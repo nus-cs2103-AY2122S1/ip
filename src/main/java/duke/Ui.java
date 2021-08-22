@@ -1,13 +1,15 @@
+package duke;
+
 public class Ui {
     public static final String LINE = "____________________________________________________________\n";
     public static final String OUTPUT_DISPLAY = "  →   ";
     public static final String OUTPUT_SPACES =  "      ";
 
     /**
-     * Welcome text to display when Duke starts up
+     * Welcome text to display when duke.Duke starts up
      */
     public static void intro() {
-        String welcomeText = "When the Duke is sus";
+        String welcomeText = "When the duke.Duke is sus";
 
         String mascot ="\n" +
                 "       `:ossys/`              \n" +
@@ -39,7 +41,7 @@ public class Ui {
         );
         System.out.println(
                 Ui.LINE +
-                "Hello! I'm Duke!\n" +
+                "Hello! I'm duke.Duke!\n" +
                 "What can I do for you?\n" +
                 Ui.LINE
         );
@@ -57,7 +59,7 @@ public class Ui {
                 "delete [index]\t- Deletes the task from the list\n" +
                 "-----------------------------------------------------------------------------------------\n" +
                 "help\t- Display this text\n" +
-                "gubbai\t- Exit Duke UwU\n");
+                "gubbai\t- Exit duke.Duke UwU\n");
     }
 
 }

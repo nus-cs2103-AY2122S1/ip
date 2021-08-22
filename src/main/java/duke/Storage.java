@@ -1,3 +1,11 @@
+package duke;
+
+import task.Task;
+import task.TaskDeadline;
+import task.TaskList;
+import task.TaskTodo;
+import task.TaskEvent;
+
 import java.io.*;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -16,7 +24,7 @@ public class Storage {
                 writer.write("\r\n");
             }
             writer.close();
-            // System.out.println(Ui.OUTPUT_DISPLAY + "Duke-san saved your list UwU");
+            // System.out.println(duke.Ui.OUTPUT_DISPLAY + "duke.Duke-san saved your list UwU");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,9 +54,9 @@ public class Storage {
     }
 
     /**
-     * Converts a given string for the .txt save file to a valid Task
+     * Converts a given string for the .txt save file to a valid task.Task
      * @param task String from .txt save file
-     * @return Task corresponding to the string
+     * @return task.Task corresponding to the string
      * @throws ParseException Thrown if string from file contains errors
      */
     public static Task StringToTask(String task) throws ParseException {

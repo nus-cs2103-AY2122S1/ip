@@ -1,4 +1,4 @@
-When the Duke is sus
+When the duke.Duke is sus
 
        `:ossys/`              
      .yh+-` ``-o/             
@@ -24,7 +24,7 @@ When the Duke is sus
  :++-                 /mddd: 
 
 ____________________________________________________________
-Hello! I'm Duke!
+Hello! I'm duke.Duke!
 What can I do for you?
 ____________________________________________________________
 
@@ -58,13 +58,13 @@ ____________________________________________________________
 
 ____________________________________________________________
 
-  →   sugoi! Duke-san marked this task as done!
+  →   sugoi! duke.Duke-san marked this task as done!
       [D][X] grocery shopping (by: Monday)
 ____________________________________________________________
 
 ____________________________________________________________
 
-  →   sugoi! Duke-san marked this task as done!
+  →   sugoi! duke.Duke-san marked this task as done!
       [E][X] flash sale at supermarket (at: Saturday)
 ____________________________________________________________
 

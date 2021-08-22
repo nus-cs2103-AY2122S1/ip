@@ -1,3 +1,8 @@
+package duke;
+
+import task.TaskList;
+import task.TaskType;
+
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,7 +13,7 @@ import java.util.regex.Pattern;
 public class DukeParser {
 
     /**
-     * Task list that this Parser object edits
+     * task.Task list that this Parser object edits
      */
     final private TaskList taskList;
 
@@ -30,7 +35,7 @@ public class DukeParser {
 
     /**Constructor
      *
-     * @param tasks Task List to edit using this Parser object
+     * @param tasks task.Task List to edit using this Parser object
      */
     public DukeParser(TaskList tasks) {
         this.taskList = tasks;

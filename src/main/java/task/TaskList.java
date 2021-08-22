@@ -1,10 +1,12 @@
+package task;
+
+import duke.Storage;
+import duke.Ui;
+
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -30,7 +32,7 @@ public class TaskList {
      * @param input A matcher object with the groups of information
      *              required to create a task with the corresponding
      *              task type
-     * @param type The TaskType of task to add
+     * @param type The task.TaskType of task to add
      */
     public void add(Matcher input, TaskType type) {
         Optional.ofNullable(

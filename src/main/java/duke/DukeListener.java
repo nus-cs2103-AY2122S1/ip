@@ -1,3 +1,7 @@
+package duke;
+
+import task.TaskList;
+
 import java.util.Scanner;
 
 /**
@@ -9,7 +13,7 @@ public class DukeListener {
 
     /** Constructor for Listener that takes instantiates a Scanner and a Parser object
      *
-     * @param taskList The TaskList that the parser should manage
+     * @param taskList The task.TaskList that the parser should manage
      */
     public DukeListener(TaskList taskList) {
         sc = new Scanner(System.in);
@@ -31,16 +35,17 @@ public class DukeListener {
             } else if (input.equals("help")) {
                 Ui.displayHelp();
             } else {
-                // TaskList related inputs
+                // task.TaskList related inputs
                 parser.parseInput(input);
             }
+
             System.out.println(Ui.LINE);
         }
 
         // Quit the program after listening stops
         System.out.println(
                 Ui.OUTPUT_DISPLAY + "kimi no unmei no hito wa boku jyanai\n"
-                + Ui.LINE
+                        + Ui.LINE
         );
 
         sc.close();

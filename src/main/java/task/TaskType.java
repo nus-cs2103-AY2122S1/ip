@@ -1,3 +1,5 @@
+package task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,7 +15,7 @@ public enum TaskType {
      *
      * @param input Groups of information needed for the task
      * @param type Type of task to use
-     * @return A Task that matches that of its TaskType
+     * @return A task.Task that matches that of its task.TaskType
      */
     public static Task getNewTask(Matcher input, TaskType type) {
         try {

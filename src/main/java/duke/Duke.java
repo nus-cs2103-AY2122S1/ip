@@ -1,5 +1,9 @@
+package duke;
+
+import task.TaskList;
+
 /**
- * Main Duke class
+ * Main duke.Duke class
  */
 public class Duke {
     private final DukeListener listener;
@@ -7,7 +11,7 @@ public class Duke {
 
     /**
      * Constructor
-     * Instantiates a (saved) Task List and a DukeListener for Duke
+     * Instantiates a (saved) task.Task List and a duke.DukeListener for duke.Duke
      */
     private Duke() {
         taskList = Storage.loadList();
@@ -15,7 +19,7 @@ public class Duke {
     }
 
     /**
-     * Starts the Duke system
+     * Starts the duke.Duke system
      */
     private void start(){
         Ui.intro();

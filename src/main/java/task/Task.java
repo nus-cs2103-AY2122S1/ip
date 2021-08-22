@@ -1,3 +1,5 @@
+package task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -20,7 +22,7 @@ public abstract class Task {
     }
 
     /**
-     * String representation of Task
+     * String representation of task.Task
      * @return task display
      */
     @Override
@@ -32,7 +34,7 @@ public abstract class Task {
     }
 
     /**
-     * The string representation of Task to be used for saving
+     * The string representation of task.Task to be used for saving
      * @return Save string
      */
     public abstract String saveString();
