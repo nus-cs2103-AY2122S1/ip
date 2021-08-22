@@ -29,7 +29,7 @@ public class Deadline extends Task {
   }
 
   public String toWriteString() {
-    String output = Duke.DEADLINE_ENUM;
+    String output = Duke.COMMAND_DEADLINE;
     String done = (this.done ? "1" : "0");
     output += DIVIDER + done + DIVIDER + this.description + DIVIDER + this.date;
     return output;

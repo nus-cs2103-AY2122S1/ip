@@ -24,7 +24,7 @@ public class Todo extends Task {
   }
 
   public String toWriteString() {
-    String output = Duke.TODO_ENUM;
+    String output = Duke.COMMAND_TODO;
     String done = (this.done ? "1" : "0");
     output += DIVIDER + done + DIVIDER + this.description;
     return output;

@@ -29,7 +29,7 @@ public class Event extends Task {
   }
 
   public String toWriteString() {
-    String output = Duke.EVENT_ENUM;
+    String output = Duke.COMMAND_EVENT;
     String done = (this.done ? "1" : "0");
     output += DIVIDER + done + DIVIDER + this.description + DIVIDER + this.date;
     return output;
