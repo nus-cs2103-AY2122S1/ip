@@ -1,3 +1,5 @@
+package duke;
+
 public class Task {
     private String taskTitle;
     private boolean isDone;
@@ -15,10 +17,6 @@ public class Task {
         } else {
             return "[ ] " + taskTitle;
         }
-    }
-
-    public boolean getIsDone() {
-        return isDone;
     }
 
     public void setDone(boolean done) {
