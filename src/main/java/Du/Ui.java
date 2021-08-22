@@ -6,7 +6,6 @@ public class Ui {
      * public constructor for Ui
      */
     public Ui() {
-
     }
 
     /**

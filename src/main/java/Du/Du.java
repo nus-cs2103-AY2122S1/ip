@@ -30,7 +30,6 @@ public class Du {
      */
     public void run() throws IOException {
         ui.greet();
-
         System.out.println("Previous records (if there are any):");
         tasks.print_list_of_tasks();
         System.out.println("\nIs there anything I can do for you?");
