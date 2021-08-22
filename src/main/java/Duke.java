@@ -182,10 +182,15 @@ public class Duke {
                 // checked for command validity in receiveCommand(), so this should not execute at all
                 throw new InvalidCommandException();
         }
-        tasks.add(task);
-        printMessage(String.format("Got it. I've added this task:"
-                + "\n\t%s"
-                + "\nNow you have %d tasks in the list.", task, this.tasks.size()));
+        if (task.save(this.file)) {
+            tasks.add(task);
+            printMessage(String.format("Got it. I've added this task:"
+                    + "\n\t%s"
+                    + "\nNow you have %d tasks in the list.", task, this.tasks.size()));
+        } else {
+            printMessage("Failed to add task.");
+        }
+
     }
 
     public void deleteTask(int index) {
