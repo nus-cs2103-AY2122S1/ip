@@ -1,5 +1,7 @@
 package main.java;
 
+import java.time.LocalDate;
+
 /**
  * ToDo is a task that doesnt have any dates tied to it.
  *
@@ -24,5 +26,16 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    /**
+     * Returns if the task date is equal to the date provided.
+     *
+     * @param date the date provided
+     * @return true if they are both equal
+     */
+    @Override
+    protected boolean onDate(LocalDate date) {
+        return false;
     }
 }

@@ -2,6 +2,8 @@ package main.java;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -88,8 +90,12 @@ public class Duke {
                             sc.close();
                             break;
                         case LIST:
-                            checkLen(commandPair, true, 1, "");
-                            tl.printList();
+                            checkLen(commandPair, true, 2, "");
+                            if (commandPair.length == 1) {
+                                tl.printList();
+                            } else {
+                                tl.printListDate(commandPair[1]);
+                            }
                             break;
                         case DONE:
                             checkLen(commandPair, false, 2, "You did not indicate the task to be marked done. Use 'done <task's number>' to mark the task as done.");
@@ -137,6 +143,8 @@ public class Duke {
             reply("☹ OOPS!!! File not found!");
         } catch (IOException e) {
             reply("☹ OOPS!!! Cannot create file!");
+        } catch (DateTimeException e) {
+            reply("☹ OOPS!!! Your date (YYYY-MM-DD) / date & time (YYYY-MM-DD HHMM) (24h) is given in the wrong format!");
         }
     }
 }
