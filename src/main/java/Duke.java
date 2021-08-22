@@ -31,7 +31,7 @@ public class Duke {
     private static String addTodo(String taskName) {
         int taskListLen = taskList.size();
         if (taskListLen < MAX_TASKS) {
-            ToDo newTodo = new ToDo(taskName);
+            Todo newTodo = new Todo(taskName);
             taskList.add(newTodo);
             taskListLen += 1;
             return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",

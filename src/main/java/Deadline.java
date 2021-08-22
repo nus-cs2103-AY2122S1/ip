@@ -1,13 +1,13 @@
 public class Deadline extends Task {
-    private final String byWhen;
+    private final Datetime dueDate;
 
-    public Deadline(String taskName, String byWhen) {
+    public Deadline(String taskName, String dueDate) {
         super(taskName);
-        this.byWhen = byWhen;
+        this.dueDate = new Datetime(dueDate);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + byWhen + ")";
+        return "[D]" + super.toString() + " (by: " + this.dueDate.toString() + ")";
     }
 }
