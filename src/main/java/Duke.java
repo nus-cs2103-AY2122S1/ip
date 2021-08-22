@@ -9,15 +9,10 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        try {
-            TextFile file = new TextFile();
-            run(scanner, file);
-        } catch (FileNotFoundException e) {
-            System.out.println("Lollipop: Folder not found.");
-        }
+        run(scanner);
     }
 
-    public static void run(Scanner scanner, TextFile file) {
+    public static void run(Scanner scanner) {
         List<Task> taskList = new ArrayList<>();
 
         // Hello message
@@ -46,12 +41,14 @@ public class Duke {
                     int taskNumber = parseInt(command.split(" ")[1]);
                     Task task = taskList.get(taskNumber - 1);
                     task.markAsDone();
+                    TextFile.updateTextFile(taskList);
                     System.out.printf("Lollipop: %s has been marked as done.%n", task.toString());
 
                 } else if (command.startsWith("delete")) {
                     int taskNumber = parseInt(command.split(" ")[1]);
                     Task task = taskList.get(taskNumber - 1);
                     taskList.remove(taskNumber - 1);
+                    TextFile.updateTextFile(taskList);
                     System.out.printf("Lollipop: %s has been deleted.%n", task.toString());
 
                 } else if (command.startsWith("todo")) {
@@ -62,6 +59,7 @@ public class Duke {
                     String description = splitCommand[1];
                     Task task = new Todo(description);
                     taskList.add(task);
+                    TextFile.updateTextFile(taskList);
                     System.out.printf("Lollipop: %s has been added.%n", task.toString());
 
                 } else if (command.startsWith("deadline")) {
@@ -80,6 +78,7 @@ public class Duke {
                     String deadline = splitDescription[1];
                     Task task = new Deadline(description, deadline);
                     taskList.add(task);
+                    TextFile.updateTextFile(taskList);
                     System.out.printf("Lollipop: %s has been added.%n", task.toString());
 
                 } else if (command.startsWith(("event"))) {
@@ -98,6 +97,7 @@ public class Duke {
                     String time = splitDescription[1];
                     Task task = new Event(description, time);
                     taskList.add(task);
+                    TextFile.updateTextFile(taskList);
                     System.out.printf("Lollipop: %s has been added.%n", task.toString());
 
                 } else {
@@ -109,6 +109,8 @@ public class Duke {
                 System.out.println("Lollipop: No such task number found.");
             } catch (NumberFormatException e) {
                 System.out.println("Lollipop: Please input a number.");
+            } catch (FileNotFoundException e) {
+                System.out.println("Lollipop: /data Folder or /data/data.txt is not found.");
             }
 
             System.out.println("");
