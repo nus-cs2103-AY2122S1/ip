@@ -16,4 +16,6 @@ abstract public class Task {
     }
 
     abstract public String toString();
+
+    abstract public String toDataFileString();
 }

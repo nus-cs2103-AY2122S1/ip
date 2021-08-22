@@ -8,4 +8,9 @@ public class ToDos extends Task {
     public String toString() {
         return String.format("[T] [%s] " + this.description, this.getStatusIcon());
     }
+
+    @Override
+    public String toDataFileString() {
+        return String.format("T|%s|%s", this.isDone ? "1" : "0", this.description);
+    }
 }
