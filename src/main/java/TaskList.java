@@ -5,12 +5,7 @@ public class TaskList {
     private final List<Task> tasks;
 
     public TaskList() {
-        this(new ArrayList<>());
-    }
-
-    // TODO consider changing this constructor so that tasks cannot be directly accessed by others
-    public TaskList(List<Task> tasks) {
-        this.tasks = tasks;
+        tasks = new ArrayList<>();
     }
 
     public void add(Task task) {
@@ -19,6 +14,10 @@ public class TaskList {
 
     public Task get(int i) {
         return tasks.get(i - 1);
+    }
+
+    public Task remove(int i) {
+        return tasks.remove(i - 1);
     }
 
     public int size() {
