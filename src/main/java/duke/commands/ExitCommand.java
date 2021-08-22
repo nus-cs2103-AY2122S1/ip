@@ -6,10 +6,13 @@ import duke.Storage;
 import duke.Ui;
 
 /**
- * This is an duke.commands.ExitCommand class that extends duke.commands.Command.
+ * This is an ExitCommand class that extends Command.
  */
 public class ExitCommand extends Command {
 
+    /**
+     * This is an ExitCommand Constructor.
+     */
     public ExitCommand() {
         super("bye");
     }

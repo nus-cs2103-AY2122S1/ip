@@ -7,10 +7,15 @@ import duke.Storage;
 import duke.Ui;
 
 /**
- * This is a duke.commands.DeleteCommand class that extends duke.commands.Command.
+ * This is a DeleteCommand class that extends Command.
  */
 public class DeleteCommand extends Command {
 
+    /**
+     * This is the constructor of a DeleteCommand.
+     *
+     * @param index An int representing the index of task to be deleted.
+     */
     public DeleteCommand(int index){
         super("delete", index);
     }

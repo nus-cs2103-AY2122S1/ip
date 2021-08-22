@@ -6,14 +6,16 @@ import duke.Storage;
 import duke.Ui;
 
 /**
- * This is a duke.commands.ListCommand class that extends duke.commands.Command.
+ * This is a ListCommand class that extends Command.
  */
 public class ListCommand extends Command {
 
+    /**
+     * This is a ListCommand Constructor
+     */
     public ListCommand() {
         super("list");
     }
-
 
     @Override
     public void execute(TaskList taskList, Storage store, Ui ui) throws EmptyListException {

@@ -15,16 +15,31 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * This is a duke.Storage class that deals with loading tasks
+ * This is a Storage class that deals with loading tasks
  * from the file and saving tasks in the file.
  */
 public class Storage {
+
+    /**
+     * This is the private class field of a Storage instance.
+     */
     private final String filePath;
 
+    /**
+     * This is the constructor for a Storage instance.
+     *
+     * @param filepath   A string representing the filepath in the operating system.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns an Arraylist of Task loaded from the filePath.
+     *
+     * @return An ArrayList of Task that was stored in the file located in the filePath.
+     * @throws DukeFileException  An exception thrown when there is error reading or creating the file.
+     */
     public ArrayList<Task> load() throws DukeFileException {
         try {
             java.nio.file.Path directoryPath = java.nio.file.Paths.get("src", "main", "java", "data");
@@ -76,17 +91,30 @@ public class Storage {
                 }
             }
             return taskList;
+
         } catch (IOException e) {
             throw new DukeFileException();
         }
     }
 
+    /**
+     * Appends a line of command into the file located at the filePath.
+     *
+     * @param taskCommand A String representing the input given to the Parser to generate a Task.
+     * @throws IOException  An exception thrown when FileWriter is unable to find or append to the file at filePath.
+     */
     public void appendCommand(String taskCommand) throws IOException {
         FileWriter fw = new FileWriter(this.filePath, true);
         fw.append(taskCommand + System.lineSeparator());
         fw.close();
     }
 
+    /**
+     * Overwrites the file located at the filePath with the minimal commands to regenerate the current Task list.
+     *
+     * @param taskList An ArrayList of Task to be saved as text in the file located at filePath.
+     * @throws IOException An exception thrown when the FileWriter is unable to find or write to the file at filePath.
+     */
     public void safeFile(ArrayList<Task> taskList) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         for (int i = 0; i < taskList.size(); i++) {

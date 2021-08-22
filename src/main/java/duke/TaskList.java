@@ -9,13 +9,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * This is a duke.TaskList class that contains the task list.
+ * This is a TaskList class that contains the task list.
  */
 public class TaskList {
+
+    /**
+     * This is the private class fields of a TaskList instance.
+     */
     private final ArrayList<Task> tasks;
 
     /**
-     * Constructors of TaskList
+     * Constructors of TaskList.
      */
     public TaskList() {
         tasks = new ArrayList<>();
@@ -25,10 +29,21 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Adds a task to the current ArrayList of task.
+     *
+     * @param t A task that is created by the user.
+     */
     public void addToList(Task t) {
         tasks.add(t);
     }
 
+    /**
+     * Prints out the contents of all the tasks in the ArrayList of task.
+     *
+     * @param ui
+     * @throws EmptyListException
+     */
     public void printTasks(Ui ui) throws EmptyListException {
         if (this.tasks.size() <= 0) {
             throw new EmptyListException();
@@ -36,6 +51,12 @@ public class TaskList {
         ui.printList(this.tasks);
     }
 
+    /**
+     * Saves the current ArrayList of task using a Storage instance.
+     *
+     * @param store  A Storage instance that helps to save the task list in a text file.
+     * @throws DukeFileException An exception thrown when store encounters an error when storing the tasks.
+     */
     public void safeTasks(Storage store) throws DukeFileException {
         try {
             store.safeFile(this.tasks);
@@ -44,6 +65,15 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task in the ArrayList of Task as done.
+     *
+     * @param index  An int representing the index of task to be marked.
+     * @param store  A Storage instance to save this action into the text file.
+     * @param ui     An Ui instance that helps to print out the message of this action to the user.
+     * @throws TaskIsCompleteException An exception thrown when the task to be mark is already done.
+     * @throws DukeFileException    An exception thrown when the store gets an error from storing the action.
+     */
     public void markTask(int index, Storage store, Ui ui)
             throws TaskIsCompleteException, DukeFileException {
         try {
@@ -61,6 +91,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task from the ArrayList of Task.
+     *
+     * @param index An int representing the index of the task to be deleted.
+     * @param store A Storage instance to save this action into a text file.
+     * @param ui    An Ui instance to print the message of this action to the user.
+     * @throws DukeFileException  An exception thrown when the store gets an error from storing the action.
+     */
     public void deleteTask(int index, Storage store, Ui ui)
             throws DukeFileException {
         try {
@@ -74,6 +112,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns an int representing the number of Task in the list.
+     *
+     * @return An int representing the number of Tasks.
+     */
     public int getSize() {
         return tasks.size();
     }

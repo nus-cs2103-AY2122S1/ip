@@ -15,11 +15,16 @@ import duke.Ui;
 import java.io.IOException;
 
 /**
- * This is a duke.commands.AddCommand class that extends duke.commands.Command.
+ * This is an AddCommand class that extends Command.
  */
 public class AddCommand extends Command {
 
-
+    /**
+     * This is the constructor for AddCommand.
+     *
+     * @param taskType A String representing the task to be created.
+     * @param description A String containing the details of the task to be created.
+     */
     public AddCommand(String taskType, String description) {
         super(taskType, description);
     }

@@ -1,33 +1,57 @@
 package duke.task;
 
 /**
- * This is a duke.task.Task Class.
+ * This is a Task Class that represent the Task user keys into Duke.
  */
-public class Task {
+public abstract class Task {
 
+    /**
+     * These are class field of a Task.
+     */
     protected String description;
     protected boolean isDone;
 
+    /**
+     * This is a Task Constructor.
+     *
+     * @param description A String representing description of task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Returns "X" when a task is done and " " when it is not done.
+     *
+     * @return A String representing the completion status of a Task.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Returns a boolean indicating if the task is done.
+     *
+     * @return A boolean representing the completion status of the task
+     */
     public boolean isDone() {
         return this.isDone;
     }
 
-    public String fullCommand() {
-        return "";
-    }
+    /**
+     * Returns the full command required to create this task.
+     *
+     * @return A String representing the command that created this task.
+     */
+    public abstract String fullCommand();
 
     @Override
     public String toString() {
