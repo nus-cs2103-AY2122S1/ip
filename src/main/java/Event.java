@@ -1,7 +1,8 @@
-public class Event extends Task{
-    private String startDate;
+import java.time.LocalDateTime;
 
-    public Event(String description, Boolean completionStatus, String startDate) {
+public class Event extends Task{
+    private LocalDateTime startDate;
+    public Event(String description, Boolean completionStatus, LocalDateTime startDate) {
         super(description, completionStatus);
         this.startDate = startDate;
     }
