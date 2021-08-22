@@ -2,7 +2,7 @@
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 7. Save
+ * Current Progress: Level 8. Dates and Times
  *
  * Description:
  * Class to encapsulates all possible exceptions that will be
