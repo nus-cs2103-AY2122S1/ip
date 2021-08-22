@@ -144,5 +144,16 @@ public class  TaskList {
         return toDoList.get(i - 1).toString();
     }
 
+    public void find(String s) {
+        int k = 1;
+        for (int i = 0; i < toDoList.size(); i++) {
+            String desc = toDoList.get(i).toString();
+            if (desc.indexOf(s) >= 0) {
+                System.out.println(k + "." + toDoList.get(i).toString());
+                k++;
+            }
+        }
+    }
+
 
 }
