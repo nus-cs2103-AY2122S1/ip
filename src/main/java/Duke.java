@@ -145,8 +145,9 @@ public class Duke {
                     String taskDetail = description.substring(0, separator).trim();
                     String at = description.substring(separator + 3).trim();
                     try {
-                        LocalDate date = LocalDate.parse(at.substring(0, at.indexOf(' ')));
-                        String timeRange = at.substring(at.indexOf(' ') + 1).trim();
+                        int index = at.indexOf(' ');
+                        LocalDate date = LocalDate.parse(at.substring(0, index));
+                        String timeRange = at.substring(index + 1).trim();
                         task = new Event(taskDetail, date, timeRange);
                     } catch (DateTimeParseException e) {
                         throw new IncompleteTaskDescriptionException("event");
