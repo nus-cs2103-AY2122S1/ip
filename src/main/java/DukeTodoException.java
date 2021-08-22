@@ -1,5 +1,5 @@
 public class DukeTodoException extends DukeException {
-    public DukeTodoException(String message) {
-        super(message);
+    public DukeTodoException() {
+        super("OOPS!!! The description of a todo cannot be empty.");
     }
 }

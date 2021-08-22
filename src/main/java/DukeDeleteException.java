@@ -1,5 +1,5 @@
 public class DukeDeleteException extends DukeException {
-    public DukeDeleteException(String message) {
-        super(message);
+    public DukeDeleteException() {
+        super("OOPS!!! The index of a delete cannot be empty.");
     }
 }
