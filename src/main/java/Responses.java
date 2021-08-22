@@ -7,7 +7,6 @@ public enum Responses {
           + "ꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤ"),
     START_MESSAGE("Welcome to Petal (•◡•)/" + "\nI am the best chat bot you'll meet! Don't be shy, say something! :P" +
                   "\nPssss here's a disclaimer: use the 'bye' command to exit or else your tasks won't save properly!"),
-
     //Exception responses
     UNINTELLIGIBLE("I do not understand what you mean :("),
     REQUIRED_FORMAT("Use 'todo <insert activity>' to create a to-do!" +
@@ -24,7 +23,7 @@ public enum Responses {
     SAVE_ERROR("Sorry, the tasks couldn't be saved properly :/'"),
     GOODBYE("You're leaving :( I hope you return soon!");
 
-    private String response;
+    private final String response;
 
     private Responses(String response) {
         this.response = response;
