@@ -1,34 +1,40 @@
+package duke.commands;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.tasks.Todo;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class AddDeadlineCommand extends Command {
-    private final String by;
-    public AddDeadlineCommand(String desc, String by) {
+public class AddTodoCommand extends Command {
+
+    public AddTodoCommand(String desc) {
         super(desc);
-        this.by = by;
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 
     @Override
-    void execute(TaskList tasks, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         try {
             FileWriter fw = new FileWriter("data/tasks.txt", true);
-            Deadline deadline = new Deadline(super.getDesc(), by, false);
-            tasks.add(deadline);
+            Todo todo = new Todo(super.getDesc(), false);
+            tasks.add(todo);
 
             System.out.println("Got it. I've added this task:");
-            System.out.println(deadline);
+            System.out.println(todo);
+
             if (tasks.size() == 1) {
                 System.out.println("Now you have 1 task in the list.");
             } else {
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             }
 
-            fw.write("D | 0 | " + super.getDesc() + " | " + by + "\n");
+            fw.write("T | 0 | " + super.getDesc() + "\n");
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();

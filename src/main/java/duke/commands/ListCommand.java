@@ -1,15 +1,21 @@
+package duke.commands;
+
+import duke.Storage;
+import duke.tasks.Task;
+import duke.TaskList;
+
 public class ListCommand extends Command {
     public ListCommand(String desc) {
         super(desc);
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 
     @Override
-    void execute(TaskList tasks, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         if (tasks.size() == 0) {
             System.out.println("You have not added anything to the list, Master Wayne.");
         } else {

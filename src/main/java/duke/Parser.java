@@ -1,3 +1,7 @@
+package duke;
+
+import duke.commands.*;
+
 public class Parser {
 
     public Command parse(String commandLine, TaskList tasks) throws DukeException {

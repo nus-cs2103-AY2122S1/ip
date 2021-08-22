@@ -1,3 +1,7 @@
+package duke;
+
+import duke.commands.Command;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -14,7 +18,6 @@ public class Duke {
     }
 
     public void run() {
-        //Scanner input = new Scanner(System.in);
         Parser parser = new Parser();
         ui.showWelcome();
         boolean isExit = false;

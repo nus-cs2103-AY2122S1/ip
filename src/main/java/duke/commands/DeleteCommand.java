@@ -1,3 +1,8 @@
+package duke.commands;
+
+import duke.Storage;
+import duke.TaskList;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -5,7 +10,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private int deleteIndex;
     public DeleteCommand(String desc, int deleteIndex) {
         super(desc);
@@ -13,10 +18,12 @@ public class DeleteCommand extends Command{
 
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }
 
+    @Override
     public void execute(TaskList tasks, Storage storage) {
         System.out.println("-------------------------------------");
         System.out.println("Very well, Master Wayne. This task has been deleted as per your request.");

@@ -1,3 +1,8 @@
+package duke.commands;
+
+import duke.Storage;
+import duke.TaskList;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -12,10 +17,12 @@ public class DoneCommand extends Command {
         this.doneIndex = doneIndex;
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }
 
+    @Override
     public void execute(TaskList tasks, Storage storage) {
         tasks.get(doneIndex - 1).markAsDone();
         System.out.println("-------------------------------------");
