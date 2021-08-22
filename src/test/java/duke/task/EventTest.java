@@ -16,7 +16,7 @@ public class EventTest {
         Task task = Event.of(false, desc, "2020-02-02");
         assertEquals(desc, task.getDescriptions());
         assertEquals(" ", task.getStatusIcon());
-        task = ToDo.of(true, desc);
+        task = Event.of(true, desc,"2020-02-02");
         assertEquals("X", task.getStatusIcon());
     }
 

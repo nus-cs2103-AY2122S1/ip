@@ -15,7 +15,7 @@ public class DeadlineTest {
         Task task = Deadline.of(false, desc, "2020-02-02");
         assertEquals(desc, task.getDescriptions());
         assertEquals(" ", task.getStatusIcon());
-        task = ToDo.of(true, desc);
+        task = Deadline.of(true, desc, "2020-02-02");
         assertEquals("X", task.getStatusIcon());
     }
 
