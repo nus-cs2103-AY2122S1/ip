@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -83,16 +85,19 @@ public class Botto {
                 String next = scanner.nextLine();
                 boolean isDone = next.charAt(4) == 'X';
                 String[] info = next.substring(7).split(" [(]..: ");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
 
                 switch (next.charAt(1)) {
                 case 'T' :
                     task = new Todo(info[0]);
                     break;
                 case 'D' :
-                    task = new Deadline(info[0], info[1].substring(0, info[1].length() - 1));
+                    String deadline = info[1].substring(0, info[1].length() - 1);
+                    task = new Deadline(info[0], LocalDateTime.parse(deadline, formatter));
                     break;
                 case 'E' :
-                    task = new Event(info[0], info[1].substring(0, info[1].length() - 1));
+                    String eventTime = info[1].substring(0, info[1].length() - 1);
+                    task = new Event(info[0], LocalDateTime.parse(eventTime, formatter));
                     break;
                 default:
                     continue;
@@ -151,13 +156,14 @@ public class Botto {
             throw new DukeException("☹ OOPS!!! The description of " + task + " cannot be empty.");
         }
 
-        String[] array = description.split("/", 2);
+        String[] array = description.split(" /.. ", 2);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
         Task task;
 
         try {
             task = type == TaskType.TODO ? new Todo(description)
-                    : type == TaskType.DEADLINE ? new Deadline(array[0].substring(0, array[0].length() - 1), array[1].substring(3))
-                    : new Event(array[0].substring(0, array[0].length() - 1), array[1].substring(3));
+                    : type == TaskType.DEADLINE ? new Deadline(array[0], LocalDateTime.parse(array[1], formatter))
+                    : new Event(array[0], LocalDateTime.parse(array[1], formatter));
         } catch (Exception e) {
             String message = "☹ OOPS!!! The command is in wrong format.\n" +
                     indentation + "Please enter in this format: [deadline/event] [title] /[by/at] [date]";
