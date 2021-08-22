@@ -1,12 +1,16 @@
 package display;
 
 import error.DukeException;
+
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.ToDo;
 
+import utility.Logger;
+
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,10 +50,12 @@ public class Duke {
      * Primary response function of the chatbot
      */
     private static void analyzeLog() {
+        Logger logger = new Logger("tasks.txt");
+        List<Task> tasks = logger.loadList();
         Scanner sc = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
         String[] words;
         StringBuilder log;
+        byte flag = 0;
 
         logging:
         while (true) {
@@ -59,6 +65,9 @@ public class Duke {
                 checkInput(words);
                 switch (words[0]) {
                 case "bye":
+                    if (flag == 1) {
+                        logger.write(tasks);
+                    }
                     System.out.println(line + "\n\t Peace out!" + line);
                     break logging;
                 case "list":
@@ -76,12 +85,18 @@ public class Duke {
                         task.markAsDone();
                         log.append("\n\t Nice! I've marked this task as done:\n\t\t").append(task);
                     }
+                    if (flag == 0) {
+                        flag = 1;
+                    }
                     break;
                 case "todo":
                     ToDo newTask = new ToDo(words[1]);
                     tasks.add(newTask);
                     log.append("\n\t Got it. I've added this task:\n\t\t").append(newTask).append("\n\t Now you have ")
                             .append(tasks.size()).append(" tasks in the list.");
+                    if (flag == 0) {
+                        flag = 1;
+                    }
                     break;
                 case "deadline":
                     String[] details = words[1].split(" /by ", 2);
@@ -89,6 +104,9 @@ public class Duke {
                     tasks.add(deadline);
                     log.append("\n\t Got it. I've added this task:\n\t\t").append(deadline)
                             .append("\n\t Now you have ").append(tasks.size()).append(" tasks in the list.");
+                    if (flag == 0) {
+                        flag = 1;
+                    }
                     break;
                 case "event":
                     details = words[1].split(" /at ", 2);
@@ -96,6 +114,9 @@ public class Duke {
                     tasks.add(event);
                     log.append("\n\t Got it. I've added this task:\n\t\t").append(event)
                             .append("\n\t Now you have ").append(tasks.size()).append(" tasks in the list.");
+                    if (flag == 0) {
+                        flag = 1;
+                    }
                     break;
                 case "delete":
                     idx = Integer.parseInt(words[1]);
@@ -103,6 +124,9 @@ public class Duke {
                     tasks.remove(idx - 1);
                     log.append("\n\t Noted. I've removed this task:\n\t\t").append(task)
                             .append("\n\t Now you have ").append(tasks.size()).append(" tasks in the list.");
+                    if (flag == 0) {
+                        flag = 1;
+                    }
                     break;
                 default:
                     throw new DukeException(

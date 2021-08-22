@@ -17,6 +17,14 @@ public class Deadline extends Task{
     }
 
     /**
+     * Returns this task's time limit.
+     * @return A string showing what the time limit of this Deadline is.
+     */
+    public String getBy() {
+        return this.by;
+    }
+
+    /**
      * Returns this task's status and description.
      * @return A string showing what the task is, its description and its time limit.
      */
