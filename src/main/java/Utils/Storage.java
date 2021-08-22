@@ -1,6 +1,6 @@
 package Utils;
 
-import Duke.DukeException;
+import WhoBot.WhoBotException;
 import Task.Deadline;
 import Task.Event;
 import Task.Task;
@@ -19,7 +19,7 @@ public class Storage {
     public String filename;
     private final File taskFile;
 
-    public Storage(String filename) throws DukeException {
+    public Storage(String filename) throws WhoBotException {
         this.filename = filename;
         taskFile = new File(this.filename);
         if (!taskFile.exists()) {
@@ -29,12 +29,12 @@ public class Storage {
                 }
                 taskFile.createNewFile();
             } catch (IOException e) {
-                throw new DukeException("Oops, The file to store my data could not be created. If you continue, tasks won't be stored permanently.");
+                throw new WhoBotException("Oops, The file to store my data could not be created. If you continue, tasks won't be stored permanently.");
             }
         }
     }
 
-    public void readData(ArrayList<Task> LIST) throws DukeException {
+    public void readData(ArrayList<Task> LIST) throws WhoBotException {
         try {
             Scanner taskReader = new Scanner(taskFile);
             while(taskReader.hasNextLine()) {
@@ -60,12 +60,12 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new DukeException("Oops, The file to store my data could not be created. If you continue, tasks won't be stored permanently.");
+            throw new WhoBotException("Oops, The file to store my data could not be created. If you continue, tasks won't be stored permanently.");
         }
     }
 
     // Method to Save List to WhoBot's Memory
-    public void saveMemory(ArrayList<Task> LIST) throws DukeException {
+    public void saveMemory(ArrayList<Task> LIST) throws WhoBotException {
         try {
             FileWriter dataWriter = new FileWriter(taskFile);
             for (Task tempTask : LIST) {
@@ -88,7 +88,7 @@ public class Storage {
             }
             dataWriter.close();
         } catch (IOException e) {
-            throw new DukeException("Oops, The file to store my data could not be created. If you continue, tasks won't be stored permanently.");
+            throw new WhoBotException("Oops, The file to store my data could not be created. If you continue, tasks won't be stored permanently.");
         }
     }
 }

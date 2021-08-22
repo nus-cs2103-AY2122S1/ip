@@ -1,8 +1,8 @@
-package Duke;
+package WhoBot;
 
-public class DukeException extends Exception{
+public class WhoBotException extends Exception{
 
-    public DukeException(String message) {
+    public WhoBotException(String message) {
         super(message);
     }
 

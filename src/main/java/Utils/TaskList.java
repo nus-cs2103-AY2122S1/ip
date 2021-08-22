@@ -1,7 +1,7 @@
 package Utils;
 
-import Duke.DukeException;
-import Duke.UI;
+import WhoBot.WhoBotException;
+import WhoBot.UI;
 import Task.Task;
 import Task.Event;
 import Task.Deadline;
@@ -15,9 +15,8 @@ import java.util.Locale;
 public class TaskList {
 
     private final ArrayList<Task> LIST = new ArrayList<>();
-    private Storage storage;
-    public TaskList(Storage storage) throws DukeException {
-        this.storage = storage;
+
+    public TaskList(Storage storage) throws WhoBotException {
         storage.readData(LIST);
     }
 
@@ -42,37 +41,37 @@ public class TaskList {
     }
 
     // Method to Mark Task as Done
-    public void markAsDone(String ind, UI ui) throws DukeException {
+    public void markAsDone(String ind, UI ui) throws WhoBotException {
         try {
             int index = Integer.parseInt(ind) - 1;
             if (index < LIST.size()) {
                 LIST.get(index).markAsDone();
                 ui.echo("Congrats! I have marked this task complete: \"" + LIST.get(index).getDescription() + "\"", UI.TYPE.COMPLETE);
             } else {
-                throw new DukeException("Oops, The index you gave is out of bound. There are only " + LIST.size() + " tasks");
+                throw new WhoBotException("Oops, The index you gave is out of bound. There are only " + LIST.size() + " tasks");
             }
         } catch (NumberFormatException  ex) {
-            throw new DukeException("I didn't get what you meant. Ensure that the command is of the form \"done #index\"");
+            throw new WhoBotException("I didn't get what you meant. Ensure that the command is of the form \"done #index\"");
         }
     }
 
     // Method to Mark Task as Not Done
-    public void markAsUndone(String ind, UI ui) throws DukeException {
+    public void markAsUndone(String ind, UI ui) throws WhoBotException {
         try {
             int index = Integer.parseInt(ind) - 1;
             if (index < LIST.size()) {
                 LIST.get(index).markAsUndone();
                 ui.echo("I have marked this task incomplete: \"" + LIST.get(index).getDescription() + "\"", UI.TYPE.COMPLETE);
             } else {
-                throw new DukeException("Oops, The index you gave is out of bound. There are only " + LIST.size() + " tasks");
+                throw new WhoBotException("Oops, The index you gave is out of bound. There are only " + LIST.size() + " tasks");
             }
         } catch (NumberFormatException  ex) {
-            throw new DukeException("I didn't get what you meant. Ensure that the command is of the form \"undo #index\"");
+            throw new WhoBotException("I didn't get what you meant. Ensure that the command is of the form \"undo #index\"");
         }
     }
 
     // Method to Delete Task from List
-    public void deleteFromList(String ind, UI ui) throws DukeException {
+    public void deleteFromList(String ind, UI ui) throws WhoBotException {
         try {
             int index = Integer.parseInt(ind) - 1;
             if (index < LIST.size()) {
@@ -91,68 +90,68 @@ public class TaskList {
                 }
 
             } else {
-                throw new DukeException("Oops, The index you gave is out of bound. There are only " + LIST.size() + " tasks");
+                throw new WhoBotException("Oops, The index you gave is out of bound. There are only " + LIST.size() + " tasks");
             }
         } catch (NumberFormatException  ex) {
-            throw new DukeException("I didn't get what you meant. Ensure that the command is of the form \"delete #index\"");
+            throw new WhoBotException("I didn't get what you meant. Ensure that the command is of the form \"delete #index\"");
         }
     }
 
     // Method to Add a ToDos type Task into List
-    public void addTODO(String command, UI ui) throws DukeException {
+    public void addTODO(String command, UI ui) throws WhoBotException {
         try {
             Todo task = new Todo(command.substring(5));
             if (LIST.add(task)) {
                 ui.echo("I have added this ToDo Task to the list: \"" + task.getDescription() + "\"", UI.TYPE.START);
                 ui.echo("You now have " + LIST.size() + " task(s) in the list.", UI.TYPE.END);
             } else {
-                throw new DukeException("I am sorry. The task couldn't be added, please try again.");
+                throw new WhoBotException("I am sorry. The task couldn't be added, please try again.");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Ensure that the command is of the form \"todo #description\". The description can not be empty.");
+            throw new WhoBotException("Ensure that the command is of the form \"todo #description\". The description can not be empty.");
         }
     }
 
     // Method to Add a Events UI.TYPE Task into List
-    public void addEvent(String command, UI ui) throws DukeException {
+    public void addEvent(String command, UI ui) throws WhoBotException {
         try {
             if (!command.contains("/at ")) {
-                throw new DukeException("Ensure that the command is of the form \"event #description /at #timing\". The timing must be given.");
+                throw new WhoBotException("Ensure that the command is of the form \"event #description /at #timing\". The timing must be given.");
             }
             Event task = new Event(command.substring(6));
             if (LIST.add(task)) {
                 ui.echo("I have added this Event Task to the list: \"" + task.getDescription() + "\"", UI.TYPE.START);
                 ui.echo("You now have " + LIST.size() + " task(s) in the list.", UI.TYPE.END);
             } else {
-                throw new DukeException("I am sorry. The task couldn't be added, please try again.");
+                throw new WhoBotException("I am sorry. The task couldn't be added, please try again.");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Ensure that the command is of the form \"event #description /at #timing\". The description can not be empty.");
+            throw new WhoBotException("Ensure that the command is of the form \"event #description /at #timing\". The description can not be empty.");
         }
     }
 
     // Method to Add a Deadline type Task into List
-    public void addDeadline(String command, UI ui) throws DukeException {
+    public void addDeadline(String command, UI ui) throws WhoBotException {
         try {
             if (!command.contains("/by ")) {
-                throw new DukeException("Ensure that the command is of the form \"deadline #description /by #deadline\". The deadline must be given.");
+                throw new WhoBotException("Ensure that the command is of the form \"deadline #description /by #deadline\". The deadline must be given.");
             }
             Deadline task = new Deadline(command.substring(9));
             if (LIST.add(task)) {
                 ui.echo("I have added this Deadline Task to the list: \"" + task.getDescription() + "\"", UI.TYPE.START);
                 ui.echo("You now have " + LIST.size() + " task(s) in the list.", UI.TYPE.END);
             } else {
-                throw new DukeException("I am sorry. The task couldn't be added, please try again.");
+                throw new WhoBotException("I am sorry. The task couldn't be added, please try again.");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Ensure that the command is of the form \"deadline #description /by #deadline\". The description can not be empty.");
+            throw new WhoBotException("Ensure that the command is of the form \"deadline #description /by #deadline\". The description can not be empty.");
         }
     }
 
-    public void showOnDate(String command, UI ui) throws DukeException {
+    public void showOnDate(String command, UI ui) throws WhoBotException {
         try {
             if (!command.contains("/on ")) {
-                throw new DukeException("Ensure that the command is of the form \"show /on #date\". The deadline must be given.");
+                throw new WhoBotException("Ensure that the command is of the form \"show /on #date\". The deadline must be given.");
             }
             LocalDate date = LocalDate.parse(command.split(" /on ")[1], DateTimeFormatter.ofPattern("d/M/yyyy"));
             ArrayList<Task> tasksToDisplay = new ArrayList<>();
@@ -181,7 +180,7 @@ public class TaskList {
             listString = listString.concat("\t\t\t" + (i + 1) + ". " + tasksToDisplay.get(i));
             ui.echo(listString, UI.TYPE.COMPLETE);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Ensure that the command is of the form \"show /on #date\". The description can not be empty.");
+            throw new WhoBotException("Ensure that the command is of the form \"show /on #date\". The description can not be empty.");
         }
     }
 

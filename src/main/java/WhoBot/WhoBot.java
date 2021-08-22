@@ -1,4 +1,4 @@
-package Duke;
+package WhoBot;
 
 import java.io.File;
 import java.util.*;
@@ -6,7 +6,7 @@ import Utils.Storage;
 import Utils.Parser;
 import Utils.TaskList;
 
-public class Duke {
+public class WhoBot {
 
     // The Global Variables used by the ChatBot
     private static final Scanner cmdReader = new Scanner(System.in);
@@ -15,13 +15,13 @@ public class Duke {
     private final Parser parser;
     private TaskList taskList;
 
-    public Duke() {
+    public WhoBot() {
         this.parser = new Parser();
         this.ui = new UI();
         try {
             this.storage = new Storage("." + File.separator + "data" + File.separator + "WhoBotData.txt");
             this.taskList = new TaskList(storage);
-        } catch (DukeException ex) {
+        } catch (WhoBotException ex) {
             ui.echo(ex.getMessage(), UI.TYPE.ERROR);
             System.exit(0);
         }
@@ -38,7 +38,7 @@ public class Duke {
                 if (parser.parse(command, ui, storage, taskList) == -1) {
                     break;
                 };
-            } catch (DukeException ex) {
+            } catch (WhoBotException ex) {
                 ui.echo(ex.getMessage(), UI.TYPE.ERROR);
             }
         }
@@ -46,7 +46,7 @@ public class Duke {
 
     //Main Method
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+        WhoBot whoBot = new WhoBot();
+        whoBot.run();
     }
 }

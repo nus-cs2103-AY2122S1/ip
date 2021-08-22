@@ -1,18 +1,18 @@
 package Utils;
 
-import Duke.DukeException;
-import Duke.UI;
+import WhoBot.WhoBotException;
+import WhoBot.UI;
 
 import java.util.Locale;
 
 public class Parser {
 
-    public int parse(String command, UI ui, Storage storage, TaskList taskList) throws DukeException {
+    public int parse(String command, UI ui, Storage storage, TaskList taskList) throws WhoBotException {
 
         Helper helper = new Helper(ui);
 
         if (command.isBlank()) {
-            throw new DukeException("The input is blank. Please enter something.");
+            throw new WhoBotException("The input is blank. Please enter something.");
         }
 
         String[] commandList = command.toLowerCase(Locale.ROOT).split(" ");
@@ -61,7 +61,7 @@ public class Parser {
             taskList.showOnDate(command, ui);
         } else {
             // Else Invalid
-            throw new DukeException("Oops, That's an invalid command. Type in help to get list of possible commands.");
+            throw new WhoBotException("Oops, That's an invalid command. Type in help to get list of possible commands.");
         }
         return 0;
     }

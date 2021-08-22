@@ -1,6 +1,6 @@
 package Task;
 
-import Duke.DukeException;
+import WhoBot.WhoBotException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,12 +10,12 @@ public class Event extends Task {
 
     private final LocalDateTime timing;
 
-    public Event(String task) throws DukeException {
+    public Event(String task) throws WhoBotException {
         super(task.split(" /at ")[0]);
         try {
             this.timing = LocalDateTime.parse(task.split(" /at ")[1], DateTimeFormatter.ofPattern("d/M/yyyy HH:mm"));
         } catch (DateTimeParseException ex) {
-            throw new DukeException("Ensure that date time is of the format d/M/yyyy HH:mm");
+            throw new WhoBotException("Ensure that date time is of the format d/M/yyyy HH:mm");
         }
     }
 

@@ -1,4 +1,4 @@
-package Duke;
+package WhoBot;
 
 import java.util.Scanner;
 

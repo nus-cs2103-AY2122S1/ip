@@ -1,6 +1,6 @@
 package Utils;
 
-import Duke.UI;
+import WhoBot.UI;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,6 +1,6 @@
 package Task;
 
-import Duke.DukeException;
+import WhoBot.WhoBotException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,12 +11,12 @@ public class Deadline extends Task{
     private LocalDateTime deadline;
     private boolean hasTime;
 
-    public Deadline(String task) throws DukeException {
+    public Deadline(String task) throws WhoBotException {
         super(task.split(" /by ")[0]);
         try {
             this.deadline = processDateTime(task.split(" /by ")[1]);
         } catch (DateTimeParseException ex) {
-            throw new DukeException("Ensure that date time is of the format d/M/yyyy HH:mm");
+            throw new WhoBotException("Ensure that date time is of the format d/M/yyyy HH:mm");
         }
     }
 
