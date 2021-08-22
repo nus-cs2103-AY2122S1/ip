@@ -8,7 +8,18 @@ import duke.task.ToDo;
 
 import java.time.LocalDate;
 
+/**
+ * Parses string inputs from user.
+ */
 public class Parser {
+
+    /**
+     * Parses string inputs from user into a Command.
+     *
+     * @param input Input recieved from user.
+     * @return Command corresponding to the input recieved.
+     * @throws DukeException Invalid inputs recieved.
+     */
     protected static Command parse(String input) throws DukeException {
         String[] inputArray = input.split(" ");
         String[] params;

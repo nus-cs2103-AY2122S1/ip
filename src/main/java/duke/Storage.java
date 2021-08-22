@@ -8,16 +8,30 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDate;
 
+/**
+ * Reads and writes the task list on the disk.
+ */
 public class Storage {
     private String path;
 
+    /**
+     * Sole constructor for invocation by Duke.
+     *
+     * @param path Path to the log file to read from or write to.
+     */
     protected Storage(String path) {
         this.path = path;
     }
 
 
+    /**
+     * Reads the file to a TaskList.
+     *
+     * @return TaskList of the tasks stored in the file.
+     */
     protected TaskList load() {
         TaskList tasks = new TaskList();
         try {
@@ -50,6 +64,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes the input TaskList to the specified file.
+     *
+     * @param tasks TaskList to be written to file.
+     */
     public void saveFile(TaskList tasks) {
         try {
             FileWriter fileWriter = new FileWriter(path);
