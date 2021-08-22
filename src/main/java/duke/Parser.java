@@ -6,6 +6,7 @@ import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DateCommand;
 import duke.command.DeleteCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 
@@ -34,6 +35,9 @@ public class Parser {
             } else if (userInput.startsWith(Commands.DATE.getCommand())) {
                 // Print tasks that fall on given date.
                 return new DateCommand(userInput);
+            } else if (userInput.startsWith(Commands.FIND.getCommand())) {
+                // Print tasks with descriptions that contain search input.
+                return new FindCommand(userInput);
             } else {
                 // Add a task to tasks.
                 return new AddCommand(userInput);

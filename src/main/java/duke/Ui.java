@@ -40,6 +40,7 @@ public class Ui {
         DELETE("delete"),
         LIST("list"),
         DATE("date"),
+        FIND("find"),
         BYE("bye");
 
         private final String COMMAND;
@@ -98,6 +99,15 @@ public class Ui {
     public void showDateListSummary(String formattedDateString, int counter, int deadlines, int events) {
         System.out.println("A total of " + counter + " events (" + deadlines + " deadlines and " +
                 events + " events) fall on " + formattedDateString);
+    }
+
+    public void showFindBegin() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    public void showFindSuccess(int counter, String keyword) {
+        System.out.println("A total of " + counter
+                + " tasks in your list match your search keyword, " + keyword + ".");
     }
 
     public static String exceptionInvalidUserCommand() {
@@ -174,4 +184,7 @@ public class Ui {
         return "Failed to save tasks.";
     }
 
+    public static String exceptionMissingSearchInput() {
+        return "Cannot perform search. Search keyword must be provided";
+    }
 }
