@@ -2,26 +2,29 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Parses any command that requires inputs
+ */
 public class DukeParser {
 
     /**
      * Task list that this Parser object edits
      */
-    final TaskList taskList;
+    final private TaskList taskList;
 
     /**
      * Patterns for the Parser to look out for in the input
      */
-    Pattern donePattern = Pattern.compile("done (\\d+)", Pattern.CASE_INSENSITIVE);
-    Pattern deletePattern = Pattern.compile("delete (\\d+)", Pattern.CASE_INSENSITIVE);
-    Pattern todoPattern = Pattern.compile("todo (.+)", Pattern.CASE_INSENSITIVE);
-    Pattern deadlinePattern = Pattern.compile(
+    final private Pattern donePattern = Pattern.compile("done (\\d+)", Pattern.CASE_INSENSITIVE);
+    final private Pattern deletePattern = Pattern.compile("delete (\\d+)", Pattern.CASE_INSENSITIVE);
+    final private Pattern todoPattern = Pattern.compile("todo (.+)", Pattern.CASE_INSENSITIVE);
+    final private Pattern deadlinePattern = Pattern.compile(
             "deadline (.+) /by (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?",
             Pattern.CASE_INSENSITIVE);
-    Pattern eventPattern = Pattern.compile(
+    final private Pattern eventPattern = Pattern.compile(
             "event (.+) /at (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?",
             Pattern.CASE_INSENSITIVE);
-    Pattern listPattern = Pattern.compile(
+    final private Pattern listPattern = Pattern.compile(
             "list( /date (\\d{1,2}/\\d{1,2}/\\d{4}+))?",
             Pattern.CASE_INSENSITIVE);
 
@@ -38,12 +41,12 @@ public class DukeParser {
      * @param input String input from the Listener given by the User
      */
     public void parseInput(String input) {
-        Matcher checkList = listPattern.matcher(input);
-        Matcher checkDone = donePattern.matcher(input);
-        Matcher checkDelete = deletePattern.matcher(input);
-        Matcher checkTodo = todoPattern.matcher(input);
-        Matcher checkDeadline = deadlinePattern.matcher(input);
-        Matcher checkEvent = eventPattern.matcher(input);
+        final Matcher checkList = listPattern.matcher(input);
+        final Matcher checkDone = donePattern.matcher(input);
+        final Matcher checkDelete = deletePattern.matcher(input);
+        final Matcher checkTodo = todoPattern.matcher(input);
+        final Matcher checkDeadline = deadlinePattern.matcher(input);
+        final Matcher checkEvent = eventPattern.matcher(input);
 
 
         if (checkList.matches()) {

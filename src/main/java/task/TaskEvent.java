@@ -30,7 +30,7 @@ public class TaskEvent extends Task {
     }
 
     @Override
-    String saveString() {
+    public String saveString() {
         return "E" + '\t'
                 + (this.done ? "1" : "0") + '\t'
                 + this.description + '\t'
@@ -39,7 +39,7 @@ public class TaskEvent extends Task {
     }
 
     @Override
-    boolean isDate(LocalDate date){
+    public boolean isDate(LocalDate date){
         return date.equals(at);
     }
 

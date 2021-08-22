@@ -35,6 +35,6 @@ public abstract class Task {
      * The string representation of Task to be used for saving
      * @return Save string
      */
-    abstract String saveString();
-    abstract boolean isDate(LocalDate date);
+    public abstract String saveString();
+    public abstract boolean isDate(LocalDate date);
 }

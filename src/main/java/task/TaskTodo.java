@@ -21,14 +21,14 @@ public class TaskTodo extends Task {
     }
 
     @Override
-    String saveString() {
+    public String saveString() {
         return "T" + '\t'
                 + (this.done ? "1" : "0") + '\t'
                 + this.description;
     }
 
     @Override
-    boolean isDate(LocalDate date) {
+    public boolean isDate(LocalDate date) {
         return false;
     }
 }

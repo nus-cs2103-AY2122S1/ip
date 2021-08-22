@@ -29,7 +29,7 @@ public class TaskDeadline extends Task {
     }
 
     @Override
-    String saveString() {
+    public String saveString() {
         return "D" + '\t'
                 + (this.done ? "1" : "0") + '\t'
                 + this.description + '\t'
@@ -38,7 +38,7 @@ public class TaskDeadline extends Task {
     }
 
     @Override
-    boolean isDate(LocalDate date){
+    public boolean isDate(LocalDate date){
         return date.equals(by);
     }
 

@@ -86,15 +86,15 @@ public class TaskList {
     /**
      * Displays the list of tasks
      *
-     * @param pred Predicate to filter; true to display the tasks
+     * @param predicate Predicate to filter; true to display the tasks
      */
-    public void displayList(Predicate<Task> pred) {
+    public void displayList(Predicate<Task> predicate) {
         if (tasks.size() == 0) {
             System.out.println(Ui.OUTPUT_DISPLAY + "There is nothing to display! :angery:");
         } else {
             // Use of streams here?
             for (int i = 0; i < tasks.size(); i++) {
-                if (pred.test(tasks.get(i))) {
+                if (predicate.test(tasks.get(i))) {
                     System.out.println(Ui.OUTPUT_SPACES + (i + 1) + "." + tasks.get(i));
                 }
             }
