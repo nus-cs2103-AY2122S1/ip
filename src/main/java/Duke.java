@@ -1,6 +1,8 @@
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -40,11 +42,18 @@ public class Duke {
     public static class Deadlines extends Task {
 
         protected String by;
+        protected LocalDate date;
 
 
         public Deadlines(String description, String finishBy) {
            super(description, "D");
            this.by = finishBy;
+        }
+
+
+        public String understandDate() {
+            date = LocalDate.parse(this.by);
+            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         }
 
 
@@ -55,7 +64,7 @@ public class Duke {
 
         @Override
         public String toString() {
-            return "[D]" + super.toString() + " (by: " + this.by + ")";
+            return "[D]" + super.toString() + " (by: " + understandDate() + ")";
         }
     }
 
@@ -79,11 +88,18 @@ public class Duke {
     public static class Events extends Task {
 
         protected String date;
+        protected LocalDate at;
 
 
         public Events(String description, String eventDate) {
             super(description, "E");
             this.date = eventDate;
+        }
+
+
+        public String understandDate() {
+            at = LocalDate.parse(this.date);
+            return at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         }
 
 
@@ -94,7 +110,8 @@ public class Duke {
 
         @Override
         public String toString() {
-            return "[E]" + super.toString() + " (at: " + this.date + ")";
+            return "[E]" + super.toString() + " (at: " + understandDate() + ")";
+
         }
     }
 
