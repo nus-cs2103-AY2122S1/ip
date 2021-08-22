@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TaskManager {
-    private final List<Task> taskList = new ArrayList<>();
+    private List<Task> taskList;
     private final Storage storage = new Storage();
 
     TaskManager() throws DateTimeException {
@@ -57,23 +57,7 @@ public class TaskManager {
 
     private void load() throws DateTimeException {
         try {
-            Stream<String> data = storage.load();
-            data.forEachOrdered(line -> {
-                String[] parts = line.split("[|]");
-                String type = parts[0];
-                boolean isDone = parts[1].equals("1");
-                switch (type) {
-                case "T":
-                    taskList.add(ToDo.of(isDone, parts[2]));
-                    break;
-                case "D":
-                    taskList.add(Deadline.of(isDone, parts[2], parts[3]));
-                    break;
-                case "E":
-                    taskList.add(Event.of(isDone, parts[2], parts[3]));
-                    break;
-                }
-            });
+            this.taskList = storage.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
