@@ -1,14 +1,17 @@
 package tasks;
 
 import exceptions.EmptyDeadlineBodyException;
+import exceptions.InvalidDateTimeFormatException;
 import exceptions.InvalidDeadlineBodyException;
 
-import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    private final String by;
+    private final LocalDate by;
 
-    public Deadline(String deadlineDataText) throws EmptyDeadlineBodyException, InvalidDeadlineBodyException {
+    public Deadline(String deadlineDataText) throws EmptyDeadlineBodyException, InvalidDeadlineBodyException,
+            InvalidDateTimeFormatException {
         if (deadlineDataText == null || deadlineDataText.isEmpty()) {
             throw new EmptyDeadlineBodyException();
         }
@@ -17,10 +20,14 @@ public class Deadline extends Task {
             throw new InvalidDeadlineBodyException();
         }
         super.setDescription(deadlineData[0].trim());
-        this.by = deadlineData[1].trim();
+        try {
+            this.by = LocalDate.parse(deadlineData[1].trim());
+        } catch (DateTimeParseException dte) {
+            throw new InvalidDateTimeFormatException();
+        }
     }
 
-    public Deadline(String description, boolean isDone, String by) {
+    public Deadline(String description, boolean isDone, LocalDate by) {
         super.setDescription(description);
         super.setIsDone(isDone);
         this.by = by;
@@ -33,6 +40,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString()
+                + " (by: " + by.getMonth() + " " + by.getDayOfMonth() + " " + by.getYear() + ")";
     }
 }

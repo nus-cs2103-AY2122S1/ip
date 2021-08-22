@@ -19,7 +19,7 @@ delete 1
 list
 test adding a task
 list
-deadline test adding a deadline /by today
+deadline test adding a deadline /by 2021-19-22
 list
 event test adding an event /at 11.15am monday 16/08/21
 list
@@ -44,5 +44,5 @@ event 1
 deadline 1
 event /at 123
 event 1 /at 2
-deadline 1 /by 2
+deadline 1 /by 2021-12-12
 bye

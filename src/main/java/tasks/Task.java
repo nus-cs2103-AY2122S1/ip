@@ -4,6 +4,7 @@ import data.TaskStorage;
 import exceptions.InvalidTaskNumberException;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public abstract class Task {
 
         switch (TaskType.valueOf(taskData[0])) {
         case DEADLINE:
-            return new Deadline(taskData[2], isDone, taskData[3]);
+            return new Deadline(taskData[2], isDone, LocalDate.parse(taskData[3]));
         case EVENT:
             return new Event(taskData[2], isDone, taskData[3]);
         case TODO:
