@@ -20,6 +20,10 @@ public class Task {
         return description;
     }
 
+    public String getMetaData() {
+        return String.format("%s|%s", isDone ? "X" : " ", description);
+    }
+
     public void markAsDone() {
         isDone = true;
     }

@@ -14,13 +14,26 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
+    public Event(String description, String eventTime, Boolean isDone) {
+        super(description);
+        if (isDone) {
+            super.markAsDone();
+        }
+        this.eventTime = eventTime;
+    }
+
     @Override
     public String getStatusIcon() {
         return "[E]" + super.getStatusIcon();
     }
 
     @Override
+    public String getMetaData() {
+        return String.format("E|%s|%s", super.getMetaData(), eventTime);
+    }
+
+    @Override
     public String getDescription() {
-        return String.format("%s(at:%s)", super.getDescription(), this.eventTime);
+        return String.format("%s (at: %s)", super.getDescription(), this.eventTime);
     }
 }

@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,9 +11,13 @@ import java.util.Scanner;
  * A chatbot based on Project Duke
  *
  * @author KelvinSoo
- * @version Level-6
+ * @version Level-7
  */
 public class Duke {
+
+    // File path
+    private final String fileDirectory = "./data/";
+    private final String fileName = "duke.txt";
 
     // Name of the chat bot
     private final String chatbotName;
@@ -85,8 +93,9 @@ public class Duke {
      *
      * @param task The task to be added to taskList
      */
-    private void addTask(Task task) {
+    private void addTask(Task task) throws DukeException {
         taskList.add(task);
+        saveTasks(taskList);
         printReply(String.format("Got it. I've added this task:\n  %s %s\nNow you have %d tasks in the list.",
                 task.getStatusIcon(), task.getDescription(), taskList.size()));
         processReply(sc.nextLine());
@@ -112,12 +121,12 @@ public class Duke {
      * @param command The user command
      */
     private void addDeadlineCommand(String command) throws DukeException {
-        if (command.length() <= 9 || !command.contains("/by")) {
+        if (command.length() <= 9 || !command.contains(" /by ")) {
             throw new DukeException("OOPS!!! The format of the deadline is incorrect.\n"
                     + "eg. deadline read book /by Friday");
         }
-        String parameter = command.substring(9);
-        String[] details = parameter.split("/by");
+        String parameter = command.split(" ", 2)[1];
+        String[] details = parameter.split(" /by ", 2);
         addTask(new Deadline(details[0], details[1]));
     }
 
@@ -128,13 +137,14 @@ public class Duke {
      * @param command The user command
      */
     private void addEventCommand(String command) throws DukeException {
-        if (command.length() <= 6 || !command.contains("/at")) {
+        if (command.length() <= 6 || !command.contains(" /at ")) {
             throw new DukeException("OOPS!!! The format of the event is incorrect.\n"
                     + "eg. event CS2103T lecture /at Thursday, 1600hr");
         }
-        String parameter = command.substring(6);
-        String[] details = parameter.split("/at");
+        String parameter = command.split(" ", 2)[1];
+        String[] details = parameter.split(" /at ", 2);
         addTask(new Event(details[0], details[1]));
+
     }
 
     /**
@@ -160,13 +170,20 @@ public class Duke {
         }
         Task task = taskList.get(taskID - 1);
         task.markAsDone();
+        saveTasks(taskList);
         printReply(String.format("Nice! I've marked this task as done: \n  %s %s",
                 task.getStatusIcon(), task.getDescription()));
         processReply(sc.nextLine());
     }
 
+    /**
+     * Evaluate a delete command.
+     * Delete a task from the task list.
+     *
+     * @param command The user command
+     */
     private void deleteCommand(String command) throws DukeException {
-        String[] details = command.split(" ");
+        String[] details = command.split(" ", 2);
         if (details.length < 2) {
             // Missing parameter
             throw new DukeException("OOPS!!! Did you forget the task number?");
@@ -182,9 +199,71 @@ public class Duke {
         }
         Task task = taskList.get(taskID - 1);
         taskList.remove(task);
+        saveTasks(taskList);
         printReply(String.format("Noted. I've removed this task:\n  %s %s\nNow you have %d tasks in the list.",
                 task.getStatusIcon(), task.getDescription(), taskList.size()));
         processReply(sc.nextLine());
+    }
+
+    /**
+     * Save task method.
+     * Save the task list at the given file path.
+     *
+     * @param list The list to save
+     */
+    private void saveTasks(List<Task> list) throws DukeException {
+        File folder = new File(fileDirectory);
+        if (!folder.isDirectory()) {
+            throw new DukeException(String.format("OOPS!!! Folder  \"%s\" not found.", fileDirectory));
+        }
+        try {
+            FileWriter fw = new FileWriter(fileDirectory + fileName);
+            for (Task t:list) {
+                fw.write(t.getMetaData() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException(String.format("OOPS!!! File path \"%s\" is invalid", fileDirectory + fileName));
+        }
+    }
+
+    /**
+     * Load task method.
+     * Load the task list at the given file path.
+     *
+     * @param fileDirectory The folder to save the file in
+     * @param fileName The file to save in the folder
+     */
+    private void loadTasks(String fileDirectory, String fileName) throws DukeException {
+        File folder = new File(fileDirectory);
+        if (!folder.isDirectory()) {
+            throw new DukeException(String.format("OOPS!!! Folder  \"%s\" not found.", fileDirectory));
+        }
+
+        File taskFile = new File(fileDirectory + fileName);
+        try {
+            Scanner s = new Scanner(taskFile);
+            while (s.hasNext()) {
+                String data = s.nextLine();
+                String[] parameter = data.split("\\|");
+
+                switch (parameter[0]) {
+                case "T":
+                    taskList.add(new ToDo(parameter[2], parameter[1].equals("X")));
+                    break;
+                case "D":
+                    taskList.add(new Deadline(parameter[2], parameter[3], parameter[1].equals("X")));
+                    break;
+                case "E":
+                    taskList.add(new Event(parameter[2], parameter[3], parameter[1].equals("X")));
+                    break;
+                default:
+                    break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new DukeException(String.format("OOPS!!! File \"%s\" does not exist in \"%s\"", fileName, fileDirectory));
+        }
     }
 
     /**
@@ -222,16 +301,21 @@ public class Duke {
             }
         } catch (DukeException e) {
             printReply(e.getMessage());
-                processReply(sc.nextLine());
-            }
+            processReply(sc.nextLine());
+        }
     }
 
     /**
      * Start a new chatbot session
      */
     private void run() {
-        greetUser();
-        processReply(sc.nextLine());
+        try {
+            loadTasks(fileDirectory, fileName);
+            greetUser();
+            processReply(sc.nextLine());
+        } catch (DukeException e) {
+            printReply(e.getMessage());
+        }
     }
 
     public static void main(String[] args) {

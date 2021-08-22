@@ -14,14 +14,27 @@ public class Deadline extends Task {
         this.dateLine = dateLine;
     }
 
+    public Deadline(String description, String dateLine, Boolean isDone) {
+        super(description);
+        if (isDone) {
+            super.markAsDone();
+        }
+        this.dateLine = dateLine;
+    }
+
     @Override
     public String getStatusIcon() {
         return "[D]" + super.getStatusIcon();
     }
 
     @Override
+    public String getMetaData() {
+        return String.format("D|%s|%s", super.getMetaData(), dateLine);
+    }
+
+    @Override
     public String getDescription() {
-        return String.format("%s(by:%s)", super.getDescription(), this.dateLine);
+        return String.format("%s (by: %s)", super.getDescription(), this.dateLine);
     }
 
 }
