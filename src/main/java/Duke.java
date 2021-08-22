@@ -3,26 +3,33 @@ public class Duke {
 
     private Storage storage;
     private TaskList taskList = new TaskList();
+    private Ui ui;
 
     public Duke(String filePath) {
+        ui = new Ui();
         storage = new Storage(filePath);
-        storage.readTasks(taskList);
+        try {
+            // TODO: reading tasks should not need UI since it's silent
+            storage.readTasks(taskList, ui);
+        } catch (IrisException exception) {
+            ui.sayError(exception);
+        }
     }
 
     public void run() {
-        Ui.say("Hello! I'm Iris. What can I do for you?");
-        String command = Ui.prompt();
+        ui.say("Hello! I'm Iris. What can I do for you?");
+        String command = ui.prompt();
         while (!command.equals(ENDING_COMMAND)) {
             try {
-                Parser.handleCommand(command, taskList);
+                Parser.handleCommand(command, taskList, ui);
             } catch (IrisException exception) {
-                Ui.sayError(exception);
+                ui.sayError(exception);
             }
             storage.writeTasks(taskList);
-            command = Ui.prompt();
+            command = ui.prompt();
         }
 
-        Ui.say("Bye. Hope to see you again soon!");
+        ui.say("Bye. Hope to see you again soon!");
     }
 
     public static void main(String[] args) {

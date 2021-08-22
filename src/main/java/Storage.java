@@ -20,17 +20,17 @@ public class Storage {
         }
     }
 
-    public void readTasks(TaskList taskList) {
+    public void readTasks(TaskList taskList, Ui ui) throws IrisException {
         File taskFile = new File(taskFilePath);
         try {
             Scanner scanner = new Scanner(taskFile);
             while (scanner.hasNextLine()) {
-                Parser.handleCommand(scanner.nextLine(), taskList, true);
+                Parser.handleCommand(scanner.nextLine(), taskList, ui, true);
             }
         } catch (FileNotFoundException exception) {
             createTaskFile();
         } catch (IrisException exception) {
-            Ui.say("data.txt has been corrupted");
+            throw new Error("data.txt has been corrupted");
         }
     }
 
