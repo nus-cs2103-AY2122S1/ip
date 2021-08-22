@@ -1,8 +1,6 @@
 package abyss;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Storage {
     private String filePath;
@@ -17,8 +15,8 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> loadTasks() throws IOException, LoadTaskException {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public TaskList loadTasks() throws IOException, LoadTaskException {
+        TaskList tasks = new TaskList();
         FileReader fileReader = new FileReader(filePath);
         BufferedReader reader = new BufferedReader(fileReader);
         String line;
@@ -29,19 +27,19 @@ public class Storage {
             Task task;
             switch (taskType) {
             case "T":
-                task = new ToDo(entry[2]);
+                task = tasks.addToDo(entry[2]);
                 if (isDone.equals("1")) {
                     task.markAsDone();
                 }
                 break;
             case "D":
-                task = new Deadline(entry[2],  LocalDate.parse(entry[3]));
+                task = tasks.addDeadline(entry[2], entry[3]);
                 if (isDone.equals("1")) {
                     task.markAsDone();
                 }
                 break;
             case "E":
-                task = new Event(entry[2],  LocalDate.parse(entry[3]));
+                task = tasks.addEvent(entry[2], entry[3]);
                 if (isDone.equals("1")) {
                     task.markAsDone();
                 }
@@ -49,15 +47,14 @@ public class Storage {
             default:
                 throw new LoadTaskException("Invalid task in file.");
             }
-            tasks.add(task);
         }
         reader.close();
         return tasks;
     }
 
-    public void saveTasks(ArrayList<Task> tasks) throws IOException {
+    public void saveTasks(TaskList tasks) throws IOException {
         StringBuffer input = new StringBuffer();
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
             Task task = tasks.get(i);
             input.append(task.toFileEntry());
             input.append("\n");
