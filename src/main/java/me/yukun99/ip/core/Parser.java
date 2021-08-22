@@ -61,6 +61,11 @@ public class Parser {
 		if (message.equals("list")) {
 			command = new ListCommand(null, this.taskList, this.ui);
 		}
+		if (message.startsWith("list ")) {
+			String date = message.replace("list ", "");
+			String[] args = {date};
+			command = new ListCommand(args, this.taskList, this.ui);
+		}
 		if (message.startsWith("todo ")) {
 			String name = message.replaceFirst("todo ", "");
 			String[] args = {name};

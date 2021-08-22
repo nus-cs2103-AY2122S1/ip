@@ -1,7 +1,9 @@
 package me.yukun99.ip.commands;
 
+import me.yukun99.ip.core.DateTimePair;
 import me.yukun99.ip.core.TaskList;
 import me.yukun99.ip.core.Ui;
+import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 
 public class ListCommand extends Command {
 	public ListCommand(String[] args, TaskList taskList, Ui ui) {
@@ -9,7 +11,12 @@ public class ListCommand extends Command {
 	}
 
 	@Override
-	public void run() {
-		this.ui.list();
+	public void run() throws HelpBotDateTimeFormatException {
+		if (args == null) {
+			this.ui.list();
+			return;
+		}
+		DateTimePair date = DateTimePair.parse(args[0]);
+		this.ui.listByDate(date);
 	}
 }

@@ -1,15 +1,38 @@
 package me.yukun99.ip.tasks;
 
-public class Deadline extends Task {
-	private String date;
+import me.yukun99.ip.core.DateTimePair;
+import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 
-	public Deadline(String name, String date) {
+public class Deadline extends Task {
+	private DateTimePair pair;
+
+	/**
+	 * Constructor for an Deadline instance.
+	 *
+	 * @param name Name of the Deadline.
+	 * @param date Date the deadline has to be completed by.
+	 */
+	public Deadline(String name, String date) throws HelpBotDateTimeFormatException {
 		super(name);
-		this.date = date;
+		setDate(date, true);
 	}
 
-	public void updateDate(String date) {
-		this.date = date;
+	@Override
+	public void updateDate(String date) throws HelpBotDateTimeFormatException {
+		setDate(date, false);
+	}
+
+	private void setDate(String strDate, boolean create) throws HelpBotDateTimeFormatException {
+		if (create) {
+			this.pair = DateTimePair.parse(strDate);
+		} else {
+			this.pair.update(DateTimePair.parse(strDate));
+		}
+	}
+
+	@Override
+	public DateTimePair getDate() {
+		return this.pair;
 	}
 
 	@Override
@@ -24,7 +47,7 @@ public class Deadline extends Task {
 			return false;
 		}
 		Deadline deadline = (Deadline) o;
-		return super.equals(o) && this.date.equals(deadline.date);
+		return super.equals(o) && this.pair.equals(deadline.pair);
 	}
 
 	@Override
@@ -35,12 +58,12 @@ public class Deadline extends Task {
 		} else {
 			save += "F:";
 		}
-		save += this.name + ":" + this.date;
+		save += this.name + ":" + this.pair.toString();
 		return save;
 	}
 
 	@Override
 	public String toString() {
-		return " [D]" + super.toString() + " (by: " + date + ")";
+		return " [D]" + super.toString() + " (by: " + this.pair.toString() + ")";
 	}
 }

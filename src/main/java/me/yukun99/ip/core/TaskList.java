@@ -1,11 +1,14 @@
 package me.yukun99.ip.core;
 
+import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
 import me.yukun99.ip.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class to handle list of all tasks currently in the todo list.
@@ -13,6 +16,8 @@ import java.util.List;
 public class TaskList {
 	// List of all tasks currently in the todo list.
 	private final List<Task> taskList;
+	private final Map<DateTimePair, List<Task>> pairTaskMap = new HashMap<>();
+	private final Map<Task, DateTimePair> taskPairMap = new HashMap<>();
 
 	/**
 	 * Constructor for a TaskList instance.
@@ -23,11 +28,16 @@ public class TaskList {
 
 	/**
 	 * Adds a task to the TaskList.
+	 * Leave dateTimePair null if the task is a ToDo task.
 	 *
 	 * @param task Task to be added to the TaskList.
+	 * @param dateTimePair Updated DateTimePair to store with the Task.
 	 */
-	public void addTask(Task task) {
+	public void addTask(Task task, DateTimePair dateTimePair) {
 		this.taskList.add(task);
+		if (dateTimePair != null) {
+			updateDateTime(task, dateTimePair);
+		}
 	}
 
 	/**
@@ -38,8 +48,8 @@ public class TaskList {
 	 */
 	public void doneTask(String strIndex, Ui ui) throws HelpBotInvalidTaskException {
 		try {
-			int index = Integer.parseInt(strIndex);
-			Task task = this.taskList.get(index - 1);
+			int index = Integer.parseInt(strIndex) - 1;
+			Task task = this.taskList.get(index);
 			task.setDone(ui);
 		} catch (IndexOutOfBoundsException | NumberFormatException e) {
 			throw new HelpBotInvalidTaskException(e, "done", strIndex + "");
@@ -56,15 +66,67 @@ public class TaskList {
 	 * @throws HelpBotInvalidTaskTypeException If specified Task is an instance of ToDo.
 	 */
 	public Task updateTask(String strIndex, String date)
-			throws HelpBotInvalidTaskException, HelpBotInvalidTaskTypeException {
+			throws HelpBotInvalidTaskException, HelpBotInvalidTaskTypeException, HelpBotDateTimeFormatException {
 		try {
-			int index = Integer.parseInt(strIndex);
-			Task task = this.taskList.get(index - 1);
+			int index = Integer.parseInt(strIndex) - 1;
+			Task task = this.taskList.get(index);
 			task.updateDate(date);
 			return task;
 		} catch (IndexOutOfBoundsException | NumberFormatException e) {
 			throw new HelpBotInvalidTaskException(e, "update", strIndex + "");
 		}
+	}
+
+	/**
+	 * Updates the stored DateTimePair of a specified task.
+	 * Stored values used to fetch the tasks by date.
+	 * Automatically called in addTask method.
+	 *
+	 * @param task Task to update stored DateTimePair for.
+	 * @param update Updated DateTimePair to be stored with the task.
+	 */
+	public void updateDateTime(Task task, DateTimePair update) {
+		try {
+			DateTimePair pair = task.getDate();
+			if (pairTaskMap.containsKey(pair)) {
+				pairTaskMap.get(pair).remove(task);
+			}
+			List<Task> updateTasks;
+			if (!pairTaskMap.containsKey(update)) {
+				updateTasks = new ArrayList<>();
+			} else {
+				updateTasks = pairTaskMap.get(update);
+			}
+			pairTaskMap.put(update, updateTasks);
+			updateTasks.add(task);
+			this.taskPairMap.remove(task);
+			this.taskPairMap.put(task, update);
+		} catch (HelpBotInvalidTaskTypeException ignored) {}
+		// ignore error here because we will never want to call updateDateTime for ToDo tasks.
+	}
+
+	/**
+	 * Gets the string representation of the tasks on a specified date.
+	 *
+	 * @param pair Date to get the string representation of tasks for.
+	 * @return String representation of the tasks on the specified date.
+	 */
+	public String listByDate(DateTimePair pair) {
+		StringBuilder message = new StringBuilder("Do you even realise how hard it was to do this?");
+		List<Task> tasks = new ArrayList<>();
+		for (Task task : taskPairMap.keySet()) {
+			DateTimePair other = taskPairMap.get(task);
+			if (other.hasEqualDate(pair)) {
+				tasks.add(task);
+			}
+		}
+		for (int i = 0; i < tasks.size(); ++i) {
+			message.append("\n ").append(i + 1).append(".").append(tasks.get(i));
+		}
+		if (tasks.size() == 0) {
+			message.append("\n  You don't have any tasks on ").append(pair).append(", idiot.");
+		}
+		return message.toString();
 	}
 
 	/**
@@ -76,7 +138,7 @@ public class TaskList {
 	 */
 	public Task deleteTask(String strIndex) throws HelpBotInvalidTaskException {
 		try {
-			int index = Integer.parseInt(strIndex);
+			int index = Integer.parseInt(strIndex) - 1;
 			Task deleted = this.taskList.get(index);
 			this.taskList.remove(index);
 			return deleted;

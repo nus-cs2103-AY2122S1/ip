@@ -5,6 +5,7 @@ import me.yukun99.ip.core.Parser;
 import me.yukun99.ip.core.Storage;
 import me.yukun99.ip.core.TaskList;
 import me.yukun99.ip.core.Ui;
+import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 import me.yukun99.ip.exceptions.HelpBotIllegalArgumentException;
 import me.yukun99.ip.exceptions.HelpBotInvalidCommandException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
@@ -53,7 +54,8 @@ public class HelpBot {
 			try {
 				Command command = this.parser.parse();
 				command.run();
-			} catch (HelpBotIllegalArgumentException | HelpBotInvalidCommandException | HelpBotInvalidTaskTypeException e) {
+			} catch (HelpBotIllegalArgumentException | HelpBotInvalidCommandException
+					| HelpBotInvalidTaskTypeException | HelpBotDateTimeFormatException e) {
 				this.ui.error(e);
 			}
 			if (this.exit) {
