@@ -6,15 +6,15 @@ import java.util.ArrayList;
 public class Task {
     protected String name;
     protected boolean done;
-    private static ArrayList<Task> list_of_tasks = new ArrayList<>();
+    protected static ArrayList<Task> list_of_tasks = new ArrayList<>();
 
     /**
      * public constructor to create a new task
      * @param name name of the task
      */
-    public Task(String name) {
+    public Task(String name, boolean done) {
         this.name = name;
-        this.done = false;
+        this.done = done;
         list_of_tasks.add(this);
     }
 
@@ -42,13 +42,17 @@ public class Task {
 
     /**
      * find the task in the list and mark it as done
-     * @param order order of the task
+     * @param order the number the task is labelled as
      */
     public static void find_finished_task(int order) {
         Task complete_task = list_of_tasks.get(order - 1);
         complete_task.finish_task();
     }
 
+    /**
+     * remove task from the list
+     * @param order the number the task is labelled as
+     */
     public static void remove_task(int order) {
         System.out.println("____________________________________________________________\n"
                 + "Okies, I have removed this task: \n"
@@ -73,10 +77,23 @@ public class Task {
         System.out.println("____________________________________________________________");
     }
 
+
     /**
      * @return state of task
      */
     public String getStatus() {
         return (done ? "X" : " ");
     }
+
+
+    public String log_record() {
+        int state;
+        if (this.done) {
+            state = 1;
+        } else {
+            state = 0;
+        }
+        return "D , " + state + " , " + name;
+    }
+
 }

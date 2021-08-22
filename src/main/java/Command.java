@@ -14,8 +14,7 @@ public class Command {
                 + "|____/ \\__,_|\n";
         System.out.println("Hello from\n" + logo);
 
-        System.out.println("Hello! I'm Du, your personal assistant chatbot!:)\n"
-                + "Please input the tasks you want to add to your list");
+        System.out.println("Hello! I'm Du, your personal assistant chatbot!:)");
     }
 
     /**

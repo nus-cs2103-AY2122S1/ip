@@ -1,7 +1,21 @@
 public class Todo extends Task {
 
-    public Todo(String name) {
-        super(name);
+    private String type = "T";
+
+    public Todo(String name, boolean done) {
+        super(name, done);
+    }
+
+
+    @Override
+    public String log_record() {
+        int state;
+        if (this.done) {
+            state = 1;
+        } else {
+            state = 0;
+        }
+        return "T , " + state + " , " + name;
     }
 
 
