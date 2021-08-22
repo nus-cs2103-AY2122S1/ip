@@ -79,7 +79,6 @@ public class DukeEngine {
     }
 
     public void loadData() {
-
         databaseEngine.createDirectory();
         databaseEngine.createDatabase();
         this.taskList = databaseEngine.readFromDatabase();

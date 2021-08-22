@@ -1,8 +1,5 @@
 package main.java;
 
-import main.java.DukeMessages;
-import main.java.DukeEngine;
-
 public class Duke {
 
     public static void main(String[] args) {

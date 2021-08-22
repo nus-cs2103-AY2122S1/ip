@@ -24,5 +24,3 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    ```
 
 ## Acknowldgements
-* [Jackson Project](https://github.com/FasterXML/jackson)
-* 
