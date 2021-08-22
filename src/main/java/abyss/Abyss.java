@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class Abyss {
     private static TaskList tasks = new TaskList();
+    private static Storage storage;
     private static final String FILE_PATH = "./data/abyss.txt";
     private static final String[] START_MESSAGES = {"Hello beautiful. Welcome to the Abyss.",
             "What can we do for you today?"};
@@ -21,7 +22,6 @@ public class Abyss {
         Ui.printLogo();
         Ui.reply(START_MESSAGES);
 
-        Storage storage;
         try {
             storage = new Storage(FILE_PATH);
             tasks = storage.loadTasks();
