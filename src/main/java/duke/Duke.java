@@ -1,10 +1,19 @@
+package duke;
+
+import duke.command.Command;
+
 import java.time.DateTimeException;
 
 public class Duke {
-    private static final Ui ui = new Ui();
-    private static final TaskManager taskManager = new TaskManager();
+    private final Ui ui;
+    private TaskManager taskManager;
 
-    public static void main(String[] args) {
+    public Duke() {
+        this.ui = new Ui();
+        this.taskManager = new TaskManager();
+    }
+
+    public void run() {
         ui.greet();
         boolean isExit = false;
         while(!isExit) {
@@ -18,4 +27,5 @@ public class Duke {
             }
         }
     }
+
 }

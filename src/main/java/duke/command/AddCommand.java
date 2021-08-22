@@ -1,10 +1,18 @@
+package duke.command;
+
+import duke.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.time.DateTimeException;
 
 public class AddCommand extends Command{
     private final String type;
     private final String[] args;
 
-    AddCommand(String type, String... args) {
+    public AddCommand(String type, String... args) {
         this.type = type;
         this.args = args;
     }
