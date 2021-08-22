@@ -8,5 +8,4 @@ public class LaunchDuke {
         Duke.runDukeBot(scanner);
         scanner.close();
     }
-    
 }

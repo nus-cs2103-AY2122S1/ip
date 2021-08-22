@@ -9,6 +9,7 @@ import commands.ByeCommand;
 import commands.DeadlineCommand;
 import commands.ListCommand;
 import commands.DoneCommand;
+import java.util.Arrays;
 public class CommandConverter {
     private static final String READ_COMMAND = "read";
     private static final String RETURN_COMMAND = "return";
@@ -29,8 +30,6 @@ public class CommandConverter {
         String formatted_input = input.trim();
         String[] commandItems = formatted_input.split(" ");
         String commandInput = commandItems[0];
-
-
         if (this.isNormalCommandType(commandInput)) {
             return this.extractNormalCommand(commandInput, formatted_input);
         } else {
@@ -39,16 +38,20 @@ public class CommandConverter {
 
     }
 
-    private Command extractSpecialCommand(String commandName, String fullCommandInput, String[] commandList) throws NoSuchCommandException {
+    private Command extractSpecialCommand(String commandName,
+                                          String fullCommandInput,
+                                          String[] commandList) throws NoSuchCommandException {
         if (commandList.length == 1) {
             String errorMessage = "☹ OOPS!!! The description of a " + commandName + " cannot be empty.";
             throw new NoSuchCommandException(errorMessage);
-        } else if (commandName.equals(TODO_COMMAND)) {
-            return new ToDoCommand(fullCommandInput);
-        } else if (commandName.equals(EVENT_COMMAND)) {
-            return new EventCommand(fullCommandInput);
         }
-        return new DeadlineCommand(fullCommandInput);
+        String actualInputs = String.join(" ", Arrays.copyOfRange(commandList, 1, commandList.length));
+        if (commandName.equals(TODO_COMMAND)) {
+            return new ToDoCommand(actualInputs);
+        } else if (commandName.equals(EVENT_COMMAND)) {
+            return new EventCommand(actualInputs);
+        }
+        return new DeadlineCommand(actualInputs);
     }
 
     
