@@ -16,7 +16,7 @@ public class Duke {
            }
            commandString = scanner.nextLine();
        }
-       Message.print("Bye, see you later.");
+       Message.print("Ok bye, see you later.");
     }
 
     public static void main(String[] args) {

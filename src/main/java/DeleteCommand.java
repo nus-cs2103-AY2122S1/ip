@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class DeleteCommand implements Command {
     int index;
 
@@ -7,11 +9,15 @@ public class DeleteCommand implements Command {
 
     @Override
     public void run() {
-        Task deleted = TaskStorage.getInstance().delete(index);
-        Message.print(new String[] {
-                "Okay, I have removed this task:",
-                "\t" + deleted.toString(),
-                String.format("Now you have %d task%s in your list.", TaskStorage.getInstance().getSize(), TaskStorage.getInstance().getSize() > 1 ? "s" : "")
-        });
+        try {
+            Task deleted = TaskStorage.getInstance().delete(index);
+            Message.print(new String[]{
+                    "Okay, I have removed this task:",
+                    "\t" + deleted.toString(),
+                    String.format("Now you have %d task%s in your list.", TaskStorage.getInstance().getSize(), TaskStorage.getInstance().getSize() > 1 ? "s" : "")
+            });
+        } catch (IOException e) {
+            Message.print("Error removing task!");
+        }
     }
 }

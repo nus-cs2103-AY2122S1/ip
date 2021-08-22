@@ -1,9 +1,13 @@
 public class EventTask extends Task{
-    String date;
+    private final String date;
 
     public EventTask(String content, boolean isDone, String date) {
         super(content, isDone);
         this.date = date;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     @Override

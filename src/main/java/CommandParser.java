@@ -74,7 +74,7 @@ public class CommandParser {
         } else if (eventDate.length() <= 0) {
             throw new DukeException("Please indicate the event date!");
         }
-        return new AddCommand(new DeadlineTask(eventContent, false, eventDate));
+        return new AddCommand(new EventTask(eventContent, false, eventDate));
     }
 
     private static Command parseDeleteCommand(String commandString) throws DukeException {

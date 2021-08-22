@@ -1,9 +1,13 @@
 public class DeadlineTask extends Task {
-    String deadline;
+    private final String deadline;
 
     public DeadlineTask(String content, boolean isDone, String deadline) {
         super(content, isDone);
         this.deadline = deadline;
+    }
+
+    public String getDeadline() {
+        return deadline;
     }
 
     @Override
