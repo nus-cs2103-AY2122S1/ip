@@ -2,6 +2,7 @@ package me.yukun99.ip.commands;
 
 import me.yukun99.ip.core.TaskList;
 import me.yukun99.ip.core.Ui;
+import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 import me.yukun99.ip.exceptions.HelpBotIllegalArgumentException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
 
@@ -35,5 +36,6 @@ public abstract class Command {
 	 * @throws HelpBotInvalidTaskTypeException If user tries to edit the time of a ToDo task.
 	 * @throws HelpBotIllegalArgumentException If user specified arguments are invalid or missing.
 	 */
-	public abstract void run() throws HelpBotInvalidTaskTypeException, HelpBotIllegalArgumentException;
+	public abstract void run()
+			throws HelpBotInvalidTaskTypeException, HelpBotIllegalArgumentException, HelpBotDateTimeFormatException;
 }

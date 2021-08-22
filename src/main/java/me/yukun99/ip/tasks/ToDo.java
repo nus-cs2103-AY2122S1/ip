@@ -1,5 +1,6 @@
 package me.yukun99.ip.tasks;
 
+import me.yukun99.ip.core.DateTimePair;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
 
 public class ToDo extends Task {
@@ -7,7 +8,13 @@ public class ToDo extends Task {
 		super(name);
 	}
 
+	@Override
 	public void updateDate(String date) throws HelpBotInvalidTaskTypeException {
+		throw new HelpBotInvalidTaskTypeException(Type.TODO);
+	}
+
+	@Override
+	public DateTimePair getDate() throws HelpBotInvalidTaskTypeException {
 		throw new HelpBotInvalidTaskTypeException(Type.TODO);
 	}
 

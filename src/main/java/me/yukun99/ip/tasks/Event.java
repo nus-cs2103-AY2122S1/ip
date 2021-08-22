@@ -1,7 +1,10 @@
 package me.yukun99.ip.tasks;
 
+import me.yukun99.ip.core.DateTimePair;
+import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
+
 public class Event extends Task {
-	private String date;
+	private DateTimePair pair;
 
 	/**
 	 * Constructor for an Event instance.
@@ -9,13 +12,27 @@ public class Event extends Task {
 	 * @param name Name of the Event.
 	 * @param date Date the event occurs at.
 	 */
-	public Event(String name, String date) {
+	public Event(String name, String date) throws HelpBotDateTimeFormatException {
 		super(name);
-		this.date = date;
+		setDate(date, true);
 	}
 
-	public void updateDate(String date) {
-		this.date = date;
+	@Override
+	public void updateDate(String date) throws HelpBotDateTimeFormatException {
+		setDate(date, false);
+	}
+
+	private void setDate(String strDate, boolean create) throws HelpBotDateTimeFormatException {
+		if (create) {
+			pair = DateTimePair.parse(strDate);
+		} else {
+			pair.update(DateTimePair.parse(strDate));
+		}
+	}
+
+	@Override
+	public DateTimePair getDate() {
+		return this.pair;
 	}
 
 	@Override
@@ -30,7 +47,7 @@ public class Event extends Task {
 			return false;
 		}
 		Event event = (Event) o;
-		return super.equals(o) && this.date.equals(event.date);
+		return super.equals(o) && this.pair.equals(event.pair);
 	}
 
 	@Override
@@ -41,12 +58,12 @@ public class Event extends Task {
 		} else {
 			save += "F:";
 		}
-		save += this.name + ":" + this.date;
+		save += this.name + ":" + this.pair.toString();
 		return save;
 	}
 
 	@Override
 	public String toString() {
-		return " [E]" + super.toString() + " (at: " + date + ")";
+		return " [E]" + super.toString() + " (at: " + this.pair.toString() + ")";
 	}
 }

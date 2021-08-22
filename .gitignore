@@ -13,4 +13,6 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Testing files
 /text-ui-test/*
+/*.txt

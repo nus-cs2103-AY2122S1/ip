@@ -1,5 +1,7 @@
 package me.yukun99.ip.core;
 
+import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
+import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
 import me.yukun99.ip.tasks.Deadline;
 import me.yukun99.ip.tasks.Event;
 import me.yukun99.ip.tasks.Task;
@@ -32,7 +34,6 @@ public class Storage {
 		this.filepath = filepath.replace("\\", "/");
 		File input = new File(this.filepath + "/input.txt");
 		this.outpath = this.filepath + "/ACTUAL.txt";
-		System.out.println(this.filepath);
 		File previous = new File(this.filepath + "/ACTUAL.txt");
 		if (previous.exists()) {
 			previous.delete();
@@ -80,7 +81,11 @@ public class Storage {
 		while (savedScanner.hasNext()) {
 			Task task = parseTask(savedScanner.nextLine());
 			if (task != null) {
-				this.taskList.addTask(task);
+				try {
+					this.taskList.addTask(task, task.getDate());
+				} catch (HelpBotInvalidTaskTypeException e) {
+					this.taskList.addTask(task, null);
+				}
 			}
 		}
 	}
@@ -115,7 +120,7 @@ public class Storage {
 				task.setDone();
 			}
 			return task;
-		} catch (ArrayIndexOutOfBoundsException e) {
+		} catch (ArrayIndexOutOfBoundsException | HelpBotDateTimeFormatException e) {
 			return null;
 		}
 	}

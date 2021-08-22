@@ -1,7 +1,11 @@
 package me.yukun99.ip.tasks;
 
+import me.yukun99.ip.core.DateTimePair;
 import me.yukun99.ip.core.Ui;
+import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
+
+import java.util.Objects;
 
 /**
  * Tasks stored in our task list.
@@ -55,8 +59,18 @@ public abstract class Task {
 	 *
 	 * @param date New date to be updated.
 	 * @throws HelpBotInvalidTaskTypeException If task does not contain a date to be updated.
+	 * @throws HelpBotDateTimeFormatException If task date could not be parsed correctly from String.
 	 */
-	public abstract void updateDate(String date) throws HelpBotInvalidTaskTypeException;
+	public abstract void updateDate(String date) throws HelpBotInvalidTaskTypeException,
+			HelpBotDateTimeFormatException;
+
+	/**
+	 * Gets the date and time of the task.
+	 *
+	 * @return Date and time pair of the task.
+	 * @throws HelpBotInvalidTaskTypeException If task does not contain a date.
+	 */
+	public abstract DateTimePair getDate() throws HelpBotInvalidTaskTypeException;
 
 	/**
 	 * Checks whether another Task object is equal to the current instance.
@@ -94,6 +108,11 @@ public abstract class Task {
 	 * @return String representation of the task to be saved into a file.
 	 */
 	public abstract String saveString();
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.name, this.done);
+	}
 
 	/**
 	 * Returns a String representation of the Task instance.

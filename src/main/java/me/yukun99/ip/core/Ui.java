@@ -30,10 +30,12 @@ public class Ui {
 	private static final String CMD_PREFIX = "  > ";
 
 	// Command usage descriptions.
-	private static final String HELP_LIST = "view all your tasks";
+	private static final String HELP_LIST = "view all your tasks, optionally (troublesome for me) by date";
 	private static final String HELP_TODO = "add a simple todo task";
 	private static final String HELP_DEADLINE = "add a task to be done by specified date/time";
 	private static final String HELP_EVENT = "add a task that happens at specified date/time";
+	private static final String HELP_DATE = "     - date format: yyyy-mm-dd";
+	private static final String HELP_TIME = "     - time format: hh:mm:ss";
 	private static final String HELP_UPDATE = "modify the date/time of task at specified index";
 	private static final String HELP_DELETE = "delete a task";
 	private static final String HELP_EXIT = "(please for the love of God) let me rest! :)";
@@ -44,11 +46,14 @@ public class Ui {
 			+ NEW_LINE + "Still here? Sigh... thought that would work. My name is"
 			+ NEW_LINE + NAME_PLACEHOLDER
 			+ NEW_LINE + "Here is the myriad of ways you can inconvenience me:"
-			+ NEW_LINE + CMD_PREFIX + "'list' - " + HELP_LIST
+			+ NEW_LINE + "  [] denotes optional arguments, () denotes REQUIRED arguments."
+			+ NEW_LINE + CMD_PREFIX + "'list [date]' - " + HELP_LIST
 			+ NEW_LINE + CMD_PREFIX + "'todo (task)' - " + HELP_TODO
-			+ NEW_LINE + CMD_PREFIX + "'deadline (task) /by (date/time)' - " + HELP_DEADLINE
-			+ NEW_LINE + CMD_PREFIX + "'event (task) /at (date/time)' - " + HELP_EVENT
-			+ NEW_LINE + CMD_PREFIX + "'update (task index) /to (date/time)' - " + HELP_UPDATE
+			+ NEW_LINE + CMD_PREFIX + "'deadline (task) /by (date) (time)' - " + HELP_DEADLINE
+			+ NEW_LINE + CMD_PREFIX + "'event (task) /at (date) (time)' - " + HELP_EVENT
+			+ NEW_LINE + CMD_PREFIX + "'update (task index) /to (date) (time)' - " + HELP_UPDATE
+			+ NEW_LINE + HELP_DATE
+			+ NEW_LINE + HELP_TIME
 			+ NEW_LINE + CMD_PREFIX + "'delete (task index)' - " + HELP_DELETE
 			+ NEW_LINE + CMD_PREFIX + "'bye' - " + HELP_EXIT;
 
@@ -60,6 +65,8 @@ public class Ui {
 			+ NEW_LINE + CMD_PREFIX + "'deadline (task) (date/time)' - " + HELP_DEADLINE
 			+ NEW_LINE + CMD_PREFIX + "'event (task) (date/time)' - " + HELP_EVENT
 			+ NEW_LINE + CMD_PREFIX + "'update (task index) (date/time)' - " + HELP_UPDATE
+			+ NEW_LINE + HELP_DATE
+			+ NEW_LINE + HELP_TIME
 			+ NEW_LINE + CMD_PREFIX + "'delete (task index)' - " + HELP_DELETE
 			+ NEW_LINE + CMD_PREFIX + "'bye' - " + HELP_EXIT;
 
@@ -113,6 +120,15 @@ public class Ui {
 	 */
 	public void list() {
 		sendMessage(this.taskList.toString().replace("\n", NEW_LINE));
+	}
+
+	/**
+	 * Sends user a list of all tasks happening at the specified date in the DateTimePair.
+	 *
+	 * @param pair Date/time pair to send tasks to user for.
+	 */
+	public void listByDate(DateTimePair pair) {
+		sendMessage(this.taskList.listByDate(pair));
 	}
 
 	/**
