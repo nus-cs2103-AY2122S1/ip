@@ -14,6 +14,18 @@ public abstract class Task {
         return String.format("[%s] %s", done ? "X" : " ", taskName);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Task)) {
+            return false;
+        }
+        Task t = (Task) o;
+        return taskName.equals(t.taskName) && done == t.isDone();
+    }
+
     public void markDone() {
         done = true;
     }
@@ -25,4 +37,6 @@ public abstract class Task {
     public abstract String getIdentifier();
 
     public abstract String getDetailsWithDelimiter(String delimiter);
+
+
 }

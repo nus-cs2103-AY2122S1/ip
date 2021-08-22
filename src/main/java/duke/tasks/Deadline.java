@@ -22,4 +22,17 @@ public class Deadline extends Task {
     public String getDetailsWithDelimiter(String delimiter) {
         return String.format("%s%s%s", taskName, delimiter, deadline);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Deadline)) {
+            return false;
+        }
+        Deadline d = (Deadline) o;
+        return taskName.equals(d.taskName) && done == d.done &&
+                deadline.equals(d.deadline);
+    }
 }
