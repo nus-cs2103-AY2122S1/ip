@@ -8,16 +8,31 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Class managing storing and loading data into Duke's list.
+ */
 public class Storage {
+
+    /** PATH to save file. */
     private String path;
+
+    /** List where data is loaded to and saved from. */
     private DukeList list;
 
+    /**
+     * Constructs a Storage object.
+     *
+     * @param path PATH to the storage file.
+     * @param list List where data is loaded to and saved from.
+     */
     public Storage(String path, DukeList list) {
         this.path = path;
         this.list = list;
     }
 
-
+    /**
+     * Saves data from list provided into file in PATH.
+     */
     public void save() {
         try {
             FileWriter fileWriter = new FileWriter(this.path + "\\data\\data.txt");
@@ -28,7 +43,11 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Loads data from file in PATH to list provided.
+     *
+     * @throws IOException If the file does not exist and cannot be created.
+     */
     public void load() throws IOException{
         try {
             Path folderPath = Paths.get(this.path + "\\data");
