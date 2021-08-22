@@ -56,7 +56,7 @@ public class ListCommand extends Command {
      * Indicates whether another object is equals to this ListCommand.
      *
      * @param obj Other object to be compared to.
-     * @return boolean indicating whether the other object is equal to this ListCommand.
+     * @return A boolean indicating whether the other object is equal to this ListCommand.
      */
     @Override
     public boolean equals(Object obj) {

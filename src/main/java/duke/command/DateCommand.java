@@ -111,7 +111,7 @@ public class DateCommand extends Command {
      * Indicates whether another object is equals to this DateCommand.
      *
      * @param obj Other object to be compared to.
-     * @return boolean indicating whether the other object is equal to this DateCommand.
+     * @return A boolean indicating whether the other object is equal to this DateCommand.
      */
     @Override
     public boolean equals(Object obj) {

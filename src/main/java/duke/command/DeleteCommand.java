@@ -87,7 +87,7 @@ public class DeleteCommand extends Command {
      * Indicates whether another object is equals to this DeleteCommand.
      *
      * @param obj Other object to be compared to.
-     * @return boolean indicating whether the other object is equal to this DeleteCommand.
+     * @return A boolean indicating whether the other object is equal to this DeleteCommand.
      */
     @Override
     public boolean equals(Object obj) {

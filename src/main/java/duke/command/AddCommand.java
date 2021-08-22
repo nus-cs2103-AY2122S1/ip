@@ -124,7 +124,7 @@ public class AddCommand extends Command {
      * Indicates whether another object is equals to this AddCommand.
      *
      * @param obj Other object to be compared to.
-     * @return boolean indicating whether the other object is equal to this AddCommand.
+     * @return A boolean indicating whether the other object is equal to this AddCommand.
      */
     @Override
     public boolean equals(Object obj) {
