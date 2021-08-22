@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -120,14 +122,20 @@ public class Duke {
      *
      * @param command The user command
      */
-    private void addDeadlineCommand(String command) throws DukeException {
+
+    private void addDeadlineCommand(String command) throws DukeException{
         if (command.length() <= 9 || !command.contains(" /by ")) {
-            throw new DukeException("OOPS!!! The format of the deadline is incorrect.\n"
-                    + "eg. deadline read book /by Friday");
+            throw new DukeException("OOPS!!! The format of the deadline is incorrect.\n" +
+                    "eg. deadline read book /by Friday");
         }
-        String parameter = command.split(" ", 2)[1];
-        String[] details = parameter.split(" /by ", 2);
-        addTask(new Deadline(details[0], details[1]));
+        String parameter = command.substring(9);
+        String[] details = parameter.split(" /by ");
+        LocalDateTime ldt = stringToDate(details[1]);
+        if (ldt == null) {
+            addTask(new Deadline(details[0], details[1]));
+        } else {
+            addTask(new Deadline(details[0],  ldt));
+        }
     }
 
     /**
@@ -136,15 +144,20 @@ public class Duke {
      *
      * @param command The user command
      */
-    private void addEventCommand(String command) throws DukeException {
-        if (command.length() <= 6 || !command.contains(" /at ")) {
-            throw new DukeException("OOPS!!! The format of the event is incorrect.\n"
-                    + "eg. event CS2103T lecture /at Thursday, 1600hr");
-        }
-        String parameter = command.split(" ", 2)[1];
-        String[] details = parameter.split(" /at ", 2);
-        addTask(new Event(details[0], details[1]));
 
+    private void addEventCommand(String command) throws DukeException{
+        if (command.length() <= 6 || !command.contains(" /at ")) {
+            throw new DukeException("OOPS!!! The format of the event is incorrect.\n" +
+                    "eg. event CS2103T lecture /at Thursday, 1600hr");
+        }
+        String parameter = command.substring(6);
+        String[] details = parameter.split(" /at ");
+        LocalDateTime ldt = stringToDate(details[1]);
+        if (ldt == null) {
+            addTask(new Event(details[0], details[1]));
+        } else {
+            addTask(new Event(details[0],  ldt));
+        }
     }
 
     /**
@@ -203,6 +216,32 @@ public class Duke {
         printReply(String.format("Noted. I've removed this task:\n  %s %s\nNow you have %d tasks in the list.",
                 task.getStatusIcon(), task.getDescription(), taskList.size()));
         processReply(sc.nextLine());
+    }
+
+    /**
+     * Convert a string in the supported format into a LocalDateTime.
+     * @param string The string to convert
+     */
+    private LocalDateTime stringToDate(String string) {
+        String[] details = string.split(" ", 2);
+        LocalDate localDate;
+        LocalDateTime localDateTime = null;
+        String date = details[0];
+        String time = details.length == 2 ? details[1] : null;
+        if (date.matches("\\d{1,2}/\\d{1,2}/\\d{4}")) {
+            String[] dateDetails = date.split("/");
+            localDate = LocalDate.of(
+                    Integer.parseInt(dateDetails[2]),
+                    Integer.parseInt(dateDetails[1]),
+                    Integer.parseInt(dateDetails[0]));
+            if (time != null) {
+                localDateTime = localDate.atTime(
+                        Integer.parseInt(time.substring(0, 2)),Integer.parseInt(time.substring(2, 4)));
+            } else {
+                localDateTime = localDate.atStartOfDay();
+            }
+        }
+        return localDateTime;
     }
 
     /**

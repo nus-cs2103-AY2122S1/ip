@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 /**
  * Event class.
  * Used to represent a event task.
@@ -20,6 +22,16 @@ public class Event extends Task {
             super.markAsDone();
         }
         this.eventTime = eventTime;
+    }
+
+    public Event(String description, LocalDateTime localDateTime) {
+        super(description);
+        this.eventTime = String.format("%s of %s %s, %s%s",
+                localDateTime.getDayOfMonth(),
+                localDateTime.getMonth().toString(),
+                localDateTime.getYear(),
+                localDateTime.getHour() < 12 ? localDateTime.getHour() : localDateTime.getHour() - 12,
+                localDateTime.getHour() < 12 ? "am" : "pm");
     }
 
     @Override
