@@ -13,6 +13,8 @@ src/main/resources/docs/
 *.iml
 bin/
 
+*.jar
+*.json
 *.class
 *.txt
 
