@@ -26,5 +26,16 @@ public abstract class Command {
         return isExit;
     }
 
+    /**
+     * Triggers the command and gives a string output depending on the command triggered.
+     *
+     * @param storage Storage class to store information.
+     * @param taskList Task list class to store information about tasks.
+     * @param ui Ui class to display messages to the user.
+     *
+     * @return Returns a string output depending on the command.
+     *
+     * @throws PixException Throws multiple exceptions depending on the tasks.
+     */
     public abstract String trigger(Storage storage, TaskList taskList, Ui ui) throws PixException;
 }

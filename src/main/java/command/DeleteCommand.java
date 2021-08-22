@@ -11,6 +11,11 @@ import java.io.IOException;
 public class DeleteCommand extends Command {
     private int taskNumber;
 
+    /**
+     * Constructor for the delete command.
+     *
+     * @param taskNumber Task number to be deleted.
+     */
     public DeleteCommand(int taskNumber) {
         super(false);
         this.taskNumber = taskNumber;
