@@ -22,6 +22,12 @@ public class Parser {
     private final String DELETE_TAG = "delete";
     private final String FIND_TAG = "find";
 
+    /**
+     * Returns the command tag of the input.
+     *
+     * @param input User's input
+     * @return A String representing the command tag.
+     */
     private String getCommandTag(String input) {
         if (!input.contains(" ")) {
             return input;
@@ -31,6 +37,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a command that allows the chat bot to know the next course of action to take
+     * based on the user input.
+     *
+     * @param input User's input
+     * @return A Command.
+     * @throws IllegalFormatException Wrong format used by user.
+     * @throws UnknownTagException Unrecognised keyword entered by user.
+     */
     public Command checkCommandTag(String input) throws IllegalFormatException, UnknownTagException {
         String commandTag = getCommandTag(input).toLowerCase();
 
@@ -61,8 +76,15 @@ public class Parser {
         }
     }
 
-    private String getTodoDesc(String msg) throws IllegalFormatException {
-        String[] details = msg.split("todo ");
+    /**
+     * Returns the description of the Todo task.
+     *
+     * @param input User's input
+     * @return A String representing the description.
+     * @throws IllegalFormatException Wrong format used by user.
+     */
+    private String getTodoDesc(String input) throws IllegalFormatException {
+        String[] details = input.split("todo ");
 
         if (details.length != 2) {
             throw new IllegalFormatException("Please ensure that you have typed todo keyword.");
@@ -71,21 +93,35 @@ public class Parser {
         return details[1].trim();
     }
 
-    private String getTaskDesc(String msg) throws IllegalFormatException {
-        int startPosition = msg.indexOf(" ");
-        int endPosition = msg.indexOf("/");
+    /**
+     * Returns the description of the Deadline/Event task.
+     *
+     * @param input User's input
+     * @return A String representing the description.
+     * @throws IllegalFormatException Wrong format used by user.
+     */
+    private String getTaskDesc(String input) throws IllegalFormatException {
+        int startPosition = input.indexOf(" ");
+        int endPosition = input.indexOf("/");
 
-        if (startPosition < 0 || startPosition >= msg.length()
-                || endPosition < 0 || endPosition >= msg.length()) {
+        if (startPosition < 0 || startPosition >= input.length()
+                || endPosition < 0 || endPosition >= input.length()) {
             throw new IllegalFormatException("Please follow the format: type description /xx yyyy-mm-dd\n\t "
                     + "Use /by for deadline, /at for event.");
         }
 
-        return msg.substring(startPosition, endPosition).trim();
+        return input.substring(startPosition, endPosition).trim();
     }
 
-    private LocalDate getDeadlineDates(String msg) throws IllegalFormatException{
-        String[] details = msg.split("/by ");
+    /**
+     * Returns the date of the Deadline task.
+     *
+     * @param input User's input
+     * @return A LocalDate representing the date.
+     * @throws IllegalFormatException Wrong format used by user.
+     */
+    private LocalDate getDeadlineDates(String input) throws IllegalFormatException{
+        String[] details = input.split("/by ");
 
         if (details.length != 2) {
             throw new IllegalFormatException("Please follow the format: type description /by yyyy-mm-dd.");
@@ -98,8 +134,15 @@ public class Parser {
         }
     }
 
-    private LocalDate getEventDates(String msg) throws IllegalFormatException{
-        String[] details = msg.split("/at ");
+    /**
+     * Returns the date of the Event task.
+     *
+     * @param input User's input
+     * @return A LocalDate representing the date.
+     * @throws IllegalFormatException Wrong format used by user.
+     */
+    private LocalDate getEventDates(String input) throws IllegalFormatException{
+        String[] details = input.split("/at ");
 
         if (details.length != 2) {
             throw new IllegalFormatException("Please follow the format: type description /at yyyy-mm-dd.");
@@ -112,6 +155,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the index of the task in the TaskList.
+     *
+     * @param input User's input
+     * @return An int representing the index.
+     * @throws IllegalFormatException Wrong format used by user.
+     */
     private int getTaskId(String input) throws IllegalFormatException {
         String[] details = input.split(" ");
 

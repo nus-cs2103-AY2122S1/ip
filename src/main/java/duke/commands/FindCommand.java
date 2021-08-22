@@ -4,6 +4,10 @@ import duke.Ui;
 import duke.exceptions.NoSuchTaskException;
 import duke.tasks.TaskList;
 
+/**
+ * Encapsulates the information of a FindCommand object that contains a keyword.
+ */
+
 public class FindCommand extends Command {
     private final String keyword;
 
