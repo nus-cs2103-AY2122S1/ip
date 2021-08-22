@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 class Main {
     public static void main(String[] args) {
-        levelSeven();
+        levelEight();
     }
 
-    public static void levelSeven() {
+    public static void levelEight() {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
         while (duke.isLive()) {

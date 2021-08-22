@@ -2,6 +2,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -161,9 +165,9 @@ public class Duke {
         String taskDescription = taskInfo[2];
         switch (taskType) {
         case "[D]":
-            return new DeadLine(taskDescription, taskInfo[3], isDone);
+            return new DeadLine(taskDescription, LocalDate.parse(taskInfo[3], DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)), isDone);
         case "[E]":
-            return new Event(taskDescription, taskInfo[3], isDone);
+            return new Event(taskDescription, LocalDate.parse(taskInfo[3], DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)), isDone);
         default:
             return new ToDo(taskDescription, isDone);
         }
@@ -246,7 +250,7 @@ public class Duke {
         return new ToDo(command, false);
     }
 
-    private DeadLine createDeadLine(String command) throws UnrecognizableCommandException {
+    private DeadLine createDeadLine(String command) throws UnrecognizableCommandException, InvalidDateTimeException {
         if (!command.contains(" /by ")) {
             throw new UnrecognizableCommandException();
         }
@@ -254,14 +258,16 @@ public class Duke {
             String[] lst = command.split(" /by ");
             String description = lst[0];
             String ddl = lst[1];
-            return new DeadLine(description, ddl, false);
+            validateDateTime(ddl);
+            LocalDate date = stringToLocalDate(ddl);
+            return new DeadLine(description, date, false);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new UnrecognizableCommandException();
         }
 
     }
 
-    private Event createEvent(String command) throws UnrecognizableCommandException {
+    private Event createEvent(String command) throws UnrecognizableCommandException, InvalidDateTimeException {
         if (!command.contains(" /at ")) {
             throw new UnrecognizableCommandException();
         }
@@ -269,7 +275,9 @@ public class Duke {
             String[] lst = command.split(" /at ");
             String description = lst[0];
             String period = lst[1];
-            return new Event(description, period, false);
+            validateDateTime(period);
+            LocalDate date = stringToLocalDate(period);
+            return new Event(description, date, false);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new UnrecognizableCommandException();
         }
@@ -298,5 +306,22 @@ public class Duke {
         tasks.remove(toBeDeleted);
         System.out.println("Now you have " + this.tasks.size() + " task" + ((tasks.size() <= 1) ? "" : "s") + " in the list");
         System.out.println("___________________________________________________\n");
+    }
+
+    private void validateDateTime(String date) throws InvalidDateTimeException {
+        try {
+            LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException();
+        }
+    }
+
+    private LocalDate stringToLocalDate(String date) {
+        String[] dateInfo = date.split("-");
+        String year = dateInfo[0];
+        String month = dateInfo[1];
+        String day = dateInfo[2];
+        LocalDate localDate = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+        return localDate;
     }
 }
