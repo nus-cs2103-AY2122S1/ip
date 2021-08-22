@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 /**
  * Deadline class.
  * Used to represent a deadline task.
@@ -14,6 +16,16 @@ public class Deadline extends Task {
         this.dateLine = dateLine;
     }
 
+    public Deadline(String description, LocalDateTime localDateTime) {
+        super(description);
+        this.dateLine = String.format("%s of %s %s, %s%s",
+                localDateTime.getDayOfMonth(),
+                localDateTime.getMonth().toString(),
+                localDateTime.getYear(),
+                localDateTime.getHour() < 12 ? localDateTime.getHour() : localDateTime.getHour() - 12,
+                localDateTime.getHour() < 12 ? "am" : "pm");
+    }
+
     @Override
     public String getStatusIcon() {
         return "[D]" + super.getStatusIcon();
@@ -21,7 +33,7 @@ public class Deadline extends Task {
 
     @Override
     public String getDescription() {
-        return String.format("%s(by:%s)", super.getDescription(), this.dateLine);
+        return String.format("%s (by: %s)", super.getDescription(), this.dateLine);
     }
 
 }
