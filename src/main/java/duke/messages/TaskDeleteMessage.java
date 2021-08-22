@@ -5,7 +5,7 @@ public class TaskDeleteMessage extends Message {
         super(MessageConstants.TASK_DELETE_HEADER
                 + taskDescription
                 + "\nNow you have " + numOfTasks
-                + (numOfTasks != 1 ? "duke/tasks " : " task ")
+                + (numOfTasks == 1 ? " task " : " tasks ")
                 + "in the list.");
     }
 }

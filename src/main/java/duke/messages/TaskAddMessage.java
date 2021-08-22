@@ -11,7 +11,7 @@ public class TaskAddMessage extends Message {
                 + taskText
                 + "\nNow you have "
                 + numOfTasks
-                + (numOfTasks == 1 ? " task " : "duke/tasks ")
+                + (numOfTasks == 1 ? " task " : " tasks ")
                 + "in the list.");
     }
 }
