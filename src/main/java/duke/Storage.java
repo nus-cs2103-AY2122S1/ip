@@ -18,7 +18,7 @@ public class Storage {
     }
 
     public void autoSave() {
-        boolean directoryExists = Files.exists( Paths.get("data"));
+        boolean directoryExists = Files.exists(Paths.get("data"));
         boolean fileExists = Files.exists(Paths.get("data","record"));
         if(!directoryExists) {
             try {
@@ -34,6 +34,7 @@ public class Storage {
             }
         }
         try {
+            System.out.println(Paths.get("data","record"));
             FileWriter writer = new FileWriter(Paths.get("data","record").toString());
             for (Task task : userInputRecord) {
                 writer.write(task.toString());
