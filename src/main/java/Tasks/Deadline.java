@@ -1,4 +1,5 @@
 package Tasks;
+import java.io.File;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,5 +17,10 @@ public class Deadline extends Task {
     public String toString() {
         String timeInfoString = timeInfo.format(outputFormatter);
         return String.format("[D]%s (by: %s)", super.toString(), timeInfoString);
+    }
+
+    @Override
+    public String dataToString() {
+        return String.format("D | %s | %s", super.dataToString(), this.timeInfo);
     }
 }

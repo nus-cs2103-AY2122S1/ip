@@ -1,6 +1,9 @@
 package Tasks;
 
-public class Task {
+import java.io.File;
+
+
+public abstract class Task {
     private boolean done = false;
     private String taskDetails;
     public Task(String taskDetails) {
@@ -14,6 +17,10 @@ public class Task {
         } else {
             return false;
         }
+    }
+
+    public String dataToString() {
+        return String.format("%d | %s", this.done ? 1 : 0, this.taskDetails);
     }
 
     @Override

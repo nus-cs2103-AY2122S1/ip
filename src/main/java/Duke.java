@@ -10,6 +10,7 @@ import Exceptions.InvalidTaskNumberException;
 import Exceptions.UnknownCommandException;
 
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -109,16 +110,61 @@ public class Duke {
         printOut(message);
     }
 
+    private static List<Task> createData() {
+        File directory = new File("./data");
+        File data = new File("./data/duke.txt");
+        List<Task> tasks= new ArrayList<>();
+
+        try {
+            data.createNewFile();
+            Scanner reader = new Scanner(data);
+            while (reader.hasNextLine()) {
+                String line = reader.nextLine();
+                String[] info = line.split(" \\| ");
+                String command = info[0];
+                Task task = null;
+                boolean done = info[1].equals("1");
+                if (command.equals("T")) {
+                    task = new Todo(info[2]);
+                } else if (command.equals("D")) {
+                    task = new Deadline(info[2], info[3]);
+                } else if (command.equals("E")) {
+                    task = new Event(info[2], info[3]);
+                }
+                if (task != null) {
+                    if (done) {
+                        task.markDone();
+                    }
+                    tasks.add(task);
+                }
+            }
+            return tasks;
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return tasks;
+        }
+    }
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
+        List<Task> tasks = createData();
+        String fileName = "./data/duke.txt";
 
         printOut(WELCOME_MESSAGE);
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
             try {
                 parseInput(input, tasks);
+                String data = tasks
+                        .stream()
+                        .map(task -> task.dataToString())
+                        .reduce("", (accum, nextString) -> String.format("%s\n%s", accum, nextString));
+                try (PrintWriter out = new PrintWriter(fileName)) {
+                    out.println(data.substring(1));
+                } catch (IOException e) {
+                    // do nothing
+                }
             } catch (DukeException e) {
                 printOut(e.getMessage());
             }
