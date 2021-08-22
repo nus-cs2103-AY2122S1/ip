@@ -1,5 +1,12 @@
-import javax.swing.*;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,6 +14,8 @@ public class Duke {
     private static abstract class Task {
         private String task;
         private boolean isDone;
+        private DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma");
 
         private String isDone() {
             return (this.isDone ? "X" : " ");
@@ -31,7 +40,8 @@ public class Duke {
         public Todo(String input) throws DukeIllegalInputException {
             String[] inputs = input.split(" ");
             if (inputs.length == 1) {
-                throw new DukeIllegalInputException("Insufficient input received! Please add in description of the Todo task.");
+                throw new DukeIllegalInputException("Insufficient input received! "
+                        + "Please add in description of the Todo task.");
             }
             int tFirst = input.indexOf(" ");
             String tTask = input.substring(tFirst + 1);
@@ -55,12 +65,13 @@ public class Duke {
     }
 
     private static class Deadline extends Task {
-        private String by;
+        private LocalDateTime by;
 
         public Deadline(String input) throws DukeIllegalInputException {
             String[] inputs = input.split(" ");
             if (inputs.length == 1) {
-                throw new DukeIllegalInputException("Insufficient input received! Please add in description of the Deadline task.");
+                throw new DukeIllegalInputException("Insufficient input received! "
+                        + "Please add in description of the Deadline task.");
             }
             if (!input.contains("/by")) {
                 throw new DukeIllegalInputException("Invalid input! Please add in the deadline for the task.");
@@ -68,7 +79,7 @@ public class Duke {
             int dFirst = input.indexOf(" ");
             int dSecond = input.indexOf("/");
             String dTask = input.substring(dFirst + 1, dSecond - 1);
-            String by = input.substring(dSecond + 4);
+            LocalDateTime by = LocalDateTime.parse(input.substring(dSecond + 4), super.inputFormat);
             super.task = dTask;
             this.by = by;
         }
@@ -76,27 +87,28 @@ public class Duke {
         public Deadline(boolean isDone, String description, String by) {
             super.isDone = isDone;
             super.task = description;
-            this.by = by;
+            this.by = LocalDateTime.parse(by, super.inputFormat);
         }
 
         @Override
         public String toString() {
-            return "[D]" + super.toString() + " (by: " + by + ")";
+            return "[D]" + super.toString() + " (by: " + by.format(super.outputFormat) + ")";
         }
 
         @Override
         public String saveAsString() {
-            return 1 + "\n" + super.saveAsString() + "\n" + this.by + "\n";
+            return 1 + "\n" + super.saveAsString() + "\n" + by.format(super.inputFormat) + "\n";
         }
     }
 
     private static class Event extends Task {
-        private String at;
+        private LocalDateTime at;
 
         public Event(String input) throws DukeIllegalInputException {
             String[] inputs = input.split(" ");
             if (inputs.length == 1) {
-                throw new DukeIllegalInputException("Insufficient input received! Please add in description of the Event task.");
+                throw new DukeIllegalInputException("Insufficient input received! "
+                        + "Please add in description of the Event task.");
             }
             if (!input.contains("/at")) {
                 throw new DukeIllegalInputException("Invalid input! Please add in information about the event.");
@@ -104,7 +116,7 @@ public class Duke {
             int eFirst = input.indexOf(" ");
             int eSecond = input.indexOf("/");
             String eTask = input.substring(eFirst + 1, eSecond - 1);
-            String at = input.substring(eSecond + 4);
+            LocalDateTime at = LocalDateTime.parse(input.substring(eSecond + 4), super.inputFormat);
             super.task = eTask;
             this.at = at;
         }
@@ -112,17 +124,17 @@ public class Duke {
         public Event(boolean isDone, String description, String at) {
             super.isDone = isDone;
             super.task = description;
-            this.at = at;
+            this.at = LocalDateTime.parse(at, super.inputFormat);
         }
 
         @Override
         public String toString() {
-            return "[E]" + super.toString() + " (at: " + at + ")";
+            return "[E]" + super.toString() + " (at: " + at.format(super.outputFormat) + ")";
         }
 
         @Override
         public String saveAsString() {
-            return 2 + "\n" + super.saveAsString() + "\n" + this.at + "\n";
+            return 2 + "\n" + super.saveAsString() + "\n" + at.format(super.inputFormat) + "\n";
         }
     }
 
@@ -237,6 +249,9 @@ public class Duke {
                         "Now you have " + list.size() + " tasks in the list.");
             } catch (DukeIllegalInputException e) {
                 System.out.println(e.getMessage());
+            } catch (DateTimeParseException pe) {
+                System.out.println("Please follow this format when entering date and time:\n"
+                        + "DD/MM/YYYY 24-Hour Time Format" + " e.g. (01/01/2020 2359)");
             }
         }
 
@@ -255,7 +270,8 @@ public class Duke {
         public void markAsDone(String input) throws DukeIllegalInputException {
             String[] inputs = input.split(" ");
             if (inputs.length == 1) {
-                throw new DukeIllegalInputException("Insufficient input received! Please indicate the task number of the completed task.");
+                throw new DukeIllegalInputException("Insufficient input received! " +
+                        "Please indicate the task number of the completed task.");
             }
             try {
                 int index = Integer.parseInt(inputs[1]);
@@ -264,23 +280,27 @@ public class Duke {
             } catch (NumberFormatException e) {
                 throw new DukeIllegalInputException("Invalid input! Please enter the task number after 'done'.");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeIllegalInputException("Invalid task number! The given task number does not exist, please enter a valid task number.");
+                throw new DukeIllegalInputException("Invalid task number! "
+                        + "The given task number does not exist, please enter a valid task number.");
             }
         }
 
         public void delete(String input) throws DukeIllegalInputException {
             String[] inputs = input.split(" ");
             if (inputs.length == 1) {
-                throw new DukeIllegalInputException("Insufficient input received! Please indicate the task number of the task you wish to delete.");
+                throw new DukeIllegalInputException("Insufficient input received! "
+                        + "Please indicate the task number of the task you wish to delete.");
             }
             try {
                 int index = Integer.parseInt(inputs[1]);
                 Task removed = list.remove(index - 1);
-                System.out.println("Noted. I've removed this task:\n  " + removed + "\nNow you have " + list.size() + " tasks in the list.");
+                System.out.println("Noted. I've removed this task:\n  " + removed + "\nNow you have "
+                        + list.size() + " tasks in the list.");
             } catch (NumberFormatException e) {
                 throw new DukeIllegalInputException("Invalid input! Please enter the task number after 'delete'.");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeIllegalInputException("Invalid task number! The given task number does not exist, please enter a valid task number.");
+                throw new DukeIllegalInputException("Invalid task number! "
+                        + "The given task number does not exist, please enter a valid task number.");
             }
         }
     }
