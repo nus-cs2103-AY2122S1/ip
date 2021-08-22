@@ -42,19 +42,23 @@ public class Duke {
         return str.startsWith("delete") || str.startsWith("done");
     }
 
-    private static void addTask(String command, String[] args) {
-        switch (command) {
-            case "todo":
-                list.add(new Todo(args[0]));
-                break;
-            case "deadline":
-                list.add(new Deadline(args[0], args[1]));
-                break;
-            case "event":
-                list.add(new Event(args[0], args[1]));
-                break;
-            default:
-                break;
+    private static void addTask(String command, String[] args) throws DukeException {
+        try {
+            switch (command) {
+                case "todo":
+                    list.add(new Todo(args[0]));
+                    break;
+                case "deadline":
+                    list.add(new Deadline(args[0], args[1]));
+                    break;
+                case "event":
+                    list.add(new Event(args[0], args[1]));
+                    break;
+                default:
+                    break;
+            }
+        } catch (DukeException e) {
+           e.print();  
         }
     }
 
