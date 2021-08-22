@@ -357,4 +357,20 @@ public class TaskList {
             Ui.myPrint("☹ OOPS!!! Please enter a valid number, such as delete 3");
         }
     }
+
+    /**
+     * Returns last Task in the list
+     * @return an instance of Task
+     */
+    public Task getLast() {
+        return taskList.get(taskList.size()-1);
+    }
+
+    /**
+     * Returns a Task in the list in a certain position
+     * @return an instance of Task
+     */
+    public Task getTask(int pos) {
+        return taskList.get(pos);
+    }
 }
