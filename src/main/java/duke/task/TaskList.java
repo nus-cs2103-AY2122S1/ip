@@ -43,11 +43,18 @@ public class TaskList {
         return sb.toString();
     }
 
+    public void print(Ui ui) {
+        print(ui, "");
+    }
+
     /**
      * Prints out the task list formatted and indented.
      */
-    public void print(Ui ui) {
+    public void print(Ui ui, String message) {
         StringBuilder tasksString = new StringBuilder();
+        if (!message.isEmpty()) {
+            tasksString.append(message).append(System.lineSeparator());
+        }
         for (int i = 0; i < taskList.size(); i++) {
             String taskAsString = i == taskList.size() - 1
                     ? String.format("%d.%s", i + 1, taskList.get(i))
@@ -55,5 +62,15 @@ public class TaskList {
             tasksString.append(taskAsString);
         }
         ui.print(tasksString.toString());
+    }
+
+    public TaskList filter(String keyword) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.toString().contains(keyword)) {
+                tasks.add(task);
+            }
+        }
+        return new TaskList(tasks);
     }
 }
