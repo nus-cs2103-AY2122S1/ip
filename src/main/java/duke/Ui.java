@@ -48,7 +48,7 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE_TAIL);
     }
 
-    public static void taskDoneMessage(Task task) {
+    public static void printTaskCompleteMessage(Task task) {
         wrapMessageInLines(Message.TASK_DONE_MSG.msg + task);
     }
 
@@ -69,13 +69,13 @@ public class Ui {
         wrapMessageInLines(Message.NONE_MATCH_MSG.msg);
     }
 
-    public static void taskDeletedMessage(Task task, int count) {
+    public static void printDeleteTaskMessage(Task task, int count) {
         String deletedTaskInfo = Message.TASK_DELETED_MSG.msg + task;
         String updatedListInfo = String.format("%d %s", count, Message.CHECK_TASK_COUNT_MSG.msg);
         wrapMessageInLines(deletedTaskInfo + "\n\t " + updatedListInfo);
     }
 
-    public static void taskAddedMessage(Task task, int count) {
+    public static void printAddTaskMessage(Task task, int count) {
         String addedTaskInfo = Message.TASK_ADDED_MSG.msg + task;
         String updatedListInfo = String.format("%d %s", count, Message.CHECK_TASK_COUNT_MSG.msg);
         wrapMessageInLines(addedTaskInfo + "\n\t " + updatedListInfo);
