@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.time.format.DateTimeParseException;
 
 public class DukeOperator {
     
@@ -56,6 +57,13 @@ public class DukeOperator {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (DateTimeParseException e) {
+            System.out.println(
+                StringFormat.tabAndFormat(
+                        "☹ OOPS!!! Please enter an appropriate date (and optionally, 24-hour time)\n" + 
+                        "Format: YYYY-MM-DD HH:MM"
+                )
+            );
         }
         return true;
     }
@@ -82,10 +90,18 @@ public class DukeOperator {
                 storage.add(new Todo(inputs[2]));
                 break;
             case "D":
-                storage.add(new Deadline(inputs[2], inputs[3]));
+                if (inputs.length == 4) {
+                    storage.add(new Deadline(inputs[2], inputs[3]));
+                    break;
+                }
+                storage.add(new Deadline(inputs[2], inputs[3], inputs[4]));
                 break;
             case "E":
-                storage.add(new Event(inputs[2], inputs[3]));
+                if (inputs.length == 4) {
+                    storage.add(new Event(inputs[2], inputs[3]));
+                    break;
+                }
+                storage.add(new Event(inputs[2], inputs[3], inputs[4]));
                 break;
             }
 
@@ -144,21 +160,48 @@ public class DukeOperator {
     private void event() {
         String[] inputs = this.userInput.split(" ", 2);
         String[] args = inputs[1].split(" /at ", 2);
-        System.out.println(
-            StringFormat.tabAndFormat(
-                storage.add(new Event(args[0], args[1]))
-            )
-        );   
+        String[] datetimeArgs = args[1].split(" ", 2);
+        if (datetimeArgs.length == 1) {
+            System.out.println(
+                StringFormat.tabAndFormat(
+                    storage.add(
+                        new Event(args[0], args[1])
+                    )
+                )
+            ); 
+        } else {
+            System.out.println(
+                StringFormat.tabAndFormat(
+                    storage.add(
+                        new Event(args[0], datetimeArgs[0], datetimeArgs[1])
+                    )
+                )
+            );
+        }
     }
 
     private void deadline() {
         String[] inputs = this.userInput.split(" ", 2);
         String[] args = inputs[1].split(" /by ", 2);
-        System.out.println(
-            StringFormat.tabAndFormat(
-                storage.add(new Deadline(args[0], args[1]))
-            )
-        ); 
+
+        String[] datetimeArgs = args[1].split(" ", 2);
+        if (datetimeArgs.length == 1) {
+            System.out.println(
+                StringFormat.tabAndFormat(
+                    storage.add(
+                        new Deadline(args[0], args[1])
+                    )
+                )
+            ); 
+        } else {
+            System.out.println(
+                StringFormat.tabAndFormat(
+                    storage.add(
+                        new Deadline(args[0], datetimeArgs[0], datetimeArgs[1])
+                    )
+                )
+            );
+        }
     }
 
 }

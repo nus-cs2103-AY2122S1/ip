@@ -7,7 +7,6 @@ public class Duke {
 
         // Taking in user input
         Scanner sc = new Scanner(System.in);
-        
         DukeOperator operator = new DukeOperator(Operation.start, storage);
         operator.operate();
 
