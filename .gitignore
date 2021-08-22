@@ -14,7 +14,8 @@ src/main/resources/docs/
 bin/
 
 # Text File for storage
-/src/main/duke.txt
+/data/duke.txt
 
 /text-ui-test/ACTUAL.txt
+/text-ui-test/data/duke.txt
 text-ui-test/EXPECTED-UNIX.TXT

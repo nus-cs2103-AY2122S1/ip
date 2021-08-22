@@ -1,55 +1,52 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Collection;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-
-
 public class Duke {
-    static Scanner userInput = new Scanner(System.in);
-    static String linebreaker = "____________________________________________________________";
-    static String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
-    static String farewell = "Bye. Hope to see you again soon!";
-    static String listMessage = "Here are the tasks in your list:";
-    static String doneMessage = "Nice! I've marked this task as done:";
-    static String addTaskMessage = "Got it. I've added this task:";
-    static String deleteTaskMessage = "Noted. I've removed this task:";
-
-    private boolean running = true;
-    private String instruction;
-    private ArrayList<Task> improvedList= new ArrayList<Task>();
+    private boolean isRunning = true;
     private enum Commands {list, done, todo, event, deadline, delete };
     Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    Duke () {
-        this.storage = new Storage("./src/main/duke.txt");
-        this.improvedList = storage.parseFile();
+    Duke (String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.parseFile());
+        } catch (Exception e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
 
-    void setInstruction() {
-        instruction = userInput.nextLine();
+    public void run() {
+        ui.greet();
+        while(isRunning) {
+            String instruction = ui.getInstruction();
+            if(checkBye(instruction)) {
+                break;
+            }
+            try {
+                parse(instruction);
+            } catch (DukeException e) {
+                ui.printErrorMessage(e);
+            }
+        }
+        ui.sayFarewell();
     }
 
-    void echo() {
-        System.out.println(instruction);
-    }
 
-
-    boolean checkBye(){
+    boolean checkBye(String instruction){
         if(instruction.equalsIgnoreCase("bye")){
-            running = false;
+            isRunning = false;
             storage.fileClear();
-            for(int i = 0; i < improvedList.size(); i++) {
-                storage.writeToFile(improvedList.get(i).toHistory());
+            for(int i = 0; i < tasks.getSize(); i++) {
+                storage.writeToFile(tasks.get(i).toHistory());
             }
             return true;
         }
         return false;
     }
 
-    void parse() throws NoDescriptionError, UnknownCommandError{
-        printLineBreak();
+    void parse(String instruction) throws NoDescriptionError, UnknownCommandError{
+        ui.printLineBreak();
         String[] strings = instruction.split(" ", 2);
         String operative = strings[0];
         Commands command;
@@ -68,19 +65,19 @@ public class Duke {
         }
         switch (command) {
         case list:
-            printArrayList();
+            ui.printArrayList(tasks);
             break;
         case done:
             item = strings[1];
             taskPointer = Integer.parseInt(item) - 1;
-            improvedList.get(taskPointer).markAsDone();
-            completeTaskMessage(improvedList.get(taskPointer));
+            tasks.get(taskPointer).markAsDone();
+            ui.completeTaskMessage(tasks.get(taskPointer));
             break;
         case todo:
             item = strings[1];
             toAdd = new Todo(item);
-            improvedList.add(toAdd);
-            addedTaskMessage(toAdd.toString());
+            tasks.addTask(toAdd);
+            ui.addedTaskMessage(toAdd, tasks.getSize());
             break;
         case event:
             item = strings[1];
@@ -88,14 +85,14 @@ public class Duke {
             date = temp[1];
             description = temp[0];
             toAdd = new Event(description, date);
-            improvedList.add(toAdd);
-            addedTaskMessage(toAdd.toString());
+            tasks.addTask(toAdd);
+            ui.addedTaskMessage(toAdd, tasks.getSize());
             break;
         case delete:
             item = strings[1];
             taskPointer = Integer.parseInt(item) - 1;
-            Task deleted = improvedList.remove(taskPointer);
-            deleteTaskMessage(deleted.toString());
+            Task deleted = tasks.delete(taskPointer);
+            ui. deleteTaskMessage(deleted, tasks.getSize());
             break;
         case deadline:
             item = strings[1];
@@ -103,79 +100,13 @@ public class Duke {
             date = temp[1];
             description = temp[0];
             toAdd = new Deadline(description, date);
-            improvedList.add(toAdd);
-            addedTaskMessage(toAdd.toString());
+            tasks.addTask(toAdd);
+            ui.addedTaskMessage(toAdd, tasks.getSize());
             break;
         }
     }
 
-
-
-    void printLineBreak () {
-        System.out.println(linebreaker);
-    }
-
-    void printArrayList () {
-        System.out.println(listMessage);
-        for(int i = 0; i < improvedList.size(); i++) {
-            System.out.println(String.valueOf(i+1) + "." + improvedList.get(i).toString());
-        }
-        printLineBreak();
-    }
-
-    void greet(){
-        System.out.println(greeting);
-        printLineBreak();
-    }
-
-    void sayFarewell() {
-        System.out.println(farewell);
-        printLineBreak();
-    }
-
-    void completeTaskMessage (Task task) {
-        System.out.println(doneMessage + "\n" + task.toString());
-        printLineBreak();
-    }
-
-    void deleteTaskMessage (String task) {
-        System.out.println(deleteTaskMessage);
-        System.out.println("  " + task);
-        taskCounterMessage();
-        printLineBreak();
-    }
-
-    void addedTaskMessage (String task) {
-        System.out.println(addTaskMessage);
-        System.out.println("  " + task);
-        taskCounterMessage();
-        printLineBreak();
-    }
-
-    void writeToFile(String text) {
-        this.storage.writeToFile(text);
-    }
-
-    void taskCounterMessage () {
-        System.out.println("Now you have " + improvedList.size() + " tasks in the list.");
-    }
-
     public static void main(String[] args) {
-        Duke weekTwo = new Duke();
-        weekTwo.greet();
-
-        while(weekTwo.running) {
-            weekTwo.setInstruction();
-            if(weekTwo.checkBye()){
-                break;
-            }
-            try {
-                weekTwo.parse();
-            } catch (DukeException e) {
-                System.out.println(e.toString());
-                weekTwo.printLineBreak();
-            }
-        }
-        weekTwo.sayFarewell();
+        new Duke("./data/duke.txt").run();
     }
 }

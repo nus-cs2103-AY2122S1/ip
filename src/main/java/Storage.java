@@ -14,6 +14,7 @@ public class Storage {
     Storage (String filePath){
         File temp =  new File(filePath);
         try {
+            temp.getParentFile().mkdir();
             temp.createNewFile();
             this.file = temp;
         } catch (Exception e) {
