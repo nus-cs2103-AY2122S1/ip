@@ -35,6 +35,13 @@ public class Parser {
                         continue;
                     }
                     tasks.find_finished_task(Integer.parseInt(split_string[1])); // might want to find a way to check whether split_string[1] is an integer
+                } else if (Objects.equals(split_string[0], "find")) {
+                    if (split_string.length <= 1) {
+                        System.out.println("Oh noes, you need to tell me what you want to find");
+                        command = sc.nextLine();
+                        continue;
+                    }
+                    tasks.print(tasks.search(split_string[1]));
                 } else if (Objects.equals(split_string[0], "delete")) {
                     tasks.remove_task(Integer.parseInt(split_string[1])); // might want to find a way to check whether split_string[1] is an integer
                 } else if (Objects.equals(split_string[0], "todo")) {

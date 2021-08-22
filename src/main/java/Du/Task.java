@@ -19,6 +19,9 @@ public class Task {
         tasklist.addTask(this);
     }
 
+    public String getName() {
+        return this.name;
+    }
 
     /**
      * print log for adding a task
