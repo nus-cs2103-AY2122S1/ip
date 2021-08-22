@@ -1,0 +1,4 @@
+T|0|borrow book
+T|0|read book
+D|0|return book|sun
+E|0|project meeting|mon

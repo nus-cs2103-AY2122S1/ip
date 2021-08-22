@@ -8,7 +8,7 @@ public class Deadline extends Task {
     private String by;
 
     /**
-     * Constructor to instantiate a Deadline Object.
+     * Instantiates a Deadline Object.
      *
      * @param description description of the task.
      * @param by due date of the task.
@@ -18,13 +18,23 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = by;
+    }
+
     /**
-     * A method that returns the string representation of this Deadline Object.
+     * Returns the string representation of this Deadline Object.
      *
      * @return String representation of Deadline object.
      */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
+    }
+
+    @Override
+    public String toSaveString() {
+        return "D" + super.toSaveString() + "|" + this.by;
     }
 }

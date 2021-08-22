@@ -8,7 +8,7 @@ public class Event extends Task {
     private String at;
 
     /**
-     * Constructor to instantiate an Event
+     * Instantiates an Event
      *
      * @param description description of the event
      * @param at scheduled date of the event
@@ -18,13 +18,23 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone);
+        this.at = at;
+    }
+
     /**
-     * A method to return the string representation of this Event object.
+     * Returns the string representation of this Event object.
      *
      * @return String representation of the Event Object.
      */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";
+    }
+
+    @Override
+    public String toSaveString() {
+        return "E" + super.toSaveString() + "|" + this.at;
     }
 }

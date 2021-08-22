@@ -1,42 +1,53 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    /**
-     * Arraylist to store the task items.
-     */
-    static List<Task> items = new ArrayList<>();
+    private static final String COMMAND_BYE = "bye";
+    private static final String COMMAND_LIST = "list";
+    private static final String COMMAND_DONE = "done";
+    private static final String COMMAND_TODO = "todo";
+    private static final String COMMAND_DDL = "deadline";
+    private static final String COMMAND_EVENT = "event";
+    private static final String COMMAND_DELETE = "delete";
+    private static final String FILE_DIR = "data";
+    private static final String FILE_NAME = "duke.txt";
+
+
+    private static List<Task> items = new ArrayList<>();
 
     /**
-     * A method to print horizontal line.
+     * Prints a horizontal line.
      */
-    public static void printHorizontalLine() {
+    private static void printHorizontalLine() {
         System.out.println("----------------------------------------------------");
     }
 
     /**
-     * A method to print a message to show users the number of tasks there are in the list.
+     * Prints a message to show users the number of tasks there are in the list.
      *
      * @param index index of items, i.e. the number of tasks
      */
-    public static void printTaskNum(int index) {
+    private static void printTaskNum(int index) {
         System.out.printf("\nNow you have %d tasks in the list.\n", index);
     }
 
     /**
-     * A method to print a message to show the task that has been successfully added to the list.
+     * Prints a message to show the task that has been successfully added to the list.
      *
      * @param task task added to items list
      */
-    public static void printAddTask(Task task) {
+    private static void printAddTask(Task task) {
         System.out.println("Got it. I've added this task:\n" + task);
     }
 
     /**
-     * A method to print the welcome message when the bot is first called.
+     * Prints the welcome message when the bot is first called.
      */
-    public static void printWelcomeMessage() {
+    private static void printWelcomeMessage() {
         String logo = " ______       ____      __\n"
                 + "|   _   \\    /    \\    |  |\n"
                 + "|  |_|  /   /  /\\  \\   |  |\n"
@@ -53,12 +64,19 @@ public class Duke {
                 "   delete <number> - delete the specified task <number>\n" +
                 "   list - display the list of tasks");
         printHorizontalLine();
+
+//        String home = System.getProperty("user.home"); // /Users/xiaoyunwu
+//
+//        java.nio.file.Path path = java.nio.file.Paths.get(home, "my", "app", "dir"); // /Users/xiaoyunwu/my/app/dir
+//
+//        boolean directoryExists = java.nio.file.Files.exists(path); // false
+
     }
 
     /**
-     * A method to print the list of tasks the user has currently.
+     * Prints the list of tasks the user has currently.
      */
-    public static void printList() {
+    private static void printList() {
         printHorizontalLine();
         if (items.size() > 0) {
             System.out.println("Here are the tasks in your list:");
@@ -74,11 +92,11 @@ public class Duke {
     }
 
     /**
-     * A method to mark a task as done.
+     * Marks a task as done.
      *
      * @param idx index of the task in the items array list.
      */
-    public static void doneTask(int idx) {
+    private static void doneTask(int idx) {
         items.get(idx).markAsDone();
 
         printHorizontalLine();
@@ -88,11 +106,11 @@ public class Duke {
     }
 
     /**
-     * A method to add a Todo task to the list.
+     * Adds a Todo task to the list.
      *
      * @param userCommand command string entered by the user.
      */
-    public static void addTodo(String userCommand) {
+    private static void addTodo(String userCommand) {
         try {
             Todo newTodo = new Todo(userCommand.substring(5));
             items.add(newTodo);
@@ -109,11 +127,11 @@ public class Duke {
     }
 
     /**
-     * A method to add a Deadline Task to the items arraylist.
+     * Adds a Deadline Task to the items arraylist.
      *
      * @param userCommand command string entered by the user.
      */
-    public static void addDeadline(String userCommand) {
+    private static void addDeadline(String userCommand) {
         try {
             int byIndex = userCommand.indexOf("/by");
             String by = userCommand.substring(byIndex + 4);
@@ -133,16 +151,17 @@ public class Duke {
     }
 
     /**
-     * A method to add a Event Task to the items arraylist.
+     * Adds a Event Task to the items arraylist.
      *
      * @param userCommand command string entered by the user.
      */
-    public static void addEvent(String userCommand) {
+    private static void addEvent(String userCommand) {
         try {
             int atIndex = userCommand.indexOf("/at");
             String at = userCommand.substring(atIndex + 4);
             Event newEvent = new Event(userCommand.substring(6, atIndex - 1), at);
             items.add(newEvent);
+
 
             printHorizontalLine();
             printAddTask(newEvent);
@@ -156,11 +175,11 @@ public class Duke {
     }
 
     /**
-     * A method to delete a task in the items arraylist.
+     * Deletes a task in the items arraylist.
      *
      * @param deleteIdx index of the task in the items arraylist.
      */
-    public static void deleteTask(int deleteIdx) {
+    private static void deleteTask(int deleteIdx) {
         Task taskToDelete = items.get(deleteIdx);
 
         items.remove(deleteIdx);
@@ -172,52 +191,108 @@ public class Duke {
         printHorizontalLine();
     }
 
+    private static void writeToFile(List<Task> tasks) throws IOException {
+        // Solution adapted from:
+        // https://stackoverflow.com/questions/9658297/java-how-to-create-a-file-in-a-directory-using-relative-path
+        File dukeFile = new File(FILE_DIR, FILE_NAME);
+
+        if (!dukeFile.exists()) {
+            dukeFile.getParentFile().mkdir();
+            dukeFile.createNewFile();
+        }
+
+        FileWriter fw = new FileWriter(dukeFile.getAbsoluteFile());
+
+        for (Task t : tasks) {
+            fw.write(t.toSaveString() + System.lineSeparator());
+        }
+
+        fw.close();
+    }
+
+    private static void readFile(String filePath) {
+        try {
+            File f = new File(filePath);
+            if (f.exists()) {
+                Scanner sc = new Scanner(f);
+                while (sc.hasNext()) {
+                    String t = sc.nextLine();
+                    String[] task = t.split("\\|");
+                    switch (task[0]) {
+                    case "T":
+                        items.add(new Todo(task[2], task[1].equals("1")));
+                        break;
+                    case "E":
+                        items.add(new Event(task[2], task[1].equals("1"), task[3]));
+                        break;
+                    case "D":
+                        items.add(new Deadline(task[2], task[1].equals("1"), task[3]));
+                        break;
+                    default:
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+
+    }
+
     public static void main(String[] args) {
         printWelcomeMessage();
+
+        readFile("data/duke.txt");
 
         Scanner sc = new Scanner(System.in);
 
         while (true) {
+
             String userCommand = sc.nextLine();
 
-            // Solution below adapted from https://stackoverflow.com/questions/5455794/removing-whitespace-from-strings-in-java
-            if (userCommand.replaceAll("\\s+","").equalsIgnoreCase("bye")) {
+            if (userCommand.replaceAll("\\s+","").equalsIgnoreCase(COMMAND_BYE)) {
                 System.out.println("====================================================\n" +
                         "Goodbai. Hope to see you again soon! （ ● ___ ●.）" +
                         "\n====================================================");
                 break;
-            } else if (userCommand.replaceAll("\\s+","").equalsIgnoreCase("list")) {
-                printList();
             } else {
                 String[] words = userCommand.split(" ");
 
                 try {
                     switch (words[0].toLowerCase()) {
-                        case "done":
-                                int idx = Integer.parseInt(words[1]) - 1;
-                                doneTask(idx);
-                            break;
+                    case COMMAND_LIST:
+                        printList();
+                        break;
 
-                        case "todo":
-                            addTodo(userCommand);
-                            break;
+                    case COMMAND_DONE:
+                        int idx = Integer.parseInt(words[1]) - 1;
+                        doneTask(idx);
+                        writeToFile(items);
+                        break;
 
-                        case "deadline":
-                            addDeadline(userCommand);
-                            break;
+                    case COMMAND_TODO:
+                        addTodo(userCommand);
+                        writeToFile(items);
+                        break;
 
-                        case "event":
-                            addEvent(userCommand);
-                            break;
+                    case COMMAND_DDL:
+                        addDeadline(userCommand);
+                        writeToFile(items);
+                        break;
 
-                        case "delete":
-                            int deleteIdx = Integer.parseInt(words[1]) - 1;
-                            deleteTask(deleteIdx);
+                    case COMMAND_EVENT:
+                        addEvent(userCommand);
+                        writeToFile(items);
+                        break;
 
-                            break;
+                    case COMMAND_DELETE:
+                        int deleteIdx = Integer.parseInt(words[1]) - 1;
+                        deleteTask(deleteIdx);
+                        writeToFile(items);
+                        break;
 
-                        default:
-                            throw new DukeException("I'm sorry, but I don't know what that means! D:");
+                    default:
+                        throw new DukeException("I'm sorry, but I don't know what that means! D:");
                     }
                 } catch (DukeException e) {
                     // unrecognisable input command
@@ -246,6 +321,8 @@ public class Duke {
                     printHorizontalLine();
                     System.out.println("Please enter a numeric character to mark your task as done!");
                     printHorizontalLine();
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
                 }
             }
         }

@@ -13,7 +13,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor to instantiate a Task object
+     * Instantiates a Task object
      *
      * @param description description of the task item
      */
@@ -22,8 +22,13 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     /**
-     * A method to display if the task has been done.
+     * Displays if the task has been done.
      *
      * @return "X" for a completed task; " " for an incomplete one.
      */
@@ -32,19 +37,23 @@ public class Task {
     }
 
     /**
-     * A method to mark the task item as done.
+     * Marks the task item as done.
      */
     public void markAsDone() {
         isDone = true;
     }
 
     /**
-     * A method to return the string representation of the task item.
+     * Returns the string representation of the task item.
      *
      * @return String representation of the task item.
      */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    public String toSaveString() {
+        return "|" + (isDone ? "1" : "0") + "|" + this.description;
     }
 }
