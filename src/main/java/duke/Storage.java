@@ -15,20 +15,14 @@ public class Storage {
         try {
             this.file = new File(filePath);
             Scanner fileReader = new Scanner(this.file);
+            fileReader.close();
         } catch (FileNotFoundException e) {
             throw new DukeException("File not found");
         }
+        
     }
     public void saveState(LinkedList<Item> itemList) {
         StringBuffer buffer = new StringBuffer();
-    }
-
-    private Item parseLine(String line) {
-        Item item;
-        switch (line[0]) {
-        case "T":
-            
-        }
     }
 
     public LinkedList<Item> loadState(String filePath) {

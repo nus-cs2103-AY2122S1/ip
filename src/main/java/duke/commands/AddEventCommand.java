@@ -1,8 +1,10 @@
 package duke.commands;
 
+import duke.Duke;
 import duke.DukeException;
-import duke.Event;
 import duke.Item;
+import duke.Event;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class AddEventCommand extends Command {
@@ -26,7 +28,12 @@ public class AddEventCommand extends Command {
 
     @Override
     public void execute(LinkedList<Item> itemList) {
-        System.out.println("Invoked AddEventCommand");
-        itemList.add(new Event(this.content, this.time));
+        ArrayList<String> printBuffer = new ArrayList<>();
+        printBuffer.add("Got it. I've added this task:");
+        Event toAdd = new Event(this.content, this.time);
+        itemList.add(toAdd);
+        printBuffer.add("  " + toAdd.toString());
+        printBuffer.add(String.format("Now you have %d tasks in the list.", itemList.size()));
+        System.out.println(Duke.styleResponse(printBuffer));
     }
 }

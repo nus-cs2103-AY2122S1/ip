@@ -15,8 +15,6 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(LinkedList<Item> itemList) {
-        System.out.println("Invoked DoneCommand");
-
         Item x = itemList.get(this.index);
         ArrayList<String> printBuffer = new ArrayList<>();
         printBuffer.add("Nice! I've marked this task as done:");

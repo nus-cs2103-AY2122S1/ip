@@ -15,7 +15,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(LinkedList<Item> itemList) {
-        System.out.println("Invoked DeleteCommand");
         ArrayList<String> printBuffer = new ArrayList<>();
         printBuffer.add("Noted. I've removed this task:");
         printBuffer.add("  " + itemList.remove(this.index).toString());

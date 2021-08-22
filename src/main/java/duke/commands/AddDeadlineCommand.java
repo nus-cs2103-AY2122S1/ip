@@ -1,8 +1,10 @@
 package duke.commands;
 
-import duke.DukeException;
 import duke.Deadline;
+import duke.Duke;
+import duke.DukeException;
 import duke.Item;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class AddDeadlineCommand extends Command {
@@ -26,7 +28,12 @@ public class AddDeadlineCommand extends Command {
 
     @Override
     public void execute(LinkedList<Item> itemList) {
-        System.out.println("Invoked AddDeadlineCommand");
-        itemList.add(new Deadline(this.content, this.time));
+        ArrayList<String> printBuffer = new ArrayList<>();
+        printBuffer.add("Got it. I've added this task:");
+        Deadline toAdd = new Deadline(this.content, this.time);
+        itemList.add(toAdd);
+        printBuffer.add("  " + toAdd.toString());
+        printBuffer.add(String.format("Now you have %d tasks in the list.", itemList.size()));
+        System.out.println(Duke.styleResponse(printBuffer));
     }
 }
