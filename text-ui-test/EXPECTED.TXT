@@ -17,22 +17,24 @@
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
 [34mWhoBot > [0mThese are the list of commands you can give me:
-			 1. list -> Prints out the List of Tasks.
-			 2. todo [#description] -> Adds a ToDo Task to the List
-			 3. event #description /at #timing -> Adds an Event Task to the List
-			 4. deadline #description /by #deadline -> Adds a Deadline Task to the List
-			 5. done #index -> Marks Task at #index in the List as completed
-			 6. undo #index -> Marks Task at #index in the List as incomplete
-			 7. delete #index -> Delete Task at #index in the List
-			 8. bye/goodbye -> Quits the ChatBot
+			 1. [35mlist[0m -> Prints out the List of Tasks.
+			 2. [35mhelp #command[0m -> Prints out Command specific help page.
+			 3. [35mtodo #description[0m -> Adds a ToDo Task to the List.
+			 4. [35mevent #description /at #timing[0m -> Adds an Event Task to the List.
+			 5. [35mdeadline #description /by #deadline[0m -> Adds a Deadline Task to the List.
+			 6. [35mshow /on #date[0m -> Prints out the List of Tasks on Given Date.
+			 7. [35mdone #index[0m -> Marks Task at #index in the List as completed.
+			 8. [35mundo #index[0m -> Marks Task at #index in the List as incomplete.
+			 9. [35mdelete #index[0m -> Delete Task at #index in the List.
+			 10. [35mbye/goodbye[0m -> Quits the ChatBot.
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
-[34mWhoBot > [0mI have added this Deadline Task to the list: "[D] Return Books to Library (by: Sunday)"
+[34mWhoBot > [0mI have added this Deadline Task to the list: "[D] Return Books to Library (by: Feb 25 2021)"
 [34mWhoBot > [0mYou now have 1 task(s) in the list.
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
 [34mWhoBot > [0mThe tasks in your list are:
-			1. [D] [ ] Return Books to Library (by: Sunday)
+			1. [D] [ ] Return Books to Library (by: Feb 25 2021)
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
 [34mWhoBot > [0mI have added this ToDo Task to the list: "[T] Get New Books"
@@ -40,33 +42,37 @@
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
 [34mWhoBot > [0mThe tasks in your list are:
-			1. [D] [ ] Return Books to Library (by: Sunday)
+			1. [D] [ ] Return Books to Library (by: Feb 25 2021)
 			2. [T] [ ] Get New Books
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
-[34mWhoBot > [0mI have added this Event Task to the list: "[E] Team Meeting (at: Saturday 2-4pm)"
+[34mWhoBot > [0mI have added this Event Task to the list: "[E] Team Meeting (at: Feb 26 2021 06:00 PM)"
 [34mWhoBot > [0mYou now have 3 task(s) in the list.
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
 [34mWhoBot > [0mThe tasks in your list are:
-			1. [D] [ ] Return Books to Library (by: Sunday)
-			2. [T] [ ] Get New Books
-			3. [E] [ ] Team Meeting (at: Saturday 2-4pm)
-[36m________________________________________________________________________________________________________________[0m
-[35m> [0m[36m________________________________________________________________________________________________________________[0m
-[34mWhoBot > [0mCongrats! I have marked this task complete: "[E] Team Meeting (at: Saturday 2-4pm)"
+			1. [D] [ ] Return Books to Library (by: Feb 25 2021)
+			2. [E] [ ] Team Meeting (at: Feb 26 2021 06:00 PM)
+			3. [T] [ ] Get New Books
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
 [34mWhoBot > [0mCongrats! I have marked this task complete: "[T] Get New Books"
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
-[34mWhoBot > [0mI have marked this task incomplete: "[T] Get New Books"
+[34mWhoBot > [0mCongrats! I have marked this task complete: "[E] Team Meeting (at: Feb 26 2021 06:00 PM)"
+[36m________________________________________________________________________________________________________________[0m
+[35m> [0m[36m________________________________________________________________________________________________________________[0m
+[34mWhoBot > [0mI have marked this task incomplete: "[E] Team Meeting (at: Feb 26 2021 06:00 PM)"
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
 [34mWhoBot > [0mThe tasks in your list are:
-			1. [D] [ ] Return Books to Library (by: Sunday)
-			2. [T] [ ] Get New Books
-			3. [E] [X] Team Meeting (at: Saturday 2-4pm)
+			1. [D] [ ] Return Books to Library (by: Feb 25 2021)
+			2. [E] [ ] Team Meeting (at: Feb 26 2021 06:00 PM)
+			3. [T] [X] Get New Books
+[36m________________________________________________________________________________________________________________[0m
+[35m> [0m[36m________________________________________________________________________________________________________________[0m
+[34mWhoBot > [0mI have added this Event Task to the list: "[E] Team Meeting (at: Feb 26 2021 02:00 PM)"
+[34mWhoBot > [0mYou now have 4 task(s) in the list.
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
 [34mWhoBot > [31mOops, That's an invalid command. Type in help to get list of possible commands.[0m
@@ -82,9 +88,10 @@
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
 [34mWhoBot > [0mThe tasks in your list are:
-			1. [D] [ ] Return Books to Library (by: Sunday)
-			2. [T] [ ] Get New Books
-			3. [E] [X] Team Meeting (at: Saturday 2-4pm)
+			1. [D] [ ] Return Books to Library (by: Feb 25 2021)
+			2. [E] [ ] Team Meeting (at: Feb 26 2021 02:00 PM)
+			3. [E] [ ] Team Meeting (at: Feb 26 2021 06:00 PM)
+			4. [T] [X] Get New Books
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
 [36m________________________________________________________________________________________________________________[0m
