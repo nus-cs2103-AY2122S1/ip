@@ -95,6 +95,12 @@ public class Parser {
             }
             LocalDate newDate = LocalDate.of(year, month, day);
             return new GetCommand(newDate);
+<<<<<<< HEAD
+=======
+        } else if (lowerCaseInput.equals("find")) {
+            String matchString = inputArr[1];
+            return new FindCommand(matchString);
+>>>>>>> branch-Level-9
         } else {
             DukeException exception = new DukeException("I'm sorry but I don't understand what that means :(");
             throw exception;
