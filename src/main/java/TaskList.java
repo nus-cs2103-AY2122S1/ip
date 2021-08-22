@@ -1,70 +1,14 @@
-import java.io.File;
 import java.util.List;
-import java.util.ArrayList;
-import java.io.PrintWriter;
-import java.time.DateTimeException;
 import java.io.IOException;
-import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
-import java.io.FileInputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 public class TaskList {
-    private final static String FILE_PATH = "duke.txt";
-    private final String ERR_SAVE = "Unexpected error occured. Could not save Tasks to file.";
     private List<Task> tasks;
+    private Storage storage;
 
-    private TaskList(List<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    private void appendToFile(Task task) {
-        try {
-            File file = new File(FILE_PATH);
-            PrintWriter pw = new PrintWriter(new FileOutputStream(file, true));
-            pw.append(task.toFile());
-            pw.close();
-        } catch (FileNotFoundException e) {
-            System.out.println(ERR_SAVE);
-        }
-    }
-
-    private void saveToFile() {
-        try {
-            File file = new File(FILE_PATH);
-            PrintWriter pw = new PrintWriter(new FileOutputStream(file));
-            for (Task task : tasks) {
-                pw.println(task.toFile());
-            }
-            pw.close();
-        } catch (FileNotFoundException e) {
-            System.out.println(ERR_SAVE);
-        }
-    }
-
-    /**
-     * Returns a TaskList initialized from local file (if any).
-     * If local file not provided, this function creates one.
-     *
-     * @return new list with tasks obtained from local file (if any).
-     */
-    public static TaskList init() throws FileNotFoundException, IOException {
-        File file = new File(FILE_PATH);
-        file.createNewFile();
-        FileInputStream fstream = new FileInputStream(file);
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-        List<Task> tasks = new ArrayList<>();
-        String line;
-        while ((line = br.readLine()) != null) {
-            try {
-                tasks.add(Task.strToObj(line));
-            } catch (IllegalArgumentException | DateTimeException e) {
-                continue;
-            }
-        }
-        br.close();
-        return new TaskList(tasks);
+    public TaskList(Storage storage) throws FileNotFoundException, IOException {
+        this.storage = storage;
+        this.tasks = storage.load();
     }
 
     /**
@@ -74,7 +18,7 @@ public class TaskList {
      */
     public void markComplete(int idx) {
         tasks.get(idx - 1).markComplete();
-        saveToFile();
+        storage.saveToFile(tasks);
     }
 
     /**
@@ -93,7 +37,7 @@ public class TaskList {
      */
     public void add(Task task) {
         tasks.add(task);
-        appendToFile(task);
+        storage.appendToFile(task);
     }
 
     /**
@@ -113,6 +57,6 @@ public class TaskList {
      */
     public void remove(int idx) {
         tasks.remove(idx);
-        saveToFile();
+        storage.saveToFile(tasks);
     }
 }

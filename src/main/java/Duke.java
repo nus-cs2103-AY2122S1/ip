@@ -38,8 +38,8 @@ public class Duke implements Runnable {
     );
     private TaskList tasks;
 
-    public Duke() throws FileNotFoundException, IOException {
-        this.tasks = TaskList.init();
+    public Duke(String filePath) throws FileNotFoundException, IOException {
+        this.tasks = new TaskList(new Storage(filePath));
     }
 
     private void printLatestTask() {
@@ -182,7 +182,7 @@ public class Duke implements Runnable {
 
     public static void main(String[] args) {
         try {
-            new Duke().run();
+            new Duke("duke.txt").run();
         } catch (FileNotFoundException e) {
             System.out.println(ERR_CREATE_FILE);
         } catch (IOException e) {
