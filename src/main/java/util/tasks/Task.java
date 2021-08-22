@@ -6,6 +6,8 @@ package util.tasks;
 
 public abstract class Task {
 
+
+
     /**
      * Method to encode the task as a String.
      * Format - {type of task}{DELIMITER}{DONE/NOTDONE}{DELIMITER}{TASKNAME}{Extra information}
@@ -14,7 +16,6 @@ public abstract class Task {
      * @return The encoded task;
      */
     public abstract String encode();
-
 
 
     protected static enum Label {
@@ -36,10 +37,12 @@ public abstract class Task {
      *
      * @param s Name of the task.
      */
-    public Task(String s) {
+    protected Task(String s) {
         this.name = s;
         this.isdone = false;
     }
+
+
 
     /**
      * Marks when the task is done.
@@ -62,13 +65,13 @@ public abstract class Task {
         switch (currentType) {
             //For todo
             case T:
-                t = new ToDos(ssplit[2]);
+                t = ToDos.of(ssplit[2]);
                 break;
             case E:
-                t = new Events(ssplit[2], ssplit[3]);
+                t = Events.of(ssplit[2], ssplit[3]);
                 break;
             case D:
-                t = new Deadlines(ssplit[2], ssplit[3]);
+                t = Deadlines.of(ssplit[2], ssplit[3]);
                 break;
             default:
                 throw new DukeException("Not a valid text document");

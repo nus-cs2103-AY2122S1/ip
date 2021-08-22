@@ -7,6 +7,10 @@ public class ToDos extends Task {
 
     }
 
+    public static Task of(String s) {
+        return new ToDos(s);
+    }
+
     @Override
     public String toString() {
         return this.label + super.toString();

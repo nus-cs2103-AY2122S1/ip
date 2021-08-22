@@ -4,15 +4,29 @@ import java.time.LocalDate;
 
 public class Deadlines extends DatedTask {
     private static String label = "[D]";
+    private static final String DELIMITER = "/by";
+    private static final String NOINPUTERRORMESSAGE = "☹ OOPS!!! The deadline must be filled in prefixed by /by";
 
-    public Deadlines(String s, LocalDate dl) {
+    private Deadlines(String s, LocalDate dl) {
         super(s.trim(), dl);
 
     }
-    public Deadlines(String s, String dl) {
+    private Deadlines(String s, String dl) {
         super(s.trim(), LocalDate.parse(dl.trim()));
 
     }
+
+    public static Deadlines of(String s) throws DukeException {
+        String[] ss = s.split(Deadlines.DELIMITER, 2);
+        if (ss.length == 0) throw new DukeException(NOINPUTERRORMESSAGE);
+        return new Deadlines(ss[0], ss[1]);
+    }
+
+
+    public static Deadlines of(String name, String date) throws DukeException {
+        return new Deadlines(name, date);
+    }
+
 
     @Override
     public String toString() {
