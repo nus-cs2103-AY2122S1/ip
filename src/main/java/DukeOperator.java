@@ -1,3 +1,5 @@
+import java.time.format.DateTimeParseException;
+
 public class DukeOperator {
     
     private final String userInput;
@@ -11,28 +13,37 @@ public class DukeOperator {
     public final boolean operate() throws DukeException {
         DukeInputProcessor operationChecker = new DukeInputProcessor(this.userInput);
         Operation operation = operationChecker.checkOperation();
-        switch(operation) {
-            case bye:
-                bye();
-                return false;
-            case list:
-                list();
-                break;
-            case done:
-                done();
-                break;
-            case delete:
-                delete();
-                break;
-            case todo: 
-                todo();
-                break;
-            case event:
-                event();
-                break;
-            case deadline:
-                deadline();
-                break;
+        try {
+            switch(operation) {
+                case bye:
+                    bye();
+                    return false;
+                case list:
+                    list();
+                    break;
+                case done:
+                    done();
+                    break;
+                case delete:
+                    delete();
+                    break;
+                case todo: 
+                    todo();
+                    break;
+                case event:
+                    event();
+                    break;
+                case deadline:
+                    deadline();
+                    break;
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println(
+                StringFormat.tabAndFormat(
+                        "☹ OOPS!!! Please enter an appropriate date (and optionally, 24-hour time)\n" + 
+                        "Format: YYYY-MM-DD HH:MM"
+                )
+            );
         }
         return true;
     }
@@ -77,21 +88,48 @@ public class DukeOperator {
     private void event() {
         String[] inputs = this.userInput.split(" ", 2);
         String[] args = inputs[1].split(" /at ", 2);
-        System.out.println(
-            StringFormat.tabAndFormat(
-                storage.add(new Event(args[0], args[1]))
-            )
-        );   
+        String[] datetimeArgs = args[1].split(" ", 2);
+        if (datetimeArgs.length == 1) {
+            System.out.println(
+                StringFormat.tabAndFormat(
+                    storage.add(
+                        new Event(args[0], args[1])
+                    )
+                )
+            ); 
+        } else {
+            System.out.println(
+                StringFormat.tabAndFormat(
+                    storage.add(
+                        new Event(args[0], datetimeArgs[0], datetimeArgs[1])
+                    )
+                )
+            );
+        }
     }
 
     private void deadline() {
         String[] inputs = this.userInput.split(" ", 2);
         String[] args = inputs[1].split(" /by ", 2);
-        System.out.println(
-            StringFormat.tabAndFormat(
-                storage.add(new Deadline(args[0], args[1]))
-            )
-        ); 
+
+        String[] datetimeArgs = args[1].split(" ", 2);
+        if (datetimeArgs.length == 1) {
+            System.out.println(
+                StringFormat.tabAndFormat(
+                    storage.add(
+                        new Deadline(args[0], args[1])
+                    )
+                )
+            ); 
+        } else {
+            System.out.println(
+                StringFormat.tabAndFormat(
+                    storage.add(
+                        new Deadline(args[0], datetimeArgs[0], datetimeArgs[1])
+                    )
+                )
+            );
+        }
     }
 
 }
