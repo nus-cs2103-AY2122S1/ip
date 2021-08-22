@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class TaskList {
 
@@ -13,9 +16,14 @@ public class TaskList {
     this.taskArray = convertStringsToTasks(taskArrayAsString);
   }
 
+  private static final String MESSAGE_LIST = "Here are the tasks in your list:";
+  private static final String MESSAGE_LIST_EMPTY = "There are no tasks in your list! ☹";
+  private static final String MESSAGE_SAVE = "Saved the file successfully! The following is saved:\n";
+  private static final String MESSAGE_RESET = "All your tasks have been reset!";
+  private static final String MESSAGE_FIND = "I found your tasks!";
+  private static final String MESSAGE_FIND_EMPTY = "No tasks were found with this description! ☹";
+  private static final String MESSAGE_FIND_LIST_EMPTY = "There are no tasks in your list to find! ☹";
   private static final String ERROR_UNKNOWN_FILE_COMMAND = "☹ OOPS!!! The saved file might be corrupted!";
-  private static final String LIST = "Here are the tasks in your list:";
-  private static final String SAVE = "Saved the file successfully! The following is saved:\n";
   private static final String ERROR_TODO_MISSING_DESCRIPTION = "☹ OOPS!!! The description of a todo cannot be empty.";
   private static final String ERROR_DELETE_INVALID_INDEX = "☹ OOPS!!! Please state a valid index to delete!";
   private static final String ERROR_SAVE = "☹ OOPS!!! I am unable to save the file for an unknown reason!";
@@ -33,19 +41,19 @@ public class TaskList {
       boolean done = commands[1].equals("1");
       String description = commands[2];
       switch (command) {
-        case Duke.EVENT_ENUM:
+        case Duke.COMMAND_EVENT:
           {
             String date = commands[3];
             newTaskArray.add(new Event(description, date, done));
             break;
           }
-        case Duke.DEADLINE_ENUM:
+        case Duke.COMMAND_DEADLINE:
           {
             String date = commands[3];
             newTaskArray.add(new Deadline(description, date, done));
             break;
           }
-        case Duke.TODO_ENUM:
+        case Duke.COMMAND_TODO:
           {
             newTaskArray.add(new Todo(description, done));
             break;
@@ -60,17 +68,17 @@ public class TaskList {
   }
 
   public void handleList() {
-    List<String> outputList = new ArrayList<>();
-    outputList.add(LIST);
-    for (int i = 0; i < this.taskArray.size(); i++) {
-      outputList.add(i + 1 + ". " + this.taskArray.get(i));
+    if (taskArray.isEmpty()) {
+      Printer.print(MESSAGE_LIST_EMPTY);
+      return;
     }
-    Printer.print(outputList);
+
+    Printer.printNumberedList(MESSAGE_LIST, taskArray);
   }
 
   public void handleAddHelper(Task newTask) {
-    this.taskArray.add(newTask);
-    Printer.print(Printer.addTaskString(newTask.toString(), Integer.toString(this.taskArray.size())));
+    taskArray.add(newTask);
+    Printer.print(Printer.addTaskString(newTask.toString(), Integer.toString(taskArray.size())));
   }
 
   public void handleAddToDo(String[] command) {
@@ -98,27 +106,57 @@ public class TaskList {
   }
 
   public void handleDone(int taskIndex) {
-    Task indexedTask = this.taskArray.get(taskIndex - 1);
+    Task indexedTask = taskArray.get(taskIndex - 1);
     String output = indexedTask.handleMarkAsDone();
     Printer.print(output);
   }
 
   public void handleDelete(int taskIndex) {
-    if (taskIndex < -1 || taskIndex >= this.taskArray.size()) Printer.print(ERROR_DELETE_INVALID_INDEX);
-    Task deletedTask = this.taskArray.remove(taskIndex - 1);
-    Printer.print(Printer.deleteTaskString(deletedTask.toString(), Integer.toString(this.taskArray.size())));
+    if (taskIndex < -1 || taskIndex >= taskArray.size()) Printer.print(ERROR_DELETE_INVALID_INDEX);
+    Task deletedTask = taskArray.remove(taskIndex - 1);
+    Printer.print(Printer.deleteTaskString(deletedTask.toString(), Integer.toString(taskArray.size())));
   }
 
   public void handleSave(Storage storage) {
     try {
-      String fileContents = storage.writeToFile(this.taskArray);
+      String fileContents = storage.writeToFile(taskArray);
       List<String> fileContentStrings = Arrays.asList(fileContents.split("\n"));
       List<String> output = new ArrayList<>();
-      output.add(SAVE);
+      output.add(MESSAGE_SAVE);
       output.addAll(fileContentStrings);
       Printer.print(output);
     } catch (IOException e) {
       Printer.print(ERROR_SAVE);
     }
+  }
+
+  public void handleFind(String description) {
+    if (taskArray.isEmpty()) {
+      Printer.print(MESSAGE_FIND_LIST_EMPTY);
+      return;
+    }
+
+    Pattern pattern = Pattern.compile(description, Pattern.CASE_INSENSITIVE);
+    List<Task> tasksFound = taskArray
+      .stream()
+      .filter(
+        x -> {
+          Matcher matcher = pattern.matcher(x.getDescription());
+          return matcher.find();
+        }
+      )
+      .collect(Collectors.toList());
+
+    if (tasksFound.isEmpty()) {
+      Printer.print(MESSAGE_FIND_EMPTY);
+      return;
+    }
+
+    Printer.printNumberedList(MESSAGE_FIND, tasksFound);
+  }
+
+  public void handleReset() {
+    taskArray = new ArrayList<>();
+    Printer.print(MESSAGE_RESET);
   }
 }

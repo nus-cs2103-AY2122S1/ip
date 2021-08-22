@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -72,5 +73,19 @@ abstract class Printer {
 
   public static void print(List<String> inputText) {
     System.out.println(formatOutput(inputText));
+  }
+
+  public static List<String> formatNumberedListOutput(String header, List<Task> taskArray) {
+    List<String> outputList = new ArrayList<>();
+    outputList.add(header);
+    for (int i = 0; i < taskArray.size(); i++) {
+      outputList.add(i + 1 + ". " + taskArray.get(i));
+    }
+    return outputList;
+  }
+
+  public static void printNumberedList(String header, List<Task> taskArray) {
+    List<String> outputList = formatNumberedListOutput(header, taskArray);
+    print(outputList);
   }
 }
