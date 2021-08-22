@@ -5,26 +5,19 @@ import commandInterface.ICommandProcessor;
 import dao.TaskDao;
 import dao.TaskDaoImpl;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import static util.Display.printSentence;
 
 /**
  * main driver program
  */
 public class Dude {
-	// initialize the buffered reader to take input from the console
-	private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	
 	// initialize the command processor from logic processing, use the commandParse to process the console input
 	private static final TaskDao taskDao = new TaskDaoImpl();
 	private static final ICommandLogicUnit commandLogicUnit = new CommandLogicUnitImpl(taskDao);
 	private static final ICommandProcessor commandProcessor = new CommandProcessorImpl(commandLogicUnit);
 	
 	@SuppressWarnings("InfiniteLoopStatement")
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		String logo = " ____        ____      \n"
 				+ "|  _ \\ _   _|  _ \\____\n"
 				+ "| | | | | | | | |/ __ \\\n"
@@ -35,8 +28,7 @@ public class Dude {
 		starting();
 		
 		while (true) {
-			String str = reader.readLine();
-			commandProcessor.processInput(str);
+			commandProcessor.processInput();
 		}
 	}
 	

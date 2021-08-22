@@ -7,6 +7,7 @@ import model.Command;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import static util.Display.printIndexedList;
 import static util.Display.printSentence;
@@ -27,12 +28,18 @@ public class CommandProcessorImpl implements ICommandProcessor {
 			"delete #index"
 	);
 	
+	// initialize the buffered reader to take input from the console
+	private static final Scanner scanner = new Scanner(System.in);
+	
 	public CommandProcessorImpl(ICommandLogicUnit commandProcessor) {
 		this.commandLogicUnit = commandProcessor;
 	}
 	
 	@Override
-	public void processInput(String input) {
+	public void processInput() {
+		// take the next command within a line, inputted using enter
+		String input = scanner.nextLine();
+		
 		List<String> parsedCommands = Arrays.asList(input.split(" "));
 		
 		processInputHelper(parsedCommands);
@@ -42,6 +49,7 @@ public class CommandProcessorImpl implements ICommandProcessor {
 		switch (parsedCommands.get(0)) {
 			case "bye":
 				commandLogicUnit.processCommand(Command.BYE, Map.of());
+				scanner.close();
 				break;
 			case "list":
 				commandLogicUnit.processCommand(Command.LIST, Map.of());
