@@ -1,3 +1,11 @@
+package botto;
+
+import botto.command.Command;
+import botto.util.Parser;
+import botto.util.Storage;
+import botto.util.TaskList;
+import botto.util.Ui;
+
 public class Botto {
     private Storage storage;
     private TaskList tasks;

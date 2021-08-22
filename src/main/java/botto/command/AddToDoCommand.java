@@ -1,3 +1,12 @@
+package botto.command;
+
+import botto.*;
+import botto.task.Task;
+import botto.task.Todo;
+import botto.util.Storage;
+import botto.util.TaskList;
+import botto.util.Ui;
+
 public class AddToDoCommand implements Command {
 
     private String command;

@@ -1,7 +1,15 @@
-public class DeleteCommand implements Command {
+package botto.command;
+
+import botto.*;
+import botto.task.Task;
+import botto.util.Storage;
+import botto.util.TaskList;
+import botto.util.Ui;
+
+public class MarkDoneCommand implements Command{
     private String command;
 
-    public DeleteCommand(String command) {
+    public MarkDoneCommand(String command) {
         this.command = command;
     }
 
@@ -16,10 +24,10 @@ public class DeleteCommand implements Command {
             throw new DukeException("☹ OOPS!!! You have to specify the task.");
         }
 
-        Task task = taskList.deleteTask(index);
-        int size = taskList.getSize();
-        ui.respondDelete(task, size);
+        Task task = taskList.markAsDone(index);
 
+        ui.respondDone(task);
         storage.save(taskList.getTasks());
+
     }
 }
