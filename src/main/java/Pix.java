@@ -42,6 +42,6 @@ public class Pix {
     }
 
     public static void main(String[] args) {
-        new Pix("src/main/java/data/Pix.txt").run();
+        new Pix("data/Pix.txt").run();
     }
 }

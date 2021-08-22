@@ -26,7 +26,7 @@ public class Storage {
      * @param filePath Path to the file to read.
      */
     public Storage(String filePath) {
-        this.file = new File("src/main/java/data/Pix.txt");
+        this.file = new File("data/Pix.txt");
     }
 
     /**
