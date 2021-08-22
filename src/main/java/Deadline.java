@@ -16,14 +16,6 @@ public class Deadline extends Task {
         this.date = date;
     }
 
-    /**
-     * Retrieve info of the deadline.
-     * @return a String
-     */
-    @Override
-    public String getInfo() {
-        return "[D][ ]" + this.getTitle() + "| (by: " + this.date + ")";
-    }
 
     /**
      * toString method.

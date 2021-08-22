@@ -15,16 +15,6 @@ public class Todo extends Task {
     }
 
     /**
-     * method to get the info of this Todo.
-     * @return a String that describes the Todo.
-     */
-    @Override
-    public String getInfo() {
-        return "[T][ ]" + this.getTitle();
-    }
-
-
-    /**
      * The toString method.
      * @return a String describing the Todo.
      */

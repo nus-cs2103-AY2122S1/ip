@@ -16,15 +16,6 @@ public class Event extends Task {
     }
 
     /**
-     * Returns basic info about the Event.
-     * @return a String.
-     */
-    @Override
-    public String getInfo() {
-        return "[E][ ]" + this.getTitle() + "| (at: " + this.date + ")";
-    }
-
-    /**
      * toString method.
      * @return a String.
      */

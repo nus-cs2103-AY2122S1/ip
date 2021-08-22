@@ -45,14 +45,6 @@ public class Task implements Serializable {
 
 
     /**
-     * Method that retrieves info of the Task.
-     * @return a String.
-     */
-    public String getInfo() {
-        return "[ ] " + this.title;
-    }
-
-    /**
      * Overriden toString method.
      * @return a String.
      */

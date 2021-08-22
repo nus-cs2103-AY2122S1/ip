@@ -172,7 +172,7 @@ public class GreetingBot {
                 Task nextTask = new Todo(title);
                 System.out.println("Got it. I've added this task:");
                 myList.add(nextTask);
-                System.out.println(nextTask.getInfo());
+                System.out.println(nextTask.toString());
             }
         } else if (nextLine.startsWith("deadline")) {
             if (nextLine.replaceAll("\\s", "").length() == 8) {
@@ -184,7 +184,7 @@ public class GreetingBot {
                 Task nextTask = new Deadline(title, date);
                 System.out.println("Got it. I've added this task:");
                 myList.add(nextTask);
-                System.out.println(nextTask.getInfo());
+                System.out.println(nextTask.toString());
             }
         } else if (nextLine.startsWith("event")) {
             if (nextLine.replaceAll("\\s", "").length() == 5) {
@@ -196,7 +196,7 @@ public class GreetingBot {
                 Task nextTask = new Event(title, date);
                 System.out.println("Got it. I've added this task:");
                 myList.add(nextTask);
-                System.out.println(nextTask.getInfo());
+                System.out.println(nextTask.toString());
             }
         } else {
             throw new DukeException("Dude I don't understand what you're saying!");
