@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -223,27 +224,43 @@ public class Duke {
             if (splitted.length >= 2) {
                 String[] information = splitted[1].split("/by");
                 if (information.length == 2) {
-                    processCommand(new AddATaskProcessor(new Deadline(information[0], information[1])));
+                    try {
+                        processCommand(new AddATaskProcessor(new Deadline(information[0], information[1])));
+                    } catch (DateTimeParseException dateTimeParseException) {
+                        throw new DukeException(
+                                "☹ OOPS!!! The time is invalid.\nPlease input time in this form: yyyy-MM-dd HH:mm");
+                    }
                 } else if (information.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The time of a deadline cannot be empty.");
+                    throw new DukeException("☹ OOPS!!! The time of a deadline cannot be empty.\n" +
+                            "Please follow the format:\ndeadline <task description> /by yyyy-MM-dd HH:mm");
                 } else {
                     throw new DukeException("☹ OOPS!!! A deadline cannot occupy multiple time slots.");
                 }
             } else {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.\n" +
+                        "Please follow the format:\ndeadline <task description> /by yyyy-MM-dd HH:mm");
             }
         } else if (splitted[0].equals("event")) {
             if (splitted.length >= 2) {
                 String[] information = splitted[1].split("/at");
                 if (information.length == 2) {
-                    processCommand(new AddATaskProcessor(new Event(information[0], information[1])));
+                    try {
+                        processCommand(new AddATaskProcessor(new Event(information[0], information[1])));
+                    } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("☹ OOPS!!! The time is invalid.\n" +
+                                "Please input time in this form:\nyyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm");
+                    }
                 } else if (information.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The time of an event cannot be empty.");
+                    throw new DukeException("☹ OOPS!!! The time of an event cannot be empty." +
+                            "\nPlease follow the format:" +
+                            "\nevent <task description> /at yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm");
                 } else {
                     throw new DukeException("☹ OOPS!!! An event cannot occupy multiple time slots.");
                 }
             } else {
-                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty." +
+                        "\nPlease follow the format:" +
+                        "\nevent <task description> /at yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm");
             }
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
