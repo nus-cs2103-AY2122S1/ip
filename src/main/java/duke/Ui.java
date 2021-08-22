@@ -1,40 +1,78 @@
 package duke;
 
-import duke.command.Command;
-
 import java.util.Scanner;
 
+/**
+ * User interface class for controlling user interaction.
+ * Reads user inputs and displays outputs.
+ *
+ * @author Chang-CH
+ */
 public class Ui {
     private Scanner inputReader;
+
+    /**
+     * Sole constructor for invocation by Duke.
+     */
     protected Ui() {
         super();
         inputReader = new Scanner(System.in);
     }
+
+    /**
+     * Reads user input from scanner.
+     *
+     * @return user input string.
+     */
     protected String readCommand() {
         return inputReader.nextLine();
     }
 
+    /**
+     * Displays an error message for unknown commands
+     *
+     * @param error Error message to be displayed.
+     */
     protected void showLoadingError(String error) {
 //        System.out.println(error);
         System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
+    /**
+     * Closes the scanner.
+     */
     public void exit() {
         inputReader.close();
     }
 
+    /**
+     * Prints a line to separate outputs more clearly.
+     */
     public void showLine() {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Displays a message.
+     *
+     * @param message Message to be displayed.
+     */
     public void showMessage(String message) {
         System.out.println(message);
     }
 
+    /**
+     * Displays an error.
+     *
+     * @param message Error message to be displayed.
+     */
     public void showError(String message) {
         System.out.println(message);
     }
 
+    /**
+     * Displays the welcome splash screen.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
