@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -18,8 +19,14 @@ public class Duke {
                 "How can I help you?");
 
         TaskManager tm = new TaskManager();
-        tm.getTasksFromStorage();
         boolean running = true;
+
+        try {
+            tm.getTasksFromStorage();
+        } catch (FileNotFoundException e) {
+            running = false;
+            System.out.println("File not found");
+        }
         Scanner sc = new Scanner(System.in);
 
         // Start taking input from the user
