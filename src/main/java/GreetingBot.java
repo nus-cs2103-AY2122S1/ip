@@ -5,6 +5,10 @@
 
 
 import java.io.*;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.LinkedList;
 
@@ -96,8 +100,11 @@ public class GreetingBot {
                 FileInputStream listIn = new FileInputStream("./data/list.txt");
                 ObjectInputStream in = new ObjectInputStream(listIn);
                 myList = (LinkedList<Task>) in.readObject();
+                listIn.close();
+                in.close();
             }
         } catch (IOException | ClassNotFoundException error) {
+            System.out.println(error.toString());
             System.out.println("Something went wrong with loading a list up!");
         }
     }
@@ -180,23 +187,35 @@ public class GreetingBot {
             } else {
                 String[] splitLine = nextLine.split("/by ");
                 String date = splitLine[1];
-                String title = splitLine[0].split("deadline")[1];
-                Task nextTask = new Deadline(title, date);
-                System.out.println("Got it. I've added this task:");
-                myList.add(nextTask);
-                System.out.println(nextTask.toString());
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                    LocalDateTime parsedDate = LocalDateTime.parse(date, formatter);
+                    String title = splitLine[0].split("deadline")[1];
+                    Task nextTask = new Deadline(title, parsedDate);
+                    System.out.println("Got it. I've added this task:");
+                    myList.add(nextTask);
+                    System.out.println(nextTask.toString());
+                } catch (DateTimeException err) {
+                    System.out.println("I think there's a problem with your input! Enter your task in this format! \"yyyy-MM-dd HHmm\"");
+                }
             }
         } else if (nextLine.startsWith("event")) {
             if (nextLine.replaceAll("\\s", "").length() == 5) {
                 throw new DukeException("Seems like your event task was incomplete!");
             } else {
-                String[] splitLine = nextLine.split("/at ");
-                String date = splitLine[1];
-                String title = splitLine[0].split("event")[1];
-                Task nextTask = new Event(title, date);
-                System.out.println("Got it. I've added this task:");
-                myList.add(nextTask);
-                System.out.println(nextTask.toString());
+                try {
+                    String[] splitLine = nextLine.split("/at ");
+                    String date = splitLine[1];
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                    LocalDateTime parsedDate = LocalDateTime.parse(date, formatter);
+                    String title = splitLine[0].split("event")[1];
+                    Task nextTask = new Event(title, parsedDate);
+                    System.out.println("Got it. I've added this task:");
+                    myList.add(nextTask);
+                    System.out.println(nextTask.toString());
+                } catch (DateTimeException err) {
+                    System.out.println("I think there's a problem with your input! Enter your task in this format! \"yyyy-MM-dd HHmm\"");
+                }
             }
         } else {
             throw new DukeException("Dude I don't understand what you're saying!");
@@ -249,14 +268,21 @@ public class GreetingBot {
      * Update data in list file.
      */
     private void updateData() {
-        try {
-            FileOutputStream fileOut = new FileOutputStream("./data/list.txt");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(myList);
-            out.close();
-            fileOut.close();
-        } catch (IOException error) {
-            System.out.println("Something went wrong when I tried to save your list :(");
+        if (!myList.isEmpty()) {
+            try {
+                FileOutputStream fileOut = new FileOutputStream("./data/list.txt");
+                ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                out.writeObject(myList);
+                out.close();
+                fileOut.close();
+                System.out.println("I'll save your list for you! You're welcome! :)");
+            } catch (IOException error) {
+                System.out.println("Something went wrong when I tried to save your list :(");
+            }
+        } else {
+            File dataFile = new File("./data/list.txt");
+            dataFile.delete();
+            System.out.println("Before you leave, it seems your list is empty anyway so I'll just delete it for you!");
         }
     }
 }
