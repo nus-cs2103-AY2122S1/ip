@@ -28,4 +28,25 @@ public class TaskList {
     public Task getTask(int id) {
         return this.items.get(id);
     }
+
+    /**
+     * Returns a TaskList containing all the tasks that contains the specified keyword.
+     *
+     * @param keyword The word used for the search.
+     * @return A TaskList contating all the tasks that contains the specified keyword.
+     */
+    public TaskList searchTaskByKeyword(String keyword) {
+        TaskList resultList = new TaskList();
+
+        for (Task task : items) {
+            String taskToStr = task.toString().toLowerCase();
+
+            if (taskToStr.contains(keyword.trim().toLowerCase())) {
+                resultList.addTask(task);
+            }
+        }
+
+        return resultList;
+    }
+    
 }

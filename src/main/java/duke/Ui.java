@@ -15,7 +15,8 @@ public class Ui {
         TASK_DONE_MSG("Well done! You have completed: \n\t  "),
         TASK_ADDED_MSG("Got it. I've added this task:\n\t   "),
         TASK_DELETED_MSG("Got it. I've deleted this task:\n\t   "),
-        CHECK_TASK_COUNT_MSG(" tasks are in your list now!");
+        CHECK_TASK_COUNT_MSG(" tasks are in your list now!"),
+        NONE_MATCH_MSG("Sorry, I can't find anything that matches the keyword.");
 
 
         private final String msg;
@@ -62,6 +63,10 @@ public class Ui {
         }
 
         displayListEnd();
+    }
+
+    public static void printNoneMatchMessage() {
+        wrapMessageInLines(Message.NONE_MATCH_MSG.msg);
     }
 
     public static void taskDeletedMessage(Task task, int count) {

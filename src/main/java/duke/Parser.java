@@ -1,12 +1,6 @@
 package duke;
 
-import duke.commands.Command;
-import duke.commands.DeadlineCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.EventCommand;
-import duke.commands.ListCommand;
-import duke.commands.TodoCommand;
+import duke.commands.*;
 import duke.exceptions.IllegalFormatException;
 import duke.exceptions.UnknownTagException;
 import duke.tasks.Deadline;
@@ -26,6 +20,7 @@ public class Parser {
     private final String DEADLINE_TAG = "deadline";
     private final String EVENT_TAG = "event";
     private final String DELETE_TAG = "delete";
+    private final String FIND_TAG = "find";
 
     private String getCommandTag(String input) {
         if (!input.contains(" ")) {
@@ -58,6 +53,9 @@ public class Parser {
         case DELETE_TAG:
             int deleteId = getTaskId(input);
             return new DeleteCommand(deleteId);
+            case FIND_TAG:
+                String keyword = getKeyword(input);
+                return new FindCommand(keyword);
         default:
             throw new UnknownTagException();
         }
@@ -124,6 +122,23 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new IllegalFormatException("Please enter a valid id.");
         }
+    }
+
+    /**
+     * Returns the keyword that will be used to search the list of task.
+     *
+     * @param input User's input
+     * @return A String representing the keyword to be used for the search.
+     * @throws IllegalFormatException Wrong format used by user.
+     */
+    private String getKeyword(String input) throws IllegalFormatException{
+        String[] details = input.split("find ");
+
+        if (details.length < 2) {
+            throw new IllegalFormatException("Please follow the format: find keyword.");
+        }
+
+        return details[1];
     }
 
 }
