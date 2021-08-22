@@ -10,8 +10,7 @@ public class EventCommand implements Command {
 
     public EventCommand(String content) throws InvalidEventException {
         if (!content.matches(EVENT_REGEX)) {
-            throw new InvalidEventException("Description and date of a 'event' task piece " +
-                    "cannot be empty.");
+            throw new InvalidEventException();
         }
         String[] parts = content.split("\\/at[ ]+", 2);
         this.description = parts[0];

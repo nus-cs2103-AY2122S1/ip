@@ -14,7 +14,7 @@ public abstract class Ui {
         Ui.reply(addedMsg, task.toString(), tasksLeftMsg);
     }
 
-    private static String formatReply(String[] messages) {
+    public static String formatReply(String[] messages) {
         String reply = "\t......................................................\n";
         for (int i = 0; i < messages.length; i++) {
             reply += "\t " + messages[i] + "\n";
