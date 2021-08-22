@@ -126,7 +126,7 @@ public class TaskList {
         return "Fine, I'll delete: " + taskToDelete.toString() + taskCount;
     }
 
-    private String listToString() {
+    public String listToString() {
         StringBuilder tasksList = new StringBuilder();
 
         if (this.taskLabel == 0) {
@@ -139,6 +139,18 @@ public class TaskList {
         }
 
         return tasksList.toString();
+    }
+
+    public ArrayList<Task> findTasks(String input) {
+        ArrayList<Task> matchedTaskList = new ArrayList<>();
+
+        for (Task t : this.tasks) {
+            if (t.getDescription().contains(input)) {
+                matchedTaskList.add(t);
+            }
+        }
+
+        return matchedTaskList;
     }
 
     @Override
