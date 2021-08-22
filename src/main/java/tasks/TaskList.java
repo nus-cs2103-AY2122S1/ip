@@ -1,3 +1,5 @@
+package tasks;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -6,12 +8,24 @@ import java.util.Set;
 public class TaskList {
     private ArrayList<Task> tasks;
 
-    public String addTask(String taskType, Task t) {
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
+
+    public void addTask(Task t) {
+        tasks.add(t);
+    }
+
+    public String addTaskAndAnnounce(String taskType, Task t) {
         String res = "";
         tasks.add(t);
         res += "I've added your " + taskType.toLowerCase() + ":\n\t\t" + t;
         res += "\n\t " + tasks.size() + " tasks in total.";
         return res;
+    }
+
+    public ArrayList<Task> tasks() {
+        return this.tasks;
     }
 
     public int size() {
@@ -63,13 +77,9 @@ public class TaskList {
         return res.toString();
     }
 
-    public TaskList() {
-        this.tasks = new ArrayList<>();
-    }
-
     @Override
     public String toString() {
-        // returns an indented, newlined, 1-indexed, String of the Tasks in this TaskList
+        // returns an indented, newlined, 1-indexed, String of the Tasks in this tasks.TaskList
         StringBuilder res = new StringBuilder("Here are your tasks:\n\t ");
         for (int i = 0; i < tasks.size(); i++) {
             res.append(i+1).append(". ").append(tasks.get(i));

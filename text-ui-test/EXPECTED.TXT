@@ -5,7 +5,7 @@
 	|   ||                      *   |
 	|   ||   a task manager         |
 	|      *             *          |
-	|             *         v0.6.0  |
+	|             *         v0.7.0  |
 	+-------------------------------+
 	_________________________________
 	 Hello! How may I help you?
@@ -41,7 +41,7 @@
 	 Please try again.
 	_________________________________
 	_________________________________
-	 Task 500 does not exist, please try again
+	 tasks.Task 500 does not exist, please try again
 	 Please try again.
 	_________________________________
 	_________________________________
@@ -98,11 +98,11 @@
 	 8 tasks in total.
 	_________________________________
 	_________________________________
-	 Task 9 does not exist, please try again
+	 tasks.Task 9 does not exist, please try again
 	 Please try again.
 	_________________________________
 	_________________________________
-	 Task 9 does not exist, please try again
+	 tasks.Task 9 does not exist, please try again
 	 Please try again.
 	_________________________________
 	_________________________________

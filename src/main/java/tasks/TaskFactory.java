@@ -1,8 +1,39 @@
+package tasks;
+
 import exceptions.AuguryException;
 import exceptions.InvalidTaskCreationException;
 
 public class TaskFactory {
     public TaskFactory() {    }
+
+    public Task createTask(String newTaskDetails) {
+        // this method is used when reading from tasks.txt file
+        // the syntax is [E][X] description (at: time)
+
+        if(newTaskDetails.startsWith("[T")) {
+            boolean isDone = newTaskDetails.charAt(4) == 'X';
+            String description = newTaskDetails.split("] ")[1].trim();
+            return new TodoTask(description, isDone);
+        } else if (newTaskDetails.startsWith("[E")) {
+            boolean isDone = newTaskDetails.charAt(4) == 'X';
+            String description = newTaskDetails.split("] ")[1]
+                    .split(" \\(")[0]
+                    .trim();
+            String time = newTaskDetails.split("\\(at: ")[1]
+                    .replaceAll(".$",""); // get rid of last character ')'
+            return new EventTask(description, time, isDone);
+        } else if (newTaskDetails.startsWith("[D")) {
+            boolean isDone = newTaskDetails.substring(4).equals("X");
+            String description = newTaskDetails.split("] ")[1]
+                    .split(" \\(")[0]
+                    .trim();
+            String time = newTaskDetails.split("\\(by: ")[1]
+                    .replaceAll(".$",""); // get rid of last character ')'
+            return new DeadlineTask(description, time, isDone);
+        } else {
+            return null;
+        }
+    }
 
     public Task createTask(String newTaskType, String newTaskDetails) throws AuguryException {
         if (newTaskType == null) {

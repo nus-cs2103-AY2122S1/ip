@@ -1,7 +1,8 @@
+package tasks;
+
 public abstract class Task {
-    protected int id;
     protected String description;
-    protected boolean isDone;
+    protected boolean isDone = false;
 
     public enum TaskTypes {
         TODO, DEADLINE, EVENT
@@ -10,10 +11,12 @@ public abstract class Task {
     public static int numOfTasks = 0;
 
     public Task(String description) {
-        this.id = numOfTasks;
-        numOfTasks++;
         this.description = description;
-        this.isDone = false;
+    }
+
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
     public void markAsDone() {

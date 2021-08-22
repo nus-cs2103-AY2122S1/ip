@@ -1,10 +1,15 @@
 import exceptions.*;
+import tasks.Task;
+import tasks.TaskFactory;
+import tasks.TaskList;
+import storage.Storage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Augury {
-    static String VER     = "v0.6.0"; // Level-6 Delete + A-Exceptions + A-Enums
+    static String VER     = "v0.7.0"; // Level-7 Save
     static String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
@@ -15,7 +20,20 @@ public class Augury {
             "\t|      *             *          |\n" +
             "\t|             *         "+VER+"  |\n" +
             "\t+-------------------------------+";
-    static TaskList taskList = new TaskList();
+    private TaskList taskList = new TaskList();
+    private Storage storage;
+
+    public Augury(String path) {
+        this.storage = new Storage(path);
+    }
+
+    public void init() throws AuguryException {
+        try {
+            this.storage.initializeTaskList(this.taskList);
+        } catch (IOException e) {
+            throw new FileIOException(e.getMessage());
+        }
+    }
 
     public static void speak(String text) {
         System.out.println("\t_________________________________");
@@ -23,79 +41,8 @@ public class Augury {
         System.out.println("\t_________________________________");
     }
 
-    public static void greet() {
+    public void greet() {
         System.out.println(WELCOME);
-    }
-
-    public void handleAddTask(String arg) throws AuguryException {
-        String type = arg.split(" ")[0];
-        String description;
-        String time;
-
-        try {
-            TaskFactory tf = new TaskFactory();
-            Task newTask = tf.createTask(type, arg);
-
-            if (newTask == null) {
-                throw new UnknownCommandException("Invalid command entered.");
-            }
-            speak(taskList.addTask(type, newTask));
-        } catch (AuguryException e) {
-            throw new AuguryException(e.getMessage());
-        }
-    }
-
-    public void handleListTasks() {
-        speak(taskList.toString());
-    }
-
-    public void handleMarkAsDone(String args) throws InvalidActionException {
-        // check if args exist
-        if (args.length() <= 5) {
-            throw new InvalidActionException("Please enter the task number which you want to mark as done.");
-        }
-
-        args = args.substring(5);
-        ArrayList<Integer> listOfTasks = commaSeparatedStringToIntegerArrayList(args);
-
-        for (Integer i : listOfTasks){
-            if (i > taskList.size()) {
-                throw new InvalidActionException("Task " + i + " does not exist, please try again");
-            }
-        }
-        speak(taskList.markAsDone(listOfTasks));
-    }
-
-    public void handleDeleteTasks(String args) throws InvalidActionException {
-        // check if args exist
-        if (args.length() <= 7) {
-            throw new InvalidActionException("Please enter the task number which you want to delete.");
-        }
-
-        args = args.substring(7);
-        ArrayList<Integer> listOfTasks = commaSeparatedStringToIntegerArrayList(args);
-
-        for (Integer i : listOfTasks){
-            if (i > taskList.size()) {
-                throw new InvalidActionException("Task " + i + " does not exist, please try again");
-            }
-        }
-        speak(taskList.deleteTasks(listOfTasks));
-    }
-
-    private ArrayList<Integer> commaSeparatedStringToIntegerArrayList (String s) {
-        // split comma-separated string to String[]
-        String[] s_String = s.split(",");
-        for (int i = 0; i < s_String.length; i++) {
-            // trim whitespace on each item
-            s_String[i] = s_String[i].trim();
-        }
-        // convert String[] to ArrayList<Integer>
-        ArrayList<Integer> s_Integer = new ArrayList<>();
-        for (String ss : s_String) {
-            s_Integer.add(Integer.parseInt(ss));
-        }
-        return s_Integer;
     }
 
     public void loop() throws AuguryException {
@@ -110,9 +57,9 @@ public class Augury {
                     break;
                 } else if (input.equals("list") || input.equals("ls")) {
                     handleListTasks();
-                } else if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
+                } else if (input.length() >= 4 && input.startsWith("done")) {
                     handleMarkAsDone(input);
-                } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
+                } else if (input.length() >= 6 && input.startsWith("delete")) {
                     handleDeleteTasks(input);
                 } else {
                     handleAddTask(input);
@@ -123,5 +70,77 @@ public class Augury {
         }
 
         scan.close();
+    }
+
+    private void handleAddTask(String arg) throws AuguryException {
+        String type = arg.split(" ")[0];
+
+        try {
+            TaskFactory tf = new TaskFactory();
+            Task newTask = tf.createTask(type, arg);
+
+            if (newTask == null) {
+                throw new UnknownCommandException("Invalid command entered.");
+            }
+            speak(taskList.addTaskAndAnnounce(type, newTask));
+            storage.saveTaskListToStorage(taskList);
+        } catch (AuguryException e) {
+            throw new AuguryException(e.getMessage());
+        }
+    }
+
+    private void handleListTasks() {
+        speak(taskList.toString());
+    }
+
+    private void handleMarkAsDone(String args) throws AuguryException {
+        // check if args exist
+        if (args.length() <= 5) {
+            throw new InvalidActionException("Please enter the task number which you want to mark as done.");
+        }
+
+        args = args.substring(5);
+        ArrayList<Integer> listOfTasks = convertCommaSeparatedStringToIntegerArrayList(args);
+
+        for (Integer i : listOfTasks){
+            if (i > taskList.size()) {
+                throw new InvalidActionException("tasks.Task " + i + " does not exist, please try again");
+            }
+        }
+        speak(taskList.markAsDone(listOfTasks));
+        storage.saveTaskListToStorage(taskList);
+    }
+
+    private void handleDeleteTasks(String args) throws AuguryException {
+        // check if args exist
+        if (args.length() <= 7) {
+            throw new InvalidActionException("Please enter the task number which you want to delete.");
+        }
+
+        args = args.substring(7);
+        ArrayList<Integer> listOfTasks = convertCommaSeparatedStringToIntegerArrayList(args);
+
+        for (Integer i : listOfTasks){
+            if (i > taskList.size()) {
+                throw new InvalidActionException("tasks.Task " + i + " does not exist, please try again");
+            }
+        }
+        speak(taskList.deleteTasks(listOfTasks));
+        storage.saveTaskListToStorage(taskList);
+    }
+
+    private ArrayList<Integer> convertCommaSeparatedStringToIntegerArrayList (String s) {
+        // split comma-separated string to String[]
+        String[] s_String = s.split(",");
+        for (int i = 0; i < s_String.length; i++) {
+            // trim whitespace on each item
+            s_String[i] = s_String[i].trim();
+        }
+        // convert String[] to ArrayList<Integer>
+        ArrayList<Integer> s_Integer = new ArrayList<>();
+        for (String ss : s_String) {
+            s_Integer.add(Integer.parseInt(ss));
+        }
+        return s_Integer;
     }
 }
