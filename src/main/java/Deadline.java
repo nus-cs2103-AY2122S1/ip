@@ -12,6 +12,16 @@ public class Deadline extends Task{
         this.by = by;
     }
 
+    /**
+     * Converts the given Deadline into an appropriate format for txt file.
+     * @return a String of the Deadline for input into a txt file.
+     */
+    @Override
+    public String toTxt() {
+        return String.format("D | %d | %s | %s", super.getIsDone() ? 1 : 0, super.getDescription(),
+                this.by + System.lineSeparator());
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
