@@ -1,10 +1,15 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Deadline encapsulates the name of the deadline as well as
  * when the task needs to be completed by.
  */
 
 public class Deadline extends Task {
-    private String doneBy;
+    private LocalDate doneBy;
+    private String by;
 
     /**
      * Constructs Deadline object with given name, and deadline of the task.
@@ -13,7 +18,8 @@ public class Deadline extends Task {
      */
     public Deadline(String name, String by) {
         super(name);
-        this.doneBy = by;
+        this.by = by;
+        this.doneBy = LocalDate.parse(by);
     }
 
 
@@ -24,7 +30,7 @@ public class Deadline extends Task {
 
     @Override
     public String getInfo() {
-        return this.doneBy;
+        return this.by;
     }
 
     /**
@@ -34,6 +40,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + doneBy + ")";
+        return "[D]" + super.toString() + " (by: " + doneBy.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

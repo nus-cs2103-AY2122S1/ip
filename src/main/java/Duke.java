@@ -1,10 +1,11 @@
-import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Chatbot that helps you form a task list
