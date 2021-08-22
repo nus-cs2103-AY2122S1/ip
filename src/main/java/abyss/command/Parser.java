@@ -23,6 +23,8 @@ public abstract class Parser {
             return new DoneCommand(content);
         case "DELETE":
             return new DeleteCommand(content);
+        case "FIND":
+            return new FindCommand(content);
         case "LIST":
             return new ListCommand();
         case "EXIT":
