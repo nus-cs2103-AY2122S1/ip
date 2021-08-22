@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class TaskListTest {
+class TaskListTest {
     @Test
     void canGetAllTasksWhenNoTasks_noTasks_returnsEmptyList() throws IOException {
         TaskList taskList = new TaskList(new TaskStorageStub());
