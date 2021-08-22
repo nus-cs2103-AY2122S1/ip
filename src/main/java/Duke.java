@@ -7,64 +7,15 @@ import java.util.ArrayList;
 import java.io.IOException;
 
 public class Duke {
-    private final ArrayList<Task> arrList;
+    private final TaskList taskList;
     private final Storage storage;
 
     public Duke(String filePath) {
-        this.arrList = new ArrayList<Task>();
         this.storage = new Storage(filePath);
+        this.taskList = new TaskList();
     }
 
-    private void printMessage(String message) {
-        System.out.println(Ui.INDENTED_HORIZONTAL_LINE);
-        System.out.println(Ui.INDENT + message);
-        System.out.println(Ui.INDENTED_HORIZONTAL_LINE + "\n");
-    }
-
-    private void printIntro() {
-        System.out.println(Ui.logo);
-        printMessage(Ui.INTRODUCTION);
-    }
-
-    private void printBye() {
-        printMessage(Ui.BYE_MESSAGE);
-    }
-
-    private void printList() {
-        if (arrList.size() == 0) {
-            printMessage(Ui.NO_TASK_MESSAGE);
-            return;
-        }
-        System.out.println(Ui.INDENTED_HORIZONTAL_LINE);
-        System.out.println(Ui.LIST_MESSAGE);
-        for (int i = 0; i < arrList.size(); i++) {
-            System.out.println(Ui.INDENT + (i + 1) + ". " + arrList.get(i).toString());
-        }
-        System.out.println(Ui.INDENTED_HORIZONTAL_LINE + "\n");
-    }
-
-    private void doneItem(String number) {
-        int index = Integer.parseInt(number) - 1;
-        Task curr = arrList.get(index);
-        this.arrList.set(index, curr.markAsDone());
-        curr = arrList.get(index);
-
-        this.printMessage(Ui.DONE_MESSAGE + "\n" + Ui.INDENT + "  " + curr.toString());
-    }
-
-    private void addTask(Task task) throws IOException {
-        arrList.add(task);
-        this.printMessage("Got it. I've added this task:\n" + Ui.INDENT + "  " + task.toString() + "\n" + Ui.INDENT
-                + "Now you have " + this.arrList.size() + " tasks in the list.");
-    }
-
-    private void deleteItem(String number) {
-        int index = Integer.parseInt(number) - 1;
-        Task task = arrList.get(index);
-        this.arrList.remove(index);
-        this.printMessage("Noted. I've removed this task:\n" + Ui.INDENT + "  " + task.toString() + "\n" + Ui.INDENT
-                + "Now you have " + this.arrList.size() + " tasks in the list.");
-    }
+    
 
     private String dateTimeFormatter(String unformattedDate) {
         // 2/12/2019 1800
@@ -91,11 +42,9 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String inputToStorage;
         ArrayList<Task> savedTasks = storage.loadData();
-        savedTasks.forEach(x -> {
-            this.arrList.add(x);
-        });
+        taskList.loadFromStorage(savedTasks);
 
-        this.printIntro();
+        Ui.printIntro();
         while (true) {
             userInput = sc.nextLine();
 
@@ -105,23 +54,23 @@ public class Duke {
                 action = actionDescription[0];
                 switch (action) {
                     case "bye":
-                        this.printBye();
+                        Ui.printBye();
                         sc.close();
                         return;
 
                     case "list":
-                        this.printList();
+                        Ui.printList(taskList.getTaskList());
                         break;
 
                     case "done":
-                        this.doneItem(userInput.split(" ")[1]);
+                        taskList.doneItem(userInput.split(" ")[1]);
                         storage.updateDone(userInput.split(" ")[1]);
                         break;
 
                     case "todo":
                         descriptions = actionDescription[1];
                         ToDos todos = new ToDos(descriptions);
-                        this.addTask(todos);
+                        taskList.addTask(todos);
                         inputToStorage = todos.getSymbol() + " | 0 | " + todos.getDescription();
                         storage.appendToData(inputToStorage);
                         break;
@@ -132,7 +81,7 @@ public class Duke {
                         by = descriptions.split("/by")[1];
                         by = dateTimeFormatter(by);
                         Deadline deadline = new Deadline(onlyDescription, by);
-                        this.addTask(deadline);
+                        taskList.addTask(deadline);
                         inputToStorage = deadline.getSymbol() + " | 0 | " + deadline.getDescription() + "|"
                                 + deadline.getBy();
                         storage.appendToData(inputToStorage);
@@ -143,14 +92,14 @@ public class Duke {
                         onlyDescription = descriptions.split("/")[0];
                         dayTime = descriptions.split("/at")[1];
                         Events event = new Events(onlyDescription, dayTime);
-                        this.addTask(event);
+                        taskList.addTask(event);
                         inputToStorage = event.getSymbol() + " | 0 | " + event.getDescription() + "|"
                                 + event.getDayTime();
                         storage.appendToData(inputToStorage);
                         break;
 
                     case "delete":
-                        this.deleteItem(userInput.split(" ")[1]);
+                        taskList.deleteItem(userInput.split(" ")[1]);
                         storage.deleteTaskFromData(userInput.split(" ")[1]);
                         break;
 
@@ -158,12 +107,12 @@ public class Duke {
                         break;
 
                     default:
-                        this.printMessage(Ui.ERROR_MSG_UNKOWN_MSG);
+                        Ui.printMessage(Ui.ERROR_MSG_UNKOWN_MSG);
                         break;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println(e);
-                this.printMessage(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
+                Ui.printMessage(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
                 continue;
             }
 
