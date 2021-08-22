@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Encapsulates functionality for reading and writing strings to and from a target file.
+ * Encapsulates functionality for reading and writing strings to and from a specified target file.
  *
  * @author kevin9foong
  */
