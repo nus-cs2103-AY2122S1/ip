@@ -11,7 +11,7 @@ public class TaskList {
     /**
      * Constructor for TaskList.
      */
-    public TaskList(){
+    public TaskList() {
         this.list = new ArrayList<>();
     }
 
@@ -22,7 +22,7 @@ public class TaskList {
      * @return String array with information of deadline split to description and date.
      * @throws DukeException For missing arguments.
      */
-    public String[] extractDeadline (String info) throws DukeException{
+    public String[] extractDeadline(String info) throws DukeException {
         if (!info.contains("/by")) {
             throw new DukeException("Error: '/by' argument is missing!");
         }
@@ -41,7 +41,7 @@ public class TaskList {
      * @return String array with information of event split to description and event timeframe.
      * @throws DukeException For missing arguments.
      */
-    public String[] extractEvent (String info) throws DukeException{
+    public String[] extractEvent(String info) throws DukeException {
         if (!info.contains("/at")) {
             throw new DukeException("Error: '/at' argument is missing!");
         }
@@ -51,32 +51,33 @@ public class TaskList {
         }
         return description;
     }
+
     /**
      * Process user input and adds task that user has given and formats the message specific to the task.
      *
-     * @param info Information about the task that user has entered.
+     * @param info     Information about the task that user has entered.
      * @param taskType The type of task user has specified
      * @return Returns formatted string to be printed out to show task has been added or not.
      * @throws DukeException For missing arguments when initialising Task.
      */
-    public String addTask(String info, Command taskType) throws DukeException{
+    public String addTask(String info, Command taskType) throws DukeException {
         switch (taskType) {
-            case TODO:
-                ToDo toDo = new ToDo(info);
-                list.add(toDo);
-                break;
-            case DEADLINE:
-                String[] deadlineInfo = extractDeadline(info);
-                Deadline deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
-                list.add(deadline);
-                break;
-            case EVENT:
-                String[] eventInfo = extractEvent(info);
-                Event event = new Event(eventInfo[0], eventInfo[1]);
-                list.add(event);
-                break;
-            default:
-                throw new DukeException("Error: No such task type!");
+        case TODO:
+            ToDo toDo = new ToDo(info);
+            list.add(toDo);
+            break;
+        case DEADLINE:
+            String[] deadlineInfo = extractDeadline(info);
+            Deadline deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
+            list.add(deadline);
+            break;
+        case EVENT:
+            String[] eventInfo = extractEvent(info);
+            Event event = new Event(eventInfo[0], eventInfo[1]);
+            list.add(event);
+            break;
+        default:
+            throw new DukeException("Error: No such task type!");
         }
         String totalTask = String.format("Now you have %d task(s) in the list.", list.size());
         return String.format("Got it! I've added this task:\n  %s\n%s", list.get(list.size() - 1), totalTask);
@@ -107,7 +108,7 @@ public class TaskList {
      * @return a message of whether task has been successfully added or not
      * @throws DukeException For invalid indexes given by user.
      */
-    public String markTaskDone(int index) throws DukeException{
+    public String markTaskDone(int index) throws DukeException {
         if (index >= 0 && index < list.size()) {
             if (list.get(index).getStatusIcon().equals(" ")) {
                 list.get(index).markDone();
@@ -127,7 +128,7 @@ public class TaskList {
      * @return String message that task has been deleted.
      * @throws DukeException For invalid indexes given by user.
      */
-    public String deleteTask(int index) throws DukeException{
+    public String deleteTask(int index) throws DukeException {
         if (index >= 0 && index < list.size()) {
             Task removed = list.remove(index);
             String totalTask = String.format("Now you have %d task(s) in the list.", list.size());
