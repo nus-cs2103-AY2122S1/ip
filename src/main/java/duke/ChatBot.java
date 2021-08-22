@@ -12,10 +12,13 @@ public class ChatBot {
 
     private ArrayList<Task> temp;
     private TaskList tasklist;
-    private Storage s = new Storage();
-    private UI ui = new UI();
+    private Storage s;
+    private UI ui;
+    private int exitCode = 1;
 
     public ChatBot() {
+        this.s = new Storage();
+        this.ui = new UI();
         s.makeDir();
         s.checkFile();
         this.temp = s.loadTasks();
@@ -24,6 +27,7 @@ public class ChatBot {
     }
 
     public void handleExit() {
+        this.exitCode = 0;
         ui.showExitMessage();
     }
 
@@ -31,7 +35,6 @@ public class ChatBot {
         ui.getListMessage(tasklist);
     }
 
-    //might be wrong here
     public void handleDone(int index) {
         Task t = tasklist.completeTask(index);
         ui.showCompleteTaskMessage(t);
@@ -74,5 +77,8 @@ public class ChatBot {
         return tasklist.getTotalTasksNumber();
     }
 
+    public int getExitCode() {
+        return exitCode;
+    }
 
 }
