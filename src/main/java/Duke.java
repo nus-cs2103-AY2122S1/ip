@@ -9,12 +9,16 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        run(scanner);
+        try {
+            List<Task> taskList = TextFile.readFromTextFile();
+            run(scanner, taskList);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
+
     }
 
-    public static void run(Scanner scanner) {
-        List<Task> taskList = new ArrayList<>();
-
+    public static void run(Scanner scanner, List<Task> taskList) {
         // Hello message
         System.out.println(
                 "Lollipop: Hello! I am your personal chatbot, Lollipop! " +
@@ -110,7 +114,7 @@ public class Duke {
             } catch (NumberFormatException e) {
                 System.out.println("Lollipop: Please input a number.");
             } catch (FileNotFoundException e) {
-                System.out.println("Lollipop: /data Folder or /data/data.txt is not found.");
+                System.out.println("Lollipop: ./data or ./data/task_list.txt is not found.");
             }
 
             System.out.println("");
