@@ -1,8 +1,10 @@
+import java.time.LocalDateTime;
+
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Enums
+ * Current Progress: Level 8. Dates and Times
  *
  * Description:
  * Extends the Task Class which where it is a task that start at a
@@ -12,23 +14,14 @@
  */
 public class Event extends Task {
 
-    private String duration;
+    private DukeDate duration;
 
-    public Event(String description, String duration) {
+    public Event(String description, DukeDate duration) {
         super(description);
         this.duration = duration;
 
     }
 
-    /**
-     * Getter that returns the duration of the event
-     *
-     */
-    public String getDuration() {
-
-        return this.duration;
-
-    }
 
     @Override
     public String toString() {
@@ -36,6 +29,6 @@ public class Event extends Task {
         return "[" + "E" + "]"
                 + "[" + taskStatus + "]"
                 + " " + this.getDescription() + " "
-                + "(at: " + this.duration + ")";
+                + "(at: " + this.duration.toString() + ")";
     }
 }

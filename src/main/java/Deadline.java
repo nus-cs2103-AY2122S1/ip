@@ -2,7 +2,7 @@
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Enums
+ * Current Progress: Level 8. Dates and Times
  *
  * Description:
  * Extends the Task Class which where it is a task that needs
@@ -12,9 +12,9 @@
  */
 public class Deadline extends Task {
 
-    private String dueBy;
+    private DukeDate dueBy;
 
-    public Deadline(String description, String dueBy) {
+    public Deadline(String description, DukeDate dueBy) {
         super(description);
         this.dueBy = dueBy;
     }
@@ -22,8 +22,10 @@ public class Deadline extends Task {
     /**
      * Getter that returns the deadline of task
      *
+     * @return DukeDate returns the deadline of the task
+     *
      */
-    public String getDeadline() {
+    public DukeDate getDeadline() {
 
         return this.dueBy;
 
@@ -32,10 +34,11 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String taskStatus = this.isCompleted() ? "X" : " ";
+        String dateTime = this.dueBy.getEndTimeString();
         return "[" + "D" + "]"
                 + "[" + taskStatus + "]"
                 + " " + this.getDescription() + " "
-                + "(by: " + this.dueBy + ")";
+                + "(by: " + dateTime + ")";
     }
 
 }

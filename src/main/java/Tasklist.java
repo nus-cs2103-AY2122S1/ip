@@ -1,10 +1,13 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Enums
+ * Current Progress: Level 8. Dates and Times
  *
  * Description:
  * Encapsulates the TaskList which contains a list of tasks
@@ -14,6 +17,15 @@ import java.util.ArrayList;
 public class Tasklist {
 
     private ArrayList<Task> tasks;
+
+    private static final DateTimeFormatter[] DATE_FORMATTERS = {
+            DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm"),
+            DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm"),
+            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"),
+            DateTimeFormatter.ofPattern("mm-DD-yyyy HH:mm"),
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
+            DateTimeFormatter.ofPattern("yyyy-DD-mm HH:mm"),
+    };
 
     public Tasklist() {
         this.tasks = new ArrayList<Task>();
@@ -26,17 +38,68 @@ public class Tasklist {
      * @param event String stating the type of task to be added
      * @return String Returns the time of the task
      * @throws MissingArgumentException throws a MissingArgumentException if no time found
+     * @throws InvalidArgumentException throws an InvalidArgumentException if error occurs when parsing
+     *                                  inputted command line for dates
      */
-    private static String checkTime(String[] strArr, String event) throws MissingArgumentException {
+    private DukeDate checkTime(String[] strArr, String event) throws MissingArgumentException, InvalidArgumentException {
 
         if (strArr.length < 2) {
             throw new MissingArgumentException("time", event);
         } else if (strArr[1].trim().isEmpty()) {
             throw new MissingArgumentException("time", event);
         } else {
-            return strArr[1];
+            if (event.equals("deadline")) {
+                return new DukeDate(parseDateTime(strArr[1], event));
+            } else {
+                //if task is an event
+                String[] eventDuration = strArr[1].split(" to ", 2);
+                return new DukeDate(parseDateTime(eventDuration[0], event),
+                        parseDateTime(eventDuration[1], event));
+
+            }
+        }
+    }
+
+    /**
+     * Parses the LocalDateTime from the inputted date and time string in the command
+     *
+     * @param dateTime String array containing the inputted date and time
+     * @param event String stating the type of task to be added
+     * @return LocalDateTime Returns the time of the task
+     * @throws InvalidArgumentException throws an InvalidArgumentException if error occurs when parsing
+     *                                  inputted command line for dates
+     */
+    public LocalDateTime parseDateTime(String dateTime, String event) throws InvalidArgumentException {
+
+        LocalDateTime result = null;
+        for (DateTimeFormatter df : DATE_FORMATTERS) {
+            try {
+                result = LocalDateTime.parse(dateTime, df);
+                break;
+            } catch (DateTimeParseException dtpe) {
+                // Ignore; try next formatter
+            }
         }
 
+        if (result == null) {
+
+            throw new InvalidArgumentException("times", event);
+        } else {
+            return result;
+        }
+
+
+
+    }
+
+    /**
+     * Adds tasks read from store in hard drive
+     *
+     * @param storeTask Task that was saved in hard drive to be loaded into
+     *                  current task list
+     */
+    public void addTask(Task storeTask) {
+        tasks.add(storeTask);
     }
 
     /**
@@ -46,8 +109,10 @@ public class Tasklist {
      * @param task Command stating the type of task to be added
      * @return String Returns the success message of added the task to the list
      * @throws DukeException throws a duke exception depending on the error found
+     * @throws InvalidCommandException throws an invalid command exception in the event no
+     *                                 command string present
      */
-    public String addTask(String description, Command task) throws DukeException {
+    public String addTask(String description, Command task) throws DukeException,InvalidCommandException {
 
         Task newTask;
         String taskType = Command.changeToString(task);
@@ -57,11 +122,13 @@ public class Tasklist {
                 break;
             case "deadline":
                 String[] deadlineDetails = description.split(" /by ", 2);
-                newTask = new Deadline(deadlineDetails[0], checkTime(deadlineDetails, "deadline"));
+                DukeDate deadlineTime = checkTime(deadlineDetails, "deadline");
+                newTask = new Deadline(deadlineDetails[0], deadlineTime);
                 break;
             case "event":
                 String[] eventDetails = description.split(" /at ", 2);
-                newTask = new Event(eventDetails[0], checkTime(eventDetails, "event"));
+                DukeDate eventTime =  checkTime(eventDetails, "event");
+                newTask = new Event(eventDetails[0], eventTime);
                 break;
             default:
                 //unexpected error occurs
@@ -135,10 +202,11 @@ public class Tasklist {
 
     }
 
+
     @Override
     public String toString() {
 
-        String listString = "Here are the tasks in your list:\n";
+        String listString = "";
         for (int i = 0; i < tasks.size(); i++) {
             String listItem = String.format("%d.%s", (i + 1), tasks.get(i).toString());
             if (i == (tasks.size() - 1)) {

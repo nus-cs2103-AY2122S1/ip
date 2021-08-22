@@ -2,7 +2,7 @@
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Enums
+ * Current Progress: Level 8. Dates and Times
  *
  * Description:
  * Class to encapsulates all possible exceptions that will be
@@ -54,6 +54,16 @@ class InvalidCommandException extends DukeException {
     public InvalidCommandException() {
 
         super("Hi I don't understand your command :(");
+
+    }
+
+}
+
+class FileWritingException extends DukeException {
+
+    public FileWritingException() {
+
+        super("Hi, Duke ran into an error trying to save task to your hard drive. Please try again!");
 
     }
 

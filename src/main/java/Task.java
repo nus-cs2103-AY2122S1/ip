@@ -2,7 +2,7 @@
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Enums
+ * Current Progress: Level 8. Dates and Times
  *
  * Description:
  * Encapsulates the Task Class which contains a task description
