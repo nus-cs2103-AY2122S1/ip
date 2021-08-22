@@ -3,6 +3,7 @@ package tiger.utils;
 import org.junit.jupiter.api.Test;
 import tiger.exceptions.TigerException;
 import tiger.exceptions.inputs.TigerDateParsingException;
+import tiger.messages.Messages;
 
 import java.time.LocalDate;
 
@@ -48,8 +49,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("2020-11-32");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -57,8 +57,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("2020-13-15");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -66,8 +65,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("12345-13-15");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -75,8 +73,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("345-11-16");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -105,8 +102,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("2345-11-16  08:00");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -114,8 +110,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("2345-11-16 08:00 08:00");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -123,8 +118,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("08:00 2345-11-16");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
 
@@ -133,8 +127,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("-345-11-16");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -142,8 +135,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("-1345-11-16");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -151,8 +143,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("-345--4-16");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -160,8 +151,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("-345--12-16");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -169,8 +159,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("-345-11--6");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -178,8 +167,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("-345-11--16");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -187,8 +175,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("1345-11-16 -09:00");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -196,8 +183,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("1345-11-16 -9:00");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -205,8 +191,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("1345-11-16 09:-00");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -214,8 +199,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("1345-11-16 09:-0");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -223,8 +207,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("1345-1-16 09:00");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -232,8 +215,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("1345-11-6 09:00");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -241,8 +223,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("1345-11-06 9:00");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -250,8 +231,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("1345-11-06 09:3");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -259,8 +239,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("0000-11-16");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -268,8 +247,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("2020:11:16 15:28");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -277,8 +255,7 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("2020/11-16 15:28");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 
     @Test
@@ -286,7 +263,6 @@ public class DateStringConverterTest {
         TigerException thrown = assertThrows(TigerDateParsingException.class, () -> {
             dateStringConverter.getDateFromString("2020/11/16 15-28");
         });
-        assertTrue(thrown.toString().contains("Please ensure you key in dates in " +
-                "the input specified."));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_DATE_PARSING.getMessage()));
     }
 }

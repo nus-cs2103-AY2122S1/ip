@@ -1,7 +1,9 @@
 package tiger.exceptions.inputs;
 
+import tiger.messages.Messages;
+
 public class TigerTooManyInputsException extends TigerInvalidInputException {
     public TigerTooManyInputsException(String e) {
-        super("Too many arguments specified!");
+        super(Messages.EXCEPTION_INPUT_TOO_MANY_ARGUMENTS.getMessage());
     }
 }

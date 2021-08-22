@@ -5,6 +5,7 @@ import tiger.exceptions.TigerException;
 import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.exceptions.inputs.TigerInvalidArgumentException;
 import tiger.exceptions.inputs.TigerTooManyInputsException;
+import tiger.messages.Messages;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -61,7 +62,7 @@ public class MarkDoneParserTest {
         TigerException thrown = assertThrows(TigerTooManyInputsException.class, () -> {
             MarkDoneParser markDoneParser = new MarkDoneParser("done 5 5555");
         });
-        assertTrue(thrown.toString().contains("Too many arguments specified!"));
+        assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_TOO_MANY_ARGUMENTS.getMessage()));
     }
 
     @Test
