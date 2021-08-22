@@ -4,10 +4,14 @@
  * @author Deng Huaiyu(G12)
  * @version CS2103T AY21/22 Semester 1
  */
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Tasks {
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private static ArrayList<Task> tasks = new ArrayList<>();
     //for division
     private static String ind = "    ";
     //for sentences
@@ -43,7 +47,16 @@ public class Tasks {
                 int j = findTime("/by", ss);
                 String[] info = getInfo(j, ss);
                 if (info[0] != "" && info[1] != "") {
-                    Deadline ddl = new Deadline(info[0], info[1]);
+                    Deadline ddl;
+                    if (info[1].length() == 10) {
+                        LocalDate date = getDate(info[1]);
+                        ddl = new Deadline(info[0], date);
+                    } else if (info[1].length() == 16) {
+                        LocalDateTime time = getTime(info[1]);
+                        ddl = new Deadline(info[0], time);
+                    } else {
+                        throw new DukeException("Please enter time in the form of dd/MM/yyyy HH:mm or dd/MM/yyyy.");
+                    }
                     this.tasks.add(ddl);
                     noteAdded(ddl);
                 } else {
@@ -54,7 +67,14 @@ public class Tasks {
                 int k = findTime("/at", ss);
                 String[] info2 = getInfo(k, ss);
                 if (info2[0] != "" && info2[1] != "") {
-                    Event e = new Event(info2[0], info2[1]);
+                    Event e;
+                    if (info2[1].length() >= 10) {
+                        LocalDate date = getDate(info2[1].substring(0, 10));
+                        String time = info2[1].substring(10);
+                        e = new Event(info2[0], date, time);
+                    } else {
+                        throw new DukeException("Please enter time in the form of dd/MM/yyyy time.");
+                    }
                     this.tasks.add(e);
                     noteAdded(e);
                 } else {
@@ -172,5 +192,62 @@ public class Tasks {
             result[0] = name;
             result[1] = time;
             return result;
+    }
+
+    private LocalDateTime getTime(String t) throws DukeException{
+        LocalDateTime dateTime;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            dateTime = LocalDateTime.parse(t, formatter);
+        } catch (DateTimeParseException d) {
+            throw new DukeException("Please enter time in the form of dd/MM/yyyy HH:mm.");
+        }
+
+        return dateTime;
+    }
+
+    private LocalDate getDate(String t) throws DukeException{
+        LocalDate date;
+
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            date = LocalDate.parse(t, formatter);
+        } catch (DateTimeParseException d) {
+            throw new DukeException("Please enter time in the form of dd/MM/yyyy.");
+        }
+        return date;
+    }
+
+    /**
+     * method to return all tasks on a single day
+     *
+     * @param s string indicating the date
+     * @return an arraylist of all relevant tasks
+     * @throws DukeException if the date format is incorrect
+     */
+    public static ArrayList<Task> onADay(String s) throws DukeException{
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate target;
+        try {
+            target = LocalDate.parse(s, formatter);
+        } catch (DateTimeParseException d) {
+            throw new DukeException("Please enter date in the form of dd/MM/yyyy.");
+        }
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task t: tasks) {
+            if (target.equals(t.getDate())) {
+                result.add(t);
+            }
+        }
+
+        System.out.println(div);
+        System.out.println(ind2 + "Here are the tasks on " + target + ": ");
+        int i = 1;
+        for (Task task: result) {
+            System.out.println( ind2+ i + ". "+ task);
+            i++;
+        }
+        System.out.println(div);
+        return result;
     }
 }

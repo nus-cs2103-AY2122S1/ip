@@ -18,6 +18,7 @@ public class Duke {
         END("bye"),
         DELETE("delete"),
         LIST("list"),
+        GET("get"),
         DONE("done");
 
         private final String k;
@@ -60,6 +61,18 @@ public class Duke {
                 } else {
                     System.out.println(div + "\n" + ind2 + "☹ OOPS!!! Please enter a valid number, such as delete 3" + "\n" + div);
                 }
+            } else if (next.length() > 2 && next.substring(0, 3).equals(KeyWord.GET.getK())){
+                if (next.length() == 14) {
+                    try {
+                        System.out.println(next.substring(4));
+                        Tasks.onADay(next.substring(4));
+                    } catch (DukeException e) {
+                        System.out.println(e);
+                    }
+                } else {
+                    System.out.println(div + "\n" + ind2 + "☹ OOPS!!! Please enter a valid date, such as get dd/MM/yyyy" + "\n" + div);
+                }
+
             } else {
                 try {
                     myTasks.addTask(next);

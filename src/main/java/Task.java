@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  * This class is to create a task.
  *
@@ -46,5 +49,22 @@ public class Task {
     public String finished() {
         this.isDone = true;
         return this.toString();
+    }
+
+    /**
+     * The method to return deadline/time of a task
+     *
+     * @return LocalDate of the task
+     */
+    public LocalDate getDate() {
+        return null;
+    }
+
+    protected static String dateFormat(LocalDate date) {
+        return date.getMonth() + " " + date.getDayOfMonth() + " " + date.getYear();
+    }
+
+    protected static String timeFormat(LocalDateTime time) {
+        return time.getMonth() + " " + time.getDayOfMonth() + " " + time.getYear() + " "+time.toLocalTime();
     }
 }
