@@ -2,15 +2,18 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    
+    public static ArrayList<Task> taskArr;
+    
     public static void main(String[] args) {
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> taskArr = new ArrayList<Task>();
         String command = sc.nextLine();
+        taskArr = new ArrayList<>();
         while (! command.equals("bye")) {
             try {
-                addTask(command, taskArr);
+                addTask(command);
                 
             } catch (DukeException e) {
                 System.out.println(e);
@@ -20,26 +23,20 @@ public class Duke {
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
-    public static void addTask(String command, ArrayList<Task> taskArr) throws DukeException{
+    public static void addTask(String command) throws DukeException{
         String[] commandArr = command.split(" ");
         if (command.equals("list")) {
-            System.out.println("Here are the tasks in your list:");
-            for(int i = 0; i < taskArr.size(); i++) {
-                int j = i + 1;
-                System.out.println(j + ". " + taskArr.get(i));
-            }
+            
+            listCommand();
+            
         } else if (commandArr[0].equals("done")) {
+            
             int taskArrRef = Integer.parseInt(commandArr[1]) - 1;
-            Task taskRef = taskArr.get(taskArrRef);
-            taskRef.taskDone();
-            System.out.println("Nice! I've marked this task as done:\n"+ taskRef);
+            doneCommand(taskArrRef);
+            
         } else if (commandArr[0].equals("delete")) {
             int taskArrRef = Integer.parseInt(commandArr[1]) - 1;
-            Task taskRef = taskArr.get(taskArrRef);
-            taskArr.remove(taskArrRef);
-            System.out.println("Noted. I've removed this task:\n"+ taskRef);
-            System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
-            
+            deleteCommand(taskArrRef);
         } else {
             
             boolean commandArrayLength = commandArr.length <= 1;
@@ -49,7 +46,8 @@ public class Duke {
                     throw new DukeException("The description of a todo cannot be empty!");
                 } else {
                     System.out.println(taskAdded);
-                    Task t = new Todo(command);
+                    int spaceIndex = command.indexOf(" ");
+                    Task t = new Todo(command.substring(spaceIndex + 1));
                     taskArr.add(t);
                     System.out.println(t);
                 }
@@ -85,7 +83,35 @@ public class Duke {
 
         }
 
-
-
     }
+    
+    public static void listCommand() {
+        System.out.println("Here are the tasks in your list:");
+        for(int i = 0; i < taskArr.size(); i++) {
+            int j = i + 1;
+            System.out.println(j + ". " + taskArr.get(i));
+        }
+    }
+    
+    public static void doneCommand(int index) throws DukeException{
+        if (index >= taskArr.size() || index < 0) {
+            throw new DukeException("Invalid value!");
+        } else {
+            Task taskRef = taskArr.get(index);
+            taskRef.taskDone();
+            System.out.println("Nice! I've marked this task as done:\n"+ taskRef);
+        }
+    }
+
+    public static void deleteCommand(int index) throws DukeException{
+        if (index >= taskArr.size() || index < 0) {
+            throw new DukeException("Invalid value!");
+        } else {
+            Task taskRef = taskArr.get(index);
+            taskArr.remove(index);
+            System.out.println("Noted. I've removed this task:\n"+ taskRef);
+            System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
+        }
+    }
+    
 }
