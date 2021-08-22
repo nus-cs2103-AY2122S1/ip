@@ -1,11 +1,15 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class AddDeadlineCommand extends AddCommand {
 
     private String desc;
-    private String by;
+    private LocalDate by;
 
     public AddDeadlineCommand(String desc, String by) {
         this.desc = desc;
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
     @Override

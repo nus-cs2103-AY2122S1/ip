@@ -1,11 +1,15 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class AddEventCommand extends AddCommand {
 
     private String desc;
-    private String at;
+    private LocalDate at;
 
     public AddEventCommand(String desc, String at) {
         this.desc = desc;
-        this.at = at;
+        this.at = LocalDate.parse(at);
     }
 
     @Override

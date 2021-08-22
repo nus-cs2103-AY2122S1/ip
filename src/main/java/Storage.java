@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -43,14 +46,14 @@ public class Storage {
                         strList.add(newTodo);
                         break;
                     case "D":
-                        Deadline newDeadline = new Deadline(currentEntryArray[2], currentEntryArray[3]);
+                        Deadline newDeadline = new Deadline(currentEntryArray[2], LocalDate.parse(currentEntryArray[3]));
                         if (currentEntryArray[1].equals("1")) {
                             newDeadline.setDone();
                         }
                         strList.add(newDeadline);
                         break;
                     case "E":
-                        Event newEvent = new Event(currentEntryArray[2], currentEntryArray[3]);
+                        Event newEvent = new Event(currentEntryArray[2], LocalDate.parse(currentEntryArray[3]));
                         if (currentEntryArray[1].equals("1")) {
                             newEvent.setDone();
                         }
