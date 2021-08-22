@@ -1,15 +1,21 @@
-import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
 
     public static class Task {
         protected String description;
+        protected String taskType;
         protected boolean isDone;
 
         // constructor for task object
-        public Task(String description) {
+        public Task(String description, String taskType) {
             this.description = description;
+            this.taskType = taskType;
             this.isDone = false;
         }
 
@@ -19,6 +25,10 @@ public class Duke {
 
         public void markAsDone() {
             this.isDone = true;
+        }
+
+        public String hardDiskSave() {
+            return "";
         }
 
         @Override
@@ -31,21 +41,33 @@ public class Duke {
 
         protected String by;
 
+
         public Deadlines(String description, String finishBy) {
-           super(description);
+           super(description, "D");
            this.by = finishBy;
+        }
+
+
+        @Override
+        public String hardDiskSave() {
+            return "D/" + this.isDone + "/" + this.description + "/" + this.by;
         }
 
         @Override
         public String toString() {
-            return "[D]" + super.toString() + " (by: " + by + ")";
+            return "[D]" + super.toString() + " (by: " + this.by + ")";
         }
     }
 
     public static class ToDos extends Task {
 
         public ToDos(String description) {
-            super(description);
+            super(description, "T");
+        }
+
+        @Override
+        public String hardDiskSave() {
+            return "T/" + this.isDone + "/" + this.description;
         }
 
         @Override
@@ -58,14 +80,21 @@ public class Duke {
 
         protected String date;
 
+
         public Events(String description, String eventDate) {
-            super(description);
+            super(description, "E");
             this.date = eventDate;
+        }
+
+
+        @Override
+        public String hardDiskSave() {
+            return "E/" + this.isDone + "/" + this.description + "/" + this.date;
         }
 
         @Override
         public String toString() {
-            return "[E]" + super.toString() + " (at: " + date + ")";
+            return "[E]" + super.toString() + " (at: " + this.date + ")";
         }
     }
 
@@ -83,14 +112,16 @@ public class Duke {
                 + "     * type down something and i'll remember\n"
                 + "         'todo' followed by your 'task'\n"
                 + "             eg. todo go to sleep\n"
-                + "         'deadline' followed by the '/by deadline'\n"
-                + "             eg. deadline finish test /by tomorrow\n"
-                + "         'event' followed by the '/at time'\n"
-                + "             eg. event christmas /at december\n"
+                + "         'deadline' followed by the '/by yyyy-mm-dd'\n"
+                + "             eg. deadline finish test /by 2020-12-31\n"
+                + "         'event' followed by the '/at yyyy-mm-dd'\n"
+                + "             eg. event christmas /at 2020-10-10\n"
                 + "     * type 'list' to show everything\n"
                 + "     * type 'bye' to leave\n"
                 + "     * type 'done' followed by the task number\n"
                 + "       to mark it as done\n"
+                + "     * type 'delete' followed by the task number\n"
+                + "       to delete it from your list\n"
                 + " >";
 
         String fish = "                              ....\n"
@@ -105,13 +136,28 @@ public class Duke {
         System.out.println(dory);
     }
 
-    public static void startChatBot() throws DukeException {
+    public static void updateHardDisk(ArrayList<Task> taskList) {
+        Path dataFilePath = Paths.get("data/dory.txt");
+        try {
+            BufferedWriter bw = Files.newBufferedWriter(dataFilePath);
+            for (int i = 0; i < taskList.size(); i++) {
+                String fullLine = taskList.get(i).hardDiskSave();
+                bw.write(fullLine);
+                bw.newLine() ;
+            }
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("IO Exception");
+        }
+    }
+
+    public static void startChatBot(ArrayList<Task> taskList) throws DukeException {
         // creates a new Scanner instance
         // System.in is the keyboard input
         Scanner input = new Scanner(System.in);
 
         // arraylist to save the user's tasks
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = taskList;
 
         while (input.hasNextLine()) {
             // reads user input and modifies it to lower case
@@ -166,7 +212,6 @@ public class Duke {
                     if (updatedTask.isBlank()) {
                         throw new ToDoException("please add a description to your todo task");
                     }
-                    System.out.println("adding " + nextInput + " final : " + updatedTask);
                     ToDos toDoTask = new ToDos(updatedTask);
                     tasks.add(toDoTask);
                     System.out.println(" > added:");
@@ -215,15 +260,67 @@ public class Duke {
 
                 System.out.println("==================================Oo");
             }
+            updateHardDisk(taskList);
         }
     }
+
 
     public static void main(String[] args) throws DukeException {
         // displays logo and instructions
         showIntro();
+        // load data from hard disk when Dory starts up and starts bot
+        Path dataFolderPath = Paths.get("data");
+        Path dataFilePath = Paths.get("data/dory.txt");
+        boolean doesFolderExist = Files.exists(dataFolderPath);
+        boolean doesFileExist = Files.exists(dataFilePath);
+        if (doesFolderExist) {
+            if (doesFileExist) {
+                try {
+                    List<String> data = Files.readAllLines(dataFilePath);
+                    ArrayList<Task> dataForDory = new ArrayList<>();
+                    for (int i = 0; i < data.size(); i++) {
+                        String[] lineTask = data.get(i).split("/");
+                        String taskType = lineTask[0];
+                        String isDone = lineTask[1];
+                        String taskDesc = lineTask[2];
 
-        // starts scanner and listens for input
-        startChatBot();
+                        boolean doneOrNot = (isDone.equals("true"));
+                        if (taskType.equals("T")) {
+                            ToDos toDo = new ToDos(taskDesc);
+                            toDo.isDone = doneOrNot;
+                            dataForDory.add(toDo);
+                        } else if (taskType.equals("D")) {
+                            String finishBy = lineTask[3];
+                            Deadlines deadline = new Deadlines(taskDesc, finishBy);
+                            deadline.isDone = doneOrNot;
+                            dataForDory.add(deadline);
+                        } else if (taskType.equals("E")) {
+                            String dateOfEvent = lineTask[3];
+                            Events event = new Events(taskDesc, dateOfEvent);
+                            event.isDone = doneOrNot;
+                            dataForDory.add(event);
+                        }
+                    }
+                    startChatBot(dataForDory);
+                } catch (IOException e) {
+                    ArrayList<Task> dataForDory = new ArrayList<>();
+                    startChatBot(dataForDory);
+                }
+            } else {
+                try {
+                    Files.createFile(dataFilePath);
+                } catch (IOException e) {
+                    System.out.println("failed to create a data file");
+                }
+            }
+        } else {
+            try {
+                Files.createDirectories(dataFolderPath);
+                Files.createFile(dataFilePath);
+            } catch (IOException e) {
+                System.out.println("failed to create a data folder");
+            }
+        }
     }
 
 }
