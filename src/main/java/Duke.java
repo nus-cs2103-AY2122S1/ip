@@ -1,5 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -56,12 +59,17 @@ public class Duke {
                 case "deadline":
                     try {
                         String[] deadlineArr = sc.nextLine().split("/by");
-                        Task deadline = new Deadline(deadlineArr[0].trim(), deadlineArr[1].trim(), count);
+                        LocalDate d1 = LocalDate.parse(deadlineArr[1].trim());
+                        Task deadline = new Deadline(deadlineArr[0].trim(),
+                                d1.format(DateTimeFormatter.ofPattern("MMM dd YYYY")), count);
                         arrList.add(deadline);
                         count++;
                         System.out.println(line + "Got it. I've added this task:\n" + deadline +
                                 "\nNow you have " + count + " tasks in the list.\n" + line);
                         break;
+                    } catch (DateTimeParseException e){
+                        System.out.println("\n" + line +
+                                "\n☹ OOPS!!! The date must be in the format YYYY-MM-DD\n" + line);
                     } catch (Exception e){
                         System.out.println("\n" + line +
                                 "\n☹ OOPS!!! The description of a deadline cannot be empty.\n" + line);
@@ -70,12 +78,17 @@ public class Duke {
                 case "event":
                     try {
                         String[] eventArr = sc.nextLine().split("/at");
-                        Task event = new Event(eventArr[0].trim(), eventArr[1].trim(), count);
+                        LocalDate d2 = LocalDate.parse(eventArr[1].trim());
+                        Task event = new Event(eventArr[0].trim(),
+                                d2.format(DateTimeFormatter.ofPattern("MMM dd YYYY")), count);
                         arrList.add(event);
                         count++;
                         System.out.println(line + "Got it. I've added this task:\n" + event +
                                 "\nNow you have " + count + " tasks in the list.\n" + line);
                         break;
+                    } catch (DateTimeParseException e){
+                        System.out.println("\n" + line +
+                                "\n☹ OOPS!!! The date must be in the format YYYY-MM-DD\n" + line);
                     } catch (Exception e){
                         System.out.println("\n" + line +
                                 "\n☹ OOPS!!! The description of a event cannot be empty.\n" + line);
