@@ -5,7 +5,7 @@ Hello from
 | |_| | |_| |
 |____/ \__,_|
 
-Hello! I'm Du, your personal assistant chatbot!:)
+Hello! I'm Du.Du, your personal assistant chatbot!:)
 Please input the tasks you want to add to your list
 ____________________________________________________________
 Got it. I've added this task:

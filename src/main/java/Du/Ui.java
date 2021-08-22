@@ -1,3 +1,5 @@
+package Du;
+
 public class Ui {
 
     public Ui() {
@@ -19,7 +21,7 @@ public class Ui {
                 + "|____/ \\__,_|\n";
         System.out.println("Hello from\n" + logo);
 
-        System.out.println("Hello! I'm Du, your personal assistant chatbot!:)");
+        System.out.println("Hello! I'm Du.Du, your personal assistant chatbot!:)");
     }
 
     /**
