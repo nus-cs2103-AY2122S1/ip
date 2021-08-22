@@ -274,6 +274,10 @@ public class DukeEngine {
         databaseEngine.writeToDatabase(this.taskList);
     }
 
+    /**
+     * Displays the tasks that have the keywords inputted.
+     * @param inputArr the array containing the keywords.
+     */
     public void findTasks(String[] inputArr) {
         List<Task> filteredList = this.taskList
                 .stream()
