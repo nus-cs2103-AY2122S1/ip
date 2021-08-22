@@ -5,8 +5,8 @@ import java.time.*;
 import java.time.format.*;
 
 /**
- * The Event class encapsulates information
- * and methods pertaining to Event tasks.
+ * The Deadline class encapsulates information
+ * and methods pertaining to Deadline tasks.
  *
  * @author Frederick Pek
  * @version CS2103 AY21/22 Sem 1 iP
