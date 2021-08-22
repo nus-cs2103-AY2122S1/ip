@@ -9,14 +9,12 @@ import side.util.Parser;
 import side.exception.SideException;
 
 /**
- * CS2103T Individual Project AY 21/22 Sem 1
- * Project Duke: Incrementally building a Chatbot.
+ * Side contains logic for prompting user for input and directing flow of commands.
  *
- * Description:
- * On running the program, Duke greets the user and awaits for inputted commands:
+ * On running the program, Side greets the user and awaits for inputted commands:
  *   - 'todo x' -> adds a Task of x with no date/time attached
  *   - 'deadline x /by y' -> adds Deadline of x that needs to be done by y
- *   - 'event x /at y' -> adds an Event of x that starts and ends at a specific time y
+ *   - 'event x /at y /to z' -> adds an Event of x that starts at datetime y and ends on datetime z
  *   - 'list' -> displays current list of tasks
  *   - 'done x' -> marks Task x as done
  *   - 'delete x' -> deletes Task x from the task list

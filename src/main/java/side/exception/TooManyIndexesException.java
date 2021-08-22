@@ -1,5 +1,11 @@
 package side.exception;
 
+/**
+ * TooManyIndexesException is thrown when user attempts to carry out an action requiring index with too many indexes.
+ *
+ * @author Lua Yi Da
+ */
+
 public class TooManyIndexesException extends SideException {
 
     public TooManyIndexesException(String input) {

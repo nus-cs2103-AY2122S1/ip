@@ -5,6 +5,12 @@ import side.tasks.Deadline;
 import side.tasks.Event;
 import side.tasks.Task;
 
+/**
+ * Ui encapsulates user interactions, handling user input logic and formats responses to print for user.
+ *
+ * @author Lua Yi Da
+ */
+
 public class Ui {
 
     private static final String LINEBREAK = "---------------------------------------------------------------------";
@@ -26,11 +32,19 @@ public class Ui {
         System.out.println(logo);
     }
 
+    /**
+     * Prints logo and greeting for user on launch.
+     *
+     */
     public void greet() {
         this.printLogo();
         System.out.println(GREETING);
     }
 
+    /**
+     * Prints closing message for user on end.
+     *
+     */
     public void close() {
         System.out.println(GOODBYE);
     }
@@ -145,7 +159,7 @@ public class Ui {
     }
 
     /**
-     * Handles the logic of deleting a task
+     * Handles the logic of deleting a task.
      *
      * @param input String representation of user input.
      * @param taskList TaskList in which task is to be marked.

@@ -3,11 +3,9 @@ package side.tasks;
 import side.util.DateTime;
 
 /**
- * CS2103T Individual Project AY 21/22 Sem 1
- * Project Duke: Incrementally building a Chatbot.
+ * The Deadline class represents a task that has to be done before a specified time.
  *
- * The Deadline class represents a task that has to be done before a specified time, currently represented
- * as a string. It encapsulates the following information:
+ * It encapsulates the following information:
  * - description
  * - time
  * - isDone

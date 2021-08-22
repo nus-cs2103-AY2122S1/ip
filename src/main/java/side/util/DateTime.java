@@ -9,6 +9,18 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
+/**
+ * DateTime is used to encapsulate the time and date for tasks, and corresponding conversion from string to
+ * [yyyy-MM-dd] and [HHmm].
+ *
+ * It encapsulates the following information:
+ * - localDate
+ * - localTime
+ * - localDateTime
+ *
+ * @author Lua Yi Da
+ */
+
 public class DateTime {
 
     private LocalDate localDate;

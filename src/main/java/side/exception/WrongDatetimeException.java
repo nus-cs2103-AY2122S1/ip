@@ -1,5 +1,11 @@
 package side.exception;
 
+/**
+ * WrongDatetimeException is thrown when user attempts to do enter an invalid datetime format.
+ *
+ * @author Lua Yi Da
+ */
+
 public class WrongDatetimeException extends SideException {
 
     public WrongDatetimeException() {
