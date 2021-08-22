@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -121,24 +124,36 @@ public class Duke {
                     throw new IncompleteTaskDescriptionException("todo");
                 }
             case DEADLINE:
-                if (description.matches("[^ ].* /by *[^ ].*")) {
+                if (description.matches("[^ ].* /by *[^ ].* [^ ].*")) {
                     int separator = description.indexOf("/by");
                     String taskDetail = description.substring(0, separator).trim();
-                    String by = description.substring(separator + 3).trim();
-                    task = new Deadline(taskDetail, by);
+                    String[] by = description.substring(separator + 3).trim().split(" ");
+                    try {
+                        LocalDate date = LocalDate.parse(by[0].trim());
+                        LocalTime time = LocalTime.parse(by[1].trim());
+                        task = new Deadline(taskDetail, date, time);
+                    } catch (DateTimeParseException e) {
+                        throw new IncompleteTaskDescriptionException("deadline");
+                    }
                     break;
                 } else {
                     throw new IncompleteTaskDescriptionException("deadline");
                 }
             case EVENT:
-                if(description.matches("[^ ].* /at *[^ ].*")) {
+                if(description.matches("[^ ].* /at *[^ ].* [^ ].*")) {
                     int separator = description.indexOf("/at");
                     String taskDetail = description.substring(0, separator).trim();
                     String at = description.substring(separator + 3).trim();
-                    task = new Event(taskDetail, at);
+                    try {
+                        LocalDate date = LocalDate.parse(at.substring(0, at.indexOf(' ')));
+                        String timeRange = at.substring(at.indexOf(' ') + 1).trim();
+                        task = new Event(taskDetail, date, timeRange);
+                    } catch (DateTimeParseException e) {
+                        throw new IncompleteTaskDescriptionException("event");
+                    }
                     break;
                 } else {
-                    throw new IncompleteTaskDescriptionException("deadline");
+                    throw new IncompleteTaskDescriptionException("event");
                 }
             default:
                 // checked for command validity in receiveCommand(), so this should not execute at all
