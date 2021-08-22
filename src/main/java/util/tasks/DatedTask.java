@@ -9,7 +9,6 @@ import util.parser.*;
 
 public abstract class DatedTask extends Task {
     protected LocalDate lDate;
-    public final boolean isDated = true;
 
     public DatedTask(String name, String date) {
         super(name);
@@ -37,6 +36,12 @@ public abstract class DatedTask extends Task {
 
         }
 
+
+    }
+
+    public void removeFromTable(DateTaskTable table) {
+        ArrayList<DatedTask> ls = table.get(this.lDate);
+        if (ls != null) ls.remove(this);
 
     }
 

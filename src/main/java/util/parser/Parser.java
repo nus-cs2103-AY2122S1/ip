@@ -93,7 +93,7 @@ public class Parser {
                     });
                     break;
                 case DELETE:
-                    cmds.add(new DelCommand(Integer.parseInt(description), this.tasklist));
+                    cmds.add(new DelCommand(Integer.parseInt(description), this.tasklist, this.dateTaskList));
                     break;
                 case TODO:
                     Task t = ToDos.of(description);
