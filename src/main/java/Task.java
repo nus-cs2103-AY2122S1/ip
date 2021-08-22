@@ -1,4 +1,4 @@
-public class Task {
+public class Task implements Comparable<Task> {
 
     private final String description;
     private boolean isDone;
@@ -37,5 +37,16 @@ public class Task {
     @Override
     public String toString() {
         return getStatusIcon() + " " + this.description;
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        if (!this.isDone && o.isDone) {
+            return -1;
+        } else if (this.isDone && !o.isDone) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

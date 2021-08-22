@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Duke {
@@ -12,6 +14,7 @@ public class Duke {
     public static final String COLOR_CYAN = "\u001B[36m";
     public static final String COLOR_PURPLE = "\u001B[35m";
     public static final String COLOR_RED = "\u001B[31m";
+    public static final String COLOR_GREEN = "\u001B[32m";
 
     // The General Strings Used by the ChatBot
     private static final String logo = "\n" +
@@ -42,8 +45,8 @@ public class Duke {
     // The Global Variables used by the ChatBot
     private static final Scanner cmdReader = new Scanner(System.in);
     private static final ArrayList<Task> LIST = new ArrayList<>();
-    private enum TYPE {START, MIDDLE, END, COMPLETE, ERROR}
     private static File taskFile;
+    public enum TYPE {START, MIDDLE, END, COMPLETE, ERROR};
 
     // Method to Print Greeting
     public static void greeting() {
@@ -63,19 +66,6 @@ public class Duke {
         echo("I hope to see you again soon :)", TYPE.MIDDLE);
         System.out.println(COLOR_CYAN + line + COLOR_RESET);
         System.out.println(COLOR_CYAN + line + COLOR_RESET);
-    }
-
-    public static void showHelp() {
-        String helpString = "These are the list of commands you can give me:\n";
-        helpString += "\t\t\t 1. list -> Prints out the List of Tasks.\n";
-        helpString += "\t\t\t 2. todo [#description] -> Adds a ToDo Task to the List\n";
-        helpString += "\t\t\t 3. event #description /at #timing -> Adds an Event Task to the List\n";
-        helpString += "\t\t\t 4. deadline #description /by #deadline -> Adds a Deadline Task to the List\n";
-        helpString += "\t\t\t 5. done #index -> Marks Task at #index in the List as completed\n";
-        helpString += "\t\t\t 6. undo #index -> Marks Task at #index in the List as incomplete\n";
-        helpString += "\t\t\t 7. delete #index -> Delete Task at #index in the List\n";
-        helpString += "\t\t\t 8. bye/goodbye -> Quits the ChatBot";
-        echo(helpString, TYPE.COMPLETE);
     }
 
     //Method to Echo the Given Word
@@ -105,6 +95,7 @@ public class Duke {
             echo("There are currently no tasks in your list.", TYPE.COMPLETE);
             return;
         }
+        Collections.sort(LIST);
         String listString = "The tasks in your list are:\n";
         int i;
         for (i = 0; i < LIST.size() - 1; i++) {
@@ -290,6 +281,41 @@ public class Duke {
         }
     }
 
+    public static void showOnDate(String command) throws DukeException {
+        try {
+            if (!command.contains("/on ")) {
+                throw new DukeException("Ensure that the command is of the form \"show /on #date\". The deadline must be given.");
+            }
+            LocalDate date = LocalDate.parse(command.split(" /on ")[1], DateTimeFormatter.ofPattern("d/M/yyyy"));
+            ArrayList<Task> tasksToDisplay = new ArrayList<>();
+            for (Task tempTask : LIST) {
+                if (tempTask instanceof Deadline) {
+                    if (((Deadline) tempTask).getDeadline().toLocalDate().equals(date)) {
+                        tasksToDisplay.add(tempTask);
+                    }
+                } else if (tempTask instanceof Event) {
+                    if (((Event) tempTask).getTiming().toLocalDate().equals(date)) {
+                        tasksToDisplay.add(tempTask);
+                    }
+                }
+            }
+            String dateString = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            if (tasksToDisplay.isEmpty()) {
+                echo("There are currently no tasks on " + dateString, TYPE.COMPLETE);
+                return;
+            }
+            Collections.sort(tasksToDisplay);
+            String listString = "The tasks on " + dateString + " are:\n";
+            int i;
+            for (i = 0; i < tasksToDisplay.size() - 1; i++) {
+                listString = listString.concat("\t\t\t" + (i + 1) + ". " + tasksToDisplay.get(i) + "\n");
+            }
+            listString = listString.concat("\t\t\t" + (i + 1) + ". " + tasksToDisplay.get(i));
+            echo(listString, TYPE.COMPLETE);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Ensure that the command is of the form \"show /on #date\". The description can not be empty.");
+        }
+    }
 
     //Main Method
     public static void main(String[] args) {
@@ -323,9 +349,13 @@ public class Duke {
                 } else if (command.toLowerCase(Locale.ROOT).equals("list")) {
                     // If input is list, prints list
                     printList();
-                } else if (command.toLowerCase(Locale.ROOT).equals("help")) {
+                } else if (commandList[0].equals("help")) {
                     // If input is list, prints list
-                    showHelp();
+                    if (commandList.length == 1) {
+                        Helper.showMainHelp();
+                    } else {
+                        Helper.showCommandHelp(commandList[1]);
+                    }
                 } else if (commandList.length == 2 && commandList[0].equals("done")) {
                     //If input starts with done, mark the specific item in list as done
                     markAsDone(commandList[1]);
@@ -350,6 +380,9 @@ public class Duke {
                     //If input starts with todos, add that to list
                     addDeadline(command);
                     saveMemory();
+                } else if (commandList[0].equals("show")) {
+                    //If input starts with todos, add that to list
+                    showOnDate(command);
                 } else {
                     // Else Invalid
                     throw new DukeException("Oops, That's an invalid command. Type in help to get list of possible commands.");
