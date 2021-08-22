@@ -21,6 +21,7 @@ public class Event extends Task {
 
     @Override
     public String dataToString() {
-        return String.format("E | %s | %s", super.dataToString(), this.timeInfo);
+        String timeInfoString = timeInfo.format(inputFormatter);
+        return String.format("E | %s | %s", super.dataToString(), timeInfoString);
     }
 }
