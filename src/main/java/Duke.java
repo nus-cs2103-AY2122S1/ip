@@ -1,9 +1,11 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
     private static ArrayList<Task> tasks = new ArrayList<>();
+    private static Parser parser;
 
     private static String formatDukeResponse(String response) {
         return HORIZONTAL_LINE + "\n" + response + "\n" + HORIZONTAL_LINE + "\n";
@@ -24,17 +26,18 @@ public class Duke {
         System.out.println(formatDukeResponse(exitMessage));
     }
 
-    private static void addTask(String description) throws DukeException {
+    private static void addTask(String description) throws DukeException, IOException {
         if (description == null || description.equals("")) {
             throw new DukeException("Oops!!! The description of a todo cannot be empty.");
         }
 
         Task task = new Todo(description);
         tasks.add(task);
+        parser.addLine(task);
         printAddTaskMessage(task);
     }
 
-    private static void addTask(String descriptionAndTime, String command) throws DukeException {
+    private static void addTask(String descriptionAndTime, String command) throws DukeException, IOException {
         String[] splitDescriptionAndTime;
         Task task;
 
@@ -55,21 +58,24 @@ public class Duke {
         }
 
         tasks.add(task);
+        parser.addLine(task);
         printAddTaskMessage(task);
     }
 
-    private static void markTask(String taskNumberString) throws DukeException {
+    private static void markTask(String taskNumberString) throws DukeException, IOException {
         int taskNumber = retrieveTaskNumber(taskNumberString);
 
         Task task = tasks.get(taskNumber - 1);
         task.markAsDone();
+        parser.editLine(taskNumber, task);
         printMarkTaskDoneMessage(task);
     }
 
-    private static void deleteTask(String taskNumberString) throws DukeException {
+    private static void deleteTask(String taskNumberString) throws DukeException, IOException {
         int taskNumber = retrieveTaskNumber(taskNumberString);
 
         Task removedTask = tasks.remove(taskNumber - 1);
+        parser.removeLine(removedTask);
         printDeleteTaskMessage(removedTask);
     }
 
@@ -122,9 +128,7 @@ public class Duke {
         System.out.println(formatDukeResponse(e.getMessage()));
     }
 
-    public static void main(String[] args) {
-        printWelcomeMessage();
-
+    private static void scanUserInput() throws IOException {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String[] userInput = sc.nextLine().trim().split(" ", 2);
@@ -132,7 +136,6 @@ public class Duke {
             String action = userInput.length == 2 ? userInput[1].trim() : "";
 
             if (command.equals("bye")) {
-                sc.close();
                 break;
             }
 
@@ -162,7 +165,21 @@ public class Duke {
                 printDukeExceptionMessage(e);
             }
         }
+        sc.close();
+    }
 
-        printExitMessage();
+    public static void main(String[] args) {
+        try {
+            Storage storage = new Storage("data/duke.txt");
+            parser = new Parser(storage);
+            tasks = parser.retrieveTaskListFromLines();
+
+            printWelcomeMessage();
+            scanUserInput();
+            printExitMessage();
+
+        } catch (IOException e) {
+            System.out.println("Something went wrong. Please restart the app.");
+        }
     }
 }
