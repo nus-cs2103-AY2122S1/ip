@@ -7,14 +7,25 @@ import java.util.Scanner;
  * 'delete' and 'bye'
  */
 public class Duke {
-    private static DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static String format = "dd-MM-yyyy";
     public static void main(String[] args) {
         start();
     }
 
-    public static DateTimeFormatter getFormat() {
+    /**
+     * Method to get the current format setting.
+     * @return the DateTimeFormatter
+     */
+    public static String getFormat() {
         return format;
     }
+
+    public static void setFormat(String newFormat) throws IllegalArgumentException {
+        DateTimeFormatter.ofPattern(newFormat);
+        format = newFormat;
+    }
+
+
     /**
      * Method to start the bot and waits for the user's input.
      */
@@ -90,7 +101,21 @@ public class Duke {
                 } else {
                     System.out.println("Invalid index, please try again");
                 }
-            } else {
+            } else if (input.equals("setFormat")) {
+                Scanner s6 = new Scanner(s.nextLine());
+                if (s6.hasNextLine()) {
+                    try {
+                        setFormat(s6.nextLine().substring(1));
+                        System.out.println(
+                                "Date format has been updated to: "
+                                        + getFormat()
+                        );
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Not an acceptable format. Please try again");
+                    }
+                }
+            }
+            else {
                 System.out.println("No specific command specified. Please try again");
             }
             input = s.next();

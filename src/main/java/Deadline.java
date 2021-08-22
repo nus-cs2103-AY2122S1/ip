@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 // testing new branch
@@ -12,10 +13,10 @@ import java.util.Scanner;
  */
 public class Deadline extends Task {
 
-    private String deadline;
     private String description = " ";
     private boolean isDone;
-    private LocalDate deadline1;
+    private LocalDate deadline;
+    private DateTimeFormatter format = DateTimeFormatter.ofPattern(Duke.getFormat());
 
     /**
      * constructor for the deadline class.
@@ -34,18 +35,21 @@ public class Deadline extends Task {
             } else if (next.equals("/by")) {
                 try {
                     if (s.hasNextLine()) {
-                        this.deadline1 = LocalDate.parse(s.nextLine().substring(1), Duke.getFormat());
-                        System.out.println(this.deadline1.toString());
+                        this.deadline = LocalDate.parse(s.nextLine().substring(1), this.format);
                     } else {
                         throw new WrongCommandFormatException(
                                 "No deadline specified. Please specify a deadline after `/by`"
                         );
                     }
                 } catch (DateTimeParseException ex) {
-                    System.out.println(ex.getMessage());
                     throw new WrongCommandFormatException(
                             "Wrong deadline format specified. \n"
-                            + "Acceptable formats: \n"
+                            + "Current format setting: "
+                            + Duke.getFormat()
+                            + "\n"
+                            + "Please try again or consider changing the format "
+                            + "settings by using the command `setFormat`"
+
                     );
                 }
 
@@ -102,7 +106,7 @@ public class Deadline extends Task {
                 + statusIcon
                 + this.description
                 + " (by: "
-                + this.deadline1.format(Duke.getFormat())
+                + this.deadline.format(this.format)
                 + ")";
     }
 
@@ -116,10 +120,10 @@ public class Deadline extends Task {
         if (this.isDone) {
             System.out.println("`" + this.description.substring(1) + "`" + " is already completed.");
         } else {
-            System.out.println("Completed: "
+            System.out.println("Completed:"
                             + this.description
                             + " (by:"
-                            + this.deadline + ")"
+                            + this.deadline.format(this.format) + ")"
             );
             System.out.println("You didn't overshoot the deadline right?");
             this.isDone = true;
