@@ -13,6 +13,13 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage is used to model saving to hard disk using a .txt file. It contains logic for saving and retrieving from
+ * the .txt file.
+ *
+ * @author Lua Yi Da
+ */
+
 public class Storage {
 
     private Parser parser;
@@ -21,6 +28,13 @@ public class Storage {
         this.parser = new Parser();
     }
 
+    /**
+     * Helper method to save existing tasks to .txt file.
+     *
+     * @param savedList ArrayList containing existing tasks.
+     * @param directory String representing directory to save to.
+     * @throws IOException Error with file operation.
+     */
     public void save(ArrayList<Task> savedList, String directory) throws IOException {
         String filePath = directory + "/Side.txt";
         File file = new File(filePath);
@@ -55,6 +69,13 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Helper method to retrieve saved tasks from .txt file.
+     *
+     * @param directory String representing directory to read from.
+     * @return ArrayList of tasks saved from previous session.
+     * @throws FileNotFoundException Error with finding file to read from.
+     */
     public ArrayList<Task> retrieve(String directory) throws FileNotFoundException {
         String filePath = directory + "/Side.txt";
         File file = new File(filePath);

@@ -9,11 +9,8 @@ import side.tasks.Event;
 import side.tasks.Deadline;
 
 /**
- * CS2103T Individual Project AY 21/22 Sem 1
- * Project Duke: Incrementally building a Chatbot.
- *
  * The TaskList class provides a wrapper around an ArrayList of Tasks to encapsulate the list of tasks given to
- * Side by its user. Supports add, delete and done operations on tasks in it.
+ * Side by its user. Supports operations on tasks in it.
  *
  * @author Lua Yi Da
  */
@@ -29,6 +26,11 @@ public class TaskList {
         this.storage = new Storage();
     }
 
+    /**
+     * Helper method to retrieve saved tasks from previous session.
+     *
+     * @return String of retrieved tasks.
+     */
     public String retrieve()  {
         try {
             String filepath = "./data";
@@ -40,12 +42,16 @@ public class TaskList {
         }
     }
 
+    /**
+     * Helper method to save tasks for future use. Prints message if IOException occurs.
+     *
+     */
     public void save() {
         try {
             String filepath = "./data";
             this.storage.save(this.tasks, filepath);
         } catch (IOException e) {
-            System.out.println("Problem");
+            System.out.println("Ran into problem reading file...");
         }
     }
 
@@ -119,7 +125,7 @@ public class TaskList {
         return "Fine, I'll delete: " + taskToDelete.toString() + taskCount;
     }
 
-    public String listToString() {
+    private String listToString() {
         StringBuilder tasksList = new StringBuilder();
 
         if (this.taskLabel == 0) {

@@ -1,10 +1,8 @@
 package side.tasks;
 
 /**
- * CS2103T Individual Project AY 21/22 Sem 1
- * Project Duke: Incrementally building a Chatbot.
+ * The Task class represents a task that has to be done.
  *
- * The Task class represents a task that has to be done, currently represented as a string.
  * It encapsulates the following information:
  * - description
  * - time

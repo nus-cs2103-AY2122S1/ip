@@ -1,5 +1,11 @@
 package side.util;
 
+/**
+ * Parser is used to encapsulate operations for parsing user input and translating it to corresponding commands.
+ *
+ * @author Lua Yi Da
+ */
+
 public class Parser {
     public Parser() {}
 
@@ -16,6 +22,12 @@ public class Parser {
         return output.stripLeading().stripTrailing();
     }
 
+    /**
+     * Helper method to find corresponding datetime for deadline commands.
+     *
+     * @param input String representing user input.
+     * @return String of datetime.
+     */
     public String findDeadlineDatetime(String input) {
         return findDatetime(input, "/by");
     }
@@ -38,6 +50,12 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Helper method to find task descriptions for commands.
+     *
+     * @param input String representing user input.
+     * @return String of description.
+     */
     public String findDescription(String input) {
         String cmd = input.split("\\s+", 2)[1];
 
