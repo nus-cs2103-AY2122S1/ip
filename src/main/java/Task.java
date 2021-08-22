@@ -9,7 +9,27 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    protected String getDescription() {
+    public static Task createTask(String[] inputs) throws DukeException {
+        String keyword = inputs[0];
+
+        switch (keyword) {
+        case "todo":
+            return new Todo(inputs[1]);
+        case "deadline":
+            inputs = inputs[1].split(" /by ", 2);
+            TaskCenter.checkMissingArguments(inputs,
+                    String.format("Please specify the date/time of your deadline.\n", keyword));
+            return new Deadline(inputs[0], inputs[1]);
+        case "event":
+            inputs = inputs[1].split(" /at ", 2);
+            TaskCenter.checkMissingArguments(inputs, String.format("Please specify a time for your event.\n", keyword));
+            return new Event(inputs[0], inputs[1]);
+        default:
+            throw new InvalidArgumentException();
+        }
+    }
+
+    public String getDescription() {
         return description;
     }
 

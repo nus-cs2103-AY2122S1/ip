@@ -115,7 +115,7 @@ do for you today?
     ____________________________________________________________
 
     ____________________________________________________________
-     Noted. I've removed this task:
+     Got it. I've removed this task:
        [T][ ] borrow book
      Now you have 2 tasks in the list.
     ____________________________________________________________
