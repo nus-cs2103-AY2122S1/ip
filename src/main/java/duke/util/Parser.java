@@ -1,9 +1,7 @@
 package duke.util;
 
 import duke.command.*;
-import duke.exception.DukeException;
-import duke.exception.IndexFormatException;
-import duke.exception.MissingIndexException;
+import duke.exception.*;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -45,6 +43,8 @@ public class Parser {
             return new DeleteCommand(input, list);
         case "filter":
             return new FilterCommand(input, list);
+        case "find":
+            return new FindCommand(list, input);
         default:
             return new UnrecognisedCommand(input);
         }
@@ -86,5 +86,21 @@ public class Parser {
             return null;
         }
         return date;
+    }
+
+    /**
+     * Extracts out the keyword for find command.
+     *
+     * @param input Raw user's input.
+     * @return the keyword user is searching for.
+     */
+    public static String extractKeyword(String input) throws DukeException {
+        if (input.split(" ").length < 2) {
+            throw new MissingKeywordException();
+        } else if (input.split(" ").length > 2) {
+            throw new MultipleKeywordsException();
+        }
+
+        return input.split(" ")[1];
     }
 }
