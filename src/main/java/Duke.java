@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -92,7 +93,13 @@ public class Duke {
                             if (details.length == 1) { // time of deadline not given
                                 throw new DukeException(DukeExceptionType.DEADLINETIME);
                             } else {
-                                newTask = new Deadline(details[0], LocalDate.parse(details[1]));
+                                String[] deadline = details[1].split(" ");
+                                if (deadline.length == 1) {
+                                    newTask = new Deadline(details[0], LocalDate.parse(details[1]));
+                                } else {
+                                    newTask = new Deadline(details[0], LocalDate.parse(deadline[0]), 
+                                            LocalTime.parse(deadline[1]));
+                                }
                             }
                             break;
                         }
@@ -127,7 +134,7 @@ public class Duke {
                 System.out.println(new DukeException(DukeExceptionType.INVALIDDONE).getMessage());
 
             } catch (DateTimeParseException e) { 
-                System.out.println(new DukeException(DukeExceptionType.INVALIDDATE).getMessage());
+                System.out.println(new DukeException(DukeExceptionType.INVALIDDATETIME).getMessage());
 
             } finally {
                 System.out.println("  ____________________________________________________________\n");

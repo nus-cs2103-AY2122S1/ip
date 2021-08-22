@@ -27,9 +27,9 @@ public class DukeException extends Exception {
         case INVALIDINPUT:
             customMessage = "  OOPS!!! I don't recognise the command you've given me.";
             break;
-        case INVALIDDATE:
+        case INVALIDDATETIME:
             customMessage = "  OOPS!!! The deadline you provided is not in a correct format!\n"
-                    + "  Some formats you can use are yyyy/mm/dd, yyyy-mm-dd etc.";
+                    + "  The required format is yyyy-mm-dd or yyyy-mm-dd hh:mm.";
             break;
         default:
             customMessage = "  OOPS!!! Duck has run into an unspecified error!";
