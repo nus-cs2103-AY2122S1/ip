@@ -2,7 +2,7 @@
  * Encapsulates the name and completion status of the task.
  */
 
-public class Task {
+abstract public class Task {
     private final String name;
     private boolean completed;
 
@@ -29,12 +29,22 @@ public class Task {
         return this.name;
     }
 
+    public String getCompletion() {
+        return (completed ? "X" : " ");
+    }
+
     /**
      * Toggles the completion status.
      */
     public void toggleCompleted() {
         this.completed = !this.completed;
     }
+
+    //TODO
+    abstract public String getType();
+
+    //TODO
+    abstract public String getInfo();
 
     /**
      * Converts task into a string

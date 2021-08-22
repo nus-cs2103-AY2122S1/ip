@@ -16,6 +16,16 @@ public class Event extends Task{
         this.at = at;
     }
 
+    @Override
+    public String getType() {
+        return "E";
+    }
+
+    @Override
+    public String getInfo() {
+        return this.at;
+    }
+
     /**
      * Converts the event object into a string.
      * @return A string containing the type (event), completion status and time
@@ -23,6 +33,6 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 }

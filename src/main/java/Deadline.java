@@ -16,6 +16,17 @@ public class Deadline extends Task {
         this.doneBy = by;
     }
 
+
+    @Override
+    public String getType() {
+        return "D";
+    }
+
+    @Override
+    public String getInfo() {
+        return this.doneBy;
+    }
+
     /**
      * Converts the deadline object into a string
      * @return A string containing the type (Deadline), completion status and time

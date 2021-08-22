@@ -11,6 +11,16 @@ public class ToDo extends Task {
         super(name);
     }
 
+    @Override
+    public String getType() {
+        return "T";
+    }
+
+    @Override
+    public String getInfo() {
+        return null;
+    }
+
     /**
      * Converts the ToDo task into a string
      * @return String with the type of the task (todo) and the name of the task.
