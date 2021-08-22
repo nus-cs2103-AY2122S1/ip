@@ -5,7 +5,7 @@ import java.io.Serializable;
  */
 
 public class Task implements Serializable {
-    private boolean done;
+    private boolean isDone;
     private String title;
 
     /**
@@ -14,7 +14,7 @@ public class Task implements Serializable {
      */
     public Task(String title) {
         this.title = title;
-        this.done = false;
+        this.isDone = false;
 
     }
 
@@ -23,7 +23,7 @@ public class Task implements Serializable {
      * @param status the value that done is to be set to.
      */
     public void setDone(boolean status) {
-        done = status;
+        isDone = status;
         System.out.println("Nice! I've marked this task as done:\n[X]" + this.title);
     }
 
@@ -32,7 +32,7 @@ public class Task implements Serializable {
      * @return a boolean.
      */
     public boolean getDone() {
-        return this.done;
+        return this.isDone;
     }
 
     /**
@@ -50,7 +50,7 @@ public class Task implements Serializable {
      */
     @Override
     public String toString() {
-        if (!done) {
+        if (!this.isDone) {
             return "[ ] " + this.title;
         } else {
             return "[X] " + this.title;
