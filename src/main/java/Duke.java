@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -70,6 +73,7 @@ public class Duke {
         noOfTasks++;
         System.out.printf("Got it. I've added this task:%n  %s%nNow you have %d tasks in the list.%n",
                 task, noOfTasks);
+        updateTasksInFile();
     }
 
     /**
@@ -99,6 +103,7 @@ public class Duke {
             Task task = taskList.get(taskNo - 1);
             task.markAsDone();
             System.out.printf("Nice! I've marked this task as done:%n  %s%n", task);
+            updateTasksInFile();
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             // When non numeric or out of bounds task number is inputted.
             throw new InvalidTaskNumException();
@@ -124,6 +129,7 @@ public class Duke {
             noOfTasks--;
             System.out.printf("Noted. I've removed this task:%n  %s%nNow you have %d tasks in the list.%n", task,
                     noOfTasks);
+            updateTasksInFile();
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             // When non numeric or out of bounds task number is inputted.
             throw new InvalidTaskNumException();
@@ -185,6 +191,31 @@ public class Duke {
         }
         String dayTime = splitByAt[1];
         return new Event(description, dayTime);
+    }
+
+    /**
+     * Updates tasks in file.
+     */
+    public static void updateTasksInFile() {
+        try {
+            File file = new File("./data/duke.txt");
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+            FileWriter writer = new FileWriter("./data/duke.txt");
+            StringBuilder tasks = new StringBuilder();
+            for (int i = 0; i < taskList.size(); i++) {
+                tasks.append(String.format("%d. %s", i + 1, taskList.get(i)));
+                if (i != taskList.size() - 1) {
+                    tasks.append(String.format("%n"));
+                }
+            }
+            writer.write(tasks.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
