@@ -1,5 +1,9 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     private final String BORDER = "\t_________________________________________________\n";
@@ -25,9 +29,9 @@ public class Duke {
      * Gets commands from enum.
      * @param input The user input.
      * @return A command corresponding to the enum.
-     * @throws UnknownCommandException Invalid command.
+     * @throws DukeException Invalid command.
      */
-    private Commands getCommand(String input) throws UnknownCommandException {
+    private Commands getCommand(String input) throws DukeException {
         try {
             return Commands.valueOf(input.toUpperCase());
         } catch (IllegalArgumentException error) {
@@ -70,9 +74,9 @@ public class Duke {
     /**
      * Prints the list of tasks.
      *
-     * @throws EmptyListException List has no tasks.
+     * @throws DukeException List has no tasks.
      */
-    private void printTasks() throws EmptyListException {
+    private void printTasks() throws DukeException {
         if (tasks.size() == 0) {
             throw new EmptyListException();
         }
@@ -98,10 +102,9 @@ public class Duke {
      * Marks a task as completed.
      *
      * @param taskNum The task number.
-     * @throws TaskNotFoundException Invalid task number.
-     * @throws InvalidTaskException  Task has invalid description.
+     * @throws DukeException Invalid task number or task has invalid description.
      */
-    private void finishTask(String taskNum) throws TaskNotFoundException, InvalidTaskException {
+    private void finishTask(String taskNum) throws DukeException {
         int i = Integer.parseInt(taskNum);
         if (i <= 0 || i > this.tasks.size()) {
             throw new TaskNotFoundException();
@@ -116,18 +119,26 @@ public class Duke {
      * Adds an event to the list of tasks.
      *
      * @param commands the event with a specific time.
-     * @throws InvalidTaskException Task has invalid description.
+     * @throws DukeException Task has invalid description.
      */
-    private void addEvent(String[] commands) throws InvalidTaskException {
+    private void addEvent(String[] commands) throws DukeException {
+        LocalDateTime dateTime;
         if (commands.length < 2) {
             throw new InvalidTaskException();
         }
-
         String[] taskCommands = commands[1].split("/at");
         if (taskCommands.length < 2) {
             throw new InvalidTaskException();
         }
-        Task newTask = new Event(taskCommands[0].trim(), taskCommands[1].trim());
+
+        taskCommands = Arrays.stream(taskCommands).map(String::trim).toArray(String[]::new);
+        try {
+            dateTime = LocalDateTime.parse(taskCommands[1], DateTimeFormatter.ofPattern("d/M/yy Hmm"));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
+
+        Task newTask = new Event(taskCommands[0], dateTime);
         addTask(newTask);
     }
 
@@ -135,18 +146,26 @@ public class Duke {
      * Adds a deadline to the list of tasks.
      *
      * @param commands the deadline with a specific time.
-     * @throws InvalidTaskException Task has invalid description.
+     * @throws DukeException Task has invalid description.
      */
-    private void addDeadline(String[] commands) throws InvalidTaskException {
+    private void addDeadline(String[] commands) throws DukeException {
+        LocalDateTime dateTime;
         if (commands.length < 2) {
             throw new InvalidTaskException();
         }
-
         String[] taskCommands = commands[1].split("/by");
         if (taskCommands.length < 2) {
             throw new InvalidTaskException();
         }
-        Task newTask = new Deadline(taskCommands[0].trim(), taskCommands[1].trim());
+
+        taskCommands = Arrays.stream(taskCommands).map(String::trim).toArray(String[]::new);
+        try {
+            dateTime = LocalDateTime.parse(taskCommands[1], DateTimeFormatter.ofPattern("d/M/yy Hmm"));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
+
+        Task newTask = new Deadline(taskCommands[0], dateTime);
         addTask(newTask);
     }
 
@@ -154,6 +173,7 @@ public class Duke {
      * Adds a todo to the list of tasks.
      *
      * @param commands the todo with a specific time.
+     * @throws DukeException Task is invalid.
      */
     private void addTodo(String[] commands) throws InvalidTaskException {
         if (commands.length < 2) {
@@ -183,43 +203,44 @@ public class Duke {
                 // Takes in 2 commands
                 String[] commands = input.split("\\s", 2);
                 switch (this.getCommand(commands[0])) {
-                    case DONE:
-                        if (commands.length < 2) {
-                            throw new InvalidTaskException();
-                        }
-                        finishTask(commands[1]);
-                        break;
-                    case LIST:
-                        printTasks();
-                        break;
-                    case EVENT:
-                        addEvent(commands);
-                        break;
-                    case DEADLINE:
-                        addDeadline(commands);
-                        break;
-                    case TODO:
-                        addTodo(commands);
-                        break;
-                    case DELETE:
-                        if (commands.length < 2) {
-                            throw new InvalidTaskException();
-                        }
-                        deleteTask(commands[1]);
-                        break;
-                    case BYE:
-                        goodbye();
-                        // Close scanner
-                        running = false;
-                        break;
-                    default:
-                        throw new UnknownCommandException();
-                }
+                case DONE:
+                    if (commands.length < 2) {
+                        throw new InvalidTaskException();
+                    }
+                    finishTask(commands[1]);
+                    break;
+                case LIST:
+                    printTasks();
+                    break;
+                case EVENT:
+                    addEvent(commands);
+                    break;
+                case DEADLINE:
+                    addDeadline(commands);
+                    break;
+                case TODO:
+                    addTodo(commands);
+                    break;
+                case DELETE:
+                    if (commands.length < 2) {
+                        throw new InvalidTaskException();
+                    }
+                    deleteTask(commands[1]);
+                    break;
+                case BYE:
+                    goodbye();
+                    // Close scanner
+                    running = false;
+                    break;
+                default:
+                    throw new UnknownCommandException();
+            }
             } catch (DukeException e) {
                 print(e.getMessage());
             }
         }
     }
+
 
     public void run() {
         // Greet user

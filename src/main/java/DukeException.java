@@ -27,3 +27,9 @@ class TaskNotFoundException extends DukeException {
         super("Invalid task number, please try again.");
     }
 }
+
+class InvalidDateException extends DukeException {
+    public InvalidDateException() {
+        super("Invalid date format, should be [dd/MM/yy] [HHmm]");
+    }
+}

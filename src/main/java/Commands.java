@@ -5,5 +5,5 @@ public enum Commands {
     LIST,
     DONE,
     DELETE,
-    BYE;
+    BYE
 }

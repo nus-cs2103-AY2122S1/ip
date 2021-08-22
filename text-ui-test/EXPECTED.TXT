@@ -2,38 +2,60 @@
 	Hi, my name is Nee ´･ᴗ･`. How can I help you?
 	_________________________________________________
 	_________________________________________________
+	Nee's list is empty! Add some tasks?
+	_________________________________________________
+	_________________________________________________
 	Nee added this task:
-	  [E][ ] tp meeting (at: Mon 2-4pm)
+	  [D][ ] do ip (by: Oct 12 2021, 7:12 PM)
 	Nee has 1 task in the list.
 	_________________________________________________
 	_________________________________________________
-	Nee added this task:
-	  [D][ ] do homework (by: no idea :-p)
-	Nee has 2 tasks in the list.
+	Invalid date format, should be [dd/MM/yy] [HHmm]
 	_________________________________________________
 	_________________________________________________
 	Nee added this task:
 	  [T][ ] get coffee
+	Nee has 2 tasks in the list.
+	_________________________________________________
+	_________________________________________________
+	Here's your tasks!
+	1.	[D][ ] do ip (by: Oct 12 2021, 7:12 PM)
+	2.	[T][ ] get coffee
+	_________________________________________________
+	_________________________________________________
+	Nice! (ᵔ.ᵔ) Task done:
+	  [D][X] do ip (by: Oct 12 2021, 7:12 PM)
+	_________________________________________________
+	_________________________________________________
+	Nice! (ᵔ.ᵔ) Task done:
+	  [T][X] get coffee
+	_________________________________________________
+	_________________________________________________
+	Nee doesn't understand your command!
+	_________________________________________________
+	_________________________________________________
+	Nee added this task:
+	  [E][ ] tp meeting (at: Oct 10 2020, 1:13 PM)
 	Nee has 3 tasks in the list.
 	_________________________________________________
 	_________________________________________________
 	Here's your tasks!
-	1.	[E][ ] tp meeting (at: Mon 2-4pm)
-	2.	[D][ ] do homework (by: no idea :-p)
-	3.	[T][ ] get coffee
+	1.	[D][X] do ip (by: Oct 12 2021, 7:12 PM)
+	2.	[T][X] get coffee
+	3.	[E][ ] tp meeting (at: Oct 10 2020, 1:13 PM)
 	_________________________________________________
 	_________________________________________________
-	Nice! (ᵔ.ᵔ) Task done:
-	  [E][X] tp meeting (at: Mon 2-4pm)
+	Nee has deleted this task:
+	  [E][ ] tp meeting (at: Oct 10 2020, 1:13 PM)
+	Nee has 2 tasks in the list.
 	_________________________________________________
 	_________________________________________________
-	Nice! (ᵔ.ᵔ) Task done:
-	  [D][X] do homework (by: no idea :-p)
+	Invalid task number, please try again.
 	_________________________________________________
 	_________________________________________________
-	Nee added this task:
-	  [E][ ] tp meeting (at: Sun 2-4pm)
-	Nee has 4 tasks in the list.
+	Here's your tasks!
+	1.	[D][X] do ip (by: Oct 12 2021, 7:12 PM)
+	2.	[T][X] get coffee
 	_________________________________________________
 	_________________________________________________
 	Goodbye!~
