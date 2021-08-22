@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Save{
+public class Storage {
     File file;
     String filePath;
 
-    Save(String filePath){
+    Storage(String filePath){
         this.filePath = filePath;
         file = new File(filePath);
         if(!file.exists()){
@@ -24,7 +24,7 @@ public class Save{
         }
     }
 
-    public void writeToFile(String filePath,ArrayList<Task> list){
+    public void writeToFile(String filePath,TaskList list){
         try{
             String text = "";
             FileWriter fw = new FileWriter(filePath);
