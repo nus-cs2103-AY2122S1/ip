@@ -7,6 +7,10 @@ public class TaskList {
         this.taskList = new ArrayList<Task>();
     }
 
+    public TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList; 
+    }
+    
     public void add(Task newTask) {
         taskList.add(newTask);
         System.out.println("Just added:\n" + newTask.toString());
