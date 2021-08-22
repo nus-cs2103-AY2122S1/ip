@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -112,10 +115,10 @@ public class Duke {
             System.out.print(count + ". ");
             if (t instanceof Deadline) {
                 Deadline d = (Deadline) t;
-                System.out.println(d);
+                System.out.println(d.formatString());
             } else if (t instanceof Event) {
                 Event e = (Event) t;
-                System.out.println(e);
+                System.out.println(e.formatString());
             } else if (t instanceof ToDo) {
                 ToDo td = (ToDo) t;
                 System.out.println(td);
@@ -190,11 +193,12 @@ public class Duke {
         }
         try {
             String description = des.substring(9, des.indexOf('/') - 1);
-            String date = des.substring(des.indexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
-            Deadline atHand = new Deadline(description, date);
+            LocalDate date = extractDate(des);
+            LocalTime time = extractTimeDeadline(des);
+            Deadline atHand = new Deadline(description, date, time);
             taskList.add(atHand);
             System.out.println("Sure. The following task has been added: ");
-            System.out.println(atHand);
+            System.out.println(atHand.formatString());
             this.numberOfTasks();
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("\"deadline\" command not correctly formatted");
@@ -218,11 +222,12 @@ public class Duke {
         }
         try {
             String description = des.substring(6, des.indexOf('/') - 1);
-            String timeframe = des.substring(des.indexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
-            Event atHand = new Event(description, timeframe);
+            LocalDate date = extractDate(des);
+            ArrayList<LocalTime> startEnd = extractTimeEvent(des);
+            Event atHand = new Event(description, date, startEnd.get(0), startEnd.get(1));
             taskList.add(atHand);
             System.out.println("Sure. The following task has been added: ");
-            System.out.println(atHand);
+            System.out.println(atHand.formatString());
             this.numberOfTasks();
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("\"event\" command not correctly formatted");
@@ -257,35 +262,35 @@ public class Duke {
      * command should be called.
      */
     private String checkForKeyword(String des) {
-            if (des.equals("allCmd")) {
-                return "allCmd";
-            } else if (des.equals("bye")) {
-                return "bye";
-            } else if (des.equals("list")) {
-                return "list";
-            } else if (des.contains("done") && des.startsWith("done")) {
-                try {
-                    String sNum = des.substring(des.indexOf(' ') + 1);
-                    Integer.parseInt(sNum);
-                    return "done";
-                } catch (NumberFormatException e) {
-                    return null;
-                }
-            } else if (des.contains("delete") && des.startsWith("delete")) {
-                try {
-                    String sNum = des.substring(des.indexOf(' ') + 1);
-                    Integer.parseInt(sNum);
-                    return "delete";
-                } catch (NumberFormatException e) {
-                    return null;
-                }
-            } else if (des.contains("deadline") && des.startsWith("deadline")) {
-                return "deadline";
-            } else if (des.contains("event") && des.startsWith("event")) {
-                return "event";
-            } else if (des.contains("todo") && des.startsWith("todo")) {
-                return "todo";
+        if (des.equals("allCmd")) {
+            return "allCmd";
+        } else if (des.equals("bye")) {
+            return "bye";
+        } else if (des.equals("list")) {
+            return "list";
+        } else if (des.contains("done") && des.startsWith("done")) {
+            try {
+                String sNum = des.substring(des.indexOf(' ') + 1);
+                Integer.parseInt(sNum);
+                return "done";
+            } catch (NumberFormatException e) {
+                return null;
             }
+        } else if (des.contains("delete") && des.startsWith("delete")) {
+            try {
+                String sNum = des.substring(des.indexOf(' ') + 1);
+                Integer.parseInt(sNum);
+                return "delete";
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        } else if (des.contains("deadline") && des.startsWith("deadline")) {
+            return "deadline";
+        } else if (des.contains("event") && des.startsWith("event")) {
+            return "event";
+        } else if (des.contains("todo") && des.startsWith("todo")) {
+            return "todo";
+        }
         return null;
     }
 
@@ -355,5 +360,38 @@ public class Duke {
         System.out.println("               - Deletes the corresponding task");
         System.out.println();
 
+    }
+
+    public LocalDate extractDate(String des) throws DukeException {
+        try {
+            int startIndex = des.indexOf('/') + 4;
+            int endIndex = startIndex + 10;
+            return LocalDate.parse(des.substring(startIndex, endIndex));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Date not properly formatted");
+        }
+    }
+
+    public LocalTime extractTimeDeadline(String des) throws DukeException {
+        try {
+            String time = des.substring(des.lastIndexOf('-') + 4, des.lastIndexOf('-') + 9);
+            return LocalTime.parse(time);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Date not properly formatted");
+        }
+    }
+
+    public ArrayList<LocalTime> extractTimeEvent(String des) throws DukeException {
+        try {
+            String time = des.substring(des.lastIndexOf('-') + 4, des.lastIndexOf('-') + 15);
+            String firstTime = time.substring(0, 5);
+            String secondTime = time.substring(6);
+            ArrayList<LocalTime> result = new ArrayList<>();
+            result.add(LocalTime.parse(firstTime));
+            result.add(LocalTime.parse(secondTime));
+            return result;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Time not properly formatted");
+        }
     }
 }
