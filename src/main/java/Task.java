@@ -33,7 +33,7 @@ public class Task {
      * @return The data of the task written in a standard format.
      */
     public String toDataString() {
-        return String.format(" | %d | %s | ", this.isDone ? 1 : 0, this.description);
+        return String.format("| %d | %s |", this.isDone ? 1 : 0, this.description);
     }
 
     public String toString() {
