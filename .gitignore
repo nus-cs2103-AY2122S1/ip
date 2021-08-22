@@ -19,4 +19,4 @@ src/main/resources/docs/
 bin/
 
 /text-ui-test/ACTUAL*
-/data
+**/data/
