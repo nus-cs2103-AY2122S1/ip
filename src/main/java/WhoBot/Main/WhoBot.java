@@ -1,10 +1,10 @@
-package WhoBot;
+package WhoBot.Main;
 
 import java.io.File;
 import java.util.*;
-import Utils.Storage;
-import Utils.Parser;
-import Utils.TaskList;
+import WhoBot.Utils.Storage;
+import WhoBot.Utils.Parser;
+import WhoBot.Utils.TaskList;
 
 public class WhoBot {
 

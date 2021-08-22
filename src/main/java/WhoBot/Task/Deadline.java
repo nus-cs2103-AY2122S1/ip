@@ -1,6 +1,6 @@
-package Task;
+package WhoBot.Task;
 
-import WhoBot.WhoBotException;
+import WhoBot.Main.WhoBotException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

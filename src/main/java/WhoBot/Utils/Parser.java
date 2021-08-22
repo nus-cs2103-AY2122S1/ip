@@ -1,7 +1,7 @@
-package Utils;
+package WhoBot.Utils;
 
-import WhoBot.WhoBotException;
-import WhoBot.UI;
+import WhoBot.Main.WhoBotException;
+import WhoBot.Main.UI;
 
 import java.util.Locale;
 

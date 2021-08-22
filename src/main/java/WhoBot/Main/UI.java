@@ -1,4 +1,4 @@
-package WhoBot;
+package WhoBot.Main;
 
 import java.util.Scanner;
 

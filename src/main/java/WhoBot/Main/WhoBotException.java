@@ -1,4 +1,4 @@
-package WhoBot;
+package WhoBot.Main;
 
 public class WhoBotException extends Exception{
 

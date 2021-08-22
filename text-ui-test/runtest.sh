@@ -19,7 +19,7 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-find ../src/main/java/*/*.java > sources.txt
+find ../src/main/java/WhoBot/*/*.java > sources.txt
 
 if ! javac -cp ../src/main/java -Xlint:none -d ../bin @sources.txt
 then

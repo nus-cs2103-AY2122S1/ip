@@ -1,6 +1,6 @@
-package Utils;
+package WhoBot.Utils;
 
-import WhoBot.UI;
+import WhoBot.Main.UI;
 
 import java.util.Arrays;
 import java.util.List;

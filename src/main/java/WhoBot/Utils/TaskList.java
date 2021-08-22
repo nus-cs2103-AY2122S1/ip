@@ -1,11 +1,11 @@
-package Utils;
+package WhoBot.Utils;
 
-import WhoBot.WhoBotException;
-import WhoBot.UI;
-import Task.Task;
-import Task.Event;
-import Task.Deadline;
-import Task.Todo;
+import WhoBot.Main.WhoBotException;
+import WhoBot.Main.UI;
+import WhoBot.Task.Task;
+import WhoBot.Task.Event;
+import WhoBot.Task.Deadline;
+import WhoBot.Task.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

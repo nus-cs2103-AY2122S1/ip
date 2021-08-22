@@ -1,10 +1,10 @@
-package Utils;
+package WhoBot.Utils;
 
-import WhoBot.WhoBotException;
-import Task.Deadline;
-import Task.Event;
-import Task.Task;
-import Task.Todo;
+import WhoBot.Main.WhoBotException;
+import WhoBot.Task.Deadline;
+import WhoBot.Task.Event;
+import WhoBot.Task.Task;
+import WhoBot.Task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

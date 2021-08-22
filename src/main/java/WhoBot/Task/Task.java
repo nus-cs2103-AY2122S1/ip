@@ -1,4 +1,4 @@
-package Task;
+package WhoBot.Task;
 
 public class Task implements Comparable<Task> {
 
