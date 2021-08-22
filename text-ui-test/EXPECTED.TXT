@@ -4,6 +4,7 @@
 | |_| | |_| | | |
 |____/ \__,_|_|_|
 
+Loaded Files.
 Hello! I'm Duii, your personal assistant!
 What do you need help with?
 
