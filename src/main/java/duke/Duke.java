@@ -11,7 +11,7 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = storage.load();
@@ -24,7 +24,7 @@ public class Duke {
         new Duke(PATH).run();
     }
 
-    public void run() {
+    private void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {

@@ -13,12 +13,12 @@ import java.time.LocalDate;
 public class Storage {
     private String path;
 
-    public Storage(String path) {
+    protected Storage(String path) {
         this.path = path;
     }
 
 
-    public TaskList load() {
+    protected TaskList load() {
         TaskList tasks = new TaskList();
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));

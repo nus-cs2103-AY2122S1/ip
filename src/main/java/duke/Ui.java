@@ -6,15 +6,15 @@ import java.util.Scanner;
 
 public class Ui {
     private Scanner inputReader;
-    public Ui() {
+    protected Ui() {
         super();
         inputReader = new Scanner(System.in);
     }
-    public String readCommand() {
+    protected String readCommand() {
         return inputReader.nextLine();
     }
 
-    public void showLoadingError(String error) {
+    protected void showLoadingError(String error) {
 //        System.out.println(error);
         System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
@@ -49,5 +49,4 @@ public class Ui {
                 + "____________________________________________________________";
         System.out.println(greeting);
     }
-
 }
