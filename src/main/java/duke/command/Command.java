@@ -8,9 +8,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 public abstract class Command {
-	public abstract void execute(TaskList tasks, UI ui, Storage storage) throws IOException;
+    public abstract void execute(TaskList tasks, UI ui, Storage storage) throws IOException;
 
-	public boolean isExit() {
-		return false;
-	}
+    public boolean isExit() {
+        return false;
+    }
 }

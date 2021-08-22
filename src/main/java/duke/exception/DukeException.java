@@ -3,12 +3,12 @@ package duke.exception;
 import java.util.*;
 
 public abstract class DukeException extends IllegalArgumentException {
-	public DukeException(String message) {
-		super("Duke has encountered an problem: " + message);
-	}
+    public DukeException(String message) {
+        super("Duke has encountered an problem: " + message);
+    }
 
-	/* Future messages may require more lines to passed to outputhandler */
-	public List<String> getHelpMessages() {
-		return new ArrayList<>();
-	}
+    /* Future messages may require more lines to passed to outputhandler */
+    public List<String> getHelpMessages() {
+        return new ArrayList<>();
+    }
 }
