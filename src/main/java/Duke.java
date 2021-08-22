@@ -1,3 +1,11 @@
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -123,11 +131,13 @@ public class Duke {
             tasks.add(new Todo(s));
         } else {
             String description = s.substring(0, s.indexOf("/"));
-            String time = s.substring(s.indexOf("/") + 4, s.length());
+            String dateAndtime = s.substring(s.indexOf("/") + 4, s.length());
+            LocalDate date = LocalDate.parse(dateAndtime, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
             if (type == taskType.DEADLINE) {
-                tasks.add(new Deadline(description, time));
+                tasks.add(new Deadline(description, date));
             } else {
-                tasks.add(new Event(description, time));
+                tasks.add(new Event(description, date));
             }
         }
     }
@@ -194,7 +204,7 @@ public class Duke {
     /**
      * A method that allows Duke to read the input command and react.
      *
-     * @throws Exception Task number larger than total number of tasks.
+     * @throws Exception task.Task number larger than total number of tasks.
      */
     public void chat() throws taskNumberOutOfBoundException{
         Scanner sc = new Scanner(System.in);
