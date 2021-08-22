@@ -1,26 +1,79 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
-
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
     private static StorageList sl = new StorageList();
+    private static File file;
 
     public static void main(String[] args) throws DukeException {
-        
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello I am\n" + logo);
 
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        result();
+
+        try{
+            file = new File("data/duketest.txt");
+            if(!file.exists()) {
+                throw new FileNotFoundException();
+            } else {
+                System.out.println("I have received your file! Added tasks!\n");
+                Scanner sc = new Scanner(file);
+                readFile(sc);
+                result();
+            }
+
+        }catch (FileNotFoundException e) {
+            System.out.println("I am unable to find your file. " +
+                    "Check that your 'duketest' file exists," +
+                    " or that your 'data' folder exists.");
+        }
+
     }
+
+    private static void readFile(Scanner sc) {
+        while(sc.hasNext()){
+            String input = sc.nextLine();
+
+            char type = input.charAt(0);
+            int doneState = Integer.parseInt(input.substring(4,5));
+            if(type == 'T'){
+                String taskDesc = input.substring(8);
+                ToDos todo = new ToDos(taskDesc);
+                if(doneState == 1){
+                    todo.markAsDone();
+                }
+                sl.add(todo);
+            } else {
+                int thirdBarIdx = input.indexOf('|', 7);
+                String taskDesc = input.substring(8, thirdBarIdx-1);
+                String taskTime = input.substring(thirdBarIdx+2);
+                if(type == 'D'){
+                    Deadlines dl = new Deadlines(taskDesc, taskTime);
+                    if(doneState == 1){
+                        dl.markAsDone();
+                    }
+                    sl.add(dl);
+                } else if(type == 'E'){
+                    Events event = new Events(taskDesc, taskTime);
+                    if(doneState == 1){
+                        event.markAsDone();
+                    }
+                    sl.add(event);
+                }
+            }
+        }
+    }
+
 
     private static void result() throws DukeException {
         Scanner sc = new Scanner(System.in);
-
         while(sc.hasNext()){
             String input = sc.nextLine();
 
@@ -62,6 +115,7 @@ public class Duke {
                     String desc = task.getDescription();
                     switch(desc){
                         case "bye":
+                            save();
                             System.out.println("    Bye. Hope to see you again soon!");
                             return;
                         case "list":
@@ -71,12 +125,43 @@ public class Duke {
                             throw new DukeException("   ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
-            }catch(DukeException e){
+            } catch(DukeException e){
                 System.out.println(e.getMessage());
+            } catch(IOException e){
+                System.out.println("Something went wrong!");
+            }
+        }
+
+    }
+
+    private static void save() throws IOException{
+        FileWriter fw = new FileWriter("data/duketest.txt");
+        String textToAdd = "";
+        for(int i = 0; i < sl.size(); i++){
+            Task task = sl.get(i);
+            String taskType = "";
+            String status = task.isDone() ? "1 " : "0 ";
+            String taskDesc = task.getDescription();
+            String taskTime = "";
+            if(task instanceof ToDos){
+                taskType = "T ";
+                textToAdd += taskType + "| " + status + "| " + taskDesc + "\n";
+            } else {
+                if(task instanceof Deadlines){
+                    taskType = "D ";
+                    taskTime = ((Deadlines) task).getBy();
+                } else if(task instanceof Events){
+                    taskType = "E ";
+                    taskTime = ((Events) task).getAt();
+                }
+                textToAdd += taskType + "| " + status + "| " + taskDesc
+                        + " | " + taskTime + "\n";
             }
 
-
         }
+
+        fw.write(textToAdd);
+        fw.close();
 
     }
 
