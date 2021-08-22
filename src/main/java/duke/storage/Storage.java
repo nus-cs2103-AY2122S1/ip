@@ -24,7 +24,7 @@ public class Storage {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public void makeDir() {
-        File f = new File("data");
+        File f = new File("./data");
 //        boolean bool = f.mkdir();
 //        if(bool){
 //            System.out.println("Directory created successfully");
@@ -35,7 +35,7 @@ public class Storage {
 
     public void checkFile() {
         try {
-            File myObj = new File("data/duke.txt");
+            File myObj = new File("./data/duke.txt");
             myObj.createNewFile();
 //            if (myObj.createNewFile()) {
 //                System.out.println("File created: " + myObj.getName());
