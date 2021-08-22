@@ -115,6 +115,22 @@ public class Duke {
      * @param task The task to be removed.
      */
     public static void removeFromList(Task task) {
+        try {
+            List<String> lines = Files.readAllLines(Duke.data.toPath());
+            FileWriter fileWriter = new FileWriter(Duke.data);
+            int index = Duke.tasks.indexOf(task);
+            for (int i = 0; i < Duke.getNumOfTasks(); i++) { // remove this task from file.
+                if (i != index) {
+                    fileWriter.append(lines.get(i) + "\n");
+                }
+            }
+            fileWriter.close();
+        } catch (IOException ioException) {
+            Duke.readFile();
+            DukeException dukeException = new DukeException(
+                    "☹ OOPS!!! The file cannot be found. A new file has been created, please try again!");
+            System.out.println(dukeException);
+        }
         Duke.tasks.remove(task); // remove from task list.
     }
 
