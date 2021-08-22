@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
-    private final String BOT_NAME = "botto.Botto";
+    private final String BOT_NAME = "Botto";
     private final String INDENTATION = "    ";
 
     private Scanner scanner;
