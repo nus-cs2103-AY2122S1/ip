@@ -249,9 +249,9 @@ public class Duke {
 
                     Task event;
                     if (inputArr[1].trim().split("\\s+").length < 2) {      // no time given
-                        event = new Deadline(inputArr[0], parseDate(inputArr[1]));
+                        event = new Event(inputArr[0], parseDate(inputArr[1]));
                     } else {
-                        event = new Deadline(inputArr[0], parseDateTime(inputArr[1]));
+                        event = new Event(inputArr[0], parseDateTime(inputArr[1]));
                     }
 
                     taskList.add(event);
@@ -389,16 +389,16 @@ public class Duke {
                     new DateTimeFormatterBuilder()
                             .parseCaseInsensitive()
                             .parseLenient()
-                            .parseDefaulting(ChronoField.YEAR, 2021)
-                            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
                             .appendOptional(DateTimeFormatter.ofPattern("d/M/yyyy"))
                             .appendOptional(DateTimeFormatter.ofPattern("yyyy-M-d"))
                             .appendOptional(DateTimeFormatter.ofPattern("dMMMyyyy"))
+                            .parseDefaulting(ChronoField.YEAR_OF_ERA, 2021)
                             .appendOptional(DateTimeFormatter.ofPattern("d/M"))
                             .appendOptional(DateTimeFormatter.ofPattern("dMMM"))
                             .appendLiteral(" ")
                             .appendOptional(DateTimeFormatter.ofPattern("HHmm"))
                             .appendOptional(DateTimeFormatter.ofPattern("h.mma"))
+                            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
                             .appendOptional(DateTimeFormatter.ofPattern("ha"))
                             .toFormatter(Locale.ENGLISH));
         } catch (DateTimeParseException e) {
@@ -413,10 +413,10 @@ public class Duke {
                     new DateTimeFormatterBuilder()
                             .parseCaseInsensitive()
                             .parseLenient()
-                            .parseDefaulting(ChronoField.YEAR, 2021)
                             .appendOptional(DateTimeFormatter.ofPattern("d/M/yyyy"))
                             .appendOptional(DateTimeFormatter.ofPattern("yyyy-M-d"))
                             .appendOptional(DateTimeFormatter.ofPattern("dMMMyyyy"))
+                            .parseDefaulting(ChronoField.YEAR_OF_ERA, 2021)
                             .appendOptional(DateTimeFormatter.ofPattern("d/M"))
                             .appendOptional(DateTimeFormatter.ofPattern("dMMM"))
                             .toFormatter(Locale.ENGLISH));
