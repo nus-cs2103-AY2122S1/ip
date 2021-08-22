@@ -1,9 +1,20 @@
+import exceptions.DukeException;
+import exceptions.IllegalFormatException;
+import exceptions.NoSuchTaskException;
+import exceptions.UnknownTagException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     // list used to store text entered by user
     private ArrayList<Task> items = new ArrayList<>();
+
+    private final boolean DEFAULT_STATUS = false;
 
     // Lines used to indicate a block of message
     private final String HORIZONTAL_LINE_HEAD = "\t____________________________________________________________";
@@ -111,7 +122,7 @@ public class Duke {
      * @throws IllegalFormatException Wrong format used by user.
      */
     private void addEvent(String msg) throws IllegalFormatException{
-        Task newTask = new Event(getTaskDesc(msg), getTaskDates(msg));
+        Task newTask = new Event(getTaskDesc(msg), getTaskDates(msg), DEFAULT_STATUS);
         addTask(newTask);
     }
 
@@ -122,7 +133,7 @@ public class Duke {
      * @throws IllegalFormatException Wrong format used by user.
      */
     private void addDeadline(String msg) throws IllegalFormatException{
-        Task newTask = new Deadline(getTaskDesc(msg), getTaskDates(msg));
+        Task newTask = new Deadline(getTaskDesc(msg), getTaskDates(msg), DEFAULT_STATUS);
         addTask(newTask);
     }
 
@@ -133,7 +144,7 @@ public class Duke {
      * @throws IllegalFormatException Wrong format used by user.
      */
     private void addTodo(String msg) throws IllegalFormatException{
-        Task newTask = new Todo(getTodoDesc(msg));
+        Task newTask = new Todo(getTodoDesc(msg), DEFAULT_STATUS);
         addTask(newTask);
     }
 
@@ -218,7 +229,7 @@ public class Duke {
      * @return A String representing the description of the task.
      * @throws StringIndexOutOfBoundsException Wrong Format used by the user.
      */
-    private String getTodoDesc(String msg) throws IllegalFormatException{
+    private String getTodoDesc(String msg) throws IllegalFormatException {
         int position = msg.indexOf(" ");
 
         if (position >= msg.length() || position < 0) {
