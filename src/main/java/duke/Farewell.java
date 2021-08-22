@@ -2,6 +2,7 @@ package duke;
 
 /**
  *  This class handles the farewell when the user exits the program.
+ *  May handle more features in the future such as saving to hard drive
  *
  * @author Ryan Tian Jun.
  */

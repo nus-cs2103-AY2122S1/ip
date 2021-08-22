@@ -15,6 +15,13 @@ public class DeadLine extends Task {
     private String by;
     private LocalDate date;
 
+    /**
+     * This constructor handles the creation af a new Deadline Task.
+     *
+     * @param description Task description.
+     * @param type Task type: Deadline.
+     * @param by Deadline due date.
+     */
     public DeadLine(String description, Task.TYPE type, String by) {
         super(description, type);
         try {
@@ -26,16 +33,35 @@ public class DeadLine extends Task {
         }
     }
 
+    /**
+     * This constructor handles the Deadline Task read from the hard drive.
+     *
+     * @param type Task type: Deadline.
+     * @param isDone Whether the task has been done or not.
+     * @param description Task description.
+     * @param by Deadline due date.
+     */
     public DeadLine(Task.TYPE type, boolean isDone, String description, String by) {
         super(type, isDone, description);
         this.by = by;
     }
 
+    /**
+     * Returns the stored deadline.
+     *
+     * @return returns the stored Deadline of the task.
+     */
     @Override
     public String getTime() {
         return by;
     }
 
+    /**
+     * Returns the String representation of a Deadline
+     * as displayed in the list/mark done.
+     *
+     * @return returns the String representation of a Deadline.
+     */
     @Override
     public String toString() {
         return super.toString() + " (by: " + by + ")";

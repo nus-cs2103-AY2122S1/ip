@@ -35,10 +35,22 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the CommandType of the Command to the UI to handle
+     * and execute the Command.
+     *
+     * @return returns CommandType.
+     */
     public COMMAND getCommandType() {
         return commandType;
     }
 
+    /**
+     * Returns the TaskNumber of the Command (if the command requires it)
+     * Commands that require Task number: Delete, Done.
+     *
+     * @return returns Task number.
+     */
     public int getTaskNumber() {
         return taskNumber;
     }

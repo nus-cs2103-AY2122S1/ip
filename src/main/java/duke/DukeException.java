@@ -31,6 +31,13 @@ public class DukeException extends Exception {
         this.type = type;
     }
 
+    /**
+     * Returns the String representation of a DukeException.
+     * Contains some general exceptions applied to across the program.
+     * Error codes can be found above.
+     *
+     * @return returns the String representation of a DukeException.
+     */
     @Override
     public String toString() {
         if (type == 0) {

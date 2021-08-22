@@ -94,6 +94,13 @@ public class Task {
         return "";
     }
 
+    /**
+     * Returns String representation of a Task.
+     * Does not include timeline/deadlines, which are handled
+     * in the respective subclasses.
+     *
+     * @return String representation of a Task.
+     */
     @Override
     public String toString() {
         return getType() + getStatusIcon() + getDescription();

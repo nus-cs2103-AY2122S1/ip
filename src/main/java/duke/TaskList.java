@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  This class represnts the list of all tasks.
+ *  This class represents the list of all tasks.
  *  It also houses some list operations.
  *
  * @author Ryan Tian Jun.
@@ -16,14 +16,12 @@ public class TaskList {
 
     }
 
+    /**
+     * Adds a Task to the List.
+    */
     public void add(Task task) {
         taskList.add(task);
     }
-
-    public int size() {
-        return taskList.size();
-    }
-
 
     /**
      * Prints past commands.
@@ -112,6 +110,11 @@ public class TaskList {
         return "\n";
     }
 
+    /**
+     * Returns the size of the List.
+     *
+     * @return The String representation of the size of the list.
+     */
     @Override
     public String toString() {
         return Integer.toString(taskList.size());
