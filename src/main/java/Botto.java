@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -101,16 +103,17 @@ public class Botto {
             throw new DukeException("☹ OOPS!!! The description of " + task + " cannot be empty.");
         }
 
-        String[] array = description.split("/", 2);
+        String[] array = description.split(" /by ", 2);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
         Task task;
 
         try {
             task = type == TaskType.TODO ? new Todo(description)
-                    : type == TaskType.DEADLINE ? new Deadline(array[0].substring(0, array[0].length() - 1), array[1].substring(3))
-                    : new Event(array[0].substring(0, array[0].length() - 1), array[1].substring(3));
+                    : type == TaskType.DEADLINE ? new Deadline(array[0], LocalDateTime.parse(array[1], formatter))
+                    : new Event(array[0], LocalDateTime.parse(array[1], formatter));
         } catch (Exception e) {
             String message = "☹ OOPS!!! The command is in wrong format.\n" +
-                    indentation + "Please enter in this format: [deadline/event] [title] /[by/at] [date]";
+                    indentation + "Please enter in this format: [deadline/event] [title] /[by/at] [date]" + e.getMessage();
             throw new DukeException(message);
         }
 
