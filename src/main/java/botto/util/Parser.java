@@ -4,7 +4,7 @@ import botto.DukeException;
 import botto.command.*;
 
 public class Parser {
-    private final static String[] commands = {"list", "done", "todo", "deadline", "event", "delete", "bye"};
+    private final static String[] commands = {"list", "done", "todo", "deadline", "event", "delete", "bye", "find"};
 
 
     public static Command parse(String fullCommand) throws DukeException {
@@ -25,6 +25,8 @@ public class Parser {
             return new DeleteCommand(fullCommand);
         case "bye":
             return new ExitCommand();
+        case "find":
+            return new FindCommand(fullCommand);
         }
 
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

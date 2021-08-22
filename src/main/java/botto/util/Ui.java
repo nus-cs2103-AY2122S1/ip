@@ -33,8 +33,8 @@ public class Ui {
         showLine();
     }
 
-    public void showTasks(List<Task> list) {
-        System.out.println(INDENTATION + "Here are the tasks in your list:");
+    public void showTasks(List<Task> list, String header) {
+        System.out.println(INDENTATION + header);
         for(int i = 0; i < list.size(); i ++) {
             Task task = list.get(i);
             System.out.println(INDENTATION + (i + 1) + ". " + task);
