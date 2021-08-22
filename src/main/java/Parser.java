@@ -1,0 +1,84 @@
+public class Parser {
+    private String input; 
+    private String[] inputArr;
+    private String command; 
+
+    public Parser(String input) {
+        this.input = input; 
+        this.inputArr = input.split(" ");
+        this.command = inputArr[0]; 
+    }
+    
+    public boolean isEditingTask() {
+        return command.equals("done") || command.equals("delete"); 
+    }
+    
+    public boolean isAddingNewTask() {
+        return command.equals("todo") || command.equals("deadline") || command.equals("event");
+    }
+    
+    private String[] getAddTaskArgs() throws DukeException {
+        int inputLen = inputArr.length; 
+        if (inputLen == 1) {
+            throw new DukeException("OOPS!! The description of a " + command 
+                    + " cannot be empty :(");
+        }
+        
+        if (command.equals("todo")) {
+            String desc = "";
+            for (int i = 1; i < inputLen; i++) {
+                desc = desc + inputArr[i] + " ";
+            }
+            return new String[] {command, desc.strip()};
+        } else {
+            boolean hasByAt = false; 
+            String desc = ""; 
+            String time = ""; 
+            for (int i = 1; i < inputLen; i++) {
+               String curr = inputArr[i]; 
+               if (curr.equals("/by") || curr.equals("/at")) {
+                   hasByAt = true; 
+                   continue; 
+               }
+               if (hasByAt) {
+                   time += curr + " "; 
+               } else {
+                   desc += curr + " ";
+               }
+            }
+            if (desc.length() == 0 || time.length() == 0) {
+                throw new DukeException("Something is missing..." +
+                        "\nPlease specify the task in the correct format" +
+                        "\ni.e. deadline finish homework /by 2021-03-21"); 
+            } else if (!hasByAt) {
+                throw new DukeException("Make sure to specify the time after a '/by' or '/at'"); 
+            } else {
+                return new String[] {command, desc.strip(), time.strip()}; 
+            }
+        }
+    }
+    
+    public String[] parse() throws DukeException {
+        int inputLen = inputArr.length;
+        if (input.equals("bye") || input.equals("list")) {
+            return new String[] {command}; 
+        } else if (isEditingTask()) {
+            if (inputLen < 2) {
+                throw new DukeException("Please specify the index of the task to be edited" +
+                        "\n i.e. done 3"); 
+            } else {
+                try {
+                    int index = Integer.parseInt(inputArr[1]);
+                    return new String[] {command, inputArr[1]}; 
+                } catch (NumberFormatException e) {
+                    throw new DukeException("Task index should be a valid integer");   
+                }
+            }
+        } else if (isAddingNewTask()) {
+            System.out.println("adding");
+            return getAddTaskArgs();
+        } else {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :(");
+        }
+    }
+}
