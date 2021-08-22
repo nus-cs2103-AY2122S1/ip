@@ -1,4 +1,6 @@
+package duke;
 import java.util.Scanner;
+
 
 public class Ui {
     static Scanner userInput = new Scanner(System.in);
