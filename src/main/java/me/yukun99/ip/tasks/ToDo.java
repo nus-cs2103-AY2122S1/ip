@@ -12,6 +12,18 @@ public class ToDo extends Task {
 	}
 
 	@Override
+	public String saveString() {
+		String save = "T:";
+		if (this.done) {
+			save += "T:";
+		} else {
+			save += "F:";
+		}
+		save += this.name;
+		return save;
+	}
+
+	@Override
 	public String toString() {
 		return " [T]" + super.toString();
 	}

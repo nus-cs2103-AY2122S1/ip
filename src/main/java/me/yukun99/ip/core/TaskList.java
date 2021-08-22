@@ -95,6 +95,19 @@ public class TaskList {
 	}
 
 	/**
+	 * Gets the string representation of the TaskList to be saved into a file.
+	 *
+	 * @return String representation of the TaskList to be saved into a file.
+	 */
+	public String saveString() {
+		StringBuilder result = new StringBuilder();
+		for (Task task : taskList) {
+			result.append(task.saveString()).append(System.lineSeparator());
+		}
+		return result.toString();
+	}
+
+	/**
 	 * Gets the string representation of the TaskList.
 	 *
 	 * @return String representation of the TaskList.
