@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Task class represents a task that Duke keep tracks of and it contains the description and status of it.
  *
@@ -47,7 +49,7 @@ public class Task {
         return String.format("%s | %s", isDone ? "1" : "0", this.description);
     }
 
-    public boolean checkDate(String date) throws DukeException{
+    public boolean checkDate(LocalDate date) throws DukeException{
         return false;
     }
 }

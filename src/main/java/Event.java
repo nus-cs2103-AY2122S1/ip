@@ -30,52 +30,9 @@ public class Event extends Task{
         if (splitStartEnd.length != 2) {
             throw new DukeException("Missing Start/End Time @_@");
         }
-        this.date = parseDate(splitDateTime[0]);
-        this.startTime = parseTime(splitStartEnd[0]);
-        this.endTime = parseTime(splitStartEnd[1]);
-    }
-
-    private LocalDate parseDate(String date) throws DukeException {
-        try {
-            // Reuse regex from https://www.javacodeexamples.com/java-regular-expression-validate-date-example-regex/1504
-            String[] dateSplit;
-            if (date.matches("\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|[3][01])")) {
-                // for yyyy-mm-dd
-                return LocalDate.parse(date);
-            } else if (date.matches("(0[1-9]|[12][0-9]|[3][01])-(0[1-9]|1[012])-\\d{4}")) {
-                // for dd-mm-yyyy
-                dateSplit = date.split("-", 3);
-                return LocalDate.parse(String.format("%s-%s-%s", dateSplit[2], dateSplit[1], dateSplit[0]));
-            } else if (date.matches("(0[1-9]|[12][0-9]|[3][01])/(0[1-9]|1[012])/\\d{4}")) {
-                // for dd/mm/yyyy
-                dateSplit = date.split("/", 3);
-                return LocalDate.parse(String.format("%s-%s-%s", dateSplit[2], dateSplit[1], dateSplit[0]));
-            } else {
-                throw new DateTimeException("Invalid Date");
-            }
-        } catch (DateTimeException e) {
-            throw new DukeException("Invalid Date @_@\nDate formats: dd/mm/yyyy, dd-mm-yyyy, yyyy-mm-dd");
-        }
-    }
-
-    private LocalTime parseTime(String time) throws DukeException {
-        try {
-            // Reuse regex from https://www.geeksforgeeks.org/how-to-validate-time-in-24-hour-format-using-regular-expression/
-            if (time.length() == 4) {
-                String t = String.format("%s:%s", time.substring(0,2), time.substring(2,4));
-                if (t.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {
-                    return LocalTime.parse(t);
-                } else {
-                    throw new DateTimeException("Invalid Time");
-                }
-            } else if (time.length() == 5 && time.split(":",2).length == 2) {
-                return LocalTime.parse(time);
-            } else {
-                throw new DateTimeException("Invalid Time");
-            }
-        } catch (DateTimeException e) {
-            throw new DukeException("Invalid Time @_@\nEvent time format: HHmm-HHmm");
-        }
+        this.date = Parser.parseDate(splitDateTime[0]);
+        this.startTime = Parser.parseTime(splitStartEnd[0]);
+        this.endTime = Parser.parseTime(splitStartEnd[1]);
     }
 
     private String formatDateTime() {
@@ -85,8 +42,8 @@ public class Event extends Task{
     }
 
     @Override
-    public boolean checkDate(String date) throws DukeException {
-        return this.date.equals(this.parseDate(date));
+    public boolean checkDate(LocalDate date) throws DukeException {
+        return this.date.equals(date);
     }
 
     @Override
