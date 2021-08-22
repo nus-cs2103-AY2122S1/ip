@@ -25,4 +25,14 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";
     }
+
+    /**
+     * Converts the task to a string with the format of the file in hard disk.
+     *
+     * @return String representation of the task in the file's format.
+     */
+    @Override
+    public String toFileFormatString() {
+        return String.format("E / %s / %s / %s\n", this.isDone ? "1" : "0", this.description, this.at);
+    }
 }

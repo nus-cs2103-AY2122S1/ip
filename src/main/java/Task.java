@@ -43,4 +43,13 @@ public class Task {
         String status = this.getStatusIcon();
         return String.format("[%s] %s", status, this.description);
     }
+
+    /**
+     * Converts the task to a string with the format of the file in hard disk.
+     *
+     * @return String representation of the task in the file's format.
+     */
+    public String toFileFormatString() {
+        return String.format("%s / %s\n", this.isDone ? "1" : "0", this.description);
+    }
 }
