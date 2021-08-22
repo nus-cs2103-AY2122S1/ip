@@ -43,8 +43,9 @@ public class Ui {
                         + "\t\t- Deadline: To add a new deadline, type 'deadline' followed by the task " +
                         "description and specify the deadline using '/by <dateTime>'" + LINE_SEPARATOR
                         + "\t\t- Event: To add a new event, type 'event' followed by the event description "
-                        + "and specify the timing using '/by <dateTime>'" + LINE_SEPARATOR
+                        + "and specify the timing using '/at <dateTime>'" + LINE_SEPARATOR
                         + "\tTo see all your task currently, type 'list'." + LINE_SEPARATOR
+                        + "\tTo find task matching a certain keyword, type 'find <keyword>'." + LINE_SEPARATOR
                         + "\tTo delete a task, type 'delete' followed by the index of the task you wish to "
                         + "delete (e.g delete 2)." + LINE_SEPARATOR
                         + "\tYou can also mark tasks as done by typing 'done' followed by the index of the "

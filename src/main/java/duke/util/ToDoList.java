@@ -105,4 +105,23 @@ public class ToDoList {
         }
         return filteredList;
     }
+
+    /**
+     * Searches through the list and filters out tasks containing a keyword.
+     * Returns ArrayList of tasks containing the keyword.
+     *
+     * @param keyword Keyword to search the list with.
+     * @return ArrayList of tasks containing the keyword.
+     */
+    public ArrayList<Task> searchList(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+
+        for (Task t : list) {
+            if (t.toString().contains(keyword)) {
+                matchingTasks.add(t);
+            }
+        }
+
+        return matchingTasks;
+    }
 }
