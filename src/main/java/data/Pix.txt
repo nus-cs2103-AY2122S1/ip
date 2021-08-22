@@ -1,2 +1,2 @@
-T|0|borrow book
-D|0|idw|2020-01-01
+D|1|idw|2020-01-01
+T|0|idw
