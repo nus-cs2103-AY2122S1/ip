@@ -5,6 +5,8 @@ import side.tasks.Deadline;
 import side.tasks.Event;
 import side.tasks.Task;
 
+import java.util.ArrayList;
+
 /**
  * Ui encapsulates user interactions, handling user input logic and formats responses to print for user.
  *
@@ -180,6 +182,35 @@ public class Ui {
             throw new NoIndexException();
         } else {
             throw new TooManyIndexesException("delete");
+        }
+    }
+
+    private String convertFindList(ArrayList<Task> list) {
+        StringBuilder tasksList = new StringBuilder();
+
+        for (int i = 0; i < list.size(); i++) {
+            String fullTaskLine = (i + 1) + ". " + list.get(i).toString() + "\n";
+            tasksList.append(fullTaskLine);
+        }
+
+        return tasksList.toString();
+    }
+
+    public void handleFind(String input, TaskList taskList) {
+        if (input.split("\\s+").length == 1) {
+            throw new NoIndexException();
+        } else {
+            String matching = input.replaceFirst("find", "").trim();
+            StringBuilder listString = new StringBuilder();
+            listString.append("I found...\n");
+
+            if (taskList.findTasks(matching).size() == 0) {
+                listString.append("Nothing.");
+            } else {
+                listString.append(convertFindList(taskList.findTasks(matching)));
+            }
+
+            printResponse(listString.toString());
         }
     }
 }

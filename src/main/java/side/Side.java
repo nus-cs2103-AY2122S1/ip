@@ -65,6 +65,9 @@ public class Side {
                 case DELETE:
                     ui.handleDelete(userInput, tasks);
                     break;
+                case FIND:
+                    ui.handleFind(userInput, tasks);
+                    break;
                 default:
                     throw new UnknownCommandException();
                 }

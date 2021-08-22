@@ -10,7 +10,7 @@ public class Parser {
 
     public Parser() {}
 
-    public enum COMMAND { TODO, DEADLINE, EVENT, LIST, DONE, DELETE, INVALID }
+    public enum COMMAND { TODO, DEADLINE, EVENT, LIST, DONE, DELETE, INVALID, FIND }
 
     private static String findDatetime(String input, String argument) {
         int argumentIndex = input.lastIndexOf(argument);
@@ -106,6 +106,8 @@ public class Parser {
             return COMMAND.DONE;
         case "delete":
             return COMMAND.DELETE;
+        case "find":
+            return COMMAND.FIND;
         default:
             return COMMAND.INVALID;
         }
