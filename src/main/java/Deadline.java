@@ -10,4 +10,12 @@ public class Deadline extends Task {
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), deadline);
     }
+
+    public String getIdentifier() {
+        return "D";
+    }
+
+    public String getDetailsWithDelimiter(String delimiter) {
+        return String.format("%s%s%s", taskName, delimiter, deadline);
+    }
 }

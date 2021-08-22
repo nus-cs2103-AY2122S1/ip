@@ -1,18 +1,26 @@
-public class Task {
+public abstract class Task {
     protected String taskName;
-    protected boolean isDone;
+    protected boolean done;
 
     public Task(String taskName) {
-        isDone = false;
+        done = false;
         this.taskName = taskName;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", isDone ? "X" : " ", taskName);
+        return String.format("[%s] %s", done ? "X" : " ", taskName);
     }
 
     public void markDone() {
-        isDone = true;
+        done = true;
     }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public abstract String getIdentifier();
+
+    public abstract String getDetailsWithDelimiter(String delimiter);
 }

@@ -1,15 +1,29 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static String endWord = "bye";
+    public static String END_WORD = "bye";
+    public static String FILE_PATH = "data/";
 
     ArrayList<Task> storedList;
+    FileController fc;
 
     private Duke() {
         storedList = new ArrayList<>();
+        fc = new FileController(FILE_PATH, "list.txt");
+        String contents = fc.readContentsAsString();
+        contents.lines().forEach((line) -> {
+            Task savedTask = TaskUtils.stringToTask(line);
+            if (savedTask != null) {
+                storedList.add(savedTask);
+            } else {
+                System.out.println("Line " + line + " is not a task");
+            }
+        });
     }
+
 
     private void start() {
         System.out.println("Hello, what can I do for you.\n");
@@ -18,7 +32,7 @@ public class Duke {
         strArr = sc.nextLine().split(" ", 2);
         String inputFirst = strArr[0];
 
-        while(!inputFirst.equals(Duke.endWord)) {
+        while(!inputFirst.equals(Duke.END_WORD)) {
             try {
                 switch(inputFirst) {
                     case "list":
@@ -78,6 +92,7 @@ public class Duke {
 
     private void addTask(Task task) {
         storedList.add(task);
+        saveChanges();
         System.out.println("added: " + task);
         System.out.println(String.format("Now you have %d tasks\n", storedList.size()));
     }
@@ -85,6 +100,9 @@ public class Duke {
     private void printList() {
         for (int i = 0; i < storedList.size(); i++) {
             System.out.println(String.format("%d.%s", i + 1, storedList.get(i)));
+        }
+        if (storedList.size() == 0) {
+            System.out.println("\n");
         }
     }
 
@@ -103,12 +121,12 @@ public class Duke {
                 throw new InvalidOperationDukeException("Number is out of bounds");
             }
             storedList.get(index - 1).markDone();
+            saveChanges();
             System.out.println(String.format("Task %d is done", index));
             System.out.println(storedList.get(index - 1) + "\n");
         } catch (NumberFormatException e) {
             throw new WrongArgumentDukeException();
         }
-
     }
 
     private void delete(String indexStr) throws WrongArgumentDukeException, InvalidOperationDukeException {
@@ -118,12 +136,29 @@ public class Duke {
                 throw new InvalidOperationDukeException("Number is out of bounds");
             }
             Task task = storedList.remove(index - 1);
+            saveChanges();
             System.out.println(String.format("Removed task %d", index));
             System.out.println(task + "\n");
         } catch (NumberFormatException e) {
             throw new WrongArgumentDukeException();
         }
+    }
 
+    public void saveChanges() throws UnsavedChangesException {
+        StringBuilder sb = new StringBuilder();
+        boolean first = true;
+        for(Task task : storedList) {
+            if (first) {
+                first = false;
+            } else {
+                sb.append("\n");
+            }
+            sb.append(TaskUtils.taskToString(task));
+
+        }
+        if (!fc.writeText(sb.toString())) {
+            throw new UnsavedChangesException();
+        }
     }
 
 
