@@ -31,7 +31,7 @@ public class TaskList {
     public List<Task> search(String query) {
         List<Task> results = new ArrayList<>();
         for (Task task : taskList) {
-            if (task.description.contains(query)) {
+            if (task.getDescription().contains(query)) {
                 results.add(task);
             }
         }

@@ -7,9 +7,9 @@ package duke;
  * @author Ryan Tian Jun.
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
-    protected TYPE type;
+    private String description;
+    private boolean isDone;
+    private TYPE type;
 
     // ToDos, DeadLines, Events, Others(Placeholder)
     protected enum TYPE {
@@ -70,13 +70,35 @@ public class Task {
     }
 
 
-    // return task description
-    private String getDescription() {
+    /**
+     * Returns Task description.
+     *
+     * @return String representation of description.
+     */
+    public String getDescription() {
         return description;
     }
 
+    /**
+     * Returns if Task has been done.
+     *
+     * @return True, Task has been done, false otherwise.
+     */
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    /**
+     * Returns Task Type.
+     *
+     * @return Returns Type of the task.
+     */
+    public TYPE getType() {
+        return this.type;
+    }
+
     // return task type
-    private String getType() {
+    private String printType() {
         return "[" + type.toString() + "]";
     }
 
@@ -103,6 +125,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return getType() + getStatusIcon() + getDescription();
+        return printType() + getStatusIcon() + getDescription();
     }
 }

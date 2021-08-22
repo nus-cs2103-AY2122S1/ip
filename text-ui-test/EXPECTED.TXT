@@ -69,4 +69,13 @@ Unable to Delete: Task does not exist
 
 The Delete command requires a number, separated by whitespace!
 
+Here's what I found!:
+1.[T][ ] fly
+
+
+The Find command must be followed by a string!
+
+No matches found!
+The Find command requires a string, separated by whitespace!
+
 Bye. Thank You for using Duke!

@@ -20,4 +20,8 @@ delete -1
 delete adsad
 delete 7
 delete1
+find fly
+find
+find 2
+findasda
 bye

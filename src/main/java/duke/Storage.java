@@ -86,19 +86,19 @@ public class Storage {
      * @param task Task to be saved.
      */
     public static void writeTask(Task task) {
-        String type = task.type.toString();
-        String isDone = task.isDone ? "1" : "0";
+        String type = task.getType().toString();
+        String isDone = task.isDone() ? "1" : "0";
         String toSave = type + " | " + isDone + " | ";
 
-       if (task.type == Task.TYPE.T) {
-           String description = task.description;
+       if (task.getType() == Task.TYPE.T) {
+           String description = task.getDescription();
            toSave += description;
-       } else if (task.type == Task.TYPE.D) {
-           String description = task.description;
+       } else if (task.getType() == Task.TYPE.D) {
+           String description = task.getDescription();
            String by = task.getTime();
            toSave += description + " | " + by;
-       } else if (task.type == Task.TYPE.E) {
-           String description = task.description;
+       } else if (task.getType() == Task.TYPE.E) {
+           String description = task.getDescription();
            String at = task.getTime();
            toSave += description + " | " + at;
        } else {
