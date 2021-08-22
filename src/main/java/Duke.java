@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -104,6 +105,29 @@ public class Duke {
                     TextFile.writeToTextFile(taskList);
                     System.out.printf("Lollipop: %s has been added.%n", task.toString());
 
+                } else if (command.startsWith(("date"))) {
+                    String[] splitCommand = command.split(" ", 2);
+                    if (splitCommand.length == 1) {
+                        throw new DukeException("Please fill in a date");
+                    }
+
+                    LocalDate date = LocalDate.parse(splitCommand[1]);
+                    System.out.println("Lollipop: Here the tasks that occurs on the specified date.");
+                    int count = 1;
+                    for (Task task : taskList) {
+                        if (task instanceof Deadline) {
+                            LocalDate deadline = ((Deadline) task).getDeadline();
+                            if (deadline.equals(date)) {
+                                System.out.printf("%d. %s%n", count, task);
+                            }
+                        } else if (task instanceof Event) {
+                            LocalDate time = ((Event) task).getTime();
+                            if (time.equals(date)) {
+                                System.out.printf("%d. %s%n", count, task);
+                            }
+                        }
+                    }
+
                 } else {
                     throw new DukeException("I do not understand what that means :(");
                 }
@@ -115,6 +139,8 @@ public class Duke {
                 System.out.println("Lollipop: Please input a number.");
             } catch (FileNotFoundException e) {
                 System.out.println("Lollipop: ./data or ./data/task_list.txt is not found.");
+            } catch (DateTimeParseException e) {
+                System.out.println("Lollipop: Please specify a valid date format, such as YYYY-MM-DD");
             }
 
             System.out.println("");
