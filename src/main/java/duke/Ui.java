@@ -46,6 +46,9 @@ public class Ui {
             } else if (commandType == Parser.COMMAND.DELETE) {
                 int taskNumberDelete = parsedCommand.getTaskNumber();
                 commands.deleteTask(taskNumberDelete);
+            } else if (commandType == Parser.COMMAND.FIND){
+                String query = parsedCommand.getQuery();
+                commands.search(query);
             } else {
                 // Unknown Command, throw error
                 throw new DukeException("Error, Invalid Command");

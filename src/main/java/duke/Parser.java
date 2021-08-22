@@ -9,10 +9,11 @@ package duke;
 public class Parser {
     private String currentCommand;
     private int taskNumber;
+    private String query;
     private COMMAND commandType;
 
     protected enum COMMAND {
-        TODO, EVENT, DEADLINE, DELETE, DONE, LIST, OTHER
+        TODO, EVENT, DEADLINE, DELETE, DONE, LIST, FIND, OTHER
     }
 
     public Parser(String command) throws DukeException {
@@ -30,6 +31,8 @@ public class Parser {
             this.commandType = COMMAND.EVENT;
         } else if (isDelete(command)) {
             this.commandType = COMMAND.DELETE;
+        } else if (isFind(command)){
+            this.commandType = COMMAND.FIND;
         } else {
             this.commandType = COMMAND.OTHER;
         }
@@ -53,6 +56,10 @@ public class Parser {
      */
     public int getTaskNumber() {
         return taskNumber;
+    }
+
+    public String getQuery() {
+        return query;
     }
 
     // checks if command given is a list
@@ -166,6 +173,22 @@ public class Parser {
                 } else {
                     throw new DukeException("The Delete command requires a number, separated by whitespace!");
                 }
+            }
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isFind(String command) throws DukeException {
+        int commandLength = command.length();
+        if (commandLength >= 4 && command.startsWith("find")) {
+            if (commandLength == 4) {
+                throw new DukeException("The Find command must be followed by a string!");
+            } else if (command.charAt(4) != ' ') {
+                throw new DukeException("The Find command requires a string, separated by whitespace!");
+            } else {
+                query = command.substring(5).trim();
+                return true;
             }
         } else {
             return false;
