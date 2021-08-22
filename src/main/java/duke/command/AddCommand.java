@@ -14,8 +14,6 @@ public class AddCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(line);
         ui.showAdded();
-
-        super.execute(tasks, ui, storage);
     }
     @Override
     public boolean isExit() {
