@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * @author Chang-CH
  */
 public class TaskList {
+
     /**
      * Class constuctor.
      */
@@ -72,5 +73,20 @@ public class TaskList {
      */
     public void removeIndex(int index) {
         tasks.remove(index);
+    }
+
+    /**
+     * Finds all tasks with description matching the regex.
+     * @param regex Regex to match to.
+     * @return TaskList containing all matching tasks.
+     */
+    public TaskList findTasks(String regex) {
+        TaskList result = new TaskList();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(regex)) {
+                result.add(task);
+            }
+        }
+        return result;
     }
 }

@@ -60,4 +60,8 @@ public abstract class Task {
         }
         return indicator + "|" + this.description;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
 }
