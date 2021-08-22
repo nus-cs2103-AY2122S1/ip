@@ -9,6 +9,11 @@ public class Deadline extends Item {
     }
 
     @Override
+    public String getPickle() {
+        return super.getPickle() + "|" + this.time;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + time + ")";
     }

@@ -6,18 +6,30 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Duke {
-    static final String LOGO = " ____        _        \n"
+    private static final String LOGO = " ____        _        \n"
         + "|  _ \\ _   _| | _____ \n"
         + "| | | | | | | |/ / _ \\\n"
         + "| |_| | |_| |   <  __/\n"
         + "|____/ \\__,_|_|\\_\\___|\n";
-    LinkedList<Item> itemList = new LinkedList<>();
+    private LinkedList<Item> itemList = new LinkedList<>();
+    private Storage storage;
+
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke();
+    }
+
+    public Duke() {
+        this.storage = null;
+        try {
+            this.storage = new Storage("duke/data/duke.txt");
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
+        System.out.println("Hello from\n" + LOGO);
+        this.run();
     }
 
     public void run() {
-        System.out.println("Hello from\n" + LOGO);
         Scanner sc = new Scanner(System.in);
         boolean isExit = false;
         String currLine;
@@ -26,6 +38,7 @@ public class Duke {
                 currLine = sc.nextLine();
                 Command currCommand = Parser.parse(currLine);
                 currCommand.execute(this.itemList);
+                this.storage.saveState(this.itemList);
                 isExit = currCommand.isExit();
             } catch (DukeException e) {
                 System.out.println(styleResponse(e.toString()));

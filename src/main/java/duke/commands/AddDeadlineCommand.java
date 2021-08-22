@@ -22,7 +22,7 @@ public class AddDeadlineCommand extends Command {
             throw new DukeException("Message cannot be empty");
         }
 
-        this.content = line.substring(9, idx);
+        this.content = line.substring(9, idx - 1);
         this.time = line.substring(idx + 4);
     }
 

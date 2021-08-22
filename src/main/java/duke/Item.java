@@ -12,6 +12,14 @@ public abstract class Item {
         this.isDone = true;
     }
 
+    public String getDone() {
+        return (isDone ? "X" : "O");
+    }
+
+    public String getPickle() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
         return (isDone ? "[X] " : "[] ") + this.name;

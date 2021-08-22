@@ -9,6 +9,11 @@ public class Event extends Item {
     }
 
     @Override
+    public String getPickle() {
+        return super.getPickle() + "|" + this.time;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: " + time + ")";
     }
