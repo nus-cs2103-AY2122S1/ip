@@ -149,6 +149,11 @@ public class Ui {
         return "There is a missing space after " + userCommand + ".";
     }
 
+    public static String exceptionWrongDescriptor(Commands command, Descriptors descriptors) {
+        return "Wrong descriptor used. Descriptor for " + command.getCommand()
+                + " should be " + descriptors.getDescriptor() + ".";
+    }
+
     public static String exceptionMissingSpaceBeforeDescriptor(Descriptors descriptor) {
         return "There is a missing space before the descriptor " + descriptor.getDescriptor() + ".";
     }

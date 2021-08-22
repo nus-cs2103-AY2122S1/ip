@@ -131,12 +131,14 @@ public class Parser {
     }
 
     public static String[] parseUserDescriptionInput(String userDescription, Descriptors descriptor,
-                                                      Character separator, Commands command) throws DukeException {
+                                                      char separator, Commands command) throws DukeException {
         // Index of separator in userDescription.
         int separatorIdx = findIndex(userDescription, separator);
 
         // Index of space after descriptor
         int indexDescriptorSpace = separatorIdx + descriptor.getLength() + 1;
+
+        // Check if separator exists. Then check if there could be time input after descriptor.
         if ((separatorIdx == -1) || (userDescription.length() <= indexDescriptorSpace)) {
             throw new DukeException(Ui.exceptionMissingDescriptor(descriptor, command));
         }
@@ -147,13 +149,36 @@ public class Parser {
             throw new DukeException(Ui.exceptionMissingTaskDescription(command.getCommand()));
         }
 
-        // Check whether the front of separatorIdx is an empty space.
-        if (userDescription.charAt(separatorIdx - 1) != ' ') {
-            throw new DukeException(Ui.exceptionMissingSpaceBeforeDescriptor(descriptor));
-        }
-
         // Index of first character following space after descriptor.
         int indexAfterDescriptorSpace = separatorIdx + descriptor.getLength() + 2;
+
+        // Check if descriptor matches descriptor parameter.
+        String actualDescriptor = userDescription.substring(separatorIdx + 1, indexAfterDescriptorSpace - 1);
+        boolean isDescriptorIncorrect = false;
+        if (!actualDescriptor.equals(descriptor.getDescriptor())) {
+            isDescriptorIncorrect = true;
+        }
+
+        // Check whether the front of separatorIdx is an empty space.
+        boolean isNoSpaceBeforeSeparator = false;
+        if (userDescription.charAt(separatorIdx - 1) != ' ') {
+            isNoSpaceBeforeSeparator = true;
+        }
+
+        // If descriptor wrong and no space before separator, it is likely that user did not provide descriptor.
+        if (isDescriptorIncorrect && isNoSpaceBeforeSeparator) {
+            throw new DukeException(Ui.exceptionMissingDescriptor(descriptor, command));
+        }
+
+        // If only descriptor wrong, user gave wrong descriptor.
+        if (isDescriptorIncorrect) {
+            throw new DukeException(Ui.exceptionWrongDescriptor(command, descriptor));
+        }
+
+        // If only no space, user did not include space before separator.
+        if (isNoSpaceBeforeSeparator) {
+            throw new DukeException(Ui.exceptionMissingSpaceBeforeDescriptor(descriptor));
+        }
 
         // Check whether the back of descriptor is followed by a space.
         if (userDescription.charAt(indexAfterDescriptorSpace - 1) != ' ') {
