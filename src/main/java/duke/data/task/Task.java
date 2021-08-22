@@ -2,15 +2,25 @@ package duke.data.task;
 
 import duke.data.exception.EmptyDescriptionException;
 
+/**
+ * Encapsulates tasks
+ */
 public abstract class Task {
+    /** Description of task */
     protected String description;
+    /** Status of task */
     protected boolean isDone;
 
+    /**
+     * Converts content to formatted text to save into storage
+     * @return formatted text to save into storage
+     */
     public abstract String convertToData();
     
     /**
      * Constructor for Task
      * @param description the description of the task
+     * @throws EmptyDescriptionException if description is empty
      */
     public Task(String description) throws EmptyDescriptionException {
         if (description.isEmpty()) {
@@ -19,14 +29,19 @@ public abstract class Task {
         this.description = description;
         this.isDone = false;
     }
-    
+
+    /**
+     * Constructor for Task specifying isDone
+     * @param description the description of the task
+     * @param isDone the status of the task
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
 
     /**
-     * Return icon indicating status of this task
+     * Returns icon indicating status of this task
      * @return X if done, empty if otherwise
      */
     public String getStatusIcon() {
@@ -34,7 +49,7 @@ public abstract class Task {
     }
 
     /**
-     * Mark this task as done
+     * Marks this task as done
      */
     public void setDone() {
         this.isDone = true;

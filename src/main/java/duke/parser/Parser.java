@@ -10,10 +10,17 @@ import duke.data.exception.InvalidCommandException;
 public class Parser {
     public Parser() {}
 
+    /** All Possible commands */
     private enum Commands {
         LIST, TODO, DEADLINE, EVENT, DONE, DELETE, BYE
     }
-    
+
+    /**
+     * Converts user input into a Command
+     * @param fullCommand the user input
+     * @return the Command encapsulating the given user input
+     * @throws InvalidCommandException if command is invalid
+     */
     public static Command parse(String fullCommand) throws DukeException {
         //Extract command
         int i = fullCommand.indexOf(" ");

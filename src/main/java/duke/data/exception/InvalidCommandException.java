@@ -1,5 +1,8 @@
 package duke.data.exception;
 
+/**
+ * Describes exception caused by an invalid command
+ */
 public class InvalidCommandException extends DukeException{
     @Override
     public String toString() {

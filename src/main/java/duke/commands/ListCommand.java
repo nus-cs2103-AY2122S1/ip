@@ -4,6 +4,9 @@ import duke.data.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Encapsulates the List command's operations
+ */
 public class ListCommand extends Command {
     public ListCommand() {
         super();

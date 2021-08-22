@@ -5,7 +5,11 @@ import duke.data.task.Task;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Encapsulates the add command's operations
+ */
 public class AddCommand extends Command {
+    /** Task to add */
     private Task t;
 
     /**

@@ -8,12 +8,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates the Deadline task
+ */
 public class Deadline extends Task {
+    /** The deadline of the task */
     protected LocalDateTime by;
 
     /**
      * Constructor for Deadline
      * @param input the input array consisting of description and date/time
+     * @throws EmptyTimeException if time is empty 
+     * @throws InvalidTimeException if time is not in correct format
      */
     public Deadline(String[] input) throws DukeException {
         super(input[0]);
@@ -26,7 +32,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor for Deadline
+     * Constructor for Deadline specifying isDone
      * @param input the input array consisting of description and date/time from saved data
      * @param isDone deadline's status from saved data
      */
@@ -34,11 +40,7 @@ public class Deadline extends Task {
         super(input[0], isDone);
         this.by = LocalDateTime.parse(input[1]);
     }
-
-    /**
-     * Converts content to formatted text to save into storage
-     * @return formatted text to save into storage
-     */
+    
     @Override
     public String convertToData() {
         return String.format("D/%s/%s/%s", this.isDone ? "1" : "0", this.description, this.by);

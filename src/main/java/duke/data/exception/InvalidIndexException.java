@@ -1,5 +1,8 @@
 package duke.data.exception;
 
+/**
+ * Describes exception caused by an invalid input index
+ */
 public class InvalidIndexException extends DukeException{
     @Override
     public String toString() {

@@ -10,6 +10,9 @@ import duke.ui.Ui;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Describes chatbot Duke
+ */
 public class Duke {
     private final TaskList tasks;
     private final Storage storage;

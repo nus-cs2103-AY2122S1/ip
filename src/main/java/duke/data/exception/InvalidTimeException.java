@@ -1,5 +1,8 @@
 package duke.data.exception;
 
+/**
+ * Describes exception caused by invalid time input
+ */
 public class InvalidTimeException extends DukeException {
     @Override
     public String toString() {
