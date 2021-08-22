@@ -1,12 +1,22 @@
-import java.util.Locale;
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.*;
+import java.util.Locale;
+import java.util.regex.Pattern;
+import java.util.Scanner;
+
+
+
 
 public class Duke {
     private static String input = "";
     private static ArrayList<Task> list = new ArrayList<>();
     private static int listLength = 0;
+    private static File file;
 
     public static void main(String[] args) {
         String logo = " ____        _ _\n"
@@ -15,22 +25,28 @@ public class Duke {
                     + "| |_| | |_| | | |\n"
                     + "|____/ \\__,_|_|_|\n";
         System.out.println(logo);
+        file = getfiles();
         greet();
+
 
         Scanner sc = new Scanner(System.in);
         input = sc.nextLine().toLowerCase();
         while (!input.equals("bye")) {
             try {
                 parseInput(input);
+                save();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 System.out.println();
+            } catch (IOException e) {
+                System.out.println("Error occurred while saving.");
             } finally {
                 input = sc.nextLine().toLowerCase();
                 continue;
             }
         }
         exit();
+        sc.close();
     }
 
     /**
@@ -160,5 +176,39 @@ public class Duke {
      */
     public static void exit() {
         System.out.println("You're going already? Hope to see you again soon!");
+    }
+
+    public static File getfiles() {
+        String home = System.getProperty("user.home");
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "ip","data");
+        File directory = new File(path.toString());
+        if (!directory.exists()) {
+            System.out.println("'data' directory not found. Creating the directory...");
+            directory.mkdir();
+            System.out.println("Directory created.");
+        }
+
+        java.nio.file.Path filepath = java.nio.file.Paths.get(home, "ip","data", "duke.txt");
+        File file = new File(filepath.toString());
+        if (!file.exists()) {
+            System.out.println("Data file not found. Creating a new file...");
+            try {
+                file.createNewFile();
+                System.out.println("File created.");
+            } catch (IOException e) {
+                System.out.println("IO error occured");
+            }
+        } else {
+            System.out.println("Loaded Files.");
+        }
+        return file;
+    }
+
+    public static void save() throws IOException {
+        FileWriter writer = new FileWriter(file, false);
+        for (Task item : list) {
+            writer.write(item.displayInfo() + "\n");
+        }
+        writer.close();
     }
 }
