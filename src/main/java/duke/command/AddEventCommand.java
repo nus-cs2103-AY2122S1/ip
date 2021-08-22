@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.exceptions.EmptyEventBodyException;
 import duke.exceptions.InvalidEventBodyException;
+import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserOutputHandler;
 import duke.messages.TaskAddMessage;
 import duke.tasks.Event;

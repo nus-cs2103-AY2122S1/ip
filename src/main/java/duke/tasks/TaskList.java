@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import duke.data.TaskFileStorage;
 import duke.data.TaskStorage;
 import duke.exceptions.InvalidTaskNumberException;
 
@@ -11,9 +12,9 @@ public class TaskList {
     private final List<Task> tasks;
     private TaskStorage taskStorage;
 
-    public TaskList() throws IOException {
-        taskStorage = new TaskStorage();
-        tasks = taskStorage.loadTasksFromFile();
+    public TaskList(TaskStorage taskStorage) throws IOException {
+        this.taskStorage = taskStorage;
+        tasks = taskStorage.loadTasks();
     }
 
     /**
@@ -24,9 +25,9 @@ public class TaskList {
      */
     private void saveTasksToStorage(List<Task> tasksToSave) throws IOException {
         if (taskStorage == null) {
-            taskStorage = new TaskStorage();
+            taskStorage = new TaskFileStorage();
         }
-        taskStorage.saveTasksToFile(tasksToSave);
+        taskStorage.saveTasks(tasksToSave);
     }
 
     /**

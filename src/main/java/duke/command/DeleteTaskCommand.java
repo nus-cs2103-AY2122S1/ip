@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exceptions.InvalidTaskNumberException;
+import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserOutputHandler;
 import duke.messages.Message;
 import duke.messages.MessageConstants;

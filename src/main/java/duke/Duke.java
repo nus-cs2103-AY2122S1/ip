@@ -1,23 +1,22 @@
 package duke;
 
+import duke.data.TaskFileStorage;
 import duke.fulfillment.FulfillmentHandler;
-import duke.io.UserInputHandler;
+import duke.io.ConsoleUserInputHandler;
+import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserOutputHandler;
 import duke.tasks.TaskList;
 
 import java.io.IOException;
 
 public class Duke {
-    private UserInputHandler userInputHandler;
-    private UserOutputHandler userOutputHandler;
-    private FulfillmentHandler fulfillmentHandler;
-    private TaskList taskList;
+    private final FulfillmentHandler fulfillmentHandler;
 
     public Duke() throws IOException {
-        this.userInputHandler = new UserInputHandler();
-        this.userOutputHandler = new UserOutputHandler();
-        this.taskList = new TaskList();
-        this.fulfillmentHandler = new FulfillmentHandler(userInputHandler,
+        ConsoleUserInputHandler consoleUserInputHandler = new ConsoleUserInputHandler();
+        UserOutputHandler userOutputHandler = new ConsoleUserOutputHandler();
+        TaskList taskList = new TaskList(new TaskFileStorage());
+        this.fulfillmentHandler = new FulfillmentHandler(consoleUserInputHandler,
                 userOutputHandler, taskList);
     }
 

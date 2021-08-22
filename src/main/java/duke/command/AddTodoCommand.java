@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exceptions.EmptyTodoBodyException;
+import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserOutputHandler;
 import duke.messages.TaskAddMessage;
 import duke.tasks.Task;

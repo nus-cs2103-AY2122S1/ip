@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserOutputHandler;
 import duke.messages.ByeMessage;
 import duke.tasks.TaskList;
@@ -11,7 +12,7 @@ public class ByeCommand extends Command {
 
     @Override
     public void execute(UserOutputHandler userOutputHandler, TaskList taskList) {
-            userOutputHandler.writeMessage(new ByeMessage());
+        userOutputHandler.writeMessage(new ByeMessage());
     }
 
     @Override

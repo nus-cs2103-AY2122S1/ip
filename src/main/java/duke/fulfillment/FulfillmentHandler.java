@@ -2,6 +2,8 @@ package duke.fulfillment;
 
 import duke.command.Command;
 import duke.exceptions.DukeException;
+import duke.io.ConsoleUserInputHandler;
+import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserInputHandler;
 import duke.io.UserOutputHandler;
 import duke.messages.GreetingMessage;
@@ -16,14 +18,14 @@ import java.io.IOException;
  * @author kevin9foong
  */
 public class FulfillmentHandler {
-    private final UserInputHandler userInputHandler;
-    private final UserOutputHandler userOutputHandler;
+    private final UserInputHandler consoleUserInputHandler;
+    private final UserOutputHandler consoleUserOutputHandler;
     private final TaskList taskList;
 
-    public FulfillmentHandler(UserInputHandler userInputHandler,
-                              UserOutputHandler userOutputHandler, TaskList taskList) {
-        this.userInputHandler = userInputHandler;
-        this.userOutputHandler = userOutputHandler;
+    public FulfillmentHandler(UserInputHandler consoleUserInputHandler,
+                              UserOutputHandler consoleUserOutputHandler, TaskList taskList) {
+        this.consoleUserInputHandler = consoleUserInputHandler;
+        this.consoleUserOutputHandler = consoleUserOutputHandler;
         this.taskList = taskList;
     }
 
@@ -38,18 +40,18 @@ public class FulfillmentHandler {
         boolean isExit = false;
 
         while (!isExit) {
-            String userInput = userInputHandler.readInput();
+            String userInput = consoleUserInputHandler.readInput();
             try {
                 Command userCommand = Parser.parse(userInput);
-                userCommand.execute(userOutputHandler, taskList);
+                userCommand.execute(consoleUserOutputHandler, taskList);
                 isExit = userCommand.isExit();
             } catch (DukeException e) {
-                userOutputHandler.writeMessage(new Message(e.getMessage()));
+                consoleUserOutputHandler.writeMessage(new Message(e.getMessage()));
             }
         }
     }
 
     private void handleGreeting() {
-        userOutputHandler.writeMessage(new GreetingMessage());
+        consoleUserOutputHandler.writeMessage(new GreetingMessage());
     }
 }

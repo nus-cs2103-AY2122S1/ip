@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserOutputHandler;
 import duke.messages.TaskListMessage;
 import duke.tasks.TaskList;
