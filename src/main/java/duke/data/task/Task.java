@@ -47,6 +47,10 @@ public abstract class Task {
     public String getStatusIcon() {
         return (this.isDone ? "X" : " ");
     }
+    
+    public String getDescription() {
+        return this.description;
+    }
 
     /**
      * Marks this task as done
