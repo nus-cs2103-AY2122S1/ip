@@ -37,13 +37,4 @@ public class Task {
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
-
-    /**
-     * Converts task to a suitable format to be placed in data.txt.
-     *
-     * @return Formatted String which represents a task to be placed in data.txt.
-     */
-    public String format() {
-        return String.format("%s | %s", isDone ? "1" : "0", this.description);
-    }
 }
