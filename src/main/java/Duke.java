@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -31,6 +32,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        DateTimeHandler dth = new DateTimeHandler();
         Scanner scanner = new Scanner(System.in);
         System.out.println(formatMessage("Hello! I'm Duke\n" + "     What can I do for you?"));
         while (true) {
@@ -116,7 +118,12 @@ public class Duke {
                         break;
                     }
                     parts = params[1].split(" /by ");
-                    Deadline d = new Deadline(parts[0], parts[1]);
+                    LocalDateTime deadlineDate = dth.parseDate(parts[1]);
+                    if (deadlineDate == null) {
+                        System.out.println(formatMessage("Please enter a valid date-time format. Type formats to see valid formats"));
+                        break;
+                    }
+                    Deadline d = new Deadline(parts[0], deadlineDate);
                     addToList(d);
                     System.out.println(taskAddedMessage(d));
                     break;
@@ -130,9 +137,17 @@ public class Duke {
                         break;
                     }
                     parts = params[1].split(" /at ");
-                    Event e = new Event(parts[0], parts[1]);
+                    LocalDateTime startDate = dth.parseDate(parts[1]);
+                    if (startDate == null) {
+                        System.out.println(formatMessage("Please enter a valid date-time format. Type formats to see valid formats"));
+                        break;
+                    }
+                    Event e = new Event(parts[0], startDate);
                     addToList(e);
                     System.out.println(taskAddedMessage(e));
+                    break;
+                case "formats":
+                    System.out.println(formatMessage(dth.getFormatList()));
                     break;
                 default:
                     System.out.println(formatMessage("That is not a recognised command"));
