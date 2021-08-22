@@ -1,16 +1,18 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Scanner;
 
 public class Command {
-    String command;
 
-    Command(String command){
-        this.command = command;
-    }
+    public void execute(TaskList tasks,Ui ui,Storage save) {
+        ui.Start();
+        boolean exit = false;
+        Scanner sc = new Scanner(System.in);
+        String filePath = "data/duke.txt";
+        int count = tasks.size();
 
-    public void execute(){
-        while(sc.hasNext()){
+        while (!exit) {
             String command = sc.next();
             switch(command){
                 case "bye":
@@ -24,7 +26,7 @@ public class Command {
                         list += listNum + "." + tasks.get(i) +"\n";
                         listNum++;
                     }
-                    System.out.println(line + list + line);
+                    ui.list(list);
                     break;
                 case "done":
                     int doneNum = sc.nextInt() - 1;
@@ -94,8 +96,6 @@ public class Command {
 
             save.writeToFile(filePath,tasks);
 
-            if(exit){
-                break;
-            }
+        }
     }
 }
