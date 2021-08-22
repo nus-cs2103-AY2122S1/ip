@@ -1,9 +1,12 @@
 todo feed cat
-deadline write an essay on cats /by Sunday
-event cat appreciation club /at Mon 2-4pm
+deadline write an essay on cats /by 27/12/2021
+event cat appreciation club /at 30/11/2021 1800
+deadline return book /by 22/12/2021 2359
+event christmas day /at 25/12/2021
 list
 done 1
 done 2
 done 3
+done 4
 list
 bye
