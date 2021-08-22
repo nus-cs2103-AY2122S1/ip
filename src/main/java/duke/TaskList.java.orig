@@ -23,11 +23,12 @@ public class TaskList {
         taskList.add(task);
     }
 
-    /**
-     * Searches for Tasks containing a search query.
-     *
-     * @return returns List of all Tasks that contain the Query.
-     */
+<<<<<<< HEAD
+=======
+    public int size() {
+        return taskList.size();
+    }
+
     public List<Task> search(String query) {
         List<Task> results = new ArrayList<>();
         for (Task task : taskList) {
@@ -50,7 +51,8 @@ public class TaskList {
     }
 
 
-   /**
+>>>>>>> branch-Level-9
+    /**
      * Prints past commands.
      *
      * @return returns a printout of all the past user commands.
