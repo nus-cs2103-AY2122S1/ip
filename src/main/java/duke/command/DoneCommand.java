@@ -1,6 +1,11 @@
+package duke.command;
+
+import duke.TaskManager;
+import duke.Ui;
+
 public class DoneCommand extends Command {
     private final int id;
-    DoneCommand(int id) {
+    public DoneCommand(int id) {
         this.id = id;
     }
 
