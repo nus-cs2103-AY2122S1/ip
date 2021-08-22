@@ -19,6 +19,11 @@ public class Duke {
         this.storage = new Storage(filePath);
     }
 
+    /**
+     * Driver method for the entire program.
+     * Used to instantiate the chat bot to receive user input.
+     *
+     */
     public void run() {
         this.intro.printIntro();
         // Starts reading user input

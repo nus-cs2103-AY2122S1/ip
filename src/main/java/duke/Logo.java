@@ -21,7 +21,8 @@ public class Logo {
      *
      * @return returns the bot logo.
      */
-    public String printLogo() {
+    @Override
+    public String toString() {
         return logo;
     }
 }
