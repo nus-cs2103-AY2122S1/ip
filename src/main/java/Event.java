@@ -2,7 +2,7 @@
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 8. Dates and Times
+ * Current Progress: A-Enums
  *
  * Description:
  * Extends the Task Class which where it is a task that start at a
@@ -12,14 +12,23 @@
  */
 public class Event extends Task {
 
-    private DukeDate duration;
+    private String duration;
 
-    public Event(String description, DukeDate duration) {
+    public Event(String description, String duration) {
         super(description);
         this.duration = duration;
 
     }
 
+    /**
+     * Getter that returns the duration of the event
+     *
+     */
+    public String getDuration() {
+
+        return this.duration;
+
+    }
 
     @Override
     public String toString() {
@@ -27,6 +36,6 @@ public class Event extends Task {
         return "[" + "E" + "]"
                 + "[" + taskStatus + "]"
                 + " " + this.getDescription() + " "
-                + "(at: " + this.duration.toString() + ")";
+                + "(at: " + this.duration + ")";
     }
 }
