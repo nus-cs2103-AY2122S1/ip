@@ -13,7 +13,7 @@ public class Duke {
 
     /**
      * Wraps a string between 2 line breaks.
-     * 
+     *
      * @param s String to be wrapped.
      * @return New string between 2 line breaks.
      */
@@ -23,7 +23,7 @@ public class Duke {
 
     /**
      * Prints the specified message in a standardized format.
-     * 
+     *
      * @param s The message to be printed.
      */
     private static void dukePrint(String s) {
@@ -135,7 +135,7 @@ public class Duke {
 
     /**
      * Run tasks based on the corresponding commands given by the user.
-     * 
+     *
      * @param s Command input of user
      */
     private static void handleInput(String s) {
@@ -144,29 +144,29 @@ public class Duke {
         String args = inputTokens.length > 1 ? inputTokens[1] : "";
         try {
             switch (command) {
-                case "done":
-                    doneHandler(args);
-                    break;
-                case "bye":
-                    byeHandler();
-                    break;
-                case "list":
-                    listHandler();
-                    break;
-                case "todo":
-                    todoHandler(args);
-                    break;
-                case "event":
-                    eventHandler(args);
-                    break;
-                case "deadline":
-                    deadlineHandler(args);
-                    break;
-                case "delete":
-                    deleteHandler(args);
-                    break;
-                default:
-                    defaultHandler();
+            case "done":
+                doneHandler(args);
+                break;
+            case "bye":
+                byeHandler();
+                break;
+            case "list":
+                listHandler();
+                break;
+            case "todo":
+                todoHandler(args);
+                break;
+            case "event":
+                eventHandler(args);
+                break;
+            case "deadline":
+                deadlineHandler(args);
+                break;
+            case "delete":
+                deleteHandler(args);
+                break;
+            default:
+                defaultHandler();
             }
         } catch (InvalidDukeCommandException e) {
             dukePrint(e.getMessage());
