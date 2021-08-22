@@ -16,7 +16,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * construct a new duke.Duke instance
+     * Constructs a new duke.Duke instance
      */
     public Duke() {
         ui = new Ui();

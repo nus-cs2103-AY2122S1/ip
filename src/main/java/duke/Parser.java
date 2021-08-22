@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * This class deals with user's input by parsing them and convert each instruction
+ * into different commands.
+ */
 public class Parser {
     private enum KeyWord {
         END("bye"),

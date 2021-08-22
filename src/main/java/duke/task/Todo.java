@@ -9,7 +9,7 @@ package duke.task;
 public class Todo extends Task{
 
     /**
-     * The construction method for a todo.
+     * Constructs a todo.
      *
      * @param description detail of a todo
      */
@@ -18,7 +18,7 @@ public class Todo extends Task{
     }
 
     /**
-     * The toString method to output a todo.
+     * Stringifies and outputs a todo.
      *
      * @return return the string form of the todo
      */
@@ -28,7 +28,7 @@ public class Todo extends Task{
     }
 
     /**
-     * The method is to get type of the todo task
+     * Gets type of the todo task
      *
      * @return type of the task
      */

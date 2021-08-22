@@ -14,7 +14,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * The method to create a task
+     * Creates a task
      *
      * @param description detail of the task to be created
      */
@@ -24,7 +24,7 @@ public class Task {
     }
 
     /**
-     * The method to return task status
+     * Returns task status
      *
      * @return string form of the status icon
      */
@@ -33,7 +33,7 @@ public class Task {
     }
 
     /**
-     * The method to print a task
+     * Prints a task
      *
      * @return string form of the task
      */
@@ -44,7 +44,7 @@ public class Task {
     }
 
     /**
-     * The method to finish a task
+     * Finishes a task
      *
      * @return string form of the task after complete it
      */
@@ -54,21 +54,21 @@ public class Task {
     }
 
     /**
-     * The method is to finish the task.
+     * Finishes the task.
      */
     public void setFinish() {
         this.isDone = true;
     }
 
     /**
-     * The method is to get type of the task
+     * Gets type of the task
      */
     public String getType() {
         return "";
     }
 
     /**
-     * The method is to get description of the task
+     * Gets description of the task
      */
     public String getDescription() {
         return description;
@@ -90,10 +90,22 @@ public class Task {
         return null;
     }
 
+    /**
+     * Converts a LocalDate instance to String format.
+     *
+     * @param date intaks a LocalDate
+     * @return string of the input
+     */
     protected static String toDateFormat(LocalDate date) {
         return date.getMonth() + " " + date.getDayOfMonth() + " " + date.getYear();
     }
 
+    /**
+     * Converts a LocalDateTime instance to String format.
+     *
+     * @param time intaks a LocalDateTime
+     * @return string of the input
+     */
     protected static String toTimeFormat(LocalDateTime time) {
         return time.getMonth() + " " + time.getDayOfMonth() + " " + time.getYear() + " "+time.toLocalTime();
     }

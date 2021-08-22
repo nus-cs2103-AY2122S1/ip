@@ -23,7 +23,7 @@ public class DukeException extends Exception{
     }
 
     /**
-     * The method to print the exception
+     * Prints the exception
      *
      * @return string form of the exception
      */

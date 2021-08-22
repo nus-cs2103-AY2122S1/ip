@@ -112,7 +112,7 @@ public class TaskList {
     }
 
     /**
-     * The toString method to print all duke.TaskList in the list.
+     * Stringifies and prints all tasks in the list.
      */
     public void printTaskList() {
         System.out.println(div);
@@ -122,7 +122,7 @@ public class TaskList {
     }
 
     /**
-     * The method to complete a task
+     * Completes a task
      *
      * @param pos position of the task to be completed
      * @throws DukeException if the position is invalid throws exceptions
@@ -138,7 +138,7 @@ public class TaskList {
     }
 
     /**
-     * The method to delete a task
+     * Deletes a task
      *
      * @param pos position of the task to be deleted
      * @throws DukeException if the position is invalid throws exceptions
@@ -198,7 +198,7 @@ public class TaskList {
     }
 
     /**
-     * Loads duke.TaskList previously stored in local hard disk into the arraylist.
+     * Loads tasks previously stored in local hard disk into the arraylist.
      *
      * @param f the file read from disk
      */

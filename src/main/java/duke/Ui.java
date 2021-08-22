@@ -5,6 +5,9 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Ui class to print lines and intake inputs from user.
+ */
 public class Ui {
     //for division
     private static String ind = "    ";

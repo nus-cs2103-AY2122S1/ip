@@ -7,6 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The class for accessing and writing to local file which stores task list.
+ */
 public class Storage {
     private final static String FILE_PATH = new File("").getAbsolutePath().concat("/data/duke.txt");
     private static File storedList;

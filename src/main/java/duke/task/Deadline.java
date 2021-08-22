@@ -16,7 +16,7 @@ public class Deadline extends Task{
 
 
     /**
-     * The construction method for a deadline.
+     * Constructs a deadline.
      *
      * @param description detail of a deadline
      * @param ddl time of a deadline
@@ -28,7 +28,7 @@ public class Deadline extends Task{
     }
 
     /**
-     * The construction method for a deadline.
+     * Constructs a deadline.
      *
      * @param description detail of a deadline
      * @param date time of a deadline
@@ -56,7 +56,7 @@ public class Deadline extends Task{
     }
 
     /**
-     * The toString method to output a deadline.
+     * Outputs after stringifying a deadline.
      *
      * @return return the string form of the deadline
      */

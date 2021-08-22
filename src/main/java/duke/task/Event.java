@@ -34,7 +34,7 @@ public class Event extends Task{
     }
 
     /**
-     * The toString method to output an event.
+     * Outputs after transforming to String an event.
      *
      * @return return the string form of the event
      */
@@ -44,7 +44,7 @@ public class Event extends Task{
     }
 
     /**
-     * The method is to get type of the event
+     * Gets type of the event
      *
      * @return String of the type
      */
@@ -54,7 +54,7 @@ public class Event extends Task{
     }
 
     /**
-     * The method is to get time of the event
+     * Gets time of the event
      *
      * @return time of the event
      */
