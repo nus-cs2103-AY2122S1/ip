@@ -10,19 +10,20 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         try {
+            File data = new File("data");
+            File duke = new File("data/duke.txt");
+
+            if (data.mkdir()) {
+                System.out.println("  Data directory does not exist, it has been created!");
+            }
+            if (duke.createNewFile()) {
+                System.out.println("  Hard disk does not exist, a new one has been created!");
+            }
+
             Scanner input = new Scanner(System.in);
             boolean isBye = false;
             ArrayList<Task> taskList = new ArrayList<>(100);
             int listLength = 0;
-
-            File data = new File("data");
-            File disk = new File("data/duke.txt");
-            if (data.mkdir()) {
-                System.out.println("data directory created!");
-            }
-            if (disk.createNewFile()) {
-                System.out.println("Hard disk created!");
-            }
 
             System.out.println("  ____________________________________________________________");
             System.out.print("  Hello! I'm Duck.\n  What's up?\n");
@@ -53,9 +54,11 @@ public class Duke {
                             if (toSet > listLength || toSet < 1) {
                                 throw new DukeException(DukeExceptionType.INVALIDDONE);
                             } else {
-                                taskList.get(toSet - 1).setDone();
+                                Task toSetDone = taskList.get(toSet - 1);
+                                Duke.setDBEntryDone(toSetDone.databaseEntry());
+                                toSetDone.setDone();
                                 System.out.print("  Nice! I've marked this task as done:\n    "
-                                        + taskList.get(toSet - 1).listEntry() + "\n");
+                                        + toSetDone.listEntry() + "\n");
                             }
                         }
 
@@ -68,6 +71,7 @@ public class Duke {
                                 throw new DukeException(DukeExceptionType.INVALIDDELETE);
                             } else {
                                 Task deleted = taskList.remove(toDelete - 1);
+                                Duke.deleteDBEntry(deleted.databaseEntry());
                                 System.out.print("  Noted. I've removed this task:\n    "
                                         + deleted.listEntry()
                                         + "\n  Now you have " + --listLength + " tasks in the list.\n");
@@ -128,6 +132,7 @@ public class Duke {
                             }
                             // add task to taskList
                             taskList.add(listLength++, newTask);
+                            Duke.addDBEntry(newTask.databaseEntry());
                             System.out.print("  Got it. I've added this task:\n    "
                                     + newTask.listEntry()
                                     + "\n  Now you have " + listLength + " tasks in the list.\n");
@@ -148,30 +153,30 @@ public class Duke {
             input.close();
             
         } catch (IOException e) {
-            System.out.println(new DukeException(DukeExceptionType.DUKEIO).getMessage());
+            System.out.println(new DukeException(DukeExceptionType.DB_LAUNCH).getMessage());
         }
     }
 
-    public static void addEntry(String s) {
+    public static void addDBEntry(String s) {
         try {
-            File disk = new File("data/disk.txt");
-            FileWriter writer = new FileWriter(disk, true);
+            File duke = new File("data/duke.txt");
+            FileWriter writer = new FileWriter(duke, true);
             writer.write(s + "\n");
             writer.close();
         } catch (IOException e){
-            System.out.println(new DukeException(DukeExceptionType.DUKEIO).getMessage());
+            System.out.println(new DukeException(DukeExceptionType.DB_ADD).getMessage());
         }
     }
 
-    public static void setEntryDone(String s) {
+    public static void setDBEntryDone(String s) {
         try {
             File updated = new File("data/updated.txt");
-            File disk = new File("data/disk.txt");
+            File duke = new File("data/duke.txt");
             updated.createNewFile();
 
             FileWriter writer = new FileWriter(updated, true);
 
-            BufferedReader reader = new BufferedReader(new FileReader(disk));
+            BufferedReader reader = new BufferedReader(new FileReader(duke));
             String currLine = reader.readLine();
 
             while (currLine != null) {
@@ -186,22 +191,22 @@ public class Duke {
 
             writer.close();
 
-            disk.delete();
-            updated.renameTo(disk);
+            duke.delete();
+            updated.renameTo(duke);
         } catch (IOException e) {
-            System.out.println(new DukeException(DukeExceptionType.DUKEIO).getMessage());
+            System.out.println(new DukeException(DukeExceptionType.DB_DONE).getMessage());
         }
     }
 
-    public static void deleteEntry(String s) {
+    public static void deleteDBEntry(String s) {
         try {
             File updated = new File("data/updated.txt");
-            File disk = new File("data/disk.txt");
+            File duke = new File("data/duke.txt");
             updated.createNewFile();
 
             FileWriter writer = new FileWriter(updated, true);
 
-            BufferedReader reader = new BufferedReader(new FileReader(disk));
+            BufferedReader reader = new BufferedReader(new FileReader(duke));
             String currLine = reader.readLine();
 
             while (currLine != null) {
@@ -213,10 +218,10 @@ public class Duke {
 
             writer.close();
 
-            disk.delete();
-            updated.renameTo(disk);
+            duke.delete();
+            updated.renameTo(duke);
         } catch (IOException e) {
-            System.out.println(new DukeException(DukeExceptionType.DUKEIO).getMessage());
+            System.out.println(new DukeException(DukeExceptionType.DB_DELETE).getMessage());
         }
     }
 }

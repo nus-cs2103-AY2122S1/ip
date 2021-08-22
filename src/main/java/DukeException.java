@@ -27,9 +27,8 @@ public class DukeException extends Exception {
         case INVALIDINPUT:
             customMessage = "  OOPS!!! I don't recognise the command you've given me.";
             break;
-        case DUKEIO:
-            customMessage = "OOPS!!! There was a problem creating a hard disk!\n" + 
-                    "Check that [program root]/data/duke.txt exists.";
+        case DB_LAUNCH:
+            customMessage = "OOPS!!! There was a problem setting up the hard disk!";
             break;
         case DB_ADD:
             customMessage = "OOPS!!! There was a problem adding the task to the hard disk!";

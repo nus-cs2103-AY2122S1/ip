@@ -10,4 +10,9 @@ public class Deadline extends Task {
     public String listEntry() {
         return "[D]" + super.listEntry() + " (by: " + deadline + ")";
     }
+    
+    @Override
+    public String databaseEntry() {
+        return "D" + super.databaseEntry() + " | " + deadline;
+    }
 }

@@ -10,4 +10,9 @@ public class Event extends Task {
     public String listEntry() {
         return "[E]" + super.listEntry() + " (at: " + period + ")";
     }
+
+    @Override
+    public String databaseEntry() {
+        return "E" + super.databaseEntry() + " | " + period;
+    }
 }
