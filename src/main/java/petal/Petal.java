@@ -1,3 +1,9 @@
+package petal;
+
+import petal.components.Parser;
+import petal.components.Storage;
+import petal.components.TaskList;
+
 import java.util.Scanner;
 
 /**

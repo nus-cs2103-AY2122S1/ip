@@ -1,3 +1,5 @@
+package petal.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +17,7 @@ public class Deadline extends Task {
     private final String dateTime;
     private final LocalDate date;
     private final LocalTime time;
-    private static HashMap<LocalDate, ArrayList<Deadline>> dateMap = new HashMap<>();
+    private static final HashMap<LocalDate, ArrayList<Deadline>> dateMap = new HashMap<>();
 
     /**
      * The constructor for the Deadline class

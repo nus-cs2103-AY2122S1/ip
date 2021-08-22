@@ -1,3 +1,7 @@
+package petal.exception;
+
+import petal.components.Responses;
+
 /**
  * EmptyDescException class. Subclass of PetalException.
  * Thrown when user does not give a description for Event/Deadline.

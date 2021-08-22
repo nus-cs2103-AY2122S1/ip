@@ -1,3 +1,5 @@
+package petal.exception;
+
 /**
  * The parent, PetalException. It represents all possible
  * exceptions in relation to the Petal bot.

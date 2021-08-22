@@ -1,3 +1,7 @@
+package petal.exception;
+
+import petal.components.Responses;
+
 /**
  * InvalidInputException class, subclass of PetalException.
  * Thrown when user enters something unintelligible ("random command")

@@ -1,3 +1,5 @@
+package petal.components;
+
 public enum Responses {
 
     //Greetings
