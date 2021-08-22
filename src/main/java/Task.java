@@ -1,30 +1,42 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected Category category;
 
     public enum Category {
         TODO, DEADLINE, EVENT
     }
 
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
-    public static void createTask(String description, String time, Category category) {
+    public static void createTask(String description, String time, Category category, boolean isDone, boolean hasNotif) {
+        System.out.println("creating task");
         switch (category) {
-            case TODO:
-                Duke.list.add(new ToDo(description));
-                break;
-            case DEADLINE:
-                Duke.list.add(new Deadline(description, time));
-                break;
-            case EVENT:
-                Duke.list.add(new Event(description, time));
-                break;
+        case TODO:
+            Duke.list.add(new ToDo(description, isDone, hasNotif));
+            break;
+        case DEADLINE:
+            Duke.list.add(new Deadline(description, time, isDone, hasNotif));
+            break;
+        case EVENT:
+            Duke.list.add(new Event(description, time, isDone, hasNotif));
+            break;
         }
-        System.out.println(Duke.friendGreeting + "added: " + Duke.list.get(Duke.list.size() - 1).toString() + " to your to-do list!");
-        System.out.println("Now you have " + Duke.list.size() + " tasks in the list.");
+        if (hasNotif) {
+            System.out.println(Duke.friendGreeting + "added: " + Duke.list.get(Duke.list.size() - 1).toString() + " to your to-do list!");
+            System.out.println("Now you have " + Duke.list.size() + " tasks in the list.");
+            try {
+                Duke.saveListToFile();
+            } catch (IOException e) {
+                System.out.println("File not found");
+            }
+        }
     }
 
     public String getStatusIcon() {
