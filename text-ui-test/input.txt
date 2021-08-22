@@ -3,6 +3,7 @@ todo do homework
 deadline assignment /by next Monday
 event dinner /at 6pm
 deadline submission /by 29/08/21-1pm
+event @something /at today
 done 1
 done 4
 delete 2
@@ -14,11 +15,13 @@ deadline
 deadline nowhitespace /by
 deadline whitespace /by
 deadline  /by tonight
+deadline some,comma /by sometime
 deadline something /at sometime
 event
 event nowhitespace /at
 event whitespace /at
 event  /at tonight
+event some,comma /at today
 event something /by sometime
 done 1000
 done 0
