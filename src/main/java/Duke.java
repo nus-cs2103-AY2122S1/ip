@@ -1,4 +1,5 @@
 package main.java;
+import java.time.DateTimeException;
 import java.util.Scanner;
 
 /**
@@ -73,8 +74,12 @@ public class Duke {
                         sc.close();
                         break;
                     case LIST:
-                        checkLen(commandPair, true, 1, "");
-                        tl.printList();
+                        checkLen(commandPair, true, 2, "");
+                        if (commandPair.length == 1) {
+                            tl.printList();
+                        } else {
+                            tl.printListDate(commandPair[1]);
+                        }
                         break;
                     case DONE:
                         checkLen(commandPair, false, 2, "You did not indicate the task to be marked done. Use 'done <task's number>' to mark the task as done.");
@@ -95,9 +100,9 @@ public class Duke {
                         tl.addTask(new ToDo(commandPair[1]));
                         break;
                     case DEADLINE:
-                        checkLen(commandPair, false, 2, "The description of a deadline cannot be empty. Use 'deadline <description> /at <date>' to add a deadline.");
+                        checkLen(commandPair, false, 2, "The description of a deadline cannot be empty. Use 'deadline <description> /by <date>' to add a deadline.");
                         String[] deadlinePair = commandPair[1].split("/by", 2);
-                        checkLen(deadlinePair, false, 2, "The description / date of a deadline cannot be empty. Use 'deadline <description> /at <date>' to add a deadline.");
+                        checkLen(deadlinePair, false, 2, "The description / date of a deadline cannot be empty. Use 'deadline <description> /by <date>' to add a deadline.");
                         tl.addTask(new Deadline(deadlinePair[0], deadlinePair[1]));
                         break;
                     case EVENT:
@@ -111,6 +116,8 @@ public class Duke {
                 }
             } catch (IllegalArgumentException e) {
                reply("☹ OOPS!!! " + e.getMessage());
+            } catch (DateTimeException e) {
+                reply("☹ OOPS!!! Your date (YYYY-MM-DD) / date & time (YYYY-MM-DD HHMM) (24 hours) is given in the wrong format.");
             }
         }
     }

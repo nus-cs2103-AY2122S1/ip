@@ -1,4 +1,6 @@
 package main.java;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -64,6 +66,28 @@ public class TaskList {
             }
         }
         System.out.println(Duke.LINE + "\n");
+    }
+
+    /**
+     * Prints Tasks on the specified date.
+     */
+    protected void printListDate(String date) {
+        LocalDate localDate = LocalDate.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        System.out.println(Duke.LINE);
+        System.out.println(LIST_INTRO);
+        if (this.LIST.size() == 0) {
+            System.out.println("\t There are no tasks on or due on this date.");
+        } else {
+            int count = 0;
+            for (int i = 0; i < this.LIST.size(); i++) {
+                Task t = this.LIST.get(i);
+                if (t.onDate(localDate)) {
+                    System.out.println("\t " + (++count) + "." + t);
+                }
+            }
+        }
+        System.out.println(Duke.LINE + "\n");
+
     }
 
     /**

@@ -1,5 +1,9 @@
 package main.java;
 
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Event is a task that has a date in which it is happening.
  *
@@ -8,7 +12,7 @@ package main.java;
  */
 public class Event extends Task {
 
-    private final String date;
+    private final LocalDateTime date;
 
     /**
      * Constructor for Deadline task.
@@ -17,7 +21,8 @@ public class Event extends Task {
      */
     public Event(String description, String date) {
         super(description);
-        this.date = date;
+        LocalDateTime dateTime = LocalDateTime.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-ddHHmm"));
+        this.date = dateTime;
     }
 
     /**
@@ -27,6 +32,17 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + this.date + ")";
+        return "[E]" + super.toString() + "(at: " + DateTimeFormatter.ofPattern("d MMM uuuu hh:mma").format(this.date) + ")";
+    }
+
+    /**
+     * Returns if the task date is equal to the date provided.
+     *
+     * @param date the date provided
+     * @return true if they are both equal
+     */
+    @Override
+    protected boolean onDate(LocalDate date) {
+        return this.date.toLocalDate().equals(date);
     }
 }

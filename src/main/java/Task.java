@@ -1,5 +1,7 @@
 package main.java;
 
+import java.time.LocalDate;
+
 /**
  * A task contains its description and information of whether it is done or not.
  *
@@ -44,4 +46,12 @@ public abstract class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.DESCRIPTION;
     }
+
+    /**
+     * Returns if the task date is equal to the date provided.
+     *
+     * @param date the date provided
+     * @return true if they are both equal
+     */
+    protected abstract boolean onDate(LocalDate date);
 }
