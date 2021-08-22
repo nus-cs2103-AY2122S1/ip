@@ -15,7 +15,15 @@ public class JWBot {
     public static void updateTxt(List<Task> items) throws IOException {
         FileWriter fw = new FileWriter(txtPath);
         for (Task task : items) {
-            fw.write(task.toString() + "\n");
+            if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                String original = deadline.toString();
+                String[] separated = original.split("by: ");
+                separated[1] = String.valueOf(deadline.getBy()) + ")";
+                fw.write(String.join("by: ", separated) + "\n");
+            } else {
+                fw.write(task.toString() + "\n");
+            }
         }
         fw.close();
     }

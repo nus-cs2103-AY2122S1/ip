@@ -25,6 +25,15 @@ public class Deadline extends Task {
     }
 
     /**
+     * The constructor of the deadline task.
+     *
+     * @return the protected field by.
+     */
+    public LocalDate getBy() {
+        return by;
+    }
+
+    /**
      * override toString method for easier printing.
      *
      * @return the stingified task.
