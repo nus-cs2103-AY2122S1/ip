@@ -1,4 +1,5 @@
 package duke.storage;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public class TaskList {
         Ui.printMessage(Ui.DONE_MESSAGE + "\n" + Ui.INDENT + "  " + curr.toString());
     }
 
-    public void addTask(Task task) throws IOException {
+    public void addTask(Task task) {
         this.taskList.add(task);
         Ui.printMessage("Got it. I've added this task:\n" + Ui.INDENT + "  " + task.toString() + "\n" + Ui.INDENT
                 + "Now you have " + this.taskList.size() + " tasks in the list.");
