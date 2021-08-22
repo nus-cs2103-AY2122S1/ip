@@ -27,6 +27,10 @@ public class DukeException extends Exception {
         case INVALIDINPUT:
             customMessage = "  OOPS!!! I don't recognise the command you've given me.";
             break;
+        case DUKEIO:
+            customMessage = "OOPS!!! There was a problem creating a hard disk!\n" + 
+                    "Check that [program root]/data/duke.txt exists.";
+            break;
         default:
             customMessage = "  OOPS!!! Duck has run into an unspecified error!";
             break;
