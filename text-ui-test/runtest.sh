@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # create bin directory if it doesn't exist
-if [ ! -e "../bin" ]
+if [ ! -d "../bin" ]
 then
     mkdir ../bin
 fi
