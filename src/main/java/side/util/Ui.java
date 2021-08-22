@@ -84,8 +84,7 @@ public class Ui {
      * @param taskList TaskList to be added to.
      * @throws WrongFormatException Catches incorrectly formatted input and returns error.
      */
-    public void addEvent(String input, TaskList taskList) throws WrongFormatException
-            , NoSecondDatetimeException {
+    public void addEvent(String input, TaskList taskList) throws WrongFormatException {
         if (input.contains("/at") && (this.parser.findEventDatetime(input) != null)) {
             String[] datetimeArr = this.parser.findEventDatetime(input);
             String description = this.parser.findDescription(input);

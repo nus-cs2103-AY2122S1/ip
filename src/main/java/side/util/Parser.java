@@ -41,12 +41,15 @@ public class Parser {
     public String findDescription(String input) {
         String cmd = input.split("\\s+", 2)[1];
 
-        if (cmd.contains("/by"))
+        if (cmd.contains("/by")) {
             return cmd.split("/by")[0];
-        else if (cmd.contains("/at"))
+        }
+        else if (cmd.contains("/at")) {
             return cmd.split("/at")[0];
-        else
+        }
+        else {
             return null;
+        }
     }
 
     /**
