@@ -25,7 +25,6 @@ Got it. I have added this task:
     [T][ ] Wash laundry
 Now you have 2 tasks in the list
 ------------------
-19/8/2021
 Got it. I have added this task:
     [D][ ] CS2103T Project (by: 2021-08-19, 23:59)
 Now you have 3 tasks in the list
@@ -81,7 +80,6 @@ Got it. I have added this task:
     [E][ ] Sleep (at: 2021-08-23, 02:00)
 Now you have 10 tasks in the list
 ------------------
-25/8/2021
 Got it. I have added this task:
     [D][ ] CS2100 homework (by: 2021-08-25, 23:59)
 Now you have 11 tasks in the list

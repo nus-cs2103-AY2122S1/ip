@@ -2,13 +2,13 @@ package duke;
 
 import duke.logic.LPrintTask;
 
-import java.time.LocalDateTime;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 /**
  * Duke is a personal assistant that allows users to keep track of events, deadlines and things to do.

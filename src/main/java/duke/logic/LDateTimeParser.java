@@ -17,6 +17,7 @@ public class LDateTimeParser {
 
     /**
      * Creates a new instance of a Date
+     *
      * @param dateTime The string to be parsed
      */
     public LDateTimeParser(String dateTime) {
@@ -25,7 +26,6 @@ public class LDateTimeParser {
         try {
             if (dateAndTime.length == 1) {
                 if (dateAndTime[0].contains("/")) { // User entered date
-                    System.out.println(dateAndTime[0]);
                     this.date = LocalDate.parse(dateAndTime[0], DateTimeFormatter.ofPattern("d/M/yyyy"));
                     this.time = LocalTime.parse("23:59");
                 } else { // User likely entered time

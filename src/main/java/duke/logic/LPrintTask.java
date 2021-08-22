@@ -12,7 +12,8 @@ import java.util.TreeMap;
  */
 public final class LPrintTask {
     // No initialization required.
-    private LPrintTask() {}
+    private LPrintTask() {
+    }
 
     /**
      * Prints all upcoming tasks from a list of tasks.

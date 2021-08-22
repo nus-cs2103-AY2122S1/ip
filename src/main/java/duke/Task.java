@@ -12,8 +12,9 @@ public abstract class Task {
 
     /**
      * The constructor for a task object
+     *
      * @param description The description of the task
-     * @param taskType The type of task (to<></>do/event/deadline)
+     * @param taskType    The type of task (to<></>do/event/deadline)
      */
     public Task(String description, String taskType) {
         this.description = description;
@@ -77,6 +78,7 @@ public abstract class Task {
 
     /**
      * Gets the string that is to be appended in the dukedata.txt file.
+     *
      * @return The associated string
      */
     public String getDataLine() {
