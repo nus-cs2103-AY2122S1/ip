@@ -1,13 +1,23 @@
-public class Deadline extends Task {
-    private String by;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    public Deadline(String desc, String by) {
+public class Deadline extends Task {
+    private LocalDate by;
+
+    public Deadline(String desc, String by) throws DukeException {
         super(desc);
-        this.by = by;
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Deadline should be in the form yyyy-mm-dd" +
+                    "\ni.e. deadline read book /by 2021-06-18"); 
+        }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String byFormatted = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[D]" + super.toString() + " (by: " + byFormatted + ")";
     }
 }
