@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /** Utility class for handling things related to Task **/
 public class TaskUtils {
     /** cached things */
@@ -27,13 +29,13 @@ public class TaskUtils {
                 if (segments.length != 4) {
                     return null;
                 }
-                toReturn = new Deadline(segments[2], segments[3]);
+                toReturn = new Deadline(segments[2], LocalDate.parse(segments[3]));
                 break;
             case "E":
                 if (segments.length != 4) {
                     return null;
                 }
-                toReturn = new Event(segments[2], segments[3]);
+                toReturn = new Event(segments[2], LocalDate.parse(segments[3]));
                 break;
             default:
                 return null;
