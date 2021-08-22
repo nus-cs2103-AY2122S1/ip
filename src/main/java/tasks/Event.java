@@ -28,8 +28,7 @@ public class Event extends Task {
 
     @Override
     public String getDueDate() {
-        String dueDute = at.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        return dueDute;
+        return at.toString().trim();
     }
 
     @Override

@@ -28,8 +28,7 @@ public class Deadline extends Task {
 
     @Override
     public String getDueDate() {
-        String dueDate = by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        return dueDate;
+        return by.toString().trim();
     }
 
     @Override
