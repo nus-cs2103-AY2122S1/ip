@@ -39,7 +39,7 @@ public class DukeHandler {
             }
             String[] splitDeadline = splitString[1].split(" /by", 2);
             if (splitDeadline.length == 1) {
-                throw new DukeException("OOPS!!! The deadline for a deadline cannot be empty or it must be after a '/'");
+                throw new DukeException("OOPS!!! The description or deadline for a deadline cannot be empty or it must be after a '/'");
             }
             System.out.println(splitDeadline[1]);
             tasks.add(new Deadline(splitDeadline[0], splitDeadline[1]));
@@ -50,7 +50,7 @@ public class DukeHandler {
             }
             String[] splitEvent = splitString[1].split(" /at", 2);
             if (splitEvent.length == 1) {
-                throw new DukeException("\tOOPS!!! The duration for an event cannot be empty or it must be after a '/'");
+                throw new DukeException("\tOOPS!!! The description or duration for an event cannot be empty or it must be after a '/'");
             }
             tasks.add(new Event(splitEvent[0], splitEvent[1]));
             break;
@@ -65,11 +65,16 @@ public class DukeHandler {
     }
 
     private String deleteTask(String input) {
-        return "";
+        String[] splitString = input.split(" ", 2);
+        int i = Integer.parseInt(splitString[1])-1;
+        return "\tNoted. I've removed this task:\n" + "\t\t" + tasks.remove(i).toString() + "\n" + "\tNow you have " + tasks.size() + " tasks in the list.";
     }
 
     private String setTaskAsDone(String input) {
-        return "";
+        String[] splitString = input.split(" ", 2);
+        int i = Integer.parseInt(splitString[1])-1;
+        tasks.get(i).markAsDone();
+        return "\tNice! I've marked this task as done:\n\t\t" +  tasks.get(i).toString();
     }
 
     private String[] list() {
