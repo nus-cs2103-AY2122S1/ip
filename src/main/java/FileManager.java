@@ -48,6 +48,8 @@ public class FileManager {
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
+        } catch (DukeException e) {
+            e.print(); 
         }
         return new TaskList(newList); 
     }
