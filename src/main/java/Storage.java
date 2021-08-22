@@ -60,7 +60,7 @@ public class Storage {
                 out.writeObject(myList);
                 out.close();
                 fileOut.close();
-                System.out.println("I'll save your list for you! You're welcome! :)");
+                System.out.println("I've updated your list for you! You're welcome! :)");
             } catch (IOException error) {
                 throw new DukeException("Something went wrong when I tried to save your list :(");
             }

@@ -45,8 +45,6 @@ public class GreetingBot {
         }
 
         store();
-
-        exit();
         ui.goodbye();
 
     }
@@ -70,14 +68,19 @@ public class GreetingBot {
                     break;
                 } else if (action == 2) {
                     tasks.setDone(nextLine);
+                    storage.updateData(tasks.getList());
                 } else if (action == 3) {
                     tasks.deleteTask(nextLine);
+                    storage.updateData(tasks.getList());
                 } else if (action == 4) {
                     tasks.newTodo(nextLine);
+                    storage.updateData(tasks.getList());
                 } else if (action == 5) {
                     tasks.newDeadline(nextLine);
+                    storage.updateData(tasks.getList());
                 } else if (action == 6) {
                     tasks.newEvent(nextLine);
+                    storage.updateData(tasks.getList());
                 }
             } catch (DukeException err) {
                 System.out.println(err.toString());
@@ -90,17 +93,6 @@ public class GreetingBot {
 
 
 
-    /**
-     * Method to print the exit message and stop the program.
-     */
-    private void exit() {
-        try {
-            storage.updateData(tasks.getList());
-        } catch (DukeException err) {
-            System.out.println(err.toString());
-        }
-
-    }
 
 
 }
