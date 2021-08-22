@@ -6,9 +6,7 @@ import java.io.File;
 public class Duke {
     public static void main(String[] args) {
 
-        File directory = new File("./");
-        System.out.println(directory.getAbsolutePath());
-
+        // Storage
         File f = new File("data/duke.txt");
         try {
             f.createNewFile();
@@ -16,6 +14,7 @@ public class Duke {
             System.out.println(e.getMessage());
         }
 
+        // Storage
         List<Task> strList = new ArrayList<Task>();
         try {
             Scanner s = new Scanner(f);
@@ -50,13 +49,17 @@ public class Duke {
             System.out.println(e.getMessage());
         }
 
+        // Ui
         displayLogo();
         greet();
+
+        // Parser
         addToList(strList);
 
 
     }
 
+    // Ui
     public static void displayLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -66,12 +69,14 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
     }
 
+    // Ui
     public static void greet() {
         String greeting = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
         System.out.println(greeting);
     }
 
+    // stay/ delete
     public static void echo() {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -107,7 +112,7 @@ public class Duke {
                 } else if (str.startsWith("delete")) {
                     detectDelete(str, strList);
                 } else {
-                    throw new DukeUnknownException("OOPS!!! I'm sorry, but I don't know what that means.");
+                    throw new DukeUnknownException();
                 }
             } catch (DukeUnknownException e) {
                 System.out.println(e.getMessage());
@@ -149,7 +154,7 @@ public class Duke {
             System.out.println("Nice! I've marked this task as done:\n"
                     + doneTask.toString());
         } catch (Exception e) {
-            throw new DukeDoneException("OOPS!!! The index of a done cannot be empty.");
+            throw new DukeDoneException();
         }
     }
 
@@ -163,7 +168,7 @@ public class Duke {
                     + "Now you have " + numOfTasks
                     + " tasks in the list.");
         } else {
-            throw new DukeTodoException("OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeTodoException();
         }
     }
 
@@ -180,7 +185,7 @@ public class Duke {
                     + "Now you have " + numOfTasks
                     + " tasks in the list.");
         } catch (Exception e) {
-            throw new DukeDeadlineException("OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeDeadlineException();
         }
     }
 
@@ -197,7 +202,7 @@ public class Duke {
                     + "Now you have " + numOfTasks
                     + " tasks in the list.");
         } catch (Exception e) {
-            throw new DukeEventException("OOPS!!! The description of a event cannot be empty.");
+            throw new DukeEventException();
         }
     }
 
@@ -212,7 +217,7 @@ public class Duke {
                     + "Now you have " + numOfTasks
                     + " tasks in the list.") ;
         } catch (Exception e) {
-            throw new DukeDeleteException("OOPS!!! The index of a delete cannot be empty.");
+            throw new DukeDeleteException();
         }
     }
 

@@ -1,5 +1,5 @@
 public class DukeDoneException extends DukeException {
-    public DukeDoneException(String message) {
-        super(message);
+    public DukeDoneException() {
+        super("OOPS!!! The index of a done cannot be empty.");
     }
 }

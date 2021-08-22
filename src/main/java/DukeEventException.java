@@ -1,5 +1,5 @@
 public class DukeEventException extends DukeException {
-    public DukeEventException(String message) {
-        super(message);
+    public DukeEventException() {
+        super("OOPS!!! The description of a event cannot be empty.");
     }
 }
