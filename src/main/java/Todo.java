@@ -6,6 +6,10 @@ public class Todo extends Task {
         super(name);
     }
 
+    Todo(String name, boolean isDone) {
+        super(name, isDone);
+    }
+
     @Override
     public String printType() {
         return "[T]";

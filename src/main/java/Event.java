@@ -9,10 +9,22 @@ public class Event extends Task {
         this.timeInfo = timeInfo;
     }
 
+    Event(String name, String timeInfo, boolean isDone) {
+        super(name, isDone);
+        this.timeInfo = timeInfo;
+    }
+
     @Override
     public String showStatus() {
         String status =  super.showStatus();
         return status + " (at: " + timeInfo + ")";
+    }
+
+    @Override
+    public String showStatusWrite() {
+        return this.printType() + this.printCompletionStatus()
+                + Task.separator + this.name
+                + Task.separator + this.timeInfo;
     }
 
     @Override

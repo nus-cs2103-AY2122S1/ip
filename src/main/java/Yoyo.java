@@ -1,9 +1,24 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+
 
 public class Yoyo {
     private static ArrayList<Task> tasks = new ArrayList<>();
+    private static final int TYPE_STR_INDEX = 1;
+    private static final int ISDONE_STR_INDEX = 4;
+//    private static int currListLength = 0;
+    private static final String DATAPATH = "data/yoyo.txt";
+
+    enum TaskType {
+        TODO,
+        EVENT,
+        DEADLINE
+    }
 
     /**
      * Exception class for incomplete command .
@@ -38,6 +53,31 @@ public class Yoyo {
         outputWrapper();
         System.out.println(greetings);
         outputWrapper();
+        File f = new File(DATAPATH);
+
+        try {
+            if (!f.exists()) {
+                f.createNewFile();
+            } else {
+                readExistingTasks(f);
+            }
+        } catch (IOException e) {
+            System.out.println("Something went wrong while creating new file:\n"
+                    + e.getMessage());
+        }
+
+        try {
+            FileWriter fw = new FileWriter(DATAPATH, true);
+        } catch (IOException e) {
+            System.out.println("Something went wrong while creating file writer:\n"
+                    + e.getMessage());
+        }
+
+
+
+
+
+
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -139,6 +179,45 @@ public class Yoyo {
                 outputWrapper();
             }
         }
+    }
+
+    private static void readExistingTasks(File f) {
+        try {
+            Scanner s = new Scanner(f);
+            String currLine;
+            boolean currCompletionStatus;
+            String[] currStrArr;
+            TaskType currType;
+
+            while (s.hasNext()) {
+                currLine = s.nextLine();
+                currCompletionStatus = currLine.charAt(ISDONE_STR_INDEX) == 'X'
+                        ? true
+                        : false;
+                char typeChar = currLine.charAt(TYPE_STR_INDEX);
+                currType = typeChar == 'T'
+                        ? TaskType.TODO
+                        : typeChar == 'D'
+                            ? TaskType.DEADLINE
+                            : TaskType.EVENT;
+                currStrArr = currLine.split(" , ");
+                switch (currType) {
+                case TODO:
+                    tasks.add(new Todo(currStrArr[1], currCompletionStatus));
+                    break;
+                case EVENT:
+                    tasks.add(new Event(currStrArr[1], currStrArr[2], currCompletionStatus));
+                    break;
+                case DEADLINE:
+                    tasks.add(new Deadline(currStrArr[1], currStrArr[2], currCompletionStatus));
+                    break;
+                default:
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not Found!");
+        }
+
     }
 
     /**
