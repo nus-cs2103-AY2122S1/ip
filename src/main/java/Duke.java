@@ -1,3 +1,4 @@
+
 import java.util.*;
 public class Duke {
     List<Task> commands = new ArrayList<>();
@@ -17,37 +18,74 @@ public class Duke {
         }
 
     }
-    void add(String input){
-        String[] inputSplit = input.split("\\s", 2);
-        String commandType = inputSplit[0].toLowerCase();
+    void execute(DukeCommands command, String input){
         try {
-            if(inputSplit.length < 2){
-                throw new EmptyTaskDescriptionException();
-            }
-            switch (commandType) {
-                case "todo":
-                    commands.add(new ToDo(inputSplit[1]));
-                    break;
-                case "deadline":
-                    String[] deadline = inputSplit[1].split("/by");
-                    if(deadline.length < 2){
-                        throw new NoTimeException();
+            boolean taskToAdd = false;
+            int taskIndex;
+            switch (command) {
+                case TODO:
+                    if(input.equals("")){
+                        throw new EmptyTaskDescriptionException();
+                    } else{
+                        commands.add(new ToDo(input));
+                        taskToAdd = true;
                     }
-                    commands.add(new Deadline(deadline[0], deadline[1]));
                     break;
-                case "event":
-                    String[] event = inputSplit[1].split("/at");
-                    if(event.length < 2){
-                        throw new NoTimeException();
+                case DEADLINE:
+                    if(input.equals("")){
+                        throw new EmptyTaskDescriptionException();
+                    } else {
+                        String[] deadline = input.split("/by");
+                        if (deadline.length < 2) {
+                            throw new NoTimeException();
+                        }
+                        commands.add(new Deadline(deadline[0], deadline[1]));
+                        taskToAdd = true;
                     }
-                    commands.add(new Event(event[0], event[1]));
+                    break;
+                case EVENT:
+                    if(input.equals("")){
+                        throw new EmptyTaskDescriptionException();
+                    } else {
+                        String[] event = input.split("/at");
+                        if (event.length < 2) {
+                            throw new NoTimeException();
+                        }
+                        commands.add(new Event(event[0], event[1]));
+                        taskToAdd = true;
+                    }
+                    break;
+                case LIST:
+                    list();
+                    break;
+                case BYE:
+                    System.out.println("\t ByeBye! Hope to see you again!");
+                    System.exit(0);
+                    break;
+                case DONE:
+                    if(input.equals("")){
+                        throw new EmptyTaskNumberException();
+                    } else {
+                        taskIndex = Integer.parseInt(input.trim());
+                        done(taskIndex);
+                    }
+                    break;
+                case DELETE:
+                    if(input.equals("")){
+                        throw new EmptyTaskNumberException();
+                    } else {
+                        taskIndex = Integer.parseInt(input.trim());
+                        remove(taskIndex);
+                    }
                     break;
                 default:
                     throw new UnknownInputException();
             }
-            System.out.println("I have added this task:");
-            System.out.println(commands.get(commands.size()-1));
-            System.out.println("You now have " + commands.size() + " tasks in your list");
+            if (taskToAdd) {
+                System.out.println("I have added this task:");
+                System.out.println(commands.get(commands.size() - 1));
+                System.out.println("You now have " + commands.size() + " tasks in your list");
+            }
         } catch (DukeException e){
             System.out.println(e.getMessage());
         }
@@ -86,6 +124,7 @@ public class Duke {
         }
     }
 
+
     public static void main(String[] args){
         Duke duke = new Duke();
         String logo = "   _       _\n"
@@ -102,42 +141,17 @@ public class Duke {
         while(sc.hasNext()){
             //Exit command
             System.out.println("............................................................");
+            String command = sc.next().trim();
             String input = sc.nextLine().trim();
-            String[] command = input.split("\\s+", 2);
             try {
-                if (command[0].equalsIgnoreCase("bye")) {
-                    System.out.println("\n\tByeBye! Hope to see you again!");
-                    break;
-                } else if (command[0].equalsIgnoreCase("list")) {
-                    duke.list();
-                } else if (command[0].equalsIgnoreCase("done")) {
-                    if (!command[0].equals(input)) {
-                        if (!duke.commands.isEmpty()) {
-                            int listNumber = Integer.parseInt(command[1]);
-                            duke.done(listNumber - 1);
-                        } else {
-                            throw new EmptyTaskListException();
-                        }
-                    } else {
-                        throw new EmptyTaskNumberException();
-                    }
-                } else if (command[0].equalsIgnoreCase("delete")) {
-                    if (!command[0].equals(input)) {
-                        if (!duke.commands.isEmpty()) {
-                            int listNumber = Integer.parseInt(command[1]);
-                            duke.remove(listNumber - 1);
-                        } else {
-                            throw new EmptyTaskListException();
-                        }
-                    } else {
-                        throw new EmptyTaskNumberException();
-                    }
-                } else {
-                    duke.add(input);
-                }
-            } catch (DukeException e){
-                System.out.println(e.getMessage());
+                DukeCommands dukeCommand = DukeCommands.valueOf(command.toUpperCase());
+                duke.execute(dukeCommand, input);
+            } catch (IllegalArgumentException e){
+                System.out.println("I'm sorry, I don't know what that means! ☹");
             }
+            
+                
+            
             System.out.println("____________________________________________________________");
         }
         sc.close();
