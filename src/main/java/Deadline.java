@@ -7,6 +7,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toDukeStoreFormat() {
+        return String.format("D | %s | %s",super.toDukeStoreFormat(), finishDate);
+    }
+
+    @Override
     public String toString() {
         return String.format("[D] %s (by: %s)", super.toString(), this.finishDate);
     }

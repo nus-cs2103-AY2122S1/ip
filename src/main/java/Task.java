@@ -14,6 +14,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String toDukeStoreFormat() {
+        return String.format("%s | %s", this.isDone ? "1" : "0", this.taskDescription);
+    }
+
     @Override
     public String toString() {
         return String.format("[%c] %s", isDone ? 'X' : ' ', taskDescription);

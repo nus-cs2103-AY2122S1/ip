@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.ArrayList;
@@ -7,9 +13,11 @@ import java.util.stream.Collectors;
 public class Duke {
     // Constant declarations
     private final static String LINE_BREAK = "--------------------------\n";
+    private final static Path DATA_PATH = Paths.get(System.getProperty("user.dir"), "data/duke.txt");
 
     // Class static attributes
-    private final static List<Task> taskList = new ArrayList<Task>();
+    private static List<Task> taskList;
+    private static DukeParser dukeParser;
 
     /**
      * Wraps a string between 2 line breaks.
@@ -82,7 +90,9 @@ public class Duke {
         String outputList = taskList.stream().map(task -> Integer.toString(idx.getAndIncrement()) + ". " + task + "\n")
                 .collect(Collectors.joining());
         // Remove last newline for prettier formatting
-        outputList = outputList.substring(0, outputList.length() - 1);
+        if (outputList.length() > 0) {
+            outputList = outputList.substring(0, outputList.length() - 1);
+        }
         dukePrint(outputList);
     }
 
@@ -168,8 +178,11 @@ public class Duke {
             default:
                 defaultHandler();
             }
+            dukeParser.writeTasksToFile(taskList);
         } catch (InvalidDukeCommandException e) {
             dukePrint(e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error occurred while storing tasks in data file.");
         }
     }
 
@@ -195,6 +208,24 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        try {
+            // create storage directories and files if it does not exist
+            if (Files.notExists(DATA_PATH)) {
+                File f = new File(DATA_PATH.toString());
+                f.getParentFile().mkdirs();
+                f.createNewFile();
+            }
+            dukeParser = new DukeParser(DATA_PATH.toString());
+            taskList = dukeParser.loadTasksFromData();
+        } catch (IOException e) {
+            System.out.println("Error occurred while handling data files. " +
+                    "Try re-running Duke or create Duke.txt file in the /data directory.");
+            return;
+        } catch (InvalidDukeCommandException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
