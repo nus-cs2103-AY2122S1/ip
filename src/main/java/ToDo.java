@@ -2,7 +2,7 @@
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Enums
+ * Current Progress: Level 7. Save
  *
  * Description:
  * Extends the Task Class which where it is a task that does
