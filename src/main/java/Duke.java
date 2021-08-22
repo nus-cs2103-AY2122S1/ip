@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,7 +25,7 @@ public class Duke {
     }
 
     public static void printTasksInList() {
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("These are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             System.out.printf("\t%s."+ taskList.get(i).toString() + "%n", i + 1);
         }
@@ -67,7 +68,7 @@ public class Duke {
         }
         Task task = taskList.get(deleteNumber);
         taskList.remove(deleteNumber);
-        System.out.printf("Noted. I've removed this task:\n" + task.toString()
+        System.out.printf("Okay! I've removed this task from the list:\n" + task.toString()
                 + "\nNow you have %s tasks in your list\n" , taskList.size());
     }
 
