@@ -8,6 +8,12 @@ import duke.util.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * This class encapsulates the command dealing with finding tasks matching a keyword.
+ *
+ * @author Tan Yi Guan
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class FindCommand extends Command {
     private final ToDoList list;
     private final String input;
