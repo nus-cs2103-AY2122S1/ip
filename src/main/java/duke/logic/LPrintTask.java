@@ -1,6 +1,6 @@
 package duke.logic;
 
-import duke.Task;
+import duke.task.Task;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,9 +26,7 @@ public final class LPrintTask {
             LocalDateTime dateTime1 = task1.getDateTime();
             LocalDateTime dateTime2 = task2.getDateTime();
             // time can be null if task is to-do. By default, put all to-do to the last.
-            return dateTime1 == null && dateTime2 == null
-                    ? 0
-                    : dateTime1 == null
+            return dateTime1 == null
                     ? 1
                     : dateTime2 == null
                     ? -1

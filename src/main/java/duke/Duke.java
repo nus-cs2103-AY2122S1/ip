@@ -1,6 +1,13 @@
 package duke;
 
+import duke.logic.LCommandParser;
 import duke.logic.LPrintTask;
+import duke.logic.LStorage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,6 +22,14 @@ import java.util.Scanner;
  * The main method will start the personal assistant in the console.
  */
 public class Duke {
+    private final TaskList taskList;
+    private final LStorage lStorage;
+
+    public Duke(String filePath, int listLimit) {
+        this.taskList = new TaskList(listLimit);
+        this.lStorage = new LStorage(filePath, taskList);
+    }
+
     private static final List<Task> storage = new ArrayList<>();
 
     private static void addTask(String[] splitInput) {
@@ -181,7 +196,7 @@ public class Duke {
         return false;
     }
 
-    public static void main(String[] args) {
+    public void run() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -195,7 +210,8 @@ public class Duke {
         while (sc.hasNextLine()) {
             input = sc.nextLine();
             try {
-                if (processInput(input)) {
+                LCommandParser commandParser = new LCommandParser(input, taskList, lStorage);
+                if (commandParser.willExit()) {
                     return;
                 }
             } catch (DukeException e) {
@@ -205,6 +221,10 @@ public class Duke {
         }
 
         sc.close();
+    }
+
+    public static void main(String[] args) {
+        new Duke("./dukedata.txt", 100).run();
     }
 
 

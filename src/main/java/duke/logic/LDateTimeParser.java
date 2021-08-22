@@ -37,7 +37,6 @@ public class LDateTimeParser {
                 this.time = LocalTime.parse(dateAndTime[1], DateTimeFormatter.ofPattern("H:m"));
             }
         } catch (DateTimeParseException e) {
-            e.printStackTrace();
             throw new DukeException("Invalid date and time format. Please enter them in the format: d/M/YYYY H:m.\n" +
                     "For example: 23/8/2021 14:00");
         }

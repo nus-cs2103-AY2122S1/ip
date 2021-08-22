@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -14,7 +14,7 @@ public abstract class Task {
      * The constructor for a task object
      *
      * @param description The description of the task
-     * @param taskType    The type of task (to<></>do/event/deadline)
+     * @param taskType    The type of task (todo/event/deadline)
      */
     public Task(String description, String taskType) {
         this.description = description;
@@ -43,6 +43,10 @@ public abstract class Task {
         return taskType;
     }
 
+    /**
+     * Marks the current task as done.
+     * @return true if task is successfully marked, or false if task has been marked as done before.
+     */
     public boolean markAsDone() {
         if (this.isDone) {
             return false;
