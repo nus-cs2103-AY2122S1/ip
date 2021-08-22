@@ -1,8 +1,13 @@
+package duke.core;
+
 /**
  * Encapsulates the Main Program that facilitates interaction between ChatBot and user.
  *
  * @author Clifford
  */
+
+import duke.command.Command;
+import duke.exception.DukeException;
 
 import java.util.Scanner;
 

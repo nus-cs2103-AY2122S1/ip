@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
+import duke.exception.DukeException;
 import java.time.format.DateTimeParseException;
 
 public class AddEventCommand extends AddCommand {
@@ -14,7 +20,7 @@ public class AddEventCommand extends AddCommand {
             return tasks.recordEvent(descriptionDatePair[0].trim(), descriptionDatePair[1].trim());
         } catch (IndexOutOfBoundsException | DateTimeParseException e) {
             throw new DukeException("event should be in format: [DESCRIPTION] /by [DATE]!\n" +
-                    "Only accepted [DATE] format is: date/month/year, HHMM (24h time)");
+                    "Only accepted [DATE] format is: date/month/year HHMM (24h time)");
         }
     }
 }

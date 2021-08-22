@@ -1,3 +1,8 @@
+package duke.core;
+
+import duke.command.*;
+import duke.exception.DukeException;
+
 public class Parser {
     public static Command identifyCommand(String input) throws DukeException {
         if(input.equals("")) {

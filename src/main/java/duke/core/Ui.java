@@ -1,3 +1,5 @@
+package duke.core;
+
 import java.util.ArrayList;
 
 public class Ui {

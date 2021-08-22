@@ -1,3 +1,11 @@
+package duke.core;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -111,12 +119,11 @@ public class TaskList {
             Task task = tasks.get(taskId - 1);
             boolean isChanged = task.markAsDone();
             if(!isChanged) {
-                return "Task is already marked as done";
+                return "duke.task.Task is already marked as done";
             }
             saveTasks();
             return "Nice! I've marked this task as done:\n  " + task.toString();
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
             throw new DukeException("No such task exists to be marked as done!");
         }
     }
@@ -142,7 +149,6 @@ public class TaskList {
                     deletedTask.toString(),
                     currentIdx);
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
             throw new DukeException("No such task exists to be deleted!");
         }
     }
