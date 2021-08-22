@@ -1,6 +1,7 @@
 import javax.swing.text.html.Option;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class Event extends Task{
@@ -25,6 +26,8 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.time);
+        return String.format("[E]%s (at: %s)",
+                super.toString(),
+                this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }
