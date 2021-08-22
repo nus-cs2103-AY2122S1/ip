@@ -4,6 +4,8 @@ enum Action {
     TODO,
     DEADLINE,
     EVENT,
-    DELETE
+    DELETE,
+    BYE,
+    UNKNOWN
 }
   

@@ -6,9 +6,17 @@ import java.util.Set;
 public class TaskList {
     ArrayList<Task> list;
     int curSize;
-    public TaskList(){
+    ArrayList<String[]> data;
+
+
+    public TaskList(ArrayList<String[]> data){
         this.list = new ArrayList<>();
         this.curSize = 0;
+        try {
+            this.LoadTask(data);
+        } catch (InputNotValidError e) {
+            e.printStackTrace();
+        }
     }
 
     public void LoadTask(ArrayList<String[]> data) throws InputNotValidError{
@@ -29,7 +37,8 @@ public class TaskList {
                 actions[0] = "deadline";
                 actions[1] = each[2].substring(1) + "/by" + each[3].substring(1, each[3].length());                
             }
-            this.actionHalder(actions, done, true);
+            Parser hitoryData = new Parser(actions[0] + " " + actions[1]);
+            this.actionHalder(hitoryData, done, true);
         }
 
     }
@@ -61,24 +70,12 @@ public class TaskList {
 
     }
 
-    public void isValidAction(String[] actionList) throws InputNotValidError{
-        Set<String> validactionset = new HashSet<>(Arrays.asList(
-                                            "list", "done", "todo", "deadline", "event", "delete"));
-        Set<String> infoReqired = new HashSet<>(Arrays.asList(
-                                            "todo", "deadline", "event", "delete"));
-        String actionName = actionList[0];
-        if (!validactionset.contains(actionName)){
-            throw new InputNotValidError("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }else{
-            if ((infoReqired.contains(actionName)) && (actionList.length <= 1)){
-                throw new InputNotValidError("☹ OOPS!!! The description of a " + actionName + " cannot be empty.");
-            }
-        }
-    }
 
-    public void actionHalder(String[] actionList, boolean done, boolean fromData) throws InputNotValidError{
+
+    public void actionHalder(Parser actionList, boolean done, boolean fromData) throws InputNotValidError{
+        boolean validCommand;
         try{
-            this.isValidAction(actionList);
+            validCommand = actionList.isValid();
         }
         catch(InputNotValidError e){
             String error = 
@@ -88,27 +85,34 @@ public class TaskList {
             System.out.println(error);
             return;
         }
-          
-        String actionName = actionList[0];
+        if (validCommand){
+            Action actionName = actionList.getAction();
 
-        if (actionName.equals("list")){
-            this.printList();
-        }else if (actionName.equals("done")){
-            int num = Integer.parseInt(actionList[1]);
-            this.done(num);
-        }else if(actionName.equals("todo")){
-            this.addToDo(actionList[1], done, fromData);
-        }else if(actionName.equals("deadline")){
-            this.addDeadline(actionList[1], done, fromData);
-        }else if(actionName.equals("event")){
-            this.addEvent(actionList[1], done, fromData);
-        }else if(actionName.equals("delete")){
-            int num = Integer.parseInt(actionList[1]);
-            this.delete(num);
-        }else{
-            System.out.println("something wrong");
+            switch(actionName){
+                case LIST:
+                    this.printList();
+                    break;
+                case DONE:
+                    int num = Integer.parseInt(actionList.getActionList());
+                    this.done(num);
+                    break;                
+                case TODO:
+                    this.addToDo(actionList.getActionList(), done, fromData);
+                    break;
+                case DEADLINE:
+                    this.addDeadline(actionList.getActionList(), done, fromData);
+                    break;
+                case EVENT:
+                    this.addEvent(actionList.getActionList(), done, fromData);
+                    break;
+                case DELETE:
+                    int num2 = Integer.parseInt(actionList.getActionList());
+                    this.delete(num2);
+                    break;
+                default:
+                    break;
+            }
         }
-
     }
     
     public void addToDo(String action, boolean done, boolean fromdata){
@@ -164,6 +168,6 @@ public class TaskList {
     public ArrayList<Task> returnTaskList(){
         return this.list;
     }
-
+    
 
 }
