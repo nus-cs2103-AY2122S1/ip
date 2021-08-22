@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
  *
  * @author kevin9foong
  */
-public class InputHandler {
+public class UserInputHandler {
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public String readInput() throws IOException {

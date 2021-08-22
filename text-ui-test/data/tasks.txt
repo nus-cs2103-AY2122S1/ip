@@ -1,5 +1,0 @@
-DEADLINE,X,test adding a deadline,today,
-EVENT,X,test adding an event,11.15am monday 16/08/21,
-TODO,X,test adding a todo,
-EVENT,,1,2,
-DEADLINE,,1,2,

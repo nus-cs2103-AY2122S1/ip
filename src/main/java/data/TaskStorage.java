@@ -1,6 +1,6 @@
 package data;
 
-import io.FileIO;
+import io.FileInputOutputHandler;
 import tasks.Task;
 
 import java.io.IOException;
@@ -14,11 +14,11 @@ import java.util.List;
  * @author kevin9foong
  */
 public class TaskStorage {
-    private final FileIO taskFileIO;
+    private final FileInputOutputHandler taskFileInputOutputHandler;
 
     public TaskStorage() throws IOException {
         String taskFilePath = "data/tasks.txt";
-        taskFileIO = new FileIO(taskFilePath);
+        taskFileInputOutputHandler = new FileInputOutputHandler(taskFilePath);
     }
 
     private static List<Task> convertRepresentationStringsToTaskList(List<String> taskRepresentations) {
@@ -48,15 +48,16 @@ public class TaskStorage {
      * @throws IOException thrown when failure to write to file occurs
      */
     public void saveTasksToFile(List<Task> taskList) throws IOException {
-        taskFileIO.saveLinesToFile(convertTaskListToRepresentationStrings(taskList));
+        taskFileInputOutputHandler.saveLinesToFile(convertTaskListToRepresentationStrings(taskList));
     }
 
     /**
      * Reads the file containing string representations of tasks and returns the task list stored.
+     *
      * @return List of tasks stored in text file
      * @throws IOException thrown when failure to read from file occurs
      */
     public List<Task> loadTasksFromFile() throws IOException {
-        return convertRepresentationStringsToTaskList(taskFileIO.readLinesFromFile());
+        return convertRepresentationStringsToTaskList(taskFileInputOutputHandler.readLinesFromFile());
     }
 }

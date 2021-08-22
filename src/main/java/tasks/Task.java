@@ -14,34 +14,8 @@ import java.util.List;
  * @author kevin9foong
  */
 public abstract class Task {
-    private static List<Task> taskList = new ArrayList<>();
-    private static TaskStorage taskStorage;
-
     private String description;
     private boolean isDone = false;
-
-    /**
-     * Retrieves tasks from task storage into memory.
-     *
-     * @throws IOException thrown when failure to read from Task storage occurs.
-     */
-    public static void loadTasksFromStorage() throws IOException {
-        Task.taskStorage = new TaskStorage();
-        taskList = taskStorage.loadTasksFromFile();
-    }
-
-    /**
-     * Writes current taskList to the Task storage to be persisted.
-     *
-     * @param tasksToSave List of tasks to be saved to Task storage
-     * @throws IOException thrown when failure to write to Task storage occurs.
-     */
-    private static void saveTasksToStorage(List<Task> tasksToSave) throws IOException {
-        if (taskStorage == null) {
-            taskStorage = new TaskStorage();
-        }
-        taskStorage.saveTasksToFile(tasksToSave);
-    }
 
     /**
      * Extracts data from given taskRepresentation and returns the specific subclass of
@@ -64,73 +38,6 @@ public abstract class Task {
         default:
             return null;
         }
-    }
-
-    /**
-     * Get task associated with index number in taskList.
-     *
-     * @param index index of task to get
-     * @return task associated with index number in taskList
-     */
-    public static Task getTask(int index) throws InvalidTaskNumberException {
-        if (index < 0 || index >= taskList.size()) {
-            throw new InvalidTaskNumberException();
-        }
-        return taskList.get(index);
-    }
-
-    /**
-     * Adds a new task to the taskList.
-     *
-     * @param task task to be added
-     */
-    public static Task addTask(Task task) throws IOException {
-        taskList.add(task);
-        saveTasksToStorage(taskList);
-        return task;
-    }
-
-    /**
-     * Deletes task associated with given index number
-     *
-     * @param index index of task to delete
-     * @return deleted task
-     */
-    public static Task deleteTask(int index) throws InvalidTaskNumberException, IOException {
-        if (index < 0 || index >= taskList.size()) {
-            throw new InvalidTaskNumberException();
-        }
-        Task removedTask = taskList.remove(index);
-        saveTasksToStorage(taskList);
-        return removedTask;
-    }
-
-    /**
-     * Retrieves a new list containing all tasks in the taskList.
-     *
-     * @return new list containing copy of all tasks from the taskList
-     */
-    public static List<Task> getAllTasks() {
-        return new ArrayList<>(taskList);
-    }
-
-    /**
-     * Gets the number of tasks in the taskList.
-     *
-     * @return int representing number of tasks in the taskList
-     */
-    public static int getNumOfTasks() {
-        return taskList.size();
-    }
-
-    /**
-     * Marks task as done and updates the <code>TaskStorage</code> file.
-     *
-     * @throws IOException thrown when errors writing to file occur.
-     */
-    public void setDone() throws IOException {
-        this.isDone = true;
-        saveTasksToStorage(taskList);
     }
 
     /**

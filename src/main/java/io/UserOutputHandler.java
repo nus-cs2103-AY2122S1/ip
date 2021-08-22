@@ -7,7 +7,7 @@ import messages.Message;
  *
  * @author kevin9foong
  */
-public class OutputHandler {
+public class UserOutputHandler {
     public void writeMessage(Message msg) {
         System.out.println(msg.toString());
     }

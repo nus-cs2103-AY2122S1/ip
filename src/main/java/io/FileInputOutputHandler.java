@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author kevin9foong
  */
-public class FileIO {
+public class FileInputOutputHandler {
     private final BufferedReader br;
     private final String filePath;
 
@@ -24,7 +24,7 @@ public class FileIO {
      * @param filePath filepath of file to read from and write to
      * @throws IOException thrown when error reading or writing to target file occurs
      */
-    public FileIO(String filePath) throws IOException {
+    public FileInputOutputHandler(String filePath) throws IOException {
         this.filePath = filePath;
 
         File tasksFile = new java.io.File(filePath);
