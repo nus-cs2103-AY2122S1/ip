@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class TaskList {
     private static final String ADD = "\t Got it. I've added this task:";
     private static final String LIST_INTRO = "\t Here are the tasks in your list:";
-    private static final String DONE = "Nice! I've marked this task as done:\n\t   ";
-    private static final String DELETE = "Noted. I've removed this task:\n\t   ";
+    private static final String DONE = "\t Nice! I've marked this task as done:\n\t   ";
+    private static final String DELETE = "\t Noted. I've removed this task:\n\t   ";
     private final ArrayList<Task> LIST;
 
     /**
@@ -31,7 +31,6 @@ public class TaskList {
      */
     protected void addTask(Task task) {
         this.LIST.add(task);
-        System.out.println(Duke.LINE);
         System.out.println(ADD);
         System.out.println("\t   " + task);
         if (this.LIST.size() == 1) {
@@ -39,7 +38,6 @@ public class TaskList {
         } else {
             System.out.println("\t Now you have " + this.LIST.size() + " tasks in the list.");
         }
-        System.out.println(Duke.LINE + "\n");
     }
 
     /**
@@ -48,7 +46,7 @@ public class TaskList {
     protected void setDone(int index) {
         Task task = this.LIST.get(index);
         task.setDone();
-        Duke.reply(DONE + task);
+        System.out.println(DONE + task);
     }
 
     /**
@@ -57,14 +55,14 @@ public class TaskList {
     protected void delete(int index) {
         Task task = this.LIST.get(index);
         this.LIST.remove(index);
-        Duke.reply(DELETE + task);
+        System.out.println(DELETE + task);
+
     }
 
     /**
      * Prints the list.
      */
     protected void printList() {
-        System.out.println(Duke.LINE);
         System.out.println(LIST_INTRO);
         if (this.LIST.size() == 0) {
             System.out.println("\t List is empty");
@@ -73,7 +71,6 @@ public class TaskList {
                 System.out.println("\t " + (i + 1) + "." + this.LIST.get(i));
             }
         }
-        System.out.println(Duke.LINE + "\n");
     }
 
     /**
@@ -81,10 +78,9 @@ public class TaskList {
      */
     protected void printListDate(String date) {
         LocalDate localDate = LocalDate.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        System.out.println(Duke.LINE);
         System.out.println(LIST_INTRO);
         if (this.LIST.size() == 0) {
-            System.out.println("\t There are no tasks on or due on this date.");
+            System.out.println("\t List is empty.");
         } else {
             int count = 0;
             for (int i = 0; i < this.LIST.size(); i++) {
@@ -93,9 +89,8 @@ public class TaskList {
                     System.out.println("\t " + (++count) + "." + t);
                 }
             }
+            if (count == 0) System.out.println("There are no tasks pertaining to the specified date.");
         }
-        System.out.println(Duke.LINE + "\n");
-
     }
 
     /**
