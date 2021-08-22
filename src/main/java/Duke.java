@@ -61,8 +61,18 @@ public class Duke {
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
-                } else {
-                    throw new DukeException("    OOPS!!! I'm sorry, but I don't know what that means :-(");
+                } else if (command.contains("delete")) {
+                    try {
+                        if (command.equals("delete ") || command.equals("delete")) {
+                            throw new DukeException("    OOPS!!! The task number cannot be empty.");
+                        } else {
+                            xs.delete(command);
+                        }
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }  else {
+                throw new DukeException("    OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
 
             } catch (DukeException e) {
