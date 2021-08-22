@@ -1,15 +1,12 @@
 package util.storage;
 
-import util.tasks.DukeException;
-import util.tasks.Task;
-import util.tasks.TaskList;
+import util.tasks.*;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.ArrayList;
-import util.tasks.*;
+import java.util.Scanner;
 
 /**
  * The storage class is the class representing the stored
@@ -39,14 +36,12 @@ public class Storage {
 
 
     /**
-     * The method that runs when the Duke needs to log the
-     * list of Tasks. Occurs every time there is a modification to the
-     * List of tasks.
+     * Command to write the input list of tasks onto the
+     * hard disk.
      *
-     *
-     * maybe its not better though?
+     * @param inputs The list of input tasks to encode onto the hardisk.
+     * @throws IOException When the writing has failed.
      */
-
     public void write(ArrayList<? extends Task> inputs) throws IOException {
 
         File dir = new File("./data");
@@ -93,6 +88,8 @@ public class Storage {
      * the saves in an arraylist.
      *
      * @return The arraylist containing the read result.
+     * @throws IOException When the read fails.
+     * @throws  DukeException When the format of the text to be read is wrong.
      */
     public TaskList read() throws IOException, DukeException {
         TaskList inputs = new TaskList();

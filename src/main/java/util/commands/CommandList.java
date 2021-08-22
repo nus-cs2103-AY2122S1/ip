@@ -12,7 +12,8 @@ public class CommandList extends ArrayList<Command> {
 
     /**
      * Executing all the commands in the command list.
-     * @throws DukeException
+     *
+     * @throws DukeException When a class in the list has the exception.
      */
     public void executeAll() throws DukeException {
         for (int i = 0; i < this.size(); i++) {

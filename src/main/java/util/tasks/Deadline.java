@@ -2,8 +2,6 @@ package util.tasks;
 
 import util.commons.Messages;
 
-import java.time.LocalDate;
-
 
 /**
  * The class representing the deadline task.
@@ -31,7 +29,9 @@ public class Deadline extends DatedTask {
      */
     public static Deadline of(String s) throws DukeException {
         String[] ss = s.split(Deadline.DELIMITER, 2);
-        if (ss.length == 0) throw new DukeException(Messages.DEADLINE_NO_INPUT_ERROR_MESSAGE);
+        if (ss.length == 0) {
+            throw new DukeException(Messages.DEADLINE_NO_INPUT_ERROR_MESSAGE);
+        }
         return new Deadline(ss[0], ss[1]);
     }
 
