@@ -120,10 +120,11 @@ public class Parser {
             int i = Integer.parseInt(userInput[1]);
             Task task = tasks.get(i - 1);
             tasks.remove(i - 1);
+            String taskWord = tasks.size() == 1
+                    ? "task"
+                    : "tasks";
             ui.print(String.format("Noted. I've removed this task:\n  %s\nNow you have %d %s in the list.",
-                    task, tasks.size(), tasks.size() == 1
-                            ? "task"
-                            : "tasks"));
+                    task, tasks.size(), taskWord));
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("Please give a valid number!");
         }

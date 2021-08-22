@@ -29,14 +29,20 @@ public class Duke {
 
         tasks = tasks1;
         parser = new Parser(tasks, ui);
-        ui.sayHi();
     }
 
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
 
+    /**
+     * Runs the duke app.
+     */
     public void run() {
+        // start
+        start();
+
+        // parse
         Scanner scanner = new Scanner(System.in);
         String input;
 
@@ -48,8 +54,16 @@ public class Duke {
             }
         }
 
+        // end
         exit();
         scanner.close();
+    }
+
+    /**
+     * Starts up Duke.
+     */
+    private void start() {
+        ui.sayHi();
     }
 
     /**
