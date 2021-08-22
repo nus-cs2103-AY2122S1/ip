@@ -1,8 +1,12 @@
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * This class runs a personal assistant chatbot that helps a person keep track of various tasks.
+ * Commands for the bot are: list, mark, delete, bye, event, deadline, and todo.
+ * Unrecognised command will be met with a prompt to enter a recognised one instead.
  */
 public class Duke {
 
@@ -16,15 +20,15 @@ public class Duke {
         TODO, DEADLINE, EVENT, LIST, MARK, DELETE, BYE
     }
 
-    /***
+    /**
      * Initializes the chatbot.
      */
     public static void main(String[] args) {
 
         // Prints initial message as prompt.
         System.out.printf("%s\nGreetings! This is Elsa.\n" +
-                "What can I do for you?\n" +
-                "%s\n",
+                        "What can I do for you?\n" +
+                        "%s\n",
                 LINE_HORIZONTAL, LINE_HORIZONTAL);
 
         // Initializes scanner to take input from user.
@@ -40,30 +44,30 @@ public class Duke {
             try {
                 Command commandToExecute = interpretCommand(input);
                 switch (commandToExecute) {
-                    case LIST:
-                        printList();
-                        break;
-                    case MARK:
-                        int toMark = Integer.parseInt(input.substring(5));
-                        markTaskAsDone(toMark);
-                        break;
-                    case DELETE:
-                        int toDelete = Integer.parseInt(input.substring(7));
-                        deleteTask(toDelete);
-                        break;
-                    case TODO:
-                        addToDo(input);
-                        break;
-                    case DEADLINE:
-                        addDeadline(input);
-                        break;
-                    case EVENT:
-                        addEvent(input);
-                        break;
-                    case BYE:
-                        printBye();
-                        exit = true;
-                        break;
+                case LIST:
+                    printList();
+                    break;
+                case MARK:
+                    int toMark = Integer.parseInt(input.substring(5));
+                    markTaskAsDone(toMark);
+                    break;
+                case DELETE:
+                    int toDelete = Integer.parseInt(input.substring(7));
+                    deleteTask(toDelete);
+                    break;
+                case TODO:
+                    addToDo(input);
+                    break;
+                case DEADLINE:
+                    addDeadline(input);
+                    break;
+                case EVENT:
+                    addEvent(input);
+                    break;
+                case BYE:
+                    printBye();
+                    exit = true;
+                    break;
                 }
             } catch (InvalidCommandException e) {
                 System.out.printf("%s\n" +
@@ -90,13 +94,13 @@ public class Duke {
         scanner.close();
     }
 
-    /***
+    /**
      * Interprets the command entered by user and returns its enum.
      *
      * @param input The input entered by user.
      * @return The command enum in the input.
      */
-    public static Command interpretCommand(String input) throws InvalidCommandException {
+    private static Command interpretCommand(String input) throws InvalidCommandException {
         if (input.equalsIgnoreCase("list")) {
             return Command.valueOf("LIST");
         } else if (input.toLowerCase().indexOf("done") != -1) {
@@ -116,7 +120,7 @@ public class Duke {
         }
     }
 
-    /***
+    /**
      * Prints out every task in the list.
      */
     public static void printList() {
@@ -136,7 +140,7 @@ public class Duke {
         System.out.println(LINE_HORIZONTAL);
     }
 
-    /***
+    /**
      * Marks the corresponding task as done and prints confirmation.
      *
      * @param toMark The index of the task to be marked.
@@ -149,14 +153,14 @@ public class Duke {
         taskList.get(toMark - 1).markAsDone();
 
         System.out.printf("%s\n" +
-                "Great job!\n" +
-                "The following task is marked as done:\n" +
-                "\t%s\n" +
-                "%s\n",
+                        "Great job!\n" +
+                        "The following task is marked as done:\n" +
+                        "\t%s\n" +
+                        "%s\n",
                 LINE_HORIZONTAL, taskList.get(toMark - 1).toString(), LINE_HORIZONTAL);
     }
 
-    /***
+    /**
      * Deletes the corresponding task as done and prints confirmation.
      *
      * @param toDelete The index of the task to be deleted.
@@ -167,17 +171,17 @@ public class Duke {
         }
 
         System.out.printf("%s\n" +
-                "Done!\n" +
-                "The following task has been removed:\n" +
-                "\t%s\n" +
-                "You now have %d tasks left in your list!\n" +
-                "%s\n",
+                        "Done!\n" +
+                        "The following task has been removed:\n" +
+                        "\t%s\n" +
+                        "You now have %d tasks left in your list!\n" +
+                        "%s\n",
                 LINE_HORIZONTAL, taskList.get(toDelete - 1).toString(), taskList.size() - 1, LINE_HORIZONTAL);
 
         taskList.remove(toDelete - 1);
     }
 
-    /***
+    /**
      * Adds the to do entered by the user to the list and prints it.
      *
      * @param input The to do inputted by the user.
@@ -192,7 +196,7 @@ public class Duke {
         printTaskAdded(taskName);
     }
 
-    /***
+    /**
      * Adds the deadline entered by the user to the list and prints it.
      *
      * @param input The deadline inputted by the user.
@@ -219,7 +223,7 @@ public class Duke {
         printTaskAdded(taskName);
     }
 
-    /***
+    /**
      * Adds the event entered by the user to the list and prints it.
      *
      * @param input The event inputted by the user.
@@ -245,27 +249,27 @@ public class Duke {
         printTaskAdded(taskName);
     }
 
-    /***
+    /**
      * Prints the confirmation of the addition of the last task.
      *
      * @param taskName The name of the task just added.
      */
     public static void printTaskAdded(String taskName) {
         System.out.printf("%s\n" +
-                "Gotcha! The following task has been added:\n" +
-                "\t%s\n" +
-                "You now have %d tasks in your list!\n" +
-                "%s\n",
+                        "Gotcha! The following task has been added:\n" +
+                        "\t%s\n" +
+                        "You now have %d tasks in your list!\n" +
+                        "%s\n",
                 LINE_HORIZONTAL, taskName,
                 taskList.size(), LINE_HORIZONTAL);
     }
 
-    /***
+    /**
      * Prints the farewell message for the user.
      */
     public static void printBye() {
         System.out.printf("%s\n" +
-                "Goodbye. Hope to see you again soon!\n",
+                        "Goodbye. Hope to see you again soon!\n",
                 LINE_HORIZONTAL);
     }
 }
