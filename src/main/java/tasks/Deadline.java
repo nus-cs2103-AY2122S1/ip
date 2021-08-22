@@ -1,12 +1,17 @@
 package tasks;
 
 import exceptions.EmptyDeadlineBodyException;
+import exceptions.InvalidDateTimeFormatException;
 import exceptions.InvalidDeadlineBodyException;
 
-public class Deadline extends Task {
-    private final String by;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
-    public Deadline(String deadlineDataText) throws EmptyDeadlineBodyException, InvalidDeadlineBodyException {
+public class Deadline extends Task {
+    private final LocalDate by;
+
+    public Deadline(String deadlineDataText) throws EmptyDeadlineBodyException, InvalidDeadlineBodyException,
+            InvalidDateTimeFormatException {
         if (deadlineDataText == null || deadlineDataText.isEmpty()) {
             throw new EmptyDeadlineBodyException();
         }
@@ -15,11 +20,16 @@ public class Deadline extends Task {
             throw new InvalidDeadlineBodyException();
         }
         super.setDescription(deadlineData[0].trim());
-        this.by = deadlineData[1].trim();
+        try {
+            this.by = LocalDate.parse(deadlineData[1].trim());
+        } catch (DateTimeParseException dte) {
+            throw new InvalidDateTimeFormatException();
+        }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString()
+                + " (by: " + by.getMonth() + " " + by.getDayOfMonth() + " " + by.getYear() + ")";
     }
 }
