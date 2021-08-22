@@ -24,27 +24,31 @@ public class Parser {
             if (command.equals("list")) {
                 return new ListCommand();
             } else {
-                // Splits the string on spaces, and acts accordingly based on the first word
-                String[] wordsArr = command.split(" ");
-                if (wordsArr.length == 0) {
+                // Splits the string on spaces
+                String[] wordsArray = command.split(" ");
+
+                // Acts accordingly based on the first word
+                if (wordsArray.length == 0) {
                     throw new UnrecognisedCommandException();
-                } else if (wordsArr[0].equals("done")) {
-                    if (wordsArr.length != 2) {
+                } else if (wordsArray[0].equals("done")) {
+                    if (wordsArray.length != 2) {
                         throw new MissingTaskIndexException();
                     }
-                    return new DoneCommand(Integer.valueOf(wordsArr[1]) - 1);
-                } else if (wordsArr[0].equals("delete")) {
-                    if (wordsArr.length != 2) {
+                    return new DoneCommand(Integer.valueOf(wordsArray[1]) - 1);
+                } else if (wordsArray[0].equals("delete")) {
+                    if (wordsArray.length != 2) {
                         throw new MissingTaskIndexException();
                     }
-                    return new DeleteCommand(Integer.valueOf(wordsArr[1]) - 1);
-                } else if (wordsArr[0].equals("todo") || wordsArr[0].equals("event")
-                        || wordsArr[0].equals("deadline")) {
+                    return new DeleteCommand(Integer.valueOf(wordsArray[1]) - 1);
+                } else if (wordsArray[0].equals("todo") || wordsArray[0].equals("event")
+                        || wordsArray[0].equals("deadline")) {
+                    // Declaring the variables required for creating a Task instance
                     String taskType;
                     String task;
                     LocalDate date;
 
-                    taskType = wordsArr[0];
+                    // Checks if a task description is provided by the user
+                    taskType = wordsArray[0];
                     int indexOfSpaceChar = command.indexOf(" ");
                     if (indexOfSpaceChar == -1) {
                         throw new EmptyTaskDescriptionException(taskType);
@@ -54,6 +58,7 @@ public class Parser {
                         throw new EmptyTaskDescriptionException(taskType);
                     }
 
+                    // Parsing the user input based on the task type
                     if (taskType.equals("deadline")) {
                         if (!taskDescription.contains(" /by ")) {
                             throw new TimeNotSpecifiedException(" /by ");

@@ -10,12 +10,10 @@ public class Ui {
 
     /** Horizontal line for formatting */
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
-
     /** Greeting message to be displayed when bot starts running */
-    private static final String GREETING_MESSAGE = "Hello! I'm JWBot\nWhat can I do for you?";
-
+    private static final String MESSAGE_GREETING = "Hello! I'm JWBot\nWhat can I do for you?";
     /** Goodbye message to be displayed when bot stops running */
-    private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String MESSAGE_GOODBYE = "Bye. Hope to see you again soon!";
 
     /** A Scanner instance to obtain user input */
     private Scanner scanner = new Scanner(System.in);
@@ -25,7 +23,7 @@ public class Ui {
      */
     public void greetUser() {
         System.out.println(HORIZONTAL_LINE);
-        System.out.println(GREETING_MESSAGE);
+        System.out.println(MESSAGE_GREETING);
         System.out.println(HORIZONTAL_LINE);
     }
 
@@ -35,7 +33,7 @@ public class Ui {
     public void exit() {
         scanner.close();
         System.out.println(HORIZONTAL_LINE);
-        System.out.println(GOODBYE_MESSAGE);
+        System.out.println(MESSAGE_GOODBYE);
         System.out.println(HORIZONTAL_LINE);
     }
 

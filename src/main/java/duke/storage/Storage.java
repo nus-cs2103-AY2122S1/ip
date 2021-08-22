@@ -27,18 +27,19 @@ public class Storage {
 
     public ArrayList<Task> load() {
         File dukeFile = new File(this.filePath);
-        ArrayList<Task> tasksList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
         try {
             Scanner fileScanner = new Scanner(dukeFile);
             while (fileScanner.hasNext()) {
+                // Splitting the line according to the characteristics of a task
                 String currentLine = fileScanner.nextLine();
-
                 String[] taskStatus = currentLine.split(Pattern.quote(" | "));
                 String taskType = taskStatus[0];
                 String taskProgress = taskStatus[1];
                 String taskDescription = taskStatus[2];
                 Task taskToAdd;
 
+                // Creating a Deadline/Event/Todo instance
                 if (taskType.equals("T")) {
                     taskToAdd = new Todo(taskDescription);
                 } else if (taskType.equals("D")) {
@@ -46,32 +47,33 @@ public class Storage {
                 } else {
                     taskToAdd = new Event(taskDescription, LocalDate.parse(taskStatus[3]));
                 }
-
                 if (taskProgress.equals("1")) {
                     taskToAdd.markAsDone();
                 }
 
-                tasksList.add(taskToAdd);
+                // Adding the created task to the task list
+                taskList.add(taskToAdd);
             }
-            return tasksList;
+            return taskList;
         } catch (FileNotFoundException e) {
-            // Checking if directory exists
             java.nio.file.Path directoryPath = Paths.get(System.getProperty("user.home"), "data");
             if (!Files.exists(directoryPath)) {
                 File directory = new File(String.valueOf(String.valueOf(directoryPath)));
                 directory.mkdir();
             }
-            return tasksList;
+            return taskList;
         }
     }
 
     public void save(TaskList taskList) {
+        // Format the task list into a String
         String textToAdd = "";
         ArrayList<Task> tasksList = taskList.getTaskList();
-
         for (Task task : tasksList) {
+            // Initialising a String to store the characteristics of the task
             String currentLine = "";
 
+            // Formatting the task type
             if (task instanceof Todo) {
                 currentLine += "T | ";
             } else if (task instanceof Deadline) {
@@ -80,23 +82,28 @@ public class Storage {
                 currentLine += "E | ";
             }
 
+            // Formatting the completion status of the task
             if (task.isDone()) {
                 currentLine += "1 | ";
             } else {
                 currentLine += "0 | ";
             }
 
+            // Formatting the task description
             currentLine += task.getDescription() + " | ";
 
+            // Formatting the date associated with the task
             if (task instanceof Deadline) {
                 currentLine += ((Deadline) task).getDate().toString();
             } else if (task instanceof Event) {
                 currentLine += ((Event) task).getDate().toString();
             }
 
+            // Concatenate the formatted line to textToAdd
             textToAdd += currentLine + System.lineSeparator();
         }
 
+        // Write to the hard disk
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
             fileWriter.write(textToAdd);

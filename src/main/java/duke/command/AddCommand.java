@@ -29,6 +29,7 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        // Adds a Task to the TaskList instance
         Task taskToBeAdded;
         if (taskType.equals("todo")) {
             taskToBeAdded = new Todo(task);
@@ -39,6 +40,7 @@ public class AddCommand extends Command {
         }
         tasks.addTask(taskToBeAdded);
 
+        // Displays a message indicating the task has been successfully added to the list
         String message = "Got it. I've added this task:\n" + "  " + taskToBeAdded + "\n";
         if (tasks.getNumberOfTasks() <= 1) {
             message += "Now you have " + tasks.getNumberOfTasks() + " task in the list.";
@@ -47,6 +49,7 @@ public class AddCommand extends Command {
         }
         ui.showCommandDone(message);
 
+        // Saves the current task list to the hard drive
         storage.save(tasks);
     }
 
