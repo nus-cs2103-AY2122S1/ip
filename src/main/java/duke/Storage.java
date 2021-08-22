@@ -10,7 +10,7 @@ public class Storage {
     private File file;
     private String filePath;
 
-    public Storage(String filePath) {
+    public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
         try {
             this.file = new File(filePath);

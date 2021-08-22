@@ -10,7 +10,7 @@ import duke.commands.DoneCommand;
 import duke.commands.ListCommand;
 
 public class Parser {
-    public static Command parse(String line) {
+    public static Command parse(String line) throws DukeException {
         Command c;
         String[] lineSegments = line.split(" ");
         switch (lineSegments[0].toLowerCase()) {

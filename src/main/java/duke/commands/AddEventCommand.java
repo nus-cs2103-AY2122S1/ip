@@ -12,7 +12,7 @@ public class AddEventCommand extends Command {
     private String time;
 
     @Override
-    public void parseLine(String line) {
+    public void parseLine(String line) throws DukeException {
         int idx = line.indexOf("/at");
         if (idx == -1) {
             throw new DukeException("Please specify /at");

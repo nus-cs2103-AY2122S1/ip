@@ -3,7 +3,6 @@ package duke;
 import duke.commands.Command;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Duke {
