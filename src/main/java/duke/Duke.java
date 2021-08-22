@@ -60,7 +60,11 @@ public class Duke {
             } catch (DukeException | IOException e) {
                 Ui.notifyError(e.getMessage());
             } finally {
-                input = scanner.nextLine().trim();
+                if (scanner.hasNext()) {
+                    input = scanner.nextLine().trim();
+                } else {
+                    break;
+                }
             }
         }
 

@@ -1,116 +1,72 @@
- 	____________________________________________________________
+	____________________________________________________________
 	 Hello! I am Matthew!
 	 What can I do for you?
 	____________________________________________________________
 
 	____________________________________________________________
 	 Got it. I've added this task:
-	   [T][ ] read book
-	 Now you have 1 tasks in the list.
+	   [T][ ] make coffee
+	 1  tasks are in your list now!
 	____________________________________________________________
 
 	____________________________________________________________
-	 Got it. I've added this task:
-	   [D][ ] finish book (by: Monday)
-	 Now you have 2 tasks in the list.
+	 No such tag! Please input the correct tag!
 	____________________________________________________________
 
 	____________________________________________________________
-	 Here are the tasks in your list:
-	 1.[T][ ] read book
-	 2.[D][ ] finish book (by: Monday)
+	 There are the tasks you have:
+	 1.[T][ ] make coffee
 
 	____________________________________________________________
 
 	____________________________________________________________
 	 Got it. I've added this task:
-	   [E][ ] meeting (at: Tuesday 2-4pm)
-	 Now you have 3 tasks in the list.
+	   [D][ ] watch movie (by: Sep 18 2021)
+	 2  tasks are in your list now!
 	____________________________________________________________
 
 	____________________________________________________________
-	 Got it. I've added this task:
-	   [T][ ] top up card
-	 Now you have 4 tasks in the list.
+	 Wrong format! Please follow the format: type description /xx yyyy-mm-dd
+	 Use /by for deadline, /at for event.
 	____________________________________________________________
 
 	____________________________________________________________
-	 Nice! I've marked this task as done: 
-	  [T][X] read book
+	 Wrong format! Please follow the format: type description /by yyyy-mm-dd.
 	____________________________________________________________
 
 	____________________________________________________________
-	 Nice! I've marked this task as done: 
-	  [D][X] finish book (by: Monday)
-	____________________________________________________________
-
-	____________________________________________________________
-	 Got it. I've added this task:
-	   [D][ ] return book (by: Sunday)
-	 Now you have 5 tasks in the list.
-	____________________________________________________________
-
-	____________________________________________________________
-	 Got it. I've added this task:
-	   [E][ ] birthday party (at: Saturday 10am-10pm)
-	 Now you have 6 tasks in the list.
-	____________________________________________________________
-
-	____________________________________________________________
-	 Here are the tasks in your list:
-	 1.[T][X] read book
-	 2.[D][X] finish book (by: Monday)
-	 3.[E][ ] meeting (at: Tuesday 2-4pm)
-	 4.[T][ ] top up card
-	 5.[D][ ] return book (by: Sunday)
-	 6.[E][ ] birthday party (at: Saturday 10am-10pm)
-
-	____________________________________________________________
-
-	____________________________________________________________
-	 Nice! I've marked this task as done: 
-	  [T][X] top up card
-	____________________________________________________________
-
-	____________________________________________________________
-	 Here are the tasks in your list:
-	 1.[T][X] read book
-	 2.[D][X] finish book (by: Monday)
-	 3.[E][ ] meeting (at: Tuesday 2-4pm)
-	 4.[T][X] top up card
-	 5.[D][ ] return book (by: Sunday)
-	 6.[E][ ] birthday party (at: Saturday 10am-10pm)
+	 There are the tasks you have:
+	 1.[T][ ] make coffee
+	 2.[D][ ] watch movie (by: Sep 18 2021)
 
 	____________________________________________________________
 
 	____________________________________________________________
 	 Got it. I've added this task:
-	   [T][ ] borrow new book
-	 Now you have 7 tasks in the list.
+	   [E][ ] wedding (at: Sep 18 2021)
+	 3  tasks are in your list now!
 	____________________________________________________________
 
 	____________________________________________________________
-	 Got it. I've added this task:
-	   [E][ ] book convention (at: Wednesday 3-6pm)
-	 Now you have 8 tasks in the list.
+	 Wrong format! Please follow the format: type description /xx yyyy-mm-dd
+	 Use /by for deadline, /at for event.
 	____________________________________________________________
 
 	____________________________________________________________
-	 Here are the tasks in your list:
-	 1.[T][X] read book
-	 2.[D][X] finish book (by: Monday)
-	 3.[E][ ] meeting (at: Tuesday 2-4pm)
-	 4.[T][X] top up card
-	 5.[D][ ] return book (by: Sunday)
-	 6.[E][ ] birthday party (at: Saturday 10am-10pm)
-	 7.[T][ ] borrow new book
-	 8.[E][ ] book convention (at: Wednesday 3-6pm)
+	 Wrong format! Please follow the format: type description /at yyyy-mm-dd.
+	____________________________________________________________
+
+	____________________________________________________________
+	 There are the tasks you have:
+	 1.[T][ ] make coffee
+	 2.[D][ ] watch movie (by: Sep 18 2021)
+	 3.[E][ ] wedding (at: Sep 18 2021)
 
 	____________________________________________________________
 
 	____________________________________________________________
-	 Nice! I've marked this task as done: 
-	  [T][X] borrow new book
+	 Well done! You have completed: 
+	  [T][X] make coffee
 	____________________________________________________________
 
 	____________________________________________________________
@@ -118,78 +74,104 @@
 	____________________________________________________________
 
 	____________________________________________________________
-	 Wrong Format used! Please you the correct format!
+	 Wrong format! Please enter a valid id.
 	____________________________________________________________
 
 	____________________________________________________________
-	 Wrong Format used! Please you the correct format!
+	 Wrong format! Please enter a valid id.
 	____________________________________________________________
 
 	____________________________________________________________
-	 Wrong Format used! Please you the correct format!
-	____________________________________________________________
-
-	____________________________________________________________
-	 Wrong Format used! Please you the correct format!
-	____________________________________________________________
-
-	____________________________________________________________
-	 Here are the tasks in your list:
-	 1.[T][X] read book
-	 2.[D][X] finish book (by: Monday)
-	 3.[E][ ] meeting (at: Tuesday 2-4pm)
-	 4.[T][X] top up card
-	 5.[D][ ] return book (by: Sunday)
-	 6.[E][ ] birthday party (at: Saturday 10am-10pm)
-	 7.[T][X] borrow new book
-	 8.[E][ ] book convention (at: Wednesday 3-6pm)
+	 There are the tasks you have:
+	 1.[T][X] make coffee
+	 2.[D][ ] watch movie (by: Sep 18 2021)
+	 3.[E][ ] wedding (at: Sep 18 2021)
 
 	____________________________________________________________
 
 	____________________________________________________________
-	 Got it. I've deleted this task:
-	   [T][X] read book
-	 Now you have 7 tasks in the list.
+	 Got it. I've added this task:
+	   [T][ ] read book
+	 4  tasks are in your list now!
 	____________________________________________________________
 
 	____________________________________________________________
-	 Here are the tasks in your list:
-	 1.[D][X] finish book (by: Monday)
-	 2.[E][ ] meeting (at: Tuesday 2-4pm)
-	 3.[T][X] top up card
-	 4.[D][ ] return book (by: Sunday)
-	 5.[E][ ] birthday party (at: Saturday 10am-10pm)
-	 6.[T][X] borrow new book
-	 7.[E][ ] book convention (at: Wednesday 3-6pm)
+	 There are the tasks you have:
+	 1.[T][X] make coffee
+	 2.[D][ ] watch movie (by: Sep 18 2021)
+	 3.[E][ ] wedding (at: Sep 18 2021)
+	 4.[T][ ] read book
 
 	____________________________________________________________
 
 	____________________________________________________________
 	 Got it. I've deleted this task:
-	   [D][ ] return book (by: Sunday)
-	 Now you have 6 tasks in the list.
+	   [T][X] make coffee
+	 3  tasks are in your list now!
 	____________________________________________________________
 
 	____________________________________________________________
-	 Wrong Format used! Please you the correct format!
+	 You do not have this many task added yet, please check and try again.
 	____________________________________________________________
 
 	____________________________________________________________
-	 Wrong Format used! Please you the correct format!
+	 Wrong format! Please enter a valid id.
 	____________________________________________________________
 
 	____________________________________________________________
-	 Here are the tasks in your list:
-	 1.[D][X] finish book (by: Monday)
-	 2.[E][ ] meeting (at: Tuesday 2-4pm)
-	 3.[T][X] top up card
-	 4.[E][ ] birthday party (at: Saturday 10am-10pm)
-	 5.[T][X] borrow new book
-	 6.[E][ ] book convention (at: Wednesday 3-6pm)
+	 Wrong format! Please enter a valid id.
+	____________________________________________________________
+
+	____________________________________________________________
+	 Wrong format! Please enter a valid id.
+	____________________________________________________________
+
+	____________________________________________________________
+	 Got it. I've added this task:
+	   [T][ ] buy monkey
+	 4  tasks are in your list now!
+	____________________________________________________________
+
+	____________________________________________________________
+	 Got it. I've added this task:
+	   [T][ ] feed monkey
+	 5  tasks are in your list now!
+	____________________________________________________________
+
+	____________________________________________________________
+	 Got it. I've added this task:
+	   [T][ ] play monkey
+	 6  tasks are in your list now!
+	____________________________________________________________
+
+	____________________________________________________________
+	 There are the tasks you have:
+	 1.[D][ ] watch movie (by: Sep 18 2021)
+	 2.[E][ ] wedding (at: Sep 18 2021)
+	 3.[T][ ] read book
+	 4.[T][ ] buy monkey
+	 5.[T][ ] feed monkey
+	 6.[T][ ] play monkey
 
 	____________________________________________________________
 
 	____________________________________________________________
-	 Bye. Don't have a good day... Have a great day!!!
+	 Sorry, I can't find anything that matches the keyword.
+	____________________________________________________________
+
+	____________________________________________________________
+	 There are the tasks you have:
+	 1.[T][ ] buy monkey
+	 2.[T][ ] feed monkey
+	 3.[T][ ] play monkey
+
+	____________________________________________________________
+
+	____________________________________________________________
+	 No such tag! Please input the correct tag!
+	____________________________________________________________
+
+	____________________________________________________________
+	 Good Bye. Don't have a good day... Have a great day!!!
 	____________________________________________________________
 

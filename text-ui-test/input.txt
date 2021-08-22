@@ -1,29 +1,32 @@
-todo read book
-deadline finish book /by Monday
+todo make coffee
+todo-wash cup
+list 
+deadline watch movie /by 2021-09-18
+deadline watch movie trailer by 2021-09-17
+deadline watch movie teaser /by 2021/09/16
 list
-event meeting /at Tuesday 2-4pm
-todo top up card
+event wedding /at 2021-09-18
+event wedding at 2021-09-19
+event wedding /at 2021/09/20
+list
 done 1
-done 2
-deadline return book /by Sunday
-event birthday party /at Saturday 10am-10pm
-list
-done 4
-list
-todo borrow new book
-event book convention /at Wednesday 3-6pm
-list
-done 7
 done 10
-done 5s
-done s
-deadline assignment by Monday
-event Meeting Again at Thursday 2-4pm
+done x
+done one
+list
+todo read book
 list
 delete 1
+delete 10
+delete x
+delete 1x
+delete one
+todo buy monkey
+todo feed monkey
+todo play monkey
 list
-delete 4
-delete -1
-delete xs
-list
-bye
+find money
+find monkey
+schedule meeting
+
+
