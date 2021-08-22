@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * This class implements a Task with a description and completion status
  *

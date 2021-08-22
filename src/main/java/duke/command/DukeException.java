@@ -1,5 +1,6 @@
+package duke.command;
 /**
- * This class implements DukeException to represent exceptions specific to Duke.
+ * This class implements DukeException to represent exceptions specific to duke.command.Duke.
  *
  * CS2103T ip
  * AY21/22 Semester 1

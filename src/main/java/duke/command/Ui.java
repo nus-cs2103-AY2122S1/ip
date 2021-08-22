@@ -1,3 +1,5 @@
+package duke.command;
+
 public class Ui {
     private static String DOTTED_LINES = "-".repeat(80);
     public static void showWelcomeMessage() {

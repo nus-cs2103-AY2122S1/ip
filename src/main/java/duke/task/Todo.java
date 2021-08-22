@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * This class implements a Todo object which inherits from Task.
  *

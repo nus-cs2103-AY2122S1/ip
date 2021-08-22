@@ -1,9 +1,11 @@
+package duke.command;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MyParser {
-    public void parse(String command,String description,Duke duke) throws DukeException {
+    protected void parse(String command,String description,Duke duke) throws DukeException {
         String userDescription = description.trim();
         switch (command) {
             case "bye":
