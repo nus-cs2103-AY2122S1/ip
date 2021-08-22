@@ -43,6 +43,7 @@ public class AddTodoCommand extends Command {
             FileWriter fw = new FileWriter("data/tasks.txt", true);
             Todo todo = new Todo(super.getDesc(), false);
             tasks.add(todo);
+            storage.add(todo);
 
             System.out.println("Got it. I've added this task:");
             System.out.println(todo);
@@ -52,9 +53,6 @@ public class AddTodoCommand extends Command {
             } else {
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             }
-
-            fw.write("T | 0 | " + super.getDesc() + "\n");
-            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

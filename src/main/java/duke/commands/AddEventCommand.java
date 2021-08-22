@@ -55,12 +55,10 @@ public class AddEventCommand extends Command {
             FileWriter fw = new FileWriter("data/tasks.txt", true);
             Event event = new Event(super.getDesc(), at, false);
             tasks.add(event);
+            storage.add(event);
 
             System.out.println("Got it. I've added this task:");
             System.out.println(event);
-
-            fw.write("E | 0 | " + super.getDesc() + " | " + at + "\n");
-            fw.close();
 
             if (tasks.size() == 1) {
                 System.out.println("Now you have 1 task in the list.");
