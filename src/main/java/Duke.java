@@ -1,8 +1,14 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Duke {
     private static boolean inSession;
@@ -124,7 +130,27 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! " +
                     "The deadline of a deadline cannot be empty.");
         }
-        Deadline newDeadline = new Deadline(description[0], description[1]);
+        String[] dateTime = description[1].split(" ", 2);
+        LocalDate date;
+        LocalTime time;
+        Deadline newDeadline;
+        try {
+            date = LocalDate.parse(dateTime[0]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("☹ OOPS!!! " +
+                    "The format of the date must be in yyyy-mm-dd.");
+        }
+        if (dateTime.length == 1) {
+            newDeadline = new Deadline(description[0], date);
+        } else {
+            try {
+                time = LocalTime.parse(dateTime[1]);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("☹ OOPS!!! " +
+                        "The format of the time must be in hh:mm.");
+            }
+            newDeadline = new Deadline(description[0], date, time);
+        }
         toDoList.add(newDeadline);
         System.out.println(addedMessage + newDeadline.toString() +
                 "\nNow you have " + toDoList.size() + " tasks in the list.");
@@ -148,7 +174,27 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! " +
                     "The date of an event cannot be empty.");
         }
-        Event newEvent = new Event(description[0], description[1]);
+        String[] dateTime = description[1].split(" ", 2);
+        LocalDate date;
+        LocalTime time;
+        Event newEvent;
+        try {
+            date = LocalDate.parse(dateTime[0]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("☹ OOPS!!! " +
+                    "The format of the date must be in yyyy-mm-dd.");
+        }
+        if (dateTime.length == 1) {
+            newEvent = new Event(description[0], date);
+        } else {
+            try {
+                time = LocalTime.parse(dateTime[1]);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("☹ OOPS!!! " +
+                        "The format of the time must be in hh:mm.");
+            }
+            newEvent = new Event(description[0], date, time);
+        }
         toDoList.add(newEvent);
         System.out.println(addedMessage + newEvent.toString() +
                 "\nNow you have " + toDoList.size() + " tasks in the list.");
@@ -300,8 +346,17 @@ public class Duke {
             String[] deadlineDescription = taskDetail
                     .substring(0, taskDetail.length() - 1)
                     .split("by: ", 2);
-            result = new Deadline(deadlineDescription[0]
-                    .substring(0, deadlineDescription[0].length() - 2), deadlineDescription[1]);
+            String[] dateTimeOfDeadline = deadlineDescription[1].split(", ", 2);
+            if (dateTimeOfDeadline.length == 1) {
+                result = new Deadline(deadlineDescription[0]
+                        .substring(0, deadlineDescription[0].length() - 2),
+                        LocalDate.parse(dateTimeOfDeadline[0], DateTimeFormatter.ofPattern("dd MMM yyyy")));
+            } else {
+                result = new Deadline(deadlineDescription[0]
+                        .substring(0, deadlineDescription[0].length() - 2),
+                        LocalDate.parse(dateTimeOfDeadline[0], DateTimeFormatter.ofPattern("dd MMM yyyy")),
+                        LocalTime.parse(dateTimeOfDeadline[1]));
+            }
             if (taskStatus.equals("[X]")) {
                 result.setDone();
             }
@@ -310,8 +365,17 @@ public class Duke {
             String[] eventDescription = taskDetail
                     .substring(0, taskDetail.length() - 1)
                     .split("at: ", 2);
-            result = new Event(eventDescription[0]
-                    .substring(0, eventDescription[0].length() - 2), eventDescription[1]);
+            String[] dateTimeOfEvent = eventDescription[1].split(", ", 2);
+            if (dateTimeOfEvent.length == 1) {
+                result = new Event(eventDescription[0]
+                        .substring(0, eventDescription[0].length() - 2),
+                        LocalDate.parse(dateTimeOfEvent[0], DateTimeFormatter.ofPattern("dd MMM yyyy")));
+            } else {
+                result = new Deadline(eventDescription[0]
+                        .substring(0, eventDescription[0].length() - 2),
+                        LocalDate.parse(dateTimeOfEvent[0], DateTimeFormatter.ofPattern("dd MMM yyyy")),
+                        LocalTime.parse(dateTimeOfEvent[1]));
+            }
             if (taskStatus.equals("[X]")) {
                 result.setDone();
             }
