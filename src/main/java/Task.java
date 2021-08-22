@@ -12,6 +12,10 @@ public class Task {
         this.taskType = taskType;
     }
 
+    public String saveTaskFormat() {
+        return String.format("|%s|%s", isDone? 1 : 0, description);
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
