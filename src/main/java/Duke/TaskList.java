@@ -107,6 +107,9 @@ public class TaskList {
                     int num2 = Integer.parseInt(actionList.getActionList());
                     this.delete(num2);
                     break;
+                case FIND:
+                    this.find(actionList.getActionList());
+                    break;
                 default:
                     break;
             }
@@ -144,6 +147,25 @@ public class TaskList {
         "   Now you have " + curSize + " tasks in the list.\n" +
         "   ____________________________________________________________";
         System.out.println(item);
+    }
+
+    public void find(String keyword){
+        ArrayList<Task> mathingList = new ArrayList<>();
+        for (Task eachtask : this.list){
+            if (eachtask.actionName.contains(keyword)){
+                mathingList.add(eachtask);
+            }
+        }
+        String res = "";
+        res += "    ____________________________________________________________\n" + 
+        "   Here are the matching tasks in your list:\n";
+        for (int i = 0; i < mathingList.size(); i++){
+            Task eachTask = mathingList.get(i);
+            String each = String.valueOf(i + 1) + ". " + eachTask.toString();
+            res += each + "\n";
+        }
+        res += "    ____________________________________________________________";
+        System.out.println(res);
     }
 
     public void printList(){
