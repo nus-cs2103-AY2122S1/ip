@@ -15,6 +15,7 @@ import duke.task.TaskList;
  * @version CS2103 AY21/22 Sem 1 iP
  */
 public abstract class Command {
+<<<<<<< HEAD
     /**
      * Executes this Command and prints appropriate responses.
      *
@@ -30,6 +31,10 @@ public abstract class Command {
      *
      * @return Returns true if this is an instance of an ExitCommand.
      */
+=======
+    public abstract void execute(TaskList tasks, UI ui, Storage storage) throws IOException;
+
+>>>>>>> branch-A-CodingStandard
     public boolean isExit() {
         return false;
     }
