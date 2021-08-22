@@ -38,7 +38,7 @@ public class Storage {
     public ArrayList<duke.task.Task> load() throws DukeException {
         try {
             ArrayList<duke.task.Task> result = new ArrayList<>();
-            Path folderPath = Paths.get(this.filePath.toString(),  "..");
+            Path folderPath = Paths.get(filePath.toString(),  "..");
             if (!Files.exists(folderPath)) {
                 Files.createDirectories(folderPath);
             }
@@ -94,7 +94,7 @@ public class Storage {
      */
     public void updateStorage(TaskList taskList) throws DukeException {
         try {
-            Path temp = Files.createTempFile(Paths.get(this.filePath.toString(), "..")
+            Path temp = Files.createTempFile(Paths.get(filePath.toString(), "..")
                     , "temp", ".txt");
             FileWriter fw = new FileWriter(temp.toString());
             File tempFile = new File(temp.toString());
@@ -103,8 +103,8 @@ public class Storage {
                 fw.write(task.record() + System.lineSeparator());
             }
             fw.close();
-            Files.delete(this.filePath);
-            Files.copy(temp, this.filePath);
+            Files.delete(filePath);
+            Files.copy(temp, filePath);
             //noinspection ResultOfMethodCallIgnored
             tempFile.delete();
         } catch (IOException e) {

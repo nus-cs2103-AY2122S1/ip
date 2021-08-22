@@ -17,22 +17,22 @@ public abstract class Task {
      */
     Task(String content) {
         this.content = content;
-        this.status = false;
+        status = false;
     }
     
     public String getContent() {
-        return this.content;
+        return content;
     }
 
     public boolean getStatus() {
-        return this.status;
+        return status;
     }
 
     /**
      * Sets the Task as done.
      */
     public void doneTask() {
-        this.status = true;
+        status = true;
     }
 
     /**
@@ -43,7 +43,7 @@ public abstract class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s",
-                this.status ? "x" : " ", this.content);
+                status ? "x" : " ", content);
     }
     
     abstract public String record();

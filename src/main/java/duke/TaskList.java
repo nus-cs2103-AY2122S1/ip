@@ -28,7 +28,7 @@ public class TaskList {
      * Returns a TaskList instance with an empty ArrayList of duke.task.Task objects.
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        taskList = new ArrayList<>();
     }
 
     /**
@@ -39,8 +39,8 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("");
-        for (int i = 0; i < this.taskList.size(); i++) {
-            Task task = this.taskList.get(i);
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
             String entry = String.format("%d. %s\n",
                     i+1, task.toString());
             result.append(entry);
@@ -54,7 +54,7 @@ public class TaskList {
      * @return An int object indicating the size of the current ArrayList.
      */
     public int size() {
-        return this.taskList.size();
+        return taskList.size();
     }
 
     /**
@@ -64,7 +64,7 @@ public class TaskList {
      * @return A String representation of the ArrayList after being filtered by a LocalDate Object. 
      */
     public String listSchedule(LocalDate dateFilter) {
-        ArrayList<Task> filteredTaskList = this.taskList.stream()
+        ArrayList<Task> filteredTaskList = taskList.stream()
                 .filter(Task::hasSchedule).collect(Collectors.toCollection(ArrayList::new));
         StringBuilder result = new StringBuilder("");
         for (int i = 0; i < filteredTaskList.size(); i++) {
@@ -83,7 +83,7 @@ public class TaskList {
      * @param index An int indicating the position of Task in the ArrayList that is to be marked as done.
      */
     public void doneTask(int index) {
-        Task holder = this.taskList.get(index);
+        Task holder = taskList.get(index);
         holder.doneTask();
     }
 
@@ -93,9 +93,9 @@ public class TaskList {
      * @param index An int indicating the position of Task in the ArrayList to be deleted.
      */
     public void deleteTask(int index) {
-        String holder = this.taskList.get(index).toString();
-        this.taskList.remove(index);
-        this.taskList.trimToSize();
+        String holder = taskList.get(index).toString();
+        taskList.remove(index);
+        taskList.trimToSize();
     }
 
     /**
@@ -104,7 +104,7 @@ public class TaskList {
      * @param task A duke.task.Task object that is to be added. 
      */
     public void addTask(duke.task.Task task) {
-        this.taskList.add(task);
+        taskList.add(task);
     }
 
     /**
@@ -114,7 +114,7 @@ public class TaskList {
      * @return A duke.task.Task object specified by the index given from the ArrayList. 
      */
     public duke.task.Task getTask(int index) {
-        return this.taskList.get(index);
+        return taskList.get(index);
     }
     
 }

@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(String command) throws DukeException {
         if (isDeleteOps(command)) {
-            this.index = Integer.parseInt(command.substring(7)) - 1;
+            index = Integer.parseInt(command.substring(7)) - 1;
         } else {
             throw new DukeException("☹ Would you specify the duke.task for me my dear?");
         }
