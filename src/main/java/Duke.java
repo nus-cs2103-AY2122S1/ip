@@ -1,12 +1,17 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import java.time.LocalDate;
-
 public class Duke {
+    private static final String FILE_PATH = "./data/duke.txt";
+
     List<Task> taskList;
 
     public Duke() {
@@ -72,6 +77,12 @@ public class Duke {
         System.out.println("\t" + task);
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         printHorizLine();
+        try {
+            writeListToFile(FILE_PATH);
+        } catch(IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
 
     private void deleteTask(int idx) {
@@ -82,8 +93,11 @@ public class Duke {
             System.out.println("\t" + curr);
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
             printHorizLine();
+            writeListToFile(FILE_PATH);
         } catch(IndexOutOfBoundsException e) {
             System.out.println("The task index is invalid!");
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -96,6 +110,14 @@ public class Duke {
         printHorizLine();
     }
 
+    private String listString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= this.taskList.size(); i++) {
+           sb.append(String.format("%s\n", taskList.get(i-1)));
+        }
+        return sb.toString();
+    }
+
     private void markTaskDone(int idx) {
         try {
             Task curr = this.taskList.get(idx - 1);
@@ -104,8 +126,11 @@ public class Duke {
             System.out.println("Nice! I've marked this task as done:");
             System.out.println("\t" + curr);
             printHorizLine();
+            writeListToFile(FILE_PATH);
         } catch(IndexOutOfBoundsException e) {
             System.out.println("The task index is invalid!");
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -195,11 +220,46 @@ public class Duke {
         }
     }
 
+    private void writeListToFile(String path) throws IOException {
+        File file = linkFileOrCreateFile(path);
+        FileWriter fw = new FileWriter(file);
+        fw.write(listString());
+        fw.close();
+    }
+
+    private void appendToFile(String path, String text) throws IOException {
+        File file = linkFileOrCreateFile(path);
+        FileWriter fw = new FileWriter(file, true);
+        fw.write(text);
+        fw.close();
+    }
+
+    private File linkFileOrCreateFile(String path) throws IOException {
+        File file = new File(path);
+        if(!file.exists()) {
+            checkAndFixParentDirectory(file.getParentFile());
+            file.createNewFile();
+        }
+        return file;
+    }
+
+    /** Recursively check if current directory and anscestor directory exsits
+     *  if not, create directories.
+     * @param currDir current directory to check and fix
+     */
+    private void checkAndFixParentDirectory(File currDir) {
+        if(!currDir.exists()) {
+            checkAndFixParentDirectory(currDir.getParentFile());
+            currDir.mkdir();
+        }
+    }
+
     private void greeting(String name) {
         printHorizLine();
         System.out.println("Hello " + name + "!");
         System.out.println("I'm Duke");
         printHorizLine();
+        System.out.println("");
     }
 
     private void sayBye(String name) {
