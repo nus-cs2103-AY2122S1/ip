@@ -13,15 +13,40 @@ import duke.task.Todo;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a command that can be executed to add a task based on user input,
+ * print task added and new total count of tasks, then save tasks to storage.
+ */
 public class AddCommand extends Command {
     private String userInput;
 
+    /**
+     * Constructor for AddCommand.
+     * Creates an AddCommand containing user input.
+     *
+     * @param userInput User's input into Duke chatbot.
+     */
     public AddCommand(String userInput) {
         this.userInput = userInput;
     }
 
-
-    private void addTask(TaskList tasks, Ui ui, Character separator) throws DukeException {
+    /**
+     * Adds task based on user input into tasks, then prints task added and new total count of tasks.
+     * Event is added for user inputs of the form "event task-descr /at dd/mm/yyyy".
+     * Deadline is added for user inputs of the form "deadline task-descr /by dd/mm/yyyy".
+     * Todo is added for user inputs of the form "todo task-descr".
+     *
+     * @param tasks TaskList to add task to.
+     * @param ui Ui to get enums, response messages and exception messages from.
+     * @param separator char separator used to separate task description and time in Event and Deadline.
+     * @throws DukeException If user command is invalid.
+     * @throws DukeException If user input does not provide task description.
+     * @throws DukeException If user input has missing spaces.
+     * @throws DukeException If user input for time is in invalid date format.
+     * @throws DukeException If user input does not contain descriptors by or at for Deadline and Event respectively.
+     * @throws DukeException If user input is missing time input for Deadline and Event.
+     */
+    private void addTask(TaskList tasks, Ui ui, char separator) throws DukeException {
         // Checks for command given in user input.
         String userCommand;
         if (this.userInput.startsWith(Commands.TODO.getCommand())) {
@@ -71,6 +96,17 @@ public class AddCommand extends Command {
         ui.showAddSuccess(tasks.get(tasks.size() - 1), tasks.size());
     }
 
+    /**
+     * Adds task based on user input to tasks, prints task added and new total count of task
+     * and then saves tasks to storage.
+     * Event is added for user inputs of the form "event task-descr /at dd/mm/yyyy".
+     * Deadline is added for user inputs of the form "deadline task-descr /by dd/mm/yyyy".
+     * Todo is added for user inputs of the form "todo task-descr".
+     *
+     * @param tasks TaskList that command executes upon.
+     * @param ui Ui contains enums, response messages and exception messages that command execution will use.
+     * @param storage Storage that command executes upon. Should contain the TaskList used in tasks parameter.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storable storage) {
         try {
@@ -84,6 +120,12 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Indicates whether another object is equals to this AddCommand.
+     *
+     * @param obj Other object to be compared to.
+     * @return boolean indicating whether the other object is equal to this AddCommand.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof AddCommand) {
