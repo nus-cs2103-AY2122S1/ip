@@ -129,6 +129,8 @@ public class Duke {
                 for (String s: lines) {
                     parseTaskFromFile(s);
                 }
+                System.out.println("   Autosave feature detected. Please type 'list' to view " +
+                        "previously saved tasks");
             } catch (NoSuchFileException e) {
                 System.out.println("   Tasklist file not found. Initialising empty tasklist...");
             } catch (IOException e) {
@@ -159,7 +161,7 @@ public class Duke {
         case "E":
             Event e = new Event(words.get(2), words.get(3));;
             if (words.size() == 4) { // add only if date is specified
-                if (words.get(1).equals("0")) {
+                if (words.get(1).equals("X")) {
                     e = e.markAsDone();
                 }
                 this.taskList.add(e);
