@@ -14,8 +14,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class encapsulates the data manager used for persisting tasks.
+ *
+ * @author Tan Yi Guan
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class DataManager {
+    // Storage file used for persisting task
     private final File data;
+    // Relative path of file
     private final String filePath;
 
     public DataManager(String filePath) {
@@ -23,6 +31,12 @@ public class DataManager {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads data from storage file.
+     * Returns an ArrayList<Task> containing all tasks persisted in storage.
+     *
+     * @return ArrayList of tasks persisted in storage.
+     */
     public ArrayList<Task> readData() {
         try {
             Scanner sc = new Scanner(data);
@@ -37,6 +51,12 @@ public class DataManager {
         }
     }
 
+    /**
+     * Writes data to storage file.
+     * Takes in a task to be stored in persisted storage.
+     *
+     * @param task Task to be persisted in storage.
+     */
     public void writeToFile(Task task) throws DukeException {
         if (!data.exists()) {
             createNewFile();
@@ -51,6 +71,13 @@ public class DataManager {
         }
     }
 
+    /**
+     * Updates storage file.
+     * Runs after an edit is made to the ToDoList.
+     *
+     * @param tasks Updated state of task list after edit is made.
+     * @throws DukeIOException if there is error writing to the storage file.
+     */
     public void updateData(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -63,6 +90,12 @@ public class DataManager {
         }
     }
 
+    /**
+     * Converts the txt format stored in storage back to a Task object.
+     *
+     * @param txt Text format of Task stored in storage file.
+     * @return Task object of text stored in storage.
+     */
     private Task convertTxtToTasks(String txt) {
         String[] extracted = txt.split(" \\| ");
         String taskType = extracted[0];

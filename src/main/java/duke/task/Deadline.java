@@ -28,6 +28,12 @@ public class Deadline extends Task {
         this.deadline = Parser.parseDateTime(deadline);
     }
 
+    /**
+     * Reformats the dateTime format into a more readable format to be displayed.
+     * Returns the formatted string.
+     *
+     * @return Formatted string after reformatting.
+     */
     private String deadlineToString() {
         if (deadline == null) {
             return deadlineString;
@@ -42,11 +48,23 @@ public class Deadline extends Task {
         return outFormat.format(this.deadline);
     }
 
+    /**
+     * Converts the deadline task into text format meant for persisted storage.
+     * Returns the formatted string.
+     *
+     * @return Formatted string of task meant for persisted storage.
+     */
     @Override
     public String convertToTxt() {
         return String.format("D | %s | %s", super.convertToTxt(), deadlineToString());
     }
 
+    /**
+     * Checks whether the date and time user input is the same as the deadline of task.
+     *
+     * @param dateTime the date and time that the user input.
+     * @return true if deadline of task is the same as date and time of user input.
+     */
     public boolean isSameDateTime(String dateTime) {
         return this.deadline.equals(Parser.parseDateTime(dateTime));
     }

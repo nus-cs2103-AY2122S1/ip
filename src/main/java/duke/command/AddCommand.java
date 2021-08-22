@@ -10,6 +10,12 @@ import duke.task.ToDo;
 import duke.util.DataManager;
 import duke.util.ToDoList;
 
+/**
+ * This class encapsulates the command dealing with adding tasks to the list.
+ *
+ * @author Tan Yi Guan
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class AddCommand extends Command {
     private final ToDoList list;
     private final DataManager dataManager;
@@ -23,6 +29,7 @@ public class AddCommand extends Command {
         this.input = input;
     }
 
+    /** Detects and handles different add commands appropriately. */
     @Override
     public void execute() throws DukeException {
         switch (taskType) {
@@ -42,6 +49,7 @@ public class AddCommand extends Command {
      * Handles ToDos task creation.
      *
      * @param input Raw user's input.
+     * @throws MissingDescriptionException if no description is entered after todo command.
      */
     private void handleTodo(String input) throws DukeException {
         String[] extracted = input.split(" ", 2);
@@ -60,6 +68,9 @@ public class AddCommand extends Command {
      * Handles Deadline task creation.
      *
      * @param input Raw user's input.
+     * @throws MissingDescriptionException if no description is entered after deadline command.
+     * @throws MissingDateTimeException if no date/time is entered following a deadline command.
+     * @throws MultipleDateTimeException if multiple date/time is detected in user input.
      */
     private void handleDeadline(String input) throws DukeException {
         // Check whether description is entered
@@ -87,6 +98,9 @@ public class AddCommand extends Command {
      * Handler for Event task creation.
      *
      * @param input Raw user's input.
+     * @throws MissingDescriptionException if no description is entered after event command.
+     * @throws MissingDateTimeException if no date/time is entered following an event command.
+     * @throws MultipleDateTimeException if multiple date/time is detected in user input.
      */
     private void handleEvent(String input) throws DukeException {
         // Check whether description is entered

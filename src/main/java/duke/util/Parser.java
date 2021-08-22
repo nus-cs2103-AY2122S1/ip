@@ -10,10 +10,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * This class encapsulates the parser which deals with making sense of user inputs.
+ *
+ * @author Tan Yi Guan
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class Parser {
     private final ToDoList list;
     private final DataManager dataManager;
-    private static final String ls = System.lineSeparator();
 
     public Parser(ToDoList list, DataManager dataManager) {
         this.list = list;
@@ -55,6 +60,8 @@ public class Parser {
      *
      * @param input Raw user's input.
      * @return Desired index specified by user.
+     * @throws MissingIndexException if user did not input index.
+     * @throws IndexFormatException if user inputs anything besides positive numerals.
      */
     public static int extractIndex(String input) throws DukeException {
         String[] inputs = input.split(" ", 2);
@@ -71,6 +78,12 @@ public class Parser {
         return Integer.parseInt(inputs[1]);
     }
 
+    /**
+     * Extracts out index for commands that deals with modifying specific tasks.
+     *
+     * @param dateTime DateTime entered by user.
+     * @return Date object after parsing user's input.
+     */
     public static Date parseDateTime(String dateTime) {
         Date date;
         DateFormat inFormat;

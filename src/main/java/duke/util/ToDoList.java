@@ -1,5 +1,6 @@
 package duke.util;
 
+import duke.exception.DukeIOException;
 import duke.task.Task;
 import duke.exception.DukeException;
 import duke.exception.DukeNegativeIndexException;
@@ -8,7 +9,7 @@ import duke.exception.InvalidIndexException;
 import java.util.ArrayList;
 
 /**
- * This class encapsulates a List.
+ * This class encapsulates a List used by Duke to keep track of tasks.
  *
  * @author Tan Yi Guan
  * @version CS2103T AY21/22 Semester 1
@@ -46,6 +47,7 @@ public class ToDoList {
      * Marks the task at index specified to be done.
      *
      * @param index Index of task to be marked as done.
+     * @throws InvalidIndexException if user inputs a number larger than number of tasks currently in list.
      */
     public void markTaskAsDone(int index) throws DukeException {
         if (index > list.size()) {
@@ -57,6 +59,13 @@ public class ToDoList {
         }
     }
 
+    /**
+     * Removes the task at index specified from the list.
+     *
+     * @param index Index of task to be removed.
+     * @throws InvalidIndexException if user inputs a number larger than number of tasks currently in list.
+     * @throws DukeNegativeIndexException if user inputs a negative number.
+     */
     public void removeFromList(int index) throws DukeException {
         if (index > list.size()) {
             throw new InvalidIndexException(list.size());
@@ -72,10 +81,21 @@ public class ToDoList {
         }
     }
 
+    /**
+     * Updates the persisted storage with the current state of the list.
+     *
+     * @throws DukeIOException if there is error writing to the storage file.
+     */
     public void updateData() throws DukeException {
         dataManager.updateData(list);
     }
 
+    /**
+     * Returns an ArrayList with tasks that matches date and time specified by user.
+     *
+     * @return ArrayList containing task that matches the date and time specified.
+     * @param dateTime the date and time to filter the tasks with.
+     */
     public ArrayList<Task> filterList(String dateTime) {
         ArrayList<Task> filteredList = new ArrayList<>();
         for (Task t : list) {
