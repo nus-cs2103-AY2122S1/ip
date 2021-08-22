@@ -37,15 +37,13 @@ public class Duke {
     private void printReply(String text) {
         String[] textLine = text.split("\n");
         int maxLength = Arrays.stream(textLine).map(String::length).max(Integer::compareTo).orElse(-1);
-        // unicode does not work with test script
-        //String lineStart =  "    \u2554" + "\u2550".repeat(maxLength + 2) + "\u2557";
-        //String lineEnd =  "    \u255A" + "\u2550".repeat(maxLength + 2) + "\u255D";
-        String lineBorder =  "     " + "=".repeat(maxLength + 2);
-        System.out.println(lineBorder);
+        String lineStart = "." + "-".repeat(maxLength + 2) + ".";
+        String lineEnd = "`" + "-".repeat(maxLength + 2) + "`";
+        System.out.println(lineStart);
         for (String s : textLine) {
-            System.out.println("    | " + s + " ".repeat(maxLength - s.length()) + " |");
+            System.out.printf("| %s%s |\n", s, " ".repeat(maxLength - s.length()));
         }
-        System.out.println(lineBorder);
+        System.out.println(lineEnd);
     }
 
     /**
