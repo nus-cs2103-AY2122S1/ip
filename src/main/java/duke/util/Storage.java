@@ -8,7 +8,7 @@ import duke.task.Event;
 import duke.task.Deadline;
 
 public class Storage {
-	private final String relativePath = "../../../";
+	private final String relativePath = "./";
 	private String filePath;
 	private File file;
 
