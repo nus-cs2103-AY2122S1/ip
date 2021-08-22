@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 /**
  * Represents an exception for the chatbot.
@@ -8,8 +8,8 @@ package exceptions;
 
 public class IllegalFormatException extends DukeException {
 
-    public IllegalFormatException() {
-        super("Wrong Format used! Please you the correct format!");
+    public IllegalFormatException(String msg) {
+        super("Wrong format! " + msg);
     }
 }
 

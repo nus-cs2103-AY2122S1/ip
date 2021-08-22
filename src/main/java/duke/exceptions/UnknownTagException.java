@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 /**
  * Represents an exception for the chatbot.

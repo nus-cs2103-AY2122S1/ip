@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 /**
  * Encapsulates information of a Task.

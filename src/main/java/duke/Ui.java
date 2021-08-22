@@ -1,7 +1,7 @@
-import tasks.Task;
-import tasks.TaskList;
+package duke;
 
-import java.util.ArrayList;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 public class Ui {
     // Lines used to indicate a block of message
@@ -24,6 +24,7 @@ public class Ui {
             this.msg = msg;
         }
     }
+
 
     private static void wrapMessageInLines(String msg) {
         String formattedMsg = String.format("%s\n\t %s%s", HORIZONTAL_LINE_HEAD, msg, HORIZONTAL_LINE_TAIL);

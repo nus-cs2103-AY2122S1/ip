@@ -1,7 +1,7 @@
+package duke;
 
-
-import exceptions.NoSuchTaskException;
-import tasks.*;
+import duke.exceptions.NoSuchTaskException;
+import duke.tasks.*;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
