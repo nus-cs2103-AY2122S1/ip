@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.Scanner;
 import java.io.File;
@@ -15,12 +18,14 @@ public class Du {
         if (Integer.parseInt(task[1]) == 1) {
             done = true;
         }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd yyyy, HHmm");
+
         if (Objects.equals(task[0], "T")) {
             t = new Todo(task[2], done);
         } else if (Objects.equals(task[0], "D")) {
-            t = new Deadline(task[2], done, task[3]);
+            t = new Deadline(task[2], done, LocalDateTime.parse(task[3], formatter));
         } else if (Objects.equals(task[0], "E")) {
-            t = new Event(task[2], done, task[3]);
+            t = new Event(task[2], done, LocalDateTime.parse(task[3], formatter));
         }
         System.out.println(t);
     }
@@ -67,6 +72,11 @@ public class Du {
             } else {
                 String[] split_string = command.split(" ", 2);
                 if (Objects.equals(split_string[0], "done")) {
+                    if (split_string.length <= 1) {
+                        System.out.println("Oh noes, you need to tell me what item you have finished");
+                        command = sc.nextLine();
+                        continue;
+                    }
                     Task.find_finished_task(Integer.parseInt(split_string[1])); // might want to find a way to check whether split_string[1] is an integer
                 } else if (Objects.equals(split_string[0], "delete")) {
                     Task.remove_task(Integer.parseInt(split_string[1])); // might want to find a way to check whether split_string[1] is an integer
@@ -80,13 +90,15 @@ public class Du {
                     Task task = new Todo(split_string[1], false);
                     task.log_add_task();
                 } else {
+                    // error handling when the deadline/event item is empty
+                    if (split_string.length <= 1) {
+                        System.out.println("Oh noes, the task item cannot be empty, please input again");
+                        command = sc.nextLine();
+                        continue;
+                    }
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                     if (Objects.equals(split_string[0], "deadline")) {
-                        // error handling when deadline item is empty
-                        if (split_string.length <= 1) {
-                            System.out.println("Oh noes, the deadline item cannot be empty, please input again");
-                            command = sc.nextLine();
-                            continue;
-                        }
+
                         String[] task_time = split_string[1].split("/by ", 2);
                         // error handling when there is no time for deadline
                         if (task_time.length <= 1) {
@@ -94,15 +106,19 @@ public class Du {
                             command = sc.nextLine();
                             continue;
                         }
-                        Task task = new Deadline(task_time[0], false, task_time[1]);
-                        task.log_add_task();
-                    } else if (Objects.equals(split_string[0], "event")) {
-                        // error handling when event item is empty
-                        if (split_string.length <= 1) {
-                            System.out.println("Oh noes, the todo item cannot be empty, please input again");
+
+                        try {
+                            LocalDateTime date = LocalDateTime.parse(task_time[1], formatter);
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Invalid date format, please input the date in this format: yyyy-MM-dd HH:mm");
                             command = sc.nextLine();
                             continue;
                         }
+                        LocalDateTime date = LocalDateTime.parse(task_time[1], formatter);
+                        Task task = new Deadline(task_time[0], false, date);
+                        task.log_add_task();
+                    } else if (Objects.equals(split_string[0], "event")) {
+
                         String[] task_time = split_string[1].split("/at ", 2);
                         // error handling when there is no time for event
                         if (task_time.length <= 1) {
@@ -110,7 +126,16 @@ public class Du {
                             command = sc.nextLine();
                             continue;
                         }
-                        Task task = new Event(task_time[0], false, task_time[1]);
+
+                        try {
+                            LocalDateTime date = LocalDateTime.parse(task_time[1], formatter);
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Invalid date format, please input the date in this format: yyyy-MM-dd HH:mm");
+                            command = sc.nextLine();
+                            continue;
+                        }
+                        LocalDateTime date = LocalDateTime.parse(task_time[1], formatter);
+                        Task task = new Event(task_time[0], false, date);
                         task.log_add_task();
                     } else {
                         System.out.println("Oh noes, I don't understand:(, please input again");
