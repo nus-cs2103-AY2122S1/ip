@@ -4,18 +4,18 @@ public class Task {
 
     public Task(String taskName) {
         this.taskName = taskName;
-        this.done = false;
+        done = false;
     }
 
     public void setDone() {
-        this.done = true;
+        done = true;
     }
 
     public String listEntry() {
         if (done) {
-            return "[X] " + this.taskName;
+            return "[X] " + taskName;
         } else {
-            return "[ ] " + this.taskName;
+            return "[ ] " + taskName;
         }
     }
 }
