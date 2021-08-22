@@ -1,7 +1,11 @@
 package duke;
 
 import duke.exceptions.NoSuchTaskException;
-import duke.tasks.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -64,7 +68,8 @@ public class Storage {
 
         for (int i = 0; i < taskList.getTaskCount(); i++) {
             Task task = taskList.getTask(i);
-            bw.write(String.format("%s/%s/%s/%s\n", task.getTag(), task.getStatusIcon(), task.getDescription(), task.getDueDate()));
+            bw.write(String.format("%s/%s/%s/%s\n",
+                    task.getTag(), task.getStatusIcon(), task.getDescription(), task.getDueDate()));
         }
 
         bw.close();
@@ -95,13 +100,13 @@ public class Storage {
             String dueDate = details[3];
 
 
-            if (type.equals("T")) {
+            if (type.equals(Todo.TAG)) {
                 Task t = new Todo(desc, isDone);
                 taskList.addTask(t);
-            } else if (type.equals("D")) {
+            } else if (type.equals(Deadline.TAG)) {
                 Task t = new Deadline(desc, LocalDate.parse(dueDate), isDone);
                 taskList.addTask(t);
-            } else if (type.equals("E")) {
+            } else if (type.equals(Event.TAG)) {
                 Task t = new Event(desc, LocalDate.parse(dueDate), isDone);
                 taskList.addTask(t);
             } else {

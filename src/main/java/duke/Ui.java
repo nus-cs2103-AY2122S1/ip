@@ -8,8 +8,8 @@ import duke.tasks.TaskList;
  */
 public class Ui {
     // Lines used to indicate a block of message
-    private static final  String HORIZONTAL_LINE_HEAD = "\t____________________________________________________________";
-    private static final String HORIZONTAL_LINE_TAIL = String.format("\n%s\n", HORIZONTAL_LINE_HEAD);
+    private static final String LINE_HEAD = "\t____________________________________________________________";
+    private static final String LINE_TAIL = String.format("\n%s\n", LINE_HEAD);
 
     private enum Message {
         WELCOME_MSG("Hello! I am Matthew!\n\t What can I do for you?"),
@@ -30,7 +30,7 @@ public class Ui {
 
 
     private static void wrapMessageInLines(String msg) {
-        String formattedMsg = String.format("%s\n\t %s%s", HORIZONTAL_LINE_HEAD, msg, HORIZONTAL_LINE_TAIL);
+        String formattedMsg = String.format("%s\n\t %s%s", LINE_HEAD, msg, LINE_TAIL);
         System.out.println(formattedMsg);
     }
 
@@ -43,14 +43,14 @@ public class Ui {
     }
 
     private static void displayListStart() {
-        System.out.println(String.format("%s\n%s", HORIZONTAL_LINE_HEAD, Message.DISPLAY_LIST_MSG.msg));
+        System.out.println(String.format("%s\n%s", LINE_HEAD, Message.DISPLAY_LIST_MSG.msg));
     }
 
     private static void displayListEnd() {
-        System.out.println(HORIZONTAL_LINE_TAIL);
+        System.out.println(LINE_TAIL);
     }
 
-    public static void taskDoneMessage(Task task) {
+    public static void printCompleteTaskMessage(Task task) {
         wrapMessageInLines(Message.TASK_DONE_MSG.msg + task);
     }
 
@@ -67,13 +67,13 @@ public class Ui {
         displayListEnd();
     }
 
-    public static void taskDeletedMessage(Task task, int count) {
+    public static void printDeleteTaskMessage(Task task, int count) {
         String deletedTaskInfo = Message.TASK_DELETED_MSG.msg + task;
         String updatedListInfo = String.format("%d %s", count, Message.CHECK_TASK_COUNT_MSG.msg);
         wrapMessageInLines(deletedTaskInfo + "\n\t " + updatedListInfo);
     }
 
-    public static void taskAddedMessage(Task task, int count) {
+    public static void printAddTaskMessage(Task task, int count) {
         String addedTaskInfo = Message.TASK_ADDED_MSG.msg + task;
         String updatedListInfo = String.format("%d %s", count, Message.CHECK_TASK_COUNT_MSG.msg);
         wrapMessageInLines(addedTaskInfo + "\n\t " + updatedListInfo);

@@ -35,7 +35,7 @@ class ParserTest {
             assertEquals("", new Parser().checkCommandTag("event conference /at 01/10/2021"));
             fail();
         } catch (DukeException e) {
-            assertEquals("Wrong format! Please follow the format: type description /at yyyy-mm-dd", e.getMessage());
+            assertEquals("Wrong format! Please follow the format: type description /at yyyy-mm-dd.", e.getMessage());
         }
     }
 

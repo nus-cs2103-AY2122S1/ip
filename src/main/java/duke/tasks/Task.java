@@ -32,7 +32,7 @@ public class Task {
     /**
      * Marks the task has been completed.
      */
-    public void taskCompleted() {
+    public void markAsComplete() {
         this.isDone = true;
     }
 

@@ -8,7 +8,6 @@ import duke.tasks.Todo;
  * Encapsulates the information of a TodoCommand object that contains a Todo.
  */
 public class TodoCommand extends Command {
-
     private final Todo task;
 
     public TodoCommand(Todo task) {
@@ -17,7 +16,7 @@ public class TodoCommand extends Command {
 
     @Override
     public void executeCommand(TaskList taskList) {
-        taskList.addTask(task);
-        Ui.taskAddedMessage(task, taskList.getTaskCount());
+        taskList.addTask(this.task);
+        Ui.printAddTaskMessage(this.task, taskList.getTaskCount());
     }
 }
