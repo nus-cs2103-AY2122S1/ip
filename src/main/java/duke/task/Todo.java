@@ -9,13 +9,13 @@ public class Todo extends Task{
     @Override
     public String toString() {
         return String.format("[T][%s] %s",
-                this.getStatus() ? "X" : " ", this.getContent());
+                getStatus() ? "X" : " ", getContent());
     }
 
     @Override
     public String record() {
         return String.format("T | %s | %s",
-                this.getStatus() ? "1" : "0", this.getContent());
+                getStatus() ? "1" : "0", getContent());
     }
         
     public boolean hasSchedule() {

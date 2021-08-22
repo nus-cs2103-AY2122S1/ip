@@ -11,9 +11,9 @@ public class Deadline extends Task{
 
     public Deadline(String content) throws duke.DukeException {
         super(content.substring(9, content.indexOf("/")).trim());
-        this.time = content.substring(content.indexOf("/") + 1).trim();
+        time = content.substring(content.indexOf("/") + 1).trim();
         try {
-            this.localDate = LocalDate.parse(this.time);
+            this.localDate = LocalDate.parse(time);
         } catch (DateTimeParseException e) {
             throw new DukeException(" ☹ SORZ but I only understand date in yyyy-MM-dd format!");
         }
@@ -21,20 +21,20 @@ public class Deadline extends Task{
     }
 
     public String getTime() {
-        return this.localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     @Override
     public String toString() {
         return String.format("[D][%s] %s (by: %s)",
-                this.getStatus() ? "X" : " ", this.getContent(), this.time);
+                getStatus() ? "X" : " ", getContent(), time);
     }
 
     @Override
 
     public String record() {
         return String.format("D | %s | %s | %s",
-                this.getStatus() ? "1" : "0", this.getContent(), this.time);
+                getStatus() ? "1" : "0", getContent(), time);
     }
 
     public String getType() {

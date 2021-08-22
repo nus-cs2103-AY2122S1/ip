@@ -13,14 +13,14 @@ public class TaskList {
         this.taskList = taskList;
     }
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        taskList = new ArrayList<>();
     }
     
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("");
-        for (int i = 0; i < this.taskList.size(); i++) {
-            Task task = this.taskList.get(i);
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
             String entry = String.format("%d. %s\n",
                     i+1, task.toString());
             result.append(entry);
@@ -29,11 +29,11 @@ public class TaskList {
     }
     
     public int size() {
-        return this.taskList.size();
+        return taskList.size();
     }
     
     public String listSchedule(LocalDate dateFilter) {
-        ArrayList<Task> filteredTaskList = this.taskList.stream()
+        ArrayList<Task> filteredTaskList = taskList.stream()
                 .filter(Task::hasSchedule).collect(Collectors.toCollection(ArrayList::new));
         StringBuilder result = new StringBuilder("");
         for (int i = 0; i < filteredTaskList.size(); i++) {
@@ -47,27 +47,27 @@ public class TaskList {
     }
     
     public void doneTask(int index) throws DukeException {
-        Task holder = this.taskList.get(index);
+        Task holder = taskList.get(index);
         holder.doneTask();
     }
     
     public void deleteTask(int index) throws DukeException {
-        String holder = this.taskList.get(index).toString();
-        this.taskList.remove(index);
-        this.taskList.trimToSize();
+        String holder = taskList.get(index).toString();
+        taskList.remove(index);
+        taskList.trimToSize();
         System.out.println("____________________________________________________________\n"
                 + "okie! I've removed this annoying duke.task: \n"
                 + holder
-                + "\nNow you have " + this.taskList.size() + " tasks in the list.\n"
+                + "\nNow you have " + taskList.size() + " tasks in the list.\n"
                 + "____________________________________________________________\n");
     }
     
     public void addTask(Task task) {
-        this.taskList.add(task);
+        taskList.add(task);
     }
     
     public Task getTask(int index) {
-        return this.taskList.get(index);
+        return taskList.get(index);
     }
     
 }

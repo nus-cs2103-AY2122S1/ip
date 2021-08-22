@@ -30,7 +30,7 @@ public class DoneCommand extends Command{
     
     public DoneCommand(String command) throws DukeException {
         if (isDoneOps(command)) {
-            this.index = Integer.parseInt(command.substring(5)) - 1;
+            index = Integer.parseInt(command.substring(5)) - 1;
         } else {
             throw new DukeException("☹ Would you specify the duke.task for me my dear?");
         }

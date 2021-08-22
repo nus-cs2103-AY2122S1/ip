@@ -27,9 +27,9 @@ public class ListCommand extends Command{
     public ListCommand(String command) throws DukeException {
         if (isListOps(command)) {
             this.localDate = LocalDate.parse(command.substring(5).trim());
-            this.isOps = true;
+            isOps = true;
         } else {
-            this.isOps = false;
+            isOps = false;
         }
     }
     
@@ -39,7 +39,7 @@ public class ListCommand extends Command{
             ui.emptyList();
         } else {
             if (isOps) {
-                ui.showScheduleList(taskList, this.localDate);
+                ui.showScheduleList(taskList, localDate);
             } else {
                 ui.showFullList(taskList);
             }
