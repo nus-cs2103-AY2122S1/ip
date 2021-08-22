@@ -20,10 +20,6 @@ public class ChatBot {
         return greeting;
     }
 
-    private boolean listEmpty() {
-        return list.isEmpty();
-    }
-
     private void printItem(Task task) {
         System.out.println(currIndex + "." + task.printTask());
         currIndex++;
@@ -55,10 +51,14 @@ public class ChatBot {
     }
 
     private void listSeq() throws InputError {
-        if (lastIndex == 0) {
-            throw new InputError("No items in list");
+        try {
+            if (lastIndex == 0) {
+                throw new InputError("No items in list");
+            }
+            printList();
+        } catch (InputError e) {
+            System.out.println("Here is the error boss. " + e);
         }
-        printList();
     }
 
     private boolean checkDone(String str) {
@@ -70,18 +70,22 @@ public class ChatBot {
     }
 
     private void doneSeq(String str) throws InputError {
-        if (str.length() == 4) {
-            throw new InputError("No task indicated");
-        }
-        int indexNum = Integer.parseInt(str.replaceAll("[^0-9]", ""));
+        try {
+            if (str.length() == 4) {
+                throw new InputError("No task indicated");
+            }
+            int indexNum = Integer.parseInt(str.replaceAll("[^0-9]", ""));
 
-        if (indexNum > lastIndex) {
-            throw new InputError("Invalid Number");
+            if (indexNum > lastIndex) {
+                throw new InputError("Invalid Number");
+            }
+            System.out.println("Good job for this thing done man:");
+            Task currTask = list.get(indexNum - 1);
+            currTask.setComplete();
+            System.out.println("   " + currTask.printTask());
+        } catch (InputError e) {
+            System.out.println("Here is the error boss. " + e);
         }
-        System.out.println("Good job for this thing done man:");
-        Task currTask = list.get(indexNum - 1);
-        currTask.setComplete();
-        System.out.println("   " + currTask.printTask());
     }
 
     private boolean checkToDo(String str) {
@@ -93,14 +97,18 @@ public class ChatBot {
     }
 
     private void todoSeq(String str) throws InputError {
-        if (str.length() == 4 ) {
-            throw new InputError("Description Please!");
+        try {
+            if (str.length() == 4) {
+                throw new InputError("Description Please!");
+            }
+            System.out.println("Alrighty! I have added this task:");
+            list.add(new ToDo(str.substring(5)));
+            System.out.println("   " + list.get(lastIndex).printTask());
+            lastIndex++;
+            System.out.println("Now you have " + lastIndex + " task(s) in total!");
+        } catch (InputError e) {
+            System.out.println("Here is the error boss. " + e);
         }
-        System.out.println("Alrighty! I have added this task:");
-        list.add(new ToDo(str.substring(5)));
-        System.out.println("   " + list.get(lastIndex).printTask());
-        lastIndex++;
-        System.out.println("Now you have " + lastIndex + " task(s) in total!");
     }
 
     private boolean checkDeadLine(String str) {
@@ -112,14 +120,18 @@ public class ChatBot {
     }
 
     private void deadlineSeq(String str) throws InputError {
-        if (str.length() == 8 ) {
-            throw new InputError("Description Please!");
+        try {
+            if (str.length() == 8) {
+                throw new InputError("Description Please!");
+            }
+            System.out.println("Alrighty! I have added this task:");
+            list.add(new Deadline(str.substring(9, str.indexOf("/")), str.substring(str.indexOf("/") + 4)));
+            System.out.println("   " + list.get(lastIndex).printTask());
+            lastIndex++;
+            System.out.println("Now you have " + lastIndex + " task(s) in total!");
+        } catch (InputError e) {
+            System.out.println("Here is the error boss. " + e);
         }
-        System.out.println("Alrighty! I have added this task:");
-        list.add(new Deadline(str.substring(9, str.indexOf("/")), str.substring(str.indexOf("/") + 4)));
-        System.out.println("   " + list.get(lastIndex).printTask());
-        lastIndex++;
-        System.out.println("Now you have " + lastIndex + " task(s) in total!");
     }
 
     private boolean checkEvent(String str) {
@@ -131,14 +143,18 @@ public class ChatBot {
     }
 
     private void eventSeq(String str) throws InputError {
-        if (str.length() == 5 ) {
-            throw new InputError("Description Please!");
-        } else {
-            System.out.println("Alrighty! I have added this task:");
-            list.add(new Event(str.substring(6, str.indexOf("/")), str.substring(str.indexOf("/") + 4)));
-            System.out.println("   " + list.get(lastIndex).printTask());
-            lastIndex++;
-            System.out.println("Now you have " + lastIndex + " task(s) in total!");
+        try {
+            if (str.length() == 5) {
+                throw new InputError("Description Please!");
+            } else {
+                System.out.println("Alrighty! I have added this task:");
+                list.add(new Event(str.substring(6, str.indexOf("/")), str.substring(str.indexOf("/") + 4)));
+                System.out.println("   " + list.get(lastIndex).printTask());
+                lastIndex++;
+                System.out.println("Now you have " + lastIndex + " task(s) in total!");
+            }
+        } catch (InputError e) {
+            System.out.println("Here is the error boss. " + e);
         }
     }
 
@@ -151,83 +167,79 @@ public class ChatBot {
     }
 
     private void deleteSeq(String str) throws InputError {
-        if (str.length() == 5 ) {
-            throw new InputError("No Task to input");
+        try {
+            if (str.length() == 5) {
+                throw new InputError("No Task to input");
+            }
+            int indexNum = Integer.parseInt(str.replaceAll("[^0-9]", ""));
+            if (indexNum > lastIndex) {
+                throw new InputError("Invalid Number");
+            }
+            System.out.println("Alrighty! I have deleted this task:");
+            Task removed = list.remove(indexNum - 1);
+            System.out.println("   " + removed.printTask());
+            lastIndex--;
+            System.out.println("Now you have " + lastIndex + " task(s) in total!");
+        } catch (InputError e) {
+            System.out.println("Here is the error boss. " + e);
+            System.out.println("You have " + lastIndex + " item(s) in your list!");
         }
-        int indexNum = Integer.parseInt(str.replaceAll("[^0-9]", ""));
-        if (indexNum > lastIndex) {
-            throw new InputError("Invalid Number");
-        }
-        System.out.println("Alrighty! I have deleted this task:");
-        Task removed = list.remove(indexNum - 1);
-        System.out.println("   " + removed.printTask());
-        lastIndex--;
-        System.out.println("Now you have " + lastIndex + " task(s) in total!");
     }
 
 
     private void startInput() throws InputError {
         Scanner userInput = new Scanner(System.in);
         String input = userInput.nextLine();
-        boolean byeInput = checkBye(input);
-        boolean listInput = checkList(input);
-        boolean doneInput = checkDone(input);
-        boolean todoInput = checkToDo(input);
-        boolean deadlineInput = checkDeadLine(input);
-        boolean eventInput = checkEvent(input);
-        boolean deleteInput = checkDelete(input);
+        int caseNum = 0;
 
+        if (checkBye(input)) {
+            caseNum = 1;
+        } else if (checkList(input)) {
+            caseNum = 2;
+        } else if (checkDone(input)) {
+            caseNum = 3;
+        } else if (checkToDo(input)) {
+            caseNum = 4;
+        } else if (checkDeadLine(input)) {
+            caseNum = 5;
+        } else if (checkEvent(input)) {
+            caseNum = 6;
+        } else if (checkDelete(input)) {
+            caseNum = 7;
+        }
 
-        if (byeInput) {                                          //bye input
-            byeSeq();
-            userInput.close();
-            return;
-        } else if (listInput) {                                   //list input
-            try {
+        switch (caseNum) {
+            case 1:
+                byeSeq();
+                userInput.close();
+                return;
+            case 2:
                 listSeq();
-            } catch (InputError e) {
-                System.out.println("Here is the error boss. " + e);
-            }
-        } else if (doneInput) { //done input
-            try {
+                break;
+            case 3:
                 doneSeq(input);
-            } catch (InputError e) {
-                System.out.println("Here is the error boss. " + e);
-            }
-        } else if (todoInput) {
-            try {
+                break;
+            case 4:
                 todoSeq(input);
-            } catch (InputError e) {
-                System.out.println("Here is the error boss. " + e);
-            }
-        } else if (deadlineInput) {
-            try {
+                break;
+            case 5:
                 deadlineSeq(input);
-            } catch (InputError e) {
-                System.out.println("Here is the error boss. " + e);
-            }
-        } else if (eventInput) {
-            try {
+                break;
+            case 6:
                 eventSeq(input);
-            } catch (InputError e) {
-                System.out.println("Here is the error boss. " + e);
-            }
-        } else if (deleteInput) {
-            try {
+                break;
+            case 7:
                 deleteSeq(input);
-            } catch (InputError e) {
-                System.out.println("Here is the error boss. " + e);
-                System.out.println("You have " + lastIndex + " item(s) in your list!");
-            }
-        } else {
-            try {
-                throw new InputError("Invalid Input");
-            } catch (InputError e) {
-                System.out.println("Here is the error boss. " + e);
-                System.out.println("I'm not too sure what you meant.");
-                System.out.println("Try again with these keywords.");
-                System.out.println("todo deadline event");
-            }
+                break;
+            default:
+                try {
+                    throw new InputError("Invalid Input");
+                } catch (InputError e) {
+                    System.out.println("Here is the error boss. " + e);
+                    System.out.println("I'm not too sure what you meant.");
+                    System.out.println("Try again with these keywords.");
+                    System.out.println("todo deadline event");
+                }
         }
         startInput();
     }
