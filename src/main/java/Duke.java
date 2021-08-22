@@ -18,8 +18,8 @@ public class Duke {
         System.out.println(openingMessage);
 
         Scanner sc = new Scanner(System.in);
-        boolean flag = true;
-        while (sc.hasNextLine() && flag) {
+        boolean isReadingInput = true;
+        while (sc.hasNextLine() && isReadingInput) {
             String input = sc.nextLine();
             String firstWord;
             String remainingWords = "";
@@ -36,47 +36,35 @@ public class Duke {
                 break;
             case "bye":
                 System.out.println(bot.sayBye());
-                flag = false;
+                isReadingInput = false;
                 break;
             case "done":
                 int index = Integer.parseInt(remainingWords);
                 try {
                     System.out.println(bot.completeTask(index));
                 } catch (DukeException e) {
-                    String errorMessage = "   -------------------------------------------- \n"
-                                        + "      OOPS!!! Invalid task number given \n"
-                                        + "   -------------------------------------------- \n";
-                    System.out.println(errorMessage);
+                    bot.printErrorMessage("done");
                 }
                 break;
             case "todo":
                 try {
                     System.out.println(bot.addTodo(remainingWords));
                 } catch (DukeException e) {
-                    String errorMessage = "   -------------------------------------------- \n"
-                                        + "      OOPS!!! The description of a todo cannot be empty. \n"
-                                        + "   -------------------------------------------- \n";
-                    System.out.println(errorMessage);
+                    bot.printErrorMessage("todo");
                 }
                 break;
             case "deadline":
                 try {
                     System.out.println(bot.addDeadline(remainingWords));
                 } catch (DukeException e) {
-                    String errorMessage = "   -------------------------------------------- \n"
-                                        + "      OOPS!!! The description of a deadline cannot be empty. \n"
-                                        + "   -------------------------------------------- \n";
-                    System.out.println(errorMessage);
+                    bot.printErrorMessage("deadline");
                 }
                 break;
             case "event":
                 try {
                     System.out.println(bot.addEvent(remainingWords));
                 } catch (DukeException e) {
-                    String errorMessage = "   -------------------------------------------- \n"
-                                        + "      OOPS!!! The description of an event cannot be empty. \n"
-                                        + "   -------------------------------------------- \n";
-                    System.out.println(errorMessage);
+                    bot.printErrorMessage("event");
                 }
                 break;
             case "delete":
@@ -84,20 +72,39 @@ public class Duke {
                 try {
                     System.out.println(bot.deleteTask(deleteIndex));
                 } catch (DukeException e) {
-                    String errorMessage = "   -------------------------------------------- \n"
-                            + "      Invalid index. Specified task does not exist to be deleted. \n"
-                            + "   -------------------------------------------- \n";
-                    System.out.println(errorMessage);
+                    bot.printErrorMessage("event");
                 }
                 break;
             default:
-                String errorMessage = "   -------------------------------------------- \n"
-                                    + "      OOPS!!! I have no idea what that means :-( \n"
-                                    + "   -------------------------------------------- \n";
-                System.out.println(errorMessage);
+                bot.printErrorMessage("error");
             }
         }
         sc.close();
+    }
+
+    public void printErrorMessage(String message) {
+        String errorMessage = "   -------------------------------------------- \n";
+        switch(message) {
+        case "done":
+            errorMessage += "      OOPS!!! Invalid task number given \n";
+            break;
+        case "todo":
+            errorMessage += "      OOPS!!! The description of a todo cannot be empty. \n";
+            break;
+        case "deadline":
+            errorMessage += "      OOPS!!! The description of a deadline cannot be empty. \n";
+            break;
+        case "event":
+            errorMessage += "      OOPS!!! The description of an event cannot be empty. \n";
+            break;
+        case "delete":
+            errorMessage += "      Invalid index. Specified task does not exist to be deleted. \n";
+            break;
+        default:
+            errorMessage += "      OOPS!!! I have no idea what that means :-( \n";
+        }
+        errorMessage += "   -------------------------------------------- \n";
+        System.out.println(errorMessage);
     }
 
     public String printList() {
@@ -247,7 +254,6 @@ public class Duke {
                 + String.format("\n   Now you have %d tasks in the list.", numTasks) + "\n"
                 + "   -------------------------------------------- \n";
     }
-
 
     public String getFirstWord(String input) {
         String[] arr = input.split(" ", 2);
