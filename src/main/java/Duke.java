@@ -47,22 +47,45 @@ public class Duke {
             }
 
             File file = path.resolve("duke.txt").toFile();
+            this.file = file;
             if (file.exists()) {
                 this.loadTasks();
             } else {
                 file.createNewFile();
             }
-
-            this.file = file;
         } catch (IOException e) {
             // this exception should not occur because the input is fixed
         }
     }
 
-    /**
-     * Not implemented yet
-     */
     public void loadTasks() {
+        try {
+            Scanner sc = new Scanner(this.file);
+            while (sc.hasNextLine()) {
+                String[] taskInfoSplit = sc.nextLine().split(" \\| ");
+                Task task = convertToTask(taskInfoSplit);
+                if (task != null) {
+                    tasks.add(task);
+                }
+            }
+        } catch (IOException e) {
+            printMessage("There is an error while loading tasks.");
+        }
+    }
+
+    public Task convertToTask(String[] arr) {
+        char letter = arr[0].charAt(0);
+        boolean isDone = arr[1].equals("X");
+        switch (letter) {
+            case 'T':
+                return new Todo(arr[2], isDone);
+            case 'D':
+                return new Deadline(arr[2], arr[3], isDone);
+            case 'E':
+                return new Event(arr[2], arr[3], isDone);
+            default:
+                return null;
+        }
     }
 
     public void printMessage(String message) {
@@ -211,10 +234,9 @@ public class Duke {
             fw.flush();
             fw.close();
         } catch (IOException e) {
-            System.out.println("Failed to update storage.");
+            printMessage("Failed to update storage.");
         }
     }
-
 
     public static void main(String[] args) {
         new Duke().run();

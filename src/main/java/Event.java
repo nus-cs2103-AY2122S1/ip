@@ -11,6 +11,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String description, String at, boolean isDone) {
+        super(description, isDone);
+        this.at = at;
+    }
+
     @Override
     public String toString() {
         return String.format("[%c]%s (at: %s)", Event.TASK_LETTER, super.toString(), this.at);
