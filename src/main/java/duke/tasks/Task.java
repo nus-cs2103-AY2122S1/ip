@@ -1,7 +1,7 @@
 package duke.tasks;
 
 /**
- * Encapsulates information of a Task.
+ * Encapsulates information of a Task object than contains the description and completion status.
  */
 
 public class Task {
@@ -40,8 +40,8 @@ public class Task {
      * Returns the tag of the task.
      * Indicates which type of task is it.
      *
-     * @return A string represent the type of task.
-     *         An empty string is the type if not recognised by the chat bot.
+     * @return A String represent the type of task.
+     *         An empty String is the type if not recognised by the chat bot.
      */
     public String getTag() {
         return "";
@@ -50,7 +50,7 @@ public class Task {
     /**
      * Returns the description/title of the task.
      *
-     * @return A string representing the description/title of the task.
+     * @return A String representing the description/title of the task.
      */
     public String getDescription() {
         return this.description;
@@ -61,7 +61,8 @@ public class Task {
      * Returns the due date of the task if it belongs to the Deadline/Event type.
      * Otherwise, return a string stating no data, as there is no due that for this task type.
      *
-     * @return A string representing the due date of the task if it exists.
+     * @return A String indicating that there is not due date if it does not exist.
+     *         A String indicating the due date if it exists.
      */
     public String getDueDate() {
         return "No Data";

@@ -3,6 +3,9 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Encapsulates the information for an Event object that contains the description, completion status and due date.
+ */
 public class Event extends Task {
     private static final String TAG = "E";
     private LocalDate at;

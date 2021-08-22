@@ -3,6 +3,9 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Encapsulates the information for a Deadline object that contains the description, completion status and due date.
+ */
 public class Deadline extends Task {
     private static final String TAG = "D";
     private LocalDate by;

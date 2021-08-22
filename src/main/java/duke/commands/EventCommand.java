@@ -4,6 +4,9 @@ import duke.Ui;
 import duke.tasks.Event;
 import duke.tasks.TaskList;
 
+/**
+ * Encapsulates the information of a EventCommand object that contains an Event.
+ */
 public class EventCommand extends Command {
     private final Event task;
 
