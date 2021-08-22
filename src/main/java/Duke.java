@@ -6,16 +6,6 @@ public class Duke {
 
     private List<Task> taskList = new ArrayList<>();
 
-    private enum Command {
-        TODO,
-        DEADLINE,
-        EVENT,
-        DONE,
-        DELETE,
-        LIST,
-        BYE
-    };
-
     /**
      * Display formatted message.
      * @param message Message to be printed in console.
@@ -97,9 +87,10 @@ public class Duke {
         return taskNumber <= this.taskList.size();
     }
 
-    public void operate(String userInput, Command command) {
+    public void operate(String userInput) {
+        String command = this.getCommand(userInput);
         switch (command) {
-            case TODO:
+            case "todo":
                 if (this.isDescExists(userInput)) {
                     // get task description
                     String desc = this.getDescription(userInput, "todo", "ignore");
@@ -112,7 +103,7 @@ public class Duke {
                 }
                 break;
 
-            case DEADLINE:
+            case "deadline":
                 if (this.isDescExists(userInput)) {
                     String descDeadline = this.getDescription(userInput, "deadline ", "/by ");
                     String timeDeadline = this.getTime(userInput,"/by ");
@@ -124,7 +115,7 @@ public class Duke {
                 }
                 break;
 
-            case EVENT:
+            case "event":
                if (this.isDescExists(userInput)) {
                    String descEvent = this.getDescription(userInput, "event ", "/at ");
                    String timeEvent = this.getTime(userInput,  "/at ");
@@ -137,7 +128,7 @@ public class Duke {
                }
                break;
 
-            case DONE:
+            case "done":
                 if (this.isDescExists(userInput)) {
                     // get task number
                     int taskNumber = this.getTaskNumber(userInput);
@@ -154,7 +145,7 @@ public class Duke {
                 }
                 break;
 
-            case DELETE:
+            case "delete":
                if (this.isDescExists(userInput)) {
                    int taskNumberDel = this.getTaskNumber(userInput);
                    if (isTaskExists(taskNumberDel)) {
@@ -170,7 +161,7 @@ public class Duke {
                }
                break;
 
-            case LIST:
+            case "list":
                 this.displayAllItems();
                 break;
 
@@ -189,14 +180,10 @@ public class Duke {
 
         // read user input
         String userInput = scan.nextLine();
-        String cmd = this.getCommand(userInput).toUpperCase();
-        Command command = Command.valueOf(cmd);
 
-        while (command!= Command.BYE) {
-            this.operate(userInput, command);
+        while (!userInput.equals("bye")) {
+            this.operate(userInput);
             userInput = scan.nextLine();
-            cmd = this.getCommand(userInput).toUpperCase();
-            command = Command.valueOf(cmd);
         }
         scan.close();
 

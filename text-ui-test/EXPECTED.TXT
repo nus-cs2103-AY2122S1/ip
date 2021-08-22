@@ -50,6 +50,10 @@
     * * * * * * * * * * * * * * * * * * * *
 
     * * * * * * * * * * * * * * * * * * * *
+    OOPS! I do not understand what does that mean. Maybe you can try either one of [todo, deadline, event, done, list, delete]?
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
     Here are the tasks in your list: 
     1.[D][X] return laptop (by: Friday)
     2.[T][ ] buy battery
