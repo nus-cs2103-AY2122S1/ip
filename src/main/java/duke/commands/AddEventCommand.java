@@ -14,6 +14,10 @@ public class AddEventCommand extends Command {
         this.at = at;
     }
 
+    public String getAt() {
+        return this.at;
+    }
+
     @Override
     public boolean isExit() {
         return false;
