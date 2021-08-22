@@ -60,11 +60,15 @@ public class Abyss {
                     task = tasks.addEvent(event.getDescription(), event.getDate());
                     Ui.replyTaskAdded(task, tasks.getNumberOfTasks());
                     storage.saveTasks(tasks);
-                } else if (cmd.getClass() == ListCommand.class) {
+                } else if (cmd.getClass() == FindCommand.class) {
+                    FindCommand find = (FindCommand) cmd;
+                    tasks.find(find.getKeyword());
+                }  else if (cmd.getClass() == ListCommand.class) {
                     tasks.list();
                 } else if (cmd.getClass() == ExitCommand.class) {
                     Ui.reply(EXIT_MESSAGE);
                     sc.close();
+                    return;
                 }
             } catch (AbyssException | IOException | DateTimeParseException e) {
                 Ui.reply(e.getMessage());

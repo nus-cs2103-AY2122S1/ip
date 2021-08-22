@@ -46,6 +46,20 @@ public class TaskList {
         Ui.reply("Task piece is lit up in the Abyss.", markedTask);
     }
 
+    public void find(String keyword) {
+        keyword = keyword.trim();
+        String regex = "[ -~]*" + keyword + "[ -~]*";
+        TaskList filteredTasks = new TaskList();
+        for (int i = 0; i < this.getNumberOfTasks(); i++) {
+            Task task = this.get(i);
+            if (!task.description.matches(regex)) {
+                continue;
+            }
+            filteredTasks.tasks.add(task);
+        }
+        filteredTasks.list();
+    }
+
     public void list() {
         System.out.println(Ui.formatListReply(this));
     }
