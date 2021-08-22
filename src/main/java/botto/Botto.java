@@ -6,32 +6,43 @@ import botto.util.Storage;
 import botto.util.TaskList;
 import botto.util.Ui;
 
+/**
+ * A task tracking bot
+ */
 public class Botto {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
+    /**
+     * Constructor for a Botto bot
+     *
+     * @param filePath Filepath of the file that keeps track of the tasks
+     */
     public Botto(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (BottoException e) {
             ui.showError(e.getMessage());
         }
     }
 
-    public void run() {
+    /**
+     * Handle the logic of the bot
+     */
+    private void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException e) {
+            } catch (BottoException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
@@ -39,6 +50,12 @@ public class Botto {
         }
     }
 
+
+    /**
+     * This method will instantiate the Botto bot
+     *
+     * @param args sequence of characters (Strings) that are passed to the function.
+     */
     public static void main(String[] args) {
         new Botto("data/botto.txt").run();
     }

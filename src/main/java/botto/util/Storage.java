@@ -1,6 +1,6 @@
 package botto.util;
 
-import botto.DukeException;
+import botto.BottoException;
 import botto.task.Deadline;
 import botto.task.Event;
 import botto.task.Task;
@@ -15,14 +15,28 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private File file;
 
+    /**
+     * Constructor for the Botto's storage
+     *
+     * @param filePath Filepath of the file that keeps track of the tasks
+     */
     public Storage(String filePath) {
         this.file = new File(filePath);
     }
 
-    public List<Task> load() throws DukeException {
+    /**
+     * read the file and load the tasks stored inside it
+     *
+     * @return a list of tasks recorded in the file
+     * @throws BottoException whenever an read operation is failed
+     */
+    public List<Task> load() throws BottoException {
         List<Task> temp = new LinkedList<>();
 
         try {
@@ -65,13 +79,19 @@ public class Storage {
             }
 
         } catch (IOException e) {
-            throw new DukeException("Something went wrong when loading data: " + e.getMessage());
+            throw new BottoException("Something went wrong when loading data: " + e.getMessage());
         }
 
         return temp;
     }
 
-    public void save(List<Task> tasks) throws DukeException {
+    /**
+     * save the tasks in the assigned file
+     *
+     * @param tasks list of tasks to be stored
+     * @throws BottoException  whenever an write operation is failed
+     */
+    public void save(List<Task> tasks) throws BottoException {
         try {
             FileWriter fw = new FileWriter("data/botto.txt");
             StringBuilder data = new StringBuilder();
@@ -83,7 +103,7 @@ public class Storage {
             fw.write(data.toString());
             fw.close();
         } catch (IOException e){
-            throw new DukeException("Something went wrong when saving data: " + e.getMessage());
+            throw new BottoException("Something went wrong when saving data: " + e.getMessage());
         }
     }
 }

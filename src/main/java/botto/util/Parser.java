@@ -1,13 +1,25 @@
 package botto.util;
 
-import botto.DukeException;
+import botto.BottoException;
 import botto.command.*;
 
+/**
+ * This class deals with making sense of the user command
+ */
 public class Parser {
+
+    /** current available user commands */
     private final static String[] commands = {"list", "done", "todo", "deadline", "event", "delete", "bye"};
 
 
-    public static Command parse(String fullCommand) throws DukeException {
+    /**
+     * analyse user inputs and find out type of commands needed by the user
+     *
+     * @param fullCommand input from the user
+     * @return type of commands requested by the user
+     * @throws BottoException when the type of commands cannot be resolved
+     */
+    public static Command parse(String fullCommand) throws BottoException {
         String command = findCommand(fullCommand);
 
         switch (command) {
@@ -27,8 +39,9 @@ public class Parser {
             return new ExitCommand();
         }
 
-        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new BottoException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
+
 
 
     private static String findCommand(String fullCommand) {

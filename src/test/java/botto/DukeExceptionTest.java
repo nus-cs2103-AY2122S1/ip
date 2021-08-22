@@ -9,11 +9,11 @@ public class DukeExceptionTest {
     @Test
     public void getMessage_normalMessage_success() {
         assertEquals("Sorry, I don't understand you.",
-                new DukeException("Sorry, I don't understand you.").getMessage());
+                new BottoException("Sorry, I don't understand you.").getMessage());
         assertEquals("What's your name.",
-                new DukeException("What's your name.").getMessage());
+                new BottoException("What's your name.").getMessage());
         assertEquals("Wrong input format.",
-                new DukeException("Wrong input format.").getMessage());
+                new BottoException("Wrong input format.").getMessage());
     }
 
 }
