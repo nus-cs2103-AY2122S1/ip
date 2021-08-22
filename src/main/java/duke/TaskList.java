@@ -53,7 +53,7 @@ public class TaskList {
     
     public void deleteTask(int index) throws DukeException {
         String holder = this.taskList.get(index).toString();
-        this.taskList.remove(index - 1);
+        this.taskList.remove(index);
         this.taskList.trimToSize();
         System.out.println("____________________________________________________________\n"
                 + "okie! I've removed this annoying duke.task: \n"

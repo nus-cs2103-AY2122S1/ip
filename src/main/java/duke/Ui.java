@@ -36,7 +36,7 @@ public class Ui {
     
     public void showDone(duke.task.Task task) {
         showLine();
-        System.out.println("Noice! I've marked this duke.task as done: \n" + task + "\n");
+        System.out.println("Noice! I've marked this task as done: \n" + task + "\n");
         showLine();
     }
     
@@ -69,7 +69,7 @@ public class Ui {
 
     public void showDelete(duke.task.Task task, int num) {
         showLine();
-        System.out.println("okie! I've removed this annoying duke.task: \n" + task + "\n");
+        System.out.println("okie! I've removed this annoying task: \n" + task + "\n");
         showNumOfTask(num);
         showLine();
     }
@@ -80,7 +80,7 @@ public class Ui {
 
     public void showAdd(duke.task.Task task, int num) {
         showLine();
-        System.out.println("Gotcha my dear. I've added this duke.task for you: \n" + task
+        System.out.println("Gotcha my dear. I've added this task for you: \n" + task
                 + "\nNow you have " + num + " tasks in the list.\n");
         showLine();
     }

@@ -20,7 +20,7 @@ public class Storage {
     
     public ArrayList<duke.task.Task> load() throws DukeException {
         try {
-            ArrayList<Task> result = new ArrayList<>();
+            ArrayList<duke.task.Task> result = new ArrayList<>();
             Path folderPath = Paths.get(this.filePath.toString(),  "..");
             if (!Files.exists(folderPath)) {
                 Files.createDirectories(folderPath);
@@ -28,8 +28,8 @@ public class Storage {
             if (!Files.exists(filePath)) {
                 Files.createFile(filePath);
             }
-            File fileholder = new File(filePath.toString());
-            Scanner s = new Scanner(fileholder);
+            File fileHolder = new File(filePath.toString());
+            Scanner s = new Scanner(fileHolder);
             while (s.hasNext()) {
                 String holder = s.nextLine();
                 String[] content = holder.split(" \\| ");

@@ -38,8 +38,9 @@ public class DeleteCommand extends Command {
         if (index > taskList.size()) {
             throw new DukeException("☹ oopsie!!! The specified duke.task does not exit.");
         }
+        duke.task.Task holder = taskList.getTask(index);
         taskList.deleteTask(index);
-        ui.showDelete(taskList.getTask(index), taskList.size());
+        ui.showDelete(holder, taskList.size());
         storage.updateStorage(taskList);
     }
 
