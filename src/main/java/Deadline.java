@@ -7,7 +7,7 @@ public class Deadline extends Task {
     }
 
     public String toData() {
-        return super.toData() + "|" + by;
+        return super.toData() + "~S~" + by;
     }
     
     @Override

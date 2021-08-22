@@ -7,7 +7,7 @@ public class Event extends Task {
     }
     
     public String toData() {
-        return super.toData() + "|" + at; 
+        return super.toData() + "~S~" + at; 
     }
     
     @Override

@@ -20,7 +20,7 @@ public abstract class Task {
     
     public String toData() {
         String isDoneNum = isDone ? "1" : "0"; 
-        return String.format("%s|%s|%s", icon, isDoneNum, description); 
+        return String.format("%s~S~%s~S~%s", icon, isDoneNum, description); 
     }
 
     @Override
