@@ -6,6 +6,7 @@ import side.tasks.Event;
 import side.tasks.Task;
 
 public class Ui {
+
     private static final String LINEBREAK = "---------------------------------------------------------------------";
     private static final String GREETING = LINEBREAK + "" + "\nI'm Side, your unpaid personal assistant. " +
             "Please do less...\n" + LINEBREAK;
