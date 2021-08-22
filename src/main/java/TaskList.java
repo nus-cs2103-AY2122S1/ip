@@ -2,14 +2,16 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.ArrayList;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
+import java.nio.charset.StandardCharsets;
+
+import java.time.LocalDate;
 
 public class TaskList {
     private static final String directory = "./data";
@@ -111,7 +113,7 @@ public class TaskList {
                     name = name.split("\\(")[0].stripTrailing();
                     String parsedInput = line.split("deadline:")[1];
                     String deadline = parsedInput.substring(1, parsedInput.length() - 1);
-                    addWithoutPrinting(new Deadline(name, isDone, deadline));
+                    addWithoutPrinting(new Deadline(name, isDone, LocalDate.parse(deadline, Deadline.formatter)));
                 } else {
                     name = name.split("\\(")[0].stripTrailing();
                     String parsedInput = line.split("at:")[1];
