@@ -21,4 +21,14 @@ public class Event extends Task{
                 this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
         );
     }
+
+    @Override
+    public String toCommand(int index) {
+        return String.format(
+                "event %s /at %s\n%s",
+                this.name,
+                this.at,
+                super.toCommand(index)
+        );
+    }
 }

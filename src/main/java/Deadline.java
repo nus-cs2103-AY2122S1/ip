@@ -21,4 +21,14 @@ public class Deadline extends Task {
                 this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
         );
     }
+
+    @Override
+    public String toCommand(int index) {
+        return String.format(
+                "deadline %s /by %s\n%s",
+                this.name,
+                this.by,
+                super.toCommand(index)
+        );
+    }
 }

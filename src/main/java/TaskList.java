@@ -43,4 +43,13 @@ public class TaskList {
         taskList.remove(index - 1);
         return task;
     }
+
+    public static String[] toCommands() {
+        List<String> commands = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            commands.add(taskList.get(i).toCommand(i + 1));
+        }
+        String[] result = new String[commands.size()];
+        return commands.toArray(result);
+    }
 }
