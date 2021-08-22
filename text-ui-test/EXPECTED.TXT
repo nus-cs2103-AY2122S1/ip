@@ -8,7 +8,7 @@ Hello! I'm
 
 What can I do for you?
 ............................................................
-There are no tasks in your list!
+There are no tasks in your to-do list! ☹
 ____________________________________________________________
 ............................................................
 I have added this task:
@@ -21,7 +21,7 @@ I have added this task:
 You now have 2 tasks in your list
 ____________________________________________________________
 ............................................................
-There is no such task in your to-do list! ☹️
+There is no such task in your to-do list! ☹
 ____________________________________________________________
 ............................................................
 Here are the tasks in your list:
@@ -31,7 +31,7 @@ ____________________________________________________________
 ............................................................
 Good job! I've marked this task as completed:
 [E][X] project meeting  (at:  Mon 2-4pm)
-You now have 1 tasks in your list
+You now have 1 tasks to complete
 ____________________________________________________________
 ............................................................
 
