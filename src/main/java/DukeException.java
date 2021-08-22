@@ -9,7 +9,7 @@ public class DukeException extends Exception {
 class TaskIndexNotInteger extends DukeException {
 
     TaskIndexNotInteger(int length) {
-        super(Duke.Box("Meow? That's not an integer... Please enter a task number between 1 and " + length));
+        super("Meow? That's not an integer... Please enter a task number between 1 and " + length);
     }
 
 }
@@ -17,7 +17,7 @@ class TaskIndexNotInteger extends DukeException {
 class TaskNotFound extends DukeException {
 
     TaskNotFound(String taskStr) {
-        super(Duke.Box("Meow? I can't find " + taskStr));
+        super("Meow? I can't find " + taskStr);
     }
 
 }
@@ -25,7 +25,7 @@ class TaskNotFound extends DukeException {
 class TaskExistsException extends DukeException {
 
     TaskExistsException(Duke.TaskTypes taskTypes, String taskStr) {
-        super(Duke.Box("Meow? " + taskTypes + " " + taskStr + " already exists."));
+        super("Meow? " + taskTypes + " " + taskStr + " already exists.");
     }
 
 }
@@ -33,7 +33,7 @@ class TaskExistsException extends DukeException {
 class TaskIndexOutOfBounds extends DukeException {
 
     TaskIndexOutOfBounds(int i, int length) {
-        super(Duke.Box("Meow? I can't find task " + i + "... Please enter a task number between 1 and " + length));
+        super("Meow? I can't find task " + i + "... Please enter a task number between 1 and " + length);
     }
 
 }
@@ -41,7 +41,7 @@ class TaskIndexOutOfBounds extends DukeException {
 class MissingParams extends DukeException {
 
     MissingParams(String params) {
-        super(Duke.Box("Meow? Missing params... Please use /" + params + " params."));
+        super("Meow? Missing params... Please use /" + params + " params.");
     }
 
 }
@@ -49,7 +49,7 @@ class MissingParams extends DukeException {
 class NothingAfterCommand extends DukeException {
 
     NothingAfterCommand(Duke.Commands command) {
-        super(Duke.Box("Meow? There's nothing after your command " + command.toString() + "... Meow meow meow?"));
+        super("Meow? There's nothing after your command " + command.toString() + "... Meow meow meow?");
     }
 
 }
@@ -57,7 +57,7 @@ class NothingAfterCommand extends DukeException {
 class MissingArguments extends DukeException {
 
     MissingArguments(Duke.Commands command) {
-        super(Duke.Box("Meow? There's missing arguments in your command " + command.toString() + "... Meow meow meow?"));
+        super("Meow? There's missing arguments in your command " + command.toString() + "... Meow meow meow?");
     }
 
 }
@@ -65,7 +65,7 @@ class MissingArguments extends DukeException {
 class EmptyListException extends DukeException {
 
     EmptyListException(Duke.Commands command) {
-        super(Duke.Box("You have nothing in your list to " + command.toString() + ", meow!"));
+        super("You have nothing in your list to " + command.toString() + ", meow!");
     }
 
 }
@@ -73,7 +73,7 @@ class EmptyListException extends DukeException {
 class IllegalCommandException extends DukeException {
 
     IllegalCommandException(String commandStr) {
-        super(Duke.Box("Meow? There is no command " + commandStr + "!"));
+        super("Meow? There is no command " + commandStr + "!");
     }
 
 }
@@ -81,7 +81,7 @@ class IllegalCommandException extends DukeException {
 class IllegalTaskTypeException extends DukeException {
 
     IllegalTaskTypeException(String taskTypeStr) {
-        super(Duke.Box("Meow? There is no task type " + taskTypeStr + "!"));
+        super(("Meow? There is no task type " + taskTypeStr + "!"));
     }
 
 }
@@ -89,7 +89,7 @@ class IllegalTaskTypeException extends DukeException {
 class DateTimeFormatException extends DukeException {
 
     DateTimeFormatException(String datetime) {
-        super(Duke.Box("Meow? You entered " + datetime
+        super(("Meow? You entered " + datetime
                 + ".\n   Please input date in 31/12/2021 or 2021-12-31 or 31Dec2021 format."
                 + "\n   Please input time in 2300 or 11pm or 11.00pm format."));
     }
