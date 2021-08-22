@@ -1,5 +1,7 @@
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 
 import java.util.ArrayList;
@@ -145,6 +147,74 @@ public class Duke {
 
             input.close();
             
+        } catch (IOException e) {
+            System.out.println(new DukeException(DukeExceptionType.DUKEIO).getMessage());
+        }
+    }
+
+    public static void addEntry(String s) {
+        try {
+            File disk = new File("data/disk.txt");
+            FileWriter writer = new FileWriter(disk, true);
+            writer.write(s + "\n");
+            writer.close();
+        } catch (IOException e){
+            System.out.println(new DukeException(DukeExceptionType.DUKEIO).getMessage());
+        }
+    }
+
+    public static void setEntryDone(String s) {
+        try {
+            File updated = new File("data/updated.txt");
+            File disk = new File("data/disk.txt");
+            updated.createNewFile();
+
+            FileWriter writer = new FileWriter(updated, true);
+
+            BufferedReader reader = new BufferedReader(new FileReader(disk));
+            String currLine = reader.readLine();
+
+            while (currLine != null) {
+                if (currLine.equals(s)) {
+                    String[] toSetDone = currLine.split(" \\| ", 3);
+                    writer.write(toSetDone[0] + " | 1 | " + toSetDone[2] + "\n");
+                } else {
+                    writer.write(currLine + "\n");
+                }
+                currLine = reader.readLine();
+            }
+
+            writer.close();
+
+            disk.delete();
+            updated.renameTo(disk);
+        } catch (IOException e) {
+            System.out.println(new DukeException(DukeExceptionType.DUKEIO).getMessage());
+        }
+    }
+
+    public static void deleteEntry(String s) {
+        try {
+            File updated = new File("data/updated.txt");
+            File disk = new File("data/disk.txt");
+            updated.createNewFile();
+
+            FileWriter writer = new FileWriter(updated, true);
+
+            BufferedReader reader = new BufferedReader(new FileReader(disk));
+            String currLine = reader.readLine();
+
+            while (currLine != null) {
+                if (!currLine.equals(s)) {
+                    writer.write(currLine + "\n");
+                }
+                currLine = reader.readLine();
+            }
+
+            writer.close();
+
+            disk.delete();
+            updated.renameTo(disk);
         } catch (IOException e) {
             System.out.println(new DukeException(DukeExceptionType.DUKEIO).getMessage());
         }
