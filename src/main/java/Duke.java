@@ -8,12 +8,18 @@ public class Duke {
     /**
      * Field for duke to keep track of task list.
      */
-    private static TaskList taskList = new TaskList();
+    private TaskList taskList;
+
+    /**
+     * Constructor for Duke
+     */
+    public Duke(TaskList taskList) {
+        this.taskList = taskList;
+    }
 
     /**
      * Commands that Duke might use.
      */
-
     private enum Commands {
         GREET(String.format("Hello! I'm Duke\n%4sWhat can I do for you?", " ")),
         ADD("Got it. I've added this task:"),
@@ -36,7 +42,7 @@ public class Duke {
     /**
      * Dividing line for formatting Duke's replies.
      */
-    private static void divider() {
+    private void divider() {
         StringBuilder builder = new StringBuilder(100);
         Stream.generate(() -> '-').limit(60).forEach(e -> builder.append(e));
 
@@ -47,7 +53,7 @@ public class Duke {
     /**
      * Method that prints Duke's greetings.
      */
-    private static void greet() {
+    private void greet() {
         divider();
         Commands.GREET.printCommand();
         divider();
@@ -56,7 +62,7 @@ public class Duke {
     /**
      * Method that prints Duke's exit message.
      */
-    private static void exit() {
+    private void exit() {
         divider();
         Commands.EXIT.printCommand();
         divider();
@@ -65,7 +71,7 @@ public class Duke {
     /**
      * Method that prints the current tasks in the task list.
      */
-    private static void returnTaskList() {
+    private void returnTaskList() {
         divider();
         Commands.LIST.printCommand();
         System.out.println(taskList);
@@ -77,18 +83,21 @@ public class Duke {
      *
      * @param input The user input to Duke.
      */
-    private static void handleInvalidInputs(String input) {
+    private void handleInvalidInputs(String input) {
         try {
             switch (input) {
-                case "todo":
-                case "deadline":
+                case "todo": // fallthrough
+                case "deadline": // fallthrough
                 case "event": {
                     System.out.println(
-                            String.format(
-                                    "%4s☹ OOPS!!! The description of a %s cannot be empty.",
-                                    " ", input)
+
                     );
-                    break;
+                    throw new DukeException(
+                            String.format(
+                                    "☹ OOPS!!! The description of a %s cannot be empty.",
+                                    input
+                            )
+                    );
                 }
                 default:
                     throw new DukeException(
@@ -96,7 +105,10 @@ public class Duke {
                     );
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            divider();
+            System.out.println(String.format("%4s%s",
+                    " ", e.getMessage()));
+            divider();
         }
 
     }
@@ -106,7 +118,7 @@ public class Duke {
      *
      * @param command The command that specifies the type of task and its description.
      */
-    private static void updateTaskList(String command) {
+    private void updateTaskList(String command) {
         // The type of the task indicated before the first space.
         try {
             int indexOfFirstSpace = command.indexOf(" ");
@@ -143,16 +155,19 @@ public class Duke {
             }
 
             divider();
-            Duke.taskList = taskList.add(newTask);
+            this.taskList = this.taskList.add(newTask);
             Commands.ADD.printCommand();
             System.out.println(
                     String.format("%5s%s\n%4s%s", " ", newTask,
-                            " ", taskList.status())
+                            " ", this.taskList.status())
             );
             divider();
         } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
+            divider();
+            System.out.println(String.format("%4s%s",
+                    " ", e.getMessage()));
+            divider();
+        }
     }
 
     /**
@@ -160,15 +175,15 @@ public class Duke {
      *
      * @param index Index of the task to be deleted.
      */
-    private static void markTaskAsCompleted(int index) throws DukeException {
-        boolean isValid = taskList.isValidTaskIndex(index);
+    private void markTaskAsCompleted(int index) throws DukeException {
+        boolean isValid = this.taskList.isValidTaskIndex(index);
         divider();
         if (isValid) {
-            Task task = taskList.markTaskAsCompleted(index);
+            Task task = this.taskList.markTaskAsCompleted(index);
             Commands.DONE.printCommand();
             System.out.println(
                     String.format("%6s%s\n%4s%s", " ", task,
-                            " ", taskList.status())
+                            " ", this.taskList.status())
             );
         } else {
             throw new DukeException("There is no such task.");
@@ -181,12 +196,12 @@ public class Duke {
      *
      * @param index Index of the task to be deleted.
      */
-    private static void deleteTask(int index) throws DukeException {
+    private void deleteTask(int index) throws DukeException {
         boolean isValid = taskList.isValidTaskIndex(index);
         divider();
         if (isValid) {
             Task task = taskList.getTask(index);
-            Duke.taskList = taskList.deleteTask(index);
+            this.taskList = this.taskList.deleteTask(index);
             Commands.DELETE.printCommand();
             System.out.println(
                     String.format("%6s%s\n%4s%s", " ", task,
@@ -199,11 +214,9 @@ public class Duke {
     }
 
     /**
-     * Main method to execute Duke's functions.
-     *
-     * @param args Command line arguments.
+     * Runs the Duke chatbot.
      */
-    public static void main(String[] args) {
+    private void run() {
         // Greeting the user
         greet();
 
@@ -216,7 +229,7 @@ public class Duke {
                 exit();
                 break;
             } else if (command.equals("list")) {
-                Duke.returnTaskList();
+                returnTaskList();
             } else if (command.startsWith("done")
                     || command.startsWith("delete")) {
                 try {
@@ -227,20 +240,33 @@ public class Duke {
                     }
                     int taskIndex = Integer.parseInt(arrOfCommandWords[1]) - 1;
                     if (command.startsWith("done")) {
-                        Duke.markTaskAsCompleted(taskIndex);
+                        markTaskAsCompleted(taskIndex);
                     } else {
-                        Duke.deleteTask(taskIndex);
+                        deleteTask(taskIndex);
                     }
                 } catch (NumberFormatException|DukeException e){
-                    System.out.println(e.getMessage());
+                    divider();
+                    System.out.println(String.format("%4s%s",
+                            " ", e.getMessage()));
+                    divider();
                 } finally {
                     // TODO: implement cleanup
                 }
             } else {
                 // Add the task to the task list
-                Duke.updateTaskList(command);
+                updateTaskList(command);
             }
         }
         sc.close();
+    }
+
+    /**
+     * Main method to execute Duke's functions.
+     *
+     * @param args Command line arguments.
+     */
+    public static void main(String[] args) {
+        Duke duke = new Duke(new TaskList());
+        duke.run();
     }
 }
