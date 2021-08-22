@@ -1,4 +1,6 @@
-import java.util.ArrayList;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
 
 public class Ui {
     String line = "____________________________________________________________\n";
@@ -9,6 +11,10 @@ public class Ui {
 
     public void Bye(){
         System.out.println(line + "Bye. Hope to see you again soon!\n" + line);
+    }
+
+    public void list(String list){
+        System.out.println(line + list + line);
     }
 
     public void Done(TaskList list, int doneNum){
