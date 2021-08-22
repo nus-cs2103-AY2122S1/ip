@@ -1,0 +1,81 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Storage {
+    private File file;
+
+    public Storage(String filePath) {
+        this.file = new File(filePath);
+    }
+
+    public List<Task> load() throws DukeException {
+        List<Task> temp = new LinkedList<>();
+
+        try {
+            this.file.getParentFile().mkdirs();
+
+            // file does not exist
+            if (file.createNewFile()) {
+                return temp;
+            }
+
+            Scanner scanner = new Scanner(this.file);
+            while(scanner.hasNext()) {
+                Task task;
+                String next = scanner.nextLine();
+                boolean isDone = next.charAt(4) == 'X';
+                String[] info = next.substring(7).split(" [(]..: ");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
+
+                switch (next.charAt(1)) {
+                case 'T' :
+                    task = new Todo(info[0]);
+                    break;
+                case 'D' :
+                    String deadline = info[1].substring(0, info[1].length() - 1);
+                    task = new Deadline(info[0], LocalDateTime.parse(deadline, formatter));
+                    break;
+                case 'E' :
+                    String eventTime = info[1].substring(0, info[1].length() - 1);
+                    task = new Event(info[0], LocalDateTime.parse(eventTime, formatter));
+                    break;
+                default:
+                    continue;
+                }
+
+                if(isDone) {
+                    task.markAsDone();
+                }
+
+                temp.add(task);
+            }
+
+        } catch (IOException e) {
+            throw new DukeException("Something went wrong when loading data: " + e.getMessage());
+        }
+
+        return temp;
+    }
+
+    public void save(List<Task> tasks) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter("data/botto.txt");
+            StringBuilder data = new StringBuilder();
+
+            for (Task task : tasks) {
+                data.append(task).append(System.lineSeparator());
+            }
+
+            fw.write(data.toString());
+            fw.close();
+        } catch (IOException e){
+            throw new DukeException("Something went wrong when saving data: " + e.getMessage());
+        }
+    }
+}

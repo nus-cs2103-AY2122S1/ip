@@ -1,5 +1,0 @@
-[T][X] read book
-[D][ ] return book (by: 2/12/2019 6:00 pm)
-[E][ ] project meeting (at: 28/8/2021 9:00 am)
-[T][X] return book
-[E][X] birthday party (at: 1/9/2021 5:00 pm)
