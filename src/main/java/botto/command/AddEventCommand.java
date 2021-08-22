@@ -19,20 +19,20 @@ public class AddEventCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws BottoException {
         String detail;
 
         try {
             detail = command.split(" ", 2)[1];
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! The detail of an event cannot be empty.");
+            throw new BottoException("☹ OOPS!!! The detail of an event cannot be empty.");
         }
 
         String[] information = detail.split(" /.. ", 2);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
 
         try {
-            Task task =  new Event(information[0], LocalDateTime.parse(information[1], formatter));
+            Task task = new Event(information[0], LocalDateTime.parse(information[1], formatter));
             taskList.addTask(task);
 
             ui.respondAdd(task, taskList.getSize());
@@ -40,7 +40,7 @@ public class AddEventCommand implements Command {
         } catch (Exception e) {
             String message = "☹ OOPS!!! The command is in wrong format.\n"
                     + "    Please enter in this format: event [title] /[at] [d/M/yyyy H:mm a]";
-            throw new DukeException(message);
+            throw new BottoException(message);
         }
     }
 }

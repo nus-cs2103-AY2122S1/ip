@@ -1,6 +1,6 @@
 package botto.util;
 
-import botto.DukeException;
+import botto.BottoException;
 import botto.task.Deadline;
 import botto.task.Event;
 import botto.task.Task;
@@ -22,15 +22,15 @@ public class Storage {
         this.file = new File(filePath);
     }
 
-    public List<Task> load() throws DukeException {
-        List<Task> temp = new LinkedList<>();
+    public List<Task> load() throws BottoException {
+        List<Task> tasks = new LinkedList<>();
 
         try {
             this.file.getParentFile().mkdirs();
 
             // file does not exist
             if (file.createNewFile()) {
-                return temp;
+                return tasks;
             }
 
             Scanner scanner = new Scanner(this.file);
@@ -61,17 +61,17 @@ public class Storage {
                     task.markAsDone();
                 }
 
-                temp.add(task);
+                tasks.add(task);
             }
 
         } catch (IOException e) {
-            throw new DukeException("Something went wrong when loading data: " + e.getMessage());
+            throw new BottoException("Something went wrong when loading data: " + e.getMessage());
         }
 
-        return temp;
+        return tasks;
     }
 
-    public void save(List<Task> tasks) throws DukeException {
+    public void save(List<Task> tasks) throws BottoException {
         try {
             FileWriter fw = new FileWriter("data/botto.txt");
             StringBuilder data = new StringBuilder();
@@ -83,7 +83,7 @@ public class Storage {
             fw.write(data.toString());
             fw.close();
         } catch (IOException e){
-            throw new DukeException("Something went wrong when saving data: " + e.getMessage());
+            throw new BottoException("Something went wrong when saving data: " + e.getMessage());
         }
     }
 }

@@ -1,6 +1,6 @@
 package botto.util;
 
-import botto.DukeException;
+import botto.BottoException;
 import botto.command.*;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParserTest {
 
     @Test
-    public void parse_allCommands_success() throws DukeException {
+    public void parse_allCommands_success() throws BottoException {
         String command = "list     ";
         assertEquals(ShowListCommand.class, Parser.parse(command).getClass());
         command = "done 5";
@@ -31,14 +31,14 @@ public class ParserTest {
         try {
             String command = "";
             assertEquals(ShowListCommand.class, Parser.parse(command).getClass());
-        } catch (DukeException e) {
+        } catch (BottoException e) {
             assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
 
         try {
             String command = "I want a bowl";
             assertEquals(DeleteCommand.class, Parser.parse(command).getClass());
-        } catch (DukeException e) {
+        } catch (BottoException e) {
             assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
     }

@@ -5,17 +5,17 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    protected LocalDateTime by;
+    protected LocalDateTime dateTime;
 
-    public Deadline(String description, LocalDateTime by) {
+    public Deadline(String description, LocalDateTime dateTime) {
         super(description);
-        this.by = by;
+        this.dateTime = dateTime;
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
-        return "[D]" + super.toString() + " (by: " + formatter.format(by) + ")";
+        return "[D]" + super.toString() + " (by: " + formatter.format(dateTime) + ")";
     }
 
 

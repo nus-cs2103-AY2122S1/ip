@@ -1,6 +1,6 @@
 package botto.util;
 
-import botto.DukeException;
+import botto.BottoException;
 import botto.task.Task;
 import botto.task.TaskStub;
 import org.junit.jupiter.api.AfterEach;
@@ -38,7 +38,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void markAsDone_task1_success() throws DukeException {
+    public void markAsDone_task1_success() throws BottoException {
         assertEquals(false, t1.isDone);
         assertEquals(t1, taskList.markAsDone(0));
         assertEquals(true, t1.isDone);
@@ -48,7 +48,7 @@ public class TaskListTest {
     public void markAsDone_notElement_exceptionThrown() {
         try {
             assertEquals(new Task("Dummy"),taskList.markAsDone(4));
-        } catch (DukeException e) {
+        } catch (BottoException e) {
             assertEquals("☹ OOPS!!! The task does not exist.", e.getMessage());
         }
     }

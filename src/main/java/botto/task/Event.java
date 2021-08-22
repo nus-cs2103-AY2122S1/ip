@@ -5,16 +5,16 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task{
 
-    protected LocalDateTime at;
+    protected LocalDateTime dateTime;
 
-    public Event(String description, LocalDateTime at) {
+    public Event(String description, LocalDateTime dateTime) {
         super(description);
-        this.at = at;
+        this.dateTime = dateTime;
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
-        return "[E]" + super.toString() + " (at: " + formatter.format(this.at) + ")";
+        return "[E]" + super.toString() + " (at: " + formatter.format(this.dateTime) + ")";
     }
 }

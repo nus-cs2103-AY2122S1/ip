@@ -1,6 +1,6 @@
 package botto.util;
 
-import botto.DukeException;
+import botto.BottoException;
 import botto.task.Task;
 
 import java.util.List;
@@ -25,24 +25,24 @@ public class TaskList {
         this.tasks.add(task);
     }
 
-    public Task markAsDone(int index) throws DukeException {
+    public Task markAsDone(int index) throws BottoException {
         try {
             Task subject = this.tasks.get(index);
             subject.markAsDone();
 
             return subject;
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! The task does not exist.");
+            throw new BottoException("☹ OOPS!!! The task does not exist.");
         }
     }
 
-    public Task deleteTask(int index) throws DukeException {
+    public Task deleteTask(int index) throws BottoException {
         try {
             Task task = this.tasks.get(index);
             this.tasks.remove(index);
             return task;
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! The task does not exist.");
+            throw new BottoException("☹ OOPS!!! The task does not exist.");
         }
     }
 }

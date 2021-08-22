@@ -16,13 +16,13 @@ public class AddToDoCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws BottoException {
         String description;
 
         try {
             description = command.split(" ", 2)[1];
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new BottoException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
 
         Task task = new Todo(description);

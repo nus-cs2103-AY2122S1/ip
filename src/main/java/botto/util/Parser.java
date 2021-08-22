@@ -1,13 +1,12 @@
 package botto.util;
 
-import botto.DukeException;
+import botto.BottoException;
 import botto.command.*;
 
 public class Parser {
-    private final static String[] commands = {"list", "done", "todo", "deadline", "event", "delete", "bye"};
+    private final static String[] COMMANDS = {"list", "done", "todo", "deadline", "event", "delete", "bye"};
 
-
-    public static Command parse(String fullCommand) throws DukeException {
+    public static Command parse(String fullCommand) throws BottoException {
         String command = findCommand(fullCommand);
 
         switch (command) {
@@ -27,12 +26,12 @@ public class Parser {
             return new ExitCommand();
         }
 
-        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new BottoException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
 
     private static String findCommand(String fullCommand) {
-        for(String x: commands) {
+        for(String x: COMMANDS) {
             if(fullCommand.startsWith(x)) {
                 return x;
             }

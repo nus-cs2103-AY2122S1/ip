@@ -14,14 +14,14 @@ public class MarkDoneCommand implements Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws BottoException {
         String integer = command.replaceAll("\\D+", "");
         int index;
 
         try {
             index = Integer.parseInt(integer) - 1;
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! You have to specify the task.");
+            throw new BottoException("☹ OOPS!!! You have to specify the task.");
         }
 
         Task task = taskList.markAsDone(index);
