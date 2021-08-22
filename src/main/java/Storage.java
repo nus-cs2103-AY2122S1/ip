@@ -5,10 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TextFile {
+public class Storage {
 
-    public static List<Task> readFromTextFile() throws FileNotFoundException {
-        File file = new File("./data/task_list.txt");
+    String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public List<Task> load() throws FileNotFoundException {
+        File file = new File(this.filePath);
         Scanner reader = new Scanner(file);
         List<Task> taskList = new ArrayList<>();
 
@@ -33,8 +39,8 @@ public class TextFile {
         return taskList;
     }
 
-    public static void writeToTextFile(List<Task> taskList) throws FileNotFoundException {
-        PrintWriter out = new PrintWriter("./data/task_list.txt");
+    public void update(List<Task> taskList) throws FileNotFoundException {
+        PrintWriter out = new PrintWriter(this.filePath);
         for (Task task : taskList) {
             if (task instanceof Todo) {
                 out.printf("T | %s | %s%n", task.getStatusIcon() == "X" ? 1 : 0, task.getDescription());

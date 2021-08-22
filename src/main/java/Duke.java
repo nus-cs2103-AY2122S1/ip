@@ -2,26 +2,27 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
 public class Duke {
 
     private UI ui;
+    private Storage storage;
 
-    public Duke() {
+    public Duke(String filePath) {
         ui = new UI();
-        Scanner scanner = new Scanner(System.in);
+        storage = new Storage(filePath);
+
         try {
-            List<Task> taskList = TextFile.readFromTextFile();
-            run(scanner, taskList);
+            List<Task> taskList = storage.load();
+            run(taskList, filePath, this.storage);
         } catch (FileNotFoundException e) {
-            ui.printLoadingError();
+            ui.printLoadingError(filePath);
         }
     }
 
-    public void run(Scanner scanner, List<Task> taskList) {
+    public void run(List<Task> taskList, String filePath, Storage storage) {
         ui.printWelcome();
         String command = ui.readCommand();
 
@@ -39,14 +40,14 @@ public class Duke {
                     int taskNumber = parseInt(command.split(" ")[1]);
                     Task task = taskList.get(taskNumber - 1);
                     task.markAsDone();
-                    TextFile.writeToTextFile(taskList);
+                    storage.update(taskList);
                     ui.printTaskMarkedDone(task);
 
                 } else if (command.startsWith("delete")) {
                     int taskNumber = parseInt(command.split(" ")[1]);
                     Task task = taskList.get(taskNumber - 1);
                     taskList.remove(taskNumber - 1);
-                    TextFile.writeToTextFile(taskList);
+                    storage.update(taskList);
                     ui.printDeleteTask(task);
 
                 } else if (command.startsWith("todo")) {
@@ -57,7 +58,7 @@ public class Duke {
                     String description = splitCommand[1];
                     Task task = new Todo(description);
                     taskList.add(task);
-                    TextFile.writeToTextFile(taskList);
+                    storage.update(taskList);
                     ui.printAddTask(task);
 
                 } else if (command.startsWith("deadline")) {
@@ -76,7 +77,7 @@ public class Duke {
                     String deadline = splitDescription[1];
                     Task task = new Deadline(description, deadline);
                     taskList.add(task);
-                    TextFile.writeToTextFile(taskList);
+                    storage.update(taskList);
                     ui.printAddTask(task);
 
                 } else if (command.startsWith(("event"))) {
@@ -95,7 +96,7 @@ public class Duke {
                     String time = splitDescription[1];
                     Task task = new Event(description, time);
                     taskList.add(task);
-                    TextFile.writeToTextFile(taskList);
+                    storage.update(taskList);
                     ui.printAddTask(task);
 
                 } else if (command.startsWith(("date"))) {
@@ -117,7 +118,7 @@ public class Duke {
             } catch (NumberFormatException e) {
                 ui.printNumberFormatException();
             } catch (FileNotFoundException e) {
-                ui.printLoadingError();
+                ui.printLoadingError(filePath);
             } catch (DateTimeParseException e) {
                 ui.printDateTimeParseException();
             }
@@ -129,6 +130,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke();
+        new Duke("./data/task_list.txt");
     }
 }

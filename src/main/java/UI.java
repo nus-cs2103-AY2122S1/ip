@@ -64,8 +64,8 @@ public class UI {
     }
 
     /** Error methods */
-    public void printLoadingError() {
-        System.out.println("Lollipop: ./data or ./data/task_list.txt is not found.");
+    public void printLoadingError(String filePath) {
+        System.out.printf("Lollipop: %s is not found.%n", filePath);
     }
 
     public void printDukeException(Exception e) {
