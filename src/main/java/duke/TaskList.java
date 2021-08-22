@@ -13,19 +13,19 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
-    void addTask(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
     }
 
-    Task delete(int index) {
+    public Task delete(int index) {
         return tasks.remove(index);
     }
 
-    int getSize() {
+    public int getSize() {
         return tasks.size();
     }
 
-    Task get(int index) {
+    public Task get(int index) {
         return tasks.get(index);
     }
 }

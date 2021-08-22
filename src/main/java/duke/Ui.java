@@ -3,28 +3,28 @@ import java.util.Scanner;
 
 
 public class Ui {
-    static Scanner userInput = new Scanner(System.in);
-    static String lineBreaker = "____________________________________________________________";
-    static String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
-    static String farewell = "Bye. Hope to see you again soon!";
-    static String listMessage = "Here are the tasks in your list:";
-    static String doneMessage = "Nice! I've marked this task as done:";
-    static String addTaskMessage = "Got it. I've added this task:";
-    static String deleteTaskMessage = "Noted. I've removed this task:";
+    private static final Scanner userInput = new Scanner(System.in);
+    private static String lineBreaker = "____________________________________________________________";
+    private static String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
+    private static String farewell = "Bye. Hope to see you again soon!";
+    private static String listMessage = "Here are the tasks in your list:";
+    private static String doneMessage = "Nice! I've marked this task as done:";
+    private static String addTaskMessage = "Got it. I've added this task:";
+    private static String deleteTaskMessage = "Noted. I've removed this task:";
 
-    void showLoadingError() {
+    public void showLoadingError() {
         System.out.println("Can't load saved file");
     }
 
-    String getInstruction() {
+    public String getInstruction() {
         return userInput.nextLine();
     }
 
-    void printLineBreak () {
+    public  void printLineBreak () {
         System.out.println(lineBreaker);
     }
 
-    void printArrayList (TaskList taskList) {
+    public void printArrayList (TaskList taskList) {
         System.out.println(listMessage);
         for(int i = 0; i < taskList.getSize(); i++) {
             System.out.println(String.valueOf(i+1) + "." + taskList.get(i).toString());
@@ -32,30 +32,30 @@ public class Ui {
         printLineBreak();
     }
 
-    void greet(){
+    public void greet(){
         System.out.println(greeting);
         printLineBreak();
     }
 
-    void sayFarewell() {
+    public void sayFarewell() {
         printLineBreak();
         System.out.println(farewell);
         printLineBreak();
     }
 
-    void completeTaskMessage (Task task) {
+    public void completeTaskMessage (Task task) {
         System.out.println(doneMessage + "\n" + task.toString());
         printLineBreak();
     }
 
-    void deleteTaskMessage (Task task, int size) {
+    public void deleteTaskMessage (Task task, int size) {
         System.out.println(deleteTaskMessage);
         System.out.println("  " + task.toString());
         taskCounterMessage(size);
         printLineBreak();
     }
 
-    void addedTaskMessage (Task task, int size) {
+    public void addedTaskMessage (Task task, int size) {
         System.out.println(addTaskMessage);
         System.out.println("  " + task.toString());
         taskCounterMessage(size);

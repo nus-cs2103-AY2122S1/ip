@@ -35,7 +35,7 @@ public class Duke {
     }
 
 
-    boolean checkBye(String instruction){
+    private boolean checkBye(String instruction){
         if(instruction.equalsIgnoreCase("bye")){
             isRunning = false;
             storage.fileClear();
@@ -47,7 +47,7 @@ public class Duke {
         return false;
     }
 
-    void parse(String instruction) throws NoDescriptionError, UnknownCommandError{
+    private void parse(String instruction) throws NoDescriptionError, UnknownCommandError{
         ui.printLineBreak();
         String[] strings = instruction.split(" ", 2);
         String operative = strings[0];

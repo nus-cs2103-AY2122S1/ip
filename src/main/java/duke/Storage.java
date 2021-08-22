@@ -22,7 +22,7 @@ public class Storage {
         }
     }
 
-    ArrayList<Task> parseFile () {
+    public ArrayList<Task> parseFile () {
         ArrayList<Task> history = new ArrayList<Task>();
         try {
             FileReader fileReader = new FileReader(file);
@@ -38,7 +38,7 @@ public class Storage {
         return history;
     }
 
-    Task parseTask(String task) {
+    public Task parseTask(String task) {
         String[] temp = task.split(" \\| ");
         if (temp.length == 3) {
             Todo toReturn = new Todo(temp[2]);
@@ -61,7 +61,7 @@ public class Storage {
         }
     }
 
-    void fileClear () {
+    public void fileClear () {
         try {
             FileWriter fileWriter = new FileWriter(file.getAbsoluteFile(), false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -71,7 +71,7 @@ public class Storage {
         }
     }
 
-    void writeToFile (String text) {
+    public void writeToFile (String text) {
         try {
             FileWriter fileWriter = new FileWriter(file.getAbsoluteFile(),true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
