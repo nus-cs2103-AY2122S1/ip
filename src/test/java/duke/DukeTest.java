@@ -18,7 +18,9 @@ import java.nio.file.Path;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
-    // referenced from https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println
+    //@@author dfa
+    //Reused from https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println
+    // with minor modifications
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -35,6 +37,7 @@ public class DukeTest {
         System.setOut(originalOut);
         System.setErr(originalErr);
     }
+    //@@author dfa
 
     @Test
     public void testMain() {
