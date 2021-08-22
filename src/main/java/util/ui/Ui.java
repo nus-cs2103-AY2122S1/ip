@@ -5,8 +5,7 @@ import util.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Scanner;
-
+import util.commons.*;
 
 /**
  * Deals with the interactions of the user.
@@ -14,16 +13,6 @@ import java.util.Scanner;
  */
 
 public class Ui {
-    private static final String taskRemoved = "Noted, I've removed this task:";
-    private static final String taskComplete = "Nice, I've marked this task as done";
-    private static final String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String greetings = "Greetings! I'm Duke\n\tWhat can I do for you?";
-    private static final String bye = "Godspeed young padawan!";
-    private static final String hline = "\t----------------------------";
     private final Scanner sc;
 
     public Ui() {
@@ -38,21 +27,17 @@ public class Ui {
      * @param s The string to be printed.
      */
     public void print(String s) {
-        System.out.println(hline);
+        System.out.println(Messages.HLINE);
         System.out.println("\t" + s);
-        System.out.println("\n" + hline);
+        System.out.println(Messages.HLINE);
     }
 
     public void printTaskAdded(Task t, int i) {
-        System.out.println(hline);
-        System.out.println("\tRoger! I have added this task.");
-        System.out.println("\t" + t);
-        System.out.println(String.format("\tNow you have %d tasks in the list.", i));
-        System.out.println("\n" + hline);
+        this.print(String.format(Messages.TASK_ADDED, t.toString(), i));
     }
 
     public void printTaskDel(Task t, int i) {
-        this.print("The following task has been removed\n\t" + t + "\n\tNow you have "+ i + " tasks remaining");
+        this.print(String.format(Messages.TASK_DELETED, t.toString(), i));
     }
 
 
@@ -64,7 +49,7 @@ public class Ui {
      * Method to print the Logo for Duke.
      */
     public void print_logo() {
-        System.out.println("Hello from\n" + Ui.logo);
+        System.out.println("Hello from\n" + Messages.LOGO);
 
     }
 

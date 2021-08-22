@@ -2,7 +2,7 @@ package util.commands;
 
 import util.tasks.*;
 import util.ui.*;
-
+import util.commons.*;
 /**
  * Command representing the addition of a
  * task to the task list.
@@ -23,8 +23,8 @@ public class AddCommand implements Command {
 
     @Override
     public void execute() {
-        if (this.tasks.isAdded(task)) {
-            this.ui.print("Task already added: " + task);
+        if (TaskList.isAdded(task, tasks)) {
+            this.ui.print(String.format(Messages.TASK_ALREADY_ADDED, task.toString()));
         } else {
             tasks.add(task);
             ui.printTaskAdded(task, tasks.size());

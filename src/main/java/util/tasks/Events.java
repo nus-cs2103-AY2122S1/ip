@@ -1,25 +1,21 @@
 package util.tasks;
 
 import java.time.LocalDate;
+import util.commons.*;
 
 public class Events extends DatedTask {
     private static String label = "[E]";
-    private static final String NOINPUTERRORMESSAGE = "☹ OOPS!!! The event deadline must be filled in prefixed by /at";
-    private Events(String name, LocalDate date) {
-        super(name.trim(), date);
-
-    }
 
 
 
     private Events(String name, String date) {
-        super(name.trim(), LocalDate.parse(date.trim()));
+        super(name.trim(), date.trim());
 
     }
 
     public static Events of(String total) throws DukeException {
         String[] ss = total.split("/at", 2);
-        if (ss.length == 0) throw new DukeException();
+        if (ss.length == 0) throw new DukeException(Messages.EVENT_NO_INPUT_ERROR_MESSAGE);
         return new Events(ss[0], ss[1]);
     }
 

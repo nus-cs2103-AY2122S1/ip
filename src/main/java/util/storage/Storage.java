@@ -9,20 +9,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
-
+import util.tasks.*;
 
 
 public class Storage {
 
-    private String tempFilePath = "data/temp.txt";
-    private String saveFilePath = "data/save.txt";
+    private String tempFilePath;
+    private String saveFilePath;
+    private DateTaskTable dateTaskTable;
     //Use a custom ui for storage?
 
 
-    public Storage(String saveFilePath, String tempFilePath) {
+    public Storage(String saveFilePath, String tempFilePath, DateTaskTable dateTaskTable) {
         this.tempFilePath = tempFilePath;
         this.saveFilePath = saveFilePath;
-
+        this.dateTaskTable = dateTaskTable;
     }
 
 
@@ -31,7 +32,7 @@ public class Storage {
      * list of Tasks. Occurs every time there is a modification to the
      * List of tasks.
      *
-     * todo -- check if it is possible to have write and read in a seperate class file (encapsulate in a package)?
+     *
      * maybe its not better though?
      */
 
@@ -87,8 +88,13 @@ public class Storage {
         if (!f.exists()) return inputs;
         Scanner sc = new Scanner(f);
         while (sc.hasNext()) {
-            inputs.add(Task.decode(sc.nextLine()));
+            Task t = Task.decode(sc.nextLine());
+            inputs.add(t);
+            if (t.isDated()) {
+                dateTaskTable.add((DatedTask) t);
+            }
         }
+        sc.close();
         return inputs;
 
     }

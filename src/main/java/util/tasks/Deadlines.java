@@ -7,12 +7,9 @@ public class Deadlines extends DatedTask {
     private static final String DELIMITER = "/by";
     private static final String NOINPUTERRORMESSAGE = "☹ OOPS!!! The deadline must be filled in prefixed by /by";
 
-    private Deadlines(String s, LocalDate dl) {
-        super(s.trim(), dl);
 
-    }
     private Deadlines(String s, String dl) {
-        super(s.trim(), LocalDate.parse(dl.trim()));
+        super(s.trim(), dl.trim());
 
     }
 

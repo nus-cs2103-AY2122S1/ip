@@ -19,4 +19,5 @@ public class DateTaskTable extends HashMap<LocalDate, ArrayList<DatedTask>> {
         return res;
     }
 
+
 }

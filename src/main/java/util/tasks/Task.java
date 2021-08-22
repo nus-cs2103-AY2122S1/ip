@@ -7,6 +7,9 @@ package util.tasks;
 public abstract class Task {
 
 
+    public boolean isDated() {
+        return false;
+    }
 
     /**
      * Method to encode the task as a String.
@@ -16,6 +19,8 @@ public abstract class Task {
      * @return The encoded task;
      */
     public abstract String encode();
+
+
 
 
     protected static enum Label {

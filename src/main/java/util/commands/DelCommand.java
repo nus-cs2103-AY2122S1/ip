@@ -18,7 +18,7 @@ public class DelCommand implements Command {
 
     @Override
     public void execute() {
-        Task t = this.tasklist.remove(delPos);
+        Task t = this.tasklist.remove(delPos - 1);
         delUI.printTaskDel(t, tasklist.size());
     }
 
