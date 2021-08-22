@@ -1,8 +1,12 @@
+package com.iP.yiheng;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Task {
     protected String description;
     private boolean isDone;
+    private static final TaskFile file = new TaskFile();
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     private Task(String description) {
@@ -15,6 +19,18 @@ public class Task {
 
     private class Todo extends Task {
         public Todo(String description) {
+            super(description);
+            try {
+                file.saveTask(this); // Saves task to hard disk
+                System.out.println("\nDuke: Got it. I have added this task:\n" +
+                        this + "\nNow you have " +
+                        Task.listLength() + " tasks in the list.");
+            } catch (IOException e) {
+                System.out.println("File not found. Please ensure you have the data folder with tasks.txt.");
+            }
+        }
+
+        public Todo(String description, boolean isExisting) {
             super(description);
         }
 
@@ -30,12 +46,25 @@ public class Task {
         public Deadline(String description, String time) {
             super(description);
             this.time = time;
+            try {
+                file.saveTask(this); // Saves task to hard disk
+                System.out.println("\nDuke: Got it. I have added this task:\n" +
+                        this + "\nNow you have " +
+                        Task.listLength() + " tasks in the list.");
+            } catch (IOException e) {
+                System.out.println("File not found. Please ensure you have the data folder with tasks.txt.");
+            }
+        }
+
+        public Deadline(String description, String time, boolean isExisting) {
+            super(description);
+            this.time = time;
         }
 
         @Override
         public String toString() {
             return "[D]" + "[" + this.getStatusIcon() + "] " + this.description
-                    + "(" + time.replace(" ", ": ") + ")";
+                    + "(" + time + ")";
         }
     }
 
@@ -45,12 +74,25 @@ public class Task {
         public Event(String description, String time) {
             super(description);
             this.time = time;
+            try {
+                file.saveTask(this); // Saves task to hard disk
+                System.out.println("\nDuke: Got it. I have added this task:\n" +
+                        this + "\nNow you have " +
+                        Task.listLength() + " tasks in the list.");
+            } catch (IOException e) {
+                System.out.println("File not found. Please ensure you have the data folder with tasks.txt.");
+            }
+        }
+
+        public Event(String description, String time, boolean isExisting) {
+            super(description);
+            this.time = time;
         }
 
         @Override
         public String toString() {
             return "[E]" + "[" + this.getStatusIcon() + "] " + this.description
-                    + "(" + time.replace(" ", ": ") + ")";
+                    + "(" + time + ")";
         }
     }
 
@@ -60,14 +102,22 @@ public class Task {
 
     public void taskDone() {
         this.isDone = true;
+        file.overwriteList(tasks);
     }
 
-    public void markDone(int index) {
-        tasks.get(index).taskDone();
+    public boolean markDone(int index) {
+        if (index < 0 || index >= tasks.size()) {
+            System.out.println("Please enter a proper index!");
+            return false;
+        } else {
+            tasks.get(index).taskDone();
+            return true;
+        }
     }
 
     public void delete(int index) {
         tasks.remove(index);
+        file.overwriteList(tasks);
     }
 
     public void add(String input) {
@@ -123,8 +173,33 @@ public class Task {
         }
     }
 
+    protected void loadArrayList() {
+        file.loadFile(tasks);
+    }
+
+    protected void addExisting(char taskChar, char taskStatus, String description, String timeline) {
+        Task currentTask;
+
+        if (taskChar == 'T') {
+            currentTask = new Todo(description, true);
+        } else if (taskChar == 'D') {
+            currentTask = new Deadline(description, timeline, true);
+        } else {
+            currentTask = new Event(description, timeline, true);
+        }
+
+        if (taskStatus == 'X') {
+            currentTask.taskDone();
+        }
+    }
+
     public static Task retrieveTask(int index) {
-        return tasks.get(index);
+        if (index < 0 || index >= tasks.size()) {
+            System.out.println("Please enter a proper index!");
+            return null;
+        } else {
+            return tasks.get(index);
+        }
     }
 
     public static int listLength() {
@@ -133,14 +208,6 @@ public class Task {
 
     public static void displayList() {
         System.out.println("\nHere are the tasks in your list:\n--------------------");
-        if (tasks.size() == 0) {
-            System.out.println("List is empty!");
-        } else {
-            int index = 1;
-            for (Task t : tasks) {
-                System.out.println(index + ". " + t);
-                index++;
-            }
-        }
+        file.printTaskFile();
     }
 }

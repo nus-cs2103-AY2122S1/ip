@@ -12,3 +12,20 @@ Now you have 2 tasks in the list.
 Duke: Got it. I have added this task:
 [E][ ]  splashdown (at: nus)
 Now you have 3 tasks in the list.
+
+Duke: Nice! I've marked this task as done:
+[T][X]  say hello
+
+Duke: Nice! I've marked this task as done:
+[D][X]  project (by: sunday)
+
+Duke: Noted. I've removed this task:
+[E][ ]  splashdown (at: nus)
+Now you have 2 tasks in the list.
+
+Here are the tasks in your list:
+--------------------
+1. [T][X]  say hello
+2. [D][X]  project (by: sunday)
+
+Duke: Bye. Hope to see you again soon!
