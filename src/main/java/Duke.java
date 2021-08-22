@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,10 +9,15 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        run(scanner);
+        try {
+            TextFile file = new TextFile();
+            run(scanner, file);
+        } catch (FileNotFoundException e) {
+            System.out.println("Lollipop: Folder not found.");
+        }
     }
 
-    public static void run(Scanner scanner) {
+    public static void run(Scanner scanner, TextFile file) {
         List<Task> taskList = new ArrayList<>();
 
         // Hello message
