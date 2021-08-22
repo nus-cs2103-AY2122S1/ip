@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Task {
     protected String description;
@@ -26,32 +29,92 @@ public class Task {
 
     private class Deadline extends Task {
         private String time;
+        private LocalDate localDate;
+        private String deadLineTiming;
 
         public Deadline(String description, String time) {
             super(description);
             this.time = time;
+            localDate = Task.this.findDate(time);
+            deadLineTiming = Task.this.findTime(time);
+            if (deadLineTiming != null) Task.this.convertTime(deadLineTiming);
         }
 
         @Override
         public String toString() {
-            return "[D]" + "[" + this.getStatusIcon() + "] " + this.description
-                    + "(" + time.replace(" ", ": ") + ")";
+            return localDate == null
+            ? "[D]" + "[" + this.getStatusIcon() + "] " + this.description
+                    + "(" + time.replace(" ", ": ") + ")"
+            : "[D]" + "[" + this.getStatusIcon() + "] " + this.description
+                    + "by " + localDate.getDayOfMonth() + " " + localDate.getMonth()
+                    + " " + localDate.getYear() + " " + (deadLineTiming == null ? "" : deadLineTiming);
         }
     }
 
     private class Event extends Task {
         private String time;
+        private LocalDate localDate;
+        private String deadLineTiming;
 
         public Event(String description, String time) {
             super(description);
             this.time = time;
+            localDate = Task.this.findDate(time);
+            deadLineTiming = Task.this.findTime(time);
+            if (deadLineTiming != null) Task.this.convertTime(deadLineTiming);
         }
 
         @Override
         public String toString() {
-            return "[E]" + "[" + this.getStatusIcon() + "] " + this.description
-                    + "(" + time.replace(" ", ": ") + ")";
+            return localDate == null
+                    ? "[E]" + "[" + this.getStatusIcon() + "] " + this.description
+                    + "(" + time.replace(" ", ": ") + ")"
+                    : "[E]" + "[" + this.getStatusIcon() + "] " + this.description
+                    + "by " + localDate.getDayOfMonth() + " " + localDate.getMonth()
+                    + " " + localDate.getYear() + " " + (deadLineTiming == null ? "" : deadLineTiming);
         }
+    }
+
+    private LocalDate findDate(String input) {
+        String regex = "(\\d{4}-\\d{2}-\\d{2})"; // Regex to find date of the form yyyy-mm-dd
+        Matcher m = Pattern.compile(regex).matcher(input);
+        if (m.find()) {
+            return LocalDate.parse(m.group(1));
+        }
+        return null;
+    }
+
+    private String findTime(String input) {
+        StringBuilder sb = new StringBuilder();
+        int index = input.length() - 1;
+        for (int i = 0; i < 4; i++) {
+            sb.append(input.charAt(index));
+            index--;
+        }
+        sb.reverse();
+        String regex = "^\\d{4}$";
+        Matcher m = Pattern.compile(regex).matcher(sb.toString());
+        if (m.find()) {
+            return sb.toString();
+        } else {
+            return null;
+        }
+    }
+
+    private String convertTime(String input) {
+        Integer time = Integer.parseInt(input);
+        String postfix;
+        String prefix;
+        if (time < 1200) {
+            time = time / 100;
+            prefix = Integer.toString(time);
+            postfix = "AM";
+        } else {
+            time = (time - 1200) / 100;
+            prefix = Integer.toString(time);
+            postfix = "PM";
+        }
+        return prefix + " " + postfix;
     }
 
     protected String getStatusIcon() {
