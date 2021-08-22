@@ -13,7 +13,7 @@ import java.util.Scanner;
  * A chatbot based on Project Duke
  *
  * @author KelvinSoo
- * @version Level-7
+ * @version Level-8
  */
 public class Duke {
 
