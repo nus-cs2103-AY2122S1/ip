@@ -7,6 +7,7 @@ public enum Action {
     EVENT,
     DELETE,
     BYE,
+    FIND,
     UNKNOWN
 }
   

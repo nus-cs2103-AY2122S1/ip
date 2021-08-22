@@ -38,7 +38,7 @@ public class Duke {
         }
     }
     /**
-     * method to run the main process
+     * method to run the main process. 
      */
     public void run() throws InputNotValidError, IOException{
         System.out.println(this.ui.great());

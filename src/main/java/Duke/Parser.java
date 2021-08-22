@@ -30,7 +30,10 @@ public class Parser {
             return Action.DELETE;
         }else if(action1.equals("bye")){
             return Action.BYE;
-        }else{
+        }else if(action1.equals("find")){
+            return Action.FIND;
+        }
+        else{
             return Action.UNKNOWN;
         }
     }
