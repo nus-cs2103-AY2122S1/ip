@@ -4,6 +4,8 @@ public class Task {
     protected boolean isDone;
     protected static int idCounter = 1;
 
+    public Task() {}
+
     public Task(String description) {
         this.id = idCounter;
         this.description = description;
