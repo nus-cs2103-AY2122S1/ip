@@ -4,9 +4,9 @@ import java.time.format.DateTimeParseException;
 
 public class DateTimeHandler {
     String[] formats = {
-            "dd-MM-yyyy hh:mm",
+            "dd-MM-yyyy hh:mm a",
             "dd-MM-yyyy HHmm",
-            "dd/MM/yyyy hh:mm",
+            "dd/MM/yyyy hh:mm a",
             "dd/MM/yyyy HHmm"
     };
     DateTimeFormatter[] dtfList = new DateTimeFormatter[formats.length];
