@@ -8,6 +8,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
+/**
+ * Encapsulates parsing of user inputs into the list of tasks.
+ */
 public class Parser {
     private final TaskList tasks;
     private final Ui ui;
@@ -17,6 +20,12 @@ public class Parser {
         this.ui = ui;
     }
 
+    /**
+     * Parses input and handles user input accordingly.
+     *
+     * @param input command given by user input.
+     * @throws DukeException exception thrown due to invalid command or file writing error.
+     */
     public void parse(String input) throws DukeException {
         Command command;
         String[] userInput = input.split(" ", 2);

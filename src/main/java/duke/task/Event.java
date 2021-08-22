@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Event class which is a subclass of Task.
+ */
 public class Event extends Task {
 
     // Time which event happen at
