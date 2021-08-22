@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,10 +15,11 @@ public class Botto {
         TODO, DEADLINE, EVENT
     }
 
-    private List<Task> list = new LinkedList<>();
+    private List<Task> list;
 
     public static void main(String[] args) {
         Botto botto = new Botto();
+        botto.loadData();
         Scanner scanner = new Scanner(System.in);
 
         botto.printDivider();
@@ -29,24 +33,24 @@ public class Botto {
 
             try {
                 switch (findCommand(next)) {
-                    case "list":
-                        botto.printList();
-                        break;
-                    case "done":
-                        botto.markAsDone(next.replaceAll("\\D+", ""));
-                        break;
-                    case "todo":
-                        botto.add(TaskType.TODO, next);
-                        break;
-                    case "deadline":
-                        botto.add(TaskType.DEADLINE, next);
-                        break;
-                    case "event":
-                        botto.add(TaskType.EVENT, next);
-                        break;
-                    case "delete":
-                        botto.delete(next.replaceAll("\\D+", ""));
-                        break;
+                case "list":
+                    botto.printList();
+                    break;
+                case "done":
+                    botto.markAsDone(next.replaceAll("\\D+", ""));
+                    break;
+                case "todo":
+                    botto.add(TaskType.TODO, next);
+                    break;
+                case "deadline":
+                    botto.add(TaskType.DEADLINE, next);
+                    break;
+                case "event":
+                    botto.add(TaskType.EVENT, next);
+                    break;
+                case "delete":
+                    botto.delete(next.replaceAll("\\D+", ""));
+                    break;
                 }
             } catch (DukeException e) {
                 System.out.println(indentation + e.getMessage());
@@ -59,6 +63,52 @@ public class Botto {
         botto.printDivider();
         botto.bye();
         botto.printDivider();
+    }
+
+    private void loadData() {
+        File file = new File("data/botto.txt");
+        this.list = new LinkedList<>();
+
+        try {
+            file.getParentFile().mkdirs();
+
+            // file does not exist
+            if (file.createNewFile()) {
+                return;
+            }
+
+            Scanner scanner = new Scanner(file);
+            while(scanner.hasNext()) {
+                Task task;
+                String next = scanner.nextLine();
+                boolean isDone = next.charAt(4) == 'X';
+                String[] info = next.substring(7).split(" [(]..: ");
+
+                switch (next.charAt(1)) {
+                case 'T' :
+                    task = new Todo(info[0]);
+                    break;
+                case 'D' :
+                    task = new Deadline(info[0], info[1].substring(0, info[1].length() - 1));
+                    break;
+                case 'E' :
+                    task = new Event(info[0], info[1].substring(0, info[1].length() - 1));
+                    break;
+                default:
+                    continue;
+                }
+
+                if(isDone) {
+                    task.markAsDone();
+                }
+
+                list.add(task);
+            }
+
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+
     }
 
     private static String findCommand(String command) throws DukeException {
@@ -115,6 +165,7 @@ public class Botto {
         }
 
         this.list.add(task);
+        this.saveData();
         System.out.println(indentation + "Got it! I've added this task:\n"
                 + indentation + "  " + task + "\n"
                 + indentation + "Now you have " + this.list.size() + " tasks in the list.");
@@ -135,7 +186,9 @@ public class Botto {
         } catch (Exception e) {
             throw new DukeException("☹ OOPS!!! The task does not exist.");
         }
+
         subject.markAsDone();
+        saveData();
         System.out.println(indentation + "Nice! I've marked this task as done:");
         System.out.println(indentation + "  " + subject);
     }
@@ -157,6 +210,9 @@ public class Botto {
         }
 
         this.list.remove(index);
+
+
+        saveData();
         System.out.println(indentation + "Noted. I've removed this task:");
         System.out.println(indentation + "  " + subject);
         System.out.println(indentation + "Now you have " + this.list.size() + " tasks in the list.");
@@ -165,6 +221,23 @@ public class Botto {
     private void bye() {
         String bye = "Bye. Hope to see you again soon!";
         System.out.println(indentation + bye);
+    }
+
+    private void saveData() throws DukeException {
+
+        try {
+            FileWriter fw = new FileWriter("data/botto.txt");
+            StringBuilder data = new StringBuilder();
+
+            for (Task task : this.list) {
+                data.append(task).append(System.lineSeparator());
+            }
+
+            fw.write(data.toString());
+            fw.close();
+        } catch (IOException e){
+            throw new DukeException("Something went wrong: " + e.getMessage());
+        }
     }
 
 
