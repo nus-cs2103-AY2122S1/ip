@@ -10,13 +10,11 @@ import Exceptions.InvalidTaskNumberException;
 import Exceptions.UnknownCommandException;
 
 
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.io.File;
 
 public class Duke {
 
@@ -151,12 +149,22 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         List<Task> tasks = createData();
+        String fileName = "./data/duke.txt";
 
         printOut(WELCOME_MESSAGE);
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
             try {
                 parseInput(input, tasks);
+                String data = tasks
+                        .stream()
+                        .map(task -> task.dataToString())
+                        .reduce("", (accum, nextString) -> String.format("%s\n%s", accum, nextString));
+                try (PrintWriter out = new PrintWriter(fileName)) {
+                    out.println(data.substring(1));
+                } catch (IOException e) {
+                    // do nothing
+                }
             } catch (DukeException e) {
                 printOut(e.getMessage());
             }
