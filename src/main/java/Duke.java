@@ -1,12 +1,15 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Duke {
     ArrayList<Task> listOfTasks = new ArrayList<>();
-    String[] commandWords = {"bye", "list", "done", "todo", "deadline", "event", "delete"};
+    String[] commandWords = {"bye", "list", "done", "todo", "deadline", "event", "delete", "check"};
 
     public Duke() {
 
@@ -90,11 +93,15 @@ public class Duke {
                 String desc = s.substring(9, slashIndex - 1);
                 String time = s.substring(slashIndex + 4);
                 Deadline newDeadline = new Deadline(desc, time);
-                listOfTasks.add(newDeadline);
-
-                System.out.println("Got it. I'll add this task:");
-                System.out.println(newDeadline);
-                System.out.println("Now you've got " + listOfTasks.size() + " tasks in your list.");
+                try {
+                    String checkValid = newDeadline.toString();
+                    System.out.println("Got it. I'll add this task:");
+                    System.out.println(newDeadline);
+                    listOfTasks.add(newDeadline);
+                    System.out.println("Now you've got " + listOfTasks.size() + " tasks in your list.");
+                } catch (Exception err) {
+                    throw new DukeException("Wrong date/time format! YYYY-MM-DD HH:MM, (time optional!)");
+                }
             } catch (StringIndexOutOfBoundsException err) {
                 throw new DukeException("Date/time is needed!");
             }
@@ -116,13 +123,18 @@ public class Duke {
                 String desc = s.substring(6, slashIndex - 1);
                 String time = s.substring(slashIndex + 4);
                 Event newEvent = new Event(desc, time);
-                listOfTasks.add(newEvent);
 
-                System.out.println("Got it. I'll add this task:");
-                System.out.println(newEvent);
-                System.out.println("Now you've got " + listOfTasks.size() + " tasks in your list.");
+                try {
+                    String checkValid = newEvent.toString();
+                    System.out.println("Got it. I'll add this task:");
+                    System.out.println(newEvent);
+                    listOfTasks.add(newEvent);
+                    System.out.println("Now you've got " + listOfTasks.size() + " tasks in your list.");
+                } catch (Exception err) {
+                    throw new DukeException("Wrong date/time format! YYYY-MM-DD HH:MM-HH:MM");
+                }
             } catch (StringIndexOutOfBoundsException err) {
-                throw new DukeException("Date/timeis needed!");
+                throw new DukeException("Date/time is needed!");
             }
         } else {
             throw new DukeException("Event command needs date/time!");
@@ -158,9 +170,13 @@ public class Duke {
     }
 
     public void chooseList() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < listOfTasks.size(); i++) {
-            System.out.println((i + 1) + "." + listOfTasks.get(i).toString());
+        try {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < listOfTasks.size(); i++) {
+                System.out.println((i + 1) + "." + listOfTasks.get(i).toString());
+            }
+        } catch (Exception err) {
+            throw new DukeException("File formatted wrongly!");
         }
     }
 
@@ -239,6 +255,35 @@ public class Duke {
         }
     }
 
+    /**
+     * Handles the keyword "check".
+     *
+     *
+     */
+    public void chooseCheck(String s) {
+        try {
+            String[] segments = s.split(" ");
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter dateFormatterOutput = DateTimeFormatter.ofPattern("MMM dd yyyy");
+            LocalDate inputDate = LocalDate.parse(segments[1], dateFormatter);
+            String inputDateOutput = inputDate.format(dateFormatterOutput);
+
+            int counter = 1;
+
+            System.out.println("Showing important deadlines/events on " + inputDateOutput);
+            for (int i = 0; i < listOfTasks.size(); i++) {
+                String taskDate = listOfTasks.get(i).getDate();
+                if (inputDateOutput.equals(taskDate)) {
+                    System.out.println(counter + "." + listOfTasks.get(i).toString());
+                    counter++;
+                }
+            }
+
+        } catch (Exception e) {
+            throw new DukeException("Wrong date format! YYYY-MM-DD");
+        }
+    }
+
 
     public static void main(String[] args) {
         System.out.println("Hello, I'm Duke!\nWhat can I do for you?");
@@ -283,6 +328,8 @@ public class Duke {
                 } else if (choice == 6) {
                     duke.chooseDelete(userResponse);
                     duke.updateSave();
+                } else if (choice == 7) {
+                    duke.chooseCheck(userResponse);
                 } else {
                     throw new DukeException("Unrecognised command!");
                 }
