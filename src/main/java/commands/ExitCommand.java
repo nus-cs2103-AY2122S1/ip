@@ -1,3 +1,11 @@
+package commands;
+
+import commands.Command;
+import duke.Ui;
+
+/**
+ * A command to exit duke.
+ */
 public class ExitCommand implements Command {
 
     /**
@@ -14,7 +22,7 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public void invalidArguments() {
+    public void invalidArgumentsProvided() {
         // Not needed since no arguments are needed for the exit command
     }
 }

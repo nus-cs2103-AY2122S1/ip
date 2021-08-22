@@ -1,3 +1,7 @@
+package duke;
+
+import exceptions.DukeInvalidDateException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -6,9 +10,9 @@ import java.time.format.DateTimeParseException;
 /**
  * A class that contains functions used to parse formatted strings to dates.
  */
-public class DateParser {
+class DateParser {
 
-    /** The date formatters used by Duke to format date strings provided by the user. */
+    /** The date formatters used by duke.Duke to format date strings provided by the user. */
     private static final DateTimeFormatter DATE_FORMATTER =
             DateTimeFormatter.ofPattern("d/M/[uuuu][uu]");
     private static final DateTimeFormatter DATE_FORMATTER_WITH_TIME =
@@ -17,9 +21,9 @@ public class DateParser {
     /** The date formatters used by duke to format a date to a string to display to the user or to store
      * in the local file taskList.txt.
      * */
-    public static final DateTimeFormatter PRINT_DATE_FORMATTER =
+    protected static final DateTimeFormatter PRINT_DATE_FORMATTER =
             DateTimeFormatter.ofPattern("d MMM yyyy");
-    public static final DateTimeFormatter PRINT_DATE_TIME_FORMATTER =
+    protected static final DateTimeFormatter PRINT_DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("d MMM yyyy HHmm");
 
     /**
@@ -30,7 +34,7 @@ public class DateParser {
      * @return The LocalDate object converted from the string.
      * @throws DukeInvalidDateException Throws an exception when the dateString cannot be parsed.
      */
-    public static LocalDate parseDate(String dateString) throws DukeInvalidDateException {
+    protected static LocalDate parseDate(String dateString) throws DukeInvalidDateException {
         try {
             return LocalDate.parse(dateString, DATE_FORMATTER);
         } catch (DateTimeParseException e) {
@@ -46,7 +50,7 @@ public class DateParser {
      * @return The LocalDateTime object converted from the string.
      * @throws DukeInvalidDateException Throws an exception when the dateTimeString cannot be parsed.
      */
-    public static LocalDateTime parseDateTime(String dateTimeString) throws DukeInvalidDateException {
+    protected static LocalDateTime parseDateTime(String dateTimeString) throws DukeInvalidDateException {
         try {
             return LocalDateTime.parse(dateTimeString, DATE_FORMATTER_WITH_TIME);
         } catch (DateTimeParseException e) {

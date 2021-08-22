@@ -1,3 +1,8 @@
+package tasks;
+
+import duke.DukeDate;
+import exceptions.DukeInvalidDateException;
+
 /**
  * A class that represent an event which is a type of task that starts
  * and ends at a specific dead or time.
@@ -18,7 +23,7 @@ public class Event extends Task {
      * @param input An input in the form of a event name followed by the keyword "-at"
      *              then followed by the timing of the event.
      * @return The newly created event task.
-     * @throws DukeInvalidDateException Throws an exception when the user tries to create an Event
+     * @throws exceptions.DukeInvalidDateException Throws an exception when the user tries to create an tasks.Event
      * task with a specified date but formats the date wrongly.
      */
     public static Event newEventTask(String input) throws DukeInvalidDateException {

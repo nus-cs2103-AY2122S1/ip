@@ -16,8 +16,10 @@ src/main/resources/docs/
 *.iml
 bin/
 
-# Task history saved files
+# File for saving tasks history
 taskList.txt
 
+# Files used in testing
+/text-ui-test/sources.txt
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT

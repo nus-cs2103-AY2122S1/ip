@@ -1,7 +1,23 @@
+package commands;
+
+import exceptions.DukeInvalidDateException;
+import tasks.Deadline;
+import tasks.Task;
+import tasks.TaskList;
+
+/**
+ * A command to add a Deadline task to Duke's taskList.
+ */
 public class AddDeadlineCommand extends AddCommand {
 
-    private TaskList taskList;
+    private final TaskList taskList;
 
+    /**
+     * Creates an AddDeadline Command.
+     *
+     * @param input The input by the user that triggers this command.
+     * @param taskList The taskList for Duke.
+     */
     public AddDeadlineCommand(String input, TaskList taskList) {
         super(input, Task.Type.DEADLINE);
         this.taskList = taskList;
@@ -33,12 +49,12 @@ public class AddDeadlineCommand extends AddCommand {
     @Override
     public boolean verifyAddCommand(String input) {
         if (!input.contains("-by") && !input.contains("/by")) {
-            this.invalidArguments();
+            this.invalidArgumentsProvided();
             return false;
         }
         String[] inputParts = input.split(" -by | /by ");
         if (inputParts.length != 2) {
-            this.invalidArguments();
+            this.invalidArgumentsProvided();
             return false;
         }
         return true;

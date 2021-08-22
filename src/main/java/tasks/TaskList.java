@@ -1,3 +1,7 @@
+package tasks;
+
+import duke.Storage;
+
 import java.util.ArrayList;
 
 /**
@@ -89,10 +93,16 @@ public class TaskList {
     }
 
     /**
-     * Prints the task list for the user to view.
+     * Prints the task list for the user to view. If there are no tasks in the taskList,
+     * print message indicating that the taskList is empty.
      */
     public void listHistory() {
         System.out.println("-----------------------------------------------------------");
+        if (this.taskArrayList.isEmpty()) {
+            System.out.println("There are no tasks in your task list.");
+            System.out.println("-----------------------------------------------------------");
+            return;
+        }
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < this.taskArrayList.size(); i++) {
             System.out.println((i + 1) + ". " + this.taskArrayList.get(i));

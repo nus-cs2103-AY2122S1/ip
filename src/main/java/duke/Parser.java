@@ -1,9 +1,14 @@
+package duke;
+
+import commands.*;
+import tasks.TaskList;
+
 import java.util.Scanner;
 
 /**
  * A class responsible for reading and evaluating user inputs.
  */
-public class Parser {
+class Parser {
 
     /** User input keywords */
     private final static String KEYWORD_DONE = "done";
@@ -19,7 +24,7 @@ public class Parser {
     /** A scanner to scan for user inputs */
     private final Scanner scanner;
 
-    public Parser(Scanner scanner) {
+    protected Parser(Scanner scanner) {
         taskList = new TaskList();
         this.scanner = scanner;
     }
@@ -29,19 +34,17 @@ public class Parser {
      *
      * @return The user input as a String.
      */
-    public String getUserInput() {
+    protected String getUserInput() {
         return this.scanner.nextLine();
     }
 
     /**
-     * Evaluates a user's input to the chat bot and carries out the appropriate functions. It also checks if the
-     * user's input is a keyword to close the chat bot.
+     * Parses the user's input to find the relevant command.
      *
      * @param input The user's input.
-     * @return False if the user's input is supposed to close the chat bot. Else, the chat bot continues
-     * and wait for the user to input another word.
+     * @return The correct command for the user's input.
      */
-    public Command parseUserInput(String input) {
+    protected Command parseUserInput(String input) {
         if (input.equalsIgnoreCase(KEYWORD_BYE)) {
             // Ends the chat
             return new ExitCommand();
@@ -68,8 +71,7 @@ public class Parser {
         return new InvalidCommand();
     }
 
-
-    public TaskList getTaskList() {
+    protected TaskList getTaskList() {
         return taskList;
     }
 }

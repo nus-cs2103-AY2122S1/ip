@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package duke;
 
 /**
  * A chat bot that is capable of recording tasks.
@@ -10,8 +10,7 @@ import java.util.Scanner;
 public class Duke {
 
     /**
-     * When run, opens a chat bot that greets the user and echos any user's input. If the input
-     * is bye the chat bot is closed.
+     * Runs Duke, the chat bot.
      *
      * @param args Not used.
      */

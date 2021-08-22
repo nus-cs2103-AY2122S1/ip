@@ -1,3 +1,4 @@
+list
 todo Borrow book
 deadline Return book -by Sunday
 event Birthday -at Monday 1400
@@ -56,4 +57,12 @@ list
 delete 4
 list
 delete 0
+event dinner /at 19/8/22 1800
+event lunch /at 5/8/22
+deadline Exercise /by 19/8/22 1800
+deadline Diet /by 5/8/22
+event sdad /at 20/15/25
+deadline dsgfs /by 51443
+event asd /at dssda
+list
 bye

@@ -1,3 +1,8 @@
+package duke;
+
+import commands.Command;
+import tasks.Task;
+
 import java.util.Scanner;
 
 /**
@@ -10,9 +15,14 @@ public class Ui {
             + "Use \"/by\" to specify that the input date is a formatted date.";
     public static final String EVENT_FORMAT = "event {Event name} -at {Date of event}.\n"
             + "Use \"/at\" to specify that the input date is a formatted date.";
-    public static final String TODO_FORMAT = "todo {todo name}";
+    public static final String TODO_FORMAT = "todo {Todo name}";
     public static final String DATE_FORMAT = "dd/MM/yyyy or dd/MM/yyyy HHmm";
 
+    /**
+     * Starts up the chat bot. It prints a welcome message for the user and then waits
+     * for a user input. It will then evaluate and execute inputs given by the user until the
+     * user ends the chat.
+     */
     public void start() {
         showStartMessage();
         Scanner scanner = new Scanner(System.in);
@@ -39,6 +49,9 @@ public class Ui {
         System.out.println("What can I help you with?\n");
     }
 
+    /**
+     * Prints a goodbye message to the user.
+     */
     public static void endChat() {
         System.out.println("Bye!! Hope to see you again!!");
     }

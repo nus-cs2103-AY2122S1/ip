@@ -1,7 +1,23 @@
+package commands;
+
+import exceptions.DukeInvalidDateException;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
+
+/**
+ * A command to add an Event task to the taskList.
+ */
 public class AddEventCommand extends AddCommand {
 
-    private TaskList taskList;
+    private final TaskList taskList;
 
+    /**
+     * Creates an AddEventCommand.
+     *
+     * @param input The input by the user that triggers this command.
+     * @param taskList The taskList for Duke.
+     */
     public AddEventCommand(String input, TaskList taskList) {
         super(input, Task.Type.EVENT);
         this.taskList = taskList;
@@ -33,12 +49,12 @@ public class AddEventCommand extends AddCommand {
     @Override
     public boolean verifyAddCommand(String input) {
         if (!input.contains("-at") && !input.contains("/at")) {
-            this.invalidArguments();
+            this.invalidArgumentsProvided();
             return false;
         }
         String[] inputParts = input.split(" -at | /at ");
         if (inputParts.length != 2) {
-            this.invalidArguments();
+            this.invalidArgumentsProvided();
             return false;
         }
         return true;

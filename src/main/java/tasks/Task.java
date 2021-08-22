@@ -1,3 +1,7 @@
+package tasks;
+
+import duke.DukeDate;
+
 /**
  * A class that abstracts a task.
  */
@@ -33,7 +37,7 @@ public abstract class Task {
      * Converts a task into a specified String format for saving into local storage.
      * The format to save the strings is {type of task} | {is done} | {type of date}|
      * {task name} | {time (if applicable)}.
-     * The type of date is based on the static variables in the DukeDate class. It is only applicable
+     * The type of date is based on the static variables in the duke.DukeDate class. It is only applicable
      * for deadline and event tasks.
      *
      * @return The String format to save the task as.

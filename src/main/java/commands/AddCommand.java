@@ -1,6 +1,17 @@
+package commands;
+
+import duke.Ui;
+import tasks.Task;
+
+/**
+ * An abstract class that represents commands given by the
+ * user that involves adding a task to the task:ist.
+ */
 public abstract class AddCommand implements Command {
 
+    /** The type of task that should be added */
     private final Task.Type type;
+    /** The user input */
     private final String userInput;
 
     public abstract boolean verifyAddCommand(String input);
@@ -15,12 +26,9 @@ public abstract class AddCommand implements Command {
         return false;
     }
 
-    public void invalidArguments() {
+    @Override
+    public void invalidArgumentsProvided() {
         Ui.printErrorMessage(type);
-    }
-
-    public String getUserInput() {
-        return userInput;
     }
 
     /**
@@ -34,7 +42,7 @@ public abstract class AddCommand implements Command {
         try {
             return this.userInput.split(" ", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            this.invalidArguments();
+            this.invalidArgumentsProvided();
             return null;
         }
     }

@@ -1,14 +1,29 @@
+package commands;
+
+import tasks.Task;
+import tasks.TaskList;
+import tasks.Todo;
+
+/**
+ * A command to add a Todo task to Duke's taskList.
+ */
 public class AddTodoCommand extends AddCommand {
 
-    private TaskList taskList;
+    private final TaskList taskList;
 
+    /**
+     * Creates an AddTodoCommand.
+     *
+     * @param input The input by the user that triggers this command.
+     * @param taskList The taskList for Duke.
+     */
     public AddTodoCommand(String input, TaskList taskList) {
         super(input, Task.Type.TODO);
         this.taskList = taskList;
     }
 
     /**
-     * Adds a Todo event based on the user's input after verifying that the
+     * Adds a tasks.Todo event based on the user's input after verifying that the
      * user's input is valid.
      */
     @Override

@@ -1,3 +1,7 @@
+package tasks;
+
+import duke.DukeDate;
+import exceptions.DukeInvalidDateException;
 
 /**
  * A class to abstract a deadline which is a type of task with a date
@@ -19,7 +23,7 @@ public class Deadline extends Task {
      * @param input An input in the form of a task name followed by the keyword "-by"
      *              then followed by the task deadline.
      * @return The newly created task deadline
-     * @throws DukeInvalidDateException Throws an exception when the user tries to create a deadline
+     * @throws exceptions.DukeInvalidDateException Throws an exception when the user tries to create a deadline
      * task with a specified date but formats the date wrongly.
      */
     public static Deadline newDeadlineTask(String input) throws DukeInvalidDateException {

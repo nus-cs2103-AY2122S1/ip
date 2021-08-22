@@ -1,3 +1,7 @@
+package exceptions;
+
+import duke.Ui;
+
 /**
  * Duke has the ability for users to attach a specific date object to an event rather than
  * just using a string. This requires the user to provide the required date as a properly

@@ -1,3 +1,8 @@
+package duke;
+
+import tasks.Task;
+import tasks.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,15 +16,15 @@ import java.util.Scanner;
 public class Storage {
 
     /** Name of the file to save the task history in local storage */
-    public static String fileName = "taskList.txt";
+    protected static String fileName = "taskList.txt";
 
     /**
      * Loads previously saved task from memory. If no saved tasks is found, create a new file called
-     * TaskList.txt to store newly added tasks.
+     * taskList.txt to store newly added tasks. The file is stored in the project's root directory.
      *
      * @param taskList The taskList to store previously saved tasks.
      */
-    public static void initialise(TaskList taskList) {
+    protected static void initialise(TaskList taskList) {
         if (!createFile()) {
             // Found previously saved task
             readTaskFile(new File(fileName), taskList);

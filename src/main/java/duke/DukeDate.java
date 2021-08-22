@@ -1,7 +1,9 @@
+package duke;
+
+import exceptions.DukeInvalidDateException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 /**
  * To abstract a date inputted by the user for the event or deadline tasks.
@@ -12,7 +14,7 @@ import java.time.format.FormatStyle;
  */
 public class DukeDate {
 
-    /** Constants indicating the type of date a DukeDate is stoing */
+    /** Constants indicating the type of date a DukeDate is storing */
     public static final int HAS_STRING = 1;
     public static final int HAS_DATE = 2;
     public static final int HAS_DATE_TIME = 3;
@@ -23,7 +25,7 @@ public class DukeDate {
     private LocalDateTime dateTime;
 
     /** Stores what type of date is stored in the duke date. Based on the constants above */
-    private int dateType;
+    private final int dateType;
 
     private DukeDate(String string) {
         dateString = string;
@@ -41,7 +43,7 @@ public class DukeDate {
     }
 
     /**
-     * Returns a DukeDate based on the user's date input. If the user enters a formatted date, the method
+     * Returns a duke.DukeDate based on the user's date input. If the user enters a formatted date, the method
      * will check if the user has included a time or just the date.
      *
      * @param input The user's String input for a date.
@@ -67,7 +69,7 @@ public class DukeDate {
     }
 
     /**
-     * Returns a DukeDate that has been previously saved.
+     * Returns a duke.DukeDate that has been previously saved.
      * Duke saves newly created or edited tasks into local storage. A DukeDate is converted to a string
      * and then stored in the text file. The String describes the date itself along with its type.
      * When reloading the tasks from the text file, this method takes the date String and reconverts
