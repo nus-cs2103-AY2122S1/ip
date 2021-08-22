@@ -3,8 +3,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Event extends Task{
-    private final String eventType;
-    private final String time;
 
     /**
      * Takes in a string and splits msg into based on /at pattern. Set the eventType and time of the instance
@@ -23,10 +21,9 @@ public class Event extends Task{
         if (key.equals("")) {
             throw new InvalidEventFormatException(" Missing description");
         }
-        String time = "(at: " + results.get(1) + ")";
+        super.setEventType("E");
         super.setDescription(key);
-        this.eventType = "[E]";
-        this.time = time;
+        super.setTime(results.get(1));
     }
     /**
      * Returns a string that describes the instance
@@ -34,6 +31,6 @@ public class Event extends Task{
      */
     @Override
     public String toString(){
-        return this.eventType + super.toString() + " " + this.time;
+        return super.toString() + " (at: " + super.getTime() + ")";
     }
 }

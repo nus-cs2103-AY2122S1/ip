@@ -3,9 +3,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Deadline extends Task{
-    private final String eventType;
-    private final String time;
-
     /**
      * Takes in a string and splits msg into based on /by pattern. Set the eventType and time of the instance
      * @param input string from the user
@@ -25,14 +22,10 @@ public class Deadline extends Task{
         if (key.equals("")){
             throw new InvalidDeadlineFormatException("Missing description ");
         }
-        System.out.println(results.size());
-        System.out.println("this is the first[" + key+ "]");
 
-        String time = "(by: " + results.get(1) + ")";
+        super.setEventType("D");
         super.setDescription(key);
-        this.eventType = "[D]";
-        this.time = time;
-
+        super.setTime(results.get(1));
     }
 
     /**
@@ -41,6 +34,6 @@ public class Deadline extends Task{
      */
     @Override
     public String toString(){
-        return this.eventType + super.toString() + " " + this.time;
+        return super.toString() + " (by: " + super.getTime() + ")";
     }
 }

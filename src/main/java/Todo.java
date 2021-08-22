@@ -1,5 +1,4 @@
 public class Todo extends Task{
-    private final String eventType;
 
     /**
      * Takes in a string Set the eventType and description of the instance
@@ -8,12 +7,13 @@ public class Todo extends Task{
     public Todo(String input){
         super();
         String key = input.trim();
+        super.setEventType("T");
         super.setDescription(key);
-        this.eventType = "[T]";
+        super.setTime(null);
     }
 
     @Override
     public String toString(){
-        return this.eventType + super.toString();
+        return super.toString();
     }
 }
