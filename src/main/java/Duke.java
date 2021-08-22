@@ -13,7 +13,7 @@ public class Duke {
             List<Task> taskList = TextFile.readFromTextFile();
             run(scanner, taskList);
         } catch (FileNotFoundException e) {
-            System.out.println("File not found.");
+            System.out.println("Lollipop: ./data or ./data/task_list.txt is not found.");
         }
 
     }
