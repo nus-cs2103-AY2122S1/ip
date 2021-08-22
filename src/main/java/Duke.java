@@ -7,16 +7,15 @@ import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) throws FileNotFoundException {
-        int count = 0;
         boolean exit = false;
-        ArrayList<Task> arrList = new ArrayList<>();
         String line = "____________________________________________________________\n";
         String logo = line + " Hello! I'm Duke\n" + " What can I do for you?\n" + line;
         Scanner sc = new Scanner(System.in);
         System.out.println(logo);
         String filePath = "data/duke.txt";
         Save save = new Save(filePath);
-        arrList = save.readFile(filePath);
+        ArrayList<Task> arrList = save.readFile(filePath);
+        int count = arrList.size();
 
         while(sc.hasNext()){
             String command = sc.next();
@@ -46,12 +45,18 @@ public class Duke {
                     }
                 case "delete":
                     int delNum = sc.nextInt()-1;
-                    Task delete = arrList.get(delNum);
-                    count--;
-                    System.out.println(line + "Noted. I've removed this task:\n" + delete +
-                            "\nNow you have " + count + " tasks in the list.\n" + line);
-                    arrList.remove(delNum);
-                    break;
+                    try{
+                        Task delete = arrList.get(delNum);
+                        count--;
+                        System.out.println(line + "Noted. I've removed this task:\n" + delete +
+                                "\nNow you have " + count + " tasks in the list.\n" + line);
+                        arrList.remove(delNum);
+                        break;
+                    }catch (IndexOutOfBoundsException e){
+                        System.out.println("\n" + line +
+                                "\n☹ OOPS!!! No such task to be deleted.\n" + line);
+                        break;
+                    }
                 case "todo":
                     try {
                         Task todo = new Todo(sc.nextLine().trim(), count);
@@ -78,7 +83,7 @@ public class Duke {
                         break;
                     } catch (DateTimeParseException e){
                         System.out.println("\n" + line +
-                                "\n☹ OOPS!!! The date must be in the format YYYY-MM-DD\n" + line);
+                                "\n☹ OOPS!!! The time must be in the format YYYY-MM-DD\n" + line);
                     } catch (Exception e){
                         System.out.println("\n" + line +
                                 "\n☹ OOPS!!! The description of a deadline cannot be empty.\n" + line);
@@ -87,17 +92,12 @@ public class Duke {
                 case "event":
                     try {
                         String[] eventArr = sc.nextLine().split("/at");
-                        LocalDate d2 = LocalDate.parse(eventArr[1].trim());
-                        Task event = new Event(eventArr[0].trim(),
-                                d2.format(DateTimeFormatter.ofPattern("MMM dd YYYY")), count);
+                        Task event = new Event(eventArr[0].trim(),eventArr[1].trim(), count);
                         arrList.add(event);
                         count++;
                         System.out.println(line + "Got it. I've added this task:\n" + event +
                                 "\nNow you have " + count + " tasks in the list.\n" + line);
                         break;
-                    } catch (DateTimeParseException e){
-                        System.out.println("\n" + line +
-                                "\n☹ OOPS!!! The date must be in the format YYYY-MM-DD\n" + line);
                     } catch (Exception e){
                         System.out.println("\n" + line +
                                 "\n☹ OOPS!!! The description of a event cannot be empty.\n" + line);

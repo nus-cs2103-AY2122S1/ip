@@ -50,7 +50,7 @@ public class Save{
             switch(taskType){
                 case "T":
                     String[] todoArr = s.nextLine().trim().split("\\|");
-                    Task todo = new Todo(todoArr[2],count);
+                    Task todo = new Todo(todoArr[2].trim(),count);
                     if(Integer.parseInt(todoArr[1].trim()) == 1){
                         todo.markAsDone();
                     }
@@ -59,7 +59,7 @@ public class Save{
                     break;
                 case "D":
                     String[] deadlineArr = s.nextLine().trim().split("\\|");
-                    Task deadline = new Deadline(deadlineArr[2],deadlineArr[3],count);
+                    Task deadline = new Deadline(deadlineArr[2].trim(),deadlineArr[3].trim(),count);
                     if(Integer.parseInt(deadlineArr[1].trim()) == 1){
                         deadline.markAsDone();
                     }
@@ -68,7 +68,7 @@ public class Save{
                     break;
                 case "E":
                     String[] eventArr = s.nextLine().trim().split("\\|");
-                    Task event = new Event(eventArr[2],eventArr[3],count);
+                    Task event = new Event(eventArr[2].trim(),eventArr[3].trim(),count);
                     if(Integer.parseInt(eventArr[1].trim()) == 1){
                         event.markAsDone();
                     }
