@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,10 +16,14 @@ public class Duke {
             "What can I do for you?\n" +
             "____________________________________________________________\n";
     /** Message to be printed when the program exits */
-    public static final String EXITING_MESSAGE =
+    private static final String EXITING_MESSAGE =
             "____________________________________________________________\n" +
             "Bye. Hope to see you again soon!\n" +
             "____________________________________________________________";
+    /** Path of the current folder as a string */
+    private static final String DIRECTORY_PATH = System.getProperty("user.dir");
+    /** Path of file containing data saved */
+    private File data;
     /** List of tasks */
     private static ArrayList<Task> tasks = new ArrayList<>();
     /** Whether the Duke program is running */
@@ -27,9 +35,55 @@ public class Duke {
      * Constructor of the class 'Duke'.
      */
     public Duke() {
+        this.data = Paths.get(Duke.DIRECTORY_PATH, "data", "duke.txt").toFile();
+        this.readFile();
         this.isRunning = true;
         System.out.println(Duke.GREETING_MESSAGE);
         this.input = new Scanner(System.in);
+    }
+
+    /**
+     * Reads the data in the file. If the file doesn't exist, create it.
+     */
+    private void readFile() {
+        try {
+            Scanner fileScanner = new Scanner(this.data);
+            while (fileScanner.hasNext()) {
+                String task = fileScanner.nextLine();
+                this.readData(task);
+            }
+        } catch (FileNotFoundException fileNotFoundException) { // if file doesn't exist, create it.
+            try {
+                this.data.createNewFile();
+            } catch (IOException ioException) { // if directory doesn't exist, create it.
+                File directory = Paths.get(Duke.DIRECTORY_PATH, "data").toFile();
+                directory.mkdirs();
+                this.readFile(); // run this method again to create a file.
+            }
+        }
+    }
+
+    /**
+     * Reads a line of data, creates a task and adds it to the task list.
+     *
+     * @param line A line of data.
+     */
+    private void readData(String line) {
+        String[] splitted = line.split(" / ");
+        Task task;
+        if (splitted[0].equals("T")) { // a todo task
+            task = new ToDo(splitted[2]);
+        } else if (splitted[0].equals("D")) { // a task with deadline
+            task = new Deadline(splitted[2], splitted[3]);
+        } else if (splitted[0].equals("E")) { // an event
+            task = new Event(splitted[2], splitted[3]);
+        } else {
+            task = new Task(splitted[2]);
+        }
+        if (splitted[1].equals("1")) {
+            task.markAsDone();
+        }
+        Duke.addToList(task);
     }
 
     /**
@@ -155,6 +209,13 @@ public class Duke {
      */
     public static void main(String[] args) {
         Duke duke = new Duke();
+//        File file = Duke.FILE_PATH.toFile();
+//        try {
+//            Scanner s = new Scanner(file);
+//            System.out.println(s.nextLine());
+//        } catch (Exception e) {
+//            System.out.println("!");
+//        }
         while (duke.isRunning) {
             try {
                 duke.readCommand();
