@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,6 +12,10 @@ public class Duke {
     private static ArrayList<Task> userInputRecord;
     private static final String indentation = "     ";
     private static final String subIndentation = "       ";
+    private static final String[] months  = new String[] {
+        "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY",
+            "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+    };
 
     public static void main(String[] args) {
         System.out.println(formatMessage( "Hello! I'm Peoduo\n" + indentation + "Can I help you?\n"));
@@ -65,22 +71,28 @@ public class Duke {
         } else if(userInput.startsWith("deadline")) {
             try {
                 int byPosition = userInput.lastIndexOf("/by");
-                String ddl = userInput.substring(byPosition + 4);
                 String description = userInput.substring(9,byPosition); //Length of "deadline " = 9
+                LocalDate ddl = LocalDate.parse(userInput.substring(byPosition + 4));
                 task = new Deadline(description,ddl);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println(formatMessage("OOPS!!! The description of a deadline cannot be empty.\n" ));
+                return;
+            } catch (DateTimeParseException e) {
+                System.out.println(formatMessage("Please enter a valid date in the format:/at yyyy-mm-dd!\n"));
                 return;
             }
 
         } else if(userInput.startsWith("event")) {
             try {
                 int atPosition = userInput.lastIndexOf("/at");
-                String time = userInput.substring(atPosition + 4);
                 String description = userInput.substring(6, atPosition);//Length of "event " = 6
+                LocalDate time = LocalDate.parse(userInput.substring(atPosition + 4));
                 task = new Event(description, time);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println(formatMessage("OOPS!!! The description of an event cannot be empty.\n"));
+                return;
+            } catch (DateTimeParseException e) {
+                System.out.println(formatMessage("Please enter a valid date in the format:/at yyyy-mm-dd!\n"));
                 return;
             }
         } else {
@@ -141,8 +153,6 @@ public class Duke {
             System.out.println(formatMessage("Nice! I've marked this task as done:\n" +
                     subIndentation + userInputRecord.get(itemToComplete) + "\n"));
             autoSave();
-            System.out.println(formatMessage("Nice! I've marked this task as done:\n" +
-                            subIndentation + userInputRecord.get(itemToComplete) + "\n"));
         } catch (IndexOutOfBoundsException e) {
             System.out.println(formatMessage("Oops, the ID of the task does not exist!\n"));
         } catch (NumberFormatException e) {
@@ -207,14 +217,14 @@ public class Duke {
                     userInputRecord.add(task);
                 } else if(itemInfo.startsWith("[D]")) {
                     Task task = new Deadline(itemInfo.substring(7, itemInfo.indexOf("(by")),
-                            itemInfo.substring(itemInfo.indexOf("(by") + 5, itemInfo.length() -1));
+                            convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(by") + 5, itemInfo.length() -1)));
                     if(itemInfo.contains("[X]")) {
                         task.setDone(true);
                     }
                     userInputRecord.add(task);
                 } else if(itemInfo.startsWith("[E]")) {
                     Task task = new Event(itemInfo.substring(7, itemInfo.indexOf("(at")),
-                            itemInfo.substring(itemInfo.indexOf("(at") + 5, itemInfo.length() -1));
+                            convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(at") + 5, itemInfo.length() -1)));
                     if(itemInfo.contains("[X]")) {
                         task.setDone(true);
                     }
@@ -222,13 +232,31 @@ public class Duke {
                 }
             }
             scanner.close();
-        } catch (Exception ignored) {
-
+        } catch (IOException e) {
+            System.out.println(formatMessage("Saved data not found, a new data file created.\n"));
         }
     }
 
     private static String formatMessage(String message) {
         return "    ____________________________________________________________\n" + indentation +
                 message + "    ____________________________________________________________";
+    }
+
+    private static LocalDate convertToLocalTime(String time) {
+        String copy = time;
+        String month = copy.substring(0,time.indexOf(" "));
+        int monthValue = -1;
+        for (int i = 0; i < months.length; i++) {
+            if(month.equals(months[i])) {
+                monthValue = i + 1;
+                break;
+            }
+        }
+        copy = copy.replace(month + " ", "");
+        String day = copy.substring(0,copy.indexOf(" ")).trim();
+        int dayValue = Integer.parseInt(day);
+        copy = copy.replace(day + " ", "");
+        int yearValue = Integer.parseInt(copy);
+        return LocalDate.of(yearValue,monthValue,dayValue);
     }
 }
