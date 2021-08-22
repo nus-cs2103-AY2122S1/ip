@@ -8,7 +8,7 @@ import duke.Ui;
 import duke.Ui.Commands;
 
 public class MarkCommand extends Command {
-    private String userInput;
+    private final String userInput;
 
     public MarkCommand(String userInput) {
         this.userInput = userInput;

@@ -36,9 +36,13 @@ public class Deadline extends Task {
     public boolean equals(Object obj) {
         if (obj instanceof Deadline) {
             Deadline other = (Deadline) obj;
-            return (this.isDone == other.getIsDone() &&
-                    this.description.equals(other.getDescription()) &&
-                    this.by.equals(other.getTime()));
+
+            // Check if done status, description and time are the same.
+            boolean isDoneStatusSame = this.isDone == other.isDone;
+            boolean isDescriptionSame = this.description.equals(other.description);
+            boolean isTimeSame = this.by.equals(other.by);
+
+            return (isDoneStatusSame && isDescriptionSame && isTimeSame);
         }
         return false;
     }

@@ -20,8 +20,12 @@ public class Todo extends Task {
     public boolean equals(Object obj) {
         if (obj instanceof Todo) {
             Todo other = (Todo) obj;
-            return (this.isDone == other.getIsDone() &&
-                    this.description.equals(other.getDescription()));
+
+            // Check is done status and description are the same.
+            boolean isDoneStatusSame = this.isDone == other.isDone;
+            boolean isDescriptionSame = this.description.equals(other.description);
+
+            return (isDoneStatusSame && isDescriptionSame);
         }
         return false;
     }

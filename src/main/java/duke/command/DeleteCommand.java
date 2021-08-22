@@ -9,7 +9,7 @@ import duke.Ui.Commands;
 import duke.task.Task;
 
 public class DeleteCommand extends Command {
-    private String userInput;
+    private final String userInput;
 
     public DeleteCommand(String userInput) {
         this.userInput = userInput;

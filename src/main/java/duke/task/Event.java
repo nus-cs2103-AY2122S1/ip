@@ -36,9 +36,13 @@ public class Event extends Task {
     public boolean equals(Object obj) {
         if (obj instanceof Event) {
             Event other = (Event) obj;
-            return (this.isDone == other.getIsDone() &&
-                    this.description.equals(other.getDescription()) &&
-                    this.at.equals(other.getTime()));
+
+            // Check if done status, description and time are the same.
+            boolean isDoneStatusSame = this.isDone == other.isDone;
+            boolean isDescriptionSame = this.description.equals(other.description);
+            boolean isTimeSame = this.at.equals(other.at);
+
+            return (isDoneStatusSame && isDescriptionSame && isTimeSame);
         }
         return false;
     }
