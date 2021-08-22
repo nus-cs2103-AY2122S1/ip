@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 /**
- * Represents a logger that can read logs and act according to logs.
+ * Represents a logger that can read logs and act according to logs provided.
  */
 public class Logger {
     BufferedReader bufferedReader;

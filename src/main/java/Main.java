@@ -1,7 +1,7 @@
 import utility.Duke;
 
 /**
- * The entry point into the program.
+ * The entry point into the Duke program.
  */
 public class Main {
     public static void main(String[] args) {
