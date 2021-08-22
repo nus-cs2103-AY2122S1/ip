@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -26,7 +27,6 @@ public class Storage {
         this.path = path;
     }
 
-
     /**
      * Reads the file to a TaskList.
      *
@@ -37,29 +37,32 @@ public class Storage {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             String line;
-            String[] arr;
-            boolean done;
 
             while((line = bufferedReader.readLine()) != null) {
+                String[] arr;
+                boolean isDone;
+
                 arr = line.split("\\|");
-                done = arr[1].equals("1");
+                isDone = arr[1].equals("1");
 
                 switch (arr[0]) {
                     case "T":
-                        tasks.add(new ToDo(done, arr[2]));
+                        tasks.add(new ToDo(isDone, arr[2]));
                         break;
                     case "E":
-                        tasks.add(new Event(done, arr[2], LocalDate.parse(arr[3])));
+                        tasks.add(new Event(isDone, arr[2], LocalDate.parse(arr[3])));
                         break;
                     case "D":
-                        tasks.add(new Deadline(done, arr[2], LocalDate.parse(arr[3])));
+                        tasks.add(new Deadline(isDone, arr[2], LocalDate.parse(arr[3])));
                         break;
                     default:
-                        throw new IllegalArgumentException("Unrecognized task flag");
+                        throw new DukeException("Unrecognized task flag");
                 }
             }
         } catch(IOException e) {
             System.out.println(e.toString());
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
         return tasks;
     }

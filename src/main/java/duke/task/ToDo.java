@@ -17,11 +17,11 @@ public class ToDo extends Task{
     /**
      * Alternative constructor for initializing from storage.
      *
-     * @param done Whether the task is already checked.
+     * @param isDone Whether the task is already checked.
      * @param description Description of the task.
      */
-    public ToDo(boolean done, String description) {
-        super(done, description);
+    public ToDo(boolean isDone, String description) {
+        super(isDone, description);
     }
 
     /**
@@ -31,7 +31,8 @@ public class ToDo extends Task{
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]"
+                + super.toString();
     }
 
     /**
@@ -41,6 +42,7 @@ public class ToDo extends Task{
      */
     @Override
     public String saveString() {
-        return "T|" + super.saveString();
+        return "T|"
+                + super.saveString();
     }
 }

@@ -40,6 +40,7 @@ public class AddCommand extends Command {
     @Override
     public String message(TaskList tasks) {
         return "Got it. I've added this task:\n"
-                + task.toString() + "\n";
+                + task.toString()
+                + "\n";
     }
 }

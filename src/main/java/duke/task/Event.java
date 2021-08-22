@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Tasks that occur at a specified time.
  */
 public class Event extends Task {
-    protected LocalDate at;
+    private final LocalDate at;
 
     /**
      * Class constructor.
@@ -23,12 +23,12 @@ public class Event extends Task {
     /**
      * Alternative constructor for initializing from storage.
      *
-     * @param done Whether the task is already checked.
+     * @param isDone Whether the task is already checked.
      * @param description Description of the task.
      * @param at Time the task occurs.
      */
-    public Event(boolean done, String description, LocalDate at) {
-        super(done, description);
+    public Event(boolean isDone, String description, LocalDate at) {
+        super(isDone, description);
         this.at = at;
     }
 
@@ -39,7 +39,11 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]"
+                + super.toString()
+                + " (at: "
+                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + ")";
     }
 
     /**

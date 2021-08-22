@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Tasks that require a due date.
  */
 public class Deadline extends Task {
-    protected LocalDate by;
+    private final LocalDate by;
 
     /**
      * Class constructor.
@@ -23,12 +23,12 @@ public class Deadline extends Task {
     /**
      * Alternative constructor for initializing from storage.
      *
-     * @param done Whether the task is already checked.
+     * @param isDone Whether the task is already checked.
      * @param description Description of the task.
      * @param by Deadline task must be done by.
      */
-    public Deadline(boolean done, String description, LocalDate by) {
-        super(done, description);
+    public Deadline(boolean isDone, String description, LocalDate by) {
+        super(isDone, description);
         this.by = by;
     }
 
@@ -39,7 +39,11 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]"
+                + super.toString()
+                + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + ")";
     }
 
     /**

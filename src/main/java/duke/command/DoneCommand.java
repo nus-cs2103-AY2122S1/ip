@@ -8,7 +8,7 @@ import duke.Ui;
  * Command to mark a task as done.
  */
 public class DoneCommand extends Command{
-    private int index;
+    private final int index;
 
     /**
      * Class constructor.
@@ -40,6 +40,7 @@ public class DoneCommand extends Command{
     @Override
     public String message(TaskList tasks) {
         return "Nice! I've marked this task as done: \n"
-                + tasks.getIndex(index).toString() + "\n";
+                + tasks.getIndex(index).toString()
+                + "\n";
     }
 }

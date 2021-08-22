@@ -10,13 +10,12 @@ import java.util.ArrayList;
  * @author Chang-CH
  */
 public class TaskList {
-    ArrayList<Task> tList;
-
     /**
      * Class constuctor.
      */
+    private ArrayList<Task> tasks;
     public TaskList() {
-        tList = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
 
@@ -25,7 +24,7 @@ public class TaskList {
      * @param task Task to be added.
      */
     public void add(Task task) {
-        tList.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -36,7 +35,7 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Task task : tList) {
+        for (Task task : tasks) {
             if (stringBuilder.length() != 0) {
                 stringBuilder.append("\n");
             }
@@ -53,7 +52,7 @@ public class TaskList {
      * @return List size.
      */
     public int getSize() {
-        return tList.size();
+        return tasks.size();
     }
 
     /**
@@ -63,7 +62,7 @@ public class TaskList {
      * @return Task at the index.
      */
     public Task getIndex(int index) {
-        return tList.get(index);
+        return tasks.get(index);
     }
 
     /**
@@ -72,6 +71,6 @@ public class TaskList {
      * @param index Index of the task to be removed.
      */
     public void removeIndex(int index) {
-        tList.remove(index);
+        tasks.remove(index);
     }
 }

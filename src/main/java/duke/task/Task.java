@@ -1,13 +1,11 @@
 package duke.task;
 
-import java.time.LocalDate;
-
 /**
  * Abstract class providing the skeleton of all Tasks.
  */
 public abstract class Task {
-    private boolean done = false;
-    private String description;
+    private boolean isDone = false;
+    private final String description;
 
     /**
      * Class constructor.
@@ -21,19 +19,19 @@ public abstract class Task {
     /**
      * Alternative constructor for storage to load tasks already done.
      *
-     * @param done Whether the task is done.
+     * @param isDone Whether the task is done.
      * @param description Description of the task.
      */
-    public Task(boolean done, String description) {
+    public Task(boolean isDone, String description) {
         this.description = description;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
      * Marks the task as done.
      */
     public void setDone() {
-        done = true;
+        isDone = true;
     }
 
     /**
@@ -44,7 +42,7 @@ public abstract class Task {
     @Override
     public String toString() {
         char indicator = ' ';
-        if (done) {
+        if (isDone) {
             indicator = 'X';
         }
         return "[" + indicator + "] " + this.description;
@@ -57,7 +55,7 @@ public abstract class Task {
      */
     public String saveString() {
         char indicator = '0';
-        if (done) {
+        if (isDone) {
             indicator = '1';
         }
         return indicator + "|" + this.description;
