@@ -39,6 +39,15 @@ public class TaskList {
             }
         }
     }
+    
+    //list to data
+    public String convertToData() {
+        StringBuilder data = new StringBuilder();
+        for (Task task : taskList) {
+            data.append(task.toData() + "\n"); 
+        }
+        return data.toString(); 
+    }
 
     @Override
     public String toString() {
