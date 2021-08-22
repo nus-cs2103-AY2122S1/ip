@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Specify the type of action to be taken by the duke.
+ * Specifies the type of action to be taken by the duke.
  */
 enum ActionType {
     LIST, TODO, DEADLINE, EVENT, DONE, DELETE, BYE, UNRECOGNIZED
@@ -17,12 +17,15 @@ public class Duke {
     private final List<Task> tasks = new ArrayList<>();
     private boolean isLive = true;
 
+    /**
+     * Constructor for a duke.
+     */
     public Duke() {
         init();
     }
 
     /**
-     * To show if the duke is still active.
+     * Shows if the duke is still active.
      *
      * @return whether the duke is still active.
      */
@@ -31,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * Process the command input by user.
+     * Processes the command input by user.
      *
      * @param command command input of the user.
      * @throws DukeException exceptions when processing the command
@@ -104,10 +107,6 @@ public class Duke {
         System.out.println("___________________________________________________\n");
     }
 
-    /**
-     * Read duke.txt file from disk.
-     * Create the file/directory if it does not exist.
-     */
     private void loadFromDisk()  {
         File folder = new File("data");
        if (folder.isDirectory()) {

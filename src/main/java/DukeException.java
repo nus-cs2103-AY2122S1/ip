@@ -5,7 +5,7 @@ abstract class DukeException extends Exception{
 }
 
 /**
- * Threw when the description of a task is empty.
+ * Throws when the description of a task is empty.
  */
 class EmptyDescriptionException extends DukeException {
     private String action;
@@ -23,7 +23,7 @@ class EmptyDescriptionException extends DukeException {
 }
 
 /**
- * Threw when the command is not recognised by duke.
+ * Throws when the command is not recognised by duke.
  */
 class UnrecognizableCommandException extends DukeException {
 
@@ -36,7 +36,7 @@ class UnrecognizableCommandException extends DukeException {
 }
 
 /**
- * Threw when the task does not exist in the list.
+ * Throws when the task does not exist in the list.
  */
 class NoSuchTaskException extends DukeException {
     @Override
@@ -48,7 +48,7 @@ class NoSuchTaskException extends DukeException {
 }
 
 /**
- * Threw when the task index given is out of bound.
+ * Throws when the task index given is out of bound.
  */
 class InvalidTaskIndexException extends DukeException {
     String action;

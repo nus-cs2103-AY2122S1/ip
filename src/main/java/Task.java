@@ -1,6 +1,6 @@
 class Task {
     /**
-     * To indicate if a task is done.
+     * Indicates if a task is done.
      */
     public boolean isDone;
     public final String description;
@@ -16,13 +16,14 @@ class Task {
     }
 
     /**
-     * Mark a task as done.
+     * Marks a task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
+     * Returns the description of the task.
      *
      * @return The description of the task.
      */
@@ -44,7 +45,7 @@ class ToDo extends Task {
     }
 
     /**
-     * To String.
+     * Returns the string representation of a todo.
      *
      * @return To do's string representation
      */
@@ -54,7 +55,7 @@ class ToDo extends Task {
     }
 }
 
-class  DeadLine extends Task {
+class DeadLine extends Task {
     String deadline;
 
     /**
@@ -68,7 +69,7 @@ class  DeadLine extends Task {
     }
 
     /**
-     * Deadline's string.
+     * Returns the string representation of a deadline task.
      *
      * @return Deadline's string.
      */
@@ -86,13 +87,13 @@ class Event extends Task {
      *
      * @param description description for the task.
      */
-    public Event(String description,String timePeriod, boolean isDone) {
+    public Event(String description, String timePeriod, boolean isDone) {
         super(description, isDone);
         this.timePeriod = timePeriod;
     }
 
     /**
-     * Event's string.
+     * Returns the string representation of a event task.
      *
      * @return Event's string.
      */
