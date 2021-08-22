@@ -97,24 +97,26 @@ public class Duke {
             String[] command = input.split(" ", 2);
             try {
                 switch (Command.valueOf(command[0].toUpperCase())) {
-                    case LIST:
-                        Printer.prettyPrint("Here are the tasks in your list:\n" +
-                                Printer.listTask(tasks, numOfTask));
-                        break;
-                    case DONE:
-                        tasks.get(Integer.parseInt(command[1]) - 1).markAsDone();
-                        break;
-                    case DELETE:
-                        printAddOrDelete(false, tasks.get(Integer.parseInt(command[1]) - 1), --numOfTask);
-                        tasks.remove(Integer.parseInt(command[1]) - 1);
-                        break;
-                    case TODO:
-                    case EVENT:
-                    case DEADLINE:
-                        addThenPrint(command, tasks, numOfTask++);
-                        break;
-                    default:
-                        throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
+                case LIST:
+                    Printer.prettyPrint("Here are the tasks in your list:\n" +
+                            Printer.listTask(tasks, numOfTask));
+                    break;
+                case DONE:
+                    tasks.get(Integer.parseInt(command[1]) - 1).markAsDone();
+                     break;
+                case DELETE:
+                    printAddOrDelete(false, tasks.get(Integer.parseInt(command[1]) - 1), --numOfTask);
+                    tasks.remove(Integer.parseInt(command[1]) - 1);
+                    break;
+                case TODO:
+                    // Fallthrough
+                case EVENT:
+                    // Fallthrough
+                case DEADLINE:
+                    addThenPrint(command, tasks, numOfTask++);
+                    break;
+                default:
+                    throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
                 }
             } catch (UnknownCommandException e) {
                 Printer.prettyPrint(e.toString());
