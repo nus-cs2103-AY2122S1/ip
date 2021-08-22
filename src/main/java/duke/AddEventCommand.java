@@ -1,20 +1,22 @@
+package duke;
+
 import java.io.IOException;
 
-public class AddTodoCommand extends Command {
-    private final Todo todo;
+public class AddEventCommand extends Command {
+    private final Event event;
 
-    public AddTodoCommand(Todo todo) {
-        this.todo = todo;
+    public AddEventCommand(Event event) {
+        this.event = event;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addTask(this.todo);
+        tasks.addTask(this.event);
         try {
             storage.updateFile(tasks.getTasks());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ui.showAddedMessage(this.todo, tasks);
+        ui.showAddedMessage(this.event, tasks);
     }
 }
