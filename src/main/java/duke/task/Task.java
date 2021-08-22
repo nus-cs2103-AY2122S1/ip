@@ -49,5 +49,6 @@ public abstract class Task {
     abstract public String record();
     abstract public boolean hasSchedule();
     abstract public String getType();
+    abstract public String getTime();
 
 }

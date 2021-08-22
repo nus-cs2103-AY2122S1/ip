@@ -31,7 +31,12 @@ public class Deadline extends Task{
         }
         
     }
-    
+
+    /**
+     * Returns the time factor of the Task in String form where applicable.
+     * 
+     * @return A String indicating the time factor of the Task.
+     */
     public String getTime() {
         return localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
@@ -44,7 +49,7 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         return String.format("[D][%s] %s (by: %s)",
-                getStatus() ? "X" : " ", getContent(), time);
+                getStatus() ? "X" : " ", getContent(), getTime());
     }
 
     /**

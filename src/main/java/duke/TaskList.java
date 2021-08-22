@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Task;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -65,7 +66,9 @@ public class TaskList {
      */
     public String listSchedule(LocalDate dateFilter) {
         ArrayList<Task> filteredTaskList = taskList.stream()
-                .filter(Task::hasSchedule).collect(Collectors.toCollection(ArrayList::new));
+                .filter(ele -> ele.hasSchedule() 
+                        && ele.getTime().equals(dateFilter.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))))
+                .collect(Collectors.toCollection(ArrayList::new));
         StringBuilder result = new StringBuilder("");
         for (int i = 0; i < filteredTaskList.size(); i++) {
             Task task = filteredTaskList.get(i);

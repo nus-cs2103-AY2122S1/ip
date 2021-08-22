@@ -29,7 +29,12 @@ public class Event extends Task {
             throw new duke.DukeException(" ☹ SORZ but I only understand date in yyyy-MM-dd format!");
         }
     }
-    
+
+    /**
+     * Returns the time factor of the Task in String form where applicable.
+     *
+     * @return A String indicating the time factor of the Task.
+     */
     public String getTime() {
         return localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
@@ -42,7 +47,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E][%s] %s (at: %s)",
-                getStatus() ? "X" : " ", getContent(), time);
+                getStatus() ? "X" : " ", getContent(), getTime());
     }
 
     /**

@@ -49,6 +49,15 @@ public class Todo extends Task{
     }
 
     /**
+     * Returns the time factor of the Task in String form where applicable.
+     *
+     * @return A String indicating the time factor of the Task.
+     */
+    public String getTime() {
+        return "null";
+    }
+
+    /**
      * Implements the hasSchedule method from Task.
      *
      * @return A boolean indicating if Todo has a schedule.
