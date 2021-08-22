@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.*;
+import duke.tasks.*;
+import duke.exceptions.*;
+
 /** Command to add tasks */
 public class AddTaskCommand extends Command {
     /** task to add */

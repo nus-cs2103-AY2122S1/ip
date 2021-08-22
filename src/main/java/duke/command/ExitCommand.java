@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.*;
+import duke.tasks.*;
+
 public class ExitCommand extends Command {
     public void execute(TaskList tasks, UI ui, FileController fc) {
         ui.printText("Bye bye");

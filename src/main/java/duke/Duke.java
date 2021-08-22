@@ -1,11 +1,11 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
+package duke;
 
+import duke.tasks.*;
+import duke.command.*;
+import duke.exceptions.*;
 
 public class Duke {
 
-    public static String END_WORD = "bye";
     public static String FILE_PATH = "data/";
 
     TaskList taskList;

@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.*;
+import duke.tasks.*;
+import duke.exceptions.*;
+
 public class MarkDoneCommand extends Command {
 
     private int index;
