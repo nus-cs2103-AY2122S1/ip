@@ -1,7 +1,14 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.function.BinaryOperator;
 import java.util.function.UnaryOperator;
@@ -208,7 +215,13 @@ public class Duke {
                         throw new TaskExistsException(TaskTypes.DEADLINE, inputArr[0]);
                     }
 
-                    Task deadline = new Deadline(inputArr[0], inputArr[1]);
+                    Task deadline;
+                    if (inputArr[1].trim().split("\\s+").length < 2) {          // no time given
+                        deadline = new Deadline(inputArr[0], parseDate(inputArr[1]));
+                    } else {
+                        deadline = new Deadline(inputArr[0], parseDateTime(inputArr[1]));
+                    }
+
                     taskList.add(deadline);
                     System.out.println(AddTaskMessage.apply(deadline.toString(), Integer.toString(taskList.size())));
                     break;
@@ -234,7 +247,13 @@ public class Duke {
                         throw new TaskExistsException(TaskTypes.EVENT, inputArr[0]);
                     }
 
-                    Task event = new Event(inputArr[0], inputArr[1]);
+                    Task event;
+                    if (inputArr[1].trim().split("\\s+").length < 2) {      // no time given
+                        event = new Deadline(inputArr[0], parseDate(inputArr[1]));
+                    } else {
+                        event = new Deadline(inputArr[0], parseDateTime(inputArr[1]));
+                    }
+
                     taskList.add(event);
                     System.out.println(AddTaskMessage.apply(event.toString(), Integer.toString(taskList.size())));
                     break;
@@ -335,10 +354,10 @@ public class Duke {
             i = taskList.indexOf(new Todo(taskName));
             break;
         case DEADLINE:
-            i = taskList.indexOf(new Deadline(taskName, null));
+            i = taskList.indexOf(new Deadline(taskName));
             break;
         case EVENT:
-            i = taskList.indexOf(new Event(taskName, null));
+            i = taskList.indexOf(new Event(taskName));
             break;
         default:
             throw new DukeException("unreachable by design");
@@ -361,6 +380,48 @@ public class Duke {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public static LocalDateTime parseDateTime(String datetime) throws DateTimeFormatException {
+        try {
+            return LocalDateTime.parse(datetime,
+                    new DateTimeFormatterBuilder()
+                            .parseCaseInsensitive()
+                            .parseLenient()
+                            .parseDefaulting(ChronoField.YEAR, 2021)
+                            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+                            .appendOptional(DateTimeFormatter.ofPattern("d/M/yyyy"))
+                            .appendOptional(DateTimeFormatter.ofPattern("yyyy-M-d"))
+                            .appendOptional(DateTimeFormatter.ofPattern("dMMMyyyy"))
+                            .appendOptional(DateTimeFormatter.ofPattern("d/M"))
+                            .appendOptional(DateTimeFormatter.ofPattern("dMMM"))
+                            .appendLiteral(" ")
+                            .appendOptional(DateTimeFormatter.ofPattern("HHmm"))
+                            .appendOptional(DateTimeFormatter.ofPattern("h.mma"))
+                            .appendOptional(DateTimeFormatter.ofPattern("ha"))
+                            .toFormatter(Locale.ENGLISH));
+        } catch (DateTimeParseException e) {
+            throw new DateTimeFormatException(datetime);
+        }
+
+    }
+
+    public static LocalDate parseDate(String date) throws DateTimeFormatException {
+        try {
+            return LocalDate.parse(date,
+                    new DateTimeFormatterBuilder()
+                            .parseCaseInsensitive()
+                            .parseLenient()
+                            .parseDefaulting(ChronoField.YEAR, 2021)
+                            .appendOptional(DateTimeFormatter.ofPattern("d/M/yyyy"))
+                            .appendOptional(DateTimeFormatter.ofPattern("yyyy-M-d"))
+                            .appendOptional(DateTimeFormatter.ofPattern("dMMMyyyy"))
+                            .appendOptional(DateTimeFormatter.ofPattern("d/M"))
+                            .appendOptional(DateTimeFormatter.ofPattern("dMMM"))
+                            .toFormatter(Locale.ENGLISH));
+        } catch (DateTimeParseException e) {
+            throw new DateTimeFormatException(date);
         }
     }
 

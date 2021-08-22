@@ -1,4 +1,3 @@
-
 public class DukeException extends Exception {
 
     public DukeException(String message) {
@@ -34,7 +33,7 @@ class TaskExistsException extends DukeException {
 class TaskIndexOutOfBounds extends DukeException {
 
     TaskIndexOutOfBounds(int i, int length) {
-        super(Duke.Box("Meow? I can't find task " + i +  "... Please enter a task number between 1 and " + length));
+        super(Duke.Box("Meow? I can't find task " + i + "... Please enter a task number between 1 and " + length));
     }
 
 }
@@ -85,5 +84,14 @@ class IllegalTaskTypeException extends DukeException {
         super(Duke.Box("Meow? There is no task type " + taskTypeStr + "!"));
     }
 
+}
+
+class DateTimeFormatException extends DukeException {
+
+    DateTimeFormatException(String datetime) {
+        super(Duke.Box("Meow? You entered " + datetime
+                + ".\n   Please input date in 31/12/2021 or 2021-12-31 or 31Dec2021 format."
+                + "\n   Please input time in 2300 or 11pm or 11.00pm format."));
+    }
 }
 
