@@ -21,6 +21,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public boolean filterByKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
@@ -29,4 +33,6 @@ public class Task {
     public String toHistory() {
         return " | " + getStatusForHistory() + " | " + this.description;
     }
+
+
 }

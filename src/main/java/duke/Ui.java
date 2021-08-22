@@ -1,4 +1,5 @@
 package duke;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -11,6 +12,7 @@ public class Ui {
     private static String doneMessage = "Nice! I've marked this task as done:";
     private static String addTaskMessage = "Got it. I've added this task:";
     private static String deleteTaskMessage = "Noted. I've removed this task:";
+    private static String findTaskMessage = "Here are the matching tasks in your list:";
 
     public void showLoadingError() {
         System.out.println("Can't load saved file");
@@ -45,6 +47,14 @@ public class Ui {
 
     public void completeTaskMessage (Task task) {
         System.out.println(doneMessage + "\n" + task.toString());
+        printLineBreak();
+    }
+
+    public void findTaskMessage (TaskList tasks) {
+        System.out.println(findTaskMessage);
+        for(int i = 0; i < tasks.getSize(); i++) {
+            System.out.println(String.valueOf(i+1) + "." + tasks.get(i).toString());
+        }
         printLineBreak();
     }
 

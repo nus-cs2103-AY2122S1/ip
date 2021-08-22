@@ -2,7 +2,7 @@ package duke;
 
 public class Duke {
     private boolean isRunning = true;
-    private enum Commands {list, done, todo, event, deadline, delete }
+    private enum Commands {list, done, todo, event, deadline, delete, find }
     Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -53,7 +53,7 @@ public class Duke {
         String operative = strings[0];
         Commands command;
         String[] temp;
-        String item, date, description;
+        String item, date, description, keyword;
         Task toAdd;
         int taskPointer;
         try {
@@ -68,6 +68,11 @@ public class Duke {
         switch (command) {
         case list:
             ui.printArrayList(tasks);
+            break;
+        case find:
+            keyword = strings[1];
+            TaskList filtered = tasks.findMatchingTasks(keyword);
+            ui.findTaskMessage(filtered);
             break;
         case done:
             item = strings[1];
@@ -105,6 +110,8 @@ public class Duke {
             tasks.addTask(toAdd);
             ui.addedTaskMessage(toAdd, tasks.getSize());
             break;
+
+
         }
     }
 
