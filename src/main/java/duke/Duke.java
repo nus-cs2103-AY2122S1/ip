@@ -34,20 +34,6 @@ public class Duke {
         }
         sc.close();
     }
-    /**
-     * Adds item to to-do list.
-     * @param inputString
-     * @return Returns and echoes string that was added.
-     */
-    public String add(String[] inputStrings) {
-        ArrayList<String> printBuffer = new ArrayList<>();
-        printBuffer.add("Got it. I've added this task:");
-        Item toAdd = null;
-        this.itemList.add(toAdd);
-        printBuffer.add("  " + toAdd.toString());
-        printBuffer.add(String.format("Now you have %d tasks in the list.", this.itemList.size()));
-        return styleResponse(printBuffer);
-    }
 
     public static String styleResponse(String inputString) {
         return "     --------------------\n     " + inputString + "\n     --------------------";
