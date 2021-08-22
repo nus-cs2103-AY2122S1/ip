@@ -11,13 +11,17 @@ public class Deadline extends Task {
         this.deadline = LocalDate.parse(deadline);
     }
 
-    private String getDeadline() {
+    public LocalDate getDeadline() {
+        return this.deadline;
+    }
+
+    private String deadlineToString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
         return this.deadline.format(formatter);
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.getDeadline());
+        return String.format("[D]%s (by: %s)", super.toString(), this.deadlineToString());
     }
 }

@@ -10,13 +10,17 @@ public class Event extends Task {
         this.time = LocalDate.parse(time);
     }
 
-    private String getTime() {
+    public LocalDate getTime() {
+        return this.time;
+    }
+
+    private String timeToString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
         return this.time.format(formatter);
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.getTime());
+        return String.format("[E]%s (at: %s)", super.toString(), this.timeToString());
     }
 }

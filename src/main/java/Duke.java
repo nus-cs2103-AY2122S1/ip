@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +96,29 @@ public class Duke {
                     Task task = new Event(description, time);
                     taskList.add(task);
                     System.out.printf("Lollipop: %s has been added.%n", task.toString());
+
+                } else if (command.startsWith(("date"))) {
+                    String[] splitCommand = command.split(" ", 2);
+                    if (splitCommand.length == 1) {
+                        throw new DukeException("Please fill in a date");
+                    }
+
+                    LocalDate date = LocalDate.parse(splitCommand[1]);
+                    System.out.println("Lollipop: Here the tasks that occurs on the specified date.");
+                    int count = 1;
+                    for (Task task : taskList) {
+                        if (task instanceof Deadline) {
+                            LocalDate deadline = ((Deadline) task).getDeadline();
+                            if (deadline.equals(date)) {
+                                System.out.printf("%d. %s%n", count, task);
+                            }
+                        } else if (task instanceof Event) {
+                            LocalDate time = ((Event) task).getTime();
+                            if (time.equals(date)) {
+                                System.out.printf("%d. %s%n", count, task);
+                            }
+                        }
+                    }
 
                 } else {
                     throw new DukeException("I do not understand what that means :(");
