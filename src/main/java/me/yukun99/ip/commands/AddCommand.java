@@ -1,5 +1,6 @@
 package me.yukun99.ip.commands;
 
+import me.yukun99.ip.core.Storage;
 import me.yukun99.ip.core.TaskList;
 import me.yukun99.ip.core.Ui;
 import me.yukun99.ip.exceptions.HelpBotIllegalArgumentException;
@@ -12,10 +13,12 @@ import static me.yukun99.ip.tasks.Task.Type;
 
 public class AddCommand extends Command {
 	private final Type type;
+	private Storage storage;
 
-	public AddCommand(String[] args, TaskList taskList, Ui ui, Type type) {
+	public AddCommand(String[] args, TaskList taskList, Ui ui, Type type, Storage storage) {
 		super(args, taskList, ui);
 		this.type = type;
+		this.storage = storage;
 	}
 
 	@Override
@@ -36,5 +39,6 @@ public class AddCommand extends Command {
 		}
 		this.taskList.addTask(task);
 		this.ui.add(task);
+		this.storage.saveTask(task);
 	}
 }

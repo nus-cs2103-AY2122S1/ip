@@ -19,8 +19,8 @@ public abstract class Task {
 	private static final String PREFIX_DONE = "[X] ";
 
 	// Constants/Variables related to the instance
-	private final String name;
-	private boolean done = false;
+	protected final String name;
+	protected boolean done = false;
 
 	/**
 	 * Constructor for a Task instance.
@@ -41,6 +41,13 @@ public abstract class Task {
 		}
 		done = true;
 		ui.done(this);
+	}
+
+	/**
+	 * Marks a task as done without sending a message to the user.
+	 */
+	public void setDone() {
+		done = true;
 	}
 
 	/**
@@ -80,6 +87,13 @@ public abstract class Task {
 	public void deleteMessage(Ui ui) {
 		ui.delete(this, done);
 	}
+
+	/**
+	 * Gets the string representation of the task to be saved into a file.
+	 *
+	 * @return String representation of the task to be saved into a file.
+	 */
+	public abstract String saveString();
 
 	/**
 	 * Returns a String representation of the Task instance.

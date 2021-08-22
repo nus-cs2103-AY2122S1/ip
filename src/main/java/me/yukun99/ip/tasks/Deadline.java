@@ -28,6 +28,18 @@ public class Deadline extends Task {
 	}
 
 	@Override
+	public String saveString() {
+		String save = "D:";
+		if (this.done) {
+			save += "T:";
+		} else {
+			save += "F:";
+		}
+		save += this.name + ":" + this.date;
+		return save;
+	}
+
+	@Override
 	public String toString() {
 		return " [D]" + super.toString() + " (by: " + date + ")";
 	}

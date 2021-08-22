@@ -22,6 +22,8 @@ public class HelpBot {
 	private final Ui ui;
 	// Parser instance to parse user commands.
 	private final Parser parser;
+	// Storage instance to handle file IO.
+	private final Storage storage;
 
 	// Whether to exit bot.
 	private boolean exit = false;
@@ -34,10 +36,11 @@ public class HelpBot {
 	 */
 	public HelpBot(String name, String filepath) throws IOException {
 		TaskList taskList = new TaskList();
-		Storage storage = new Storage(filepath);
+		this.storage = new Storage(filepath, taskList);
+		this.storage.loadTasks();
 		this.ui = new Ui(name, taskList, storage);
 		this.scanner = storage.getInputs();
-		this.parser = new Parser(this, this.scanner, taskList, this.ui);
+		this.parser = new Parser(this, this.scanner, taskList, this.ui, this.storage);
 		this.ui.start();
 		this.listen();
 	}
