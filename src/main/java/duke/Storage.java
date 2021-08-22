@@ -65,11 +65,6 @@ public class Storage {
                 String currLine = fileReader.nextLine();
                 String[] currArgs = currLine.split("###");
                 Item toAdd = null;
-                System.out.println(currLine);
-                System.out.println(currArgs.length);
-                System.out.println(currArgs[0]);
-                System.out.println(currArgs[1]);
-                System.out.println(currArgs[2]);
 
                 switch (currArgs[0]) {
                 case "T":
