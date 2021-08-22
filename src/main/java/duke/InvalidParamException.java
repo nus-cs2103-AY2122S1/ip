@@ -1,3 +1,5 @@
+package duke;
+
 public class InvalidParamException extends DukeException {
     /**
      * A constructor for this InvalidParamException.

@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -17,7 +19,7 @@ public class Duke {
         new Duke().run();
     }
 
-    public void run() {
+    private void run() {
         // Obtain data from save file if it exists
         storage.copyFromFileToList(taskList);
 
@@ -28,7 +30,7 @@ public class Duke {
         exit();
     }
 
-    public static void exit() {
+    private void exit() {
         System.out.println("Output: Goodbye! See you again!");
         ui.printDoubleDivider();
         sc.close();

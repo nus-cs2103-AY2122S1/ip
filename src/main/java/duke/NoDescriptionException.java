@@ -1,3 +1,5 @@
+package duke;
+
 public class NoDescriptionException extends DukeException {
     /**
      * A constructor for this NoDescriptionException.
