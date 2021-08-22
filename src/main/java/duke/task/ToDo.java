@@ -5,17 +5,19 @@ public class ToDo extends Task{
         super(description);
     }
 
-    public ToDo(boolean done, String description) {
-        super(done, description);
+    public ToDo(boolean isDone, String description) {
+        super(isDone, description);
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]"
+                + super.toString();
     }
 
     @Override
     public String saveString() {
-        return "T|" + super.saveString();
+        return "T|"
+                + super.saveString();
     }
 }

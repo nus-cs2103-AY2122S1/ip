@@ -14,7 +14,9 @@ public class ListCommand extends Command {
     public String message(TaskList tasks) {
         StringBuilder stringBuilder = new StringBuilder();
         for(int i = 0; i < tasks.size(); i++) {
-            stringBuilder.append(String.format("%d. %s\n", i + 1, tasks.getIndex(i).toString()));
+            stringBuilder.append(String.format("%d. %s\n",
+                    i + 1,
+                    tasks.getIndex(i).toString()));
         }
         return stringBuilder.toString();
     }

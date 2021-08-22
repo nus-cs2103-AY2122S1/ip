@@ -20,7 +20,8 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        PATH = System.getProperty("user.dir") + "\\data\\save.txt";
+        PATH = System.getProperty("user.dir")
+                + "\\data\\save.txt";
         new Duke(PATH).run();
     }
 

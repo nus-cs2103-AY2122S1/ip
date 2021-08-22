@@ -27,14 +27,18 @@ public class Parser {
             return new DeleteCommand(selectedTask);
         case "event":
             params = input.split("/at");
-            params[0] = params[0].substring(6, params[0].length() - 1);
+            params[0] = params[0].substring(6,
+                    params[0].length() - 1);
             params[1] = params[1].substring(1);
-            return new AddCommand(new Event(params[0], LocalDate.parse(params[1])));
+            return new AddCommand(new Event(params[0],
+                    LocalDate.parse(params[1])));
         case "deadline":
             params = input.split("/by");
-            params[0] = params[0].substring(9, params[0].length() - 1);
+            params[0] = params[0].substring(9,
+                    params[0].length() - 1);
             params[1] = params[1].substring(1);
-            return new AddCommand(new Deadline(params[0], LocalDate.parse(params[1])));
+            return new AddCommand(new Deadline(params[0],
+                    LocalDate.parse(params[1])));
         case "todo":
             try {
                 String name = input.substring(5);

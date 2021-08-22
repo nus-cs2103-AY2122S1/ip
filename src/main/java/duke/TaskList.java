@@ -5,19 +5,20 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> tList;
+    private ArrayList<Task> tasks;
+
     public TaskList() {
-        tList = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     public void add(Task task) {
-        tList.add(task);
+        tasks.add(task);
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Task task : tList) {
+        for (Task task : tasks) {
             if (stringBuilder.length() != 0) {
                 stringBuilder.append("\n");
             }
@@ -29,14 +30,14 @@ public class TaskList {
     }
 
     public int size() {
-        return tList.size();
+        return tasks.size();
     }
 
     public Task getIndex(int index) {
-        return tList.get(index);
+        return tasks.get(index);
     }
 
     public void removeIndex(int index) {
-        tList.remove(index);
+        tasks.remove(index);
     }
 }

@@ -15,7 +15,6 @@ public class Ui {
     }
 
     protected void showLoadingError(String error) {
-//        System.out.println(error);
         System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 

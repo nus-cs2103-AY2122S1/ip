@@ -19,8 +19,8 @@ public class DeleteCommand extends Command {
 
     @Override
     public String message(TaskList tasks) {
-        return "Noted. I've removed this task:\n" +
-                tasks.getIndex(index).toString() + "\n" +
-                "Now you have " + (tasks.size() - 1) + " tasks in the list.\n";
+        return "Noted. I've removed this task:\n"
+                + tasks.getIndex(index).toString() + "\n"
+                + "Now you have " + (tasks.size() - 1) + " tasks in the list.\n";
     }
 }

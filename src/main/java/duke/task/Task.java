@@ -3,26 +3,26 @@ package duke.task;
 import java.time.LocalDate;
 
 public class Task {
-    private boolean done = false;
-    private String description;
+    private boolean isDone = false;
+    private final String description;
 
     public Task(String description) {
         this.description = description;
     }
 
-    public Task(boolean done, String description) {
+    public Task(boolean isDone, String description) {
         this.description = description;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     public void setDone() {
-        done = true;
+        isDone = true;
     }
 
     @Override
     public String toString() {
         char indicator = ' ';
-        if (done) {
+        if (isDone) {
             indicator = 'X';
         }
         return "[" + indicator + "] " + this.description;
@@ -30,7 +30,7 @@ public class Task {
 
     public String saveString() {
         char indicator = '0';
-        if (done) {
+        if (isDone) {
             indicator = '1';
         }
         return indicator + "|" + this.description;
