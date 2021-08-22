@@ -3,6 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.String;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,6 +17,7 @@ import java.util.Scanner;
 public class Duke {
     private static final ArrayList<Task> taskList = new ArrayList<>();
     private static final String FILEPATH = "DukeList.txt";
+    private static final String DATE_TIME_FORMAT = "dd-MM-yyyy HH:mm";
 
     /**
      * Prints the Duke logo.
@@ -51,7 +55,7 @@ public class Duke {
      */
     private static void addToList(Task task) {
         taskList.add(task);
-        updateFile(task);
+        writeFile();
         echo("Got it. I've added this task:\n  "
                 + task + "\nNow you have " + taskList.size() + " tasks in the list.");
     }
@@ -77,15 +81,22 @@ public class Duke {
      * @throws DukeException The exception to be thrown when input is not as expected.
      */
     private static void addDeadline(String[] input) throws DukeException {
+        String formatErrorMsg = "OOPS!!! Please add the deadline with the right format:\n"
+                + "  deadline <description> /by <" + DATE_TIME_FORMAT + ">";
         if (input.length > 1) {
             String[] deadline = input[1].split("/", 2);
             if (deadline.length > 1 && deadline[1].length() > 3) {
-                addToList(new Deadline(deadline[0], deadline[1].substring(3)));
+                try {
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+                    addToList(new Deadline(deadline[0], LocalDateTime.parse(deadline[1].substring(3), format)));
+                } catch (DateTimeParseException e) {
+                    throw new DukeException(formatErrorMsg);
+                }
             } else {
-                throw new DukeException("OOPS!!! Please add the deadline with the right format ☹");
+                throw new DukeException(formatErrorMsg);
             }
         } else {
-            throw new DukeException("OOPS!!! The description of a deadline cannot be empty ☹");
+            throw new DukeException(formatErrorMsg);
         }
     }
 
@@ -96,15 +107,22 @@ public class Duke {
      * @throws DukeException The exception to be thrown when input is not as expected.
      */
     private static void addEvent(String[] input) throws DukeException {
+        String formatErrorMsg = "OOPS!!! Please add the event with the right format:\n"
+                + "  event <description> /at <" + DATE_TIME_FORMAT + ">";
         if (input.length > 1) {
             String[] event = input[1].split("/", 2);
             if (event.length > 1 && event[1].length() > 3) {
-                addToList(new Event(event[0], event[1].substring(3)));
+                try {
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+                    addToList(new Event(event[0], LocalDateTime.parse(event[1].substring(3), format)));
+                } catch (DateTimeParseException e) {
+                    throw new DukeException(formatErrorMsg);
+                }
             } else {
-                throw new DukeException("OOPS!!! Please add the event with the right format ☹");
+                throw new DukeException(formatErrorMsg);
             }
         } else {
-            throw new DukeException("OOPS!!! The description of a event cannot be empty ☹");
+            throw new DukeException(formatErrorMsg);
         }
     }
 
@@ -194,38 +212,22 @@ public class Duke {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                StringBuilder taskString = new StringBuilder(data);
-                final int lastIndex = taskString.length() - 1;
-                switch (taskString.charAt(1)) {
+                switch (data.charAt(0)) {
                 case 'T':
-                    Task toDoTask = new ToDo(taskString.substring(7));
-                    if (taskString.charAt(4) == 'X') {
+                    Task toDoTask = new ToDo(data.substring(4));
+                    if (data.charAt(2) == 'X') {
                         toDoTask.markAsDone();
                     }
                     taskList.add(toDoTask);
                     break;
                 case 'D':
-                    int byIndex = taskString.indexOf(" (by: ", 6);
-                    String deadlineDesc = taskString.substring(7, byIndex);
-                    String deadlineBy = taskString.substring(byIndex + 6, lastIndex);
-                    Task deadlineTask = new Deadline(deadlineDesc, deadlineBy);
-                    if (taskString.charAt(4) == 'X') {
-                        deadlineTask.markAsDone();
-                    }
-                    taskList.add(deadlineTask);
+                    readDeadline(data);
                     break;
                 case 'E':
-                    int atIndex = taskString.indexOf(" (at: ", 6);
-                    String eventDesc = taskString.substring(7, atIndex);
-                    String eventAt = taskString.substring(atIndex + 6, lastIndex);
-                    Task eventTask = new Event(eventDesc, eventAt);
-                    if (taskString.charAt(4) == 'X') {
-                        eventTask.markAsDone();
-                    }
-                    taskList.add(eventTask);
+                    readEvent(data);
                     break;
                 default:
-                    // Do nothing and continue to the next line.
+                    // Do nothing and continue to scan the next line.
                 }
             }
             myReader.close();
@@ -234,6 +236,40 @@ public class Duke {
         }
     }
 
+    private static void readEvent(String data) {
+        try {
+            String[] splitEvent = data.split("\\|", 4);
+            if (splitEvent.length == 4) {
+                DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+                LocalDateTime at = LocalDateTime.parse(splitEvent[3], format);
+                Task eventTask = new Event(splitEvent[2], at);
+                if (data.charAt(2) == 'X') {
+                    eventTask.markAsDone();
+                }
+                taskList.add(eventTask);
+            } // Else invalid data, do nothing.
+        } catch (DateTimeParseException e) {
+            // Invalid data, do nothing.
+            System.out.println("Date format wrong");
+        }
+    }
+    private static void readDeadline(String data) {
+        try {
+            String[] splitDeadline = data.split("\\|", 4);
+            if (splitDeadline.length == 4) {
+                DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+                LocalDateTime by = LocalDateTime.parse(splitDeadline[3], format);
+                Task deadlineTask = new Deadline(splitDeadline[2], by);
+                if (data.charAt(2) == 'X') {
+                    deadlineTask.markAsDone();
+                }
+                taskList.add(deadlineTask);
+            } // Else, invalid data, do nothing.
+        } catch (DateTimeParseException e) {
+            // Invalid data, do nothing.
+            System.out.println("Date format wrong");
+        }
+    }
     /**
      * Creates a file. Called in readFile().
      */
@@ -259,25 +295,9 @@ public class Duke {
             FileWriter myWriter = new FileWriter(FILEPATH); // Overwrite mode.
             StringBuilder fileContent = new StringBuilder();
             for (Task task : taskList) {
-                fileContent.append(task.toString()).append("\n");
+                fileContent.append(task.toData()).append("\n");
             }
             myWriter.write(fileContent.toString());
-            myWriter.close();
-        } catch (IOException e) {
-            echo("OOPS!!! An error occurred when writing a file!");
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Appends a new task to the last line of the txt file.
-     *
-     * @param newTask The task to be added to the file.
-     */
-    private static void updateFile(Task newTask) {
-        try {
-            FileWriter myWriter = new FileWriter(FILEPATH,true);
-            myWriter.write(newTask.toString());
             myWriter.close();
         } catch (IOException e) {
             echo("OOPS!!! An error occurred when writing a file!");

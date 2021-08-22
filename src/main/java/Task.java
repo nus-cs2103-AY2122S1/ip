@@ -22,6 +22,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public String toData() {
+        return getStatusIcon() + "|" + description;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
