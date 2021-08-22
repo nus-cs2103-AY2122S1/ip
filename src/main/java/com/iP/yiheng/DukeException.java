@@ -1,3 +1,5 @@
+package com.iP.yiheng;
+
 public class DukeException extends IllegalArgumentException {
 
     public DukeException(String message) {
