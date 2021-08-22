@@ -30,12 +30,42 @@ public class Deadline extends Task {
     }
 
     /**
+     * A constructor used to initialize the deadline through file input.
+     *
+     * @param description the description of the event.
+     * @param isCompleted the state of the event.
+     * @param date the date of the deadline
+     * @param time the time of the deadline
+     */
+    protected Deadline(String description, boolean isCompleted, LocalDate date, LocalTime time) {
+        super(description, isCompleted);
+        this.date = date;
+        this.time = time;
+    }
+
+    /**
      * Return the string representation of deadline.
      *
      * @return the string representation of deadline.
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("d/MM/yyyy")) + ")";
+        String str = "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("d/M/yyyy"));
+        str += this.time != null ? " " + this.time + ")" : ")";
+        return str;
+    }
+
+    /**
+     * Return the string representation of deadline for file input/output.
+     *
+     * @return the string representation of deadline for file input/output.
+     */
+    @Override
+    public String fileFormat() {
+        String displayCompletion = this.isCompleted ? "1" : "0";
+        String str = String.format("%s | %s | %s | %s", "D", displayCompletion, this.description,
+                this.date.format(DateTimeFormatter.ofPattern("d/M/yyyy")));
+        str += this.time != null ? " | " + this.time : "";
+        return str;
     }
 }

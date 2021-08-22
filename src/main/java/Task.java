@@ -22,6 +22,17 @@ public class Task {
     }
 
     /**
+     * A constructor used to initialize the task through file input.
+     *
+     * @param description the description of the task.
+     * @param isCompleted the state of the task.
+     */
+    protected Task(String description, boolean isCompleted) {
+        this.description = description;
+        this.isCompleted = isCompleted;
+    }
+
+    /**
      * Marks the task as done.
      */
     protected void markAsDone() {
@@ -37,5 +48,15 @@ public class Task {
     public String toString() {
         String displayCompletion = this.isCompleted ? "[X]" : "[]";
         return displayCompletion + ' ' + this.description;
+    }
+
+    /**
+     * Return the string representation of task for file input/output.
+     *
+     * @return the string representation of task.
+     */
+    public String fileFormat() {
+        String displayCompletion = this.isCompleted ? "1" : "0";
+        return String.format("%s | %s", displayCompletion, this.description);
     }
 }
