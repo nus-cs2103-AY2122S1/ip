@@ -1,3 +1,8 @@
+package exception;
+
+/**
+ * Triggers when the date is in an invalid format
+ */
 public class PixInvalidDateException extends PixException {
     @Override
     public String getMessage() {

@@ -1,3 +1,5 @@
+package exception;
+
 /**
  * The General Exception class that signals any errors.
  */

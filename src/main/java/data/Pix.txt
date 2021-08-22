@@ -1,3 +1,2 @@
-D | 0 | haha | 2002-10-01
-T | 1 | freestyle
-D | 0 | kwoj | 2021-01-01
+T|0|borrow book
+D|0|idw|2020-01-01
