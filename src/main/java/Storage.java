@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -67,7 +68,7 @@ public class Storage {
 
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            bw.write(String.format("%s-%s-%s-%s\n", task.getTag(), task.getStatusIcon(), task.getDescription(), task.getDueDate()));
+            bw.write(String.format("%s/%s/%s/%s\n", task.getTag(), task.getStatusIcon(), task.getDescription(), task.getDueDate()));
         }
 
         bw.close();
@@ -91,9 +92,9 @@ public class Storage {
             String nextData = scanner.nextLine();
 
             // get the relevant details from the data
-            String[] details = nextData.split("-");
+            String[] details = nextData.split("/");
             String type = details[0];
-            boolean isDone = details[1] == "[X]";
+            boolean isDone = (details[1].equals("[X]"));
             String desc = details[2];
             String dueDate = details[3];
 
@@ -102,10 +103,10 @@ public class Storage {
                 Task t = new Todo(desc, isDone);
                 taskList.add(t);
             } else if (type.equals("D")) {
-                Task t = new Deadline(desc, dueDate, isDone);
+                Task t = new Deadline(desc, LocalDate.parse(dueDate), isDone);
                 taskList.add(t);
             } else if (type.equals("E")) {
-                Task t = new Event(desc, dueDate, isDone);
+                Task t = new Event(desc, LocalDate.parse(dueDate), isDone);
                 taskList.add(t);
             } else {
                 throw new NoSuchTaskException();
