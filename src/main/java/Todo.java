@@ -4,6 +4,10 @@ public class Todo extends Task{
         super(description);
     }
 
+    public Todo(String description, String status) {
+        super(description, status.equals("true"));
+    }
+
     public String getType() {
         return "T";
     }
@@ -18,5 +22,9 @@ public class Todo extends Task{
 
     public String getDescription() {
         return this.description;
+    }
+
+    public String save() {
+        return String.format("%s-%s-%s-\n", this.getType(), this.getStatus(), this.description);
     }
 }
