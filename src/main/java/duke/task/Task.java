@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Task class which contains description of task and whether task is done.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -36,7 +39,7 @@ public class Task {
     }
 
     /**
-     * Returns the string representation which is use to store the tasks.
+     * Returns the string representation which is used to store the tasks.
      *
      * @return string representation used for storing task.
      */

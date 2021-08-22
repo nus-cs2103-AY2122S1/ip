@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates the methods used to read and store data onto disk.
+ */
 public class Storage {
     private final String filePath;
 
@@ -74,6 +77,8 @@ public class Storage {
 
     /**
      * Saves task list to file path.
+     *
+     * @param taskList the path to save task list to.
      */
     public void save(TaskList taskList) throws DukeException {
         try {

@@ -8,6 +8,9 @@ import duke.task.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Main class for Duke app.
+ */
 public class Duke {
 
     private final Ui ui;
@@ -32,10 +35,18 @@ public class Duke {
         ui.sayHi();
     }
 
+    /**
+     * Driver code for Duke
+     *
+     * @param args arguments for main method.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
 
+    /**
+     * Starts up duke.
+     */
     public void run() {
         Scanner scanner = new Scanner(System.in);
         String input;
@@ -53,7 +64,7 @@ public class Duke {
     }
 
     /**
-     * Prints exit message upon exit.
+     * Exits duke.
      */
     private void exit() {
         try {

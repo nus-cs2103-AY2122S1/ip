@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Deadline class which is subclass of Task.
+ */
 public class Deadline extends Task {
 
     // Time of deadline

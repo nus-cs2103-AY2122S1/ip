@@ -1,5 +1,8 @@
 package duke.io;
 
+/**
+ * Encapsulates the methods used to print to output.
+ */
 public class Ui {
 
     private static final String LINE_SEPARATOR = "\t____________________________________________________________\n";
@@ -21,10 +24,16 @@ public class Ui {
         print("LOADING ERROR! ;_;");
     }
 
+    /**
+     * Prints a hi message.
+     */
     public void sayHi() {
         print("Hello! I'm Duke\nWhat can I do for you?");
     }
 
+    /**
+     * Prints a bye message.
+     */
     public void sayBye() {
         print("Bye. Hope to see you again soon!");
     }
