@@ -7,11 +7,18 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.util.ArrayList;
 
-
+/**
+ * Class that encapsulates the file reading/writing for the storage of tasks.
+ */
 public class Storage {
     private File file;
 
-    Storage (String filePath){
+    /**
+     * Class Constructor that takes in the file path of the storage file.
+     *
+     * @param filePath where the storage file is at.
+     */
+    public Storage (String filePath){
         File temp =  new File(filePath);
         try {
             temp.getParentFile().mkdir();
@@ -22,6 +29,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the file of the storage and returns a ArrayList of Tasks from the storage.
+     *
+     * @return ArrayList of Task that is stored.
+     */
     public ArrayList<Task> parseFile () {
         ArrayList<Task> history = new ArrayList<Task>();
         try {
@@ -38,6 +50,12 @@ public class Storage {
         return history;
     }
 
+    /**
+     * Function that parses the line that is stored in the storage file.
+     *
+     * @param task line in the file that represents a task.
+     * @return Task object corresponding to the line in the file.
+     */
     public Task parseTask(String task) {
         String[] temp = task.split(" \\| ");
         if (temp.length == 3) {
@@ -61,6 +79,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Clears the file to avoid appending of the same tasks.
+     */
     public void fileClear () {
         try {
             FileWriter fileWriter = new FileWriter(file.getAbsoluteFile(), false);
@@ -71,6 +92,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Function that writes a line to file.
+     *
+     * @param text text to be written.
+     */
     public void writeToFile (String text) {
         try {
             FileWriter fileWriter = new FileWriter(file.getAbsoluteFile(),true);

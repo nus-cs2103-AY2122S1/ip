@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Class that is a chat bot that can store tasks.
+ */
 public class Duke {
     private boolean isRunning = true;
     private enum Commands {list, done, todo, event, deadline, delete }
@@ -7,7 +10,12 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    Duke (String filePath) {
+    /**
+     * Class Constructor based on where the storage file path.
+     *
+     * @param filePath where the storage file is at.
+     */
+    public Duke (String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -18,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Driver function that runs the chat bot.
+     */
     public void run() {
         ui.greet();
         while(isRunning) {
@@ -34,7 +45,12 @@ public class Duke {
         ui.sayFarewell();
     }
 
-
+    /**
+     * Function that checks whether the user wants to exit the program.
+     *
+     * @param instruction instruction given by the user
+     * @return a boolean on whether the program should terminate
+     */
     private boolean checkBye(String instruction){
         if(instruction.equalsIgnoreCase("bye")){
             isRunning = false;
@@ -47,6 +63,13 @@ public class Duke {
         return false;
     }
 
+    /**
+     * Method that parses instruction from the user.
+     *
+     * @param instruction user's instruction
+     * @throws NoDescriptionError If user inputs nothing after a task command.
+     * @throws UnknownCommandError If user inputs a command that is outside the scope of the chatbot
+     */
     private void parse(String instruction) throws NoDescriptionError, UnknownCommandError{
         ui.printLineBreak();
         String[] strings = instruction.split(" ", 2);
@@ -107,6 +130,7 @@ public class Duke {
             break;
         }
     }
+
 
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
