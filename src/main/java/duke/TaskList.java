@@ -373,4 +373,24 @@ public class TaskList {
     public Task getTask(int pos) {
         return taskList.get(pos);
     }
+
+    /**
+     * Searches for tasks containing a keyword in its description.
+     *
+     * @param n the search string
+     */
+    public static void search(String n) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task t: taskList) {
+            if (!n.isEmpty()) {
+                if (t.getDescription().toLowerCase().contains(n.toLowerCase())) {
+                    result.add(t);
+                }
+            }
+        }
+        System.out.println(div);
+        System.out.println(ind2 + "Here are the tasks including " + n + ": ");
+        Ui.printTasks(result);
+        System.out.println(div);
+    }
 }

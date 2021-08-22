@@ -52,6 +52,10 @@ public class Duke {
                     executeNext = new GetDayCommand(next);
                     executeNext.execute();
                     break;
+                case 6:
+                    executeNext = new SearchCommand(myTasks, next);
+                    executeNext.execute();
+                    break;
                 case 5:
                     executeNext = new AddCommand(myTasks, next);
                     executeNext.execute();

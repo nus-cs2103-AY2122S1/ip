@@ -10,6 +10,7 @@ public class Parser {
         DELETE("delete"),
         LIST("list"),
         GET("get"),
+        SEARCH("find"),
         DONE("done");
 
         private final String k;
@@ -40,6 +41,8 @@ public class Parser {
             return 3;
         } else if (next.length() > 2 && next.substring(0, 3).equals(KeyWord.GET.getK())) {
             return 4;
+        } else if (next.length() > 3 && next.substring(0, 4).equals(KeyWord.SEARCH.getK())) {
+            return 6;
         } else {
            return 5;
         }
