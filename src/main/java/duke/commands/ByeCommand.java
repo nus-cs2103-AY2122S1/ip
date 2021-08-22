@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class ByeCommand extends Command {
     
     @Override
-    public void parseArg(String args) {
+    public void parseLine(String line) {
     }
 
     @Override

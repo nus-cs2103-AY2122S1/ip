@@ -9,8 +9,8 @@ public class DoneCommand extends Command {
     private int index;
 
     @Override
-    public void parseArg(String args) {
-        this.index = Integer.valueOf(args.substring(5)) - 1;
+    public void parseLine(String line) {
+        this.index = Integer.valueOf(line.substring(5)) - 1;
     }
 
     @Override

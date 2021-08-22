@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class ListCommand extends Command {
     
     @Override
-    public void parseArg(String args) {}
+    public void parseLine(String line) {}
 
     @Override
     public void execute(LinkedList<Item> itemList) {

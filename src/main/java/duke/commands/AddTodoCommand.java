@@ -9,7 +9,7 @@ public class AddTodoCommand extends Command {
     private String content;
 
     @Override
-    public void parseArg(String line) {
+    public void parseLine(String line) {
         if (line.length() <= 5) {
             throw new DukeException("Argument cannot be empty.");
         } else {

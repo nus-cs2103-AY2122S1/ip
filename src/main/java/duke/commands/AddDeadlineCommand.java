@@ -10,7 +10,7 @@ public class AddDeadlineCommand extends Command {
     private String time;
 
     @Override
-    public void parseArg(String line) {
+    public void parseLine(String line) {
         int idx = line.indexOf("/by");
         if (idx == -1) {
             throw new DukeException("Please specify /by");

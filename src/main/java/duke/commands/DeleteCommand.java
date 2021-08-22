@@ -9,7 +9,7 @@ public class DeleteCommand extends Command {
     private int index;
 
     @Override
-    public void parseArg(String line) {
+    public void parseLine(String line) {
         this.index = Integer.valueOf(line.substring(7)) - 1;
     }
 
