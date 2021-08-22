@@ -1,26 +1,27 @@
 package item;
 
 import exception.BotException;
-import exception.InvalidCommandException;
 import exception.OutOfBoundException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * TaskList contains a list of tasks.
  */
 public class TaskList {
-    public List<Task> taskList;
+    private final List<Task> taskList;
 
     /**
-     * Constructor for a TaskList.
+     * Constructs a TaskList.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
     /**
-     * Add a task into the TaskList.
+     * Adds a task into the TaskList.
+     *
      * @param item The task to be added.
      * @return The response message after adding the item.
      */
@@ -32,7 +33,8 @@ public class TaskList {
     }
 
     /**
-     * Display the current list of tasks.
+     * Displays the current list of tasks.
+     *
      * @return The bullet point lists of current tasks.
      */
     public String display() {
@@ -44,7 +46,8 @@ public class TaskList {
     }
 
     /**
-     * Mark a specific task as completed.
+     * Marks a specific task as completed.
+     *
      * @param index The index of the task in the TaskList.
      * @return The response message after completing the task.
      * @throws OutOfBoundException if the index is out of valid range of TaskList.
@@ -57,7 +60,8 @@ public class TaskList {
     }
 
     /**
-     * Delete a task from current TaskList
+     * Deletes a task from current TaskList.
+     *
      * @param index The index of the task in the TaskList.
      * @return The response message after deleting the task.
      * @throws BotException if the index is out of valid range of TaskList.
@@ -87,6 +91,7 @@ public class TaskList {
 
     /**
      * Returns a string representing the TaskList.
+     *
      * @return The string representation of the TaskList in bullet points.
      */
     @Override

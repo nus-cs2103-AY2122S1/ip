@@ -5,14 +5,14 @@ package exception;
  */
 public class InvalidCommandException extends BotException {
     /**
-     * Create a default InvalidCommandException.
+     * Creates a default InvalidCommandException.
      */
     public InvalidCommandException() {
         super("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     /**
-     * Create a InvalidCommandException.
+     * Creates a InvalidCommandException.
      * @param errorMessage The customized error message.
      */
     public InvalidCommandException(String errorMessage) {

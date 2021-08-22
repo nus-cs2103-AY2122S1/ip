@@ -22,21 +22,22 @@ public abstract class RequestHandler {
     };
 
     /**
-     * Send an initialization message.
+     * Sends an initialization message.
      */
     public void initialize() {
         respond(greeting);
     }
 
     /**
-     * Send an exit message.
+     * Sends an exit message.
      */
     public void exit() {
         respond(byeMessage);
     }
 
     /**
-     * Decide the response to the requests.
+     * Decides the response to the requests.
+     *
      * @param command The action word at the start of request.
      * @param request The full request message from a line of input.
      * @throws BotException if the request is invalid.

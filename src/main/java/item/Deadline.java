@@ -1,13 +1,12 @@
 package item;
 
-import exception.BotException;
 import exception.EmptyCommandException;
 
 /**
  * Deadline is a type of Task which has a due time.
  */
 public class Deadline extends Task {
-    protected String by;
+    private String by;
 
     private Deadline(String description, String by) throws EmptyCommandException {
         super(description);
@@ -15,7 +14,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Create a Deadline.
+     * Creates a Deadline.
+     *
      * @param description The description of Deadline details.
      * @param by The due date of the Deadline.
      * @return The created Deadline
@@ -30,7 +30,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return the string representation of Deadline.
+     * Returns the string representation of Deadline.
+     *
      * @return The string format of Deadline, including status, description and due time.
      */
     @Override

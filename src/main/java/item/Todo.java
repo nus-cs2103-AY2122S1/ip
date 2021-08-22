@@ -1,6 +1,5 @@
 package item;
 
-import exception.BotException;
 import exception.EmptyCommandException;
 
 /**
@@ -12,7 +11,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Create a Todo
+     * Creates a Todo.
+     *
      * @param description The description of the Todo.
      * @return The created Todo item.
      * @throws EmptyCommandException if the description is empty.
@@ -26,7 +26,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Return the string representation of Task.
+     * Returns the string representation of Task.
+     *
      * @return The string representation of Task, including status and description.
      */
     @Override

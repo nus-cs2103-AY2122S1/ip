@@ -15,7 +15,8 @@ public enum Command {
     }
 
     /**
-     * Find the matching Command of a request.
+     * Finds the matching Command of a request.
+     *
      * @param request The request from raw input line.
      * @return The corresponding Command to a request.
      */

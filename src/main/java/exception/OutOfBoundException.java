@@ -5,7 +5,8 @@ package exception;
  */
 public class OutOfBoundException extends BotException {
     /**
-     * Create an OutOfBoundException.
+     * Creates an OutOfBoundException.
+     *
      * @param expected The expected range of values.
      * @param actual The actual value.
      */
@@ -14,7 +15,8 @@ public class OutOfBoundException extends BotException {
     }
 
     /**
-     * Create an OutOfBoundException.
+     * Creates an OutOfBoundException with customized error message.
+     *
      * @param errorMessage The customized error message.
      */
     public OutOfBoundException(String errorMessage) {

@@ -5,7 +5,8 @@ package exception;
  */
 public class BotException extends Exception {
     /**
-     * Create a BotException.
+     * Creates a BotException.
+     *
      * @param errorMessage The error message.
      */
     public BotException(String errorMessage) {
@@ -13,7 +14,8 @@ public class BotException extends Exception {
     }
 
     /**
-     * Get the message of the BotException
+     * Gets the message of the BotException.
+     *
      * @return The error message.
      */
     @Override

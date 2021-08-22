@@ -1,13 +1,12 @@
 package item;
 
-import exception.BotException;
 import exception.EmptyCommandException;
 
 /**
  * Event is a type of Task which happen at a specific timing.
  */
 public class Event extends Task {
-    protected String at;
+    private String at;
 
     private Event(String description, String at) throws EmptyCommandException {
         super(description);
@@ -15,7 +14,8 @@ public class Event extends Task {
     }
 
     /**
-     * Create an event.
+     * Creates an event.
+     *
      * @param description The description of Event details.
      * @param at The time when the Event happens.
      * @return The created Event.
@@ -30,7 +30,8 @@ public class Event extends Task {
     }
 
     /**
-     * Return the string representation of Event.
+     * Returns the string representation of Event.
+     *
      * @return The string representation of Event, including status, description and time.
      */
     @Override

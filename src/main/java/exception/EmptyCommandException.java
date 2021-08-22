@@ -5,7 +5,8 @@ package exception;
  */
 public class EmptyCommandException extends BotException {
     /**
-     * Create an EmptyCommandException.
+     * Creates an EmptyCommandException.
+     *
      * @param item The item where the description is empty.
      */
     public EmptyCommandException(String item) {

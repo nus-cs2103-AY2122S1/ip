@@ -1,17 +1,17 @@
 package item;
 
-import exception.BotException;
 import exception.EmptyCommandException;
 
 /**
  * Task contains items which can be done.
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
-     * Constructor for Task.
+     * Constructs a Task.
+     *
      * @param description The task description.
      * @throws EmptyCommandException if the description is empty.
      */
@@ -28,14 +28,15 @@ public class Task {
     }
 
     /**
-     * Mark the Task as Done.
+     * Marks the Task as Done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Return the string representation of Task.
+     * Returns the string representation of Task.
+     *
      * @return The string representation of Task, including status and description.
      */
     @Override

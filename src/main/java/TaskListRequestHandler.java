@@ -1,13 +1,17 @@
 import exception.BotException;
 import exception.EmptyCommandException;
 import exception.InvalidCommandException;
-import item.*;
+import item.Deadline;
+import item.Event;
+import item.TaskList;
+import item.Todo;
 
 public class TaskListRequestHandler extends RequestHandler{
-    private TaskList taskList;
+    private final TaskList taskList;
 
     /**
-     * Constructor for a TaskListRequestHandler
+     * Constructs a TaskListRequestHandler.
+     *
      * @param taskList The TaskList that the handler is responsible for.
      */
     public TaskListRequestHandler(TaskList taskList) {
@@ -16,7 +20,8 @@ public class TaskListRequestHandler extends RequestHandler{
     }
 
     /**
-     * Respond to the request/
+     * Responds to the request.
+     *
      * @param command The action word at the start of request.
      * @param request The full request message from a line of input.
      * @throws BotException if the request is invalid.
@@ -24,32 +29,32 @@ public class TaskListRequestHandler extends RequestHandler{
     @Override
     public void decideResponse(Command command, String request) throws BotException {
         switch (command) {
-            case LIST:
-                processList();
-                break;
-            case DONE:
-                processDone(request);
-                break;
-            case DELETE:
-                processDelete(request);
-                break;
-            case TODO:
-                processTodo(request);
-                break;
-            case DEADLINE:
-                processDeadline(request);
-                break;
-            case EVENT:
-                processEvent(request);
-                break;
-            default:
-                throw new InvalidCommandException();
+        case LIST:
+            processList();
+            break;
+        case DONE:
+            processDone(request);
+            break;
+        case DELETE:
+            processDelete(request);
+            break;
+        case TODO:
+            processTodo(request);
+            break;
+        case DEADLINE:
+            processDeadline(request);
+            break;
+        case EVENT:
+            processEvent(request);
+            break;
+        default:
+            throw new InvalidCommandException();
         }
 
     }
 
     /**
-     * Display the list of tasks.
+     * Displays the list of tasks.
      */
     private void processList() {
         super.respond(taskList.display());
@@ -57,6 +62,7 @@ public class TaskListRequestHandler extends RequestHandler{
 
     /**
      * Mark a task as Done.
+     *
      * @param request The full request message from a line of input.
      * @throws BotException if the request is invalid.
      */
@@ -70,7 +76,8 @@ public class TaskListRequestHandler extends RequestHandler{
     }
 
     /**
-     * Delete a task from the TaskList.
+     * Deletes a task from the TaskList.
+     *
      * @param request The full request message from a line of input.
      * @throws BotException if the request is invalid.
      */
@@ -84,7 +91,8 @@ public class TaskListRequestHandler extends RequestHandler{
     }
 
     /**
-     * Add a Todo to TaskList.
+     * Adds a Todo to TaskList.
+     *
      * @param request The full request message from a line of input.
      * @throws BotException if the request is invalid.
      */
@@ -94,7 +102,8 @@ public class TaskListRequestHandler extends RequestHandler{
     }
 
     /**
-     * Add a Deadline to TaskList.
+     * Adds a Deadline to TaskList.
+     *
      * @param request The full request message from a line of input.
      * @throws BotException if the request is invalid.
      */
@@ -112,7 +121,8 @@ public class TaskListRequestHandler extends RequestHandler{
     }
 
     /**
-     * Add an Event to TaskList.
+     * Adds an Event to TaskList.
+     *
      * @param request The full request message from a line of input.
      * @throws BotException if the request is invalid.
      */
