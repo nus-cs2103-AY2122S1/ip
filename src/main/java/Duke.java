@@ -33,7 +33,7 @@ public class Duke {
         return description;
     }
 
-    private static void addThenPrint(String[] command, ArrayList<Task> tasks, int numOfTask) {
+    private static void addThenPrint(String[] command, int numOfTask) {
         try {
             String[] descriptions = extractCommand(command);
             Task task = null;
@@ -92,7 +92,7 @@ public class Duke {
                 case EVENT:
                     // Fallthrough
                 case DEADLINE:
-                    addThenPrint(command, TASKS, numOfTask++);
+                    addThenPrint(command, numOfTask++);
                     break;
                 default:
                     throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
