@@ -28,6 +28,8 @@ public class PixMissingInfoException extends PixException {
             return "You need to input a task number!";
         case "delete":
             return "The task cannot be found. Which task do you want deleted?";
+        case "find":
+            return "Key in 1 word to search for! O-N-E!";
         default:
             return "There is insufficient information!";
         }
