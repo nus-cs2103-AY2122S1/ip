@@ -4,19 +4,17 @@ What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[D][ ] level9 test (by: 12-Mar-2020 18:00)
-2.[T][ ] testing 123
-3.[E][ ] test123 (at: 23-Dec-2020 15:00 to 24-Dec-2020 12:00)
+
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
   [D][ ] level9 test (by: 12-Mar-2020 18:00)
-Now you have 4 tasks in the list.
+Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
   [T][ ] testing 123
-Now you have 5 tasks in the list.
+Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
@@ -32,41 +30,36 @@ ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
   [D][X] level9 test (by: 12-Mar-2020 18:00)
-Now you have 4 tasks in the list.
+Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
   [E][ ] test123 (at: 23-Dec-2020 15:00 to 24-Dec-2020 12:00)
-Now you have 5 tasks in the list.
+Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
   [E][ ] test123 (at: 23-Dec-2020 15:00 to 24-Dec-2020 12:00)
-Now you have 4 tasks in the list.
+Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Hi, you are missing the description for the event!
 ____________________________________________________________
 ____________________________________________________________
-Hi, 5 is not a valid index. List has currently 4 items.
+Hi, 5 is not a valid index. List has currently 1 items.
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
   [T][X] testing 123
-Now you have 3 tasks in the list.
+Now you have 0 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Hi, 4 is not a valid index. List has currently 3 items.
+Hi, 4 is not a valid index. List has currently 0 items.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[D][ ] level9 test (by: 12-Mar-2020 18:00)
-2.[T][ ] testing 123
-3.[E][ ] test123 (at: 23-Dec-2020 15:00 to 24-Dec-2020 12:00)
+
 ____________________________________________________________
-1.[D][ ] level9 test (by: 12-Mar-2020 18:00)
-2.[T][ ] testing 123
-3.[E][ ] test123 (at: 23-Dec-2020 15:00 to 24-Dec-2020 12:00)
 ____________________________________________________________
 Bye. Hope to see you again soon!
 ____________________________________________________________

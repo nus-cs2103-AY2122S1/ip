@@ -31,7 +31,7 @@ public class Store {
      * @throws FileWritingException throws an FileWritingException if error encountered during
      *                              loading of tasks
      */
-    public Tasklist loadTaskFromStore() throws FileWritingException {
+    public Tasklist load() throws FileWritingException {
         Tasklist result;
         try {
 
@@ -74,7 +74,6 @@ public class Store {
             BufferedWriter bw = new BufferedWriter(fw);
             String fileString = "";
             fileString += list.toString();
-            System.out.println(fileString);
             bw.write(fileString);
             bw.newLine();
             bw.flush();

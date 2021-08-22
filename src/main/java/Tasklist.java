@@ -88,8 +88,6 @@ public class Tasklist {
             return result;
         }
 
-
-
     }
 
     /**
@@ -112,11 +110,10 @@ public class Tasklist {
      * @throws InvalidCommandException throws an invalid command exception in the event no
      *                                 command string present
      */
-    public String addTask(String description, Command task) throws DukeException,InvalidCommandException {
+    public String addTask(String description, String task) throws DukeException,InvalidCommandException {
 
         Task newTask;
-        String taskType = Command.changeToString(task);
-        switch(taskType) {
+        switch(task) {
             case "todo":
                 newTask = new ToDo(description);
                 break;
