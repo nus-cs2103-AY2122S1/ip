@@ -1,6 +1,7 @@
 package abyss;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Storage {
@@ -34,13 +35,13 @@ public class Storage {
                 }
                 break;
             case "D":
-                task = new Deadline(entry[2], entry[3]);
+                task = new Deadline(entry[2],  LocalDate.parse(entry[3]));
                 if (isDone.equals("1")) {
                     task.markAsDone();
                 }
                 break;
             case "E":
-                task = new Event(entry[2], entry[3]);
+                task = new Event(entry[2],  LocalDate.parse(entry[3]));
                 if (isDone.equals("1")) {
                     task.markAsDone();
                 }
