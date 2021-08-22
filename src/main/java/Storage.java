@@ -20,12 +20,12 @@ public class Storage {
         }
     }
 
-    public void readTasks() {
+    public void readTasks(TaskList taskList) {
         File taskFile = new File(taskFilePath);
         try {
             Scanner scanner = new Scanner(taskFile);
             while (scanner.hasNextLine()) {
-                Parser.handleCommand(scanner.nextLine(), true);
+                Parser.handleCommand(scanner.nextLine(), taskList, true);
             }
         } catch (FileNotFoundException exception) {
             createTaskFile();
@@ -34,11 +34,10 @@ public class Storage {
         }
     }
 
-    // TODO: call writeTasks when tasks changes
-    public void writeTasks() {
+    public void writeTasks(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(taskFilePath);
-            String[] commands = TaskList.toCommands();
+            String[] commands = taskList.toCommands();
             for (String command : commands) {
                 fw.write(command);
             }

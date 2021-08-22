@@ -17,38 +17,38 @@ public class Parser {
         }
     }
 
-    public static void handleCommand(String command) throws IrisException {
-        handleCommand(command, false);
+    public static void handleCommand(String command, TaskList taskList) throws IrisException {
+        handleCommand(command, taskList, false);
     }
 
-    public static void handleCommand(String command, boolean silent) throws IrisException {
+    public static void handleCommand(String command, TaskList taskList, boolean silent) throws IrisException {
         if (command.equals("list")) {
-            Ui.listTasks();
+            Ui.listTasks(taskList);
         } else if (command.startsWith("done")) {
-            Task task = TaskList.done(parseInt(getMetadata(command)));
+            Task task = taskList.done(parseInt(getMetadata(command)));
             if (!silent) Ui.say(String.format("Good job! I've marked this task as done: %s", task));
         } else if (command.startsWith("delete")) {
-            Task task = TaskList.delete(parseInt(getMetadata(command)));
+            Task task = taskList.delete(parseInt(getMetadata(command)));
             if (!silent) {
                 Ui.say("Noted. I've removed this task:");
                 Ui.say(task.toString(), false);
-                int count = TaskList.getCount();
+                int count = taskList.getCount();
                 Ui.say(String.format("Now you have %d %s in the list.",
                         count, count == 1 ? "task" : "tasks"), false);
             }
         } else if (command.startsWith("todo")) {
-            TaskList.addTodo(getMetadata(command));
-            if (!silent) Ui.sayTaskAdded();
+            taskList.addTodo(getMetadata(command));
+            if (!silent) Ui.sayTaskAdded(taskList);
         } else if (command.startsWith("deadline")) {
             String[] splitted = getMetadata(command).split(" /by ");
             if (splitted.length != 2) throw new IrisException("deadline should have 2 arguments: a name and a time");
-            TaskList.addDeadline(splitted[0], splitted[1]);
-            if (!silent) Ui.sayTaskAdded();
+            taskList.addDeadline(splitted[0], splitted[1]);
+            if (!silent) Ui.sayTaskAdded(taskList);
         } else if (command.startsWith("event")) {
             String[] splitted = getMetadata(command).split(" /at ");
             if (splitted.length != 2) throw new IrisException("event should have 2 arguments: a name and a time");
-            TaskList.addEvent(splitted[0], splitted[1]);
-            if (!silent) Ui.sayTaskAdded();
+            taskList.addEvent(splitted[0], splitted[1]);
+            if (!silent) Ui.sayTaskAdded(taskList);
         } else {
             throw new IrisException("I'm sorry, but I don't know what that means.");
         }

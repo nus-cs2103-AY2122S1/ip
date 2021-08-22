@@ -15,17 +15,17 @@ public class Ui {
         say(exception.getMessage());
     }
 
-    public static void sayTaskAdded() {
-        int count = TaskList.getCount();
+    public static void sayTaskAdded(TaskList taskList) {
+        int count = taskList.getCount();
         Ui.say("Got it. I've added this task:");
-        Ui.say(TaskList.get(count - 1).toString(), false);
+        Ui.say(taskList.get(count - 1).toString(), false);
         Ui.say(String.format("Now you have %d %s in the list.",
                 count, count == 1 ? "task" : "tasks"), false);
     }
 
-    public static void listTasks() {
-        for (int i = 0; i < TaskList.getCount(); i++) {
-            Ui.say(String.format("%d. %s", i + 1, TaskList.get(i)), i == 0);
+    public static void listTasks(TaskList taskList) {
+        for (int i = 0; i < taskList.getCount(); i++) {
+            Ui.say(String.format("%d. %s", i + 1, taskList.get(i)), i == 0);
         }
     }
 

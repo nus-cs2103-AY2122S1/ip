@@ -2,10 +2,11 @@ public class Duke {
     private static final String ENDING_COMMAND = "bye";
 
     private Storage storage;
+    private TaskList taskList = new TaskList();
 
     public Duke(String filePath) {
         storage = new Storage(filePath);
-        storage.readTasks();
+        storage.readTasks(taskList);
     }
 
     public void run() {
@@ -13,11 +14,11 @@ public class Duke {
         String command = Ui.prompt();
         while (!command.equals(ENDING_COMMAND)) {
             try {
-                Parser.handleCommand(command);
+                Parser.handleCommand(command, taskList);
             } catch (IrisException exception) {
                 Ui.sayError(exception);
             }
-            storage.writeTasks();
+            storage.writeTasks(taskList);
             command = Ui.prompt();
         }
 
