@@ -114,8 +114,9 @@ public class Duke {
                         System.out.println("Not an acceptable format. Please try again");
                     }
                 }
-            }
-            else {
+            } else if (input.equals("format")) {
+                System.out.println("Current format " + getFormat());
+            } else {
                 System.out.println("No specific command specified. Please try again");
             }
             input = s.next();
