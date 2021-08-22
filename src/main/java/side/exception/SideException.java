@@ -12,6 +12,7 @@ package side.exception;
  */
 
 public class SideException extends RuntimeException {
+
     String message;
 
     public SideException(String message) {

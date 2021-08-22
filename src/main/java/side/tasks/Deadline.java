@@ -16,6 +16,7 @@ import side.util.DateTime;
  */
 
 public class Deadline extends Task {
+
     private DateTime datetime;
 
     public Deadline(String description, String datetimeInput) {

@@ -19,6 +19,7 @@ import side.tasks.Deadline;
  */
 
 public class TaskList {
+
     private ArrayList<Task> tasks;
     private int taskLabel;
     private Storage storage;

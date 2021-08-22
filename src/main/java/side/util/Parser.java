@@ -1,6 +1,7 @@
 package side.util;
 
 public class Parser {
+
     public Parser() {}
 
     public enum COMMAND { TODO, DEADLINE, EVENT, LIST, DONE, DELETE, INVALID }

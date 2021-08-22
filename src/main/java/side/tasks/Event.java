@@ -16,6 +16,7 @@ import side.util.DateTime;
  */
 
 public class Event extends Task {
+
     private DateTime startDatetime, endDatetime;
 
     public Event(String description, String startInput, String endInput) {
