@@ -9,7 +9,13 @@ import java.util.Scanner;
 
 public class Storage {
 
-    public static void save(ArrayList<Task> savedList, String directory) throws IOException {
+    private Parser parser;
+
+    public Storage() {
+        this.parser = new Parser();
+    }
+
+    public void save(ArrayList<Task> savedList, String directory) throws IOException {
         String filePath = directory + "/Side.txt";
         File file = new File(filePath);
         File dataDirectory = new File(directory);
@@ -43,7 +49,7 @@ public class Storage {
         writer.close();
     }
 
-    public static ArrayList<Task> retrieve(String directory) throws FileNotFoundException {
+    public ArrayList<Task> retrieve(String directory) throws FileNotFoundException {
         String filePath = directory + "/Side.txt";
         File file = new File(filePath);
         ArrayList<Task> savedList = new ArrayList<>();
@@ -63,8 +69,8 @@ public class Storage {
                     savedList.add(new Deadline(taskDescription, taskTime, isTaskDone));
                     break;
                 case "E ":
-                    if (Parser.findEventDatetime(taskTime) != null) {
-                        savedList.add(new Event(taskDescription, Parser.findEventDatetime(taskTime), isTaskDone));
+                    if (this.parser.findEventDatetime(taskTime) != null) {
+                        savedList.add(new Event(taskDescription, this.parser.findEventDatetime(taskTime), isTaskDone));
                     }
                     break;
                 case "T ":

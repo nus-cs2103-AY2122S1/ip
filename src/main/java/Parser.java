@@ -1,4 +1,8 @@
 public class Parser {
+    public Parser() {}
+
+    protected enum COMMAND { TODO, DEADLINE, EVENT, LIST, DONE, DELETE, INVALID }
+
     private static String findDatetime(String input, String argument) {
         int argumentIndex = input.lastIndexOf(argument);
         String output = input.substring(argumentIndex + argument.length());
@@ -10,11 +14,11 @@ public class Parser {
         return output.stripLeading().stripTrailing();
     }
 
-    public static String findDeadlineDatetime(String input) {
+    public String findDeadlineDatetime(String input) {
         return findDatetime(input, "/by");
     }
 
-    public static String[] findEventDatetime(String input) {
+    public String[] findEventDatetime(String input) {
         String output = input;
 
         if (input.contains("/at")) {
@@ -32,7 +36,7 @@ public class Parser {
         return null;
     }
 
-    public static String findDescription(String input) {
+    public String findDescription(String input) {
         String cmd = input.split("\\s+", 2)[1];
 
         if (cmd.contains("/by"))
@@ -41,5 +45,45 @@ public class Parser {
             return cmd.split("/at")[0];
         else
             return null;
+    }
+
+    /**
+     * Helper method to parse string and isolate index passed in by user
+     *
+     * @param s String to be parsed.
+     * @return Integer from parsing String s.
+     */
+    public Integer tryIntParsing(String s) {
+        try {
+            int parsedInt = Integer.parseInt(s);
+            return parsedInt;
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    /**
+     * Helper to convert parsed command to COMMAND constant.
+     *
+     * @param command String representing command input.
+     * @return COMMAND corresponding to String input.
+     */
+    public static COMMAND toCommand(String command) {
+        switch (command) {
+        case "todo":
+            return COMMAND.TODO;
+        case "deadline":
+            return COMMAND.DEADLINE;
+        case "event":
+            return COMMAND.EVENT;
+        case "list":
+            return COMMAND.LIST;
+        case "done":
+            return COMMAND.DONE;
+        case "delete":
+            return COMMAND.DELETE;
+        default:
+            return COMMAND.INVALID;
+        }
     }
 }

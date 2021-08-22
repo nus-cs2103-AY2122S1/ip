@@ -25,8 +25,12 @@ public class DateTime {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        this.localDate = LocalDate.parse(date, dateFormatter);
-        this.localTime = LocalTime.parse(time, timeFormatter);
+        try {
+            this.localDate = LocalDate.parse(date, dateFormatter);
+            this.localTime = LocalTime.parse(time, timeFormatter);
+        } catch (DateTimeParseException e) {
+            throw new WrongDatetimeException();
+        }
         this.localDateTime = localDate.atTime(localTime);
     }
 

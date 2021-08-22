@@ -15,16 +15,18 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasks;
     private int taskLabel;
+    private Storage storage;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
         this.taskLabel = 0;
+        this.storage = new Storage();
     }
 
     public String retrieve()  {
         try {
             String filepath = "./data";
-            this.tasks = Storage.retrieve(filepath);
+            this.tasks = this.storage.retrieve(filepath);
             this.taskLabel = this.tasks.size();
             return "Here's your history...\n" + this.listToString();
         } catch (FileNotFoundException e) {
@@ -35,7 +37,7 @@ public class TaskList {
     public void save() {
         try {
             String filepath = "./data";
-            Storage.save(this.tasks, filepath);
+            this.storage.save(this.tasks, filepath);
         } catch (IOException e) {
             System.out.println("Problem");
         }
