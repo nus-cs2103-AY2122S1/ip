@@ -7,6 +7,10 @@ public class TaskList {
         this.taskList = new ArrayList<Task>();
     }
 
+    public TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList; 
+    }
+    
     public void add(Task newTask) {
         taskList.add(newTask);
         System.out.println("Just added:\n" + newTask.toString());
@@ -27,6 +31,7 @@ public class TaskList {
                 case "done":
                     Task toMark = taskList.get(index);
                     toMark.markAsDone();
+                    System.out.println("Nice! I've marked this task as done:\n" + toMark.toString());
                     break;
                 case "delete":
                     System.out.println("Poof!\n" + taskList.get(index).toString() + "\nis gone");
@@ -38,6 +43,15 @@ public class TaskList {
                     break;
             }
         }
+    }
+    
+    //list to data
+    public String convertToData() {
+        StringBuilder data = new StringBuilder();
+        for (Task task : taskList) {
+            data.append(task.toData() + "\n"); 
+        }
+        return data.toString(); 
     }
 
     @Override

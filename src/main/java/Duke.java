@@ -1,9 +1,8 @@
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    private static final TaskList list = new TaskList();
+    private static TaskList list = new TaskList();
+    private static final FileManager fm = new FileManager(); 
 
     private static String[] parseInput(String[] arr) throws DukeException {
         String command = arr[0];
@@ -56,6 +55,7 @@ public class Duke {
             default:
                 break;
         }
+        fm.writeToFile(list);
     }
 
     public static void main(String[] args) {
@@ -66,6 +66,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        
+        list = fm.getListFromFile(); 
         Scanner sc = new Scanner(System.in);
         while (true) {
             String input = sc.nextLine().strip();
@@ -79,9 +81,9 @@ public class Duke {
                 //print list of tasks
                 System.out.println(list.toString());
             } else if (isEditingTask(input)) {
-                //mark task as done
                 try {
                     list.editTask(split);
+                    fm.writeToFile(list);
                 } catch (DukeException e) {
                     e.print();
                 }
