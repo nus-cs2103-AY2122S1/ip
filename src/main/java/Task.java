@@ -23,7 +23,9 @@ abstract public class Task {
         return this.description;
     }
 
-    abstract public String getTaskIcon();
+    public boolean getIsDone() {
+        return this.isDone;
+    }
 
     public String getStatusIcon() {
         return this.isDone ? "X" : " ";
