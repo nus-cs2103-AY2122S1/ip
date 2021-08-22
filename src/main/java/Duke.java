@@ -7,7 +7,7 @@ import java.util.Scanner;
  * 'delete' and 'bye'
  */
 public class Duke {
-    private static String format = "dd-MM-yyyy";
+    private static String format;
     public static void main(String[] args) {
         start();
     }
