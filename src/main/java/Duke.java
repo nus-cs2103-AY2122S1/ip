@@ -1,7 +1,5 @@
 import java.util.Scanner;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,41 +8,39 @@ import java.io.IOException;
 
 public class Duke {
     private final ArrayList<Task> arrList;
-    private final String filePath;
-    private final File data;
+    private final Storage storage;
 
     public Duke(String filePath) {
         this.arrList = new ArrayList<Task>();
-        this.filePath = filePath;
-        this.data = new File(filePath);
+        this.storage = new Storage(filePath);
     }
 
     private void printMessage(String message) {
-        System.out.println(STATICS.INDENTED_HORIZONTAL_LINE);
-        System.out.println(STATICS.INDENT + message);
-        System.out.println(STATICS.INDENTED_HORIZONTAL_LINE + "\n");
+        System.out.println(Ui.INDENTED_HORIZONTAL_LINE);
+        System.out.println(Ui.INDENT + message);
+        System.out.println(Ui.INDENTED_HORIZONTAL_LINE + "\n");
     }
 
     private void printIntro() {
-        System.out.println(STATICS.logo);
-        printMessage(STATICS.INTRODUCTION);
+        System.out.println(Ui.logo);
+        printMessage(Ui.INTRODUCTION);
     }
 
     private void printBye() {
-        printMessage(STATICS.BYE_MESSAGE);
+        printMessage(Ui.BYE_MESSAGE);
     }
 
     private void printList() {
         if (arrList.size() == 0) {
-            printMessage(STATICS.NO_TASK_MESSAGE);
+            printMessage(Ui.NO_TASK_MESSAGE);
             return;
         }
-        System.out.println(STATICS.INDENTED_HORIZONTAL_LINE);
-        System.out.println(STATICS.LIST_MESSAGE);
+        System.out.println(Ui.INDENTED_HORIZONTAL_LINE);
+        System.out.println(Ui.LIST_MESSAGE);
         for (int i = 0; i < arrList.size(); i++) {
-            System.out.println(STATICS.INDENT + (i + 1) + ". " + arrList.get(i).toString());
+            System.out.println(Ui.INDENT + (i + 1) + ". " + arrList.get(i).toString());
         }
-        System.out.println(STATICS.INDENTED_HORIZONTAL_LINE + "\n");
+        System.out.println(Ui.INDENTED_HORIZONTAL_LINE + "\n");
     }
 
     private void doneItem(String number) {
@@ -53,122 +49,21 @@ public class Duke {
         this.arrList.set(index, curr.markAsDone());
         curr = arrList.get(index);
 
-        this.printMessage(STATICS.DONE_MESSAGE + "\n" + STATICS.INDENT + "  " + curr.toString());
+        this.printMessage(Ui.DONE_MESSAGE + "\n" + Ui.INDENT + "  " + curr.toString());
     }
 
     private void addTask(Task task) throws IOException {
         arrList.add(task);
-        this.printMessage("Got it. I've added this task:\n" + STATICS.INDENT + "  " + task.toString() + "\n"
-                + STATICS.INDENT + "Now you have " + this.arrList.size() + " tasks in the list.");
+        this.printMessage("Got it. I've added this task:\n" + Ui.INDENT + "  " + task.toString() + "\n" + Ui.INDENT
+                + "Now you have " + this.arrList.size() + " tasks in the list.");
     }
 
     private void deleteItem(String number) {
         int index = Integer.parseInt(number) - 1;
         Task task = arrList.get(index);
         this.arrList.remove(index);
-        this.printMessage("Noted. I've removed this task:\n" + STATICS.INDENT + "  " + task.toString() + "\n"
-                + STATICS.INDENT + "Now you have " + this.arrList.size() + " tasks in the list.");
-    }
-
-    private void loadData() throws FileNotFoundException {
-        String currLine;
-        String type;
-        String descriptions;
-        String[] stringArr;
-        String dateTimeLocation;
-        boolean isDone;
-
-        Scanner sc = new Scanner(data);
-        while (sc.hasNext()) {
-            currLine = sc.nextLine();
-            stringArr = currLine.replace("|", "/").split("/");
-            type = currLine.split("")[0];
-            isDone = false;
-            switch (type) {
-                case "T":
-                    descriptions = stringArr[2];
-                    ToDos todos;
-                    if (stringArr[1].contains("1")) {
-                        isDone = true;
-                    }
-                    todos = new ToDos(descriptions, isDone);
-                    this.arrList.add(todos);
-                    break;
-
-                case "D":
-                    descriptions = stringArr[2];
-                    dateTimeLocation = stringArr[3];
-                    Deadline deadline;
-                    if (stringArr[1].contains("1")) {
-                        isDone = true;
-                    }
-                    deadline = new Deadline(descriptions, dateTimeLocation, isDone);
-                    this.arrList.add(deadline);
-                    break;
-
-                case "E":
-                    descriptions = stringArr[2];
-                    dateTimeLocation = stringArr[3];
-                    Events event;
-                    if (stringArr[1].contains("1")) {
-                        isDone = true;
-                    }
-                    event = new Events(descriptions, dateTimeLocation, isDone);
-                    this.arrList.add(event);
-                    break;
-
-                default:
-                    break;
-            }
-        }
-        sc.close();
-    }
-
-    private void appendToData(String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(this.data, true);
-        fw.append(textToAppend + "\n");
-        fw.close();
-    }
-
-    private void updateDone(String number) throws FileNotFoundException, IOException {
-        int index = Integer.parseInt(number);
-        int count = 0;
-        String currLine;
-        String finalAppend = "";
-        Scanner sc = new Scanner(this.data);
-        while (sc.hasNextLine()) {
-            currLine = sc.nextLine();
-            count++;
-            if (count != index) {
-                finalAppend += currLine + "\n";
-            } else {
-                currLine = currLine.replace("| 0 |", "| 1 |");
-                finalAppend += currLine + "\n";
-            }
-        }
-        FileWriter fw = new FileWriter(this.data, false);
-        fw.append(finalAppend);
-        fw.close();
-        sc.close();
-    }
-
-    private void deleteTaskFromData(String number) throws FileNotFoundException, IOException {
-        int index = Integer.parseInt(number);
-        int count = 0;
-        String currLine;
-        String finalAppend = "";
-        Scanner sc = new Scanner(this.data);
-        while (sc.hasNextLine()) {
-            currLine = sc.nextLine();
-            count++;
-            if (count != index) {
-                finalAppend += currLine + "\n";
-            }
-        }
-        FileWriter fw = new FileWriter(this.data, false);
-        fw.append(finalAppend);
-        fw.close();
-        sc.close();
+        this.printMessage("Noted. I've removed this task:\n" + Ui.INDENT + "  " + task.toString() + "\n" + Ui.INDENT
+                + "Now you have " + this.arrList.size() + " tasks in the list.");
     }
 
     private String dateTimeFormatter(String unformattedDate) {
@@ -195,7 +90,10 @@ public class Duke {
         String onlyDescription = "";
         Scanner sc = new Scanner(System.in);
         String inputToStorage;
-        this.loadData();
+        ArrayList<Task> savedTasks = storage.loadData();
+        savedTasks.forEach(x -> {
+            this.arrList.add(x);
+        });
 
         this.printIntro();
         while (true) {
@@ -217,7 +115,7 @@ public class Duke {
 
                     case "done":
                         this.doneItem(userInput.split(" ")[1]);
-                        this.updateDone(userInput.split(" ")[1]);
+                        storage.updateDone(userInput.split(" ")[1]);
                         break;
 
                     case "todo":
@@ -225,7 +123,7 @@ public class Duke {
                         ToDos todos = new ToDos(descriptions);
                         this.addTask(todos);
                         inputToStorage = todos.getSymbol() + " | 0 | " + todos.getDescription();
-                        this.appendToData(inputToStorage);
+                        storage.appendToData(inputToStorage);
                         break;
 
                     case "deadline":
@@ -237,7 +135,7 @@ public class Duke {
                         this.addTask(deadline);
                         inputToStorage = deadline.getSymbol() + " | 0 | " + deadline.getDescription() + "|"
                                 + deadline.getBy();
-                        this.appendToData(inputToStorage);
+                        storage.appendToData(inputToStorage);
                         break;
 
                     case "event":
@@ -248,24 +146,24 @@ public class Duke {
                         this.addTask(event);
                         inputToStorage = event.getSymbol() + " | 0 | " + event.getDescription() + "|"
                                 + event.getDayTime();
-                        this.appendToData(inputToStorage);
+                        storage.appendToData(inputToStorage);
                         break;
 
                     case "delete":
                         this.deleteItem(userInput.split(" ")[1]);
-                        this.deleteTaskFromData(userInput.split(" ")[1]);
+                        storage.deleteTaskFromData(userInput.split(" ")[1]);
                         break;
 
                     case "":
                         break;
 
                     default:
-                        this.printMessage(STATICS.ERROR_MSG_UNKOWN_MSG);
+                        this.printMessage(Ui.ERROR_MSG_UNKOWN_MSG);
                         break;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println(e);
-                this.printMessage(STATICS.ERROR_MSG_EMPTY_DESCRIPTION);
+                this.printMessage(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
                 continue;
             }
 
