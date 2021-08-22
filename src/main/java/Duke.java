@@ -81,9 +81,9 @@ public class Duke {
                 //print list of tasks
                 System.out.println(list.toString());
             } else if (isEditingTask(input)) {
-                //mark task as done
                 try {
                     list.editTask(split);
+                    fm.writeToFile(list);
                 } catch (DukeException e) {
                     e.print();
                 }

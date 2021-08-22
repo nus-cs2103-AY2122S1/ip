@@ -31,6 +31,7 @@ public class TaskList {
                 case "done":
                     Task toMark = taskList.get(index);
                     toMark.markAsDone();
+                    System.out.println("Nice! I've marked this task as done:\n" + toMark.toString());
                     break;
                 case "delete":
                     System.out.println("Poof!\n" + taskList.get(index).toString() + "\nis gone");
