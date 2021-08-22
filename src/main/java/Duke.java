@@ -1,5 +1,12 @@
+import javax.imageio.IIOException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.stream.StreamSupport;
 
 public class Duke {
     /** The data structure to store all the tasks. **/
@@ -260,6 +267,86 @@ public class Duke {
         }
     }
 
+    public void loadTaskList() throws FileNotFoundException, IOException {
+        File f = new File("data/taskList.txt");
+        /** If folder data does not exist, mkdir. **/
+        if (f.getParentFile().exists() == false) {
+            f.getParentFile().mkdir();
+        }
+        /** If file taskList.txt does not exist, create it. **/
+        if (f.exists() == false) {
+            f.createNewFile();
+        }
+
+        /** When the file is empty, do not load anything. **/
+        Scanner sc = new Scanner(f);
+        if (sc.hasNext() == false) {
+            return;
+        }
+
+        int n = sc.nextInt();
+        System.out.println("total number of tasks loaded from file = " + n);
+
+        for (int i = 0; i < n; i++) {
+            int type = sc.nextInt();
+            int isDone = sc.nextInt();
+            sc.nextLine();
+            String taskName = sc.nextLine();
+            String time = sc.nextLine();
+
+            System.out.println(String.format("[%d %d [%s] [%s]]", type, isDone, taskName, time));
+            Task newTask;
+            if (type == 1) {
+                newTask = new Todo(taskName);
+            } else if (type == 2) {
+                newTask = new Deadline(taskName, time);
+            } else {
+                newTask = new Event(taskName, time);
+            }
+
+            if (isDone == 1) {
+                newTask.markAsDone();
+            }
+
+            tasks.add(newTask);
+        }
+    }
+
+    public void saveTaskList() throws FileNotFoundException, IOException {
+        FileWriter fw = new FileWriter("data/taskList.txt");
+        int n = tasks.size();
+        fw.write(String.format("%d\n", n));
+
+        for (int i = 0; i < n; i++) {
+            Task currentTask = tasks.get(i);
+            if (currentTask.getTypeIcon() == "T") {
+                fw.write(String.format("%d ", 1));
+            } else if (currentTask.getTypeIcon() == "D") {
+                fw.write(String.format("%d ", 2));
+            } else {
+                fw.write(String.format("%d ", 3));
+            }
+
+            fw.write(currentTask.isDone ? "1\n" : "0\n");
+
+            fw.write(currentTask.description + "\n");
+
+            if (currentTask instanceof Deadline) {
+                Deadline d = (Deadline) currentTask;
+                fw.write(d.byTime + "\n");
+            } else if (currentTask instanceof Event) {
+                Event e = (Event) currentTask;
+                fw.write(e.atTime + "\n");
+            } else {
+                fw.write("noSpecificTime\n");
+            }
+
+            fw.write("\n");
+        }
+
+        fw.close();
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -269,10 +356,29 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         Duke chatBot = new Duke();
         chatBot.greet();
+
+        try {
+            chatBot.loadTaskList();
+        } catch (FileNotFoundException e) {
+            System.out.println("Sorry. Cannot load task list from taskList.txt");
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Sorry. The format of taskList.txt is incorrect");
+        }
+
         try {
             chatBot.chat();
         } catch (taskNumberOutOfBoundException e) {
             chatBot.printMessage(new String[] {e.toString()});
+        }
+
+        try {
+            chatBot.saveTaskList();
+        } catch (FileNotFoundException e) {
+            System.out.println("Sorry. Cannot find the file taskList.txt");
+        } catch (IOException e) {
+            System.out.println("Sorry. Cannot write to file taskList.txt");
+            System.out.println(e.getMessage());
         }
     }
 }

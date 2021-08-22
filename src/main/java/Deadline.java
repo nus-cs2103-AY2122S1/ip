@@ -1,6 +1,6 @@
 public class Deadline extends Task{
     /** A String indicates the latest completion time of the task. **/
-    private String byTime;
+    protected String byTime;
 
     /**
      * A public constructor to initialize the Deadline.

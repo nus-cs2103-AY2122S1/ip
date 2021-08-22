@@ -1,6 +1,6 @@
 public class Event extends Task{
     /** A String indicates the time when the event happens. **/
-    private String atTime;
+    protected String atTime;
 
     /**
      * A public constructor to initialize the Deadline.
