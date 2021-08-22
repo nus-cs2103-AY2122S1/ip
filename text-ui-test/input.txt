@@ -1,8 +1,8 @@
 list
 todo do homework
-deadline assignment /by next Monday
+deadline assignment /by 2021-12-01
 event dinner /at 6pm
-deadline submission /by 29/08/21-1pm
+deadline submission /by 2021-08-21
 event @something /at today
 done 1
 done 4
@@ -14,9 +14,10 @@ todo
 deadline
 deadline nowhitespace /by
 deadline whitespace /by
-deadline  /by tonight
+deadline something /by invalidDate
+deadline  /by 2021-08-21
 deadline some,comma /by sometime
-deadline something /at sometime
+deadline something /at 2021-08-21
 event
 event nowhitespace /at
 event whitespace /at

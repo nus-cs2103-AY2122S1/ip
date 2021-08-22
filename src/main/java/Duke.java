@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -138,9 +140,17 @@ public class Duke {
      * @throws InvalidFormatException
      */
     private void handleDeadline(String command) throws InvalidFormatException {
-        this.validateRegex(command, "^deadline .+ /by .+", "deadline {description} /by {time}");
+        this.validateRegex(command, "^deadline .+ /by .+", "deadline {description} /by {date}");
         String[] info = command.substring(8).split("/by");
-        Deadline newDeadline = new Deadline(info[0].trim(), info[1].trim());
+
+        LocalDate date;
+        try {
+            date = LocalDate.parse(info[1].trim());
+        } catch (DateTimeParseException e) {
+            throw new InvalidFormatException("Please ensure the date is in YYYY-MM-DD format!");
+        }
+
+        Deadline newDeadline = new Deadline(info[0].trim(), date);
         tasks.add(newDeadline);
         this.saveToFile();
         System.out.println(formatAddTaskString(newDeadline));
@@ -277,7 +287,13 @@ public class Duke {
                         newTask = new Todo(values[2], values[1].equals("1"));
                         break;
                     case "D":
-                        newTask = new Deadline(values[2], values[3], values[1].equals("1"));
+                        LocalDate date;
+                        try {
+                            date = LocalDate.parse(values[3]);
+                        } catch (DateTimeParseException e) {
+                            throw new InvalidFileFormatException();
+                        }
+                        newTask = new Deadline(values[2], date, values[1].equals("1"));
                         break;
                     case "E":
                         newTask = new Event(values[2], values[3], values[1].equals("1"));
