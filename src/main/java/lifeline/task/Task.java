@@ -5,14 +5,7 @@ package lifeline.task;
  */
 public class Task {
 
-    /**
-     * Name of task
-     */
     private String name;
-
-    /**
-     * Indicates whether the task has been completed
-     */
     private boolean isDone;
 
     /**

@@ -10,11 +10,11 @@ import lifeline.task.TaskList;
  */
 public class Ui {
 
-    /**
-     * Scanner object to read inputs from the user
-     */
     private Scanner sc;
 
+    /**
+     * Initialises the scanner object to read input from user
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }

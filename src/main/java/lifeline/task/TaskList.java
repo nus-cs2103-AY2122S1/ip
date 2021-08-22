@@ -9,9 +9,6 @@ import lifeline.exception.LifelineException;
  */
 public class TaskList {
 
-    /**
-     * ArrayList to store tasks
-     */
     private ArrayList<Task> taskList;
 
     /**
