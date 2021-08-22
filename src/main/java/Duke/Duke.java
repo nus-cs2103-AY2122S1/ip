@@ -1,19 +1,26 @@
+package Duke;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class DukeCommandManager {
+public class Duke {
 
     private final List<Task> taskList;
-    protected DukeCommandManager() {
+    public Duke() {
         this.taskList = new ArrayList<>();
     }
 
+    public boolean isExitCommand(String command) {
+        return (command.equals("bye") || command.equals("Bye") || command.equals("BYE"));
+    }
     /**
      * Process incoming command of Duke - one for all method
      * @param command Command entered by user in Duke
-     * @param commandType Type of command entered
      */
-    public void processCommand(String command, String commandType) {
+    public void processCommand(String command) {
+        String[] divide = command.split(" ", 2);
+        String commandType = divide[0];
+        String description = (divide.length < 2) ? "" : divide[1];
         try {
             switch (commandType) {
                 case "help":
@@ -23,31 +30,25 @@ public class DukeCommandManager {
                     respondList();
                     break;
                 case "done":
-                    respondDone(command);
+                    respondDone(description);
                     break;
                 case "todo":
-                    respondTask(command, Task.Type.TODO);
+                    respondTask(description, Task.Type.TODO);
                     break;
                 case "deadline":
-                    respondTask(command, Task.Type.DEADLINE);
+                    respondTask(description, Task.Type.DEADLINE);
                     break;
                 case "event":
-                    respondTask(command, Task.Type.EVENT);
+                    respondTask(description, Task.Type.EVENT);
                     break;
                 case "delete":
-                    respondDelete(command);
+                    respondDelete(description);
                     break;
                 default:
-                    respondWith("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    defaultResponse();
             }
         } catch (DukeException e) {
-            if (e.type == DukeException.TYPE.OUT_OF_BOUND) {
-                respondWith("☹ OOPS!!! Your task number is out of bound!\n" +
-                        "To use '" + commandType + "', please enter 'help' for instructions");
-            } else if (e.type == DukeException.TYPE.INCOMPLETE){
-                respondWith("☹ OOPS!!! Your description of '" + commandType + "' is incomplete!\n" +
-                        "To use '" + commandType + "', please enter 'help' for instructions");
-            }
+            respondWith(e.getMessage());
         } catch (NumberFormatException e) {
             respondWith("☹ OOPS!!! Your description of '" + commandType + "' is incorrect!\n" +
                     "To use '" + commandType + "', please enter 'help' for instructions");
@@ -109,10 +110,10 @@ public class DukeCommandManager {
     /**
      * Mark a task by its index as completed.
      * All tasks are marked as completed if entered 'done all'
-     * @param command Task command
+     * @param command Duke.Task command
      */
     private void respondDone(String command) throws DukeException {
-        command = command.substring(4).replaceAll("\\s+", "");
+        command = command.replaceAll("\\s+", "");
         if (command.equals("all")) {
             for (Task task : taskList) {
                 task.markAsCompleted();
@@ -134,11 +135,13 @@ public class DukeCommandManager {
     /**
      * Delete a task inside the list by its index.
      * All tasks are deleted if entered 'delete all'
-     * @param command Task command
+     * @param command Duke.Task command
      */
     public void respondDelete(String command) {
-        command = command.substring(6).replaceAll("\\s+", "");
-        if (command.equals("all")) {
+        command = command.replaceAll("\\s+", "");
+        if (command.equals("")) {
+            throw new DukeException("Error", DukeException.TYPE.INCOMPLETE);
+        } else if (command.equals("all")) {
             taskList.clear();
             respondWith("Noted. I've reset your list and remove all tasks");
         } else {
@@ -156,11 +159,11 @@ public class DukeCommandManager {
     /**
      * Adding a specified task to the list.
      * There are 3 types of task: TODO, DEADLINE, and EVENT
-     * @param command Task command
-     * @param type Task type
+     * @param command Duke.Task command
+     * @param type Duke.Task type
      */
     private void respondTask(String command, Task.Type type) {
-        command = command.split(" ", 2)[1].trim();
+        command = command.trim();
         if (command.equals("")) {
             throw new DukeException("Error", DukeException.TYPE.INCOMPLETE);
         } else {
@@ -171,6 +174,10 @@ public class DukeCommandManager {
             respondWith("Got it! I've added this task:\n" + newTask +
                     "\nNow you have " + taskList.size() + " tasks in the list");
         }
+    }
+
+    private void defaultResponse() {
+        throw new DukeException("", DukeException.TYPE.INVALID);
     }
     /**
      * Template of respond after each command-reply cycle
