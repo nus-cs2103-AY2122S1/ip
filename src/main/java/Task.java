@@ -1,5 +1,8 @@
 /**
- * a class that encapsulates a task
+ * Represents a task which can be marked done.
+ * 
+ * @author Gordon Yit
+ * @Since 23-08-21
  */
 
 public class Task {
@@ -7,41 +10,38 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * a constructor for Task class.
-     * initially sets isDone to false, meaning task is not done.
+     * Class constructor for Task class.
+     * Sets isDone to false, meaning task is not done.
+     * 
      * @param description the description of the task.
      */
-
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
     /**
-     * method that returns the status icon of the task.
-     * if task is done, returns "X" else returns " ".
-     * @return status icon of the task.
+     * Returns the status icon of the task.
+     * 
+     * @return "X" if task is done, else returns " ".
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
     /**
-     * method that mark task as done.
-     * sets isDone to true.
+     * Marks task as done.
      */
-
     public void markAsDone() {
         isDone = true;
     }
 
     /**
-     * method to print out the task,
-     * overrides toString in Object class.
-     * @return string format of the task, consisting of
-     * the status icon and task description.
+     * Prints out the task.
+     * 
+     * @return string format of the task, 
+     * consisting of the status icon and task description.
      */
-
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
