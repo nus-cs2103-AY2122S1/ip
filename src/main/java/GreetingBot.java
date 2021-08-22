@@ -14,6 +14,9 @@ import java.util.LinkedList;
 
 public class GreetingBot {
 
+    private Storage storage;
+    private TaskList tasks;
+
     /**
      * The list of tasks that belongs to the bot.
      */
@@ -30,261 +33,76 @@ public class GreetingBot {
      * Method that runs the main functions of the bot.
      *
      */
-    public void startBot() {
-        greet();
+    public void startBot(String filePath) {
+        Ui ui = new Ui();
+        ui.greet();
+        ui.instruct();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.loadData());
+        } catch (DukeException err) {
+            System.out.println(err.toString());
+        }
+
         store();
+
         exit();
+        ui.goodbye();
 
     }
 
 
-    /**
-     * Method that greets the user when bot is first run.
-     *
-     */
-    private void greet() {
-        String greetingMessage = "What's up! I'm Duke! What can I help you with?";
-        System.out.println(greetingMessage);
 
-    }
 
     /**
      * Method that reads input and decides what method to call to deal with the input.
      */
     private void store() {
-        loadData();
+        Parser parser = new Parser();
         Scanner inputScanner = new Scanner(System.in);
         while (true) {
             try {
                 String nextLine = inputScanner.nextLine();
-                if (nextLine.startsWith("list")) {
-                    list(myList);
-                } else if (nextLine.equals("bye")) {
+                int action = parser.parse(nextLine);
+                if (action == 0) {
+                    tasks.list();
+                } else if (action == 1) {
                     break;
-                } else if (nextLine.startsWith("done")) {
-                    setDone(nextLine);
-                } else if (nextLine.startsWith("delete")) {
-                    deleteTask(nextLine);
-                } else {
-                    newTask(nextLine);
+                } else if (action == 2) {
+                    tasks.setDone(nextLine);
+                } else if (action == 3) {
+                    tasks.deleteTask(nextLine);
+                } else if (action == 4) {
+                    tasks.newTodo(nextLine);
+                } else if (action == 5) {
+                    tasks.newDeadline(nextLine);
+                } else if (action == 6) {
+                    tasks.newEvent(nextLine);
                 }
-                    int totalTasks = myList.size();
-                    System.out.println("Now you have " + totalTasks + " tasks in the list. You're welcome!");
-                }
-            catch (DukeException ex) {
-                System.out.println(ex.toString());
+            } catch (DukeException err) {
+                System.out.println(err.toString());
                 continue;
             }
-        }
-    }
-
-    /**
-     * load data from list file in data folder.
-     */
-    @SuppressWarnings("unchecked")
-    private void loadData() {
-            // Create data folder if it does not exist.
-            File dataFolder = new File("./data/");
-            if (!dataFolder.exists()) {
-                dataFolder.mkdir();
-            }
-
-        try {
-            File dataFile = new File("./data/list.txt");
-            if (dataFile.createNewFile()) {
-                // If dataFile does not exist (has not been created before)
-                System.out.println("Seems like a new list has been created!");
-            } else {
-                // dataFile already has been created before
-                System.out.println("Let's load up your list!");
-                FileInputStream listIn = new FileInputStream("./data/list.txt");
-                ObjectInputStream in = new ObjectInputStream(listIn);
-                myList = (LinkedList<Task>) in.readObject();
-                listIn.close();
-                in.close();
-            }
-        } catch (IOException | ClassNotFoundException error) {
-            System.out.println(error.toString());
-            System.out.println("Something went wrong with loading a list up!");
-        }
-    }
-
-    /**
-     * Method that is called to set a task to done.
-     * @param nextLine
-     * @throws DukeException
-     */
-    private void setDone(String nextLine) throws DukeException {
-        String[] splitWords = nextLine.split(" ");
-        if (splitWords.length == 1 && splitWords[0].equals("done")) {
-            throw new DukeException("Dude I don't think you told me which task you're talking about!");
-        } else if (!splitWords[0].equals("done")) {
-            throw new DukeException("Dude, I don't understand your instructions!");
-        }
-        try {
-            int taskNumber = Integer.parseInt(splitWords[1]);
-            if (taskNumber > myList.size()) {
-                throw new DukeException("Dude I don't think you have a list THAT long!");
-            } else if (myList.get(taskNumber - 1).getDone()) {
-                throw new DukeException("This task is already done man!");
-            } else {
-                myList.get(taskNumber - 1).setDone(true);
-            }
-        }
-        catch (NumberFormatException ex) {
-            throw new DukeException("Woah, enter the task number properly..");
-        }
-    }
-
-    /**
-     * Method that is called to delete a task from the list.
-     * @param nextLine
-     * @throws DukeException
-     */
-    private void deleteTask(String nextLine) throws DukeException {
-        String[] splitWords = nextLine.split(" ");
-        if (splitWords.length == 1 && splitWords[0].equals("delete")) {
-            throw new DukeException("Dude I don't think you told me which task you're talking about!");
-        } else if (!splitWords[0].equals("delete")) {
-            throw new DukeException("Dude, I don't understand your instructions!");
-        }
-        try {
-            int taskNumber = Integer.parseInt(splitWords[1]);
-            if (taskNumber > myList.size()) {
-                throw new DukeException("Dude I don't think you have a list THAT long!");
-            } else {
-                String infoOfTask = myList.get(taskNumber - 1).toString();
-                myList.remove(taskNumber - 1);
-                System.out.println("Noted. I've removed this task:\n" + infoOfTask);
-            }
-        }
-        catch (NumberFormatException ex) {
-            throw new DukeException("Woah, enter the task number properly..");
+            tasks.getInfo();
         }
     }
 
 
-    /**
-     * method that is called to create a new Task.
-     * @param nextLine
-     * @throws DukeException
-     */
-    private void newTask(String nextLine) throws DukeException {
-        if (nextLine.startsWith("todo")) {
-            if (nextLine.replaceAll("\\s", "").length() == 4) {
-                throw new DukeException("Seems like your todo task was incomplete!");
-            } else {
-                String[] splitLine = nextLine.split("todo");
-                String title = splitLine[1];
-                Task nextTask = new Todo(title);
-                System.out.println("Got it. I've added this task:");
-                myList.add(nextTask);
-                System.out.println(nextTask.toString());
-            }
-        } else if (nextLine.startsWith("deadline")) {
-            if (nextLine.replaceAll("\\s", "").length() == 8) {
-                throw new DukeException("Seems like your deadline task was incomplete!");
-            } else {
-                String[] splitLine = nextLine.split("/by ");
-                String date = splitLine[1];
-                try {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                    LocalDateTime parsedDate = LocalDateTime.parse(date, formatter);
-                    String title = splitLine[0].split("deadline")[1];
-                    Task nextTask = new Deadline(title, parsedDate);
-                    System.out.println("Got it. I've added this task:");
-                    myList.add(nextTask);
-                    System.out.println(nextTask.toString());
-                } catch (DateTimeException err) {
-                    System.out.println("I think there's a problem with your input! Enter your task in this format! \"yyyy-MM-dd HHmm\"");
-                }
-            }
-        } else if (nextLine.startsWith("event")) {
-            if (nextLine.replaceAll("\\s", "").length() == 5) {
-                throw new DukeException("Seems like your event task was incomplete!");
-            } else {
-                try {
-                    String[] splitLine = nextLine.split("/at ");
-                    String date = splitLine[1];
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                    LocalDateTime parsedDate = LocalDateTime.parse(date, formatter);
-                    String title = splitLine[0].split("event")[1];
-                    Task nextTask = new Event(title, parsedDate);
-                    System.out.println("Got it. I've added this task:");
-                    myList.add(nextTask);
-                    System.out.println(nextTask.toString());
-                } catch (DateTimeException err) {
-                    System.out.println("I think there's a problem with your input! Enter your task in this format! \"yyyy-MM-dd HHmm\"");
-                }
-            }
-        } else {
-            throw new DukeException("Dude I don't understand what you're saying!");
-        }
-    }
 
-    /**
-     * Method that is called to display the list.
-     * @param myList
-     * @throws DukeException
-     */
-    private void list(LinkedList<Task> myList) throws DukeException {
-        if (myList.isEmpty()) {
-            throw new DukeException("Yo! Your list looks empty to me!");
-        }
-        System.out.println("Here are the tasks in your list:");
-        int counter = 0;
-        while(counter < myList.size()) {
-            System.out.println((counter + 1) + ". " + myList.get(counter).toString());
-            counter += 1;
-        }
-    }
-
-
-    /**
-     * Method to echo the input by the user.
-     */
-    private void echo() {
-        Scanner inputScanner = new Scanner(System.in);
-        while (true) {
-            String nextLine = inputScanner.nextLine();
-            if (nextLine.equals("bye")) {
-                break;
-            } else {
-                System.out.println(nextLine);
-            }
-        }
-    }
 
     /**
      * Method to print the exit message and stop the program.
      */
     private void exit() {
-        updateData();
-        String exitMessage = "Leaving just like that? Fine. See you soon I guess.";
-        System.out.println(exitMessage);
+        try {
+            storage.updateData(tasks.getList());
+        } catch (DukeException err) {
+            System.out.println(err.toString());
+        }
+
     }
 
-    /**
-     * Update data in list file.
-     */
-    private void updateData() {
-        if (!myList.isEmpty()) {
-            try {
-                FileOutputStream fileOut = new FileOutputStream("./data/list.txt");
-                ObjectOutputStream out = new ObjectOutputStream(fileOut);
-                out.writeObject(myList);
-                out.close();
-                fileOut.close();
-                System.out.println("I'll save your list for you! You're welcome! :)");
-            } catch (IOException error) {
-                System.out.println("Something went wrong when I tried to save your list :(");
-            }
-        } else {
-            File dataFile = new File("./data/list.txt");
-            dataFile.delete();
-            System.out.println("Before you leave, it seems your list is empty anyway so I'll just delete it for you!");
-        }
-    }
+
 }
 
 
