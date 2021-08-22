@@ -3,13 +3,13 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 
-public class FileManager {
+public class Storage {
 
     private final String FILEPATH = "tasklist.txt";
     private final File SAVEFILE = new File(FILEPATH);
     private final String SEPARATOR = "~SEPARATION_STRING~";
 
-    public FileManager() {
+    public Storage() {
         try {
             SAVEFILE.createNewFile();
         } catch (java.io.IOException e) {
