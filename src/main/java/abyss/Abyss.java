@@ -10,6 +10,11 @@ import java.io.*;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * The Abyss is an application which keeps track of tasks, allowing users to
+ * add and delete tasks of multiple types, including deadlines, events and to-dos.
+ * The Abyss can also list existing tasks and mark tasks as done.
+ */
 public class Abyss {
     private static TaskList tasks = new TaskList();
     private static final String FILE_PATH = "./data/abyss.txt";
@@ -17,6 +22,11 @@ public class Abyss {
             "What can we do for you today?"};
     private static final String EXIT_MESSAGE = "Exiting the Abyss. We look forward to your return.";
 
+    /**
+     * Main function that handles the flow of the application.
+     *
+     * @param args Input arguments.
+     */
     public static void main(String[] args) {
         Ui.printLogo();
         Ui.reply(START_MESSAGES);

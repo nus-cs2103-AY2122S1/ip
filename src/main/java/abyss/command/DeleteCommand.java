@@ -3,6 +3,9 @@ package abyss.command;
 import abyss.Abyss;
 import abyss.exception.InvalidCommandException;
 
+/**
+ * Represents a command to delete a task from the list of tasks.
+ */
 public class DeleteCommand implements Command {
     private static final String DELETE_REGEX = "^\\d*$";
 

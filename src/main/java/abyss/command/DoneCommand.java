@@ -3,6 +3,9 @@ package abyss.command;
 import abyss.Abyss;
 import abyss.exception.InvalidCommandException;
 
+/**
+ * Represents a command to mark a task as done in the list of tasks.
+ */
 public class DoneCommand implements Command {
     private static final String DONE_REGEX = "^\\d*$";
 

@@ -2,6 +2,9 @@ package abyss.command;
 
 import abyss.exception.InvalidDeadlineException;
 
+/**
+ * Represents a command to add a deadline to the list of tasks.
+ */
 public class DeadlineCommand implements Command {
     private static final String DEADLINE_REGEX = "^\\S[ -~]*\\/by[ ]+\\S[ -~]*$";
 

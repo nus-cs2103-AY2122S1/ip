@@ -2,6 +2,9 @@ package abyss.command;
 
 import abyss.exception.InvalidTodoException;
 
+/**
+ * Represents a command to add a to-do task to the list of tasks.
+ */
 public class TodoCommand implements Command {
     private String description;
 
