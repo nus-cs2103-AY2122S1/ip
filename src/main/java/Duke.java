@@ -1,11 +1,13 @@
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class Duke {
     private static final String FILE_PATH = "./data/duke.txt";
@@ -22,43 +24,42 @@ public class Duke {
         greeting("Alex");
         while (true) {
             // conversation loop
-            String input = sc.nextLine();
+            String input = sc.nextLine().strip();
             String[] strArr = input.split(" ");
             String cmd = strArr[0];
-            if (cmd.equals("bye")) {
+
+
+            if(cmd.equals("bye")) {
+                sayBye("Alex");
                 break;
             }
-
-            String[] parsed = parseInput(strArr);
-            String content = parsed[0];
-            String time= parsed[1];
-
+            String description = "";
             try {
                 switch (cmd) {
                 case "":
-                    throw new DukeException("Command cannot begin with white space!");
+                    throw new DukeException("Input cannot be empty!");
                 case "list":
                     listTask();
                     break;
                 case "delete":
-                    deleteTask(Integer.parseInt(strArr[1]));
+                    deleteTask(parseIndex(strArr));
                     break;
                 case "done":
-                    markTaskDone(Integer.parseInt(strArr[1]));
+                    markTaskDone(parseIndex(strArr));
                     break;
                 case "todo":
-                    checkContent(content);
-                    addTask(new Task(content));
+                    description = parseDescription(strArr);
+                    addTask(new Task(description));
                     break;
                 case "deadline":
-                    checkContent(content);
-                    checkTime(time);
-                    addTask(new Deadline(content, time));
+                    description = parseDescription(strArr);
+                    LocalDateTime dateTime = parseDeadlineDateTime(strArr);
+                    addTask(new Deadline(description, dateTime));
                     break;
                 case "event":
-                    checkContent(content);
-                    checkTime(time);
-                    addTask(new Event(content, time));
+                    description = parseDescription(strArr);
+                    LocalDateTime[] dateTimes = parseEventDateTime(strArr);
+                    addTask(new Event(description, dateTimes[0], dateTimes[1]));
                     break;
                 default:
                     throw new DukeException("Invalid command");
@@ -67,7 +68,6 @@ public class Duke {
                 System.err.println(ex);
             }
         }
-        sayBye("Alex");
     }
 
     private void addTask(Task task) {
@@ -134,25 +134,78 @@ public class Duke {
         }
     }
 
-    private String[] parseInput(String[] strArr) {
-        StringBuilder contentSb = new StringBuilder();
-        StringBuilder timeSb = new StringBuilder();
-        int i=1;
-        for(; i < strArr.length; i++) {
-            String curr = strArr[i];
-            if(!curr.equals("/by") && !curr.equals("/at")) {
-                contentSb.append(curr + " ");
-            } else {
-                i++;
+    private int parseIndex(String[] strArr) throws DukeException {
+        if(strArr.length < 2) {
+            throw new DukeException("Missing index after command");
+        }
+        return Integer.parseInt(strArr[1]);
+    }
+
+    private String parseDescription(String[] strArr) throws DukeException {
+        StringBuilder sb = new StringBuilder();
+        if(strArr.length >= 2 && !isDateTimeDelim(strArr[1])) {
+            sb.append(strArr[1]);
+        }
+        for(int i = 2; i < strArr.length; i++) {
+            if(isDateTimeDelim(strArr[i])) {
                 break;
             }
+            sb.append(" " + strArr[i]);
         }
-        for(; i < strArr.length-1; i++) {
-            timeSb.append(strArr[i] + " ");
+        if(sb.length() < 1) {
+            throw new DukeException("The task description cannot be empty");
         }
-        timeSb.append(strArr[strArr.length-1]);
 
-        return new String[]{contentSb.toString(),timeSb.toString()};
+        return sb.toString();
+    }
+
+    private LocalDateTime parseDeadlineDateTime(String[] strArr) throws DukeException {
+        // format should be "yyyy-MM-dd" or "yyyy-MM-dd HHmm"
+        int i = 1;
+        while(!isDateTimeDelim(strArr[i]) && i < strArr.length) {
+            i++;
+        }
+        if(i == strArr.length - 1) {
+            throw new DukeException("The time of deadline cannot be empty");
+        }
+
+        String dateStr = strArr[i + 1];
+        String timeStr = "2359";  // default value in case time is missing from input
+        if(strArr.length - i - 1 >= 2) {
+            timeStr = strArr[i + 2];
+        }
+
+        return LocalDateTime.parse(dateStr + " " + timeStr,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+    }
+
+    private LocalDateTime[] parseEventDateTime(String[] strArr) throws DukeException {
+        // format should be "yyyy-MM-dd HHmm HHmm"
+        int i = 1;
+        while(!isDateTimeDelim(strArr[i]) && i < strArr.length) {
+            i++;
+        }
+        if(strArr.length - 1 - i < 3) {
+            throw new DukeException("Invalid start and end dateTime format");
+        }
+
+        String dateStr = strArr[i + 1];
+        String startTimeStr = strArr[i + 2];
+        String endTimeStr = strArr[i + 3];
+
+        LocalDateTime startDateTime = LocalDateTime
+                .parse(String.format("%s %s", dateStr, startTimeStr),
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+
+        LocalDateTime endDateTime = LocalDateTime
+                .parse(String.format("%s %s", dateStr, endTimeStr),
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+
+        return new LocalDateTime[] {startDateTime, endDateTime};
+    }
+
+    private boolean isDateTimeDelim(String str) {
+        return str.equals("/by") || str.equals("/at");
     }
 
     private void checkContent(String content) throws DukeException {

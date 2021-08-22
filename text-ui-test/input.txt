@@ -1,7 +1,8 @@
 todo todo 1
 todo todo 2
-deadline ddl 1 /by ddl 1 time
-event event 1 /at event 1 time
+deadline return book /by 2/12/2019 1800
+event library opens /at 2/12/2019 1500-1800
+event watch on sale /at 2/12/2019 1500-1800
 list
 done 1
 done 5
