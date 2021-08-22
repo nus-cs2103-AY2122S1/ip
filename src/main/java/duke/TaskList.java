@@ -24,6 +24,27 @@ public class TaskList {
         return taskList.size();
     }
 
+    public List<Task> search(String query) {
+        List<Task> results = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.description.contains(query)) {
+                results.add(task);
+            }
+        }
+        if (results.size() == 0) {
+            System.out.println("No matches found!");
+        } else {
+            System.out.println("Here's what I found!:");
+            int counter = 1;
+            for (Task result : results) {
+                String printResult = counter + "." + result;
+                System.out.println(printResult);
+            }
+            newLine();
+        }
+        return results;
+    }
+
 
     /**
      * Prints past commands.
