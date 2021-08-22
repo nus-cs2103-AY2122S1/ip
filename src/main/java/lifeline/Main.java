@@ -16,5 +16,4 @@ public class Main {
         Lifeline lifeline = new Lifeline("save" + File.separator + "tasks.json");
         lifeline.start();
     }
-
 }

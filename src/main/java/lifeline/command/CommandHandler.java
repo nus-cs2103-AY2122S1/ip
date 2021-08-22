@@ -61,7 +61,8 @@ public class CommandHandler {
     public static String handleDeadline(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         String[] commands = getCommands(command);
-        // Check if user has typed in correct input
+
+        // Get Deadline name and details
         String[] description = commands[1].split("/by", 2);
         if (description.length != 2) {
             throw new LifelineException("Deadline is not of the correct format! Please use deadline <name> /by "
@@ -105,6 +106,7 @@ public class CommandHandler {
         if (descriptions.length != 2) {
             throw new LifelineException(errorMessage);
         }
+        String eventName = descriptions[0].trim();
 
         // Get event date and duration
         String[] eventDateAndDuration = descriptions[1].trim().split("\\s", 2);
@@ -135,7 +137,7 @@ public class CommandHandler {
             LocalTime endTime = LocalTime.parse(duration[1], timeFormatter);
 
             // Create new Task and add to tasklist
-            Task newTask = new Event(descriptions[0].trim(), date, startTime, endTime);
+            Task newTask = new Event(eventName, date, startTime, endTime);
             taskList.add(newTask);
             storage.save(taskList);
             return ui.showAddedTask(newTask);
@@ -234,12 +236,12 @@ public class CommandHandler {
     private static String[] getCommands(String command) throws LifelineException {
         String[] commands = command.split("\\s", 2);
         if (commands.length < 2) {
-            handleIncomplete(commands[0]);
+            handleIncompleteCommand(commands[0]);
         }
         return commands;
     }
 
-    private static void handleIncomplete(String command) throws LifelineException {
+    private static void handleIncompleteCommand(String command) throws LifelineException {
         switch (command) {
         case "done":
             throw new LifelineException("You did not specify an integer! Please use done <number>");
