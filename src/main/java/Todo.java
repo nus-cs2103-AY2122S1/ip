@@ -1,8 +1,11 @@
-
 public class Todo extends Task {
 
     public Todo(String description) {
         super(description);
+    }
+
+    public String saveString() {
+        return "T | " + super.saveString();
     }
 
     @Override

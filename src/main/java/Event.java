@@ -1,4 +1,3 @@
-
 public class Event extends Task {
 
     protected String at;
@@ -6,6 +5,10 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         this.at = at;
+    }
+
+    public String saveString() {
+        return "E | " + super.saveString() + " | " + at;
     }
 
     @Override
