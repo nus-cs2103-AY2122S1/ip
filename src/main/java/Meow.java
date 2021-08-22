@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -116,7 +119,7 @@ public class Meow {
         if (folder.isDirectory()) {
             try {
                 addFileContentToArray("data/meow.txt");
-            } catch (FileNotFoundException e) {
+            } catch (FileNotFoundException | InvalidDateTimeException e) {
                 // Create a file
                 createFile("data/meow.txt");
             }
@@ -126,7 +129,7 @@ public class Meow {
         }
     }
 
-    private void addFileContentToArray(String filePath) throws FileNotFoundException {
+    private void addFileContentToArray(String filePath) throws FileNotFoundException, InvalidDateTimeException {
         File file = new File(filePath);
         Scanner s = new Scanner(file);
         while (s.hasNext()) {
@@ -135,7 +138,7 @@ public class Meow {
         }
     }
 
-    private void addTaskToArray(String input) {
+    private void addTaskToArray(String input) throws InvalidDateTimeException {
         String[] values = input.split(" \\| ");
         String typeOfTask = values[0].trim();
         String completeStatus = values[1].trim();
@@ -150,12 +153,25 @@ public class Meow {
             break;
         }
         case "D": {
-            String date = values[3].trim();
-            Deadline newDeadline = new Deadline(task, date);
+            String dateAndTime = values[3].trim();
+            String[] dateTimeArray = dateAndTime.split(" ");
+            String date = "";
+            for (int i = 0; i < dateTimeArray.length - 1; i++) {
+                if (i == 1 && Integer.parseInt(dateTimeArray[i]) < 10) {
+                    date = date + "0" + dateTimeArray[i] + " ";
+                } else if (i == 2) {
+                    date = date + dateTimeArray[i];
+                } else {
+                    date = date + dateTimeArray[i] + " ";
+                }
+            }
+            LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM d yyyy"));
+            Deadline newDeadline = new Deadline(task, localDate, dateTimeArray[3]);
             if (completeStatus.equals("1")) {
                 newDeadline.markAsDone();
             }
             tasksList.add(newDeadline);
+
             break;
         }
         case "E": {
@@ -227,8 +243,8 @@ public class Meow {
         printTaskList(newTodo);
     }
 
-    private void addDeadline(String deadline, String by) {
-        Deadline newDeadline = new Deadline(deadline, by);
+    private void addDeadline(String deadline, LocalDate date, String time) {
+        Deadline newDeadline = new Deadline(deadline, date, time);
         tasksList.add(newDeadline);
         addArrayTaskToFile();
         printTaskList(newDeadline);
@@ -265,6 +281,40 @@ public class Meow {
             split = task.split(" /at ");
         }
         return split;
+    }
+
+    private LocalDate convertToLocalDate(String inputDate) throws InvalidDateTimeException {
+        try {
+            String modifiedDate = "";
+            String[] values = inputDate.split("/");
+            for (int i = values.length - 1; i >= 0; i--) {
+                String addedValue;
+                if (Integer.parseInt(values[i]) < 10) {
+                    addedValue = "0" + values[i];
+                } else {
+                    addedValue = values[i];
+                }
+
+                if (i == 0) {
+                    modifiedDate = modifiedDate + addedValue;
+                } else {
+                    modifiedDate = modifiedDate + addedValue + "-";
+                }
+            }
+            LocalDate date = LocalDate.parse(modifiedDate);
+            return date;
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException();
+        }
+    }
+
+    private boolean isLocalDateTime(String inputDate, String inputTime) {
+        System.out.println("input date: " + inputDate);
+        String validator = "[0-9]{1,2}(/|-)[0-9]{1,2}(/|-)[0-9]{4}";
+        boolean dateValidated = inputDate.matches(validator);
+        int time = Integer.parseInt(inputTime);
+        boolean timeValidated = time >= 0 && time <= 2359;
+        return dateValidated && timeValidated;
     }
 
     private void deleteTask(String index) throws MeowException {
@@ -333,11 +383,18 @@ public class Meow {
                 String task = getTask(input, userCommand);
                 String[] taskAndDate = getTaskAndDate(task, userCommand);
                 try {
-                    addDeadline(taskAndDate[0], taskAndDate[1]);
+                    String[] dateAndTime = taskAndDate[1].split(" ");
+                    if (isLocalDateTime(dateAndTime[0], dateAndTime[1])) {
+                        LocalDate date = convertToLocalDate(dateAndTime[0]);
+                        addDeadline(taskAndDate[0], date, dateAndTime[1]);
+                    } else {
+                        throw new InvalidDateTimeException();
+                    }
                     break;
                 } catch (ArrayIndexOutOfBoundsException exception) {
                     throw new EmptyDeadlineTimeException();
                 }
+
             }
             case DELETE: {
                 deleteTask(commandWord[1].trim());

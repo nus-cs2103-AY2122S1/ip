@@ -84,3 +84,11 @@ class NoItemInTheListException extends MeowException {
     }
 }
 
+class InvalidDateTimeException extends MeowException {
+    @Override
+    public String toString() {
+        return "------------------------------------------------------------------------------\n" +
+                "Meow: The format of your deadline is invalid, please try again~\n" +
+                "------------------------------------------------------------------------------";
+    }
+}
