@@ -78,19 +78,11 @@ public class Storage {
             for (int i = 0; i < arr.size(); i++) {
                 JsonObject currTask = arr.get(i).getAsJsonObject();
                 if (currTask.has("by")) {
-                    savedTasks.add(new Deadline(currTask.get("name").getAsString(),
-                            gson.fromJson(currTask.get("by"), LocalDateTime.class),
-                            currTask.get("isDone").getAsBoolean()));
-
+                    addDeadlineTask(currTask, savedTasks);
                 } else if (currTask.has("startTime")) {
-                    savedTasks.add(new Event(currTask.get("name").getAsString(),
-                            gson.fromJson(currTask.get("date"), LocalDate.class),
-                            gson.fromJson(currTask.get("startTime"), LocalTime.class),
-                            gson.fromJson(currTask.get("endTime"), LocalTime.class),
-                            currTask.get("isDone").getAsBoolean()));
+                    addEventTask(currTask, savedTasks);
                 } else {
-                    savedTasks.add(new ToDo(currTask.get("name").getAsString(),
-                            currTask.get("isDone").getAsBoolean()));
+                    addToDoTask(currTask, savedTasks);
                 }
             }
             fileReader.close();
@@ -98,6 +90,31 @@ public class Storage {
         } catch (IOException e) {
             throw new LifelineException("Unable to find your saved tasks!\n");
         }
+    }
+
+    private void addDeadlineTask(JsonObject deadline, TaskList taskList) {
+        String name = deadline.get("name").getAsString();
+        LocalDateTime by = gson.fromJson(deadline.get("by"), LocalDateTime.class);
+        boolean isDone = deadline.get("isDone").getAsBoolean();
+        Deadline savedDeadline = new Deadline(name, by, isDone);
+        taskList.add(savedDeadline);
+    }
+
+    private void addEventTask(JsonObject event, TaskList taskList) {
+        String name = event.get("name").getAsString();
+        LocalDate date = gson.fromJson(event.get("date"), LocalDate.class);
+        LocalTime startTime = gson.fromJson(event.get("startTime"), LocalTime.class);
+        LocalTime endTime = gson.fromJson(event.get("endTime"), LocalTime.class);
+        boolean isDone = event.get("isDone").getAsBoolean();
+        Event savedEvent = new Event(name, date, startTime, endTime, isDone);
+        taskList.add(savedEvent);
+    }
+
+    private void addToDoTask(JsonObject toDo, TaskList taskList) {
+        String name = toDo.get("name").getAsString();
+        boolean isDone = toDo.get("isDone").getAsBoolean();
+        ToDo savedToDo = new ToDo(name, isDone);
+        taskList.add(savedToDo);
     }
 
     private void createDirectoryIfMissing() {
