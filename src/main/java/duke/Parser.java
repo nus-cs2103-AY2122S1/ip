@@ -1,8 +1,12 @@
 package duke;
+
 import duke.command.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class responsible for parsing and understanding user input.
+ */
 public abstract class Parser {
     private static void checkDescription(String in) throws DukeException {
         if (in.equals("")) {
@@ -10,6 +14,15 @@ public abstract class Parser {
         }
     }
 
+    /**
+     * Takes in a String representing user input, and parses it, producing the appropriate Command.
+     * @param in is a String representing user input.
+     * @return Command to be executed by the application.
+     * @throws DukeException if the user's input is missing a description.
+     * @throws IndexOutOfBoundsException if the user's command gives a index that is out of bounds.
+     * @throws NumberFormatException if the user's command has an index that the application does not understand.
+     * @throws DateTimeParseException if the user's command has a date that does not match "yyyy-mm-dd" format.
+     */
     public static Command parse(String in) throws DukeException,IndexOutOfBoundsException,
             NumberFormatException, DateTimeParseException {
         if (in.equals("list")) {

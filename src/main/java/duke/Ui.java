@@ -1,18 +1,32 @@
 package duke;
+
 import java.util.Scanner;
 import duke.task.*;
 
+/**
+ * Ui class to handle printing notices to the user, and reading of user input to pass to Parser.
+ */
 public class Ui {
     private final Scanner sc;
 
+    /**
+     * Initialise scanner to read user input.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Method to read users input
+     * @return one line of user input as a String.
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Method called at beginning of application run. Prints welcome message.
+     */
     public void init() {
         System.out.println(
                         "░▄░█░░░▄▀▀▀▀▀▄░░░█░▄░\n" +
@@ -71,6 +85,10 @@ public class Ui {
         System.out.println("Just a moment, i'm saving your list!");
     }
 
+    public void notifySavingComplete() {
+        System.out.println("Done!");
+    }
+
     public void notifySavingError() {
         System.out.println("Something went wrong and I can't save your list, sorry!");
     }
@@ -93,5 +111,13 @@ public class Ui {
 
     public void printLine() {
         System.out.println("--------------------------------------------------");
+    }
+
+    public void notifyFolderFound() {
+        System.out.println("I've found the data folder. Your session will be saved there.");
+    }
+
+    public void notifyFolderCreated() {
+        System.out.println("I couldn't find a data folder. I've initialised one for your data.");
     }
 }
