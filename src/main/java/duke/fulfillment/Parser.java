@@ -12,10 +12,23 @@ import duke.command.MarkTaskDoneCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandException;
 
+/**
+ * Utility class which provides methods for parsing and understanding user input.
+ *
+ * @author kevin9foong
+ */
 public class Parser {
     private Parser() {
     }
 
+    /**
+     * Parses user input and returns the appropriate <code>Command</code> which
+     * corresponds to user input.
+     *
+     * @param userInput String which represents user's command for chat bot.
+     * @return corresponding command as understood from user's input.
+     * @throws DukeException thrown when user's input is invalid.
+     */
     public static Command parse(String userInput) throws DukeException {
         String[] splitUserInput = userInput.trim().split(" ", 2);
         CommandType userCommandType = CommandType.getCommand(splitUserInput[0].trim());

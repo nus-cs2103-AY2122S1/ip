@@ -3,9 +3,22 @@ package duke.tasks;
 import duke.exceptions.EmptyEventBodyException;
 import duke.exceptions.InvalidEventBodyException;
 
+/**
+ * Represents a completable <code>Task</code> with a description and a venue.
+ *
+ * @author kevin9foong
+ */
 public class Event extends Task {
     private final String at;
 
+    /**
+     * Instantiates an <code>Event</code> from its data String representation.
+     *
+     * @param eventDataText String containing data in the form 'description /at venue'.
+     * @throws InvalidEventBodyException thrown when the data String representation is invalid.
+     * @throws EmptyEventBodyException   thrown when the description or venue is missing from the
+     *                                   data String representation.
+     */
     public Event(String eventDataText) throws InvalidEventBodyException, EmptyEventBodyException {
         if (eventDataText == null || eventDataText.isEmpty()) {
             throw new EmptyEventBodyException();

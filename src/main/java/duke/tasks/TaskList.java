@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a list of tasks and provides functionality to manipulate tasks contained within the list.
+ *
+ * @author kevin9foong
+ */
 public class TaskList {
     private final List<Task> tasks;
     private TaskStorage taskStorage;
@@ -20,7 +25,7 @@ public class TaskList {
     /**
      * Writes current taskList to the Task storage to be persisted.
      *
-     * @param tasksToSave List of tasks to be saved to Task storage
+     * @param tasksToSave List of tasks to be saved to Task storage.
      * @throws IOException thrown when failure to write to Task storage occurs.
      */
     private void saveTasksToStorage(List<Task> tasksToSave) throws IOException {
@@ -33,9 +38,9 @@ public class TaskList {
     /**
      * Get task associated with index number in taskList.
      *
-     * @param index index of task to get
-     * @return task associated with index number in taskList
-     * @throws InvalidTaskNumberException thrown when index provided exceeds valid index range
+     * @param index index of task to get.
+     * @return task associated with index number in taskList.
+     * @throws InvalidTaskNumberException thrown when index provided exceeds valid index range.
      */
     public Task getTask(int index) throws InvalidTaskNumberException {
         if (index < 0 || index >= tasks.size()) {
@@ -47,9 +52,9 @@ public class TaskList {
     /**
      * Adds a new task to the TaskList.
      *
-     * @param task task to be added
-     * @return task that has been added to TaskList
-     * @throws IOException thrown when errors writing to storage occur
+     * @param task task to be added.
+     * @return task that has been added to TaskList.
+     * @throws IOException thrown when errors writing to storage occur.
      */
     public Task addTask(Task task) throws IOException {
         tasks.add(task);
@@ -60,9 +65,9 @@ public class TaskList {
     /**
      * Marks task as done and updates the <code>TaskStorage</code> file.
      *
-     * @param index index of task to mark as done
-     * @return task that has been marked as done
-     * @throws IOException thrown when errors writing to storage occur
+     * @param index index of task to mark as done.
+     * @return task that has been marked as done.
+     * @throws IOException thrown when errors writing to storage occur.
      */
     public Task setDone(int index) throws IOException, InvalidTaskNumberException {
         Task doneTask = getTask(index);
@@ -74,10 +79,10 @@ public class TaskList {
     /**
      * Deletes task associated with given index number
      *
-     * @param index index of task to delete
-     * @return deleted task
-     * @throws InvalidTaskNumberException thrown when index provided exceeds valid index range
-     * @throws IOException thrown when errors writing to storage occur
+     * @param index index of task to delete.
+     * @return deleted task.
+     * @throws InvalidTaskNumberException thrown when index provided exceeds valid index range.
+     * @throws IOException thrown when errors writing to storage occur.
      */
     public Task deleteTask(int index) throws InvalidTaskNumberException, IOException {
         if (index < 0 || index >= tasks.size()) {
@@ -91,7 +96,7 @@ public class TaskList {
     /**
      * Retrieves a new list containing all tasks in the taskList.
      *
-     * @return new list containing copy of all tasks from the taskList
+     * @return new list containing copy of all tasks from the taskList.
      */
     public List<Task> getAllTasks() {
         return new ArrayList<>(tasks);
@@ -100,7 +105,7 @@ public class TaskList {
     /**
      * Gets the number of tasks in the taskList.
      *
-     * @return int representing number of tasks in the taskList
+     * @return int representing number of tasks in the taskList.
      */
     public int getNumOfTasks() {
         return tasks.size();

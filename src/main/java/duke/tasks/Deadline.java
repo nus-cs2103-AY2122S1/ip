@@ -7,9 +7,23 @@ import duke.exceptions.InvalidDeadlineBodyException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a completable <code>Task</code> with a description and a date to be completed by.
+ *
+ * @author kevin9foong
+ */
 public class Deadline extends Task {
     private final LocalDate by;
 
+    /**
+     * Instantiates a <code>Deadline</code> from its data String representation.
+     *
+     * @param deadlineDataText String containing data in the form 'description /by yyyy-mm-dd'.
+     * @throws EmptyDeadlineBodyException     thrown when deadline description or by date are not provided.
+     * @throws InvalidDeadlineBodyException   thrown when the data String representation is invalid.
+     * @throws InvalidDateTimeFormatException thrown when the <code>DateTime</code> format for the by date provided
+     *                                        is invalid.
+     */
     public Deadline(String deadlineDataText) throws EmptyDeadlineBodyException, InvalidDeadlineBodyException,
             InvalidDateTimeFormatException {
         if (deadlineDataText == null || deadlineDataText.isEmpty()) {

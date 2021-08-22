@@ -15,8 +15,8 @@ public abstract class Task {
      * Extracts data from given taskRepresentation and returns the specific subclass of
      * Task associated with the given String task representation.
      *
-     * @param taskRepresentation comma separated String representation of a task
-     * @return Task with data extracted from the given String representation of the Task
+     * @param taskRepresentation comma separated String representation of a task.
+     * @return Task with data extracted from the given String representation of the Task.
      */
     public static Task getTaskFromRepresentation(String taskRepresentation) {
         String[] taskData = taskRepresentation.split(",");
@@ -35,7 +35,9 @@ public abstract class Task {
     }
 
     /**
-     * Set description of task.
+     * Set description of this task.
+     *
+     * @param description description to be set as.
      */
     protected void setDescription(String description) {
         this.description = description;
@@ -50,14 +52,19 @@ public abstract class Task {
     }
 
     /**
-     * Convert task data to representation to be saved in file.
+     * Convert this task's data to representation to be saved in file.
      *
-     * @return representation of task data
+     * @return representation of this task's data
      */
     public String getTaskRepresentation() {
         return (isDone ? "X," : ",") + description + ",";
     }
 
+    /**
+     * Returns textual representation of this <code>Task</code> and its data.
+     *
+     * @return String representing this <code>Task</code> and its data.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;

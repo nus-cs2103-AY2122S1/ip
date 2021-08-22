@@ -2,8 +2,6 @@ package duke.fulfillment;
 
 import duke.command.Command;
 import duke.exceptions.DukeException;
-import duke.io.ConsoleUserInputHandler;
-import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserInputHandler;
 import duke.io.UserOutputHandler;
 import duke.messages.GreetingMessage;
@@ -13,7 +11,7 @@ import duke.tasks.TaskList;
 import java.io.IOException;
 
 /**
- * Handles commands from user.
+ * This class handles user input and handles user's commands.
  *
  * @author kevin9foong
  */
@@ -30,7 +28,7 @@ public class FulfillmentHandler {
     }
 
     /**
-     * Initializes the Chatbot
+     * Initializes the Chatbot.
      *
      * @throws IOException thrown when an error connecting
      *                     to input/output stream occurs.

@@ -3,7 +3,7 @@ package duke.messages;
 import duke.tasks.Task;
 
 /**
- * Class is responsible for generating message indicating task is marked as done.
+ * Class is responsible for generating message indicating given task is marked as done.
  *
  * @author kevin9foong
  */

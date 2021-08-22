@@ -2,6 +2,11 @@ package duke.tasks;
 
 import duke.exceptions.EmptyTodoBodyException;
 
+/**
+ * Represents a completable <code>Task</code> that only has a description.
+ *
+ * @author kevin9foong
+ */
 public class ToDo extends Task {
     public ToDo(String description) throws EmptyTodoBodyException {
         if (description == null || description.isEmpty()) {

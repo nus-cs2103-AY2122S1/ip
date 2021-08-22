@@ -1,5 +1,10 @@
 package duke.messages;
 
+/**
+ * Encapsulates textual data to be output to the user.
+ *
+ * @author kevin9foong
+ */
 public class Message {
     private String messageText;
     private final String separator =
