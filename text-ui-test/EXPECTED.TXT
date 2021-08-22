@@ -45,4 +45,5 @@ Now you have 1 tasks left in the list!
 Alright! I've removed this task:
 [E] [X] CS2103 tutorial (at: Aug 21 2021)
 Now you have 0 tasks left in the list!
+No tasks in your list! Add one using todo, deadline or event!
 Bye! Hope to see you again soon!

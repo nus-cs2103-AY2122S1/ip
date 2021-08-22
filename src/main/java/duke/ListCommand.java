@@ -2,8 +2,17 @@ package duke;
 
 import java.util.List;
 
+/**
+ * Represents a command to list all tasks
+ */
 public class ListCommand extends Command {
 
+    /**
+     * Executes <code>ListCommand</code>
+     * @param tasks <code>TaskList</code> containing saved tasks
+     * @param ui <code>Ui</code> responsible for user interactions
+     * @param storage <code>Storage</code> responsible for saving tasks to drive
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> savedTasks = tasks.getTasks();

@@ -9,13 +9,24 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a means to load and save files
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs <code>Storage</code>
+     * @param filePath Path to file
+     */
     Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads a save file
+     * @return List of saved tasks
+     */
     public List<Task> loadSave() {
         List<Task> savedTasks = new ArrayList<>();
         String[] filepathArr = this.filePath.split("/");
@@ -87,6 +98,11 @@ public class Storage {
         return savedTasks;
     }
 
+    /**
+     * Updates save file
+     * @param updatedTasks New list of tasks
+     * @throws IOException
+     */
     public void updateFile(List<Task> updatedTasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         for (Task i : updatedTasks) {

@@ -2,7 +2,16 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Represents <code>Parser</code> object to parse user input
+ */
 public class Parser {
+    /**
+     * Returns corresponding <code>Command</code> based on input supplied
+     * @param input User input
+     * @return <code>Command</code> object
+     * @throws DukeException
+     */
     public static Command parse(String input) throws DukeException{
         String[] inputArr = input.split(" ");
         String body = "";
