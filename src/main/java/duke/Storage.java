@@ -16,7 +16,7 @@ public class Storage {
     BufferedReader reader;
     Path path;
 
-    public Storage (String filename) {
+    public Storage(String filename) {
         path = FileSystems.getDefault().getPath("data", filename);
         File directory = new File("data");
         directory.mkdir();

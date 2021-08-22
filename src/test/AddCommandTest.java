@@ -18,7 +18,7 @@ public class AddCommandTest {
 
 
     @Test
-    void testAddTodo() {
+    void testAddTask_addOneTodo_listWithOneTodo() {
         Command c = new AddCommand("todo", "a simple todo task");
         c.execute(tl, ui, store);
         Task expected = new Todo("a simple todo task");
@@ -28,7 +28,7 @@ public class AddCommandTest {
     }
 
     @Test
-    void testAddDeadline() {
+    void testAddTask_addOneDeadline_listWithOneDeadline() {
         LocalDate date = LocalDate.parse("2020-02-20");
         Command c = new AddCommand("deadline", "a simple deadline task", date);
         c.execute(tl, ui, store);
@@ -39,7 +39,7 @@ public class AddCommandTest {
     }
 
     @Test
-    void testAddEvent() {
+    void testAddTask_addOneEvent_listWithOneEvent() {
         LocalDate date = LocalDate.parse("2021-01-10");
         Command c = new AddCommand("event", "a simple event task", date);
         c.execute(tl, ui, store);
