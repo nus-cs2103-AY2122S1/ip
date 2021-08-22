@@ -11,11 +11,12 @@ public class List extends ArrayList<Task> {
     public void addTask(String input) {
         if (input.equals("list")) {
             showList();
-        } else if (input.startsWith("done ")) {
-            int index = parseInt(input.substring(5));
-            done(index);
         } else {
-            process(input);
+            try {
+                process(input);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
@@ -25,27 +26,58 @@ public class List extends ArrayList<Task> {
         }
     }
 
-    public void done(int index) {
+    public void done(String[] array) throws DukeDoneException {
+        if (array.length == 1) {
+            throw new DukeDoneException();
+        }
+        int index = parseInt(array[1]);
         Task temp = todos.get(index - 1);
         temp.markAsDone();
         System.out.println("Nice! I've marked this task as done:\n" + temp);
     }
 
-    public void process(String input) {
-        if (input.startsWith("todo ")) {
-            Task newItem = new Todo(input.substring(5));
+    public void delete(String[] array) {
+        int index = parseInt(array[1]);
+        Task temp = todos.remove(index - 1);
+        System.out.println("Noted. I've removed this task:\n"
+                + temp
+                + "\nNow you have "
+                + todos.size()
+                + " task"
+                + (todos.size() == 1 ? "" : "s")
+                + " in the list");
+
+    }
+
+    public void process(String input) throws DukeException {
+        String[] split = input.split(" ", 2);
+        if (split[0].equals("done")) {
+            done(split);
+        } else if (split[0].equals("delete")) {
+            delete(split);
+        } else if (split[0].equals("todo")) {
+            if (split.length == 1) {
+                throw new DukeTodoException();
+            }
+            Task newItem = new Todo(split[1]);
             todos.add(newItem);
             echo(newItem);
-        } else if (input.startsWith("deadline ")) {
-            Task newItem = new Deadline(input.substring(9));
+        } else if (split[0].equals("deadline")) {
+            if (split.length == 1) {
+                throw new DukeDeadlineException();
+            }
+            Task newItem = new Deadline(split[1]);
             todos.add(newItem);
             echo(newItem);
-        } else if (input.startsWith("event ")) {
-            Task newItem = new Event(input.substring(6));
+        } else if (split[0].equals("event")) {
+            if (split.length == 1) {
+                throw new DukeEventException();
+            }
+            Task newItem = new Event(split[1]);
             todos.add(newItem);
             echo(newItem);
         } else {
-            echo(input);
+            throw new DukeException();
         }
     }
 

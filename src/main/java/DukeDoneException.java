@@ -1,2 +1,6 @@
-package PACKAGE_NAME;public class DukeDoneException {
+public class DukeDoneException extends DukeException{
+    @Override
+    public String getMessage() {
+        return "OOPS!!! Please specify which task.";
+    }
 }
