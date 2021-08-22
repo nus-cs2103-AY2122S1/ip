@@ -23,7 +23,7 @@ public class Task {
      * @return The status of the task.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (this.isDone ? "X" : " "); // mark done task with X
     }
 
     /**
@@ -31,6 +31,7 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+        Duke.rewriteFile();
     }
 
     /**

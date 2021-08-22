@@ -135,6 +135,24 @@ public class Duke {
     }
 
     /**
+     * Rewrites the data to the file.
+     */
+    public static void rewriteFile() {
+        try {
+            FileWriter fileWriter = new FileWriter(Duke.data);
+            for (int i = 0; i < Duke.getNumOfTasks(); i++) {
+                fileWriter.append(Duke.tasks.get(i).toFileFormatString());
+            }
+            fileWriter.close();
+        } catch (IOException ioException) {
+            Duke.readFile();
+            DukeException dukeException = new DukeException(
+                    "☹ OOPS!!! The file cannot be found. A new file has been created, please try again!");
+            System.out.println(dukeException);
+        }
+    }
+
+    /**
      * Returns a list of string, which is a copy of `tasks` list.
      *
      * @return A copy of tasks list.
