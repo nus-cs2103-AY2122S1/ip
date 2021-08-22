@@ -28,6 +28,6 @@ public class Event extends Task {
     }
 
     public String save() {
-        return String.format("%s-%s-%s-%s\n", this.getType(), this.getStatus(), this.description, this.date);
+        return String.format("%s:%s:%s:%s\n", this.getType(), this.getStatus(), this.description, this.date);
     }
 }

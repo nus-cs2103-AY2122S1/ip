@@ -17,7 +17,7 @@ public class Task {
     }
 
     public String save() {
-        return String.format("%s-%s-%s-\n", this.getType(), this.getStatus(), this.description);
+        return String.format("%s:%s:%s:\n", this.getType(), this.getStatus(), this.description);
     }
 
     public String getStatusIcon() {
