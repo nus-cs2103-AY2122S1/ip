@@ -8,7 +8,7 @@ import duke.task.*;
  * Java's arraylist with a more limited interface, implemented due to course requirements.
  */
 public class TaskList {
-    private static ArrayList<Task> tl;
+    private ArrayList<Task> tl;
 
     public TaskList() {
         tl = new ArrayList<>();
