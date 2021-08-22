@@ -1,11 +1,15 @@
 package task;
 
 public abstract class Task {
+    public static enum taskType {
+        TODO, DEADLINE, EVENT
+    }
+
     /** A String that stores the description of the task. **/
-    protected String description;
+    public String description;
 
     /** A boolean that indicates whether the task is done. **/
-    protected boolean isDone;
+    public boolean isDone;
 
     /**
      * A public constructor to initialize the task.

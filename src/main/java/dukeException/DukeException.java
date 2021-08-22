@@ -1,3 +1,5 @@
+package dukeException;
+
 public class DukeException extends Throwable{
     public DukeException(String s) {
         super(s);

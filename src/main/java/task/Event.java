@@ -8,9 +8,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class Event extends Task {
-    private LocalDate date;
+    public LocalDate date;
 
-    private LocalTime time;
+    public LocalTime time;
 
     /**
      * A public constructor to initialize the task.Deadline.
