@@ -1,14 +1,19 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 public class Event extends Task {
 
-    private String duration;
+    private LocalDateTime time;
 
-    public Event(String taskName, String duration) {
+    public Event(String taskName, LocalDateTime time) {
         super(taskName);
-        this.duration = duration;
+        this.time = time;
     }
 
     public String getWhen() {
-        return this.duration;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+        return dtf.format(time);
     }
 
     @Override

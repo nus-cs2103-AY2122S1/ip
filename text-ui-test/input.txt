@@ -1,11 +1,22 @@
 yeehor
 todo Borrow Book
 list
-deadline return book /by 2pm
+deadline buy book /by 19-02-2020 1900
+deadline sell book /by 18.03.2020 1900
+deadline PL1101E project /by 20/04/2021 1200
+deadline CS2101 project /by 20/04/2021 2500
+deadline CS2101 project /by 33/04/2021 2100
+deadline CS2101 project  /by 30/13/2021 2100
 deadline
 event zoom meeting
 deadline go home
-event project meeting /at Mon 2-4pm
+event book fair /at 19-01-2020 1900
+event comic fair /at 18.03.2020 1900
+event PL1101E project meeting /at 15/04/2021 1200
+event CS2103T project meeting /at 04/04/2021
+event CS2101 project meeting /at 20/04/2021 2500
+event CS2101 project meeting /at 33/04/2021 2100
+event CS2101 project meeting /at 30/13/2021 2100
 done 2
 delete 2
 list

@@ -1,16 +1,13 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.file.Paths;
-import java.nio.file.Files;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.regex.Pattern;
 import java.util.Scanner;
-
-
-
 
 public class Duke {
     private static String input = "";
@@ -79,21 +76,63 @@ public class Duke {
                 throw new DukeException(e.getMessage());
             }
         } else if (Pattern.matches("event.*", input)) {
-            String[] inputArr = input.replaceFirst("event ","").split("/at");
+            String[] inputArr = input.replaceFirst("event ","").split(" /at ");
             if (inputArr.length == 1) {
-                throw new DukeException("Describe the event and indicate its time!");
+                throw new DukeException("Input the following format: event *description* /at *DD/MM/YYYY* *24H-Time*");
+            } else {
+                LocalDateTime dateTime;
+                String[] dateTimeArr = inputArr[1].split(" ");
+                String[] date = dateTimeArr[0].split("[-/.]");
+                int year = Integer.parseInt(date[2]);
+                int month = Integer.parseInt(date[1]);
+                int dateNum = Integer.parseInt(date[0]);
+                if (month > 12 || dateNum > 31) {
+                    throw new DukeException("Invalid date given. Try again!");
+                }
+                if (dateTimeArr.length == 1) {
+                    dateTime = LocalDateTime.of(year, month, dateNum, 0, 0);
+                } else {
+                    String time = dateTimeArr[1];
+                    int hour = Integer.parseInt(time.substring(0, 2));
+                    int minute =  Integer.parseInt(time.substring(2, 4));
+                    if (hour > 23 || minute >= 60) {
+                        throw new DukeException("Invalid time given. Try again!");
+                    }
+                    dateTime = LocalDateTime.of(year, month, dateNum, hour, minute);
+                }
+                add(new Event(inputArr[0], dateTime));
             }
-            add(new Event(inputArr[0], inputArr[1]));
         } else if (Pattern.matches("deadline.*", input)) {
-            String[] inputArr = input.replaceFirst("deadline ", "").split("/by");
+            String[] inputArr = input.replaceFirst("deadline ", "").split(" /by ");
             if (inputArr.length == 1) {
-                throw new DukeException("Describe the activity and its deadline!");
+                throw new DukeException("Input the following format: deadline *description* /by *DD/MM/YYYY* *24H-Time*");
+            } else {
+                LocalDateTime dateTime;
+                String[] dateTimeArr = inputArr[1].split(" ");
+                String[] date = dateTimeArr[0].split("[-/.]");
+                int year = Integer.parseInt(date[2]);
+                int month = Integer.parseInt(date[1]);
+                int dateNum = Integer.parseInt(date[0]);
+                if (month > 12 || dateNum > 31) {
+                    throw new DukeException("Invalid date given. Try again!");
+                }
+                if (dateTimeArr.length == 1) {
+                     dateTime = LocalDateTime.of(year, month, dateNum, 0, 0);
+                } else {
+                    String time = dateTimeArr[1];
+                    int hour = Integer.parseInt(time.substring(0, 2));
+                    int minute =  Integer.parseInt(time.substring(2, 4));
+                    if (hour > 23 || minute >= 60) {
+                        throw new DukeException("Invalid time given. Try again!");
+                    }
+                    dateTime = LocalDateTime.of(year, month, dateNum, hour, minute);
+                }
+                add(new Deadline(inputArr[0], dateTime));
             }
-            add(new Deadline(inputArr[0], inputArr[1]));
         } else if (Pattern.matches("todo.*", input)) {
             String inputArr = input.replaceFirst("todo", "");
-            if (inputArr.equals("")) {
-                throw new DukeException("Describe the activity!");
+            if (inputArr.equals("") || inputArr.equals(" ")) {
+                throw new DukeException("Input the following format: todo *description*");
             }
             add(new Task(inputArr.strip()));
         } else {
@@ -180,7 +219,7 @@ public class Duke {
 
     public static File getfiles() {
         String home = System.getProperty("user.home");
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "ip","data");
+        Path path = Paths.get(home, "ip","data");
         File directory = new File(path.toString());
         if (!directory.exists()) {
             System.out.println("'data' directory not found. Creating the directory...");
@@ -188,7 +227,7 @@ public class Duke {
             System.out.println("Directory created.");
         }
 
-        java.nio.file.Path filepath = java.nio.file.Paths.get(home, "ip","data", "duke.txt");
+       Path filepath = Paths.get(home, "ip","data", "duke.txt");
         File file = new File(filepath.toString());
         if (!file.exists()) {
             System.out.println("Data file not found. Creating a new file...");

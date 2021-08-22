@@ -18,45 +18,91 @@ Here's your current list:
 1. [T] [ ] borrow book
 
 New Task? I've added it to the list:
-[D] [ ] return book  (by:  2pm)
+[D] [ ] buy book (by: 19 Feb 2020 19:00)
 Now you have 2 task(s) in the list.
 
-Describe the activity and its deadline!
-
-Describe the event and indicate its time!
-
-Describe the activity and its deadline!
+New Task? I've added it to the list:
+[D] [ ] sell book (by: 18 Mar 2020 19:00)
+Now you have 3 task(s) in the list.
 
 New Task? I've added it to the list:
-[E] [ ] project meeting  (at:  mon 2-4pm)
-Now you have 3 task(s) in the list.
+[D] [ ] pl1101e project (by: 20 Apr 2021 12:00)
+Now you have 4 task(s) in the list.
+
+Invalid time given. Try again!
+
+Invalid date given. Try again!
+
+Invalid date given. Try again!
+
+Input the following format: deadline *description* /by *DD/MM/YYYY* *24H-Time*
+
+Input the following format: event *description* /at *DD/MM/YYYY* *24H-Time*
+
+Input the following format: deadline *description* /by *DD/MM/YYYY* *24H-Time*
+
+New Task? I've added it to the list:
+[E] [ ] book fair (at: 19 Jan 2020 19:00)
+Now you have 5 task(s) in the list.
+
+New Task? I've added it to the list:
+[E] [ ] comic fair (at: 18 Mar 2020 19:00)
+Now you have 6 task(s) in the list.
+
+New Task? I've added it to the list:
+[E] [ ] pl1101e project meeting (at: 15 Apr 2021 12:00)
+Now you have 7 task(s) in the list.
+
+New Task? I've added it to the list:
+[E] [ ] cs2103t project meeting (at: 04 Apr 2021 00:00)
+Now you have 8 task(s) in the list.
+
+Invalid time given. Try again!
+
+Invalid date given. Try again!
+
+Invalid date given. Try again!
 
 You've finished the task? Good job!
 This task has been marked as done:
-[D] [X] return book  (by:  2pm)
+[D] [X] buy book (by: 19 Feb 2020 19:00)
 
 Okay! Removing the task:
-[D] [X] return book  (by:  2pm)
+[D] [X] buy book (by: 19 Feb 2020 19:00)
 
 Here's your current list:
 1. [T] [ ] borrow book
-2. [E] [ ] project meeting  (at:  mon 2-4pm)
+2. [D] [ ] sell book (by: 18 Mar 2020 19:00)
+3. [D] [ ] pl1101e project (by: 20 Apr 2021 12:00)
+4. [E] [ ] book fair (at: 19 Jan 2020 19:00)
+5. [E] [ ] comic fair (at: 18 Mar 2020 19:00)
+6. [E] [ ] pl1101e project meeting (at: 15 Apr 2021 12:00)
+7. [E] [ ] cs2103t project meeting (at: 04 Apr 2021 00:00)
 
 Okay! Removing the task:
 [T] [ ] borrow book
 
-The id you entered was invalid!
+Okay! Removing the task:
+[E] [ ] pl1101e project meeting (at: 15 Apr 2021 12:00)
 
 The id you entered was invalid!
 
 Here's your current list:
-1. [E] [ ] project meeting  (at:  mon 2-4pm)
+1. [D] [ ] sell book (by: 18 Mar 2020 19:00)
+2. [D] [ ] pl1101e project (by: 20 Apr 2021 12:00)
+3. [E] [ ] book fair (at: 19 Jan 2020 19:00)
+4. [E] [ ] comic fair (at: 18 Mar 2020 19:00)
+5. [E] [ ] cs2103t project meeting (at: 04 Apr 2021 00:00)
 
 Indicate the id of the task which you have completed!
 
-Describe the activity!
+Input the following format: todo *description*
 
 Here's your current list:
-1. [E] [ ] project meeting  (at:  mon 2-4pm)
+1. [D] [ ] sell book (by: 18 Mar 2020 19:00)
+2. [D] [ ] pl1101e project (by: 20 Apr 2021 12:00)
+3. [E] [ ] book fair (at: 19 Jan 2020 19:00)
+4. [E] [ ] comic fair (at: 18 Mar 2020 19:00)
+5. [E] [ ] cs2103t project meeting (at: 04 Apr 2021 00:00)
 
 You're going already? Hope to see you again soon!

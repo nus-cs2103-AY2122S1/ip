@@ -1,14 +1,19 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 public class Deadline extends Task {
 
-    private String deadline;
+    private LocalDateTime deadline;
 
-    public Deadline(String taskName, String deadline) {
+    public Deadline(String taskName, LocalDateTime deadline) {
         super(taskName);
         this.deadline = deadline;
     }
 
     public String getWhen() {
-        return this.deadline;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+        return dtf.format(deadline);
     }
 
     @Override
