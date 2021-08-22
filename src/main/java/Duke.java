@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,6 +22,7 @@ public class Duke {
      * All the recognised commands.
      */
     protected enum Command {
+        LIST("list"),
         DONE("done"),
         BYE("bye"),
         TODO("todo"),
@@ -169,7 +173,13 @@ public class Duke {
             throw new NoDescriptionException(Command.DEADLINE);
         }
         String by = splitByBy[1];
-        return new Deadline(description, by);
+        String[] splitDateTime = by.split(" ");
+        LocalDate date = LocalDate.parse(splitDateTime[0], DateTimeFormatter.ofPattern("d/MM/yyyy"));
+        LocalTime time = null;
+        if (splitDateTime.length == 2) {
+            time = LocalTime.parse(splitDateTime[1], DateTimeFormatter.ofPattern("HHmm"));
+        }
+        return new Deadline(description, date, time);
     }
 
     /**
@@ -190,7 +200,13 @@ public class Duke {
             throw new NoDescriptionException(Command.EVENT);
         }
         String dayTime = splitByAt[1];
-        return new Event(description, dayTime);
+        String[] splitDateTime = dayTime.split(" ");
+        LocalDate date = LocalDate.parse(splitDateTime[0], DateTimeFormatter.ofPattern("d/MM/yyyy"));
+        LocalTime time = null;
+        if (splitDateTime.length == 2) {
+            time = LocalTime.parse(splitDateTime[1], DateTimeFormatter.ofPattern("HHmm"));
+        }
+        return new Event(description, date, time);
     }
 
     /**

@@ -1,21 +1,32 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A task that stores the day and time of the event.
  */
 public class Event extends Task {
     /**
-     * The day and time of the event.
+     * The date of the event.
      */
-    protected String dayTime;
+    protected LocalDate date;
+
+    /**
+     * The time of the event.
+     */
+    protected LocalTime time;
 
     /**
      * A constructor used to initialize the event.
      *
      * @param description the description of the event.
-     * @param dayTime the day and time of the event.
+     * @param date the date of the event.
+     * @param time the time of the event.
      */
-    protected Event(String description, String dayTime) {
+    protected Event(String description, LocalDate date, LocalTime time) {
         super(description);
-        this.dayTime = dayTime;
+        this.date = date;
+        this.time = time;
     }
 
     /**
@@ -25,6 +36,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.dayTime + ")";
+        return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("d/MM/yyyy")) + ")";
     }
 }
