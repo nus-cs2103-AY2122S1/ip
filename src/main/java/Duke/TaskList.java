@@ -1,7 +1,5 @@
+package Duke;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 public class TaskList {
     ArrayList<Task> list;
@@ -168,6 +166,6 @@ public class TaskList {
     public ArrayList<Task> returnTaskList(){
         return this.list;
     }
-    
+
 
 }

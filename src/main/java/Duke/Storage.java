@@ -1,3 +1,4 @@
+package Duke;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,10 +12,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Data {
-    static ArrayList<String[]> loadData(String pathname) throws FileNotFoundException{
+public class Storage {
+
+    String filepath;
+
+    public Storage (String filepath){
+        this.filepath = filepath;
+    }
+
+    public ArrayList<String[]> loadData() throws FileNotFoundException{
     ArrayList<String[]> res = new ArrayList<>();
-    try (BufferedReader br = new BufferedReader(new FileReader(pathname))) {
+    try (BufferedReader br = new BufferedReader(new FileReader(this.filepath))) {
         String line;
         while ((line = br.readLine()) != null) {
             String[] splited = line.split("\\|");
@@ -26,12 +34,12 @@ public class Data {
     return res;
     }
 
-    static void saveData(ArrayList<Task> tasks, String outpath) throws IOException{
-        File fout = new File(outpath);
+    public void saveData(ArrayList<Task> tasks) throws IOException{
+        File fout = new File(this.filepath);
         FileOutputStream fos = new FileOutputStream(fout);
-     
+        
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-    
+        
         for(Task eachtask : tasks){
             String actionname = eachtask.getActionName();
             boolean compleated = eachtask.getCompleted();

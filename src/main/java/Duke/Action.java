@@ -1,4 +1,5 @@
-enum Action {
+package Duke;
+public enum Action {
     LIST,
     DONE,
     TODO,

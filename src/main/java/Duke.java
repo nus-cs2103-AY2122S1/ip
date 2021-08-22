@@ -2,6 +2,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+import Duke.Action;
+import Duke.InputNotValidError;
+import Duke.Storage;
+import Duke.TaskList;
+import Duke.Ui;
+import Duke.Parser;
+
 public class Duke {
 
     private Storage storage;
