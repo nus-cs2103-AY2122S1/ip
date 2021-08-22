@@ -3,6 +3,8 @@ package util.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import util.parser.*;
 
 public abstract class DatedTask extends Task {
@@ -19,18 +21,20 @@ public abstract class DatedTask extends Task {
     }
 
     //this function isn't working
-    public void addTo(DateTaskTable table) {
+    public void addTo(HashMap<LocalDate, ArrayList<DatedTask>> table) {
         ArrayList<DatedTask> list = table.get(this.lDate);
-
-
         if (list == null) {
             list = new ArrayList<>();
             table.put(this.lDate, list);
-            list.add(this);
+            table.get(this.lDate).add(this);
+
         } else if (TaskList.isAdded(this, list)) {
             //it has been added before
+
         } else {
+
             list.add(this);
+
         }
 
 

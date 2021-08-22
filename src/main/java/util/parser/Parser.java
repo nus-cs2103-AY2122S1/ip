@@ -65,6 +65,7 @@ public class Parser {
                 case LIST:
                     cmds.add(() -> ui.list(this.tasklist));
                     break;
+                case DLIST:
                 case DONE:
                 case TODO:
                 case DEADLINE:
@@ -83,6 +84,7 @@ public class Parser {
                     Task b = tasklist.get(i);
                     cmds.add(new DoneCommand(b, this.ui));
                     break;
+                    //dlist does not work -- suspect is coz of the hashmap
                 case DLIST:
                     //to implement such a filter in tasklist
                     ArrayList<DatedTask> ls = dateTaskList.get(dateParse(description.trim()));
@@ -100,7 +102,6 @@ public class Parser {
                 case EVENT:
                     Events e = Events.of(description);
                     cmds.add(new AddCommand(tasklist, e));
-                    //in theory i can just execute it here but might as well promise
                     cmds.add(() -> dateTaskList.add(e));
                     break;
                 case DEADLINE:

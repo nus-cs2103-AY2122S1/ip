@@ -90,7 +90,7 @@ public class Storage {
         while (sc.hasNext()) {
             Task t = Task.decode(sc.nextLine());
             inputs.add(t);
-            if (t.isDated()) {
+            if (t instanceof DatedTask) {
                 dateTaskTable.add((DatedTask) t);
             }
         }
