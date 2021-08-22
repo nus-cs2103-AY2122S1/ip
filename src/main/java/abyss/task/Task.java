@@ -1,4 +1,4 @@
-package abyss;
+package abyss.task;
 
 public abstract class Task {
     protected String description;

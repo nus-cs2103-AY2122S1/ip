@@ -1,4 +1,4 @@
-package abyss;
+package abyss.exception;
 
 public class InvalidDeadlineException extends InvalidCommandException {
     public InvalidDeadlineException(String message) {

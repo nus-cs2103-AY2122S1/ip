@@ -1,12 +1,14 @@
-package abyss;
+package abyss.command;
 
-public class DeleteCommand extends Command {
+import abyss.Abyss;
+import abyss.exception.InvalidCommandException;
+
+public class DeleteCommand implements Command {
     private static final String DELETE_REGEX = "^\\d*$";
 
     private int index;
 
     protected DeleteCommand(String content) throws InvalidCommandException {
-        super(Type.DELETE);
         if (!content.matches(DELETE_REGEX)) {
             throw new InvalidCommandException("Command 'delete' should be followed by " +
                     "the index of the task piece.");

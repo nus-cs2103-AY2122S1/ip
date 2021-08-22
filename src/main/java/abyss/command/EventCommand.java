@@ -1,13 +1,14 @@
-package abyss;
+package abyss.command;
 
-public class EventCommand extends Command {
+import abyss.exception.InvalidEventException;
+
+public class EventCommand implements Command {
     private static final String EVENT_REGEX = "^\\S[ -~]*\\/at[ ]+\\S[ -~]*$";
 
     private String description;
     private String at;
 
     public EventCommand(String content) throws InvalidEventException {
-        super(Type.EVENT);
         if (!content.matches(EVENT_REGEX)) {
             throw new InvalidEventException("Description and date of a 'event' task piece " +
                     "cannot be empty.");

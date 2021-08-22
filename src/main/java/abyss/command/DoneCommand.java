@@ -1,12 +1,14 @@
-package abyss;
+package abyss.command;
 
-public class DoneCommand extends Command {
+import abyss.Abyss;
+import abyss.exception.InvalidCommandException;
+
+public class DoneCommand implements Command {
     private static final String DONE_REGEX = "^\\d*$";
 
     private int index;
 
     protected DoneCommand(String content) throws InvalidCommandException {
-        super(Type.DONE);
         if (!content.matches(DONE_REGEX)) {
             throw new InvalidCommandException("Command 'done' should be followed by " +
                     "the index of the task piece.");

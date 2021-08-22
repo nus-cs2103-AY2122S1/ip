@@ -1,4 +1,7 @@
-package abyss;
+package abyss.command;
+
+import abyss.command.*;
+import abyss.exception.InvalidCommandException;
 
 public abstract class Parser {
     public static Command parseCommand(String command) throws InvalidCommandException {

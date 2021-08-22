@@ -1,4 +1,6 @@
-package abyss;
+package abyss.task;
+
+import abyss.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

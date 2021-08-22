@@ -1,10 +1,9 @@
-package abyss;
+package abyss.command;
 
-public class TodoCommand extends Command {
+public class TodoCommand implements Command {
     private String description;
 
     protected TodoCommand(String description) {
-        super(Type.TODO);
         this.description = description;
     }
 
