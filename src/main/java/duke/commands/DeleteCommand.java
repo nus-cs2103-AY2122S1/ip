@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
         if (id >= 0 && id < taskList.getTaskCount()) {
             Task task = taskList.getTask(id);
             taskList.deleteTask(id);
-            Ui.taskDoneMessage(task);
+            Ui.printDeleteTaskMessage(task, taskList.getTaskCount());
         } else {
             throw new NoSuchTaskException();
         }

@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
         if (id >= 0 && id < taskList.getTaskCount()) {
             Task task = taskList.getTask(id);
             task.taskCompleted();
-            Ui.taskDoneMessage(task);
+            Ui.printCompleteTaskMessage(task);
         } else {
             throw new NoSuchTaskException();
         }
