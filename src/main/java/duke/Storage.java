@@ -36,16 +36,16 @@ public class Storage {
                 while (iterator.hasNext()) {
                     Item currItem = iterator.next();
                     if (currItem instanceof ToDo) {
-                        s.append("T|");
+                        s.append("T###");
                     } else if (currItem instanceof Event) {
-                        s.append("E|");
+                        s.append("E###");
                     } else if (currItem instanceof Deadline) {
-                        s.append("D|");
+                        s.append("D###");
                     } else {
                         throw new DukeException("storage error");
                     }
                     
-                    s.append(currItem.getDone() + "|");
+                    s.append(currItem.getDone() + "###");
                     s.append(currItem.getPickle() + "\n");
                 }
             }
@@ -63,8 +63,13 @@ public class Storage {
             Scanner fileReader = new Scanner(this.file);
             while (fileReader.hasNextLine()) {
                 String currLine = fileReader.nextLine();
-                String[] currArgs = currLine.split("|");
+                String[] currArgs = currLine.split("###");
                 Item toAdd = null;
+                System.out.println(currLine);
+                System.out.println(currArgs.length);
+                System.out.println(currArgs[0]);
+                System.out.println(currArgs[1]);
+                System.out.println(currArgs[2]);
 
                 switch (currArgs[0]) {
                 case "T":
