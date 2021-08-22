@@ -1,6 +1,11 @@
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.String;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  * The Duke class encapsulates the Duke project's chat-bot for CS2103T individual project 1.
  *
@@ -8,6 +13,7 @@ import java.lang.String;
  */
 public class Duke {
     private static final ArrayList<Task> taskList = new ArrayList<>();
+    private static final String FILENAME = "DukeList.txt";
 
     /**
      * Prints the Duke logo.
@@ -161,6 +167,7 @@ public class Duke {
         System.out.println(line);
         System.out.println();
     }
+
     /**
      * Prints out the todolist.
      */
@@ -176,44 +183,129 @@ public class Duke {
         System.out.println();
     }
 
+    /**
+     * Reads and loads the taskList from txt file. Creates new file if it does not exist.
+     */
+    private static void readFile() {
+        try {
+            File myObj = new File(FILENAME);
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                StringBuilder taskString = new StringBuilder(data);
+                final int lastIndex = taskString.length() - 1;
+                switch (taskString.charAt(1)) {
+                case 'T':
+                    Task toDoTask = new ToDo(taskString.substring(7));
+                    if (taskString.charAt(4) == 'X') {
+                        toDoTask.markAsDone();
+                    }
+                    taskList.add(toDoTask);
+                    break;
+                case 'D':
+                    int byIndex = taskString.indexOf(" (by: ", 6);
+                    String deadlineDesc = taskString.substring(7, byIndex);
+                    String deadlineBy = taskString.substring(byIndex + 6, lastIndex);
+                    Task deadlineTask = new Deadline(deadlineDesc, deadlineBy);
+                    if (taskString.charAt(4) == 'X') {
+                        deadlineTask.markAsDone();
+                    }
+                    taskList.add(deadlineTask);
+                    break;
+                case 'E':
+                    int atIndex = taskString.indexOf(" (at: ", 6);
+                    String eventDesc = taskString.substring(7, atIndex);
+                    String eventAt = taskString.substring(atIndex + 6, lastIndex);
+                    Task eventTask = new Event(eventDesc, eventAt);
+                    if (taskString.charAt(4) == 'X') {
+                        eventTask.markAsDone();
+                    }
+                    taskList.add(eventTask);
+                    break;
+                default:
+                    // Do nothing and continue to the next line.
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            createFile();
+        }
+    }
+
+    /**
+     * Creates a file. Called in readFile().
+     */
+    private static void createFile() {
+        try {
+            File myObj = new File(FILENAME);
+            if (myObj.createNewFile()) {
+                echo("Successfully created a save file!");
+            } else {
+                echo("OOPS!!! An error occurred when creating a file!");
+            }
+        } catch (IOException e) {
+            echo("OOPS!!! An error occurred when creating a file!");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Writes to the txt file on program exit.
+     */
+    private static void writeFile() {
+        try {
+            FileWriter myWriter = new FileWriter(FILENAME); // Overwrite mode.
+            StringBuilder fileContent = new StringBuilder();
+            for (Task task : taskList) {
+                fileContent.append(task.toString()).append("\n");
+            }
+            myWriter.write(fileContent.toString());
+            myWriter.close();
+        } catch (IOException e) {
+            echo("OOPS!!! An error occurred when writing a file!");
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
+        readFile();
         logo();
         greet();
         Scanner sc = new Scanner(System.in);
         boolean isExited = false;
         while (!isExited) {
-            // String input
             try {
                 String input = sc.nextLine();
                 switch (input) {
-                    case "bye":
-                        isExited = true;
-                        bye();
+                case "bye":
+                    isExited = true;
+                    writeFile();
+                    bye();
+                    break;
+                case "list":
+                    printList();
+                    break;
+                default:
+                    String[] split = input.split(" ", 2);
+                    switch (split[0]) {
+                    case "done":
+                        doTask(split);
                         break;
-                    case "list":
-                        printList();
+                    case "todo":
+                        addToDo(split);
+                        break;
+                    case "deadline":
+                        addDeadline(split);
+                        break;
+                    case "event":
+                        addEvent(split);
+                        break;
+                    case "delete":
+                        deleteTask(split);
                         break;
                     default:
-                        String[] split = input.split(" ", 2);
-                        switch (split[0]) {
-                            case "done":
-                                doTask(split);
-                                break;
-                            case "todo":
-                                addToDo(split);
-                                break;
-                            case "deadline":
-                                addDeadline(split);
-                                break;
-                            case "event":
-                                addEvent(split);
-                                break;
-                            case "delete":
-                                deleteTask(split);
-                                break;
-                            default:
-                                echo("OOPS!!! I'm sorry, but I don't know what that means ☹ ");
-                        }
+                        echo("OOPS!!! I'm sorry, but I don't know what that means ☹ ");
+                    }
                 }
             } catch (DukeException e) {
                 echo(e.getMessage());
