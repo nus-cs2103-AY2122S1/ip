@@ -32,7 +32,7 @@ public abstract class Task {
     }
 
     protected String name;
-    boolean isdone;
+    private boolean isDone;
     //what is a better choice for a delimiter
     protected static String DELIMITER = "/ghx-124";
     protected static String DONE = "DONETASKe123111";
@@ -48,7 +48,7 @@ public abstract class Task {
      */
     protected Task(String s) {
         this.name = s;
-        this.isdone = false;
+        this.isDone = false;
     }
 
 
@@ -57,7 +57,7 @@ public abstract class Task {
      * Marks when the task is done.
      */
     public void done() {
-        this.isdone = true;
+        this.isDone = true;
     }
 
     /**
@@ -97,14 +97,14 @@ public abstract class Task {
      * @return true if the task is done and false otherwise.
      */
     public boolean isDone() {
-        return this.isdone;
+        return this.isDone;
     }
 
 
 
     @Override
     public String toString() {
-        String checkBox = this.isdone
+        String checkBox = this.isDone
                 ? Task.done
                 : Task.notDone;
         return checkBox + " " + this.name;
