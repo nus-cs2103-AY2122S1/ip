@@ -2,10 +2,7 @@ import exceptions.DukeException;
 import exceptions.IllegalFormatException;
 import exceptions.NoSuchTaskException;
 import exceptions.UnknownTagException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import tasks.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -14,12 +11,11 @@ import java.util.Scanner;
 
 public class Duke {
     // list used to store text entered by user
-    private ArrayList<Task> items;
+    private TaskList items;
 
     private Storage storage;
 
     private final boolean DEFAULT_STATUS = false;
-
 
     // Command Tags for the chat bot
     private final String EXIT_TAG = "bye";
@@ -29,6 +25,7 @@ public class Duke {
     private final String DEADLINE_TAG = "deadline";
     private final String EVENT_TAG = "event";
     private final String DELETE_TAG = "delete";
+
 
 
     public static void main(String[] args) {
@@ -112,7 +109,7 @@ public class Duke {
      */
     private void addEvent(String msg) throws IllegalFormatException{
         Task newTask = new Event(getTaskDesc(msg), getEventDates(msg), DEFAULT_STATUS);
-        addTask(newTask);
+        items.addTask(newTask);
     }
 
     /**
@@ -123,7 +120,7 @@ public class Duke {
      */
     private void addDeadline(String msg) throws IllegalFormatException{
         Task newTask = new Deadline(getTaskDesc(msg), getDeadlineDates(msg), DEFAULT_STATUS);
-        addTask(newTask);
+        items.addTask(newTask);
     }
 
     /**
@@ -134,13 +131,13 @@ public class Duke {
      */
     private void addTodo(String msg) throws IllegalFormatException{
         Task newTask = new Todo(getTodoDesc(msg), DEFAULT_STATUS);
-        addTask(newTask);
+        items.addTask(newTask);
     }
 
     /**
      * Display the list of task that has been added.
      */
-    private void displayTasks(ArrayList<Task> taskList) {
+    private void displayTasks(TaskList taskList) {
         Ui.displayList(taskList);
     }
 
@@ -153,7 +150,7 @@ public class Duke {
      */
     private void taskDone(String msg) throws NoSuchTaskException, IllegalFormatException{
         int index = getTaskId(msg);
-        Task item = this.items.get(index);
+        Task item = this.items.getTask(index);
         item.taskCompleted();
 
         Ui.taskDoneMessage(item);
@@ -161,10 +158,10 @@ public class Duke {
 
     private void deleteTask(String msg) throws NoSuchTaskException, IllegalFormatException {
         int index = getTaskId(msg);
-        Task task = this.items.get(index);
-        this.items.remove(index);
+        Task task = this.items.getTask(index);
+        this.items.deleteTask(index);
 
-        Ui.taskDeletedMessage(task, getTaskCount());
+        Ui.taskDeletedMessage(task, items.getTaskCount());
     }
 
     /**
@@ -185,7 +182,7 @@ public class Duke {
         try {
             int index = Integer.valueOf(details[1]) - 1;
 
-            if (index >= items.size()) {
+            if (index >= items.getTaskCount()) {
                 throw new NoSuchTaskException();
             }
 
@@ -264,24 +261,7 @@ public class Duke {
         return LocalDate.parse(details[1]);
     }
 
-    /**
-     * Add a new task to the list.
-     *
-     * @param task The new task to be added
-     */
-    private void addTask(Task task) {
-        this.items.add(task);
-        Ui.taskAddedMessage(task, getTaskCount());
-    }
 
-    /**
-     * Returns the current number of items in the list.
-     *
-     * @return An int representing the current number of items in th list.
-     */
-    private int getTaskCount() {
-        return this.items.size();
-    }
 
 
 }

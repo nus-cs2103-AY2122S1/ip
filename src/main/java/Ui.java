@@ -1,4 +1,5 @@
 import tasks.Task;
+import tasks.TaskList;
 
 import java.util.ArrayList;
 
@@ -49,11 +50,11 @@ public class Ui {
         wrapMessageInLines(Message.TASK_DONE_MSG.msg + task);
     }
 
-    public static void displayList(ArrayList<Task> taskList) {
+    public static void displayList(TaskList taskList) {
         displayListStart();
 
-        for (int i = 0; i < taskList.size(); i++) {
-            Task item = taskList.get(i);
+        for (int i = 0; i < taskList.getTaskCount(); i++) {
+            Task item = taskList.getTask(i);
             String itemDetails = String.format("\t %s.%s", (i + 1), item);
 
             System.out.println(itemDetails);

@@ -1,10 +1,7 @@
 
 
 import exceptions.NoSuchTaskException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import tasks.*;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -62,12 +59,12 @@ public class Storage {
      * @param taskList The list containing the tasks added by the user.
      * @throws IOException Data file cannot be found or written to.
      */
-    public void saveTask(ArrayList<Task> taskList) throws IOException {
+    public void saveTask(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         BufferedWriter bw = new BufferedWriter(fw);
 
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
+        for (int i = 0; i < taskList.getTaskCount(); i++) {
+            Task task = taskList.getTask(i);
             bw.write(String.format("%s/%s/%s/%s\n", task.getTag(), task.getStatusIcon(), task.getDescription(), task.getDueDate()));
         }
 
@@ -82,10 +79,10 @@ public class Storage {
      * @throws FileNotFoundException Data file could not be found.
      * @throws NoSuchTaskException The data file contains information/tag that is not recognised by the chat bot.
      */
-    private ArrayList<Task> loadData() throws FileNotFoundException, NoSuchTaskException {
+    private TaskList loadData() throws FileNotFoundException, NoSuchTaskException {
         File dataFile = new File(this.filePath);
         Scanner scanner = new Scanner(dataFile);
-        ArrayList<Task> taskList = new ArrayList<>();
+        TaskList taskList = new TaskList();
 
 
         while (scanner.hasNextLine()) {
@@ -101,13 +98,13 @@ public class Storage {
 
             if (type.equals("T")) {
                 Task t = new Todo(desc, isDone);
-                taskList.add(t);
+                taskList.addTask(t);
             } else if (type.equals("D")) {
                 Task t = new Deadline(desc, LocalDate.parse(dueDate), isDone);
-                taskList.add(t);
+                taskList.addTask(t);
             } else if (type.equals("E")) {
                 Task t = new Event(desc, LocalDate.parse(dueDate), isDone);
-                taskList.add(t);
+                taskList.addTask(t);
             } else {
                 throw new NoSuchTaskException();
             }
@@ -124,7 +121,7 @@ public class Storage {
      * @throws IOException Data file cannot be created, found or opened.
      * @throws NoSuchTaskException The data file contains information/tag that is not recognised by the chat bot.
      */
-    public ArrayList<Task> loadTask() throws IOException, NoSuchTaskException {
+    public TaskList loadTask() throws IOException, NoSuchTaskException {
         checkToMake();
         return loadData();
     }
