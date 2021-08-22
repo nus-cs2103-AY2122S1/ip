@@ -4,11 +4,10 @@ import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
     private String time;
-    private static final String TYPE = "E";
     private LocalDate localDate;
 
     Event(String content) throws DukeException {
-        super(content.substring(6, content.indexOf("/")));
+        super(content.substring(6, content.indexOf("/")).trim());
         this.time = content.substring(content.indexOf("/") + 1).trim();
         try {
             this.localDate = LocalDate.parse(this.time);
@@ -34,7 +33,7 @@ public class Event extends Task {
     }
 
     public String getType() {
-        return TYPE;
+        return "E";
     }
 
     public boolean hasSchedule() {

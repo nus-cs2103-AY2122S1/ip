@@ -5,10 +5,9 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task{
     private String time;
     private LocalDate localDate;
-    private static final String TYPE = "D";
 
     Deadline(String content) throws DukeException {
-        super(content.substring(9, content.indexOf("/")));
+        super(content.substring(9, content.indexOf("/")).trim());
         this.time = content.substring(content.indexOf("/") + 1).trim();
         try {
             this.localDate = LocalDate.parse(this.time);
@@ -36,7 +35,7 @@ public class Deadline extends Task{
     }
 
     public String getType() {
-        return TYPE;
+        return "D";
     }
 
     public boolean hasSchedule() {
