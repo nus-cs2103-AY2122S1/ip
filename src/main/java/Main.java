@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 class Main {
     public static void main(String[] args) {
-        enumVersion();
+        levelEight();
     }
 
-    public static void enumVersion() {
+    public static void levelEight() {
         Duke duke = new Duke();
         duke.greet();
         Scanner sc = new Scanner(System.in);

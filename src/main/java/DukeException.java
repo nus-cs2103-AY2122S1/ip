@@ -64,3 +64,16 @@ class InvalidTaskIndexException extends DukeException {
                 + "___________________________________________________\n";
     }
 }
+
+/**
+ * Throws when an invalid date time is entered.
+ */
+class InvalidDateTimeException extends DukeException {
+
+    @Override
+    public String toString() {
+        return "___________________________________________________\n"
+                + "☹ OOPS!!! please ensure you entered a valid date with format: yyyy-mm-dd\n"
+                + "___________________________________________________\n";
+    }
+}

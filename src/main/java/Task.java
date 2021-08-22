@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 class Task {
     /**
      * To indicate if a task is done.
@@ -22,7 +26,6 @@ class Task {
     }
 
     /**
-     *
      * @return The description of the task.
      */
     @Override
@@ -53,15 +56,15 @@ class ToDo extends Task {
     }
 }
 
-class  DeadLine extends Task {
-    String deadline;
+class DeadLine extends Task {
+    LocalDate deadline;
 
     /**
      * Constructor for a deadline task.
      *
      * @param description description for the task.
      */
-    public DeadLine(String description, String deadline) {
+    public DeadLine(String description, LocalDate deadline) {
         super(description);
         this.deadline = deadline;
     }
@@ -73,19 +76,19 @@ class  DeadLine extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + (this.isDone ? "[X]" : "[ ]") + " " + this.description + "(by: " + this.deadline + ")";
+        return "[D]" + (this.isDone ? "[X]" : "[ ]") + " " + this.description + "(by: " + this.deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")";
     }
 }
 
 class Event extends Task {
-    String timePeriod;
+    LocalDate timePeriod;
 
     /**
      * Constructor for a event task.
      *
      * @param description description for the task.
      */
-    public Event(String description,String timePeriod) {
+    public Event(String description, LocalDate timePeriod) {
         super(description);
         this.timePeriod = timePeriod;
     }
@@ -97,6 +100,6 @@ class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + (this.isDone ? "[X]" : "[ ]") + " " + this.description + "(at: " + this.timePeriod + ")";
+        return "[E]" + (this.isDone ? "[X]" : "[ ]") + " " + this.description + "(at: " + this.timePeriod.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")";
     }
 }
