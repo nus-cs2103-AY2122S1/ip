@@ -36,3 +36,5 @@ else
     echo "Test result: FAILED"
     exit 1
 fi
+
+rm -r data
