@@ -9,6 +9,7 @@ import duke.task.Deadline;
 import duke.command.Command;
 import duke.command.AddCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.DeleteCommand;
 import duke.command.DisplayCommand;
 import duke.command.MarkDoneCommand;
@@ -92,22 +93,24 @@ public class Parser {
             /* todo: catch format and ioob exceptions */
             int index = Integer.parseInt(line.split(" ")[1]) - 1;
             return new DeleteCommand(index);
+	} else if (line.split(" ")[0].equals("find")) {
+		return new FindCommand(line.substring(5));
 
-        } else {
-            Task task = null;
-            String type = line.split(" ")[0];
-            if (type.equals("todo")) {
-                task = Parser.parseToDo(line);
-    
-            } else if (type.equals("deadline")) {
-                task = Parser.parseDeadline(line);
-    
-            } else if (type.equals("event")) {
-                task = Parser.parseEvent(line);
-    
-            } else {
-                throw new UnknownCommandException(line);
-            }
+	} else {
+		Task task = null;
+		String type = line.split(" ")[0];
+		if (type.equals("todo")) {
+			task = Parser.parseToDo(line);
+
+		} else if (type.equals("deadline")) {
+			task = Parser.parseDeadline(line);
+	
+		} else if (type.equals("event")) {
+			task = Parser.parseEvent(line);
+
+		} else {
+			throw new UnknownCommandException(line);
+		}
 
             return new AddCommand(task);
         }
