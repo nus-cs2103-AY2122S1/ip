@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class Duke {
     private static final ArrayList<Task> taskList = new ArrayList<>();
-    private static final String FILENAME = "DukeList.txt";
+    private static final String FILEPATH = "DukeList.txt";
 
     /**
      * Prints the Duke logo.
@@ -51,6 +51,7 @@ public class Duke {
      */
     private static void addToList(Task task) {
         taskList.add(task);
+        updateFile(task);
         echo("Got it. I've added this task:\n  "
                 + task + "\nNow you have " + taskList.size() + " tasks in the list.");
     }
@@ -147,6 +148,7 @@ public class Duke {
             if (0 <= index && index < taskList.size()) {
                 echo("Got it. I've removed this task:\n  "
                         + taskList.remove(index) + "\nNow you have " + taskList.size() + " tasks in the list.");
+                writeFile();
             } else {
                 throw new DukeException("OOPS!!! Please enter a valid task number ☹");
             }
@@ -188,7 +190,7 @@ public class Duke {
      */
     private static void readFile() {
         try {
-            File myObj = new File(FILENAME);
+            File myObj = new File(FILEPATH);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -237,7 +239,7 @@ public class Duke {
      */
     private static void createFile() {
         try {
-            File myObj = new File(FILENAME);
+            File myObj = new File(FILEPATH);
             if (myObj.createNewFile()) {
                 echo("Successfully created a save file!");
             } else {
@@ -250,16 +252,32 @@ public class Duke {
     }
 
     /**
-     * Writes to the txt file on program exit.
+     * Overwrites task list in txt file with updated list.
      */
     private static void writeFile() {
         try {
-            FileWriter myWriter = new FileWriter(FILENAME); // Overwrite mode.
+            FileWriter myWriter = new FileWriter(FILEPATH); // Overwrite mode.
             StringBuilder fileContent = new StringBuilder();
             for (Task task : taskList) {
                 fileContent.append(task.toString()).append("\n");
             }
             myWriter.write(fileContent.toString());
+            myWriter.close();
+        } catch (IOException e) {
+            echo("OOPS!!! An error occurred when writing a file!");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Appends a new task to the last line of the txt file.
+     *
+     * @param newTask The task to be added to the file.
+     */
+    private static void updateFile(Task newTask) {
+        try {
+            FileWriter myWriter = new FileWriter(FILEPATH,true);
+            myWriter.write(newTask.toString());
             myWriter.close();
         } catch (IOException e) {
             echo("OOPS!!! An error occurred when writing a file!");
@@ -279,7 +297,6 @@ public class Duke {
                 switch (input) {
                 case "bye":
                     isExited = true;
-                    writeFile();
                     bye();
                     break;
                 case "list":
