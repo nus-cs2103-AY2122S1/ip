@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -90,7 +92,7 @@ public class Duke {
                             if (details.length == 1) { // time of deadline not given
                                 throw new DukeException(DukeExceptionType.DEADLINETIME);
                             } else {
-                                newTask = new Deadline(details[0], details[1]);
+                                newTask = new Deadline(details[0], LocalDate.parse(details[1]));
                             }
                             break;
                         }
@@ -123,6 +125,9 @@ public class Duke {
              
             } catch (NumberFormatException e) { // throws if index given in done/delete functions is not an integer
                 System.out.println(new DukeException(DukeExceptionType.INVALIDDONE).getMessage());
+
+            } catch (DateTimeParseException e) { 
+                System.out.println(new DukeException(DukeExceptionType.INVALIDDATE).getMessage());
 
             } finally {
                 System.out.println("  ____________________________________________________________\n");
