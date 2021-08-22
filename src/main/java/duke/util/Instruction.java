@@ -1,3 +1,5 @@
+package duke.util;
+
 public enum Instruction {
     LIST("list"),
     DONE("done"),

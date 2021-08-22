@@ -1,3 +1,9 @@
+package duke.util;
+
+import duke.exception.DukeException;
+import duke.exception.DukeNoSuchTaskException;
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -25,9 +31,8 @@ public class TaskList {
      *
      * @param task The task user has specified
      * @return Returns formatted string to be printed out to show task has been added or not.
-     * @throws DukeException For missing arguments when initialising Task.
      */
-    public String addTask(Task task) throws DukeException {
+    public String addTask(Task task) {
         list.add(task);
         String totalTask = String.format("Now you have %d task(s) in the list.", list.size());
         return String.format("Got it! I've added this task:\n  %s\n%s", list.get(list.size() - 1), totalTask);
@@ -53,9 +58,9 @@ public class TaskList {
      *
      * @param index index of task to be mark as done.
      * @return a message of whether task has been successfully added or not
-     * @throws DukeException For invalid indexes given by user.
+     * @throws DukeNoSuchTaskException For invalid indexes given by user.
      */
-    public String markTaskDone(int index) throws DukeException {
+    public String markTaskDone(int index) throws DukeNoSuchTaskException {
         if (index >= 0 && index < list.size()) {
             if (list.get(index).getStatusIcon().equals(" ")) {
                 list.get(index).markDone();
@@ -64,7 +69,7 @@ public class TaskList {
                 return "Task has already been completed!";
             }
         } else {
-            throw new DukeException("No such task :< (Check the index input!!!)");
+            throw new DukeNoSuchTaskException();
         }
     }
 
@@ -73,15 +78,15 @@ public class TaskList {
      *
      * @param index Index of tasks to be deleted.
      * @return String message that task has been deleted.
-     * @throws DukeException For invalid indexes given by user.
+     * @throws DukeNoSuchTaskException For invalid indexes given by user.
      */
-    public String deleteTask(int index) throws DukeException {
+    public String deleteTask(int index) throws DukeNoSuchTaskException {
         if (index >= 0 && index < list.size()) {
             Task removed = list.remove(index);
             String totalTask = String.format("Now you have %d task(s) in the list.", list.size());
             return String.format("Noted! I've removed this task:\n  %s\n%s", removed, totalTask);
         } else {
-            throw new DukeException("No such task :< (Check the index input!!!)");
+            throw new DukeNoSuchTaskException();
         }
     }
 

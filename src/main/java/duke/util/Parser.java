@@ -1,3 +1,19 @@
+package duke.util;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FilterCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.exception.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+import duke.util.Instruction;
+
 import java.beans.IntrospectionException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -5,7 +21,7 @@ import java.time.LocalTime;
 
 public class Parser {
 
-    public static Command parse(String input) throws DukeException{
+    public static Command parse(String input) throws DukeException {
         Instruction instruction = Instruction.valueOfLabel(input.split(" ")[0]);
         switch (instruction) {
         case LIST:
@@ -36,7 +52,7 @@ public class Parser {
         case BYE:
             return new ExitCommand();
         default:
-            throw new DukeException("Invalid command @_@ Try typing 'help' to see my list of commands!");
+            throw new DukeInvalidCommandException();
         }
     }
 
@@ -48,11 +64,10 @@ public class Parser {
      * @return String containing information that we need.
      * @throws DukeException Prevent empty descriptions.
      */
-    private static String extractInfo(String input, Instruction instruction) throws DukeException {
+    private static String extractInfo(String input, Instruction instruction) throws DukeMissingDescriptionException {
         String[] info = input.split(" ", 2);
         if (info.length < 2) {
-            throw new DukeException(String.format("Error: OOPS!!! The description of %s cannot be empty.",
-                    instruction.label));
+            throw new DukeMissingDescriptionException(instruction);
         }
         return info[1];
     }
@@ -65,11 +80,10 @@ public class Parser {
      * @return int of the task user wants to select.
      * @throws DukeException Prevent empty indexes.
      */
-    public static int extractIndex(String input, Instruction instruction) throws DukeException {
+    public static int extractIndex(String input, Instruction instruction) throws DukeMissingIndexException {
         String[] info = input.split(" ", 2);
         if (info.length < 2 || info[1].equals("")) {
-            throw new DukeException(String.format("Error: OOPS!!! The index argument for %s cannot be empty.",
-                    instruction.label));
+            throw new DukeMissingIndexException(instruction);
         }
         return Integer.parseInt(info[1]) - 1;
     }
@@ -83,12 +97,12 @@ public class Parser {
      */
     public static String[] extractDeadline(String info) throws DukeException {
         if (!info.contains("/by")) {
-            throw new DukeException("Error: '/by' argument is missing!");
+            throw new DukeMissingArgumentException("/by");
         }
         String[] description = info.split(" /by ", 2);
 
         if (description.length < 2 || description[1].equals("")) {
-            throw new DukeException("Error: OOPS!!! Argument after '/by' is empty!");
+            throw new DukeMissingDateTimeException();
         }
         return description;
     }
@@ -102,16 +116,16 @@ public class Parser {
      */
     public static String[] extractEvent(String info) throws DukeException {
         if (!info.contains("/at")) {
-            throw new DukeException("Error: '/at' argument is missing!");
+            throw new DukeMissingArgumentException("/at");
         }
         String[] description = info.split(" /at ", 2);
         if (description.length < 2 || description[1].equals("")) {
-            throw new DukeException("Error: OOPS!!! Argument after '/at' is empty!");
+            throw new DukeMissingDateTimeException();
         }
         return description;
     }
 
-    public static LocalDate parseDate(String date) throws DukeException {
+    public static LocalDate parseDate(String date) throws DukeInvalidDateException {
         try {
             // Reuse regex from https://www.javacodeexamples.com/java-regular-expression-validate-date-example-regex/1504
             String[] dateSplit;
@@ -127,14 +141,14 @@ public class Parser {
                 dateSplit = date.split("/", 3);
                 return LocalDate.parse(String.format("%s-%s-%s", dateSplit[2], dateSplit[1], dateSplit[0]));
             } else {
-                throw new DateTimeException("Invalid Date");
+                throw new DukeInvalidDateException();
             }
-        } catch (DateTimeException e) {
-            throw new DukeException("Invalid Date @_@\nDate formats: dd/mm/yyyy, dd-mm-yyyy, yyyy-mm-dd");
+        } catch (DateTimeException | DukeInvalidDateException e) {
+            throw new DukeInvalidDateException();
         }
     }
 
-    public static LocalTime parseTime(String time) throws DukeException {
+    public static LocalTime parseTime(String time) throws DukeInvalidTimeException {
         try {
             // Reuse regex from https://www.geeksforgeeks.org/how-to-validate-time-in-24-hour-format-using-regular-expression/
             if (time.length() == 4) {
@@ -147,10 +161,10 @@ public class Parser {
             } else if (time.length() == 5 && time.split(":",2).length == 2) {
                 return LocalTime.parse(time);
             } else {
-                throw new DateTimeException("Invalid Time");
+                throw new DukeInvalidTimeException();
             }
-        } catch (DateTimeException e) {
-            throw new DukeException("Invalid Time @_@\nTime format: HHmm HH:mm");
+        } catch (DateTimeException | DukeInvalidTimeException e) {
+            throw new DukeInvalidTimeException();
         }
     }
 }

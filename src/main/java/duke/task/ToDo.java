@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * ToDo class represents tasks without any date/time attached to it e.g., visit new theme park.
  *

@@ -1,3 +1,5 @@
+package duke.util;
+
 public class Ui {
     private static final String DIVIDER = "--------------------------------------------------------------------------------";
     private static final String PROMPT = "Enter Command: ";
