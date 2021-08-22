@@ -1,7 +1,7 @@
-package commandImpl;
+package commandimpl;
 
-import commandInterface.ICommandLogicUnit;
 import dao.TaskDao;
+import icommand.ICommandLogicUnit;
 import model.*;
 
 import java.util.Map;
@@ -30,36 +30,36 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
 	@Override
 	public void processCommand(Command command, Map<String, String> arguments) {
 		switch (command) {
-			case BYE:
-				processBye();
-				break;
-			case LIST:
-				processList();
-				break;
-			case DEADLINE:
-				processAdd(new Deadline(
-						arguments.getOrDefault("description", "default deadline"),
-						arguments.getOrDefault("timing", "default timing")
-				));
-				break;
-			case EVENT:
-				processAdd(new Event(
-						arguments.getOrDefault("description", "default event"),
-						arguments.getOrDefault("timing", "default timing")
-				));
-				break;
-			case TODOS:
-				processAdd(new ToDos(arguments.getOrDefault("description", "default todo")));
-				break;
-			case DONE:
-				// convert 1-indexing to 0-indexing
-				processDone(Integer.parseInt(arguments.getOrDefault("index", "-1")) - 1);
-				break;
-			case DELETE:
-				processDelete(Integer.parseInt(arguments.getOrDefault("index", "-1")) - 1);
-				break;
-			default:
-				printSentence("command not recognized by processor");
+		case BYE:
+			processBye();
+			break;
+		case LIST:
+			processList();
+			break;
+		case DEADLINE:
+			processAdd(new Deadline(
+					arguments.getOrDefault("description", "default deadline"),
+					arguments.getOrDefault("timing", "default timing")
+			));
+			break;
+		case EVENT:
+			processAdd(new Event(
+					arguments.getOrDefault("description", "default event"),
+					arguments.getOrDefault("timing", "default timing")
+			));
+			break;
+		case TODOS:
+			processAdd(new ToDos(arguments.getOrDefault("description", "default todo")));
+			break;
+		case DONE:
+			// convert 1-indexing to 0-indexing
+			processDone(Integer.parseInt(arguments.getOrDefault("index", "-1")) - 1);
+			break;
+		case DELETE:
+			processDelete(Integer.parseInt(arguments.getOrDefault("index", "-1")) - 1);
+			break;
+		default:
+			printSentence("command not recognized by processor");
 		}
 	}
 	

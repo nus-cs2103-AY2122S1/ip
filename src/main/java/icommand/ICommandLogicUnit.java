@@ -1,4 +1,4 @@
-package commandInterface;
+package icommand;
 
 import model.Command;
 

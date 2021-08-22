@@ -1,9 +1,9 @@
-package commandInterface;
+package icommand;
 
 /**
  * Command line processor interface that takes in the input from the console
  */
-public interface ICommandProcessor {
+public interface ICommandProcessor extends AutoCloseable {
 	/**
 	 * Parse the input from console into corresponding command and process it, current implementation using Command Processor
 	 */
