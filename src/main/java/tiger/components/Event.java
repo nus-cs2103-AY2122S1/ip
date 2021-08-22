@@ -8,7 +8,7 @@ import tiger.utils.DateStringConverter;
 public class Event extends Task {
 
     /** Date event is at. */
-    private CustomDate customDate;
+    private final CustomDate customDate;
 
     /**
      * Private constructor for {@code Event} class.
@@ -85,6 +85,7 @@ public class Event extends Task {
 
     /**
      * Given a String loaded from storage, interpret it and return its corresponding {@code Event}
+     *
      * @param s String loaded from storage.
      * @return the corresponding {@code Event} object.
      * @throws TigerStorageLoadException if the loaded string is corrupted, or if there is so {@code IOException}.

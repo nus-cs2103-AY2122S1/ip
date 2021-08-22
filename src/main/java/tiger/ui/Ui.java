@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class Ui {
 
     private AppState applicationState;
-    private Scanner scanner;
+    private final Scanner scanner;
 
     /**
      * Constructor of the {@code Ui} class. It creates storage file if not

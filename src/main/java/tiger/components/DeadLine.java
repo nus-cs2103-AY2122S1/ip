@@ -8,7 +8,7 @@ import tiger.utils.DateStringConverter;
 public class DeadLine extends Task {
 
     /** Date deadline is due by. */
-    private CustomDate customDate;
+    private final CustomDate customDate;
 
     /**
      * Private constructor for {@code DeadLine} class.

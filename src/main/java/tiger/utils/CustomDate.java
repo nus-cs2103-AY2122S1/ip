@@ -14,8 +14,8 @@ import java.time.LocalTime;
 
 public class CustomDate {
 
-    private LocalDate localDate;
-    private LocalTime localTime;
+    private final LocalDate localDate;
+    private final LocalTime localTime;
     boolean hasTime;
 
     /**
