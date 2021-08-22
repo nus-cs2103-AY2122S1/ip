@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.StringBuilder;
@@ -56,7 +57,37 @@ public class Storage {
         }
     }
 
-    public void loadState() {
+    public LinkedList<Item> loadState() {
+        LinkedList<Item> itemList = new LinkedList<>();
+        try {
+            Scanner fileReader = new Scanner(this.file);
+            while (fileReader.hasNextLine()) {
+                String currLine = fileReader.nextLine();
+                String[] currArgs = currLine.split("|");
+                Item toAdd = null;
 
+                switch (currArgs[0]) {
+                case "T":
+                    toAdd = new ToDo(currArgs[2]);
+                    break;
+                case "D":
+                    toAdd = new Deadline(currArgs[2], currArgs[3]);
+                    break;
+                case "E":
+                    toAdd = new Event(currArgs[2], currArgs[3]);
+                    break;
+                }
+
+                if (currArgs[1] == "X") {
+                    toAdd.markAsDone();
+                }
+
+                itemList.add(toAdd);
+            }
+            fileReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return itemList;
     }
 }
