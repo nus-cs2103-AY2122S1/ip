@@ -1,86 +1,57 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.nio.file.Path;
 
 public class TaskManager {
-    static private List<Task> taskList = new ArrayList<>();
-    static private final String DB_NAME = "db.txt";
+    private final List<Task> taskList = new ArrayList<>();
+    private final Storage storage = new Storage();
 
-    public static void initialize() throws DateTimeException {
-        load(DB_NAME);
+    TaskManager() throws DateTimeException {
+        load();
     }
 
-    public static Task addTask(String type, Optional<String> args) throws DukeException, IllegalArgumentException, DateTimeException {
-        Task ret = null;
-        // parse raw task string
-        switch (type) {
-            case "todo":
-                ret = ToDo.of(args);
-                break;
-            case "deadline":
-                ret = Deadline.of(args);
-                break;
-            case "event":
-                ret = Event.of(args);
-                break;
-            default:
-                throw new InvalidDukeCommandException();
-        }
-        taskList.add(ret);
-        save(DB_NAME);
-
-        return ret;
+    public void addTask(Task task) {
+        taskList.add(task);
+        save();
     }
 
-    public static Task deleteTask(int taskId) throws IllegalArgumentException {
+    public Task deleteTask(int taskId) throws IllegalArgumentException {
         if (taskId < taskList.size() && taskId >= 0) {
             Task ret = taskList.remove(taskId);
-            save(DB_NAME);
+            save();
             return ret;
         } else {
             throw new IllegalArgumentException("☹ OOPS!!! Task Index is invalid!!");
         }
     }
 
-    public static int taskCount() {
+    public int taskCount() {
         return taskList.size();
     }
 
-    public static Task completeTask(int taskId) throws IllegalArgumentException {
+    public Task completeTask(int taskId) throws IllegalArgumentException {
         if (taskId < taskList.size() && taskId >= 0) {
             taskList.set(taskId, taskList.get(taskId).done());
-            save(DB_NAME);
+            save();
             return taskList.get(taskId);
         } else {
             throw new IllegalArgumentException("☹ OOPS!!! Task Index is invalid!!");
         }
     }
 
-    public static String listTasks() {
+    public String listTasks() {
         return Stream.iterate(0, x -> x < taskList.size(), x -> x+1)
                 .map(x -> String.format("%d. %s", x+1, taskList.get(x).toString()))
                 .collect(Collectors.joining("\n"));
     }
 
-    private static void load(String dbName) throws DateTimeException {
-        Path path = Paths.get(".", dbName);
-        boolean fileExists = Files.exists(path);
-        if(!fileExists) {
-            return;
-        }
-
+    private void load() throws DateTimeException {
         try {
-            BufferedReader file = Files.newBufferedReader(path);
-            file.lines().forEachOrdered(line -> {
+            Stream<String> data = storage.load();
+            data.forEachOrdered(line -> {
                 String[] parts = line.split("[|]");
                 String type = parts[0];
                 boolean isDone = parts[1].equals("1");
@@ -101,21 +72,9 @@ public class TaskManager {
         }
     }
 
-    private static void save(String dbName) {
-        Path path = Paths.get(".", dbName);
-        boolean fileExists = Files.exists(path);
+    private void save() {
         try {
-            if (!fileExists) {
-                path = Files.createFile(path);
-            }
-            BufferedWriter file = Files.newBufferedWriter(path);
-
-            for (int i=0; i < taskList.size(); i++) {
-                Task t = taskList.get(i);
-                file.write(t.toDatabaseString() + "\n");
-            }
-
-            file.close();
+            storage.save(taskList);
         } catch (IOException e) {
             e.printStackTrace();
         }

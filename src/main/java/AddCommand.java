@@ -1,0 +1,37 @@
+import java.time.DateTimeException;
+
+public class AddCommand extends Command{
+    private final String type;
+    private final String[] args;
+
+    AddCommand(String type, String... args) {
+        this.type = type;
+        this.args = args;
+    }
+
+    @Override
+    public void execute(TaskManager taskManager, Ui ui) throws InvalidDukeCommandException, DateTimeException {
+        Task task;
+        switch (type) {
+        case "todo":
+            task = ToDo.of(false, args[0]);
+            break;
+        case "deadline":
+            task = Deadline.of(false, args[0], args[1]);
+            break;
+        case "event":
+            task = Event.of(false, args[0], args[1]);
+            break;
+        default:
+            throw new InvalidDukeCommandException();
+        }
+
+        taskManager.addTask(task);
+
+        ui.reply(String.format(
+                "Got it. I've added this task: \n" +
+                "%s\n" +
+                "Now you have %d tasks in the list", task.toString(), taskManager.taskCount()
+        ));
+    }
+}
