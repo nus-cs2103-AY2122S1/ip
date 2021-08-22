@@ -1,6 +1,8 @@
-import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class Duke {
 
@@ -73,9 +75,10 @@ public class Duke {
     private void addDeadline(String args) throws WrongArgumentDukeException {
         String[] strArr = args.split(" /by ", 2);
         if (strArr.length >= 2) {
-            addTask(new Deadline(strArr[0], strArr[1]));
+            LocalDate date = getLocalDate(strArr[1]);
+            addTask(new Deadline(strArr[0], date));
         } else {
-            throw new WrongArgumentDukeException();
+            throw new WrongArgumentDukeException("Did you forget to use /by");
         }
 
     }
@@ -83,9 +86,10 @@ public class Duke {
     private void addEvent(String args) throws WrongArgumentDukeException {
         String[] strArr = args.split(" /at ", 2);
         if (strArr.length >= 2) {
-            addTask(new Event(strArr[0], strArr[1]));
+            LocalDate date = getLocalDate(strArr[1]);
+            addTask(new Event(strArr[0], date));
         } else {
-            throw new WrongArgumentDukeException();
+            throw new WrongArgumentDukeException("Did you forget to use /at");
         }
 
     }
@@ -106,6 +110,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Get argument to command if it exists.
+     *
+     * @param arr array splitted into 2, first is command second is argument
+     * @return get argument to command
+     * @throws NoArgumentDukeException
+     */
     private String getArgs(String[] arr) throws NoArgumentDukeException {
         if (arr.length >= 2 && !arr[1].equals("")) {
             return arr[1];
@@ -114,6 +125,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Marks a Task as done.
+     *
+     * @param indexStr string format of index
+     * @throws WrongArgumentDukeException
+     * @throws InvalidOperationDukeException
+     */
     private void markDone(String indexStr) throws WrongArgumentDukeException, InvalidOperationDukeException {
         try {
             int index = Integer.parseInt(indexStr);
@@ -125,9 +143,17 @@ public class Duke {
             System.out.println(String.format("Task %d is done", index));
             System.out.println(storedList.get(index - 1) + "\n");
         } catch (NumberFormatException e) {
-            throw new WrongArgumentDukeException();
+            throw new WrongArgumentDukeException("Not a number specified");
         }
     }
+
+    /**
+     * Deletes an entry in this Duke.
+     *
+     * @param indexStr string format of index
+     * @throws WrongArgumentDukeException
+     * @throws InvalidOperationDukeException
+     */
 
     private void delete(String indexStr) throws WrongArgumentDukeException, InvalidOperationDukeException {
         try {
@@ -140,7 +166,24 @@ public class Duke {
             System.out.println(String.format("Removed task %d", index));
             System.out.println(task + "\n");
         } catch (NumberFormatException e) {
-            throw new WrongArgumentDukeException();
+            throw new WrongArgumentDukeException("Not a number specified");
+        }
+
+    }
+
+    /**
+     *
+     * Converts a string to a LocalDate
+     *
+     * @param str string representation of a date
+     * @return LocalDate object represented by string
+     * @throws WrongArgumentDukeException
+     */
+    private LocalDate getLocalDate(String str) throws WrongArgumentDukeException {
+        try {
+            return LocalDate.parse(str);
+        } catch (DateTimeParseException e) {
+            throw new WrongArgumentDukeException("Cannot parse date.");
         }
     }
 
