@@ -29,7 +29,6 @@ public class Deadline extends Task {
         super(description, isDone);
         Scanner s = new Scanner(description);
         this.command = description;
-        System.out.println(this.command);
         while (s.hasNext()) {
             String next = s.next();
             if (next.equals("/at")) {
@@ -43,6 +42,7 @@ public class Deadline extends Task {
                             DateTimeFormatter format = DateTimeFormatter.ofPattern(formatter);
                             this.deadline = LocalDate.parse(date, format);
                         } else {
+                            this.command += " " + Duke.getFormat();
                             this.deadline = LocalDate.parse(date, currentFormat);
                         }
                     } else {
@@ -146,12 +146,7 @@ public class Deadline extends Task {
                     + getStatusIcon()
                     + " "
                     + this.command;
-//                    + " "
-//                    + Duke.getFormat();
         return data;
     }
 
-    public String getCommand() {
-        return this.command;
-    }
 }

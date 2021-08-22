@@ -110,7 +110,7 @@ public class Duke {
                                 "Date format has been updated to: "
                                         + getFormat()
                         );
-                        l.writeToFile(true);
+                        l.writeToFile();
                     } catch (IllegalArgumentException e) {
                         System.out.println("Not an acceptable format. Please try again");
                     }
