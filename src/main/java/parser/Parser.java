@@ -53,6 +53,7 @@ public class Parser {
         if (splitCommand.length > 1) {
             throw new PixInvalidTaskException();
         }
+
         return new ExitCommand();
     }
 
@@ -69,6 +70,7 @@ public class Parser {
         if (splitCommand[1].isBlank()) {
             throw new PixMissingInfoException(splitCommand[0]);
         }
+
         return new AddCommand(new Todo(splitCommand[1]));
     }
 
@@ -127,6 +129,7 @@ public class Parser {
         if (splitCommand.length > 1) {
             throw new PixMissingInfoException(splitCommand[0]);
         }
+
         return new ListCommand();
     }
 
