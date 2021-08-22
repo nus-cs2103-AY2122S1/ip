@@ -30,7 +30,7 @@ class UnknownCommandException extends DukeException {
  */
 class InvalidFormatException extends DukeException {
     public InvalidFormatException(String format) {
-        super("Please follow this format: " + format);
+        super("Invalid format: " + format);
     }
 }
 
@@ -41,4 +41,11 @@ class InvalidTaskIndexException extends DukeException {
     public InvalidTaskIndexException() {
         super("Invalid task index!");
     }
+}
+
+/**
+ * Thrown when reading a file with invalid format.
+ */
+class InvalidFileFormatException extends DukeException {
+    public InvalidFileFormatException() { super ("Invalid file format! File ignored!"); }
 }
