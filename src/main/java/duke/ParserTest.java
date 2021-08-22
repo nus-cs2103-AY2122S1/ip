@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ParserTest {
 
+
     @Test
     void parseTestList() throws DukeException {
         Parser testParser = new Parser();

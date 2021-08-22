@@ -36,6 +36,9 @@ public class Ui {
 
     }
 
+    /**
+     * Method that gives the goodbye message to the user.
+     */
     protected void goodbye() {
         String exitMessage = "Leaving just like that? Fine. See you soon I guess.";
         System.out.println(exitMessage);
