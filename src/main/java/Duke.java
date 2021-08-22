@@ -1,3 +1,4 @@
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -6,11 +7,14 @@ import java.util.Scanner;
  * 'delete' and 'bye'
  */
 public class Duke {
-
+    private static DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static void main(String[] args) {
         start();
     }
 
+    public static DateTimeFormatter getFormat() {
+        return format;
+    }
     /**
      * Method to start the bot and waits for the user's input.
      */
