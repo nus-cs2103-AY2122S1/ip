@@ -8,38 +8,31 @@ import static java.lang.Integer.parseInt;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    private UI ui;
+
+    public Duke() {
+        ui = new UI();
         Scanner scanner = new Scanner(System.in);
         try {
             List<Task> taskList = TextFile.readFromTextFile();
             run(scanner, taskList);
         } catch (FileNotFoundException e) {
-            System.out.println("Lollipop: ./data or ./data/task_list.txt is not found.");
+            ui.printLoadingError();
         }
-
     }
 
-    public static void run(Scanner scanner, List<Task> taskList) {
-        // Hello message
-        System.out.println(
-                "Lollipop: Hello! I am your personal chatbot, Lollipop! " +
-                        "What would you like to do today?");
-        System.out.println("");
-        System.out.print("You: ");
-        String command = scanner.nextLine();
+    public void run(Scanner scanner, List<Task> taskList) {
+        ui.printWelcome();
+        String command = ui.readCommand();
 
         // Commands
         while (!command.equals("bye")) {
             try {
                 if (command.equals("list")) {
                     if (taskList.size() == 0) {
-                        System.out.println("Lollipop: You have no tasks available.");
+                        ui.printNoTaskAvailable();
                     } else {
-                        System.out.println("Lollipop: Here are your tasks");
-                        for (int i = 0; i < taskList.size(); i++) {
-                            Task task = taskList.get(i);
-                            System.out.printf("%d. %s%n", i + 1, task.toString());
-                        }
+                        ui.printTaskList(taskList);
                     }
 
                 } else if (command.startsWith("done")) {
@@ -47,14 +40,14 @@ public class Duke {
                     Task task = taskList.get(taskNumber - 1);
                     task.markAsDone();
                     TextFile.writeToTextFile(taskList);
-                    System.out.printf("Lollipop: %s has been marked as done.%n", task.toString());
+                    ui.printTaskMarkedDone(task);
 
                 } else if (command.startsWith("delete")) {
                     int taskNumber = parseInt(command.split(" ")[1]);
                     Task task = taskList.get(taskNumber - 1);
                     taskList.remove(taskNumber - 1);
                     TextFile.writeToTextFile(taskList);
-                    System.out.printf("Lollipop: %s has been deleted.%n", task.toString());
+                    ui.printDeleteTask(task);
 
                 } else if (command.startsWith("todo")) {
                     String[] splitCommand = command.split(" ", 2);
@@ -65,7 +58,7 @@ public class Duke {
                     Task task = new Todo(description);
                     taskList.add(task);
                     TextFile.writeToTextFile(taskList);
-                    System.out.printf("Lollipop: %s has been added.%n", task.toString());
+                    ui.printAddTask(task);
 
                 } else if (command.startsWith("deadline")) {
                     String[] splitCommand = command.split(" ", 2);
@@ -84,7 +77,7 @@ public class Duke {
                     Task task = new Deadline(description, deadline);
                     taskList.add(task);
                     TextFile.writeToTextFile(taskList);
-                    System.out.printf("Lollipop: %s has been added.%n", task.toString());
+                    ui.printAddTask(task);
 
                 } else if (command.startsWith(("event"))) {
                     String[] splitCommand = command.split(" ", 2);
@@ -103,7 +96,7 @@ public class Duke {
                     Task task = new Event(description, time);
                     taskList.add(task);
                     TextFile.writeToTextFile(taskList);
-                    System.out.printf("Lollipop: %s has been added.%n", task.toString());
+                    ui.printAddTask(task);
 
                 } else if (command.startsWith(("date"))) {
                     String[] splitCommand = command.split(" ", 2);
@@ -112,43 +105,30 @@ public class Duke {
                     }
 
                     LocalDate date = LocalDate.parse(splitCommand[1]);
-                    System.out.println("Lollipop: Here the tasks that occurs on the specified date.");
-                    int count = 1;
-                    for (Task task : taskList) {
-                        if (task instanceof Deadline) {
-                            LocalDate deadline = ((Deadline) task).getDeadline();
-                            if (deadline.equals(date)) {
-                                System.out.printf("%d. %s%n", count, task);
-                            }
-                        } else if (task instanceof Event) {
-                            LocalDate time = ((Event) task).getTime();
-                            if (time.equals(date)) {
-                                System.out.printf("%d. %s%n", count, task);
-                            }
-                        }
-                    }
+                    ui.printTaskOnDate(taskList, date);
 
                 } else {
                     throw new DukeException("I do not understand what that means :(");
                 }
             } catch (DukeException e) {
-                System.out.printf("Lollipop: %s%n", e.getMessage());
+                ui.printDukeException(e);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Lollipop: No such task number found.");
+                ui.printIndexOutOfBoundsException();
             } catch (NumberFormatException e) {
-                System.out.println("Lollipop: Please input a number.");
+                ui.printNumberFormatException();
             } catch (FileNotFoundException e) {
-                System.out.println("Lollipop: ./data or ./data/task_list.txt is not found.");
+                ui.printLoadingError();
             } catch (DateTimeParseException e) {
-                System.out.println("Lollipop: Please specify a valid date format, such as YYYY-MM-DD");
+                ui.printDateTimeParseException();
             }
 
-            System.out.println("");
-            System.out.print("You: ");
-            command = scanner.nextLine();
+            command = ui.readCommand();
         }
 
-        // Goodbye message
-        System.out.println("Lollipop: See you again soon!");
+        ui.printGoodBye();
+    }
+
+    public static void main(String[] args) {
+        new Duke();
     }
 }
