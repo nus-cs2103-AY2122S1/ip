@@ -2,25 +2,24 @@ package duke;
 
 public class Task {
     private final String body;
-    private final boolean done;
+    private final boolean isDone;
 
     Task(String body){
         this.body = body;
-        this.done = false;
+        this.isDone = false;
     }
 
     Task(String body, boolean done) {
         this.body = body;
-        this.done = done;
+        this.isDone = done;
     }
-
 
     String getBody() {
         return this.body;
     }
 
-    boolean getDone() {
-        return this.done;
+    boolean isDone() {
+        return this.isDone;
     }
 
     Task setDone() {
@@ -29,10 +28,9 @@ public class Task {
 
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return " [X] " + this.body;
-        }
-        else {
+        } else {
             return " [ ] " + this.body;
         }
     }

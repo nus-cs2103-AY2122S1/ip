@@ -17,10 +17,9 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        if (this.getDone()) {
+        if (this.isDone()) {
             return "[T] [X]" + this.getBody();
-        }
-        else {
+        } else {
             return "[T] [ ]" + this.getBody();
         }
     }

@@ -1,12 +1,12 @@
 package duke;
 
+import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Storage {
@@ -91,30 +91,25 @@ public class Storage {
         FileWriter fw = new FileWriter(this.filePath);
         for (Task i : updatedTasks) {
             String taskBody = i.getBody();
-            boolean isDone = i.getDone();
+            boolean isDone = i.isDone();
             if (i instanceof Todo) {
                 if (!isDone) {
                     fw.write("T|0|" + taskBody + System.lineSeparator());
-                }
-                else {
+                } else {
                     fw.write("T|1|" + taskBody + System.lineSeparator());
                 }
-            }
-            else if (i instanceof Deadline) {
+            } else if (i instanceof Deadline) {
                 LocalDate taskDeadline = ((Deadline) i).getDeadline();
                 if (!isDone) {
                     fw.write("D|0|" + taskBody + "|" + taskDeadline + System.lineSeparator());
-                }
-                else {
+                } else {
                     fw.write("D|1|" + taskBody + "|" + taskDeadline + System.lineSeparator());
                 }
-            }
-            else {
+            } else {
                 LocalDate taskDate = ((Event) i).getDate();
                 if (!isDone) {
                     fw.write("E|0|" + taskBody + "|" + taskDate + System.lineSeparator());
-                }
-                else {
+                } else {
                     fw.write("E|1|" + taskBody + "|" + taskDate + System.lineSeparator());
                 }
             }
