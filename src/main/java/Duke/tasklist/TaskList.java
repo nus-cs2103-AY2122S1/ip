@@ -14,9 +14,6 @@ public class TaskList {
 
     private ArrayList<Task> taskList = new ArrayList<>();
 
-    private int nextSpace(String str) {
-        return str.indexOf(' ');
-    }
     public TaskList(List<String> initial) {
         Scanner scanner;
         for (int i = 0; i < initial.size(); i++) {
