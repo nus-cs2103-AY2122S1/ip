@@ -25,4 +25,14 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
     }
+
+    /**
+     * Converts the task to a string with the format of the file in hard disk.
+     *
+     * @return String representation of the task in the file's format.
+     */
+    @Override
+    public String toFileFormatString() {
+        return String.format("D / %s / %s / %s\n", this.isDone ? "1" : "0", this.description, this.by);
+    }
 }

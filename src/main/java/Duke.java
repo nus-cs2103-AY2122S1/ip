@@ -1,4 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -12,10 +19,14 @@ public class Duke {
             "What can I do for you?\n" +
             "____________________________________________________________\n";
     /** Message to be printed when the program exits */
-    public static final String EXITING_MESSAGE =
+    private static final String EXITING_MESSAGE =
             "____________________________________________________________\n" +
             "Bye. Hope to see you again soon!\n" +
             "____________________________________________________________";
+    /** Path of the current folder as a string */
+    private static final String DIRECTORY_PATH = System.getProperty("user.dir");
+    /** Path of file containing data saved */
+    private static File data;
     /** List of tasks */
     private static ArrayList<Task> tasks = new ArrayList<>();
     /** Whether the Duke program is running */
@@ -27,9 +38,56 @@ public class Duke {
      * Constructor of the class 'Duke'.
      */
     public Duke() {
+        Duke.data = Paths.get(Duke.DIRECTORY_PATH, "data", "duke.txt").toFile();
+        Duke.readFile();
         this.isRunning = true;
         System.out.println(Duke.GREETING_MESSAGE);
         this.input = new Scanner(System.in);
+    }
+
+    /**
+     * Reads the data in the file. If the file doesn't exist, create it.
+     */
+    private static void readFile() {
+        try {
+            Scanner fileScanner = new Scanner(Duke.data);
+            while (fileScanner.hasNextLine()) {
+                String task = fileScanner.nextLine();
+                Duke.readData(task);
+            }
+            fileScanner.close();
+        } catch (FileNotFoundException fileNotFoundException) { // if file doesn't exist, create it.
+            try {
+                Duke.data.createNewFile();
+            } catch (IOException ioException) { // if directory doesn't exist, create it.
+                File directory = Paths.get(Duke.DIRECTORY_PATH, "data").toFile();
+                directory.mkdirs();
+                Duke.readFile(); // run this method again to create a file.
+            }
+        }
+    }
+
+    /**
+     * Reads a line of data, creates a task and adds it to the task list.
+     *
+     * @param line A line of data.
+     */
+    private static void readData(String line) {
+        String[] splitted = line.split(" / ");
+        Task task;
+        if (splitted[0].equals("T")) { // a todo task
+            task = new ToDo(splitted[2]);
+        } else if (splitted[0].equals("D")) { // a task with deadline
+            task = new Deadline(splitted[2], splitted[3]);
+        } else if (splitted[0].equals("E")) { // an event
+            task = new Event(splitted[2], splitted[3]);
+        } else {
+            task = new Task(splitted[2]);
+        }
+        if (splitted[1].equals("1")) {
+            task.markAsDone();
+        }
+        Duke.tasks.add(task); // add to task list.
     }
 
     /**
@@ -37,8 +95,18 @@ public class Duke {
      *
      * @param task The new task.
      */
-    public static void addToList(Task task) {
-        Duke.tasks.add(task);
+    public static void addToList(Task task){
+        Duke.tasks.add(task); // add to task list.
+        try {
+            FileWriter fileWriter = new FileWriter(Duke.data, true);
+            fileWriter.append(task.toFileFormatString()); // write to file.
+            fileWriter.close();
+        } catch (IOException ioException) {
+            Duke.readFile();
+            DukeException dukeException = new DukeException(
+                    "☹ OOPS!!! The file cannot be found. A new file has been created, please try again!");
+            System.out.println(dukeException);
+        }
     }
 
     /**
@@ -47,7 +115,41 @@ public class Duke {
      * @param task The task to be removed.
      */
     public static void removeFromList(Task task) {
-        Duke.tasks.remove(task);
+        try {
+            List<String> lines = Files.readAllLines(Duke.data.toPath());
+            FileWriter fileWriter = new FileWriter(Duke.data);
+            int index = Duke.tasks.indexOf(task);
+            for (int i = 0; i < Duke.getNumOfTasks(); i++) { // remove this task from file.
+                if (i != index) {
+                    fileWriter.append(lines.get(i) + "\n");
+                }
+            }
+            fileWriter.close();
+        } catch (IOException ioException) {
+            Duke.readFile();
+            DukeException dukeException = new DukeException(
+                    "☹ OOPS!!! The file cannot be found. A new file has been created, please try again!");
+            System.out.println(dukeException);
+        }
+        Duke.tasks.remove(task); // remove from task list.
+    }
+
+    /**
+     * Rewrites the data to the file.
+     */
+    public static void rewriteFile() {
+        try {
+            FileWriter fileWriter = new FileWriter(Duke.data);
+            for (int i = 0; i < Duke.getNumOfTasks(); i++) {
+                fileWriter.append(Duke.tasks.get(i).toFileFormatString());
+            }
+            fileWriter.close();
+        } catch (IOException ioException) {
+            Duke.readFile();
+            DukeException dukeException = new DukeException(
+                    "☹ OOPS!!! The file cannot be found. A new file has been created, please try again!");
+            System.out.println(dukeException);
+        }
     }
 
     /**
@@ -158,8 +260,8 @@ public class Duke {
         while (duke.isRunning) {
             try {
                 duke.readCommand();
-            } catch (DukeException e) {
-                System.out.println(e);
+            } catch (DukeException dukeException) {
+                System.out.println(dukeException);
                 continue;
             }
         }

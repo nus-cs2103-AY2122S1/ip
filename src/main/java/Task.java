@@ -23,7 +23,7 @@ public class Task {
      * @return The status of the task.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (this.isDone ? "X" : " "); // mark done task with X
     }
 
     /**
@@ -31,6 +31,7 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+        Duke.rewriteFile();
     }
 
     /**
@@ -42,5 +43,14 @@ public class Task {
     public String toString() {
         String status = this.getStatusIcon();
         return String.format("[%s] %s", status, this.description);
+    }
+
+    /**
+     * Converts the task to a string with the format of the file in hard disk.
+     *
+     * @return String representation of the task in the file's format.
+     */
+    public String toFileFormatString() {
+        return String.format("%s / %s\n", this.isDone ? "1" : "0", this.description);
     }
 }
