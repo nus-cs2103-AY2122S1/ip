@@ -4,6 +4,10 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.ToDoTask;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Helper class to parse commands.
  *
@@ -18,6 +22,8 @@ public class CommandParser {
     private static final String ADD_DEADLINE_TASK_COMMAND = "deadline";
     private static final String ADD_EVENT_TASK_COMMAND = "event";
     private static final String DELETE_TASK_COMMAND = "delete";
+    private static final String DATE_TIME_FORMAT_PATTERN = "yyyy/M/d HHmm";
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT_PATTERN);
 
     /**
      * Parses the commands to get the command name.
@@ -176,12 +182,19 @@ public class CommandParser {
             deadlineSb.append(tokens[i]).append(" ");
         }
         String taskDescription = taskDescriptionSb.toString().strip();
-        String deadline = deadlineSb.toString().strip();
+        String deadlineStr = deadlineSb.toString().strip();
         if (taskDescription.length() == 0) {
             throw new DukeInvalidCommandException("A description is required for an 'Add Deadline Task' command.");
         }
-        if (deadline.length() == 0) {
+        if (deadlineStr.length() == 0) {
             throw new DukeInvalidCommandException("A deadline is required for an 'Add Deadline Task' command.");
+        }
+        LocalDateTime deadline;
+        try {
+            deadline = LocalDateTime.parse(deadlineStr, DATE_TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidCommandException(String
+                    .format("The deadline should be in the %s format.", DATE_TIME_FORMAT_PATTERN));
         }
         return new DeadlineTask(taskDescription, deadline);
     }
@@ -217,12 +230,19 @@ public class CommandParser {
             timeSb.append(tokens[i]).append(" ");
         }
         String taskDescription = taskDescriptionSb.toString().strip();
-        String time = timeSb.toString().strip();
+        String timeStr = timeSb.toString().strip();
         if (taskDescription.length() == 0) {
             throw new DukeInvalidCommandException("A description is required for an 'Add Event Task' command.");
         }
-        if (time.length() == 0) {
+        if (timeStr.length() == 0) {
             throw new DukeInvalidCommandException("An event time is required for an 'Add Event Task' command.");
+        }
+        LocalDateTime time;
+        try {
+            time = LocalDateTime.parse(timeStr, DATE_TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidCommandException(String
+                    .format("The time should be in the %s format.", DATE_TIME_FORMAT_PATTERN));
         }
         return new EventTask(taskDescription, time);
     }
