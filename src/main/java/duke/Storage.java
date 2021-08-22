@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class Storage {
+
     private final File file;
 
     public Storage(String path_to_file){
@@ -42,7 +42,7 @@ public class Storage {
                 lines.add(data);
             }
             myReader.close();
-            lines.forEach(s -> taskList.addToStorage(s));
+            lines.forEach(s -> taskList.add(s));
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

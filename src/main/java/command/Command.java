@@ -1,16 +1,17 @@
-package Command;
+package command;
 
-import Duke.Parser;
+import duke.*;
 
 public abstract class Command {
-    private String args;
+
+    protected String args;
 
     protected Command(String args){
         this.args = args;
     }
     
-    public static Command createCommand(String input) throws Exception{
-        String[] cmd_args = Parser.parseInput(input);
+    public static Command createCommand(String input) throws DukeException{
+        String[] cmd_args = Parser.parseUserInput(input);
         Command cmd;
         switch (cmd_args[0]){
             case "bye":
@@ -35,10 +36,10 @@ public abstract class Command {
                 cmd = new DeadlineCommand(cmd_args[1]);
                 break;
             default:
-                throw new Exception();
+                throw new DukeException("command not found");
         }
         return cmd;
     }
 
-    public abstract void execute();
+    public abstract void execute(TaskList taskList, Ui ui, Storage store, Duke bot);
 }

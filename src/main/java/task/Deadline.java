@@ -1,12 +1,13 @@
-package Task;
+package task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import Duke.DukeException;
+import duke.DukeException;
 
 public class Deadline extends Task {
+
     private LocalDate by;
 
     public Deadline(String name, String by) throws DukeException {
@@ -21,8 +22,9 @@ public class Deadline extends Task {
 
     @Override
     public String saveTask(){
-        return "DEADLINE|" + this.getName() +"/by" + by + (this.isDone() ? "|1" : "|0");
+        return "deadline|" + this.getName() +"/by" + by + (this.isDone() ? "|1" : "|0");
     }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";

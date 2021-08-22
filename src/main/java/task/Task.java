@@ -1,9 +1,10 @@
-package Task;
+package task;
 
-import Duke.DukeException;
-import Duke.Duke.Commands;
+import duke.DukeException;
+import duke.Parser;
 
 public abstract class Task {
+
     private String name;
     private boolean done;
 
@@ -15,39 +16,39 @@ public abstract class Task {
         this.done = false;
     }
 
-    public static Task taskFactory(Commands cmd, String rest) throws DukeException{
+    public static Task createTask(String type, String rest) throws DukeException{
         Task newTask;
         String[] name_delimit;
-        switch (cmd) {
-            case TODO:
-                newTask = new ToDo(rest.trim());
+        switch (type) {
+            case "todo":
+                newTask = new ToDo(rest);
                 break;
 
-            case DEADLINE:
-                name_delimit = rest.split("/by");
-                checkArg(name_delimit);
-                newTask = new Deadline(name_delimit[0].trim(), name_delimit[1].trim());
+            case "deadline":
+                name_delimit = Parser.parseArgs(rest, "/by");
+                newTask = new Deadline(name_delimit[0], name_delimit[1]);
                 break;
 
-            case EVENT:
-                name_delimit = rest.split("/at");
-                checkArg(name_delimit);
-                newTask = new Event(name_delimit[0].trim(), name_delimit[1].trim());
+            case "event":
+                name_delimit = Parser.parseArgs(rest, "/at");
+                newTask = new Event(name_delimit[0], name_delimit[1]);
                 break;
+
             default:
                 throw new DukeException("command not found");
         }
         return newTask;
     }
+
     public static Task getTask(String s){
-        String[] parts = s.split("\\|");
-        Commands cmd = Commands.valueOf(parts[0]);
-        Task t = taskFactory(cmd, parts[1]);
+        String[] parts = Parser.parseStorage(s);
+        Task t = createTask(parts[0], parts[1]);
         if(parts[2].equals("1")){
             t.markDone();
         }
         return t;
     }
+
     /**
      * marks this task as done
      */
@@ -63,13 +64,6 @@ public abstract class Task {
         return done;
     }
 
-    private static void checkArg(String[] arg) throws DukeException{
-        if(arg.length < 2){
-            throw new DukeException("Please specify time");
-        }else if(arg.length > 2){
-            throw new DukeException("too many argument");
-        }
-    }
     public abstract String saveTask();
 
     /**
