@@ -1,6 +1,6 @@
 Hello, I am
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
@@ -18,27 +18,30 @@ Now you have 0 task in the list
 :'( OOPS!!! There are no tasks so far
 ------------------
 Got it. I have added this task:
-    [E][ ] Townhall (at: Friday 2.30pm)
+    [E][ ] Townhall (at: 2021-08-27, 15:00)
 Now you have 1 task in the list
 ------------------
 Got it. I have added this task:
     [T][ ] Wash laundry
 Now you have 2 tasks in the list
 ------------------
+19/8/2021
 Got it. I have added this task:
-    [D][ ] CS2103T Project (by: 19 August 2359)
+    [D][ ] CS2103T Project (by: 2021-08-19, 23:59)
 Now you have 3 tasks in the list
 ------------------
-1: [E][ ] Townhall (at: Friday 2.30pm)
+1: [E][ ] Townhall (at: 2021-08-27, 15:00)
 2: [T][ ] Wash laundry
-3: [D][ ] CS2103T Project (by: 19 August 2359)
+3: [D][ ] CS2103T Project (by: 2021-08-19, 23:59)
 ------------------
 :'( OOPS!!! Only todo, event or deadline allowed.
 ------------------
-:'( OOPS!!! Invalid input. Please enter the action, followed by "/at" or "/by".
+:'( OOPS!!! Invalid input. Please enter the action, followed by the description.
+If action is "deadline", add a date in the format:"/by dd/mm/yyyy hh:mm".
+If action is "event", add a date in the format: "/at dd/mm/yyyy hh:mm".
 For example: todo Buy a gift for mum
-For example: deadline CS2103T individual project /by 19 August
-For example: event CS2103T lecture /at 19 August
+For example: deadline CS2103T individual project /by 26/08/2021 23:59
+For example: event CS2103T lecture /at 19/08/2021 16:00
 ------------------
 :'( OOPS!!! Use the preposition "by".
 ------------------
@@ -49,17 +52,17 @@ For example: event CS2103T lecture /at 19 August
 :'( OOPS!!! Use the preposition "by".
 ------------------
 Got it. I have added this task:
-    [E][ ] Job Interview (at: Tuesday)
+    [E][ ] Job Interview (at: 2021-08-23, 15:00)
 Now you have 4 tasks in the list
 ------------------
 :'( OOPS!!! Enter the deadline.
 ------------------
 Got it. I have added this task:
-    [D][ ] Prepare presentation (by: 21 August)
+    [D][ ] Prepare presentation (by: 2021-08-22, 21:30)
 Now you have 5 tasks in the list
 ------------------
 Got it. I have added this task:
-    [E][ ] Mum's birthday (at: 2 September 8pm)
+    [E][ ] Mum's birthday (at: 2021-08-24, 20:00)
 Now you have 6 tasks in the list
 ------------------
 Got it. I have added this task:
@@ -75,30 +78,54 @@ Got it. I have added this task:
 Now you have 9 tasks in the list
 ------------------
 Got it. I have added this task:
-    [E][ ] Sleep (at: 2am)
+    [E][ ] Sleep (at: 2021-08-23, 02:00)
 Now you have 10 tasks in the list
 ------------------
-Nice! I've marked this task as done: 
+25/8/2021
+Got it. I have added this task:
+    [D][ ] CS2100 homework (by: 2021-08-25, 23:59)
+Now you have 11 tasks in the list
+------------------
+Got it. I have added this task:
+    [T][ ] Learn to bake
+Now you have 12 tasks in the list
+------------------
+Got it. I have added this task:
+    [T][ ] Renew passport
+Now you have 13 tasks in the list
+------------------
+ 5: [D][ ] Prepare presentation (by: 2021-08-22, 21:30)
+10: [E][ ] Sleep (at: 2021-08-23, 02:00)
+ 4: [E][ ] Job Interview (at: 2021-08-23, 15:00)
+ 6: [E][ ] Mum's birthday (at: 2021-08-24, 20:00)
+11: [D][ ] CS2100 homework (by: 2021-08-25, 23:59)
+ 1: [E][ ] Townhall (at: 2021-08-27, 15:00)
+13: [T][ ] Wash laundry
+------------------
+Nice! I've marked this task as done:
     [T][X] Wash laundry
 ------------------
 :'( OOPS!!! You have already marked this as done
 ------------------
-Nice! I've marked this task as done: 
-    [E][X] Sleep (at: 2am)
+Nice! I've marked this task as done:
+    [T][X] Get a life
 ------------------
 Please key in done [number].
 ------------------
 Please key in delete [number].
 ------------------
- 1: [E][ ] Townhall (at: Friday 2.30pm)
+ 1: [E][ ] Townhall (at: 2021-08-27, 15:00)
  2: [T][X] Wash laundry
- 3: [D][ ] CS2103T Project (by: 19 August 2359)
- 4: [E][ ] Job Interview (at: Tuesday)
- 5: [D][ ] Prepare presentation (by: 21 August)
- 6: [E][ ] Mum's birthday (at: 2 September 8pm)
- 7: [T][ ] Get a life
+ 3: [D][ ] CS2103T Project (by: 2021-08-19, 23:59)
+ 4: [E][ ] Job Interview (at: 2021-08-23, 15:00)
+ 5: [D][ ] Prepare presentation (by: 2021-08-22, 21:30)
+ 6: [E][ ] Mum's birthday (at: 2021-08-24, 20:00)
+ 7: [T][X] Get a life
  8: [T][ ] Get a wife
  9: [T][ ] Get 6 packs
-10: [E][X] Sleep (at: 2am)
+10: [E][ ] Sleep (at: 2021-08-23, 02:00)
+11: [D][ ] CS2100 homework (by: 2021-08-25, 23:59)
+12: [T][ ] Learn to bake
+13: [T][ ] Renew passport
 ------------------
 Bye. Hope to see you again soon!

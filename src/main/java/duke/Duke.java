@@ -1,13 +1,21 @@
+package duke;
+
+import duke.logic.LPrintTask;
+
+import java.time.LocalDateTime;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 /**
  * Duke is a personal assistant that allows users to keep track of events, deadlines and things to do.
  * The main method will start the personal assistant in the console.
  */
 public class Duke {
-    private static final ArrayList<Task> storage = new ArrayList<>();
+    private static final List<Task> storage = new ArrayList<>();
 
     private static void addTask(String[] splitInput) {
         String action; // eg. event, deadline, todo
@@ -15,10 +23,12 @@ public class Duke {
         String preposition = null; // eg. at, by, etc
         StringBuilder dateBuilder = new StringBuilder();
         if (splitInput == null || splitInput.length < 2) {
-            throw new DukeException("Invalid input. Please enter the action, followed by \"/at\" or \"/by\".\n" +
+            throw new DukeException("Invalid input. Please enter the action, followed by the description.\n" +
+                    "If action is \"deadline\", add a date in the format:\"/by dd/mm/yyyy hh:mm\".\n" +
+                    "If action is \"event\", add a date in the format: \"/at dd/mm/yyyy hh:mm\".\n" +
                     "For example: todo Buy a gift for mum\n" +
-                    "For example: deadline CS2103T individual project /by 19 August\n" +
-                    "For example: event CS2103T lecture /at 19 August");
+                    "For example: deadline CS2103T individual project /by 26/08/2021 23:59\n" +
+                    "For example: event CS2103T lecture /at 19/08/2021 16:00");
         }
         action = splitInput[0];
         for (int i = 1; i < splitInput.length; i++) {
@@ -130,12 +140,10 @@ public class Duke {
             System.out.println("Bye. Hope to see you again soon!");
             return true;
         case "list":
-            for (int i = 1; i <= storageCount; i++) {
-                Task task = storage.get(i - 1);
-                String leadingSpace = " ".repeat((int) Math.log10(storageCount) - (int) Math.log10(i));
-                // For better formatting if numbers exceed 9
-                System.out.printf("%s%d: %s\n", leadingSpace, i, task);
-            }
+            LPrintTask.printAllTasks(storage);
+            break;
+        case "upcoming":
+            LPrintTask.printUpcomingTasks(storage);
             break;
         default:
             String[] splitInput = input.split(" ");

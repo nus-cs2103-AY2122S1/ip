@@ -1,27 +1,31 @@
 todo Buy Milk
 delete 1
 delete 1
-event Townhall /at Friday 2.30pm
+event Townhall /at 27/8/2021 15:00
 todo Wash laundry
-deadline CS2103T Project /by 19 August 2359
+deadline CS2103T Project /by 19/8/2021
 list
 do this thing
 todo
 deadline Art Project
-deadline /by 20 October
-event Concert /by 19 August
+deadline /by 20
+event Concert /by 19/2/2021
 deadline hello
-event Job Interview /at Tuesday
+event Job Interview /at 15:00
 deadline Write resume /by
-deadline Prepare presentation /by 21 August
-event Mum's birthday /at 2 September 8pm
+deadline Prepare presentation /by 21:30
+event Mum's birthday /at 24/8/2021, 20:00
 todo Get a life
 todo Get a wife
 todo Get 6 packs
-event Sleep /at 2am
+event Sleep /at 2:00
+deadline CS2100 homework /by 25/8/2021
+todo Learn to bake
+todo Renew passport
+upcoming
 done 2
 done 2
-done 10
+done 7
 done
 delete
 list

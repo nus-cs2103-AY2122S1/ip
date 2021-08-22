@@ -1,7 +1,10 @@
+package duke;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * Task is a general class for any task that is to be saved by Duke.
+ * duke.Task is a general class for any task that is to be saved by duke.Duke.
  */
 public abstract class Task {
     private final String description, taskType;
@@ -35,6 +38,10 @@ public abstract class Task {
         return this.description;
     }
 
+    public String getTaskType() {
+        return taskType;
+    }
+
     public boolean markAsDone() {
         if (this.isDone) {
             return false;
@@ -42,6 +49,13 @@ public abstract class Task {
         this.isDone = true;
         return true;
     }
+
+    /**
+     * Gets the date and time of the task, or null if not applicable.
+     *
+     * @return the associated LocalDateTime object
+     */
+    public abstract LocalDateTime getDateTime();
 
     @Override
     public boolean equals(Object o) {
