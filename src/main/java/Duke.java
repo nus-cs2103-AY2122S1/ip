@@ -2,6 +2,10 @@ import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     static boolean isListening;
@@ -36,8 +40,8 @@ public class Duke {
     public static void listenForInputs(){
         isListening = true;
 
+        Scanner sc = new Scanner(System.in); //initialize scanner
         while(isListening) {
-            Scanner sc = new Scanner(System.in); //initialize scanner
             String userInput = sc.nextLine(); //scanning user's first input
             int errorCode = checkCommand(userInput); // check for Duke Exception
             if(errorCode == 1) continue; // if DukeError is caught, continue on with the loop
@@ -46,6 +50,16 @@ public class Duke {
                 break;
             }
             respond(userInput);
+        }
+    }
+
+    public static void listenForInputs(String filePath) throws FileNotFoundException{
+        File f = new File(filePath);
+        FileUpdater fu = new FileUpdater(f);
+        Scanner sc = new Scanner(f);
+        while(sc.hasNext()){
+            String line = sc.nextLine(); //scanning file's first input
+            fu.updateLine(line); // read each line, convert the line into a command and input it to Duke
         }
     }
 
@@ -96,6 +110,14 @@ public class Duke {
         System.out.println("Now you have " + lst.size() + " tasks in the list.");
     }
 
+    static void addTodo(String s, boolean isCompleted){
+        Todo d = new Todo(s.substring(5));
+        if(isCompleted)d.completed();
+        lst.add(d);
+        System.out.println("Got it. I've added this todo: \n" + d.toString());
+        System.out.println("Now you have " + lst.size() + " tasks in the list.");
+    }
+
     /**
      * function to add deadlines into the list
      * @param s
@@ -103,6 +125,15 @@ public class Duke {
     static void addDeadline(String s){
         Deadline d = new Deadline(s.substring(9, s.indexOf("/")),
                 s.substring(s.indexOf("/by") + 3));
+        lst.add(d);
+        System.out.println("Got it. I've added this deadline: \n" + d.toString());
+        System.out.println("Now you have " + lst.size() + " tasks in the list.");
+    }
+
+    static void addDeadline(String s, boolean isCompleted){
+        Deadline d = new Deadline(s.substring(9, s.indexOf("/")),
+                s.substring(s.indexOf("/by") + 3));
+        if(isCompleted)d.completed();
         lst.add(d);
         System.out.println("Got it. I've added this deadline: \n" + d.toString());
         System.out.println("Now you have " + lst.size() + " tasks in the list.");
@@ -120,6 +151,15 @@ public class Duke {
         System.out.println("Now you have " + lst.size() + " tasks in the list.");
     }
 
+    static void addEvent(String s, boolean isCompleted){
+        Event d = new Event(s.substring(6, s.indexOf("/")),
+                s.substring(s.indexOf("/at") + 3));
+        if(isCompleted) d.completed();
+        lst.add(d);
+        System.out.println("Got it. I've added this event: \n" + d.toString());
+        System.out.println("Now you have " + lst.size() + " tasks in the list.");
+    }
+
     /**
      * funtion to display all tasks in the list
      */
@@ -130,7 +170,7 @@ public class Duke {
 
     /**
      * function to mark a task done in the list
-     * @param t
+     * @param order
      */
     static void markDone(int order){
         Task currentTask = lst.get(order-1);
@@ -152,10 +192,31 @@ public class Duke {
         }
     }
 
+    public static void updateListFile(String filePath){
+        String s ="";
+        for(int i = 0; i < lst.size(); i++){
+            s = s + lst.get(i).toStringConvert() + "\n";
+        }
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(s);
+            fw.close();
+        } catch (IOException e){
+            System.out.println("error: " + e.getMessage());
+        }
+    }
+
+
     public static void main(String[] args) {
         initialize();
         greet();
+        try {
+            listenForInputs("data/Duke.txt");
+        } catch (FileNotFoundException e){
+            System.out.println(e.getMessage());
+        }
         listenForInputs();
+        updateListFile("data/Duke.txt");
         goodbye();
     }
 }

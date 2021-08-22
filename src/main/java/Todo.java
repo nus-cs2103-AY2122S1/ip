@@ -8,4 +8,13 @@ public class Todo extends Task{
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String toStringConvert(){
+        if(this.isCompleted()) {
+            return "T | 1 | " +  this.getString() ;
+        } else {
+            return "T | 0 | " +  this.getString() ;
+        }
+    }
 }

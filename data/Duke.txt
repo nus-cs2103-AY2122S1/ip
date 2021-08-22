@@ -1,0 +1,6 @@
+D | 0 | return book | June 6th
+E | 0 | project meeting | Aug 6th 2-4pm
+E | 1 | join sports club | Aug 7th
+T | 1 | eat
+T | 0 | eat breakfast
+D | 1 | sleepwalk | 9am
