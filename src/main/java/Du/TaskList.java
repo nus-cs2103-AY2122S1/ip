@@ -65,4 +65,29 @@ public class TaskList {
         complete_task.finish_task();
     }
 
+
+    /**
+     *
+     * @param substring
+     * @return
+     */
+    public ArrayList<Task> search(String substring) {
+        ArrayList<Task> have_substring = new ArrayList<>();
+        for (Task t : this.getList_of_tasks()) {
+            if (t.getName().contains(substring)) {
+                have_substring.add(t);
+            }
+        }
+        return have_substring;
+    }
+
+    public void print(ArrayList<Task> arraylist) {
+        System.out.println("____________________________________________________________\n" +
+                "Here are the matching tasks in your list:");
+        for (Task t : arraylist) {
+            System.out.println(t);
+        }
+        System.out.println("____________________________________________________________");
+    }
+
 }
