@@ -1,11 +1,19 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.nio.file.Paths;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
 
 public class Duke {
 
 	private ArrayList<Task> tasks;
 
-	Duke() { this.tasks = new ArrayList<>(); }
+	Duke() {
+		this.tasks = new ArrayList<>();
+		this.getTasks();
+	}
 
 	public static void main(String[] args) {
 		String logo = " ____        _\n"
@@ -48,6 +56,53 @@ public class Duke {
 			System.out.println("\t____________________________");
 		}
 		sc.close();
+		this.saveTasks();
+	}
+
+	private void getTasks() {
+		try {
+			Path path = Paths.get("..", "..", "..", "data", "tasks.txt");
+			File tasks = new File(path.toString());
+			Scanner sc = new Scanner(tasks);
+			while (sc.hasNextLine()) {
+				String[] taskArray = sc.nextLine().split(" : ");
+				Task task;
+				if (taskArray[0].equals("T")) {
+					task = new Todo(taskArray[2], taskArray[1].equals("1"));
+				} else  if (taskArray[0].equals("D")) {
+					task = new Deadline(taskArray[2], taskArray[1].equals("1"), taskArray[3]);
+				} else {
+					task = new Event(taskArray[2], taskArray[1].equals("1"), taskArray[3]);
+				}
+				this.tasks.add(task);
+			}
+		} catch (IOException e) {
+			System.out.println(e.toString());
+		}
+	}
+
+	private void saveTasks() {
+		try {
+			Path path = Paths.get("..", "..", "..", "data");
+			File taskDir = new File(path.toString());
+			if (!taskDir.exists()) {
+				taskDir.mkdir();
+			}
+			path = Paths.get("..", "..", "..", "data", "tasks.txt");
+			File tasks = new File(path.toString());
+			if (tasks.createNewFile()) {
+				System.out.println("File created");
+			} else {
+				System.out.println("File updated");
+			}
+			FileWriter writer = new FileWriter(path.toString());
+			for (Task task : this.tasks) {
+				writer.write(task.saveString() + "\n");
+			}
+			writer.close();
+		} catch (IOException e) {
+			System.out.println(e.toString());
+		}
 	}
 
 	private void addTask(String[] taskArray) throws DukeTaskDetailsException {

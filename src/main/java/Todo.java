@@ -4,13 +4,13 @@
  */
 public class Todo extends Task {
 
-	/**
-	 * Constructor for Todo
-	 *
-	 * @param title title of the todo task
-	 *
-	 */
-	Todo(String title) { super(title); }
+	Todo(String title) {
+		super(title);
+	}
+
+	Todo(String title, Boolean done) {
+		super(title, done);
+	}
 
 	/**
 	 * Returns a string representation of the todo task
@@ -23,6 +23,15 @@ public class Todo extends Task {
 			return "[T][X] " + this.title;
 		} else {
 			return "[T][ ] " + this.title;
+		}
+	}
+
+	@Override
+	public String saveString() {
+		if (this.done) {
+			return "T : 1 : " + this.title;
+		} else {
+			return "T : 0 : " + this.title;
 		}
 	}
 }
