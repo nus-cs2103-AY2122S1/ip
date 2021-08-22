@@ -12,6 +12,6 @@ public class ToDos extends Task {
 
     @Override
     public void displayTask(){
-        System.out.println(toString());
+        System.out.println("        " + toString());
     }
 }

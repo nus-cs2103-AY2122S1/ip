@@ -13,7 +13,7 @@ public class Deadlines extends Task{
 
     @Override
     public void displayTask(){
-        System.out.println(toString());
+        System.out.println("        " + toString());
     }
 }
 

@@ -28,6 +28,6 @@ public class Task {
     }
 
     public void displayTask(){
-        System.out.println(toString());
+        System.out.println("        " + toString());
     }
 }
