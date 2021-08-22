@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,7 +16,7 @@ public class Duke {
     this.taskArray = new TaskList(taskArrayAsString);
   }
 
-  private static final List<String> GREETING = List.of("Hello! I'm Fergus' Chatbot", "What can I do for you?");
+  private static final List<String> GREETING = List.of("Hello! I'm Fergus' Chatbot!", "What can I do for you?");
   private static final String FAREWELL = "Bye. Hope to see you again soon!";
   private static final String ERROR_UNKNOWN_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
