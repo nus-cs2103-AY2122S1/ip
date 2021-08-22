@@ -55,7 +55,7 @@ public class Duke {
                     if (words.length < 2) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
-                    addTask(words[1], "", TaskType.TODO);
+                    addTask(words[1], "", "",TaskType.TODO);
                     break;
                 case "deadline":
                     if (words.length < 2) {
@@ -67,7 +67,11 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! Please ensure that the '/by' keyword is used and "
                                               + "that a description and due date is given.");
                     }
-                    addTask(separatedDeadline[0], separatedDeadline[1], TaskType.DEADLINE);
+                    String deadlineDescription = separatedDeadline[0];
+                    String[] deadLineDateTimeArr = separatedDeadline[1].split(" ");
+                    String deadLineDateString = deadLineDateTimeArr[0];
+                    String deadLineTimeString = deadLineDateTimeArr[1];
+                    addTask(deadlineDescription, deadLineDateString, deadLineTimeString, TaskType.DEADLINE);
                     break;
                 case "event":
                     if (words.length < 2) {
@@ -79,7 +83,11 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! Please ensure that the '/at' keyword is used and "
                                 + "that a description and a timing is given.");
                     }
-                    addTask(separatedEvent[0], separatedEvent[1], TaskType.EVENT);
+                    String eventDescription = separatedEvent[0];
+                    String[] eventDateTimeArr = separatedEvent[1].split(" ");
+                    String eventDateString = eventDateTimeArr[0];
+                    String eventTimeString = eventDateTimeArr[1];
+                    addTask(eventDescription, eventDateString, eventTimeString, TaskType.EVENT);
                     break;
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -118,7 +126,8 @@ public class Duke {
         printLineSeparator();
     }
 
-    private static void addTask(String description, String timing, TaskType taskType) {
+    private static void addTask(String description,
+                                String dateString, String timeString, TaskType taskType) throws DukeException {
         Task task;
         switch (taskType) {
         case TODO:
@@ -127,12 +136,12 @@ public class Duke {
             printAddedMessage(task);
             break;
         case DEADLINE:
-            task = new Deadline(description, timing);
+            task = new Deadline(description, dateString, timeString);
             tasks.add(task);
             printAddedMessage(task);
             break;
         case EVENT:
-            task = new Event(description, timing);
+            task = new Event(description, dateString, timeString);
             tasks.add(task);
             printAddedMessage(task);
             break;
