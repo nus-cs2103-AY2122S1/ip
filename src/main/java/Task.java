@@ -1,5 +1,5 @@
 public class Task {
-    private String taskName;
+    private final String taskName;
     private boolean done;
 
     Task(String taskName) {

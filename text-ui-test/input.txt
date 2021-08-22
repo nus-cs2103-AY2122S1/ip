@@ -1,8 +1,14 @@
-event tp meeting /at Mon 2-4pm
-deadline do homework /by no idea :-p
+list
+deadline do ip /by 12/10/21 1912
+deadline do ip /by monkee
 todo get coffee
 list
 done 1
 done 2
-event tp meeting /at Sun 2-4pm
+monkeeeee
+event tp meeting /at 10/10/20 1313
+list
+delete 3
+delete 11
+list
 bye
