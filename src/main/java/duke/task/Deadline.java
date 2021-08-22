@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 public class Deadline extends Task{
@@ -27,6 +28,9 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)", this.getTaskType(), super.toString(), this.time);
+        return String.format("[%s]%s (by: %s)",
+                this.getTaskType(),
+                super.toString(),
+                this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }
