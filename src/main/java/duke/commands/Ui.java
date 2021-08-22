@@ -1,4 +1,7 @@
+package duke.commands;
 import java.util.ArrayList;
+
+import duke.tasks.Task;
 
 public class Ui {
     public final static String logo = " ____        _        \n"

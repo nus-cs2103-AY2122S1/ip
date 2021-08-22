@@ -1,3 +1,4 @@
+package duke.tasks;
 public class Events extends Task {
     protected final String dayTime;
 

@@ -1,2 +1,4 @@
 E | 1 | project meeting | Aug 6th 2-4pm
 D | 1 | return book | 02 Dec 2019 18:00
+T | 1 | borrow book
+T | 1 | borrow book

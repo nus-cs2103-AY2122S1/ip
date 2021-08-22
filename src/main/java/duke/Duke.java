@@ -1,4 +1,14 @@
+package duke;
 import java.util.Scanner;
+
+import duke.commands.Ui;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.tasks.Deadline;
+import duke.tasks.Events;
+import duke.tasks.Task;
+import duke.tasks.ToDos;
+
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
