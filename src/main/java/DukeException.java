@@ -28,9 +28,21 @@ class NoCommandException extends DukeException {
     }
 }
 
-class InvalidTaskDeletion extends DukeException {
-    public InvalidTaskDeletion() {
+class InvalidTaskDeletionException extends DukeException {
+    public InvalidTaskDeletionException() {
         super("OOPS! You are trying to delete a non-existent task!");
+    }
+}
+
+class InvalidTaskDoneException extends DukeException {
+    public InvalidTaskDoneException() {
+        super("OOPS! You are seting a non-existent task as done!");
+    }
+}
+
+class InvalidDateTimeException extends DukeException {
+    public InvalidDateTimeException() {
+        super("Please enter a date of the format yyyy-mm-dd!");
     }
 }
 
