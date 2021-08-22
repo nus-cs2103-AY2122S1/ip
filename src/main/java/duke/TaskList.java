@@ -146,6 +146,7 @@ public class TaskList {
     public void delete(int pos) throws DukeException {
         if (this.taskList.size()>pos-1 && pos > 0) {
             Task deleted = this.taskList.get(pos-1);
+            this.taskList.remove(deleted);
             int total = taskList.size();
             String sOrNot = "";
             if (total <= 1) {
@@ -153,7 +154,6 @@ public class TaskList {
             } else {
                 sOrNot = "tasks";
             }
-            this.taskList.remove(deleted);
             Duke.saveFile();
             Ui.sayDelete(deleted, total, sOrNot);
         } else {

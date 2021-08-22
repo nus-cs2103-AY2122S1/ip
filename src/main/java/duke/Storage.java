@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Storage {
-    private final static String FILE_PATH = "./data/duke.txt";
+    private final static String FILE_PATH = new File("").getAbsolutePath().concat("/data/duke.txt");
     private static File storedList;
 
     /**
@@ -18,6 +18,9 @@ public class Storage {
         storedList = new File(FILE_PATH);
         try {
             if (!storedList.exists()) {
+                if (!storedList.getParentFile().exists()) {
+                    storedList.getParentFile().mkdirs();
+                }
                 storedList.createNewFile();
                 System.out.println("Local file created.");
             }
