@@ -20,18 +20,6 @@ public class Duke {
 
     private final boolean DEFAULT_STATUS = false;
 
-    // Lines used to indicate a block of message
-    private final String HORIZONTAL_LINE_HEAD = "\t____________________________________________________________";
-    private final String HORIZONTAL_LINE_TAIL = String.format("\n%s\n", HORIZONTAL_LINE_HEAD);
-
-    // Default messages sent by the chat bot
-    private final String WELCOME_MSG = "Hello! I am Matthew!\n\t What can I do for you?";
-    private final String EXIT_MSG = "Bye. Don't have a good day... Have a great day!!!";
-    private final String DISPLAY_LIST_MSG = "\t Here are the tasks in your list:";
-    private final String TASK_DONE_MSG = "Well done! You have completed: \n\t  ";
-    private final String TASK_ADDED_MSG = "Got it. I've added this task:\n\t   ";
-    private final String TASK_DELETED_MSG = "Got it. I've deleted this task:\n\t   ";
-
 
     // Command Tags for the chat bot
     private final String EXIT_TAG = "bye";
@@ -60,10 +48,10 @@ public class Duke {
         try {
             items = storage.loadTask();
         } catch (IOException | NoSuchTaskException e) {
-            printFormattedMsg(e.getMessage());
+            Ui.notifyError(e.getMessage());
         }
 
-        greet();
+        Ui.greetUser();
 
         // scanner to take in user's input(s)
         Scanner scanner = new Scanner(System.in);
@@ -74,7 +62,7 @@ public class Duke {
                 checkTag(input);
                 storage.saveTask(items);
             } catch (DukeException | IOException e) {
-                printFormattedMsg(e.getMessage());
+                Ui.notifyError(e.getMessage());
             } finally {
                 input = scanner.nextLine().trim();
             }
@@ -82,21 +70,7 @@ public class Duke {
 
         // close the scanner as the bot is terminated.
         scanner.close();
-        exit();
-    }
-
-    /**
-     * Greets the users when chat bot is started.
-     */
-    private void greet() {
-        printFormattedMsg(WELCOME_MSG);
-    }
-
-    /**
-     * Greets the users when chat bot is terminated.
-     */
-    private void exit() {
-        printFormattedMsg(EXIT_MSG);
+        Ui.exit();
     }
 
     /**
@@ -111,7 +85,7 @@ public class Duke {
         String msgToCheck = msg.toLowerCase();
         try {
             if (msgToCheck.equals(LIST_TAG)) {
-                displayTasks();
+                displayTasks(this.items);
             } else if (msgToCheck.contains(DONE_TAG)) {
                 taskDone(msg);
             } else if (msgToCheck.contains(TODO_TAG)) {
@@ -126,7 +100,7 @@ public class Duke {
                 throw new UnknownTagException();
             }
         } catch (DukeException e) {
-            printFormattedMsg(e.getMessage());
+            Ui.notifyError(e.getMessage());
         }
     }
 
@@ -137,7 +111,7 @@ public class Duke {
      * @throws IllegalFormatException Wrong format used by user.
      */
     private void addEvent(String msg) throws IllegalFormatException{
-        Task newTask = new Event(getTaskDesc(msg), getTaskDates(msg), DEFAULT_STATUS);
+        Task newTask = new Event(getTaskDesc(msg), getEventDates(msg), DEFAULT_STATUS);
         addTask(newTask);
     }
 
@@ -148,7 +122,7 @@ public class Duke {
      * @throws IllegalFormatException Wrong format used by user.
      */
     private void addDeadline(String msg) throws IllegalFormatException{
-        Task newTask = new Deadline(getTaskDesc(msg), getTaskDates(msg), DEFAULT_STATUS);
+        Task newTask = new Deadline(getTaskDesc(msg), getDeadlineDates(msg), DEFAULT_STATUS);
         addTask(newTask);
     }
 
@@ -166,18 +140,8 @@ public class Duke {
     /**
      * Display the list of task that has been added.
      */
-    private void displayTasks() {
-        System.out.println(HORIZONTAL_LINE_HEAD);
-        System.out.println(DISPLAY_LIST_MSG);
-
-        for (int i = 0; i < this.items.size(); i++) {
-            Task item = this.items.get(i);
-            String formattedMsg = String.format("\t %s.%s", (i + 1), item);
-
-            System.out.println(formattedMsg);
-        }
-
-        System.out.println(HORIZONTAL_LINE_TAIL);
+    private void displayTasks(ArrayList<Task> taskList) {
+        Ui.displayList(taskList);
     }
 
     /**
@@ -192,8 +156,7 @@ public class Duke {
         Task item = this.items.get(index);
         item.taskCompleted();
 
-        String content = String.format(TASK_DONE_MSG + item);
-        printFormattedMsg(content);
+        Ui.taskDoneMessage(item);
     }
 
     private void deleteTask(String msg) throws NoSuchTaskException, IllegalFormatException {
@@ -201,7 +164,7 @@ public class Duke {
         Task task = this.items.get(index);
         this.items.remove(index);
 
-        printFormattedMsg(TASK_DELETED_MSG + task + "\n\t Now you have " + getTaskCount() + " tasks in the list.");
+        Ui.taskDeletedMessage(task, getTaskCount());
     }
 
     /**
@@ -213,27 +176,22 @@ public class Duke {
      * @throws IllegalFormatException Invalid id enter.
      */
     private int getTaskId(String msg) throws NoSuchTaskException, IllegalFormatException {
-        int position = msg.indexOf(" ");
+        String[] details = msg.split(" ");
 
-        if (position >= msg.length() || position < 0) {
+        if (details.length != 2) {
             throw new IllegalFormatException();
-        } else {
-            try {
-                int index = Integer.parseInt(msg.substring(position + 1)) - 1;
+        }
 
-                if (index >= items.size()) {
-                    throw new NoSuchTaskException();
-                }
+        try {
+            int index = Integer.valueOf(details[1]) - 1;
 
-                if (index > msg.length() || index < 0) {
-                    throw new IllegalFormatException();
-                }
-
-                return index;
-            } catch (NumberFormatException e) {
-                // input after a whitespace is not a number.
-                throw new IllegalFormatException();
+            if (index >= items.size()) {
+                throw new NoSuchTaskException();
             }
+
+            return index;
+        } catch (NumberFormatException e) {
+            throw new IllegalFormatException();
         }
     }
 
@@ -245,13 +203,13 @@ public class Duke {
      * @throws StringIndexOutOfBoundsException Wrong Format used by the user.
      */
     private String getTodoDesc(String msg) throws IllegalFormatException {
-        int position = msg.indexOf(" ");
+        String[] details = msg.split("todo ");
 
-        if (position >= msg.length() || position < 0) {
+        if (details.length != 2) {
             throw new IllegalFormatException();
         }
 
-        return msg.substring(position).trim();
+        return details[1].trim();
     }
 
     /**
@@ -273,20 +231,37 @@ public class Duke {
     }
 
     /**
-     * Returns the date/time for the deadline/event respectively.
+     * Returns the date for the deadline.
      *
      * @param msg Input from user.
-     * @return A String representing the date (deadline type) / time (event type).
+     * @return A LocalDate representing the date.
      * @throws IllegalFormatException Wrong Format used by the user.
      */
-    private LocalDate getTaskDates(String msg) throws IllegalFormatException{
-        int position = msg.indexOf("/") + 2;
+    private LocalDate getDeadlineDates(String msg) throws IllegalFormatException{
+        String[] details = msg.split("/by ");
 
-        if (position < 2 || position >= msg.length()) {
+        if (details.length != 2) {
             throw new IllegalFormatException();
         }
 
-        return LocalDate.parse(msg.substring(position + 1).trim());
+        return LocalDate.parse(details[1]);
+    }
+
+    /**
+     * Returns the date for the event.
+     *
+     * @param msg Input from user.
+     * @return A LocalDate representing the date..
+     * @throws IllegalFormatException Wrong Format used by the user.
+     */
+    private LocalDate getEventDates(String msg) throws IllegalFormatException{
+        String[] details = msg.split("/at ");
+
+        if (details.length != 2) {
+            throw new IllegalFormatException();
+        }
+
+        return LocalDate.parse(details[1]);
     }
 
     /**
@@ -296,7 +271,7 @@ public class Duke {
      */
     private void addTask(Task task) {
         this.items.add(task);
-        printFormattedMsg(TASK_ADDED_MSG + task + "\n\t Now you have " + getTaskCount() + " tasks in the list.");
+        Ui.taskAddedMessage(task, getTaskCount());
     }
 
     /**
@@ -308,14 +283,5 @@ public class Duke {
         return this.items.size();
     }
 
-    /**
-     * Formats the message; puts the message in a block.
-     * Horizontal lines - message - Horizontal lines.
-     *
-     * @param msg The message to be printed by the chat bot.
-     */
-    private void printFormattedMsg(String msg) {
-        String formattedMsg = String.format("%s\n\t %s%s", HORIZONTAL_LINE_HEAD, msg, HORIZONTAL_LINE_TAIL);
-        System.out.println(formattedMsg);
-    }
+
 }
