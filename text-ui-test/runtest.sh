@@ -31,8 +31,18 @@ diff ACTUAL.TXT EXPECTED-UNIX.TXT
 if [ $? -eq 0 ]
 then
     echo "Test result: PASSED"
-    exit 0
 else
     echo "Test result: FAILED"
-    exit 1
 fi
+
+dos2unix db.txt EXPECTED-DB.TXT
+diff db.txt EXPECTED-DB.TXT
+if [ $? -eq 0 ]
+then
+    echo "DB Test result: PASSED"
+else
+    echo "DB Test result: FAILED"
+fi
+
+# remove db
+rm db.txt

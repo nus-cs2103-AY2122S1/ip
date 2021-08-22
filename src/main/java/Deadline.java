@@ -20,8 +20,20 @@ public class Deadline extends Task{
         return new Deadline(parsedArgs[0], parsedArgs[1]);
     }
 
+    public static Task of(boolean isDone, String description, String time) {
+        Task ret = new Deadline(description, time);
+        return isDone ? ret.done() : ret;
+    }
+
+    public String getTaskType() { return "D"; }
+
+    @Override
+    public String toDatabaseString() {
+        return String.format("%s|%s", super.toDatabaseString(), this.time);
+    }
+
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.time);
+        return String.format("[%s]%s (by: %s)", this.getTaskType(), super.toString(), this.time);
     }
 }

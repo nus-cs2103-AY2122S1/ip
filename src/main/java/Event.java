@@ -20,8 +20,21 @@ public class Event extends Task{
         return new Event(parsedArgs[0], parsedArgs[1]);
     }
 
+    public static Task of(boolean isDone, String description, String time) {
+        Task ret = new Event(description, time);
+        return isDone ? ret.done() : ret;
+    }
+
+    @Override
+    public String getTaskType() { return "E"; }
+
+    @Override
+    public String toDatabaseString() {
+        return String.format("%s|%s", super.toDatabaseString(), this.time);
+    }
+
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.time);
+        return String.format("[%s]%s (at: %s)", this.getTaskType() , super.toString(), this.time);
     }
 }

@@ -1,3 +1,5 @@
+import com.sun.source.util.TaskListener;
+
 import javax.swing.text.html.Option;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,6 +11,7 @@ import java.util.stream.Collectors;
 public class Duke {
     private static final HashMap<String, Function<Optional<String>, String>> commandTable = new HashMap<>();
     private static void initialize() {
+        TaskManager.initialize();
         commandTable.put("list", x -> listTask());
         commandTable.put("done", x -> completeTask(parseId(x)));
         commandTable.put("delete", x -> deleteTask(parseId(x)));

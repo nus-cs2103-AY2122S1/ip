@@ -12,8 +12,15 @@ public class ToDo extends Task{
         )));
     }
 
+    public static Task of(boolean isDone, String description) {
+        Task ret = new ToDo(description);
+        return isDone ? ret.done() : ret;
+    }
+
+    public String getTaskType() { return "T"; }
+
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[%s]%s", this.getTaskType(), super.toString());
     }
 }
