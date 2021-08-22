@@ -2,9 +2,12 @@ package tasks;
 
 import tasks.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
     private static final String TAG = "E";
-    private String at;
+    private LocalDate at;
 
     /**
      * Constructs a new Event object with the specified task description, due date and task status.
@@ -13,7 +16,7 @@ public class Event extends Task {
      * @param at Due date of the task.
      * @param isDone Completion status of the task.
      */
-    public Event(String description, String at, boolean isDone) {
+    public Event(String description, LocalDate at, boolean isDone) {
         super(description, isDone);
         this.at = at;
     }
@@ -25,11 +28,12 @@ public class Event extends Task {
 
     @Override
     public String getDueDate() {
-        return this.at;
+        String dueDute = at.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return dueDute;
     }
 
     @Override
     public String toString() {
-        return "[" + TAG + "]" + super.toString() + " (at: " + at + ")";
+        return "[" + TAG + "]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

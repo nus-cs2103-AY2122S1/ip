@@ -7,6 +7,7 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -264,14 +265,14 @@ public class Duke {
      * @return A String representing the date (deadline type) / time (event type).
      * @throws IllegalFormatException Wrong Format used by the user.
      */
-    private String getTaskDates(String msg) throws IllegalFormatException{
+    private LocalDate getTaskDates(String msg) throws IllegalFormatException{
         int position = msg.indexOf("/") + 2;
 
         if (position < 2 || position >= msg.length()) {
             throw new IllegalFormatException();
         }
 
-        return msg.substring(position + 1).trim();
+        return LocalDate.parse(msg.substring(position + 1).trim());
     }
 
     /**
