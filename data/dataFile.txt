@@ -1,0 +1,3 @@
+D|1|do homework|Monday
+T|0|buy milk
+E|0|party|Friday 6-8pm
