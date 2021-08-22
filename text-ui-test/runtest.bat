@@ -12,6 +12,7 @@ del taskList.TXT
 REM compile the code into the bin folder
 javac  -cp ..\src\main\java\duke\exception -Xlint:none -d ..\bin ..\src\main\java\duke\exception\*.java
 javac  -cp ..\src\main\java\duke\task -Xlint:none -d ..\bin ..\src\main\java\duke\task\*.java
+
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1

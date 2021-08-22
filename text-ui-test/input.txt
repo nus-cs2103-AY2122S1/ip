@@ -1,17 +1,11 @@
-borrow book
-todo borrow book
-todo
-deadline return book /by Sunday
-deadline /by
-deadline /by Sunday
-deadline return book /by
-event project meeting /at Mon 2-4pm
-event /at
-event project meeting /at
-event /at Mon 2-4pm
-list
-done
-done 1
-done 4
+deadline return book /by 2000-12-20 1200
+deadline return book 2 /by 2021/08/22 0715
+event project meeting /at 2021-08-22 0715-0915
+event project meeting 2 /at 2000-12-20 1200-0000
+date
+date asdfhasdf
+date 2000-12-20 1200
+date 2021/08/22 0715
+date 2021-12-03
 list
 bye

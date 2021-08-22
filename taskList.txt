@@ -1,3 +1,0 @@
-[T][X] hi
-[D][ ] hi (by: tmr)
-[E][X] hi (at: tmr)
