@@ -1,17 +1,19 @@
 import java.util.ArrayList;
+import java.io.IOException;
 
 public class DukeHandler {
     private final ArrayList<Task> tasks;
-
-    DukeHandler(ArrayList<Task> tasks) {
+    private final FileHandler fileHandler;
+    DukeHandler(ArrayList<Task> tasks, FileHandler fileHandler) {
         this.tasks = tasks;
+        this.fileHandler = fileHandler;
     }
 
     public boolean isExit(String input) {
         return input.equals("bye");
     }
 
-    public String[] parseInput(String input) throws DukeException {
+    public String[] parseInput(String input) throws DukeException, IOException {
         if (input.startsWith("done")) {
             return new String[]{setTaskAsDone(input)};
         } else if (input.startsWith("delete")) {
@@ -23,7 +25,7 @@ public class DukeHandler {
         }
     }
 
-    private String[] addTask(String input) throws DukeException {
+    private String[] addTask(String input) throws DukeException, IOException {
         String[] splitString = input.split(" ", 2);
         String type = splitString[0];
         switch (type) {
@@ -31,28 +33,34 @@ public class DukeHandler {
             if (splitString.length == 1) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
             }
-            tasks.add(new Todo(splitString[1]));
+            Todo todo = new Todo(splitString[1]);
+            tasks.add(todo);
+            fileHandler.write(todo.save());
             break;
         case "deadline":
             if (splitString.length == 1) {
                 throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
             }
-            String[] splitDeadline = splitString[1].split(" /by", 2);
+            String[] splitDeadline = splitString[1].split(" /by ", 2);
             if (splitDeadline.length == 1) {
                 throw new DukeException("OOPS!!! The description or deadline for a deadline cannot be empty or it must be after a '/'");
             }
-            System.out.println(splitDeadline[1]);
-            tasks.add(new Deadline(splitDeadline[0], splitDeadline[1]));
+            Deadline deadline = new Deadline(splitDeadline[0], splitDeadline[1]);
+            tasks.add(deadline);
+            System.out.println(deadline.save());
+            fileHandler.write(deadline.save());
             break;
         case "event":
             if (splitString.length == 1) {
                 throw new DukeException("OOPS!!! The description of an event cannot be empty.\n");
             }
-            String[] splitEvent = splitString[1].split(" /at", 2);
+            String[] splitEvent = splitString[1].split(" /at ", 2);
             if (splitEvent.length == 1) {
                 throw new DukeException("\tOOPS!!! The description or duration for an event cannot be empty or it must be after a '/'");
             }
-            tasks.add(new Event(splitEvent[0], splitEvent[1]));
+            Event event = new Event(splitEvent[0], splitEvent[1]);
+            tasks.add(event);
+            fileHandler.write(event.save());
             break;
         default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

@@ -5,12 +5,14 @@ public class Deadline extends Task{
         this.deadline = deadline;
     }
 
-    public String getDeadline() {
-        return this.deadline;
-    }
 
     @Override
     public String toString(){
-        return "[D]" + "[" + this.getStatusIcon() + "]" + " " + this.description + " (by:" + deadline + ")";
+        return "[D]" + "[" + this.getStatusIcon() + "]" + " " + this.description + " (by: " + deadline + ")";
+    }
+
+    @Override
+    public String save() {
+        return "D | " + (this.isDone ? 1 : 0) + " | " + this.description + " | " +  this.deadline;
     }
 }
