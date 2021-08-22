@@ -6,7 +6,7 @@ import duke.command.Command;
 import java.util.Scanner;
 
 /**
- * Handles initialization of storage and tasks and running of chatbot.
+ * Handles initialization of storage and tasks and running of Duke chatbot.
  */
 public class Duke {
     private static final String SAVE_FILENAME = "dukeSave.txt";
@@ -14,6 +14,14 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     * Creates a Duke with a Storage and an Ui.
+     * Storage will read tasks from specified file to TaskList.
+     * If there are errors reading file, TaskList will be empty by default.
+     *
+     * @param fileName Filename that Storage will save tasks to and read tasks from.
+     */
     public Duke(String fileName) {
         storage = new Storage(fileName);
         ui = new Ui();
@@ -29,6 +37,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke chatbot.
+     * Takes in user input and prints the corresponding output to the user.
+     * Also manages the user's tasks by saving to and reading from a specified file.
+     */
     public void run() {
         // Initialize scanner object.
         Scanner sc = new Scanner(System.in);
@@ -53,9 +66,9 @@ public class Duke {
     }
 
     /**
-     * The main method is runs the duke.Duke chatbot.
+     * The main method runs the duke.Duke chatbot.
      *
-     * @param args duke.command.Command line arguments.
+     * @param args Commandline arguments.
      */
     public static void main(String[] args) {
         Duke duke = new Duke(SAVE_FILENAME);

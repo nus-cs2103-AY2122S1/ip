@@ -105,7 +105,7 @@ public class AddCommand extends Command {
      *
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
-     * @param storage Storage that command executes upon. Should contain the TaskList used in tasks parameter.
+     * @param storage Storage that command executes upon.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storable storage) {

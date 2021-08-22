@@ -44,7 +44,6 @@ public class ListCommand extends Command {
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
      * @param storage Not Used. Storage that command executes upon.
-     *                Should contain the TaskList used in tasks parameter.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storable storage) {
