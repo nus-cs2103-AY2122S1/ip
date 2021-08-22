@@ -47,11 +47,11 @@ public class Duke {
         taskList.add(new ToDo(item));
     }
 
-    private static void addDeadline(String item, String by) {
+    private static void addDeadline(String item, String by) throws IrisException {
         taskList.add(new Deadline(item, by));
     }
 
-    private static void addEvent(String item, String at) {
+    private static void addEvent(String item, String at) throws IrisException {
         taskList.add(new Event(item, at));
     }
 
