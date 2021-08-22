@@ -11,6 +11,10 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
+    public String getStatusBinary() {
+        return (isDone ? "1" : "0");
+    }
+
     public void setDone() {
         this.isDone = true;
     }

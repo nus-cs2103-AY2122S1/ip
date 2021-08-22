@@ -1,15 +1,19 @@
 public class Event extends Task {
 
-    protected String startEnd;
+    protected String at;
 
-    public Event(String description, String startEnd) {
+    public Event(String description, String at) {
         super(description);
-        this.startEnd = startEnd;
+        this.at = at;
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + startEnd + ")";
+                + at + ")";
+    }
+
+    public String getAt() {
+        return this.at;
     }
 }
