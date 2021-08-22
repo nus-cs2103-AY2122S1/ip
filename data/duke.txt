@@ -1,0 +1,9 @@
+T | 0 | 8
+E | 0 | homework | 2021-08-23 | 
+E | 0 | homework | 2021-08-23 | 8:00
+E | 1 | homework | 2021-08-23 | 
+E | 0 | homework | 2021-08-23 | 
+E | 0 | homework | 2021-08-23 | 
+E | 0 | homework | 2021-08-23 | 
+E | 0 | homework | 2021-08-23 | 9:00
+T | 0 | 999

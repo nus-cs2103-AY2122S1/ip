@@ -73,7 +73,10 @@ public class Tasks {
                     Event e;
                     if (info2[1].length() >= 10) {
                         LocalDate date = getDate(info2[1].substring(0, 10));
-                        String time = info2[1].substring(11);
+                        String time="";
+                        if (info2[1].length()>=11) {
+                            time = info2[1].substring(11);
+                        }
                         e = new Event(info2[0], date, time);
                     } else {
                         throw new DukeException("Please enter time in the form of dd/MM/yyyy time.");
@@ -221,7 +224,11 @@ public class Tasks {
                     break;
                 case("E"):
                     DateTimeFormatter ff = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    Event e = new Event(n[2], LocalDate.parse(n[3], ff), n[4]);
+                    String time = "";
+                    if (n.length> 4) {
+                        time = n[4];
+                    }
+                    Event e = new Event(n[2], LocalDate.parse(n[3], ff), time);
                     int c = Integer.parseInt(n[1]);
                     if (c == 1) {
                         e.setFinish();
