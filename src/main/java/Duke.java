@@ -1,10 +1,20 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.io.File;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
 public class Duke {
     private ArrayList<Task> tasks = new ArrayList<>();
+    private File file;
 
     public void run() {
+        this.setUp();
         this.greetUser();
         Scanner sc = new Scanner(System.in);
         boolean shouldContinue = true;
@@ -13,6 +23,7 @@ public class Duke {
             try {
                 Command command = Command.valueOf(commandName.toUpperCase());
                 shouldContinue = receiveCommand(command, sc);
+                this.updateStorage();
             } catch (IllegalArgumentException e) { // caused by user entering a command that is invalid
                 sc.nextLine(); // clear user's input
                 String errorMessage = new InvalidCommandException().getMessage();
@@ -23,6 +34,58 @@ public class Duke {
         }
         sc.close();
         this.exit();
+    }
+
+    public void setUp() {
+        try {
+            String dir = System.getProperty("user.dir");
+            Path path = Paths.get(dir, "data");
+
+            // create the data folder if it does not exist
+            if (!Files.exists(path)) {
+                path = Files.createDirectory(path);
+            }
+
+            File file = path.resolve("duke.txt").toFile();
+            this.file = file;
+            if (file.exists()) {
+                this.loadTasks();
+            } else {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            // this exception should not occur because the input is fixed
+        }
+    }
+
+    public void loadTasks() {
+        try {
+            Scanner sc = new Scanner(this.file);
+            while (sc.hasNextLine()) {
+                String[] taskInfoSplit = sc.nextLine().split(" \\| ");
+                Task task = convertToTask(taskInfoSplit);
+                if (task != null) {
+                    tasks.add(task);
+                }
+            }
+        } catch (IOException e) {
+            printMessage("There is an error while loading tasks.");
+        }
+    }
+
+    public Task convertToTask(String[] arr) {
+        char letter = arr[0].charAt(0);
+        boolean isDone = arr[1].equals("X");
+        switch (letter) {
+            case 'T':
+                return new Todo(arr[2], isDone);
+            case 'D':
+                return new Deadline(arr[2], arr[3], isDone);
+            case 'E':
+                return new Event(arr[2], arr[3], isDone);
+            default:
+                return null;
+        }
     }
 
     public void printMessage(String message) {
@@ -158,6 +221,20 @@ public class Duke {
                     "Now you have %d tasks in the list.", task, tasks.size()));
         } catch (IndexOutOfBoundsException e) {
             printMessage("There is no such task to delete!");
+        }
+    }
+
+    public void updateStorage() {
+        try {
+            FileWriter fw = new FileWriter(this.file);
+            for (int i = 0; i < this.tasks.size(); i++) {
+                String taskInfo = tasks.get(i).stringToStore();
+                fw.write(taskInfo);
+            }
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            printMessage("Failed to update storage.");
         }
     }
 
