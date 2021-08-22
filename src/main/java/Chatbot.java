@@ -11,6 +11,7 @@ public class Chatbot {
 
     void initialize() {
         greet();
+        taskList.readData("list.txt");
         listen();
     }
 
@@ -39,7 +40,7 @@ public class Chatbot {
                 System.out.println("Goodbye human. See you soon!");
                 return false;
             } else if (input.equals("list")) {
-                listItems();
+                printItems();
             } else if (input.contains("done")) {
                 markAsDone(input);
             } else if (input.contains("delete")) {
@@ -99,8 +100,8 @@ public class Chatbot {
         taskList.add(newItem);
     }
 
-    void listItems() {
-        taskList.listItems();
+    void printItems() {
+        taskList.printItems();
     }
 
     void markAsDone(String input) throws HAL9000Exception {
