@@ -109,7 +109,20 @@ public class Duke {
                             if (details.length == 1) { // period of event not given
                                 throw new DukeException(DukeExceptionType.EVENTPERIOD);
                             } else {
-                                newTask = new Event(details[0], details[1]);
+                                String[] periodRange = details[1].split(" ");
+                                if (periodRange.length == 2) {
+                                    newTask = new Event(details[0], LocalDate.parse(periodRange[0]), 
+                                            LocalDate.parse(periodRange[1]));
+                                } else if (periodRange.length == 3) {
+                                    newTask = new Event(details[0], LocalDate.parse(periodRange[0]),
+                                            LocalTime.parse(periodRange[1]), LocalTime.parse(periodRange[2]));
+                                } else if (periodRange.length == 4) {
+                                    newTask = new Event(details[0], 
+                                            LocalDate.parse(periodRange[0]), LocalTime.parse(periodRange[1]), 
+                                            LocalDate.parse(periodRange[2]), LocalTime.parse(periodRange[3]));
+                                } else {
+                                    throw new DukeException(DukeExceptionType.INVALIDPERIOD);
+                                }
                             }
                             break;
                         }

@@ -31,6 +31,13 @@ public class DukeException extends Exception {
             customMessage = "  OOPS!!! The deadline you provided is not in a correct format!\n"
                     + "  The required format is yyyy-mm-dd or yyyy-mm-dd hh:mm.";
             break;
+        case INVALIDPERIOD:
+            customMessage = "  OOPS!!! The event period you provided is not in a correct format!\n"
+                    + "  You can provide:\n" 
+                    + "    1. start and end dates\n" 
+                    + "    2. one date, start and end times\n" 
+                    + "    3. start date and time, end date and time";
+            break;
         default:
             customMessage = "  OOPS!!! Duck has run into an unspecified error!";
             break;

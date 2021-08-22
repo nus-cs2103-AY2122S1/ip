@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private final LocalDate deadlineDate;
-    private LocalTime deadlineTime = LocalTime.of(0, 0, 0);
+    private LocalTime deadlineTime;
     private final boolean isTimeGiven;
 
     public Deadline(String taskName, LocalDate deadlineDate) {
@@ -24,10 +24,10 @@ public class Deadline extends Task {
     public String listEntry() {
         if (isTimeGiven) {
             return "[D]" + super.listEntry() 
-                    + " (by: " + deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) 
+                    + " (by " + deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) 
                     + " at " + deadlineTime.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
         } else {
-            return "[D]" + super.listEntry() + " (by: "
+            return "[D]" + super.listEntry() + " (by "
                     + deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
     }
