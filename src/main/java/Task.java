@@ -15,7 +15,7 @@ public class Task {
                 break;
             }
             case DEADLINE: {
-                int index = input.indexOf('/');
+                int index = input.indexOf("/by");
                 if (index == -1) {
                     if (input.equals("deadline")) {
                         throw new DukeException("Please provide a description and date of the deadline Sir/Mdm.");
@@ -27,12 +27,12 @@ public class Task {
                 if (description.isBlank()) {
                     throw new DukeException("Please provide a description of the deadline Sir/Mdm.");
                 }
-                String date = input.substring(index + 1);
+                String date = input.substring(index + 3).trim();
                 newTask = new Deadline(description, date);
                 break;
             }
             case EVENT: {
-                int index = input.indexOf('/');
+                int index = input.indexOf("/at");
                 if (index == -1) {
                     if (input.equals("event")) {
                         throw new DukeException("Please provide a description and timeline of the event Sir/Mdm.");
@@ -45,7 +45,7 @@ public class Task {
                 if (description.isBlank()) {
                     throw new DukeException("Please provide a description of the event Sir/Mdm.");
                 }
-                String date = input.substring(index + 1);
+                String date = input.substring(index + 3).trim();
                 newTask = new Event(description, date);
                 break;
             }

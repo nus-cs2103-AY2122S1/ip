@@ -11,19 +11,28 @@ Now you have 2 tasks.
 
 Pardon me Sir/Mdm, but I do not understand.
 
+Please provide a date of the deadline Sir/Mdm.
+
 Understood Sir/Mdm, I have added the indicated task: 
    [D][ ] assignment (by: Monday 5pm)
 Now you have 3 tasks.
 
+Please provide a timeline of the event Sir/Mdm.
+
 Understood Sir/Mdm, I have added the indicated task: 
    [E][ ] exam (at: 23/11/21)
 Now you have 4 tasks.
+
+Understood Sir/Mdm, I have added the indicated task: 
+   [E][ ] test (at: 23/11/21)
+Now you have 5 tasks.
 
 Here are your tasks Sir/Mdm:
 1. [T][ ] check email
 2. [T][ ] feed momo
 3. [D][ ] assignment (by: Monday 5pm)
 4. [E][ ] exam (at: 23/11/21)
+5. [E][ ] test (at: 23/11/21)
 
 Good job Sir/Mdm! I shall mark this task as complete:
    [T][X] check email
@@ -36,6 +45,7 @@ Here are your tasks Sir/Mdm:
 2. [T][X] feed momo
 3. [D][ ] assignment (by: Monday 5pm)
 4. [E][ ] exam (at: 23/11/21)
+5. [E][ ] test (at: 23/11/21)
 
 Good job Sir/Mdm! I shall mark this task as complete:
    [D][X] assignment (by: Monday 5pm)
@@ -43,35 +53,43 @@ Good job Sir/Mdm! I shall mark this task as complete:
 Good job Sir/Mdm! I shall mark this task as complete:
    [E][X] exam (at: 23/11/21)
 
+Good job Sir/Mdm! I shall mark this task as complete:
+   [E][X] test (at: 23/11/21)
+
 Here are your tasks Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
 3. [D][X] assignment (by: Monday 5pm)
 4. [E][X] exam (at: 23/11/21)
+5. [E][X] test (at: 23/11/21)
 
 Please specify a task you would like marked as done Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
 3. [D][X] assignment (by: Monday 5pm)
 4. [E][X] exam (at: 23/11/21)
+5. [E][X] test (at: 23/11/21)
 
 Please enter a proper number within this range Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
 3. [D][X] assignment (by: Monday 5pm)
 4. [E][X] exam (at: 23/11/21)
+5. [E][X] test (at: 23/11/21)
 
 Please specify a task within this range Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
 3. [D][X] assignment (by: Monday 5pm)
 4. [E][X] exam (at: 23/11/21)
+5. [E][X] test (at: 23/11/21)
 
 Please enter a proper number within this range Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
 3. [D][X] assignment (by: Monday 5pm)
 4. [E][X] exam (at: 23/11/21)
+5. [E][X] test (at: 23/11/21)
 
 Please provide a description of the todo Sir/Mdm.
 
@@ -85,9 +103,13 @@ Please provide a timeline of the event Sir/Mdm.
 
 Please provide a description of the event Sir/Mdm.
 
+Please provide a description of the event Sir/Mdm.
+
 Please provide a description and date of the deadline Sir/Mdm.
 
 Please provide a date of the deadline Sir/Mdm.
+
+Please provide a description of the deadline Sir/Mdm.
 
 Please provide a description of the deadline Sir/Mdm.
 
@@ -96,6 +118,18 @@ Please specify a task you would like to delete Sir/Mdm:
 2. [T][X] feed momo
 3. [D][X] assignment (by: Monday 5pm)
 4. [E][X] exam (at: 23/11/21)
+5. [E][X] test (at: 23/11/21)
+
+Please enter a proper number within this range Sir/Mdm:
+1. [T][X] check email
+2. [T][X] feed momo
+3. [D][X] assignment (by: Monday 5pm)
+4. [E][X] exam (at: 23/11/21)
+5. [E][X] test (at: 23/11/21)
+
+Much obliged Sir/Mdm! I shall delete this task:
+   [E][X] test (at: 23/11/21)
+Now you have 4 tasks.
 
 Please enter a proper number within this range Sir/Mdm:
 1. [T][X] check email
@@ -104,12 +138,6 @@ Please enter a proper number within this range Sir/Mdm:
 4. [E][X] exam (at: 23/11/21)
 
 Please specify a task within this range Sir/Mdm:
-1. [T][X] check email
-2. [T][X] feed momo
-3. [D][X] assignment (by: Monday 5pm)
-4. [E][X] exam (at: 23/11/21)
-
-Please enter a proper number within this range Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
 3. [D][X] assignment (by: Monday 5pm)
