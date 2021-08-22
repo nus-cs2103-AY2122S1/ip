@@ -5,11 +5,13 @@ public class Duke {
     private final Brain brain;
     private final Storage storage;
     private final Speech speech;
+    private final Writer writer;
 
     public Duke() {
         storage = new Storage();
-        speech = new Speech(true, 48);
-        brain = new Brain(storage, speech);
+        writer = new Writer();
+        speech = new Speech(writer, true, 48);
+        brain = new Brain(storage, speech, writer);
     }
 
     /**

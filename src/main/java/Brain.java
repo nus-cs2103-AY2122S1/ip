@@ -3,7 +3,7 @@ public class Brain {
     private final Storage storage;
     private final Speech speech;
 
-    public Brain(Storage storage, Speech speech){
+    public Brain(Storage storage, Speech speech, Writer writer){
         this.storage = storage;
         this.speech = speech;
     }
