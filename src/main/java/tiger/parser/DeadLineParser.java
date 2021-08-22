@@ -14,6 +14,15 @@ public class DeadLineParser extends Parser {
 
     // TODO: ban users from entering semicolons!
 
+    /**
+     * The {@code DeadlineParser} parser class takes in an input String and
+     * parses it, so that the {@code DeadlineAction} class can access the
+     * class fields and understand user input.
+     *
+     * @param  input String to be parsed.
+     * @throws TigerInvalidInputException If input is invalid.
+     */
+
     public DeadLineParser(String input) throws TigerInvalidInputException {
         super(input);
         RemoveSpaces removeSpaces = new RemoveSpaces();

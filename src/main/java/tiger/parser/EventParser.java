@@ -11,6 +11,15 @@ public class EventParser extends Parser {
     public String todo = "";
     public String eventAt = "";
 
+    /**
+     * The {@code EventParser} parser class takes in an input String and
+     * parses it, so that the {@code EventAction} class can access the
+     * class fields and understand user input.
+     *
+     * @param  input String to be parsed.
+     * @throws TigerEmptyStringException If input is invalid.
+     */
+
     public EventParser(String input) throws TigerEmptyStringException {
         super(input);
         RemoveSpaces removeSpaces = new RemoveSpaces();

@@ -12,17 +12,12 @@ public class MarkDoneAction extends Action {
         this.index = index;
     }
 
-    public AppState run() {
+    public AppState run() throws TigerIndexOutOfBoundsException {
         TaskList taskList = this.applicationState.taskList;
         TaskList newTaskList = taskList;
-        try {
-            newTaskList = taskList.markTaskDone(index);
-            System.out.println(String.format("Nice! I've marked this task as done:\n%s",
-                    newTaskList.showTask(index)));
-        } catch (TigerIndexOutOfBoundsException e) {
-            System.out.println(e.toString());
-        } finally {
-            return new AppState(applicationState.userExit, newTaskList);
-        }
+        newTaskList = taskList.markTaskDone(index);
+        System.out.println(String.format("Nice! I've marked this task as done:\n%s",
+                newTaskList.showTask(index)));
+        return new AppState(applicationState.userExit, newTaskList);
     }
 }

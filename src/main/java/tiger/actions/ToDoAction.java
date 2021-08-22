@@ -12,6 +12,12 @@ public class ToDoAction extends Action {
         this.todo = todo;
     }
 
+    /**
+     * Runs the {@code ToDo} action.
+     *
+     * @return an updated {@code AppState}.
+     */
+
     public AppState run() {
         TaskList taskList = this.applicationState.taskList;
         TaskList newTaskList = taskList.addTask(ToDo.of(this.todo, false));

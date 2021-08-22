@@ -14,6 +14,12 @@ public class EventAction extends Action {
         this.eventAt = eventAt;
     }
 
+    /**
+     * Runs the {@code Event} action.
+     *
+     * @return an updated {@code AppState}.
+     */
+
     public AppState run() {
         TaskList taskList = this.applicationState.taskList;
         TaskList newTaskList = taskList.addTask(Event.of(this.todo, false, this.eventAt));

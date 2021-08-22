@@ -10,6 +10,15 @@ public class MarkDoneParser extends Parser {
 
     public int index;
 
+    /**
+     * The {@code MarkDoneParser} parser class takes in an input String and
+     * parses it, so that the {@code MarkDoneAction} class can access the
+     * class fields and understand user input.
+     *
+     * @param  input String to be parsed.
+     * @throws TigerInvalidInputException If input is invalid.
+     */
+
     public MarkDoneParser(String input) throws TigerInvalidInputException {
         super(input);
         RemoveSpaces removeSpaces = new RemoveSpaces();

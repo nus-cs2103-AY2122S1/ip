@@ -10,8 +10,8 @@ import tiger.storage.Storage;
 
 import java.util.Scanner;
 
-/*
- * Ui is responsible for handling interactions with users. This includes
+/**
+ * {@code Ui} is responsible for handling interactions with users. This includes
  * responding and listening to user commands, storing user tasks, and loading user
  * tasks.
  */
@@ -21,8 +21,12 @@ public class Ui {
     private AppState applicationState;
     private Scanner scanner;
 
-    /*
-     * Inits the Ui, loads the taskList from the saved file.
+    /**
+     * Constructor of the {@code Ui} class. It creates storage file if not
+     * present.
+     *
+     * @param partialLoad Whether partial loading should be done.
+     * @throws TigerStorageException if the loaded file is corrupt.
      */
 
     private Ui(boolean partialLoad) throws TigerStorageException {
@@ -32,9 +36,17 @@ public class Ui {
         } else {
             this.applicationState = new AppState(false, Storage.partialLoad());
         }
-        System.out.println(String.format("Hello, I am Tiger, your personal assistant. I have fetched %d tasks from my memory.", this.applicationState.numTasks()));
+        System.out.println(String.format("Hello, I am Tiger, your personal assistant. I have fetched %d tasks from my" +
+                " memory.", this.applicationState.numTasks()));
         this.scanner = new Scanner(System.in);
     }
+
+    /**
+     * Attempts to initalise the {@code Ui} class until successful. If the storage file is
+     * corrupted, asks the user if the storage should be wiped or if a partial load should be done.
+     *
+     * @return a new {@code Ui} class that is properly initalised.
+     */
 
     public static Ui start() {
         try {
@@ -63,19 +75,28 @@ public class Ui {
         return new Ui(true);
     }
 
+    /**
+     * Makes the {@code Ui} class listen to user inputs and respond to user commands until the user quits.
+     * Ask saves the {@code TaskList} for every command.
+     */
+
     public void runUntilStopped() {
         while (!this.applicationState.isExited()) {
             try {
                 String userInput = scanner.nextLine();
                 Action action = Command.getActionFromCommand(userInput, applicationState);
                 this.applicationState = action.run();
-                // save the storage everytime the user runs an action in case the app inexplictly quits
+                // save the storage everytime the user runs an action in case the app inexplicably quits
                 Storage.save(this.applicationState.taskList);
             } catch (TigerInvalidInputException e) {
                 System.out.println(e);
             }
         }
     }
+
+    /**
+     * Exits the {@code Ui}.
+     */
 
     public void exit() {
         if (this.applicationState.isExited()) {

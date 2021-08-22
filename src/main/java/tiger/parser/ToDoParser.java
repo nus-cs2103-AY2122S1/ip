@@ -7,6 +7,15 @@ public class ToDoParser extends Parser {
 
     public String todo = "";
 
+    /**
+     * The {@code ToDoParser} parser class takes in an input String and
+     * parses it, so that the {@code ToDoAction} class can access the
+     * class fields and understand user input.
+     *
+     * @param  input String to be parsed.
+     * @throws TigerEmptyStringException If input is invalid.
+     */
+
     public ToDoParser(String input) throws TigerEmptyStringException {
         super(input);
         RemoveSpaces removeSpaces = new RemoveSpaces();

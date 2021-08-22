@@ -1,8 +1,7 @@
 package tiger.actions;
 
-import tiger.components.TaskList;
 import tiger.components.DeadLine;
-import tiger.utils.CustomDate;
+import tiger.components.TaskList;
 
 public class DeadLineAction extends Action {
     AppState applicationState;
@@ -14,6 +13,12 @@ public class DeadLineAction extends Action {
         this.todo = todo;
         this.dateLine = dateLine;
     }
+
+    /**
+     * Runs the {@code DeadLine} action.
+     *
+     * @return an updated {@code AppState}.
+     */
 
     public AppState run() {
         TaskList taskList = this.applicationState.taskList;

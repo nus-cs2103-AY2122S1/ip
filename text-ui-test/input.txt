@@ -8,6 +8,7 @@ list
 done 4
 todo E
 done 6
+delete 14
 done -1
 list
 deadline F /by

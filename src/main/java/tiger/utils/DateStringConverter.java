@@ -7,7 +7,19 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+
 public class DateStringConverter {
+
+    /**
+     * Takes in a string representation of the date and converts it to a
+     * {@code CustomDate} object. If an input day is not given, the function
+     * assumes it to be today.
+     *
+     * @param input String Represention of Date.
+     * @return The corresponding {@code CustomDate} object.
+     * @throws TigerDateParsingException if the date is not in the format
+     * specified.
+     */
 
     public CustomDate getDateFromString(String input) throws TigerDateParsingException {
         String editedInput = new RemoveSpaces().removeBackAndFrontSpaces(input);

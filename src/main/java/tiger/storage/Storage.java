@@ -17,6 +17,12 @@ public class Storage {
     public static final String FILE_PATH = "./data/Tiger.txt";
     public static final String DIRECTORY_PATH = "./data/";
 
+    /**
+     * Makes the storage text file is not present.
+     *
+     * @throws TigerStorageInitException if there is some {@code IOException}.
+     */
+
     public static void makeFileIfNotPresent() throws TigerStorageInitException {
         new File(DIRECTORY_PATH).mkdir();
         File file = new File(FILE_PATH);
@@ -41,10 +47,25 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves {@code TaskList} into the storage file.
+     *
+     * @param taskList a {@code TaskList} object to be saved.
+     * @throws TigerStorageSaveException if there is some {@code IOException}.
+     */
+
     public static void save(TaskList taskList) throws TigerStorageSaveException {
         String textToAdd = taskList.getStorageRepresentation();
         writeToFile(FILE_PATH, textToAdd);
     }
+
+    /**
+     * Loads {@code TaskList} from the storage file.
+     *
+     * @return a new {@code TaskList}.
+     * @throws TigerStorageLoadException if the storage file has been corrupted in some way,
+     *                                   or if there is some {@code IOException}.
+     */
 
     public static TaskList load() throws TigerStorageLoadException {
         try {
@@ -55,10 +76,20 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads a subset of {@code TaskList} from what data can be recovered from the storage file.
+     *
+     * @return a new {@code TaskList}.
+     */
+
     public static TaskList partialLoad() {
         // TODO: implement partial loading
         return new TaskList();
     }
+
+    /**
+     * Wipes the storage file.
+     */
 
     public static void wipeStorage() {
         writeToFile(FILE_PATH, "");

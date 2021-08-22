@@ -12,17 +12,12 @@ public class DeleteAction extends Action {
         this.index = index;
     }
 
-    public AppState run() {
+    public AppState run() throws TigerIndexOutOfBoundsException {
         TaskList taskList = this.applicationState.taskList;
         TaskList newTaskList = taskList;
-        try {
-            System.out.println(String.format("Feeling lazy today? I've deleted:\n%s",
-                    taskList.showTask(index)));
-            newTaskList = taskList.deleteTask(index);
-        } catch (TigerIndexOutOfBoundsException e) {
-            System.out.println(e.toString());
-        } finally {
-            return new AppState(applicationState.userExit, newTaskList);
-        }
+        System.out.println(String.format("Feeling lazy today? I've deleted:\n%s",
+                taskList.showTask(index)));
+        newTaskList = taskList.deleteTask(index);
+        return new AppState(applicationState.userExit, newTaskList);
     }
 }
