@@ -1,3 +1,7 @@
+package mango.task;
+
+import mango.DukeException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -5,6 +9,10 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
     public Task(String description, boolean isDone) {

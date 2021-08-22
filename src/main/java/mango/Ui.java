@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package mango;
 
 public class Ui {
     public Ui() {

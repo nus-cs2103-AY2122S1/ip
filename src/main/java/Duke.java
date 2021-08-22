@@ -1,4 +1,5 @@
 import java.io.IOException;
+import mango.*;
 
 public class Duke {
     private Storage storage;

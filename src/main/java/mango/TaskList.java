@@ -1,3 +1,7 @@
+package mango;
+
+import mango.task.*;
+
 import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> list;
@@ -68,7 +72,7 @@ public class TaskList {
 
     public void complete(int completedTask) {
         Task currentTask = list.get(completedTask - 1);
-        if (!currentTask.isDone) {
+        if (!currentTask.isDone()) {
             currentTask.markDone();
         }
 
