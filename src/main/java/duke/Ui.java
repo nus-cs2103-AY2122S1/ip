@@ -3,6 +3,9 @@ package duke;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+/**
+ * Encapsulates the information of a Ui object that handles the interaction with the user.
+ */
 public class Ui {
     // Lines used to indicate a block of message
     private static final  String HORIZONTAL_LINE_HEAD = "\t____________________________________________________________";

@@ -4,6 +4,9 @@ import duke.Ui;
 import duke.tasks.TaskList;
 import duke.tasks.Todo;
 
+/**
+ * Encapsulates the information of a TodoCommand object that contains a Todo.
+ */
 public class TodoCommand extends Command {
 
     private final Todo task;

@@ -5,6 +5,9 @@ import duke.exceptions.NoSuchTaskException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+/**
+ * Encapsulates the information of a DoneCommand object that contains an id of the task.
+ */
 public class DoneCommand extends Command {
     private final int id;
 

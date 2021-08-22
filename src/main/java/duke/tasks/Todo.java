@@ -1,5 +1,8 @@
 package duke.tasks;
 
+/**
+ * Encapsulates the information for a Todo object that contains the description and completion status.
+ */
 public class Todo extends Task {
     private static final String TAG = "T";
 
