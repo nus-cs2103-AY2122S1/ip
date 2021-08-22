@@ -1,5 +1,5 @@
-import java.io.File;
-import java.util.ArrayList;
+package Duke;
+
 import java.util.Scanner;
 
 public class UI {
