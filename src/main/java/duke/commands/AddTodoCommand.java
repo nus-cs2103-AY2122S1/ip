@@ -7,17 +7,36 @@ import duke.tasks.Todo;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Command that adds todo to task list.
+ */
 public class AddTodoCommand extends Command {
 
+    /**
+     * Constructor for AddTodoCommand.
+     *
+     * @param desc description for todo.
+     */
     public AddTodoCommand(String desc) {
         super(desc);
     }
 
+    /**
+     * Returns if the command is the exit command.
+     *
+     * @return false since this command is not the exit command.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Executes the command. Adds deadline to task list. Updates the save file.
+     *
+     * @param tasks   the task list.
+     * @param storage the storage of the programme.
+     */
     @Override
     public void execute(TaskList tasks, Storage storage) {
         try {

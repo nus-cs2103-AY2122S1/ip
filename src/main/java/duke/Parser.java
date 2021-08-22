@@ -2,8 +2,19 @@ package duke;
 
 import duke.commands.*;
 
+/**
+ * Represents the Parser class which makes sense of what the user typed.
+ */
 public class Parser {
 
+    /**
+     * Method to parse and make sense what the user typed in.
+     *
+     * @param commandLine the user's input.
+     * @param tasks       the TaskList that contains all the user's tasks.
+     * @return Command deciphered from the user input.
+     * @throws DukeException If the user gives a bad input.
+     */
     public Command parse(String commandLine, TaskList tasks) throws DukeException {
         String[] split = commandLine.split(" ");
         String command = split[0];
@@ -16,12 +27,12 @@ public class Parser {
         case "list":
             return new ListCommand("list");
         case "done":
-            checkLength(split.length);
+            checkIndex(split.length);
             int doneIndex = Integer.parseInt(split[1]);
             checkIndex(doneIndex, tasks.size());
             return new DoneCommand("done", doneIndex);
         case "delete":
-            checkLength(split.length);
+            checkIndex(split.length);
             int deleteIndex = Integer.parseInt(split[1]);
             checkIndex(deleteIndex, tasks.size());
             return new DeleteCommand("delete", deleteIndex);
@@ -95,18 +106,37 @@ public class Parser {
         return new UnknownCommand("unknown");
     }
 
+    /**
+     * Checks whether there is a description in the command line. Throws DukeException if description is missing.
+     *
+     * @param test the description the user input.
+     * @throws DukeException if there is no description in the command line.
+     */
     public static void checkDesc(String test) throws DukeException {
         if (test.equals("")) {
             throw new DukeException("The description is empty");
         }
     }
 
-    public static void checkLength(int l) throws DukeException {
-        if (l == 1) {
+    /**
+     * Checks if the user input an index number when using the commands: done, delete.
+     *
+     * @param length the number of words in the command line that the user input.
+     * @throws DukeException If the user did not enter an index number.
+     */
+    public static void checkIndex(int length) throws DukeException {
+        if (length == 1) {
             throw new DukeException("Please give an index number");
         }
     }
 
+    /**
+     * Checks if the index number that the user input is valid.
+     *
+     * @param i            the index number that the user input.
+     * @param lengthOfList the length of the user's TaskList.
+     * @throws DukeException If the index number is negative or more than length of the TaskList.
+     */
     public static void checkIndex(int i, int lengthOfList) throws DukeException {
         if (i <= 0) {
             throw new DukeException("Please give an index number > 0");

@@ -10,18 +10,39 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Command that marks task.
+ */
 public class DoneCommand extends Command {
     private int doneIndex;
+
+    /**
+     * Constructor for DoneCommand
+     *
+     * @param desc
+     * @param doneIndex
+     */
     public DoneCommand(String desc, int doneIndex) {
         super(desc);
         this.doneIndex = doneIndex;
     }
 
+    /**
+     * Returns if the command is the exit command.
+     *
+     * @return false since this command is not the exit command.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Executes the command. Adds deadline to task list. Updates the save file.
+     *
+     * @param tasks   the task list.
+     * @param storage the storage of the programme.
+     */
     @Override
     public void execute(TaskList tasks, Storage storage) {
         tasks.get(doneIndex - 1).markAsDone();

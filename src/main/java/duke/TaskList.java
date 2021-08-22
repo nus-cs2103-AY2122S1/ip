@@ -10,10 +10,19 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class containing the task list.
+ */
 public class TaskList {
 
     private ArrayList<Task> list;
 
+    /**
+     * Contrusctor of TaskList.
+     *
+     * @param data the save file.
+     * @throws FileNotFoundException when the file cannot be found.
+     */
     public TaskList(File data) throws FileNotFoundException {
         list = new ArrayList<>();
 
@@ -101,18 +110,39 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the task in the task list at the index passed in.
+     *
+     * @param index index of the desired task.
+     * @return the task at that index.
+     */
     public Task get(int index) {
         return list.get(index);
     }
 
+    /**
+     * Returns the size of the task list.
+     *
+     * @return size of the task list.
+     */
     public int size() {
         return list.size();
     }
 
+    /**
+     * Removes the task at the index passed in.
+     *
+     * @param index the index of the task to be removed.
+     */
     public void remove(int index) {
         list.remove(index);
     }
 
+    /**
+     * Adds a task to the task list.
+     *
+     * @param task the task to be added.
+     */
     public void add(Task task) {
         list.add(task);
     }
