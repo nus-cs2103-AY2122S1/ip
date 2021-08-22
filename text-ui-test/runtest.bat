@@ -10,8 +10,12 @@ REM delete saved taskList from previous run
 del taskList.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src\main\java\duke\exception -Xlint:none -d ..\bin ..\src\main\java\duke\exception\*.java
-javac  -cp ..\src\main\java\duke\task -Xlint:none -d ..\bin ..\src\main\java\duke\task\*.java
+javac  -cp ..\bin -Xlint:none -d ..\bin ..\src\main\java\duke\exception\*.java
+javac  -cp ..\bin -Xlint:none -d ..\bin ..\src\main\java\duke\task\*.java
+javac  -cp ..\bin -Xlint:none -d ..\bin ..\src\main\java\duke\parser\*.java
+javac  -cp ..\bin -Xlint:none -d ..\bin ..\src\main\java\duke\storage\*.java
+javac  -cp ..\bin -Xlint:none -d ..\bin ..\src\main\java\duke\tasklist\*.java
+javac  -cp ..\bin -Xlint:none -d ..\bin ..\src\main\java\duke\ui\*.java
 
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********

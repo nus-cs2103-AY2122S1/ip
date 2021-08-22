@@ -1,11 +1,17 @@
+wrongcommand
+todo
+todo this
+deadline
+deadline /by
 deadline return book /by 2000-12-20 1200
-deadline return book 2 /by 2021/08/22 0715
 event project meeting /at 2021-08-22 0715-0915
-event project meeting 2 /at 2000-12-20 1200-0000
-date
+event project meeting 2 /at 2000/12/20 1200-0000
+list
+done 1
+done 10
+list
 date asdfhasdf
 date 2000-12-20 1200
 date 2021/08/22 0715
 date 2021-12-03
-list
 bye
