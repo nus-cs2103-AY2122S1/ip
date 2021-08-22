@@ -2,13 +2,26 @@ package duke;
 
 import java.util.List;
 
+/**
+ * Represents a command to delete a task
+ */
 public class DeleteCommand extends Command {
     private final int index;
 
+    /**
+     * Constructs an instance of <code>DeleteCommand</code>
+     * @param index Index to be deleted
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Executes <code>DeleteCommand</code>
+     * @param tasks <code>TaskList</code> containing saved tasks
+     * @param ui <code>Ui</code> responsible for user interactions
+     * @param storage <code>Storage</code> responsible for saving tasks to drive
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> savedTasks = tasks.getTasks();

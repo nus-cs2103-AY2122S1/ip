@@ -3,13 +3,26 @@ package duke;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Represents a command to get all tasks on a specified date
+ */
 public class GetCommand extends Command {
     private final LocalDate date;
 
+    /**
+     * Constructs an instance of <code>GetCommand</code>
+     * @param date
+     */
     public GetCommand(LocalDate date) {
         this.date = date;
     }
 
+    /**
+     * Executes <code>GetCommand</code>
+     * @param tasks <code>TaskList</code> containing saved tasks
+     * @param ui <code>Ui</code> responsible for user interactions
+     * @param storage <code>Storage</code> responsible for saving tasks to drive
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> savedTasks = tasks.getTasks();
