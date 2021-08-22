@@ -2,21 +2,19 @@ package duke;
 
 import duke.exception.DukeException;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
+
 
 public class Parser {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-
 
     public int parse (String input, ChatBot bot) throws DukeException {
         String[] inputs = input.split(" ", 2);
         String key = inputs[0];
         int run = 1;
 
-
-        // i wonder if those length checking exceptions can be replaced with a method.
         switch (key) {
         case "bye":
             bot.handleExit();

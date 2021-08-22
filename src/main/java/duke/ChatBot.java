@@ -15,7 +15,6 @@ public class ChatBot {
     private TaskList tasklist;
     private Storage s;
     private UI ui;
-    private int exitCode = 1;
 
     public ChatBot() {
         this.s = new Storage();
@@ -28,7 +27,6 @@ public class ChatBot {
     }
 
     public void handleExit() {
-        this.exitCode = 0;
         ui.showExitMessage();
     }
 
@@ -44,13 +42,13 @@ public class ChatBot {
 
     public void handleDeadline(String name, LocalDateTime deadline) {
         Task t = tasklist.addDeadline(name, deadline, false);
-        ui.showAddDeadlineMessage(t, tasklist.getTotalTasksNumber());
+        ui.showAddTaskMessage(t, tasklist.getTotalTasksNumber());
         s.saveTasks(tasklist);
     }
 
     public void handleTodo(String name) {
         Task t = tasklist.addTodo(name, false);
-        ui.showAddTodoMessage(t, tasklist.getTotalTasksNumber());
+        ui.showAddTaskMessage(t, tasklist.getTotalTasksNumber());
         s.saveTasks(tasklist);
     }
 
@@ -76,10 +74,6 @@ public class ChatBot {
 
     public int getTotalTasks() {
         return tasklist.getTotalTasksNumber();
-    }
-
-    public int getExitCode() {
-        return exitCode;
     }
 
 }

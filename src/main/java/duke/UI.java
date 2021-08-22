@@ -15,14 +15,6 @@ public class UI {
         System.out.println(LINE + "bye! for now...\n" + LINE);
     }
 
-    public void showAddTodoMessage(Task t, int size) {
-        System.out.println(LINE + "I've added this task:\n" + t +"\n" + "You have " + size + " tasks left!\n" + LINE);
-    }
-
-    public void showAddDeadlineMessage(Task t, int size) {
-        System.out.println(LINE + "I've added this task:\n" + t +"\n" + "You have " + size + " tasks left!\n" + LINE);
-    }
-
     public void showAddTaskMessage(Task t, int size) {
         System.out.println(LINE + "I've added this task:\n" + t +"\n" + "You have " + size + " tasks left!\n" + LINE);
     }
