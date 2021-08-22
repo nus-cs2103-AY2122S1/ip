@@ -2,8 +2,10 @@ package duke.task;
 
 import duke.command.Ui;
 import duke.command.DukeException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -18,46 +20,46 @@ public class  TaskList {
             String s = tasks.get(i);
             char type = s.charAt(1);
             switch (type) {
-                case 'T':
-                    Todo t = new Todo(s.substring(7));
-                    if (s.charAt(4) == 'x'){
-                        t.markAsDone();
-                    }
-                    toDoList.add(t);
-                    break;
-                case 'D':
-                    int deadlineIndex = s.indexOf("(by:");
-                    Calendar deadlineCal = Calendar.getInstance();
+            case 'T':
+                Todo t = new Todo(s.substring(7));
+                if (s.charAt(4) == 'x'){
+                    t.markAsDone();
+                }
+                toDoList.add(t);
+                break;
+            case 'D':
+                int deadlineIndex = s.indexOf("(by:");
+                Calendar deadlineCal = Calendar.getInstance();
 
-                    try {
-                        deadlineCal.setTime(formatter.parse(s.substring(deadlineIndex + 5, s.length() - 1)));
-                    } catch(ParseException e) {
-                        System.out.println(e);
-                    }
+                try {
+                    deadlineCal.setTime(formatter.parse(s.substring(deadlineIndex + 5, s.length() - 1)));
+                } catch(ParseException e) {
+                    System.out.println(e);
+                }
 
-                    Deadline d = new Deadline(s.substring(7, deadlineIndex), deadlineCal);
-                    if (s.charAt(4) == 'x'){
-                        d.markAsDone();
-                    }
-                    toDoList.add(d);
-                    break;
-                case 'E':
-                    int eventIndex = s.indexOf("(at:");
+                Deadline d = new Deadline(s.substring(7, deadlineIndex), deadlineCal);
+                if (s.charAt(4) == 'x'){
+                    d.markAsDone();
+                }
+                toDoList.add(d);
+                break;
+            case 'E':
+                int eventIndex = s.indexOf("(at:");
 
-                    Calendar eventCal = Calendar.getInstance();
+                Calendar eventCal = Calendar.getInstance();
 
-                    try {
-                        eventCal.setTime(formatter.parse(s.substring(eventIndex + 5, s.length() - 1)));
-                    } catch(ParseException e) {
-                        System.out.println(e);
-                    }
+                try {
+                    eventCal.setTime(formatter.parse(s.substring(eventIndex + 5, s.length() - 1)));
+                } catch(ParseException e) {
+                    System.out.println(e);
+                }
 
-                    Event event = new Event(s.substring(7, eventIndex), eventCal);
-                    if (s.charAt(4) == 'x'){
-                        event.markAsDone();
-                    }
-                    toDoList.add(event);
-                    break;
+                Event event = new Event(s.substring(7, eventIndex), eventCal);
+                if (s.charAt(4) == 'x'){
+                    event.markAsDone();
+                }
+                toDoList.add(event);
+                break;
             }
         }
     }
