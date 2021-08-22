@@ -15,7 +15,7 @@ public class Todo extends Task{
     }
 
     /**
-     * Return the string representation of Todo
+     * Returns the string representation of Todo
      *
      * @return The string representation of Todo
      */

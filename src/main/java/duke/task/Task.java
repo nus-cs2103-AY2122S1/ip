@@ -22,7 +22,7 @@ public class Task {
     }
 
     /**
-     * Method to generate status icon for String representation of Task.
+     * Returns status icon for String representation of Task.
      *
      * @return Status icon 'x' for done ' ' for not done
      */
@@ -30,15 +30,13 @@ public class Task {
         return isDone ? "x" : " ";
     }
 
-    /**
-     * Method to mark task as done.
-     */
+    /** Marks task as done. */
     public void markAsDone() {
         isDone = true;
     }
 
     /**
-     * Return the string representation of Task
+     * Returns the string representation of Task
      *
      * @return The string representation of Task
      */
