@@ -5,7 +5,7 @@ public class Todo extends Task {
 
     @Override
     public String toDukeStoreFormat() {
-        return String.format("T | %s",super.toDukeStoreFormat());
+        return String.format("T | %s", super.toDukeStoreFormat());
     }
 
     @Override

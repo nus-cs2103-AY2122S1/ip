@@ -8,7 +8,7 @@ public class Event extends Task {
 
     @Override
     public String toDukeStoreFormat() {
-        return String.format("E | %s | %s",super.toDukeStoreFormat(), eventTime);
+        return String.format("E | %s | %s", super.toDukeStoreFormat(), eventTime);
     }
 
     @Override

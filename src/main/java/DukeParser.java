@@ -43,7 +43,7 @@ public class DukeParser {
      * Returns a list of task based on the data given by specified file in the constructor.
      *
      * @return List of Tasks from file
-     * @throws FileNotFoundException If source is not found
+     * @throws FileNotFoundException       If source is not found
      * @throws InvalidDukeCommandException If data from the file does not follow specifications
      */
     public List<Task> loadTasksFromData() throws FileNotFoundException, InvalidDukeCommandException {
