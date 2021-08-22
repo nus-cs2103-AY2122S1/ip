@@ -38,8 +38,8 @@ abstract class Printer {
       .filter(i -> commands[i].equals("/at") || commands[i].equals("/by"))
       .findFirst()
       .orElse(commands.length);
-    String[] taskNames = Arrays.copyOfRange(commands, 1, indexOfDateSeparator);
-    return Arrays.stream(taskNames).collect(Collectors.joining(" "));
+    String[] tasksNames = Arrays.copyOfRange(commands, 1, indexOfDateSeparator);
+    return Arrays.stream(tasksNames).collect(Collectors.joining(" "));
   }
 
   public static String getTaskDate(String[] commands) {
@@ -48,8 +48,8 @@ abstract class Printer {
       .filter(i -> commands[i].equals("/at") || commands[i].equals("/by"))
       .findFirst()
       .orElse(commands.length);
-    String[] taskNames = Arrays.copyOfRange(commands, indexOfDateSeparator + 1, commands.length);
-    return Arrays.stream(taskNames).collect(Collectors.joining(" "));
+    String[] tasksNames = Arrays.copyOfRange(commands, indexOfDateSeparator + 1, commands.length);
+    return Arrays.stream(tasksNames).collect(Collectors.joining(" "));
   }
 
   //TODO: Make both sets of formatOutput and print to handle String ... args instead

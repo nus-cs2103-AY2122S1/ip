@@ -99,7 +99,7 @@ public class TaskList {
 
   public void handleDone(int taskIndex) {
     Task indexedTask = this.taskArray.get(taskIndex - 1);
-    String output = indexedTask.handleMarkAsDone();
+    String output = indexedTask.setTaskAsDone();
     Printer.print(output);
   }
 
