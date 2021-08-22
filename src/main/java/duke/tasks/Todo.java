@@ -1,7 +1,7 @@
 package duke.tasks;
 
 public class Todo extends Task {
-    private static final String TAG = "T";
+    public static final String TAG = "T";
 
     /**
      * Constructs a new Todo object with the specified task description and task status.

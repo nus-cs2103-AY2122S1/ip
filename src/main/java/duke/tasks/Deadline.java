@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private static final String TAG = "D";
+    public static final String TAG = "D";
     private LocalDate by;
 
     /**
@@ -31,6 +31,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[" + TAG + "]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[" + TAG + "]" + super.toString()
+                + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

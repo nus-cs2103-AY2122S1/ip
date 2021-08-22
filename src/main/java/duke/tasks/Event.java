@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private static final String TAG = "E";
+    public static final String TAG = "E";
     private LocalDate at;
 
     /**
@@ -31,6 +31,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[" + TAG + "]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[" + TAG + "]" + super.toString()
+                + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

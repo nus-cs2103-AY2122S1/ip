@@ -5,7 +5,6 @@ import duke.tasks.TaskList;
 import duke.tasks.Todo;
 
 public class TodoCommand extends Command {
-
     private final Todo task;
 
     public TodoCommand(Todo task) {

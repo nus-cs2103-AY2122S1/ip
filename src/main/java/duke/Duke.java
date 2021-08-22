@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    // list used to store text entered by user
     private TaskList items;
-
     private final Storage storage;
     private final Parser parser;
 
@@ -43,12 +41,12 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().trim();
 
-        // duke.commands.Command Tags for the chat bot
         String exitTag = "bye";
         while(!input.equalsIgnoreCase(exitTag)) {
             try {
                 Command action = parser.checkCommandTag(input);
                 action.executeCommand(items);
+
                 storage.saveTask(items);
             } catch (DukeException | IOException e) {
                 Ui.notifyError(e.getMessage());

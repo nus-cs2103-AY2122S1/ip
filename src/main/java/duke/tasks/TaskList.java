@@ -17,8 +17,8 @@ public class TaskList {
         this.items.remove(id);
     }
 
-    public void taskCompleted(int id) {
-        this.items.get(id).taskCompleted();
+    public void markTaskAsComplete(int id) {
+        this.items.get(id).markAsComplete();
     }
 
     public int getTaskCount() {

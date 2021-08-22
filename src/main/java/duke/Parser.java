@@ -77,8 +77,10 @@ public class Parser {
         int startPosition = msg.indexOf(" ");
         int endPosition = msg.indexOf("/");
 
-        if (startPosition < 0 || startPosition >= msg.length() || endPosition < 0 || endPosition >= msg.length()) {
-            throw new IllegalFormatException("Please follow the format: type description /xx yyyy-mm-dd\n\t Use /by for deadline, /at for event.");
+        if (startPosition < 0 || startPosition >= msg.length()
+                || endPosition < 0 || endPosition >= msg.length()) {
+            throw new IllegalFormatException("Please follow the format: type description /xx yyyy-mm-dd\n\t "
+                    + "Use /by for deadline, /at for event.");
         }
 
         return msg.substring(startPosition, endPosition).trim();
@@ -88,13 +90,13 @@ public class Parser {
         String[] details = msg.split("/by ");
 
         if (details.length != 2) {
-            throw new IllegalFormatException("Please follow the format: type description /by yyyy-mm-dd");
+            throw new IllegalFormatException("Please follow the format: type description /by yyyy-mm-dd.");
         }
 
         try {
             return LocalDate.parse(details[1]);
         } catch (DateTimeParseException e) {
-            throw new IllegalFormatException("Please follow the format: type description /by yyyy-mm-dd");
+            throw new IllegalFormatException("Please follow the format: type description /by yyyy-mm-dd.");
         }
     }
 
@@ -102,21 +104,21 @@ public class Parser {
         String[] details = msg.split("/at ");
 
         if (details.length != 2) {
-            throw new IllegalFormatException("Please follow the format: type description /at yyyy-mm-dd");
+            throw new IllegalFormatException("Please follow the format: type description /at yyyy-mm-dd.");
         }
 
         try {
             return LocalDate.parse(details[1]);
         } catch (DateTimeParseException e) {
-            throw new IllegalFormatException("Please follow the format: type description /at yyyy-mm-dd");
+            throw new IllegalFormatException("Please follow the format: type description /at yyyy-mm-dd.");
         }
     }
 
-    private int getTaskId(String msg) throws IllegalFormatException {
-        String[] details = msg.split(" ");
+    private int getTaskId(String input) throws IllegalFormatException {
+        String[] details = input.split(" ");
 
         if (details.length != 2) {
-            throw new IllegalFormatException("Please follow the format: command 0");
+            throw new IllegalFormatException("Please follow the format: command 0.");
         }
 
         try {
