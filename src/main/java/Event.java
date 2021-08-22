@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A subclass of Task with scheduled date.
  */
@@ -5,7 +8,8 @@ public class Event extends Task {
     /**
      * Scheduled date of the task.
      */
-    private String at;
+    private LocalDateTime at;
+    private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
 
     /**
      * Instantiates an Event
@@ -13,12 +17,12 @@ public class Event extends Task {
      * @param description description of the event
      * @param at scheduled date of the event
      */
-    public Event(String description, String at) {
+    public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
 
-    public Event(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, LocalDateTime at) {
         super(description, isDone);
         this.at = at;
     }
@@ -30,11 +34,11 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[E]" + super.toString() + " (at: " + this.at.format(outputFormatter) + ")";
     }
 
     @Override
     public String toSaveString() {
-        return "E" + super.toSaveString() + "|" + this.at;
+        return "E" + super.toSaveString() + "|" + this.at.format(outputFormatter);
     }
 }

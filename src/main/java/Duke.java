@@ -1,6 +1,10 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +19,8 @@ public class Duke {
     private static final String COMMAND_DELETE = "delete";
     private static final String FILE_DIR = "data";
     private static final String FILE_NAME = "duke.txt";
+    private static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
+    private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
 
 
     private static List<Task> items = new ArrayList<>();
@@ -135,7 +141,9 @@ public class Duke {
         try {
             int byIndex = userCommand.indexOf("/by");
             String by = userCommand.substring(byIndex + 4);
-            Deadline newDeadline = new Deadline(userCommand.substring(9, byIndex - 1), by);
+            LocalDateTime date = LocalDateTime.parse(by, inputFormatter);
+
+            Deadline newDeadline = new Deadline(userCommand.substring(9, byIndex - 1), date);
             items.add(newDeadline);
 
             printHorizontalLine();
@@ -146,6 +154,10 @@ public class Duke {
         } catch (StringIndexOutOfBoundsException e) {
             printHorizontalLine();
             System.out.println("Please add a description and/or deadline!");
+            printHorizontalLine();
+        } catch (DateTimeException e) {
+            printHorizontalLine();
+            System.out.println("Please add a valid deadline of format yyyy/MM/dd HHmm (24-hour format)!");
             printHorizontalLine();
         }
     }
@@ -159,7 +171,8 @@ public class Duke {
         try {
             int atIndex = userCommand.indexOf("/at");
             String at = userCommand.substring(atIndex + 4);
-            Event newEvent = new Event(userCommand.substring(6, atIndex - 1), at);
+            LocalDateTime date = LocalDateTime.parse(at, inputFormatter);
+            Event newEvent = new Event(userCommand.substring(6, atIndex - 1), date);
             items.add(newEvent);
 
 
@@ -170,6 +183,10 @@ public class Duke {
         } catch (StringIndexOutOfBoundsException e) {
             printHorizontalLine();
             System.out.println("Please add a description and/or date for your event!");
+            printHorizontalLine();
+        } catch (DateTimeException e) {
+            printHorizontalLine();
+            System.out.println("Please add a valid event date of format yyyy/MM/dd HHmm (24-hour format)!");
             printHorizontalLine();
         }
     }
@@ -222,12 +239,15 @@ public class Duke {
                     case "T":
                         items.add(new Todo(task[2], task[1].equals("1")));
                         break;
+
                     case "E":
-                        items.add(new Event(task[2], task[1].equals("1"), task[3]));
+                        items.add(new Event(task[2], task[1].equals("1"), LocalDateTime.parse(task[3], outputFormatter)));
                         break;
+
                     case "D":
-                        items.add(new Deadline(task[2], task[1].equals("1"), task[3]));
+                        items.add(new Deadline(task[2], task[1].equals("1"), LocalDateTime.parse(task[3], outputFormatter)));
                         break;
+
                     default:
                         break;
                     }
@@ -241,6 +261,7 @@ public class Duke {
 
     public static void main(String[] args) {
         printWelcomeMessage();
+
 
         readFile("data/duke.txt");
 
