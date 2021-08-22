@@ -9,10 +9,13 @@ public class Duke {
      **/
     private final ArrayList<Task> list;
 
+    private final DukeDB database;
+
     /**
      * Basic constructor to initialise the list
      **/
-    public Duke() {
+    public Duke(DukeDB database) {
+        this.database = database;
         this.list = new ArrayList<>();
     }
 
@@ -32,14 +35,17 @@ public class Duke {
      */
     public void listen(){
         Scanner scanner = new Scanner(System.in);
-        Duke.printMsg("Hello! I'm Duke\nWhat can I do for you?");
+        Duke.printMsg("Hello! I'm Duke\nWhat can I do for you? \n Loading database...");
+        this.database.load(this.list);
+        Duke.printMsg(String.format("Loaded %d number of tasks.", this.list.size()));
         boolean terminate = true;
         while (terminate && scanner.hasNextLine()) {
             String scannedLine = scanner.nextLine();
             Optional<DukeCommands> prefix = DukeCommands.getCommand(scannedLine.split(" ")[0]);
             DukeCommands command = prefix.orElseGet(() -> DukeCommands.INVALID);
             try {
-                terminate = command.action.run(Parser.parseCommand(scannedLine), this.list);
+                terminate = command.action.run(Parser.parseCommand(scannedLine), this.list, this.database);
+                this.database.save(this.list);
             } catch(DukeException e) {
                 printMsg(e.toString());
             }

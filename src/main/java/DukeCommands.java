@@ -6,11 +6,12 @@ import java.util.Optional;
 public enum DukeCommands {
 
     BYE("bye",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDB database) -> {
                 Duke.printMsg("Bye. Hope to see you again soon!");
                 return false;
             }), LIST("list",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDB
+              database) -> {
                 StringBuilder output =
                         new StringBuilder("Here are the tasks in your list:\n");
                 for (Task i : list) {
@@ -23,7 +24,7 @@ public enum DukeCommands {
                 return true;
             }),
     DONE("done",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDB database) -> {
                 Parser.parseInt(map.get("done"))
                         .map(x -> {
                             if (x < 1 || x > list.size()) {
@@ -43,7 +44,7 @@ public enum DukeCommands {
                 return true;
             }),
     EVENT("event",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDB database) -> {
                 if (!map.containsKey("/at")) {
                     throw new DukeException("Missing positional argument '/at'.");
                 } else if (map.get("event") == null || map.get("/at") == null) {
@@ -58,7 +59,7 @@ public enum DukeCommands {
                 return true;
             }),
     DELETE("delete",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDB database) -> {
                 Parser.parseInt(map.get("delete"))
                         .map(x -> {
                             if (x < 1 || x > list.size()) {
@@ -79,7 +80,7 @@ public enum DukeCommands {
                 return true;
             }),
     DEADLINE("deadline",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDB database) -> {
 
                 if (!map.containsKey("/by")) {
                     throw new DukeException("Missing positional argument " +
@@ -96,7 +97,7 @@ public enum DukeCommands {
                 return true;
             }),
     TODO("todo",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDB database) -> {
                 if (map.get("todo") == null) {
                     throw new DukeException("Todo body cannot be empty.");
                 } else {
@@ -108,7 +109,7 @@ public enum DukeCommands {
                 return true;
             }),
     INVALID("invalid",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDB database) -> {
                 throw new DukeException("Unrecognized command.");
             });
 
