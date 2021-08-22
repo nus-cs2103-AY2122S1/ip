@@ -1,4 +1,3 @@
-
 public class Deadline extends Task {
 
     protected String by;
@@ -6,6 +5,11 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+    }
+
+    @Override
+    public String saveString() {
+        return "D | " + super.saveString() + " | " + by;
     }
 
     @Override
