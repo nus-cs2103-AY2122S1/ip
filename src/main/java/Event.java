@@ -2,8 +2,8 @@ public class Event extends Task {
 
     private final String at;
 
-    public Event(String name, String at) {
-        super(name, TaskType.E);
+    Event(String name, String at, boolean isCompleted) {
+        super(name, TaskType.E, isCompleted);
         this.at = at;
     }
 
@@ -12,7 +12,19 @@ public class Event extends Task {
     }
 
     @Override
+    public Task updateName(String input) {
+        return new Event(input, this.at, this.getCompleted());
+    }
+
+    @Override
+    public Task complete() {
+        return new Event(this.getName(), this.at, true);
+    }
+
+    @Override
     public String details() {
-        return super.details() + happeningWhen();
+        String checkbox = "[" + ( getCompleted() ? "X" : " ") + "]";
+        String details = taskType() + checkbox + " " + this.getName();
+        return details + happeningWhen();
     }
 }

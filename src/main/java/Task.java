@@ -1,12 +1,12 @@
 public abstract class Task {
-    private String name;
-    private boolean completed;
+    private final String name;
+    private final boolean isCompleted;
     private final TaskType taskType;
 
-    public Task(String name, TaskType taskType) {
+    Task(String name, TaskType taskType, boolean isCompleted) {
         this.taskType = taskType;
         this.name = name;
-        this.completed = false;
+        this.isCompleted = isCompleted;
     }
 
     public String getName() {
@@ -14,21 +14,14 @@ public abstract class Task {
     }
 
     public boolean getCompleted() {
-        return this.completed;
+        return this.isCompleted;
     }
 
-    public void updateName(String input) {
-        this.name = input;
-    }
+    public abstract Task updateName(String input);
 
-    public void markAsCompleted() {
-        this.completed = true;
-    }
+    public abstract Task complete();
 
-    public String details() {
-        String checkbox = "[" + (getCompleted() ? "X" : " ") + "]";
-        return taskType() + checkbox + " " + this.getName();
-    }
+    public abstract String details();
 
     public String taskType() {
         return "[" + this.taskType.toString() + "]";

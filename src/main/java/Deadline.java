@@ -2,8 +2,8 @@ public class Deadline extends Task {
 
     private final String by;
 
-    public Deadline(String name, String by) {
-        super(name, TaskType.D);
+    Deadline(String name, String by, boolean isCompleted) {
+        super(name, TaskType.D, isCompleted);
         this.by = by;
     }
 
@@ -12,8 +12,20 @@ public class Deadline extends Task {
     }
 
     @Override
+    public Task updateName(String input) {
+        return new Deadline(input, this.by, this.getCompleted());
+    }
+
+    @Override
+    public Task complete() {
+        return new Deadline(this.getName(), this.by, true);
+    }
+
+    @Override
     public String details() {
-        return super.details() + deadline();
+        String checkbox = "[" + ( getCompleted() ? "X" : " ") + "]";
+        String details = taskType() + checkbox + " " + this.getName();
+        return details + deadline();
     }
 
 }
