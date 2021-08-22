@@ -13,5 +13,6 @@ public class DeleteTask implements Executable{
         taskAmount.set(taskAmount.get() - 1);
         Processor.printString("Noted. I've removed this task:\n  " + Processor.spaceString + removedTask + "\n" + Processor.spaceString +
              "Now you have " + taskAmount + " tasks in the list.");
+        Processor.save(tasks);
     }
 }

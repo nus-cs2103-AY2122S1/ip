@@ -10,6 +10,7 @@ public class DoneTask implements Executable{
 
     public void execute(ArrayList<Task> tasks, AtomicInteger taskAmount) {
         tasks.get(index - 1).done();
+        Processor.save(tasks); 
         Processor.printString("Nice, I've marked this as done!\n" + Processor.spaceString + "  " + tasks.get(index - 1));
     }
 }

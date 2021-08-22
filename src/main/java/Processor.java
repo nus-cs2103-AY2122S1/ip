@@ -1,6 +1,12 @@
 import java.util.Scanner; 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.io.File;
+import java.io.IOException; 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * class to process duke
@@ -120,5 +126,46 @@ public class Processor {
         System.out.println(decoratorString);
         System.out.print(spaceString + taskString);
         System.out.println(decoratorString);
+    }
+
+    public static void save(ArrayList<Task> tasks) {
+        File file =  new File("data/TaskList.ser");
+        if (! file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                printString(e.toString());
+            }
+        }
+        try {
+            FileOutputStream fileOut = new FileOutputStream("data/TaskList.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(tasks);
+            out.close();
+            fileOut.close();
+        } catch (IOException e) {
+            printString(e.getMessage());
+        }
+    }
+
+    public static void load() {
+        File file =  new File("data/TaskList.ser");
+        if (! file.exists()) {
+            return; 
+        } else {
+            try {
+                FileInputStream fileIn = new FileInputStream("data/TaskList.ser");
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                try {
+                    tasks = (ArrayList<Task>) in.readObject();
+                    taskAmount = new AtomicInteger(tasks.size());
+                } catch (ClassNotFoundException e) {
+                    printString(e.getMessage());
+                }
+                in.close();
+            } catch (IOException e) {
+                printString(e.getMessage());
+            }
+        }
     }
 }
