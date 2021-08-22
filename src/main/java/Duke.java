@@ -2,6 +2,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -42,7 +46,7 @@ public class Duke {
             break;
           case "D":
             String taskBy = taskComponents[3];
-            task = new Deadline(taskDescription, taskBy);
+            task = new Deadline(taskDescription, LocalDate.parse(taskBy));
             break;
           default:
             String taskAt = taskComponents[3];
@@ -121,7 +125,7 @@ public class Duke {
 
     // Deadline command
     final String deadlineCommand = "deadline";
-    String by = "";
+    LocalDate by = null;
 
     // Event command
     final String eventCommand = "event";
@@ -242,7 +246,11 @@ public class Duke {
                 throw new MissingArgumentException("Deadline", "/by");
               } else {
                 description = rest.split(" /by ")[0];
-                by = rest.split(" /by ")[1];
+                try {
+                  by = LocalDate.parse(rest.split(" /by ")[1]);
+                } catch (DateTimeParseException err) {
+                  throw new InvalidDateFormatException();
+                }
               }
             }
             break;
