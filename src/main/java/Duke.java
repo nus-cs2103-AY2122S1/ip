@@ -1,5 +1,9 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -60,10 +64,16 @@ public class Duke {
                         if (deadlineInfo.length < 2) {
                             throw new DukeException("Please enter a valid deadline format.");
                         }
-                        Task newDeadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
-                        tasks.add(newDeadline);
-                        System.out.println("Got it. I've added this task:\n  " + newDeadline.toString());
-                        break;
+                        try {
+                            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("ddMMyy");
+                            LocalDate by = LocalDate.parse(deadlineInfo[1], dateFormatter);
+                            Task newDeadline = new Deadline(deadlineInfo[0], by);
+                            tasks.add(newDeadline);
+                            System.out.println("Got it. I've added this task:\n  " + newDeadline.toString());
+                            break;
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("Please enter a valid date.");
+                        }
                     case "event":
                         if (inputStringArray.length < 2) {
                             throw new DukeException("Please specify the task info.");
@@ -72,10 +82,16 @@ public class Duke {
                         if (eventInfo.length < 2) {
                             throw new DukeException("Please enter a valid event format.");
                         }
-                        Task newEvent = new Event(eventInfo[0], eventInfo[1]);
-                        tasks.add(newEvent);
-                        System.out.println("Got it. I've added this task:\n" + "  " + newEvent.toString());
-                        break;
+                        try {
+                            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("ddMMyy HHmm");
+                            LocalDateTime at = LocalDateTime.parse(eventInfo[1], dateTimeFormatter);
+                            Task newEvent = new Event(eventInfo[0], at);
+                            tasks.add(newEvent);
+                            System.out.println("Got it. I've added this task:\n" + "  " + newEvent.toString());
+                            break;
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("Please enter a valid date.");
+                        }
                     case "todo":
                         if (inputStringArray.length < 2) {
                             throw new DukeException("Please specify the task info.");
