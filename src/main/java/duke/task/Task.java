@@ -20,4 +20,16 @@ public class Task implements Serializable {
         char statusIcon = this.isDone ? 'X' : ' ';
         return String.format("[%c] %s", statusIcon, this.description);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Task))
+            return false;
+
+        Task task = (Task) o;
+        return isDone == ((Task) o).isDone
+                && description.equals(task.description);
+    }
 }
