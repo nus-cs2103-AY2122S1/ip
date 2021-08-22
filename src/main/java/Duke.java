@@ -157,17 +157,86 @@ public class Duke {
         }
     }
 
-    /**
-     * Handles the keyword "list".
-     * Iterates through the listOfTasks array and prints each task description out.
-     *
-     */
     public void chooseList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < listOfTasks.size(); i++) {
             System.out.println((i + 1) + "." + listOfTasks.get(i).toString());
         }
+    }
 
+    /**
+     * Handles the keyword "list".
+     * Checks for save file to read, if does not exist then create one.
+     * Reads the save file and adds tasks to listOfTasks array accordingly.
+     * Iterates through listOfTasks array and prints out the description of each task.
+     *
+     */
+    public void initialiseSaveFile() {
+        //check if save file exists, if not create the directory and file.
+        File saveFile = new File("saves/saves.txt");
+        try {
+            if (saveFile.getParentFile().mkdir()) {
+                System.out.println("File path created.");
+                if (saveFile.createNewFile()) {
+                    System.out.println("File created.");
+                }
+            }
+
+            Scanner s = new Scanner(saveFile);
+            String currentLine = "";
+
+            while (s.hasNextLine()) {
+                currentLine = s.nextLine();
+                String[] segments = currentLine.split(" \\| ");
+
+                if (segments[0].equals("T")) {
+                    Todo newTodo = new Todo(segments[2]);
+                    if (segments[1].equals("1")) {
+                        newTodo.markAsDone();
+                    }
+                    listOfTasks.add(newTodo);
+                } else if (segments[0].equals("D")) {
+                    Deadline newDeadline = new Deadline(segments[2], segments[3]);
+                    if (segments[1].equals("1")) {
+                        newDeadline.markAsDone();
+                    }
+                    listOfTasks.add(newDeadline);
+                } else if (segments[0].equals("E")) {
+                    Event newEvent = new Event(segments[2], segments[3]);
+                    if (segments[1].equals("1")) {
+                        newEvent.markAsDone();
+                    }
+                    listOfTasks.add(newEvent);
+                }
+            }
+
+            s.close();
+
+        } catch (Exception e) {
+            throw new DukeException("File could not be loaded!");
+        }
+
+    }
+
+    /**
+     * Iterates through listOfTasks array and writes them as strings in saves/saves.txt
+     *
+     */
+    public void updateSave() {
+        try {
+            FileWriter myWriter = new FileWriter("saves/saves.txt");
+            System.out.println("Updating Save File");
+
+            for (int i = 0; i < listOfTasks.size(); i++) {
+                Task thisTask = listOfTasks.get(i);
+                myWriter.write(thisTask.getReadableString());
+            }
+
+            myWriter.close();
+
+        } catch (Exception e) {
+            throw new DukeException("File could not be found!");
+        }
     }
 
 
@@ -179,6 +248,7 @@ public class Duke {
         boolean finished = false;
 
         Duke duke = new Duke();
+        duke.initialiseSaveFile();
 
         while(!finished) {
             String userResponse = sc.nextLine();
@@ -196,18 +266,23 @@ public class Duke {
                     //done
                 } else if (choice == 2) {
                     duke.chooseDone(userResponse);
+                    duke.updateSave();
                     //to do
                 } else if (choice == 3) {
                     duke.chooseTodo(userResponse);
+                    duke.updateSave();
                     //deadline
                 } else if (choice == 4) {
                     duke.chooseDeadline(userResponse);
+                    duke.updateSave();
                     //event
                 } else if (choice == 5) {
                     duke.chooseEvent(userResponse);
+                    duke.updateSave();
                     //delete
                 } else if (choice == 6) {
                     duke.chooseDelete(userResponse);
+                    duke.updateSave();
                 } else {
                     throw new DukeException("Unrecognised command!");
                 }
