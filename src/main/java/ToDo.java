@@ -2,6 +2,10 @@ import java.util.Objects;
 
 public class ToDo extends Task{
 
+    public ToDo(String description) {
+        super(description);
+    }
+
     public ToDo(String description, Boolean empty) throws DukeException {
         super(description);
 

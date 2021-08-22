@@ -2,6 +2,10 @@ public class Event extends Task{
 
     protected String duration;
 
+    public Event(String restOfInput) {
+        super(restOfInput);
+    }
+
     public Event(String restOfInput, Boolean empty) throws DukeException {
         super(restOfInput);
 

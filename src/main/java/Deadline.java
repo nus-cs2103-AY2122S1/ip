@@ -2,6 +2,10 @@ public class Deadline extends Task{
 
     protected String returnDate;
 
+    public Deadline(String restOfInput) {
+        super(restOfInput);
+    }
+
     public Deadline(String restOfInput, Boolean empty) throws DukeException {
         super(restOfInput);
 
