@@ -38,6 +38,8 @@ public class Parser {
             return 5;
         } else if (input.startsWith("event")) {
             return 6;
+        } else if (input.startsWith("find")) {
+            return 7;
         } else {
             throw new DukeException("Dude! I don't understand what you're saying!");
         }
