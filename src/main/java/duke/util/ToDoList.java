@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class ToDoList {
     private final ArrayList<Task> list;
     private final DataManager dataManager;
+    private final String ls = System.lineSeparator();
 
     /** Instantiates a new To do list. */
     public ToDoList(ArrayList<Task> list, DataManager dataManager) {
@@ -31,14 +32,14 @@ public class ToDoList {
     /**
      * Adds user input to list and pretty prints a visual feedback.
      *
-     * @param task duke.task.Task to be stored into the list.
+     * @param task Task to be stored into the list.
      */
     public void addToList(Task task) {
         list.add(task);
         Ui.prettyPrint(
                 String.format(
-                        "Got it. I've added this task:\r\n\t  %s\r\n\tNow you have %s tasks in the list.",
-                        task, list.size()));
+                        "Got it. I've added this task:" + ls + "\t\t%s\tNow you have %s tasks in the list.",
+                        task + ls, list.size()));
     }
 
     /**
@@ -52,7 +53,7 @@ public class ToDoList {
         } else {
             Task task = list.get(index - 1);
             task.markAsDone();
-            Ui.prettyPrint(String.format("Good job on completing this task!\r\n\t  %s", task));
+            Ui.prettyPrint(String.format("Good job on completing this task!\r\n\t\t%s", task));
         }
     }
 
@@ -65,8 +66,8 @@ public class ToDoList {
             Task task = list.get(index - 1);
             Ui.prettyPrint(
                     String.format(
-                            "Noted. I've removed this task:\r\n\t  %s\r\n\tNow you have %s tasks in the list.",
-                            task, list.size() - 1));
+                            "Noted. I've removed this task:\r\n\t\t%s\tNow you have %s tasks in the list.",
+                            task + ls, list.size() - 1));
             list.remove(index - 1);
         }
     }

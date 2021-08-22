@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * This class encapsulates a duke.task.Deadline.
+ * This class encapsulates a Deadline.
  *
  * @author Tan Yi Guan
  * @version CS2103T AY21/22 Semester 1
@@ -17,7 +17,7 @@ public class Deadline extends Task {
     private final String deadlineString;
 
     /**
-     * Instantiates a new duke.task.Deadline task.
+     * Instantiates a new Deadline task.
      *
      * @param description the description of the deadline task.
      * @param deadline the deadline
@@ -48,9 +48,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of a duke.task.Deadline.
+     * String representation of a Deadline.
      *
-     * @return String representation of a duke.task.Deadline.
+     * @return String representation of a Deadline.
      */
     @Override
     public String toString() {

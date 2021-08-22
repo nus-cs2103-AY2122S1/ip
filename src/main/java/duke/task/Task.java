@@ -11,7 +11,7 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Instantiates a new duke.task.Task.
+     * Instantiates a new Task.
      *
      * @param description the description for the task
      */

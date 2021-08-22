@@ -1,10 +1,15 @@
 package duke.util;
 
 import duke.Command;
+import duke.exception.DukeException;
+import duke.exception.IndexFormatException;
+import duke.exception.MissingDateTimeException;
+import duke.exception.MissingDescriptionException;
+import duke.exception.MissingIndexException;
+import duke.exception.MultipleDateTimeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
-import duke.exception.*;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -21,10 +26,10 @@ public class Parser {
     }
 
     /**
-     * Classifies the user's input into one of the duke.Command.
+     * Classifies the user's input into one of the Command.
      *
      * @param input Raw user's input.
-     * @return The corresponding duke.Command.
+     * @return The corresponding Command.
      */
     public Command detectCommand(String input) {
         String[] inputs = input.split(" ");
@@ -71,7 +76,7 @@ public class Parser {
     }
 
     /**
-     * Handler for duke.task.Deadline task creation.
+     * Handler for Deadline task creation.
      *
      * @param input Raw user's input.
      */
@@ -98,7 +103,7 @@ public class Parser {
     }
 
     /**
-     * Handler for duke.task.Event task creation.
+     * Handler for Event task creation.
      *
      * @param input Raw user's input.
      */

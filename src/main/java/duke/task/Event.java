@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * This class encapsulates an duke.task.Event.
+ * This class encapsulates an Event.
  *
  * @author Tan Yi Guan
  * @version CS2103T AY21/22 Semester 1
@@ -17,7 +17,7 @@ public class Event extends Task {
     private final Date dateTime;
 
     /**
-     * Instantiates a new duke.task.Event.
+     * Instantiates a new Event.
      *
      * @param description the description of the event.
      * @param dateTimeString the datetime of event.
@@ -48,9 +48,9 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of an duke.task.Event.
+     * String representation of an Event.
      *
-     * @return String representation of an duke.task.Event.
+     * @return String representation of an Event.
      */
     @Override
     public String toString() {
