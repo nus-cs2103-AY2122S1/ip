@@ -5,6 +5,7 @@ public enum CommandType {
 
     /**
      * Returns Command classification based on the given string.
+     *
      * @param commandText string which matches command name
      * @return Command representing the given string command, or null if no command matched.
      */

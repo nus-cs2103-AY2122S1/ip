@@ -2,8 +2,6 @@ package duke.fulfillment;
 
 import duke.command.Command;
 import duke.exceptions.DukeException;
-import duke.io.ConsoleUserInputHandler;
-import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserInputHandler;
 import duke.io.UserOutputHandler;
 import duke.messages.GreetingMessage;

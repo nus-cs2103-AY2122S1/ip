@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exceptions.InvalidTaskNumberException;
-import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserOutputHandler;
 import duke.messages.Message;
 import duke.messages.MessageConstants;
@@ -24,7 +23,7 @@ public class DeleteTaskCommand extends Command {
             Task deletedTask = taskList.deleteTask(index);
             userOutputHandler.writeMessage(new TaskDeleteMessage(deletedTask.toString(), taskList.getNumOfTasks()));
         } catch (NumberFormatException | IOException nfe) {
-            userOutputHandler.writeMessage(new Message(MessageConstants.INVALID_INTEGER_MESSAGE));
+            userOutputHandler.writeMessage(new Message(MessageConstants.MESSAGE_INVALID_INTEGER));
         }
     }
 

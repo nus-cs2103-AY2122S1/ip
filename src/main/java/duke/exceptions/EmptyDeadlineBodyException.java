@@ -4,6 +4,6 @@ import duke.messages.MessageConstants;
 
 public class EmptyDeadlineBodyException extends DukeException {
     public EmptyDeadlineBodyException() {
-        super(MessageConstants.EMPTY_DEADLINE_BODY_MESSAGE);
+        super(MessageConstants.MESSAGE_EMPTY_DEADLINE_BODY);
     }
 }

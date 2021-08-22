@@ -3,7 +3,6 @@ package duke.command;
 import duke.exceptions.EmptyDeadlineBodyException;
 import duke.exceptions.InvalidDateTimeFormatException;
 import duke.exceptions.InvalidDeadlineBodyException;
-import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserOutputHandler;
 import duke.messages.TaskAddMessage;
 import duke.tasks.Deadline;

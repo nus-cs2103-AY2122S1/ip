@@ -7,8 +7,8 @@ import duke.tasks.Task;
  *
  * @author kevin9foong
  */
-public class TaskDoneMessage extends Message{
+public class TaskDoneMessage extends Message {
     public TaskDoneMessage(Task task) {
-        super(MessageConstants.TASK_DONE_HEADER + "\n\t" + task.toString());
+        super(MessageConstants.MESSAGE_TASK_DONE_HEADER + "\n\t" + task.toString());
     }
 }

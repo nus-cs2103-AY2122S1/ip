@@ -17,7 +17,7 @@ public class TaskListMessage extends Message {
 
     private String generateListMessageText(List<Task> tasks) {
         StringBuilder listMessageBuilder = new StringBuilder();
-        listMessageBuilder.append(MessageConstants.TASK_LIST_HEADER);
+        listMessageBuilder.append(MessageConstants.MESSAGE_TASK_LIST_HEADER);
         for (int index = 0; index < tasks.size(); index++) {
             listMessageBuilder
                     .append("\n")

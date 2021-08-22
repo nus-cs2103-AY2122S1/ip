@@ -4,6 +4,6 @@ import duke.messages.MessageConstants;
 
 public class InvalidTaskNumberException extends DukeException {
     public InvalidTaskNumberException() {
-        super(MessageConstants.INVALID_TASK_NUMBER_MESSAGE);
+        super(MessageConstants.MESSAGE_INVALID_TASK_NUMBER);
     }
 }

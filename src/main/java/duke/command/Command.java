@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exceptions.DukeException;
-import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserOutputHandler;
 import duke.tasks.TaskList;
 

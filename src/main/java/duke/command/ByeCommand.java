@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserOutputHandler;
 import duke.messages.ByeMessage;
 import duke.tasks.TaskList;

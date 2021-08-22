@@ -7,7 +7,7 @@ package duke.messages;
  */
 public class TaskAddMessage extends Message {
     public TaskAddMessage(String taskText, int numOfTasks) {
-        super(MessageConstants.TASK_ADD_HEADER
+        super(MessageConstants.MESSAGE_TASK_ADD_HEADER
                 + taskText
                 + "\nNow you have "
                 + numOfTasks
