@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDateTime;
 
 public class TaskStorage {
     private ArrayList<Task> storage;
@@ -55,9 +56,9 @@ public class TaskStorage {
         case "todo":
             return new TodoTask(tokens[1], Boolean.parseBoolean(tokens[2]));
         case "event":
-            return new EventTask(tokens[1], Boolean.parseBoolean(tokens[2]), tokens[3]);
+            return new EventTask(tokens[1], Boolean.parseBoolean(tokens[2]), LocalDateTime.parse(tokens[3]));
         case "deadline":
-            return new DeadlineTask(tokens[1], Boolean.parseBoolean(tokens[2]), tokens[3]);
+            return new DeadlineTask(tokens[1], Boolean.parseBoolean(tokens[2]), LocalDateTime.parse(tokens[3]));
         default:
             throw new DukeException("Task with invalid format!");
         }
@@ -71,11 +72,11 @@ public class TaskStorage {
         } else if (task instanceof EventTask) {
             @SuppressWarnings("unchecked")
             EventTask eventTask = (EventTask) task;
-            return String.format("event %s %b %s", eventTask.getContent(), eventTask.isDone(), eventTask.getDate());
+            return String.format("event %s %b %s", eventTask.getContent(), eventTask.isDone(), eventTask.getDate().toString());
         } else if (task instanceof DeadlineTask) {
             @SuppressWarnings("unchecked")
             DeadlineTask deadlineTask = (DeadlineTask) task;
-            return String.format("deadline %s %b %s", deadlineTask.getContent(), deadlineTask.isDone(), deadlineTask.getDeadline());
+            return String.format("deadline %s %b %s", deadlineTask.getContent(), deadlineTask.isDone(), deadlineTask.getDeadline().toString());
         } else {
             // never reach this branch
             return null;
