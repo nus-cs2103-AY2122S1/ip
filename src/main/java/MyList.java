@@ -1,5 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-//test merge conflict
+import java.util.Scanner;
 
 /**
  * MyList class that encapsulates the bot list object and functionalities.
@@ -15,12 +19,31 @@ public class MyList {
     private ArrayList<Task> myList = new ArrayList<Task>();
 
     /**
+     * Constructor for the MyList class.
+     * Adds the tasks from the Data.txt file into the list if any.
+     */
+    public MyList() {
+        try {
+            File dataFile = new File("src/main/java/Data.txt");
+            Scanner s = new Scanner(dataFile);
+            while (s.hasNextLine()) {
+                String input = s.nextLine();
+                Task t = Task.getTaskFromString(input);
+                this.myList.add(t);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No data to load");
+        }
+    }
+
+    /**
      * Method to add an item into the list
      * Subsequently prints out the total number of items in the list.
      * @param t the Task to be added into the list
      */
     public void addTask(Task t) {
         myList.add(t);
+        writeToFile();
         System.out.println("Got it! I have added:");
         System.out.println(t.toString());
         int noOfItems = this.myList.size();
@@ -29,7 +52,6 @@ public class MyList {
         } else {
             System.out.printf("You now have %d items in your list \n", noOfItems);
         }
-
     }
 
     /**
@@ -43,8 +65,6 @@ public class MyList {
             System.out.println("Your list items:");
             for (int i = 0; i < listLength; i ++) {
                 Task t = myList.get(i);
-                String statusIcon = t.getStatusIcon();
-                String typeIcon = t.getTypeIcon();
                 System.out.printf("%d. %s \n", i + 1, t.toString());
             }
         }
@@ -72,8 +92,35 @@ public class MyList {
      */
     public void deleteTask(int index) {
         Task removed = this.myList.remove(index - 1);
+        writeToFile();
         System.out.println("Noted. I've removed this task:");
         System.out.println(removed.toString());
-        System.out.printf("You now have %d items in your list \n", this.myList.size());
+        int noOfItems = this.myList.size();
+        if (noOfItems == 1) {
+            System.out.printf("You now have %d item in your list \n", noOfItems);
+        } else {
+            System.out.printf("You now have %d items in your list \n", noOfItems);
+        }
+    }
+
+    /**
+     * Method to update the Data.txt file with all the items in the list.
+     * This would allow the saving of data even when Duke restarts
+     */
+    private void writeToFile() {
+        try {
+            int listLength = myList.size();
+            String input = "";
+            FileWriter fw = new FileWriter("src/main/java/Data.txt");
+            for (int i = 0; i < listLength; i++) {
+                Task t = myList.get(i);
+                int index = i + 1;
+                input += index + ". " + t.toString() + "\n";
+            }
+            fw.write(input);
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
