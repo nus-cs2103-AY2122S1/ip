@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,15 +17,16 @@ public class Duke {
      *
      * @param type The type of the task that will be added
      * @param input The corresponding description provided for the task
+     * @param isDone The boolean if the task is done
      * @throws DukeException Exceptions specific to Duke's input
      * @return The String of the reply after adding a task
      */
-    private String addTask(Task.TaskName type, String input) throws DukeException {
+    private String addTask(Task.TaskName type, String input, Boolean isDone) throws DukeException {
         Task task;
         String[] inputArray;
         switch (type) {
         case TODO:
-            task = new Todo(input);
+            task = new Todo(input, isDone);
             break;
         case EVENT:
             // Fallthrough
@@ -35,8 +39,8 @@ public class Duke {
             } else if(inputArray[1].isBlank()) {
                 throw new DukeException("The date/time is missing from " + type +".");
             }
-            task = type == Task.TaskName.EVENT ? new Event(inputArray[0], inputArray[1])
-                    : new Deadline(inputArray[0], inputArray[1]);
+            task = type == Task.TaskName.EVENT ? new Event(inputArray[0], inputArray[1], isDone)
+                    : new Deadline(inputArray[0], inputArray[1], isDone);
             break;
         default:
             throw new DukeException("Unexpected value: " + type);
@@ -45,6 +49,18 @@ public class Duke {
         this.list.add(task);
         return "\tGot it. I've added this task:\n\t\t " + task
                 + "\n\tNow you have " + list.size() + " tasks in the list.";
+    }
+
+    /**
+     * A private method to add the new Task into list and return the corresponding String reply.
+     *
+     * @param type The type of the task that will be added
+     * @param input The corresponding description provided for the task
+     * @throws DukeException Exceptions specific to Duke's input
+     * @return The String of the reply after adding a task
+     */
+    private String addTask(Task.TaskName type, String input) throws DukeException {
+        return addTask(type, input, false);
     }
 
     /**
@@ -119,8 +135,6 @@ public class Duke {
     public String handleInput(String input) throws DukeException {
         String[] inputArray = input.split(" ",2);
         String reply = "";
-        String[] tempArray;
-        int index;
 
         switch (inputArray[0]) {
         case "list":
@@ -134,33 +148,76 @@ public class Duke {
                 throw new DukeException("The index is missing.");
             }
             reply = inputArray[0].equals("done") ? this.markTask(inputArray[1]) : this.deleteTask(inputArray[1]);
+            saveData();
             break;
 
         case "todo":
-            if (inputArray.length < 2 || inputArray[1].isBlank()) {
-                throw new DukeException("The description of todo cannot be empty.");
-            }
-            reply = this.addTask(Task.TaskName.TODO, inputArray[1]);
-            break;
-
+            // Fallthrough
         case "deadline":
-            if (inputArray.length < 2 || inputArray[1].isBlank()) {
-                throw new DukeException("The description of deadline cannot be empty.");
-            }
-            reply = this.addTask(Task.TaskName.DEADLINE, inputArray[1]);
-            break;
-
+            // Fallthrough
         case "event":
             if (inputArray.length < 2 || inputArray[1].isBlank()) {
-                throw new DukeException("The description of event cannot be empty.");
+                throw new DukeException("The description of " + inputArray[0] + " cannot be empty.");
             }
-            reply = this.addTask(Task.TaskName.EVENT, inputArray[1]);
+            reply = this.addTask(Task.TaskName.getTaskType(inputArray[0]), inputArray[1]);
+            saveData();
             break;
 
         default:
             throw new DukeException("I'm sorry, but I don't know what that means.");
         }
         return reply;
+    }
+
+    /**
+     * Saves the data of the task in the list into a text file formatted
+     */
+    private void saveData() {
+        try {
+            String path = new File("").getAbsoluteFile() + "/data";
+            File file = new File(path);
+
+            // create directory if not yet created
+            if (!file.isDirectory()) {
+                file.mkdirs();
+            }
+
+            FileWriter fw = new FileWriter(file + "/duke.txt");
+
+            for (Task task: this.list) {
+                fw.write(task.toData() + System.lineSeparator());
+            }
+
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Reads the data from the saved file if it exists to update Duke on running
+     */
+    private void readData() {
+        try {
+            String path = new File("").getAbsoluteFile() + "/data/duke.txt";
+            File file = new File(path);
+
+            if (!file.isFile()) {
+                return;
+            }
+
+            Scanner s = new Scanner(file);
+            while (s.hasNext()) {
+                String[] inputArray = s.nextLine().split(" \\| ");
+                Task.TaskName type = Task.TaskName.getTaskType(inputArray[0]);
+
+                addTask(type, inputArray[2] + type.getSplit()
+                        + (type != Task.TaskName.TODO ? inputArray[3] : "")
+                        , inputArray[1].equals("1"));
+            }
+        } catch (IOException | DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
@@ -172,6 +229,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo + "What can I do for you\n");
 
         Duke duke = new Duke();
+        duke.readData();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 

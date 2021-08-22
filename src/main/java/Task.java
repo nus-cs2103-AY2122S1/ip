@@ -19,6 +19,12 @@ public class Task {
             this.split = split;
         }
 
+        /**
+         * Returns the corresponding regex/split needed to split the string input
+         * received to get correct output.
+         *
+         * @return
+         */
         public String getSplit() {
             return this.split;
         }
@@ -26,6 +32,35 @@ public class Task {
         @Override
         public String toString() {
             return this.name().toLowerCase();
+        }
+
+        /**
+         * Returns the TaskName when provided with the string name of the type of task.
+         *
+         * @param s The string representation of the type of task
+         * @return The corresponding TaskName
+         * @throws DukeException Exception specific to Duke
+         */
+        public static TaskName getTaskType(String s) throws DukeException {
+            switch (s) {
+            case "todo":
+                // Fallthrough
+            case "[T]":
+                return TODO;
+
+            case "deadline":
+                // Fallthrough
+            case "[D]":
+                return DEADLINE;
+
+            case "event":
+                // Fallthrough
+            case "[E]":
+                return EVENT;
+
+            default:
+                throw new DukeException("Something has gone very wrong!");
+            }
         }
     }
 
@@ -36,11 +71,13 @@ public class Task {
      * A public constructor to initialise a Task.
      *
      * @param description The String description/name of the task
+     * @param isDone The Boolean of if the task is done
      */
-    public Task(String description) {
+    public Task(String description, Boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
+
 
     /**
      * Gets the corresponding status icon for this task.
@@ -64,5 +101,17 @@ public class Task {
     public String markDone() {
         this.isDone = true;
         return this.toString();
+    }
+
+    /**
+     * Returns the task formatted as a text string to be stored as data in a text file.
+     * The task is stored with 1 and 0 representing the isDone status of the task with 1
+     * representing the task is done while 0 is not done separated by a vertical line
+     * then followed by the description of the task.
+     *
+     * @return The String representation of this task
+     */
+    public String toData() {
+        return (this.isDone ? "1" : "0") + " | " + this.description;
     }
 }
