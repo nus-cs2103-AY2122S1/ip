@@ -5,6 +5,7 @@ import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Storage;
 import java.io.IOException;
+
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -93,6 +94,10 @@ public class Duke {
         Event event = new Event(desc, cal);
         tasks.add(event);
         Ui.showAddTaskMessage(event.toString(), tasks.size());
+    }
+
+    protected void dukeFind(String desc){
+        tasks.find(desc);
     }
 
     public static void main(String[] args) {

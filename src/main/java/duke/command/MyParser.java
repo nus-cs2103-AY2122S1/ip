@@ -103,6 +103,13 @@ public class MyParser {
                 duke.dukeEvent(desc, eventCal);
                 break;
             }
+            case "find":
+                if (userDescription.isBlank()) {
+                    throw new DukeException("OOPS!!! The description of find cannot be empty");
+                }
+
+                duke.dukeFind(userDescription);
+                break;
             default:
                 throw new DukeException("OOPS!!! I'm Sorry, but I don't know what that means");
         }
