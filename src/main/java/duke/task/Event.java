@@ -5,6 +5,7 @@ import duke.util.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Objects;
 
 public class Event extends Task {
 
@@ -42,7 +43,7 @@ public class Event extends Task {
                 formattedString.substring(onIndex + 4),
                 DATE_SHORT_FORMATTER);
 
-        return new Event(formattedString.substring(6, onIndex), time);
+        return new Event(formattedString.substring(6, onIndex).trim(), time);
     }
 
     @Override
@@ -50,6 +51,19 @@ public class Event extends Task {
         char statusIcon = this.isDone ? 'X' : ' ';
         String timeString = DATE_MED_FORMATTER.format(this.on);
 
-        return String.format("[%c] Task.Event: %s(on: %s)", statusIcon, this.description, timeString);
+        return String.format("[%c] Task.Event: %s (on: %s)", statusIcon, this.description, timeString);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Event))
+            return false;
+
+        Event event = (Event) o;
+        return isDone == event.isDone
+                && on.equals(event.on)
+                && description.equals(event.description);
     }
 }

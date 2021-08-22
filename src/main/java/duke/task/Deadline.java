@@ -43,7 +43,7 @@ public class Deadline extends Task {
                 formattedString.substring(byIndex + 4),
                 DATE_SHORT_FORMATTER);
 
-        return new Deadline(formattedString.substring(9, byIndex), time);
+        return new Deadline(formattedString.substring(9, byIndex).trim(), time);
     }
 
     @Override
@@ -51,6 +51,19 @@ public class Deadline extends Task {
         char statusIcon = this.isDone ? 'X' : ' ';
         String timeString = DATE_MED_FORMATTER.format(this.by);
 
-        return String.format("[%c] duke.task.Deadline: %s(by: %s)", statusIcon, this.description, timeString);
+        return String.format("[%c] duke.task.Deadline: %s (by: %s)", statusIcon, this.description, timeString);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Deadline))
+            return false;
+
+        Deadline deadline = (Deadline) o;
+        return isDone == deadline.isDone
+                && by.equals(deadline.by)
+                && description.equals(deadline.description);
     }
 }

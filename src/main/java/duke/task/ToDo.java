@@ -19,12 +19,24 @@ public class ToDo extends Task {
 
     public static ToDo create(String formattedString) throws DukeException {
         checkFormat(formattedString);
-        return new ToDo(formattedString.substring(5));
+        return new ToDo(formattedString.substring(5).trim());
     }
 
     @Override
     public String toString() {
         char statusIcon = this.isDone ? 'X' : ' ';
         return String.format("[%c] Task.ToDo: %s", statusIcon, this.description);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof ToDo))
+            return false;
+
+        ToDo toDo = (ToDo) o;
+        return isDone == ((ToDo) o).isDone
+                && description.equals(toDo.description);
     }
 }
