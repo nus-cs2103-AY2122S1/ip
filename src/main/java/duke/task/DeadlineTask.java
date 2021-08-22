@@ -21,6 +21,14 @@ public class DeadlineTask extends TemporalTask {
     }
 
     @Override
+    public String getRepresentation() {
+        int done = isDone() ? 1 : 0;
+        String description = getDescription();
+        String time = getTime();
+        return String.format("%s %d %s /%s %s", TYPE_MARK, done, description, TIME_RELATION, time);
+    }
+
+    @Override
     String getTypeIndicator() {
         return String.format("[%s]", TYPE_MARK);
     }

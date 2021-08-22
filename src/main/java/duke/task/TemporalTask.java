@@ -27,6 +27,10 @@ public abstract class TemporalTask extends Task {
      */
     abstract String getTimeRelation();
 
+    String getTime() {
+        return time;
+    }
+
     @Override
     public String toString() {
         String taskRepresentation = super.toString();

@@ -1,5 +1,6 @@
 package duke;
 
+import duke.storage.StorageHandler;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
@@ -30,33 +31,45 @@ public class DukeChatbot {
     private static final String GREETING_MESSAGE = "Hello! I'm Duke!\n"
             + "What can I do for you?";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
-    private static final String READ_COMMAND_ERROR_MESSAGE = "An unexpected error has occurred.";
+    private static final String UNEXPECTED_ERROR_MESSAGE = "An unexpected error has occurred.";
     private static final String INVALID_COMMAND_ERROR_TEMPLATE = "This command is invalid.\n%s\nPlease try again.";
 
+    private StorageHandler storageHandler;
     private MessageFormatter messageFormatter;
     private CommandParser commandParser;
     private List<Task> tasks;
 
     /**
-     * Creates a Duke chatbot with an initially empty list of tasks.
+     * Creates a Duke chatbot.
      */
     public DukeChatbot() {
-        this.messageFormatter = new MessageFormatter();
-        this.commandParser = new CommandParser();
-        this.tasks = new ArrayList<>();
     }
 
     /**
-     * Prints the greeting message.
+     * Runs the Duke chatbot.
      */
-    public void printGreeting() {
+    public void run() {
+        try {
+            initialise();
+            printGreeting();
+            listenForInput();
+        } catch (IOException e) {
+            printFormattedMessage(UNEXPECTED_ERROR_MESSAGE);
+        }
+    }
+
+    private void initialise() throws IOException {
+        messageFormatter = new MessageFormatter();
+        commandParser = new CommandParser();
+        storageHandler = StorageHandler.getInstance();
+        tasks = storageHandler.loadTasks();
+    }
+
+    private void printGreeting() {
         printFormattedMessage(LOGO + GREETING_MESSAGE);
     }
 
-    /**
-     * Listens for inputs for commands and responds accordingly.
-     */
-    public void listenForInput() {
+    private void listenForInput() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String command;
         CommandType commandType;
@@ -72,6 +85,7 @@ public class DukeChatbot {
                 case ADD_TODO_TASK:
                     ToDoTask toDo = commandParser.getToDoTask(command);
                     addTask(toDo);
+                    storageHandler.saveTasks(tasks);
                     break;
                 case LIST_TASKS:
                     printTasks();
@@ -79,27 +93,31 @@ public class DukeChatbot {
                 case MARK_TASK_DONE:
                     taskIndex = commandParser.getTaskIndexOfTaskMarkedDone(command);
                     markTaskDone(taskIndex);
+                    storageHandler.saveTasks(tasks);
                     break;
                 case ADD_DEADLINE_TASK:
                     DeadlineTask deadlineTask = commandParser.getDeadlineTask(command);
                     addTask(deadlineTask);
+                    storageHandler.saveTasks(tasks);
                     break;
                 case ADD_EVENT_TASK:
                     EventTask eventTask = commandParser.getEventTask(command);
                     addTask(eventTask);
+                    storageHandler.saveTasks(tasks);
                     break;
                 case DELETE_TASK:
                     taskIndex = commandParser.getTaskIndexOfTaskDeleted(command);
                     deleteTask(taskIndex);
+                    storageHandler.saveTasks(tasks);
                     break;
                 default:
                     // The default case should be unreachable. If this is reached, something is wrong.
-                    printFormattedMessage(READ_COMMAND_ERROR_MESSAGE);
+                    printFormattedMessage(UNEXPECTED_ERROR_MESSAGE);
                     commandType = CommandType.EXIT;
                     break;
                 }
             } catch (IOException e) {
-                printFormattedMessage(READ_COMMAND_ERROR_MESSAGE);
+                printFormattedMessage(UNEXPECTED_ERROR_MESSAGE);
                 break;
             } catch (DukeInvalidCommandException e) {
                 printFormattedMessage(String.format(INVALID_COMMAND_ERROR_TEMPLATE, e.getMessage()));
