@@ -1,18 +1,14 @@
+list
+deadline level9 test /by 12-03-2020 18:00
 todo testing 123
-deadline duke123 /by tonight
-done asdfg
-done 3
-todo
-list
-event what are you doing step /at
-event what are you doing step /at 27 July to 28 August
+done 1
+deadline Level9 test /by 12
 done 2
+delete 1
+event test123 /at 23-Dec-2020 15:00 to 2020-Dec-24 12:00
+delete 2
+event
+done 5
+delete 1
 list
-done 3
-done 3
-done
-todo whatever
-list
-delete 4
-delete 4
 bye
