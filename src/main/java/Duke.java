@@ -1,11 +1,13 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Encapsulates the Duke bot that has the ability to create, read, update and delete tasks
- * such as todo, deadline and event based on user input.
+ * such as todo, deadline and event tasks based on user input.
  *
  * @author Dickson
  */
@@ -19,7 +21,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
 
         printDoubleLineBorder();
-        System.out.println("Hi there! I'm Duke" + "\nHow may I help you?");
+        System.out.println("Hi there! I'm Duke\n" + "How may I help you?\n");
         printDoubleLineBorder();
 
         processInput(scanner);
@@ -55,8 +57,8 @@ public class Duke {
                     if (splitInput.length == 0) {
                         throw new InvalidInputException("Invalid Task. Please enter a valid task.\n" +
                                 "(Todo) todo CS2103T Readings\n" +
-                                "(Deadline) deadline CS2103T Individual Project /by Week 6\n" +
-                                "(Event) event CS2103T Test /at Friday 4-6pm");
+                                "(Deadline) deadline CS2103T Individual Project /by 2021-09-07 1159\n" +
+                                "(Event) event CS2103T Finals /at 2021-11-23 1700");
                     } else if (splitInput[0].equals("done")) {
                         int taskIndex = Integer.parseInt(splitInput[1]) - 1;
                         if (taskIndex < 0 || taskIndex > list.size() - 1) {
@@ -90,39 +92,47 @@ public class Duke {
         String[] splitInput = input.split(" ");
         String taskType = splitInput[0];
         String taskDescription = "";
-        boolean taskHasTimestamp = false;
+        boolean taskHasDate = false;
+        boolean nextIsDateValue = false;
         for (int i = 1; i < splitInput.length; i++) {
-            if (splitInput[i].contains("/")) {
-                taskHasTimestamp = true;
+            if (nextIsDateValue) {
+                if (!validDate(splitInput[i])) {
+                    throw new InvalidInputException("Invalid Task Date. Please input date in this format YYYY-MM-DD.");
+                }
+                nextIsDateValue = false;
+                taskDescription = taskDescription.concat(parseDate(splitInput[i]) + " ");
+            } else if (splitInput[i].contains("/")) {
+                taskHasDate = true;
+                nextIsDateValue = true;
                 taskDescription = taskDescription.concat("(" + splitInput[i].split("/")[1] + ": ");
             } else if (i != splitInput.length - 1){
                 taskDescription = taskDescription.concat(splitInput[i] + " ");
             } else {
                 taskDescription = taskDescription.concat(splitInput[i]);
-                if (taskHasTimestamp) {
+                if (taskHasDate) {
                     taskDescription += ")";
                 }
             }
         }
         if (validTaskType(taskType)) {
             if (taskDescription.length() == 0) {
-                throw new InvalidInputException("The description of a task cannot be empty.");
+                throw new InvalidInputException("Invalid Task Description. The description of a task cannot be empty.");
             } else if (taskType.equals("todo")) {
                 task = new ToDo(taskDescription);
                 list.add(task);
             } else if (taskType.equals("deadline")) {
                 if (!input.contains("by")) {
-                    throw new InvalidInputException("Invalid deadline task.\n" +
+                    throw new InvalidInputException("Invalid Deadline Task.\n" +
                             "Please enter deadline task followed by /by and then the date/time it is due,\n" +
-                            "e.g. CS2103T Individual Project /by Week 6");
+                            "e.g. CS2103T Individual Project /by 2021-09-07 1159");
                 }
                 task = new Deadline(taskDescription);
                 list.add(task);
             } else {
                 if (!input.contains("at")) {
-                    throw new InvalidInputException("Invalid event task.\n" +
+                    throw new InvalidInputException("Invalid Event Task.\n" +
                             "Please enter event task followed by /at and then the date it is due,\n" +
-                            "e.g. CS2103T Test /at Friday 4-6pm");
+                            "e.g. CS2103T Test /at 2021-11-23 1700");
                 }
                 task = new Event(taskDescription);
                 list.add(task);
@@ -189,6 +199,30 @@ public class Duke {
             System.out.println("An error occurred when saving tasks list as text file." + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Returns boolean after checking for valid input date in this format: YYYY-MM-DD.
+     *
+     * @param input User input date string
+     * @return boolean to check for valid user input date string.
+     */
+    private static boolean validDate(String input) {
+        if (input.length() == 10) {
+            return input.charAt(4) == input.charAt(7);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Parse user input date string.
+     *
+     * @return String of formatted user input date.
+     */
+    private static String parseDate(String input) {
+        LocalDate date = LocalDate.parse(input);
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**

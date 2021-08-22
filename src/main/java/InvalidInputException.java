@@ -7,7 +7,7 @@ public class InvalidInputException extends DukeException {
     /**
      * Constructor for InvalidInputException.
      *
-     * @param message
+     * @param message message to show user for InvalidInputException.
      */
     public InvalidInputException(String message) {
         super(message);
