@@ -21,7 +21,7 @@ public class FileManager {
         }
     }
     
-    public TaskList getListFromFile() {
+    public TaskList getListFromFile() throws DukeException {
         ArrayList<Task> newList = new ArrayList<>(); 
         try {
             Scanner sc = new Scanner(DATA_FILE);
@@ -47,9 +47,7 @@ public class FileManager {
                 newList.add(newTask); 
             }
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (DukeException e) {
-            e.print(); 
+            throw new DukeException("Save file is not found"); 
         }
         return new TaskList(newList); 
     }

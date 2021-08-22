@@ -18,34 +18,29 @@ public class TaskList {
     }
 
     public void editTask(String[] input) throws DukeException {
-        if (input.length == 1) {
-            throw new DukeException("Pls specify the task index");
-        } else {
-            String num = input[1];
-            int index = Integer.parseInt(num) - 1;
-            if (index >= taskList.size()) {
-                throw new DukeException("There is no such task in your list D:");
-            }
-            String command = input[0];
-            switch (command) {
-                case "done":
-                    Task toMark = taskList.get(index);
-                    toMark.markAsDone();
-                    System.out.println("Nice! I've marked this task as done:\n" + toMark.toString());
-                    break;
-                case "delete":
-                    System.out.println("Poof!\n" + taskList.get(index).toString() + "\nis gone");
-                    taskList.remove(index);
-                    System.out.println("Now you have " + taskList.size() + " tasks in the list");
-                    break;
-                default:
-                    System.out.println("Didn't understand that :(");
-                    break;
-            }
+        String num = input[1];
+        int index = Integer.parseInt(num) - 1;
+        if (index >= taskList.size() || index == 0) {
+            throw new DukeException("There is no such task in your list D:");
+        }
+        String command = input[0];
+        switch (command) {
+            case "done":
+                Task toMark = taskList.get(index);
+                toMark.markAsDone();
+                System.out.println("Nice! I've marked this task as done:\n" + toMark.toString());
+                break;
+            case "delete":
+                System.out.println("Poof!\n" + taskList.get(index).toString() + "\nis gone");
+                taskList.remove(index);
+                System.out.println("Now you have " + taskList.size() + " tasks in the list");
+                break;
+            default:
+                System.out.println("Didn't understand that :(");
+                break;
         }
     }
     
-    //list to data
     public String convertToData() {
         StringBuilder data = new StringBuilder();
         for (Task task : taskList) {
