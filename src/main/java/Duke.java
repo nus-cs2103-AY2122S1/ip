@@ -43,52 +43,52 @@ public class Duke {
         String action = this.getAction(command);
         ActionType actionType = this.getActionType(action);
         switch (actionType) {
-            case LIST:
-                this.displayTasks();
-                break;
-            case TODO: {
-                String task = this.getTask(command);
-                ToDo toDo = this.createTodo(task);
-                this.addTask(toDo);
-                saveProgress();
-                break;
-            }
-            case DEADLINE: {
-                String task = this.getTask(command);
-                DeadLine ddl = this.createDeadLine(task);
-                this.addTask(ddl);
-                saveProgress();
-                break;
-            }
-            case EVENT: {
-                String task = this.getTask(command);
-                Event event = this.createEvent(task);
-                this.addTask(event);
-                saveProgress();
-                break;
-            }
-            case DONE: {
-                String task = this.getTask(command);
-                int taskIdx = this.getTaskIdx(this.getAction(command), task);
-                this.markTaskAsDone(taskIdx - 1);
-                saveProgress();
-                break;
-            }
-            case DELETE: {
-                String task = this.getTask(command);
-                int taskIdx = this.getTaskIdx(this.getAction(command), task);
-                this.deleteTask(taskIdx - 1);
-                saveProgress();
-                break;
-            }
-            case BYE: {
-                saveProgress();
-                this.bye();
-                this.isLive = false;
-                break;
-            }
-            default:
-                throw new UnrecognizableCommandException();
+        case LIST:
+            this.displayTasks();
+            break;
+        case TODO: {
+            String task = this.getTask(command);
+            ToDo toDo = this.createTodo(task);
+            this.addTask(toDo);
+            saveProgress();
+            break;
+        }
+        case DEADLINE: {
+            String task = this.getTask(command);
+            DeadLine ddl = this.createDeadLine(task);
+            this.addTask(ddl);
+            saveProgress();
+            break;
+        }
+        case EVENT: {
+            String task = this.getTask(command);
+            Event event = this.createEvent(task);
+            this.addTask(event);
+            saveProgress();
+            break;
+        }
+        case DONE: {
+            String task = this.getTask(command);
+            int taskIdx = this.getTaskIdx(this.getAction(command), task);
+            this.markTaskAsDone(taskIdx - 1);
+            saveProgress();
+            break;
+        }
+        case DELETE: {
+            String task = this.getTask(command);
+            int taskIdx = this.getTaskIdx(this.getAction(command), task);
+            this.deleteTask(taskIdx - 1);
+            saveProgress();
+            break;
+        }
+        case BYE: {
+            saveProgress();
+            this.bye();
+            this.isLive = false;
+            break;
+        }
+        default:
+            throw new UnrecognizableCommandException();
         }
     }
 
@@ -107,22 +107,22 @@ public class Duke {
         System.out.println("___________________________________________________\n");
     }
 
-    private void loadFromDisk()  {
+    private void loadFromDisk() {
         File folder = new File("data");
-       if (folder.isDirectory()) {
-           try {
-               File file = new File("data/duke.txt");
-               Scanner s = new Scanner(file);
-               readTasks(s);
-           } catch (FileNotFoundException e) {
-               //create the file if it does not exist.
-               createFile();
-           }
-       } else {
-           //create both directory and file if they do not exist.
-           createDataFolder();
-           createFile();
-       }
+        if (folder.isDirectory()) {
+            try {
+                File file = new File("data/duke.txt");
+                Scanner s = new Scanner(file);
+                readTasks(s);
+            } catch (FileNotFoundException e) {
+                //create the file if it does not exist.
+                createFile();
+            }
+        } else {
+            //create both directory and file if they do not exist.
+            createDataFolder();
+            createFile();
+        }
     }
 
     private void createFile() {
@@ -138,7 +138,7 @@ public class Duke {
     private void createDataFolder() {
         File dataFolder = new File("data");
         boolean isFolderCreated = dataFolder.mkdir();
-        if(!isFolderCreated){
+        if (!isFolderCreated) {
             System.out.println("Could not create data directory");
             System.exit(-1);
         }
@@ -160,12 +160,12 @@ public class Duke {
         boolean isDone = taskInfo[1].equals("[X]");
         String taskDescription = taskInfo[2];
         switch (taskType) {
-            case "[D]":
-                return new DeadLine(taskDescription, taskInfo[3], isDone);
-            case "[E]":
-                return new Event(taskDescription, taskInfo[3], isDone);
-            default:
-                return new ToDo(taskDescription, isDone);
+        case "[D]":
+            return new DeadLine(taskDescription, taskInfo[3], isDone);
+        case "[E]":
+            return new Event(taskDescription, taskInfo[3], isDone);
+        default:
+            return new ToDo(taskDescription, isDone);
         }
     }
 
@@ -213,22 +213,22 @@ public class Duke {
 
     private ActionType getActionType(String action) {
         switch (action) {
-            case "list":
-                return ActionType.LIST;
-            case "done":
-                return ActionType.DONE;
-            case "deadline":
-                return ActionType.DEADLINE;
-            case "event":
-                return ActionType.EVENT;
-            case "todo" :
-                return ActionType.TODO;
-            case "delete":
-                return ActionType.DELETE;
-            case "bye" :
-                return ActionType.BYE;
-            default:
-                return ActionType.UNRECOGNIZED;
+        case "list":
+            return ActionType.LIST;
+        case "done":
+            return ActionType.DONE;
+        case "deadline":
+            return ActionType.DEADLINE;
+        case "event":
+            return ActionType.EVENT;
+        case "todo":
+            return ActionType.TODO;
+        case "delete":
+            return ActionType.DELETE;
+        case "bye":
+            return ActionType.BYE;
+        default:
+            return ActionType.UNRECOGNIZED;
         }
     }
 
@@ -271,14 +271,14 @@ public class Duke {
             String period = lst[1];
             return new Event(description, period, false);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw  new UnrecognizableCommandException();
+            throw new UnrecognizableCommandException();
         }
     }
 
     private int getTaskIdx(String action, String idxString) throws InvalidTaskIndexException, NoSuchTaskException {
         int taskIdx;
         try {
-             taskIdx = Integer.parseInt(idxString);
+            taskIdx = Integer.parseInt(idxString);
         } catch (NumberFormatException e) {
             throw new InvalidTaskIndexException(action);
         }

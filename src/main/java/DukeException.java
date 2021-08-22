@@ -1,7 +1,7 @@
 /**
  * Exceptions encountered when interacting with a duke
  */
-abstract class DukeException extends Exception{
+abstract class DukeException extends Exception {
 }
 
 /**
@@ -17,7 +17,7 @@ class EmptyDescriptionException extends DukeException {
     @Override
     public String toString() {
         return "___________________________________________________\n"
-                + "☹ OOPS!!! The description of a "+ this.action + " cannot be empty.\n" +
+                + "☹ OOPS!!! The description of a " + this.action + " cannot be empty.\n" +
                 "___________________________________________________\n";
     }
 }
