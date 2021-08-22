@@ -1,6 +1,6 @@
+package duke.util;
+
 import duke.exception.DukeException;
-import duke.util.Storage;
-import duke.util.TaskList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class TaskListTest {
     // referenced from https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println
@@ -43,7 +45,7 @@ public class TaskListTest {
 
     @Test
     public void testAddToList_deadline_success() {
-        assertArrayEquals(new String[]{
+        assertArrayEquals(new String[] {
                 "I've added this task but it's not like I did it for you or anything!",
                 "  [D][ ] return book (by: Aug 23 2021 00:00)",
                 "Now you have 1 task in the list. Do your best doing them okay?"
@@ -53,7 +55,7 @@ public class TaskListTest {
     @Test
     public void testAddToList_deadline_exceptionThrown() {
         try {
-            assertArrayEquals(new String[]{
+            assertArrayEquals(new String[] {
                     "I've added this task but it's not like I did it for you or anything!",
                     "  [D][ ] return book (by: Aug 23 2021 00:00)",
                     "Now you have 1 task in the list. Do your best doing them okay?"
@@ -67,7 +69,7 @@ public class TaskListTest {
 
     @Test
     public void testAddToList_event_success() {
-        assertArrayEquals(new String[]{
+        assertArrayEquals(new String[] {
                 "I've added this task but it's not like I did it for you or anything!",
                 "  [E][ ] return book (by: Aug 23 2021 00:00-01:00)",
                 "Now you have 1 task in the list. Do your best doing them okay?"
@@ -77,7 +79,7 @@ public class TaskListTest {
     @Test
     public void testAddToList_event_exceptionThrown() {
         try {
-            assertArrayEquals(new String[]{
+            assertArrayEquals(new String[] {
                     "I've added this task but it's not like I did it for you or anything!",
                     "  [D][ ] return book (by: Aug 23 2021 00:00)",
                     "Now you have 1 task in the list. Do your best doing them okay?"
@@ -115,8 +117,9 @@ public class TaskListTest {
         taskList.addToList("project meeting /at 2021-08-23 1400 1600", "Event");
         taskList.printList(null);
 
-        assertEquals("     1:[T][ ] read book\n     2:[D][ ] return book (by: Aug 23 2021 00:00)\n"
-                + "     3:[E][ ] project meeting (by: Aug 23 2021 14:00-16:00)\n",
+        assertEquals(
+                "     1:[T][ ] read book\n     2:[D][ ] return book (by: Aug 23 2021 00:00)\n"
+                        + "     3:[E][ ] project meeting (by: Aug 23 2021 14:00-16:00)\n",
                 outContent.toString());
     }
 
@@ -127,7 +130,8 @@ public class TaskListTest {
         taskList.addToList("project meeting /at 2021-08-23 1400 1600", "Event");
         taskList.printList("2021-08-23");
 
-        assertEquals("     1:[D][ ] return book (by: Aug 23 2021 00:00)\n"
+        assertEquals(
+                "     1:[D][ ] return book (by: Aug 23 2021 00:00)\n"
                         + "     2:[E][ ] project meeting (by: Aug 23 2021 14:00-16:00)\n",
                 outContent.toString());
     }

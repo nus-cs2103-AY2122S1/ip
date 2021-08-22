@@ -1,7 +1,18 @@
 package duke.util;
 
-import duke.command.*;
-import duke.exception.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidDateInputException;
+import duke.exception.InvalidTimeInputException;
+import duke.exception.MissingArgumentException;
+import duke.exception.MissingIndexException;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -64,10 +75,12 @@ public class Parser {
         if (commandItems.length == 1) {
             throw new EmptyDescriptionException();
         }
+
         String filteredDescription  = command.split(" ", 2)[1];
         if (filteredDescription.trim().isEmpty()) {
             throw new EmptyDescriptionException();
         }
+
         return filteredDescription.trim();
     }
 
@@ -84,10 +97,12 @@ public class Parser {
         if (commandItems.length == 1) {
             throw new MissingIndexException();
         }
+
         String indexString  = command.split(" ", 2)[1];
         if (indexString.trim().isEmpty()) {
             throw new MissingIndexException();
         }
+
         return parseInt(indexString);
     }
 

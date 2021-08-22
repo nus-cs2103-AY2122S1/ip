@@ -37,13 +37,13 @@ public class Storage {
             try {
                 File f = new File(FILE_PATH);
                 Scanner sc = new Scanner(f);
-                ArrayList<String> taskList = new ArrayList<>();
+                ArrayList<String> tasksList = new ArrayList<>();
 
                 while (sc.hasNextLine()) {
-                    taskList.add(sc.nextLine());
+                    tasksList.add(sc.nextLine());
                 }
 
-                return taskList;
+                return tasksList;
 
             } catch (FileNotFoundException e) {
                 System.out.println("Something went wrong:  " + e.getMessage());
