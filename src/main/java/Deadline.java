@@ -2,8 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-// testing new branch
-// add another commit to feature1 branch
+
 /**
  * Class to represent a task with a deadline.
  * Has an additional component of a deadline.
@@ -13,10 +12,11 @@ import java.util.Scanner;
  */
 public class Deadline extends Task {
 
+    private String command;
     private String description = " ";
     private boolean isDone;
     private LocalDate deadline;
-    private DateTimeFormatter format = DateTimeFormatter.ofPattern(Duke.getFormat());
+    private DateTimeFormatter currentFormat = DateTimeFormatter.ofPattern(Duke.getFormat());
 
     /**
      * constructor for the deadline class.
@@ -28,14 +28,23 @@ public class Deadline extends Task {
     public Deadline(String description, boolean isDone) throws WrongCommandFormatException {
         super(description, isDone);
         Scanner s = new Scanner(description);
+        this.command = description;
+        System.out.println(this.command);
         while (s.hasNext()) {
             String next = s.next();
             if (next.equals("/at")) {
                 throw new WrongCommandFormatException("Wrong keyword used. Please try again with /by");
             } else if (next.equals("/by")) {
                 try {
-                    if (s.hasNextLine()) {
-                        this.deadline = LocalDate.parse(s.nextLine().substring(1), this.format);
+                    if (s.hasNext()) {
+                        String date = s.next();
+                        if (s.hasNext()) {
+                            String formatter = s.next();
+                            DateTimeFormatter format = DateTimeFormatter.ofPattern(formatter);
+                            this.deadline = LocalDate.parse(date, format);
+                        } else {
+                            this.deadline = LocalDate.parse(date, currentFormat);
+                        }
                     } else {
                         throw new WrongCommandFormatException(
                                 "No deadline specified. Please specify a deadline after `/by`"
@@ -106,7 +115,7 @@ public class Deadline extends Task {
                 + statusIcon
                 + this.description
                 + " (by: "
-                + this.deadline.format(this.format)
+                + this.deadline.format(DateTimeFormatter.ofPattern(Duke.getFormat()))
                 + ")";
     }
 
@@ -123,10 +132,26 @@ public class Deadline extends Task {
             System.out.println("Completed:"
                             + this.description
                             + " (by:"
-                            + this.deadline.format(this.format) + ")"
+                            + this.deadline.format(this.currentFormat) + ")"
             );
             System.out.println("You didn't overshoot the deadline right?");
             this.isDone = true;
         }
+    }
+
+    @Override
+    public String createData() {
+        String data = getTypeIcon()
+                    + ""
+                    + getStatusIcon()
+                    + " "
+                    + this.command;
+//                    + " "
+//                    + Duke.getFormat();
+        return data;
+    }
+
+    public String getCommand() {
+        return this.command;
     }
 }
