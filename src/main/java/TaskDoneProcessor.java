@@ -1,3 +1,6 @@
+/**
+ * Represents a processor that can mark a task as done. A subclass of the Processor class.
+ */
 public class TaskDoneProcessor extends Processor {
     /**
      * Constructor of the class `TaskDoneProcessor`.

@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Represents a processor that can retrieve the task list. A subclass of the Processor class.
+ */
 public class GetListProcessor extends Processor {
     /**
      * Constructor of the class `GetListProcessor`.

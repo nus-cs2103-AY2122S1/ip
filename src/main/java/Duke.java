@@ -1,24 +1,32 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the Duke program. Manages tasks based on commands received.
+ */
 public class Duke {
-    private static final String GREETING_MESSAGE = "____________________________________________________________\n" +
+    /** Greeting message to be printed when the program starts */
+    private static final String GREETING_MESSAGE =
+            "____________________________________________________________\n" +
             "Hello! I'm Duke\n" +
             "What can I do for you?\n" +
             "____________________________________________________________\n";
-    public static final String EXITING_MESSAGE = "____________________________________________________________\n" +
+    /** Message to be printed when the program exits */
+    public static final String EXITING_MESSAGE =
+            "____________________________________________________________\n" +
             "Bye. Hope to see you again soon!\n" +
             "____________________________________________________________";
-    // List of tasks.
+    /** List of tasks */
     private static ArrayList<Task> tasks = new ArrayList<>();
+    /** Whether the Duke program is running */
     private boolean isRunning;
+    /** Scanner used to read commands */
     private Scanner input;
 
     /**
      * Constructor of the class 'Duke'.
      */
     public Duke() {
-        // Start the program and greet the user.
         this.isRunning = true;
         System.out.println(Duke.GREETING_MESSAGE);
         this.input = new Scanner(System.in);
@@ -48,7 +56,7 @@ public class Duke {
      * @return A copy of tasks list.
      */
     public static ArrayList<Task> getTasks() {
-        ArrayList<Task> copy = new ArrayList<Task>();
+        ArrayList<Task> copy = new ArrayList<>();
         int len = Duke.getNumOfTasks();
         for (int i = 0; i < len; i++) {
             copy.add(Duke.tasks.get(i));
@@ -77,10 +85,11 @@ public class Duke {
 
     /**
      * Based on the command received, either quit the program or process an event.
+     *
+     * @throws DukeException If command is invalid.
      */
     private void readCommand() throws DukeException {
-        // read the command and extract out the first word to determine the type of command.
-        String command = this.input.nextLine().trim();
+        String command = this.input.nextLine().trim(); // read the command
         String[] splitted = command.split(" ", 2);
 
         if (command.equals("bye")) {
@@ -139,9 +148,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program, prints out messages based on commands received.
+     *
+     * @param args The command line parameters.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
-        // Process the commands received.
         while (duke.isRunning) {
             try {
                 duke.readCommand();

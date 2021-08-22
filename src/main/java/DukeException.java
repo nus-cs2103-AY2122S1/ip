@@ -1,3 +1,6 @@
+/**
+ * Represents an exception thrown when invalid commands are received.
+ */
 public class DukeException extends Exception {
     /**
      * Constructor of the class `DukeException`.
@@ -10,6 +13,11 @@ public class DukeException extends Exception {
                 "\n____________________________________________________________\n");
     }
 
+    /**
+     * Returns the error message of the DukeException.
+     *
+     * @return String representation of the exception.
+     */
     @Override
     public String toString() {
         return super.getMessage();

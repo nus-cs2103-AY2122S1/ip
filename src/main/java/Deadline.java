@@ -1,4 +1,8 @@
+/**
+ * Represents a task with a deadline. A subclass of the Task class.
+ */
 public class Deadline extends Task {
+    /** Deadline of this task as a string */
     protected String by;
 
     /**

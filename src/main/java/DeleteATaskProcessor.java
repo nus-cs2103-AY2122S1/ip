@@ -1,8 +1,11 @@
+/**
+ * Represents a processor that can delete a task from the task list. A subclass of the Processor class.
+ */
 public class DeleteATaskProcessor extends Processor {
     /**
      * Constructor of the class `DeleteATaskProcessor`.
      *
-     * @param task Task deleted.
+     * @param task Task to be deleted.
      */
     public DeleteATaskProcessor(Task task) {
         super("delete");
@@ -16,7 +19,7 @@ public class DeleteATaskProcessor extends Processor {
     public void process() {
         Duke.removeFromList(this.task);
         this.message = String.format(
-                "Noted. I've removed this task:\n  %s\n" +
-                        "Now you have %o tasks in the list.\n", this.task, Duke.getNumOfTasks());
+                "Noted. I've removed this task:\n  %s\nNow you have %o tasks in the list.\n",
+                this.task, Duke.getNumOfTasks());
     }
 }

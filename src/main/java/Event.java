@@ -1,4 +1,8 @@
+/**
+ * Represents an Event, which is a Task with a starting time and an ending time.
+ */
 public class Event extends Task {
+    /** Time range of the event */
     protected String at;
 
     /**

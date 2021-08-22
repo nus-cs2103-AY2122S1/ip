@@ -1,3 +1,6 @@
+/**
+ * Represents a task to be completed with unspecified time.
+ */
 public class ToDo extends Task {
     /**
      * Constructor of the class `ToDo`.
@@ -8,6 +11,11 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Converts the task to string.
+     *
+     * @return String representation of the task.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

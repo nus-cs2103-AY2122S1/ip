@@ -1,6 +1,12 @@
+/**
+ * Represents a processor that can process a command and print out the results.
+ */
 public class Processor {
+    /** The command to be processed */
     protected String command;
+    /** Message generated */
     protected String message;
+    /** Task involved in the command */
     protected Task task;
 
     /**

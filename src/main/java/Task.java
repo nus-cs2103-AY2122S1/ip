@@ -1,5 +1,10 @@
+/**
+ * Represents a task that can be performed by the Duke program.
+ */
 public class Task {
+    /** Description of the task */
     protected String description;
+    /** Whether the task is done */
     protected boolean isDone;
 
     /**
