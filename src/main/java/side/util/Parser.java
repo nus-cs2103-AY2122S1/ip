@@ -1,7 +1,9 @@
+package side.util;
+
 public class Parser {
     public Parser() {}
 
-    protected enum COMMAND { TODO, DEADLINE, EVENT, LIST, DONE, DELETE, INVALID }
+    public enum COMMAND { TODO, DEADLINE, EVENT, LIST, DONE, DELETE, INVALID }
 
     private static String findDatetime(String input, String argument) {
         int argumentIndex = input.lastIndexOf(argument);

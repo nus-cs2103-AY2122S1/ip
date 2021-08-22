@@ -1,3 +1,5 @@
+package side.tasks;
+
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke: Incrementally building a Chatbot.
@@ -23,6 +25,14 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = description.stripLeading().stripTrailing() + " ";
         this.isDone = isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     /**

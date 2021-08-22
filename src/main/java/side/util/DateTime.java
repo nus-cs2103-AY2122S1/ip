@@ -1,3 +1,7 @@
+package side.util;
+
+import side.exception.WrongDatetimeException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -10,7 +14,7 @@ public class DateTime {
     private LocalTime localTime;
     private LocalDateTime localDateTime;
 
-    DateTime(String date) {
+    public DateTime(String date) {
         try {
             this.localDate = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
@@ -21,7 +25,7 @@ public class DateTime {
     }
 
 
-    DateTime(String date, String time) {
+    public DateTime(String date, String time) {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 

@@ -1,3 +1,7 @@
+package side.tasks;
+
+import side.util.DateTime;
+
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke: Incrementally building a Chatbot.
@@ -12,7 +16,7 @@
  */
 
 public class Deadline extends Task {
-    protected DateTime datetime;
+    private DateTime datetime;
 
     public Deadline(String description, String datetimeInput) {
         super(description);
@@ -23,6 +27,10 @@ public class Deadline extends Task {
         } else {
             this.datetime = new DateTime(datetime[0]);
         }
+    }
+
+    public DateTime getDatetime() {
+        return this.datetime;
     }
 
     public Deadline(String description, String datetimeInput, Boolean isDone) {

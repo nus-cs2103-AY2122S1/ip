@@ -1,3 +1,9 @@
+package side.util;
+
+import side.tasks.Deadline;
+import side.tasks.Event;
+import side.tasks.Task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -32,16 +38,16 @@ public class Storage {
 
         for (Task t : savedList) {
             if (t instanceof Deadline) {
-                String taskDetails = "D | " + ((Deadline) t).datetime.saveDatetime();
+                String taskDetails = "D | " + ((Deadline) t).getDatetime().saveDatetime();
                 taskLine.append(taskDetails);
             } else if (t instanceof Event) {
-                String taskDetails = "E | " + ((Event) t).startDatetime.saveDatetime()
-                        + "/to" + ((Event) t).endDatetime.saveDatetime();
+                String taskDetails = "E | " + ((Event) t).getStartDatetime().saveDatetime()
+                        + "/to" + ((Event) t).getEndDatetime().saveDatetime();
                 taskLine.append(taskDetails);
             } else {
                 taskLine.append("T | No time");
             }
-            String generalTaskDetails = " | " + t.description + " | " + (t.isDone ? "T" : "F") + "\n";
+            String generalTaskDetails = " | " + t.getDescription() + " | " + (t.getIsDone() ? "T" : "F") + "\n";
             taskLine.append(generalTaskDetails);
         }
 

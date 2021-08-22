@@ -1,4 +1,12 @@
+package side;
+
 import java.util.Scanner;
+
+import side.exception.UnknownCommandException;
+import side.util.Ui;
+import side.util.TaskList;
+import side.util.Parser;
+import side.exception.SideException;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1

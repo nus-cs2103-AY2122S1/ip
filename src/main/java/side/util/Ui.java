@@ -1,3 +1,10 @@
+package side.util;
+
+import side.exception.*;
+import side.tasks.Deadline;
+import side.tasks.Event;
+import side.tasks.Task;
+
 public class Ui {
     private static final String LINEBREAK = "---------------------------------------------------------------------";
     private static final String GREETING = LINEBREAK + "" + "\nI'm Side, your unpaid personal assistant. " +

@@ -1,3 +1,7 @@
+package side.tasks;
+
+import side.util.DateTime;
+
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke: Incrementally building a Chatbot.
@@ -12,7 +16,7 @@
  */
 
 public class Event extends Task {
-    protected DateTime startDatetime, endDatetime;
+    private DateTime startDatetime, endDatetime;
 
     public Event(String description, String startInput, String endInput) {
         super(description);
@@ -43,6 +47,14 @@ public class Event extends Task {
             this.startDatetime = new DateTime(startDatetimeArr[0]);
             this.endDatetime = new DateTime(endDatetimeArr[0]);
         }
+    }
+
+    public DateTime getStartDatetime() {
+        return this.startDatetime;
+    }
+
+    public DateTime getEndDatetime() {
+        return this.startDatetime;
     }
 
     @Override
