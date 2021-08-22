@@ -1,6 +1,6 @@
 package duke.storage;
 
-import duke.TaskList;
+import duke.tasks.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
