@@ -13,6 +13,12 @@ public abstract class Task {
     private String description;
     private boolean isDone;
 
+    /**
+     * Convert the Task into a suitable String for saving into file.
+     * To be overridden by child classes to call formatString in a suitable way.
+     *
+     * @return String of the formatted Task.
+     */
     public abstract String saveAsString();
 
     /**
@@ -48,6 +54,11 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Formats the task into a suitable String for saving.
+     *
+     * @return String containing formatted Task.
+     */
     public String formatString(String ...args) {
         switch (args.length) {
         case 1:
@@ -63,6 +74,12 @@ public abstract class Task {
 
     }
 
+    /**
+     * Checks if task is due on the given date and returns the result.
+     *
+     * @param date String containing the date in the form dd/mm/yyyy, dd-mm-yyyy or yyyy-mm-dd.
+     * @return boolean of the result.
+     */
     public boolean onDate(String date) {
         return false;
     }

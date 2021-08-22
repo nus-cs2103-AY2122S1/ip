@@ -3,6 +3,11 @@ package duke.command;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * Class that represents the Command to add to the TaskList.
+ *
+ * @author Benedict Chua
+ */
 public class AddCommand extends Command {
     private TaskList taskList;
     private String task;
@@ -14,12 +19,6 @@ public class AddCommand extends Command {
         this.type = type;
     }
 
-    /**
-     * Adds the given task into the task list and prints the outcome using displayMessage.
-     *
-     * @param task description of task
-     * @param typeOfTask type of task from ToDo, Deadline, Event. Handled by switch case.
-     */
     @Override
     public void execute() {
         Ui.displayMessage(this.taskList.addToList(this.task, this.type));

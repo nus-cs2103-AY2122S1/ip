@@ -22,6 +22,12 @@ public class Deadline extends Task {
     private LocalDate dueDate;
     private LocalTime dueTime;
 
+    /**
+     * Constructs a new Deadline task from the given description and dueDate.
+     *
+     * @param description String of the task description.
+     * @param dueDate String of the given due date and time.
+     */
     public Deadline(String description, String dueDate) {
         super(description);
 
@@ -33,6 +39,14 @@ public class Deadline extends Task {
         this.dueTime = Parser.parseTime(dateInfo[1]);
     }
 
+    /**
+     * Constructs a Deadline task from an existing task description, dueDate and completion status.
+     * Used when loading from a save file.
+     *
+     * @param completed String indicating the status of completion: 1 if done, 0 if not.
+     * @param description String of the task description.
+     * @param dueDate String of the given due date and time.
+     */
     public Deadline(String completed, String description, String dueDate) {
         super(description);
 
@@ -48,7 +62,12 @@ public class Deadline extends Task {
         }
     }
 
-    public String formatDate() {
+    /**
+     * Formats date into a String for printing.
+     *
+     * @return String of the formatted date in the form Mmm d yyyy.
+     */
+    private String formatDate() {
         return dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 

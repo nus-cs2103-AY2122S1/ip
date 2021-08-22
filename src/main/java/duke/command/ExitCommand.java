@@ -2,6 +2,11 @@ package duke.command;
 
 import duke.util.Ui;
 
+/**
+ * Class that represents the Command to exit from the program.
+ *
+ * @author Benedict Chua
+ */
 public class ExitCommand extends Command {
     public ExitCommand() { }
 

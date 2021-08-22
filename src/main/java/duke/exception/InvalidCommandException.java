@@ -1,10 +1,7 @@
 package duke.exception;
 
 /**
- * The DukeException is an exception that is thrown when Duke is run.
- *
- * It contains the exceptions that are thrown due to wrong inputs given and is specific to this version of Duke.
- * Names of exception should be self-explanatory in describing when it should be used.
+ * The InvalidCommandException is thrown when user types in a command that is unrecognisable by Duke.
  *
  * @author Benedict Chua
  */

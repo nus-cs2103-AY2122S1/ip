@@ -1,5 +1,10 @@
 package duke.util;
 
+/**
+ * Class to deal with interactions with the user via messages.
+ *
+ * @author Benedict Chua
+ */
 public class Ui {
     private static final String INDENTATION = "     ";
     private static final String LINE_SEPARATOR = "    ____________________________________________________________";
@@ -8,7 +13,7 @@ public class Ui {
     private static final String[] GOODBYE = {"Hmph! It's not like I want to see you again or anything!"};
 
     /**
-     * Prints messages line by line enclosed within line separators.
+     * Prints messages line by line with indentation.
      *
      * @param messages an array of String that contains the messages to be printed
      */
@@ -18,18 +23,32 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints line separator.
+     */
     public static void showLine() {
         System.out.println(LINE_SEPARATOR);
     }
 
+    /**
+     * Prints empty line.
+     */
     public static void newLine() {
         System.out.println();
     }
 
+    /**
+     * Prints greeting salutations.
+     * Used on start-up of program.
+     */
     public static void showWelcome() {
         displayMessage(GREETING);
     }
 
+    /**
+     * Prints farewell salutation.
+     * Used when program stops.
+     */
     public static void bidFarewell() {
         displayMessage(GOODBYE);
     }

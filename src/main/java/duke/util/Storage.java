@@ -7,6 +7,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that deals with loading tasks from save file and saving tasks in the file.
+ *
+ * @author Benedict Chua
+ */
 public class Storage {
     private static final String DIRECTORY_PATH = "../../../../../data";
     private static final String FILE_PATH = DIRECTORY_PATH + "/duke.txt";
@@ -22,6 +27,11 @@ public class Storage {
         this.isFileExists = file.exists();
     }
 
+    /**
+     * Loads tasks from the save file.
+     *
+     * @return Tasks from the saved file in an ArrayList of String
+     */
     public ArrayList<String> retrieveData() {
         if (isFileExists) {
             try {
@@ -44,6 +54,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks into the save file from a given String of Tasks.
+     *
+     * @param allTasks String containing all the tasks to save.
+     */
     public void writeToFile(String allTasks) {
         // Checks if directory exists, creates if it doesn't
         if (!isDirectoryExists) {

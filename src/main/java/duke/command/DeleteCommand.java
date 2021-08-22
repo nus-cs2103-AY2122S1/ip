@@ -3,6 +3,11 @@ package duke.command;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * Class that represents the Command to delete from the TaskList.
+ *
+ * @author Benedict Chua
+ */
 public class DeleteCommand extends Command {
     private TaskList taskList;
     private int index;

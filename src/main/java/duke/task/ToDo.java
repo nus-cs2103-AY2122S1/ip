@@ -10,10 +10,22 @@ package duke.task;
  * @author Benedict Chua
  */
 public class ToDo extends Task {
+    /**
+     * Constructs a new ToDo task from the given description.
+     *
+     * @param description String of the task description.
+     */
     public ToDo(String description) {
         super(description);
     }
 
+    /**
+     * Constructs a ToDo task from an existing task description and completion status.
+     * Used when loading from a save file.
+     *
+     * @param completed String indicating the status of completion: 1 if done, 0 if not.
+     * @param description String of the task description.
+     */
     public ToDo(String completed, String description) {
         super(description);
 

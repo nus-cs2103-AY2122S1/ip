@@ -24,6 +24,12 @@ public class Event extends Task {
     private LocalTime startTime;
     private LocalTime endTime;
 
+    /**
+     * Constructs a new Eveent task from the given description and eventTime.
+     *
+     * @param description String of the task description.
+     * @param eventTime String of the given event date, startTime and endTime.
+     */
     public Event(String description, String eventTime) {
         super(description);
         String[] dateInfo = eventTime.split(" ", 3);
@@ -35,6 +41,14 @@ public class Event extends Task {
         this.endTime = Parser.parseTime(dateInfo[2]);
     }
 
+    /**
+     * Constructs a new Eveent task from the given description, eventTime and completion status.
+     * Used when loading from a save file.
+     *
+     * @param completed String indicating the status of completion: 1 if done, 0 if not.
+     * @param description String of the task description.
+     * @param eventTime String of the given event date, startTime and endTime.
+     */
     public Event(String completed, String description, String eventTime) {
         super(description);
         String[] dateInfo = eventTime.split(" ", 3);
@@ -50,7 +64,12 @@ public class Event extends Task {
         }
     }
 
-    public String formatDate() {
+    /**
+     * Formats date into a String for printing.
+     *
+     * @return String of the formatted date in the form Mmm d yyyy.
+     */
+    private String formatDate() {
         return eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 

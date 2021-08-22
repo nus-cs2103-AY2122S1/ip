@@ -16,14 +16,26 @@ import java.util.Scanner;
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted commands:
+ *
+ *   Add Tasks:
  *   - 'todo x' -> adds a ToDo task of x with no date/time attached
  *   - 'deadline x /by a b' -> adds a Deadline task of x that needs to be done by date a and time b (time is optional)
  *   - 'event x /at a b c' -> adds an Event task of x that is on date a and starts at time b and ends at time c
+ *
+ *   Display Tasks
  *   - 'list' -> displays current list of tasks
  *   - 'check x' -> displays list of tasks due on date x
+ *
+ *   Complete Tasks
  *   - 'done x' -> marks Task x as done
+ *
+ *   Remove Tasks
  *   - 'delete x' -> deletes Task x from the task list
+ *
+ *   Exit Program
  *   - 'bye' -> exits the program
+ *
+ *   Invalid Commands
  *   - any other String of different patterns -> throws an exception
  *
  * CS2103T Individual Project AY 21/22 Sem 1

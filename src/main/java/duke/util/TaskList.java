@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * The TaskList Class is a representation of a list of tasks that Duke is keeping track of.
  *
- * Tasks can be added into the list via Duke and the list can be displayed as well.
+ * Contains functions to add/remove Tasks in the list and to display the list.
  *
  * @author Benedict Chua
  */
@@ -21,6 +21,14 @@ public class TaskList {
     private ArrayList<Task> taskList;
     private Storage storage;
 
+    /**
+     * Constructs a TaskList with the given arguments.
+     * If existing task is empty, creates an empty ArrayList of task.
+     * Otherwise, parses the Tasks from the saved file and adds it to the ArrayList of task.
+     *
+     * @param existingTask Tasks in the formatted into a String from the saved file.
+     * @param storage Storage object to use to save state of TaskList.
+     */
     public TaskList(ArrayList<String> existingTask, Storage storage) {
         this.storage = storage;
         if (existingTask != null) {
@@ -49,6 +57,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Converts and formats current TaskList into a String suitable to write into saved file.
+     *
+     * @return Formatted TaskList in the form of a String.
+     */
     private String convertListToString() {
         String allTasks = "";
         for (Task task : taskList) {
@@ -59,6 +72,7 @@ public class TaskList {
 
     /**
      * Adds a given task to the tasks list.
+     * Task can be in the from of ToDo, Deadline or Event.
      *
      * @param task the task to add to the list.
      * @return String representation of messages stating that the task has been added
@@ -94,6 +108,10 @@ public class TaskList {
 
     /**
      * Prints the tasks in the list with indexing starting from 1.
+     * If dateString is not null, prints tasks that are due on that date.
+     * Otherwise, prints all tasks.
+     *
+     * @param dateString String containing the date in the form dd/mm/yyyy, dd-mm-yyyy or yyyy-mm-dd.
      */
     public void printList(String dateString) {
         if (dateString != null) {
@@ -115,10 +133,11 @@ public class TaskList {
     }
 
     /**
-     * Marks tasks (based on index) as done if it exists.
+     * Marks tasks based on index as done if it exists.
      *
-     * @param index index given by the User for Task in the TaskList (starts from 1).
-     * @return message of the completion of the Task if it exists, else user will be informed that no such task exists.
+     * @param index index given by the User for Task in the TaskList starting from 1.
+     * @return message of the completion of the Task.
+     * @throws InvalidIndexException if index given does not exist in the TaskList.
      */
     public String[] markTaskAsDone(int index) throws InvalidIndexException {
         if (index <= 0 || index > taskList.size()) {
@@ -135,6 +154,13 @@ public class TaskList {
 
     }
 
+    /**
+     * Deletes a task based on index if it exists.
+     *
+     * @param index index given by the User for Task in the TaskList starting from 1.
+     * @return message of the deletion of the Task.
+     * @throws InvalidIndexException if index given does not exist in the TaskList.
+     */
     public String[] deleteTask(int index) throws InvalidIndexException {
         if (index <= 0 || index > taskList.size()) {
             throw new InvalidIndexException(taskList.size());
