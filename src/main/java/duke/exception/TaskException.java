@@ -1,4 +1,7 @@
+package duke.exception;
+
 import java.util.*;
+import duke.task.Task;
 
 /* Exception to handle correct task name-input, but failed on subsequent syntax */
 public class TaskException extends DukeException {

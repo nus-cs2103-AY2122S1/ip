@@ -1,6 +1,8 @@
+package duke.exception;
+
 import java.util.*;
 
-abstract class DukeException extends IllegalArgumentException {
+public abstract class DukeException extends IllegalArgumentException {
 	public DukeException(String message) {
 		super("Duke has encountered an problem: " + message);
 	}

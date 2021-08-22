@@ -1,5 +1,20 @@
+package duke.util;
+
 import java.io.*;
 import java.util.*;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.ExitCommand;
+import duke.command.DeleteCommand;
+import duke.command.DisplayCommand;
+import duke.command.MarkDoneCommand;
+import duke.exception.DukeException;
+import duke.exception.TaskException;
+import duke.exception.UnknownCommandException;
 
 public class Parser {
 	public static ToDo parseToDo(String line) {

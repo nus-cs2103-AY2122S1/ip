@@ -1,5 +1,4 @@
-import java.io.*;
-import java.util.*;
+package duke.command;
 
 public class AddCommand extends Command {
 	private Task task;

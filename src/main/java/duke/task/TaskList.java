@@ -1,4 +1,5 @@
-import java.io.*;
+package duke.task;
+
 import java.util.*;
 
 public class TaskList {

@@ -1,4 +1,7 @@
+package duke.util;
+
 import java.util.*;
+import duke.exception.DukeException;
 
 public class UI {
 	private final String tab;

@@ -1,6 +1,8 @@
+package duke.task;
+
 import java.util.*;
 
-abstract class Task {
+public abstract class Task {
 	protected String description;
 	protected boolean isDone;
 	protected String type;
@@ -22,7 +24,7 @@ abstract class Task {
 		this.isDone = true;
 	}
 
-	abstract String getFormat();
+	public abstract String getFormat();
 
 	public List<String> getSaveParameters() {
 		List<String> params = new ArrayList<>();

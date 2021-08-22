@@ -1,5 +1,4 @@
-import java.io.*;
-import java.util.*;
+package duke.command;
 
 public class ExitCommand extends Command {
 	public void execute(TaskList taskList, UI ui, Storage storage) throws IOException {

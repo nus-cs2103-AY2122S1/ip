@@ -1,5 +1,4 @@
-import java.io.*;
-import java.util.*;
+package duke.command;
 
 public class MarkDoneCommand extends Command {
 	private int index;

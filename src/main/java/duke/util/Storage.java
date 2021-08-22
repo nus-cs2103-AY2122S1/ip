@@ -1,27 +1,43 @@
+package duke.util;
+
 import java.io.*;
 import java.util.*;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
+import duke.task.Deadline;
 
-class Storage {
+public class Storage {
 	private final String relativePath = "../../../";
-	private final String filePath;
+	private String filePath;
 	private File file;
 
-	public Storage(String dirName, String fileName) throws IOException {
-		File dir = new File(relativePath + dirName);
+	public Storage(String dirName, String fileName) {
+		try {
+			File dir = new File(relativePath + dirName);
 
-		/* case when folder does not exist */
-		if (!dir.exists()) {
-			dir.mkdir();
-		}
+			/* case when folder does not exist */
+			if (!dir.exists()) {
+				dir.mkdir();
+			}
 
-		this.filePath = relativePath + dirName + "/" + fileName;
-		this.file = new File(filePath);
-		/* case when file does not exist */
-		this.file.createNewFile();
+			this.filePath = relativePath + dirName + "/" + fileName;
+			this.file = new File(filePath);
+			/* case when file does not exist */
+			this.file.createNewFile();
+
+		} catch (IOException ex) {
+            ex.printStackTrace();
+        }
 	}
 
-	public List<Task> loadTasks() throws FileNotFoundException {
-		Scanner sc = new Scanner(this.file);
+	public List<Task> loadTasks() {
+		Scanner sc = null;
+		try {
+			sc = new Scanner(this.file);
+		} catch (FileNotFoundException ex) {
+			ex.printStackTrace();
+		}
 		List<Task> tasks = new ArrayList<>();
 
 		while (sc.hasNext()) {
