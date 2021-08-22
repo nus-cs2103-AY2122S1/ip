@@ -7,13 +7,16 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     // list used to store text entered by user
-    private ArrayList<Task> items = new ArrayList<>();
+    private ArrayList<Task> items;
+
+    private Storage storage;
 
     private final boolean DEFAULT_STATUS = false;
 
@@ -25,7 +28,7 @@ public class Duke {
     private final String WELCOME_MSG = "Hello! I am Matthew!\n\t What can I do for you?";
     private final String EXIT_MSG = "Bye. Don't have a good day... Have a great day!!!";
     private final String DISPLAY_LIST_MSG = "\t Here are the tasks in your list:";
-    private final String TASK_DONE_MSG = "Nice! I've marked this task as done: \n\t  ";
+    private final String TASK_DONE_MSG = "Well done! You have completed: \n\t  ";
     private final String TASK_ADDED_MSG = "Got it. I've added this task:\n\t   ";
     private final String TASK_DELETED_MSG = "Got it. I've deleted this task:\n\t   ";
 
@@ -41,8 +44,12 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        Duke chatBot = new Duke();
+        Duke chatBot = new Duke("data/duke.txt");
         chatBot.start();
+    }
+
+    public Duke(String filePath) {
+        this.storage = new Storage(filePath);
     }
 
     /**
@@ -50,6 +57,12 @@ public class Duke {
      * Chat bot starts receiving commands from user and echo back the command until terminated.
      */
     public void start() {
+        try {
+            items = storage.loadTask();
+        } catch (IOException | NoSuchTaskException e) {
+            printFormattedMsg(e.getMessage());
+        }
+
         greet();
 
         // scanner to take in user's input(s)
@@ -59,7 +72,8 @@ public class Duke {
         while(!input.equalsIgnoreCase(EXIT_TAG)) {
             try {
                 checkTag(input);
-            } catch (DukeException e) {
+                storage.saveTask(items);
+            } catch (DukeException | IOException e) {
                 printFormattedMsg(e.getMessage());
             } finally {
                 input = scanner.nextLine().trim();
