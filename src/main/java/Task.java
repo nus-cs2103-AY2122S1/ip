@@ -73,14 +73,14 @@ public class Task {
     }
 
     /**
-     * The method is to get time of the task
+     * Gets time of the task
      */
     public String getTime() {
         return "";
     }
 
     /**
-     * The method to return deadline/time of a task
+     * Returns deadline/time of a task
      *
      * @return LocalDate of the task
      */
@@ -88,11 +88,11 @@ public class Task {
         return null;
     }
 
-    protected static String dateFormat(LocalDate date) {
+    protected static String toDateFormat(LocalDate date) {
         return date.getMonth() + " " + date.getDayOfMonth() + " " + date.getYear();
     }
 
-    protected static String timeFormat(LocalDateTime time) {
+    protected static String toTimeFormat(LocalDateTime time) {
         return time.getMonth() + " " + time.getDayOfMonth() + " " + time.getYear() + " "+time.toLocalTime();
     }
 }

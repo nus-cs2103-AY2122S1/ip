@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * This class stores all tasks of the user.
+ * This class stores all TaskList of the user.
  *
  * @author Deng Huaiyu(G12)
  * @version CS2103T AY21/22 Semester 1
  */
-public class Tasks {
-    private static ArrayList<Task> tasks = new ArrayList<>();
+public class TaskList {
+    private static ArrayList<Task> TaskList = new ArrayList<>();
     //for division
     private static String ind = "    ";
     //for sentences
@@ -22,7 +22,7 @@ public class Tasks {
     private static String div = ind + "____________________________________________________________";
 
     /**
-     * the method to add a new task according to instruction
+     * Adds a new task according to instruction
      *
      * @param t input from the user
      * @throws DukeException if the input is invalid
@@ -40,7 +40,7 @@ public class Tasks {
                 }
                 if (i != "") {
                     Todo todo = new Todo(i);
-                    this.tasks.add(todo);
+                    this.TaskList.add(todo);
                     noteAdded(todo);
                 } else {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -60,7 +60,7 @@ public class Tasks {
                     } else {
                         throw new DukeException("Please enter time in the form of dd/MM/yyyy HH:mm or dd/MM/yyyy.");
                     }
-                    this.tasks.add(ddl);
+                    this.TaskList.add(ddl);
                     noteAdded(ddl);
                 } else {
                     throw new DukeException("☹ OOPS!!! The description and time of a deadline cannot be empty.");
@@ -81,7 +81,7 @@ public class Tasks {
                     } else {
                         throw new DukeException("Please enter time in the form of dd/MM/yyyy time.");
                     }
-                    this.tasks.add(e);
+                    this.TaskList.add(e);
                     noteAdded(e);
                 } else {
                     throw new DukeException("☹ OOPS!!! The description and time of an event cannot be empty.");
@@ -93,12 +93,12 @@ public class Tasks {
     }
 
     private void noteAdded(Task t) {
-        int total = tasks.size();
+        int total = TaskList.size();
         String sOrNot = "";
         if (total <= 1) {
             sOrNot = "task";
         } else {
-            sOrNot = "tasks";
+            sOrNot = "TaskList";
         }
         Duke.saveFile();
         System.out.println(div);
@@ -109,13 +109,13 @@ public class Tasks {
     }
 
     /**
-     * The toString method to print all tasks in the list.
+     * The toString method to print all TaskList in the list.
      */
-    public void printTasks() {
+    public void printTaskList() {
         System.out.println(div);
-        System.out.println(ind2 + "Here are the tasks in your list:");
+        System.out.println(ind2 + "Here are the TaskList in your list:");
         int i = 1;
-        for (Task task: tasks) {
+        for (Task task: TaskList) {
             System.out.println( ind2+ i + ". "+ task);
             i++;
         }
@@ -129,8 +129,8 @@ public class Tasks {
      * @throws DukeException if the position is invalid throws exceptions
      */
     public void complete(int pos) throws DukeException {
-        if (this.tasks.size()>pos-1 && pos != 0) {
-            String p = this.tasks.get(pos-1).finished();
+        if (this.TaskList.size()>pos-1 && pos != 0) {
+            String p = this.TaskList.get(pos-1).finished();
             Duke.saveFile();
             System.out.println(div + "\n" + ind2 + "Nice! I've marked this task as done: " + "\n" +
                     ind2 + ind2 + p + "\n" + div);
@@ -146,16 +146,16 @@ public class Tasks {
      * @throws DukeException if the position is invalid throws exceptions
      */
     public void delete(int pos) throws DukeException {
-        if (this.tasks.size()>pos-1 && pos != 0) {
-            Task deleted = this.tasks.get(pos-1);
-            int total = tasks.size();
+        if (this.TaskList.size()>pos-1 && pos != 0) {
+            Task deleted = this.TaskList.get(pos-1);
+            int total = TaskList.size();
             String sOrNot = "";
             if (total <= 1) {
                 sOrNot = "task";
             } else {
-                sOrNot = "tasks";
+                sOrNot = "TaskList";
             }
-            this.tasks.remove(deleted);
+            this.TaskList.remove(deleted);
             Duke.saveFile();
             System.out.println(div);
             System.out.println(ind2 + "Noted. I've removed this task: ");
@@ -204,7 +204,7 @@ public class Tasks {
     }
 
     /**
-     * The method is to load tasks previously stored in local hard disk into the arraylist.
+     * Loads TaskList previously stored in local hard disk into the arraylist.
      *
      * @param f the file read from disk
      */
@@ -220,7 +220,7 @@ public class Tasks {
                     if (completed == 1) {
                         t.setFinish();
                     }
-                    tasks.add(t);
+                    TaskList.add(t);
                     break;
                 case("E"):
                     DateTimeFormatter ff = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -233,7 +233,7 @@ public class Tasks {
                     if (c == 1) {
                         e.setFinish();
                     }
-                    tasks.add(e);
+                    TaskList.add(e);
                     break;
                 case("D"):
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -248,7 +248,7 @@ public class Tasks {
                     if (cd == 1) {
                         d.setFinish();
                     }
-                    tasks.add(d);
+                    TaskList.add(d);
                     break;
                 default:
                     break;
@@ -257,10 +257,10 @@ public class Tasks {
     }
 
     /**
-     * The method is to get all the tasks listed.
+     * Gets all the TaskList listed.
      */
-    public static ArrayList<Task> getTasks() {
-        return tasks;
+    public static ArrayList<Task> getTaskList() {
+        return TaskList;
     }
 
     private LocalDateTime getTime(String t) throws DukeException{
@@ -288,13 +288,13 @@ public class Tasks {
     }
 
     /**
-     * method to return all tasks on a single day
+     * Returns all TaskList on a single day
      *
      * @param s string indicating the date
-     * @return an arraylist of all relevant tasks
+     * @return an arraylist of all relevant TaskList
      * @throws DukeException if the date format is incorrect
      */
-    public static ArrayList<Task> onADay(String s) throws DukeException{
+    public static ArrayList<Task> getOnADay(String s) throws DukeException{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate target;
         try {
@@ -303,14 +303,14 @@ public class Tasks {
             throw new DukeException("Please enter date in the form of dd/MM/yyyy.");
         }
         ArrayList<Task> result = new ArrayList<>();
-        for (Task t: tasks) {
+        for (Task t: TaskList) {
             if (target.equals(t.getDate())) {
                 result.add(t);
             }
         }
 
         System.out.println(div);
-        System.out.println(ind2 + "Here are the tasks on " + target + ": ");
+        System.out.println(ind2 + "Here are the TaskList on " + target + ": ");
         int i = 1;
         for (Task task: result) {
             System.out.println( ind2+ i + ". "+ task);

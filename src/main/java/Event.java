@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * This class is a subclass of task.
@@ -23,6 +22,10 @@ public class Event extends Task{
         this.time = time;
     }
 
+    /**
+     * Returns date
+     * @return date in the form of LocalDate
+     */
     @Override
     public LocalDate getDate() {
         return date;
@@ -35,11 +38,13 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + Task.dateFormat(date) + " " + time + ")";
+        return "[E]" + super.toString() + " (at: " + Task.toDateFormat(date) + " " + time + ")";
     }
 
     /**
      * The method is to get type of the event
+     *
+     * @return String of the type
      */
     @Override
     public String getType() {
@@ -48,6 +53,8 @@ public class Event extends Task{
 
     /**
      * The method is to get time of the event
+     *
+     * @return time of the event
      */
     @Override
     public String getTime() {

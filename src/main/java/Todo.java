@@ -27,6 +27,8 @@ public class Todo extends Task{
 
     /**
      * The method is to get type of the todo task
+     *
+     * @return type of the task
      */
     @Override
     public String getType() {

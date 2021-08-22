@@ -37,7 +37,7 @@ public class Duke {
     private final static String FILE_PATH = "./data/duke.txt";
 
     /**
-     * The main method to access input from user.
+     * Assesses input from user.
      *
      * @param args takes in input
      */
@@ -45,14 +45,14 @@ public class Duke {
         greeting();
         loadFile();
         Scanner sc = new Scanner(System.in);
-        Tasks myTasks = new Tasks();
+        TaskList myTasks = new TaskList();
         while (sc.hasNext()) {
             String next = sc.nextLine();
             if (next.equals(KeyWord.END.getK())) {
                 myPrint("Bye. Hope to see you again soon!");
                 break;
             } else if (next.equals(KeyWord.LIST.getK())) {
-                myTasks.printTasks();
+                myTasks.printTaskList();
             } else if (next.length() > 3 && next.substring(0, 4).equals(KeyWord.DONE.getK())) {
                 if (next.length() > 5) {
                    mainDone(next, myTasks);
@@ -70,7 +70,7 @@ public class Duke {
                 if (next.length() == 14) {
                     try {
                         System.out.println(next.substring(4));
-                        Tasks.onADay(next.substring(4));
+                        TaskList.getOnADay(next.substring(4));
                     } catch (DukeException e) {
                         System.out.println(e);
                     }
@@ -98,7 +98,7 @@ public class Duke {
         System.out.println(div + "\n" + ind2 + s + "\n" + div);
     }
 
-    private static void mainDone(String next, Tasks myTasks) {
+    private static void mainDone(String next, TaskList myTasks) {
         String emp = next.substring(4, 5);
         if (emp.equals(" ")) {
             String index = next.substring(5);
@@ -117,7 +117,7 @@ public class Duke {
         }
     }
 
-    private static void mainDelete(String next, Tasks myTasks) {
+    private static void mainDelete(String next, TaskList myTasks) {
         String emp = next.substring(6, 7);
         if (emp.equals(" ")) {
             String index = next.substring(7);
@@ -143,14 +143,14 @@ public class Duke {
                 storedList.createNewFile();
                 System.out.println("Local file created.");
             }
-            Tasks.loadList(storedList);
+            TaskList.loadList(storedList);
         } catch (IOException e) {
             System.out.println("error when loading file: "+ e);
         }
     }
 
     /**
-     * The method is to write to the file by appending
+     * Writes to the file by appending
      *
      * @param s takes in input string
      */
@@ -165,7 +165,7 @@ public class Duke {
     }
 
     /**
-     * The method save the file to hard disk
+     * Saves the file to hard disk
      */
     public static void saveFile() {
         try {
@@ -175,7 +175,7 @@ public class Duke {
         } catch (IOException e) {
             System.out.println(":( Error when re-writing file");
         }
-        ArrayList<Task> arr = Tasks.getTasks();
+        ArrayList<Task> arr = TaskList.getTaskList();
         for (Task t: arr) {
             int c = t.getStatusIcon().equals("X") ? 1 : 0;
             String now = t.getType() + " | " + c + " | " + t.getDescription();

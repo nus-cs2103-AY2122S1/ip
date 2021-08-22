@@ -38,7 +38,7 @@ public class Deadline extends Task{
     }
 
     /**
-     * The method to return date of a deadline
+     * Returns date of a deadline
      *
      * @return LocalDate of the deadline task
      */
@@ -60,11 +60,11 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + (this.whichOne == 0 ? Task.timeFormat(ddl) : Task.dateFormat(date)) + ")";
+        return "[D]" + super.toString() + " (by: " + (this.whichOne == 0 ? Task.toTimeFormat(ddl) : Task.toDateFormat(date)) + ")";
     }
 
     /**
-     * The method is to get type of the deadline event
+     * Gets type of the deadline event
      */
     @Override
     public String getType() {
@@ -72,7 +72,7 @@ public class Deadline extends Task{
     }
 
     /**
-     * The method is to get time of the deadline event
+     * Gets time of the deadline event
      */
     @Override
     public String getTime() {
