@@ -15,4 +15,6 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 /text-ui-test/EXPECTED-UNIX.txt
+/text-ui-test/ip.jar
 /text-ui-test/results.txt
+/text-ui-test/tasks.txt
