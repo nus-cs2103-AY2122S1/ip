@@ -1,12 +1,10 @@
 import java.util.Scanner;
 
 public class Parser {
-    private FormatAdapter adapter;
     private TaskList tasks;
     private Ui ui;
 
     public Parser(TaskList tasks, Ui ui) {
-        this.adapter = new FormatAdapter();
         this.tasks = tasks;
         this.ui = ui;
     }
@@ -42,13 +40,13 @@ public class Parser {
                 if(isDoneCommand(userInput)) {
                     tasks.markAsDone(userInput, tasks.getStorage().getUserInputRecord());
                 } else {
-                    System.out.println(adapter.formatMessage("OOPS!!! I'm sorry, but I don't know what that means :-(\n"));
+                    ui.cannotInterpretMessage();
                 }
             } else if(userInput.startsWith("delete")) {
                 if (isDeleteCommand(userInput)) {
                     tasks.delete(userInput, tasks.getStorage().getUserInputRecord());
                 } else {
-                    System.out.println(adapter.formatMessage("OOPS!!! I'm sorry, but I don't know what that means :-(\n"));
+                    ui.cannotInterpretMessage();
                 }
             } else {
                 tasks.add(userInput, tasks.getStorage().getUserInputRecord());

@@ -71,4 +71,5 @@ public class Ui {
     public void invalidIDMessage() {
         System.out.println(adapter.formatMessage("Please enter a valid ID!\n"));
     }
+
 }
