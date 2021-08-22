@@ -11,6 +11,10 @@ public class Deadline extends Task{
         this.by = by;
     }
 
+    public String getBy() {
+        return this.by;
+    }
+
     public Deadline markAsDone() {
         return new Deadline(this.description, this.by, true);
     }

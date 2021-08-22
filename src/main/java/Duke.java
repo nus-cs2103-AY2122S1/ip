@@ -1,6 +1,7 @@
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -44,7 +45,7 @@ public class Duke {
                 System.out.println(bot.printList());
                 break;
             case "bye":
-                System.out.println(bot.sayBye());
+                bot.sayBye();
                 isReadingInput = false;
                 break;
             case "done":
@@ -123,6 +124,10 @@ public class Duke {
         if (!directoryExists) {
             System.out.println("   Specified tasklist directory does not exist. " +
                     "Duke is unable to save future data unless directory is created.");
+
+            // create a directory for it to save
+
+
         } else {
             try {
                 List<String> lines = Files.readAllLines(Paths.get(home, "Desktop", "ip", "src", "main", "java", "tasklist.txt"));
@@ -132,7 +137,13 @@ public class Duke {
                 System.out.println("   Autosave feature detected. Please type 'list' to view " +
                         "previously saved tasks");
             } catch (NoSuchFileException e) {
-                System.out.println("   Tasklist file not found. Initialising empty tasklist...");
+                System.out.println("   Tasklist file not found. Creating empty tasklist...");
+                File tempfile = new File("./src/main/java/tasklist.txt");
+                try {
+                    tempfile.createNewFile();
+                } catch (IOException x) {
+                    System.out.println("   Unexpected error: Unable to create file...");
+                }
             } catch (IOException e) {
                 System.out.println("   An error occurred reading the tasklist file. Initialising empty tasklist...");
             }
@@ -194,10 +205,53 @@ public class Duke {
         return output;
     }
 
-    public String sayBye() {
-        return "   -------------------------------------------- \n"
-                + "   Bye! Hope to see you again soon! \n"
-                + "   --------------------------------------------";
+    public void sayBye() {
+        saveToFile();
+        String closingMessage = "   -------------------------------------------- \n"
+                            + "   Bye! Hope to see you again soon! \n"
+                            + "   --------------------------------------------";
+        System.out.println(closingMessage);
+    }
+
+    public void saveToFile() {
+        String home = System.getProperty("user.home");
+        java.nio.file.Path path = java.nio.file.Paths.get(
+                home, "Desktop", "ip", "src", "main", "java", "tasklist.txt");
+        String outputText = "";
+
+        for (Task t: this.taskList) {
+            if (t instanceof Todo) {
+                outputText += "T | ";
+                if (t.getStatusIcon().equals("X")) {
+                    outputText += "X | " + t.getDescription() + "\n";
+                } else {
+                    outputText += "0 | " + t.getDescription() + "\n";
+                }
+            } else if (t instanceof Deadline) {
+                Deadline d = (Deadline) t;
+                outputText += "D | ";
+                if (d.getStatusIcon().equals("X")) {
+                    outputText += "X | " + d.getDescription() + " | " + d.getBy() + "\n";
+                } else {
+                    outputText += "0 | " + d.getDescription() + " | " + d.getBy() + "\n";
+                }
+            } else if (t instanceof Event) {
+                Event e = (Event) t;
+                outputText += "E | ";
+                if (e.getStatusIcon().equals("X")) {
+                    outputText += "X | " + e.getDescription() + " | " + e.getAt() + "\n";
+                } else {
+                    outputText += "0 | " + e.getDescription() + " | " + e.getAt() + "\n";
+                }
+            }
+        }
+        try {
+            Files.write(path, "".getBytes()); // clears the file
+            Files.write(path, outputText.getBytes(), StandardOpenOption.APPEND);
+            System.out.println("   Saved tasks to file");
+        } catch (IOException e) {
+            System.out.println("   An error occurred...");
+        }
     }
 
     public String completeTask(int index) throws DukeException {
