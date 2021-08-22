@@ -23,10 +23,10 @@ public class EventTask extends TemporalTask {
     }
 
     @Override
-    public String getRepresentation() {
+    public String getFileRepresentation() {
         int done = isDone() ? 1 : 0;
         String description = getDescription();
-        String time = getTime();
+        String time = getFileFormattedTime();
         return String.format("%s %d %s /%s %s", TYPE_MARK, done, description, TIME_RELATION, time);
     }
 
