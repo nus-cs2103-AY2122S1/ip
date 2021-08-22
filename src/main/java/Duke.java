@@ -1,5 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     public enum Type {
@@ -125,11 +128,17 @@ public class Duke {
             if (userInput.substring(8).trim().isEmpty()) {
                 throw new IllegalArgumentException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
             }
-            int slash = userInput.indexOf("/by");
-            if (slash == -1) {
+            int timeIndex = userInput.indexOf("/by");
+            if (timeIndex == -1) {
                 throw new IllegalArgumentException(" Please set a deadline by adding /by");
             }
-            tasks.add(new Deadline(userInput.substring(9, slash), userInput.substring(slash + 4)));
+            try {
+                tasks.add(new Deadline(userInput.substring(9, timeIndex - 1),
+                        LocalDate.parse(userInput.substring(timeIndex + 4, timeIndex + 14)),
+                        LocalTime.parse(userInput.substring(timeIndex + 15))));
+            } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
+                throw new IllegalArgumentException(" Date and Time must be specified by YYYY-MM-DD HH:MM");
+            }
             System.out.println("Got it. I've added this task:");
             System.out.println("  " + tasks.get(tasks.size() - 1).getTask());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -137,11 +146,17 @@ public class Duke {
             if (userInput.substring(5).trim().isEmpty()) {
                 throw new IllegalArgumentException(" ☹ OOPS!!! The description of an event cannot be empty.");
             }
-            int slash = userInput.indexOf("/at");
-            if (slash == -1) {
+            int timeIndex = userInput.indexOf("/at");
+            if (timeIndex == -1) {
                 throw new IllegalArgumentException(" Please set a deadline by adding /at");
             }
-            tasks.add(new Event(userInput.substring(6, slash), userInput.substring(slash + 4)));
+            try {
+                tasks.add(new Event(userInput.substring(6, timeIndex - 1),
+                        LocalDate.parse(userInput.substring(timeIndex + 4, timeIndex + 14)),
+                        LocalTime.parse(userInput.substring(timeIndex + 15))));
+            } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
+                throw new IllegalArgumentException(" Date and Time must be specified by YYYY-MM-DD HH:MM");
+            }
             System.out.println("Got it. I've added this task:");
             System.out.println("  " + tasks.get(tasks.size() - 1).getTask());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
