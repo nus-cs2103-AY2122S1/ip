@@ -1,17 +1,17 @@
 package duke.task;
 
 /**
- * Encapsulates a duke.task to be done at a specified time.
+ * Encapsulates a task to be done at a specified time.
  */
 public class Events extends Task {
-    /** When the duke.task begins */
+    /** When the task begins */
     private String limit;
 
     /**
-     * Constructor of an duke.task.Events object.
+     * Constructs a Events object.
      *
-     * @param description Description of the duke.task.
-     * @param limit When the duke.task begins.
+     * @param description Description of the task.
+     * @param limit When the task begins.
      */
     public Events(String description, String limit) {
         super(description);
@@ -24,9 +24,9 @@ public class Events extends Task {
     }
 
     /**
-     * Returns the string form of the duke.task.Events object.
+     * Returns the string form of the Events object.
      *
-     * @return The string form of the duke.task.Events.
+     * @return The string form of the Events.
      */
     @Override
     public String toString() {

@@ -4,17 +4,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Encapsulates a duke.task to be done with a deadline.
+ * Encapsulates a task to be done with a deadline.
  */
 public class Deadlines extends Task {
-    /** When the duke.task must be done by. */
+    /** When the task must be done by. */
     private LocalDate limit;
 
     /**
-     * Constructor of a duke.task.Deadlines object.
+     * Constructs a Deadlines object.
      *
-     * @param description Description of the duke.task.
-     * @param limit When the duke.task must be done by.
+     * @param description Description of the task.
+     * @param limit When the task must be done by.
      */
     public Deadlines(String description, String limit) {
         super(description);
@@ -31,9 +31,9 @@ public class Deadlines extends Task {
     }
 
     /**
-     * Returns the string form of the duke.task.Deadlines object.
+     * Returns the string form of the Deadlines object.
      *
-     * @return The string form of the duke.task.Deadlines.
+     * @return The string form of the Deadlines.
      */
     @Override
     public String toString() {
