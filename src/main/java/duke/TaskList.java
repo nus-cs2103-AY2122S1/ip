@@ -174,4 +174,33 @@ public class TaskList {
     }
 
 
+    protected void findTask(String nextLine) throws DukeException {
+        String[] splitWords = nextLine.split(" ");
+        if (splitWords.length == 1 && splitWords[0].equals("find")) {
+            throw new DukeException("Dude at least enter a word you want me to look for!");
+        } else {
+            String keyword = splitWords[1];
+            LinkedList<Task> copyList = new LinkedList<Task>(myList);
+            copyList.removeIf(task -> {
+                String taskTitle = task.getTitle();
+                String[] taskWords = taskTitle.split(" ");
+                for (String word : taskWords) {
+                    if (word.equals(keyword)) {
+                        return false;
+                    } else {}
+                }
+                return true;
+//                !task.getTitle().contains(keyword)
+            });
+            if (copyList.isEmpty()) {
+                throw new DukeException("Yo! I can't find this keyword in your list!");
+            }
+            System.out.println("Here are the matching tasks in your list:");
+            int counter = 0;
+            while(counter < copyList.size()) {
+                System.out.println((counter + 1) + ". " + copyList.get(counter).toString());
+                counter += 1;
+            }
+        }
+    }
 }

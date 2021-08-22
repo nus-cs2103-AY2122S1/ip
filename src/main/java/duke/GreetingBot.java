@@ -81,7 +81,11 @@ public class GreetingBot {
                 } else if (action == 6) {
                     tasks.newEvent(nextLine);
                     storage.updateData(tasks.getList());
+                } else if (action == 7) {
+                    tasks.findTask(nextLine);
+                    continue;
                 }
+
             } catch (DukeException err) {
                 System.out.println(err.toString());
                 continue;
