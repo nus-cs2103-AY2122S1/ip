@@ -7,7 +7,6 @@ public class ChatBot {
     private int lastIndex = 0;
     private int currIndex = 1;
 
-
     private String welcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -185,7 +184,6 @@ public class ChatBot {
             System.out.println("You have " + lastIndex + " item(s) in your list!");
         }
     }
-
 
     private void startInput() throws InputError {
         Scanner userInput = new Scanner(System.in);
