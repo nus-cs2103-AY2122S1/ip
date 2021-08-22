@@ -1,7 +1,10 @@
-public class Deadline extends Task {
-    private String time;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String name, String time) {
+public class Deadline extends Task {
+    private LocalDateTime time;
+
+    public Deadline(String name, LocalDateTime time) {
         super(name);
         this.time = time;
     }
@@ -9,7 +12,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd yyyy, HHmm");
         return "[D][" + this.getStatus() + "] " + this.name
-                + "(by: " + time + ")";
+                + "(by: " + time.getMonth() + " " + time.format(formatter) + ")";
     }
 }
