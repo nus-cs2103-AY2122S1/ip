@@ -11,7 +11,7 @@ public class Parser {
     public Parser() {}
 
     private enum Commands {
-        LIST, TODO, DEADLINE, EVENT, DONE, DELETE, BYE
+        LIST, TODO, DEADLINE, EVENT, DONE, DELETE, BYE, FIND
     }
     
     public static Command parse(String fullCommand) throws DukeException {
@@ -37,6 +37,8 @@ public class Parser {
                     return new DoneCommand(rest);
                 case DELETE:
                     return new DeleteCommand(rest);
+            case FIND:
+                return new FindCommand(rest);
                 case BYE:
                     return new ExitCommand();
                 default:

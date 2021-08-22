@@ -4,6 +4,7 @@ import duke.data.exception.InvalidIndexException;
 import duke.data.task.Task;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 /**
  * Contains the task list and its operations
@@ -56,7 +57,7 @@ public class TaskList {
      */
     public String printList () {
         Task[] lst = this.tasks.toArray(new Task[0]);
-        StringBuilder output = new StringBuilder("Here are the tasks in your list:");
+        StringBuilder output = new StringBuilder();
         int index = 1;
         for (Task t : lst) {
             output.append(String.format("\n%d.%s", index++, t.toString()));
@@ -73,6 +74,18 @@ public class TaskList {
         if (index >= this.count || index < 0) throw new InvalidIndexException();
         this.tasks.get(index).setDone();
         return this.tasks;
+    }
+
+    /**
+     * Returns a list of tasks that satisfy the given predicate
+     * @param predicate the predicate 
+     * @return ArrayList<Task> that satisfy given predicate
+     */
+    public TaskList filter(Predicate<? super Task> predicate) {
+        ArrayList<Task> copy = new ArrayList<>();
+        copy.addAll(this.tasks);
+        copy.removeIf(predicate.negate());
+        return new TaskList(copy);
     }
     
     public int getCount() {
