@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class Parser {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
-    public int parse (String input, ChatBot bot) throws DukeException {
+    public void parse (String input, ChatBot bot) throws DukeException {
         String[] inputs = input.split(" ", 2);
         String key = inputs[0];
         int run = 1;
@@ -87,6 +87,6 @@ public class Parser {
         default:
             bot.handleWrongCommand();
         }
-        return run;
+//        return run;
     }
 }

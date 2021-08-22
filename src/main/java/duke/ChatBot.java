@@ -15,10 +15,14 @@ public class ChatBot {
     private TaskList tasklist;
     private Storage s;
     private UI ui;
+    private int exitStatus = 1;
 
     public ChatBot() {
         this.s = new Storage();
         this.ui = new UI();
+    }
+
+    public void start() {
         s.makeDir();
         s.checkFile();
         this.temp = s.loadTasks();
@@ -27,6 +31,7 @@ public class ChatBot {
     }
 
     public void handleExit() {
+        exitStatus = 0;
         ui.showExitMessage();
     }
 
@@ -74,6 +79,10 @@ public class ChatBot {
 
     public int getTotalTasks() {
         return tasklist.getTotalTasksNumber();
+    }
+
+    public int getExitStatus() {
+        return exitStatus;
     }
 
 }

@@ -15,12 +15,14 @@ public class Duke {
         Parser parser = new Parser();
         // create object of Scanner to take inputs
         Scanner sc = new Scanner(System.in);
+        bot.start();
         String input = sc.nextLine();
         boolean running = true;
 
         while (running) {
             try{
-                int temp = parser.parse(input, bot);
+                parser.parse(input, bot);
+                int temp = bot.getExitStatus();
                 if (temp == 0) {
                     running = false;
                     break;
