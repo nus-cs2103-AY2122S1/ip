@@ -1,3 +1,5 @@
+package duke;
+
 /**
  *  A class that encapsulates the handling of the text input into Duke
  */

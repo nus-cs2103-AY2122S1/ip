@@ -1,3 +1,7 @@
+package duke;
+
+import duke.DukeException;
+
 /**
  * A wrapper for a task used by DukeList.
  *
@@ -39,7 +43,7 @@ public class Task {
          *
          * @param s The string representation of the type of task
          * @return The corresponding TaskName
-         * @throws DukeException Exception specific to Duke
+         * @throws DukeException Exception specific to duke.Duke
          */
         public static TaskName getTaskType(String s) throws DukeException {
             switch (s) {
@@ -68,7 +72,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * A public constructor to initialise a Task.
+     * A public constructor to initialise a duke.task.Task.
      *
      * @param description The String description/name of the task
      * @param isDone The Boolean of if the task is done
@@ -96,7 +100,7 @@ public class Task {
     /**
      * Marks the status of this task as done.
      *
-     * @return The new String representation of this Task after the status is marked as done
+     * @return The new String representation of this duke.task.Task after the status is marked as done
      */
     public String markDone() {
         this.isDone = true;

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  *  A class that encapsulates the interactions with the user
  */
