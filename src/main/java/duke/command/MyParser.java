@@ -5,7 +5,24 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * This class implements a parser that deals with making sense of user commands.
+ *
+ * CS2103T ip
+ * AY21/22 Semester 1
+ *
+ * @author Kishendran Vendar Kon (Group G05)
+ */
 public class MyParser {
+
+    /**
+     * Deals with making sense of user commands.
+     *
+     * @param command First word of line inputted by user to decide command.
+     * @param description Following words of line inputted by user.
+     * @param duke Duke instance referred to.
+     * @throws DukeException if line inputted by the user is formatted incorrectly.
+     */
     protected void parse(String command,String description,Duke duke) throws DukeException {
         String userDescription = description.trim();
         switch (command) {

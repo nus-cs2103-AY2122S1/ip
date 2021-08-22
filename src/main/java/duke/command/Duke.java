@@ -9,9 +9,9 @@ import java.util.Calendar;
 import java.util.Scanner;
 
 /**
- * This class is an implementation of Project duke.command.Duke customised to be named LOTTERY-A
+ * This class is an implementation of Duke customised to be named LOTTERY-A
  * that stands for List of Tasks That Eventually Require Your Attention.
- * It is a CLI designed to work as a todolist of sorts.
+ * It is a CLI designed to work as a todolist.
  *
  * CS2103T ip
  * AY21/22 Semester 1
@@ -19,15 +19,17 @@ import java.util.Scanner;
  * @author Kishendran Vendar Kon (Group G05)
  */
 public class Duke {
-    /** Arraylist that represents list of Tasks. */
+    /** Contains task list. */
     private TaskList tasks;
+    /** Deals with loading and saving tasks from and to file. */
     private Storage storage;
+    /** Deals with making sense of user commands. */
     private MyParser parser;
+    /** Reads user input. */
     private Scanner keyboard;
     private boolean isScannerOpen;
-    /**
-     * Core function of bot that opens scanner and reads user input to decide what to do next.
-     */
+
+    /** Default Constructor. */
     public Duke(String txtFile) {
         parser = new MyParser();
         try {
@@ -40,6 +42,7 @@ public class Duke {
         isScannerOpen = true;
     }
 
+    /** Launches Duke */
     public void runDuke() {
         Ui.showWelcomeMessage();
         while (isScannerOpen) {
@@ -55,6 +58,7 @@ public class Duke {
         }
     }
 
+    /** Saves task to file then exits. */
     protected void dukeBye() throws DukeException{
         Ui.showByeMessage();
         try {
@@ -65,30 +69,60 @@ public class Duke {
         isScannerOpen = false;
     }
 
+    /** Lists tasks. */
     protected void dukeList() {
         tasks.list();
     }
 
+    /**
+     * Marks task at index i as done.
+     *
+     * @param i Index of tasks to be marked.
+     * @throws DukeException if no such tasks exist.
+     */
     protected void dukeDone(int i) throws DukeException {
         tasks.markAsDone(i);
     }
 
+    /**
+     * Deletes task at index i.
+     *
+     * @param i Index of tasks to be deleted.
+     * @throws DukeException if no such tasks exist.
+     */
     protected void dukeDelete(int i) throws DukeException {
         tasks.delete(i);
     }
 
+    /**
+     * Creates and adds Todo Object.
+     *
+     * @param desc Description of Todo Object.
+     */
     protected void dukeTodo(String desc) {
         Todo todo = new Todo(desc);
         tasks.add(todo);
         Ui.showAddTaskMessage(todo.toString(), tasks.size());
     }
 
+    /**
+     * Creates and adds Deadline Object.
+     *
+     * @param desc Description of Deadline Object.
+     * @param cal Calendar set to dueBy date of Deadline.
+     */
     protected void dukeDeadline(String desc, Calendar cal){
         Deadline deadline = new Deadline(desc, cal);
         tasks.add(deadline);
         Ui.showAddTaskMessage(deadline.toString(), tasks.size());
     }
 
+    /**
+     * Creates and adds Event Object.
+     *
+     * @param desc Description of Event Object.
+     * @param cal Calendar set to time of Event.
+     */
     protected void dukeEvent(String desc, Calendar cal){
         Event event = new Event(desc, cal);
         tasks.add(event);
