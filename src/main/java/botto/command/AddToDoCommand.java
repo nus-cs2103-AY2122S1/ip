@@ -7,22 +7,38 @@ import botto.util.Storage;
 import botto.util.TaskList;
 import botto.util.Ui;
 
+/**
+ * Command for adding an event
+ */
 public class AddToDoCommand implements Command {
 
     private String command;
 
+    /**
+     * Constructor for an AddEventCommand
+     *
+     * @param command user command
+     */
     public AddToDoCommand(String command) {
         this.command = command;
     }
 
+    /**
+     * add task to the tasklist, update the storage and print relevant messages
+     *
+     * @param taskList the task list involved
+     * @param ui the ui of the Botto bot
+     * @param storage storage of the Botto bot
+     * @throws BottoException when the there is no description inserted
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws BottoException {
         String description;
 
         try {
             description = command.split(" ", 2)[1];
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new BottoException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
 
         Task task = new Todo(description);
