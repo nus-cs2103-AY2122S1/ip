@@ -20,7 +20,7 @@ public class Duke {
         DONE("Nice! I've marked this task as done:"),
         DELETE("Noted. I've removed this task:"),
         LIST("Here are the tasks in your list:"),
-        EXIT("Bye. Hope to see you again soon!"),
+        EXIT("Bye. Hope to see you again soon!");
 
         private final String command;
 
@@ -224,7 +224,6 @@ public class Duke {
                     if (arrOfCommandWords.length <= 1) {
                         // No task specified.
                         throw new DukeException("Please enter the task index.");
-                        continue;
                     }
                     int taskIndex = Integer.parseInt(arrOfCommandWords[1]) - 1;
                     if (command.startsWith("done")) {
