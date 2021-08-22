@@ -7,22 +7,23 @@ import static java.lang.Integer.parseInt;
 
 public class Duke {
 
-    private UI ui;
     private Storage storage;
+    private TaskList tasks;
+    private UI ui;
 
     public Duke(String filePath) {
         ui = new UI();
         storage = new Storage(filePath);
 
         try {
-            List<Task> taskList = storage.load();
-            run(taskList, filePath, this.storage);
+            tasks = new TaskList(storage.load());
+            run(filePath);
         } catch (FileNotFoundException e) {
             ui.printLoadingError(filePath);
         }
     }
 
-    public void run(List<Task> taskList, String filePath, Storage storage) {
+    public void run(String filePath) {
         ui.printWelcome();
         String command = ui.readCommand();
 
@@ -30,25 +31,15 @@ public class Duke {
         while (!command.equals("bye")) {
             try {
                 if (command.equals("list")) {
-                    if (taskList.size() == 0) {
-                        ui.printNoTaskAvailable();
-                    } else {
-                        ui.printTaskList(taskList);
-                    }
+                    this.tasks.printTaskList(ui);
 
                 } else if (command.startsWith("done")) {
                     int taskNumber = parseInt(command.split(" ")[1]);
-                    Task task = taskList.get(taskNumber - 1);
-                    task.markAsDone();
-                    storage.update(taskList);
-                    ui.printTaskMarkedDone(task);
+                    this.tasks.markTaskAsDone(taskNumber, this.storage, this.ui);
 
                 } else if (command.startsWith("delete")) {
                     int taskNumber = parseInt(command.split(" ")[1]);
-                    Task task = taskList.get(taskNumber - 1);
-                    taskList.remove(taskNumber - 1);
-                    storage.update(taskList);
-                    ui.printDeleteTask(task);
+                    this.tasks.deleteTask(taskNumber, this.storage, this.ui);
 
                 } else if (command.startsWith("todo")) {
                     String[] splitCommand = command.split(" ", 2);
@@ -56,10 +47,7 @@ public class Duke {
                         throw new DukeException("Please fill in a description for todo.");
                     }
                     String description = splitCommand[1];
-                    Task task = new Todo(description);
-                    taskList.add(task);
-                    storage.update(taskList);
-                    ui.printAddTask(task);
+                    tasks.addTodo(description, this.storage, this.ui);
 
                 } else if (command.startsWith("deadline")) {
                     String[] splitCommand = command.split(" ", 2);
@@ -75,10 +63,7 @@ public class Duke {
 
                     description = splitDescription[0];
                     String deadline = splitDescription[1];
-                    Task task = new Deadline(description, deadline);
-                    taskList.add(task);
-                    storage.update(taskList);
-                    ui.printAddTask(task);
+                    this.tasks.addDeadline(description, deadline, this.storage, this.ui);
 
                 } else if (command.startsWith(("event"))) {
                     String[] splitCommand = command.split(" ", 2);
@@ -94,10 +79,7 @@ public class Duke {
 
                     description = splitDescription[0];
                     String time = splitDescription[1];
-                    Task task = new Event(description, time);
-                    taskList.add(task);
-                    storage.update(taskList);
-                    ui.printAddTask(task);
+                    tasks.addEvent(description, time, this.storage, this.ui);
 
                 } else if (command.startsWith(("date"))) {
                     String[] splitCommand = command.split(" ", 2);
@@ -105,9 +87,7 @@ public class Duke {
                         throw new DukeException("Please fill in a date");
                     }
 
-                    LocalDate date = LocalDate.parse(splitCommand[1]);
-                    ui.printTaskOnDate(taskList, date);
-
+                    tasks.printTasksOnDate(splitCommand[1], this.ui);
                 } else {
                     throw new DukeException("I do not understand what that means :(");
                 }
