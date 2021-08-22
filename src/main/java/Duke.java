@@ -1,5 +1,9 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 /**
  * Represents a personalised chat bot for CS2103/T iP.
@@ -15,6 +19,17 @@ public class Duke {
      */
     public static void main(String[] args) {
         System.out.println("hi sis, type out your task right away! :D");
+
+        File f = new File("data/duke.txt");
+        if (!f.exists()) {
+            f.getParentFile().mkdirs();
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         while (sc.hasNextLine()) {
             try {
                 String text = sc.nextLine();
@@ -23,9 +38,9 @@ public class Duke {
                     break;
                 } else if (text.equals("ls")) {
                     printList();
-                } else if (text.contains("done")) {
+                } else if (text.contains("done")) { // TODO add exception for number out of range
                     markAsDone(text);
-                } else if (text.contains("delete")) {
+                } else if (text.contains("delete")) { // TODO add exception for number out of range
                     deleteTask(text);
                 } else {
                     addTask(text);
@@ -35,6 +50,22 @@ public class Duke {
             }
         }
     }
+
+//    /**
+//     * Reads data/duke.txt and copies data into task list.
+//     */
+//    private static void readFile() throws DukeException{
+//        File f = new File("data/duke.txt");;
+//        try {
+//            Scanner s = new Scanner(f);
+//            while (s.hasNextLine()) {
+//                String text = sc.nextLine();
+//            }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//            throw new DukeException("No file found.");
+//        }
+//    }
 
     /**
      * Prints the list of Tasks.
@@ -112,6 +143,17 @@ public class Duke {
             } else {
                 throw new DukeException("Please use the keyword --todo, deadline or event--");
             }
+
+            try {
+                FileWriter fw = new FileWriter("data/duke.txt");
+                for (int i = 0; i < myList.size(); i++) {
+                    fw.write(myList.get(i).toString() + System.lineSeparator());
+                }
+                fw.close();
+            } catch (IOException e) { // TODO might wanna include under DukeException
+                e.printStackTrace();
+            }
+
             System.out.println("added: " + myList.get(myList.size() - 1));
             System.out.printf("Now you have %d task(s) in the list.\n", myList.size());
         } catch (ArrayIndexOutOfBoundsException e) {
