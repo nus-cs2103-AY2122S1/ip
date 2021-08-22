@@ -1,4 +1,4 @@
 T | 0 | read book
-D | 0 | return book | Sunday 2-4pm
+D | 1 | return book | Sunday 2-4pm
 E | 0 | project meeting | 6pm
 T | 0 | join sports club

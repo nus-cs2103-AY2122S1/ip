@@ -27,6 +27,7 @@ public class Event extends Task{
     public Event(String description, String timing) {
         super(description);
         String[] dateAndTime = timing.trim().split(" ", 2);
+
         if (Pattern.matches(YMD_REGEX, dateAndTime[0])) {
             try {
                 DateFormat format1 = new SimpleDateFormat(YMD_DATE_FORMAT);
