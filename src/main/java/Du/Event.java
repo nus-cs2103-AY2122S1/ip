@@ -6,12 +6,23 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDateTime time;
 
+    /**
+     * public constructor for Event
+     * @param name description for Event
+     * @param done whether the Event is done
+     * @param tasklist the Tasklist the Event is under
+     * @param time time which the Event is at
+     */
     public Event(String name, boolean done, TaskList tasklist, LocalDateTime time) {
         super(name, done, tasklist);
         this.time = time;
     }
 
 
+    /**
+     * record the Event in a certain format to save to the file
+     * @return String which the Event is formatted in
+     */
     @Override
     public String log_record() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -25,6 +36,10 @@ public class Event extends Task {
     }
 
 
+    /**
+     * toString method
+     * @return String for printing
+     */
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd yyyy, HHmm");

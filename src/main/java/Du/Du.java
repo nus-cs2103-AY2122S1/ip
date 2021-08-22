@@ -8,6 +8,10 @@ public class Du {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * public constructor for Du
+     * @param filepath where the file will be saved for the data
+     */
     public Du(String filepath) {
         ui = new Ui();
         tasks = new TaskList();
@@ -20,6 +24,10 @@ public class Du {
     }
 
 
+    /**
+     * run Du itself
+     * @throws IOException from p.parse()
+     */
     public void run() throws IOException {
         ui.greet();
 

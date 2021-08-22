@@ -9,6 +9,10 @@ public class Todo extends Task {
     }
 
 
+    /**
+     * record the To do in a certain format to save to the file
+     * @return String which the To do is formatted in
+     */
     @Override
     public String log_record() {
         int state;
@@ -21,6 +25,10 @@ public class Todo extends Task {
     }
 
 
+    /**
+     * toString method
+     * @return String for printing
+     */
     @Override
     public String toString() {
         return "[T][" + this.getStatus() + "] " + this.name;

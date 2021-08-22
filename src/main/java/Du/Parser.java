@@ -13,6 +13,9 @@ public class Parser {
         this.tasks = tasks;
     }
 
+    /**
+     * takes in commands from user and parse them
+     */
     public void parse() {
         // takes in command from user after greeting
         Scanner sc = new Scanner(System.in);

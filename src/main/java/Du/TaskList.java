@@ -6,19 +6,34 @@ public class TaskList {
 
     protected static ArrayList<Task> list_of_tasks = new ArrayList<>();
 
+    /**
+     * public constructor for TaskList
+     */
     public TaskList() {
 
     }
 
+    /**
+     * add a Task to the TaskList
+     * @param t Task added
+     */
     public void addTask(Task t) {
         list_of_tasks.add(t);
     }
 
 
+    /**
+     * size of the TaskList
+     * @return int
+     */
     public int size() {
         return list_of_tasks.size();
     }
 
+    /**
+     * getter for list_of_task
+     * @return ArrayList
+     */
     public ArrayList<Task> getList_of_tasks() {
         return list_of_tasks;
     }

@@ -2,10 +2,16 @@ package Du;
 
 public class Ui {
 
+    /**
+     * public constructor for Ui
+     */
     public Ui() {
 
     }
 
+    /**
+     * called when there is an error
+     */
     public void showLoadingError() {
         System.out.println("Oops, there is an error somewhere, I'm not sure where it is exactly as well");
     }

@@ -13,11 +13,20 @@ public class Storage {
     protected String filepath;
     protected TaskList tasks;
 
+    /**
+     * public constructor for Storage
+     * @param filepath where the saved file is located at
+     * @param tasks Tasklist with the list of tasks
+     */
     public Storage(String filepath, TaskList tasks) {
         this.filepath = filepath;
         this.tasks = tasks;
     }
 
+    /**
+     * load previously recorded items if there is any
+     * @throws IOException
+     */
     public void load() throws IOException {
         File f = new File(filepath);
 
@@ -38,6 +47,10 @@ public class Storage {
     }
 
 
+    /**
+     * read the tasks if there is any from the saved file
+     * @param task_name name from the file
+     */
     public void read_task(String task_name) {
         String[] task = task_name.split(" , ", 4);
         boolean done = false;

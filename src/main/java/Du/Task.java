@@ -42,8 +42,6 @@ public class Task {
                 + "____________________________________________________________");
     }
 
-
-
     /**
      * @return state of task
      */
@@ -52,6 +50,10 @@ public class Task {
     }
 
 
+    /**
+     * record the Task in a certain format to save to the file
+     * @return String which the Task is formatted in
+     */
     public String log_record() {
         int state;
         if (this.done) {

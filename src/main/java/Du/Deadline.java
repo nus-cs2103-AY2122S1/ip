@@ -6,11 +6,22 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDateTime time;
 
+    /**
+     * public constructor for Deadline
+     * @param name description for Deadline
+     * @param done whether the Deadline is done
+     * @param tasklist the Tasklist the Deadline is under
+     * @param time time which the Deadline must be done by
+     */
     public Deadline(String name, boolean done, TaskList tasklist, LocalDateTime time) {
         super(name, done, tasklist);
         this.time = time;
     }
 
+    /**
+     * record the Deadline in a certain format to save to the file
+     * @return String which the Deadline is formatted in
+     */
     @Override
     public String log_record() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -24,6 +35,10 @@ public class Deadline extends Task {
     }
 
 
+    /**
+     * toString method
+     * @return String for printing
+     */
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd yyyy, HHmm");
