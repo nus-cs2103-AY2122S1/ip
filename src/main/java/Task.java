@@ -3,24 +3,6 @@
  */
 public abstract class Task {
 
-    /**
-     * Returns a description of the task filled with its details.
-     *
-     * @return The description of the task.
-     */
-    public abstract String taskDescription();
-
-    /**
-     * Converts a task into a specified String format for saving into local storage.
-     * The format to save the strings is {type of task} | {is done} | {type of date}|
-     * {task name} | {time (if applicable)}.
-     * The type of date is based on the static variables in the DukeDate class. It is only applicable
-     * for deadline and event tasks.
-     *
-     * @return The String format to save the task as.
-     */
-    public abstract String taskSaveString();
-
     // The type of task
     public enum Type {
         TODO,
@@ -40,7 +22,23 @@ public abstract class Task {
         this.type = type;
     }
 
+    /**
+     * Returns a description of the task filled with its details.
+     *
+     * @return The description of the task.
+     */
+    public abstract String taskDescription();
 
+    /**
+     * Converts a task into a specified String format for saving into local storage.
+     * The format to save the strings is {type of task} | {is done} | {type of date}|
+     * {task name} | {time (if applicable)}.
+     * The type of date is based on the static variables in the DukeDate class. It is only applicable
+     * for deadline and event tasks.
+     *
+     * @return The String format to save the task as.
+     */
+    public abstract String taskSaveString();
 
     /**
      * Marks a task as completed.

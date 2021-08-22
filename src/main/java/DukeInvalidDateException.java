@@ -11,6 +11,6 @@ public class DukeInvalidDateException extends Exception {
      * entered an invalid date and what the correct format should be.
      */
     public DukeInvalidDateException() {
-        super("Invalid date format entered. Date should be formatted as:\n" + Duke.DATE_FORMAT);
+        super("Invalid date format entered. Date should be formatted as:\n" + Ui.DATE_FORMAT);
     }
 }
