@@ -4,6 +4,7 @@ import exceptions.DukeInvalidDateException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * To abstract a date inputted by the user for the event or deadline tasks.
@@ -107,5 +108,19 @@ public class DukeDate {
         } else {
             return dateString;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DukeDate dukeDate = (DukeDate) o;
+        return dateType == dukeDate.dateType && Objects.equals(dateString, dukeDate.dateString)
+                && Objects.equals(date, dukeDate.date) && Objects.equals(dateTime, dukeDate.dateTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dateString, date, dateTime, dateType);
     }
 }

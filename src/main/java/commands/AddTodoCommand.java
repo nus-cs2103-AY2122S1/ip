@@ -27,12 +27,14 @@ public class AddTodoCommand extends AddCommand {
      * user's input is valid.
      */
     @Override
-    public void execute() {
+    public boolean execute() {
         String details = this.removeFirstWordFromInput();
         if (details != null && this.verifyAddCommand(details.trim())) {
             Task task = Todo.newTodoTask(details);
             this.taskList.addTask(task);
+            return true;
         }
+        return false;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package commands;
 
-import commands.Command;
 import duke.Ui;
 
 /**
@@ -12,8 +11,9 @@ public class ExitCommand implements Command {
      * Prints a command to say bye to the user and closed the Chat bot.
      */
     @Override
-    public void execute() {
+    public boolean execute() {
         Ui.endChat();
+        return true;
     }
 
     @Override

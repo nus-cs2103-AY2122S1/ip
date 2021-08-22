@@ -19,8 +19,9 @@ public class ListCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         this.taskList.listHistory();
+        return true;
     }
 
     @Override

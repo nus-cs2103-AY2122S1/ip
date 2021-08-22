@@ -22,12 +22,14 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         try {
             int index = Integer.parseInt(input.split(" ", 2)[1].trim());
             this.taskList.markTaskAsCompleted(index);
+            return true;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             this.invalidArgumentsProvided();
+            return false;
         }
     }
 

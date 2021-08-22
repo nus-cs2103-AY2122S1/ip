@@ -6,9 +6,11 @@ package commands;
 public interface Command {
 
     /**
-     * Execute the command.
+     * Execute the respective command.
+     *
+     * @return True if the command is executed successfully else false.
      */
-    void execute();
+    boolean execute();
 
     /**
      * Returns true if the command is supposed to exit the chat.

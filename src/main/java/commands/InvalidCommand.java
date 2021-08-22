@@ -10,8 +10,9 @@ public class InvalidCommand implements Command {
      * Displays a message to the user that he has entered an invalid input to Duke.
      */
     @Override
-    public void execute() {
+    public boolean execute() {
         System.out.println("Invalid input. Please try again.\n");
+        return true;
     }
 
     @Override

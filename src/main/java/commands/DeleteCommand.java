@@ -25,12 +25,14 @@ public class DeleteCommand implements Command {
      * Removes a task from the taskList based on the user's input.
      */
     @Override
-    public void execute() {
+    public boolean execute() {
         try {
             int index = Integer.parseInt(input.split(" ", 2)[1].trim());
             this.taskList.removeTask(index);
+            return true;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             this.invalidArgumentsProvided();
+            return false;
         }
     }
 

@@ -24,7 +24,7 @@ public class AddEventCommand extends AddCommand {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         String details = this.removeFirstWordFromInput();
         if (details != null && this.verifyAddCommand(details.trim())) {
             Task task;
@@ -32,10 +32,12 @@ public class AddEventCommand extends AddCommand {
                 task = Event.newEventTask(details);
             } catch (DukeInvalidDateException e) {
                 System.out.println(e.getMessage() + "\n");
-                return;
+                return false;
             }
             this.taskList.addTask(task);
+            return true;
         }
+        return false;
     }
 
     /**
