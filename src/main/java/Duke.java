@@ -80,78 +80,78 @@ public class Duke {
     }
 
     private void processCommand(String command) throws DukeException{
-        switch(getCommandType(command)){
-            case EXIT:
-                exit();
-                break;
+        switch (getCommandType(command)){
+        case EXIT:
+            exit();
+            break;
 
-            case LIST:
-                listTasks();
-                break;
+        case LIST:
+            listTasks();
+            break;
 
-            case DONE:
-                int taskNumber = Integer.parseInt(command.split(" ")[1]);
-                markTaskAsDone(taskNumber);
-                break;
+        case DONE:
+            int taskNumber = Integer.parseInt(command.split(" ")[1]);
+            markTaskAsDone(taskNumber);
+            break;
 
-            case EVENT:
-                String eventDescription = command.substring(command.indexOf(" ")+1, command.indexOf("/at")-1);
-                Task event = new Event(eventDescription, command.substring(command.indexOf("at")+3));
-                addTask(event);
-                break;
+        case EVENT:
+            String eventDescription = command.substring(command.indexOf(" ")+1, command.indexOf("/at")-1);
+            Task event = new Event(eventDescription, command.substring(command.indexOf("at")+3));
+            addTask(event);
+            break;
 
-            case DEADLINE:
-                String deadlineDescription = command.substring(command.indexOf(" ")+1, command.indexOf("/by")-1);
-                Task deadline = new Deadline(deadlineDescription, command.substring(command.indexOf("by")+3));
-                addTask(deadline);
-                break;
+        case DEADLINE:
+            String deadlineDescription = command.substring(command.indexOf(" ")+1, command.indexOf("/by")-1);
+            Task deadline = new Deadline(deadlineDescription, command.substring(command.indexOf("by")+3));
+            addTask(deadline);
+            break;
 
-            case TODO:
-                int spaceIndex = command.indexOf(" ");
-                String toDoDescription = command.substring(spaceIndex+1);
-                if (toDoDescription.isBlank() || spaceIndex == -1){
-                    throw new NoToDoDescriptionException();
-                };
-                Task toDo = new ToDo(toDoDescription);
-                addTask(toDo);
-                break;
+        case TODO:
+            int spaceIndex = command.indexOf(" ");
+            String toDoDescription = command.substring(spaceIndex+1);
+            if (toDoDescription.isBlank() || spaceIndex == -1){
+                throw new NoToDoDescriptionException();
+            };
+            Task toDo = new ToDo(toDoDescription);
+            addTask(toDo);
+            break;
 
-            case DELETE:
-                int taskNum = Integer.parseInt(command.substring(command.indexOf(" ")+1));
-                deleteTask(taskNum);
-                break;
+        case DELETE:
+            int taskNum = Integer.parseInt(command.substring(command.indexOf(" ")+1));
+            deleteTask(taskNum);
+            break;
 
-            case UNKNOWN: default:
-                throw new UnknownCommandException();
+        case UNKNOWN: default:
+            throw new UnknownCommandException();
         }
     }
 
     private CommandTypes getCommandType(String command){
         String commandType = command.split(" ")[0];
-        switch(commandType){
-            case "list":
-                return CommandTypes.LIST;
+        switch (commandType){
+        case "list":
+            return CommandTypes.LIST;
 
-            case "bye":
-                return CommandTypes.EXIT;
+        case "bye":
+            return CommandTypes.EXIT;
 
-            case "done":
-                return CommandTypes.DONE;
+        case "done":
+            return CommandTypes.DONE;
 
-            case "todo":
-                return CommandTypes.TODO;
+        case "todo":
+            return CommandTypes.TODO;
 
-            case "deadline":
-                return CommandTypes.DEADLINE;
+        case "deadline":
+            return CommandTypes.DEADLINE;
 
-            case "event":
-                return CommandTypes.EVENT;
+        case "event":
+            return CommandTypes.EVENT;
 
-            case "delete":
-                return CommandTypes.DELETE;
+        case "delete":
+            return CommandTypes.DELETE;
 
-            default:
-                return CommandTypes.UNKNOWN;
+        default:
+            return CommandTypes.UNKNOWN;
         }
     }
 
