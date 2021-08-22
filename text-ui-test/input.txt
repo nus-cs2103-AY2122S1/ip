@@ -21,4 +21,5 @@ delete 99999
 delete funnyWord
 list
 List
+find borrow
 bye

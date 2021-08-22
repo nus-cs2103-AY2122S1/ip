@@ -60,6 +60,9 @@ public class Parser {
         case DELETE:
             deleteTask(userInput);
             break;
+        case FIND:
+            findTask(userInput);
+            break;
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
@@ -136,6 +139,19 @@ public class Parser {
                     task, tasks.size(), taskWord));
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("Please give a valid number!");
+        }
+    }
+
+    /**
+     * Prints the tasks filtered by keyword.
+     *
+     * @param userInput given by user.
+     */
+    private void findTask(String[] userInput) throws DukeException {
+        try {
+            tasks.filter(userInput[1]).print(ui, "Here are the matching tasks in your list:");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please enter something to find for!");
         }
     }
 
