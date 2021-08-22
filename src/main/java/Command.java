@@ -12,6 +12,7 @@ public enum Command {
     HELP("help"),
     BYE("bye"),
     DELETE("delete"),
+    FILTER("filter"),
     INVALID("invalid");
 
     public final String label;

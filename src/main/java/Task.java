@@ -46,4 +46,8 @@ public class Task {
     public String format() {
         return String.format("%s | %s", isDone ? "1" : "0", this.description);
     }
+
+    public boolean checkDate(String date) throws DukeException{
+        return false;
+    }
 }
