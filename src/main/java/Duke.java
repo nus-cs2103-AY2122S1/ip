@@ -1,10 +1,19 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.io.File;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
 public class Duke {
     private ArrayList<Task> tasks = new ArrayList<>();
+    private File file;
 
     public void run() {
+        this.setUp();
         this.greetUser();
         Scanner sc = new Scanner(System.in);
         boolean shouldContinue = true;
@@ -23,6 +32,35 @@ public class Duke {
         }
         sc.close();
         this.exit();
+    }
+
+    public void setUp() {
+        try {
+            String dir = System.getProperty("user.dir");
+            Path path = Paths.get(dir, "data");
+
+            // create the data folder if it does not exist
+            if (!Files.exists(path)) {
+                path = Files.createDirectory(path);
+            }
+
+            File file = path.resolve("duke.txt").toFile();
+            if (file.exists()) {
+                this.loadTasks();
+            } else {
+                file.createNewFile();
+            }
+
+            this.file = file;
+        } catch (IOException e) {
+            // this exception should not occur because the input is fixed
+        }
+    }
+
+    /**
+     * Not implemented yet
+     */
+    public void loadTasks() {
     }
 
     public void printMessage(String message) {
@@ -160,6 +198,7 @@ public class Duke {
             printMessage("There is no such task to delete!");
         }
     }
+
 
     public static void main(String[] args) {
         new Duke().run();
