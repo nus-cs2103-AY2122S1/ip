@@ -12,6 +12,11 @@ public class AppState {
     /** A {@code TaskList} to store user tasks */
     public TaskList taskList;
 
+    // TODO: move AppState in their own class
+    // TODO: have some object to get the response of the Ui, instead of doing System.out.println() at each component
+    //  individually
+    // TODO: set priority tasks
+
     /**
      * Public constructor for the {@code AppState} class.
      *
