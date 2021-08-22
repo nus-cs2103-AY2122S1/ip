@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -8,7 +10,7 @@ public class Task {
     }
 
     /**
-     * Gets the icon representation of Task depending if Task is done.
+     * Gets the icon representation of duke.task.Task depending if duke.task.Task is done.
      *
      * @return X if done, empty otherwise.
      */

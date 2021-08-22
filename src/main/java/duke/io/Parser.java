@@ -1,3 +1,13 @@
+package duke.io;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 public class Parser {
     private final TaskList tasks;
     private final Ui ui;
@@ -8,7 +18,7 @@ public class Parser {
     }
 
     public void parse(String input) throws DukeException {
-        Duke.Command command;
+        Command command;
         String[] userInput = input.split(" ", 2);
 
         if (!userInput[0].equals(userInput[0].toLowerCase())) {
@@ -17,7 +27,7 @@ public class Parser {
         }
 
         try {
-            command = Duke.Command.valueOf(userInput[0].toUpperCase());
+            command = Command.valueOf(userInput[0].toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
@@ -66,7 +76,7 @@ public class Parser {
         try {
             addTask(new Todo(userInput[1]));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Todo description cannot be empty");
+            throw new DukeException("duke.task.Todo description cannot be empty");
         }
     }
 
@@ -81,7 +91,7 @@ public class Parser {
             String by = userInput[1].split(" /by ")[1];
             addTask(new Deadline(deadlineDescription, by));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Deadline description and time by cannot be empty");
+            throw new DukeException("duke.task.Deadline description and time by cannot be empty");
         }
     }
 
@@ -96,7 +106,7 @@ public class Parser {
             String by = userInput[1].split(" /at ")[1];
             addTask(new Event(eventDescription, by));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Event description and time at cannot be empty");
+            throw new DukeException("duke.task.Event description and time at cannot be empty");
         }
     }
 

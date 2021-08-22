@@ -1,9 +1,14 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.io.Parser;
+import duke.io.Storage;
+import duke.io.Ui;
+import duke.task.TaskList;
+
 import java.util.Scanner;
 
 public class Duke {
-    enum Command {
-        LIST, DONE, TODO, DEADLINE, EVENT, DELETE
-    }
 
     private final Ui ui;
     private final Storage storage;
