@@ -57,12 +57,16 @@ public class Task {
         return "[ ]";
     }
 
+    public String createData() {
+        return "";
+    }
+
     public static Task getTaskFromString(String s) {
-        String taskType = s.substring(3, 6);
-        String taskDescription = s.substring(10);
+        String taskType = s.substring(0, 3);
+        String taskDescription = s.substring(7);
         Task t = null;
         try {
-            if (s.substring(7, 10). equals("[X]")) {
+            if (s.substring(3,6). equals("[X]")) {
                 switch (taskType) {
                 case "[T]":
                     t = new Todo(taskDescription, true);
@@ -88,9 +92,9 @@ public class Task {
                 }
             }
         } catch (WrongCommandFormatException e) {
+            System.out.println(e.getMessage());
             System.out.println("Error loading tasks");
         }
-
         return t;
     }
 }
