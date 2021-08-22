@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DukeEngine {
     private final DukeMessages messages = new DukeMessages();
@@ -39,7 +40,7 @@ public class DukeEngine {
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
-                messages.displayListItems(this.taskList);
+                messages.displayListTasks(this.taskList);
             } else if (inputArr[0].equals("done")) {
                 
                 //obtains the task number which we want to mark as done
@@ -61,8 +62,9 @@ public class DukeEngine {
                 } catch (DukeException e) {
                     messages.displayText(e.toString());
                 }
-            }
-            else {
+            } else if (inputArr[0].equals("find")) {
+                this.findTasks(inputArr);
+            } else {
 
                 //adds item input by the user into the inputList
                 try {
@@ -165,31 +167,6 @@ public class DukeEngine {
                 if (byArray.length >= 3) {
                     throw new DukeException("Command after /by should at most only have 2 parts for date and time!");
                 }
-
-                /*
-                System.out.println("byArray's Length: " + byArray.length);
-                if (byArray.length == 2) {
-                    //first input was a time
-                    if (byArray[0].length() == 4) {
-                        LocalTime time = LocalTime.parse(byArray[0]);
-                        LocalDate date = LocalDate.parse(byArray[1]);
-                        by =  LocalDateTime.of(date, time);
-                    } else {
-                        //first input is a date
-                        LocalTime time = LocalTime.parse(byArray[1]);
-                        LocalDate date = LocalDate.parse(byArray[0]);
-                        by =  LocalDateTime.of(date, time);
-                    }
-
-                } else {
-                    if (byArray[0].length() == 4) {
-                        throw new DukeException("Input has to be a date and not time!");
-                    } else {
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-
-                    }
-                }
-                */
 
                 if (byArray.length == 1) {
                     LocalDate by = LocalDate.parse(byArray[0]);
@@ -297,7 +274,21 @@ public class DukeEngine {
         databaseEngine.writeToDatabase(this.taskList);
     }
 
-    public void setTaskList(List<Task> inputList) {
-        this.taskList = inputList;
+    public void findTasks(String[] inputArr) {
+        List<Task> filteredList = this.taskList
+                .stream()
+                .filter(task -> {
+                    String description = task.getDescription();
+                    for (String s: inputArr) {
+                        if (description.contains(s)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })
+                .collect(Collectors.toList());
+
+        messages.displayFilteredTasks(filteredList);
     }
+
 }

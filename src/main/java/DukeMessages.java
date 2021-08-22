@@ -72,7 +72,7 @@ public class DukeMessages {
      * Displays all items and their completion status.
      * @param taskList the list containing Task objects.
      */
-    public void displayListItems(List<Task> taskList) {
+    public void displayListTasks(List<Task> taskList) {
 
         //shown when there are no tasks in the list
         if (taskList.isEmpty()) {
@@ -101,6 +101,31 @@ public class DukeMessages {
 
     public void wrongDateInputMessage() {
         this.displayText("The input should be in the form of yyyy-dd-mm");
+    }
+
+    /**
+     * Displays all items and their completion status.
+     * @param taskList the list containing Task objects.
+     */
+    public void displayFilteredTasks(List<Task> taskList) {
+
+        //shown when there are no tasks in the list
+        if (taskList.isEmpty()) {
+            this.listEmptyMessage();
+            return;
+        }
+
+        System.out.println(borderLine);
+        System.out.println("Here are the matching tasks in your list:");
+
+        for (int i = 0; i < taskList.size(); i++) {
+
+            //displays the current task's status
+            String inputMessage = String.format("%d. %s", i + 1, taskList.get(i).toString());
+            System.out.println(inputMessage);
+        }
+
+        System.out.println(borderLine);
     }
 
 
