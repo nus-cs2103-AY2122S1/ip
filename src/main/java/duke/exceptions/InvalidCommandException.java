@@ -9,6 +9,6 @@ import duke.messages.MessageConstants;
  */
 public class InvalidCommandException extends DukeException {
     public InvalidCommandException() {
-        super(MessageConstants.INVALID_COMMAND_MESSAGE);
+        super(MessageConstants.MESSAGE_INVALID_COMMAND);
     }
 }

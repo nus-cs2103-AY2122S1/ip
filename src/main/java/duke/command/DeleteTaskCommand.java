@@ -35,7 +35,7 @@ public class DeleteTaskCommand extends Command {
             Task deletedTask = taskList.deleteTask(index);
             userOutputHandler.writeMessage(new TaskDeleteMessage(deletedTask.toString(), taskList.getNumOfTasks()));
         } catch (NumberFormatException | IOException nfe) {
-            userOutputHandler.writeMessage(new Message(MessageConstants.INVALID_INTEGER_MESSAGE));
+            userOutputHandler.writeMessage(new Message(MessageConstants.MESSAGE_INVALID_INTEGER));
         }
     }
 

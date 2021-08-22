@@ -10,7 +10,8 @@ public class Message {
     private final String separator =
             "____________________________________________________________";
 
-    public Message() {}
+    public Message() {
+    }
 
     public Message(String messageText) {
         this.messageText = messageText;

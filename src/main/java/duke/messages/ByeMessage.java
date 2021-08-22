@@ -7,6 +7,6 @@ package duke.messages;
  */
 public class ByeMessage extends Message {
     public ByeMessage() {
-        super(MessageConstants.BYE_MESSAGE);
+        super(MessageConstants.MESSAGE_BYE);
     }
 }

@@ -36,7 +36,7 @@ public class MarkTaskDoneCommand extends Command {
             Task doneTask = taskList.setDone(index);
             userOutputHandler.writeMessage(new TaskDoneMessage(doneTask));
         } catch (NumberFormatException | IOException nfe) {
-            userOutputHandler.writeMessage(new Message(MessageConstants.INVALID_INTEGER_MESSAGE));
+            userOutputHandler.writeMessage(new Message(MessageConstants.MESSAGE_INVALID_INTEGER));
         }
     }
 

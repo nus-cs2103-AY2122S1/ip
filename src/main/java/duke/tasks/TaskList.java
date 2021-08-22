@@ -79,10 +79,10 @@ public class TaskList {
     /**
      * Deletes task associated with given index number
      *
-     * @param index index of task to delete.
-     * @return deleted task.
-     * @throws InvalidTaskNumberException thrown when index provided exceeds valid index range.
-     * @throws IOException thrown when errors writing to storage occur.
+     * @param index index of task to delete
+     * @return deleted task
+     * @throws InvalidTaskNumberException thrown when index provided exceeds valid index range
+     * @throws IOException                thrown when errors writing to storage occur
      */
     public Task deleteTask(int index) throws InvalidTaskNumberException, IOException {
         if (index < 0 || index >= tasks.size()) {

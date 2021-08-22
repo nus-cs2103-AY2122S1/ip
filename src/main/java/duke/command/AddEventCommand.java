@@ -5,7 +5,6 @@ import duke.exceptions.EmptyEventBodyException;
 import duke.exceptions.InvalidDateTimeFormatException;
 import duke.exceptions.InvalidDeadlineBodyException;
 import duke.exceptions.InvalidEventBodyException;
-import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserOutputHandler;
 import duke.messages.TaskAddMessage;
 import duke.tasks.Event;

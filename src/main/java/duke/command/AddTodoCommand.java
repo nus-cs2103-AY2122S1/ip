@@ -1,9 +1,6 @@
 package duke.command;
 
-import duke.exceptions.EmptyEventBodyException;
 import duke.exceptions.EmptyTodoBodyException;
-import duke.exceptions.InvalidEventBodyException;
-import duke.io.ConsoleUserOutputHandler;
 import duke.io.UserOutputHandler;
 import duke.messages.TaskAddMessage;
 import duke.tasks.Task;
@@ -28,9 +25,9 @@ public class AddTodoCommand extends Command {
      *
      * @param userOutputHandler handles outputting messages to the output destination.
      * @param taskList          handles task operations including adding, deleting, marking as done and retrieval.
-     * @throws IOException                    thrown when failure due to reading or writing occurs.
-     * @throws EmptyTodoBodyException     thrown when the data String representing the
-     *                                        <code>ToDo</code> is missing.
+     * @throws IOException            thrown when failure due to reading or writing occurs.
+     * @throws EmptyTodoBodyException thrown when the data String representing the
+     *                                <code>ToDo</code> is missing.
      */
     @Override
     public void execute(UserOutputHandler userOutputHandler, TaskList taskList)
