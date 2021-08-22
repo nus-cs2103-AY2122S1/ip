@@ -9,7 +9,6 @@ public class DukeException extends RuntimeException {
         return new StringBuilder()
                 .append("Error: ")
                 .append(super.getMessage())
-                .append("\n")
                 .toString();
     }
 }
