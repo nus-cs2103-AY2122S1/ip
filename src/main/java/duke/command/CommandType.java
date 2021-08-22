@@ -1,0 +1,19 @@
+package duke.command;
+
+public enum CommandType {
+    LIST, TODO, DEADLINE, EVENT, DELETE, DONE, BYE;
+
+    /**
+     * Returns Command classification based on the given string.
+     * @param commandText string which matches command name
+     * @return Command representing the given string command, or null if no command matched.
+     */
+    public static CommandType getCommand(String commandText) {
+        for (CommandType cmd : CommandType.values()) {
+            if (commandText.toUpperCase().equals(cmd.toString())) {
+                return cmd;
+            }
+        }
+        return null;
+    }
+}
