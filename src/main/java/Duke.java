@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+
 
 public class Duke {
     private static final String LINE = "     ________________________________________\n"; // 5 spaces, 40 dashes
@@ -66,7 +70,7 @@ public class Duke {
         Scanner scanner = new Scanner(dataFile);
         while (scanner.hasNext()) {
             String currLine = scanner.nextLine();
-            String[] currLineSplit = currLine.split("\\|", 4);
+            String[] currLineSplit = currLine.split("\\|", 6);
             Task currTask = null;
 
             switch (currLineSplit[0]) {
@@ -74,10 +78,15 @@ public class Duke {
                     currTask = new ToDos(currLineSplit[2]);
                     break;
                 case "D":
-                    currTask = new Deadlines(currLineSplit[2], currLineSplit[3]);
+                    currTask = new Deadlines(currLineSplit[2],
+                        LocalDate.parse(currLineSplit[3]),
+                        LocalTime.parse(currLineSplit[4]));
                     break;
                 case "E":
-                    currTask = new Events(currLineSplit[2], currLineSplit[3]);
+                    currTask = new Events(currLineSplit[2],
+                        LocalDate.parse(currLineSplit[3]),
+                        LocalTime.parse(currLineSplit[4]),
+                        LocalTime.parse(currLineSplit[5]));
                     break;
             }
 
@@ -133,6 +142,13 @@ public class Duke {
             } catch (NumberFormatException e) {
                 System.out.println(LINE + INDENT + "Please enter a valid integer for task number!\n" + LINE);
                 continue;
+            } catch (DateTimeParseException e) {
+                System.out.println(LINE
+                    + INDENT + "Please enter date in the valid format:\n"
+                    + INDENT + "Deadlines: yyyy-mm-dd hh:mm\n"
+                    + INDENT + "Events: yyyy-mm-dd hh:mm-hh:mm\n"
+                    + LINE);
+                continue;
             }
         }
     }
@@ -183,7 +199,9 @@ public class Duke {
             + LINE);
     }
 
-    private void addTask(String[] spaceSplitInput, String[] slashSplitInput, List<Task> taskList, taskKind currTaskKind) throws DukeException {
+    // Input format for deadline: /by yyyy-mm-dd hh:mm (ISO_LOCAL_DATE, space, ISO_LOCAL_TIME)
+    // Input format for event: /at yyyy-mm-dd hh:mm-hh:mm (ISO_LOCAL_DATE, space, ISO_LOCAL_TIME, dash, ISO_LOCAL_TIME)
+    private void addTask(String[] spaceSplitInput, String[] slashSplitInput, List<Task> taskList, taskKind currTaskKind) throws DukeException, DateTimeParseException {
         Task currTask = null;
 
         switch (currTaskKind) {
@@ -192,7 +210,6 @@ public class Duke {
                     // Tudo has no description. If has, spaceSplitInput has length 2.
                     throw new DukeException(LINE + INDENT + "Todo description cannot be empty!\n" + LINE);
                 }
-                // Only if no exception is thrown
                 currTask = new ToDos(spaceSplitInput[1].trim()); // description trimmed of trailing white space behind
                 break;
             case DEADLINES:
@@ -202,15 +219,17 @@ public class Duke {
                 }
                 if (slashSplitInput.length < 2) {
                     // Deadline has no slash (thus no date)
-                    throw new DukeException(LINE + INDENT + "Deadline must has a date written after a slash!\n" + LINE);
+                    throw new DukeException(LINE + INDENT + "Deadline must have a date and time written after a slash!\n" + LINE);
                 }
-                if (slashSplitInput[1].split(" ", 2).length < 2) {
-                    // If there're less than 2 words behind slash i.e. No "by" or nothing behind "by"
-                    throw new DukeException(LINE + INDENT + "Deadline date must be in the format of 'by date'!" + "\n" + LINE);
+
+                String[] DdlDateTimeArr = slashSplitInput[1].split(" ", 3);
+                if (DdlDateTimeArr.length < 3) {
+                    // If there're less than 3 words behind slash e.g. No "by", nothing behind "by", etc.
+                    throw new DukeException(LINE + INDENT + "Deadline date must be in the format of 'by date time'!" + "\n" + LINE);
                 }
-                // Only if no exceptions is thrown:
-                String taskTimeDDL = slashSplitInput[1].split(" ", 2)[1]; // Extract taskTime by discarding the "by"
-                currTask = new Deadlines(spaceSplitInput[1].trim(), taskTimeDDL);
+                LocalDate DdlDate = LocalDate.parse(DdlDateTimeArr[1]); // Throws DateTimeParseException if date cannot be parsed
+                LocalTime DdlTime = LocalTime.parse(DdlDateTimeArr[2]);
+                currTask = new Deadlines(spaceSplitInput[1].trim(), DdlDate, DdlTime);
                 break;
             case EVENTS:
                 if (spaceSplitInput.length < 2) {
@@ -221,13 +240,23 @@ public class Duke {
                     // Event has no slash (thus no date)
                     throw new DukeException(LINE + INDENT + "Event must has a date written after a slash!\n" + LINE);
                 }
-                if (slashSplitInput[1].split(" ", 2).length < 2) {
-                    // If there're less than 2 words behind slash i.e. No "at" or nothing behind "at"
-                    throw new DukeException(LINE + INDENT + "Event date must be in the format of 'at date'!" + "\n" + LINE);
+
+                String[] eventDateTimeArr = slashSplitInput[1].split(" ", 3);
+                if (eventDateTimeArr.length < 3) {
+                    // If there're less than 3 words behind slash e.g. No "at", nothing behind "at", etc.
+                    throw new DukeException(LINE + INDENT + "Event date must be in the format of 'by date time-time'!" + "\n" + LINE);
                 }
-                // Only if no exception is thrown
-                String taskTimeEvent = slashSplitInput[1].split(" ", 2)[1];
-                currTask = new Events(spaceSplitInput[1].trim(), taskTimeEvent);
+                LocalDate eventDate = LocalDate.parse(eventDateTimeArr[1]); // Throws DateTimeParseException if date cannot be parsed
+
+                String[] eventTimes = eventDateTimeArr[2].split("-", 2); // split the start and end time
+                if (eventTimes.length < 2) {
+                    // There's no dash for start and end time
+                    throw new DukeException(LINE + INDENT + "Event date must have a start and end time separated by a dash" + "\n" + LINE);
+                }
+
+                LocalTime eventStartTime = LocalTime.parse(eventTimes[0]);
+                LocalTime eventEndTime = LocalTime.parse(eventTimes[1]);
+                currTask = new Events(spaceSplitInput[1].trim(), eventDate, eventStartTime, eventEndTime);
                 break;
         }
 
@@ -237,5 +266,8 @@ public class Duke {
             + INDENT + INDENT + currTask.toString() + "\n"
             + INDENT + String.format("Now you have %d tasks in the list.\n", taskList.size())
             + LINE);
+    }
 }
-}
+
+
+
