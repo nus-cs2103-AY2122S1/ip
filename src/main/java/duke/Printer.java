@@ -16,6 +16,13 @@ abstract class Printer {
   private static final String INDENTATION_5 = "     ";
   private static final String BREAK_LINE = "____________________________________________________________";
 
+  /**
+   * Returns the proper format for adding task string.
+   *
+   * @param task The formatted string of a task.
+   * @param totalTasks The total number of tasks.
+   * @return
+   */
   public static List<String> addTaskString(String task, String totalTasks) {
     return List.of(
       "Got it. I've added this task: ",
@@ -24,6 +31,13 @@ abstract class Printer {
     );
   }
 
+  /**
+   * Returns the proper format for deleting task string.
+   *
+   * @param task The formatted string of a task.
+   * @param totalTasks The total number of tasks.
+   * @return
+   */
   public static List<String> deleteTaskString(String task, String totalTasks) {
     return List.of(
       "Noted. I've removed this task: ",
@@ -32,6 +46,13 @@ abstract class Printer {
     );
   }
 
+  /**
+   * Parses the commands for task name from user-input.
+   *
+   * @param task The formatted string of a task.
+   * @param totalTasks The total number of tasks.
+   * @return
+   */
   public static String getTaskName(String[] commands) {
     int indexOfDateSeparator = IntStream
       .range(0, commands.length)
@@ -42,6 +63,13 @@ abstract class Printer {
     return Arrays.stream(taskNames).collect(Collectors.joining(" "));
   }
 
+  /**
+   * Parses the commands for task date from user-input.
+   *
+   * @param task The formatted string of a task.
+   * @param totalTasks The total number of tasks.
+   * @return
+   */
   public static String getTaskDate(String[] commands) {
     int indexOfDateSeparator = IntStream
       .range(0, commands.length)
@@ -61,6 +89,12 @@ abstract class Printer {
     System.out.println(formatOutput(inputText));
   }
 
+  /**
+   * Formats by surrounding each text of the list of texts with 2 breaklines
+   *
+   * @param inputText
+   * @return
+   */
   public static String formatOutput(List<String> inputText) {
     String output = INDENTATION_4 + BREAK_LINE + "\n";
     for (int i = 0; i < inputText.size(); i++) {

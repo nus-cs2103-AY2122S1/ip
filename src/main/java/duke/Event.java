@@ -28,6 +28,9 @@ public class Event extends Task {
     return output;
   }
 
+  /**
+   * Returns proper format to write to txt file.
+   */
   public String toWriteString() {
     String output = Duke.EVENT_ENUM;
     String done = (this.done ? "1" : "0");

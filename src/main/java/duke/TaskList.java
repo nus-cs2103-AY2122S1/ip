@@ -59,6 +59,10 @@ public class TaskList {
     return newTaskArray;
   }
 
+  /**
+   * Lists the array of tasks.
+   *
+   */
   public void handleList() {
     List<String> outputList = new ArrayList<>();
     outputList.add(LIST);
@@ -68,11 +72,21 @@ public class TaskList {
     Printer.print(outputList);
   }
 
+  /**
+   * Adds the tasks to the list and prints the add message.
+   *
+   * @param newTask
+   */
   public void handleAddHelper(Task newTask) {
     this.taskArray.add(newTask);
     Printer.print(Printer.addTaskString(newTask.toString(), Integer.toString(this.taskArray.size())));
   }
 
+  /**
+   * Creates a Todo Task.
+   *
+   * @param command
+   */
   public void handleAddToDo(String[] command) {
     String newTaskDescription = Printer.getTaskName(command);
     if (newTaskDescription.equals("")) {
@@ -83,6 +97,11 @@ public class TaskList {
     handleAddHelper(newTask);
   }
 
+  /**
+   * Creates a deadline task.
+   *
+   * @param command
+   */
   public void handleAddDeadline(String[] command) {
     String newTaskDescription = Printer.getTaskName(command);
     String newTaskDate = Printer.getTaskDate(command);
@@ -90,6 +109,11 @@ public class TaskList {
     handleAddHelper(newTask);
   }
 
+  /**
+   * Creates a event task.
+   *
+   * @param command
+   */
   public void handleAddEvent(String[] command) {
     String newTaskDescription = Printer.getTaskName(command);
     String newTaskDate = Printer.getTaskDate(command);
@@ -97,18 +121,34 @@ public class TaskList {
     handleAddHelper(newTask);
   }
 
+  /**
+   * Marks the indexed task as done and prints a message.
+   *
+   * @param taskIndex
+   */
   public void handleDone(int taskIndex) {
     Task indexedTask = this.taskArray.get(taskIndex - 1);
     String output = indexedTask.handleMarkAsDone();
     Printer.print(output);
   }
 
+  /**
+   * Deletes an indexed task.
+   * If invalid index, it'll print an error.
+   *
+   * @param taskIndex
+   */
   public void handleDelete(int taskIndex) {
     if (taskIndex < -1 || taskIndex >= this.taskArray.size()) Printer.print(ERROR_DELETE_INVALID_INDEX);
     Task deletedTask = this.taskArray.remove(taskIndex - 1);
     Printer.print(Printer.deleteTaskString(deletedTask.toString(), Integer.toString(this.taskArray.size())));
   }
 
+  /**
+   * Saves the current task list to a txt file.
+   *
+   * @param storage
+   */
   public void handleSave(Storage storage) {
     try {
       String fileContents = storage.writeToFile(this.taskArray);
