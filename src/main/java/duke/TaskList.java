@@ -3,6 +3,7 @@ package duke;
 import duke.exceptions.DukeFileException;
 import duke.exceptions.EmptyListException;
 import duke.exceptions.TaskIsCompleteException;
+import duke.exceptions.TaskNotFoundException;
 import duke.task.Task;
 
 import java.io.IOException;
@@ -34,6 +35,29 @@ public class TaskList {
             throw new EmptyListException();
         }
         ui.printList(this.tasks);
+    }
+
+    /**
+     * Searches the ArrayList of Task for tasks with the specified keyword and uses an Ui to print it out.
+     *
+     * @param ui An Ui instance that prints the list of task containing the keyword.
+     * @param keyword A String representing the keyword.
+     * @throws EmptyListException An exception thrown when the ArrayList of Task is empty.
+     */
+    public void printFindTasks(Ui ui, String keyword) throws EmptyListException, TaskNotFoundException {
+        if (this.tasks.size() <= 0) {
+            throw new EmptyListException();
+        }
+        ArrayList<Task> listOfTaskWithKeyword = new ArrayList<>();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (this.tasks.get(i).toString().contains(keyword)) {
+                listOfTaskWithKeyword.add(this.tasks.get(i));
+            }
+        }
+        if (listOfTaskWithKeyword.size() == 0) {
+            throw new TaskNotFoundException();
+        }
+        ui.printFindTask(listOfTaskWithKeyword);
     }
 
     public void safeTasks(Storage store) throws DukeFileException {

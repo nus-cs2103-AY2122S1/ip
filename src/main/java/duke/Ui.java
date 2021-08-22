@@ -65,6 +65,20 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints a list of task that contains a specified keyword.
+     *
+     * @param tasks  An ArrayList of task that contains the keyword in its description.
+     */
+    public void printFindTask(ArrayList<Task> tasks) {
+        printLine();
+        System.out.println("    Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.printf("    %d. %s\n", i + 1, tasks.get(i));
+        }
+        printLine();
+    }
+
     public void bidFarewell() {
         printLine();
         System.out.println("    Bye. Hope to see you again soon!");
