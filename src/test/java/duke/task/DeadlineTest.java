@@ -12,19 +12,19 @@ public class DeadlineTest {
     }
 
     @Test
-    public void toStringDateTest() {
+    public void toStringTest_date() {
         Deadline task = new Deadline("Test toString() with Date", "2021-08-22");
         assertEquals("[D][ ] Test toString() with Date (by: Aug 22 2021)", task.toString());
     }
 
     @Test
-    public void toStringDateTimeTest() {
+    public void toStringTest_dateTime() {
         Deadline task = new Deadline("Test toString() with DateTime", "2021-08-22 1000");
         assertEquals("[D][ ] Test toString() with DateTime (by: Aug 22 2021 10.00 AM)", task.toString());
     }
 
     @Test
-    public void toStringNormalTest() {
+    public void toStringTest_normal() {
         Deadline task = new Deadline("Test toString()", "Tonight");
         assertEquals("[D][ ] Test toString() (by: Tonight)", task.toString());
     }

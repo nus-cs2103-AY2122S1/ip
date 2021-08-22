@@ -89,6 +89,7 @@ public class AddCommand extends Command {
 
         String description = extracted[0];
         String deadline = extracted[1];
+
         Deadline task = new Deadline(description, deadline);
         list.addToList(task);
         dataManager.writeToFile(task);
@@ -119,6 +120,7 @@ public class AddCommand extends Command {
 
         String description = extracted[0];
         String dateTime = extracted[1];
+
         Event task = new Event(description, dateTime);
         list.addToList(task);
         dataManager.writeToFile(task);

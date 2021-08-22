@@ -22,8 +22,8 @@ public class ToDoListTest {
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
-    private ToDoList tdlist;
     private final String ls = System.lineSeparator();
+    private ToDoList tdlist;
 
     @BeforeEach
     public void setUpStreams() {

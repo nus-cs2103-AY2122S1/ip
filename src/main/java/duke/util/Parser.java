@@ -1,6 +1,13 @@
 package duke.util;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FilterCommand;
+import duke.command.ListCommand;
+import duke.command.UnrecognisedCommand;
 import duke.exception.DukeException;
 import duke.exception.IndexFormatException;
 import duke.exception.MissingIndexException;
@@ -26,36 +33,6 @@ public class Parser {
     }
 
     /**
-     * Parses the user's input and returns the appropriate command to act on.
-     *
-     * @param input Raw user's input.
-     * @return The corresponding Command.
-     */
-    public Command parse(String input) {
-        String[] inputs = input.split(" ");
-
-        String lowerCaseInput = inputs[0].toLowerCase();
-        switch (lowerCaseInput) {
-        case "list":
-            return new ListCommand(list);
-        case "done":
-            return new DoneCommand(list, input);
-        case "todo":
-        case "deadline":
-        case "event":
-            return new AddCommand(list, dataManager, lowerCaseInput, input);
-        case "exit":
-            return new ExitCommand();
-        case "delete":
-            return new DeleteCommand(input, list);
-        case "filter":
-            return new FilterCommand(input, list);
-        default:
-            return new UnrecognisedCommand(input);
-        }
-    }
-
-    /**
      * Extracts out index for commands that deals with modifying specific tasks.
      *
      * @param input Raw user's input.
@@ -71,6 +48,7 @@ public class Parser {
             throw new MissingIndexException();
         }
 
+        // Checks whether user entered positive numeral
         if (!inputs[1].matches("\\d+")) {
             throw new IndexFormatException();
         }
@@ -99,5 +77,37 @@ public class Parser {
             return null;
         }
         return date;
+    }
+
+    /**
+     * Parses the user's input and returns the appropriate command to act on.
+     *
+     * @param input Raw user's input.
+     * @return The corresponding Command.
+     */
+    public Command parse(String input) {
+        String[] inputs = input.split(" ");
+
+        String lowerCaseInput = inputs[0].toLowerCase();
+        switch (lowerCaseInput) {
+        case "list":
+            return new ListCommand(list);
+        case "done":
+            return new DoneCommand(list, input);
+        case "todo":
+            // Fallthrough
+        case "deadline":
+            // Fallthrough
+        case "event":
+            return new AddCommand(list, dataManager, lowerCaseInput, input);
+        case "exit":
+            return new ExitCommand();
+        case "delete":
+            return new DeleteCommand(input, list);
+        case "filter":
+            return new FilterCommand(input, list);
+        default:
+            return new UnrecognisedCommand(input);
+        }
     }
 }

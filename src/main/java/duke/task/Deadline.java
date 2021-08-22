@@ -20,7 +20,7 @@ public class Deadline extends Task {
      * Instantiates a new Deadline task.
      *
      * @param description the description of the deadline task.
-     * @param deadline the deadline
+     * @param deadline    the deadline
      */
     public Deadline(String description, String deadline) {
         super(description);
@@ -45,6 +45,7 @@ public class Deadline extends Task {
         } else {
             outFormat = new SimpleDateFormat("MMM dd yyyy");
         }
+
         return outFormat.format(this.deadline);
     }
 

@@ -11,8 +11,8 @@ import duke.util.ToDoList;
  * @version CS2103T AY21/22 Semester 1
  */
 public class DeleteCommand extends Command {
-    private final String input;
     private final ToDoList list;
+    private final String input;
 
     public DeleteCommand(String input, ToDoList list) {
         this.input = input;
