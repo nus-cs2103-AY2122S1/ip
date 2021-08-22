@@ -258,7 +258,7 @@ public class Duke {
                     taskList.add(new Event(parameter[2], parameter[3], parameter[1].equals("X")));
                     break;
                 default:
-                    throw new DukeException("OOPS!!! File content is not of the correct format.");
+                    break;
                 }
             }
         } catch (FileNotFoundException e) {
