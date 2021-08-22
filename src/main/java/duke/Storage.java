@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.DukeList;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -9,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Class managing storing and loading data into Duke's list.
+ * Class managing storing and loading data into duke.Duke's list.
  */
 public class Storage {
 
@@ -20,7 +24,7 @@ public class Storage {
     private DukeList list;
 
     /**
-     * Constructs a Storage object.
+     * Constructs a duke.Storage object.
      *
      * @param path PATH to the storage file.
      * @param list List where data is loaded to and saved from.

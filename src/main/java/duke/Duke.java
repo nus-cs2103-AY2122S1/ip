@@ -1,5 +1,6 @@
-import java.util.Scanner;
-import java.io.IOException;
+package duke;
+
+import duke.task.DukeList;
 
 public class Duke {
     private DukeList list;

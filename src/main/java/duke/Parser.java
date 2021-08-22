@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.DukeList;
+
 public class Parser {
 
     private DukeList list;

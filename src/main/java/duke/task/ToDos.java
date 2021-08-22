@@ -1,12 +1,14 @@
+package duke.task;
+
 /**
- * Encapsulates a task to be done.
+ * Encapsulates a duke.task to be done.
  */
 public class ToDos extends Task {
 
     /**
-     * Constructor for a ToDos object.
+     * Constructor for a duke.task.ToDos object.
      *
-     * @param description Description of the task.
+     * @param description Description of the duke.task.
      */
     public ToDos(String description) {
         super(description);
@@ -19,9 +21,9 @@ public class ToDos extends Task {
 
 
     /**
-     * Returns the string form of the ToDos object.
+     * Returns the string form of the duke.task.ToDos object.
      *
-     * @return The string form of the ToDos.
+     * @return The string form of the duke.task.ToDos.
      */
     @Override
     public String toString() {

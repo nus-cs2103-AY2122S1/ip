@@ -1,9 +1,11 @@
+package duke;
+
 /**
- * Encapsulation of an Exception thrown by Duke's processes.
+ * Encapsulation of an Exception thrown by duke.Duke's processes.
  */
 public class DukeException extends Exception {
     /**
-     * Constructor of a DukeException
+     * Constructor of a duke.DukeException
      *
      * @param message The message sent due to an Exception occurring.
      */

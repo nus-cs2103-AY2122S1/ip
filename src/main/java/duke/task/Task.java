@@ -1,17 +1,19 @@
+package duke.task;
+
 /**
- * Encapsulates a Task with a String description.
+ * Encapsulates a duke.task.Task with a String description.
  */
 public class Task {
-    /** The description of the task */
+    /** The description of the duke.task */
     private String description;
 
-    /** The state of whether the task has been done */
+    /** The state of whether the duke.task has been done */
     private boolean isDone;
 
     /**
-     * Constructor of a Task object.
+     * Constructor of a duke.task.Task object.
      *
-     * @param description Description of the task.
+     * @param description Description of the duke.task.
      */
     public Task(String description) {
         this.description = description;
@@ -19,16 +21,16 @@ public class Task {
     }
 
     /**
-     * Returns the checkmark for whether the task is done.
+     * Returns the checkmark for whether the duke.task is done.
      *
-     * @return The whether the task is done.
+     * @return The whether the duke.task is done.
      */
     private String status() {
         return this.isDone ? "X" : " ";
     }
 
     /**
-     * Marks the task as done.
+     * Marks the duke.task as done.
      */
     public void done() {
         this.isDone = true;
@@ -42,9 +44,9 @@ public class Task {
     }
 
     /**
-     * Returns the string form of the task object.
+     * Returns the string form of the duke.task object.
      *
-     * @return The string form of the task.
+     * @return The string form of the duke.task.
      */
     @Override
     public String toString() {

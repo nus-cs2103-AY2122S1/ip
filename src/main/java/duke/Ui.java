@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.DukeList;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -9,7 +13,7 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static String greeting = "\nHello I'm Duke!\n"
+    private static String greeting = "\nHello I'm duke.Duke!\n"
             + "What can I do for you?\n";
     private static String exit = "Bye. Hope to see you again soon!";
 
