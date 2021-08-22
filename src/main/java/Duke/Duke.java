@@ -1,10 +1,12 @@
+package Duke;
+
 import java.util.Locale;
-import Duke.Ui;
-import Duke.Parser;
+
+import Task.Task;
 
 
 public class Duke {
-    enum Commands{
+    public enum Commands{
         BYE,
         DONE,
         LIST,
@@ -23,7 +25,7 @@ public class Duke {
         taskList = new TaskList();
         this.store.retrieveTasks(taskList);
         this.ui = new Ui();
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+        System.out.println("Hello! I'm Duke.Duke\n" + "What can I do for you?");
     }
 
     private void run(){

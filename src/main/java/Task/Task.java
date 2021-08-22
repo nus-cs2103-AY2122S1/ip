@@ -1,8 +1,13 @@
+package Task;
+
+import Duke.DukeException;
+import Duke.Duke.Commands;
+
 public abstract class Task {
     private String name;
     private boolean done;
 
-    public Task(String name) throws DukeException{
+    public Task(String name) throws DukeException {
         if(name.isBlank()) {
             throw new DukeException("Please specify name");
         }
@@ -10,7 +15,7 @@ public abstract class Task {
         this.done = false;
     }
 
-    public static Task taskFactory(Duke.Commands cmd, String rest) throws DukeException{
+    public static Task taskFactory(Commands cmd, String rest) throws DukeException{
         Task newTask;
         String[] name_delimit;
         switch (cmd) {
@@ -36,7 +41,7 @@ public abstract class Task {
     }
     public static Task getTask(String s){
         String[] parts = s.split("\\|");
-        Duke.Commands cmd = Duke.Commands.valueOf(parts[0]);
+        Commands cmd = Commands.valueOf(parts[0]);
         Task t = taskFactory(cmd, parts[1]);
         if(parts[2].equals("1")){
             t.markDone();

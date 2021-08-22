@@ -1,4 +1,7 @@
+package Duke;
+
 import java.util.ArrayList;
+import Task.Task;
 
 public class TaskList {
     private ArrayList<Task> storage;
@@ -35,7 +38,7 @@ public class TaskList {
             throw new DukeException("no such task");
         }
         this.storage.remove(Id);
-        System.out.println("removed Task " + Id);
+        System.out.println("removed Task.Task " + Id);
     }
 
     public String saveTasklist(){

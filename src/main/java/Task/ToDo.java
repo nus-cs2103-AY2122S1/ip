@@ -1,4 +1,8 @@
-public class ToDo extends Task{
+package Task;
+
+import Duke.DukeException;
+
+public class ToDo extends Task {
     public ToDo(String name) throws DukeException {
         super(name);
     }
