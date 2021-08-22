@@ -16,6 +16,15 @@ public class TaskList {
     }
 
     /**
+     * Constructor for TaskList.
+     *
+     * @param list List of task.
+     */
+    public TaskList(ArrayList<Task> list) {
+        this.list = list;
+    }
+
+    /**
      * Format the raw information by splitting it to get the description and due date of deadline.
      *
      * @param info User input containing relevant information.
@@ -79,6 +88,7 @@ public class TaskList {
         default:
             throw new DukeException("Error: No such task type!");
         }
+        Duke.save(toDataFileInput());
         String totalTask = String.format("Now you have %d task(s) in the list.", list.size());
         return String.format("Got it! I've added this task:\n  %s\n%s", list.get(list.size() - 1), totalTask);
     }
@@ -112,6 +122,7 @@ public class TaskList {
         if (index >= 0 && index < list.size()) {
             if (list.get(index).getStatusIcon().equals(" ")) {
                 list.get(index).markDone();
+                Duke.save(toDataFileInput());
                 return "Good job! I've marked this task as done:\n  " + list.get(index);
             } else {
                 return "Task has already been completed!";
@@ -132,9 +143,23 @@ public class TaskList {
         if (index >= 0 && index < list.size()) {
             Task removed = list.remove(index);
             String totalTask = String.format("Now you have %d task(s) in the list.", list.size());
+            Duke.save(toDataFileInput());
             return String.format("Noted! I've removed this task:\n  %s\n%s", removed, totalTask);
         } else {
             throw new DukeException("No such task :< (Check the index input!!!)");
         }
+    }
+
+    /**
+     * Converts the list of tasks to a formatted version to be placed in data.txt.
+     *
+     * @return Formatted string to be placed in data.txt.
+     */
+    public String toDataFileInput() {
+        String data = "";
+        for (int i = 0; i < list.size(); i++) {
+            data += list.get(i).format() + "\n";
+        }
+        return data;
     }
 }

@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -18,12 +23,36 @@ public class Duke {
             "Hello! I'm Duke :)\nWhat can I do for you? (Type 'help' to see what I can do!)", DIVIDER, PROMPT);
     private static final String GOODBYEMESSAGE = String.format("%s\n%s\n%s", DIVIDER,
             "Bye :< Hope to see you again soon!", DIVIDER);
+    private static final String DIRECTORY = "./data/";
+    private static final String FILEPATH = DIRECTORY + "data.txt";
 
     private static TaskList taskList;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        taskList = new TaskList();
+
+        // Set up files and intialise TaskList
+        File file = new File(FILEPATH);
+        if (file.exists()) {
+            try {
+                taskList = new TaskList(retrieveData(file));
+            } catch (FileNotFoundException | DukeException e) {
+                formatPrint(e.getMessage());
+            }
+        } else {
+            try {
+                System.out.println("data.txt file does not exist. Creating new file...");
+                File directory = new File(DIRECTORY);
+                if (!directory.exists()) {
+                    directory.mkdir();
+                }
+                file.createNewFile();
+                System.out.println("data.txt created successfully! :>");
+                taskList = new TaskList();
+            } catch (IOException e) {
+                formatPrint(e.getMessage());
+            }
+        }
 
         // Welcome message
         System.out.println(WELCOMEMESSAGE);
@@ -135,5 +164,65 @@ public class Duke {
                     command.label));
         }
         return Integer.parseInt(info[1]) - 1;
+    }
+
+    /**
+     * Returns an ArrayList containing all the tasks in the data.txt file.
+     * If data.txt is empty, an Empty ArrayList is returned.
+     *
+     * @param file File Object for data.txt.
+     * @return ArrayList containing tasks.
+     * @throws FileNotFoundException If file is missing.
+     * @throws DukeException If file is corrupted.
+     */
+    public static ArrayList<Task> retrieveData(File file) throws FileNotFoundException, DukeException {
+        Scanner fileReader = new Scanner(file);
+        ArrayList<Task> taskList = new ArrayList<>();
+        if (file.length() == 0) {
+            System.out.println("No tasks to load!");
+            return taskList;
+        }
+        while (fileReader.hasNextLine()) {
+            String data = fileReader.nextLine();
+            String[] dataBreakdown = data.split(" \\| ");
+            Task task;
+            switch (dataBreakdown[0]) {
+            case "T":
+                task = new ToDo(dataBreakdown[2]);
+                taskList.add(task);
+                break;
+            case "D":
+                task = new Deadline(dataBreakdown[2], dataBreakdown[3]);
+                taskList.add(task);
+                break;
+            case "E":
+                task = new Event(dataBreakdown[2], dataBreakdown[3]);
+                taskList.add(task);
+                break;
+            default:
+                throw new DukeException("File has been corrupted @_@");
+            }
+            if (dataBreakdown[1].equals("1")) {
+                task.markDone();
+            }
+        }
+        fileReader.close();
+        System.out.println("YAY! File has been loaded Successfully! :>");
+        return taskList;
+    }
+
+    /**
+     * Saves data into data.txt files after changes have been made by user.
+     *
+     * @param data Formatted TaskList to be stored in data.txt.
+     */
+    public static void save(String data) {
+        try {
+            FileWriter fileWriter = new FileWriter("./data/data.txt");
+            fileWriter.write(data);
+            fileWriter.close();
+        } catch (IOException e) {
+            formatPrint(e.getMessage());
+        }
     }
 }
