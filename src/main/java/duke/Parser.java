@@ -20,6 +20,12 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
 
+    /**
+     * Reads user input and returns the corresponding Command.
+     *
+     * @param userInput User's input into Duke chatbot.
+     * @return Command that can be executed to perform a set of actions.
+     */
     public static Command parse(String userInput) {
         // Only exactly "list" will be accepted for ListCommand.
         if (userInput.equals(Commands.LIST.getCommand())) {
@@ -45,6 +51,18 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks user input for missing spaces and invalid commands.
+     * This only checks for missing spaces in initial command and if the initial command is invalid.
+     * For instance, in "event task description/at 1/1/2020", it only checks if there is a space following
+     * the initial command "event" and if the initial command "event" is a valid command.
+     *
+     * @param userInput User's input into Duke chatbot.
+     * @param command The starting command of user's input.
+     * @param exceptionMessage Error message to be printed when user input is invalid.
+     * @throws DukeException If user command is invalid.
+     * @throws DukeException If user input contains missing spaces.
+     */
     public static void checkInputValidity(String userInput, String command,
             String exceptionMessage) throws DukeException {
 
@@ -64,6 +82,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Prepends zeroes to the string till a desired length of the output string.
+     *
+     * @param original String to prepend zeroes to.
+     * @param expected Length of output string.
+     * @return String prepended with zeroes till desired length.
+     * @throws DukeException If string input is larger than expected length of output string.
+     */
     private static String padZeros(String original, int expected) throws DukeException {
         String output = original;
         if (original.length() < expected) {
@@ -77,6 +103,14 @@ public class Parser {
         return output;
     }
 
+    /**
+     * Parses a LocalDate into a string format "d MMMM yyyy" to be printed to the user.
+     * For instance, the LocalDate equivalent of 2020-01-01 will be parsed into "1 January 2020".
+     *
+     * @param localDate LocalDate to be parsed.
+     * @return Formatted string representing the date of LocalDate in d MMMM yyyy format.
+     * @throws DukeException
+     */
     public static String parseLocalDate(LocalDate localDate) throws DukeException {
         try {
             return localDate.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
@@ -85,6 +119,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a formatted string into LocalDate.
+     * The formatted string must be of the format "dd/mm/yyyy".
+     *
+     * @param dateString Formatted string to be parsed.
+     * @return LocalDate equivalent of the date represented by dateString.
+     * @throws DukeException If dateString is of an invalid date format.
+     * @throws DukeException If dateString represents a date later than "+999999999-12-31" or
+     *                       earlier than "-999999999-01-01".
+     */
     public static LocalDate toLocalDate(String dateString) throws DukeException {
         String[] split = dateString.split("[/\\s]");
 
@@ -112,6 +156,16 @@ public class Parser {
         return localDate;
     }
 
+    /**
+     * Parses index provided in user input into an int.
+     * For instance, when user inputs "done 1", calling parseUserNumInput on this input will return 1.
+     * In this case, the input's identifying command is "done".
+     *
+     * @param userInput User's input into Duke chatbot.
+     * @param command The identifying command in user input.
+     * @return An int representing an index.
+     * @throws DukeException
+     */
     public static int parseUserNumInput(String userInput, Commands command) throws DukeException {
         // Parses integer in user input. Invalid user input could throw NumberFormatException.
         try {
@@ -132,6 +186,27 @@ public class Parser {
         return -1;
     }
 
+    /**
+     * Parses user description into description and time based on initial command and descriptor used.
+     * User description is defined to be the part of user's input following the initial command.
+     * For instance, the user description of "event task description /at 1/1/2020" is
+     * "task description /at 1/1/2020", where the initial command "event" and the space after it is removed.
+     * An Event would require descriptor "at" whereas a Deadline would require descriptor "by".
+     * The separator is a char that comes before the descriptor.
+     * For instance, '/' is the separator in "/at".
+     * Calling parseUserDescriptionInput on the example description will give a String array
+     * of 2 elements ["task description", "1/1/2020"].
+     *
+     * @param userDescription User's input into Duke chatbot.
+     * @param descriptor Descriptor to separate description and time with.
+     * @param separator char that comes before the descriptor.
+     * @param command The initial command in user's input.
+     * @return String array of 2 elements with the task description at index 0 and time at index 1.
+     * @throws DukeException If user input is missing the expected descriptor or a time input.
+     * @throws DukeException If user input is missing a task description.
+     * @throws DukeException If user input is using the wrong descriptor.
+     * @throws DukeException If user input has missing spaces.
+     */
     public static String[] parseUserDescriptionInput(String userDescription, Descriptors descriptor,
                                                       char separator, Commands command) throws DukeException {
         // Index of separator in userDescription.

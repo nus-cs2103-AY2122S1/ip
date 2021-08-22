@@ -7,13 +7,34 @@ import duke.TaskList;
 import duke.Ui;
 import duke.Ui.Commands;
 
+/**
+ * Represents a command that can be executed to mark a task as done, print the marked task,
+ * then save tasks to storage.
+ */
 public class MarkCommand extends Command {
     private final String userInput;
 
+    /**
+     * Constructor for MarkCommand.
+     * Creates a MarkCommand containing user input.
+     *
+     * @param userInput User's input into Duke chatbot.
+     */
     public MarkCommand(String userInput) {
         this.userInput = userInput;
     }
 
+    /**
+     * Marks task at index specified by user input as done, then prints the marked task.
+     * Accepts user input of the form "done N", where N can be any valid index.
+     * Index provided should be 1-based.
+     *
+     * @param tasks TaskList to mark a task in.
+     * @param ui Ui to get enums, response messages and exception messages from.
+     * @throws DukeException If user input is missing an index.
+     * @throws DukeException If user input for index is not an integer.
+     * @throws DukeException If user input for index is invalid.
+     */
     private void markTask(TaskList tasks, Ui ui) throws DukeException {
 
         // Preliminary check for any input following command.
@@ -39,6 +60,15 @@ public class MarkCommand extends Command {
 
     }
 
+    /**
+     * Marks a task at index specified by user input as done, prints the marked task, then saves tasks to storage.
+     * Accepts user input of the form "done N", where N can be any valid index.
+     * Index provided should be 1-based.
+     *
+     * @param tasks TaskList that command executes upon.
+     * @param ui Ui contains enums, response messages and exception messages that command execution will use.
+     * @param storage Storage that command executes upon.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storable storage) {
         try {
@@ -52,6 +82,12 @@ public class MarkCommand extends Command {
         }
     }
 
+    /**
+     * Indicates whether another object is equals to this MarkCommand.
+     *
+     * @param obj Other object to be compared to.
+     * @return A boolean indicating whether the other object is equal to this MarkCommand.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof MarkCommand) {

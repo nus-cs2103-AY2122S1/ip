@@ -8,13 +8,34 @@ import duke.Ui;
 import duke.Ui.Commands;
 import duke.task.Task;
 
+/**
+ * Represents a command that can be executed to delete a task based on user input,
+ * print the task deleted and new total count of tasks, then save tasks to storage.
+ */
 public class DeleteCommand extends Command {
     private final String userInput;
 
+    /**
+     * Constructor for DeleteCommand.
+     * Creates DeleteCommand containing user input.
+     *
+     * @param userInput User's input into Duke chatbot.
+     */
     public DeleteCommand(String userInput) {
         this.userInput = userInput;
     }
 
+    /**
+     * Deletes a task based on user input, then prints the task deleted and new total count of tasks.
+     * Task is deleted at index provided by user input in format "delete N", where N can be any valid index.
+     * Index provided should be 1-based.
+     *
+     * @param tasks TaskList to delete task from.
+     * @param ui Ui to get enums, response messages and exception messages from.
+     * @throws DukeException If user input is missing an index.
+     * @throws DukeException If user input for index is not an integer.
+     * @throws DukeException If user input for index is invalid.
+     */
     private void deleteTask(TaskList tasks, Ui ui) throws DukeException {
 
         // Preliminary check for any input following command.
@@ -39,6 +60,16 @@ public class DeleteCommand extends Command {
         ui.showDeleteSuccess(deletedTask, tasks.size());
     }
 
+    /**
+     * Deletes a task based on user input, prints the task deleted and new total count of tasks,
+     * then saves tasks to storage.
+     * Task is deleted at index provided by user input in format "delete N", where N can be any valid index.
+     * Index provided should be 1-based.
+     *
+     * @param tasks TaskList that command executes upon.
+     * @param ui Ui contains enums, response messages and exception messages that command execution will use.
+     * @param storage Storage that command executes upon.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storable storage) {
         try {
@@ -52,6 +83,12 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Indicates whether another object is equals to this DeleteCommand.
+     *
+     * @param obj Other object to be compared to.
+     * @return A boolean indicating whether the other object is equal to this DeleteCommand.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof DeleteCommand) {

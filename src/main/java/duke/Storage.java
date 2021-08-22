@@ -20,16 +20,29 @@ import java.util.List;
  */
 public class Storage implements Storable {
 
-    // File name for saved tasks.
+    /** Filename of file to be saved to */
     private final String SAVE_FILENAME;
 
+    /**
+     * Constructor for Storage.
+     * Creates a Storage with a specified filename as the target file for save and read operations.
+     *
+     * @param fileName filename of file to be saved to and read from.
+     */
     public Storage(String fileName) {
         this.SAVE_FILENAME = fileName;
     }
 
-    // | is a special character that has to be escaped.
+    /** Tasks saved are separated by SAVE_SEPARATOR */
     private static final String SAVE_SEPARATOR = " ~ ";
 
+    /**
+     * Converts LocalDate into "dd/MM/yyyy" string format for saving.
+     *
+     * @param localDate LocalDate to be converted.
+     * @return Formatted String suitable for saving.
+     * @throws DukeException If localDate cannot be parsed into save format.
+     */
     private static String toSaveDateFormat(LocalDate localDate) throws DukeException {
         try {
             return localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -38,6 +51,13 @@ public class Storage implements Storable {
         }
     }
 
+    /**
+     * Converts a Task into a formatted string suitable for saving.
+     *
+     * @param task Task to be converted.
+     * @return Formatted String suitable for saving.
+     * @throws DukeException If date cannot be parsed to save format.
+     */
     private static String toSaveFormat(Task task) throws DukeException {
         // Initialize StringBuilder.
         StringBuilder stringBuilder = new StringBuilder();
@@ -70,6 +90,15 @@ public class Storage implements Storable {
         return stringBuilder.toString();
     }
 
+    /**
+     * Converts string read from specified file into corresponding tasks based on the string identifier.
+     *
+     * @param save The read string.
+     * @return Task corresponding to the read string.
+     * @throws DukeException if string cannot be parsed to date.
+     * @throws DukeException if string cannot be parsed to integer.
+     * @throws DukeException if string does not have sufficient parts for the task it represents.
+     */
     private static Task parseSaveFormat(String save) throws DukeException {
         // Split save string by the save separator.
         String[] saveSplit = save.split(SAVE_SEPARATOR);
@@ -110,6 +139,14 @@ public class Storage implements Storable {
         }
     }
 
+    /**
+     * Reads tasks from specified file and returns a TaskList containing the retrieved tasks.
+     * Doubles down as an initializer for the save file if the data directory and the save file are missing.
+     *
+     * @return TaskList containing retrieved tasks.
+     * @throws DukeException If there are errors reading the file.
+     * @throws DukeException If there tasks cannot be parsed.
+     */
     public TaskList readTasksFromData() throws DukeException {
         // Initialize an ArrayList for duke.task.Task objects.
         ArrayList<Task> tasks = new ArrayList<>();
@@ -143,6 +180,13 @@ public class Storage implements Storable {
         return new TaskList(tasks);
     }
 
+    /**
+     * Saves tasks to specified file.
+     *
+     * @param taskList TaskList containing the tasks to be saved to specified file.
+     * @throws DukeException If tasks cannot be written to save file.
+     * @throws DukeException If tasks cannot be converted into their corresponding save formats.
+     */
     public void saveTasksToData(TaskList taskList) throws DukeException {
         // Extracts ArrayList from duke.TaskList object.
         ArrayList<Task> tasks = taskList.getTasks();
