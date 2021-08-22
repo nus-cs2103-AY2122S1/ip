@@ -1,21 +1,20 @@
 package duke;
 
 import duke.command.AddCommand;
-import duke.command.ListCommand;
-import duke.command.DeleteCommand;
-import duke.command.MarkCommand;
 import duke.command.DateCommand;
+import duke.command.DeleteCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParserTest {
 
     private static final LocalDate TIME = LocalDate.parse("2020-01-01");
-
-    private final Ui ui = new Ui();
 
     @Test
     void parse_listInput_listCommand() {

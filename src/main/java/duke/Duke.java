@@ -1,7 +1,6 @@
 package duke;
 
 import duke.Ui.Commands;
-
 import duke.command.Command;
 
 import java.util.Scanner;
