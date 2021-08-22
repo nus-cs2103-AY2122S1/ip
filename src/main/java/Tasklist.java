@@ -1,16 +1,10 @@
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 7. Save
+ * Current Progress: A-Enums
  *
  * Description:
  * Encapsulates the TaskList which contains a list of tasks
@@ -46,16 +40,6 @@ public class Tasklist {
     }
 
     /**
-     * Adds tasks read from store in hard drive
-     *
-     * @param storeTask Task that was saved in hard drive to be loaded into
-     *                  current task list
-     */
-    public void addTask(Task storeTask) {
-        tasks.add(storeTask);
-    }
-
-    /**
      * Adds the task to the list
      *
      * @param description String containing the description and time of the task
@@ -63,7 +47,7 @@ public class Tasklist {
      * @return String Returns the success message of added the task to the list
      * @throws DukeException throws a duke exception depending on the error found
      */
-    public String addTask(String description, Command task) throws DukeException, IOException {
+    public String addTask(String description, Command task) throws DukeException {
 
         Task newTask;
         String taskType = Command.changeToString(task);
@@ -73,13 +57,11 @@ public class Tasklist {
                 break;
             case "deadline":
                 String[] deadlineDetails = description.split(" /by ", 2);
-                String deadlineTime = checkTime(deadlineDetails, "deadline");
-                newTask = new Deadline(deadlineDetails[0], deadlineTime);
+                newTask = new Deadline(deadlineDetails[0], checkTime(deadlineDetails, "deadline"));
                 break;
             case "event":
                 String[] eventDetails = description.split(" /at ", 2);
-                String eventTime =  checkTime(eventDetails, "event");
-                newTask = new Event(eventDetails[0], eventTime);
+                newTask = new Event(eventDetails[0], checkTime(eventDetails, "event"));
                 break;
             default:
                 //unexpected error occurs
@@ -101,7 +83,7 @@ public class Tasklist {
      * @throws IndexOutOfRangeException throws the exception if index given is out of
      *              range of the current list
      */
-    public String markTask(int taskNumber) throws IndexOutOfRangeException, IOException {
+    public String markTask(int taskNumber) throws IndexOutOfRangeException {
 
         if (taskNumber > tasks.size()) {
 
@@ -134,7 +116,7 @@ public class Tasklist {
      * @throws IndexOutOfRangeException throws the exception if index given is out of
      *              range of the current list
      */
-    public String deleteTask(int taskNumber) throws IndexOutOfRangeException, IOException {
+    public String deleteTask(int taskNumber) throws IndexOutOfRangeException {
 
         if (taskNumber> tasks.size()) {
 
@@ -153,11 +135,10 @@ public class Tasklist {
 
     }
 
-
     @Override
     public String toString() {
 
-        String listString = "";
+        String listString = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             String listItem = String.format("%d.%s", (i + 1), tasks.get(i).toString());
             if (i == (tasks.size() - 1)) {
