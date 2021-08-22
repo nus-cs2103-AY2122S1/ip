@@ -2,9 +2,12 @@ package tasks;
 
 import tasks.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
     private static final String TAG = "D";
-    private String by;
+    private LocalDate by;
 
     /**
      * Constructs a new Deadline object with the specified task description, due date and task status.
@@ -13,7 +16,7 @@ public class Deadline extends Task {
      * @param by Due date of the task.
      * @param isDone Completion status of the task.
      */
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, LocalDate by, boolean isDone) {
         super(description, isDone);
         this.by = by;
     }
@@ -25,11 +28,12 @@ public class Deadline extends Task {
 
     @Override
     public String getDueDate() {
-        return this.by;
+        String dueDate = by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return dueDate;
     }
 
     @Override
     public String toString() {
-        return "[" + TAG + "]" + super.toString() + " (by: " + by + ")";
+        return "[" + TAG + "]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

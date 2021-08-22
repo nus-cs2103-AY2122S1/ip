@@ -7,18 +7,15 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
-import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    // list used to store task entered by user
-    private ArrayList<Task> items;
+    // list used to store text entered by user
+    private ArrayList<Task> items = new ArrayList<>();
 
-    private final boolean DEFAULT_TASK_STATUS = false;
-
-    // space used to store data entered by user
-    private Storage storage;
+    private final boolean DEFAULT_STATUS = false;
 
     // Lines used to indicate a block of message
     private final String HORIZONTAL_LINE_HEAD = "\t____________________________________________________________";
@@ -28,7 +25,7 @@ public class Duke {
     private final String WELCOME_MSG = "Hello! I am Matthew!\n\t What can I do for you?";
     private final String EXIT_MSG = "Bye. Don't have a good day... Have a great day!!!";
     private final String DISPLAY_LIST_MSG = "\t Here are the tasks in your list:";
-    private final String TASK_DONE_MSG = "Well done! You have completed: \n\t  ";
+    private final String TASK_DONE_MSG = "Nice! I've marked this task as done: \n\t  ";
     private final String TASK_ADDED_MSG = "Got it. I've added this task:\n\t   ";
     private final String TASK_DELETED_MSG = "Got it. I've deleted this task:\n\t   ";
 
@@ -44,17 +41,8 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        Duke chatBot = new Duke("data/duke.txt");
+        Duke chatBot = new Duke();
         chatBot.start();
-    }
-
-    /**
-     * Constructs a Duke object with the specified file path.
-     *
-     * @param filePath File path of the data file.
-     */
-    public Duke(String filePath) {
-        this.storage = new Storage(filePath);
     }
 
     /**
@@ -62,29 +50,16 @@ public class Duke {
      * Chat bot starts receiving commands from user and echo back the command until terminated.
      */
     public void start() {
-        // attempt to load past data from the given filepath
-        try {
-            items = storage.loadTask();
-        } catch (IOException | NoSuchTaskException e) {
-            printFormattedMsg(e.getMessage());
-        }
-
-        // prints welcome message
         greet();
 
         // scanner to take in user's input(s)
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().trim();
 
-
         while(!input.equalsIgnoreCase(EXIT_TAG)) {
             try {
-                // check the input tag
                 checkTag(input);
-
-                // updates the data storage
-                storage.saveTask(items);
-            } catch (DukeException | IOException e) {
+            } catch (DukeException e) {
                 printFormattedMsg(e.getMessage());
             } finally {
                 input = scanner.nextLine().trim();
@@ -97,42 +72,42 @@ public class Duke {
     }
 
     /**
-     * Prints the welcome message when the chat bot is started.
+     * Greets the users when chat bot is started.
      */
     private void greet() {
         printFormattedMsg(WELCOME_MSG);
     }
 
     /**
-     * Prints the goodbye message when the chat bot is terminated.
+     * Greets the users when chat bot is terminated.
      */
     private void exit() {
         printFormattedMsg(EXIT_MSG);
     }
 
     /**
-     * Checks if there is a tag in the user input that matches one of the tags recognised
-     * by the chat bot. If it matches, carry out to corresponding activity.
-     * Otherwise, throws an UnknownTagException that indicates that the format used is wrong.
+     * Check if the inputted string match the 'list' tag.
+     * Prints the list of items if inputted msg is 'list.
+     * Otherwise, adds the item to the list.
      *
-     * @param input User's input.
+     * @param msg User's input.
      * @throws UnknownTagException Tag used is undefined.
      */
-    private void checkTag(String input) throws UnknownTagException {
-        String msgToCheck = input.toLowerCase();
+    private void checkTag(String msg) throws UnknownTagException {
+        String msgToCheck = msg.toLowerCase();
         try {
             if (msgToCheck.equals(LIST_TAG)) {
                 displayTasks();
             } else if (msgToCheck.contains(DONE_TAG)) {
-                taskDone(input);
+                taskDone(msg);
             } else if (msgToCheck.contains(TODO_TAG)) {
-                addTodo(input);
+                addTodo(msg);
             } else if (msgToCheck.contains(DEADLINE_TAG)) {
-                addDeadline(input);
+                addDeadline(msg);
             } else if (msgToCheck.contains(EVENT_TAG)) {
-                addEvent(input);
-            } else if (input.contains(DELETE_TAG)) {
-                deleteTask(input);
+                addEvent(msg);
+            } else if (msg.contains(DELETE_TAG)) {
+                deleteTask(msg);
             } else {
                 throw new UnknownTagException();
             }
@@ -142,40 +117,40 @@ public class Duke {
     }
 
     /**
-     * Adds an event to the list.
+     * Add an event to the list.
      *
-     * @param input User's input
+     * @param msg Input from user
      * @throws IllegalFormatException Wrong format used by user.
      */
-    private void addEvent(String input) throws IllegalFormatException{
-        Task newTask = new Event(getTaskDesc(input), getTaskDates(input), DEFAULT_TASK_STATUS);
+    private void addEvent(String msg) throws IllegalFormatException{
+        Task newTask = new Event(getTaskDesc(msg), getTaskDates(msg), DEFAULT_STATUS);
         addTask(newTask);
     }
 
     /**
-     * Adds a deadline to the list.
+     * Add a deadline to the list.
      *
-     * @param input User's input
+     * @param msg Input from user
      * @throws IllegalFormatException Wrong format used by user.
      */
-    private void addDeadline(String input) throws IllegalFormatException{
-        Task newTask = new Deadline(getTaskDesc(input), getTaskDates(input), DEFAULT_TASK_STATUS);
+    private void addDeadline(String msg) throws IllegalFormatException{
+        Task newTask = new Deadline(getTaskDesc(msg), getTaskDates(msg), DEFAULT_STATUS);
         addTask(newTask);
     }
 
     /**
-     * Adds a todo to the list.
+     * Add a todo to the list.
      *
-     * @param input User's input.
+     * @param msg Input from user.
      * @throws IllegalFormatException Wrong format used by user.
      */
-    private void addTodo(String input) throws IllegalFormatException{
-        Task newTask = new Todo(getTodoDesc(input), DEFAULT_TASK_STATUS);
+    private void addTodo(String msg) throws IllegalFormatException{
+        Task newTask = new Todo(getTodoDesc(msg), DEFAULT_STATUS);
         addTask(newTask);
     }
 
     /**
-     * Displays the list of task that has been added by the user.
+     * Display the list of task that has been added.
      */
     private void displayTasks() {
         System.out.println(HORIZONTAL_LINE_HEAD);
@@ -192,14 +167,14 @@ public class Duke {
     }
 
     /**
-     * Marks the task as completed once it is done.
+     * Mark the task as completed once it is done.
      *
-     * @param input User's input.
-     * @throws NoSuchTaskException Invalid id used, id used is larger/smaller than the number of tasks in the list.
+     * @param msg Input from user.
+     * @throws NoSuchTaskException Invalid id used.
      * @throws IllegalFormatException Wrong format used by user.
      */
-    private void taskDone(String input) throws NoSuchTaskException, IllegalFormatException{
-        int index = getTaskId(input);
+    private void taskDone(String msg) throws NoSuchTaskException, IllegalFormatException{
+        int index = getTaskId(msg);
         Task item = this.items.get(index);
         item.taskCompleted();
 
@@ -207,15 +182,8 @@ public class Duke {
         printFormattedMsg(content);
     }
 
-    /**
-     * Deletes the task as requested by the user.
-     *
-     * @param input User's input
-     * @throws NoSuchTaskException Invalid id used, id used is larger/smaller than the number of tasks in the list.
-     * @throws IllegalFormatException Wrong format used by user.
-     */
-    private void deleteTask(String input) throws NoSuchTaskException, IllegalFormatException {
-        int index = getTaskId(input);
+    private void deleteTask(String msg) throws NoSuchTaskException, IllegalFormatException {
+        int index = getTaskId(msg);
         Task task = this.items.get(index);
         this.items.remove(index);
 
@@ -225,25 +193,25 @@ public class Duke {
     /**
      * Returns the id of the task that has been completed.
      *
-     * @param input User's input
+     * @param msg Input of user
      * @return An integer indicating the id of the task that has been completed.
-     * @throws NoSuchTaskException Invalid id used, id used is larger/smaller than the number of tasks in the list.
-     * @throws IllegalFormatException Wrong format used by user.
+     * @throws NoSuchTaskException Invalid id enter.
+     * @throws IllegalFormatException Invalid id enter.
      */
-    private int getTaskId(String input) throws NoSuchTaskException, IllegalFormatException {
-        int position = input.indexOf(" ");
+    private int getTaskId(String msg) throws NoSuchTaskException, IllegalFormatException {
+        int position = msg.indexOf(" ");
 
-        if (position >= input.length() || position < 0) {
+        if (position >= msg.length() || position < 0) {
             throw new IllegalFormatException();
         } else {
             try {
-                int index = Integer.parseInt(input.substring(position + 1)) - 1;
+                int index = Integer.parseInt(msg.substring(position + 1)) - 1;
 
                 if (index >= items.size()) {
                     throw new NoSuchTaskException();
                 }
 
-                if (index > input.length() || index < 0) {
+                if (index > msg.length() || index < 0) {
                     throw new IllegalFormatException();
                 }
 
@@ -258,57 +226,57 @@ public class Duke {
     /**
      * Returns the description for a todo type task.
      *
-     * @param input User's input
+     * @param msg Input from user
      * @return A String representing the description of the task.
      * @throws StringIndexOutOfBoundsException Wrong Format used by the user.
      */
-    private String getTodoDesc(String input) throws IllegalFormatException{
-        int position = input.indexOf(" ");
+    private String getTodoDesc(String msg) throws IllegalFormatException {
+        int position = msg.indexOf(" ");
 
-        if (position >= input.length() || position < 0) {
+        if (position >= msg.length() || position < 0) {
             throw new IllegalFormatException();
         }
 
-        return input.substring(position).trim();
+        return msg.substring(position).trim();
     }
 
     /**
      * Returns the description for a deadline or event type task.
      *
-     * @param input User's input.
+     * @param msg Input from user
      * @return A String representing the description of the task.
      * @throws IllegalFormatException Wrong Format used by the user.
      */
-    private String getTaskDesc(String input) throws IllegalFormatException{
-        int startPosition = input.indexOf(" ");
-        int endPosition = input.indexOf("/");
+    private String getTaskDesc(String msg) throws IllegalFormatException{
+        int startPosition = msg.indexOf(" ");
+        int endPosition = msg.indexOf("/");
 
-        if (startPosition < 0 || startPosition >= input.length() || endPosition < 0 || endPosition >= input.length()) {
+        if (startPosition < 0 || startPosition >= msg.length() || endPosition < 0 || endPosition >= msg.length()) {
             throw new IllegalFormatException();
         }
 
-        return input.substring(startPosition, endPosition).trim();
+        return msg.substring(startPosition, endPosition).trim();
     }
 
     /**
      * Returns the date/time for the deadline/event respectively.
      *
-     * @param input Input from user.
+     * @param msg Input from user.
      * @return A String representing the date (deadline type) / time (event type).
      * @throws IllegalFormatException Wrong Format used by the user.
      */
-    private String getTaskDates(String input) throws IllegalFormatException{
-        int position = input.indexOf("/") + 2;
+    private LocalDate getTaskDates(String msg) throws IllegalFormatException{
+        int position = msg.indexOf("/") + 2;
 
-        if (position < 2 || position >= input.length()) {
+        if (position < 2 || position >= msg.length()) {
             throw new IllegalFormatException();
         }
 
-        return input.substring(position + 1).trim();
+        return LocalDate.parse(msg.substring(position + 1).trim());
     }
 
     /**
-     * Adds a new task to the list.
+     * Add a new task to the list.
      *
      * @param task The new task to be added
      */
@@ -327,8 +295,8 @@ public class Duke {
     }
 
     /**
-     * Formats the message; puts the message in a block wrap in between two horizontal lines.
-     * Format: Horizontal lines - message - Horizontal lines.
+     * Formats the message; puts the message in a block.
+     * Horizontal lines - message - Horizontal lines.
      *
      * @param msg The message to be printed by the chat bot.
      */
