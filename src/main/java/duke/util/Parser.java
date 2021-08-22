@@ -1,21 +1,13 @@
 package duke.util;
 
-import duke.Command;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.exception.IndexFormatException;
-import duke.exception.MissingDateTimeException;
-import duke.exception.MissingDescriptionException;
 import duke.exception.MissingIndexException;
-import duke.exception.MultipleDateTimeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Parser {
@@ -29,14 +21,33 @@ public class Parser {
     }
 
     /**
-     * Classifies the user's input into one of the Command.
+     * Parses the user's input and returns the appropriate command to act on.
      *
      * @param input Raw user's input.
      * @return The corresponding Command.
      */
-    public Command detectCommand(String input) {
+    public Command parse(String input) {
         String[] inputs = input.split(" ");
-        return Command.convertInput(inputs[0]);
+
+        String lowerCaseInput = inputs[0].toLowerCase();
+        switch (lowerCaseInput) {
+        case "list":
+            return new ListCommand(list);
+        case "done":
+            return new DoneCommand(list, input);
+        case "todo":
+        case "deadline":
+        case "event":
+            return new AddCommand(list, dataManager, lowerCaseInput, input);
+        case "exit":
+            return new ExitCommand();
+        case "delete":
+            return new DeleteCommand(input, list);
+        case "filter":
+            return new FilterCommand(input, list);
+        default:
+            return new UnrecognisedCommand(input);
+        }
     }
 
     /**
@@ -45,7 +56,7 @@ public class Parser {
      * @param input Raw user's input.
      * @return Desired index specified by user.
      */
-    public int extractIndex(String input) throws DukeException {
+    public static int extractIndex(String input) throws DukeException {
         String[] inputs = input.split(" ", 2);
 
         // Check whether user input index
@@ -58,100 +69,6 @@ public class Parser {
         }
 
         return Integer.parseInt(inputs[1]);
-    }
-
-    /**
-     * Handler for ToDos task creation.
-     *
-     * @param input Raw user's input.
-     */
-    public void handleTodo(String input) throws DukeException {
-        String[] extracted = input.split(" ", 2);
-
-        // Check whether description is entered
-        if (extracted.length < 2) {
-            throw new MissingDescriptionException();
-        }
-
-        ToDo task = new ToDo(extracted[1]);
-        list.addToList(task);
-        dataManager.writeToFile(task);
-    }
-
-    /**
-     * Handler for Deadline task creation.
-     *
-     * @param input Raw user's input.
-     */
-    public void handleDeadline(String input) throws DukeException {
-        // Check whether description is entered
-        if (input.split(" ").length < 2) {
-            throw new MissingDescriptionException();
-        }
-
-        String[] extracted = input.split(" ", 2)[1].split(" /by ");
-
-        // Check whether deadline is specified correctly
-        if (extracted.length < 2) {
-            throw new MissingDateTimeException("'/by'");
-        } else if (extracted.length > 2) {
-            throw new MultipleDateTimeException();
-        }
-
-        String description = extracted[0];
-        String deadline = extracted[1];
-        Deadline task = new Deadline(description, deadline);
-        list.addToList(task);
-        dataManager.writeToFile(task);
-    }
-
-    /**
-     * Handler for Event task creation.
-     *
-     * @param input Raw user's input.
-     */
-    public void handleEvent(String input) throws DukeException {
-        // Check whether description is entered
-        if (input.split(" ").length < 2) {
-            throw new MissingDescriptionException();
-        }
-
-        String[] extracted = input.split(" ", 2)[1].split(" /at ");
-
-        // Check whether deadline is specified correctly
-        if (extracted.length < 2) {
-            throw new MissingDateTimeException("'/at'");
-        } else if (extracted.length > 2) {
-            throw new MultipleDateTimeException();
-        }
-
-        String description = extracted[0];
-        String dateTime = extracted[1];
-        Event task = new Event(description, dateTime);
-        list.addToList(task);
-        dataManager.writeToFile(task);
-    }
-
-    public void handleFilter(String input) throws DukeException {
-        if (input.split(" ").length < 2) {
-            throw new DukeException("MissingDateTimeException: Enter a date/time after your command!");
-        } else if (input.split(" ").length > 2) {
-            throw new MultipleDateTimeException();
-        }
-
-        String[] extracted = input.split(" ", 2);
-        ArrayList<Task> extractedTask = list.filterList(extracted[1]);
-
-        if (extractedTask.size() == 0) {
-            Ui.prettyPrint("There are no tasks on this day.");
-        } else {
-            String output = String.format("Here are your tasks for this day:%s", ls + "\t\t");
-            int count = 1;
-            for (Task t : extractedTask) {
-                output = output.concat(String.format("[%d]. %s", count++, t + ls + "\t\t"));
-            }
-            Ui.prettyPrint(output);
-        }
     }
 
     public static Date parseDateTime(String dateTime) {

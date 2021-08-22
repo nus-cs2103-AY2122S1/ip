@@ -29,7 +29,7 @@ public class Ui {
     }
 
     /** Prints the welcome message when a user uses the bot for the first time. */
-    public void printWelcomeMessage() {
+    public static void printWelcomeMessage() {
         System.out.println(banner);
         prettyPrint(
                 "Hello! I'm Duke, your personal CLI bot!" + ls
@@ -49,7 +49,7 @@ public class Ui {
     }
 
     /** Prints the exit message when user types in the exit command. */
-    public void printExitMessage() {
+    public static void printExitMessage() {
         prettyPrint("Bye bye! See you again soon!");
     }
 
@@ -67,7 +67,7 @@ public class Ui {
         System.out.println(divider);
     }
 
-    public void printException(String message) {
+    public static void printException(String message) {
         System.err.println("\t" + message);
     }
 }

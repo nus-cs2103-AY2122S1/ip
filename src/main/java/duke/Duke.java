@@ -1,7 +1,7 @@
 package duke;
 
+import duke.command.Command;
 import duke.exception.DukeException;
-import duke.exception.NoSuchCommandException;
 import duke.util.DataManager;
 import duke.util.Parser;
 import duke.util.ToDoList;
@@ -16,15 +16,12 @@ import java.util.Scanner;
  * @version CS2103T AY21/22 Semester 1
  */
 public class Duke {
-    private final Ui ui;
     private final Parser parser;
-    private final ToDoList list;
     private final Scanner sc = new Scanner(System.in);
 
     public Duke(String filePath) {
-        ui = new Ui();
         DataManager dataManager = new DataManager(filePath);
-        list = new ToDoList(dataManager.readData(), dataManager);
+        ToDoList list = new ToDoList(dataManager.readData(), dataManager);
         parser = new Parser(list, dataManager);
     }
 
@@ -33,49 +30,21 @@ public class Duke {
     }
 
     public void run() {
-        ui.printWelcomeMessage();
+        Ui.printWelcomeMessage();
+        String input;
+        boolean isExit = false;
+        Command command;
 
-        String input = sc.nextLine();
-        Command command = parser.detectCommand(input);
-
-        while (command != Command.EXIT) {
+        while (!isExit) {
             try {
-                switch (command) {
-                case TODO:
-                    parser.handleTodo(input);
-                    break;
-                case DEADLINE:
-                    parser.handleDeadline(input);
-                    break;
-                case EVENT:
-                    parser.handleEvent(input);
-                    break;
-                case LIST:
-                    list.printList();
-                    break;
-                case DONE:
-                    int index = parser.extractIndex(input);
-                    list.markTaskAsDone(index);
-                    list.updateData();
-                    break;
-                case DELETE:
-                    index = parser.extractIndex(input);
-                    list.removeFromList(index);
-                    list.updateData();
-                    break;
-                case FILTER:
-                    parser.handleFilter(input);
-                    break;
-                case UNRECOGNISED:
-                    throw new NoSuchCommandException(input.split(" ", 2)[0]);
-                }
+                input = sc.nextLine();
+                command = parser.parse(input);
+                command.execute();
+                isExit = command.isExit();
             } catch (DukeException e) {
-                ui.printException(e.getMessage());
+                Ui.printException(e.getMessage());
             }
-            input = sc.nextLine();
-            command = parser.detectCommand(input);
         }
-        ui.printExitMessage();
     }
 }
 
