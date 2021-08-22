@@ -1,8 +1,16 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.tasks.Task;
+import duke.Ui;
+
 public class Add extends Command {
 
     private final Task t;
 
-    Add(Task t) {
+    public Add(Task t) {
         this.t = t;
     }
 

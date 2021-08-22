@@ -1,9 +1,21 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.exception.InvalidFormatException;
+import duke.exception.InvalidIntegerException;
+import duke.exception.InvalidTaskNumberException;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.tasks.Task;
+import duke.Ui;
+
 public class Action extends Command {
 
     private final Parser.Type type;
     private final String[] words;
 
-    Action(Parser.Type type, String[] words) {
+    public Action(Parser.Type type, String[] words) {
         this.type = type;
         this.words = words;
     }

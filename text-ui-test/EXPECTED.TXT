@@ -1,15 +1,17 @@
 
-	Hi! I'm Herbert, you can call me Herb  ٩(˘◡˘)۶
-	How can I help you?
+	@Herb:~$ 
+			 	Hi! I'm Herbert, you can call me Herb  ٩(˘◡˘)۶
+			 	How can I help you?
+			 
+			 	You can type:
+			 		 `list` to get a list of tasks
+			 		 `todo ${item}` to add a todo
+			 		 `deadline ${item} /by ${time}` to add a deadline
+			 		 `event ${item} /at ${time}` to add an event
+			 		 `done ${i}` to mark task i as completed
+			 		 `delete ${i}` to delete task i
+			 		 `bye` to end this chat
 
-	You can type:
-		 `list` to get a list of tasks
-		 `todo ${item}` to add a todo
-		 `deadline ${item} /by ${time}` to add a deadline
-		 `event ${item} /at ${time}` to add an event
-		 `done ${i}` to mark task i as completed
-		 `delete ${i}` to delete task i
-		 `bye` to end this chat
 
 --> 
 	@Herb:~$ Got it! I've added this task:
@@ -20,19 +22,15 @@
 	@Herb:~$ 1. [T][ ] complete IP
 
 --> 
-	@Herb:~$ Got it! I've added this task:
-			    [D][ ] presentation for hackers (by: Thursday)
-			 Now you have 2 tasks in the list.
+	@Herb:~$ Incorrect date/time format given!
 
 --> 
-	@Herb:~$ Got it! I've added this task:
-			    [E][ ] meeting (at: COM1 4-6pm)
-			 Now you have 3 tasks in the list.
+	@Herb:~$ Incorrect date/time format given!
 
 --> 
 	@Herb:~$ Got it! I've added this task:
 			    [T][ ] prep for lesson 3
-			 Now you have 4 tasks in the list.
+			 Now you have 2 tasks in the list.
 
 --> 
 	@Herb:~$ A task requires a description following it!
@@ -47,13 +45,23 @@
 	@Herb:~$ Invalid format! Try `deadline ${item} /by ${time}`
 
 --> 
+	@Herb:~$ Got it! I've added this task:
+			    [D][ ] wah (by: Aug 22 2021)
+			 Now you have 3 tasks in the list.
+
+--> 
+	@Herb:~$ Got it! I've added this task:
+			    [E][ ] hah (at: Aug 29 2021 11:30 AM)
+			 Now you have 4 tasks in the list.
+
+--> 
 	@Herb:~$ I'm not too sure what you mean :(
 
 --> 
 	@Herb:~$ 1. [T][ ] complete IP
-			 2. [D][ ] presentation for hackers (by: Thursday)
-			 3. [E][ ] meeting (at: COM1 4-6pm)
-			 4. [T][ ] prep for lesson 3
+			 2. [T][ ] prep for lesson 3
+			 3. [D][ ] wah (by: Aug 22 2021)
+			 4. [E][ ] hah (at: Aug 29 2021 11:30 AM)
 
 --> 
 	@Herb:~$ Not a valid task number!
@@ -66,11 +74,11 @@
 
 --> 
 	@Herb:~$ Nice, I've marked this task as done!
-			    [D][X] presentation for hackers (by: Thursday)
+			    [T][X] prep for lesson 3
 
 --> 
 	@Herb:~$ Nice, I've marked this task as done!
-			    [T][X] prep for lesson 3
+			    [E][X] hah (at: Aug 29 2021 11:30 AM)
 
 --> 
 	@Herb:~$ Enter valid integer!
@@ -84,12 +92,25 @@
 	@Herb:~$ Not a valid task number!
 
 --> 
-	@Herb:~$ Invalid format! Try `delete ${i}`
+	@Herb:~$ Noted, I've removed this task:
+			    [T][X] prep for lesson 3
+			 Now you have 2 tasks in the list.
 
 --> 
-	@Herb:~$ 1. [D][X] presentation for hackers (by: Thursday)
-			 2. [E][ ] meeting (at: COM1 4-6pm)
-			 3. [T][X] prep for lesson 3
+	@Herb:~$ Noted, I've removed this task:
+			    [D][ ] wah (by: Aug 22 2021)
+			 Now you have 1 task in the list.
+
+--> 
+	@Herb:~$ Noted, I've removed this task:
+			    [E][X] hah (at: Aug 29 2021 11:30 AM)
+			 Now you have 0 tasks in the list.
+
+--> 
+	@Herb:~$ Not a valid task number!
+
+--> 
+	@Herb:~$ No tasks added yet!
 
 --> 
 	Sad to see you go :(

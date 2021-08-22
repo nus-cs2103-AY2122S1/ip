@@ -1,19 +1,23 @@
+package duke;
+
+import duke.tasks.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     private enum Format {
         LIST,
         SAVE
     }
 
-    TaskList() {
+    public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
-    TaskList(ArrayList<Task> taskList) {
+    public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 

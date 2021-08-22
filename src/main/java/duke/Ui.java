@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -14,7 +16,7 @@ public class Ui {
     private static final String endMessage = "\n\tSad to see you go :(\n\t...shutting down...";
     private final Scanner sc;
 
-    Ui () {
+    public Ui () {
         this.sc = new Scanner(System.in);
     }
     private static String wrapOutput(String s) {

@@ -1,3 +1,13 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.exception.LoadingError;
+import duke.TaskList;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,7 +22,7 @@ public class Storage {
 
     private final String filepath;
 
-    Storage(String filepath) {
+    public Storage(String filepath) {
         this.filepath = filepath;
     }
 

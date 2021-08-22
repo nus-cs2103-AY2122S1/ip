@@ -1,19 +1,22 @@
+package duke.tasks;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
+public class Deadline extends Task {
 
     protected LocalDate date;
     protected LocalTime time;
 
-    public Event(String description, LocalDate date) {
+    public Deadline(String description, LocalDate date) {
         super(description);
         this.date = date;
         this.time = null;
+
     }
 
-    public Event(String description, LocalDate date, LocalTime time) {
+    public Deadline(String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;
         this.time = time;
@@ -23,10 +26,10 @@ public class Event extends Task {
     public String toString() {
         String dateString = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         if (this.time == null) {
-            return "[E]" + super.toString() + " (at: " + dateString + ")";
+            return "[D]" + super.toString() + " (by: " + dateString + ")";
         } else {
             String timeString = this.time.format(DateTimeFormatter.ofPattern("hh:mm a"));
-            return "[E]" + super.toString() + " (at: " + dateString + " " + timeString + ")";
+            return "[D]" + super.toString() + " (by: " + dateString + " " + timeString + ")";
         }
     }
 
@@ -34,10 +37,10 @@ public class Event extends Task {
     public String toSaveString() {
         String dateString = this.date.format(DateTimeFormatter.ISO_LOCAL_DATE);
         if (this.time == null) {
-            return "| E | " + super.toSaveString() + " | " + dateString;
+            return "| D | " + super.toSaveString() + " | " + dateString;
         } else {
             String timeString = this.time.format(DateTimeFormatter.ofPattern("HH:mm"));
-            return "| E | " + super.toSaveString() + " | " + dateString + " | " + timeString;
+            return "| D | " + super.toSaveString() + " | " + dateString + " | " + timeString;
         }
     }
 }
