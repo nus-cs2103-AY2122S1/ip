@@ -31,77 +31,70 @@ public class Duke {
             }
 
             switch (firstWord) {
-                case "list":
-                    System.out.println(bot.printList());
-                    break;
-
-                case "bye":
-                    System.out.println(bot.sayBye());
-                    flag = false;
-                    break;
-
-                case "done":
-                    int index = Integer.parseInt(remainingWords);
-                    try {
-                        System.out.println(bot.completeTask(index));
-                    } catch (DukeException e) {
-                        String errorMessage = "   -------------------------------------------- \n"
-                                            + "      OOPS!!! Invalid task number given \n"
-                                            + "   -------------------------------------------- \n";
-                        System.out.println(errorMessage);
-                    }
-                    break;
-
-                case "todo":
-                    try {
-                        System.out.println(bot.addTodo(remainingWords));
-                    } catch (DukeException e) {
-                        String errorMessage = "   -------------------------------------------- \n"
-                                            + "      OOPS!!! The description of a todo cannot be empty. \n"
-                                            + "   -------------------------------------------- \n";
-                        System.out.println(errorMessage);
-                    }
-                    break;
-
-                case "deadline":
-                    try {
-                        System.out.println(bot.addDeadline(remainingWords));
-                    } catch (DukeException e) {
-                        String errorMessage = "   -------------------------------------------- \n"
-                                            + "      OOPS!!! The description of a deadline cannot be empty. \n"
-                                            + "   -------------------------------------------- \n";
-                        System.out.println(errorMessage);
-                    }
-                    break;
-
-                case "event":
-                    try {
-                        System.out.println(bot.addEvent(remainingWords));
-                    } catch (DukeException e) {
-                        String errorMessage = "   -------------------------------------------- \n"
-                                            + "      OOPS!!! The description of an event cannot be empty. \n"
-                                            + "   -------------------------------------------- \n";
-                        System.out.println(errorMessage);
-                    }
-                    break;
-
-                case "delete":
-                    int deleteIndex = Integer.parseInt(remainingWords);
-                    try {
-                        System.out.println(bot.deleteTask(deleteIndex));
-                    } catch (DukeException e) {
-                        String errorMessage = "   -------------------------------------------- \n"
-                                + "      Invalid index. Specified task does not exist to be deleted. \n"
-                                + "   -------------------------------------------- \n";
-                        System.out.println(errorMessage);
-                    }
-                    break;
-
-                default:
+            case "list":
+                System.out.println(bot.printList());
+                break;
+            case "bye":
+                System.out.println(bot.sayBye());
+                flag = false;
+                break;
+            case "done":
+                int index = Integer.parseInt(remainingWords);
+                try {
+                    System.out.println(bot.completeTask(index));
+                } catch (DukeException e) {
                     String errorMessage = "   -------------------------------------------- \n"
-                                        + "      OOPS!!! I have no idea what that means :-( \n"
+                                        + "      OOPS!!! Invalid task number given \n"
                                         + "   -------------------------------------------- \n";
                     System.out.println(errorMessage);
+                }
+                break;
+            case "todo":
+                try {
+                    System.out.println(bot.addTodo(remainingWords));
+                } catch (DukeException e) {
+                    String errorMessage = "   -------------------------------------------- \n"
+                                        + "      OOPS!!! The description of a todo cannot be empty. \n"
+                                        + "   -------------------------------------------- \n";
+                    System.out.println(errorMessage);
+                }
+                break;
+            case "deadline":
+                try {
+                    System.out.println(bot.addDeadline(remainingWords));
+                } catch (DukeException e) {
+                    String errorMessage = "   -------------------------------------------- \n"
+                                        + "      OOPS!!! The description of a deadline cannot be empty. \n"
+                                        + "   -------------------------------------------- \n";
+                    System.out.println(errorMessage);
+                }
+                break;
+            case "event":
+                try {
+                    System.out.println(bot.addEvent(remainingWords));
+                } catch (DukeException e) {
+                    String errorMessage = "   -------------------------------------------- \n"
+                                        + "      OOPS!!! The description of an event cannot be empty. \n"
+                                        + "   -------------------------------------------- \n";
+                    System.out.println(errorMessage);
+                }
+                break;
+            case "delete":
+                int deleteIndex = Integer.parseInt(remainingWords);
+                try {
+                    System.out.println(bot.deleteTask(deleteIndex));
+                } catch (DukeException e) {
+                    String errorMessage = "   -------------------------------------------- \n"
+                            + "      Invalid index. Specified task does not exist to be deleted. \n"
+                            + "   -------------------------------------------- \n";
+                    System.out.println(errorMessage);
+                }
+                break;
+            default:
+                String errorMessage = "   -------------------------------------------- \n"
+                                    + "      OOPS!!! I have no idea what that means :-( \n"
+                                    + "   -------------------------------------------- \n";
+                System.out.println(errorMessage);
             }
         }
         sc.close();
@@ -157,28 +150,25 @@ public class Duke {
                     + "      ";
 
             switch (taskClass) {
-                case "Todo":
-                    Todo completedTask = ((Todo) this.taskList.get(index - 1)).markAsDone();
-                    this.taskList.set(index - 1, completedTask);
-                    output += completedTask.toString() + "\n";
-                    break;
-
-                case "Deadline":
-                    Deadline completedTask2 = ((Deadline) this.taskList.get(index - 1)).markAsDone();
-                    this.taskList.set(index - 1, completedTask2);
-                    output += completedTask2.toString() + "\n";
-                    break;
-
-                case "Event":
-                    Event completedTask3 = ((Event) this.taskList.get(index - 1)).markAsDone();
-                    this.taskList.set(index - 1, completedTask3);
-                    output += completedTask3.toString() + "\n";
-                    break;
-
-                default:
-                    Task completedTask4 = this.taskList.get(index - 1).markAsDone();
-                    this.taskList.set(index - 1, completedTask4);
-                    output += completedTask4.toString() + "\n";
+            case "Todo":
+                Todo completedTask = ((Todo) this.taskList.get(index - 1)).markAsDone();
+                this.taskList.set(index - 1, completedTask);
+                output += completedTask.toString() + "\n";
+                break;
+            case "Deadline":
+                Deadline completedTask2 = ((Deadline) this.taskList.get(index - 1)).markAsDone();
+                this.taskList.set(index - 1, completedTask2);
+                output += completedTask2.toString() + "\n";
+                break;
+            case "Event":
+                Event completedTask3 = ((Event) this.taskList.get(index - 1)).markAsDone();
+                this.taskList.set(index - 1, completedTask3);
+                output += completedTask3.toString() + "\n";
+                break;
+            default:
+                Task completedTask4 = this.taskList.get(index - 1).markAsDone();
+                this.taskList.set(index - 1, completedTask4);
+                output += completedTask4.toString() + "\n";
             }
             output += "   -------------------------------------------- \n";
             return output;
