@@ -1,5 +1,9 @@
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /** This class implements the Duke assistant/chat-bot
  * @author damithc
@@ -39,8 +43,56 @@ public class Duke {
         }
     }
 
+    private static String checkForDate(String s){
+        String temp = "^[0-9]{1,2}[\\\\/][0-9]{1,2}[\\\\/][0-9]{4}\\s[0-9]{4}$";
+        Pattern p = Pattern.compile(temp);
+        Matcher m = p.matcher(s);
+        if (m.find()) {
+           return m.group();
+        }
+        return "";
+    }
+
+    private static LocalDate convertDate(String s) {
+        String[] date = s.substring(0,s.length() - 4).split("/");
+        int day = Integer.parseInt(date[0].replaceAll(" ", ""));
+        int month = Integer.parseInt(date[1].replaceAll(" ", ""));
+        int year = Integer.parseInt(date[2].replaceAll(" ", ""));
+        return LocalDate.of(year, month, day);
+    }
+
+    private static void anyItemsDue(String s) {
+        ArrayList<Task> dueItems = new ArrayList<>();
+        if (tasks.isEmpty()) {
+            System.out.println("     No tasks yet!");
+        } else {
+            String[] date = s.split("/");
+            LocalDate ref = LocalDate.parse(date[0] + "-" + date[1] + "-" + date[2]);
+            for (Task t : tasks) {
+                if (!(t instanceof ToDo)) {
+                    LocalDate temp = t.getLocalDate();
+                    if (temp != null) {
+                        if (temp.equals(ref)) {
+                            dueItems.add(t);
+                        }
+                    }
+                }
+            }
+            if (dueItems.isEmpty()) {
+                System.out.println("     Nothing due on this day!");
+            } else {
+                System.out.println("     The items due are: ");
+                for (int i = 0; i < dueItems.size(); i++) {
+                    System.out.println("     " + (i + 1) + "." + dueItems.get(i).getType() + "["
+                            + dueItems.get(i).getStatus() + "] " + tasks.get(i).getTask());
+                }
+            }
+        }
+    }
+
+
     public enum Command{
-        TODO, DEADLINE, EVENT, LIST, DONE, DELETE, BYE
+        TODO, DEADLINE, EVENT, LIST, DONE, DELETE, BYE, DUE
     }
 
     /**
@@ -72,6 +124,9 @@ public class Duke {
             doSomething(c, s);
         } else if (words[0].equalsIgnoreCase("event")) {
             Command c = Command.EVENT;
+            doSomething(c, s);
+        } else if (words[0].equalsIgnoreCase("due")) {
+            Command c = Command.DUE;
             doSomething(c, s);
         } else {
             System.out.println("     Invalid input :(");
@@ -121,7 +176,7 @@ public class Duke {
                     System.out.println("     Please input in the form: 'delete <task index>'.");
                     System.out.println("     Note: list can be used to see the current tasks.");
                 } else {
-                    if (tasks.isEmpty() || tasks == null) {
+                    if (tasks.isEmpty()) {
                         System.out.println("     List is empty, no tasks to delete, looking good!");
                     } else {
                         try {
@@ -130,7 +185,6 @@ public class Duke {
                         } catch (NumberFormatException e) {
                             System.out.println("     Please use a number instead :(");
                         }
-
                     }
                 }
                 break;
@@ -173,6 +227,15 @@ public class Duke {
                     }
                 }
                 break;
+            case DUE:
+                String[] checkWhen = doWhat.split(" ");
+                try {
+                    anyItemsDue(checkWhen[1]);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("     Invalid input :(");
+                    helperMessage();
+                }
+                break;
         }
     }
 
@@ -202,6 +265,8 @@ public class Duke {
         System.out.println("     If you wish to see the current tasks, please input 'list'.");
         System.out.println("     If you wish to mark a task as done, please input 'done <task index>.'");
         System.out.println("     If you wish to terminate the program, please input 'bye'.");
+        System.out.println("     If you wish to check items due on a particular day, please " +
+                "input 'due YYYY/MM/DD'.");
     }
 
     /**
@@ -219,7 +284,7 @@ public class Duke {
                 break;
             }
         }
-        return temp;
+        return temp.equals("") ? temp : temp.substring(0, temp.length()-1);
     }
 
     /**
@@ -382,6 +447,10 @@ public class Duke {
         public String getType() {
             return "regular";
         }
+
+        public LocalDate getLocalDate() {
+            return null;
+        }
     }
 
     /**
@@ -433,6 +502,8 @@ public class Duke {
          */
         final String dueDate;
 
+        private LocalDate localDate;
+
         /**
          * Constructor for a Deadline task
          *
@@ -442,6 +513,11 @@ public class Duke {
         public Deadline(String s, String date) {
             super(s);
             this.dueDate = date;
+            String day = checkForDate(date);
+            if (!day.equals("")) {
+                LocalDate ld = convertDate(day);
+                setLocalDate(ld);
+            }
         }
 
         /**
@@ -453,6 +529,11 @@ public class Duke {
             return this.type;
         }
 
+        private void setLocalDate(LocalDate localDate) { this.localDate = localDate; }
+
+        @Override
+        public LocalDate getLocalDate() { return this.localDate; }
+
         /**
          * To retrieve the description of the Deadline task
          *
@@ -460,7 +541,12 @@ public class Duke {
          */
         @Override
         public String getTask() {
-            return super.getTask() + "(by: " + this.dueDate + ")";
+            if (this.localDate == null) {
+                return super.getTask() + "(by: " + this.dueDate + ")";
+            } else {
+                return super.getTask() + "(by: " + Month.of(this.localDate.getMonthValue()) + " "
+                        + this.localDate.getDayOfMonth() + " " + this.localDate.getYear() + ")";
+            }
         }
     }
 
@@ -474,13 +560,15 @@ public class Duke {
          * The String to store the type of task information
          * that identifies an Event task
          */
-        final String type = "[E]";
+        private final String type = "[E]";
 
         /**
          * The String to store the date information
          * that identifies an Event task
          */
-        final String date;
+        private final String date;
+
+        private LocalDate localDate;
 
         /**
          * Constructor for an Event task
@@ -490,6 +578,11 @@ public class Duke {
         public Event(String s, String date) {
             super(s);
             this.date = date;
+            String day = checkForDate(date);
+            if (!day.equals("")) {
+                LocalDate ld = convertDate(day);
+                setLocalDate(ld);
+            }
         }
 
         /**
@@ -497,9 +590,12 @@ public class Duke {
          *
          * @return the String description of the type of Task
          */
-        public String getType() {
-            return this.type;
-        }
+        public String getType() { return this.type; }
+
+        private void setLocalDate(LocalDate localDate) { this.localDate = localDate; }
+
+        @Override
+        public LocalDate getLocalDate() { return this.localDate; }
 
         /**
          * To retrieve the description of the Event task
@@ -508,7 +604,12 @@ public class Duke {
          */
         @Override
         public String getTask() {
-            return super.getTask() + "(at: " + this.date + ")";
+            if (this.localDate == null) {
+                return super.getTask() + "(at: " + this.date + ")";
+            } else {
+                return super.getTask() + "(at: " + Month.of(this.localDate.getMonthValue()) + " "
+                        + this.localDate.getDayOfMonth() + " " + this.localDate.getYear() + ")";
+            }
         }
     }
 }
