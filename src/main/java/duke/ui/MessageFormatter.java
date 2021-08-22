@@ -17,6 +17,17 @@ public class MessageFormatter {
     private static final int DIVIDER_LINE_UNIT_COUNT = 60;
     private static final int DIVIDER_INDENTATION_UNIT_COUNT = 1;
 
+    private static MessageFormatter instance;
+
+    private MessageFormatter() {}
+
+    public static MessageFormatter getInstance() {
+        if (instance == null) {
+            instance = new MessageFormatter();
+        }
+        return instance;
+    }
+
     /**
      * Formats the message passed for output.
      *

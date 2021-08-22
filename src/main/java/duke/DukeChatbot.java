@@ -6,6 +6,7 @@ import duke.command.CommandParser;
 import duke.command.CommandType;
 import duke.command.DukeInvalidCommandException;
 import duke.ui.MessageFormatter;
+import duke.ui.Ui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,20 +19,9 @@ import java.io.InputStreamReader;
  */
 public class DukeChatbot {
 
-    private static final String LOGO = " ____        _\n"
-            + "|  _ \\ _   _| | _____\n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String GREETING_MESSAGE = "Hello! I'm Duke!\n"
-            + "What can I do for you?";
-    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
-    private static final String UNEXPECTED_ERROR_MESSAGE = "An unexpected error has occurred.";
-    private static final String INVALID_COMMAND_ERROR_TEMPLATE = "This command is invalid.\n%s\nPlease try again.";
-
-    private StorageHandler storageHandler;
-    private MessageFormatter messageFormatter;
+    private Ui ui;
     private CommandParser commandParser;
+    private StorageHandler storageHandler;
     private TaskHandler taskHandler;
     private boolean hasErrorOnSave;
 
@@ -47,15 +37,15 @@ public class DukeChatbot {
     public void run() {
         try {
             initialise();
-            printGreeting();
+            ui.printGreeting();
             listenForInput();
         } catch (IOException e) {
-            printFormattedMessage(UNEXPECTED_ERROR_MESSAGE);
+            ui.printUnexpectedErrorMessage();
         }
     }
 
     private void initialise() throws IOException {
-        messageFormatter = new MessageFormatter();
+        ui = new Ui();
         commandParser = new CommandParser();
         storageHandler = StorageHandler.getInstance();
         taskHandler = new TaskHandler(storageHandler.loadTasks());
@@ -69,10 +59,6 @@ public class DukeChatbot {
         hasErrorOnSave = false;
     }
 
-    private void printGreeting() {
-        printFormattedMessage(LOGO + GREETING_MESSAGE);
-    }
-
     private void listenForInput() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String command;
@@ -84,7 +70,7 @@ public class DukeChatbot {
                 int taskIndex;
                 switch (commandType) {
                 case EXIT:
-                    printExitMessage();
+                    ui.printExitMessage();
                     break;
                 case ADD_TODO_TASK:
                     ToDoTask toDo = commandParser.getToDoTask(command);
@@ -111,19 +97,19 @@ public class DukeChatbot {
                     break;
                 default:
                     // The default case should be unreachable. If this is reached, something is wrong.
-                    printFormattedMessage(UNEXPECTED_ERROR_MESSAGE);
+                    ui.printUnexpectedErrorMessage();
                     commandType = CommandType.EXIT;
                     break;
                 }
                 if (hasErrorOnSave) {
-                    printFormattedMessage(UNEXPECTED_ERROR_MESSAGE);
+                    ui.printUnexpectedErrorMessage();
                     break;
                 }
             } catch (IOException e) {
-                printFormattedMessage(UNEXPECTED_ERROR_MESSAGE);
+                ui.printUnexpectedErrorMessage();
                 break;
             } catch (DukeInvalidCommandException e) {
-                printFormattedMessage(String.format(INVALID_COMMAND_ERROR_TEMPLATE, e.getMessage()));
+                ui.printInvalidCommandErrorMessage(e.getMessage());
                 commandType = null;
             }
         } while (commandType == null || !commandType.equals(CommandType.EXIT));
@@ -131,19 +117,23 @@ public class DukeChatbot {
 
     private void addTask(Task task) {
         taskHandler.addTask(task);
-        StringBuilder sb = new StringBuilder("Got it. I've added this task:\n");
-        sb.append(messageFormatter.formatTask(task)).append("\n");
-        sb.append(getListLengthMessage());
-        printFormattedMessage(sb.toString());
+        ui.startMessage()
+                .addLine("Got it. I've added this task:")
+                .addTask(task)
+                .addTasksListLength(taskHandler.getNumberOfTasks())
+                .printFormatted();
     }
 
     private void printTasks() {
         if (taskHandler.getNumberOfTasks() == 0) {
-            printFormattedMessage("You have no tasks in the list.");
+            ui.startMessage()
+                    .addLine("You have no tasks in the list.")
+                    .printFormatted();
         } else {
-            StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
-            sb.append(taskHandler.getTasksString(messageFormatter));
-            printFormattedMessage(sb.toString());
+            ui.startMessage()
+                    .addLine("Here are the tasks in your list:")
+                    .addLine(taskHandler.getTasksString(MessageFormatter.getInstance()))
+                    .printFormatted();
         }
     }
 
@@ -154,9 +144,10 @@ public class DukeChatbot {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeInvalidCommandException("The task number does not exist.");
         }
-        StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:\n");
-        sb.append(messageFormatter.formatTask(task));
-        printFormattedMessage(sb.toString());
+        ui.startMessage()
+                .addLine("Nice! I've marked this task as done:")
+                .addTask(task)
+                .printFormatted();
     }
 
     private void deleteTask(int taskIndex) throws DukeInvalidCommandException {
@@ -166,28 +157,10 @@ public class DukeChatbot {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeInvalidCommandException("The task number does not exist.");
         }
-        StringBuilder sb = new StringBuilder("Noted. I've removed this task:\n");
-        sb.append(messageFormatter.formatTask(task)).append("\n");
-        sb.append(getListLengthMessage());
-        printFormattedMessage(sb.toString());
-    }
-
-    private String getListLengthMessage() {
-        int n = taskHandler.getNumberOfTasks();
-        // Check whether singular or plural should be printed.
-        if (n != 1) {
-            return String.format("Now you have %d tasks in the list.", n);
-        } else {
-            return "Now you have 1 task in the list.";
-        }
-    }
-
-    private void printExitMessage() {
-        printFormattedMessage(EXIT_MESSAGE);
-    }
-
-    private void printFormattedMessage(String message) {
-        System.out.println(messageFormatter.getFormattedMessage(message));
-        System.out.println();
+        ui.startMessage()
+                .addLine("Noted. I've removed this task:")
+                .addTask(task)
+                .addTasksListLength(taskHandler.getNumberOfTasks())
+                .printFormatted();
     }
 }
