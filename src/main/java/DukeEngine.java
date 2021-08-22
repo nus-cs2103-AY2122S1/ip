@@ -151,6 +151,8 @@ public class DukeEngine {
         }
         if (commandAbsent) {
             throw new CommandException("deadline", "/by");
+        } else if (commandIndex == 1) {
+            throw new DescriptionException("deadline");
         }
 
         String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, commandIndex);
@@ -230,6 +232,8 @@ public class DukeEngine {
         }
         if (commandAbsent) {
             throw new CommandException("event", "/at");
+        } else if (commandIndex == 1) {
+            throw new DescriptionException("event");
         }
 
         String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, commandIndex);
@@ -291,5 +295,9 @@ public class DukeEngine {
      */
     public void saveData() {
         databaseEngine.writeToDatabase(this.taskList);
+    }
+
+    public void setTaskList(List<Task> inputList) {
+        this.taskList = inputList;
     }
 }

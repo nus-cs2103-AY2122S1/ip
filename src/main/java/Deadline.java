@@ -1,7 +1,5 @@
 package main.java;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,7 +7,6 @@ import java.time.temporal.ChronoUnit;
 
 public class Deadline extends Task {
 
-    @JsonProperty
     protected LocalDate by;
 
     /**
@@ -23,9 +20,12 @@ public class Deadline extends Task {
     }
 
     /**
-     * Required for JackSon.
+     * Retrieves the parameter by as a string.
+     * @return by property as a String.
      */
-    private Deadline() {}
+    public String getBy() {
+        return this.by.toString();
+    }
 
     @Override
     public String toString() {

@@ -10,11 +10,6 @@ public class Todo extends Task {
         super(description);
     }
 
-    /**
-     * Required for JackSon.
-     */
-    private Todo() {}
-
     @Override
     public String toString() {
         return "[T]" + super.toString();

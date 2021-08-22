@@ -100,10 +100,7 @@ public class DukeMessages {
     }
 
     public void wrongDateInputMessage() {
-        this.displayText("The input should be a date! Some standard forms include (but are not exhaustive):\n" +
-                "yyyy-mm-dd\n" +
-                "MMM dd yyyy\n" +
-                "dd/mm/yyyy tttt");
+        this.displayText("The input should be in the form of yyyy-dd-mm");
     }
 
 
