@@ -34,6 +34,9 @@ public class MessageConstants {
     public static final String INVALID_TASK_NUMBER_MESSAGE =
             "☹ Task number provided is invalid. Please try another number.";
     public static final String INVALID_INTEGER_MESSAGE = "☹ Task number must be valid integer. eg. \"done 1\"";
+    public static final String MESSAGE_FIND_TASK_LIST = "Here are the matching tasks in your list:";
+    public static final String MESSAGE_EMPTY_TEXT_FILTER = "☹ No text filter provided. "
+            + "Try \"find <text filter>\" instead.";
 
     // hide constructor for utility class
     private MessageConstants() {

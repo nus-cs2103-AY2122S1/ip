@@ -7,6 +7,7 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.CommandType;
 import duke.command.DeleteTaskCommand;
+import duke.command.FindTasksCommand;
 import duke.command.ListTasksCommand;
 import duke.command.MarkTaskDoneCommand;
 import duke.exceptions.DukeException;
@@ -38,6 +39,8 @@ public class Parser {
                 return new MarkTaskDoneCommand(userInputBody);
             case DELETE:
                 return new DeleteTaskCommand(userInputBody);
+            case FIND:
+                return new FindTasksCommand(userInputBody);
             case BYE:
                 return new ByeCommand(userInputBody);
             // default case in case unexpected no matches occurs.

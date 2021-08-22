@@ -4,16 +4,10 @@ import duke.tasks.Task;
 
 import java.util.List;
 
-/**
- * Class is responsible for generating message to list all tasks
- * based on given task list.
- *
- * @author kevin9foong
- */
-public class TaskListMessage extends Message {
-    public TaskListMessage(List<Task> tasks) {
-        super.setMessageText(MessageConstants.TASK_LIST_HEADER
-                + generateListMessageText(tasks));
+public class TaskFindListMessage extends Message {
+    public TaskFindListMessage(List<Task> tasks) {
+        super.setMessageText(MessageConstants.MESSAGE_FIND_TASK_LIST
+            + generateListMessageText(tasks));
     }
 
     private String generateListMessageText(List<Task> tasks) {
