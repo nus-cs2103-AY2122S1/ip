@@ -25,6 +25,8 @@ public class Parser {
         case "delete":
             selectedTask = Integer.parseInt(inputArray[1]) - 1;
             return new DeleteCommand(selectedTask);
+        case "find":
+            return new FindCommand(input.substring(5));
         case "event":
             params = input.split("/at");
             params[0] = params[0].substring(6, params[0].length() - 1);
