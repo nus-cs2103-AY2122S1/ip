@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws MeowException {
+    public static void main(String[] args) {
         run();
     }
 
-    public static void run() throws MeowException {
+    public static void run() {
         // Create a new chat bot object.
         Meow meow = new Meow();
         // Greeting from chat bot.

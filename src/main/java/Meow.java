@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,8 +118,8 @@ public class Meow {
         System.out.println("------------------------------------------------------------------------------");
     }
 
-    private void addDeadline(String deadline, String by) {
-        Deadline newDeadline = new Deadline(deadline, by);
+    private void addDeadline(String deadline, LocalDate date, String time) {
+        Deadline newDeadline = new Deadline(deadline, date, time);
         tasksList.add(newDeadline);
         int taskListLength = tasksList.size();
         String task = taskListLength <= 1 ? " task " : " tasks ";
@@ -164,6 +166,40 @@ public class Meow {
             split = task.split(" /at ");
         }
         return split;
+    }
+
+    private LocalDate convertToLocalDate(String inputDate) throws InvalidDateTimeException {
+        try {
+            String modifiedDate = "";
+            String[] values = inputDate.split("/");
+            for (int i = values.length - 1; i >= 0; i--) {
+                String addedValue;
+                if (Integer.parseInt(values[i]) < 10) {
+                    addedValue = "0" + values[i];
+                } else {
+                    addedValue = values[i];
+                }
+
+                if (i == 0) {
+                    modifiedDate = modifiedDate + addedValue;
+                } else {
+                    modifiedDate = modifiedDate + addedValue + "-";
+                }
+            }
+            LocalDate date = LocalDate.parse(modifiedDate);
+            return date;
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException();
+        }
+    }
+
+    private boolean isLocalDateTime(String inputDate, String inputTime) {
+        System.out.println("input date: " + inputDate);
+        String validator = "[0-9]{1,2}(/|-)[0-9]{1,2}(/|-)[0-9]{4}";
+        boolean dateValidated = inputDate.matches(validator);
+        int time = Integer. parseInt(inputTime);
+        boolean timeValidated = time >= 0 && time <= 2359;
+        return dateValidated && timeValidated;
     }
 
     private void deleteTask(String index) throws MeowException {
@@ -231,7 +267,13 @@ public class Meow {
                     String task = getTask(input, userCommand);
                     String[] taskAndDate = getTaskAndDate(task, userCommand);
                     try {
-                        addDeadline(taskAndDate[0], taskAndDate[1]);
+                        String[] dateAndTime = taskAndDate[1].split(" ");
+                        if (isLocalDateTime(dateAndTime[0], dateAndTime[1])) {
+                            LocalDate date = convertToLocalDate(dateAndTime[0]);
+                            addDeadline(taskAndDate[0], date, dateAndTime[1]);
+                        } else {
+                            throw new InvalidDateTimeException();
+                        }
                         break;
                     } catch (ArrayIndexOutOfBoundsException exception) {
                         throw new EmptyDeadlineTimeException();
