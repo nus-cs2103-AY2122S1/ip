@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -8,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * This class stores all TaskList of the user.
+ * This class stores all duke.TaskList of the user.
  *
  * @author Deng Huaiyu(G12)
  * @version CS2103T AY21/22 Semester 1
@@ -98,18 +105,18 @@ public class TaskList {
         if (total <= 1) {
             sOrNot = "task";
         } else {
-            sOrNot = "TaskList";
+            sOrNot = "tasks";
         }
         Duke.saveFile();
         Ui.sayAdd(t, total, sOrNot);
     }
 
     /**
-     * The toString method to print all TaskList in the list.
+     * The toString method to print all duke.TaskList in the list.
      */
     public void printTaskList() {
         System.out.println(div);
-        System.out.println(ind2 + "Here are the TaskList in your list:");
+        System.out.println(ind2 + "Here are the tasks in your list:");
         Ui.printTasks(taskList);
         System.out.println(div);
     }
@@ -144,7 +151,7 @@ public class TaskList {
             if (total <= 1) {
                 sOrNot = "task";
             } else {
-                sOrNot = "TaskList";
+                sOrNot = "tasks";
             }
             this.taskList.remove(deleted);
             Duke.saveFile();
@@ -191,7 +198,7 @@ public class TaskList {
     }
 
     /**
-     * Loads TaskList previously stored in local hard disk into the arraylist.
+     * Loads duke.TaskList previously stored in local hard disk into the arraylist.
      *
      * @param f the file read from disk
      */
@@ -244,7 +251,7 @@ public class TaskList {
     }
 
     /**
-     * Gets all the TaskList listed.
+     * Gets all the duke.TaskList listed.
      */
     public static ArrayList<Task> getTaskList() {
         return taskList;
@@ -275,10 +282,10 @@ public class TaskList {
     }
 
     /**
-     * Returns all TaskList on a single day
+     * Returns all duke.TaskList on a single day
      *
      * @param s string indicating the date
-     * @return an arraylist of all relevant TaskList
+     * @return an arraylist of all relevant duke.TaskList
      * @throws DukeException if the date format is incorrect
      */
     public static ArrayList<Task> getOnADay(String s) throws DukeException{
@@ -296,7 +303,7 @@ public class TaskList {
             }
         }
         System.out.println(div);
-        System.out.println(ind2 + "Here are the TaskList on " + target + ": ");
+        System.out.println(ind2 + "Here are the tasks on " + target + ": ");
         Ui.printTasks(result);
         System.out.println(div);
         return result;

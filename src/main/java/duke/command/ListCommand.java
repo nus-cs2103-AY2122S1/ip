@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.TaskList;
+
 public class ListCommand extends Command{
     private TaskList myTasks;
     public ListCommand(TaskList myTasks) {
@@ -5,7 +9,7 @@ public class ListCommand extends Command{
         this.myTasks = myTasks;
     }
     @Override
-    void execute() {
+    public void execute() {
         myTasks.printTaskList();
     }
 }

@@ -1,5 +1,8 @@
+package duke;
+
+import duke.command.*;
 /**
- * This class is the Duke class to assess input from user.
+ * This class is the duke.Duke class to assess input from user.
  *
  * @author Deng Huaiyu(G12)
  * @version CS2103T AY21/22 Semester 1
@@ -13,7 +16,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * construct a new Duke instance
+     * construct a new duke.Duke instance
      */
     public Duke() {
         ui = new Ui();
@@ -69,7 +72,7 @@ public class Duke {
     }
 
     private static void greeting() {
-        String g = "Hello! I'm Duke";
+        String g = "Hello! I'm duke.Duke";
         String g2 = "What can I do for you?";
         Ui.myPrint(g + "\n" + ind2+ g2 );
     }

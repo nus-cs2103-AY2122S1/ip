@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * This class is a subclass of exception.
  *

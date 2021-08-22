@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+
 public class AddCommand extends Command{
     private TaskList myTasks;
     private String next;
@@ -8,7 +14,7 @@ public class AddCommand extends Command{
     }
 
     @Override
-    void execute() {
+    public void execute() {
         try {
             myTasks.addTask(next);
         } catch (DukeException dukeException) {

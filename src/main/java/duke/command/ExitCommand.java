@@ -1,7 +1,11 @@
+package duke.command;
+
+import duke.Ui;
+
 public class ExitCommand extends Command{
 
     @Override
-    void execute() {
+    public void execute() {
         Ui.myPrint("Bye. Hope to see you again soon!");
     }
 }
