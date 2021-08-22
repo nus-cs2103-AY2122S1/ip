@@ -1,5 +1,7 @@
 package duke;
 
+import duke.logic.LPrintTask;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,39 +92,10 @@ public class Duke {
             System.out.println("Bye. Hope to see you again soon!");
             return true;
         case "list":
-            for (int i = 1; i <= storageCount; i++) {
-                Task task = storage.get(i - 1);
-                String leadingSpace = " ".repeat((int) Math.log10(storageCount) - (int) Math.log10(i));
-                // For better formatting if numbers exceed 9
-                System.out.printf("%s%d: %s\n", leadingSpace, i, task);
-            }
+            LPrintTask.printAllTasks(storage);
             break;
         case "upcoming":
-            Map<Task, Integer> upcomingTasks = new TreeMap<>((task1, task2) -> {
-                LocalDateTime dateTime1 = task1.getDateTime();
-                LocalDateTime dateTime2 = task2.getDateTime();
-                // time can be null if task is to-do. By default, put all to-do to the last.
-                return dateTime1 == null && dateTime2 == null
-                        ? 0
-                        : dateTime1 == null
-                        ? 1
-                        : dateTime2 == null
-                        ? -1
-                        : dateTime1.compareTo(dateTime2);
-            });
-            for (int i = 1; i <= storageCount; i++) {
-                Task task = storage.get(i - 1);
-                String type = task.getTaskType();
-                if (!task.isDone() && // Task is not done and it is either to-do or the date is later than now.
-                        (type.equals("T") || task.getDateTime().isAfter(LocalDateTime.now()))) {
-                    upcomingTasks.put(task, i);
-                }
-            }
-            upcomingTasks.forEach((task, i) -> {
-                String leadingSpace = " ".repeat((int) Math.log10(storageCount) - (int) Math.log10(i));
-                // For better formatting if numbers exceed 9
-                System.out.printf("%s%d: %s\n", leadingSpace, i, task);
-            });
+            LPrintTask.printUpcomingTasks(storage);
             break;
         default:
             String[] splitInput = input.split(" ");
