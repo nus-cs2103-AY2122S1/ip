@@ -27,7 +27,7 @@ public class LDateTimeParser {
                 if (dateAndTime[0].contains("/")) { // User entered date
                     System.out.println(dateAndTime[0]);
                     this.date = LocalDate.parse(dateAndTime[0], DateTimeFormatter.ofPattern("d/M/yyyy"));
-                    this.time = LocalTime.parse("00:00");
+                    this.time = LocalTime.parse("23:59");
                 } else { // User likely entered time
                     this.time = LocalTime.parse(dateAndTime[0], DateTimeFormatter.ofPattern("H:m"));
                     this.date = this.time.isAfter(LocalTime.now()) ? LocalDate.now() : LocalDate.now().plusDays(1);

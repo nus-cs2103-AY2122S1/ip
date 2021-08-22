@@ -9,7 +9,7 @@ do this thing
 todo
 deadline Art Project
 deadline /by 20
-event Concert /by 19/9/2021
+event Concert /by 19/2/2021
 deadline hello
 event Job Interview /at 15:00
 deadline Write resume /by
@@ -22,6 +22,7 @@ event Sleep /at 2:00
 deadline CS2100 homework /by 25/8/2021
 todo Learn to bake
 todo Renew passport
+upcoming
 done 2
 done 2
 done 7

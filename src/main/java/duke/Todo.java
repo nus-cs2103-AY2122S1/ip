@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDateTime;
+
 /**
  * A simple task with no deadline
  */
@@ -12,6 +14,12 @@ public class Todo extends Task {
     public Todo(String description) {
         super(description, "T");
     }
+
+    @Override
+    public LocalDateTime getDateTime() {
+        return null;
+    }
+
     @Override
     public String toString() {
         return super.toString(); // No preposition

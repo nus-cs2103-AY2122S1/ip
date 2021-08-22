@@ -3,6 +3,7 @@ package duke;
 import duke.logic.LDateTimeParser;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -23,6 +24,11 @@ public class Deadline extends Task{
         LDateTimeParser logicDateTimeParser = new LDateTimeParser(stringDateOfDeadline);
         this.timeOfDeadline = logicDateTimeParser.getTime();
         this.dateOfDeadline = logicDateTimeParser.getDate();
+    }
+
+    @Override
+    public LocalDateTime getDateTime() {
+        return LocalDateTime.of(dateOfDeadline, timeOfDeadline);
     }
 
     @Override

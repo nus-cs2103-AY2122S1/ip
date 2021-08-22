@@ -1,14 +1,18 @@
 package duke;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 /**
  * duke.Duke is a personal assistant that allows users to keep track of events, deadlines and things to do.
  * The main method will start the personal assistant in the console.
  */
 public class Duke {
-    private static final ArrayList<Task> storage = new ArrayList<>();
+    private static final List<Task> storage = new ArrayList<>();
     private static int storageCount = 0;
 
     private static void addTask(String[] splitInput) {
@@ -92,6 +96,33 @@ public class Duke {
                 // For better formatting if numbers exceed 9
                 System.out.printf("%s%d: %s\n", leadingSpace, i, task);
             }
+            break;
+        case "upcoming":
+            Map<Task, Integer> upcomingTasks = new TreeMap<>((task1, task2) -> {
+                LocalDateTime dateTime1 = task1.getDateTime();
+                LocalDateTime dateTime2 = task2.getDateTime();
+                // time can be null if task is to-do. By default, put all to-do to the last.
+                return dateTime1 == null && dateTime2 == null
+                        ? 0
+                        : dateTime1 == null
+                        ? 1
+                        : dateTime2 == null
+                        ? -1
+                        : dateTime1.compareTo(dateTime2);
+            });
+            for (int i = 1; i <= storageCount; i++) {
+                Task task = storage.get(i - 1);
+                String type = task.getTaskType();
+                if (!task.isDone() && // Task is not done and it is either to-do or the date is later than now.
+                        (type.equals("T") || task.getDateTime().isAfter(LocalDateTime.now()))) {
+                    upcomingTasks.put(task, i);
+                }
+            }
+            upcomingTasks.forEach((task, i) -> {
+                String leadingSpace = " ".repeat((int) Math.log10(storageCount) - (int) Math.log10(i));
+                // For better formatting if numbers exceed 9
+                System.out.printf("%s%d: %s\n", leadingSpace, i, task);
+            });
             break;
         default:
             String[] splitInput = input.split(" ");

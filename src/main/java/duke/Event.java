@@ -3,6 +3,7 @@ package duke;
 import duke.logic.LDateTimeParser;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -23,6 +24,11 @@ public class Event extends Task{
         LDateTimeParser logicDateTimeParser = new LDateTimeParser(eventDate);
         this.timeOfEvent = logicDateTimeParser.getTime();
         this.dateOfEvent = logicDateTimeParser.getDate();
+    }
+
+    @Override
+    public LocalDateTime getDateTime() {
+        return LocalDateTime.of(dateOfEvent, timeOfEvent);
     }
 
     @Override
