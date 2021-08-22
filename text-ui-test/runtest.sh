@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # create bin directory if it doesn't exist
-if [ ! -e "../bin" ]
+if [ ! -d "../bin" ]
 then
     mkdir ../bin
 fi
@@ -10,6 +10,12 @@ fi
 if [ -e "./ACTUAL.TXT" ]
 then
     rm ACTUAL.TXT
+fi
+
+# delete data from previous run
+if [ -d "./data" ]
+then
+    rm -r ./data
 fi
 
 # compile the code into the bin folder, terminates if error occurred
