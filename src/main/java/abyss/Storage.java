@@ -6,10 +6,18 @@ import abyss.task.TaskList;
 
 import java.io.*;
 
+/**
+ * Represents a storage file which stores user tasks.
+ */
 public class Storage {
     private String filePath;
     private File file;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param filePath File path of the storage file.
+     */
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         this.file = new File(filePath);
@@ -19,6 +27,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from storage file into a task list.
+     *
+     * @return Loaded task list.
+     * @throws IOException If there is error reading from file.
+     * @throws LoadTaskException If there is invalid task in the file.
+     */
     public TaskList loadTasks() throws IOException, LoadTaskException {
         TaskList tasks = new TaskList();
         FileReader fileReader = new FileReader(filePath);
@@ -56,6 +71,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Save tasks from given task list into the storage file.
+     *
+     * @param tasks List of tasks to be stored.
+     * @throws IOException If there is error writing to file.
+     */
     public void saveTasks(TaskList tasks) throws IOException {
         StringBuffer input = new StringBuffer();
         for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
