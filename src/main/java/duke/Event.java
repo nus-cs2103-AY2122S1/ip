@@ -49,11 +49,18 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        if (this.getDone()) {
-            return "[E] [X]" + this.getBody() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
-        }
-        else {
-            return "[E] [ ]" + this.getBody() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        if (this.isDone()) {
+            return "[E] [X]"
+                    + this.getBody()
+                    + " (at: "
+                    + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                    + ")";
+        } else {
+            return "[E] [ ]"
+                    + this.getBody()
+                    + " (at: "
+                    + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                    + ")";
         }
     }
 }

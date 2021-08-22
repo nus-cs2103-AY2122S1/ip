@@ -29,32 +29,26 @@ public class Parser {
         String lowerCaseInput = inputArr[0].toLowerCase();
         if (lowerCaseInput.equals("bye")) {
             return new ByeCommand();
-        }
-        else if (lowerCaseInput.equals("list")) {
+        } else if (lowerCaseInput.equals("list")) {
             return new ListCommand();
-        }
-        else if (lowerCaseInput.equals("done")) {
+        } else if (lowerCaseInput.equals("done")) {
             int index = Integer.parseInt(inputArr[1]);
             return new DoneCommand(index);
-        }
-        else if (lowerCaseInput.equals("todo")) {
+        } else if (lowerCaseInput.equals("todo")) {
             if (body.equals("")) {
                 DukeException exception = new DukeException("Description of todo cannot be empty :(");
                 throw exception;
             }
             Todo todo = new Todo(body);
             return new AddTodoCommand(todo);
-        }
-        else if (lowerCaseInput.equals("deadline")) {
+        } else if (lowerCaseInput.equals("deadline")) {
             if (!hasDate) {
                 DukeException exception = new DukeException("Deadline of deadline cannot be empty :(");
                 throw exception;
-            }
-            else if (date.length() != 10) {
+            } else if (date.length() != 10) {
                 DukeException exception = new DukeException("Please enter a valid date (yyyy-mm-dd) :(");
                 throw exception;
-            }
-            else {
+            } else {
                 String[] dateArr = date.split("-");
                 int year = Integer.parseInt(dateArr[0]);
                 int month = Integer.parseInt(dateArr[1]);
@@ -67,16 +61,14 @@ public class Parser {
                 Deadline deadline = new Deadline(body, newDate);
                 return new AddDeadlineCommand(deadline);
             }
-        }
-        else if (lowerCaseInput.equals("event")) {
+        } else if (lowerCaseInput.equals("event")) {
             if (!hasDate) {
                 DukeException exception = new DukeException("Date of event cannot be empty :(");
                 throw exception;
-            }
-            else if (date.length() != 10) {
+            } else if (date.length() != 10) {
                 DukeException exception = new DukeException("Please enter a valid date (yyyy-mm-dd) :(");
-                throw exception;            }
-            else {
+                throw exception;
+            } else {
                 String[] dateArr = date.split("-");
                 int year = Integer.parseInt(dateArr[0]);
                 int month = Integer.parseInt(dateArr[1]);
@@ -89,12 +81,10 @@ public class Parser {
                 Event event = new Event(body, newDate);
                 return new AddEventCommand(event);
             }
-        }
-        else if (lowerCaseInput.equals("delete")) {
+        } else if (lowerCaseInput.equals("delete")) {
             int index = Integer.parseInt(inputArr[1]);
             return new DeleteCommand(index);
-        }
-        else if (lowerCaseInput.equals("get")) {
+        } else if (lowerCaseInput.equals("get")) {
             String[] dateArr = inputArr[1].split("-");
             int year = Integer.parseInt(dateArr[0]);
             int month = Integer.parseInt(dateArr[1]);
@@ -105,8 +95,7 @@ public class Parser {
             }
             LocalDate newDate = LocalDate.of(year, month, day);
             return new GetCommand(newDate);
-        }
-        else {
+        } else {
             DukeException exception = new DukeException("I'm sorry but I don't understand what that means :(");
             throw exception;
         }

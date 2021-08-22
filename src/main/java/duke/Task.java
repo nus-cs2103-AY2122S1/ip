@@ -5,7 +5,7 @@ package duke;
  */
 public class Task {
     private final String body;
-    private final boolean done;
+    private final boolean isDone;
 
     /**
      * Constructor of <code>Task</code>
@@ -13,7 +13,7 @@ public class Task {
      */
     Task(String body){
         this.body = body;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -23,7 +23,7 @@ public class Task {
      */
     Task(String body, boolean done) {
         this.body = body;
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
@@ -38,8 +38,9 @@ public class Task {
      * Returns status of task
      * @return Status of task
      */
-    boolean getDone() {
-        return this.done;
+    
+    boolean isDone() {
+        return this.isDone;
     }
 
     /**
@@ -52,10 +53,9 @@ public class Task {
 
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return " [X] " + this.body;
-        }
-        else {
+        } else {
             return " [ ] " + this.body;
         }
     }

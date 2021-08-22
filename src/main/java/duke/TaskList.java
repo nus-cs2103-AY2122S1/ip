@@ -41,8 +41,7 @@ public class TaskList {
         if (index >= this.tasks.size() || index < 0) {
             DukeException exception = new DukeException("Number out of range!");
             System.out.println(exception);
-        }
-        else {
+        } else {
             this.tasks.set(index, task);
         }
     }
@@ -55,8 +54,7 @@ public class TaskList {
         if (index >= this.tasks.size() || index < 0) {
             DukeException exception = new DukeException("Number out of range!");
             System.out.println(exception);
-        }
-        else {
+        } else {
             this.tasks.remove(index);
         }
     }

@@ -1,7 +1,8 @@
 package duke;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+
 
 /**
  * Represents a <code>Deadline</code> type of task.
@@ -49,11 +50,18 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        if (this.getDone()) {
-            return "[D] [X]" + this.getBody() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
-        }
-        else {
-            return "[D] [ ]" + this.getBody() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        if (this.isDone()) {
+            return "[D] [X]"
+                    + this.getBody()
+                    + " (by: "
+                    + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                    + ")";
+        } else {
+            return "[D] [ ]"
+                    + this.getBody()
+                    + " (by: "
+                    + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                    + ")";
         }
     }
 }

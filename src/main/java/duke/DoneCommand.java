@@ -28,8 +28,7 @@ public class DoneCommand extends Command {
         if (this.index > savedTasks.size() || this.index < 1) {
             DukeException exception = new DukeException("Number out of range!");
             System.out.println(exception);
-        }
-        else {
+        } else {
             Task oldTask = savedTasks.get(this.index-1);
             Task newTask = oldTask.setDone();
             tasks.replaceTask(this.index-1, newTask);
