@@ -1,7 +1,7 @@
 package duke.command;
 
 public enum CommandType {
-    LIST, TODO, DEADLINE, EVENT, DELETE, DONE, BYE;
+    LIST, TODO, DEADLINE, EVENT, DELETE, DONE, FIND, BYE;
 
     /**
      * Returns Command classification based on the given string.

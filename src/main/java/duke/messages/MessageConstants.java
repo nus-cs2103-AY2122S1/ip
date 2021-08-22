@@ -11,6 +11,7 @@ public class MessageConstants {
     public static final String MESSAGE_TASK_ADD_HEADER = "Got it. I've added this task:\n\t";
     public static final String MESSAGE_TASK_DONE_HEADER = "Nice! I've marked this task as done:";
     public static final String MESSAGE_TASK_LIST_HEADER = "Here are the tasks in your list:";
+    public static final String MESSAGE_FIND_TASK_LIST = "Here are the matching tasks in your list:";
     public static final String MESSAGE_TASK_DELETE_HEADER = "Noted. I've removed this task:\n\t";
     public static final String MESSAGE_INVALID_COMMAND =
             "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
@@ -22,6 +23,8 @@ public class MessageConstants {
     public static final String MESSAGE_EMPTY_DEADLINE_BODY =
             "☹ The description & by fields of a deadline are not provided eg." +
                     "\"deadline <description> /by <yyyy-mm-dd>\" instead";
+    public static final String MESSAGE_EMPTY_TEXT_FILTER = "☹ No text filter provided. "
+            + "Try \"find <text filter>\" instead.";
     public static final String MESSAGE_INVALID_EVENT_FORMAT =
             "☹ The format of event provided is invalid. " +
                     "Try \"event <description> /at <venue>\" instead.";

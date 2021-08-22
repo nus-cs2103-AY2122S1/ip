@@ -45,4 +45,24 @@ deadline 1
 event /at 123
 event 1 /at 2
 deadline 1 /by 2021-12-12
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+list
+todo h
+deadline hehe /by 2020-12-12
+event hello /at home
+list
+find h
+find heh
+find he
+find lo
+delete 1
+delete 1
+delete 1
+list
+find
 bye

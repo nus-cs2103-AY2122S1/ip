@@ -12,7 +12,8 @@ import java.util.List;
  */
 public class TaskListMessage extends Message {
     public TaskListMessage(List<Task> tasks) {
-        super.setMessageText(generateListMessageText(tasks));
+        super.setMessageText(MessageConstants.MESSAGE_TASK_LIST_HEADER
+                + generateListMessageText(tasks));
     }
 
     /**
@@ -24,7 +25,6 @@ public class TaskListMessage extends Message {
      */
     private String generateListMessageText(List<Task> tasks) {
         StringBuilder listMessageBuilder = new StringBuilder();
-        listMessageBuilder.append(MessageConstants.MESSAGE_TASK_LIST_HEADER);
         for (int index = 0; index < tasks.size(); index++) {
             listMessageBuilder
                     .append("\n")
