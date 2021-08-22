@@ -5,17 +5,37 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * A class that keeps track of the tasks in the form of ArrayList of duke.task.Task objects.
+ * It contains methods to provide information and execute operations over the ArrayList stored.
+ * 
+ * @author Gu Geng
+ */
 public class TaskList {
     
     private ArrayList<duke.task.Task> taskList;
-    
+
+    /**
+     * Returns a TaskList instance using an ArrayList of duke.task.Task objects.
+     * 
+     * @param taskList A ArrayList of duke.task.Task objects.
+     */
     public TaskList(ArrayList<duke.task.Task> taskList) {
         this.taskList = taskList;
     }
+
+    /**
+     * Returns a TaskList instance with an empty ArrayList of duke.task.Task objects.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
-    
+
+    /**
+     * Overrides the toString method to change the String representation of the TaskList.
+     * 
+     * @return A String as the String representation of the TaskList in specified format.
+     */
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("");
@@ -27,11 +47,22 @@ public class TaskList {
         }
         return result.toString();
     }
-    
+
+    /**
+     * Returns the size of the ArrayList contained in the class instance.
+     * 
+     * @return An int object indicating the size of the current ArrayList.
+     */
     public int size() {
         return this.taskList.size();
     }
-    
+
+    /**
+     * Returns a String representation of the ArrayList after being filtered by a LocalDate Object. 
+     * 
+     * @param dateFilter A LocalDate object used to filter the ArrayList of Task objects.
+     * @return A String representation of the ArrayList after being filtered by a LocalDate Object. 
+     */
     public String listSchedule(LocalDate dateFilter) {
         ArrayList<Task> filteredTaskList = this.taskList.stream()
                 .filter(Task::hasSchedule).collect(Collectors.toCollection(ArrayList::new));
@@ -45,28 +76,44 @@ public class TaskList {
         return result.toString();
 
     }
-    
-    public void doneTask(int index) throws DukeException {
+
+    /**
+     * Marks the specified Task in the ArrayList as done. 
+     * 
+     * @param index An int indicating the position of Task in the ArrayList that is to be marked as done.
+     */
+    public void doneTask(int index) {
         Task holder = this.taskList.get(index);
         holder.doneTask();
     }
-    
-    public void deleteTask(int index) throws DukeException {
+
+    /**
+     * Deletes the specified Task in the ArrayList.
+     * 
+     * @param index An int indicating the position of Task in the ArrayList to be deleted.
+     */
+    public void deleteTask(int index) {
         String holder = this.taskList.get(index).toString();
         this.taskList.remove(index);
         this.taskList.trimToSize();
-        System.out.println("____________________________________________________________\n"
-                + "okie! I've removed this annoying duke.task: \n"
-                + holder
-                + "\nNow you have " + this.taskList.size() + " tasks in the list.\n"
-                + "____________________________________________________________\n");
     }
-    
-    public void addTask(Task task) {
+
+    /**
+     * Adds the given Task to the ArrayList. 
+     * 
+     * @param task A duke.task.Task object that is to be added. 
+     */
+    public void addTask(duke.task.Task task) {
         this.taskList.add(task);
     }
-    
-    public Task getTask(int index) {
+
+    /**
+     * Returns a duke.task.Task object specified by the index given from the ArrayList.
+     * 
+     * @param index An int indicating the position of Task in the ArrayList to be obtained.
+     * @return A duke.task.Task object specified by the index given from the ArrayList. 
+     */
+    public duke.task.Task getTask(int index) {
         return this.taskList.get(index);
     }
     
