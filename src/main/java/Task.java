@@ -1,10 +1,19 @@
+/**
+ * Encapsulates a task object.
+ *
+ * @author Dickson
+ */
 public class Task {
-    private String description, type;
+    private String description;
     private boolean isDone;
 
-    public Task(String description, String type) {
+    /**
+     * Constructor for Task object.
+     *
+     * @param description
+     */
+    public Task(String description) {
         this.description = description;
-        this.type = type;
         this.isDone = false;
     }
 
@@ -12,9 +21,13 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     *
+     * @return String representation of a task.
+     */
     @Override
     public String toString() {
         String done = this.isDone ? "X" : " ";
-        return "[" + type + "][" + done + "] " + this.description;
+        return "[" + done + "] " + this.description;
     }
 }
