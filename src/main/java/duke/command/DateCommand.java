@@ -13,7 +13,7 @@ import duke.task.Task;
 import java.time.LocalDate;
 
 public class DateCommand extends Command {
-    private String userInput;
+    private final String userInput;
 
     public DateCommand(String userInput) {
         this.userInput = userInput;

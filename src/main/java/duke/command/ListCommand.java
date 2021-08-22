@@ -14,6 +14,7 @@ public class ListCommand extends Command {
 
     private void printTasks(TaskList tasks, Ui ui) {
         ui.showListSuccess();
+
         for (int i = 0; i < tasks.size(); i++) {
             // Increment i by 1 so number matches display indexing which starts from 1.
             int idx = i + 1;

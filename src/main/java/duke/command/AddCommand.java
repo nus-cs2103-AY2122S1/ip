@@ -14,7 +14,7 @@ import duke.task.Todo;
 import java.time.LocalDate;
 
 public class AddCommand extends Command {
-    private String userInput;
+    private final String userInput;
 
     public AddCommand(String userInput) {
         this.userInput = userInput;
