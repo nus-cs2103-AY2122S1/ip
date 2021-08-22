@@ -196,6 +196,12 @@ public class Ui {
         return tasksList.toString();
     }
 
+    /**
+     * Handle logic for find command.
+     *
+     * @param input String representing user input.
+     * @param taskList List to check against.
+     */
     public void handleFind(String input, TaskList taskList) {
         if (input.split("\\s+").length == 1) {
             throw new NoIndexException();

@@ -141,6 +141,12 @@ public class TaskList {
         return tasksList.toString();
     }
 
+    /**
+     * Helper method to match existing tasks with given description.
+     *
+     * @param input String representing user input.
+     * @return ArrayList of tasks matching given description.
+     */
     public ArrayList<Task> findTasks(String input) {
         ArrayList<Task> matchedTaskList = new ArrayList<>();
 
