@@ -17,12 +17,12 @@ public class DelCommand implements Command {
     /**
      * Constructor for the delete command.
      *
-     * @param delPost The position to delete at.
+     * @param delPos The position to delete at.
      * @param tasklist The tasklist to delete from.
      * @param table The dateTaskTable we might delete from.
      */
-    public DelCommand(int delPost, TaskList tasklist, DateTaskTable table) {
-        this.delPos = delPost;
+    public DelCommand(int delPos, TaskList tasklist, DateTaskTable table) {
+        this.delPos = delPos;
         this.tasklist = tasklist;
         this.table = table;
     }
