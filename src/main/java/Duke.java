@@ -1,9 +1,14 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.File;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import java.io.File;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,6 +17,7 @@ import java.nio.file.Files;
 public class Duke {
     private ArrayList<Task> tasks = new ArrayList<>();
     private File file;
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     public void run() {
         this.setUp();
@@ -80,9 +86,13 @@ public class Duke {
             case 'T':
                 return new Todo(arr[2], isDone);
             case 'D':
-                return new Deadline(arr[2], arr[3], isDone);
+                LocalDate deadlineDate = LocalDate.parse(arr[3], Duke.DATE_TIME_FORMATTER);
+                LocalTime deadlineTime = LocalTime.parse(arr[4]);
+                return new Deadline(arr[2], deadlineDate, deadlineTime, isDone);
             case 'E':
-                return new Event(arr[2], arr[3], isDone);
+                LocalDate eventDate = LocalDate.parse(arr[3], Duke.DATE_TIME_FORMATTER);
+                String timeRange = arr[4];
+                return new Event(arr[2], eventDate, timeRange, isDone);
             default:
                 return null;
         }
@@ -184,24 +194,36 @@ public class Duke {
                     throw new IncompleteTaskDescriptionException("todo");
                 }
             case DEADLINE:
-                if (description.matches("[^ ].* /by *[^ ].*")) {
+                if (description.matches("[^ ].* /by *[^ ].* [^ ].*")) {
                     int separator = description.indexOf("/by");
                     String taskDetail = description.substring(0, separator).trim();
-                    String by = description.substring(separator + 3).trim();
-                    task = new Deadline(taskDetail, by);
+                    String[] by = description.substring(separator + 3).trim().split(" ");
+                    try {
+                        LocalDate date = LocalDate.parse(by[0].trim());
+                        LocalTime time = LocalTime.parse(by[1].trim());
+                        task = new Deadline(taskDetail, date, time);
+                    } catch (DateTimeParseException e) {
+                        throw new IncompleteTaskDescriptionException("deadline");
+                    }
                     break;
                 } else {
                     throw new IncompleteTaskDescriptionException("deadline");
                 }
             case EVENT:
-                if(description.matches("[^ ].* /at *[^ ].*")) {
+                if(description.matches("[^ ].* /at *[^ ].* [^ ].*")) {
                     int separator = description.indexOf("/at");
                     String taskDetail = description.substring(0, separator).trim();
                     String at = description.substring(separator + 3).trim();
-                    task = new Event(taskDetail, at);
+                    try {
+                        LocalDate date = LocalDate.parse(at.substring(0, at.indexOf(' ')));
+                        String timeRange = at.substring(at.indexOf(' ') + 1).trim();
+                        task = new Event(taskDetail, date, timeRange);
+                    } catch (DateTimeParseException e) {
+                        throw new IncompleteTaskDescriptionException("event");
+                    }
                     break;
                 } else {
-                    throw new IncompleteTaskDescriptionException("deadline");
+                    throw new IncompleteTaskDescriptionException("event");
                 }
             default:
                 // checked for command validity in receiveCommand(), so this should not execute at all
