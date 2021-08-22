@@ -1,7 +1,8 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 public class Duke {
 
@@ -42,6 +43,7 @@ public class Duke {
     private static final Scanner cmdReader = new Scanner(System.in);
     private static final ArrayList<Task> LIST = new ArrayList<>();
     private enum TYPE {START, MIDDLE, END, COMPLETE, ERROR}
+    private static File taskFile;
 
     // Method to Print Greeting
     public static void greeting() {
@@ -220,17 +222,92 @@ public class Duke {
         }
     }
 
+    // Method to Save List to WhoBot's Memory
+    public static void saveMemory() throws DukeException {
+        try {
+            FileWriter dataWriter = new FileWriter(taskFile);
+            for (Task tempTask : LIST) {
+                String type = tempTask.getType();
+                if (type.equals("T")) {
+                    dataWriter.write(type + " | " + tempTask.getStatusIcon().charAt(1) + " | " + tempTask.getTask());
+                } else if (type.equals("E")) {
+                    Event tempEvent = (Event) tempTask;
+                    dataWriter.write(type + " | " + tempTask.getStatusIcon().charAt(1) + " | " + tempTask.getTask()
+                            + " /at " + tempEvent.getTiming());
+                } else if (type.equals("D")) {
+                    Deadline tempDeadline = (Deadline) tempTask;
+                    dataWriter.write(type + " | " + tempTask.getStatusIcon().charAt(1) + " | " + tempTask.getTask()
+                            + " /by " + tempDeadline.getDeadline());
+                }
+                dataWriter.write("\n");
+            }
+            dataWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method to Initialize the List from Memory
+    public static void getStarted() throws DukeException {
+        taskFile = new File("." + File.separator + "data" + File.separator + "WhoBotData.txt");
+        if (!taskFile.exists()) {
+            try {
+                if (!taskFile.getParentFile().exists()) {
+                    taskFile.getParentFile().mkdirs();
+                }
+                taskFile.createNewFile();
+            } catch (IOException e) {
+                throw new DukeException("Oops, The file to store my data could not be created. If you continue, tasks won't be stored permanently.");
+            }
+        } else {
+            try {
+                Scanner taskReader = new Scanner(taskFile);
+                while(taskReader.hasNextLine()) {
+                    String[] data = taskReader.nextLine().split(" \\| ");
+                    if (data[0].equals("T")) {
+                        Todo tempTodo = new Todo(data[2]);
+                        if (data[1].equals("X")) {
+                            tempTodo.markAsDone();
+                        }
+                        LIST.add(tempTodo);
+                    } else if (data[0].equals("D")) {
+                        Deadline tempDeadline = new Deadline(data[2]);
+                        if (data[1].equals("X")) {
+                            tempDeadline.markAsDone();
+                        }
+                        LIST.add(tempDeadline);
+                    } else if (data[0].equals("E")) {
+                        Event tempEvent = new Event(data[2]);
+                        if (data[1].equals("X")) {
+                            tempEvent.markAsDone();
+                        }
+                        LIST.add(tempEvent);
+                    }
+                }
+            } catch (FileNotFoundException e) {
+                throw new DukeException("Oops, The file to store my data could not be created. If you continue, tasks won't be stored permanently.");
+            }
+        }
+    }
+
+
     //Main Method
     public static void main(String[] args) {
 
         greeting();
 
+        try {
+            getStarted();
+        } catch (DukeException ex) {
+            echo(ex.getMessage(), TYPE.ERROR);
+        }
+
         while (true) {
             // Take in the input
             try {
-            String command;
-            System.out.print(COLOR_PURPLE + "> " + COLOR_RESET);
-            command = cmdReader.nextLine().trim();
+                String command;
+                System.out.print(COLOR_PURPLE + "> " + COLOR_RESET);
+                command = cmdReader.nextLine().trim();
 
                 if (command.isBlank()) {
                     throw new DukeException("The input is blank. Please enter something.");
@@ -241,6 +318,7 @@ public class Duke {
                 if (command.toLowerCase(Locale.ROOT).equals("bye") || command.toLowerCase(Locale.ROOT).equals("goodbye")) {
                     // If input is bye or goodbye, quits program
                     goodbye();
+                    saveMemory();
                     break;
                 } else if (command.toLowerCase(Locale.ROOT).equals("list")) {
                     // If input is list, prints list
@@ -251,21 +329,27 @@ public class Duke {
                 } else if (commandList.length == 2 && commandList[0].equals("done")) {
                     //If input starts with done, mark the specific item in list as done
                     markAsDone(commandList[1]);
+                    saveMemory();
                 } else if (commandList.length == 2 && commandList[0].equals("undo")) {
                     //If input starts with undo, mark the specific item in list as not done
                     markAsUndone(commandList[1]);
+                    saveMemory();
                 } else if (commandList.length == 2 && commandList[0].equals("delete")) {
                     //If input starts with delete, delete the specific item in list
                     deleteFromList(commandList[1]);
+                    saveMemory();
                 } else if (commandList[0].equals("todo")) {
                     //If input starts with todos, add that to list
                     addTODO(command);
+                    saveMemory();
                 } else if (commandList[0].equals("event")) {
                     //If input starts with todos, add that to list
                     addEvent(command);
+                    saveMemory();
                 } else if (commandList[0].equals("deadline")) {
                     //If input starts with todos, add that to list
                     addDeadline(command);
+                    saveMemory();
                 } else {
                     // Else Invalid
                     throw new DukeException("Oops, That's an invalid command. Type in help to get list of possible commands.");

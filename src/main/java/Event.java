@@ -12,6 +12,14 @@ public class Event extends Task {
         return "[E] " + super.getDescription() + " (at: " + this.timing + ")";
     }
 
+    @Override
+    public String getType() {
+        return "E";
+    }
+
+    public String getTiming() {
+        return timing;
+    }
 
     @Override
     public String toString() {
