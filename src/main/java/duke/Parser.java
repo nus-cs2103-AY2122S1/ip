@@ -14,6 +14,7 @@ import duke.tasks.Event;
 import duke.tasks.Todo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
     private final boolean DEFAULT_STATUS = false;
@@ -90,7 +91,11 @@ public class Parser {
             throw new IllegalFormatException("Please follow the format: type description /by yyyy-mm-dd");
         }
 
-        return LocalDate.parse(details[1]);
+        try {
+            return LocalDate.parse(details[1]);
+        } catch (DateTimeParseException e) {
+            throw new IllegalFormatException("Please follow the format: type description /by yyyy-mm-dd");
+        }
     }
 
     private LocalDate getEventDates(String msg) throws IllegalFormatException{
@@ -100,7 +105,11 @@ public class Parser {
             throw new IllegalFormatException("Please follow the format: type description /at yyyy-mm-dd");
         }
 
-        return LocalDate.parse(details[1]);
+        try {
+            return LocalDate.parse(details[1]);
+        } catch (DateTimeParseException e) {
+            throw new IllegalFormatException("Please follow the format: type description /at yyyy-mm-dd");
+        }
     }
 
     private int getTaskId(String msg) throws IllegalFormatException {
