@@ -1,8 +1,20 @@
 package duke;
 
 import duke.command.*;
+
+/**
+ * A class with method to interpret the commands from user input.
+ * The parse method will return the interpretation in the form of a Command.
+ * 
+ * @author Gu Geng
+ */
 public class Parser {
 
+    /**
+     * A collection of command words that is used to specify the user input command.
+     * 
+     * @author Gu Geng
+     */
     private enum CommandWord {
         TODO("todo"), DEADLINE("deadline"), EVENT("event"),
         DONE("done"), DELETE("delete"), BYE("bye"), LIST("list");
@@ -12,6 +24,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Interprets the user input in terms of a String and returns the information in the form of a Command.
+     * 
+     * @param command A String that contains the user input.
+     * @return A Command that is corresponding to the specific user input of command.
+     * @throws DukeException Will be thrown should the user input command are not in the correct formats.
+     */
     public static Command parse(String command) throws DukeException {
         String commandHolder = command.split(" ", 2)[0];
 

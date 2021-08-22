@@ -7,15 +7,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Executes commands from user input for record keeping of tasks.
- * Exits the programme when "bye" is entered.
+ * A chatbot programme that executes a series of commands from user input and helps keep track user's tasks.
+ * 
+ * @author Gu Geng
  */
 public class Duke {
     
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    
+
+    /**
+     * Returns an Duke instance with storage tasklist and ui initialised.
+     * 
+     * @param filePath the directory to stored data as a Path.
+     */
     public Duke(Path filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -26,7 +32,10 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-    
+
+    /**
+     * Executes the Duke programme.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -43,8 +52,7 @@ public class Duke {
     }
     
     /**
-     * Executes the main programme where Duke is activated to receive user input and perform corresponding operations.
-     * Exits when "bye" is entered.
+     * Drives the Duke programme. 
      *
      * @param args A String array from user input
      * @throws DukeException Exception that is specific to Duke where invalid input is detected
