@@ -27,9 +27,11 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "list":
-            return new ListCommand(this.taskList, null);
+            return new ListCommand(this.taskList, "all",null);
         case "check":
-            return new ListCommand(this.taskList, filterTaskDescription(input));
+            return new ListCommand(this.taskList, "date", filterTaskDescription(input));
+        case "find":
+            return new ListCommand(this.taskList, "keyword", filterTaskDescription(input));
         case "done":
             return new DoneCommand(this.taskList, filterTaskIndex(input));
         case "todo":

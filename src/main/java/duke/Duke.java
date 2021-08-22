@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * Project Duke: Incrementally building a Chatbot.
  *
- * Current Progress: Level 8. Date and Times
+ * Current Progress: Level 9. Find
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted commands:
@@ -21,6 +21,7 @@ import java.util.Scanner;
  *   - 'event x /at a b c' -> adds an Event task of x that is on date a and starts at time b and ends at time c
  *   - 'list' -> displays current list of tasks
  *   - 'check x' -> displays list of tasks due on date x
+ *   - 'find x' -> displays list of tasks that contains the keyword x in their description
  *   - 'done x' -> marks Task x as done
  *   - 'delete x' -> deletes Task x from the task list
  *   - 'bye' -> exits the program

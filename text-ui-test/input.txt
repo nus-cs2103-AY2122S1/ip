@@ -9,6 +9,7 @@ done 2
 done 3
 list
 check 23/08/2021
+find re
 todo
 deadline submit assignment
 event x'mas /at 25/12/2021 0000 2500

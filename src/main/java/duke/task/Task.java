@@ -67,6 +67,18 @@ public abstract class Task {
         return false;
     }
 
+    /**
+     * Checks if tasks description contains the keyword given and returns the result.
+     * Both description and keyword will be case insensitive for check.
+     *
+     * @param keyword String of the keyword to be checked against the description.
+     * @return boolean of whether description contains the keyword.
+     */
+    public boolean containsKeyword(String keyword) {
+        int result = this.description.toLowerCase().indexOf(keyword.toLowerCase());
+        return result != -1;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), this.description);
