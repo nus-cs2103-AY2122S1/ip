@@ -1,4 +1,10 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class CommandParser {
+    private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
     public static Command parse(String commandString) throws DukeException {
         if (commandString.startsWith("list")) {
             return parseListCommand();
@@ -52,13 +58,18 @@ public class CommandParser {
             throw new DukeException("Please indicate in this format: deadline [description] /by [due date].");
         }
         String deadlineContent = payload.substring(0, separatorIndex).trim();
-        String deadline = payload.substring(separatorIndex + "/by".length()).trim();
+        String deadlineString = payload.substring(separatorIndex + "/by".length()).trim();
         if (deadlineContent.length() <= 0) {
             throw new DukeException("Please indicate the deadline description!");
-        } else if (deadline.length() <= 0) {
+        } else if (deadlineString.length() <= 0) {
             throw new DukeException("Please indicate the due date!");
         }
-        return new AddCommand(new DeadlineTask(deadlineContent, false, deadline));
+        try {
+            LocalDateTime deadline = LocalDateTime.parse(deadlineString, dateTimeFormatter);
+            return new AddCommand(new DeadlineTask(deadlineContent, false, deadline));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please provide date time in the format yyyy-MM-dd HHmm, e.g. 2021-08-04 2359");
+        }
     }
 
     private static Command parseEventCommand(String commandString) throws DukeException {
@@ -68,13 +79,18 @@ public class CommandParser {
             throw new DukeException("Please indicate in this format: event [description] /at [due date].");
         }
         String eventContent = payload.substring(0, separatorIndex).trim();
-        String eventDate = payload.substring(separatorIndex + "/at".length()).trim();
+        String eventDateString = payload.substring(separatorIndex + "/at".length()).trim();
         if (eventContent.length() <= 0) {
             throw new DukeException("Please indicate the event description!");
-        } else if (eventDate.length() <= 0) {
+        } else if (eventDateString.length() <= 0) {
             throw new DukeException("Please indicate the event date!");
         }
-        return new AddCommand(new DeadlineTask(eventContent, false, eventDate));
+        try {
+            LocalDateTime eventDate = LocalDateTime.parse(eventDateString, dateTimeFormatter);
+            return new AddCommand(new EventTask(eventContent, false, eventDate));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please provide date time in the format yyyy-MM-dd HHmm, e.g. 2021-08-04 2359");
+        }
     }
 
     private static Command parseDeleteCommand(String commandString) throws DukeException {
