@@ -9,12 +9,25 @@ import Duke.TaskList;
 import Duke.Ui;
 import Duke.Parser;
 
+ /**
+  * <pre>
+  * Duke class, which is the main class
+  * to run this duke app.
+  * </pre>
+  * @param <Storage> storage object stoating history
+  * @param <TaskList> tasklist object to sort tasks
+  * @author Yuichiro Fukushima
+  */
 public class Duke {
 
     private Storage storage;
     private TaskList tasklist;
     private Ui ui;
 
+    /**
+     * Defult constructor  
+     * @param filepath filepath to the history file
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -24,7 +37,9 @@ public class Duke {
             e.printStackTrace();
         }
     }
-
+    /**
+     * method to run the main process
+     */
     public void run() throws InputNotValidError, IOException{
         System.out.println(this.ui.great());
         Scanner input = new Scanner(System.in);

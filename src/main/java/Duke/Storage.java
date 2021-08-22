@@ -12,14 +12,33 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+
+
+ /**
+  * <pre>
+  * Stroage class, 
+  * this class is to deal with 
+  * loading tasks from the file and saving tasks in the file.
+  * </pre>
+  * @param <String> Filepath path to the data txt file
+  */
 public class Storage {
 
     String filepath;
 
+    /**
+     * Defult constructor  
+     * @param filepath filepath to the data txt file
+     */
     public Storage (String filepath){
         this.filepath = filepath;
     }
 
+    /**
+     * Method to load data from txt file,
+     * returns the arraylist of tring array representation of tasks.
+     * @return String array representation of tasks
+     */           
     public ArrayList<String[]> loadData() throws FileNotFoundException{
     ArrayList<String[]> res = new ArrayList<>();
     try (BufferedReader br = new BufferedReader(new FileReader(this.filepath))) {
@@ -34,6 +53,10 @@ public class Storage {
     return res;
     }
 
+    /**
+     * Method to save data to txt file,
+     * @param tasks String array representation of tasks
+     */     
     public void saveData(ArrayList<Task> tasks) throws IOException{
         File fout = new File(this.filepath);
         FileOutputStream fos = new FileOutputStream(fout);
