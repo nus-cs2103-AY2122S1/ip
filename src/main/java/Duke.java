@@ -41,7 +41,8 @@ public class Duke {
                     todoBuilder.append(split[i]);
                 }
                 desc = todoBuilder.toString();
-                list.add(new Todo(desc));
+
+                list.add(new Todo(desc, taskDone));
                 break;
 
             case "D" :
@@ -70,7 +71,8 @@ public class Duke {
                 desc = deadlineBuilder.toString();
                 by = byBuilder.toString();
 
-                list.add(new Deadline(desc, by));
+                list.add(new Deadline(desc, by, taskDone));
+
                 break;
 
             case "E" :
@@ -99,7 +101,8 @@ public class Duke {
                 desc = eventBuilder.toString();
                 at = atBuilder.toString();
 
-                list.add(new Event(desc, at));
+                list.add(new Event(desc, at, taskDone));
+
             }
         }
 
@@ -205,7 +208,7 @@ public class Duke {
                 desc = todoBuilder.toString();
                 try {
                     checkDesc(desc);
-                    Todo todo = new Todo(desc);
+                    Todo todo = new Todo(desc, false);
                     list.add(todo);
 
                     System.out.println("Got it. I've added this task:");
@@ -253,7 +256,7 @@ public class Duke {
                 by = byBuilder.toString();
                 try {
                     checkDesc(desc);
-                    Deadline deadline = new Deadline(desc, by);
+                    Deadline deadline = new Deadline(desc, by, false);
                     list.add(deadline);
 
                     System.out.println("Got it. I've added this task:");
@@ -301,7 +304,7 @@ public class Duke {
                 at = atBuilder.toString();
                 try {
                     checkDesc(desc);
-                    Event event = new Event(desc, at);
+                    Event event = new Event(desc, at, false);
                     list.add(event);
 
                     System.out.println("Got it. I've added this task:");
