@@ -17,17 +17,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public boolean save(File file) {
-        String taskInfo = Deadline.TASK_LETTER + " | " + this.getStatusIcon() + " | " + this.description + " | "
+    public String stringToStore() {
+        return Deadline.TASK_LETTER + " | " + this.getStatusIcon() + " | " + this.description + " | "
                 + this.by + "\n";
-        try {
-            FileWriter fw = new FileWriter(file, true);
-            fw.write(taskInfo);
-            fw.flush();
-            fw.close();
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
     }
 }

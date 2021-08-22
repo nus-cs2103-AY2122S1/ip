@@ -22,5 +22,5 @@ public abstract class Task {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 
-    public abstract boolean save(File file);
+    public abstract String stringToStore();
 }

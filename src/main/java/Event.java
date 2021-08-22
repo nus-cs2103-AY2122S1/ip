@@ -17,17 +17,8 @@ public class Event extends Task {
     }
 
     @Override
-    public boolean save(File file) {
-        String taskInfo = Event.TASK_LETTER + " | " + this.getStatusIcon() + " | " + this.description + " | "
+    public String stringToStore() {
+        return Event.TASK_LETTER + " | " + this.getStatusIcon() + " | " + this.description + " | "
                 + this.at + "\n";
-        try {
-            FileWriter fw = new FileWriter(file, true);
-            fw.write(taskInfo);
-            fw.flush();
-            fw.close();
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
     }
 }

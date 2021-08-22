@@ -1,3 +1,4 @@
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -22,6 +23,7 @@ public class Duke {
             try {
                 Command command = Command.valueOf(commandName.toUpperCase());
                 shouldContinue = receiveCommand(command, sc);
+                this.updateStorage();
             } catch (IllegalArgumentException e) { // caused by user entering a command that is invalid
                 sc.nextLine(); // clear user's input
                 String errorMessage = new InvalidCommandException().getMessage();
@@ -182,15 +184,10 @@ public class Duke {
                 // checked for command validity in receiveCommand(), so this should not execute at all
                 throw new InvalidCommandException();
         }
-        if (task.save(this.file)) {
-            tasks.add(task);
-            printMessage(String.format("Got it. I've added this task:"
-                    + "\n\t%s"
-                    + "\nNow you have %d tasks in the list.", task, this.tasks.size()));
-        } else {
-            printMessage("Failed to add task.");
-        }
-
+        tasks.add(task);
+        printMessage(String.format("Got it. I've added this task:"
+                + "\n\t%s"
+                + "\nNow you have %d tasks in the list.", task, this.tasks.size()));
     }
 
     public void deleteTask(int index) {
@@ -201,6 +198,20 @@ public class Duke {
                     "Now you have %d tasks in the list.", task, tasks.size()));
         } catch (IndexOutOfBoundsException e) {
             printMessage("There is no such task to delete!");
+        }
+    }
+
+    public void updateStorage() {
+        try {
+            FileWriter fw = new FileWriter(this.file);
+            for (int i = 0; i < this.tasks.size(); i++) {
+                String taskInfo = tasks.get(i).stringToStore();
+                fw.write(taskInfo);
+            }
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Failed to update storage.");
         }
     }
 
