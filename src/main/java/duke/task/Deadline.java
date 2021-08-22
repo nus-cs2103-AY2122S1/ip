@@ -1,19 +1,23 @@
+package duke.task;
+
+import duke.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task {
+public class Deadline extends Task{
     private String time;
     private LocalDate localDate;
 
-    Event(String content) throws DukeException {
-        super(content.substring(6, content.indexOf("/")).trim());
+    public Deadline(String content) throws duke.DukeException {
+        super(content.substring(9, content.indexOf("/")).trim());
         this.time = content.substring(content.indexOf("/") + 1).trim();
         try {
             this.localDate = LocalDate.parse(this.time);
         } catch (DateTimeParseException e) {
             throw new DukeException(" ☹ SORZ but I only understand date in yyyy-MM-dd format!");
         }
+        
     }
 
     public String getTime() {
@@ -22,18 +26,19 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)",
+        return String.format("[D][%s] %s (by: %s)",
                 this.getStatus() ? "X" : " ", this.getContent(), this.time);
     }
 
     @Override
+
     public String record() {
-        return String.format("E | %s | %s | %s",
+        return String.format("D | %s | %s | %s",
                 this.getStatus() ? "1" : "0", this.getContent(), this.time);
     }
 
     public String getType() {
-        return "E";
+        return "D";
     }
 
     public boolean hasSchedule() {

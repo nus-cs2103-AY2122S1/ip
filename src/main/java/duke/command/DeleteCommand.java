@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.DukeException;
+
 public class DeleteCommand extends Command {
     private int index;
 
@@ -23,16 +27,16 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(String command) throws DukeException {
         if (isDeleteOps(command)) {
-            this.index = Integer.parseInt(command.substring(7));
+            this.index = Integer.parseInt(command.substring(7)) - 1;
         } else {
-            throw new DukeException("☹ Would you specify the task for me my dear?");
+            throw new DukeException("☹ Would you specify the duke.task for me my dear?");
         }
     }
     
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(duke.TaskList taskList, duke.Ui ui, duke.Storage storage) throws DukeException {
         if (index > taskList.size()) {
-            throw new DukeException("☹ oopsie!!! The specified task does not exit.");
+            throw new DukeException("☹ oopsie!!! The specified duke.task does not exit.");
         }
         taskList.deleteTask(index);
         ui.showDelete(taskList.getTask(index), taskList.size());

@@ -12,8 +12,8 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
-Gotcha my dear. I've added this task for you: 
-[T][ ] a todo task
+Gotcha my dear. I've added this duke.task for you: 
+[T][ ] a todo duke.task
 Now you have 1 tasks in the list.
 ____________________________________________________________
 
@@ -26,7 +26,7 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
-Gotcha my dear. I've added this task for you: 
+Gotcha my dear. I've added this duke.task for you: 
 [D][ ] cs2103t ip  (by: thur 2359)
 Now you have 2 tasks in the list.
 ____________________________________________________________
@@ -40,7 +40,7 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
-Gotcha my dear. I've added this task for you: 
+Gotcha my dear. I've added this duke.task for you: 
 [E][ ] sem1  (at: aug-nov)
 Now you have 3 tasks in the list.
 ____________________________________________________________
@@ -48,27 +48,27 @@ ____________________________________________________________
 ____________________________________________________________
 Darling, here are the tasks in your list:
 
-1. [T][ ] a todo task
+1. [T][ ] a todo duke.task
 2. [D][ ] cs2103t ip  (by: thur 2359)
 3. [E][ ] sem1  (at: aug-nov)
 ____________________________________________________________
 
 ____________________________________________________________
-Noice! I've marked this task as done: 
-[T][X] a todo task
+Noice! I've marked this duke.task as done: 
+[T][X] a todo duke.task
 ____________________________________________________________
 
 ____________________________________________________________
 Darling, here are the tasks in your list:
 
-1. [T][X] a todo task
+1. [T][X] a todo duke.task
 2. [D][ ] cs2103t ip  (by: thur 2359)
 3. [E][ ] sem1  (at: aug-nov)
 ____________________________________________________________
 
 ____________________________________________________________
-okie! I've removed this annoying task: 
-[T][X] a todo task
+okie! I've removed this annoying duke.task: 
+[T][X] a todo duke.task
 Now you have 2 tasks in the list.
 ____________________________________________________________
 
@@ -80,19 +80,19 @@ Darling, here are the tasks in your list:
 ____________________________________________________________
 
 ____________________________________________________________
-☹ Would you specify the task for me my dear?
+☹ Would you specify the duke.task for me my dear?
 ____________________________________________________________
 
 ____________________________________________________________
-☹ Would you specify the task for me my dear?
+☹ Would you specify the duke.task for me my dear?
 ____________________________________________________________
 
 ____________________________________________________________
-☹ oopsie!!! The specified task does not exit.
+☹ oopsie!!! The specified duke.task does not exit.
 ____________________________________________________________
 
 ____________________________________________________________
-☹ oopsie!!! The specified task does not exit.
+☹ oopsie!!! The specified duke.task does not exit.
 ____________________________________________________________
 
 ____________________________________________________________

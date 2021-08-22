@@ -1,12 +1,15 @@
+package duke;
+
+import duke.task.Task;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class TaskList {
     
-    private ArrayList<Task> taskList;
+    private ArrayList<duke.task.Task> taskList;
     
-    public TaskList(ArrayList<Task> taskList) {
+    public TaskList(ArrayList<duke.task.Task> taskList) {
         this.taskList = taskList;
     }
     public TaskList() {
@@ -44,16 +47,16 @@ public class TaskList {
     }
     
     public void doneTask(int index) throws DukeException {
-        Task holder = this.taskList.get(index - 1);
+        Task holder = this.taskList.get(index);
         holder.doneTask();
     }
     
     public void deleteTask(int index) throws DukeException {
-        String holder = this.taskList.get(index - 1).toString();
+        String holder = this.taskList.get(index).toString();
         this.taskList.remove(index - 1);
         this.taskList.trimToSize();
         System.out.println("____________________________________________________________\n"
-                + "okie! I've removed this annoying task: \n"
+                + "okie! I've removed this annoying duke.task: \n"
                 + holder
                 + "\nNow you have " + this.taskList.size() + " tasks in the list.\n"
                 + "____________________________________________________________\n");

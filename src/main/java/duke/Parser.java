@@ -1,3 +1,6 @@
+package duke;
+
+import duke.command.*;
 public class Parser {
 
     private enum CommandWord {
