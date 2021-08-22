@@ -1,8 +1,11 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -23,7 +26,7 @@ public class Duke {
     /** Path of the current folder as a string */
     private static final String DIRECTORY_PATH = System.getProperty("user.dir");
     /** Path of file containing data saved */
-    private File data;
+    private static File data;
     /** List of tasks */
     private static ArrayList<Task> tasks = new ArrayList<>();
     /** Whether the Duke program is running */
@@ -35,8 +38,8 @@ public class Duke {
      * Constructor of the class 'Duke'.
      */
     public Duke() {
-        this.data = Paths.get(Duke.DIRECTORY_PATH, "data", "duke.txt").toFile();
-        this.readFile();
+        Duke.data = Paths.get(Duke.DIRECTORY_PATH, "data", "duke.txt").toFile();
+        Duke.readFile();
         this.isRunning = true;
         System.out.println(Duke.GREETING_MESSAGE);
         this.input = new Scanner(System.in);
@@ -45,20 +48,21 @@ public class Duke {
     /**
      * Reads the data in the file. If the file doesn't exist, create it.
      */
-    private void readFile() {
+    private static void readFile() {
         try {
-            Scanner fileScanner = new Scanner(this.data);
-            while (fileScanner.hasNext()) {
+            Scanner fileScanner = new Scanner(Duke.data);
+            while (fileScanner.hasNextLine()) {
                 String task = fileScanner.nextLine();
-                this.readData(task);
+                Duke.readData(task);
             }
+            fileScanner.close();
         } catch (FileNotFoundException fileNotFoundException) { // if file doesn't exist, create it.
             try {
-                this.data.createNewFile();
+                Duke.data.createNewFile();
             } catch (IOException ioException) { // if directory doesn't exist, create it.
                 File directory = Paths.get(Duke.DIRECTORY_PATH, "data").toFile();
                 directory.mkdirs();
-                this.readFile(); // run this method again to create a file.
+                Duke.readFile(); // run this method again to create a file.
             }
         }
     }
@@ -68,7 +72,7 @@ public class Duke {
      *
      * @param line A line of data.
      */
-    private void readData(String line) {
+    private static void readData(String line) {
         String[] splitted = line.split(" / ");
         Task task;
         if (splitted[0].equals("T")) { // a todo task
@@ -83,7 +87,7 @@ public class Duke {
         if (splitted[1].equals("1")) {
             task.markAsDone();
         }
-        Duke.addToList(task);
+        Duke.tasks.add(task); // add to task list.
     }
 
     /**
@@ -91,8 +95,18 @@ public class Duke {
      *
      * @param task The new task.
      */
-    public static void addToList(Task task) {
-        Duke.tasks.add(task);
+    public static void addToList(Task task){
+        Duke.tasks.add(task); // add to task list.
+        try {
+            FileWriter fileWriter = new FileWriter(Duke.data, true);
+            fileWriter.append(task.toFileFormatString()); // write to file.
+            fileWriter.close();
+        } catch (IOException ioException) {
+            Duke.readFile();
+            DukeException dukeException = new DukeException(
+                    "☹ OOPS!!! The file cannot be found. A new file has been created, please try again!");
+            System.out.println(dukeException);
+        }
     }
 
     /**
@@ -101,7 +115,7 @@ public class Duke {
      * @param task The task to be removed.
      */
     public static void removeFromList(Task task) {
-        Duke.tasks.remove(task);
+        Duke.tasks.remove(task); // remove from task list.
     }
 
     /**
@@ -209,18 +223,11 @@ public class Duke {
      */
     public static void main(String[] args) {
         Duke duke = new Duke();
-//        File file = Duke.FILE_PATH.toFile();
-//        try {
-//            Scanner s = new Scanner(file);
-//            System.out.println(s.nextLine());
-//        } catch (Exception e) {
-//            System.out.println("!");
-//        }
         while (duke.isRunning) {
             try {
                 duke.readCommand();
-            } catch (DukeException e) {
-                System.out.println(e);
+            } catch (DukeException dukeException) {
+                System.out.println(dukeException);
                 continue;
             }
         }
