@@ -1,13 +1,20 @@
 package Duke;
 
+import java.io.*;
+
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
 
     private final List<Task> taskList;
+    File file = new File("taskFile/taskList.txt");
+
     public Duke() {
         this.taskList = new ArrayList<>();
+        loadData();     // process data in the task list file
     }
 
     public boolean isExitCommand(String command) {
@@ -52,6 +59,8 @@ public class Duke {
         } catch (NumberFormatException e) {
             respondWith("☹ OOPS!!! Your description of '" + commandType + "' is incorrect!\n" +
                     "To use '" + commandType + "', please enter 'help' for instructions");
+        } finally {
+            saveData();     // mark any changes to the text file
         }
     }
 
@@ -79,21 +88,16 @@ public class Duke {
      * Getting helps with Duke command
      */
     private void respondHelp() {
-        respondWith("Welcome to Duke! Here are a list of commands that you can use:\n" +
-                "'help':     Instructions and command formula\n\n" +
-                "'list':     Display a list of all current tasks you have\n\n" +
-                "'todo':     Add a task to do with no fixed timing\n" +
-                "            Formula: 'todo' + <your task name>\n\n" +
-                "'deadline': Add a task with a deadline timing to your list\n" +
-                "            Formula: 'deadline' + <your task name> + (optional: '/by' + <your deadline>)\n\n" +
-                "'event':    Add an event task with starting or fixed timing to your list\n" +
-                "            Formula: 'event' + <your task name> + (optional: '/at' + <your event time>)\n\n" +
-                "'done':     Mark a specified task in your list as done\n" +
-                "            Formula: 'done' + <task index> (To mark all tasks as done, enter 'done all')\n\n" +
-                "'delete':   Delete a specified task in your list\n" +
-                "            Formula: 'delete' + <task index> (To delete all tasks in list, enter 'delete all')\n\n" +
-                "'bye':      Exit the program\n"
-        );
+        try {
+            File file = new File("taskFile/instructions.txt");
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                System.out.println(sc.nextLine());
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -196,5 +200,72 @@ public class Duke {
         }
         System.out.println();
         System.out.print("Enter command: ");
+    }
+
+    public void saveData() {
+        try {
+            FileWriter writer = new FileWriter(file);
+            for (Task task : taskList) {
+                writer.write(task + "\n");
+            }
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * Assuming that data are loaded correctly
+     */
+    public void loadData() {
+        try {
+            FileReader reader = new FileReader(file);
+            Scanner sc = new Scanner(reader);
+            while (sc.hasNextLine()) {
+                String taskString = sc.nextLine();
+                char type = (taskString.length() < 1) ? ' ' : taskString.trim().charAt(1);
+                char status = (taskString.length() < 4) ? '?' : taskString.trim().charAt(4);
+                String[] taskArray = taskString.split("] ", 2);
+                String taskDescription = (taskArray.length < 2) ? "" : taskArray[1];
+                Task curr;
+                switch (type) {
+                    case 'T':
+                        taskDescription = taskDescription.trim();
+                        curr = new Todo(taskDescription);
+                        if (status == 'X') {
+                            curr.markAsCompleted();
+                        }
+                        taskList.add(curr);
+                        break;
+                    case 'D':
+                        taskDescription = taskDescription.trim().
+                                replaceAll("\\(", "/").
+                                replaceAll("\\)", "");
+                        curr = new Deadline(taskDescription);
+                        if (status == 'X') {
+                            curr.markAsCompleted();
+                        }
+                        taskList.add(curr);
+                        break;
+                    case 'E':
+                        taskDescription = taskDescription.
+                                replaceAll("\\(", "/").
+                                replaceAll("\\)", "");
+                        curr = new Event(taskDescription);
+                        if (status == 'X') {
+                            curr.markAsCompleted();
+                        }
+                        taskList.add(curr);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            sc.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
