@@ -18,13 +18,13 @@ public class Storage {
     private final File DATA_FILE;
 
     public Storage(String filepath) {
-        DATA_FILE = new File("data/duke.txt");
+        DATA_FILE = new File(filepath);
 
         //Create data file if missing
         if (!DATA_FILE.exists()) {
             try {
                 Files.createDirectory(Path.of("data"));
-                Files.createFile(Path.of("data/duke.txt"));
+                Files.createFile(Path.of(filepath));
             } catch (IOException e) {
                 System.out.println("WARNING: Cannot create save file");
             }
