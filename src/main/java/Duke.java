@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,12 +9,16 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        run(scanner);
+        try {
+            List<Task> taskList = TextFile.readFromTextFile();
+            run(scanner, taskList);
+        } catch (FileNotFoundException e) {
+            System.out.println("Lollipop: ./data or ./data/task_list.txt is not found.");
+        }
+
     }
 
-    public static void run(Scanner scanner) {
-        List<Task> taskList = new ArrayList<>();
-
+    public static void run(Scanner scanner, List<Task> taskList) {
         // Hello message
         System.out.println(
                 "Lollipop: Hello! I am your personal chatbot, Lollipop! " +
@@ -40,12 +45,14 @@ public class Duke {
                     int taskNumber = parseInt(command.split(" ")[1]);
                     Task task = taskList.get(taskNumber - 1);
                     task.markAsDone();
+                    TextFile.writeToTextFile(taskList);
                     System.out.printf("Lollipop: %s has been marked as done.%n", task.toString());
 
                 } else if (command.startsWith("delete")) {
                     int taskNumber = parseInt(command.split(" ")[1]);
                     Task task = taskList.get(taskNumber - 1);
                     taskList.remove(taskNumber - 1);
+                    TextFile.writeToTextFile(taskList);
                     System.out.printf("Lollipop: %s has been deleted.%n", task.toString());
 
                 } else if (command.startsWith("todo")) {
@@ -56,6 +63,7 @@ public class Duke {
                     String description = splitCommand[1];
                     Task task = new Todo(description);
                     taskList.add(task);
+                    TextFile.writeToTextFile(taskList);
                     System.out.printf("Lollipop: %s has been added.%n", task.toString());
 
                 } else if (command.startsWith("deadline")) {
@@ -74,6 +82,7 @@ public class Duke {
                     String deadline = splitDescription[1];
                     Task task = new Deadline(description, deadline);
                     taskList.add(task);
+                    TextFile.writeToTextFile(taskList);
                     System.out.printf("Lollipop: %s has been added.%n", task.toString());
 
                 } else if (command.startsWith(("event"))) {
@@ -92,6 +101,7 @@ public class Duke {
                     String time = splitDescription[1];
                     Task task = new Event(description, time);
                     taskList.add(task);
+                    TextFile.writeToTextFile(taskList);
                     System.out.printf("Lollipop: %s has been added.%n", task.toString());
 
                 } else {
@@ -103,6 +113,8 @@ public class Duke {
                 System.out.println("Lollipop: No such task number found.");
             } catch (NumberFormatException e) {
                 System.out.println("Lollipop: Please input a number.");
+            } catch (FileNotFoundException e) {
+                System.out.println("Lollipop: ./data or ./data/task_list.txt is not found.");
             }
 
             System.out.println("");

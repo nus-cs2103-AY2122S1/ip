@@ -11,4 +11,8 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(), this.time);
     }
+
+    public String getTime() {
+        return this.time;
+    }
 }
