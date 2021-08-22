@@ -6,7 +6,10 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Data {
     static ArrayList<String[]> loadData(String pathname) throws FileNotFoundException{
@@ -43,9 +46,9 @@ public class Data {
             if(type.equals("T")){
                 output = type + " | " + done + " | " + actionname;
             }else{
-                String date = eachtask.toString().split("\\(")[1];
-                date = date.substring(3, date.length() - 1 );
-                output = type + " | " + done + " | " + actionname + " | " + date;
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                Date date = eachtask.getDate();
+                output = type + " | " + done + " | " + actionname + " | " + dateFormat.format(date) ;
             }
             bw.write(output);
             bw.newLine();
