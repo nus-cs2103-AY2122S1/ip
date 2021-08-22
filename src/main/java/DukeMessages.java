@@ -104,8 +104,8 @@ public class DukeMessages {
     }
 
     /**
-     * Displays all items and their completion status.
-     * @param taskList the list containing Task objects.
+     * Displays all the tasks with the keywords.
+     * @param taskList the list containing filtered tasks.
      */
     public void displayFilteredTasks(List<Task> taskList) {
 
