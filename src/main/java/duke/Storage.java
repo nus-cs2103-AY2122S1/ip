@@ -19,6 +19,11 @@ public class Storage {
   private static final String READ_SUCCESS = "A saved file has been found! It will now be loaded :)";
   private static final String READ_FAILURE = "No saved file has been found :(";
 
+  /**
+   * Returns the read contents from the txt file.
+   *
+   * @return
+   */
   public List<String> load() {
     List<String> taskArrayAsString = new ArrayList<>();
     try {
@@ -36,6 +41,13 @@ public class Storage {
     return taskArrayAsString;
   }
 
+  /**
+   * Writes the given tasks to the file.
+   *
+   * @param taskList
+   * @return
+   * @throws IOException
+   */
   public String writeToFile(List<Task> taskList) throws IOException {
     FileWriter myWriter = new FileWriter(this.filepath);
 

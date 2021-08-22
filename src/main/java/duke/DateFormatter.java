@@ -8,6 +8,12 @@ public class DateFormatter {
 
   private DateFormatter() {}
 
+  /**
+   * Formats date to use MMM d yyyy pattern
+   *
+   * @param date
+   * @return
+   */
   public static String formatDate(String date) {
     String outputDate = "";
     try {

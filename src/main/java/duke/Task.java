@@ -9,6 +9,12 @@ public abstract class Task {
   protected static final String INDENTATION_5 = "     ";
   protected static final String DIVIDER = " | ";
 
+  /**
+   * Marks the task as done, and returns the done message.
+   * If already done, it'll return an error message.
+   *
+   * @return
+   */
   public String setTaskAsDone() {
     if (this.done) {
       return Task.ERROR_ALREADY_DONE;

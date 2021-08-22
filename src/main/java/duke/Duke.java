@@ -31,6 +31,9 @@ public class Duke {
   private static final String COMMAND_FIND = "find";
   private static final String COMMAND_RESET = "reset";
 
+  /**
+   * Handles the user commands using a switch.
+   */
   public void handleCommands() {
     Scanner scanner = new Scanner(System.in);
     boolean hasCommands = true;
@@ -97,6 +100,9 @@ public class Duke {
     }
   }
 
+  /**
+   * Runs the Duke program.
+   */
   public void run() {
     Printer.print(GREETING);
     this.handleCommands();
