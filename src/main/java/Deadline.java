@@ -24,6 +24,11 @@ public class Deadline extends Task{
         return this.prefix;
     }
 
+    @Override
+    public String toString() {
+        return (this.prefix + " " + super.showStatus() + this.name + ":" + this.date);
+    }
+
     /**
      * print out the relevant info of the deadline task
      */

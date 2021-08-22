@@ -24,6 +24,11 @@ public class Event extends Task{
         return this.prefix;
     }
 
+    @Override
+    public String toString() {
+        return (this.prefix + " " + super.showStatus() + this.name + ":" + this.time);
+    }
+
     /**
      * print out the relevant info of the event
      */

@@ -20,6 +20,11 @@ public class Todo extends Task{
         return this.prefix;
     }
 
+    @Override
+    public String toString() {
+        return (this.prefix + " " + super.showStatus() + this.name);
+    }
+
     /**
      * print out the relevant info of the todo
      */
