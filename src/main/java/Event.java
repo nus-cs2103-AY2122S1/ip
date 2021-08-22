@@ -11,14 +11,20 @@ public class Event extends Task {
      *
      * @param description The String description/name of the task
      * @param at The String describing when the Event takes place
+     * @param isDone The Boolean of if the task is done
      */
-    public Event(String description, String at) {
-        super(description);
+    public Event(String description, String at, Boolean isDone) {
+        super(description, isDone);
         this.at = at;
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";
+    }
+
+    @Override
+    public String toData() {
+        return "[E] | " + super.toData() + " | " + this.at;
     }
 }

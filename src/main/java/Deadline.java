@@ -12,13 +12,18 @@ public class Deadline extends Task {
      * @param description The String description/name of the task
      * @param by The String describing when the Deadline need to be done by
      */
-    public Deadline(String description, String by) {
-        super(description);
+    public Deadline(String description, String by, Boolean isDone) {
+        super(description, isDone);
         this.by = by;
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
+    }
+
+    @Override
+    public String toData() {
+        return "[D] | " + super.toData() + " | " + this.by;
     }
 }
