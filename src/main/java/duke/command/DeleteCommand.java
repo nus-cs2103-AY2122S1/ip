@@ -5,8 +5,8 @@ import duke.util.Parser;
 import duke.util.ToDoList;
 
 public class DeleteCommand extends Command {
-    private String input;
     private final ToDoList list;
+    private final String input;
 
     public DeleteCommand(String input, ToDoList list) {
         this.input = input;

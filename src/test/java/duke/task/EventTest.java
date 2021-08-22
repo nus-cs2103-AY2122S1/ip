@@ -12,19 +12,19 @@ public class EventTest {
     }
 
     @Test
-    public void toStringDateTest() {
+    public void toStringTest_date() {
         Event task = new Event("Test toString() with Date", "2021-08-22");
         assertEquals("[E][ ] Test toString() with Date (at: Aug 22 2021)", task.toString());
     }
 
     @Test
-    public void toStringDateTimeTest() {
+    public void toStringTest_dateTime() {
         Event task = new Event("Test toString() with DateTime", "2021-08-22 1000");
         assertEquals("[E][ ] Test toString() with DateTime (at: Aug 22 2021 10.00 AM)", task.toString());
     }
 
     @Test
-    public void toStringNormalTest() {
+    public void toStringTest_normal() {
         Event task = new Event("Test toString()", "Tonight");
         assertEquals("[E][ ] Test toString() (at: Tonight)", task.toString());
     }

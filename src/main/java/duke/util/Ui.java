@@ -5,10 +5,10 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class Ui {
-    private static final String divider = "\t" +
+    public static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final String DIVIDER = "\t" +
             "-------------------------------------------------------------------------";
-
-    private static final String banner =
+    private static final String BANNER =
             "____    __    ____  _______  __        ______   ______   .___  ___.  _______    .___________.  ______       _______   __    __   __  ___  _______  __  \r\n"
                     + "\\   \\  /  \\  /   / |   ____||  |      /      | /  __  \\  |   \\/   | |   ____|   |           | /  __  \\     |       \\ |  |  |  | |  |/  / |   ____||  | \r\n"
                     + " \\   \\/    \\/   /  |  |__   |  |     |  ,----'|  |  |  | |  \\  /  | |  |__      `---|  |----`|  |  |  |    |  .--.  ||  |  |  | |  '  /  |  |__   |  | \r\n"
@@ -17,34 +17,32 @@ public class Ui {
                     + "    \\__/  \\__/     |_______||_______| \\______| \\______/  |__|  |__| |_______|       |__|      \\______/     |_______/  \\______/  |__|\\__\\ |_______|(__) \r\n"
                     + "                                                                                                                                                       ";
 
-    private static final String ls = System.lineSeparator();
-
     /**
      * Formats message passed in and prints it out to the screen.
      *
      * @param message Message to be pretty printed.
      */
     public static void prettyPrint(String message) {
-        System.out.printf("%s\t%s%s", divider + ls, message + ls, divider + ls);
+        System.out.printf("%s\t%s%s", DIVIDER + LINE_SEPARATOR, message + LINE_SEPARATOR, DIVIDER + LINE_SEPARATOR);
     }
 
     /** Prints the welcome message when a user uses the bot for the first time. */
     public static void printWelcomeMessage() {
-        System.out.println(banner);
+        System.out.println(BANNER);
         prettyPrint(
-                "Hello! I'm Duke, your personal CLI bot!" + ls
-                        + "\tI now function as a simple ToDoList." + ls
-                        + "\tI can keep track of 3 different types of tasks:" + ls
-                        + "\t\t- ToDo: To add a new todo task, type 'todo' followed by a task description." + ls
+                "Hello! I'm Duke, your personal CLI bot!" + LINE_SEPARATOR
+                        + "\tI now function as a simple ToDoList." + LINE_SEPARATOR
+                        + "\tI can keep track of 3 different types of tasks:" + LINE_SEPARATOR
+                        + "\t\t- ToDo: To add a new todo task, type 'todo' followed by a task description." + LINE_SEPARATOR
                         + "\t\t- Deadline: To add a new deadline, type 'deadline' followed by the task " +
-                        "description and specify the deadline using '/by <dateTime>'" + ls
+                        "description and specify the deadline using '/by <dateTime>'" + LINE_SEPARATOR
                         + "\t\t- Event: To add a new event, type 'event' followed by the event description "
-                        + "and specify the timing using '/by <dateTime>'" + ls
-                        + "\tTo see all your task currently, type 'list'." + ls
+                        + "and specify the timing using '/by <dateTime>'" + LINE_SEPARATOR
+                        + "\tTo see all your task currently, type 'list'." + LINE_SEPARATOR
                         + "\tTo delete a task, type 'delete' followed by the index of the task you wish to "
-                        + "delete (e.g delete 2)." + ls
+                        + "delete (e.g delete 2)." + LINE_SEPARATOR
                         + "\tYou can also mark tasks as done by typing 'done' followed by the index of the "
-                        + "task you completed (e.g done 2)." + ls
+                        + "task you completed (e.g done 2)." + LINE_SEPARATOR
                         + "\tOnce you are done, just type 'exit' to quit the program.");
     }
 
@@ -54,17 +52,17 @@ public class Ui {
     }
 
     public static void printList(ArrayList<Task> list) {
-        System.out.println(divider);
+        System.out.println(DIVIDER);
         // Custom message for when user types 'list' when nothing is added.
         if (list.size() == 0) {
             System.out.println("\tYou are all done for the day :-)");
         } else {
             System.out.println("\tHere are the tasks in your list:");
             for (int i = 1; i <= list.size(); i++) {
-                System.out.printf("\t%s. %s", i, list.get(i - 1) + ls);
+                System.out.printf("\t%s. %s", i, list.get(i - 1) + LINE_SEPARATOR);
             }
         }
-        System.out.println(divider);
+        System.out.println(DIVIDER);
     }
 
     public static void printException(String message) {

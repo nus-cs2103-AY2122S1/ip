@@ -1,9 +1,9 @@
 package duke.util;
 
-import duke.task.Task;
 import duke.exception.DukeException;
 import duke.exception.DukeNegativeIndexException;
 import duke.exception.InvalidIndexException;
+import duke.task.Task;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class ToDoList {
     private final ArrayList<Task> list;
     private final DataManager dataManager;
-    private final String ls = System.lineSeparator();
 
     /** Instantiates a new To do list. */
     public ToDoList(ArrayList<Task> list, DataManager dataManager) {
@@ -38,8 +37,9 @@ public class ToDoList {
         list.add(task);
         Ui.prettyPrint(
                 String.format(
-                        "Got it. I've added this task:" + ls + "\t\t%s\tNow you have %s tasks in the list.",
-                        task + ls, list.size()));
+                        "Got it. I've added this task:" + Ui.LINE_SEPARATOR
+                                + "\t\t%s\tNow you have %s tasks in the list.",
+                        task + Ui.LINE_SEPARATOR, list.size()));
     }
 
     /**
@@ -67,7 +67,7 @@ public class ToDoList {
             Ui.prettyPrint(
                     String.format(
                             "Noted. I've removed this task:\r\n\t\t%s\tNow you have %s tasks in the list.",
-                            task + ls, list.size() - 1));
+                            task + Ui.LINE_SEPARATOR, list.size() - 1));
             list.remove(index - 1);
         }
     }

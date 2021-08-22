@@ -19,7 +19,7 @@ public class Event extends Task {
     /**
      * Instantiates a new Event.
      *
-     * @param description the description of the event.
+     * @param description    the description of the event.
      * @param dateTimeString the datetime of event.
      */
     public Event(String description, String dateTimeString) {
@@ -39,6 +39,7 @@ public class Event extends Task {
         } else {
             outFormat = new SimpleDateFormat("MMM dd yyyy");
         }
+
         return outFormat.format(this.dateTime);
     }
 

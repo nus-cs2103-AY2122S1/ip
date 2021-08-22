@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class FilterCommand extends Command {
     private final String input;
     private final ToDoList list;
-    private String ls = System.lineSeparator();
 
     public FilterCommand(String input, ToDoList list) {
         this.input = input;
@@ -36,11 +35,13 @@ public class FilterCommand extends Command {
         if (extractedTask.size() == 0) {
             Ui.prettyPrint("There are no tasks on this day.");
         } else {
-            String output = String.format("Here are your tasks for this day:%s", ls + "\t\t");
+            String output = String.format("Here are your tasks for this day:%s", Ui.LINE_SEPARATOR + "\t\t");
+
             int count = 1;
             for (Task t : extractedTask) {
-                output = output.concat(String.format("[%d]. %s", count++, t + ls + "\t\t"));
+                output = output.concat(String.format("[%d]. %s", count++, t + Ui.LINE_SEPARATOR + "\t\t"));
             }
+
             Ui.prettyPrint(output);
         }
     }

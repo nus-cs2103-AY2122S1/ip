@@ -1,11 +1,11 @@
 package duke.util;
 
+import duke.exception.DukeException;
+import duke.exception.DukeIOException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import duke.exception.DukeException;
-import duke.exception.DukeIOException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +19,7 @@ public class DataManager {
     private final String filePath;
 
     public DataManager(String filePath) {
-        data = new File(filePath);
+        this.data = new File(filePath);
         this.filePath = filePath;
     }
 
@@ -54,7 +54,7 @@ public class DataManager {
     public void updateData(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (Task t: tasks) {
+            for (Task t : tasks) {
                 fw.write(t.convertToTxt() + System.lineSeparator());
             }
             fw.close();

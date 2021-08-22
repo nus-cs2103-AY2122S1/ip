@@ -15,8 +15,6 @@ public class UiTest {
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
-    private final Ui ui = new Ui();
-    private final String ls = System.lineSeparator();
 
     @BeforeEach
     public void setUpStreams() {
@@ -33,25 +31,25 @@ public class UiTest {
     @Test
     public void prettyPrintTest() {
         Ui.prettyPrint("test string");
-        assertEquals("\t-------------------------------------------------------------------------" + ls +
-                        "\ttest string" + ls +
-                        "\t-------------------------------------------------------------------------" + ls,
+        assertEquals("\t-------------------------------------------------------------------------" + Ui.LINE_SEPARATOR +
+                        "\ttest string" + Ui.LINE_SEPARATOR +
+                        "\t-------------------------------------------------------------------------" + Ui.LINE_SEPARATOR,
                 outContent.toString());
     }
 
     @Test
     public void printExitMessageTest() {
-        ui.printExitMessage();
-        assertEquals("\t-------------------------------------------------------------------------" + ls +
-                        "\tBye bye! See you again soon!" + ls +
-                        "\t-------------------------------------------------------------------------" + ls,
+        Ui.printExitMessage();
+        assertEquals("\t-------------------------------------------------------------------------" + Ui.LINE_SEPARATOR +
+                        "\tBye bye! See you again soon!" + Ui.LINE_SEPARATOR +
+                        "\t-------------------------------------------------------------------------" + Ui.LINE_SEPARATOR,
                 outContent.toString());
     }
 
     @Test
     public void printException() {
-        ui.printException("TestException");
-        assertEquals("\t" + "TestException" + ls,
+        Ui.printException("TestException");
+        assertEquals("\t" + "TestException" + Ui.LINE_SEPARATOR,
                 errContent.toString());
     }
 }
