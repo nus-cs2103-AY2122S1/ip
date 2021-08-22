@@ -9,15 +9,17 @@ import duke.util.TaskList;
  */
 public class ListCommand extends Command {
     private TaskList taskList;
-    private String dateString;
+    private String type;
+    private String filterCondition;
 
-    public ListCommand(TaskList taskList, String dateString) {
+    public ListCommand(TaskList taskList, String type, String filterCondition) {
         this.taskList = taskList;
-        this.dateString = dateString;
+        this.type = type;
+        this.filterCondition = filterCondition;
     }
 
     @Override
     public void execute() {
-        taskList.printList(dateString);
+        taskList.printList(this.type, this.filterCondition);
     }
 }

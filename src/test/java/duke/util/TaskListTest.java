@@ -111,11 +111,11 @@ public class TaskListTest {
     }
 
     @Test
-    public void testPrintList_noDateFiltering() {
+    public void testPrintList_noFiltering() {
         taskList.addToList("read book", "ToDo");
         taskList.addToList("return book /by 23/08/2021 0000", "Deadline");
         taskList.addToList("project meeting /at 2021-08-23 1400 1600", "Event");
-        taskList.printList(null);
+        taskList.printList("all", null);
 
         assertEquals(
                 "     1:[T][ ] read book\n     2:[D][ ] return book (by: Aug 23 2021 00:00)\n"
@@ -128,11 +128,23 @@ public class TaskListTest {
         taskList.addToList("read book", "ToDo");
         taskList.addToList("return book /by 23/08/2021 0000", "Deadline");
         taskList.addToList("project meeting /at 2021-08-23 1400 1600", "Event");
-        taskList.printList("2021-08-23");
+        taskList.printList("date", "2021-08-23");
 
         assertEquals(
                 "     1:[D][ ] return book (by: Aug 23 2021 00:00)\n"
                         + "     2:[E][ ] project meeting (by: Aug 23 2021 14:00-16:00)\n",
+                outContent.toString());
+    }
+
+    @Test
+    public void testPrintList_withKeywordFiltering() {
+        taskList.addToList("read book", "ToDo");
+        taskList.addToList("return book /by 23/08/2021 0000", "Deadline");
+        taskList.addToList("project meeting /at 2021-08-23 1400 1600", "Event");
+        taskList.printList("keyword", "re");
+
+        assertEquals("     1:[T][ ] read book\n"
+                        + "     2:[D][ ] return book (by: Aug 23 2021 00:00)\n",
                 outContent.toString());
     }
 }

@@ -111,23 +111,37 @@ public class TaskList {
      * If dateString is not null, prints tasks that are due on that date.
      * Otherwise, prints all tasks.
      *
-     * @param dateString String containing the date in the form dd/mm/yyyy, dd-mm-yyyy or yyyy-mm-dd.
+     * @param type the type of filtering to be done when displaying list
+     * @param filterCondition String containing the respective filtering condition (expects date or keyword).
      */
-    public void printList(String dateString) {
-        if (dateString != null) {
-            int index = 1;
-
-            for (int i = 0; i < tasksList.size(); i++) {
-                Task currTask = tasksList.get(i);
-                if (currTask.onDate(dateString)) {
-                    System.out.println(INDENTATION + String.format("%d:%s", index, currTask));
-                    index++;
-                }
-            }
-        } else {
+    public void printList(String type, String filterCondition) {
+        switch (type) {
+        case "all":
             for (int i = 0; i < tasksList.size(); i++) {
                 Task currTask = tasksList.get(i);
                 System.out.println(INDENTATION + String.format("%d:%s", i + 1, currTask));
+            }
+            break;
+        case "date":
+            int dateIndex = 1;
+
+            for (int i = 0; i < tasksList.size(); i++) {
+                Task currTask = tasksList.get(i);
+                if (currTask.onDate(filterCondition)) {
+                    System.out.println(INDENTATION + String.format("%d:%s", dateIndex, currTask));
+                    dateIndex++;
+                }
+            }
+            break;
+        case "keyword":
+            int keywordIndex = 1;
+
+            for (int i = 0; i < tasksList.size(); i++) {
+                Task currTask = tasksList.get(i);
+                if (currTask.containsKeyword(filterCondition)) {
+                    System.out.println(INDENTATION + String.format("%d:%s", keywordIndex, currTask));
+                    keywordIndex++;
+                }
             }
         }
     }
