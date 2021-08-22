@@ -23,8 +23,8 @@ public class Event extends Task {
     @Override
     public String showStatusWrite() {
         return this.printType() + this.printCompletionStatus()
-                + Task.separator + this.name
-                + Task.separator + this.timeInfo;
+                + Separator.SEPARATOR + this.name
+                + Separator.SEPARATOR + this.timeInfo;
     }
 
     @Override

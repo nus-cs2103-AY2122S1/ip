@@ -1,7 +1,7 @@
+
 public abstract class Task {
     protected boolean isDone = false;
     protected String name;
-    protected static final String separator = " || ";
 
     Task(String name) {
         this.name = name;
@@ -54,8 +54,8 @@ public abstract class Task {
      * @return A status string.
      */
      public String showStatusWrite() {
-         return printCompletionStatus() + printType()
-                + Task.separator + this.name;
+         return this.printType() + this.printCompletionStatus()
+                + Separator.SEPARATOR + this.name;
      }
 
     @Override

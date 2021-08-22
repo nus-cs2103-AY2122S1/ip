@@ -1,3 +1,0 @@
-[T][X] , eat
-[D][X] , geq , 22nd aug
-[E][] , open house , mon 2am
