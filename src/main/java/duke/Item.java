@@ -1,25 +1,23 @@
 package duke;
 
-abstract class Item {
+public abstract class Item {
     private String name;
     private boolean isDone = false;
 
-    public Item(String[] strings) {
-        this.checkInput(strings);
+    public Item(String name) {
+        this.name = name;
     }
 
     public void markAsDone() {
         this.isDone = true;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getDone() {
+        return (isDone ? "X" : "O");
     }
 
-    public void checkInput(String[] strings) {
-        if (strings.length == 1) {
-            throw new DukeException("I need more than just the command");
-        }
+    public String getPickle() {
+        return this.name;
     }
 
     @Override

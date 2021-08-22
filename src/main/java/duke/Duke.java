@@ -1,122 +1,54 @@
 package duke;
 
+import duke.commands.Command;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Duke {
-    static final String LOGO = " ____        _        \n"
+    private static final String LOGO = "Hello from\n____        _        \n"
         + "|  _ \\ _   _| | _____ \n"
         + "| | | | | | | |/ / _ \\\n"
         + "| |_| | |_| |   <  __/\n"
-        + "|____/ \\__,_|_|\\_\\___|\n";;
-    static final String GOODBYE = "Bye. Hope to see you again soon!";
-    LinkedList<Item> itemList = new LinkedList<>();
+        + "|____/ \\__,_|_|\\_\\___|\n";
+    private LinkedList<Item> itemList;
+    private Storage storage;
+
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke();
+    }
+
+    public Duke() {
+        this.storage = null;
+
+        try {
+            this.storage = new Storage("duke/data/duke.txt");
+            this.itemList = this.storage.loadState();
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
+
+        System.out.println(LOGO);
+        this.run();
     }
 
     public void run() {
-        System.out.println("Hello from\n" + LOGO);
         Scanner sc = new Scanner(System.in);
-        String[] currLine;
-        scanner: while (true) {
+        boolean isExit = false;
+        String currLine;
+        
+        while (!isExit) {
             try {
-                currLine = sc.nextLine().split(" ");
-                switch (currLine[0]) {
-                case "bye":
-                    System.out.println(styleResponse(GOODBYE));
-                    break scanner;
-                case "list":
-                    System.out.println(this.list());
-                    break;
-                case "done":
-                    System.out.println(this.markIdxAsDone(currLine));
-                    break;
-                case "delete":
-                    System.out.println(this.deleteIdx(currLine));
-                    break;
-                default:
-                    System.out.println(this.add(currLine));
-                }
+                currLine = sc.nextLine();
+                Command currCommand = Parser.parse(currLine);
+                currCommand.execute(this.itemList);
+                this.storage.saveState(this.itemList);
+                isExit = currCommand.isExit();
             } catch (DukeException e) {
                 System.out.println(styleResponse(e.toString()));
             }
         }
         sc.close();
-    }
-    /**
-     * Adds item to to-do list.
-     * @param inputString
-     * @return Returns and echoes string that was added.
-     */
-    public String add(String[] inputStrings) {
-        ArrayList<String> printBuffer = new ArrayList<>();
-        printBuffer.add("Got it. I've added this task:");
-        Item toAdd = null;
-        switch (inputStrings[0]) {
-        case "todo":
-            toAdd = new ToDo(inputStrings);
-            break;
-        case "deadline":
-            toAdd = new Deadline(inputStrings);
-            break;
-        case "event":
-            toAdd = new Event(inputStrings);
-            break;
-        default:
-            throw new DukeException("I'm sorry I don't know what that means.");
-        }
-        this.itemList.add(toAdd);
-        printBuffer.add("  " + toAdd.toString());
-        printBuffer.add(String.format("Now you have %d tasks in the list.", this.itemList.size()));
-        return styleResponse(printBuffer);
-    }
-    /**
-     * Prints all items in list.
-     * @return String of tally.
-     */
-    public String list() {
-        ListIterator<Item> iterator = this.itemList.listIterator();
-        if (!iterator.hasNext()) {
-            return "Empty!";
-        } else {
-            ArrayList<String> printBuffer = new ArrayList<>();
-            printBuffer.add("Here are the tasks in your list:");
-            Integer currIdx = 1;
-            while (iterator.hasNext()) {
-                printBuffer.add(currIdx.toString() + ". " + iterator.next().toString());
-                currIdx++;
-            }
-            return styleResponse(printBuffer);
-        }
-    }
-
-    /**
-     * Marks to-do list at index i (0-count).
-     * @param i 0 is the first item in the list.
-     */
-    public String markIdxAsDone(String[] currLine) {
-        int i = Integer.valueOf(currLine[1]);
-        Item x = this.itemList.get(i - 1);
-        ArrayList<String> printBuffer = new ArrayList<>();
-        printBuffer.add("Nice! I've marked this task as done:");
-        x.markAsDone();
-        printBuffer.add("  " + x.toString());
-        return styleResponse(printBuffer);
-    }
-
-    public String deleteIdx(String[] currLine) {
-        int i = Integer.valueOf(currLine[1]);
-        ArrayList<String> printBuffer = new ArrayList<>();
-        printBuffer.add("Noted. I've removed this task:");
-        printBuffer.add("  " + this.itemList.remove(i - 1).toString());
-        return styleResponse(printBuffer);
-    }
-
-    public static String echo(String inputString) {
-        return inputString;
     }
 
     public static String styleResponse(String inputString) {
