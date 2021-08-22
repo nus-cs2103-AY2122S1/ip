@@ -1,7 +1,11 @@
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a task that can be performed by the Duke program.
  */
 public class Task {
+    /***/
+    protected static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     /** Description of the task */
     protected String description;
     /** Whether the task is done */
