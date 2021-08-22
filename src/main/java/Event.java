@@ -30,13 +30,14 @@ public class Event extends Task {
     }
 
     @Override
-    public String getTiming() {
-        return timing;
+    public String getDateTimeString() {
+        return this.date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                + " " + this.time.format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " +
+        return "[E]" + super.toString() + " (at: " +
                 date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
                 time.format(DateTimeFormatter.ofPattern("HHmm"))+ ")";
     }

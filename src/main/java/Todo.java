@@ -14,7 +14,7 @@ public class Todo extends Task{
     }
 
     @Override
-    public String getTiming() {
+    public String getDateTimeString() {
         return "";
     }
 

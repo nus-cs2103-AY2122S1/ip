@@ -104,6 +104,7 @@ public class Duke {
     }
 
     private static void readTasks() {
+        System.out.println("reading......");
         File savedTasksFile = new File("./src/main/data/tasks.txt");
         if (!savedTasksFile.exists()) {
             return;
@@ -120,11 +121,17 @@ public class Duke {
                         task = new Todo(taskStringArr[2]);
                         break;
                     case "D":
-                        task = new Deadline(taskStringArr[2], taskStringArr[3]);
+                        String[] deadlineDateTimeArr = taskStringArr[3].split(" ");
+                        String deadlineDateString = deadlineDateTimeArr[0];
+                        String deadlineTimeString = deadlineDateTimeArr[1];
+                        task = new Deadline(taskStringArr[2], deadlineDateString, deadlineTimeString);
                         // addTask(taskStringArr[2], taskStringArr[3], TaskType.DEADLINE);
                         break;
                     case "E":
-                        task = new Event(taskStringArr[2], taskStringArr[3]);
+                        String[] eventDateTimeArr = taskStringArr[3].split(" ");
+                        String eventDateString = eventDateTimeArr[0];
+                        String eventTimeString = eventDateTimeArr[1];
+                        task = new Event(taskStringArr[2], eventDateString, eventTimeString);
                         // addTask(taskStringArr[2], taskStringArr[3], TaskType.EVENT);
                         break;
                     default:
@@ -138,6 +145,10 @@ public class Duke {
             } catch (FileNotFoundException e) {
                 System.out.println("An error has occurred");
                 e.printStackTrace();
+            } catch (DukeException e) {
+                printLineSeparator();
+                System.out.println(e.getMessage());
+                printLineSeparator();
             }
         }
     }
@@ -163,7 +174,7 @@ public class Duke {
                 }
                 builder.append(task.getDescription());
                 builder.append("|");
-                builder.append(task.getTiming());
+                builder.append(task.getDateTimeString());
                 builder.append("\n");
                 writer.write(builder.toString());
 

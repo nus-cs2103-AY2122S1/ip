@@ -3,6 +3,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 public class Deadline extends Task{
     protected LocalDate date;
@@ -30,8 +31,9 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String getTiming() {
-        return by;
+    public String getDateTimeString() {
+        return this.date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                + " " + this.time.format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
     @Override

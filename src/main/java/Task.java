@@ -20,7 +20,7 @@ public abstract class Task {
 
     public abstract String getDescription();
 
-    public abstract String getTiming();
+    public abstract String getDateTimeString();
 
     @Override
     public String toString() {
