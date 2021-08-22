@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  * This class is a subclass of task.
  *
@@ -5,17 +8,24 @@
  * @version CS2103T AY21/22 Semester 1
  */
 public class Event extends Task{
-    protected String at;
+    protected LocalDate date;
+    private String time;
 
     /**
      * The construction method for an event.
      *
      * @param description detail of an event
-     * @param at time of a deadline
+     * @param date time of a deadline
      */
-    public Event(String description, String at) {
+    public Event(String description, LocalDate date, String time) {
         super(description);
-        this.at = at;
+        this.date = date;
+        this.time = time;
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return date;
     }
 
     /**
@@ -25,7 +35,7 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + Task.dateFormat(date) + " " + time + ")";
     }
 
     /**
@@ -41,6 +51,6 @@ public class Event extends Task{
      */
     @Override
     public String getTime() {
-        return this.at;
+        return date.toString() + " | " + time;
     }
 }

@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  * This class is a subclass of task.
  *
@@ -5,7 +8,10 @@
  * @version CS2103T AY21/22 Semester 1
  */
 public class Deadline extends Task{
-    protected String ddl;
+    protected LocalDateTime ddl;
+    protected LocalDate date;
+    private int whichOne;
+
 
     /**
      * The construction method for a deadline.
@@ -13,9 +19,38 @@ public class Deadline extends Task{
      * @param description detail of a deadline
      * @param ddl time of a deadline
      */
-    public Deadline(String description, String ddl) {
+    public Deadline(String description, LocalDateTime ddl) {
         super(description);
         this.ddl = ddl;
+        this.whichOne = 0;
+    }
+
+    /**
+     * The construction method for a deadline.
+     *
+     * @param description detail of a deadline
+     * @param date time of a deadline
+     */
+    public Deadline(String description, LocalDate date) {
+        super(description);
+        this.date = date;
+        this.whichOne = 1;
+    }
+
+    /**
+     * The method to return date of a deadline
+     *
+     * @return LocalDate of the deadline task
+     */
+    @Override
+    public LocalDate getDate() {
+        LocalDate result;
+        if (whichOne == 0) {
+            result = ddl.toLocalDate();
+        } else {
+            result = date;
+        }
+        return result;
     }
 
     /**
@@ -25,7 +60,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + ddl + ")";
+        return "[D]" + super.toString() + " (by: " + (this.whichOne == 0 ? Task.timeFormat(ddl) : Task.dateFormat(date)) + ")";
     }
 
     /**
@@ -41,6 +76,6 @@ public class Deadline extends Task{
      */
     @Override
     public String getTime() {
-        return this.ddl;
+        return (this.whichOne == 0 ? ddl.toLocalDate()+" "+ddl.toLocalTime() : date.toString());
     }
 }

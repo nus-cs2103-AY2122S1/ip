@@ -1,16 +1,15 @@
-/**
- * This class is the Duke class to assess input from user.
- *
- * @author Deng Huaiyu(G12)
- * @version CS2103T AY21/22 Semester 1
- */
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class is the Duke class to assess input from user.
+ *
+ * @author Deng Huaiyu(G12)
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class Duke {
     //for division
     private static String ind = "    ";
@@ -22,6 +21,7 @@ public class Duke {
         END("bye"),
         DELETE("delete"),
         LIST("list"),
+        GET("get"),
         DONE("done");
 
         private final String k;
@@ -66,6 +66,18 @@ public class Duke {
                 } else {
                     System.out.println(div + "\n" + ind2 + "☹ OOPS!!! Please enter a valid number, such as delete 3" + "\n" + div);
                 }
+            } else if (next.length() > 2 && next.substring(0, 3).equals(KeyWord.GET.getK())){
+                if (next.length() == 14) {
+                    try {
+                        System.out.println(next.substring(4));
+                        Tasks.onADay(next.substring(4));
+                    } catch (DukeException e) {
+                        System.out.println(e);
+                    }
+                } else {
+                    System.out.println(div + "\n" + ind2 + "☹ OOPS!!! Please enter a valid date, such as get dd/MM/yyyy" + "\n" + div);
+                }
+
             } else {
                 try {
                     myTasks.addTask(next);
