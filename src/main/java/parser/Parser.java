@@ -3,6 +3,7 @@ package parser;
 import command.*;
 import exception.*;
 import task.Deadline;
+import task.Event;
 import task.Todo;
 
 import java.time.LocalDate;
@@ -28,13 +29,15 @@ public class Parser {
         case "deadline":
             return getDeadlineCommand(splitCommand);
         case "event":
-            return  getEventCommand(splitCommand);
+            return getEventCommand(splitCommand);
         case "list":
             return getListCommand(splitCommand);
         case "done":
             return getDoneCommand(splitCommand);
         case "delete":
             return getDeleteCommand(splitCommand);
+        case "find":
+            return getFindCommand(splitCommand);
         default:
             throw new PixUnknownCommandException();
         }
@@ -112,7 +115,7 @@ public class Parser {
             if (taskDetails[0].isBlank() || taskDetails[1].isBlank()) {
                 throw new PixMissingInfoException(splitCommand[0]);
             }
-            return new AddCommand(new Deadline(taskDetails[0], LocalDate.parse(taskDetails[1])));
+            return new AddCommand(new Event(taskDetails[0], LocalDate.parse(taskDetails[1])));
         } catch (DateTimeParseException e) {
             throw new PixInvalidDateException();
         }
@@ -168,5 +171,22 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new PixMissingInfoException(splitCommand[0]);
         }
+    }
+
+    /**
+     * Runs the find command.
+     *
+     * @return Returns the find command.
+     *
+     * @throws PixMissingInfoException Throws the exception when not enough information is provided.
+     */
+    private static Command getFindCommand(String[] splitCommand) throws PixMissingInfoException {
+        String keyword = splitCommand[1];
+        String[] finalKeyword = keyword.split(" ", 0);
+        if (finalKeyword.length > 1 || keyword.isBlank()) {
+            throw new PixMissingInfoException(splitCommand[0]);
+        }
+
+        return new FindCommand(keyword);
     }
 }

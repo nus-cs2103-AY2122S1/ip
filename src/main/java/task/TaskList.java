@@ -39,6 +39,8 @@ public class TaskList {
      * Adds a task to the taskList.
      *
      * @param task The task to be added
+     *
+     * @return Returns the string representation of the task added.
      */
     public String addTask(Task task, Storage storage) {
         taskList.add(task);
@@ -54,6 +56,8 @@ public class TaskList {
 
     /**
      * Displays the task list.
+     *
+     * @return Returns the string representation of the task list.
      */
     public String displayList() {
         StringBuilder res = new StringBuilder();
@@ -73,6 +77,8 @@ public class TaskList {
      * Sets the selected task to be completed.
      *
      * @param n The number of the task.Task to be completed.
+     *
+     * @return Returns the string representation of the task completed.
      */
     public String completeTask(int n) throws PixNoSuchTaskException {
         try {
@@ -89,6 +95,8 @@ public class TaskList {
      * Deletes the selected task from the task.Task List.
      *
      * @param n The number of the task.Task to be deleted.
+     *
+     * @return Returns the string representation of the task deleted.
      */
     public String deleteTask(int n) throws PixNoSuchTaskException {
         try {
@@ -102,5 +110,23 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new PixNoSuchTaskException();
         }
+    }
+
+    /**
+     * Finds all tasks in the task list that contain the keyword.
+     *
+     * @param keyword Keyword to search for.
+     *
+     * @return Returns a list of all the tasks containing the keyword.
+     */
+    public String findTasks(String keyword) {
+        String res = "Here are the matching tasks in your list:\n";
+        for (int i = 1; i < taskList.size() + 1; i++) {
+            if (taskList.get(i - 1).getTaskName().contains(keyword)) {
+                res += i + ". " + taskList.get(i - 1).toString() + "\n";
+            }
+        }
+
+        return res;
     }
 }
