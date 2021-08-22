@@ -21,94 +21,42 @@ public class Duke {
     private static final String FILE_NAME = "duke.txt";
     private static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
     private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+    private TaskList tasks;
+    private Ui ui;
+    private Storage storage;
 
 
-    private static List<Task> items = new ArrayList<>();
+//    private static List<Task> items = new ArrayList<>();
 
-    /**
-     * Prints a horizontal line.
-     */
-    private static void printHorizontalLine() {
-        System.out.println("----------------------------------------------------");
-    }
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
 
-    /**
-     * Prints a message to show users the number of tasks there are in the list.
-     *
-     * @param index index of items, i.e. the number of tasks
-     */
-    private static void printTaskNum(int index) {
-        System.out.printf("\nNow you have %d tasks in the list.\n", index);
-    }
-
-    /**
-     * Prints a message to show the task that has been successfully added to the list.
-     *
-     * @param task task added to items list
-     */
-    private static void printAddTask(Task task) {
-        System.out.println("Got it. I've added this task:\n" + task);
-    }
-
-    /**
-     * Prints the welcome message when the bot is first called.
-     */
-    private static void printWelcomeMessage() {
-        String logo = " ______       ____      __\n"
-                + "|   _   \\    /    \\    |  |\n"
-                + "|  |_|  /   /  /\\  \\   |  |\n"
-                + "|  |_|  \\  /  ____  \\  |  |\n"
-                + "|_______/ /__/    \\__\\ |__|\n";
-        System.out.println(logo);
-        System.out.println("Hello! I'm Bai.\n" +
-                "What can I do for you?\n\n" +
-                "Available commands:\n" +
-                "   todo <description> - add todo item\n" +
-                "   deadline <description> /by <date> - add a task to be completed by <date>\n" +
-                "   event <description> /at <date> - add an event scheduled at <date>\n" +
-                "   done <number> - mark task <number> as done\n" +
-                "   delete <number> - delete the specified task <number>\n" +
-                "   list - display the list of tasks");
-        printHorizontalLine();
-
-//        String home = System.getProperty("user.home"); // /Users/xiaoyunwu
-//
-//        java.nio.file.Path path = java.nio.file.Paths.get(home, "my", "app", "dir"); // /Users/xiaoyunwu/my/app/dir
-//
-//        boolean directoryExists = java.nio.file.Files.exists(path); // false
-
-    }
-
-    /**
-     * Prints the list of tasks the user has currently.
-     */
-    private static void printList() {
-        printHorizontalLine();
-        if (items.size() > 0) {
-            System.out.println("Here are the tasks in your list:");
-
-            for (int i = 0; i < items.size(); i++) {
-                System.out.printf("%d. " + items.get(i) + "\n", i + 1);
-            }
-        } else {
-            System.out.println("You have no tasks in your list.");
+        try {
+            tasks = new TaskList(storage.load());
+            ui.printWelcomeMessage();
+        } catch (IOException e) {
+            ui.printError(e.getMessage());
         }
 
-        printHorizontalLine();
     }
+
+
 
     /**
      * Marks a task as done.
      *
      * @param idx index of the task in the items array list.
      */
-    private static void doneTask(int idx) {
-        items.get(idx).markAsDone();
+    private void doneTask(int idx) {
+//        items.get(idx).markAsDone();
+        tasks.markTaskDone(idx);
 
-        printHorizontalLine();
+        ui.printHorizontalLine();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(items.get(idx));
-        printHorizontalLine();
+//        System.out.println(items.get(idx));
+        System.out.println(tasks.getTask(idx));
+        ui.printHorizontalLine();
     }
 
     /**
@@ -116,19 +64,21 @@ public class Duke {
      *
      * @param userCommand command string entered by the user.
      */
-    private static void addTodo(String userCommand) {
+    public void addTodo(String userCommand) {
         try {
-            Todo newTodo = new Todo(userCommand.substring(5));
-            items.add(newTodo);
+            tasks.addTodo(userCommand);
+//            Todo newTodo = new Todo(userCommand.substring(5));
+//            items.add(newTodo);
 
-            printHorizontalLine();
-            printAddTask(newTodo);
-            printTaskNum(items.size());
-            printHorizontalLine();
+
+            //            ui.printHorizontalLine();
+            //            ui.printAddTask(newTodo);
+            //            ui.printTaskNum(items.size());
+            //            ui.printHorizontalLine();
         } catch (StringIndexOutOfBoundsException e) {
-            printHorizontalLine();
+            //            ui.printHorizontalLine();
             System.out.println("Please add a description for your todo!");
-            printHorizontalLine();
+            //            ui.printHorizontalLine();
         }
     }
 
@@ -137,7 +87,7 @@ public class Duke {
      *
      * @param userCommand command string entered by the user.
      */
-    private static void addDeadline(String userCommand) {
+    private void addDeadline(String userCommand) {
         try {
             int byIndex = userCommand.indexOf("/by");
             String by = userCommand.substring(byIndex + 4);
@@ -146,19 +96,19 @@ public class Duke {
             Deadline newDeadline = new Deadline(userCommand.substring(9, byIndex - 1), date);
             items.add(newDeadline);
 
-            printHorizontalLine();
-            printAddTask(newDeadline);
-            printTaskNum(items.size());
-            printHorizontalLine();
+            ui.printHorizontalLine();
+            ui.printAddTask(newDeadline);
+            ui.printTaskNum(items.size());
+            ui.printHorizontalLine();
 
         } catch (StringIndexOutOfBoundsException e) {
-            printHorizontalLine();
+            ui.printHorizontalLine();
             System.out.println("Please add a description and/or deadline!");
-            printHorizontalLine();
+            ui.printHorizontalLine();
         } catch (DateTimeException e) {
-            printHorizontalLine();
+            ui.printHorizontalLine();
             System.out.println("Please add a valid deadline of format yyyy/MM/dd HHmm (24-hour format)!");
-            printHorizontalLine();
+            ui.printHorizontalLine();
         }
     }
 
@@ -167,7 +117,7 @@ public class Duke {
      *
      * @param userCommand command string entered by the user.
      */
-    private static void addEvent(String userCommand) {
+    private void addEvent(String userCommand) {
         try {
             int atIndex = userCommand.indexOf("/at");
             String at = userCommand.substring(atIndex + 4);
@@ -176,18 +126,18 @@ public class Duke {
             items.add(newEvent);
 
 
-            printHorizontalLine();
-            printAddTask(newEvent);
-            printTaskNum(items.size());
-            printHorizontalLine();
+            ui.printHorizontalLine();
+            ui.printAddTask(newEvent);
+            ui.printTaskNum(items.size());
+            ui.printHorizontalLine();
         } catch (StringIndexOutOfBoundsException e) {
-            printHorizontalLine();
+            ui.printHorizontalLine();
             System.out.println("Please add a description and/or date for your event!");
-            printHorizontalLine();
+            ui.printHorizontalLine();
         } catch (DateTimeException e) {
-            printHorizontalLine();
+            ui.printHorizontalLine();
             System.out.println("Please add a valid event date of format yyyy/MM/dd HHmm (24-hour format)!");
-            printHorizontalLine();
+            ui.printHorizontalLine();
         }
     }
 
@@ -196,16 +146,16 @@ public class Duke {
      *
      * @param deleteIdx index of the task in the items arraylist.
      */
-    private static void deleteTask(int deleteIdx) {
+    private void deleteTask(int deleteIdx) {
         Task taskToDelete = items.get(deleteIdx);
 
         items.remove(deleteIdx);
 
-        printHorizontalLine();
+        ui.printHorizontalLine();
         System.out.println("Noted. I've removed this task:");
         System.out.println(taskToDelete);
-        printTaskNum(items.size());
-        printHorizontalLine();
+        ui.printTaskNum(items.size());
+        ui.printHorizontalLine();
     }
 
     private static void writeToFile(List<Task> tasks) throws IOException {
@@ -260,7 +210,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        printWelcomeMessage();
+
 
 
         readFile("data/duke.txt");
@@ -282,7 +232,9 @@ public class Duke {
                 try {
                     switch (words[0].toLowerCase()) {
                     case COMMAND_LIST:
-                        printList();
+//                        ui.printHorizontalLine();
+                        items.printList();
+//                        ui.printHorizontalLine();
                         break;
 
                     case COMMAND_DONE:
@@ -317,31 +269,31 @@ public class Duke {
                     }
                 } catch (DukeException e) {
                     // unrecognisable input command
-                    printHorizontalLine();
+//                    printHorizontalLine();
                     System.out.println(e);
-                    printHorizontalLine();
+//                    printHorizontalLine();
 
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    printHorizontalLine();
+//                    printHorizontalLine();
                     System.out.println("Invalid input! D:");
-                    printHorizontalLine();
+//                    printHorizontalLine();
 
                 } catch (IndexOutOfBoundsException e) {
                     // error when try to mark an invalid task as done / delete task
 
-                    printHorizontalLine();
+//                    printHorizontalLine();
                     if (items.size() > 0) {
                         System.out.printf("That task does not exist!\nPlease enter a number from 1 to %d.\n", items.size());
                     } else {
                         System.out.println("You have no tasks in your list to mark as done or delete.");
                     }
-                    printHorizontalLine();
+//                    printHorizontalLine();
 
                 } catch (NumberFormatException e) {
                     // error encountered when command followed by done is not Number e.g. done one
-                    printHorizontalLine();
+//                    printHorizontalLine();
                     System.out.println("Please enter a numeric character to mark your task as done!");
-                    printHorizontalLine();
+//                    printHorizontalLine();
                 } catch (IOException e) {
                     System.out.println("Something went wrong: " + e.getMessage());
                 }
