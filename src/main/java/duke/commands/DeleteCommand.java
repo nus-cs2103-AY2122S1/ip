@@ -6,9 +6,17 @@ import duke.data.task.Task;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Encapsulates the Delete command's operations
+ */
 public class DeleteCommand extends Command {
+    /** Index of task to delete*/
     private final int  index;
-    
+
+    /**
+     * Constructor for DeleteCommand
+     * @param rest the user input after the command
+     */
     public DeleteCommand(String rest) {
         this.index = Integer.parseInt(rest.strip());
     }

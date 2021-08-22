@@ -8,12 +8,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates event task
+ */
 public class Event extends Task {
+    /** Time of the event */
     protected LocalDateTime at;
 
     /**
      * Constructor for Event
      * @param input the input array consisting of description and date/time
+     * @throws EmptyDescriptionException if description is empty
+     * @throws EmptyTimeException if time is empty
+     * @throws InvalidTimeException if time is not in correct format
      */
     public Event(String[] input) throws EmptyDescriptionException, EmptyTimeException, InvalidTimeException {
         super(input[0]);
@@ -24,7 +31,12 @@ public class Event extends Task {
             throw new InvalidTimeException();
         }
     }
-    
+
+    /**
+     * Constructor for Event specifying isDone
+     * @param input the input array consisting of description and date/time
+     * @param isDone event's status from saved data
+     */
     public Event(String[] input, boolean isDone) {
         super(input[0], isDone);
         this.at = LocalDateTime.parse(input[1]);

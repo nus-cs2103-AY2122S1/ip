@@ -19,6 +19,7 @@ import java.util.Arrays;
  * Deals with loading tasks form the file and saving tasks in the file
  */
 public class Storage {
+    /** Path of data file */
     private final Path filePath;
 
     /**
