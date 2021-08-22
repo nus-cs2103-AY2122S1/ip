@@ -14,7 +14,7 @@ import java.util.Calendar;
 public class Event extends Task{
     /** String representing time of Event. */
     protected Calendar atCalendar;
-    protected static SimpleDateFormat formatter = new SimpleDateFormat("MMM dd YYYY hh:mm aaa");
+    protected static SimpleDateFormat formatter = new SimpleDateFormat("MMM dd yyyy hh:mm aaa");
 
     /** Default constructor. */
     public Event(String description, Calendar atCalendar) {

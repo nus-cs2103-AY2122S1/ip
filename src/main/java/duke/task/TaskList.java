@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class TaskList {
+public class  TaskList {
     private List<Task> toDoList;
-    protected static SimpleDateFormat formatter = new SimpleDateFormat("MMM dd YYYY hh:mm aaa");
+    protected static SimpleDateFormat formatter = new SimpleDateFormat("MMM dd yyyy hh:mm aaa");
 
     public TaskList(ArrayList<String> tasks) {
         this.toDoList = new ArrayList<>();
@@ -52,11 +52,12 @@ public class TaskList {
                         System.out.println(e);
                     }
 
-                    Event e = new Event(s.substring(7, eventIndex), eventCal);
+                    Event event = new Event(s.substring(7, eventIndex), eventCal);
                     if (s.charAt(4) == 'x'){
-                        e.markAsDone();
+                        event.markAsDone();
                     }
-                    toDoList.add(e);
+                    toDoList.add(event);
+                    break;
             }
         }
     }

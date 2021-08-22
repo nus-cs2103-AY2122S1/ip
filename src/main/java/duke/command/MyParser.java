@@ -3,6 +3,7 @@ package duke.command;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MyParser {
     protected void parse(String command,String description,Duke duke) throws DukeException {
@@ -22,7 +23,7 @@ public class MyParser {
                 String regex = "[0-9]+";
 
                 if (!userDescription.matches(regex)) {
-                    throw new DukeException("OOPS!!! The description of done must be an integer ");
+                    throw new DukeException("OOPS!!! The description of done must be an integer");
                 }
 
                 int targetTask = Integer.parseInt(userDescription);
@@ -38,7 +39,7 @@ public class MyParser {
                 String regex = "[0-9]+";
 
                 if (!userDescription.matches(regex)) {
-                    throw new DukeException("OOPS!!! The description of delete must be an integer ");
+                    throw new DukeException("OOPS!!! The description of delete must be an integer");
                 }
 
                 int targetTask = Integer.parseInt(userDescription);
@@ -59,25 +60,22 @@ public class MyParser {
                 }
 
                 if (dueByIndex == -1) {
-                    throw new DukeException("OOPS!! No deadline has been set. Reinput with '/by dueBy'");
+                    throw new DukeException("OOPS!!! No deadline has been set. Input with '/by dd/mm/yyyy 0000'");
                 }
 
                 String desc = userDescription.substring(0, dueByIndex);
                 String dueBy = userDescription.substring(dueByIndex + 4);
 
-                if (dueBy.isBlank()) {
-                    throw new DukeException("OOPS!!! The description of /by cannot be empty");
-                }
-
                 Calendar deadlineCal = Calendar.getInstance();
-                SimpleDateFormat dateTimeFormat = new SimpleDateFormat("d/MM/YYYY HHmm");
-
+                SimpleDateFormat deadlineTimeFormat = new SimpleDateFormat("d/MM/yyyy HHmm");
+                Date d;
                 try {
-                    deadlineCal.setTime(dateTimeFormat.parse(dueBy));
+                    d = deadlineTimeFormat.parse(dueBy);
+                    deadlineCal.setTime(d);
                 } catch(ParseException e) {
-                    throw new DukeException("OOPS!!! The date is not formatted as dd/mm/yy 0000");
+                    throw new DukeException("OOPS!!! The date is not formatted as dd/mm/yyyy 0000");
                 }
-
+                System.out.println(desc + d);
                 duke.dukeDeadline(desc, deadlineCal);
                 break;
             }
@@ -88,23 +86,19 @@ public class MyParser {
                 }
 
                 if (atIndex == -1) {
-                    throw new DukeException("OOPS!! No event time has been set. Reinput Event with '/at time'");
+                    throw new DukeException("OOPS!!! No event time has been set. Input with '/at dd/mm/yyyy 0000'");
                 }
 
                 String desc = userDescription.substring(0, atIndex);
                 String at = userDescription.substring(atIndex + 4);
 
-                if (at.isBlank()) {
-                    throw new DukeException("OOPS!!! The description of /at cannot be empty");
-                }
-
                 Calendar eventCal = Calendar.getInstance();
-                SimpleDateFormat dateTimeFormat = new SimpleDateFormat("d/MM/YYYY HHmm");
+                SimpleDateFormat eventTimeFormat = new SimpleDateFormat("d/MM/yyyy HHmm");
 
                 try {
-                    eventCal.setTime(dateTimeFormat.parse(at));
+                    eventCal.setTime(eventTimeFormat.parse(at));
                 } catch(ParseException e) {
-                    throw new DukeException("OOPS!!! The date is not formatted as dd/mm/yy 0000");
+                    throw new DukeException("OOPS!!! The date is not formatted as dd/mm/yyyy 0000");
                 }
                 duke.dukeEvent(desc, eventCal);
                 break;
