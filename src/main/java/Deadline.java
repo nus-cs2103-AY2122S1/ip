@@ -6,13 +6,14 @@ public class Deadline extends Task {
         this.dueDate = new Datetime(dueDate);
     }
 
-    public Deadline(String taskName, String byWhen, boolean isDone) {
+    public Deadline(String taskName, String dueDate, boolean isDone) {
         super(taskName, isDone);
-        this.byWhen = byWhen;
+        this.dueDate = new Datetime(dueDate);
     }
 
     public String fileSaveFormat() {
-        return String.format("D | %d | %s | %s", this.isDone() ? 1 : 0, this.taskName(), this.byWhen);
+        return String.format("D | %d | %s | %s", this.isDone() ? 1 : 0, this.taskName(),
+                this.dueDate.getDatetimeString());
     }
 
     @Override

@@ -4,10 +4,16 @@ import java.time.format.DateTimeFormatter;
 public class Datetime {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
     private LocalDate datetime;
+    private String datetimeString;
 
     public Datetime(String datetimeString) {
+        this.datetimeString = datetimeString;
         this.datetime = LocalDate.parse(datetimeString);
     };
+
+    public String getDatetimeString() {
+        return this.datetimeString;
+    }
 
     @Override
     public String toString() {

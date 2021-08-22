@@ -32,10 +32,7 @@ public class Duke {
         int taskListLen = storage.taskListLen();
         if (taskListLen < MAX_TASKS) {
             Todo newTodo = new Todo(taskName);
-<<<<<<< HEAD
             storage.addTask(newTodo);
-=======
->>>>>>> branch-Level-8
             taskListLen += 1;
             return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
                     newTodo.toString(), taskListLen);
