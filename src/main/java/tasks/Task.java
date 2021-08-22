@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Creates a task with the specified description.
+     *
      * @param description The description of this task.
      */
     public Task(String description) {
@@ -18,6 +19,7 @@ public class Task {
 
     /**
      * Returns the description of this task.
+     *
      * @return A string representing the description of this task.
      */
     public String getDescription() {
@@ -26,6 +28,7 @@ public class Task {
 
     /**
      * Returns the status of this task.
+     *
      * @return A string representing the status of this task.
      */
     public String getStatusIcon() {
@@ -41,6 +44,7 @@ public class Task {
 
     /**
      * Returns this task's status and description.
+     *
      * @return A string representing the status of this task and its description.
      */
     @Override

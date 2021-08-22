@@ -7,6 +7,7 @@ public class ToDo extends Task{
 
     /**
      * Creates a ToDo with a specified description.
+     *
      * @param description The description of this ToDo.
      */
     public ToDo(String description) {
@@ -15,6 +16,7 @@ public class ToDo extends Task{
 
     /**
      * Returns this task's status and description.
+     *
      * @return A string showing what the task is and its description.
      */
     @Override

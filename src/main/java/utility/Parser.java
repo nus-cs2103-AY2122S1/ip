@@ -9,16 +9,31 @@ import tasks.ToDo;
 
 import java.util.List;
 
+/**
+ * Represents a parser that can read and understand what to do with an input String.
+ */
 public class Parser {
     protected byte flag = 1;
     private String input;
     private String[] words;
     private StringBuilder log;
 
+    /**
+     * Takes an input that parser parses.
+     *
+     * @param input The String that is handled by the parser.
+     */
     public void takeInput(String input) {
         this.input = input;
     }
 
+    /**
+     * Allows the parser to interact with the ui, logger and the list of tasks when needed.
+     *
+     * @param ui The Ui interacting with the user.
+     * @param logger The logger that keeps track of the logs.
+     * @param list A list of Tasks.
+     */
     public void interactWith(Ui ui, Logger logger, TaskList list) {
         log = new StringBuilder();
         words = this.input.trim().split(" ", 2);

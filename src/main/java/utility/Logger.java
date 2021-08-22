@@ -13,11 +13,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import java.util.List;
-
+/**
+ * Represents a logger that can read logs and act according to logs.
+ */
 public class Logger {
     BufferedReader bufferedReader;
     BufferedWriter writer;
 
+    /**
+     * Creates a Logger with a specified filepath.
+     *
+     * @param filepath The specified filepath that the logger uses.
+     */
     public Logger(String filepath) {
         Path path = Paths.get(filepath);
         try {
@@ -31,6 +38,11 @@ public class Logger {
         }
     }
 
+    /**
+     * Writes to the file containing the tasks.
+     *
+     * @param tasks The list of tasks that are due for writing.
+     */
     public void write(List<Task> tasks) {
         try {
             writer = new BufferedWriter(new FileWriter("tasks.txt"));
@@ -71,6 +83,11 @@ public class Logger {
         }
     }
 
+    /**
+     * Loads the file according to the filepath of this logger.
+     *
+     * @return A list of Tasks.
+     */
     public List<Task> loadList() {
         List<Task> list = new ArrayList<>();
         try {

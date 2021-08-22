@@ -21,6 +21,7 @@ public class Event extends Task{
 
     /**
      * Creates an Event with a specified description and timing.
+     *
      * @param description The description of this Event.
      * @param timing The timing of this Event.
      */
@@ -71,6 +72,7 @@ public class Event extends Task{
 
     /**
      * Returns this Event's timing.
+     *
      * @return A string showing what the timing of this Event is.
      */
     public String getTiming() {
@@ -79,6 +81,7 @@ public class Event extends Task{
 
     /**
      * Returns this task's status and description.
+     *
      * @return A string showing what the task is, its description and its timing.
      */
     @Override

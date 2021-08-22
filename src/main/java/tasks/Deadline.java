@@ -21,6 +21,7 @@ public class Deadline extends Task{
 
     /**
      * Creates a Deadline with a specified description and time limit.
+     *
      * @param description The description of this Deadline.
      * @param by The time limit of this Deadline.
      */
@@ -71,6 +72,7 @@ public class Deadline extends Task{
 
     /**
      * Returns this task's time limit.
+     *
      * @return A string showing what the time limit of this Deadline is.
      */
     public String getBy() {
@@ -79,6 +81,7 @@ public class Deadline extends Task{
 
     /**
      * Returns this task's status and description.
+     *
      * @return A string showing what the task is, its description and its time limit.
      */
     @Override

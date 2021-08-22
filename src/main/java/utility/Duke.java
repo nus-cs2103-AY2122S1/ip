@@ -10,7 +10,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     *
+     * Runs the Duke chatbot
      */
     public void run() {
         start();

@@ -7,6 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * Represents a UI that the user interacts with.
+ */
 public class Ui {
     private PrintStream out;
     private Scanner in;
@@ -17,10 +20,18 @@ public class Ui {
         this.in = new Scanner(System.in);
     }
 
+    /**
+     * Returns the user input.
+     *
+     * @return A String entered by the user.
+     */
     public String getUserInput() {
         return in.nextLine();
     }
 
+    /**
+     * Greets the user according to the specific timezone.
+     */
     public void greet() {
         Date localDate = new Date();
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
@@ -36,6 +47,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows the user a message indicating what happened with their input.
+     *
+     * @param message The main message to the user.
+     */
     public void showToUser(String message) {
         out.println(line + message + line);
     }
