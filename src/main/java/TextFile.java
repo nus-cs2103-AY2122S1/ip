@@ -10,12 +10,27 @@ public class TextFile {
     public static List<Task> readFromTextFile() throws FileNotFoundException {
         File file = new File("./data/task_list.txt");
         Scanner reader = new Scanner(file);
+        List<Task> taskList = new ArrayList<>();
+
         while (reader.hasNextLine()) {
-            String task = reader.nextLine();
-            String[] splitDescription = task.split(" | ");
-            System.out.println(splitDescription[0]);
+            String taskString = reader.nextLine();
+            String[] splitDescription = taskString.split(" \\| ");
+            Task task;
+
+            if (splitDescription[0].equals("T")) {
+                task = new Todo(splitDescription[2]);
+            } else if (splitDescription[0].equals("D")) {
+                task = new Deadline(splitDescription[2], splitDescription[3]);
+            } else {
+                task = new Event(splitDescription[2], splitDescription[3]);
+            }
+
+            if (splitDescription[1].equals("1")) {
+                task.markAsDone();
+            }
+            taskList.add(task);
         }
-        return new ArrayList<>();
+        return taskList;
     }
 
     public static void writeToTextFile(List<Task> taskList) throws FileNotFoundException {
