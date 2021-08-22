@@ -50,13 +50,16 @@ public class Ui {
         showLine();
     }
 
+
     /**
      * print the user's tasks
      *
      * @param list list of tasks to be printed
+     * @param header header message to be printed before printing the tasks
      */
-    public void showTasks(List<Task> list) {
-        System.out.println(INDENTATION + "Here are the tasks in your list:");
+    public void showTasks(List<Task> list, String header) {
+        System.out.println(INDENTATION + header);
+
         for(int i = 0; i < list.size(); i ++) {
             Task task = list.get(i);
             System.out.println(INDENTATION + (i + 1) + ". " + task);

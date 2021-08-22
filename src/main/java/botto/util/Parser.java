@@ -7,8 +7,9 @@ import botto.command.*;
  * This class deals with making sense of the user command
  */
 public class Parser {
+
     /** current available user commands */
-    private final static String[] COMMANDS = {"list", "done", "todo", "deadline", "event", "delete", "bye"};
+    private final static String[] COMMANDS = {"list", "done", "todo", "deadline", "event", "delete", "bye", "find"};
 
 
     /**
@@ -36,6 +37,8 @@ public class Parser {
             return new DeleteCommand(fullCommand);
         case "bye":
             return new ExitCommand();
+        case "find":
+            return new FindCommand(fullCommand);
         }
 
         throw new BottoException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
