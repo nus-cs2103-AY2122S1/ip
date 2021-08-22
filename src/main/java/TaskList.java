@@ -3,6 +3,10 @@ import java.util.ArrayList;
 public class TaskList {
     protected ArrayList<Task> list;
 
+    TaskList(){
+        this.list = new ArrayList<>();
+    }
+
     TaskList(ArrayList<Task> list){
         this.list = list;
     }
