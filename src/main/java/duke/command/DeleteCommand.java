@@ -1,5 +1,12 @@
 package duke.command;
 
+import java.io.*;
+import java.util.*;
+import duke.util.UI;
+import duke.util.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class DeleteCommand extends Command {
 	private int index;
 
