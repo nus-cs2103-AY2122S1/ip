@@ -6,16 +6,16 @@ import tiger.actions.ByeAction;
 import tiger.actions.DeadLineAction;
 import tiger.actions.DeleteAction;
 import tiger.actions.EventAction;
+import tiger.actions.FindAction;
 import tiger.actions.InvalidAction;
 import tiger.actions.ListAction;
 import tiger.actions.MarkDoneAction;
 import tiger.actions.ToDoAction;
-
 import tiger.exceptions.inputs.TigerInvalidInputException;
-
 import tiger.parser.DeadLineParser;
 import tiger.parser.DeleteParser;
 import tiger.parser.EventParser;
+import tiger.parser.FindParser;
 import tiger.parser.MarkDoneParser;
 import tiger.parser.Parser;
 import tiger.parser.ToDoParser;
@@ -58,6 +58,9 @@ public class Command {
         case "event":
             EventParser eventCommand = new EventParser(command);
             return new EventAction(applicationState, eventCommand.todo, eventCommand.eventAt);
+        case "find":
+            FindParser findCommand = new FindParser(command);
+            return new FindAction(applicationState, findCommand.findString);
         default:
             return new InvalidAction(applicationState);
         }

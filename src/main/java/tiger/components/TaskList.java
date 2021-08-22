@@ -72,9 +72,25 @@ public class TaskList {
     }
 
     /**
-     * Returns the size of the taskList, or number of {@code Tasks}.
+     * Returns another {@code TaskList}, with task descriptions matching the search String
      *
-     * @return the size of the taskList.
+     * @param searchString the string to search for.
+     * @return a new {@code TaskList}.
+     */
+
+    public TaskList findRelevantTasks(String searchString) {
+        TaskList taskList = new TaskList();
+        for (Task t: this.taskList) {
+            if (t.toString().contains(searchString)) {
+                taskList.addTask(t);
+            }
+        }
+        return  taskList;
+    }
+
+    /**
+     * Returns the size of the {@code TaskList}.
+     * @return the size of the {@code TaskList}.
      */
 
     public int size() {
