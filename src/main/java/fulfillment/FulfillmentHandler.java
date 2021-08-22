@@ -5,7 +5,14 @@ import exceptions.InvalidCommandException;
 import exceptions.InvalidTaskNumberException;
 import io.InputHandler;
 import io.OutputHandler;
-import messages.*;
+import messages.ByeMessage;
+import messages.GreetingMessage;
+import messages.Message;
+import messages.MessageConstants;
+import messages.TaskAddMessage;
+import messages.TaskDeleteMessage;
+import messages.TaskDoneMessage;
+import messages.TaskListMessage;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -22,20 +29,21 @@ public class FulfillmentHandler {
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
 
-    public FulfillmentHandler() {
-        this.inputHandler = new InputHandler();
-        this.outputHandler = new OutputHandler();
+    public FulfillmentHandler(InputHandler inputHandler, OutputHandler outputHandler) {
+        this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
     }
 
     /**
      * Initializes the Chatbot
+     *
      * @throws IOException thrown when an error connecting
-     * to input/output stream occurs.
+     *                     to input/output stream occurs.
      */
     public void initializeChatbot() throws IOException {
         handleGreeting();
 
-        while(true) {
+        while (true) {
             String userInput = inputHandler.readInput();
             String[] splitUserInput = userInput.trim().split(" ", 2);
             Command userCommand = Command.getCommand(splitUserInput[0].trim());
@@ -48,30 +56,30 @@ public class FulfillmentHandler {
             try {
                 if (userCommand != null) {
                     switch (userCommand) {
-                        case LIST:
-                            handleTaskList();
-                            break;
-                        case TODO:
-                            handleTaskAdd(new ToDo(userInputBody));
-                            break;
-                        case DEADLINE:
-                            handleTaskAdd(new Deadline(userInputBody));
-                            break;
-                        case EVENT:
-                            handleTaskAdd(new Event(userInputBody));
-                            break;
-                        case DONE:
-                            handleTaskDone(userInputBody);
-                            break;
-                        case DELETE:
-                            handleTaskDelete(userInputBody);
-                            break;
-                        case BYE:
-                            handleBye();
-                            return;
-                        // default case in case unexpected no matches occurs.
-                        default:
-                            throw new InvalidCommandException();
+                    case LIST:
+                        handleTaskList();
+                        break;
+                    case TODO:
+                        handleTaskAdd(new ToDo(userInputBody));
+                        break;
+                    case DEADLINE:
+                        handleTaskAdd(new Deadline(userInputBody));
+                        break;
+                    case EVENT:
+                        handleTaskAdd(new Event(userInputBody));
+                        break;
+                    case DONE:
+                        handleTaskDone(userInputBody);
+                        break;
+                    case DELETE:
+                        handleTaskDelete(userInputBody);
+                        break;
+                    case BYE:
+                        handleBye();
+                        return;
+                    // default case in case unexpected no matches occurs.
+                    default:
+                        throw new InvalidCommandException();
                     }
                 } else {
                     throw new InvalidCommandException();
@@ -94,7 +102,7 @@ public class FulfillmentHandler {
         outputHandler.writeMessage(new TaskListMessage(Task.getAllTasks()));
     }
 
-    private void handleTaskAdd(Task task) {
+    private void handleTaskAdd(Task task) throws IOException {
         Task addedTask = Task.addTask(task);
         outputHandler.writeMessage(new TaskAddMessage(addedTask.toString(),
                 Task.getNumOfTasks()));
@@ -107,7 +115,7 @@ public class FulfillmentHandler {
             Task doneTask = Task.getTask(index);
             doneTask.setDone();
             outputHandler.writeMessage(new TaskDoneMessage(doneTask));
-        } catch (NumberFormatException nfe) {
+        } catch (NumberFormatException | IOException nfe) {
             outputHandler.writeMessage(new Message(MessageConstants.INVALID_INTEGER_MESSAGE));
         }
     }
@@ -118,7 +126,7 @@ public class FulfillmentHandler {
             int index = Integer.parseInt(userInputBody) - 1;
             Task deletedTask = Task.deleteTask(index);
             outputHandler.writeMessage(new TaskDeleteMessage(deletedTask.toString(), Task.getNumOfTasks()));
-        } catch (NumberFormatException nfe) {
+        } catch (NumberFormatException | IOException nfe) {
             outputHandler.writeMessage(new Message(MessageConstants.INVALID_INTEGER_MESSAGE));
         }
     }

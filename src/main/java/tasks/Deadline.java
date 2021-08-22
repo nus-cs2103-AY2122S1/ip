@@ -3,6 +3,8 @@ package tasks;
 import exceptions.EmptyDeadlineBodyException;
 import exceptions.InvalidDeadlineBodyException;
 
+import java.io.IOException;
+
 public class Deadline extends Task {
     private final String by;
 
@@ -16,6 +18,17 @@ public class Deadline extends Task {
         }
         super.setDescription(deadlineData[0].trim());
         this.by = deadlineData[1].trim();
+    }
+
+    public Deadline(String description, boolean isDone, String by) {
+        super.setDescription(description);
+        super.setIsDone(isDone);
+        this.by = by;
+    }
+
+    @Override
+    public String getTaskRepresentation() {
+        return TaskType.DEADLINE + "," + super.getTaskRepresentation() + this.by + ",";
     }
 
     @Override

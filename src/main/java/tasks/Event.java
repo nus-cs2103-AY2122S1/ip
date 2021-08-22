@@ -3,6 +3,8 @@ package tasks;
 import exceptions.EmptyEventBodyException;
 import exceptions.InvalidEventBodyException;
 
+import java.io.IOException;
+
 public class Event extends Task {
     private final String at;
 
@@ -16,6 +18,17 @@ public class Event extends Task {
         }
         super.setDescription(eventData[0].trim());
         this.at = eventData[1].trim();
+    }
+
+    public Event(String description, boolean isDone, String at) {
+        super.setDescription(description);
+        super.setIsDone(isDone);
+        this.at = at;
+    }
+
+    @Override
+    public String getTaskRepresentation() {
+        return TaskType.EVENT + "," + super.getTaskRepresentation() + this.at + ",";
     }
 
     @Override
