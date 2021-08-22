@@ -45,10 +45,8 @@ public class Storage {
 
     /**
      * Loads data from file in PATH to list provided.
-     *
-     * @throws IOException If the file does not exist and cannot be created.
      */
-    public void load() throws IOException{
+    public void load() {
         try {
             Path folderPath = Paths.get(this.path + "\\data");
             Path filePath = Paths.get(this.path + "\\data\\data.txt");
