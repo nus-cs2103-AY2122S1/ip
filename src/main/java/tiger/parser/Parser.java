@@ -1,5 +1,7 @@
 package tiger.parser;
 
+import tiger.exceptions.inputs.TigerSemiColonException;
+
 /**
  * The {@code Parser} class takes in the user input String, and parses
  * the string in relevant substrings so that {@code Action} classes
@@ -16,7 +18,10 @@ public class Parser {
      * @param command User input commmand.
      */
 
-    public Parser(String command) {
+    public Parser(String command) throws TigerSemiColonException {
+        if (command.contains(";")) {
+            throw new TigerSemiColonException("");
+        }
         this.command = command;
     }
 
