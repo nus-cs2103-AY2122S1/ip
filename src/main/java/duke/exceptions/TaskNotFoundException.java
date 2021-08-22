@@ -10,6 +10,7 @@ public class TaskNotFoundException extends DukeException {
      * This is the class field of TaskNotFoundException.
      */
     private final int index;
+    private final boolean hasIndex;
 
     /**
      * This is the TaskNotFoundException constructor.
@@ -19,11 +20,26 @@ public class TaskNotFoundException extends DukeException {
     public TaskNotFoundException(int index) {
         super("☹ OOPS!!! There is no such task!");
         this.index = index;
+        this.hasIndex = true;
+    }
+
+    /**
+     * This is an Overloaded TaskNotFoundException for no index specified.
+     */
+    public TaskNotFoundException() {
+        super("☹ OOPS!!! There is no such task!");
+        this.index = 0;
+        this.hasIndex = false;
     }
 
     @Override
     public String getMessage() {
-        return super.getMessage() + String.format("\n    I can't seem to find the task at number %d !", this.index);
+        if (this.hasIndex) {
+            return super.getMessage()
+                    + String.format("\n    I can't seem to find the task at number %d !", this.index);
+        } else {
+            return super.getMessage();
+        }
     }
 
 }

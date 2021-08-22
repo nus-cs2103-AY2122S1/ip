@@ -50,9 +50,9 @@ public class Deadline extends Task {
     @Override
     public String fullCommand() {
         return "deadline " + this.description + " /by "
-                           + this.date.toString()
-                           + " "
-                           + this.time.format(DateTimeFormatter.ofPattern("kkmm"));
+                + this.date.toString()
+                + " "
+                + this.time.format(DateTimeFormatter.ofPattern("kkmm"));
     }
 
     @Override

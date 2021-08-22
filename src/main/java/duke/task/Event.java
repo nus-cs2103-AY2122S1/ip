@@ -50,9 +50,9 @@ public class Event extends Task {
     @Override
     public String fullCommand() {
         return "event " + this.description + " /at "
-                        + this.date.toString()
-                        + " "
-                        + this.time.format(DateTimeFormatter.ofPattern("kkmm"));
+                + this.date.toString()
+                + " "
+                + this.time.format(DateTimeFormatter.ofPattern("kkmm"));
     }
 
     @Override

@@ -5,6 +5,7 @@ import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.UnknownCommandException;
@@ -70,6 +71,13 @@ public class Parser {
             }
             int indexToMark = s.nextInt() - 1;
             return new DoneCommand(indexToMark);
+
+        case "find":
+            if (!s.hasNext()) {
+                throw new EmptyDescriptionException("find");
+            }
+            String keyword = s.nextLine().trim();
+            return new FindCommand(keyword);
 
         default:
             throw new UnknownCommandException();

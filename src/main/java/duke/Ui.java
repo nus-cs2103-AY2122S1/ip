@@ -1,6 +1,7 @@
 package duke;
 
 import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,7 +22,6 @@ public class Ui {
     public void showWelcomeMessage() {
         System.out.println("Hello I'm FullOfBugs. What can I do for you?");
     }
-
 
     /**
      * Prints the standard line separator for each message.
@@ -49,7 +49,6 @@ public class Ui {
         System.out.printf("    %s\n", message);
         printLine();
     }
-
 
     /**
      * Prints the message when a task is added to the list.
@@ -100,6 +99,21 @@ public class Ui {
      */
     public void printList(ArrayList<Task> tasks) {
         printLine();
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.printf("    %d. %s\n", i + 1, tasks.get(i));
+        }
+        printLine();
+    }
+
+
+    /**
+     * Prints a list of task that contains a specified keyword.
+     *
+     * @param tasks  An ArrayList of task that contains the keyword in its description.
+     */
+    public void printFindTask(ArrayList<Task> tasks) {
+        printLine();
+        System.out.println("    Here are the matching tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.printf("    %d. %s\n", i + 1, tasks.get(i));
         }

@@ -30,7 +30,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Storage store, Ui ui)
+    public void execute(TaskList taskList, Storage store, Ui ui)
             throws CommandParamException, DukeFileException, EmptyDescriptionException, UnknownCommandException {
         try {
             Task t;
@@ -67,13 +67,14 @@ public class AddCommand extends Command {
                 } else {
                     throw new CommandParamException("event");
                 }
+
             } else {
                 throw new UnknownCommandException();
             }
 
-            tasklist.addToList(t);
+            taskList.addToList(t);
             store.appendCommand(t.fullCommand());
-            ui.printAddTask(t, tasklist.getSize());
+            ui.printAddTask(t, taskList.getSize());
 
         } catch (IOException e) {
             throw new DukeFileException();

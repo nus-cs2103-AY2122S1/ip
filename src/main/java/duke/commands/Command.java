@@ -15,7 +15,7 @@ public abstract class Command {
      */
     protected final String command;
     protected final Boolean isExit;
-    protected String description;
+    protected final String description;
     protected int index;
 
     /**
@@ -80,7 +80,7 @@ public abstract class Command {
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         if (!(o instanceof Command)) {
             return false;
         } else {

@@ -10,11 +10,7 @@ public class DukeFileException extends DukeException {
      * This is a DukeFileException constructor.
      */
     public DukeFileException() {
-        super("");
+        super("☹ OOPS!!! I might have some issues dealing with files.");
     }
 
-    @Override
-    public String getMessage() {
-        return "☹ OOPS!!! I might have some issues dealing with files.";
-    }
 }
