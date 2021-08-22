@@ -26,7 +26,7 @@ public class Parser {
     private static final String DLIST = "dlist";
     private static final String LIST = "list";
     private static final String BYE = "bye";
-
+    private static final String FIND = "find";
     //is it just me or does the parser
     //have to contain all the objects to send the information to
     private final Ui ui;
@@ -72,6 +72,7 @@ public class Parser {
             case LIST:
                 cmds.add(() -> ui.list(this.taskList));
                 break;
+
             case DLIST:
                 //fallthrough
             case DONE:
@@ -89,6 +90,10 @@ public class Parser {
 
             String description = twoInputs[1];
             switch (cmd) {
+
+            case FIND:
+                cmds.add(() -> ui.list(taskList.filter(t -> t.contains(description.trim()))));
+                break;
             case DONE:
                 int i = Integer.parseInt(description) - 1;
                 if (i > taskList.size() || i < 0) throw new DukeException(Messages.INVALID_DONE_INPUT);

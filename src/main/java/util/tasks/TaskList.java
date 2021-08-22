@@ -1,6 +1,7 @@
 package util.tasks;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 
 /**
@@ -24,4 +25,13 @@ public class TaskList extends ArrayList<Task>{
     }
 
 
+    public TaskList filter(Predicate<? super Task> predicate) {
+        TaskList result = new TaskList();
+        for (int i = 0; i < this.size(); i++) {
+            if (predicate.test(this.get(i))) {
+                result.add(this.get(i));
+            }
+        }
+        return result;
+    }
 }

@@ -101,6 +101,22 @@ public abstract class Task {
     }
 
 
+    /**
+     * Checks if the name contains the input string as a word.
+     *
+     * @param s Input word
+     * @return True when the input string is in the name.
+     */
+    public boolean contains(String s) {
+        String[] arr = this.name.split(" ");
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].equals(s)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
 
     @Override
     public String toString() {
