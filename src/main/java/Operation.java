@@ -1,4 +1,5 @@
 public enum Operation {
+    start,
     bye,
     list,
     done,
