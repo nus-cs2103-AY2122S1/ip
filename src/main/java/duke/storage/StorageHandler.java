@@ -1,7 +1,6 @@
 package duke.storage;
 
 import duke.task.DeadlineTask;
-import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
 
@@ -13,6 +12,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +24,11 @@ import java.util.List;
  * @author Jay Aljelo Saez Ting
  */
 public class StorageHandler {
+
     private static final String DEFAULT_PATH = "data/tasks.txt";
     private static final Charset DEFAULT_ENCODING = StandardCharsets.UTF_8;
+    private static final String DATE_TIME_FORMAT_PATTERN = "yyyyMMddHHmm";
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT_PATTERN);
 
     private static StorageHandler instance;
 
@@ -89,7 +94,7 @@ public class StorageHandler {
     private String createFileContents(List<Task> tasks) {
         StringBuilder fileContentsSb = new StringBuilder();
         for (Task task : tasks) {
-            fileContentsSb.append(task.getRepresentation()).append("\n");
+            fileContentsSb.append(task.getFileRepresentation()).append("\n");
         }
         String fileContents = fileContentsSb.toString();
         return fileContents;
@@ -107,7 +112,8 @@ public class StorageHandler {
         StringBuilder timeSb = new StringBuilder();
         int timeStartIndex = tokens.length;
         String taskDescription;
-        String time;
+        String timeStr;
+        LocalDateTime time;
         switch (type) {
         case "T":
             for (int i = 2; i < tokens.length; i++) {
@@ -134,8 +140,13 @@ public class StorageHandler {
                 timeSb.append(token).append(" ");
             }
             taskDescription = taskDescriptionSb.toString().strip();
-            time = timeSb.toString().strip();
-            if (taskDescription.length() == 0 || time.length() == 0) {
+            timeStr = timeSb.toString().strip();
+            if (taskDescription.length() == 0 || timeStr.length() == 0) {
+                throw new IllegalArgumentException();
+            }
+            try {
+                time = LocalDateTime.parse(timeStr, DATE_TIME_FORMATTER);
+            } catch (DateTimeParseException e) {
                 throw new IllegalArgumentException();
             }
             task = new DeadlineTask(taskDescription, time);
@@ -154,11 +165,16 @@ public class StorageHandler {
                 timeSb.append(token).append(" ");
             }
             taskDescription = taskDescriptionSb.toString().strip();
-            time = timeSb.toString().strip();
-            if (taskDescription.length() == 0 || time.length() == 0) {
+            timeStr = timeSb.toString().strip();
+            if (taskDescription.length() == 0 || timeStr.length() == 0) {
                 throw new IllegalArgumentException();
             }
-            task = new EventTask(taskDescription, time);
+            try {
+                time = LocalDateTime.parse(timeStr, DATE_TIME_FORMATTER);
+            } catch (DateTimeParseException e) {
+                throw new IllegalArgumentException();
+            }
+            task = new DeadlineTask(taskDescription, time);
             break;
         default:
             throw new IllegalArgumentException();

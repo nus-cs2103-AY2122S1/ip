@@ -27,7 +27,7 @@ public abstract class Task {
      *
      * @return The representation of the task.
      */
-    public abstract String getRepresentation();
+    public abstract String getFileRepresentation();
 
     abstract String getTypeIndicator();
 
