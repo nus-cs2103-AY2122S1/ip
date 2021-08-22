@@ -44,11 +44,12 @@ public class Deadline extends Task {
 
     public static String deadlinesOnDate(String date) {
         LocalDate deadlineDate = Deadline.parseDate(date);
+        int count = 1;
         Optional<ArrayList<Deadline>> current = Optional.ofNullable(dateMap.get(deadlineDate));
         if (current.isPresent()) {
-            StringBuilder result = new StringBuilder("Here are the events on this date:");
+            StringBuilder result = new StringBuilder("Here are the tasks on this date: ");
             for (Deadline d: current.get()) {
-                result.append("\n").append(d);
+                result.append("\n").append(count++).append(". ").append(d);
             }
             return result.toString();
         } else {

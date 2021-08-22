@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -25,7 +24,7 @@ public class Petal {
     private final List<Task> tasks;
     //Relative path of the folder containing Tasks.txt
     private final String folderPath = System.getProperty("user.dir") + "/PetalData";
-    //Relative path of the txt file with the taks
+    //Relative path of the txt file with the tasks
     private final String filePath = folderPath + "/Tasks.txt";
     //Boolean representing if saving should be performed
     private boolean savedProperly;
@@ -42,7 +41,7 @@ public class Petal {
      * Method to give the start message and to run the bot.
      */
     public void run() {
-        createDirectory(); //IOException already handled internally
+        createDirectory();
         Scanner scanner = new Scanner(System.in);
         while (!bye) {
             String message = scanner.nextLine();
@@ -97,9 +96,10 @@ public class Petal {
 
     public void tasksOnThisDay(String date) throws InvalidInputException {
         try {
-            String result = Deadline.deadlinesOnDate(date);
-            printMessage(result);
-        } catch (DateTimeParseException e) {
+            String deadlines = Deadline.deadlinesOnDate(date);
+            String events = Event.eventsOnDate(date);
+            printMessage(deadlines + "\n" + events);
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
             throw new InvalidInputException("The date/time format used was wrong! Try again :(");
         }
 
@@ -135,8 +135,11 @@ public class Petal {
                 }
                 break;
             default: //Represents the Event task
-                task = new Event(deadlineEvent[0], deadlineEvent[1], false);
-                break;
+                try {
+                    task = new Event(deadlineEvent[0], deadlineEvent[1], false);
+                } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+                    throw new InvalidInputException("The date/time format used was wrong! Try again :(");
+                }
         }
         addTask(task);
     }
@@ -146,7 +149,7 @@ public class Petal {
      * @param addTasks The arraylist of previously saved tasks
      */
     public void addTask(ArrayList<Task> addTasks) {
-        tasks.addAll(addTasks); //Add done ability
+        tasks.addAll(addTasks);
         printMessage(Responses.WELCOME_BACK);
     }
 
@@ -157,8 +160,7 @@ public class Petal {
     public void addTask(Task task) {
         tasks.add(task);
         String plural = (tasks.size() + 1) > 0 ? " tasks!" : " task!";
-        printMessage("Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size()
-                     + plural);
+        printMessage("Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size() + plural);
     }
 
     /**
@@ -172,9 +174,8 @@ public class Petal {
         try {
             int indexOfTask = Integer.parseInt(index) - 1;
             Task toBeDeleted = tasks.remove(indexOfTask);
-            printMessage("Okay. I've deleted this task:\n"
-                         + toBeDeleted
-                         + "\nYou now have " + tasks.size() + " task(s)!");
+            printMessage("Okay. I've deleted this task:\n" + toBeDeleted  + "\nYou now have " + tasks.size()
+                                                                                              + " task(s)!");
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException("Invalid task number given! Please enter another value!", e);
         }
@@ -206,10 +207,10 @@ public class Petal {
                 }
             }
             addTask(toBeAdded);
+            return true;
         } catch (FileNotFoundException e) {
             return false;
         }
-        return true;
     }
 
     /**
@@ -226,11 +227,11 @@ public class Petal {
             File petalData = new File(filePath);
             petalData.createNewFile();
             savedProperly = true;
-            printMessage(Responses.START_MESSAGE);
         } catch (IOException e) {
             savedProperly = false;
             printMessage(Responses.FILE_ERROR);
         }
+        printMessage(Responses.START_MESSAGE);
     }
 
     /**

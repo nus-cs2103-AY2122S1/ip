@@ -22,4 +22,13 @@ public class InvalidInputException extends PetalException {
         super(message, cause);
     }
 
+    /**
+     * Constructor for InvalidInputException (Used as wrapper)
+     * @param response The exception message
+     * @param cause Initial cause
+     */
+    public InvalidInputException(Responses response, Throwable cause) {
+        super(response.toString(), cause);
+    }
+
 }

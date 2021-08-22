@@ -1,5 +1,7 @@
 deadline go for a jog /by 2/12/2021 1800
 deadline go for a jog /by 2/12/2021 1900
+event go for a jog /at 2/12/2021 1800 2100
+event go for a jog /at 2/12/2021 1900 2100
 date 2/12/2021
 deadline go for a jog /by 8pm today
 deadline use a computer /by 7pm tomorrow
