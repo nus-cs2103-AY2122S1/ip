@@ -32,7 +32,6 @@ public class Duke {
 
         tasks = tasks1;
         parser = new Parser(tasks, ui);
-        ui.sayHi();
     }
 
     /**
@@ -45,9 +44,13 @@ public class Duke {
     }
 
     /**
-     * Starts up duke.
+     * Runs the duke app.
      */
     public void run() {
+        // start
+        start();
+
+        // parse
         Scanner scanner = new Scanner(System.in);
         String input;
 
@@ -59,12 +62,20 @@ public class Duke {
             }
         }
 
+        // end
         exit();
         scanner.close();
     }
 
     /**
-     * Exits duke.
+     * Starts up Duke.
+     */
+    private void start() {
+        ui.sayHi();
+    }
+
+    /**
+     * Exits Duke.
      */
     private void exit() {
         try {
