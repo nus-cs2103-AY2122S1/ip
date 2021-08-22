@@ -39,7 +39,7 @@ public class Deadline extends Task{
         } else if (this.time == 0) {
             timeStr = "12:00AM";
         } else {
-            String min = this.time % 100 > 10
+            String min = this.time % 100 >= 10
                     ? "" + (this.time % 100)
                     : "0" + (this.time % 100);
             if (time > 1159) {

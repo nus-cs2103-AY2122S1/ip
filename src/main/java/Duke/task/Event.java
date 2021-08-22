@@ -45,7 +45,7 @@ public class Event extends Task {
         } else if (time == 0) {
             timeStr = "12:00AM";
         } else {
-            String min = time % 100 > 10
+            String min = time % 100 >= 10
                     ? "" + (time % 100)
                     : "0" + (time % 100);
             if (time > 1159) {
