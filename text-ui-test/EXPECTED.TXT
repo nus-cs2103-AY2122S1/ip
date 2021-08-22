@@ -36,7 +36,7 @@ Output:
 
 You have successfully added the following task:
 
-    [D][ ] return book (by: Sunday)
+    [D][ ] return book (by: Dec 25 2021)
 
 You now have 2 tasks in your list!
 
@@ -62,7 +62,7 @@ Output:
 
 This task is successfully marked as done:
 
-    [D][X] return book (by: Sunday)
+    [D][X] return book (by: Dec 25 2021)
 
 =================================================
 
@@ -72,7 +72,7 @@ Input:
 Output: This is your current list!
 
 1. [T][ ] borrow book
-2. [D][X] return book (by: Sunday)
+2. [D][X] return book (by: Dec 25 2021)
 3. [E][ ] project meeting (at: Mon 2-4pm)
 
 =================================================
@@ -142,7 +142,17 @@ Input:
 
 Output: Please include the deadline of the task after
 a task description using a '/by' (only once).
-i.e. deadline return book /by Monday
+i.e. deadline return book /by 2021-12-25
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
+Output: 
+
+The deadline should be a valid date in the form: yyyy-mm-dd
+i.e. 2021-12-25
 
 =================================================
 
@@ -220,7 +230,7 @@ Output:
 
 This task is successfully deleted:
 
-    [D][X] return book (by: Sunday)
+    [D][X] return book (by: Dec 25 2021)
 
 You now have 0 tasks in your list!
 

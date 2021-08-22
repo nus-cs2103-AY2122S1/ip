@@ -4,7 +4,6 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task{
 
-
     private String by;
     private LocalDate date;
 
@@ -20,7 +19,6 @@ public class Deadline extends Task{
 
         try {
             this.date = LocalDate.parse(by);
-            this.by = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } catch (DateTimeParseException e) {
             throw new InvalidParamException("\n\nThe deadline should be a valid date in the form: yyyy-mm-dd\n"
                     + "i.e. 2021-12-25");
@@ -36,7 +34,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
     public String getBy() {

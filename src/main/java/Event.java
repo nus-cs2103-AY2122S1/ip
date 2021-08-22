@@ -1,6 +1,6 @@
 public class Event extends Task {
 
-    private final String AT;
+    private String at;
 
     /**
      * A constructor for this event Task.
@@ -10,7 +10,7 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
-        this.AT = at;
+        this.at = at;
     }
 
     /**
@@ -22,11 +22,11 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + AT + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
     public String getAt() {
-        return this.AT;
+        return this.at;
     }
 }
 

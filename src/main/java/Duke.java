@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static ArrayList<Task> list;
+    private static TaskList taskList;
     private static FileManager fileManager;
     private static Scanner sc;
 
@@ -29,12 +29,12 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        list = new ArrayList<>();
+        taskList = new TaskList();
         fileManager = new FileManager();
         sc = new Scanner(System.in);
 
         // Obtain data from save file if it exists
-        fileManager.copyFromFileToList(list);
+        fileManager.copyFromFileToList(taskList);
 
         // Show the logo
         showLogo();
@@ -87,9 +87,7 @@ public class Duke {
         } else if (input.equals("list")) {
 
             System.out.println("Output: This is your current list!\n");
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println(i + 1 + ". " + list.get(i));
-            }
+            taskList.printList();
 
         } else if (input.startsWith("done")) {
 
@@ -99,28 +97,16 @@ public class Duke {
 
             // If successfully deleted task, then print current number of tasks.
             if (alterTask(input, TaskAction.DELETE)) {
-                printNumberOfTasks();
+                taskList.printNumberOfTasks();
             }
 
         } else {
             vetoTask(input);
         }
 
-        fileManager.writeToFile(list);
+        fileManager.writeToFile(taskList);
         printDoubleDivider();
         getInput();
-    }
-
-    /**
-     * Adds the Task into the task list.
-     *
-     * @param newTask the Task to be added into the task list.
-     */
-    private static void addTask(Task newTask) {
-        list.add(newTask);
-        System.out.println("Output:\n\nYou have successfully added the following task:\n\n" +
-                "    " + newTask);
-        printNumberOfTasks();
     }
 
     /**
@@ -138,11 +124,10 @@ public class Duke {
 
             if (action == TaskAction.DELETE) {
                 // If delete
-                taskToBeAltered = list.remove(index);
+                taskToBeAltered = taskList.removeTask(index);
             } else {
                 // If done
-                taskToBeAltered = list.get(index);
-                taskToBeAltered.markAsDone();
+                taskToBeAltered = taskList.markDoneInTaskList(index);
             }
 
             System.out.println("Output:\n\nThis task is successfully " + action.successMessage + ":\n\n"
@@ -203,7 +188,12 @@ public class Duke {
         }
 
         // If there was no error, then add task. Else, skip this to get input again.
-        if (newTask != null) addTask(newTask);
+        if (newTask != null) {
+            taskList.addTask(newTask);
+            System.out.println("Output:\n\nYou have successfully added the following task:\n\n" +
+                    "    " + newTask);
+            taskList.printNumberOfTasks();
+        }
     }
 
     /**
@@ -264,14 +254,6 @@ public class Duke {
         }
         Task event = new Event(eventParams[0], eventParams[1]);
         return event;
-    }
-
-    /**
-     * Prints the number of tasks currently in the task list.
-     */
-    private static void printNumberOfTasks() {
-        System.out.println("\nYou now have " + list.size() + (list.size() == 1 ? " task " : " tasks ")
-                + "in your list!");
     }
 
     /**

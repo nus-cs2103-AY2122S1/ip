@@ -17,7 +17,7 @@ public class FileManager {
         }
     }
 
-    public void writeToFile(ArrayList<Task> taskList) {
+    public void writeToFile(TaskList taskList) {
         try {
             StringBuilder toBeWritten = new StringBuilder();
             FileWriter fileWriter = new FileWriter(FILEPATH);
@@ -55,7 +55,7 @@ public class FileManager {
         }
     }
 
-    public void copyFromFileToList(ArrayList<Task> taskList) { //STOPPED HERE
+    public void copyFromFileToList(TaskList taskList) { //STOPPED HERE
         try {
             Scanner sc = new Scanner(SAVEFILE);
 
@@ -80,10 +80,13 @@ public class FileManager {
                     newTask.markAsDone();
                 }
 
-                taskList.add(newTask);
+                taskList.addTask(newTask);
             }
-        } catch (java.io.IOException e) {
-            System.out.println(e.getMessage());
+        } catch (java.io.IOException e1) {
+            System.out.println(e1.getMessage());
+        } catch (InvalidParamException e2) {
+            // SHOULD NEVER HAPPEN
+            System.out.println("THIS SHOULD NEVER HAPPEN, DEADLINE FORMAT WRONG");
         }
     }
 
