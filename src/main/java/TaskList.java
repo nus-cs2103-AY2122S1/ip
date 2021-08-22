@@ -1,11 +1,18 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.Scanner;
 
 public class TaskList {
+    private final static File saveFile = new File("save.csv");
     private ArrayList<Task> taskList = new ArrayList<>();
 
-    private void addTask(Task task) {
+    private void addTask(Task task) throws DukeException {
         taskList.add(task);
 
+        save();
         Duke.printMessage("Got it. I've added this task:\n  "
                 + task.toString() + "\n" + taskLengthReport());
     }
@@ -76,6 +83,8 @@ public class TaskList {
 
         Task task = taskList.get(idx);
         task.doTask();
+        save();
+
         Duke.printMessage("Nice! I've marked this task as done:\n  " + task.toString());
     }
 
@@ -84,6 +93,7 @@ public class TaskList {
 
         Task task = taskList.get(idx);
         taskList.remove(idx);
+        save();
 
         Duke.printMessage("Noted! I've removed this task:\n  " +
                 task.toString() + "\n" + taskLengthReport());
@@ -133,5 +143,64 @@ public class TaskList {
     private String taskLengthReport() {
         return "Now you have " + taskList.size()
                 + (taskList.size() != 1 ? " tasks" : " task") + " in the list.";
+    }
+
+    private void save() throws DukeException {
+        try {
+            // create the file if it does not exist
+            saveFile.createNewFile();
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
+
+        try (FileWriter fw = new FileWriter(saveFile)){
+            fw.write(convertToSaveString());
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
+    }
+
+    private String convertToSaveString() {
+        StringBuilder sb = new StringBuilder();
+
+        if (taskList.size() == 0) {
+            return "";
+        }
+
+        for (Task task : taskList) {
+            sb.append(task.getSaveString());
+            sb.append('\n');
+        }
+
+        // remove the last newline character
+        sb.deleteCharAt(sb.length() - 1);
+
+        return sb.toString();
+    }
+
+    // returns whether the saveFile exists, indicating whether the user is a new user
+    public boolean loadFile() {
+        try {
+            Scanner sc = new Scanner(saveFile);
+            while (sc.hasNextLine()) {
+                String[] data = sc.nextLine().split(",");
+                switch (data[0]) {
+                case "t":
+                    taskList.add(ToDo.load(data));
+                    break;
+                case "d":
+                    taskList.add(Deadline.load(data));
+                    break;
+                case "e":
+                    taskList.add(Event.load(data));
+                    break;
+                default:
+                    break;
+                }
+            }
+            return true;
+        } catch (FileNotFoundException e) {
+            return false;
+        }
     }
 }

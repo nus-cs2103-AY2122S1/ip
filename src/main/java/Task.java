@@ -1,6 +1,6 @@
 public abstract class Task {
-    private boolean done;
-    private String name;
+    protected boolean done;
+    protected String name;
 
     public Task(String name) {
         this.name = name;
@@ -14,5 +14,9 @@ public abstract class Task {
     @Override
     public String toString() {
         return "[" + (done ? "X" : " ") + "] " + name;
+    }
+
+    public String getSaveString() {
+        return (done ? "o," : "x,") +  name;
     }
 }
