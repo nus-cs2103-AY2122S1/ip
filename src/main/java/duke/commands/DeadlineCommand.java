@@ -14,7 +14,7 @@ public class DeadlineCommand extends Command {
 
     @Override
     public void executeCommand(TaskList taskList) {
-        taskList.addTask(task);
-        Ui.printAddTaskMessage(task, taskList.getTaskCount());
+        taskList.addTask(this.task);
+        Ui.printAddTaskMessage(this.task, taskList.getTaskCount());
     }
 }

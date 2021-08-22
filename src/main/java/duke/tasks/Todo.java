@@ -15,11 +15,11 @@ public class Todo extends Task {
 
     @Override
     public String getTag() {
-        return TAG;
+        return Todo.TAG;
     }
 
     @Override
     public String toString() {
-        return "[" + TAG + "]" + super.toString();
+        return "[" + Todo.TAG + "]" + super.toString();
     }
 }

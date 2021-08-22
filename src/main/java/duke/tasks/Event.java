@@ -21,17 +21,17 @@ public class Event extends Task {
 
     @Override
     public String getTag() {
-        return TAG;
+        return Event.TAG;
     }
 
     @Override
     public String getDueDate() {
-        return at.toString().trim();
+        return this.at.toString().trim();
     }
 
     @Override
     public String toString() {
-        return "[" + TAG + "]" + super.toString()
-                + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[" + Event.TAG + "]" + super.toString()
+                + " (at: " + this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

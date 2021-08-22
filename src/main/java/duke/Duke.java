@@ -30,7 +30,7 @@ public class Duke {
      */
     public void start() {
         try {
-            items = storage.loadTask();
+            this.items = this.storage.loadTask();
         } catch (IOException | NoSuchTaskException e) {
             Ui.notifyError(e.getMessage());
         }
@@ -44,10 +44,10 @@ public class Duke {
         String exitTag = "bye";
         while(!input.equalsIgnoreCase(exitTag)) {
             try {
-                Command action = parser.checkCommandTag(input);
-                action.executeCommand(items);
+                Command action = this.parser.checkCommandTag(input);
+                action.executeCommand(this.items);
 
-                storage.saveTask(items);
+                this.storage.saveTask(this.items);
             } catch (DukeException | IOException e) {
                 Ui.notifyError(e.getMessage());
             } finally {

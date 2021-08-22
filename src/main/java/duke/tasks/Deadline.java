@@ -21,17 +21,17 @@ public class Deadline extends Task {
 
     @Override
     public String getTag() {
-        return TAG;
+        return Deadline.TAG;
     }
 
     @Override
     public String getDueDate() {
-        return by.toString().trim();
+        return this.by.toString().trim();
     }
 
     @Override
     public String toString() {
-        return "[" + TAG + "]" + super.toString()
-                + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[" + Deadline.TAG + "]" + super.toString()
+                + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }
