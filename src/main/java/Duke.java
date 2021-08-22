@@ -33,17 +33,19 @@ public class Duke {
         try {
             String[] descriptions = extractCommand(command);
             Task task = null;
+
             switch (TaskType.valueOf(command[0].toUpperCase())) {
-                case TODO:
-                    task = new Todo(descriptions[0]);
-                    break;
-                case EVENT:
-                    task = new Event(descriptions[0], descriptions[1]);
-                    break;
-                case DEADLINE:
-                    task = new Deadline(descriptions[0], descriptions[1]);
-                    break;
+            case TODO:
+                task = new Todo(descriptions[0]);
+                break;
+            case EVENT:
+                task = new Event(descriptions[0], descriptions[1]);
+                break;
+            case DEADLINE:
+                task = new Deadline(descriptions[0], descriptions[1]);
+                break;
             }
+            
             if (task != null) {
                 tasks.add(task);
                 printAddOrDelete(true, task, ++numOfTask);
