@@ -9,7 +9,7 @@ Total tasks: 1
 -----------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------
 Noted! I've added the following task:
-    [D][ ] return book  (deadline: Sunday)
+    [D][ ] return book  (deadline: Dec 1 2021)
 Total tasks: 2
 -----------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ Total tasks: 5
 -----------------------------------------------------------------------------------------
 Here are the tasks in your list:
 1. [T][ ] read book
-2. [D][ ] return book  (deadline: Sunday)
+2. [D][ ] return book  (deadline: Dec 1 2021)
 3. [E][ ] project meeting  (at: Mon 2-4pm)
 4. [T][ ] join sports club
 5. [T][ ] borrow book
@@ -41,7 +41,7 @@ Nice! I've marked this task as done:
 -----------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------
 Nice! I've marked this task as done:
-    [D][X] return book  (deadline: Sunday)
+    [D][X] return book  (deadline: Dec 1 2021)
 -----------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------
 Nice! I've marked this task as done:
@@ -50,7 +50,7 @@ Nice! I've marked this task as done:
 -----------------------------------------------------------------------------------------
 Here are the tasks in your list:
 1. [T][X] read book
-2. [D][X] return book  (deadline: Sunday)
+2. [D][X] return book  (deadline: Dec 1 2021)
 3. [E][X] project meeting  (at: Mon 2-4pm)
 4. [T][ ] join sports club
 5. [T][ ] borrow book
@@ -76,7 +76,7 @@ Error: Whoops... The time of event cannot be empty. Please provide a time for th
 -----------------------------------------------------------------------------------------
 Here are the tasks in your list:
 1. [T][X] read book
-2. [D][X] return book  (deadline: Sunday)
+2. [D][X] return book  (deadline: Dec 1 2021)
 3. [E][X] project meeting  (at: Mon 2-4pm)
 4. [T][ ] join sports club
 5. [T][ ] borrow book
@@ -89,7 +89,7 @@ Total tasks: 4
 -----------------------------------------------------------------------------------------
 Here are the tasks in your list:
 1. [T][X] read book
-2. [D][X] return book  (deadline: Sunday)
+2. [D][X] return book  (deadline: Dec 1 2021)
 3. [T][ ] join sports club
 4. [T][ ] borrow book
 -----------------------------------------------------------------------------------------

@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import java.time.LocalDate;
+
 public class Chatbot {
     private final String name;
     private final TaskList taskList;
@@ -78,7 +80,7 @@ public class Chatbot {
 
             String name = description[0];
             String deadline = description[1].split(" ")[1];
-            newItem = new Deadline(name, deadline);
+            newItem = new Deadline(name, LocalDate.parse(deadline));
         } else if (input.contains("event")) {
             String[] parsedInput = input.split(" ", 2); // Splits input into array of [event, ...]
             if (isIncomplete(parsedInput)) {
