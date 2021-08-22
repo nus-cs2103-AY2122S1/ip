@@ -3,7 +3,7 @@
  *
  * @author KelvinSoo
  */
-public class Task {
+public abstract class Task {
     private boolean isDone;
     private final String description;
 
