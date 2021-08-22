@@ -20,11 +20,6 @@ public class TaskList {
         taskList.add(task);
     }
 
-    public int size() {
-        return taskList.size();
-    }
-
-
     /**
      * Prints past commands.
      *
