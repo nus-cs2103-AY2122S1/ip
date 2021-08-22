@@ -1,15 +1,26 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Events extends Task {
 
-    protected String eventTime;
+    protected LocalDate localDate;
+    protected LocalTime localStartTime;
+    protected LocalTime localEndTime;
 
-    public Events(String description, String time) {
+    public Events(String description, LocalDate localDate, LocalTime localStartTime, LocalTime localEndTime) {
         super(description);
-        eventTime = time;
+        this.localDate = localDate;
+        this.localStartTime = localStartTime;
+        this.localEndTime = localEndTime;
     }
 
     @Override
     public String toString() {
-        return String.format("[E] [%s] " + this.description + "(at: %s)",
-            this.getStatusIcon(), this.eventTime);
+        return String.format("[E] [%s] " + this.description + "(at: %s %s-%s)",
+            this.getStatusIcon(),
+            this.localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+            this.localStartTime.toString(),
+            this.localEndTime.toString());
     }
 }
