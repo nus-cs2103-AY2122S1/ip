@@ -58,6 +58,5 @@ public class Storage {
                 throw new DukeException("Something happened to the file when saving: " + e.getMessage());
             }
         }
-
     }
 }

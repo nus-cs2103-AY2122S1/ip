@@ -17,6 +17,12 @@ public class TaskList {
     private int currentIdx;
     private Storage tasksStorage;
 
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+        this.currentIdx = 0;
+        this.tasksStorage = null;
+    }
+
     public TaskList(Storage tasksStorage) {
         this.tasks = new ArrayList<>();
         this.currentIdx = 0;
@@ -25,7 +31,7 @@ public class TaskList {
 
     public void retrieveTasks() throws DukeException {
         File taskData = this.tasksStorage.retrieveTasks();
-        if(taskData == null) {
+        if(taskData == null || tasksStorage == null) {
             return ;
         }
         try {
@@ -40,6 +46,9 @@ public class TaskList {
     }
 
     public void saveTasks() throws DukeException {
+        if(tasksStorage == null) {
+            return ;
+        }
         this.tasksStorage.saveTasks(this.convertTasksToText());
     }
 
@@ -99,7 +108,7 @@ public class TaskList {
         for(int i = 0; i < currentIdx; i++) {
             sb = sb.append(Integer.toString(i + 1)).append(". ").append(tasks.get(i).toString()).append("\n");
         }
-        sb = sb.append("--- End Of List ---");
+        sb = sb.append("--- End of List ---");
         return sb.toString();
     }
 
