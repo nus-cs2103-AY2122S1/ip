@@ -63,6 +63,9 @@ public class Duke {
                     list.removeFromList(index);
                     list.updateData();
                     break;
+                case FILTER:
+                    parser.handleFilter(input);
+                    break;
                 case UNRECOGNISED:
                     throw new NoSuchCommandException(input.split(" ", 2)[0]);
                 }

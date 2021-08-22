@@ -21,6 +21,11 @@ public class ToDo extends Task {
         return String.format("T | %s", super.convertToTxt());
     }
 
+    @Override
+    public boolean isSameDateTime(String dateTime) {
+        return false;
+    }
+
     /**
      * String representation of Todos task.
      *

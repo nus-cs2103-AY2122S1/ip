@@ -47,6 +47,10 @@ public class Deadline extends Task {
         return String.format("D | %s | %s", super.convertToTxt(), deadlineToString());
     }
 
+    public boolean isSameDateTime(String dateTime) {
+        return this.deadline.equals(Parser.parseDateTime(dateTime));
+    }
+
     /**
      * String representation of a Deadline.
      *

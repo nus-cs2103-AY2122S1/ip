@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * All commands available to duke.Duke.
+ * All commands available to Duke.
  *
  * @author Tan Yi Guan
  * @version CS2103T AY21/22 Semester 1
@@ -14,12 +14,13 @@ public enum Command {
     DEADLINE,
     EVENT,
     DELETE,
-    EXIT;
+    EXIT,
+    FILTER;
 
     /**
      * Convert input command.
      *
-     * @param input duke.Command issued by user in String format.
+     * @param input Command issued by user in String format.
      * @return Corresponding command.
      */
     public static Command convertInput(String input) {
@@ -46,6 +47,9 @@ public enum Command {
                 break;
             case "delete":
                 result = Command.DELETE;
+                break;
+            case "filter":
+                result = Command.FILTER;
                 break;
             default:
                 result = Command.UNRECOGNISED;

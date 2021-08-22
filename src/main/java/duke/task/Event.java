@@ -42,6 +42,10 @@ public class Event extends Task {
         return outFormat.format(this.dateTime);
     }
 
+    public boolean isSameDateTime(String dateTime) {
+        return this.dateTime.equals(Parser.parseDateTime(dateTime));
+    }
+
     @Override
     public String convertToTxt() {
         return String.format("E | %s | %s", super.convertToTxt(), dateTimeToString());

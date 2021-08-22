@@ -9,16 +9,19 @@ import duke.exception.MissingIndexException;
 import duke.exception.MultipleDateTimeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.ToDo;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Parser {
     private final ToDoList list;
     private final DataManager dataManager;
+    private static final String ls = System.lineSeparator();
 
     public Parser(ToDoList list, DataManager dataManager) {
         this.list = list;
@@ -127,6 +130,28 @@ public class Parser {
         Event task = new Event(description, dateTime);
         list.addToList(task);
         dataManager.writeToFile(task);
+    }
+
+    public void handleFilter(String input) throws DukeException {
+        if (input.split(" ").length < 2) {
+            throw new DukeException("MissingDateTimeException: Enter a date/time after your command!");
+        } else if (input.split(" ").length > 2) {
+            throw new MultipleDateTimeException();
+        }
+
+        String[] extracted = input.split(" ", 2);
+        ArrayList<Task> extractedTask = list.filterList(extracted[1]);
+
+        if (extractedTask.size() == 0) {
+            Ui.prettyPrint("There are no tasks on this day.");
+        } else {
+            String output = String.format("Here are your tasks for this day:%s", ls + "\t\t");
+            int count = 1;
+            for (Task t : extractedTask) {
+                output = output.concat(String.format("[%d]. %s", count++, t + ls + "\t\t"));
+            }
+            Ui.prettyPrint(output);
+        }
     }
 
     public static Date parseDateTime(String dateTime) {

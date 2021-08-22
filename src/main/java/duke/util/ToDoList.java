@@ -75,4 +75,14 @@ public class ToDoList {
     public void updateData() throws DukeException {
         dataManager.updateData(list);
     }
+
+    public ArrayList<Task> filterList(String dateTime) {
+        ArrayList<Task> filteredList = new ArrayList<>();
+        for (Task t : list) {
+            if (t.isSameDateTime(dateTime)) {
+                filteredList.add(t);
+            }
+        }
+        return filteredList;
+    }
 }
