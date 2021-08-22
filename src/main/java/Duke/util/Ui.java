@@ -1,5 +1,21 @@
+package Duke.util;
+
+import Duke.exception.DukeException;
+
 import java.util.Scanner;
 
+/**
+ * CS2103T Individual Project AY 21/22 Sem 1
+ * Project Duke
+ *
+ * Current Progress: A-MoreOOP. Use More OOP
+ *
+ * Description:
+ * Encapsulates the UI that interacts with the user through scanner the inputted text from the user and prints
+ * messages based on the result of the different Command methods
+ *
+ * @author Keith Tan
+ */
 public class Ui {
 
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
@@ -9,9 +25,14 @@ public class Ui {
         this.commandScanner = new Scanner(System.in);
     }
 
+    /**
+     * Reads the next command inputted by the user
+     *
+     */
     public String readCommand() {
         return commandScanner.nextLine();
     }
+
     /**
      * Prints out message according to desired format to user
      *
@@ -45,11 +66,11 @@ public class Ui {
     }
 
     /**
-     * Prints out goodbye message
+     * Prints out help message
      *
      */
     public void printHelpMessage() {
-        String helpString = "Here are the following commands Duke accepts:\n"
+        String helpString = "Here are the following commands Duke.util.Duke accepts:\n"
                 + "todo - adds a todo task, type 'todo' followed by a description\n"
                 + "event - adds a event task, type 'todo' followed by a description and event duration\n"
                 + "deadline - adds a deadline task, type 'deadline' followed by a description and event due date\n"

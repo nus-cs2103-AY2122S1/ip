@@ -1,8 +1,10 @@
+package Duke.task;
+
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 8. Dates and Times
+ * Current Progress: A-MoreOOP. Use More OOP
  *
  * Description:
  * Encapsulates the Task Class which contains a task description
@@ -21,7 +23,7 @@ public class Task {
     }
 
     /**
-     * Sets Task Completion Status to true and returns true if successfully marked
+     * Sets Duke.util.Duke.task.Task Completion Status to true and returns true if successfully marked
      *
      * @return boolean returns true if task successfully marked and false if task
      *                 already marked

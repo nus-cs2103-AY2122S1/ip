@@ -1,3 +1,16 @@
+package Duke.util;
+
+import Duke.exception.DukeException;
+import Duke.exception.MissingArgumentException;
+import Duke.exception.IndexOutOfRangeException;
+import Duke.exception.InvalidArgumentException;
+import Duke.exception.InvalidCommandException;
+
+import Duke.task.Deadline;
+import Duke.task.Event;
+import Duke.task.Task;
+import Duke.task.ToDo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -7,10 +20,10 @@ import java.util.ArrayList;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 8. Dates and Times
+ * Current Progress: A-MoreOOP. Use More OOP
  *
  * Description:
- * Encapsulates the TaskList which contains a list of tasks
+ * Encapsulates the task List which contains a list of tasks
  *
  * @author Keith Tan
  */
@@ -38,7 +51,7 @@ public class Tasklist {
      * @param event String stating the type of task to be added
      * @return String Returns the time of the task
      * @throws MissingArgumentException throws a MissingArgumentException if no time found
-     * @throws InvalidArgumentException throws an InvalidArgumentException if error occurs when parsing
+     * @throws InvalidArgumentException throws a InvalidArgumentException if error occurs when parsing
      *                                  inputted command line for dates
      */
     private DukeDate checkTime(String[] strArr, String event) throws MissingArgumentException, InvalidArgumentException {
@@ -93,8 +106,7 @@ public class Tasklist {
     /**
      * Adds tasks read from store in hard drive
      *
-     * @param storeTask Task that was saved in hard drive to be loaded into
-     *                  current task list
+     * @param storeTask Task that was saved in hard drive to be loaded into current task list
      */
     public void addTask(Task storeTask) {
         tasks.add(storeTask);
@@ -104,13 +116,11 @@ public class Tasklist {
      * Adds the task to the list
      *
      * @param description String containing the description and time of the task
-     * @param task Command stating the type of task to be added
+     * @param task Duke.util.Duke.command.Command stating the type of task to be added
      * @return String Returns the success message of added the task to the list
      * @throws DukeException throws a duke exception depending on the error found
-     * @throws InvalidCommandException throws an invalid command exception in the event no
-     *                                 command string present
      */
-    public String addTask(String description, String task) throws DukeException,InvalidCommandException {
+    public String addTask(String description, String task) throws DukeException {
 
         Task newTask;
         switch(task) {

@@ -1,8 +1,13 @@
+package Duke.util;
+
+import Duke.command.Command;
+import Duke.exception.DukeException;
+
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 8. Dates and Times
+ * Current Progress: A-MoreOOP. Use More OOP
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted text.
@@ -28,6 +33,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Initializes the Duke chat bot and runs the chat bot
+     *
+     */
     public void run() {
         ui.printWelcomeMessage();
         boolean isExit = false;

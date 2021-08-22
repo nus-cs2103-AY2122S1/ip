@@ -1,11 +1,15 @@
+package Duke.task;
+
+import Duke.util.DukeDate;
+
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 8. Dates and Times
+ * Current Progress: A-MoreOOP. Use More OOP
  *
  * Description:
- * Extends the Task Class which where it is a task that start at a
+ * Extends the Event Class which where it is a task that start at a
  * specific time and ends at a specific time
  *
  * @author Keith Tan
@@ -19,7 +23,6 @@ public class Event extends Task {
         this.duration = duration;
 
     }
-
 
     @Override
     public String toString() {

@@ -1,3 +1,5 @@
+package Duke.util;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -5,10 +7,10 @@ import java.time.format.DateTimeFormatter;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 8. Dates and Times
+ * Current Progress: A-MoreOOP. Use More OOP
  *
  * Description:
- * Encapsulates the DukeDate Class which it stores the duration/dates
+ * Encapsulates the DukeDate Class where it stores the duration/dates
  * for the deadline and event classes
  *
  * @author Keith Tan
@@ -32,8 +34,7 @@ public class DukeDate {
     }
 
     /**
-     * Getter that returns the end date and time of the task in a string
-     * format
+     * Getter that returns the end date and time of the task in a string format
      *
      * @return String returns the end date and time of the task in a string
      *

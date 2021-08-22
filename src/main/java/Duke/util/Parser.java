@@ -1,3 +1,23 @@
+package Duke.util;
+
+import Duke.command.*;
+import Duke.exception.DukeException;
+import Duke.exception.InvalidArgumentException;
+import Duke.exception.InvalidCommandException;
+import Duke.exception.MissingArgumentException;
+
+/**
+ * CS2103T Individual Project AY 21/22 Sem 1
+ * Project Duke
+ *
+ * Current Progress: A-MoreOOP. Use More OOP
+ *
+ * Description:
+ * Encapsulates the parser where it parses the inputted command from the user and runs
+ * the correct command
+ *
+ * @author Keith Tan
+ */
 public class Parser {
 
     /**
@@ -28,7 +48,7 @@ public class Parser {
      * @param strArr String array containing the command
      * @param event String stating the type of task to be added
      * @return String Returns the description of the task
-     * @throws MissingArgumentException throws a MissingArgumentException if no description found
+     * @throws MissingArgumentException throws a Duke.util.Duke.exception.MissingArgumentException if no description found
      */
     private static String checkDescription(String[] strArr, String event) throws MissingArgumentException {
 
@@ -48,10 +68,12 @@ public class Parser {
      * @param strArr String array containing the integer
      * @param event String stating whether task is to be marked or deleted
      * @return int Returns the task number to be marked
-     * @throws MissingArgumentException throws a MissingArgumentException if no integer found
-     * @throws InvalidArgumentException throws a InvalidArgumentException if no integer inputted after done command
+     * @throws MissingArgumentException throws a Duke.util.Duke.exception.MissingArgumentException if no integer found
+     * @throws InvalidArgumentException throws a Duke.util.Duke.exception.InvalidArgumentException if no integer
+     *                                  inputted after done command
      */
-    private static int checkInteger(String[] strArr, String event) throws MissingArgumentException, InvalidArgumentException {
+    private static int checkInteger(String[] strArr, String event) throws MissingArgumentException,
+            InvalidArgumentException {
 
         if (strArr.length < 2) {
             throw new MissingArgumentException("integer", event);
@@ -63,7 +85,15 @@ public class Parser {
 
     }
 
-    public static Command parseCommandString(String command) throws DukeException{
+    /**
+     * Parses the inputted command and creates the corresponding command
+     *
+     * @param command String containing the inputted command
+     * @return Command Returns the corresponding command
+     * @throws DukeException throws a Duke Exception that might be raised during the parsing of the inputted
+     *                       command
+     */
+    public static Command parseCommandString(String command) throws DukeException {
         Command currentCommand = new InvalidCommand();
         String[] checkCommand = command.split(" ", 2);
         switch(checkCommand[0]) {

@@ -1,3 +1,10 @@
+package Duke.util;
+
+import Duke.exception.FileWritingException;
+import Duke.task.Deadline;
+import Duke.task.Event;
+import Duke.task.Task;
+import Duke.task.ToDo;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -7,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 8. Dates and Times
+ * Current Progress: A-MoreOOP. Use More OOP
  *
  * Description:
  * Encapsulates the Store Class which has the functions that stores the task
@@ -28,7 +35,7 @@ public class Store {
      * Loads tasks in hard disk to current task list
      *
      * @return Tasklist returns a tasklist of all tasks stored in the hard drive
-     * @throws FileWritingException throws an FileWritingException if error encountered during
+     * @throws FileWritingException throws an Duke.util.Duke.exception.FileWritingException if error encountered during
      *                              loading of tasks
      */
     public Tasklist load() throws FileWritingException {
@@ -64,8 +71,8 @@ public class Store {
     /**
      * Saves tasks currently in the tasks list to the hard disk
      *
-     * @param list Tasklist containing tasks to be saved into the hard disk
-     * @throws FileWritingException throws an FileWritingException if error encountered during
+     * @param list Task list containing tasks to be saved into the hard disk
+     * @throws FileWritingException throws a FileWritingException if error encountered during
      *                              saving of tasks
      */
     public void saveTasksToStore(Tasklist list) throws FileWritingException {
@@ -89,8 +96,8 @@ public class Store {
      *
      * @param line line from file, which contains tasks list saved in hard drive,
      *             to be parsed
-     * @throws FileWritingException throws an FileWritingException if error encountered during
-     *                              parsing of line
+     * @throws FileWritingException throws a FileWritingException if error encountered during
+     *                              parsing of file line
      */
     public Task parseLine(String line) throws FileWritingException{
         char type = line.charAt(3);

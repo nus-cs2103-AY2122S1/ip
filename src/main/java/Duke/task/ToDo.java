@@ -1,8 +1,10 @@
+package Duke.task;
+
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 8. Dates and Times
+ * Current Progress: A-MoreOOP. Use More OOP
  *
  * Description:
  * Extends the Task Class which where it is a task that does
