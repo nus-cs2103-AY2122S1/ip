@@ -27,7 +27,7 @@ public class Duke {
     }
 
     /**
-     * If the user command is valid, then return the task description from the command.
+     * Return the task description from the command if the user command is valid.
      * Otherwise, throw corresponding exception.
      *
      * @param command The command entered by the user which is divided into 2 parts (Type of task and its description).
