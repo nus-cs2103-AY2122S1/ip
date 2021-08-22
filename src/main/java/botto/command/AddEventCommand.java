@@ -48,7 +48,7 @@ public class AddEventCommand implements Command {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
 
         try {
-            Task task =  new Event(information[0], LocalDateTime.parse(information[1], formatter));
+            Task task = new Event(information[0], LocalDateTime.parse(information[1], formatter));
             taskList.addTask(task);
 
             ui.respondAdd(task, taskList.getSize());

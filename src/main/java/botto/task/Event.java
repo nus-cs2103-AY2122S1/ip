@@ -8,17 +8,17 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task{
 
-    protected LocalDateTime at;
+    protected LocalDateTime dateTime;
 
     /**
      * Constructor for an event
      *
      * @param description description of the event
-     * @param at datetime of the event
+     * @param dateTime datetime of the event
      */
-    public Event(String description, LocalDateTime at) {
+    public Event(String description, LocalDateTime dateTime) {
         super(description);
-        this.at = at;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -29,6 +29,6 @@ public class Event extends Task{
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
-        return "[E]" + super.toString() + " (at: " + formatter.format(this.at) + ")";
+        return "[E]" + super.toString() + " (at: " + formatter.format(this.dateTime) + ")";
     }
 }

@@ -8,17 +8,18 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected LocalDateTime by;
+    protected LocalDateTime dateTime;
+
 
     /**
      * Constructor of a deadline task
      *
      * @param description description of the deadline task
-     * @param by date for the deadline task
+     * @param dateTime dateTime for the deadline task
      */
-    public Deadline(String description, LocalDateTime by) {
+    public Deadline(String description, LocalDateTime dateTime) {
         super(description);
-        this.by = by;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -29,7 +30,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
-        return "[D]" + super.toString() + " (by: " + formatter.format(by) + ")";
+        return "[D]" + super.toString() + " (by: " + formatter.format(dateTime) + ")";
     }
 
 

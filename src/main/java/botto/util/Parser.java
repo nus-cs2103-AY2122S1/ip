@@ -7,9 +7,8 @@ import botto.command.*;
  * This class deals with making sense of the user command
  */
 public class Parser {
-
     /** current available user commands */
-    private final static String[] commands = {"list", "done", "todo", "deadline", "event", "delete", "bye"};
+    private final static String[] COMMANDS = {"list", "done", "todo", "deadline", "event", "delete", "bye"};
 
 
     /**
@@ -45,7 +44,7 @@ public class Parser {
 
 
     private static String findCommand(String fullCommand) {
-        for(String x: commands) {
+        for(String x: COMMANDS) {
             if(fullCommand.startsWith(x)) {
                 return x;
             }

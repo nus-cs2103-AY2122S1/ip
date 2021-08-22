@@ -37,14 +37,14 @@ public class Storage {
      * @throws BottoException whenever an read operation is failed
      */
     public List<Task> load() throws BottoException {
-        List<Task> temp = new LinkedList<>();
+        List<Task> tasks = new LinkedList<>();
 
         try {
             this.file.getParentFile().mkdirs();
 
             // file does not exist
             if (file.createNewFile()) {
-                return temp;
+                return tasks;
             }
 
             Scanner scanner = new Scanner(this.file);
@@ -75,14 +75,14 @@ public class Storage {
                     task.markAsDone();
                 }
 
-                temp.add(task);
+                tasks.add(task);
             }
 
         } catch (IOException e) {
             throw new BottoException("Something went wrong when loading data: " + e.getMessage());
         }
 
-        return temp;
+        return tasks;
     }
 
     /**
