@@ -11,6 +11,16 @@ public class ToDo extends Task {
         }
     }
 
+    public ToDo(String description, boolean isDone) {
+        super.setDescription(description);
+        super.setIsDone(isDone);
+    }
+
+    @Override
+    public String getTaskRepresentation() {
+        return TaskType.TODO + "," + super.getTaskRepresentation();
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
