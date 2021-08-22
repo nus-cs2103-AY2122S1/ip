@@ -10,8 +10,8 @@ package duke.exception;
  */
 public class InvalidDateInputException extends DukeException {
     public InvalidDateInputException(String dateString) {
-        super("BAKA! I don't understand this Date input!\n" +
-                String.format("     Date: %s\n", dateString) +
-                "     It should be a valid date in the form dd-mm-yyyy, dd/mm/yyyy or yyyy-mm-dd!");
+        super("BAKA! I don't understand this Date input!\n"
+                + String.format("     Date: %s\n", dateString)
+                + "     It should be a valid date in the form dd-mm-yyyy, dd/mm/yyyy or yyyy-mm-dd!");
     }
 }

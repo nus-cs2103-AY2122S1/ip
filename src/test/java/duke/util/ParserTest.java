@@ -1,6 +1,6 @@
+package duke.util;
+
 import duke.command.ExitCommand;
-import duke.util.Parser;
-import duke.util.TaskList;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

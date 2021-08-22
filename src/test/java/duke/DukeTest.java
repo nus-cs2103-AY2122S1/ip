@@ -1,14 +1,19 @@
-import duke.Duke;
-import duke.DukeStub;
+package duke;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.PrintStream;
+import java.io.IOException;
+
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -37,7 +42,10 @@ public class DukeTest {
 
         try {
             // Get expected output
-            String expectedOutput = Files.readString(Path.of("../../text-ui-test/EXPECTED.TXT"), StandardCharsets.UTF_8);
+            String expectedOutput = Files.readString(
+                    Path.of("../../text-ui-test/EXPECTED.TXT"),
+                    StandardCharsets.UTF_8
+            );
 
             // Feed in input to Duke
             File file = new File("../../text-ui-test/input.txt");

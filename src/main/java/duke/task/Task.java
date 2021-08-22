@@ -35,9 +35,9 @@ public abstract class Task {
     }
 
     /**
-     * Checks if task is done and marks task as done if not already completed
+     * Checks if task is done and marks task as done if task is not done
      *
-     * @return description of task if it has been marked as completed, else message that task is already done previously.
+     * @return String containing the description of task if not already done, else message that action is redundant.
      */
     public String markTaskAsDone() {
         if (!this.isDone) {
