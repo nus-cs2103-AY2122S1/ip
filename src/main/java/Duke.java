@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -85,6 +87,7 @@ public class Duke {
                     default:
                         throw new DukeException("Sorry, I don't know what that means.");
                 }
+                writeTasksToFile();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
@@ -99,6 +102,22 @@ public class Duke {
         int taskCount = tasks.size();
         for (int i = 0; i < taskCount; i++) {
             System.out.println((i + 1) + ". " + tasks.get(i).toString());
+        }
+    }
+
+    private void writeTasksToFile() throws DukeException {
+        File file = new File("./data/duke.txt");
+        file.getParentFile().mkdirs();
+        try {
+            file.createNewFile();
+            FileWriter fw = new FileWriter("./data/duke.txt");
+            int taskCount = tasks.size();
+            for (int i = 0; i < taskCount; i++) {
+                fw.write("1. " + tasks.get(i).toString() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (java.io.IOException e) {
+            throw new DukeException("Error: duke.txt does not seem to exist");
         }
     }
 
