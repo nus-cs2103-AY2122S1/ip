@@ -1,7 +1,7 @@
 package duke;
 
 /**
- *  This class makes sense of the user inputs
+ *  This class makes sense of the user inputs.
  *  Supported Commands: Todo, Event, Deadline, Delete, Done, List.
  *
  * @author Ryan Tian Jun.

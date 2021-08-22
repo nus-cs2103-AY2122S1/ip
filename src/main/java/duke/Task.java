@@ -2,6 +2,7 @@ package duke;
 
 /**
  *  This class represents the tasks in a list.
+ *  Also provides some operations on tasks.
  *
  * @author Ryan Tian Jun.
  */
