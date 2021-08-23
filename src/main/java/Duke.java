@@ -2,9 +2,99 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Duke {
-    private static List<Task> list = new ArrayList<>();
 
+
+public class Duke {
+    private static final String FILE_URL = "data/Duke.txt";
+    private static List<Task> list = new ArrayList<>();
+    private static DataStorage storage = null; 
+    
+    
+
+    public static void main(String[] args) {
+        storage = new DataStorage(FILE_URL);
+        list = storage.loadStorage();
+        for (Task task: list) {
+            System.out.println(list);
+        }
+        greet();
+
+        
+        Scanner scanner = new Scanner(System.in);
+        String text = scanner.nextLine();
+        
+
+        String[] keywords = {"done", "bye", "list", "bye", "deadline", "event", "todo", "delete"};
+
+        try {
+            while (!text.isEmpty()) {
+
+
+                if (!stringContainsItemFromList(text, keywords)) {
+                    throw new UnknownException();
+                } else {
+                    //mark as done
+                    if (text.startsWith("done")) {
+                        char last_digit = text.charAt(text.length() - 1);
+                        int index = Character.getNumericValue(last_digit);
+                        setAsDone(index);
+                        text = scanner.nextLine();
+                    }
+
+                    //list
+                    else if (text.equals("list")) {
+                        list();
+                        text = scanner.nextLine();
+                    }
+
+                    //exit program
+                    else if (text.equals("bye")) {
+                        bye();
+                        break;
+                    }
+
+                    //delete task
+                    else if (text.startsWith("delete")) {
+                        char last_digit = text.charAt(text.length() - 1);
+                        int index = Character.getNumericValue(last_digit);
+                        deleteTask(index);
+                        text = scanner.nextLine();
+                    }
+
+                    //add new task
+                    else {
+                        Task newTask = null;
+                        if (text.contains("deadline")) {
+                            String description = extractTaskDescription(text);
+                            String time = extractTaskTime(text);
+                            newTask = new Deadline(description, time);
+                        } else if (text.contains("event")) {
+                            String description = extractTaskDescription(text);
+                            String time = extractTaskTime(text);
+                            newTask = new Event(description, time);
+                        } else if (text.contains("todo")) {
+                            String description = extractTaskDescription(text);
+                            newTask = new Todo(description);
+                        }
+
+                        list.add(newTask);
+                        addTask(newTask);
+
+                        text = scanner.nextLine();
+                    }
+
+                    storage.saveToStorage(list);
+
+                }
+            }
+        } catch (UnknownException e) {
+            System.out.println(e.getMessage());
+        } catch (UnclearInstructionException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+    
     private static void greet() {
         System.out.println("Hiiii~ I'm Duke created by Tianyue.\n" +
                 "How can I help you? :)");
@@ -124,78 +214,5 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) {
-        greet();
-
-        Scanner scanner = new Scanner(System.in);
-        String text = scanner.nextLine();
-
-        String[] keywords = {"done", "bye", "list", "bye", "deadline", "event", "todo", "delete"};
-
-        try {
-            while (!text.isEmpty()) {
-
-
-                if (!stringContainsItemFromList(text, keywords)) {
-                    throw new UnknownException();
-                } else {
-                    //mark as done
-                    if (text.startsWith("done")) {
-                        char last_digit = text.charAt(text.length() - 1);
-                        int index = Character.getNumericValue(last_digit);
-                        setAsDone(index);
-                        text = scanner.nextLine();
-                    }
-
-                    //list
-                    else if (text.equals("list")) {
-                        list();
-                        text = scanner.nextLine();
-                    }
-
-                    //exit program
-                    else if (text.equals("bye")) {
-                        bye();
-                        break;
-                    }
-
-                    //delete task
-                    else if (text.startsWith("delete")) {
-                        char last_digit = text.charAt(text.length() - 1);
-                        int index = Character.getNumericValue(last_digit);
-                        deleteTask(index);
-                        text = scanner.nextLine();
-                    }
-
-                    //add new task
-                    else {
-                        Task newTask = null;
-                        if (text.contains("deadline")) {
-                            String description = extractTaskDescription(text);
-                            String time = extractTaskTime(text);
-                            newTask = new Deadline(description, time);
-                        } else if (text.contains("event")) {
-                            String description = extractTaskDescription(text);
-                            String time = extractTaskTime(text);
-                            newTask = new Event(description, time);
-                        } else if (text.contains("todo")) {
-                            String description = extractTaskDescription(text);
-                            newTask = new Todo(description);
-                        }
-
-                        list.add(newTask);
-                        addTask(newTask);
-
-                        text = scanner.nextLine();
-                    }
-
-                }
-            }
-        } catch (UnknownException e) {
-            System.out.println(e.getMessage());
-        } catch (UnclearInstructionException e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
+    
 }
