@@ -1,5 +1,6 @@
-package main.java.duke;
+package main.java.duke.tasklist;
 
+import main.java.duke.Ui;
 import main.java.duke.task.Task;
 
 import java.time.LocalDate;
@@ -12,18 +13,15 @@ import java.util.ArrayList;
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
-public class TaskList {
-    private static final String ADD = "\t Got it. I've added this task:";
-    private static final String LIST_INTRO = "\t Here are the tasks in your list:";
-    private static final String DONE = "\t Nice! I've marked this task as done:\n\t   ";
-    private static final String DELETE = "\t Noted. I've removed this task:\n\t   ";
+public class TaskListStub implements TaskList {
     private final ArrayList<Task> LIST;
     private final Ui UI;
+    private ArrayList<Task> output;
 
     /**
      * Constructor for TaskList.
      */
-    TaskList(ArrayList<Task> list, Ui ui) {
+    public TaskListStub(ArrayList<Task> list, Ui ui) {
         this.LIST = list;
         this.UI = ui;
     }
@@ -33,48 +31,35 @@ public class TaskList {
      *
      * @param task the task to be added into the list
      */
+    @Override
     public void addTask(Task task) {
         this.LIST.add(task);
-        UI.print(ADD);
-        UI.print("\t   " + task);
-        if (this.LIST.size() == 1) {
-            UI.print("\t Now you have 1 task in the list.");
-        } else {
-            UI.print("\t Now you have " + this.LIST.size() + " tasks in the list.");
-        }
     }
 
     /**
      * Setter to change the done status of the task.
      */
+    @Override
     public void setDone(int index) {
         Task task = this.LIST.get(index);
         task.setDone();
-        UI.print(DONE + task);
     }
 
     /**
      * Delete the task at a specified index.
      */
+    @Override
     public void delete(int index) {
         Task task = this.LIST.get(index);
         this.LIST.remove(index);
-        UI.print(DELETE + task);
-
     }
 
     /**
      * Prints the list.
      */
+    @Override
     public void printList() {
-        UI.print(LIST_INTRO);
-        if (this.LIST.size() == 0) {
-            UI.print("\t List is empty");
-        } else {
-            for (int i = 0; i < this.LIST.size(); i++) {
-                UI.print("\t " + (i + 1) + "." + this.LIST.get(i));
-            }
-        }
+        this.output = this.LIST;
     }
 
     /**
@@ -82,17 +67,11 @@ public class TaskList {
      */
     public void printListDate(String date) {
         LocalDate localDate = LocalDate.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        UI.print(LIST_INTRO);
-        if (this.LIST.size() == 0) {
-            UI.print("\t List is empty.");
-        } else {
-            int count = 0;
-            for (Task t : this.LIST) {
-                if (t.onDate(localDate)) {
-                    UI.print("\t " + (++count) + "." + t);
-                }
+        this.output = new ArrayList<>();
+        for (Task t : this.LIST) {
+            if (t.onDate(localDate)) {
+                this.output.add(t);
             }
-            if (count == 0) UI.print("There are no tasks pertaining to the specified date.");
         }
     }
 
@@ -105,4 +84,12 @@ public class TaskList {
         return this.LIST.size();
     }
 
+    /**
+     * Return output for testing.
+     *
+     * @return the output
+     */
+    public ArrayList<Task> output() {
+        return this.output;
+    }
 }

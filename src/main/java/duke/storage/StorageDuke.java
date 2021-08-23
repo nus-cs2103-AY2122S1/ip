@@ -1,4 +1,4 @@
-package main.java.duke;
+package main.java.duke.storage;
 
 import main.java.duke.task.Deadline;
 import main.java.duke.task.Event;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
-public class Storage {
+public class StorageDuke implements Storage {
     private final String FILEPATH;
     private ArrayList<String> fileContent;
 
@@ -27,7 +27,7 @@ public class Storage {
      *
      * @param filePath the specified path of the file.
      */
-    Storage(String filePath) {
+    public StorageDuke(String filePath) {
         this.FILEPATH = filePath;
     }
 
@@ -37,7 +37,8 @@ public class Storage {
      * @return the list of tasks
      * @throws IOException if there is an issue with writing/reading the file
      */
-    protected ArrayList<Task> load() throws IOException {
+    @Override
+    public ArrayList<Task> load() throws IOException {
         File directory = new File(this.FILEPATH.split("/")[0]);
         if (!directory.exists()) {
             directory.mkdir();
@@ -76,6 +77,7 @@ public class Storage {
      * @param index the position of the item
      * @throws IOException if there is an error writing to the file
      */
+    @Override
     public void setDone(int index) throws IOException {
         String str = fileContent.get(index);
         fileContent.set(index, str.replace("|0|", "|1|"));
@@ -90,6 +92,7 @@ public class Storage {
      * @param date        the date of the task (if deadline or event)
      * @throws IOException if there is an error writing to the file
      */
+    @Override
     public void add(String type, String description, String date) throws IOException {
         fileContent.add(type + "|0|" + description + "|" + date);
         Files.write(Paths.get(this.FILEPATH), fileContent, StandardCharsets.UTF_8);
@@ -101,6 +104,7 @@ public class Storage {
      * @param index the position of the task in the list
      * @throws IOException if there is an error writing to the file
      */
+    @Override
     public void delete(int index) throws IOException {
         fileContent.remove(index);
         Files.write(Paths.get(this.FILEPATH), fileContent, StandardCharsets.UTF_8);

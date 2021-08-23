@@ -1,8 +1,8 @@
 package main.java.duke.command;
 
 import main.java.duke.DukeException;
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
+import main.java.duke.storage.Storage;
+import main.java.duke.tasklist.TaskList;
 import main.java.duke.Ui;
 import main.java.duke.task.Event;
 
@@ -40,8 +40,10 @@ public class EventCommand extends Command {
             if (eventPair.length < 2 || eventPair[0].equals("") || eventPair[1].equals("")) {
                 throw new DukeException("Your add event command is incomplete.");
             }
-            tasks.addTask(new Event(false, eventPair[0], eventPair[1]));
-            storage.add("E", eventPair[0], eventPair[1]);
+            String desc = eventPair[0].trim();
+            String date = eventPair[1].trim();
+            tasks.addTask(new Event(false, desc, date));
+            storage.add("E", desc, date);
         } catch (IOException e) {
             throw new DukeException("There is an error in adding the Event task to your saved data.");
         } catch (DateTimeException e) {

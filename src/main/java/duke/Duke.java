@@ -1,6 +1,8 @@
 package main.java.duke;
 
 import main.java.duke.command.Command;
+import main.java.duke.storage.StorageDuke;
+import main.java.duke.tasklist.TaskListDuke;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,9 +15,9 @@ import java.util.ArrayList;
  * @version CS2103T AY21/22 S2
  */
 public class Duke {
-    private final Storage STORAGE;
+    private final StorageDuke STORAGE;
     private final Ui UI;
-    private TaskList tasks;
+    private TaskListDuke tasks;
 
     /**
      * Constructor for Duke.
@@ -24,12 +26,12 @@ public class Duke {
      */
     public Duke(String filePath) {
         this.UI = new Ui();
-        this.STORAGE = new Storage(filePath);
+        this.STORAGE = new StorageDuke(filePath);
         try {
-            tasks = new TaskList(this.STORAGE.load(), UI);
+            tasks = new TaskListDuke(this.STORAGE.load(), UI);
         } catch (IOException e) {
             UI.reply("☹ OOPS!!! Cannot create file!");
-            tasks = new TaskList(new ArrayList<>(), UI);
+            tasks = new TaskListDuke(new ArrayList<>(), UI);
         }
     }
 

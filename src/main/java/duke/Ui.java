@@ -20,7 +20,7 @@ public class Ui {
     private final BufferedReader bufferedReader;
     private final PrintWriter printWriter;
 
-    Ui() {
+    public Ui() {
         inputStreamReader = new InputStreamReader(System.in);
         bufferedReader = new BufferedReader(inputStreamReader);
         printWriter = new PrintWriter(System.out, true);
@@ -31,7 +31,7 @@ public class Ui {
      *
      * @param str the String to be printed
      */
-    protected void print(String str) {
+    public void print(String str) {
         printWriter.println(str);
     }
 
@@ -69,7 +69,7 @@ public class Ui {
     }
 
     /**
-     * Closes the BufferedReader.
+     * Closes the BufferedReader and PrintWriter.
      */
     public void close() throws DukeException {
         try {
@@ -78,7 +78,7 @@ public class Ui {
             bufferedReader.close();
             printWriter.close();
         } catch (IOException e) {
-            throw new DukeException("Unable to close the parser.");
+            throw new DukeException("Unable to close the parser / printWriter.");
         }
     }
 
