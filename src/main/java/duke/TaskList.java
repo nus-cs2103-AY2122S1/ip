@@ -33,11 +33,6 @@ public class TaskList {
                 + System.lineSeparator());
     }
 
-    public static void deleteTask(Task currTask) {
-        TaskList.taskList.remove(currTask);
-        TaskList.counter--;
-    }
-
     public static void deleteTaskAndUpdate(Task currTask) throws IOException{
         TaskList.taskList.remove(currTask);
         counter--;

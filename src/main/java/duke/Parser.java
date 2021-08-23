@@ -3,9 +3,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class Parser {
-    public static void Parser() {
-
-    }
     public static String parseCommand(String command) {
         String keyWord = "";
         if (command.equals("list")) {
