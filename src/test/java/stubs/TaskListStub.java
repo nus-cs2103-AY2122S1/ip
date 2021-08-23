@@ -1,8 +1,22 @@
 package stubs;
 
+import petal.components.Responses;
 import petal.components.TaskList;
+import petal.components.Ui;
+import petal.task.Task;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaskListStub extends TaskList {
+
+    private List<TaskStub> taskList = new ArrayList<>();
+    private Ui ui;
+
+    public TaskListStub(Ui ui) {
+        super(ui);
+        this.ui = ui;
+        taskList.add(new TaskStub());
+    }
 
     @Override
     public String printList() {
@@ -11,11 +25,22 @@ public class TaskListStub extends TaskList {
 
     @Override
     public void markTaskAsDone(String indexOfTask) {
-        System.out.println("This task was marked as done!");
+        TaskStub taskStub = taskList.get(0);
+        taskStub.taskDone();
+        System.out.println(Responses.LINE + "\nYou have completed the task: " + "'"
+                                          + "run!"
+                                          + "\nI am so happy for you!\n"
+                                          + Responses.LINE);
     }
 
     @Override
     public void deleteTask(String index) {
-        System.out.println("Okay, I have deleted this task");
+        TaskStub toBeDeleted = new TaskStub();
+        System.out.println("Okay. I've deleted this task:\n" + toBeDeleted  + "\nYou now have 1 task(s)!");
+    }
+
+    @Override
+    public void addTask(Task task) {
+        System.out.println("Okay. I've added this task:\n" + task + "\nYou now have 1 task!");
     }
 }

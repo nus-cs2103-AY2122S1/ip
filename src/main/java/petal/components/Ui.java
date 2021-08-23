@@ -1,8 +1,6 @@
 package petal.components;
 
 import petal.Petal;
-
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Ui {

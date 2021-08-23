@@ -5,7 +5,6 @@ import petal.components.Parser;
 import petal.components.Storage;
 import petal.components.TaskList;
 import petal.components.Ui;
-import java.util.Scanner;
 
 /**
  * The class for the Petal bot. It is able to respond to

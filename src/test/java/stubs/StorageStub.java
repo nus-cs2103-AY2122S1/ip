@@ -1,16 +1,15 @@
 package stubs;
 
 import petal.components.Storage;
-import petal.components.TaskList;
+import petal.components.Ui;
 
 public class StorageStub extends Storage {
 
-    public StorageStub(TaskList taskList) {
-        super(taskList);
+    public StorageStub(TaskListStub taskListStub, Ui ui) {
+        super(taskListStub, ui);
     }
 
     @Override
     public void saveTasks() {
-        System.out.println("You're leaving :( I hope you return soon!");
     }
 }
