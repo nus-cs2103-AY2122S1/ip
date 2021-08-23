@@ -16,13 +16,16 @@ import java.time.LocalDate;
 public class TaskList {
     private static final String directory = "./data";
     private final List<Task> list;
+    private final Ui ui;
 
     TaskList() {
         this.list = new ArrayList<Task>();
+        this.ui = new Ui();
     }
 
     TaskList(List<Task> storage) {
         this.list = storage;
+        this.ui = new Ui();
     }
 
     List<Task> getList() {
@@ -36,15 +39,15 @@ public class TaskList {
     void markTaskAsDone(int index) {
         Task doneTask = getTask(index).markAsDone();
         list.set(index - 1, doneTask);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.printf("    %s%n", doneTask.toString());
+        ui.print("Nice! I've marked this task as done:");
+        ui.print("    %s%n", doneTask.toString());
         saveData();
     }
 
     void add(Task item) {
         addWithoutPrinting(item);
-        System.out.println("Noted! I've added the following task:");
-        System.out.printf("    %s%n", item.toString());
+        ui.print("Noted! I've added the following task:");
+        ui.print("    %s%n", item.toString());
         printSize();
     }
 
@@ -55,20 +58,20 @@ public class TaskList {
 
     void delete(int index) {
         Task removedItem = list.remove(index - 1);
-        System.out.println("Got it. I've removed the following task:");
-        System.out.printf("    %s%n", removedItem.toString());
+        ui.print("Got it. I've removed the following task:");
+        ui.print("    %s%n", removedItem.toString());
         printSize();
         saveData();
     }
 
     void printSize() {
-        System.out.printf("Total tasks: %d%n", list.size());
+        ui.print("Total tasks: %d%n", list.size());
     }
 
     void printItems() {
-        System.out.println("Here are the tasks in your list:");
+        ui.print("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
-            System.out.printf("%d. %s%n", (i + 1), list.get(i));
+            ui.print("%d. %s%n", (i + 1), list.get(i));
         }
     }
 

@@ -5,10 +5,12 @@ import java.time.LocalDate;
 public class Chatbot {
     private final String name;
     private final TaskList taskList;
+    private final Ui ui;
 
     Chatbot(String name) {
         this.name = name;
         this.taskList = new TaskList();
+        this.ui = new Ui();
     }
 
     void initialize() {
@@ -18,10 +20,10 @@ public class Chatbot {
     }
 
     void greet() {
-        printDashedLine();
-        System.out.printf("Hey there! I'm %s%n", name);
-        System.out.println("How can I help you?");
-        printDashedLine();
+        ui.printDivider();
+        ui.print("Hey there! I'm %s%n", name);
+        ui.print("How can I help you?");
+        ui.printDivider();
     }
 
     void listen() {
@@ -30,16 +32,16 @@ public class Chatbot {
         boolean isListening;
 
         do {
-            input = sc.nextLine();
+            input = ui.readFromUser();
             isListening = parseInput(input);
         } while (isListening);
     }
 
     boolean parseInput(String input) {
-        printDashedLine();
+        ui.printDivider();
         try {
             if (input.equals("bye")) {
-                System.out.println("Goodbye human. See you soon!");
+                ui.print("Goodbye human. See you soon!");
                 return false;
             } else if (input.equals("list")) {
                 printItems();
@@ -51,10 +53,10 @@ public class Chatbot {
                 addItem(input);
             }
         } catch (HAL9000Exception e) {
-            System.out.println(e.getMessage());
+            ui.print(e.getMessage());
         }
 
-        printDashedLine();
+        ui.printDivider();
         return true;
     }
 
@@ -126,9 +128,5 @@ public class Chatbot {
 
     boolean isIncomplete(String[] arr) {
         return arr.length <= 1;
-    }
-
-    void printDashedLine() {
-        System.out.println("-----------------------------------------------------------------------------------------");
     }
 }
