@@ -14,7 +14,6 @@ import java.io.IOException;
  * @version Level-7
  */
 public class Duke {
-
     /**
      * Method to simulate the program.
      */
