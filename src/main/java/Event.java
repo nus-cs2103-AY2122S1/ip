@@ -1,9 +1,11 @@
+import java.time.LocalDate;
+
 public class Event extends DateDependentTask {
-    public Event(String description, String at) {
+    public Event(String description, LocalDate at) {
         super(description, at);
     }
 
-    public Event(String description, String at, boolean isCompleted) {
+    public Event(String description, LocalDate at, boolean isCompleted) {
         super(description, at, isCompleted);
     }
 
@@ -13,6 +15,6 @@ public class Event extends DateDependentTask {
 
     @Override
     public String toString() {
-        return "[E] " + super.toString() + " (at: " + super.getDate() + ")";
+        return "[E] " + super.toString() + " (at: " + super.getDateString() + ")";
     }
 }

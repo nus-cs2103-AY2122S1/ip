@@ -1,17 +1,24 @@
-public abstract class DateDependentTask extends Task {
-    String date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public DateDependentTask(String description, String date) {
+public abstract class DateDependentTask extends Task {
+    LocalDate date;
+
+    public DateDependentTask(String description, LocalDate date) {
         super(description);
         this.date = date;
     }
 
-    public DateDependentTask(String description, String date, boolean isCompleted) {
+    public DateDependentTask(String description, LocalDate date, boolean isCompleted) {
         super(description, isCompleted);
         this.date = date;
     }
 
     protected String getDate() {
-        return this.date;
+        return this.date.toString();
+    }
+
+    protected String getDateString() {
+        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }

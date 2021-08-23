@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -37,6 +39,28 @@ public class Kermit {
                 + task +"\nNow you have " + list.size() + " tasks in the list.";
     }
 
+    private static LocalDate formatTaskDateFormat(String s) {
+        String[] components = s.split("-");
+        String day = components[0];
+        String month = components[1];
+        String year = components[2];
+        LocalDate parsedDate = LocalDate.parse(String.join("-", year, month, day));
+        return parsedDate;
+    }
+
+    private static LocalDate formatUserDateFormat(String s) {
+        String[] components = s.split("-");
+        String day = components[0];
+        String month = components[1];
+        String year = components[2];
+        LocalDate parsedDate = LocalDate.parse(String.join("-", day, month, year));
+        return parsedDate;
+    }
+
+    private static void formatAndPrintText(String text) {
+        System.out.println(formatText(text));
+    }
+
     private static String formatWriteString(Task task) {
         String delimiter = " | ";
 
@@ -59,19 +83,19 @@ public class Kermit {
         while (sc.hasNextLine()) {
             line = sc.nextLine();
             String[] commands = line.split(" \\| ");
-            String description = commands[1];
-            boolean isCompleted = commands[2] == "1";
+            String description = commands[2];
+            boolean isCompleted = commands[1] == "1";
             switch (commands[0]) {
                 case "T":
                     task = new ToDos(description, isCompleted);
                     todo.add(task);
                     break;
                 case "D":
-                    task = new Deadline(description, commands[3], isCompleted);
+                    task = new Deadline(description, formatTaskDateFormat(commands[3]), isCompleted);
                     todo.add(task);
                     break;
                 case "E":
-                    task = new Event(description, commands[3], isCompleted);
+                    task = new Event(description, formatTaskDateFormat(commands[3]), isCompleted);
                     todo.add(task);
                     break;
             }
@@ -115,10 +139,11 @@ public class Kermit {
         final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
         final String listText = "Here are the tasks in your list:";
         final String invalidCommandText = "I'm sorry, but I don't know what that means :-(";
+        final String invalidTimeText = "BAH That's not a time is it?? Try writing like this D/MM/YYYY 1200";
         final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
         final String goodbyeText = "Bye. Hope to see you again soon!";
 
-        System.out.println(formatText(introductionText));
+        formatAndPrintText(introductionText);
 
         // Init writer to save Kermit data
 
@@ -185,41 +210,41 @@ public class Kermit {
                     // Quit program
                     switch (command) {
                         case "bye":
-                            System.out.println(formatText(goodbyeText));
+                            formatAndPrintText(goodbyeText);
                             return;
                         // List out all objects that user added to list
                         case "list":
-                            System.out.println(formatText(listText + "\n" + list));
+                            formatAndPrintText(listText + "\n" + list);
                             break;
                         // Add objects to list
                         case "done":
                             index = Integer.parseInt(description) - 1;
                             // Get task name
                             String taskText = list.completeTask(index);
-                            System.out.println(formatText(completeTaskText + "\n" + taskText));
+                            formatAndPrintText(completeTaskText + "\n" + taskText);
                             break;
                         // Add new todo task
                         case "todo":
                             Task newToDo = new ToDos(description);
                             list.add(newToDo);
-                            System.out.println(formatText(printAddTask(newToDo, list)));
+                            formatAndPrintText(printAddTask(newToDo, list));
                             bufferedWriter.write(formatWriteString(newToDo));
                             bufferedWriter.newLine();
                             break;
                         // Add new deadline task
                         case "deadline":
-                            Task newDeadline = new Deadline(description, flagArguments);
+                            Task newDeadline = new Deadline(description, formatUserDateFormat(flagArguments));
                             list.add(newDeadline);
-                            System.out.println(formatText(printAddTask(newDeadline, list)));
+                            formatAndPrintText(printAddTask(newDeadline, list));
                             bufferedWriter.write(formatWriteString(newDeadline));
                             bufferedWriter.newLine();
                             break;
 
                         // Add new event task
                         case "event":
-                            Task newEvent = new Event(description, flagArguments);
+                            Task newEvent = new Event(description, formatUserDateFormat(flagArguments));
                             list.add(newEvent);
-                            System.out.println(formatText(printAddTask(newEvent, list)));
+                            formatAndPrintText(printAddTask(newEvent, list));
                             bufferedWriter.write(formatWriteString(newEvent));
                             bufferedWriter.newLine();
                             break;
@@ -227,10 +252,12 @@ public class Kermit {
                         case "delete":
                             index = Integer.parseInt(description) - 1;
                             Task deletedTask = list.deleteTask(index);
-                            System.out.println(formatText(printDeleteTask(deletedTask, list)));
+                            formatAndPrintText(printDeleteTask(deletedTask, list));
                     }
                 } catch (KermitException e) {
-                    System.out.println(formatText(e.getMessage()));
+                    formatAndPrintText(e.getMessage());
+                } catch (DateTimeParseException e) {
+                    formatAndPrintText(invalidTimeText);
                 }
             }
         } catch (IOException e) {

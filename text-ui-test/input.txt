@@ -2,9 +2,9 @@ hello
 list
 todo Make a sandwich
 list
-event Catch up with friends /at 11:30am
+event Catch up with friends /at 23-08-2021
 list
-deadline Do CS2103T iP /by Thu, Aug 19th 2359
+deadline Do CS2103T iP /by 19-01-2021
 list
 done 1
 list
