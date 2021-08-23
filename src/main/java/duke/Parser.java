@@ -41,8 +41,8 @@ public class Parser {
             if (!s.hasNext()) {
                 throw new EmptyDescriptionException("event");
             }
-            String details = s.nextLine().trim();
-            return new AddCommand("event", details);
+            String eventDetails = s.nextLine().trim();
+            return new AddCommand("event", eventDetails);
 
         case "deadline":
             if (!s.hasNext()) {
