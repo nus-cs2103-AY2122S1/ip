@@ -24,7 +24,7 @@ public class DukeExceptionTest {
     @Test
     public void dukeFileException_sameMessage() {
         DukeFileException e = new DukeFileException();
-        assertEquals("☹ OOPS!!! I might have some issues dealing with files.", e.getMessage());
+        assertEquals("☹ OOPS!!! Error loading file!!", e.getMessage());
     }
 
     @Test
