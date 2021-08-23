@@ -1,6 +1,13 @@
+// import java.sql.Date;
+// import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task{
     protected String prefix;
     protected String date;
+    protected LocalDate dateFormatted;
 
     /**
      * Constructs a new deadline task.
@@ -11,7 +18,32 @@ public class Deadline extends Task{
     public Deadline(String name, String date) {
         super(name);
         this.prefix = "[D]";
-        this.date = date;
+        if (canBeFormattedDate(date)) {
+            this.date = date;
+            this.dateFormatted = fromStringToDate(date.substring(1));
+        } else {
+            this.date = date;
+        }
+    }
+
+    private boolean canBeFormattedDate(String date) {
+        try {
+            LocalDate.parse(date.substring(1), DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
+    
+    }
+
+    /**
+     * Converts a date string to local date format
+     * 
+     * @param dateString
+     * @return a local date of the string
+     */
+    public LocalDate fromStringToDate(String dateString) {
+        return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
     }
 
     /**
@@ -34,17 +66,12 @@ public class Deadline extends Task{
      */
     @Override
     public void showThisTask() {
-        System.out.println(this.prefix + super.showStatus() + this.name + "(by:" + this.date + ")");
-    }
-
-    /**
-     * print out the relevant info of the deadline task with number in front
-     * 
-     * @param num the index of the deadline task in the task list
-     */
-    @Override
-    public void showThisTask(int num) {
-        System.out.println(num +  "."+ this.prefix + showStatus() + this.name + "(by:" + this.date + ")");
+        if (canBeFormattedDate(this.date)) {
+            System.out.println(this.prefix + super.showStatus() + this.name + "(by:" + this.dateFormatted.format(DateTimeFormatter.ofPattern("MMM d uuuu")) + ")");
+        } else {
+            System.out.println(this.prefix + super.showStatus() + this.name + "(by:" + this.date + ")");
+        }
+        
     }
 
     /**

@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,10 +11,6 @@ public class Duke {
     private static ArrayList<Task> tasksList = new ArrayList<>();
     
    
-
-    // public enum ActionType {
-    //     ADDTASK, LIST, DONE, DELETE, BYE
-    // }
 
     /**
      * Adds the task to the taskslist.
@@ -39,7 +38,9 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasksList.size(); i++) {
             Task t = tasksList.get(i);
-            t.showThisTask(i + 1);
+            System.out.print((i+1) + ".");
+            t.showThisTask();
+            
         }
     }
 
@@ -153,6 +154,25 @@ public class Duke {
         writer.close();
     }
 
+    public void identifyTasksByDate(String dateString) {
+        LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        ArrayList<Task> tasksOnDate = new ArrayList<>();
+        for (Task task : tasksList) {
+            if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                if (deadline.dateFormatted.equals(date)) tasksOnDate.add(deadline); 
+            } else if (task instanceof Event) {
+                Event event = (Event) task;
+                LocalDate eventDate = event.timeFormatted.toLocalDate();
+                if (eventDate.equals(date)) tasksOnDate.add(event);
+            }
+        }
+        System.out.println("On this day you have the following task(s):");
+        for (Task task : tasksOnDate) {
+            task.showThisTask();
+        }
+    }
+
     public static void main(String[] args) throws DukeException, IOException{
         Duke neko = new Duke();
         File nekoData = new File("duke.txt");
@@ -182,9 +202,18 @@ public class Duke {
                 }
                 if (userInput.equals("list")) {
                     neko.listTask();
+                } else if (userInput.length() >= 4 && userInput.substring(0, 3).equals("on ")) {
+                    boolean isFormattedDate = true;
+                    String dateString = userInput.substring(3);
+                    try {
+                        LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+                    } catch (DateTimeParseException e) {
+                        isFormattedDate = false;
+                    }
+                    if (isFormattedDate) {
+                        neko.identifyTasksByDate(dateString);
+                    }
                 } else if (userInput.length() >= 6 && userInput.substring(0, 5).equals("done ")) {
-                    
-                    
                     int taskNum = Integer.parseInt(userInput.substring(5));
                     if (tasksList.size() > taskNum) {
                         throw new DukeException("You cannot complete a task that does not exist!");
@@ -193,8 +222,6 @@ public class Duke {
                         neko.markAsDoneInFile(taskNum, newSc);
                         neko.completeTask(tasksList.get(taskNum - 1));
                     }
-                    
-                    
                 } else if (userInput.length() >= 8 && userInput.substring(0, 7).equals("delete ")) {
                     int taskNum = Integer.parseInt(userInput.substring(7));
                     if (tasksList.size() < taskNum) {
