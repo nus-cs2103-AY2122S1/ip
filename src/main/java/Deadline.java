@@ -80,6 +80,6 @@ public class Deadline extends Task{
     @Override
     public void markAsDone() {
         this.hasDone = true;
-        System.out.println(this.prefix + "[X] " + this.name + "(by:" + this.date + ")");
+        //System.out.println(this.prefix + "[X] " + this.name + "(by:" + this.date + ")");
     }
 }

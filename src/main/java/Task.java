@@ -19,7 +19,7 @@ public class Task {
      */
     public void markAsDone() {
         this.hasDone = true;
-        System.out.println(this.prefix + "[X] " + this.name);
+        //System.out.println(this.prefix + "[X] " + this.name);
     }
 
     /**

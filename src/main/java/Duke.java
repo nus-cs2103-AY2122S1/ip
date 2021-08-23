@@ -9,8 +9,6 @@ import java.util.Scanner;
 
 public class Duke {
     private static ArrayList<Task> tasksList = new ArrayList<>();
-    
-   
 
     /**
      * Adds the task to the taskslist.
@@ -50,17 +48,22 @@ public class Duke {
      * @return a task from the string
      */
     public Task stringToTask(String s) {
+        boolean isDone = false;
+        if (s.substring(4,7).equals("[X]")) isDone = true;
+        Task task;
         if (s.startsWith("[T]")) {
-            return new Todo(s.substring(8));
+            task = new Todo(s.substring(8));
         } else if (s.startsWith("[D]")) {
             String name = s.split(":")[0].substring(8);
             String date = s.split(":")[1];
-            return new Deadline(name, date);
+            task = new Deadline(name, date);
         } else {
             String name = s.split(":")[0].substring(8);
             String time = s.split(":")[1];
-            return new Event(name, time);
+            task = new Event(name, time);
         }
+        if (isDone) task.markAsDone();
+        return task;
     }
 
     /**
@@ -71,6 +74,7 @@ public class Duke {
     public void completeTask(Task task) {
         System.out.println("Nice! I've marked this task as done: ");
         task.markAsDone();
+        task.showThisTask();
     }
 
     /**
@@ -147,7 +151,7 @@ public class Duke {
             fileString += input + "\n";
         }
         System.out.println("before: \n" + fileString +"\n");
-        String newFile = fileString.replace(task.toString() + "\n", task.toString().replace("[ ]", "[X]"));
+        String newFile = fileString.replace(task.toString(), task.toString().replace("[ ]", "[X]"));
         FileWriter writer = new FileWriter("duke.txt");
         writer.write(newFile);
         writer.flush();
@@ -160,11 +164,15 @@ public class Duke {
         for (Task task : tasksList) {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
-                if (deadline.dateFormatted.equals(date)) tasksOnDate.add(deadline); 
+                if (deadline.dateFormatted != null) {
+                    if (deadline.dateFormatted.equals(date)) tasksOnDate.add(deadline); 
+                }
             } else if (task instanceof Event) {
                 Event event = (Event) task;
-                LocalDate eventDate = event.timeFormatted.toLocalDate();
-                if (eventDate.equals(date)) tasksOnDate.add(event);
+                if (event.timeFormatted != null) {
+                    LocalDate eventDate = event.timeFormatted.toLocalDate();
+                    if (eventDate.equals(date)) tasksOnDate.add(event);
+                }
             }
         }
         System.out.println("On this day you have the following task(s):");
@@ -215,7 +223,7 @@ public class Duke {
                     }
                 } else if (userInput.length() >= 6 && userInput.substring(0, 5).equals("done ")) {
                     int taskNum = Integer.parseInt(userInput.substring(5));
-                    if (tasksList.size() > taskNum) {
+                    if (tasksList.size() < taskNum) {
                         throw new DukeException("You cannot complete a task that does not exist!");
                     } else {
                         Scanner newSc = new Scanner(nekoData);

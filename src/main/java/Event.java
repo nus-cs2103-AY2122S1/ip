@@ -25,7 +25,6 @@ public class Event extends Task{
 
     private boolean canBeFormattedDateTime(String time) {
         try {
-            System.out.println(time);
             LocalDateTime.parse(time.substring(1), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
         } catch (DateTimeParseException e) {
             return false;
@@ -71,6 +70,6 @@ public class Event extends Task{
     @Override
     public void markAsDone() {
         this.hasDone = true;
-        System.out.println(this.prefix + "[X] " + this.name + "(by:" + this.time + ")");
+        //System.out.println(this.prefix + "[X] " + this.name + "(by:" + this.time + ")");
     }
 }
