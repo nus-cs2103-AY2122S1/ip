@@ -1,0 +1,3 @@
+T | 0 | Finish this week's Ip tasks
+D | 0 | CS2100 Tutorial | Aug 24 2021 11.00AM
+E | 0 | The Weekends | Aug 28 2021 All day

@@ -97,7 +97,7 @@ public class Parser {
             if (ss.length < 2)
                 throw new MissingArguments(command);
             else
-                by = ss[1];
+                at = ss[1];
             break;
 
         case TODO:
