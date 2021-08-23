@@ -25,9 +25,9 @@ public class Ui {
         System.out.println("  See you next time!");
     }
     
-    public void showList(ArrayList<Task> taskList, int listLength) {
+    public void showList(ArrayList<Task> taskList) {
         System.out.println("  Here are the tasks in your list:");
-        for (int i = 0; i < listLength; ++i) {
+        for (int i = 0; i < taskList.size(); ++i) {
             System.out.println("  " + (i + 1) + "." + taskList.get(i).listEntry());
         }
     }

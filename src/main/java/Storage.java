@@ -9,14 +9,17 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Storage {
-    private String filePath;
-    private File duke;
-    private Ui ui;
+    private final String filePath;
+    private final File direc;
+    private final File duke;
+    private final Ui ui;
     
-    public Storage(String filePath, Ui ui) {
-        this.filePath = filePath;
-        duke = new File(filePath);
+    public Storage(String fileDirectory, String fileName, Ui ui) {
+        this.filePath = fileDirectory + "/" + fileName;
         this.ui = ui;
+
+        direc = new File(fileDirectory);
+        duke = new File(filePath);
     }
     
     public ArrayList<Task> load() {
@@ -26,7 +29,7 @@ public class Storage {
             ui.showOpenLine();
             ui.showInitialise();
 
-            if (duke.mkdirs()) {
+            if (direc.mkdirs()) {
                 ui.showNewDataDirectory();
             }
             if (duke.createNewFile()) {
