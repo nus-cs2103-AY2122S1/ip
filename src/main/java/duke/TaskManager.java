@@ -19,7 +19,6 @@ public class TaskManager {
     TaskManager() throws DateTimeException {
         load();
     }
-
     public void addTask(Task task) {
         taskList.add(task);
         save();
@@ -53,6 +52,10 @@ public class TaskManager {
         return Stream.iterate(0, x -> x < taskList.size(), x -> x+1)
                 .map(x -> String.format("%d. %s", x+1, taskList.get(x).toString()))
                 .collect(Collectors.joining("\n"));
+    }
+
+    public List<Task> find(String keyword) {
+        return this.taskList.stream().filter(t -> t.getDescriptions().contains(keyword)).collect(Collectors.toList());
     }
 
     private void load() throws DateTimeException {

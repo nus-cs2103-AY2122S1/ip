@@ -18,6 +18,9 @@ public class Parser {
         case "delete":
             if (parts.length < 2) throw new IllegalArgumentException("Not enough arguments");
             else return new DeleteCommand(Integer.parseInt(parts[1]));
+        case "find":
+            if (parts.length < 2) throw new IllegalArgumentException("Not enough arguments");
+            else return new FindCommand(parts[1]);
         case "todo":
             if (parts.length < 2) throw new IllegalArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
             else return new AddCommand(action, parts[1]);
