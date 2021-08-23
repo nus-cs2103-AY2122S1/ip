@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class TaskList {
     protected String description;
     private boolean isDone;
-    protected static final Storage file = new Storage();
+    protected static final Storage file = new Storage("data/tasks.txt");
     protected static final ArrayList<TaskList> tasks = new ArrayList<>();
     protected static final UserInterface userInterface = new UserInterface();
 
@@ -94,7 +94,7 @@ public class TaskList {
         }
     }
 
-    public void addExisting(char taskChar, char taskStatus, String description, String timeline) {
+    public TaskList addExisting(char taskChar, char taskStatus, String description, String timeline) {
         TaskList currentTask;
 
         if (taskChar == 'T') {
@@ -108,6 +108,7 @@ public class TaskList {
         if (taskStatus == 'X') {
             currentTask.setDone();
         }
+        return currentTask;
     }
 
     public void loadArrayList() {

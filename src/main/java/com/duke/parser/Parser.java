@@ -142,13 +142,13 @@ public class Parser {
                 : Integer.toString(index);
     }
 
-    public static void parseFromFile(String line) {
+    public static TaskList parseFromFile(String line) {
         TaskList task = new TaskList();
         char taskChar = line.charAt(1);
         char taskStatus = line.charAt(4);
         String description = line.substring(7);
         if (taskChar == 'T') {
-            task.addExisting(taskChar, taskStatus, description, null);
+            return task.addExisting(taskChar, taskStatus, description, null);
         } else {
             int lastIndex = line.length() - 2;
             int startIndex = 0;
@@ -171,7 +171,7 @@ public class Parser {
                 }
             }
             stringBuilder.reverse();
-            task.addExisting(taskChar, taskStatus, description.substring(0, startIndex), stringBuilder.toString().trim());
+            return task.addExisting(taskChar, taskStatus, description.substring(0, startIndex), stringBuilder.toString().trim());
         }
     }
 }

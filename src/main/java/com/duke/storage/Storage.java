@@ -14,10 +14,11 @@ import java.util.Scanner;
 public class Storage {
 
     private final File file;
-    private final static String filePath = "data/tasks.txt";
+    private final String filePath;
     private final static UserInterface userInterface = new UserInterface();
 
-    public Storage() {
+    public Storage(String path) {
+        filePath = path;
         file = new File(filePath);
     }
 
