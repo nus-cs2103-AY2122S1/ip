@@ -5,46 +5,54 @@ import model.Task;
 import java.util.List;
 
 /**
- * Data access object (dao) for the Task model
+ * Data access object (dao) for the Task model.
  */
 public interface TaskDao {
 	/**
-	 * add a task to the data layer, throw error instead of Optional if add fails
+	 * Adds a task to the data layer, throw error instead of Optional if add fails.
 	 *
-	 * @param task task to be added
-	 * @return task that is added
+	 * @param task Task to be added.
 	 */
-	Task add(Task task);
+	void addTask(Task task);
 	
 	/**
-	 * delete the task using 0-indexing
+	 * Deletes the task using 0-indexing.
+	 * Returns null if reading or writing the file task fails.
 	 *
-	 * @param index as it appears in the list - 1 (from 1 indexing to 0 indexing)
-	 * @return deleted task
+	 * @param index Index as it appears in the list - 1 (from 1 indexing to 0 indexing).
 	 */
-	Task delete(int index);
+	Task deleteTask(int index) throws IndexOutOfBoundsException;
 	
 	/**
-	 * mark a task as done
+	 * Marks a task as done.
 	 *
-	 * @param index as it appears in the list - 1 (from 1 indexing to 0 indexing)
-	 * @return marked task
+	 * @param index Index as it appears in the list - 1 (from 1 indexing to 0 indexing).
 	 */
-	Task markDone(int index);
+	void markDone(int index) throws IndexOutOfBoundsException;
 	
 	/**
-	 * @param index as it appears in the list - 1 (from 1 indexing to 0 indexing)
-	 * @return the single task
+	 * Gets a single task from the task list.
+	 * Return null if the task file containing the array list cannot be read.
+	 *
+	 * @param index Index as it appears in the list - 1 (from 1 indexing to 0 indexing).
+	 * @return Task or null if reading the file fails.
+	 * @throws IndexOutOfBoundsException If the index is invalid.
 	 */
-	Task get(int index);
+	Task getTask(int index) throws IndexOutOfBoundsException;
 	
 	/**
-	 * @return list of all of done and not done tasks
+	 * Gets all the tasks from the list.
+	 * Returns empty list if reading the file fails.
+	 *
+	 * @return Tasks ArrayList of all the tasks in the list.
 	 */
 	List<Task> getAll();
 	
 	/**
-	 * @return the size of the task
+	 * Gets the size of the current list.
+	 * Returns -1 if the Task file cannot be read or invalid.
+	 *
+	 * @return Size of the current list or -1.
 	 */
-	int size();
+	int getSize();
 }
