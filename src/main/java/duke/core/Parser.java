@@ -47,6 +47,9 @@ public class Parser {
             if (command.equals("event")) {
                 return new AddEventCommand(fullCommand[1].trim());
             }
+            if(command.equals("find")) {
+                return new FindCommand(fullCommand[1].trim());
+            }
             return new InvalidCommand();
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Don't be shy! I need more information to carry out " + command + " :(");

@@ -221,4 +221,21 @@ public class TaskList {
             throw new DukeException("No such task exists to be deleted!");
         }
     }
+
+    /**
+     * Finds all task in TaskList that contains the word.
+     *
+     * @param searchWord the word that filters the search results
+     * @return a String representation of the list of task that contains the searchWord
+     * @throws DukeException if the number of tasks exceed the task limit
+     */
+    public String findTasks(String searchWord) throws DukeException {
+        TaskList matchList = new TaskList();
+        for (int i = 0; i < currentIdx; i++) {
+            if(tasks.get(i).toString().indexOf(searchWord) != -1) {
+                matchList.record(tasks.get(i));
+            }
+        }
+        return matchList.printTasks();
+    }
 }
