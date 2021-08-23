@@ -1,5 +1,10 @@
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
     public static void main(String[] args) {
@@ -124,8 +129,23 @@ public class Duke {
                     }
 
                     int deadlineDateIndex = nextTask.indexOf("/by ") + 4;
-                    String deadlineDesc = nextTask.substring(9, deadlineDateIndex - 4); //skip the "deadline "
-                    taskList.add(new Deadline(deadlineDesc, nextTask.substring(deadlineDateIndex)));
+                    int deadlineTimeIndex = deadlineDateIndex + 11;
+
+                    try {
+                        //System.out.println(nextTask.substring(deadlineDateIndex, deadlineDateIndex + 11));
+                        //System.out.println(nextTask.substring(deadlineTimeIndex));
+                        LocalDate date = LocalDate.parse(nextTask.substring(deadlineDateIndex, deadlineDateIndex + 10));
+                        //System.out.println(date.toString());
+                        LocalTime time = LocalTime.parse(nextTask.substring(deadlineTimeIndex));
+                        //System.out.println(time.toString());
+                        String deadlineDesc = nextTask.substring(9, deadlineDateIndex - 4); //skip the "deadline "
+                        taskList.add(new Deadline(deadlineDesc, date, time));
+
+                        //deadline do homework /by 2020-10-12 12:00
+                    }
+                    catch (DateTimeParseException e) {
+                        throw new DukeException("Please enter the date format like this: /by yyyy-mm-dd hh:mm");
+                    }
 
                     // Else case for all non-recognised user inputs
                 } else {
