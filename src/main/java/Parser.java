@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 
 public class Parser {
     
@@ -9,10 +8,10 @@ public class Parser {
         // task function: add tasks
         switch (fullCommand.split("\\s+")[0]) {
         case "bye":   // bye function: exits the loop, ends process
-            return new Command("bye");
+            return new ByeCommand();
             
         case "list":   // list function: iterates through taskList, prints Tasks' listEntry
-            return new Command("list");
+            return new ListCommand();
             
         case "done":   // done function: sets a task to done
             if (fullCommand.split("\\s+").length == 1) {
@@ -22,7 +21,7 @@ public class Parser {
                 if (taskList.isInvalidIndex(toSet)) {
                     throw new DukeException(DukeExceptionType.INVALIDINDEX);
                 } else {
-                    return new Command("done", toSet - 1);
+                    return new DoneCommand(toSet - 1);
                 }
             }
             
@@ -34,7 +33,7 @@ public class Parser {
                 if (taskList.isInvalidIndex(toDelete)) {
                     throw new DukeException(DukeExceptionType.INVALIDINDEX);
                 } else {
-                    return new Command("delete", toDelete - 1);
+                    return new DeleteCommand(toDelete - 1);
                 }
             }
             
@@ -43,7 +42,7 @@ public class Parser {
                 throw new DukeException(DukeExceptionType.INVALIDFIND);
             } else {
                 LocalDate desiredDate = LocalDate.parse(fullCommand.split("\\s+")[1]);
-                return new Command("find", desiredDate);
+                return new FindCommand(desiredDate);
             }
             
         default:
@@ -119,7 +118,7 @@ public class Parser {
                     throw new DukeException(DukeExceptionType.INVALIDINPUT);
                 }
                 // add task to taskList
-                return new Command(taskType, newTask);
+                return new AddCommand(newTask);
             }
         }
     }
