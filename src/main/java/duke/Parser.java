@@ -9,8 +9,17 @@ import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.WrongCommand;
 
+/**
+ * Deals with making sense of user's commands.
+ */
 public class Parser {
 
+    /**
+     * Returns the Command to be executed after reading
+     * in user's input.
+     * @param fullCommand User's input.
+     * @return Command.
+     */
     public static Command parse(String fullCommand) {
         String nextInput = fullCommand.toLowerCase();
         if (nextInput.contains("delete")) {

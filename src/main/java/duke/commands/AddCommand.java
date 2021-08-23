@@ -12,6 +12,9 @@ import duke.tasktypes.ToDos;
 import duke.exceptions.ToDoException;
 
 
+/**
+ * Command that adds task to the list.
+ */
 public class AddCommand extends Command {
 
     private String command;
@@ -20,6 +23,12 @@ public class AddCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * Executes the command.
+     * @param taskList taskList with all tasks.
+     * @param ui User Interface to deal with interactions with user.
+     * @param storage Storage to store data of user.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             if (command.contains("todo")) {
