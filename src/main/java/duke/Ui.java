@@ -13,17 +13,18 @@ import java.io.PrintWriter;
  */
 public class Ui {
 
-    protected static final String LINE = "\t____________________________________________________________";
-    private static final String INTRO = "Hello! I'm Duke\n\t What can I do for you?";
-    private static final String BYE_MESSAGE = "\t Bye. Hope to see you again soon!";
-    private final InputStreamReader inputStreamReader;
-    private final BufferedReader bufferedReader;
-    private final PrintWriter printWriter;
+    protected static final String MESSAGE_BYE = "\t Bye. Hope to see you again soon!";
+    protected static final String MESSAGE_INTRO = "Hello! I'm Duke\n\t What can I do for you?";
+    protected static final String MESSAGE_LINE = "\t____________________________________________________________";
+
+    private final InputStreamReader INPUT_STREAM_READER;
+    private final BufferedReader BUFFERED_READER;
+    private final PrintWriter PRINT_WRITER;
 
     public Ui() {
-        inputStreamReader = new InputStreamReader(System.in);
-        bufferedReader = new BufferedReader(inputStreamReader);
-        printWriter = new PrintWriter(System.out, true);
+        INPUT_STREAM_READER = new InputStreamReader(System.in);
+        BUFFERED_READER = new BufferedReader(INPUT_STREAM_READER);
+        PRINT_WRITER = new PrintWriter(System.out, true);
     }
 
     /**
@@ -32,7 +33,7 @@ public class Ui {
      * @param str the String to be printed
      */
     public void print(String str) {
-        printWriter.println(str);
+        PRINT_WRITER.println(str);
     }
 
     /**
@@ -41,31 +42,31 @@ public class Ui {
      * @param str the String to be formatted
      */
     protected void reply(String str) {
-        print(LINE);
+        print(MESSAGE_LINE);
         print("\t " + str);
-        print(LINE + "\n");
+        print(MESSAGE_LINE + "\n");
     }
 
     /**
      * Print welcome message.
      */
     protected void showWelcome() {
-        reply(INTRO);
+        reply(MESSAGE_INTRO);
     }
 
     /**
      * Print bye message.
      */
     protected void showBye() {
-        print(BYE_MESSAGE);
-        print(LINE + "\n");
+        print(MESSAGE_BYE);
+        print(MESSAGE_LINE + "\n");
     }
 
     /**
      * Read the user input.
      */
     protected String readCommand() throws IOException {
-        return bufferedReader.readLine();
+        return BUFFERED_READER.readLine();
     }
 
     /**
@@ -74,9 +75,9 @@ public class Ui {
     public void close() throws DukeException {
         try {
             showBye();
-            inputStreamReader.close();
-            bufferedReader.close();
-            printWriter.close();
+            INPUT_STREAM_READER.close();
+            BUFFERED_READER.close();
+            PRINT_WRITER.close();
         } catch (IOException e) {
             throw new DukeException("Unable to close the parser.");
         }
@@ -86,7 +87,7 @@ public class Ui {
      * Show the divider line.
      */
     protected void showLine() {
-        print(LINE);
+        print(MESSAGE_LINE);
     }
 
     /**

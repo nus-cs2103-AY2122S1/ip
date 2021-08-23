@@ -23,7 +23,8 @@ public class Event extends Task {
      */
     public Event(boolean isDone, String description, String date) {
         super(description, isDone);
-        this.date = LocalDateTime.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-ddHHmm"));
+        this.date = LocalDateTime.parse(date.replace(" ", ""),
+                DateTimeFormatter.ofPattern("yyyy-MM-ddHHmm"));
     }
 
     /**
@@ -33,7 +34,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + DateTimeFormatter.ofPattern("d MMM uuuu h.mma").format(this.date) + ")";
+        return "[E]" + super.toString() +
+                " (at: " + DateTimeFormatter.ofPattern("d MMM uuuu h.mma").format(this.date) + ")";
     }
 
     /**

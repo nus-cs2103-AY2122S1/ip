@@ -1,8 +1,8 @@
 package main.java.duke.command;
 
-import main.java.duke.Ui;
 import main.java.duke.storage.Storage;
 import main.java.duke.tasklist.TaskList;
+import main.java.duke.Ui;
 
 /**
  * This is an abstract class of all the Commands that Duke can perform.

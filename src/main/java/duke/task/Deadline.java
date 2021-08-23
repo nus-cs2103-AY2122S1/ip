@@ -23,7 +23,8 @@ public class Deadline extends Task {
      */
     public Deadline(boolean isDone, String description, String date) {
         super(description, isDone);
-        this.date = LocalDateTime.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-ddHHmm"));
+        this.date = LocalDateTime.parse(date.replace(" ", ""),
+                DateTimeFormatter.ofPattern("yyyy-MM-ddHHmm"));
     }
 
     /**
@@ -33,7 +34,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateTimeFormatter.ofPattern("d MMM uuuu h.mma").format(this.date) + ")";
+        return "[D]" + super.toString() + " (by: " +
+                DateTimeFormatter.ofPattern("d MMM uuuu h.mma").format(this.date) + ")";
     }
 
     /**

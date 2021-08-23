@@ -39,10 +39,14 @@ public class StorageDuke implements Storage {
      */
     @Override
     public ArrayList<Task> load() throws IOException {
+
+        //Check if the directory is present, else, create it.
         File directory = new File(this.FILEPATH.split("/")[0]);
         if (!directory.exists()) {
             directory.mkdir();
         }
+
+        //Check if the file is present, else, create it.
         ArrayList<Task> tl = new ArrayList<>();
         File savedList = new File(this.FILEPATH);
         if (!savedList.exists()) {
@@ -55,17 +59,17 @@ public class StorageDuke implements Storage {
         {
             String[] command = str.split("\\|");
             switch (command[0]) {
-                case "T":
-                    tl.add(new ToDo(command[1].equals("1"), command[2]));
-                    break;
-                case "E":
-                    tl.add(new Event(command[1].equals("1"), command[2], command[3]));
-                    break;
-                case "D":
-                    tl.add(new Deadline(command[1].equals("1"), command[2], command[3]));
-                    break;
-                default:
-                    break;
+            case "T":
+                tl.add(new ToDo(command[1].equals("1"), command[2]));
+                break;
+            case "E":
+                tl.add(new Event(command[1].equals("1"), command[2], command[3]));
+                break;
+            case "D":
+                tl.add(new Deadline(command[1].equals("1"), command[2], command[3]));
+                break;
+            default:
+                break;
             }
         });
         return tl;
