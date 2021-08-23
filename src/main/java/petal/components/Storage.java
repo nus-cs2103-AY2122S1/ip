@@ -13,17 +13,24 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * The Storage that handles all the operation dealing with the creation of directories,
+ * files, saving of tasks, and the retrieval of previously saved tasks.
+ */
 public class Storage {
 
-    //Boolean representing if saving should be performed
-    public static boolean savedProperly;
-    //Relative path of the folder containing Tasks.txt
+    private boolean savedProperly;
     private final String folderPath;
-    //Relative path of the txt file with the tasks
     private final String filePath;
     private final TaskList taskList;
     private final Ui ui;
 
+    /**
+     * The constructor for the Storage class
+     *
+     * @param taskList Instance of TaskList being used
+     * @param ui The Ui instance being used
+     */
     public Storage(TaskList taskList, Ui ui) {
         this.ui = ui;
         this.taskList = taskList;
@@ -52,6 +59,7 @@ public class Storage {
 
     /**
      * Method to parse the text from Tasks.txt in tasks
+     *
      * @return True if tasks were retrieved, false if no tasks (new user) or exception occurred
      */
     public boolean retrieveTasks() {
@@ -86,6 +94,7 @@ public class Storage {
     /**
      * Method to save the tasks. If the folder was not able to be created, Petal does not
      * save any of the tasks.
+     *
      * @throws IOException Thrown if tasks are not saved properly
      */
     public void saveTasks() throws IOException {

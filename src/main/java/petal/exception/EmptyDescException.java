@@ -11,6 +11,7 @@ public class EmptyDescException extends PetalException {
 
     /**
      * Constructor for the EmptyDescException
+     *
      * @param message The exception message
      */
     public EmptyDescException(String message) {
@@ -19,6 +20,7 @@ public class EmptyDescException extends PetalException {
 
     /**
      * Constructor for the EmptyDescException (Used as wrapper)
+     *
      * @param message The exception message
      * @param cause Initial Cause
      */
@@ -28,6 +30,7 @@ public class EmptyDescException extends PetalException {
 
     /**
      * Constructor for the EmptyDescException (Used as wrapper)
+     *
      * @param response The exception message
      * @param cause Initial Cause
      */

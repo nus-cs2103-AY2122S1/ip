@@ -10,18 +10,19 @@ import petal.components.Ui;
  * The class for the Petal bot. It is able to respond to
  * a certain number of pre-determined commands in order to add certain
  * activities and track them.
+ *
+ * @author Siddanth
  */
 public class Petal {
 
-    //Boolean representing if the user has said bye
-    private boolean bye = false;
+    private boolean isBye = false;
     private final Storage storage;
     private final Parser parser;
     private final Ui ui;
     private final TaskList taskList;
 
     /**
-     * Constructor for the Duke class
+     * The constructor for the Petal class
      */
     public Petal() {
         ui = new Ui(this);
@@ -30,16 +31,19 @@ public class Petal {
         parser = new Parser();
     }
 
+    /**
+     * Method to flip the boolean isBye and terminate the process
+     */
     public void stop() {
-        this.bye = true;
+        this.isBye = true;
     }
 
     /**
-     * Method to give the start message and to run the bot.
+     * Method to start the bot
      */
     public void run() {
         storage.createDirectory();
-        while (!bye) {
+        while (!isBye) {
             String message = ui.readCommand();
             Command command = parser.handleInput(message);
             command.execute(taskList, ui, storage);

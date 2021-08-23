@@ -1,8 +1,11 @@
 package petal.components;
 
+/**
+ * The enum that holds all the responses that user might see, as these responses
+ * remain a constant
+ */
 public enum Responses {
 
-    //Greetings
     WELCOME_BACK("Welcome back! It definitely is good to see you again :D"),
     LINE("============================================================="
           + "=========================================================="
@@ -27,6 +30,11 @@ public enum Responses {
 
     private final String response;
 
+    /**
+     * Constructor for Responses
+     *
+     * @param response The String response
+     */
     Responses(String response) {
         this.response = response;
     }

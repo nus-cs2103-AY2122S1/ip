@@ -7,11 +7,23 @@ import petal.components.Ui;
 import petal.exception.EmptyDescException;
 import petal.exception.InvalidInputException;
 
+/**
+ * The TaskCommand implements Command and deals
+ * with handling commands related to task creation
+ */
 public class TaskCommand implements Command {
 
-    private String type;
-    private String input;
+    private final String type;
+    private final String input;
 
+    /**
+     * Overwritten Execute method. It handles the input, and creates
+     * the corresponding Task object
+     *
+     * @param taskList TaskList instance
+     * @param ui Ui instance
+     * @param storage Storage instance
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
@@ -22,6 +34,12 @@ public class TaskCommand implements Command {
         }
     }
 
+    /**
+     * The Constructor for TaskCommand
+     *
+     * @param type The type of Task
+     * @param input The input
+     */
     public TaskCommand(String type, String input) {
         this.type = type;
         this.input = input;

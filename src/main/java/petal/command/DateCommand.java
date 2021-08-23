@@ -5,14 +5,30 @@ import petal.components.TaskList;
 import petal.components.Ui;
 import petal.exception.InvalidInputException;
 
+/**
+ * The DateCommand class implements Command
+ * and handles displayed tasks on the given date
+ */
 public class DateCommand implements Command {
 
-    private String input;
+    private final String input;
 
+    /**
+     * Constructor for the DateCommand class
+     *
+     * @param input The given input
+     */
     public DateCommand(String input) {
         this.input = input;
     }
 
+    /**
+     * Overwritten Execute method. Displays all tasks on the given date
+     *
+     * @param taskList TaskList instance
+     * @param ui Ui instance
+     * @param storage Storage instance
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {

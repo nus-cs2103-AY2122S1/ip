@@ -11,6 +11,7 @@ public class InvalidInputException extends PetalException {
 
     /**
      * Constructor for InvalidInputException
+     *
      * @param message The exception message
      */
     public InvalidInputException(String message) {
@@ -19,6 +20,7 @@ public class InvalidInputException extends PetalException {
 
     /**
      * Constructor for InvalidInputException (Used as wrapper)
+     *
      * @param message The exception message
      * @param cause Initial cause
      */
@@ -28,6 +30,7 @@ public class InvalidInputException extends PetalException {
 
     /**
      * Constructor for InvalidInputException (Used as wrapper)
+     *
      * @param response The exception message
      * @param cause Initial cause
      */
