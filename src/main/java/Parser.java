@@ -10,15 +10,19 @@ public class Parser {
         this.lines = storage.readLines();
     }
 
-    public ArrayList<Task> retrieveTaskListFromLines() {
+    public ArrayList<Task> retrieveTaskListFromLines() throws FileParseException {
         ArrayList<Task> tasks = new ArrayList<>();
-        for (String line : lines) {
-            parseLineToTask(line, tasks);
+        try {
+            for (String line : lines) {
+                parseLineToTask(line, tasks);
+            }
+        } catch (DukeException e) {
+            throw new FileParseException("The contents of the file in storage are formatted wrongly.");
         }
         return tasks;
     }
 
-    private void parseLineToTask(String line, ArrayList<Task> tasks) {
+    private void parseLineToTask(String line, ArrayList<Task> tasks) throws DukeException {
         String[] params = line.split(" \\| ");
         String taskType = params[0];
         boolean isTaskDone = params[1].equals("1");

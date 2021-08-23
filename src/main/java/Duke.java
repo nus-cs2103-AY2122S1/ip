@@ -37,24 +37,24 @@ public class Duke {
         printAddTaskMessage(task);
     }
 
-    private static void addTask(String descriptionAndTime, String command) throws DukeException, IOException {
-        String[] splitDescriptionAndTime;
+    private static void addTask(String descriptionAndDate, String command) throws DukeException, IOException {
+        String[] splitDescriptionAndDate;
         Task task;
 
         try {
             if (command.equals("deadline")) {
-                splitDescriptionAndTime = descriptionAndTime.split(" /by ");
-                task = new Deadline(splitDescriptionAndTime[0].trim(), splitDescriptionAndTime[1].trim());
+                splitDescriptionAndDate = descriptionAndDate.split(" /by ");
+                task = new Deadline(splitDescriptionAndDate[0].trim(), splitDescriptionAndDate[1].trim());
             } else if (command.equals("event")) {
-                splitDescriptionAndTime = descriptionAndTime.split(" /at ");
-                task = new Event(splitDescriptionAndTime[0].trim(), splitDescriptionAndTime[1].trim());
+                splitDescriptionAndDate = descriptionAndDate.split(" /at ");
+                task = new Event(splitDescriptionAndDate[0].trim(), splitDescriptionAndDate[1].trim());
             } else {
                 printInvalidCommandMessage();
                 return;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Oops!!! Deadlines or events should contain a description, followed by " +
-                    "a /by or /at respectively, followed by a date or a time.");
+                    "a /by or /at respectively, followed by a date.");
         }
 
         tasks.add(task);
@@ -168,11 +168,15 @@ public class Duke {
         sc.close();
     }
 
+    private static void populateTaskListFromStorage() throws FileParseException {
+        tasks = parser.retrieveTaskListFromLines();
+    }
+
     public static void main(String[] args) {
         try {
             Storage storage = new Storage("data/duke.txt");
             parser = new Parser(storage);
-            tasks = parser.retrieveTaskListFromLines();
+            populateTaskListFromStorage();
 
             printWelcomeMessage();
             scanUserInput();
@@ -180,6 +184,8 @@ public class Duke {
 
         } catch (IOException e) {
             System.out.println("Something went wrong. Please restart the app.");
+        } catch (FileParseException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

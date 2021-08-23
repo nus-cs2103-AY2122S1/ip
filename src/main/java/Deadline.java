@@ -1,23 +1,19 @@
-public class Deadline extends Task {
-    private String by;
-
-    public Deadline(String description, String by) {
-        super(description);
-        this.by = by;
+public class Deadline extends DateTask {
+    public Deadline(String description, String by) throws DukeException {
+        this(description, by, false);
     }
 
-    public Deadline(String description, String by, boolean isDone) {
-        super(description, isDone);
-        this.by = by;
+    public Deadline(String description, String by, boolean isDone) throws DukeException {
+        super(description, by, isDone);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + formatDate() + ")";
     }
 
     @Override
     public String toStorageString() {
-        return "D | " + super.toStorageString() + " | " + by;
+        return "D | " + super.toStorageString() + " | " + getDateString();
     }
 }

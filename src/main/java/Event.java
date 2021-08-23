@@ -1,23 +1,19 @@
-public class Event extends Task {
-    private String at;
-
-    public Event(String description, String at) {
-        super(description);
-        this.at = at;
+public class Event extends DateTask {
+    public Event(String description, String at) throws DukeException {
+        this(description, at, false);
     }
 
-    public Event(String description, String at, boolean isDone) {
-        super(description, isDone);
-        this.at = at;
+    public Event(String description, String at, boolean isDone) throws DukeException {
+        super(description, at, isDone);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + formatDate() + ")";
     }
 
     @Override
     public String toStorageString() {
-        return "E | " + super.toStorageString() + " | " + at;
+        return "E | " + super.toStorageString() + " | " + getDateString();
     }
 }
