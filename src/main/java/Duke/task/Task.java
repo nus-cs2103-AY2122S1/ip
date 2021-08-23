@@ -4,7 +4,7 @@ package Duke.task;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-JUnit. Add JUNit Test
+ * Current Progress: A-Jar. Create a JAR file
  *
  * Description:
  * Encapsulates the Task Class which contains a task description

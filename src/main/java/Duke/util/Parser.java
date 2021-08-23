@@ -10,7 +10,7 @@ import Duke.exception.MissingArgumentException;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-JUnit. Add JUNit Test
+ * Current Progress: A-Jar. Create a JAR file
  *
  * Description:
  * Encapsulates the parser where it parses the inputted command from the user and runs

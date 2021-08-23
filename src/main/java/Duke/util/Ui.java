@@ -8,7 +8,7 @@ import java.util.Scanner;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-JUnit. Add JUNit Test
+ * Current Progress: A-Jar. Create a JAR file
  *
  * Description:
  * Encapsulates the UI that interacts with the user through scanner the inputted text from the user and prints
