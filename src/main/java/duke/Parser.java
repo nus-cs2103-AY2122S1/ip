@@ -34,6 +34,8 @@ public class Parser {
             } else if (segment[0].equals("event")) {
                 list.addEvents(input.split("event", 2)[1]);
                 storage.save();
+            } else if (segment[0].equals("find")) {
+                list.find(input.split("find", 2)[1]);
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry,"
                         + " but I don't know what that means :-(");
