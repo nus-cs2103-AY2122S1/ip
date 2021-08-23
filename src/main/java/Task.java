@@ -1,9 +1,15 @@
+
 public abstract class Task {
     protected boolean isDone = false;
     protected String name;
 
     Task(String name) {
         this.name = name;
+    }
+
+    Task(String name, boolean isDone) {
+        this.name = name;
+        this.isDone = isDone;
     }
 
     /**
@@ -40,6 +46,16 @@ public abstract class Task {
      */
      public String showStatus() {
         return this.printType() + this.printCompletionStatus() + " " + this.name;
+     }
+
+    /**
+     * Returns an info string for writing to file.
+     *
+     * @return A status string.
+     */
+     public String showStatusWrite() {
+         return this.printType() + this.printCompletionStatus()
+                + Separator.SEPARATOR + this.name;
      }
 
     @Override

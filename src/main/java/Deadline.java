@@ -9,11 +9,23 @@ public class Deadline extends Task {
         this.timeInfo = deadline;
     }
 
+    Deadline(String name, String deadline, boolean isDone) {
+        super(name, isDone);
+        this.timeInfo = deadline;
+    }
+
     @Override
     public String showStatus() {
         String status =  super.showStatus();
         return status + " (by: " + timeInfo + ")";
 
+    }
+
+    @Override
+    public String showStatusWrite() {
+        return this.printType() + this.printCompletionStatus()
+                + Separator.SEPARATOR + this.name
+                + Separator.SEPARATOR + this.timeInfo;
     }
 
     @Override
