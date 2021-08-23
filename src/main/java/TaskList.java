@@ -136,15 +136,16 @@ public class TaskList {
                 task.toString() + "\n" + taskLengthReport());
     }
 
-    private void deleteDone() {
+    private void deleteDone() throws DukeException {
         taskList.removeIf(Task::isDone);
+        save();
         Duke.printMessage("Noted! I've removed all completed tasks.\n" +
                 taskLengthReport());
     }
 
-    private void deleteExpired() {
+    private void deleteExpired() throws DukeException {
         taskList.removeIf(Task::isExpired);
-
+        save();
         Duke.printMessage("Noted! I've removed all expired tasks.\n" +
                 taskLengthReport());
     }

@@ -15,7 +15,7 @@ public class Deadline extends Task {
     public static Deadline load(String[] loadData) {
         boolean done = loadData[1].equals("o");
         String name = loadData[2];
-        String time = loadData[3];
+        LocalDate time = LocalDate.parse(loadData[3]);
 
         Deadline deadline = new Deadline(name, time);
         if (done) {
@@ -48,6 +48,6 @@ public class Deadline extends Task {
 
     @Override
     public String getSaveString() {
-        return "d," + super.getSaveString() + "," + time;
+        return "d," + super.getSaveString() + "," + date;
     }
 }
