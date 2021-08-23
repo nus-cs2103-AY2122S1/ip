@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -16,6 +17,13 @@ public class Duke {
      * awaken() awakens Duke and allows one to input commands to Duke.
      */
     public static void awaken() {
+
+        //load previous list data here maybe
+
+        taskList = WriteToFile.loadData();
+//        System.out.println("This is the tasklist");
+//        System.out.println(taskList.toString());
+
         Duke.active = true;
 
         Duke.sendStartMessage();
@@ -35,6 +43,9 @@ public class Duke {
                     }
                     String taskItemNumber = splitString[1];
                     Duke.markAsFinished(taskItemNumber);
+
+                    //rewrite whole file lmaooooo havent written a method for that yet though
+                    WriteToFile.rewriteFile(taskList);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
@@ -51,6 +62,10 @@ public class Duke {
                     }
                     ToDo newToDo = new ToDo(actualToDo);
                     Duke.addToList(newToDo);
+
+                    WriteToFile.appendToFile(newToDo.toString());
+
+
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
@@ -68,6 +83,9 @@ public class Duke {
                     String description = input.split("/")[0];
                     Deadline dead = new Deadline(description, by);
                     Duke.addToList(dead);
+
+                    WriteToFile.appendToFile(dead.toString());
+
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
@@ -87,6 +105,11 @@ public class Duke {
                     String description = input.split("/")[0];
                     Event someEvent = new Event(description, date, time);
                     Duke.addToList(someEvent);
+
+                    //edit txt file here
+
+                    WriteToFile.appendToFile(someEvent.toString());
+
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
@@ -95,6 +118,9 @@ public class Duke {
             } else if (input.equals("bye")) {
                 Duke.active = false;
                 Duke.sendEndMessage();
+
+                //save txt file here or something idk
+                WriteToFile.rewriteFile(taskList);
                 break;
             } else if (input.split(" ")[0].equals("delete")) {
 
@@ -108,6 +134,9 @@ public class Duke {
                     }
                     String taskToBeDeleted = input.split(" ")[1];
                     Duke.deleteTask(taskToBeDeleted);
+
+                    //rewrite whole txt file
+                    WriteToFile.rewriteFile(taskList);
                 } catch (DukeException e) {
 
                 }
@@ -181,7 +210,7 @@ public class Duke {
      */
     public static void addToList(TaskItem taskItem) {
         Duke.taskList.add(taskItem);
-        Duke.listIndex++;
+        Duke.listIndex = taskList.size();
         System.out.println("____________________________________________________________");
         System.out.println("Got it. I've added this task:");
         System.out.println(taskItem.toString());

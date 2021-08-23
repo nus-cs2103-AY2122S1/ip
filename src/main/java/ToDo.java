@@ -1,5 +1,7 @@
 public class ToDo extends TaskItem {
 
+    private boolean readFromFile = false;
+
     /**
      * Constructor for creating a ToDo object.
      * @param description the description of the ToDo/TaskItem.
@@ -7,6 +9,12 @@ public class ToDo extends TaskItem {
     public ToDo(String description) {
         super(description);
     }
+
+//    public ToDo(String description, boolean readFromFile) {
+//        super(description);
+//        this.readFromFile = readFromFile;
+//    }
+
 
     /**
      * Overriden toString() method.

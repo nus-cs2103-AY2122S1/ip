@@ -2,6 +2,7 @@ public class Event extends TaskItem {
 
     protected String date;
     protected String time;
+    protected boolean readFromFile = false;
 
     /**
      * Constructor for creating an Event object.
@@ -13,6 +14,12 @@ public class Event extends TaskItem {
         super(description);
         this.date = date;
         this.time = time;
+        this.readFromFile = false;
+    }
+
+    public Event(String description) {
+        super(description);
+        this.readFromFile = true;
     }
 
     /**
@@ -21,6 +28,10 @@ public class Event extends TaskItem {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.date + " " + this.time + ")";
+        if (!readFromFile) {
+            return "[E]" + super.toString() + "(at: " + this.date + " " + this.time + ")";
+        } else {
+            return "[E]" + super.toString();
+        }
     }
 }
