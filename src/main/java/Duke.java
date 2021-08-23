@@ -1,7 +1,20 @@
+import java.io.File;
+
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+    // Data file path
+    private static final String DIRECTORY_PATH = "./data";
+    private static final String FILE_PATH = DIRECTORY_PATH + "/duke.txt";
+
 
     // Initialize string array to store the list
     private static final ArrayList<Task> TASKS = new ArrayList<>();
@@ -13,6 +26,58 @@ public class Duke {
 
     enum TaskType {
         TODO, EVENT, DEADLINE
+    }
+
+    // Handle data file reading
+    private static void readData() {
+        try {
+            Path dirPath = Paths.get(DIRECTORY_PATH);
+            File dataFile = new File(FILE_PATH);
+
+            // Create data directory if it doesn't exist
+            if (!Files.exists(dirPath))
+                Files.createDirectory(dirPath);
+
+            // Greet user and create data file if it doesn't exist
+            Printer.prettyPrint(String.format("Welcome %s\n%s\tI'm Desmond,\n\thow may I serve you?\n"
+                    , dataFile.createNewFile()? "to" : "back"
+                    , Printer.logo));
+
+            // Read the file and add to the list
+            Scanner dataScanner = new Scanner(dataFile);
+            while (dataScanner.hasNext()) {
+                // Extract task details into three parts
+                String[] taskDetails = dataScanner.nextLine().split(" \\| ", 3);
+                TaskType type = TaskType.valueOf(taskDetails[0].toUpperCase());
+                boolean isDone = taskDetails[1].equals("1");
+                String description = taskDetails[2];
+
+                // Create task based on the extracted details
+                Task task = null;
+                switch (type) {
+                case TODO:
+                    task = new Todo(description);
+                    break;
+                case EVENT:
+                    String at = taskDetails[3];
+                    task = new Event(description, at);
+                    break;
+                case DEADLINE:
+                    String by = taskDetails[3];
+                    task = new Deadline(description, by);
+                    break;
+                }
+
+                // Add to the task list if and only if it is valid in data file
+                if (task != null) {
+                    if (isDone)
+                        task.markAsDone();
+                    TASKS.add(task);
+                }
+            }
+        } catch (IOException |UnsupportedOperationException | SecurityException e) {
+            Printer.prettyPrint("File reading failed: " + e);
+        }
     }
 
     private static void printAddOrDelete(boolean isAdd, Task task, int numOfTask) {
@@ -60,11 +125,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        // Greet the user
-        Printer.prettyPrint("Welcome to\n" +
-                Printer.logo +
-                "\tI'm Desmond,\n" +
-                "\thow may I serve you?\n");
+        // Load data file
+        readData();
 
         // Initialize scanner to get user input
         Scanner scanner = new Scanner(System.in);
