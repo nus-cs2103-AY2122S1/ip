@@ -1,7 +1,13 @@
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
 public class Duke {
     public static void main(String[] args) {
@@ -16,6 +22,31 @@ public class Duke {
         System.out.println("----------------------");
         Scanner stdin = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
+        String home = System.getProperty("user.home");
+        Path dukePath = Paths.get(home, "Documents", "duke", "data.csv");
+        File dukeData = dukePath.toFile();
+        try {
+            Scanner dukeDataScanner = new Scanner(dukeData);
+            while (dukeDataScanner.hasNext()) {
+                String taskData = dukeDataScanner.nextLine();
+                String[] taskTokens = taskData.split(",");
+                Task task = null;
+                if (taskTokens[0].equals("todo")) {
+                    task = new ToDo(taskTokens[1], Boolean.parseBoolean(taskTokens[2]));
+                } else if (taskTokens[0].equals("deadline")) {
+                    task = new Deadline(taskTokens[1], taskTokens[2],
+                                Boolean.parseBoolean(taskTokens[3]));
+                } else if (taskTokens[0].equals("event")) {
+                    task = new Event(taskTokens[1], taskTokens[2],
+                            Boolean.parseBoolean(taskTokens[3]));
+                }
+                if (task != null) {
+                    tasks.add(task);
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.err.printf("File %s not found\n", dukePath.toString());
+        }
         while (true){
             String command = stdin.nextLine();
             if ("bye".equals(command)){
