@@ -17,19 +17,8 @@ public class Storage {
         index = 0;
     }
 
-    public Task push(String[] args) {
-        String command = args[0];
-        switch (command) {
-            case "todo":
-                storage.add(new ToDo(args[1]));
-                break;
-            case "deadline":
-                storage.add(new Deadline(args[1], args[2]));
-                break;
-            case "event":
-                storage.add(new Event(args[1], args[2]));
-                break;
-        }
+    public Task push(Task t) {
+        storage.add(t);
         index += 1;
         return storage.get(index - 1);
     }
@@ -58,4 +47,5 @@ public class Storage {
     public int numTasks() {
         return index;
     }
+
 }

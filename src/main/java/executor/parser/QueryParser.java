@@ -1,4 +1,4 @@
-package parser;
+package executor.parser;
 
 import exception.UnknownCommandException;
 import java.util.Set;
