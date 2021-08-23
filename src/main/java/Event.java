@@ -29,6 +29,11 @@ public class Event extends Task{
     }
 
     @Override
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
+    @Override
     public String getName() {
         return name;
     }

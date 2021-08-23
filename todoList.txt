@@ -1,6 +1,4 @@
-T jump false
 T run false
-T fly false
-E tun /at: 2020-11-02 4-9pm false
-E ewf /at: 2020-01-11 3-4 false
-D read book /by: 2020-09-11 9 pm false
+T fly true
+E run run run /at: 2020-02-12 4-6pm true
+D run and run /by: 2020-11-20 4pm false

@@ -42,6 +42,11 @@ public class Deadline extends Task{
     }
 
     @Override
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
+    @Override
     public String toString() {
         return "D" + " " +  name  +" "  +"/"+ time + " "+  isDone+ '\n';
     }

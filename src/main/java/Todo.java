@@ -20,6 +20,10 @@ public class Todo extends Task{
         return isDone;
     }
 
+    @Override
+    public void setDone(boolean done) {
+        isDone = done;
+    }
 
     @Override
     public String toString() {

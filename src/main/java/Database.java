@@ -125,4 +125,64 @@ public class Database {
         d.getData();
     }
 
+    public void updateData(Task task, int index) {
+        String data = "";
+        try {
+            Scanner myReader = new Scanner(file);
+
+            while (myReader.hasNextLine()) {
+                if (index == 1) {
+                    myReader.nextLine();
+                    data += task.toString();
+                } else {
+                    data += myReader.nextLine() + "\n";
+                }
+                index--;
+            }
+            myReader.close();
+
+        } catch (IOException e) {
+
+        }
+
+        try {
+            FileWriter fw = new FileWriter(file);
+            fw.write(data);
+            fw.close();
+        } catch (IOException e) {
+
+        }
+
+
+    }
+
+    public void deleteData(int index) {
+        String data = "";
+        try {
+            Scanner myReader = new Scanner(file);
+
+            while (myReader.hasNextLine()) {
+                if (index == 1) {
+                    myReader.nextLine();
+
+                } else {
+                    data += myReader.nextLine() + "\n";
+                }
+                index--;
+            }
+            myReader.close();
+
+        } catch (IOException e) {
+
+        }
+
+        try {
+            FileWriter fw = new FileWriter(file);
+            fw.write(data);
+            fw.close();
+        } catch (IOException e) {
+
+        }
+    }
+
 }

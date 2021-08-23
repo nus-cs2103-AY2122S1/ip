@@ -55,10 +55,10 @@ public class Duke {
 
             switch(keyword[0]) {
                 case LIST:
-                    //System.out.println(indentation + Horizontal_line);
+                    System.out.println(indentation + Horizontal_line);
                     try {
 
-                        System.out.println(task.size() );
+                        //System.out.println(task.size() );
                         for (int i = 0; i < task.size(); i++) {
                             String s = indentation;
                             String s2 = "";
@@ -93,11 +93,13 @@ public class Duke {
                     try {
                         Integer num = Integer.valueOf(keyword[1]) - 1;
                         task.get(num).setDone(true);
+                        myTask.updateData(task.get(num), num + 1);
                         System.out.println(indentation + Horizontal_line);
                         System.out.println(indentation + "Nice! I've marked this task as done:");
                         String s = indentation;
                         String s2 = "";
                         if (task.get(num) instanceof Todo) {
+
                             s += (task.get(num).getIndex() + 1) + "." + " [T]";
                             s2 = task.get(num).getName();
                         } else if (task.get(num) instanceof Deadline) {
@@ -127,6 +129,7 @@ public class Duke {
                     try {
                         Integer num = Integer.valueOf(keyword[1]) - 1;
 
+                        myTask.deleteData(num + 1);
                         String s = indentation + "     ";
                         String s2 = "";
 
