@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected String by;
+    protected String timeToDisplay;
     protected LocalDateTime deadline;
 
     public Deadline(String description, String by) {
@@ -15,7 +16,7 @@ public class Deadline extends Task {
         int min = Integer.parseInt(by.substring(14, 16));
 
         LocalDateTime taskDate = LocalDateTime.of(year, month, date, hour, min);
-        this.by = taskDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
+        this.timeToDisplay = taskDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
         deadline = taskDate;
     }
 
@@ -25,6 +26,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+        return "[D]" + super.toString() + " (by: " + timeToDisplay + ")";
+    }
+
+    @Override
+    public String toPrintToFile() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 }
