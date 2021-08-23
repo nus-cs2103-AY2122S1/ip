@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,10 +56,12 @@ public class Duke {
                 task = new Todo(descriptions[0]);
                 break;
             case EVENT:
-                task = new Event(descriptions[0], descriptions[1]);
+                LocalDate at = LocalDate.parse(descriptions[1]);
+                task = new Event(descriptions[0], at);
                 break;
             case DEADLINE:
-                task = new Deadline(descriptions[0], descriptions[1]);
+                LocalDate by = LocalDate.parse(descriptions[1]);
+                task = new Deadline(descriptions[0], by);
                 break;
             }
 
