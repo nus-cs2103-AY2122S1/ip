@@ -8,7 +8,12 @@ public class Event extends Task {
     }
 
     public Event(String descAndTime) throws DukeException {
-            this(extractDesc(descAndTime), extractTime(descAndTime));
+        this(extractDesc(descAndTime), extractTime(descAndTime));
+    }
+
+    public Event(String desc, String time, boolean completed) {
+        this(desc, time);
+        super.completed = completed;
     }
 
     private static String extractDesc(String descAndTime) throws DukeException {
@@ -18,7 +23,7 @@ public class Event extends Task {
         return descAndTime.split("at")[0];
     }
 
-    private static String extractTime(String descAndTime) throws DukeException  {
+    private static String extractTime(String descAndTime) throws DukeException {
         try {
             return descAndTime.split("at")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -30,4 +35,10 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at:" + at + ")";
     }
+
+    @Override
+    public String storageString() {
+        return "E | " + super.completed + " | " + super.description + " | " + this.at;
+    }
+
 }

@@ -11,6 +11,11 @@ public class Deadline extends Task {
         this(extractDesc(descAndTime), extractTime(descAndTime));
     }
 
+    public Deadline(String desc, String time, boolean completed) {
+        this(desc, time);
+        super.completed = completed;
+    }
+
     private static String extractDesc(String descAndTime) throws DukeException {
         if (descAndTime.equals("")) {
             throw new DukeException("\t☹ OOPS!!! Your deadline needs a description.\n");
@@ -30,4 +35,10 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by:" + by + ")";
     }
+
+    @Override
+    public String storageString() {
+        return "D | " + super.completed + " | " + super.description + " | " + this.by;
+    }
+
 }

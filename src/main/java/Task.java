@@ -1,6 +1,6 @@
-public class Task {
-    private boolean completed;
-    private String description;
+abstract public class Task {
+    protected boolean completed;
+    protected String description;
 
     protected Task(String taskName) {
         this.description = taskName;
@@ -19,8 +19,6 @@ public class Task {
         System.out.println("\t\t " + this + "\n");
     }
 
-    public String getDescription() {
-        return this.description;
-    }
+    abstract public String storageString();
 
 }
