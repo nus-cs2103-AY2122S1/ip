@@ -43,11 +43,12 @@ public class DukeTest {
         assertThrows(InvalidDateTimeException.class
                 , () -> parser.stringToLocalDate("1999-1-3"));
     }
+
     @Test
     public void parseDate_validDate_noException() throws InvalidDateTimeException {
         Parser parser = new Parser();
-        assertEquals(LocalDate.of(1999,10,30),parser.stringToLocalDate("1999-10-30"));
-        assertEquals(LocalDate.of(0,10,30),parser.stringToLocalDate("0000-10-30") );
-        assertEquals(LocalDate.of(2020,01,03), parser.stringToLocalDate("2020-01-03"));
+        assertEquals(LocalDate.of(1999, 10, 30), parser.stringToLocalDate("1999-10-30"));
+        assertEquals(LocalDate.of(0, 10, 30), parser.stringToLocalDate("0000-10-30"));
+        assertEquals(LocalDate.of(2020, 1, 3), parser.stringToLocalDate("2020-01-03"));
     }
 }

@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
-
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
  */
@@ -112,11 +111,11 @@ public class Parser {
     /**
      * Retrieves the task index from a command.
      *
-     * @param command Instruction input by the user.
+     * @param command  Instruction input by the user.
      * @param listSize Size of the task list.
      * @return Index of the task in the command.
      * @throws InvalidTaskIndexException If the task index is not a number.
-     * @throws NoSuchTaskException If the task index is out of range of the listSize.
+     * @throws NoSuchTaskException       If the task index is out of range of the listSize.
      * @throws EmptyDescriptionException If the task index is empty.
      */
     public int getTaskIdx(String command, int listSize) throws InvalidTaskIndexException, NoSuchTaskException, EmptyDescriptionException {
