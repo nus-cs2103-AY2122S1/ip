@@ -8,8 +8,8 @@
 public class DuchessException extends Exception {
 
     /**
-     * Constructor for DuchessException
-     * @param errorMessage the error message associated with the exception
+     * Constructs a DuchessException.
+     * @param errorMessage The error message associated with the exception.
      */
     public DuchessException(String errorMessage) {
         super(errorMessage);

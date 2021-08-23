@@ -6,16 +6,16 @@
  */
 
 public class Event extends Task {
-    /** The day of the event */
+    /** The day of the event.*/
     protected String day;
-    /** The time which the event takes place */
+    /** The time which the event takes place.*/
     protected String time;
 
     /**
-     * Constructor for Event class
-     * @param name the name of the event
-     * @param day the day of the event
-     * @param time the time which the event takes place
+     * Constructs an Event.
+     * @param name The name of the event.
+     * @param day The day of the event.
+     * @param time The time which the event takes place.
      */
     public Event(String name, String day, String time) {
         super(name);
@@ -23,6 +23,18 @@ public class Event extends Task {
         this.time = time;
     }
 
+    /**
+     * Returns a simplified representation of the Event for easier recovery from save file.
+     * @return The file formatted string representation of the Event.
+     */
+    public String toFileFormat() {
+        return String.format("E%s,%s,%s,%s", name, day, time, isDone);
+    }
+
+    /**
+     * Returns a string representation of the Evenr, with an [X] marked for done and [ ] as undone.
+     * @return the string representation of the Event.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + day + " " + time + ")";

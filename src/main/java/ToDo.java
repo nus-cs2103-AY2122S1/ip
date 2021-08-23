@@ -8,13 +8,25 @@
 public class ToDo extends Task {
 
     /**
-     * Constructor for ToDo task
+     * Constructs a ToDo.
      * @param name the name of the todo task
      */
     public ToDo(String name) {
         super(name);
     }
 
+    /**
+     * Returns a simplified representation of the ToDo for easier recovery from save file.
+     * @return The file formatted string representation of the ToDo.
+     */
+    public String toFileFormat() {
+        return String.format("T%s,%b", name, isDone);
+    }
+
+    /**
+     * Returns a string representation of the ToDo, with an [X] marked for done and [ ] as undone.
+     * @return the string representation of the ToDo.
+     */
     @Override
     public String toString() {
         return String.format("[T]" + super.toString());
