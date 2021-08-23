@@ -8,6 +8,7 @@ import duke.task.Todo;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TaskList {
 
@@ -28,6 +29,15 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints a task with the index specified.
+     *
+     * @param index Index of the task to print.
+     */
+    public void printTask(int index) {
+        System.out.println(index + 1 + ": " + tasks.get(index));
+    }
+
     public String tasksAsString() {
         String result = "";
         for (int i = 0; i < tasks.size(); i++) {
@@ -38,6 +48,7 @@ public class TaskList {
 
     /**
      * Mark a task as done.
+     *
      * @param taskId ID of the task we are marking as done.
      */
     public void markTaskAsDone(int taskId) throws DukeException {
@@ -51,6 +62,7 @@ public class TaskList {
 
     /**
      * Adds a duke.task.Todo task.
+     *
      * @param description Description of the duke.task.Todo.
      */
     public void addTodo(String description) {
@@ -60,6 +72,7 @@ public class TaskList {
 
     /**
      * Adds a duke.task.Deadline task.
+     *
      * @param fullDescription String that contains the description and deadline of the task.
      */
     public void addDeadline(String fullDescription) throws DukeException {
@@ -77,12 +90,14 @@ public class TaskList {
             tasks.add(new Deadline(description, dateTime, FORMAT_TIME, true));
         } else {
             tasks.add(new Deadline(description, dateTime, FORMAT_NO_TIME, false));
-        };
+        }
+        ;
         printAfterAdding();
     }
 
     /**
      * Adds an duke.task.Event task.
+     *
      * @param fullDescription String that contains the description and time of the task.
      */
     public void addEvent(String fullDescription) throws DukeException {
@@ -114,6 +129,7 @@ public class TaskList {
 
     /**
      * Deletes a specific task.
+     *
      * @param taskId ID of the task to be deleted.
      */
     public void deleteTask(int taskId) throws DukeException {
@@ -124,5 +140,27 @@ public class TaskList {
         System.out.println("   " + tasks.get(taskId - 1));
         tasks.remove(taskId - 1);
         System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+    }
+
+    /**
+     * Prints tasks that match a certain keyword.
+     *
+     * @param keyword Keyword supplied by the user.
+     */
+    public void findTask(String keyword) {
+        ArrayList<Integer> taskIndexes = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().toLowerCase(Locale.ROOT).contains(keyword.toLowerCase(Locale.ROOT))) {
+                taskIndexes.add(i);
+            }
+        }
+        if (taskIndexes.isEmpty()) {
+            System.out.println("No matches found!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i : taskIndexes) {
+                printTask(i);
+            }
+        }
     }
 }

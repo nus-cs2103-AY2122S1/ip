@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * A task that is scheduled for a specific time.
- */public class Event extends Task{
+ */
+public class Event extends Task {
     protected boolean timeBool;
     protected LocalDateTime dateTime;
     protected LocalDate date;
@@ -29,6 +30,7 @@ import java.time.format.DateTimeFormatter;
 
     /**
      * Provides a String representation of the duke.task.Deadline.
+     *
      * @return A String representation of the duke.task.Deadline.
      */
     @Override
