@@ -28,7 +28,6 @@ public class StorageParserTest {
     @Test
     public void testEvent() {
         Task original = new Event("eat breakfast", "2021-01-31");
-        System.out.println(original.toString());
         Task afterParse = parser.parse(original.toString());
         assertEquals(original.toString(), afterParse.toString());
     }

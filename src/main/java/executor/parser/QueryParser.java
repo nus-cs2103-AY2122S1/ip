@@ -22,6 +22,6 @@ public class QueryParser {
         } else if (taskCreation.contains(command)) {
             return taskCreationParser.parse(command, queryArr);
         }
-        throw new UnknownCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
     }
 }

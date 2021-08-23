@@ -1,14 +1,21 @@
 package model.task;
 
+import exception.LogicException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
     protected LocalDate startTime;
 
     public Event(String entry, Boolean status, String startTime) {
         super(entry, status);
-        this.startTime = LocalDate.parse(startTime);
+        try {
+            this.startTime = LocalDate.parse(startTime);
+        } catch (DateTimeParseException e) {
+            throw new LogicException("Cannot understand given date. Is it in \"yyyy-mm-dd\" format?");
+        }
     }
 
     public Event(String entry, String startTime) {

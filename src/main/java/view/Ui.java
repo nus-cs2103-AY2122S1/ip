@@ -1,5 +1,7 @@
 package view;
 
+import exception.BobCatException;
+
 public class Ui {
     private static void hLine() {
         System.out.println("\t----------------------------------------------");
@@ -17,5 +19,16 @@ public class Ui {
 
     public void respond(String reply) {
         respond(new String[]{reply});
+    }
+
+    public void respondError(String errorMessage) {
+        hLine();
+        System.out.print("\t☹ OOPS!!! ");
+        System.out.println(errorMessage);
+        hLine();
+    }
+
+    public void respondError(BobCatException e) {
+        respondError(e.getMessage());
     }
 }

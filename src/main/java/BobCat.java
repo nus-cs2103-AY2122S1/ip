@@ -1,8 +1,7 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-import exception.LogicException;
-import exception.ParserException;
+import exception.BobCatException;
 import executor.ExecutionUnit;
 import view.Ui;
 
@@ -17,23 +16,21 @@ public class BobCat {
             executor.initStorage();
         } catch (IOException e) {
             ui.respond(new String[]{"Memory file not found! Starting from blank state..."});
-        } catch (ParserException | LogicException e) {
-            ui.respond("Memory may have been corrupted! Starting from blank state...");
+        } catch (BobCatException e) {
+            ui.respondError("Memory may have been corrupted! Starting from blank state...");
             executor.clearStorage();
         } finally {
             ui.respond(new String[] {"Initialisation done!", "What can I do for you?"});
         }
 
-        while(true) {
-            String inp = scanObj.nextLine();
+        String inp = "";
+        while(!inp.equals("bye")) {
+            inp = scanObj.nextLine();
             try {
                 String[] results = executor.executeCommand(inp);
                 ui.respond(results);
-            } catch (ParserException | LogicException e) {
-                ui.respond(e.getMessage());
-            }
-            if (inp.equals("bye")) {
-                break;
+            } catch (BobCatException e) {
+                ui.respondError(e.getMessage());
             }
         }
         scanObj.close();

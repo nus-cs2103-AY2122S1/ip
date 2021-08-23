@@ -11,7 +11,7 @@ public class CreationCommandParser implements CommandParser {
             String commandArg = String.join(" ",
                     Arrays.copyOfRange(commandArgs, 1, commandArgs.length));
             if (commandArg.length() <= 0) {
-                throw new CommandArityException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
+                throw new CommandArityException("The description of a " + command + " cannot be empty.");
             }
             return new String[]{command, commandArg};
         } else {
@@ -19,9 +19,9 @@ public class CreationCommandParser implements CommandParser {
                     Arrays.copyOfRange(commandArgs, 1, commandArgs.length));
             String[] argArr = args.split("\\s(/by|/at)");
             if (argArr[0].trim().length() <= 0) {
-                throw new CommandArityException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
+                throw new CommandArityException("The description of a " + command + " cannot be empty.");
             } else if (argArr.length == 1) {
-                throw new CommandArityException("☹ OOPS!!! The date of a " + command + " cannot be empty.");
+                throw new CommandArityException("The date of a " + command + " cannot be empty.");
             }
             return new String[]{command, argArr[0].trim(), argArr[1].trim()};
         }

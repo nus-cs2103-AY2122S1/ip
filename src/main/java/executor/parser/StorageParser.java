@@ -32,7 +32,7 @@ public class StorageParser {
                     .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             return new Event(description, isDone, parsedTime);
         } else {
-         throw new ParserException("Oops! Unable to parse line from storage. Is storage corrupted?");
+         throw new ParserException("Unable to parse line from storage. Is storage corrupted?");
         }
     }
 }
