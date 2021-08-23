@@ -1,3 +1,7 @@
+package duke;
+import command.*;
+import task.*;
+import duke_exception.*;
 public class Duke {
 
     private Storage storage;

@@ -1,3 +1,5 @@
+package command;
+import task.*;
 public abstract class AddCommand extends Command {
 
     @Override

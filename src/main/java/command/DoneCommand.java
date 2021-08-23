@@ -1,3 +1,7 @@
+package command;
+import task.*;
+import duke.*;
+
 public class DoneCommand extends Command {
 
     private int doneIndex;

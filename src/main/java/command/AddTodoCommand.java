@@ -1,3 +1,7 @@
+package command;
+import task.*;
+import duke.*;
+
 public class AddTodoCommand extends AddCommand {
 
     private String desc;

@@ -1,3 +1,7 @@
+package command;
+import task.*;
+import duke.*;
+
 public class DeleteCommand extends Command {
 
     private int deleteIndex;
@@ -7,7 +11,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.get(deleteIndex);
         tasks.delete(deleteIndex);
         int numOfTasks = tasks.size();
@@ -19,7 +23,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 

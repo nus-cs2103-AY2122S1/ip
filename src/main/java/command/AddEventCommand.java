@@ -1,24 +1,27 @@
+package command;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import task.*;
+import duke.*;
 
-public class AddDeadlineCommand extends AddCommand {
+public class AddEventCommand extends AddCommand {
 
     private String desc;
-    private LocalDate by;
+    private LocalDate at;
 
-    public AddDeadlineCommand(String desc, String by) {
+    public AddEventCommand(String desc, String at) {
         this.desc = desc;
-        this.by = LocalDate.parse(by);
+        this.at = LocalDate.parse(at);
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         // tasks
-        Deadline newDeadline = new Deadline(desc, by);
-        tasks.add(newDeadline);
+        Event newEvent = new Event(desc, at);
+        tasks.add(newEvent);
         // ui
-        String response = respond(newDeadline, tasks.size());
+        String response = respond(newEvent, tasks.size());
         ui.showResponse(response);
         // storage
         storage.save(tasks);

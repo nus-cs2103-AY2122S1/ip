@@ -1,7 +1,11 @@
+package command;
+import task.*;
+import duke.*;
+
 public class ExitCommand extends Command {
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         // perform saving of taskList to disk here
         storage.save(tasks);
 
@@ -10,7 +14,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return true;
     }
 
