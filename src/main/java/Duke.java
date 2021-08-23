@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -9,12 +10,14 @@ public class Duke {
      * Field for duke to keep track of task list.
      */
     private TaskList taskList;
+    private FileManager fileManager;
 
     /**
      * Constructor for Duke
      */
-    public Duke(TaskList taskList) {
+    public Duke(TaskList taskList, FileManager fileManager) {
         this.taskList = taskList;
+        this.fileManager = fileManager;
     }
 
     /**
@@ -162,6 +165,7 @@ public class Duke {
                             " ", this.taskList.status())
             );
             divider();
+            fileManager.addTaskToFile(newTask);
         } catch (DukeException e) {
             divider();
             System.out.println(String.format("%4s%s",
@@ -179,12 +183,14 @@ public class Duke {
         boolean isValid = this.taskList.isValidTaskIndex(index);
         divider();
         if (isValid) {
+            String toUpdate = this.taskList.getTask(index).toString();
             Task task = this.taskList.markTaskAsCompleted(index);
             Commands.DONE.printCommand();
             System.out.println(
                     String.format("%6s%s\n%4s%s", " ", task,
                             " ", this.taskList.status())
             );
+            fileManager.markTaskAsCompleted(task.toString(), toUpdate);
         } else {
             throw new DukeException("There is no such task.");
         }
@@ -207,16 +213,21 @@ public class Duke {
                     String.format("%6s%s\n%4s%s", " ", task,
                             " ", taskList.status())
             );
+            fileManager.deleteTaskFromFile(this.taskList);
         } else {
             throw new DukeException("There is no such task.");
         }
         divider();
     }
 
+
     /**
      * Runs the Duke chatbot.
      */
     private void run() {
+
+        this.taskList = fileManager.loadData(this.taskList);
+
         // Greeting the user
         greet();
 
@@ -266,7 +277,21 @@ public class Duke {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke(new TaskList());
+        String directoryPath = "./data";
+        String filePath = "./data/duke.text";
+        File directory = new File(directoryPath);
+        System.out.println(directory.getAbsolutePath());
+        // Check folder exists
+        if (!directory.exists()) {
+            boolean created = directory.mkdirs();
+            if (created) {
+                System.out.println("Successfully created directory.");
+            } else {
+                System.out.println("An error occurred");
+            }
+        }
+
+        Duke duke = new Duke(new TaskList(), new FileManager(filePath));
         duke.run();
     }
 }
