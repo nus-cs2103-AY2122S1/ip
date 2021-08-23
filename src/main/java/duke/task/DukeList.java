@@ -171,7 +171,11 @@ public class DukeList {
         System.out.println(response + task.toString() + taskCount);
     }
 
-
+    /**
+     * Finds all tasks in list with the input keyword.
+     *
+     * @param input User input keyword.
+     */
     public void find(String input) {
         String trimmedInput = input.trim();
         String str = "";
