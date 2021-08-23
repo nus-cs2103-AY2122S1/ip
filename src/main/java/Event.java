@@ -18,6 +18,10 @@ public class Event extends Task{
     }
 
     public String getSaveFormat() {
-        return String.format("%s|%s", super.getSaveFormat(), this.time);
+        return String.format(
+                "%s|%s",
+                super.getSaveFormat(),
+                DukeDate.formatDateSave(this.time)
+        );
     }
 }

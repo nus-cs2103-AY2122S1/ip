@@ -25,6 +25,11 @@ public class DukeDate {
         }
     }
 
+    public static String formatDateSave(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateInputFormat);
+        return formatter.format(date);
+    }
+
     public static String formatDateOutput(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateOutputFormat, Locale.US);
         return formatter.format(date);

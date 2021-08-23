@@ -5,14 +5,6 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.File;
 
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
-import java.util.Scanner;
-import java.lang.StringBuilder;
-
 public class Duke {
     private enum TaskType {
         TODO,
@@ -151,10 +143,30 @@ public class Duke {
                     tList.addTask(new ToDo(taskInfo[2],taskInfo[1] == "c"));
                     break;
                 case "D":
-                    tList.addTask(new Deadline(taskInfo[2], taskInfo[3], taskInfo[1] == "c"));
+                    try {
+                        tList.addTask(
+                                new Deadline(
+                                        taskInfo[2],
+                                        DukeDate.parseDateInput(taskInfo[3]),
+                                        taskInfo[1].equals("c")
+                                )
+                        );
+                    } catch (DukeArgumentException e) {
+                        printLine(e.getMessage());
+                    }
                     break;
                 case "E":
-                    tList.addTask(new Event(taskInfo[2], taskInfo[3], taskInfo[1] == "c"));
+                    try {
+                        tList.addTask(
+                                new Event(
+                                        taskInfo[2],
+                                        DukeDate.parseDateInput(taskInfo[3]),
+                                        taskInfo[1].equals("c")
+                                )
+                        );
+                    } catch (DukeArgumentException e) {
+                        printLine(e.getMessage());
+                    }
                     break;
                 default:
                     return "you may have a corrupted/edited save file. Tasks partially loaded";
