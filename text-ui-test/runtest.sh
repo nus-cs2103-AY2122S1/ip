@@ -12,6 +12,12 @@ then
     rm ACTUAL.TXT
 fi
 
+# delete stored tasks from previous run
+if [ -e "./data/tasks.txt" ]
+then
+    rm ./data/tasks.txt
+fi
+
 # compile the code into the bin folder, terminates if error occurred
 find ../src/main/java/*/*.java  > sources.txt
 
@@ -25,8 +31,8 @@ fi
 java -classpath ../bin Duke < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
-cp EXPECTED.TXT EXPECTED-UNIX.TXT
-dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
+#cp EXPECTED.TXT EXPECTED-UNIX.TXT
+#dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 
 # compare the output to the expected output
 diff ACTUAL.TXT EXPECTED-UNIX.TXT
