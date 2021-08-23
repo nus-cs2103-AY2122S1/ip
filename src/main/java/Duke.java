@@ -202,8 +202,8 @@ public class Duke {
      * @param input The deadline inputted by the user.
      */
     public static void addDeadline(String input)
-            throws MissingTaskException, MissingTimeException {
-        int separation = input.indexOf("/by");
+            throws MissingTaskException, MissingTimeException, InvalidDateFormatException {
+        int separation = input.indexOf(" /by ");
 
         if (separation == -1) {
             throw new MissingTimeException("Time not found");
@@ -212,13 +212,14 @@ public class Duke {
         if (separation < 11) {
             throw new MissingTaskException("Task not found");
         }
-        String taskName = input.substring(9, separation - 1);
 
-        if (input.substring(separation + 4).length() < 1) {
+        String taskName = input.substring(9, separation);
+
+        if (input.substring(separation + 6).length() < 1) {
             throw new MissingTimeException("Time not found");
         }
 
-        String time = input.substring(separation + 4);
+        String time = input.substring(separation + 5);
         taskList.add(new Deadline(taskName, time));
         printTaskAdded(taskName);
     }
@@ -229,8 +230,9 @@ public class Duke {
      * @param input The event inputted by the user.
      */
     public static void addEvent(String input)
-            throws MissingTaskException, MissingTimeException {
-        int separation = input.indexOf("/at");
+            throws MissingTaskException, MissingTimeException, InvalidDateFormatException {
+        int separation = input.indexOf(" /at ");
+
         if (separation == -1) {
             throw new MissingTimeException("Time not found");
         }
@@ -238,13 +240,13 @@ public class Duke {
         if (separation < 8) {
             throw new MissingTaskException("Task not found");
         }
-        String taskName = input.substring(6, separation - 1);
+        String taskName = input.substring(6, separation);
 
-        if (input.substring(separation + 4).length() < 1) {
+        if (input.substring(separation + 6).length() < 1) {
             throw new MissingTimeException("Time not found");
         }
 
-        String time = input.substring(separation + 4);
+        String time = input.substring(separation + 5);
         taskList.add(new Event(taskName, time));
         printTaskAdded(taskName);
     }

@@ -3,7 +3,7 @@
  */
 public class MissingTimeException extends DukeException {
     /***
-     * Constructor to create a Duke exception.
+     * Constructor to create a missing time exception.
      *
      * @param msg The error message of the exception.
      */
