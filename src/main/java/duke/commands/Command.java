@@ -6,7 +6,7 @@ import duke.DukeException;
 import duke.Item;
 
 public abstract class Command {
-    public abstract void execute(LinkedList<Item> itemList);
+    public abstract void execute(LinkedList<Item> itemList) throws DukeException;
 
     public abstract void parseLine(String line) throws DukeException;
 

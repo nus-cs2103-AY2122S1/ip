@@ -27,7 +27,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(LinkedList<Item> itemList) {
+    public void execute(LinkedList<Item> itemList) throws DukeException {
         ArrayList<String> printBuffer = new ArrayList<>();
         printBuffer.add("Got it. I've added this task:");
         Deadline toAdd = new Deadline(this.content, this.time);

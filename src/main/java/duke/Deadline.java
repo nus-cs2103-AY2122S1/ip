@@ -1,11 +1,23 @@
 package duke;
 
-public class Deadline extends Item {
-    private String time;
+import java.lang.NumberFormatException;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String name, String time) {
+public class Deadline extends Item {
+    private LocalDate time;
+    private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+
+    public Deadline(String name, String date) throws DukeException {
         super(name);
-        this.time = time;
+        String[] dateArgs = date.split("-");
+        try {
+            this.time = LocalDate.of(Integer.valueOf(dateArgs[0]),
+                Integer.valueOf(dateArgs[1]), Integer.valueOf(dateArgs[2]));
+        } catch (NumberFormatException | DateTimeException e) {
+            throw new DukeException("please use format yyyy-mm-dd");
+        }
     }
 
     @Override
@@ -15,6 +27,6 @@ public class Deadline extends Item {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + time + ")";
+        return "[D]" + super.toString() + " (by: " + this.time.format(dateFormat) + ")";
     }
 }

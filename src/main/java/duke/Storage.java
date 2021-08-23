@@ -78,14 +78,14 @@ public class Storage {
                     break;
                 }
 
-                if (currArgs[1] == "X") {
+                if (currArgs[1].equals("X")) {
                     toAdd.markAsDone();
                 }
 
                 itemList.add(toAdd);
             }
             fileReader.close();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | DukeException e) {
             e.printStackTrace();
         }
         return itemList;
