@@ -1,11 +1,14 @@
 package Duke.ui;
 
+import java.util.Scanner;
 import Duke.task.TaskList;
 import Duke.task.Task;
 
 public class UI {
     protected static String greetingText = "Hello! I'm Duke\nWhat can I do for you?\n";
     protected static String byeText = "Bye. Hope to see you again soon!";
+
+    protected static Scanner scanner = new Scanner(System.in);
 
     private static String formatWithSpace(String text){
         return "\n" + text + "\n";
@@ -53,6 +56,11 @@ public class UI {
                     + task
                     + listTaskAmount(list.getTaskAmount())));
 
+    }
+
+    public static String getUserInput(){
+        String input = scanner.nextLine();
+        return input;
     }
 
 }

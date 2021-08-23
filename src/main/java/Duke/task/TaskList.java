@@ -37,12 +37,12 @@ public class TaskList {
         }
     }
 
-    public void deleteTask(int taskPos) throws NoSuchTaskException {
+    public Task deleteTask(int taskPos) throws NoSuchTaskException {
 
         if(taskPos >= 0 && taskPos < list.size()) {
             Task temp = list.get(taskPos);
             list.remove(taskPos);
-            UI.printTaskDeleted(temp, this);
+            return temp;
         }else{
             throw new NoSuchTaskException();
         }
