@@ -23,7 +23,6 @@ public class Yoyo {
         DEADLINE
     }
 
-
     /**
      * Exception class for command with invalid format .
      */
@@ -52,6 +51,15 @@ public class Yoyo {
     }
 
     /**
+     * Exception class for invalid task index.
+     */
+    private static class YoyoTaskIndexException extends IOException {
+        YoyoTaskIndexException(String message) {
+            super(message);
+        }
+    }
+
+    /**
      * Exception class for empty command.
      */
     private static class YoyoEmptyCommandException extends IOException {
@@ -61,11 +69,8 @@ public class Yoyo {
     }
 
     public static void main(String[] args) {
-        String greetings = "Hello! I'm Yoyo.\n"
-                + "What can I do for you?";
-        outputWrapper();
-        System.out.println(greetings);
-        outputWrapper();
+        Ui ui = new Ui();
+        ui.greetUser();
         File f = new File(DATAPATH);
 
         try {
@@ -108,36 +113,20 @@ public class Yoyo {
                         System.out.println("Something went wrong while creating file writer:\n"
                                 + e.getMessage());
                     }
-                    outputWrapper();
-                    System.out.println("Bye. Hope to see you again soon!");
-                    outputWrapper();
+                    ui.sayGoodbye();
                     break;
                 } else if (command.equals("list")) {
                     int currListLength = tasks.size();
-                    outputWrapper();
-                    if (currListLength == 0) {
-                        System.out.println("You have no task at the moment.");
-                    } else {
-                        for (int i = 0; i < currListLength; i++) {
-                            System.out.println(i + 1 + "." + tasks.get(i).showStatus());
-                        }
-                    }
-                    outputWrapper();
+                    ui.printTaskList(tasks);
                 } else {
                     if (command.equals("done")) {
                         checkCompleteCommand(inputTokens);
                         try {
                             int taskIndex = Integer.parseInt(inputTokens[1]) - 1;
                             tasks.get(taskIndex).toggleDone();
-                            outputWrapper();
-                            System.out.println("Nice! I've marked this task as done:\n"
-                                    + tasks.get(taskIndex).showStatus());
-                            outputWrapper();
+                            ui.printMarkTaskMessage(tasks, taskIndex);
                         } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
-                            outputWrapper();
-                            System.out.println("Please enter a valid index!");
-                            outputWrapper();
-
+                            throw new YoyoTaskIndexException("Please enter A valid task index!");
                         }
                     } else if (command.equals("delete")) {
                         checkCompleteCommand(inputTokens);
@@ -145,17 +134,9 @@ public class Yoyo {
                             int taskIndex = Integer.parseInt(inputTokens[1]) - 1;
                             Task toRemove = tasks.get(taskIndex);
                             tasks.remove(taskIndex);
-                            outputWrapper();
-                            System.out.println("Noted. I've removed this task:\n"
-                                    + toRemove.showStatus()
-                                    + "\nNow you have "
-                                    + tasks.size()
-                                    + " tasks in the list.");
-                            outputWrapper();
+                            ui.printRemoveTaskMessage(toRemove, tasks);
                         } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
-                            outputWrapper();
-                            System.out.println("Please enter a valid index!");
-                            outputWrapper();
+                            throw new YoyoTaskIndexException("Please enter A valid task index!");
                         }
 
                     } else {
@@ -163,7 +144,7 @@ public class Yoyo {
                             checkCompleteCommand(inputTokens);
                             Task newTask = new Todo(inputTokens[1]);
                             tasks.add(newTask);
-                            printAddMessage(newTask);
+                            ui.printAddMessage(newTask, tasks);
                         } else if (command.equals("event")) {
                             checkCompleteCommand(inputTokens);
                             String[] taskInfo = inputTokens[1].split(" /at ");
@@ -174,7 +155,7 @@ public class Yoyo {
                                 LocalDateTime datetime = parseTimeString(taskInfo[1]);
                                 Task newTask = new Event(taskInfo[0], datetime);
                                 tasks.add(newTask);
-                                printAddMessage(newTask);
+                                ui.printAddMessage(newTask, tasks);
                             }
                         } else if (command.equals("deadline")) {
                             checkCompleteCommand(inputTokens);
@@ -186,7 +167,7 @@ public class Yoyo {
                                 LocalDateTime datetime = parseTimeString(taskInfo[1]);
                                 Task newTask = new Deadline(taskInfo[0], datetime);
                                 tasks.add(newTask);
-                                printAddMessage(newTask);
+                                ui.printAddMessage(newTask, tasks);
                             }
                         } else {
                             throw new YoyoCommandNotFoundException("Yoyo doesn't understand what you mean :-(");
@@ -198,10 +179,9 @@ public class Yoyo {
 
 
             } catch (YoyoCommandNotFoundException | YoyoIncompleteCommandException
-                        | YoyoEmptyCommandException | YoyoInvalidFormatException e) {
-                outputWrapper();
-                System.out.println(e.getMessage());
-                outputWrapper();
+                    | YoyoEmptyCommandException | YoyoInvalidFormatException
+                    | YoyoTaskIndexException e) {
+                ui.printErrorMessage(e);
             }
         }
     }
@@ -279,20 +259,7 @@ public class Yoyo {
         return result;
     }
 
-    /**
-     * prints success message for adding task.
-     *
-     * @param newTask The task that has been created.
-     */
-    private static void printAddMessage(Task newTask) {
-        outputWrapper();
-        System.out.print("Got it. I've added this task:\n   "
-                + newTask.showStatus()
-                + "\nNow you have "
-                + tasks.size()
-                + " tasks in the list.\n");
-        outputWrapper();
-    }
+
 
     /**
      * Checks user input for incomplete commands.
@@ -306,10 +273,6 @@ public class Yoyo {
         }
     }
 
-    /**
-     * Prints a decoration line for output.
-     */
-    private static void outputWrapper() {
-        System.out.println("============================================================");
-    }
+
+
 }
