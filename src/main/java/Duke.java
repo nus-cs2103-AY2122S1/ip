@@ -206,10 +206,17 @@ public class Duke {
                         text += "T ~ " + doneStr + " ~ " + task.newTask + "\n";
                     } else if (task instanceof Deadline) {
                         Deadline dl = (Deadline) task;
+<<<<<<< HEAD
                         text += "D ~ " + doneStr + " ~ " + task.newTask + " ~ " + dl.deadLine + "\n";
                     } else if (task instanceof Event) {
                         Event ev = (Event) task;
                         text += "D ~ " + doneStr + " ~ " + task.newTask + " ~ " + ev.timing + "\n";
+=======
+                        text += "D ~ " + doneStr + " ~ " + task.newTask + " ~ " + dl.getDeadLine() + "\n";
+                    } else if (task instanceof Event) {
+                        Event ev = (Event) task;
+                        text += "E ~ " + doneStr + " ~ " + task.newTask + " ~ " + ev.getEvent() + "\n";
+>>>>>>> parent of d00a2f9 (Add indents.)
                     } else {
                         text += doneStr + " ~ " + task.newTask + "\n";
                     }
