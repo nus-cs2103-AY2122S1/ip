@@ -1,4 +1,8 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class Event extends Task {
+    private static final String TASK_TYPE = "E";
     private String at;
 
     /**
@@ -19,6 +23,18 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E] " + super.toString() + " (at: " + this.at + ")";
+        return super.toString() + " (at: " + this.at + ")";
+    }
+
+    @Override
+    protected String toSavableFormat() {
+        String isDone = Parser.parseIsDoneToString(this.isDone());
+        List<String> stringList = Arrays.asList(TASK_TYPE, isDone, this.getDescription(), this.at);
+        return String.join(Duke.DELIMITER, stringList);
+    }
+    
+    @Override
+    protected String getTaskType() {
+        return TASK_TYPE;
     }
 }

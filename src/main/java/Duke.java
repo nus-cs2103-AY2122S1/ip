@@ -1,6 +1,10 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
+    protected static final String FILE_PATH = "data/duke.txt";
+    protected static final String DELIMITER = " | ";
     private static final String ROBOT_EMOJI = "\uD83E\uDD16";
     private static final String COLOR_CYAN = "\u001B[36m";
     private static final String COLOR_RED = "\u001B[91m";
@@ -11,19 +15,42 @@ public class Duke {
         + "| | | | | | | |/ / _ \\\n"
         + "| |_| | |_| |   <  __/\n"
         + "|____/ \\__,_|_|\\_\\___|\n";
-
-    /**
-     * Starts the bot
-     *
-     * @param args CLI commands (not used for now)
-     */
+    private TaskList tasks;
+    
+    private Duke() {
+        File file = new File(FILE_PATH);
+        printLogo();
+        print("Initializing Duke...");
+        try {
+            if (file.exists()) {
+                // if file exists, we initialize the task list with the existing saved tasks
+                this.tasks = Parser.parseTxtFile(file);
+            } else {
+                // if file does not exist, we initialize an empty task list, and create a new text file.
+                this.tasks = new TaskList();
+                file.getParentFile().mkdir(); // creates /data/ directory if it does not exist.
+                file.createNewFile();
+            }
+            
+            print("Initialized!");
+            this.tasks.printAllTasks();
+            print("Hi, im Duke!");
+            print("What can i do for you?");
+        } catch (IOException | UnableToParseException e) {
+            printErr("Unable to initialize duke:");
+            System.out.println("\t" + COLOR_RED + e.getMessage() + COLOR_RESET);
+            printErr("exiting...");
+            System.exit(1);
+        }
+        
+    }
+    
     public static void main(String[] args) {
-        printIntro();
-        handleCommands();
+        Duke duke = new Duke();
+        duke.run();
     }
 
-    private static void handleCommands() {
-        TaskList tasks = new TaskList();
+    private void run() {
         Scanner sc = new Scanner(System.in);
         
         while (true) {
@@ -82,18 +109,10 @@ public class Duke {
             } catch (InvalidTaskSelectedException
                     | InvalidArgumentsException
                     | UnableToParseException
-                    | NoTasksException e) {
+                    | IOException e) {
                 printErr(e.getMessage());
             }
         }
-    }
-    
-    private static void printIntro() {
-        // print logo
-        System.out.println(COLOR_CYAN + LOGO + COLOR_RESET);
-        
-        print("Hello! I'm Duke");
-        print("What can I do for you?");
     }
     
     protected static void printErr(String string) {
@@ -102,5 +121,9 @@ public class Duke {
 
     protected static void print(String string) {
         System.out.println(ROBOT_EMOJI + ": " + string);
+    }
+    
+    private static void printLogo() {
+        System.out.println(COLOR_CYAN + LOGO + COLOR_RESET);
     }
 }

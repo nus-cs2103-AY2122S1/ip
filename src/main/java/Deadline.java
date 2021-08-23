@@ -1,4 +1,8 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class Deadline extends Task {
+    private static final String TASK_TYPE = "D";
     private String by;
 
     /**
@@ -19,6 +23,18 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + this.by + ")";
+        return super.toString() + " (by: " + this.by + ")";
+    }
+
+    @Override
+    protected String toSavableFormat() {
+        String isDone = Parser.parseIsDoneToString(this.isDone());
+        List<String> stringList = Arrays.asList(TASK_TYPE, isDone, this.getDescription(), this.by);
+        return String.join(Duke.DELIMITER, stringList);
+    }
+    
+    @Override
+    protected String getTaskType() {
+        return TASK_TYPE;
     }
 }

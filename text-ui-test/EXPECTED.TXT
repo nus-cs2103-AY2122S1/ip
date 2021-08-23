@@ -4,9 +4,12 @@
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 [0m
-🤖: Hello! I'm Duke
-🤖: What can I do for you?
-🤖: [91mNo tasks added yet![0m
+🤖: Initializing Duke...
+🤖: Initialized!
+🤖: You have no tasks in your list.
+🤖: Hi, im Duke!
+🤖: What can i do for you?
+🤖: You have no tasks in your list.
 🤖: [91mInvalid arguments! Please use the command in the following format: "todo [task]"[0m
 🤖: [91mInvalid arguments! Please use the command in the following format: "deadline [task] /by [time]"[0m
 🤖: [91mInvalid arguments! Please use the command in the following format: "event [task] /at [time period]"[0m

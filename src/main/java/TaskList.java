@@ -1,13 +1,22 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
 
     /**
-     * Constructor of the TaskList class
+     * Constructor of the TaskList class.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
+    }
+
+    /**
+     * Constructor of the TaskList class, initialized with existing tasks.
+     * @param tasks the tasks to be initialized with.
+     */
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     protected void delete(String id) throws UnableToParseException, InvalidTaskSelectedException {
@@ -21,48 +30,53 @@ public class TaskList {
         System.out.println("\t" + task);
         printNumOfTasks();
     }
-
-    protected void markTaskDone(String id) throws UnableToParseException, InvalidTaskSelectedException {
+    
+    protected void markTaskDone(String id) throws UnableToParseException, InvalidTaskSelectedException, IOException {
         int index = Parser.parseTaskId(id) - 1;
         if (index < 0 || index >= this.tasks.size()) {
             throw new InvalidTaskSelectedException();
         }
         Task task = this.tasks.get(index);
         task.markAsDone();
-
+        task.updateToFile(index); // persist to file
+        
         Duke.print("Nice! I've marked this task as done:");
         System.out.println("\t" + task);
     }
 
-    protected void addTodo(String description) {
+    protected void addTodo(String description) throws IOException {
         Todo todo = new Todo(description);
         this.tasks.add(todo);
-
+        todo.appendToFile();
+        
         printTaskAdded(todo);
         printNumOfTasks();
     }
 
-    protected void addDeadline(String args) throws InvalidArgumentsException {
+    protected void addDeadline(String args) throws InvalidArgumentsException, IOException {
         String[] splitArgs = Parser.parseDeadline(args);
         Deadline deadline = new Deadline(splitArgs[0], splitArgs[1]);
         this.tasks.add(deadline);
+        deadline.appendToFile();
 
         printTaskAdded(deadline);
         printNumOfTasks();
     }
 
-    protected void addEvent(String args) throws InvalidArgumentsException {
+    protected void addEvent(String args) throws InvalidArgumentsException, IOException {
         String[] splitArgs = Parser.parseEvent(args);
         Event event = new Event(splitArgs[0], splitArgs[1]);
         this.tasks.add(event);
+        event.appendToFile();
 
         printTaskAdded(event);
         printNumOfTasks();
     }
 
-    protected void printAllTasks() throws NoTasksException {
+    protected void printAllTasks() {
         if (tasks.size() == 0) {
-            throw new NoTasksException();
+            Duke.print("You have no tasks in your list.");
+            return;
         }
 
         Duke.print("Here are the tasks in your list:");
