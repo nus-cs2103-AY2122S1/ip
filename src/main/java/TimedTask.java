@@ -12,11 +12,11 @@ public abstract class TimedTask extends Task {
         switch (keyword) {
         case "deadline":
             inputs = inputs[1].split(" /by ", 2);
-            InputChecker.checkMissingArguments(inputs, "Please specify the date & time of your deadline.\n");
+            Parser.checkMissingArguments(inputs, "Please specify the date & time of your deadline.");
             return new Deadline(inputs[0], inputs[1]);
         case "event":
             inputs = inputs[1].split(" /at ", 2);
-            InputChecker.checkMissingArguments(inputs, "Please specify the date & time of your event.\n");
+            Parser.checkMissingArguments(inputs, "Please specify the date & time of your event.");
             return new Event(inputs[0], inputs[1]);
         default:
             throw new InvalidArgumentException();

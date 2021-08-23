@@ -1,28 +1,26 @@
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Optional;
 
-public class LocalDateTimeOrString {
-    private Optional<LocalDateTime> dateTime = Optional.empty();
-    private Optional<String> dateTimeString = Optional.empty();
+public class LocalDateTimeOrString implements Serializable {
+    private LocalDateTime dateTime;
+    private String dateTimeString;
 
     private static final DateTimeFormatter IN_FORMATTER = DateTimeFormatter
             .ofPattern("" + "[dd-MM-yyyy HHmm]" + "[dd/MM/yyyy HHmm]");
     private static final DateTimeFormatter OUT_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a");
-    private static final String INVALID_DATE = "Invalid date pattern.";
 
     public LocalDateTimeOrString(String dateTimeInput) {
         try {
-            LocalDateTime parsedDateTime = LocalDateTime.parse(dateTimeInput, IN_FORMATTER);
-            dateTime = Optional.ofNullable(parsedDateTime);
+            dateTime = LocalDateTime.parse(dateTimeInput, IN_FORMATTER);
         } catch (DateTimeParseException e) {
-            dateTimeString = Optional.ofNullable(dateTimeInput);
+            dateTimeString = dateTimeInput;
         }
     }
 
     protected String getDateTimeDesc() {
-        return dateTime.map(x -> OUT_FORMATTER.format(x)).or(() -> dateTimeString).orElse(INVALID_DATE);
+        return (dateTime != null) ? OUT_FORMATTER.format(dateTime) : dateTimeString;
     }
 
     @Override
