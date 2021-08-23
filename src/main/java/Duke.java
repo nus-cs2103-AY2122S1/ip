@@ -1,4 +1,6 @@
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,6 +18,7 @@ public class Duke {
 
     public static ArrayList<Task> readTask(File taskFile) {
         ArrayList<Task> tasks = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy HHmm");
         try {
             Scanner fileScanner = new Scanner(taskFile);
             while (fileScanner.hasNextLine()) {
@@ -29,13 +32,15 @@ public class Duke {
 
                     case 'D': {
                         int index = current.indexOf("by");
-                        currentTask = new Deadline(current.substring(7, index - 2), current.substring(index + 4, current.length() - 1));
+                        LocalDateTime by = LocalDateTime.parse(current.substring(index + 4, current.length() - 1), formatter);
+                        currentTask = new Deadline(current.substring(7, index - 2), by);
                         break;
                     }
 
                     case 'E': {
                         int index = current.indexOf("at");
-                        currentTask = new Event(current.substring(7, index - 2), current.substring(index + 4, current.length() - 1));
+                        LocalDateTime at = LocalDateTime.parse(current.substring(index + 4, current.length() - 1), formatter);
+                        currentTask = new Event(current.substring(7, index - 2), at);
                         break;
                     }
                 }
@@ -107,7 +112,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        File taskFile = new File("../data/duke.txt");
+        File taskFile = new File("data/duke.txt");
         if (!taskFile.exists()) {
             try {
                 if (taskFile.getParentFile().mkdirs()) {
@@ -174,7 +179,6 @@ public class Duke {
                                     int taskNo = Integer.parseInt(description);
                                     Task deletedTask = task.get(taskNo - 1);
                                     task.remove(taskNo - 1);
-                                    System.out.println(deletedTask.toString());
                                     deleteTask(taskFile, deletedTask.toString());
                                     System.out.printf("Noted. I've removed this task:\n  %s\nNow you have %d task(s) in the list.%n",
                                             deletedTask, task.size());
