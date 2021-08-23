@@ -23,4 +23,10 @@ public class Deadline extends Task {
                 + this.deadline
                 + ")";
     }
+
+    @Override
+    public String toTextRepresentation() {
+        String binaryStatus = this.status ? "1" : "0";
+        return String.format("D; %s; %s; %s", binaryStatus, this.description.strip(), this.deadline.strip());
+    }
 }

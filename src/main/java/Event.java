@@ -7,6 +7,8 @@
  * 
  */
 
+import java.time.LocalDateTime;
+
 public class Event extends Task {
     protected String timing;
 
@@ -23,5 +25,11 @@ public class Event extends Task {
                 + " (at: "
                 + this.timing
                 + ")";
+    }
+
+    @Override
+    public String toTextRepresentation() {
+        String binaryStatus = this.status ? "1" : "0";
+        return String.format("E; %s; %s; %s", binaryStatus, this.description.strip(), this.timing.strip());
     }
 }

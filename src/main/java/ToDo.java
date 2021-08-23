@@ -15,5 +15,11 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
-    }    
+    }
+
+    @Override
+    public String toTextRepresentation() {
+        String binaryStatus = this.status ? "1" : "0";
+        return String.format("T; %s; %s", binaryStatus, this.description.strip());
+    }
 }

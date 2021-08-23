@@ -5,7 +5,7 @@
  * @version CS2103, AY21/222 Semester 1
  * 
  */
-public class Task {
+abstract public class Task {
     protected String description;
     protected Boolean status;
 
@@ -48,4 +48,6 @@ public class Task {
     public String toString() {
         return this.getStatusString() + " " + this.getDescription();
     }
+
+    abstract public String toTextRepresentation();
 }
