@@ -1,8 +1,10 @@
-todo make personal website
-deadline ip stuff /by 19 aug or something
-todo collect merch
-event birthday /at secret
+clear
+todo thing1
+todo thing2
 list
-done 4
+event event1 /at 2021-10-02
+deadline deadline1 /by 2021-12-11
+list
+done 3
 list
 bye
