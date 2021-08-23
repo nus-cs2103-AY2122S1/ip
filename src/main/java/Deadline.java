@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Class that encapsulates a Deadline task.
  */
@@ -5,7 +7,7 @@ public class Deadline extends Task {
     /**
      * String that indicates the deadline for the task.
      */
-    protected String deadline;
+    protected LocalDate deadline;
 
     /**
      * Public constructor to create a Deadline task
@@ -13,7 +15,7 @@ public class Deadline extends Task {
      * @param description Description of the deadline task.
      * @param deadline Deadline to complete task by.
      */
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, LocalDate deadline) {
         super(description);
         this.deadline = deadline;
     }

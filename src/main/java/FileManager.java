@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class FileManager {
     private String filePath;
@@ -28,7 +29,7 @@ public class FileManager {
 
                 String description = parseDescription(task);
                 Task newTask;
-                String time;
+                LocalDate time;
                 switch (type) {
                 case 'T':
                     newTask = new ToDo(description);
@@ -41,6 +42,7 @@ public class FileManager {
                     break;
                 case 'E':
                     time = parseTime(task, "at: ");
+                    System.out.println(time);
                     newTask = new Event(description, time);
                     taskList = loadTasks(newTask, taskList, isCompleted);
                     break;
@@ -64,13 +66,14 @@ public class FileManager {
         return taskList.add(task);
     }
 
-    private String parseTime(String task, String command) throws DukeException {
+    private LocalDate parseTime(String task, String command) throws DukeException {
         int timeIndex = task.indexOf(command);
         if (timeIndex < 0) {
             throw new DukeException("Invalid Task");
         }
-        String time = task.substring(timeIndex + command.length(),
+        String timeDescription = task.substring(timeIndex + command.length(),
                 task.indexOf(')'));
+        LocalDate time = LocalDate.parse(timeDescription);
         return time;
     }
 
@@ -111,13 +114,14 @@ public class FileManager {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line;
-            String oldContent = "";
+            String newContent = "";
             while((line = reader.readLine()) != null) {
-                oldContent += line + System.lineSeparator();
+                if (line.compareTo(toUpdate) == 0) {
+                    line = task;
+                }
+                newContent += line + System.lineSeparator();
             }
 
-            // Error here : Not replacing content
-            String newContent = oldContent.replace(toUpdate, task);
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             writer.write(newContent);
             reader.close();

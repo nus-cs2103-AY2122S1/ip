@@ -1,4 +1,6 @@
-import java.io.*;
+import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -113,7 +115,6 @@ public class Duke {
                     " ", e.getMessage()));
             divider();
         }
-
     }
 
     /**
@@ -134,7 +135,13 @@ public class Duke {
             String taskType = command.substring(0, indexOfFirstSpace);
             String description = command.substring(indexOfFirstSpace + 1);
 
+            String customPattern ="dd-MM-yyyy";
+            DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern(customPattern);
+            DateTimeManager dateTimeManager = new DateTimeManager(customFormatter);
+
             Task newTask;
+            String dateTime;
+            LocalDate date;
 
             switch (taskType) {
                 case "todo":
@@ -142,13 +149,17 @@ public class Duke {
                     break;
                 case "deadline":
                     int deadlineIndex = description.indexOf("/by");
+                    dateTime = description.substring(deadlineIndex + 4);
+                    date = dateTimeManager.parseDateTime(dateTime);
                     newTask = new Deadline(description.substring(0, deadlineIndex),
-                            description.substring(deadlineIndex + 4));
+                            date);
                     break;
                 case "event":
                     int timeIndex = description.indexOf("/at");
+                    dateTime = description.substring(timeIndex + 4);
+                    date = dateTimeManager.parseDateTime(dateTime);
                     newTask = new Event(description.substring(0, timeIndex),
-                            description.substring(timeIndex + 4));
+                            date);
                     break;
                 default:
                     throw new DukeException(

@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Class that encapsulates an Event task.
  */
@@ -5,7 +7,7 @@ public class Event extends Task {
     /**
      * String that indicates the time of the event.
      */
-    protected String timeOfEvent;
+    protected LocalDate timeOfEvent;
 
     /**
      * Public constructor to create an Event task
@@ -13,7 +15,7 @@ public class Event extends Task {
      * @param description Description of the event.
      * @param timeOfEvent Time of the event.
      */
-    public Event(String description, String timeOfEvent) {
+    public Event(String description, LocalDate timeOfEvent) {
         super(description);
         this.timeOfEvent = timeOfEvent;
     }
