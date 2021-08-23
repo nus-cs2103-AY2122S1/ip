@@ -4,7 +4,8 @@ import java.util.Scanner;
 public class Duke {
 
     public static void main(String[] args) {
-        ArrayList<Task> task = new ArrayList<>();
+        Database database = new Database();
+        ArrayList<Task> task = database.getData();
         int taskNum = 0;
         String indentation = "       ";
         String Horizontal_line = "---------------------------------------------------------------";
