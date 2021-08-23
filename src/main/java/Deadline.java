@@ -1,14 +1,16 @@
 public class Deadline extends Task {
     private String timeDue;
 
-    public Deadline(String s, String timeDue) {
-        super(s, TypeIndicators.DEADLINE);
+    public Deadline(String title, String timeDue) {
+        super(title, TypeIndicators.DEADLINE);
         this.timeDue = timeDue;
     }
 
-//    public Deadline createDeadlineWithDetail(String title, String timeDue, boolean isDone) {
-//        Deadline deadline = new Deadline(title)
-//    }
+    public Deadline(String title, String timeDue, boolean isDone) {
+        super(title, TypeIndicators.DEADLINE);
+        this.timeDue = timeDue;
+        this.isDone = isDone;
+    }
 
     /**
      * Returns the string representation of a Deadline.
