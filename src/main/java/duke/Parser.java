@@ -2,17 +2,33 @@ package duke;
 
 import duke.task.DukeList;
 
+/**
+ * Encapsulates the parser of user input to duke.
+ */
 public class Parser {
 
+    /** List of duke. */
     private DukeList list;
 
+    /** Storage of duke. */
     private Storage storage;
 
+    /**
+     * Constructs a Parser object.
+     *
+     * @param list The list of duke.
+     * @param storage The storage of duke.
+     */
     public Parser(DukeList list, Storage storage) {
         this.list = list;
         this.storage = storage;
     }
 
+    /**
+     * Parses user input to duke and runs the appropriate function.
+     *
+     * @param input User input.
+     */
     public void parse(String input) {
         String[] segment = input.split(" ", 2);
 
