@@ -1,7 +1,8 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -57,24 +58,18 @@ public class Kermit {
 
         String DIRNAME = "./data";
         String FILENAME = "kermit.txt";
-        String PATH = String.join("/", DIRNAME, FILENAME);
+        String PATHSTRING = String.join("/", DIRNAME, FILENAME);
+        File FILE = new File(PATHSTRING);
+
 
         // Check if Kermit data exists, else create it
         try {
             File dir = new File(DIRNAME);
             dir.mkdir();
-            File f = new File(PATH);
-            f.createNewFile();
+            FILE.createNewFile();
         } catch (IOException e) {
             System.err.println(e.getMessage());
             return;
-        }
-
-        // Init writer to save Kermit data
-        try {
-            PrintWriter printWriter = new PrintWriter(PATH);
-        } catch (FileNotFoundException e) {
-            System.err.println(e.getMessage());
         }
 
         StringBuilder descriptionBuilder = new StringBuilder();
@@ -96,109 +91,123 @@ public class Kermit {
 
         System.out.println(formatText(introductionText));
 
-        while (true) {
-            try {
-                // Task description and flag should be separated by some /command
-                String[] userInput = sc.nextLine().split("/");
-                String commandString = userInput[0];
-                String flagString = userInput.length > 1 ? userInput[1] : "";
+        // Init writer to save Kermit data
 
-                String[] commandArr = commandString.split(" ");
-                String[] flagArr = flagString.split(" ");
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(PATHSTRING))) {
+            while (true) {
+                try {
+                    // Task description and flag should be separated by some /command
+                    String[] userInput = sc.nextLine().split("/");
+                    String commandString = userInput[0];
+                    String flagString = userInput.length > 1 ? userInput[1] : "";
 
-                // first item is command
-                command = commandArr[0];
-                flag = flagArr[0];
+                    String[] commandArr = commandString.split(" ");
+                    String[] flagArr = flagString.split(" ");
 
-                // Check if command is valid
-                if (!commands.contains(command)) {
-                    throw new KermitException(invalidCommandText);
-                }
-                String description = "";
-                String flagArguments = "";
+                    // first item is command
+                    command = commandArr[0];
+                    flag = flagArr[0];
 
-                // Clear contents of string builders
-                descriptionBuilder.setLength(0);
-                flagBuilder.setLength(0);
-
-                // Get description of task and error check
-                for (int i = 1; i < commandArr.length; i++) {
-                    word = commandArr[i];
-                    if (i != 1) {
-                        descriptionBuilder.append(" ");
+                    // Check if command is valid
+                    if (!commands.contains(command)) {
+                        throw new KermitException(invalidCommandText);
                     }
-                    descriptionBuilder.append(word);
-                }
-                description = descriptionBuilder.toString();
-                if (description.equals("") && tasks.contains(command)) {
-                    throw new KermitException("The description of a " + command + " cannot be empty");
-                }
+                    String description = "";
+                    String flagArguments = "";
 
-                // Get the flags provided for task and error check
-                for (int i = 1; i < flagArr.length; i++) {
-                    word = flagArr[i];
-                    if (i != 1) {
-                        flagBuilder.append(" ");
+                    // Clear contents of string builders
+                    descriptionBuilder.setLength(0);
+                    flagBuilder.setLength(0);
+
+                    // Get description of task and error check
+                    for (int i = 1; i < commandArr.length; i++) {
+                        word = commandArr[i];
+                        if (i != 1) {
+                            descriptionBuilder.append(" ");
+                        }
+                        descriptionBuilder.append(word);
                     }
-                    flagBuilder.append(word);
-                }
-                flagArguments = flagBuilder.toString();
-                // flag arguments for these tasks should not be empty
-                if (flagArguments.equals("")) {
+                    description = descriptionBuilder.toString();
+                    if (description.equals("") && tasks.contains(command)) {
+                        throw new KermitException("The description of a " + command + " cannot be empty");
+                    }
+
+                    // Get the flags provided for task and error check
+                    for (int i = 1; i < flagArr.length; i++) {
+                        word = flagArr[i];
+                        if (i != 1) {
+                            flagBuilder.append(" ");
+                        }
+                        flagBuilder.append(word);
+                    }
+                    flagArguments = flagBuilder.toString();
+                    // flag arguments for these tasks should not be empty
+                    if (flagArguments.equals("")) {
+                        switch (command) {
+                            case "event":
+                                throw new KermitException("Events should be formatted as:\nevent <description> /at <time of event>");
+                            case "deadline":
+                                throw new KermitException("Deadlines should be formatted as:\ndeadline <description> /by <deadline>");
+
+                        }
+                    }
+
+                    int index;
+                    // Quit program
                     switch (command) {
-                        case "event":
-                            throw new KermitException("Events should be formatted as:\nevent <description> /at <time of event>");
+                        case "bye":
+                            System.out.println(formatText(goodbyeText));
+                            return;
+                        // List out all objects that user added to list
+                        case "list":
+                            System.out.println(formatText(listText + "\n" + list));
+                            break;
+                        // Add objects to list
+                        case "done":
+                            index = Integer.parseInt(description) - 1;
+                            // Get task name
+                            String taskText = list.completeTask(index);
+                            System.out.println(formatText(completeTaskText + "\n" + taskText));
+                            break;
+                        // Add new todo task
+                        case "todo":
+                            Task newToDo = new ToDos(description);
+                            list.add(newToDo);
+                            System.out.println(formatText(printAddTask(newToDo, list)));
+                            bufferedWriter.write(formatWriteString(newToDo));
+                            bufferedWriter.newLine();
+                            break;
+                        // Add new deadline task
                         case "deadline":
-                            throw new KermitException("Deadlines should be formatted as:\ndeadline <description> /by <deadline>");
+                            Task newDeadline = new Deadline(description, flagArguments);
+                            list.add(newDeadline);
+                            System.out.println(formatText(printAddTask(newDeadline, list)));
+                            bufferedWriter.write(formatWriteString(newDeadline));
+                            bufferedWriter.newLine();
+                            break;
 
+                        // Add new event task
+                        case "event":
+                            Task newEvent = new Event(description, flagArguments);
+                            list.add(newEvent);
+                            System.out.println(formatText(printAddTask(newEvent, list)));
+                            bufferedWriter.write(formatWriteString(newEvent));
+                            bufferedWriter.newLine();
+                            break;
+                        // Delete task
+                        case "delete":
+                            index = Integer.parseInt(description) - 1;
+                            Task deletedTask = list.deleteTask(index);
+                            System.out.println(formatText(printDeleteTask(deletedTask, list)));
                     }
+                } catch (KermitException e) {
+                    System.out.println(formatText(e.getMessage()));
                 }
-
-                int index;
-                // Quit program
-                switch (command) {
-                    case "bye":
-                        System.out.println(formatText(goodbyeText));
-                        return;
-                    // List out all objects that user added to list
-                    case "list":
-                        System.out.println(formatText(listText + "\n" + list));
-                        break;
-                    // Add objects to list
-                    case "done":
-                        index = Integer.parseInt(description) - 1;
-                        // Get task name
-                        String taskText = list.completeTask(index);
-                        System.out.println(formatText(completeTaskText + "\n" + taskText));
-                        break;
-                    // Add new todo task
-                    case "todo":
-                        Task newToDo = new ToDos(description);
-                        list.add(newToDo);
-                        System.out.println(formatText(printAddTask(newToDo, list)));
-                        break;
-                    // Add new deadline task
-                    case "deadline":
-                        Task newDeadline = new Deadline(description, flagArguments);
-                        list.add(newDeadline);
-                        System.out.println(formatText(printAddTask(newDeadline, list)));
-                        break;
-
-                    // Add new event task
-                    case "event":
-                        Task newEvent = new Event(description, flagArguments);
-                        list.add(newEvent);
-                        System.out.println(formatText(printAddTask(newEvent, list)));
-                        break;
-                    // Delete task
-                    case "delete":
-                        index = Integer.parseInt(description) - 1;
-                        Task deletedTask = list.deleteTask(index);
-                        System.out.println(formatText(printDeleteTask(deletedTask, list)));
-                }
-            } catch (KermitException e) {
-                System.out.println(formatText(e.getMessage()));
             }
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
     }
 }
