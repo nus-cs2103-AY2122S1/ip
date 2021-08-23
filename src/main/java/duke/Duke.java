@@ -3,12 +3,20 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 
+/**
+ * A terminal based chat bot to track tasks.
+ */
 public class Duke {
 
     private final Storage storage;
     private final Ui ui;
     private TaskList taskList;
 
+    /**
+     * Duke constructor.
+     *
+     * @param filePath The filepath of the task list from the project root
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method that starts and runs the bot.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

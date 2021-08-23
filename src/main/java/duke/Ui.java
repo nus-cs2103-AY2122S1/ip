@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Class that handles user interactions.
+ */
 public class Ui {
     private static final String welcomeMessage = "\n\tHi! I'm Herbert, you can call me Herb  ٩(˘◡˘)۶\n"
             + "\tHow can I help you?\n\n"
@@ -16,6 +19,9 @@ public class Ui {
     private static final String endMessage = "\n\tSad to see you go :(\n\t...shutting down...";
     private final Scanner sc;
 
+    /**
+     * Ui constructor.
+     */
     public Ui () {
         this.sc = new Scanner(System.in);
     }
@@ -27,26 +33,46 @@ public class Ui {
         return "\n\t@Herb:~$" + mstr.substring(3) + "\n";
     }
 
+    /**
+     * Shows welcome message.
+     */
     public void showWelcome() {
         System.out.println(wrapOutput(welcomeMessage));
     }
 
+    /**
+     * Shows end message.
+     */
     public void sayBye() {
         System.out.println(endMessage);
     }
 
+    /**
+     * Shows error in loading initial file.
+     */
     public void showLoadingError(String error) {
         System.out.println(error);
     }
 
+    /**
+     * Shows error messages.
+     */
     public void showError(String error) {
         System.out.println(wrapOutput(error));
     }
 
+    /**
+     * Shows replies to user inputs.
+     */
     public void print(String message) {
         System.out.println(wrapOutput(message));
     }
 
+    /**
+     * Reads user input in.
+     * 
+     * @return User input as string
+     */
     public String readCommand() {
         System.out.print("--> ");
         return this.sc.nextLine();
