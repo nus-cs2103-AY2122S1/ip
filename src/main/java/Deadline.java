@@ -1,9 +1,12 @@
 public class Deadline extends Task {
+    private String deadline;
+
     public Deadline(String description, String deadline) {
-        super(String.format("%s (by: %s)", description, deadline));
+        super(description);
+        this.deadline = deadline;
     }
 
-    public String getTaskIcon() {
-        return "D";
+    public String getDeadline() {
+        return this.deadline;
     }
 }

@@ -1,9 +1,12 @@
 public class Event extends Task {
+    private String time;
+
     public Event(String description, String time) {
-        super(String.format("%s (at: %s)", description, time));
+        super(description);
+        this.time = time;
     }
 
-    public String getTaskIcon() {
-        return "E";
+    public String getTime() {
+        return this.time;
     }
 }
