@@ -4,5 +4,6 @@ public class Duke {
         ChatBot currBot = new ChatBot();
 
         currBot.welcomeSeq(); //Prints welcome message first
+
     }
 }
