@@ -1,25 +1,52 @@
-import java.util.Scanner;
+import java.io.IOException;
 
 public class Duke {
-    public static void main(String[] args) {
-        // Storage for tasks
-        TaskStorage storage = new TaskStorage();
 
-        // Taking in user input
-        Scanner sc = new Scanner(System.in);
-        DukeOperator operator = new DukeOperator(Operation.start, storage);
-        operator.operate();
+    // storage to handle save file (loading and saving)
+    private Storage storage;
+    // storage to store tasks
+    private TaskList tasks;
+    // handles interaction with the user
+    private UI ui;
 
-        while (true) {
-            String input = sc.nextLine();
+    public Duke(String filePath) {
+        this.tasks = new TaskList();
+        this.ui = new UI();
+        // Initialise Storage with the tasks storage and the filepath to the save file
+        this.storage = new Storage(this.tasks, filePath);
+        // Loading save file from the filepath
+        try {
+            storage.load();
+        } catch (IOException e) {
+            System.out.println(
+                UI.tabAndFormat(
+                    "☹ OOPS!!! Please enter a proper file path! e.g.:\n'./data/duke.txt'"
+                )
+            );
+        }
+    }
+
+    public void run() {
+        // Starting with a welcome message
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            String input = ui.readCommand();
             
             try {
-                operator = new DukeOperator(input.trim(), storage);
-                if (!operator.operate()) break;
+                Command userCommand = new Parser(input, tasks).checkOperation();
+                userCommand.execute();
+                isExit = userCommand.isExit();
+                storage.save();
             } catch (DukeException | IllegalArgumentException e) {
-                System.out.println(StringFormat.tabAndFormat(e.getMessage()));
+                System.out.println(UI.tabAndFormat(e.getMessage()));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }
-        sc.close();
+        }   
+    }
+
+    public static void main(String[] args) {
+        new Duke("./data/duke.txt").run();
     }
 }

@@ -1,30 +1,32 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DukeInputProcessor {
+public class Parser {
 
     private final String userInput;
+    private final TaskList tasks;
 
-    public DukeInputProcessor(String userInput) {
+    public Parser(String userInput, TaskList tasks) {
         this.userInput = userInput;
+        this.tasks = tasks;
     }
 
-    public final Operation checkOperation() throws DukeException {
+    public final Command checkOperation() throws DukeException {
         // if it is "bye", we return false to indicate operation stoppage
         if (checkBye()) {
-            return Operation.bye;
+            return new ExitCommand();
         } else if (checkList()) {
-            return Operation.list;
+            return new ListCommand(this.tasks);
         } else if (checkDone()) {
-            return Operation.done;
+            return new DoneCommand(userInput, tasks);
         } else if (checkDelete()) {
-            return Operation.delete;
+            return new DeleteCommand(userInput, tasks);
         } else if (checkTodo()) {
-            return Operation.todo;
+            return new AddCommand(AddCommandType.todo, userInput, tasks);
         } else if (checkEvent()) {
-            return Operation.event;
+            return new AddCommand(AddCommandType.event, userInput, tasks);
         } else if (checkDeadline()) {
-            return Operation.deadline;
+            return new AddCommand(AddCommandType.deadline, userInput, tasks);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

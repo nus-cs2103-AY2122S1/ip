@@ -1,6 +1,9 @@
-public class StringFormat {
+import java.util.Scanner;
+
+public class UI {
 
     private static final String lineBreak = "\t____________________________________________________________\n";
+    private Scanner sc = new Scanner(System.in);
 
     // formats string argument(s) sequentially
     public static String formatString(String one, String... strings) {
@@ -32,4 +35,19 @@ public class StringFormat {
         return formatString(tabAllNewline(str));
     }
 
+    public void showWelcome() {
+        // Starting Message
+        String[] startMessage = {" ____        _        ", 
+                "|  _ \\ _   _| | _____ ",
+                "| | | | | | | |/ / _ \\",
+                "| |_| | |_| |   <  __/",
+                "|____/ \\__,_|_|\\_\\___|",
+                "Hello! I'm Duke",
+                "What can I do for you?"};
+        System.out.println(UI.formatString(startMessage));
+    }
+
+    public String readCommand() {
+        return sc.nextLine().trim();
+    }
 }
