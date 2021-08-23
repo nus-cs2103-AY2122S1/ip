@@ -16,23 +16,23 @@ public class Parser {
             inputFirst = command.substring(0, command.indexOf(" "));
         }
         try {
-            switch(inputFirst) {
-                case "list":
-                    return new PrintListCommand();
-                case "done":
-                    return markDone(getArgs(command));
-                case "todo":
-                    return addTodo(getArgs(command));
-                case "deadline":
-                    return addDeadline(getArgs(command));
-                case "event":
-                    return addEvent(getArgs(command));
-                case "delete":
-                    return delete(getArgs(command));
-                case "bye":
-                    return new ExitCommand();
-                default:
-                    throw new InvalidCommandDukeException();
+            switch (inputFirst) {
+            case "list":
+                return new PrintListCommand();
+            case "done":
+                return markDone(getArgs(command));
+            case "todo":
+                return addTodo(getArgs(command));
+            case "deadline":
+                return addDeadline(getArgs(command));
+            case "event":
+                return addEvent(getArgs(command));
+            case "delete":
+                return delete(getArgs(command));
+            case "bye":
+                return new ExitCommand();
+            default:
+                throw new InvalidCommandDukeException();
             }
         } catch (DukeException e) {
             throw new DukeException("Error for command: \"" + inputFirst + "\"\n" + e.getMessage());
