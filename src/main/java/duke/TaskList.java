@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -83,7 +84,7 @@ public class TaskList {
      * @param task The task description of the deadline.
      * @return A DeadLine object.
      * @throws UnrecognizableCommandException If the command is invalid.
-     * @throws InvalidDateTimeException If the date is invalid.
+     * @throws InvalidDateTimeException       If the date is invalid.
      */
     public DeadLine createDeadLine(String task) throws UnrecognizableCommandException, InvalidDateTimeException {
         if (!task.contains(" /by ")) {
@@ -107,7 +108,7 @@ public class TaskList {
      * @param task The task description of the event.
      * @return An event object.
      * @throws UnrecognizableCommandException If the command is invalid.
-     * @throws InvalidDateTimeException If the date is invalid.
+     * @throws InvalidDateTimeException       If the date is invalid.
      */
     public Event createEvent(String task) throws UnrecognizableCommandException, InvalidDateTimeException {
         if (!task.contains(" /at ")) {
@@ -122,5 +123,21 @@ public class TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new UnrecognizableCommandException();
         }
+    }
+
+    /**
+     * Finds a list of matching tasks given a keyword.
+     *
+     * @param keyword Keyword to be found among all tasks.
+     * @return A list of matched tasks.
+     */
+    public List<Task> findTask(String keyword) {
+        List<Task> matchedTasks = new ArrayList<>();
+        this.tasks.forEach((task) -> {
+            if (task.getDescription().contains(keyword)) {
+                matchedTasks.add(task);
+            }
+        });
+        return matchedTasks;
     }
 }

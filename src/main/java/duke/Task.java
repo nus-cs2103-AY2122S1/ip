@@ -9,6 +9,16 @@ class Task {
      * Indicates if a task is done.
      */
     public boolean isDone;
+
+    /**
+     * Gets the description of the task.
+     *
+     * @return The Description of the task
+     */
+    public String getDescription() {
+        return description;
+    }
+
     public final String description;
 
     /**
