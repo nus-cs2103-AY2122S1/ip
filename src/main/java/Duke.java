@@ -7,6 +7,7 @@ import java.util.Scanner;
  * @version Level-6
  */
 public class Duke {
+    public static final String divider = "-------------------------------------";
     private Scanner sc;
     private List list;
 
@@ -16,13 +17,8 @@ public class Duke {
         this.list = new List();
     }
 
-    //Class method to print static line
-    public static void divider() {
-        System.out.println("-------------------------------------");
-    }
-
-    //Class method to print greeting
-    private static void greeting() {
+    /** Prints greeting statement */
+    private static void greet() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -30,30 +26,23 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println(logo);
-        Duke.divider();
+        System.out.println(Duke.divider);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        Duke.divider();
+        System.out.println(Duke.divider);
     }
 
-    //Class method to print goodbye
+    /** Prints goodbye statement */
     private static void goodbye() {
-        Duke.divider();
+        System.out.println(Duke.divider);
         System.out.println("Bye. Hope to see you again soon!");
-        Duke.divider();
+        System.out.println(Duke.divider);
     }
 
-    //done method to mark a task as done
-    private void done(String req) {
-        int index = Integer.parseInt(req);
-        Task task = this.list.getIndex(index);
-        task.markAsDone();
-    }
-
-    //addToDo method throws an exception if there is no description
-    private void addToDo(String req) throws NoSuchElementException {
+    /** Adds a ToDo to the list */
+    private void addToDo(String req) throws NoDescriptionException {
         if (req.equals("todo")) {
-            throw new NoSuchElementException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new NoDescriptionException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         String[] splitReq = req.split(" ", 2);
         String body = splitReq[1];
@@ -61,17 +50,32 @@ public class Duke {
         this.list.add(todo);
     }
 
-    //addDeadline method
-    private void addDeadline(String req) {
+    /** Adds a Deadline to the list */
+    private void addDeadline(String req) throws NoDescriptionException, MissingTimeCommandException{
+        if (req.equals("deadline")) {
+            throw new NoDescriptionException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+        if (!req.contains("/by")) {
+            throw new MissingTimeCommandException("Missing Time Command: add '/by' in the command.");
+        }
+
         String[] splitReq = req.split("/by", 2);
         String desc = splitReq[0];
         String date = splitReq[1];
         Deadline deadline = new Deadline(desc, date);
         this.list.add(deadline);
+
     }
 
-    //addEvent method
-    private void addEvent(String req) {
+    /** Adds an Event to the list */
+    private void addEvent(String req) throws NoDescriptionException, MissingTimeCommandException {
+        if (req.equals("event")) {
+            throw new NoDescriptionException("☹ OOPS!!! The description of an event cannot be empty.");
+        }
+        if (!req.contains("/at")) {
+            throw new MissingTimeCommandException("Missing Time Command: add '/at' in the command.");
+        }
+
         String[] splitReq = req.split("/at", 2);
         String desc = splitReq[0];
         String date = splitReq[1];
@@ -79,85 +83,111 @@ public class Duke {
         this.list.add(event);
     }
 
-    //wrongInput method called from the default switch statement in this.run()
-    private void wrongInput(String req) throws IllegalArgumentException {
-      throw new IllegalArgumentException(
+    /** Receives an invalid command and throws and exception*/
+    private void invalidInput(String req) throws InvalidCommandException {
+      throw new InvalidCommandException(
         "Sorry! I do not understand you? Try another command!");
     }
 
-    //deleteTask method throws error if no number is appended to command
-    private void deleteTask(String req) throws NoSuchElementException {
-        if (req.equals("delete")) {
-            throw new NoSuchElementException("☹ OOPS!!! Please indicate a task to delete!");
+    /** Receives an index to specify a task is done */
+    private void done(String req) throws NoDescriptionException, InvalidDescriptionException {
+        if (req.equals("done")) {
+            throw new NoDescriptionException("Please specify the task number.");
         }
+
         String[] splitReq = req.split(" ", 2);
-        int index = Integer.parseInt(splitReq[1]);
+        String desc = splitReq[1];
+        int index;
+
+        try {
+            index = Integer.parseInt(desc);
+        } catch (NumberFormatException e) {
+            throw new InvalidDescriptionException("Please append a task number after 'done'.");
+        }
+
+        Task task = this.list.getIndex(index);
+        task.markAsDone();
+    }
+
+    /** Receives an index to specify a task to delete*/
+    private void deleteTask(String req) throws NoDescriptionException, InvalidDescriptionException {
+        if (req.equals("delete")) {
+            throw new NoDescriptionException("Please indicate a task to delete.");
+        }
+
+        String[] splitReq = req.split(" ", 2);
+        String desc = splitReq[1];
+        int index;
+
+        try {
+            index = Integer.parseInt(desc);
+        } catch (NumberFormatException e) {
+            throw new InvalidDescriptionException("Please append a task number after 'delete'.");
+        }
+
         this.list.removeTask(index);
     }
 
-    //run method to start instance of duke
-    private void run() throws IllegalArgumentException {
-        Duke.greeting();
+    /** Runs the instance of duke*/
+    private void run() {
+        Duke.greet();
 
         String req = "";
         boolean end = false;
 
         do {
-            //Get first command
-            req = this.sc.nextLine();
-            String[] splitReq = req.split(" ", 2);
-            String cmd = splitReq[0];
+            try {
+                //Get first command word
+                req = this.sc.nextLine();
+                String[] splitReq = req.split(" ", 2);
+                String cmd = splitReq[0];
 
-            //Switch statement based on initial command
-            switch (cmd) {
-                case "list":
-                    Duke.divider();
-                    this.list.getAll();
-                    Duke.divider();
-                    break;
+                //Switch statement based on initial command
+                switch (cmd) {
+                    case "list":
+                        this.list.getAll();
+                        break;
 
-                case "bye":
-                    Duke.goodbye();
-                    end = true;
-                    break;
+                    case "bye":
+                        Duke.goodbye();
+                        end = true;
+                        break;
 
-                case "done":
-                    this.done(splitReq[1]);
-                    break;
+                    case "done":
+                        this.done(req);
+                        break;
 
-                case "todo":
-                    try {
+                    case "todo":
                         this.addToDo(req);
-                    } catch (NoSuchElementException e) {
-                        System.err.println(e.getMessage());
-                    }
-                    break;
+                        break;
 
-                case "deadline":
-                    this.addDeadline(splitReq[1]);
-                    break;
+                    case "deadline":
+                        this.addDeadline(req);
+                        break;
 
-                case "event":
-                    this.addEvent(splitReq[1]);
-                    break;
+                    case "event":
+                        this.addEvent(req);
+                        break;
 
-                case "delete":
-                    try {
+                    case "delete":
                         this.deleteTask(req);
-                    } catch (NoSuchElementException e) {
-                        System.err.println(e.getMessage());
-                    }
-                    break;
+                        break;
 
-                default:
-                    try {
-                        this.wrongInput(req);
-                    } catch (IllegalArgumentException e) {
-                        System.err.println(e.getMessage());
-                    }
+                    default:
+                        this.invalidInput(req);
+                }
+            } catch (Exception e) {
+                this.exceptionHandler(e);
             }
         } while (!end);
         sc.close();
+    }
+
+    /** Catches all exceptions from run. Should the param be  of type DukeException? */
+    private void exceptionHandler(Exception e) {
+        System.err.println(e.getMessage());
+        //enumerate exceptions here
+        //switch cases for exceptions
     }
 
     public static void main(String[] args) {

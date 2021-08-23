@@ -19,26 +19,29 @@ public class List {
     //Add method to insert new entry into list
     public void add(Task task) {
         this.array.add(task);
-        Duke.divider();
+        System.out.println(Duke.divider);
         System.out.println("Got it. I've added this task:");
         System.out.println(task.toString());
         this.getNumOfTasks();
-        Duke.divider();
+        System.out.println(Duke.divider);
     }
 
     //getIndex method to return a specific task
-    public Task getIndex(int index) {
+    public Task getIndex(int index) throws InvalidDescriptionException {
+        if (index < 1 || index > array.size()) {
+            throw new InvalidDescriptionException("The task you have indicated does not exist!");
+        }
         return this.array.get(index - 1);
     }
 
     //removeTask method delete a task at a specific index
-    public void removeTask(int index) {
+    public void removeTask(int index) throws InvalidDescriptionException {
         Task removedTask = this.getIndex(index);
         this.array.remove(index - 1);
-        Duke.divider();
+        System.out.println(Duke.divider);
         System.out.println("Noted. I've removed this task:\n" + removedTask.toString());
         this.getNumOfTasks();
-        Duke.divider();
+        System.out.println(Duke.divider);
     }
 
     //getNumOfTasks method prints the number of tasks in the list
@@ -53,10 +56,12 @@ public class List {
 
     //getAll method to return all entries in list
     public void getAll() {
+        System.out.println(Duke.divider);
         int count = 1;
         for (Task t : this.array) {
             System.out.println(count + ". " + t.toString());
             count += 1;
         }
+        System.out.println(Duke.divider);
     }
 }
