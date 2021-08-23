@@ -1,5 +1,13 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Duke {
     private ArrayList<Task> taskList;
@@ -11,6 +19,8 @@ public class Duke {
     public static void main(String[] args) {
         Duke bot = new Duke();
 
+        bot.accessFile();
+
         String openingMessage = "   -------------------------------------------- \n"
                         + "   Hello! I'm Duke \n"
                         + "   What can I do for you? \n"
@@ -18,8 +28,8 @@ public class Duke {
         System.out.println(openingMessage);
 
         Scanner sc = new Scanner(System.in);
-        boolean flag = true;
-        while (sc.hasNextLine() && flag) {
+        boolean isReadingInput = true;
+        while (sc.hasNextLine() && isReadingInput) {
             String input = sc.nextLine();
             String firstWord;
             String remainingWords = "";
@@ -35,48 +45,36 @@ public class Duke {
                 System.out.println(bot.printList());
                 break;
             case "bye":
-                System.out.println(bot.sayBye());
-                flag = false;
+                bot.sayBye();
+                isReadingInput = false;
                 break;
             case "done":
                 int index = Integer.parseInt(remainingWords);
                 try {
                     System.out.println(bot.completeTask(index));
                 } catch (DukeException e) {
-                    String errorMessage = "   -------------------------------------------- \n"
-                                        + "      OOPS!!! Invalid task number given \n"
-                                        + "   -------------------------------------------- \n";
-                    System.out.println(errorMessage);
+                    bot.printErrorMessage("done");
                 }
                 break;
             case "todo":
                 try {
                     System.out.println(bot.addTodo(remainingWords));
                 } catch (DukeException e) {
-                    String errorMessage = "   -------------------------------------------- \n"
-                                        + "      OOPS!!! The description of a todo cannot be empty. \n"
-                                        + "   -------------------------------------------- \n";
-                    System.out.println(errorMessage);
+                    bot.printErrorMessage("todo");
                 }
                 break;
             case "deadline":
                 try {
                     System.out.println(bot.addDeadline(remainingWords));
                 } catch (DukeException e) {
-                    String errorMessage = "   -------------------------------------------- \n"
-                                        + "      OOPS!!! The description of a deadline cannot be empty. \n"
-                                        + "   -------------------------------------------- \n";
-                    System.out.println(errorMessage);
+                    bot.printErrorMessage("deadline");
                 }
                 break;
             case "event":
                 try {
                     System.out.println(bot.addEvent(remainingWords));
                 } catch (DukeException e) {
-                    String errorMessage = "   -------------------------------------------- \n"
-                                        + "      OOPS!!! The description of an event cannot be empty. \n"
-                                        + "   -------------------------------------------- \n";
-                    System.out.println(errorMessage);
+                    bot.printErrorMessage("event");
                 }
                 break;
             case "delete":
@@ -84,20 +82,104 @@ public class Duke {
                 try {
                     System.out.println(bot.deleteTask(deleteIndex));
                 } catch (DukeException e) {
-                    String errorMessage = "   -------------------------------------------- \n"
-                            + "      Invalid index. Specified task does not exist to be deleted. \n"
-                            + "   -------------------------------------------- \n";
-                    System.out.println(errorMessage);
+                    bot.printErrorMessage("event");
                 }
                 break;
             default:
-                String errorMessage = "   -------------------------------------------- \n"
-                                    + "      OOPS!!! I have no idea what that means :-( \n"
-                                    + "   -------------------------------------------- \n";
-                System.out.println(errorMessage);
+                bot.printErrorMessage("error");
             }
         }
         sc.close();
+    }
+
+    public void printErrorMessage(String message) {
+        String errorMessage = "   -------------------------------------------- \n";
+        switch(message) {
+        case "done":
+            errorMessage += "      OOPS!!! Invalid task number given \n";
+            break;
+        case "todo":
+            errorMessage += "      OOPS!!! The description of a todo cannot be empty. \n";
+            break;
+        case "deadline":
+            errorMessage += "      OOPS!!! The description of a deadline cannot be empty. \n";
+            break;
+        case "event":
+            errorMessage += "      OOPS!!! The description of an event cannot be empty. \n";
+            break;
+        case "delete":
+            errorMessage += "      Invalid index. Specified task does not exist to be deleted. \n";
+            break;
+        default:
+            errorMessage += "      OOPS!!! I have no idea what that means :-( \n";
+        }
+        errorMessage += "   -------------------------------------------- \n";
+        System.out.println(errorMessage);
+    }
+
+    public void accessFile() {
+        String home = System.getProperty("user.home");
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "ip", "src", "main", "java");
+        boolean directoryExists = java.nio.file.Files.exists(path);
+        if (!directoryExists) {
+            System.out.println("   Specified tasklist directory does not exist. " +
+                    "Duke is unable to save future data unless directory is created.");
+
+            // create a directory for it to save
+
+
+        } else {
+            try {
+                List<String> lines = Files.readAllLines(Paths.get(home, "Desktop", "ip", "src", "main", "java", "tasklist.txt"));
+                for (String s: lines) {
+                    parseTaskFromFile(s);
+                }
+                System.out.println("   Autosave feature detected. Please type 'list' to view " +
+                        "previously saved tasks");
+            } catch (NoSuchFileException e) {
+                System.out.println("   Tasklist file not found. Creating empty tasklist...");
+                File tempfile = new File("./src/main/java/tasklist.txt");
+                try {
+                    tempfile.createNewFile();
+                } catch (IOException x) {
+                    System.out.println("   Unexpected error: Unable to create file...");
+                }
+            } catch (IOException e) {
+                System.out.println("   An error occurred reading the tasklist file. Initialising empty tasklist...");
+            }
+        }
+    }
+
+    public void parseTaskFromFile(String taskInput) {
+        List<String> words = List.of(taskInput.split(" \\| "));
+        switch (words.get(0)) {
+        case "T":
+            Todo t = new Todo(words.get(2));
+            if (words.get(1).equals("X")) {
+                t = t.markAsDone();
+            }
+            this.taskList.add(t);
+            break;
+        case "D":
+            Deadline d = new Deadline(words.get(2), words.get(3));
+            if (words.size() == 4) { // add only if date is  specified
+                if (words.get(1).equals("X")) {
+                    d = d.markAsDone();
+                }
+                this.taskList.add(d);
+            }
+            break;
+        case "E":
+            Event e = new Event(words.get(2), words.get(3));;
+            if (words.size() == 4) { // add only if date is specified
+                if (words.get(1).equals("X")) {
+                    e = e.markAsDone();
+                }
+                this.taskList.add(e);
+            }
+        default:
+            break;
+        }
     }
 
     public String printList() {
@@ -123,10 +205,53 @@ public class Duke {
         return output;
     }
 
-    public String sayBye() {
-        return "   -------------------------------------------- \n"
-                + "   Bye! Hope to see you again soon! \n"
-                + "   --------------------------------------------";
+    public void sayBye() {
+        saveToFile();
+        String closingMessage = "   -------------------------------------------- \n"
+                            + "   Bye! Hope to see you again soon! \n"
+                            + "   --------------------------------------------";
+        System.out.println(closingMessage);
+    }
+
+    public void saveToFile() {
+        String home = System.getProperty("user.home");
+        java.nio.file.Path path = java.nio.file.Paths.get(
+                home, "Desktop", "ip", "src", "main", "java", "tasklist.txt");
+        String outputText = "";
+
+        for (Task t: this.taskList) {
+            if (t instanceof Todo) {
+                outputText += "T | ";
+                if (t.getStatusIcon().equals("X")) {
+                    outputText += "X | " + t.getDescription() + "\n";
+                } else {
+                    outputText += "0 | " + t.getDescription() + "\n";
+                }
+            } else if (t instanceof Deadline) {
+                Deadline d = (Deadline) t;
+                outputText += "D | ";
+                if (d.getStatusIcon().equals("X")) {
+                    outputText += "X | " + d.getDescription() + " | " + d.getBy() + "\n";
+                } else {
+                    outputText += "0 | " + d.getDescription() + " | " + d.getBy() + "\n";
+                }
+            } else if (t instanceof Event) {
+                Event e = (Event) t;
+                outputText += "E | ";
+                if (e.getStatusIcon().equals("X")) {
+                    outputText += "X | " + e.getDescription() + " | " + e.getAt() + "\n";
+                } else {
+                    outputText += "0 | " + e.getDescription() + " | " + e.getAt() + "\n";
+                }
+            }
+        }
+        try {
+            Files.write(path, "".getBytes()); // clears the file
+            Files.write(path, outputText.getBytes(), StandardOpenOption.APPEND);
+            System.out.println("   Saved tasks to file");
+        } catch (IOException e) {
+            System.out.println("   An error occurred...");
+        }
     }
 
     public String completeTask(int index) throws DukeException {

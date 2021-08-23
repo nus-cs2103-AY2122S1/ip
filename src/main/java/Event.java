@@ -12,6 +12,10 @@ public class Event extends Task{
         this.at = at;
     }
 
+    public String getAt() {
+        return this.at;
+    }
+
     public Event markAsDone() {
         return new Event(this.description, this.at, true);
     }
