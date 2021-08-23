@@ -100,8 +100,8 @@ public class TaskList {
      * object added.
      *
      * @param deadline The deadline input by the user.
-     * @param date The date of the deadline.
-     * @param time The time of the deadline.
+     * @param date     The date of the deadline.
+     * @param time     The time of the deadline.
      * @return The meow.Deadline object added.
      */
     public Deadline addDeadline(String deadline, LocalDate date, String time) {
@@ -115,7 +115,7 @@ public class TaskList {
      * object added.
      *
      * @param event The event input by the user.
-     * @param at The time of the event.
+     * @param at    The time of the event.
      * @return The meow.Event object added.
      */
     public Event addEvent(String event, String at) {

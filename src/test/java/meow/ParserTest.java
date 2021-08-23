@@ -1,7 +1,7 @@
 package meow;
 
 import org.junit.Test;
-
+import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
@@ -22,6 +22,6 @@ public class ParserTest {
 
     private void fail() {
         System.out.println("Your test has failed.");
-        assertEquals(true, false);
+        Assertions.fail();
     }
 }
