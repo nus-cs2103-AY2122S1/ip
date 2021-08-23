@@ -109,22 +109,6 @@ public class Duke {
     }
 
     /**
-     * Method that saves Tasks in the hard disk whenever called.
-     */
-    public void save() {
-        try {
-            FileWriter data = new FileWriter("./data/data.txt");
-            for (Task task : ToDoList.getDukeList()) {
-                data.write(task.toString() + "\n");
-            }
-            data.close();
-            System.out.print("Tasks have been saved");
-        } catch (IOException e) {
-            System.out.println("☹ Oops! An error occurred when saving the data.");
-        }
-    }
-
-    /**
      * Calls the appropriate methods depending on what the user has input.
      */
     public void start() {

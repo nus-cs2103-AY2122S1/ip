@@ -55,7 +55,7 @@ public class Data {
         try {
             FileWriter writer = new FileWriter("./data/data.txt");
             for (Task task : dukeList) {
-                writer.write(task.toTxt());
+                writer.write(task.toTxt() + "\n");
             }
             writer.close();
         } catch (IOException e) {

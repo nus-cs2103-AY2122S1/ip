@@ -14,7 +14,7 @@ public class Todo extends Task {
      */
     @Override
     public String toTxt() {
-        return String.format("T | %d | %s", super.getIsDone() ? 1 : 0, super.getDescription() + System.lineSeparator());
+        return String.format("T | %d | %s", super.getIsDone() ? 1 : 0, super.getDescription());
     }
 
     @Override
