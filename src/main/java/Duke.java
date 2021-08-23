@@ -1,19 +1,18 @@
 import java.io.File;
-
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     // Data file path
-    private static final String DIRECTORY_PATH = "./data";
-    private static final String FILE_PATH = DIRECTORY_PATH + "/duke.txt";
+    private static final String DIRECTORY_PATH = "data";
+    private static final String FILE_PATH = DIRECTORY_PATH + File.separator + "duke.txt";
 
 
     // Initialize string array to store the list
