@@ -2,7 +2,6 @@ package Duke;
 
 import java.io.*;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -181,7 +180,7 @@ public class Duke {
     }
 
     private void defaultResponse() {
-        throw new DukeException("", DukeException.TYPE.INVALID);
+        throw new DukeException("", DukeException.TYPE.SYNTAX_ERROR);
     }
     /**
      * Template of respond after each command-reply cycle
@@ -206,7 +205,7 @@ public class Duke {
         try {
             FileWriter writer = new FileWriter(file);
             for (Task task : taskList) {
-                writer.write(task + "\n");
+                writer.write(task.save() + "\n");
             }
             writer.flush();
             writer.close();
@@ -266,6 +265,8 @@ public class Duke {
             sc.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

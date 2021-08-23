@@ -1,5 +1,2 @@
-[T][ ] walk 10k steps today
-[D][X] individual project (by the end of this week)
-[T][X] play piano
-[T][X] complete cs2100 tutorial
-[E][ ] cs2100 lecture (at tuesday)
+[T][X] walk 10k steps
+[D][ ] cs2100 tutorial (by 2021-08-09)
