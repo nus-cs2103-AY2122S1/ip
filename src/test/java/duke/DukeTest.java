@@ -10,17 +10,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * Tests the duke.
+ */
 public class DukeTest {
     List<Task> tasks = new ArrayList<>(Arrays.asList(new ToDo("return book", false),
             new DeadLine("buy book", LocalDate.of(2020, 8, 23), false)));
 
+    /**
+     * Tests if taskList.size() returns the correct input.
+     */
     @Test
     public void taskList_twoTasks_listSizeTwo() {
         TaskList tLst = new TaskList(tasks);
         assertEquals(2, tLst.size());
     }
 
+    /**
+     * Tests delete task.
+     */
     @Test
     public void taskList_deleteTask_listSizeOne() {
         TaskList tLst = new TaskList(tasks);
@@ -29,6 +37,9 @@ public class DukeTest {
         assertEquals(1, tLst.size());
     }
 
+    /**
+     * Tests parser for parsing dates.
+     */
     @Test
     public void parseDate_invalidDate_invalidDateTimeException() {
         Parser parser = new Parser();
@@ -43,6 +54,12 @@ public class DukeTest {
         assertThrows(InvalidDateTimeException.class
                 , () -> parser.stringToLocalDate("1999-1-3"));
     }
+
+    /**
+     * Tests parser for parsing dates.
+     *
+     * @throws InvalidDateTimeException if the date is invalid.
+     */
     @Test
     public void parseDate_validDate_noException() throws InvalidDateTimeException {
         Parser parser = new Parser();

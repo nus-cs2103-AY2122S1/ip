@@ -7,6 +7,9 @@ enum ActionType {
     LIST, TODO, DEADLINE, EVENT, DONE, DELETE, BYE, UNRECOGNIZED
 }
 
+/**
+ * A duke that creates todo list.
+ */
 public class Duke {
 
     private boolean isLive = true;
