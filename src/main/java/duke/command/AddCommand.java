@@ -11,20 +11,43 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * A class that implements Command. This class is responsible for all commands that
+ * result in the addition of a task into the task list.
+ */
 public class AddCommand implements Command {
     private String taskString;
     private String taskType;
 
+    /**
+     * Class constructor taking in the taskString and the taskType.
+     *
+     * @param taskString The main string for the task.
+     * @param taskType The type of the task in String format.
+     */
     public AddCommand(String taskString, String taskType) {
         this.taskString = taskString;
         this.taskType = taskType.toUpperCase();
     };
 
+    /**
+     * Method to obtain if the program should continue running.
+     *
+     * @return Always returns true.
+     */
     @Override
     public boolean isRunning() {
         return true;
     }
 
+    /**
+     * Method to execute the given command.
+     *
+     * @param t The TaskList loaded.
+     * @param ui The Ui object running the program.
+     * @param storage The Storage object handling the loading and saving.
+     * @throws DukeException Thrown in the event of input format errors.
+     */
     @Override
     public void execute(TaskList t, Ui ui, Storage storage) throws DukeException {
         try{
