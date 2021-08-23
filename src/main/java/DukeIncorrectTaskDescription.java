@@ -15,7 +15,7 @@ public class DukeIncorrectTaskDescription extends DukeIncorrectInputs {
      */
     public DukeIncorrectTaskDescription(Deadline deadline, Throwable err) {
         super("\t" + DukeIncorrectTaskDescription.prefix + " deadline" +
-                DukeIncorrectTaskDescription.suffix + "\t\t{deadline description} /by {date}", err);
+                DukeIncorrectTaskDescription.suffix + "\t\t{deadline description} /by {yyyy-mm-dd}", err);
     }
 
     /**
@@ -24,6 +24,6 @@ public class DukeIncorrectTaskDescription extends DukeIncorrectInputs {
      */
     public DukeIncorrectTaskDescription(Event event, Throwable err) {
         super("\t" + DukeIncorrectTaskDescription.prefix + "n event" +
-                DukeIncorrectTaskDescription.suffix + "\t\t{event description} /at {date}", err);
+                DukeIncorrectTaskDescription.suffix + "\t\t{event description} /at {yyyy-mm-dd}", err);
     }
 }
