@@ -27,12 +27,12 @@ public class CommandManager {
     }
 
     /**
-     * Process the given input (user's input) and search for its corresponding
+     * Processes the given input (user's input) and search for its corresponding
      * command to be executed with the given argument.
      * 
      * @param input straight out from the command line
      */
-    public void processAndExecuteInput(String input) {
+    public void parseInput(String input) {
         String[] arr = input.split(" ", 2);
         Command command = registry.get(arr[0]);
         if (command != null) {

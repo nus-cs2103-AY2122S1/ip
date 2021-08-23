@@ -1,6 +1,5 @@
 package duke.task;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 
 /**
@@ -8,16 +7,9 @@ import java.time.LocalDate;
  */
 public class DeadlineTask extends Task {
 
-    public DeadlineTask(String task) {
-        super(task);
-        String[] arr = task.split(" /by ", 2);
-        if (arr.length >= 2) {
-            try {
-                this.date = LocalDate.parse(arr[1]);
-            } catch (DateTimeException e) {
-            }
-        }
-        this.name = arr[0];
+    public DeadlineTask(String name, LocalDate date) {
+        super(name);
+        this.date = date;
     }
 
     public DeadlineTask(String name, boolean completed) {

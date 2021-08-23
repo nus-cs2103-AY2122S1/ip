@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 import duke.DukeList;
 import duke.UserInterface;
 import duke.exception.InvalidArgumentException;
@@ -22,7 +25,15 @@ public class EventCommand implements Command {
     public void exec(String args) {
         if (args == null || args.isEmpty())
             throw new InvalidArgumentException("☹ OOPS!!! The description of an event cannot be empty.");
-        Task task = new EventTask(args);
+        String[] arr = args.split(" /at ", 2);
+        LocalDate date = null;
+        if (arr.length >= 2) {
+            try {
+                date = LocalDate.parse(arr[1]);
+            } catch (DateTimeException e) {
+            }
+        }
+        Task task = new EventTask(arr[0], date);
         this.dukeList.addTask(task);
         this.ui.showMessage("Got it. I've added this task:\n" + task + "\n" + this.dukeList.currentSizeMessage());
     }

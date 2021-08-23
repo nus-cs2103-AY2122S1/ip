@@ -12,12 +12,21 @@ public abstract class Task {
     protected LocalDate date;
 
     public Task(String name) {
-        this(name, false);
+        this(name, false, null);
     }
 
     public Task(String name, boolean completed) {
-        this.completed = completed;
+        this(name, completed, null);
+    }
+
+    public Task(String name, LocalDate date) {
+        this(name, false, date);
+    }
+
+    public Task(String name, boolean completed, LocalDate date) {
         this.name = name;
+        this.date = date;
+        this.completed = completed;
     }
 
     /**

@@ -55,7 +55,7 @@ public class Duke {
             terminate();
         } else {
             try {
-                this.commandManager.processAndExecuteInput(input);
+                this.commandManager.parseInput(input);
             } catch (DukeException ex) {
                 this.ui.showError(ex);
             }
