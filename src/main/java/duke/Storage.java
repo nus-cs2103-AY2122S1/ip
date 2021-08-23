@@ -56,9 +56,8 @@ public class Storage {
             ArrayList<Task> taskList = new ArrayList<>();
 
             while (s.hasNext()) {
-                // input here will definitely be correct and accurate
+                // input received here will definitely be correct and accurate
                 // either, todo, deadline, delete, event, done
-                // Parser not used here since loading do not require execution again.
                 String fullLineOfCommand = s.nextLine();
                 Scanner lineSplitter = new Scanner(fullLineOfCommand);
                 String command = lineSplitter.next().trim();
