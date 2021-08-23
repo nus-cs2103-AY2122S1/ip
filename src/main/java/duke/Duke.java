@@ -21,6 +21,12 @@ public class Duke {
     private final TaskList taskList;
     private final Storage storage;
 
+    /**
+     * Class Constructor.
+     * 
+     * @param filePath path where the txt file, data base for this application, is
+     *                 being stored.
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.taskList = new TaskList();
@@ -40,6 +46,14 @@ public class Duke {
         return dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
     }
 
+    /**
+     * Starts the application, allows the application to start taking in inputs from
+     * the users.
+     * 
+     * @throws FileNotFoundException when file is not found in the given location.
+     * @throws IOException           when Scanner is not able to scan anything from
+     *                               the given file path.
+     */
     public void start() throws FileNotFoundException, IOException {
         String userInput = "";
         String action = "";
