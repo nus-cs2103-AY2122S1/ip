@@ -7,7 +7,7 @@ package duke.task;
  * @version Level-6
  */
 public class Event extends Task {
-    protected String at;
+    protected DateTime at;
 
     /**
      * Constructor for Event class.
@@ -17,11 +17,11 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = new DateTime(at);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")\n";
+        return "[E]" + super.toString() + " (at: " + at.toString() + ")\n";
     }
 }

@@ -7,7 +7,7 @@ package duke.task;
  * @version Level-6
  */
 public class Deadline extends Task{
-    protected String by;
+    protected DateTime by;
 
     /**
      * Constructor for Deadline class.
@@ -17,11 +17,11 @@ public class Deadline extends Task{
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = new DateTime(by);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")\n";
+        return "[D]" + super.toString() + " (by: " + by.toString() + ")\n";
     }
 }

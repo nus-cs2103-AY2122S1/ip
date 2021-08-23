@@ -4,7 +4,7 @@ package duke.task;
  * A task without any deadline.
  *
  * @author limzk126
- * @version Level-6
+ * @version Level-7
  */
 public class Todo extends Task {
     /**
