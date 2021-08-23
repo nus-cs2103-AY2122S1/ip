@@ -38,6 +38,7 @@ public class TaskList {
 
     /**
      * Mark a task as done.
+     *
      * @param taskId ID of the task we are marking as done.
      */
     public void markTaskAsDone(int taskId) throws DukeException {
@@ -51,6 +52,7 @@ public class TaskList {
 
     /**
      * Adds a duke.task.Todo task.
+     *
      * @param description Description of the duke.task.Todo.
      */
     public void addTodo(String description) {
@@ -60,6 +62,7 @@ public class TaskList {
 
     /**
      * Adds a duke.task.Deadline task.
+     *
      * @param fullDescription String that contains the description and deadline of the task.
      */
     public void addDeadline(String fullDescription) throws DukeException {
@@ -77,12 +80,13 @@ public class TaskList {
             tasks.add(new Deadline(description, dateTime, FORMAT_TIME, true));
         } else {
             tasks.add(new Deadline(description, dateTime, FORMAT_NO_TIME, false));
-        };
+        }
         printAfterAdding();
     }
 
     /**
      * Adds an duke.task.Event task.
+     *
      * @param fullDescription String that contains the description and time of the task.
      */
     public void addEvent(String fullDescription) throws DukeException {
@@ -114,6 +118,7 @@ public class TaskList {
 
     /**
      * Deletes a specific task.
+     *
      * @param taskId ID of the task to be deleted.
      */
     public void deleteTask(int taskId) throws DukeException {

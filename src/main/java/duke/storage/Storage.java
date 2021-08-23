@@ -33,32 +33,32 @@ public class Storage {
             while (s.hasNext()) {
                 String line = s.nextLine();
                 switch (line.charAt(4)) {
-                    case 'T':
-                        arr.add(new Todo(line.substring(10)));
-                        break;
-                    case 'D': {
-                        int index = line.indexOf(" (by: ");
-                        String description = line.substring(10, index);
-                        String dateTime = line.substring(index + 6, line.length() - 1);
-                        String[] dateTimeArray = dateTime.split(" ");
-                        if (dateTimeArray.length > 3) {
-                            arr.add(new Deadline(description, dateTime, FORMAT_TIME_FILE, true));
-                        } else {
-                            arr.add(new Deadline(description, dateTime, FORMAT_NO_TIME_FILE, false));
-                        }
-                        break;
+                case 'T':
+                    arr.add(new Todo(line.substring(10)));
+                    break;
+                case 'D': {
+                    int index = line.indexOf(" (by: ");
+                    String description = line.substring(10, index);
+                    String dateTime = line.substring(index + 6, line.length() - 1);
+                    String[] dateTimeArray = dateTime.split(" ");
+                    if (dateTimeArray.length > 3) {
+                        arr.add(new Deadline(description, dateTime, FORMAT_TIME_FILE, true));
+                    } else {
+                        arr.add(new Deadline(description, dateTime, FORMAT_NO_TIME_FILE, false));
                     }
-                    case 'E':
-                        int index = line.indexOf(" (at: ");
-                        String description = line.substring(10, index);
-                        String dateTime = line.substring(index + 6, line.length() - 1);
-                        String[] dateTimeArray = dateTime.split(" ");
-                        if (dateTimeArray.length > 3) {
-                            arr.add(new Event(description, dateTime, FORMAT_TIME_FILE, true));
-                        } else {
-                            arr.add(new Event(description, dateTime, FORMAT_NO_TIME_FILE, false));
-                        }
-                        break;
+                    break;
+                }
+                case 'E':
+                    int index = line.indexOf(" (at: ");
+                    String description = line.substring(10, index);
+                    String dateTime = line.substring(index + 6, line.length() - 1);
+                    String[] dateTimeArray = dateTime.split(" ");
+                    if (dateTimeArray.length > 3) {
+                        arr.add(new Event(description, dateTime, FORMAT_TIME_FILE, true));
+                    } else {
+                        arr.add(new Event(description, dateTime, FORMAT_NO_TIME_FILE, false));
+                    }
+                    break;
                 }
             }
         }
