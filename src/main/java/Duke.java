@@ -19,11 +19,11 @@ public class Duke {
         System.out.println("Stay on track with Duke!\n" +
                 "How can I help you?");
 
-        TaskManager tm = new TaskManager();
         boolean running = true;
 
         try {
-            tm.getTasksFromStorage();
+            TaskList.start();
+            TaskList.getTasksFromStorage();
         } catch (FileNotFoundException e) {
             running = false;
             System.out.println("File not found");
@@ -40,15 +40,15 @@ public class Duke {
             switch (command) {
                 case "bye":
                     System.out.println("¡Adiós! See you soon!");
-                    tm.saveTasksToStorage();
+                    TaskList.saveTasksToStorage();
                     running = false;
                     break;
                 case "list":
-                    tm.list();
+                    TaskList.list();
                     break;
                 default:
                     try {
-                        tm.handle(command);
+                        Parser.handle(command);
                     } catch (InvalidCommandException e) {
                         System.out.println("I'm afraid I don't recognise that, please try again!");
                     } catch (MissingTaskNameException e) {
