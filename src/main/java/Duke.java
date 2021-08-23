@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -115,9 +119,10 @@ public class Duke {
                         }
 
                         String by = input.split(" /by ")[1];
+                        LocalDate deadlineDate = LocalDate.parse(by);
                         String deadlineDescription = input.split(" /by ")[0].substring(9);
 
-                        Deadline deadline = new Deadline(deadlineDescription, by);
+                        Deadline deadline = new Deadline(deadlineDescription, deadlineDate);
                         System.out.println("Got it. I've added this task:\n  " + deadline);
                         savedInputs.add(deadline);
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
@@ -140,9 +145,10 @@ public class Duke {
                         }
 
                         String at = input.split(" /at ")[1];
+                        LocalDate eventDate = LocalDate.parse(at);
                         String eventDescription = input.split(" /at ")[0].substring(6);
 
-                        Event event = new Event(eventDescription, at);
+                        Event event = new Event(eventDescription, eventDate);
                         System.out.println("Got it. I've added this task:\n  " + event);
                         savedInputs.add(event);
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
