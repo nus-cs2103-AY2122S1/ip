@@ -1,8 +1,10 @@
 import java.sql.SQLOutput;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 public class Parser {
     private String inp;
@@ -40,11 +42,10 @@ public class Parser {
     }
 
     public String parseTime() {
-
-            String atByTime = ((inp.split("\\s", 2)[1]).split("/"))[1];
-            String time = atByTime.split("\\s", 2)[1];
-            return time;
-
+        String atByTime = ((inp.split("\\s", 2)[1]).split("/"))[1];
+        String time = atByTime.split("\\s", 2)[1];
+        LocalDate d1 = LocalDate.parse(time);
+        return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     public int getTaskIndex() {
