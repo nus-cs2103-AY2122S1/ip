@@ -6,11 +6,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    
+
     private final String identifier = "D";
     private LocalDateTime deadlineDateTime;
-    private boolean isDateAndTime;
-    private LocalDate deadlineDate;
+    private final boolean isDateAndTime;
+    private final LocalDate deadlineDate;
     private LocalTime deadlineTime;
 
     public Deadline(String description, String deadline) throws DateTimeParseException {

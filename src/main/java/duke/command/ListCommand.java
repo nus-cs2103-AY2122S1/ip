@@ -1,11 +1,10 @@
 package duke.command;
 
 import duke.UI;
-
 import duke.task.TaskList;
 
-public class ListCommand extends Command{
-    
+public class ListCommand extends Command {
+
     private final TaskList tasks;
 
     public ListCommand(TaskList tasks) {
@@ -15,7 +14,7 @@ public class ListCommand extends Command{
     @Override
     public void execute() {
         System.out.println(
-            UI.tabAndFormat(this.tasks.toString())
+                UI.tabAndFormat(this.tasks.toString())
         );
     }
 }

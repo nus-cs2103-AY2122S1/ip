@@ -10,7 +10,7 @@ public class Event extends Task {
     private final String identifier = "E";
     private LocalDateTime eventDateTime;
     private boolean isDateAndTime;
-    private LocalDate eventDate;
+    private final LocalDate eventDate;
     private LocalTime eventTime;
 
     public Event(String description, String eventDate) throws DateTimeParseException {
@@ -30,7 +30,7 @@ public class Event extends Task {
     public String toString() {
         String result = "[" + identifier + "]";
         result += super.toString();
-        result += isDateAndTime 
+        result += isDateAndTime
                 ? " (at: " + this.eventDateTime.format(super.dateTimePattern) + ")"
                 : " (at: " + this.eventDate.format(super.datePattern) + ")";
         return result;

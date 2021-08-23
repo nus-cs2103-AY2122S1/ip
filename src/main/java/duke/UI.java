@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class UI {
 
     private static final String lineBreak = "\t____________________________________________________________\n";
-    private Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 
     // formats string argument(s) sequentially
     public static String formatString(String one, String... strings) {
@@ -39,7 +39,7 @@ public class UI {
 
     public void showWelcome() {
         // Starting Message
-        String[] startMessage = {" ____        _        ", 
+        String[] startMessage = {" ____        _        ",
                 "|  _ \\ _   _| | _____ ",
                 "| | | | | | | |/ / _ \\",
                 "| |_| | |_| |   <  __/",

@@ -1,11 +1,10 @@
 package duke.command;
 
 import duke.UI;
-
 import duke.task.TaskList;
 
-public class DoneCommand extends Command{
-    
+public class DoneCommand extends Command {
+
     private final String userInput;
     private final TaskList tasks;
 

@@ -1,12 +1,7 @@
 package duke.command;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
-
 import duke.UI;
+import duke.task.*;
 
 import java.time.format.DateTimeParseException;
 
@@ -27,7 +22,7 @@ public class AddCommand extends Command {
         Task newTask = null;
         String[] inputs = this.userInput.split(" ", 2);
         try {
-            switch(this.addType) {
+            switch (this.addType) {
             case todo: {
                 newTask = new Todo(inputs[1]);
                 break;
@@ -55,10 +50,10 @@ public class AddCommand extends Command {
             }
         } catch (DateTimeParseException e) {
             System.out.println(
-                UI.tabAndFormat(
-                        "☹ OOPS!!! Please enter an appropriate date (and optionally, 24-hour time)\n" + 
-                        "Format: YYYY-MM-DD HH:MM"
-                )
+                    UI.tabAndFormat(
+                            "☹ OOPS!!! Please enter an appropriate date (and optionally, 24-hour time)\n" +
+                                    "Format: YYYY-MM-DD HH:MM"
+                    )
             );
             return;
         }

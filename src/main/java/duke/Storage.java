@@ -8,7 +8,6 @@ import duke.task.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.Scanner;
 
 public class Storage {
@@ -29,13 +28,13 @@ public class Storage {
 
     public void load() throws IOException {
         File saveFile = new File(filePath);
-        System.out.println(saveFile.createNewFile());
+        saveFile.createNewFile();
         Scanner saveReader = new Scanner(saveFile);
-        while(saveReader.hasNextLine()) {
+        while (saveReader.hasNextLine()) {
             String inputRead = saveReader.nextLine();
             String[] inputs = inputRead.split("[|]");
 
-            switch(inputs[0]) {
+            switch (inputs[0]) {
             case "T":
                 tasks.add(new Todo(inputs[2]));
                 break;
@@ -62,9 +61,9 @@ public class Storage {
         saveReader.close();
     }
 
-    public void save() throws IOException {        
+    public void save() throws IOException {
         FileWriter writer = new FileWriter(filePath, false);
-        for (int i = 0; i < tasks.size(); i++){
+        for (int i = 0; i < tasks.size(); i++) {
             writer.write(tasks.get(i).databaseString() + "\n");
         }
         writer.close();

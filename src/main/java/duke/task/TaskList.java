@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
 
     // Adds a new task to the storage
     public void add(Task task) {
@@ -23,10 +23,10 @@ public class TaskList {
 
     // Marks a task as done
     public void markDone(int ind) {
-        if (ind < 0 || ind >= tasks.size()){ 
+        if (ind < 0 || ind >= tasks.size()) {
             throw new IllegalArgumentException(
-                    "☹ OOPS!!! Index entered is not valid. " + 
-                    "Please use 'list' and check for the appropriate index for task(s)."
+                    "☹ OOPS!!! Index entered is not valid. " +
+                            "Please use 'list' and check for the appropriate index for task(s)."
             );
         }
         tasks.get(ind).markDone();
@@ -34,21 +34,23 @@ public class TaskList {
 
     // Gets a task from the storage
     public Task get(int ind) {
-        if (ind < 0 || ind >= tasks.size()){ 
+        if (ind < 0 || ind >= tasks.size()) {
             throw new IllegalArgumentException(
-                    "☹ OOPS!!! Index entered is not valid. " + 
-                    "Please use 'list' and check for the appropriate index for task(s)."
-            );        }
+                    "☹ OOPS!!! Index entered is not valid. " +
+                            "Please use 'list' and check for the appropriate index for task(s)."
+            );
+        }
         return tasks.get(ind);
     }
 
     // Deletes a task from storage
     public void delete(int ind) {
-        if (ind < 0 || ind >= tasks.size()){ 
+        if (ind < 0 || ind >= tasks.size()) {
             throw new IllegalArgumentException(
-                    "☹ OOPS!!! Index entered is not valid. " + 
-                    "Please use 'list' and check for the appropriate index for task(s)."
-            );        }
+                    "☹ OOPS!!! Index entered is not valid. " +
+                            "Please use 'list' and check for the appropriate index for task(s)."
+            );
+        }
         tasks.remove(ind);
     }
 
@@ -57,7 +59,7 @@ public class TaskList {
     public String toString() {
         String result = "Here are the tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
-            result += ("\n" + String.valueOf(i + 1) + "." + tasks.get(i).toString());
+            result += ("\n" + (i + 1) + "." + tasks.get(i).toString());
         }
         return result;
     }
