@@ -38,4 +38,13 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+    /**
+     * Get text description of Task.
+     * @return Text description of Task
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
 }

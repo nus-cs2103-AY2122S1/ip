@@ -63,6 +63,19 @@ public class Parser {
             } else {
                 ui.noSuchTaskMessage();
             }
+        } else if (isFindCall(userInput)) {
+            System.out.println("____________________________________________________________");
+            String keyword = userInput.substring(5);
+            TaskList matchingTasks = tasks.find(keyword);
+            if (matchingTasks.size() == 0) {
+                System.out.println("There are no tasks that include your keyword.");
+            } else {
+                System.out.println("Here are the matching tasks in your list:");
+                for (int i = 0; i < matchingTasks.size(); i++) {
+                    System.out.println((i + 1) + "." + matchingTasks.getTask(i).toString());
+                }
+            }
+            System.out.println("____________________________________________________________");
         } else {
             System.out.println("____________________________________________________________");
             try {
@@ -81,6 +94,7 @@ public class Parser {
             }
             System.out.println("____________________________________________________________");
         }
+
         return false;
     }
 
@@ -187,5 +201,23 @@ public class Parser {
             System.out.println("  " + tasks.getTask(tasks.size() - 1).toString());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         }
+    }
+
+    /**
+     * Check whether user input is a valid find call to find Tasks with a certain keyword.
+     * @param str User input.
+     * @return True if valid find call, false otherwise.
+     */
+    public boolean isFindCall(String str) {
+        if (str == null) {
+            return false;
+        }
+        if (str.length() < 5) {
+            return false;
+        }
+        if (!str.startsWith("find ")) {
+            return false;
+        }
+        return true;
     }
 }
