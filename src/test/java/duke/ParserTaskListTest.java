@@ -15,8 +15,7 @@ public class ParserTaskListTest {
         try {
             Scanner testScanner = new Scanner(Paths.get("java","duke","add-markdone-command"));
             Storage storage = new Storage();
-            Ui ui = new Ui();
-            Parser parser = new Parser(new TaskList(storage, ui),ui);
+            Parser parser = new Parser(new TaskList(storage));
             parser.parse(testScanner);
             assertEquals(storage.getUserInputRecord().get(0).toString(),"[T][X] sleep");
             assertEquals(storage.getUserInputRecord().get(1).toString(),"[D][X] assignment (by: AUGUST 9 2021)");
@@ -32,8 +31,7 @@ public class ParserTaskListTest {
         try {
             Scanner testScanner = new Scanner(Paths.get("java","duke","delete-command"));
             Storage storage = new Storage();
-            Ui ui = new Ui();
-            Parser parser = new Parser(new TaskList(storage, ui),ui);
+            Parser parser = new Parser(new TaskList(storage));
             parser.parse(testScanner);
             assert(storage.getUserInputRecord().isEmpty());
 

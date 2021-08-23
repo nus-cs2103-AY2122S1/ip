@@ -3,13 +3,13 @@ package duke;
 public class Duke {
     private Parser parser;
     private Storage storage;
-    private Ui ui;
+    private DukeUi ui;
 
     public Duke() {
-        ui = new Ui();
+        ui = new DukeUi();
         storage = new Storage();
         storage.autoLoad();
-        parser = new Parser(new TaskList(storage,ui),ui);
+        parser = new Parser(new TaskList(storage));
     }
 
     public void run() {

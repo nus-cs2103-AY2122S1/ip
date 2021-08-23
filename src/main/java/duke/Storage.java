@@ -2,19 +2,19 @@ package duke;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
     private FormatAdapter adapter;
     private ArrayList<Task> userInputRecord;
+    private StorageUi ui;
 
     public Storage() {
         this.userInputRecord = new ArrayList<>();
         this.adapter = new FormatAdapter();
+        this.ui = new StorageUi();
     }
 
     public void autoSave() {
@@ -24,17 +24,16 @@ public class Storage {
             try {
                 Files.createDirectory(Path.of("data"));
             } catch (IOException e) {
-                System.out.println("Something is wrong " + e);
+                ui.directoryAlreadyExistMessage();
             }
         } else if(!fileExists) {
             try {
                 Files.createFile(Path.of("data","record"));
             } catch (IOException e) {
-                System.out.println("Something is wrong " + e);
+                ui.fileAlreadyExistMessage();
             }
         }
         try {
-            System.out.println(Paths.get("data","record"));
             FileWriter writer = new FileWriter(Paths.get("data","record").toString());
             for (Task task : userInputRecord) {
                 writer.write(task.toString());
@@ -42,7 +41,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("Something is wrong " + e);
+            ui.unexpectedErrorMessage();
         }
     }
 
@@ -75,7 +74,66 @@ public class Storage {
             }
             scanner.close();
         } catch (IOException e) {
-            System.out.println(adapter.formatMessage("Saved data not found, a new data file created.\n"));
+            ui.saveNotFoundMessage();
+        }
+    }
+
+    public void save(String filePath) {
+        try {
+            filePath = filePath.replace("save ", "");
+            if (filePath.isEmpty()) {
+                ui.invalidFilePathMessage();
+                return;
+            } else {
+                Files.deleteIfExists(Path.of(filePath));
+                Files.createFile(Path.of(filePath));
+            }
+
+            FileWriter writer = new FileWriter(filePath);
+            for (Task task : userInputRecord) {
+                writer.write(task.toString());
+                writer.write(System.getProperty("line.separator"));
+            }
+            writer.close();
+            autoSave();
+            ui.saveSuccessfulMessage();
+        } catch (IOException|InvalidPathException e) {
+            ui.invalidFilePathMessage();
+        }
+    }
+
+    public void load(String filePath) {
+        try {
+            filePath = filePath.replace("load ","");
+            Scanner scanner = new Scanner(Paths.get(filePath));
+            while (scanner.hasNextLine()) {
+                String itemInfo = scanner.nextLine();
+                if(itemInfo.startsWith("[T]")) {
+                    Task task = new ToDo(itemInfo.substring(7));
+                    if(itemInfo.contains("[X]")) {
+                        task.setDone(true);
+                    }
+                    userInputRecord.add(task);
+                } else if(itemInfo.startsWith("[D]")) {
+                    Task task = new Deadline(itemInfo.substring(7, itemInfo.indexOf("(by")),
+                            adapter.convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(by") + 5, itemInfo.length() -1)));
+                    if(itemInfo.contains("[X]")) {
+                        task.setDone(true);
+                    }
+                    userInputRecord.add(task);
+                } else if(itemInfo.startsWith("[E]")) {
+                    Task task = new Event(itemInfo.substring(7, itemInfo.indexOf("(at")),
+                            adapter.convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(at") + 5, itemInfo.length() -1)));
+                    if(itemInfo.contains("[X]")) {
+                        task.setDone(true);
+                    }
+                    userInputRecord.add(task);
+                }
+            }
+            scanner.close();
+            ui.loadSuccessfulMessage();
+        } catch (IOException e) {
+            ui.invalidFilePathMessage();
         }
     }
 

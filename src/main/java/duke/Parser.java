@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Parser {
     private TaskList tasks;
-    private Ui ui;
+    private ParserUi ui;
 
-    public Parser(TaskList tasks, Ui ui) {
+    public Parser(TaskList tasks) {
         this.tasks = tasks;
-        this.ui = ui;
+        this.ui = new ParserUi();
     }
 
     /**
@@ -17,6 +17,7 @@ public class Parser {
      * Case 1: done 3 => valid, standard form
      * Case 2: done         5 ==> valid, after trimmed
      * Case 3: done with my schoolwork ==> invalid, will generate an exception
+     * Case 4: done 1 4 => valid, will be interpreted as done 14
      * **/
     private boolean isDoneCommand(String userInput) {
         String copy = userInput.replace("done", "");
@@ -37,18 +38,24 @@ public class Parser {
         while(!userInput.equals("bye")) {
             if (userInput.equals("list")) {
                 ui.printUserInputRecord(tasks.getStorage().getUserInputRecord());
-            } else if(userInput.startsWith("done")){
-                if(isDoneCommand(userInput)) {
+            } else if (userInput.startsWith("done")) {
+                if (isDoneCommand(userInput)) {
                     tasks.markAsDone(userInput, tasks.getStorage().getUserInputRecord());
                 } else {
                     ui.cannotInterpretMessage();
                 }
-            } else if(userInput.startsWith("delete")) {
+            } else if (userInput.equals("deleteAll")) {
+                tasks.deleteAll(tasks.getStorage().getUserInputRecord());
+            } else if (userInput.startsWith("delete")) {
                 if (isDeleteCommand(userInput)) {
                     tasks.delete(userInput, tasks.getStorage().getUserInputRecord());
                 } else {
                     ui.cannotInterpretMessage();
                 }
+            } else if (userInput.startsWith("save ")) {
+                tasks.getStorage().save(userInput);
+            } else if (userInput.startsWith("load ")) {
+                tasks.getStorage().load(userInput);
             } else {
                 tasks.add(userInput, tasks.getStorage().getUserInputRecord());
             }

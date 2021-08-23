@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public class TaskList {
     private Storage storage;
-    private Ui ui;
+    private TaskListUi ui;
 
-    public TaskList(Storage storage, Ui ui) {
+    public TaskList(Storage storage) {
         this.storage = storage;
-        this.ui = ui;
+        this.ui = new TaskListUi();
     }
 
     //This method adds the user's input to the reminder list
@@ -94,6 +94,11 @@ public class TaskList {
         } catch (NumberFormatException e) {
             ui.invalidIDMessage();
         }
+    }
+
+    public void deleteAll(ArrayList<Task> userInputRecord) {
+        userInputRecord.clear();
+        ui.deleteAllMessage();
     }
 
     public Storage getStorage() {

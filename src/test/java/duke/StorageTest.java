@@ -18,8 +18,7 @@ public class StorageTest {
         try {
             Scanner testScanner = new Scanner(Paths.get("java","duke","add-markdone-command"));
             Storage storage = new Storage();
-            Ui ui = new Ui();
-            Parser parser = new Parser(new TaskList(storage, ui),ui);
+            Parser parser = new Parser(new TaskList(storage));
             parser.parse(testScanner);
 
             BufferedReader expectedReader = new BufferedReader(new FileReader(String.valueOf(Path.of("java","duke","expected-storage"))));
