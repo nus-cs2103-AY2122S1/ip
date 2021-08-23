@@ -13,8 +13,8 @@ public class TaskList {
         return this.taskList.get(i);
     }
 
-    public void addTask(Task task) {
-        this.taskList.add(task);
+    public boolean addTask(Task task) {
+        return this.taskList.add(task);
     }
 
     public Task deleteTask(int taskNum) {

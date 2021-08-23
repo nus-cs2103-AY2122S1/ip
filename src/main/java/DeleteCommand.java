@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
                 ui.missingTaskMessage();
             }
         } catch (IndexOutOfBoundsException e) {
-            ui.showErrorMessage("Please enter a valid index!");
+            Ui.showErrorMessage("Please enter a valid index!");
         }
     }
 

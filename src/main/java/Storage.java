@@ -29,7 +29,7 @@ public class Storage {
             f.createNewFile();
 
         } catch (IOException e) {
-            return;
+            Ui.showErrorMessage("Error in storage creation!");
         }
     }
 
@@ -81,7 +81,7 @@ public class Storage {
             }
             bw.close();
         } catch (IOException e) {
-            return;
+            Ui.showErrorMessage("Error in saving file!");
         }
     }
 

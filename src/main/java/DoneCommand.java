@@ -11,7 +11,7 @@ public class DoneCommand extends Command {
             taskToMark.markDone();
             ui.markedDoneMessage(taskToMark);
         } catch (IndexOutOfBoundsException e) {
-            ui.showErrorMessage("Please enter a valid index!");
+            Ui.showErrorMessage("Please enter a valid index!");
         }
     }
 

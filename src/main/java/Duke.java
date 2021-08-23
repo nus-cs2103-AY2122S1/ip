@@ -18,7 +18,7 @@ public class Duke {
                 c.execute(storage, ui);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showErrorMessage(e.getMessage());
+                Ui.showErrorMessage(e.getMessage());
             }
         }
     }

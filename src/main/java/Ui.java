@@ -74,7 +74,7 @@ public class Ui {
         prettyPrintToUser(UNKNOWN_COMMAND);
     }
 
-    public void showErrorMessage(String errorMsg) {
+    public static void showErrorMessage(String errorMsg) {
         System.err.println(errorMsg);
     }
 
