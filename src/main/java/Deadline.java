@@ -19,4 +19,24 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    /**
+     * Returns the task type of Todo.
+     *
+     * @return 1 to represent Deadline task type.
+     */
+    @Override
+    public int taskType() {
+        return 1;
+    }
+
+    /**
+     * Returns the description in the format that will be saved into Hard drive.
+     *
+     * @return String
+     */
+    @Override
+    public String savedFormat() {
+        return super.description + "/~/" + this.by;
+    }
 }

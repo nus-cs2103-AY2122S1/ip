@@ -1,4 +1,10 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,7 +16,23 @@ public class Duke {
         scanner = new Scanner(System.in);
         savedInputs = new ArrayList<>(100);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        chat();
+
+        try {
+            if (!new File("src/data/duke.txt").createNewFile()) {
+                Scanner dataScanner = new Scanner(new File("src/data/duke.txt"));
+                int counter = 0;
+                while(dataScanner.hasNext()) {
+                    convertToTask(dataScanner.nextLine(), counter);
+                    counter++;
+
+                }
+            }
+            chat();
+        } catch (IOException ioException) {
+            System.out.println(ioException);
+        } finally {
+            scanner.close();
+        }
     }
 
     /**
@@ -57,7 +79,25 @@ public class Duke {
                             throw new DukeException("Oops! " +
                                 "The task to mark as done is not within the range of the list.");
                         }
+                        System.out.println("Nice! I've marked this task as done:\n  [X] " +
+                                savedInputs.get(donePos - 1).description);
                         savedInputs.get(donePos - 1).markAsDone();
+                        try {
+                            Task t = savedInputs.get(donePos - 1);
+                            String taskType = t.taskType() == 0 ? "T" : (t.taskType() == 1 ? "D" : "E");
+                            String done = t.isDone ? "1" : "0";
+                            String description = t.savedFormat();
+                            String textToSave = taskType + "/~/" + done + "/~/" + description + "\n";
+
+                            List<String> fileContent = new ArrayList<>(Files.readAllLines(Path
+                                    .of("src/data/duke.txt")));
+                            fileContent.set(donePos - 1, textToSave);
+
+                            Files.write(Path.of("src/data/duke.txt"), fileContent);
+
+                        } catch (IOException ioException) {
+                            System.out.println(ioException);
+                        }
                         break;
 
                     case DELETE:
@@ -78,6 +118,17 @@ public class Duke {
                             savedInputs.get(deletePos - 1).toString());
                         savedInputs.remove(deletePos - 1);
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
+                        try {
+                            List<String> fileContent = new ArrayList<>(Files.readAllLines(Path
+                                    .of("src/data/duke.txt")));
+//                            fileContent.set(deletePos - 1, "");
+                            fileContent.remove(deletePos - 1);
+
+                            Files.write(Path.of("src/data/duke.txt"), fileContent);
+
+                        } catch (IOException ioException) {
+                            System.out.println(ioException);
+                        }
                         break;
 
                     case TODO:
@@ -94,6 +145,16 @@ public class Duke {
                         System.out.println("Got it. I've added this task:\n  " + todo);
                         savedInputs.add(todo);
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
+                        try {
+                            String textToSave = "T/~/0/~/" + todo.description + "\n";
+
+                            FileWriter fw = new FileWriter("src/data/duke.txt", true);
+                            fw.write(textToSave);
+                            fw.close();
+
+                        } catch (IOException ioException) {
+                            System.out.println(ioException);
+                        }
                         break;
 
                     case DEADLINE:
@@ -121,6 +182,16 @@ public class Duke {
                         System.out.println("Got it. I've added this task:\n  " + deadline);
                         savedInputs.add(deadline);
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
+                        try {
+                            String textToSave = "D/~/0/~/" + deadline.savedFormat() + "\n";
+
+                            FileWriter fw = new FileWriter("src/data/duke.txt", true);
+                            fw.write(textToSave);
+                            fw.close();
+
+                        } catch (IOException ioException) {
+                            System.out.println(ioException);
+                        }
                         break;
 
                     case EVENT:
@@ -146,6 +217,16 @@ public class Duke {
                         System.out.println("Got it. I've added this task:\n  " + event);
                         savedInputs.add(event);
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
+                        try {
+                            String textToSave = "E/~/0/~/" + event.savedFormat() + "\n";
+
+                            FileWriter fw = new FileWriter("src/data/duke.txt", true);
+                            fw.write(textToSave);
+                            fw.close();
+
+                        } catch (IOException ioException) {
+                            System.out.println(ioException);
+                        }
                         break;
 
                     default:
@@ -178,6 +259,26 @@ public class Duke {
             return Command.EVENT;
         } else {
             return Command.INVALID;
+        }
+    }
+
+    private static void convertToTask(String s, int counter) {
+        String[] savedTasks = s.split("/~/");
+
+        String description = savedTasks[2];
+        if (savedTasks.length == 3) {
+            savedInputs.add(new Todo(description));
+        } else if (savedTasks[0].equals("D")) {
+            String by = savedTasks[3];
+            savedInputs.add(new Deadline(description, by));
+        } else {
+            String at = savedTasks[3];
+            savedInputs.add(new Event(description, at));
+        }
+
+        boolean isDone = savedTasks[1].equals("1");
+        if (isDone) {
+            savedInputs.get(counter).markAsDone();
         }
     }
 }
