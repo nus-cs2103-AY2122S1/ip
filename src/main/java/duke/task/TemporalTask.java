@@ -13,7 +13,8 @@ public abstract class TemporalTask extends Task {
     private static final String DATE_TIME_FORMAT_PATTERN = "HH:mm MMMM d yyyy";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT_PATTERN);
     private static final String DATE_TIME_FILE_FORMAT_PATTERN = "yyyyMMddHHmm";
-    private static final DateTimeFormatter DATE_TIME_FILE_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FILE_FORMAT_PATTERN);
+    private static final DateTimeFormatter DATE_TIME_FILE_FORMATTER = DateTimeFormatter
+            .ofPattern(DATE_TIME_FILE_FORMAT_PATTERN);
 
     private LocalDateTime time;
 

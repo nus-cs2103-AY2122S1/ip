@@ -26,7 +26,8 @@ public abstract class Command {
         String commandName = tokens[0];
         CommandType commandType = getCommandType();
         if (!commandName.equals(commandType.getCommandName())) {
-            throw new DukeInvalidCommandException(String.format("This command is not \"%s\".", commandType.getCommandDescription()));
+            throw new DukeInvalidCommandException(String.format("This command is not \"%s\".",
+                    commandType.getCommandDescription()));
         }
         parseCommand(tokens);
     }
@@ -40,6 +41,12 @@ public abstract class Command {
      */
     public abstract void execute(TaskHandler taskHandler, Ui ui) throws DukeInvalidCommandException;
 
+    /**
+     * Parses the command to check if it is valid and to set up the command for execution.
+     *
+     * @param tokens The tokens in the original command which were separated by spaces.
+     * @throws DukeInvalidCommandException If the command is malformed, or invalid.
+     */
     abstract void parseCommand(String[] tokens) throws DukeInvalidCommandException;
 
     abstract CommandType getCommandType();

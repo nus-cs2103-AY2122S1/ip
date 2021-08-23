@@ -13,7 +13,8 @@ public enum CommandType {
     MARK_TASK_DONE("done", "Mark Task Done"),
     ADD_DEADLINE_TASK("deadline", "Add Deadline Task"),
     ADD_EVENT_TASK("event", "Add Event Task"),
-    DELETE_TASK("delete", "Delete Task");
+    DELETE_TASK("delete", "Delete Task"),
+    FIND_TASKS("find", "Find Task");
 
     private final String commandName;
     private final String commandDescription;
