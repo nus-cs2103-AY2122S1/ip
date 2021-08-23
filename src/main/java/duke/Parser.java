@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
  * This is the class that handles user input.
  */
 public class Parser {
+
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
@@ -101,6 +102,7 @@ public class Parser {
             break;
         default:
             bot.handleWrongCommand();
+            break;
         }
 //        return run;
     }

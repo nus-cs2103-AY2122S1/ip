@@ -5,6 +5,7 @@ package duke.tasks;
  * if the task is done or not.
  */
 public class Task {
+
     private String name;
     private boolean isDone;
 

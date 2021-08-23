@@ -89,6 +89,7 @@ public class Storage {
                     load.add(t);
                     break;
                 default:
+                    break;
                 }
             }
             myReader.close();

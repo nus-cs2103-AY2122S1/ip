@@ -2,8 +2,6 @@ package duke;
 
 import duke.exception.DukeException;
 
-import java.time.format.DateTimeFormatter;
-
 import java.util.Scanner;
 
 /**
@@ -18,7 +16,6 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
         ChatBot bot = new ChatBot();
         Parser parser = new Parser();
@@ -37,7 +34,6 @@ public class Duke {
                     break;
                 }
                 input = sc.nextLine();
-
             } catch (DukeException e) {
                 bot.handleErrorMessage(e.getMessage());
                 input = sc.nextLine();
