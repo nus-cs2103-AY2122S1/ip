@@ -5,6 +5,9 @@ import exception.BobCatException;
 import executor.ExecutionUnit;
 import view.Ui;
 
+/**
+ * Main entrypoint to the BobCat Chat Application. Attempts to follow the MVC pattern
+ */
 public class BobCat {
     public static void main(String[] args) throws IOException {
         Scanner scanObj = new Scanner(System.in);
@@ -17,7 +20,7 @@ public class BobCat {
         } catch (IOException e) {
             ui.respond(new String[]{"Memory file not found! Starting from blank state..."});
         } catch (BobCatException e) {
-            ui.respondError("Memory may have been corrupted! Starting from blank state...");
+            ui.respond(new String[]{"Memory may have been corrupted! Starting from blank state..."});
             executor.clearStorage();
         } finally {
             ui.respond(new String[] {"Initialisation done!", "What can I do for you?"});
@@ -27,10 +30,9 @@ public class BobCat {
         while(!inp.equals("bye")) {
             inp = scanObj.nextLine();
             try {
-                String[] results = executor.executeCommand(inp);
-                ui.respond(results);
+                ui.respond(executor.executeCommand(inp));
             } catch (BobCatException e) {
-                ui.respondError(e.getMessage());
+                ui.respondError(e);
             }
         }
         scanObj.close();
