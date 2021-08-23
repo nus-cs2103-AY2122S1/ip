@@ -17,6 +17,7 @@ public class Duke {
     private static final String LIST_COMMAND = "list";
     private static final String DATA_DELIMITER = " \\| ";
     private static final String DATA_FILENAME = "duke.txt";
+    private static final String DATA_FILEPATH = System.getProperty("user.dir") + "/data/";
     private static List<Task> tasks = new ArrayList<>();
 
     private static void printReply(String string) {
@@ -80,8 +81,12 @@ public class Duke {
     }
 
     private static void readData() {
+        File directory = new File(DATA_FILEPATH);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
         try {
-            File dataFile = new File(DATA_FILENAME);
+            File dataFile = new File(DATA_FILEPATH + DATA_FILENAME);
             Scanner fileReader = new Scanner(dataFile);
             while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
@@ -113,7 +118,7 @@ public class Duke {
             printReply("duke.txt found. Tasks have been imported.");
         } catch (FileNotFoundException e) {
             try {
-                File dataFile = new File(DATA_FILENAME);
+                File dataFile = new File(DATA_FILEPATH + DATA_FILENAME);
                 dataFile.createNewFile();
                 String message = DATA_FILENAME + " not found. File has been created.";
                 printReply(message);
@@ -125,7 +130,7 @@ public class Duke {
 
     private static void writeData(Task task) {
         try {
-            FileWriter fileWriter = new FileWriter(DATA_FILENAME, true);
+            FileWriter fileWriter = new FileWriter(DATA_FILEPATH + DATA_FILENAME, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(task.getDataString());
             bufferedWriter.newLine();
@@ -137,7 +142,7 @@ public class Duke {
 
     private static void rewriteData() {
         try {
-            FileWriter fileWriter = new FileWriter(DATA_FILENAME, false);
+            FileWriter fileWriter = new FileWriter(DATA_FILEPATH + DATA_FILENAME, false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (Task task : tasks) {
                 bufferedWriter.write(task.getDataString());
