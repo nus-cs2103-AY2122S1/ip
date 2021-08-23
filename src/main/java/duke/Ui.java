@@ -3,12 +3,16 @@ package duke;
 import duke.tasktypes.Task;
 import duke.tasktypes.TaskList;
 
-
+/**
+ * Deals with the interactions with the user.
+ */
 public class Ui {
 
-    // deals with interactions with the user
     public Ui() {}
 
+    /**
+     * Shows introduction paragraph and instructions to user.
+     */
     public void showIntro() {
         String dory = "      _\n"
                 + "     | |\n"
@@ -47,31 +51,55 @@ public class Ui {
         System.out.println(dory);
     }
 
+    /**
+     * Displays deleted task.
+     * @param removed Deleted Task.
+     * @param taskList TaskList containing remaining tasks.
+     */
     public void displayDelete(Task removed, TaskList taskList) {
         System.out.println(" > i've removed this task:");
         System.out.println("  " + removed.toString());
         System.out.println("you have " + taskList.getSize() + " things in your list");
     }
 
+    /**
+     * Displays finished task.
+     * @param done Done Task.
+     * @param taskList TaskList containing remaining tasks.
+     */
     public void displayDone(Task done, TaskList taskList) {
         System.out.println(" > i've marked this as done:");
         System.out.println("  " + done.toString());
     }
 
+    /**
+     * Displays goodbye message.
+     */
     public void displayBye() {
         System.out.println(" > see you! hope to see you again :-)");
     }
 
+    /**
+     * Displays added task.
+     * @param taskAdded Added task.
+     */
     public void displayAdd(Task taskAdded) {
         System.out.println(" > added:");
         System.out.println("    " + taskAdded.toString());
     }
 
+    /**
+     * Displays invalid comment.
+     */
     public void displayWrongCommand() {
         System.out.println("i'm not sure i know what you mean :-( try typing something\n"
                 + "using 'todo', 'deadline' or 'event'");
     }
 
+    /**
+     * Displays taskList.
+     * @param taskList TaskList with all the tasks.
+     */
     public void displayList(TaskList taskList) {
         if (taskList.getSize() == 0) {
             System.out.println("add anything using 'todo', 'deadline' or 'event'");
@@ -86,6 +114,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays how many tasks are remaining in the list.
+     * @param taskList TaskList with all tasks.
+     */
     public void displayTaskListSize(TaskList taskList) {
         if (taskList.getSize() == 1) {
             System.out.println("you have " + taskList.getSize() + " thing in your list");
@@ -96,14 +128,24 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays straight line.
+     */
     public void endOfCommand() {
         System.out.println("------------------------------------");
     }
 
+    /**
+     * Displays straight line.
+     */
     public void endOfResponse() {
         System.out.println("==================================Oo");
     }
 
+    /**
+     * Displays error message
+     * @param e Exception
+     */
     public void showError(Exception e) {
         System.out.println(e.getMessage());
     }

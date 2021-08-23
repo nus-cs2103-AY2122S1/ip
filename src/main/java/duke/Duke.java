@@ -4,12 +4,18 @@ import java.util.Scanner;
 import duke.tasktypes.TaskList;
 import duke.commands.Command;
 
+/**
+ * Represents the chat bot.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Starts the Dory chat bot.
+     */
     public void run() {
         ui.showIntro();
 
@@ -30,6 +36,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Constructor for the class.
+     * @param filePath filePath for the data file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

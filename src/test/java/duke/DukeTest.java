@@ -1,6 +1,5 @@
 package duke;
 
-import duke.commands.ListCommand;
 import duke.tasktypes.*;
 import org.junit.jupiter.api.Test;
 

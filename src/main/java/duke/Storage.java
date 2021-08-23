@@ -14,6 +14,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Deals with loading tasks from the data file
+ * and saving tasks in the data file.
+ */
 public class Storage {
 
     private String filePath;
@@ -22,6 +26,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the data previously stored in the file.
+     * @return ArrayList of data.
+     */
     public ArrayList<Task> load() {
         // load data from hard disk when Dory starts up and starts bot
         Path dataFolderPath = Paths.get("data");
@@ -81,6 +89,10 @@ public class Storage {
     }
 
 
+    /**
+     * Updates the data in the file with new data.
+     * @param taskList TaskList containing all tasks.
+     */
     public void updateHardDisk(TaskList taskList) {
         Path dataFilePath = Paths.get("data/dory.txt");
         try {
