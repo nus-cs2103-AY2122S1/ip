@@ -1,8 +1,14 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Duke {
     private static final String LINEBREAK = "____________________________________________________________";
@@ -88,6 +94,7 @@ public class Duke {
             }
             currentTask.setIsDone(true);
             print("YOU SAY YOU'VE COMPLETED THIS TASK:\n " + currentTask);
+            saveToFile();
         } catch (NumberFormatException e) {
             throw new DukeException("DO YOU NOT KNOW WHAT A NUMBER IS, FOOLISH HUMAN?");
         }
@@ -106,10 +113,10 @@ public class Duke {
             tasks.remove(index - 1);
             print(String.format("YOU'VE CHOSEN TO ABANDON THIS TASK:\n %s\n YOU HAVE %d TASKS LEFT.", currentTask,
                     tasks.size()));
+            saveToFile();
         } catch (NumberFormatException e) {
             throw new DukeException("DO YOU NOT KNOW WHAT A NUMBER IS, FOOLISH HUMAN?");
         }
-
     }
 
     private void addToDo(String taskName) throws DukeException {
@@ -119,6 +126,7 @@ public class Duke {
         Task newTask = new ToDo(taskName);
         tasks.add(newTask);
         print(String.format(" MORTAL, YOU'VE ADDED THIS TASK:\n %s\n YOU HAVE %d TASKS LEFT.", newTask, tasks.size()));
+        saveToFile();
     }
 
     private void addEvent(String input) throws DukeException {
@@ -130,6 +138,7 @@ public class Duke {
         tasks.add(newEvent);
         print(String.format(" MORTAL, YOU'VE ADDED THIS EVENT:\n %s\n YOU HAVE %d TASKS LEFT.", newEvent,
                 tasks.size()));
+        saveToFile();
     }
 
     private void addDeadline(String input) throws DukeException {
@@ -141,9 +150,62 @@ public class Duke {
         tasks.add(newDeadline);
         print(String.format(" MORTAL, YOU'VE ADDED THIS DEADLINE:\n %s\n YOU NOW HAVE %d TASKS.", newDeadline,
                 tasks.size()));
+        saveToFile();
     }
 
-    private void serve() {
+    private void getTasksFromFile() throws DukeException {
+        try {
+            File taskFile = new File("../../../data", "duke.txt");
+            Scanner myReader = new Scanner(taskFile);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                String[] args = data.split(Pattern.quote("|"));
+                boolean isDone = args[1].trim().equals("1");
+                switch (args[0].trim()) {
+                    case "T":
+                        tasks.add(new ToDo(args[2], isDone));
+                        break;
+                    case "E":
+                        tasks.add(new Event(args[2], isDone, args[3]));
+                        break;
+                    case "D":
+                        tasks.add(new Deadline(args[2], isDone, args[3]));
+                        break;
+                    default:
+                        myReader.close();
+                        throw new IllegalArgumentException(
+                                "COULDN'T PARSE YOUR STUPID FILE. FORMAT THE INPUT PROPERLY.");
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            // Init file and directory if they do not exist
+            saveToFile();
+        } catch (Exception e) {
+            throw new DukeException("COULDN'T GET YOUR MISERABLE FILE. TRY AGAIN.");
+        }
+    }
+
+    private void saveToFile() throws DukeException {
+        try {
+            // create directory if it does not exist
+            File directory = new File("../../../data");
+            directory.mkdirs();
+
+            File myFile = new File("../../../data", "duke.txt");
+            FileWriter DukeWriter = new FileWriter(myFile);
+            for (Task task : tasks) {
+                DukeWriter.write(String.format("%s\n", task.getFileString()));
+            }
+            DukeWriter.close();
+        } catch (IOException e) {
+            throw new DukeException("SAVING THE FILE FAILED YOU IDIOT. JUST GIVE UP.");
+        }
+
+    }
+
+    private void serve() throws DukeException {
+        getTasksFromFile();
         greet();
         Scanner input = new Scanner(System.in);
 
@@ -166,7 +228,7 @@ public class Duke {
         input.close();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Duke Squirtle = new Duke();
         Squirtle.serve();
     }
