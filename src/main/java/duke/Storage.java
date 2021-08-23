@@ -20,6 +20,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns the list of tasks as loaded from the file given by the file path.
+     *
+     * @return A list of the loaded tasks.
+     * @throws FileNotFoundException If the file containing the tasks is not found.
+     */
     public List<Task> load() throws FileNotFoundException {
         File file = new File(this.filePath);
         Scanner reader = new Scanner(file);

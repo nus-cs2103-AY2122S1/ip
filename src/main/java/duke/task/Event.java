@@ -12,10 +12,12 @@ public class Event extends Task {
         this.time = LocalDate.parse(time);
     }
 
+    /** Returns the time of the event as a LocalDate object */
     public LocalDate getTime() {
         return this.time;
     }
 
+    /** Returns the time of the event as a String */
     private String timeToString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
         return this.time.format(formatter);
