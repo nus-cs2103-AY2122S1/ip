@@ -4,6 +4,9 @@ import duke.command.Command;
 
 import java.time.DateTimeException;
 
+/**
+ * Represents the Duke bot engine, handles everything.
+ */
 public class Duke {
     private final Ui ui;
     private TaskManager taskManager;
@@ -13,6 +16,9 @@ public class Duke {
         this.taskManager = new TaskManager();
     }
 
+    /**
+     * Entrypoint of Duke bot engine.
+     */
     public void run() {
         ui.greet();
         boolean isExit = false;

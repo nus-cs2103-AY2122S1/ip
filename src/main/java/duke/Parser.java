@@ -2,8 +2,20 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * Represents a parser to understand user input and returns a Command object to be executed.
+ */
 public class Parser {
 
+    /**
+     * Parse a String of fullCommand and Return a valid Command object.
+     * If fullCommand is invalid, exceptions are thrown.
+     *
+     * @param fullCommand String of the full command user inputted.
+     * @return Command that can be executed.
+     * @throws DukeException If the command action is not recognized.
+     * @throws IllegalArgumentException If there are missing arguments for given command.
+     */
     public static Command parse(String fullCommand) throws DukeException, IllegalArgumentException {
         String[] parts = fullCommand.split(" ", 2);
         String action = parts[0];

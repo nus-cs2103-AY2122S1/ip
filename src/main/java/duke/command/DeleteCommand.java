@@ -4,6 +4,9 @@ import duke.task.Task;
 import duke.TaskManager;
 import duke.Ui;
 
+/**
+ * Represents the command "delete x" to delete a task at index x (1-indexed).
+ */
 public class DeleteCommand extends Command {
     private final int id;
     public DeleteCommand(int id) {

@@ -8,6 +8,9 @@ import duke.task.ToDo;
 
 import java.time.DateTimeException;
 
+/**
+ * Represents the command to add additional tasks. Accepted task so far are "todo" "deadline" and "event".
+ */
 public class AddCommand extends Command{
     private final String type;
     private final String[] args;

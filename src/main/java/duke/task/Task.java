@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a Task object that support serializing to database string and pretty print. Can be marked as completed.
+ */
 abstract public class Task {
     protected String descriptions;
     protected boolean isDone;
@@ -10,8 +13,9 @@ abstract public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
     }
+
     abstract String getTaskType();
 
     public Task done() {
@@ -27,6 +31,12 @@ abstract public class Task {
         return this.descriptions;
     }
 
+    /**
+     * Returns | delimited string that is used to represent the task.
+     * Used for serializing task for database.
+     *
+     * @return String serialized for database.
+     */
     public String toDatabaseString() {
         return String.format("%s|%d|%s",
                 this.getTaskType(), this.isDone() ? 1 : 0, this.getDescriptions());

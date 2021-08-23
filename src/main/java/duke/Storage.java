@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * Represents a Storage object that handles file IO for tasks.
+ */
 public class Storage {
     private final String DB_NAME = "db.txt";
     private final String DB_DIR = ".";
@@ -29,6 +32,15 @@ public class Storage {
         this.path = path;
     }
 
+    /**
+     * Saves given list of tasks to file specified at instantiation.
+     * If file does not exist, it will be created.
+     * The list of tasks will be formatted in easily parsable format delimited
+     * by |.
+     *
+     * @param taskList The list of tasks to be saved.
+     * @throws IOException If something goes wrong with File operations.
+     */
     public void save(List<Task> taskList) throws IOException{
         boolean fileExists = Files.exists(path);
 
@@ -45,6 +57,14 @@ public class Storage {
         file.close();
     }
 
+    /**
+     * Returns a List of Task by parsing file specified at instantiation.
+     * If file does not exist, empty List will be returned.
+     *
+     * @return List of Task saved in file.
+     * @throws IOException If something goes wrong with File operations.
+     * @throws DateTimeException If file's date data is corrupted.
+     */
     public List<Task> load() throws IOException, DateTimeException {
         boolean fileExists = Files.exists(path);
         List<Task> taskList = new ArrayList<>();
