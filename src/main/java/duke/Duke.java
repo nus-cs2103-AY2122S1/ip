@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-
     private static Parser parser;
     private static Storage storage;
 
