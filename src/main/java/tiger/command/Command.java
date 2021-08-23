@@ -56,14 +56,24 @@ public class Command {
             }
         }
         switch (parser.getCommandKeyword()) {
+        case "exit":
+            // Fallthrough
+        case "quit":
+            // Fallthrough
         case "bye":
             return new ByeAction(applicationState);
+        case "ls":
+            // Fallthrough
         case "list":
             return new ListAction(applicationState);
         case "done":
             MarkDoneParser markDoneParser = new MarkDoneParser(command);
             markDoneParser.parse();
             return new MarkDoneAction(applicationState, markDoneParser.getIndex() - 1);
+        case "remove":
+            // Fallthrough
+        case "del":
+            // Fallthrough
         case "delete":
             DeleteParser deleteCommand = new DeleteParser(command);
             deleteCommand.parse();
@@ -80,6 +90,8 @@ public class Command {
             EventParser eventCommand = new EventParser(command);
             eventCommand.parse();
             return new EventAction(applicationState, eventCommand.getTodo(), eventCommand.getDate());
+        case "search":
+            // Fallthrough
         case "find":
             FindParser findCommand = new FindParser(command);
             findCommand.parse();

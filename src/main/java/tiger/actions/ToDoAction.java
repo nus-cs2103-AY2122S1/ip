@@ -5,8 +5,9 @@ import tiger.components.TaskList;
 import tiger.components.ToDo;
 
 public class ToDoAction extends Action {
-    AppState applicationState;
-    String todo;
+
+    private AppState applicationState;
+    private String todo;
 
     public ToDoAction(AppState applicationState, String todo) {
         this.applicationState = applicationState;

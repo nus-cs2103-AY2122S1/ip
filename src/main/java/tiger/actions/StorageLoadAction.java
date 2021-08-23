@@ -22,6 +22,8 @@ public class StorageLoadAction extends Action {
         TaskList taskList;
         switch (this.applicationState.checkFlag()) {
         case STORAGE_FAILED:
+            /* This case will happen when we tried and failed to init the storage, and after prompting the user
+            whether to wipe or do partial loading, the user responds with an invalid input. */
             return new AppState(false, new TaskList(), "Please enter Y or N only", Flag.STORAGE_FAILED);
         case STORAGE_WIPE:
             /* Check if the user wants to wipe the storage */
@@ -35,6 +37,7 @@ public class StorageLoadAction extends Action {
                 return new AppState(false, new TaskList(), response);
             }
         case STORAGE_PARTIAL_LOAD:
+            /* Checks if the user wants to do partial loading. */
             taskList = Storage.partialLoad();
             response = String.format("Hello, I am Tiger, your personal assistant. I have fetched %d tasks from" +
                     " my memory.", taskList.size());
