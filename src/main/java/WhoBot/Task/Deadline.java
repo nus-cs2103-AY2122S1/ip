@@ -5,6 +5,7 @@ import WhoBot.Main.WhoBotException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 public class Deadline extends Task{
 
@@ -17,6 +18,8 @@ public class Deadline extends Task{
             this.deadline = processDateTime(task.split(" /by ")[1]);
         } catch (DateTimeParseException ex) {
             throw new WhoBotException("Ensure that date time is of the format d/M/yyyy HH:mm");
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            throw new WhoBotException("Ensure that the command is of the form \"deadline #description /by #deadline\". The deadline must be given.");
         }
     }
 
@@ -73,5 +76,14 @@ public class Deadline extends Task{
         } else {
             return val;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Deadline deadline1 = (Deadline) o;
+        return deadline.equals(deadline1.deadline) && this.hasTime == deadline1.hasTime
+                && this.getDescription().equals(deadline1.getDescription());
     }
 }

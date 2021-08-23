@@ -1,5 +1,7 @@
 package WhoBot.Task;
 
+import java.util.Objects;
+
 public class Task implements Comparable<Task> {
 
     private final String description;
@@ -50,5 +52,13 @@ public class Task implements Comparable<Task> {
         } else {
             return 0;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return isDone == task.isDone && description.equals(task.description);
     }
 }

@@ -5,6 +5,7 @@ import WhoBot.Main.WhoBotException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 public class Event extends Task {
 
@@ -16,6 +17,8 @@ public class Event extends Task {
             this.timing = LocalDateTime.parse(task.split(" /at ")[1], DateTimeFormatter.ofPattern("d/M/yyyy HH:mm"));
         } catch (DateTimeParseException ex) {
             throw new WhoBotException("Ensure that date time is of the format d/M/yyyy HH:mm");
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            throw new WhoBotException("Ensure that the command is of the form \"event #description /at #timing\". The timing must be given.");
         }
     }
 
@@ -56,5 +59,13 @@ public class Event extends Task {
         } else {
             return val;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return timing.equals(event.timing) && this.getDescription().equals(event.getDescription());
     }
 }

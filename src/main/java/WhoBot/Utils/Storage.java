@@ -24,7 +24,7 @@ public class Storage {
         taskFile = new File(this.filename);
         if (!taskFile.exists()) {
             try {
-                if (!taskFile.getParentFile().exists()) {
+                if (taskFile.getParentFile() != null && !taskFile.getParentFile().exists()) {
                     taskFile.getParentFile().mkdirs();
                 }
                 taskFile.createNewFile();
