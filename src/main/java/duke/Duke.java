@@ -1,13 +1,8 @@
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+package duke;
 
-import duke.Parser;
-import duke.Storage;
-import duke.Ui;
-import tasktypes.Task;
-import tasktypes.TaskList;
-import commands.Command;
+import java.util.Scanner;
+import duke.tasktypes.TaskList;
+import duke.commands.Command;
 
 public class Duke {
 
@@ -42,7 +37,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        // start running the chatbot
+        // start running the chat bot
         new Duke("data/dory.txt").run();
     }
 

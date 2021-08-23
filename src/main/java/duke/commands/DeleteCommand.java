@@ -1,9 +1,9 @@
-package commands;
+package duke.commands;
 
 import duke.Storage;
 import duke.Ui;
-import tasktypes.Task;
-import tasktypes.TaskList;
+import duke.tasktypes.Task;
+import duke.tasktypes.TaskList;
 
 public class DeleteCommand extends Command {
 
@@ -16,6 +16,7 @@ public class DeleteCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             if (numToBeRemoved < 0 || numToBeRemoved > taskList.getSize()) {
+                ui.displayWrongCommand();
             } else {
                 Task removedTask = taskList.get(numToBeRemoved);
                 taskList.remove(numToBeRemoved);

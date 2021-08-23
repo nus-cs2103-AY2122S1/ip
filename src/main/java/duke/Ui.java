@@ -1,7 +1,7 @@
 package duke;
 
-import tasktypes.Task;
-import tasktypes.TaskList;
+import duke.tasktypes.Task;
+import duke.tasktypes.TaskList;
 
 
 public class Ui {

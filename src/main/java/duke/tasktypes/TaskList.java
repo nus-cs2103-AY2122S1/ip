@@ -1,4 +1,4 @@
-package tasktypes;
+package duke.tasktypes;
 
 import java.util.ArrayList;
 

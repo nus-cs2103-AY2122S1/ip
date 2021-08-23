@@ -1,9 +1,9 @@
-package commands;
+package duke.commands;
 
 import duke.Storage;
 import duke.Ui;
-import tasktypes.Task;
-import tasktypes.TaskList;
+import duke.tasktypes.Task;
+import duke.tasktypes.TaskList;
 
 public class DoneCommand extends Command {
 
@@ -16,6 +16,7 @@ public class DoneCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             if (numToBeMarked < 0 || numToBeMarked > taskList.getSize()) {
+                ui.displayWrongCommand();
             } else {
                 Task done = taskList.get(numToBeMarked);
                 taskList.get(numToBeMarked).markAsDone();

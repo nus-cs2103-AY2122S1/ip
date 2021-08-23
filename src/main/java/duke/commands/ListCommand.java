@@ -1,8 +1,8 @@
-package commands;
+package duke.commands;
 
 import duke.Storage;
 import duke.Ui;
-import tasktypes.TaskList;
+import duke.tasktypes.TaskList;
 
 public class ListCommand extends Command {
 

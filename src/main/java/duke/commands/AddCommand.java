@@ -1,15 +1,15 @@
-package commands;
+package duke.commands;
 
 import duke.Storage;
 import duke.Ui;
-import exceptions.DeadLineException;
-import exceptions.DukeException;
-import exceptions.EventException;
-import tasktypes.Deadlines;
-import tasktypes.Events;
-import tasktypes.TaskList;
-import tasktypes.ToDos;
-import exceptions.ToDoException;
+import duke.exceptions.DeadLineException;
+import duke.exceptions.DukeException;
+import duke.exceptions.EventException;
+import duke.tasktypes.Deadlines;
+import duke.tasktypes.Events;
+import duke.tasktypes.TaskList;
+import duke.tasktypes.ToDos;
+import duke.exceptions.ToDoException;
 
 
 public class AddCommand extends Command {

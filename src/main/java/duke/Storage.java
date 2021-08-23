@@ -1,10 +1,10 @@
 package duke;
 
-import tasktypes.Deadlines;
-import tasktypes.Events;
-import tasktypes.Task;
-import tasktypes.ToDos;
-import tasktypes.TaskList;
+import duke.tasktypes.Deadlines;
+import duke.tasktypes.Events;
+import duke.tasktypes.Task;
+import duke.tasktypes.ToDos;
+import duke.tasktypes.TaskList;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
