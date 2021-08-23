@@ -5,6 +5,8 @@ import java.util.ArrayList;
  */
 public class TaskArrayList extends ArrayList<Task> {
     public final static String DELETE_USAGE_TEXT = "Usage: delete <integer task number>";
+    public final static String DONE_USAGE_TEXT = "Usage: done <integer task number>";
+
     TaskArrayList(){
         super();
     }
@@ -53,13 +55,12 @@ public class TaskArrayList extends ArrayList<Task> {
         return out;
     }
 
-    public String markDone(String[] cmd_args) throws DukeException{
-        if (cmd_args.length != 2 || !cmd_args[1].matches("[0-9]+")){
-            throw new DukeException("done takes exactly one integer as argument.");
-        }
-        return markDone(Integer.parseInt(cmd_args[1]));
-    }
-
+    /**
+     * Mark a task as done
+     * @param index task number to mark
+     * @return mark done message String
+     * @throws DukeException when invalid task number provided
+     */
     public String markDone(int index) throws DukeException{
         if (index > this.size()){
             throw new DukeException(String.format("task %d not found",index));

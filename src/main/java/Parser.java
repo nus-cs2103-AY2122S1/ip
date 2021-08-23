@@ -41,7 +41,10 @@ public class Parser {
             break;
 
         case ("done"):
-            ui.display(taskList.markDone(cmd_args));
+            if (cmd_args.length != 2 || !cmd_args[1].matches("[0-9]+")){
+                throw new DukeException(TaskArrayList.DONE_USAGE_TEXT);
+            }
+            ui.display(taskList.markDone(Integer.parseInt(cmd_args[1])));
             break;
 
         case ("delete"):
