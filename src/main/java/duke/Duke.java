@@ -1,5 +1,6 @@
+package duke;
+
 import java.io.*;
-import java.util.Scanner;
 
 public class Duke {
     public static List todoList;

@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeDeadlineException extends DukeException {
     @Override
     public String getMessage() {

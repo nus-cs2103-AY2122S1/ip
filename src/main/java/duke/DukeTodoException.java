@@ -1,3 +1,7 @@
+package duke;
+
+import duke.DukeException;
+
 public class DukeTodoException extends DukeException {
     @Override
     public String getMessage() {

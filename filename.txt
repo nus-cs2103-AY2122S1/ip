@@ -1,8 +1,7 @@
-D|T||2020-11-11
-D|F||2021-11-11
-D|F||2021-11-11
+D|T||2021-11-11
 T|F|asa
-D|T|do it ok |2022-02-02
 E|F||y jd
 E|F||fjso /by da
-E|F|sadas |dasdas
+E|F||dasdas
+T|F|a
+D|F|fff |2021-11-11
