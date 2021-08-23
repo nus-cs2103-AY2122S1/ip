@@ -13,6 +13,12 @@ public class Deadline extends Task {
 
     private LocalDate by;
 
+    /**
+     * Initialises a Deadline.
+     *
+     * @param description description of Deadline
+     * @param by date of Deadline
+     */
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;

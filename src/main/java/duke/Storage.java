@@ -14,9 +14,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+/**
+ * Manages the reading and writing of files onto the disk.
+ */
 public class Storage {
     private final File DATA_FILE;
 
+    /**
+     * Initialises a new Storage with the given file location to save.
+     * If file does not exist, one will be created.
+     *
+     * @param filepath path to a .txt file
+     */
     public Storage(String filepath) {
         DATA_FILE = new File(filepath);
 
@@ -30,6 +39,13 @@ public class Storage {
             }
         }
     }
+
+    /**
+     * Retrieves the list of tasks saved from onto the disk.
+     * Returns an empty list if error is encountered.
+     *
+     * @return list of tasks retrieved from disk
+     */
     public ArrayList<Task> readFromDisk() {
         // Return empty list if file is empty
         if (DATA_FILE.length() == 0)
@@ -52,6 +68,11 @@ public class Storage {
         return new ArrayList<>();
     }
 
+    /**
+     * Writes a given list of tasks onto the disk.
+     *
+     * @param taskList list of tasks to be written onto the disk
+     */
     public void writeToDisk(ArrayList<Task> taskList) {
         try {
             FileOutputStream f = new FileOutputStream(DATA_FILE);

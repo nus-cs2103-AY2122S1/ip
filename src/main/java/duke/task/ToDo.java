@@ -4,6 +4,11 @@ import duke.util.DukeException;
 
 public class ToDo extends Task {
 
+    /**
+     * Initialises a ToDo.
+     *
+     * @param description description of ToDo
+     */
     public ToDo(String description) {
         super(description);
     }
@@ -17,6 +22,14 @@ public class ToDo extends Task {
             throw new DukeException("the description of todo cannot be empty");
     }
 
+    /**
+     * Creates a ToDo given a ToDo represented as a formatted string.
+     * Format: todo [description]
+     *
+     * @param formattedString ToDo represented as a formatted string.
+     * @return Created ToDo
+     * @throws DukeException given string fails to meet format requirements
+     */
     public static ToDo create(String formattedString) throws DukeException {
         checkFormat(formattedString);
         return new ToDo(formattedString.substring(5).trim());

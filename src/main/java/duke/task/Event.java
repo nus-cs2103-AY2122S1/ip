@@ -14,6 +14,12 @@ public class Event extends Task {
 
     private LocalDate on;
 
+    /**
+     * Initialises an Event.
+     *
+     * @param description description of Event
+     * @param on date of Event
+     */
     public Event(String description, LocalDate on) {
         super(description);
         this.on = on;
@@ -34,7 +40,14 @@ public class Event extends Task {
             throw new DukeException("the [/on] time of event cannot be empty");
     }
 
-    //Format: "Task.Event: [description] /by [on]
+    /**
+     * Creates an Event given a Event represented as a formatted string.
+     * Format: event [description] /on [DD/MM/YYYY]
+     *
+     * @param formattedString Event represented as a formatted string.
+     * @return Created Event
+     * @throws DukeException given string fails to meet format requirements
+     */
     public static Event create(String formattedString) throws DukeException {
         checkFormat(formattedString);
 

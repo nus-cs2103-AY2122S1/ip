@@ -7,16 +7,32 @@ import duke.util.Utility;
 import java.util.ArrayList;
 import java.util.function.Function;
 
+/**
+ * Stores and manages the user's list of tasks.
+ */
 public class TaskBank {
 
     private final ArrayList<Task> taskList;
     private final Storage storage;
 
+    /**
+     * Initialise a new TaskBank given a storage path.
+     *
+     * @param filepath path to storage file
+     */
     public TaskBank(String filepath) {
-        this.storage = new Storage("data/duke.txt");
+        this.storage = new Storage(filepath);
         this.taskList = storage.readFromDisk();
     }
 
+    /**
+     * Add a task to the list of tasks
+     * Throws a Duke Exception if format is erroneous
+     *
+     * @param formattedString task to add represented as a formatted string
+     * @param create function to map the formatted string into a task
+     */
+    //TODO: change function parameter to enum
     public void addTask(String formattedString, Function<String, ? extends Task> create) {
         Task e = create.apply(formattedString);
         this.taskList.add(e);
@@ -24,6 +40,12 @@ public class TaskBank {
         this.storage.writeToDisk(this.taskList);
     }
 
+    /**
+     * Marks a task in the task list as done.
+     * Throws a Duke Exception if given id is not found.
+     *
+     * @param input task to mark represented as a formatted string (done [id])
+     */
     public void  markTask(String input) {
         int taskId = -1;
         try {
@@ -37,6 +59,12 @@ public class TaskBank {
         this.storage.writeToDisk(this.taskList);
     }
 
+    /**
+     * Deletes a task in the task list.
+     * Throws a Duke Exception if given id is not found.
+     *
+     * @param input task to delete represented as a formatted string (delete [id])
+     */
     public void deleteTask(String input) {
         int taskId = -1;
         try {
@@ -50,6 +78,10 @@ public class TaskBank {
         this.storage.writeToDisk(this.taskList);
     }
 
+    /**
+     * Returns a copy of the list of tasks.
+     *
+     */
     public ArrayList<Task> getTasks() {
         return new ArrayList<>(this.taskList);
     }

@@ -1,6 +1,17 @@
 package duke.util;
 
 public class Utility {
+
+    /**
+     * Extracts an integer from an input string, specifically,the integer after the prefix.
+     * e.g. Extracts 2 from "done 2"
+     *
+     * @param input input string
+     * @param prefix prefix string
+     * @return extracted integer
+     * @throws DukeException extracted substring is not a valid integer
+     */
+    //TODO: refactor to not include prefix
     public static int getIdFromString(String input, String prefix) throws DukeException {
         String idString = "";
         try {
