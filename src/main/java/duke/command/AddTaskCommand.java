@@ -23,6 +23,11 @@ public abstract class AddTaskCommand extends Command {
         super(command);
     }
 
+    /**
+     * Creates the task relevant to the "Add Task" command.
+     *
+     * @return The task created.
+     */
     abstract Task createTask();
 
     @Override

@@ -40,6 +40,12 @@ public abstract class Command {
      */
     public abstract void execute(TaskHandler taskHandler, Ui ui) throws DukeInvalidCommandException;
 
+    /**
+     * Parses the command to check if it is valid and to set up the command for execution.
+     *
+     * @param tokens The tokens in the original command which were separated by spaces.
+     * @throws DukeInvalidCommandException If the command is malformed, or invalid.
+     */
     abstract void parseCommand(String[] tokens) throws DukeInvalidCommandException;
 
     abstract CommandType getCommandType();
