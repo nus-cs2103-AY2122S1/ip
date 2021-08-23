@@ -10,6 +10,10 @@ public class ToDo extends Task {
         super(name);
     }
 
+    public ToDo(String name, boolean isDone) {
+        super(name, isDone);
+    }
+
     @Override
     public String toString() {
         String isDone = isDone() ? "x" : " ";
