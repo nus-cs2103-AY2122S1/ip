@@ -11,4 +11,8 @@ list
 delete 3
 delete 11
 list
+todo breadd
+todo bbbready
+find bread
+find imaginarytask
 bye
