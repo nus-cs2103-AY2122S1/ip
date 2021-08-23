@@ -16,6 +16,7 @@ public class TaskList {
 
     /**
      * Gets the size of the TaskList
+     *
      * @return the size of the TaskList
      */
     public int getCount() {
@@ -24,6 +25,7 @@ public class TaskList {
 
     /**
      * Gets the Task from the TaskList at a given index
+     *
      * @param index index of task to get
      * @return
      */
@@ -33,6 +35,7 @@ public class TaskList {
 
     /**
      * Adds a ToDo object to the TaskList
+     *
      * @param name name of the ToDo to be created
      */
     public void addTodo(String name) {
@@ -41,6 +44,7 @@ public class TaskList {
 
     /**
      * Adds a Deadline object to the TaskList
+     *
      * @param name name of the Deadline to be created
      * @param by   due date of the Deadline to be created
      * @throws IrisException
@@ -51,6 +55,7 @@ public class TaskList {
 
     /**
      * Adds an Event object to the TaskList
+     *
      * @param name name of the Event to be created
      * @param at   date of the Event to be created
      * @throws IrisException
@@ -61,6 +66,7 @@ public class TaskList {
 
     /**
      * Validates whether a given Task index is found in the TaskList
+     *
      * @param index index of Task to lookup
      * @throws IrisException for invalid Task index e.g. too small or too large
      */
@@ -72,6 +78,7 @@ public class TaskList {
 
     /**
      * Marks Task at a given index as completed
+     *
      * @param index index of Task to mark as completed
      * @return task object that was just marked complete
      * @throws IrisException for invalid index given
@@ -85,6 +92,7 @@ public class TaskList {
 
     /**
      * Deletes Task at a given index
+     *
      * @param index index of Task to delete from TaskList
      * @return task object that was just deleted
      * @throws IrisException
@@ -96,6 +104,7 @@ public class TaskList {
 
     /**
      * Converts all Tasks in TaskList to commands
+     *
      * @return array containing commands to re-create TaskList
      */
     public String[] toCommands() {

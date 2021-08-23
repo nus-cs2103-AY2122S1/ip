@@ -14,6 +14,7 @@ public class Storage {
 
     /**
      * Creates a new Storage object
+     *
      * @param taskFilePath Path to file containing tasks
      */
     public Storage(String taskFilePath) {
@@ -32,6 +33,7 @@ public class Storage {
 
     /**
      * Reads tasks from task file
+     *
      * @param taskList TaskList object to update with read tasks
      * @param ui       Ui object for current Iris instance
      * @throws IrisException for invalid tasks.txt
@@ -52,6 +54,7 @@ public class Storage {
 
     /**
      * Writes tasks to task file
+     *
      * @param taskList TaskList object representing current list of tasks
      */
     public void writeTasks(TaskList taskList) {

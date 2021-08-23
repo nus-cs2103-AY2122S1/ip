@@ -26,6 +26,7 @@ public class Parser {
 
     /**
      * Handles a given command
+     *
      * @param command  raw text representing command
      * @param taskList TaskList object representing current list of tasks
      * @param ui       Ui object for current Duke instance
@@ -37,6 +38,7 @@ public class Parser {
 
     /**
      * Handles a given command
+     *
      * @param command  raw text representing command
      * @param taskList TaskList object representing current list of tasks
      * @param ui       Ui object for current Iris instance

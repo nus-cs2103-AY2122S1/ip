@@ -14,6 +14,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a new Deadline object
+     *
      * @param name name of the deadline
      * @param by   due date for this deadline e.g. "2021-08-23"
      * @throws IrisException for invalid date
@@ -29,6 +30,7 @@ public class Deadline extends Task {
 
     /**
      * Converts Deadline object to String
+     *
      * @return String representation of Deadline object
      */
     @Override
@@ -42,6 +44,7 @@ public class Deadline extends Task {
 
     /**
      * Converts Deadline object to Command
+     *
      * @param index index of this Task in the TaskList
      * @return String representing the command to re-create this Deadline object
      */

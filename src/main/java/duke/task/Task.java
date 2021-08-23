@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Creates a new Task object
+     *
      * @param name name of the Task
      */
     public Task(String name) {
@@ -29,6 +30,7 @@ public class Task {
 
     /**
      * Converts Task object to String
+     *
      * @return String representation of Task object
      */
     @Override
@@ -38,6 +40,7 @@ public class Task {
 
     /**
      * Converts Task object to Command
+     *
      * @param index index of this Task in the TaskList
      * @return String representing the command to re-create this Task object
      */

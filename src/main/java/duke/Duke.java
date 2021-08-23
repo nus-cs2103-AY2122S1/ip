@@ -12,6 +12,7 @@ public class Duke {
 
     /**
      * Creates a new Iris instance
+     *
      * @param filePath Path to file containing tasks
      */
     public Duke(String filePath) {
