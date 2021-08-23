@@ -12,6 +12,11 @@ public class Task {
 		this.done = false;
 	}
 
+	Task(String title, Boolean done) {
+		this.title = title;
+		this.done = done;
+	}
+
 	/** function to mark this task as done */
 	public void markAsDone() { this.done = true; }
 
@@ -26,6 +31,14 @@ public class Task {
 			return "[X] " + this.title;
 		} else {
 			return "[ ] " + this.title;
+		}
+	}
+
+	public String saveString() {
+		if (this.done) {
+			return "Task : 1 : " + this.title;
+		} else {
+			return "Task : 0 : " + this.title;
 		}
 	}
 }
