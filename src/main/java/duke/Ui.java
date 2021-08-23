@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 public class Ui {
 
     public Ui() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm duke.Duke\nWhat can I do for you?");
     }
 
     public void list(ArrayList<Task> savedInputs) {

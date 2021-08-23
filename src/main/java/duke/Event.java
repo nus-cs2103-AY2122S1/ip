@@ -1,8 +1,10 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A type of Task that keeps track of the date and time of a task and the task's description.
+ * A type of duke.Task that keeps track of the date and time of a task and the task's description.
  */
 public class Event extends Task {
     protected LocalDate at;
@@ -13,7 +15,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns Event's String form.
+     * Returns duke.Event's String form.
      *
      * @return String.
      */
@@ -23,9 +25,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the task type of Todo.
+     * Returns the task type of duke.Todo.
      *
-     * @return 2 to represent Event task type.
+     * @return 2 to represent duke.Event task type.
      */
     @Override
     public int taskType() {

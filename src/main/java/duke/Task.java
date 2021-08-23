@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Tracks a task with a description and whether it has been completed yet.
  *
@@ -24,9 +26,9 @@ public class Task {
     }
 
     /**
-     * Returns the Task's String.
+     * Returns the duke.Task's String.
      *
-     * @return String form of Task.
+     * @return String form of duke.Task.
      */
     @Override
     public String toString() {

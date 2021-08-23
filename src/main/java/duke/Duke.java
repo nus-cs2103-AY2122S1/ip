@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -24,7 +26,7 @@ public class Duke {
     }
 
     /**
-     * Prints (to screen) Duke's response to the user input, entered from the Command Line.
+     * Prints (to screen) duke.Duke's response to the user input, entered from the Command Line.
      */
     private void chat() throws DukeException {
         String input;

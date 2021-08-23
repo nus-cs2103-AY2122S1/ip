@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -14,7 +16,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the Deadline's string.
+     * Returns the duke.Deadline's string.
      *
      * @return String.
      */
@@ -24,9 +26,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the task type of Todo.
+     * Returns the task type of duke.Todo.
      *
-     * @return 1 to represent Deadline task type.
+     * @return 1 to represent duke.Deadline task type.
      */
     @Override
     public int taskType() {

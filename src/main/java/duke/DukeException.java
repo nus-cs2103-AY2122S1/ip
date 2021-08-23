@@ -1,9 +1,11 @@
+package duke;
+
 /**
- * Special Exception class for Duke.java.
+ * Special Exception class for duke.Duke.java.
  */
 public class DukeException extends Exception {
     /**
-     * Constructor for DukeException class.
+     * Constructor for duke.DukeException class.
      *
      * @param errorMessage to print to screen.
      */

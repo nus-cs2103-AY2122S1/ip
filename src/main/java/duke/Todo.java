@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * A type of task that just keeps track of the description.
  */
@@ -17,9 +19,9 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns the task type of Todo.
+     * Returns the task type of duke.Todo.
      *
-     * @return 0 to represent Todo task type.
+     * @return 0 to represent duke.Todo task type.
      */
     @Override
     public int taskType() {
