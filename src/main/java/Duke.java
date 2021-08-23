@@ -99,7 +99,7 @@ public class Duke {
                         int escapeIndex = command.lastIndexOf("/");
                         String dateAndTime = command.substring(escapeIndex + 4);
 //                        LocalDateTime localDateTime = LocalDateTime.parse(dateAndTime);
-                        Event event = new Event(command.substring(5, escapeIndex - 1), dateAndTime);
+                        Event event = new Event(command.substring(6, escapeIndex - 1), dateAndTime);
                         lst.add(event);
                         System.out.format("Got it. I've added this task:\n" + event.toString() + "\n"
                                 + "Now you have %d tasks in this list.\n", lst.size());

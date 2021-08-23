@@ -7,6 +7,7 @@ public class Event extends Task{
     final String EVENT = "[E]";
     protected String dateAndTime;
     protected LocalDateTime localDateTime;
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
     public Event(String description, String dateAndTime) {
         super(description);
@@ -16,15 +17,16 @@ public class Event extends Task{
     }
 
     public void formatLocalDateTime() {
-        int space = dateAndTime.lastIndexOf(" ");
-        String date = dateAndTime.substring(0, space);
-        String time = dateAndTime.substring(space + 1);
-        this.localDateTime = LocalDateTime.parse(date + "T" + time);
+        if (this.dateAndTime.substring(0, 1).matches("[0-9]")) {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            this.localDateTime = LocalDateTime.parse(dateAndTime, dateTimeFormatter);
+        } else {
+            this.localDateTime = LocalDateTime.parse(dateAndTime, dtf);
+        }
     }
 
     @Override
     public String toString() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd YYYY HH:mm");
         formatLocalDateTime();
         return EVENT + this.getStatusIcon() + " " + this.getDescription() + " (at: " + localDateTime.format(dtf) + ")";
     }
