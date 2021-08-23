@@ -1,10 +1,12 @@
+import java.util.Scanner;
+
 /**
  * A personal assistant chatbot that helps a person to keep track of various things.
  *
  * @author Jovyn Tan
  * @version CS2103 AY21/22 Sem 1
  */
-public class Duke extends Chatbot {
+public class Duke implements ChatbotUI {
     private static final String GREETING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String FAREWELL_MESSAGE = "See you soon! :)";
     private static final String FAREWELL_COMMAND = "bye";
@@ -16,6 +18,8 @@ public class Duke extends Chatbot {
     private static final String CREATE_DEADLINE_COMMAND = "deadline";
 
     private TaskList taskList;
+
+    private Scanner sc;
 
     /**
      * The entrypoint of the Duke chat bot.
@@ -40,24 +44,25 @@ public class Duke extends Chatbot {
      */
     public Duke() {
         this.taskList = new TaskList();
+        this.sc = new Scanner(System.in);
     }
 
     /**
      * Prints a greeting to the user.
      */
     public void greet() {
-        Chatbot.printMessage(GREETING_MESSAGE);
+        ChatbotUI.printMessage(GREETING_MESSAGE);
     }
 
     /**
      * Echoes the user's input, until the user says "bye".
      */
     public void echo() {
-        String message = Chatbot.acceptUserInput();
+        String message = ChatbotUI.acceptUserInput(this.sc);
         if (message.equals("bye")) {
-            Chatbot.printMessage(FAREWELL_MESSAGE);
+            ChatbotUI.printMessage(FAREWELL_MESSAGE);
         } else {
-            Chatbot.printMessage(message);
+            ChatbotUI.printMessage(message);
             echo();
         }
     }
@@ -99,9 +104,9 @@ public class Duke extends Chatbot {
      * Handles the logic for managing a user's tasks.
      */
     public void taskMode() {
-        String message = Chatbot.acceptUserInput().trim();
+        String message = ChatbotUI.acceptUserInput(this.sc).trim();
         if (message.equals(FAREWELL_COMMAND)) {
-            Chatbot.printMessage(FAREWELL_MESSAGE);
+            ChatbotUI.printMessage(FAREWELL_MESSAGE);
             return;
         }
         try {
@@ -122,9 +127,9 @@ public class Duke extends Chatbot {
                 throw new DukeException("I don't know what that command means." +
                         "\nPlease input a valid command.");
             }
-            Chatbot.printMessage(output);
+            ChatbotUI.printMessage(output);
         } catch (DukeException e) {
-            Chatbot.printMessage(e.getMessage());
+            ChatbotUI.printMessage(e.getMessage());
         } finally {
             taskMode();
         }
