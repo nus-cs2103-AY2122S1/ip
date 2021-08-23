@@ -7,7 +7,7 @@ public class Deadline extends Task {
     protected LocalDate dueDate;
     public Deadline(String entry, Boolean status, String dueDate) {
         super(entry, status);
-        this.dueDate = LocalDate.parse(dueDate);
+        this.dueDate = LocalDate.parse(dueDate); // Need to find a better way to parse
     }
 
     public Deadline(String entry, String dueDate) {
@@ -15,7 +15,7 @@ public class Deadline extends Task {
     }
 
     private String dateTimeFormatter(LocalDate dateTime) {
-        return dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        return dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy")).trim();
     }
 
     @Override

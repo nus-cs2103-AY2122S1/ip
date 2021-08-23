@@ -17,7 +17,9 @@ public class Storage {
         StorageParser storeParser = new StorageParser();
         Path path = Paths.get(storagePath);
         List<String> read = Files.readAllLines(path);
+        System.out.println(read.size());
         for (String storeCmd : read) {
+            System.out.println(storeCmd);
             Task t = storeParser.parse(storeCmd);
             taskList.push(t);
         }

@@ -1,19 +1,14 @@
 package executor;
 
-import executor.parser.StorageParser;
+import executor.parser.QueryParser;
+
 import model.TaskList;
 import model.task.Deadline;
 import model.task.Event;
 import model.task.Task;
-import executor.parser.QueryParser;
 import model.task.ToDo;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,7 +41,7 @@ public class ExecutionUnit {
                 List<String> initialReply = new ArrayList<String>();
                 initialReply.add("Here are the tasks in your list:");
                 Task[] toShow = taskList.getAllTasks();
-                initialReply.addAll(Stream.<Integer>iterate(1, x -> x + 1)
+                initialReply.addAll(Stream.iterate(1, x -> x + 1)
                         .limit(toShow.length)
                         .map(num -> num.toString() + "." + toShow[num - 1])
                         .collect(Collectors.toList()));
