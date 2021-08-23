@@ -8,6 +8,7 @@ public class AddEventCommand extends AddCommand {
     public static final String KEYWORD = "event";
     private static final int TASK_INDEX = 0;
     private static final int DATETIME_INDEX = 1;
+    private static final int INPUT_PARAMETERS = 2;
 
     public AddEventCommand (String userInput) throws DukeException {
         // TODO: dateTime validation
@@ -23,7 +24,7 @@ public class AddEventCommand extends AddCommand {
         String[] inputData = userInput.substring(KEYWORD.length()).trim().split(DELIMITER);
 
         // Check whether input contains task and date/time
-        boolean isValidInput = (inputData.length == 2);
+        boolean isValidInput = (inputData.length == INPUT_PARAMETERS);
         if (!isValidInput) {
             throw new DukeException("OOPS!!! " +
                     "Please ensure your input is in the following format:\n" + inputFormat);
