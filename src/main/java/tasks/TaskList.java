@@ -1,8 +1,10 @@
 package tasks;
 
 import duke.Storage;
+import duke.Ui;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * A class that abstracts a list of tasks set by the user.
@@ -100,14 +102,24 @@ public class TaskList {
         System.out.println("-----------------------------------------------------------");
         if (this.taskArrayList.isEmpty()) {
             System.out.println("There are no tasks in your task list.");
-            System.out.println("-----------------------------------------------------------");
+            System.out.println(Ui.DASHES);
             return;
         }
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < this.taskArrayList.size(); i++) {
             System.out.println((i + 1) + ". " + this.taskArrayList.get(i));
         }
-        System.out.println("-----------------------------------------------------------");
+        System.out.println(Ui.DASHES);
+    }
+
+    public ArrayList<Task> findTask(String searchKeyword) {
+        ArrayList<Task> searchList = new ArrayList<>();
+        for (Task task : this.taskArrayList) {
+            if (task.getTaskName().toLowerCase().contains(searchKeyword.toLowerCase())) {
+                searchList.add(task);
+            }
+        }
+        return searchList;
     }
 
     /**

@@ -263,4 +263,11 @@ Here are the tasks in your list:
 6. [D][] Exercise (by: 19 Aug 2022 1800)
 7. [D][] Diet (by: 5 Aug 2022)
 -----------------------------------------------------------
+-----------------------------------------------------------
+Here are the matching tasks in your list:
+1. [T][X] Borrow book
+2. [D][] Return book (by: Sunday)
+-----------------------------------------------------------
+Sorry I could not find any matching tasks.
+
 Bye!! Hope to see you again!!

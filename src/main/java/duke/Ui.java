@@ -10,6 +10,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
+    public static final String DASHES = "-----------------------------------------------------------";
     /** System messages */
     public static final String DEADLINE_FORMAT = "deadline {Deadline name} -by {Date to be completed by}.\n"
             + "Use \"/by\" to specify that the input date is a formatted date.";
