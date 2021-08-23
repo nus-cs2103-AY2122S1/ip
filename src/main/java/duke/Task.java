@@ -35,6 +35,15 @@ public abstract class Task {
     public void markAsDone() {
         isDone = true;
     }
+    
+    /** A method that indicates whether the task description contains a keyword.
+     * 
+     * @param keyword The keyword to be searched for in the description.
+     * @return Boolean indicating whether the keyword is found in the description.
+     */
+    public boolean contains(String keyword) {
+        return description.toLowerCase().indexOf(keyword.toLowerCase()) != -1; 
+    }
 
     /**
      * A method that converts the task data into a suitable format to be saved in a save file.

@@ -65,10 +65,31 @@ public class TaskList {
                 break;
         }
     }
-
+    
+    /** A method that finds tasks that contain the specified keyword.
+     * 
+     * @param keyword Keyword to be searched for.
+     * @return A TaskList of the matching tasks.
+     * @throws DukeException If there are no matching tasks found.
+     */
+    public TaskList find(String keyword) throws DukeException {
+        ArrayList<Task> newList = new ArrayList<>(); 
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currTask = taskList.get(i); 
+            if (currTask.contains(keyword)) {
+                newList.add(currTask); 
+            }
+        }
+        if (newList.size() == 0) {
+            throw new DukeException("There are no matching tasks :("); 
+        } else {
+            return new TaskList(newList);
+        }
+    }
+    
     /**
      * A method that converts the task list to a suitable format to be saved in a save file.
-     * 
+     *
      * @return The formatted data as a string.
      */
     public String convertToData() {
@@ -84,10 +105,10 @@ public class TaskList {
         if (taskList.isEmpty()) {
             return "Your list is empty :(";
         }
-        String result = "Here's your list!";
+        String result = "";
         for (int i = 0; i < taskList.size(); i++) {
             String curr = taskList.get(i).toString();
-            result += String.format("\n %s. %s", i + 1, curr);
+            result += String.format(" %s. %s\n", i + 1, curr);
         }
         return result;
     }

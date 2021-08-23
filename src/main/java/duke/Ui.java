@@ -43,6 +43,18 @@ public class Ui {
      * @param list The task list to be displayed.
      */
     public void displayList(TaskList list) {
+        System.out.println("Here's your list!");
+        System.out.println(list.toString());
+    }
+
+    /**
+     * A method that displays matching tasks with the correct statement after the user searches 
+     * for them.
+     * 
+     * @param list The list of matching tasks to be displayed.
+     */
+    public void displayMatching(TaskList list) {
+        System.out.println("Here are the matching tasks in your list:"); 
         System.out.println(list.toString());
     }
 
