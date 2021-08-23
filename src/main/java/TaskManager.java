@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManager {
@@ -16,8 +15,8 @@ public class TaskManager {
 
     private final List<Task> taskList;
 
-    public TaskManager() {
-        this.taskList = new ArrayList<>();
+    public TaskManager(List<Task> taskList) {
+        this.taskList = taskList;
     }
 
     public String addTask(Task task) {
@@ -66,6 +65,14 @@ public class TaskManager {
             }
         }
         return count;
+    }
+
+    public String toText() {
+        String[] tasks = new String[taskList.size()];
+        for (int i = 0; i < taskList.size(); i++) {
+            tasks[i] = taskList.get(i).toText();
+        }
+        return String.join("\n", tasks);
     }
 
     @Override

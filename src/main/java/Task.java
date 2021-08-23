@@ -3,8 +3,12 @@ public abstract class Task {
     private boolean isDone;
 
     protected Task(String name) {
+        this(name, false);
+    }
+
+    protected Task(String name, boolean isDone) {
         this.name = name;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     protected Task markAsDone() {
@@ -12,13 +16,33 @@ public abstract class Task {
         return this;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public boolean checkTaskDone() {
         return isDone;
     }
 
-    private String getStatusIcon() {
+    public String getStatusIcon() {
         return isDone ? "X" : " ";
     }
+
+    public static Task fromText(String text) throws DukeException {
+        char taskType = text.charAt(0);
+        switch (taskType) {
+        case 'T':
+            return ToDo.fromText(text);
+        case 'D':
+            return Deadline.fromText(text);
+        case 'E':
+            return Event.fromText(text);
+        default:
+            throw new DukeException(String.format("Cannot parse Task from \n\t`%s`", text));
+        }
+    }
+
+    public abstract String toText();
 
     @Override
     public String toString() {

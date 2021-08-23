@@ -16,5 +16,9 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Text UI Test files
 /text-ui-test/ACTUAL.TXT
 /text-ui-test/EXPECTED-UNIX.TXT
+
+# Local data generated from running Duke
+/data
