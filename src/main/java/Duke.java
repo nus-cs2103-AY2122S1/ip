@@ -1,4 +1,8 @@
-import java.util.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
 
@@ -103,8 +107,9 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeExceptions {
+    public static void main(String[] args) throws DukeExceptions, IOException {
 
+        ///// Setting up of variables to be used in the function
         String linebreak = "~~~~~~~~~~";
         String command; // this is the container for the command received from the user
         ArrayList<Task> todoList = new ArrayList<Task>(); // this array stores previous commands
@@ -112,9 +117,46 @@ public class Duke {
         //enum Commands {bye, list, done, delete, deadline, event, todo}; TODO
         Duke duke = new Duke();
 
+        ///// Introduction of the robot
         // The chat bot name is Notaro bc it's Not-a-ro-bot :>
         // This is the introduction of the chat bot, and includes a list of the commands for the user
         System.out.println("Hi! I'm Taro, short for Notaro because I'm Not-a-ro-bot!!");
+        System.out.println(linebreak);
+
+        ///// Handling the opening and checking of the duke.txt file, used in storing the list
+        final String FILE_PATH = "data/duke.txt";
+        File file = new File(FILE_PATH);
+
+        // If the file exists, print out the previous data
+        if (file.exists()) {
+
+            if (file.length() == 0) {
+                System.out.println("Oops! Looks like you don't have anything saved :(");
+
+            } else {
+                System.out.println("Here's your progress:");
+                Scanner file_sc = new Scanner(file);
+
+                while (file_sc.hasNext()) {
+                    String nextLine = file_sc.nextLine();
+                    System.out.println(nextLine);
+                }
+                file_sc.close();
+            }
+
+            // If the file does not exist, create a new file
+        } else {
+            System.out.println("Welcome new user!");
+            System.out.println("Let me create a save file for you :)");
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdir();
+            }
+            file.createNewFile();
+        }
+        System.out.println(linebreak);
+
+
+        ///// Introduction of possible commands
         System.out.println("There are three special tasks you can add: Deadline, Event and Todo");
         System.out.println("Here are some special keywords! :");
         System.out.println("bye : End our conversation :(");
@@ -123,10 +165,11 @@ public class Duke {
         System.out.println("delete [number] : Deletes the item corresponding the number in the todo list");
         System.out.println("\nWhat can I do for you today? :>");
         System.out.println(linebreak);
-        Scanner sc = new Scanner(System.in);
 
 
+        ///// This listens for the commands and interprets them
         // This part listens for user input and repeats until the command "bye" is identified
+        Scanner sc = new Scanner(System.in);
         while (true) {
             command = sc.nextLine();
 
