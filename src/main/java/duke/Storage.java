@@ -31,7 +31,7 @@ public class Storage {
         try {
             ListIterator<Item> iterator = itemList.listIterator();
             if (!iterator.hasNext()) {
-                return;
+                s.append("");
             } else {
                 while (iterator.hasNext()) {
                     Item currItem = iterator.next();
@@ -85,7 +85,7 @@ public class Storage {
                 itemList.add(toAdd);
             }
             fileReader.close();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | DukeException e) {
             e.printStackTrace();
         }
         return itemList;

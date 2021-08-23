@@ -27,7 +27,7 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    public void execute(LinkedList<Item> itemList) {
+    public void execute(LinkedList<Item> itemList) throws DukeException {
         ArrayList<String> printBuffer = new ArrayList<>();
         printBuffer.add("Got it. I've added this task:");
         Event toAdd = new Event(this.content, this.time);
