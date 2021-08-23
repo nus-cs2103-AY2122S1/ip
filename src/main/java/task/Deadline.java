@@ -39,6 +39,11 @@ public class Deadline extends Task {
     public String getFormattedBy() {
         return " (" + SPLIT_WORD  + ": " + by + ")";
     }
+    
+    @Override
+    public String toSavedString() {
+        return KEYWORD + getSplitTemplate() + super.toSavedString() + getSplitTemplate() + by;
+    }
 
     @Override
     public String toString() {

@@ -8,6 +8,7 @@ import task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +89,8 @@ public class TaskManager {
         
         while (scanner.hasNext()) {
             String taskAsString = scanner.nextLine();
-            String[] taskAsArray = taskAsString.split(" \\| "); // split based on regex '|'
+            String splitRegex = " \\" + Task.SPLIT_CHAR + ' '; // split based on regex '|'
+            String[] taskAsArray = taskAsString.split(splitRegex); 
             boolean isDone = taskAsArray[1].equals("1"); // if not 1, just set to false
 
             switch (taskAsArray[0]) {
@@ -114,6 +116,12 @@ public class TaskManager {
         }
         this.taskList.addAll(taskList);
     }
+    
+    public void saveToFile(Task newTask) throws IOException {
+        FileWriter fileWriter = new FileWriter(TASK_FILE_PATH, true);
+        fileWriter.write('\n' + newTask.toSavedString());
+        fileWriter.close();
+    }
 
     /**
      * Gets the current number of tasks stored.
@@ -135,7 +143,12 @@ public class TaskManager {
         if (taskList.size() == MAX_STORAGE) {
             throw new DukeException(FULL_CAPACITY_ERROR_MESSAGE);
         }
-        taskList.add(newTask);
+        try {
+            saveToFile(newTask);
+            taskList.add(newTask);
+        } catch (IOException exception) {
+            throw new DukeException("Unable to save task to memory.");
+        }
         return newTask;
     }
 

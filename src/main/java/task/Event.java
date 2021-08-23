@@ -41,6 +41,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String toSavedString() {
+        return KEYWORD + getSplitTemplate() + super.toSavedString() + getSplitTemplate() + at;
+    }
+    
+    @Override
     public String toString() {
         return "[E]" + super.toString() + getFormattedAt();
     }
