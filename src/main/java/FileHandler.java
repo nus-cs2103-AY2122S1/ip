@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
@@ -46,11 +47,11 @@ public class FileHandler {
             break;
         case "D":
             String deadline = splitString[3];
-            newTask = new Deadline(desc, deadline);
+            newTask = new Deadline(desc, LocalDateTime.parse(deadline));
             break;
         case "E":
             String duration = splitString[3];
-            newTask = new Event(desc, duration);
+            newTask = new Event(desc, LocalDateTime.parse(duration));
             break;
         default:
             return null;

@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoField;
 
 public class Duke {
     private static DukeHandler dukeHandler;
@@ -11,6 +15,15 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         loadFile();
 
+
+        DateTimeFormatter fmt = new DateTimeFormatterBuilder()
+                .appendPattern("d/M/yyyy")
+                .optionalStart()
+                .appendPattern(" HHmm")
+                .optionalEnd()
+                .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+                .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+                .toFormatter();
         while (true) {
             String input = sc.nextLine();
             if (dukeHandler.isExit(input)) {

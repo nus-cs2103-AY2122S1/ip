@@ -1,9 +1,23 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.io.IOException;
 
 public class DukeHandler {
     private final ArrayList<Task> tasks;
     private final FileHandler fileHandler;
+
+    DateTimeFormatter fmt = new DateTimeFormatterBuilder()
+            .appendPattern("d/M/yyyy")
+            .optionalStart()
+            .appendPattern(" HHmm")
+            .optionalEnd()
+            .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+            .toFormatter();
+
     DukeHandler(ArrayList<Task> tasks, FileHandler fileHandler) {
         this.tasks = tasks;
         this.fileHandler = fileHandler;
@@ -45,7 +59,7 @@ public class DukeHandler {
             if (splitDeadline.length == 1) {
                 throw new DukeException("OOPS!!! The description or deadline for a deadline cannot be empty or it must be after a '/'");
             }
-            Deadline deadline = new Deadline(splitDeadline[0], splitDeadline[1]);
+            Deadline deadline = new Deadline(splitDeadline[0], LocalDateTime.parse(splitDeadline[1], fmt));
             tasks.add(deadline);
             System.out.println(deadline.save());
             fileHandler.write(deadline.save());
@@ -58,7 +72,7 @@ public class DukeHandler {
             if (splitEvent.length == 1) {
                 throw new DukeException("\tOOPS!!! The description or duration for an event cannot be empty or it must be after a '/'");
             }
-            Event event = new Event(splitEvent[0], splitEvent[1]);
+            Event event = new Event(splitEvent[0], LocalDateTime.parse(splitEvent[1], fmt));
             tasks.add(event);
             fileHandler.write(event.save());
             break;
