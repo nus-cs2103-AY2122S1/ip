@@ -2,9 +2,11 @@ public class Todo extends Task {
     public Todo(String desc) {
         super(desc);
     }
-    public Todo(String desc, boolean done) {
-        super(desc, done);
+    public Todo(String entry, boolean done) {
+        super(entry, done);
     }
+    
+    void addTime(String rawArgs) {}
 
     public String toDB() {
         return String.format("T | %d | %s ", super.done ? 1 : 0, super.desc);

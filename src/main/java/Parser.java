@@ -2,13 +2,13 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class InputHandler {
+public class Parser {
     
-    private Database db;
+    private TaskList db;
     private HashMap<String, CheckedFunction<String, Record>> cmds = new HashMap<>();
 
-    public InputHandler() throws DukeException {
-        db = new Database();
+    public Parser() throws DukeException {
+        db = new TaskList();
         cmds.put("greet", this::greet);
         cmds.put("bye", this::bye);
         cmds.put("list", this::list);
@@ -17,6 +17,7 @@ public class InputHandler {
         cmds.put("todo", this::todo);
         cmds.put("deadline", this::deadline);
         cmds.put("event", this::event);
+        cmds.put("help", this::help);
     }
 
     public Record query(String input) throws DukeException {
@@ -82,24 +83,30 @@ public class InputHandler {
         Deadline t = new Deadline();
         if (args.length == 0 || args[0].equals(new String()))
             throw new DukeException("The description of a deadline cannot be empty.");
-        if (args.length >= 1)
+        if (args.length == 2) {
             t.addDesc(args[0]);
-        if (args.length == 2)
             t.addTime(args[1]);
-        db.add(t);
+            db.add(t);
+        } else if (args.length == 1)
+            throw Task.FORMAT_EXCEPTION;
         return new Record("Got it. I've added this task:\n\t   " + t + sizeMsg());
     }
 
     private Record event(String raw) throws DukeException {
         String[] args = raw.split("( /at )");
         Event t = new Event();
-        if (args.length == 0 || args[0].equals(new String()))
+        if (args.length == 0 || args[0].trim().equals(new String()))
             throw new DukeException("The description of a event cannot be empty.");
-        if (args.length >= 1)
+        if (args.length == 2) {
             t.addDesc(args[0]);
-        if (args.length == 2)
             t.addTime(args[1]);
-        db.add(t);
+            db.add(t);
+        } else if (args.length == 1)
+            throw Task.FORMAT_EXCEPTION;
         return new Record("Got it. I've added this task:\n\t   " + t + sizeMsg());
+    }
+    
+    private Record help(String raw) throws DukeException {
+        return new Record(Ui.help());
     }
 }

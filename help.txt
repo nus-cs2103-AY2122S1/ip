@@ -1,0 +1,43 @@
+clear
+SYNOPSIS
+    clear
+DESCRIPTION
+    Clears the current task list.
+============================================================
+deadline
+SYNOPSIS
+    deadline (DESCRIPTION) /by (yyyy-mm-dd HH:MM) [ / OTHER_INFORMATION ]
+DESCRIPTION
+    Set a deadline task.
+EXAMPLES
+    deadline MA1231 Assignment 2 /by 2021-10-03 23:59
+    deadline Report /by 2021-11-21 15:20 / finalize bibliography
+============================================================
+delete
+SYNOPSIS
+    delete (index)
+DESCRIPTION
+    Deletes the task at index. CANNOT BE UNDONE.
+============================================================
+done
+SYNOPSIS
+    done (index)
+DESCRIPTION
+    Marks the task at index as complete.
+============================================================
+event
+SYNOPSIS
+    event (DESCRIPTION) /at (yyyy-mm-dd HH:MM ~ HH:MM) [ / OTHER_INFORMATION ]
+DESCRIPTION
+    Set a event task.
+EXAMPLES
+    event Singapore International Film Festival /at 2021-11-03 11:50
+    event Oral Presentation /by 2021-11-21 15:20 /at memorize script
+============================================================
+todo
+SYNOPSIS
+    todo (DESCRIPTION)
+DESCRIPTION
+    Set a todo task.
+EXAMPLES
+    todo bake cake

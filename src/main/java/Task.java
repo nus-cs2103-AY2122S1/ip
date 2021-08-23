@@ -6,8 +6,10 @@ public abstract class Task {
     protected final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     protected String desc;
     protected boolean done;
-    protected String details = null;
-    protected LocalDateTime dateTime = null;
+    protected String details = new String();
+    protected LocalDateTime dateTime = LocalDateTime.now();
+    public final static DukeException FORMAT_EXCEPTION = 
+            new DukeException("I don't understand this entry, enter 'help' to learn the correct formatting!");
 
     public Task() {}
 
@@ -31,23 +33,16 @@ public abstract class Task {
     protected String formatTime() {
         if (details == null && dateTime == null) return null;
         if (dateTime == null) return details;
-        String dt = dateTime.format(DateTimeFormatter.ofPattern("dd MMM, HH:mm"));
+        String dt = String.format("%s on %s",
+                dateTime.format(DateTimeFormatter.ofPattern("HH:mm")),
+                dateTime.format(DateTimeFormatter.ofPattern("dd MMM")));
         if (details == null) return dt;
         return String.format("%s -- %s", dt, details);
     }
     
-    protected void addTime(String time) {
-        String[] args = time.split(" / ");
-        if (args.length == 0) return;
-        try {
-            dateTime = LocalDateTime.parse(args[0], formatter);
-            if (args.length > 1) details = args[1];
-        } catch (DateTimeException e) {
-            details = time;
-        }
-    }
+    abstract void addTime(String time) throws DukeException;
     
-    public abstract String toDB();
+    abstract String toDB();
 
     @Override
     public String toString() {
