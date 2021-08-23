@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * @author Nigel Tan
  */
 public class Response {
-    private final String horizontalLine = "    ____________________________________________________________\n";
+    private final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
     private ArrayList<Task> lst;
     private int count;
 
@@ -21,10 +21,10 @@ public class Response {
      * This method handles the greet event.
      */
     public void greet() {
-        System.out.println(horizontalLine +
+        System.out.println(HORIZONTAL_LINE +
                 "    Hello! I'm LebronChatBot\n" +
                 "    What can I do for you?\n" +
-                horizontalLine);
+                HORIZONTAL_LINE);
     }
 
     /**
@@ -34,18 +34,18 @@ public class Response {
     public void echo(Task task) {
         lst.add(task);
         String num = String.valueOf(lst.size());
-        System.out.println(horizontalLine + "    Got it. I've added this task: \n" + "    " +
+        System.out.println(HORIZONTAL_LINE + "    Got it. I've added this task: \n" + "    " +
                 task.toString() + "\n" + "    Now you have " + num + " tasks in the list\n" +
-                horizontalLine);
+                HORIZONTAL_LINE);
     }
 
     /**
      * This method handles the exit event when the user says bye.
      */
     public void exit() {
-        System.out.println(horizontalLine +
+        System.out.println(HORIZONTAL_LINE +
                 "    Bye. Hope to see you again soon!\n" +
-                horizontalLine);
+                HORIZONTAL_LINE);
     }
 
     /**
@@ -53,12 +53,12 @@ public class Response {
      */
     public void display() {
         this.count = 1;
-        System.out.println(horizontalLine + "    Here are the tasks in your list:");
+        System.out.println(HORIZONTAL_LINE + "    Here are the tasks in your list:");
         lst.forEach(item -> {
             System.out.println("    " + count + ". " + item.toString());
             count++;
         });
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -68,9 +68,9 @@ public class Response {
     public void markDone(int pos) {
         Task task = lst.get(pos);
         task.mark();
-        System.out.println(horizontalLine + "    Nice! I've marked this task as done:\n" +
+        System.out.println(HORIZONTAL_LINE + "    Nice! I've marked this task as done:\n" +
                 "    " + task.toString() +
-                "\n" + horizontalLine);
+                "\n" + HORIZONTAL_LINE);
     }
 
     /**
@@ -80,9 +80,9 @@ public class Response {
     public void delete(int pos) {
         Task task = lst.remove(pos);
         String num = String.valueOf(lst.size());
-        System.out.println(horizontalLine + "    Noted. I've removed this task:\n" +
+        System.out.println(HORIZONTAL_LINE + "    Noted. I've removed this task:\n" +
                 "    " + task.toString() +
                 "\n" + "    Now you have " + num + " tasks in the list\n"
-                +  horizontalLine);
+                +  HORIZONTAL_LINE);
     }
 }
