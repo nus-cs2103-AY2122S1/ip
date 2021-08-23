@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * abstract class of task that represents a thing to be done
  */
-public abstract class Task {
+public abstract class Task implements Serializable {
 	private final String desc;
 	private boolean isDone = false;
 	
@@ -19,7 +21,7 @@ public abstract class Task {
 	/**
 	 * mark the task as done
 	 */
-	public void checkDone() {
+	public void markDone() {
 		this.isDone = true;
 	}
 	

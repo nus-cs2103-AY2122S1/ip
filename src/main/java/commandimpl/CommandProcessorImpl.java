@@ -17,9 +17,12 @@ import static util.Display.printSentence;
  * if the command is invalid
  */
 public class CommandProcessorImpl implements ICommandProcessor {
-	// initialize the buffered reader to take input from the console
+	/** Scanner to take input from the console */
 	private final Scanner scanner = new Scanner(System.in);
+	
+	/** CommandLogicUnit to process all the commands */
 	private final ICommandLogicUnit commandLogicUnit;
+	
 	private final List<String> availableCommands = List.of(
 			"bye",
 			"list",
@@ -30,8 +33,13 @@ public class CommandProcessorImpl implements ICommandProcessor {
 			"delete #index"
 	);
 	
-	public CommandProcessorImpl(ICommandLogicUnit commandProcessor) {
-		this.commandLogicUnit = commandProcessor;
+	/**
+	 * CommandProcessorImplementation that would parse the inputs into commands.
+	 *
+	 * @param commandLogicUnit CommandLogicUnit that would process the parsed input.
+	 */
+	public CommandProcessorImpl(ICommandLogicUnit commandLogicUnit) {
+		this.commandLogicUnit = commandLogicUnit;
 	}
 	
 	@Override
@@ -44,6 +52,12 @@ public class CommandProcessorImpl implements ICommandProcessor {
 		processInputHelper(parsedCommands);
 	}
 	
+	/**
+	 * Processes the input as list of strings into commands.
+	 * Helper method for processInput method.
+	 *
+	 * @param parsedCommands List of string from user inputs.
+	 */
 	private void processInputHelper(List<String> parsedCommands) {
 		switch (parsedCommands.get(0)) {
 		case "bye":
@@ -138,12 +152,12 @@ public class CommandProcessorImpl implements ICommandProcessor {
 		}
 	}
 	
-	private void processException(Exception e) {
-		printSentence("☹ OOPS!!! " + e.getMessage());
-	}
-	
 	@Override
 	public void close() {
 		scanner.close();
+	}
+	
+	private void processException(Exception e) {
+		printSentence("☹ OOPS!!! " + e.getMessage());
 	}
 }
