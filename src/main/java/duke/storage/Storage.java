@@ -1,3 +1,11 @@
+package duke.storage;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.tasklist.TaskList;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,9 +18,9 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    protected String filePath;
+    private String filePath;
 
-    protected Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -57,7 +65,7 @@ public class Storage {
     /**
      * add task to file.
      */
-    protected void updateTasks(TaskList taskList) {
+    public void updateTasks(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getAllTasks();
         try {
             FileWriter writer = new FileWriter(this.filePath);

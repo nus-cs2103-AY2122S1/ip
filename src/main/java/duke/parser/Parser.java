@@ -1,3 +1,15 @@
+package duke.parser;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -9,12 +21,12 @@ public class Parser {
      *
      * @param userInput the input by the user.
      * @return the todo inputted by the user.
-     * @throws NoDescriptionException if no description is inputted.
+     * @throws DukeException if no description is inputted.
      */
     private static Todo createTodo(String userInput) throws DukeException {
         String description = userInput.substring(4).trim();
         if (description.length() == 0) {
-            throw new DukeException("☹ OOPS!!! The description of a %s cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description cannot be empty.");
         }
         return new Todo(description);
     }
@@ -33,7 +45,7 @@ public class Parser {
         }
         String description = splitByBy[0].substring(8).trim();
         if (description.length() == 0) {
-            throw new DukeException("☹ OOPS!!! The description of a %s cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description cannot be empty.");
         }
         String by = splitByBy[1];
         String[] splitDateTime = by.split(" ");
@@ -59,7 +71,7 @@ public class Parser {
         }
         String description = splitByAt[0].substring(5).trim();
         if (description.length() == 0) {
-            throw new DukeException("☹ OOPS!!! The description of a %s cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description cannot be empty.");
         }
         String dayTime = splitByAt[1];
         String[] splitDateTime = dayTime.split(" ");

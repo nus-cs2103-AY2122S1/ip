@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -9,12 +11,12 @@ public class Event extends Task {
     /**
      * The date of the event.
      */
-    protected LocalDate date;
+    private LocalDate date;
 
     /**
      * The time of the event.
      */
-    protected LocalTime time;
+    private LocalTime time;
 
     /**
      * A constructor used to initialize the event.
@@ -23,7 +25,7 @@ public class Event extends Task {
      * @param date the date of the event.
      * @param time the time of the event.
      */
-    protected Event(String description, LocalDate date, LocalTime time) {
+    public Event(String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;
         this.time = time;
@@ -37,7 +39,7 @@ public class Event extends Task {
      * @param date the date of the event.
      * @param time the time of the event.
      */
-    protected Event(String description, boolean isCompleted, LocalDate date, LocalTime time) {
+    public Event(String description, boolean isCompleted, LocalDate date, LocalTime time) {
         super(description, isCompleted);
         this.date = date;
         this.time = time;

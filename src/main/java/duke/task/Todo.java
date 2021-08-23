@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * A task that is to be done.
  */
@@ -7,7 +9,7 @@ public class Todo extends Task {
      *
      * @param description the description of the todo.
      */
-    protected Todo(String description) {
+    public Todo(String description) {
         super(description);
     }
 
@@ -17,7 +19,7 @@ public class Todo extends Task {
      * @param description the description of the todo.
      * @param isCompleted the state of the todo.
      */
-    protected Todo(String description, boolean isCompleted) {
+    public Todo(String description, boolean isCompleted) {
         super(description, isCompleted);
     }
 

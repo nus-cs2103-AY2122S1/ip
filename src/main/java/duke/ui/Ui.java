@@ -1,24 +1,28 @@
+package duke.ui;
+
+import duke.tasklist.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
 
-    Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
-    protected String readCommand() {
+    public String readCommand() {
         return scanner.nextLine();
     }
 
     /**
      * Prints a line.
      */
-    protected void printLine() {
+    public void printLine() {
         System.out.println("__________________________________________________________");
     }
 
     /**
      * Prints the greeting message.
      */
-    protected void greetUser() {
+    public void greetUser() {
         printLine();
         System.out.println("Greetings! I am Duke.");
         System.out.println("How can I assist you?");
@@ -28,20 +32,20 @@ public class Ui {
     /**
      * Prints the farewell message.
      */
-    protected void farewellUser() {
+    public void farewellUser() {
         printLine();
         System.out.println("Bye! See you soon!");
         printLine();
     }
 
-    protected void printsMessage(String message) {
+    public void printsMessage(String message) {
         System.out.println(message);
     }
 
-    protected void printTasks(TaskList taskList) {
+    public void printTasks(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskList.tasks.size(); i++) {
-            System.out.printf("%d. %s%n", i + 1, taskList.tasks.get(i));
+        for (int i = 0; i < taskList.getAllTasks().size(); i++) {
+            System.out.printf("%d. %s%n", i + 1, taskList.getAllTasks().get(i));
         }
     }
 }

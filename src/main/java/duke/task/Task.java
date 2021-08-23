@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * A task that can be mark as completed.
  */
@@ -17,7 +19,7 @@ public class Task {
      *
      * @param description the description of the task.
      */
-    protected Task(String description) {
+    public Task(String description) {
         this.description = description;
     }
 
@@ -27,7 +29,7 @@ public class Task {
      * @param description the description of the task.
      * @param isCompleted the state of the task.
      */
-    protected Task(String description, boolean isCompleted) {
+    public Task(String description, boolean isCompleted) {
         this.description = description;
         this.isCompleted = isCompleted;
     }
@@ -35,7 +37,7 @@ public class Task {
     /**
      * Marks the task as done.
      */
-    protected void markAsDone() {
+    public void markAsDone() {
         this.isCompleted = true;
     }
 
