@@ -42,7 +42,7 @@ public class TaskList {
     }
 
     /**
-     * Prints all the elements in teh TaskList.
+     * Prints all the elements in the TaskList.
      */
     public void printList() {
         if (taskList == null || taskList.isEmpty()) {
@@ -69,6 +69,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds the tasks that match a given String.
+     *
+     * @param str The given String.
+     * @return An ArrayList of the tasks that contain the string.
+     */
     public ArrayList<Task> findMatches(String str) {
         ArrayList<Task> result = new ArrayList<>();
         for (Task task : getTaskList()) {

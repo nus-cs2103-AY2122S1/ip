@@ -71,6 +71,11 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Displays the results of the find command.
+     *
+     * @param matchList The resultant list of tasks from calling find.
+     */
     public void showFindMessage(ArrayList<Task> matchList) {
         if (matchList == null || matchList.isEmpty()) {
             System.out.println("Oh no, Duke cannot find any matches!");
