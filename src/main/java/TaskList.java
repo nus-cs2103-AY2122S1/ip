@@ -27,7 +27,8 @@ public class TaskList {
      * @return the newly created Deadline.
      */
     public String addDeadline(String taskTitle) {
-        Deadline task = new Deadline(taskTitle);
+        int delimiter = taskTitle.indexOf("/by ");
+        Deadline task = new Deadline(taskTitle.substring(0, delimiter), taskTitle.substring(delimiter + 4));
         this.tasks.add(task);
         return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
     }
@@ -38,7 +39,8 @@ public class TaskList {
      * @return the newly created Deadline.
      */
     public String addEvent(String taskTitle) {
-        Event task = new Event(taskTitle);
+        int delimiter = taskTitle.indexOf("/at ");
+        Event task = new Event(taskTitle.substring(0, delimiter), taskTitle.substring(delimiter + 4));
         this.tasks.add(task);
         return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
     }

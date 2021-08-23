@@ -1,9 +1,9 @@
 public class Event extends Task {
     private String timeDue;
 
-    public Event(String s) {
-        super(s.substring(0, s.indexOf("/at ")), TypeIndicators.EVENT);
-        this.timeDue = s.substring(s.indexOf("/at ") + 4);
+    public Event(String s, String timeDue) {
+        super(s, TypeIndicators.EVENT);
+        this.timeDue = timeDue;
     }
 
     /**
