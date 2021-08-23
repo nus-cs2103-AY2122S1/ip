@@ -12,21 +12,21 @@ public class DukeTest {
     }
 
     @Test
-    public void createToDoAndMarkAsDone() {
+    public void ToDo_Task_createTodo() {
         Task toDo = new ToDos("paint on book");
         toDo.markAsDone();
         assertEquals(toDo.toString(), "[T][X] paint on book");
     }
 
     @Test
-    public void createEventAndMarkAsDone() {
+    public void Event_Task_createEvent() {
         Task event = new Events("birthday party", "2001-01-01");
         event.markAsDone();
         assertEquals(event.toString(), "[E][X] birthday party (at: Jan 1 2001)");
     }
 
     @Test
-    public void createDeadline() {
+    public void DeadLine_Task_createDeadline() {
         Deadlines deadline = new Deadlines("exam book", "2021-12-31");
         assertEquals(deadline.toString(), "[D][ ] exam book (by: Dec 31 2021)");
     }
