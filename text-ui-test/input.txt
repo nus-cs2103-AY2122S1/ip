@@ -1,14 +1,11 @@
+list
 todo
 blah
-todo read book
-delete 1
-deadline return book /by June 6th
-event project meeting /at Aug 6th 2-4pm
-todo join sports club
-done 1
-done 3
 todo borrow book
-list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline gym /by Aug 6th
+event marathon /at Aug 10th 8-10am
+done 5
+delete 7
+delete 6
+delete 5
 bye
