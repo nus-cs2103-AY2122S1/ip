@@ -1,22 +1,18 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.time.LocalDateTime;
 
 public class TaskStorage {
-    private ArrayList<Task> storage;
-    private static TaskStorage instance = null;
     private File dataFile;
     static final String DATA_FILE_DIR = "./data";
     static final String DATA_FILE_PATH = "./data/tasks.txt";
 
-    private TaskStorage() {
-        try {
-            this.dataFile = initializeDataFile();
-            this.storage = readTasksFromMemory(this.dataFile);
-        } catch (IOException e) {
-            System.out.println("Cannot create database!");
-        }
+    public TaskStorage() throws IOException {
+        this.dataFile = initializeDataFile();
     }
 
     private File initializeDataFile() throws IOException {
@@ -31,10 +27,10 @@ public class TaskStorage {
         return dataFile;
     }
 
-    private ArrayList<Task> readTasksFromMemory(File file) {
+    public ArrayList<Task> readTasksFromMemory() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            Scanner scanner = new Scanner(file);
+            Scanner scanner = new Scanner(this.dataFile);
             while (scanner.hasNextLine()) {
                 try {
                     Task task = parseTask(scanner.nextLine());
@@ -45,7 +41,7 @@ public class TaskStorage {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.printf("File not found: %s\n", file.toString());
+            System.out.printf("File not found: %s\n", this.dataFile.toString());
         }
         return tasks;
     }
@@ -83,45 +79,13 @@ public class TaskStorage {
         }
     }
 
-    private void writeToMem() throws IOException {
+    public void writeToMem(ArrayList<Task> tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(DATA_FILE_PATH);
         String data = "";
-        for (Task task : this.storage) {
+        for (Task task : tasks) {
             data += taskToMemString(task) + System.lineSeparator();
         }
         fileWriter.write(data);
         fileWriter.close();
-    }
-
-    public static TaskStorage getInstance() {
-        if (instance == null) {
-            instance = new TaskStorage();
-            return instance;
-        }
-        return instance;
-    }
-
-    public ArrayList<Task> getAll() {
-        return storage;
-    }
-
-    public Task get(int index) throws IndexOutOfBoundsException {
-        return storage.get(index);
-    }
-
-    public int getSize() {
-        return storage.size();
-    }
-
-    public boolean add(Task task) throws IOException {
-        boolean isAdded = storage.add(task);
-        writeToMem();
-        return isAdded;
-    }
-
-    public Task delete(int index) throws IndexOutOfBoundsException, IOException {
-        Task deletedTask = storage.remove(index);
-        writeToMem();
-        return deletedTask;
     }
 }

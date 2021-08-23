@@ -2,17 +2,16 @@ import java.util.ArrayList;
 
 public class ListCommand implements Command{
     @Override
-    public void run() {
-        if (TaskStorage.getInstance().getSize() == 0) {
+    public String run() throws DukeException {
+        if (TaskList.getInstance().getSize() == 0) {
             Message.print("No task added yet.");
-            return;
+            return "";
         }
-        ArrayList<Task> tasks = TaskStorage.getInstance().getAll();
-        String[] messages = new String[TaskStorage.getInstance().getSize() + 1];
-        messages[0] = "Here are the tasks in your list:";
+        ArrayList<Task> tasks = TaskList.getInstance().getAll();
+        String message = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            messages[i + 1] = String.format("%d. %s", i + 1, tasks.get(i).toString());
+            message += String.format("\t\t%d. %s\n", i + 1, tasks.get(i).toString());
         }
-        Message.print(messages);
+        return message;
     }
 }

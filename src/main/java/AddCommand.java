@@ -8,15 +8,18 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public void run() {
+    public String run() throws DukeException {
         try {
-            TaskStorage.getInstance().add(this.task);
-            Message.print(new String[] {
-                    "Got it. I have added this task:",
-                    "\t" + task.toString(),
-                    String.format("Now you have %d task%s in your list.", TaskStorage.getInstance().getSize(), TaskStorage.getInstance().getSize() > 1 ? "s" : "")});
+            TaskList.getInstance().add(this.task);
+            String resultString =
+                    "Got it. I have added this task:\n" +
+                    "\t\t" + task.toString() + "\n" +
+                    String.format("\t  Now you have %d task%s in your list.",
+                            TaskList.getInstance().getSize(),
+                            TaskList.getInstance().getSize() > 1 ? "s" : "");
+            return resultString;
         } catch (IOException e) {
-            Message.print("Error adding new task!");
+            throw new DukeException("Error adding new task!");
         }
     }
 }

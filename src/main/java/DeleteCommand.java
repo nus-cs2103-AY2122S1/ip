@@ -8,16 +8,15 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void run() {
+    public String run() throws DukeException {
         try {
-            Task deleted = TaskStorage.getInstance().delete(index);
-            Message.print(new String[]{
-                    "Okay, I have removed this task:",
-                    "\t" + deleted.toString(),
-                    String.format("Now you have %d task%s in your list.", TaskStorage.getInstance().getSize(), TaskStorage.getInstance().getSize() > 1 ? "s" : "")
-            });
+            Task deleted = TaskList.getInstance().delete(index);
+            String message = "Okay, I have removed this task:\n" +
+                    "\t\t" + deleted.toString() + "\n" +
+                    String.format("\t  Now you have %d task%s in your list.", TaskList.getInstance().getSize(), TaskList.getInstance().getSize() > 1 ? "s" : "");
+            return message;
         } catch (IOException e) {
-            Message.print("Error removing task!");
+            throw new DukeException("Error removing task!");
         }
     }
 }

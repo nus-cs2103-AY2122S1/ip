@@ -1,22 +1,33 @@
-import java.util.Scanner;
-
 public class Duke {
-    private TaskStorage taskStorage = TaskStorage.getInstance();
+    private TaskList taskStorage;
+    private Ui ui;
+
+    public Duke() {
+        this.ui = new Ui();
+        try {
+            taskStorage = TaskList.getInstance();
+        } catch (DukeException e) {
+            ui.printError(e.getMessage());
+        }
+    }
 
     public void run() {
-       Message.print(new String[] {"Yo, I'm Xiri.", "How can I help you?"});
+       ui.greet();
 
-       Scanner scanner = new Scanner(System.in);
-       String commandString = scanner.nextLine();
-       while (!commandString.equals("bye")) {
+       String commandString;
+       while (true) {
+           commandString = ui.readCommand();
            try {
-               CommandParser.parse(commandString).run();
+               if(CommandParser.isExit(commandString)) {
+                   break;
+               }
+               String message = CommandParser.parse(commandString).run();
+               ui.print(message);
            } catch (DukeException e) {
-               Message.print(e.getMessage());
+               ui.printError(e.getMessage());
            }
-           commandString = scanner.nextLine();
        }
-       Message.print("Ok bye, see you later.");
+       ui.bye();
     }
 
     public static void main(String[] args) {

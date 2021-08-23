@@ -16,4 +16,13 @@ public class Message {
         }
         Message.print(new String[] {msg});
     }
+
+    public static void printError(String msg) {
+        if (msg.length() == 0) {
+            return;
+        }
+        System.err.println("\t_______________________________________________________");
+        System.err.println("\t" + msg);
+        System.err.println("\t_______________________________________________________");
+    }
 }

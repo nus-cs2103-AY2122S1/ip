@@ -5,6 +5,14 @@ import java.time.format.DateTimeParseException;
 public class CommandParser {
     private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
+    public static boolean isExit(String commandString) {
+        if (commandString.startsWith("bye")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static Command parse(String commandString) throws DukeException {
         if (commandString.startsWith("list")) {
             return parseListCommand();
@@ -34,7 +42,7 @@ public class CommandParser {
         } else {
             try {
                 int taskIndex = Integer.parseInt(tokens[1]) - 1;
-                return new MarkDoneCommand(TaskStorage.getInstance().get(taskIndex));
+                return new MarkDoneCommand(taskIndex);
             } catch (NumberFormatException e) {
                 throw new DukeException("Please indicate a valid task number to mark as done!");
             } catch (IndexOutOfBoundsException e) {
@@ -100,7 +108,7 @@ public class CommandParser {
         } else {
             try {
                 int taskIndex = Integer.parseInt(tokens[1]) - 1;
-                if (taskIndex >= 0 && taskIndex < TaskStorage.getInstance().getSize()) {
+                if (taskIndex >= 0 && taskIndex < TaskList.getInstance().getSize()) {
                     return new DeleteCommand(taskIndex);
                 } else {
                     throw new DukeException("404 Task not found");
