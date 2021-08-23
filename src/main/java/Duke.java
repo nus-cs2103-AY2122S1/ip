@@ -25,72 +25,15 @@ public class Duke {
 
     public void run(String filePath) {
         ui.printWelcome();
-        String command = ui.readCommand();
+        boolean isExit = false;
 
         // Commands
-        while (!command.equals("bye")) {
+        while (!isExit) {
             try {
-                if (command.equals("list")) {
-                    this.tasks.printTaskList(ui);
-
-                } else if (command.startsWith("done")) {
-                    int taskNumber = parseInt(command.split(" ")[1]);
-                    this.tasks.markTaskAsDone(taskNumber, this.storage, this.ui);
-
-                } else if (command.startsWith("delete")) {
-                    int taskNumber = parseInt(command.split(" ")[1]);
-                    this.tasks.deleteTask(taskNumber, this.storage, this.ui);
-
-                } else if (command.startsWith("todo")) {
-                    String[] splitCommand = command.split(" ", 2);
-                    if (splitCommand.length == 1) {
-                        throw new DukeException("Please fill in a description for todo.");
-                    }
-                    String description = splitCommand[1];
-                    tasks.addTodo(description, this.storage, this.ui);
-
-                } else if (command.startsWith("deadline")) {
-                    String[] splitCommand = command.split(" ", 2);
-                    if (splitCommand.length == 1) {
-                        throw new DukeException("Please fill in a description for deadline.");
-                    }
-
-                    String description = splitCommand[1];
-                    String[] splitDescription = description.split(" /by ");
-                    if (splitDescription.length == 1) {
-                        throw new DukeException("Please add in /by, following by a dateline.");
-                    }
-
-                    description = splitDescription[0];
-                    String deadline = splitDescription[1];
-                    this.tasks.addDeadline(description, deadline, this.storage, this.ui);
-
-                } else if (command.startsWith(("event"))) {
-                    String[] splitCommand = command.split(" ", 2);
-                    if (splitCommand.length == 1) {
-                        throw new DukeException("Please fill in a description for event.");
-                    }
-
-                    String description = splitCommand[1];
-                    String[] splitDescription = description.split(" /at ");
-                    if (splitDescription.length == 1) {
-                        throw new DukeException("Please add in /at, followed by the event's time.");
-                    }
-
-                    description = splitDescription[0];
-                    String time = splitDescription[1];
-                    tasks.addEvent(description, time, this.storage, this.ui);
-
-                } else if (command.startsWith(("date"))) {
-                    String[] splitCommand = command.split(" ", 2);
-                    if (splitCommand.length == 1) {
-                        throw new DukeException("Please fill in a date");
-                    }
-
-                    tasks.printTasksOnDate(splitCommand[1], this.ui);
-                } else {
-                    throw new DukeException("I do not understand what that means :(");
-                }
+                String command = ui.readCommand();
+                Command c = Parser.parse(command);
+                c.execute(this.tasks, this.ui, this.storage);
+                isExit = c.isExit();
             } catch (DukeException e) {
                 ui.printDukeException(e);
             } catch (IndexOutOfBoundsException e) {
@@ -102,8 +45,6 @@ public class Duke {
             } catch (DateTimeParseException e) {
                 ui.printDateTimeParseException();
             }
-
-            command = ui.readCommand();
         }
 
         ui.printGoodBye();
