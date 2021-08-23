@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeExcpetion extends Exception {
     public DukeExcpetion(String message) {
         super(message);

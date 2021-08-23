@@ -1,3 +1,5 @@
+package duke;
+
 public class ListCommand implements Executable {
     public void execute(TaskList taskList) {
         if (taskList.tasks().size() == 0) {

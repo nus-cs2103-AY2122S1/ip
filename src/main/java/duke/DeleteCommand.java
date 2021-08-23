@@ -1,3 +1,5 @@
+package duke;
+
 public class DeleteCommand implements Executable{
     private int index;
 

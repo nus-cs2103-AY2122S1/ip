@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * tasks without any date/time attached to it
  */
