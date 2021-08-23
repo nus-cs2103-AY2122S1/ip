@@ -1,3 +1,7 @@
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,13 +11,15 @@ enum Activity {
 
 public class Duke {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         final String INTRO = "Hello! I'm Duke\n" +
                 "What can I do for you?";
 
         final String OUTRO = "Bye. Hope to see you again soon!";
         Scanner sc = new Scanner(System.in);
+
+        final String FILE_NAME = "C:/Users/chocm/OneDrive/Documents/ip/data/duke.txt";
 
         ArrayList<Task> lst = new ArrayList<>();
         String command;
@@ -50,97 +56,112 @@ public class Duke {
                 }
 
                 switch (activity) {
-                    case BYE: {
-                        System.out.println(OUTRO);
-                        return;
+                case BYE: {
+                    System.out.println(OUTRO);
+                    return;
+                }
+
+                case DONE: {
+                    int index = Integer.parseInt(command.substring(5)) - 1;
+                    String subtext = "Nice! I've marked this task as done:\n";
+                    Task currentTask = lst.get(index);
+                    currentTask.setDone();
+                    System.out.println(subtext + currentTask.getStatusAndDescription());
+                    writeToFile(FILE_NAME, lst);
+                    break;
+                }
+
+                case List: {
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < lst.size(); i++) {
+                        Task currentTask = lst.get(i);
+                        System.out.println((i + 1) + "." + currentTask.getStatusAndDescription());
+                    }
+                    writeToFile(FILE_NAME, lst);
+                    break;
+                }
+
+                case TODO: {
+                    String desc = command.substring(4);
+
+                    if (desc.isEmpty()) {
+                        throw new DukeException("todo");
                     }
 
-                    case DONE: {
-                        int index = Integer.parseInt(command.substring(5)) - 1;
-                        String subtext = "Nice! I've marked this task as done:\n";
-                        Task currentTask = lst.get(index);
-                        currentTask.setDone();
-                        System.out.println(subtext + currentTask.getStatusAndDescription());
-                        break;
+                    ToDo toDo = new ToDo(command.substring(5));
+                    lst.add(toDo);
+                    System.out.format("Got it. I've added this task:\n" + toDo.getStatusAndDescription() + "\n"
+                            + "Now you have %d tasks in this list.\n", lst.size());
+                    writeToFile(FILE_NAME, lst);
+                    break;
+                }
+
+                case EVENT: {
+                    String desc = command.substring(5);
+
+                    if (desc.isEmpty()) {
+                        throw new DukeException("event");
                     }
 
-                    case List: {
-                        System.out.println("Here are the tasks in your list:");
-                        for (int i = 0; i < lst.size(); i++) {
-                            Task currentTask = lst.get(i);
-                            System.out.println((i + 1) + "." + currentTask.getStatusAndDescription());
-                        }
-                        break;
+                    int escapeIndex = command.lastIndexOf("/");
+                    Deadline deadline = new Deadline(command.substring(5, escapeIndex - 1), command.substring(escapeIndex + 4));
+                    lst.add(deadline);
+                    System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
+                            + "Now you have %d tasks in this list.\n", lst.size());
+                    writeToFile(FILE_NAME, lst);
+                    break;
+                }
+
+                case DELETE: {
+                    int index = Integer.parseInt(command.substring(7)) - 1;
+
+                    if (index >= lst.size()) {
+                        throw new DeleteException();
                     }
 
-                    case TODO: {
-                        String desc = command.substring(4);
+                    Task currentTask = lst.get(index);
+                    lst.remove(index);
+                    System.out.format("Noted. I've removed this task:\n" + currentTask.getStatusAndDescription() + "\nNow you have %d tasks in the list\n", lst.size());
+                    writeToFile(FILE_NAME, lst);
+                    break;
+                }
 
-                        if (desc.isEmpty()) {
-                            throw new DukeException("todo");
-                        }
+                case NORMAL: {
+                    lst.add(new Task(command));
+                    System.out.println("added: " + command);
+                    writeToFile(FILE_NAME, lst);
+                    break;
+                }
 
-                        ToDo toDo = new ToDo(command.substring(5));
-                        lst.add(toDo);
-                        System.out.format("Got it. I've added this task:\n" + toDo.getStatusAndDescription() + "\n"
-                                + "Now you have %d tasks in this list.\n", lst.size());
-                        break;
+                case DEADLINE: {
+                    String desc = command.substring(8);
+
+                    if (desc.isEmpty()) {
+                        throw new DukeException("deadline");
                     }
 
-                    case EVENT: {
-                        String desc = command.substring(5);
-
-                        if (desc.isEmpty()) {
-                            throw new DukeException("event");
-                        }
-
-                        int escapeIndex = command.lastIndexOf("/");
-                        Deadline deadline = new Deadline(command.substring(5, escapeIndex - 1), command.substring(escapeIndex + 4));
-                        lst.add(deadline);
-                        System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
-                                + "Now you have %d tasks in this list.\n", lst.size());
-                        break;
-                    }
-
-                    case DELETE: {
-                        int index = Integer.parseInt(command.substring(7)) - 1;
-
-                        if (index >= lst.size()) {
-                            throw new DeleteException();
-                        }
-
-                        Task currentTask = lst.get(index);
-                        lst.remove(index);
-                        System.out.format("Noted. I've removed this task:\n" + currentTask.getStatusAndDescription() + "\nNow you have %d tasks in the list\n", lst.size());
-                        break;
-                    }
-
-                    case NORMAL: {
-                        lst.add(new Task(command));
-                        System.out.println("added: " + command);
-                        break;
-                    }
-
-                    case DEADLINE: {
-                        String desc = command.substring(8);
-
-                        if (desc.isEmpty()) {
-                            throw new DukeException("deadline");
-                        }
-
-                        int escapeIndex = command.lastIndexOf("/");
-                        Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), command.substring(escapeIndex + 4));
-                        lst.add(deadline);
-                        System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
-                                + "Now you have %d tasks in this list.\n", lst.size());
-                        break;
-                    }
+                    int escapeIndex = command.lastIndexOf("/");
+                    Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), command.substring(escapeIndex + 4));
+                    lst.add(deadline);
+                    System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
+                            + "Now you have %d tasks in this list.\n", lst.size());
+                    writeToFile(FILE_NAME, lst);
+                    break;
+                }
                 }
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means! Please fill in a valid command");
-            } catch (DukeException | DeleteException e) {
+            } catch (DukeException | DeleteException | IOException e) {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private static void writeToFile(String filePath, ArrayList<Task> lst) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (int i = 0; i < lst.size(); i++) {
+            fw.write(lst.get(i).getStatusAndDescription() + "\n");
+        }
+        fw.close();
     }
 }
