@@ -4,7 +4,7 @@ package Duke.exception;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-MoreOOP. Use More OOP
+ * Current Progress: A-JUnit. Add JUNit Test
  *
  * Description:
  * Class that encapsulates an invalid argument exception that might be

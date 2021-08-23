@@ -10,7 +10,7 @@ import Duke.util.Store;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-MoreOOP. Use More OOP
+ * Current Progress: A-JUnit. Add JUNit Test
  *
  * Description:
  * Abstract class that encapsulates a command inputted by the user
