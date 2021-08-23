@@ -53,4 +53,11 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    public boolean includedOrNot(String keyword) {
+        if (this.description.contains(keyword)) {
+            return true;
+        }
+        return false;
+    }
+
 }

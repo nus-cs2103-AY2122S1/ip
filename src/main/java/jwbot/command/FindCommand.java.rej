@@ -1,0 +1,9 @@
+diff a/src/main/java/jwbot/command/FindCommand.java b/src/main/java/jwbot/command/FindCommand.java	(rejected hunks)
+@@ -26,7 +26,6 @@
+         }
+         ui.showSearchList(results);
+     }
+-
+     
+     @Override
+     public boolean isExit() {

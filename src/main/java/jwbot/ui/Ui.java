@@ -3,6 +3,7 @@ package jwbot.ui;
 import jwbot.data.TaskList;
 import jwbot.data.task.Task;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -84,8 +85,15 @@ public class Ui {
     /**
      * Show the message that the task is marked done successfully to the user.
      *
-     * @param doneTask The task that the user marked done
+     * @param searchList The list that is the result of user find command
      */
+    public void showSearchList(List<Task> searchList) {
+        System.out.println("OK bro, the matching tasks in your list are: ");
+        for (int i = 1; i < searchList.size() + 1; i++) {
+            System.out.println(i + ". " + searchList.get(i - 1));
+        }
+    }
+
     public void showDoneSuccessMessage(Task doneTask) {
         System.out.println("OK Bro, I noted you've done this task:\n" +
                 doneTask);
