@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.io.File;  // Import the File class
 import java.io.FileWriter;   // Import the FileWriter class
 import java.io.IOException;  // Import the IOException class to handle errors
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
 
@@ -52,11 +54,13 @@ public class Duke {
             } else if (input.startsWith("deadline")) {
                 String remaining = input.substring(9);
                 String[] segments = remaining.split(" /");
-                myList.add(new Deadline(segments[0], segments[1]));
+                LocalDate myDate = LocalDate.parse(segments[1]);
+                myList.add(new Deadline(segments[0], myDate));
             } else if (input.startsWith("event")) {
                 String remaining = input.substring(6);
                 String[] segments = remaining.split(" /");
-                myList.add(new Event(segments[0], segments[1]));
+                LocalDate myDate = LocalDate.parse(segments[1]);
+                myList.add(new Event(segments[0], myDate));
             } else {
                 System.out.println("Invalid task. Please specify the type of task.");
                 return;
@@ -69,7 +73,9 @@ public class Duke {
             System.out.println("Invalid format. Please follow this format. <type of task> <description> /<date if necessary>");
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("Invalid input. Please type something after specifying the type of task.");
-        }
+        } catch (DateTimeParseException e) {
+            System.out.println("Wrong date format. Please provide your date in this format: yyyy-mm-dd");
+    }
     }
 
     private static void deleteTask(String input) {
