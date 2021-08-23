@@ -1,6 +1,6 @@
 public class Deadline extends TaskItem {
 
-    protected String by;
+    protected String by = null;
 
     /**
      * Constructor for creating a Deadline object.
@@ -12,12 +12,20 @@ public class Deadline extends TaskItem {
         this.by = by;
     }
 
+    public Deadline(String description) {
+        super(description);
+    }
+
     /**
      * Overriden toString() method.
      * @return a string representation of the Deadline object.
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + this.by + ")";
+        if (this.by != null) {
+            return "[D]" + super.toString() + "(by: " + this.by + ")";
+        } else {
+            return "[D]" + super.toString();
+        }
     }
 }
