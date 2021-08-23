@@ -5,60 +5,46 @@ import java.util.Scanner;
 
 public class Duke {
 
+    private Database database;
+    private ArrayList<Task> taskList;
+    private UI ui = new UI();
 
-    public static void main(String[] args) {
-        Database myTask = new Database();
-        ArrayList<Task> task = myTask.getData();
-//        ArrayList<Task> task = new ArrayList<>();
 
+    public Duke(String filePath) {
+        database = new Database(filePath);
+
+
+
+    }
+
+    public void run() {
+
+        ArrayList<Task> task = database.getData();
         int taskNum = task.size();
         String indentation = "       ";
-        String Horizontal_line = "---------------------------------------------------------------";
-        String greeting = "Hello! I'm Duke.\n" + indentation + "What can I do for you?\n";
         final String LIST = "list";
         final String BYE = "bye";
         final String DONE = "done";
         final String DELETE = "delete";
-        //Enumeration
-//        enum Command {
-//            CLIST, CDONE, CBYE, CDELETE, COTHER
-//        };
+
 
         boolean isEnd = false;
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println(indentation + Horizontal_line);
-        System.out.println(indentation + greeting);
-        System.out.println(indentation + Horizontal_line);
+        System.out.println(ui.logo);
+        System.out.println(ui.line);
+        System.out.println(ui.greeting);
+        System.out.println(ui.line);
         Scanner scanner = new Scanner(System.in);
 
 
         while (!isEnd) {
             String keywords = scanner.nextLine();
             String[] keyword = keywords.split(" ");
-//            Command command;
-//            if (keyword[0].equals("list")) {
-//                command = Command.CLIST;
-//            } else if (keyword[0].equals("bye")) {
-//                command = Command.CBYE;
-//            } else if (keyword[0].equals("done")) {
-//                command = Command.CDONE;
-//            } else if (keyword[0].equals("delete")) {
-//                command = Command.CDELETE;
-//            } else {
-//                command = Command.COTHER;
-//            }
+
 
             switch(keyword[0]) {
                 case LIST:
-                    System.out.println(indentation + Horizontal_line);
+                    System.out.println(ui.line);
                     try {
-
-                        //System.out.println(task.size() );
                         for (int i = 0; i < task.size(); i++) {
                             String s = indentation;
                             String s2 = "";
@@ -85,7 +71,7 @@ public class Duke {
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println(indentation + e.getMessage());
                     }
-                    System.out.println(indentation + Horizontal_line);
+                    System.out.println(ui.line);
 
                     break;
                 case DONE:
@@ -93,9 +79,9 @@ public class Duke {
                     try {
                         Integer num = Integer.valueOf(keyword[1]) - 1;
                         task.get(num).setDone(true);
-                        myTask.updateData(task.get(num), num + 1);
-                        System.out.println(indentation + Horizontal_line);
-                        System.out.println(indentation + "Nice! I've marked this task as done:");
+                        database.updateData(task.get(num), num + 1);
+                        System.out.println(ui.line);
+                        System.out.println(ui.done_message);
                         String s = indentation;
                         String s2 = "";
                         if (task.get(num) instanceof Todo) {
@@ -113,15 +99,11 @@ public class Duke {
                         s += "[X]" + s2;
                         System.out.println(s);
 
-                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(ui.line);
                     } catch (NullPointerException e) {
-                        System.out.println(indentation + Horizontal_line);
-                        System.out.println(indentation + "Sorry! you do not have this task");
-                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(ui.no_task_message);
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println(indentation + Horizontal_line);
-                        System.out.println(indentation + "Sorry, please enter a task number bigger than 0");
-                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(ui.task_num_message);
                     }
 
                     break;
@@ -129,7 +111,7 @@ public class Duke {
                     try {
                         Integer num = Integer.valueOf(keyword[1]) - 1;
 
-                        myTask.deleteData(num + 1);
+                        database.deleteData(num + 1);
                         String s = indentation + "     ";
                         String s2 = "";
 
@@ -143,8 +125,8 @@ public class Duke {
                             s += (task.get(num).getIndex() + 1) + "." + " [E]";
                             s2 = task.get(num).getName() +  " ( " + ((Event) task.get(num)).getTime() + " )";
                         }
-                        System.out.println(indentation + Horizontal_line);
-                        System.out.println(indentation + "Noted. I've removed this task:");
+                        System.out.println(ui.line);
+                        System.out.println(ui.remove_message);
                         if (task.get(num).isDone() == false) {
                             s += "[ ]" + s2;
                             System.out.println(s);
@@ -154,21 +136,15 @@ public class Duke {
                         }
                         task.remove(num.intValue());
                         System.out.format(indentation + "Now you have %d tasks in the list.%n", task.size());
-                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(ui.line);
                     } catch (NullPointerException e) {
-                        System.out.println(indentation + Horizontal_line);
-                        System.out.println(indentation + "Sorry, you do not have this task");
-                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(ui.no_task_message);
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println(indentation + Horizontal_line);
-                        System.out.println(indentation + "Sorry, you do not have this task");
-                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(ui.no_task_message);
                     }
                     break;
                 case BYE:
-                    System.out.println(indentation + Horizontal_line);
-                    System.out.println(indentation + "Bye. Hope to see you again soon!");
-                    System.out.println(indentation + Horizontal_line);
+                    System.out.println(ui.bye_message);
                     scanner.close();
                     isEnd = true;
                     break;
@@ -178,9 +154,7 @@ public class Duke {
 
                             case "deadline":
                                 if (keyword.length == 1) {
-                                    System.out.println(indentation + Horizontal_line);
-                                    System.out.println(indentation + "OOPS!!! The description of a deadline cannot be empty.");
-                                    System.out.println(indentation + Horizontal_line);
+                                    System.out.println(ui.lack_content_message);
                                     break;
                                 }
                                 String taskname_ddl = "";
@@ -201,26 +175,22 @@ public class Duke {
                                     }
                                 }
                                 if (tasktime_ddl.equals("")) {
-                                    System.out.println(indentation + Horizontal_line);
-                                    System.out.println(indentation + "OOPS!!! The time of a deadline cannot be empty.");
-                                    System.out.println(indentation + Horizontal_line);
+                                    System.out.println(ui.lack_content_message);
                                     break;
                                 }
                                 Task ddl = new Deadline(taskname_ddl, false, tasktime_ddl);
                                 task.add(ddl);
-                                myTask.writeToDatabase(ddl);
+                                database.writeToDatabase(ddl);
                                 taskNum++;
-                                System.out.println(indentation + Horizontal_line);
-                                System.out.println(indentation + "Got it. I've added this task:");
+                                System.out.println(ui.line);
+                                System.out.println(ui.added_message);
                                 System.out.println(indentation + "   [D][ ] "+ taskname_ddl + " ( " + tasktime_ddl + " )");
                                 System.out.format(indentation + "Now you have %d tasks in the list%n", taskNum);
-                                System.out.println(indentation + Horizontal_line);
+                                System.out.println(ui.line);
                                 break;
                             case "todo":
                                 if (keyword.length == 1) {
-                                    System.out.println(indentation + Horizontal_line);
-                                    System.out.println(indentation + "OOPS!!! The description of a todo cannot be empty.");
-                                    System.out.println(indentation + Horizontal_line);
+                                    System.out.println(ui.lack_content_message);
                                     break;
                                 }
                                 String taskname_todo = "";
@@ -235,19 +205,17 @@ public class Duke {
                                 Task todo = new Todo(taskname_todo, false);
 
                                 task.add(todo);
-                                myTask.writeToDatabase(todo);
+                                database.writeToDatabase(todo);
                                 taskNum++;
-                                System.out.println(indentation + Horizontal_line);
-                                System.out.println(indentation + "Got it. I've added this task:");
+                                System.out.println(ui.line);
+                                System.out.println(ui.added_message);
                                 System.out.println(indentation + "   [T][ ] "+ taskname_todo);
                                 System.out.format(indentation + "Now you have %d tasks in the list%n", taskNum);
-                                System.out.println(indentation + Horizontal_line);
+                                System.out.println(ui.line);
                                 break;
                             case "event":
                                 if (keyword.length == 1) {
-                                    System.out.println(indentation + Horizontal_line);
-                                    System.out.println(indentation + "OOPS!!! The description of a event cannot be empty.");
-                                    System.out.println(indentation + Horizontal_line);
+                                    System.out.println(ui.lack_content_message);
                                     break;
                                 }
 
@@ -270,38 +238,39 @@ public class Duke {
                                     }
                                 }
                                 if (tasktime_event.equals("")) {
-                                    System.out.println(indentation + Horizontal_line);
-                                    System.out.println(indentation + "OOPS!!! The time of a event cannot be empty.");
-                                    System.out.println(indentation + Horizontal_line);
+                                    System.out.println(ui.lack_content_message);
                                     break;
                                 }
                                 Task event = new Event(taskname_event, false, tasktime_event);
                                 task.add(event);
-                                myTask.writeToDatabase(event);
+                                database.writeToDatabase(event);
                                 taskNum++;
-                                System.out.println(indentation + Horizontal_line);
-                                System.out.println(indentation + "Got it. I've added this task:");
+                                System.out.println(ui.line);
+                                System.out.println(ui.added_message);
                                 System.out.println(indentation + "   [E][ ] "+ taskname_event + " ( " + tasktime_event + " )");
                                 System.out.format(indentation + "Now you have %d tasks in the list%n", taskNum);
-                                System.out.println(indentation + Horizontal_line);
+                                System.out.println(ui.line);
                                 break;
                             default:
-                                System.out.println(indentation + Horizontal_line);
-                                System.out.println(indentation + "OOPS!!! I'm sorry, but I don't know what that means :-(");
-                                System.out.println(indentation + Horizontal_line);
+                                System.out.println(ui.unknown_message);
                                 break;
 
                         }
 
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println(indentation + Horizontal_line);
-                        System.out.println(indentation + "please follow the format of adding event");
-                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(ui.index_message);
                     }
 
             }
         }
 
 
+
     }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke("todoList.txt");
+        duke.run();
+    }
+
 }

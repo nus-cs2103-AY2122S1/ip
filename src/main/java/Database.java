@@ -8,9 +8,9 @@ public class Database {
 
 
 
-    public Database() {
+    public Database(String filePath) {
         try {
-            file = new File("todoList.txt");
+            file = new File(filePath);
             if (file.createNewFile()) {
 
             } else {
@@ -121,7 +121,7 @@ public class Database {
 
 
     public static void main(String args[]) {
-        Database d = new Database();
+        Database d = new Database("todoList.txt");
         d.getData();
     }
 
