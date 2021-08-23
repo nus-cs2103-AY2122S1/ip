@@ -4,16 +4,17 @@ package duke.task;
  * An abstract Task class.
  */
 public abstract class Task {
-    private String taskName;
+    private String taskDetails;
     private boolean isDone = false;
+
 
     /**
      * Class constructor for the Task class.
      *
-     * @param taskName The main input details for the task.
+     * @param taskDetails The main input details for the task.
      */
-    public Task(String taskName) {
-        this.taskName = taskName;
+    public Task(String taskDetails) {
+        this.taskDetails = taskDetails;
     }
 
     /**
@@ -29,7 +30,7 @@ public abstract class Task {
      * @return The details of the task.
      */
     public String getTaskName() {
-        return taskName;
+        return taskDetails;
     }
 
     /**
@@ -68,6 +69,6 @@ public abstract class Task {
         } else {
             completedBox="[ ]";
         }
-        return completedBox + " " + taskName;
+        return completedBox + " " + taskDetails;
     }
 }
