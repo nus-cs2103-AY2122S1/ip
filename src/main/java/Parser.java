@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -17,20 +19,27 @@ public class Parser {
         return i;
     }
 
-    protected static String[] parseEvent(String args) throws InvalidArgumentsException {
+    protected static Event parseEvent(String args) throws InvalidArgumentsException {
         String[] splitArgs = args.split(" /at ");
         if (splitArgs.length != 2) {
             throw new InvalidArgumentsException("event [task] /at [time period]");
         }
-        return splitArgs;
+        return new Event(splitArgs[0], splitArgs[1]);
     }
 
-    protected static String[] parseDeadline(String args) throws InvalidArgumentsException {
+    protected static Deadline parseDeadline(String args) throws InvalidArgumentsException {
         String[] splitArgs = args.split(" /by ");
+        InvalidArgumentsException invalidArgsException = new InvalidArgumentsException("deadline [task] /by [YYYY-MM-DD]");
         if (splitArgs.length != 2) {
-            throw new InvalidArgumentsException("deadline [task] /by [time]");
+            throw invalidArgsException;
         }
-        return splitArgs;
+        
+        try {
+            LocalDate by = LocalDate.parse(splitArgs[1]);
+            return new Deadline(splitArgs[0], by);
+        } catch (DateTimeParseException e) {
+            throw invalidArgsException;
+        }
     }
     
     protected static TaskList parseTxtFile(File f) throws FileNotFoundException, UnableToParseException {
@@ -45,7 +54,7 @@ public class Parser {
                         throw new UnableToParseException(f.getAbsolutePath());
                     }
 
-                    String description, time;
+                    String description;
                     boolean isDone;
                     UnableToParseException e = new UnableToParseException("\"" + curr + "\" at " + f.getAbsolutePath());
 
@@ -70,8 +79,15 @@ public class Parser {
 
                         isDone = parseStringToIsDone(split[1]);
                         description = split[2];
-                        time = split[3];
-                        Deadline deadline = new Deadline(description, time);
+                        
+                        LocalDate by;
+                        try {
+                            by = LocalDate.parse(split[3]);
+                        } catch (DateTimeParseException exception) {
+                            throw e;
+                        }
+                        
+                        Deadline deadline = new Deadline(description, by);
                         if (isDone) {
                             deadline.markAsDone();
                         }
@@ -84,8 +100,8 @@ public class Parser {
 
                         isDone = parseStringToIsDone(split[1]);
                         description = split[2];
-                        time = split[3];
-                        Event event = new Event(description, time);
+                        String at = split[3];
+                        Event event = new Event(description, at);
                         if (isDone) {
                             event.markAsDone();
                         }

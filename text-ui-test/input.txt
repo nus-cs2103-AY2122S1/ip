@@ -5,7 +5,7 @@ event
 todo buy milk
 done 2
 deadline return book
-deadline return book /by June 6th
+deadline return book /by 2021-08-24
 event project meeting
 event project meeting /at Aug 6th 2-4pm
 list

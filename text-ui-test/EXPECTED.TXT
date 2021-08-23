@@ -17,9 +17,9 @@
 	[T] [ ] buy milk
 🤖: Now you have 1 task in the list.
 🤖: [91mInvalid task selected![0m
-🤖: [91mInvalid arguments! Please use the command in the following format: "deadline [task] /by [time]"[0m
+🤖: [91mInvalid arguments! Please use the command in the following format: "deadline [task] /by [YYYY-MM-DD]"[0m
 🤖: Got it. I've added this task:
-	[D] [ ] return book (by: June 6th)
+	[D] [ ] return book (by: Aug 24 2021)
 🤖: Now you have 2 tasks in the list.
 🤖: [91mInvalid arguments! Please use the command in the following format: "event [task] /at [time period]"[0m
 🤖: Got it. I've added this task:
@@ -27,13 +27,13 @@
 🤖: Now you have 3 tasks in the list.
 🤖: Here are the tasks in your list:
 	1. [T] [ ] buy milk
-	2. [D] [ ] return book (by: June 6th)
+	2. [D] [ ] return book (by: Aug 24 2021)
 	3. [E] [ ] project meeting (at: Aug 6th 2-4pm)
 🤖: Nice! I've marked this task as done:
 	[T] [X] buy milk
 🤖: Here are the tasks in your list:
 	1. [T] [X] buy milk
-	2. [D] [ ] return book (by: June 6th)
+	2. [D] [ ] return book (by: Aug 24 2021)
 	3. [E] [ ] project meeting (at: Aug 6th 2-4pm)
 🤖: [91mUnknown Command![0m
 🤖: [91mInvalid task selected![0m
@@ -41,7 +41,7 @@
 	[T] [X] buy milk
 🤖: Now you have 2 tasks in the list.
 🤖: Noted. I've removed this task:
-	[D] [ ] return book (by: June 6th)
+	[D] [ ] return book (by: Aug 24 2021)
 🤖: Now you have 1 task in the list.
 🤖: Noted. I've removed this task:
 	[E] [ ] project meeting (at: Aug 6th 2-4pm)
