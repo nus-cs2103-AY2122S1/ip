@@ -7,25 +7,28 @@ class Duke {
     "     ____________________________________________________________\n";
   private static final String INDENT = "      ";
   private boolean isEndChat = false;
-  private static final ArrayList<Task> taskList = new ArrayList<>();
+  private static ArrayList<Task> taskList = new ArrayList<>();
  
   private void getInput() {
     Scanner sc = new Scanner(System.in);
+    taskList = Storage.readDatabase();
+
     while (sc.hasNextLine()) {
       String input = sc.nextLine();
       takeInput(input);
       if (isEndChat) {
-        sc.close();
         break;
       }
     }
+    sc.close();
+    Storage.writeDatabase(taskList);
   }
 
   private void endChat() {
-    isEndChat = false;
+    isEndChat = true;
   }
 
-  private static String getFirstWord(String text) {
+  private String getFirstWord(String text) {
     int index = text.indexOf(' ');
     if (index > -1) { // Check if there is more than one word.
       return text.substring(0, index).trim(); // Extract first word.
@@ -127,7 +130,7 @@ class Duke {
 
 
   private void addNewTask(String input, Task.Type type) throws UserInputError {
-      checkDescExist(input);
+    checkDescExist(input);
       Task newTask = Task.createTask(getDesc(input), type);
       taskList.add(newTask);
       addTaskOutput(newTask);
@@ -165,7 +168,7 @@ class Duke {
     renderOutput(output);
   }
 
-  private void renderOutput(String op) {
+  private static void renderOutput(String op) {
     System.out.println(LINE);
     op.lines().forEach(line -> System.out.println("      " + line));
     System.out.println(LINE);

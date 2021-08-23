@@ -115,7 +115,7 @@ public class Logic {
 
   private static void addTodoTask(String input) throws UserInputError {
     checkDescExist(input);
-    Task newTask = new Todo(getDesc(input));
+    Task newTask = new Todo(getDesc(input), false);
     taskList.add(newTask);
     addTaskOutput(newTask);
   }
@@ -135,7 +135,7 @@ public class Logic {
   private static void addDeadlineTask(String input) throws UserInputError {
     checkDescExist(input);
     String[] details = separateDetails(getDesc(input), "/by");
-    Task newTask = new Deadline(details[0], details[1]);
+    Task newTask = new Deadline(details[0], details[1], false);
     taskList.add(newTask);
     addTaskOutput(newTask);
   }
@@ -143,7 +143,7 @@ public class Logic {
   private static void addEventTask(String input) throws UserInputError {
     checkDescExist(input);
     String[] details = separateDetails(getDesc(input), "/at");
-    Task newTask = new Event(details[0], details[1]);
+    Task newTask = new Event(details[0], details[1], false);
     taskList.add(newTask);
     addTaskOutput(newTask);
   }

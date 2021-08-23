@@ -1,2 +1,3 @@
-package PACKAGE_NAME;public class TaskList {
+class TaskList {
+    
 }
