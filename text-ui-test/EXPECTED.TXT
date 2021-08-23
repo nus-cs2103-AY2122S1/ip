@@ -80,6 +80,12 @@ Here are the tasks in your list:
 6.[E][X] orbital meeting (at: Sep 7 2021)
 ____________________________________________________________
 ____________________________________________________________
+Here are the matching tasks in your list:
+1.[T][ ] read book
+2.[D][X] return book (by: Jun 6 2021)
+3.[T][ ] borrow book
+____________________________________________________________
+____________________________________________________________
 Got it! I've removed this task:
   [D][X] return book (by: Jun 6 2021)
 Now you have 5 tasks in the list.
@@ -102,6 +108,10 @@ ____________________________________________________________
 ____________________________________________________________
 Task index is not specified!
 Please follow this format: [done/delete] [index]
+____________________________________________________________
+____________________________________________________________
+Keyword is not specified!
+Please follow this format: [find] [keyword]
 ____________________________________________________________
 ____________________________________________________________
 Task index is not specified!

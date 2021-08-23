@@ -5,8 +5,10 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.EmptyTaskDescriptionException;
+import duke.exception.MissingKeywordException;
 import duke.exception.MissingTaskIndexException;
 import duke.exception.TimeNotSpecifiedException;
 import duke.exception.UnrecognisedCommandException;
@@ -17,7 +19,8 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     public Command parse(String command) throws UnrecognisedCommandException, MissingTaskIndexException,
-            EmptyTaskDescriptionException, TimeNotSpecifiedException, DateTimeParseException {
+            EmptyTaskDescriptionException, TimeNotSpecifiedException, DateTimeParseException,
+            MissingKeywordException {
         if (command.equals("bye")) {
             return new ExitCommand();
         } else {
@@ -38,6 +41,11 @@ public class Parser {
                         throw new MissingTaskIndexException();
                     }
                     return new DeleteCommand(Integer.valueOf(wordsArr[1]) - 1);
+                } else if (wordsArr[0].equals("find")) {
+                    if (wordsArr.length != 2) {
+                        throw new MissingKeywordException();
+                    }
+                    return new FindCommand(wordsArr[1]);
                 } else if (wordsArr[0].equals("todo") || wordsArr[0].equals("event")
                         || wordsArr[0].equals("deadline")) {
                     String taskType;

@@ -12,11 +12,13 @@ list
 done 6
 done 6
 list
+find book
 delete 2
 delete 4
 list
 blahblah
 delete
+find
 done
 done -1
 delete 10

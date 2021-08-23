@@ -59,4 +59,37 @@ public class TaskList {
     public int getNumberOfTasks() {
         return taskList.size();
     }
+
+    /**
+     * Find all the tasks with the matching keyword.
+     *
+     * @param keyword The term to search for.
+     * @return A TaskList with matching tasks.
+     */
+    public TaskList findTasksWithKeyword(String keyword) {
+        ArrayList<Task> tasksWithMatchingKeyword = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.toString().contains(keyword)) {
+                tasksWithMatchingKeyword.add(task);
+            }
+        }
+        return new TaskList(tasksWithMatchingKeyword);
+    }
+
+    /**
+     * Returns the string representation of a TaskList instance.
+     *
+     * @return A string representing a TaskList instance.
+     */
+    @Override
+    public String toString() {
+        String tasksInOrder = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            tasksInOrder += (i + 1) + "." + taskList.get(i);
+            if (i != taskList.size() - 1) {
+                tasksInOrder += "\n";
+            }
+        }
+        return tasksInOrder;
+    }
 }
