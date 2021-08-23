@@ -29,9 +29,9 @@ public class Duke {
 
     }
 
+
     public static void main(String[] args) {
         Duke d =new Duke("data/Duke.txt");
         d.run();
-
     }
 }
