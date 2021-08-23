@@ -1,41 +1,12 @@
-import java.util.Scanner;
-
 import java.time.LocalDate;
 
-public class Chatbot {
-    private final String name;
+public class Parser {
     private final TaskList taskList;
     private final Ui ui;
-    private final Storage storage;
 
-    Chatbot(String name) {
-        this.name = name;
+    public Parser(TaskList taskList) {
+        this.taskList = taskList;
         this.ui = new Ui();
-        this.storage = new Storage("list.txt");
-        this.taskList = new TaskList(storage.load());
-    }
-
-    void initialize() {
-        greet();
-        listen();
-    }
-
-    void greet() {
-        ui.printDivider();
-        ui.print("Hey there! I'm %s%n", name);
-        ui.print("How can I help you?");
-        ui.printDivider();
-    }
-
-    void listen() {
-        Scanner sc = new Scanner(System.in);
-        String input;
-        boolean isListening;
-
-        do {
-            input = ui.readFromUser();
-            isListening = parseInput(input);
-        } while (isListening);
     }
 
     boolean parseInput(String input) {
@@ -53,7 +24,7 @@ public class Chatbot {
             } else {
                 addItem(input);
             }
-        } catch (HAL9000Exception e) {
+        } catch (DukeException e) {
             ui.print(e.getMessage());
         }
 
@@ -61,7 +32,7 @@ public class Chatbot {
         return true;
     }
 
-    void addItem(String input) throws HAL9000Exception {
+    void addItem(String input) throws DukeException {
         Task newItem = null;
         if (input.contains("todo")) {
             String[] parsedInput = input.split(" ", 2); // Splits input into array of [todo, ...]
@@ -98,36 +69,35 @@ public class Chatbot {
             String time = description[1].split(" ", 2)[1];
             newItem = new Event(name, time);
         } else {
-            throw new HAL9000Exception("I'm sorry, but I do not quite understand what that means :(");
+            throw new DukeException("I'm sorry, but I do not quite understand what that means :(");
         }
-
 
         taskList.add(newItem);
     }
 
-    void printItems() {
-        taskList.printItems();
-    }
-
-    void markAsDone(String input) throws HAL9000Exception {
+    void markAsDone(String input) throws DukeException {
         int index = getIndexFromInput(input);
         taskList.markTaskAsDone(index);
     }
 
-    void deleteItem(String input) throws HAL9000Exception {
+    void deleteItem(String input) throws DukeException {
         int index = getIndexFromInput(input);
         taskList.delete(index);
     }
 
-    int getIndexFromInput(String input) throws HAL9000Exception {
+    int getIndexFromInput(String input) throws DukeException {
         String[] parsedInput = input.split(" ");
         if (isIncomplete(parsedInput)) {
-            throw new HAL9000Exception("I do not know which task you are referring to. Please provide a number.");
+            throw new DukeException("I do not know which task you are referring to. Please provide a number.");
         }
         return Integer.parseInt(parsedInput[1]);
     }
 
     boolean isIncomplete(String[] arr) {
         return arr.length <= 1;
+    }
+
+    void printItems() {
+        taskList.printItems();
     }
 }

@@ -1,4 +1,4 @@
-public class EventException extends HAL9000Exception{
+public class EventException extends DukeException {
     public EventException() {
         super("The description of an event cannot be empty.");
     }
