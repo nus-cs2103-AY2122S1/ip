@@ -13,17 +13,30 @@ import storage.Storage;
 
 public class Parser {
 
+    /** Ui object to print output to user */
     private Ui ui;
+    /** List of all Tasks */
     private TaskList tasks;
+    /** Storage object to interact with the data file */
     private Storage storage;
 
+    /**
+     * Constructor for Parser object.
+     * @param ui Ui object to print output to user.
+     * @param tasks List of all Tasks.
+     * @param storage Storage object to interact with the data file.
+     */
     public Parser(Ui ui, TaskList tasks, Storage storage) {
         this.ui = ui;
         this.tasks = tasks;
         this.storage = storage;
     }
 
-
+    /**
+     * Make sense of String input from the user.
+     * @param userInput String input from user.
+     * @return True if user input is to exit the program, false otherwise.
+     */
     public boolean parse(String userInput) {
         if (userInput.equals("bye")) {
             ui.goodbyeMessage();
@@ -71,6 +84,11 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Check whether user input is a valid done call for a task to be marked as done.
+     * @param strNum String input from user.
+     * @return True if input is a valid done call, false otherwise.
+     */
     public boolean isDoneCall (String strNum) {
         if (strNum == null) {
             return false;
@@ -89,6 +107,11 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Check whether user input is a valid remove call for a task to be removed.
+     * @param str String input from user.
+     * @return True if input is a valid remove call, false otherwise.
+     */
     public boolean isRemoveCall (String str) {
         if (str == null) {
             return false;
@@ -107,6 +130,13 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Handles the user input when it is a command to add a Task.
+     * @param userInput String input from user.
+     * @param tasks Current list of tasks to be edited.
+     * @param type Type of Task added.
+     * @throws IllegalArgumentException
+     */
     public void parseAddTask(String userInput, TaskList tasks, Duke.Type type) throws IllegalArgumentException {
         if (type == Duke.Type.TODO) {
             if (userInput.substring(4).trim().isEmpty()) {

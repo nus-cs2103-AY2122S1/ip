@@ -10,8 +10,11 @@ import java.util.Scanner;
 
 public class Duke {
 
+    /** Storage object to interact with the data file */
     private Storage storage;
+    /** List of all Tasks */
     private TaskList tasks;
+    /** Ui object to print output to user */
     private Ui ui;
 
     public enum Type {
@@ -20,9 +23,14 @@ public class Duke {
         EVENT
     }
 
-    public Duke(String filePath) {
+    /**
+     * Constructor for Duke main class.
+     * @param filePath Relative file path to the folder containing the data file.
+     * @param fileName Name of data file.
+     */
+    public Duke(String filePath, String fileName) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, fileName);
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
@@ -31,6 +39,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method to start the Duke program.
+     */
     public void run() {
         Scanner myObj = new Scanner(System.in);
         boolean exit = false;
@@ -45,6 +56,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("../ip/src/main/java/data/data.txt").run();
+        new Duke("/data", "/data.txt").run();
     }
 }

@@ -15,49 +15,77 @@ import task.Task;
 import task.Todo;
 
 public class Storage {
+    /** Relative file path to the folder containing the data file */
     private String filePath;
+    /** Name of data file */
+    private String fileName;
 
-    public Storage(String filePath) {
+    /**
+     * Constructor for Storage class.
+     * @param filePath Relative file path to the folder containing the data file.
+     * @param fileName Name of data file.
+     */
+    public Storage(String filePath, String fileName) {
         this.filePath = filePath;
+        this.fileName = fileName;
     }
 
+    /**
+     * Returns ArrayList of Tasks loaded in from a data file.
+     * @return ArrayList of Tasks listed in data file.
+     * @throws IOException If reading file or file directory has issues.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
-        File data_file = new File(filePath);
-        // if data file already exists, load the file's data into tasks, else create a new data file
-        if (!data_file.createNewFile()) {
-            Scanner dataScanner = new Scanner(data_file);
-            while (dataScanner.hasNextLine()) {
-                String[] arr = dataScanner.nextLine().split(",");
-                // if task is a task.Todo
-                if (arr[0].equals("T")) {
-                    tasks.add(new Todo(arr[2]));
-                    // if task is done, mark as done
-                    if (arr[1].equals("1")) {
-                        tasks.get(tasks.size() - 1).markAsDone();
-                    }
-                } else if (arr[0].equals("D")) {
-                    tasks.add(new Deadline(arr[2], LocalDate.parse(arr[3].substring(0, 10)),
-                            LocalTime.parse(arr[3].substring(11))));
-                    // if task is done, mark as done
-                    if (arr[1].equals("1")) {
-                        tasks.get(tasks.size() - 1).markAsDone();
-                    }
-                } else {
-                    tasks.add(new Event(arr[2], LocalDate.parse(arr[3].substring(0, 10)),
-                            LocalTime.parse(arr[3].substring(11))));
-                    // if task is done, mark as done
-                    if (arr[1].equals("1")) {
-                        tasks.get(tasks.size() - 1).markAsDone();
+        File dataFilePath = new File(filePath);
+        // check if data directory exists
+        if (dataFilePath.exists()) {
+            File dataFile = new File(filePath.concat(fileName));
+            // if data file already exists, load the file's data into tasks, else create a new data file
+            if (dataFile.exists()) {
+                Scanner dataScanner = new Scanner(dataFile);
+                while (dataScanner.hasNextLine()) {
+                    String[] arr = dataScanner.nextLine().split(",");
+                    // if task is a task.Todo
+                    if (arr[0].equals("T")) {
+                        tasks.add(new Todo(arr[2]));
+                        // if task is done, mark as done
+                        if (arr[1].equals("1")) {
+                            tasks.get(tasks.size() - 1).markAsDone();
+                        }
+                    } else if (arr[0].equals("D")) {
+                        tasks.add(new Deadline(arr[2], LocalDate.parse(arr[3].substring(0, 10)),
+                                LocalTime.parse(arr[3].substring(11))));
+                        // if task is done, mark as done
+                        if (arr[1].equals("1")) {
+                            tasks.get(tasks.size() - 1).markAsDone();
+                        }
+                    } else {
+                        tasks.add(new Event(arr[2], LocalDate.parse(arr[3].substring(0, 10)),
+                                LocalTime.parse(arr[3].substring(11))));
+                        // if task is done, mark as done
+                        if (arr[1].equals("1")) {
+                            tasks.get(tasks.size() - 1).markAsDone();
+                        }
                     }
                 }
+            } else {
+                dataFile.createNewFile();
             }
+        } else {
+            dataFilePath.mkdirs();
+            File dataFile = new File(filePath.concat(fileName));
+            dataFile.createNewFile();
         }
         return tasks;
     }
 
+    /**
+     * Removes a Task from the data file based on the index of the Task.
+     * @param number Index of Task to be removed.
+     */
     public void removeData(int number) {
-        File fileToBeModified = new File(filePath);
+        File fileToBeModified = new File(filePath.concat(fileName));
         String newContent = "";
         try {
             Scanner scanner = new Scanner(fileToBeModified);
@@ -87,8 +115,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Mark a Task as done in the data file.
+     * @param number Index of Task to be marked as done.
+     */
     public void markAsDoneData(int number) {
-        File fileToBeModified = new File(filePath);
+        File fileToBeModified = new File(filePath.concat(fileName));
         String newContent = "";
         try {
             Scanner scanner = new Scanner(fileToBeModified);
@@ -121,9 +153,15 @@ public class Storage {
         }
     }
 
+    /**
+     * Add new Task to save into the data file.
+     * @param taskName Name of task to be saved.
+     * @param type Type of Task (Event, Deadline, or Todo).
+     * @param time Time of Task (if applicable).
+     */
     public void newTaskToData(String taskName, Duke.Type type, String time) {
         try {
-            FileWriter dataWriter = new FileWriter(filePath, true);
+            FileWriter dataWriter = new FileWriter(filePath.concat(fileName), true);
             if (type == Duke.Type.TODO) {
                 dataWriter.write("T,0," + taskName + ", \n");
                 dataWriter.close();
