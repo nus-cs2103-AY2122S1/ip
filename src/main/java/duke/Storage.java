@@ -78,7 +78,7 @@ public class Storage {
                     break;
                 }
 
-                if (currArgs[1] == "X") {
+                if (currArgs[1].equals("X")) {
                     toAdd.markAsDone();
                 }
 
