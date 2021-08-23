@@ -27,7 +27,8 @@ public class Duke {
             "     What can I do for you?\n" +
             "    ____________________________________________________________";
         //ArrayList to store whatever text entered by the user
-        ArrayList<Task> userList = new ArrayList<Task>();
+        UserDataManager userFile = new UserDataManager();
+        ArrayList<Task> userList = userFile.getUserDataFromFile();
 
         Scanner userInput = new Scanner(System.in);
         System.out.println(greetingStatement);
@@ -73,11 +74,12 @@ public class Duke {
                 else if (keyword.equals("todo")) {
                     //checks if description is empty
                     if (descriptionArray.length > 1) {
-                        ToDo newToDo = new ToDo(description.replace(keyword, ""));
+                        ToDo newToDo = new ToDo(description.replace(keyword, "").replaceFirst(" ", ""));
                         userList.add(newToDo);
                         System.out.println("    ____________________________________________________________\n    " +
                             "Got it. I've added this task:\n    " + newToDo.toString() + "\n    " + "Now you have " + userList.size() + " tasks in the list.\n" +
                             "    ____________________________________________________________");
+                        userFile.updateFile(userList);
                     } else {
                         throw new DukeException("The description of a todo cannot be empty.");
                     }
@@ -92,18 +94,19 @@ public class Duke {
                         //checks if there is a "/by" to separate the description
                         if (description.contains("/by")) {
                             //Removes the "deadline" string and splits the description using "/by"
-                            String[] updatedDeadline = description.replace(keyword, "").split("/by");
+                            String[] updatedDeadline = description.replace(keyword, "").split(" /by");
                             //Returns error if user enters more than one "/by"
                             if (updatedDeadline.length > 2) {
                                 throw new DukeException("I'm sorry, please only have ONE '/by' in your description!");
                             } else {
-                                String deadlineDescription = updatedDeadline[0];
-                                String deadlineBy = updatedDeadline[1];
+                                String deadlineDescription = updatedDeadline[0].replaceFirst(" ", "");
+                                String deadlineBy = updatedDeadline[1].replaceFirst(" ", "");
                                 Deadline newDeadline = new Deadline(deadlineDescription, deadlineBy);
                                 userList.add(newDeadline);
                                 System.out.println("    ____________________________________________________________\n    " +
                                     "Got it. I've added this task:\n    " + newDeadline.toString() + "\n    " + "Now you have " + userList.size() + " tasks in the list.\n" +
                                     "    ____________________________________________________________");
+                                userFile.updateFile(userList);
                             }
                         } else {
                             throw new DukeException("I'm sorry, please add a '/by' in your description!");
@@ -119,18 +122,19 @@ public class Duke {
                         //checks if there is an "/at" to separate the description
                         if (description.contains("/at")) {
                             //Removes the "event" string and splits the description using "/at"
-                            String[] updatedEvent = description.replace(keyword, "").split("/at");
+                            String[] updatedEvent = description.replace(keyword, "").split(" /at");
                             //Returns error if user enters more than one "/at"
                             if (updatedEvent.length > 2) {
                                 throw new DukeException("I'm sorry, please only have ONE '/at' in your description!");
                             } else {
-                                String eventDescription = updatedEvent[0];
-                                String eventBy = updatedEvent[1];
+                                String eventDescription = updatedEvent[0].replaceFirst(" ", "");
+                                String eventBy = updatedEvent[1].replaceFirst(" ", "");
                                 Event newEvent = new Event(eventDescription, eventBy);
                                 userList.add(newEvent);
                                 System.out.println("    ____________________________________________________________\n    " +
                                     "Got it. I've added this task:\n    " + newEvent.toString() + "\n    " + "Now you have " + userList.size() + " tasks in the list.\n" +
                                     "    ____________________________________________________________");
+                                userFile.updateFile(userList);
                             }
                         } else {
                             throw new DukeException("I'm sorry, please add an '/at' in your description!");
@@ -154,6 +158,7 @@ public class Duke {
                                 System.out.println("    ____________________________________________________________\n    " + "Nice! I've marked this task as done:\n" +
                                 "    " + userList.get(taskNumber - 1).toString() +
                                 "\n    ____________________________________________________________");
+                                userFile.updateFile(userList);
                             }
                         }
                         //else throw DukeException for invalid scenarios ie "done two" instead of "done 2"
@@ -182,6 +187,7 @@ public class Duke {
                                     "    " + userList.get(taskNumber - 1).toString() +
                                     "\n    ____________________________________________________________");
                                 userList.remove(taskNumber - 1);
+                                userFile.updateFile(userList);
                             }
                         }
                         //else throw DukeException for invalid scenarios ie "delete two" instead of "delete 2"
