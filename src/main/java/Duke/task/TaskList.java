@@ -1,7 +1,6 @@
 package Duke.task;
 
 import Duke.exception.NoSuchTaskException;
-import Duke.ui.UI;
 
 import java.util.ArrayList;
 

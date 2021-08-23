@@ -4,7 +4,7 @@ import Duke.exception.InvalidCommandException;
 import Duke.exception.InvalidCommandParameterException;
 import Duke.exception.NoSuchTaskException;
 import Duke.task.*;
-import Duke.ui.UI;
+import Duke.UI;
 
 import java.util.Scanner;
 

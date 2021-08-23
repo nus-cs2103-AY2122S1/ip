@@ -1,5 +1,5 @@
 import Duke.parser.DukeParser;
-import Duke.ui.UI;
+import Duke.UI;
 import Duke.exception.DukeException;
 import Duke.task.TaskList;
 
