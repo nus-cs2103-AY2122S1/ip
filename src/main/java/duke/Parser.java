@@ -28,6 +28,8 @@ public class Parser {
             keyWord = "event";
         } else if (command.startsWith("today")) {
             keyWord = "today";
+        } else if (command.startsWith("find")) {
+            keyWord = "find";
         } else if (command.startsWith("bye")) {
             keyWord = "bye";
         }
@@ -231,6 +233,22 @@ public class Parser {
         }
         if (num == 1) {
             System.out.println("\t\tLooks like there is nothing due today!");
+        }
+    }
+
+    public static void parseFind(String search) {
+        System.out.println("\tHere are the matching tasks in your list:");
+        int num = 1;
+        search = search.substring(5);
+        for (int i = 0; i < TaskList.getTaskList().size(); i++) {
+            if (TaskList.getTaskList().get(i).getDescription().contains(search)) {
+                System.out.println("\t\t" + num + "." +
+                        TaskList.getTaskList().get(i).toString());
+                num++;
+            }
+        }
+        if (num == 1) {
+            System.out.println("\t\tNo matching results found!");
         }
     }
 }

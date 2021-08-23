@@ -58,6 +58,14 @@ public class Task {
      * Returns the task as a string that is to be displayed to the user
      * @return the given task as a string that is to be displayed to the user
      */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Returns the task as a string that is to be displayed to the user
+     * @return the given task as a string that is to be displayed to the user
+     */
     @Override
     public String toString() {
         return this.getStatusIcon() + this.description;
