@@ -1,7 +1,7 @@
-package Duke.Exception;
+package duke.exception;
 
 /**
- * Duke.Exception.NoDateIndicatorException is thrown if there is no /at or /by provided by either Duke.Task.Event or Duke.Task.Deadline task respectively.
+ * NoDateIndicatorException is thrown if there is no /at or /by provided by either Duke.Task.Event or Duke.Task.Deadline task respectively.
  */
 public class NoDateIndicatorException extends Exception{
     private final static String SAD_ROBOT_ICON = "[~T-T~]";

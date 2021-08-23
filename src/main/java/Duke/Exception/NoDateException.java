@@ -1,7 +1,7 @@
-package Duke.Exception;
+package duke.exception;
 
 /**
- * Duke.Exception.NoDateException is thrown if there is no date/timing provided by either Duke.Task.Event or Duke.Task.Deadline task.
+ * NoDateException is thrown if there is no date/timing provided by either Duke.Task.Event or Duke.Task.Deadline task.
  */
 public class NoDateException extends Exception{
     private final static String SAD_ROBOT_ICON = "[~T-T~]";

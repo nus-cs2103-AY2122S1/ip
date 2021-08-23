@@ -1,7 +1,7 @@
-package Duke.Exception;
+package duke.exception;
 
 /**
- * Duke.Exception.NoTaskDescriptionException is thrown when there is no task description for any task.
+ * NoTaskDescriptionException is thrown when there is no task description for any task.
  */
 public class NoTaskDescriptionException extends Exception{
     private final static String SAD_ROBOT_ICON = "[~T-T~]";

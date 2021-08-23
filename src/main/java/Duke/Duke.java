@@ -1,7 +1,7 @@
-package Duke;
+package duke;
 
 /**
- * Duke.Duke is a simple bot that allows users to keep track of different types of tasks.
+ * Duke is a simple bot that allows users to keep track of different types of tasks.
  */
 public class Duke {
     private final Storage storage;
@@ -25,7 +25,7 @@ public class Duke {
     }
 
     public static void main(String[] args)  {
-        new Duke("data/Duke.Duke.txt").run();
+        new Duke("data/Duke.txt").run();
 
     }
 }

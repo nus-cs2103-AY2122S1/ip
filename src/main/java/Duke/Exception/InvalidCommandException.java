@@ -1,7 +1,7 @@
-package Duke.Exception;
+package duke.exception;
 
 /**
- * Duke.Exception.InvalidCommandException is an exception that is thrown when command is not recognized for any type of task.
+ * InvalidCommandException is an exception that is thrown when command is not recognized for any type of task.
  */
 public class InvalidCommandException extends Exception {
     private final static String SAD_ROBOT_ICON = "[~T-T~]";

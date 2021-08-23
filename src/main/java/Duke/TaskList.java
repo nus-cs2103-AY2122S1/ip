@@ -1,16 +1,16 @@
-package Duke;
+package duke;
 
-import Duke.Exception.InvalidIndexException;
-import Duke.Exception.NoDateException;
-import Duke.Exception.NoTaskDescriptionException;
-import Duke.Exception.NoDateIndicatorException;
+import duke.exception.InvalidIndexException;
+import duke.exception.NoDateException;
+import duke.exception.NoTaskDescriptionException;
+import duke.exception.NoDateIndicatorException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Duke.Task.Task;
-import Duke.Task.Event;
-import Duke.Task.ToDo;
-import Duke.Task.Deadline;
+import duke.task.Task;
+import duke.task.Event;
+import duke.task.ToDo;
+import duke.task.Deadline;
 
 
 public class TaskList {
@@ -109,7 +109,7 @@ public class TaskList {
     }
 
     /**
-     * Returns newly created Duke.Task.Event Duke.Task.ToDo task otherwise throw an appropriate error.
+     * Returns newly created  ToDo task otherwise throw an appropriate error.
      *
      * @param userInput user input String
      * @return todo task.
@@ -123,7 +123,7 @@ public class TaskList {
     }
 
     /**
-     * Returns newly created Duke.Task.Event task otherwise throw an appropriate error.
+     * Returns newly created Event task otherwise throw an appropriate error.
      *
      * @param userInput user input String
      * @return event task
@@ -154,7 +154,7 @@ public class TaskList {
     }
 
     /**
-     * Returns newly created Duke.Task.Event Duke.Task.Deadline task otherwise throw an appropriate error.
+     * Returns newly created Deadline task otherwise throw an appropriate error.
      *
      * @param userInput user input String
      * @return deadline task

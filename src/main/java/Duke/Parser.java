@@ -1,10 +1,10 @@
-package Duke;
+package duke;
 
-import Duke.Task.Task;
-import Duke.Exception.NoDateException;
-import Duke.Exception.NoDateIndicatorException;
-import Duke.Exception.NoTaskDescriptionException;
-import Duke.Exception.InvalidCommandException;
+import duke.task.Task;
+import duke.exception.NoDateException;
+import duke.exception.NoDateIndicatorException;
+import duke.exception.NoTaskDescriptionException;
+import duke.exception.InvalidCommandException;
 
 public class Parser {
 

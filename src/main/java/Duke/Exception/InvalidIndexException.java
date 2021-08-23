@@ -1,7 +1,7 @@
-package Duke.Exception;
+package duke.exception;
 
 /**
- * Duke.Exception.InvalidIndexException is thrown if done i, where i is the index of task is not a number or taskNumber
+ * InvalidIndexException is thrown if done i, where i is the index of task is not a number or taskNumber
  * exceeds the current list size.
  */
 public class InvalidIndexException extends Exception {

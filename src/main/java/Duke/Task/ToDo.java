@@ -1,7 +1,8 @@
-package Duke.Task;
+package duke.task;
+
 
 /**
- * A toDo-type of Duke.Task.Duke.Task that contains details toDo.
+ * A toDo-type of Task that contains details.
  */
 public class ToDo extends Task {
 
