@@ -1,27 +1,30 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Deadline class: For tasks that need to be done before a specific date/time
  * e.g., submit report by 11/10/2019 5pm
  */
 public class Deadline extends Task {
-    private String date;
+    private LocalDate date;
 
-    public Deadline(String description, String date) {
+    public Deadline(String description, LocalDate date) {
         super(description, Type.DEADLINE);
         this.date = date;
     }
 
-    public Deadline(boolean isDone, String description, String date) {
+    public Deadline(boolean isDone, String description, LocalDate date) {
         super(isDone, description, Type.DEADLINE);
         this.date = date;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
     @Override
     public String toString() {
-        return getTypeBox() + getCheckBox() + description.trim() + " (by: "
-                + date + ")";
+        return getTypeBox() + getCheckBox() + description + " (by: "
+                + date.format(DateTimeFormatter.ofPattern("dd LLL yyyy")) + ")";
     }
 }

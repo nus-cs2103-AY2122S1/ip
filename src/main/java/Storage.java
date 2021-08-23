@@ -1,4 +1,7 @@
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -69,11 +72,11 @@ public class Storage {
         switch (task.getType()) {
         case DEADLINE:
             Deadline deadline = (Deadline) task;
-            csv += "," + escapeSpecialCharacters(deadline.getDate());
+            csv += "," + escapeSpecialCharacters(deadline.getDate().toString());
             break;
         case EVENT:
             Event event = (Event) task;
-            csv += "," + escapeSpecialCharacters(event.getDate());
+            csv += "," + escapeSpecialCharacters(event.getDate().toString());
             break;
         default:
             break;
@@ -96,9 +99,9 @@ public class Storage {
             String description = unescapeSpecialCharacters(values[2]);
             switch (Task.Type.valueOf(values[0])) {
             case DEADLINE:
-                return new Deadline(isDone, description, values[3]);
+                return new Deadline(isDone, description, LocalDate.parse(values[3]));
             case EVENT:
-                return new Event(isDone, description, values[3]);
+                return new Event(isDone, description, LocalDateTime.parse(values[3]));
             case TODO:
                 return new ToDo(isDone, description);
             default:

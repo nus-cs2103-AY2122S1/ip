@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -106,22 +110,32 @@ public class Biscuit {
                 case "deadline":
                     String[] deadlineData = userInput[1].split("/by ", 2);
                     if (deadlineData.length == 2) {
-                        task = new Deadline(deadlineData[0], deadlineData[1]);
+                        try {
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                            task = new Deadline(deadlineData[0].trim(), LocalDate.parse(deadlineData[1], formatter));
+                        } catch (DateTimeParseException e) {
+                            throw new BiscuitException("Woof! Please use the date format of dd-MM-yyy (eg. 02-22-1999).");
+                        }
                     } else {
                         throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The date/time for deadline cannot be empty.\n" +
-                                "If you do not wish to add a date, use todo instead.");
+                                "Please use the format: deadline <name> /by dd-MM-yyy");
                     }
                     break;
                 case "event":
                         String[] eventData = userInput[1].split("/at ", 2);
                         if (eventData.length == 2) {
-                            task = new Event(eventData[0], eventData[1]);
+                            try {
+                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+                                task = new Event(eventData[0].trim(), LocalDateTime.parse(eventData[1], formatter));
+                            } catch (DateTimeParseException e) {
+                                throw new BiscuitException("Woof! Please use the date format of dd-MM-yyy HH:mm (eg. 02-22-1999 22:02).");
+                            }
                         } else {
                             throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The date/time for event cannot be empty.\n" +
-                                    "If you do not wish to add a date, use todo instead.");
+                                    "Please use the format: event <name> /at dd-MM-yyy HH:mm");
                         }
                     break;
-                default: // todo task
+                default:
                     task = new ToDo(userInput[1]);
                     break;
             }
