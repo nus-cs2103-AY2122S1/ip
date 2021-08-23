@@ -1,19 +1,16 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.List;
-
 public class DukeParser {
-    private final String dataPath;
+    public DukeParser() {
 
-    public DukeParser(String dataPath) {
-        this.dataPath = dataPath;
     }
 
-    private Task parseTaskFromLine(String line) throws InvalidDukeCommandException {
+    /**
+     * Provides a task based on data read from line.
+     *
+     * @param line line that data is read from.
+     * @return a task matching the information from the line of data.
+     * @throws DukeFileSystemException if the line provided does not conform to the Duke storing format.
+     */
+    public Task parseTaskFromLine(String line) throws DukeFileSystemException {
         String[] lineArgs = line.split(" \\| ");
         String taskType = lineArgs[0];
         boolean isDone = lineArgs[1].equals("1");
@@ -31,7 +28,8 @@ public class DukeParser {
             task = new Event(taskDescription, date);
             break;
         default:
-            throw new InvalidDukeCommandException("Invalid data read from file while loading tasks");
+            throw new DukeFileSystemException("Invalid data read from file while loading tasks. A new list will " +
+                    "be used for this session.");
         }
         if (isDone) {
             task.markAsDone();
@@ -40,36 +38,55 @@ public class DukeParser {
     }
 
     /**
-     * Returns a list of task based on the data given by specified file in the constructor.
+     * Gets the type of Duke command of a given input string.
+     * The Duke command of an input string is given by the first argument provided in the string.
      *
-     * @return List of Tasks from file
-     * @throws FileNotFoundException       If source is not found
-     * @throws InvalidDukeCommandException If data from the file does not follow specifications
+     * @param inputString the string literal of the input.
+     * @return a corresponding Duke command type based on the input string.
      */
-    public List<Task> loadTasksFromData() throws FileNotFoundException, InvalidDukeCommandException {
-        File dataFile = new File(dataPath);
-        Scanner scanner = new Scanner(dataFile);
-        List<Task> taskList = new ArrayList<>();
-        while (scanner.hasNext()) {
-            try {
-                Task task = parseTaskFromLine(scanner.nextLine());
-                taskList.add(task);
-            } catch (InvalidDukeCommandException e) {
-                throw e;
-            }
+    public DukeCommand getCommandType(String inputString) {
+        DukeCommand inputCommand;
+        String command = inputString.split(" ", 2)[0];
+        switch (command) {
+        case "done":
+            inputCommand = DukeCommand.DONE;
+            break;
+        case "bye":
+            inputCommand = DukeCommand.BYE;
+            break;
+        case "list":
+            inputCommand = DukeCommand.LIST;
+            break;
+        case "todo":
+            inputCommand = DukeCommand.TODO;
+            break;
+        case "event":
+            inputCommand = DukeCommand.EVENT;
+            break;
+        case "deadline":
+            inputCommand = DukeCommand.DEADLINE;
+            break;
+        case "delete":
+            inputCommand = DukeCommand.DELETE;
+            break;
+        default:
+            inputCommand = DukeCommand.INVALID;
         }
-        return taskList;
+
+        return inputCommand;
     }
 
-    public void writeTasksToFile(List<Task> taskList) throws IOException {
-        FileWriter fileWriter = new FileWriter(dataPath);
-        StringBuilder outputBuilder = new StringBuilder();
-        taskList.forEach(task -> {
-            outputBuilder.append(task.toDukeStoreFormat());
-            outputBuilder.append("\n");
-        });
-        fileWriter.write(outputBuilder.toString());
-        fileWriter.close();
-        return;
+    /**
+     * Gets the string literal of the arguments provided in a duke command.
+     * This refers to the entire string literal after the first word provided in the input.
+     *
+     * @param inputString the string literal of the input.
+     * @return a string literal of the input after the first word. If there is only one word, an empty string is
+     * returned instead.
+     */
+    public String getArgsLiteral(String inputString) {
+        String[] args = inputString.split(" ", 2);
+        String argsLiteral = args.length > 1 ? args[1] : "";
+        return argsLiteral;
     }
 }
