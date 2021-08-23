@@ -1,3 +1,4 @@
 T,X,read book
-D,,post-lecture quiz,Fri 12pm
+D,X,post-lecture quiz,Fri 12pm
 E,X,welcome tea,Sun 8-9pm
+E, ,party,Sunday 8pm

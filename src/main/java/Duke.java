@@ -21,16 +21,36 @@ public class Duke {
      */
     public static void addTask(List<Task> tasks, Task task) {
         tasks.add(task);
+        saveData(tasks);
         System.out.println("Added task:\n " + task);
         int taskCount = tasks.size();
         System.out.printf("You have %d %s in the list.%n", taskCount, taskCount > 1 ? "tasks" : "task");
     }
 
     /**
-     * Returns the list of tasks saved if the directory and file exists.
-     * If not, creates the directory and file and returns an empty list.
+     * Marks a task as done and saves it to the file.
      *
-     * @return List of tasks
+     * @param tasks The list of tasks.
+     * @param index The index of the task to mark as done.
+     * @throws DukeException
+     */
+    public static void doneTask(List<Task> tasks, String index) throws DukeException {
+        if (index.isBlank()) {
+            throw new DukeException("☹ OOPS!!! Please provide the index of the " +
+                    "task you want to mark as done.");
+        }
+        int taskIndex = Integer.parseInt(index) - 1;
+        Task doneTask = tasks.get(taskIndex);
+        doneTask.markAsDone();
+        saveData(tasks);
+        System.out.printf("Good job! I have marked the following task as done:%n %s%n", doneTask);
+    }
+
+    /**
+     * Returns the list of tasks saved if the directory and file exists.
+     * If not, creates the directory and file as necessary and returns an empty list.
+     *
+     * @return List of saved tasks
      */
     public static List<Task> loadData() {
         String path = "./data/Duke.txt";
@@ -76,14 +96,18 @@ public class Duke {
         return tasks;
     }
 
-    public static void saveData(List<Task> tasks) throws IOException {
+    public static void saveData(List<Task> tasks) {
         String path = "./data/Duke.txt";
-        FileWriter fw = new FileWriter(path, true);
-        for (Task task : tasks) {
-            fw.write(task.toSaveString());
-        }
+        try {
+            FileWriter fw = new FileWriter(path);
+            for (Task task : tasks) {
+                fw.write(task.toSaveString() + System.lineSeparator());
+            }
 
-        fw.close();
+            fw.close();
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
