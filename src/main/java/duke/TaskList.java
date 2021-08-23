@@ -68,4 +68,14 @@ public class TaskList {
             taskList.get(index - 1).markAsDone();
         }
     }
+
+    public ArrayList<Task> findMatches(String str) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task : getTaskList()) {
+            if (task.toString().contains(str)) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
 }
