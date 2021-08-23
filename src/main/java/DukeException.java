@@ -27,6 +27,22 @@ public class DukeException extends Exception {
         case INVALIDINPUT:
             customMessage = "  OOPS!!! I don't recognise the command you've given me.";
             break;
+        case DB_LAUNCH:
+            customMessage = "  OOPS!!! There was a problem setting up the hard disk!";
+            break;
+        case DB_READ:
+            customMessage = "  OOPS!!! There was a problem with reading tasks in the hard disk!\n" 
+                    + "  Check out duke.txt for any erroneous entries or incorrect formatting.";
+            break;
+        case DB_ADD:
+            customMessage = "  OOPS!!! There was a problem adding the task to the hard disk!";
+            break;
+        case DB_DONE:
+            customMessage = "  OOPS!!! There was a problem setting the task to done in the hard disk!";
+            break;
+        case DB_DELETE:
+            customMessage = "  OOPS!!! There was a problem deleting the task from the hard disk!";
+            break;
         default:
             customMessage = "  OOPS!!! Duck has run into an unspecified error!";
             break;

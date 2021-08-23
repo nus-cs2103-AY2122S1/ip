@@ -18,4 +18,12 @@ public class Task {
             return "[ ] " + taskName;
         }
     }
+
+    public String databaseEntry() {
+        if (done) {
+            return " | 1 | " + taskName;
+        } else {
+            return " | 0 | " + taskName;
+        }
+    }
 }
