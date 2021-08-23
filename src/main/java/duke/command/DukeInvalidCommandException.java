@@ -1,4 +1,4 @@
-package duke.ui;
+package duke.command;
 
 /**
  * Represents an exception that occurs when an invalid command is used as an input for the Duke chatbot.
