@@ -17,6 +17,7 @@ public class TaskList {
     private final String MESSAGE_LIST = "Here's your tasks!";
     private final String MESSAGE_ADD = "Nee added this task:";
     private final String MESSAGE_DELETE = "Nee has deleted this task:";
+    private final String MESSAGE_FIND = "Nee found matching tasks!";
 
     private ArrayList<Task> tasks;
 
@@ -53,10 +54,6 @@ public class TaskList {
         return (MESSAGE_DELETE + "\n  " + task + "\n" + "Nee has " + tasks.size() + str);
     }
 
-    public ArrayList<Task> getTasks() {
-        return this.tasks;
-    }
-
     /**
      * Prints the list of tasks.
      *
@@ -76,6 +73,14 @@ public class TaskList {
     }
 
     /**
+     * Returns the list of tasks.
+     * @return List of tasks.
+     */
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
+    }
+
+    /**
      * Marks a task as completed.
      *
      * @param command The user input.
@@ -90,7 +95,6 @@ public class TaskList {
         task.toggleDone();
         return MESSAGE_DONE + "\n" + "  " + task;
     }
-
 
     /**
      * Adds an event to the list of tasks.
@@ -142,7 +146,6 @@ public class TaskList {
         return formatTask(newTask, tasks.size());
     }
 
-
     /**
      * Adds a todo to the list of tasks.
      *
@@ -153,6 +156,32 @@ public class TaskList {
         Task newTask = new Todo(command.substring(5).trim());
         tasks.add(newTask);
         return formatTask(newTask, tasks.size());
+    }
+
+    /**
+     * Returns a {@code String} of filtered tasks that match the keyword.
+     *
+     * @param command The user input.
+     * @return Filtered tasks.
+     * @throws DukeException No tasks match the search term.
+     */
+    public String find(String command) throws DukeException {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.getTaskName().contains(command.substring(5).trim())) {
+                filteredTasks.add(t);
+            }
+        }
+        if (filteredTasks.size() <= 0) {
+            throw new DukeException("No tasks found!");
+        }
+
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < filteredTasks.size() - 1; i++) {
+            res.append((i + 1) + ".\t" + filteredTasks.get(i) + "\n");
+        }
+        res.append(filteredTasks.size() + ".\t" + filteredTasks.get(filteredTasks.size() - 1));
+        return MESSAGE_FIND + "\n" + res;
     }
 
 }
