@@ -68,11 +68,11 @@ public class Parser {
 
     /**
      * Parses the command input by the user, interprets and returns
-     * the content of the task in a String representation.
+     * the description of the task in a String representation.
      *
      * @param input The input command from the user.
      * @param typeOfTask The type of task in the command.
-     * @return The content of the task in a String representation.
+     * @return The description of the task in a String representation.
      * @throws MeowException If the user input is incomplete.
      */
     public String getTask(String input, Meow.Command typeOfTask) throws MeowException {
@@ -91,12 +91,12 @@ public class Parser {
 
     /**
      * Parses the command input by the user, interprets and returns
-     * an array containing the content of the task as well as the
+     * an array containing the description of the task as well as the
      * date/time of the task to be completed (only for meow.Deadline and meow.Event).
      *
-     * @param task The content of the task in the command.
+     * @param task The description of the task in the command.
      * @param typeOfTask The type of task in the command.
-     * @return An array containing the content of the task as well as the
+     * @return An array containing the description of the task as well as the
      * date/time of the task to be completed (only for meow.Deadline and meow.Event).
      */
     public String[] getTaskAndDate(String task, Meow.Command typeOfTask) {
