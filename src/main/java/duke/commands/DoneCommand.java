@@ -1,3 +1,9 @@
+package duke.commands;
+
+import duke.functionality.Storage;
+import duke.functionality.Ui;
+import duke.tasks.Task;
+
 public class DoneCommand extends Command {
     private int taskNum;
 

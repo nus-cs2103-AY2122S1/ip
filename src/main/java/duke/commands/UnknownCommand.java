@@ -1,3 +1,8 @@
+package duke.commands;
+
+import duke.functionality.Storage;
+import duke.functionality.Ui;
+
 public class UnknownCommand extends Command {
 
     public UnknownCommand (){}

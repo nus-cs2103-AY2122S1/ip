@@ -1,3 +1,11 @@
+package duke.functionality;
+
+import duke.commands.*;
+import duke.exceptions.DukeException;
+import duke.tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+
 public class Parser {
     public static Command parseInput(String userInput) throws DukeException {
         //TODO need to catch DukeException and IndexOutOfBoundsException somewhere
@@ -26,6 +34,7 @@ public class Parser {
             if (checkInputLength(argsSplit)) {
                 throw new DukeException("☹ OOPS!!! Please indicate when the deadline for the task is.");
             }
+            timeFormatChecker(argsSplit[1]);
             return new AddCommand(Deadline.taskTag(), argsSplit[0], argsSplit[1]);
 
         } else if (command.equals(Event.taskTag())) {
@@ -37,6 +46,7 @@ public class Parser {
             if (checkInputLength(argsSplit)) {
                 throw new DukeException("☹ OOPS!!! Please indicate the start and end time of the event.");
             }
+            timeFormatChecker(argsSplit[1]);
             return new AddCommand(Event.taskTag(), argsSplit[0], argsSplit[1]);
 
         } else if (command.equals("done")) {
@@ -60,5 +70,11 @@ public class Parser {
 
     private static boolean checkInputLength(String[] inputSplit) {
         return inputSplit.length < 2;
+    }
+
+    private static void timeFormatChecker(String inputString) throws DukeException {
+        if (!inputString.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new DukeException("☹ OOPS!!! Please enter a valid format for the date/time of your task.");
+        }
     }
 }

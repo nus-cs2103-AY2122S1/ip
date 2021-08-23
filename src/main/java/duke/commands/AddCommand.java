@@ -1,3 +1,9 @@
+package duke.commands;
+
+import duke.functionality.Ui;
+import duke.functionality.Storage;
+import duke.tasks.*;
+
 public class AddCommand extends Command {
     private String taskType;
     private String taskName;

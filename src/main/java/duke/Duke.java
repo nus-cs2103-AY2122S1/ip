@@ -1,3 +1,12 @@
+package duke;
+
+import duke.functionality.Storage;
+import duke.functionality.Ui;
+import duke.functionality.Parser;
+import duke.commands.*;
+import duke.exceptions.DukeException;
+
+
 public class Duke {
     private Storage storage;
     private Ui ui;

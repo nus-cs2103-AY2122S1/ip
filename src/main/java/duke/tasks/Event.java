@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.functionality.Datetime;
+
 public class Event extends Task {
     private final Datetime eventDatetime;
     private static final String TASK_TAG = "event";

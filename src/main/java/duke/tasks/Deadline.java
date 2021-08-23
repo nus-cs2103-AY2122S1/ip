@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.functionality.Datetime;
+
 public class Deadline extends Task {
     private final Datetime dueDate;
     private static final String TASK_TAG = "deadline";

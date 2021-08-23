@@ -1,3 +1,8 @@
+package duke.functionality;
+
+import duke.tasks.TaskList;
+import duke.tasks.*;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
