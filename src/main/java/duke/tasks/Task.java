@@ -1,6 +1,7 @@
 package duke.tasks;
 
 public class Task {
+
     private String name;
     private boolean isDone;
 

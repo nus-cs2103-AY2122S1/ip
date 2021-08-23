@@ -15,6 +15,7 @@ public class ChatBot {
     private TaskList tasklist;
     private Storage s;
     private UI ui;
+
     private int exitStatus = 1;
 
     public ChatBot() {
