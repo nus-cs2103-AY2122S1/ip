@@ -4,12 +4,12 @@ import java.util.Date;
 import java.util.Scanner;
 
 enum Activity {
-    TODO, DONE, EVENT, DELETE, DEADLINE, BYE, List, NORMAL;
+    TODO, DONE, EVENT, DELETE, DEADLINE, BYE, LIST, NORMAL
 }
 
 public class Duke {
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
 
         final String INTRO = "Hello! I'm Duke\n" +
                 "What can I do for you?";
@@ -39,21 +39,21 @@ public class Duke {
                     activity = Activity.BYE;
 
                 } else if (command.equals("list")) {
-                    activity = Activity.List;
+                    activity = Activity.LIST;
 
-                } else if (command.substring(0, 4).equals("done")) {
+                } else if (command.startsWith("done")) {
                     activity = Activity.DONE;
 
-                } else if (command.substring(0, 4).equals("todo")) {
+                } else if (command.startsWith("todo")) {
                     activity = Activity.TODO;
 
-                } else if (command.substring(0, 5).equals("event")) {
+                } else if (command.startsWith("event")) {
                     activity = Activity.EVENT;
 
-                } else if (command.substring(0, 8).equals("deadline")) {
+                } else if (command.startsWith("deadline")) {
                     activity = Activity.DEADLINE;
 
-                } else if (command.substring(0, 6).equals("delete")){
+                } else if (command.startsWith("delete")){
                     activity = Activity.DELETE;
 
                 } else {
@@ -65,7 +65,6 @@ public class Duke {
                     System.out.println(OUTRO);
                     return;
                 }
-
                 case DONE: {
                     int index = Integer.parseInt(command.substring(5)) - 1;
                     String subtext = "Nice! I've marked this task as done:\n";
@@ -75,7 +74,7 @@ public class Duke {
                     writeToFile(FILE_NAME, lst);
                     break;
                 }
-                case List: {
+                case LIST: {
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < lst.size(); i++) {
                         Task currentTask = lst.get(i);
@@ -182,7 +181,6 @@ public class Duke {
                 String desc = String.format("%s | %s | %s\n",activity, status, information);
                 fw.write(desc);
             }
-//
         }
         fw.close();
     }
