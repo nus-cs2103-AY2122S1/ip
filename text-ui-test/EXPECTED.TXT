@@ -1,4 +1,7 @@
 Hi! I'm Taro, short for Notaro because I'm Not-a-ro-bot!!
+~~~~~~~~~~
+Oops! Looks like you don't have anything saved :(
+~~~~~~~~~~
 There are three special tasks you can add: Deadline, Event and Todo
 Here are some special keywords! :
 bye : End our conversation :(

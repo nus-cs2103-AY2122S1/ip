@@ -1,6 +1,7 @@
 import java.io.File;
-import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -17,6 +18,11 @@ public class Duke {
             this.isDone = false;
         }
 
+        public Task(String description, boolean isDone) {
+            this.description = description;
+            this.isDone = isDone;
+        }
+
         public String getStatusIcon() {
             return (isDone ? "X" : " "); // mark done task with X
         }
@@ -25,9 +31,11 @@ public class Duke {
             this.isDone = true;
         }
 
-            public String toString() {
+        public String toString() {
                 return "[" + this.getStatusIcon() + "] ";
             }
+
+        public String getStatusString() { return ""; }
     }
 
     protected class Deadline extends Task {
@@ -38,10 +46,20 @@ public class Duke {
             this.dateBy = dateBy;
         }
 
+        public Deadline(String description, String dateBy, boolean isDone) {
+            super(description);
+            this.dateBy = dateBy;
+            this.isDone = isDone;
+        }
+
         @Override
         public String toString() {
             return "[D]" + super.toString() + description + " (by: " + dateBy + ")";
         }
+
+        @Override
+        public String getStatusString() { return "D@" + (isDone ? 1 : 0) + "@" + this.description + "@" + this.dateBy; }
+
     }
 
     protected class Event extends Task {
@@ -52,10 +70,19 @@ public class Duke {
             this.eventDetails = eventDetails;
         }
 
+        public Event(String description, String eventDetails, boolean isDone) {
+            super(description);
+            this.eventDetails = eventDetails;
+            this.isDone = isDone;
+        }
+
         @Override
         public String toString() {
             return "[E]" + super.toString() + description + " (at: " + eventDetails + ")";
         }
+
+        @Override
+        public String getStatusString() { return "D@" + (isDone ? 1 : 0) + "@" + this.description + "@" + this.eventDetails; }
     }
 
     protected class Todo extends Task {
@@ -63,11 +90,18 @@ public class Duke {
         public Todo(String description) {
             super(description);
         }
+        public Todo(String description, boolean isDone) {
+            super(description);
+            this.isDone = isDone;
+        }
 
         @Override
         public String toString() {
             return "[T]" + super.toString() + description;
         }
+
+        @Override
+        public String getStatusString() { return "D@" + (isDone ? 1 : 0) + "@" + this.description; }
     }
 
     protected static class DukeExceptions extends Exception {
@@ -112,9 +146,8 @@ public class Duke {
         String linebreak = "~~~~~~~~~~";
         String command; // this is the container for the command received from the user
         ArrayList<Task> todoList = new ArrayList<Task>(); // this array stores previous commands
-        int pointer = 0; // this tracks the newest position to add an item in todoList
-        //enum Commands {bye, list, done, delete, deadline, event, todo}; TODO
         Duke duke = new Duke();
+        ArrayList<String> textFileString = new ArrayList<String>();
 
         ///// Introduction of the robot
         // The chat bot name is Notaro bc it's Not-a-ro-bot :>
@@ -138,12 +171,42 @@ public class Duke {
 
                 while (file_sc.hasNext()) {
                     String nextLine = file_sc.nextLine();
-                    System.out.println(nextLine);
+                    textFileString.add(nextLine);
+
+                    String[] txtFileCmd = nextLine.split("@");
+                    String taskType = txtFileCmd[0];
+                    boolean taskState = Integer.parseInt(txtFileCmd[1]) != 0;  // 0 for not done, 1 for done
+                    String taskInfo = txtFileCmd[2];
+
+                    switch (taskType) {
+                        case "T": {
+                            todoList.add(duke.new Todo(taskInfo, taskState));
+                            break;
+
+                        }
+                        case "D": {
+                            String dateBy = txtFileCmd[3];
+                            todoList.add(duke.new Deadline(taskInfo, dateBy, taskState));
+                            break;
+
+                        }
+                        case "E": {
+                            String eventDetails = txtFileCmd[3];
+                            todoList.add(duke.new Event(taskInfo, eventDetails, taskState));
+                            break;
+                        }
+                        default:
+                            throw new CommandDoesNotExist(nextLine);
+                    }
                 }
                 file_sc.close();
+
+                for (int count = 0; count < todoList.size(); count++) {
+                    System.out.println((count + 1) + ". " + todoList.get(count).toString());
+                }
             }
 
-            // If the file does not exist, create a new file
+        // If the file does not exist, create a new file
         } else {
             System.out.println("Welcome new user!");
             System.out.println("Let me create a save file for you :)");
@@ -182,20 +245,6 @@ public class Duke {
 
             // 'list' : Retrieves information from the hard drive and prints it
             } else if (command.toLowerCase().equals("list")) {
-//                if (file.length() == 0) {
-//                    System.out.println("Yay! Nothing on your list right now :>");
-//
-//                } else {
-//                    System.out.println("Here's your progress:");
-//                    Scanner file_sc = new Scanner(file);
-//
-//                    while (file_sc.hasNext()) {
-//                        String nextLine = file_sc.nextLine();
-//                        System.out.println(nextLine);
-//                    }
-//                    file_sc.close();
-//                }
-//                System.out.println(linebreak);
 
                 if (todoList.size() == 0) {
                     System.out.println("Yay! Nothing on your list right now :>");
@@ -216,13 +265,32 @@ public class Duke {
                     throw new NotDoneRightException("1", String.valueOf(todoList.size()));
                 }
 
+                // Marks the task as done and prints statements as proof
                 int ref = Integer.parseInt(command.split(" ")[1]) - 1;
-                todoList.get(ref).markAsDone();
-                System.out.println("Yay good job!!");
-                System.out.println(todoList.get(ref));
-                System.out.println(linebreak);
+                Task task = todoList.get(ref); //TODO
+
+                if (task.getStatusIcon().equals("X")) {
+                    System.out.println("You've already done this!");
+                    System.out.println(linebreak);
+                } else {
+                    task.markAsDone();
+                    System.out.println("Yay good job!!");
+                    System.out.println(todoList.get(ref));
+                    System.out.println(linebreak);
+
+                    // Updates the duke.txt file
+                    textFileString.set(ref, task.getStatusString());
+                    String txt = "";
+                    for (String s : textFileString) {
+                        txt += s + "\n";
+                    }
+                    PrintWriter pw = new PrintWriter(file);
+                    pw.append(txt);
+                    pw.flush();
+                }
 
 
+            // 'delete [int]' : delete the corresponding number
             } else if (command.toLowerCase().split(" ")[0].equals("delete")) {
 
                 if (command.toLowerCase().split(" ").length == 1 || Integer.parseInt(command.split(" ")[1]) < 1
@@ -236,6 +304,16 @@ public class Duke {
                 System.out.println(todoList.remove(ref));
                 System.out.println(todoList.size() + " more tasks to go!");
                 System.out.println(linebreak);
+
+                // Remove it from the text file
+                textFileString.remove(ref);
+                String txt = "";
+                for (String s : textFileString) {
+                    txt += s + "\n";
+                }
+                PrintWriter pw = new PrintWriter(file);
+                pw.append(txt);
+                pw.flush();
 
 
             // Else, an item has been added to the chat bot
@@ -253,6 +331,14 @@ public class Duke {
                         System.out.println("added: " + command);
                         System.out.println(linebreak);
                         todoList.add(duke.new Todo(taskInfo[1]));
+                        textFileString.add(todoList.get(todoList.size() - 1).getStatusString());
+                        String txt = "";
+                        for (String s : textFileString) {
+                            txt += s + "\n";
+                        }
+                        PrintWriter pw = new PrintWriter(file);
+                        pw.append(txt);
+                        pw.flush();
                         break;
 
                     }
@@ -272,6 +358,14 @@ public class Duke {
                         System.out.println("added: " + command);
                         System.out.println(linebreak);
                         todoList.add(duke.new Deadline(description, dateBy));
+                        textFileString.add(todoList.get(todoList.size() - 1).getStatusString());
+                        String txt = "";
+                        for (String s : textFileString) {
+                            txt += s + "\n";
+                        }
+                        PrintWriter pw = new PrintWriter(file);
+                        pw.append(txt);
+                        pw.flush();
                         break;
 
                     }
@@ -291,14 +385,19 @@ public class Duke {
                         System.out.println("added: " + command);
                         System.out.println(linebreak);
                         todoList.add(duke.new Event(description, eventDetails));
+                        textFileString.add(todoList.get(todoList.size() - 1).getStatusString());
+                        String txt = "";
+                        for (String s : textFileString) {
+                            txt += s + "\n";
+                        }
+                        PrintWriter pw = new PrintWriter(file);
+                        pw.append(txt);
+                        pw.flush();
                         break;
 
                     }
                     default : throw new CommandDoesNotExist(command);
                 }
-
-                pointer++;
-
             }
         }
     }
