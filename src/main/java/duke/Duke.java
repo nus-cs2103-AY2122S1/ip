@@ -2,6 +2,11 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Duke is a chatbot that responds to user input.
+ *
+ * @author Gabriel Goh
+ */
 public class Duke {
 
     private final Storage storage;
@@ -26,6 +31,11 @@ public class Duke {
         EVENT
     }
 
+    /**
+     * Constructor to create Duke instance.
+     *
+     * @param filePath Path to storage
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -42,11 +52,19 @@ public class Duke {
         */
     }
 
+    /**
+     * Returns the size of the task list.
+     *
+     * @return size of task list.
+     */
     public int taskSize() {
         return tasks.size();
     }
 
 
+    /**
+     * Runs the chatbot. Begin to accept user input.
+     */
     public void run() {
         ui.showLogo();
         Scanner sc = new Scanner(System.in);

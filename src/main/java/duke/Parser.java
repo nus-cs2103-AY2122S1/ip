@@ -8,6 +8,11 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 import java.util.Locale;
 
+/**
+ * Parser handles parsing of user input.
+ *
+ * @author Gabriel Goh
+ */
 public class Parser {
 
     public Duke.Commands command;
@@ -18,7 +23,7 @@ public class Parser {
     public String by;
     public String at;
 
-    public Duke.Commands parseCommand(String commandStr) throws IllegalCommandException {
+    private Duke.Commands parseCommand(String commandStr) throws IllegalCommandException {
         try {
             return Duke.Commands.valueOf(commandStr);
         } catch (IllegalArgumentException e) {
@@ -26,6 +31,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse input arguments and assign parser class variables to corresponding input.
+     *
+     * @param argument Input string
+     * @param duke     Duke instance that called this method
+     * @throws DukeException Invalid arguments exceptions
+     */
     public void parse(String argument, Duke duke) throws DukeException {
         String[] s = argument.trim().split("\\s+", 2);
         command = parseCommand(s[0].toUpperCase());
@@ -50,7 +62,7 @@ public class Parser {
         }
     }
 
-    public boolean parseParameters(String argument, Duke duke) throws DukeException {
+    private boolean parseParameters(String argument, Duke duke) throws DukeException {
         switch (command) {
         case DONE:
         case DELETE:
@@ -110,6 +122,13 @@ public class Parser {
         return true;    // parsed succesfully
     }
 
+    /**
+     * Parse Date and Time into computer-understandable format.
+     *
+     * @param datetime Input date and time
+     * @return LocalDateTime instance
+     * @throws DateTimeFormatException Invalid date-time format
+     */
     public static LocalDateTime parseDateTime(String datetime) throws DateTimeFormatException {
         try {
             return LocalDateTime.parse(datetime,
@@ -133,6 +152,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse Date into computer-understandable format.
+     *
+     * @param date Input date
+     * @return LocalDate instance
+     * @throws DateTimeFormatException Invalid date format
+     */
     public static LocalDate parseDate(String date) throws DateTimeFormatException {
         try {
             return LocalDate.parse(date,
