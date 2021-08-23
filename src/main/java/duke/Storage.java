@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -60,7 +62,7 @@ public class Storage {
 
     /**
      * Writes data to data.txt in data directory.
-     * @param tasks Tasklist in Duke.
+     * @param tasks Tasklist in duke.Duke.
      * @throws IOException
      */
     public void writeData(TaskList tasks) throws DukeException{

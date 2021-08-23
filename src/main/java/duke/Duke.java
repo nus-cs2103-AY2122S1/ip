@@ -1,10 +1,12 @@
+package duke;
+
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
- * This class represents the chat bot, Duke.
+ * This class represents the chat bot, duke.Duke.
  */
 public class Duke {
 
@@ -87,7 +89,7 @@ public class Duke {
     }
 
     /**
-     * Method to add task to Duke.
+     * Method to add task to duke.Duke.
      * @return String array of the command keywords.
      * @throws DukeException
      */
@@ -101,7 +103,7 @@ public class Duke {
         } else if (date.equals("") && convertToTaskType(firstCommand) != Task.TaskType.TODO) {
             throw new DukeException("☹ OOPS!!! The date of " + aOrAn + " " + firstCommand + " cannot be empty.");
         } else if (convertToTaskType(firstCommand) == Task.TaskType.DEADLINE || convertToTaskType(firstCommand) == Task.TaskType.EVENT) {
-//                To Parser
+//                To duke.Parser
             if (DATE_PATTERN.matcher(date).matches()) {
 
                 String[] dateSplit = date.split(" ");
@@ -115,7 +117,7 @@ public class Duke {
             } else {
                 throw new DukeException("You need to put the date in yyyy-mm-dd hhmm format!");
             }
-            //        ENd of To Parser
+            //        ENd of To duke.Parser
         } else {
             this.tasks.addTask(taskDesc, convertToTaskType(firstCommand), date);
             this.confirmAdditionOfTask();
@@ -129,7 +131,7 @@ public class Duke {
     }
 
     /**
-     * Method for Duke to mark a task done.
+     * Method for duke.Duke to mark a task done.
      * @throws DukeException
      */
     private void markDone() throws DukeException {

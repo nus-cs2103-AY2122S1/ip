@@ -1,4 +1,5 @@
-import java.lang.reflect.Array;
+package duke;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -18,15 +19,15 @@ public class TaskList {
     private int taskIndex;
 
     /**
-     * Constructor for TaskList.
+     * Constructor for duke.TaskList.
      */
     private TaskList() {
         this.tasks = new ArrayList<Task>(100);
     }
 
     /**
-     * Factory method to create a TaskList.
-     * @return A new TaskList.
+     * Factory method to create a duke.TaskList.
+     * @return A new duke.TaskList.
      */
     public static TaskList createTaskList() {
         return new TaskList();

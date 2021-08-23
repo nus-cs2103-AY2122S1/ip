@@ -1,16 +1,18 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     /**
-     * String representation of date of Event.
+     * String representation of date of duke.Event.
      */
     protected LocalDate date;
     protected String time;
 
     /**
-     * Constructor for Event object.
-     * @param description Description of Event.
+     * Constructor for duke.Event object.
+     * @param description Description of duke.Event.
      */
     public Event(String description, LocalDate ld, String time) {
         super(description);
@@ -20,8 +22,8 @@ public class Event extends Task {
     }
 
     /**
-     * Returns string representation of Event object.
-     * @return String representation of Event.
+     * Returns string representation of duke.Event object.
+     * @return String representation of duke.Event.
      */
     @Override
     public String toString() {
@@ -29,8 +31,8 @@ public class Event extends Task {
     }
 
     /**
-     * Returns at property of Event object.
-     * @return at of Event.
+     * Returns at property of duke.Event object.
+     * @return at of duke.Event.
      */
     public String getAt() {
         return this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " + this.time;

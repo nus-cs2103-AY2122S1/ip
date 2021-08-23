@@ -1,7 +1,9 @@
+package duke;
+
 public class Todo extends Task {
     /**
-     * Constructor for Todo object.
-     * @param description Description of Todo.
+     * Constructor for duke.Todo object.
+     * @param description Description of duke.Todo.
      */
     public Todo(String description) {
         super(description);
@@ -9,8 +11,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns string representation of Todo object.
-     * @return String representation of Todo.
+     * Returns string representation of duke.Todo object.
+     * @return String representation of duke.Todo.
      */
     @Override
     public String toString() {

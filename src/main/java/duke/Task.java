@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * This class encapsulates a task.
  */
@@ -25,7 +27,7 @@ public class Task {
     public TaskType type;
 
     /**
-     * Constructor for Task object, takes in taskDescription string.`
+     * Constructor for duke.Task object, takes in taskDescription string.`
      * @param taskDescription Description of the task.
     */
     protected Task(String taskDescription) {
@@ -49,8 +51,8 @@ public class Task {
     }
 
     /**
-     * Returns string representation of Task object.
-     * @return String representation of Task.
+     * Returns string representation of duke.Task object.
+     * @return String representation of duke.Task.
      */
     @Override
     public String toString() {
