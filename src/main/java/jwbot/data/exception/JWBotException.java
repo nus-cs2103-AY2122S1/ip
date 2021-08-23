@@ -1,3 +1,5 @@
+package jwbot.data.exception;
+
 /**
  * Class for chatbot exceptions
  *

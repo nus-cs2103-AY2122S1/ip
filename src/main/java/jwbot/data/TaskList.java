@@ -1,3 +1,7 @@
+package jwbot.data;
+
+import jwbot.data.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 

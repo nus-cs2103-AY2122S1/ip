@@ -1,3 +1,12 @@
+package jwbot.storage;
+
+import jwbot.data.TaskList;
+import jwbot.data.exception.JWBotException;
+import jwbot.data.task.Deadline;
+import jwbot.data.task.Event;
+import jwbot.data.task.Task;
+import jwbot.data.task.Todo;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

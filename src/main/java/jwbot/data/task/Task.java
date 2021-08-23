@@ -1,3 +1,5 @@
+package jwbot.data.task;
+
 /**
  * Class to represent tasks
  *

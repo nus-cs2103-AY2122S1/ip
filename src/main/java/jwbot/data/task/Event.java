@@ -1,3 +1,7 @@
+package jwbot.data.task;
+
+import jwbot.data.task.Task;
+
 /**
  * Class for the event task
  *

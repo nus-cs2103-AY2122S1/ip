@@ -1,3 +1,10 @@
+package jwbot.command;
+
+import jwbot.data.exception.JWBotException;
+import jwbot.storage.Storage;
+import jwbot.data.TaskList;
+import jwbot.ui.Ui;
+
 public class DoneCommand extends Command {
 
     public DoneCommand(String input) {

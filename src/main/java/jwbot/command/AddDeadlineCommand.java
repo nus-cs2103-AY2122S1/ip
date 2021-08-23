@@ -1,3 +1,11 @@
+package jwbot.command;
+
+import jwbot.data.TaskList;
+import jwbot.data.exception.JWBotException;
+import jwbot.data.task.Deadline;
+import jwbot.storage.Storage;
+import jwbot.ui.Ui;
+
 public class AddDeadlineCommand extends Command {
 
     public AddDeadlineCommand(String input) {

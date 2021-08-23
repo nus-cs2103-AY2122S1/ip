@@ -1,3 +1,11 @@
+package jwbot.command;
+
+import jwbot.data.TaskList;
+import jwbot.data.exception.JWBotException;
+import jwbot.data.task.Event;
+import jwbot.storage.Storage;
+import jwbot.ui.Ui;
+
 public class AddEventCommand extends Command {
 
     public AddEventCommand(String input) {

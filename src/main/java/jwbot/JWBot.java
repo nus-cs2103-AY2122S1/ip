@@ -1,3 +1,12 @@
+package jwbot;
+
+import jwbot.command.Command;
+import jwbot.data.TaskList;
+import jwbot.data.exception.JWBotException;
+import jwbot.parser.Parser;
+import jwbot.storage.Storage;
+import jwbot.ui.Ui;
+
 /**
  * Main class for the chat bot
  *
@@ -5,9 +14,9 @@
  */
 public class JWBot {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
     private static final String txtPath = "jwbot.txt";
 
     public JWBot(String filePath) {

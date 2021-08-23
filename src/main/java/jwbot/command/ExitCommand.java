@@ -1,3 +1,9 @@
+package jwbot.command;
+
+import jwbot.storage.Storage;
+import jwbot.data.TaskList;
+import jwbot.ui.Ui;
+
 public class ExitCommand extends Command {
 
     public ExitCommand(String input) {

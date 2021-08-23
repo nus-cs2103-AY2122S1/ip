@@ -1,3 +1,8 @@
+package jwbot.ui;
+
+import jwbot.data.task.Task;
+import jwbot.data.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -8,7 +13,7 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    private final static String greeting = "Wassup bro! I'm JWBot\n"
+    private final static String greeting = "Wassup bro! I'm jwbot.JWBot\n"
             + "How can I help you?\n";
     private final static String byeMessage = "You leaving already? See you soon bro!";
 

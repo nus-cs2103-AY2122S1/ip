@@ -1,3 +1,8 @@
+package jwbot.parser;
+
+import jwbot.data.exception.JWBotException;
+import jwbot.command.*;
+
 public class Parser {
 
     public static Command parse(String input) throws JWBotException {

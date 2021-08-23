@@ -1,4 +1,12 @@
-public class DeleteCommand extends Command{
+package jwbot.command;
+
+import jwbot.data.TaskList;
+import jwbot.data.exception.JWBotException;
+import jwbot.data.task.Task;
+import jwbot.storage.Storage;
+import jwbot.ui.Ui;
+
+public class DeleteCommand extends Command {
 
     public DeleteCommand(String input) {
         super(input);
