@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,7 +12,7 @@ public class Deadline extends Task {
         try {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Deadline should be in the form yyyy-mm-dd" +
+            throw new DukeException("duke.Deadline should be in the form yyyy-mm-dd" +
                     "\ni.e. deadline read book /by 2021-06-18"); 
         }
     }

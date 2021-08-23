@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     private String input; 
     private String[] inputArr;
@@ -71,7 +73,7 @@ public class Parser {
                     int index = Integer.parseInt(inputArr[1]);
                     return new String[] {command, inputArr[1]}; 
                 } catch (NumberFormatException e) {
-                    throw new DukeException("Task index should be a valid integer");   
+                    throw new DukeException("duke.Task index should be a valid integer");   
                 }
             }
         } else if (isAddingNewTask()) {
