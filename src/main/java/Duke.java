@@ -115,6 +115,12 @@ public class Duke {
                         if (currIndex == instruction.length() ||
                                 currIndex + 5 >= instruction.length()) {
                             throw new DukeException("\tI think you forgot to key in your event timing!");
+                        } else if (instruction.charAt(currIndex + 7) != '/' &&
+                                instruction.charAt(currIndex + 10) != '/') {
+                            throw new DukeException("Please format the date as dd/mm/yyy");
+                        } else if (instruction.substring(currIndex).length() < 20){
+                            throw new DukeException("Please include the time in the 24 hour " +
+                                    "format (e.g. 15:00)");
                         } else {
                             String by = instruction.substring(currIndex + 5);
                             Task newEvent = new Event(taskDescription, by);
