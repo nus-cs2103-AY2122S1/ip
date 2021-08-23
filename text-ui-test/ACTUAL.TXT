@@ -20,29 +20,33 @@ Hello from
 
 	☹ OOPS!!! You need to specify a time.
 
+	☹ OOPS!!! Please specify the time in the yyyy-mm-dd format.
+
 	 Got it. I've added this task:
-	 	 [D][ ] do 2 things  (by: Monday)
+	 	 [D][ ] do 2 things (by: Oct 12 2020)
 	 You have 2 tasks in the list.
 
 	☹ OOPS!!! You need to specify a time.
 
+	☹ OOPS!!! Please specify the time in the yyyy-mm-dd format.
+
 	 Got it. I've added this task:
-	 	 [E][ ] a birthday  (at: 21:00)
+	 	 [E][ ] a birthday (at: Oct 12 2020)
 	 You have 3 tasks in the list.
 
 	Sorry, I can't seem to find that task
 
 	 Got it. I've removed this task:
-	 	 [E][ ] a birthday  (at: 21:00)
+	 	 [E][ ] a birthday (at: Oct 12 2020)
 	 You have 2 tasks in the list.
 
 	I'm Sorry, WHAT?!?!
 
 	 Nice! I've marked this task as done:
-		 [D][X] do 2 things  (by: Monday)
+		 [D][X] do 2 things (by: Oct 12 2020)
 
 	 1. [T][ ] do one thing
-	 2. [D][X] do 2 things  (by: Monday)
+	 2. [D][X] do 2 things (by: Oct 12 2020)
 
 	Clearing tasks...
 

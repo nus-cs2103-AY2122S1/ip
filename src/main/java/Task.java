@@ -1,13 +1,10 @@
-abstract public class Task {
-    protected boolean completed;
-    protected String description;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Task {
-    private boolean completed;
-    private String description;
+abstract public class Task {
+    protected boolean completed;
+    protected String description;
 
     protected Task(String taskName) {
         this.description = taskName;
