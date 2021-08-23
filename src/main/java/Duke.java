@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import static java.lang.Integer.parseInt;
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;
+import java.io.FileWriter; // Import this class to handle errors
+import java.io.IOException;
 
 /**
  * Project Duke
@@ -10,6 +14,12 @@ import static java.lang.Integer.parseInt;
  */
 
 public class Duke {
+
+    public static void addTask(List<Task> ls) {
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(ls.get(ls.size() - 1).toString());
+        System.out.println("Now you have " + ls.size() + " tasks in the list.");
+    }
 
     /**
      * A method to get the description from a task entered by the user
@@ -70,7 +80,50 @@ public class Duke {
         return true;
     }
 
+    public static void readFile() {
+        try {
+            File myObj = new File("data/duke.txt");
+            Scanner myScanner = new Scanner(myObj);
+            while (myScanner.hasNextLine()) {
+                String data = myScanner.nextLine();
+                System.out.println(data);
+            }
+            myScanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void saveFile(List<Task> ls) {
+        try {
+            String str = "";
+            for (int i = 0; i < ls.size(); i++) {
+                str += (i + 1) + "." + ls.get(i).toString() + "\n";
+            }
+            FileWriter fileWriter = new FileWriter("data/duke.txt");
+            fileWriter.write(str);
+            fileWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void displayList(List<Task> ls) {
+        if (ls.size() == 0) {
+            System.out.println("You currently do not have any task!");
+        } else {
+            System.out.println("Here are the tasks in your list: ");
+            for (int i = 0; i < ls.size(); i++) {
+                System.out.println((i + 1) + "." + ls.get(i).toString());
+            }
+        }
+    }
+
     public static void main(String[] args) {
+        readFile();
         String input = "";
         String[] arr;
         Scanner scan = new Scanner(System.in);
@@ -127,38 +180,26 @@ public class Duke {
                     if (arr.length < 2) {
                         throw new EmptyDescriptionException("Missing description / date");
                     }
-                    System.out.println("Got it. I've added this task: ");
                     ls.add(new Todo(getDescription(arr)));
-                    System.out.println(ls.get(ls.size() - 1).toString());
-                    System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                    addTask(ls);
                 } else if (arr[0].equals("deadline")) {
                     if (arr.length < 2) {
                         throw new EmptyDescriptionException("Missing description / date");
                     }
-                    System.out.println("Got it. I've added this task: ");
                     ls.add(new Deadline(getDescription(arr), getDeadline(arr)));
-                    System.out.println(ls.get(ls.size() - 1).toString());
-                    System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                    addTask(ls);
                 } else if (arr[0].equals("event")) {
                     if (arr.length < 2) {
                         throw new EmptyDescriptionException("Missing description / date");
                     }
-                    System.out.println("Got it. I've added this task: ");
                     ls.add(new Event(getDescription(arr), getDeadline(arr)));
-                    System.out.println(ls.get(ls.size() - 1).toString());
-                    System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                    addTask(ls);
                 } else if (input.equals("list")) {
-                    if (ls.size() == 0) {
-                        System.out.println("You currently do not have any task!");
-                    } else {
-                        System.out.println("Here are the tasks in your list: ");
-                        for (int i = 0; i < ls.size(); i++) {
-                            System.out.println((i + 1) + "." + ls.get(i).toString());
-                        }
-                    }
+                    displayList(ls);
                 } else {
                     throw new InvalidCommandException("Command not Found");
                 }
+                saveFile(ls);
             } catch (InvalidCommandException e) {
                 System.out.println(e.toString());
             } catch (EmptyDescriptionException e) {
