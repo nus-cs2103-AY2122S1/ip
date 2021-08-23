@@ -21,4 +21,18 @@ public class ToDo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Returns the string representation for storing in text file.
+     *
+     * @return the string representation for storing in text file
+     */
+    @Override
+    public String toStringSave() {
+        int completeBinary = 0;
+        if (this.isComplete) {
+            completeBinary = 1;
+        }
+        return "T" + " | " + completeBinary + " | " + this.taskDetails + " | ";
+    }
+
 }

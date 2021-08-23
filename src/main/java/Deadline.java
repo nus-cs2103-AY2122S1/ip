@@ -28,4 +28,18 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
+    /**
+     * Returns the string representation for storing in text file.
+     *
+     * @return the string representation for storing in text file
+     */
+    @Override
+    public String toStringSave() {
+        int completeBinary = 0;
+        if (this.isComplete) {
+            completeBinary = 1;
+        }
+        return "D" + " | " + completeBinary + " | " + this.taskDetails + " | " + this.by;
+    }
+
 }
