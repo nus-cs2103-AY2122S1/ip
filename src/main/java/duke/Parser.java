@@ -1,3 +1,13 @@
+package duke;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+import duke.utils.CheckedFunction;
+import duke.utils.DukeException;
+import duke.utils.Record;
+
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -37,7 +47,7 @@ public class Parser {
     }
 
     public Record greet(String args) {
-        return new Record("Hello! I'm Duke\n\t What can I do for you?");
+        return new Record("Hello! I'm duke.Duke\n\t What can I do for you?");
     }
 
     private Record bye(String args) throws DukeException {

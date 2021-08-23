@@ -1,3 +1,5 @@
+Command List
+============================================================
 clear
 SYNOPSIS
     clear
@@ -6,37 +8,41 @@ DESCRIPTION
 ============================================================
 deadline
 SYNOPSIS
-    deadline (DESCRIPTION) /by (yyyy-mm-dd HH:MM) [ / OTHER_INFORMATION ]
+    deadline DESCRIPTION /by DATE_TIME [ / OTHER_INFORMATION ]
 DESCRIPTION
-    Set a deadline task.
+    Set a deadline task. DATE_TIME must be formatted as a date
+    (yyyy-MM-dd) or time (HH:mm) or both, separated by a space
+    (yyyy-MM-dd HH:mm).
 EXAMPLES
     deadline MA1231 Assignment 2 /by 2021-10-03 23:59
     deadline Report /by 2021-11-21 15:20 / finalize bibliography
 ============================================================
 delete
 SYNOPSIS
-    delete (index)
+    delete INDEX
 DESCRIPTION
     Deletes the task at index. CANNOT BE UNDONE.
 ============================================================
 done
 SYNOPSIS
-    done (index)
+    done INDEX
 DESCRIPTION
     Marks the task at index as complete.
 ============================================================
 event
 SYNOPSIS
-    event (DESCRIPTION) /at (yyyy-mm-dd HH:MM ~ HH:MM) [ / OTHER_INFORMATION ]
+    event DESCRIPTION /at START_DATE_TIME ~ END_DATE_TIME [ / OTHER_INFORMATION ]
 DESCRIPTION
-    Set a event task.
+    Set a event task. START_DATE_TIME and END_DATE_TIME must be 
+    formatted as a date (yyyy-MM-dd) or time (HH:mm) or both, 
+    separated by a space (yyyy-MM-dd HH:mm).
 EXAMPLES
     event Singapore International Film Festival /at 2021-11-03 11:50
     event Oral Presentation /by 2021-11-21 15:20 /at memorize script
 ============================================================
 todo
 SYNOPSIS
-    todo (DESCRIPTION)
+    todo DESCRIPTION
 DESCRIPTION
     Set a todo task.
 EXAMPLES

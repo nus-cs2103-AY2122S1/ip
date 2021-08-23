@@ -1,21 +1,21 @@
-import java.time.DateTimeException;
+package duke.utils;
+
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class DukeDateTime implements Comparable<DukeDateTime> {
     private enum Level { TIME, DATE, DATETIME }
     public enum Format {
         DT_FULL("yyyy-MM-dd HH:mm", Level.DATETIME),
-        DT_SHORT("MM-dd HH:mm", Level.DATETIME),
+        // DT_SHORT("MM-dd HH:mm", Level.DATETIME),
         TIME("HH:mm", Level.TIME),
-        DATE_SHORT("MM-dd", Level.DATE),
+        // DATE_SHORT("MM-dd", Level.DATE),
         DATE_LONG("yyyy-MM-dd", Level.DATE),
         
         PRINT_TIME("HH:mm", Level.TIME),
-        PRINT_DATE_SHORT("dd MMM", Level.DATE),
+        // PRINT_DATE_SHORT("dd MMM", Level.DATE),
         PRINT_DATE_LONG("dd MMM yyyy", Level.DATE);
         
         protected final DateTimeFormatter format;
@@ -126,7 +126,7 @@ public class DukeDateTime implements Comparable<DukeDateTime> {
     }
     
     public static void main(String[] args) {
-        System.out.println("Driver testing DukeDateTime");
+        System.out.println("Driver testing duke.utils.DukeDateTime");
         String date = "2021-08-22";
         String startTime = "04:20";
         String endTime = "06:09";

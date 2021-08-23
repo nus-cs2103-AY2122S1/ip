@@ -1,3 +1,5 @@
+package duke.utils;
+
 public class Record {
     private String message;
     private boolean terminate;

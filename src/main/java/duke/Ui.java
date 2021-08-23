@@ -1,3 +1,7 @@
+package duke;
+
+import duke.utils.DukeException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;

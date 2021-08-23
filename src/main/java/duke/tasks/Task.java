@@ -1,5 +1,8 @@
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
+package duke.tasks;
+
+import duke.utils.DukeDateTime;
+import duke.utils.DukeException;
+
 import java.time.format.DateTimeFormatter;
 
 public abstract class Task {
@@ -7,7 +10,7 @@ public abstract class Task {
     protected String desc;
     protected boolean done;
     protected String details = new String();
-    protected DukeDateTime dateTime1;
+    protected DukeDateTime dateTime;
     public final static DukeException FORMAT_EXCEPTION = 
             new DukeException("I don't understand this entry, enter 'help' to learn the correct formatting!");
 
@@ -30,21 +33,9 @@ public abstract class Task {
         done = true;
     }
     
-    /*
-    protected String formatTime() {
-        if (details == null && dateTime == null) return null;
-        if (dateTime == null) return details;
-        String dt = String.format("%s on %s",
-                dateTime.format(DateTimeFormatter.ofPattern("HH:mm")),
-                dateTime.format(DateTimeFormatter.ofPattern("dd MMM")));
-        if (details == null) return dt;
-        return String.format("%s -- %s", dt, details);
-    }
-     */
-    
     abstract void addTime(String time) throws DukeException;
     
-    abstract String toDB();
+    public abstract String toDB();
 
     @Override
     public String toString() {
