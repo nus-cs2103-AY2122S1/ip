@@ -1,7 +1,7 @@
 package tiger.command;
 
 import tiger.actions.Action;
-import tiger.actions.AppState;
+import tiger.app.AppState;
 import tiger.actions.ByeAction;
 import tiger.actions.ClearAction;
 import tiger.actions.DeadLineAction;

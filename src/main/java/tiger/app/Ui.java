@@ -1,9 +1,5 @@
-package tiger.ui;
+package tiger.app;
 
-import tiger.actions.Action;
-import tiger.actions.AppState;
-import tiger.command.Command;
-import tiger.exceptions.inputs.TigerInvalidInputException;
 import tiger.exceptions.storage.TigerStorageException;
 import tiger.exceptions.storage.TigerStorageLoadException;
 import tiger.storage.Storage;
@@ -82,26 +78,16 @@ public class Ui {
 
     public void runUntilStopped() {
         while (!this.applicationState.isExited()) {
-            try {
-                String userInput = scanner.nextLine();
-                Action action = Command.getActionFromCommand(userInput, applicationState);
-                this.applicationState = action.run();
-                // save the storage everytime the user runs an action in case the app inexplicably quits
-                Storage.save(this.applicationState.taskList);
-            } catch (TigerInvalidInputException e) {
-                System.out.println(e);
-            }
+            String userInput = scanner.nextLine();
+            this.applicationState = new Pipeline(userInput, this.applicationState).run();
+            System.out.println(this.applicationState.getResponse());
         }
     }
 
     /**
-     * Exits the {@code Ui}.
+     * Exits the {@code Ui}. Handles the tasks that is supposed to be done upon exit.
      */
 
     public void exit() {
-        if (this.applicationState.isExited()) {
-            String goodbyeMessage = "Bye. Hope to see you again soon!";
-            System.out.println(goodbyeMessage);
-        }
     }
 }

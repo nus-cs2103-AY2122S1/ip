@@ -1,5 +1,6 @@
 package tiger.actions;
 
+import tiger.app.AppState;
 import tiger.components.Event;
 import tiger.components.TaskList;
 import tiger.utils.CustomDate;
@@ -24,8 +25,8 @@ public class EventAction extends Action {
     public AppState run() {
         TaskList taskList = this.applicationState.taskList;
         TaskList newTaskList = taskList.addTask(new Event(this.todo, false, this.date));
-        System.out.println(String.format("Excellent! I've added this event:\n%s",
-                taskList.showTask(taskList.size() - 1)));
-        return new AppState(applicationState.userExit, newTaskList);
+        String response = String.format("Excellent! I've added this event:\n%s",
+                taskList.showTask(taskList.size() - 1));
+        return new AppState(false, newTaskList, response);
     }
 }

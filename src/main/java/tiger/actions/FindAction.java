@@ -1,5 +1,6 @@
 package tiger.actions;
 
+import tiger.app.AppState;
 import tiger.components.TaskList;
 
 public class FindAction extends Action {
@@ -20,8 +21,8 @@ public class FindAction extends Action {
 
     public AppState run() {
         TaskList newTaskList = this.applicationState.taskList.findRelevantTasks(this.findDescription);
-        System.out.println(newTaskList);
-        return this.applicationState;
+        String response = newTaskList.toString();
+        return new AppState(false, this.applicationState.taskList, response);
     }
 
 

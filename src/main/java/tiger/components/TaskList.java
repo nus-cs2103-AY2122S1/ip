@@ -1,6 +1,6 @@
 package tiger.components;
 
-import tiger.exceptions.inputs.TigerIndexOutOfBoundsException;
+import tiger.exceptions.actions.TigerIndexOutOfBoundsException;
 import tiger.exceptions.storage.TigerStorageLoadException;
 
 import java.util.ArrayList;
@@ -51,7 +51,11 @@ public class TaskList {
      */
 
     public TaskList deleteTask(int index) throws TigerIndexOutOfBoundsException {
-        this.taskList.remove(index);
+        try {
+            this.taskList.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new TigerIndexOutOfBoundsException(index, this.taskList.size());
+        }
         return new TaskList(this.taskList);
     }
 

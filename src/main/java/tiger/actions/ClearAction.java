@@ -1,5 +1,6 @@
 package tiger.actions;
 
+import tiger.app.AppState;
 import tiger.components.TaskList;
 
 public class ClearAction extends Action {
@@ -17,7 +18,7 @@ public class ClearAction extends Action {
 
     @Override
     public AppState run() {
-        System.out.println("I've cleared all your tasks!");
-        return new AppState(this.applicationState.userExit, new TaskList());
+        String response = "I've cleared all your tasks!";
+        return new AppState(false, new TaskList(), response);
     }
 }

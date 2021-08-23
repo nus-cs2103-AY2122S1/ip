@@ -59,9 +59,4 @@ public class DateStringConverter {
         }
     }
 
-    public static void main(String[] args) {
-        CustomDate customDate = new DateStringConverter().getDateFromString(
-                "2021/15/22 08:35");
-        System.out.println(customDate.toString());
-    }
 }

@@ -1,4 +1,4 @@
-import tiger.ui.Ui;
+import tiger.app.Ui;
 
 public class Tiger {
     public static void main(String[] args) {

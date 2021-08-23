@@ -1,11 +1,12 @@
 package tiger.actions;
 
+import tiger.app.AppState;
 import tiger.components.TaskList;
-import tiger.exceptions.inputs.TigerIndexOutOfBoundsException;
+import tiger.exceptions.actions.TigerIndexOutOfBoundsException;
 
 public class DeleteAction extends Action {
-    AppState applicationState;
-    int index;
+    private AppState applicationState;
+    private int index;
 
     public DeleteAction(AppState applicationState, int index) {
         this.applicationState = applicationState;
@@ -14,10 +15,9 @@ public class DeleteAction extends Action {
 
     public AppState run() throws TigerIndexOutOfBoundsException {
         TaskList taskList = this.applicationState.taskList;
-        TaskList newTaskList = taskList;
-        System.out.println(String.format("Feeling lazy today? I've deleted:\n%s",
-                taskList.showTask(index)));
-        newTaskList = taskList.deleteTask(index);
-        return new AppState(applicationState.userExit, newTaskList);
+        String response = String.format("Feeling lazy today? I've deleted:\n%s",
+                taskList.showTask(index));
+        TaskList newTaskList = taskList.deleteTask(index);
+        return new AppState(false, newTaskList, response);
     }
 }

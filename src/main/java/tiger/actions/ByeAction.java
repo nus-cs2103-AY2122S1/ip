@@ -1,6 +1,8 @@
 package tiger.actions;
 
 
+import tiger.app.AppState;
+
 public class ByeAction extends Action {
     AppState applicationState;
 
@@ -16,6 +18,7 @@ public class ByeAction extends Action {
 
     @Override
     public AppState run() {
-        return new AppState(true, this.applicationState.taskList);
+        String response = "Bye. Hope to see you again soon!";
+        return new AppState(true, this.applicationState.taskList, response);
     }
 }

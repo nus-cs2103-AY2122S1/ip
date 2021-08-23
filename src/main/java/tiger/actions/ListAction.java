@@ -1,5 +1,7 @@
 package tiger.actions;
 
+import tiger.app.AppState;
+
 public class ListAction extends Action {
     AppState applicationState;
 
@@ -15,7 +17,7 @@ public class ListAction extends Action {
 
     @Override
     public AppState run() {
-        System.out.println(applicationState.taskList.toString());
-        return this.applicationState;
+        String response = this.applicationState.taskList.toString();
+        return new AppState(false, this.applicationState.taskList, response);
     }
 }

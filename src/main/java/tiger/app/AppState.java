@@ -1,4 +1,4 @@
-package tiger.actions;
+package tiger.app;
 
 import tiger.components.TaskList;
 
@@ -8,13 +8,14 @@ import tiger.components.TaskList;
 
 public class AppState {
     /** Whether the user has exited the program*/
-    protected boolean userExit;
+    private boolean userExit;
     /** A {@code TaskList} to store user tasks */
     public TaskList taskList;
+    /** String to store the response in */
+    private String response;
+    /** Flag in case some tasks failed to execute properly, or require subsequent follow ups */
+    public String flag;
 
-    // TODO: move AppState in their own class
-    // TODO: have some object to get the response of the Ui, instead of doing System.out.println() at each component
-    //  individually
     // TODO: set priority tasks
 
     /**
@@ -27,6 +28,14 @@ public class AppState {
     public AppState(boolean userExit, TaskList taskList) {
         this.userExit = userExit;
         this.taskList = taskList;
+        this.response = "";
+    }
+
+    public AppState(boolean userExit, TaskList taskList, String response) throws AssertionError {
+        this.userExit = userExit;
+        this.taskList = taskList;
+        assert (!response.equals(""));
+        this.response = response;
     }
 
     /**
@@ -48,4 +57,10 @@ public class AppState {
     public boolean isExited() {
         return this.userExit;
     }
+
+    public String getResponse() {
+        assert (!this.response.equals(""));
+        return this.response;
+    }
+
 }

@@ -1,5 +1,7 @@
 package tiger.actions;
 
+import tiger.app.AppState;
+
 public class InvalidAction extends Action {
     AppState applicationState;
 
@@ -16,7 +18,7 @@ public class InvalidAction extends Action {
 
     @Override
     public AppState run() {
-        System.out.println("Please enter in a valid command.");
-        return this.applicationState;
+        String response = "Please enter in a valid command.";
+        return new AppState(false, this.applicationState.taskList, response);
     }
 }
