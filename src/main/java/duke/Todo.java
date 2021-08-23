@@ -3,8 +3,18 @@ package duke;
 import duke.DukeTodoException;
 import duke.Task;
 
+/**
+ * Represents a subclass of Task that can be added to the List.
+ * It is annotated by T in the list.
+ */
 public class Todo extends Task {
 
+    /**
+     * Constructor for Todo class.
+     *
+     * @param name Name of the Task.
+     * @throws DukeTodoException If the name is an empty String.
+     */
     public Todo(String name) throws DukeTodoException {
         super(name);
         if (name.equals("")) {
@@ -12,6 +22,12 @@ public class Todo extends Task {
         }
     }
 
+    /**
+     * Overloaded Constructor for Todo Class.
+     * Used when loading the data file.
+     *
+     * @param input Array of Strings with type of Task, name, done.
+     */
     public Todo(String[] input) {
         super(input[2], input[1].equals("T") ? true : false );
     }
