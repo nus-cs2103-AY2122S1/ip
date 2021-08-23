@@ -25,10 +25,8 @@ public class Events extends Task {
 
     private void setLocalDateAndTime() {
         if (at.substring(0, 1).matches("[0-9]+")) {
-            int whitespaceIdx = at.indexOf(" ");
-            String date = at.substring(0, whitespaceIdx);
-            String time = at.substring(whitespaceIdx+1);
-            localDateTime = LocalDateTime.parse(date+"T"+time);
+            DateTimeFormatter anotherDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            this.localDateTime = LocalDateTime.parse(at, anotherDTF);
         } else {
             this.localDateTime = LocalDateTime.parse(at, dtf);
         }
