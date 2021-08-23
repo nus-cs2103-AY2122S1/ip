@@ -18,5 +18,8 @@ bin/
 *.jar
 *.exe
 
+# Save data
+save.csv
+
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT

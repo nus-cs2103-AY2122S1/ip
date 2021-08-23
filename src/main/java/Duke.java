@@ -7,7 +7,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         TaskList taskList = new TaskList();
 
-        greet();
+        init(taskList);
 
         while (sc.hasNextLine()) {
             try {
@@ -47,8 +47,18 @@ public class Duke {
         System.out.println(LINE_SEPARATOR + msg + "\n" + LINE_SEPARATOR);
     }
 
-    private static void greet() {
-        String greeting = "Hello! I'm iP Man.\nWhat can I do for you?";
+    private static void init(TaskList taskList) {
+        String greeting;
+
+        if (taskList.loadFile()) {
+            // file successfully loaded, it's a returning user. Print the retrieved list.
+            greeting = "Welcome back! What can I do for you?\n\n" +
+                    "Tasks in list:\n" + taskList.toString();
+        } else {
+            // file does not exist, it's a new user
+            greeting = "Hello! I'm iP Man.\nWhat can I do for you?";
+        }
+
         printMessage(greeting);
     }
 
