@@ -15,7 +15,7 @@ public class Deadline extends Task{
 
     private void timeSetter(String timeInput) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-        dateTime = LocalDateTime.parse(timeInput,formatter);
+        dateTime = LocalDateTime.parse(timeInput, formatter);
     }
 
     private String timeFormChange() {

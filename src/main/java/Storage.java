@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class Writer {
+public class Storage {
 
     public void fileSaver(ArrayList saveThis) {
         try {
