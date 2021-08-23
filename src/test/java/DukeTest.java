@@ -7,4 +7,9 @@ public class DukeTest {
     public void dummyTest(){
         assertEquals(2, 2);
     }
+
+    @Test
+    public void dummyTest2(){
+        assertEquals(2, 3);
+    }
 }
