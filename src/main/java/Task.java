@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public class Task {
+public abstract class Task {
     protected String name;
     protected boolean isDone;
-    private static ArrayList<Task> listOfTasks = new ArrayList<Task>();
+    public static ArrayList<Task> listOfTasks = new ArrayList<Task>();
 
     public Task(String name) {
         this.name = name;
@@ -30,11 +30,15 @@ public class Task {
     }
 
     public static void listAllTasks() {
-        System.out.println("Here are the tasks in your list:");
-        int size = listOfTasks.size();
-        for (int i = 0; i < size; i++) {
-            Task t = listOfTasks.get(i);
-            System.out.println((i + 1) + "." + t.toString());
+        if (listOfTasks.isEmpty()) {
+            System.out.println("You currently have no tasks! Add one now ☻");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            int size = listOfTasks.size();
+            for (int i = 0; i < size; i++) {
+                Task t = listOfTasks.get(i);
+                System.out.println((i + 1) + "." + t.toString());
+            }
         }
     }
 
@@ -64,4 +68,6 @@ public class Task {
             System.out.println("Nice! I've marked this task as done:\n  " + t.toString());
         }
     }
+
+    public abstract String getRecordString();
 }
