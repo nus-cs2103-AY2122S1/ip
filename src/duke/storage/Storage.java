@@ -99,11 +99,7 @@ public class Storage {
     private void createFile() {
         try {
             File myObj = new File(FILEPATH);
-            if (myObj.createNewFile()) {
-                System.out.println("Successfully created a save file!");
-            } else {
-                System.out.println("OOPS!!! An error occurred when creating a file!");
-            }
+            myObj.createNewFile();
         } catch (IOException e) {
             System.out.println("OOPS!!! An error occurred when creating a file!");
             e.printStackTrace();
