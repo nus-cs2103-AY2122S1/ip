@@ -1,5 +1,4 @@
 T | 1 | read book
-D | 0 | return book | June 6th
-E | 0 | project meeting | Aug 6th 2-4pm
+D | 0 | my birthday | 05/10/1999 6:00AM
+E | 0 | baby shower | 24/08/2021 5:30PM
 T | 1 | join sports club
-T | 0 | poo

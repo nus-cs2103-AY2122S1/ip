@@ -1,9 +1,14 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class Duke {
+    private final static DateTimeFormatter DT_INPUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy h:mma");
+
 	public enum Command {
 	    EXIT("bye"),
         LIST("list"),
@@ -84,7 +89,7 @@ public class Duke {
                             list.get(index).markAsDone();
                             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                             System.out.println("Awesome! I marked this as done:\n" +
-                                    list.get(index).toString());
+                                    list.get(index).toString() + "\n");
                             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                             TaskReader.write(filePath, list);
                         }
@@ -108,7 +113,12 @@ public class Duke {
                             throw DukeException.emptyDesc();
                         }
                         String[] tokens = remainder.split(" /by ", 2);
-                        Deadline event = new Deadline(false, tokens[0], tokens[1]);
+                        if (tokens.length == 1) {
+                            throw DukeException.emptyTime();
+                        }
+                        LocalDateTime deadline = LocalDateTime.parse(tokens[1], DT_INPUT_FORMAT);
+                        Deadline event = new Deadline(false, tokens[0], deadline);
+
                         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                         System.out.println("Alright! I added this task: \n" + event.toString() + "\n");
                         list.add(event);
@@ -122,7 +132,9 @@ public class Duke {
                             throw DukeException.emptyDesc();
                         }
                         String[] tokens = remainder.split(" /at ", 2);
-                        Event event = new Event(false, tokens[0], tokens[1]);
+                        LocalDateTime startTime = LocalDateTime.parse(tokens[1], DT_INPUT_FORMAT);
+                        Event event = new Event(false, tokens[0], startTime);
+
                         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                         System.out.println("Alright! I added this task: \n" + event.toString() + "\n");
                         list.add(event);
@@ -138,6 +150,10 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 System.out.println(e.getMessage() + "\n");
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            } catch (DateTimeParseException e) {
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.println("Please enter the date and time in dd/mm/yyyy hh:mma format! :\n)");
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
         }

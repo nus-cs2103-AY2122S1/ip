@@ -6,11 +6,15 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
 
 
 public class TaskReader {
+    private static final DateTimeFormatter DT_DATA_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy h:mma");
+
     public static ArrayList<Task> read(String fileName) throws IOException {
 
         ArrayList<Task> tasks = new ArrayList<>(100);
@@ -39,13 +43,13 @@ public class TaskReader {
                     String[] deadlineTokens = remainder.split("\\s\\|\\s*");
                     desc = deadlineTokens[0];
                     time = deadlineTokens[1];
-                    tasks.add(new Deadline(isDone, desc, time));
+                    tasks.add(new Deadline(isDone, desc, LocalDateTime.parse(time, DT_DATA_FORMAT)));
                     break;
                 case "E":
                     String[] eventTokens = remainder.split("\\s\\|\\s*");
                     desc = eventTokens[0];
                     time = eventTokens[1];
-                    tasks.add(new Event(isDone, desc, time));
+                    tasks.add(new Event(isDone, desc, LocalDateTime.parse(time, DT_DATA_FORMAT)));
                     break;
                 default:
                     break;
