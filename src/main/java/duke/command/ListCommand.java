@@ -1,13 +1,12 @@
 package duke.command;
 
 import duke.UI;
-
 import duke.task.TaskList;
 
 /**
  * The type List command that lists out all tasks from a given list of tasks.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /** List of tasks to run the command on */
     private final TaskList tasks;
@@ -24,7 +23,7 @@ public class ListCommand extends Command{
     @Override
     public void execute() {
         System.out.println(
-            UI.tabAndFormat(this.tasks.toString())
+                UI.tabAndFormat(this.tasks.toString())
         );
     }
 }

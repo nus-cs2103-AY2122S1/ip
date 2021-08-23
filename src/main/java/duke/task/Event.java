@@ -17,7 +17,7 @@ public class Event extends Task {
     /** Boolean flag to check if both Date and Time are specified by user */
     private boolean isDateAndTime;
     /** Stores Date specified by user */
-    private LocalDate eventDate;
+    private final LocalDate eventDate;
     /** Stores Time specified by use */
     private LocalTime eventTime;
 
@@ -57,7 +57,7 @@ public class Event extends Task {
     public String toString() {
         String result = "[" + identifier + "]";
         result += super.toString();
-        result += isDateAndTime 
+        result += isDateAndTime
                 ? " (at: " + this.eventDateTime.format(super.dateTimePattern) + ")"
                 : " (at: " + this.eventDate.format(super.datePattern) + ")";
         return result;

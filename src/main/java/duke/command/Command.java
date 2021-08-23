@@ -5,9 +5,7 @@ package duke.command;
  */
 public abstract class Command {
 
-    /**
-     * Method to execute the specific command.
-     */
+    /** Method to execute the specific command. */
     public abstract void execute();
 
     /**
@@ -15,7 +13,7 @@ public abstract class Command {
      *
      * @return boolean that determines if we exit the program.
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

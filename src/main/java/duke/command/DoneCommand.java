@@ -1,13 +1,12 @@
 package duke.command;
 
 import duke.UI;
-
 import duke.task.TaskList;
 
 /**
  * The type Done command that marks a user-specified task as done from a given list of tasks.
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     /** User inputted string */
     private final String userInput;

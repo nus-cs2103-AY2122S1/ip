@@ -12,14 +12,10 @@ public abstract class Task {
     /** Boolean that determines whether a task is done or not */
     private boolean isDone;
 
-    /**
-     * The formatting patterns for Tasks with date (and time) inputs.
-     */
+    /** The formatting patterns for Tasks with date (and time) inputs. */
     protected final DateTimeFormatter dateTimePattern = DateTimeFormatter.ofPattern("MMM d yyyy hh:mma");
 
-    /**
-     * The formatting patterns for Tasks with date inputs.
-     */
+    /** The formatting patterns for Tasks with date inputs. */
     protected final DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**

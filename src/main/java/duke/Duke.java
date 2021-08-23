@@ -1,7 +1,6 @@
 package duke;
 
 import duke.command.Command;
-
 import duke.task.TaskList;
 
 import java.io.IOException;
@@ -12,11 +11,11 @@ import java.io.IOException;
 public class Duke {
 
     /** storage to handle save file (loading and saving) */
-    private Storage storage;
+    private final Storage storage;
     /** storage to store tasks */
-    private TaskList tasks;
+    private final TaskList tasks;
     /** handles basic interaction with the user and string formatting */
-    private UI ui;
+    private final UI ui;
 
     /**
      * Instantiates a new Duke.
@@ -33,11 +32,20 @@ public class Duke {
             storage.load();
         } catch (IOException e) {
             System.out.println(
-                UI.tabAndFormat(
-                    "☹ OOPS!!! Please enter a proper file path! e.g.:\n'./duke.txt'"
-                )
+                    UI.tabAndFormat(
+                            "☹ OOPS!!! Please enter a proper file path! e.g.:\n'./duke.txt'"
+                    )
             );
         }
+    }
+
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
+    public static void main(String[] args) {
+        new Duke("./duke.txt").run();
     }
 
     /**
@@ -49,7 +57,7 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             String input = ui.readCommand();
-            
+
             try {
                 Command userCommand = new Parser(input, tasks).checkOperation();
                 userCommand.execute();
@@ -60,15 +68,6 @@ public class Duke {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }   
-    }
-
-    /**
-     * The entry point of application.
-     *
-     * @param args the input arguments
-     */
-    public static void main(String[] args) {
-        new Duke("./duke.txt").run();
+        }
     }
 }
