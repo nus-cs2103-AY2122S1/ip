@@ -1,11 +1,18 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.Serializable;
 
-public class ChatBot {
+public class ChatBot implements Serializable {
 
     private ArrayList<Task> list = new ArrayList<Task>();
     private int lastIndex = 0;
     private int currIndex = 1;
+    private Writer saver = new Writer();
+
+    public void setList(ArrayList list) {
+        this.list = list;
+        lastIndex = list.size();
+    }
 
     private String welcomeMessage() {
         String logo = " ____        _        \n"
@@ -51,7 +58,7 @@ public class ChatBot {
 
     private void listSeq() throws InputError {
         try {
-            if (lastIndex == 0) {
+            if (list.isEmpty()) {
                 throw new InputError("No items in list");
             }
             printList();
@@ -210,24 +217,30 @@ public class ChatBot {
             case 1:
                 byeSeq();
                 userInput.close();
+                saver.fileSaver(list);
                 return;
             case 2:
                 listSeq();
                 break;
             case 3:
                 doneSeq(input);
+                saver.fileSaver(list);
                 break;
             case 4:
                 todoSeq(input);
+                saver.fileSaver(list);
                 break;
             case 5:
                 deadlineSeq(input);
+                saver.fileSaver(list);
                 break;
             case 6:
                 eventSeq(input);
+                saver.fileSaver(list);
                 break;
             case 7:
                 deleteSeq(input);
+                saver.fileSaver(list);
                 break;
             default:
                 try {
@@ -243,6 +256,10 @@ public class ChatBot {
     }
 
     void welcomeSeq() throws InputError {
+        ArrayList savedList = saver.fileReader();
+        if (savedList != null) {
+            setList(savedList);
+        }
         System.out.println(this.welcomeMessage());
         startInput();
     }
