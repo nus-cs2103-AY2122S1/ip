@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 
 public class Duke {
     static String border = "--------------------------------------------------";
@@ -20,8 +23,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        TaskArrayList taskList = new TaskArrayList();
-
+//        TaskArrayList taskList = new TaskArrayList();
+        Path storagePath = Paths.get(".","data","duke.txt");
+        TaskArrayList taskList = Storage.load(storagePath);
         String logo =
                 "  _____          _   _    ___   ___   ___   ___  \n" +
                 " |  __ \\   /\\   | \\ | |  / _ \\ / _ \\ / _ \\ / _ \\ \n" +
@@ -55,6 +59,7 @@ public class Duke {
                         break;
                     }
                     System.out.println(formatReply("BYEEEEEE!\nHope to see you again soon :)"));
+                    Storage.dump(taskList,storagePath);
                     System.exit(0);
                     break;
 

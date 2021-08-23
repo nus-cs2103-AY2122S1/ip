@@ -12,9 +12,33 @@ public class Deadline extends Task{
         return new Deadline(name_by[0],name_by[1]);
     }
 
+    /**
+     * default constructor for a new task
+     *
+     * @param name task name
+     * @param by   deadline for deadline task
+     */
     Deadline(String name,String by){
+        this(name, false, by);
+    }
+
+    /**
+     * default constructor for a new task
+     * @param name task name
+     * @param done boolean state of task done
+     * @param by   deadline for deadline task
+     */
+    Deadline(String name, boolean done, String by) {
         super(name);
         this.by = by;
+    }
+
+
+    public String serialize() {
+        return "Task:deadline\n" +
+                String.format("\tName:%s\n", this.name) +
+                String.format("\tDone:%s\n", this.done) +
+                String.format("\tBy:%s\n", this.by);
     }
 
     @Override
