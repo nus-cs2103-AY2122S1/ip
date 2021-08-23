@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -50,7 +51,8 @@ public class TaskManager {
                     throw new MissingDeadlineException("Missing deadline");
                 }
                 String deadlineName = command.substring(9, byIndex - 1);
-                String deadlineBy = command.substring(byIndex + 4);
+                String deadlineByString = command.substring(byIndex + 4);
+                LocalDate deadlineBy = LocalDate.parse(deadlineByString);
                 add(new Deadline(deadlineName, deadlineBy));
                 System.out.println("Great! I've added your deadline. Enter 'list' to see your tasks!");
                 System.out.printf("You currently have %d tasks.%n", taskArrayList.size());
@@ -64,7 +66,8 @@ public class TaskManager {
                     throw new MissingEventTimeException("Missing event time");
                 }
                 String eventName = command.substring(6, atIndex - 1);
-                String eventAt = command.substring(atIndex + 4);
+                String eventAtString = command.substring(atIndex + 4);
+                LocalDate eventAt = LocalDate.parse(eventAtString);
                 add(new Event(eventName, eventAt));
                 System.out.println("Great! I've added your event. Enter 'list' to see your tasks!");
                 System.out.printf("You currently have %d tasks.%n", taskArrayList.size());
@@ -120,10 +123,12 @@ public class TaskManager {
                     add(new ToDo(commandArr[2], isDone));
                     break;
                 case "D":
-                    add(new Deadline(commandArr[2], commandArr[3], isDone));
+                    LocalDate deadlineDate = LocalDate.parse(commandArr[3]);
+                    add(new Deadline(commandArr[2], deadlineDate, isDone));
                     break;
                 case "E":
-                    add(new Event(commandArr[2], commandArr[3], isDone));
+                    LocalDate eventDate = LocalDate.parse(commandArr[3]);
+                    add(new Event(commandArr[2], eventDate, isDone));
                     break;
             }
         }
@@ -145,7 +150,7 @@ public class TaskManager {
                 taskString = "D|" + isDone + task.getName() + "|" + deadline.getEndDate();
             } else {
                 Event event = (Event) task;
-                taskString = "E|" + isDone + task.getName() + "|" + event.getStartEndTime();
+                taskString = "E|" + isDone + task.getName() + "|" + event.getEventDate();
             }
             if (i == 0) {
                 DukeIOManager.writeToDataFile(taskString);
