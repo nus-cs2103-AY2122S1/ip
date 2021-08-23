@@ -13,8 +13,10 @@ import java.util.Scanner;
 
 public class Duke {
     
+    private Ui ui;
+    
     public Duke() {
-        
+        ui = new Ui();
     }
     
     public static void main(String[] args) {
@@ -28,56 +30,48 @@ public class Duke {
         boolean isBye = false;
         int listLength = taskList.size();
 
-        System.out.println("  ____________________________________________________________");
-        System.out.print("  Hello! I'm Duck.\n  What's up?\n");
-        System.out.println("  ____________________________________________________________\n");
+        ui.showWelcome();
 
         while (!isBye) {
             try {
-                System.out.print("> ");
+                ui.showInput();
                 String text = input.nextLine().trim();
 
-                System.out.println("  ____________________________________________________________");
+                ui.showOpenLine();
 
                 if (text.split("\\s+")[0].equals("bye")) { // bye function: exits the loop, ends process
-                    System.out.println("  See you next time!");
+                    ui.showBye();
                     isBye = true;
 
                 } else if (text.split("\\s+")[0].equals("list")) { // list function: iterates through taskList, prints Tasks' listEntry
-                    System.out.println("  Here are the tasks in your list:");
-                    for (int i = 0; i < listLength; ++i) {
-                        System.out.println("  " + (i + 1) + "." + taskList.get(i).listEntry());
-                    }
+                    ui.showList(taskList, listLength);
 
                 } else if (text.split("\\s+")[0].equals("done")) { // done function: sets a task to done
                     if (text.split("\\s+").length == 1) {
-                        throw new DukeException(DukeExceptionType.INVALIDDONE);
+                        throw new DukeException(DukeExceptionType.INVALIDINDEX);
                     } else {
                         int toSet = Integer.parseInt(text.split("\\s+")[1]);
                         if (toSet > listLength || toSet < 1) {
-                            throw new DukeException(DukeExceptionType.INVALIDDONE);
+                            throw new DukeException(DukeExceptionType.INVALIDINDEX);
                         } else {
                             Task toSetDone = taskList.get(toSet - 1);
                             setDBEntryDone(toSetDone.databaseEntry());
                             toSetDone.setDone();
-                            System.out.print("  Nice! I've marked this task as done:\n    "
-                                    + toSetDone.listEntry() + "\n");
+                            ui.showDone(toSetDone);
                         }
                     }
 
                 } else if (text.split("\\s+")[0].equals("delete")) { // delete function: delete a task
                     if (text.split("\\s+").length == 1) {
-                        throw new DukeException(DukeExceptionType.INVALIDDELETE);
+                        throw new DukeException(DukeExceptionType.INVALIDINDEX);
                     } else {
                         int toDelete = Integer.parseInt(text.split("\\s+")[1]);
                         if (toDelete > listLength || toDelete < 1) {
-                            throw new DukeException(DukeExceptionType.INVALIDDELETE);
+                            throw new DukeException(DukeExceptionType.INVALIDINDEX);
                         } else {
                             Task deleted = taskList.remove(toDelete - 1);
                             deleteDBEntry(deleted.databaseEntry());
-                            System.out.print("  Noted. I've removed this task:\n    "
-                                    + deleted.listEntry()
-                                    + "\n  Now you have " + --listLength + " tasks in the list.\n");
+                            ui.showDelete(deleted, --listLength);
                         }
                     }
 
@@ -86,13 +80,7 @@ public class Duke {
                         throw new DukeException(DukeExceptionType.INVALIDFIND);
                     } else {
                         LocalDate desiredDate = LocalDate.parse(text.split("\\s+")[1]);
-                        System.out.println("  Here are the tasks for the given day:");
-                        for (int i = 0; i < listLength; ++i) {
-                            Task currTask = taskList.get(i);
-                            if (currTask.isTodayTask(desiredDate)) {
-                                System.out.println("  " + (i + 1) + "." + taskList.get(i).listEntry());
-                            }
-                        }
+                        ui.showFind(taskList, listLength, desiredDate);
                     }
 
                 } else { // task function: add tasks
@@ -169,23 +157,21 @@ public class Duke {
                         // add task to taskList
                         taskList.add(listLength++, newTask);
                         addDBEntry(newTask.databaseEntry());
-                        System.out.print("  Got it. I've added this task:\n    "
-                                + newTask.listEntry()
-                                + "\n  Now you have " + listLength + " tasks in the list.\n");
+                        ui.showAdd(newTask, listLength);
                     }
                 }
 
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                ui.showException(e);
 
             } catch (NumberFormatException e) { // throws if index given in done/delete functions is not an integer
-                System.out.println(new DukeException(DukeExceptionType.INVALIDDONE).getMessage());
+                ui.showException(new DukeException(DukeExceptionType.INVALIDINDEX));
 
             } catch (DateTimeParseException e) {
-                System.out.println(new DukeException(DukeExceptionType.INVALIDDATETIME).getMessage());
+                ui.showException(new DukeException(DukeExceptionType.INVALIDDATETIME));
 
             } finally {
-                System.out.println("  ____________________________________________________________\n");
+                ui.showCloseLine();
             }
         }
 
@@ -199,17 +185,17 @@ public class Duke {
             File data = new File("data");
             File duke = new File("data/duke.txt");
 
-            System.out.println("  ____________________________________________________________");
-            System.out.println("  Loading Duke...");
+            ui.showOpenLine();
+            ui.showInitialise();
             
             if (data.mkdir()) {
-                System.out.println("  Data directory does not exist, it has been created!");
+                ui.showNewDataDirectory();
             }
             if (duke.createNewFile()) {
-                System.out.println("  Hard disk does not exist, a new one has been created!");
+                ui.showNewHardDisk();
             }
             
-            System.out.println("  ____________________________________________________________");
+            ui.showCloseLine();
             
             BufferedReader reader = new BufferedReader(new FileReader(duke));
             String currLine = reader.readLine();
@@ -262,10 +248,10 @@ public class Duke {
             }
 
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            ui.showException(e);
             
         } catch (IOException e) {
-            System.out.println(new DukeException(DukeExceptionType.DB_LAUNCH).getMessage());
+            ui.showException(new DukeException(DukeExceptionType.DB_LAUNCH));
         }
         
         return savedTasks;
@@ -279,7 +265,7 @@ public class Duke {
             writer.close();
             
         } catch (IOException e){
-            System.out.println(new DukeException(DukeExceptionType.DB_ADD).getMessage());
+            ui.showException(new DukeException(DukeExceptionType.DB_ADD));
         }
     }
 
@@ -310,7 +296,7 @@ public class Duke {
             updated.renameTo(duke);
             
         } catch (IOException e) {
-            System.out.println(new DukeException(DukeExceptionType.DB_DONE).getMessage());
+            ui.showException(new DukeException(DukeExceptionType.DB_DONE));
         }
     }
 
@@ -338,7 +324,7 @@ public class Duke {
             updated.renameTo(duke);
             
         } catch (IOException e) {
-            System.out.println(new DukeException(DukeExceptionType.DB_DELETE).getMessage());
+            ui.showException(new DukeException(DukeExceptionType.DB_DELETE));
         }
     }
 }

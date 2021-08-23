@@ -18,11 +18,8 @@ public class DukeException extends Exception {
         case TODODESC:
             customMessage = "  OOPS!!! The description of a todo cannot be empty!";
             break;
-        case INVALIDDONE:
-            customMessage = "  OOPS!!! That is not a valid task index for completion!";
-            break;
-        case INVALIDDELETE:
-            customMessage = "  OOPS!!! That is not a valid task index for deletion!";
+        case INVALIDINDEX:
+            customMessage = "  OOPS!!! That is not a valid task index!";
             break;
         case INVALIDFIND:
             customMessage = "  OOPS!!! You need to specify a date!";
