@@ -1,9 +1,13 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
+
 
 public class Duke {
 
     enum Commands {
-        BYE, LIST, DONE, TODO, EVENT, DEADLINE, DELETE;
+        BYE, LIST, DONE, TODO, EVENT, DEADLINE, DELETE
     }
 
     private static String name = "Duke";
@@ -11,7 +15,6 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke.isRunning = true;
-        ToDoList tdl = new ToDoList(Duke.name);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -19,6 +22,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         greeting();
+        ToDoList tdl = new ToDoList(Duke.name);
+        reloadTask(tdl);
         Scanner input = new Scanner(System.in);
         while (isRunning) {
             String command = input.nextLine();
@@ -28,7 +33,7 @@ public class Duke {
 
     private static void startBot(String command, ToDoList tdl) {
         if (command.equals(Commands.BYE.toString().toLowerCase())) {
-            exit();
+            exit(tdl);
         } else if (command.equals(Commands.LIST.toString().toLowerCase())) {
             tdl.displayList();
         } else if (command.startsWith(Commands.DONE.toString().toLowerCase())) {
@@ -95,14 +100,17 @@ public class Duke {
     private static void greeting() {
         System.out.println("========== " + Duke.name + " ===========");
         System.out.println("Hello... I'm " + Duke.name + ":/");
-        System.out.println("And how can I help you? Make it snappy!");
+        createTaskListStorage();
+        System.out.println("And how can I help you?");
         System.out.println("========== " + Duke.name + " ===========\n");
     }
 
-    private static void exit() {
+    private static void exit(ToDoList tdl) {
         Duke.isRunning = false;
         System.out.println("========== " + Duke.name + " ===========");
         System.out.println("Wow! I can get off work now :D");
+        tdl.save();
+        System.out.println("Saved your work by the way!");
         System.out.println("========== " + Duke.name + " ===========\n");
     }
 
@@ -130,5 +138,84 @@ public class Duke {
         System.out.println("========== " + Duke.name + " ===========");
         System.out.println(message);
         System.out.println("========== " + Duke.name + " ===========\n");
+    }
+
+    private static void createTaskListStorage() {
+        File s = new File("./data");
+        boolean sResult;
+        boolean fResult;
+        try {
+            sResult = s.mkdir();
+            if (sResult) {
+                File f = new File("./data/task-list.txt");
+                fResult = f.createNewFile();
+                if (fResult) {
+                    System.out.println("I've created a task list for you.");
+                }
+            } else {
+                System.out.println("Welcome back I guess..");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void reloadTask(ToDoList tdl) {
+        try {
+            int counter = 0;
+            File file = new File("./data/task-list.txt");
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String str = scanner.nextLine();
+                if (str.isBlank()) {
+                    break;
+                }
+                char type = str.charAt(3);
+                char status = str.charAt(6);
+                if (type == 'T') {
+                    String item = str.substring(9);
+                    tdl.addToDo(item);
+                    if (status == 'X') {
+                        tdl.getTask(counter).setCompleted();
+                    }
+                    counter++;
+                } else if (type == 'E') {
+                    try {
+                        String temp = str.substring(9);
+                        String item = temp.substring(0, temp.indexOf(" ")); //name
+                        String temp2 = temp.substring(temp.indexOf("("));
+                        String duration = temp2.substring(5, temp2.length() - 1);
+                        tdl.addEvent(item, duration);
+                        if (status == 'X') {
+                            tdl.getTask(counter).setCompleted();
+                        }
+                        counter++;
+                    } catch (StringIndexOutOfBoundsException e) {
+                        System.out.println("Oops file is corrupted");
+                    }
+                } else {
+                    try {
+                        String temp = str.substring(9);
+                        String item = temp.substring(0, temp.indexOf(" ")); //name
+                        String temp2 = temp.substring(temp.indexOf("("));
+                        String deadline = temp2.substring(5, temp2.length() - 1);
+                        tdl.addDeadline(item, deadline);
+                        if (status == 'X') {
+                            tdl.getTask(counter).setCompleted();
+                        }
+                        counter++;
+                    } catch (StringIndexOutOfBoundsException e) {
+                        System.out.println("Oops file is corrupted");
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            File f = new File("./data/task-list.txt");
+            try {
+                boolean result = f.createNewFile();
+            } catch (IOException ioException) {
+                System.out.println("I smell smoke hmm...");
+            }
+        }
     }
 }

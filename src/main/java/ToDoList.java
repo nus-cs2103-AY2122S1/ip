@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ToDoList {
@@ -37,6 +39,7 @@ public class ToDoList {
         System.out.println("  " + "[X] " + record.get(num-1).toString());
         System.out.println("========== " + this.name + " ===========\n");
     }
+
 
     public void addToDo(String item) {
         ToDo todo = new ToDo(item);
@@ -86,6 +89,30 @@ public class ToDoList {
         }
         System.out.println("Now you have " + this.totalNumber.toString() + " in the list");
         System.out.println("========== " + this.name + " ===========\n");
+    }
+
+    public void save() {
+        try {
+            FileWriter fw = new FileWriter("./data/task-list.txt");
+            Integer number = 1;
+            for (Task a : this.record) {
+                if (a.isCompleted()) {
+                    fw.write(number.toString() + "." + a.logo() + "[X] " + a.toString() + "\n");
+                } else {
+                    fw.write(number.toString() + "." + a.logo() + "[ ] " + a.toString()+ "\n");
+                }
+                number++;
+            }
+            System.out.println("Your task list has been updated successfully.");
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something's wrong.. I can't find the file..");
+        }
+    }
+
+    public Task getTask(int index) {
+        return this.record.get(index);
     }
 }
 
