@@ -1,7 +1,12 @@
 list
+delete 1
+delete 1
+delete 1
 todo sweep floor
 event computing day /at 3pm Monday
 deadline geq quiz /by 22nd August
+event computing day /at 2021-08-13 1800
+deadline geq quiz /by 2021-08-13 2359
 list
 done 2
 done 3
@@ -20,6 +25,12 @@ delete -99
 delete
 
 delete 1
-delete 2
+delete 1
+delete 1
+list
+todo sleep
+deadline geq quiz /by 2021/08/13 1800
+event computing day /at 2021/09/13 1800
+done 1
 list
 bye
