@@ -1,12 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.AddCommandType;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 
 import duke.task.TaskList;
 
@@ -33,6 +27,8 @@ public class Parser {
             return new DoneCommand(userInput, tasks);
         } else if (checkDelete()) {
             return new DeleteCommand(userInput, tasks);
+        } else if (checkFind()) {
+            return new FindCommand(userInput, tasks);
         } else if (checkTodo()) {
             return new AddCommand(AddCommandType.todo, userInput, tasks);
         } else if (checkEvent()) {
@@ -81,6 +77,12 @@ public class Parser {
         Pattern deadlinePattern = Pattern.compile("^deadline\\h\\w.*/by\\h\\w.*");
         Matcher deadlineMatcher = deadlinePattern.matcher(this.userInput);
         return deadlineMatcher.find();
+    }
+
+    private boolean checkFind() {
+        Pattern findPattern = Pattern.compile("^find\\h\\w.*");
+        Matcher findMatcher = findPattern.matcher(this.userInput);
+        return findMatcher.find();
     }
 
 }
