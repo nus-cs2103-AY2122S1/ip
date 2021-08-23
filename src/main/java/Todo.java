@@ -14,6 +14,16 @@ public class Todo extends Task {
     }
 
     /**
+     * Returns a data string of the Todo task for saving.
+     *
+     * @return A data string including the Todo's icon and description.
+     */
+    @Override
+    public String getDataString() {
+        return "T | " + super.getDataString();
+    }
+
+    /**
      * Returns a string representation of the Todo task.
      *
      * @return A string including the Todo's icon and description.
