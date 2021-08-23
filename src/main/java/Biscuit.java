@@ -1,11 +1,12 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
  * Biscuit is a Personal Assistant Chatbot that helps a person to keep track of various things
  */
 public class Biscuit {
-    private static ArrayList<Task> list = new ArrayList<>();
+    private static List<Task> list = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo =
@@ -35,6 +36,18 @@ public class Biscuit {
         System.out.println("Woof from\n" + logo);
         System.out.println("Woof! I'm Biscuit.\nWhat can I do for you?\n" + separator);
         Scanner scanner = new Scanner(System.in);
+        Storage storage = new Storage("data/biscuit.csv");
+
+
+        try {
+            list = storage.load();
+        } catch (BiscuitException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Something went wrong, could not load data...");
+        }
+
+
         boolean isContinue = true;
         while (isContinue) {
             try {
@@ -46,14 +59,20 @@ public class Biscuit {
                     case "deadline":
                     case "event":
                         addTask(processedInput);
+                        storage.save();
                         break;
                     case "done":
                         doneTask(processedInput);
+                        storage.save();
                         break;
                     case "delete":
                         deleteTask(processedInput);
+                        storage.save();
                         break;
                     case "list":
+                        if (list.isEmpty()) {
+                            System.out.println("List is currently empty.");
+                        }
                         for (int i = 0; i < list.size(); i++) {
                             System.out.println(i + 1 + ". " + list.get(i));
                         }
@@ -63,8 +82,7 @@ public class Biscuit {
                         isContinue = false;
                         break;
                     default:
-                        System.out.println("໒(◉ᴥ◉)७ OOPS!!! I'm sorry, but I don't know what that means...");
-                        break;
+                        throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! I'm sorry, but I don't know what that means...");
                 }
             } catch (BiscuitException be) {
                 System.out.println(be.getMessage());

@@ -10,9 +10,18 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    public Deadline(boolean isDone, String description, String date) {
+        super(isDone, description, Type.DEADLINE);
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
     @Override
     public String toString() {
-        return getTypeBox() + getCheckBox() + description + "(by: "
+        return getTypeBox() + getCheckBox() + description.trim() + " (by: "
                 + date + ")";
     }
 }

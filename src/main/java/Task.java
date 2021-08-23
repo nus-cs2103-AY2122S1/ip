@@ -12,9 +12,15 @@ public class Task {
     }
     protected boolean isDone = false;
     protected String description;
-    public Type type;
+    private Type type;
 
     public Task(String description, Type type) {
+        this.description = description;
+        this.type = type;
+    }
+
+    public Task(boolean isDone, String description, Type type) {
+        this.isDone = isDone;
         this.description = description;
         this.type = type;
     }
@@ -32,16 +38,30 @@ public class Task {
      * @return box containing task of Type
      */
     protected String getTypeBox() {
-        String taskType = "T";
+        String taskType;
         switch (this.type) {
-            case DEADLINE:
-                taskType = "D";
-                break;
-            case EVENT:
-                taskType = "E";
-                break;
+        case DEADLINE:
+            taskType = "D";
+            break;
+        case EVENT:
+            taskType = "E";
+            break;
+        default:
+            taskType= "T";
         }
         return "[" + taskType + "]";
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDone(boolean done) {

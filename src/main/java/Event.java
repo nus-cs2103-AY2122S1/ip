@@ -10,9 +10,18 @@ public class Event extends Task {
         this.date = date;
     }
 
+    public Event(boolean isDone, String description, String date) {
+        super(isDone, description, Type.EVENT);
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
     @Override
     public String toString() {
-        return getTypeBox() + getCheckBox() + description + "(at: "
+        return getTypeBox() + getCheckBox() + description.trim() + " (at: "
                 + date + ")";
     }
 }
