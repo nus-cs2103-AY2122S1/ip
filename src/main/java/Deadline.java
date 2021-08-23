@@ -5,6 +5,16 @@ class Deadline extends Task {
         this.by = by;
     }
 
+    Deadline(String content, String by, boolean isDone) {
+        super(content, isDone);
+        this.by = by;
+    }
+
+    @Override
+    public String encoding() {
+        return "E&&" + super.encoding() + "&&" + by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

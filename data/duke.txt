@@ -1,0 +1,3 @@
+T&&InProgress&&coding
+E&&Done&&submit lab&&tmr
+E&&InProgress&&class meeting&&Sunday
