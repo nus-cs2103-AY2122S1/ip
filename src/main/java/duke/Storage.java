@@ -44,17 +44,17 @@ public class Storage {
                 String[] strArr = taskString.split(" \\| ", 4);
                 Task t;
                 switch (strArr[0]) {
-                    case "T":
-                        t = new ToDo(strArr[2]);
-                        break;
-                    case "E":
-                        t = new Event(strArr[2], strArr[3]);
-                        break;
-                    case "D":
-                        t = new Deadline(strArr[2], strArr[3]);
-                        break;
-                    default:
-                        throw new DukeException("initialization error");
+                case "T":
+                    t = new ToDo(strArr[2]);
+                    break;
+                case "E":
+                    t = new Event(strArr[2], strArr[3]);
+                    break;
+                case "D":
+                    t = new Deadline(strArr[2], strArr[3]);
+                    break;
+                default:
+                    throw new DukeException("initialization error");
                 }
                 initializeDone(t, strArr[1]);
                 taskArr.add(t);

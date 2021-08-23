@@ -1,11 +1,11 @@
 package duke.task;
 
 public abstract class Task {
-    private String taskName;
+    private String taskDetails;
     private boolean isDone = false;
 
-    public Task(String taskName) {
-        this.taskName = taskName;
+    public Task(String taskDetails) {
+        this.taskDetails = taskDetails;
     }
 
     public void setDone() {
@@ -13,7 +13,7 @@ public abstract class Task {
     }
 
     public String getTaskName() {
-        return taskName;
+        return taskDetails;
     }
 
     public boolean isDone() {
@@ -32,6 +32,6 @@ public abstract class Task {
         } else {
             completedBox="[ ]";
         }
-        return completedBox + " " + taskName;
+        return completedBox + " " + taskDetails;
     }
 }
