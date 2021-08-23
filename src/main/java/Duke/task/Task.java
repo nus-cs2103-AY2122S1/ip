@@ -12,14 +12,14 @@ abstract public class Task {
 
     public Task(String details) {
         this.details = details;
-        this.completed = false;
+        completed = false;
     }
 
     /**
      * Completes task.
      */
-    public void complete() {
-        this.completed = true;
+    public void isComplete() {
+        completed = true;
     }
 
     /**
@@ -28,7 +28,7 @@ abstract public class Task {
      * @return True if completed; false otherwise.
      */
     public boolean isCompleted() {
-        return this.completed;
+        return completed;
     }
 
     /**
@@ -37,7 +37,7 @@ abstract public class Task {
      * @return Task details.
      */
     public String getDetails() {
-        return this.details;
+        return details;
     }
 
     /**
@@ -61,7 +61,11 @@ abstract public class Task {
      */
     @Override
     public String toString() {
-        String status = this.completed ? "[X]" : "[ ]";
-        return status + " " + details;
+        String status = completed
+                ? "[X]"
+                : "[ ]";
+        return status
+                + " "
+                + details;
     }
 }

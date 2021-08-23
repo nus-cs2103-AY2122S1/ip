@@ -22,7 +22,7 @@ public class Deadline extends Task{
     }
 
     public String getBy() {
-        return this.by;
+        return by;
     }
 
     /**
@@ -32,7 +32,7 @@ public class Deadline extends Task{
      */
     @Override
     public LocalDate getDate() {
-        return this.date;
+        return date;
     }
 
     /**
@@ -42,7 +42,7 @@ public class Deadline extends Task{
      */
     @Override
     public int getTime() {
-        return this.time;
+        return time;
     }
 
     /**
@@ -52,18 +52,18 @@ public class Deadline extends Task{
      */
     private String twelveHrTime() {
         String timeStr = "";
-        if (this.time == 1200) {
+        if (time == 1200) {
             timeStr = "12:00PM";
-        } else if (this.time == 0) {
+        } else if (time == 0) {
             timeStr = "12:00AM";
         } else {
-            String min = this.time % 100 >= 10
-                    ? "" + (this.time % 100)
-                    : "0" + (this.time % 100);
+            String min = time % 100 >= 10
+                    ? "" + (time % 100)
+                    : "0" + (time % 100);
             if (time > 1159) {
-                timeStr = timeStr + (((this.time / 100) - 12) + ":" + min + "PM");
+                timeStr = timeStr + (((time / 100) - 12) + ":" + min + "PM");
             } else {
-                timeStr = timeStr + ((this.time / 100) + ":" + min + "AM");
+                timeStr = timeStr + ((time / 100) + ":" + min + "AM");
             }
         }
         return timeStr;

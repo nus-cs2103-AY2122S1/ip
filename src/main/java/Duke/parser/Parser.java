@@ -152,8 +152,10 @@ public class Parser {
 
                 if (cmd.equals("deadline")) {
                     if (aftCenter.length() == 15) {
-                        if (isDate(aftCenter.substring(0, 10)) && isTime(aftCenter.substring(11))) {
-                            date = aftCenter.substring(0, 4) + '-' + aftCenter.substring(5, 7) + '-'
+                        if (isDate(aftCenter.substring(0, 10))
+                                && isTime(aftCenter.substring(11))) {
+                            date = aftCenter.substring(0, 4) + '-'
+                                    + aftCenter.substring(5, 7) + '-'
                                     + aftCenter.substring(8, 10);
                             time1 = Integer.parseInt(aftCenter.substring(11));
                             aftCenter = null;
@@ -161,9 +163,11 @@ public class Parser {
                     }
                 } else if (cmd.equals("event")) {
                     if (aftCenter.length() == 20) {
-                        if (isDate(aftCenter.substring(0, 10)) && isTime(aftCenter.substring(11, 15))
+                        if (isDate(aftCenter.substring(0, 10))
+                                && isTime(aftCenter.substring(11, 15))
                                 && isTime(aftCenter.substring(16))) {
-                            date = aftCenter.substring(0, 4) + '-' + aftCenter.substring(5, 7) + '-'
+                            date = aftCenter.substring(0, 4) + '-'
+                                    + aftCenter.substring(5, 7) + '-'
                                     + aftCenter.substring(8, 10);
                             time1 = Integer.parseInt(aftCenter.substring(11, 15));
                             time2 = Integer.parseInt(aftCenter.substring(16));

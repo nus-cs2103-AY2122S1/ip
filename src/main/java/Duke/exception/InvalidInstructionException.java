@@ -9,7 +9,7 @@ public class InvalidInstructionException extends DukeException {
 
     public InvalidInstructionException(String str) {
         super(str);
-        this.instruction = str;
+        instruction = str;
     }
 
     /**

@@ -24,7 +24,7 @@ public class Event extends Task {
     }
 
     public String getAt() {
-        return this.at;
+        return at;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Event extends Task {
      */
     @Override
     public LocalDate getDate() {
-        return this.date;
+        return date;
     }
 
     /**
@@ -44,11 +44,11 @@ public class Event extends Task {
      */
     @Override
     public int getTime() {
-        return this.startTime;
+        return startTime;
     }
 
     public int getEndTime() {
-        return this.endTime;
+        return endTime;
     }
 
     /**
@@ -88,7 +88,7 @@ public class Event extends Task {
         } else {
             return "[E]" + super.toString() + " (at: "
                     + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                    + ' ' + twelveHrTime(this.startTime) + " to " + twelveHrTime(this.endTime) + ")";
+                    + ' ' + twelveHrTime(startTime) + " to " + twelveHrTime(endTime) + ")";
         }
     }
 }

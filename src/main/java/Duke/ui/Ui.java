@@ -10,8 +10,8 @@ import duke.task.Task;
 public class Ui {
 
     private static final String line =
-            "------------------------------------------------------------------------------" +
-            "-------------------------------";
+            "------------------------------------------------------------------------------"
+                    + "-------------------------------";
 
     /**
      * Returns the response in a standardised format.
@@ -77,9 +77,9 @@ public class Ui {
      * @param taskCount The remaining number of tasks in the task list.
      */
     public void deleteMsg(Task task, int taskCount) {
-        System.out.println(wrap("Noted. I've removed this task: \n" +
-                "\t\t" + task.toString() + "\n" +
-                "\tNow you have " + taskCount + " tasks in the list."));
+        System.out.println(wrap("Noted. I've removed this task: \n"
+                + "\t\t" + task.toString() + "\n"
+                + "\tNow you have " + taskCount + " tasks in the list."));
     }
 
     /**
@@ -90,9 +90,9 @@ public class Ui {
      * @param taskCount The current number of tasks in the task list.
      */
     public void addTaskMsg(Task task, int taskCount) {
-        System.out.println(wrap("Got it. I've added this task:\n" +
-                "\t\t" + task.toString() + "\n" +
-                "\t" + "Now you have " + taskCount + " tasks in the list."));
+        System.out.println(wrap("Got it. I've added this task:\n"
+                + "\t\t" + task.toString() + "\n"
+                + "\t" + "Now you have " + taskCount + " tasks in the list."));
     }
 
     /**
