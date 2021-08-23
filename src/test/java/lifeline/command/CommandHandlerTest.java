@@ -156,6 +156,32 @@ public class CommandHandlerTest {
     }
 
     @Test
+    public void handleDoneCommand_indexOutOfBounds_exceptionThrown() {
+        try {
+            Storage storage = new Storage("test.json");
+            TaskList taskList = new TaskList(new ArrayList<Task>());
+            Ui ui = new Ui();
+            Command.DONE.getExecute().apply("done 2", storage, taskList, ui);
+            fail();
+        } catch (LifelineException e) {
+            assertEquals("Index is out of bounds!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void handleDoneCommand_indexIsNotInteger_exceptionThrown() {
+        try {
+            Storage storage = new Storage("test.json");
+            TaskList taskList = new TaskList(new ArrayList<Task>());
+            Ui ui = new Ui();
+            Command.DONE.getExecute().apply("done abc", storage, taskList, ui);
+            fail();
+        } catch (LifelineException e) {
+            assertEquals("Index is not an integer! Please use done <number>", e.getMessage());
+        }
+    }
+
+    @Test
     public void handleDoneCommand_completeCommand_success() throws LifelineException {
         Storage storage = new Storage("test.json");
         ArrayList<Task> tasks = new ArrayList<>();
@@ -167,6 +193,7 @@ public class CommandHandlerTest {
         assertEquals("[T][X] read book", taskList.get(0).toString());
     }
 
+
     @Test
     public void handleDeleteCommand_missingIndex_exceptionThrown() {
         try {
@@ -177,6 +204,32 @@ public class CommandHandlerTest {
             fail();
         } catch (LifelineException e) {
             assertEquals("You did not specify an integer! Please use delete <number>", e.getMessage());
+        }
+    }
+
+    @Test
+    public void handleDeleteCommand_indexOutOfBounds_exceptionThrown() {
+        try {
+            Storage storage = new Storage("test.json");
+            TaskList taskList = new TaskList(new ArrayList<Task>());
+            Ui ui = new Ui();
+            Command.DELETE.getExecute().apply("delete 2", storage, taskList, ui);
+            fail();
+        } catch (LifelineException e) {
+            assertEquals("Index is out of bounds!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void handleDeleteCommand_indexIsNotInteger_exceptionThrown() {
+        try {
+            Storage storage = new Storage("test.json");
+            TaskList taskList = new TaskList(new ArrayList<Task>());
+            Ui ui = new Ui();
+            Command.DONE.getExecute().apply("delete abc", storage, taskList, ui);
+            fail();
+        } catch (LifelineException e) {
+            assertEquals("Index is not an integer! Please use delete <number>", e.getMessage());
         }
     }
 
