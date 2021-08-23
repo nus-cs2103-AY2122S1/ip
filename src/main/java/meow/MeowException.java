@@ -86,6 +86,15 @@ class NoItemInTheListException extends MeowException {
     }
 }
 
+class NoSearchResultException extends MeowException {
+    @Override
+    public String toString() {
+        return "------------------------------------------------------------------------------\n" +
+                "Meow: Meow can't find any matching results, try entering a different keyword~\n" +
+                "------------------------------------------------------------------------------";
+    }
+}
+
 class InvalidDateTimeException extends MeowException {
     @Override
     public String toString() {

@@ -1,6 +1,7 @@
 package meow;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -18,6 +19,7 @@ public class Meow {
         LIST,
         DONE,
         DELETE,
+        FIND,
         TODO,
         EVENT,
         DEADLINE
@@ -54,6 +56,11 @@ public class Meow {
             case DONE: {
                 this.tasks.completeTask(this.parser.getTaskNumber(input));
                 this.storage.addArrayTaskToFile(this.tasks.getTasksList());
+                break;
+            }
+            case FIND: {
+                List<Task> filteredTasks = this.tasks.searchTask(this.parser.getTaskNumber(input));
+                this.ui.displaySearchList(filteredTasks);
                 break;
             }
             case TODO: {
