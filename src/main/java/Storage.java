@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -79,6 +81,8 @@ public class Storage {
      * @throws IOException thrown during writing
      */
     public void write(List<Task> tasks) throws IOException {
+        Files.createDirectories(Paths.get("data"));
+        file.createNewFile();
         FileWriter fw = new FileWriter(filePath);
         StringBuilder text = new StringBuilder();
         for (Task task : tasks) {

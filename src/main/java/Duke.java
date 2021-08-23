@@ -156,6 +156,7 @@ public class Duke {
         try {
             storage.write(TASKS);
         } catch (IOException e) {
+            errorPrint(e.getMessage());
             errorPrint("error while saving the tasks!");
         }
 
