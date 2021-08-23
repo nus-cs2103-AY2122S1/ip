@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import java.nio.file.Files;
@@ -13,7 +14,6 @@ public class Duke {
     // Data file path
     private static final String DIRECTORY_PATH = "data";
     private static final String FILE_PATH = DIRECTORY_PATH + File.separator + "duke.txt";
-
 
     // Initialize string array to store the list
     private static final ArrayList<Task> TASKS = new ArrayList<>();
@@ -76,6 +76,19 @@ public class Duke {
             }
         } catch (IOException |UnsupportedOperationException | SecurityException e) {
             Printer.prettyPrint("File reading failed: " + e);
+        }
+    }
+
+    // Handle data file writing
+    private static void writeData() {
+        try {
+            FileWriter dataFileWriter = new FileWriter(FILE_PATH);
+            for (Task task : TASKS) {
+                dataFileWriter.write(task.toDataString() + System.lineSeparator());
+            }
+            dataFileWriter.close();
+        } catch (IOException e) {
+            Printer.prettyPrint("File writing failed: " + e);
         }
     }
 
@@ -143,10 +156,12 @@ public class Duke {
                     break;
                 case DONE:
                     TASKS.get(Integer.parseInt(command[1]) - 1).markAsDone();
-                     break;
+                    writeData();
+                    break;
                 case DELETE:
                     printAddOrDelete(false, TASKS.get(Integer.parseInt(command[1]) - 1), --numOfTask);
                     TASKS.remove(Integer.parseInt(command[1]) - 1);
+                    writeData();
                     break;
                 case TODO:
                     // Fallthrough
@@ -154,6 +169,7 @@ public class Duke {
                     // Fallthrough
                 case DEADLINE:
                     addThenPrint(command, numOfTask++);
+                    writeData();
                     break;
                 default:
                     throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
