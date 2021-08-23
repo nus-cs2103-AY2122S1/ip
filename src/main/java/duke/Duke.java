@@ -26,6 +26,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program.
+     *
+     * @param filePath Filepath of the text file where tasks data is stored.
+     */
     public void run(String filePath) {
         ui.printWelcome();
         boolean isExit = false;

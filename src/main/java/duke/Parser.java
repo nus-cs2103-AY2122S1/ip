@@ -6,6 +6,14 @@ import static java.lang.Integer.parseInt;
 
 public class Parser {
 
+    /**
+     * Parses the command entered by the user and returns a executable
+     * command object.
+     *
+     * @param command The command entered by the user.
+     * @return A command object that can be executed.
+     * @throws DukeException If the command is invalid
+     */
     public static Command parse(String command) throws DukeException {
         if (command.equals("list")) {
             return new ListCommand();

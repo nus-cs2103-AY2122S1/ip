@@ -13,10 +13,12 @@ public class Deadline extends Task {
         this.deadline = LocalDate.parse(deadline);
     }
 
+    /** Returns the deadline of the task as a LocalDate object */
     public LocalDate getDeadline() {
         return this.deadline;
     }
 
+    /** Returns the deadline of the task as a String */
     private String deadlineToString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
         return this.deadline.format(formatter);
