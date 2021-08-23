@@ -18,6 +18,8 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
-
-    public String getStatusAndDescription() {return this.getStatusIcon() + " " + this.getDescription(); }
+    @Override
+    public String toString() {
+        return this.getStatusIcon() + " " + this.getDescription();
+    }
 }

@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -60,7 +62,7 @@ public class Duke {
                         String subtext = "Nice! I've marked this task as done:\n";
                         Task currentTask = lst.get(index);
                         currentTask.setDone();
-                        System.out.println(subtext + currentTask.getStatusAndDescription());
+                        System.out.println(subtext + currentTask.toString());
                         break;
                     }
 
@@ -68,7 +70,7 @@ public class Duke {
                         System.out.println("Here are the tasks in your list:");
                         for (int i = 0; i < lst.size(); i++) {
                             Task currentTask = lst.get(i);
-                            System.out.println((i + 1) + "." + currentTask.getStatusAndDescription());
+                            System.out.println((i + 1) + "." + currentTask.toString());
                         }
                         break;
                     }
@@ -82,7 +84,7 @@ public class Duke {
 
                         ToDo toDo = new ToDo(command.substring(5));
                         lst.add(toDo);
-                        System.out.format("Got it. I've added this task:\n" + toDo.getStatusAndDescription() + "\n"
+                        System.out.format("Got it. I've added this task:\n" + toDo.toString() + "\n"
                                 + "Now you have %d tasks in this list.\n", lst.size());
                         break;
                     }
@@ -95,9 +97,11 @@ public class Duke {
                         }
 
                         int escapeIndex = command.lastIndexOf("/");
-                        Deadline deadline = new Deadline(command.substring(5, escapeIndex - 1), command.substring(escapeIndex + 4));
-                        lst.add(deadline);
-                        System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
+                        String dateAndTime = command.substring(escapeIndex + 4);
+//                        LocalDateTime localDateTime = LocalDateTime.parse(dateAndTime);
+                        Event event = new Event(command.substring(5, escapeIndex - 1), dateAndTime);
+                        lst.add(event);
+                        System.out.format("Got it. I've added this task:\n" + event.toString() + "\n"
                                 + "Now you have %d tasks in this list.\n", lst.size());
                         break;
                     }
@@ -111,7 +115,7 @@ public class Duke {
 
                         Task currentTask = lst.get(index);
                         lst.remove(index);
-                        System.out.format("Noted. I've removed this task:\n" + currentTask.getStatusAndDescription() + "\nNow you have %d tasks in the list\n", lst.size());
+                        System.out.format("Noted. I've removed this task:\n" + currentTask.toString() + "\nNow you have %d tasks in the list\n", lst.size());
                         break;
                     }
 
@@ -129,9 +133,10 @@ public class Duke {
                         }
 
                         int escapeIndex = command.lastIndexOf("/");
-                        Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), command.substring(escapeIndex + 4));
+                        String dateAndTime = command.substring(escapeIndex + 4);
+                        Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), dateAndTime);
                         lst.add(deadline);
-                        System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
+                        System.out.format("Got it. I've added this task:\n" + deadline + "\n"
                                 + "Now you have %d tasks in this list.\n", lst.size());
                         break;
                     }
