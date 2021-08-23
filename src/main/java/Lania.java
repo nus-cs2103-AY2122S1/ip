@@ -1,5 +1,11 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Lania {
 
@@ -37,9 +43,31 @@ public class Lania {
             throw new LaniaException("Sorry, but Lania doesn't know what that means");
         }
         taskArrayList.add(t);
+        String file = "data/lania.txt";
+        try {
+            for (int i = 0; i < taskArrayList.size(); i++) {
+                Task task = taskArrayList.get(i);
+                appendToFile(file, getStringFormat(task), i);
+            }
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
         System.out.println("Lania has added: ");
         System.out.println(t);
         System.out.println("Great! Now you have " + taskArrayList.size() + (taskArrayList.size() == 1 ? " task" : " tasks") + " in your list.");
+    }
+
+    private String getStringFormat(Task t) {
+        if (t instanceof Todo) {
+            Todo temp = (Todo) t;
+            return "T|" + temp.getStatusIcon() + "|" + temp.description + "\n";
+        } else if (t instanceof Deadline) {
+            Deadline temp = (Deadline) t;
+            return "D|" + temp.getStatusIcon() + "|" + temp.description + "|" + temp.by + "\n";
+        } else {
+            Event temp = (Event) t;
+            return "E|" + temp.getStatusIcon() + "|" + temp.description + "|" + temp.at + "\n";
+        }
     }
 
     /**
@@ -80,6 +108,19 @@ public class Lania {
     }
 
     public void run() {
+        try {
+            Files.createDirectories(Paths.get("data/"));
+            File f = new File("data/lania.txt");
+            if (f.createNewFile()) {
+                System.out.println("File created: " + f.getName());
+            } else {
+                System.out.println("File already exists.");
+                loadFileContents("data/lania.txt");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
         System.out.println("Hello I am Lania! How may Lania be of assistance?");
         System.out.println("Enter 'bye' to exit");
         Scanner s = new Scanner(System.in);
@@ -102,7 +143,37 @@ public class Lania {
                 input = s.nextLine();
             }
         }
+        s.close();
         System.out.println("Bye. Lania looks forward to seeing you again!");
+    }
+
+    private void loadFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String next = s.nextLine();
+            System.out.println(next);
+            String[] split = next.split("\\|", 4);
+            Task t;
+            if (split[0].equals("T")) {
+                t = new Todo(split[2]);
+            } else if (split[0].equals("D")) {
+                t = new Deadline(split[2], split[3]);
+            } else {
+                t = new Event(split[2], split[3]);
+            }
+            if (split[1].equals("X")) {
+                t.markAsDone();
+            }
+            taskArrayList.add(t);
+        }
+        s.close();
+    }
+
+    private void appendToFile(String filePath, String textToAppend, int i) throws IOException {
+        FileWriter fw = new FileWriter(filePath, i != 0);
+        fw.write(textToAppend);
+        fw.close();
     }
 
     /**
