@@ -20,7 +20,7 @@ public class Task implements Executable {
     public void execute(ArrayList<Task> tasks, AtomicInteger taskAmount) {
         tasks.add(this);
         taskAmount.set(taskAmount.get() + 1);
-        Processor.printString("Got it. I've added this task:\n  " + Processor.spaceString + this + "\n" + Processor.spaceString + "Now you have " + taskAmount + " tasks in the list.");
+        Processor.printString("Got it. I've added this task:\n  " + Processor.SPACE_STRING + this + "\n" + Processor.SPACE_STRING + "Now you have " + taskAmount + " tasks in the list.");
     }
 
     public String toString() {
