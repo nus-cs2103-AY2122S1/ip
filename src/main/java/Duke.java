@@ -1,9 +1,15 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
+
 /**
  * This class represents the chat bot, Duke.
  */
 public class Duke {
     private static TaskList tasks = TaskList.createTaskList();
+    private static Pattern DATE_PATTERN = Pattern.compile("^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3])[0-5][0-9]$");
+
     /**
      * The static method that runs in Main to reply to the user.
      */
@@ -73,14 +79,29 @@ public class Duke {
         String aOrAn = firstCommand.equals("event") ? "an" : "a";
         if (taskDesc.equals("")) {
             throw new DukeException("☹ OOPS!!! The description of " + aOrAn + " " + firstCommand + " cannot be empty.");
-        } else if (date.equals("") && !firstCommand.equals("todo")) {
+        } else if (date.equals("") && convertToTaskType(firstCommand) != Task.TaskType.TODO) {
             throw new DukeException("☹ OOPS!!! The date of " + aOrAn + " " + firstCommand + " cannot be empty.");
+        } else if (convertToTaskType(firstCommand) == Task.TaskType.DEADLINE || convertToTaskType(firstCommand) == Task.TaskType.EVENT) {
+            if (DATE_PATTERN.matcher(date).matches()) {
+                String[] dateSplit = date.split(" ");
+                String dateString = dateSplit[0];
+                String timeString = dateSplit[1];
+                LocalDate ld = LocalDate.parse(dateString);
+                Duke.tasks.addTask(taskDesc, convertToTaskType(firstCommand), ld, timeString);
+                Duke.confirmAdditionOfTask();
+            } else {
+                throw new DukeException("You need to put the date in yyyy-mm-dd hhmm format!");
+            }
         } else {
             Duke.tasks.addTask(taskDesc, convertToTaskType(firstCommand), date);
-            System.out.println("Got it. I've added this task: ");
-            System.out.println(Duke.tasks.getTask(Duke.tasks.getTasksLength()));
-            System.out.println("Now you have " + Duke.tasks.getTasksLength() + " tasks in the list.");
+            Duke.confirmAdditionOfTask();
         }
+    }
+
+    public static void confirmAdditionOfTask() {
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(Duke.tasks.getTask(Duke.tasks.getTasksLength()));
+        System.out.println("Now you have " + Duke.tasks.getTasksLength() + " tasks in the list.");
     }
 
     /**
