@@ -21,13 +21,20 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
-        Printer.prettyPrint("Nice! I've marked this task as done:\n\t   " +
-                this.getStatusIcon() +
-                " " +
-                this.description);
+    }
+
+    /**
+     * Return the data of the task written in a standard format.
+     *
+     * @return The data of the task written in a standard format.
+     */
+    public String toDataString() {
+        return String.format("| %d | %s", this.isDone ? 1 : 0, this.description);
     }
 
     public String toString() {
         return String.format("%s %s", this.getStatusIcon(), this.description);
     }
+
+
 }

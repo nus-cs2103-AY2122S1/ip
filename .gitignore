@@ -16,7 +16,7 @@ bin/
 # Java class file
 *.class
 
-# Data
+# Data files
 /data/
 
 /text-ui-test/ACTUAL.txt

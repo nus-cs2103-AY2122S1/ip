@@ -8,6 +8,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String toDataString() {
+        return String.format("EVENT %s | %s", super.toDataString(), this.at);
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
