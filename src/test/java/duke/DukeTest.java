@@ -10,11 +10,11 @@ public class DukeTest {
         assertEquals(2, 2);
     }
 
-    @Test
-    public void startUpTest() {
-        Duke duke = new Duke();
-        duke.run();
-    }
+//    @Test
+//    public void startUpTest() {
+//        Duke duke = new Duke();
+//        duke.run();
+//    }
 
 
 }

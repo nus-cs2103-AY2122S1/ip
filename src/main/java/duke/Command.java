@@ -8,12 +8,17 @@ public enum Command {
     EVENT("event"),
     DEADLINE("deadline"),
     BYE("bye"),
+    FIND("find"),
     UNKNOWN("unknown");
 
-    protected final String value;
+    private final String value;
 
     Command(String value) {
         this.value = value;
+    }
+
+    public boolean strIsSelf(String input) {
+        return (input.equals(value));
     }
 
 }

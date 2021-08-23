@@ -41,16 +41,15 @@ public class Duke {
 
         do {
             try {
-                System.out.println(currentCommand);
+//                System.out.println(currentCommand);
                 StringBuilder sb = new StringBuilder();
                 String[] descriptionAndTime;
                 switch (currentCommand) {
                     case UNKNOWN:
                         throw new DukeException("Unknown input");
                     case LIST:
-                        sb.append("Here are the tasks in your list:\n");
-                        sb.append(taskList.listTasks());
-                        Ui.printStatement(sb.toString());
+
+                        taskList.listTasks();
                         break;
                     case TODO:
                         if (currentParameter == "") {
@@ -103,6 +102,12 @@ public class Duke {
                         }
                         taskList.done(number);
                         Storage.updateLocalFile(taskList);
+                        break;
+                    case FIND:
+                        if (currentParameter.equals("")) {
+                            throw new DukeException("Please indicate word to be found.");
+                        }
+                        taskList.listMatchingTasks(currentParameter);
                         break;
                 }
             } catch (DukeException | IOException e) {
