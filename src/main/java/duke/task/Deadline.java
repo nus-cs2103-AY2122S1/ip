@@ -12,24 +12,23 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
-
-    protected final static String taskSymbol = "[D]";
+    protected static final String TASK_SYMBOL = "[D]";
     protected LocalDateTime dateTime;
-    protected final DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    protected final DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
+    protected static final DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
 
     public Deadline(String description, String dateTime) throws DateTimeParseException {
-        super(description, taskSymbol);
-        this.dateTime = LocalDateTime.parse(dateTime.trim(), parseFormat);
+        super(description, TASK_SYMBOL);
+        this.dateTime = LocalDateTime.parse(dateTime.trim(), PARSE_FORMAT);
     }
 
     @Override
     public String convertToText() {
-        return super.convertToText() + super.getDivider() + dateTime.format(parseFormat);
+        return super.convertToText() + super.getDivider() + dateTime.format(PARSE_FORMAT);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dateTime.format(outputFormat) + ")";
+        return "[D]" + super.toString() + " (by: " + dateTime.format(OUTPUT_FORMAT) + ")";
     }
 }

@@ -6,9 +6,9 @@ abstract public class Task {
     protected String description;
     protected boolean isDone;
     protected String taskSymbol;
-    protected final static String divider = ",";
-    protected final static String doneStatus = "[X]";
-    protected final static String notDoneStatus = "[ ]";
+    protected static final String DIVIDER = ",";
+    protected static final String DONE_STATUS = "[X]";
+    protected static final String NOT_DONE_STATUS = "[ ]";
 
     public Task(String description, String taskSymbol) {
         this.description = description;
@@ -17,30 +17,30 @@ abstract public class Task {
     }
 
     public static Task createTaskFromText(String text) throws DukeException {
-        String[] taskInformation = text.split(divider);
+        String[] taskInformation = text.split(DIVIDER);
         String taskType = taskInformation[0].trim();
         String taskStatus = taskInformation[1].trim();
 
-        switch(taskType) {
-            case "[T]":
-                Task todo = new Todo(taskInformation[2]);
-                changeStatusFromText(todo, taskStatus);
-                return todo;
-            case "[D]":
-                Task deadline = new Deadline(taskInformation[2], taskInformation[3]);
-                changeStatusFromText(deadline, taskStatus);
-                return deadline;
-            case "[E]":
-                Task event = new Event(taskInformation[2], taskInformation[3]);
-                changeStatusFromText(event, taskStatus);
-                return event;
-            default:
-                throw new DukeException("duke.task.Task symbol from text is not recognised.");
+        switch (taskType) {
+        case "[T]":
+            Task todo = new Todo(taskInformation[2]);
+            changeStatusFromText(todo, taskStatus);
+            return todo;
+        case "[D]":
+            Task deadline = new Deadline(taskInformation[2], taskInformation[3]);
+            changeStatusFromText(deadline, taskStatus);
+            return deadline;
+        case "[E]":
+            Task event = new Event(taskInformation[2], taskInformation[3]);
+            changeStatusFromText(event, taskStatus);
+            return event;
+        default:
+            throw new DukeException("duke.task.Task symbol from text is not recognised.");
         }
     }
 
     public static Task changeStatusFromText(Task task, String symbol) {
-        if(symbol.equals(doneStatus)) {
+        if (symbol.equals(DONE_STATUS)) {
             task.markAsDone();
         }
         return task;
@@ -51,16 +51,16 @@ abstract public class Task {
     }
 
     public String getDivider() {
-        return divider;
+        return DIVIDER;
     }
 
     public String convertToText() {
         StringBuilder sb = new StringBuilder();
         return sb
             .append(getTaskSymbol())
-            .append(divider)
+            .append(DIVIDER)
             .append(getStatusIcon())
-            .append(divider)
+            .append(DIVIDER)
             .append(description)
             .toString();
     }
@@ -71,18 +71,29 @@ abstract public class Task {
      * @return a graphical way of whether a task is done or not
      */
     public String getStatusIcon() {
-        return (isDone ? doneStatus : notDoneStatus);
+        return (isDone ? DONE_STATUS : NOT_DONE_STATUS);
     }
 
     /**
-     * Mark a task as done and leaves a marked task unchanged.
+     * Returns true if the task is done and false otherwise.
      *
-     * @return true if the task is initially not done and marked as done.
+     * @return true if the task is done
      */
-    public boolean markAsDone() {
-        boolean alreadyDone = isDone;
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
+     * Marks a task as done and leaves marked task unchanged.
+     *
+     * @return a String of whether the task is marked or already marked.
+     */
+    public String markAsDone() {
+        if (isDone) {
+            return "Task is already marked as done";
+        }
         isDone = true;
-        return !alreadyDone;
+        return "Nice! I've marked this task as done:\n  " + this;
     }
 
     @Override
