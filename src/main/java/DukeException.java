@@ -24,6 +24,9 @@ public class DukeException extends Exception {
         case INVALIDDELETE:
             customMessage = "  OOPS!!! That is not a valid task index for deletion!";
             break;
+        case INVALIDFIND:
+            customMessage = "  OOPS!!! You need to specify a date!";
+            break;
         case INVALIDINPUT:
             customMessage = "  OOPS!!! I don't recognise the command you've given me.";
             break;

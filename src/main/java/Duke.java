@@ -61,6 +61,20 @@ public class Duke {
                         }
                     }
 
+                } else if (text.split("\\s+")[0].equals("find")) {
+                    if (text.split("\\s+").length == 1) {
+                        throw new DukeException(DukeExceptionType.INVALIDFIND);
+                    } else {
+                        LocalDate desiredDate = LocalDate.parse(text.split("\\s+")[1]);
+                        System.out.println("  Here are the tasks for the given day:");
+                        for (int i = 0; i < listLength; ++i) {
+                            Task currTask = taskList.get(i);
+                            if (currTask.isTodayTask(desiredDate)) {
+                                System.out.println("  " + (i + 1) + "." + taskList.get(i).listEntry());
+                            }
+                        }
+                    }
+                    
                 } else { // task function: add tasks
                     if (text.split("\\s+").length == 1) { // task details not given or not valid task
                         switch (text) {
