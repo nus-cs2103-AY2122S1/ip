@@ -1,10 +1,12 @@
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.file.Files;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -127,8 +129,23 @@ public class Duke {
         }
     }
 
-    public static void loadFile() throws FileNotFoundException, DukeException {
-        File file = new File("src/main/data/duketest.txt");
+    /**
+     * Reads the duke.txt file and loads the tasks into the taskList array.
+     * If the directory or file does not exist, it will be created.
+     *
+     * @throws FileNotFoundException If file is not found.
+     * @throws DukeException If the file has bad format.
+     */
+    public static void loadFile() throws IOException, DukeException {
+        File directory = new File("src/main/data");
+        if (!directory.exists()) {
+            Path path = Paths.get("src/main/data");
+            Files.createDirectories(path);
+        }
+        File file = new File("src/main/data/duke.txt");
+        if (!file.exists()) {
+            file.createNewFile();
+        }
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String[] data = scanner.nextLine().split("\\|");
@@ -161,6 +178,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Writes the tasks from the taskList into the file.
+     *
+     * @throws IOException
+     */
     public static void writeFile() throws IOException {
         FileWriter fw = new FileWriter("src/main/data/duke.txt");
         for (int i = 0; i<taskList.size(); i++) {
@@ -230,8 +252,6 @@ public class Duke {
             loadFile();
             Scanner scanner = new Scanner(System.in);
             handleInput(scanner);
-        } catch (FileNotFoundException e) {
-            System.out.println("(duke.txt) cannot be found.");
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
