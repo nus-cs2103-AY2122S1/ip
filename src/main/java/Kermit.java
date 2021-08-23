@@ -1,7 +1,8 @@
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -49,11 +50,36 @@ public class Kermit {
         return formattedString;
     }
 
-    private static ToDo readToDoData(File file) {
-        return;
+    private static ToDo readToDoData(File file) throws FileNotFoundException {
+        Scanner sc = new Scanner(file);
+        ToDo todo = new ToDo();
+        String line;
+        Task task;
+        // Read file line by line
+        while (sc.hasNextLine()) {
+            line = sc.nextLine();
+            String[] commands = line.split(" \\| ");
+            String description = commands[1];
+            boolean isCompleted = commands[2] == "1";
+            switch (commands[0]) {
+                case "T":
+                    task = new ToDos(description, isCompleted);
+                    todo.add(task);
+                    break;
+                case "D":
+                    task = new Deadline(description, commands[3], isCompleted);
+                    todo.add(task);
+                    break;
+                case "E":
+                    task = new Event(description, commands[3], isCompleted);
+                    todo.add(task);
+                    break;
+            }
+        }
+        return todo;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         String command = "";
         String flag;
@@ -84,7 +110,7 @@ public class Kermit {
         String[] strTasks = {"deadline", "todo", "event"};
         ArrayList<String> validTasks = new ArrayList<>(Arrays.asList(strTasks));
 
-        ToDo list = new ToDo();
+        ToDo list = readToDoData(FILE);
 
         final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
         final String listText = "Here are the tasks in your list:";
