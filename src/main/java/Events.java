@@ -1,7 +1,7 @@
 public class Events extends Task{
     protected String at;
 
-    public Events(String description, String at){
+    public Events(String description, String at) {
         super(description);
         this.at = at;
     }
@@ -16,7 +16,7 @@ public class Events extends Task{
     }
 
     @Override
-    public void displayTask(){
+    public void displayTask() {
         System.out.println("        " + toString());
     }
 }
