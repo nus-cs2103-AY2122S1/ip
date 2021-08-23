@@ -1,11 +1,10 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.text.DateFormat;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -46,6 +45,42 @@ public class MyJournal {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public String getTimeDate(Scanner line) {
+        String parsed = "";
+        while (line.hasNext()) {
+            String currWord = line.next();
+            if (isDate(currWord)) {
+                LocalDate date = LocalDate.parse(currWord);
+                String month = date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+                String dateFormatted = date.getDayOfWeek().toString() + ", " + date.getDayOfMonth() + " " + month
+                        + " " + date.getYear();
+                parsed = parsed + " " + dateFormatted;
+            } else if (isTime(currWord)) {
+                LocalTime time = LocalTime.parse(currWord);
+                String beforeOrAfterNoon = time.getHour() >= 12 ? "pm" : "am";
+                int hour = time.getHour() >= 12 ? time.getHour() - 12 : time.getHour();
+                int min = time.getMinute();
+                String timeFormatted = (String.valueOf(hour).length() == 1 ? "0" + hour : hour)
+                        + ":" + (min < 10 ? "0" + min : min) + beforeOrAfterNoon;
+                parsed = parsed + " " + timeFormatted;
+            } else {
+                parsed = parsed + " " + currWord;
+            }
+        }
+        return parsed;
+    }
+
+    public boolean isDate(String string) {
+        return string.length() == 10 && string.charAt(4) == '-' && string.charAt(7) == '-'
+                && isInteger(string.substring(0, 4)) && isInteger(string.substring(5, 7))
+                && isInteger(string.substring(8, 10));
+    }
+
+    public boolean isTime(String string) {
+        return string.length() == 5 && isInteger(string.substring(0,2))
+                && isInteger(string.substring(3,5)) && string.charAt(2) == ':';
     }
 
     public void run() throws IOException {
@@ -122,13 +157,7 @@ public class MyJournal {
                                 }
                                 taskName = taskName + currWord + " ";
                             }
-                          //  String date = getDateTime(line);
-                            String time = "";
-                            while(line.hasNext()) {
-                                time = time + " " + line.hasNext();
-                            }
-                            tasks.addTask(new Event(taskName, time));
-                                    //date));
+                            tasks.addTask(new Event(taskName, getTimeDate(line)));
                             System.out.println(taskAddPrint(tasks));
                             break;
                         case "deadline":
@@ -142,12 +171,7 @@ public class MyJournal {
                                 }
                                 taskName = taskName + currWord + " ";
                             }
-                            time = "";
-                            while(line.hasNext()) {
-                                time = time + " " + line.hasNext();
-                            }
-                            tasks.addTask(new Deadline(taskName, time));
-                                    //getDateTime(line)));
+                            tasks.addTask(new Deadline(taskName, getTimeDate(line)));
                             System.out.println(taskAddPrint(tasks));
                             break;
                         default:
@@ -165,6 +189,7 @@ public class MyJournal {
         }
         System.out.println("Bye. Hope to see you again soon!:)");
     }
+
     /**
      * The main method of the MyJournal class.
      *
