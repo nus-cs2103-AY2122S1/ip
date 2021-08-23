@@ -7,8 +7,27 @@ public class Todo extends Task{
         return new Todo(cmd_args[1]);
     }
 
+    /**
+     * default constructor for a new task
+     * @param name task name
+     */
     Todo(String name){
-        super(name);
+        this(name, false);
+    }
+
+    /**
+     * default constructor for a new task
+     * @param name task name
+     * @param done state of task done
+     */
+    Todo(String name, boolean done) {
+        super(name, done);
+    }
+
+    public String serialize() {
+        return "Task:todo\n" +
+                String.format("\tName:%s\n", this.name) +
+                String.format("\tDone:%s", this.done);
     }
 
     @Override
