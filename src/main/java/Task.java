@@ -15,6 +15,17 @@ public class Task {
     }
 
     /**
+     * Another constructor which indicates whether the Task is done.
+     *
+     * @param description
+     * @param isDone
+     */
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    /**
      * Returns an icon to indicate whether the Task is done.
      *
      * @return "X" if the Task is done
