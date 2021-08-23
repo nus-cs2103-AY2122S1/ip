@@ -53,6 +53,14 @@ abstract public class Task {
         }
     }
 
+    /**
+     * Marks the Task if the text representation of the symbol from save file is the Done status,
+     * otherwise leaves Task object unchanged.
+     *
+     * @param task the Task object
+     * @param symbol representation of status symbol in save file.
+     * @return the same Task object that has its status updated
+     */
     public static Task changeStatusFromText(Task task, String symbol) {
         if (symbol.equals(DONE_STATUS)) {
             task.markAsDone();
