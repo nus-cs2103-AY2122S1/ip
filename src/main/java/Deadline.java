@@ -1,8 +1,14 @@
 public class Deadline extends Task{
-    public String ddlTime;
-    public Deadline (String task, String ddlTime) {
+    public String deadlineTime;
+
+    public Deadline(String task, String deadlineTime) {
         super(task);
-        this.ddlTime = ddlTime;
+        this.deadlineTime = deadlineTime;
+    }
+
+    public Deadline(String task, boolean done, String deadlineTime) {
+        super(task, done);
+        this.deadlineTime = deadlineTime;
     }
 
     @Override
@@ -11,6 +17,12 @@ public class Deadline extends Task{
         if (this.done) {
             finished = "X";
         }
-        return "[D]" + "[" + finished + "] " + this.taskName + " (by: " + this.ddlTime + ")";
+        return "[D]" + "[" + finished + "] " + this.taskName + " (by: " + this.deadlineTime + ")";
+    }
+
+    @Override
+    public String toStoredString() {
+        int finished = done ? 1 : 0;
+        return "D | " + finished + " | " + taskName + " | " + deadlineTime;
     }
 }
