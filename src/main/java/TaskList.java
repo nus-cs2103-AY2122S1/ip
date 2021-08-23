@@ -50,26 +50,26 @@ public class TaskList {
         );
     }
 
-    public String markComplete(int taskID) {
-        if (taskID - 1 < listSize) {
-            if (userList.get(taskID - 1).completeTask()) {
+    public String markComplete(int taskId) {
+        if (taskId - 1 < listSize) {
+            if (userList.get(taskId - 1).completeTask()) {
                 return String.format(
                         "You have completed task %d. %s",
-                        taskID,
-                        userList.get(taskID - 1).getName()
+                        taskId,
+                        userList.get(taskId - 1).getName()
                 );
             } else {
                 return "Something seems to have went terribly wrong";
             }
         } else {
-            return String.format("Uh oh, seems like there is no task number %d", taskID);
+            return String.format("Uh oh, seems like there is no task number %d", taskId);
         }
     }
 
-    public String deleteTask(int taskID) {
-        if (taskID - 1 < listSize) {
-            Task t = userList.get(taskID - 1);
-            userList.remove(taskID - 1);
+    public String deleteTask(int taskId) {
+        if (taskId - 1 < listSize) {
+            Task t = userList.get(taskId - 1);
+            userList.remove(taskId - 1);
             listSize--;
             return String.format(
                     "Alright,\nTask: %s [%s] [%s] (%s)\nHas been removed, you have %d tasks in the list",
@@ -80,7 +80,7 @@ public class TaskList {
                     listSize
             );
         } else {
-            return String.format("Uh oh, seems like there is no task number %d", taskID);
+            return String.format("Uh oh, seems like there is no task number %d", taskId);
         }
     }
 

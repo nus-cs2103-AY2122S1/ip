@@ -1,4 +1,4 @@
-public class DukeCommandException extends Exception{
+public class DukeCommandException extends Exception {
     private String msg;
     public DukeCommandException(String command) {
         switch (command) {
