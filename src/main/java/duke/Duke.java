@@ -66,16 +66,16 @@ public class Duke {
 
                 case DONE:
                     if (parser.description == null)
-                        ui.markedDone(tasks.markDone(parser.index));
+                        ui.showMarkedDoneMessage(tasks.markDone(parser.index));
                     else
-                        ui.markedDone(tasks.markDone(parser.description, parser.taskTypes));
+                        ui.showMarkedDoneMessage(tasks.markDone(parser.description, parser.taskTypes));
                     break;
 
                 case DELETE:
                     if (parser.description == null)
-                        ui.deleted(tasks.remove(parser.index), tasks.size());
+                        ui.showDeletedMessage(tasks.remove(parser.index), tasks.size());
                     else
-                        ui.deleted(tasks.remove(parser.description, parser.taskTypes), tasks.size());
+                        ui.showDeletedMessage(tasks.remove(parser.description, parser.taskTypes), tasks.size());
                     break;
 
                 case TODO:
@@ -85,7 +85,7 @@ public class Duke {
 
                     Task todo = new Todo(parser.description);
                     tasks.add(todo);
-                    ui.added(todo, tasks.size());
+                    ui.showAddedMessage(todo, tasks.size());
                     break;
 
                 case DEADLINE:
@@ -101,7 +101,7 @@ public class Duke {
                     }
 
                     tasks.add(deadline);
-                    ui.added(deadline, tasks.size());
+                    ui.showAddedMessage(deadline, tasks.size());
                     break;
 
                 case EVENT:
@@ -117,12 +117,12 @@ public class Duke {
                     }
 
                     tasks.add(event);
-                    ui.added(event, tasks.size());
+                    ui.showAddedMessage(event, tasks.size());
                     break;
 
                 case SAVE:
                     storage.save(tasks);
-                    ui.saved();
+                    ui.showSavedMessage();
                     break;
 
                 default:
@@ -137,7 +137,7 @@ public class Duke {
 
         }
 
-        ui.bye();
+        ui.showExitMessage();
 
         sc.close();
     }

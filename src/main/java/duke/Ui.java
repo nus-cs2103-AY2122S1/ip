@@ -38,25 +38,25 @@ public class Ui {
         print(GREET);
     }
 
-    public void saved() {
+    public void showSavedMessage() {
         print(SAVE);
     }
 
-    public void markedDone(Task task) {
+    public void showMarkedDoneMessage(Task task) {
         print(DONE + task);
     }
 
-    public void deleted(Task task, int size) {
+    public void showDeletedMessage(Task task, int size) {
         print("Understood, meow! Deleted this task:\n   " +
                 task + "\n" + "|  Now you have " + size + " tasks in the list.");
     }
 
-    public void added(Task task, int size) {
+    public void showAddedMessage(Task task, int size) {
         print("Meow. I've added this task:\n   " +
                 task + "\n" + "|  Now you have " + size + " tasks in the list.");
     }
 
-    public void bye() {
+    public void showExitMessage() {
         print(EXIT);
     }
 
