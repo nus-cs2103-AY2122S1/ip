@@ -115,7 +115,6 @@ public class Duke {
                     String desc = task.getDescription();
                     switch(desc){
                         case "bye":
-                            save();
                             System.out.println("    Bye. Hope to see you again soon!");
                             return;
                         case "list":
@@ -125,6 +124,7 @@ public class Duke {
                             throw new DukeException("   ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
+                save();
             } catch(DukeException e){
                 System.out.println(e.getMessage());
             } catch(IOException e){
