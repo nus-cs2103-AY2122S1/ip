@@ -3,6 +3,10 @@ public class Event extends DateDependentTask {
         super(description, at);
     }
 
+    public Event(String description, String at, boolean isCompleted) {
+        super(description, at, isCompleted);
+    }
+
     public String getShortForm() {
         return "E";
     }

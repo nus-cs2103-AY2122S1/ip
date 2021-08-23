@@ -3,6 +3,10 @@ public class Deadline extends DateDependentTask {
         super(description, by);
     }
 
+    public Deadline(String description, String by, boolean isCompleted) {
+        super(description, by, isCompleted);
+    }
+
     protected String getShortForm() {
         return "D";
     }

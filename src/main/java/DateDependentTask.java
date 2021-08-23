@@ -6,6 +6,11 @@ public abstract class DateDependentTask extends Task {
         this.date = date;
     }
 
+    public DateDependentTask(String description, String date, boolean isCompleted) {
+        super(description, isCompleted);
+        this.date = date;
+    }
+
     protected String getDate() {
         return this.date;
     }

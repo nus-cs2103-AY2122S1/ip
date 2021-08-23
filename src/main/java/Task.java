@@ -14,6 +14,11 @@ public abstract class Task {
         this.description = description;
     }
 
+    public Task(String description, boolean isCompleted) {
+        this.description = description;
+        this.isCompleted = isCompleted;
+    }
+
     /**
      * Marks task as complete
      */
