@@ -1,10 +1,6 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
@@ -12,81 +8,15 @@ import static java.lang.Integer.parseInt;
 
 
 public class Yoyo {
-    private static TaskList tasks = new TaskList(new ArrayList<>());
-    private static final int TYPE_STR_INDEX = 1;
-    private static final int ISDONE_STR_INDEX = 4;
+    private static TaskList tasks = new TaskList();
     private static final String DATAPATH = "data/yoyo.txt";
-
-    enum TaskType {
-        TODO,
-        EVENT,
-        DEADLINE
-    }
-
-    /**
-     * Exception class for command with invalid format .
-     */
-    private static class YoyoInvalidFormatException extends IOException {
-        YoyoInvalidFormatException(String message) {
-            super(message);
-        }
-    }
-
-    /**
-     * Exception class for incomplete command .
-     */
-    private static class YoyoIncompleteCommandException extends IOException {
-        YoyoIncompleteCommandException(String message) {
-            super(message);
-        }
-    }
-
-    /**
-     * Exception class for invalid command.
-     */
-    private static class YoyoCommandNotFoundException extends IOException {
-        YoyoCommandNotFoundException(String message) {
-            super(message);
-        }
-    }
-
-    /**
-     * Exception class for invalid task index.
-     */
-    private static class YoyoTaskIndexException extends IOException {
-        YoyoTaskIndexException(String message) {
-            super(message);
-        }
-    }
-
-    /**
-     * Exception class for empty command.
-     */
-    private static class YoyoEmptyCommandException extends IOException {
-        YoyoEmptyCommandException(String message) {
-            super(message);
-        }
-    }
 
     public static void main(String[] args) {
         Ui ui = new Ui();
-        ui.greetUser();
-        File f = new File(DATAPATH);
-
-        try {
-            if (!f.exists()) {
-                f.createNewFile();
-            } else {
-                readExistingTasks(f);
-            }
-        } catch (IOException e) {
-            System.out.println("Something went wrong while creating new file:\n"
-                    + e.getMessage());
-        }
-
-
-
+        Storage storage = new Storage(DATAPATH);
+        tasks = storage.load();
         Scanner scanner = new Scanner(System.in);
+        ui.greetUser();
 
         while (true) {
             try {
@@ -99,20 +29,7 @@ public class Yoyo {
                 String command = inputTokens[0];
 
                 if (command.equals("bye")) {
-                    try {
-                        FileWriter fw = new FileWriter(DATAPATH);
-                        String textOutput = "";
-                        for (int i = 0; i < tasks.size(); i++) {
-                            textOutput += tasks.get(i).showStatusWrite();
-                            textOutput += "\n";
-                        }
-                        fw.write(textOutput);
-                        fw.close();
-
-                    } catch (IOException e) {
-                        System.out.println("Something went wrong while creating file writer:\n"
-                                + e.getMessage());
-                    }
+                    storage.deposit(tasks);
                     ui.sayGoodbye();
                     break;
                 } else if (command.equals("list")) {
@@ -177,7 +94,6 @@ public class Yoyo {
 
                 }
 
-
             } catch (YoyoCommandNotFoundException | YoyoIncompleteCommandException
                     | YoyoEmptyCommandException | YoyoInvalidFormatException
                     | YoyoTaskIndexException e) {
@@ -187,43 +103,7 @@ public class Yoyo {
     }
 
 
-    private static void readExistingTasks(File f) {
-        try {
-            Scanner s = new Scanner(f);
-            String currLine;
-            boolean currCompletionStatus;
-            String[] currStrArr;
-            TaskType currType;
 
-            while (s.hasNext()) {
-                currLine = s.nextLine();
-                currCompletionStatus = currLine.charAt(ISDONE_STR_INDEX) == 'X'
-                        ? true
-                        : false;
-                char typeChar = currLine.charAt(TYPE_STR_INDEX);
-                currType = typeChar == 'T'
-                        ? TaskType.TODO
-                        : typeChar == 'D'
-                            ? TaskType.DEADLINE
-                            : TaskType.EVENT;
-                currStrArr = currLine.split(", ");
-                switch (currType) {
-                case TODO:
-                    tasks.add(new Todo(currStrArr[1], currCompletionStatus));
-                    break;
-                case EVENT:
-                    tasks.add(new Event(currStrArr[1], LocalDateTime.parse(currStrArr[2]), currCompletionStatus));
-                    break;
-                case DEADLINE:
-                    tasks.add(new Deadline(currStrArr[1], LocalDateTime.parse(currStrArr[2]), currCompletionStatus));
-                    break;
-                default:
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not Found!");
-        }
-    }
 
     private static LocalDateTime parseTimeString(String ts)
             throws YoyoIncompleteCommandException, YoyoInvalidFormatException {
@@ -270,6 +150,51 @@ public class Yoyo {
     private static void checkCompleteCommand(String[] inputTokens) throws YoyoIncompleteCommandException {
         if (inputTokens.length < 2 || inputTokens[1].trim().length() == 0) {
             throw new YoyoIncompleteCommandException("You have not entered enough information for your command.");
+        }
+    }
+
+    /**
+     * Exception class for command with invalid format .
+     */
+    private static class YoyoInvalidFormatException extends IOException {
+        YoyoInvalidFormatException(String message) {
+            super(message);
+        }
+    }
+
+    /**
+     * Exception class for incomplete command .
+     */
+    private static class YoyoIncompleteCommandException extends IOException {
+        YoyoIncompleteCommandException(String message) {
+            super(message);
+        }
+    }
+
+    /**
+     * Exception class for invalid command.
+     */
+    private static class YoyoCommandNotFoundException extends IOException {
+        YoyoCommandNotFoundException(String message) {
+            super(message);
+        }
+    }
+
+    /**
+     * Exception class for invalid task index.
+     */
+    private static class YoyoTaskIndexException extends IOException {
+        YoyoTaskIndexException(String message) {
+            super(message);
+        }
+    }
+
+    /**
+     * Exception class for empty command.
+     */
+    private static class YoyoEmptyCommandException extends IOException {
+        YoyoEmptyCommandException(String message) {
+            super(message);
         }
     }
 
