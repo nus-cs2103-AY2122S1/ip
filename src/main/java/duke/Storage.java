@@ -2,30 +2,48 @@ package duke;
 
 import duke.exception.DukeException;
 import duke.exception.LoadingError;
-import duke.TaskList;
+
+import duke.exception.SavingError;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Class that handles laoding and saving tasks to a file.
+ */
 public class Storage {
 
     private final String filepath;
 
+    /**
+     * Storage constructor.
+     *
+     * @param filepath The filepath of the task list from the project root
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Returns an ArrayList<Task> of loaded Tasks from the file.
+     *
+     * @return ArrayList<Task> of tasks
+     * @throws DukeException that indicates what the issue was in opening/parsing the file
+     */
     public ArrayList<Task> load() throws DukeException {
         String home = System.getProperty("user.dir");
         Path path = Paths.get(home, this.filepath);
@@ -68,7 +86,7 @@ public class Storage {
                             }
                             break;
                         default:
-//                            Invalid task found when loading, skipped!
+                            // Invalid task found when loading, skipped!
                             continue;
                     }
 
@@ -86,24 +104,29 @@ public class Storage {
         }
     }
 
-    public void save(TaskList taskList) {
+    /**
+     * Saves the provided TaskList in an appropriate format.
+     *
+     * @param taskList TaskList which is to be saved.
+     */
+    public void save(TaskList taskList) throws DukeException {
         String home = System.getProperty("user.dir");
         String text = taskList.stringifyTasksForSave();
-        Path path = Paths.get(home, "data");
+        Path path = Paths.get(home, this.filepath);
         boolean directoryExists = Files.exists(path);
 
         if (!directoryExists) {
             try {
-                Files.createDirectory(path);
+                Files.createDirectories(path.getParent());
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new SavingError("Could not create directory path :(");
             }
         }
 
         try {
-            Files.write(Paths.get(home,"data", "taskList.txt"), text.getBytes());
+            Files.write(Paths.get(home,this.filepath), text.getBytes());
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new SavingError("Could not write to file :(");
         }
     }
 }
