@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 public class Parser {
     private static String getMetadata(String command) throws IrisException {
         String[] splitted = command.split(" ", 2);

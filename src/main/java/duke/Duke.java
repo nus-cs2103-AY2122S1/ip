@@ -1,3 +1,5 @@
+package duke;
+
 public class Duke {
     private static final String ENDING_COMMAND = "bye";
 

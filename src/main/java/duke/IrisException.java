@@ -1,5 +1,7 @@
+package duke;
+
 public class IrisException extends Exception {
-    IrisException(String message) {
+    public IrisException(String message) {
         super(message);
     }
 }

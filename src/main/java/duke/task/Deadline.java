@@ -1,13 +1,17 @@
+package duke.task;
+
+import duke.IrisException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task{
-    protected LocalDate at;
-    public Event(String name, String at) throws IrisException {
+public class Deadline extends Task {
+    protected LocalDate by;
+    public Deadline(String name, String by) throws IrisException {
         super(name);
         try {
-            this.at = LocalDate.parse(at);
+            this.by = LocalDate.parse(by);
         } catch (DateTimeParseException exception) {
             throw new IrisException("Invalid date provided.");
         }
@@ -16,18 +20,18 @@ public class Event extends Task{
     @Override
     public String toString() {
         return String.format(
-                "[E]%s (at: %s)",
+                "[D]%s (by: %s)",
                 super.toString(),
-                this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
         );
     }
 
     @Override
     public String toCommand(int index) {
         return String.format(
-                "event %s /at %s\n%s",
+                "deadline %s /by %s\n%s",
                 this.name,
-                this.at,
+                this.by,
                 super.toCommand(index)
         );
     }
