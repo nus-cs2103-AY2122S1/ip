@@ -82,7 +82,14 @@ public class Duke {
                         }
                         if (currIndex == instruction.length() ||
                                 currIndex + 5 >= instruction.length()) {
-                            throw new DukeException("I think you forgot to key in your deadline!");
+                            throw new DukeException("I think you forgot to key in your deadline! Please key it" +
+                                    " in as dd/mm/yyyy hh:mm (in 24 hours format)");
+                        } else if (instruction.charAt(currIndex + 7) != '/' &&
+                                    instruction.charAt(currIndex + 10) != '/') {
+                                throw new DukeException("Please format the date as dd/mm/yyy");
+                        } else if (instruction.substring(currIndex).length() < 20){
+                                throw new DukeException("Please include the time in the 24 hour " +
+                                        "format (e.g. 15:00)");
                         } else {
                             String by = instruction.substring(currIndex + 5);
                             Task newDeadline = new Deadline(taskDescription, by);
