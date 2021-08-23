@@ -1,9 +1,19 @@
-public class Event extends Task {
-    protected String eventTime;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
-    public Event(String taskDescription, String eventTime) {
+public class Event extends Task {
+    protected LocalDate eventTime;
+
+    public Event(String taskDescription, String dateString) {
         super(taskDescription);
-        this.eventTime = eventTime;
+        try {
+            int[] dateArgs = Arrays.stream(dateString.split("-")).mapToInt(Integer::valueOf).toArray();
+            this.eventTime = LocalDate.of(dateArgs[0], dateArgs[1], dateArgs[2]);
+        } catch (NumberFormatException | DateTimeException | ArrayIndexOutOfBoundsException e) {
+            throw new InvalidDukeCommandException("Event date has to be declared in the format yyyy-mm-dd.");
+        }
     }
 
     @Override
@@ -13,6 +23,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E] %s (at: %s)", super.toString(), this.eventTime);
+        return String.format("[E] %s (at: %s)", super.toString(), this.eventTime.format(DateTimeFormatter
+                .ofPattern("dd MMM yyyy")));
     }
 }
