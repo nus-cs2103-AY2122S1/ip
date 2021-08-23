@@ -25,9 +25,8 @@ public class Duke {
 
             if (userInput.contains(" ")) { //if there's a spacing after first word
                 firstWord = userInput.split(" ",2)[0];
-                restOfInput = userInput.split(" ",2)[1];
-            }
-            else { // if only one word is typed in with no spaces following
+                restOfInput = userInput.split(" ",2)[1]; //can be spaces or words
+            } else { // if only one word is typed in with no spaces following
                 descriptionEmpty = true;
             }
 

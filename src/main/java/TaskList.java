@@ -39,6 +39,7 @@ public class TaskList {
         Task createdTask = new Task("Created");
         Boolean isDone = (taskDone == 'X');
 
+
         switch (taskType) {
         case 'T':
             Task taskToDo = new ToDo(taskDescription);

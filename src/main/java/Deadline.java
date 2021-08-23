@@ -4,9 +4,9 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
 
-    protected String returnDate;
     protected LocalDateTime dateTime;
     protected LocalDate date;
+    private String detectedFormat;
     private static final String[] dateTimeFormats = {
             "dd/MM/yyyy HHmm",
             "dd-MM-yyyy HHmm",
@@ -29,27 +29,32 @@ public class Deadline extends Task{
             "yyyy-MM-dd",
             "dd MMM yyyy"
     };
-    private String detectedFormat;
 
     public Deadline(String restOfInput) {
-        super(restOfInput);
+        super(restOfInput.split("\\(", 2)[0].trim());
+        String returnDate = restOfInput.substring(restOfInput.indexOf(":")+2,restOfInput.indexOf(")"));
+
+        if (isDateTime(returnDate)) {
+            this.dateTime = LocalDateTime.parse(returnDate, DateTimeFormatter.ofPattern(detectedFormat));
+        } else if (isDate(returnDate)) {
+            this.date = LocalDate.parse(returnDate, DateTimeFormatter.ofPattern(detectedFormat));
+        }
     }
 
     public Deadline(String restOfInput, Boolean empty) throws DukeException {
-        super(restOfInput);
+        super(restOfInput.split("/by", 2)[0].trim());
 
         if (empty || restOfInput.trim().isEmpty()) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
 
         if (restOfInput.contains("/by")) {
-            description = restOfInput.split("/by", 2)[0];
-            returnDate = restOfInput.split("/by", 2)[1];
-            String date = returnDate.split(" ", 2)[1];
+            String description = restOfInput.split("/by", 2)[0].trim();
+            String date = restOfInput.split("/by", 2)[1].trim();
 
             if (description.trim().isEmpty()) {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-            } else if (returnDate.trim().isEmpty()) {
+            } else if (date.trim().isEmpty()) {
                 throw new DukeException("☹ OOPS!!! The deadline of a... deadline cannot be empty.");
             }
 
@@ -57,6 +62,8 @@ public class Deadline extends Task{
                 this.dateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern(detectedFormat));
             } else if (isDate(date)) {
                 this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern(detectedFormat));
+            } else {
+                throw new DukeException("☹ OOPS!!! Please enter a valid deadline!");
             }
 
         } else {
@@ -96,13 +103,11 @@ public class Deadline extends Task{
     public String toString() {
 
         if (this.dateTime != null) {
-            return String.format("[D]%s(by: %s)", super.toString(),
+            return String.format("[D]%s (by: %s)", super.toString(),
                     this.dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")));
-        } else if (this.date != null) {
-            return String.format("[D]%s(by: %s)", super.toString(),
-                    this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
         } else {
-            return String.format("[D]%s(by:%s)", super.toString(), this.returnDate);
+            return String.format("[D]%s (by: %s)", super.toString(),
+                    this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
         }
     }
 }
