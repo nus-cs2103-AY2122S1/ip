@@ -1,12 +1,17 @@
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
+
     public static void main(String[] args) {
-        Database database = new Database();
-        ArrayList<Task> task = database.getData();
-        int taskNum = 0;
+        Database myTask = new Database();
+        ArrayList<Task> task = myTask.getData();
+//        ArrayList<Task> task = new ArrayList<>();
+
+        int taskNum = task.size();
         String indentation = "       ";
         String Horizontal_line = "---------------------------------------------------------------";
         String greeting = "Hello! I'm Duke.\n" + indentation + "What can I do for you?\n";
@@ -50,9 +55,10 @@ public class Duke {
 
             switch(keyword[0]) {
                 case LIST:
-                    System.out.println(indentation + Horizontal_line);
+                    //System.out.println(indentation + Horizontal_line);
                     try {
 
+                        System.out.println(task.size() );
                         for (int i = 0; i < task.size(); i++) {
                             String s = indentation;
                             String s2 = "";
@@ -68,16 +74,16 @@ public class Duke {
                                 s2 = task.get(i).getName() +  " ( " + ((Event) task.get(i)).getTime() + " )";
                             }
                             if (task.get(i).isDone() == false) {
-                                s += "[ ]" + s2;
+                                s += "[ ] " + s2;
                                 System.out.println(s);
                             } else {
-                                s += "[X]" + s2;
+                                s += "[X] " + s2;
                                 System.out.println(s);
                             }
                         }
 
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println(indentation + "Currently you have no task to do");
+                        System.out.println(indentation + e.getMessage());
                     }
                     System.out.println(indentation + Horizontal_line);
 
@@ -91,8 +97,6 @@ public class Duke {
                         System.out.println(indentation + "Nice! I've marked this task as done:");
                         String s = indentation;
                         String s2 = "";
-                        System.out.println(indentation + Horizontal_line);
-                        System.out.println(indentation + "Noted. I've removed this task:");
                         if (task.get(num) instanceof Todo) {
                             s += (task.get(num).getIndex() + 1) + "." + " [T]";
                             s2 = task.get(num).getName();
@@ -182,11 +186,15 @@ public class Duke {
                                 for (int i = 1; i < keyword.length; i++) {
                                     if (keyword[i].startsWith("/")) {
                                         timepart_ddl = true;
-                                        tasktime_ddl = keyword[i].substring(1) + ": ";
+                                        tasktime_ddl = keyword[i].substring(1) + ":";
                                     } else if (timepart_ddl) {
                                         tasktime_ddl += " " + keyword[i];
                                     } else {
-                                        taskname_ddl += " " + keyword[i];
+                                        if (keyword[i + 1].startsWith("/")) {
+                                            taskname_ddl += keyword[i];
+                                        } else {
+                                            taskname_ddl += keyword[i] + " ";
+                                        }
                                     }
                                 }
                                 if (tasktime_ddl.equals("")) {
@@ -195,7 +203,9 @@ public class Duke {
                                     System.out.println(indentation + Horizontal_line);
                                     break;
                                 }
-                                task.add(new Deadline(taskname_ddl, false, taskNum, tasktime_ddl));
+                                Task ddl = new Deadline(taskname_ddl, false, tasktime_ddl);
+                                task.add(ddl);
+                                myTask.writeToDatabase(ddl);
                                 taskNum++;
                                 System.out.println(indentation + Horizontal_line);
                                 System.out.println(indentation + "Got it. I've added this task:");
@@ -212,9 +222,17 @@ public class Duke {
                                 }
                                 String taskname_todo = "";
                                 for (int i = 1; i < keyword.length; i++) {
-                                    taskname_todo += " " + keyword[i];
+                                    if (i == keyword.length - 1) {
+                                        taskname_todo += keyword[i];
+                                    } else {
+                                        taskname_todo += keyword[i] + " ";
+                                    }
+
                                 }
-                                task.add(new Todo(taskname_todo, false, taskNum));
+                                Task todo = new Todo(taskname_todo, false);
+
+                                task.add(todo);
+                                myTask.writeToDatabase(todo);
                                 taskNum++;
                                 System.out.println(indentation + Horizontal_line);
                                 System.out.println(indentation + "Got it. I've added this task:");
@@ -236,11 +254,16 @@ public class Duke {
                                 for (int i = 1; i < keyword.length; i++) {
                                     if (keyword[i].startsWith("/")) {
                                         timepart_event = true;
-                                        tasktime_event = keyword[i].substring(1) + ": ";
+                                        tasktime_event = keyword[i].substring(1) + ":";
                                     } else if (timepart_event) {
                                         tasktime_event += " " + keyword[i];
                                     } else {
-                                        taskname_event += " " + keyword[i];
+                                        if (keyword[i + 1].startsWith("/")) {
+                                            taskname_event += keyword[i];
+                                        } else {
+                                            taskname_event += keyword[i] + " ";
+                                        }
+
                                     }
                                 }
                                 if (tasktime_event.equals("")) {
@@ -249,7 +272,9 @@ public class Duke {
                                     System.out.println(indentation + Horizontal_line);
                                     break;
                                 }
-                                task.add(new Event(taskname_event, false, taskNum, tasktime_event));
+                                Task event = new Event(taskname_event, false, tasktime_event);
+                                task.add(event);
+                                myTask.writeToDatabase(event);
                                 taskNum++;
                                 System.out.println(indentation + Horizontal_line);
                                 System.out.println(indentation + "Got it. I've added this task:");

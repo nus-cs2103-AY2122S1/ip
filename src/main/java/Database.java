@@ -46,7 +46,7 @@ public class Database {
         String[] s = data.split(" ");
 
         boolean isDone;
-        if (s[2].equals("false")) {
+        if (s[s.length - 1].equals("false")) {
             isDone = false;
         } else {
             isDone = true;
@@ -55,13 +55,51 @@ public class Database {
 
         switch (s[0]) {
             case "T":
-                Todo todo = new Todo(s[1], isDone, Integer.valueOf(s[3]));
+                Todo todo = new Todo(s[1], isDone);
+                System.out.println(todo.toString());
                 return todo;
             case "E":
-                Event event =  new Event(s[1], isDone, Integer.valueOf(s[3]), s[4]);
+                String taskname_event = "";
+                String tasktime_event = "";
+                boolean timepart_event = false;
+                for (int i = 1; i < s.length - 1; i++) {
+                    if (s[i].startsWith("/")) {
+                        timepart_event = true;
+                        tasktime_event = s[i].substring(1);
+                    } else if (timepart_event) {
+                        tasktime_event += " " + s[i];
+                    } else {
+                        if (s[i + 1].startsWith("/")) {
+                            taskname_event += s[i];
+                        } else {
+                            taskname_event += s[i] + " ";
+                        }
+
+                    }
+                }
+                Event event =  new Event(s[1], isDone, tasktime_event);
+                System.out.println(event.toString());
                 return event;
             case "D":
-                Deadline deadline = new Deadline(s[1],isDone, Integer.valueOf(s[3]), s[4]);
+                String taskname_ddl = "";
+                String tasktime_ddl = "";
+                boolean timepart_ddl = false;
+                for (int i = 1; i < s.length - 1; i++) {
+                    if (s[i].startsWith("/")) {
+                        timepart_ddl = true;
+                        tasktime_ddl = s[i].substring(1);
+                    } else if (timepart_ddl) {
+                        tasktime_ddl += " " + s[i];
+                    } else {
+                        if (s[i + 1].startsWith("/")) {
+                            taskname_ddl += s[i];
+                        } else {
+                            taskname_ddl += s[i] + " ";
+                        }
+                    }
+                }
+                Deadline deadline = new Deadline(taskname_ddl,isDone, tasktime_ddl);
+                System.out.println(deadline.toString());
                 return deadline;
         }
         return null;
