@@ -18,8 +18,8 @@ public class DukeException extends IllegalArgumentException {
     }
 
     public static class EmptyDescriptionException extends DukeException {
-        public EmptyDescriptionException(String message) {
-            super("the description of a " + message + " cannot be empty!");
+        public EmptyDescriptionException() {
+            super("the description cannot be empty!");
         }
 
         @Override
@@ -37,6 +37,15 @@ public class DukeException extends IllegalArgumentException {
         public String toString() {
             return super.toString();
         }
+    }
+
+    public static class InvalidInputException extends DukeException {
+        public InvalidInputException(String message) {
+            super("you need to input a number as index!");
+        }
+
+        @Override
+        public String toString() { return super.toString(); }
     }
 
     @Override

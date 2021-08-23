@@ -4,65 +4,21 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.greet();
+    private static final TaskList task = new TaskList();
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final Parser parser = new Parser();
+    private static final UserInterface userInterface = new UserInterface();
 
-        Scanner scanner = new Scanner(System.in);
-        Task task = new Task();
+    public static void main(String[] args) {
+
+        userInterface.greet();
         task.loadArrayList(); // Loads the array list based on our file on hard disk
-        boolean breakWhile = false;
+        boolean breakWhile;
 
         while (scanner.hasNext()) {
             String firstWord = scanner.next().toLowerCase(Locale.ROOT);
-
-            switch (firstWord) {
-                case "bye":
-                    duke.exit();
-                    breakWhile = true;
-                    break;
-                case "done":
-                    String stringIndex = scanner.next();
-                    try {
-                        int index = Integer.parseInt(stringIndex) - 1;
-                        if (task.markDone(index)) {
-                            System.out.println("\nDuke: Nice! I've marked this task as done:\n" + Task.retrieveTask(index));
-                        }
-                        break;
-                    } catch (NumberFormatException e) {
-                        System.out.println("Please enter a number as index");
-                        break;
-                    }
-                case "list":
-                    Task.displayList();
-                    break;
-                case "delete":
-                    String stringIndex2 = scanner.next();
-                    int index2 = Integer.parseInt(stringIndex2) - 1;
-                    Task deletedTask = Task.retrieveTask(index2);
-                    if (deletedTask == null) break;
-                    task.delete(index2);
-                    System.out.println("\nDuke: Noted. I've removed this task:\n"
-                    + deletedTask + "\nNow you have " + Task.listLength() + " tasks in the list.");
-                    break;
-                default:
-                    String remaining = firstWord.concat(" " + scanner.nextLine());
-                    try {
-                        task.add(remaining);
-                        break;
-                    } catch (DukeException e) {
-                        System.out.println(e);
-                    }
-            }
+            breakWhile = parser.firstCommandParser(firstWord, scanner);
             if (breakWhile) break;
         }
-    }
-
-    private void greet() {
-        System.out.println("Duke: Hello! I'm Duke\nWhat can I do for you?");
-    }
-
-    private void exit() {
-        System.out.println("\nDuke: Bye. Hope to see you again soon!");
     }
 }
