@@ -4,33 +4,33 @@ import java.util.Scanner;
 import exception.LogicException;
 import exception.ParserException;
 import executor.ExecutionUnit;
-import view.Response;
+import view.Ui;
 
 public class BobCat {
     public static void main(String[] args) throws IOException {
         Scanner scanObj = new Scanner(System.in);
-        Response response = new Response();
-        ExecutionUnit executor = new ExecutionUnit();
+        Ui ui = new Ui();
+        ExecutionUnit executor = new ExecutionUnit("memory/taskList.txt");
 
-        response.respond(new String[]{"Hello! I'm BobCat!", "Trying to remember what happened..."});
+        ui.respond(new String[]{"Hello! I'm BobCat!", "Trying to remember what happened..."});
         try {
             executor.initStorage();
         } catch (IOException e) {
-            response.respond(new String[]{"Memory file not found! Starting from blank state..."});
+            ui.respond(new String[]{"Memory file not found! Starting from blank state..."});
         } catch (ParserException | LogicException e) {
-            response.respond("Memory may have been corrupted! Starting from blank state...");
-            executor.storageClear();
+            ui.respond("Memory may have been corrupted! Starting from blank state...");
+            executor.clearStorage();
         } finally {
-            response.respond(new String[] {"Initialisation done!", "What can I do for you?"});
+            ui.respond(new String[] {"Initialisation done!", "What can I do for you?"});
         }
 
         while(true) {
             String inp = scanObj.nextLine();
             try {
                 String[] results = executor.executeCommand(inp);
-                response.respond(results);
+                ui.respond(results);
             } catch (ParserException | LogicException e) {
-                response.respond(e.getMessage());
+                ui.respond(e.getMessage());
             }
             if (inp.equals("bye")) {
                 break;

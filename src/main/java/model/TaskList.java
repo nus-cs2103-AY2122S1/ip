@@ -8,11 +8,11 @@ import model.task.ToDo;
 
 import java.util.ArrayList;
 
-public class Storage {
+public class TaskList {
     private final ArrayList<Task> storage;
     private int index;
 
-    public Storage() {
+    public TaskList() {
         storage = new ArrayList<>();
         index = 0;
     }

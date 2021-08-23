@@ -1,6 +1,6 @@
 package view;
 
-public class Response {
+public class Ui {
     private static void hLine() {
         System.out.println("\t----------------------------------------------");
     }
