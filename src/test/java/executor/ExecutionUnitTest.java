@@ -1,9 +1,6 @@
 package executor;
 
 import exception.CommandArityException;
-import exception.LogicException;
-import executor.parser.StorageParser;
-import model.task.Task;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -80,9 +77,9 @@ public class ExecutionUnitTest {
             List<String> read = Files.readAllLines(path);
             int n = read.size();
 
-            assertEquals(read.get(n - 1), "[D][ ] eat breakfast (by: 31 Jan 2021)");
-            assertEquals(read.get(n - 2), "[E][ ] eat breakfast (at: 31 Jan 2021)");
-            assertEquals(read.get(n - 3), "[T][ ] eat breakfast");
+            assertEquals("[D][ ] eat breakfast (by: 31 Jan 2021)", read.get(n - 1));
+            assertEquals("[E][ ] eat breakfast (at: 03 Oct 2020)", read.get(n - 2));
+            assertEquals("[T][ ] eat breakfast", read.get(n - 3));
         });
     }
 }
