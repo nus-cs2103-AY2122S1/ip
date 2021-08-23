@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     private static List<Task> list = new ArrayList<>();
@@ -173,11 +175,13 @@ public class Duke {
                         if (text.contains("deadline")) {
                             String description = extractTaskDescription(text);
                             String time = extractTaskTime(text);
-                            newTask = new Deadline(description, time);
+                            LocalDate date = LocalDate.parse(time);
+                            newTask = new Deadline(description, date);
                         } else if (text.contains("event")) {
                             String description = extractTaskDescription(text);
                             String time = extractTaskTime(text);
-                            newTask = new Event(description, time);
+                            LocalDate date = LocalDate.parse(time);
+                            newTask = new Event(description, date);
                         } else if (text.contains("todo")) {
                             String description = extractTaskDescription(text);
                             newTask = new Todo(description);
