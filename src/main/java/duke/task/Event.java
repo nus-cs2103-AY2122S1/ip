@@ -1,12 +1,19 @@
+package duke.task;
+
+import duke.parser.Parser;
+import duke.storage.Storage;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class encapsulates an event task.
+ */
 public class Event extends Task {
     private static final String TASK_TYPE = "E";
     private String at;
 
     /**
-     * Constructor of the Event class
+     * Constructor of the duke.task.Event class
      *
      * @param description description of this event
      * @param at the time period of this event
@@ -26,11 +33,16 @@ public class Event extends Task {
         return super.toString() + " (at: " + this.at + ")";
     }
 
+    /**
+     * Returns the savable string format of this task.
+     *
+     * @return Formatted string to be saved into storage.
+     */
     @Override
-    protected String toSavableFormat() {
+    public String toSavableFormat() {
         String isDone = Parser.parseIsDoneToString(this.isDone());
         List<String> stringList = Arrays.asList(TASK_TYPE, isDone, this.getDescription(), this.at);
-        return String.join(Duke.DELIMITER, stringList);
+        return String.join(Storage.DELIMITER, stringList);
     }
     
     @Override

@@ -1,11 +1,18 @@
+package duke.task;
+
+import duke.parser.Parser;
+import duke.storage.Storage;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class encapsulates a todo task.
+ */
 public class Todo extends Task {
     private static final String TASK_TYPE = "T";
     
     /**
-     * Constructor of the Todo class
+     * Constructor of the duke.task.Todo class
      *
      * @param description description of this todo
      */
@@ -22,12 +29,17 @@ public class Todo extends Task {
     public String toString() {
         return super.toString();
     }
-    
+
+    /**
+     * Returns the savable string format of this task.
+     *
+     * @return Formatted string to be saved into storage.
+     */
     @Override
-    protected String toSavableFormat() {
+    public String toSavableFormat() {
         String isDone = Parser.parseIsDoneToString(this.isDone());
         List<String> stringList = Arrays.asList(TASK_TYPE, isDone, this.getDescription());
-        return String.join(Duke.DELIMITER, stringList);
+        return String.join(Storage.DELIMITER, stringList);
     }
     
     @Override

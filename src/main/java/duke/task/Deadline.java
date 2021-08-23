@@ -1,14 +1,21 @@
+package duke.task;
+
+import duke.parser.Parser;
+import duke.storage.Storage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class encapsulates a Deadline task.
+ */
 public class Deadline extends Task {
     private static final String TASK_TYPE = "D";
     private LocalDate by;
 
     /**
-     * Constructor of the Deadline class
+     * Constructor of the duke.task.Deadline class
      *
      * @param description description of this deadline
      * @param by the due date of the deadline
@@ -29,11 +36,16 @@ public class Deadline extends Task {
         return super.toString() + " (by: " + formattedDate + ")";
     }
 
+    /**
+     * Returns the savable string format of this task.
+     * 
+     * @return Formatted string to be saved into storage.
+     */
     @Override
-    protected String toSavableFormat() {
+    public String toSavableFormat() {
         String isDone = Parser.parseIsDoneToString(this.isDone());
         List<String> stringList = Arrays.asList(TASK_TYPE, isDone, this.getDescription(), this.by.toString());
-        return String.join(Duke.DELIMITER, stringList);
+        return String.join(Storage.DELIMITER, stringList);
     }
 
     @Override
