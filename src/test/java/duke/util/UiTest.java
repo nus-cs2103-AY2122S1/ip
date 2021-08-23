@@ -79,6 +79,7 @@ public class UiTest {
                 + "list - shows the current task list\n"
                 + "done - marks a task in the task list as complete, type 'done' followed by an integer\n"
                 + "delete - deletes a task in the task list, type 'delete' followed by an integer\n"
+                + "filter - filter task lists for tasks through searching for a keyword\n"
                 + "bye - exits the duke chat bot and saves all task in the task list to the hard disk";
         assertEquals(HORIZONTAL_LINE
                 + "\n"

@@ -6,7 +6,13 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,7 +20,7 @@ import java.time.format.DateTimeFormatter;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
+ * Current Progress: Level-9. Find
  *
  * Description:
  * Encapsulates the Store Class which has the functions that stores the task
@@ -25,7 +31,7 @@ import java.time.format.DateTimeFormatter;
 public class Store {
 
     private final String filePath;
-    private final DateTimeFormatter OFFICIAL_FORMAT = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
+    private final DateTimeFormatter officialFormat = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
 
     public Store(String filePath) {
         this.filePath = filePath;
@@ -114,8 +120,8 @@ public class Store {
                 String[] checkEventDetails = eventDetails.split("at: ", 2);
                 String[] eventDate = checkEventDetails[1].substring(0, checkEventDetails[1].length() - 1)
                         .split(" to ", 2);
-                LocalDateTime eventStartTime = LocalDateTime.parse(eventDate[0], OFFICIAL_FORMAT);
-                LocalDateTime eventEndTime = LocalDateTime.parse(eventDate[1], OFFICIAL_FORMAT);
+                LocalDateTime eventStartTime = LocalDateTime.parse(eventDate[0], officialFormat);
+                LocalDateTime eventEndTime = LocalDateTime.parse(eventDate[1], officialFormat);
                 DukeDate eventDuration = new DukeDate(eventStartTime, eventEndTime);
                 Task tempEventTask = new Event(checkEventDetails[0]
                         .substring(0, checkEventDetails[0].length() -2), eventDuration);
@@ -127,7 +133,7 @@ public class Store {
                 String deadlineDetails = line.substring(9);
                 String[] checkDeadlineDetails = deadlineDetails.split("by: ", 2);
                 LocalDateTime deadlineDate = LocalDateTime.parse(checkDeadlineDetails[1]
-                        .substring(0, checkDeadlineDetails[1].length() - 1), OFFICIAL_FORMAT);
+                        .substring(0, checkDeadlineDetails[1].length() - 1), officialFormat);
                 DukeDate deadlineDukeDate = new DukeDate(deadlineDate);
                 Task tempDeadlineTask = new Deadline(checkDeadlineDetails[0]
                         .substring(0, checkDeadlineDetails[0].length() - 2), deadlineDukeDate);

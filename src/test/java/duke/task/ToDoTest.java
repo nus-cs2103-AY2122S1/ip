@@ -1,6 +1,10 @@
 package duke.task;
 
+import duke.util.DukeDate;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,5 +26,11 @@ public class ToDoTest {
     public void testGetDescription() {
         ToDo tempTask = new ToDo("testing the tester");
         assertEquals(tempTask.getDescription(), "testing the tester");
+    }
+
+    @Test
+    public void testCheckTerm() {
+        ToDo tempTask = new ToDo("testing the tester");
+        assertEquals(tempTask.checkTerm("tester"), true);
     }
 }

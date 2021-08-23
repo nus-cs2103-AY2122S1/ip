@@ -1,34 +1,33 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
+import duke.util.Store;
 import duke.util.Tasklist;
 import duke.util.Ui;
-import duke.util.Store;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level-9. Find
+ * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
  *
  * Description:
  * Class that encapsulates the delete task command inputted by the user
  *
  * @author Keith Tan
  */
-public class DeleteCommand extends Command {
-    private final int toDelete;
-    public static final String COMMAND_WORD = "delete";
+public class FindCommand extends Command{
+    private final String searchTerm;
+    public static final String COMMAND_WORD = "add";
 
-    public DeleteCommand(int toDelete) {
+    public FindCommand(String searchTerm) {
 
-        this.toDelete = toDelete;
+        this.searchTerm = searchTerm;
 
     }
 
     /**
-     * Executes the delete command and delete the inputted task to the task list
+     * Executes the filter task command. Returns a specific task in the task list that contains search term.
      *
      * @param list Tasklist of current tasks
      * @param ui Ui which prints any successful message from the associated methods
@@ -38,7 +37,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(Tasklist list, Ui ui, Store storage) throws DukeException {
-        String successMessage = list.deleteTask(toDelete);
+        String successMessage = list.filterTask(searchTerm);
         ui.printMessage(successMessage);
 
     }

@@ -4,7 +4,7 @@ package duke.task;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
+ * Current Progress: Level-9. Find
  *
  * Description:
  * Encapsulates the Task Class which contains a task description
@@ -23,7 +23,7 @@ public class Task {
     }
 
     /**
-     * Sets Task Completion Status to true and returns true if successfully marked
+     * Sets Duke.util.Duke.task.Task Completion Status to true and returns true if successfully marked
      *
      * @return boolean returns true if task successfully marked and false if task
      *                 already marked
@@ -58,6 +58,21 @@ public class Task {
     public String getDescription() {
 
         return this.description;
+    }
+
+    /**
+     * Getter that returns the description of the task
+     *
+     * @return boolean Returns true if search term exists in the description
+     */
+    public boolean checkTerm(String searchTerm) {
+        String[] descriptionArr = this.description.split(" ");
+        for (String word : descriptionArr) {
+            if (word.equals(searchTerm)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

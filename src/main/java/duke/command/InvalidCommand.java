@@ -11,7 +11,7 @@ import duke.util.Store;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
+ * Current Progress: Level-9. Find
  *
  * Description:
  * Class that encapsulates an invalid command inputted by the user

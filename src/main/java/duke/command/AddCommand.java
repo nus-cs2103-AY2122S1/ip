@@ -2,15 +2,15 @@ package duke.command;
 
 import duke.exception.DukeException;
 
+import duke.util.Store;
 import duke.util.Tasklist;
 import duke.util.Ui;
-import duke.util.Store;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
+ * Current Progress: Level-9. Find
  *
  * Description:
  * Class that encapsulates the add task command inputted by the user

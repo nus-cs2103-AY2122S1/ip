@@ -50,4 +50,14 @@ public class EventTest {
         Event tempTask = new Event("testing the tester", savedDuration);
         assertEquals(tempTask.getDescription(), "testing the tester");
     }
+
+    @Test
+    public void testCheckTerm() {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
+        LocalDateTime dateStartTime = LocalDateTime.parse("12-Dec-2020 12:00", format);
+        LocalDateTime dateEndTime = LocalDateTime.parse("12-Jan-2020 20:00", format);
+        DukeDate savedDuration = new DukeDate(dateStartTime, dateEndTime);
+        Event tempTask = new Event("testing the tester", savedDuration);
+        assertEquals(tempTask.checkTerm("tester"), true);
+    }
 }

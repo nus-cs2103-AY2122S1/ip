@@ -1,17 +1,26 @@
 package duke.util;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidArgumentException;
 import duke.exception.InvalidCommandException;
 import duke.exception.MissingArgumentException;
+import duke.exception.TooManyArgumentsException;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
+ * Current Progress: Level-9. Find
  *
  * Description:
  * Encapsulates the parser where it parses the inputted command from the user and runs
@@ -57,6 +66,29 @@ public class Parser {
             throw new MissingArgumentException("description", event);
         } else if (strArr[1].trim().isEmpty()) {
             throw new MissingArgumentException("description", event);
+        } else {
+            return strArr[1];
+        }
+
+    }
+
+    /**
+     * Checks whether user inputted the description for the task
+     *
+     * @param strArr String array containing the command
+     * @param event String stating the type of task to be added
+     * @return String Returns the description of the task
+     * @throws MissingArgumentException throws a Duke.util.Duke.exception.MissingArgumentException if no description found
+     */
+    private static String checkSearchTerm(String[] strArr, String event) throws MissingArgumentException,
+            TooManyArgumentsException {
+
+        if (strArr.length < 2) {
+            throw new MissingArgumentException("search term", event);
+        } else if (strArr.length > 2){
+            throw new TooManyArgumentsException("search terms", event);
+        } else if (strArr[1].trim().isEmpty()) {
+            throw new MissingArgumentException("search term", event);
         } else {
             return strArr[1];
         }
@@ -117,6 +149,9 @@ public class Parser {
                 break;
             case "list":
                 currentCommand = new ListCommand();
+                break;
+            case "filter":
+                currentCommand = new FindCommand(checkSearchTerm(command.split(" "), "filter"));
                 break;
             case "help":
                 currentCommand = new HelpCommand();

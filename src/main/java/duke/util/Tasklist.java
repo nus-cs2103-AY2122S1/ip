@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
+ * Current Progress: Level-9. Find
  *
  * Description:
  * Encapsulates the task List which contains a list of tasks
@@ -45,6 +45,17 @@ public class Tasklist {
     }
 
     /**
+     * Getter that returns the current length of the list
+     *
+     * @return int returns current length of list
+     */
+    public int getSize() {
+
+        return this.tasks.size();
+
+    }
+
+    /**
      * Checks whether user inputted the time for the deadline/event task
      *
      * @param strArr String array containing the inputted description and time
@@ -54,8 +65,7 @@ public class Tasklist {
      * @throws InvalidArgumentException throws a InvalidArgumentException if error occurs when parsing
      *                                  inputted command line for dates
      */
-    private DukeDate checkTime(String[] strArr, String event) throws MissingArgumentException
-            , InvalidArgumentException {
+    private DukeDate checkTime(String[] strArr, String event) throws MissingArgumentException, InvalidArgumentException {
 
         if (strArr.length < 2) {
             throw new MissingArgumentException("time", event);
@@ -210,6 +220,25 @@ public class Tasklist {
 
     }
 
+    /**
+     * Filter the task list to find tasks whose description the fit the search term
+     *
+     * @param searchTerm search term to filter the task list by
+     * @return String message to be printed depending on if any tasks are found
+     */
+    public String filterTask(String searchTerm) {
+
+        Tasklist tempList = new Tasklist();
+        for (int i = 0; i < this.tasks.size(); i++ ) {
+            Task currentTask = this.tasks.get(i);
+            if (currentTask.checkTerm(searchTerm)) {
+                tempList.addTask(currentTask);
+            }
+        }
+        return tempList.getSize() == 0 ? "No tasks fit search term"
+                : "Here are the matching tasks in your list:\n" + tempList.toString();
+
+    }
 
     @Override
     public String toString() {

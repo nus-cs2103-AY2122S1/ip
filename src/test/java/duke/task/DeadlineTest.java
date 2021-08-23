@@ -42,4 +42,13 @@ public class DeadlineTest {
         Deadline tempTask = new Deadline("testing the tester", new DukeDate(dateTime));
         assertEquals(tempTask.getDescription(), "testing the tester");
     }
+
+    @Test
+    public void testCheckTerm() {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse("12-Dec-2020 12:00", format);
+        Deadline tempTask = new Deadline("testing the tester", new DukeDate(dateTime));
+        assertEquals(tempTask.checkTerm("testing"), true);
+    }
+
 }
