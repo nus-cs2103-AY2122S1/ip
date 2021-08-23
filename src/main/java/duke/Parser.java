@@ -1,8 +1,13 @@
 package duke;
 
 import duke.command.*;
-import duke.exceptions.*;
-import duke.tasks.*;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidCommandDukeException;
+import duke.exceptions.NoArgumentDukeException;
+import duke.exceptions.WrongArgumentDukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -38,6 +43,8 @@ public class Parser {
                 return delete(getArgs(command));
             case "bye":
                 return new ExitCommand();
+            case "find":
+                return find(getArgs(command));
             default:
                 throw new InvalidCommandDukeException();
             }
@@ -118,6 +125,16 @@ public class Parser {
             throw new WrongArgumentDukeException("Not a number specified");
         }
 
+    }
+
+    /**
+     * Finds an entry containing the specified string.
+     *
+     * @param toFind String to find in all entries.
+     * @return A command that will find the entries when executed.
+     */
+    private Command find(String toFind) {
+        return new FindCommand(toFind);
     }
 
     /**

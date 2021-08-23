@@ -51,6 +51,14 @@ public abstract class Task {
     }
 
     /**
+     * Returns the name of this task
+     * @return String representation of name
+     */
+    public String getName() {
+        return taskName;
+    }
+
+    /**
      * Gets an identifier for the labelled task.
      *
      * @return A string identifier for this task.
