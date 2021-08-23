@@ -22,7 +22,14 @@ public class Deadline extends Task {
         this.dueDate = date.toString() + " " + time.toString();
         this.taskType = "D";
         this.isDone = isDone;
+    }
 
+    public LocalDate getDate() {
+        return this.deadlineDate;
+    }
+
+    public LocalTime getTime() {
+        return this.deadlineTime;
     }
 
     @Override

@@ -12,7 +12,6 @@ import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 
-
 public class Storage {
 
     File dataFile;

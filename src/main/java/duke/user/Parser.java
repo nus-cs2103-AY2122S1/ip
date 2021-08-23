@@ -105,8 +105,5 @@ public class Parser {
         String time = input.substring(deadlineTimeIndex);
         String deadlineDesc = input.substring(9, deadlineDateIndex - 4); //skip the "deadline "
         return deadlineDesc + " | " + date + " | " + time;
-
     }
-
-
 }

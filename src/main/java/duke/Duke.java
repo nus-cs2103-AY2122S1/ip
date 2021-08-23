@@ -23,7 +23,6 @@ public class Duke {
         storage = new Storage("data/Duke.txt");
         tasks = new TaskList(storage.loadFromFile());
         ui = new Ui();
-
     }
 
     public void run() {
@@ -37,7 +36,6 @@ public class Duke {
         Parser parser = new Parser(tasks);
 
         while (true) {
-
             String nextTask = in.nextLine();  // Read user input
 
             try {
@@ -45,7 +43,6 @@ public class Duke {
                 String command = parsedInputString[0];
 
                 // Case where user marks a task as done
-
                 if (command.equals("done")) {
                     Task current = tasks.getTask(Integer.parseInt(parsedInputString[1]));
                     current.markAsDone();
@@ -71,7 +68,6 @@ public class Duke {
                     System.out.println(ui.byeMessage());
                     break;
 
-
                     // Case where user wants to add a new to do task
                 } else if (command.equals("todo")) {
                     tasks.addTask(new Todo(parsedInputString[1]));
@@ -79,8 +75,6 @@ public class Duke {
 
                     // Case where user wants to add a new event task
                 } else if (nextTask.startsWith("event")) {
-//                        for (String i : parsedInputString) {
-//                        System.out.println(i);}
                     tasks.addTask(new Event(parsedInputString[1], parsedInputString[2]));
                     taskListIsAddedTo = true;
 
@@ -98,15 +92,12 @@ public class Duke {
                 }
 
                 if (taskListIsUpdated || taskListIsAddedTo) {
-
                     storage.saveToFile();
-
                     if (taskListIsAddedTo) {
                         // When adding a new task, this message be printed
                         System.out.println(ui.addTaskMessage(tasks));
                     }
                 }
-
 
                 // catch all the custom exceptions and displays the message
             } catch (DukeException e) {
