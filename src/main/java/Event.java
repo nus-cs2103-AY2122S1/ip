@@ -21,4 +21,9 @@ public class Event extends Task {
     public String toString() {
         return ("[E]" + super.toString() + String.format("(at:%s)", this.time));
     }
+
+    @Override
+    public String typeString() {
+        return "event" + Task.sep + super.toSaveInFile("/at" + this.time);
+    }
 }

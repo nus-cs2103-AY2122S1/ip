@@ -1,6 +1,7 @@
-public class Task {
+public abstract class Task {
     private String description;
     private boolean done = false;
+    final public static String sep = "4%213";
 
     public static Task makeTask(String type, String description) throws DukeException {
         if (description.length() == 0) {
@@ -26,9 +27,11 @@ public class Task {
         this.description = description;
     }
 
-    public void markDone() {
+    public void markDone(Boolean toPrint) {
         this.done = true;
-        System.out.println("Nice! I've marked this task as done:\n" + this.toString());
+        if (toPrint) {
+            System.out.println("Nice! I've marked this task as done:\n" + this.toString());
+        }
     }
 
     @Override
@@ -40,4 +43,10 @@ public class Task {
                 doneIndicator + " " + this.description
                 );
     }
+
+    protected String toSaveInFile(String time) {
+        return String.format("%s%s%s%s", this.description, time, Task.sep, this.done ? "1" : "0");
+    }
+
+    public abstract String typeString();
 }
