@@ -28,13 +28,13 @@ public class Event extends Task {
         String[] dateTimeEndInput = dateTimes[1].trim().split(" ");
         if (dateTimeStartInput.length == 1 && dateTimeEndInput.length == 1) {
 
-            startDate = DateTime.parseDateAndTime(dateTimeStartInput[0], "00:00");
-            endDate = DateTime.parseDateAndTime(dateTimeEndInput[0], "00:00");
+            startDate = Parser.parseDateAndTime(dateTimeStartInput[0], "00:00");
+            endDate = Parser.parseDateAndTime(dateTimeEndInput[0], "00:00");
             isDateOnly = true;
 
         } else if (dateTimeStartInput.length == 2 && dateTimeStartInput.length == 2) {
-            startDate = DateTime.parseDateAndTime(dateTimeStartInput[0], dateTimeStartInput[1]);
-            endDate = DateTime.parseDateAndTime(dateTimeEndInput[0], dateTimeEndInput[1]);
+            startDate = Parser.parseDateAndTime(dateTimeStartInput[0], dateTimeStartInput[1]);
+            endDate = Parser.parseDateAndTime(dateTimeEndInput[0], dateTimeEndInput[1]);
             isDateOnly = false;
         } else {
             throw new DukeException(exceptionMessage);
@@ -74,8 +74,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return taskType + super.toString() + " (at: " + DateTime.dateTimeToString(this.startDateTime, isDateOnly)
-                + " to " + DateTime.dateTimeToString(this.endDateTime, isDateOnly) + ")";
+        return taskType + super.toString() + " (at: " + Parser.dateTimeToString(this.startDateTime, isDateOnly)
+                + " to " + Parser.dateTimeToString(this.endDateTime, isDateOnly) + ")";
     }
 
 

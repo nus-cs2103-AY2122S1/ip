@@ -6,17 +6,22 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class FileManager {
+class Storage {
+    protected String filePath;
 
-    protected static ArrayList<Task> getPreviousTasks() {
+    protected Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    protected TaskList load() throws DukeException {
         createDir();
-        File taskList = new File("data/taskList.txt");
+        File taskList = new File(this.filePath);
         ArrayList<Task> taskArrayList = new ArrayList<Task>();
         if (taskList.exists()) {
             try {
-                Scanner s = new Scanner(taskList);
-                while (s.hasNext()) {
-                    String line = s.nextLine();
+                Scanner scanner = new Scanner(taskList);
+                while (scanner.hasNext()) {
+                    String line = scanner.nextLine();
                     char typeOfTask = line.charAt(2);
                     if (typeOfTask == 'E') {
                         String[] storedValues = line.substring(5).split("[|]", 5);
@@ -41,35 +46,36 @@ class FileManager {
                     }
                 }
             } catch (FileNotFoundException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
+                throw new DukeException("Something went wrong: " + e.getMessage());
+
             }
         } else {
             try {
                 taskList.createNewFile();
-                return new ArrayList<Task>();
+                return new TaskList(new ArrayList<Task>());
             } catch (IOException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
+                throw new DukeException("Something went wrong: " + e.getMessage());
             }
         }
 
-        return taskArrayList;
+        return new TaskList(taskArrayList);
 
     }
 
-    protected static void createDir() {
+    protected void createDir() {
         File dataDir = new File("data");
         dataDir.mkdirs();
     }
 
-    protected static void saveTaskList(ArrayList<Task> taskArrayList) {
+    protected void save(TaskList tasks) {
         createDir();
-        File taskListFile = new File("data/taskList.txt");
+        File taskListFile = new File(this.filePath);
 
         String text = "";
 
-        for (int i = 0; i < taskArrayList.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
 
-            Task currentTask = taskArrayList.get(i);
+            Task currentTask = tasks.get(i);
             if (currentTask instanceof Event) {
                 Event event = (Event) currentTask;
                 text += String.format("| E | %s | %s | %s | %s | %s\n", event.isDone ? "X" : " ",

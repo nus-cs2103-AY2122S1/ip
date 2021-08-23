@@ -39,10 +39,10 @@ public class Deadline extends Task {
         boolean isDateOnly;
 
         if (dateAndOrTime.length == 1) {
-            dateTime = DateTime.parseDateAndTime(dateAndOrTime[0], "00:00");
+            dateTime = Parser.parseDateAndTime(dateAndOrTime[0], "00:00");
             isDateOnly = true;
         } else if (dateAndOrTime.length == 2) {
-            dateTime = DateTime.parseDateAndTime(dateAndOrTime[0], dateAndOrTime[1]);
+            dateTime = Parser.parseDateAndTime(dateAndOrTime[0], dateAndOrTime[1]);
             isDateOnly = false;
         } else {
             throw new DukeException(errorMessage);
@@ -53,7 +53,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return taskType + super.toString() + " (by: " + DateTime.dateTimeToString(this.date, isDateOnly) + ")";
+        return taskType + super.toString() + " (by: " + Parser.dateTimeToString(this.date, isDateOnly) + ")";
     }
 
 
