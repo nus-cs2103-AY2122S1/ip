@@ -1,13 +1,17 @@
+package task;
+
+import task.Task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
+public class Deadline extends Task {
 
     protected LocalDate date;
     protected LocalTime time;
 
-    public Event(String description, LocalDate date, LocalTime time) {
+    public Deadline(String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;
         this.time = time;
@@ -15,7 +19,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
+        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
                 time.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
     }
 }

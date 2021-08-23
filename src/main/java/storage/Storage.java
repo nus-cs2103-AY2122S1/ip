@@ -1,3 +1,5 @@
+package storage;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -5,6 +7,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.Duke;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 public class Storage {
     private String filePath;
@@ -21,7 +29,7 @@ public class Storage {
             Scanner dataScanner = new Scanner(data_file);
             while (dataScanner.hasNextLine()) {
                 String[] arr = dataScanner.nextLine().split(",");
-                // if task is a Todo
+                // if task is a task.Todo
                 if (arr[0].equals("T")) {
                     tasks.add(new Todo(arr[2]));
                     // if task is done, mark as done
@@ -48,8 +56,8 @@ public class Storage {
         return tasks;
     }
 
-    public static void removeData(int number) {
-        File fileToBeModified = new File("../ip/src/main/data.txt");
+    public void removeData(int number) {
+        File fileToBeModified = new File(filePath);
         String newContent = "";
         try {
             Scanner scanner = new Scanner(fileToBeModified);
@@ -79,8 +87,8 @@ public class Storage {
         }
     }
 
-    public static void markAsDoneData(int number) {
-        File fileToBeModified = new File("../ip/src/main/data.txt");
+    public void markAsDoneData(int number) {
+        File fileToBeModified = new File(filePath);
         String newContent = "";
         try {
             Scanner scanner = new Scanner(fileToBeModified);
@@ -113,9 +121,9 @@ public class Storage {
         }
     }
 
-    public static void newTaskToData(String taskName, Duke.Type type, String time) {
+    public void newTaskToData(String taskName, Duke.Type type, String time) {
         try {
-            FileWriter dataWriter = new FileWriter("../ip/src/main/data.txt", true);
+            FileWriter dataWriter = new FileWriter(filePath, true);
             if (type == Duke.Type.TODO) {
                 dataWriter.write("T,0," + taskName + ", \n");
                 dataWriter.close();

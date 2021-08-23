@@ -1,3 +1,10 @@
+package duke;
+
+import parser.Parser;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -38,6 +45,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("../ip/src/main/data.txt").run();
+        new Duke("../ip/src/main/java/data/data.txt").run();
     }
 }
