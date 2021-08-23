@@ -34,7 +34,7 @@ public class Storage {
      * @return List of strings.
      */
     public static List<String> readFile() {
-        File file = new File("data/duke.txt");
+        File file = new File("/Users/ramapriyansrivatsanpd/Documents/Year 2 Sem 1/CS2103T/ip/data/duke.txt");
         List<String> tasks = new ArrayList();
         try {
             Scanner readFile = new Scanner(file);
