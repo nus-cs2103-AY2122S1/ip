@@ -33,7 +33,11 @@ public class Duke {
                     if (input.equals("bye")) {
                         break;
                     }
+<<<<<<< HEAD
+                    Level7(input, tasks);
+=======
                     Level6(input, tasks);
+>>>>>>> master
             }
             System.out.println(displayLabel(byeLabel));
         } catch (DukeException | IOException e) {
@@ -191,6 +195,34 @@ public class Duke {
                 Level5(input, tasks);
             }
     }
+
+    public static void Level7(String input, ArrayList<Task> tasks) throws DukeException, IOException {
+        Level6(input, tasks);
+        String text = "";
+        FileWriter fw = new FileWriter("/Users/ravi57004/ip/src/main/java/Tasks.txt", false);
+
+        if (!input.equals("bye")) {
+                for (Task task: tasks) {
+                    String doneStr = "No";
+                    if (task.getIsDone().equals("[X]")) {
+                        doneStr = "Yes";
+                    }
+                    if (task instanceof ToDo) {
+                        text += "T ~ " + doneStr + " ~ " + task.newTask + "\n";
+                    } else if (task instanceof Deadline) {
+                        Deadline dl = (Deadline) task;
+                        text += "D ~ " + doneStr + " ~ " + task.newTask + " ~ " + dl.deadLine + "\n";
+                    } else if (task instanceof Event) {
+                        Event ev = (Event) task;
+                        text += "D ~ " + doneStr + " ~ " + task.newTask + " ~ " + ev.timing + "\n";
+                    } else {
+                        text += doneStr + " ~ " + task.newTask + "\n";
+                    }
+                }
+            }
+        fw.write(text);
+        fw.close();
+       }
 }
 
 
