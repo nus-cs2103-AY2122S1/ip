@@ -42,4 +42,9 @@ public class UI {
     public void showErrorMessage(String errorMessage) {
         System.out.println(LINE + errorMessage + "\n" + LINE);
     }
+
+    public void showFoundTask(String tasks) {
+        System.out.println(LINE + "Here are the matching tasks in your list:");
+        System.out.println(tasks + LINE);
+    }
 }

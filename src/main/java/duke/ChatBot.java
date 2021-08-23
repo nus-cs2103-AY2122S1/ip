@@ -69,6 +69,11 @@ public class ChatBot {
         s.saveTasks(tasklist);
     }
 
+    public void handleFind(String name) {
+        String findTask = tasklist.findTask(name);
+        ui.showFoundTask(findTask);
+    }
+
     public void handleWrongCommand() {
         ui.showListOfCommands();
     }
