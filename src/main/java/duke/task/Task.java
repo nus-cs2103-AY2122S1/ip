@@ -1,4 +1,4 @@
-package main.java;
+package main.java.duke.task;
 
 import java.time.LocalDate;
 
@@ -10,7 +10,7 @@ import java.time.LocalDate;
  */
 public abstract class Task {
     private final String DESCRIPTION;
-    private boolean isDone = false;
+    private boolean isDone;
 
     /**
      * Constructor for task.
@@ -34,7 +34,7 @@ public abstract class Task {
     /**
      * Change task to done.
      */
-    protected void setDone() {
+    public void setDone() {
         isDone = true;
     }
 
@@ -54,5 +54,5 @@ public abstract class Task {
      * @param date the date provided
      * @return true if they are both equal
      */
-    protected abstract boolean onDate(LocalDate date);
+    public abstract boolean onDate(LocalDate date);
 }

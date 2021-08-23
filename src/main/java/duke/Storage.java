@@ -1,4 +1,9 @@
-package main.java;
+package main.java.duke;
+
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.ToDo;
 
 import java.io.File;
 import java.io.IOException;
@@ -71,7 +76,7 @@ public class Storage {
      * @param index the position of the item
      * @throws IOException if there is an error writing to the file
      */
-    protected void setDone(int index) throws IOException {
+    public void setDone(int index) throws IOException {
         String str = fileContent.get(index);
         fileContent.set(index, str.replace("|0|", "|1|"));
         Files.write(Paths.get(this.FILEPATH), fileContent, StandardCharsets.UTF_8);
@@ -85,7 +90,7 @@ public class Storage {
      * @param date        the date of the task (if deadline or event)
      * @throws IOException if there is an error writing to the file
      */
-    protected void add(String type, String description, String date) throws IOException {
+    public void add(String type, String description, String date) throws IOException {
         fileContent.add(type + "|0|" + description + "|" + date);
         Files.write(Paths.get(this.FILEPATH), fileContent, StandardCharsets.UTF_8);
     }
@@ -96,7 +101,7 @@ public class Storage {
      * @param index the position of the task in the list
      * @throws IOException if there is an error writing to the file
      */
-    protected void delete(int index) throws IOException {
+    public void delete(int index) throws IOException {
         fileContent.remove(index);
         Files.write(Paths.get(this.FILEPATH), fileContent, StandardCharsets.UTF_8);
     }

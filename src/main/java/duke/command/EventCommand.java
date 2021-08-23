@@ -1,22 +1,28 @@
-package main.java;
+package main.java.duke.command;
+
+import main.java.duke.DukeException;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
+import main.java.duke.task.Event;
 
 import java.io.IOException;
 import java.time.DateTimeException;
 
 /**
- * AddEvent is a command which adds an event task to the task list.
+ * EventCommand is a command which adds an event task to the task list.
  *
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
-public class AddEvent extends Command {
+public class EventCommand extends Command {
 
     /**
      * Constructor.
      *
      * @param description it should contain the event description and the date
      */
-    AddEvent(String description) {
+    public EventCommand(String description) {
         super(description);
     }
 
@@ -31,7 +37,7 @@ public class AddEvent extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String[] eventPair = description.split("/at", 2);
-            if (eventPair[0] == "" || eventPair[1] == "") {
+            if (eventPair.length < 2 || eventPair[0].equals("") || eventPair[1].equals("")) {
                 throw new DukeException("Your add event command is incomplete.");
             }
             tasks.addTask(new Event(false, eventPair[0], eventPair[1]));

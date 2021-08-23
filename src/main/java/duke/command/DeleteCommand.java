@@ -1,21 +1,26 @@
-package main.java;
+package main.java.duke.command;
+
+import main.java.duke.DukeException;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
 
 import java.io.IOException;
 
 /**
- * Delete is a command which deletes a specific Task from the TaskList.
+ * DeleteCommand is a command which deletes a specific Task from the TaskList.
  *
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
-public class Delete extends Command {
+public class DeleteCommand extends Command {
 
     /**
      * Constructor.
      *
      * @param description it should contain index of the task to be deleted
      */
-    Delete(String description) {
+    public DeleteCommand(String description) {
         super(description);
     }
 

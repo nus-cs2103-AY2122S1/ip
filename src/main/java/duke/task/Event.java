@@ -1,16 +1,16 @@
-package main.java;
+package main.java.duke.task;
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline is a task that has a date to be done by.
+ * Event is a task that has a date in which it is happening.
  *
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
-public class Deadline extends Task {
+public class Event extends Task {
 
     private final LocalDateTime date;
 
@@ -19,10 +19,9 @@ public class Deadline extends Task {
      *
      * @param description the description
      */
-    public Deadline(boolean isDone, String description, String date) {
+    public Event(boolean isDone, String description, String date) {
         super(description, isDone);
-        LocalDateTime dateTime = LocalDateTime.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-ddHHmm"));
-        this.date = dateTime;
+        this.date = LocalDateTime.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-ddHHmm"));
     }
 
     /**
@@ -32,7 +31,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + DateTimeFormatter.ofPattern("d MMM uuuu hh:mma").format(this.date) + ")";
+        return "[E]" + super.toString() + "(at: " + DateTimeFormatter.ofPattern("d MMM uuuu hh:mma").format(this.date) + ")";
     }
 
     /**
@@ -42,7 +41,7 @@ public class Deadline extends Task {
      * @return true if they are both equal
      */
     @Override
-    protected boolean onDate(LocalDate date) {
+    public boolean onDate(LocalDate date) {
         return this.date.toLocalDate().equals(date);
     }
 }

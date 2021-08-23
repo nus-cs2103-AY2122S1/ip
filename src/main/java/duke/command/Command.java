@@ -1,4 +1,8 @@
-package main.java;
+package main.java.duke.command;
+
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
 
 /**
  * This is an abstract class of all the Commands that Duke can perform.
@@ -15,7 +19,7 @@ public abstract class Command {
      *
      * @param description it should contain more instructions for the command
      */
-    Command(String description) {
+    public Command(String description) {
         this.description = description;
     }
 
@@ -26,14 +30,14 @@ public abstract class Command {
      * @param ui      the ui
      * @param storage the storage for the saved task list
      */
-    protected abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Returns true if it is a bye command and returns false otherwise
      *
      * @return boolean of whether this is the last command or not
      */
-    protected boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

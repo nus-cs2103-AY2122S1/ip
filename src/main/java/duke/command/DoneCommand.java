@@ -1,17 +1,41 @@
-package main.java;
+package main.java.duke.command;
+
+import main.java.duke.DukeException;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
 
 import java.io.IOException;
 import java.time.DateTimeException;
 
+/**
+ * DoneCommand is a command which marks a specific Task as done from the TaskList.
+ *
+ * @author Zhen Xuan (Tutorial Group W12)
+ * @version CS2103T AY21/22 S2
+ */
+public class DoneCommand extends Command {
 
-public class Done extends Command {
-    Done(String description) {
+    /**
+     * Constructor.
+     *
+     * @param description it should contain index of the task to be marked done
+     */
+    public DoneCommand(String description) {
         super(description);
     }
+
+    /**
+     * Marks the task done from the task list.
+     *
+     * @param tasks   the task list
+     * @param ui      the ui
+     * @param storage the storage for the saved task list
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            int index = Integer.valueOf(description);
+            int index = Integer.parseInt(description);
             if (index > tasks.count()) {
                 throw new IllegalArgumentException();
             }

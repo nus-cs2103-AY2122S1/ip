@@ -1,4 +1,6 @@
-package main.java;
+package main.java.duke;
+
+import main.java.duke.command.*;
 
 /**
  * Parser reads the input by the user and returns the relevant command.
@@ -19,21 +21,21 @@ public class Parser {
         String description = commandPair.length == 1 ? "" : commandPair[1];
         switch (commandPair[0]) {
             case "bye":
-                return new Bye(description);
+                return new ByeCommand(description);
             case "list":
-                return new List(description);
+                return new ListCommand(description);
             case "done":
-                return new Done(description);
+                return new DoneCommand(description);
             case "delete":
-                return new Delete(description);
+                return new DeleteCommand(description);
             case "todo":
-                return new AddTodo(description);
+                return new ToDoCommand(description);
             case "deadline":
-                return new AddDeadline(description);
+                return new DeadlineCommand(description);
             case "event":
-                return new AddEvent(description);
+                return new EventCommand(description);
             default:
-                return new Invalid(description);
+                return new InvalidCommand(description);
         }
     }
 

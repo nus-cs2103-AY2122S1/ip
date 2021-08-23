@@ -1,19 +1,23 @@
-package main.java;
+package main.java.duke.command;
+
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
 
 /**
- * Bye is a command which closes the Duke bot and its readers.
+ * ByeCommand is a command which closes the Duke bot and its readers.
  *
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
-public class Bye extends Command {
+public class ByeCommand extends Command {
 
     /**
      * Constructor.
      *
      * @param description empty string
      */
-    Bye(String description) {
+    public ByeCommand(String description) {
         super(description);
     }
 

@@ -1,4 +1,6 @@
-package main.java;
+package main.java.duke;
+
+import main.java.duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,7 +31,7 @@ public class TaskList {
      *
      * @param task the task to be added into the list
      */
-    protected void addTask(Task task) {
+    public void addTask(Task task) {
         this.LIST.add(task);
         System.out.println(ADD);
         System.out.println("\t   " + task);
@@ -43,7 +45,7 @@ public class TaskList {
     /**
      * Setter to change the done status of the task.
      */
-    protected void setDone(int index) {
+    public void setDone(int index) {
         Task task = this.LIST.get(index);
         task.setDone();
         System.out.println(DONE + task);
@@ -52,7 +54,7 @@ public class TaskList {
     /**
      * Delete the task at a specified index.
      */
-    protected void delete(int index) {
+    public void delete(int index) {
         Task task = this.LIST.get(index);
         this.LIST.remove(index);
         System.out.println(DELETE + task);
@@ -62,7 +64,7 @@ public class TaskList {
     /**
      * Prints the list.
      */
-    protected void printList() {
+    public void printList() {
         System.out.println(LIST_INTRO);
         if (this.LIST.size() == 0) {
             System.out.println("\t List is empty");
@@ -76,15 +78,14 @@ public class TaskList {
     /**
      * Prints Tasks on the specified date.
      */
-    protected void printListDate(String date) {
+    public void printListDate(String date) {
         LocalDate localDate = LocalDate.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         System.out.println(LIST_INTRO);
         if (this.LIST.size() == 0) {
             System.out.println("\t List is empty.");
         } else {
             int count = 0;
-            for (int i = 0; i < this.LIST.size(); i++) {
-                Task t = this.LIST.get(i);
+            for (Task t : this.LIST) {
                 if (t.onDate(localDate)) {
                     System.out.println("\t " + (++count) + "." + t);
                 }
@@ -98,7 +99,7 @@ public class TaskList {
      *
      * @return listCount
      */
-    protected int count() {
+    public int count() {
         return this.LIST.size();
     }
 

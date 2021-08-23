@@ -1,11 +1,9 @@
-package main.java;
+package main.java.duke;
 
-import java.io.FileNotFoundException;
+import main.java.duke.command.Command;
+
 import java.io.IOException;
-import java.time.DateTimeException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
 
 /**
  * Duke is a Personal Assistant Chatbot that helps a person
@@ -15,12 +13,16 @@ import java.util.Scanner;
  * @version CS2103T AY21/22 S2
  */
 public class Duke {
-    private Storage storage;
+    private final Storage storage;
+    private final Ui ui = new Ui();
     private TaskList tasks;
-    private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath the filePath for the saved data
+     */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -30,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the Duke application.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -41,9 +46,9 @@ public class Duke {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError("\t " + e.getMessage());
+                ui.showError(e.getMessage());
             } catch (IOException e) {
-                ui.showError("\t " + new DukeException("Error reading commands.").getMessage());
+                ui.showError(new DukeException("Error reading commands.").getMessage());
             } finally {
                 ui.showLine();
             }

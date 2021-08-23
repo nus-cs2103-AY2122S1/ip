@@ -1,4 +1,4 @@
-package main.java;
+package main.java.duke;
 
 /**
  * DukeException encapsulates all the exceptions that could occur from Duke.
@@ -13,7 +13,7 @@ public class DukeException extends RuntimeException {
      *
      * @param errorMessage indicates the error that has occurred
      */
-    DukeException(String errorMessage) {
-        super("☹ OOPS!!! " + errorMessage);
+    public DukeException(String errorMessage) {
+        super("\t ☹ OOPS!!! " + errorMessage);
     }
 }

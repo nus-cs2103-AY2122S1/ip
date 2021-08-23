@@ -1,21 +1,27 @@
-package main.java;
+package main.java.duke.command;
+
+import main.java.duke.DukeException;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
+import main.java.duke.task.ToDo;
 
 import java.io.IOException;
 
 /**
- * AddTodo is a command which adds a ToDo task to the task list.
+ * ToDoCommand is a command which adds a ToDo task to the task list.
  *
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
-public class AddTodo extends Command {
+public class ToDoCommand extends Command {
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param description it should contain the ToDo description and the date
      */
-    AddTodo(String description) {
+    public ToDoCommand(String description) {
         super(description);
     }
 

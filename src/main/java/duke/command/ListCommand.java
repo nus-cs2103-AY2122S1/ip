@@ -1,22 +1,27 @@
-package main.java;
+package main.java.duke.command;
+
+import main.java.duke.DukeException;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
 
 import java.time.DateTimeException;
 
 /**
- * List is a command which prints out all the Tasks in the list, and even
+ * ListCommand is a command which prints out all the Tasks in the list, and even
  * prints only tasks of a specific date if the date is specified.
  *
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
-public class List extends Command {
+public class ListCommand extends Command {
 
     /**
      * Constructor.
      *
      * @param description it is either empty, or contains a date for which tasks with that date should be returned.
      */
-    List(String description) {
+    public ListCommand(String description) {
         super(description);
     }
 
@@ -31,13 +36,10 @@ public class List extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String date = super.description.replace(" ", "");
         try {
-            switch (date) {
-                case "":
-                    tasks.printList();
-                    break;
-                default:
-                    tasks.printListDate(date);
-                    break;
+            if (date.equals("")) {
+                tasks.printList();
+            } else {
+                tasks.printListDate(date);
             }
         } catch (DateTimeException e) {
             throw new DukeException("Your date (YYYY-MM-DD) / date & time (YYYY-MM-DD HHMM) (24h) is given in the wrong format!");

@@ -1,19 +1,24 @@
-package main.java;
+package main.java.duke.command;
+
+import main.java.duke.DukeException;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
 
 /**
- * Invalid is a command that is invalid.
+ * InvalidCommand is a command that is invalid.
  *
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
-public class Invalid extends Command {
+public class InvalidCommand extends Command {
 
     /**
      * Constructor.
      *
      * @param description it should not contain any description.
      */
-    Invalid(String description) {
+    public InvalidCommand(String description) {
         super(description);
     }
 

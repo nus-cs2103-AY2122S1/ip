@@ -1,22 +1,28 @@
-package main.java;
+package main.java.duke.command;
+
+import main.java.duke.DukeException;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
+import main.java.duke.task.Deadline;
 
 import java.io.IOException;
 import java.time.DateTimeException;
 
 /**
- * AddDeadline is a command which adds a deadline task to the task list.
+ * DeadlineCommand is a command which adds a deadline task to the task list.
  *
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
-public class AddDeadline extends Command {
+public class DeadlineCommand extends Command {
 
     /**
      * Constructor.
      *
      * @param description it should contain the deadline description and the date
      */
-    AddDeadline(String description) {
+    public DeadlineCommand(String description) {
         super(description);
     }
 
@@ -31,7 +37,7 @@ public class AddDeadline extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String[] deadlinePair = description.split("/by", 2);
-            if (deadlinePair[0] == "" || deadlinePair[1] == "") {
+            if (deadlinePair.length < 2 || deadlinePair[0].equals("") || deadlinePair[1].equals("")) {
                 throw new DukeException("Your add deadline command is incomplete.");
             }
             tasks.addTask(new Deadline(false, deadlinePair[0], deadlinePair[1]));

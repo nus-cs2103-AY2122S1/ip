@@ -1,4 +1,4 @@
-package main.java;
+package main.java.duke;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class Ui {
      *
      * @param str the String to be formatted
      */
-    protected static void reply(String str) {
+    protected void reply(String str) {
         System.out.println(LINE);
         System.out.println("\t " + str);
         System.out.println(LINE + "\n");
@@ -58,7 +58,7 @@ public class Ui {
     /**
      * Closes the BufferedReader.
      */
-    protected void close() throws DukeException {
+    public void close() throws DukeException {
         try {
             inputStreamReader.close();
             bufferedReader.close();
@@ -71,7 +71,7 @@ public class Ui {
     /**
      * Show the divider line.
      */
-    protected static void showLine() {
+    protected void showLine() {
         System.out.println(LINE);
     }
 
@@ -79,7 +79,7 @@ public class Ui {
      * Show error.
      */
     protected void showError(String message) {
-        reply(message);
+        System.out.println(message);
     }
 
 }

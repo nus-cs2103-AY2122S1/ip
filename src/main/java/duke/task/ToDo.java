@@ -1,4 +1,4 @@
-package main.java;
+package main.java.duke.task;
 
 import java.time.LocalDate;
 
@@ -35,7 +35,7 @@ public class ToDo extends Task {
      * @return true if they are both equal
      */
     @Override
-    protected boolean onDate(LocalDate date) {
+    public boolean onDate(LocalDate date) {
         return false;
     }
 }
