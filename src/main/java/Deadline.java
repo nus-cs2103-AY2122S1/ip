@@ -19,6 +19,6 @@ public class Deadline extends Task{
      * @return A String representation of the Deadline.
      */
     public String toString() {
-        return "[D][" + this.getStatusIcon() + "] " + this.description + "(by: " + this.deadline + ")";
+        return "[D][" + this.getStatusIcon() + "] " + this.description + " (by: " + this.deadline + ")";
     }
 }
