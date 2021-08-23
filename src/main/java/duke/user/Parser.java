@@ -1,6 +1,6 @@
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
+package duke.user;
+
+import duke.data.TaskList;
 
 public class Parser {
 
@@ -17,40 +17,40 @@ public class Parser {
         String parsedInput;
 
         switch (command) {
-            case "done":
-                parsedInput = doneCheck(input);
-                output = new String[]{command, parsedInput};
-                return output;
+        case "done":
+            parsedInput = doneCheck(input);
+            output = new String[]{command, parsedInput};
+            return output;
 
-            case "delete":
-                parsedInput = deleteCheck(input);
-                output = new String[]{command, parsedInput};
-                return output;
+        case "delete":
+            parsedInput = deleteCheck(input);
+            output = new String[]{command, parsedInput};
+            return output;
 
-            case "todo":
-                parsedInput = todoCheck(input);
-                output = new String[]{command, parsedInput};
-                return output;
+        case "todo":
+            parsedInput = todoCheck(input);
+            output = new String[]{command, parsedInput};
+            return output;
 
-            case "event":
-                parsedInput = eventCheck(input);
-                output = new String[]{command, parsedInput.split(" \\| ")[0], parsedInput.split(" \\| ")[1]};
-                return output;
+        case "event":
+            parsedInput = eventCheck(input);
+            output = new String[]{command, parsedInput.split(" \\| ")[0], parsedInput.split(" \\| ")[1]};
+            return output;
 
-            case "deadline":
-                parsedInput = deadlineCheck(input);
-                output = new String[] {command, parsedInput.split(" \\| ")[0],
-                        parsedInput.split(" \\| ")[1], parsedInput.split(" \\| ")[2]};
-                return output;
+        case "deadline":
+            parsedInput = deadlineCheck(input);
+            output = new String[]{command, parsedInput.split(" \\| ")[0],
+                    parsedInput.split(" \\| ")[1], parsedInput.split(" \\| ")[2]};
+            return output;
 
-            case "bye":
+        case "bye":
 
-            case "list":
-                return new String[]{command};
+        case "list":
+            return new String[]{command};
 
 
-            default:
-                throw new DukeException("Please enter a valid command");
+        default:
+            throw new DukeException("Please enter a valid command");
         }
     }
 

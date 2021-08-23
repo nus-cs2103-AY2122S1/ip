@@ -1,3 +1,6 @@
+package duke.user;
+
+import duke.data.TaskList;
 public class Ui {
 
     // ASCII DIVIDER to clean up the output
