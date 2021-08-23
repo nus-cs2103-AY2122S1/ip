@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadlines extends Task {
     /** When the task must be done by. */
-    private LocalDate limit;
+    private final LocalDate LIMIT;
 
     /**
      * Constructs a Deadlines object.
@@ -18,16 +18,16 @@ public class Deadlines extends Task {
      */
     public Deadlines(String description, String limit) {
         super(description);
-        this.limit = LocalDate.parse(limit.replace("/", "-"));
+        this.LIMIT = LocalDate.parse(limit.replace("/", "-"));
     }
 
     @Override
     public String saveData() {
-        return "deadline " + super.saveData() + " /by " + this.limit.toString();
+        return "deadline " + super.saveData() + " /by " + this.LIMIT.toString();
     }
 
     private String dateConverter() {
-        return this.limit.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        return this.LIMIT.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
     /**

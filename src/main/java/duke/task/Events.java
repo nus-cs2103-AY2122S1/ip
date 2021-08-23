@@ -5,7 +5,7 @@ package duke.task;
  */
 public class Events extends Task {
     /** When the task begins */
-    private String limit;
+    private final String LIMIT;
 
     /**
      * Constructs a Events object.
@@ -15,12 +15,12 @@ public class Events extends Task {
      */
     public Events(String description, String limit) {
         super(description);
-        this.limit = limit;
+        this.LIMIT = limit;
     }
 
     @Override
     public String saveData() {
-        return "event " + super.saveData() + " /at " + this.limit;
+        return "event " + super.saveData() + " /at " + this.LIMIT;
     }
 
     /**
@@ -30,6 +30,6 @@ public class Events extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.limit + ")";
+        return "[E]" + super.toString() + " (at: " + this.LIMIT + ")";
     }
 }
