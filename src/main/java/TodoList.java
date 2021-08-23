@@ -1,11 +1,46 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class TodoList {
     private final LinkedList<Task> tasks = new LinkedList<>();
-    public TodoList() { }
+    public TodoList(File file) {
+        try {
+            Scanner s = new Scanner(file);
+            while (s.hasNext()) {
+                String taskCode = s.nextLine();
+                tasks.add(decode(taskCode));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Task decode(String taskCode) {
+        String[] taskDetails = taskCode.split("\\|");
+        String taskType = taskDetails[0];
+        boolean done = taskDetails[1].equals("1");
+        switch (taskType) {
+            case "T":
+                return new Todo(done, taskDetails[2]);
+            case "E": {
+                String info = taskDetails[3];
+                return new Event(done, taskDetails[2], info);
+            }
+            case "D": {
+                String info = taskDetails[3];
+                return new Deadline(done, taskDetails[2], info);
+            }
+            default:
+                return null;
+        }
+    }
 
     public void addTodo(String taskName) {
-        Todo todo = new Todo(taskName);
+        Todo todo = new Todo(false, taskName);
         tasks.add(todo);
         PrintResponse.print(String.format("Caan Do!\n  added: %s\n" +
                         "Look at me! " +
@@ -39,7 +74,7 @@ public class TodoList {
     }
 
     public void addDeadline(String name, String dateTime) {
-        Deadline deadline = new Deadline(name, dateTime);
+        Deadline deadline = new Deadline(false, name, dateTime);
         tasks.add(deadline);
         PrintResponse.print(
                 String.format("Caan Do!\n" +
@@ -50,7 +85,7 @@ public class TodoList {
     }
 
     public void addEvent(String name, String dateTime) {
-        Event event = new Event(name, dateTime);
+        Event event = new Event(false, name, dateTime);
         tasks.add(event);
         PrintResponse.print(
                 String.format("Caan Do!\n" +
@@ -71,6 +106,21 @@ public class TodoList {
             PrintResponse.print(response);
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new DukeException(String.format("Task number %d invalid.", taskNumber));
+        }
+    }
+
+    public void writeToDisk() throws DukeException {
+        try {
+            FileWriter fw = new FileWriter("./data/duke.txt");
+
+            StringBuilder result = new StringBuilder();
+            for (Task task : tasks) {
+                result.append(String.format("%s\n", task.encode()));
+            }
+            fw.write(String.valueOf(result));
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

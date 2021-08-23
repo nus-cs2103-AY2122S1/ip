@@ -1,8 +1,12 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        TodoList todoList = new TodoList();
+        File dataFile = initDataFile();
+        TodoList todoList = new TodoList(dataFile);
+
         System.out.println("Look at me! I'm DUKE\n"  + "How can I help?");
 
         Scanner scanner = new Scanner(System.in);
@@ -14,6 +18,22 @@ public class Duke {
             userInput = scanner.nextLine();
         }
         PrintResponse.print("Ooooh yeah! Can do!");
+    }
+
+    private static File initDataFile() {
+        try {
+            File f = new File("./data/duke.txt");
+            if (!f.exists()) {
+                File dir = new File("./data");
+                if(dir.mkdir() && f.createNewFile()) {
+                    return f;
+                }
+            }
+            return f;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private static void handleInputs(TodoList todoList, String userInput) {
@@ -76,6 +96,7 @@ public class Duke {
                 default:
                     throw new DukeException("Say something I can understand!! >:(");
             }
+            todoList.writeToDisk();
         } catch (DukeException e) {
             PrintResponse.print(e.getMessage());
         }

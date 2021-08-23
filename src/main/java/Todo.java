@@ -1,6 +1,11 @@
 public class Todo extends Task {
-    public Todo(String taskName) {
-        super(taskName);
+    public Todo(boolean done, String taskName) {
+        super(done, taskName);
+    }
+
+    @Override
+    public String encode() {
+        return String.format("T|%s", super.encode());
     }
 
     @Override
