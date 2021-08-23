@@ -1,18 +1,21 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * This class encapsulates a Deadline task.
  *
  * @author Kleon Ang
  */
 public class Deadline extends Task {
-    protected String by;
+    private final LocalDateTime by;
 
     /**
      * Constructor for a Deadline task.
      *
      * @param description A string describing the Deadline task.
-     * @param by A string indicating when the task is due.
+     * @param by A LocalDateTime indicating when the task is due.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
@@ -24,6 +27,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
+        return "[D]" + super.toString() + " (by: " + this.by.format(formatter) + ")";
     }
 }
