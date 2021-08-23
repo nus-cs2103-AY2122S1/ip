@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Todo extends Task {
     private static final char TASK_LETTER = 'T';
 

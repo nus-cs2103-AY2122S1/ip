@@ -1,3 +1,5 @@
+package duke.command;
+
 public class Command {
     private CommandKeyword keyword;
     private String restOfCommand;

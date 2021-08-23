@@ -1,3 +1,10 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
+import duke.task.Tasklist;
+
 public class Duke {
     private Tasklist tasks;
     private Ui ui;

@@ -1,5 +1,13 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.CommandKeyword;
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
+import duke.task.Task;
+import duke.task.Tasklist;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Parser {
 

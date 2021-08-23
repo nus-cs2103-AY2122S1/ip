@@ -1,3 +1,10 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.CommandKeyword;
+import duke.exception.DukeException;
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 

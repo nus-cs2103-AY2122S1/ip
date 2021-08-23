@@ -1,3 +1,11 @@
+package duke.task;
+
+import duke.*;
+import duke.command.CommandKeyword;
+import duke.exception.DukeException;
+import duke.exception.IncompleteTaskDescriptionException;
+import duke.exception.InvalidCommandException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -75,7 +83,7 @@ public class Tasklist {
                     throw new IncompleteTaskDescriptionException("event");
                 }
             default:
-                // checked for command validity in Parser class, so this should not execute at all
+                // checked for command validity in duke.Parser class, so this should not execute at all
                 throw new InvalidCommandException();
         }
         tasks.add(task);
