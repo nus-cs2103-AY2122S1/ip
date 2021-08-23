@@ -2,11 +2,11 @@ public class Event extends Task{
     private String deadline;
 
     public Event(String description, String deadline) {
-        super(description.replace("event", ""), "[E]");
+        super(description, "[E]");
         if (deadline.equals("")) {
             throw new MissingDateException();
         } else {
-            this.deadline = deadline.replace("at", "at:");
+            this.deadline = "at:" + deadline;
         }
     }
 
