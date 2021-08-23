@@ -19,7 +19,7 @@ public class Duke {
      *
      * @param pathname the path of the save file.
      * @param dir the directory containing the save file.
-     * @throws IOException when an IO operations fails.
+     * @throws IOException when an IO operation fails.
      */
     public Duke(String pathname, String dir) throws IOException {
         this.storage = new Storage(pathname, dir);

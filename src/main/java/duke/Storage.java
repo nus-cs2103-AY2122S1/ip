@@ -48,6 +48,11 @@ public class Storage {
         return this.data;
     }
 
+    /**
+     * Adds a task to the save file.
+     * @param task the task to be added to the save file.
+     * @throws IOException when an IO operation fails.
+     */
     public void add(Task task) throws IOException {
         FileWriter fw = new FileWriter("data/tasks.txt", true);
         if (task instanceof Todo) {
@@ -65,12 +70,22 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes task from save file.
+     * @param deleteIndex the index of the task to be deleted.
+     * @throws IOException when an IO operation fails.
+     */
     public void delete(int deleteIndex) throws IOException {
         List<String> content = new ArrayList<>(Files.readAllLines(Path.of("data/tasks.txt"), StandardCharsets.UTF_8));
         content.remove(deleteIndex - 1);
         Files.write(Path.of("data/tasks.txt"), content, StandardCharsets.UTF_8);
     }
 
+    /**
+     * Marks a task in the save file as done.
+     * @param doneIndex the index of the task to be marked as done.
+     * @throws IOException when an IO operation fails.
+     */
     public void markAsDone(int doneIndex) throws IOException {
         List<String> fileContent = new ArrayList<>(Files.readAllLines(Path.of("data/tasks.txt"), StandardCharsets.UTF_8));
 
