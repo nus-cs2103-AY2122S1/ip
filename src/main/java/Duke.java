@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,6 +24,14 @@ public class Duke {
         System.out.println("Howdy! I'm Duke" + '\n'+ "How may I assist you?");
         System.out.println(dash);
 
+        // READ FILE CONTENTS
+        System.out.println("You've saved the following tasks last time we met:");
+        try {
+            printFileContents("data/tasks.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
         Scanner scanner = new Scanner(System.in);
         String userInput;
 
@@ -31,6 +43,13 @@ public class Duke {
                 System.out.println(dash);
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println(dash);
+
+                try {
+                    writeToFile(tasks);
+                } catch (IOException e) {
+                    System.out.println("No tasks saved.");
+                }
+
                 break;
 
             } else if (userInput.matches("list")){
@@ -69,6 +88,64 @@ public class Duke {
         }
     }
 
+
+    public static void printFileContents(String filePath) throws FileNotFoundException {
+
+        // System.out.println(filePath);
+        File f = new File(filePath); // create a File for the given file path
+        // System.out.println(f.exists());
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+
+        while (s.hasNext()) {
+            String toAdd = s.nextLine();
+
+            if (toAdd.charAt(1) == 'T') {
+                String task = toAdd.substring(7);
+                addTodo(task);
+
+            } else if (toAdd.charAt(1) == 'E') {
+                String task = toAdd.substring(7);
+                String name = task.substring(0, task.indexOf("(") - 1);
+                String when = task.substring(task.indexOf(":") + 2, task.indexOf(")"));
+
+                addEvent(name + " /at " + when);
+
+            } else if (toAdd.charAt(1) == 'D') {
+                String task = toAdd.substring(7);
+                String name = task.substring(0, task.indexOf("(") - 1);
+                String when = task.substring(task.indexOf(":") + 2, task.indexOf(")"));
+
+                addDeadline(name + " /by " + when);
+            }
+
+            if (toAdd.charAt(4) == 'X') {
+                addDone(counter);
+            }
+        }
+
+        for (int i = 0; i < counter; i++) {
+            Task currTask = tasks.get(i);
+            System.out.println(i+1 + "." + currTask.toString());
+        }
+        System.out.println(dash);
+    }
+
+    public static void writeToFile(ArrayList<Task> lst) throws IOException {
+
+        File directory = new java.io.File(System.getProperty("user.dir") + "/data");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        PrintWriter out = new PrintWriter("data/tasks.txt");
+
+        for (int i = 0; i < tasks.size(); i++) {
+            out.println(tasks.get(i).toString());
+        }
+        out.close();
+    }
+
+
+
     public static void markDone(String userInput) {
         if (userInput.substring(4).length() == 0) {
             System.out.println(dash + '\n' + "Sorry, which task do you wish to mark as completed?" + '\n'+ dash);
@@ -84,6 +161,11 @@ public class Duke {
             System.out.println(currTask.toString());
             System.out.println(dash);
         }
+    }
+
+    public static void addDone(int num) {
+        Task currTask = tasks.get(num - 1);
+        currTask.completeTask();
     }
 
     public static void delete(String userInput) {
@@ -122,6 +204,11 @@ public class Duke {
             System.out.println(dash);
         }
     }
+    public static void addTodo(String userInput) {
+        tasks.add(new ToDo(userInput));
+        counter += 1;
+    }
+
 
     public static void makeEvent(String userInput) {
         if (userInput.substring(5).length() == 0) {
@@ -140,6 +227,12 @@ public class Duke {
             System.out.println("You now have " + counter + " task(s) in the list.");
             System.out.println(dash);
         }
+    }
+
+    public static void addEvent(String userInput) {
+        String[] info = userInput.split("/");
+        tasks.add(new Event(info[0], info[1].substring(3)));
+        counter += 1;
     }
 
     public static void makeDeadline(String userInput) {
@@ -161,5 +254,10 @@ public class Duke {
         }
     }
 
+    public static void addDeadline(String userInput) {
+        String[] info = userInput.split("/");
+        tasks.add(new Deadline(info[0], info[1].substring(3)));
+        counter += 1;
+    }
 
 }

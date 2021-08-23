@@ -1,0 +1,3 @@
+[T][ ] eat lunch
+[T][X] dinner
+[E][ ] meeting (at: 2pm)
