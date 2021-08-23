@@ -1,9 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * This class keeps track of tasks with a deadline.
  */
 public class Deadline extends Task{
 
-    private String by;
+    private TaskDateAndTime by;
 
     /**
      * Constructor, to initialize a deadline task.
@@ -11,7 +14,7 @@ public class Deadline extends Task{
      * @param description Description of the task.
      * @param by Time to do the task by.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, TaskDateAndTime by) {
         super(description);
         this.by = by;
     }
@@ -24,6 +27,6 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + this.by + ")";
     }
 }

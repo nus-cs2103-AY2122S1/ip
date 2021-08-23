@@ -1,9 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * This class keeps track of event type tasks.
  */
 public class Event extends Task{
 
-    private String at;
+    private TaskDateAndTime at;
 
     /**
      * Constructor, to initialize an event task.
@@ -11,7 +14,7 @@ public class Event extends Task{
      * @param description Description of the task.
      * @param at What time the event is at.
      */
-    public Event(String description, String at){
+    public Event(String description, TaskDateAndTime at){
         super(description);
         this.at = at;
     }
