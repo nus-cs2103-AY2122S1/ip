@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import Duke.ui.UI;
 import Duke.exception.DukeException;
 import Duke.exception.InvalidCommandException;
 import Duke.exception.InvalidCommandParameterException;
@@ -13,7 +13,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         TaskList list = new TaskList();
 
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n");
+        UI.printGreeting();
 
         String input = scanner.nextLine();
         Scanner inputScanner = new Scanner(input);
@@ -22,11 +22,12 @@ public class Duke {
         while(!input.equals("bye")){
             try{
                 if (input.equals("list")) {
-                    list.listTasks();
+                    UI.printList(list);
                 } else if(checkForKeyword.equals("done")) {
                     if(inputScanner.hasNextInt()){
-                        int taskNumber = inputScanner.nextInt() - 1;
-                        list.markDone(taskNumber);
+                        int taskPos = inputScanner.nextInt() - 1;
+                        list.markDone(taskPos);
+                        UI.printTaskDone(list.getTask(taskPos + 1));
                     }else{
                         throw new InvalidCommandParameterException();
                     }
@@ -34,6 +35,7 @@ public class Duke {
                     if(inputScanner.hasNextInt()){
                         int taskNumber = inputScanner.nextInt() - 1;
                         list.deleteTask(taskNumber);
+
                     }else{
                         throw new InvalidCommandParameterException();
                     }
@@ -42,6 +44,7 @@ public class Duke {
                     if(inputScanner.hasNextLine()) {
                         String secondWord = inputScanner.nextLine();
                         list.addTask(new Todo(secondWord));
+                        UI.printTaskAdded(list);
                     }else{
                         throw new InvalidCommandParameterException();
                     }
@@ -52,6 +55,7 @@ public class Duke {
                         String content = contentAndDate[0];
                         String date = contentAndDate[1];
                         list.addTask(new Deadline(content, date));
+                        UI.printTaskAdded(list);
                     }else{
                         throw new InvalidCommandParameterException();
                     }
@@ -62,6 +66,7 @@ public class Duke {
                         String content = contentAndDate[0];
                         String date = contentAndDate[1];
                         list.addTask(new Event(content, date));
+                        UI.printTaskAdded(list);
                     }else {
                         throw new InvalidCommandParameterException();
                     }
@@ -76,6 +81,6 @@ public class Duke {
             inputScanner = new Scanner(input);
             checkForKeyword = inputScanner.next();
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        UI.printBye();
     }
 }
