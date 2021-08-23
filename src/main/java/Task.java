@@ -1,13 +1,9 @@
-
-public class Task{
+public class Task {
     private String name;
     private boolean isDone;
     private int index;
 
 
-    public Task(){
-
-    };
     public Task(String name, boolean isDone, int index) {
         this.name = name;
         this.isDone = isDone;
@@ -28,14 +24,5 @@ public class Task{
 
     public int getIndex() {
         return index;
-    }
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "name='" + this.name + '\'' +
-                ", isDone=" + isDone +
-                ", index=" + index +
-                '}' + '\n';
     }
 }
