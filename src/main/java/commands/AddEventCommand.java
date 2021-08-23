@@ -41,8 +41,8 @@ public class AddEventCommand extends AddCommand {
     }
 
     /**
-     * Verifies the event task details is correct. It checks that the user has used the command
-     * "-at" and that a non-empty date and time is specified. If is not correct, it prints
+     * Verifies the event task details are correct. It checks that the user has used the command
+     * "-at" or "/at" and that a non-empty date and time is specified. If is not correct, it prints
      * an error message.
      *
      * @param input The event details.

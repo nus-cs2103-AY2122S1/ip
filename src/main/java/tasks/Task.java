@@ -35,10 +35,11 @@ public abstract class Task {
 
     /**
      * Converts a task into a specified String format for saving into local storage.
-     * The format to save the strings is {type of task} | {is done} | {type of date}|
+     * The format to save the strings is {type of task} | {is done} | {type of date} |
      * {task name} | {time (if applicable)}.
      * The type of date is based on the static variables in the duke.DukeDate class. It is only applicable
-     * for deadline and event tasks.
+     * for deadline and event tasks. For other tasks with no date, a "0" is used to represent the type
+     * of date.
      *
      * @return The String format to save the task as.
      */

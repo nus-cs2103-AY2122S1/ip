@@ -25,7 +25,7 @@ public class DukeDate {
     private LocalDate date;
     private LocalDateTime dateTime;
 
-    /** Stores what type of date is stored in the duke date. Based on the constants above */
+    /** Stores what type of date is stored in the duke date. Based on the static constants above */
     private final int dateType;
 
     private DukeDate(String string) {

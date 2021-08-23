@@ -5,7 +5,8 @@ import duke.Storage;
 import java.util.ArrayList;
 
 /**
- * A class that abstracts a list of tasks set by the user.
+ * A class that abstracts a list of tasks set by the user. It also contains methods
+ * that pertain to updating the list of tasks.
  */
 public class TaskList {
 
@@ -15,8 +16,6 @@ public class TaskList {
     private int uncompletedTasks = 0;
     /** The total number of tasks in the task list. */
     private int totalTasks = 0;
-
-    public TaskList() {}
 
     /**
      * Adds a task to the task list. Prints a message to tell the user that the task has been added.

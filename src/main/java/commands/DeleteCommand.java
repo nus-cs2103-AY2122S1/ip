@@ -21,9 +21,6 @@ public class DeleteCommand implements Command {
         this.taskList = taskList;
     }
 
-    /**
-     * Removes a task from the taskList based on the user's input.
-     */
     @Override
     public boolean execute() {
         try {

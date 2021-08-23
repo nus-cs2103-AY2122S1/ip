@@ -12,7 +12,7 @@ public class Event extends Task {
     /** The time of the event */
     private final DukeDate eventTime;
 
-    public Event(String taskName, DukeDate eventTime) {
+    protected Event(String taskName, DukeDate eventTime) {
         super(taskName, Type.EVENT);
         this.eventTime = eventTime;
     }
@@ -21,7 +21,9 @@ public class Event extends Task {
      * Creates a new event task based on the input by a user.
      *
      * @param input An input in the form of a event name followed by the keyword "-at"
-     *              then followed by the timing of the event.
+     *              then followed by the timing of the event. The keyword "/at" is used
+     *              when entering a formatted date. This allows Duke to interpret the event
+     *              time as a date object.
      * @return The newly created event task.
      * @throws exceptions.DukeInvalidDateException Throws an exception when the user tries to create an tasks.Event
      * task with a specified date but formats the date wrongly.

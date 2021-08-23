@@ -6,7 +6,7 @@ import tasks.Task;
 import tasks.TaskList;
 
 /**
- * A command to add a Deadline task to Duke's taskList.
+ * A command to add a Deadline task to dus taskList.
  */
 public class AddDeadlineCommand extends AddCommand {
 
@@ -42,7 +42,7 @@ public class AddDeadlineCommand extends AddCommand {
 
     /**
      * Verifies that the deadline task details are correct. It checks that the user has used the
-     * command "-by" and that a non-empty date and time is specified. If it is not correct, it
+     * command "-by" or "/by" and that a non-empty date and time is specified. If it is not correct, it
      * prints an error message.
      *
      * @param input The deadline details.

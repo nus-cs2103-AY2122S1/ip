@@ -15,7 +15,9 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    /** Name of the file to save the task history in local storage */
+    /** Name of the file to save the task history in local storage. The file is saved in
+     * the project's root directory.
+     * */
     protected static String fileName = "taskList.txt";
 
     /**

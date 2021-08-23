@@ -6,7 +6,8 @@ import tasks.Task;
 import java.util.Scanner;
 
 /**
- * Class responsible for interacting with users.
+ * Class responsible for interacting with users by collecting user's input and displaying
+ * messages to users.
  */
 public class Ui {
 
@@ -21,9 +22,9 @@ public class Ui {
     /**
      * Starts up the chat bot. It prints a welcome message for the user and then waits
      * for a user input. It will then evaluate and execute inputs given by the user until the
-     * user ends the chat.
+     * user ends the chat. It is the main driver for the chat.
      */
-    public void start() {
+    protected void startDuke() {
         showStartMessage();
         Scanner scanner = new Scanner(System.in);
         Parser parser = new Parser(scanner);

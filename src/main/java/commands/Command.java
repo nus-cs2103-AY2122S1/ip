@@ -8,7 +8,7 @@ public interface Command {
     /**
      * Execute the respective command.
      *
-     * @return True if the command is executed successfully else false.
+     * @return True if the command is executed successfully, else false.
      */
     boolean execute();
 
