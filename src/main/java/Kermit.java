@@ -49,6 +49,10 @@ public class Kermit {
         return formattedString;
     }
 
+    private static ToDo readToDoData(File file) {
+        return;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String command = "";
@@ -78,7 +82,7 @@ public class Kermit {
         String[] strCommands = {"bye", "list", "done", "deadline", "todo", "event", "delete"};
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(strCommands));
         String[] strTasks = {"deadline", "todo", "event"};
-        ArrayList<String> tasks = new ArrayList<>(Arrays.asList(strTasks));
+        ArrayList<String> validTasks = new ArrayList<>(Arrays.asList(strTasks));
 
         ToDo list = new ToDo();
 
@@ -127,7 +131,7 @@ public class Kermit {
                         descriptionBuilder.append(word);
                     }
                     description = descriptionBuilder.toString();
-                    if (description.equals("") && tasks.contains(command)) {
+                    if (description.equals("") && validTasks.contains(command)) {
                         throw new KermitException("The description of a " + command + " cannot be empty");
                     }
 
