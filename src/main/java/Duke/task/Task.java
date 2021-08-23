@@ -9,21 +9,21 @@ abstract public class Task {
 
     public Task(String details) {
         this.details = details;
-        this.completed = false;
+        completed = false;
     }
 
     // Completes task
-    public void complete() {
-        this.completed = true;
+    public void isComplete() {
+        completed = true;
     }
 
     // Check if task is completed
     public boolean isCompleted() {
-        return this.completed;
+        return completed;
     }
 
     public String getDetails() {
-        return this.details;
+        return details;
     }
 
     abstract public LocalDate getDate();
@@ -31,7 +31,11 @@ abstract public class Task {
 
     @Override
     public String toString() {
-        String status = this.completed ? "[X]" : "[ ]";
-        return status + " " + details;
+        String status = completed
+                ? "[X]"
+                : "[ ]";
+        return status
+                + " "
+                + details;
     }
 }

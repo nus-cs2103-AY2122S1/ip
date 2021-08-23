@@ -62,24 +62,24 @@ public class TaskList {
                 break;
             }
             if (Objects.equals(done, "done")) {
-                taskList.get(taskList.size() - 1).complete();
+                taskList.get(taskList.size() - 1).isComplete();
             }
         }
     }
 
     public void addTask(Task task) {
-        this.taskList.add(task);
+        taskList.add(task);
     }
 
     public String getList() {
-        if (this.taskList.isEmpty()) {
+        if (taskList.isEmpty()) {
             return "There are no items in the task list.";
         }
         else {
             String list = "Tasks in task list:\n";
-            for (int i = 0; i < this.taskList.size(); i++) {
-                list += "\t\t" + (i + 1) + ". " + this.taskList.get(i).toString();
-                if (i != this.taskList.size() - 1) {
+            for (int i = 0; i < taskList.size(); i++) {
+                list += "\t\t" + (i + 1) + ". " + taskList.get(i).toString();
+                if (i != taskList.size() - 1) {
                     list += "\n";
                 }
             }
@@ -88,18 +88,19 @@ public class TaskList {
     }
 
     public void completeTask(int index) throws IndexOutOfBoundsException {
-        this.taskList.get(index).complete();
+        taskList.get(index)
+                .isComplete();
     }
 
     public void deleteTask(int index) throws IndexOutOfBoundsException {
-        this.taskList.remove(index);
+        taskList.remove(index);
     }
 
     public Task getTask(int index) throws IndexOutOfBoundsException {
-        return this.taskList.get(index);
+        return taskList.get(index);
     }
 
     public int getSize() {
-        return this.taskList.size();
+        return taskList.size();
     }
 }

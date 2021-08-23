@@ -16,7 +16,7 @@ public class Storage {
     }
 
     public ArrayList<String> getStorageContents() throws FileNotFoundException {
-        File f = new File(this.filePath);
+        File f = new File(filePath);
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         ArrayList<String> contents = new ArrayList<>();
         while (s.hasNext()) {
@@ -26,7 +26,7 @@ public class Storage {
     }
 
     public void writeToStorage(String content, boolean append) throws IOException {
-        FileWriter fw = new FileWriter(this.filePath, append);
+        FileWriter fw = new FileWriter(filePath, append);
         fw.write(content);
         fw.close();
     }
