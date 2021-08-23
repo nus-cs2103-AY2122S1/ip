@@ -1,9 +1,9 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
 import java.io.FileWriter;
 import java.io.File;
-import java.io.IOException;
 
 public class Duke {
     private enum TaskType {
@@ -23,7 +23,7 @@ public class Duke {
 
     private static String tasksFile = "data/tasks.txt";
 
-    public static void printLine(String content) {
+    private static void printLine(String content) {
         System.out.println(
                 "------------------------------------------------\n"
                         + "Duck says:\n"
@@ -118,7 +118,40 @@ public class Duke {
         return msg;
     }
 
+    private static String loadTasks() {
+        File f = new File(tasksFile);
+        String[] taskInfo;
+        String nextTask;
+        try {
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                nextTask = s.nextLine();
+                if (nextTask.length() == 0) {
+                    break;
+                }
+                taskInfo = nextTask.split("[|]", 4);
+                switch (taskInfo[0]) {
+                case "T":
+                    tList.addTask(new ToDo(taskInfo[2],taskInfo[1] == "c"));
+                    break;
+                case "D":
+                    tList.addTask(new Deadline(taskInfo[2], taskInfo[3], taskInfo[1] == "c"));
+                    break;
+                case "E":
+                    tList.addTask(new Event(taskInfo[2], taskInfo[3], taskInfo[1] == "c"));
+                    break;
+                default:
+                    return "you may have a corrupted/edited save file. Tasks partially loaded";
+                }
+            }
+        } catch (FileNotFoundException e) {
+            return "Save file not found";
+        }
+        return "Tasks successfully loaded!";
+    }
+
     public static void runDuck() {
+        loadTasks();
         Scanner sc = new Scanner(System.in);
         String userInput;
         Duke.greet();

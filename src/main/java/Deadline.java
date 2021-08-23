@@ -6,6 +6,11 @@ public class Deadline extends Task{
         this.time = time;
     }
 
+    public Deadline(String name, String time, boolean completed) {
+        super(name,  completed, "D");
+        this.time = time;
+    }
+
     public String getTime() {
         return time;
     }

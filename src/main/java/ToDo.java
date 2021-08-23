@@ -4,4 +4,8 @@ public class ToDo extends Task{
         super(name, "T");
     }
 
+    public ToDo(String name, boolean completed) {
+        super(name, completed, "T");
+    }
+
 }

@@ -6,6 +6,11 @@ public class Event extends Task{
         this.time = time;
     }
 
+    public Event(String name, String time, boolean completed) {
+        super(name, completed, "E");
+        this.time = time;
+    }
+
     public String getTime() {
         return time;
     }

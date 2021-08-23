@@ -14,6 +14,12 @@ public class Task {
         this.taskType = taskType;
     }
 
+    public Task(String name, boolean completed, String taskType) {
+        this.name = name;
+        this.completed = completed;
+        this.taskType = taskType;
+    }
+
     public String getName() {
         return name;
     }
@@ -32,6 +38,6 @@ public class Task {
     }
 
     public String getSaveFormat() {
-        return String.format("%s|%s|%s", this.taskType, this.completed, this.name);
+        return String.format("%s|%s|%s", this.taskType, this.completed ? "c" : "i", this.name);
     }
 }
