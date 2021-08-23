@@ -1,8 +1,13 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 
 public class Duke {
@@ -31,9 +36,16 @@ public class Duke {
                     if (taskDetails.startsWith("D ")) {
                         // [0] is the Task category, [1] is the isDone boolean, [2] is the task desc, [3] is the task dueDate
                         if (taskDetails.split(" \\| ")[1].equals("0")) {
-                            taskList.add(new Deadline(taskDetails.split(" \\| ")[2], taskDetails.split(" \\| ")[3]));
+                            //System.out.println(taskDetails.split(" \\| ")[3]);
+                            taskList.add(new Deadline(taskDetails.split(" \\| ")[2],
+                                    LocalDate.parse(taskDetails.split(" \\| ")[3].split(" ")[0]),
+                                    LocalTime.parse(taskDetails.split(" \\| ")[3].split(" ")[1])));
                         } else {
-                            taskList.add(new Deadline(taskDetails.split(" \\| ")[2], taskDetails.split(" \\| ")[3], true));
+                            //taskList.add(new Deadline(taskDetails.split(" \\| ")[2], taskDetails.split(" \\| ")[3], true));
+                            taskList.add(new Deadline(taskDetails.split(" \\| ")[2],
+                                    LocalDate.parse(taskDetails.split(" \\| ")[3].split(" ")[0]),
+                                    LocalTime.parse(taskDetails.split(" \\| ")[3].split(" ")[1]),
+                                    true));
                         }
                     } else if (taskDetails.startsWith("E ")) {
                         if (taskDetails.split(" \\| ")[1].equals("0")) {
@@ -172,9 +184,26 @@ public class Duke {
                     }
 
                     int deadlineDateIndex = nextTask.indexOf("/by ") + 4;
-                    String deadlineDesc = nextTask.substring(9, deadlineDateIndex - 4); //skip the "deadline "
-                    taskList.add(new Deadline(deadlineDesc, nextTask.substring(deadlineDateIndex)));
-                    taskListIsAddedTo = true;
+
+                    int deadlineTimeIndex = deadlineDateIndex + 11;
+
+                    try {
+                        //System.out.println(nextTask.substring(deadlineDateIndex, deadlineDateIndex + 11));
+                        //System.out.println(nextTask.substring(deadlineTimeIndex));
+                        LocalDate date = LocalDate.parse(nextTask.substring(deadlineDateIndex, deadlineDateIndex + 10));
+                        //System.out.println(date.toString());
+                        LocalTime time = LocalTime.parse(nextTask.substring(deadlineTimeIndex));
+                        //System.out.println(time.toString());
+                        String deadlineDesc = nextTask.substring(9, deadlineDateIndex - 4); //skip the "deadline "
+                        taskList.add(new Deadline(deadlineDesc, date, time));
+                        taskListIsAddedTo = true;
+
+                        //deadline do homework /by 2020-10-12 12:00
+                    }
+                    catch (DateTimeParseException e) {
+                        throw new DukeException("Please enter the date format like this: /by yyyy-mm-dd hh:mm");
+                    }
+
 
                     // Else case for all non-recognised user inputs
                 } else {

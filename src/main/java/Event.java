@@ -10,7 +10,7 @@ public class Event extends Task {
         super(desc);
         this.dueDate = at;
         this.taskType = "E";
-        this.isDone = true;
+        this.isDone = isDone;
     }
 
     @Override

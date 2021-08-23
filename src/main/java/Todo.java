@@ -10,7 +10,7 @@ public class Todo extends Task {
         super(desc);
         this.taskType = "T";
         this.dueDate = "";
-        this.isDone = true;
+        this.isDone = isDone;
     }
 
     @Override
