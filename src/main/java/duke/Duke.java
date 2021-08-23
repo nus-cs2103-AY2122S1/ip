@@ -1,17 +1,20 @@
 package duke;
 
 import duke.command.Command;
+import duke.task.Task;
+
+import java.util.ArrayList;
 
 public class Duke {
     private TaskList tasks;
     private final Ui ui;
     private final Storage storage;
     private boolean isRunning = true;
-//    private ArrayList<Task> taskArr = new ArrayList<Task>();
 
     Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        tasks = new TaskList(new ArrayList< Task >());
         try{
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
