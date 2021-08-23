@@ -41,7 +41,6 @@ public class Deadline extends Task{
         } catch (DateTimeParseException e){
             this.byDate = null;
         }
-        System.out.println(this.byDate);
     }
 
 
