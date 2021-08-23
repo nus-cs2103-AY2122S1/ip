@@ -6,10 +6,10 @@ public class BruhBot {
             + " | $$                          | $$      \n" + " | $$$$$$$   /$$$$$$  /$$   /$$| $$$$$$$ \n"
             + " | $$__  $$ /$$__  $$| $$  | $$| $$__  $$\n" + " | $$  \\ $$| $$  \\__/| $$  | $$| $$  \\ $$\n"
             + " | $$  | $$| $$      | $$  | $$| $$  | $$\n" + " | $$$$$$$/| $$      |  $$$$$$/| $$  | $$\n"
-            + " |_______/ |__/       \\______/ |__/  |__/";
+            + " |_______/ |__/       \\______/ |__/  |__/\n";
 
     /** The greeting message displayed when the bot is initialized. */
-    private static final String GREETING = String.format("What can\n%s\ndo for you today?", LOGO);
+    private static final String GREETING = String.format("What can\n\n%s\ndo for you today?\n", LOGO);
 
     /** The farewell message displayed when the bot is exited. */
     private static final String FAREWELL = "Bye. Hope to see you again soon!\n";
@@ -24,7 +24,7 @@ public class BruhBot {
      * Initializes the chatbot.
      */
     public void init() {
-        System.out.println(GREETING + '\n');
+        System.out.println(GREETING);
         listen();
     }
 
