@@ -14,6 +14,26 @@ public class Todo extends Task {
     }
 
     /**
+     * Constructor of a Todo Task.
+     *
+     * @param description
+     */
+    public Todo(String description, boolean isDone) {
+        super(description);
+        this.isDone = isDone;
+    }
+
+    /**
+     * Returns a string representation of the task to be saved in.
+     *
+     * @return The string representation of the task.
+     */
+    @Override
+    public String toSaveString() {
+        return "T" + super.toSaveString();
+    }
+    
+    /**
      * Returns the string representation of a Todo Task.
      *
      * @return The string representation of a Todo Task.

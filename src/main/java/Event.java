@@ -8,7 +8,7 @@ public class Event extends Task {
     protected String dateTime;
 
     /**
-     * Constructor of a Deadline Task.
+     * Constructor of an Event Task.
      *
      * @param description
      */
@@ -18,9 +18,30 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string representation of a Deadline Task.
+     * Constructor of an Event Task.
      *
-     * @return The string representation of a Deadline Task.
+     * @param description
+     */
+    public Event(String description, String dateTime, boolean isDone) {
+        super(description);
+        this.dateTime = dateTime;
+        this.isDone = isDone;
+    }
+
+    /**
+     * Returns a string representation of the task to be saved in.
+     *
+     * @return The string representation of the task.
+     */
+    @Override
+    public String toSaveString() {
+        return "E" + super.toSaveString() + String.format(",%s", this.dateTime);
+    }
+
+    /**
+     * Returns the string representation of an Event Task.
+     *
+     * @return The string representation of an Event Task.
      */
     @Override
     public String toString() {

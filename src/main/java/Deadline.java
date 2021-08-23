@@ -18,6 +18,27 @@ public class Deadline extends Task {
     }
 
     /**
+     * Constructor of a Deadline Task.
+     *
+     * @param description
+     */
+    public Deadline(String description, String by, boolean isDone) {
+        super(description);
+        this.by = by;
+        this.isDone = isDone;
+    }
+
+    /**
+     * Returns a string representation of the task to be saved in.
+     *
+     * @return The string representation of the task.
+     */
+    @Override
+    public String toSaveString() {
+        return "D" + super.toSaveString() + String.format(",%s", this.by);
+    }
+
+    /**
      * Returns the string representation of a Deadline Task.
      *
      * @return The string representation of a Deadline Task.

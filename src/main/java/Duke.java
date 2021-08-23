@@ -1,5 +1,11 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileWriter;
 
 /**
  * Represents a personal assistant chatbot that responds to command line inputs.
@@ -13,20 +19,81 @@ public class Duke {
      * @param tasks The list of tasks to add a new task to.
      * @param task The task to be added to the list of tasks.
      */
-    public static void addTask(ArrayList<Task> tasks, Task task) {
+    public static void addTask(List<Task> tasks, Task task) {
         tasks.add(task);
         System.out.println("Added task:\n " + task);
         int taskCount = tasks.size();
         System.out.printf("You have %d %s in the list.%n", taskCount, taskCount > 1 ? "tasks" : "task");
     }
 
+    /**
+     * Returns the list of tasks saved if the directory and file exists.
+     * If not, creates the directory and file and returns an empty list.
+     *
+     * @return List of tasks
+     */
+    public static List<Task> loadData() {
+        String path = "./data/Duke.txt";
+        List<Task> tasks = new ArrayList<>();
+
+        // Check if data directory exists
+        File directory = new File("./data");
+        File file = new File("./data/Duke.txt");
+        try {
+            if (!directory.exists()) {
+                directory.mkdir();
+                file.createNewFile();
+            } else if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                String[] taskParts = sc.nextLine().split(",");
+                String taskType = taskParts[0];
+                boolean isDone = taskParts[1].equals("X");
+                String taskDescription = taskParts[2];
+
+                switch (taskType) {
+                case "T":
+                    tasks.add(new Todo(taskDescription, isDone));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(taskDescription, taskParts[3], isDone));
+                    break;
+                case "E":
+                    tasks.add(new Event(taskDescription, taskParts[3], isDone));
+                    break;
+                default:
+                    System.out.println("Invalid task in data");
+                    break;
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return tasks;
+    }
+
+    public static void saveData(List<Task> tasks) throws IOException {
+        String path = "./data/Duke.txt";
+        FileWriter fw = new FileWriter(path, true);
+        for (Task task : tasks) {
+            fw.write(task.toSaveString());
+        }
+
+        fw.close();
+    }
+
     public static void main(String[] args) {
         System.out.println("Hello, I am Duke!\nHow may I help you?");
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
-
+        List<Task> tasks = loadData();
+//        List<Task> tasks = new ArrayList<>();
+        System.out.println(tasks);
         String command = sc.next();
-
+        
         while (!command.equals("bye")) {
             try {
                 switch (command) {
