@@ -16,6 +16,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public boolean isExpired() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "[T] " + super.toString();
     }
