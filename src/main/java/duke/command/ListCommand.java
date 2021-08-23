@@ -6,10 +6,15 @@ import duke.Duke;
  * Encapsulate a command on a DukeList.
  */
 public class ListCommand implements Command {
+    private Duke duke;
+
+    public ListCommand(Duke duke) {
+        this.duke = duke;
+    }
 
     @Override
     public void exec(String args) {
-        Duke.getList().currentListResponse().print();
+        this.duke.getList().currentListResponse().print();
     }
 
     @Override

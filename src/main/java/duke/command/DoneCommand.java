@@ -8,6 +8,11 @@ import duke.exception.InvalidArgumentException;
  * completed.
  */
 public class DoneCommand implements Command {
+    private Duke duke;
+
+    public DoneCommand(Duke duke) {
+        this.duke = duke;
+    }
 
     @Override
     public void exec(String args) {
@@ -17,7 +22,7 @@ public class DoneCommand implements Command {
         } catch (NumberFormatException exception) {
             throw new InvalidArgumentException("Invalid Input! Please enter an integer...");
         }
-        Duke.getList().markCompleted(i).print();
+        this.duke.getList().markCompleted(i).print();
     }
 
     @Override
