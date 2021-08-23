@@ -14,6 +14,8 @@ public class Ui {
 	private final TaskList taskList;
 	// Storage instance from the current HelpBot.
 	private final Storage storage;
+	// TaskFinder instance from the current HelpBot.
+	private final TaskFinder taskFinder;
 
 	// Field placeholders.
 	private static final String NAME_PLACEHOLDER = "%name%";
@@ -31,13 +33,14 @@ public class Ui {
 
 	// Command usage descriptions.
 	private static final String HELP_LIST = "view all your tasks, optionally (troublesome for me) by date";
+	private static final String HELP_FIND = "finds all tasks containing specified keyword (please no)";
 	private static final String HELP_TODO = "add a simple todo task";
 	private static final String HELP_DEADLINE = "add a task to be done by specified date/time";
 	private static final String HELP_EVENT = "add a task that happens at specified date/time";
 	private static final String HELP_DATE = "     - date format: yyyy-mm-dd";
 	private static final String HELP_TIME = "     - time format: hh:mm:ss";
 	private static final String HELP_UPDATE = "modify the date/time of task at specified index";
-	private static final String HELP_DELETE = "delete a task";
+	private static final String HELP_DELETE = "delete a task (LIFT MY BURDEN!)";
 	private static final String HELP_EXIT = "(please for the love of God) let me rest! :)";
 
 	// Message sent to user when bot starts.
@@ -48,6 +51,7 @@ public class Ui {
 			+ NEW_LINE + "Here is the myriad of ways you can inconvenience me:"
 			+ NEW_LINE + "  [] denotes optional arguments, () denotes REQUIRED arguments."
 			+ NEW_LINE + CMD_PREFIX + "'list [date]' - " + HELP_LIST
+			+ NEW_LINE + CMD_PREFIX + "'find (keyword)' - " + HELP_FIND
 			+ NEW_LINE + CMD_PREFIX + "'todo (task)' - " + HELP_TODO
 			+ NEW_LINE + CMD_PREFIX + "'deadline (task) /by (date) (time)' - " + HELP_DEADLINE
 			+ NEW_LINE + CMD_PREFIX + "'event (task) /at (date) (time)' - " + HELP_EVENT
@@ -60,7 +64,8 @@ public class Ui {
 	// Message sent to user when user requests for help.
 	private static final String HELP = "You've ALREADY forgotten the commands? How???"
 			+ NEW_LINE + "Actually, why am I even surprised... here are the commands."
-			+ NEW_LINE + CMD_PREFIX + "'list' - " + HELP_LIST
+			+ NEW_LINE + CMD_PREFIX + "'list [date]' - " + HELP_LIST
+			+ NEW_LINE + CMD_PREFIX + "'find (keyword)' - " + HELP_FIND
 			+ NEW_LINE + CMD_PREFIX + "'todo (task)' - " + HELP_TODO
 			+ NEW_LINE + CMD_PREFIX + "'deadline (task) (date/time)' - " + HELP_DEADLINE
 			+ NEW_LINE + CMD_PREFIX + "'event (task) (date/time)' - " + HELP_EVENT
@@ -70,6 +75,12 @@ public class Ui {
 			+ NEW_LINE + CMD_PREFIX + "'delete (task index)' - " + HELP_DELETE
 			+ NEW_LINE + CMD_PREFIX + "'bye' - " + HELP_EXIT;
 
+	// Message sent to user when user lists all tasks.
+	private static final String LIST = "Oh. My. God. Fine. Here are your tasks:";
+	// Message sent to user when user lists all tasks by date.
+	private static final String LIST_DATE = "Do you even realise how hard it was to do this?";
+	// Message sent to user when user finds all tasks by keyword.
+	private static final String FIND = "Why must you make life hard for me?";
 	// Message sent to user when user adds new task.
 	private static final String ADD = "Urgh, fine. Your task has been added:";
 	// Message sent to user when user deletes finished task.
@@ -95,10 +106,11 @@ public class Ui {
 	 *
 	 * @param name Name of the HelpBot.
 	 */
-	public Ui(String name, TaskList taskList, Storage storage) {
+	public Ui(String name, TaskList taskList, Storage storage, TaskFinder taskFinder) {
 		this.name = name.replace("\n", NEW_LINE);
 		this.taskList = taskList;
 		this.storage = storage;
+		this.taskFinder = taskFinder;
 	}
 
 	/**
@@ -119,7 +131,7 @@ public class Ui {
 	 * Sends user a list of all tasks.
 	 */
 	public void list() {
-		sendMessage(this.taskList.toString().replace("\n", NEW_LINE));
+		sendMessage(LIST + this.taskList.toString().replace("\n", NEW_LINE));
 	}
 
 	/**
@@ -128,7 +140,16 @@ public class Ui {
 	 * @param pair Date/time pair to send tasks to user for.
 	 */
 	public void listByDate(DateTimePair pair) {
-		sendMessage(this.taskList.listByDate(pair));
+		sendMessage(LIST_DATE + this.taskList.listByDate(pair).replace("\n", NEW_LINE));
+	}
+
+	/**
+	 * Sends user a list of all tasks containing the specified word.
+	 *
+	 * @param word Word that has to be in all returned tasks.
+	 */
+	public void findByWord(String word) {
+		sendMessage(FIND + this.taskFinder.findTasksByWord(word).replace("\n", NEW_LINE));
 	}
 
 	/**

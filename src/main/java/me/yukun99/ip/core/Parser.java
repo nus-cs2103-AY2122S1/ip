@@ -6,6 +6,7 @@ import me.yukun99.ip.commands.Command;
 import me.yukun99.ip.commands.DeleteCommand;
 import me.yukun99.ip.commands.DoneCommand;
 import me.yukun99.ip.commands.ExitCommand;
+import me.yukun99.ip.commands.FindCommand;
 import me.yukun99.ip.commands.HelpCommand;
 import me.yukun99.ip.commands.ListCommand;
 import me.yukun99.ip.commands.UpdateCommand;
@@ -65,6 +66,11 @@ public class Parser {
 			String date = message.replace("list ", "");
 			String[] args = {date};
 			command = new ListCommand(args, this.taskList, this.ui);
+		}
+		if (message.startsWith("find ")) {
+			String word = message.replaceFirst("find ", "");
+			String[] args = word.split(" ");
+			command = new FindCommand(args, this.taskList, this.ui);
 		}
 		if (message.startsWith("todo ")) {
 			String name = message.replaceFirst("todo ", "");

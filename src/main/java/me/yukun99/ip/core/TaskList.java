@@ -18,12 +18,14 @@ public class TaskList {
 	private final List<Task> taskList;
 	private final Map<DateTimePair, List<Task>> pairTaskMap = new HashMap<>();
 	private final Map<Task, DateTimePair> taskPairMap = new HashMap<>();
+	private final TaskFinder taskFinder;
 
 	/**
 	 * Constructor for a TaskList instance.
 	 */
-	public TaskList() {
+	public TaskList(TaskFinder taskFinder) {
 		this.taskList = new ArrayList<>();
+		this.taskFinder = taskFinder;
 	}
 
 	/**
@@ -35,6 +37,7 @@ public class TaskList {
 	 */
 	public void addTask(Task task, DateTimePair dateTimePair) {
 		this.taskList.add(task);
+		task.updateFinder(this.taskFinder, false);
 		if (dateTimePair != null) {
 			updateDateTime(task, dateTimePair);
 		}
@@ -112,7 +115,7 @@ public class TaskList {
 	 * @return String representation of the tasks on the specified date.
 	 */
 	public String listByDate(DateTimePair pair) {
-		StringBuilder message = new StringBuilder("Do you even realise how hard it was to do this?");
+		StringBuilder message = new StringBuilder("\nHere are your tasks on " + pair.toString() + ".");
 		List<Task> tasks = new ArrayList<>();
 		for (Task task : taskPairMap.keySet()) {
 			DateTimePair other = taskPairMap.get(task);
@@ -141,6 +144,7 @@ public class TaskList {
 			int index = Integer.parseInt(strIndex) - 1;
 			Task deleted = this.taskList.get(index);
 			this.taskList.remove(index);
+			deleted.updateFinder(this.taskFinder, true);
 			return deleted;
 		} catch (IndexOutOfBoundsException | NumberFormatException e) {
 			throw new HelpBotInvalidTaskException(e, "delete", strIndex + "");
@@ -176,7 +180,7 @@ public class TaskList {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder message = new StringBuilder("Oh. My. God. Fine. Here are your tasks:");
+		StringBuilder message = new StringBuilder();
 		if (this.taskList.size() == 0) {
 			message
 					.append("\n  Oh I'm sorry, were you expecting ME to make you a todo list, you lazy sod?")
