@@ -1,8 +1,5 @@
 package duke;
 
-import duke.DukeTodoException;
-import duke.Task;
-
 public class Todo extends Task {
 
     public Todo(String name) throws DukeTodoException {

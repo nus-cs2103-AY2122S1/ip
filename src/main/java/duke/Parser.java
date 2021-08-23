@@ -1,10 +1,7 @@
 package duke;
 
-import duke.*;
-
 import java.io.IOException;
 import java.time.DateTimeException;
-
 import static java.lang.Integer.parseInt;
 
 public class Parser {
@@ -75,8 +72,6 @@ public class Parser {
                 + List.todos.size()
                 + " task"
                 + (List.todos.size() == 1 ? "" : "s")
-                + " in the list"); // will take care of when it is 1
+                + " in the list");
     }
-
-
 }

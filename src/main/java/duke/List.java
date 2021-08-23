@@ -1,11 +1,7 @@
 package duke;
 
-import duke.DukeException;
-import duke.Task;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import static java.lang.Integer.parseInt;
 
 public class List extends ArrayList<Task> {
     public static ArrayList<Task> todos;
@@ -35,14 +31,4 @@ public class List extends ArrayList<Task> {
             System.out.println(i + 1 + ". " + todos.get(i).toString());
         }
     }
-
-
-
-
-
-
-
-
-
-
 }

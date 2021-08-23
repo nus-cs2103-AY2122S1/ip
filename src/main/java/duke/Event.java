@@ -1,8 +1,5 @@
 package duke;
 
-import duke.DukeEventException;
-import duke.Task;
-
 public class Event extends Task {
     private String time;
 

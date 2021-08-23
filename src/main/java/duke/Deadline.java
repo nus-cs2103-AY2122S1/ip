@@ -1,11 +1,11 @@
 package duke;
 
 import java.time.DateTimeException;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 public class Deadline extends Task {
-    LocalDate deadline;
+    private LocalDate deadline;
 
     public Deadline(String name) throws DukeDeadlineException, DateTimeException {
         super(name.substring(0, name.indexOf(" /by ") + 1));
