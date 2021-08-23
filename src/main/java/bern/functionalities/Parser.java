@@ -84,4 +84,8 @@ public class Parser {
     public boolean isList(String input) {
         return input.equals("list");
     }
+
+    public boolean isFind(String input) {
+        return input.length() >= 4 && input.substring(0, 4).equals("find");
+    }
 }
