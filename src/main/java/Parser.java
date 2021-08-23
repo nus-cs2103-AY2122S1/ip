@@ -1,0 +1,85 @@
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Parser {
+    /**
+     * Represents the action command keyed in by the user.
+     */
+    public enum Action {
+        LIST("list"),
+        BYE("bye"),
+        DONE("done"),
+        TASK("task"),
+        DELETE("delete"),
+        ERRORS("error");
+
+        private final String actionCommand;
+
+        private Action(String actionCommmand) {
+            this.actionCommand = actionCommmand;
+        }
+
+        /**
+         * Returns the Action type ENUM for each string
+         * @param s action word typed in by user
+         * @return Action that corresponds to the user's entry
+         */
+        public static Action getAction(String s) {
+            for (Action a : values()) {
+                if (a.actionCommand.equals(s)) {
+                    return a;
+                }
+            }
+            return ERRORS;
+        }
+    }
+
+    private static String getFirstWord(String s) {
+        String[] arrString = s.split(" ", 2);
+        return arrString[0];
+    }
+
+    private static int getSecondNum(String s) throws DukeIncorrectInputs {
+        String[] arrString = s.split(" ", 2);
+        try {
+            String second = arrString[1];
+            Integer.parseInt(second);
+        } catch (IllegalArgumentException e) {
+            throw new DukeDoneIncorrectArgument();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeDoneIncorrectArgument();
+        }
+        return Integer.parseInt(arrString[1]);
+    }
+
+    public static Command parse(String userInput, Duke d, Scanner sc) throws IOException, DukeException {
+        String firstWord = Parser.getFirstWord(userInput);
+        firstWord = firstWord.equals("todo") || firstWord.equals("event") || firstWord.equals("deadline")
+                ? "task" : firstWord;
+        Action actionCommand = Action.getAction(firstWord);
+
+        Command c = null;
+
+        switch (actionCommand) {
+        case BYE:
+            c = new ByeCommand(d, sc);
+            break;
+        case LIST:
+            c = new ListCommand(d, sc);
+            break;
+        case DONE:
+            c = new DoneCommand(d, sc, Parser.getSecondNum(userInput));
+            break;
+        case DELETE:
+            c = new DeleteCommand(d, sc, Parser.getSecondNum(userInput));
+            break;
+        case TASK:
+            c = new TaskCommand(d, sc, userInput);
+            break;
+        case ERRORS:
+            throw new DukeIncorrectCommandWord(new IllegalArgumentException());
+        }
+
+        return c;
+    }
+}
