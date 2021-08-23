@@ -16,6 +16,7 @@ public class Storage {
     private void createTaskFile() {
         try {
             File taskFile = new File(taskFilePath);
+            taskFile.getParentFile().mkdirs();
             taskFile.createNewFile();
         } catch (IOException exception) {
             // TODO: handle IOException?

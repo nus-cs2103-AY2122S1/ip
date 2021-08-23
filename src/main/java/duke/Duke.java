@@ -35,6 +35,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("src/data.txt").run();
+        new Duke("data/tasks.txt").run();
     }
 }
