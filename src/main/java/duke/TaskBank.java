@@ -50,6 +50,20 @@ public class TaskBank {
         this.storage.writeToDisk(this.taskList);
     }
 
+    public ArrayList<Task> searchTasks(String query) {
+        query = query.split(" ", 2)[1].trim();
+
+        ArrayList ret = new ArrayList<Task>();
+
+        for(Task t: this.taskList) {
+            if (t.getDescription().contains(query)) {
+                ret.add(t);
+            }
+        }
+
+        return ret;
+    }
+
     public ArrayList<Task> getTasks() {
         return new ArrayList<>(this.taskList);
     }
