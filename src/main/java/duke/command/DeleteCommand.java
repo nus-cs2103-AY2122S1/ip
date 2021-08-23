@@ -5,7 +5,7 @@ import duke.core.TaskList;
 import duke.core.Ui;
 import duke.exception.DukeException;
 
-public class DeleteCommand implements Command {
+public class DeleteCommand implements Commandable {
     private String description;
 
     public DeleteCommand(String description) {

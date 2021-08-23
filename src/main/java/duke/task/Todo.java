@@ -1,7 +1,8 @@
 package duke.task;
 
 /**
- * Encapsulates a task that solely has a description
+ * <h1> Todo </h1>
+ * Encapsulates a task that solely has a description.
  *
  * @author Clifford
  */
@@ -13,6 +14,11 @@ public class Todo extends Task {
         super(description, taskSymbol);
     }
 
+    /**
+     * converts a Todo object to a formatted text to be saved in storage.
+     *
+     * @return text representation of Todo in storage files.
+     */
     @Override
     public String convertToText() {
         return super.convertToText();

@@ -2,6 +2,13 @@ package duke.task;
 
 import duke.exception.DukeException;
 
+/**
+ * <h1> Task </h1>
+ * Encapsulates a task that can be marked as done and convert itself
+ * to text to be saved and vice versa.
+ *
+ * @author Clifford
+ */
 abstract public class Task {
     protected String description;
     protected boolean isDone;
@@ -16,6 +23,13 @@ abstract public class Task {
         this.taskSymbol = taskSymbol;
     }
 
+    /**
+     * Converts a text from storage file to a Task, otherwise throws DukeException.
+     *
+     * @param text the text representation of a task in storage file
+     * @return the corresponding type of task based on the text provided
+     * @throws DukeException if the text representation in storage file does not match any tasks
+     */
     public static Task createTaskFromText(String text) throws DukeException {
         String[] taskInformation = text.split(divider);
         String taskType = taskInformation[0].trim();
@@ -35,11 +49,11 @@ abstract public class Task {
                 changeStatusFromText(event, taskStatus);
                 return event;
             default:
-                throw new DukeException("duke.task.Task symbol from text is not recognised.");
+                throw new DukeException("Task symbol from text is not recognised.");
         }
     }
 
-    public static Task changeStatusFromText(Task task, String symbol) {
+    private static Task changeStatusFromText(Task task, String symbol) {
         if(symbol.equals(doneStatus)) {
             task.markAsDone();
         }
@@ -54,6 +68,11 @@ abstract public class Task {
         return divider;
     }
 
+    /**
+     * converts a Task object to a formatted text to be saved in storage.
+     *
+     * @return text representation of Task in storage files.
+     */
     public String convertToText() {
         StringBuilder sb = new StringBuilder();
         return sb
@@ -66,9 +85,9 @@ abstract public class Task {
     }
 
     /**
-     * produces a graphical way of whether a task is done or not.
+     * produces a graphical icon of whether a task is done or not.
      *
-     * @return a graphical way of whether a task is done or not
+     * @return a graphical icon of whether a task is done or not
      */
     public String getStatusIcon() {
         return (isDone ? doneStatus : notDoneStatus);

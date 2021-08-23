@@ -4,7 +4,7 @@ import duke.core.Storage;
 import duke.core.TaskList;
 import duke.core.Ui;
 
-public class ListCommand implements Command {
+public class ListCommand implements Commandable {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return tasks.printTasks();
