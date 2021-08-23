@@ -12,6 +12,8 @@ public class Parser {
             return new ListCommand(input);
         } else if (input.startsWith("done ")) {
             return new DoneCommand(input);
+        } else if (input.startsWith("find ")) {
+            return new FindCommand(input);
         } else if (input.startsWith("deadline ")) {
             return new AddDeadlineCommand(input);
         } else if (input.startsWith("todo ")) {

@@ -1,8 +1,9 @@
 package jwbot.ui;
 
-import jwbot.data.task.Task;
 import jwbot.data.TaskList;
+import jwbot.data.task.Task;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -45,6 +46,13 @@ public class Ui {
             System.out.println(i + ". " + tasks.getTask(i - 1));
         }
         System.out.println("Bro, now you have " + tasks.getSize() + " task(s) stored in the list!");
+    }
+
+    public void showSearchList(List<Task> searchList) {
+        System.out.println("OK bro, the matching tasks in your list are: ");
+        for (int i = 1; i < searchList.size() + 1; i++) {
+            System.out.println(i + ". " + searchList.get(i - 1));
+        }
     }
 
     public void showDoneSuccessMessage(Task doneTask) {
