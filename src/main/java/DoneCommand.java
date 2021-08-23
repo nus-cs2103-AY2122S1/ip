@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the general done command.
+ */
 public class DoneCommand extends Command {
     private final int index;
 

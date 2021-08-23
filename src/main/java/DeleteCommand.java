@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the general delete command.
+ */
 public class DeleteCommand extends Command {
     private final int index;
 

@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the general task command.
+ */
 public class TaskCommand extends Command {
     private String description;
     public TaskCommand(Duke duke, Scanner sc, String description) {
