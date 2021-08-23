@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -32,7 +34,7 @@ public class Duke {
                     if (input.equals("bye")) {
                         break;
                     }
-                    Level7(input, tasks);
+                    Level8(input, tasks);
             }
             System.out.println(displayLabel(byeLabel));
         } catch (DukeException | IOException e) {
@@ -81,7 +83,6 @@ public class Duke {
         ArrayList<String> fileInfo = new ArrayList<>();
         Scanner sc = new Scanner(f);
         while (sc.hasNext()) {
-            //System.out.println(sc.nextLine());
             fileInfo.add(sc.nextLine());
         }
         return fileInfo;
@@ -107,6 +108,52 @@ public class Duke {
             tasks.add(newTask);
         }
         return tasks;
+    }
+
+    public static Task getDateAndTime(String[] info, String input, String type) {
+        String[] potentialDate = info[1].split(" ");
+        LocalDate date = null;
+        if (!getTime(potentialDate[0]).equals("")) {
+            info[1] = getTime(potentialDate[0]);
+        } else if (potentialDate.length > 1 &&
+                !getTime(potentialDate[1]).equals("")) {
+            potentialDate[1] = getTime(potentialDate[1]);
+            info[1] = potentialDate[0] + " " + potentialDate[1];
+        }
+        if (potentialDate.length > 1 && potentialDate[0].contains("/")) {
+            date = LocalDate.parse(parseDates(potentialDate[0]));
+        }
+        if (type.equals("deadline")) {
+            if (date != null) {
+                return new Deadline(info[0], date, potentialDate[1]);
+            } else {
+                return new Deadline(info[0], info[1]);
+            }
+        } else {
+            if (date != null) {
+                return new Event(info[0], date, potentialDate[1]);
+            } else {
+                return new Event(info[0], info[1]);
+            }
+        }
+    }
+
+    public static String parseDates(String date) {
+        String[] sep = date.split("/");
+        if (Integer.parseInt(sep[0]) < 10) {
+            sep[0] = "0" + sep[0];
+        }
+        return sep[2] + "-" + sep[1] + "-" + sep[0];
+    }
+
+    public static String getTime(String time) {
+        try {
+             int timeVal = Integer.parseInt(time) / 100;
+             if (timeVal > 12) { timeVal -= 12; }
+             return Integer.toString(timeVal) + "pm";
+        } catch (NumberFormatException e) {
+            return "";
+        }
     }
 
     /* adds the information that is inputted,
@@ -146,11 +193,11 @@ public class Duke {
                 String info = input.substring(5);
                 tasks.add(new ToDo(info));
             } else if (input.contains("deadline")) {
-                String[] info = input.substring(9).split("/by");
-                tasks.add(new Deadline(info[0], info[1]));
+                String[] info = input.substring(9).split(" /by ");
+                tasks.add(getDateAndTime(info, input, "deadline"));
             } else if (input.contains("event")) {
-                String[] info = input.substring(6).split("/at");
-                tasks.add(new Event(info[0], info[1]));
+                String[] info = input.substring(6).split(" /at ");
+                tasks.add(getDateAndTime(info, input, "event"));
             } else {
                 tasks.add(new Task(input));
             }
@@ -191,11 +238,10 @@ public class Duke {
             }
     }
 
-    public static void Level7(String input, ArrayList<Task> tasks) throws DukeException, IOException {
+    public static void Level8(String input, ArrayList<Task> tasks) throws DukeException, IOException {
         Level6(input, tasks);
         String text = "";
         FileWriter fw = new FileWriter("/Users/ravi57004/ip/src/main/java/Tasks.txt", false);
-
         if (!input.equals("bye")) {
                 for (Task task: tasks) {
                     String doneStr = "No";
@@ -206,10 +252,10 @@ public class Duke {
                         text += "T ~ " + doneStr + " ~ " + task.newTask + "\n";
                     } else if (task instanceof Deadline) {
                         Deadline dl = (Deadline) task;
-                        text += "D ~ " + doneStr + " ~ " + task.newTask + " ~ " + dl.deadLine + "\n";
+                        text += "D ~ " + doneStr + " ~ " + task.newTask + " ~ " + dl.getDeadLine() + "\n";
                     } else if (task instanceof Event) {
                         Event ev = (Event) task;
-                        text += "D ~ " + doneStr + " ~ " + task.newTask + " ~ " + ev.timing + "\n";
+                        text += "E ~ " + doneStr + " ~ " + task.newTask + " ~ " + ev.getEvent() + "\n";
                     } else {
                         text += doneStr + " ~ " + task.newTask + "\n";
                     }
@@ -217,7 +263,7 @@ public class Duke {
             }
         fw.write(text);
         fw.close();
-       }
+    }
 }
 
 
@@ -279,22 +325,43 @@ class Deadline extends Task {
 
     protected String newTask;
     protected String deadLine;
+    protected LocalDate date;
 
     public Deadline(String newTask, String deadLine) {
         super(newTask);
         this.deadLine = deadLine;
     }
 
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + "(by:" + deadLine + ")";
+    public Deadline(String newTask, LocalDate date,  String deadLine) {
+        super(newTask);
+        this.date = date;
+        this.deadLine = deadLine;
     }
 
+    public String getDeadLine() {
+        if (date != null) {
+            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + deadLine;
+        } else {
+            return deadLine;
+        }
+    }
+
+    @Override
+    public String toString() {
+        if (date == null) {
+            return "[D]" + super.toString() + " (by: " + deadLine + ")";
+        } else {
+            return "[D]" + super.toString() + " (by: " +
+                    date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + deadLine + ")";
+        }
+
+    }
 }
 
 class Event extends Task {
 
     protected String newTask;
+    protected LocalDate date;
     protected String timing;
 
     public Event(String newTask, String timing) {
@@ -302,9 +369,29 @@ class Event extends Task {
         this.timing = timing;
     }
 
+    public Event(String newTask, LocalDate date,  String timing) {
+        super(newTask);
+        this.date = date;
+        this.timing = timing;
+    }
+
+    public String getEvent() {
+        if (date != null) {
+            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + timing;
+        } else {
+            return timing;
+        }
+    }
+
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + timing + ")";
+        if (date == null) {
+            return "[E]" + super.toString() + " (at: " + timing + ")";
+        } else {
+            return "[E]" + super.toString() + " (at: " +
+                    date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + timing + ")";
+        }
     }
 
 }
