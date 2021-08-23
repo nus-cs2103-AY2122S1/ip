@@ -121,6 +121,7 @@ public class Duke {
 
             if (message.trim().equals("bye")) {
                 System.out.println(Duke.friendGreeting + "See you again, my friend!");
+                System.exit(0);
                 break;
             }
 
@@ -163,6 +164,11 @@ public class Duke {
                             String description = task.description;
                             if (!task.isDone) {
                                 task.markAsDone();
+                                try {
+                                    saveListToFile();
+                                } catch (IOException e) {
+                                    System.out.println("File not found");
+                                }
                                 System.out.println(friendGreeting + "Hooray! You've completed task \n[X] " + description);
                             } else {
                                 System.out.println(description + " has already been done! :)");

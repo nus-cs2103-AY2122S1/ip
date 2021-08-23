@@ -8,9 +8,6 @@ done    2
 todo
 deadline
 event
-todo
-deadline
-event
 .todo
 ssiudhtodo
 deadline /by
@@ -23,7 +20,8 @@ event flight /at 3.45pm
 deadline assignment /by 1pm tomorrow
 deadline       project     /by        noon
 event    exam        /at  9.30am in 6 days
-delete
+event booksale /at 2021-08-08
+deadline presentation /by 2021-08-02
 delete
 delete 31
 delete31
