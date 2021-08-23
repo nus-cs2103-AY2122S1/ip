@@ -1,16 +1,72 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
-    protected String date;
+    protected LocalDateTime startDateTime;
+    protected LocalDateTime endDateTime;
     protected String taskType = "[E]";
+    private boolean isDateOnly = false;
 
-    public Event(String description, String date) {
+    public static Event of(String description, String input) throws DukeException {
+
+        String exceptionMessage = "Wrong format for event timeline Sir/Mdm. Please use either formats:\n"
+                + "'DATE TIME to DATE TIME' or 'DATE to DATE' \n"
+                + "Hint: Use 'to' keyword and ensure that start and end date either both\n"
+                + "include TIME or both exclude TIME\n"
+                + "Examples for DATE TIME to DATE TIME: 13/2/2019 1800 to 13/2/2019 1900\n"
+                + "Examples for DATE: 13/2/2019 to 14/2/2019";
+
+        String[] dateTimes = input.split("to");
+        if (dateTimes.length != 2) {
+            throw new DukeException(exceptionMessage);
+        }
+
+        LocalDateTime startDate;
+        LocalDateTime endDate;
+        boolean isDateOnly;
+
+        String[] dateTimeStartInput = dateTimes[0].trim().split(" ");
+        String[] dateTimeEndInput = dateTimes[1].trim().split(" ");
+        if (dateTimeStartInput.length == 1 && dateTimeEndInput.length == 1) {
+
+            startDate = DateTime.parseDateAndTime(dateTimeStartInput[0], "00:00");
+            endDate = DateTime.parseDateAndTime(dateTimeEndInput[0], "00:00");
+            isDateOnly = true;
+
+        } else if (dateTimeStartInput.length == 2 && dateTimeStartInput.length == 2) {
+            startDate = DateTime.parseDateAndTime(dateTimeStartInput[0], dateTimeStartInput[1]);
+            endDate = DateTime.parseDateAndTime(dateTimeEndInput[0], dateTimeEndInput[1]);
+            isDateOnly = false;
+        } else {
+            throw new DukeException(exceptionMessage);
+        }
+
+        if (startDate.compareTo(endDate) > 0) {
+            throw new DukeException("The end date must come after the start date Sir/Mdm!");
+        }
+
+        return new Event(description, startDate, endDate, isDateOnly);
+
+    }
+
+
+    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(description);
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+    }
 
-        this.date = date;
+
+    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime, boolean isDateOnly) {
+        super(description);
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+        this.isDateOnly = isDateOnly;
     }
 
     @Override
     public String toString() {
-        return taskType + super.toString() + " (at: " + this.date + ")";
+        return taskType + super.toString() + " (at: " + DateTime.dateTimeToString(this.startDateTime, isDateOnly)
+                + " to " + DateTime.dateTimeToString(this.endDateTime, isDateOnly) + ")";
     }
 
 

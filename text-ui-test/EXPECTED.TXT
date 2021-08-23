@@ -14,25 +14,106 @@ Pardon me Sir/Mdm, but I do not understand.
 Please provide a date of the deadline Sir/Mdm.
 
 Understood Sir/Mdm, I have added the indicated task: 
-   [D][ ] assignment (by: Monday 5pm)
+   [D][ ] assignment (by: 24 November 2021 15:00)
 Now you have 3 tasks.
+
+Understood Sir/Mdm, I have added the indicated task: 
+   [D][ ] project (by: 2 February 2021)
+Now you have 4 tasks.
+
+Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE
+or as date and time: DATE TIME
+Accepted formats for DATE: YYYY-MM-DD, DD/MM/YYYY
+Accepted formats for TIME (24H format): TT:TT, TTTT
+Examples for DATE TIME: 13/2/2019 1800, 13/2/2019 18:00, 2019-02-13 1800,
+2019-02-13 18:00
+Examples for DATE: 13/2/2019, 2019-02-13
+
+Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE
+or as date and time: DATE TIME
+Accepted formats for DATE: YYYY-MM-DD, DD/MM/YYYY
+Accepted formats for TIME (24H format): TT:TT, TTTT
+Examples for DATE TIME: 13/2/2019 1800, 13/2/2019 18:00, 2019-02-13 1800,
+2019-02-13 18:00
+Examples for DATE: 13/2/2019, 2019-02-13
+
+Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE
+or as date and time: DATE TIME
+Accepted formats for DATE: YYYY-MM-DD, DD/MM/YYYY
+Accepted formats for TIME (24H format): TT:TT, TTTT
+Examples for DATE TIME: 13/2/2019 1800, 13/2/2019 18:00, 2019-02-13 1800,
+2019-02-13 18:00
+Examples for DATE: 13/2/2019, 2019-02-13
+
+Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE
+or as date and time: DATE TIME
+Accepted formats for DATE: YYYY-MM-DD, DD/MM/YYYY
+Accepted formats for TIME (24H format): TT:TT, TTTT
+Examples for DATE TIME: 13/2/2019 1800, 13/2/2019 18:00, 2019-02-13 1800,
+2019-02-13 18:00
+Examples for DATE: 13/2/2019, 2019-02-13
 
 Please provide a timeline of the event Sir/Mdm.
 
 Understood Sir/Mdm, I have added the indicated task: 
-   [E][ ] exam (at: 23/11/21)
-Now you have 4 tasks.
+   [E][ ] exam (at: 23 November 2021 to 25 November 2021)
+Now you have 5 tasks.
 
 Understood Sir/Mdm, I have added the indicated task: 
-   [E][ ] test (at: 23/11/21)
-Now you have 5 tasks.
+   [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
+Now you have 6 tasks.
+
+The end date must come after the start date Sir/Mdm!
+
+Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE
+or as date and time: DATE TIME
+Accepted formats for DATE: YYYY-MM-DD, DD/MM/YYYY
+Accepted formats for TIME (24H format): TT:TT, TTTT
+Examples for DATE TIME: 13/2/2019 1800, 13/2/2019 18:00, 2019-02-13 1800,
+2019-02-13 18:00
+Examples for DATE: 13/2/2019, 2019-02-13
+
+Wrong format for event timeline Sir/Mdm. Please use either formats:
+'DATE TIME to DATE TIME' or 'DATE to DATE' 
+Hint: Use 'to' keyword and ensure that start and end date either both
+include TIME or both exclude TIME
+Examples for DATE TIME to DATE TIME: 13/2/2019 1800 to 13/2/2019 1900
+Examples for DATE: 13/2/2019 to 14/2/2019
+
+Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE
+or as date and time: DATE TIME
+Accepted formats for DATE: YYYY-MM-DD, DD/MM/YYYY
+Accepted formats for TIME (24H format): TT:TT, TTTT
+Examples for DATE TIME: 13/2/2019 1800, 13/2/2019 18:00, 2019-02-13 1800,
+2019-02-13 18:00
+Examples for DATE: 13/2/2019, 2019-02-13
+
+Wrong format for event timeline Sir/Mdm. Please use either formats:
+'DATE TIME to DATE TIME' or 'DATE to DATE' 
+Hint: Use 'to' keyword and ensure that start and end date either both
+include TIME or both exclude TIME
+Examples for DATE TIME to DATE TIME: 13/2/2019 1800 to 13/2/2019 1900
+Examples for DATE: 13/2/2019 to 14/2/2019
+
+Wrong format for date Sir/Mdm. Examples of dates accepted: 2/12/2019, 2019-12-02
+
+Wrong format for date Sir/Mdm. Examples of dates accepted: 2/12/2019, 2019-12-02
+
+Here are the deadlines and events that match the date Sir/Mdm:
+1. [D][ ] project (by: 2 February 2021)
+
+Here are the deadlines and events that match the date Sir/Mdm:
+1. [D][ ] assignment (by: 24 November 2021 15:00)
+2. [E][ ] exam (at: 23 November 2021 to 25 November 2021)
+3. [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
 
 Here are your tasks Sir/Mdm:
 1. [T][ ] check email
 2. [T][ ] feed momo
-3. [D][ ] assignment (by: Monday 5pm)
-4. [E][ ] exam (at: 23/11/21)
-5. [E][ ] test (at: 23/11/21)
+3. [D][ ] assignment (by: 24 November 2021 15:00)
+4. [D][ ] project (by: 2 February 2021)
+5. [E][ ] exam (at: 23 November 2021 to 25 November 2021)
+6. [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
 
 Good job Sir/Mdm! I shall mark this task as complete:
    [T][X] check email
@@ -43,53 +124,59 @@ Good job Sir/Mdm! I shall mark this task as complete:
 Here are your tasks Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
-3. [D][ ] assignment (by: Monday 5pm)
-4. [E][ ] exam (at: 23/11/21)
-5. [E][ ] test (at: 23/11/21)
+3. [D][ ] assignment (by: 24 November 2021 15:00)
+4. [D][ ] project (by: 2 February 2021)
+5. [E][ ] exam (at: 23 November 2021 to 25 November 2021)
+6. [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
 
 Good job Sir/Mdm! I shall mark this task as complete:
-   [D][X] assignment (by: Monday 5pm)
+   [D][X] assignment (by: 24 November 2021 15:00)
 
 Good job Sir/Mdm! I shall mark this task as complete:
-   [E][X] exam (at: 23/11/21)
+   [D][X] project (by: 2 February 2021)
 
 Good job Sir/Mdm! I shall mark this task as complete:
-   [E][X] test (at: 23/11/21)
+   [E][X] exam (at: 23 November 2021 to 25 November 2021)
 
 Here are your tasks Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
-3. [D][X] assignment (by: Monday 5pm)
-4. [E][X] exam (at: 23/11/21)
-5. [E][X] test (at: 23/11/21)
+3. [D][X] assignment (by: 24 November 2021 15:00)
+4. [D][X] project (by: 2 February 2021)
+5. [E][X] exam (at: 23 November 2021 to 25 November 2021)
+6. [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
 
 Please specify a task you would like marked as done Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
-3. [D][X] assignment (by: Monday 5pm)
-4. [E][X] exam (at: 23/11/21)
-5. [E][X] test (at: 23/11/21)
+3. [D][X] assignment (by: 24 November 2021 15:00)
+4. [D][X] project (by: 2 February 2021)
+5. [E][X] exam (at: 23 November 2021 to 25 November 2021)
+6. [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
 
 Please enter a proper number within this range Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
-3. [D][X] assignment (by: Monday 5pm)
-4. [E][X] exam (at: 23/11/21)
-5. [E][X] test (at: 23/11/21)
+3. [D][X] assignment (by: 24 November 2021 15:00)
+4. [D][X] project (by: 2 February 2021)
+5. [E][X] exam (at: 23 November 2021 to 25 November 2021)
+6. [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
 
 Please specify a task within this range Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
-3. [D][X] assignment (by: Monday 5pm)
-4. [E][X] exam (at: 23/11/21)
-5. [E][X] test (at: 23/11/21)
+3. [D][X] assignment (by: 24 November 2021 15:00)
+4. [D][X] project (by: 2 February 2021)
+5. [E][X] exam (at: 23 November 2021 to 25 November 2021)
+6. [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
 
 Please enter a proper number within this range Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
-3. [D][X] assignment (by: Monday 5pm)
-4. [E][X] exam (at: 23/11/21)
-5. [E][X] test (at: 23/11/21)
+3. [D][X] assignment (by: 24 November 2021 15:00)
+4. [D][X] project (by: 2 February 2021)
+5. [E][X] exam (at: 23 November 2021 to 25 November 2021)
+6. [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
 
 Please provide a description of the todo Sir/Mdm.
 
@@ -116,39 +203,47 @@ Please provide a description of the deadline Sir/Mdm.
 Please specify a task you would like to delete Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
-3. [D][X] assignment (by: Monday 5pm)
-4. [E][X] exam (at: 23/11/21)
-5. [E][X] test (at: 23/11/21)
+3. [D][X] assignment (by: 24 November 2021 15:00)
+4. [D][X] project (by: 2 February 2021)
+5. [E][X] exam (at: 23 November 2021 to 25 November 2021)
+6. [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
 
 Please enter a proper number within this range Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
-3. [D][X] assignment (by: Monday 5pm)
-4. [E][X] exam (at: 23/11/21)
-5. [E][X] test (at: 23/11/21)
+3. [D][X] assignment (by: 24 November 2021 15:00)
+4. [D][X] project (by: 2 February 2021)
+5. [E][X] exam (at: 23 November 2021 to 25 November 2021)
+6. [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
 
 Much obliged Sir/Mdm! I shall delete this task:
-   [E][X] test (at: 23/11/21)
-Now you have 4 tasks.
+   [E][X] exam (at: 23 November 2021 to 25 November 2021)
+Now you have 5 tasks.
 
 Please enter a proper number within this range Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
-3. [D][X] assignment (by: Monday 5pm)
-4. [E][X] exam (at: 23/11/21)
+3. [D][X] assignment (by: 24 November 2021 15:00)
+4. [D][X] project (by: 2 February 2021)
+5. [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
 
 Please specify a task within this range Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
-3. [D][X] assignment (by: Monday 5pm)
-4. [E][X] exam (at: 23/11/21)
+3. [D][X] assignment (by: 24 November 2021 15:00)
+4. [D][X] project (by: 2 February 2021)
+5. [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
 
 Much obliged Sir/Mdm! I shall delete this task:
-   [E][X] exam (at: 23/11/21)
+   [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
+Now you have 4 tasks.
+
+Much obliged Sir/Mdm! I shall delete this task:
+   [D][X] project (by: 2 February 2021)
 Now you have 3 tasks.
 
 Much obliged Sir/Mdm! I shall delete this task:
-   [D][X] assignment (by: Monday 5pm)
+   [D][X] assignment (by: 24 November 2021 15:00)
 Now you have 2 tasks.
 
 Much obliged Sir/Mdm! I shall delete this task:
