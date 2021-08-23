@@ -19,6 +19,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);*/
 
         System.out.println(displayLabel(welcomeLabel));
+
         // for Level 2
         ArrayList<String> items = new ArrayList<>();
         // for Level 3 onwards
