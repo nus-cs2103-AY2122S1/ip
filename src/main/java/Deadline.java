@@ -1,19 +1,33 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
- * Represents a task that needs to be done before a specific date/time.
- * E.g. submit assignment by 11/9/2021.
+ * Represents a task that needs to be done before a specific date.
+ * E.g. submit assignment by Nov-9-2021.
  */
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDate by;
 
     /**
      * Class constructor.
      *
      * @param description Description of the Deadline.
-     * @param by Time and Date of the Deadline.
+     * @param by Date of the Deadline.
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = LocalDate.parse(by);
+    }
+
+    /**
+     * Returns the date of the deadline formatted as [MMM-dd-yyyy]
+     *
+     * @return String formatted date
+     */
+    public String getDate() {
+        DateTimeFormatter dateFormatObj = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
+        String formattedDate = by.format(dateFormatObj);
+        return formattedDate;
     }
 
     /**
@@ -23,6 +37,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + this.getDate() + ")";
     }
 }

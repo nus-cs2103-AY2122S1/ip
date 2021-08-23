@@ -1,9 +1,13 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a task that starts and ends at a specific time.
  * E.g. team project meeting on 2/10/2019 2-4pm
  */
 public class Event extends Task {
-    protected String at;
+    protected LocalDateTime at;
 
     /**
      * Class constructor
@@ -12,7 +16,19 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        String dateTime = String.format(at.replace(" ", "T") + ":00");
+        this.at = LocalDateTime.parse(dateTime);
+    }
+
+    /**
+     * Returns the date and time of the event formatted as [MMM-dd-yyyy HH:mm]
+     *
+     * @return String formatted date and time
+     */
+    public String getDateTime() {
+        DateTimeFormatter dateTimeFormatObj = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
+        String formattedDate = String.format(at.format(dateTimeFormatObj) + "hrs");
+        return formattedDate;
     }
 
     /**
@@ -22,6 +38,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + this.getDateTime() + ")";
     }
 }
