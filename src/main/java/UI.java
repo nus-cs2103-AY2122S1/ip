@@ -74,4 +74,8 @@ public class UI {
         String savePath = "./data/duke.txt";
         this.display("ERROR: unable to load save file from "+ savePath);
     }
+
+    public void displayException(Exception e){
+        this.display(e.getMessage());
+    }
 }
