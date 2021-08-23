@@ -7,16 +7,31 @@ import duke.task.Task;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * TaskList class which encapsulates all tasks, as well as handle information and
+ * operations relating to the tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private Storage storage;
 
-    public TaskList() throws IOException {
+    /**
+     * Constructor for TaskList.
+     */
+    public TaskList() {
         storage = new Storage();
-        tasks = storage.readData();
+        try {
+            tasks = storage.readData();
+        } catch (IOException e) {
+            System.err.println("File does not exist!");
+        }
     }
 
-    // creates a string of list of task
+    /**
+     * Creates a string with all task information appended in rows.
+     *
+     * @return String of all task information.
+     */
     public String displayList() {
         StringBuilder str = new StringBuilder("");
         int idx = 0;
@@ -26,13 +41,24 @@ public class TaskList {
         return str.toString();
     }
 
-    // adds task to list
+    /**
+     * Adds a task to current TaskList.
+     *
+     * @param task The task to be added.
+     * @return The String output by toString method of task to be added.
+     */
     public String add(Task task) {
         tasks.add(task);
         return task.toString();
     }
 
-    // removes the task
+    /**
+     * Deletes specified task from current TaskList.
+     *
+     * @param idx Index of task to be deleted.
+     * @return The String output by toString method of task to be added.
+     * @throws DukeException In case the index of task is out of bounds.
+     */
     public String delete(int idx) throws DukeException {
         if (idx <= 0 || idx > tasks.size()) {
             throw new InvalidIndexException();
@@ -42,7 +68,13 @@ public class TaskList {
         return message;
     }
 
-    // mark task as done
+    /**
+     * Completes specified task from current TaskList.
+     *
+     * @param idx Index of task to be completed.
+     * @return The String output by toString method of task to be added.
+     * @throws DukeException In case index of task is out of bounds.
+     */
     public String complete(int idx) throws DukeException {
         if (idx <= 0 || idx > tasks.size()) {
             throw new InvalidIndexException();
@@ -51,7 +83,11 @@ public class TaskList {
         return tasks.get(idx - 1).toString();
     }
 
-    // saves data
+    /**
+     * Saves all tasks into specified directory.
+     *
+     * @throws IOException In case directory is invalid.
+     */
     public void saveData() throws IOException {
         try {
             storage.writeData(tasks);

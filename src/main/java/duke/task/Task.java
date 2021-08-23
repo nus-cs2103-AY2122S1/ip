@@ -1,10 +1,7 @@
 package duke.task;
 
 /**
- * Encapsulates task description and status of completion.
- *
- * @author limzk126
- * @version Level-7
+ * Task class which encapsulates task description and status of completion.
  */
 public class Task {
     protected String description;
@@ -24,6 +21,11 @@ public class Task {
         return isDone;
     }
 
+    /**
+     * Returns "X" if uncompleted and " " otherwise.
+     *
+     * @return "X" or " " depending on status.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -49,6 +51,11 @@ public class Task {
         isDone = true;
     }
 
+    /**
+     * Overrides Object class toString method.
+     *
+     * @return A String describing details of Task class.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();

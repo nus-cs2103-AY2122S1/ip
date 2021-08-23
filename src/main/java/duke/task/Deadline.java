@@ -1,13 +1,10 @@
 package duke.task;
 
 /**
- * Encapsulates task Deadline.
- *
- * @author limzk126
- * @version Level-7
+ * Deadline class which Encapsulates task's deadline.
  */
 public class Deadline extends Task{
-    protected DateTime by;
+    private DateTime by;
 
     /**
      * Constructor for Deadline class.
@@ -45,6 +42,11 @@ public class Deadline extends Task{
                 + " // " + by.getDate();
     }
 
+    /**
+     * Overrides Task class toString method.
+     *
+     * @return A String describing details of Deadline class.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.toString() + ")\n";

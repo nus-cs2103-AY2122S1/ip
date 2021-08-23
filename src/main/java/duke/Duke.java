@@ -1,6 +1,5 @@
 package duke;
 
-import duke.exception.DukeException;
 import duke.misc.Parser;
 import duke.misc.TaskList;
 import duke.misc.Ui;
@@ -9,14 +8,12 @@ import java.io.IOException;
 
 /**
  * Driver class to simulate the 'Annie' chat bot program.
- *
- * @author limzk126
- * @version Level-7
  */
 public class Duke {
-
     /**
-     * Method to simulate the program.
+     * Method to Simulate program.
+     *
+     * @throws IOException In case of invalid directory.
      */
     public void run() throws IOException {
         Ui ui = new Ui();
