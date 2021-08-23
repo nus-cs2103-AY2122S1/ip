@@ -1,6 +1,9 @@
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -79,8 +82,16 @@ public class Duke {
                 String time = "";
 
                 if (type.equals("D") || type.equals("E")) {
-                    String temp = text.split(":")[1];
+                    String temp = text.split(":", 2)[1];
                     time = temp.substring(1, temp.length() - 1);
+                    if (time.length() > 11) {
+                        String date = LocalDate.parse(time.substring(0, 11), DateTimeFormatter.ofPattern("dd MMM yyyy")).toString();
+                        time = date + " " + time.substring(12);
+                    } else if (time.contains(":")) {
+                        continue;
+                    } else {
+                        time = LocalDate.parse(time, DateTimeFormatter.ofPattern("dd MMM yyyy")).toString();
+                    }
                 }
 
                 switch (type) {
@@ -194,14 +205,14 @@ public class Duke {
                     String[] task = text.split(" ", 2)[1].split(" /by ", 2);
                     myList.add(new Deadline(task[0], task[1]));
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new DukeException("use the format --deadline  xx /by xx--");
+                    throw new DukeException("use the format --deadline  xx /by dd-MM-yyy HH:mm--");
                 }
             } else if (text.contains("event")) {
                 try {
                     String[] task = text.split(" ", 2)[1].split(" /at ", 2);
                     myList.add(new Event(task[0], task[1]));
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new DukeException("use the format --event xx /at xx--");
+                    throw new DukeException("use the format --event xx /at dd-MM-yyy HH:mm--");
                 }
             } else {
                 throw new DukeException("Please use the keyword --todo, deadline or event--");
