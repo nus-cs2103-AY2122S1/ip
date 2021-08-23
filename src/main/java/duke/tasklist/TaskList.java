@@ -48,4 +48,10 @@ public interface TaskList {
      * @return listCount
      */
     int count();
+
+    /**
+     * Print Tasks containing the specified searchString.
+     * @param searchString the string to be used for searching
+     */
+    void printListSearch(String searchString);
 }

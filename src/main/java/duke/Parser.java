@@ -34,6 +34,8 @@ public class Parser {
             return new DeadlineCommand(description);
         case "event":
             return new EventCommand(description);
+        case "find":
+            return new FindCommand(description);
         default:
             return new InvalidCommand(description);
         }
