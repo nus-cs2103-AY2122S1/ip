@@ -46,7 +46,8 @@ public class Lania {
         String file = "data/lania.txt";
         try {
             for (int i = 0; i < taskArrayList.size(); i++) {
-                appendToFile(file, taskArrayList.get(i).toString() + "\n", i);
+                Task task = taskArrayList.get(i);
+                appendToFile(file, getStringFormat(task), i);
             }
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
@@ -54,6 +55,19 @@ public class Lania {
         System.out.println("Lania has added: ");
         System.out.println(t);
         System.out.println("Great! Now you have " + taskArrayList.size() + (taskArrayList.size() == 1 ? " task" : " tasks") + " in your list.");
+    }
+
+    private String getStringFormat(Task t) {
+        if (t instanceof Todo) {
+            Todo temp = (Todo) t;
+            return "T|" + temp.getStatusIcon() + "|" + temp.description + "\n";
+        } else if (t instanceof Deadline) {
+            Deadline temp = (Deadline) t;
+            return "D|" + temp.getStatusIcon() + "|" + temp.description + "|" + temp.by + "\n";
+        } else {
+            Event temp = (Event) t;
+            return "E|" + temp.getStatusIcon() + "|" + temp.description + "|" + temp.at + "\n";
+        }
     }
 
     /**
