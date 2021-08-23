@@ -1,4 +1,4 @@
-package icommand;
+package logic;
 
 import model.Command;
 

@@ -1,14 +1,19 @@
-package commandimpl;
+package logic;
 
 import dao.TaskDao;
-import icommand.ICommandLogicUnit;
 import model.Command;
 import model.Deadline;
 import model.Event;
 import model.Task;
+import model.TimedItem;
 import model.ToDos;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static util.Display.printIndexedList;
 import static util.Display.printSentence;
@@ -35,21 +40,35 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
 		case BYE:
 			processBye();
 			break;
-		case LIST:
-			processList();
+		case LIST: {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			
+			Optional<String> date = Optional.ofNullable(arguments.getOrDefault("date", null));
+			Optional<LocalDate> localDateOptional =
+					date.filter(dateStr -> !dateStr.equals(""))
+							.map(dateStr -> LocalDate.parse(dateStr, formatter));
+			
+			processList(localDateOptional);
 			break;
-		case DEADLINE:
+		}
+		case DEADLINE: {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+			
 			processAdd(new Deadline(
-					arguments.getOrDefault("description", "default deadline"),
-					arguments.getOrDefault("timing", "default timing")
+					arguments.getOrDefault("description", "default deadline desc"),
+					LocalDateTime.parse(arguments.getOrDefault("timing", LocalDateTime.now().toString()), formatter)
 			));
 			break;
-		case EVENT:
+		}
+		case EVENT: {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+			
 			processAdd(new Event(
 					arguments.getOrDefault("description", "default event"),
-					arguments.getOrDefault("timing", "default timing")
+					LocalDateTime.parse(arguments.getOrDefault("timing", LocalDateTime.now().toString()), formatter)
 			));
 			break;
+		}
 		case TODOS:
 			processAdd(new ToDos(arguments.getOrDefault("description", "default todo")));
 			break;
@@ -73,8 +92,15 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
 	/**
 	 * Prints the entire list of tasks whether its done or not done.
 	 */
-	private void processList() {
-		printIndexedList(taskDao.getAll());
+	private void processList(Optional<LocalDate> localDateOptional) {
+		localDateOptional.ifPresentOrElse(
+				x -> printIndexedList(taskDao.getAll()
+						.stream()
+						.filter(task -> task instanceof TimedItem)
+						.filter(task -> ((TimedItem) task).getTime().toLocalDate().isEqual(x))
+						.collect(Collectors.toList())),
+				() -> printIndexedList(taskDao.getAll())
+		);
 	}
 	
 	private void processAdd(Task task) {

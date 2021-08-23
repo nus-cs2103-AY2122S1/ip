@@ -1,13 +1,14 @@
-package commandimpl;
+package parser;
 
-import icommand.ICommandLogicUnit;
-import icommand.ICommandProcessor;
+import dao.TaskDaoImpl;
+import logic.ICommandLogicUnit;
 import model.Command;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 import static util.Display.printIndexedList;
 import static util.Display.printSentence;
@@ -16,29 +17,32 @@ import static util.Display.printSentence;
  * An entity that takes in the input from the console and parse it to valid command or throw exception
  * if the command is invalid
  */
-public class CommandProcessorImpl implements ICommandProcessor {
+public class CommandParserImpl implements ICommandParser {
 	/** Scanner to take input from the console */
 	private final Scanner scanner = new Scanner(System.in);
 	
 	/** CommandLogicUnit to process all the commands */
 	private final ICommandLogicUnit commandLogicUnit;
 	
+	/** list of available commands and arguments that can be parsed */
 	private final List<String> availableCommands = List.of(
 			"bye",
-			"list",
+			"list (#date dd/MM/yyyy HHmm)",
 			"done #index",
-			"deadline #desc /by #deadline",
+			"deadline #desc /by #deadline-date(dd/MM/yyyy HHmm)",
 			"todo #desc",
-			"event #desc /at #timing",
+			"event #desc /at #timing-date(dd/MM/yyyy HHmm)",
 			"delete #index"
 	);
+	
+	private final Logger logger = Logger.getLogger(TaskDaoImpl.class.getName());
 	
 	/**
 	 * CommandProcessorImplementation that would parse the inputs into commands.
 	 *
 	 * @param commandLogicUnit CommandLogicUnit that would process the parsed input.
 	 */
-	public CommandProcessorImpl(ICommandLogicUnit commandLogicUnit) {
+	public CommandParserImpl(ICommandLogicUnit commandLogicUnit) {
 		this.commandLogicUnit = commandLogicUnit;
 	}
 	
@@ -65,7 +69,15 @@ public class CommandProcessorImpl implements ICommandProcessor {
 			this.close();
 			break;
 		case "list":
-			commandLogicUnit.processCommand(Command.LIST, Map.of());
+			String date = "";
+			
+			if (parsedCommands.size() >= 2) {
+				date = parsedCommands.get(1);
+			}
+			
+			commandLogicUnit.processCommand(Command.LIST, Map.of(
+					"date", date
+			));
 			break;
 		case "done":
 			try {
@@ -80,13 +92,22 @@ public class CommandProcessorImpl implements ICommandProcessor {
 		case "deadline": {
 			try {
 				int byIndex = parsedCommands.indexOf("/by");
-				if (byIndex == -1) throw new IllegalArgumentException("/by command not found");
+				if (byIndex == -1) {
+					logger.warning("/by not supplied in deadline command");
+					throw new IllegalArgumentException("/by command not found");
+				}
 				
 				String desc = String.join(" ", parsedCommands.subList(1, byIndex));
-				if (desc.isBlank()) throw new IllegalArgumentException("deadline desc cannot be empty");
+				if (desc.isBlank()) {
+					logger.warning("Empty deadline desc supplied");
+					throw new IllegalArgumentException("deadline desc cannot be empty");
+				}
 				
 				String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
-				if (timing.isBlank()) throw new IllegalArgumentException("deadline timing cannot be empty");
+				if (timing.isBlank()) {
+					logger.warning("Empty deadline timing supplied");
+					throw new IllegalArgumentException("deadline timing cannot be empty");
+				}
 				
 				commandLogicUnit.processCommand(Command.DEADLINE, Map.of(
 						"description", desc,
@@ -102,7 +123,10 @@ public class CommandProcessorImpl implements ICommandProcessor {
 			try {
 				String desc = String.join(" ", parsedCommands.subList(1, parsedCommands.size()));
 				
-				if (desc.isBlank()) throw new IllegalArgumentException("todo desc cannot be empty");
+				if (desc.isBlank()) {
+					logger.warning("Empty Todo desc being supplied");
+					throw new IllegalArgumentException("todo desc cannot be empty");
+				}
 				
 				commandLogicUnit.processCommand(Command.TODOS, Map.of(
 						"description", desc
@@ -115,13 +139,22 @@ public class CommandProcessorImpl implements ICommandProcessor {
 		case "event": {
 			try {
 				int byIndex = parsedCommands.indexOf("/at");
-				if (byIndex == -1) throw new IllegalArgumentException("/at command not found");
+				if (byIndex == -1) {
+					logger.warning("/at not supplied in event command");
+					throw new IllegalArgumentException("/at command not found");
+				}
 				
 				String desc = String.join(" ", parsedCommands.subList(1, byIndex));
-				if (desc.isBlank()) throw new IllegalArgumentException("event desc cannot be empty");
+				if (desc.isBlank()) {
+					logger.warning("Empty event desc supplied");
+					throw new IllegalArgumentException("event desc cannot be empty");
+				}
 				
 				String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
-				if (timing.isBlank()) throw new IllegalArgumentException("event timing cannot be empty");
+				if (timing.isBlank()) {
+					logger.warning("Empty todo timing supplied");
+					throw new IllegalArgumentException("event timing cannot be empty");
+				}
 				
 				commandLogicUnit.processCommand(Command.EVENT, Map.of(
 						"description", desc,
@@ -144,9 +177,12 @@ public class CommandProcessorImpl implements ICommandProcessor {
 			
 			break;
 		case "man":
+			printSentence("() -> optional parameter or format of date time\n" +
+					"# -> the parameter of the commands");
 			printIndexedList(availableCommands);
 			break;
 		default:
+			logger.warning("Unknown command : " + parsedCommands.get(0) + "being parsed");
 			processException(new IllegalCallerException("I'm sorry, but I don't know what that means :-("));
 			break;
 		}

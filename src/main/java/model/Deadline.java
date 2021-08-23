@@ -1,29 +1,40 @@
 package model;
 
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
- * a task containing description and the deadline of the task
+ * Task containing description and the deadline of the task.
  */
-public class Deadline extends Task {
-	private final String deadline;
+public class Deadline extends Task implements TimedItem {
+	/** Deadline stored in local date time */
+	private final LocalDateTime deadline;
 	
 	/**
-	 * public constructor for deadline
+	 * Constructor for Deadline.
 	 *
-	 * @param desc     description of the deadline
-	 * @param deadline string representing the deadline
+	 * @param desc Description.
+	 * @param deadline LocalDateTime.
 	 */
-	public Deadline(String desc, String deadline) {
+	public Deadline(String desc, LocalDateTime deadline) {
 		super(desc);
 		this.deadline = deadline;
 	}
 	
 	/**
-	 * String representation of deadline, marked with [D], desc and the deadline
+	 * Returns string representation of deadline, marked with [D], desc and the deadline.
 	 *
-	 * @return string
+	 * @return string.
 	 */
 	@Override
 	public String toString() {
-		return "[D]" + super.toString() + " (by: " + deadline + ")";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+		return "[D]" + super.toString() + " (by: " + deadline.format(formatter) + ")";
+	}
+	
+	@Override
+	public LocalDateTime getTime() {
+		return deadline;
 	}
 }
