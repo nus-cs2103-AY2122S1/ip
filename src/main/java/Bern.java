@@ -1,3 +1,9 @@
+import bern.functionalities.Parser;
+import bern.functionalities.Storage;
+import bern.functionalities.TaskList;
+import bern.functionalities.Ui;
+import bern.model.Task;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -7,10 +13,6 @@ public class Bern {
     private TaskList taskList;
     private Ui ui;
     private Parser parser;
-
-    public enum Command {
-        DONE, DEADLINE, EVENT, TODO, BYE, LIST, DELETE, INVALID
-    }
 
     public Bern() {
         ui = new Ui();

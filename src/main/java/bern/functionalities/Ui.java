@@ -1,3 +1,15 @@
+package bern.functionalities;
+
+import bern.Command;
+import bern.exception.BernException;
+import bern.exception.EmptyDescriptionException;
+import bern.exception.IndexException;
+import bern.exception.InvalidCommandException;
+import bern.model.Deadline;
+import bern.model.Event;
+import bern.model.Task;
+import bern.model.ToDo;
+
 import java.util.ArrayList;
 
 public class Ui {
@@ -83,7 +95,7 @@ public class Ui {
                 + (arListTask.size() == 1 ? " task in the list" : " tasks in the list");
     }
 
-    public String getReply(Bern.Command c, String input, ArrayList<Task> arListTask) throws BernException {
+    public String getReply(Command c, String input, ArrayList<Task> arListTask) throws BernException {
         switch (c) {
             case DONE:
                 return new Ui().ifDone(input, arListTask);
@@ -122,27 +134,27 @@ public class Ui {
     public void processInput(String input, ArrayList<Task> arListTask) {
         try {
             if (parser.isDone(input)){
-                System.out.println(new Ui().getReply(Bern.Command.DONE, input, arListTask));
+                System.out.println(new Ui().getReply(Command.DONE, input, arListTask));
                 storage.writeIntoFile(arListTask);
             } else if (parser.isDeadline(input)) {
-                System.out.println(new Ui().getReply(Bern.Command.DEADLINE, input, arListTask));
+                System.out.println(new Ui().getReply(Command.DEADLINE, input, arListTask));
                 storage.writeIntoFile(arListTask);
             } else if (parser.isEvent(input)) {
-                System.out.println(new Ui().getReply(Bern.Command.EVENT, input, arListTask));
+                System.out.println(new Ui().getReply(Command.EVENT, input, arListTask));
                 storage.writeIntoFile(arListTask);
             } else if (parser.isToDo(input)) {
-                System.out.println(new Ui().getReply(Bern.Command.TODO, input, arListTask));
+                System.out.println(new Ui().getReply(Command.TODO, input, arListTask));
                 storage.writeIntoFile(arListTask);
             } else if (parser.isBye(input)){
-                System.out.println(new Ui().getReply(Bern.Command.BYE, input, arListTask));
+                System.out.println(new Ui().getReply(Command.BYE, input, arListTask));
             } else if (parser.isList(input)){
-                System.out.println(new Ui().getReply(Bern.Command.LIST, input, arListTask));
+                System.out.println(new Ui().getReply(Command.LIST, input, arListTask));
                 storage.writeIntoFile(arListTask);
             } else if (parser.isDelete(input)){
-                System.out.println(new Ui().getReply(Bern.Command.DELETE, input, arListTask));
+                System.out.println(new Ui().getReply(Command.DELETE, input, arListTask));
                 storage.writeIntoFile(arListTask);
             } else {
-                new Ui().getReply(Bern.Command.INVALID, input, arListTask);
+                new Ui().getReply(Command.INVALID, input, arListTask);
             }
         } catch (BernException e) {
             System.out.println(e.getMessage());

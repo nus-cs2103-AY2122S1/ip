@@ -1,3 +1,9 @@
+package bern.functionalities;
+
+import bern.Command;
+import bern.exception.BernException;
+import bern.model.Task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,7 +17,7 @@ public class Storage {
         try {
             new Storage().reinitialiseFile();
             FileWriter fw = new FileWriter("savedList.txt");
-            fw.write(new Ui().getReply(Bern.Command.LIST, "", arListTask));
+            fw.write(new Ui().getReply(Command.LIST, "", arListTask));
             fw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
