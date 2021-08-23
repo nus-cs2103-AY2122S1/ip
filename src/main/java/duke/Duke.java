@@ -1,15 +1,23 @@
+package duke;
+
 import command.Command;
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import dukeException.DukeException;
+import duke.exception.DukeException;
 
 public class Duke {
+    /** Duke's Storage. Deals with loading tasks from the file and saving tasks in the file. **/
     private Storage storage;
+
+    /** Duke's TaskList. Containing the data structure for storing tasks. **/
     private TaskList taskList;
+
+    /** Duke's user interface. Deals with interactions with the user. **/
     private Ui ui;
 
+    /**
+     * A public constructor to initialized Duke.
+     *
+     * @param filePath The given filePath to load and save the tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -21,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * The method to execute Duke.
+     */
     public void run() {
         ui.printLogo();
         ui.greet();

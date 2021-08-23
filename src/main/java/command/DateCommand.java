@@ -3,24 +3,37 @@ package command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import dukeException.DukeException;
+import duke.exception.DukeException;
 import task.Task;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DateCommand extends Command {
+    /** The date to be queried. **/
     public LocalDate date;
 
+    /**
+     * A public constructor to initialized the DateCommand.
+     *
+     * @param date The date to be queried.
+     */
     public DateCommand(LocalDate date) {
         this.date = date;
     }
 
+    /**
+     * A method to execute this DateCommand. When the method is executed,
+     * it will scan through the given TaskList to find all the tasks that
+     * happen on the given date, and send them to the given Ui.
+     *
+     * @param taskList The given Duke TaskList.
+     * @param ui The given Duke Ui.
+     * @param storage The given Duke Storage.
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> dateResult = new ArrayList<>();

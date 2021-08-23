@@ -3,7 +3,8 @@ package task;
 import java.time.LocalDate;
 
 public abstract class Task {
-    public static enum taskType {
+    /** An Enum type of task. **/
+    public static enum TaskType {
         TODO, DEADLINE, EVENT
     }
 
@@ -54,6 +55,12 @@ public abstract class Task {
                 this.getTypeIcon(), this.getStatusIcon(), this.description);
     }
 
+    /**
+     * A method to check whether this task happen on a given date.
+     *
+     * @param date The given date to check.
+     * @return A boolean value indicating whether the task happen on that day.
+     */
     public boolean onDate(LocalDate date) {
         return false;
     }

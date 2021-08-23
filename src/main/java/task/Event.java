@@ -8,8 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class Event extends Task {
+    /** The date of the task. **/
     public LocalDate date;
 
+    /** The time of the task. **/
     public LocalTime time;
 
     /**
@@ -64,6 +66,12 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * A method to check whether this task happen on a given date.
+     *
+     * @param date The given date to check.
+     * @return A boolean value indicating whether the task happen on that day.
+     */
     @Override
     public boolean onDate(LocalDate date) {
         if (this.date != null && this.date.equals(date)) {

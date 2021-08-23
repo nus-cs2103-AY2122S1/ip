@@ -1,7 +1,7 @@
 package duke;
 
 import command.*;
-import dukeException.DukeException;
+import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 import task.Task;
 
@@ -21,7 +21,7 @@ class ParserTest {
     void parse_todoCommand_newTodoCommand() {
         try {
             AddCommand ac = (AddCommand) Parser.parse("todo description");
-            assertEquals(Task.taskType.TODO, ac.type);
+            assertEquals(Task.TaskType.TODO, ac.type);
             assertEquals("description", ac.description);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
@@ -33,7 +33,7 @@ class ParserTest {
     void parse_deadlineCommand_newDeadlineCommand() {
         try {
             AddCommand ac = (AddCommand) Parser.parse("deadline ddl /by 01-01-2021 1800");
-            assertEquals(Task.taskType.DEADLINE, ac.type);
+            assertEquals(Task.TaskType.DEADLINE, ac.type);
             assertEquals("ddl", ac.description);
             assertEquals(LocalDate.of(2021, 1, 1), ac.date);
             assertEquals(LocalTime.of(18, 0), ac.time);
@@ -47,7 +47,7 @@ class ParserTest {
     void parse_eventCommand_newEventCommand() {
         try {
             AddCommand ac = (AddCommand) Parser.parse("event event /by 01-01-2021");
-            assertEquals(Task.taskType.EVENT, ac.type);
+            assertEquals(Task.TaskType.EVENT, ac.type);
             assertEquals("event", ac.description);
             assertEquals(LocalDate.of(2021, 1, 1), ac.date);
             assertNull(ac.time);

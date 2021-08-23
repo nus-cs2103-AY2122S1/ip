@@ -1,6 +1,6 @@
 package duke;
 
-import dukeException.DukeException;
+import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 import task.Deadline;
 import task.Task;
@@ -8,7 +8,6 @@ import task.Todo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +15,7 @@ class TaskListTest {
     @Test
     public void add_addNewTodoTask_newToDoTask() {
         TaskList taskList = new TaskList();
-        Task t = taskList.add(Task.taskType.TODO, "todo", null, null);
+        Task t = taskList.add(Task.TaskType.TODO, "todo", null, null);
         if (!(t instanceof Todo)) {
             fail();
         }

@@ -1,13 +1,12 @@
 package duke;
 
-import dukeException.DukeException;
+import duke.exception.DukeException;
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.Todo;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -18,12 +17,25 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Storage {
+    /** The filePath to load and save the tasks. **/
     private String filePath;
 
+    /**
+     * A public constructor to initialized the Storage.
+     *
+     * @param filePath The given filePath.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * A method to load the task from the file, and add them to the data structure
+     * in TaskList
+     *
+     * @return An ArrayList of Task, the list of tasks loaded from the file.
+     * @throws DukeException
+     */
     public ArrayList<Task> loadTaskList() throws DukeException{
         File f;
         Scanner sc;
@@ -85,6 +97,13 @@ public class Storage {
         }
     }
 
+    /**
+     * A method to save the tasks in TaskList by
+     * writing the information about the tasks to a given file.
+     *
+     * @param tasks An ArrayList of Task, the list of tasks to be saved.
+     * @throws DukeException
+     */
     public void saveTaskList(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);

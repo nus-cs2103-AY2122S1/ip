@@ -1,7 +1,7 @@
 package duke;
 
 import task.Task;
-import dukeException.DukeException;
+import duke.exception.DukeException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,29 +11,52 @@ public class TaskList {
     /** The data structure to store all the tasks. **/
     public ArrayList<Task> tasks;
 
-    /** A enum type indicating the type of the task. **/
-
+    /**
+     * A public constructor to initialized the TaskList by declaring a new empty ArrayList.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * A public constructor to initialized the TaskList by
+     * giving a list of tasks loaded from the file.
+     *
+     * @param tasks An ArrayList of Task, the initial list of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    public Task add(Task.taskType type, String description, LocalDate date, LocalTime time) {
+    /**
+     * A method to insert a new task to the TaskList.
+     *
+     * @param type The type of the task.
+     * @param description A String, the description of the task.
+     * @param date The date of the task.
+     * @param time The time of the task.
+     * @return A Task object, the inserted task.
+     */
+    public Task add(Task.TaskType type, String description, LocalDate date, LocalTime time) {
         Task newTask = null;
-        if (type == Task.taskType.TODO) {
+        if (type == Task.TaskType.TODO) {
             newTask = new task.Todo(description);
-        } else if (type == Task.taskType.DEADLINE) {
+        } else if (type == Task.TaskType.DEADLINE) {
             newTask = new task.Deadline(description, date, time);
-        } else if (type == Task.taskType.EVENT) {
+        } else if (type == Task.TaskType.EVENT) {
             newTask = new task.Event(description, date, time);
         }
         tasks.add(newTask);
         return newTask;
     }
 
+    /**
+     * A method to remove a task from the TaskList.
+     *
+     * @param taskIndex The index of the task to be deleted.
+     * @return A Task object, the deleted task.
+     * @throws DukeException
+     */
     public Task delete(int taskIndex) throws DukeException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
             throw new DukeException("task index out of bound");
@@ -43,6 +66,13 @@ public class TaskList {
         return deletedTask;
     }
 
+    /**
+     * A method to mark a task as done.
+     *
+     * @param taskIndex The index of the task.
+     * @return A Task object, the task marked as done.
+     * @throws DukeException
+     */
     public Task markAsDone(int taskIndex) throws DukeException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
             throw new DukeException("task index out of bound");
@@ -66,10 +96,22 @@ public class TaskList {
         return taskList;
     }
 
+    /**
+     * A method to get the total number of tasks in the data structure.
+     *
+     * @return An integer, the total number of tasks.
+     */
     public int amountOfTasks() {
         return tasks.size();
     }
 
+    /**
+     * A method to get a certain task by entering its index.
+     *
+     * @param taskIndex The index of the task.
+     * @return A Task object, the target task.
+     * @throws DukeException
+     */
     public Task getTask(int taskIndex) throws DukeException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
             throw new DukeException("task index out of bound");
@@ -77,6 +119,11 @@ public class TaskList {
         return tasks.get(taskIndex);
     }
 
+    /**
+     * A method to get the data structure storing the tasks.
+     *
+     * @return An ArrayList of Task, the data structure.
+     */
     public ArrayList<Task> getTaskList() {
         return tasks;
     }

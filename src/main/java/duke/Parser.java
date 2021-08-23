@@ -1,17 +1,22 @@
 package duke;
 
 import command.*;
-import dukeException.DukeException;
+import duke.exception.DukeException;
 import task.Task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
-import java.util.Scanner;
 
 public class Parser {
+    /**
+     * A method to parse the given String command.
+     *
+     * @param fullCommand A String, the given command to be parsed.
+     * @return A Command, the result of parsing the String.
+     * @throws DukeException
+     */
     public static Command parse(String fullCommand) throws DukeException {
         try {
             if (fullCommand.equals("bye")) {
@@ -32,7 +37,7 @@ public class Parser {
             }
             if (fullCommand.length() >= 6 && fullCommand.substring(0, 4).equals("todo")) {
                 String description = fullCommand.substring(5, fullCommand.length());
-                return new AddCommand(Task.taskType.TODO, description, null, null);
+                return new AddCommand(Task.TaskType.TODO, description, null, null);
             }
             if (fullCommand.length() >= 25 && fullCommand.substring(0, 8).equals("deadline")) {
                 String description = fullCommand.substring(9, fullCommand.indexOf("/") - 1);
@@ -47,7 +52,7 @@ public class Parser {
                                 dateAndTime.substring(dateAndTime.indexOf(" ") + 1, dateAndTime.length()),
                                 DateTimeFormatter.ofPattern("HHmm"));
                     }
-                    return new AddCommand(Task.taskType.DEADLINE, description, date, time);
+                    return new AddCommand(Task.TaskType.DEADLINE, description, date, time);
                 } catch (DateTimeParseException e) {
                     throw new DukeException("Cannot parse this command, " +
                             "please enter correct date and time format: dd-MM-yyyy HHmm");
@@ -66,7 +71,7 @@ public class Parser {
                                 dateAndTime.substring(dateAndTime.indexOf(" ") + 1, dateAndTime.length()),
                                 DateTimeFormatter.ofPattern("HHmm"));
                     }
-                    return new AddCommand(Task.taskType.EVENT, description, date, time);
+                    return new AddCommand(Task.TaskType.EVENT, description, date, time);
                 } catch (DateTimeParseException e) {
                     throw new DukeException("Cannot parse this command, " +
                             "please enter correct date and time format: dd-MM-yyyy HHmm");

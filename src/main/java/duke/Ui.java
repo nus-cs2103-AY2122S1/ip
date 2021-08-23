@@ -1,17 +1,23 @@
 package duke;
 
-import dukeException.DukeException;
+import duke.exception.DukeException;
 
 import java.util.Scanner;
 
 public class Ui {
-
+    /** A Scanner object to read user command. **/
     Scanner sc;
 
+    /**
+     * A public constructor to initialized the Ui.
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * A method to print the Duke logo.
+     */
     public void printLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -26,7 +32,7 @@ public class Ui {
      */
     public void greet() {
         String greetMessage[] = new String[2];
-        greetMessage[0] = "Hello! I'm Duke";
+        greetMessage[0] = "Hello! I'm duke.Duke";
         greetMessage[1] = "What can I do for you?";
         printMessage(greetMessage);
     }
@@ -48,10 +54,20 @@ public class Ui {
         System.out.println("");
     }
 
+    /**
+     * A method to read user command.
+     *
+     * @return A String, user command.
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * A method to print the message of DukeException.
+     *
+     * @param e The given DukeException to be shown.
+     */
     public void showDukeException(DukeException e) {
         this.printMessage(new String[] {e.getMessage()});
     }

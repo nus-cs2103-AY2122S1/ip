@@ -3,21 +3,37 @@ package command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import dukeException.DukeException;
+import duke.exception.DukeException;
 import task.Task;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FindCommand extends Command {
+    /** The keyword to search. **/
     public String keyword;
 
+    /**
+     * A public constructor to initialized the FindCommand.
+     *
+     * @param keyword
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
+    /**
+     * The method to execute this FindCommand. When the method is executed,
+     * it will scan through the given TaskList to find all the tasks that
+     * contain the keyword in their description. It will send the result to
+     * the given Ui for printing.
+     *
+     * @param taskList The given Duke TaskList.
+     * @param ui The given Duke Ui.
+     * @param storage The given Duke Storage.
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> findResult = new ArrayList<>();

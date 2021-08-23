@@ -3,11 +3,14 @@ package command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import dukeException.DukeException;
-
-import java.io.IOException;
+import duke.exception.DukeException;
 
 public class ExitCommand extends Command {
+    /**
+     * An override method to check whether the Command is an ExitCommand.
+     *
+     * @return Always return true indicating this is an ExitCommand.
+     */
     @Override
     public boolean isExit() {
         return true;
