@@ -1,19 +1,49 @@
+import java.time.LocalDate;
+import java.time.LocalTime; 
+
 /**
  * tasks that need to be done before a specific date/time
  */
 public class Deadline extends Task {
-    private String endTime;
+    private LocalTime endTime;
+    private LocalDate endDate; 
+    private String timeString;
+    private boolean isTimeString;
     
-    public Deadline(String name, String endTime) {
+    public Deadline(String name, LocalDate endDate) {
         super(name);
-        this.endTime = endTime; 
+        this.endDate = endDate;
+        isTimeString = false; 
     }
 
-    public String toString() {
-        if (isDone) {
-            return "[D][X] " + name + " (by: " + endTime + ")"; 
+    public Deadline(String name, LocalDate endDate, LocalTime endTime) {
+        super(name);
+        this.endDate = endDate; 
+        this.endTime = endTime; 
+        isTimeString = false; 
+    }
+
+    public Deadline(String name, String time) {
+        super(name);
+        this.timeString = time; 
+        isTimeString = true; 
+    }
+
+    private String getTime() {
+        if (isTimeString) {
+            return timeString; 
+        } else if (endTime == null) {
+            return Processor.OUT_DATE_FORMATTER.format(endDate);
         } else {
-            return "[D][ ] " + name + " (by: " + endTime + ")";
+            return Processor.OUT_DATE_FORMATTER.format(endDate) + " " + Processor.OUT_TIME_FORMATTER.format(endTime);
+        }
+    }
+    
+    public String toString() {
+        if (isTimeString) {
+            return "[D][X] " + name + " (by: " + getTime() + ")"; 
+        } else {
+            return "[D][ ] " + name + " (by: " + getTime() + ")"; 
         }
     }
 }
