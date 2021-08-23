@@ -40,6 +40,9 @@ public class DukeException extends Exception {
                 errorMessage = "This task does not exist!\n"
                         + "Please enter a valid task to be deleted.";
                 break;
+            case "empty find":
+                errorMessage = "The item to find cannot be empty dear <3";
+                break;
             default:
                 errorMessage = "unknown error message";
         }
