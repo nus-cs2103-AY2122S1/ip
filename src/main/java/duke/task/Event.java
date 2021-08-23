@@ -5,7 +5,6 @@ import duke.util.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Objects;
 
 public class Event extends Task {
 

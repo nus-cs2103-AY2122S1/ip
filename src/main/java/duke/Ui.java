@@ -4,7 +4,7 @@ import duke.task.Task;
 
 import java.util.Collection;
 
-public class UI {
+public class Ui {
 
     private static final String DIVIDER = "------------------------------------------";
     private static final String LOGO = " ____        _        \n"
