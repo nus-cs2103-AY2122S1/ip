@@ -13,6 +13,11 @@ public class EventTask extends Task {
   }
 
   @Override
+  public String taskToString() {
+    return super.taskToString() + this.dates;
+  }
+
+  @Override
   public String toString() {
     return "[E] " + super.toString() + String.format(" (at: %s)", this.dates);
   }

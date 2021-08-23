@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.function.Function;
 import tasks.InvalidTaskException;
 import tasks.Task;
 
@@ -10,7 +9,7 @@ import tasks.Task;
  */
 public class DukeLogic {
 
-  private static ArrayList<Task> tasks = new ArrayList<>();
+  private static ArrayList<Task> tasks = DukeStorage.tasksList;
 
   enum Actions {
     DELETE,
@@ -48,6 +47,13 @@ public class DukeLogic {
       return true;
     } else if (startsWithOrEquals("event ", input)) {
       addTask(getArgs(input, "event "), Task.Type.EVENT);
+      return true;
+    } else if (matches("save", input)) {
+      DukeStorage.writeToDatabase();
+      DukeStorage.readFromDatabase();
+      return true;
+    } else if (matches("reset", input)) {
+      tasks.clear();
       return true;
     } else {
       Duke.renderOutput("I did not understand, sorry!");
