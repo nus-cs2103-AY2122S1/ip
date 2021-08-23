@@ -30,13 +30,13 @@ public class Storage {
             Scanner scanner = new Scanner(new File(filePath));
 
             while (scanner.hasNext()) {
-                String[] tokens = scanner.nextLine().split(" / ");
+                String[] tokens = scanner.nextLine().split(" \\| ");
                 String taskType = tokens[0];
                 String completionStatus = tokens[1];
                 String taskDescription = tokens[2];
 
                 if(taskType.contains("D")) {
-                    Task deadlineTask = new Deadline(taskDescription, tokens[3]);
+                    Task deadlineTask = new Deadline(taskDescription, new TaskDateAndTime(tokens[3]));
                     if(completionStatus.contains("1")) {
                         deadlineTask.markAsDone();
                     }
@@ -44,7 +44,7 @@ public class Storage {
                 }
 
                 if(taskType.contains("E")) {
-                    Task eventTask = new Event(taskDescription, tokens[3]);
+                    Task eventTask = new Event(taskDescription, new TaskDateAndTime(tokens[3]));
                     if(completionStatus.contains("1")) {
                         eventTask.markAsDone();
                     }
@@ -74,13 +74,13 @@ public class Storage {
 
         switch (task) {
         case DEADLINE:
-            taskAsText = "D / 0 / " + taskDescription + " / " + taskDeadline + System.getProperty("line.separator");
+            taskAsText = "D | 0 | " + taskDescription + " | " + taskDeadline + System.getProperty("line.separator");
             break;
         case EVENT:
-            taskAsText = "E / 0 / " + taskDescription + " / " + taskDeadline + System.getProperty("line.separator");
+            taskAsText = "E | 0 | " + taskDescription + " | " + taskDeadline + System.getProperty("line.separator");
             break;
         case TODO:
-            taskAsText = "T / 0 / " + taskDescription + System.getProperty("line.separator");
+            taskAsText = "T | 0 | " + taskDescription + System.getProperty("line.separator");
             break;
         default:
             taskAsText = " ";
@@ -136,12 +136,12 @@ public class Storage {
 
             while((currentLine = reader.readLine()) != null) {
                 if(counter == taskNumber) {
-                    String[] taskToUpdate = currentLine.split(" / ");
+                    String[] taskToUpdate = currentLine.split(" \\| ");
 
-                    String newLine = taskToUpdate[0] + " / 1 / " + taskToUpdate[2];
+                    String newLine = taskToUpdate[0] + " | 1 | " + taskToUpdate[2];
 
                     if(!taskToUpdate[0].contains("T")) {
-                        newLine += " / " + taskToUpdate[3];
+                        newLine += " | " + taskToUpdate[3];
                     }
 
                     writer.write(newLine + System.getProperty("line.separator"));

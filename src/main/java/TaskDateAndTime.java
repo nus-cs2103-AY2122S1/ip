@@ -7,6 +7,7 @@ public class TaskDateAndTime {
 
     public TaskDateAndTime(String userInputDateAndTime) {
         this.userInputDateAndTime = userInputDateAndTime;
+        isValidDate();
     }
 
     public boolean isValidDate() {
