@@ -102,9 +102,7 @@ public class Duke {
         } else {
             System.out.println("---------------------------------------------");
             System.out.println("Noted I've removed this task:");
-            System.out.println("[" + arr.get(taskID - 1).getTaskType() + "]["
-                    + arr.get(taskID - 1).getStatusIcon() + "] "
-                    + arr.get(taskID - 1).description);
+            System.out.println(arr.get(taskID - 1).toString());
             arr.remove(taskID - 1);
             System.out.println("Now you have " + arr.size() + " task(s) in the list.");
             System.out.println("---------------------------------------------");

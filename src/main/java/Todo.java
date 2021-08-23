@@ -14,6 +14,11 @@ public class Todo extends Task {
     @Override
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("[" + this.taskType + "][" + this.getStatusIcon() + "] " + this.description);
+        System.out.println(this.toString());
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.taskType + "]" + super.toString();
     }
 }

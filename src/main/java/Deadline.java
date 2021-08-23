@@ -16,7 +16,7 @@ public class Deadline extends Task {
     @Override
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("[" + this.taskType + "][" + this.getStatusIcon() + "] " + this.description);
+        System.out.println(this.toString());
     }
 
     public static String getDeadlineDescription(String input) throws MissingDueDateDescriptionException {
@@ -34,5 +34,10 @@ public class Deadline extends Task {
     public static String getDueDate(String input) {
         String[] strArr = input.split("/by", 2);
         return strArr[1];
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.taskType + "]" + super.toString();
     }
 }

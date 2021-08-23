@@ -16,7 +16,7 @@ public class Event extends Task {
     @Override
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("[" + this.taskType + "][" + this.getStatusIcon() + "] " + this.description);
+        System.out.println(this.toString());
     }
 
     public static String getEventDescription(String input) throws MissingEventDetailsException {
@@ -35,5 +35,10 @@ public class Event extends Task {
     public static String getEventDetails(String input) {
         String[] strArr = input.split("/at", 2);
         return strArr[1];
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.taskType + "]" + super.toString();
     }
 }

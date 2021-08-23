@@ -17,11 +17,16 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("[" + this.getStatusIcon() + "] " + this.description);
+        System.out.println(this.toString());
     }
 
     public String getTaskType() {
         return this.taskType;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
 }
