@@ -46,6 +46,8 @@ public class Duke {
                     Parser.parseEvent(instruction);
                 } else if (Parser.parseCommand(instruction).equals("today")) {
                     Parser.parseToday();
+                } else if (Parser.parseCommand(instruction).equals("find")) {
+                    Parser.parseFind(instruction);
                 } else {
                     throw new DukeException("\tOOPS!!! I'm sorry, but I don't " +
                             "know what that means :-(");
