@@ -1,4 +1,5 @@
 package duke;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -76,6 +77,15 @@ public class Ui {
      */
     public void completeTaskMessage (Task task) {
         System.out.println(DONE_MESSAGE + "\n" + task.toString());
+        printLineBreak();
+    }
+
+    
+    public void findTaskMessage (TaskList tasks) {
+        System.out.println(findTaskMessage);
+        for(int i = 0; i < tasks.getSize(); i++) {
+            System.out.println(String.valueOf(i+1) + "." + tasks.get(i).toString());
+        }
         printLineBreak();
     }
 
