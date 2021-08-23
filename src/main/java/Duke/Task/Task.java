@@ -1,5 +1,7 @@
+package Duke.Task;
+
 /**
- * Task is an Object that consist of the status of completion and the task details.
+ * Duke.Task.Duke.Task is an Object that consist of the status of completion and the task details.
  */
 public class Task {
     /**

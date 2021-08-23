@@ -1,8 +1,10 @@
+package Duke.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A Deadline-type Task consisting of its details and deadline in day.
+ * A Duke.Task.Deadline-type Duke.Task.Duke.Task consisting of its details and deadline in day.
  */
 public class Deadline extends Task {
     /**
@@ -13,7 +15,7 @@ public class Deadline extends Task {
     private static final DateTimeFormatter outputDateFormat = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**
-     * Constructs a instance of Deadline that consist of its details and deadline in day.
+     * Constructs a instance of Duke.Task.Deadline that consist of its details and deadline in day.
      *
      * @param taskDetails Description of the task
      * @param by day
@@ -25,9 +27,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return the string representation of Deadline details with day and time, prefixed with [D]
+     * Return the string representation of Duke.Task.Deadline details with day and time, prefixed with [D]
      *
-     * @return the string representation of Deadline details
+     * @return the string representation of Duke.Task.Deadline details
      */
     @Override
     public String toString() {

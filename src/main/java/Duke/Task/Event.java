@@ -1,8 +1,10 @@
+package Duke.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A Event-type Task consisting of event details, day and time.
+ * A Duke.Task.Event-type Duke.Task.Duke.Task consisting of event details, day and time.
  */
 public class Event extends Task {
     /**
@@ -13,7 +15,7 @@ public class Event extends Task {
     private static final DateTimeFormatter outputDateFormat = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**.
-     * Constructs a instance of Event that consist of event details, day and time
+     * Constructs a instance of Duke.Task.Event that consist of event details, day and time
      *
      * @param taskDetails Description of the task
      * @param at day and time in string
@@ -24,9 +26,9 @@ public class Event extends Task {
         this.at = byDate;
     }
     /**
-     * Return the string representation of Event details with day and time, prefixed with [E].
+     * Return the string representation of Duke.Task.Event details with day and time, prefixed with [E].
      *
-     * @return the string representation of Event details
+     * @return the string representation of Duke.Task.Event details
      */
     public String toString() {
         String outputDate = this.at.format(outputDateFormat);
