@@ -26,7 +26,7 @@ public class Duke {
         Parser parser = new Parser();
         System.out.println("Hello, what can I do for you.\n");
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String input = ui.readCommand();
                 Command c = parser.parseCommand(input);
