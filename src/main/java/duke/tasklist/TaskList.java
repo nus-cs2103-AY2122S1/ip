@@ -9,12 +9,20 @@ import duke.task.Todo;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Represents the list of tasks.
+ */
 public class TaskList {
 
     private static ArrayList<Task> tasks;
     private static final DateTimeFormatter FORMAT_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final DateTimeFormatter FORMAT_NO_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    /**
+     * Constructor for TaskList.
+     *
+     * @param tasks ArrayList of Tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
@@ -28,6 +36,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a string of all the tasks.
+     *
+     * @return A string of all tasks.
+     */
     public String tasksAsString() {
         String result = "";
         for (int i = 0; i < tasks.size(); i++) {
@@ -38,6 +51,7 @@ public class TaskList {
 
     /**
      * Mark a task as done.
+     *
      * @param taskId ID of the task we are marking as done.
      */
     public void markTaskAsDone(int taskId) throws DukeException {
@@ -51,6 +65,7 @@ public class TaskList {
 
     /**
      * Adds a duke.task.Todo task.
+     *
      * @param description Description of the duke.task.Todo.
      */
     public void addTodo(String description) {
@@ -60,6 +75,7 @@ public class TaskList {
 
     /**
      * Adds a duke.task.Deadline task.
+     *
      * @param fullDescription String that contains the description and deadline of the task.
      */
     public void addDeadline(String fullDescription) throws DukeException {
@@ -77,12 +93,14 @@ public class TaskList {
             tasks.add(new Deadline(description, dateTime, FORMAT_TIME, true));
         } else {
             tasks.add(new Deadline(description, dateTime, FORMAT_NO_TIME, false));
-        };
+        }
+        ;
         printAfterAdding();
     }
 
     /**
      * Adds an duke.task.Event task.
+     *
      * @param fullDescription String that contains the description and time of the task.
      */
     public void addEvent(String fullDescription) throws DukeException {
@@ -114,6 +132,7 @@ public class TaskList {
 
     /**
      * Deletes a specific task.
+     *
      * @param taskId ID of the task to be deleted.
      */
     public void deleteTask(int taskId) throws DukeException {

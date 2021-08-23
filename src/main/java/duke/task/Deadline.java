@@ -7,15 +7,22 @@ import java.time.format.DateTimeFormatter;
 /**
  * A task that the user wants to complete by a certain point in time.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected boolean timeBool;
     protected LocalDateTime dateTime;
     protected LocalDate date;
-
     protected DateTimeFormatter formatInput;
     protected DateTimeFormatter formatOutputTime = DateTimeFormatter.ofPattern("MMM d yyyy hh:m a");
     protected DateTimeFormatter formatOutputNoTime = DateTimeFormatter.ofPattern("MMM d yyyy");
 
+    /**
+     * Constructor for the Deadline class.
+     *
+     * @param description Description of the task.
+     * @param dateString  Date and time of the deadline.
+     * @param formatInput How the input is formatted.
+     * @param timeBool    Boolean for whether time was supplied.
+     */
     public Deadline(String description, String dateString, DateTimeFormatter formatInput, boolean timeBool) {
         super(description);
         this.formatInput = formatInput;
@@ -29,6 +36,7 @@ public class Deadline extends Task{
 
     /**
      * Provides a String representation of the duke.task.Deadline.
+     *
      * @return A String representation of the duke.task.Deadline.
      */
     @Override

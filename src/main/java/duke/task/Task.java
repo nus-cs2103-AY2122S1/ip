@@ -10,6 +10,7 @@ public abstract class Task {
 
     /**
      * Constructor for the duke.task.Task class.
+     *
      * @param description Description of the task.
      */
     public Task(String description) {
@@ -19,6 +20,7 @@ public abstract class Task {
 
     /**
      * Outputs "X" if the task is done, else output " ".
+     *
      * @return A String which represents whether the task is done or not.
      */
     public String getStatusIcon() {
@@ -27,12 +29,14 @@ public abstract class Task {
 
     /**
      * Provides a String representation for each duke.task.Task object.
+     *
      * @return A String that describes the current duke.task.Task object.
      */
     public abstract String toString();
 
     /**
      * Sets whether the current duke.task.Task is done or not.
+     *
      * @param value Boolean value to set isDone to.
      */
     public void setIsDone(boolean value) {

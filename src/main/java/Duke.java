@@ -7,17 +7,33 @@ import duke.ui.Ui;
 import java.io.IOException;
 import java.time.DateTimeException;
 
+/**
+ * Represents the main class for Duke.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String dirPath, String fileName) throws IOException {
-        storage = new Storage(dirPath, fileName);
-        tasks = new TaskList(storage.loadFile());
+    /**
+     * Constructor for Duke class.
+     *
+     * @param dirPath  Directory path of the file.
+     * @param fileName Name of the file.
+     */
+    public Duke(String dirPath, String fileName) {
+        try {
+            storage = new Storage(dirPath, fileName);
+            tasks = new TaskList(storage.loadFile());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
+    /**
+     * Starts interaction with the user.
+     */
     public void run() {
         String[] inputWords = null;
         Ui.greet();
@@ -77,11 +93,16 @@ public class Duke {
                 Ui.printError(e.getMessage());
             }
         }
-        while(!inputWords[0].equals("bye"));
+        while (!inputWords[0].equals("bye"));
         System.out.println("Bye, hope to see you again!");
     }
 
-    public static void main(String[] args) throws IOException {
+    /**
+     * Creates an instance of Duke and starts the user interaction.
+     *
+     * @param args Command line arguments.
+     */
+    public static void main(String[] args) {
         new Duke("./data/", "duke.txt").run();
     }
 }
