@@ -57,21 +57,6 @@ public class Ui {
     }
 
     /**
-     * Displays the current list of tasks to the user.
-     *
-     * @param taskList The task list.
-     */
-    public void listTasks(TaskList taskList) {
-        ArrayList<Task> tasksList = taskList.getTaskList();
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasksList.size(); i++) {
-            System.out.println((i + 1) + "." + tasksList.get(i));
-        }
-        System.out.println(HORIZONTAL_LINE);
-    }
-
-    /**
      * Displays a formatted message indicating that the command
      * has been successfully executed.
      *
