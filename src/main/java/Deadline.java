@@ -9,7 +9,11 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = dateAndTime(by);
+    }
+    @Override
+    public String getActualTime() {
+        return by;
     }
 
     @Override

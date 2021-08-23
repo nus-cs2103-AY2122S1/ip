@@ -32,13 +32,13 @@ public class Duke {
 
         //User input.
         Scanner sc = new Scanner(System.in);
-        boolean flag = true;
+        boolean isContinue = true;
 
         //Continue the loop until user says bye.
-        while (flag) {
+        while (isContinue) {
             response = sc.nextLine();
             len = response.length();
-            flag = echo2();
+            isContinue = echo();
         }
     }
 
@@ -86,7 +86,7 @@ public class Duke {
      * @return Content of input is digit or not.
      */
     public static boolean chekDigit(String input) {
-        boolean flag = true;
+        boolean isDigit = true;
         int i = 0;
         if (input.charAt(0) == '-') {
             i = 1;
@@ -94,11 +94,11 @@ public class Duke {
         for (; i < input.length(); i++) {
             char curr = input.charAt(i);
             if (!(curr >= '0' && curr <= '9')) {
-                flag = false;
+                isDigit = false;
                 break;
             }
         }
-        return flag;
+        return isDigit;
     }
 
     /**
@@ -113,6 +113,7 @@ public class Duke {
         String end = "Now you have " + count + " tasks in the list.";
         return title + middle + end;
     }
+
     /**
      * Returns a boolean checking whether the user input is
      * related to to-do operations.
@@ -121,11 +122,11 @@ public class Duke {
      */
     public static boolean checkTodo() {
         //check with the special response "to-do X", where X is what to do.
-            Todo todo = new Todo(response.substring(5, len));
-            TASK_LIST.add(todo);
-            count++;
-            System.out.println(getPattern(getOutputFrame(todo.toString())));
-            return true;
+        Todo todo = new Todo(response.substring(5, len));
+        TASK_LIST.add(todo);
+        count++;
+        System.out.println(getPattern(getOutputFrame(todo.toString())));
+        return true;
     }
 
     /**
@@ -136,14 +137,14 @@ public class Duke {
      */
     public static boolean checkDeadline(){
         //check with the special response "deadline X", where X is what to do and by what time.
-            String[] parts = response.substring(9, len).split(" /by ");
-            String content = parts[0];
-            String time = parts[1];
-            Deadline deadline = new Deadline(content, time);
-            TASK_LIST.add(deadline);
-            count++;
-            System.out.println(getPattern(getOutputFrame(deadline.toString())));
-            return true;
+        String[] parts = response.substring(9, len).split(" /by ");
+        String content = parts[0];
+        String time = parts[1];
+        Deadline deadline = new Deadline(content, time);
+        TASK_LIST.add(deadline);
+        count++;
+        System.out.println(getPattern(getOutputFrame(deadline.toString())));
+        return true;
     }
 
 
@@ -155,14 +156,14 @@ public class Duke {
      */
     public static boolean checkEvent(){
         //check with the special response "event X", where X includes what to do and time to do.
-            String[] parts = response.substring(6, len).split(" /at ");
-            String content = parts[0];
-            String time = parts[1];
-            Event event = new Event(content, time);
-            TASK_LIST.add(event);
-            count++;
-            System.out.println(getPattern(getOutputFrame(event.toString())));
-            return true;
+        String[] parts = response.substring(6, len).split(" /at ");
+        String content = parts[0];
+        String time = parts[1];
+        Event event = new Event(content, time);
+        TASK_LIST.add(event);
+        count++;
+        System.out.println(getPattern(getOutputFrame(event.toString())));
+        return true;
     }
 
     /**
@@ -230,7 +231,10 @@ public class Duke {
     public static Operation checkResponse() {
         Operation op;
         try {
-            if (response.startsWith("done ")
+            if (response.startsWith("date ")
+                    && Task.isDate(response.substring(5, len))) {
+                op = Operation.DATE;
+            } else if (response.startsWith("done ")
                     && chekDigit(response.substring(5, len))) {
                 op = Operation.DONE;
             } else if (response.startsWith("todo ")) {
@@ -245,7 +249,7 @@ public class Duke {
                     && chekDigit(response.substring(7, len))) {
                 op = Operation.DELETE;
             } else if (response.equals("delete") || response.equals("todo") || response.equals("deadline")
-                    || response.equals("event") || response.equals("done")) {
+                    || response.equals("event") || response.equals("done") || response.equals("date")) {
                 String curr = response;
                 throw new EmptyInputException(curr);
             } else {
@@ -259,13 +263,34 @@ public class Duke {
         return op;
     }
 
+    public static boolean checkDate() {
+        String preTime = response.substring(5, len);
+        String actualTime = Task.dateAndTime(preTime);
+        StringBuilder sb = new StringBuilder();
+        String end = "\n   ";
+        String begin = "Here are the tasks in your list:\n   ";
+        sb.append(begin);
+        for (int i = 0; i < count; i++) {
+            Task curr = TASK_LIST.get(i);
+            if (i == count - 1) {
+                end = "";
+            }
+            if (!(curr instanceof Todo) && curr.getActualTime().equals(actualTime)) {
+                String out = (i + 1) + "." + curr + end;
+                sb.append(out);
+            }
+        }
+        System.out.println(getPattern(sb.toString()));
+        return true;
+    }
+
     /**
      * Returns a boolean to react to a response, while
      * printing the required information.
      *
      * @return Whether the user continues to input or not.
      */
-    public static boolean echo2() {
+    public static boolean echo() {
         switch (response) {
         case "bye":
             System.out.println(getPattern("Bye, see you soon. ^-^"));
@@ -289,6 +314,8 @@ public class Duke {
                 return checkDone();
             case DELETE:
                 return checkDelete();
+            case DATE:
+                return checkDate();
             default:
                 return true;
             }
