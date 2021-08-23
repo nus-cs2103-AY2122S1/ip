@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public abstract class Task {
+public class Task {
     protected String name;
     protected boolean isDone;
     public static ArrayList<Task> listOfTasks = new ArrayList<Task>();
@@ -68,6 +68,4 @@ public abstract class Task {
             System.out.println("Nice! I've marked this task as done:\n  " + t.toString());
         }
     }
-
-    public abstract String getRecordString();
 }

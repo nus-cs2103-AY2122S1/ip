@@ -15,18 +15,4 @@ public class Deadline extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
         return "[D]" + super.toString() + " (by: " + this.by.format(formatter) + ")";
     }
-
-    @Override
-    public String getRecordString() {
-        int done = this.isDone ? 1 : 0;
-        String record = String.format("D | %d | %s | %s", done, this.name, this.by);
-        return record;
-    }
-
-    @Override
-    public String getRecordString() {
-        int done = this.isDone ? 1 : 0;
-        String record = String.format("D | %d | %s | %s", done, this.name, this.by);
-        return record;
-    }
 }

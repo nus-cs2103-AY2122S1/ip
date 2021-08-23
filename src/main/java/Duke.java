@@ -132,7 +132,7 @@ public class Duke {
     public static void writeToFile() throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH);
         for (Task t : Task.listOfTasks) {
-            fw.write(t.getRecordString() + "\n");
+            fw.write(t.toString() + "\n");
         }
         fw.close();
     }
