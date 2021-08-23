@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.io.File;
 
@@ -79,7 +80,7 @@ public class Duke {
                                 " in my list. Please key in 'list' if you'd like to " +
                                 "view your list of tasks again!");
                     } else {
-                        System.out.println("\tNoted. I've removed this task:");
+                        System.out.println("\tNoted. I've removed this task from your main list:");
                         System.out.println("\t\t" + Task.getTaskList().get(taskNum).toString());
                         Task.getTaskList().get(taskNum).deleteTaskAndUpdate();
                         System.out.println("\tNow you have " + Task.getCounter() +
@@ -112,7 +113,14 @@ public class Duke {
                         }
                         if (currIndex == instruction.length() ||
                                 currIndex + 5 >= instruction.length()) {
-                            throw new DukeException("I think you forgot to key in your deadline!");
+                            throw new DukeException("I think you forgot to key in your deadline! Please key it" +
+                                    " in as dd/mm/yyyy hh:mm (in 24 hours format)");
+                        } else if (instruction.charAt(currIndex + 7) != '/' &&
+                                    instruction.charAt(currIndex + 10) != '/') {
+                                throw new DukeException("Please format the date as dd/mm/yyy");
+                        } else if (instruction.substring(currIndex).length() < 20){
+                                throw new DukeException("Please include the time in the 24 hour " +
+                                        "format (e.g. 15:00)");
                         } else {
                             String by = instruction.substring(currIndex + 5);
                             Task newDeadline = new Deadline(taskDescription, by);
@@ -138,6 +146,12 @@ public class Duke {
                         if (currIndex == instruction.length() ||
                                 currIndex + 5 >= instruction.length()) {
                             throw new DukeException("\tI think you forgot to key in your event timing!");
+                        } else if (instruction.charAt(currIndex + 7) != '/' &&
+                                instruction.charAt(currIndex + 10) != '/') {
+                            throw new DukeException("Please format the date as dd/mm/yyy");
+                        } else if (instruction.substring(currIndex).length() < 20){
+                            throw new DukeException("Please include the time in the 24 hour " +
+                                    "format (e.g. 15:00)");
                         } else {
                             String by = instruction.substring(currIndex + 5);
                             Task newEvent = new Event(taskDescription, by);
@@ -147,6 +161,39 @@ public class Duke {
                             System.out.println("\tNow you have " + Task.getCounter() +
                                     " task(s) in the list.");
                         }
+                    }
+                } else if (instruction.startsWith("today")) {
+                    System.out.println("\tTasks scheduled for today are: ");
+                    int num = 1;
+                    for (int i = 0; i < Task.getTaskList().size(); i++) {
+                        if (Task.getTaskList().get(i) instanceof Todo) {
+                            System.out.println("\t\t" + num + "." +
+                                    Task.getTaskList().get(i).toString());
+                            num++;
+                        } else {
+                            int currYear = LocalDateTime.now().getYear();
+                            int currMonth = LocalDateTime.now().getMonthValue();
+                            int currDate = LocalDateTime.now().getDayOfMonth();
+                            LocalDateTime start = LocalDateTime.of(currYear, currMonth, currDate, 0, 0);
+                            LocalDateTime end = LocalDateTime.of(currYear, currMonth, currDate, 23, 59);
+
+                            if (Task.getTaskList().get(i) instanceof Deadline &&
+                                    (((Deadline) Task.getTaskList().get(i)).getDeadline()).isAfter(start) &&
+                                    (((Deadline) Task.getTaskList().get(i)).getDeadline()).isBefore(end)) {
+                                System.out.println("\t\t" + num + "." +
+                                        Task.getTaskList().get(i).toString());
+                                num++;
+                            } else if (Task.getTaskList().get(i) instanceof Event &&
+                                    (((Event) Task.getTaskList().get(i)).getEventTime()).isAfter(start) &&
+                                    (((Event) Task.getTaskList().get(i)).getEventTime()).isBefore(end)) {
+                                System.out.println("\t\t" + num + "." +
+                                        Task.getTaskList().get(i).toString());
+                                num++;
+                            }
+                        }
+                    }
+                    if (num == 1) {
+                        System.out.println("\t\tLooks like there is nothing due today!");
                     }
                 } else {
                     throw new DukeException("\tOOPS!!! I'm sorry, but I don't " +
