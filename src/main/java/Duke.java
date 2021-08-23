@@ -1,8 +1,16 @@
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+
+    private static final String FILE_PATH = "data/duke.txt";
+
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,7 +23,25 @@ public class Duke {
         }
         System.out.println();
 
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        File f = new File(FILE_PATH);
+        if (f.exists()) {
+            System.out.println("Here's your previous data:");
+            Scanner sc = new Scanner(f);
+            while (sc.hasNext()) {
+                String next = sc.nextLine();
+                System.out.println(next);
+            }
+            sc.close();
+            for (int i = 0; i < 60; i++) {
+                System.out.print("_");
+            }
+            System.out.println();
+        } else {
+            if (!f.getParentFile().exists()) {
+                f.getParentFile().mkdir();
+            }
+        }
+        f.createNewFile();
 
         Scanner in = new Scanner(System.in);
         while (in.hasNext()) {
@@ -24,14 +50,14 @@ public class Duke {
             String cmd = x[0];
             if (x.length == 1) {
                 if ("bye".equals(cmd)) {
-                    System.out.println("Bye. Hope to see you again soon! :)");
+                    System.out.println("Bye. See you again soon! :)");
                     break;
                 } else if ("list".equals(cmd)) {
                     Task.listAllTasks();
                 } else if ("todo".equals(cmd) || "deadline".equals(cmd) || "event".equals(cmd)) {
                     missingTaskName(cmd);
                 } else if ("done".equals(cmd) || "delete".equals(cmd)) {
-                    System.out.println("Indicate a task number beside this command ☻");
+                    System.out.println("Indicate a task number beside the command ☻");
                 } else {
                     System.out.println("☹︎wut☁︎☻ unknown command");
                 }
@@ -61,6 +87,7 @@ public class Duke {
             }
         }
         in.close();
+        writeToFile();
     }
 
     public static void addToDo(String input) {
@@ -70,17 +97,27 @@ public class Duke {
     }
 
     public static void addDeadline(String input) {
-        String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/by") - 1);
-        String by = input.substring(input.lastIndexOf("/by") + 4);
-        Deadline d = new Deadline(name, by);
-        Task.addTask(d);
+        try {
+            String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/by") - 1);
+            String by = input.substring(input.lastIndexOf("/by") + 4);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            Deadline d = new Deadline(name, LocalDateTime.parse(by, formatter));
+            Task.addTask(d);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date and time input, indicate date in yyyy-MM-dd HH:mm format.");
+        }
     }
 
-    public static void addEvent(String input) {
-        String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/at") - 1);
-        String at = input.substring(input.lastIndexOf("/at") + 4);
-        Event e = new Event(name, at);
-        Task.addTask(e);
+    public static void addEvent(String input) throws DateTimeParseException {
+        try {
+            String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/at") - 1);
+            String at = input.substring(input.lastIndexOf("/at") + 4);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            Event e = new Event(name, LocalDateTime.parse(at, formatter));
+            Task.addTask(e);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date and time input, indicate date in yyyy-MM-dd HH:mm format.");
+        }
     }
 
     public static void missingTaskName(String cmd) {
@@ -90,5 +127,13 @@ public class Duke {
 
     public static int getTaskNumber(String[] inputArr) {
         return Integer.parseInt(inputArr[1]) - 1;
+    }
+
+    public static void writeToFile() throws IOException {
+        FileWriter fw = new FileWriter(FILE_PATH);
+        for (Task t : Task.listOfTasks) {
+            fw.write(t.getRecordString() + "\n");
+        }
+        fw.close();
     }
 }
