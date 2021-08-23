@@ -1,6 +1,7 @@
 package duke.tasktype;
 
 import java.util.Scanner;
+
 import duke.exception.WrongCommandFormatException;
 
 /**

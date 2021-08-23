@@ -1,15 +1,16 @@
 package duke;
 
-import duke.exception.WrongCommandFormatException;
-import duke.tasktype.Deadline;
-import duke.tasktype.Event;
-import duke.tasktype.Task;
-import duke.tasktype.Todo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import duke.tasktype.Task;
+import duke.tasktype.Deadline;
+import duke.tasktype.Event;
+import duke.tasktype.Todo;
+import duke.exception.WrongCommandFormatException;
 
 public class Storage {
     private MyList list;

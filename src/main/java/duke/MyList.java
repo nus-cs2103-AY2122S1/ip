@@ -1,8 +1,8 @@
 package duke;
 
-import duke.tasktype.Task;
-
 import java.util.ArrayList;
+
+import duke.tasktype.Task;
 
 /**
  * duke.MyList class that encapsulates the bot list object and functionalities.

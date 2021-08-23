@@ -1,9 +1,10 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.tasktype.Deadline;
 import duke.tasktype.Event;
 import duke.tasktype.Todo;
-import java.util.Scanner;
 import duke.exception.WrongCommandFormatException;
 
 public class Parser {

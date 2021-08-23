@@ -1,8 +1,7 @@
 package duke.tasktype;
 
 import duke.exception.WrongCommandFormatException;
-//test master branch
-//add another commit in master branch
+
 /**
  * Class to represent a to-do task.
  * A to-do event does not have any time or date requirements.
