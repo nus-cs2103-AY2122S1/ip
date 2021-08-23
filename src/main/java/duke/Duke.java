@@ -4,11 +4,18 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.File;
 
+/**
+ * Class which operates Jarvis the chat-bot
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Retrieves all the tasks stored by Jarvis in the hard disk upon running the main method.
+     * @param filePath The file in which the tasks are stored
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +27,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Scans for user input and calls the corresponding method once the command has been processed
+     * by Parser.parseCommand()
+     * @throws IOException if there is an error in the reading user input or Jarvis's output
+     * @throws DukeException if user input is formatted incorrectly
+     */
     public void run() throws IOException, DukeException {
         Scanner sc = new Scanner(System.in);
         String instruction = sc.nextLine();
@@ -27,12 +40,10 @@ public class Duke {
         while (!Parser.parseCommand(instruction).equals("bye")) {
             try {
                 if (Parser.parseCommand(instruction).equals("list")) {
-                    int index = 0;
                     if (TaskList.getCounter() == 0) {
                         System.out.println("\tThere are currently no tasks on your list :)");
                     } else {
                         Parser.parseList();
-                        //printFileContents("data/jarvis.txt");
                     }
                 } else if (Parser.parseCommand(instruction).equals("done")) {
                     Parser.parseDone(instruction);
@@ -60,6 +71,12 @@ public class Duke {
         System.out.println("----------------------------------");
     }
 
+    /**
+     * Runs Jarvis and starts the input/output calls
+     * @param args
+     * @throws IOException if there is an error in the reading user input or Jarvis's output
+     * @throws DukeException if user input is formatted incorrectly
+     */
     public static void main (String[]args) throws IOException, DukeException {
         new Duke("data/jarvis.txt").run();
     }

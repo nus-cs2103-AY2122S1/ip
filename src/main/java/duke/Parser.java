@@ -2,10 +2,20 @@ package duke;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+/**
+ * Deals with making sense of the user commands
+ */
 public class Parser {
     public static void Parser() {
 
     }
+
+    /**
+     * Identifies and returns the command word from the user's input so that the corresponding methods
+     * can be called
+     * @param command user's input
+     * @return the extracted command word from the user's input
+     */
     public static String parseCommand(String command) {
         String keyWord = "";
         if (command.equals("list")) {
@@ -28,6 +38,13 @@ public class Parser {
         return keyWord;
     }
 
+    /**
+     * Identifies the task that is completed and passes it to markASDoneAndUpdate() method
+     * @param instruction User's input that followed the "done" command word
+     * @throws DukeException if there is no task that has the index keyed in by the user
+     * @throws IOException if there is an error in updated the list of tasks saved in the user's
+     * hard disk after marking a task as completed
+     */
     public static void parseDone(String instruction) throws DukeException, IOException {
         int taskNum = Integer.parseInt(instruction.substring(5)) - 1;
         if (taskNum >= TaskList.getCounter()) {
@@ -41,6 +58,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Identifies the task that is to be deleted and passes it to deleteTaskAndUpdate() method
+     * @param instruction User's input that followed the "delete" command word
+     * @throws DukeException if there is no task that has the index keyed in by the user
+     * @throws IOException if there is an error in updated the list of tasks saved in the user's
+     * hard disk after marking a task as completed
+     */
     public static void parseDelete(String instruction) throws DukeException, IOException {
         int taskNum = Integer.parseInt(instruction.substring(7)) - 1;
         if (taskNum >= TaskList.getCounter()) {
@@ -56,6 +80,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Identifies the description of the todo task that is to be added and passes it to
+     * addTaskAndUpdate() method
+     * @param instruction User's input that followed the "todo" command word
+     * @throws DukeException if there is no task description keyed in
+     * @throws IOException if there is an error in updated the list of tasks saved in the user's
+     * hard disk after marking a task as completed
+     */
     public static void parseTodo(String instruction) throws DukeException, IOException {
         if (instruction.length() < 5) {
             throw new DukeException("\tOOPS!!! The description of a todo " +
@@ -71,6 +103,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Identifies the description of the deadline task that is to be added and passes it to
+     * addTaskAndUpdate() method
+     * @param instruction User's input that followed the "deadline" command word
+     * @throws DukeException if there is no task description/no deadline/wrongly formatted deadline
+     * keyed in
+     * @throws IOException if there is an error in updated the list of tasks saved in the user's
+     * hard disk after marking a task as completed
+     */
     public static void parseDeadline(String instruction) throws DukeException, IOException {
         if (instruction.length() < 10) {
             throw new DukeException("\tOOPS!!! The description of a deadline " +
@@ -105,6 +146,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Identifies the description of the event task that is to be added and passes it to
+     * addTaskAndUpdate() method
+     * @param instruction User's input that followed the "event" command word
+     * @throws DukeException if there is no task description/no deadline/wrongly formatted deadline
+     * keyed in
+     * @throws IOException if there is an error in updated the list of tasks saved in the user's
+     * hard disk after marking a task as completed
+     */
     public static void parseEvent(String instruction) throws DukeException, IOException {
         if (instruction.length() < 7) {
             throw new DukeException("\tOOPS!!! The description of a event " +
@@ -138,7 +188,10 @@ public class Parser {
         }
     }
 
-    public static void parseList() throws DukeException, IOException {
+    /**
+     * Prints out the list of tasks saved by Jarvis
+     */
+    public static void parseList() {
         int num = 1;
         for (int i = 0; i < TaskList.getTaskList().size(); i++) {
             System.out.println("\t" + num + "." +
@@ -147,7 +200,10 @@ public class Parser {
         }
     }
 
-    public static void parseToday() throws DukeException, IOException {
+    /**
+     * Prints out the list of tasks set for/due today and all todo tasks
+     */
+    public static void parseToday() {
         System.out.println("\tTasks scheduled for today are: ");
         int num = 1;
         for (int i = 0; i < TaskList.getTaskList().size(); i++) {

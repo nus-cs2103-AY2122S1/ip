@@ -1,5 +1,13 @@
 package duke;
+
+/**
+ * Deals with interactions with the user
+ */
 public class Ui {
+    /**
+     * Prints greeting message to user from Jarvis and the question prompting for the first user
+     * input
+     */
     public Ui() {
         String logo = "\n" +
                 "       __       ___      .______     ____    ____  __       _______.\n" +
