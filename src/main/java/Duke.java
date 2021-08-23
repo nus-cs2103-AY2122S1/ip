@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -171,10 +173,16 @@ public class Duke {
                 return new Todo(taskLine);
             case DEADLINE:
                 String[] deadlineParts = taskLine.split("\\s+/by\\s+", 2);
-                return new Deadline(deadlineParts[0], deadlineParts[1]);
+                return new Deadline(
+                    deadlineParts[0],
+                    LocalDate.parse(deadlineParts[1])
+                );
             case EVENT:
                 String[] eventParts = taskLine.split("\\s+/at\\s+", 2);
-                return new Event(eventParts[0], eventParts[1]);
+                return new Event(
+                    eventParts[0],
+                    LocalDate.parse(eventParts[1])
+                );
             default:
                 throw new UnsupportedOperationException("task type is not a valid enum value");
         }
@@ -196,10 +204,20 @@ public class Duke {
                 return task.getDescription();
             case DEADLINE:
                 var deadline = (Deadline) task;
-                return String.format("%s /by %s", deadline.getDescription(), deadline.getDeadline());
+                return String.format(
+                    "%s /by %s",
+                    deadline.getDescription(),
+                    deadline.getDeadline()
+                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                );
             case EVENT:
                 var event = (Event) task;
-                return String.format("%s /at %s", event.getDescription(), event.getTime());
+                return String.format(
+                    "%s /at %s",
+                    event.getDescription(),
+                    event.getTime()
+                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                );
             default:
                 throw new UnsupportedOperationException("task type is not a valid enum value");
         }
@@ -211,13 +229,32 @@ public class Duke {
         String statusIcon = task.getStatusIcon();
         switch (taskType) {
             case TODO:
-                return String.format("[%s][%s] %s", taskIcon, statusIcon, task.getDescription());
+                return String.format(
+                    "[%s][%s] %s",
+                    taskIcon,
+                    statusIcon,
+                    task.getDescription()
+                );
             case DEADLINE:
                 var deadline = (Deadline) task;
-                return String.format("[%s][%s] %s (by: %s)", taskIcon, statusIcon, deadline.getDescription(), deadline.getDeadline());
+                return String.format(
+                    "[%s][%s] %s (by: %s)",
+                    taskIcon,
+                    statusIcon,
+                    deadline.getDescription(),
+                    deadline.getDeadline()
+                        .format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                );
             case EVENT:
                 var event = (Event) task;
-                return String.format("[%s][%s] %s (at: %s)", taskIcon, statusIcon, event.getDescription(), event.getTime());
+                return String.format(
+                    "[%s][%s] %s (at: %s)",
+                    taskIcon,
+                    statusIcon,
+                    event.getDescription(),
+                    event.getTime()
+                        .format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                );
             default:
                 throw new UnsupportedOperationException("task type is not a valid enum value");
         }
