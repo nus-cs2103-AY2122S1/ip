@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 /**
  * This class represents the chat bot.
+ *
  * @author Nigel Tan
  */
 
@@ -22,6 +23,7 @@ public class Duke {
         Command(String text) {
             this.text = text;
         }
+
         public static Command fromString(String text) {
             for (Command c : Command.values()) {
                 if (c.text.equalsIgnoreCase(text)) {
@@ -33,7 +35,7 @@ public class Duke {
     }
 
     public static void main(String[] args) throws Exception {
-        final String horizontalLine = "    ____________________________________________________________\n";
+        final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -49,53 +51,53 @@ public class Duke {
         while (!text.equals("bye")) {
             String[] splitWords = text.split(" ", 2);
             String commandWord = splitWords[0];
-            Command command =  Command.fromString(commandWord);
+            Command command = Command.fromString(commandWord);
             switch (command) {
-                case LIST:
-                    response.display();
-                    break;
-                case DONE:
-                    int pos = Integer.parseInt(splitWords[1]);
-                    response.markDone(pos - 1);
-                    break;
-                case TODO:
-                    try {
-                        response.echo(new ToDo(splitWords[1]));
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.err.println(horizontalLine +
-                                "    :( OOPS! The description of a todo cannot be empty.\n" +
-                                horizontalLine);
-                    }
-                    break;
-                case DEADLINE:
-                    try {
-                        String[] splitBy = splitWords[1].split("/by ", 2);
-                        response.echo(new Deadline(splitBy[0], splitBy[1]));
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.err.println(horizontalLine +
-                                "    :( OOPS! The description or a time of a deadline cannot be empty.\n" +
-                                horizontalLine);
-                    }
-                    break;
-                case EVENT:
-                    try {
-                        String[] splitAt = splitWords[1].split("/at ", 2);
-                        response.echo(new Events(splitAt[0], splitAt[1]));
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.err.println(horizontalLine +
-                                "    :( OOPS! The description or a time of an event cannot be empty.\n" +
-                                horizontalLine);
-                    }
-                    break;
-                case DELETE:
-                    int pos2 = Integer.parseInt(splitWords[1]);
-                    response.delete(pos2 - 1);
-                    break;
-                case OTHER:
-                    System.out.println(horizontalLine +
-                            "    :( OOPS! I'm sorry, but I don't know what that means.\n" +
-                            horizontalLine);
-                    break;
+            case LIST:
+                response.display();
+                break;
+            case DONE:
+                int pos = Integer.parseInt(splitWords[1]);
+                response.markDone(pos - 1);
+                break;
+            case TODO:
+                try {
+                    response.echo(new ToDo(splitWords[1]));
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.err.println(HORIZONTAL_LINE +
+                            "    :( OOPS! The description of a todo cannot be empty.\n" +
+                            HORIZONTAL_LINE);
+                }
+                break;
+            case DEADLINE:
+                try {
+                    String[] splitBy = splitWords[1].split("/by ", 2);
+                    response.echo(new Deadline(splitBy[0], splitBy[1]));
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.err.println(HORIZONTAL_LINE +
+                            "    :( OOPS! The description or a time of a deadline cannot be empty.\n" +
+                            HORIZONTAL_LINE);
+                }
+                break;
+            case EVENT:
+                try {
+                    String[] splitAt = splitWords[1].split("/at ", 2);
+                    response.echo(new Events(splitAt[0], splitAt[1]));
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.err.println(HORIZONTAL_LINE +
+                            "    :( OOPS! The description or a time of an event cannot be empty.\n" +
+                            HORIZONTAL_LINE);
+                }
+                break;
+            case DELETE:
+                int pos2 = Integer.parseInt(splitWords[1]);
+                response.delete(pos2 - 1);
+                break;
+            case OTHER:
+                System.out.println(HORIZONTAL_LINE +
+                        "    :( OOPS! I'm sorry, but I don't know what that means.\n" +
+                        HORIZONTAL_LINE);
+                break;
             }
             text = sc.nextLine();
         }
