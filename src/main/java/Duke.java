@@ -21,29 +21,22 @@ public class Duke {
             System.out.println("    -----------------------------------------");
 
             if (command.equals("bye")) {
-                ByeCommand bye = new ByeCommand();
-                bye.execute();
+                new ByeCommand().execute();
                 break;
             } else if (command.equals("list")) {
-                ListCommand list = new ListCommand(taskList);
-                list.execute();
+                new ListCommand(taskList).execute();
             } else if (inputValues[0].equals("done") && inputValues.length == 2) {
                 //treat as unknown command if there is more than 1 number after "done".
-                DoneCommand done = new DoneCommand(taskList, inputValues);
-                done.execute();
+                new DoneCommand(taskList, inputValues).execute();
             } else if (inputValues[0].equals("delete") && inputValues.length == 2) {
                 //treat as unknown command if there is more than 1 number after "delete".
-                DeleteCommand delete = new DeleteCommand(taskList, inputValues);
-                delete.execute();
+                new DeleteCommand(taskList, inputValues).execute();
             } else if (inputValues[0].equals("deadline")) {
-                DeadlineCommand deadline = new DeadlineCommand(taskList, inputValues, command);
-                deadline.execute();
+                new DeadlineCommand(taskList, inputValues, command).execute();
             } else if (inputValues[0].equals("event")) {
-                EventCommand event = new EventCommand(taskList, inputValues, command);
-                event.execute();
+                new EventCommand(taskList, inputValues, command).execute();
             } else if (inputValues[0].equals("todo")) {
-                TodoCommand todo = new TodoCommand(taskList, inputValues, command);
-                todo.execute();
+                new TodoCommand(taskList, inputValues, command).execute();
             } else {
                 System.out.println("     OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
