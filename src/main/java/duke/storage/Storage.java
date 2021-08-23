@@ -30,7 +30,7 @@ public class Storage {
 
     /**
      * Constructor of the Storage class.
-     * 
+     *
      * @param filePath The specified file path of the txt file.
      */
     public Storage(String filePath) {
@@ -39,7 +39,7 @@ public class Storage {
 
     /**
      * Loads the txt file into a TaskList.
-     * 
+     *
      * @return The resultant task list.
      * @throws UnableToParseException Thrown if unable to parse the txt file.
      * @throws IOException Thrown if there was an unexpected IO error.
@@ -50,7 +50,7 @@ public class Storage {
             Files.createFile(path);
             return new TaskList();
         }
-        
+
         List<String> lines = Files.readAllLines(this.path);
         ArrayList<Task> tasks = new ArrayList<>();
         for (String line : lines) {
@@ -122,7 +122,7 @@ public class Storage {
      * Solution adapted from https://stackoverflow.com/a/37624091 with modifications.
      *
      * @param index the line number to overwrite
-     * @param task the new task 
+     * @param task the new task
      * @throws IOException unexpected IO error.
      */
     public void update(int index, Task task) throws IOException {
@@ -133,11 +133,11 @@ public class Storage {
 
     /**
      * Appends a new task to storage.
-     * 
+     *
      * @param task The task to be appended.
      * @throws IOException Thrown if there was an unexpected IO error.
      */
-    public void append(Task task) throws IOException{
+    public void append(Task task) throws IOException {
         Files.write(this.path, (task.toSavableFormat() + "\n").getBytes(), StandardOpenOption.APPEND);
     }
 
@@ -145,7 +145,7 @@ public class Storage {
      * Solution adapted from https://stackoverflow.com/a/37624091 with modifications.
      *
      * @param taskId Id of the task to delete.
-     * @throws IOException Thrown if there was an unexpected IO error.               
+     * @throws IOException Thrown if there was an unexpected IO error.
      */
     public void delete(int taskId) throws IOException {
         List<String> fileContent = new ArrayList<>(Files.readAllLines(this.path));

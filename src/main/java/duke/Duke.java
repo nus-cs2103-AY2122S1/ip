@@ -12,10 +12,10 @@ import java.io.IOException;
  * This class is the main driver of the Duke app.
  */
 public class Duke {
-    private TaskList tasks;
     private final Storage storage;
     private final Ui ui;
-    
+    private TaskList tasks;
+
     private Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -30,7 +30,7 @@ public class Duke {
         }
         ui.printAllTasks(this.tasks);
     }
-    
+
     public static void main(String[] args) {
         String filePath = Storage.DEFAULT_FILE_PATH;
         if (args.length >= 1) {
@@ -54,7 +54,7 @@ public class Duke {
                 ui.printErr("Unexpected Error: " + e.getMessage());
                 ui.exit();
                 System.exit(1);
-            } 
+            }
         }
     }
 }

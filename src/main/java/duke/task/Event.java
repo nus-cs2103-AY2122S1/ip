@@ -44,7 +44,7 @@ public class Event extends Task {
         List<String> stringList = Arrays.asList(TASK_TYPE, isDone, this.getDescription(), this.at);
         return String.join(Storage.DELIMITER, stringList);
     }
-    
+
     @Override
     protected String getTaskType() {
         return TASK_TYPE;

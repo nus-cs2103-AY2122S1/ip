@@ -13,14 +13,14 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     /**
      * Returns the corresponding command from user input.
-     * 
+     *
      * @param input The user input.
      * @return The corresponding command.
      * @throws UnknownCommandException Thrown if the command keyword has no match.
      * @throws InvalidArgumentsException Thrown if there are invalid arguments.
      * @throws UnableToParseException Thrown if there was an error parsing the command.
      */
-    public static Command parseCommand(String input) 
+    public static Command parseCommand(String input)
             throws UnknownCommandException, InvalidArgumentsException, UnableToParseException {
         // index 0 has command, index 1 has command arguments (if applicable)
         String[] splitInput = input.split(" ", 2);
@@ -41,7 +41,7 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         default:
-           throw new UnknownCommandException();
+            throw new UnknownCommandException();
         }
     }
 
@@ -56,9 +56,10 @@ public class Parser {
         if (args.length != 2) {
             throw new InvalidArgumentsException("todo [task]");
         }
-        
+
         return new AddTaskCommand(new Todo(args[1]));
     }
+
 
     /**
      * Parses the add event command
@@ -71,7 +72,7 @@ public class Parser {
         if (args.length != 2) {
             throw new InvalidArgumentsException("event [task] /at [time period]");
         }
-        
+
         String[] eventArgs = args[1].split(" /at ");
         if (eventArgs.length != 2) {
             throw new InvalidArgumentsException("event [task] /at [time period]");
@@ -79,6 +80,7 @@ public class Parser {
 
         return new AddTaskCommand(new Event(eventArgs[0], eventArgs[1]));
     }
+
 
     /**
      * Parses the add deadline command
@@ -105,6 +107,7 @@ public class Parser {
         }
     }
 
+
     /**
      * Parses the done command
      *
@@ -117,7 +120,7 @@ public class Parser {
         if (args.length != 2) {
             throw new InvalidArgumentsException("done [task id]");
         }
-        
+
         int taskId = parseTaskId(args[1]);
         return new DoneCommand(taskId);
     }
@@ -134,11 +137,11 @@ public class Parser {
         if (args.length != 2) {
             throw new InvalidArgumentsException("delete [task id]");
         }
-        
+
         int taskId = parseTaskId(args[1]);
         return new DeleteCommand(taskId);
     }
-    
+
     private static int parseTaskId(String index) throws UnableToParseException {
         int i;
 
@@ -150,11 +153,11 @@ public class Parser {
 
         return i;
     }
-    
+
     public static String parseIsDoneToString(boolean isDone) {
         return isDone ? "1" : "0";
     }
-    
+
     public static boolean parseStringToIsDone(String s) throws UnableToParseException {
         switch (s) {
         case "1":

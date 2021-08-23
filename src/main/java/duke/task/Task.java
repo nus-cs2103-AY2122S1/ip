@@ -13,14 +13,14 @@ public abstract class Task {
         this.description = description;
         this.isDone = false;
     }
-    
+
     /**
      * Marks this task as done
      */
     public void markAsDone() {
         this.isDone = true;
     }
-    
+
     protected boolean isDone() {
         return this.isDone;
     }
@@ -28,7 +28,7 @@ public abstract class Task {
     protected String getDescription() {
         return this.description;
     }
-    
+
     /**
      * Returns a string representation of this task
      *
@@ -40,7 +40,8 @@ public abstract class Task {
         String isDone = "[" + (this.isDone ? "X" : " ") + "]";
         return taskType + " " + isDone + " " + this.description;
     }
-    
+
     public abstract String toSavableFormat();
+
     protected abstract String getTaskType();
 }

@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Todo extends Task {
     private static final String TASK_TYPE = "T";
-    
+
     /**
      * Constructor of the duke.task.Todo class
      *
@@ -41,7 +41,7 @@ public class Todo extends Task {
         List<String> stringList = Arrays.asList(TASK_TYPE, isDone, this.getDescription());
         return String.join(Storage.DELIMITER, stringList);
     }
-    
+
     @Override
     protected String getTaskType() {
         return TASK_TYPE;

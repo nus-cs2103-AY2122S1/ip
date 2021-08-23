@@ -15,7 +15,7 @@ public class TaskTest {
 
     @Test
     public void toSavableFormat_deadline_success() {
-        Task task = new Deadline("test" , LocalDate.parse("2020-10-10"));
+        Task task = new Deadline("test", LocalDate.parse("2020-10-10"));
         String expected = "D | 0 | test | 2020-10-10";
         assertEquals(expected, task.toSavableFormat());
     }
