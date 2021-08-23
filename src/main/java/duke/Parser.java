@@ -15,6 +15,10 @@ public class Parser {
         return command.equals("done") || command.equals("delete"); 
     }
     
+    private boolean isFindingTask() {
+        return command.equals("find"); 
+    }
+    
     public boolean isAddingNewTask() {
         return command.equals("todo") || command.equals("deadline") || command.equals("event");
     }
@@ -64,6 +68,13 @@ public class Parser {
         int inputLen = inputArr.length;
         if (input.equals("bye") || input.equals("list")) {
             return new String[] {command}; 
+        } else if (isFindingTask()) {
+            if (inputLen < 2) {
+                throw new DukeException("Please specify the search keyword" +
+                        "\n i.e. find book");
+            } else {
+                return new String[] {command, inputArr[1]}; 
+            }
         } else if (isEditingTask()) {
             if (inputLen < 2) {
                 throw new DukeException("Please specify the index of the task to be edited" +

@@ -48,6 +48,9 @@ public class Duke {
                     ui.displayList(list); 
                 } else if (cmd.equals("done") || cmd.equals("delete")) {
                     list.editTask(args);
+                } else if (cmd.equals("find")) {
+                    TaskList matches = list.find(args[1]); 
+                    ui.displayMatching(matches);
                 } else {
                     addTask(args);
                 }
