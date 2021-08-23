@@ -1,8 +1,8 @@
 package main.java.duke.command;
 
 import main.java.duke.DukeException;
-import main.java.duke.storage.Storage;
-import main.java.duke.tasklist.TaskList;
+import main.java.duke.storage.*;
+import main.java.duke.tasklist.*;
 import main.java.duke.Ui;
 import main.java.duke.task.ToDo;
 
@@ -38,8 +38,9 @@ public class ToDoCommand extends Command {
             if (description.replace(" ", "").equals("")) {
                 throw new DukeException("The description for the Todo task cannot be empty.");
             }
-            tasks.addTask(new ToDo(false, description));
-            storage.add("T", description.trim(), "");
+            String desc = description.trim();
+            tasks.addTask(new ToDo(false, desc));
+            storage.add("T", desc, "");
         } catch (IOException e) {
             throw new DukeException("There is an error in adding the Todo task to your saved data.");
         }

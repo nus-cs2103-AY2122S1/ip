@@ -69,7 +69,7 @@ public class Ui {
     }
 
     /**
-     * Closes the BufferedReader and PrintWriter.
+     * Closes the BufferedReader.
      */
     public void close() throws DukeException {
         try {
@@ -78,7 +78,7 @@ public class Ui {
             bufferedReader.close();
             printWriter.close();
         } catch (IOException e) {
-            throw new DukeException("Unable to close the parser / printWriter.");
+            throw new DukeException("Unable to close the parser.");
         }
     }
 

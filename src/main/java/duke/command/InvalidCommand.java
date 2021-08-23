@@ -1,8 +1,8 @@
 package main.java.duke.command;
 
 import main.java.duke.DukeException;
-import main.java.duke.storage.Storage;
-import main.java.duke.tasklist.TaskList;
+import main.java.duke.storage.*;
+import main.java.duke.tasklist.*;
 import main.java.duke.Ui;
 
 /**

@@ -1,8 +1,8 @@
 package main.java.duke;
 
 import main.java.duke.command.Command;
-import main.java.duke.storage.StorageDuke;
-import main.java.duke.tasklist.TaskListDuke;
+import main.java.duke.storage.*;
+import main.java.duke.tasklist.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,9 +15,9 @@ import java.util.ArrayList;
  * @version CS2103T AY21/22 S2
  */
 public class Duke {
-    private final StorageDuke STORAGE;
+    private final Storage STORAGE;
     private final Ui UI;
-    private TaskListDuke tasks;
+    private TaskList tasks;
 
     /**
      * Constructor for Duke.
