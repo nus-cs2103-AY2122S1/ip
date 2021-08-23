@@ -92,6 +92,19 @@ public abstract class Command {
         public void execute(TaskList taskList, Ui ui, Storage storage) {
             ui.unknownUi();
         }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == this) {
+                return true;
+            }
+
+            if (obj instanceof UnknowCommand) {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
 
