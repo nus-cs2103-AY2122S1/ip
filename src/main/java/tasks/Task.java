@@ -1,6 +1,8 @@
 package tasks;
 
 public class Task {
+    public static String delimiter = " | ";
+    protected String taskIcon;
     protected String description;
     protected boolean isDone;
 
@@ -23,5 +25,12 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public String saveFormat() {
+        return String.join(Task.delimiter,
+                        this.taskIcon,
+                        isDone ? "1" : "0",
+                        this.description);
     }
 }

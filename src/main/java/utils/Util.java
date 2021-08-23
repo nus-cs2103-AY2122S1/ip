@@ -2,9 +2,22 @@ package utils;
 
 import tasks.Task;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Util {
     public static boolean isLowerCase(String input) {
         return input == input.toLowerCase();
+    }
+
+    public static void writeToFile(String filePath, String textToAdd) {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(textToAdd);
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
     }
 
     public static boolean isInteger(String s) {
