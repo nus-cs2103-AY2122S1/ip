@@ -29,7 +29,7 @@ public class DateTime {
     public static boolean isValidDate(String date) {
         try {
             DATE_FORMATTER.parse(date);
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return false;
         }
         return true;
