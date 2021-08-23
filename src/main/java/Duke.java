@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,22 +12,36 @@ import java.util.Scanner;
  * @author Chen Yanyu
  */
 public class Duke {
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_PURPLE = "\u001B[35m";
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String PATH = "data/duke.txt";
 
-    public static final List<Task> TASKS = new ArrayList<>();
+    private static final List<Task> TASKS = new ArrayList<>();
 
-    public static void main(String[] args) {
+    private final Storage storage;
+
+    public Duke() {
+        this.storage = new Storage(PATH);
+    }
+
+    private void run() {
+        try {
+            TASKS.addAll(storage.load());
+            hikoPrint("Saved task loaded successfully.\n");
+        } catch (FileNotFoundException e) {
+            errorPrint("You do not have any saved task.\n");
+        } catch (FileFormatException e) {
+            errorPrint(e.getMessage());
+        }
+
         greet();
 
         Scanner sc = new Scanner(System.in);
-        while (true) {
-            try {
-                handleInput(sc.nextLine());
-            } catch (DukeException e) {
-                errorPrint(e.getMessage());
-            }
+        while (true) try {
+            handleInput(sc.nextLine());
+        } catch (Exception e) {
+            errorPrint(e.getMessage());
         }
     }
 
@@ -46,7 +64,7 @@ public class Duke {
         System.out.print(ANSI_RED + err + ANSI_RESET + "\n> ");
     }
 
-    private static void handleInput(String input)
+    private void handleInput(String input)
             throws UnknownActionException, EmptyDescriptionException, WrongFormatException, ListIndexException {
         Command command = new Command(input);
         switch (command.getAction()) {
@@ -85,7 +103,7 @@ public class Duke {
             Task task = TASKS.remove(idx - 1);
             hikoPrint("Noted. I've removed this task:\n  " +
                     task +
-                    "\nNow you have " + TASKS.size() + " tasks in the list.");
+                    "\nNow you have " + TASKS.size() + " tasks in the list.\n");
         } catch (NumberFormatException e) {
             throw new WrongFormatException("delete <index for the task>");
         } catch (IndexOutOfBoundsException e) {
@@ -130,8 +148,19 @@ public class Duke {
         hikoPrint(output);
     }
 
-    private static void handleBye() {
+    private void handleBye() {
+        try {
+            storage.write(TASKS);
+        } catch (IOException e) {
+            errorPrint("error while saving the tasks!");
+        }
+
         System.out.println(ANSI_PURPLE + "Bye! Hope to see you again soon!" + ANSI_RESET);
         System.exit(0);
+    }
+
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }

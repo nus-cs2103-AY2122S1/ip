@@ -4,7 +4,7 @@
  * @author Chen Yanyu
  */
 
-class Task {
+abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -38,6 +38,14 @@ class Task {
     }
 
     /**
+     * return the status of the task.
+     * @return the status of the task
+     */
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    /**
      * Mark the task as done.
      */
     public void setDone() {
@@ -49,4 +57,6 @@ class Task {
         return "[" + this.getStatusIcon() +
             "] " + this.description;
     }
+
+    abstract public String[] saveStrings();
 }
