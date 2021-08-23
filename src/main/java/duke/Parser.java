@@ -32,6 +32,8 @@ public class Parser {
                     throw new DukeException("empty deadline");
                 case "event":
                     throw new DukeException("empty event");
+                case "find":
+                    throw new DukeException("empty find");
                 default:
                     throw new DukeException("invalid input");
                 }
@@ -45,6 +47,8 @@ public class Parser {
                     return new DoneCommand(inputArr[1]);
                 case "delete":
                     return new DeleteCommand(inputArr[1]);
+                    case "find":
+                    return new FindCommand(inputArr[1]);
                 default:
                     throw new DukeException("invalid input");
                 }
