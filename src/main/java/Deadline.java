@@ -8,7 +8,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String s) {
         super(description);
-        this.Dtime = s; // accept format yyyy-mm-dd
+        this.Dtime = s; // accept "yyyy-mm-dd kkm" format
         this.localDtime = LocalDateTime.parse(s.substring(1), DateTimeFormatter.ofPattern("uuuu-MM-dd kkmm"));
 
     }
