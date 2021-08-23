@@ -52,7 +52,7 @@ public class Duke {
      * @return a boolean on whether the program should terminate
      */
     private boolean checkBye(String instruction){
-        if(instruction.equalsIgnoreCase("bye")){
+        if(instruction.equalsIgnoreCase("bye")) {
             isRunning = false;
             storage.fileClear();
             for(int i = 0; i < tasks.getSize(); i++) {
@@ -72,8 +72,8 @@ public class Duke {
      */
     private void parse(String instruction) throws NoDescriptionError, UnknownCommandError{
         ui.printLineBreak();
-        String[] strings = instruction.split(" ", 2);
-        String operative = strings[0];
+        String[] splitInstructions = instruction.split(" ", 2);
+        String operative = splitInstructions[0];
         Commands command;
         String[] temp;
         String item, date, description;
@@ -85,7 +85,7 @@ public class Duke {
             throw new UnknownCommandError();
         }
 
-        if(strings.length == 1 && !operative.equalsIgnoreCase("list")) {
+        if(splitInstructions.length == 1 && !operative.equalsIgnoreCase("list")) {
             throw new NoDescriptionError(operative);
         }
         switch (command) {
@@ -93,19 +93,19 @@ public class Duke {
             ui.printArrayList(tasks);
             break;
         case done:
-            item = strings[1];
+            item = splitInstructions[1];
             taskPointer = Integer.parseInt(item) - 1;
             tasks.get(taskPointer).markAsDone();
             ui.completeTaskMessage(tasks.get(taskPointer));
             break;
         case todo:
-            item = strings[1];
+            item = splitInstructions[1];
             toAdd = new Todo(item);
             tasks.addTask(toAdd);
             ui.addedTaskMessage(toAdd, tasks.getSize());
             break;
         case event:
-            item = strings[1];
+            item = splitInstructions[1];
             temp = item.split("/at ");
             date = temp[1];
             description = temp[0];
@@ -114,13 +114,13 @@ public class Duke {
             ui.addedTaskMessage(toAdd, tasks.getSize());
             break;
         case delete:
-            item = strings[1];
+            item = splitInstructions[1];
             taskPointer = Integer.parseInt(item) - 1;
             Task deleted = tasks.delete(taskPointer);
             ui. deleteTaskMessage(deleted, tasks.getSize());
             break;
         case deadline:
-            item = strings[1];
+            item = splitInstructions[1];
             temp = item.split("/by ");
             date = temp[1];
             description = temp[0];
