@@ -1,15 +1,17 @@
 package tasks;
 
+import java.time.LocalDateTime;
+
 /**
  * Handles tasks that have a single date.
  */
 public class DeadlineTask extends Task {
 
-  private String date;
+  private LocalDateTime date;
 
-  public DeadlineTask(String title, String date) {
+  public DeadlineTask(String title, LocalDateTime date) {
     super(title, Type.DEADLINE);
-    this.date = date.trim();
+    this.date = date;
   }
 
   @Override
@@ -19,6 +21,8 @@ public class DeadlineTask extends Task {
 
   @Override
   public String toString() {
-    return "[D] " + super.toString() + String.format(" (by: %s)", this.date);
+    return (
+      "[D] " + super.toString() + String.format(" (by: %s)", DateParser.toHumanReadable(this.date))
+    );
   }
 }

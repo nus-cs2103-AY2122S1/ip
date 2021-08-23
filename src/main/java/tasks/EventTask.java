@@ -1,15 +1,19 @@
 package tasks;
 
+import java.time.LocalDateTime;
+
 /**
  * Handles tasks that have a start and end date.
  */
 public class EventTask extends Task {
 
-  private String dates;
+  private LocalDateTime startDateTime;
+  private LocalDateTime endDateTime;
 
-  public EventTask(String title, String dates) {
+  public EventTask(String title, LocalDateTime startDateTime, LocalDateTime endDateTime) {
     super(title, Type.EVENT);
-    this.dates = dates.trim();
+    this.startDateTime = startDateTime;
+    this.endDateTime = endDateTime;
   }
 
   @Override
@@ -19,6 +23,14 @@ public class EventTask extends Task {
 
   @Override
   public String toString() {
-    return "[E] " + super.toString() + String.format(" (at: %s)", this.dates);
+    return (
+      "[E] " +
+      super.toString() +
+      String.format(
+        " (at: %s - %s)",
+        DateParser.toHumanReadable(startDateTime),
+        DateParser.toHumanReadable(endDateTime)
+      )
+    );
   }
 }
