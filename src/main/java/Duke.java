@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -15,8 +16,8 @@ public class Duke {
         String arguments;
 
         while (!command.equals("bye")) {
-            printBorder();
             try {
+                printBorder();
                 switch (command) {
                     case "list":
                         println("Here are the tasks in your list:");
@@ -74,7 +75,8 @@ public class Duke {
                                 if (argArr.length == 1 || argArr[1].isEmpty()) {
                                     throw new DukeException("Arguments do not follow proper format. Don't forget the /by");
                                 }
-                                Deadline newTask = new Deadline(argArr[0], argArr[1]);
+                                LocalDate newTaskDate = convertDate(argArr[1].trim());
+                                Deadline newTask = new Deadline(argArr[0].trim(), newTaskDate);
                                 tasks.add(newTask);
                                 println("Got it. I've added this task:");
                                 println("  " + newTask);
@@ -85,7 +87,8 @@ public class Duke {
                                 if (argArr.length == 1 || argArr[1].isEmpty()) {
                                     throw new DukeException("Arguments do not follow proper format. Don't forget the /at");
                                 }
-                                Event newTask = new Event(argArr[0], argArr[1]);
+                                LocalDate newTaskDate = convertDate(argArr[1].trim());
+                                Event newTask = new Event(argArr[0], newTaskDate);
                                 tasks.add(newTask);
                                 println("Got it. I've added this task:");
                                 println("  " + newTask);
@@ -95,7 +98,6 @@ public class Duke {
                         println("Now you have " + tasks.size() +
                                 (tasks.size() == 1 ? " task" : " tasks")
                                 + " in your list.");
-                        ;
                         break;
                     default:
                         throw new DukeException("I'm sorry, but I don't know what \""
@@ -136,6 +138,14 @@ public class Duke {
 
     public static void printBorder() {
         System.out.println("\t____________________________________________________________");
+    }
+    
+    public static LocalDate convertDate(String eventDate) throws DukeException {
+       if (eventDate.matches("\\d{4}-\\d{2}-\\d{2}")) { 
+           return LocalDate.parse(eventDate);
+       } else { 
+           throw new DukeException("Please follow date format: yyyy-mm-dd");
+       }
     }
 
 }
