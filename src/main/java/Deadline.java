@@ -1,9 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    private final String by;
+    private final LocalDateTime by;
 
     public Deadline(String content, String by, boolean isDone) {
         super(content, isDone);
-        this.by = by;
+        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd H:m"));
     }
 
     public Deadline(String content, String by) {
@@ -12,11 +15,13 @@ public class Deadline extends Task {
 
     @Override
     public String dataFormat() {
-        return String.format("D, %d, %s, %s\n", isDoneInt(), getContent(), by);
+        String dateFormat =  by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd H:m"));
+        return String.format("D, %d, %s, %s\n", isDoneInt(), getContent(), dateFormat);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String dateFormat = by.format(DateTimeFormatter.ofPattern("EEE d MMM yyyy, K:ma"));
+        return "[D]" + super.toString() + " (by: " + dateFormat + ")";
     }
 }
