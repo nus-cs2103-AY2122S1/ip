@@ -10,6 +10,7 @@ public enum Instruction {
     BYE("bye"),
     DELETE("delete"),
     FILTER("filter"),
+    FIND("find"),
     INVALID("invalid");
 
     public final String label;

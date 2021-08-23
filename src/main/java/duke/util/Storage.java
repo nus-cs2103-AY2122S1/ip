@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String DIRECTORY = "./dataaaa/";
+    private static final String DIRECTORY = "./data/";
     private static final String FILEPATH = DIRECTORY + "data.txt";
     private File file;
 

@@ -44,6 +44,8 @@ public class Parser {
         case FILTER:
             String filterDate = extractInfo(input, Instruction.FILTER);
             return new FilterCommand(parseDate(filterDate));
+        case FIND:
+            return new FindCommand(extractInfo(input, Instruction.FIND));
         case BYE:
             return new ExitCommand();
         default:

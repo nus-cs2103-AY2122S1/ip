@@ -103,7 +103,7 @@ public class TaskList {
         return data;
     }
 
-    public String filterByDate(LocalDate date) throws DukeException {
+    public String filterByDate(LocalDate date) {
         String ls = "";
         int count = 1;
         for (int i = 0; i < this.list.size(); i++) {
@@ -117,6 +117,29 @@ public class TaskList {
             return "You do not have any tasks on this day! :>";
         } else {
             return "Here is your list of task on this day:\n" + ls;
+        }
+    }
+
+    /**
+     * Checks and filters task with specific keyword.
+     *
+     * @param keyword Keyword to be checked against.
+     * @return List of task with the specific keyword.
+     */
+    public String filterByKeyword(String keyword) {
+        String ls = "";
+        int count = 1;
+        for (int i = 0; i < this.list.size(); i++) {
+            Task task = this.list.get(i);
+            if (task.hasKeyword(keyword)) {
+                ls += String.format("%d.%s\n", count, task);
+                count++;
+            }
+        }
+        if (ls.equals("")) {
+            return "There is no task with this keyword! :<";
+        } else {
+            return "Here are the matching tasks in your list:\n" + ls;
         }
     }
 }
