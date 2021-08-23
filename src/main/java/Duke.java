@@ -17,9 +17,7 @@ public class Duke {
 
     private static final DateTimeFormatter dateInputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    /**
-     * An enum describing the type of task.
-     */
+    /** An enum describing the type of task. */
     enum TaskType {
         TODO("T"), DEADLINE("D"), EVENT("E");
 
@@ -239,9 +237,7 @@ public class Duke {
             return (isDone ? DONE_STATUS_ICON : NOT_DONE_STATUS_ICON);
         }
 
-        /**
-         * Marks the current task as done.
-         */
+        /** Marks the current task as done. */
         public void markAsDone() {
             this.isDone = true;
             System.out.println("Nice! I've marked this task as done:");
@@ -255,9 +251,7 @@ public class Duke {
     }
 
 
-    /**
-     * A Task without any date/time attached to it.
-     */
+    /** A Task without any date/time attached to it. */
     public static class ToDo extends Task {
         public ToDo(String description) {
             super(description);
@@ -274,9 +268,7 @@ public class Duke {
     }
 
 
-    /**
-     * A type of task that needs to be done before a specific date/time.
-     */
+    /** A type of task that needs to be done before a specific date/time. */
     public static class Deadline extends Task {
        private final LocalDate time;
 
@@ -307,9 +299,7 @@ public class Duke {
 
 
 
-    /**
-     * A type of Task that starts at a specific time and ends at a specific date/time.
-     */
+    /** A type of Task that starts at a specific time and ends at a specific date/time. */
     public static class Event extends Task {
         private final LocalDate time;
 
@@ -404,6 +394,104 @@ public class Duke {
         }
     }
 
+    public static class TaskList {
+
+        private final ArrayList<Task> taskList;
+
+        private TaskList(ArrayList<Task> taskList) {
+            this.taskList = taskList;
+        }
+
+        public static TaskList load() {
+            ArrayList<Task> list = new ArrayList<>();
+            File file = new File("myTasks.txt");
+            // create a file, if it doesn't already exist
+            try {
+                if (!file.createNewFile()) {
+                    // if file already exists, read from it
+                    Scanner myReader = new Scanner(file);
+                    while (myReader.hasNextLine()) {
+                        String taskData = myReader.nextLine();
+                        try {
+                            // get Tasks from the file and add them to the list
+                            Task currTask = Task.readTaskFromFile(taskData);
+                            list.add(currTask);
+                        } catch (DukeException e) {
+                            // file data is in the wrong format, cannot be read
+                            System.err.println(e.getMessage());
+                            System.exit(-1);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                // exception when creating file
+                System.err.println(e.getMessage());
+                System.exit(-1);
+            }
+
+            return new TaskList(list);
+        }
+
+        public void saveToFile() {
+            try {
+                BufferedWriter myWriter =
+                        new BufferedWriter(new FileWriter("myTasks.txt"));
+
+                for (int i = 0; i < taskList.size(); i++) {
+                    if (i != 0) {
+                        myWriter.newLine();
+                    }
+                    myWriter.append(taskList.get(i).toString());
+                }
+                myWriter.close();
+
+            } catch (IOException e) {
+                System.err.println("Oh no! An error occurred while writing to the file.");
+                System.exit(-1);
+            }
+        }
+
+        public void addToList(Task task) {
+            taskList.add(task);
+            System.out.println("Got it. I've added this task:");
+            System.out.println("  " + task);
+            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        }
+
+        public void removeFromList(int index) {
+            if (index <= 0 || index > taskList.size()) {
+                // number given is out of bounds of the taskList
+                System.out.println("Invalid Argument: Index " + index + " is out of bounds!");
+            } else {
+                // no problems with the input, a task is added
+                Task toDelete = taskList.get(index - 1);
+                taskList.remove(index - 1);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("  " + toDelete);
+                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            }
+        }
+
+        public void printList() {
+            if (taskList == null || taskList.isEmpty()) {
+                System.out.println("You currently have no tasks!");
+            } else {
+                for (int i = 0; i < taskList.size(); i++) {
+                    System.out.println((i + 1) + ". " + taskList.get(i));
+                }
+            }
+        }
+
+        public void markAsDone(int index) {
+            if (index <= 0 || index > taskList.size()) {
+                // number given is out of bounds of the taskList
+                System.out.println("Invalid Argument: Index " + index + " is out of bounds!");
+            } else {
+                // no problems with the input, a task is added
+                taskList.get(index - 1).markAsDone();
+            }
+        }
+    }
 
 
     public static void main(String[] args) {
@@ -418,32 +506,7 @@ public class Duke {
         System.out.println(divider);
 
         // a list of all the tasks created by the user
-        ArrayList<Task> taskList = new ArrayList<>();
-
-        File file = new File("myTasks.txt");
-        // create a file, if it doesn't already exist
-        try {
-            if (!file.createNewFile()) {
-                // if file already exists, read from it
-                Scanner myReader = new Scanner(file);
-                while (myReader.hasNextLine()) {
-                    String taskData = myReader.nextLine();
-                    try {
-                        // get Tasks from the file and add them to the list
-                        Task currTask = Task.readTaskFromFile(taskData);
-                        taskList.add(currTask);
-                    } catch (DukeException e) {
-                        // file data is in the wrong format, cannot be read
-                        System.err.println(e.getMessage());
-                        return;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            // exception when creating file
-            System.err.println(e.getMessage());
-            return;
-        }
+        TaskList taskList = TaskList.load();
 
         Scanner in = new Scanner(System.in);
         String s = in.nextLine();
@@ -456,13 +519,7 @@ public class Duke {
             if (s.matches("^list *?$")) {
 
                 // list command, that prints out all the tasks in the taskList.
-                if (taskList.isEmpty()) {
-                    System.out.println("You currently have no tasks!");
-                } else {
-                    for (int i = 0; i < taskList.size(); i++) {
-                        System.out.println((i + 1) + ". " + taskList.get(i));
-                    }
-                }
+                taskList.printList();
 
             } else if (s.matches("^done.*?$")) {
                 // done command
@@ -471,14 +528,7 @@ public class Duke {
                 Matcher m = pattern.matcher(s);
 
                 if (m.find()) {
-                    int listIndex = Integer.parseInt(m.group(1));
-                    if (listIndex <= 0 || listIndex > taskList.size()) {
-                        // number given is out of bounds of the taskList
-                        System.out.println("Invalid Argument: Index " + listIndex + " is out of bounds!");
-                    } else {
-                        // no problems with the input, a task is added
-                        taskList.get(listIndex - 1).markAsDone();
-                    }
+                    taskList.markAsDone(Integer.parseInt(m.group(1)));
                 } else {
                     System.out.println("Please indicate a task to mark as done");
                 }
@@ -490,18 +540,7 @@ public class Duke {
                 Matcher m = pattern.matcher(s);
 
                 if (m.find()) {
-                    int listIndex = Integer.parseInt(m.group(1));
-                    if (listIndex <= 0 || listIndex > taskList.size()) {
-                        // number given is out of bounds of the taskList
-                        System.out.println("Invalid Argument: Index " + listIndex + " is out of bounds!");
-                    } else {
-                        // no problems with the input, a task is added
-                        Task toDelete = taskList.get(listIndex - 1);
-                        taskList.remove(listIndex - 1);
-                        System.out.println("Noted. I've removed this task:");
-                        System.out.println("  " + toDelete);
-                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-                    }
+                    taskList.removeFromList(Integer.parseInt(m.group(1)));
                 } else {
                     System.out.println("Please indicate a task to delete");
                 }
@@ -510,11 +549,7 @@ public class Duke {
 
                 try {
                     Task toAdd = Task.createTask(s);
-                    taskList.add(toAdd);
-
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + toAdd);
-                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                    taskList.addToList(toAdd);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
@@ -531,23 +566,7 @@ public class Duke {
         in.close();
 
         // save all changes to the file at the end
-        try {
-
-            BufferedWriter myWriter =
-                    new BufferedWriter(new FileWriter("myTasks.txt"));
-
-            for (int i = 0; i < taskList.size(); i++) {
-                if (i != 0) {
-                    myWriter.newLine();
-                }
-                myWriter.append(taskList.get(i).toString());
-            }
-            myWriter.close();
-
-        } catch (IOException e) {
-            System.err.println("Oh no! An error occurred while writing to the file.");
-            e.printStackTrace();
-        }
+        taskList.saveToFile();
 
         // say goodbye
         System.out.println(divider);
