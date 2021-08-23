@@ -1,6 +1,9 @@
 package duke.ui;
 
 import duke.task.Task;
+import duke.task.TaskHandler;
+
+import java.util.List;
 
 public class Ui {
 
@@ -24,6 +27,11 @@ public class Ui {
 
         public MessageBuilder addTasksListLength(int length) {
             messageSb.append(getListLengthMessage(length)).append("\n");
+            return this;
+        }
+
+        public MessageBuilder addTasksList(List<Task> tasks) {
+            messageSb.append(messageFormatter.formatTasksList(tasks)).append("\n");
             return this;
         }
 

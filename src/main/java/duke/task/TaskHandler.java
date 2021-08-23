@@ -42,9 +42,13 @@ public class TaskHandler {
         return tasks.size();
     }
 
-    public String getTasksString(MessageFormatter messageFormatter) {
-        return messageFormatter.formatTasksList(tasks);
+    public List<Task> getTasks() {
+        return tasks;
     }
+
+//    public String getTasksString(MessageFormatter messageFormatter) {
+//        return messageFormatter.formatTasksList(tasks);
+//    }
 
     public Task markTaskDone(int taskIndex) {
         Task task = tasks.get(taskIndex);
