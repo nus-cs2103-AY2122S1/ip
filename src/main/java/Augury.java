@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Augury {
-    static String VER     = "v0.6.0"; // Level-6 Delete + A-Exceptions + A-Enums
+    static String VER     = "v0.8.0"; // Level-8 Dates and Times
     static String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
