@@ -9,8 +9,17 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Represents the parser of user inputs for Duke. Parses user input for Duke to respond to.
+ */
 public class Parser {
 
+    /**
+     * Checks if a String is in the right date format.
+     *
+     * @param str String to be checked.
+     * @return True if format is correct; false otherwise.
+     */
     private static Boolean isDate(String str) {
         try {
             if (str.length() != 10) {
@@ -34,6 +43,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if a String is in the right time format.
+     *
+     * @param str String to be checked.
+     * @return True if format is correct; false otherwise.
+     */
     private static Boolean isTime(String str) {
         try {
             if (str.length() != 4) {
@@ -53,6 +68,16 @@ public class Parser {
 
     public Parser() {}
 
+    /**
+     * Parse user input.
+     *
+     * @param input User input.
+     * @return HashMap containing the necessary information for Duke to respond to the input.
+     * @throws InvalidInputException If user input is invalid.
+     * @throws InvalidInstructionException If user input is an invalid instruction.
+     * @throws IllegalStateException Exception thrown by the scanner.
+     * @throws NoSuchElementException Exception thrown by the scanner.
+     */
     public HashMap<String, Object> parse(String input)
             throws InvalidInputException, InvalidInstructionException, IllegalStateException, NoSuchElementException {
 

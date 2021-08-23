@@ -10,10 +10,19 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList {
 
     private ArrayList<Task> taskList = new ArrayList<>();
 
+    /**
+     * Constructor.
+     * Initializes the task list with previously saved tasks.
+     *
+     * @param initial The list of previously saved tasks in String form.
+     */
     public TaskList(List<String> initial) {
         Scanner scanner;
         for (int i = 0; i < initial.size(); i++) {
@@ -67,10 +76,20 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a task to the task list.
+     *
+     * @param task The task to be added.
+     */
     public void addTask(Task task) {
         this.taskList.add(task);
     }
 
+    /**
+     * Returns the tasks in the list.
+     *
+     * @return The tasks in the list as a String.
+     */
     public String getList() {
         if (this.taskList.isEmpty()) {
             return "There are no items in the task list.";
@@ -87,18 +106,42 @@ public class TaskList {
         }
     }
 
+    /**
+     * Completes a task in the list.
+     *
+     * @param index The index of the task to be completed.
+     * @throws IndexOutOfBoundsException If index exceeds the list.
+     */
     public void completeTask(int index) throws IndexOutOfBoundsException {
         this.taskList.get(index).complete();
     }
 
+    /**
+     * Deletes a task in the list.
+     *
+     * @param index The index of the task to be deleted.
+     * @throws IndexOutOfBoundsException If index exceeds the list.
+     */
     public void deleteTask(int index) throws IndexOutOfBoundsException {
         this.taskList.remove(index);
     }
 
+    /**
+     * Returns a task in the list.
+     *
+     * @param index The index of the task to be returned.
+     * @return The task at the given index.
+     * @throws IndexOutOfBoundsException If index exceeds the list.
+     */
     public Task getTask(int index) throws IndexOutOfBoundsException {
         return this.taskList.get(index);
     }
 
+    /**
+     * Returns the number of tasks in the list.
+     *
+     * @return The size of the list.
+     */
     public int getSize() {
         return this.taskList.size();
     }
