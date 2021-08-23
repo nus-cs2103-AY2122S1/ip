@@ -157,7 +157,7 @@ public class Bern {
     }
 
     public static ToDo toDoFromString(String s) {
-        boolean isDone = s.substring(4, 5).equals("X") ? true : false;
+        boolean isDone = s.substring(4, 5).equals("X");
         String desc = s.substring(7);
         ToDo ans = new ToDo(desc);
         if (isDone) {
@@ -167,7 +167,7 @@ public class Bern {
     }
 
     public static Deadline deadlineFromString(String s) {
-        boolean isDone = s.substring(4, 5).equals("X") ? true : false;
+        boolean isDone = s.substring(4, 5).equals("X");
         String desc = s.substring(7, s.indexOf("(by: ") - 1);
         String by = s.substring(s.indexOf("(by: ") + 5, s.length() - 1);
         Deadline ans = new Deadline(desc, by);
@@ -178,7 +178,7 @@ public class Bern {
     }
 
     public static Event eventFromString(String s) {
-        boolean isDone = s.substring(4, 5).equals("X") ? true : false;
+        boolean isDone = s.substring(4, 5).equals("X");
         String desc = s.substring(7, s.indexOf("(at: ") - 1);
         String at = s.substring(s.indexOf("(at: ") + 5, s.length() - 1);
         Event ans = new Event(desc, at);
