@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 /**
  * This class implements a DukeList to be used in storing string from Duke
  *
@@ -13,6 +15,10 @@ public class ToDo extends Task {
      */
     public ToDo(String name) {
         super(name);
+    }
+
+    public LocalDateTime getDateTime() {
+        return LocalDateTime.MAX;
     }
 
     @Override
