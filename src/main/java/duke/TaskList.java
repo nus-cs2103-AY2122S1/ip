@@ -18,12 +18,14 @@ public class TaskList {
     private static final String DONE = "\t Nice! I've marked this task as done:\n\t   ";
     private static final String DELETE = "\t Noted. I've removed this task:\n\t   ";
     private final ArrayList<Task> LIST;
+    private final Ui UI;
 
     /**
      * Constructor for TaskList.
      */
-    TaskList(ArrayList<Task> list) {
+    TaskList(ArrayList<Task> list, Ui ui) {
         this.LIST = list;
+        this.UI = ui;
     }
 
     /**
@@ -33,12 +35,12 @@ public class TaskList {
      */
     public void addTask(Task task) {
         this.LIST.add(task);
-        System.out.println(ADD);
-        System.out.println("\t   " + task);
+        UI.print(ADD);
+        UI.print("\t   " + task);
         if (this.LIST.size() == 1) {
-            System.out.println("\t Now you have 1 task in the list.");
+            UI.print("\t Now you have 1 task in the list.");
         } else {
-            System.out.println("\t Now you have " + this.LIST.size() + " tasks in the list.");
+            UI.print("\t Now you have " + this.LIST.size() + " tasks in the list.");
         }
     }
 
@@ -48,7 +50,7 @@ public class TaskList {
     public void setDone(int index) {
         Task task = this.LIST.get(index);
         task.setDone();
-        System.out.println(DONE + task);
+        UI.print(DONE + task);
     }
 
     /**
@@ -57,7 +59,7 @@ public class TaskList {
     public void delete(int index) {
         Task task = this.LIST.get(index);
         this.LIST.remove(index);
-        System.out.println(DELETE + task);
+        UI.print(DELETE + task);
 
     }
 
@@ -65,12 +67,12 @@ public class TaskList {
      * Prints the list.
      */
     public void printList() {
-        System.out.println(LIST_INTRO);
+        UI.print(LIST_INTRO);
         if (this.LIST.size() == 0) {
-            System.out.println("\t List is empty");
+            UI.print("\t List is empty");
         } else {
             for (int i = 0; i < this.LIST.size(); i++) {
-                System.out.println("\t " + (i + 1) + "." + this.LIST.get(i));
+                UI.print("\t " + (i + 1) + "." + this.LIST.get(i));
             }
         }
     }
@@ -80,17 +82,17 @@ public class TaskList {
      */
     public void printListDate(String date) {
         LocalDate localDate = LocalDate.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        System.out.println(LIST_INTRO);
+        UI.print(LIST_INTRO);
         if (this.LIST.size() == 0) {
-            System.out.println("\t List is empty.");
+            UI.print("\t List is empty.");
         } else {
             int count = 0;
             for (Task t : this.LIST) {
                 if (t.onDate(localDate)) {
-                    System.out.println("\t " + (++count) + "." + t);
+                    UI.print("\t " + (++count) + "." + t);
                 }
             }
-            if (count == 0) System.out.println("There are no tasks pertaining to the specified date.");
+            if (count == 0) UI.print("There are no tasks pertaining to the specified date.");
         }
     }
 

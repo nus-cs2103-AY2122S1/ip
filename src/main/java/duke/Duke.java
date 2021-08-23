@@ -13,8 +13,8 @@ import java.util.ArrayList;
  * @version CS2103T AY21/22 S2
  */
 public class Duke {
-    private final Storage storage;
-    private final Ui ui = new Ui();
+    private final Storage STORAGE;
+    private final Ui UI;
     private TaskList tasks;
 
     /**
@@ -23,12 +23,13 @@ public class Duke {
      * @param filePath the filePath for the saved data
      */
     public Duke(String filePath) {
-        storage = new Storage(filePath);
+        this.UI = new Ui();
+        this.STORAGE = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(this.STORAGE.load(), UI);
         } catch (IOException e) {
-            ui.reply("☹ OOPS!!! Cannot create file!");
-            tasks = new TaskList(new ArrayList<>());
+            UI.reply("☹ OOPS!!! Cannot create file!");
+            tasks = new TaskList(new ArrayList<>(), UI);
         }
     }
 
@@ -36,21 +37,21 @@ public class Duke {
      * Executes the Duke application.
      */
     public void run() {
-        ui.showWelcome();
+        UI.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                String fullCommand = UI.readCommand();
+                UI.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, UI, STORAGE);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                UI.showError(e.getMessage());
             } catch (IOException e) {
-                ui.showError(new DukeException("Error reading commands.").getMessage());
+                UI.showError(new DukeException("Error reading commands.").getMessage());
             } finally {
-                ui.showLine();
+                UI.showLine();
             }
         }
     }
