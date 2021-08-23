@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.io.Serializable;
 
 public class Task implements Executable, Serializable{
@@ -18,11 +16,8 @@ public class Task implements Executable, Serializable{
         return name;
     }
 
-    public void execute(ArrayList<Task> tasks, AtomicInteger taskAmount) {
-        tasks.add(this);
-        taskAmount.set(taskAmount.get() + 1);
-        Processor.save(tasks);
-        Processor.printString("Got it. I've added this task:\n  " + Processor.SPACE_STRING + this + "\n" + Processor.SPACE_STRING + "Now you have " + taskAmount + " tasks in the list.");
+    public void execute(TaskList taskList) {
+        taskList.addTask(this);
     }
 
     public String toString() {

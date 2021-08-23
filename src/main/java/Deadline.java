@@ -33,14 +33,14 @@ public class Deadline extends Task {
         if (isTimeString) {
             return timeString; 
         } else if (endTime == null) {
-            return Processor.OUT_DATE_FORMATTER.format(endDate);
+            return Ui.OUT_DATE_FORMATTER.format(endDate);
         } else {
-            return Processor.OUT_DATE_FORMATTER.format(endDate) + " " + Processor.OUT_TIME_FORMATTER.format(endTime);
+            return Ui.OUT_DATE_FORMATTER.format(endDate) + " " + Ui.OUT_TIME_FORMATTER.format(endTime);
         }
     }
     
     public String toString() {
-        if (isTimeString) {
+        if (isDone) {
             return "[D][X] " + name + " (by: " + getTime() + ")"; 
         } else {
             return "[D][ ] " + name + " (by: " + getTime() + ")"; 

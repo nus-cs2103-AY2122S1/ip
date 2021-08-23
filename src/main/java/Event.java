@@ -33,9 +33,9 @@ public class Event extends Task {
         if (isTimeString) {
             return timeString; 
         } else if (startTime == null) {
-            return Processor.OUT_DATE_FORMATTER.format(startDate);
+            return Ui.OUT_DATE_FORMATTER.format(startDate);
         } else {
-            return Processor.OUT_DATE_FORMATTER.format(startDate) + " " + Processor.OUT_TIME_FORMATTER.format(startTime);
+            return Ui.OUT_DATE_FORMATTER.format(startDate) + " " + Ui.OUT_TIME_FORMATTER.format(startTime);
         }
     }
 

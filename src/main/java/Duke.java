@@ -1,12 +1,25 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        Processor.greet();
-        Processor.load(); 
+
+    private static void run() {
+        Ui.greet();
+        TaskList taskList = Storage.load(); 
         Scanner input = new Scanner(System.in);
-        Processor.process(input); 
+        while (true) {
+            String newInput = input.nextLine();
+            if (newInput.equals("bye")) break; 
+            try {
+                Parser.parse(newInput, taskList).execute(taskList);
+            } catch (DukeExcpetion e) {
+                Ui.printString(e.toString());
+            }
+        }
         input.close();
-        Processor.exit();
+        Ui.exit();
+    }
+
+    public static void main(String[] args) {
+        run();
     }
 }

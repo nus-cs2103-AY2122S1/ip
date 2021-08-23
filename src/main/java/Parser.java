@@ -1,75 +1,18 @@
-import java.util.Scanner; 
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.io.File;
-import java.io.IOException; 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-/**
- * class to process duke
- * @author Tianqi-Zhu
- */
-public class Processor {
-    public static final String LINE_STRING = "----------------------------------------";
-    public static final String SPACE_STRING = "    ";
-    public static final String DECORATOR_STRING = SPACE_STRING + LINE_STRING; 
-    public static final DateTimeFormatter OUT_DATE_FORMATTER = DateTimeFormatter.ofPattern("EEE, d MMM yyyy");
-    public static final DateTimeFormatter OUT_TIME_FORMATTER = DateTimeFormatter.ISO_LOCAL_TIME;
-    private static ArrayList<Task> tasks = new ArrayList<>(); 
-    private static AtomicInteger taskAmount = new AtomicInteger(0);
-
-    /** 
-     * function called to process every input form user
-     * @param input scanner for user input from Duke class
-     */
-    public static void process(Scanner input) {
-        while (true) {
-            String newInput = input.nextLine();
-            if (newInput.equals("bye")) break; 
-            try {
-                parse(newInput).execute(tasks, taskAmount);
-            } catch (DukeExcpetion e) {
-                printString(e.toString());
-            }
-        }
-    }
-    
-    /**
-     * print exit message
-     */
-    public static void exit() {
-        printString("Bye. Hope to see you again soon!");
-    }
-    
-    /**
-     * print greeting messgae
-     */
-    public static void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        printString("Hello, I am your personal asistant\n" + logo + SPACE_STRING + "What can I do for you?");
-    }
-
-    private static Executable parse(String newInput) throws DukeExcpetion {
+public class Parser {
+    public static Executable parse(String newInput, TaskList taskList) throws DukeExcpetion {
         if (newInput.equals("list")) {
-            return new ListTask(); 
+            return new ListCommand(); 
         } else if (newInput.length() > 5 && newInput.substring(0, 5).equals("done ")) {               
             try {
                 int doneIndex = Integer.parseInt(newInput.substring(5));
-                if (doneIndex <= 0 || doneIndex > taskAmount.get()) {
+                if (doneIndex <= 0 || doneIndex > taskList.taskAmount()) {
                     throw new DukeExcpetion("Please input a valid task index.");
                 } else {
-                    return new DoneTask(doneIndex);
+                    return new DoneCommand(doneIndex);
                 }
             } catch (NumberFormatException e) {
                 throw new DukeExcpetion("Invalid task index, please input an integer.");
@@ -79,10 +22,10 @@ public class Processor {
         } else if (newInput.length() > 7 && newInput.substring(0, 7).equals("delete ")) {               
             try {
                 int deleteIndex = Integer.parseInt(newInput.substring(7));
-                if (deleteIndex <= 0 || deleteIndex > taskAmount.get()) {
+                if (deleteIndex <= 0 || deleteIndex > taskList.taskAmount()) {
                     throw new DukeExcpetion("Please input a valid task index.");
                 } else {
-                    return new DeleteTask(deleteIndex);
+                    return new DeleteCommand(deleteIndex);
                 }
             } catch (NumberFormatException e) {
                 throw new DukeExcpetion("Invalid task index, please input an integer.");
@@ -136,73 +79,12 @@ public class Processor {
         }
     }
 
-    /** 
-     * print in the format with lines
-     * @param inputString string to print
-     */
-    public static void printString(String inputString) {
-        System.out.println(DECORATOR_STRING);
-        System.out.println(SPACE_STRING + inputString);
-        System.out.println(DECORATOR_STRING);
-    }
-    
-    /** 
-     * method that adjust printing format to suit list printing 
-     * @param taskString multi-line string of tasks to be printed
-     */
-    public static void printList(String taskString) {
-        System.out.println(DECORATOR_STRING);
-        System.out.print(SPACE_STRING + taskString);
-        System.out.println(DECORATOR_STRING);
-    }
-
     private static LocalTime parseTime(String timeString) throws DukeExcpetion {
         String expanded = timeString.substring(0, 2) + ":" + timeString.substring(2) + ":00";
         try {
             return LocalTime.parse(expanded);
         } catch (DateTimeParseException e) {
             throw new DukeExcpetion("Please input a correct time format of hhmm");
-        }
-    }
-
-    public static void save(ArrayList<Task> tasks) {
-        File file =  new File("data/TaskList.ser");
-        if (! file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                printString(e.toString());
-            }
-        }
-        try {
-            FileOutputStream fileOut = new FileOutputStream("data/TaskList.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(tasks);
-            out.close();
-            fileOut.close();
-        } catch (IOException e) {
-            printString(e.getMessage());
-        }
-    }
-
-    public static void load() {
-        File file =  new File("data/TaskList.ser");
-        if (! file.exists()) {
-            return; 
-        } else {
-            try {
-                FileInputStream fileIn = new FileInputStream("data/TaskList.ser");
-                ObjectInputStream in = new ObjectInputStream(fileIn);
-                try {
-                    tasks = (ArrayList<Task>) in.readObject();
-                    taskAmount = new AtomicInteger(tasks.size());
-                } catch (ClassNotFoundException e) {
-                    printString(e.getMessage());
-                }
-                in.close();
-            } catch (IOException e) {
-                printString(e.getMessage());
-            }
         }
     }
 }
