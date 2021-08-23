@@ -4,7 +4,7 @@ package duke.task;
  * Represents a Task
  */
 public class Task {
-    protected boolean completed = false;
+    protected boolean isDone;
     protected String name;
 
     /**
@@ -14,18 +14,18 @@ public class Task {
      */
     public Task(String name) {
         this.name = name;
-        this.completed = false;
+        this.isDone = false;
     }
 
     /**
      * Marks Task as complete
      */
-    public void markComplete() {
-        this.completed = true;
+    public void markDone() {
+        this.isDone = true;
     }
 
     private String getStatusIcon() {
-        return this.completed ? "X" : " ";
+        return this.isDone ? "X" : " ";
     }
 
     /**
@@ -45,6 +45,6 @@ public class Task {
      * @return String representing the command to re-create this Task object
      */
     public String toCommand(int index) {
-        return this.completed ? String.format("done %d\n", index) : "";
+        return this.isDone ? String.format("done %d\n", index) : "";
     };
 }

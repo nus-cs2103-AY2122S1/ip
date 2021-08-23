@@ -24,7 +24,7 @@ public class Ui {
      * @param isFirst say Iris's name only if first message
      */
     public void say(String message, boolean isFirst) {
-        String name = isFirst ? "Iris:": "     ";
+        String name = isFirst ? "Iris:" : "     ";
         System.out.printf("%s %s%n", name, message);
     }
 
@@ -40,12 +40,12 @@ public class Ui {
     /**
      * Gets Iris to notify user about new Task added
      *
-     * @param taskList TaskList object representing current list of tasks
+     * @param tasks TaskList object representing current list of tasks
      */
-    public void sayTaskAdded(TaskList taskList) {
-        int count = taskList.getCount();
+    public void sayTaskAdded(TaskList tasks) {
+        int count = tasks.getCount();
         say("Got it. I've added this task:");
-        say(taskList.get(count - 1).toString(), false);
+        say(tasks.get(count - 1).toString(), false);
         say(String.format("Now you have %d %s in the list.",
                 count, count == 1 ? "task" : "tasks"), false);
     }
@@ -53,11 +53,11 @@ public class Ui {
     /**
      * Gets Iris to list out all Tasks in the TaskList
      *
-     * @param taskList TaskList object representing current list of tasks
+     * @param tasks TaskList object representing current list of tasks
      */
-    public void listTasks(TaskList taskList) {
-        for (int i = 0; i < taskList.getCount(); i++) {
-            say(String.format("%d. %s", i + 1, taskList.get(i)), i == 0);
+    public void listTasks(TaskList tasks) {
+        for (int i = 0; i < tasks.getCount(); i++) {
+            say(String.format("%d. %s", i + 1, tasks.get(i)), i == 0);
         }
     }
 

@@ -26,7 +26,7 @@ public class EventTest {
     @Test
     public void markComplete_success() throws IrisException {
         Event event = new Event("test event", "2021-08-23");
-        event.markComplete();
+        event.markDone();
         assertEquals("[E][X] test event (at: Aug 23 2021)", event.toString());
     }
 
@@ -39,7 +39,7 @@ public class EventTest {
     @Test
     public void toCommand_completed_success() throws IrisException {
         Event event = new Event("test event", "2021-08-23");
-        event.markComplete();
+        event.markDone();
         assertEquals("event test event /at 2021-08-23\ndone 1\n", event.toCommand(1));
     }
 }

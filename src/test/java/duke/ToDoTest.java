@@ -15,7 +15,7 @@ public class ToDoTest {
     @Test
     public void markComplete_success() {
         ToDo todo = new ToDo("test todo");
-        todo.markComplete();
+        todo.markDone();
         assertEquals("[T][X] test todo", todo.toString());
     }
 
@@ -28,7 +28,7 @@ public class ToDoTest {
     @Test
     public void toCommand_completed_success() {
         ToDo todo = new ToDo("test todo");
-        todo.markComplete();
+        todo.markDone();
         assertEquals("todo test todo\ndone 1\n", todo.toCommand(1));
     }
 }

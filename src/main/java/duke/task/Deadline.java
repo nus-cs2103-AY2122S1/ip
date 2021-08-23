@@ -1,11 +1,10 @@
 package duke.task;
 
-import duke.IrisException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.IrisException;
 /**
  * Represents a Deadline
  */

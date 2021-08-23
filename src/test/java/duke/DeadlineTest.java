@@ -26,7 +26,7 @@ public class DeadlineTest {
     @Test
     public void markComplete_success() throws IrisException {
         Deadline deadline = new Deadline("test deadline", "2021-08-23");
-        deadline.markComplete();
+        deadline.markDone();
         assertEquals("[D][X] test deadline (by: Aug 23 2021)", deadline.toString());
     }
 
@@ -39,7 +39,7 @@ public class DeadlineTest {
     @Test
     public void toCommand_completed_success() throws IrisException {
         Deadline deadline = new Deadline("test deadline", "2021-08-23");
-        deadline.markComplete();
+        deadline.markDone();
         assertEquals("deadline test deadline /by 2021-08-23\ndone 1\n", deadline.toCommand(1));
     }
 }

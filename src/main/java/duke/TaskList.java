@@ -1,18 +1,18 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Encapsulates the TaskList-related functionality of Iris
  */
 public class TaskList {
-    private final List<Task> taskList = new ArrayList<>();
+    private final List<Task> tasks = new ArrayList<>();
 
     /**
      * Gets the size of the TaskList
@@ -20,7 +20,7 @@ public class TaskList {
      * @return the size of the TaskList
      */
     public int getCount() {
-        return taskList.size();
+        return tasks.size();
     }
 
     /**
@@ -30,7 +30,7 @@ public class TaskList {
      * @return
      */
     public Task get(int index) {
-        return taskList.get(index);
+        return tasks.get(index);
     }
 
     /**
@@ -39,7 +39,7 @@ public class TaskList {
      * @param name name of the ToDo to be created
      */
     public void addTodo(String name) {
-        taskList.add(new ToDo(name));
+        tasks.add(new ToDo(name));
     }
 
     /**
@@ -50,7 +50,7 @@ public class TaskList {
      * @throws IrisException
      */
     public void addDeadline(String name, String by) throws IrisException {
-        taskList.add(new Deadline(name, by));
+        tasks.add(new Deadline(name, by));
     }
 
     /**
@@ -61,7 +61,7 @@ public class TaskList {
      * @throws IrisException
      */
     public void addEvent(String name, String at) throws IrisException {
-        taskList.add(new Event(name, at));
+        tasks.add(new Event(name, at));
     }
 
     /**
@@ -71,9 +71,13 @@ public class TaskList {
      * @throws IrisException for invalid Task index e.g. too small or too large
      */
     private void validateTaskIndex(int index) throws IrisException {
-        if (index <= 0) throw new IrisException("Please enter a valid task index.");
-        int count = taskList.size();
-        if (index > count) throw new IrisException(String.format("Your task list only has %d items", count));
+        if (index <= 0) {
+            throw new IrisException("Please enter a valid task index.");
+        }
+        int count = tasks.size();
+        if (index > count) {
+            throw new IrisException(String.format("Your task list only has %d items", count));
+        }
     }
 
     /**
@@ -85,8 +89,8 @@ public class TaskList {
      */
     public Task done(int index) throws IrisException {
         validateTaskIndex(index);
-        Task task = taskList.get(index - 1);
-        task.markComplete();
+        Task task = tasks.get(index - 1);
+        task.markDone();
         return task;
     }
 
@@ -99,7 +103,7 @@ public class TaskList {
      */
     public Task delete(int index) throws IrisException {
         validateTaskIndex(index);
-        return taskList.remove(index - 1);
+        return tasks.remove(index - 1);
     }
 
     /**
@@ -109,8 +113,8 @@ public class TaskList {
      */
     public String[] toCommands() {
         List<String> commands = new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
-            commands.add(taskList.get(i).toCommand(i + 1));
+        for (int i = 0; i < tasks.size(); i++) {
+            commands.add(tasks.get(i).toCommand(i + 1));
         }
         String[] result = new String[commands.size()];
         return commands.toArray(result);

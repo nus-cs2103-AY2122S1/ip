@@ -34,16 +34,16 @@ public class Storage {
     /**
      * Reads tasks from task file
      *
-     * @param taskList TaskList object to update with read tasks
+     * @param tasks TaskList object to update with read tasks
      * @param ui       Ui object for current Iris instance
      * @throws IrisException for invalid tasks.txt
      */
-    public void readTasks(TaskList taskList, Ui ui) throws IrisException {
+    public void readTasks(TaskList tasks, Ui ui) throws IrisException {
         File taskFile = new File(taskFilePath);
         try {
             Scanner scanner = new Scanner(taskFile);
             while (scanner.hasNextLine()) {
-                Parser.handleCommand(scanner.nextLine(), taskList, ui, true);
+                Parser.handleCommand(scanner.nextLine(), tasks, ui, true);
             }
         } catch (FileNotFoundException exception) {
             createTaskFile();
@@ -55,12 +55,12 @@ public class Storage {
     /**
      * Writes tasks to task file
      *
-     * @param taskList TaskList object representing current list of tasks
+     * @param tasks TaskList object representing current list of tasks
      */
-    public void writeTasks(TaskList taskList) {
+    public void writeTasks(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(taskFilePath);
-            String[] commands = taskList.toCommands();
+            String[] commands = tasks.toCommands();
             for (String command : commands) {
                 fw.write(command);
             }
