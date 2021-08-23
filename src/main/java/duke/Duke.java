@@ -25,6 +25,7 @@ public class Duke {
 
     public Duke() {
         ui = new Ui();
+        parser = new Parser();
         try {
             storage = new Storage();
             taskList = new TaskList(storage.retrieveData(), storage);
@@ -42,19 +43,16 @@ public class Duke {
             try {
                 ui.printPrompt();
                 String input = sc.nextLine();
-                Command c = Parser.parse(input);
+                Command c = parser.parse(input);
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.formatPrint(e.getMessage());
-            } finally {
-
             }
         }
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+        new Duke().run();
     }
 }

@@ -1,27 +1,18 @@
 package duke.util;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FilterCommand;
-import duke.command.HelpCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exception.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
-import duke.util.Instruction;
 
-import java.beans.IntrospectionException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Parser {
 
-    public static Command parse(String input) throws DukeException {
+    public Command parse(String input) throws DukeException {
         Instruction instruction = Instruction.valueOfLabel(input.split(" ")[0]);
         switch (instruction) {
         case LIST:
@@ -37,11 +28,15 @@ public class Parser {
             return new AddCommand(toDo);
         case DEADLINE:
             String[] deadlineInfo = extractDeadline(extractInfo(input, Instruction.DEADLINE));
-            Deadline deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
+            String[] deadlineDateTime = deadlineDateTimeSplit(deadlineInfo[1]);
+            Deadline deadline = new Deadline(deadlineInfo[0], parseDate(deadlineDateTime[0]),
+                    parseTime(deadlineDateTime[1]));
             return new AddCommand(deadline);
         case EVENT:
             String[] eventInfo = extractEvent(extractInfo(input, Instruction.EVENT));
-            Event event = new Event(eventInfo[0], eventInfo[1]);
+            String[] eventDateTime = eventDateTimeSplit(eventInfo[1]);
+            Event event = new Event(eventInfo[0], parseDate(eventDateTime[0]), parseTime(eventDateTime[1]),
+                    parseTime(eventDateTime[2]));
             return new AddCommand(event);
         case DELETE:
             int deleteIndex = extractIndex(input, Instruction.DELETE);
@@ -52,7 +47,7 @@ public class Parser {
         case BYE:
             return new ExitCommand();
         default:
-            throw new DukeInvalidCommandException();
+            return new InvalidCommand();
         }
     }
 
@@ -64,7 +59,7 @@ public class Parser {
      * @return String containing information that we need.
      * @throws DukeException Prevent empty descriptions.
      */
-    private static String extractInfo(String input, Instruction instruction) throws DukeMissingDescriptionException {
+    private static String extractInfo(String input, Instruction instruction) throws DukeException {
         String[] info = input.split(" ", 2);
         if (info.length < 2) {
             throw new DukeMissingDescriptionException(instruction);
@@ -80,7 +75,7 @@ public class Parser {
      * @return int of the task user wants to select.
      * @throws DukeException Prevent empty indexes.
      */
-    public static int extractIndex(String input, Instruction instruction) throws DukeMissingIndexException {
+    private static int extractIndex(String input, Instruction instruction) throws DukeException {
         String[] info = input.split(" ", 2);
         if (info.length < 2 || info[1].equals("")) {
             throw new DukeMissingIndexException(instruction);
@@ -95,12 +90,11 @@ public class Parser {
      * @return String array with information of deadline split to description and date.
      * @throws DukeException For missing arguments.
      */
-    public static String[] extractDeadline(String info) throws DukeException {
+    private static String[] extractDeadline(String info) throws DukeException {
         if (!info.contains("/by")) {
             throw new DukeMissingArgumentException("/by");
         }
         String[] description = info.split(" /by ", 2);
-
         if (description.length < 2 || description[1].equals("")) {
             throw new DukeMissingDateTimeException();
         }
@@ -114,7 +108,7 @@ public class Parser {
      * @return String array with information of event split to description and event timeframe.
      * @throws DukeException For missing arguments.
      */
-    public static String[] extractEvent(String info) throws DukeException {
+    private static String[] extractEvent(String info) throws DukeException {
         if (!info.contains("/at")) {
             throw new DukeMissingArgumentException("/at");
         }
@@ -143,7 +137,7 @@ public class Parser {
             } else {
                 throw new DukeInvalidDateException();
             }
-        } catch (DateTimeException | DukeInvalidDateException e) {
+        } catch (DateTimeException e) {
             throw new DukeInvalidDateException();
         }
     }
@@ -163,8 +157,28 @@ public class Parser {
             } else {
                 throw new DukeInvalidTimeException();
             }
-        } catch (DateTimeException | DukeInvalidTimeException e) {
+        } catch (DateTimeException e) {
             throw new DukeInvalidTimeException();
         }
+    }
+
+    public static String[] deadlineDateTimeSplit(String dateTime) throws DukeMissingDateTimeException {
+        String[] splitDateTime = dateTime.split(" ", 2);
+        if (splitDateTime.length != 2) {
+            throw new DukeMissingDateTimeException();
+        }
+        return splitDateTime;
+    }
+
+    public static String[] eventDateTimeSplit(String dateTime) throws DukeMissingDateTimeException {
+        String[] splitDateTime = dateTime.split(" ", 2);
+        if (splitDateTime.length != 2) {
+            throw new DukeMissingDateTimeException();
+        }
+        String[] splitStartEnd = splitDateTime[1].split("-", 2);
+        if (splitStartEnd.length != 2) {
+            throw new DukeMissingDateTimeException();
+        }
+        return new String[] {splitDateTime[0], splitStartEnd[0], splitStartEnd[1]};
     }
 }

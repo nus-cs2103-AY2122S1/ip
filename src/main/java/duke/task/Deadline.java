@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.DukeException;
+import duke.exception.DukeMissingDateTimeException;
 import duke.util.Parser;
 
 import java.time.DateTimeException;
@@ -24,14 +25,10 @@ public class Deadline extends Task{
      * @param description The description of the deadline.
      * @param by The due date of deadline.
      */
-    public Deadline(String description, String by) throws DukeException {
+    public Deadline(String description, LocalDate dueDate, LocalTime dueTime) {
         super(description);
-        String[] splitDateTime = by.split(" ", 2);
-        if (splitDateTime.length != 2) {
-            throw new DukeException("Missing Date/Time @_@");
-        }
-        this.dueDate = Parser.parseDate(splitDateTime[0]);
-        this.dueTime = Parser.parseTime(splitDateTime[1]);
+        this.dueDate = dueDate;
+        this.dueTime = dueTime;
     }
 
     private String formatDateTime() {
@@ -41,7 +38,7 @@ public class Deadline extends Task{
     }
 
     @Override
-    public boolean checkDate(LocalDate date) throws DukeException {
+    public boolean checkDate(LocalDate date) {
         return this.dueDate.equals(date);
     }
 

@@ -11,17 +11,28 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String DIRECTORY = "./data/";
+    private static final String DIRECTORY = "./dataaaa/";
     private static final String FILEPATH = DIRECTORY + "data.txt";
     private File file;
 
-    public Storage() throws DukeIoException {
+    public Storage() {
         this.file = new File(FILEPATH);
-        if (!file.exists()) {
+    }
+
+    /**
+     * Returns an ArrayList containing all the tasks in the data.txt file.
+     * If data.txt is empty, an Empty ArrayList is returned.
+     *
+     * @return ArrayList containing tasks.
+     */
+    public ArrayList<Task> retrieveData() throws DukeException{
+        if (!this.file.exists()) {
             try {
                 System.out.println("data.txt file does not exist. Creating new file...");
                 File directory = new File(DIRECTORY);
@@ -34,16 +45,6 @@ public class Storage {
                 throw new DukeIoException();
             }
         }
-    }
-
-    /**
-     * Returns an ArrayList containing all the tasks in the data.txt file.
-     * If data.txt is empty, an Empty ArrayList is returned.
-     *
-     * @return ArrayList containing tasks.
-     * @throws DukeException If file is corrupted.
-     */
-    public ArrayList<Task> retrieveData() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         if (file.length() == 0) {
             System.out.println("No tasks to load!");
@@ -61,11 +62,15 @@ public class Storage {
                     taskList.add(task);
                     break;
                 case "D":
-                    task = new Deadline(dataBreakdown[2], dataBreakdown[3]);
+                    String[] deadlineDateTime = Parser.deadlineDateTimeSplit(dataBreakdown[3]);
+                    task = new Deadline(dataBreakdown[2], LocalDate.parse(deadlineDateTime[0]),
+                            LocalTime.parse(deadlineDateTime[1]));
                     taskList.add(task);
                     break;
                 case "E":
-                    task = new Event(dataBreakdown[2], dataBreakdown[3]);
+                    String[] eventDateTime = Parser.eventDateTimeSplit(dataBreakdown[3]);
+                    task = new Event(dataBreakdown[2], LocalDate.parse(eventDateTime[0]),
+                            LocalTime.parse(eventDateTime[1]), LocalTime.parse(eventDateTime[2]));
                     taskList.add(task);
                     break;
                 default:

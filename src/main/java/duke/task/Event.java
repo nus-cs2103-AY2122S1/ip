@@ -23,21 +23,12 @@ public class Event extends Task{
      * Constructor for Event.
      *
      * @param description The description of the event.
-     * @param eventTimeframe The timeframe of the event.
      */
-    public Event(String description, String eventTimeframe) throws DukeException {
+    public Event(String description, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(description);
-        String[] splitDateTime = eventTimeframe.split(" ", 2);
-        if (splitDateTime.length != 2) {
-            throw new DukeException("Missing Date/Time @_@");
-        }
-        String[] splitStartEnd = splitDateTime[1].split("-", 2);
-        if (splitStartEnd.length != 2) {
-            throw new DukeException("Missing Start/End Time @_@");
-        }
-        this.date = Parser.parseDate(splitDateTime[0]);
-        this.startTime = Parser.parseTime(splitStartEnd[0]);
-        this.endTime = Parser.parseTime(splitStartEnd[1]);
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     private String formatDateTime() {
@@ -47,7 +38,7 @@ public class Event extends Task{
     }
 
     @Override
-    public boolean checkDate(LocalDate date) throws DukeException {
+    public boolean checkDate(LocalDate date) {
         return this.date.equals(date);
     }
 

@@ -53,7 +53,7 @@ public class Task {
         return String.format("%s | %s", isDone ? "1" : "0", this.description);
     }
 
-    public boolean checkDate(LocalDate date) throws DukeException{
+    public boolean checkDate(LocalDate date) {
         return false;
     }
 }
