@@ -2,13 +2,16 @@ package item;
 
 import exception.EmptyCommandException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Event is a type of Task which happen at a specific timing.
  */
 public class Event extends Task {
-    private String at;
+    private LocalDate at;
 
-    private Event(String description, String at) throws EmptyCommandException {
+    private Event(String description, LocalDate at) throws EmptyCommandException {
         super(description);
         this.at = at;
     }
@@ -21,7 +24,7 @@ public class Event extends Task {
      * @return The created Event.
      * @throws EmptyCommandException if the description is empty.
      */
-    public static Event of(String description, String at) throws EmptyCommandException {
+    public static Event of(String description, LocalDate at) throws EmptyCommandException {
         if (description.isEmpty()) {
             throw new EmptyCommandException("event");
         } else {
@@ -36,7 +39,11 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]"
+                + super.toString()
+                + " (at: "
+                + at.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+                + ")";
     }
 
     @Override

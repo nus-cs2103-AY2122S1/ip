@@ -2,13 +2,16 @@ package item;
 
 import exception.EmptyCommandException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Deadline is a type of Task which has a due time.
  */
 public class Deadline extends Task {
-    private String by;
+    private LocalDate by;
 
-    private Deadline(String description, String by) throws EmptyCommandException {
+    private Deadline(String description, LocalDate by) throws EmptyCommandException {
         super(description);
         this.by = by;
     }
@@ -21,7 +24,7 @@ public class Deadline extends Task {
      * @return The created Deadline
      * @throws EmptyCommandException if the description is empty.
      */
-    public static Deadline of(String description, String by) throws EmptyCommandException {
+    public static Deadline of(String description, LocalDate by) throws EmptyCommandException {
         if (description.isEmpty()) {
             throw new EmptyCommandException("deadline");
         } else {
@@ -36,7 +39,11 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]"
+                + super.toString()
+                + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+                + ")";
     }
 
     @Override
