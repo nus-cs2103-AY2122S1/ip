@@ -1,8 +1,11 @@
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
-    public static ArrayList<Task> list = new ArrayList<Task> ();
+    public static ArrayList<Task> list = new ArrayList<Task>();
 
     public static void main(String[] args) {
         echo();
@@ -55,8 +58,16 @@ public class Duke {
                         if (!s.contains("/by")) {
                             throw new DukeException("deadlines require a /by");
                         }
-                        String[] data = s.replace("deadline ", "").split("/by");
-                        list.add(new Deadline(data[0].trim(), data[1].trim()));
+
+                        try {
+                            String[] data = s.replace("deadline ", "").split("/by");
+                            list.add(new Deadline(data[0].trim(),
+                                    LocalDate.parse(data[1].trim())
+                            ));
+                        } catch (DateTimeParseException err) {
+                            throw new DukeException("/by date is not valid");
+                        }
+
                     } else if (s.startsWith("event")) {
                         if (!s.contains("/at")) {
                             throw new DukeException("events require an /at");
@@ -64,6 +75,8 @@ public class Duke {
 
                         String[] data = s.replace("event ", "").split("/at");
                         list.add(new Event(data[0].trim(), data[1].trim()));
+
+
                     } else {
                         throw new DukeException("Sorry I don't know what that means");
                     }
@@ -79,7 +92,7 @@ public class Duke {
                 s = in.nextLine();
             } catch (DukeException err) {
                 System.out.println("---------");
-                System.out.println(err);
+                System.out.println(err.getMessage());
                 System.out.println("---------");
                 s = in.nextLine();
             }
