@@ -50,7 +50,7 @@ public class Parser {
             if(command.equals("find")) {
                 return new FindCommand(fullCommand[1].trim());
             }
-            return new InvalidCommand();
+            throw new DukeException("Sorry, I don't understand what you are saying!");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Don't be shy! I need more information to carry out " + command + " :(");
         }

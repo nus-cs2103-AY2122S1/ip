@@ -29,12 +29,13 @@ public class ParserTest {
     }
 
     @Test
-    public void identifyCommand_unrecognisedCommand_InvalidCommand() {
+    public void identifyCommand_unrecognisedCommand_exceptionThrown() {
         try {
-            assertEquals(true,
-                    Parser.identifyCommand("jksbfaskj bafjkb bjaskfb") instanceof InvalidCommand);
-        } catch (DukeException e) {
+            Parser.identifyCommand("jksbfaskj bafjkb bjaskfb");
             fail();
+        } catch (DukeException e) {
+            assertEquals("Sorry, I don't understand what you are saying!",
+                    e.getMessage());
         }
     }
 
