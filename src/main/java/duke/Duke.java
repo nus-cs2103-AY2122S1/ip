@@ -1,146 +1,21 @@
+package duke;
+
+import duke.exceptions.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.time.LocalDate;
 
 public class Duke {
 
-    // This class represents the tasks added by the user
-    protected class Task {
-        protected final String description;
-        protected boolean isDone;
-
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        public Task(String description, boolean isDone) {
-            this.description = description;
-            this.isDone = isDone;
-        }
-
-        public String getStatusIcon() {
-            return (isDone ? "X" : " "); // mark done task with X
-        }
-
-        public void markAsDone() {
-            this.isDone = true;
-        }
-
-        public String toString() {
-                return "[" + this.getStatusIcon() + "] ";
-            }
-
-        public String getStatusString() { return ""; }
-    }
-
-    protected class Deadline extends Task {
-        protected final LocalDate dateBy;
-
-        public Deadline(String description, LocalDate dateBy) {
-            super(description);
-            this.dateBy = dateBy;
-            this.isDone = false;
-        }
-
-        public Deadline(String description, LocalDate dateBy, boolean isDone) {
-            super(description);
-            this.dateBy = dateBy;
-            this.isDone = isDone;
-        }
-
-        @Override
-        public String toString() {
-            return "[D]" + super.toString() + description + " (by: " +
-                    dateBy.getDayOfMonth() + " " + dateBy.getMonth().toString() + " " + dateBy.getYear() + ")";
-        }
-
-        @Override
-        public String getStatusString() { return "D@" + (isDone ? 1 : 0) + "@" + this.description + "@" + this.dateBy.toString(); }
-
-    }
-
-    protected class Event extends Task {
-        protected final String eventDetails;
-
-        public Event(String description, String eventDetails) {
-            super(description);
-            this.eventDetails = eventDetails;
-        }
-
-        public Event(String description, String eventDetails, boolean isDone) {
-            super(description);
-            this.eventDetails = eventDetails;
-            this.isDone = isDone;
-        }
-
-        @Override
-        public String toString() {
-            return "[E]" + super.toString() + description + " (at: " + eventDetails + ")";
-        }
-
-        @Override
-        public String getStatusString() { return "D@" + (isDone ? 1 : 0) + "@" + this.description + "@" + this.eventDetails; }
-    }
-
-    protected class Todo extends Task {
-
-        public Todo(String description) {
-            super(description);
-        }
-        public Todo(String description, boolean isDone) {
-            super(description);
-            this.isDone = isDone;
-        }
-
-        @Override
-        public String toString() {
-            return "[T]" + super.toString() + description;
-        }
-
-        @Override
-        public String getStatusString() { return "D@" + (isDone ? 1 : 0) + "@" + this.description; }
-    }
-
-    protected static class DukeExceptions extends Exception {
-        public DukeExceptions(String message) {
-            super(message);
-        }
-    }
-
-    protected static class CommandDoesNotExist extends DukeExceptions {
-        public CommandDoesNotExist(String message) {
-            super("Sorry! The command \"" + message + "\" doesn't exist :(\nPlease try again!");
-        }
-    }
-
-    protected static class EmptyDescriptionException extends DukeExceptions {
-        public EmptyDescriptionException(String message) {
-            super("Sorry! There needs to be a description for a " + message + " item :(\nPlease try again!");
-        }
-    }
-
-    protected static class EmptyDetailsException extends DukeExceptions {
-        public EmptyDetailsException(String message) {
-            super("Sorry! Please include more details for a " + message + " item :(\nPlease try again!");
-        }
-    }
-
-    protected static class NotDoneRightException extends DukeExceptions {
-        public NotDoneRightException(String start, String end) {
-            super("Please input an integer in the range of " + start + " to " + end + "!");
-        }
-    }
-
-    protected static class DeletionException extends DukeExceptions {
-        public DeletionException(String start, String end) {
-            super("Please input an integer in the range of " + start + " to " + end + "!");
-        }
-    }
+    private Storage storage;
 
     public static void main(String[] args) throws DukeExceptions, IOException {
 
@@ -182,19 +57,19 @@ public class Duke {
 
                     switch (taskType) {
                         case "T": {
-                            todoList.add(duke.new Todo(taskInfo, taskState));
+                            todoList.add(new Todo(taskInfo, taskState));
                             break;
 
                         }
                         case "D": {
                             String dateBy = txtFileCmd[3];
-                            todoList.add(duke.new Deadline(taskInfo, LocalDate.parse(dateBy), taskState));
+                            todoList.add(new Deadline(taskInfo, LocalDate.parse(dateBy), taskState));
                             break;
 
                         }
                         case "E": {
                             String eventDetails = txtFileCmd[3];
-                            todoList.add(duke.new Event(taskInfo, eventDetails, taskState));
+                            todoList.add(new Event(taskInfo, eventDetails, taskState));
                             break;
                         }
                         default:
@@ -332,7 +207,7 @@ public class Duke {
 
                         System.out.println("added: " + command);
                         System.out.println(linebreak);
-                        todoList.add(duke.new Todo(taskInfo[1]));
+                        todoList.add(new Todo(taskInfo[1]));
                         textFileString.add(todoList.get(todoList.size() - 1).getStatusString());
                         String txt = "";
                         for (String s : textFileString) {
@@ -360,7 +235,7 @@ public class Duke {
                         System.out.println("added: " + command);
                         System.out.println(linebreak);
 
-                        todoList.add(duke.new Deadline(description, LocalDate.parse(date.strip())));
+                        todoList.add(new Deadline(description, LocalDate.parse(date.strip())));
                         textFileString.add(todoList.get(todoList.size() - 1).getStatusString());
                         String txt = "";
                         for (String s : textFileString) {
@@ -388,7 +263,7 @@ public class Duke {
 
                         System.out.println("added: " + command);
                         System.out.println(linebreak);
-                        todoList.add(duke.new Event(description, eventDetails));
+                        todoList.add(new Event(description, eventDetails));
                         textFileString.add(todoList.get(todoList.size() - 1).getStatusString());
                         String txt = "";
                         for (String s : textFileString) {
