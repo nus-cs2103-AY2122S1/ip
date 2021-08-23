@@ -25,6 +25,11 @@ public enum Messages {
         }
     };
 
+    /**
+     * Returns display datetime format "yyyy MMM d h.mm a".
+     *
+     * @param time datetime object of task.
+     */
     public static String dateFormat(LocalDateTime time) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MMM d h.mm a");
         return time.format(formatter);

@@ -12,13 +12,26 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a list of task within chat bot.
+ * Contains operations to add, delete and run task.
+ */
 public class TaskList {
     private final List<Task> library;
 
+    /**
+     * Constructs TaskList Object.
+     */
     public TaskList() {
         this.library = new ArrayList<>(100);
     }
 
+    /**
+     * Constructs TaskList Object.
+     * Loads task request from text file into list.
+     *
+     * @param taskFile scanner object of text file.
+     */
     public TaskList(Scanner taskFile) throws DukeException{
         this.library = new ArrayList<>(100);
 
@@ -30,6 +43,14 @@ public class TaskList {
         taskFile.close();
     }
 
+    /**
+     * Returns task title of task request.
+     * Substrings input line after start word till end of string.
+     *
+     * @param input task request line.
+     * @param start substring after target word.
+     * @throws DukeException If start word doesn't exist.
+     */
     private String cut(String input, String start) throws DukeException {
         String result;
         try {
@@ -40,6 +61,15 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Returns task title of task request.
+     * Substrings input line between start word and end word.
+     *
+     * @param input task request line.
+     * @param start substring after target word.
+     * @param end substring before target word.
+     * @throws DukeException If start or end word doesn't exist.
+     */
     private String cut(String input, String start, String end) throws DukeException {
         String result;
         try {
@@ -50,6 +80,13 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Converts date time string into LocalDateTime.
+     * Parses date time by d/M/yyyy (optional HHmm).
+     * If optional is empty, default time is 2359.
+     *
+     * @param time date time string.
+     */
     private LocalDateTime dateTime(String time) throws DukeException {
         DateTimeFormatter fmt = new DateTimeFormatterBuilder()
                 .appendPattern("d/M/yyyy")
@@ -67,6 +104,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds new task command into TaskList.
+     *
+     * @param tsk task to be inserted.
+     */
     public String add(String input) throws DukeException {
         Task tsk;
         if (input.contains("todo")) {
