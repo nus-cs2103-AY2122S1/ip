@@ -34,24 +34,24 @@ public class Duke {
         printAddTaskMessage(task);
     }
 
-    private static void addTask(String descriptionAndTime, String command) throws DukeException {
-        String[] splitDescriptionAndTime;
+    private static void addTask(String descriptionAndDate, String command) throws DukeException {
+        String[] splitDescriptionAndDate;
         Task task;
 
         try {
             if (command.equals("deadline")) {
-                splitDescriptionAndTime = descriptionAndTime.split(" /by ");
-                task = new Deadline(splitDescriptionAndTime[0].trim(), splitDescriptionAndTime[1].trim());
+                splitDescriptionAndDate = descriptionAndDate.split(" /by ");
+                task = new Deadline(splitDescriptionAndDate[0].trim(), splitDescriptionAndDate[1].trim());
             } else if (command.equals("event")) {
-                splitDescriptionAndTime = descriptionAndTime.split(" /at ");
-                task = new Event(splitDescriptionAndTime[0].trim(), splitDescriptionAndTime[1].trim());
+                splitDescriptionAndDate = descriptionAndDate.split(" /at ");
+                task = new Event(splitDescriptionAndDate[0].trim(), splitDescriptionAndDate[1].trim());
             } else {
                 printInvalidCommandMessage();
                 return;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Oops!!! Deadlines or events should contain a description, followed by " +
-                    "a /by or /at respectively, followed by a date or a time.");
+                    "a /by or /at respectively, followed by a date.");
         }
 
         tasks.add(task);
