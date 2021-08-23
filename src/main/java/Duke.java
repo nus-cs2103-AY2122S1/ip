@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -9,16 +11,18 @@ public class Duke {
      * TaskList containing Tasks.
      */
     private TaskList tl;
+    private Storage storage;
 
     /**
      * Constructor for a Duke.
      */
     public Duke() {
-        this.tl = new TaskList();
+        this.storage = new Storage();
+        this.tl = this.storage.load();
     }
 
     /**
-     * Greeting from Duke.
+     * Greetings from Duke.
      */
     private void greet() {
         String logo = " ____        _        \n"
@@ -30,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * Duke echoes the given command.
+     * Echoes the given command.
      * @param t User's command.
      */
     private void echo(String t) {
@@ -56,7 +60,7 @@ public class Duke {
      * @param t String array of parsed user input.
      * @throws DukeException Exception for wrong user inputs.
      */
-    private void add(String[] t) throws DukeException {
+    private void add(String[] t) throws DukeException{
         Task newTask = null;
         switch (t[0]) {
             case "todo":
@@ -82,6 +86,7 @@ public class Duke {
                 break;
         }
         this.tl.addTask(newTask);
+        this.storage.write(this.tl);
         System.out.println("-----------------------------------------\n" +
                 "Got it. I've added this task:\n" +
                 newTask.toString() +
@@ -90,7 +95,7 @@ public class Duke {
     }
 
     /**
-     * Get the task from duke given an index.
+     * Gets the task from duke given an index.
      * @param index Index of Task.
      * @return Task of the given index.
      */
@@ -99,11 +104,12 @@ public class Duke {
     }
 
     /**
-     * Mark a task as done given its position in the list.
+     * Marks a task as done given its position in the list.
      * @param itemNum Position of Task in the list.
      */
-    private void markDone(int itemNum) {
+    private void markDone(int itemNum){
         this.tl.markDone(itemNum);
+        this.storage.write(this.tl);
         System.out.println("-----------------------------------------\n" +
                 "Nice! I've marked this task as done:\n" +
                 this.getTaskByIndex(itemNum - 1).toString() +
@@ -111,11 +117,11 @@ public class Duke {
     }
 
     /**
-     * Delete a task from the list.
+     * Deletes a task from the list.
      * @param items Parsed delete command from user.
      * @throws DukeException Exception for wrong user inputs.
      */
-    private void deleteTask(String[] items) throws DukeException {
+    private void deleteTask(String[] items) throws DukeException{
         if (items[1].equals("")) {
             throw new DukeException("☹ OOPS!!! The task's number cannot be empty");
         } else {
@@ -123,6 +129,7 @@ public class Duke {
             Task toBeDeleted = this.getTaskByIndex(itemNum - 1);
             String taskName = toBeDeleted.toString();
             this.tl.deleteTask(itemNum - 1);
+            this.storage.write(this.tl);
             System.out.println("-----------------------------------------\n" +
                     "Noted. I've removed this task:\n" +
                     taskName +
@@ -136,6 +143,7 @@ public class Duke {
      */
     private void run() {
         this.greet();
+        this.storage.load();
         Scanner sc = new Scanner(System.in);
         Parser p = new Parser();
         String t;
@@ -145,34 +153,36 @@ public class Duke {
 
             try {
                 switch (items[0]) {
-                    case "bye":
-                        this.exit();
-                        break;
-                    case "list":
-                        System.out.println(this.tl.toString());
-                        break;
-                    case "done":
-                        this.markDone(Integer.parseInt(items[1]));
-                        break;
-                    case "todo":
-                    case "deadline":
-                    case "event":
-                        this.add(items);
-                        break;
-                    case "delete":
-                        this.deleteTask(items);
-                        break;
-                    default:
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                case "bye":
+                    this.exit();
+                    break;
+                case "list":
+                    System.out.println(this.tl.toString());
+                    break;
+                case "done":
+                    this.markDone(Integer.parseInt(items[1]));
+                    break;
+                case "todo":
+                    //Fallthrough
+                case "deadline":
+                    //Fallthrough
+                case "event":
+                    this.add(items);
+                    break;
+                case "delete":
+                    this.deleteTask(items);
+                    break;
+                default:
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (DukeException e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
 
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Duke duke = new Duke();
         duke.run();
     }

@@ -14,8 +14,13 @@ public class Deadline extends Task{
      * @param desc String array consisting of parsed description.
      */
     public Deadline(String[] desc) {
-        super(desc[1], false);
+        super(desc[1], Boolean.valueOf(desc[3]));
         this.by = desc[2];
+    }
+
+    @Override
+    public String toWrite() {
+        return "deadline--" + Boolean.toString(this.isDone) + "--" + this.desc + "--" + this.by +"\n";
     }
 
     /**

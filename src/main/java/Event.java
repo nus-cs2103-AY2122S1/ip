@@ -13,8 +13,13 @@ public class Event extends Task{
      * @param desc String array consisting of parsed description.
      */
     public Event(String[] desc) {
-        super(desc[1], false);
+        super(desc[1], Boolean.valueOf(desc[3]));
         this.at = desc[2];
+    }
+
+    @Override
+    public String toWrite() {
+        return "event--" + Boolean.toString(this.isDone) + "--" + this.desc + "--" + this.at + "\n";
     }
 
     /**

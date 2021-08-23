@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the task in index itemNum (1-indexed) as completed.
+     * Marks the task in index itemNum (1-indexed) as completed.
      * @param itemNum The number in the Tasklist of the Task to be mark completed (1-indexed).
      */
     public void markDone(int itemNum) {
@@ -36,7 +36,7 @@ public class TaskList {
     }
 
     /**
-     * Get the task given its index.
+     * Gets the task given its index.
      * @param index The index of the Task in the TaskList(0-indexed).
      * @return Task with the index in the TaskList.
      */
@@ -45,7 +45,7 @@ public class TaskList {
     }
 
     /**
-     * Get length of the TaskList.
+     * Gets length of the TaskList.
      * @return Length of the TaskList.
      */
     public int getLength() {
@@ -61,7 +61,7 @@ public class TaskList {
     }
 
     /**
-     * Return a string representation of the TaskList.
+     * Returns a string representation of the TaskList.
      * @return All the items in the TaskList.
      */
     @Override
