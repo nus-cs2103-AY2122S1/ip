@@ -7,8 +7,8 @@ import java.io.FileWriter;
 
 public class Duke {
 
-    private static String welcomeLabel = "Hello! I'm Banana \n" + "     What can I do for you?";
-    private static String byeLabel = "Bye. Hope to see you again soon!";
+    private static final String WELCOME_LABEL = "Hello! I'm Banana \n" + "     What can I do for you?";
+    private static final String BYE_LABEL = "Bye. Hope to see you again soon!";
 
     public static void main(String[] args) {
         /*String logo = " ____        _        \n"
@@ -18,7 +18,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);*/
 
-        System.out.println(displayLabel(welcomeLabel));
+        System.out.println(displayLabel(WELCOME_LABEL));
         // for Level 2
         ArrayList<String> items = new ArrayList<>();
         // for Level 3 onwards
@@ -34,7 +34,7 @@ public class Duke {
                     }
                     Level7(input, tasks);
             }
-            System.out.println(displayLabel(byeLabel));
+            System.out.println(displayLabel(BYE_LABEL));
         } catch (DukeException | IOException e) {
             System.out.println(e.getMessage());
         }
