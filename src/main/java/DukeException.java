@@ -22,6 +22,10 @@ public class DukeException extends Exception {
                 errorMessage = "Invalid event formatting!\n"
                         + "Proper format: event 'event description' /at 'location'";
                 break;
+            case "initialization error":
+                errorMessage = "data.txt is corrupted!\n"
+                        + "Please delete data.txt to start fresh";
+                break;
             default:
                 errorMessage = "unknown error message";
         }

@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private String taskName;
     private boolean isDone = false;
 
@@ -17,6 +17,10 @@ public class Task {
     public boolean isDone() {
         return isDone;
     }
+
+    public abstract String getTag();
+
+    public abstract String getAdditionalInfo();
 
     @Override
     public String toString() {

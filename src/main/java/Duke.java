@@ -1,5 +1,12 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
     private ArrayList<Task> taskArr = new ArrayList<Task>();
@@ -8,6 +15,7 @@ public class Duke {
         DEADLINE,
         EVENT
     }
+    private final String pathName = ".\\src\\main\\data\\data.txt";
 
 
     private void textFrame(String s) {
@@ -33,6 +41,76 @@ public class Duke {
             }
         }
         textFrame(" This be ye list of things to do Sire:" + listString );
+    }
+
+    private void initializeDone(Task t, String s) {
+        if (s.equals("1")) {
+            t.setDone();
+        }
+    }
+
+    private void loadTask(){
+        File file = new File(".\\src\\main\\data");
+        if (!file.isDirectory()) {
+            Path path = Paths.get(".\\src\\main\\data");
+            try {
+                Files.createDirectories(path);
+            } catch(IOException e) {
+                System.out.println("Failed to create directory: " + e.getMessage());
+            }
+        }
+        try {
+            File fCurr = new File(pathName);
+            Scanner reader = new Scanner(fCurr);
+            while (reader.hasNextLine()) {
+                try {
+                    String taskString = reader.nextLine();
+                    String[] strArr = taskString.split(" \\| ", 4);
+                    Task t;
+                    switch (strArr[0]) {
+                        case "T":
+                            t = new ToDo(strArr[2]);
+                            break;
+                        case "E":
+                            t = new Event(strArr[2], strArr[3]);
+                            break;
+                        case "D":
+                            t = new Deadline(strArr[2], strArr[3]);
+                            break;
+                        default:
+                            throw new DukeException("initialization error");
+                    }
+                    initializeDone(t, strArr[1]);
+                    taskArr.add(t);
+                } catch (DukeException e) {
+                    errorFrame(e.getErrorMessage());
+                    break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No saved files, starting fresh!");
+        }
+    }
+
+    private void saveTasks() {
+        try {
+            File fOld = new File(pathName);
+            fOld.delete();
+            File fNew = new File(pathName);
+            fNew.createNewFile();
+            FileWriter myWriter = new FileWriter(pathName);
+            String savedString = "";
+            for(int i = 0; i < taskArr.size(); i++) {
+                Task task = taskArr.get(i);
+                String completionState = task.isDone() ? "1" : "0";
+                savedString += task.getTag() + " | " + completionState + " | "
+                        + task.getTaskName() + " | " + task.getAdditionalInfo() + "\n";
+            }
+            myWriter.write(savedString);
+            myWriter.close();
+        } catch (IOException e){
+            System.out.println("File creation error: " + e.getMessage());
+        }
     }
 
     private void addTask(String taskString, TaskType taskType) {
@@ -68,6 +146,7 @@ public class Duke {
     }
 
     public void startBob() {
+        loadTask();
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             String inputText = scanner.nextLine();
@@ -79,19 +158,19 @@ public class Duke {
                 try {
                     if (inputArr.length == 1) {
                         switch (inputArr[0]) {
-                            case "list":
-                                listTasks();
-                                break;
-                            case "delete":
-                                throw new DukeException("empty delete");
-                            case "todo":
-                                throw new DukeException("empty todo");
-                            case "deadline":
-                                throw new DukeException("empty deadline");
-                            case "event":
-                                throw new DukeException("empty event");
-                            default:
-                                throw new DukeException("invalid input");
+                        case "list":
+                            listTasks();
+                            break;
+                        case "delete":
+                            throw new DukeException("empty delete");
+                        case "todo":
+                            throw new DukeException("empty todo");
+                        case "deadline":
+                            throw new DukeException("empty deadline");
+                        case "event":
+                            throw new DukeException("empty event");
+                        default:
+                            throw new DukeException("invalid input");
                         }
                     } else {
                         switch (inputArr[0]) {
@@ -125,7 +204,7 @@ public class Duke {
                                         errorFrame(" That task does not exist!");
                                     } else {
                                         Task deletedTask = taskArr.remove(index);
-                                        textFrame("Loser! I have deleted that task for you" + "\n" +
+                                        textFrame("Quitter! I have deleted that task for you" + "\n" +
                                                 deletedTask + "\n" +
                                                 "Now you have " + taskArr.size() + " tasks left.");
 
@@ -142,6 +221,7 @@ public class Duke {
                     errorFrame(e.getErrorMessage());
                 }
             }
+            saveTasks();
         }
     }
 
