@@ -2,11 +2,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Events extends Task{
+public class Events extends Task {
     protected String at;
     protected LocalDateTime localDateTime;
 
-    public Events(String description, String at){
+    public Events(String description, String at) {
         super(description);
         this.at = at;
     }
@@ -19,7 +19,7 @@ public class Events extends Task{
     }
 
     @Override
-    public void displayTask(){
+    public void displayTask() {
         System.out.println(toString());
     }
 
@@ -29,5 +29,4 @@ public class Events extends Task{
         String time = at.substring(whitespaceIdx+1);
         localDateTime = LocalDateTime.parse(date+"T"+time);
     }
-
 }

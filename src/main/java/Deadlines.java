@@ -2,11 +2,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadlines extends Task{
+public class Deadlines extends Task {
     protected String by;
     protected LocalDateTime localDateTime;
 
-    public Deadlines(String description, String by){
+    public Deadlines(String description, String by) {
         super(description);
         this.by = by;
     }

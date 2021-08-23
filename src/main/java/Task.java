@@ -11,7 +11,7 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public void markAsDone(){
+    public void markAsDone() {
         isDone = true;
     }
 
@@ -27,7 +27,7 @@ public class Task {
         return "[" + getStatusIcon() + "]" + " " + description;
     }
 
-    public void displayTask(){
+    public void displayTask() {
         System.out.println(toString());
     }
 }

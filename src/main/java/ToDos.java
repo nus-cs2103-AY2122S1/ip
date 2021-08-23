@@ -1,8 +1,7 @@
 public class ToDos extends Task {
 
-    public ToDos(String description){
+    public ToDos(String description) {
         super(description);
-
     }
 
     @Override
@@ -11,7 +10,7 @@ public class ToDos extends Task {
     }
 
     @Override
-    public void displayTask(){
+    public void displayTask() {
         System.out.println(toString());
     }
 }
