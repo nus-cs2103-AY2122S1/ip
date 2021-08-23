@@ -36,7 +36,7 @@ public class Event extends Task{
         return "Task:event\n" +
                 String.format("\tName:%s\n", this.name) +
                 String.format("\tDone:%s\n", this.done) +
-                String.format("\tAt:%s", this.at);
+                String.format("\tAt:%s\n", this.at);
     }
 
     @Override

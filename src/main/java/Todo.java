@@ -27,7 +27,7 @@ public class Todo extends Task{
     public String serialize() {
         return "Task:todo\n" +
                 String.format("\tName:%s\n", this.name) +
-                String.format("\tDone:%s", this.done);
+                String.format("\tDone:%s\n", this.done);
     }
 
     @Override

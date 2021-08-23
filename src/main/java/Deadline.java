@@ -38,7 +38,7 @@ public class Deadline extends Task{
         return "Task:deadline\n" +
                 String.format("\tName:%s\n", this.name) +
                 String.format("\tDone:%s\n", this.done) +
-                String.format("\tBy:%s", this.by);
+                String.format("\tBy:%s\n", this.by);
     }
 
     @Override
