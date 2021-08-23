@@ -107,6 +107,22 @@ public class TaskList {
     }
 
     /**
+     * Returns a subset of tasks which contain the searchTerm
+     * 
+     * @param searchTerm keyword to search for
+     * @return List of Tasks which contain the searchTerm
+     */
+    public List<Task> find(String searchTerm) {
+        List<Task> result = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.contains(searchTerm)) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+
+    /**
      * Converts all Tasks in TaskList to commands
      *
      * @return array containing commands to re-create TaskList

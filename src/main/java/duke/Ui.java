@@ -1,6 +1,9 @@
 package duke;
 
+import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Encapsulates UI-related functionality of Iris
@@ -58,6 +61,17 @@ public class Ui {
     public void listTasks(TaskList tasks) {
         for (int i = 0; i < tasks.getCount(); i++) {
             say(String.format("%d. %s", i + 1, tasks.get(i)), i == 0);
+        }
+    }
+
+    /**
+     * Gets Iris to list out all Tasks in a given List<Task>
+     * 
+     * @param taskList List of Tasks to list out
+     */
+    public void listTasks(List<Task> taskList) {
+        for (int i = 0; i < taskList.size(); i++) {
+            say(String.format("%d. %s", i + 1, taskList.get(i)), i == 0);
         }
     }
 

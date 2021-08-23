@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.List;
+
 import duke.task.Task;
 
 /**
@@ -83,6 +85,10 @@ public class Parser {
             if (!silent) {
                 ui.sayTaskAdded(tasks);
             }
+        } else if (command.startsWith("find")) {
+            String searchTerm = getMetadata(command);
+            List<Task> searchResults = tasks.find(searchTerm);
+            ui.listTasks(searchResults);
         } else {
             throw new IrisException("I'm sorry, but I don't know what that means.");
         }

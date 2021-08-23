@@ -24,6 +24,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public boolean contains(String searchTerm) {
+        return name.contains(searchTerm);
+    }
+
     private String getStatusIcon() {
         return this.isDone ? "X" : " ";
     }
