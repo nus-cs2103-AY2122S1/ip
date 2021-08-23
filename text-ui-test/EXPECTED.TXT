@@ -11,113 +11,195 @@ Hello from
 -----------------------------------------
 
     -----------------------------------------
+     OOPS!!! The description and date/time of a deadline cannot be empty.
+    -----------------------------------------
+
+    -----------------------------------------
+     Invalid deadline format!
+     Please ensure you specify your date and time after a "/by"
+     Eg: deadline Submit Assignment /by 2021-08-29 15:00
+    -----------------------------------------
+
+    -----------------------------------------
+     Error! Description or date and time is empty!
+    -----------------------------------------
+
+    -----------------------------------------
+     Invalid deadline format!
+     Please ensure you specify your date and time after a "/by"
+     Eg: deadline Submit Assignment /by 2021-08-29 15:00
+    -----------------------------------------
+
+    -----------------------------------------
+     Error! Description or date and time is empty!
+    -----------------------------------------
+
+    -----------------------------------------
+     Error! Description or date and time is empty!
+    -----------------------------------------
+
+    -----------------------------------------
      Got it. I have added this task:
-       [T][ ] read book
+       [D][ ] read book (by: August 24 2021, 6:00 pm)
      Now you have 1 task in the list.
     -----------------------------------------
 
     -----------------------------------------
      Got it. I have added this task:
-       [D][ ] return book (by: Wednesday 8pm)
+       [D][ ] return book (by: August 24 2021, 11:59 pm)
      Now you have 2 tasks in the list.
     -----------------------------------------
 
     -----------------------------------------
      Got it. I have added this task:
-       [E][ ] borrow book again (at: National Library Monday 10am)
+       [D][ ] borrow book again (by: August 24 2021, 2:00 pm)
      Now you have 3 tasks in the list.
     -----------------------------------------
 
     -----------------------------------------
+     Error! You can only enter one date and time, Eg: "2021-09-12 18:00",
+     one date, Eg: "2021-09-12" (This will enter time as 23:59 by default),
+     or one time, Eg: "18:00" (This will enter today's date by default)
+    -----------------------------------------
+
+    -----------------------------------------
+     Error! Date and time entered must be some time in the future!
+    -----------------------------------------
+
+    -----------------------------------------
+     Got it. I have added this task:
+       [D][ ] read book (by: August 24 2021, 11:59 pm)
+     Now you have 4 tasks in the list.
+    -----------------------------------------
+
+    -----------------------------------------
+     Error! Date and time entered must be some time in the future!
+    -----------------------------------------
+
+    -----------------------------------------
+     Got it. I have added this task:
+       [D][ ] read book (by: August 25 2021, 11:59 pm)
+     Now you have 5 tasks in the list.
+    -----------------------------------------
+
+    -----------------------------------------
+     OOPS!!! The description and date/time of an event cannot be empty.
+    -----------------------------------------
+
+    -----------------------------------------
+     Invalid event format!
+     Please ensure you specify your date and time after a "/at"
+     Eg: event Attend physical lessons /at 2021-08-29 15:00
+    -----------------------------------------
+
+    -----------------------------------------
+     Error! Description or date and time is empty!
+    -----------------------------------------
+
+    -----------------------------------------
+     Invalid event format!
+     Please ensure you specify your date and time after a "/at"
+     Eg: event Attend physical lessons /at 2021-08-29 15:00
+    -----------------------------------------
+
+    -----------------------------------------
+     Error! Description or date and time is empty!
+    -----------------------------------------
+
+    -----------------------------------------
+     Error! Description or date and time is empty!
+    -----------------------------------------
+
+    -----------------------------------------
+     Got it. I have added this task:
+       [E][ ] read book (at: August 24 2021, 6:00 pm)
+     Now you have 6 tasks in the list.
+    -----------------------------------------
+
+    -----------------------------------------
+     Got it. I have added this task:
+       [E][ ] return book (at: August 24 2021, 11:59 pm)
+     Now you have 7 tasks in the list.
+    -----------------------------------------
+
+    -----------------------------------------
+     Got it. I have added this task:
+       [E][ ] borrow book again (at: August 24 2021, 2:00 pm)
+     Now you have 8 tasks in the list.
+    -----------------------------------------
+
+    -----------------------------------------
+     Error! You can only enter one date and time, Eg: "2021-09-12 18:00",
+     one date, Eg: "2021-09-12" (This will enter time as 23:59 by default),
+     or one time, Eg: "18:00" (This will enter today's date by default)
+    -----------------------------------------
+
+    -----------------------------------------
+     Error! Date and time entered must be some time in the future!
+    -----------------------------------------
+
+    -----------------------------------------
+     Got it. I have added this task:
+       [E][ ] read book (at: August 24 2021, 11:59 pm)
+     Now you have 9 tasks in the list.
+    -----------------------------------------
+
+    -----------------------------------------
+     Error! Date and time entered must be some time in the future!
+    -----------------------------------------
+
+    -----------------------------------------
+     Got it. I have added this task:
+       [E][ ] read book (at: August 25 2021, 11:59 pm)
+     Now you have 10 tasks in the list.
+    -----------------------------------------
+
+    -----------------------------------------
     Here are the tasks in your list:
-     1. [T][ ] read book
-     2. [D][ ] return book (by: Wednesday 8pm)
-     3. [E][ ] borrow book again (at: National Library Monday 10am)
+     1. [D][ ] read book (by: August 24 2021, 6:00 pm)
+     2. [D][ ] return book (by: August 24 2021, 11:59 pm)
+     3. [D][ ] borrow book again (by: August 24 2021, 2:00 pm)
+     4. [D][ ] read book (by: August 24 2021, 11:59 pm)
+     5. [D][ ] read book (by: August 25 2021, 11:59 pm)
+     6. [E][ ] read book (at: August 24 2021, 6:00 pm)
+     7. [E][ ] return book (at: August 24 2021, 11:59 pm)
+     8. [E][ ] borrow book again (at: August 24 2021, 2:00 pm)
+     9. [E][ ] read book (at: August 24 2021, 11:59 pm)
+     10. [E][ ] read book (at: August 25 2021, 11:59 pm)
     -----------------------------------------
 
     -----------------------------------------
      Nice! I've marked this task as done:
-       [E][X] borrow book again (at: National Library Monday 10am)
-    -----------------------------------------
-
-    -----------------------------------------
-     Noted. I've removed this task:
-       [E][X] borrow book again (at: National Library Monday 10am)
-     Now you have 2 tasks in the list.
-    -----------------------------------------
-
-    -----------------------------------------
-     OOPS!!! You do not have 4 tasks in the list
-    -----------------------------------------
-
-    -----------------------------------------
-     OOPS!!! You do not have 3 tasks in the list
+       [D][X] borrow book again (by: August 24 2021, 2:00 pm)
     -----------------------------------------
 
     -----------------------------------------
      Nice! I've marked this task as done:
-       [D][X] return book (by: Wednesday 8pm)
+       [D][X] return book (by: August 24 2021, 11:59 pm)
     -----------------------------------------
 
     -----------------------------------------
      Noted. I've removed this task:
-       [D][X] return book (by: Wednesday 8pm)
-     Now you have 1 task in the list.
-    -----------------------------------------
-
-    -----------------------------------------
-     Nice! I've marked this task as done:
-       [T][X] read book
+       [D][X] return book (by: August 24 2021, 11:59 pm)
+     Now you have 9 tasks in the list.
     -----------------------------------------
 
     -----------------------------------------
      Noted. I've removed this task:
-       [T][X] read book
-     Now you have 0 tasks in the list.
+       [D][X] borrow book again (by: August 24 2021, 2:00 pm)
+     Now you have 8 tasks in the list.
     -----------------------------------------
 
     -----------------------------------------
-     OOPS!!! You do not have any task in the list
-    -----------------------------------------
-
-    -----------------------------------------
-     OOPS!!! You do not have any task in the list
-    -----------------------------------------
-
-    -----------------------------------------
-     OOPS!!! You do not have any task in the list
-    -----------------------------------------
-
-    -----------------------------------------
-     OOPS!!! Please ensure a number is entered after delete (eg: delete 2)
-    -----------------------------------------
-
-    -----------------------------------------
-     OOPS!!! I'm sorry, but I don't know what that means :-(
-    -----------------------------------------
-
-    -----------------------------------------
-     OOPS!!! The description and date/time of a deadline cannot be empty.
-    -----------------------------------------
-
-    -----------------------------------------
-     OOPS!!! The description and date/time of a deadline cannot be empty.
-    -----------------------------------------
-
-    -----------------------------------------
-     OOPS!!! The description of a todo cannot be empty.
-    -----------------------------------------
-
-    -----------------------------------------
-     Invalid deadline format! Please ensure you specify your date and time after a /by Eg: deadline Submit Assignment /by Thursday 2359
-    -----------------------------------------
-
-    -----------------------------------------
-     Invalid event format! Please ensure you specify your date and time after a /at Eg: event Attend physical lessons /at NUS Monday 0800
-    -----------------------------------------
-
-    -----------------------------------------
-    There are no tasks in your list
+    Here are the tasks in your list:
+     1. [D][ ] read book (by: August 24 2021, 6:00 pm)
+     2. [D][ ] read book (by: August 24 2021, 11:59 pm)
+     3. [D][ ] read book (by: August 25 2021, 11:59 pm)
+     4. [E][ ] read book (at: August 24 2021, 6:00 pm)
+     5. [E][ ] return book (at: August 24 2021, 11:59 pm)
+     6. [E][ ] borrow book again (at: August 24 2021, 2:00 pm)
+     7. [E][ ] read book (at: August 24 2021, 11:59 pm)
+     8. [E][ ] read book (at: August 25 2021, 11:59 pm)
     -----------------------------------------
 
     -----------------------------------------
