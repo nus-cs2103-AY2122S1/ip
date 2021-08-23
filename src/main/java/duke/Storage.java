@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,6 +17,11 @@ public class Storage {
         this.file = new File(filePath);
     }
 
+    /**
+     * Reads data from the file to load all the current tasks.
+     *
+     * @return An ArrayList of tasks stored int the file.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> list = new ArrayList<>();
 
@@ -47,6 +51,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Saves all the tasks in a given TaskList to the file.
+     *
+     * @param taskList The TaskList whose data is to be saved.
+     */
     public void save(TaskList taskList) {
         ArrayList<Task> list = taskList.getTaskList();
         try {

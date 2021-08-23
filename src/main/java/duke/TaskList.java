@@ -22,6 +22,11 @@ public class TaskList {
         taskList.add(task);
     }
 
+    /**
+     * Removes the element in the list represented by the index.
+     *
+     * @param index The index of the element to be removed.
+     */
     public void removeFromList(int index) {
         if (index <= 0 || index > taskList.size()) {
             // number given is out of bounds of the taskList
@@ -36,6 +41,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints all the elements in teh TaskList.
+     */
     public void printList() {
         if (taskList == null || taskList.isEmpty()) {
             System.out.println("You currently have no tasks!");
@@ -46,6 +54,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the task at the given index as done.
+     *
+     * @param index The index of the task to be marked as done.
+     */
     public void markAsDone(int index) {
         if (index <= 0 || index > taskList.size()) {
             // number given is out of bounds of the taskList

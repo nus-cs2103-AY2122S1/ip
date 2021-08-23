@@ -15,32 +15,57 @@ public class Ui {
 
     private final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Displays a greeting message.
+     */
     public void greet() {
         System.out.println("Hello from\n" + logo +"\n");
         System.out.println("What can I do for you?");
         showLine();
     }
 
+    /**
+     * Displays a goodbye message.
+     */
     public void goodBye() {
         scanner.close();
         System.out.println("Bye. Hope to see you again soon!");
         showLine();
     }
 
+    /**
+     * Prints a divider.
+     */
     public void showLine() {
         System.out.println(divider);
     }
 
+    /**
+     * Prints a message for when a task is created.
+     *
+     * @param task The task created.
+     * @param taskList The current TaskList.
+     */
     public void taskCreatedMessage(Task task, TaskList taskList) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task);
         System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
     }
 
+    /**
+     * Reads the given input from the user.
+     *
+     * @return The String input from the user.
+     */
     public String readCommand() {
         return scanner.nextLine();
     }
 
+    /**
+     * Displays an error message.
+     *
+     * @param message The message to be displayed.
+     */
     public void showError(String message) {
         System.out.println(message);
     }

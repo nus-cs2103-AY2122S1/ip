@@ -21,12 +21,33 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Execute the command.
+     *
+     * @param taskList The current TaskList.
+     * @param ui The Ui.
+     * @param storage The storage.
+     * @throws DukeException Teh exception thrown when the command is unable to execute.
+     */
     public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
+    /**
+     * Returns whether a command is an ExitCommand.
+     *
+     * @return Whether a command is an ExitCommand.
+     */
     public boolean isExit() {
         return this instanceof ExitCommand;
     }
 
+    /**
+     * Creates a command of a given type from a given input.
+     *
+     * @param type The type of command.
+     * @param input The given input.
+     * @return A command.
+     * @throws DukeException The exception thrown when a command cannot be created.
+     */
     public static Command createCommand(Command.Type type, String input) throws DukeException {
         switch (type) {
             case ADD:
