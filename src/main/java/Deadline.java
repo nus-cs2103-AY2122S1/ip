@@ -24,4 +24,12 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + "(by: " + by + ")";
     }
+
+    /**
+     * Returns by property of Deadline object.
+     * @return by of Deadline.
+     */
+    public String getBy() {
+        return this.by;
+    }
 }

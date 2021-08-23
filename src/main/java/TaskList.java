@@ -84,13 +84,13 @@ public class TaskList {
     }
 
     /**
-     * Returns task description from the list using the index.
+     * Returns task from the list using the index.
      * @param index Index of the task on the list.
-     * @return Returns task description.
+     * @return Returns task.
      */
-    public String getTask(int index) {
+    public Task getTask(int index) {
         Task currentTask = tasks.get(index - 1);
-        return currentTask.toString();
+        return currentTask;
     }
 
     /**
@@ -99,5 +99,12 @@ public class TaskList {
      */
     public int getTasksLength() {
         return this.taskIndex;
+    }
+
+    public void printList() {
+        System.out.println("This is the list.");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(tasks.get(i));
+        }
     }
 }
