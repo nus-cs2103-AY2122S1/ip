@@ -5,12 +5,12 @@ public class Task {
     /**
      * the status of the task
      */
-    private boolean isComplete;
+    protected boolean isComplete;
 
     /**
      * the details of the task
      */
-    private final String taskDetails;
+    protected final String taskDetails;
 
     /**
      * Constructs a uncompleted task with the details as taskDetails
@@ -42,4 +42,18 @@ public class Task {
             return "[ ] " + taskDetails;
         }
     }
+
+    /**
+     * Returns the string representation for storing in text file.
+     *
+     * @return the string representation for storing in text file
+     */
+    public String toStringSave() {
+        int completeBinary = 0;
+        if (this.isComplete) {
+            completeBinary = 1;
+        }
+        return "G" + " | " + completeBinary + " | " + this.taskDetails + " | ";
+    }
+
 }

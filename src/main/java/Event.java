@@ -26,4 +26,19 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
+
+    /**
+     * Returns the string representation for storing in text file.
+     *
+     * @return the string representation for storing in text file
+     */
+    @Override
+    public String toStringSave() {
+        int completeBinary = 0;
+        if (this.isComplete) {
+            completeBinary = 1;
+        }
+        return "E" + " | " + completeBinary + " | " + this.taskDetails + " | " + this.at;
+    }
+
 }

@@ -1,4 +1,8 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -20,7 +24,7 @@ public class Duke {
         System.out.println(LINE);
         System.out.println(ROBOT_ICON + ": Hello I am your RobotFriend.\n" + ROBOT_TEXT_SPACE + "How can i help you?");
         System.out.println(ROBOT_TEXT_SPACE + "Commands:");
-        System.out.println(ROBOT_TEXT_SPACE + "bye: terminate session:");
+        System.out.println(ROBOT_TEXT_SPACE + "bye: terminate session.");
         System.out.println(ROBOT_TEXT_SPACE + "list: view all tasks in the list.");
         System.out.println(ROBOT_TEXT_SPACE + "done i: mark task number i as complete and view the task.");
         System.out.println(ROBOT_TEXT_SPACE + "delete i: delete the task at the given index i.");
@@ -99,7 +103,8 @@ public class Duke {
      * @throws NoDateIndicatorException if there is no /by indicator, it will result in this error.
      * @throws NoDateException if there is no date, it will result in this error.
      */
-    private static Task makeEventTask(String userInput) throws NoTaskDescriptionException, NoDateIndicatorException, NoDateException {
+    private static Task makeEventTask(String userInput) throws
+            NoTaskDescriptionException, NoDateIndicatorException, NoDateException {
         int indexOfAt = userInput.indexOf("/at");
         int EndIndexForEvent = "event".length();
         boolean doesAtExist = indexOfAt != -1;
@@ -129,7 +134,8 @@ public class Duke {
      * @throws NoDateIndicatorException if there is no /by indicator, it will result in this error.
      * @throws NoDateException if there is no date, it will result in this error.
      */
-    private static Deadline makeDeadlineTask(String userInput) throws NoTaskDescriptionException, NoDateIndicatorException, NoDateException {
+    private static Deadline makeDeadlineTask(String userInput) throws NoTaskDescriptionException,
+            NoDateIndicatorException, NoDateException {
         int indexOfBy = userInput.indexOf("/by");
         int EndIndexForDeadline = "deadline".length();
         boolean doesByExist = indexOfBy != -1;
@@ -150,6 +156,20 @@ public class Duke {
                 userInput.substring(indexOfBy + "/by".length() + 1));
     }
 
+    /**
+     * Overwrites and save new task list in data/duke.txt file when there is changes such as deleting and adding task.
+     */
+    private static void saveData() {
+        try {
+            FileWriter myWriter = new FileWriter("data/duke.txt");
+            for (Task task: list) {
+                myWriter.write(task.toStringSave() + '\n');
+            }
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Adds user inputted String to list and prints the user added tasks and the current number of tasks, else
@@ -185,6 +205,7 @@ public class Duke {
             return;
         }
         addTask(newTask);
+        saveData();
         System.out.println(LINE);
         System.out.println(ROBOT_ICON + ": " + "You have added this following task to the list:");
         System.out.println(newTask.toString());
@@ -211,6 +232,7 @@ public class Duke {
      */
     private static void deleteTask(Task task) {
         list.remove(task);
+        saveData();
     }
 
     /**
@@ -239,6 +261,7 @@ public class Duke {
         System.out.println(LINE);
         System.out.println(ROBOT_ICON + ": " + "You have completed the following task:");
         list.get(taskNumber - 1).completeTask();
+        saveData();
         System.out.println(list.get(taskNumber - 1).toString());
         System.out.println(LINE);
     }
@@ -276,8 +299,68 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    public static void main(String[] args) {
+    /**
+     * Returns Duke's memory file in data/Duke.txt else create and return a new file in the directory.
+     *
+     * @return memory file for Duke
+     */
+    private static File loadData() {
+        File directory = new File("data");
+        directory.mkdir();
+        File storageFile = new File("data/duke.txt");
+        try {
+            storageFile.createNewFile();
+        } catch (IOException e) {
+            System.out.println("Error has occurred.");
+        }
+        return storageFile;
+    }
+
+    /**
+     * Reads from storage file all the previously saved tasks info and add all the tasks to the current tracking list.
+     *
+     * @param storageFile stores all the previously saved tasks info.
+     */
+    private static void readFile(File storageFile) {
+        try {
+            Scanner s = new Scanner(storageFile);
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                char taskType = line.charAt(0);
+                int taskStatus = line.charAt(4);
+                int startOfTaskDes = 8;
+                int taskDescIdentifier  = line.indexOf('|', startOfTaskDes);
+
+                String taskDesc = line.substring(startOfTaskDes, taskDescIdentifier - 1);
+                if (taskType == 'E') {
+                    String date = line.substring(taskDescIdentifier + 2);
+                    Event task = new Event(taskDesc, date);
+                    if (taskStatus == 1) {
+                        task.completeTask();
+                    }
+                    addTask(task);
+
+                } else if (taskType == 'D') {
+                    String time = line.substring(taskDescIdentifier + 2);
+                    Deadline task = new Deadline(taskDesc, time);
+                    if (taskStatus == 1) {
+                        task.completeTask();
+                    }
+                    addTask(new Deadline(taskDesc, time));
+                } else {
+                    addTask(new ToDo(taskDesc));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void main(String[] args)  {
         greet();
+        File storageFile = loadData();
+        readFile(storageFile);
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String userInput = scanner.nextLine();
