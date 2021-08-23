@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -69,12 +70,12 @@ public class Duke {
             printBanner(renderNewTask(todoTask));
         } else if (command.equals("deadline") && input.contains("/by")) {
             String[] parts = input.replace("deadline\s+", "").split("\s+/by\s+", 2);
-            var task = new Deadline(parts[0], parts[1]);
+            var task = new Deadline(parts[0], LocalDate.parse(parts[1]));
             tasks.add(task);
             printBanner(renderNewTask(task));
         } else if (command.equals("event") && input.contains("/at")) {
             String[] parts = input.replace("event\s+", "").split("\s+/at\s+", 2);
-            var task = new Event(parts[0], parts[1]);
+            var task = new Event(parts[0], LocalDate.parse(parts[1]));
             tasks.add(task);
             printBanner(renderNewTask(task));
         } else {
