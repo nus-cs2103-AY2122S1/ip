@@ -13,7 +13,7 @@ public class Parser {
      * @throws DukeException Invalid command.
      * @throws IOException File
      */
-    public static ParseCommands interpretCommand(String input) throws DukeException, IOException {
+    public static ParseCommands parse(String input) throws DukeException, IOException {
         if (input.equals("list")) {
             return TaskList::printTasks;
         } else if (input.matches("^todo( .*)")) {

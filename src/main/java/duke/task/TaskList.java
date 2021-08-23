@@ -87,7 +87,7 @@ public class TaskList {
             throw new TaskNotFoundException();
         }
         Task task = this.tasks.get(taskNum - 1);
-        task.markAsDone();
+        task.toggleDone();
         return MESSAGE_DONE + "\n" + "  " + task;
     }
 

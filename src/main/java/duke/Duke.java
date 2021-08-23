@@ -35,7 +35,7 @@ public class Duke {
 
         while (!(input = ui.getCommand()).equals("bye")) {
             try {
-                String output = Parser.interpretCommand(input).execute(tasks);
+                String output = Parser.parse(input).execute(tasks);
                 ui.print(output);
                 storage.saveData(tasks.getTasks());
             } catch (DukeException | IOException e) {

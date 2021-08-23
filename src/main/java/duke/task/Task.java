@@ -4,7 +4,7 @@ public class Task {
     private final String taskName;
     private boolean done;
 
-    Task(String taskName) {
+    public Task(String taskName) {
         this.taskName = taskName;
         this.done = false;
     }
@@ -12,8 +12,24 @@ public class Task {
     /**
      * Marks task as done.
      */
-    public void markAsDone() {
-        done = true;
+    public void toggleDone() {
+        this.done = !this.done;
+    }
+
+    /**
+     * Returns a description of the task.
+     * @return task name.
+     */
+    public String getTaskName() {
+        return this.taskName;
+    }
+
+    /**
+     * Returns a {@code boolean} value that indicates completion status of the task.
+     * @return Completion status of task.
+     */
+    public boolean isDone() {
+        return this.done;
     }
 
     /**
