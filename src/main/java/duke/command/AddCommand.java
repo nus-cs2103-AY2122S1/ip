@@ -8,7 +8,7 @@ import duke.task.ToDo;
 
 import java.time.DateTimeException;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private final String type;
     private final String[] args;
 
@@ -38,8 +38,8 @@ public class AddCommand extends Command{
 
         ui.reply(String.format(
                 "Got it. I've added this task: \n" +
-                "%s\n" +
-                "Now you have %d tasks in the list", task.toString(), taskManager.taskCount()
+                        "%s\n" +
+                        "Now you have %d tasks in the list", task.toString(), taskManager.taskCount()
         ));
     }
 }

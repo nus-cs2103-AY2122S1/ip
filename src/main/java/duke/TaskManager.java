@@ -1,13 +1,9 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDo;
 
 import java.io.IOException;
 import java.time.DateTimeException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -50,8 +46,8 @@ public class TaskManager {
     }
 
     public String listTasks() {
-        return Stream.iterate(0, x -> x < taskList.size(), x -> x+1)
-                .map(x -> String.format("%d. %s", x+1, taskList.get(x).toString()))
+        return Stream.iterate(0, x -> x < taskList.size(), x -> x + 1)
+                .map(x -> String.format("%d. %s", x + 1, taskList.get(x).toString()))
                 .collect(Collectors.joining("\n"));
     }
 

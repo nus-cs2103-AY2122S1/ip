@@ -25,8 +25,8 @@ public class Ui {
                 .map(s -> String.format("\t%s\n", s))
                 .collect(Collectors.joining(""));
         System.out.printf("\t____________________________________\n" +
-                    "%s" +
-                    "\t____________________________________\n", indentedMsg);
+                "%s" +
+                "\t____________________________________\n", indentedMsg);
     }
 
     public void handleError(Exception e) {

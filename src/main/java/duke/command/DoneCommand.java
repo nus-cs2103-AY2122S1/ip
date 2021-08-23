@@ -5,6 +5,7 @@ import duke.Ui;
 
 public class DoneCommand extends Command {
     private final int id;
+
     public DoneCommand(int id) {
         this.id = id;
     }
@@ -13,7 +14,7 @@ public class DoneCommand extends Command {
     public void execute(TaskManager taskManager, Ui ui) {
         ui.reply(String.format(
                 "Nice! I've marked this task as done: \n" +
-                "%s", taskManager.completeTask(id - 1).toString()
+                        "%s", taskManager.completeTask(id - 1).toString()
         ));
     }
 }

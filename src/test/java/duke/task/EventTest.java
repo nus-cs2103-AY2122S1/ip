@@ -16,7 +16,7 @@ public class EventTest {
         Task task = Event.of(false, desc, "2020-02-02");
         assertEquals(desc, task.getDescriptions());
         assertEquals(" ", task.getStatusIcon());
-        task = Event.of(true, desc,"2020-02-02");
+        task = Event.of(true, desc, "2020-02-02");
         assertEquals("X", task.getStatusIcon());
     }
 
@@ -43,7 +43,7 @@ public class EventTest {
     @Test
     public void createEvent_invalidDate_exceptionThrown() {
         String desc = "TEST EVENT";
-        assertThrows(DateTimeException.class, ()-> Event.of(false, desc, "NOT VALID DATE"));
+        assertThrows(DateTimeException.class, () -> Event.of(false, desc, "NOT VALID DATE"));
     }
 
 }

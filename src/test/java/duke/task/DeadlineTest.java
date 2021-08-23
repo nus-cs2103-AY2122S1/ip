@@ -42,7 +42,7 @@ public class DeadlineTest {
     @Test
     public void createDeadline_invalidDate_exceptionThrown() {
         String desc = "TEST DEADLINE";
-        assertThrows(DateTimeException.class, ()-> Deadline.of(false, desc, "NOT VALID DATE"));
+        assertThrows(DateTimeException.class, () -> Deadline.of(false, desc, "NOT VALID DATE"));
     }
 
 }

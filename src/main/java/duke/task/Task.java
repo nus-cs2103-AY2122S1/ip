@@ -1,7 +1,7 @@
 package duke.task;
 
 abstract public class Task {
-    protected String descriptions;
+    protected final String descriptions;
     protected boolean isDone;
 
     public Task(String descriptions) {
@@ -12,6 +12,7 @@ abstract public class Task {
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
+
     abstract String getTaskType();
 
     public Task done() {

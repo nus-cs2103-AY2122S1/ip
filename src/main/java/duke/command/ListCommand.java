@@ -3,7 +3,7 @@ package duke.command;
 import duke.TaskManager;
 import duke.Ui;
 
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     @Override
     public void execute(TaskManager taskManager, Ui ui) {

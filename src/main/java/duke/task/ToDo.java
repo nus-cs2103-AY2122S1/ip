@@ -1,6 +1,6 @@
 package duke.task;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     private ToDo(String description) {
         super(description);
@@ -11,7 +11,9 @@ public class ToDo extends Task{
         return isDone ? ret.done() : ret;
     }
 
-    public String getTaskType() { return "T"; }
+    public String getTaskType() {
+        return "T";
+    }
 
     @Override
     public String toString() {
