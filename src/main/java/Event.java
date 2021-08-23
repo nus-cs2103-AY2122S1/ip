@@ -24,4 +24,10 @@ public class Event extends Task {
                 + this.timing
                 + ")";
     }
+
+    @Override
+    public String toTextRepresentation() {
+        String binaryStatus = this.status ? "1" : "0";
+        return String.format("E; %s; %s; %s", binaryStatus, this.description.strip(), this.timing.strip());
+    }
 }
