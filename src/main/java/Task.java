@@ -17,7 +17,7 @@ public class Task {
     }
 
     /**
-     * Method to return the task description.
+     * Returns the task description.
      * @return Description of the task to do.
      */
     public String getTaskDescription() {
@@ -25,7 +25,7 @@ public class Task {
     }
 
     /**
-     * Method to check and return the status of a task in the form of "X" or " ".
+     * Checks and returns the status of a task in the form of "X" or " ".
      * @return If the task is done "X" will be returned, else " " will be returned.
      */
     public String getStatusIcon() {
@@ -37,9 +37,9 @@ public class Task {
     }
 
     /**
-     * Method to indicate that the Task is done.
+     * Indicates that the Task is done.
      */
-    public void taskCompleted() {
+    public void completeTask() {
         isDone = true;
     }
 

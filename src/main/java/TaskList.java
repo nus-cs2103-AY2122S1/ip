@@ -18,18 +18,18 @@ public class TaskList {
     }
 
     /**
-     * Method to store the task to the TaskList and increment the nextSpaceToStore pointer by one.
+     * Stores the task to the TaskList and increment the nextSpaceToStore pointer by one.
      * @param toStore The task to store into the TaskList.
      */
-    public void store(Task toStore) {
+    public void storeTask(Task toStore) {
         allTasks.add(toStore);
         nextSpaceToStore = nextSpaceToStore + 1;
     }
 
     /**
-     * Method to list out the current tasks in the TaskList.
+     * Lists out the current tasks in the TaskList.
      */
-    public void list() {
+    public void listTask() {
         for (int i = 0; i < nextSpaceToStore; i++) {
             int currTask = i + 1;
             System.out.println(currTask + "." + allTasks.get(i).toString());
@@ -37,20 +37,20 @@ public class TaskList {
     }
 
     /**
-     * Method to indicate the indicated task is done in the TaskList.
+     * Indicates the specified task is done in the TaskList.
      * @param taskNo The task that is completed.
      */
-    public void done(int taskNo) {
+    public void doneTask(int taskNo) {
         Task doneTask = allTasks.get(taskNo - 1);
-        doneTask.taskCompleted();
+        doneTask.completeTask();
         System.out.println("  " + doneTask.toString());
     }
 
     /**
-     * Method to delete the indicated task from the TaskList.
+     * Deletes the specified task from the TaskList.
      * @param taskNo The task to be deleted.
      */
-    public void delete(int taskNo) {
+    public void deleteTask(int taskNo) {
         Task deleteTask = allTasks.get(taskNo - 1);
         allTasks.remove(taskNo - 1);
         nextSpaceToStore = nextSpaceToStore - 1;
