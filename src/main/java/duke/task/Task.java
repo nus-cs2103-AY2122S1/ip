@@ -1,20 +1,20 @@
 package duke.task;
 
 public class Task {
-    protected boolean completed = false;
+    protected boolean isDone;
     protected String name;
 
     public Task(String name) {
         this.name = name;
-        this.completed = false;
+        this.isDone = false;
     }
 
-    public void markComplete() {
-        this.completed = true;
+    public void markDone() {
+        this.isDone = true;
     }
 
     private String getStatusIcon() {
-        return this.completed ? "X" : " ";
+        return this.isDone ? "X" : " ";
     }
 
     @Override
@@ -23,6 +23,6 @@ public class Task {
     }
 
     public String toCommand(int index) {
-        return this.completed ? String.format("done %d\n", index) : "";
+        return this.isDone ? String.format("done %d\n", index) : "";
     };
 }

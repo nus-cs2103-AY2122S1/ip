@@ -3,16 +3,16 @@ package duke;
 public class Duke {
     private static final String ENDING_COMMAND = "bye";
 
-    private Storage storage;
-    private TaskList taskList = new TaskList();
-    private Ui ui;
+    private final Storage storage;
+    private final TaskList tasks = new TaskList();
+    private final Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             // TODO: reading tasks should not need UI since it's silent
-            storage.readTasks(taskList, ui);
+            storage.readTasks(tasks, ui);
         } catch (IrisException exception) {
             ui.sayError(exception);
         }
@@ -23,11 +23,11 @@ public class Duke {
         String command = ui.prompt();
         while (!command.equals(ENDING_COMMAND)) {
             try {
-                Parser.handleCommand(command, taskList, ui);
+                Parser.handleCommand(command, tasks, ui);
             } catch (IrisException exception) {
                 ui.sayError(exception);
             }
-            storage.writeTasks(taskList);
+            storage.writeTasks(tasks);
             command = ui.prompt();
         }
 

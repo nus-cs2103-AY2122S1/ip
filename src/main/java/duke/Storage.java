@@ -23,12 +23,12 @@ public class Storage {
         }
     }
 
-    public void readTasks(TaskList taskList, Ui ui) throws IrisException {
+    public void readTasks(TaskList tasks, Ui ui) throws IrisException {
         File taskFile = new File(taskFilePath);
         try {
             Scanner scanner = new Scanner(taskFile);
             while (scanner.hasNextLine()) {
-                Parser.handleCommand(scanner.nextLine(), taskList, ui, true);
+                Parser.handleCommand(scanner.nextLine(), tasks, ui, true);
             }
         } catch (FileNotFoundException exception) {
             createTaskFile();
@@ -37,10 +37,10 @@ public class Storage {
         }
     }
 
-    public void writeTasks(TaskList taskList) {
+    public void writeTasks(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(taskFilePath);
-            String[] commands = taskList.toCommands();
+            String[] commands = tasks.toCommands();
             for (String command : commands) {
                 fw.write(command);
             }
