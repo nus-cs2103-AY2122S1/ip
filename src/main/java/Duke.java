@@ -40,6 +40,8 @@ public class Duke {
      */
     public void run() {
         chatBot.greet();
+        taskManager.loadTasks();
+        
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine().trim();
         String output;
