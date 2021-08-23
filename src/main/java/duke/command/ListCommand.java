@@ -1,20 +1,20 @@
 package duke.command;
 
-import duke.Duke;
+import duke.DukeList;
 
 /**
  * Encapsulate a command on a DukeList.
  */
 public class ListCommand implements Command {
-    private Duke duke;
+    private DukeList duke;
 
-    public ListCommand(Duke duke) {
+    public ListCommand(DukeList duke) {
         this.duke = duke;
     }
 
     @Override
     public void exec(String args) {
-        this.duke.getList().currentListResponse().print();
+        this.duke.currentListResponse().print();
     }
 
     @Override

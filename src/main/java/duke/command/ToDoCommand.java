@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Duke;
+import duke.DukeList;
 import duke.exception.InvalidArgumentException;
 import duke.task.ToDoTask;
 
@@ -8,9 +8,9 @@ import duke.task.ToDoTask;
  * A command to add a todo task into main DukeList.
  */
 public class ToDoCommand implements Command {
-    private Duke duke;
+    private DukeList duke;
 
-    public ToDoCommand(Duke duke) {
+    public ToDoCommand(DukeList duke) {
         this.duke = duke;
     }
 
@@ -18,7 +18,7 @@ public class ToDoCommand implements Command {
     public void exec(String args) {
         if (args == null || args.isEmpty())
             throw new InvalidArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
-        this.duke.getList().addWithResponse(new ToDoTask(args)).print();
+        this.duke.addWithResponse(new ToDoTask(args)).print();
     }
 
     @Override

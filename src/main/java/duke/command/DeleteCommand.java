@@ -1,15 +1,15 @@
 package duke.command;
 
-import duke.Duke;
+import duke.DukeList;
 import duke.exception.InvalidArgumentException;
 
 /**
  * Represents a command that removes a task from the main DukeList.
  */
 public class DeleteCommand implements Command {
-    private Duke duke;
+    private DukeList duke;
 
-    public DeleteCommand(Duke duke) {
+    public DeleteCommand(DukeList duke) {
         this.duke = duke;
     }
 
@@ -21,7 +21,7 @@ public class DeleteCommand implements Command {
         } catch (NumberFormatException exception) {
             throw new InvalidArgumentException("Invalid Input! Please enter an integer...");
         }
-        this.duke.getList().deleteWithResponse(i).print();
+        this.duke.deleteWithResponse(i).print();
     }
 
     @Override

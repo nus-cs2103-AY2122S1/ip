@@ -29,15 +29,6 @@ public class Duke {
         new Duke().run();
     }
 
-    /**
-     * Return the static DukeList of the program.
-     * 
-     * @return program's list
-     */
-    public DukeList getList() {
-        return this.list;
-    }
-
     private void run() {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
@@ -46,8 +37,9 @@ public class Duke {
 
         // Duke commands work with a registry so that add-ons can be developed with
         // commands simply registered like so
-        this.commandManager.registerCommands(new ListCommand(this), new DoneCommand(this), new ToDoCommand(this),
-                new EventCommand(this), new DeadlineCommand(this), new DeleteCommand(this));
+        this.commandManager.registerCommands(new ListCommand(this.list), new DoneCommand(this.list),
+                new ToDoCommand(this.list), new EventCommand(this.list), new DeadlineCommand(this.list),
+                new DeleteCommand(this.list));
 
         echoInput(new BufferedReader(new InputStreamReader(System.in)));
     }

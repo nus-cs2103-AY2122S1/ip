@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Duke;
+import duke.DukeList;
 import duke.exception.InvalidArgumentException;
 import duke.task.EventTask;
 
@@ -8,9 +8,9 @@ import duke.task.EventTask;
  * A command to add an event task into main DukeList.
  */
 public class EventCommand implements Command {
-    private Duke duke;
+    private DukeList duke;
 
-    public EventCommand(Duke duke) {
+    public EventCommand(DukeList duke) {
         this.duke = duke;
     }
 
@@ -18,7 +18,7 @@ public class EventCommand implements Command {
     public void exec(String args) {
         if (args == null || args.isEmpty())
             throw new InvalidArgumentException("☹ OOPS!!! The description of an event cannot be empty.");
-        this.duke.getList().addWithResponse(new EventTask(args)).print();
+        this.duke.addWithResponse(new EventTask(args)).print();
     }
 
     @Override
