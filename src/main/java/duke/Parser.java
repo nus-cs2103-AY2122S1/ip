@@ -29,16 +29,22 @@ public class Parser {
         return input.equals("bye");
     }
 
-    public String[] parseInput(String input) throws DukeException, IOException {
-        if (input.startsWith("done")) {
-            return new String[]{setTaskAsDone(input)};
-        } else if (input.startsWith("delete")) {
-            return new String[]{deleteTask(input)};
-        } else if (input.startsWith("list")) {
-            return list();
-        } else {
-            return addTask(input);
+    public String[] parseInput(String input) {
+        try {
+            if (input.startsWith("done")) {
+                return new String[]{setTaskAsDone(input)};
+            } else if (input.startsWith("delete")) {
+                return new String[]{deleteTask(input)};
+            } else if (input.startsWith("list")) {
+                return list();
+            } else {
+                return addTask(input);
+            }
+        } catch (DukeException|IOException e) {
+            e.printStackTrace();
+            return null;
         }
+
     }
 
     private String[] addTask(String input) throws DukeException, IOException {

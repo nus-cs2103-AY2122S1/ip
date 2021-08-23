@@ -8,7 +8,7 @@ import java.time.temporal.ChronoField;
 public class Event extends Task{
     protected LocalDateTime duration;
     DateTimeFormatter fmt = new DateTimeFormatterBuilder()
-            .appendPattern("MMM dd yyyy")
+            .appendPattern("dd MMM yyyy")
             .optionalStart()
             .appendPattern(" HH:mm")
             .optionalEnd()

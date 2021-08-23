@@ -8,7 +8,7 @@ import java.time.temporal.ChronoField;
 public class Deadline extends Task{
     protected LocalDateTime deadline;
     DateTimeFormatter fmt = new DateTimeFormatterBuilder()
-            .appendPattern("MMM dd yyyy")
+            .appendPattern("dd MMM yyyy")
             .optionalStart()
             .appendPattern(" HH:mm")
             .optionalEnd()
