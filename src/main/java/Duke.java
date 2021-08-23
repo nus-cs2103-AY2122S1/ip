@@ -5,19 +5,14 @@ public class Duke {
     private final Storage storage;
     private final DateTimeHandler dth;
     private final TaskList taskList;
+    private final Parser parser;
 
     public Duke() {
         ui = new UI();
         taskList = new TaskList();
         storage = new Storage();
         dth = new DateTimeHandler();
-    }
-
-    public void print(String s) {
-        System.out.println(ui.formatMessage(s));
-    }
-    public void print(String[] s) {
-        System.out.println(ui.formatMessage(s));
+        parser = new Parser();
     }
 
     public void run() {
@@ -25,22 +20,30 @@ public class Duke {
             storage.loadFile();
             storage.readFromFile(taskList);
         } catch (Exception e) {
-            print("The file could not be created");
+            ui.print("The file could not be created");
         }
-        Scanner scanner = new Scanner(System.in);
         ui.welcomeMessage();
-        while (true) {
-            String input = scanner.nextLine();
+        boolean isExit = false;
+        while (!isExit) {
+            String input = ui.readCommand();
+            Command command = parser.parse(input);
+            if (command == null) {
+                ui.unrecognisedCommand();
+                continue;
+            }
+            command.execute(taskList, storage, ui);
+            isExit = command.isExit();
+
             String[] params = input.split(" ", 2);
             String[] parts;
             String arg;
-            if(params[0].equals("bye")) {
-                break;
-            }
+//            if(params[0].equals("bye")) {
+//                break;
+//            }
             switch (params[0]) {
-            case "list":
-                System.out.println(ui.formatMessage(taskList.printList()));
-                break;
+//            case "list":
+//                System.out.println(ui.formatMessage(taskList.printList()));
+//                break;
             case "done":
                 if (params.length == 1) {
                     System.out.println(ui.formatMessage("Please enter a number after done"));
@@ -50,10 +53,10 @@ public class Duke {
                 try {
                     int index = Integer.parseInt(arg);
                     if (index > taskList.size()) {
-                        print("There are only " + taskList.size() + " tasks");
+                        ui.print("There are only " + taskList.size() + " tasks");
                         break;
                     } else if (index == 0) {
-                        print(ui.formatMessage("There is no task 0"));
+                        ui.print(ui.formatMessage("There is no task 0"));
                         break;
                     }
                     Task t = taskList.getTask(index - 1);
@@ -100,7 +103,7 @@ public class Duke {
                 }
                 Todo t = new Todo(params[1], false);
                 taskList.addToList(t);
-                print(taskList.taskAddedMessage(t));
+                ui.print(taskList.taskAddedMessage(t));
                 break;
             case "deadline":
                 if (params.length == 1) {
@@ -114,12 +117,12 @@ public class Duke {
                 parts = params[1].split(" /by ");
                 LocalDateTime deadlineDate = dth.parseDate(parts[1]);
                 if (deadlineDate == null) {
-                    print(dth.invalidFormat());
+                    ui.print(dth.invalidFormat());
                     break;
                 }
                 Deadline d = new Deadline(parts[0], false, deadlineDate);
                 taskList.addToList(d);
-                print(taskList.taskAddedMessage(d));
+                ui.print(taskList.taskAddedMessage(d));
                 break;
             case "event":
                 if (params.length == 1) {
@@ -133,27 +136,27 @@ public class Duke {
                 parts = params[1].split(" /at ");
                 LocalDateTime startDate = dth.parseDate(parts[1]);
                 if (startDate == null) {
-                    print(dth.invalidFormat());
+                    ui.print(dth.invalidFormat());
                     break;
                 }
                 Event e = new Event(parts[0], false, startDate);
                 taskList.addToList(e);
-                print(taskList.taskAddedMessage(e));
+                ui.print(taskList.taskAddedMessage(e));
                 break;
             case "formats":
                 System.out.println(ui.formatMessage(dth.getFormatList()));
                 break;
-            default:
-                System.out.println(ui.formatMessage("That is not a recognised command"));
+//            default:
+//                System.out.println(ui.formatMessage("That is not a recognised command"));
             }
             try {
                 storage.writeToFile(taskList);
             } catch (Exception e) {
-                print("An Error Occurred");
+                ui.print("An Error Occurred");
             }
 
         }
-        System.out.println(ui.formatMessage("Bye. Hope to see you again soon!"));
+        ui.goodByeMessage();
 
     }
 
