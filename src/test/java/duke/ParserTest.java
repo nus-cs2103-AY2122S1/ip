@@ -2,7 +2,6 @@ package duke;
 
 import org.junit.Test;
 
-import static duke.Parser.inputParser;
 import static org.junit.Assert.assertEquals;
 
 public class ParserTest {

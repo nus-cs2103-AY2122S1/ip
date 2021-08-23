@@ -16,7 +16,7 @@ public class Parser {
 
     public static Command commandParser(String input) {
         for (Command c : Command.values()) {
-            if (c.value.equals(input)) {
+            if (c.strIsSelf(input)) {
                 return c;
             }
         }

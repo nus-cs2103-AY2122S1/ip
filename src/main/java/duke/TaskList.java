@@ -12,27 +12,40 @@ public class TaskList {
         this(new ArrayList<>(100));
     }
 
-    public String listTasks() {
+    public void listMatchingTasks(String word) {
         StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
+        int counter = 1;
+        for (Task t : arrayList) {
+            if (t.containWord(word)) {
+                sb.append(counter + ". " + t + "\n");
+                counter += 1;
+            }
+        }
+        if (counter == 1) {
+            sb = new StringBuilder();
+            sb.append("No matching tasks found!");
+        }
+        Ui.printStatement(sb.toString());
+
+    }
+
+    public void listTasks() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list: \n");
         int counter = 1;
         for (Task t : arrayList) {
             sb.append(counter + ". " + t + "\n");
             counter += 1;
         }
-        return sb.toString();
+
+        Ui.printStatement(sb.toString());
     }
 
     public void addTask(Command command, String parameter, String date) {
         StringBuilder sb = new StringBuilder();
         sb.append("Got it. I've added this task: \n");
         String parsedDate = Parser.dateParser(date).equals("") ? date : Parser.dateParser(date);
-//            if (Command.EVENT.equals(command)) {
-//                task = new Event(parameter, parsedDate);
-//            } else if (Command.TODO.equals(command)) {
-//                task = new Todo(parameter);
-//            } else {//if (Command.DEADLINE.equals(command)) {
-//                task = new Deadline(parameter, parsedDate);
-//            }
         Task task;
 
         if (command.equals(Command.TODO)) {
