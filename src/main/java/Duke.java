@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -215,10 +217,11 @@ public class Duke {
     }
 
     public String addDeadline(String input) throws DukeException {
+        System.out.println("Deadline input = " + input);
         if (!input.equals("")) {
             String[] arr = input.split("/by", 2);
-            String day = arr[1];
-            Deadline newDeadline = new Deadline(arr[0].trim(), day.trim());
+            String dayTime = arr[1].trim();
+            Deadline newDeadline = new Deadline(arr[0].trim(), processDate(dayTime));
             this.taskList.add(newDeadline);
             return printTaskMessage(newDeadline.toString(), this.taskList.size());
         } else {
@@ -230,14 +233,26 @@ public class Duke {
     public String addEvent(String input) throws DukeException {
         if (!input.equals("")) {
             String[] arr = input.split("/at", 2);
-            String time = arr[1];
-            Event newEvent = new Event(arr[0].trim(), time.trim());
+            String dayTime = arr[1].trim();
+            Event newEvent = new Event(arr[0].trim(), processDate(dayTime));
             this.taskList.add(newEvent);
             return printTaskMessage(newEvent.toString(), this.taskList.size());
         } else {
             String errorMessage = "OOPS!!! The description of an event cannot be empty.";
             throw new DukeException(errorMessage);
         }
+    }
+
+    public String processDate(String inputDate) {
+        String output;
+        String[] dayTimeArr = inputDate.split(" ");
+        LocalDate date = LocalDate.parse(dayTimeArr[0]);
+        if (dayTimeArr.length == 2) { // if there is a time to it
+            output = date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + dayTimeArr[1];
+        } else { // just the date
+            output = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        }
+        return output;
     }
 
     public String printTaskMessage(String input, int numTasks) {
@@ -247,7 +262,6 @@ public class Duke {
                 + String.format("\n   Now you have %d tasks in the list.", numTasks) + "\n"
                 + "   -------------------------------------------- \n";
     }
-
 
     public String getFirstWord(String input) {
         String[] arr = input.split(" ", 2);
