@@ -10,17 +10,17 @@ import java.util.Scanner;
 public class Ui {
     
     public void showWelcome() {
-        System.out.println("  ____________________________________________________________");
+        System.out.println("  ______________________________________________________________");
         System.out.print("  Hello! I'm Duck.\n  What's up?\n");
-        System.out.println("  ____________________________________________________________\n");
+        System.out.println("  ______________________________________________________________\n");
     }
     
     public void showOpenLine() {
-        System.out.println("  ____________________________________________________________");
+        System.out.println("  ______________________________________________________________");
     }
 
     public void showCloseLine() {
-        System.out.println("  ____________________________________________________________\n");
+        System.out.println("  ______________________________________________________________\n");
     }
     
     public void showInput() {

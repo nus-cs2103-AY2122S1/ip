@@ -5,28 +5,28 @@ public class DukeException extends Exception {
 
     public DukeException(DukeExceptionType err) {
         switch (err) {
-        case DEADLINEDESC:
+        case DEADLINE_DESC:
             customMessage = "  OOPS!!! The description of a deadline cannot be empty!";
             break;
-        case DEADLINETIME:
+        case DEADLINE_TIME:
             customMessage = "  OOPS!!! The time of a deadline cannot be empty!";
             break;
-        case EVENTDESC:
+        case EVENT_DESC:
             customMessage = "  OOPS!!! The description of an event cannot be empty!";
             break;
-        case EVENTPERIOD:
+        case EVENT_PERIOD:
             customMessage = "  OOPS!!! The period of an event cannot be empty!";
             break;
-        case TODODESC:
+        case TODO_DESC:
             customMessage = "  OOPS!!! The description of a todo cannot be empty!";
             break;
-        case INVALIDINDEX:
+        case INVALID_INDEX:
             customMessage = "  OOPS!!! That is not a valid task index!";
             break;
-        case INVALIDFIND:
+        case INVALID_FIND:
             customMessage = "  OOPS!!! You need to specify a date!";
             break;
-        case INVALIDINPUT:
+        case INVALID_INPUT:
             customMessage = "  OOPS!!! I don't recognise the command you've given me.";
             break;
         case DB_LAUNCH:
@@ -45,11 +45,11 @@ public class DukeException extends Exception {
         case DB_DELETE:
             customMessage = "  OOPS!!! There was a problem deleting the task from the hard disk!";
             break;
-        case INVALIDDATETIME:
+        case INVALID_DATETIME:
             customMessage = "  OOPS!!! The deadline you provided is not in a correct format!\n"
                     + "  The required format is yyyy-mm-dd or yyyy-mm-dd hh:mm.";
             break;
-        case INVALIDPERIOD:
+        case INVALID_PERIOD:
             customMessage = "  OOPS!!! The event period you provided is not in a correct format!\n"
                     + "  You can provide:\n" 
                     + "    1. start and end dates\n" 

@@ -25,11 +25,11 @@ public class Parser {
             
         case "done":   // done function: sets a task to done
             if (fullCommand.split("\\s+").length == 1) {
-                throw new DukeException(DukeExceptionType.INVALIDINDEX);
+                throw new DukeException(DukeExceptionType.INVALID_INDEX);
             } else {
                 int toSet = Integer.parseInt(fullCommand.split("\\s+")[1]);
                 if (taskList.isInvalidIndex(toSet)) {
-                    throw new DukeException(DukeExceptionType.INVALIDINDEX);
+                    throw new DukeException(DukeExceptionType.INVALID_INDEX);
                 } else {
                     return new DoneCommand(toSet - 1);
                 }
@@ -37,11 +37,11 @@ public class Parser {
             
         case "delete":   // delete function: delete a task
             if (fullCommand.split("\\s+").length == 1) {
-                throw new DukeException(DukeExceptionType.INVALIDINDEX);
+                throw new DukeException(DukeExceptionType.INVALID_INDEX);
             } else {
                 int toDelete = Integer.parseInt(fullCommand.split("\\s+")[1]);
                 if (taskList.isInvalidIndex(toDelete)) {
-                    throw new DukeException(DukeExceptionType.INVALIDINDEX);
+                    throw new DukeException(DukeExceptionType.INVALID_INDEX);
                 } else {
                     return new DeleteCommand(toDelete - 1);
                 }
@@ -49,7 +49,7 @@ public class Parser {
             
         case "find":
             if (fullCommand.split("\\s+").length == 1) {
-                throw new DukeException(DukeExceptionType.INVALIDFIND);
+                throw new DukeException(DukeExceptionType.INVALID_FIND);
             } else {
                 LocalDate desiredDate = LocalDate.parse(fullCommand.split("\\s+")[1]);
                 return new FindCommand(desiredDate);
@@ -59,16 +59,16 @@ public class Parser {
             if (fullCommand.split("\\s+").length == 1) { // task details not given or not valid task
                 switch (fullCommand) {
                 case "deadline":
-                    throw new DukeException(DukeExceptionType.DEADLINEDESC);
+                    throw new DukeException(DukeExceptionType.DEADLINE_DESC);
 
                 case "event":
-                    throw new DukeException(DukeExceptionType.EVENTDESC);
+                    throw new DukeException(DukeExceptionType.EVENT_DESC);
 
                 case "todo":
-                    throw new DukeException(DukeExceptionType.TODODESC);
+                    throw new DukeException(DukeExceptionType.TODO_DESC);
 
                 default:
-                    throw new DukeException(DukeExceptionType.INVALIDINPUT);
+                    throw new DukeException(DukeExceptionType.INVALID_INPUT);
                 }
 
             } else {
@@ -85,7 +85,7 @@ public class Parser {
                     String[] details = taskDetails.split(" /by ");
 
                     if (details.length == 1) { // time of deadline not given
-                        throw new DukeException(DukeExceptionType.DEADLINETIME);
+                        throw new DukeException(DukeExceptionType.DEADLINE_TIME);
                     } else {
                         String[] deadline = details[1].split(" ");
                         if (deadline.length == 1) {
@@ -101,7 +101,7 @@ public class Parser {
                     String[] details = taskDetails.split(" /at ");
 
                     if (details.length == 1) { // period of event not given
-                        throw new DukeException(DukeExceptionType.EVENTPERIOD);
+                        throw new DukeException(DukeExceptionType.EVENT_PERIOD);
                     } else {
                         String[] periodRange = details[1].split(" ");
                         if (periodRange.length == 2) {
@@ -115,7 +115,7 @@ public class Parser {
                                     LocalDate.parse(periodRange[0]), LocalTime.parse(periodRange[1]),
                                     LocalDate.parse(periodRange[2]), LocalTime.parse(periodRange[3]));
                         } else {
-                            throw new DukeException(DukeExceptionType.INVALIDPERIOD);
+                            throw new DukeException(DukeExceptionType.INVALID_PERIOD);
                         }
                     }
                     break;
@@ -125,7 +125,7 @@ public class Parser {
                     break;
 
                 default:  // taskName is invalid
-                    throw new DukeException(DukeExceptionType.INVALIDINPUT);
+                    throw new DukeException(DukeExceptionType.INVALID_INPUT);
                 }
                 // add task to taskList
                 return new AddCommand(newTask);

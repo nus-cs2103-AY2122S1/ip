@@ -37,10 +37,10 @@ public class Duke {
                 ui.showException(e);
                 
             } catch (NumberFormatException e) { 
-                ui.showException(new DukeException(DukeExceptionType.INVALIDINDEX));
+                ui.showException(new DukeException(DukeExceptionType.INVALID_INDEX));
 
             } catch (DateTimeParseException e) {
-                ui.showException(new DukeException(DukeExceptionType.INVALIDDATETIME));
+                ui.showException(new DukeException(DukeExceptionType.INVALID_DATETIME));
                 
             } finally {
                 ui.showCloseLine();
