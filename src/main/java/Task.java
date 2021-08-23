@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -27,7 +29,7 @@ public class Task {
         return null;
     }
     
-    public String getTiming() {
+    public LocalDate getTiming() {
         return null;
     }
 
