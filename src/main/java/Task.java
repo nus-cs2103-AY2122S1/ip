@@ -29,6 +29,16 @@ public class Task {
     }
 
     /**
+     * Returns a data string of the Task for saving.
+     *
+     * @return A data string including the Task's status icon and description.
+     */
+    public String getDataString() {
+        String status = this.isDone ? "1" : "0";
+        return status + " | " + this.description;
+    }
+
+    /**
      * Returns a string representation of the Task.
      *
      * @return A string including the Task's status icon and description.

@@ -18,6 +18,16 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns a data string of the Deadline task for saving.
+     *
+     * @return A data string including the Deadline's icon, description and due date.
+     */
+    @Override
+    public String getDataString() {
+        return "D | " + super.getDataString() + " | " + this.by;
+    }
+
+    /**
      * Returns a string representation of the Deadline task.
      *
      * @return A string including the Deadline's icon, description and due date.

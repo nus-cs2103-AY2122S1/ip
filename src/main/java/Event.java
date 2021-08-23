@@ -18,6 +18,16 @@ public class Event extends Task {
     }
 
     /**
+     * Returns a data string of the Event task for saving.
+     *
+     * @return A data string including the Event's icon, description and time.
+     */
+    @Override
+    public String getDataString() {
+        return "E | " + super.getDataString() + " | " + this.at;
+    }
+
+    /**
      * Returns a string representation of the Event task.
      *
      * @return A string including the Event's icon, description and time.
