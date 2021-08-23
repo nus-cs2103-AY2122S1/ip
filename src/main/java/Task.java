@@ -18,12 +18,14 @@ public class Task {
 	}
 
 	/** function to mark this task as done */
-	public void markAsDone() { this.done = true; }
+	public void markAsDone() {
+		this.done = true;
+	}
 
 	/**
-	 * Returns String representation of the task
+	 * Returns string representation of the task for displaying
 	 *
-	 * @return string representation of the task
+	 * @return string representation of the task for displaying
 	 */
 	@Override
 	public String toString() {
@@ -34,6 +36,11 @@ public class Task {
 		}
 	}
 
+	/**
+	 * Returns a string representation of the task for saving
+	 *
+	 * @return string representation of the task for saving
+	 */
 	public String saveString() {
 		if (this.done) {
 			return "Task : 1 : " + this.title;

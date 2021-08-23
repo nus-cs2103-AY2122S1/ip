@@ -22,9 +22,6 @@ public class Duke {
 			+ "| |_| | |_| |   <  __/\n"
 			+ "|____/ \\__,_|_|\\_\\___|\n";
 		System.out.println("Hello from\n" + logo);
-		// System.out.println("\t____________________________");
-		// System.out.println("\tHello!, I'm Duke\n\tWhat can I do for you?");
-		// System.out.println("\t____________________________");
 		Duke duke = new Duke();
 		duke.run();
 	}
@@ -76,6 +73,7 @@ public class Duke {
 				}
 				this.tasks.add(task);
 			}
+			sc.close();
 		} catch (IOException e) {
 			System.out.println(e.toString());
 		}

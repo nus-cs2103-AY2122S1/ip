@@ -4,7 +4,6 @@ import java.time.format.DateTimeParseException;
 
 /**
  * class for deadlines, a type of task, with an added deadline field
- *
  */
 public class Deadline extends Task {
 
@@ -14,6 +13,11 @@ public class Deadline extends Task {
 
 	Deadline(String title, String deadline) {
 		super(title);
+		this.parseDate(deadline);
+	}
+
+	Deadline(String title, Boolean done, String deadline) {
+		super(title, done);
 		this.parseDate(deadline);
 	}
 
@@ -77,11 +81,11 @@ public class Deadline extends Task {
 		return dateString + timeString;
 	}
 
-	Deadline(String title, Boolean done, String deadline) {
-		super(title, done);
-		this.deadline = deadline;
-	}
-
+	/**
+	 * Returns a string representation of the Deadline for displaying
+	 *
+	 * @return string representation of the Deadline for displaying
+	 */
 	@Override
 	public String toString() {
 		if (this.done) {
@@ -95,6 +99,11 @@ public class Deadline extends Task {
 		}
 	}
 
+	/**
+	 * Returns a string representation of the Deadline for saving
+	 *
+	 * @return string representation of the Deadline for saving
+	 */
 	@Override
 	public String saveString() {
 		if (this.done) {

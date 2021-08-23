@@ -4,7 +4,6 @@ import java.time.format.DateTimeParseException;
 
 /**
  * class to represent events, a type of task with a eventDate field
- *
  */
 public class Event extends Task {
 
@@ -16,6 +15,11 @@ public class Event extends Task {
 	Event(String title, String eventString) {
 		super(title);
 		this.parseDate(eventString);
+	}
+
+	Event(String title, Boolean done, String eventDate) {
+		super(title, done);
+		this.parseDate(eventDate);
 	}
 
 	private String formatTime(String time) {
@@ -78,11 +82,11 @@ public class Event extends Task {
 		return dateString + timeString;
 	}
 
-	Event(String title, Boolean done, String eventDate) {
-		super(title, done);
-		this.eventDate = eventDate;
-	}
-
+	/**
+	 * Returns a string representation of the Event for displaying
+	 *
+	 * @return string representation of the Event for displaying
+	 */
 	@Override
 	public String toString() {
 		if (this.done) {
@@ -96,6 +100,11 @@ public class Event extends Task {
 		}
 	}
 
+	/**
+	 * Returns a string representation of the Event for saving
+	 *
+	 * @return string representation of the Event for saving
+	 */
 	@Override
 	public String saveString() {
 		if (this.done) {
