@@ -7,6 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+>>>>>>> branch-Level-8
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -120,6 +123,11 @@ public class Duke {
                         + "There is a problem with saving the list to the file.\n"
                         + "Please ensure a duke.txt file is present in /data.\n"
                         + "%s\n", LINE_HORIZONTAL, LINE_HORIZONTAL);
+            } catch (DateTimeParseException e) {
+                System.out.printf("%s\n" +
+                        "Your date might not be in the correct format.\n" +
+                        "Please ensure it is in the YYYY-MM-DD format.\n" +
+                        "%s\n", LINE_HORIZONTAL, LINE_HORIZONTAL);
             }
         }
         scanner.close();
@@ -245,8 +253,8 @@ public class Duke {
      * @throws MissingTimeException If time is unspecified after command.
      */
     public static void addDeadline(String input)
-            throws MissingTaskException, MissingTimeException {
-        int separation = input.indexOf("/by");
+            throws MissingTaskException, MissingTimeException, DateTimeParseException {
+        int separation = input.indexOf(" /by ");
 
         if (separation == -1) {
             throw new MissingTimeException("Time not found");
@@ -255,14 +263,25 @@ public class Duke {
         if (separation < 11) {
             throw new MissingTaskException("Task not found");
         }
-        String taskName = input.substring(9, separation - 1);
 
-        if (input.substring(separation + 4).length() < 1) {
+        String taskName = input.substring(9, separation);
+
+        if (input.substring(separation + 6).length() < 1) {
             throw new MissingTimeException("Time not found");
         }
 
-        String time = input.substring(separation + 4);
-        taskList.add(new Deadline(taskName, time));
+        String timeFull = input.substring(separation + 5);
+        int timeFullSeparation;
+
+        if ((timeFullSeparation = timeFull.indexOf(" ")) != -1) {
+            String time = timeFull.substring(timeFullSeparation + 1);
+            LocalDate date = LocalDate.parse(timeFull.substring(0, timeFullSeparation));
+            taskList.add(new Deadline(taskName, date, time));
+        } else {
+            LocalDate date = LocalDate.parse(timeFull);
+            taskList.add(new Deadline(taskName, date));
+        }
+
         printTaskAdded(taskName);
     }
 
@@ -274,8 +293,9 @@ public class Duke {
      * @throws MissingTimeException If time is unspecified after command.
      */
     public static void addEvent(String input)
-            throws MissingTaskException, MissingTimeException {
-        int separation = input.indexOf("/at");
+            throws MissingTaskException, MissingTimeException, DateTimeParseException {
+        int separation = input.indexOf(" /at ");
+
         if (separation == -1) {
             throw new MissingTimeException("Time not found");
         }
@@ -283,14 +303,24 @@ public class Duke {
         if (separation < 8) {
             throw new MissingTaskException("Task not found");
         }
-        String taskName = input.substring(6, separation - 1);
+        String taskName = input.substring(6, separation);
 
-        if (input.substring(separation + 4).length() < 1) {
+        if (input.substring(separation + 6).length() < 1) {
             throw new MissingTimeException("Time not found");
         }
 
-        String time = input.substring(separation + 4);
-        taskList.add(new Event(taskName, time));
+        String timeFull = input.substring(separation + 5);
+        int timeFullSeparation;
+
+        if ((timeFullSeparation = timeFull.indexOf(" ")) != -1) {
+            String time = timeFull.substring(timeFullSeparation + 1);
+            LocalDate date = LocalDate.parse(timeFull.substring(0, timeFullSeparation));
+            taskList.add(new Event(taskName, date, time));
+        } else {
+            LocalDate date = LocalDate.parse(timeFull);
+            taskList.add(new Event(taskName, date));
+        }
+
         printTaskAdded(taskName);
     }
 

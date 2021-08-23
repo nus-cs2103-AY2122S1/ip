@@ -3,7 +3,7 @@
  */
 public class InvalidCommandException extends DukeException {
     /**
-     * Constructor to create a Duke exception.
+     * Constructor to create an invalid command exception.
      *
      * @param msg The error message of the exception.
      */
