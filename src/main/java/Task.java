@@ -2,17 +2,27 @@ public abstract class Task {
     private final String content;
     private boolean isDone;
 
-    public Task(String content) {
+    public Task(String content, boolean isDone) {
         this.content = content;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
-    void setDone() {
-        this.isDone = true;
+    public Task(String content) {
+        this(content, false);
+    }
+
+    public abstract String dataFormat();
+
+    protected int isDoneInt() {
+        return isDone ? 1 : 0;
     }
 
     String getContent() {
         return this.content;
+    }
+
+    void setDone() {
+        this.isDone = true;
     }
 
     public String getStatusIcon() {

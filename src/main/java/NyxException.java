@@ -1,6 +1,4 @@
-import java.util.InputMismatchException;
-
-public class NyxException extends InputMismatchException {
+public class NyxException extends Exception {
     public NyxException(String message) {
         super("\t☹ OOPS!!! " + message);
     }
