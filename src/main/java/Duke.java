@@ -37,9 +37,9 @@ public class Duke {
         // Loads list data if saved in hard drive before.
         try {
             loadListData();
-        } catch (FileNotFoundException e) {
-            System.out.printf("%s\nIt seems like there is no saved list.\n"
-                    + "Start adding tasks to save your list!\n"
+        } catch (IOException e) {
+            System.out.printf("%s\nIt seems there was an error reading the saved list.\n"
+                    + "Please ensure a duke.txt file is present in /data.\n"
                     + "%s\n",
                     LINE_HORIZONTAL, LINE_HORIZONTAL);
         }
@@ -80,16 +80,18 @@ public class Duke {
                     break;
                 case TODO:
                     addToDo(input);
+                    addTaskToFile();
                     break;
                 case DEADLINE:
                     addDeadline(input);
+                    addTaskToFile();
                     break;
                 case EVENT:
                     addEvent(input);
+                    addTaskToFile();
                     break;
                 case BYE:
                     printBye();
-                    saveListData();
                     exit = true;
                     break;
                 }
@@ -175,13 +177,16 @@ public class Duke {
      *
      * @param toMark The index of the task to be marked.
      * @throws InvalidTaskException If task cannot be found in user's list.
+     * @throws IOException If there are problems with writing into the file.
+     *
      */
-    public static void markTaskAsDone(int toMark) throws InvalidTaskException {
+    public static void markTaskAsDone(int toMark) throws InvalidTaskException, IOException {
         if (toMark <= 0 || toMark > taskList.size()) {
             throw new InvalidTaskException("Task is not found");
         }
 
         taskList.get(toMark - 1).markAsDone();
+        updateTaskToFile(toMark);
 
         System.out.printf("%s\n"
                 + "Great job!\n"
@@ -197,7 +202,7 @@ public class Duke {
      * @param toDelete The index of the task to be deleted.
      * @throws InvalidTaskException If task cannot be found in list.
      */
-    public static void deleteTask(int toDelete) throws InvalidTaskException {
+    public static void deleteTask(int toDelete) throws InvalidTaskException, IOException {
         if (toDelete <= 0 || toDelete > taskList.size()) {
             throw new InvalidTaskException("Task is not found");
         }
@@ -213,6 +218,7 @@ public class Duke {
                 LINE_HORIZONTAL, taskList.get(toDelete - 1).toString(), taskList.size() - 1, LINE_HORIZONTAL);
 
         taskList.remove(toDelete - 1);
+        deleteTaskFromFile(toDelete);
     }
 
     /**
@@ -315,11 +321,89 @@ public class Duke {
     }
 
     /**
-     * Saves the data in the user's list to the hard disk.
+     * Saves the last element in the user's list to the .txt file.
      *
      * @throws IOException If there are problems with writing into the file.
      */
-    public static void saveListData() throws IOException {
+    public static void addTaskToFile() throws IOException {
+        String fileName = "./data/duke_list_data.txt";
+
+        // Writes the data into the file.
+        FileWriter fw = new FileWriter(fileName, true);
+        String textToAdd = "";
+        String taskName = taskList.get(taskList.size() - 1).toString();
+        textToAdd = textToAdd + taskName + "\n";
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    /**
+     * Updates a task in the user's list to be marked as done in the .txt file.
+     *
+     * @param toMark The index of the task to be marked.
+     * @throws IOException If there are problems with writing into the file.
+     */
+    public static void updateTaskToFile(int toMark) throws IOException {
+        String fileName = "./data/duke_list_data.txt";
+
+        // Updates the data into the file.
+        File file = new File(fileName);
+        Scanner sc = new Scanner(file);
+        String toUpdate = "";
+        int lineNumber = 1;
+
+        while (sc.hasNext()) {
+            if (lineNumber == toMark) {
+                String currentLine = sc.nextLine();
+                currentLine = currentLine.substring(0, 4) + 'X' + currentLine.substring(5);
+                toUpdate = toUpdate + currentLine + "\n";
+            } else {
+                toUpdate = toUpdate + sc.nextLine() + "\n";
+            }
+            lineNumber++;
+        }
+
+        FileWriter fw = new FileWriter(fileName);
+        fw.write(toUpdate);
+        fw.close();
+    }
+
+    /**
+     * Deletes a task from the .txt file.
+     *
+     * @param toDelete The index of the task to be marked.
+     * @throws IOException If there are problems with writing into the file.
+     */
+    public static void deleteTaskFromFile(int toDelete) throws IOException {
+        String fileName = "./data/duke_list_data.txt";
+
+        // Updates the data into the file.
+        File file = new File(fileName);
+        Scanner sc = new Scanner(file);
+        String toUpdate = "";
+        int lineNumber = 1;
+
+        while (sc.hasNext()) {
+            if (lineNumber == toDelete) {
+                sc.nextLine();
+            } else {
+                toUpdate = toUpdate + sc.nextLine() + "\n";
+            }
+            lineNumber++;
+        }
+
+        FileWriter fw = new FileWriter(fileName);
+        fw.write(toUpdate);
+        fw.close();
+    }
+
+    /**
+     * Imports the data from the hard disk to the user's list.
+     *
+     * @throws IOException If there are problems with writing into the file.
+     */
+    public static void loadListData() throws IOException {
+
         String fileName = "./data/duke_list_data.txt";
 
         // Creates directory if it does not already exist.
@@ -331,34 +415,6 @@ public class Duke {
         File file = new File(fileName);
         file.createNewFile();
 
-        // Writes the data into the file.
-        FileWriter fw = new FileWriter(fileName);
-        String textToAdd = listToString();
-        fw.write(textToAdd);
-        fw.close();
-    }
-
-    /**
-     * Parses the data in the list to a String.
-     */
-    public static String listToString() {
-        String listData = "";
-
-        for (int i = 0; i < taskList.size(); i++) {
-            String taskName = taskList.get(i).toString();
-            listData = listData + taskName + "\n";
-        }
-
-        return listData;
-    }
-
-    /**
-     * Imports the data from the hard disk to the user's list.
-     *
-     * @throws FileNotFoundException If file to read data from does not exist.
-     */
-    public static void loadListData() throws FileNotFoundException {
-        File file = new File("./data/duke_list_data.txt");
         Scanner sc = new Scanner(file);
 
         while (sc.hasNext()) {
