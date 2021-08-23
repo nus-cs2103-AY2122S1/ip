@@ -2,14 +2,14 @@ clear
 todo a
 todo b
 deadline c /by today
-event d /at tomorrow
+event d /at 2021-09-12
 done 2
 deadline e
 todo
 list
 done abc
 done 10
-deadline f /by yesterday
+deadline f /by 2021-03-11
 done 4
 list
 remove 3
