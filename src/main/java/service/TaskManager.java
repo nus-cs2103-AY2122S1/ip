@@ -6,8 +6,12 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * TaskManager class.
@@ -34,11 +38,84 @@ public class TaskManager {
     private static final String CREATE_DEADLINE_MESSAGE =
             "Got it. I've added this DEADLINE task:\n\t%s\nNow you have %d task(s) in the list.";
 
+    // Saved task directory.
+    private final String TASK_DIRECTORY_PATH = "data";
+    private final String TASK_FILE_PATH = TASK_DIRECTORY_PATH + "/duke.txt";
+    
     private final static int MAX_STORAGE = 100;
-
+      
     private final List<Task> taskList = new ArrayList<>();
     
-    public void initialiseList(List<Task> taskList) throws DukeException {
+    public void loadTasks() {
+        try {
+            File file = loadAndCreateTaskFile();
+            List<Task> savedTaskList = extractTasksFromFile(file);
+            loadToList(savedTaskList);
+            
+        } catch (Exception exception) {
+            System.out.printf("Unable to generate/read save data file ./%s", TASK_FILE_PATH);
+            System.out.println(exception.getMessage());
+        }
+    }
+    
+    public File loadAndCreateTaskFile() throws DukeException, IOException {
+        File directory = new File(TASK_DIRECTORY_PATH);
+        File file = new File(TASK_FILE_PATH);
+        if (!directory.exists()) {
+            if (!directory.mkdir()) {
+                throw new DukeException(String.format(
+                        "Load/save directory ./%s cannot be created.",
+                        TASK_DIRECTORY_PATH));
+            } else {
+                System.out.printf("Directory ./%s created!\n", TASK_DIRECTORY_PATH);
+            }
+        }
+        if (!file.exists()) {
+            if (!file.createNewFile()) {
+                throw new DukeException(String.format(
+                        "Load/save file ./%s cannot be created.",
+                        TASK_FILE_PATH));
+            } else {
+                System.out.printf("File ./%s created!\n", TASK_FILE_PATH);
+            }
+        }
+        return file;
+    }
+    
+    public List<Task> extractTasksFromFile(File file) throws FileNotFoundException {
+        Scanner scanner = new Scanner(file);
+        List<Task> savedTaskList = new ArrayList<>();
+        
+        while (scanner.hasNext()) {
+            String taskAsString = scanner.nextLine();
+            String[] taskAsArray = taskAsString.split(" \\| "); // split based on regex '|'
+            boolean isDone = taskAsArray[1].equals("1"); // if not 1, just set to false
+            Task newTask;
+
+            switch (taskAsArray[0]) {
+                case "T":
+                    newTask = new Todo(taskAsArray[2]);
+                    newTask.setDone(isDone);
+                    savedTaskList.add(newTask);
+                    break;
+                case "E":
+                    newTask = new Event(taskAsArray[2], taskAsArray[3]);
+                    newTask.setDone(isDone);
+                    savedTaskList.add(newTask);
+                    break;
+                case "D":
+                    newTask = new Deadline(taskAsArray[2], taskAsArray[3]);
+                    newTask.setDone(isDone);
+                    savedTaskList.add(newTask);
+                    break;
+                default:
+                    System.out.printf("'%s' is an invalid entry.\n", taskAsString);
+            }
+        }
+        return savedTaskList;
+    }
+
+    public void loadToList(List<Task> taskList) throws DukeException {
         if (taskList.size() > MAX_STORAGE) {
             throw new DukeException(FULL_CAPACITY_ERROR_MESSAGE);
         }
