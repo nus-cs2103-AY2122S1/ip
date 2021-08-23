@@ -36,6 +36,15 @@ public abstract class Task {
     }
 
     /**
+     * Returns a string representation of the task to be saved in.
+     *
+     * @return The string representation of the task.
+     */
+    public String toSaveString() {
+        return String.format(",%s,%s", this.getStatusIcon(), this.description);
+    }
+
+    /**
      * Returns a string representation of the task.
      *
      * @return The string representation of the task.

@@ -1,5 +1,11 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileWriter;
 
 /**
  * Represents a personal assistant chatbot that responds to command line inputs.
@@ -13,20 +19,131 @@ public class Duke {
      * @param tasks The list of tasks to add a new task to.
      * @param task The task to be added to the list of tasks.
      */
-    public static void addTask(ArrayList<Task> tasks, Task task) {
+    public static void addTask(List<Task> tasks, Task task) {
         tasks.add(task);
+        saveData(tasks);
         System.out.println("Added task:\n " + task);
         int taskCount = tasks.size();
         System.out.printf("You have %d %s in the list.%n", taskCount, taskCount > 1 ? "tasks" : "task");
     }
 
+    /**
+     * Marks a task as done and saves it to the file.
+     *
+     * @param tasks The list of tasks.
+     * @param index The index of the task to mark as done.
+     * @throws DukeException
+     */
+    public static void doneTask(List<Task> tasks, String index) throws DukeException {
+        if (index.isBlank()) {
+            throw new DukeException("☹ OOPS!!! Please provide the index of the " +
+                    "task you want to mark as done.");
+        }
+        int taskIndex = Integer.parseInt(index) - 1;
+        Task doneTask = tasks.get(taskIndex);
+        doneTask.markAsDone();
+        saveData(tasks);
+        System.out.printf("Good job! I have marked the following task as done:%n %s%n", doneTask);
+    }
+
+    /**
+     * Deletes a task as done and saves the new list of tasks to the file.
+     *
+     * @param tasks The list of tasks.
+     * @param index The index of the task to mark as done.
+     * @throws DukeException
+     */
+    public static void deleteTask(List<Task> tasks, String index) throws DukeException {
+        if (index.isBlank()) {
+            throw new DukeException("☹ OOPS!!! Please provide the index of the " +
+                    "task you want to delete.");
+        }
+        int deleteTaskIndex = Integer.parseInt(index) - 1;
+        Task toBeDeleted = tasks.get(deleteTaskIndex);
+        tasks.remove(deleteTaskIndex);
+        saveData(tasks);
+        System.out.printf("Noted! I have removed the following task:%n %s%n", toBeDeleted);
+        int taskCount = tasks.size();
+        System.out.printf("You have %d %s in the list.%n", taskCount, taskCount > 1 ? "tasks" : "task");
+    }
+
+    /**
+     * Returns the list of tasks saved if the directory and file exists.
+     * If not, creates the directory and file as necessary and returns an empty list.
+     *
+     * @return List of saved tasks
+     */
+    public static List<Task> loadData() {
+        String path = "./data/Duke.txt";
+        List<Task> tasks = new ArrayList<>();
+
+        // Check if data directory exists
+        File directory = new File("./data");
+        File file = new File("./data/Duke.txt");
+        try {
+            if (!directory.exists()) {
+                directory.mkdir();
+                file.createNewFile();
+            } else if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                String[] taskParts = sc.nextLine().split(",");
+                String taskType = taskParts[0];
+                boolean isDone = taskParts[1].equals("X");
+                String taskDescription = taskParts[2];
+
+                switch (taskType) {
+                case "T":
+                    tasks.add(new Todo(taskDescription, isDone));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(taskDescription, taskParts[3], isDone));
+                    break;
+                case "E":
+                    tasks.add(new Event(taskDescription, taskParts[3], isDone));
+                    break;
+                default:
+                    System.out.println("Invalid task in data");
+                    break;
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return tasks;
+    }
+
+    /**
+     * Save the list of tasks in the hard disk.
+     *
+     * @param tasks The list of tasks to be saved.
+     */
+    public static void saveData(List<Task> tasks) {
+        String path = "./data/Duke.txt";
+        try {
+            FileWriter fw = new FileWriter(path);
+            for (Task task : tasks) {
+                fw.write(task.toSaveString() + System.lineSeparator());
+            }
+
+            fw.close();
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("Hello, I am Duke!\nHow may I help you?");
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
-
+        List<Task> tasks = loadData();
+//        List<Task> tasks = new ArrayList<>();
+        System.out.println(tasks);
         String command = sc.next();
-
+        
         while (!command.equals("bye")) {
             try {
                 switch (command) {
@@ -64,27 +181,11 @@ public class Duke {
                     break;
                 case "done":
                     String doneInput = sc.nextLine().strip();
-                    if (doneInput.isBlank()) {
-                        throw new DukeException("☹ OOPS!!! Please provide the index of the " +
-                                "task you want to mark as done.");
-                    }
-                    int taskIndex = Integer.parseInt(doneInput) - 1;
-                    Task doneTask = tasks.get(taskIndex);
-                    doneTask.markAsDone();
-                    System.out.printf("Good job! I have marked the following task as done:%n %s%n", doneTask);
+                    doneTask(tasks, doneInput);
                     break;
                 case "delete":
                     String deleteInput = sc.nextLine().strip();
-                    if (deleteInput.isBlank()) {
-                        throw new DukeException("☹ OOPS!!! Please provide the index of the " +
-                                "task you want to delete.");
-                    }
-                    int deleteTaskIndex = Integer.parseInt(deleteInput) - 1;
-                    Task toBeDeleted = tasks.get(deleteTaskIndex);
-                    tasks.remove(deleteTaskIndex);
-                    System.out.printf("Noted! I have removed the following task:%n %s%n", toBeDeleted);
-                    int taskCount = tasks.size();
-                    System.out.printf("You have %d %s in the list.%n", taskCount, taskCount > 1 ? "tasks" : "task");
+                    deleteTask(tasks, deleteInput);
                     break;
                 default:
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means (X_X)" +
