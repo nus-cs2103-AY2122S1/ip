@@ -19,8 +19,8 @@ public class UI {
     /** Print methods */
     public void printWelcome() {
         System.out.println(
-                "Lollipop: Hello! I am your personal chatbot, Lollipop! " +
-                        "What would you like to do today?");
+                "Lollipop: Hello! I am your personal chatbot, Lollipop! "
+                + "What would you like to do today?");
     }
 
     public void printGoodBye() {
