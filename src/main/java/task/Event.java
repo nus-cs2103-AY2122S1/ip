@@ -1,5 +1,8 @@
 package task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * Event class.
  *
@@ -11,24 +14,20 @@ public class Event extends Task {
 
     public final static String SPLIT_WORD = "at";
 
-    private String at;
+    private final LocalDate atDate;
+    
+    private final LocalTime atTime;
 
-    public Event(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, LocalDate atDate, LocalTime atTime) {
         super(description, isDone);
-        this.at = at;
+        this.atDate = atDate;
+        this.atTime = atTime;
     }
 
-    public Event(String description, String at) {
+    public Event(String description, LocalDate atDate, LocalTime atTime) {
         super(description);
-        this.at = at;
-    }
-
-    public String getAt() {
-        return at;
-    }
-
-    public void setAt(String timing) {
-        this.at = timing;
+        this.atDate = atDate;
+        this.atTime = atTime;
     }
 
     /**
@@ -37,16 +36,26 @@ public class Event extends Task {
      * @return formatted String for field 'at'
      */
     public String getFormattedAt() {
-        return " (" + SPLIT_WORD + ": " + at + ")";
+        return "(" 
+                + SPLIT_WORD 
+                + ": " 
+                + atDate 
+                + ((atTime == null) ? "": " " + atTime)
+                + ")";
     }
 
     @Override
     public String toSavedString() {
-        return KEYWORD + getSplitTemplate() + super.toSavedString() + getSplitTemplate() + at;
+        return KEYWORD 
+                + getSplitTemplate() 
+                + super.toSavedString() 
+                + getSplitTemplate() 
+                + atDate
+                + ((atTime == null) ? "" : getSplitTemplate() + atTime);
     }
     
     @Override
     public String toString() {
-        return "[E]" + super.toString() + getFormattedAt();
+        return "[E]" + super.toString() + ' ' + getFormattedAt();
     }
 }

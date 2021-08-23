@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -57,8 +59,8 @@ public class TaskManager {
             loadToList(savedTaskList);
             
         } catch (Exception exception) {
-            System.out.printf("Unable to generate/read save data file ./%s", TASK_FILE_PATH);
-            System.out.println(exception.getMessage());
+            System.out.printf("Unable to generate/read save data file ./%s\n", TASK_FILE_PATH);
+            exception.printStackTrace();
         }
     }
     
@@ -70,8 +72,6 @@ public class TaskManager {
                 throw new DukeException(String.format(
                         "Load/save directory ./%s cannot be created.",
                         TASK_DIRECTORY_PATH));
-            } else {
-                System.out.printf("Directory ./%s created!\n", TASK_DIRECTORY_PATH);
             }
         }
         if (!file.exists()) {
@@ -79,8 +79,6 @@ public class TaskManager {
                 throw new DukeException(String.format(
                         "Load/save file ./%s cannot be created.",
                         TASK_FILE_PATH));
-            } else {
-                System.out.printf("File ./%s created!\n", TASK_FILE_PATH);
             }
         }
         return file;
@@ -93,18 +91,25 @@ public class TaskManager {
         while (scanner.hasNext()) {
             String taskAsString = scanner.nextLine();
             String splitRegex = " \\" + Task.SPLIT_CHAR + ' '; // split based on regex '|'
-            String[] taskAsArray = taskAsString.split(splitRegex); 
+            String[] taskAsArray = taskAsString.split(splitRegex);
             boolean isDone = taskAsArray[1].equals("1"); // if not 1, just set to false
+            String desc = taskAsArray[2];
+            LocalDate date;
+            LocalTime time;
 
             switch (taskAsArray[0]) {
                 case Todo.KEYWORD:
-                    savedTaskList.add(new Todo(taskAsArray[2], isDone));
+                    savedTaskList.add(new Todo(desc, isDone));
                     break;
                 case Event.KEYWORD:
-                    savedTaskList.add(new Event(taskAsArray[2], isDone, taskAsArray[3]));
+                    date = LocalDate.parse(taskAsArray[3]);
+                    time = (taskAsArray.length == 4) ? null : LocalTime.parse(taskAsArray[4]);
+                    savedTaskList.add(new Event(desc, isDone, date, time));
                     break;
                 case Deadline.KEYWORD:
-                    savedTaskList.add(new Deadline(taskAsArray[2], isDone, taskAsArray[3]));
+                    date = LocalDate.parse(taskAsArray[3]);
+                    time = (taskAsArray.length == 4) ? null : LocalTime.parse(taskAsArray[4]);
+                    savedTaskList.add(new Deadline(desc, isDone, date, time));
                     break;
                 default:
                     System.out.printf("'%s' is an invalid entry.\n", taskAsString);
@@ -122,7 +127,7 @@ public class TaskManager {
     
     public void saveToFile(Task newTask) throws IOException {
         FileWriter fileWriter = new FileWriter(TASK_FILE_PATH, true);
-        fileWriter.write('\n' + newTask.toSavedString());
+        fileWriter.write(newTask.toSavedString() + '\n');
         fileWriter.close();
     }
 
@@ -172,14 +177,12 @@ public class TaskManager {
     /**
      * Adds a Todo Task, returns an output message.
      *
-     * @param userParams user input with parameters for a Todo
+     * @param desc user input with parameters for a Todo
      * @return String message of successful creation of Todo
      * @throws DukeException if task list is full
      */
-    public String addToDoTask(String userParams) throws DukeException {
-        assert (!userParams.isBlank());
-
-        Todo todo = new Todo(userParams); // desc
+    public String addToDoTask(String desc) throws DukeException {
+        Todo todo = new Todo(desc);
         Task task = addTask(todo);
         return String.format(CREATE_TODO_MESSAGE, task, getTaskListSize());
     }
@@ -187,14 +190,14 @@ public class TaskManager {
     /**
      * Adds an Event Task, returns an output message.
      *
-     * @param userParams user input with parameters for a Deadline
+     * @param desc todo
      * @return String message of successful creation of Event
      * @throws DukeException if task list is full
      */
-    public String addEventTask(String[] userParams) throws DukeException {
-        assert (userParams.length == 2);
-
-        Event event = new Event(userParams[0], userParams[1]); // desc, timing
+    public String addEventTask(String desc, LocalDate atDate, LocalTime atTime) 
+            throws DukeException {     
+        
+        Event event = new Event(desc, atDate, atTime);
         Task task = addTask(event);
         return String.format(CREATE_EVENT_MESSAGE, task, getTaskListSize());
     }
@@ -202,14 +205,14 @@ public class TaskManager {
     /**
      * Adds a Deadline Task, returns an output message.
      *
-     * @param userParams user input with parameters for a Deadline
+     * @param desc todo user input with parameters for a Deadline
      * @return String message of successful creation of Deadline
      * @throws DukeException if task list is full
      */
-    public String addDeadlineTask(String[] userParams) throws DukeException {
-        assert (userParams.length == 2);
+    public String addDeadlineTask(String desc, LocalDate byDate, LocalTime byTime)
+            throws DukeException {
 
-        Deadline deadline = new Deadline(userParams[0], userParams[1]); // desc, by
+        Deadline deadline = new Deadline(desc, byDate, byTime);
         Task task = addTask(deadline);
         return String.format(CREATE_DEADLINE_MESSAGE, task, getTaskListSize());
     }
