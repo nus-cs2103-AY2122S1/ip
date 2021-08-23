@@ -1,0 +1,28 @@
+public class Formatter {
+
+    public Task formatStringToTask(String input) {
+        String[] delimitedInput = input.split("[|]");
+        String taskType = delimitedInput[0];
+        if (taskType.equals(TaskType.T.toString())) {
+            return new Todo(delimitedInput[2], Boolean.parseBoolean(delimitedInput[1]));
+        }
+        if (taskType.equals(TaskType.D.toString())) {
+            return new Deadline(delimitedInput[2], delimitedInput[3], Boolean.parseBoolean(delimitedInput[1]));
+        }
+        if (taskType.equals(TaskType.E.toString())) {
+            return new Event(delimitedInput[2], delimitedInput[3], Boolean.parseBoolean(delimitedInput[1]));
+        }
+        return Task.emptyTask();
+    }
+
+    public String formatTaskToString(Task input) {
+        StringBuilder result = new StringBuilder();
+        TaskType taskType = input.taskType();
+        result.append(taskType.toString())
+                .append("|")
+                .append(input.getCompleted())
+                .append("|")
+                .append(input.getLabel());
+        return result.toString();
+    }
+}

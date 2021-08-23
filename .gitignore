@@ -18,3 +18,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # .class files ignored
 *.class
+data/duke.txt

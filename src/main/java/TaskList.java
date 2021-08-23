@@ -58,7 +58,7 @@ public class TaskList {
 
     @Override()
     public String toString() {
-        StringBuilder result = new StringBuilder("Here are the tasks in your list:");
+        StringBuilder result = new StringBuilder();
         for (int j = 1; j <= this.size() ; j++) {
             result.append("\n");
             String line = j + "." + this.get(j).toString();

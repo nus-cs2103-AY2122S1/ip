@@ -11,6 +11,10 @@ public class Deadline extends Task {
         return " (by: " + this.by + ")";
     }
 
+    public String getBy() {
+        return this.by;
+    }
+
     @Override
     public Task updateName(String input) {
         return new Deadline(input, this.by, this.getCompleted());
@@ -24,8 +28,13 @@ public class Deadline extends Task {
     @Override
     public String details() {
         String checkbox = "[" + ( getCompleted() ? "X" : " ") + "]";
-        String details = taskType() + checkbox + " " + this.getName();
+        String details = taskTypeString() + checkbox + " " + this.getName();
         return details + deadline();
+    }
+
+    @Override
+    public String getLabel() {
+        return this.getName() + "|" + this.getBy();
     }
 
 }

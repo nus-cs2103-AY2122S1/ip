@@ -17,6 +17,11 @@ public class Todo extends Task {
     @Override
     public String details() {
         String checkbox = "[" + ( getCompleted() ? "X" : " ") + "]";
-        return taskType() + checkbox + " " + this.getName();
+        return taskTypeString() + checkbox + " " + this.getName();
+    }
+
+    @Override
+    public String getLabel() {
+        return this.getName() + "|";
     }
 }

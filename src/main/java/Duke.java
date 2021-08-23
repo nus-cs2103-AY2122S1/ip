@@ -1,6 +1,13 @@
 public class Duke {
-    UserInterface userInterface = new UserInterface();
-    final TaskList list = new TaskList();
+    UserInterface userInterface;
+    TaskList list;
+    Storage storage;
+
+    public Duke() {
+        this.userInterface = new UserInterface();
+        this.list = new TaskList();
+        this.storage = Storage.createStorage();
+    }
 
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -9,7 +16,9 @@ public class Duke {
 
     public void run() {
         this.userInterface.printInitialGreeting();
+        this.list = this.storage.load(this.list);
         this.runLoop();
+        this.storage.save(this.list);
         this.userInterface.printGoodByeGreeting();
         System.exit(0);
     }
@@ -78,7 +87,7 @@ public class Duke {
     }
 
     private void printList() {
-        System.out.println(this.list);
+        System.out.println("Here are the tasks in your list:\n" + this.list);
     }
 
     private void addToList(Task input) {
