@@ -44,7 +44,7 @@ public class Kermit {
 
         if (task instanceof DateDependentTask) {
             DateDependentTask dateTask = (DateDependentTask) task;
-            String.join(delimiter, formattedString, dateTask.getDate());
+            formattedString = String.join(delimiter, formattedString, dateTask.getDate());
         }
         return formattedString;
     }
