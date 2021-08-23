@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.time.DateTimeException;
+
 public class Duke {
     private static final ArrayList<Task> arr = new ArrayList<>();
     private static final Scanner in = new Scanner(System.in);
@@ -73,6 +75,8 @@ public class Duke {
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+        } catch (DateTimeException e) {
+            System.out.println("Please provide date/time in the correct format: yyyy-mm-dd hh:mm");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -114,11 +118,15 @@ public class Duke {
         int sepIndex = fullDescription.indexOf("/by");
         if (fullDescription.charAt(sepIndex + 3) != ' ' || sepIndex == -1) {
             throw new DukeException("☹ OOPS!!! Please input with the correct format e.g. deadline return books" +
-                    " /by Sunday");
+                    " /by 2023-04-05 18:40 (yyyy-mm-dd hh:mm, where time is optional)");
         }
         String description = fullDescription.substring(0, sepIndex);
-        String deadline = fullDescription.substring(sepIndex + 4);
-        arr.add(new Deadline(description, deadline));
+        String[] deadlineArray = fullDescription.substring(sepIndex + 4).split(" ");
+        if (deadlineArray.length == 2) {
+            arr.add(new Deadline(description, deadlineArray[0], deadlineArray[1]));
+        } else {
+            arr.add(new Deadline(description, deadlineArray[0]));
+        }
         printAfterAdding();
     }
 
@@ -130,12 +138,19 @@ public class Duke {
         int sepIndex = fullDescription.indexOf("/at");
         if (fullDescription.charAt(sepIndex + 3) != ' ' || sepIndex == -1) {
             throw new DukeException("☹ OOPS!!! Please input with the correct format e.g. event read books" +
-                    " /at Saturday 9am");
+                    " /at 2021-09-08 09:30 (yyyy-mm-dd hh:mm, where time is optional)");
         }
         String description = fullDescription.substring(0, sepIndex);
-        String time = fullDescription.substring(sepIndex + 4);
-        arr.add(new Event(description, time));
+        String[] deadlineArray = fullDescription.substring(sepIndex + 4).split(" ");
+        if (deadlineArray.length == 2) {
+            arr.add(new Event(description, deadlineArray[0], deadlineArray[1]));
+        } else {
+            arr.add(new Event(description, deadlineArray[0]));
+        }
         printAfterAdding();
+//        String time = fullDescription.substring(sepIndex + 4);
+//        arr.add(new Event(description, time));
+//        printAfterAdding();
     }
 
     /**

@@ -1,24 +1,42 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
+
 /**
  * A task that is scheduled for a specific time.
  */
 public class Event extends Task{
-    protected String time;
+    protected LocalDate date;
+    protected LocalTime time;
 
-    /**
-     * Constructor for the Event class.
-     * @param description Description of the task at hand.
-     * @param time Time the event is scheduled to take place at.
-     */
-    public Event(String description, String time) {
+    public Event(String description, String dateString, String timeString) {
         super(description);
-        this.time = time;
+        this.date = LocalDate.parse(dateString);
+        if (timeString == "") {
+            this.time = null;
+        } else {
+            this.time = LocalTime.parse(timeString);
+        }
+    }
+
+    public Event(String description, String dateString) {
+        this(description, dateString, "");
     }
 
     /**
-     * Provides a String representation of the Event.
-     * @return A String reprsentation of the Event.
+     * Provides a String representation of the Deadline.
+     * @return A String representation of the Deadline.
      */
     public String toString() {
-        return "[E][" + this.getStatusIcon() + "] " + this.description + "(at: " + this.time + ")";
+        if (this.time != null) {
+            return "[E][" + this.getStatusIcon() + "] " + this.description + "(by: " +
+                    this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " " +
+                    this.time.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + ")";
+        } else {
+            return "[E][" + this.getStatusIcon() + "] " + this.description + "(by: " +
+                    this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + ")";
+        }
     }
 }
