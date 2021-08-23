@@ -1,4 +1,5 @@
-import java.lang.reflect.Array;
+package duke;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class Ui {
     /**
      * Filter tasks out based on regex string.
      * @param regex String based on which to filter.
-     * @param tasks Task list from which to filter.
+     * @param tasks duke.Task list from which to filter.
      * @return Filtered tasks.
      */
     public static List<Task> findTasks(String regex, List<Task> tasks) {

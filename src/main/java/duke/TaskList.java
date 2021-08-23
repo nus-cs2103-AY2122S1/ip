@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,11 +31,11 @@ public class TaskList {
 
     /**
      * Initialise event subclass by type.
-     * @param task Task string.
-     * @param type Type enum.
+     * @param task duke.Task string.
+     * @param type duke.Type enum.
      * @param done Whether task is done or not Bool.
      * @param localDateTime Datetime object.
-     * @return Task of requisite type.
+     * @return duke.Task of requisite type.
      */
     public static Task initialiseByType(String task, Type type, Boolean done, LocalDateTime localDateTime) {
         if(type == Type.TODO) {
@@ -67,7 +69,7 @@ public class TaskList {
         } else if(input.equals("list")) {
             System.out.println(taskListString(tasks));
         } else if(input.equals("hello")) {
-            System.out.println("Hello! I'm Duke\n" +
+            System.out.println("Hello! I'm duke.Duke\n" +
                     "What can I do for you?");
         } else if (input.startsWith("done ")) {
             Ui.doneTask(Integer.parseInt(input.substring(5)), tasks);

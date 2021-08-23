@@ -1,4 +1,5 @@
-import java.time.LocalDate;
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -10,7 +11,7 @@ public abstract class Task {
     /** The done status of the task */
     private Boolean done;
 
-    /** The type of the task, defined by the enum Type */
+    /** The type of the task, defined by the enum duke.Type */
     private Type type;
 
     /** The datetime object for the event */
@@ -19,7 +20,7 @@ public abstract class Task {
     /**
      * Constructor to initialise the task
      * @param task The task itself.
-     * @param type The type of the task defined by the enum Type.
+     * @param type The type of the task defined by the enum duke.Type.
      */
     public Task(String task, Type type) {
         this.task = task;

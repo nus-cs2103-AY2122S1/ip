@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDateTime;
 
 public class Todo extends Task {
@@ -6,7 +8,7 @@ public class Todo extends Task {
     /**
      * Constructor to initialise the task
      * @param task The task itself.
-     * @param type The type of the task defined by the enum Type.
+     * @param type The type of the task defined by the enum duke.Type.
      */
     public Todo(String task, Type type) {
         super(task, type);

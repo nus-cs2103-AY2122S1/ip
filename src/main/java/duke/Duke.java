@@ -1,10 +1,5 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+package duke;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -15,7 +10,7 @@ public class Duke {
 
     public static void main(String[] args) {
         TaskList taskManager = new Duke().generateTaskList();
-        String hello = "Hello! I'm Duke\n" +
+        String hello = "Hello! I'm duke.Duke\n" +
                 "What can I do for you?";
         System.out.println(hello);
         Scanner scanner = new Scanner(System.in);

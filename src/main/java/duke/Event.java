@@ -1,4 +1,5 @@
-import java.time.LocalDate;
+package duke;
+
 import java.time.LocalDateTime;
 
 public class Event extends Task{
@@ -6,7 +7,7 @@ public class Event extends Task{
     /**
      * Constructor to initialise the task.
      * @param task The task itself.
-     * @param type The type of the task defined by the enum Type.
+     * @param type The type of the task defined by the enum duke.Type.
      * @param done The status of the task.
      * @param datetime The time for task.
      */

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Enum class for types of events.
  */
