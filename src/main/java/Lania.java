@@ -115,7 +115,7 @@ public class Lania {
                 System.out.println("File created: " + f.getName());
             } else {
                 System.out.println("File already exists.");
-                printFileContents("data/lania.txt");
+                loadFileContents("data/lania.txt");
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -143,19 +143,35 @@ public class Lania {
                 input = s.nextLine();
             }
         }
+        s.close();
         System.out.println("Bye. Lania looks forward to seeing you again!");
     }
 
-    private void printFileContents(String filePath) throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+    private void loadFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
         while (s.hasNext()) {
-            System.out.println(s.nextLine());
+            String next = s.nextLine();
+            System.out.println(next);
+            String[] split = next.split("\\|", 4);
+            Task t;
+            if (split[0].equals("T")) {
+                t = new Todo(split[2]);
+            } else if (split[0].equals("D")) {
+                t = new Deadline(split[2], split[3]);
+            } else {
+                t = new Event(split[2], split[3]);
+            }
+            if (split[1].equals("X")) {
+                t.markAsDone();
+            }
+            taskArrayList.add(t);
         }
+        s.close();
     }
 
     private void appendToFile(String filePath, String textToAppend, int i) throws IOException {
-        FileWriter fw = new FileWriter(filePath, i != 0); // create a FileWriter in append mode
+        FileWriter fw = new FileWriter(filePath, i != 0);
         fw.write(textToAppend);
         fw.close();
     }
