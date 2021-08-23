@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -93,14 +94,12 @@ public class Duke {
         }
     }
 
-    // TODO it shows 1 to 0 if "done" is entered before any items are appended to the list
     protected static class NotDoneRightException extends DukeExceptions {
         public NotDoneRightException(String start, String end) {
             super("Please input an integer in the range of " + start + " to " + end + "!");
         }
     }
 
-    // TODO it shows 1 to 0 if "done" is entered before any items are appended to the list
     protected static class DeletionException extends DukeExceptions {
         public DeletionException(String start, String end) {
             super("Please input an integer in the range of " + start + " to " + end + "!");
@@ -173,6 +172,7 @@ public class Duke {
         while (true) {
             command = sc.nextLine();
 
+            // 'bye' : Ends the program
             if (command.toLowerCase().equals("bye")) {
                 System.out.println("Bye bye!! It was nice meeting you!");
                 System.out.println(linebreak);
@@ -180,17 +180,34 @@ public class Duke {
                 break;
 
 
+            // 'list' : Retrieves information from the hard drive and prints it
             } else if (command.toLowerCase().equals("list")) {
-                if (pointer == 0) {
-                    System.out.println("Yay! Nothing on your list right now :>");
-                }
+//                if (file.length() == 0) {
+//                    System.out.println("Yay! Nothing on your list right now :>");
+//
+//                } else {
+//                    System.out.println("Here's your progress:");
+//                    Scanner file_sc = new Scanner(file);
+//
+//                    while (file_sc.hasNext()) {
+//                        String nextLine = file_sc.nextLine();
+//                        System.out.println(nextLine);
+//                    }
+//                    file_sc.close();
+//                }
+//                System.out.println(linebreak);
 
-                for (int counter = 0; counter < todoList.size(); counter++) {
-                    System.out.println((counter + 1) + ". " + todoList.get(counter).toString());
+                if (todoList.size() == 0) {
+                    System.out.println("Yay! Nothing on your list right now :>");
+                } else {
+                    for (int count = 0; count < todoList.size(); count++) {
+                        System.out.println((count + 1) + ". " + todoList.get(count).toString());
+                    }
                 }
                 System.out.println(linebreak);
 
 
+            // 'done [int]' : marks the corresponding number in the list as done
             } else if (command.toLowerCase().split(" ")[0].equals("done")) {
 
                 if (command.toLowerCase().split(" ").length == 1 || Integer.parseInt(command.split(" ")[1]) < 1
