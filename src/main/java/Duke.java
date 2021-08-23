@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -94,17 +97,27 @@ public class Duke {
     }
 
     public static void addDeadline(String input) {
-        String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/by") - 1);
-        String by = input.substring(input.lastIndexOf("/by") + 4);
-        Deadline d = new Deadline(name, by);
-        Task.addTask(d);
+        try {
+            String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/by") - 1);
+            String by = input.substring(input.lastIndexOf("/by") + 4);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            Deadline d = new Deadline(name, LocalDateTime.parse(by, formatter));
+            Task.addTask(d);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date and time input, indicate date in yyyy-MM-dd HH:mm format.");
+        }
     }
 
-    public static void addEvent(String input) {
-        String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/at") - 1);
-        String at = input.substring(input.lastIndexOf("/at") + 4);
-        Event e = new Event(name, at);
-        Task.addTask(e);
+    public static void addEvent(String input) throws DateTimeParseException {
+        try {
+            String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/at") - 1);
+            String at = input.substring(input.lastIndexOf("/at") + 4);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            Event e = new Event(name, LocalDateTime.parse(at, formatter));
+            Task.addTask(e);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date and time input, indicate date in yyyy-MM-dd HH:mm format.");
+        }
     }
 
     public static void missingTaskName(String cmd) {
