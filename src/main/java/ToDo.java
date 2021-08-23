@@ -15,6 +15,10 @@ public class ToDo extends TaskItem {
 //        this.readFromFile = readFromFile;
 //    }
 
+    @Override
+    public String toFileString() {
+        return "[T]" + super.toString();
+    }
 
     /**
      * Overriden toString() method.

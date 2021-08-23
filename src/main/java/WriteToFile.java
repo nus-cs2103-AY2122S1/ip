@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class WriteToFile {
@@ -15,9 +16,9 @@ public class WriteToFile {
         File dukeData = new File("./data/dukeData.txt");
         try {
             if (dukeData.createNewFile()) {
-                System.out.println("File is created!");
+                //System.out.println("File is created!");
             } else {
-                System.out.println("Data file already exists.");
+                //System.out.println("Data file already exists.");
             }
 
             if (dukeData.length() == 0) {
@@ -29,22 +30,34 @@ public class WriteToFile {
                 while (task != null) {
                     String completed = task.substring(4, 5);
                     String taskType = task.substring(1, 2);
-                    task = " " + task.substring(7);
 
                     if (taskType.equals("D")) {
-                        Deadline dead = new Deadline(task);
+//                        System.out.println(task.split("--")[1]);
+                        String dateAndTimeInString = task.split("--")[1];
+                        //System.out.println(dateAndTimeInString);
+                        LocalDateTime byDateAndTime = LocalDateTime.parse(dateAndTimeInString);
+                        task = " " + task.split("--")[0].substring(7);
+                        //System.out.println(task);
+                        Deadline dead = new Deadline(task, byDateAndTime);
                         if (completed.equals("X")) {
                             dead.completeTask();
                         }
                         taskItems.add(dead);
                     } else if (taskType.equals("T")) {
+                        task = " " + task.substring(7);
                         ToDo toDoItem = new ToDo(task);
                         if (completed.equals("X")) {
                             toDoItem.completeTask();
                         }
                         taskItems.add(toDoItem);
                     } else if (taskType.equals("E")) {
-                        Event someEvent = new Event(task);
+                        //System.out.println(task.split("--")[0]);
+                        String dateAndTimeInString = task.split("--")[1];
+                        //System.out.println(dateAndTimeInString);
+                        LocalDateTime byDateAndTime = LocalDateTime.parse(dateAndTimeInString);
+                        task = " " + task.split("--")[0].substring(7);
+                        //System.out.println(task);
+                        Event someEvent = new Event(task, byDateAndTime);
                         if (completed.equals("X")) {
                             someEvent.completeTask();
                         }
@@ -90,7 +103,7 @@ public class WriteToFile {
             FileWriter fw = new FileWriter(filePath, appendMode);
 
             for (int i = 0; i < arrayList.size(); i++) {
-                fw.write(arrayList.get(i).toString() + "\n");
+                fw.write(arrayList.get(i).toFileString() + "\n");
 //                System.out.println("Wrote " + arrayList.get(i).toString() + " to file");
             }
 

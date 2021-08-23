@@ -1,19 +1,35 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends TaskItem {
 
-    protected String by = null;
 
+    protected LocalDateTime byDateAndTime;
+
+
+    protected String dateAndTimeInString;
     /**
      * Constructor for creating a Deadline object.
      * @param description description of the task.
-     * @param by the by-date of the task, e.g. "by Sunday"
+     * @param byDateAndTime the by-date of the task, e.g. "by 27-04-1999 12:00"
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime byDateAndTime) {
         super(description);
-        this.by = by;
+        this.byDateAndTime = byDateAndTime;
+        if (byDateAndTime.getDayOfMonth() == LocalDateTime.now().getDayOfMonth()) {
+            int hour = byDateAndTime.getHour();
+            int minute = byDateAndTime.getMinute();
+            this.dateAndTimeInString = "Today at " + hour + ":" + minute;
+        } else {
+            this.dateAndTimeInString = this.byDateAndTime.getDayOfWeek().toString();
+        }
     }
 
-    public Deadline(String description) {
-        super(description);
+//    public Deadline(String description) {
+//        super(description);
+//    }
+    @Override
+    public String toFileString() {
+        return "[D]" + super.toString() + "--" + byDateAndTime.toString();
     }
 
     /**
@@ -22,10 +38,6 @@ public class Deadline extends TaskItem {
      */
     @Override
     public String toString() {
-        if (this.by != null) {
-            return "[D]" + super.toString() + "(by: " + this.by + ")";
-        } else {
-            return "[D]" + super.toString();
-        }
+        return "[D]" + super.toString() + "(by: " + this.dateAndTimeInString + ")";
     }
 }
