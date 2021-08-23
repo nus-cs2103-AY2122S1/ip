@@ -12,10 +12,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+
 public class Storage {
 
     private final String filePath;
 
+    /**
+     * Creates new file at filePath if the file does not exist.
+     * @return File to write
+     */
     private File initStorageFile() {
         File directory = new File("data");
         directory.mkdir();
