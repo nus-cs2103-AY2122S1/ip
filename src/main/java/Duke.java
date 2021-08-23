@@ -6,6 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -84,9 +87,6 @@ public class Duke {
                 }
             }
             s.close();
-            for (int i = 0; i < storage.size(); i++) {
-                System.out.printf("%d. %s\n", i + 1, storage.get(i));
-            }
         } catch (FileNotFoundException e) {
             System.err.println("File does not exist" + e.getMessage());
         }
@@ -132,7 +132,6 @@ public class Duke {
                 int count = 1;
                 while (s.hasNextLine()) {
                     String command = s.nextLine();
-                    System.out.println(command);
                     if (count == taskNum) {
                         String head = command.substring(0, 4);
                         String tail = command.substring(5);
@@ -161,7 +160,6 @@ public class Duke {
                 int count = 1;
                 while (s.hasNextLine()) {
                     String command = s.nextLine();
-                    System.out.println(command);
                     if (count == taskNum) {
                         count++;
                     } else {
@@ -251,22 +249,25 @@ public class Duke {
         } else if (!command.contains("/by")) {
             throw new DukeException("invalidDeadline");
         } else {
-            int position = command.indexOf("/by");
-            String name = command.substring(9, position);
-            String date = command.substring(position + 4);
-            Task task  = new Deadline(name, date);
-            storage.add(task);
-            if (printOutput) {
-                try {
+            try {
+                LocalDate.parse(words[3]);
+                int position = command.indexOf("/by");
+                String name = command.substring(9, position);
+                String date = command.substring(position + 4);
+                Task task  = new Deadline(name, date);
+                storage.add(task);
+                if (printOutput) {
                     appendToFile(fileAddress, "D - 0 - " + name + " - " + date);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("    ______________________________________");
+                    System.out.println("     Got it. I've added this task: ");
+                    System.out.printf("       %s\n",task);
+                    System.out.printf("     Now you have %d tasks in the list\n", storage.size());
+                    System.out.println("    ______________________________________");
                 }
-                System.out.println("    ______________________________________");
-                System.out.println("     Got it. I've added this task: ");
-                System.out.printf("       %s\n",task);
-                System.out.printf("     Now you have %d tasks in the list\n", storage.size());
-                System.out.println("    ______________________________________");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (DateTimeParseException e) {
+                System.out.println("Enter valid date format!");
             }
         }
     }
@@ -285,22 +286,25 @@ public class Duke {
         } else if (!command.contains("/at")) {
             throw new DukeException("invalidEvent");
         } else {
-            int position = command.indexOf("/at");
-            String name = command.substring(6, position);
-            String date = command.substring(position + 4);
-            Task task  = new Event(name, date);
-            storage.add(task);
-            if (printOutput) {
-                try {
+            try {
+                LocalDate.parse(words[3]);
+                int position = command.indexOf("/at");
+                String name = command.substring(6, position);
+                String date = command.substring(position + 4);
+                Task task  = new Event(name, date);
+                storage.add(task);
+                if (printOutput) {
                     appendToFile(fileAddress, "E - 0 - " + name + " - " + date);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("    ______________________________________");
+                    System.out.println("     Got it. I've added this task: ");
+                    System.out.printf("       %s\n",task);
+                    System.out.printf("     Now you have %d tasks in the list\n", storage.size());
+                    System.out.println("    ______________________________________");
                 }
-                System.out.println("    ______________________________________");
-                System.out.println("     Got it. I've added this task: ");
-                System.out.printf("       %s\n",task);
-                System.out.printf("     Now you have %d tasks in the list\n", storage.size());
-                System.out.println("    ______________________________________");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (DateTimeParseException e) {
+                System.out.println("Enter valid date format!");
             }
         }
     }

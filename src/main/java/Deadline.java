@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Description:
  * Deadlines: tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm.
@@ -6,11 +9,11 @@
  */
 
 public class Deadline extends Task {
-    private String date;
+    private LocalDate date;
 
     public Deadline(String name, String date) {
         super(name);
-        this.date = date;
+        this.date = LocalDate.parse(date);
     }
 
     /**
@@ -20,6 +23,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + date + ")";
+        return "[D]" + super.toString() + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
