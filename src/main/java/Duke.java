@@ -1,18 +1,21 @@
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.awt.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     private static List<Task> tasks = new ArrayList<>();
+
     public enum inputTypes {
         BYE("bye"), TODO("todo"), DEADLINE("deadline"), EVENT("event"), LIST("list"), DONE("done"), DELETE("delete");
 
         private String value;
 
-        inputTypes (String value) {
+        inputTypes(String value) {
             this.value = value;
         }
 
@@ -21,7 +24,7 @@ public class Duke {
         }
     }
 
-    private static void todoEvent (String task) throws Exception {
+    private static void todoEvent(String task) throws Exception {
         if (task.length() <= 5) {
             throw new Exception("todoEmpty");
         }
@@ -32,7 +35,7 @@ public class Duke {
         System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
     }
 
-    private static void deadlineEvent (String task) throws Exception {
+    private static void deadlineEvent(String task) {
         int position = task.indexOf('/');
         String taskName = task.substring(9, position - 1);
         String deadlineTime = task.substring(position + 4);
@@ -42,7 +45,7 @@ public class Duke {
         System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
     }
 
-    private static void event (String task) throws Exception {
+    private static void event(String task) throws Exception {
         int position = task.indexOf('/');
         String taskName = task.substring(6, position - 1);
         String eventTime = task.substring(position + 4);
@@ -52,21 +55,21 @@ public class Duke {
         System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
     }
 
-    private static void setEventDone (String task) throws Exception {
+    private static void setEventDone(String task) throws Exception {
         int itemDone = Integer.parseInt(task.substring(5));
-        tasks.get(itemDone - 1).done = true;
+        tasks.get(itemDone - 1).finished();
         System.out.println("    Nice! I've marked this task as done:");
         System.out.println("      " + tasks.get(itemDone - 1).toString());
     }
 
-    private static void showList () throws Exception {
+    private static void showList() throws Exception {
         System.out.println("    Here are the tasks in your list:");
         for (int i = 1; i <= tasks.size(); i++) {
             System.out.println("    " + i + "." + tasks.get(i - 1).toString());
         }
     }
 
-    private static void deleteEvent (String task) throws Exception {
+    private static void deleteEvent(String task) throws Exception {
         int itemDeleted = Integer.parseInt(task.substring(7));
         Task deletedTask = tasks.remove(itemDeleted - 1);
         System.out.println("    Noted. I've removed this task:");
@@ -74,8 +77,13 @@ public class Duke {
         System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    private static void translateDate(String s) {
+
+    }
+
 
     public static void main(String[] args) {
+        translateDate("");
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

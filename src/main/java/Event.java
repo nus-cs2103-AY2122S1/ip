@@ -1,5 +1,9 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Event extends Task{
-    public String eventTime;
+    private String eventTime;
+
     public Event (String task, String eventTime) {
         super(task);
         this.eventTime = eventTime;
@@ -8,9 +12,9 @@ public class Event extends Task{
     @Override
     public String toString() {
         String finished = " ";
-        if (this.done) {
+        if (this.isDone()) {
             finished = "X";
         }
-        return "[E]" + "[" + finished + "] " + this.taskName + " (at: " + this.eventTime + ")";
+        return "[E]" + "[" + finished + "] " + this.getTaskName() + " (at: " + this.eventTime + ")";
     }
 }

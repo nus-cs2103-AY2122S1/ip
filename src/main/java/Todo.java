@@ -6,9 +6,9 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String finished = " ";
-        if (this.done) {
+        if (this.isDone()) {
             finished = "X";
         }
-        return "[T]" + "[" + finished + "] " + this.taskName;
+        return "[T]" + "[" + finished + "] " + this.getTaskName();
     }
 }
