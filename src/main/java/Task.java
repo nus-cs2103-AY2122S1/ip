@@ -2,9 +2,9 @@ public class Task {
     private String taskName;
     private boolean doneStatus;
     
-    public Task(String taskName) {
+    public Task(String taskName, boolean doneStatus) {
         this.taskName = taskName;
-        this.doneStatus = false;
+        this.doneStatus = doneStatus;
     }
 
     protected void setDone() {
