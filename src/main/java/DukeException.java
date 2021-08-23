@@ -30,12 +30,21 @@ public class DukeException extends Exception {
                 errorMessage = "Cannot parse date format!\n"
                         + "Proper format: dd/MM/yyyy HHmm";
                 break;
+            case "file not found":
+                errorMessage = "Saved file not found!\n"
+                        + "Creating empty list...";
+                break;
+            case "invalid task":
+                errorMessage = "This task does not exist!\n"
+                        + "Please enter a valid task to be deleted.";
+                break;
             default:
                 errorMessage = "unknown error message";
         }
     }
 
-    public String getErrorMessage() {
+    @Override
+    public String getMessage() {
         return errorMessage;
     }
 }
