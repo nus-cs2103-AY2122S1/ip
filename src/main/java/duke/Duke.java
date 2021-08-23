@@ -9,7 +9,7 @@ import java.util.Scanner;
  * 'delete' and 'bye'
  */
 public class Duke {
-    private static String format;
+    private static String format = "yyyy-MM-dd"; //default date
     private MyList list;
     private Storage storage;
 
