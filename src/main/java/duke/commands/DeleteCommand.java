@@ -56,10 +56,9 @@ public class DeleteCommand extends Command {
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         }
         System.out.println("-------------------------------------");
+
         try {
-            List<String> content = new ArrayList<>(Files.readAllLines(Path.of("data/tasks.txt"), StandardCharsets.UTF_8));
-            content.remove(deleteIndex - 1);
-            Files.write(Path.of("data/tasks.txt"), content, StandardCharsets.UTF_8);
+            storage.delete(deleteIndex);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -8,6 +8,11 @@ import duke.tasks.Event;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -58,5 +63,22 @@ public class Storage {
             fw.write("E | 0 | " + event.getDescription() + " | " + event.getAt() + "\n");
             fw.close();
         }
+    }
+
+    public void delete(int deleteIndex) throws IOException {
+        List<String> content = new ArrayList<>(Files.readAllLines(Path.of("data/tasks.txt"), StandardCharsets.UTF_8));
+        content.remove(deleteIndex - 1);
+        Files.write(Path.of("data/tasks.txt"), content, StandardCharsets.UTF_8);
+    }
+
+    public void markAsDone(int doneIndex) throws IOException {
+        List<String> fileContent = new ArrayList<>(Files.readAllLines(Path.of("data/tasks.txt"), StandardCharsets.UTF_8));
+
+        String oldLine = fileContent.get(doneIndex - 1);
+        StringBuilder newLine = new StringBuilder(oldLine);
+        newLine.setCharAt(4, '1');
+
+        fileContent.set(doneIndex - 1, newLine.toString());
+        Files.write(Path.of("data/tasks.txt"), fileContent, StandardCharsets.UTF_8);
     }
 }

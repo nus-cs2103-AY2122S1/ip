@@ -52,14 +52,7 @@ public class DoneCommand extends Command {
         System.out.println("-------------------------------------");
 
         try {
-            List<String> fileContent = new ArrayList<>(Files.readAllLines(Path.of("data/tasks.txt"), StandardCharsets.UTF_8));
-
-            String oldLine = fileContent.get(doneIndex - 1);
-            StringBuilder newLine = new StringBuilder(oldLine);
-            newLine.setCharAt(4, '1');
-
-            fileContent.set(doneIndex - 1, newLine.toString());
-            Files.write(Path.of("data/tasks.txt"), fileContent, StandardCharsets.UTF_8);
+            storage.markAsDone(doneIndex);
         } catch (IOException e) {
             e.printStackTrace();
         }
