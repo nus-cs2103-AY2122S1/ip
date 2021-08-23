@@ -103,6 +103,32 @@ public class Bern {
                 + (arListTask.size() == 1 ? " task in the list" : " tasks in the list");
     }
 
+    public enum Command {
+        DONE, DEADLINE, EVENT, TODO, BYE, LIST, DELETE, INVALID
+    }
+
+    public static String getReply(Command c, String input, ArrayList<Task> arListTask) throws BernException {
+        switch (c) {
+            case DONE:
+                return ifDone(input, arListTask);
+            case DEADLINE:
+                return ifDeadline(input, arListTask);
+            case EVENT:
+                return ifEvent(input, arListTask);
+            case TODO:
+                return ifToDo(input, arListTask);
+            case BYE:
+                return ifBye(input, arListTask);
+            case LIST:
+                return ifList(input, arListTask);
+            case DELETE:
+                return ifDelete(input, arListTask);
+            case INVALID:
+                throw new InvalidCommandException(input);
+        }
+        return "";
+    }
+
     public static void main(String[] args) {
         Scanner myObj = new Scanner(System.in);
 
@@ -114,22 +140,22 @@ public class Bern {
             String input = myObj.nextLine();
             try {
                 if (input.length() >= 4 && input.substring(0, 4).equals("done")){
-                    System.out.println(ifDone(input, arListTask));
+                    System.out.println(getReply(Command.DONE, input, arListTask));
                 } else if (input.length() >= 8 && input.substring(0, 8).equals("deadline")) {
-                    System.out.println(ifDeadline(input, arListTask));
+                    System.out.println(getReply(Command.DEADLINE, input, arListTask));
                 } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
-                    System.out.println(ifEvent(input, arListTask));
+                    System.out.println(getReply(Command.EVENT, input, arListTask));
                 } else if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
-                    System.out.println(ifToDo(input, arListTask));
+                    System.out.println(getReply(Command.TODO, input, arListTask));
                 } else if (input.equals("bye")){
-                    System.out.println(ifBye(input, arListTask));
+                    System.out.println(getReply(Command.BYE, input, arListTask));
                     break;
                 } else if (input.equals("list")){
-                    System.out.println(ifList(input, arListTask));
+                    System.out.println(getReply(Command.LIST, input, arListTask));
                 } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")){
-                    System.out.println(ifDelete(input, arListTask));
+                    System.out.println(getReply(Command.DELETE, input, arListTask));
                 } else {
-                    throw new InvalidCommandException(input);
+                    getReply(Command.INVALID, input, arListTask);
                 }
             } catch (BernException e) {
                 System.out.println(e.getMessage());
