@@ -7,7 +7,7 @@ public abstract class Task {
     protected String desc;
     protected boolean done;
     protected String details = new String();
-    protected LocalDateTime dateTime = LocalDateTime.now();
+    protected DukeDateTime dateTime1;
     public final static DukeException FORMAT_EXCEPTION = 
             new DukeException("I don't understand this entry, enter 'help' to learn the correct formatting!");
 
@@ -30,6 +30,7 @@ public abstract class Task {
         done = true;
     }
     
+    /*
     protected String formatTime() {
         if (details == null && dateTime == null) return null;
         if (dateTime == null) return details;
@@ -39,6 +40,7 @@ public abstract class Task {
         if (details == null) return dt;
         return String.format("%s -- %s", dt, details);
     }
+     */
     
     abstract void addTime(String time) throws DukeException;
     

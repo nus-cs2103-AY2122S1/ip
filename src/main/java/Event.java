@@ -4,7 +4,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private LocalTime end;
+    private DukeDateTime end;
 
     public Event() {}
     public Event(String desc) {
@@ -16,8 +16,8 @@ public class Event extends Task {
             if (args.length < 4) throw new DukeException("Error reading DB");
             super.desc = args[0];
             super.done = done;
-            super.dateTime = LocalDateTime.parse(args[1], formatter);
-            end = LocalTime.parse(args[2]);
+            super.dateTime1 = DukeDateTime.parse(args[1]);
+            end = DukeDateTime.parse(args[2]);
         } catch (DateTimeException e) {
             throw new DukeException("Error reading DB");
         }
@@ -28,8 +28,8 @@ public class Event extends Task {
         if (args.length == 0) return;
         try {
             String[] parts = args[0].split("~");
-            dateTime = LocalDateTime.parse(parts[0].trim(), formatter);
-            if (parts.length > 1) end = LocalTime.parse(parts[1].trim());
+            dateTime1 = DukeDateTime.parse(parts[0].trim());
+            if (parts.length > 1) end = DukeDateTime.parse(parts[1].trim());
             if (args.length > 1) details = args[1];
         } catch (DateTimeException e) {
             details = rawArgs;
@@ -40,9 +40,11 @@ public class Event extends Task {
         DateTimeFormatter d = DateTimeFormatter.ofPattern("HH:mm");
         // return String.format("E | %d | %s | %s", super.done ? 1 : 0, super.desc, time);
         return String.format("E | %d | %s | %s | %s | %s", super.done ? 1 : 0, super.desc, 
-                dateTime.format(Task.formatter), end.format(d), details);
+                dateTime1.format(DukeDateTime.Format.DATE_LONG, DukeDateTime.Format.PRINT_TIME), 
+                end.format(DukeDateTime.Format.DATE_LONG, DukeDateTime.Format.TIME), details);
     }
 
+    /*
     @Override
     protected String formatTime() {
         if (details == null && dateTime == null) return null;
@@ -54,10 +56,12 @@ public class Event extends Task {
         if (details == null) return dt;
         return String.format("%s -- %s", dt, details);
     }
+     */
 
     @Override
     public String toString() {
-        String timeSeq = formatTime();
+        String timeSeq = dateTime1.format() + " to " + end.format();
+        String desc = (details.equals(new String()) ? details : ", " + details);
         return "[E]" + super.toString() + (timeSeq != null ? String.format(" (at: %s)", timeSeq) : "");
     }
 }
