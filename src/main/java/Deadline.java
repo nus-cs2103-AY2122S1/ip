@@ -7,7 +7,14 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = LocalDate.parse(by);
+
+        if (by.contains("-")) {
+            this.by = LocalDate.parse(by);
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+            this.by = LocalDate.parse(by, formatter);
+        }
+
     }
 
     @Override

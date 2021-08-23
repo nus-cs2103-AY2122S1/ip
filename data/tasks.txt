@@ -1,3 +1,5 @@
 [T][ ] eat lunch
 [T][X] dinner
 [E][ ] meeting (at: 2pm)
+[D][ ] brunch (by: Aug 5 2021)
+[D][ ] have fun (by: Aug 21 2021)
