@@ -43,6 +43,10 @@ public class Kermit {
         return parsedDate;
     }
 
+    private static void formatAndPrintText(String text) {
+        System.out.println(formatText(text));
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String command = "";
@@ -67,7 +71,7 @@ public class Kermit {
         final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
         final String goodbyeText = "Bye. Hope to see you again soon!";
 
-        System.out.println(formatText(introductionText));
+        formatAndPrintText(introductionText);
 
         while (true) {
             try {
@@ -131,48 +135,48 @@ public class Kermit {
                 // Quit program
                 switch (command) {
                     case "bye":
-                        System.out.println(formatText(goodbyeText));
+                        formatAndPrintText(goodbyeText);
                         return;
                     // List out all objects that user added to list
                     case "list":
-                        System.out.println(formatText(listText + "\n" + list));
+                        formatAndPrintText(listText + "\n" + list);
                         break;
                     // Add objects to list
                     case "done":
                         index = Integer.parseInt(description) - 1;
                         // Get task name
                         String taskText = list.completeTask(index);
-                        System.out.println(formatText(completeTaskText + "\n" + taskText));
+                        formatAndPrintText(completeTaskText + "\n" + taskText);
                         break;
                     // Add new todo task
                     case "todo":
                         Task newToDo = new ToDos(description);
                         list.add(newToDo);
-                        System.out.println(formatText(printAddTask(newToDo, list)));
+                        formatAndPrintText(printAddTask(newToDo, list));
                         break;
                     // Add new deadline task
                     case "deadline":
                         Task newDeadline = new Deadline(description, formatDate(flagArguments));
                         list.add(newDeadline);
-                        System.out.println(formatText(printAddTask(newDeadline, list)));
+                        formatAndPrintText(printAddTask(newDeadline, list));
                         break;
 
                     // Add new event task
                     case "event":
                         Task newEvent = new Event(description, formatDate(flagArguments));
                         list.add(newEvent);
-                        System.out.println(formatText(printAddTask(newEvent, list)));
+                        formatAndPrintText(printAddTask(newEvent, list));
                         break;
                     // Delete task
                     case "delete":
                         index = Integer.parseInt(description) - 1;
                         Task deletedTask = list.deleteTask(index);
-                        System.out.println(formatText(printDeleteTask(deletedTask, list)));
+                        formatAndPrintText(printDeleteTask(deletedTask, list));
                 }
             } catch (KermitException e) {
-                System.out.println(formatText(e.getMessage()));
+                formatAndPrintText(e.getMessage());
             } catch (DateTimeParseException e) {
-                System.out.println(formatText(invalidTimeText));
+                formatAndPrintText(invalidTimeText);
             }
         }
     }
