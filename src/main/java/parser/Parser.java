@@ -1,15 +1,16 @@
-package service;
+package parser;
 
 import exception.DukeException;
+import service.TaskList;
 import task.Deadline;
 import task.Event;
 import utils.Command;
+import utils.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +20,8 @@ import java.util.List;
  */
 public class Parser {
 
+    private final DateTimeFormat dateTimeFormat = DateTimeFormat.generate();
+    
     // Error message formats.
     private static final String EMPTY_COMMAND_ERROR_MESSAGE = "Instruction cannot be empty.";
     private static final String NOT_AN_INTEGER_ERROR_MESSAGE = "'%s' is not an integer.";
@@ -52,33 +55,34 @@ public class Parser {
         LocalTime time;
         
         switch (command) {
-            case LIST:
-                return taskList.getTaskList();
-            case DONE:
-                taskNumber = extractNumber(userInput, command);
-                return taskList.updateTaskAsDone(taskNumber);
-            case DELETE:
-                taskNumber = extractNumber(userInput, command);
-                return taskList.deleteTask(taskNumber);
-            case TODO:
-                desc = extractDesc(userInput, command);
-                return taskList.addToDoTask(desc);
-            case EVENT:
-                desc = extractDesc(userInput, command);
-                dateTime = extractDateTime(userInput, command);
-                date = extractDate(dateTime);
-                time = extractTime(dateTime);
-                return taskList.addEventTask(desc, date, time);
-            case DEADLINE:
-                desc = extractDesc(userInput, command);
-                dateTime = extractDateTime(userInput, command);
-                date = extractDate(dateTime);
-                time = extractTime(dateTime);
-                return taskList.addDeadlineTask(desc, date, time);
-            case EMPTY:
-                throw new DukeException(EMPTY_COMMAND_ERROR_MESSAGE);
-            default: // INVALID
-                throw new DukeException(UNKNOWN_COMMAND_ERROR_MESSAGE);
+        case LIST:
+            return taskList.getTaskList();
+        case DONE:
+            taskNumber = extractNumber(userInput, command);
+            return taskList.updateTaskAsDone(taskNumber);
+        case DELETE:
+            taskNumber = extractNumber(userInput, command);
+            return taskList.deleteTask(taskNumber);
+        case TODO:
+            desc = extractDesc(userInput, command);
+            return taskList.addToDoTask(desc);
+        case EVENT:
+            desc = extractDesc(userInput, command);
+            dateTime = extractDateTime(userInput, command);
+            date = extractDate(dateTime);
+            time = extractTime(dateTime);
+            return taskList.addEventTask(desc, date, time);
+        case DEADLINE:
+            desc = extractDesc(userInput, command);
+            dateTime = extractDateTime(userInput, command);
+            date = extractDate(dateTime);
+            time = extractTime(dateTime);
+            return taskList.addDeadlineTask(desc, date, time);
+        case EMPTY:
+            throw new DukeException(EMPTY_COMMAND_ERROR_MESSAGE);
+        case INVALID: // fall through
+        default:
+            throw new DukeException(UNKNOWN_COMMAND_ERROR_MESSAGE);
         }
     }
 
@@ -100,24 +104,6 @@ public class Parser {
     }
 
     /**
-     * DEPRECIATE
-     * Parses the user's input to return a String parameter for the command.
-     *
-     * @param userInput user input
-     * @param command command to be executed with specified arrangement of parameters
-     * @return a String parameter
-     * @throws DukeException if userInput is of invalid format
-     */
-    public String parseToString(String userInput, Command command) throws DukeException {
-        String userParam = extractParameters(userInput, command);
-
-        if (userParam.isBlank()) {
-            throw new DukeException(String.format(EMPTY_PARAM_TO_COMMAND_ERROR_MESSAGE, command));
-        }
-        return userParam;
-    }
-
-    /**
      * Parses the user's input to return a String array for the command.
      *
      * @param userInput user input
@@ -134,7 +120,6 @@ public class Parser {
         } else if (command.equals(Command.DEADLINE)) {
             key += Deadline.SPLIT_WORD;
         }
-
         String[] parameters = userParams.split(key); // pattern applied many times as possible
         if (parameters.length < 1 || parameters[0].isBlank()) {
             throw new DukeException(String.format(IMPROPER_FORMATTED_ERROR_MESSAGE, command, key));
@@ -164,27 +149,7 @@ public class Parser {
     }
     
     public LocalDate extractDate(String[] dateTime) throws DukeException {
-        List<DateTimeFormatter> dateFormatterList = new ArrayList<>();
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd/M/yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy/M/dd"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd-M-yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy-M-dd"));
-
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd/MMMM/yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy/MMMM/dd"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd-MMMM-yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy-MMMM-dd"));
-
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd.MMMM.yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy.MMMM.dd"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd.MMMM.yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy.MMMM.dd"));
-        
+        List<DateTimeFormatter> dateFormatterList = dateTimeFormat.getDateFormatterList();
         for (DateTimeFormatter formatter: dateFormatterList) {
             try {
                 return LocalDate.parse(dateTime[0], formatter);
@@ -199,17 +164,7 @@ public class Parser {
         if (dateTime.length == 1) {
             return null;
         }
-        
-        List<DateTimeFormatter> timeFormatterList = new ArrayList<>();
-        timeFormatterList.add(DateTimeFormatter.ofPattern("HH:mm"));
-        timeFormatterList.add(DateTimeFormatter.ofPattern("hh:mm a"));
-        
-        timeFormatterList.add(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        timeFormatterList.add(DateTimeFormatter.ofPattern("hh:mm:ss a"));
-        
-        timeFormatterList.add(DateTimeFormatter.ofPattern("HHmm"));
-        timeFormatterList.add(DateTimeFormatter.ofPattern("hhmm a"));
-
+        List<DateTimeFormatter> timeFormatterList = dateTimeFormat.getTimeFormatterList();
         String timeString = dateTime[0].toUpperCase();
         for (DateTimeFormatter formatter: timeFormatterList) {
             try {
@@ -231,7 +186,6 @@ public class Parser {
      */
     public int extractNumber(String userInput, Command command) throws DukeException {
         String userParam = extractParameters(userInput, command);
-
         try {
             return Integer.parseInt(userParam);
         } catch (NumberFormatException exception) {
