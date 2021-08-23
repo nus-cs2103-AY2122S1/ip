@@ -1,5 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+
 public class Deadline extends Task{
     String by;
+    LocalDate byDate;
 
     public static Deadline fromCmd(String[] cmd_args) throws DukeException{
         if (cmd_args.length != 2 ){
@@ -31,6 +36,12 @@ public class Deadline extends Task{
     Deadline(String name, boolean done, String by) {
         super(name);
         this.by = by;
+        try{
+            this.byDate = LocalDate.parse(by.strip());
+        } catch (DateTimeParseException e){
+            this.byDate = null;
+        }
+        System.out.println(this.byDate);
     }
 
 
@@ -43,8 +54,13 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + (this.done? "[X] " : "[ ] ")
-                + this.name
-                +String.format("(by:%s)",this.by);
+        String out =  "[D]" + (this.done? "[X] " : "[ ] ")
+                + this.name;
+        if (this.byDate == null){
+            out += String.format("(by: %s)",this.by);
+        } else{
+            out += String.format(" by: %d days left",LocalDate.now().until(this.byDate,ChronoUnit.DAYS));
+        }
+        return out;
     }
 }
