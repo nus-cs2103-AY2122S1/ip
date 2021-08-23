@@ -11,6 +11,7 @@
 		 'todo': add a todo task in your task list
 		 'deadline': add a deadline task in your task list
 		 'event': add an event task in your task list
+		 'delete': delete a task from your task list
 		 'bye': exit chat
 	What can I do for you?
 	____________________________________________________________

@@ -20,4 +20,9 @@ public class Deadline extends Task {
         String[] arrString = this.deadline.split(" ", 2);
         return "[D]" + super.toString() + "(" + arrString[0] + "by: " + arrString[1] + ")";
     }
+
+    @Override
+    public String saveToFile() {
+        return "D | " + super.saveToFile() + "|" + this.deadline;
+    }
 }

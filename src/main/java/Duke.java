@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Represents a Duke chatbot that can add tasks
@@ -10,6 +13,7 @@ public class Duke {
     private boolean isOpen;
     private final String dukeLogo;
     private TaskList listOfTasks;
+    private final String FILE_PATH = "./data/duke.txt";
 
     private Duke() { // constructor for Duke chat bot object
         this.dukeLogo = "      ____        _        \n" +
@@ -54,13 +58,14 @@ public class Duke {
 
     private void openDukeChatBot() {
         this.isOpen = true;
-        System.out.println(chatBotMessage(this.dukeLogo + "\n" +
+        System.out.println(formatDukeMessage(this.dukeLogo + "\n" +
                 "\tHELLO! I'm Duke\n" +
                 "\tTo ease your experience, here are some commands you can type: \n" +
                     "\t\t 'list': view all tasks in your task list\n" +
                     "\t\t 'todo': add a todo task in your task list\n" +
                     "\t\t 'deadline': add a deadline task in your task list\n" +
                     "\t\t 'event': add an event task in your task list\n" +
+                    "\t\t 'delete': delete a task from your task list\n" +
                     "\t\t 'bye': exit chat\n" +
                 "\tWhat can I do for you?\n"
 
@@ -70,7 +75,7 @@ public class Duke {
 
     private void closeDukeChatBot() {
         this.isOpen = false;
-        System.out.println(chatBotMessage("\tBye. Hope to see you again soon!\n"));
+        System.out.println(formatDukeMessage("\tBye. Hope to see you again soon!\n"));
     }
 
     private Task addTaskToList(String item) {
@@ -79,7 +84,7 @@ public class Duke {
         return task;
     }
 
-    private String chatBotMessage(String reply) {
+    private String formatDukeMessage(String reply) {
         return "\t____________________________________________________________\n" +
                 reply +
                 "\t____________________________________________________________\n";
@@ -107,6 +112,61 @@ public class Duke {
         return this.listOfTasks.deleteTask(i);
     }
 
+    private void saveTasks() throws IOException {
+        StringBuffer tasksToWrite = new StringBuffer();
+        int len = this.listOfTasks.getTotalNumber();
+
+        for (int i = 0; i < len; i++) {
+            tasksToWrite.append(this.listOfTasks.getTask(i).saveToFile() + "\n");
+        }
+
+        FileWriter fileWriter = new FileWriter(this.FILE_PATH);
+        fileWriter.write(tasksToWrite.toString());
+        fileWriter.close();
+    }
+
+    private void loadSavedTasks() throws IOException, DukeUnableLoadTask {
+        File f = new File(this.FILE_PATH);
+        Scanner sc = new Scanner(f); // Scanner with file as source
+
+        int i = 1; // index counter
+
+        while (sc.hasNextLine()) {
+            String entry = sc.nextLine();
+            String[] pastEntry = entry.split(" \\| ");
+            String taskType = pastEntry[0];
+            String isDone = pastEntry[1];
+
+            switch (taskType) {
+            case "T":
+                this.addTaskToList("todo " + pastEntry[2]);
+                if (isDone.equals("1")) {
+                    this.listOfTasks.setTaskAsDone(i);
+                }
+                break;
+            case "D":
+                this.addTaskToList("deadline " + pastEntry[2] + " /by " + pastEntry[3]);
+                if (isDone.equals("1")) {
+                    this.listOfTasks.setTaskAsDone(i);
+                }
+                break;
+            case "E":
+                this.addTaskToList("event " + pastEntry[2] + " /at " + pastEntry[3]);
+                if (isDone.equals("1")) {
+                    this.listOfTasks.setTaskAsDone(i);
+                }
+                break;
+            default:
+                throw new DukeUnableLoadTask();
+            }
+            i++;
+        }
+
+
+    }
+
+
+
     /**
      * Function that runs to execute the chatbot Duke
      * @param args user inputs
@@ -115,6 +175,22 @@ public class Duke {
         Duke d = new Duke();
         d.openDukeChatBot();
         Scanner sc = new Scanner(System.in);
+        File output = new File(d.FILE_PATH);
+        if (!output.isFile()) {
+            output.getParentFile().mkdirs(); // if user does not have existing file path
+            try {
+                output.createNewFile();
+            } catch (IOException e) {
+                System.out.println(d.formatDukeMessage(e.getMessage()));
+            }
+        }
+
+        try {
+            d.loadSavedTasks();
+        } catch (IOException | DukeUnableLoadTask e) {
+            System.err.println(e.getMessage());
+        }
+
         while (d.isOpen) {
             try {
                 String userInput = sc.nextLine().strip();
@@ -124,36 +200,39 @@ public class Duke {
                 Action actionCommand = Action.getAction(firstWord);
 
                 switch (actionCommand) {
-                    case BYE:
-                        d.closeDukeChatBot();
-                        sc.close();
-                        break;
-                    case LIST:
-                        System.out.println(d.chatBotMessage(d.listOfTasks.toString()));
-                        break;
-                    case DONE:
-                        d.listOfTasks.setTaskAsDone(d.getSecondNum(userInput));
-                        System.out.println(d.chatBotMessage("\tNice! I've marked this task as done:\n" +
-                                "\t\t" + d.listOfTasks.getTask(d.getSecondNum(userInput) - 1) + "\n"));
-                        break;
-                    case DELETE:
-                        Task taskRemoved = d.deleteTask(d.getSecondNum(userInput));
-                        System.out.println(d.chatBotMessage("\tNoted. I've removed this task:\n" +
-                                "\t\t" + taskRemoved + "\n" +
-                                "\tNow you have " + d.listOfTasks.getTotal() + " in your list.\n"
-                        ));
-                        break;
-                    case TASK:
-                        System.out.println(d.chatBotMessage("\tGot it. I've added this task:\n" +
-                                "\t\t" + d.addTaskToList(userInput) + "\n" +
-                                "\tNow you have " + d.listOfTasks.getTotal() + " in your list.\n"
-                        ));
-                        break;
-                    case ERRORS:
-                        throw new DukeIncorrectCommandWord(new IllegalArgumentException());
+                case BYE:
+                    d.closeDukeChatBot();
+                    sc.close();
+                    break;
+                case LIST:
+                    System.out.println(d.formatDukeMessage(d.listOfTasks.toString()));
+                    break;
+                case DONE:
+                    d.listOfTasks.setTaskAsDone(d.getSecondNum(userInput));
+                    System.out.println(d.formatDukeMessage("\tNice! I've marked this task as done:\n" +
+                            "\t\t" + d.listOfTasks.getTask(d.getSecondNum(userInput) - 1) + "\n"));
+                    d.saveTasks();
+                    break;
+                case DELETE:
+                    Task taskRemoved = d.deleteTask(d.getSecondNum(userInput));
+                    System.out.println(d.formatDukeMessage("\tNoted. I've removed this task:\n" +
+                            "\t\t" + taskRemoved + "\n" +
+                            "\tNow you have " + d.listOfTasks.getTotal() + " in your list.\n"
+                    ));
+                    d.saveTasks();
+                    break;
+                case TASK:
+                    System.out.println(d.formatDukeMessage("\tGot it. I've added this task:\n" +
+                            "\t\t" + d.addTaskToList(userInput) + "\n" +
+                            "\tNow you have " + d.listOfTasks.getTotal() + " in your list.\n"
+                    ));
+                    d.saveTasks();
+                    break;
+                case ERRORS:
+                    throw new DukeIncorrectCommandWord(new IllegalArgumentException());
                 }
-            } catch (DukeException e) {
-                System.err.println(d.chatBotMessage(e.getMessage() + "\n"));
+            } catch (DukeException | IOException e) {
+                System.err.println(d.formatDukeMessage(e.getMessage() + "\n"));
             }
         }
     }
