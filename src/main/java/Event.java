@@ -1,3 +1,6 @@
+/**
+ * Represents an event task with a time and a name.
+ */
 public class Event extends Task {
 	private String time;
 

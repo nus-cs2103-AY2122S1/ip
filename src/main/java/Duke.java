@@ -1,19 +1,19 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Represents a Personal Assistant Chatbot that helps a person to keep track of various things.
+ */
 public class Duke {
     private final static String LINE = "\t----------------------------------------------------\n";
     private Storage storage;
     private static TaskList tasks;
-    // private Ui ui;
 
     public Duke(String filePath) {
-        // ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadTasks());
         } catch (DukeException e) {
-            // ui.showLoadingError();
             tasks = new TaskList(new ArrayList<Task>());
         }
     }

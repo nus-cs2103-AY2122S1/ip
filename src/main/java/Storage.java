@@ -4,7 +4,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * Represents the storage of tasks. Storage is able to load and save tasks.
+ */
 public class Storage {
 	private final String filepath;
 	

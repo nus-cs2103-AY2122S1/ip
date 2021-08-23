@@ -1,3 +1,6 @@
+/**
+ * Represents a task with a deadline to be completed by.
+ */
 public class Deadline extends Task {
 	private String deadline="unknown";
 

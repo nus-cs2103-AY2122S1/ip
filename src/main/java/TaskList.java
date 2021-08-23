@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * Represents the list of tasks a user has.
+ * Tasks can be added, deleted, completed or simply printed out.
+ */
 public class TaskList {
 	protected static ArrayList<Task> tasks;
 
