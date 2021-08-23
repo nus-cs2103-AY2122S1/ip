@@ -1,4 +1,4 @@
-public class Task {
+public class Task implements {
     protected String description;
     protected boolean isDone;
 

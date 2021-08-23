@@ -1,8 +1,6 @@
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 enum Activity {
@@ -11,7 +9,7 @@ enum Activity {
 
 public class Duke {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         final String INTRO = "Hello! I'm Duke\n" +
                 "What can I do for you?";
@@ -19,13 +17,20 @@ public class Duke {
         final String OUTRO = "Bye. Hope to see you again soon!";
         Scanner sc = new Scanner(System.in);
 
-        final String FILE_NAME = "C:/Users/chocm/OneDrive/Documents/ip/data/duke.txt";
+        final String FILE_NAME = "data/duke.txt";
 
         ArrayList<Task> lst = new ArrayList<>();
-        String command;
 
+        String command;
         System.out.println(INTRO);
-        while (true) {
+
+        try {
+            lst = readFromFile(FILE_NAME);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
+        while (sc.hasNextLine()) {
             try {
                 command = sc.nextLine();
 
@@ -70,7 +75,6 @@ public class Duke {
                     writeToFile(FILE_NAME, lst);
                     break;
                 }
-
                 case List: {
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < lst.size(); i++) {
@@ -80,7 +84,6 @@ public class Duke {
                     writeToFile(FILE_NAME, lst);
                     break;
                 }
-
                 case TODO: {
                     String desc = command.substring(4);
 
@@ -95,7 +98,6 @@ public class Duke {
                     writeToFile(FILE_NAME, lst);
                     break;
                 }
-
                 case EVENT: {
                     String desc = command.substring(5);
 
@@ -104,14 +106,13 @@ public class Duke {
                     }
 
                     int escapeIndex = command.lastIndexOf("/");
-                    Deadline deadline = new Deadline(command.substring(5, escapeIndex - 1), command.substring(escapeIndex + 4));
+                    Deadline deadline = new Deadline(command.substring(6, escapeIndex - 1), command.substring(escapeIndex + 4));
                     lst.add(deadline);
                     System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
                             + "Now you have %d tasks in this list.\n", lst.size());
                     writeToFile(FILE_NAME, lst);
                     break;
                 }
-
                 case DELETE: {
                     int index = Integer.parseInt(command.substring(7)) - 1;
 
@@ -125,14 +126,12 @@ public class Duke {
                     writeToFile(FILE_NAME, lst);
                     break;
                 }
-
                 case NORMAL: {
                     lst.add(new Task(command));
                     System.out.println("added: " + command);
                     writeToFile(FILE_NAME, lst);
                     break;
                 }
-
                 case DEADLINE: {
                     String desc = command.substring(8);
 
@@ -160,8 +159,71 @@ public class Duke {
     private static void writeToFile(String filePath, ArrayList<Task> lst) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < lst.size(); i++) {
-            fw.write(lst.get(i).getStatusAndDescription() + "\n");
+            Task task = lst.get(i);
+            String status = task.isDone ? "1" : "0";
+            String date = "";
+            String activity = "";
+            String information = "";
+            if (task instanceof Event) {
+                activity = "E";
+                information = task.getDescription();
+                date = ((Event) task).getDate();
+                String desc = String.format("%s | %s | %s | %s\n",activity, status, information,date);
+                fw.write(desc);
+            } else if (task instanceof Deadline) {
+                activity = "D";
+                information = task.getDescription();
+                date = ((Deadline) task).getDate();
+                String desc = String.format("%s | %s | %s | %s\n",activity, status, information, date);
+                fw.write(desc);
+            } else if (task instanceof ToDo) {
+                activity = "T";
+                information = task.getDescription();
+                String desc = String.format("%s | %s | %s\n",activity, status, information);
+                fw.write(desc);
+            }
+//
         }
         fw.close();
+    }
+
+    private static ArrayList<Task> readFromFile(String filePath) throws FileNotFoundException {
+        Scanner s = new Scanner(new File(filePath));
+        ArrayList<Task> lst = new ArrayList<>();
+        while (s.hasNext()) {
+            String text = s.nextLine();
+            String activity = text.substring(0, 1);
+            String status = text.substring(4, 5);
+            String desc, date;
+
+            if (activity.equals("T")) {
+                desc = text.substring(8);
+                ToDo todo = new ToDo(desc);
+                if (status.equals("1")) {
+                    todo.setDone();
+                }
+                lst.add(todo);
+            } else {
+                int thirdBarId = text.indexOf('|', 7);
+                desc = text.substring(8, thirdBarId - 1);
+                date = text.substring(thirdBarId + 2);
+
+                if (activity.equals("D")) {
+                    Deadline deadline = new Deadline(desc, date);
+                    if (status.equals("1")) {
+                        deadline.setDone();
+                    }
+                    lst.add(deadline);
+                } else {
+                    Event event = new Event(desc, date);
+                    if (status.equals("1")) {
+                        event.setDone();
+                    }
+                    lst.add(event);
+                }
+            }
+        }
+        System.out.println("Your file has been loaded");
+        return lst;
     }
 }

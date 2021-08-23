@@ -1,4 +1,4 @@
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String description;
     protected boolean isDone;
     final String DEADLINE = "[D]";
@@ -11,11 +11,12 @@ public class Deadline extends Task{
         this.date = date;
     }
 
-    public String getDeadline() {
+    public String getDate() {
         return this.date;
     }
 
     @Override
-    public String getStatusAndDescription() {return DEADLINE + this.getStatusIcon() + " " + this.getDescription() + " (by: " + this.date + ")"; }
+    public String getStatusAndDescription() {return DEADLINE + this.getStatusIcon() + " " + this.getDescription() + " (by: "
+            + this.date + ")"; }
 
 }

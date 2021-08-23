@@ -1,20 +1,21 @@
-public class Event extends Task{
+public class Event extends Task {
     protected String description;
     protected boolean isDone;
     final String EVENT = "[E]";
-    protected String event;
+    protected String date;
 
-    public Event(String description, String event) {
+    public Event(String description, String date) {
         super(description);
         this.description = description;
         this.isDone = false;
-        this.event = event;
+        this.date = date;
     }
 
-    public String getEvent() {
-        return this.event;
+    public String getDate() {
+        return this.date;
     }
 
     @Override
-    public String getStatusAndDescription() {return EVENT + this.getStatusIcon() + " " + this.getDescription() + " (at: " + this.event + ")"; }
+    public String getStatusAndDescription() {return EVENT + this.getStatusIcon() + " " + this.getDescription() + " (at: "
+            + this.date + ")"; }
 }
