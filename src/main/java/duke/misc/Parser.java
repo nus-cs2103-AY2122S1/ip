@@ -13,7 +13,6 @@ import duke.task.Task;
 import duke.task.Todo;
 
 public class Parser {
-
     public Task makeTask(String input) throws DukeException {
         int idx = input.indexOf(' ');
         String name = "";
