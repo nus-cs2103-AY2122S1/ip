@@ -5,8 +5,10 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.EmptyTaskDescriptionException;
+import duke.exception.MissingKeywordException;
 import duke.exception.MissingTaskIndexException;
 import duke.exception.TimeNotSpecifiedException;
 import duke.exception.UnrecognisedCommandException;
@@ -29,9 +31,11 @@ public class Parser {
      * @throws EmptyTaskDescriptionException If the task description is not provided.
      * @throws TimeNotSpecifiedException If the date is not provided.
      * @throws DateTimeParseException If the date cannot be parsed into a LocalDate instance.
+     * @throws MissingKeywordException If the keyword is missing.
      */
     public Command parse(String command) throws UnrecognisedCommandException, MissingTaskIndexException,
-            EmptyTaskDescriptionException, TimeNotSpecifiedException, DateTimeParseException {
+            EmptyTaskDescriptionException, TimeNotSpecifiedException, DateTimeParseException,
+            MissingKeywordException {
         if (command.equals("bye")) {
             return new ExitCommand();
         } else {
@@ -54,6 +58,11 @@ public class Parser {
                         throw new MissingTaskIndexException();
                     }
                     return new DeleteCommand(Integer.valueOf(wordsArray[1]) - 1);
+                } else if (wordsArray[0].equals("find")) {
+                    if (wordsArray.length != 2) {
+                        throw new MissingKeywordException();
+                    }
+                    return new FindCommand(wordsArray[1]);
                 } else if (wordsArray[0].equals("todo") || wordsArray[0].equals("event")
                         || wordsArray[0].equals("deadline")) {
                     // Declaring the variables required for creating a Task instance
