@@ -17,6 +17,8 @@ public abstract class Task {
 
     public abstract boolean isExpired();
 
+    public abstract TextColor getListColor();
+
     @Override
     public String toString() {
         return "[" + (done ? "X" : " ") + "] " + name;

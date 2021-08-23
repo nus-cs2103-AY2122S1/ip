@@ -1,3 +1,5 @@
+import org.w3c.dom.Text;
+
 import java.time.LocalDate;
 
 public class Deadline extends Task {
@@ -30,20 +32,21 @@ public class Deadline extends Task {
         return date.isBefore(LocalDate.now());
     }
 
+    @Override
+    public TextColor getListColor() {
+        return isDone()
+                ? TextColor.DEFAULT
+                : isToday()
+                ? TextColor.YELLOW
+                : isExpired()
+                ? TextColor.RED
+                : TextColor.DEFAULT;
+    }
+
     // prints in red if the deadline is expired, yellow if deadline is today
     @Override
     public String toString() {
-        String color = isDone()
-                ? ""
-                : isToday()
-                ? StringFormatter.ANSI_YELLOW
-                : isExpired()
-                ? StringFormatter.ANSI_RED
-                : "";
-
-        return color +
-                "[D] " + super.toString() + " (by: " + date + ")" +
-                (isToday() || isExpired() ? StringFormatter.ANSI_RESET : "");
+        return "[D] " + super.toString() + " (by: " + date + ")";
     }
 
     @Override

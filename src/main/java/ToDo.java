@@ -21,6 +21,12 @@ public class ToDo extends Task {
     }
 
     @Override
+    public TextColor getListColor() {
+        return TextColor.DEFAULT;
+    }
+
+    // prints in red if the deadline is expired, yellow if deadline is today
+    @Override
     public String toString() {
         return "[T] " + super.toString();
     }

@@ -1,90 +1,121 @@
 _________________________________________
-Hello! I'm iP Man.
-What can I do for you?
+[0mHello, I'm iP Man! How may I help you?
+[0m[0mSupported commands: [0m[0mbye, [0m[0mlist, [0m[0mtodo, [0m[0mdeadline, [0m[0mevent, [0m[0mdone, [0m[0mdelete, [0m
 _________________________________________
 
 _________________________________________
-Got it. I've added this task:
+[0mGot it. I've added this task:
   [T] [ ] hello
-Now you have 1 task in the list.
+Now you have 1 task in the list.[0m
 _________________________________________
 
+How can I help you?
 _________________________________________
-1. [T] [ ] hello
-_________________________________________
-
-_________________________________________
-Got it. I've added this task:
-  [D] [ ] hi (by: tomorrow)
-Now you have 2 tasks in the list.
+[0m1. [T] [ ] hello[0m
 _________________________________________
 
+How can I help you?
 _________________________________________
-1. [T] [ ] hello
-2. [D] [ ] hi (by: tomorrow)
-_________________________________________
-
-_________________________________________
-Got it. I've added this task:
-  [E] [ ] bye (at: tomorrow)
-Now you have 3 tasks in the list.
+[0mOops! Something went wrong :(
+[0m[31mPlease input your date in the format YYYY-MM-DD[0m
 _________________________________________
 
+How can I help you?
 _________________________________________
-1. [T] [ ] hello
-2. [D] [ ] hi (by: tomorrow)
-3. [E] [ ] bye (at: tomorrow)
-_________________________________________
-
-_________________________________________
-Nice! I've marked this task as done:
-  [T] [X] hello
+[0mGot it. I've added this task:
+  [D] [ ] far future (by: 2030-12-31)
+Now you have 2 tasks in the list.[0m
 _________________________________________
 
+How can I help you?
 _________________________________________
-1. [T] [X] hello
-2. [D] [ ] hi (by: tomorrow)
-3. [E] [ ] bye (at: tomorrow)
-_________________________________________
-
-_________________________________________
-Nice! I've marked this task as done:
-  [D] [X] hi (by: tomorrow)
+[0m1. [T] [ ] hello
+[0m[0m2. [D] [ ] far future (by: 2030-12-31)[0m
 _________________________________________
 
+How can I help you?
 _________________________________________
-1. [T] [X] hello
-2. [D] [X] hi (by: tomorrow)
-3. [E] [ ] bye (at: tomorrow)
-_________________________________________
-
-_________________________________________
-Noted! I've removed this task:
-  [D] [X] hi (by: tomorrow)
-Now you have 2 tasks in the list.
+[0mGot it. I've added this task:
+  [E] [ ] past (at: 2020-01-01)
+Now you have 3 tasks in the list.[0m
 _________________________________________
 
+How can I help you?
 _________________________________________
-1. [T] [X] hello
-2. [E] [ ] bye (at: tomorrow)
-_________________________________________
-
-_________________________________________
-Nice! I've marked this task as done:
-  [E] [X] bye (at: tomorrow)
+[0m1. [T] [ ] hello
+[0m[0m2. [D] [ ] far future (by: 2030-12-31)
+[0m[31m3. [E] [ ] past (at: 2020-01-01)[0m
 _________________________________________
 
+How can I help you?
 _________________________________________
-1. [T] [X] hello
-2. [E] [X] bye (at: tomorrow)
-_________________________________________
-
-_________________________________________
-Oops! Something went wrong :(
-[31mUnsupported operation[0m
+[0mNice! I've marked this task as done:
+  [T] [X] hello[0m
 _________________________________________
 
+How can I help you?
 _________________________________________
-Bye. Hope to see you again soon!
+[0m1. [T] [X] hello
+[0m[0m2. [D] [ ] far future (by: 2030-12-31)
+[0m[31m3. [E] [ ] past (at: 2020-01-01)[0m
+_________________________________________
+
+How can I help you?
+_________________________________________
+[0mNice! I've marked this task as done:
+  [D] [X] far future (by: 2030-12-31)[0m
+_________________________________________
+
+How can I help you?
+_________________________________________
+[0m1. [T] [X] hello
+[0m[0m2. [D] [X] far future (by: 2030-12-31)
+[0m[31m3. [E] [ ] past (at: 2020-01-01)[0m
+_________________________________________
+
+How can I help you?
+_________________________________________
+[0mNoted! I've removed this task:
+  [D] [X] far future (by: 2030-12-31)
+Now you have 2 tasks in the list.[0m
+_________________________________________
+
+How can I help you?
+_________________________________________
+[0m1. [T] [X] hello
+[0m[31m2. [E] [ ] past (at: 2020-01-01)[0m
+_________________________________________
+
+How can I help you?
+_________________________________________
+[0mNoted! I've removed all completed tasks.
+Now you have 1 task in the list.[0m
+_________________________________________
+
+How can I help you?
+_________________________________________
+[31m1. [E] [ ] past (at: 2020-01-01)[0m
+_________________________________________
+
+How can I help you?
+_________________________________________
+[0mNoted! I've removed all expired tasks.
+Now you have 0 tasks in the list.[0m
+_________________________________________
+
+How can I help you?
+_________________________________________
+[0mNo tasks yet![0m
+_________________________________________
+
+How can I help you?
+_________________________________________
+[0mOops! Something went wrong :(
+[0m[31mUnsupported command[0m
+_________________________________________
+
+How can I help you?
+_________________________________________
+[0mBye. Hope to see you again soon![0m
 _________________________________________
 

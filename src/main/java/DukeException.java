@@ -4,7 +4,8 @@ public class DukeException extends Exception {
     }
 
     public void displayError() {
-        Duke.printMessage("Oops! Something went wrong :(\n" +
-                StringFormatter.ANSI_RED + getMessage() + StringFormatter.ANSI_RESET);
+        Duke.ui.resetMessage();
+        Duke.ui.addMessage("Oops! Something went wrong :(\n", TextColor.DEFAULT);
+        Duke.ui.addMessage(getMessage(), TextColor.RED);
     }
 }

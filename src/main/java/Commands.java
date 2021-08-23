@@ -1,23 +1,25 @@
 public enum Commands {
-    EXIT ("bye"),
-    LIST ("list"),
-    TODO ("todo"),
-    DEADLINE ("deadline"),
-    EVENT ("event"),
-    DONE ("done"),
-    DELETE ("delete");
+    EXIT (new ExitCommand()),
+    LIST (new ListCommand()),
+    TODO (new ToDoCommand()),
+    DEADLINE (new DeadlineCommand()),
+    EVENT (new EventCommand()),
+    DONE (new DoneCommand()),
+    DELETE (new DeleteCommand());
 
-    private final String command;
-    Commands(String command) {
+    // make an abstract command class,
+    // this enum is just a way to iterate through all the commands
+    // not sure if good practice lmao but sounds cool
+    private final Command command;
+    Commands(Command command) {
         this.command = command;
     }
 
-    public boolean isCommand(String input) {
-        return input.equals(command);
+    public boolean isCommand(String firstWord) {
+        return firstWord.equals(command.getCommandString());
     }
 
-    @Override
-    public String toString() {
+    public Command getCommand() {
         return command;
     }
 }
