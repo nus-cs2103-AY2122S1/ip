@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -12,9 +14,12 @@ public class Duchess {
     private static final String HORIZONTAL_BARS = "\n____________________________________________________________\n";
     /** The duchessList which holds the string stored by the user.*/
     private DuchessList duchessList;
+    /** The home of the user to search for existing Duchess.*/
+    private static final String DATA_FOLDER = "data";
+    private static final String FILE_LOCATION = "data/duchess.txt";
 
     /**
-     * The commands recognised by Duchess
+     * The commands recognised by Duchess.
      */
     private enum Command {
         BYE ("bye"),
@@ -32,11 +37,32 @@ public class Duchess {
     }
 
     /**
-     * Constructor for Duchess object
+     * Constructs a Duchess object.
      */
     public Duchess()
     {
-        duchessList = new DuchessList();
+        // Solution below adapted from https://www.w3schools.com/java/java_files_create.asp
+        try {
+            File savedDuchess = new File(FILE_LOCATION);
+            DuchessFileHandler.savedDuchess = savedDuchess;
+            if (savedDuchess.createNewFile()) {
+                System.out.println("File created: " + savedDuchess.getName());
+                duchessList = new DuchessList();
+            }
+            else {
+                duchessList = DuchessFileHandler.extractListFromFile(savedDuchess);
+                System.out.println("Found saved duchess file!");
+            }
+        } catch (IOException e) {
+            // Directory does not exist
+            System.out.println("Directory does not exist, creating one now.");
+            File dir = new File(DATA_FOLDER);
+            if (!dir.exists())
+                dir.mkdir();
+            File newDuchess = new File(FILE_LOCATION);
+            DuchessFileHandler.savedDuchess = newDuchess;
+            duchessList = new DuchessList();
+        }
     }
 
     public static void main(String[] args) {
@@ -48,8 +74,8 @@ public class Duchess {
     }
 
     /**
-     * Prints to System.out fancily including horizontal bars ontop and bottom
-     * @param input string to be printed fancily
+     * Prints to System.out fancily including horizontal bars ontop and bottom.
+     * @param input String to be printed fancily.
      */
     public static void prettyPrint(String input)
     {
@@ -57,8 +83,8 @@ public class Duchess {
     }
 
     /**
-     * Gets input from user and PrettyPrints the corresponding response
-     * @param sc scanner to be reused
+     * Gets input from user and PrettyPrints the corresponding response.
+     * @param sc Scanner to be reused.
      */
     public void handleInput(Scanner sc)
     {
@@ -66,30 +92,35 @@ public class Duchess {
         try {
             Command c = checkPrefix(input);
             switch (c) {
-                case BYE:
-                    prettyPrint("I bid thee farewell.");
-                    return; // stop prompting user input
-                case LIST:
-                    prettyPrint(duchessList.printList());
-                    break;
-                case DONE:
-                    handleDone(input);
-                    break;
-                case TODO:
-                    handleTodo(input);
-                    break;
-                case DEADLINE:
-                    handleDeadline(input);
-                    break;
-                case EVENT:
-                    handleEvent(input);
-                    break;
-                case DELETE:
-                    handleDelete(input);
-                    break;
-                case INVALID:
-                    printError();
-                    break;
+            case BYE:
+                prettyPrint("I bid thee farewell.");
+                return; // stop prompting user input
+            case LIST:
+                prettyPrint(duchessList.printList());
+                break;
+            case DONE:
+                handleDone(input);
+                DuchessFileHandler.writeToFile(duchessList);
+                break;
+            case TODO:
+                handleTodo(input);
+                DuchessFileHandler.writeToFile(duchessList);
+                break;
+            case DEADLINE:
+                handleDeadline(input);
+                DuchessFileHandler.writeToFile(duchessList);
+                break;
+            case EVENT:
+                handleEvent(input);
+                DuchessFileHandler.writeToFile(duchessList);
+                break;
+            case DELETE:
+                handleDelete(input);
+                DuchessFileHandler.writeToFile(duchessList);
+                break;
+            case INVALID:
+                printError();
+                break;
             }
         } catch (DuchessException d) {
             prettyPrint(d.getMessage());
@@ -99,9 +130,9 @@ public class Duchess {
     }
 
     /**
-     * Handles the logic for marking a task as done
-     * @param input the user given input
-     * @throws DuchessException the exception thrown when input does not match the done format
+     * Handles the logic for marking a task as done.
+     * @param input The user given input.
+     * @throws DuchessException Exception thrown when input does not match the done format.
      */
     public void handleDone(String input) throws DuchessException {
         String index = input.split(" ", 2)[1];
@@ -125,9 +156,9 @@ public class Duchess {
     }
 
     /**
-     * Handles the logic for checking and creating ToDo tasks
-     * @param input the user given input
-     * @throws DuchessException the exception thrown when input does not match the todo format
+     * Handles the logic for checking and creating ToDo tasks.
+     * @param input The user given input.
+     * @throws DuchessException Exception thrown when input does not match the todo format.
      */
     public void handleTodo(String input) {
         String task = input.split(" ", 2)[1];
@@ -141,9 +172,9 @@ public class Duchess {
     }
 
     /**
-     * Handles the logic for checking and creating Deadline tasks
-     * @param input the user given input
-     * @throws DuchessException the exception thrown when input does not match the deadline format
+     * Handles the logic for checking and creating Deadline tasks.
+     * @param input The user given input.
+     * @throws DuchessException Exception thrown when input does not match the deadline format.
      */
     public void handleDeadline(String input) throws DuchessException {
         String invalidMessage = "The command \"deadline\" should be followed by " +
@@ -166,9 +197,9 @@ public class Duchess {
     }
 
     /**
-     * Handles the logic for checking and creating Event tasks
-     * @param input the user given input
-     * @throws DuchessException the exception thrown when input does not match the event format
+     * Handles the logic for checking and creating Event tasks.
+     * @param input The user given input.
+     * @throws DuchessException Exception thrown when input does not match the event format.
      */
     public void handleEvent(String input) throws DuchessException {
         String invalidMessage = "The command \"event\" should be followed by " +
@@ -196,9 +227,9 @@ public class Duchess {
     }
 
     /**
-     * Handles the logic fpr checking and deleting tasks
-     * @param input the user given input
-     * @throws DuchessException the exception thrown when input does not match the deletion format
+     * Handles the logic fpr checking and deleting tasks.
+     * @param input The user given input.
+     * @throws DuchessException Exception thrown when input does not match the deletion format.
      */
     public void handleDelete(String input) throws DuchessException {
         String index = input.split(" ", 2)[1];
@@ -220,7 +251,7 @@ public class Duchess {
     }
 
     /**
-     * Prints a message given for invalid inputs
+     * Prints a message given for invalid inputs.
      */
     public void printError()
     {
@@ -228,10 +259,10 @@ public class Duchess {
     }
 
     /**
-     * Checks if a given string is present at the front of another string
-     * @param input the string to be checked against
-     * @throws DuchessException the exception thrown when the prefix is preceded by an empty string
-     * @return the prefix enum present at the front of the string
+     * Checks if a given string is present at the front of another string.
+     * @param input The string to be checked against.
+     * @throws DuchessException  Exception thrown when the prefix is preceded by an empty string.
+     * @return The prefix enum present at the front of the string.
      */
     public Command checkPrefix(String input) throws DuchessException {
         String[] parts = input.split(" ", 2);
