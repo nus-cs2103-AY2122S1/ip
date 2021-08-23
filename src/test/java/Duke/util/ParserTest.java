@@ -1,15 +1,15 @@
-package Duke.util;
+package duke.util;
 
-import Duke.command.*;
+import duke.command.*;
 
-import Duke.exception.DukeException;
+import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     @Test
-    public void testParserReturnExitCommand(){
+    public void testParseCommandString_exitCommand_returnExitCommand(){
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
         try {
@@ -23,7 +23,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParserReturnInvalidCommand(){
+    public void testParseCommandString_invalidCommand_returnInvalidCommand(){
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
         try {
@@ -37,7 +37,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParserReturnAddCommandForTodo(){
+    public void testParseCommandString_todoTask_returnAddCommand(){
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
         try {
@@ -51,7 +51,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParserReturnAddCommandForDeadline(){
+    public void testParseCommandString_deadlineTask_returnAddCommand(){
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
         try {
@@ -65,7 +65,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParserReturnAddCommandForEvent(){
+    public void testParseCommandString_eventTask_returnAddCommand(){
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
         try {
@@ -79,7 +79,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParserDescriptionParser(){
+    public void testParseCommandString_invalidTask_returnInvalidCommand(){
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
         try {
@@ -93,7 +93,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParserReturnMarkCommand(){
+    public void testParseCommandString_markTask_returnMarkCommand(){
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
         try {
@@ -107,7 +107,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParserReturnDeleteCommand(){
+    public void testParseCommandString_deleteTask_returnDeleteCommand(){
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
         try {
@@ -121,7 +121,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParserIntegerParser(){
+    public void testParseCommandString_invalidInteger_returnInvalidCommand(){
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
         try {

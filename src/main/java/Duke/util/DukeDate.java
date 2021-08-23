@@ -1,4 +1,4 @@
-package Duke.util;
+package duke.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Jar. Create a JAR file
+ * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
  *
  * Description:
  * Encapsulates the DukeDate Class where it stores the duration/dates

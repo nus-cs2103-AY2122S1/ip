@@ -1,6 +1,6 @@
-package Duke.util;
+package duke.util;
 
-import Duke.exception.FileWritingException;
+import duke.exception.FileWritingException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

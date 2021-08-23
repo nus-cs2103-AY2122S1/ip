@@ -1,15 +1,15 @@
-package Duke.util;
+package duke.util;
 
-import Duke.exception.DukeException;
-import Duke.exception.MissingArgumentException;
-import Duke.exception.IndexOutOfRangeException;
-import Duke.exception.InvalidArgumentException;
-import Duke.exception.InvalidCommandException;
+import duke.exception.DukeException;
+import duke.exception.MissingArgumentException;
+import duke.exception.IndexOutOfRangeException;
+import duke.exception.InvalidArgumentException;
+import duke.exception.InvalidCommandException;
 
-import Duke.task.Deadline;
-import Duke.task.Event;
-import Duke.task.Task;
-import Duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Jar. Create a JAR file
+ * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
  *
  * Description:
  * Encapsulates the task List which contains a list of tasks

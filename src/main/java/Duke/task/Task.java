@@ -1,10 +1,10 @@
-package Duke.task;
+package duke.task;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Jar. Create a JAR file
+ * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
  *
  * Description:
  * Encapsulates the Task Class which contains a task description
@@ -15,11 +15,11 @@ package Duke.task;
 public class Task {
 
     private String description;
-    private boolean completed;
+    private boolean isCompleted;
 
     public Task(String description) {
         this.description = description;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
@@ -31,10 +31,10 @@ public class Task {
      */
     public boolean completeTask() {
 
-        if (this.completed) {
+        if (this.isCompleted) {
             return false;
         } else {
-            this.completed = true;
+            this.isCompleted = true;
             return true;
         }
 
@@ -47,7 +47,7 @@ public class Task {
      */
     public boolean isCompleted() {
 
-        return this.completed;
+        return this.isCompleted;
     }
 
     /**
@@ -62,7 +62,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String taskStatus = completed ? "X" : " ";
+        String taskStatus = isCompleted ? "X" : " ";
         return "[" + taskStatus + "]" + " " + description;
     }
 

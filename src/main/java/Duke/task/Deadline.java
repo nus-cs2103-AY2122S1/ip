@@ -1,12 +1,12 @@
-package Duke.task;
+package duke.task;
 
-import Duke.util.DukeDate;
+import duke.util.DukeDate;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Jar. Create a JAR file
+ * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
  *
  * Description:
  * Extends the Task Class which where it is a task that needs

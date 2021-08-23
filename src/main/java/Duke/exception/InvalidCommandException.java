@@ -1,10 +1,10 @@
-package Duke.exception;
+package duke.exception;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Jar. Create a JAR file
+ * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
  *
  * Description:
  * Class that encapsulates an invalid command exception that might be

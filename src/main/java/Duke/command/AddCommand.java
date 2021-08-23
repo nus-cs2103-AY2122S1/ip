@@ -1,16 +1,16 @@
-package Duke.command;
+package duke.command;
 
-import Duke.exception.DukeException;
+import duke.exception.DukeException;
 
-import Duke.util.Tasklist;
-import Duke.util.Ui;
-import Duke.util.Store;
+import duke.util.Tasklist;
+import duke.util.Ui;
+import duke.util.Store;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Jar. Create a JAR file
+ * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
  *
  * Description:
  * Class that encapsulates the add task command inputted by the user

@@ -1,6 +1,6 @@
-package Duke.util;
+package duke.util;
 
-import Duke.exception.DukeException;
+import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TasklistTest {
 
     @Test
-    public void testAddTask(){
+    public void testAddTask_deadlineTask_returnSuccessMessage(){
         Tasklist temp = new Tasklist();
         String message = null;
         try {
@@ -24,7 +24,7 @@ public class TasklistTest {
     }
 
     @Test
-    public void testAddInvalidTask(){
+    public void testAddTask_invalidTask_returnInvalidCommandExceptionMessage(){
         Tasklist temp = new Tasklist();
         String message = null;
         try {
@@ -37,7 +37,7 @@ public class TasklistTest {
     }
 
     @Test
-    public void testDateParser(){
+    public void testAddTask_invalidDate_returnInvalidArgumentExceptionMessage(){
         Tasklist temp = new Tasklist();
         String message = null;
         try {
@@ -50,7 +50,7 @@ public class TasklistTest {
     }
 
     @Test
-    public void testDeleteTask(){
+    public void testDeleteTask_deleteTask_returnSuccessMessage(){
         Tasklist temp = new Tasklist();
         String message = null;
         try {
@@ -61,8 +61,8 @@ public class TasklistTest {
             message = e.toString();
         }
         String deleteMessage = "Noted. I've removed this task:\n"
-            + "  [E][ ] test123 (at: 24-Jul-2010 19:00 to 24-Dec-2010 00:00)\n"
-            + "Now you have 1 tasks in the list.";
+                + "  [E][ ] test123 (at: 24-Jul-2010 19:00 to 24-Dec-2010 00:00)\n"
+                + "Now you have 1 tasks in the list.";
         assertEquals(message, deleteMessage);
 
     }
@@ -77,8 +77,8 @@ public class TasklistTest {
         } catch (DukeException e) {
         }
         String successMessage = "1.[T][ ] test1\n"
-            + "2.[D][ ] test12 (by: 24-Jul-2010 19:00)\n"
-            + "3.[E][ ] test123 (at: 24-Jul-2010 19:00 to 24-Dec-2010 00:00)";
+                + "2.[D][ ] test12 (by: 24-Jul-2010 19:00)\n"
+                + "3.[E][ ] test123 (at: 24-Jul-2010 19:00 to 24-Dec-2010 00:00)";
         assertEquals(temp.toString(), successMessage);
 
     }

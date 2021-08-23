@@ -1,16 +1,17 @@
-package Duke.util;
+package duke.util;
 
-import Duke.command.*;
-import Duke.exception.DukeException;
-import Duke.exception.InvalidArgumentException;
-import Duke.exception.InvalidCommandException;
-import Duke.exception.MissingArgumentException;
+import duke.command.*;
+
+import duke.exception.DukeException;
+import duke.exception.InvalidArgumentException;
+import duke.exception.InvalidCommandException;
+import duke.exception.MissingArgumentException;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Jar. Create a JAR file
+ * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
  *
  * Description:
  * Encapsulates the parser where it parses the inputted command from the user and runs

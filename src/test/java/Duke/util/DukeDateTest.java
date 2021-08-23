@@ -1,6 +1,5 @@
-package Duke.util;
+package duke.util;
 
-import Duke.util.DukeDate;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
