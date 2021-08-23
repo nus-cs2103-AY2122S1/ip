@@ -90,25 +90,25 @@ public class Duke {
             try {
                 if (inputArr.length == 1) {
                     switch (inputArr[0]) {
-                        case "bye":
-                            bye = true;
-                            Duke.sayBye();
-                            break;
-                        case "list":
-                            printLine(tList.getTasks());
-                            break;
-                        case "todo":
-                            throw new DukeCommandException("todo");
-                        case "deadline":
-                            throw new DukeCommandException("deadline");
-                        case "done":
-                            throw new DukeCommandException("done");
-                        case "event":
-                            throw new DukeCommandException("event");
-                        case "delete":
-                            throw new DukeCommandException("delete");
-                        default:
-                            throw new DukeCommandException(inputArr[0]);
+                    case "bye":
+                        bye = true;
+                        Duke.sayBye();
+                        break;
+                    case "list":
+                        printLine(tList.getTasks());
+                        break;
+                    case "todo":
+                        throw new DukeCommandException("todo");
+                    case "deadline":
+                        throw new DukeCommandException("deadline");
+                    case "done":
+                        throw new DukeCommandException("done");
+                    case "event":
+                        throw new DukeCommandException("event");
+                    case "delete":
+                        throw new DukeCommandException("delete");
+                    default:
+                        throw new DukeCommandException(inputArr[0]);
                     }
                 } else {
                     switch (inputArr[0]) {
