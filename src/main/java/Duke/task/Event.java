@@ -24,6 +24,18 @@ public class Event extends Task {
 
     }
 
+    /**
+     * Getter that returns the duration of the event
+     *
+     * @return DukeDate returns the duration of the event
+     *
+     */
+    public DukeDate getDuration() {
+
+        return this.duration;
+
+    }
+
     @Override
     public String toString() {
         String taskStatus = this.isCompleted() ? "X" : " ";

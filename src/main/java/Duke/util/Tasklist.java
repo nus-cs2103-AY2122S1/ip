@@ -106,7 +106,7 @@ public class Tasklist {
     /**
      * Adds tasks read from store in hard drive
      *
-     * @param storeTask Task that was saved in hard drive to be loaded into current task list
+     * @param storeTask Task that was saved in hard drive to be loaded into  current task list
      */
     public void addTask(Task storeTask) {
         tasks.add(storeTask);
