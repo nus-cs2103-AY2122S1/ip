@@ -1,15 +1,12 @@
 package duke;
 
 import duke.exception.DukeException;
-import duke.exception.InvalidDateException;
+import duke.exception.InvalidFormatException;
 import duke.exception.InvalidIndexException;
-import duke.exception.InvalidNoDateException;
+import duke.exception.InvalidDateException;
 import duke.exception.InvalidCommandException;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -122,8 +119,8 @@ public class Duke {
     // Adds task without deadline to list and notifies user.
     private void addTodo (String text) throws DukeException {
         // Check format. Throw exception if invalid.
-        if (!correctNoDateFormat(text)) {
-            throw new InvalidNoDateException();
+        if (!text.matches("(.*) (.*)")) {
+            throw new InvalidFormatException();
         }
 
         String taskName = text.substring(text.indexOf(' ') + 1);
@@ -139,8 +136,8 @@ public class Duke {
     // Adds task with deadline to list and notifies user.
     private void addDeadline(String text) throws DukeException {
         // Check format. Throw exception if invalid.
-        if (!correctDateFormat(text)) {
-            throw new InvalidDateException();
+        if (!text.matches("(.*) (.*)/(.*)")) {
+            throw new InvalidFormatException();
         }
 
         // Split the command by the first '/'.
@@ -152,10 +149,14 @@ public class Duke {
         String taskName = str[0].substring(str[0].indexOf(' ') + 1).trim();
         String taskDate = str[1].trim();
 
+        // Check date validity.
+        if (!DateTime.isValidDate(taskDate)) {
+            throw new InvalidDateException();
+        }
+
         // Create and add task.
         Deadline task = new Deadline(taskName, taskDate);
         taskList.add(task);
-
         // Message to notify user.
         printText(ADD_MSG + task + NUMTASK_MSG + taskList.size());
     }
@@ -163,8 +164,8 @@ public class Duke {
     // Adds event to list and notifies user.
     private void addEvent(String text) throws DukeException {
         // Check format. Throw exception if invalid.
-        if (!correctDateFormat(text)) {
-            throw new InvalidDateException();
+        if (!text.matches("(.*) (.*)/(.*)")) {
+            throw new InvalidFormatException();
         }
 
         // Split the command by the first '/'.
@@ -176,24 +177,17 @@ public class Duke {
         String taskName = str[0].substring(str[0].indexOf(' ') + 1).trim();
         String taskDate = str[1].trim();
 
+        // Check date validity.
+        if (!DateTime.isValidDate(taskDate)) {
+            throw new InvalidDateException();
+        }
+
         // Create and add task.
         Event task = new Event(taskName, taskDate);
         taskList.add(task);
 
         // Message to notify user.
         printText(ADD_MSG + task + NUMTASK_MSG + taskList.size());
-    }
-
-    // Checks if the command with date is in valid format.
-    private boolean correctDateFormat (String text) {
-        String regex = "(.*) (.*)/(.*)";
-        return text.matches(regex);
-    }
-
-    // Checks if the command with no date is in valid format.
-    private boolean correctNoDateFormat (String text) {
-        String regex = "(.*) (.*)";
-        return text.matches(regex);
     }
 
     // Processes text to find out what command user has issued.
