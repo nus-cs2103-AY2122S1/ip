@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 public class DukeTest {
     @Test
-    public void deadline_test(){
+    public void test_create_deadline() {
         Deadline dl = new Deadline("return book ", LocalDateTime.of(2021,
                                         Month.JULY, 29, 12, 0, 0));
 
@@ -20,7 +20,7 @@ public class DukeTest {
         assertEquals(dl.save(), "D | 1 | return book | 2021 Jul 29 12.00 PM");
     }
     @Test
-    public void event_test(){
+    public void test_create_event() {
         Event ev = new Event("project meeting ", LocalDateTime.of(2021,
                 Month.AUGUST, 2, 14, 0, 0));
 
@@ -30,7 +30,7 @@ public class DukeTest {
         assertEquals(ev.save(), "E | 1 | project meeting | 2021 Aug 2 2.00 PM");
     }
     @Test
-    public void todo_test(){
+    public void test_create_todo() {
         Todo td = new Todo("read book");
 
         assertEquals(td.toString(), "[T][ ] read book");
