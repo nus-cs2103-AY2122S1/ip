@@ -1,10 +1,25 @@
+package duke.parser;
+
+import static duke.common.Formats.DT_INPUT_FORMAT;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Parser {
-    private final static DateTimeFormatter DT_INPUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy h:mma");
+import duke.DukeException;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.CompleteCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.ListCommand;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
+
+
+public class Parser {
     public enum CommandEnum {
         EXIT("bye"),
         LIST("list"),
@@ -64,8 +79,8 @@ public class Parser {
             if (tokens.length == 1) {
                 throw DukeException.emptyTime();
             }
-            LocalDateTime deadline = LocalDateTime.parse(tokens[1], DT_INPUT_FORMAT);
-            Deadline event = new Deadline(false, tokens[0], deadline);
+            LocalDateTime deadline = LocalDateTime.parse(deadlineTokens[1], DT_INPUT_FORMAT);
+            Deadline event = new Deadline(false, deadlineTokens[0], deadline);
 
             return new AddCommand(event);
         }
@@ -74,8 +89,8 @@ public class Parser {
                 throw DukeException.emptyDesc();
             }
             String[] eventTokens = remainder.split(" /at ", 2);
-            LocalDateTime startTime = LocalDateTime.parse(tokens[1], DT_INPUT_FORMAT);
-            Event event = new Event(false, tokens[0], startTime);
+            LocalDateTime startTime = LocalDateTime.parse(eventTokens[1], DT_INPUT_FORMAT);
+            Event event = new Event(false, eventTokens[0], startTime);
 
             return new AddCommand(event);
         }
@@ -83,15 +98,5 @@ public class Parser {
             throw DukeException.invalidCommand();
             //System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         }
-    }
-
-    public static String arrayToString(ArrayList<Task> list) {
-        String answer = "";
-        int counter = 1;
-        for (Task item : list) {
-            answer += String.format("%d: %s\n", counter, item.toString());
-            counter++;
-        }
-        return answer;
     }
 }

@@ -1,14 +1,16 @@
+package duke;
+d
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.logging.Logger;
+
+import duke.commands.Command;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
-    private final static DateTimeFormatter DT_INPUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy h:mma");
-
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
@@ -27,7 +29,7 @@ public class Duke {
     public void run() {
         boolean isActive = true;
 
-        String welcomeMsg = "Hey, I'm Duke.\n"
+        String welcomeMsg = "Hey, I'm duke.Duke.\n"
                 + "What's up?\n";
         String exitMsg = "Bye! Hope I helped!\n"
                 + "See you next time :)\n";

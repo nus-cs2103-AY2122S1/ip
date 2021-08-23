@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeException extends Exception {
     private static final String INVALID_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     private static final String EMPTY_DESC = "☹ OOPS!!! The description of a task cannot be empty.";

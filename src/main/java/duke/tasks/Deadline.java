@@ -1,10 +1,11 @@
+package duke.tasks;
+
+import static duke.common.Formats.DT_OUTPUT_FORMAT;
+import static duke.common.Formats.DT_DATA_FORMAT;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
-    private static final DateTimeFormatter DT_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy h:mma");
-    private static final DateTimeFormatter DT_DATA_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy h:mma");
-
     private LocalDateTime deadline;
 
 
