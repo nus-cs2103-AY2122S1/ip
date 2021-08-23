@@ -1,13 +1,10 @@
 package duke.task;
 
 /**
- * Encapsulates event date.
- *
- * @author limzk126
- * @version Level-7
+ * Event class which encapsulates event date/time.
  */
 public class Event extends Task {
-    protected DateTime at;
+    private DateTime at;
 
     /**
      * Constructor for Event class.
@@ -34,7 +31,7 @@ public class Event extends Task {
     }
 
     /**
-     * Formats task's data into a string for storage in hard disk
+     * Formats task's data into a string for hard drive storage
      * and returns it.
      *
      * @return String containing task's data.
@@ -45,6 +42,11 @@ public class Event extends Task {
                 + " // " + at.getDate();
     }
 
+    /**
+     * Overrides Task class's toString method.
+     *
+     * @return A String Describing details of Event class.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at.toString() + ")\n";

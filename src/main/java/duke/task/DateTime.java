@@ -5,27 +5,53 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * DateTime class which encapsulates a task's date and time. It also enables
+ * the date and time to be reformatted.
+ */
 public class DateTime {
     static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("hh:mm");
 
-    protected LocalDate date;
-    protected LocalTime time;
+    private LocalDate date;
+    private LocalTime time;
 
+    /**
+     * Constructor for DateTIme class.
+     *
+     * @param date The date in YYYY-MM-dd format.
+     */
     DateTime(String date) {
         this.date = LocalDate.parse(date);
     }
 
+    /**
+     * Constructor for DateTime class.
+     *
+     * @param date The date in yyyy-MM-dd format.
+     * @param time The time in hh:mm format.
+     */
     DateTime(String date, String time) {
         this.date = LocalDate.parse(date);
         this.time = LocalTime.parse(time);
     }
 
-    // returns original date
+    /**
+     * Returns original date used to create the DateTime class.
+     *
+     * @return String of original date.
+     */
     public String getDate() {
         return date.toString();
     }
 
+    /**
+     * Checks if date if in valid format. Returns true if yes and false
+     * otherwise.
+     *
+     * @param date The time.
+     * @return The boolean value.
+     */
     public static boolean isValidDate(String date) {
         try {
             DATE_FORMATTER.parse(date);
@@ -35,6 +61,13 @@ public class DateTime {
         return true;
     }
 
+    /**
+     * Checks if time if in valid format. Returns true if yes and false
+     * otherwise.
+     *
+     * @param time The time.
+     * @return The boolean value.
+     */
     public static boolean isValidTime(String time) {
         try {
             TIME_FORMATTER.parse(time);
@@ -44,6 +77,11 @@ public class DateTime {
         return true;
     }
 
+    /**
+     * Overrides Object class's toString method.
+     *
+     * @return The String representation of the date in d MMM yyy format.
+     */
     @Override
     public String toString() {
         return date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));

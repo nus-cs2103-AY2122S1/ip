@@ -12,7 +12,17 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Parser class to handle user commands.
+ */
 public class Parser {
+    /**
+     * Creates a Task object according to user command.
+     *
+     * @param input User's command input.
+     * @return Respective Task object.
+     * @throws DukeException In case of errors.
+     */
     public Task makeTask(String input) throws DukeException {
         int idx = input.indexOf(' ');
         String name = "";
@@ -45,7 +55,13 @@ public class Parser {
         }
     }
 
-    // Take in command, parse it and then executes.
+    /**
+     * Determines the action to be executed according to user command.
+     *
+     * @param input User's command input.
+     * @param tl TaskList which action is executed on.
+     * @return Message according to what action is executed.
+     */
     public String execute(String input, TaskList tl) {
         int idx;
         String message = "";

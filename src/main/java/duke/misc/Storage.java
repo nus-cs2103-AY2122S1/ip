@@ -11,9 +11,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class to retrieve and store tasks in Duke.
+ */
 public class Storage {
     private String FILE_PATH = "C:\\Users\\Chu Heng 2\\Desktop\\cs2103T\\ip\\data\\duke.txt";
 
+    /**
+     * Reads data from duke.txt file.
+     *
+     * @return ArrayList of tasks.
+     * @throws IOException In case directory is invalid or file does not exist.
+     */
     public ArrayList<Task> readData() throws IOException {
         ArrayList<Task> al = new ArrayList<>();
         File f = new File(FILE_PATH);
@@ -44,6 +53,12 @@ public class Storage {
         return al;
     }
 
+    /**
+     * Writes data into duke.txt file.
+     *
+     * @param al The ArrayList to write from.
+     * @throws IOException In case directory is invalid or file does not exist.
+     */
     public void writeData(ArrayList<Task> al) throws IOException {
         try {
             File f = new File(FILE_PATH);
