@@ -1,7 +1,17 @@
 package duke;
 
+/**
+ * An exception class for us to handle all the different exceptions in the application
+ * while allowing the application to handle their respective error messages
+ */
 public class DukeException extends Exception {
     private final String errorMessage;
+
+    /**
+     * Class constructor specifying error type
+     *
+     * @param errorType The type of error to result in the correct error message
+     */
     public DukeException(String errorType) {
         switch (errorType) {
             case "invalid input":
@@ -45,6 +55,11 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * A method to obtain the error message from the DukeException.
+     *
+     * @return The requires error message.
+     */
     @Override
     public String getMessage() {
         return errorMessage;

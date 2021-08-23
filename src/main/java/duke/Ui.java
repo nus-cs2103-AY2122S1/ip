@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * The class responsible for all the text outputs in the application.
+ */
 public class Ui {
     private Scanner scanner;
     private final String welcome =  "                     ,,\n" +
@@ -38,26 +41,47 @@ public class Ui {
             + ".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.\n"
             + "What would you like me to add to the list?";
 
+    /**
+     * Class constructor for the Ui class.
+     */
     public Ui() {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Method to display the initial welcome message upon startup.
+     */
     public void showWelcome() {
         System.out.println(welcome);
     }
 
+    /**
+     * Method to wrap a given text in a frame.
+     *
+     * @param s The string to be wrapped.
+     */
     public void textFrame(String s) {
         System.out.println(".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.\n"
                 + s + "\n"
                 + ".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.");
     }
 
+    /**
+     * Method to wrap a given error in a frame.
+     *
+     * @param s Error string to be wrapped.
+     */
     public void errorFrame(String s) {
         System.out.println(".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.\n"
                 + s + "\n"
                 + ".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.");
     }
 
+    /**
+     * Method to read the user input.
+     *
+     * @return The user input in String format.
+     */
     public String readCommand() {
         return scanner.nextLine();
     }

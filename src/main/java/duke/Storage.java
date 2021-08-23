@@ -12,19 +12,40 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A Storage class that handles the loading and saving of list items in the program to the
+ * required data.txt file.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Class constructor specifying the file path for data.txt file.
+     *
+     * @param filePath the file path for data.txt file given as a string.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Method to initialize the Done state of the task.
+     *
+     * @param t The task to be initialized.
+     * @param s The initialization value. 0 is not done. 1 is done.
+     */
     private void initializeDone(Task t, String s) {
         if (s.equals("1")) {
             t.setDone();
         }
     }
 
+    /**
+     * Method to load the list items in data.txt file into the application.
+     *
+     * @return An ArrayList of type Task containing all the tasks saved in data.txt.
+     * @throws DukeException In the event that there are issues with the loading of the file.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskArr = new ArrayList<>();
         File file = new File(".\\src\\main\\data");
@@ -66,6 +87,11 @@ public class Storage {
         return taskArr;
     }
 
+    /**
+     * Method to save the current list of tasks into the data.txt file.
+     *
+     * @param t The list of tasks to be saved into the data.txt file.
+     */
     public void save(TaskList t) {
         try {
             File fOld = new File(filePath);
