@@ -1,3 +1,5 @@
+package meow;
+
 /**
  * Represents a specific task (an event) containing the description
  * and the starting and ending time of the task that the user wants
@@ -7,7 +9,7 @@ public class Event extends Task{
     protected String at;
 
     /**
-     * A public constructor to initialize an Event object.
+     * A public constructor to initialize an meow.Event object.
      */
     public Event(String description, String at) {
         super(description);
@@ -15,7 +17,7 @@ public class Event extends Task{
     }
 
     /**
-     * Returns the string representation of the Event object.
+     * Returns the string representation of the meow.Event object.
      */
     @Override
     public String toString() {

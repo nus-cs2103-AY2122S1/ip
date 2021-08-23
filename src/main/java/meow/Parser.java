@@ -1,3 +1,5 @@
+package meow;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -8,7 +10,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     /**
-     * A public constructor to initialize a Parser object.
+     * A public constructor to initialize a meow.Parser object.
      */
     public Parser() {
 
@@ -90,12 +92,12 @@ public class Parser {
     /**
      * Parses the command input by the user, interprets and returns
      * an array containing the content of the task as well as the
-     * date/time of the task to be completed (only for Deadline and Event).
+     * date/time of the task to be completed (only for meow.Deadline and meow.Event).
      *
      * @param task The content of the task in the command.
      * @param typeOfTask The type of task in the command.
      * @return An array containing the content of the task as well as the
-     * date/time of the task to be completed (only for Deadline and Event).
+     * date/time of the task to be completed (only for meow.Deadline and meow.Event).
      */
     public String[] getTaskAndDate(String task, Meow.Command typeOfTask) {
         String[] split;

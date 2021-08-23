@@ -1,3 +1,5 @@
+package meow;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -11,7 +13,7 @@ public class Deadline extends Task{
     protected String time;
 
     /**
-     * A public constructor to initialize a Deadline object.
+     * A public constructor to initialize a meow.Deadline object.
      */
     public Deadline(String description, LocalDate date, String time) {
         super(description);
@@ -20,7 +22,7 @@ public class Deadline extends Task{
     }
 
     /**
-     * Returns the string representation of the Deadline object.
+     * Returns the string representation of the meow.Deadline object.
      */
     @Override
     public String toString() {

@@ -1,3 +1,5 @@
+package meow;
+
 import java.util.List;
 
 /**
@@ -6,7 +8,7 @@ import java.util.List;
  */
 public class Ui {
     /**
-     * A public constructor to initialize an Ui object.
+     * A public constructor to initialize an meow.Ui object.
      */
     public Ui() {
 

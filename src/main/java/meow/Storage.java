@@ -1,3 +1,5 @@
+package meow;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,7 +19,7 @@ public class Storage {
     protected List<Task> tasksList = new ArrayList<>();
 
     /**
-     * A public constructor to initialize a Storage object.
+     * A public constructor to initialize a meow.Storage object.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -133,9 +135,9 @@ public class Storage {
     }
 
     /**
-     * Returns a list of Task objects stored in the local file.
+     * Returns a list of meow.Task objects stored in the local file.
      *
-     * @return A list of Task objects.
+     * @return A list of meow.Task objects.
      */
     public List<Task> getStorageTasksList() {
         return this.tasksList;

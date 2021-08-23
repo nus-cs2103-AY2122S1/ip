@@ -1,3 +1,5 @@
+package meow;
+
 /**
  * Represents a general task that the user wants to add
  * in his or her todo list.
@@ -7,7 +9,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * A public constructor to initialize a Task object.
+     * A public constructor to initialize a meow.Task object.
      */
     public Task(String description) {
         this.description = description;
@@ -23,14 +25,14 @@ public class Task {
     }
 
     /**
-     * Changes the isDone field of the Task object to true.
+     * Changes the isDone field of the meow.Task object to true.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Returns the string representation of the Task object.
+     * Returns the string representation of the meow.Task object.
      */
     @Override
     public String toString() {

@@ -1,3 +1,5 @@
+package meow;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,7 @@ public class TaskList {
     protected List<Task> tasksList;
 
     /**
-     * A public constructor to initialize a TaskList object which
+     * A public constructor to initialize a meow.TaskList object which
      * stores the content from the local file.
      */
     public TaskList(List tasksList) {
@@ -18,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * A public constructor to initialize an empty TaskList object.
+     * A public constructor to initialize an empty meow.TaskList object.
      */
     public TaskList() {
         this.tasksList = new ArrayList<>();
@@ -81,11 +83,11 @@ public class TaskList {
     }
 
     /**
-     * Adds a new Todo to the TaskList and returns the Todo
+     * Adds a new meow.Todo to the meow.TaskList and returns the meow.Todo
      * object added.
      *
      * @param todo The todo input by the user.
-     * @return The Todo object added.
+     * @return The meow.Todo object added.
      */
     public Todo addTodo(String todo) {
         Todo newTodo = new Todo(todo);
@@ -94,13 +96,13 @@ public class TaskList {
     }
 
     /**
-     * Adds a new Deadline to the TaskList and returns the Deadline
+     * Adds a new meow.Deadline to the meow.TaskList and returns the meow.Deadline
      * object added.
      *
      * @param deadline The deadline input by the user.
      * @param date The date of the deadline.
      * @param time The time of the deadline.
-     * @return The Deadline object added.
+     * @return The meow.Deadline object added.
      */
     public Deadline addDeadline(String deadline, LocalDate date, String time) {
         Deadline newDeadline = new Deadline(deadline, date, time);
@@ -109,12 +111,12 @@ public class TaskList {
     }
 
     /**
-     * Adds a new Event to the TaskList and returns the Event
+     * Adds a new meow.Event to the meow.TaskList and returns the meow.Event
      * object added.
      *
      * @param event The event input by the user.
      * @param at The time of the event.
-     * @return The Event object added.
+     * @return The meow.Event object added.
      */
     public Event addEvent(String event, String at) {
         Event newEvent = new Event(event, at);
@@ -123,9 +125,9 @@ public class TaskList {
     }
 
     /**
-     * Returns a list of Task objects stored in the TaskList object.
+     * Returns a list of meow.Task objects stored in the meow.TaskList object.
      *
-     * @return A list of Task objects.
+     * @return A list of meow.Task objects.
      */
     public List<Task> getTasksList() {
         return this.tasksList;

@@ -1,3 +1,5 @@
+package meow;
+
 abstract class MeowException extends Exception{
 }
 
