@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Class for Deadline, a child class of Task.
  * @author Liew Jian Hong
@@ -7,7 +10,7 @@ public class Deadline extends Task{
     /**
      * The date and time of the deadline.
      */
-    protected String by;
+    protected LocalDate date;
 
     /**
      * Constructor for a Deadline task.
@@ -15,7 +18,7 @@ public class Deadline extends Task{
      */
     public Deadline(String[] desc) {
         super(desc[1], false);
-        this.by = desc[2];
+        this.date = LocalDate.parse(desc[2]);
     }
 
     /**
@@ -24,6 +27,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")\n";
+        String dateString = this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        return "[D]" + super.toString() + " (by: " + dateString + ")\n";
     }
 }

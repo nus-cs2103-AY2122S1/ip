@@ -24,6 +24,7 @@ public class Parser {
             for (int i = 0; i < remainder.length(); i++) {
                 if (Character.toString(remainder.charAt(i)).equals("/")) {
                     separator = i;
+                    break;
                 }
             }
         }
@@ -32,6 +33,7 @@ public class Parser {
         } else {
             result[1] = remainder.substring(0, separator);
             result[2] = remainder.substring(separator + 4);
+            System.out.println(result[2]);
         }
         return result;
     }

@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+
 /**
  * Class for Event, a child class of Task.
  * @author Liew Jian Hong
@@ -6,7 +10,7 @@ public class Event extends Task{
     /**
      * The date and time of the event.
      */
-    protected String at;
+    protected LocalDate date;
 
     /**
      * Constructor for an Event task.
@@ -14,7 +18,7 @@ public class Event extends Task{
      */
     public Event(String[] desc) {
         super(desc[1], false);
-        this.at = desc[2];
+        this.date = LocalDate.parse(desc[2]);
     }
 
     /**
@@ -23,6 +27,7 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")\n";
+        String dateString = this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        return "[E]" + super.toString() + " (at: " + dateString + ")\n";
     }
 }
