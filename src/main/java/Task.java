@@ -28,7 +28,7 @@ public class Task {
                     throw new DukeException("Please provide a description of the deadline Sir/Mdm.");
                 }
                 String date = input.substring(index + 3).trim();
-                newTask = new Deadline(description, date);
+                newTask = Deadline.of(description, date);
                 break;
             }
             case EVENT: {
@@ -46,7 +46,7 @@ public class Task {
                     throw new DukeException("Please provide a description of the event Sir/Mdm.");
                 }
                 String date = input.substring(index + 3).trim();
-                newTask = new Event(description, date);
+                newTask = Event.of(description, date);
                 break;
             }
         }
@@ -71,5 +71,6 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
 
 }

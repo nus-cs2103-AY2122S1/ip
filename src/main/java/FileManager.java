@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,22 +19,26 @@ class FileManager {
                     String line = s.nextLine();
                     char typeOfTask = line.charAt(2);
                     if (typeOfTask == 'E') {
-                        String description = line.substring(10, 10 + line.substring(10).indexOf('|')).trim();
-                        String date = line.substring(line.lastIndexOf('|') + 1).trim();
-                        boolean isDone = line.charAt(6) == 'X';
-                        taskArrayList.add(new Event(description, date, isDone));
+                        String[] storedValues = line.substring(5).split("[|]", 5);
+                        boolean isDone = storedValues[0].trim().equals("X");
+                        boolean isDateOnly = storedValues[1].trim().equals("X");
+                        LocalDateTime startDate = LocalDateTime.parse(storedValues[2].trim());
+                        LocalDateTime endDate = LocalDateTime.parse(storedValues[3].trim());
+                        String description = storedValues[3].trim();
+                        taskArrayList.add(new Event(description, startDate, endDate, isDone, isDateOnly));
                     } else if (typeOfTask == 'D') {
-                        String description = line.substring(10, 10 + line.substring(10).indexOf('|')).trim();
-                        String date = line.substring(line.lastIndexOf('|') + 1).trim();
-                        boolean isDone = line.charAt(6) == 'X';
-                        taskArrayList.add(new Deadline(description, date, isDone));
+                        String[] storedValues = line.substring(5).split("[|]", 4);
+                        boolean isDone = storedValues[0].trim().equals("X");
+                        boolean isDateOnly = storedValues[1].trim().equals("X");
+                        LocalDateTime date = LocalDateTime.parse(storedValues[2].trim());
+                        String description = storedValues[3].trim();
+                        taskArrayList.add(new Deadline(description, date, isDone, isDateOnly));
                     } else {
-                        String description = line.substring(10);
-                        boolean isDone = line.charAt(6) == 'X';
+                        String[] storedValues = line.substring(5).split("[|]", 2);
+                        boolean isDone = storedValues[0].trim().equals("X");
+                        String description = storedValues[1].trim();
                         taskArrayList.add(new Todo(description, isDone));
                     }
-
-
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("Something went wrong: " + e.getMessage());
@@ -67,11 +72,12 @@ class FileManager {
             Task currentTask = taskArrayList.get(i);
             if (currentTask instanceof Event) {
                 Event event = (Event) currentTask;
-                text += String.format("| E | %s | %s | %s\n", event.isDone ? "X" : " ", event.description, event.date);
+                text += String.format("| E | %s | %s | %s | %s | %s\n", event.isDone ? "X" : " ",
+                        event.isDateOnly ? "X" : " ", event.startDateTime, event.endDateTime, event.description);
             } else if (currentTask instanceof Deadline) {
                 Deadline deadline = (Deadline) currentTask;
-                text += String.format("| D | %s | %s | %s\n", deadline.isDone ? "X" : " ", deadline.description,
-                        deadline.date);
+                text += String.format("| D | %s | %s | %s | %s\n", deadline.isDone ? "X" : " ",
+                        deadline.isDateOnly ? "X" : " ", deadline.date, deadline.description);
             } else {
                 Todo todo = (Todo) currentTask;
                 text += String.format("| T | %s | %s\n", todo.isDone ? "X" : " ", todo.description);
