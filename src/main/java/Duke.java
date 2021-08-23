@@ -1,55 +1,57 @@
+import exceptions.*;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Duke {
-    private static final String HELLO = "\nHello! I'm Duke\nWhat can I do for you?\n";
-    private static final String LINE = "=======================================================";
-    private static final String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String BYE = "Bye. Hope to see you again soon!\n";
 
-    private static final String TODO_FORMAT = "\nPlease use the following format:\ntodo [todo_description]";
-    private static final String DEADLINE_FORMAT = "\nPlease use the following format:\n" +
-            "deadline [deadline_description] /by [deadline_date]";
-    private static final String EVENT_FORMAT = "\nPlease use the following format:\n" +
-            "event [event_description] /at [event_date_and_time]";
-
-    private final ArrayList<Task> taskList = new ArrayList<>();
+    private ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         Duke chatbot = new Duke();
-        System.out.println(logo + HELLO + LINE);
-        chatbot.start();
-    }
-
-    public void start() {
-        Scanner sc = new Scanner(System.in);
-        String userInput = sc.nextLine();
+        System.out.println(Constants.logo + Constants.HELLO + Constants.LINE);
         try {
-            while (!userInput.trim().equalsIgnoreCase("bye")) {
-                if (userInput.trim().equalsIgnoreCase("list")) {
-                    printList(taskList);
-                } else if (userInput.trim().split("\\s")[0].equalsIgnoreCase("done")) {
-                    completeTask(userInput.trim());
-                } else if (userInput.trim().split("\\s")[0].equalsIgnoreCase("delete")) {
-                    deleteTask(userInput.trim());
-                } else {
-                    categoriseTask(userInput.trim());
-                }
-                userInput = sc.nextLine();
-            }
-            System.out.println(BYE + LINE);
-            sc.close();
-        } catch (DukeException ex) {
-            System.out.println(ex.getMessage());
-            System.out.println(LINE);
-            start();
+            chatbot.start();
+        } catch (Exception ex) {
+            System.out.println(ex);
         }
     }
 
-    public void printList(ArrayList<Task> list) {
+    public void start() throws IOException {
+            Storage.readTasks(taskList);
+            Scanner sc = new Scanner(System.in);
+            while (sc.hasNext()) {
+                String userInput = sc.nextLine();
+                try {
+                    if (userInput.trim().equalsIgnoreCase("bye")) {
+                        System.out.println(Constants.BYE + Constants.LINE);
+                        System.exit(0);
+                    } else if (userInput.trim().equalsIgnoreCase("list")) {
+                        printList(taskList);
+                    } else if (userInput.trim().split("\\s")[0].equalsIgnoreCase("done")) {
+                        completeTask(userInput.trim());
+                    } else if (userInput.trim().split("\\s")[0].equalsIgnoreCase("delete")) {
+                        deleteTask(userInput.trim());
+                    } else {
+                        categoriseTask(userInput.trim());
+                    }
+                    Storage.saveTasks(taskList);
+
+                } catch (DukeException ex) {
+                    System.out.println(ex.getMessage());
+                    System.out.println(Constants.LINE);
+                    start();
+                }
+            }
+    }
+
+    public static void printList(ArrayList<Task> list) {
         boolean allTasksDone = true;
         System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < list.size(); i++) {
@@ -62,19 +64,19 @@ public class Duke {
         if (allTasksDone) {
             System.out.println("All tasks are complete!!");
         }
-        System.out.println(LINE);
+        System.out.println(Constants.LINE);
     }
 
-    public void categoriseTask(String inp) {
+    public void categoriseTask(String input) {
             Task task;
-            String[] splitTasks = inp.split("\\s", 2);
+            String[] splitTasks = input.split("\\s", 2);
             String taskType = splitTasks[0].toLowerCase();
             try {
                 switch (taskType) {
                     case "todo":
                         if (hasEmptyDesc(splitTasks)) {
                             throw new EmptyDescriptionException(
-                                    "Sorry, the description of a todo cannot be empty" + TODO_FORMAT
+                                    "Sorry, the description of a todo cannot be empty" + Constants.TODO_FORMAT
                             );
                         } else {
                             String desc = splitTasks[1].trim();
@@ -85,17 +87,17 @@ public class Duke {
                     case "deadline":
                         if (hasEmptyDesc(splitTasks)) {
                             throw new EmptyDescriptionException(
-                                    "Sorry, the description of a deadline cannot be empty" + DEADLINE_FORMAT
+                                    "Sorry, the description of a deadline cannot be empty" + Constants.DEADLINE_FORMAT
                             );
                         } else {
                             String[] parsedDeadline = splitTasks[1].split("/by");
                             if (hasDateButEmptyDesc(parsedDeadline)) {
                                 throw new EmptyDescriptionException(
-                                        "Sorry, the description of a deadline cannot be empty" + DEADLINE_FORMAT
+                                        "Sorry, the description of a deadline cannot be empty" + Constants.DEADLINE_FORMAT
                                 );
                             } else if (hasEmptyDesc(parsedDeadline)) {
                                 throw new IncorrectFormatException(
-                                        "Please add a date for your deadline!" + DEADLINE_FORMAT);
+                                        "Please add a date for your deadline!" + Constants.DEADLINE_FORMAT);
                             } else {
                                 String desc = parsedDeadline[0].trim();
                                 String date = parsedDeadline[1].trim();
@@ -107,17 +109,17 @@ public class Duke {
                     case "event":
                         if (hasEmptyDesc(splitTasks)) {
                             throw new EmptyDescriptionException(
-                                    "Sorry the description of an event cannot be empty" + EVENT_FORMAT
+                                    "Sorry the description of an event cannot be empty" + Constants.EVENT_FORMAT
                             );
                         } else {
                             String[] parsedEvent = splitTasks[1].split("/at");
                             if (hasDateButEmptyDesc(parsedEvent)) {
                                 throw new EmptyDescriptionException(
-                                        "Sorry the description of an event cannot be empty" + EVENT_FORMAT
+                                        "Sorry the description of an event cannot be empty" + Constants.EVENT_FORMAT
                                 );
                             } else if (hasEmptyDesc(parsedEvent)) {
                                 throw new IncorrectFormatException(
-                                        "Please add a date and time for your event!" + EVENT_FORMAT);
+                                        "Please add a date and time for your event!" + Constants.EVENT_FORMAT);
                             } else {
                                 String details = parsedEvent[0].trim();
                                 String at = parsedEvent[1].trim();
@@ -133,9 +135,9 @@ public class Duke {
             } catch (ArrayIndexOutOfBoundsException ex) {
                 switch (taskType) {
                     case "deadline": throw new IncorrectFormatException(
-                            "Please specify a description and date for your deadline!" + DEADLINE_FORMAT);
+                            "Please specify a description and date for your deadline!" + Constants.DEADLINE_FORMAT);
                     case "event": throw new IncorrectFormatException(
-                            "Please specify a description, date and time for your event!" + EVENT_FORMAT);
+                            "Please specify a description, date and time for your event!" + Constants.EVENT_FORMAT);
                     default: throw new IncorrectFormatException(
                             "Please specify a description and date/time for your task!");
                     }
@@ -156,7 +158,7 @@ public class Duke {
                     } else {
                         currTask.markAsDone();
                         System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(currTask.toString() + "\n" + LINE);
+                        System.out.println(currTask.toString() + "\n" + Constants.LINE);
                     }
                 }
         } catch (IndexOutOfBoundsException | NumberFormatException | NullPointerException ex) {
@@ -184,9 +186,9 @@ public class Duke {
 
     public void printRemainingTasks() {
         if (taskList.size() == 1) {
-            System.out.println("Now you have 1 task in the list." + "\n" + LINE);
+            System.out.println("Now you have 1 task in the list." + "\n" + Constants.LINE);
         } else {
-            System.out.println(String.format("Now you have %s tasks in the list.", taskList.size()) + "\n" + LINE);
+            System.out.println(String.format("Now you have %s tasks in the list.", taskList.size()) + "\n" + Constants.LINE);
         }
     }
 
@@ -204,10 +206,10 @@ public class Duke {
         return (taskArray[0].isBlank() || taskArray[0].isEmpty()) && (!taskArray[1].isBlank());
     }
 
-    public boolean containsTask(Task task, ArrayList<Task> list) {
+    public static boolean containsTask(Task task, ArrayList<Task> list) {
        boolean ans = false;
         for (Task value : list) {
-             if (value.getDescription().equals(task.getDescription())){
+             if (value.getDetails().strip().equals(task.getDetails().strip())){
                 ans = true;
                 break;
             }
@@ -222,4 +224,5 @@ public class Duke {
             taskList.add(task);
         }
     }
+
 }

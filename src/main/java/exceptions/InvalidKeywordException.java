@@ -1,4 +1,8 @@
-public class InvalidKeywordException extends DukeException{
+package exceptions;
+
+import exceptions.DukeException;
+
+public class InvalidKeywordException extends DukeException {
 
     public InvalidKeywordException() {
         super("Sorry, I don't know what that means. " +

@@ -1,0 +1,3 @@
+T | 0 | read book
+D | 1 | do homework | 25th Aug
+E | 0 | go to library | 27th Aug, 5pm
