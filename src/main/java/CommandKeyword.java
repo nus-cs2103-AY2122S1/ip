@@ -1,3 +1,3 @@
-public enum CommandName {
+public enum CommandKeyword {
     LIST, DONE, DELETE, BYE, TODO, DEADLINE, EVENT;
 }
