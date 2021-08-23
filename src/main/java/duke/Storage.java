@@ -4,9 +4,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     protected String filePath;
 
+    /**
+     * Creates the 'data' directory and 'jarvis.txt' file in user's hard disk to store user's
+     * list of tasks (if the directory and file don't already exit)
+     * @param filePath the relative path to location in which the file is to be created
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         try {
@@ -20,6 +28,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Retrieves the list of tasks from the user's hard disk and displays it to the user
+     * @throws FileNotFoundException if the file ('jarvis.txt') containing the list of tasks
+     * cannot be found
+     */
     public void retrieveFileContents() throws FileNotFoundException {
         File f = new File(this.filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
