@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -92,14 +94,19 @@ public class Duke {
                         //checks if there is a "/by" to separate the description
                         if (description.contains("/by")) {
                             //Removes the "deadline" string and splits the description using "/by"
-                            String[] updatedDeadline = description.replace(keyword, "").split("/by");
+                            String[] updatedDeadline = description.replace(keyword, "").split(" /by");
                             //Returns error if user enters more than one "/by"
                             if (updatedDeadline.length > 2) {
                                 throw new DukeException("I'm sorry, please only have ONE '/by' in your description!");
                             } else {
-                                String deadlineDescription = updatedDeadline[0];
-                                String deadlineBy = updatedDeadline[1];
-                                Deadline newDeadline = new Deadline(deadlineDescription, deadlineBy);
+                                String deadlineDescription = updatedDeadline[0].replaceFirst(" ", "");
+                                String deadlineBy = updatedDeadline[1].replaceFirst(" ", "");
+                                try {
+                                    LocalDate.parse(deadlineBy);
+                                } catch (DateTimeParseException e){
+                                    throw new DukeException("Please enter a valid date!");
+                                }
+                                Deadline newDeadline = new Deadline(deadlineDescription, LocalDate.parse(deadlineBy));
                                 userList.add(newDeadline);
                                 System.out.println("    ____________________________________________________________\n    " +
                                     "Got it. I've added this task:\n    " + newDeadline.toString() + "\n    " + "Now you have " + userList.size() + " tasks in the list.\n" +
@@ -119,12 +126,12 @@ public class Duke {
                         //checks if there is an "/at" to separate the description
                         if (description.contains("/at")) {
                             //Removes the "event" string and splits the description using "/at"
-                            String[] updatedEvent = description.replace(keyword, "").split("/at");
+                            String[] updatedEvent = description.replace(keyword, "").split(" /at");
                             //Returns error if user enters more than one "/at"
                             if (updatedEvent.length > 2) {
                                 throw new DukeException("I'm sorry, please only have ONE '/at' in your description!");
                             } else {
-                                String eventDescription = updatedEvent[0];
+                                String eventDescription = updatedEvent[0].replaceFirst(" ", "");;
                                 String eventBy = updatedEvent[1];
                                 Event newEvent = new Event(eventDescription, eventBy);
                                 userList.add(newEvent);
