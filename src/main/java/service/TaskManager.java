@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -123,6 +126,13 @@ public class TaskManager {
         fileWriter.close();
     }
 
+    public void updateToFile(int taskNumber, Task newTask) throws IOException {
+        Path filePath = Paths.get(TASK_FILE_PATH);
+        List<String> taskLines = Files.readAllLines(filePath);
+        taskLines.set(taskNumber - 1, newTask.toSavedString()); // 0-indexing
+        Files.write(filePath, taskLines);
+    }
+
     /**
      * Gets the current number of tasks stored.
      *
@@ -144,7 +154,7 @@ public class TaskManager {
             throw new DukeException(FULL_CAPACITY_ERROR_MESSAGE);
         }
         try {
-            saveToFile(newTask);
+            saveToFile(newTask); // save to file before saving to collection
             taskList.add(newTask);
         } catch (IOException exception) {
             throw new DukeException("Unable to save task to memory.");
@@ -207,7 +217,17 @@ public class TaskManager {
      */
     public String updateTaskAsDone(int taskNumber) throws DukeException {
         Task selectedTask = getTaskFromNumberString(taskNumber);
-        selectedTask.markAsDone();
+        boolean wasDone = selectedTask.isDone();
+        try {
+            selectedTask.markAsDone();
+            updateToFile(taskNumber, selectedTask);
+            
+        } catch (IOException exception) {
+            selectedTask.setDone(wasDone); // set it back to old value if fails
+            throw new DukeException(String.format(
+                    "Unable to update task numbered %d to file.", 
+                    taskNumber));
+        }
         return String.format(TASK_DONE_MESSAGE, selectedTask);
     }
 
