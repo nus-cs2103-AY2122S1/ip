@@ -9,37 +9,24 @@ import java.util.logging.Logger;
 public class Duke {
     private final static DateTimeFormatter DT_INPUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy h:mma");
 
-	public enum Command {
-	    EXIT("bye"),
-        LIST("list"),
-        DELETE("delete"),
-        COMPLETE("done"),
-        TODO("todo"),
-        DEADLINE("deadline"),
-        EVENT("event");
+    private TaskList tasks;
+    private Ui ui;
+    private Storage storage;
 
-	    public final String label;
-
-	    private Command(String label) {
-	        this.label = label;
-        }
-
-        public static Command valueOfLabel(String label) {
-            for (Command e : values()) {
-                if (e.label.equals(label)) {
-                    return e;
-                }
-            }
-            return null;
+    public Duke(String filePath) throws IOException {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
 
-    public static void main(String[] args) throws DukeException, IOException {
-        Logger logger = Logger.getLogger("Duke");
+    public void run() {
         boolean isActive = true;
-        String filePath = "./data/duke.txt";
 
-        ArrayList<Task> list = TaskReader.read(filePath);
         String welcomeMsg = "Hey, I'm Duke.\n"
                 + "What's up?\n";
         String exitMsg = "Bye! Hope I helped!\n"
@@ -50,103 +37,16 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (isActive) {
-            String[] inputs = sc.nextLine().strip().split("\\s+", 2);
-            String eventType = inputs[0];
-            String remainder = inputs.length == 1 ? null : inputs[1];
+            String input = sc.nextLine();
+//            String eventType = inputs[0];
+//            String remainder = inputs.length == 1 ? null : inputs[1];
             try {
-                switch (Command.valueOfLabel(eventType)) { // Exit routine
-                    case EXIT:
-                        isActive = false;
-                        break;
-                    case LIST:
-                        if (list.size() == 0) {
-                            throw DukeException.emptyList();
-                        }
-                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                        System.out.println(arrayToString(list));
-                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                        break;
-                    case DELETE: {
-                        int index = Integer.parseInt(remainder) - 1;
-                        if (index < 0 || index > list.size() - 1) {
-                            throw DukeException.invalidIndex();
-                        } else {
-                            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                            System.out.println("This item will be removed:\n" +
-                                    list.get(index).toString() + "\n");
-                            list.remove(index);
-                            System.out.println(String.format("You have %d task(s) at the moment!\n", list.size()));
-                            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                            TaskReader.write(filePath, list);
-                        }
-                        break;
-                    }
-                    case COMPLETE: {
-                        int index = Integer.parseInt(remainder) - 1;
-                        if (index < 0 || index > list.size() - 1) {
-                            throw DukeException.invalidIndex();
-                        } else {
-                            list.get(index).markAsDone();
-                            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                            System.out.println("Awesome! I marked this as done:\n" +
-                                    list.get(index).toString() + "\n");
-                            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                            TaskReader.write(filePath, list);
-                        }
-                        break;
-                    }
-                    case TODO: {
-                        if (remainder == null) {
-                            throw DukeException.emptyDesc();
-                        }
-                        Todo event = new Todo(false, remainder);
-                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                        System.out.println("Alright! I added this task: \n" + event.toString() + "\n");
-                        list.add(event);
-                        System.out.println(String.format("You have %d task(s) at the moment!\n", list.size()));
-                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                        TaskReader.write(filePath, list);
-                        break;
-                    }
-                    case DEADLINE: {
-                        if (remainder == null) {
-                            throw DukeException.emptyDesc();
-                        }
-                        String[] tokens = remainder.split(" /by ", 2);
-                        if (tokens.length == 1) {
-                            throw DukeException.emptyTime();
-                        }
-                        LocalDateTime deadline = LocalDateTime.parse(tokens[1], DT_INPUT_FORMAT);
-                        Deadline event = new Deadline(false, tokens[0], deadline);
+                //String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(input);
+                c.execute(tasks, ui, storage);
+                isActive = c.isActive();
 
-                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                        System.out.println("Alright! I added this task: \n" + event.toString() + "\n");
-                        list.add(event);
-                        System.out.println(String.format("You have %d task(s) at the moment!\n", list.size()));
-                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                        TaskReader.write(filePath, list);
-                        break;
-                    }
-                    case EVENT: {
-                        if (remainder == null) {
-                            throw DukeException.emptyDesc();
-                        }
-                        String[] tokens = remainder.split(" /at ", 2);
-                        LocalDateTime startTime = LocalDateTime.parse(tokens[1], DT_INPUT_FORMAT);
-                        Event event = new Event(false, tokens[0], startTime);
-
-                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                        System.out.println("Alright! I added this task: \n" + event.toString() + "\n");
-                        list.add(event);
-                        System.out.println(String.format("You have %d task(s) at the moment!\n", list.size()));
-                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                        TaskReader.write(filePath, list);
-                        break;
-                    }
-                    default:
-                        throw DukeException.invalidCommand();
-                        //System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                }
             } catch (DukeException e) {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 System.out.println(e.getMessage() + "\n");
@@ -163,13 +63,7 @@ public class Duke {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
-    public static String arrayToString(ArrayList<Task> list) {
-        String answer = "";
-        int counter = 1;
-        for (Task item : list) {
-            answer += String.format("%d: %s\n", counter, item.toString());
-            counter++;
-        }
-        return answer;
+    public static void main(String[] args) throws IOException {
+        new Duke("data/tasks.txt").run();
     }
 }

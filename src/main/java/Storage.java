@@ -12,10 +12,16 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-public class TaskReader {
+public class Storage {
     private static final DateTimeFormatter DT_DATA_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy h:mma");
 
-    public static ArrayList<Task> read(String fileName) throws IOException {
+    private String fileName;
+
+    public Storage(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public ArrayList<Task> load() throws IOException {
 
         ArrayList<Task> tasks = new ArrayList<>(100);
         List<String> lines;
@@ -61,7 +67,7 @@ public class TaskReader {
             Files.createFile(storagePath);
             System.out.println("No file found, but we created one!");
             System.out.println(e.toString() + e.getMessage());
-            return read(fileName);
+            return load();
         } catch (IOException e) {
             System.out.println("Something went wrong during reading!");
             System.out.println(e.toString() + e.getMessage());
@@ -71,10 +77,10 @@ public class TaskReader {
         }
     }
 
-    public static void write (String filename, ArrayList<Task> tasks) throws IOException{
+    public void write (ArrayList<Task> tasks) {
         BufferedWriter outputWriter = null;
         try {
-            outputWriter = new BufferedWriter(new FileWriter(filename, false));
+            outputWriter = new BufferedWriter(new FileWriter(fileName, false));
             for (int i = 0; i < tasks.size(); i++) {
                 // Maybe:
                 outputWriter.write(tasks.get(i).getData());
