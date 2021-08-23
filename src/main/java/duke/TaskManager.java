@@ -77,6 +77,10 @@ public class TaskManager {
                 .collect(Collectors.joining("\n"));
     }
 
+    public List<Task> find(String keyword) {
+        return this.taskList.stream().filter(t -> t.getDescriptions().contains(keyword)).collect(Collectors.toList());
+    }
+
     private void load() throws DateTimeException {
         try {
             this.taskList = storage.load();
