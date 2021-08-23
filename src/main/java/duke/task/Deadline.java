@@ -1,9 +1,23 @@
+package duke.task;
+
+
+import duke.DukeException;
+import duke.Parser;
+
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
     protected LocalDateTime date;
     protected String taskType = "[D]";
     protected boolean isDateOnly = false;
+
+    public boolean getIsDateOnly() {
+        return isDateOnly ? true : false;
+    }
+
+    public LocalDateTime getDate() {
+        return LocalDateTime.parse(date.toString());
+    }
 
     private static String errorMessage = "Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE\n"
             + "or as date and time: DATE TIME\n"

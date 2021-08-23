@@ -1,3 +1,8 @@
+package duke;
+
+
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -6,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Storage {
+public class Storage {
     protected String filePath;
 
     protected Storage(String filePath) {
@@ -67,7 +72,7 @@ class Storage {
         dataDir.mkdirs();
     }
 
-    protected void save(TaskList tasks) {
+    public void save(TaskList tasks) {
         createDir();
         File taskListFile = new File(this.filePath);
 
@@ -78,15 +83,16 @@ class Storage {
             Task currentTask = tasks.get(i);
             if (currentTask instanceof Event) {
                 Event event = (Event) currentTask;
-                text += String.format("| E | %s | %s | %s | %s | %s\n", event.isDone ? "X" : " ",
-                        event.isDateOnly ? "X" : " ", event.startDateTime, event.endDateTime, event.description);
+                text += String.format("| E | %s | %s | %s | %s | %s\n", event.getIsDone() ? "X" : " ",
+                        event.getIsDateOnly() ? "X" : " ", event.getStartDateTime(), event.getEndDateTime(),
+                        event.getDescription());
             } else if (currentTask instanceof Deadline) {
                 Deadline deadline = (Deadline) currentTask;
-                text += String.format("| D | %s | %s | %s | %s\n", deadline.isDone ? "X" : " ",
-                        deadline.isDateOnly ? "X" : " ", deadline.date, deadline.description);
+                text += String.format("| D | %s | %s | %s | %s\n", deadline.getIsDone() ? "X" : " ",
+                        deadline.getIsDateOnly() ? "X" : " ", deadline.getDate(), deadline.getDescription());
             } else {
                 Todo todo = (Todo) currentTask;
-                text += String.format("| T | %s | %s\n", todo.isDone ? "X" : " ", todo.description);
+                text += String.format("| T | %s | %s\n", todo.getIsDone() ? "X" : " ", todo.getDescription());
             }
         }
 

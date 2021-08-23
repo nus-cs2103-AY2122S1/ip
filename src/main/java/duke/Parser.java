@@ -1,3 +1,11 @@
+package duke;
+
+
+import duke.command.*;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -5,7 +13,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
-class Parser {
+public class Parser {
 
     private static String errorMessage = "Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE\n"
             + "or as date and time: DATE TIME\n"
@@ -105,7 +113,7 @@ class Parser {
         }
     }
 
-    protected static LocalDateTime parseDateAndTime(String dateInput, String timeInput) throws DukeException {
+    public static LocalDateTime parseDateAndTime(String dateInput, String timeInput) throws DukeException {
 
 
         LocalDate date = parseDate(dateInput);
@@ -114,7 +122,7 @@ class Parser {
 
     }
 
-    protected static String dateTimeToString(LocalDateTime dateTime, boolean isDateOnly) {
+    public static String dateTimeToString(LocalDateTime dateTime, boolean isDateOnly) {
 
         int len = dateTime.toString().length();
 

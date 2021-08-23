@@ -1,6 +1,19 @@
+package duke.task;
+
+
+import duke.DukeException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+
+    public String getDescription() {
+        return description.substring(0);
+    }
+
+    public boolean getIsDone() {
+        return isDone ? true : false;
+    }
 
     public static Task taskFactory(TaskType taskType, String input) throws DukeException {
         Task newTask = null;

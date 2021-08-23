@@ -1,3 +1,9 @@
+package duke.task;
+
+
+import duke.DukeException;
+import duke.Parser;
+
 import java.time.LocalDateTime;
 
 public class Event extends Task {
@@ -5,6 +11,19 @@ public class Event extends Task {
     protected LocalDateTime endDateTime;
     protected String taskType = "[E]";
     protected boolean isDateOnly = false;
+
+    public boolean getIsDateOnly() {
+        return isDateOnly ? true : false;
+    }
+
+    public LocalDateTime getStartDateTime() {
+        return LocalDateTime.parse(startDateTime.toString());
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return LocalDateTime.parse(endDateTime.toString());
+    }
+
 
     public static Event of(String description, String input) throws DukeException {
 

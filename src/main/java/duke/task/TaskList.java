@@ -1,23 +1,26 @@
+package duke.task;
+
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-class TaskList {
+public class TaskList {
 
     private ArrayList<Task> tasks;
 
-    protected TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
-    protected TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    protected void add(Task task) {
+    public void add(Task task) {
         this.tasks.add(task);
     }
 
-    protected void remove(int index) {
+    public void remove(int index) {
         this.tasks.remove(index);
     }
 
@@ -25,15 +28,15 @@ class TaskList {
         return (ArrayList<Task>) tasks.subList(0, tasks.size());
     }
 
-    protected int size() {
+    public int size() {
         return this.tasks.size();
     }
 
-    protected Task get(int index) {
+    public Task get(int index) {
         return this.tasks.get(index);
     }
 
-    protected TaskList findByDate(LocalDate date) {
+    public TaskList findByDate(LocalDate date) {
 
 
         TaskList foundTasks = new TaskList();
