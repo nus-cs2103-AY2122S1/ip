@@ -25,7 +25,7 @@ public class UI {
     }
 
     /**
-     * read user input
+     * Reads user input
      * @return returns user input as string
      */
     public String readCommand() {
@@ -33,7 +33,7 @@ public class UI {
     }
 
     /**
-     * Print the text to I/O
+     * Prints the text to I/O
      * @param text text to print
      */
     public void printText(String text) {

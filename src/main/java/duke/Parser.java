@@ -7,6 +7,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
+    /**
+     * Reads and returns the corresponding command from a given string.
+     *
+     * @param command Command in String format.
+     * @return Command that can execute the actions required.
+     * @throws DukeException If command is invalid
+     */
     public Command parseCommand(String command) throws DukeException {
         String inputFirst;
         int breakPoint = command.indexOf(" ");
@@ -17,22 +24,22 @@ public class Parser {
         }
         try {
             switch(inputFirst) {
-                case "list":
-                    return new PrintListCommand();
-                case "done":
-                    return markDone(getArgs(command));
-                case "todo":
-                    return addTodo(getArgs(command));
-                case "deadline":
-                    return addDeadline(getArgs(command));
-                case "event":
-                    return addEvent(getArgs(command));
-                case "delete":
-                    return delete(getArgs(command));
-                case "bye":
-                    return new ExitCommand();
-                default:
-                    throw new InvalidCommandDukeException();
+            case "list":
+                return new PrintListCommand();
+            case "done":
+                return markDone(getArgs(command));
+            case "todo":
+                return addTodo(getArgs(command));
+            case "deadline":
+                return addDeadline(getArgs(command));
+            case "event":
+                return addEvent(getArgs(command));
+            case "delete":
+                return delete(getArgs(command));
+            case "bye":
+                return new ExitCommand();
+            default:
+                throw new InvalidCommandDukeException();
             }
         } catch (DukeException e) {
             throw new DukeException("Error for command: \"" + inputFirst + "\"\n" + e.getMessage());
@@ -66,7 +73,7 @@ public class Parser {
     }
 
     /**
-     * Get argument to command if it exists.
+     * Gets argument to command if it exists.
      *
      * @param str String full command
      * @return get argument to command

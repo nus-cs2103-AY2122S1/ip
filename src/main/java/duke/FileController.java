@@ -19,11 +19,10 @@ public class FileController {
     }
 
     /**
+     * Writes given text to file specified by this object.
      *
-     * writes given text to file specified by this object
-     *
-     * @param text
-     * @return true if file writes successfully, false otherwise
+     * @param text String to write.
+     * @return True if file writes successfully, false otherwise.
      */
     public boolean writeText(String text) {
         try {
@@ -46,8 +45,7 @@ public class FileController {
     }
 
     /**
-     *
-     * return the whole contents of the file in a single String
+     * Returns the whole contents of the file in a single String
      *
      * @return contents of file specified in this object
      */

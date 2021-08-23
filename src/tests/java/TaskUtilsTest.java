@@ -1,11 +1,10 @@
-import duke.*;
 import duke.tasks.*;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
 
-public class TasksTest {
+public class TaskUtilsTest {
     @Test
     public void serializeTaskTest() {
         Todo t = new Todo("Die");

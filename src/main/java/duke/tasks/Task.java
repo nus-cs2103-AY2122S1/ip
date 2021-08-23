@@ -1,17 +1,25 @@
 package duke.tasks;
 
+/** Class representing a task. */
 public abstract class Task {
+    /* name of the Task. */
     protected String taskName;
-    protected boolean done;
+    /* Is the class done. */
+    protected boolean isDone;
 
+    /**
+     * Constructor for Task.
+     *
+     * @param taskName Name of the task.
+     */
     public Task(String taskName) {
-        done = false;
+        isDone = false;
         this.taskName = taskName;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", done ? "X" : " ", taskName);
+        return String.format("[%s] %s", isDone ? "X" : " ", taskName);
     }
 
     @Override
@@ -23,19 +31,38 @@ public abstract class Task {
             return false;
         }
         Task t = (Task) o;
-        return taskName.equals(t.taskName) && done == t.isDone();
+        return taskName.equals(t.taskName) && isDone == t.isDone();
     }
 
+    /**
+     * Marks the current Task as done.
+     */
     public void markDone() {
-        done = true;
+        isDone = true;
     }
 
+    /**
+     * Gets the isDone status of the current task
+     *
+     * @return True if task is done, false otherwise;
+     */
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
+    /**
+     * Gets an identifier for the labelled task.
+     *
+     * @return A string identifier for this task.
+     */
     public abstract String getIdentifier();
 
+    /**
+     * Gets all unique details of the task separated by a delimiter
+     *
+     * @param delimiter String to use for separation
+     * @return Details of the task with a delimiter.
+     */
     public abstract String getDetailsWithDelimiter(String delimiter);
 
 

@@ -6,8 +6,9 @@ import duke.exceptions.*;
 
 public class Duke {
 
+    /** Relative path to file used in our Duke simulations */
     public static String FILE_PATH = "data/";
-
+    
     TaskList taskList;
     FileController fc;
     UI ui;
