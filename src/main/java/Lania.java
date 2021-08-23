@@ -3,14 +3,14 @@ import java.util.ArrayList;
 
 public class Lania {
 
-    private static ArrayList<Task> taskArrayList = new ArrayList<Task>();
+    private ArrayList<Task> taskArrayList = new ArrayList<Task>();
 
     /**
      * Store user input in task array and show that it is added.
      *
      * @param s String provided by the user.
      */
-    public static void update(String s) throws LaniaException {
+    public void update(String s) throws LaniaException {
         Task t;
         String[] split = s.split(" ", 2);
         if (split[0].equals("todo")) {
@@ -46,7 +46,7 @@ public class Lania {
      * Display all tasks stored.
      *
      */
-    public static void list() {
+    public void list() {
         System.out.println("You have the following task(s):");
         for (int i = 0; i < taskArrayList.size(); i++) {
             System.out.println(i + 1 + "." + taskArrayList.get(i));
@@ -58,7 +58,7 @@ public class Lania {
      *
      * @param i The task number to be completed.
      */
-    public static void complete(int i) {
+    public void complete(int i) {
         i--;
         taskArrayList.get(i).markAsDone();
         System.out.println("Good job! Lania has marked this task as done:");
@@ -70,7 +70,7 @@ public class Lania {
      *
      * @param i The task number to be completed.
      */
-    public static void remove(int i) {
+    public void remove(int i) {
         i--;
         Task t = taskArrayList.get(i);
         taskArrayList.remove(i);
@@ -79,21 +79,7 @@ public class Lania {
         System.out.println("Great! Now you have " + taskArrayList.size() + (taskArrayList.size() == 1 ? " task" : " tasks") + " in your list.");
     }
 
-    /**
-     * Prints the user input.
-     *
-     * @param s String provided by the user.
-     */
-    public static void echo(String s) {
-        System.out.println(s);
-    }
-
-    /**
-     * Chatbot that stores and displays the user input.
-     *
-     * @param args The command line arguments. Not required here.
-     **/
-    public static void main(String[] args) {
+    public void run() {
         System.out.println("Hello I am Lania! How may Lania be of assistance?");
         System.out.println("Enter 'bye' to exit");
         Scanner s = new Scanner(System.in);
@@ -117,5 +103,24 @@ public class Lania {
             }
         }
         System.out.println("Bye. Lania looks forward to seeing you again!");
+    }
+
+    /**
+     * Prints the user input.
+     *
+     * @param s String provided by the user.
+     */
+    public void echo(String s) {
+        System.out.println(s);
+    }
+
+    /**
+     * Chatbot that stores and displays the user input.
+     *
+     * @param args The command line arguments. Not required here.
+     **/
+    public static void main(String[] args) {
+        Lania lania = new Lania();
+        lania.run();
     }
 }
