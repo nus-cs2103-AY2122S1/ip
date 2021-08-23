@@ -66,4 +66,26 @@ public class Ui {
         System.out.println(Ui.formatDukeMessage(message));
     }
 
+    /**
+     * Prints the success message once task is added.
+     * @param task task to be added.
+     * @param total total number of tasks in the task list.
+     */
+    public static void printAddedTaskMessage(Task task, String total) {
+        System.out.println(Ui.formatDukeMessage("\tGot it. I've added this task:\n" +
+                "\t\t" + task + "\n" +
+                "\tNow you have " + total + " in your list.\n"));
+    }
+
+    public static void printDeleteTaskMessage(Task task, String total) {
+        System.out.println(Ui.formatDukeMessage("\tNoted. I've removed this task:\n" +
+                "\t\t" + task + "\n" +
+                "\tNow you have " + total + " in your list.\n"));
+    }
+
+    public static void printDoneMessage(Task task) {
+        System.out.println(Ui.formatDukeMessage("\tNice! I've marked this task as done:\n" +
+                "\t\t" + task + "\n"));
+    }
+
 }
