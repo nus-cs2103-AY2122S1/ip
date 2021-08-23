@@ -1,5 +1,7 @@
 package task;
 
+import java.time.LocalDate;
+
 public abstract class Task {
     public static enum taskType {
         TODO, DEADLINE, EVENT
@@ -50,6 +52,10 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s][%s] %s",
                 this.getTypeIcon(), this.getStatusIcon(), this.description);
+    }
+
+    public boolean onDate(LocalDate date) {
+        return false;
     }
 
     /**

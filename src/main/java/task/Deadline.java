@@ -63,4 +63,12 @@ public class Deadline extends Task {
                     this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.US)), this.time);
         }
     }
+
+    @Override
+    public boolean onDate(LocalDate date) {
+        if (this.date != null && this.date.equals(date)) {
+            return true;
+        }
+        return false;
+    }
 }

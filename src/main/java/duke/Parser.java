@@ -7,6 +7,7 @@ import task.Task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -36,30 +37,56 @@ public class Parser {
             if (fullCommand.length() >= 25 && fullCommand.substring(0, 8).equals("deadline")) {
                 String description = fullCommand.substring(9, fullCommand.indexOf("/") - 1);
                 String dateAndTime = fullCommand.substring(fullCommand.indexOf("/") + 4, fullCommand.length());
-                LocalDate date = LocalDate.parse(
-                        dateAndTime.substring(0, 10),
-                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                LocalTime time = null;
-                if (dateAndTime.length() > 10) {
-                    time = LocalTime.parse(
-                            dateAndTime.substring(dateAndTime.indexOf(" ") + 1, dateAndTime.length()),
-                            DateTimeFormatter.ofPattern("HHmm"));
+                try {
+                    LocalDate date = LocalDate.parse(
+                            dateAndTime.substring(0, 10),
+                            DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                    LocalTime time = null;
+                    if (dateAndTime.length() > 10) {
+                        time = LocalTime.parse(
+                                dateAndTime.substring(dateAndTime.indexOf(" ") + 1, dateAndTime.length()),
+                                DateTimeFormatter.ofPattern("HHmm"));
+                    }
+                    return new AddCommand(Task.taskType.DEADLINE, description, date, time);
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("Cannot parse this command, " +
+                            "please enter correct date and time format: dd-MM-yyyy HHmm");
                 }
-                return new AddCommand(Task.taskType.DEADLINE, description, date, time);
             }
             if (fullCommand.length() >= 22 && fullCommand.substring(0, 5).equals("event")) {
                 String description = fullCommand.substring(6, fullCommand.indexOf("/") - 1);
                 String dateAndTime = fullCommand.substring(fullCommand.indexOf("/") + 4, fullCommand.length());
-                LocalDate date = LocalDate.parse(
-                        dateAndTime.substring(0, 10),
-                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                LocalTime time = null;
-                if (dateAndTime.length() > 10) {
-                    time = LocalTime.parse(
-                            dateAndTime.substring(dateAndTime.indexOf(" ") + 1, dateAndTime.length()),
-                            DateTimeFormatter.ofPattern("HHmm"));
+                try {
+                    LocalDate date = LocalDate.parse(
+                            dateAndTime.substring(0, 10),
+                            DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                    LocalTime time = null;
+                    if (dateAndTime.length() > 10) {
+                        time = LocalTime.parse(
+                                dateAndTime.substring(dateAndTime.indexOf(" ") + 1, dateAndTime.length()),
+                                DateTimeFormatter.ofPattern("HHmm"));
+                    }
+                    return new AddCommand(Task.taskType.EVENT, description, date, time);
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("Cannot parse this command, " +
+                            "please enter correct date and time format: dd-MM-yyyy HHmm");
                 }
-                return new AddCommand(Task.taskType.EVENT, description, date, time);
+            }
+            if (fullCommand.length() >= 6 && fullCommand.substring(0, 4).equals("find")) {
+                String findKeyword = fullCommand.substring(fullCommand.indexOf(" "), fullCommand.length());
+                return new FindCommand(findKeyword);
+            }
+            if (fullCommand.length() >= 15 && fullCommand.substring(0, 4).equals("date")) {
+                String dateString = fullCommand.substring(fullCommand.indexOf(" ") + 1, fullCommand.length());
+                try {
+                    LocalDate date = LocalDate.parse(
+                            dateString.substring(0, 10),
+                            DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                    return new DateCommand(date);
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("Cannot parse this command, " +
+                            "please enter correct date and time format: dd-MM-yyyy HHmm");
+                }
             }
             throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         } catch (DukeException e) {

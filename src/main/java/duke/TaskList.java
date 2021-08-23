@@ -61,13 +61,20 @@ public class TaskList {
         String taskList[] = new String[n + 1];
         taskList[0] = "Here are the tasks in your list:";
         for (int i = 1; i <= n; i++) {
-            taskList[i] = String.format("%d. %s", i, tasks.get(i - 1));
+            taskList[i] = String.format("  %d. %s", i, tasks.get(i - 1));
         }
         return taskList;
     }
 
     public int amountOfTasks() {
         return tasks.size();
+    }
+
+    public Task getTask(int taskIndex) throws DukeException {
+        if (taskIndex < 0 || taskIndex >= tasks.size()) {
+            throw new DukeException("task index out of bound");
+        }
+        return tasks.get(taskIndex);
     }
 
     public ArrayList<Task> getTaskList() {
