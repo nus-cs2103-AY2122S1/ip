@@ -1,6 +1,5 @@
 package duke.util;
 
-import duke.exception.DukeException;
 import duke.exception.DukeNoSuchTaskException;
 import duke.task.Task;
 
@@ -20,6 +19,7 @@ public class TaskList {
      * Constructor for TaskList.
      *
      * @param list List of task.
+     * @param storage Storage for Duke.
      */
     public TaskList(ArrayList<Task> list, Storage storage) {
         this.list = list;
@@ -103,7 +103,13 @@ public class TaskList {
         return data;
     }
 
-    public String filterByDate(LocalDate date) throws DukeException {
+    /**
+     * Checks and filters task with specific date.
+     *
+     * @param date Date to be checked against.
+     * @return List of task on the specified date.
+     */
+    public String filterByDate(LocalDate date) {
         String ls = "";
         int count = 1;
         for (int i = 0; i < this.list.size(); i++) {

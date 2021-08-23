@@ -1,10 +1,5 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.exception.DukeMissingDateTimeException;
-import duke.util.Parser;
-
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -23,7 +18,8 @@ public class Deadline extends Task{
      * Constructor for Deadline.
      *
      * @param description The description of the deadline.
-     * @param by The due date of deadline.
+     * @param dueDate The due date of deadline.
+     * @param dueTime The due time of deadline.
      */
     public Deadline(String description, LocalDate dueDate, LocalTime dueTime) {
         super(description);
@@ -31,6 +27,11 @@ public class Deadline extends Task{
         this.dueTime = dueTime;
     }
 
+    /**
+     * Formats dueDate and dueTime to an appropriate format to be printed.
+     *
+     * @return Formatted DateTime.
+     */
     private String formatDateTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         String date = this.dueDate.format(formatter);

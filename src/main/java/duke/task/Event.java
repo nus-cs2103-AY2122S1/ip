@@ -1,9 +1,5 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.util.Parser;
-
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -22,7 +18,10 @@ public class Event extends Task{
     /**
      * Constructor for Event.
      *
-     * @param description The description of the event.
+     * @param description The description of the event
+     * @param date The date of event.
+     * @param startTime The start time of event.
+     * @param endTime The endtime of event.
      */
     public Event(String description, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(description);
@@ -31,6 +30,11 @@ public class Event extends Task{
         this.endTime = endTime;
     }
 
+    /**
+     * Formats dueDate and dueTime to an appropriate format to be printed.
+     *
+     * @return Formatted DateTime.
+     */
     private String formatDateTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         String date = this.date.format(formatter);

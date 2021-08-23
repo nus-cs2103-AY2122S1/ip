@@ -1,5 +1,10 @@
 package duke.util;
 
+/**
+ * Ui class deals with interactions with the user.
+ *
+ * @author Chng Zi Hao
+ */
 public class Ui {
     private static final String DIVIDER = "--------------------------------------------------------------------------------";
     private static final String PROMPT = "Enter Command: ";
