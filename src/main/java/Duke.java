@@ -12,9 +12,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        ArrayList<Task> taskList = Duke.launchDuke();
+    
+    public Duke() {
         
+    }
+    
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+    
+    public void run() {
+        ArrayList<Task> taskList = launchDuke();
+
         Scanner input = new Scanner(System.in);
         boolean isBye = false;
         int listLength = taskList.size();
@@ -49,7 +58,7 @@ public class Duke {
                             throw new DukeException(DukeExceptionType.INVALIDDONE);
                         } else {
                             Task toSetDone = taskList.get(toSet - 1);
-                            Duke.setDBEntryDone(toSetDone.databaseEntry());
+                            setDBEntryDone(toSetDone.databaseEntry());
                             toSetDone.setDone();
                             System.out.print("  Nice! I've marked this task as done:\n    "
                                     + toSetDone.listEntry() + "\n");
@@ -65,7 +74,7 @@ public class Duke {
                             throw new DukeException(DukeExceptionType.INVALIDDELETE);
                         } else {
                             Task deleted = taskList.remove(toDelete - 1);
-                            Duke.deleteDBEntry(deleted.databaseEntry());
+                            deleteDBEntry(deleted.databaseEntry());
                             System.out.print("  Noted. I've removed this task:\n    "
                                     + deleted.listEntry()
                                     + "\n  Now you have " + --listLength + " tasks in the list.\n");
@@ -85,7 +94,7 @@ public class Duke {
                             }
                         }
                     }
-                    
+
                 } else { // task function: add tasks
                     if (text.split("\\s+").length == 1) { // task details not given or not valid task
                         switch (text) {
@@ -122,7 +131,7 @@ public class Duke {
                                 if (deadline.length == 1) {
                                     newTask = new Deadline(details[0], LocalDate.parse(details[1]));
                                 } else {
-                                    newTask = new Deadline(details[0], LocalDate.parse(deadline[0]), 
+                                    newTask = new Deadline(details[0], LocalDate.parse(deadline[0]),
                                             LocalTime.parse(deadline[1]));
                                 }
                             }
@@ -136,14 +145,14 @@ public class Duke {
                             } else {
                                 String[] periodRange = details[1].split(" ");
                                 if (periodRange.length == 2) {
-                                    newTask = new Event(details[0], LocalDate.parse(periodRange[0]), 
+                                    newTask = new Event(details[0], LocalDate.parse(periodRange[0]),
                                             LocalDate.parse(periodRange[1]));
                                 } else if (periodRange.length == 3) {
                                     newTask = new Event(details[0], LocalDate.parse(periodRange[0]),
                                             LocalTime.parse(periodRange[1]), LocalTime.parse(periodRange[2]));
                                 } else if (periodRange.length == 4) {
-                                    newTask = new Event(details[0], 
-                                            LocalDate.parse(periodRange[0]), LocalTime.parse(periodRange[1]), 
+                                    newTask = new Event(details[0],
+                                            LocalDate.parse(periodRange[0]), LocalTime.parse(periodRange[1]),
                                             LocalDate.parse(periodRange[2]), LocalTime.parse(periodRange[3]));
                                 } else {
                                     throw new DukeException(DukeExceptionType.INVALIDPERIOD);
@@ -159,7 +168,7 @@ public class Duke {
                         }
                         // add task to taskList
                         taskList.add(listLength++, newTask);
-                        Duke.addDBEntry(newTask.databaseEntry());
+                        addDBEntry(newTask.databaseEntry());
                         System.out.print("  Got it. I've added this task:\n    "
                                 + newTask.listEntry()
                                 + "\n  Now you have " + listLength + " tasks in the list.\n");
@@ -172,7 +181,7 @@ public class Duke {
             } catch (NumberFormatException e) { // throws if index given in done/delete functions is not an integer
                 System.out.println(new DukeException(DukeExceptionType.INVALIDDONE).getMessage());
 
-            } catch (DateTimeParseException e) { 
+            } catch (DateTimeParseException e) {
                 System.out.println(new DukeException(DukeExceptionType.INVALIDDATETIME).getMessage());
 
             } finally {
@@ -183,7 +192,7 @@ public class Duke {
         input.close();
     }
     
-    public static ArrayList<Task> launchDuke() {
+    public ArrayList<Task> launchDuke() {
         ArrayList<Task> savedTasks = new ArrayList<>(100);
         
         try {
@@ -262,7 +271,7 @@ public class Duke {
         return savedTasks;
     }
 
-    public static void addDBEntry(String s) {
+    public void addDBEntry(String s) {
         try {
             File duke = new File("data/duke.txt");
             FileWriter writer = new FileWriter(duke, true);
@@ -274,7 +283,7 @@ public class Duke {
         }
     }
 
-    public static void setDBEntryDone(String s) {
+    public void setDBEntryDone(String s) {
         try {
             File updated = new File("data/updated.txt");
             File duke = new File("data/duke.txt");
@@ -305,7 +314,7 @@ public class Duke {
         }
     }
 
-    public static void deleteDBEntry(String s) {
+    public void deleteDBEntry(String s) {
         try {
             File updated = new File("data/updated.txt");
             File duke = new File("data/duke.txt");
