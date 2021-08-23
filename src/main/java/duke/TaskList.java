@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -122,5 +123,21 @@ public class TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new UnrecognizableCommandException();
         }
+    }
+
+    /**
+     * Finds a list of matching tasks given a keyword.
+     *
+     * @param keyword Keyword to be found among all tasks.
+     * @return A list of matched tasks.
+     */
+    public List<Task> findTask(String keyword) {
+        List<Task> matchedTasks = new ArrayList<>();
+        this.TASKS.forEach((task) -> {
+            if (task.getDescription().contains(keyword)) {
+                matchedTasks.add(task);
+            }
+        });
+        return matchedTasks;
     }
 }

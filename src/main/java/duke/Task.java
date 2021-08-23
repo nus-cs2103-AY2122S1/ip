@@ -11,9 +11,18 @@ abstract class Task {
     /**
      * Indicates if a task is done.
      */
+
     protected boolean isDone;
     protected final String DESCRIPTION;
 
+    /**
+     * Gets the description of the task.
+     *
+     * @return The Description of the task
+     */
+    public String getDescription() {
+        return this.DESCRIPTION;
+    }
 
     /**
      * Constructor for a task.

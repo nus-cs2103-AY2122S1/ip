@@ -37,6 +37,8 @@ public class Parser {
             return ActionType.DELETE;
         case "bye":
             return ActionType.BYE;
+        case "find":
+            return ActionType.FIND;
         default:
             return ActionType.UNRECOGNIZED;
         }

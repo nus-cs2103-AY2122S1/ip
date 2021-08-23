@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.List;
+
 /**
  * Deals with interactions with the user.
  */
@@ -82,4 +84,23 @@ public class Ui {
         System.out.println("___________________________________________________\n");
     }
 
+    /**
+     * Show a list of tasks found.
+     *
+     * @param taskList A list of tasks.
+     */
+    public void showFoundTask(List<Task> taskList) {
+        if (taskList.isEmpty()) {
+            System.out.println("___________________________________________________");
+            System.out.println("OOPS, I couldn't find anything in your task list.");
+            System.out.println("___________________________________________________\n");
+        } else {
+            System.out.println("___________________________________________________");
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.println((i + 1) + ". " + taskList.get(i).toString());
+            }
+            System.out.println("___________________________________________________\n");
+        }
+    }
 }

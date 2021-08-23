@@ -1,10 +1,12 @@
 package duke;
 
+import java.util.List;
+
 /**
  * Specifies the type of action to be taken by the duke.
  */
 enum ActionType {
-    LIST, TODO, DEADLINE, EVENT, DONE, DELETE, BYE, UNRECOGNIZED
+    LIST, TODO, DEADLINE, EVENT, DONE, DELETE, BYE, FIND, UNRECOGNIZED
 }
 
 /**
@@ -88,6 +90,12 @@ public class Duke {
             TASKLIST.deleteTask(toBeDeleted);
             UI.showDeletedTask(toBeDeleted);
             STORAGE.saveProgress();
+            break;
+        }
+        case FIND: {
+            String keyword = PARSER.parseTask(command);
+            List<Task> matchedTasks = TASKLIST.findTask(keyword);
+            UI.showFoundTask(matchedTasks);
             break;
         }
         case BYE: {
