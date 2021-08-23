@@ -12,11 +12,16 @@ import duke.Ui;
 
 public class Action extends Command {
 
-    private final Parser.Type type;
+    private enum Type {
+        DONE,
+        DELETE
+    }
+    
+    private final Type type;
     private final String[] words;
 
-    public Action(Parser.Type type, String[] words) {
-        this.type = type;
+    public Action(int type, String[] words) {
+        this.type = type == 0 ? Type.DONE : Type.DELETE;
         this.words = words;
     }
 
@@ -34,12 +39,12 @@ public class Action extends Command {
             if (index < 1 || index > taskList.size()) {
                 throw new InvalidTaskNumberException();
             } else {
-                if (this.type == Parser.Type.DONE) {
+                if (this.type == Type.DONE) {
                     Task t = taskList.get(index - 1);
                     t.markAsDone();
-                    ui.print("Nice, I've marked this task as done!\n   " +
-                            t.toString());
-                } else if (this.type == Parser.Type.DELETE) {
+                    ui.print("Nice, I've marked this task as done!\n   " 
+                            + t.toString());
+                } else if (this.type == Type.DELETE) {
                     Task t = taskList.remove(index - 1);
 
                     String plurality = " task";
@@ -47,8 +52,8 @@ public class Action extends Command {
                         plurality += "s";
                     }
 
-                    ui.print("Noted, I've removed this task:\n   " +
-                            t.toString() + "\nNow you have " + taskList.size()
+                    ui.print("Noted, I've removed this task:\n   " 
+                            + t.toString() + "\nNow you have " + taskList.size()
                             + plurality + " in the list.");
                 }
             }

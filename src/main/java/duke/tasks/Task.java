@@ -4,6 +4,7 @@ package duke.tasks;
  * Class to encapsulate a Task
  */
 public class Task {
+    
     protected String description;
     protected boolean isDone;
 

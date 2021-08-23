@@ -2,8 +2,8 @@ package duke;
 
 import duke.exception.DukeException;
 import duke.exception.LoadingError;
-
 import duke.exception.SavingError;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -51,51 +51,51 @@ public class Storage {
 
         if (directoryExists) {
             try {
-                List<String> text = Files.readAllLines(path);
-                ArrayList<Task> taskList = new ArrayList<>();
-                for (String x: text) {
+                List<String> lines = Files.readAllLines(path);
+                ArrayList<Task> tasks = new ArrayList<>();
+                for (String x: lines) {
                     String[] data = x.split(Pattern.quote(" | "));
                     Task t;
                     if (data.length < 2) {
                         continue;
                     }
                     switch (data[1]) {
-                        case "T":
-                            t = new ToDo(data[3]);
-                            break;
-                        case "E":
-                            LocalDate date = LocalDate.parse(data[4]);
-                            if (data.length == 5) {
-                                t = new Event(data[3], date);
-                            } else {
-                                String hour = data[5].replace(":", "").substring(0, 2);
-                                String minute = data[5].replace(":", "").substring(2, 4);
-                                LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
-                                t = new Event(data[3], date, time);
-                            }
-                            break;
-                        case "D":
-                            LocalDate date2 = LocalDate.parse(data[4]);
-                            if (data.length == 5) {
-                                t = new Deadline(data[3], date2);
-                            } else {
-                                String hour = data[5].replace(":", "").substring(0, 2);
-                                String minute = data[5].replace(":", "").substring(2, 4);
-                                LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
-                                t = new Deadline(data[3], date2, time);
-                            }
-                            break;
-                        default:
-                            // Invalid task found when loading, skipped!
-                            continue;
+                    case "T":
+                        t = new ToDo(data[3]);
+                        break;
+                    case "E":
+                        LocalDate date = LocalDate.parse(data[4]);
+                        if (data.length == 5) {
+                            t = new Event(data[3], date);
+                        } else {
+                            String hour = data[5].replace(":", "").substring(0, 2);
+                            String minute = data[5].replace(":", "").substring(2, 4);
+                            LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
+                            t = new Event(data[3], date, time);
+                        }
+                        break;
+                    case "D":
+                        LocalDate date2 = LocalDate.parse(data[4]);
+                        if (data.length == 5) {
+                            t = new Deadline(data[3], date2);
+                        } else {
+                            String hour = data[5].replace(":", "").substring(0, 2);
+                            String minute = data[5].replace(":", "").substring(2, 4);
+                            LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
+                            t = new Deadline(data[3], date2, time);
+                        }
+                        break;
+                    default:
+                        // Invalid task found when loading, skipped!
+                        continue;
                     }
 
                     if (data[2].equals("1")) {
                         t.markAsDone();
                     }
-                    taskList.add(t);
+                    tasks.add(t);
                 }
-                return taskList;
+                return tasks;
             } catch (IOException e) {
                 throw new LoadingError("Couldn't load file :(");
             }
