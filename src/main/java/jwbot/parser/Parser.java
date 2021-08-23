@@ -3,8 +3,19 @@ package jwbot.parser;
 import jwbot.command.*;
 import jwbot.data.exception.JWBotException;
 
+/**
+ * Parser class that parses the user command
+ *
+ * @author  Yim Jaewon
+ */
 public class Parser {
 
+    /**
+     * Parse the user input command to an adequate type of command object.
+     *
+     * @param input the command entered by the user
+     * @return a parsed Command object created based on the user command
+     */
     public static Command parse(String input) throws JWBotException {
         if (input.equals("bye")) {
             return new ExitCommand(input);

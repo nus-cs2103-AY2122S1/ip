@@ -19,7 +19,7 @@ public class Todo extends Task {
     /**
      * override toString method for easier printing
      *
-     * @return the stingified task
+     * @return the sting representation of the task
      */
     @Override
     public String toString() {

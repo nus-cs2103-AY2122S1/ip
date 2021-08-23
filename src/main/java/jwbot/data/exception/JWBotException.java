@@ -10,7 +10,7 @@ public class JWBotException extends Exception {
     /**
      * The constructor of the exception.
      *
-     * @param e the message of the exception
+     * @param e the description of the exception
      */
     public JWBotException(String e) {
         super(e);
