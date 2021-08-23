@@ -3,6 +3,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -102,7 +104,8 @@ public class Duke {
                                         String[] nameAndDeadline = substring.split(" /by ");
                                         if (nameAndDeadline.length > 1
                                                 && nameAndDeadline[1].trim().length() > 0) {
-                                            newTask = new Deadline(nameAndDeadline[0], nameAndDeadline[1],
+                                            LocalDateTime deadline = Duke.formatDateTime(nameAndDeadline[1]);
+                                            newTask = new Deadline(nameAndDeadline[0], deadline,
                                                     false);
                                         } else {
                                             throw new DukeException("☹ OOPS!!! Please provide a date or "
@@ -112,7 +115,8 @@ public class Duke {
                                     default:
                                         String[] nameAndTime = substring.split(" /at ");
                                         if (nameAndTime.length > 1 && nameAndTime[1].trim().length() > 0) {
-                                            newTask = new Event(nameAndTime[0], nameAndTime[1], false);
+                                            LocalDateTime eventTime = Duke.formatDateTime(nameAndTime[1]);
+                                            newTask = new Event(nameAndTime[0], eventTime, false);
                                         } else {
                                             throw new DukeException("☹ OOPS!!! Please provide a date or "
                                                     + "time for the event.");
@@ -212,7 +216,7 @@ public class Duke {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("save.txt"));
             for (Task task : this.taskList) {
-                bw.write(task.toString() + "\n");
+                bw.write(task.parseToString() + "\n");
             }
             bw.close();
         } catch (Exception e) {
@@ -257,21 +261,43 @@ public class Duke {
      */
     private static Task processTaskString(String taskString) {
         char type = taskString.charAt(1);
-        boolean isDone = taskString.charAt(4) == 'X';
-        String taskDescription = taskString.substring(7);
+        boolean isDone = taskString.charAt(0) == 'X';
+        String[] split = taskString.split("/");
         switch (type) {
             case 'T':
-                return new ToDo(taskDescription, isDone);
+                return new ToDo(split[1], isDone);
 
             case 'D':
-                String[] deadline = taskDescription.split("by:");
-                return new Deadline(deadline[0].substring(0, deadline[0].length() - 2),
-                        deadline[1].trim().substring(0, deadline[1].length() - 2), isDone);
+                String deadlineName = split[1];
+                String deadlineDateAndTime = split[2];
+                return new Deadline(deadlineName, LocalDateTime.parse(deadlineDateAndTime), isDone);
 
             default:
-                String[] event = taskDescription.split("at:");
-                return new Event(event[0].substring(0, event[0].length() - 2),
-                        event[1].trim().substring(0, event[1].length() - 2), isDone);
+                String eventName = split[1];
+                String eventDateAndTime = split[2];
+                return new Event(eventName, LocalDateTime.parse(eventDateAndTime), isDone);
+        }
+    }
+
+    /**
+     * Takes in a string representation of a date and time and parses it into a LocalDateTime object.
+     * @param dateAndTime The given date and time.
+     * @throws DukeException If the input date and time are incorrectly configured.
+     * @return A LocalDateTime object.
+     */
+    private static LocalDateTime formatDateTime(String dateAndTime) throws DukeException {
+        try {
+            String[] split = dateAndTime.split(", ");
+            String toFormat = split[0];
+            if (split.length > 1) {
+                toFormat += "T" + split[1];
+            } else {
+                toFormat += "T" + "00:00";
+            }
+            return LocalDateTime.parse(toFormat);
+        } catch (Exception e) {
+            throw new DukeException("☹ OOPS!!! Please use the following format for date and time(optional):\n"
+            + "yyyy-MM-dd, H:mm");
         }
     }
 }

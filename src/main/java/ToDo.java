@@ -4,6 +4,10 @@ public class ToDo extends Task {
         super(taskName, isDone);
     }
 
+    /**
+     * Returns the string representation of the ToDo task.
+     * @return The string represenation of the task.
+     */
     @Override
     public String toString() {
         if (super.isDone) {
@@ -11,5 +15,16 @@ public class ToDo extends Task {
         } else {
             return "[T][ ] " + super.taskName;
         }
+    }
+
+    /**
+     * Returns a string representation of the task to store within the save file.
+     * @return A string representation of the task.
+     */
+    @Override
+    public String parseToString() {
+        String result = super.isDone ? "X" : "0";
+        result += "T/" + super.taskName;
+        return result;
     }
 }
