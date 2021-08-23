@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -98,18 +100,22 @@ public class Duke {
         }
          else if (!command.contains("/by")) {
             throw new DukeException("invalidDeadline");
-        }
-        else {
-            int position = command.indexOf("/by");
-            String name = command.substring(9, position);
-            String date = command.substring(position + 4);
-            Task task  = new Deadline(name, date);
-            storage.add(task);
-            System.out.println("    ______________________________________");
-            System.out.println("     Got it. I've added this task: ");
-            System.out.printf("       %s\n",task);
-            System.out.printf("     Now you have %d tasks in the list\n", storage.size());
-            System.out.println("    ______________________________________");
+        } else {
+            try {
+                LocalDate.parse(words[3]);
+                int position = command.indexOf("/by");
+                String name = command.substring(9, position);
+                String date = command.substring(position + 4);
+                Task task  = new Deadline(name, date);
+                storage.add(task);
+                System.out.println("    ______________________________________");
+                System.out.println("     Got it. I've added this task: ");
+                System.out.printf("       %s\n",task);
+                System.out.printf("     Now you have %d tasks in the list\n", storage.size());
+                System.out.println("    ______________________________________");
+            } catch (DateTimeParseException e) {
+                System.out.println("Enter valid date format!");
+            }
         }
     }
 
@@ -129,16 +135,22 @@ public class Duke {
             throw new DukeException("invalidEvent");
         }
         else {
-            int position = command.indexOf("/at");
-            String name = command.substring(6, position);
-            String date = command.substring(position + 4);
-            Task task  = new Event(name, date);
-            storage.add(task);
-            System.out.println("    ______________________________________");
-            System.out.println("     Got it. I've added this task: ");
-            System.out.printf("       %s\n",task);
-            System.out.printf("     Now you have %d tasks in the list\n", storage.size());
-            System.out.println("    ______________________________________");
+            try {
+                LocalDate.parse(words[3]);
+                int position = command.indexOf("/at");
+                String name = command.substring(6, position);
+                String date = command.substring(position + 4);
+                Task task  = new Event(name, date);
+                storage.add(task);
+                System.out.println("    ______________________________________");
+                System.out.println("     Got it. I've added this task: ");
+                System.out.printf("       %s\n",task);
+                System.out.printf("     Now you have %d tasks in the list\n", storage.size());
+                System.out.println("    ______________________________________");
+            } catch (DateTimeParseException e) {
+                System.out.println("Enter valid date format!");
+            }
+
         }
     }
 
