@@ -1,0 +1,5 @@
+T run false 0
+T jump false 0
+E lll false 0 at:  rum 
+T run false 0
+E dfwe false 1 egr:  erg 

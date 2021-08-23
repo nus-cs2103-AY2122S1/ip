@@ -15,9 +15,9 @@ public class Duke {
         final String DONE = "done";
         final String DELETE = "delete";
         //Enumeration
-        enum Command {
-            CLIST, CDONE, CBYE, CDELETE, COTHER
-        };
+//        enum Command {
+//            CLIST, CDONE, CBYE, CDELETE, COTHER
+//        };
 
         boolean isEnd = false;
         String logo = " ____        _        \n"
@@ -35,21 +35,21 @@ public class Duke {
         while (!isEnd) {
             String keywords = scanner.nextLine();
             String[] keyword = keywords.split(" ");
-            Command command;
-            if (keyword[0].equals("list")) {
-                command = Command.CLIST;
-            } else if (keyword[0].equals("bye")) {
-                command = Command.CBYE;
-            } else if (keyword[0].equals("done")) {
-                command = Command.CDONE;
-            } else if (keyword[0].equals("delete")) {
-                command = Command.CDELETE;
-            } else {
-                command = Command.COTHER;
-            }
+//            Command command;
+//            if (keyword[0].equals("list")) {
+//                command = Command.CLIST;
+//            } else if (keyword[0].equals("bye")) {
+//                command = Command.CBYE;
+//            } else if (keyword[0].equals("done")) {
+//                command = Command.CDONE;
+//            } else if (keyword[0].equals("delete")) {
+//                command = Command.CDELETE;
+//            } else {
+//                command = Command.COTHER;
+//            }
 
-            switch(command) {
-                case CLIST:
+            switch(keyword[0]) {
+                case LIST:
                     System.out.println(indentation + Horizontal_line);
                     try {
 
@@ -82,7 +82,7 @@ public class Duke {
                     System.out.println(indentation + Horizontal_line);
 
                     break;
-                case CDONE:
+                case DONE:
 
                     try {
                         Integer num = Integer.valueOf(keyword[1]) - 1;
@@ -119,7 +119,7 @@ public class Duke {
                     }
 
                     break;
-                case CDELETE:
+                case DELETE:
                     try {
                         Integer num = Integer.valueOf(keyword[1]) - 1;
 
@@ -158,7 +158,7 @@ public class Duke {
                         System.out.println(indentation + Horizontal_line);
                     }
                     break;
-                case CBYE:
+                case BYE:
                     System.out.println(indentation + Horizontal_line);
                     System.out.println(indentation + "Bye. Hope to see you again soon!");
                     System.out.println(indentation + Horizontal_line);
