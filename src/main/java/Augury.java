@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Augury {
-    static String VER     = "v0.8.0"; // Level-8 Dates and Times
+    static String VER     = "v0.8.0"; // Level-8 Dates and Times + A-MoreOOP
     static String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
@@ -22,9 +22,13 @@ public class Augury {
             "\t+-------------------------------+";
     private TaskList taskList = new TaskList();
     private Storage storage;
+    private Ui ui;
+    private Parser parser;
 
     public Augury(String path) {
+        ui = new Ui();
         this.storage = new Storage(path);
+        this.parser = new Parser();
     }
 
     public void init() throws AuguryException {
@@ -35,41 +39,47 @@ public class Augury {
         }
     }
 
-    public static void speak(String text) {
-        System.out.println("\t_________________________________");
-        System.out.println("\t " + text);
-        System.out.println("\t_________________________________");
-    }
-
     public void greet() {
-        System.out.println(WELCOME);
+        ui.speak(WELCOME);
     }
 
     public void loop() throws AuguryException {
         Scanner scan = new Scanner(System.in);
-        speak("Hello! How may I help you?");
+        ui.speak("Hello! How may I help you?");
 
-        while (true) {
+        boolean isRunning = true;
+
+        while (isRunning) {
             String input = scan.nextLine().trim().toLowerCase();
             try {
-                if (input.equals("bye") || input.equals("exit") || input.equals("quit")) {
-                    speak("The readiness is all.");
+                String command = parser.parse(input);
+                switch(command){
+                case "COMMAND_QUIT":
+                    ui.speak("The readiness is all.");
+                    isRunning = false;
                     break;
-                } else if (input.equals("list") || input.equals("ls")) {
+                case "COMMAND_LIST_TASKS":
                     handleListTasks();
-                } else if (input.length() >= 4 && input.startsWith("done")) {
+                    break;
+                case "COMMAND_MARK_TASK_STATUS":
                     handleMarkAsDone(input);
-                } else if (input.length() >= 6 && input.startsWith("delete")) {
+                    break;
+                case "COMMAND_DELETE_TASK":
                     handleDeleteTasks(input);
-                } else {
+                    break;
+                case "COMMAND_MAKE_TASK":
                     handleAddTask(input);
+                    break;
+                case "COMMAND_UNKNOWN":
+                    throw new AuguryException("Unknown command.");
+                default:
+                    throw new AuguryException("Something went wrong.");
                 }
             } catch (AuguryException e) {
-                speak(e.getMessage() + "\n\t Please try again.");
+                ui.speak(e.getMessage() + "\n\t Please try again.");
             }
         }
 
-        scan.close();
     }
 
     private void handleAddTask(String arg) throws AuguryException {
@@ -80,9 +90,9 @@ public class Augury {
             Task newTask = tf.createTask(type, arg);
 
             if (newTask == null) {
-                throw new UnknownCommandException("Invalid command entered.");
+                throw new UnknownCommandException("Invalid command entered when creating task.");
             }
-            speak(taskList.addTaskAndAnnounce(type, newTask));
+            ui.speak(taskList.addTaskAndAnnounce(type, newTask));
             storage.saveTaskListToStorage(taskList);
         } catch (AuguryException e) {
             throw new AuguryException(e.getMessage());
@@ -90,7 +100,7 @@ public class Augury {
     }
 
     private void handleListTasks() {
-        speak(taskList.toString());
+        ui.speak(taskList.toString());
     }
 
     private void handleMarkAsDone(String args) throws AuguryException {
@@ -107,7 +117,7 @@ public class Augury {
                 throw new InvalidActionException("Task " + i + " does not exist, please try again");
             }
         }
-        speak(taskList.markAsDone(listOfTasks));
+        ui.speak(taskList.markAsDone(listOfTasks));
         storage.saveTaskListToStorage(taskList);
     }
 
@@ -125,7 +135,7 @@ public class Augury {
                 throw new InvalidActionException("Task " + i + " does not exist, please try again");
             }
         }
-        speak(taskList.deleteTasks(listOfTasks));
+        ui.speak(taskList.deleteTasks(listOfTasks));
         storage.saveTaskListToStorage(taskList);
     }
 

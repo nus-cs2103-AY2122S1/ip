@@ -14,7 +14,6 @@ import tasks.TaskFactory;
 import tasks.TaskList;
 
 public class Storage {
-    // doesStorageFileExist, createBlankFile, createTaskListFromStorage, writeTaskListToStorage
 
     private String path;
 
@@ -31,7 +30,7 @@ public class Storage {
         File f = new File(path);
         f.createNewFile();
 
-        writeStorageToTaskList(t);
+        loadTaskListFromStorage(t);
     }
 
     public void saveTaskListToStorage(TaskList t) throws AuguryException {
@@ -57,7 +56,7 @@ public class Storage {
         return res.toString();
     }
 
-    private void writeStorageToTaskList(TaskList t) throws IOException, AuguryException {
+    private void loadTaskListFromStorage(TaskList t) throws IOException, AuguryException {
         // read tasks.txt
         Scanner s = new Scanner(new File(path)); // create a Scanner using the File as the source
         ArrayList<String> tasks = new ArrayList<>();
