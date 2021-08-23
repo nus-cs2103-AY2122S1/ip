@@ -1,9 +1,13 @@
-public class Deadline extends Task{
-    String deadline;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String name) throws DukeDeadlineException {
+public class Deadline extends Task{
+    LocalDate deadline;
+
+    public Deadline(String name) throws DukeDeadlineException, DateTimeException {
         super(name.substring(0, name.indexOf(" /by ") + 1));
-        this.deadline = name.substring(name.indexOf(" /by ") + 5);
+            this.deadline = LocalDate.parse(name.substring(name.indexOf(" /by ") + 5));
         if (name.equals("")) {
             throw  new DukeDeadlineException();
         }

@@ -1,5 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
 
@@ -72,9 +73,13 @@ public class List extends ArrayList<Task> {
             if (split.length == 1) {
                 throw new DukeDeadlineException();
             }
-            Task newItem = new Deadline(split[1]);
-            todos.add(newItem);
-            echo(newItem);
+            try {
+                Task newItem = new Deadline(split[1]);
+                todos.add(newItem);
+                echo(newItem);
+            } catch (DateTimeException e) {
+                System.out.println("Please enter the date in yyyy-mm-dd format!");
+            }
         } else if (split[0].equals("event")) {
             if (split.length == 1) {
                 throw new DukeEventException();

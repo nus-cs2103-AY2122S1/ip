@@ -1,3 +1,1 @@
-E|F|project meeting |Mon 2-4pm
-D|F|return book |Sunday
-T|T|
+D|F|return book |2021-10-10
