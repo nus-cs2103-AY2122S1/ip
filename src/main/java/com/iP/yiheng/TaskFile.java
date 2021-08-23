@@ -54,7 +54,7 @@ public class TaskFile {
         }
     }
 
-    protected void loadFile(ArrayList<Task> taskArrayList) {
+    protected void loadFile() {
         try {
             Scanner sc = new Scanner(file);
             Task task = new Task();
@@ -70,15 +70,27 @@ public class TaskFile {
                     int lastIndex = line.length() - 2;
                     int startIndex = 0;
                     StringBuilder stringBuilder = new StringBuilder();
-                    for (int i = lastIndex; i > 0; i--) {
-                        if (line.charAt(i) == '(') {
-                            startIndex = i;
-                            break;
+                    if (line.charAt(lastIndex + 1) == ')') {
+                        for (int i = lastIndex; i > 0; i--) {
+                            if (line.charAt(i) == '(') {
+                                startIndex = i - 7; // Offset characteristics
+                                break;
+                            }
+                            stringBuilder.append(line.charAt(i));
                         }
-                        stringBuilder.append(line.charAt(i));
+                        stringBuilder.reverse();
+                        task.addExisting(taskChar, taskStatus, description.substring(0, startIndex), stringBuilder.toString().trim());
+                    } else {
+                        for (int i = lastIndex + 1; i > 0; i--) {
+                            if (line.charAt(i) == '(') {
+                                startIndex = i - 7;
+                                break;
+                            }
+                            stringBuilder.append(line.charAt(i));
+                        }
+                        stringBuilder.reverse();
+                        task.addExisting(taskChar, taskStatus, description.substring(0, startIndex), stringBuilder.toString().trim());
                     }
-                    stringBuilder.reverse();
-                    task.addExisting(taskChar, taskStatus, description.substring(0, startIndex), stringBuilder.toString());
                 }
             }
         } catch (FileNotFoundException e) {

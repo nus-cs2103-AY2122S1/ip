@@ -1,6 +1,5 @@
 package com.iP.yiheng;
 
-import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -11,7 +10,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         Task task = new Task();
-        task.loadArrayList();
+        task.loadArrayList(); // Loads the array list based on our file on hard disk
         boolean breakWhile = false;
 
         while (scanner.hasNext()) {
@@ -24,11 +23,16 @@ public class Duke {
                     break;
                 case "done":
                     String stringIndex = scanner.next();
-                    int index = Integer.parseInt(stringIndex) - 1;
-                    if (task.markDone(index)) {
-                        System.out.println("\nDuke: Nice! I've marked this task as done:\n" + Task.retrieveTask(index));
+                    try {
+                        int index = Integer.parseInt(stringIndex) - 1;
+                        if (task.markDone(index)) {
+                            System.out.println("\nDuke: Nice! I've marked this task as done:\n" + Task.retrieveTask(index));
+                        }
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter a number as index");
+                        break;
                     }
-                    break;
                 case "list":
                     Task.displayList();
                     break;
