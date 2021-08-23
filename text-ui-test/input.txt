@@ -1,7 +1,7 @@
 list
 todo read book
 deadline return book /by 2021-06-06
-event project meeting /at 2021-08-06, 14:00
+event project meeting /at 2021-08-06, 14:00 - 16:00
 todo join sports club
 todo borrow book
 list
@@ -19,6 +19,7 @@ deadline return book
 event project meeting
 deadline return book /by tonight
 event project meeting /at 12th Aug
+event project meeting /at 2021-08-06, 14:00
 done 100
 done -1
 done

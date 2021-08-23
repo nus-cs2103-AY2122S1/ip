@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -87,7 +87,8 @@ public class Duke {
 
                         if (type == TaskType.UNKNOWN) {
                             // Incorrect user input.
-                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                            throw new DukeException(
+                                    "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 
                         } else {
                             // Adds a Task to the task list.
@@ -100,23 +101,42 @@ public class Duke {
                                     case TODO:
                                         newTask = new ToDo(substring, false);
                                         break;
+
                                     case DEADLINE:
                                         String[] nameAndDeadline = substring.split(" /by ");
+
                                         if (nameAndDeadline.length > 1
                                                 && nameAndDeadline[1].trim().length() > 0) {
-                                            LocalDateTime deadline = Duke.formatDateTime(nameAndDeadline[1]);
+                                            LocalDateTime deadline = Duke
+                                                    .formatDateTime(nameAndDeadline[1]);
                                             newTask = new Deadline(nameAndDeadline[0], deadline,
                                                     false);
+
                                         } else {
                                             throw new DukeException("☹ OOPS!!! Please provide a date or "
                                                     + "time for the deadline.");
                                         }
                                         break;
+
                                     default:
                                         String[] nameAndTime = substring.split(" /at ");
-                                        if (nameAndTime.length > 1 && nameAndTime[1].trim().length() > 0) {
-                                            LocalDateTime eventTime = Duke.formatDateTime(nameAndTime[1]);
-                                            newTask = new Event(nameAndTime[0], eventTime, false);
+
+                                        if (nameAndTime.length > 1
+                                                && nameAndTime[1].trim().length() > 0) {
+                                            String[] splitEndTime = nameAndTime[1].split(" - ");
+                                            LocalDateTime eventTime = Duke
+                                                    .formatDateTime(splitEndTime[0]);
+
+                                            if (splitEndTime.length > 1
+                                                    && splitEndTime[1].trim().length() > 0) {                                                LocalTime endTime = LocalTime.parse(splitEndTime[1]);
+                                                newTask = new Event(nameAndTime[0],
+                                                        eventTime, endTime,false);
+
+                                            } else {
+                                                throw new DukeException("☹ OOPS!!! Please provide an end "
+                                                        + "time for the event.");
+                                            }
+
                                         } else {
                                             throw new DukeException("☹ OOPS!!! Please provide a date or "
                                                     + "time for the event.");
@@ -275,7 +295,9 @@ public class Duke {
             default:
                 String eventName = split[1];
                 String eventDateAndTime = split[2];
-                return new Event(eventName, LocalDateTime.parse(eventDateAndTime), isDone);
+                String eventEndTime = split[3];
+                return new Event(eventName, LocalDateTime.parse(eventDateAndTime),
+                        LocalTime.parse(eventEndTime), isDone);
         }
     }
 
@@ -296,8 +318,8 @@ public class Duke {
             }
             return LocalDateTime.parse(toFormat);
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! Please use the following format for date and time(optional):\n"
-            + "yyyy-MM-dd, H:mm");
+            throw new DukeException("☹ OOPS!!! Please use the following format for date and time:\n"
+            + "yyyy-MM-dd, HH:mm");
         }
     }
 }
