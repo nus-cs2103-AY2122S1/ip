@@ -1,6 +1,12 @@
+package task;
+
 public class Event extends Task {
     private static final String type = "E";
     private String due;
+
+    public Event(String description) {
+        super(description);
+    }
 
     public Event(String description, String due) {
         super(description);

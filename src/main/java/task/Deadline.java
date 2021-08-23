@@ -1,6 +1,12 @@
+package task;
+
 public class Deadline extends Task {
     private static final String type = "D";
     private String due;
+
+    public Deadline(String description) {
+        super(description);
+    }
 
     public Deadline(String description, String due) {
         super(description);
