@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Deals with interactions with the user.
  */

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Specifies the type of action to be taken by the duke.
  */

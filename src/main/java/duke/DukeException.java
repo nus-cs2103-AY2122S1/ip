@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Exceptions encountered when interacting with a duke
  */
