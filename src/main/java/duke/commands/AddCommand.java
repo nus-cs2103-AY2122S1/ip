@@ -33,12 +33,12 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList, Storage store, Ui ui)
             throws CommandParamException, DukeFileException, EmptyDescriptionException, UnknownCommandException {
         try {
-            Task t;
+            Task task;
             if (this.command.equals("todo")) {
                 if (description.trim().equals("")) {
                     throw new EmptyDescriptionException("todo");
                 }
-                t = new ToDo(this.description);
+                task = new ToDo(this.description);
 
             } else if (this.command.equals("deadline")) {
                 if (description.equals("")) {
@@ -49,7 +49,7 @@ public class AddCommand extends Command {
                     if (parts.length < 2 || parts[0].trim().equals("") || parts[1].trim().equals("")) {
                         throw new CommandParamException("deadline");
                     }
-                    t = new Deadline(parts[0].trim(), parts[1].trim());
+                    task = new Deadline(parts[0].trim(), parts[1].trim());
                 } else {
                     throw new CommandParamException("deadline");
                 }
@@ -63,7 +63,7 @@ public class AddCommand extends Command {
                     if (parts.length < 2 || parts[0].trim().equals("") || parts[1].trim().equals("")) {
                         throw new CommandParamException("event");
                     }
-                    t = new Event(parts[0].trim(), parts[1].trim());
+                    task = new Event(parts[0].trim(), parts[1].trim());
                 } else {
                     throw new CommandParamException("event");
                 }
@@ -72,9 +72,9 @@ public class AddCommand extends Command {
                 throw new UnknownCommandException();
             }
 
-            taskList.addToList(t);
-            store.appendCommand(t.fullCommand());
-            ui.printAddTask(t, taskList.getSize());
+            taskList.addToList(task);
+            store.appendCommand(task.fullCommand());
+            ui.printAddTask(task, taskList.getSize());
 
         } catch (IOException e) {
             throw new DukeFileException();
