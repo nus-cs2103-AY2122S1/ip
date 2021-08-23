@@ -15,7 +15,7 @@ public class Duke {
             try{
                 parser.parse(input);
             } catch(DukeException e) {
-                System.out.println("\n" + e.getMessage() + "\n");
+                UI.printError(e);
             } finally{
                 input = UI.getUserInput();
             }

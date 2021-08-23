@@ -1,6 +1,8 @@
 package Duke;
 
 import java.util.Scanner;
+
+import Duke.exception.DukeException;
 import Duke.task.TaskList;
 import Duke.task.Task;
 
@@ -61,6 +63,10 @@ public class UI {
     public static String getUserInput(){
         String input = scanner.nextLine();
         return input;
+    }
+
+    public static void printError(DukeException e){
+        System.out.println(formatWithSpace(e.getMessage()));
     }
 
 }
