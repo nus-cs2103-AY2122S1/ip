@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents an Iris object
+ */
 public class Duke {
     private static final String ENDING_COMMAND = "bye";
 
@@ -7,6 +10,11 @@ public class Duke {
     private TaskList taskList = new TaskList();
     private Ui ui;
 
+    /**
+     * Creates a new Iris instance
+     *
+     * @param filePath Path to file containing tasks
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts an Iris instance
+     */
     public void run() {
         ui.say("Hello! I'm Iris. What can I do for you?");
         String command = ui.prompt();

@@ -6,9 +6,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Encapsulates storage-related functionality of Iris
+ */
 public class Storage {
     private final String taskFilePath;
 
+    /**
+     * Creates a new Storage object
+     *
+     * @param taskFilePath Path to file containing tasks
+     */
     public Storage(String taskFilePath) {
         this.taskFilePath = taskFilePath;
     }
@@ -23,6 +31,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads tasks from task file
+     *
+     * @param taskList TaskList object to update with read tasks
+     * @param ui       Ui object for current Iris instance
+     * @throws IrisException for invalid tasks.txt
+     */
     public void readTasks(TaskList taskList, Ui ui) throws IrisException {
         File taskFile = new File(taskFilePath);
         try {
@@ -33,10 +48,15 @@ public class Storage {
         } catch (FileNotFoundException exception) {
             createTaskFile();
         } catch (IrisException exception) {
-            throw new Error("data.txt has been corrupted");
+            throw new Error("tasks.txt has been corrupted");
         }
     }
 
+    /**
+     * Writes tasks to task file
+     *
+     * @param taskList TaskList object representing current list of tasks
+     */
     public void writeTasks(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(taskFilePath);
@@ -44,16 +64,6 @@ public class Storage {
             for (String command : commands) {
                 fw.write(command);
             }
-            fw.close();
-        } catch (IOException exception) {
-            // TODO: handle IOException?
-        }
-    }
-
-    public void appendToFile(String command) {
-        try {
-            FileWriter fw = new FileWriter(taskFilePath, true);
-            fw.write(command);
             fw.close();
         } catch (IOException exception) {
             // TODO: handle IOException?
