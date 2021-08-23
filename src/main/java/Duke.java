@@ -95,7 +95,7 @@ public class Duke {
                     Deadlines dl = new Deadlines(input.substring(9, input.indexOf("/")), by);
                     sl.add(dl);
                     linesToPrint(dl.toString(), sl.size());
-                }else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
+                } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
                     if (input.length() == 5) {
                         throw new DukeException("   ☹ OOPS!!! The description of an event cannot be empty.");
                     }
@@ -193,6 +193,7 @@ public class Duke {
             }
         } else {
             throw new DukeException("   ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+
         }
     }
 }
