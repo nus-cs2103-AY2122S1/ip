@@ -1,3 +1,8 @@
+package duke.io;
+
+import duke.command.Commands;
+import duke.Duke;
+
 public class Ui {
     private final String LINEBREAK = "_________________________________________\n";
 
@@ -10,7 +15,7 @@ public class Ui {
     }
 
     public void prompt() {
-        System.out.println("How can I help you?");
+        System.out.println("How may I help you?");
     }
 
     // adds message to be printed in the specified color
@@ -31,6 +36,7 @@ public class Ui {
             addMessage(command.getCommand().getCommandString() + ", ", TextColor.DEFAULT);
         }
         print();
+        prompt();
     }
 
     public void greetReturningUser() {
@@ -38,5 +44,6 @@ public class Ui {
         addMessage("Tasks in list:\n", TextColor.DEFAULT);
         Duke.taskList.list();
         print();
+        prompt();
     }
 }

@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.Duke;
+
 public class ListCommand extends Command {
     public ListCommand() {
         setCommandString("list");

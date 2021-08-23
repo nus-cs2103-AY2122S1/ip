@@ -1,3 +1,5 @@
+package duke.command;
+
 public enum Commands {
     EXIT (new ExitCommand()),
     LIST (new ListCommand()),

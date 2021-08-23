@@ -1,3 +1,8 @@
+package duke.exception;
+
+import duke.Duke;
+import duke.io.TextColor;
+
 public class DukeException extends Exception {
     public DukeException(String message) {
         super(message);

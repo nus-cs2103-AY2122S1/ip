@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.io.TextColor;
+
 public abstract class Task {
     protected boolean done;
     protected String name;

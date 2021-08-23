@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.Duke;
+import duke.exception.DukeException;
+
 public class DoneCommand extends Command {
     public DoneCommand() {
         setCommandString("done");

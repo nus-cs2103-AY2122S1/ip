@@ -1,4 +1,12 @@
+package duke;
+
 import java.util.Scanner;
+import duke.task.TaskList;
+import duke.io.Parser;
+import duke.io.Storage;
+import duke.io.Ui;
+import duke.io.TextColor;
+import duke.exception.DukeException;
 
 public class Duke {
     // you can probably make a static ui, static parser, static storage

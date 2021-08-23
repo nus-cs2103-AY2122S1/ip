@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.task.ToDo;
+import duke.exception.DukeException;
+import duke.Duke;
+
 public class ToDoCommand extends Command {
     public ToDoCommand() {
         setCommandString("todo");
@@ -15,7 +21,7 @@ public class ToDoCommand extends Command {
             throw new DukeException("Please input the todo's name!");
         }
 
-        Task task = new ToDo(name);
-        Duke.taskList.addTask(task);
+        ToDo toDo = new ToDo(name);
+        Duke.taskList.addTask(toDo);
     }
 }

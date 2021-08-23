@@ -1,5 +1,10 @@
+package duke.command;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import duke.exception.DukeException;
+import duke.Duke;
+import duke.task.Event;
 
 public class EventCommand extends Command {
     public EventCommand() {
@@ -35,7 +40,7 @@ public class EventCommand extends Command {
             throw new DukeException("Please input your date in the format YYYY-MM-DD");
         }
 
-        Task task = new Event(name, date);
-        Duke.taskList.addTask(task);
+        Event event = new Event(name, date);
+        Duke.taskList.addTask(event);
     }
 }

@@ -1,3 +1,5 @@
+package duke.io;
+
 public enum TextColor {
     RED("\u001B[31m"),
     YELLOW("\u001B[33m"),

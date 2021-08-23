@@ -1,5 +1,10 @@
+package duke.command;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import duke.Duke;
+import duke.exception.DukeException;
+import duke.task.Deadline;
 
 public class DeadlineCommand extends Command {
     public DeadlineCommand() {
@@ -34,7 +39,7 @@ public class DeadlineCommand extends Command {
             throw new DukeException("Please input your date in the format YYYY-MM-DD");
         }
 
-        Task task = new Deadline(name, date);
-        Duke.taskList.addTask(task);
+        Deadline deadline = new Deadline(name, date);
+        Duke.taskList.addTask(deadline);
     }
 }

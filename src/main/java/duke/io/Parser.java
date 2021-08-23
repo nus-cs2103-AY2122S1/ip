@@ -1,3 +1,8 @@
+package duke.io;
+
+import duke.exception.DukeException;
+import duke.command.Commands;
+
 public class Parser {
     public void parse(String input) throws DukeException {
         String firstWord = input.split(" ")[0];
