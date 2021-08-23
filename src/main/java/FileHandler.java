@@ -21,15 +21,11 @@ public class FileHandler {
         writer.close();
     }
 
-    public void loadTasks() throws DukeException{
+    public void loadTasks() throws IOException, DukeException{
         Scanner scanner;
-        try {
-            File file = new File(fileName);
-            scanner = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            throw new DukeException("File not found!");
-        }
-
+        File file = new File(fileName);
+        file.createNewFile();
+        scanner = new Scanner(file);
         while (scanner.hasNext()) {
             Task task = parseTask(scanner.nextLine());
             if (task != null) {
@@ -67,5 +63,13 @@ public class FileHandler {
 
     ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    public void writeEntireFile() throws IOException {
+        FileWriter writer = new FileWriter(this.fileName);
+        for (Task task : tasks) {
+            writer.write(task.save() + "\n");
+        }
+        writer.close();
     }
 }

@@ -75,13 +75,28 @@ public class DukeHandler {
     private String deleteTask(String input) {
         String[] splitString = input.split(" ", 2);
         int i = Integer.parseInt(splitString[1])-1;
-        return "\tNoted. I've removed this task:\n" + "\t\t" + tasks.remove(i).toString() + "\n" + "\tNow you have " + tasks.size() + " tasks in the list.";
+        Task removedTask = tasks.remove(i);
+        try {
+            fileHandler.writeEntireFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "\tNoted. I've removed this task:\n" + "\t\t" + removedTask.toString() + "\n" + "\tNow you have " + tasks.size() + " tasks in the list.";
     }
 
-    private String setTaskAsDone(String input) {
+    private String setTaskAsDone(String input) throws DukeException {
         String[] splitString = input.split(" ", 2);
         int i = Integer.parseInt(splitString[1])-1;
+        if (i + 1 <= 0 || i + 1 > tasks.size()) {
+            throw new DukeException("Task not found!");
+        }
         tasks.get(i).markAsDone();
+        try {
+            fileHandler.writeEntireFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "\tNice! I've marked this task as done:\n\t\t" +  tasks.get(i).toString();
     }
 
