@@ -1,6 +1,7 @@
 package me.yukun99.ip.tasks;
 
 import me.yukun99.ip.core.DateTimePair;
+import me.yukun99.ip.core.TaskFinder;
 import me.yukun99.ip.core.Ui;
 import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
@@ -91,6 +92,20 @@ public abstract class Task {
 		}
 		Task task = (Task) o;
 		return this.name.equals(task.name);
+	}
+
+	/**
+	 * Updates TaskFinder instance when task is added or deleted.
+	 *
+	 * @param taskFinder TaskFinder instance to be updated.
+	 * @param delete True if task is being deleted, false otherwise.
+	 */
+	public void updateFinder(TaskFinder taskFinder, boolean delete) {
+		if (!delete) {
+			taskFinder.addTask(this, this.name);
+		} else {
+			taskFinder.deleteTask(this, this.name);
+		}
 	}
 
 	/**

@@ -3,6 +3,7 @@ package me.yukun99.ip;
 import me.yukun99.ip.commands.Command;
 import me.yukun99.ip.core.Parser;
 import me.yukun99.ip.core.Storage;
+import me.yukun99.ip.core.TaskFinder;
 import me.yukun99.ip.core.TaskList;
 import me.yukun99.ip.core.Ui;
 import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
@@ -36,10 +37,11 @@ public class HelpBot {
 	 * @param filepath Filepath of the input file.
 	 */
 	public HelpBot(String name, String filepath) throws IOException {
-		TaskList taskList = new TaskList();
+		TaskFinder taskFinder = new TaskFinder();
+		TaskList taskList = new TaskList(taskFinder);
 		this.storage = new Storage(filepath, taskList);
 		this.storage.loadTasks();
-		this.ui = new Ui(name, taskList, storage);
+		this.ui = new Ui(name, taskList, storage, taskFinder);
 		this.scanner = storage.getInputs();
 		this.parser = new Parser(this, this.scanner, taskList, this.ui, this.storage);
 		this.ui.start();

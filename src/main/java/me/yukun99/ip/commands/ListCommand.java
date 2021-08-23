@@ -12,11 +12,11 @@ public class ListCommand extends Command {
 
 	@Override
 	public void run() throws HelpBotDateTimeFormatException {
-		if (args == null) {
+		if (this.args == null) {
 			this.ui.list();
 			return;
 		}
-		DateTimePair date = DateTimePair.parse(args[0]);
+		DateTimePair date = DateTimePair.parse(this.args[0]);
 		this.ui.listByDate(date);
 	}
 }
