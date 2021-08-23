@@ -1,23 +1,18 @@
-public class Event extends Task{
-    /* likely needed for future implementation
-    protected String startTime;
-    protected String endTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String startTime, String endTime) {
+public class Event extends Task{
+    private static final DateTimeFormatter DT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy h:mma");
+
+    private LocalDateTime startTime;
+
+    public Event(String description, LocalDateTime startTime) {
         super(description);
         this.startTime = startTime;
-        this.endTime = endTime;
-    }
-     */
-    protected String deadline;
-
-    public Event(String description, String deadline) {
-        super(description);
-        this.deadline = deadline;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (at: %s)", deadline);
+        return "[E]" + super.toString() + String.format(" (at: %s)", startTime.format(DT_FORMAT));
     }
 }
