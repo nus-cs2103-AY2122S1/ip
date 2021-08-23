@@ -1,28 +1,26 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 
 
 public class Duke {
     private static final String FILE_URL = "data/Duke.txt";
     private static List<Task> list = new ArrayList<>();
-    private static DataStorage storage = null; 
-    
-    
+    private static DataStorage storage = null;
+
+
 
     public static void main(String[] args) {
         storage = new DataStorage(FILE_URL);
         list = storage.loadStorage();
-        for (Task task: list) {
-            System.out.println(list);
-        }
+
         greet();
 
-        
         Scanner scanner = new Scanner(System.in);
         String text = scanner.nextLine();
-        
 
         String[] keywords = {"done", "bye", "list", "bye", "deadline", "event", "todo", "delete"};
 
@@ -67,11 +65,13 @@ public class Duke {
                         if (text.contains("deadline")) {
                             String description = extractTaskDescription(text);
                             String time = extractTaskTime(text);
-                            newTask = new Deadline(description, time);
+                            LocalDate date = LocalDate.parse(time);
+                            newTask = new Deadline(description, date);
                         } else if (text.contains("event")) {
                             String description = extractTaskDescription(text);
                             String time = extractTaskTime(text);
-                            newTask = new Event(description, time);
+                            LocalDate date = LocalDate.parse(time);
+                            newTask = new Event(description, date);
                         } else if (text.contains("todo")) {
                             String description = extractTaskDescription(text);
                             newTask = new Todo(description);
@@ -82,7 +82,6 @@ public class Duke {
 
                         text = scanner.nextLine();
                     }
-
                     storage.saveToStorage(list);
 
                 }
@@ -214,5 +213,5 @@ public class Duke {
 
     }
 
-    
+
 }
