@@ -1,5 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Lania {
 
@@ -80,6 +85,19 @@ public class Lania {
     }
 
     public void run() {
+        try {
+            Files.createDirectories(Paths.get("data/"));
+            File f = new File("data/lania.txt");
+            if (f.createNewFile()) {
+                System.out.println("File created: " + f.getName());
+            } else {
+                System.out.println("File already exists.");
+                printFileContents("data/lania.txt");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
         System.out.println("Hello I am Lania! How may Lania be of assistance?");
         System.out.println("Enter 'bye' to exit");
         Scanner s = new Scanner(System.in);
@@ -103,6 +121,14 @@ public class Lania {
             }
         }
         System.out.println("Bye. Lania looks forward to seeing you again!");
+    }
+
+    private void printFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            System.out.println(s.nextLine());
+        }
     }
 
     /**
