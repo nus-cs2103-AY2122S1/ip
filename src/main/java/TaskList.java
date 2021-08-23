@@ -14,18 +14,19 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 
 public class TaskList {
-    private static final String directory = "./data";
-    private final List<Task> list;
+    private List<Task> list;
     private final Ui ui;
+    private final Storage storage;
 
     TaskList() {
         this.list = new ArrayList<Task>();
         this.ui = new Ui();
+        this.storage = new Storage("list.txt");
     }
 
-    TaskList(List<Task> storage) {
-        this.list = storage;
-        this.ui = new Ui();
+    TaskList(List<Task> list) {
+        this();
+        this.list = list;
     }
 
     List<Task> getList() {
@@ -86,63 +87,11 @@ public class TaskList {
     void saveData() {
         String fileName = "list.txt";
         try {
-            boolean fileAlreadyExists = !createFileIfNotExists(fileName);
-            Path path = Paths.get(directory + "/" + fileName);
+            boolean fileAlreadyExists = !storage.createFileIfNotExists(fileName);
+            Path path = Paths.get(Storage.directory + "/" + fileName);
             Files.write(path, listItems(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    void readData(String fileName) {
-        String path = directory + "/" + fileName;
-        File file = new File(path);
-        if (!file.exists()) {
-            return;
-        }
-
-        try {
-            FileReader fr = new FileReader(path);
-            BufferedReader br = new BufferedReader(fr);
-            String line = br.readLine();
-            while (line != null) {
-                String type = Character.toString(line.charAt(line.indexOf("[") + 1));
-                boolean isDone = Character.toString(line.charAt(line.indexOf("[", 2) + 1)).equals("X");
-                String name = line.substring(line.indexOf("]", line.indexOf("]") + 1) + 2);
-
-                if (type.equals("T")) {
-                    addWithoutPrinting(new ToDo(name, isDone));
-                } else if (type.equals("D")) {
-                    name = name.split("\\(")[0].stripTrailing();
-                    String parsedInput = line.split("deadline:")[1];
-                    String deadline = parsedInput.substring(1, parsedInput.length() - 1);
-                    addWithoutPrinting(new Deadline(name, isDone, LocalDate.parse(deadline, Deadline.formatter)));
-                } else {
-                    name = name.split("\\(")[0].stripTrailing();
-                    String parsedInput = line.split("at:")[1];
-                    String at = parsedInput.substring(1, parsedInput.length() - 1);
-                    addWithoutPrinting(new Event(name, isDone, at));
-                }
-
-                line = br.readLine();
-            }
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    boolean createFileIfNotExists(String fileName) throws IOException {
-        File fileDirectory = new File(directory);
-        if (!fileDirectory.exists()) {
-            fileDirectory.mkdir();
-        }
-
-        File file = new File(directory + "/" + fileName);
-        try {
-            return file.createNewFile();
-        } catch (IOException e) {
-            return false;
         }
     }
 }

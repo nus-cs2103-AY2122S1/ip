@@ -6,16 +6,17 @@ public class Chatbot {
     private final String name;
     private final TaskList taskList;
     private final Ui ui;
+    private final Storage storage;
 
     Chatbot(String name) {
         this.name = name;
-        this.taskList = new TaskList();
         this.ui = new Ui();
+        this.storage = new Storage("list.txt");
+        this.taskList = new TaskList(storage.load());
     }
 
     void initialize() {
         greet();
-        taskList.readData("list.txt");
         listen();
     }
 
