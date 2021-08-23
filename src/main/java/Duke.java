@@ -18,9 +18,11 @@ public class Duke {
      * @param args The command line arguments.
      */
     public static void main(String[] args) {
-        System.out.println("hi sis, type out your task right away! :D");
+        System.out.println("Hi, Nat. Type out your task right away! :D");
 
         File f = new File("data/duke.txt");
+
+        // handles the case whereby file/directory does not exist
         if (!f.exists()) {
             f.getParentFile().mkdirs();
             try {
@@ -30,11 +32,17 @@ public class Duke {
             }
         }
 
+        try {
+            readFile();
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
+
         while (sc.hasNextLine()) {
             try {
                 String text = sc.nextLine();
                 if (text.equals("q")) {
-                    System.out.println("ciao!");
+                    System.out.println("See you! :)");
                     break;
                 } else if (text.equals("ls")) {
                     printList();
@@ -44,6 +52,8 @@ public class Duke {
                     deleteTask(text);
                 } else {
                     addTask(text);
+                    System.out.println("added: " + myList.get(myList.size() - 1));
+                    System.out.printf("Now you have %d task(s) in the list.\n", myList.size());
                 }
             } catch (DukeException e) {
                 System.out.println(e);
@@ -51,21 +61,64 @@ public class Duke {
         }
     }
 
-//    /**
-//     * Reads data/duke.txt and copies data into task list.
-//     */
-//    private static void readFile() throws DukeException{
-//        File f = new File("data/duke.txt");;
-//        try {
-//            Scanner s = new Scanner(f);
-//            while (s.hasNextLine()) {
-//                String text = sc.nextLine();
-//            }
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//            throw new DukeException("No file found.");
-//        }
-//    }
+    /**
+     * Reads data/duke.txt and copies data into task list.
+     *
+     * @throws DukeException if the named file exists but is a directory rather than a regular file
+     * or does not exist but cannot be created, or cannot be opened for any other reason.
+     */
+    private static void readFile() throws DukeException {
+        File f = new File("data/duke.txt");
+        try {
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String text = s.nextLine();
+                String type = text.substring(1, 2);
+                String status = text.substring(4, 5);
+                String description = text.split("\\(")[0].substring(7).trim();
+                String time = "";
+
+                if (type.equals("D") || type.equals("E")) {
+                    String temp = text.split(":")[1];
+                    time = temp.substring(1, temp.length() - 1);
+                }
+
+                switch (type) {
+                case "T": addTask("todo " + description);
+                    break;
+                case "D": addTask("deadline " + description + " /by " + time);
+                    break;
+                case "E": addTask("event " + description + " /at " + time);
+                    break;
+                }
+
+                if (status.equals("X")) {
+                    myList.get(myList.size() - 1).setDone();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw new DukeException("No file found.");
+        }
+    }
+
+    /**
+     *
+     * @throws DukeException if the named file exists but is a directory rather than a regular file
+     * or does not exist but cannot be created, or cannot be opened for any other reason.
+     */
+    private static void copyToFile() throws DukeException {
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt");
+            for (int i = 0; i < myList.size(); i++) {
+                fw.write(myList.get(i).toString() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) { // TODO might wanna include under DukeException
+            e.printStackTrace();
+            throw new DukeException("There's something wrong with the file.");
+        }
+    }
 
     /**
      * Prints the list of Tasks.
@@ -91,8 +144,12 @@ public class Duke {
             Task curr = (Task) myList.get(i);
             curr.setDone();
             System.out.println(curr);
+            System.out.println("The task is marked as done! Good job :D");
+            copyToFile();
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Indicate which task you want to mark as done.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("The number is out of range. Indicate the correct task number that you want to mark as done.");
         }
     }
 
@@ -106,12 +163,18 @@ public class Duke {
         text = text.trim();
         try {
             int i = Integer.parseInt(text.split(" ")[1]) - 1;
+
+            Task t = myList.get(i);
             System.out.println("Noted. I've removed this task:");
-            System.out.println(myList.get(i));
+            System.out.println(t);
             myList.remove(i);
             System.out.printf("Now you have %d task(s) in the list.\n", myList.size());
-        } catch (ArrayIndexOutOfBoundsException e){
-            throw new DukeException("Indicate which task you want to delete.");
+
+            copyToFile();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Indicate which task that you want to delete.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("The number is out of range. Indicate the correct task number that you want to delete.");
         }
     }
 
@@ -144,18 +207,8 @@ public class Duke {
                 throw new DukeException("Please use the keyword --todo, deadline or event--");
             }
 
-            try {
-                FileWriter fw = new FileWriter("data/duke.txt");
-                for (int i = 0; i < myList.size(); i++) {
-                    fw.write(myList.get(i).toString() + System.lineSeparator());
-                }
-                fw.close();
-            } catch (IOException e) { // TODO might wanna include under DukeException
-                e.printStackTrace();
-            }
+            copyToFile();
 
-            System.out.println("added: " + myList.get(myList.size() - 1));
-            System.out.printf("Now you have %d task(s) in the list.\n", myList.size());
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The description of a task cannot be empty.");
         }

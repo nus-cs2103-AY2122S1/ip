@@ -1,3 +1,4 @@
-[T][ ] list
-[T][ ] read book
-[D][ ] something (by: time)
+[D][X] something (by: time)
+[E][ ] movie night (at: thursday night)
+[T][ ] do cs2103
+[T][X] read book
