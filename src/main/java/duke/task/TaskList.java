@@ -24,7 +24,11 @@ public class TaskList {
         if (this.tasks.size() == 0) {
             ui.printNoTaskAvailable();
         } else {
-            ui.printTaskList(this.tasks);
+            ui.printTaskListHeader();
+            for (int i = 0; i < this.tasks.size(); i++) {
+                Task task = this.tasks.get(i);
+                ui.printTaskWithIndex(i + 1, task);
+            }
         }
     }
 
@@ -35,8 +39,23 @@ public class TaskList {
      * @param ui The UI object of the current Duke object
      */
     public void printTasksOnDate(String dateString, UI ui) {
+        ui.printTasksOnDateHeader();
         LocalDate date = LocalDate.parse(dateString);
-        ui.printTaskOnDate(this.tasks, date);
+        int index = 1;
+
+        for (Task task : this.tasks) {
+            if (task instanceof Deadline) {
+                LocalDate deadline = ((Deadline) task).getDeadline();
+                if (deadline.equals(date)) {
+                    ui.printTaskWithIndex(index, task);
+                }
+            } else if (task instanceof Event) {
+                LocalDate time = ((Event) task).getTime();
+                if (time.equals(date)) {
+                    ui.printTaskWithIndex(index, task);
+                }
+            }
+        }
     }
 
     /** Prints tasks with the specified keyword.
@@ -45,7 +64,13 @@ public class TaskList {
      * @param ui The UI object of the current Duke object.
      */
     public void printTasksWithKeyword(String keyword, UI ui) {
-        ui.printTasksWithKeyword(this.tasks, keyword);
+        ui.printTasksWithKeywordHeader();
+        int index = 1;
+        for (Task task : this.tasks) {
+            if (task.toString().contains(keyword)) {
+                ui.printTaskWithIndex(index, task);
+            }
+        }
     }
 
     /**

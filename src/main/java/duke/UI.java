@@ -36,16 +36,13 @@ public class UI {
     }
 
     /**
-     * Prints the task list.
+     * Prints a task with a index number.
      *
-     * @param taskList The current list of tasks.
+     * @param index The index of the task.
+     * @param task The task to be printed.
      */
-    public void printTaskList(List<Task> taskList) {
-        System.out.println("Lollipop: Here are your tasks");
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
-            System.out.printf("%d. %s%n", i + 1, task.toString());
-        }
+    public void printTaskWithIndex(int index, Task task) {
+        System.out.printf("%d. %s%n", index, task);
     }
 
     /**
@@ -75,47 +72,20 @@ public class UI {
         System.out.printf("Lollipop: %s has been deleted.%n", task.toString());
     }
 
-    /**
-     * Prints the tasks which occur on a specified date.
-     *
-     * @param taskList The list of tasks.
-     * @param date The specified date for which the tasks fall on.
-     */
-    public void printTaskOnDate(List<Task> taskList, LocalDate date) {
-        System.out.println("Lollipop: Here the tasks that occurs on the specified date.");
-        int count = 1;
-        for (Task task : taskList) {
-            if (task instanceof Deadline) {
-                LocalDate deadline = ((Deadline) task).getDeadline();
-                if (deadline.equals(date)) {
-                    System.out.printf("%d. %s%n", count, task);
-                }
-            } else if (task instanceof Event) {
-                LocalDate time = ((Event) task).getTime();
-                if (time.equals(date)) {
-                    System.out.printf("%d. %s%n", count, task);
-                }
-            }
-        }
+    /** Prints the header when displaying the task list */
+    public void printTaskListHeader() {
+        System.out.println("Lollipop: Here are your tasks");
     }
 
-    /**
-     * Prints the task with the specified keyword.
-     *
-     * @param taskList The list of tasks.
-     * @param keyword The keyword specified by the user.
-     */
-    public void printTasksWithKeyword(List<Task> taskList, String keyword) {
+    /** Prints the header when displaying tasks which occur on the specified date */
+    public void printTasksOnDateHeader() {
+        System.out.println("Lollipop: Here the tasks that occurs on the specified date:");
+    }
+
+    /** Prints the header when displaying tasks with specified keyword */
+    public void printTasksWithKeywordHeader() {
         System.out.println("Lollipop: Here the tasks that match your keyword:");
-        int count = 1;
-        for (Task task : taskList) {
-            if (task.toString().contains(keyword)) {
-                System.out.printf("%d. %s%n", count, task);
-            }
-        }
     }
-
-    /** Error methods */
 
     // Error methods
     /**
