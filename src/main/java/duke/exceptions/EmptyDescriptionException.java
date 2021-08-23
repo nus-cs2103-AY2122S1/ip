@@ -11,7 +11,6 @@ public class EmptyDescriptionException extends DukeException {
      */
     private final String command;
 
-
     /**
      * This is a EmptyDescriptionException Contructor.
      *
