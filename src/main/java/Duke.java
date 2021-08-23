@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -100,7 +99,7 @@ public class Duke {
          * @throws DukeException The exception thrown when the file data is invalid.
          */
         public static Task readTaskFromFile(String str) throws DukeException {
-            String regex = "^\\[([TDE])]\\[([X ])] ([^ ]+)$";
+            String regex = "^\\[([TDE])]\\[([X ])] (.+)$";
 
             // Create a Pattern object
             Pattern pattern = Pattern.compile(regex);
@@ -140,20 +139,30 @@ public class Duke {
                 case TODO:
                     return new ToDo(details, isDone);
                 case DEADLINE:
-                    Pattern deadlinePattern = Pattern.compile("([^ ]+) \\(by: ([^ ]+)\\)");
+                    Pattern deadlinePattern =
+                            Pattern.compile("(.+) \\(by: (\\d{1,2}-\\d{1,2}-\\d{4})\\)");
                     Matcher deadlineMatcher = deadlinePattern.matcher(details);
 
                     if (deadlineMatcher.find()) {
-                        return new Deadline(
-                                deadlineMatcher.group(1), isDone, deadlineMatcher.group(2));
+                        try {
+                            return new Deadline(
+                                    deadlineMatcher.group(1), isDone, deadlineMatcher.group(2));
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException.FileDataInvalidException();
+                        }
                     }
                 case EVENT:
-                    Pattern eventPattern = Pattern.compile("([^ ]+) \\(at: ([^ ]+)\\)");
+                    Pattern eventPattern =
+                            Pattern.compile("(.+) \\(at: (\\d{1,2}-\\d{1,2}-\\d{4})\\)");
                     Matcher eventMatcher = eventPattern.matcher(details);
 
                     if (eventMatcher.find()) {
-                        return new Event(
-                                eventMatcher.group(1), isDone, eventMatcher.group(2));
+                        try {
+                            return new Event(
+                                    eventMatcher.group(1), isDone, eventMatcher.group(2));
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException.FileDataInvalidException();
+                        }
                     }
                 default:
                     throw new DukeException.FileDataInvalidException();
@@ -199,7 +208,7 @@ public class Duke {
             case TODO:
                 return new ToDo(details);
             case DEADLINE:
-                Pattern p_deadline = Pattern.compile("^([^ ]+) /by ([^ ]+)$");
+                Pattern p_deadline = Pattern.compile("^(.+) /by (.+)$");
                 Matcher m_deadline = p_deadline.matcher(details);
 
                 if (m_deadline.find()) {
@@ -208,7 +217,7 @@ public class Duke {
                     throw new DukeException.NoTimeException(type);
                 }
             case EVENT:
-                Pattern p_event = Pattern.compile("^([^ ]+) /at ([^ ]+)$");
+                Pattern p_event = Pattern.compile("^(.+) /at (.+)$");
                 Matcher m_event = p_event.matcher(details);
 
                 if (m_event.find()) {
@@ -269,22 +278,30 @@ public class Duke {
      * A type of task that needs to be done before a specific date/time.
      */
     public static class Deadline extends Task {
-       private final String time;
+       private final LocalDate time;
 
-        public Deadline(String description, String time) {
+        public Deadline(String description, String time) throws DukeException {
             super(description);
-            this.time = time;
+            try {
+                this.time = LocalDate.parse(time, dateInputFormatter);
+            } catch (DateTimeParseException e) {
+                throw new DukeException.DateInputInvalidException();
+            }
         }
 
-        public Deadline(String description, boolean isDone, String time) {
+        public Deadline(String description, boolean isDone, String time) throws DukeException {
             super(description, isDone);
-            this.time = time;
+            try {
+                this.time = LocalDate.parse(time, dateInputFormatter);
+            } catch (DateTimeParseException e) {
+                throw new DukeException.DateInputInvalidException();
+            }
         }
 
         @Override
         public String toString() {
             return "[" + TaskType.DEADLINE.getSymbol() + "]" + super.toString()
-                    + " (by: " + time + ")";
+                    + " (by: " + dateInputFormatter.format(time) + ")";
         }
     }
 
@@ -296,20 +313,28 @@ public class Duke {
     public static class Event extends Task {
         private final LocalDate time;
 
-        public Event(String description, String time) throws DateTimeParseException {
+        public Event(String description, String time) throws DukeException {
             super(description);
-            this.time = LocalDate.parse(time, dateInputFormatter);
+            try {
+                this.time = LocalDate.parse(time, dateInputFormatter);
+            } catch (DateTimeParseException e) {
+                throw new DukeException.DateInputInvalidException();
+            }
         }
 
-        public Event(String description, boolean isDone, String time) {
+        public Event(String description, boolean isDone, String time) throws DukeException {
             super(description, isDone);
-            this.time = LocalDate.parse(time, dateInputFormatter);
+            try {
+                this.time = LocalDate.parse(time, dateInputFormatter);
+            } catch (DateTimeParseException e) {
+                throw new DukeException.DateInputInvalidException();
+            }
         }
 
         @Override
         public String toString() {
             return "[" + TaskType.EVENT.getSymbol() + "]" + super.toString()
-                    + " (at: " + time + ")";
+                    + " (at: " + dateInputFormatter.format(time) + ")";
         }
     }
 
@@ -358,10 +383,23 @@ public class Duke {
             }
         }
 
+        /**
+         * Exception thrown when Duke is unable to parse data in the file
+         */
         public static class FileDataInvalidException extends DukeException {
             @Override
             public String getMessage() {
                 return "Oh no! Duke cannot retrieve data from the file :(";
+            }
+        }
+
+        /**
+         * Exception thrown when the input date string is in the wrong format
+         */
+        public static class DateInputInvalidException extends DukeException {
+            @Override
+            public String getMessage() {
+                return "Duke cannot parse the date! Please ensure the date is in the format dd-MM-yyyy";
             }
         }
     }
