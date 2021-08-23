@@ -2,26 +2,46 @@ package duke.task;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList is a list for tasks.
+ */
 public class TaskList {
 
+    /** Storage container to store tasks */
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    // Adds a new task to the storage
+    /**
+     * Adds a new task to the list.
+     *
+     * @param task the task to be added.
+     */
     public void add(Task task) {
         tasks.add(task);
     }
 
-    // returns number of Tasks stored in the storage
+    /**
+     * Returns number of Tasks stored in the storage.
+     *
+     * @return number of tasks.
+     */
     public int size() {
         return tasks.size();
     }
 
-    // Checks if the storage is empty
+    /**
+     * Checks if the storage is empty.
+     *
+     * @return true if the list is empty, false otherwise.
+     */
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
 
-    // Marks a task as done
+    /**
+     * Marks a task as done.
+     *
+     * @param ind index of the task to be marked as done.
+     */
     public void markDone(int ind) {
         if (ind < 0 || ind >= tasks.size()){ 
             throw new IllegalArgumentException(
@@ -32,7 +52,12 @@ public class TaskList {
         tasks.get(ind).markDone();
     }
 
-    // Gets a task from the storage
+    /**
+     * Gets a task from the storage.
+     *
+     * @param ind index of the task to get from storage.
+     * @return the task.
+     */
     public Task get(int ind) {
         if (ind < 0 || ind >= tasks.size()){ 
             throw new IllegalArgumentException(
@@ -42,7 +67,11 @@ public class TaskList {
         return tasks.get(ind);
     }
 
-    // Deletes a task from storage
+    /**
+     * Deletes a task from storage.
+     *
+     * @param ind index of the task to delete from storage.
+     */
     public void delete(int ind) {
         if (ind < 0 || ind >= tasks.size()){ 
             throw new IllegalArgumentException(
@@ -52,7 +81,6 @@ public class TaskList {
         tasks.remove(ind);
     }
 
-    // Lists out all tasks from the storage in order of index
     @Override
     public String toString() {
         String result = "Here are the tasks in your list:";

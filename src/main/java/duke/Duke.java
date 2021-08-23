@@ -6,15 +6,23 @@ import duke.task.TaskList;
 
 import java.io.IOException;
 
+/**
+ * The type Duke that is the main of the program.
+ */
 public class Duke {
 
-    // storage to handle save file (loading and saving)
+    /** storage to handle save file (loading and saving) */
     private Storage storage;
-    // storage to store tasks
+    /** storage to store tasks */
     private TaskList tasks;
-    // handles interaction with the user
+    /** handles basic interaction with the user and string formatting */
     private UI ui;
 
+    /**
+     * Instantiates a new Duke.
+     *
+     * @param filePath the file path
+     */
     public Duke(String filePath) {
         this.tasks = new TaskList();
         this.ui = new UI();
@@ -32,6 +40,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke.
+     */
     public void run() {
         // Starting with a welcome message
         ui.showWelcome();
@@ -52,6 +63,11 @@ public class Duke {
         }   
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         new Duke("./duke.txt").run();
     }
