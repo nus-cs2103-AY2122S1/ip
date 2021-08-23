@@ -1,4 +1,4 @@
-public class Task {
+abstract class Task {
     private final String title;
     private boolean isDone;
 
@@ -9,6 +9,10 @@ public class Task {
     public Task(String title, boolean isDone) {
         this.title = title;
         this.isDone = isDone;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public void markDone() {

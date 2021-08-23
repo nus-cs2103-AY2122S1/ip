@@ -6,7 +6,15 @@ public class Event extends Task {
         this.at = at;
     }
 
+    static String getClassRepr() {
+        return "E";
+    }
+
+    public String getAt() {
+        return at;
+    }
+
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[" + getClassRepr() + "]" + super.toString() + " (at: " + at + ")";
     }
 }

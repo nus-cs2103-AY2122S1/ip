@@ -1,6 +1,5 @@
 import java.io.BufferedWriter;
 import java.nio.file.Files;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -8,10 +7,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private List<Task> tasks;
+    private static final String DIVIDER = "\n\n";
+    private final List<Task> tasks;
+    private final Path directoryPath = Paths.get("data");
+    private final Path filePath = Paths.get("data", "blue.txt");
+
 
     public TaskList() {
         tasks = new ArrayList<>();
+        boolean success = loadData();
+//        if (!success) {
+//// TODO            createFile();
+//        }
+    }
+
+    private boolean loadData() {
+        if (!Files.exists(directoryPath) || !Files.exists(filePath)) {
+            return false;
+        }
+        try {
+            String allContent = Files.readString(filePath);
+            String[] taskRepresentations = allContent.split(DIVIDER);
+            for (String taskRepresentation : taskRepresentations) {
+                Task task = TaskMapper.makeTask(taskRepresentation);
+                tasks.add(task);
+            }
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public void add(Task task) {
@@ -31,18 +56,16 @@ public class TaskList {
 
     private void save() {
         try {
-            Path directoryPath = Paths.get("data");
             if (!Files.exists(directoryPath)) {
                 Files.createDirectory(directoryPath);
             }
-            Path filePath = Paths.get("data", "blue.txt");
             if (!Files.exists(filePath)) {
                 Files.createFile(filePath);
             }
             BufferedWriter writer = Files.newBufferedWriter(filePath);
             for (Task task : tasks) {
-                writer.write(task.toString());
-                writer.newLine();
+                writer.write(TaskMapper.makeString(task));
+                writer.write(DIVIDER);
             }
             writer.flush();
             writer.close();
@@ -50,6 +73,7 @@ public class TaskList {
             e.printStackTrace();
         }
     }
+
 
     public int size() {
         return tasks.size();
