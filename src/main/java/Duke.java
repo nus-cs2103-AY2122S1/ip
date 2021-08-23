@@ -25,26 +25,6 @@ public class Duke {
         this.storage = new Storage(PATH);
     }
 
-    private void run() {
-        try {
-            TASKS.addAll(storage.load());
-            hikoPrint("Saved task loaded successfully.\n");
-        } catch (FileNotFoundException e) {
-            errorPrint("You do not have any saved task.\n");
-        } catch (FileFormatException e) {
-            errorPrint(e.getMessage());
-        }
-
-        greet();
-
-        Scanner sc = new Scanner(System.in);
-        while (true) try {
-            handleInput(sc.nextLine());
-        } catch (Exception e) {
-            errorPrint(e.getMessage());
-        }
-    }
-
     private static void greet() {
         String logo =
                 " _   _ _ _\n" +
@@ -62,39 +42,6 @@ public class Duke {
 
     private static void errorPrint(String err) {
         System.out.print(ANSI_RED + err + ANSI_RESET + "\n> ");
-    }
-
-    private void handleInput(String input)
-            throws UnknownActionException, EmptyDescriptionException, WrongFormatException, ListIndexException {
-        Command command = new Command(input);
-        switch (command.getAction()) {
-        case BYE:
-            handleBye();
-            break;
-        case LIST:
-            handleList();
-            break;
-        case DONE:
-            handleMarkDone(command.getArgument());
-            break;
-        case DELETE:
-            handleDelete(command.getArgument());
-            break;
-        case TODO:
-            Task task = new Todo(command.getArgument());
-            handleAdd(task);
-            break;
-        case DEADLINE:
-            Task deadline = new Deadline(command.getArgument());
-            handleAdd(deadline);
-            break;
-        case EVENT:
-            Task event = new Event(command.getArgument());
-            handleAdd(event);
-            break;
-        default:
-            throw new UnknownActionException();
-        }
     }
 
     private static void handleDelete(String arg) throws WrongFormatException, ListIndexException {
@@ -148,6 +95,63 @@ public class Duke {
         hikoPrint(output);
     }
 
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
+    private void run() {
+        try {
+            TASKS.addAll(storage.load());
+            hikoPrint("Saved task loaded successfully.\n");
+        } catch (FileNotFoundException e) {
+            errorPrint("You do not have any saved task.\n");
+        } catch (FileFormatException e) {
+            errorPrint(e.getMessage());
+        }
+
+        greet();
+
+        Scanner sc = new Scanner(System.in);
+        while (true) try {
+            handleInput(sc.nextLine());
+        } catch (Exception e) {
+            errorPrint(e.getMessage());
+        }
+    }
+
+    private void handleInput(String input)
+            throws UnknownActionException, EmptyDescriptionException, WrongFormatException, ListIndexException {
+        Command command = new Command(input);
+        switch (command.getAction()) {
+        case BYE:
+            handleBye();
+            break;
+        case LIST:
+            handleList();
+            break;
+        case DONE:
+            handleMarkDone(command.getArgument());
+            break;
+        case DELETE:
+            handleDelete(command.getArgument());
+            break;
+        case TODO:
+            Task task = new Todo(command.getArgument());
+            handleAdd(task);
+            break;
+        case DEADLINE:
+            Task deadline = new Deadline(command.getArgument());
+            handleAdd(deadline);
+            break;
+        case EVENT:
+            Task event = new Event(command.getArgument());
+            handleAdd(event);
+            break;
+        default:
+            throw new UnknownActionException();
+        }
+    }
+
     private void handleBye() {
         try {
             storage.write(TASKS);
@@ -157,10 +161,5 @@ public class Duke {
 
         System.out.println(ANSI_PURPLE + "Bye! Hope to see you again soon!" + ANSI_RESET);
         System.exit(0);
-    }
-
-
-    public static void main(String[] args) {
-        new Duke().run();
     }
 }

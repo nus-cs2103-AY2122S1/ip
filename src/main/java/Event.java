@@ -15,14 +15,6 @@ class Event extends Task {
         this.time = descriptionTime[1];
     }
 
-    public String getTime() {
-        return this.time;
-    }
-
-    public String getTask() {
-        return this.task;
-    }
-
     private static String processEventDescription(String description) throws WrongFormatException {
         String[] descriptionTime = description.split(" /at ");
         if (description.trim().equals("/at") || description.isBlank()) {
@@ -41,8 +33,13 @@ class Event extends Task {
         return "[E]" + super.toString();
     }
 
+    /**
+     * return the save string arrays for file writing
+     *
+     * @return the array of Strings representing the task
+     */
     public String[] saveStrings() {
         String isDone = this.getIsDone() ? "1" : "0";
-        return new String[] {"E", isDone, this.task, this.time};
+        return new String[]{"E", isDone, this.task, this.time};
     }
 }

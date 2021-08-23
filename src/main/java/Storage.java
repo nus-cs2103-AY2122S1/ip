@@ -8,16 +8,23 @@ import java.util.Scanner;
 
 public class Storage {
     private static final String deliminator = "::";
-    private String status;
-    private String filePath;
     private final File file;
     private final List<Task> tasks = new ArrayList<>();
+    private final String filePath;
+    private String status;
 
     public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
     }
 
+    /**
+     * load the file and parse into a list of task.
+     *
+     * @return the list of task for display
+     * @throws FileNotFoundException thrown when a file is not found
+     * @throws FileFormatException thrown when the file is wrongly formatted
+     */
     public List<Task> load() throws FileNotFoundException, FileFormatException {
         parseFile(file);
         return tasks;
@@ -65,6 +72,12 @@ public class Storage {
         }
     }
 
+    /**
+     * This will overwrite the file at the specified path with the provided tasks.
+     *
+     * @param tasks a List of task to overwrite to the file
+     * @throws IOException thrown during writing
+     */
     public void write(List<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         StringBuilder text = new StringBuilder();
