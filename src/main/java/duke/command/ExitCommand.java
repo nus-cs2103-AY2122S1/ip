@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.UI;
 
+/**
+ * The type Exit command that exits the program Duke.
+ */
 public class ExitCommand extends Command {
 
     @Override

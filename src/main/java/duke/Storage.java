@@ -11,22 +11,43 @@ import java.io.IOException;
 
 import java.util.Scanner;
 
+/**
+ * The type Storage to save and load data.
+ */
 public class Storage {
 
+    /** filepath to save and load data from */
     private final String filePath;
+    /** list of tasks to save data to or to load data from */
     private final TaskList tasks;
 
+    /**
+     * Instantiates a new Storage.
+     *
+     * @param tasks the tasks.
+     */
     public Storage(TaskList tasks) {
         this.tasks = tasks;
         // default save file filepath
         filePath = "./duke.txt";
     }
 
+    /**
+     * Instantiates a new Storage.
+     *
+     * @param tasks    the list of tasks.
+     * @param filePath the file path.
+     */
     public Storage(TaskList tasks, String filePath) {
         this.tasks = tasks;
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the data from the specified file path.
+     *
+     * @throws IOException the io exception when the file path is not valid.
+     */
     public void load() throws IOException {
         File saveFile = new File(filePath);
         System.out.println(saveFile.createNewFile());
@@ -62,7 +83,12 @@ public class Storage {
         saveReader.close();
     }
 
-    public void save() throws IOException {        
+    /**
+     * Saves the date to the specified file path.
+     *
+     * @throws IOException the io exception when the file path is not valid.
+     */
+    public void save() throws IOException {
         FileWriter writer = new FileWriter(filePath, false);
         for (int i = 0; i < tasks.size(); i++){
             writer.write(tasks.get(i).databaseString() + "\n");

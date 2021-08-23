@@ -4,11 +4,22 @@ import duke.UI;
 
 import duke.task.TaskList;
 
+/**
+ * The type Delete command that deletes a user-specified tasks from a given list of tasks.
+ */
 public class DeleteCommand extends Command {
 
+    /** User inputted string */
     private final String userInput;
+    /** List of tasks to run the command on */
     private final TaskList tasks;
 
+    /**
+     * Instantiates a new Delete command.
+     *
+     * @param userInput user-inputted string
+     * @param tasks     list of tasks to delete the user-specified task from
+     */
     public DeleteCommand(String userInput, TaskList tasks) {
         this.userInput = userInput;
         this.tasks = tasks;
