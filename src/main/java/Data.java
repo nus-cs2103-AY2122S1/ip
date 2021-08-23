@@ -8,7 +8,13 @@ import java.util.Scanner;
 
 public class Data {
 
-    public static final File data = new File("./data/data.txt");
+    private static File data;
+    private final String filePath;
+
+    public Data(String filePath) {
+        data = new File(filePath);
+        this.filePath = filePath;
+    }
 
     /**
      * Loads the Tasks stored in the form of an ArrayList<Task>.

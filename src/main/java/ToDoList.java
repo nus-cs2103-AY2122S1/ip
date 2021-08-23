@@ -3,9 +3,11 @@ import java.util.ArrayList;
 public class ToDoList {
 
     private static ArrayList<Task> dukeList;
+    private static Data data;
 
-    public ToDoList(ArrayList<Task> dukeList) {
-        this.dukeList = dukeList;
+    public ToDoList(ArrayList<Task> dukeList, Data data) {
+        ToDoList.dukeList = dukeList;
+        ToDoList.data = data;
     }
 
     public static void add(Task task) {
