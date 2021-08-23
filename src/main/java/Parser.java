@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * A parser to parse Duke commands
  */
@@ -51,9 +55,9 @@ public class Parser {
             return new Todo(todoDescription);
         case "event":
             String[] eventSplit = command.split(" /at ");
-            String at;
+            LocalDate at;
             try {
-                at = eventSplit[1];
+                at = this.stringToLocalDate(eventSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 // no /at found in command
                 String message = "☹ OOPS!!! The time of an event cannot be empty.";
@@ -70,9 +74,9 @@ public class Parser {
             return new Event(eventDescription, at);
         case "deadline":
             String[] ddlSplit = command.split(" /by ");
-            String by;
+            LocalDate by;
             try {
-                by = ddlSplit[1];
+                by = this.stringToLocalDate(ddlSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 // no /by found in command
                 String message = "☹ OOPS!!! The time of a deadline cannot be empty.";
@@ -90,5 +94,31 @@ public class Parser {
         default:
             throw new DukeException("Invalid action. Task cannot be parsed from the command.");
         }
+    }
+
+    /**
+     * Parse a string of time into LocalDate
+     *
+     * @param str The time string
+     * @return The LocalDate corresponding to the string
+     * @throws DukeException with message to be printed
+     */
+    public LocalDate stringToLocalDate(String str) throws DukeException {
+        try {
+            return LocalDate.parse(str);
+        } catch (DateTimeParseException e) {
+            String message = "The time format is invalid. Please use the format YYYY-MM-DD";
+            throw new DukeException(message);
+        }
+    }
+
+    /**
+     * Format LocalDate into MMMM d yyyy format
+     *
+     * @param localDate The LocalDate to be formatted
+     * @return The formatted LocalDate string
+     */
+    public String formatLocalDate(LocalDate localDate) {
+        return localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }
