@@ -35,7 +35,7 @@ public enum Command {
      * @return associate Command, else INVALID as default
      */
     public static Command parseFromInput(String input) {
-        String[] instructionArray = input.trim().split(" ", 2); // split first word
+        String[] instructionArray = input.split(" ", 2); // split first word
         String instruction = instructionArray[0];
 
         for (Command command : Command.values()) {

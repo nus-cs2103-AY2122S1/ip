@@ -69,8 +69,8 @@ public class Parser {
      */
     public String extractParameter(String userInput, Command command) throws DukeException {
         try {
-            String[] parameters = userInput.trim().split(" ", 2); // split on first occurrence
-            return parameters[1]; // grab second word onwards
+            String[] parameters = userInput.split(" ", 2); // split on first occurrence
+            return parameters[1].trim(); // grab second word onwards
         } catch (ArrayIndexOutOfBoundsException exception) {
             throw new DukeException(String.format(EMPTY_PARAM_TO_COMMAND_ERROR_MESSAGE, command));
         }
@@ -90,7 +90,7 @@ public class Parser {
         if (userParam.isBlank()) {
             throw new DukeException(String.format(EMPTY_PARAM_TO_COMMAND_ERROR_MESSAGE, command));
         }
-        return userParam.trim();
+        return userParam;
     }
 
     /**
