@@ -5,6 +5,7 @@ import duke.commands.AddCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.WrongCommand;
 
@@ -25,6 +26,10 @@ public class Parser {
             // number into integer
             int numToBeMarked = Integer.parseInt(taskToBeMarked) - 1;
             return new DoneCommand(numToBeMarked);
+
+        } else if (nextInput.contains("find")) {
+            String inputToMatch = nextInput.replace("find", "").trim();
+            return new FindCommand(inputToMatch);
 
         } else if (nextInput.contains("bye")) {
             return new ExitCommand();
