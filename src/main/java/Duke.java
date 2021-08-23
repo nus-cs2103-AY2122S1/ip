@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,6 +27,63 @@ public class Duke {
 
     public Duke() {
         taskList = new ArrayList<>();
+    }
+
+    public Duke(File file) {
+        taskList = new ArrayList<>();
+        try {
+            Scanner dataInput = new Scanner(file);
+            String data[];
+            boolean isDataCorrupted = false;
+            while (dataInput.hasNextLine()) {
+                data = dataInput.nextLine().split(" @ ");
+                switch (getCommand(data[0])) {
+                case DEADLINE:
+                    if (data.length != 4) {
+                        isDataCorrupted = true;
+                        continue;
+                    } else {
+                        DeadlineTask deadline = new DeadlineTask(data[1], data[2], data[3]);
+                        addTask(deadline);
+                    }
+                    break;
+                case EVENT:
+                    if (data.length != 4) {
+                        isDataCorrupted = true;
+                        continue;
+                    } else {
+                        EventTask event = new EventTask(data[1], data[2], data[3]);
+                        addTask(event);
+                    }
+                    break;
+                case TODO:
+                    if (data.length != 3) {
+                        isDataCorrupted = true;
+                        continue;
+                    } else {
+                        ToDoTask todo = new ToDoTask(data[1], data[2]);
+                        addTask(todo);
+                    }
+                    break;
+                case UNKNOWN:
+                    isDataCorrupted = true;
+                }
+            }
+
+            if (isDataCorrupted) {
+                System.out.println("____________________________________________________________________________________" +
+                        "____________________________________");
+                System.out.println("     Data was partially Corrupted");
+                System.out.println("____________________________________________________________________________________" +
+                        "____________________________________");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("____________________________________________________________________________________" +
+                    "____________________________________");
+            System.out.println(ANSI_RED + "     File Not Found" + ANSI_RESET);
+            System.out.println("____________________________________________________________________________________" +
+                    "____________________________________");
+        }
     }
 
     private void addTask(Task task) {
@@ -85,7 +146,7 @@ public class Duke {
     private void addDeadline(String taskDetails) throws DukeException {
         if ((taskDetails == null) || (taskDetails.equals("") || !(taskDetails.contains(" /by ")))) {
             throw new DukeException("Incorrect Format of the Deadline Command!!, Correct Format --> " +
-                                        "deadline <Description> /at <Deadline>");
+                    "deadline <Description> /at <Deadline>");
         } else {
             String[] values = taskDetails.split(" /by ", 2);
             DeadlineTask deadline = new DeadlineTask(values[0], values[1]);
@@ -138,7 +199,7 @@ public class Duke {
     private void addEvent(String taskDetails) throws DukeException {
         if ((taskDetails == null) || (taskDetails.equals("") || !(taskDetails.contains(" /at ")))) {
             throw new DukeException("Incorrect Format of the Event Command!!, " +
-                                    "Correct Format --> event <Description> /at <Details>");
+                    "Correct Format --> event <Description> /at <Details>");
         } else {
             String[] values = taskDetails.split(" /at ", 2);
             EventTask event = new EventTask(values[0], values[1]);
@@ -198,152 +259,107 @@ public class Duke {
                     "____________________________________");
             try {
                 switch (getCommand(taskObjective)) {
-                    case BYE: {
-                        goodbye(taskDetails);
-                        break;
-                    }
+                case BYE: {
+                    goodbye(taskDetails);
+                    break;
+                }
 
-                    case DEADLINE: {
-                        addDeadline(taskDetails);
-                        break;
-                    }
+                case DEADLINE: {
+                    addDeadline(taskDetails);
+                    break;
+                }
 
-                    case DELETE: {
-                        deleteTask(taskDetails);
-                        break;
-                    }
+                case DELETE: {
+                    deleteTask(taskDetails);
+                    break;
+                }
 
-                    case DONE: {
-                        markTaskAsCompleted(taskDetails);
-                        break;
-                    }
+                case DONE: {
+                    markTaskAsCompleted(taskDetails);
+                    break;
+                }
 
-                    case EVENT: {
-                        addEvent(taskDetails);
-                        break;
-                    }
+                case EVENT: {
+                    addEvent(taskDetails);
+                    break;
+                }
 
-                    case LIST: {
-                        displayTaskList(taskDetails);
-                        break;
-                    }
+                case LIST: {
+                    displayTaskList(taskDetails);
+                    break;
+                }
 
-                    case TODO: {
-                        addTodo(taskDetails);
-                        break;
-                    }
+                case TODO: {
+                    addTodo(taskDetails);
+                    break;
+                }
 
-                    case UNKNOWN: {
-                        throw new DukeException("OOPS! I'm sorry, but I don't know that command");
-                    }
+                case UNKNOWN: {
+                    throw new DukeException("OOPS! I'm sorry, but I don't know that command");
+                }
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
 
-//            try {
-//                if ((TaskObjective.valueOf(taskObjective) == TaskObjective.bye) && (taskDetails.equals(""))) {
-//                    display("Bye. Hope to see you again soon! \\_(\"v\")_/");
-//
-//                } else if((taskObjective.equals("list")) && (taskDetails.equals(""))) {
-//                    if (taskList.size() == 0) {
-//                        throw new DukeException("OOPS! There are no Tasks in the System");
-//                    } else {
-//                        display("Here are the tasks in your list:");
-//                        for (int i = 0; i < taskList.size(); i++) {
-//                            display((i + 1) + "." + taskList.get(i).toString());
-//                        }
-//                    }
-//                } else if (taskObjective.equals("done")) {
-//                    try {
-//                        int index = Integer.parseInt(taskDetails) - 1;
-//                        if ((index >= 0) && (index < taskList.size())) {
-//                            taskList.get(index).markAsCompleted();
-//                            display("Nice! I've marked this task as done:");
-//                            display("  " + taskList.get(index).toString());
-//                        } else {
-//                            throw new DukeException("OOPS! The Wrong Index! The Number of Tasks in the list is "
-//                                    + taskList.size());
-//                        }
-//                    } catch (NumberFormatException e) {
-//                        throw new DukeException("OOPS! The done Command should be followed at a Task Index!");
-//                    }
-//                } else if (taskObjective.equals("delete")) {
-//                    try {
-//                        int index = Integer.valueOf(taskDetails) - 1;
-//                        if (index >= 0 && index < taskList.size()) {
-//                            Task removed = taskList.remove(index);
-//                            display("Noted. I've removed this task:");
-//                            display("  " + removed.toString());
-//                        } else {
-//                            throw new DukeException("OOPS! The Wrong Index! The Number of Tasks in the list is "
-//                                    + taskList.size());
-//                        }
-//                    } catch (NumberFormatException e) {
-//                        throw new DukeException("OOPS! The delete Command should be followed at a Task Index!");
-//                    }
-//                } else if (taskObjective.equals("todo")) {
-//                    if (!(taskDetails.equals(""))) {
-//                        ToDoTask todo = new ToDoTask(taskDetails);
-//                        taskList.add(todo);
-//                        display("Got it. I've added this task:");
-//                        display("  " + todo);
-//                        display("Now you have " + taskList.size() + " tasks in the list.");
-//                    } else {
-//                        throw new DukeException("OOPS! Please provide the Description");
-//                    }
-//                } else if (taskObjective.equals("deadline")) {
-//                    if (taskDetails.equals("") || (((!(taskDetails.equals("")) && !(taskDetails.contains(" /at"))) &&
-//                        (!(taskDetails.equals("")) && !(taskDetails.contains("/at ")))) &&
-//                        (!(taskDetails.equals("")) && (taskDetails.contains("/at"))))) {
-//                        throw new DukeException("OOPS! Please provide the Description and the Deadline");
-//                    } else if(!(taskDetails.equals("")) && (taskDetails.contains(" /at"))) {
-//                        throw new DukeException("OOPS! Please provide the Description");
-//                    } else if(!(taskDetails.equals("")) && !(taskDetails.contains("/at "))) {
-//                        throw new DukeException("OOPS! Please provide the Deadline");
-//                    } else if(!(taskDetails.equals("")) && (taskDetails.contains(" /at "))) {
-//                        String[] values = taskDetails.split(" /at ", 2);
-//                        DeadlineTask deadline = new DeadlineTask(values[0], values[1]);
-//                        taskList.add(deadline);
-//                        display("Got it. I've added this task:");
-//                        display("  " + deadline);
-//                        display("Now you have " + taskList.size() + " tasks in the list.");
-//                    } else {
-//                        throw new DukeException("OOPS! I'm sorry, but I don't know that command");
-//                    }
-//                } else if (taskObjective.equals("event")) {
-//                    if (taskDetails.equals("") || (((!(taskDetails.equals("")) && !(taskDetails.contains(" /at"))) &&
-//                            (!(taskDetails.equals("")) && !(taskDetails.contains("/at ")))) &&
-//                            (!(taskDetails.equals("")) && (taskDetails.contains("/at"))))) {
-//                        throw new DukeException("OOPS! Please provide the Description and the Details");
-//                    } else if(!(taskDetails.equals("")) && !(taskDetails.contains(" /at"))) {
-//                        throw new DukeException("OOPS! Please provide the Description");
-//                    } else if(!(taskDetails.equals("")) && !(taskDetails.contains("/at "))) {
-//                        throw new DukeException("OOPS! Please provide the Details");
-//                    } else if(!(taskDetails.equals("")) && (taskDetails.contains(" /at "))) {
-//                        String[] values = taskDetails.split(" /at ", 2);
-//                        EventTask event = new EventTask(values[0], values[1]);
-//                        taskList.add(event);
-//                        display("Got it. I've added this task:");
-//                        display("  " + event);
-//                        display("Now you have " + taskList.size() + " tasks in the list.");
-//                    } else {
-//                        throw new DukeException("OOPS! I'm sorry, but I don't know that command");
-//                    }
-//                } else {
-//                    throw new DukeException("OOPS! I'm sorry, but I don't know that command");
-//                }
-//            } catch (DukeException e) {
-//                System.out.println(e.getMessage());
-//            }
-
             System.out.println("____________________________________________________________________________________" +
-                                   "____________________________________");
+                    "____________________________________");
         } while (!(taskObjective.equals("bye")));
+
+        try {
+            File dir = new File("data");
+            dir.mkdirs();
+            File data = new File(dir, "duke.txt");
+            if (data.exists()) {
+                data.delete();
+            }
+            data.createNewFile();
+            FileWriter storeData = new FileWriter(data);
+            Task task;
+            String delimiter = " @ ";
+            for(int i = 0; i < getTaskListLength(); i++) {
+                task = getTask(i);
+                if (task instanceof DeadlineTask) {
+                    DeadlineTask deadline = (DeadlineTask) task;
+                    storeData.write(deadline.getType() + delimiter + deadline.getIsCompleted() + delimiter
+                            + deadline.getDescription() + delimiter + deadline.getDeadline() + "\n");
+                } else if (task instanceof EventTask) {
+                    EventTask event = (EventTask) task;
+                    storeData.write(event.getType() + delimiter + event.getIsCompleted()+ delimiter
+                            + event.getDescription() + delimiter + event.getDetails() + "\n");
+                } else if (task instanceof ToDoTask) {
+                    ToDoTask todo = (ToDoTask) task;
+                    storeData.write(todo.getType() + delimiter + todo.getIsCompleted() + delimiter
+                            + todo.getDescription() + "\n");
+                } else {
+                    System.out.println("\n____________________________________________________________________________________" +
+                            "____________________________________");
+                    System.out.println(ANSI_RED + "     Error Occurred While Storing Data" + ANSI_RESET);
+                    System.out.println("____________________________________________________________________________________" +
+                            "____________________________________");
+                }
+            }
+            storeData.close();
+        } catch (IOException e) {
+            System.out.println("\n____________________________________________________________________________________" +
+                    "____________________________________");
+            System.out.println(ANSI_RED + "     123Error Occurred While Storing Data" + ANSI_RESET);
+            System.out.println("____________________________________________________________________________________" +
+                    "____________________________________");
+
+            File deletedFile = new File("../../../data/duke.txt");
+            deletedFile.delete();
+        }
     }
 
     public static void main(String[] args) {
+        File dataFile = new File("data", "duke.txt");
         Duke instance = new Duke();
+        if (dataFile.exists()) {
+            instance = new Duke(dataFile);
+        } else {
+            instance = new Duke();
+        }
         instance.greet();
         instance.Interact();
     }

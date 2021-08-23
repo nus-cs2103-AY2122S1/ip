@@ -7,8 +7,17 @@ public class Task {
         this.isCompleted = false;
     }
 
+    public Task(String isCompleted, String description) {
+        this.description = description;
+        this.isCompleted = isCompleted.equals("1") ? true : false;
+    }
+
     public String getDescription() {
         return this.description;
+    }
+
+    public String getIsCompleted() {
+        return this.isCompleted ? "1" : "0";
     }
 
     public String getStatusIcon() {
