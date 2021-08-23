@@ -1,3 +1,8 @@
+package command;
+
+import duke.TaskList;
+import duke.Ui;
+
 import java.time.LocalDate;
 
 public class FindCommand extends Command {

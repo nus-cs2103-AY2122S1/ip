@@ -1,3 +1,8 @@
+package command;
+
+import duke.TaskList;
+import duke.Ui;
+
 public class DoneCommand extends Command {
     private final int index;
 

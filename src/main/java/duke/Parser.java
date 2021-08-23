@@ -1,3 +1,13 @@
+package duke;
+
+import command.*;
+import exception.DukeException;
+import exception.DukeExceptionType;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
