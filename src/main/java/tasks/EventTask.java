@@ -1,38 +1,38 @@
+package tasks;
+
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * The DeadlineTask class is a child class for Task
+ * The tasks.EventTask class is a child class for tasks.Task
  * to support different specificities of a task
  * as input by user
  */
-
-public final class DeadLineTask extends Task{
+public final class EventTask extends Task {
   /**
    * The String to store the type of task information
-   * that identifies a Deadline task
+   * that identifies an Event task
    */
-  final String type = "[D]";
+  private final String type = "[E]";
 
   /**
-   * The String to store the do-by-date information
-   * that identifies a Deadline task
+   * The String to store the date information
+   * that identifies an Event task
    */
-  final String dueDate;
+  private final String date;
 
   private LocalDate localDate;
 
   /**
-   * Constructor for a Deadline task
-   *
-   * @param s the input string to describe the Deadline task
-   * @param date the do-by-date
+   * Constructor for an Event task
+   * @param s the input string to describe the Event task
+   * @param date the date of the event
    */
-  public DeadLineTask(String s, String date) {
+  public EventTask(String s, String date) {
     super(s);
-    this.dueDate = date;
+    this.date = date;
     String day = checkForDate(date);
     if (!day.equals("")) {
       LocalDate ld = convertDate(day);
@@ -59,9 +59,9 @@ public final class DeadLineTask extends Task{
   }
 
   /**
-   * To retrieve the information on the type of Task
+   * To retrieve the information on the type of tasks.Task
    *
-   * @return the String description of the type of Task
+   * @return the String description of the type of tasks.Task
    */
   public String getType() {
     return this.type;
@@ -77,16 +77,16 @@ public final class DeadLineTask extends Task{
   }
 
   /**
-   * To retrieve the description of the Deadline task
+   * To retrieve the description of the Event task
    *
-   * @return the String that is the description of the Deadline task
+   * @return the String that is the description of the Event task
    */
   @Override
   public String getTask() {
     if (this.localDate == null) {
-      return super.getTask() + " " + "(by: " + this.dueDate + ")";
+      return super.getTask() + " " + "(at: " + this.date + ")";
     } else {
-      return super.getTask() + " " + "(by: " + Month.of(this.localDate.getMonthValue()) + " "
+      return super.getTask() + " " + "(at: " + Month.of(this.localDate.getMonthValue()) + " "
               + this.localDate.getDayOfMonth() + " " + this.localDate.getYear() + ")";
     }
   }
@@ -98,9 +98,9 @@ public final class DeadLineTask extends Task{
   @Override
   public String getSaveFormat() {
     if (super.getStatus().equals("[ ]")) {
-      return "D" + "|" + this.getActualTask().strip() + "|" + this.dueDate + "|" + 0;
+      return "E" + "|" + this.getActualTask().strip() + "|" + this.date + "|" + 0;
     } else {
-      return "D" + "|" + this.getActualTask().strip() + "|" + this.dueDate + "|" + 1;
+      return "E" + "|" + this.getActualTask().strip() + "|" + this.date + "|" + 1;
     }
   }
 }

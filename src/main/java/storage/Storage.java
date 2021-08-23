@@ -1,11 +1,19 @@
+package storage;
+
 import java.io.*;
 import java.util.ArrayList;
+import duke.DukeException;
+import tasks.DeadLineTask;
+import tasks.EventTask;
+import tasks.Task;
+import tasks.ToDoTask;
+import ui.Ui;
 
 public final class Storage {
-  private final static String filePath = "../data/duke.txt";
+  private final static String filePath = "./data/duke.txt";
 
-  public void checkFiles() throws DukeException{
-    File data = new File("../data");
+  public void checkFiles() throws DukeException {
+    File data = new File("./data");
     File saves = new File(filePath);
     try {
       if (!data.exists() || !data.isDirectory()) {
@@ -15,6 +23,7 @@ public final class Storage {
         boolean save = saves.createNewFile();
       }
     } catch (IOException e) {
+      System.out.println(e.getMessage());
       throw new DukeException("Unexpected issue encountered");
     }
   }

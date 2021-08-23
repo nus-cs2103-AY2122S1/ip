@@ -6,7 +6,7 @@ Hello from
 |____/ \__,_|_|\_\___|
 
      _______________________________________________________
-     Hi! I am Duke!
+     Hi! I am duke.Duke!
      What can I do for you?
      _______________________________________________________
 list
@@ -36,7 +36,7 @@ todo join sports club
 tod test run
      _______________________________________________________
      Types of tasks: 'todo', 'deadline', 'event'.
-     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to add a task:  Please input in the form: '<Type of tasks.Task> <Name of tasks.Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
      If you wish to delete a task: Please input in the form: 'delete <task index>'.
      If you wish to see the current tasks, please input 'list'.
      If you wish to mark a task as done, please input 'done <task index>.'
@@ -93,7 +93,7 @@ event typing code /at
      _______________________________________________________
      Oh no, date is missing :(
      Types of tasks: 'todo', 'deadline', 'event'.
-     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to add a task:  Please input in the form: '<Type of tasks.Task> <Name of tasks.Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
      If you wish to delete a task: Please input in the form: 'delete <task index>'.
      If you wish to see the current tasks, please input 'list'.
      If you wish to mark a task as done, please input 'done <task index>.'
@@ -103,7 +103,7 @@ deadline what ds /by
      _______________________________________________________
      Uh oh, due-date is missing :(
      Types of tasks: 'todo', 'deadline', 'event'.
-     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to add a task:  Please input in the form: '<Type of tasks.Task> <Name of tasks.Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
      If you wish to delete a task: Please input in the form: 'delete <task index>'.
      If you wish to see the current tasks, please input 'list'.
      If you wish to mark a task as done, please input 'done <task index>.'
@@ -113,7 +113,7 @@ todo
      _______________________________________________________
      Oops, you have left out the task description for todo!
      Types of tasks: 'todo', 'deadline', 'event'.
-     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to add a task:  Please input in the form: '<Type of tasks.Task> <Name of tasks.Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
      If you wish to delete a task: Please input in the form: 'delete <task index>'.
      If you wish to see the current tasks, please input 'list'.
      If you wish to mark a task as done, please input 'done <task index>.'
@@ -128,7 +128,7 @@ deadline
      _______________________________________________________
      Hey, no deadline recorded does not mean no deadline >:(
      Types of tasks: 'todo', 'deadline', 'event'.
-     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to add a task:  Please input in the form: '<Type of tasks.Task> <Name of tasks.Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
      If you wish to delete a task: Please input in the form: 'delete <task index>'.
      If you wish to see the current tasks, please input 'list'.
      If you wish to mark a task as done, please input 'done <task index>.'
@@ -138,7 +138,7 @@ event
      _______________________________________________________
      I can't add an event without a date!
      Types of tasks: 'todo', 'deadline', 'event'.
-     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to add a task:  Please input in the form: '<Type of tasks.Task> <Name of tasks.Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
      If you wish to delete a task: Please input in the form: 'delete <task index>'.
      If you wish to see the current tasks, please input 'list'.
      If you wish to mark a task as done, please input 'done <task index>.'
@@ -153,7 +153,7 @@ done1
      _______________________________________________________
      Invalid input :(
      Types of tasks: 'todo', 'deadline', 'event'.
-     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to add a task:  Please input in the form: '<Type of tasks.Task> <Name of tasks.Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
      If you wish to delete a task: Please input in the form: 'delete <task index>'.
      If you wish to see the current tasks, please input 'list'.
      If you wish to mark a task as done, please input 'done <task index>.'
@@ -168,7 +168,7 @@ huh
      _______________________________________________________
      Invalid input :(
      Types of tasks: 'todo', 'deadline', 'event'.
-     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to add a task:  Please input in the form: '<Type of tasks.Task> <Name of tasks.Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
      If you wish to delete a task: Please input in the form: 'delete <task index>'.
      If you wish to see the current tasks, please input 'list'.
      If you wish to mark a task as done, please input 'done <task index>.'
@@ -178,7 +178,7 @@ what
      _______________________________________________________
      Invalid input :(
      Types of tasks: 'todo', 'deadline', 'event'.
-     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to add a task:  Please input in the form: '<Type of tasks.Task> <Name of tasks.Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
      If you wish to delete a task: Please input in the form: 'delete <task index>'.
      If you wish to see the current tasks, please input 'list'.
      If you wish to mark a task as done, please input 'done <task index>.'
@@ -188,7 +188,7 @@ blahh
      _______________________________________________________
      Invalid input :(
      Types of tasks: 'todo', 'deadline', 'event'.
-     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to add a task:  Please input in the form: '<Type of tasks.Task> <Name of tasks.Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
      If you wish to delete a task: Please input in the form: 'delete <task index>'.
      If you wish to see the current tasks, please input 'list'.
      If you wish to mark a task as done, please input 'done <task index>.'
@@ -232,7 +232,7 @@ delete2
      _______________________________________________________
      Invalid input :(
      Types of tasks: 'todo', 'deadline', 'event'.
-     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to add a task:  Please input in the form: '<Type of tasks.Task> <Name of tasks.Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
      If you wish to delete a task: Please input in the form: 'delete <task index>'.
      If you wish to see the current tasks, please input 'list'.
      If you wish to mark a task as done, please input 'done <task index>.'
@@ -242,7 +242,7 @@ delteeda
      _______________________________________________________
      Invalid input :(
      Types of tasks: 'todo', 'deadline', 'event'.
-     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to add a task:  Please input in the form: '<Type of tasks.Task> <Name of tasks.Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
      If you wish to delete a task: Please input in the form: 'delete <task index>'.
      If you wish to see the current tasks, please input 'list'.
      If you wish to mark a task as done, please input 'done <task index>.'
@@ -252,7 +252,7 @@ deleted
      _______________________________________________________
      Invalid input :(
      Types of tasks: 'todo', 'deadline', 'event'.
-     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to add a task:  Please input in the form: '<Type of tasks.Task> <Name of tasks.Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
      If you wish to delete a task: Please input in the form: 'delete <task index>'.
      If you wish to see the current tasks, please input 'list'.
      If you wish to mark a task as done, please input 'done <task index>.'

@@ -1,3 +1,5 @@
+package ui;
+
 import java.util.Scanner;
 
 public final class Ui{
@@ -17,7 +19,7 @@ public final class Ui{
   public static void welcomeMessage() {
     System.out.println("Hello from\n" + LOGO);
     System.out.println(separator);
-    System.out.println("     Hi! I am Duke!\n" + "     What can I do for you?");
+    System.out.println("     Hi! I am duke.Duke!\n" + "     What can I do for you?");
     System.out.println(separator);
   }
 
@@ -53,7 +55,7 @@ public final class Ui{
     System.out.println("     The following can be used:");
     System.out.println("     Types of tasks: 'todo', 'deadline', 'event'");
     System.out.println("     If you wish to add a task," +
-            " please input in the form: '<Type of Task> <Name of Task>'" +
+            " please input in the form: '<Type of tasks.Task> <Name of tasks.Task>'" +
             " and include keyword '/at' OR '/by' followed by <Date> if relevant.");
     System.out.println("     If you wish to delete a task, "
             + "please input in the form: 'delete <task index>'.");

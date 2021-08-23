@@ -1,4 +1,10 @@
+package commands;
+
 import java.util.ArrayList;
+import storage.Storage;
+import tasks.DeadLineTask;
+import tasks.TaskList;
+import ui.Ui;
 
 public final class DeadlineCommand extends Command{
 

@@ -1,9 +1,11 @@
+package tasks;
+
 /**
- * The ToDoTask class is a child class for Task
+ * The tasks.ToDoTask class is a child class for tasks.Task
  * to support different specificities of a task
  * as input by user
  */
-public final class ToDoTask extends Task{
+public final class ToDoTask extends Task {
 
   /**
    * The String to store the type of task information
@@ -21,9 +23,9 @@ public final class ToDoTask extends Task{
   }
 
   /**
-   * To retrieve the information on the type of Task
+   * To retrieve the information on the type of tasks.Task
    *
-   * @return the String description of the type of Task
+   * @return the String description of the type of tasks.Task
    */
   @Override
   public String getType() {

@@ -1,6 +1,12 @@
-import java.util.ArrayList;
+package commands;
 
-public final class EventCommand extends Command{
+import java.util.ArrayList;
+import tasks.EventTask;
+import tasks.TaskList;
+import storage.Storage;
+import ui.Ui;
+
+public final class EventCommand extends Command {
 
   public EventCommand(ArrayList<String> s) {
     super(s);

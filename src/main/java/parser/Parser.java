@@ -1,3 +1,10 @@
+package parser;
+
+import commands.*;
+import duke.DukeException;
+import ui.Ui;
+
+
 import java.util.ArrayList;
 
 public final class Parser {

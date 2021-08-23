@@ -1,6 +1,13 @@
+package commands;
+
 import java.util.ArrayList;
 
-public final class DueCommand extends Command{
+import storage.Storage;
+import tasks.TaskList;
+import ui.Ui;
+
+
+public final class DueCommand extends Command {
 
   public DueCommand(ArrayList<String> s) {
     super(s);

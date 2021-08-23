@@ -1,8 +1,11 @@
+package tasks;
+
 import java.time.LocalDate;
+import ui.Ui;
 
 /**
  * This class implements the tasks to be tracked by the
- * Duke assistant
+ * duke.Duke assistant
  */
 public class Task {
   /**
@@ -16,7 +19,7 @@ public class Task {
   private String isDone;
 
   /**
-   * Constructor for a Task
+   * Constructor for a tasks.Task
    * @param s the input string to describe the task
    */
   public Task(String s) {
@@ -63,9 +66,9 @@ public class Task {
   }
 
   /**
-   * To retrieve the information on the type of Task
+   * To retrieve the information on the type of tasks.Task
    *
-   * @return the String description of the type of Task
+   * @return the String description of the type of tasks.Task
    */
   public String getType() {
     return "regular";

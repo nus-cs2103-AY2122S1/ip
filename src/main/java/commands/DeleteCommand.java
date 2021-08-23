@@ -1,6 +1,11 @@
-import java.util.ArrayList;
+package commands;
 
-public final class DeleteCommand extends Command{
+import java.util.ArrayList;
+import storage.Storage;
+import tasks.TaskList;
+import ui.Ui;
+
+public final class DeleteCommand extends Command {
 
   public DeleteCommand(ArrayList<String> s) {
     super(s);

@@ -1,6 +1,15 @@
+package commands;
+
+
+import storage.Storage;
+import tasks.Task;
+import tasks.TaskList;
+import ui.Ui;
+
 import java.util.ArrayList;
 
-public final class DoneCommand extends Command{
+
+public final class DoneCommand extends Command {
 
   public DoneCommand(ArrayList<String> s) {
     super(s);
