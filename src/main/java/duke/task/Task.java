@@ -13,6 +13,10 @@ public class Task {
         this.completed = true;
     }
 
+    public boolean contains(String searchTerm) {
+        return name.contains(searchTerm);
+    }
+
     private String getStatusIcon() {
         return this.completed ? "X" : " ";
     }

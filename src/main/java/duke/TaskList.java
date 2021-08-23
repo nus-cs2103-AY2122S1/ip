@@ -51,6 +51,16 @@ public class TaskList {
         return task;
     }
 
+    public List<Task> find(String searchTerm) {
+        List<Task> result = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.contains(searchTerm)) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+
     public String[] toCommands() {
         List<String> commands = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {

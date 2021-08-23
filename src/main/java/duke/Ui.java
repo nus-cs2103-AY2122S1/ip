@@ -1,6 +1,9 @@
 package duke;
 
+import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 public class Ui {
     private final Scanner scanner = new Scanner(System.in);
@@ -27,6 +30,12 @@ public class Ui {
 
     public void listTasks(TaskList taskList) {
         for (int i = 0; i < taskList.getCount(); i++) {
+            say(String.format("%d. %s", i + 1, taskList.get(i)), i == 0);
+        }
+    }
+
+    public void listTasks(List<Task> taskList) {
+        for (int i = 0; i < taskList.size(); i++) {
             say(String.format("%d. %s", i + 1, taskList.get(i)), i == 0);
         }
     }

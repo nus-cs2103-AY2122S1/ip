@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.List;
+
 import duke.task.Task;
 
 public class Parser {
@@ -53,6 +55,10 @@ public class Parser {
             if (splitted.length != 2) throw new IrisException("event should have 2 arguments: a name and a time");
             taskList.addEvent(splitted[0], splitted[1]);
             if (!silent) ui.sayTaskAdded(taskList);
+        } else if (command.startsWith("find")) {
+            String searchTerm = getMetadata(command);
+            List<Task> searchResults = taskList.find(searchTerm);
+            ui.listTasks(searchResults);
         } else {
             throw new IrisException("I'm sorry, but I don't know what that means.");
         }
