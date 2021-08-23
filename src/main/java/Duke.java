@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
@@ -51,6 +52,8 @@ public class Duke {
                         System.out.println("When is that due? Let me know after '/by'!");
                     } catch (MissingEventTimeException e) {
                         System.out.println("When is the event happening? Let me know after '/at'!");
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Oops, did you enter your date in yyyy-mm-dd format?");
                     } catch (DukeException e) {
                         System.out.println("There seems to be a problem with Duke. " +
                                 "Please try again!");
