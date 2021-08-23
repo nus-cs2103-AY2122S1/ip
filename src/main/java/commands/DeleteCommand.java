@@ -24,6 +24,7 @@ public class DeleteCommand implements Command {
     @Override
     public boolean execute() {
         try {
+            // Checks if an argument is provided
             int index = Integer.parseInt(input.split(" ", 2)[1].trim());
             this.taskList.removeTask(index);
             return true;

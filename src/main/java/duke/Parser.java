@@ -18,6 +18,7 @@ class Parser {
     private final static String KEYWORD_DEADLINE = "deadline";
     private final static String KEYWORD_EVENT = "event";
     private final static String KEYWORD_DELETE = "delete";
+    private final static String KEYOWORD_FIND = "find";
 
     /** A list of the tasks entered by the user */
     private final TaskList taskList;
@@ -66,6 +67,8 @@ class Parser {
         } else if (input.toLowerCase().startsWith(KEYWORD_DELETE)) {
             // Sets a task as done
             return new DeleteCommand(input, this.taskList);
+        } else if (input.toLowerCase().startsWith(KEYOWORD_FIND)) {
+            return new FindCommand(input, this.taskList);
         }
         // Unrecognised input
         return new InvalidCommand();

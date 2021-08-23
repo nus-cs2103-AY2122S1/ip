@@ -65,4 +65,6 @@ event sdad /at 20/15/25
 deadline dsgfs /by 51443
 event asd /at dssda
 list
+find Book
+find None
 bye
