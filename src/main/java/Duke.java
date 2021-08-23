@@ -4,26 +4,31 @@ import java.util.ArrayList;
 public class Duke {
 
     public static class Commands {
-        public static ArrayList<Task> arrayList = new ArrayList<>();
-        public static final String noCommand1 = "____________________________________________________________\n" +
+        private static ArrayList<Task> arrayList = new ArrayList<>();
+        private static final String emptyCommand1 = "\n____________________________________________________________\n" +
                 "     ☹ OOPS!!! The description of a todo cannot be empty.\n" +
                 "____________________________________________________________";
-        public static final String noCommand2 = "____________________________________________________________\n" +
+        private static final String emptyCommand2 = "\n____________________________________________________________\n" +
                 "     ☹ OOPS!!! The description of a deadline cannot be empty.\n" +
                 "____________________________________________________________";
-        public static final String noCommand3 = "____________________________________________________________\n" +
+        private static final String emptyCommand3 = "\n____________________________________________________________\n" +
                 "     ☹ OOPS!!! The description of an event cannot be empty.\n" +
                 "____________________________________________________________";
-        public static final String wrongCommand1 = "____________________________________________________________\n" +
+        private static final String wrongCommand1 = "\n____________________________________________________________\n" +
                 "The command format for deadline is wrong. The command format is supposed to be : \n" +
                 "deadline <your task> / <your deadline> ! \n" +
                 "____________________________________________________________";
-        public static final String wrongCommand2 = "____________________________________________________________\n" +
+        private static final String wrongCommand2 = "\n____________________________________________________________\n" +
                 "The command format for event is wrong. The command format is supposed to be : \n" +
                 "event <your task> / <your event time> ! \n" +
                 "____________________________________________________________";
+        private static final String noCommand = "\n____________________________________________________________\n" +
+                "Invalid command! \n" +
+                "The commands for setting tasks are : 'todo', 'deadline', and 'event'. \n" +
+                "The general commands are : 'list', 'delete', 'done', and 'bye'. \n" +
+                "____________________________________________________________";
 
-        public static void helloCommand() {
+        private static void helloCommand() {
             String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
@@ -35,34 +40,28 @@ public class Duke {
             System.out.println("____________________________________________________________");
         }
 
-        public static void byeCommand() {
+        private static void byeCommand() {
             System.out.println("____________________________________________________________ \n" +
                     "Bye. Hope to see you again soon! \n" +
                     "____________________________________________________________");
         }
 
-        public static void addCommand(String inputString) {
+        private static void addCommand(String inputString) throws DukeException {
             String[] word = inputString.split(" ", 2);
             String command = word[0];
             if(!command.equals("todo") && !command.equals("deadline") && !command.equals("event")) {
-                System.out.println("____________________________________________________________");
-                System.out.println("There is no task command starting with : '" + command + "'!");
-                System.out.println("The commands for setting tasks are : 'todo', 'deadline', and 'event'.");
-                System.out.println("____________________________________________________________");
+                throw new DukeException(noCommand);
             } else {
                 if (word.length < 2) {
                     switch (command) {
                         case "todo": {
-                            System.out.println(noCommand1);
-                            break;
+                            throw new DukeException(emptyCommand1);
                         }
                         case "deadline": {
-                            System.out.println(noCommand2);
-                            break;
+                            throw new DukeException(emptyCommand2);
                         }
                         case "event": {
-                            System.out.println(noCommand3);
-                            break;
+                            throw new DukeException(emptyCommand3);
                         }
                     }
                 } else {
@@ -71,27 +70,25 @@ public class Duke {
                         case "todo": {
                             ToDo task = new ToDo(desc);
                             System.out.println("____________________________________________________________\n" +
-                                    "Got it. I've added this task:");
-                            System.out.println(task.toString());
+                                    "Got it. I've added this task: \n" + task.toString());
                             arrayList.add(task);
-                            System.out.println("Now you have " + arrayList.size() + " task(s) in the list.");
-                            System.out.println("____________________________________________________________");
+                            System.out.println("Now you have " + arrayList.size() + " task(s) in the list. \n" +
+                                    "____________________________________________________________");
                             break;
                         }
                         case "deadline": {
                             String[] descriptions = desc.split("/", 2);
                             String description = descriptions[0];
                             if (descriptions.length < 2) {
-                                System.out.println(wrongCommand1);
+                                throw new DukeException(wrongCommand1);
                             } else {
                                 String timeline = descriptions[1];
                                 Deadline task = new Deadline(description, timeline);
                                 System.out.println("____________________________________________________________\n" +
-                                        "Got it. I've added this task:");
-                                System.out.println(task.toString());
+                                        "Got it. I've added this task: \n" + task.toString());
                                 arrayList.add(task);
-                                System.out.println("Now you have " + arrayList.size() + " task(s) in the list.");
-                                System.out.println("____________________________________________________________");
+                                System.out.println("Now you have " + arrayList.size() + " task(s) in the list. \n" +
+                                        "____________________________________________________________");
                             }
                             break;
                         }
@@ -99,16 +96,15 @@ public class Duke {
                             String[] descriptions = desc.split("/", 2);
                             String description = descriptions[0];
                             if (descriptions.length < 2) {
-                                System.out.println(wrongCommand2);
+                                throw new DukeException(wrongCommand2);
                             } else {
                                 String timeline = descriptions[1];
                                 Event task = new Event(description, timeline);
                                 System.out.println("____________________________________________________________\n" +
-                                        "Got it. I've added this task:");
-                                System.out.println(task.toString());
+                                        "Got it. I've added this task: \n" + task.toString());
                                 arrayList.add(task);
-                                System.out.println("Now you have " + arrayList.size() + " task(s) in the list.");
-                                System.out.println("____________________________________________________________");
+                                System.out.println("Now you have " + arrayList.size() + " task(s) in the list. \n" +
+                                        "____________________________________________________________");
                             }
                             break;
                         }
@@ -117,7 +113,7 @@ public class Duke {
             }
         }
 
-        public static void listCommand() {
+        private static void listCommand() {
             System.out.println("____________________________________________________________");
             System.out.println("Here are the tasks in your list:");
             for (int i = 1; i < arrayList.size() + 1; i++) {
@@ -127,7 +123,7 @@ public class Duke {
             System.out.println("____________________________________________________________");
         }
 
-        public static void removeCommand(int i) {
+        private static void removeCommand(int i) {
             if (arrayList.size() < i) {
                 System.out.println("____________________________________________________________");
                 System.out.println("Sorry! There are no tasks with index number " + i + "! :(");
@@ -144,7 +140,7 @@ public class Duke {
             }
         }
 
-        public static void doneCommand(int i) {
+        private static void doneCommand(int i) {
             if (arrayList.size() < i) {
                 System.out.println("____________________________________________________________");
                 System.out.println("Sorry! I can't find the tasks you ask for! :(");
@@ -160,7 +156,7 @@ public class Duke {
         }
     }
 
-    public static void printString(Scanner sc) {
+    private static void printString(Scanner sc) throws DukeException {
         String inputString = sc.nextLine();
         String[] word = inputString.split(" ", 2);
         String command = word[0];
@@ -185,7 +181,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         Commands.helloCommand();
         printString(sc);
