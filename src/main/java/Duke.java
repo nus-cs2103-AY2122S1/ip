@@ -1,22 +1,37 @@
+import java.io.IOException;
 import java.util.Scanner;
-import java.lang.StringBuilder;
+
+import java.io.FileWriter;
+import java.io.File;
+import java.io.IOException;
+
 public class Duke {
     private enum TaskType {
         TODO,
         DEADLINE,
         EVENT
     }
-    //Added enum in previous commits
+
     private static TaskList tList = new TaskList();
     private static String selfIntro = "Hello, I'm Duck\nWhat do you need?";
-
     private static String goodBye = "See ya next time! *quack* *quack* *quack*";
-
     private static String logo =
             "    __\n" +
             "___( o)>\n" +
             "\\ <_. )\n" +
             " `---'   hjw";
+
+    private static String tasksFile = "/data/tasks.txt";
+
+    public static void printLine(String content) {
+        System.out.println(
+                "------------------------------------------------\n"
+                        + "Duck says:\n"
+                        + content
+                        + "\n------------------------------------------------"
+        );
+
+    }
 
     private static void greet() {
         //System.out.println(logo);
@@ -27,20 +42,43 @@ public class Duke {
         printLine(goodBye);
     }
 
-    public static void printLine(String content) {
-        System.out.println(
-                "------------------------------------------------\n"
-                + "Duck says:\n"
-                + content
-                + "\n------------------------------------------------"
-            );
+    private static boolean exit() {
+        File f = new File(tasksFile);
 
+        if (!f.exists()) {
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                printLine("Something went wrong while creating data file, with error message:\n"
+                        + e.getMessage()
+                );
+                return false;
+            }
+        }
+
+        FileWriter fw;
+
+        try {
+            fw = new FileWriter(tasksFile);
+            for (int i = 0; i < tList.getListSize(); i++) {
+                fw.write(tList.getTaskSaveFormat(i) + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            printLine("Something went wrong while saving your tasks, with error message:\n"
+                    + e.getMessage()
+            );
+            return false;
+        }
+        Duke.sayBye();
+        return true;
     }
 
     private static String addTask(String input, TaskType tType) throws DukeCommandException {
         String msg;
         String[] inputArr;
         String[] taskArr;
+
         switch (tType) {
             case TODO:
                 inputArr = input.split(" ", 2);
@@ -64,17 +102,18 @@ public class Duke {
             case EVENT:
                 inputArr = input.split(" ", 2);
                 if (inputArr.length != 2) {
-                    throw new DukeCommandException("deadline");
+                    throw new DukeCommandException("event");
                 }
                 taskArr = inputArr[1].split(" /at ", 2);
                 if (taskArr.length != 2 || taskArr[1].equals("")) {
-                    throw new DukeCommandException("deadline");
+                    throw new DukeCommandException("event");
                 }
                 msg = tList.addTask(new Event(taskArr[0], taskArr[1]));
                 break;
             default:
                 msg = "If you see this, something has went terribly wrong";
         }
+
         return msg;
     }
 
@@ -82,17 +121,17 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String userInput;
         Duke.greet();
-        boolean bye = false;
+        boolean isDone = false;
         String[] inputArr;
-        while (!bye) {
+        while (!isDone) {
             userInput = sc.nextLine();
             inputArr = userInput.split(" ", 2);
+
             try {
                 if (inputArr.length == 1) {
                     switch (inputArr[0]) {
                     case "bye":
-                        bye = true;
-                        Duke.sayBye();
+                        isDone = Duke.exit();
                         break;
                     case "list":
                         printLine(tList.getTasks());

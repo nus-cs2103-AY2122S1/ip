@@ -30,4 +30,8 @@ public class Task {
     public String getTaskType() {
         return taskType;
     }
+
+    public String getSaveFormat() {
+        return String.format("%s|%s|%s", this.taskType, this.completed, this.name);
+    }
 }

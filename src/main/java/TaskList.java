@@ -8,6 +8,10 @@ public class TaskList {
         userList = new ArrayList<Task>(100);
     }
 
+    public int getListSize() {
+        return listSize;
+    }
+
     public String getTasks() {
         if (listSize == 0) {
             return "The list is empty! *quack*";
@@ -77,6 +81,22 @@ public class TaskList {
             );
         } else {
             return String.format("Uh oh, seems like there is no task number %d", taskID);
+        }
+    }
+
+    /**
+     * Returns the specified task in a string format used for saving in txt file.
+     * Should not be exposed directly to the user.
+     *
+     * @param taskIndex
+     * @return
+     */
+    public String getTaskSaveFormat(int taskIndex) {
+        if (taskIndex < listSize) {
+            Task t = userList.get(taskIndex);
+            return t.getSaveFormat();
+        } else {
+            return "";
         }
     }
 

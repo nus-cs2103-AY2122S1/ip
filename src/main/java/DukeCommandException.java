@@ -9,7 +9,7 @@ public class DukeCommandException extends Exception{
             msg = "Wrong usage of \"deadline\".\nCorrect usage: \"deadline TASK_NAME /by TIME\".";
             break;
         case "event":
-            msg = "Wrong usage of \"event\".\nCorrect usage: \"deadline TASK_NAME /at TIME\".";
+            msg = "Wrong usage of \"event\".\nCorrect usage: \"event TASK_NAME /at TIME\".";
             break;
         case "done":
             msg = "Wrong usage of \"done\".\nCorrect usage: \"done TASK_NUMBER\".";

@@ -9,4 +9,8 @@ public class Deadline extends Task{
     public String getTime() {
         return time;
     }
+
+    public String getSaveFormat() {
+        return String.format("%s|%s", super.getSaveFormat(), this.time);
+    }
 }
