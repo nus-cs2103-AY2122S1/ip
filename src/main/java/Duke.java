@@ -49,6 +49,7 @@ public class Duke {
 
         //User input.
         Scanner sc = new Scanner(System.in);
+<<<<<<< HEAD
         boolean isExit = true;
 
         //Continue the loop until user says bye.
@@ -182,6 +183,15 @@ public class Duke {
             writeToFile(dataFile, content);
         } catch (IOException e) {
             System.out.println("Delete failed.");
+=======
+        boolean isContinue = true;
+
+        //Continue the loop until user says bye.
+        while (isContinue) {
+            response = sc.nextLine();
+            len = response.length();
+            isContinue = echo();
+>>>>>>> branch-Level-8
         }
     }
 
@@ -229,7 +239,7 @@ public class Duke {
      * @return Content of input is digit or not.
      */
     public static boolean chekDigit(String input) {
-        boolean flag = true;
+        boolean isDigit = true;
         int i = 0;
         if (input.charAt(0) == '-') {
             i = 1;
@@ -237,11 +247,11 @@ public class Duke {
         for (; i < input.length(); i++) {
             char curr = input.charAt(i);
             if (!(curr >= '0' && curr <= '9')) {
-                flag = false;
+                isDigit = false;
                 break;
             }
         }
-        return flag;
+        return isDigit;
     }
 
     /**
@@ -267,10 +277,15 @@ public class Duke {
         //check with the special response "to-do X", where X is what to do.
         Todo todo = new Todo(response.substring(5, len));
         TASK_LIST.add(todo);
+<<<<<<< HEAD
         String todoString = todo.toString();
         store(todoString);
         count++;
         System.out.println(getPattern(getOutputFrame(todoString)));
+=======
+        count++;
+        System.out.println(getPattern(getOutputFrame(todo.toString())));
+>>>>>>> branch-Level-8
         return true;
     }
 
@@ -287,10 +302,15 @@ public class Duke {
         String time = parts[1];
         Deadline deadline = new Deadline(content, time);
         TASK_LIST.add(deadline);
+<<<<<<< HEAD
         String deadlineString = deadline.toString();
         store(deadlineString);
         count++;
         System.out.println(getPattern(getOutputFrame(deadlineString)));
+=======
+        count++;
+        System.out.println(getPattern(getOutputFrame(deadline.toString())));
+>>>>>>> branch-Level-8
         return true;
     }
 
@@ -307,10 +327,15 @@ public class Duke {
         String time = parts[1];
         Event event = new Event(content, time);
         TASK_LIST.add(event);
+<<<<<<< HEAD
         String eventString = event.toString();
         store(eventString);
         count++;
         System.out.println(getPattern(getOutputFrame(eventString)));
+=======
+        count++;
+        System.out.println(getPattern(getOutputFrame(event.toString())));
+>>>>>>> branch-Level-8
         return true;
     }
 
@@ -447,7 +472,10 @@ public class Duke {
     public static Operation checkResponse() {
         Operation op;
         try {
-            if (response.startsWith("done ")
+            if (response.startsWith("date ")
+                    && Task.isDate(response.substring(5, len))) {
+                op = Operation.DATE;
+            } else if (response.startsWith("done ")
                     && chekDigit(response.substring(5, len))) {
                 op = Operation.DONE;
             } else if (response.startsWith("todo ")) {
@@ -462,7 +490,7 @@ public class Duke {
                     && chekDigit(response.substring(7, len))) {
                 op = Operation.DELETE;
             } else if (response.equals("delete") || response.equals("todo") || response.equals("deadline")
-                    || response.equals("event") || response.equals("done")) {
+                    || response.equals("event") || response.equals("done") || response.equals("date")) {
                 String curr = response;
                 throw new EmptyInputException(curr);
             } else {
@@ -474,6 +502,27 @@ public class Duke {
             return null;
         }
         return op;
+    }
+
+    public static boolean checkDate() {
+        String preTime = response.substring(5, len);
+        String actualTime = Task.dateAndTime(preTime);
+        StringBuilder sb = new StringBuilder();
+        String end = "\n   ";
+        String begin = "Here are the tasks in your list:\n   ";
+        sb.append(begin);
+        for (int i = 0; i < count; i++) {
+            Task curr = TASK_LIST.get(i);
+            if (i == count - 1) {
+                end = "";
+            }
+            if (!(curr instanceof Todo) && curr.getActualTime().equals(actualTime)) {
+                String out = (i + 1) + "." + curr + end;
+                sb.append(out);
+            }
+        }
+        System.out.println(getPattern(sb.toString()));
+        return true;
     }
 
     /**
@@ -509,6 +558,8 @@ public class Duke {
                 return checkDone();
             case DELETE:
                 return checkDelete();
+            case DATE:
+                return checkDate();
             default:
                 return true;
             }

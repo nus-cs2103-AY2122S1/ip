@@ -8,5 +8,6 @@ public enum Operation {
     DONE ,
     DEADLINE,
     EVENT,
-    DELETE;
+    DELETE,
+    DATE;
 }
