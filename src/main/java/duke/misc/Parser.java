@@ -48,9 +48,13 @@ public class Parser {
 
     // Take in command, parse it and then executes.
     public String execute(String input, TaskList tl) {
-        String message = "";
-        String[] args = input.split(" ");
         int idx;
+        String message = "";
+        String suffix = "";
+        idx = input.indexOf(' ');
+        if (idx >= 0) {
+            suffix = input.substring(idx + 1);
+        }
         try {
             if (input.equals("bye")) {
                 message = Ui.GOODBYE_MSG;
@@ -59,7 +63,7 @@ public class Parser {
             } else if (input.matches("done (.*)")) {
                 message = Ui.DONE_MSG;
                 try {
-                    idx = Integer.parseInt(args[1]);
+                    idx = Integer.parseInt(suffix);
                 } catch (NumberFormatException e) {
                     throw new InvalidIndexException();
                 }
@@ -67,11 +71,13 @@ public class Parser {
             } else if (input.matches("delete (.*)")) {
                 message = Ui.DELETE_MSG;
                 try {
-                    idx = Integer.parseInt(args[1]);
+                    idx = Integer.parseInt(suffix);
                 } catch (NumberFormatException e) {
                     throw new InvalidIndexException();
                 }
                 message += tl.delete(idx);
+            } else if (input.matches("find (.*)")) {
+                message = Ui.FIND_MSG + tl.find(suffix);
             } else {
                 message = Ui.ADD_MSG;
                 Task task = makeTask(input);

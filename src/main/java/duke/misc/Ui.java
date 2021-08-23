@@ -13,7 +13,7 @@ public class Ui {
     static final String NUMTASK_MSG = "Your current task count: ";
     static final String DONE_MSG = "I have marked this task as done:\n";
     static final String DELETE_MSG = "I have deleted this task:\n";
-
+    static final String FIND_MSG = "Here are what i found:\n";
     public Ui() {
         sc = new Scanner(System.in);
     }
