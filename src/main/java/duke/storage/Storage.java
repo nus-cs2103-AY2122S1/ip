@@ -5,7 +5,6 @@ import duke.exception.DukeException;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,6 +28,7 @@ public class Storage {
      * Loads content task file from filePath.
      *
      * @throws DukeException If filePath doesn't exist.
+     * @return content of file.
      */
     public Scanner load() throws DukeException {
         try {
@@ -42,7 +42,7 @@ public class Storage {
      * Saves list of task into a text file.
      *
      * @param lib library / list of task to be stored.
-     * @throws IOException If unable to create save file.
+     * @throws DukeException If unable to create save file.
      */
     public void save(List<Task> lib) throws DukeException {
         String location = "data/duke.txt";

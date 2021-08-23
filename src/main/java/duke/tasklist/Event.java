@@ -24,15 +24,18 @@ public class Event extends Task {
     /**
      * Returns custom string of event task.
      * Includes isDone status and event task name.
+     *
+     * @return task description
      */
     @Override
     public String toString() {
-
         return String.format("[E]%s(at: %s)", super.toString(), Messages.dateFormat(time));
     }
 
     /**
      * Returns custom string of event task for saving.
+     *
+     * @return task save description
      */
     public String save() {
         return String.format("E | %s| %s", super.save(), Messages.dateFormat(time));

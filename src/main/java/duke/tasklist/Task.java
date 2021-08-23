@@ -20,6 +20,8 @@ public class Task {
     /**
      * Returns custom string of task.
      * Includes isDone status and task name.
+     *
+     * @return task description
      */
     @Override
     public String toString() {
@@ -30,6 +32,8 @@ public class Task {
      * Returns completion status/mark/indication.
      * If isDone, X.
      * Else, blank.
+     *
+     * @return done status.
      */
     public String getStatus() {
         return (isDone ? "X" : " "); // mark done task with X
@@ -51,6 +55,8 @@ public class Task {
 
     /**
      * Returns custom string of task for saving.
+     *
+     * @return task save description
      */
     public String save() {
         int done = isDone ? 1 : 0;

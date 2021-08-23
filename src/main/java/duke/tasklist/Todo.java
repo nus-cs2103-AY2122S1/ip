@@ -17,6 +17,8 @@ public class Todo extends Task {
     /**
      * Returns custom string of todo task.
      * Includes isDone status and todo task name.
+     *
+     * @return task description
      */
     @Override
     public String toString() {
@@ -25,6 +27,8 @@ public class Todo extends Task {
 
     /**
      * Returns custom string of todo task for saving.
+     *
+     * @return task save description
      */
     public String save() {
         return String.format("T | %s", super.save());

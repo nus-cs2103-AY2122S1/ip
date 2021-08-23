@@ -50,6 +50,7 @@ public class TaskList {
      * @param input task request line.
      * @param start substring after target word.
      * @throws DukeException If start word doesn't exist.
+     * @return substring-ed title.
      */
     private String cut(String input, String start) throws DukeException {
         String result;
@@ -62,13 +63,14 @@ public class TaskList {
     }
 
     /**
-     * Returns task title of task request.
+     * Returns task field of task request.
      * Substrings input line between start word and end word.
      *
      * @param input task request line.
      * @param start substring after target word.
      * @param end substring before target word.
      * @throws DukeException If start or end word doesn't exist.
+     * @return substring-ed task field.
      */
     private String cut(String input, String start, String end) throws DukeException {
         String result;
@@ -86,6 +88,7 @@ public class TaskList {
      * If optional is empty, default time is 2359.
      *
      * @param time date time string.
+     * @return datetime of date time string.
      */
     private LocalDateTime dateTime(String time) throws DukeException {
         DateTimeFormatter fmt = new DateTimeFormatterBuilder()
@@ -105,9 +108,10 @@ public class TaskList {
     }
 
     /**
-     * Adds new task command into TaskList.
+     * Adds new task into TaskList.
      *
-     * @param tsk task to be inserted.
+     * @param input task to be inserted.
+     * @return added task description.
      */
     public String add(String input) throws DukeException {
         Task tsk;
@@ -133,11 +137,23 @@ public class TaskList {
         return tsk.toString();
     }
 
+    /**
+     * Removes target task from TaskList.
+     *
+     * @param index task to be removed.
+     * @return returned task description.
+     */
     public String remove(int index) {
         Task tsk = library.remove(index);
         return tsk.toString();
     }
 
+    /**
+     * Marks target task as complete.
+     *
+     * @param index task to complete.
+     * @return marked task description.
+     */
     public String done(int index) {
         Task target = library.get(index);
         target.setDone();
@@ -145,6 +161,11 @@ public class TaskList {
         return target.toString();
     }
 
+    /**
+     * Returns list of task in TaskList.
+     *
+     * @return list of task.
+     */
     public String list() {
         StringBuilder output = new StringBuilder();
 
@@ -155,6 +176,12 @@ public class TaskList {
         return output.toString().trim();
     }
 
+    /**
+     * Returns task that has search term in name.
+     *
+     * @param search search term.
+     * @return list of found task.
+     */
     public String find(String search) {
         StringBuilder output = new StringBuilder();
 

@@ -20,6 +20,7 @@ public class Parser {
      *
      * @param input user command line.
      * @param start substring after target word.
+     * @return task details.
      */
     private static String cut(String input, String start){
         return input.substring(input.indexOf(start) + start.length() + 1);
@@ -33,6 +34,7 @@ public class Parser {
      *
      * @param cmd user command line.
      * @throws DukeException If invalid command.
+     * @return task command.
      */
     public static Command parse(String cmd) throws DukeException {
         if (cmd.contains("add")) {

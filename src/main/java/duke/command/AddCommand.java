@@ -36,6 +36,8 @@ public class AddCommand extends Command {
 
     /**
      * Returns if command exits program.
+     *
+     * @return if command exists program.
      */
     @Override
     public boolean isExit() {

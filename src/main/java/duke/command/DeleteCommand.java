@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
     /**
      * Constructs DeleteCommand object.
      *
-     * @param cmd task command to be deleted.
+     * @param cmd task to be deleted.
      */
     public DeleteCommand(String cmd) {
         super(cmd);
@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            int index = Integer.parseInt(line);
+            int index = Integer.parseInt(line) - 1;
             ui.showDelete(tasks.remove(index), tasks.getSize());
             super.execute(tasks, ui, storage);
         } catch (Exception e) {
@@ -42,6 +42,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Returns if command exits program.
+     *
+     * @return if command exists program.
      */
     @Override
     public boolean isExit() {

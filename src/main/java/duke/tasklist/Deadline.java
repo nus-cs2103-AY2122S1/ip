@@ -24,6 +24,8 @@ public class Deadline extends Task {
     /**
      * Returns custom string of deadline task.
      * Includes isDone status and deadline task name.
+     *
+     * @return task description
      */
     @Override
     public String toString() {
@@ -32,6 +34,8 @@ public class Deadline extends Task {
 
     /**
      * Returns custom string of deadline task for saving.
+     *
+     * @return task save description
      */
     public String save() {
         return String.format("D | %s| %s", super.save(),  Messages.dateFormat(time));

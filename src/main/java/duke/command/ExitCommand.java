@@ -20,12 +20,11 @@ public class ExitCommand extends Command {
 
     /**
      * Executes command.
-     * Runs all task of TaskList.
+     * Does nothing and display exiting message.
      *
      * @param tasks list of tasks within chat bot.
      * @param ui user interface of chat bot.
      * @param storage file directory manager.
-     * @throws DukeException If errors occur within list.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -34,6 +33,8 @@ public class ExitCommand extends Command {
 
     /**
      * Returns if command exits program.
+     *
+     * @return if command exists program.
      */
     @Override
     public boolean isExit() {

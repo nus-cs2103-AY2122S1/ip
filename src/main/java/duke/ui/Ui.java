@@ -61,30 +61,56 @@ public class Ui {
     }
 
     /**
-     * Displays new command added message.
+     * Displays new task added message.
+     *
+     * @param task task added.
+     * @param size total size of TaskList.
      */
-    public void showAdded(String tasks, int size) {
+    public void showAdded(String task, int size) {
         System.out.println("Got it. I've added this task:");
-        System.out.println(tasks);
-        System.out.printf("Now you have %d tasks in the list.%n", size);
-    }
-    public void showDelete(String tasks, int size) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks);
+        System.out.println(task);
         System.out.printf("Now you have %d tasks in the list.%n", size);
     }
 
+    /**
+     * Displays task removed message.
+     *
+     * @param task task added.
+     * @param size total size of TaskList.
+     */
+    public void showDelete(String task, int size) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.printf("Now you have %d tasks in the list.%n", size);
+    }
+
+    /**
+     * Displays list of tasks found.
+     *
+     * @param tasks list of task found.
+     */
     public void showFind(String tasks) {
         System.out.println("Here are the matching tasks in your list:");
         System.out.println(tasks);
     }
+
+    /**
+     * Displays list of tasks.
+     *
+     * @param tasks list of task.
+     */
     public void showList(String tasks) {
         System.out.println("Here are the tasks in your list:");
         System.out.println(tasks);
     }
 
-    public void showDone(String tasks) {
+    /**
+     * Displays task completed.
+     *
+     * @param task task completed.
+     */
+    public void showDone(String task) {
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(tasks);
+        System.out.println(task);
     }
 }
