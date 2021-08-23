@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.io.File;
 
@@ -124,7 +128,16 @@ public class Duke {
                     if(deadlineArr.length == 1) {
                         throw new DukeException("deadline format");
                     } else {
-                        taskArr.add(new Deadline(deadlineArr[0], deadlineArr[1]));
+                        try{
+                            DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                            DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy hh:mm aa");
+                            Date date = inputFormat.parse(deadlineArr[1]);
+                            String  outputDate = outputFormat.format(date);
+                            taskArr.add(new Deadline(deadlineArr[0], outputDate));
+                        } catch (ParseException e) {
+                            throw new DukeException("date parse");
+                        }
+
                     }
                     break;
                 case EVENT:
@@ -139,10 +152,9 @@ public class Duke {
                     System.out.println("should never reach here");
             }
             textFrame("Got it I've added this task:\n" + taskArr.get(taskArr.size() - 1));
-        } catch (DukeException e) {
+        } catch (DukeException e){
             errorFrame(e.getErrorMessage());
         }
-
     }
 
     public void startBob() {
@@ -225,7 +237,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         String logo = "                     ,,\n" +
                 "`7MM\"\"\"Yp,          *MM\n" +
                 "  MM    Yb           MM\n" +

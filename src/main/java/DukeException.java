@@ -26,6 +26,10 @@ public class DukeException extends Exception {
                 errorMessage = "data.txt is corrupted!\n"
                         + "Please delete data.txt to start fresh";
                 break;
+            case "date parse":
+                errorMessage = "Cannot parse date format!\n"
+                        + "Proper format: dd/MM/yyyy HHmm";
+                break;
             default:
                 errorMessage = "unknown error message";
         }
