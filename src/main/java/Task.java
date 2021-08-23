@@ -26,6 +26,11 @@ public abstract class Task {
 
     public abstract String fileSaveFormat();
 
+    public static String taskTag() {
+        //TODO change to exception
+        return "Invalid Task";
+    };
+
     @Override
     public String toString() {
         return String.format("[%s] %s", isDone ? "X" : " ",taskName);

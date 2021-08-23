@@ -1,5 +1,6 @@
 public class Deadline extends Task {
     private final Datetime dueDate;
+    private static final String TASK_TAG = "deadline";
 
     public Deadline(String taskName, String dueDate) {
         super(taskName);
@@ -14,6 +15,10 @@ public class Deadline extends Task {
     public String fileSaveFormat() {
         return String.format("D | %d | %s | %s", this.isDone() ? 1 : 0, this.taskName(),
                 this.dueDate.getDatetimeString());
+    }
+
+    public static String taskTag() {
+        return TASK_TAG;
     }
 
     @Override

@@ -68,6 +68,10 @@ public class Storage {
         return this.taskList.getTask(taskIndex);
     }
 
+    public String printTaskList() {
+        return this.taskList.toString();
+    }
+
     public void saveToFile() {
         try {
             FileWriter fw = new FileWriter(this.filePath);
