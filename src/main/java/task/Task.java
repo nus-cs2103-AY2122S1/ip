@@ -22,6 +22,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public String databaseString() {
+        return String.format("%s | %s", isDone ? 1 : 0, description);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), this.description);

@@ -3,12 +3,14 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static ArrayList<Task> taskList = new ArrayList<>();
+    static ArrayList<Task> taskList;
     static int numItems = 0;
+    static Storage storage;
 
     static String introMsg = "Hello! I'm Biscuit.\n"
             + "What do you want me to do?\n";
@@ -20,6 +22,16 @@ public class Duke {
 
     static void introduce() {
         System.out.println(introMsg);
+    }
+
+    static void read() {
+        storage = new Storage("data/duke.txt");
+        try {
+            taskList = storage.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            taskList = new ArrayList<>();
+        }
     }
 
     static void reply() {
@@ -43,6 +55,7 @@ public class Duke {
                     System.out.println(taskList.get(numItems));
                     numItems++;
                     System.out.printf("Now you have %d tasks in the list.\n", numItems);
+                    storage.write(taskList);
                     break;
                 case "list":
                     System.out.println(listMsg);
@@ -60,6 +73,7 @@ public class Duke {
                     }
                     numItems++;
                     System.out.printf("Now you have %d tasks in the list.\n", numItems);
+                    storage.write(taskList);
                     break;
                 case "event":
                     System.out.println(todoMsg);
@@ -72,12 +86,14 @@ public class Duke {
                     }
                     numItems++;
                     System.out.printf("Now you have %d tasks in the list.\n", numItems);
+                    storage.write(taskList);
                     break;
                 case "done":
                     System.out.println(doneMsg);
                     int intParam = Integer.parseInt(param) - 1;
                     taskList.get(intParam).markAsDone();
                     System.out.println(taskList.get(intParam));
+                    storage.write(taskList);
                     break;
                 case "delete":
                     System.out.println(deleteMsg);
@@ -85,6 +101,7 @@ public class Duke {
                     intParam = Integer.parseInt(param) - 1;
                     taskList.remove(intParam);
                     System.out.printf("Now you have %d tasks in the list.\n", numItems);
+                    storage.write(taskList);
                     break;
                 case "bye":
                     System.out.println(byeMsg);
@@ -99,6 +116,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        read();
         introduce();
         reply();
     }
