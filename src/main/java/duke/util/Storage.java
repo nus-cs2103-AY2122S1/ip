@@ -134,7 +134,7 @@ public class Storage {
             
             // Check if task is alr done
             if (input.charAt(4) == 'X') {
-                newTask.setDone();
+                newTask.markAsDone();
             }
             
             // Add task to list but do not show a confirmation msg

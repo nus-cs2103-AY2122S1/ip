@@ -108,7 +108,7 @@ public class TaskList {
         
         // Mark the task as done
         Task task = tasks.get(taskNumber);
-        task.setDone();
+        task.markAsDone();
         
         // Return confirmation message
         return MESSAGE_DONE + "\n  " + task;

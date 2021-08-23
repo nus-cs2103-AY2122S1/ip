@@ -1,6 +1,5 @@
 package duke.util;
 
-import duke.exception.DukeException;
 import duke.exception.UnknownCommandException;
 import duke.task.TaskList;
 
@@ -9,9 +8,9 @@ public class Parser {
      * Interprets the command entered by user.
      *
      * @param command command to be interpreted
-     * @throws DukeException if user inputs invalid command
+     * @throws UnknownCommandException if user inputs invalid command
      */
-    public static CheckedFunction interpretCommand(String command) throws DukeException {
+    public static CheckedFunction interpretCommand(String command) throws UnknownCommandException {
         // Each if else handles one type of command
         if (command.equals("list")) {
             return TaskList::printFullList;
