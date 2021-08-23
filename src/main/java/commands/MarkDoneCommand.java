@@ -1,3 +1,7 @@
+package commands;
+import tasks.Task;
+import tasks.TaskManager;
+
 public class MarkDoneCommand extends Command {
     private final int taskNumber;
     public static final String KEYWORD = "done";

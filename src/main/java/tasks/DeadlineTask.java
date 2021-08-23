@@ -1,3 +1,5 @@
+package tasks;
+
 public class DeadlineTask extends Task {
     private final String deadline;
 

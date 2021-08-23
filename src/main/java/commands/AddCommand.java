@@ -1,3 +1,7 @@
+package commands;
+import tasks.Task;
+import tasks.TaskManager;
+
 public abstract class AddCommand extends Command {
     protected Task task;
 

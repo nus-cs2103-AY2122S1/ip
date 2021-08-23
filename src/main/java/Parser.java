@@ -1,3 +1,5 @@
+import commands.*;
+
 public class Parser {
     public Command getCommand(String userInput) throws DukeException {
         String[] words = userInput.split("\\s+");

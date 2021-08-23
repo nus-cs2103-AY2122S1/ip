@@ -1,3 +1,5 @@
+package tasks;
+
 public class EventTask extends Task {
     private final String timeDate;
 

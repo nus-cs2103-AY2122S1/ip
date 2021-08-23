@@ -1,3 +1,7 @@
+import commands.Command;
+import commands.DukeException;
+import tasks.TaskManager;
+
 import java.util.Scanner;
 
 public class Duke {
