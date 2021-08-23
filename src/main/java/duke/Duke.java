@@ -4,6 +4,7 @@ import java.io.*;
 
 public class Duke {
     public static List todoList;
+
     public static void greet() {
         String message = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(message);

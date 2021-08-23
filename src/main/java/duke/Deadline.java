@@ -20,10 +20,14 @@ public class Deadline extends Task {
         this.deadline = LocalDate.parse(input[3]);
     }
 
+    public String getDate() {
+        return this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: "
-                + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy" + ")"));
+                + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
