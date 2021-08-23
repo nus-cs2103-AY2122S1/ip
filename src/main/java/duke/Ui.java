@@ -2,21 +2,42 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Encapsulate UI-related functionality of Iris
+ */
 public class Ui {
     private final Scanner scanner = new Scanner(System.in);
+
+    /**
+     * Get Iris to say a message
+     * @param message message to say
+     */
     public void say(String message) {
-        System.out.printf("Iris: %s%n", message);
+        say(message, true);
     }
 
+    /**
+     * Get Iris to say a message
+     * @param message message to say
+     * @param isFirst say Iris's name only if first message
+     */
     public void say(String message, boolean isFirst) {
         String name = isFirst ? "Iris:": "     ";
         System.out.printf("%s %s%n", name, message);
     }
 
+    /**
+     * Get Iris to notify user about error
+     * @param exception exception to convey to user
+     */
     public void sayError(IrisException exception) {
         say(exception.getMessage());
     }
 
+    /**
+     * Get Iris to notify user about new Task added
+     * @param taskList TaskList object representing current list of tasks
+     */
     public void sayTaskAdded(TaskList taskList) {
         int count = taskList.getCount();
         say("Got it. I've added this task:");
@@ -25,12 +46,20 @@ public class Ui {
                 count, count == 1 ? "task" : "tasks"), false);
     }
 
+    /**
+     * Get Iris to list out all Tasks in the TaskList
+     * @param taskList TaskList object representing current list of tasks
+     */
     public void listTasks(TaskList taskList) {
         for (int i = 0; i < taskList.getCount(); i++) {
             say(String.format("%d. %s", i + 1, taskList.get(i)), i == 0);
         }
     }
 
+    /**
+     * Prompt user for a command
+     * @return user's command
+     */
     public String prompt() {
         System.out.print("me: ");
         return scanner.nextLine();

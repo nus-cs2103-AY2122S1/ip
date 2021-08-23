@@ -2,6 +2,9 @@ package duke;
 
 import duke.task.Task;
 
+/**
+ * Encapsulate the parsing-related functionality of Iris
+ */
 public class Parser {
     private static String getMetadata(String command) throws IrisException {
         String[] splitted = command.split(" ", 2);
@@ -21,10 +24,25 @@ public class Parser {
         }
     }
 
+    /**
+     * Handle a given command
+     * @param command  raw text representing command
+     * @param taskList TaskList object representing current list of tasks
+     * @param ui       Ui object for current Duke instance
+     * @throws IrisException for invalid commands
+     */
     public static void handleCommand(String command, TaskList taskList, Ui ui) throws IrisException {
         handleCommand(command, taskList, ui, false);
     }
 
+    /**
+     * Handle a given command
+     * @param command  raw text representing command
+     * @param taskList TaskList object representing current list of tasks
+     * @param ui       Ui object for current Iris instance
+     * @param silent   disables Ui if true
+     * @throws IrisException for invalid commands
+     */
     public static void handleCommand(String command, TaskList taskList, Ui ui, boolean silent) throws IrisException {
         if (command.equals("list")) {
             ui.listTasks(taskList);
