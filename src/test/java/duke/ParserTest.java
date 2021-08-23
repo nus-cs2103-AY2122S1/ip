@@ -1,6 +1,10 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.Action;
+import duke.command.End;
+import duke.command.List;
+import duke.command.Add;
 import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 
