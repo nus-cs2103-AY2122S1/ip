@@ -60,9 +60,11 @@ public class TaskList {
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (int j = 1; j <= this.size() ; j++) {
-            result.append("\n");
             String line = j + "." + this.get(j).toString();
             result.append(line);
+            if (j < this.size()) {
+                result.append("\n");
+            }
         }
         return result.toString();
     }
