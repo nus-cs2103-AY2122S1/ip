@@ -25,6 +25,10 @@ public abstract class Command {
         return this.newLog;
     }
 
+    public boolean isExit() {
+        return false;
+    }
+
     public enum ValidCommand {
         DONE,
         DELETE,
@@ -66,9 +70,8 @@ public abstract class Command {
             return new EventCommand(userInput);
         } else if (command == ValidCommand.INVALID) {
             return new InvalidCommand();
-        } else if (command == ValidCommand.BYE){
-            System.out.println("Bye. Hope to see you again soon!");
-            System.exit(0);
+        } else if (command == ValidCommand.BYE) {
+            return new ByeCommand();
         }
         return null;
     }

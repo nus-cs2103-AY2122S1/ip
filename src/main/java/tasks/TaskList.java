@@ -32,6 +32,10 @@ public class TaskList {
     }
 
     public String toString() {
+        if (this.taskList.size() == 0) {
+            return "Empty Task List";
+        }
+
         String description = "";
         for (int i = 0; i < this.taskList.size(); i += 1) {
             description += (i + 1) + "." + this.taskList.get(i) + "\n";
@@ -39,5 +43,13 @@ public class TaskList {
         //To remove last new line
         description = description.substring(0, description.length() - 1);
         return description;
+    }
+
+    public String saveFormat() {
+        String fileContent = "";
+        for (Task task : this.taskList) {
+            fileContent += task.saveFormat() + "\n";
+        }
+        return fileContent;
     }
 }

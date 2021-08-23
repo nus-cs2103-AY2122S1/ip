@@ -1,10 +1,13 @@
 import commands.Command;
 import tasks.TaskList;
+import utils.Util;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -14,15 +17,19 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        TaskList taskList = new TaskList();
+        TaskList taskList = Util.loadDataBase("./data/duke.txt");
 
-        while (sc.hasNextLine()) {
+        while (true) {
             String userInput = sc.nextLine();
             Command command = Command.of(userInput);
             command.updateLogAndTaskList(taskList);
+            if (command.isExit()) {
+                break;
+            }
             taskList = command.getTaskList();
             System.out.println(command.getLog());
         }
+        System.out.println("Bye. Hope to see you again soon!");
         sc.close();
     }
 }
