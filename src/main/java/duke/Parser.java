@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
 
     public static String[] parse(String input) {
@@ -19,7 +21,7 @@ public class Parser {
                     String[] taskDetail = task.split("/by ");
                     String[] s = taskDetail[1].split(" ", 2);
                     return new String[]{ "deadline", taskDetail[0], s[0], s[1] };
-                } else { // is an Event
+                } else { // is an duke.Event
                     String[] taskDetail = str[1].split(" /at ");
                     return new String[]{ "event", taskDetail[0], taskDetail[1] };
                 }

@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 
 public class Duke {
@@ -76,6 +78,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./src/main/data/dukea.txt").run();
+        new Duke("./src/main/data/duke.txt").run();
     }
 }

@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -49,7 +51,7 @@ public class TaskList {
             String[] s = op.split(" ", 2);
             LocalDate date = LocalDate.parse(s[0]);
             this.taskList.add(new Deadline(description, date, s[1]));
-        } else { // is an Event
+        } else { // is an duke.Event
             this.taskList.add(new Event(description, op));
         }
     }
