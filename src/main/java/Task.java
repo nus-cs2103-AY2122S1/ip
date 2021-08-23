@@ -19,6 +19,10 @@ public class Task {
         return this.isDone;
     }
 
+    public String saveToFile() {
+        return "| " + (getIsDone() ? "1" : "0") + " | " + description;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
