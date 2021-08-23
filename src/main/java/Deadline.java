@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A Deadline-type Task consisting of its details and deadline in day.
  */
@@ -5,7 +8,9 @@ public class Deadline extends Task {
     /**
      * The deadline in day.
      */
-    protected String by;
+    protected LocalDate by;
+    private static final DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter outputDateFormat = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**
      * Constructs a instance of Deadline that consist of its details and deadline in day.
@@ -15,7 +20,8 @@ public class Deadline extends Task {
      */
     public Deadline(String taskDetails, String by) {
         super(taskDetails);
-        this.by = by;
+        LocalDate byDate = LocalDate.parse(by, inputDateFormat);
+        this.by = byDate;
     }
 
     /**
@@ -25,7 +31,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String outputDate = this.by.format(outputDateFormat);
+        return "[D]" + super.toString() + " (by: " + outputDate + ")";
     }
 
     /**
@@ -39,7 +46,8 @@ public class Deadline extends Task {
         if (this.isComplete) {
             completeBinary = 1;
         }
-        return "D" + " | " + completeBinary + " | " + this.taskDetails + " | " + this.by;
+        return "D" + " | " + completeBinary + " | " + this.taskDetails + " | " +
+                this.by.format(inputDateFormat);
     }
 
 }
