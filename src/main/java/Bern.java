@@ -7,6 +7,9 @@ import bern.model.Task;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * This class is where the main method resides.
+ */
 public class Bern {
 
     private Storage storage;
@@ -14,6 +17,9 @@ public class Bern {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor for class Bern.
+     */
     public Bern() {
         ui = new Ui();
         storage = new Storage();
@@ -21,6 +27,9 @@ public class Bern {
         parser = new Parser();
     }
 
+    /**
+     * Method that runs the programme from an instance of Bern.
+     */
     public void run() {
         Scanner myObj = new Scanner(System.in);
 
@@ -39,6 +48,11 @@ public class Bern {
         }
     }
 
+    /**
+     * Method that runs the programme.
+     *
+     * @param args Optional arguments that are passed to the main function.
+     */
     public static void main(String[] args) {
         new Bern().run();
     }

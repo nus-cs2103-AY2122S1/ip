@@ -4,9 +4,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A class to represents a Task of type "Event".
+ */
 public class Event extends Task{
     protected LocalDate at;
 
+    /**
+     * Constructor for Event.
+     *
+     * @param description The description of the Task.
+     * @param at When the task is.
+     */
     public Event(String description, String at) {
         super(description);
         try {
@@ -16,6 +25,11 @@ public class Event extends Task{
         }
     }
 
+    /**
+     * A method to return the String representation of the class.
+     *
+     * @return The String representation of the class.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM dd YYYY")) + ")";

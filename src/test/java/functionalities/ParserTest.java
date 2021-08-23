@@ -5,8 +5,13 @@ import bern.model.ToDo;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * A class to encapsulates tests for Parser functions.
+ */
 public class ParserTest {
-
+    /**
+     * A test for toDoFromString method.
+     */
     @Test
     public void toDoFromStringTest() {
         ToDo temp = new Parser().toDoFromString("[T][ ] Do 2103 project");

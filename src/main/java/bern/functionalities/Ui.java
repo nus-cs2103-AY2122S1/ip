@@ -12,11 +12,22 @@ import bern.model.ToDo;
 
 import java.util.ArrayList;
 
+/**
+ * A class to encapsulates all methods UI related.
+ */
 public class Ui {
 
     Parser parser = new Parser();
     Storage storage = new Storage();
 
+    /**
+     * A method to get the reply if input starts with deadline.
+     *
+     * @param input The given command.
+     * @param arListTask The initial ArrayList of Tasks.
+     * @return The reply by the bot.
+     * @throws BernException If input is invalid.
+     */
     public String ifDeadline(String input, ArrayList<Task> arListTask) throws BernException {
         if (input.length() == 8 || (input.length() == 9 && input.substring(8, 9).equals(" "))) {
             throw new EmptyDescriptionException("deadline");
@@ -31,6 +42,14 @@ public class Ui {
                 + (arListTask.size() == 1 ? " task in the list" : " tasks in the list");
     }
 
+    /**
+     * A method to get the reply if input starts with event.
+     *
+     * @param input The given command.
+     * @param arListTask The initial ArrayList of Tasks.
+     * @return The reply by the bot.
+     * @throws BernException If input is invalid.
+     */
     public String ifEvent(String input, ArrayList<Task> arListTask) throws BernException {
         if (input.length() == 5 || (input.length() == 6 && input.substring(5, 6).equals(" "))) {
             throw new EmptyDescriptionException("event");
@@ -46,6 +65,14 @@ public class Ui {
         ;
     }
 
+    /**
+     * A method to get the reply if input starts with todo.
+     *
+     * @param input The given command.
+     * @param arListTask The initial ArrayList of Tasks.
+     * @return The reply by the bot.
+     * @throws BernException If input is invalid.
+     */
     public String ifToDo(String input, ArrayList<Task> arListTask) throws BernException {
         if (input.length() == 4 || (input.length() == 5 && input.substring(4, 5).equals(" "))) {
             throw new EmptyDescriptionException("todo");
@@ -58,10 +85,26 @@ public class Ui {
         ;
     }
 
+    /**
+     * A method to get the reply if input is bye.
+     *
+     * @param input The given command.
+     * @param arListTask The initial ArrayList of Tasks.
+     * @return The reply by the bot.
+     * @throws BernException If input is invalid.
+     */
     public String ifBye(String input, ArrayList<Task> arListTask) throws BernException {
         return "Bye. Hope to see you soon and hope you found my service useful!";
     }
 
+    /**
+     * A method to get the reply if input is list.
+     *
+     * @param input The given command.
+     * @param arListTask The initial ArrayList of Tasks.
+     * @return The reply by the bot.
+     * @throws BernException If input is invalid.
+     */
     public String ifList(String input, ArrayList<Task> arListTask) throws BernException {
         String result = "";
 
@@ -78,6 +121,14 @@ public class Ui {
         return result;
     }
 
+    /**
+     * A method to get the reply if input starts with delete.
+     *
+     * @param input The given command.
+     * @param arListTask The initial ArrayList of Tasks.
+     * @return The reply by the bot.
+     * @throws BernException If input is invalid.
+     */
     public String ifDelete(String input, ArrayList<Task> arListTask) throws BernException {
         if (input.length() == 6 || (input.length() == 7 && input.substring(6, 7).equals(" "))) {
             throw new EmptyDescriptionException("done");
@@ -95,6 +146,15 @@ public class Ui {
                 + (arListTask.size() == 1 ? " task in the list" : " tasks in the list");
     }
 
+    /**
+     * A method to get the reply for any command.
+     *
+     * @param c The command type as delineated by enum class Command.
+     * @param input The given command.
+     * @param arListTask The initial ArrayList of Tasks.
+     * @return The reply by the bot.
+     * @throws BernException If input is invalid.
+     */
     public String getReply(Command c, String input, ArrayList<Task> arListTask) throws BernException {
         switch (c) {
             case DONE:
@@ -117,6 +177,14 @@ public class Ui {
         return "";
     }
 
+    /**
+     * A method to get the reply if input starts with done.
+     *
+     * @param input The given command.
+     * @param arListTask The initial ArrayList of Tasks.
+     * @return The reply by the bot.
+     * @throws BernException If input is invalid.
+     */
     public String ifDone(String input, ArrayList<Task> arListTask) throws BernException {
         if (input.length() == 4 || (input.length() == 5 && input.substring(4, 5).equals(" "))) {
             throw new EmptyDescriptionException("done");
@@ -131,6 +199,12 @@ public class Ui {
                 + arListTask.get(index).toString();
     }
 
+    /**
+     * A method to process input from parsing to replying to writing into file.
+     *
+     * @param input The given command.
+     * @param arListTask The initial ArrayList of Tasks.
+     */
     public void processInput(String input, ArrayList<Task> arListTask) {
         try {
             if (parser.isDone(input)){

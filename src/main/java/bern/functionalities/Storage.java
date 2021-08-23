@@ -11,8 +11,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class to encapsulates all methods storage/file related.
+ */
 public class Storage {
-
+    /**
+     * A method to write into file from an ArrayList of Tasks.
+     *
+     * @param arListTask An ArrayList of Tasks to be written into a file.
+     */
     public void writeIntoFile(ArrayList<Task> arListTask) {
         try {
             new Storage().reinitialiseFile();
@@ -26,6 +33,11 @@ public class Storage {
         }
     }
 
+    /**
+     * A method to initialise the ArrayList of Tasks.
+     *
+     * @param arListTask An ArrayList of Tasks to be initialised.
+     */
     public void initialiseArListTask(ArrayList<Task> arListTask) {
         File file = new File("savedList.txt");
         if (!file.exists()) {
@@ -45,6 +57,9 @@ public class Storage {
         }
     }
 
+    /**
+     * A method to reinitialise the file (delete and make a new empty file).
+     */
     public void reinitialiseFile() {
         try {
             File file = new File("savedList.txt");
