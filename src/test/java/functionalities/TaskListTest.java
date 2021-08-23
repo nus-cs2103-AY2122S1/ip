@@ -9,8 +9,13 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * A class to encapsulates tests for TaskList functions.
+ */
 public class TaskListTest {
-
+    /**
+     * A test for addTask method.
+     */
     @Test
     public void addTaskTest() {
         ArrayList<Task> arListTask = new ArrayList<>();

@@ -9,7 +9,13 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * A class to encapsulates tests for UI functions.
+ */
 public class UiTest {
+    /**
+     * A test for ifBye method.
+     */
     @Test
     public void ifByeTest() {
         try {
