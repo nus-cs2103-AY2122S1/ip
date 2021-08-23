@@ -8,6 +8,7 @@ import duke.task.Todo;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Represents the list of tasks.
@@ -34,6 +35,15 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println(i + 1 + ": " + tasks.get(i));
         }
+    }
+
+    /**
+     * Prints a task with the index specified.
+     *
+     * @param index Index of the task to print.
+     */
+    public void printTask(int index) {
+        System.out.println(index + 1 + ": " + tasks.get(index));
     }
 
     /**
@@ -142,5 +152,27 @@ public class TaskList {
         System.out.println("   " + tasks.get(taskId - 1));
         tasks.remove(taskId - 1);
         System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+    }
+
+    /**
+     * Prints tasks that match a certain keyword.
+     *
+     * @param keyword Keyword supplied by the user.
+     */
+    public void findTask(String keyword) {
+        ArrayList<Integer> taskIndexes = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().toLowerCase(Locale.ROOT).contains(keyword.toLowerCase(Locale.ROOT))) {
+                taskIndexes.add(i);
+            }
+        }
+        if (taskIndexes.isEmpty()) {
+            System.out.println("No matches found!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i : taskIndexes) {
+                printTask(i);
+            }
+        }
     }
 }

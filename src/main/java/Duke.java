@@ -13,7 +13,6 @@ import java.time.DateTimeException;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * Constructor for Duke class.
@@ -82,6 +81,12 @@ public class Duke {
                     int taskId = Integer.parseInt(inputWords[1]);
                     tasks.deleteTask(taskId);
                     storage.saveFile(tasks.tasksAsString());
+                    break;
+                case "find":
+                    if (inputWords.length != 2) {
+                        throw new DukeException("☹ OOPS!!! Please provide a only one keyword.");
+                    }
+                    tasks.findTask(inputWords[1]);
                     break;
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

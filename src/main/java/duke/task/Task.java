@@ -42,4 +42,13 @@ public abstract class Task {
     public void setIsDone(boolean value) {
         this.isDone = value;
     }
+
+    /**
+     * Returns the description of the task.
+     *
+     * @return The task description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
 }
