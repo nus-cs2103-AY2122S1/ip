@@ -70,7 +70,7 @@ public class Parser {
      * Parses the command input by the user, interprets and returns
      * the description of the task in a String representation.
      *
-     * @param input The input command from the user.
+     * @param input      The input command from the user.
      * @param typeOfTask The type of task in the command.
      * @return The description of the task in a String representation.
      * @throws MeowException If the user input is incomplete.

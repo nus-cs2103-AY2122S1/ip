@@ -8,11 +8,12 @@ import java.util.Scanner;
  * according to user input.
  */
 public class Meow {
-    private Storage storage;
-    private TaskList tasks;
-    private Parser parser;
-    private Ui ui;
+    protected Storage storage;
+    protected TaskList tasks;
+    protected Parser parser;
+    protected Ui ui;
     private boolean isExit = false;
+
     enum Command {
         BYE,
         LIST,

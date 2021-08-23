@@ -1,6 +1,6 @@
 package meow;
 
-abstract class MeowException extends Exception{
+abstract class MeowException extends Exception {
 }
 
 class InvalidInputException extends MeowException {
@@ -71,7 +71,7 @@ class NotSuchTaskFoundException extends MeowException {
     @Override
     public String toString() {
         return "------------------------------------------------------------------------------\n" +
-                "Meow: ☹ OOPS!!! I'm sorry, but I don't know what that means,\n"  +
+                "Meow: ☹ OOPS!!! I'm sorry, but I don't know what that means,\n" +
                 "please enter a number to indicate the correct task number~\n" +
                 "------------------------------------------------------------------------------";
     }
