@@ -14,17 +14,16 @@ import java.nio.file.Paths;
 import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Represents a Storage object that handles file IO for tasks.
  */
 public class Storage {
-    private final String DB_NAME = "db.txt";
-    private final String DB_DIR = ".";
-    private Path path;
+    private final Path path;
 
     public Storage() {
+        String DB_DIR = ".";
+        String DB_NAME = "db.txt";
         this.path = Paths.get(DB_DIR, DB_NAME);
     }
 
@@ -41,16 +40,15 @@ public class Storage {
      * @param taskList The list of tasks to be saved.
      * @throws IOException If something goes wrong with File operations.
      */
-    public void save(List<Task> taskList) throws IOException{
+    public void save(List<Task> taskList) throws IOException {
         boolean fileExists = Files.exists(path);
 
         if (!fileExists) {
-           path = Files.createFile(path);
+            Files.createFile(path);
         }
         BufferedWriter file = Files.newBufferedWriter(path);
 
-        for (int i=0; i < taskList.size(); i++) {
-            Task t = taskList.get(i);
+        for (Task t : taskList) {
             file.write(t.toDatabaseString() + "\n");
         }
 
@@ -69,8 +67,8 @@ public class Storage {
         boolean fileExists = Files.exists(path);
         List<Task> taskList = new ArrayList<>();
 
-        if(!fileExists) {
-            return new ArrayList<Task>();
+        if (!fileExists) {
+            return new ArrayList<>();
         }
 
         BufferedReader file = Files.newBufferedReader(path);

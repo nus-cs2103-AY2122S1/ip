@@ -9,7 +9,7 @@ import java.time.DateTimeException;
  */
 public class Duke {
     private final Ui ui;
-    private TaskManager taskManager;
+    private final TaskManager taskManager;
 
     public Duke() {
         this.ui = new Ui();
@@ -22,7 +22,7 @@ public class Duke {
     public void run() {
         ui.greet();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             String userInput = ui.getUserInput();
             try {
                 Command c = Parser.parse(userInput);

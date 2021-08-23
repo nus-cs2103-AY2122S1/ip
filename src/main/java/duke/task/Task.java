@@ -4,7 +4,7 @@ package duke.task;
  * Represents a Task object that support serializing to database string and pretty print. Can be marked as completed.
  */
 abstract public class Task {
-    protected String descriptions;
+    protected final String descriptions;
     protected boolean isDone;
 
     public Task(String descriptions) {

@@ -9,6 +9,7 @@ import duke.Ui;
  */
 public class DeleteCommand extends Command {
     private final int id;
+
     public DeleteCommand(int id) {
         this.id = id;
     }

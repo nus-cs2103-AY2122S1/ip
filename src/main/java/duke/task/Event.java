@@ -4,17 +4,20 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
 /**
  * Represents a event type task.
  */
-public class Event extends Task{
+public class Event extends Task {
 
-    private LocalDate time;
+
+    private final LocalDate time;
 
     public Event(String description, LocalDate time) {
         super(description);
         this.time = time;
     }
+
 
     /**
      * Returns a Event object that is subclass of Task
@@ -25,13 +28,16 @@ public class Event extends Task{
      * @return A Task that is a Event object.
      * @throws DateTimeException If time string is not valid.
      */
-    public static Task of(boolean isDone, String description, String time) throws DateTimeException{
+    public static Task of(boolean isDone, String description, String time) throws DateTimeException {
+
         Task ret = new Event(description, LocalDate.parse(time));
         return isDone ? ret.done() : ret;
     }
 
     @Override
-    public String getTaskType() { return "E"; }
+    public String getTaskType() {
+        return "E";
+    }
 
     @Override
     public String toDatabaseString() {

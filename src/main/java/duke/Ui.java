@@ -17,6 +17,7 @@ public class Ui {
     public String getUserInput() {
         return sc.nextLine();
     }
+
     public void greet() {
         reply("Hello! I'am Duke\n" +
                 "What can I do for you?");
@@ -32,8 +33,8 @@ public class Ui {
                 .map(s -> String.format("\t%s\n", s))
                 .collect(Collectors.joining(""));
         System.out.printf("\t____________________________________\n" +
-                    "%s" +
-                    "\t____________________________________\n", indentedMsg);
+                "%s" +
+                "\t____________________________________\n", indentedMsg);
     }
 
     /**

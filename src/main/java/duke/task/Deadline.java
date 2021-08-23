@@ -4,12 +4,13 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
 /**
  * Represents a deadline type task.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
-    private LocalDate time;
+    private final LocalDate time;
 
     private Deadline(String description, LocalDate time) {
         super(description);
@@ -30,7 +31,9 @@ public class Deadline extends Task{
         return isDone ? ret.done() : ret;
     }
 
-    public String getTaskType() { return "D"; }
+    public String getTaskType() {
+        return "D";
+    }
 
     @Override
     public String toDatabaseString() {

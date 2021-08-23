@@ -11,7 +11,7 @@ import java.time.DateTimeException;
 /**
  * Represents the command to add additional tasks. Accepted task so far are "todo" "deadline" and "event".
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private final String type;
     private final String[] args;
 
@@ -41,8 +41,8 @@ public class AddCommand extends Command{
 
         ui.reply(String.format(
                 "Got it. I've added this task: \n" +
-                "%s\n" +
-                "Now you have %d tasks in the list", task.toString(), taskManager.taskCount()
+                        "%s\n" +
+                        "Now you have %d tasks in the list", task.toString(), taskManager.taskCount()
         ));
     }
 }
