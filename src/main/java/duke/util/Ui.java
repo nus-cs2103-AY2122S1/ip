@@ -59,7 +59,8 @@ public class Ui {
                 + "5. list - Display list of items you have added\n"
                 + "6. done [index of completed task] - Marks specified tasks as completed\n"
                 + "7. delete [index of task to be deleted] - Deletes specified task\n"
-                + "8. bye - End the program");
+                + "8. find [keyword to search for] - Finds tasks by specific keyword\n"
+                + "9. bye - End the program");
         System.out.println(DIVIDER);
     }
 }
