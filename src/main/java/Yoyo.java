@@ -12,7 +12,7 @@ import static java.lang.Integer.parseInt;
 
 
 public class Yoyo {
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static TaskList tasks = new TaskList(new ArrayList<>());
     private static final int TYPE_STR_INDEX = 1;
     private static final int ISDONE_STR_INDEX = 4;
     private static final String DATAPATH = "data/yoyo.txt";

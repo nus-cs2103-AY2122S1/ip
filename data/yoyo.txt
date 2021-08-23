@@ -1,3 +1,3 @@
 [T][X], sweep floor
-[D][], geq quiz, 2021-08-13T23:59
+[D][X], geq quiz, 2021-08-13T23:59
 [T][X], sleep

@@ -26,7 +26,7 @@ public class Ui {
     }
 
 
-    public void printTaskList(ArrayList<Task> tasks) {
+    public void printTaskList(TaskList tasks) {
         int currListLength = tasks.size();
         outputWrapper();
         if (currListLength == 0) {
@@ -39,14 +39,14 @@ public class Ui {
         outputWrapper();
     }
 
-    public void printMarkTaskMessage(ArrayList<Task> tasks, int taskIndex) {
+    public void printMarkTaskMessage(TaskList tasks, int taskIndex) {
         outputWrapper();
         System.out.println("Nice! I've marked this task as done:\n"
                 + tasks.get(taskIndex).showStatus());
         outputWrapper();
     }
 
-    public void printRemoveTaskMessage(Task toRemove, ArrayList<Task> tasks) {
+    public void printRemoveTaskMessage(Task toRemove, TaskList tasks) {
         outputWrapper();
         System.out.println("Noted. I've removed this task:\n"
                 + toRemove.showStatus()
@@ -62,7 +62,7 @@ public class Ui {
      * @param newTask The task that has been created.
      * @param tasks Task list.
      */
-    public void printAddMessage(Task newTask, ArrayList<Task> tasks) {
+    public void printAddMessage(Task newTask, TaskList tasks) {
         outputWrapper();
         System.out.print("Got it. I've added this task:\n   "
                 + newTask.showStatus()
