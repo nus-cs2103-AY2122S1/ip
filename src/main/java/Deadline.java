@@ -31,4 +31,9 @@ public class Deadline extends Task {
                     + deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
     }
+    
+    @Override
+    public boolean isTodayTask(LocalDate l) {
+        return l.isEqual(deadlineDate);
+    }
 }

@@ -59,4 +59,9 @@ public class Event extends Task {
                     + " to " + endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
     }
+
+    @Override
+    public boolean isTodayTask(LocalDate l) {
+        return l.isEqual(startDate) || l.isEqual(endDate) || (l.isAfter(startDate) && l.isBefore(endDate));
+    }
 }
