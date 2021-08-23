@@ -41,7 +41,7 @@ public class Duke {
 
         do {
             try {
-                System.out.println(currentCommand);
+//                System.out.println(currentCommand);
                 StringBuilder sb = new StringBuilder();
                 String[] descriptionAndTime;
                 switch (currentCommand) {

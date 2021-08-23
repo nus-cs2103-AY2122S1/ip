@@ -5,6 +5,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
+    /**
+     * Parses the input and splits it into command and parameter.
+     * @param input Input string to be parsed.
+     * @return String array of command and parameter.
+     */
     public static String[] inputParser(String input) {
         String[] processed = input.split(" ", 2);
         if (processed.length != 2) {
@@ -13,7 +18,11 @@ public class Parser {
         return processed;
     }
 
-
+    /**
+     * Parses a command and returns the enum equivalent.
+     * @param input String of command to be parsed.
+     * @return Enum equivalent of given command.
+     */
     public static Command commandParser(String input) {
         for (Command c : Command.values()) {
             if (c.value.equals(input)) {
@@ -23,6 +32,11 @@ public class Parser {
         return Command.UNKNOWN;
     }
 
+    /**
+     * Parses date into desired format if possible.
+     * @param date Provided date string.
+     * @return Formatted date (if possible)
+     */
     public static String dateParser(String date) {
         String parsedDate = "";
         try {
@@ -33,6 +47,14 @@ public class Parser {
         }
         return parsedDate;
     }
+
+    /**
+     * Parses parameters containing dates into description and date.
+     *
+     * @param c Command to be parsed.
+     * @param parameter Parameter containing description and date.
+     * @return String array containing description and date.
+     */
 
     public static String[] dateParameterParser(Command c, String parameter) {
         switch (c) {
