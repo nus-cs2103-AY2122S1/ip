@@ -5,7 +5,7 @@ package duke.task;
  *
  * @author Chng Zi Hao
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
     /**
      * Constructor for Todo.
      *

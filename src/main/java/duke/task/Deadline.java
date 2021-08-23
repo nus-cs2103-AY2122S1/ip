@@ -1,10 +1,5 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.exception.DukeMissingDateTimeException;
-import duke.util.Parser;
-
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Chng Zi Hao
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDate dueDate;
     private LocalTime dueTime;
 
@@ -23,7 +18,7 @@ public class Deadline extends Task{
      * Constructor for Deadline.
      *
      * @param description The description of the deadline.
-     * @param by The due date of deadline.
+     * @param by          The due date of deadline.
      */
     public Deadline(String description, LocalDate dueDate, LocalTime dueTime) {
         super(description);

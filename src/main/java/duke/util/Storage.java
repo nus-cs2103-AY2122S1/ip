@@ -31,7 +31,7 @@ public class Storage {
      *
      * @return ArrayList containing tasks.
      */
-    public ArrayList<Task> retrieveData() throws DukeException{
+    public ArrayList<Task> retrieveData() throws DukeException {
         if (!this.file.exists()) {
             try {
                 System.out.println("data.txt file does not exist. Creating new file...");

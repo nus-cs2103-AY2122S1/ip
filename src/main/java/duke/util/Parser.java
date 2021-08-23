@@ -12,49 +12,10 @@ import java.time.LocalTime;
 
 public class Parser {
 
-    public Command parse(String input) throws DukeException {
-        Instruction instruction = Instruction.valueOfLabel(input.split(" ")[0]);
-        switch (instruction) {
-        case LIST:
-            return new ListCommand();
-        case DONE:
-            int doneIndex = extractIndex(input, Instruction.DONE);
-            return new DoneCommand(doneIndex);
-        case HELP:
-            return new HelpCommand();
-        case TODO:
-            String toDoInfo = extractInfo(input, Instruction.TODO);
-            ToDo toDo = new ToDo(toDoInfo);
-            return new AddCommand(toDo);
-        case DEADLINE:
-            String[] deadlineInfo = extractDeadline(extractInfo(input, Instruction.DEADLINE));
-            String[] deadlineDateTime = deadlineDateTimeSplit(deadlineInfo[1]);
-            Deadline deadline = new Deadline(deadlineInfo[0], parseDate(deadlineDateTime[0]),
-                    parseTime(deadlineDateTime[1]));
-            return new AddCommand(deadline);
-        case EVENT:
-            String[] eventInfo = extractEvent(extractInfo(input, Instruction.EVENT));
-            String[] eventDateTime = eventDateTimeSplit(eventInfo[1]);
-            Event event = new Event(eventInfo[0], parseDate(eventDateTime[0]), parseTime(eventDateTime[1]),
-                    parseTime(eventDateTime[2]));
-            return new AddCommand(event);
-        case DELETE:
-            int deleteIndex = extractIndex(input, Instruction.DELETE);
-            return new DeleteCommand(deleteIndex);
-        case FILTER:
-            String filterDate = extractInfo(input, Instruction.FILTER);
-            return new FilterCommand(parseDate(filterDate));
-        case BYE:
-            return new ExitCommand();
-        default:
-            return new InvalidCommand();
-        }
-    }
-
     /**
      * Extract out the information given in user input by separating out command.
      *
-     * @param input   User raw input.
+     * @param input       User raw input.
      * @param instruction The specific command given by user.
      * @return String containing information that we need.
      * @throws DukeException Prevent empty descriptions.
@@ -70,7 +31,7 @@ public class Parser {
     /**
      * Extract out the index given in user input by separating out command.
      *
-     * @param input   User raw input.
+     * @param input       User raw input.
      * @param instruction The specific command given by user.
      * @return int of the task user wants to select.
      * @throws DukeException Prevent empty indexes.
@@ -146,13 +107,13 @@ public class Parser {
         try {
             // Reuse regex from https://www.geeksforgeeks.org/how-to-validate-time-in-24-hour-format-using-regular-expression/
             if (time.length() == 4) {
-                String t = String.format("%s:%s", time.substring(0,2), time.substring(2,4));
+                String t = String.format("%s:%s", time.substring(0, 2), time.substring(2, 4));
                 if (t.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {
                     return LocalTime.parse(t);
                 } else {
                     throw new DateTimeException("Invalid Time");
                 }
-            } else if (time.length() == 5 && time.split(":",2).length == 2) {
+            } else if (time.length() == 5 && time.split(":", 2).length == 2) {
                 return LocalTime.parse(time);
             } else {
                 throw new DukeInvalidTimeException();
@@ -179,6 +140,45 @@ public class Parser {
         if (splitStartEnd.length != 2) {
             throw new DukeMissingDateTimeException();
         }
-        return new String[] {splitDateTime[0], splitStartEnd[0], splitStartEnd[1]};
+        return new String[]{splitDateTime[0], splitStartEnd[0], splitStartEnd[1]};
+    }
+
+    public Command parse(String input) throws DukeException {
+        Instruction instruction = Instruction.valueOfLabel(input.split(" ")[0]);
+        switch (instruction) {
+        case LIST:
+            return new ListCommand();
+        case DONE:
+            int doneIndex = extractIndex(input, Instruction.DONE);
+            return new DoneCommand(doneIndex);
+        case HELP:
+            return new HelpCommand();
+        case TODO:
+            String toDoInfo = extractInfo(input, Instruction.TODO);
+            ToDo toDo = new ToDo(toDoInfo);
+            return new AddCommand(toDo);
+        case DEADLINE:
+            String[] deadlineInfo = extractDeadline(extractInfo(input, Instruction.DEADLINE));
+            String[] deadlineDateTime = deadlineDateTimeSplit(deadlineInfo[1]);
+            Deadline deadline = new Deadline(deadlineInfo[0], parseDate(deadlineDateTime[0]),
+                    parseTime(deadlineDateTime[1]));
+            return new AddCommand(deadline);
+        case EVENT:
+            String[] eventInfo = extractEvent(extractInfo(input, Instruction.EVENT));
+            String[] eventDateTime = eventDateTimeSplit(eventInfo[1]);
+            Event event = new Event(eventInfo[0], parseDate(eventDateTime[0]), parseTime(eventDateTime[1]),
+                    parseTime(eventDateTime[2]));
+            return new AddCommand(event);
+        case DELETE:
+            int deleteIndex = extractIndex(input, Instruction.DELETE);
+            return new DeleteCommand(deleteIndex);
+        case FILTER:
+            String filterDate = extractInfo(input, Instruction.FILTER);
+            return new FilterCommand(parseDate(filterDate));
+        case BYE:
+            return new ExitCommand();
+        default:
+            return new InvalidCommand();
+        }
     }
 }
