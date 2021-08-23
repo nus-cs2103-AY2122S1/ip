@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -101,7 +103,12 @@ public class Duke {
                             } else {
                                 String deadlineDescription = updatedDeadline[0].replaceFirst(" ", "");
                                 String deadlineBy = updatedDeadline[1].replaceFirst(" ", "");
-                                Deadline newDeadline = new Deadline(deadlineDescription, deadlineBy);
+                                try {
+                                    LocalDate.parse(deadlineBy);
+                                } catch (DateTimeParseException e){
+                                    throw new DukeException("Please enter a valid date!");
+                                }
+                                Deadline newDeadline = new Deadline(deadlineDescription, LocalDate.parse(deadlineBy));
                                 userList.add(newDeadline);
                                 System.out.println("    ____________________________________________________________\n    " +
                                     "Got it. I've added this task:\n    " + newDeadline.toString() + "\n    " + "Now you have " + userList.size() + " tasks in the list.\n" +
@@ -127,8 +134,8 @@ public class Duke {
                             if (updatedEvent.length > 2) {
                                 throw new DukeException("I'm sorry, please only have ONE '/at' in your description!");
                             } else {
-                                String eventDescription = updatedEvent[0].replaceFirst(" ", "");
-                                String eventBy = updatedEvent[1].replaceFirst(" ", "");
+                                String eventDescription = updatedEvent[0].replaceFirst(" ", "");;
+                                String eventBy = updatedEvent[1];
                                 Event newEvent = new Event(eventDescription, eventBy);
                                 userList.add(newEvent);
                                 System.out.println("    ____________________________________________________________\n    " +
