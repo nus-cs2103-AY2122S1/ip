@@ -62,11 +62,8 @@ public class Deadline extends Task{
     @Override
     public void showThisTask() {
         if (canBeFormattedDate(this.date)) {
-            //SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd yyyy");
-            System.out.println("format!");
             System.out.println(this.prefix + super.showStatus() + this.name + "(by:" + this.dateFormatted.format(DateTimeFormatter.ofPattern("MMM d uuuu")) + ")");
         } else {
-            System.out.println("not formatted!");
             System.out.println(this.prefix + super.showStatus() + this.name + "(by:" + this.date + ")");
         }
         
