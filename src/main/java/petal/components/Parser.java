@@ -1,22 +1,8 @@
 package petal.components;
 
-import petal.Petal;
 import petal.command.*;
-import petal.exception.*;
-
-import java.util.List;
 
 public class Parser {
-
-    private final Ui ui;
-    private final TaskList taskList;
-    private final Storage storage;
-
-    public Parser(Storage storage, TaskList taskList) {
-        this.ui = new Ui();
-        this.storage = storage;
-        this.taskList = taskList;
-    }
 
     /**
      * Method that formats the message to be displayed. It splits the input and takes

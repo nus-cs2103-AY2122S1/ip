@@ -1,6 +1,5 @@
 package petal.components;
 
-import petal.exception.InvalidInputException;
 import petal.task.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,7 +42,7 @@ public class Storage {
             Path path = Paths.get(folderPath);
             Files.createDirectories(path);
             File petalData = new File(filePath);
-            petalData.createNewFile();
+            boolean done = petalData.createNewFile();
         } catch (IOException e) {
             savedProperly = false;
             ui.output(Responses.FILE_ERROR);
@@ -87,21 +86,15 @@ public class Storage {
     /**
      * Method to save the tasks. If the folder was not able to be created, Petal does not
      * save any of the tasks.
-     * @throws InvalidInputException Thrown if tasks are not saved properly
+     * @throws IOException Thrown if tasks are not saved properly
      */
-    public void saveTasks() throws InvalidInputException { //TODO: Double check this!
+    public void saveTasks() throws IOException {
         if (!savedProperly) {
             return;
         }
-        try {
-            FileWriter fileWriter = new FileWriter(filePath);
-            fileWriter.write(taskList.formatForSaving());
-            fileWriter.close();
-        } catch (IOException e) {
-            throw new InvalidInputException(Responses.SAVE_ERROR, e);
-        } finally {
-            ui.goodBye();
-        }
+        FileWriter fileWriter = new FileWriter(filePath);
+        fileWriter.write(taskList.formatForSaving());
+        fileWriter.close();
     }
 
 }

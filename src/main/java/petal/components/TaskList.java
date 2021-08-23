@@ -12,8 +12,8 @@ public class TaskList {
     private final List<Task> tasks;
     private final Ui ui;
 
-    public TaskList() {
-        ui = new Ui();
+    public TaskList(Ui ui) {
+        this.ui = ui;
         tasks = new ArrayList<>();
     }
 

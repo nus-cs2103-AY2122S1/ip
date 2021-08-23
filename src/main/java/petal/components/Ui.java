@@ -1,6 +1,23 @@
 package petal.components;
 
+import petal.Petal;
+
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
 public class Ui {
+
+    private final Petal petal;
+    private final Scanner scanner;
+
+    public Ui(Petal petal) {
+        this.petal = petal;
+        scanner = new Scanner(System.in);
+    }
+
+    public String readCommand() {
+        return scanner.nextLine();
+    }
 
     /**
      * Method for Petal to say goodbye. In the case saveTasks() throws an error,
@@ -8,6 +25,8 @@ public class Ui {
      */
     public void goodBye() {
         output(Responses.GOODBYE);
+        scanner.close();
+        petal.stop();
     }
 
     /**

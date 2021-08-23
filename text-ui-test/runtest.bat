@@ -4,7 +4,7 @@ REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
 REM compiles all file
-javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\petal\*.java ..\src\main\java\petal\task\*.java ..\src\main\java\petal\exception\*.java ..\src\main\java\petal\components\*.java
+javac -cp ..\src\main\java\petal -Xlint:none -d ..\bin ..\src\main\java\petal\*.java  ..\src\main\java\petal\task\*.java  ..\src\main\java\petal\exception\*.java  ..\src\main\java\petal\components\*.java  ..\src\main\java\petal\command\*.java
  
 REM no error here, errorlevel == 0
 IF ERRORLEVEL 1 (
@@ -18,4 +18,4 @@ java -classpath ..\bin petal.Petal < input.txt > ACTUAL.TXT
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
 
-PAUSE
+cmd \k

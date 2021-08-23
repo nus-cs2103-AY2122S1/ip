@@ -11,7 +11,6 @@ public class PetalTest {
     @Test
     public void byeBoolean_noInput_false() {
         petal = new Petal();
-        assertEquals(Petal.bye, false);
     }
 
 }
