@@ -1,24 +1,46 @@
 package duke;
 
+/**
+ * The abstract Task class representing a task.
+ */
 public abstract class Task {
     private String description;
     private boolean isDone;
-    private String icon; 
+    private String icon;
 
+    /**
+     * Constructor for a Task object.
+     * 
+     * @param description The description of the task.
+     * @param icon Marker that indicates the type of task.
+     */
     public Task(String description, String icon) {
         this.description = description;
         this.icon = icon; 
         this.isDone = false;
     }
 
+    /**
+     * A method that gets a marker that indicates if task is complete.
+     * 
+     * @return A marker that indicates if task is complete.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
+    /**
+     * A method that marks the task as done. 
+     */
     public void markAsDone() {
         isDone = true;
     }
-    
+
+    /**
+     * A method that converts the task data into a suitable format to be saved in a save file.
+     *
+     * @return The formatted data as a string.
+     */
     public String toData() {
         String isDoneNum = isDone ? "1" : "0"; 
         return String.format("%s~S~%s~S~%s", icon, isDoneNum, description); 

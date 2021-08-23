@@ -5,12 +5,18 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner; 
+import java.util.Scanner;
 
+/**
+ * The FileManager class that deals with loading tasks from a file and saving tasks to a file.
+ */
 public class FileManager {
     private static final String FILENAME = "tasks.txt"; 
-    private static final File DATA_FILE = new File(FILENAME); 
-    
+    private static final File DATA_FILE = new File(FILENAME);
+
+    /**
+     * Constructor for a FileManager object.
+     */
     public FileManager() {
         try {
             if (DATA_FILE.createNewFile()) {
@@ -22,7 +28,13 @@ public class FileManager {
             System.out.println(e.getMessage()); 
         }
     }
-    
+
+    /**
+     * A method that reads a save file and returns the list of tasks.
+     * 
+     * @return The list of tasks.
+     * @throws DukeException If a save file is not found.
+     */
     public TaskList getListFromFile() throws DukeException {
         ArrayList<Task> newList = new ArrayList<>(); 
         try {
@@ -53,7 +65,12 @@ public class FileManager {
         }
         return new TaskList(newList); 
     }
-    
+
+    /**
+     * A method that saves the list of tasks to a file.
+     * 
+     * @param list The list of tasks to be saved.
+     */
     public void writeToFile(TaskList list) {
         try {
             FileWriter writer = new FileWriter(FILENAME); 

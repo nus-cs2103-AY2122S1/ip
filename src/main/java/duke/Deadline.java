@@ -4,9 +4,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The Deadline class representing a task with a deadline.
+ */
 public class Deadline extends Task {
     private LocalDate by;
-    
+
+    /**
+     * Constructor for a Deadline object.
+     * 
+     * @param desc The description of the task.
+     * @param by The deadline of the task.
+     * @throws DukeException If the deadline is not in yyyy-mm-dd format.
+     */
     public Deadline(String desc, String by) throws DukeException {
         super(desc, "D");
         try {
@@ -17,6 +27,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * A method that converts the task data into a suitable format to be saved in a save file.
+     * 
+     * @return The formatted data as a string.
+     */
     public String toData() {
         return super.toData() + "~S~" + by;
     }
