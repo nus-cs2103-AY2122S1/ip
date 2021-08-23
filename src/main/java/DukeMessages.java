@@ -34,7 +34,7 @@ public class DukeMessages {
      * Displays the message for a task marked as Done.
      * @param taskMarked the task that was marked to be done.
      */
-    public void markAsDoneMessage(String taskMarked) {
+    public void markDoneMessage(String taskMarked) {
         String message = String.format("Nice! I've marked this task as done:\n  %s", taskMarked);
         this.displayText(message);
     }
@@ -90,13 +90,6 @@ public class DukeMessages {
         }
 
         System.out.println(borderLine);
-    }
-
-    /**
-     * Displays the message that the database path is wrong.
-     */
-    public void wrongDirectoryMessage() {
-        this.displayText("The directory reference in DatabaseEngine is wrong. Please help to check it!");
     }
 
     /**
