@@ -1,3 +1,6 @@
+/**
+ * A Deadline type task representation for Duke
+ */
 public class Deadline extends Task {
 
     protected String by;

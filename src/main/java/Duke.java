@@ -1,35 +1,30 @@
-import java.io.*;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws IOException {
+    final private static String filePath = "./data/";
+    final private static String fileName = "duke.txt";
+
+    public static void main(String[] args) {
         greet();
-//        add();
+        add();
 
-        // test write to file
-//        String filePath = "./data/";
-//        String fileName = "duke.txt";
-//        File taskFile = new File(filePath + fileName);
-//        try {
-//            Files.write(Paths.get(filePath + fileName), Arrays.asList("Theeee first line", "Theeee second line"));
-//        } catch (FileNotFoundException e) {
-//            Files.createDirectories(Paths.get(filePath));
-//            Files.createFile(Paths.get(filePath + fileName));
+
+        // test reading file
+//        ArrayList<Task> taskList = Tasks.readData();
+//        String taskListStr = listToString(taskList);
+//        printMessage(taskListStr);
+
+        // test writing file
+//        ArrayList<Task> testTasks = new ArrayList<>();
+//        testTasks.add(new Todo("test 9"));
+//        testTasks.add(new Deadline("test 8", "time 2"));
+//        testTasks.add(new Event("test 7", "time 3"));
 //
-//        } catch (IOException e) {
-//            System.out.println("Error caught: " + e);
-//        }
-
-        readData();
+//        Tasks.writeTasksToData(testTasks, filePath, fileName);
 
         // close scanner
         scanner.close();
@@ -74,39 +69,40 @@ public class Duke {
      */
     static void add() {
         String command;
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<Task> list = Tasks.readData(filePath, fileName);
         while (true) {
             command = scanner.nextLine();
             if (command.equals("bye")) {
                 // end bot
+                Tasks.writeTasksToData(list, filePath, fileName);
                 break;
             } else {
                 // split command to check for actions
                 String[] actions = command.split(" ", 2);
                 switch (actions[0]) {
-                    case "list":
-                        // view list
-                        printMessage(listToString(list));
-                        break;
-                    case "done":
-                        done(command, list);
-                        break;
-                    case "todo":
-                        todo(command, list);
-                        break;
-                    case "event":
-                        event(command, list);
-                        break;
-                    case "deadline":
-                        deadline(command, list);
-                        break;
-                    case "delete":
-                        delete(command, list);
-                        break;
-                    default:
-                        // Message for unrecognised task type
-                        printMessage("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                        break;
+                case "list":
+                    // view list
+                    printMessage(listToString(list));
+                    break;
+                case "done":
+                    done(command, list);
+                    break;
+                case "todo":
+                    todo(command, list);
+                    break;
+                case "event":
+                    event(command, list);
+                    break;
+                case "deadline":
+                    deadline(command, list);
+                    break;
+                case "delete":
+                    delete(command, list);
+                    break;
+                default:
+                    // Message for unrecognised task type
+                    printMessage("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    break;
                 }
             }
         }
@@ -144,6 +140,7 @@ public class Duke {
             int doneIndex = Integer.parseInt(command.substring(5));
             try {
                 list.get(doneIndex - 1).markAsDone();
+                Tasks.writeTasksToData(list, filePath, fileName);
                 printMessage("Nice! I've marked this task as done:\n\t" + list.get(doneIndex - 1));
             } catch (IndexOutOfBoundsException e) {
                 // Task at doneIndex does not exist
@@ -175,6 +172,7 @@ public class Duke {
 
         Todo todo = new Todo(todoDescription);
         list.add(todo);
+        Tasks.writeTasksToData(list, filePath, fileName);
         printMessage("Got it. I've added this task:\n\t" + todo + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
@@ -204,6 +202,7 @@ public class Duke {
         }
         Event event = new Event(eventDescription, at);
         list.add(event);
+        Tasks.writeTasksToData(list, filePath, fileName);
         printMessage("Got it. I've added this task:\n\t" + event + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
@@ -233,6 +232,7 @@ public class Duke {
         }
         Deadline deadline = new Deadline(ddlDescription, by);
         list.add(deadline);
+        Tasks.writeTasksToData(list, filePath, fileName);
         printMessage("Got it. I've added this task:\n\t" + deadline + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
@@ -247,6 +247,7 @@ public class Duke {
             int deleteIndex = Integer.parseInt(command.substring(7));
             try {
                 Task removed = list.remove(deleteIndex - 1);
+                Tasks.writeTasksToData(list, filePath, fileName);
                 printMessage("Noted. I've removed this task:\n\t" + removed);
             } catch (IndexOutOfBoundsException e) {
                 // Task at deleteIndex does not exist
@@ -258,36 +259,4 @@ public class Duke {
         }
     }
 
-    /**
-     * Read data from the data file duke.txt
-     */
-    private static void readData() {
-        String filePath = "./data/";
-        String fileName = "duke.txt";
-        File dataFile = new File(filePath + fileName);
-
-        try {
-            Scanner fileScanner = new Scanner(dataFile);
-            while (fileScanner.hasNextLine()) {
-                String data = fileScanner.nextLine();
-                System.out.println(data);
-            }
-            fileScanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("No data file found.");
-        }
-    }
-
-    /**
-     * Convert a data string read from duke.txt into task
-     *
-     * @return the task represented by the string
-     */
-    private static Task dataStringToTask(String data) {
-        String[] taskInfo = data.split(" | ");
-        String taskType = taskInfo[0];
-        switch (taskType) {
-
-        }
-    }
 }

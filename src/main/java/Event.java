@@ -1,3 +1,6 @@
+/**
+ * A Todo type task representation for Duke
+ */
 public class Event extends Task {
 
     protected String at;
