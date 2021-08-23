@@ -24,10 +24,10 @@ public class Storage {
         }
     }
 
-    public void save(TaskList taskManager) throws DukeException {
+    public void save(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.file);
-            fileWriter.write(taskManager.toString());
+            fileWriter.write(taskList.toString());
             fileWriter.close();
         } catch (IOException e) {
             throw new DukeException("OOPS!!! " + e.getMessage());

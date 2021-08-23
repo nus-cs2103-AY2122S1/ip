@@ -10,7 +10,6 @@ public class AddDeadlineCommand extends AddCommand {
     private static final int INPUT_PARAMETERS = 2;
 
     public AddDeadlineCommand(String userInput) throws DukeException {
-        // TODO: dateTime validation
         String inputFormat = String.format("\t\"%s [task] %s [mm-dd-yyyy hh:mm]\"", KEYWORD, DELIMITER);
         // Check whether input contains delimiter
         boolean hasDelimiter = userInput.contains(DELIMITER);

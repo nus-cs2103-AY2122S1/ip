@@ -5,37 +5,26 @@ import tasks.TaskList;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String EXIT_KEYWORD = "bye";
+
     public static void main(String[] args) {
         // TODO: Add enum CommandKeyword "done" "deadline" "event"
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String line = "\n------------------------------------------\n";
-        String startGreeting = line + "Hello! I'm Duke\n"
-                + "What can I do for you?" + line;
-        String endGreeting = line + "Bye. Hope to see you again soon!" + line;
-        String exitString = "bye";
-        System.out.println("Hello from\n" + logo + startGreeting);
-
+        Ui.printStartDisplay();
         TaskList tl = new TaskList();
         Storage s = new Storage();
         Parser p = new Parser();
-        Scanner sc = new Scanner(System.in);
-
-        String userInput = sc.nextLine();
-        while (!userInput.trim().toLowerCase().equals(exitString)) {
+        String userInput = Ui.getInput();
+        while (!userInput.trim().toLowerCase().equals(EXIT_KEYWORD)) {
             try {
                 Command command = p.getCommand(userInput);
                 String output = command.execute(tl);
                 s.save(tl);
-                System.out.print(line + output + line);
+                Ui.print(output);
             } catch (DukeException e) {
-                System.out.println(line + e.getMessage() + line);
+                Ui.print(e.getMessage());
             }
-            userInput = sc.nextLine();
+            userInput = Ui.getInput();
         }
-        System.out.println(endGreeting);
+        Ui.printEndDisplay();
     }
 }

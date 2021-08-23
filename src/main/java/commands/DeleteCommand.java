@@ -11,14 +11,14 @@ public class DeleteCommand extends Command {
         this.taskNumber = Integer.parseInt(intString);
     }
 
-    public String execute(TaskList taskManager) throws DukeException {
-        if (this.taskNumber > taskManager.getNumOfTasks()) {
+    public String execute(TaskList taskList) throws DukeException {
+        if (this.taskNumber > taskList.getNumOfTasks()) {
             throw new DukeException("OOPS!!! Please choose a smaller number :-(");
         }
-        Task task = taskManager.getTask(this.taskNumber);
-        taskManager.remove(this.taskNumber);
+        Task task = taskList.getTask(this.taskNumber);
+        taskList.remove(this.taskNumber);
         return "Noted. I've removed this task:\n\t" + task.toString()
-                + "\nNow you have " + taskManager.getNumOfTasks()
+                + "\nNow you have " + taskList.getNumOfTasks()
                 + " tasks in the list.";
     }
 }
