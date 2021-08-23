@@ -19,7 +19,7 @@ public class Storage {
     public Storage(TaskList tasks) {
         this.tasks = tasks;
         // default save file filepath
-        filePath = "./data/duke.txt";
+        filePath = "./duke.txt";
     }
 
     public Storage(TaskList tasks, String filePath) {
@@ -29,7 +29,7 @@ public class Storage {
 
     public void load() throws IOException {
         File saveFile = new File(filePath);
-        saveFile.createNewFile();
+        System.out.println(saveFile.createNewFile());
         Scanner saveReader = new Scanner(saveFile);
         while(saveReader.hasNextLine()) {
             String inputRead = saveReader.nextLine();

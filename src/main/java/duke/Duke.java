@@ -26,7 +26,7 @@ public class Duke {
         } catch (IOException e) {
             System.out.println(
                 UI.tabAndFormat(
-                    "☹ OOPS!!! Please enter a proper file path! e.g.:\n'./data/duke.txt'"
+                    "☹ OOPS!!! Please enter a proper file path! e.g.:\n'./duke.txt'"
                 )
             );
         }
@@ -53,6 +53,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
+        new Duke("./duke.txt").run();
     }
 }
