@@ -1,0 +1,6 @@
+[E] | 1 | task2 | 21/09/2021
+[D] | 0 | task3 | next monday
+[T] | 0 | task5
+[E] | 0 | task6 | three week later
+[T] | 0 | task7
+[D] | 0 | task8 | tomorrow

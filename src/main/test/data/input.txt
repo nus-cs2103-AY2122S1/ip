@@ -1,0 +1,15 @@
+todo task1
+event task2 /at 21/09/2021
+deadline task3 /by next monday
+todo task4
+done 2
+done 4
+todo task5
+delete 4
+event task6 /at three week later
+done 1
+delete 1
+todo task7
+deadline task8 /by tomorrow
+done 1
+bye

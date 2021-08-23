@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 
 /**
  *  A class that encapsulates the list of task inputted by Duke
@@ -48,7 +49,7 @@ public class TaskList {
 
         this.list.add(task);
         return "\tGot it. I've added this task:\n\t\t " + task
-                + "\n\tNow you have " + list.size() + " tasks in the list.";
+                + "\n\tNow you have " + list.size() + " tasks in the list.\n";
     }
 
     /**
@@ -99,7 +100,7 @@ public class TaskList {
             throw new DukeException("The index provided is not within the valid range");
         }
 
-        return "\tNice! I've marked this task as done:\n\t\t" + list.get(index - 1).markDone();
+        return "\tNice! I've marked this task as done:\n\t\t" + list.get(index - 1).markDone() + "\n";
     }
 
     /**
@@ -123,10 +124,17 @@ public class TaskList {
 
         Task deleted = this.list.remove(index - 1);
         return "\tNoted. I've removed this task:\n\t\t" + deleted.toString()
-                + "\nNow you have " + this.list.size() + " tasks in the list.";
+                + "\n\tNow you have " + this.list.size() + " tasks in the list.\n";
     }
 
-    public ArrayList<Task> getList(){
-        return this.list;
+    /**
+     * Iterates the list and perform a function on each task.
+     *
+     * @param f the function to be applied on each task
+     */
+    public void iterateList(Function<Task, Void> f){
+        for (Task t: this.list) {
+            f.apply(t);
+        }
     }
 }

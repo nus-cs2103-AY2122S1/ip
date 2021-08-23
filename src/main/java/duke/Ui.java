@@ -37,12 +37,12 @@ public class Ui {
 
     public void showBreakLine() {
         String breakLine = "------------------------------";
-        System.out.println(breakLine + breakLine);
+        System.out.println(breakLine + breakLine + "\n");
     }
 
     public void showReply(String reply) {
         showBreakLine();
-        System.out.println("\n" + reply);
+        System.out.println(reply);
         showBreakLine();
     }
 }

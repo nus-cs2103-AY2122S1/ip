@@ -24,9 +24,14 @@ public class Storage {
 
             FileWriter fw = new FileWriter(file + "/duke.txt");
 
-            for (Task task: list.getList()) {
-                fw.write(task.toData() + System.lineSeparator());
-            }
+            list.iterateList(x -> {
+                try {
+                    fw.write(x.toData() + System.lineSeparator());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }); ;
 
             fw.close();
         } catch (IOException e) {
