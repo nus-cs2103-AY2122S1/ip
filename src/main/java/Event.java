@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     protected String time;
+    protected LocalDateTime eventTime;
 
     public Event(String description, String time) {
         super(description);
@@ -15,6 +16,11 @@ public class Event extends Task {
 
         LocalDateTime taskDate = LocalDateTime.of(year, month, date, hour, min);
         this.time = taskDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
+        eventTime = taskDate;
+    }
+
+    public LocalDateTime getEventTime() {
+        return this.eventTime;
     }
 
     @Override
