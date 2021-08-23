@@ -16,7 +16,7 @@ public class Todo extends Task {
     /**
      * Constructor of a Todo Task.
      *
-     * @param description
+     * @param description Short description of task.
      */
     public Todo(String description, boolean isDone) {
         super(description);

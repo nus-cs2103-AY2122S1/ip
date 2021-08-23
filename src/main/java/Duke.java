@@ -33,7 +33,7 @@ public class Duke {
      *
      * @param tasks The list of tasks.
      * @param index The index of the task to mark as done.
-     * @throws DukeException
+     * @throws DukeException If index is out of range.
      */
     public static void doneTask(List<Task> tasks, String index) throws DukeException {
         if (index.isBlank()) {
@@ -52,7 +52,7 @@ public class Duke {
      *
      * @param tasks The list of tasks.
      * @param index The index of the task to mark as done.
-     * @throws DukeException
+     * @throws DukeException If index is out of range.
      */
     public static void deleteTask(List<Task> tasks, String index) throws DukeException {
         if (index.isBlank()) {
@@ -75,7 +75,6 @@ public class Duke {
      * @return List of saved tasks
      */
     public static List<Task> loadData() {
-        String path = "./data/Duke.txt";
         List<Task> tasks = new ArrayList<>();
 
         // Check if data directory exists
@@ -101,10 +100,10 @@ public class Duke {
                     tasks.add(new Todo(taskDescription, isDone));
                     break;
                 case "D":
-                    tasks.add(new Deadline(taskDescription, taskParts[3], isDone));
+                    tasks.add(new Deadline(taskDescription, LocalDate.parse(taskParts[3]), isDone));
                     break;
                 case "E":
-                    tasks.add(new Event(taskDescription, taskParts[3], isDone));
+                    tasks.add(new Event(taskDescription, LocalDate.parse(taskParts[3]), isDone));
                     break;
                 default:
                     System.out.println("Invalid task in data");
@@ -141,8 +140,6 @@ public class Duke {
         System.out.println("Hello, I am Duke!\nHow may I help you?");
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = loadData();
-//        List<Task> tasks = new ArrayList<>();
-        System.out.println(tasks);
         String command = sc.next();
         
         while (!command.equals("bye")) {

@@ -23,9 +23,9 @@ public class Deadline extends Task {
     /**
      * Constructor of a Deadline Task.
      *
-     * @param description
+     * @param description Short description of task.
      */
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, LocalDate by, boolean isDone) {
         super(description);
         this.by = by;
         this.isDone = isDone;

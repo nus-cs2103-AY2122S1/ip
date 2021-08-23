@@ -23,9 +23,9 @@ public class Event extends Task {
     /**
      * Constructor of an Event Task.
      *
-     * @param description
+     * @param description Short description of task.
      */
-    public Event(String description, String dateTime, boolean isDone) {
+    public Event(String description, LocalDate dateTime, boolean isDone) {
         super(description);
         this.dateTime = dateTime;
         this.isDone = isDone;
