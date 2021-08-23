@@ -2,6 +2,8 @@ package duke.util;
 
 import duke.task.Task;
 
+import java.util.List;
+
 /**
  * Deals with the interactions with the user. This class only
  * prints out messages to the user.
@@ -64,6 +66,20 @@ public class Ui {
         printMessage("Noted. I've removed this task:",
                 task.toString(),
                 String.format("Now you have %o task(s).", totalTask));
+    }
+
+    /**
+     * Prints out all the task that is found.
+     *
+     * @param tasks Tasks to be printed.
+     */
+    public void searchOutputMessage(List<String> tasks) {
+        if (tasks.size() == 0) {
+            tasks.add(0, "There are no matching tasks found.");
+            return;
+        }
+        tasks.add(0, "Here are the matching task(s) in your list:");
+        printMessage(tasks.toArray(new String[0]));
     }
 
     /**
