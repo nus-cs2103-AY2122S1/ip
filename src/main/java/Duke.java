@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Duke {
     private static Scanner scanner;
     private static ArrayList<Task> savedInputs;
-    private enum Command {LIST, DONE, DELETE, TODO, DEADLINE, EVENT, INVALID}
+    private enum Command {LIST, DONE, DELETE, TODO, DEADLINE, EVENT, CHECKDATE, INVALID}
 
     public static void main(String[] args) throws DukeException {
         scanner = new Scanner(System.in);
@@ -154,6 +154,34 @@ public class Duke {
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
                         break;
 
+                    case CHECKDATE:
+                        String date = input.substring(6);
+                        LocalDate checkDate = LocalDate.parse(date);
+
+                        String allTasks = "";
+                        int counter = 1;
+                        for (int i = 0; i < savedInputs.size(); i++) {
+                            Task t = savedInputs.get(i);
+                            if (t instanceof Deadline) {
+                                Deadline d = (Deadline) t;
+                                if (d.by.equals(checkDate)) {
+                                    allTasks = allTasks + counter + ". " + t.description + "\n";
+                                    counter++;
+                                }
+                            }
+
+                            if (t instanceof Event) {
+                                Event e = (Event) t;
+                                if (e.at.equals(checkDate)) {
+                                    allTasks = allTasks + counter + ". " + t.description + "\n";
+                                    counter++;
+                                }
+                            }
+                        }
+                        System.out.println(allTasks);
+
+                        break;
+
                     default:
                         throw new DukeException("Oops! I'm sorry, but I don't know what that means :-(");
                 }
@@ -182,6 +210,8 @@ public class Duke {
             return Command.DEADLINE;
         } else if (input.startsWith("event")) {
             return Command.EVENT;
+        } else if (input.startsWith("check")) {
+            return Command.CHECKDATE;
         } else {
             return Command.INVALID;
         }
