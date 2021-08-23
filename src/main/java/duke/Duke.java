@@ -25,7 +25,7 @@ public class Duke {
         try {
             taskList = new TaskList(store.load());
         } catch (DukeFileException e) {
-            ui.showLoadingError();
+            ui.showError(e.getMessage());
             taskList = new TaskList();
         }
     }

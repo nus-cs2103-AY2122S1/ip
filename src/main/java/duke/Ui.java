@@ -14,7 +14,14 @@ public class Ui {
      * These are class fields and constants of Ui.
      */
     private static final String LINE_SEPARATOR = "    _______________________________";
-    private Scanner s = new Scanner(System.in);
+    private Scanner scanner;
+
+    /**
+     *
+     */
+    public Ui() {
+        this.scanner = new Scanner(System.in);
+    }
 
     /**
      * Prints the standard welcome message user sees when initiating duke.
@@ -31,15 +38,6 @@ public class Ui {
     }
 
     /**
-     * Prints the error message when a file cannot be loaded.
-     */
-    public void showLoadingError() {
-        printLine();
-        System.out.println("    Error loading file!!");
-        printLine();
-    }
-
-    /**
      * Prints the error message from DukeExceptions.
      *
      * @param message A String representing the message to be printed.
@@ -53,13 +51,13 @@ public class Ui {
     /**
      * Prints the message when a task is added to the list.
      *
-     * @param t  A Task instance that contains details of the newly added task and to be printed.
+     * @param task  A Task instance that contains details of the newly added task and to be printed.
      * @param newSize An int representing the new size of the Task list.
      */
-    public void printAddTask(Task t, int newSize) {
+    public void printAddTask(Task task, int newSize) {
         printLine();
         System.out.println("    Got it. I've added this task:");
-        System.out.printf("      %s\n", t);
+        System.out.printf("      %s\n", task);
         System.out.printf("    Now you have %d ", newSize);
         System.out.println((newSize <= 1 ? "task" : "tasks") + " in the list.");
         printLine();
@@ -68,13 +66,13 @@ public class Ui {
     /**
      * Prints the message when a task is removed from the list.
      *
-     * @param t  A Task instance that contains the details of the removed task.
+     * @param task  A Task instance that contains the details of the removed task.
      * @param remainingSize An int representing the newly updated size of task list.
      */
-    public void printRemoveTask(Task t, int remainingSize) {
+    public void printRemoveTask(Task task, int remainingSize) {
         printLine();
         System.out.println("    Noted. I've removed this task:");
-        System.out.printf("      %s\n", t);
+        System.out.printf("      %s\n", task);
         System.out.printf("    Now you have %d ", remainingSize);
         System.out.println((remainingSize <= 1 ? "task" : "tasks") + " in the list.");
         printLine();
@@ -83,12 +81,12 @@ public class Ui {
     /**
      * Prints the message when a task is marked as done.
      *
-     * @param t A Task instance that contains details of the task marked as done.
+     * @param task A Task instance that contains details of the task marked as done.
      */
-    public void printMarkTaskDone(Task t) {
+    public void printMarkTaskDone(Task task) {
         printLine();
         System.out.println("    Nice! I've marked this task as done:");
-        System.out.printf("    %s\n", t);
+        System.out.printf("    %s\n", task);
         printLine();
     }
 
@@ -127,7 +125,7 @@ public class Ui {
         printLine();
         System.out.println("    Bye. Hope to see you again soon!");
         printLine();
-        s.close();
+        this.scanner.close();
     }
 
     /**
@@ -136,7 +134,7 @@ public class Ui {
      * @return A String representing a single command.
      */
     public String readCommand() {
-        String command = s.nextLine();
+        String command = this.scanner.nextLine();
         return command;
     }
 
