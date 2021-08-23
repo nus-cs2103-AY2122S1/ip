@@ -4,8 +4,8 @@ package duke.task;
  * Enum file for chatbot commands.
  *
  * @author marcuspeh
- * @version Level-7
- * @since 19 Aug 2021
+ * @version A-JavaDoc
+ * @since 23 Aug 2021
  */
 public enum Keyword {
     /** Exit message. */
@@ -63,29 +63,14 @@ public enum Keyword {
         return keyword.length();
     }
 
-    /**
-     * Getter for keyword.
-     *
-     * @return keyword for command.
-     */
     public String getKeyword() {
         return keyword;
     }
 
-    /**
-     * Getter for separator.
-     *
-     * @return separator for command.
-     */
     public String getSeparator() {
         return separator;
     }
 
-    /**
-     * Getter for saveWord.
-     *
-     * @return saveWord for task.
-     */
     public String getSaveWord() {
         return saveWord;
     }

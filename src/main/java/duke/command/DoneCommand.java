@@ -4,6 +4,13 @@ import duke.util.TaskList;
 import duke.util.Ui;
 import duke.task.Keyword;
 
+/**
+ * Handles the command for done.
+ *
+ * @author marcuspeh
+ * @version A-JavaDoc
+ * @since 23 Aug 2021
+ */
 public class DoneCommand implements Command {
     /** Stores the message entered by the user. */
     private String message;

@@ -5,10 +5,14 @@ import duke.util.Ui;
 
 /**
  * Interface for commands.
+ *
+ * @author marcuspeh
+ * @version A-JavaDoc
+ * @since 23 Aug 2021
  */
 public interface Command {
     /**
-     * Runs for the chat.
+     * Execute the command for duke.
      *
      * @param taskList duke.main.TaskList to execute the command.
      * @param ui To interact with the user.

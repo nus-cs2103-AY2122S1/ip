@@ -13,8 +13,8 @@ import java.util.List;
  * Deals with storing of task as well as operations involving the tasks.
  *
  * @author marcuspeh
- * @version A-MoreOOP
- * @since 21 Aug 2021
+ * @version A-JavaDoc
+ * @since 23 Aug 2021
  */
 public class TaskList {
     /** List to store all the task. */
@@ -106,7 +106,6 @@ public class TaskList {
             ui.doneFailedMessage(task);
     }
 
-
     /**
      * Deletes the nth task from the task list.
      *
@@ -125,9 +124,6 @@ public class TaskList {
         storage.exportTask(this.taskList);
     }
 
-    /**
-     * Return the list of task.
-     */
     public List<Task> getTaskList() {
         return taskList;
     }

@@ -3,6 +3,13 @@ package duke.command;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * Handles the command for new todo.
+ *
+ * @author marcuspeh
+ * @version A-JavaDoc
+ * @since 23 Aug 2021
+ */
 public class TodoCommand implements Command {
     /** Stores the message entered by the user. */
     private String message;

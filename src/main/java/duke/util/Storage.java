@@ -21,8 +21,8 @@ import java.util.List;
  * Deals with loading tasks from the file and saving tasks in the file.
  *
  * @author marcuspeh
- * @version A-MoreOOP
- * @since 21 Aug 2021
+ * @version A-JavaDoc
+ * @since 23 Aug 2021
  */
 public class Storage {
     /** File name for the storage. */
@@ -69,6 +69,7 @@ public class Storage {
 
     /**
      * Loads the txt file containing information on the task.
+     * If dir/file is not found, a welcome message will be printed.
      *
      * @return A list of all the task stored.
      */

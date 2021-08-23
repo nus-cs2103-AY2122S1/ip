@@ -8,6 +8,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * Handles the command for list.
+ *
+ * @author marcuspeh
+ * @version A-JavaDoc
+ * @since 23 Aug 2021
+ */
 public class ListCommand implements Command {
     /**
      * Adds a new task to the task list.

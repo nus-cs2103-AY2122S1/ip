@@ -8,8 +8,8 @@ import java.util.Date;
  * Abstract Class to manage task stored in chatbot.
  *
  * @author marcuspeh
- * @version A-MoreOOP
- * @since 21 Aug 2021
+ * @version A-JavaDoc
+ * @since 23 Aug 2021
  */
 public abstract class Task {
     /** Stores the task. */
@@ -92,28 +92,15 @@ public abstract class Task {
      */
     public abstract String saveOutput();
 
-    /**
-     * Getter for isDone.
-     *
-     * @return whether the task is done.
-     */
+
     public boolean getIsDone() {
         return isDone;
     }
 
-    /**
-     * Getter for task.
-     *
-     * @return task
-     */
     public String getTask() {
         return task;
     }
 
-    /** Getter for dateTime.
-     *
-     * @return dateTime
-     */
     public String getDateTime() {
         return formatDateTime.format(dateTime);
     }

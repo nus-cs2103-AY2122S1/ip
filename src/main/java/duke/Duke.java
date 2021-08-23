@@ -9,13 +9,6 @@ import duke.util.Ui;
 
 import java.util.Scanner;
 
-/**
- * Main file for chatbot.
- *
- * @author marcuspeh
- * @version A-MoreOOP
- * @since 21 Aug 2021
- */
 public class Duke {
     /** For the chatboard to read the user input. */
     private Scanner sc;
