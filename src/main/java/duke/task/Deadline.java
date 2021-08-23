@@ -30,7 +30,7 @@ public class Deadline extends Task{
     public Deadline(String description, String by, Boolean isDone) {
         super(description);
         super.isDone = isDone;
-        this.by = by;
+        this.by = new DateTime(by);
     }
 
     /**
@@ -42,7 +42,7 @@ public class Deadline extends Task{
     @Override
     public String getData() {
         return "Deadline // " + (super.getIsDone() ? 1 : 0) + " // " + super.getDescription()
-                + " // " + by;
+                + " // " + by.getDate();
     }
 
     @Override

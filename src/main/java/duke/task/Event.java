@@ -30,7 +30,7 @@ public class Event extends Task {
     public Event(String description, String at, Boolean isDone) {
         super(description);
         super.isDone = isDone;
-        this.at = at;
+        this.at = new DateTime(at);
     }
 
     /**
@@ -42,7 +42,7 @@ public class Event extends Task {
     @Override
     public String getData() {
         return "Event // " + (super.getIsDone() ? 1 : 0) + " // " + super.getDescription()
-                + " // " + at;
+                + " // " + at.getDate();
     }
 
     @Override

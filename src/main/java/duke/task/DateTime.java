@@ -21,6 +21,11 @@ public class DateTime {
         this.time = LocalTime.parse(time);
     }
 
+    // returns original date
+    public String getDate() {
+        return date.toString();
+    }
+
     public static boolean isValidDate(String date) {
         try {
             DATE_FORMATTER.parse(date);
