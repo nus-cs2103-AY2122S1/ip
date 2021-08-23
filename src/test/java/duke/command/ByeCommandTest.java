@@ -11,7 +11,7 @@ public class ByeCommandTest {
     private Command c = new ByeCommand();
 
     @Test
-    public void isExitTest() {
+    public void isExit_byeCommandInitialized_trueReturned() {
         assertEquals(c.isExit(), true);
     }
 }

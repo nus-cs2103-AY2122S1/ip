@@ -21,8 +21,8 @@ public class UI {
     /** Prints the welcome message */
     public void printWelcome() {
         System.out.println(
-                "Lollipop: Hello! I am your personal chatbot, Lollipop! " +
-                        "What would you like to do today?");
+                "Lollipop: Hello! I am your personal chatbot, Lollipop! "
+                + "What would you like to do today?");
     }
 
     /** Prints the goodbye message */

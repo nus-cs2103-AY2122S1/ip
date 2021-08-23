@@ -9,27 +9,27 @@ public class EventTest {
     Event event = new Event("sell book", "2020-04-21");
 
     @Test
-    public void getTimeTest() {
+    public void getTime_eventInitialized_localDateReturned() {
         assertEquals(event.getTime().toString(), "2020-04-21");
     }
 
     @Test
-    public void getDescriptionTest() {
+    public void getDescription_eventInitialized_descriptionReturned() {
         assertEquals(event.getDescription(), "sell book");
     }
 
     @Test
-    public void getStatusIconTest() {
+    public void getStatusIcon_eventInitialized_statusIconReturned() {
         assertEquals(event.getStatusIcon(), " ");
     }
 
     @Test
-    public void toStringTest() {
+    public void toString_eventInitialized_descriptionAndTimeReturned() {
         assertEquals(event.toString(), "[E][ ] sell book (at: 21 April 2020)");
     }
 
     @Test
-    public void markAsDoneTest() {
+    public void markAsDone_eventInitialized_taskMarkedAsDone() {
         Event event = new Event("sell book", "2020-04-21");
         event.markAsDone();
         assertEquals(event.toString(), "[E][X] sell book (at: 21 April 2020)");
