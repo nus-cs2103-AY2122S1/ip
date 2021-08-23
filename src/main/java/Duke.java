@@ -34,6 +34,7 @@ public class Duke {
             command = ui.getNextLine();
             if (command.equals("bye")) {
                 // end bot
+                storage.writeTasksToData(tasks);
                 break;
             } else {
                 switch (parser.getCommandAction(command)) {
@@ -77,6 +78,7 @@ public class Duke {
                 tasks.get(doneIndex - 1).markAsDone();
                 storage.writeTasksToData(tasks);
                 ui.printMessage("Nice! I've marked this task as done:\n\t" + tasks.get(doneIndex - 1));
+
             } catch (IndexOutOfBoundsException e) {
                 // Task at doneIndex does not exist
                 ui.printMessage("Task " + doneIndex + " does not exist. Please check your task list!");
@@ -124,6 +126,7 @@ public class Duke {
         tasks.add(event);
         storage.writeTasksToData(tasks);
         ui.printMessage("Got it. I've added this task:\n\t" + event + "\nNow you have " + tasks.size() + " tasks in the list.");
+
     }
 
     /**
@@ -156,6 +159,7 @@ public class Duke {
                 Task removed = tasks.remove(deleteIndex - 1);
                 storage.writeTasksToData(tasks);
                 ui.printMessage("Noted. I've removed this task:\n\t" + removed);
+
             } catch (IndexOutOfBoundsException e) {
                 // Task at deleteIndex does not exist
                 ui.printMessage("Task " + deleteIndex + " does not exist. Please check your task list!");
@@ -167,4 +171,5 @@ public class Duke {
             ui.printMessage(e.getMessage());
         }
     }
+
 }

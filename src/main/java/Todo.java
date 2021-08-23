@@ -1,3 +1,6 @@
+/**
+ * A Todo type task representation for Duke
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
