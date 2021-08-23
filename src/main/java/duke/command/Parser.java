@@ -37,6 +37,6 @@ public class Parser {
         else if (command.equals(Keyword.DELETE.getKeyword()))
             return new DeleteCommand(message);
 
-        throw new DukeException("duke.command.Command not parsable");
+        throw new DukeException("Command not parsable");
     }
 }
