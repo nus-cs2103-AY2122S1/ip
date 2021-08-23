@@ -1,4 +1,8 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -17,6 +21,51 @@ public class MyJournal {
         return "Okay!! I've added the following task:\n"
                 + taskList.get(taskList.size() - 1) + "\n"
                 + "Now you have " + taskList.size() + " in the list";
+    }
+
+    public static boolean isInteger(String string) {
+        try {
+            Integer.parseInt(string);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static String getTimeDate(Scanner line) {
+        String parsed = "";
+        while (line.hasNext()) {
+            String currWord = line.next();
+            if (isDate(currWord)) {
+                LocalDate date = LocalDate.parse(currWord);
+                String month = date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+                String dateFormatted = date.getDayOfWeek().toString() + ", " + date.getDayOfMonth() + " " + month
+                        + " " + date.getYear();
+                parsed = parsed + " " + dateFormatted;
+            } else if (isTime(currWord)) {
+                LocalTime time = LocalTime.parse(currWord);
+                String beforeOrAfterNoon = time.getHour() >= 12 ? "pm" : "am";
+                int hour = time.getHour() >= 12 ? time.getHour() - 12 : time.getHour();
+                int min = time.getMinute();
+                String timeFormatted = (String.valueOf(hour).length() == 1 ? "0" + hour : hour)
+                        + ":" + (min < 10 ? "0" + min : min) + beforeOrAfterNoon;
+                parsed = parsed + " " + timeFormatted;
+            } else {
+                parsed = parsed + " " + currWord;
+            }
+        }
+        return parsed;
+    }
+
+    public static boolean isDate(String string) {
+        return string.length() == 10 && string.charAt(4) == '-' && string.charAt(7) == '-'
+                && isInteger(string.substring(0, 4)) && isInteger(string.substring(5, 7))
+                && isInteger(string.substring(8, 10));
+    }
+
+    public static boolean isTime(String string) {
+        return string.length() == 5 && isInteger(string.substring(0,2))
+                && isInteger(string.substring(3,5)) && string.charAt(2) == ':';
     }
 
     /**
@@ -76,7 +125,6 @@ public class MyJournal {
                     }
                 } else {
                     String taskName = "";
-                    String time = "";
                     switch (firstWord) {
                         case "todo":
                             if (!line.hasNext()) {
@@ -100,10 +148,7 @@ public class MyJournal {
                                 }
                                 taskName = taskName + currWord + " ";
                             }
-                            while (line.hasNext()) {
-                                time = time + " " + line.next();
-                            }
-                            items.add(new Event(taskName, time));
+                            items.add(new Event(taskName, getTimeDate(line)));
                             System.out.println(taskAddPrint(items));
                             break;
                         case "deadline":
@@ -117,10 +162,7 @@ public class MyJournal {
                                 }
                                 taskName = taskName + currWord + " ";
                             }
-                            while (line.hasNext()) {
-                                time = time + " " + line.next();
-                            }
-                            items.add(new Deadline(taskName, time));
+                            items.add(new Deadline(taskName, getTimeDate(line)));
                             System.out.println(taskAddPrint(items));
                             break;
                         default:
