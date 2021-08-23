@@ -7,10 +7,9 @@ package task;
  */
 public abstract class Task {
 
+    // Encoding variables.
     public static String SPLIT_TEMPLATE = " # ";
-    
     public static String DONE = "1";
-
     public static String NOT_DONE = "0";
     
     private String description;

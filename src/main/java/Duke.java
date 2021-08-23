@@ -51,22 +51,23 @@ public class Duke {
         
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine().trim();
-        String output;
+        String feedback;
         Command command = Command.parseFromInput(userInput);
         List<Task> tasks;
 
         while (!command.equals(Command.BYE)) {
             try {
-                output = parser.execute(command, userInput, taskList);
+                feedback = parser.execute(command, userInput, taskList);
                 tasks = taskList.getTasks();
                 storage.save(tasks);
-                chatBot.info(output);
+                chatBot.info(feedback);
 
             } catch (DukeException exception) {
                 chatBot.error(exception.getMessage());
 
             } catch (StorageException exception) {
                 chatBot.error("Error updating task file.");
+                break;
 
             } finally {
                 userInput = scanner.nextLine().trim();

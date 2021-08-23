@@ -30,6 +30,14 @@ public class Event extends Task {
         this.atTime = atTime;
     }
 
+    public LocalDate getAtDate() {
+        return atDate;
+    }
+
+    public LocalTime getAtTime() {
+        return atTime;
+    }
+
     /**
      * Provides a formatted String of the 'at' field.
      *

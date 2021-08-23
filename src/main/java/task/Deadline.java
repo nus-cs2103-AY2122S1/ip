@@ -31,6 +31,14 @@ public class Deadline extends Task {
         this.byTime = byTime;
     }
 
+    public LocalDate getByDate() {
+        return byDate;
+    }
+
+    public LocalTime getByTime() {
+        return byTime;
+    }
+
     /**
      * Provides a formatted String of the 'by' field.
      *
