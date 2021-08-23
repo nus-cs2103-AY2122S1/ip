@@ -129,8 +129,11 @@ public class Duke {
         String task = commandSplit[0].split(type)[1];   // The task is everything after the action
         String time = commandSplit[1];               // The time is the second part of the command
 
-        if (isDeadline) addTask(new Deadline(task, time));
-        else addTask(new Event(task, time));
+        if (isDeadline) {
+            addTask(new Deadline(task, time));
+        } else {
+            addTask(new Event(task, time));
+        }
     }
 
     /**
