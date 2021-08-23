@@ -11,19 +11,19 @@ public class Parser {
         return i;
     }
 
-    protected static String[] parseEvent(String args) throws InvalidArgumentsException {
+    protected static Event parseEvent(String args) throws InvalidArgumentsException {
         String[] splitArgs = args.split(" /at ");
         if (splitArgs.length != 2) {
             throw new InvalidArgumentsException("event [task] /at [time period]");
         }
-        return splitArgs;
+        return new Event(splitArgs[0], splitArgs[1]);
     }
 
-    protected static String[] parseDeadline(String args) throws InvalidArgumentsException {
+    protected static Deadline parseDeadline(String args) throws InvalidArgumentsException {
         String[] splitArgs = args.split(" /by ");
         if (splitArgs.length != 2) {
             throw new InvalidArgumentsException("deadline [task] /by [time]");
         }
-        return splitArgs;
+        return new Deadline(splitArgs[0], splitArgs[1]);
     }
 }

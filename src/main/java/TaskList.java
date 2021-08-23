@@ -43,8 +43,7 @@ public class TaskList {
     }
 
     protected void addDeadline(String args) throws InvalidArgumentsException {
-        String[] splitArgs = Parser.parseDeadline(args);
-        Deadline deadline = new Deadline(splitArgs[0], splitArgs[1]);
+        Deadline deadline = Parser.parseDeadline(args);
         this.tasks.add(deadline);
 
         printTaskAdded(deadline);
@@ -52,8 +51,7 @@ public class TaskList {
     }
 
     protected void addEvent(String args) throws InvalidArgumentsException {
-        String[] splitArgs = Parser.parseEvent(args);
-        Event event = new Event(splitArgs[0], splitArgs[1]);
+        Event event = Parser.parseEvent(args);
         this.tasks.add(event);
 
         printTaskAdded(event);
