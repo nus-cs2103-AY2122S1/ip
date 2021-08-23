@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     public static ArrayList<Task> tasks = new ArrayList<>();
@@ -80,8 +82,16 @@ public class Duke {
                         if (!s.contains("/by")) {
                             throw new DukeException("deadlines require a /by");
                         }
-                        String[] data = s.replace("deadline ", "").split("/by");
-                        tasks.add(new Deadline(data[0].trim(), data[1].trim()));
+
+                        try {
+                            String[] data = s.replace("deadline ", "").split("/by");
+                            tasks.add(
+                                    new Deadline(data[0].trim(),
+                                    LocalDate.parse(data[1].trim())
+                            ));
+                        } catch (DateTimeParseException err) {
+                            throw new DukeException("/by date is not valid");
+                        }
                     } else if (s.startsWith("event")) {
                         if (!s.contains("/at")) {
                             throw new DukeException("events require an /at");
@@ -101,7 +111,7 @@ public class Duke {
                     System.out.println("---------");
                 }
 
-                // saveList();
+                saveList();
                 s = in.nextLine();
             } catch (DukeException err) {
                 System.out.println("---------");
@@ -131,7 +141,7 @@ public class Duke {
                     tasks.add(new ToDo(nextItem[1].trim(), nextItem[2].trim().equals("1")));
                     break;
                 case "D":
-                    tasks.add(new Deadline(nextItem[1].trim(), nextItem[2].trim().equals("1"), nextItem[3].trim()));
+                    tasks.add(new Deadline(nextItem[1].trim(), nextItem[2].trim().equals("1"), LocalDate.parse(nextItem[3].trim())));
                     break;
                 case "E":
                     tasks.add(new Event(nextItem[1].trim(), nextItem[2].trim().equals("1"), nextItem[3].trim()));
