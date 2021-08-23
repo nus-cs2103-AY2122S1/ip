@@ -10,8 +10,20 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Parser class deals with making sense of the user command.
+ *
+ * @author Chng Zi Hao
+ */
 public class Parser {
 
+    /**
+     * Returns a Command to be executed.
+     *
+     * @param input User input.
+     * @return Command to be executed.
+     * @throws DukeException Any Exception thrown due to bad input.
+     */
     public Command parse(String input) throws DukeException {
         Instruction instruction = Instruction.valueOfLabel(input.split(" ")[0]);
         switch (instruction) {
@@ -119,6 +131,13 @@ public class Parser {
         return description;
     }
 
+    /**
+     * Returns a LocalDate object from date string.
+     *
+     * @param date String representation of date.
+     * @return LocalDate object representing the date.
+     * @throws DukeInvalidDateException If date input does not match regex or is invalid date.
+     */
     public static LocalDate parseDate(String date) throws DukeInvalidDateException {
         try {
             // Reuse regex from https://www.javacodeexamples.com/java-regular-expression-validate-date-example-regex/1504
@@ -142,6 +161,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a LocalTime object from time string.
+     *
+     * @param time String representation of time.
+     * @return LocalTime object representing the time.
+     * @throws DukeInvalidTimeException If time input does not match regex or is invalid time.
+     */
     public static LocalTime parseTime(String time) throws DukeInvalidTimeException {
         try {
             // Reuse regex from https://www.geeksforgeeks.org/how-to-validate-time-in-24-hour-format-using-regular-expression/
@@ -162,6 +188,15 @@ public class Parser {
         }
     }
 
+
+    /**
+     * Splits string with date and time combined to two separate string containing time and date
+     * for Deadline task.
+     *
+     * @param dateTime String representation of DateTime
+     * @return Array of String with date and time separated.
+     * @throws DukeMissingDateTimeException If input does not contain time or date.
+     */
     public static String[] deadlineDateTimeSplit(String dateTime) throws DukeMissingDateTimeException {
         String[] splitDateTime = dateTime.split(" ", 2);
         if (splitDateTime.length != 2) {
@@ -170,6 +205,14 @@ public class Parser {
         return splitDateTime;
     }
 
+    /**
+     * Splits string with date and time combined to two separate string containing time and date
+     * for Event task.
+     *
+     * @param dateTime String representation of DateTime
+     * @return Array of String with date and time separated.
+     * @throws DukeMissingDateTimeException If input does not contain time or date.
+     */
     public static String[] eventDateTimeSplit(String dateTime) throws DukeMissingDateTimeException {
         String[] splitDateTime = dateTime.split(" ", 2);
         if (splitDateTime.length != 2) {

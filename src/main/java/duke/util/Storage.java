@@ -16,6 +16,11 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class deals with loading tasks from the file and saving tasks in the file.
+ *
+ * @author Chng Zi Hao
+ */
 public class Storage {
     private static final String DIRECTORY = "./dataaaa/";
     private static final String FILEPATH = DIRECTORY + "data.txt";
@@ -30,6 +35,7 @@ public class Storage {
      * If data.txt is empty, an Empty ArrayList is returned.
      *
      * @return ArrayList containing tasks.
+     * @throws DukeException If there is an I/O exception.
      */
     public ArrayList<Task> retrieveData() throws DukeException{
         if (!this.file.exists()) {
@@ -96,6 +102,7 @@ public class Storage {
      * Saves data into data.txt files after changes have been made by user.
      *
      * @param data Formatted TaskList to be stored in data.txt.
+     * @throws DukeIoException If program is unable to write to file.
      */
     public void save(String data) throws DukeIoException {
         try {
