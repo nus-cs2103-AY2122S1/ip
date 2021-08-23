@@ -50,6 +50,7 @@ public class Storage {
 
     /**
      * Adds a task to the save file.
+     *
      * @param task the task to be added to the save file.
      * @throws IOException when an IO operation fails.
      */
@@ -72,6 +73,7 @@ public class Storage {
 
     /**
      * Deletes task from save file.
+     *
      * @param deleteIndex the index of the task to be deleted.
      * @throws IOException when an IO operation fails.
      */
@@ -83,6 +85,7 @@ public class Storage {
 
     /**
      * Marks a task in the save file as done.
+     *
      * @param doneIndex the index of the task to be marked as done.
      * @throws IOException when an IO operation fails.
      */
