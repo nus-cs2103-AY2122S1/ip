@@ -94,7 +94,6 @@ public class Storage {
         }
     }
 
-
     public void editFileContentsForDeletion(int taskNum) {
         File temp = new File("data/temp.txt");
         if (!temp.exists()) {

@@ -49,13 +49,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        //retrieveFileContents();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello FROM\n" + logo);
         new Duke("data/tasks.txt").run();
 
     }
@@ -64,14 +57,6 @@ public class Duke {
         commands();
     }
 
-    /**
-     * Prints out text to say goodbye to user.
-     */
-    private static void byeCommand() {
-        System.out.println("    ______________________________________");
-        System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println("    ______________________________________");
-    }
 
     /**
      * Adds a ToDo to the list of tasks.
@@ -244,18 +229,15 @@ public class Duke {
     }
 
     private void commands() throws DukeException {
-        int pointer = 1;
         System.out.println("Hello! I'm Duke\n");
         System.out.println("What can I do for you?");
         System.out.println("__________________________________________");
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
-            String command = scanner.nextLine();
-            String[] words = command.split(" ");
-            String init = words[0];
-            if (!command.equals("bye")) {
-                try {
-                    switch (init) {
+
+        String command;
+        while (!(command = ui.readCommand()).equals("bye")) {
+            String parsed = Parser.process(command);
+            try {
+                switch (parsed) {
                     case ("list"):
                         tasks.printList(command);
                         break;
@@ -276,22 +258,18 @@ public class Duke {
                         break;
                     default:
                         throw new DukeException("invalidCommand");
-                    }
-                } catch (DukeException err) {
-                    System.out.println("    ______________________________________");
-                    System.out.printf("     %s\n", err);
-                    System.out.println("    ______________________________________");
                 }
+            } catch (DukeException err) {
+                System.out.println("    ______________________________________");
+                System.out.printf("     %s\n", err);
+                System.out.println("    ______________________________________");
             }
-            else {
-                byeCommand();
-                scanner.close();
-                break;
-            }
+        }
+        ui.end();
         }
     }
 
 
 
 
-}
+
