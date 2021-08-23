@@ -3,7 +3,7 @@ package duke;
 import duke.task.Task;
 
 /**
- * Encapsulate the parsing-related functionality of Iris
+ * Encapsulates the parsing-related functionality of Iris
  */
 public class Parser {
     private static String getMetadata(String command) throws IrisException {
@@ -25,7 +25,7 @@ public class Parser {
     }
 
     /**
-     * Handle a given command
+     * Handles a given command
      * @param command  raw text representing command
      * @param taskList TaskList object representing current list of tasks
      * @param ui       Ui object for current Duke instance
@@ -36,7 +36,7 @@ public class Parser {
     }
 
     /**
-     * Handle a given command
+     * Handles a given command
      * @param command  raw text representing command
      * @param taskList TaskList object representing current list of tasks
      * @param ui       Ui object for current Iris instance

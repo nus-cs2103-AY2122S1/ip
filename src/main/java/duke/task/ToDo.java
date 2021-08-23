@@ -5,7 +5,7 @@ package duke.task;
  */
 public class ToDo extends Task {
     /**
-     * Create a new ToDo object
+     * Creates a new ToDo object
      * @param name name of the todo
      */
     public ToDo(String name) {
@@ -13,7 +13,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Convert ToDo object to String
+     * Converts ToDo object to String
      * @return String representation of ToDo object
      */
     @Override
@@ -22,7 +22,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Convert ToDo object to Command
+     * Converts ToDo object to Command
      * @param index index of this Task in the TaskList
      * @return String representing the command to re-create this ToDo object
      */

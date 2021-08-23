@@ -13,7 +13,7 @@ public class Event extends Task {
     protected LocalDate at;
 
     /**
-     * Create a new Event object
+     * Creates a new Event object
      * @param name name of the event
      * @param at   date for this event e.g. "2021-08-23"
      * @throws IrisException for invalid date
@@ -28,7 +28,7 @@ public class Event extends Task {
     }
 
     /**
-     * Convert Event object to String
+     * Converts Event object to String
      * @return String representation of Event object
      */
     @Override
@@ -41,7 +41,7 @@ public class Event extends Task {
     }
 
     /**
-     * Convert Event object to Command
+     * Converts Event object to Command
      * @param index index of this Task in the TaskList
      * @return String representing the command to re-create this Event object
      */

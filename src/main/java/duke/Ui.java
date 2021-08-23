@@ -3,13 +3,13 @@ package duke;
 import java.util.Scanner;
 
 /**
- * Encapsulate UI-related functionality of Iris
+ * Encapsulates UI-related functionality of Iris
  */
 public class Ui {
     private final Scanner scanner = new Scanner(System.in);
 
     /**
-     * Get Iris to say a message
+     * Gets Iris to say a message
      * @param message message to say
      */
     public void say(String message) {
@@ -17,7 +17,7 @@ public class Ui {
     }
 
     /**
-     * Get Iris to say a message
+     * Gets Iris to say a message
      * @param message message to say
      * @param isFirst say Iris's name only if first message
      */
@@ -27,7 +27,7 @@ public class Ui {
     }
 
     /**
-     * Get Iris to notify user about error
+     * Gets Iris to notify user about error
      * @param exception exception to convey to user
      */
     public void sayError(IrisException exception) {
@@ -35,7 +35,7 @@ public class Ui {
     }
 
     /**
-     * Get Iris to notify user about new Task added
+     * Gets Iris to notify user about new Task added
      * @param taskList TaskList object representing current list of tasks
      */
     public void sayTaskAdded(TaskList taskList) {
@@ -47,7 +47,7 @@ public class Ui {
     }
 
     /**
-     * Get Iris to list out all Tasks in the TaskList
+     * Gets Iris to list out all Tasks in the TaskList
      * @param taskList TaskList object representing current list of tasks
      */
     public void listTasks(TaskList taskList) {
@@ -57,7 +57,7 @@ public class Ui {
     }
 
     /**
-     * Prompt user for a command
+     * Prompts user for a command
      * @return user's command
      */
     public String prompt() {

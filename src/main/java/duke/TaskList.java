@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Encapsulate the TaskList-related functionality of Iris
+ * Encapsulates the TaskList-related functionality of Iris
  */
 public class TaskList {
     private final List<Task> taskList = new ArrayList<>();
 
     /**
-     * Get the size of the TaskList
+     * Gets the size of the TaskList
      * @return the size of the TaskList
      */
     public int getCount() {
@@ -23,7 +23,7 @@ public class TaskList {
     }
 
     /**
-     * Get the Task from the TaskList at a given index
+     * Gets the Task from the TaskList at a given index
      * @param index index of task to get
      * @return
      */
@@ -32,7 +32,7 @@ public class TaskList {
     }
 
     /**
-     * Add a ToDo object to the TaskList
+     * Adds a ToDo object to the TaskList
      * @param name name of the ToDo to be created
      */
     public void addTodo(String name) {
@@ -40,7 +40,7 @@ public class TaskList {
     }
 
     /**
-     * Add a Deadline object to the TaskList
+     * Adds a Deadline object to the TaskList
      * @param name name of the Deadline to be created
      * @param by   due date of the Deadline to be created
      * @throws IrisException
@@ -50,7 +50,7 @@ public class TaskList {
     }
 
     /**
-     * Add an Event object to the TaskList
+     * Adds an Event object to the TaskList
      * @param name name of the Event to be created
      * @param at   date of the Event to be created
      * @throws IrisException
@@ -60,7 +60,7 @@ public class TaskList {
     }
 
     /**
-     * Validate whether a given Task index is found in the TaskList
+     * Validates whether a given Task index is found in the TaskList
      * @param index index of Task to lookup
      * @throws IrisException for invalid Task index e.g. too small or too large
      */
@@ -71,7 +71,7 @@ public class TaskList {
     }
 
     /**
-     * Mark Task at a given index as completed
+     * Marks Task at a given index as completed
      * @param index index of Task to mark as completed
      * @return task object that was just marked complete
      * @throws IrisException for invalid index given
@@ -84,7 +84,7 @@ public class TaskList {
     }
 
     /**
-     * Delete Task at a given index
+     * Deletes Task at a given index
      * @param index index of Task to delete from TaskList
      * @return task object that was just deleted
      * @throws IrisException
@@ -95,7 +95,7 @@ public class TaskList {
     }
 
     /**
-     * Convert all Tasks in TaskList to commands
+     * Converts all Tasks in TaskList to commands
      * @return array containing commands to re-create TaskList
      */
     public String[] toCommands() {

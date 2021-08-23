@@ -8,7 +8,7 @@ public class Task {
     protected String name;
 
     /**
-     * Create a new Task object
+     * Creates a new Task object
      * @param name name of the Task
      */
     public Task(String name) {
@@ -17,7 +17,7 @@ public class Task {
     }
 
     /**
-     * Mark Task as complete
+     * Marks Task as complete
      */
     public void markComplete() {
         this.completed = true;
@@ -28,7 +28,7 @@ public class Task {
     }
 
     /**
-     * Convert Task object to String
+     * Converts Task object to String
      * @return String representation of Task object
      */
     @Override
@@ -37,7 +37,7 @@ public class Task {
     }
 
     /**
-     * Convert Task object to Command
+     * Converts Task object to Command
      * @param index index of this Task in the TaskList
      * @return String representing the command to re-create this Task object
      */

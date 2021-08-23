@@ -11,7 +11,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Create a new Iris instance
+     * Creates a new Iris instance
      * @param filePath Path to file containing tasks
      */
     public Duke(String filePath) {
@@ -26,7 +26,7 @@ public class Duke {
     }
 
     /**
-     * Start an Iris instance
+     * Starts an Iris instance
      */
     public void run() {
         ui.say("Hello! I'm Iris. What can I do for you?");

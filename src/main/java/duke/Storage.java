@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Encapsulate storage-related functionality of Iris
+ * Encapsulates storage-related functionality of Iris
  */
 public class Storage {
     private final String taskFilePath;
 
     /**
-     * Create a new Storage object
+     * Creates a new Storage object
      * @param taskFilePath Path to file containing tasks
      */
     public Storage(String taskFilePath) {
@@ -31,7 +31,7 @@ public class Storage {
     }
 
     /**
-     * Read tasks from task file
+     * Reads tasks from task file
      * @param taskList TaskList object to update with read tasks
      * @param ui       Ui object for current Iris instance
      * @throws IrisException for invalid tasks.txt
@@ -51,7 +51,7 @@ public class Storage {
     }
 
     /**
-     * Write tasks to task file
+     * Writes tasks to task file
      * @param taskList TaskList object representing current list of tasks
      */
     public void writeTasks(TaskList taskList) {
