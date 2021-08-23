@@ -28,6 +28,16 @@ public class TaskList {
         ui.printTaskOnDate(this.tasks, date);
     }
 
+    /**
+     * Prints tasks with the specified keyword.
+     *
+     * @param keyword The keyword specified by the user.
+     * @param ui The UI object attached to the current Duke object.
+     */
+    public void printTasksWithKeyword(String keyword, UI ui) {
+        ui.printTasksWithKeyword(this.tasks, keyword);
+    }
+
     public void markTaskAsDone(int taskNumber, Storage storage, UI ui) throws FileNotFoundException {
         Task task = this.tasks.get(taskNumber - 1);
         task.markAsDone();

@@ -69,6 +69,19 @@ public class Parser {
         } else if (command.equals("bye")) {
             return new ByeCommand();
 
+        } else if (command.startsWith("find")) {
+            String[] splitCommand = command.split(" ");
+            if (splitCommand.length == 1) {
+                throw new DukeException("Please fill in a keyword");
+            }
+
+            if (splitCommand.length > 2) {
+                throw new DukeException("Please only fill in one keyword");
+            }
+
+            String keyword = splitCommand[1];
+            return new FindCommand(keyword);
+
         } else {
             throw new DukeException("I do not understand what that means :(");
         }

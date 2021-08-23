@@ -69,6 +69,16 @@ public class UI {
         }
     }
 
+    public void printTasksWithKeyword(List<Task> taskList, String keyword) {
+        System.out.println("Lollipop: Here the tasks that match your keyword:");
+        int count = 1;
+        for (Task task : taskList) {
+            if (task.toString().contains(keyword)) {
+                System.out.printf("%d. %s%n", count, task);
+            }
+        }
+    }
+
     /** Error methods */
     public void printLoadingError(String filePath) {
         System.out.printf("Lollipop: %s is not found.%n", filePath);
