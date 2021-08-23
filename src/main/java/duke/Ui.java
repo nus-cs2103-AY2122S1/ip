@@ -16,7 +16,7 @@ public class Ui {
     
     public void greet() {
         System.out.println(LOGO);
-        System.out.println("Hello! I'm duke.Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
     
     public void showError(DukeException e) {
@@ -24,6 +24,18 @@ public class Ui {
     }
     
     public void displayList(TaskList list) {
+        System.out.println("Here's your list!");
+        System.out.println(list.toString());
+    }
+
+    /**
+     * A method that displays matching tasks with the correct statement after the user searches 
+     * for them.
+     * 
+     * @param list The list of matching tasks to be displayed.
+     */
+    public void displayMatching(TaskList list) {
+        System.out.println("Here are the matching tasks in your list:"); 
         System.out.println(list.toString());
     }
    
