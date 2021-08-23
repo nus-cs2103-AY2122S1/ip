@@ -11,6 +11,12 @@ public abstract class Task {
         done = true;
     }
 
+    public boolean isDone() {
+        return done;
+    }
+
+    public abstract boolean isExpired();
+
     @Override
     public String toString() {
         return "[" + (done ? "X" : " ") + "] " + name;

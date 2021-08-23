@@ -1,4 +1,6 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class TaskList {
     private ArrayList<Task> taskList = new ArrayList<>();
@@ -18,7 +20,11 @@ public class TaskList {
             throw new DukeException("Please input the todo's name!");
         }
 
-        String name = input.substring(commandLength);
+        String name = input.substring(commandLength).strip();
+        if (name.equals("")) {
+            throw new DukeException("Please input the deadline's name!");
+        }
+
         Task task = new ToDo(name);
         addTask(task);
     }
@@ -28,10 +34,10 @@ public class TaskList {
         int commandLength = Commands.DEADLINE.toString().length() + 1;
 
         if (input.length() <= commandLength) {
-            throw new DukeException("Please input the deadline's name!");
+            throw new DukeException("Please input the deadline's name and date!");
         }
 
-        String[] inputs = input.substring(commandLength).split(" /by ");
+        String[] inputs = input.substring(commandLength).split("/by");
 
         if (inputs.length < 2) {
             // /by not specified
@@ -41,9 +47,19 @@ public class TaskList {
             throw new DukeException("Please input only one deadline!");
         }
 
-        String name = inputs[0];
-        String time = inputs[1];
-        Task task = new Deadline(name, time);
+        String name = inputs[0].strip();
+        if (name.equals("")) {
+            throw new DukeException("Please input the deadline's name!");
+        }
+
+        LocalDate date;
+        try {
+            date = LocalDate.parse(inputs[1].strip());
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please input your date in the format YYYY-MM-DD");
+        }
+
+        Task task = new Deadline(name, date);
         addTask(task);
     }
 
@@ -52,10 +68,10 @@ public class TaskList {
         int commandLength = Commands.EVENT.toString().length() + 1;
 
         if (input.length() <= commandLength) {
-            throw new DukeException("Please input the event's name!");
+            throw new DukeException("Please input the event's name and date!");
         }
 
-        String[] inputs = input.substring(commandLength).split(" /at ");
+        String[] inputs = input.substring(commandLength).split("/at");
 
         if (inputs.length < 2) {
             // /by not specified
@@ -65,9 +81,20 @@ public class TaskList {
             throw new DukeException("Please input only one timing for the event!");
         }
 
-        String name = inputs[0];
-        String time = inputs[1];
-        Task task = new Event(name, time);
+        String name = inputs[0].strip();
+
+        if (name.equals("")) {
+            throw new DukeException("Please input the event's name!");
+        }
+
+        LocalDate date;
+        try {
+            date = LocalDate.parse(inputs[1].strip());
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please input your date in the format YYYY-MM-DD");
+        }
+
+        Task task = new Event(name, date);
         addTask(task);
     }
 
@@ -80,6 +107,16 @@ public class TaskList {
     }
 
     public void deleteTask(String taskNum) throws DukeException {
+        if (taskNum.equals("done")) {
+            deleteDone();
+            return;
+        }
+
+        if (taskNum.equals("expired")) {
+            deleteExpired();
+            return;
+        }
+
         int idx = getTaskIndexFromString(taskNum);
 
         Task task = taskList.get(idx);
@@ -87,6 +124,19 @@ public class TaskList {
 
         Duke.printMessage("Noted! I've removed this task:\n  " +
                 task.toString() + "\n" + taskLengthReport());
+    }
+
+    private void deleteDone() {
+        taskList.removeIf(Task::isDone);
+        Duke.printMessage("Noted! I've removed all completed tasks.\n" +
+                taskLengthReport());
+    }
+
+    private void deleteExpired() {
+        taskList.removeIf(Task::isExpired);
+
+        Duke.printMessage("Noted! I've removed all expired tasks.\n" +
+                taskLengthReport());
     }
 
     // Returns a nicely formatted string representation of all tasks in the list

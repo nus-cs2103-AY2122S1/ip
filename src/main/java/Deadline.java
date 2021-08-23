@@ -1,13 +1,35 @@
-public class Deadline extends Task {
-    private String time = "unknown";
+import java.time.LocalDate;
 
-    public Deadline(String name, String time) {
+public class Deadline extends Task {
+    private LocalDate date;
+
+    public Deadline(String name, LocalDate date) {
         super(name);
-        this.time = time;
+        this.date = date;
+    }
+
+    public boolean isToday() {
+        return date.equals(LocalDate.now());
     }
 
     @Override
+    public boolean isExpired() {
+        return date.isBefore(LocalDate.now());
+    }
+
+    // prints in red if the deadline is expired, yellow if deadline is today
+    @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + time + ")";
+        String color = isDone()
+                ? ""
+                : isToday()
+                ? StringFormatter.ANSI_YELLOW
+                : isExpired()
+                ? StringFormatter.ANSI_RED
+                : "";
+
+        return color +
+                "[D] " + super.toString() + " (by: " + date + ")" +
+                (isToday() || isExpired() ? StringFormatter.ANSI_RESET : "");
     }
 }
