@@ -1,16 +1,14 @@
-public class Deadline extends Task {
-    String by;
+public class Deadline extends DateDependentTask {
     public Deadline(String description, String by) {
-        super(description);
-        this.by = by;
+        super(description, by);
     }
 
-    public String getShortForm() {
+    protected String getShortForm() {
         return "D";
     }
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + this.by + ")";
+        return "[D] " + super.toString() + " (by: " + super.getDate() + ")";
     }
 }
