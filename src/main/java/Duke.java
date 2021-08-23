@@ -1,13 +1,35 @@
+import java.io.*;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         greet();
-        add();
+//        add();
+
+        // test write to file
+//        String filePath = "./data/";
+//        String fileName = "duke.txt";
+//        File taskFile = new File(filePath + fileName);
+//        try {
+//            Files.write(Paths.get(filePath + fileName), Arrays.asList("Theeee first line", "Theeee second line"));
+//        } catch (FileNotFoundException e) {
+//            Files.createDirectories(Paths.get(filePath));
+//            Files.createFile(Paths.get(filePath + fileName));
+//
+//        } catch (IOException e) {
+//            System.out.println("Error caught: " + e);
+//        }
+
+        readData();
 
         // close scanner
         scanner.close();
@@ -113,8 +135,9 @@ public class Duke {
 
     /**
      * Duke response message for done command
+     *
      * @param command command entered to console
-     * @param list current list of tasks
+     * @param list    current list of tasks
      */
     private static void done(String command, ArrayList<Task> list) {
         try {
@@ -135,8 +158,9 @@ public class Duke {
 
     /**
      * Duke response message for todo command
+     *
      * @param command command entered to console
-     * @param list current list of tasks
+     * @param list    current list of tasks
      */
     private static void todo(String command, ArrayList<Task> list) {
         String[] todoSplit = command.split(" ", 2);
@@ -156,8 +180,9 @@ public class Duke {
 
     /**
      * Duke response message for event command
+     *
      * @param command command entered to console
-     * @param list current list of tasks
+     * @param list    current list of tasks
      */
     private static void event(String command, ArrayList<Task> list) {
         String[] eventSplit = command.split(" /at ");
@@ -184,8 +209,9 @@ public class Duke {
 
     /**
      * Duke response message for deadline command
+     *
      * @param command command entered to console
-     * @param list current list of tasks
+     * @param list    current list of tasks
      */
     private static void deadline(String command, ArrayList<Task> list) {
         String[] ddlSplit = command.split(" /by ");
@@ -212,8 +238,9 @@ public class Duke {
 
     /**
      * Duke response message for delete command
+     *
      * @param command command entered to console
-     * @param list current list of tasks
+     * @param list    current list of tasks
      */
     private static void delete(String command, ArrayList<Task> list) {
         try {
@@ -228,6 +255,39 @@ public class Duke {
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             // command delete is not followed by a number
             printMessage("☹ OOPS!!! The index of a task to be deleted must be an integer.");
+        }
+    }
+
+    /**
+     * Read data from the data file duke.txt
+     */
+    private static void readData() {
+        String filePath = "./data/";
+        String fileName = "duke.txt";
+        File dataFile = new File(filePath + fileName);
+
+        try {
+            Scanner fileScanner = new Scanner(dataFile);
+            while (fileScanner.hasNextLine()) {
+                String data = fileScanner.nextLine();
+                System.out.println(data);
+            }
+            fileScanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No data file found.");
+        }
+    }
+
+    /**
+     * Convert a data string read from duke.txt into task
+     *
+     * @return the task represented by the string
+     */
+    private static Task dataStringToTask(String data) {
+        String[] taskInfo = data.split(" | ");
+        String taskType = taskInfo[0];
+        switch (taskType) {
+
         }
     }
 }
