@@ -14,11 +14,18 @@ public class TaskList {
     }
 
     /**
-     * Returns the total number of tasks in the list.
+     * Returns the total number of tasks in the list in String.
      */
     public String getTotal() {
         int total = this.listOfTasks.size();
         return total + (total == 1 ? " task" : " tasks");
+    }
+
+    /**
+     * Returns the total number of tasks in the list in String.
+     */
+    public int getTotalNumber() {
+        return this.listOfTasks.size();
     }
 
     /**

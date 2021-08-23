@@ -20,4 +20,10 @@ public class Event extends Task {
         String[] arrString = this.startTime.split(" ", 2);
         return "[E]" + super.toString() + "(" + arrString[0] + "at: " + arrString[1] + ")";
     }
+
+    @Override
+    public String saveToFile() {
+        return "E | " + super.saveToFile() + "|" + this.startTime;
+    }
+
 }

@@ -58,6 +58,14 @@ public class Task {
     }
 
     /**
+     * Represents the format in which the File is saved to hard-drive.
+     */
+    public String saveToFile() {
+        String checker = this.isDone ? "1" : "0";
+        return checker + " | " + this.task;
+    }
+
+    /**
      * String representation of the Task object
      */
     @Override
