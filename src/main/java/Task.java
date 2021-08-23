@@ -1,10 +1,14 @@
-public class Task {
-    private String action;
+public abstract class Task {
+    final private String action;
     private boolean isCompleted;
 
     public Task(String action) {
         this.action = action;
         this.isCompleted = false;
+    }
+
+    public String getAction() {
+        return this.action;
     }
 
     public boolean isComplete() {
@@ -18,6 +22,8 @@ public class Task {
     private String getStatusIcon() {
         return isCompleted ? "X" : " ";
     }
+
+    abstract public String toSaveFormat() ;
 
     @Override
     public String toString() {

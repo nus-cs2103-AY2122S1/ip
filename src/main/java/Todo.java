@@ -4,6 +4,10 @@ public class Todo extends Task{
         super(action);
     }
 
+    public String toSaveFormat() {
+        return String.format("%s||%s||%s", symbol, super.isComplete(), super.getAction());
+    }
+
     public String toString() {
         return String.format("%s%s", symbol, super.toString());
     }
