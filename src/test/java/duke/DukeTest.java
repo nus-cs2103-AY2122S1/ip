@@ -35,4 +35,16 @@ public class DukeTest {
 
     }
 
+    @Test
+    public void findTask_event_sucess() {
+        TaskList tasks = new TaskList(new ArrayList<Task>());
+        File file = new File("dukeTest.txt");
+        file.delete();
+        Storage storage = new Storage("dukeTest.txt");
+        Parser parser = new Parser(tasks, storage);
+        parser.parseInput("event meeting /at 22/2/2022 2222");
+        parser.parseInput("event dinner /at 22/2/2022 2222");
+
+    }
+
 }

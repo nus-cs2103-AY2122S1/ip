@@ -50,13 +50,15 @@ public class Parser {
                 return new String[]{deleteTask(input)};
             } else if (input.startsWith("list")) {
                 return list();
+            } else if (input.startsWith("find")) {
+                return find(input);
             } else {
-                return addTask(input);
+                    return addTask(input);
+                }
+            } catch (DukeException|IOException e) {
+                e.printStackTrace();
+                return null;
             }
-        } catch (DukeException|IOException e) {
-            e.printStackTrace();
-            return null;
-        }
 
     }
 
@@ -83,7 +85,6 @@ public class Parser {
             }
             Deadline deadline = new Deadline(splitDeadline[0], LocalDateTime.parse(splitDeadline[1], fmt));
             tasks.add(deadline);
-            System.out.println(deadline.save());
             storage.write(deadline.save());
             break;
         case "event":
@@ -143,6 +144,27 @@ public class Parser {
         list.add("\tHere are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             list.add("\t" + (i + 1) + ". " + tasks.get(i).toString());
+        }
+        return list.toArray(new String[0]);
+    }
+
+    private String[] find(String input) {
+        String[] splitString = input.split(" ", 2);
+        ArrayList<String> list = new ArrayList<>();
+        list.add("\tHere are the matching tasks in your list:");
+        if (splitString.length == 1) {
+            for (int i = 0; i < tasks.size(); i++) {
+                list.add("\t" + (i + 1) + ". " + tasks.get(i).toString());
+            }
+            return list.toArray(new String[0]);
+        }
+        String keyword = splitString[1];
+        int currentIndex = 0;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().contains(keyword)) {
+                list.add("\t" + (currentIndex + 1) + ". " + tasks.get(i).toString());
+                currentIndex++;
+            }
         }
         return list.toArray(new String[0]);
     }
