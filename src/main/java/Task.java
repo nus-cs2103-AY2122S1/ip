@@ -6,6 +6,12 @@ public class Task {
     private String description;
     private boolean isDone;
 
+    public enum TaskType {
+        DEADLINE,
+        EVENT,
+        TODO
+    }
+
     /**
      * Constructor, to initialize a task.
      *

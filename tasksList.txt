@@ -1,0 +1,4 @@
+D / 0 / lol / tmr
+E / 1 / sleep / 22pm
+T / 1 / cleaning
+E / 0 / tonight / 6pm

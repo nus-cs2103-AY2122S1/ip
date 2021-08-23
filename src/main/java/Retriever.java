@@ -7,8 +7,11 @@ import java.util.Scanner;
  */
 public class Retriever {
 
-    /** To store the user inputs */
+    /** To store the user tasks */
     private List<Task> userTaskList = new ArrayList<>();
+
+    /** To perform operations on the tasks stored in the text file*/
+    private Storage taskStorage;
 
     /**
      * Returns a boolean suggesting whether the entered String
@@ -103,6 +106,7 @@ public class Retriever {
         if (taskNumber <= (userTaskList.size() - 1) && taskNumber >= 0) {
             Task task = userTaskList.get(taskNumber);
             task.markAsDone();
+            taskStorage.updateTaskStatusToDone(taskNumber);
 
             System.out.println("Woof! Whose a Good Boy?\n"
                     + "Task Done!\n"
@@ -137,6 +141,7 @@ public class Retriever {
         if (taskNumber <= (userTaskList.size() - 1) && taskNumber >= 0) {
             Task task = userTaskList.get(taskNumber);
             userTaskList.remove(taskNumber);
+            taskStorage.deleteTask(taskNumber);
 
             System.out.println("Woof! Whose a Bad Boy?\n"
                     + "Task Deleted!\n"
@@ -166,6 +171,7 @@ public class Retriever {
         String[] userInputArray = userInput.substring(9).split(" /by ");
         Task deadlineTask = new Deadline(userInputArray[0], userInputArray[1]);
         userTaskList.add(deadlineTask);
+        taskStorage.writeTask(Task.TaskType.DEADLINE, userInputArray[0], userInputArray[1]);
 
         printAddedTask(deadlineTask);
     }
@@ -189,6 +195,7 @@ public class Retriever {
         String[] userInputArray = userInput.substring(6).split(" /at ");
         Task eventTask = new Event(userInputArray[0], userInputArray[1]);
         userTaskList.add(eventTask);
+        taskStorage.writeTask(Task.TaskType.EVENT, userInputArray[0], userInputArray[1]);
 
         printAddedTask(eventTask);
     }
@@ -211,6 +218,7 @@ public class Retriever {
         String userInputTodo = userInput.substring(5);
         Task todoTask = new Todo(userInputTodo);
         userTaskList.add(todoTask);
+        taskStorage.writeTask(Task.TaskType.TODO, userInputTodo, "N/A");
 
         printAddedTask(todoTask);
     }
@@ -244,6 +252,16 @@ public class Retriever {
             default:
                 throw new IllegalCommandException("Woof! Command Not Found! Can I Sleep?");
         }
+    }
+
+    public void readTasksFile() {
+        this.userTaskList = taskStorage.readTasks();
+    }
+
+    public Retriever(String filePath) {
+        taskStorage = new Storage(filePath);
+        readTasksFile();
+        run();
     }
 
     /**
@@ -312,6 +330,6 @@ public class Retriever {
         System.out.println("________________________________________");
 
         // Calling the run() method to start the Chatbot.
-        new Retriever().run();
+        new Retriever("tasksList.txt");
     }
 }
