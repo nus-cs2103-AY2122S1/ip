@@ -1,3 +1,9 @@
+package duke.storage;
+
+import duke.TaskArrayList;
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Files;
@@ -23,11 +29,11 @@ public class Storage {
     }
 
     /**
-     * Load store file as a TaskArrayList
+     * Load store file as a duke.TaskArrayList
      * @param path path to store file
-     * @return TaskArrayList of stored tasks
+     * @return duke.TaskArrayList of stored duke.tasks
      */
-    public static TaskArrayList load( Path path) throws DukeException,IOException{
+    public static TaskArrayList load(Path path) throws DukeException,IOException{
         createStore(path);
         TaskArrayList taskList =  new TaskArrayList();
         Scanner sc = new Scanner(path);
@@ -40,7 +46,7 @@ public class Storage {
 
     /**
      * Dump a taskList to a store file
-     * @param taskList TaskArrayList to store
+     * @param taskList duke.TaskArrayList to store
      * @param path location to store taskList
      */
     public static void dump(TaskArrayList taskList,Path path){

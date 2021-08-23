@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public class Todo extends Task{
 
     public static final String USAGE_TEXT = "Usage : todo <task name>";
@@ -6,7 +8,7 @@ public class Todo extends Task{
      * default constructor for a new task
      * @param name task name
      */
-    Todo(String name){
+    public Todo(String name){
         this(name, false);
     }
 
@@ -15,7 +17,7 @@ public class Todo extends Task{
      * @param name task name
      * @param done state of task done
      */
-    Todo(String name, boolean done) {
+    public Todo(String name, boolean done) {
         super(name, done);
     }
 

@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+
 import java.io.IOException;
 import java.util.Scanner;
 import java.nio.file.Path;

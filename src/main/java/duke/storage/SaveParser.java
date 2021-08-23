@@ -1,6 +1,16 @@
+package duke.storage;
+
+
+
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+
 import java.util.Scanner;
 /**
- * Parser class to create Task objects from string commands
+ * duke.Parser class to create Task objects from string commands
  */
 public class SaveParser {
     Scanner scanner;

@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.function.Function;
 
 /**
@@ -8,7 +10,7 @@ public class UI {
     Function<String, String> preprocessor;
 
     /**
-     * Construct UI with a custom preprocessor
+     * Construct duke.UI with a custom preprocessor
      * @param preprocessor
      */
     UI(Function<String, String> preprocessor) {
@@ -16,7 +18,7 @@ public class UI {
     }
 
     /**
-     * Construct UI using default preprocessor
+     * Construct duke.UI using default preprocessor
      */
     UI(){
         this(

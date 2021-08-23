@@ -1,5 +1,7 @@
+package duke.tasks;
+
 /**
- * Task created by Duke
+ * Task created by duke.Duke
  */
 abstract public class Task {
 
@@ -11,7 +13,7 @@ abstract public class Task {
      * default constructor for a new task
      * @param name task name
      */
-    Task(String name){
+    public Task(String name){
         this(name,false);
     }
 
@@ -20,7 +22,7 @@ abstract public class Task {
      * @param name task name
      * @param done done state
      */
-    Task(String name, boolean done){
+    public Task(String name, boolean done){
         this.name = name;
         this.done = done;
     }
@@ -41,7 +43,7 @@ abstract public class Task {
      * json-like representation of object data
      * @return String representation of data
      */
-    abstract String serialize();
+    public abstract String serialize();
     // newline is the only? reliable way to divide data without escape characters
 
     public String toString(){

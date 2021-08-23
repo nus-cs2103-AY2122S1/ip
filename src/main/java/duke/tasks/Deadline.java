@@ -1,3 +1,5 @@
+package duke.tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
@@ -16,7 +18,7 @@ public class Deadline extends Task{
      * @param name task name
      * @param by   deadline for deadline task
      */
-    Deadline(String name,String by){
+    public Deadline(String name,String by){
         this(name, false, by);
     }
 
@@ -26,7 +28,7 @@ public class Deadline extends Task{
      * @param done boolean state of task done
      * @param by   deadline for deadline task
      */
-    Deadline(String name, boolean done, String by) {
+    public Deadline(String name, boolean done, String by) {
         super(name);
         this.by = by;
         try{

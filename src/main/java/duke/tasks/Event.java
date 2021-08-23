@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public class Event extends Task{
     public static final String USAGE_TEXT = "Usage: event <task name> /at <deadline> ";
     String at;
@@ -9,7 +11,7 @@ public class Event extends Task{
      * @param name task name
      * @param at time of event
      */
-    Event(String name, String at){
+    public Event(String name, String at){
         this(name, false, at);
     }
 
@@ -19,7 +21,7 @@ public class Event extends Task{
      * @param done boolean state of task done
      * @param at time of event
      */
-    Event(String name, boolean done, String at) {
+    public Event(String name, boolean done, String at) {
         super(name);
         this.at = at;
     }

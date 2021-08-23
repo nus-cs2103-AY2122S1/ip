@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -7,7 +12,7 @@ public class TaskArrayList extends ArrayList<Task> {
     public final static String DELETE_USAGE_TEXT = "Usage: delete <integer task number>";
     public final static String DONE_USAGE_TEXT = "Usage: done <integer task number>";
 
-    TaskArrayList(){
+    public TaskArrayList(){
         super();
     }
 
@@ -38,7 +43,7 @@ public class TaskArrayList extends ArrayList<Task> {
 
 
     private String newLength(){
-        return String.format("Now you have %d %s in the list.",this.size(),this.size()==1?"task":"tasks");
+        return String.format("Now you have %d %s in the list.",this.size(),this.size()==1?"task": "duke/tasks");
     }
 
     /**
@@ -61,7 +66,7 @@ public class TaskArrayList extends ArrayList<Task> {
      * @return mark done message String
      * @throws DukeException when invalid task number provided
      */
-    public String markDone(int index) throws DukeException{
+    public String markDone(int index) throws DukeException {
         if (index > this.size()){
             throw new DukeException(String.format("task %d not found",index));
         }

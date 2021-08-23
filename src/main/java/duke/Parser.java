@@ -1,7 +1,14 @@
+package duke;
+
 import java.nio.file.Path;
 
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
 /**
- * Parser to parse user commands
+ * duke.Parser to parse user commands
  */
 public class Parser {
     UI ui;
