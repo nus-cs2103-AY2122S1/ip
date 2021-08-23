@@ -6,10 +6,19 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
 
-
+/**
+ * This is the class that handles user input.
+ */
 public class Parser {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+    /**
+     * This method calls the corresponding ChatBot methods based on the user input.
+     *
+     * @param input The user input.
+     * @param bot
+     * @throws DukeException
+     */
     public void parse (String input, ChatBot bot) throws DukeException {
         String[] inputs = input.split(" ", 2);
         String key = inputs[0];

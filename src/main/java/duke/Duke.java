@@ -6,8 +6,17 @@ import java.time.format.DateTimeFormatter;
 
 import java.util.Scanner;
 
+/**
+ * The Duke program implements an application that reads the user input
+ * and does the corresponding actions based on the user input.
+ */
 public class Duke {
 
+    /**
+     * This is the main method which is used to run the application.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
