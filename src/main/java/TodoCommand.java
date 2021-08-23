@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class TodoCommand extends Command {
 
-    private ArrayList<Task> taskList;
-    private String[] inputValues;
-    private String command;
+    private final ArrayList<Task> taskList;
+    private final String[] inputValues;
+    private final String command;
 
     public TodoCommand(ArrayList<Task> taskList, String[] inputValues, String command) {
         this.taskList = taskList;
@@ -15,7 +15,7 @@ public class TodoCommand extends Command {
     @Override
     public void execute() {
         if (this.inputValues.length == 1) {
-            //catch empty todo
+            //catch empty to-do
             System.out.println("     OOPS!!! The description of a todo cannot be empty.");
         } else {
             String description = command.substring(this.inputValues[0].length() + 1);

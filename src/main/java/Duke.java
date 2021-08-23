@@ -18,12 +18,14 @@ public class Duke {
             //specify where the duke.txt file should be. In this case it is created in users' Desktop.
             Path path = Paths.get(home, "Desktop", "duke.txt");
             new Duke(path.toString()).userInteraction();
-        } catch (IOException e) {
+        } catch (IOException exception) {
             System.out.println("Something went wrong! Seems like I'm unable to locate your file!");
+        } catch (DukeException exception) {
+            System.out.println(exception.getMessage());
         }
     }
 
-    public Duke(String filePath) throws IOException {
+    public Duke(String filePath) throws IOException, InvalidCommandException, EmptyFieldException {
         File f = new File(filePath);
         this.file = f;
         if (!f.createNewFile()) {
@@ -46,7 +48,8 @@ public class Duke {
         fileWriter.close();
     }
 
-    public ArrayList<Task> readFromFile(String filePath) throws FileNotFoundException {
+    public ArrayList<Task> readFromFile(String filePath)
+            throws FileNotFoundException, EmptyFieldException, InvalidCommandException {
         // create a File for the given file path
         File f = new File(filePath);
         // create a Scanner using the File as the source
@@ -59,7 +62,7 @@ public class Duke {
         return temp;
     }
 
-    public Task textToTask(String fileInput) {
+    public Task textToTask(String fileInput) throws EmptyFieldException, InvalidCommandException {
         String[] taskString = fileInput.split("\\|");
         Task temp;
         for (int i = 0; i < taskString.length; i++) {
