@@ -18,7 +18,7 @@ public class TaskList {
     private ArrayList<Task> list;
 
     /**
-     * Contrusctor of TaskList.
+     * Constructor of TaskList.
      *
      * @param data the save file.
      * @throws FileNotFoundException when the file cannot be found.

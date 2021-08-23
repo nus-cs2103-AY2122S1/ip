@@ -18,7 +18,7 @@ public class Duke {
      * Constructor for Duke class.
      *
      * @param pathname the path of the save file.
-     * @param dir the directory containing the save file.
+     * @param dir      the directory containing the save file.
      * @throws IOException when an IO operation fails.
      */
     public Duke(String pathname, String dir) throws IOException {

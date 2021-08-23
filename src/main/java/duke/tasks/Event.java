@@ -11,8 +11,8 @@ public class Event extends Task {
      * Constructor for Event task.
      *
      * @param description of the event.
-     * @param at when the event is.
-     * @param isDone if the task is done or not.
+     * @param at          when the event is.
+     * @param isDone      if the task is done or not.
      */
     public Event(String description, String at, boolean isDone) {
         super(description, isDone);

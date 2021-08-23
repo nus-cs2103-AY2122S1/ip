@@ -12,7 +12,7 @@ public class Parser {
      *
      * @param commandLine the user's input.
      * @param tasks       the TaskList that contains all the user's tasks.
-     * @return Command deciphered from the user input.
+     * @return Command command deciphered from the user input.
      * @throws DukeException If the user gives a bad input.
      */
     public Command parse(String commandLine, TaskList tasks) throws DukeException {

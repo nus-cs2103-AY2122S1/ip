@@ -4,11 +4,6 @@ import duke.Storage;
 import duke.TaskList;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Command that deletes a task.
@@ -18,7 +13,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for DeleteCommand.
-     * @param desc description of the delete command.
+     *
+     * @param desc        description of the delete command.
      * @param deleteIndex the index of the task to be deleted.
      */
     public DeleteCommand(String desc, int deleteIndex) {
