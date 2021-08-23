@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
@@ -49,7 +50,7 @@ public class Duke {
                                 " in my list. Please key in 'list' if you'd like to " +
                                 "view your list of tasks again!");
                     } else {
-                        System.out.println("\tNoted. I've removed this task:");
+                        System.out.println("\tNoted. I've removed this task from your main list:");
                         System.out.println("\t\t" + Task.getTaskList().get(taskNum).toString());
                         Task.getTaskList().get(taskNum).deleteTask();
                         System.out.println("\tNow you have " + Task.getCounter() +
@@ -130,6 +131,39 @@ public class Duke {
                             System.out.println("\tNow you have " + Task.getCounter() +
                                     " task(s) in the list.");
                         }
+                    }
+                } else if (instruction.startsWith("today")) {
+                    System.out.println("\tTasks scheduled for today are: ");
+                    int num = 1;
+                    for (int i = 0; i < Task.getTaskList().size(); i++) {
+                        if (Task.getTaskList().get(i) instanceof Todo) {
+                            System.out.println("\t\t" + num + "." +
+                                    Task.getTaskList().get(i).toString());
+                            num++;
+                        } else {
+                            int currYear = LocalDateTime.now().getYear();
+                            int currMonth = LocalDateTime.now().getMonthValue();
+                            int currDate = LocalDateTime.now().getDayOfMonth();
+                            LocalDateTime start = LocalDateTime.of(currYear, currMonth, currDate, 0, 0);
+                            LocalDateTime end = LocalDateTime.of(currYear, currMonth, currDate, 23, 59);
+
+                            if (Task.getTaskList().get(i) instanceof Deadline &&
+                                    (((Deadline) Task.getTaskList().get(i)).getDeadline()).isAfter(start) &&
+                                    (((Deadline) Task.getTaskList().get(i)).getDeadline()).isBefore(end)) {
+                                System.out.println("\t\t" + num + "." +
+                                        Task.getTaskList().get(i).toString());
+                                num++;
+                            } else if (Task.getTaskList().get(i) instanceof Event &&
+                                    (((Event) Task.getTaskList().get(i)).getEventTime()).isAfter(start) &&
+                                    (((Event) Task.getTaskList().get(i)).getEventTime()).isBefore(end)) {
+                                System.out.println("\t\t" + num + "." +
+                                        Task.getTaskList().get(i).toString());
+                                num++;
+                            }
+                        }
+                    }
+                    if (num == 1) {
+                        System.out.println("\t\tLooks like there is nothing due today!");
                     }
                 } else {
                     throw new DukeException("\tOOPS!!! I'm sorry, but I don't " +
