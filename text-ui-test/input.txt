@@ -5,7 +5,7 @@ done 2
 event project meeting /at Mon 2-4pm
 done 1
 list
-deadline do homework /by no idea :-p
+deadline do homework /by 2019-11-01
 blah
 todo
 delete 5
