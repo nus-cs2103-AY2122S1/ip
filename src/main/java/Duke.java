@@ -228,7 +228,7 @@ public class Duke {
                                     if (index == -1) {
                                         throw new WrongDescriptionException("Event time not included! Try: deadline ... /at ...");
                                     } else {
-                                        Task newTask = new Deadline(description.substring(0, index - 2), description.substring(index + 3));
+                                        Task newTask = new Event(description.substring(0, index - 2), description.substring(index + 3));
                                         task.add(newTask);
                                         addTask(taskFile, newTask.toString());
                                         System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.%n",
