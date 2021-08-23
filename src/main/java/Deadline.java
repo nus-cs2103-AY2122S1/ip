@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected String by;
+    protected LocalDateTime deadline;
 
     public Deadline(String description, String by) {
         super(description);
@@ -15,6 +16,11 @@ public class Deadline extends Task {
 
         LocalDateTime taskDate = LocalDateTime.of(year, month, date, hour, min);
         this.by = taskDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
+        deadline = taskDate;
+    }
+
+    public LocalDateTime getDeadline() {
+        return this.deadline;
     }
 
     @Override
