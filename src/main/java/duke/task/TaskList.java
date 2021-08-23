@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private ArrayList<Task> taskList = new ArrayList<>();
+    private ArrayList<Task> taskList;
 
     /**
      * Constructor for a TaskList instance that takes in a list of tasks.
@@ -61,8 +61,7 @@ public class TaskList {
         if (taskId < 0 || (taskId + 1) > taskList.size()) {
             throw new TaskIndexOutOfBoundsException();
         }
-        Task removedTask = taskList.remove(taskId);
-        return removedTask;
+        return taskList.remove(taskId);
     }
 
     /**
