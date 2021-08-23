@@ -16,13 +16,13 @@ public final class DeadLineTask extends Task {
    * The String to store the type of task information
    * that identifies a Deadline task
    */
-  final String type = "[D]";
+  private final String type = "[D]";
 
   /**
    * The String to store the do-by-date information
    * that identifies a Deadline task
    */
-  final String dueDate;
+  private final String dueDate;
 
   private LocalDate localDate;
 

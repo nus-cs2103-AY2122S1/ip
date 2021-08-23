@@ -11,7 +11,7 @@ public final class ToDoTask extends Task {
    * The String to store the type of task information
    * that identifies a ToDo task
    */
-  final String type = "[T]";
+  private final String type = "[T]";
 
   /**
    * Constructor for a ToDo task
