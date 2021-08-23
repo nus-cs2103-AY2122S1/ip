@@ -1,6 +1,6 @@
 package tiger.exceptions.inputs;
 
-import tiger.messages.Messages;
+import tiger.constants.Messages;
 
 public class TigerSemiColonException extends TigerInvalidInputException {
     public TigerSemiColonException(String e) {

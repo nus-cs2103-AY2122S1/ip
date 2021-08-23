@@ -1,4 +1,4 @@
-package tiger.messages;
+package tiger.constants;
 
 public enum Messages {
 
@@ -10,7 +10,7 @@ public enum Messages {
     EXCEPTION_STORAGE_MEMORY_CORRUPTED ("Error encountered in loading the file! Did you alter my memory directly?\nIf" +
             " you didn't backup my memory, would you like to try a partial load to see what can be recovered? " +
             "[Y/N]\nPressing N will wipe data currently stored."),
-    EXCPETION_STORAGE_SAVE ("Error encountered in saving the file! Be sure you don't have the file open while " +
+    EXCEPTION_STORAGE_SAVE ("Error encountered in saving the file! Be sure you don't have the file open while " +
             "writing!");
 
     private final String message;

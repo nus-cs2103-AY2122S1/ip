@@ -5,7 +5,7 @@ import tiger.exceptions.TigerException;
 import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.exceptions.inputs.TigerInvalidArgumentException;
 import tiger.exceptions.inputs.TigerTooManyInputsException;
-import tiger.messages.Messages;
+import tiger.constants.Messages;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

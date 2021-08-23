@@ -1,6 +1,6 @@
 package tiger.exceptions.inputs;
 
-import tiger.messages.Messages;
+import tiger.constants.Messages;
 
 public class TigerTooManyInputsException extends TigerInvalidInputException {
     public TigerTooManyInputsException(String e) {

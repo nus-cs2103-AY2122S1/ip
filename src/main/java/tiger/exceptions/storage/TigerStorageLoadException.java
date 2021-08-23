@@ -1,6 +1,6 @@
 package tiger.exceptions.storage;
 
-import tiger.messages.Messages;
+import tiger.constants.Messages;
 
 public class TigerStorageLoadException extends TigerStorageException {
     public TigerStorageLoadException(String s) {

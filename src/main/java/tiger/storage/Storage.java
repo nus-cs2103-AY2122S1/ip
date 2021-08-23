@@ -83,8 +83,12 @@ public class Storage {
      */
 
     public static TaskList partialLoad() {
-        // TODO: implement partial loading
-        return new TaskList();
+        try {
+            String textToParse = Files.readString(Paths.get(FILE_PATH), StandardCharsets.US_ASCII);
+            return TaskList.getPartialTaskListFromStringRepresentation(textToParse);
+        } catch (IOException e) {
+            throw new TigerStorageLoadException(e.toString());
+        }
     }
 
     /**

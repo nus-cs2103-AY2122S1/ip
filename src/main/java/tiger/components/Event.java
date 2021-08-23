@@ -1,5 +1,6 @@
 package tiger.components;
 
+import tiger.exceptions.inputs.TigerDateParsingException;
 import tiger.exceptions.storage.TigerStorageLoadException;
 import tiger.utils.CustomDate;
 import tiger.utils.DateStringConverter;
@@ -86,6 +87,8 @@ public class Event extends Task {
                 return new Event(stringArray[2], false, dateStringConverter.getDateFromString(stringArray[3]));
             }
         } catch (AssertionError e) {
+            throw new TigerStorageLoadException(e.toString());
+        } catch (TigerDateParsingException e) {
             throw new TigerStorageLoadException(e.toString());
         }
     }

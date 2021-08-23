@@ -90,6 +90,8 @@ public class DeadLine extends Task {
             }
         } catch (AssertionError e) {
             throw new TigerStorageLoadException(e.toString());
+        } catch (TigerDateParsingException e) {
+            throw new TigerStorageLoadException(e.toString());
         }
     }
 

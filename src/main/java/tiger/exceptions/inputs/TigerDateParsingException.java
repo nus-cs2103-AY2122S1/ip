@@ -1,6 +1,6 @@
 package tiger.exceptions.inputs;
 
-import tiger.messages.Messages;
+import tiger.constants.Messages;
 
 public class TigerDateParsingException extends TigerInvalidInputException {
     public TigerDateParsingException(String e) {

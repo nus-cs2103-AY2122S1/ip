@@ -1,14 +1,15 @@
 package tiger.app;
 
-import tiger.exceptions.storage.TigerStorageException;
-import tiger.exceptions.storage.TigerStorageLoadException;
-import tiger.storage.Storage;
+import tiger.actions.StorageLoadAction;
+import tiger.command.Command;
+import tiger.components.TaskList;
+import tiger.constants.Flag;
 
 import java.util.Scanner;
 
 /**
  * {@code Ui} is responsible for handling interactions with users. This includes
- * responding and listening to user commands, storing user tasks, and loading user
+ * responding and listening to user commands, storing and loading user tasks, and executing user
  * tasks.
  */
 
@@ -18,57 +19,32 @@ public class Ui {
     private final Scanner scanner;
 
     /**
-     * Constructor of the {@code Ui} class. It creates storage file if not
-     * present.
-     *
-     * @param partialLoad Whether partial loading should be done.
-     * @throws TigerStorageException if the loaded file is corrupt.
+     * Constructor of the {@code Ui} class.
      */
 
-    private Ui(boolean partialLoad) throws TigerStorageException {
-        Storage.makeFileIfNotPresent();
-        if (!partialLoad) {
-            this.applicationState = new AppState(false, Storage.load());
-        } else {
-            this.applicationState = new AppState(false, Storage.partialLoad());
-        }
-        System.out.println(String.format("Hello, I am Tiger, your personal assistant. I have fetched %d tasks from my" +
-                " memory.", this.applicationState.numTasks()));
+    public Ui() {
         this.scanner = new Scanner(System.in);
+        this.applicationState = new AppState(false, new TaskList(), Flag.STORAGE_NOT_YET_INIT);
     }
 
     /**
-     * Attempts to initalise the {@code Ui} class until successful. If the storage file is
-     * corrupted, asks the user if the storage should be wiped or if a partial load should be done.
+     * Attempts to initialise the {@code Ui} class until successful. Actions that should be done when the Ui is
+     * starting up, such as loading saved tasks, should go here.
      *
-     * @return a new {@code Ui} class that is properly initalised.
+     * @return a new {@code Ui} class that is properly initialised.
      */
 
-    public static Ui start() {
-        try {
-            return new Ui(false);
-        } catch (TigerStorageLoadException e) {
-            boolean loaded = false;
-            System.out.println(e); // prompt user to do partial loading
-            while (!loaded) {
-                Scanner scanner = new Scanner(System.in);
-                String userInput = scanner.nextLine();
-                switch (userInput) {
-                case "Y":
-                    loaded = true;
-                    return new Ui(true);
-                case "N":
-                    loaded = true;
-                    Storage.wipeStorage();
-                    return new Ui(false);
-                default:
-                    System.out.println("Please enter only Y or N.");
-                    break;
-                }
-            }
+    public void start() {
+        StorageLoadAction storageLoadAction;
+        storageLoadAction = new StorageLoadAction(this.applicationState);
+        this.applicationState = storageLoadAction.run();
+        System.out.println(this.applicationState.getResponse());
+        while (this.applicationState.checkFlag().equals(Flag.STORAGE_FAILED)) {
+            String userInput = scanner.nextLine();
+            storageLoadAction = (StorageLoadAction) Command.getActionFromCommand(userInput, this.applicationState);
+            this.applicationState = storageLoadAction.run();
+            System.out.println(this.applicationState.getResponse());
         }
-        // shouldn't reach here
-        return new Ui(true);
     }
 
     /**

@@ -11,20 +11,10 @@ public class ToDo extends Task{
      * @param done whether the Task is done.
      */
 
-    private ToDo(String taskDescription, boolean done) {
+    public ToDo(String taskDescription, boolean done) {
         super(taskDescription, done);
     }
 
-    /**
-     * Public constructor for {@code ToDo} class.
-     *
-     * @param taskDescription description of Task.
-     * @param done whether the Task is done.
-     */
-
-    public static ToDo of(String taskDescription, boolean done) {
-        return new ToDo(taskDescription, done);
-    }
 
     /**
      * Mark a {@code ToDo} as done.

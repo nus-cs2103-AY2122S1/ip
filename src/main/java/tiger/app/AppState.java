@@ -1,6 +1,7 @@
 package tiger.app;
 
 import tiger.components.TaskList;
+import tiger.constants.Flag;
 
 /**
  * Represents the current state of the Application.
@@ -14,7 +15,7 @@ public class AppState {
     /** String to store the response in */
     private String response;
     /** Flag in case some tasks failed to execute properly, or require subsequent follow ups */
-    public String flag;
+    private Flag flag;
 
     // TODO: set priority tasks
 
@@ -29,6 +30,7 @@ public class AppState {
         this.userExit = userExit;
         this.taskList = taskList;
         this.response = "";
+        this.flag = Flag.DEFAULT;
     }
 
     public AppState(boolean userExit, TaskList taskList, String response) throws AssertionError {
@@ -36,7 +38,24 @@ public class AppState {
         this.taskList = taskList;
         assert (!response.equals(""));
         this.response = response;
+        this.flag = Flag.DEFAULT;
     }
+
+    public AppState(boolean userExit, TaskList taskList, String response, Flag flag) throws AssertionError {
+        this.userExit = userExit;
+        this.taskList = taskList;
+        assert (!response.equals(""));
+        this.response = response;
+        this.flag = flag;
+    }
+
+    public AppState(boolean userExit, TaskList taskList, Flag flag) {
+        this.userExit = userExit;
+        this.taskList = taskList;
+        this.response = "";
+        this.flag = flag;
+    }
+
 
     /**
      * Returns the number of tasks in the {@code TaskList}.
@@ -61,6 +80,10 @@ public class AppState {
     public String getResponse() {
         assert (!this.response.equals(""));
         return this.response;
+    }
+
+    public Flag checkFlag() {
+        return this.flag;
     }
 
 }

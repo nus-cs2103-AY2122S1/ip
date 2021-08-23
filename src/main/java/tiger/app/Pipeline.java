@@ -1,11 +1,11 @@
 package tiger.app;
 
 import tiger.actions.Action;
+import tiger.actions.StorageSaveAction;
 import tiger.command.Command;
 import tiger.exceptions.actions.TigerActionExecutionException;
 import tiger.exceptions.inputs.TigerInvalidInputException;
 import tiger.exceptions.storage.TigerStorageSaveException;
-import tiger.storage.Storage;
 
 /**
  * This class handles one iteration of the user input.
@@ -41,7 +41,7 @@ public class Pipeline {
         /* Lastly, we save the new TaskList. This may incur a TigerStorageSaveException, but most of the time, it
         should be fine. */
         try {
-            Storage.save(this.applicationState.taskList);
+            newApplicationState = new StorageSaveAction(newApplicationState).run();
         } catch (TigerStorageSaveException e) {
             return new AppState(false, this.applicationState.taskList, e.toString());
         }

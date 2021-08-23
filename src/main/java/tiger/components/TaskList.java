@@ -128,6 +128,9 @@ public class TaskList {
 
     @Override
     public String toString() {
+        if (this.taskList.size() == 0) {
+            return "You currently have no tasks.";
+        }
         String returnString = "";
         for (int i = 1; i < this.taskList.size() + 1; i++) {
             String row = String.format("%d. %s", i, this.taskList.get(i-1).toString());
@@ -168,6 +171,21 @@ public class TaskList {
         for (String line: stringArray) {
             if (line.length() != 0) {
                 newTaskList.add(Task.getTaskFromStringRepresentation(line));
+            }
+        }
+        return new TaskList(newTaskList);
+    }
+
+    public static TaskList getPartialTaskListFromStringRepresentation(String s) {
+        String[] stringArray = s.split("\n");
+        ArrayList<Task> newTaskList = new ArrayList<>();
+        for (String line: stringArray) {
+            if (line.length() != 0) {
+                try {
+                    newTaskList.add(Task.getTaskFromStringRepresentation(line));
+                } catch (TigerStorageLoadException e) {
+
+                }
             }
         }
         return new TaskList(newTaskList);

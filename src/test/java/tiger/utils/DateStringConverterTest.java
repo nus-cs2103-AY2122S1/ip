@@ -3,7 +3,7 @@ package tiger.utils;
 import org.junit.jupiter.api.Test;
 import tiger.exceptions.TigerException;
 import tiger.exceptions.inputs.TigerDateParsingException;
-import tiger.messages.Messages;
+import tiger.constants.Messages;
 
 import java.time.LocalDate;
 

@@ -4,7 +4,7 @@ package tiger.actions;
 import tiger.app.AppState;
 
 public class ByeAction extends Action {
-    AppState applicationState;
+    private AppState applicationState;
 
     public ByeAction(AppState applicationState) {
         this.applicationState = applicationState;
