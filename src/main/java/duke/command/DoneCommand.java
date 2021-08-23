@@ -1,8 +1,8 @@
 package main.java.duke.command;
 
 import main.java.duke.DukeException;
-import main.java.duke.storage.*;
-import main.java.duke.tasklist.*;
+import main.java.duke.storage.Storage;
+import main.java.duke.tasklist.TaskList;
 import main.java.duke.Ui;
 
 import java.io.IOException;
@@ -42,7 +42,8 @@ public class DoneCommand extends Command {
             tasks.setDone(index - 1);
             storage.setDone(index - 1);
         } catch (DateTimeException e) {
-            throw new DukeException("Your date (YYYY-MM-DD) / date & time (YYYY-MM-DD HHMM) (24h) is given in the wrong format!");
+            throw new DukeException("Your date (YYYY-MM-DD) / date & time (YYYY-MM-DD HHMM) (24h) " +
+                    "is given in the wrong format!");
         } catch (IllegalArgumentException e) {
             throw new DukeException("There is no such task in existence.");
         }  catch (IOException e) {

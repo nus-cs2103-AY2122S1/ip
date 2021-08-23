@@ -1,9 +1,6 @@
 package command;
 
-
-import main.java.duke.command.DeadlineCommand;
 import main.java.duke.command.DoneCommand;
-import main.java.duke.command.EventCommand;
 import main.java.duke.task.*;
 import main.java.duke.storage.StorageStub;
 import main.java.duke.tasklist.TaskListStub;
@@ -25,6 +22,8 @@ public class DoneCommandTest {
 
     @Test
     public void execute() {
+
+        //Initialise Storage and TaskList
         s.add("T", "tutorial", "");
         s.add("D", "assignment", "2021-08-23 2010");
         s.add("E", "test", "2021-08-21 1530");
@@ -34,16 +33,24 @@ public class DoneCommandTest {
         list.add(new Event(false, "test", "2021-08-21 1530"));
         t = new TaskListStub(list, u);
         t.printList();
+
+        //Check size of TaskList
         assertEquals(t.output().size(), 3);
+
+        //Check TaskList and Storage
         assertEquals("[T][ ] tutorial", t.output().get(0).toString());
         assertEquals("[D][ ] assignment (by: 23 Aug 2021 8.10pm)", t.output().get(1).toString());
         assertEquals("[E][ ] test (at: 21 Aug 2021 3.30pm)", t.output().get(2).toString());
         assertEquals("T|0|tutorial|", s.getString(0));
         assertEquals("D|0|assignment|2021-08-23 2010", s.getString(1));
         assertEquals("E|0|test|2021-08-21 1530", s.getString(2));
+
+        //Mark all three tasks as done
         c1.execute(t, u, s);
         c2.execute(t, u, s);
         c3.execute(t, u, s);
+
+        //Check whether all three tasks are done
         assertEquals("[T][X] tutorial", t.output().get(0).toString());
         assertEquals("[D][X] assignment (by: 23 Aug 2021 8.10pm)", t.output().get(1).toString());
         assertEquals("[E][X] test (at: 21 Aug 2021 3.30pm)", t.output().get(2).toString());

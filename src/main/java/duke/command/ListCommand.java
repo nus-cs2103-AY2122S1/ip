@@ -1,8 +1,8 @@
 package main.java.duke.command;
 
 import main.java.duke.DukeException;
-import main.java.duke.storage.*;
-import main.java.duke.tasklist.*;
+import main.java.duke.storage.Storage;
+import main.java.duke.tasklist.TaskList;
 import main.java.duke.Ui;
 
 import java.time.DateTimeException;
@@ -42,7 +42,8 @@ public class ListCommand extends Command {
                 tasks.printListDate(date);
             }
         } catch (DateTimeException e) {
-            throw new DukeException("Your date (YYYY-MM-DD) / date & time (YYYY-MM-DD HHMM) (24h) is given in the wrong format!");
+            throw new DukeException("Your date (YYYY-MM-DD) / date & time (YYYY-MM-DD HHMM) (24h) " +
+                    "is given in the wrong format!");
         }
     }
 }
