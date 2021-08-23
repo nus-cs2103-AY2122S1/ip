@@ -3,21 +3,20 @@ package duke;
 import duke.task.DukeList;
 
 public class Duke {
-    private DukeList list;
 
-    private Storage storage;
+    private final Storage STORAGE;
 
-    private Ui ui;
+    private final Ui UI;
 
     public Duke(String path) {
-        this.list = new DukeList();
-        this.storage = new Storage(path, this.list);
-        this.ui = new Ui(this.list, this.storage);
+        DukeList LIST = new DukeList();
+        this.STORAGE = new Storage(path, LIST);
+        this.UI = new Ui(LIST, this.STORAGE);
     }
 
     public void run() {
-        this.storage.load();
-        this.ui.run();
+        this.STORAGE.load();
+        this.UI.run();
     }
 
     public static void main(String[] args) {
