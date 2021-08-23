@@ -17,7 +17,7 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D] [%s] " + this.description + "(by: %s %s)",
+        return String.format("[D] [%s] " + this.description + " (by: %s %s)",
             this.getStatusIcon(),
             this.localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
             this.localTime);

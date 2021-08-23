@@ -19,7 +19,7 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E] [%s] " + this.description + "(at: %s %s-%s)",
+        return String.format("[E] [%s] " + this.description + " (at: %s %s-%s)",
             this.getStatusIcon(),
             this.localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
             this.localStartTime,
