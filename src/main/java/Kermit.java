@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -37,7 +39,20 @@ public class Kermit {
         String command = "";
         String flag;
         String word;
-        
+
+        String DIRNAME = "./data";
+        String FILENAME = "kermit.txt";
+
+        // Check if Kermit data exists, else create it
+        try {
+            File dir = new File(DIRNAME);
+            dir.mkdir();
+            File f = new File(String.join("/", DIRNAME, FILENAME));
+            f.createNewFile();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+
         StringBuilder descriptionBuilder = new StringBuilder();
         StringBuilder flagBuilder = new StringBuilder();
 
