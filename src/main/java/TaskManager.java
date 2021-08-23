@@ -113,7 +113,7 @@ public class TaskManager {
      * Retrieves a list of tasks from previous sessions, stored in data/duke.txt
      */
     public void getTasksFromStorage() throws FileNotFoundException {
-        File dataFile = DukeIOManager.getDataFile();
+        File dataFile = Storage.getDataFile();
         Scanner sc = new Scanner(dataFile);
         while (sc.hasNext()) {
             String[] commandArr = sc.nextLine().split("\\|");
@@ -153,9 +153,9 @@ public class TaskManager {
                 taskString = "E|" + isDone + task.getName() + "|" + event.getEventDate();
             }
             if (i == 0) {
-                DukeIOManager.writeToDataFile(taskString);
+                Storage.writeToDataFile(taskString);
             } else {
-                DukeIOManager.appendToDataFile("\n" + taskString);
+                Storage.appendToDataFile("\n" + taskString);
             }
         }
     }

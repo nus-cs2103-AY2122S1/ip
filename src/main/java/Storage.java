@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * Duke class which handles interactions with user files for storage purposes
  */
-public class DukeIOManager {
+public class Storage {
     /**
      * Gets the file which stores tasks from the user's session
      * If the file exists, it returns the file
