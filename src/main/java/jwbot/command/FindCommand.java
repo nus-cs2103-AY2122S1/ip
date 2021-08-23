@@ -26,7 +26,7 @@ public class FindCommand extends Command {
         }
         ui.showSearchList(results);
     }
-
+    
     @Override
     public boolean isExit() {
         return false;
