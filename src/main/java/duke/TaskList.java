@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    private final ArrayList<Task> taskList;
+    private final ArrayList<Task> tasks;
 
     private enum Format {
         LIST,
@@ -14,11 +14,11 @@ public class TaskList {
     }
 
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+        this.tasks = taskList;
     }
 
     public String stringifyTasksForList() {
@@ -30,12 +30,12 @@ public class TaskList {
     }
 
     private String stringify(Format format) {
-        if (this.taskList.size() == 0) {
+        if (this.tasks.size() == 0) {
             return "No tasks added yet!";
         }
         StringBuilder res = new StringBuilder();
-        for (int i = 0; i < this.taskList.size(); i++) {
-            Task t = this.taskList.get(i);
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task t = this.tasks.get(i);
             res.append(i + 1).append(". ").append(
                     format == Format.LIST ? t.toString() : t.toSaveString()
             ).append("\n");
@@ -44,18 +44,18 @@ public class TaskList {
     }
 
     public int size() {
-        return this.taskList.size();
+        return this.tasks.size();
     }
 
     public Task get(int x) {
-        return this.taskList.get(x);
+        return this.tasks.get(x);
     }
 
     public Task remove(int x) {
-        return this.taskList.remove(x);
+        return this.tasks.remove(x);
     }
 
     public boolean add(Task t) {
-        return this.taskList.add(t);
+        return this.tasks.add(t);
     }
 }
