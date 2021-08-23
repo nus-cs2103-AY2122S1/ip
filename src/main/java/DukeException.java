@@ -1,7 +1,5 @@
-public class DukeException {
-    private static final String LINEBREAK = "____________________________________________________________";
-
+public class DukeException extends Exception {
     protected DukeException(String message) {
-        System.out.printf("%s\n%s\n%s\n", LINEBREAK, message, LINEBREAK);
+        super(message);
     }
 }

@@ -3,13 +3,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.function.Consumer;
 
 public class Duke {
     private static final String LINEBREAK = "____________________________________________________________";
     List<Task> tasks = new ArrayList<Task>();
 
-    private final Map<String, Consumer<String>> FUNCTIONS = new HashMap<>() {
+    private final Map<String, ThrowingConsumer<String>> FUNCTIONS = new HashMap<>() {
         {
             put("list", (input) -> list());
             put("done", (input) -> markDone(input));
@@ -73,16 +72,14 @@ public class Duke {
         System.out.println(LINEBREAK);
     }
 
-    private void markDone(String input) {
+    private void markDone(String input) throws DukeException {
         if (tasks.isEmpty()) {
-            new DukeException("YOU HAVE NO TASKS YOU FOOL.");
-            return;
+            throw new DukeException("YOU HAVE NO TASKS YOU FOOL.");
         }
         try {
             int index = Integer.parseInt(input);
             if (index < 1 || index > tasks.size()) {
-                new DukeException("INVALID TASK NUMBER YOU FOOL.");
-                return;
+                throw new DukeException("INVALID TASK NUMBER YOU FOOL.");
             }
             Task currentTask = tasks.get(index - 1);
             if (currentTask.getIsDone()) {
@@ -92,45 +89,41 @@ public class Duke {
             currentTask.setIsDone(true);
             print("YOU SAY YOU'VE COMPLETED THIS TASK:\n " + currentTask);
         } catch (NumberFormatException e) {
-            new DukeException("DO YOU NOT KNOW WHAT A NUMBER IS, FOOLISH HUMAN?");
+            throw new DukeException("DO YOU NOT KNOW WHAT A NUMBER IS, FOOLISH HUMAN?");
         }
     }
 
-    private void deleteTask(String input) {
+    private void deleteTask(String input) throws DukeException {
         if (tasks.isEmpty()) {
-            new DukeException("YOU HAVE NO TASKS YOU FOOL.");
-            return;
+            throw new DukeException("YOU HAVE NO TASKS YOU FOOL.");
         }
         try {
             int index = Integer.parseInt(input);
             if (index < 1 || index > tasks.size()) {
-                new DukeException("INVALID TASK NUMBER YOU FOOL.");
-                return;
+                throw new DukeException("INVALID TASK NUMBER YOU FOOL.");
             }
             Task currentTask = tasks.get(index - 1);
             tasks.remove(index - 1);
             print(String.format("YOU'VE CHOSEN TO ABANDON THIS TASK:\n %s\n YOU HAVE %d TASKS LEFT.", currentTask,
                     tasks.size()));
         } catch (NumberFormatException e) {
-            new DukeException("DO YOU NOT KNOW WHAT A NUMBER IS, FOOLISH HUMAN?");
+            throw new DukeException("DO YOU NOT KNOW WHAT A NUMBER IS, FOOLISH HUMAN?");
         }
 
     }
 
-    private void addToDo(String taskName) {
+    private void addToDo(String taskName) throws DukeException {
         if (taskName.equals("")) {
-            new DukeException("NAME YOUR TASK. DON'T WASTE MY TIME.");
-            return;
+            throw new DukeException("NAME YOUR TASK. DON'T WASTE MY TIME.");
         }
         Task newTask = new ToDo(taskName);
         tasks.add(newTask);
         print(String.format(" MORTAL, YOU'VE ADDED THIS TASK:\n %s\n YOU HAVE %d TASKS LEFT.", newTask, tasks.size()));
     }
 
-    private void addEvent(String input) {
+    private void addEvent(String input) throws DukeException {
         if (input.equals("") || !input.contains(" /at")) {
-            new DukeException("FORMAT YOUR EVENT PROPERLY. DON'T WASTE MY TIME.");
-            return;
+            throw new DukeException("FORMAT YOUR EVENT PROPERLY. DON'T WASTE MY TIME.");
         }
         String[] args = input.split("/at", 2);
         Task newEvent = new Event(args[0].trim(), args[1].trim());
@@ -139,10 +132,9 @@ public class Duke {
                 tasks.size()));
     }
 
-    private void addDeadline(String input) {
+    private void addDeadline(String input) throws DukeException {
         if (input.equals("") || !input.contains(" /by")) {
-            new DukeException("FORMAT YOUR DEADLINE PROPERLY. DON'T WASTE MY TIME.");
-            return;
+            throw new DukeException("FORMAT YOUR DEADLINE PROPERLY. DON'T WASTE MY TIME.");
         }
         String[] args = input.split("/by", 2);
         Task newDeadline = new Deadline(args[0].trim(), args[1].trim());
