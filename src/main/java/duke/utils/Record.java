@@ -1,8 +1,8 @@
 package duke.utils;
 
 public class Record {
-    private String message;
-    private boolean terminate;
+    private final String message;
+    private final boolean terminate;
 
     public Record (String message, boolean terminate) {
         this.message = message;
@@ -21,6 +21,16 @@ public class Record {
         return terminate;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this  == obj) return true;
+        if (obj instanceof Record) {
+            Record that = (Record) obj;
+            return this.message.equals(that.message) 
+                    && this.terminate == that.terminate;
+        } else return false;
+    }
+    
     @Override
     public String toString() {
         return message;

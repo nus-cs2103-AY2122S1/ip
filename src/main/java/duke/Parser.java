@@ -16,9 +16,13 @@ public class Parser {
     
     private TaskList db;
     private HashMap<String, CheckedFunction<String, Record>> cmds = new HashMap<>();
-
+    
     public Parser() throws DukeException {
-        db = new TaskList();
+        this(new TaskList());
+    }
+
+    public Parser(TaskList db) throws DukeException {
+        this.db = db;
         cmds.put("greet", this::greet);
         cmds.put("bye", this::bye);
         cmds.put("list", this::list);
@@ -28,6 +32,19 @@ public class Parser {
         cmds.put("deadline", this::deadline);
         cmds.put("event", this::event);
         cmds.put("help", this::help);
+        cmds.put("clear", this::clear);
+    }
+    
+    private boolean verify() {
+        System.out.println("WARNING: This procedure is irreversible." +
+                "\n\t Are you sure about proceeding? [y/n]");
+        Scanner sc = new Scanner(System.in);
+        char response =  sc.hasNext() ? sc.next().charAt(0) : 'x';
+        while (response != 'y' || response != 'n') {
+            System.out.println("Are you sure about proceeding? [y/n]");
+            response =  sc.hasNext() ? sc.next().charAt(0) : 'x';
+        }
+        return response == 'y';
     }
 
     public Record query(String input) throws DukeException {
@@ -118,5 +135,17 @@ public class Parser {
     
     private Record help(String raw) throws DukeException {
         return new Record(Ui.help());
+    }
+    
+    private Record clear(String raw) throws DukeException {
+        db.clear();
+        return new Record("Task list was cleared.");
+        /*
+        if (verify()) {
+            db.clear();
+            return new Record("Task list was cleared.");
+        }
+        else return new Record("No worries! No changes were made.");
+         */
     }
 }

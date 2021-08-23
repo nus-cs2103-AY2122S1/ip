@@ -7,7 +7,7 @@ import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private DukeDateTime end;
+    private DukeDateTime end = new DukeDateTime();
 
     public Event() {}
     public Event(String desc) {
@@ -46,6 +46,17 @@ public class Event extends Task {
         return String.format("E | %d | %s | %s | %s | %s", super.done ? 1 : 0, super.desc, 
                 dateTime.format(DukeDateTime.Format.DATE_LONG, DukeDateTime.Format.PRINT_TIME), 
                 end.format(DukeDateTime.Format.DATE_LONG, DukeDateTime.Format.TIME), details);
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (super.equals(obj)) {
+            if (obj instanceof Event) {
+                Event that = (Event) obj;
+                return end.equals(that.end);
+            }
+        }
+        return false;
     }
 
     @Override

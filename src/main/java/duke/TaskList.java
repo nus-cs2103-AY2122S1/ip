@@ -34,6 +34,10 @@ public class TaskList {
         if (storage != null) storage.update(this);
         return t;
     }
+    
+    public boolean contains(Task task) {
+        return db.contains(task);
+    }
 
     public int size() {
         return db.size();
@@ -41,6 +45,11 @@ public class TaskList {
     
     public void close() throws DukeException {
         storage.close();
+    }
+    
+    public void clear() throws DukeException {
+        db = new ArrayList<>();
+        storage.purge();
     }
     
     public List<Task> getList() {

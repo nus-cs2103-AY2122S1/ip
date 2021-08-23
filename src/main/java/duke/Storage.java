@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.List;
 
-class Storage {
-    private final static DukeException ERROR_DB = new DukeException("Error loading database.");
+public class Storage {
+    public final static DukeException ERROR_DB = new DukeException("Error loading database.");
     private RandomAccessFile raf;
     private File txt;
 
@@ -79,6 +79,16 @@ class Storage {
         try {
             raf.writeBytes(System.lineSeparator());
             raf.close();
+        } catch (IOException e) {
+            throw ERROR_DB;
+        }
+    }
+
+    public void purge() throws DukeException {
+        try {
+            close();
+            txt.delete();
+            txt.createNewFile();
         } catch (IOException e) {
             throw ERROR_DB;
         }

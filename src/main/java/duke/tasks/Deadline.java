@@ -22,7 +22,7 @@ public class Deadline extends Task {
         } catch (DateTimeException e) {
             throw new DukeException("Error reading DB");
         }
-}
+    }
 
     public void addTime(String rawArgs) throws DukeException {
         String[] args = rawArgs.split(" / ");
