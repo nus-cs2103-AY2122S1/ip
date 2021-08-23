@@ -65,7 +65,7 @@ public class Duke {
             } else {
                 sf.createNewFile();
             }
-        } catch (IOException e) {
+        } catch (IOException | DukeException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
@@ -183,7 +183,8 @@ public class Duke {
                             "You now have " + taskList.size() + " task(s) in total.");
                 } catch (DukeException de) {
                     toScreen("Sorry, the Deadline task could not be added.",
-                            "Please include the description and deadline for this task with /by.");
+                            "Please include the description and deadline for this task with /by.",
+                            "(Date and time format: dd/MM/yyyy HHmm)");
                 }
                 break;
             case EVENT:
