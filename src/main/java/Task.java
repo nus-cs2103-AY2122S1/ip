@@ -1,9 +1,13 @@
+import java.time.format.DateTimeFormatter;
+
 class Task {
 
   public enum Type {
     TODO, EVENT, DEADLINE,
   }
+
   private static final String SEPARATE = " ~#~ ";
+  private final DateTimeFormatter formatter =DateTimeFormatter.ofPattern("dd/MM/yy");
 
   private final String description;
   private final Type type;

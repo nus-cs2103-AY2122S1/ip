@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 class Duke {
@@ -7,11 +6,12 @@ class Duke {
     "     ____________________________________________________________\n";
   private static final String INDENT = "      ";
   private boolean isEndChat = false;
-  private static ArrayList<Task> taskList = new ArrayList<>();
- 
+//  private static ArrayList<Task> taskList = new ArrayList<>();
+  private TaskList taskList;
+
   private void getInput() {
     Scanner sc = new Scanner(System.in);
-    taskList = Storage.readDatabase();
+    taskList = new TaskList(Storage.readDatabase());
 
     while (sc.hasNextLine()) {
       String input = sc.nextLine();
@@ -21,7 +21,7 @@ class Duke {
       }
     }
     sc.close();
-    Storage.writeDatabase(taskList);
+    Storage.writeDatabase(taskList.toArrayList());
   }
 
   private void endChat() {
@@ -87,11 +87,11 @@ class Duke {
 
   private void renderList() {
     StringBuilder op = new StringBuilder();
-    for (int i = 0; i < taskList.size(); i++) {
+    for (int i = 0; i < taskList.length(); i++) {
       op
         .append(i + 1)
         .append(". ")
-        .append(taskList.get(i).toString())
+        .append(taskList.getTask(i).toString())
         .append("\n");
     }
     renderOutput("Here are the tasks in your list:\n" + op);
@@ -105,10 +105,10 @@ class Duke {
       );
     }
 
-    if (index > taskList.size() - 1) {
+    if (index > taskList.length() - 1) {
       throw new ExceedListSizeException(
         "Invalid task reference!\nYou currently have " +
-        taskList.size() +
+        taskList.length() +
         " tasks."
       );
     }
@@ -119,7 +119,7 @@ class Duke {
     int index = getTaskNumber(cmd) - 1;
     checkIndexRange(index);
 
-    Task task = taskList.get(index);
+    Task task = taskList.getTask(index);
     if (task.isDone()) {
       renderOutput("Great! But you have already completed this task!");
     } else {
@@ -128,11 +128,10 @@ class Duke {
     }
   }
 
-
   private void addNewTask(String input, Task.Type type) throws UserInputError {
     checkDescExist(input);
       Task newTask = Task.createTask(getDesc(input), type);
-      taskList.add(newTask);
+      taskList.addTask(newTask);
       addTaskOutput(newTask);
   }
 
@@ -142,7 +141,7 @@ class Duke {
       INDENT +
       task.toString() +
       "\nNow you have " +
-      taskList.size() +
+      taskList.length() +
       " tasks in the list.";
     renderOutput(output);
   }
@@ -152,8 +151,8 @@ class Duke {
     int index = getTaskNumber(input) - 1;
     checkIndexRange(index);
 
-    Task deleted = taskList.get(index);
-    taskList.remove(index);
+    Task deleted = taskList.getTask(index);
+    taskList.deleteTask(index);
     deleteTaskOutput(deleted);
   }
 
@@ -163,12 +162,12 @@ class Duke {
       INDENT +
       task.toString() +
       "\nNow you have " +
-      taskList.size() +
+      taskList.length() +
       " tasks in the list.";
     renderOutput(output);
   }
 
-  private static void renderOutput(String op) {
+  public static void renderOutput(String op) {
     System.out.println(LINE);
     op.lines().forEach(line -> System.out.println("      " + line));
     System.out.println(LINE);

@@ -1,3 +1,4 @@
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 public class Event extends Task {
@@ -6,12 +7,24 @@ public class Event extends Task {
 
   public Event(String description, String when, boolean done) {
     super(description, Task.Type.EVENT, done);
-    this.when = LocalDate.parse(when.trim());
+//    try {
+      this.when = LocalDate.parse(when.trim());
+//    } catch (DateTimeException e) {
+//      Duke.renderOutput("wrong datetime format");
+//    }
+  }
+
+  private void DateParser(String when) throws UserInputError {
+    try {
+      this.when = LocalDate.parse(when.trim());
+    } catch (DateTimeException e){
+      throw new UserInputError("wrong datetime format");
+    }
   }
 
   @Override
   public String taskToString() {
-    return super.taskToString() + when.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    return super.taskToString() + when;
   }
 
   @Override
