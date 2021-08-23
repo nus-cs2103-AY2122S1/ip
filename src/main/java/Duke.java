@@ -4,10 +4,6 @@ import java.util.Scanner;
 public class Duke {
     private static ArrayList<Task> tasksList = new ArrayList<>();
 
-    // public enum ActionType {
-    //     ADDTASK, LIST, DONE, DELETE, BYE
-    // }
-
     /**
      * Adds the task to the taskslist.
      * 

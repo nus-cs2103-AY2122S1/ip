@@ -60,16 +60,6 @@ public class Event extends Task{
         }
     }
 
-    // /**
-    //  * print out the relevant info of the event with number in front
-    //  * 
-    //  * @param num the index of the event in the task list
-    //  */
-    // @Override
-    // public void showThisTask(int num) {
-    //     System.out.println(num +  "."+ this.prefix + showStatus() + this.name + "(at:" + this.time + ")");
-    // }
-
     /**
      * mark an event as done and print out relevant information.
      */

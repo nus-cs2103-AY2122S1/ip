@@ -72,16 +72,6 @@ public class Deadline extends Task{
         
     }
 
-    // /**
-    //  * print out the relevant info of the deadline task with number in front
-    //  * 
-    //  * @param num the index of the deadline task in the task list
-    //  */
-    // @Override
-    // public void showThisTask(int num) {
-    //     System.out.println(num +  "."+ this.prefix + showStatus() + this.name + "(by:" + this.date + ")");
-    // }
-
     /**
      * mark a deadline task as done and print out relevant information.
      */
