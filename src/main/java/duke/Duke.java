@@ -1,10 +1,16 @@
 package duke;
 
+/**
+ * The Duke class that runs the Duke program.
+ */
 public class Duke {
     private static TaskList list;
     private static FileManager fm; 
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     */
     public Duke() {
         ui = new Ui();
         fm = new FileManager();
@@ -32,6 +38,9 @@ public class Duke {
         }
     }
 
+    /**
+     * A method that runs the program. 
+     */
     public void run() {
         ui.greet();
         while (true) {

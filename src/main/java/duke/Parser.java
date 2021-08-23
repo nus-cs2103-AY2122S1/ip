@@ -1,21 +1,29 @@
 package duke;
 
+/**
+ * The Parser class that makes sense of the user input.
+ */
 public class Parser {
     private String input; 
     private String[] inputArr;
-    private String command; 
+    private String command;
 
+    /**
+     * Constructor for a Parser object.
+     * 
+     * @param input The user input to be parsed.
+     */
     public Parser(String input) {
         this.input = input; 
         this.inputArr = input.split(" ");
         this.command = inputArr[0]; 
     }
     
-    public boolean isEditingTask() {
+    private boolean isEditingTask() {
         return command.equals("done") || command.equals("delete"); 
     }
     
-    public boolean isAddingNewTask() {
+    private boolean isAddingNewTask() {
         return command.equals("todo") || command.equals("deadline") || command.equals("event");
     }
     
@@ -59,7 +67,14 @@ public class Parser {
             }
         }
     }
-    
+
+    /**
+     * Method that parses the user input and returns the relevant commands and arguments as
+     * strings in an array.
+     * 
+     * @return An array of Strings with valid commands and arguments.
+     * @throws DukeException If an invalid command or argument is given as user input.
+     */
     public String[] parse() throws DukeException {
         int inputLen = inputArr.length;
         if (input.equals("bye") || input.equals("list")) {
@@ -77,7 +92,6 @@ public class Parser {
                 }
             }
         } else if (isAddingNewTask()) {
-            System.out.println("adding");
             return getAddTaskArgs();
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :(");
