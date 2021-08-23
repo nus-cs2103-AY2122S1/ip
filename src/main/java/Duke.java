@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Duke {
     static String filePath = "data/duke.txt";
@@ -22,6 +23,8 @@ public class Duke {
         while(!input.equals("bye")) {
             if (input.equals("list")) {
                 System.out.println(printList(lst));
+            } else if (input.split(" ")[0].equals("schedule")) {
+                printSchedule(input, lst);
             } else if (input.substring(0,Math.min(input.length(), 5)).equals("done ")) {
                 String index = input.split(" ", 2)[1];
                 System.out.println(doTask(index, lst));
@@ -180,6 +183,22 @@ public class Duke {
                 + "    ____________________________________________________________\n";
         return output;
     }
+
+    public static void printSchedule(String info, ArrayList<Task> lst) {
+        LocalDate date;
+        try {
+            date = LocalDate.parse(info.split(" ")[1]);
+        } catch (Exception e) {
+            System.out.println("Wrong format of date");
+            return ;
+        }
+        for (Task t : lst) {
+            if (date.equals(t.getDate())) {
+                System.out.println(t.toString());
+            }
+        }
+    }
+
     /**
      * return the goodbye message
      * @return a string containing the goodbye message
