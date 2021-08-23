@@ -7,7 +7,11 @@ package task;
  */
 public abstract class Task {
 
-    public static char SPLIT_CHAR = '|';
+    public static String SPLIT_TEMPLATE = " # ";
+    
+    public static String DONE = "1";
+
+    public static String NOT_DONE = "0";
     
     private String description;
 
@@ -55,12 +59,8 @@ public abstract class Task {
         return (isDone ? "[X] " : "[ ] "); // mark done task with X
     }
 
-    protected String getSplitTemplate() {
-        return " " + SPLIT_CHAR + " ";
-    }
-    
     public String toEncodedString() {
-        return ((isDone) ? "1" : "0") + getSplitTemplate() + description;
+        return ((isDone) ? DONE : NOT_DONE) + SPLIT_TEMPLATE + description;
     }    
     
     @Override

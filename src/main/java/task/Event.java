@@ -47,11 +47,11 @@ public class Event extends Task {
     @Override
     public String toEncodedString() {
         return KEYWORD 
-                + getSplitTemplate() 
+                + SPLIT_TEMPLATE
                 + super.toEncodedString() 
-                + getSplitTemplate() 
+                + SPLIT_TEMPLATE
                 + atDate
-                + ((atTime == null) ? "" : getSplitTemplate() + atTime);
+                + ((atTime == null) ? "" : SPLIT_TEMPLATE + atTime);
     }
     
     @Override
