@@ -46,8 +46,8 @@ public class Duke {
             Scanner dataScanner = new Scanner(dataFile);
             while (dataScanner.hasNext()) {
                 // Extract task details into three parts
-                String[] taskDetails = dataScanner.nextLine().split(" \\| ", 3);
-                TaskType type = TaskType.valueOf(taskDetails[0].toUpperCase());
+                String[] taskDetails = dataScanner.nextLine().split(" \\| ", 4);
+                TaskType type = TaskType.valueOf(taskDetails[0]);
                 boolean isDone = taskDetails[1].equals("1");
                 String description = taskDetails[2];
 
@@ -155,8 +155,13 @@ public class Duke {
                             Printer.listTask(TASKS, numOfTask));
                     break;
                 case DONE:
-                    TASKS.get(Integer.parseInt(command[1]) - 1).markAsDone();
+                    Task taskToMarkDone = TASKS.get(Integer.parseInt(command[1]) - 1);
+                    taskToMarkDone.markAsDone();
                     writeData();
+                    Printer.prettyPrint("Nice! I've marked this task as done:\n\t   " +
+                            taskToMarkDone.getStatusIcon() +
+                            " " +
+                            taskToMarkDone.description);
                     break;
                 case DELETE:
                     printAddOrDelete(false, TASKS.get(Integer.parseInt(command[1]) - 1), --numOfTask);

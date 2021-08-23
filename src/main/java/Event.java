@@ -9,7 +9,7 @@ public class Event extends Task {
 
     @Override
     public String toDataString() {
-        return String.format("E %s %s", super.toDataString(), this.at);
+        return String.format("EVENT %s | %s", super.toDataString(), this.at);
     }
 
     @Override
