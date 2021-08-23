@@ -23,13 +23,24 @@ public class Duke {
                 numOfTask));
     }
 
-    private static String[] extractCommand(String[] command) throws EmptyDescriptionException, IncompleteDescriptionException {
+    private static String[] extractCommand(String[] command)
+            throws EmptyDescriptionException,
+                   IncompleteDescriptionException,
+                   InvalidDateFomatException {
+
         if (command.length < 2 || command[1].trim().isEmpty())
             throw new EmptyDescriptionException(String.format("The description of a %s cannot be empty.", command[0]));
+
         String[] description = command[1].split(" /by | /at ", 2);
+
         if (!command[0].equals("todo") &&
-                (description.length < 2 || description[0].trim().isEmpty() || description[1].trim().isEmpty()))
+                (description.length < 2 ||
+                        (description[0].trim().isEmpty() || description[1].trim().isEmpty())))
             throw new IncompleteDescriptionException(String.format("The description of a %s is incomplete.", command[0]));
+
+        if (!description[1].matches("\\d{4}-\\d{2}-\\d{2}"))
+            throw new InvalidDateFomatException("Please specify the date in yyyy-mm-dd format!");
+
         return description;
     }
 
@@ -54,7 +65,7 @@ public class Duke {
                 TASKS.add(task);
                 printAddOrDelete(true, task, ++numOfTask);
             }
-        } catch (EmptyDescriptionException | IncompleteDescriptionException e) {
+        } catch (EmptyDescriptionException | IncompleteDescriptionException | InvalidDateFomatException e) {
             Printer.prettyPrint(e.toString());
         }
     }
