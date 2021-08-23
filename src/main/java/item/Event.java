@@ -38,4 +38,11 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
+
+    @Override
+    public String toStringInDoc() {
+        String s = super.toStringInDoc();
+        String s1 = String.format("E | %s | %s", s, this.at);
+        return s1;
+    }
 }

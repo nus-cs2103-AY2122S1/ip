@@ -38,4 +38,11 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    @Override
+    public String toStringInDoc() {
+        String s = super.toStringInDoc();
+        String s1 = String.format("D | %s | %s", s, this.by);
+        return s1;
+    }
 }

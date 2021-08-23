@@ -19,6 +19,10 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
+    public int getListSize() {
+        return this.taskList.size();
+    }
+
     /**
      * Adds a task into the TaskList.
      *
@@ -40,6 +44,14 @@ public class TaskList {
     public String display() {
         if (taskList.size() == 0) {
             return "Meow currently no tasks!";
+        }
+
+        return String.format("Here are the tasks in your list:%s", this);
+    }
+
+    public String displayInDoc() {
+        if (taskList.size() == 0) {
+            return "";
         }
 
         return String.format("Here are the tasks in your list:%s", this);
@@ -100,6 +112,16 @@ public class TaskList {
         for (int i = 0; i < taskList.size(); i++) {
             s.append("\n    ");
             s.append(String.format("%d. %s", i + 1, this.taskList.get(i)));
+        }
+        return s.toString();
+    }
+
+    public String toStringInDoc() {
+        StringBuilder s = new StringBuilder("");
+        for (int i = 0; i < taskList.size(); i++) {
+            s.append(this.taskList.get(i).toStringInDoc());
+            if (i == taskList.size() - 1) { break; }
+            s.append("\n");
         }
         return s.toString();
     }

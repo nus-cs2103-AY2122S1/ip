@@ -6,6 +6,8 @@ import item.Event;
 import item.TaskList;
 import item.Todo;
 
+import java.io.IOException;
+
 public class TaskListRequestHandler extends RequestHandler{
     private final TaskList taskList;
 
@@ -17,6 +19,46 @@ public class TaskListRequestHandler extends RequestHandler{
     public TaskListRequestHandler(TaskList taskList) {
         super();
         this.taskList = taskList;
+    }
+
+    public void restoreTask(String rawTask) {
+        String[] input = rawTask.split(" \\| ", 4);
+        String type = input[0];
+        int isDone = Integer.parseInt(input[1]);
+        String description = input[2];
+        switch(type) {
+        case "D":
+            try {
+                Deadline deadline = Deadline.of(description, input[3]);
+                if (isDone == 1) { deadline.markAsDone(); }
+                taskList.add(deadline);
+            } catch (EmptyCommandException e){
+                respond(e.getMessage());
+            }
+            break;
+        case "E":
+            try {
+                Event event = Event.of(description, input[3]);
+                if (isDone == 1) { event.markAsDone(); }
+                taskList.add(event);
+            } catch (EmptyCommandException e){
+                respond(e.getMessage());
+            }
+            break;
+        case "T":
+            try {
+                Todo todo = Todo.of(description);
+                if (isDone == 1) { todo.markAsDone(); }
+                taskList.add(todo);
+            } catch (EmptyCommandException e){
+                respond(e.getMessage());
+            }
+            break;
+        }
+    }
+
+    public String backUpTask() {
+        return taskList.toStringInDoc();
     }
 
     /**
