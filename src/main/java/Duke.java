@@ -4,6 +4,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,7 +21,7 @@ public class Duke {
 
         System.out.println("  ____________________________________________________________");
         System.out.print("  Hello! I'm Duck.\n  What's up?\n");
-        System.out.println("  ____________________________________________________________");
+        System.out.println("  ____________________________________________________________\n");
 
         while (!isBye) {
             try {
@@ -68,6 +72,20 @@ public class Duke {
                         }
                     }
 
+                } else if (text.split("\\s+")[0].equals("find")) {
+                    if (text.split("\\s+").length == 1) {
+                        throw new DukeException(DukeExceptionType.INVALIDFIND);
+                    } else {
+                        LocalDate desiredDate = LocalDate.parse(text.split("\\s+")[1]);
+                        System.out.println("  Here are the tasks for the given day:");
+                        for (int i = 0; i < listLength; ++i) {
+                            Task currTask = taskList.get(i);
+                            if (currTask.isTodayTask(desiredDate)) {
+                                System.out.println("  " + (i + 1) + "." + taskList.get(i).listEntry());
+                            }
+                        }
+                    }
+                    
                 } else { // task function: add tasks
                     if (text.split("\\s+").length == 1) { // task details not given or not valid task
                         switch (text) {
@@ -100,7 +118,13 @@ public class Duke {
                             if (details.length == 1) { // time of deadline not given
                                 throw new DukeException(DukeExceptionType.DEADLINETIME);
                             } else {
-                                newTask = new Deadline(details[0], details[1]);
+                                String[] deadline = details[1].split(" ");
+                                if (deadline.length == 1) {
+                                    newTask = new Deadline(details[0], LocalDate.parse(details[1]));
+                                } else {
+                                    newTask = new Deadline(details[0], LocalDate.parse(deadline[0]), 
+                                            LocalTime.parse(deadline[1]));
+                                }
                             }
                             break;
                         }
@@ -110,7 +134,20 @@ public class Duke {
                             if (details.length == 1) { // period of event not given
                                 throw new DukeException(DukeExceptionType.EVENTPERIOD);
                             } else {
-                                newTask = new Event(details[0], details[1]);
+                                String[] periodRange = details[1].split(" ");
+                                if (periodRange.length == 2) {
+                                    newTask = new Event(details[0], LocalDate.parse(periodRange[0]), 
+                                            LocalDate.parse(periodRange[1]));
+                                } else if (periodRange.length == 3) {
+                                    newTask = new Event(details[0], LocalDate.parse(periodRange[0]),
+                                            LocalTime.parse(periodRange[1]), LocalTime.parse(periodRange[2]));
+                                } else if (periodRange.length == 4) {
+                                    newTask = new Event(details[0], 
+                                            LocalDate.parse(periodRange[0]), LocalTime.parse(periodRange[1]), 
+                                            LocalDate.parse(periodRange[2]), LocalTime.parse(periodRange[3]));
+                                } else {
+                                    throw new DukeException(DukeExceptionType.INVALIDPERIOD);
+                                }
                             }
                             break;
                         }
@@ -135,8 +172,11 @@ public class Duke {
             } catch (NumberFormatException e) { // throws if index given in done/delete functions is not an integer
                 System.out.println(new DukeException(DukeExceptionType.INVALIDDONE).getMessage());
 
+            } catch (DateTimeParseException e) { 
+                System.out.println(new DukeException(DukeExceptionType.INVALIDDATETIME).getMessage());
+
             } finally {
-                System.out.println("  ____________________________________________________________");
+                System.out.println("  ____________________________________________________________\n");
             }
         }
 
@@ -170,11 +210,33 @@ public class Duke {
                 Task newTask;
                 
                 if (taskString[0].equals("D")) {
-                    String[] taskDetails = taskString[2].split(" \\| ");
-                    newTask = new Deadline(taskDetails[0], taskDetails[1]);
+                    String[] deadlineDetails = taskString[2].split(" ");
+                    if (deadlineDetails.length == 2) {
+                        newTask = new Deadline(deadlineDetails[0], LocalDate.parse(deadlineDetails[1]));
+                    } else if (deadlineDetails.length == 3) {
+                        newTask = new Deadline(deadlineDetails[0], 
+                                LocalDate.parse(deadlineDetails[1]), LocalTime.parse(deadlineDetails[2]));
+                    } else {
+                        throw new DukeException(DukeExceptionType.DB_READ);
+                    }
+                    
                 } else if (taskString[0].equals("E")) {
-                    String[] taskDetails = taskString[2].split(" \\| ");
-                    newTask = new Event(taskDetails[0], taskDetails[1]);
+                    String[] periodDetails = taskString[2].split(" ");
+                    if (periodDetails.length == 3) {
+                        newTask = new Event(periodDetails[0], 
+                                LocalDate.parse(periodDetails[1]), LocalDate.parse(periodDetails[2]));
+                    } else if (periodDetails.length == 4) {
+                        newTask = new Event(periodDetails[0], LocalDate.parse(periodDetails[1]), 
+                                LocalTime.parse(periodDetails[2]), LocalTime.parse(periodDetails[3]));
+                    } else if (periodDetails.length == 5) {
+                        newTask = new Event(periodDetails[0], 
+                                LocalDate.parse(periodDetails[1]), LocalTime.parse(periodDetails[2]), 
+                                LocalDate.parse(periodDetails[3]), LocalTime.parse(periodDetails[4]));
+                    } else {
+                        throw new DukeException(DukeExceptionType.DB_READ);
+                    }
+                    
+                    
                 } else if (taskString[0].equals("T")) {
                     newTask = new Todo(taskString[2]);
 

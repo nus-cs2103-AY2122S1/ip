@@ -1,4 +1,6 @@
-public class Task {
+import java.time.LocalDate;
+
+public abstract class Task {
     private final String taskName;
     private boolean done;
 
@@ -26,4 +28,6 @@ public class Task {
             return " | 0 | " + taskName;
         }
     }
+    
+    public abstract boolean isTodayTask(LocalDate l);
 }

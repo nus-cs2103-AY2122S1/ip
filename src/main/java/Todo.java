@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Todo extends Task {
 
     public Todo(String taskName) {
@@ -12,5 +14,10 @@ public class Todo extends Task {
     @Override
     public String databaseEntry() {
         return "T" + super.databaseEntry();
+    }
+    
+    @Override
+    public boolean isTodayTask(LocalDate l) {
+        return false;
     }
 }

@@ -24,6 +24,9 @@ public class DukeException extends Exception {
         case INVALIDDELETE:
             customMessage = "  OOPS!!! That is not a valid task index for deletion!";
             break;
+        case INVALIDFIND:
+            customMessage = "  OOPS!!! You need to specify a date!";
+            break;
         case INVALIDINPUT:
             customMessage = "  OOPS!!! I don't recognise the command you've given me.";
             break;
@@ -42,6 +45,17 @@ public class DukeException extends Exception {
             break;
         case DB_DELETE:
             customMessage = "  OOPS!!! There was a problem deleting the task from the hard disk!";
+            break;
+        case INVALIDDATETIME:
+            customMessage = "  OOPS!!! The deadline you provided is not in a correct format!\n"
+                    + "  The required format is yyyy-mm-dd or yyyy-mm-dd hh:mm.";
+            break;
+        case INVALIDPERIOD:
+            customMessage = "  OOPS!!! The event period you provided is not in a correct format!\n"
+                    + "  You can provide:\n" 
+                    + "    1. start and end dates\n" 
+                    + "    2. one date, start and end times\n" 
+                    + "    3. start date and time, end date and time";
             break;
         default:
             customMessage = "  OOPS!!! Duck has run into an unspecified error!";
