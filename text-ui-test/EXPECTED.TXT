@@ -20,24 +20,24 @@ Here are the tasks in your list:
 ____________________________________________________________________________
 ____________________________________________________________________________
 Got it. I've added this task:
-[E] [] Catch up with friends (at: 11:30am)
+[E] [] Catch up with friends (at: Aug 23 2021)
 Now you have 2 tasks in the list.
 ____________________________________________________________________________
 ____________________________________________________________________________
 Here are the tasks in your list:
 1. [T] [] Make a sandwich
-2. [E] [] Catch up with friends (at: 11:30am)
+2. [E] [] Catch up with friends (at: Aug 23 2021)
 ____________________________________________________________________________
 ____________________________________________________________________________
 Got it. I've added this task:
-[D] [] Do CS2103T iP (by: Thu, Aug 19th 2359)
+[D] [] Do CS2103T iP (by: Jan 19 2021)
 Now you have 3 tasks in the list.
 ____________________________________________________________________________
 ____________________________________________________________________________
 Here are the tasks in your list:
 1. [T] [] Make a sandwich
-2. [E] [] Catch up with friends (at: 11:30am)
-3. [D] [] Do CS2103T iP (by: Thu, Aug 19th 2359)
+2. [E] [] Catch up with friends (at: Aug 23 2021)
+3. [D] [] Do CS2103T iP (by: Jan 19 2021)
 ____________________________________________________________________________
 ____________________________________________________________________________
 Ribbit Ribbit! Good job, task has been marked as complete:
@@ -46,28 +46,28 @@ ____________________________________________________________________________
 ____________________________________________________________________________
 Here are the tasks in your list:
 1. [T] [X] Make a sandwich
-2. [E] [] Catch up with friends (at: 11:30am)
-3. [D] [] Do CS2103T iP (by: Thu, Aug 19th 2359)
+2. [E] [] Catch up with friends (at: Aug 23 2021)
+3. [D] [] Do CS2103T iP (by: Jan 19 2021)
 ____________________________________________________________________________
 ____________________________________________________________________________
 Ribbit Ribbit! Good job, task has been marked as complete:
-[E] [X] Catch up with friends (at: 11:30am)
+[E] [X] Catch up with friends (at: Aug 23 2021)
 ____________________________________________________________________________
 ____________________________________________________________________________
 Here are the tasks in your list:
 1. [T] [X] Make a sandwich
-2. [E] [X] Catch up with friends (at: 11:30am)
-3. [D] [] Do CS2103T iP (by: Thu, Aug 19th 2359)
+2. [E] [X] Catch up with friends (at: Aug 23 2021)
+3. [D] [] Do CS2103T iP (by: Jan 19 2021)
 ____________________________________________________________________________
 ____________________________________________________________________________
 Ribbit Ribbit! Good job, task has been marked as complete:
-[D] [X] Do CS2103T iP (by: Thu, Aug 19th 2359)
+[D] [X] Do CS2103T iP (by: Jan 19 2021)
 ____________________________________________________________________________
 ____________________________________________________________________________
 Here are the tasks in your list:
 1. [T] [X] Make a sandwich
-2. [E] [X] Catch up with friends (at: 11:30am)
-3. [D] [X] Do CS2103T iP (by: Thu, Aug 19th 2359)
+2. [E] [X] Catch up with friends (at: Aug 23 2021)
+3. [D] [X] Do CS2103T iP (by: Jan 19 2021)
 ____________________________________________________________________________
 ____________________________________________________________________________
 ☹ BURP-ribbit ribbit. The description of a todo cannot be empty
@@ -93,8 +93,8 @@ Now you have 2 tasks in the list.
 ____________________________________________________________________________
 ____________________________________________________________________________
 Here are the tasks in your list:
-1. [E] [X] Catch up with friends (at: 11:30am)
-2. [D] [X] Do CS2103T iP (by: Thu, Aug 19th 2359)
+1. [E] [X] Catch up with friends (at: Aug 23 2021)
+2. [D] [X] Do CS2103T iP (by: Jan 19 2021)
 ____________________________________________________________________________
 ____________________________________________________________________________
 Bye. Hope to see you again soon!
