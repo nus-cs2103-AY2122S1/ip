@@ -5,6 +5,14 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.File;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import java.util.Scanner;
+import java.lang.StringBuilder;
+
 public class Duke {
     private enum TaskType {
         TODO,
@@ -81,38 +89,46 @@ public class Duke {
         String[] taskArr;
 
         switch (tType) {
-            case TODO:
-                inputArr = input.split(" ", 2);
-                if(inputArr.length != 2 || inputArr[1].equals("")) {
-                    throw new DukeCommandException("todo");
-                }
-                msg = tList.addTask(new ToDo(inputArr[1]));
-                break;
-                //Possible exception: no string after todo.
-            case DEADLINE:
-                inputArr = input.split(" ", 2);
-                if (inputArr.length != 2) {
-                    throw new DukeCommandException("deadline");
-                }
-                taskArr = inputArr[1].split(" /by ", 2);
-                if (taskArr.length != 2 || taskArr[1].equals("")) {
-                    throw new DukeCommandException("deadline");
-                }
-                msg = tList.addTask(new Deadline(taskArr[0], taskArr[1]));
-                break;
-            case EVENT:
-                inputArr = input.split(" ", 2);
-                if (inputArr.length != 2) {
-                    throw new DukeCommandException("event");
-                }
-                taskArr = inputArr[1].split(" /at ", 2);
-                if (taskArr.length != 2 || taskArr[1].equals("")) {
-                    throw new DukeCommandException("event");
-                }
-                msg = tList.addTask(new Event(taskArr[0], taskArr[1]));
-                break;
-            default:
-                msg = "If you see this, something has went terribly wrong";
+        case TODO:
+            inputArr = input.split(" ", 2);
+            if(inputArr.length != 2 || inputArr[1].equals("")) {
+                throw new DukeCommandException("todo");
+            }
+            msg = tList.addTask(new ToDo(inputArr[1]));
+            break;
+            //Possible exception: no string after todo.
+        case DEADLINE:
+            inputArr = input.split(" ", 2);
+            if (inputArr.length != 2) {
+                throw new DukeCommandException("deadline");
+            }
+            taskArr = inputArr[1].split(" /by ", 2);
+            if (taskArr.length != 2 || taskArr[1].equals("")) {
+                throw new DukeCommandException("deadline");
+            }
+            try {
+                msg = tList.addTask(new Deadline(taskArr[0], DukeDate.parseDateInput(taskArr[1])));
+            } catch (DukeArgumentException e) {
+                msg = e.getMessage();
+            }
+            break;
+        case EVENT:
+            inputArr = input.split(" ", 2);
+            if (inputArr.length != 2) {
+                throw new DukeCommandException("event");
+            }
+            taskArr = inputArr[1].split(" /at ", 2);
+            if (taskArr.length != 2 || taskArr[1].equals("")) {
+                throw new DukeCommandException("event");
+            }
+            try {
+                msg = tList.addTask(new Event(taskArr[0], DukeDate.parseDateInput(taskArr[1])));
+            } catch (DukeArgumentException e) {
+                msg = e.getMessage();
+            }
+            break;
+        default:
+            msg = "If you see this, something has went terribly wrong";
         }
 
         return msg;

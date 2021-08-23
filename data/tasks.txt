@@ -1,0 +1,3 @@
+T|i|abcd
+E|i|maybe running|tomorrow 9am
+D|c|running definitely|next week
