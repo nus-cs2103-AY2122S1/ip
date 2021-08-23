@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -54,16 +56,16 @@ public class TaskList {
     /**
      * Appends a task to the list of existing tasks.
      *
-     * @param task Task to be added to list.
+     * @param task duke.Task to be added to list.
      */
     public void appendTask(Task task) {
         taskList.add(task);
     }
 
     /**
-     * Produces a string representing the store format of the list of tasks for Duke.
+     * Produces a string representing the store format of the list of tasks for duke.Duke.
      *
-     * @return a String of the list of tasks in Duke store format.
+     * @return a String of the list of tasks in duke.Duke store format.
      */
     public String toDukeStoreFormat() {
         String outputString =

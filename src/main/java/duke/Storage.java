@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exception.DukeFileSystemException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -44,15 +48,13 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             throw new DukeFileSystemException("Unable to load previous tasks. " +
-                    "A new list will be used for this session. Ensure that " + filePath.toString() + " exists.");
-        } catch (DukeFileSystemException e) {
-            throw e;
+                    "A new list will be used for this session. Ensure that " + filePath + " exists.");
         }
         return taskList;
     }
 
     /**
-     * Stores the tasks in Duke format to specified file path in the constructor to be cached.
+     * Stores the tasks in duke format to specified file path in the constructor to be cached.
      *
      * @param taskList a list of tasks to be converted and stored.
      * @throws IOException if the file path specified is invalid.
@@ -61,6 +63,5 @@ public class Storage {
         FileWriter fileWriter = new FileWriter(this.filePath.toString());
         fileWriter.write(taskList.toDukeStoreFormat());
         fileWriter.close();
-        return;
     }
 }

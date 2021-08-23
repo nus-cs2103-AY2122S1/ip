@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exception.InvalidDukeCommandException;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,7 +16,7 @@ public class Deadline extends Task {
             int[] dateArgs = Arrays.stream(dateString.split("-")).mapToInt(Integer::valueOf).toArray();
             this.finishDate = LocalDate.of(dateArgs[0], dateArgs[1], dateArgs[2]);
         } catch (NumberFormatException | DateTimeException | ArrayIndexOutOfBoundsException e) {
-            throw new InvalidDukeCommandException("Deadline date has to be declared in the format yyyy-mm-dd.");
+            throw new InvalidDukeCommandException("duke.Deadline date has to be declared in the format yyyy-mm-dd.");
         }
     }
 

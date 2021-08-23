@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class DukeFileSystemException extends RuntimeException {
     private static final String preMessage = "ERROR: ";
 
