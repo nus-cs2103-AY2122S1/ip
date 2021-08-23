@@ -7,7 +7,7 @@ import duke.exception.DukeException;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-JavaDoc. Add JavaDoc comments to the code
+ * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted text.

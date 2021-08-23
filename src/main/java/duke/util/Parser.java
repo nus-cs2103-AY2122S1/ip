@@ -1,6 +1,7 @@
 package duke.util;
 
 import duke.command.*;
+
 import duke.exception.DukeException;
 import duke.exception.InvalidArgumentException;
 import duke.exception.InvalidCommandException;
@@ -10,7 +11,7 @@ import duke.exception.MissingArgumentException;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-JavaDoc. Add JavaDoc comments to the code
+ * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
  *
  * Description:
  * Encapsulates the parser where it parses the inputted command from the user and runs

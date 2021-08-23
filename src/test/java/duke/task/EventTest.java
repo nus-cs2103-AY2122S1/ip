@@ -51,4 +51,3 @@ public class EventTest {
         assertEquals(tempTask.getDescription(), "testing the tester");
     }
 }
-

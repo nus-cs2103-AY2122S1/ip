@@ -61,8 +61,8 @@ public class TasklistTest {
             message = e.toString();
         }
         String deleteMessage = "Noted. I've removed this task:\n"
-            + "  [E][ ] test123 (at: 24-Jul-2010 19:00 to 24-Dec-2010 00:00)\n"
-            + "Now you have 1 tasks in the list.";
+                + "  [E][ ] test123 (at: 24-Jul-2010 19:00 to 24-Dec-2010 00:00)\n"
+                + "Now you have 1 tasks in the list.";
         assertEquals(message, deleteMessage);
 
     }
@@ -77,8 +77,8 @@ public class TasklistTest {
         } catch (DukeException e) {
         }
         String successMessage = "1.[T][ ] test1\n"
-            + "2.[D][ ] test12 (by: 24-Jul-2010 19:00)\n"
-            + "3.[E][ ] test123 (at: 24-Jul-2010 19:00 to 24-Dec-2010 00:00)";
+                + "2.[D][ ] test12 (by: 24-Jul-2010 19:00)\n"
+                + "3.[E][ ] test123 (at: 24-Jul-2010 19:00 to 24-Dec-2010 00:00)";
         assertEquals(temp.toString(), successMessage);
 
     }
