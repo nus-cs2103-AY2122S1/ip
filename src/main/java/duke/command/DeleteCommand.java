@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.util.TaskList;
 import duke.util.Ui;
-import duke.task.Keyword;
+import duke.util.Keyword;
 
 public class DeleteCommand implements Command {
     /** Stores the message entered by the . */

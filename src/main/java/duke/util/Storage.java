@@ -2,7 +2,6 @@ package duke.util;
 
 import duke.task.Deadlines;
 import duke.task.Events;
-import duke.task.Keyword;
 import duke.task.Task;
 import duke.task.ToDos;
 

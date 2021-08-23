@@ -12,7 +12,7 @@ Description of the feature.
 
 ## Usage
 
-### `duke.task.Keyword` - Describe action
+### `duke.util.Keyword` - Describe action
 
 Describe the action and its outcome.
 

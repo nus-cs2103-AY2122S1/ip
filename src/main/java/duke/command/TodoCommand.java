@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.util.Keyword;
 import duke.util.TaskList;
 import duke.util.Ui;
 
@@ -23,6 +24,6 @@ public class TodoCommand implements Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui) {
-        taskList.addTodo(message);
+        taskList.addTodo(message.substring(Keyword.TODOS.length() + 1));
     }
 }
