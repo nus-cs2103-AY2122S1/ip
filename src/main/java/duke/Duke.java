@@ -1,12 +1,18 @@
-import java.util.Scanner;
-import java.time.LocalDate;
+package duke;
+
+import duke.command.Command;
+import duke.exceptions.UnknownException;
+import duke.util.TaskList;
+import duke.util.Parser;
+import duke.util.Ui;
+import duke.util.Storage;
 
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    protected Storage storage;
+    protected TaskList tasks;
+    protected Ui ui;
 
-    private static final String FILE_URL = "data/Duke.txt";
+    protected static final String FILE_URL = "data/Duke.txt";
 
     public Duke(String filePath) {
         ui = new Ui();
