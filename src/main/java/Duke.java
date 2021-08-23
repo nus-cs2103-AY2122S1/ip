@@ -145,7 +145,6 @@ public class Duke {
         }
     }
 
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         List<Task> tasks = createData();
@@ -160,10 +159,12 @@ public class Duke {
                         .stream()
                         .map(task -> task.dataToString())
                         .reduce("", (accum, nextString) -> String.format("%s\n%s", accum, nextString));
-                try (PrintWriter out = new PrintWriter(fileName)) {
-                    out.println(data.substring(1));
-                } catch (IOException e) {
-                    // do nothing
+                if (data.length() != 0) {
+                    try (PrintWriter out = new PrintWriter(fileName)) {
+                        out.println(data.substring(1));
+                    } catch (IOException e) {
+                        // do nothing
+                    }
                 }
             } catch (DukeException e) {
                 printOut(e.getMessage());
