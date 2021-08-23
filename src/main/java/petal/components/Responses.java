@@ -27,7 +27,7 @@ public enum Responses {
 
     private final String response;
 
-    private Responses(String response) {
+    Responses(String response) {
         this.response = response;
     }
 

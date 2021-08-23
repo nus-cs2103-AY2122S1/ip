@@ -43,7 +43,7 @@ public class TaskList {
      *                               when index is out-of-bounds/not valid int or when
      *                               desc is empty
      */
-    public void deleteTask(String index) throws InvalidInputException, EmptyDescException {
+    public void deleteTask(String index) throws InvalidInputException {
         try {
             int indexOfTask = Integer.parseInt(index) - 1;
             Task toBeDeleted = tasks.remove(indexOfTask);
@@ -99,7 +99,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException Thrown if string is not within size of list
      * @throws NumberFormatException Thrown if string cannot be converted into valid int
      */
-    public void markTaskAsDone(String indexOfTask) throws EmptyDescException, InvalidInputException {
+    public void markTaskAsDone(String indexOfTask) throws InvalidInputException {
         try {
             Task taskToBeCompleted = tasks.get(Integer.parseInt(indexOfTask) - 1);
             taskToBeCompleted.taskDone();

@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -24,8 +25,8 @@ public class Storage {
     private final TaskList taskList;
     private final Ui ui;
 
-    public Storage(TaskList taskList) {
-        ui = new Ui();
+    public Storage(TaskList taskList, Ui ui) {
+        this.ui = ui;
         this.taskList = taskList;
         this.folderPath = System.getProperty("user.dir") + "/PetalData";
         this.filePath = folderPath + "/Tasks.txt";
@@ -45,9 +46,9 @@ public class Storage {
             petalData.createNewFile();
         } catch (IOException e) {
             savedProperly = false;
-            printMessage(Responses.FILE_ERROR);
+            ui.output(Responses.FILE_ERROR);
         }
-        printMessage(Responses.START_MESSAGE);
+        ui.output(Responses.START_MESSAGE);
     }
 
     /**
@@ -76,8 +77,9 @@ public class Storage {
                 }
             }
             taskList.addTask(toBeAdded);
+            scanner.close();
             return true;
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | NoSuchElementException e) {
             return false;
         }
     }
@@ -100,14 +102,6 @@ public class Storage {
         } finally {
             ui.goodBye();
         }
-    }
-
-    /**
-     * Method to add the indentation to the message
-     * @param message Message to be printed
-     */
-    public void printMessage(Responses message) {
-        System.out.println(Responses.LINE + "\n" + message.toString() + "\n" + Responses.LINE);
     }
 
 }

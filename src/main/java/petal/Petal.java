@@ -1,9 +1,14 @@
 package petal;
 
+import petal.command.Command;
 import petal.components.Parser;
 import petal.components.Storage;
 import petal.components.TaskList;
+import petal.components.Ui;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -17,13 +22,16 @@ public class Petal {
     public static boolean bye = false;
     private final Storage storage;
     private final Parser parser;
+    private final Ui ui;
+    private final TaskList taskList;
 
     /**
      * Constructor for the Duke class
      */
     public Petal() {
-        TaskList taskList = new TaskList();
-        storage = new Storage(taskList);
+        ui = new Ui();
+        taskList = new TaskList();
+        storage = new Storage(taskList, ui);
         parser = new Parser(storage, taskList);
     }
 
@@ -35,7 +43,8 @@ public class Petal {
         storage.createDirectory();
         while (!bye) {
             String message = scanner.nextLine();
-            parser.handleInput(message.trim().toLowerCase());
+            Command command = parser.handleInput(message);
+            command.execute(taskList, ui, storage);
         }
         scanner.close();
     }
