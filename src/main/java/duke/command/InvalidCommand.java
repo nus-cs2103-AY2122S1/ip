@@ -4,7 +4,7 @@ import duke.core.Storage;
 import duke.core.TaskList;
 import duke.core.Ui;
 
-public class InvalidCommand implements Command {
+public class InvalidCommand implements Commandable {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return "Sorry, I don't understand what you are saying!";

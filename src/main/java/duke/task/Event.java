@@ -5,11 +5,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Encapsulates a task that has a description and takes place at a specific time.
+ * <h1> Event </h1>
+ * Encapsulates a task that has a description and a date and time that it occurs on.
  *
  * @author Clifford
  */
-
 public class Event extends Task {
     protected final static String taskSymbol = "[E]";
     protected LocalDateTime dateTime;
@@ -21,6 +21,11 @@ public class Event extends Task {
         this.dateTime = LocalDateTime.parse(dateTime.trim(), parseFormat);
     }
 
+    /**
+     * Converts an Event object to a formatted text to be saved in storage.
+     *
+     * @return text representation of Event in storage files.
+     */
     @Override
     public String convertToText() {
         return super.convertToText() + super.getDivider() + dateTime.format(parseFormat);

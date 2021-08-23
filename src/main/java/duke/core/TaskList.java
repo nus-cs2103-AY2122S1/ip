@@ -11,6 +11,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates a checkList which can hold 100 tasks, display task information, add, delete, mark
+ * task as done. If TaskList is linked with a Storage, any changes to the TaskList will be saved.
+ *
+ * @author Clifford
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private static final int tasksLimit = 100;
@@ -29,6 +35,11 @@ public class TaskList {
         this.tasksStorage = tasksStorage;
     }
 
+    /**
+     * Requests from storage the save file and translates the file to Task that are added into list.
+     *
+     * @throws DukeException if there is an IOException when handling the file
+     */
     public void retrieveTasks() throws DukeException {
         File taskData = this.tasksStorage.retrieveTasks();
         if(taskData == null || tasksStorage == null) {
@@ -45,6 +56,12 @@ public class TaskList {
 
     }
 
+    /**
+     * Translates the existing tasks in the list to text and passes it to Storage to be saved.
+     * If no Storage is linked to TaskList, this operation does not take place.
+     *
+     * @throws DukeException if there is an IOException when handling the file
+     */
     public void saveTasks() throws DukeException {
         if(tasksStorage == null) {
             return ;
@@ -52,18 +69,46 @@ public class TaskList {
         this.tasksStorage.saveTasks(this.convertTasksToText());
     }
 
+    /**
+     * Adds Todo Task to the TaskList and return a String representation of the results of the operation.
+     *
+     * @param description user description of the Task
+     * @return a String representation of the results of the operation.
+     * @throws DukeException
+     */
     public String recordTodo(String description) throws DukeException {
         return record(new Todo(description));
     }
 
+    /**
+     * Adds Deadline Task to the TaskList and return a String representation of the results of the operation.
+     *
+     * @param description user description of the Task
+     * @param date date of the Task
+     * @return a String representation of the results of the operation.
+     * @throws DukeException
+     */
     public String recordDeadline(String description, String date) throws DukeException {
         return record(new Deadline(description, date));
     }
 
+    /**
+     * Adds Event Task to the TaskList and return a String representation of the results of the operation.
+     *
+     * @param description  user description of Task
+     * @param date date of the Task
+     * @return a String representation of the results of the operation.
+     * @throws DukeException
+     */
     public String recordEvent(String description, String date) throws DukeException {
         return record(new Event(description, date));
     }
 
+    /**
+     * Converts an arraylist of Tasks to text representation to be saved in Storage file.
+     *
+     * @return text representation of tasks in Storage
+     */
     public String convertTasksToText() {
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < currentIdx; i++) {
@@ -76,10 +121,23 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Converts a Task to text representation to be saved in Storage file.
+     *
+     * @param task a Task object
+     * @return text representation of Task in save file
+     */
     public String convertTaskToText(Task task) {
         return task.convertToText();
     }
 
+    /**
+     * Adds task to the taskList if the list is not full. If full, a DukeException is thrown.
+     *
+     * @param task the Task object to be added
+     * @return String representation of the result.
+     * @throws DukeException the TaskList is full
+     */
     public String record(Task task) throws DukeException {
         try {
             if(currentIdx >= tasksLimit) {
@@ -96,9 +154,9 @@ public class TaskList {
     }
 
     /**
-     * formats the items recorded in a list to be shown to user.
+     * Enumerates the items recorded in a list to be displayed to user.
      *
-     * @return list representation of items recorded by user
+     * @return String representation of list of items in TaskList
      */
     public String printTasks() {
         if(currentIdx == 0) {
@@ -113,11 +171,12 @@ public class TaskList {
     }
 
     /**
-     * Allows users to choose a task in the list to be crossed off.
+     * Chooses and marks a task in the list to be marked as done. If the task is already marked
+     * as done, the task will continue to be marked as done.
      *
-     * @param taskId the id of the task starting from 1 for the first task
-     * @return a String that confirms the success or failure of the mark as done operation.
-     * @throws IllegalArgumentException when a task that does not exist is selected to be mark as done
+     * @param taskId the id of the task within the list
+     * @return a String that tells user whether the task marked was previously unmarked or already marked
+     * @throws DukeException if the selected task to be marked does not exist
      */
     public String markAsDone(int taskId) throws DukeException {
         try {
@@ -128,21 +187,22 @@ public class TaskList {
             Task task = tasks.get(taskId - 1);
             boolean isChanged = task.markAsDone();
             if(!isChanged) {
-                return "duke.task.Task is already marked as done";
+                return "Task is already marked as done";
             }
             saveTasks();
             return "Nice! I've marked this task as done:\n  " + task.toString();
         } catch (IllegalArgumentException e) {
-            throw new DukeException("No such task exists to be marked as done!");
+            e.printStackTrace();
+            throw new DukeException("No such task exists!");
         }
     }
 
     /**
-     * Allows users to remove items from the list.
+     * Removes a given task from the list.
      *
      * @param taskId the id of the task starting from 1 for the first task
-     * @return a String that confirms the success or failure of the delete operation.
-     * @throws IllegalArgumentException when a task does not exist is selected to be deleted
+     * @return a String that confirms the success of the delete operation
+     * @throws DukeException when a task that does not exist is selected for deletion
      */
     public String deleteTask(int taskId) throws DukeException {
         try {
@@ -158,6 +218,7 @@ public class TaskList {
                     deletedTask.toString(),
                     currentIdx);
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
             throw new DukeException("No such task exists to be deleted!");
         }
     }

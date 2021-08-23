@@ -1,12 +1,12 @@
 package duke.core;
 
 /**
- * Encapsulates the Main Program that facilitates interaction between ChatBot and user.
+ * Encapsulates the Main Program where Duke is run.
  *
  * @author Clifford
  */
 
-import duke.command.Command;
+import duke.command.Commandable;
 import duke.exception.DukeException;
 
 import java.util.Scanner;
@@ -35,7 +35,7 @@ public class Duke {
         while(!isExit) {
             try {
                 String userInput = sc.nextLine();
-                Command c = Parser.identifyCommand(userInput);
+                Commandable c = Parser.identifyCommand(userInput);
                 ui.formatDisplay(c.execute(taskslist, ui, storage));
                 isExit = c.isExit();
             } catch (DukeException e) {

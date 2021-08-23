@@ -7,6 +7,11 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Encapsulates the Storage class which saves and retrieves tasks in Duke to and from file.
+ *
+ * @author Clifford
+ */
 public class Storage {
     private String filePath;
     private TaskList tasks = null;
@@ -19,6 +24,12 @@ public class Storage {
         this.tasks = tasks;
     }
 
+    /**
+     * Retrieves the save file, otherwise create the directory for the save file.
+     *
+     * @return file object or null to represent the absence of a save file
+     * @throws DukeException if there is an I/O Exception when it is read
+     */
     public File retrieveTasks() throws DukeException {
         File file = new File(filePath);
         try {
@@ -32,6 +43,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates the directory for the save file.
+     *
+     * @throws DukeException if there is an IO Exception when it is read
+     */
     public void createStorageFile(File file) throws DukeException {
         try {
             file.getParentFile().mkdirs();
@@ -41,6 +57,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a save file if there is no save file, then save given
+     * into the save file, throw DukeException if an IOException
+     * occurs during the handling of the file.
+     *
+     * @param dataText a text representation of the objects to be stored.
+     * @throws DukeException if there is an IOException when handling the file
+     */
     public void saveTasks(String dataText) throws DukeException {
         File file = new File(filePath);
         try {

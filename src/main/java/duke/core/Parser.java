@@ -3,8 +3,24 @@ package duke.core;
 import duke.command.*;
 import duke.exception.DukeException;
 
+/**
+ * Encapsulates the Parser class which reads the user inputs and identify what the user
+ * wants Duke to do.
+ *
+ * @author Clifford
+ */
 public class Parser {
-    public static Command identifyCommand(String input) throws DukeException {
+
+    /**
+     * Identifies the command the user wishes to invoke given a user input, otherwise throws
+     * DukeException if user input is invalid.
+     *
+     * @param input the user input
+     * @return the command the user wishes to invoke
+     * @throws DukeException if there is an absence of user input or
+     *     a valid command with missing arguments is entered
+     */
+    public static Commandable identifyCommand(String input) throws DukeException {
         if(input.equals("")) {
             throw new DukeException("Go on, I'm all ears!");
         }

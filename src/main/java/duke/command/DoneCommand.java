@@ -5,7 +5,7 @@ import duke.core.TaskList;
 import duke.core.Ui;
 import duke.exception.DukeException;
 
-public class DoneCommand implements Command {
+public class DoneCommand implements Commandable {
     private String description;
 
     public DoneCommand(String description) {

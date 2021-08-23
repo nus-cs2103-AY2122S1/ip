@@ -1,6 +1,6 @@
 package duke.command;
 
-public abstract class AddCommand implements Command {
+public abstract class AddCommand implements Commandable {
     @Override
     public boolean isExit() {
         return false;
