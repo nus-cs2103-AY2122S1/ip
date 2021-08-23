@@ -44,7 +44,14 @@ public class Parser {
            throw new UnknownCommandException();
         }
     }
-    
+
+    /**
+     * Parses the add todo command
+     * 
+     * @param args The Arguments of the command.
+     * @return The corresponding command.
+     * @throws InvalidArgumentsException Thrown if arguments are invalid.
+     */
     private static AddTaskCommand parseTodo(String[] args) throws InvalidArgumentsException {
         if (args.length != 2) {
             throw new InvalidArgumentsException("todo [task]");
@@ -52,7 +59,14 @@ public class Parser {
         
         return new AddTaskCommand(new Todo(args[1]));
     }
-    
+
+    /**
+     * Parses the add event command
+     *
+     * @param args The Arguments of the command.
+     * @return The corresponding command.
+     * @throws InvalidArgumentsException Thrown if arguments are invalid.
+     */
     private static AddTaskCommand parseEvent(String[] args) throws InvalidArgumentsException {
         if (args.length != 2) {
             throw new InvalidArgumentsException("event [task] /at [time period]");
@@ -65,7 +79,14 @@ public class Parser {
 
         return new AddTaskCommand(new Event(eventArgs[0], eventArgs[1]));
     }
-    
+
+    /**
+     * Parses the add deadline command
+     *
+     * @param args The Arguments of the command.
+     * @return The corresponding command.
+     * @throws InvalidArgumentsException Thrown if arguments are invalid.
+     */
     private static AddTaskCommand parseDeadline(String[] args) throws InvalidArgumentsException {
         InvalidArgumentsException invalidArgsException = new InvalidArgumentsException("deadline [task] /by [YYYY-MM-DD]");
         if (args.length != 2) {
@@ -83,7 +104,15 @@ public class Parser {
             throw invalidArgsException;
         }
     }
-    
+
+    /**
+     * Parses the done command
+     *
+     * @param args The Arguments of the command.
+     * @return The corresponding command.
+     * @throws InvalidArgumentsException Thrown if arguments are invalid.
+     * @throws UnableToParseException Thrown if unable to parse task id.
+     */
     private static DoneCommand parseDone(String[] args) throws InvalidArgumentsException, UnableToParseException {
         if (args.length != 2) {
             throw new InvalidArgumentsException("done [task id]");
@@ -92,7 +121,15 @@ public class Parser {
         int taskId = parseTaskId(args[1]);
         return new DoneCommand(taskId);
     }
-    
+
+    /**
+     * Parses the delete command
+     *
+     * @param args The Arguments of the command.
+     * @return The corresponding command.
+     * @throws InvalidArgumentsException Thrown if arguments are invalid.
+     * @throws UnableToParseException Thrown if unable to parse task id.
+     */
     private static DeleteCommand parseDelete(String[] args) throws InvalidArgumentsException, UnableToParseException {
         if (args.length != 2) {
             throw new InvalidArgumentsException("delete [task id]");
