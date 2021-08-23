@@ -6,7 +6,6 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 
 import exceptions.AuguryException;
 import exceptions.FileIOException;
@@ -23,7 +22,7 @@ public class Storage {
         this.path = path;
     }
 
-    public void initializeTaskList(TaskList t) throws IOException {
+    public void initializeTaskList(TaskList t) throws IOException, AuguryException {
         String directory = "data";
         File dir = new File(directory);
         if (!dir.exists()) {
@@ -58,7 +57,7 @@ public class Storage {
         return res.toString();
     }
 
-    private void writeStorageToTaskList(TaskList t) throws FileNotFoundException {
+    private void writeStorageToTaskList(TaskList t) throws IOException, AuguryException {
         // read tasks.txt
         Scanner s = new Scanner(new File(path)); // create a Scanner using the File as the source
         ArrayList<String> tasks = new ArrayList<>();

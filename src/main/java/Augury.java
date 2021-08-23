@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Augury {
-    static String VER     = "v0.7.0"; // Level-7 Save
+    static String VER     = "v0.8.0"; // Level-8 Dates and Times
     static String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
@@ -104,7 +104,7 @@ public class Augury {
 
         for (Integer i : listOfTasks){
             if (i > taskList.size()) {
-                throw new InvalidActionException("tasks.Task " + i + " does not exist, please try again");
+                throw new InvalidActionException("Task " + i + " does not exist, please try again");
             }
         }
         speak(taskList.markAsDone(listOfTasks));
@@ -122,7 +122,7 @@ public class Augury {
 
         for (Integer i : listOfTasks){
             if (i > taskList.size()) {
-                throw new InvalidActionException("tasks.Task " + i + " does not exist, please try again");
+                throw new InvalidActionException("Task " + i + " does not exist, please try again");
             }
         }
         speak(taskList.deleteTasks(listOfTasks));

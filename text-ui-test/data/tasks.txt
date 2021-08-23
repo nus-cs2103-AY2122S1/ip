@@ -1,9 +1,4 @@
-[D][X] item three (by: next tuesday)
-[T][ ] 6
-[T][ ] 7
 [T][ ] item one
-[E][ ] item two (at: 22/2/2012 2pm)
 [T][ ] 5
 [T][ ] 6
-[T][ ] 7
 [T][ ] 8

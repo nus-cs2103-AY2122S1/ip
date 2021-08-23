@@ -3,10 +3,15 @@ package tasks;
 import exceptions.AuguryException;
 import exceptions.InvalidTaskCreationException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class TaskFactory {
+    static DateTimeFormatter TIME_DISPLAY_FORMAT = DateTimeFormatter.ofPattern("d MMM y, E, kk:mm");
+
     public TaskFactory() {    }
 
-    public Task createTask(String newTaskDetails) {
+    public Task createTask(String newTaskDetails) throws AuguryException {
         // this method is used when reading from tasks.txt file
         // the syntax is [E][X] description (at: time)
 
@@ -19,16 +24,18 @@ public class TaskFactory {
             String description = newTaskDetails.split("] ")[1]
                     .split(" \\(")[0]
                     .trim();
-            String time = newTaskDetails.split("\\(at: ")[1]
+            String timeString = newTaskDetails.split("\\(at: ")[1]
                     .replaceAll(".$",""); // get rid of last character ')'
+            LocalDateTime time = LocalDateTime.parse(timeString, TIME_DISPLAY_FORMAT);
             return new EventTask(description, time, isDone);
         } else if (newTaskDetails.startsWith("[D")) {
             boolean isDone = newTaskDetails.substring(4).equals("X");
             String description = newTaskDetails.split("] ")[1]
                     .split(" \\(")[0]
                     .trim();
-            String time = newTaskDetails.split("\\(by: ")[1]
+            String timeString = newTaskDetails.split("\\(by: ")[1]
                     .replaceAll(".$",""); // get rid of last character ')'
+            LocalDateTime time = LocalDateTime.parse(timeString, TIME_DISPLAY_FORMAT);
             return new DeadlineTask(description, time, isDone);
         } else {
             return null;
@@ -46,16 +53,27 @@ public class TaskFactory {
             checkDetailsNonEmpty(newTaskType, newTaskDetails);
             checkTaskIncludesTime(newTaskType, newTaskDetails);
             String description = newTaskDetails.substring(6).split("/at ")[0].trim();
-            String time = newTaskDetails.split("/at ")[1].trim();
+            String timeString = newTaskDetails.split("/at ")[1].trim();
+            LocalDateTime time = createDateTimeFromString(timeString);
             return new EventTask(description, time);
         } else if (newTaskType.equalsIgnoreCase(Task.TaskTypes.DEADLINE.toString())) {
             checkDetailsNonEmpty(newTaskType, newTaskDetails);
             checkTaskIncludesTime(newTaskType, newTaskDetails);
             String description = newTaskDetails.substring(9).split("/by ")[0].trim();
-            String time = newTaskDetails.split("/by ")[1].trim();
+            String timeString = newTaskDetails.split("/by ")[1].trim();
+            LocalDateTime time = createDateTimeFromString(timeString);
             return new DeadlineTask(description, time);
         } else {
             return null;
+        }
+    }
+
+    private LocalDateTime createDateTimeFromString(String date) throws AuguryException {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            return LocalDateTime.parse(date, formatter);
+        } catch (Exception e) {
+            throw new InvalidTaskCreationException("Please use the YYYY-MM-DD HHMM format to specify time!");
         }
     }
 
