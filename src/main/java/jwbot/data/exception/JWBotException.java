@@ -3,7 +3,7 @@ package jwbot.data.exception;
 /**
  * Class for chatbot exceptions
  *
- * @author  Yim Jaewon
+ * @author Yim Jaewon
  */
 public class JWBotException extends Exception {
 

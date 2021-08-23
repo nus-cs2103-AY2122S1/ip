@@ -1,11 +1,9 @@
 package jwbot.data.task;
 
-import jwbot.data.task.Task;
-
 /**
  * Class for todo task
  *
- * @author  Yim Jaewon
+ * @author Yim Jaewon
  */
 public class Todo extends Task {
 

@@ -1,7 +1,7 @@
 package jwbot.command;
 
-import jwbot.storage.Storage;
 import jwbot.data.TaskList;
+import jwbot.storage.Storage;
 import jwbot.ui.Ui;
 
 public class ListCommand extends Command {

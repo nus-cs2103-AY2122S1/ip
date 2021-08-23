@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Class for the deadline task
  *
- * @author  Yim Jaewon
+ * @author Yim Jaewon
  */
 public class Deadline extends Task {
 
@@ -19,7 +19,7 @@ public class Deadline extends Task {
      * The constructor of the deadline task.
      *
      * @param description the description of the deadline task.
-     * @param by the date or time of the deadline.
+     * @param by          the date or time of the deadline.
      */
     public Deadline(String description, String by) {
         super(description);

@@ -3,7 +3,7 @@ package jwbot.data.task;
 /**
  * Class to represent tasks
  *
- * @author  Yim Jaewon
+ * @author Yim Jaewon
  */
 public class Task {
 
@@ -19,6 +19,7 @@ public class Task {
 
     /**
      * Constructor of the task.
+     *
      * @param description the description of the task.
      */
     public Task(String description) {
@@ -28,6 +29,7 @@ public class Task {
 
     /**
      * Copied from the partial solution. Get the icon of the status.
+     *
      * @return X if done and a space if not done.
      */
     public String getStatusIcon() {

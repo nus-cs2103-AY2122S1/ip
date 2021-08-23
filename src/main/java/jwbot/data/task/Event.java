@@ -3,7 +3,7 @@ package jwbot.data.task;
 /**
  * Class for the event task
  *
- * @author  Yim Jaewon
+ * @author Yim Jaewon
  */
 public class Event extends Task {
 
@@ -16,7 +16,7 @@ public class Event extends Task {
      * The constructor of the event task
      *
      * @param description the description of the event
-     * @param by the date or time of the event
+     * @param by          the date or time of the event
      */
     public Event(String description, String by) {
         super(description);

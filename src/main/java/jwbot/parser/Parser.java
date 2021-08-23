@@ -1,7 +1,7 @@
 package jwbot.parser;
 
-import jwbot.data.exception.JWBotException;
 import jwbot.command.*;
+import jwbot.data.exception.JWBotException;
 
 public class Parser {
 

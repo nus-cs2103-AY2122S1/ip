@@ -1,8 +1,8 @@
 package jwbot.command;
 
+import jwbot.data.TaskList;
 import jwbot.data.exception.JWBotException;
 import jwbot.storage.Storage;
-import jwbot.data.TaskList;
 import jwbot.ui.Ui;
 
 public abstract class Command {

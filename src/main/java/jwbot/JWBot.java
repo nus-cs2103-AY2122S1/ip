@@ -10,14 +10,14 @@ import jwbot.ui.Ui;
 /**
  * Main class for the chat bot
  *
- * @author  Yim Jaewon
+ * @author Yim Jaewon
  */
 public class JWBot {
 
-    private final Storage storage;
+    private Storage storage;
     private TaskList tasks;
-    private final Ui ui;
-    private static final String txtPath = "jwbot.txt";
+    private Ui ui;
+    private static final String TXT_PATH = "jwbot.txt";
 
     public JWBot(String filePath) {
         ui = new Ui();
@@ -48,7 +48,7 @@ public class JWBot {
 
     public static void main(String[] args) {
 
-        new JWBot(txtPath).run();
+        new JWBot(TXT_PATH).run();
 
     }
 }

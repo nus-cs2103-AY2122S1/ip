@@ -50,7 +50,7 @@ public class Storage {
             FileReader filereader = new FileReader(file);
             BufferedReader bufReader = new BufferedReader(filereader);
             String line = "";
-            while((line = bufReader.readLine()) != null){
+            while ((line = bufReader.readLine()) != null) {
                 if (line.charAt(1) == 'T') {
                     Todo todo = new Todo(line.substring(7));
                     if (line.charAt(4) == 'X') {
@@ -76,7 +76,7 @@ public class Storage {
                 }
             }
             bufReader.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new JWBotException("There was a file error, bro!");
         }
         return items;

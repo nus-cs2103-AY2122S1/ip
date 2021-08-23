@@ -1,7 +1,7 @@
 package jwbot.ui;
 
-import jwbot.data.task.Task;
 import jwbot.data.TaskList;
+import jwbot.data.task.Task;
 
 import java.util.Scanner;
 
