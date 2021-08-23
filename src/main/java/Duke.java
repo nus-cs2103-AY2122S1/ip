@@ -1,18 +1,20 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ListIterator;
 import java.util.Scanner;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+
 public class Duke {
 
-//    private static String logo = " ____        _        \n"
-//            + "|  _ \\ _   _| | _____ \n"
-//            + "| | | | | | | |/ / _ \\\n"
-//            + "| |_| | |_| |   <  __/\n"
-//            + "|____/ \\__,_|_|\\_\\___|\n";
-
-
     /**
-     * Wraps a given message above and below with lines and prints it
+     * Wraps a given message above and below with lines and prints it.
      *
      * @param msg the message to wrap and print
      */
@@ -24,7 +26,7 @@ public class Duke {
     }
 
     /**
-     * Lists the elements of a given ArrayList of Tasks and enumerates them
+     * Lists the elements of a given ArrayList of Tasks and enumerates them.
      *
      * @param lst the given array of Tasks
      * @return a String that looks like an ordered list of Tasks
@@ -43,10 +45,125 @@ public class Duke {
         return res.toString();
     }
 
+    /**
+     * Reads the taskList.txt file and returns an ArrayList<Task> based on it.
+     * Returns an empty ArrayList if the file does not exist.
+     *
+     * @return An ArrayList containing the tasks in the text file
+     * @throws DukeException
+     */
+    private static ArrayList<Task> readTaskList() throws DukeException {
+        ArrayList<Task> result = new ArrayList<>();
+
+        // directory and file names
+        Path directory = Paths.get("data");
+        Path taskFile = directory.resolve("taskList.txt");
+
+        // check if directory and file exist
+        // if not return an empty ArrayList<Task>
+        if (Files.notExists(directory) || Files.notExists(taskFile)) {
+            return result;
+        }
+
+        // parse each line
+        try {
+            Files.lines(taskFile).forEach(line -> {
+                    Task newTask = parseInput(line);
+                    if (newTask != null) {
+                        result.add(newTask);
+                    }
+                }
+            );
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
+
+        return result;
+    }
+
+    /**
+     * Parses a given string and returns a Task based on that string.
+     *
+     * @param str the given string to parse
+     * @return The Task based on the string. Returns null if the string is invalid.
+     */
+    private static Task parseInput(String str) {
+        String[] strArr = str.split(" \\| ");
+        Task newTask;
+
+        // create new task according to input
+        switch (strArr[0]) {
+        case "T":
+            newTask = new ToDo(strArr[2]);
+            break;
+        case "D":
+            newTask = new Deadline(strArr[2], strArr[3]);
+            break;
+        case "E":
+            newTask = new Event(strArr[2], strArr[3]);
+            break;
+        default:
+            newTask = null;
+            break;
+        }
+
+        return newTask;
+    }
+
+    /**
+     * Saves the given ArrayList of Tasks into data/taskList.txt.
+     * Creates a new directory and file if they do not exist.
+     *
+     * @param lst the given ArrayList of Tasks
+     * @throws DukeException
+     */
+    private static void saveToFile(ArrayList<Task> lst) throws DukeException {
+        // directory and file names
+        Path directory = Paths.get("data");
+        Path taskFile = directory.resolve("taskList.txt");
+
+        // to create string that's to be saved in the file
+        StringBuilder res = new StringBuilder();
+        ListIterator<Task> iter = lst.listIterator();
+
+        try {
+            // check if directory exists, if it does not then create it
+            if (Files.notExists(directory)) {
+                Files.createDirectories(directory);
+            }
+
+            // check if file exists, if it does not then create it
+            if (Files.notExists(taskFile)) {
+                Files.createFile(taskFile);
+            }
+
+            // create string of tasks
+            while (iter.hasNext()) {
+                res.append(iter.next().printToFile());
+                if (iter.hasNext()) {
+                    res.append("\n");
+                }
+            }
+
+            // write string of tasks into file
+            Files.writeString(taskFile, res.toString());
+
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         // initialise scanner and String array
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<Task> prevList;
+        try {
+            taskList = readTaskList();
+        } catch (DukeException e) {
+            wrapPrint("error reading from taskList file!\nError: " + e.getMessage());
+        }
+        prevList = new ArrayList<>(taskList);
         String msg = "";
 
         // Greet
@@ -58,47 +175,67 @@ public class Duke {
             try {
                 if (input.equals("list")) {
                     msg = listTaskArr(taskList);
-                } else if (input.startsWith("done")) {
+                    if (msg.isBlank()) {
+                        msg = "No tasks in the list!";
+                    }
+                } else if (input.startsWith("done ")) {
                     // input validation
                     int num = Integer.parseInt(input.substring(5));
                     if (num < 1 || num > taskList.size()) throw new DukeException("you typed an invalid number: " + num);
 
                     taskList.get(num - 1).markDone();
+                    saveToFile(taskList);
                     msg = "Nice! I've marked this task as done:\n  " + taskList.get(num - 1);
-                } else if (input.startsWith("todo")) {
+                } else if (input.startsWith("todo ")) {
                     // input validation
                     if (input.length() < 5 || input.substring(5).isBlank()) throw new DukeException("the description of the todo cannot be empty!");
 
                     ToDo newTodo = new ToDo(input.substring(5));
                     taskList.add(newTodo);
+                    saveToFile(taskList);
                     msg = "Got it. I've added this task:\n  " + newTodo + "\nNow you have " + taskList.size();
                     msg = taskList.size() == 1 ? msg + " task in the list" : msg + " tasks in the list.";
-                } else if (input.startsWith("deadline")) {
+                } else if (input.startsWith("deadline ")) {
                     // input validation
                     if (input.length() < 9 || input.substring(9).isBlank()) throw new DukeException("the description of the deadline cannot be empty!");
                     if (!input.contains("/by")) throw new DukeException("you are missing the /by keyword");
 
                     Deadline newDeadline = new Deadline(input.substring(9));
                     taskList.add(newDeadline);
+                    saveToFile(taskList);
                     msg = "Got it. I've added this task:\n  " + newDeadline + "\nNow you have " + taskList.size();
                     msg = taskList.size() == 1 ? msg + " task in the list" : msg + " tasks in the list.";
-                } else if (input.startsWith("event")) {
+                } else if (input.startsWith("event ")) {
                     // input validation
                     if (input.length() < 6 || input.substring(6).isBlank()) throw new DukeException("the description of the event cannot be empty!");
                     if (!input.contains("/at")) throw new DukeException("you are missing the /at keyword");
 
                     Event newEvent = new Event(input.substring(6));
                     taskList.add(newEvent);
+                    saveToFile(taskList);
                     msg = "Got it. I've added this task:\n  " + newEvent + "\nNow you have " + taskList.size();
                     msg = taskList.size() == 1 ? msg + " task in the list" : msg + " tasks in the list.";
-                } else if (input.startsWith("remove")) {
+                } else if (input.startsWith("remove ")) {
                     // input validation
                     int num = Integer.parseInt(input.substring(7));
                     if (num < 1 || num > taskList.size()) throw new DukeException("you typed an invalid number: " + num);
 
                     Task removed = taskList.remove(num - 1);
+                    saveToFile(taskList);
                     msg = "Noted. I've removed this task:\n  " + removed + "\nNow you have " + taskList.size();
                     msg = taskList.size() == 1 ? msg + " task in the list" : msg + " tasks in the list.";
+                } else if (input.equals("clear")) {
+                    // clears taskList and saves the previous one to prevList
+                    prevList = new ArrayList<>(taskList);
+                    taskList = new ArrayList<>();
+
+                    saveToFile(taskList);
+                    msg = "All entries in the list of tasks have been removed. To undo, type restore";
+                } else if (input.equals("restore")) {
+                    taskList = new ArrayList<>(prevList);
+
+                    saveToFile(taskList);
+                    msg = "This task list was restored:\n" + listTaskArr(taskList);
                 } else {
                     throw new DukeException("you typed in something i don't recognise");
                 }

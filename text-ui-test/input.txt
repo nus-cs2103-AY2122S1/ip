@@ -1,3 +1,4 @@
+clear
 todo a
 todo b
 deadline c /by today
@@ -17,4 +18,5 @@ remove 3
 list
 remove 6
 remove aaa
+restore
 bye

@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
 
     String name;
     boolean isDone;
@@ -33,4 +33,5 @@ public class Task {
         this.isDone = true;
     }
 
+    abstract public String printToFile();
 }
