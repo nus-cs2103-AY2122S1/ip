@@ -37,9 +37,9 @@ public class TaskList {
 
         if (command.equals(Command.TODO)) {
             task = new Todo(parameter);
-        } else if (command.equals(Command.TODO)){
+        } else if (command.equals(Command.DEADLINE)){
             task = new Deadline(parameter, parsedDate);
-        } else if (command.equals(Command.TODO)){
+        } else if (command.equals(Command.EVENT)){
             task = new Event(parameter, parsedDate);
         } else {
             throw new DukeException("Invalid command");

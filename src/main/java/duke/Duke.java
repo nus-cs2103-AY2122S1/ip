@@ -41,6 +41,7 @@ public class Duke {
 
         do {
             try {
+                System.out.println(currentCommand);
                 StringBuilder sb = new StringBuilder();
                 String[] descriptionAndTime;
                 switch (currentCommand) {
@@ -64,7 +65,9 @@ public class Duke {
                         } else if (!currentParameter.contains(" /at ")) {
                             throw new DukeException("Missing /at command");
                         }
+                        System.out.println(currentParameter);
                         descriptionAndTime = Parser.dateParameterParser(Command.EVENT, currentParameter);
+                        System.out.println(descriptionAndTime);
                         taskList.addTask(Command.EVENT, descriptionAndTime[0], descriptionAndTime[1]);
                         Storage.updateLocalFile(taskList);
                         break;
