@@ -10,12 +10,18 @@ public class Deadline extends Task{
     protected LocalDate date;
     protected String time;
 
+    /**
+     * A public constructor to initialize a Deadline object.
+     */
     public Deadline(String description, LocalDate date, String time) {
         super(description);
         this.date = date;
         this.time = time;
     }
 
+    /**
+     * Returns the string representation of the Deadline object.
+     */
     @Override
     public String toString() {
         return "D" + super.toString() + " | " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + time;

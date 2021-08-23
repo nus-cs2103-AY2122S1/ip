@@ -4,10 +4,16 @@
  */
 public class Todo extends Task{
 
+    /**
+     * A public constructor to initialize a Todo object.
+     */
     public Todo(String description) {
         super(description);
     }
 
+    /**
+     * Returns the string representation of the Todo object.
+     */
     @Override
     public String toString() {
         return "T" + super.toString();

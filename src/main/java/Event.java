@@ -6,11 +6,17 @@
 public class Event extends Task{
     protected String at;
 
+    /**
+     * A public constructor to initialize an Event object.
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Returns the string representation of the Event object.
+     */
     @Override
     public String toString() {
         return "E" + super.toString() + " | " + at;

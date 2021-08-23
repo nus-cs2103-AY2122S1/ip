@@ -1,12 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -14,9 +6,11 @@ import java.util.Scanner;
  * according to user input.
  */
 public class Meow {
+    private Storage storage;
+    private TaskList tasks;
+    private Parser parser;
+    private Ui ui;
     private boolean isExit = false;
-    private List<Task> tasksList = new ArrayList<>();
-
     enum Command {
         BYE,
         LIST,
@@ -30,363 +24,65 @@ public class Meow {
     /**
      * A public constructor to initialize a Meow object.
      */
-    public Meow() {
-
-    }
-
-    /**
-     * Prints the greeting message from the chat bot cat Meow.
-     *
-     * @return A boolean indicating whether the user wants to exit to
-     * chat bot or nor.
-     */
-    public boolean getIsExit() {
-        return this.isExit;
-    }
-
-    /**
-     * Prints the greeting message from the chat bot cat Meow.
-     */
-    public void greet() {
-
-        System.out.println(
-                "------------------------------------------------------------------------------\n" +
-                        "Meow: Hi human, I'm your cat Meow~ What can I do for you?\n" +
-                        "------------------------------------------------------------------------------"
-        );
-    }
-
-
-    /**
-     * Prints the goodbye message from the chat bot cat Meow.
-     */
-    private void exit() {
-
-        System.out.println(
-                "------------------------------------------------------------------------------\n" +
-                        "Meow: Bye human, see you soon! Your cat Meow is going to sleep now~\n" +
-                        "------------------------------------------------------------------------------"
-        );
-    }
-
-
-    private void displayList() throws NoItemInTheListException {
-        int len = tasksList.size();
-        if (len > 0) {
-            System.out.println("------------------------------------------------------------------------------");
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < len; i++) {
-                Task task = tasksList.get(i);
-                System.out.println(i + 1 + ". " + task.toString());
-            }
-            System.out.println("------------------------------------------------------------------------------");
+    public Meow(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        this.parser = new Parser();
+        if (this.storage.canReadFromFile()) {
+            // Read the file and convert the content to the taskList array
+            this.tasks = new TaskList(this.storage.getStorageTasksList());
         } else {
-            throw new NoItemInTheListException();
+            this.tasks = new TaskList();
         }
     }
 
-    private void writeToFile(String filePath, String textToAdd) {
+    private void processCommand(String input) throws MeowException {
         try {
-            FileWriter fw = new FileWriter(filePath);
-            fw.write(textToAdd);
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    private void createFile(String filePath) {
-        try {
-            File file = new File(filePath);
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void createFolder(String filePath) {
-        File file = new File(filePath);
-        file.mkdir();
-    }
-
-    /**
-     * Reads the local file and converts it the array, if the folder or file
-     * does not exists, create an empty one.
-     */
-    public void convertFileToArray() {
-        File folder = new File("data");
-        if (folder.isDirectory()) {
-            try {
-                addFileContentToArray("data/meow.txt");
-            } catch (FileNotFoundException | InvalidDateTimeException e) {
-                // Create a file
-                createFile("data/meow.txt");
-            }
-        } else {
-            // Create a folder
-            createFolder("data");
-        }
-    }
-
-    private void addFileContentToArray(String filePath) throws FileNotFoundException, InvalidDateTimeException {
-        File file = new File(filePath);
-        Scanner s = new Scanner(file);
-        while (s.hasNext()) {
-            String task = s.nextLine();
-            addTaskToArray(task);
-        }
-    }
-
-    private void addTaskToArray(String input) throws InvalidDateTimeException {
-        String[] values = input.split(" \\| ");
-        String typeOfTask = values[0].trim();
-        String completeStatus = values[1].trim();
-        String task = values[2].trim();
-        switch (typeOfTask) {
-        case "T": {
-            Todo newTodo = new Todo(task);
-            if (completeStatus.equals("1")) {
-                newTodo.markAsDone();
-            }
-            tasksList.add(newTodo);
-            break;
-        }
-        case "D": {
-            String dateAndTime = values[3].trim();
-            String[] dateTimeArray = dateAndTime.split(" ");
-            String date = "";
-            for (int i = 0; i < dateTimeArray.length - 1; i++) {
-                if (i == 1 && Integer.parseInt(dateTimeArray[i]) < 10) {
-                    date = date + "0" + dateTimeArray[i] + " ";
-                } else if (i == 2) {
-                    date = date + dateTimeArray[i];
-                } else {
-                    date = date + dateTimeArray[i] + " ";
-                }
-            }
-            LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM d yyyy"));
-            Deadline newDeadline = new Deadline(task, localDate, dateTimeArray[3]);
-            if (completeStatus.equals("1")) {
-                newDeadline.markAsDone();
-            }
-            tasksList.add(newDeadline);
-
-            break;
-        }
-        case "E": {
-            String date = values[3].trim();
-            Event newEvent = new Event(task, date);
-            if (completeStatus.equals("1")) {
-                newEvent.markAsDone();
-            }
-            tasksList.add(newEvent);
-            break;
-        }
-        default: {
-            break;
-        }
-        }
-    }
-
-    /**
-     * Checks whether the task is able to be marked as done, 0 indicating that
-     * this is an invalid task, Integer.MAX_VALUE indicating that this task is
-     * not in the task list, any number other than 0 or Integer.MAX_VALUE indicating
-     * the task number to be marked as done.
-     *
-     * @param index The task number that the user wants to mark as done.
-     * @return An integer indicating which task to be marked as done.
-     */
-    private void completeTask(String index) throws MeowException {
-        try {
-            int taskNumber = Integer.parseInt(index);
-            if (taskNumber <= tasksList.size() && taskNumber > 0) {
-                Task completedTask = tasksList.get(taskNumber - 1);
-                completedTask.markAsDone();
-                addArrayTaskToFile();
-                System.out.println("------------------------------------------------------------------------------");
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(completedTask.toString());
-                System.out.println("------------------------------------------------------------------------------");
-            } else {
-                throw new InvalidTaskIndex();
-            }
-        } catch (NumberFormatException e) {
-            // String cannot be parsed to integer
-            throw new NotSuchTaskFoundException();
-        }
-    }
-
-    private void printTaskList(Task taskAdded) {
-        int taskListLength = tasksList.size();
-        String task = taskListLength <= 1 ? " task " : " tasks ";
-        System.out.println("------------------------------------------------------------------------------");
-        System.out.println("Got it. I've added this task:");
-        System.out.println(taskAdded.toString());
-        System.out.println("Now you have " + taskListLength + task + "in the list.");
-        System.out.println("------------------------------------------------------------------------------");
-    }
-
-    private void addArrayTaskToFile() {
-        String addedContent = "";
-        for (int i = 0; i < tasksList.size(); i++) {
-            addedContent = addedContent + tasksList.get(i).toString() + System.lineSeparator();
-        }
-        writeToFile("data/meow.txt", addedContent);
-    }
-
-    private void addTodo(String todo) {
-        Todo newTodo = new Todo(todo);
-        tasksList.add(newTodo);
-        addArrayTaskToFile();
-        printTaskList(newTodo);
-    }
-
-    private void addDeadline(String deadline, LocalDate date, String time) {
-        Deadline newDeadline = new Deadline(deadline, date, time);
-        tasksList.add(newDeadline);
-        addArrayTaskToFile();
-        printTaskList(newDeadline);
-    }
-
-    private void addEvent(String event, String at) {
-        Event newEvent = new Event(event, at);
-        tasksList.add(newEvent);
-        addArrayTaskToFile();
-        printTaskList(newEvent);
-    }
-
-    private String getTask(String input, Command typeOfTask) throws MeowException {
-        try {
-            return input.trim().substring(typeOfTask.toString().length() + 1);
-        } catch (StringIndexOutOfBoundsException exception) {
-            if (typeOfTask.equals(Command.TODO)) {
-                throw new EmptyTodoDescriptionException();
-            } else if (typeOfTask.equals(Command.DEADLINE)) {
-                throw new EmptyDeadlineDescriptionException();
-            } else {
-                throw new EmptyEventDescriptionException();
-            }
-
-        }
-
-    }
-
-    private String[] getTaskAndDate(String task, Command typeOfTask) {
-        String[] split;
-        if (typeOfTask.equals(Command.DEADLINE)) {
-            split = task.split(" /by ");
-        } else {
-            split = task.split(" /at ");
-        }
-        return split;
-    }
-
-    private LocalDate convertToLocalDate(String inputDate) throws InvalidDateTimeException {
-        try {
-            String modifiedDate = "";
-            String[] values = inputDate.split("/");
-            for (int i = values.length - 1; i >= 0; i--) {
-                String addedValue;
-                if (Integer.parseInt(values[i]) < 10) {
-                    addedValue = "0" + values[i];
-                } else {
-                    addedValue = values[i];
-                }
-
-                if (i == 0) {
-                    modifiedDate = modifiedDate + addedValue;
-                } else {
-                    modifiedDate = modifiedDate + addedValue + "-";
-                }
-            }
-            LocalDate date = LocalDate.parse(modifiedDate);
-            return date;
-        } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException();
-        }
-    }
-
-    private boolean isLocalDateTime(String inputDate, String inputTime) {
-        System.out.println("input date: " + inputDate);
-        String validator = "[0-9]{1,2}(/|-)[0-9]{1,2}(/|-)[0-9]{4}";
-        boolean dateValidated = inputDate.matches(validator);
-        int time = Integer.parseInt(inputTime);
-        boolean timeValidated = time >= 0 && time <= 2359;
-        return dateValidated && timeValidated;
-    }
-
-    private void deleteTask(String index) throws MeowException {
-        try {
-            int taskNumber = Integer.parseInt(index);
-            if (taskNumber <= tasksList.size() && taskNumber > 0) {
-                Task removedTask = tasksList.remove(taskNumber - 1);
-                addArrayTaskToFile();
-                int taskListLength = tasksList.size();
-                String task = taskListLength <= 1 ? " task " : " tasks ";
-                System.out.println("------------------------------------------------------------------------------");
-                System.out.println("Noted. I've removed this task:");
-                System.out.println(removedTask.toString());
-                System.out.println("Now you have " + taskListLength + task + "in the list.");
-                System.out.println("------------------------------------------------------------------------------");
-            } else {
-                throw new InvalidTaskIndex();
-            }
-        } catch (NumberFormatException e) {
-            // String cannot be parsed to integer
-            throw new NotSuchTaskFoundException();
-        }
-    }
-
-    /**
-     * Performs different tasks according to
-     * the command that the user has entered.
-     *
-     * @param input The input command from the user.
-     * @throws MeowException If the user input is invalid.
-     */
-    public void checkCommand(String input) throws MeowException {
-        try {
-            String[] commandWord = input.split(" ");
-            Command userCommand = Command.valueOf(commandWord[0].trim().toUpperCase());
+            Command userCommand = this.parser.checkCommand(input);
             switch (userCommand) {
             case BYE: {
-                exit();
+                this.ui.exit();
                 isExit = true;
                 break;
             }
             case LIST: {
-                displayList();
+                this.ui.displayList(this.tasks.getTasksList());
                 break;
             }
             case DONE: {
-                completeTask(commandWord[1].trim());
+                this.tasks.completeTask(this.parser.getTaskNumber(input));
+                this.storage.addArrayTaskToFile(this.tasks.getTasksList());
                 break;
             }
             case TODO: {
-                String task = getTask(input, userCommand);
-                addTodo(task);
+                String task = this.parser.getTask(input, userCommand);
+                Todo newTodo = this.tasks.addTodo(task);
+                this.storage.addArrayTaskToFile(this.tasks.getTasksList());
+                this.ui.printTaskList(this.tasks.getTasksList(), newTodo);
                 break;
             }
             case EVENT: {
-                String task = getTask(input, userCommand);
-                String[] taskAndDate = getTaskAndDate(task, userCommand);
+                String task = this.parser.getTask(input, userCommand);
+                String[] taskAndDate = this.parser.getTaskAndDate(task, userCommand);
                 try {
-                    addEvent(taskAndDate[0], taskAndDate[1]);
+                    Event newEvent = this.tasks.addEvent(taskAndDate[0], taskAndDate[1]);
+                    this.storage.addArrayTaskToFile(this.tasks.getTasksList());
+                    this.ui.printTaskList(this.tasks.getTasksList(), newEvent);
                     break;
                 } catch (ArrayIndexOutOfBoundsException exception) {
                     throw new EmptyEventTimeException();
                 }
             }
             case DEADLINE: {
-                String task = getTask(input, userCommand);
-                String[] taskAndDate = getTaskAndDate(task, userCommand);
+                String task = this.parser.getTask(input, userCommand);
+                String[] taskAndDate = this.parser.getTaskAndDate(task, userCommand);
                 try {
                     String[] dateAndTime = taskAndDate[1].split(" ");
-                    if (isLocalDateTime(dateAndTime[0], dateAndTime[1])) {
-                        LocalDate date = convertToLocalDate(dateAndTime[0]);
-                        addDeadline(taskAndDate[0], date, dateAndTime[1]);
+                    if (this.parser.isLocalDateTime(dateAndTime[0], dateAndTime[1])) {
+                        LocalDate date = this.parser.convertToLocalDate(dateAndTime[0]);
+                        Deadline newDeadline = this.tasks.addDeadline(taskAndDate[0], date, dateAndTime[1]);
+                        this.storage.addArrayTaskToFile(this.tasks.getTasksList());
+                        this.ui.printTaskList(this.tasks.getTasksList(), newDeadline);
                     } else {
                         throw new InvalidDateTimeException();
                     }
@@ -397,7 +93,8 @@ public class Meow {
 
             }
             case DELETE: {
-                deleteTask(commandWord[1].trim());
+                this.tasks.deleteTask(this.parser.getTaskNumber(input));
+                this.storage.addArrayTaskToFile(this.tasks.getTasksList());
                 break;
             }
             default: {
@@ -410,5 +107,24 @@ public class Meow {
 
     }
 
+    /**
+     * Runs the Meow chat bot.
+     */
+    public void run() {
+        // Greeting from chat bot.
+        this.ui.greet();
+        // Create a scanner to read from standard input.
+        Scanner scanner = new Scanner(System.in);
+        while (!this.isExit) {
+            try {
+                String input = scanner.nextLine();
+                processCommand(input);
+            } catch (MeowException exception) {
+                System.out.println(exception.toString());
+            }
+        }
+        // Clean up the scanner.
+        scanner.close();
+    }
 
 }
