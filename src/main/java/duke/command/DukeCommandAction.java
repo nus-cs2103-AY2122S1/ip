@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.exception.InvalidCommandException;
+import duke.Storage;
+import duke.task.TaskList;
+import duke.Ui;
+
 import java.util.Map;
 
 @FunctionalInterface
@@ -6,7 +13,7 @@ interface DukeCommandAction {
      * Processes the given command (a line). Returns true if more commands are to be listened to.
      *
      * @param taskList  The list of tasks.
-     * @param ui        The Duke object which the command uses to execute its commands.
+     * @param ui        The {@link duke.Duke} object which the command uses to execute its commands.
      * @param storage   The storage object representing the file in which the tasks are stored.
      * @param arg       The positional argument to the command.
      * @param namedArgs The named arguments to the command.

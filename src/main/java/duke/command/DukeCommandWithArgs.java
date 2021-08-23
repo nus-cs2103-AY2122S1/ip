@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.exception.InvalidCommandException;
+import duke.Storage;
+import duke.task.TaskList;
+import duke.Ui;
+
 import java.util.Map;
 
 public class DukeCommandWithArgs {

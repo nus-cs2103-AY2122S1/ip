@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.exception.InvalidCommandException;
+
 public class DukeCommandArgument {
     static final DukeCommandArgument NONE = new DukeCommandArgument("Positional argument", "", DukeCommandArgumentType.NOT_ALLOWED);
 

@@ -1,3 +1,8 @@
+package duke;
+
+import duke.command.DukeCommand;
+import duke.exception.InvalidCommandException;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Map;

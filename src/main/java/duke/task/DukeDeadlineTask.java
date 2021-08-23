@@ -1,7 +1,9 @@
+package duke.task;
+
 public class DukeDeadlineTask extends DukeTask {
     final DukeDate deadline;
 
-     DukeDeadlineTask(String name, String deadline) {
+     public DukeDeadlineTask(String name, String deadline) {
         super(name);
         this.deadline = DukeDate.of(deadline);
     }
@@ -18,6 +20,6 @@ public class DukeDeadlineTask extends DukeTask {
 
     @Override
     public String toSerializedString() {
-        return String.format("%s/%d/by/%s", name, isDone ? 1 : 0, deadline);
+        return String.format("%s/%d/by/%s", name, done ? 1 : 0, deadline);
     }
 }

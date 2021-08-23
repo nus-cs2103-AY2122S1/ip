@@ -1,5 +1,7 @@
-class DukeSimpleTask extends DukeTask {
-    DukeSimpleTask(String name) {
+package duke.task;
+
+public class DukeSimpleTask extends DukeTask {
+    public DukeSimpleTask(String name) {
         super(name);
     }
 
@@ -9,6 +11,6 @@ class DukeSimpleTask extends DukeTask {
 
     @Override
     public String toSerializedString() {
-        return String.format("%s/%d/simple", name, isDone ? 1 : 0);
+        return String.format("%s/%d/simple", name, done ? 1 : 0);
     }
 }

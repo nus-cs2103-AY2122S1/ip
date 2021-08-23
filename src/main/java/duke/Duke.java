@@ -1,3 +1,10 @@
+package duke;
+
+import duke.command.DukeCommandWithArgs;
+import duke.exception.DukeStorageException;
+import duke.exception.InvalidCommandException;
+import duke.task.TaskList;
+
 public class Duke {
     private static final String SAVE_FILE_LOCATION = "duke-task-list.txt";
     private final Ui ui;

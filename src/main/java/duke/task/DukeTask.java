@@ -1,6 +1,10 @@
+package duke.task;
+
+import duke.exception.TaskParseException;
+
 public abstract class DukeTask {
-    final String name;
-    boolean isDone;
+    public final String name;
+    public boolean done;
 
     public DukeTask(String name) {
         this(name, false);
@@ -8,16 +12,20 @@ public abstract class DukeTask {
 
     DukeTask(String name, boolean isDone) {
         this.name = name;
-        this.isDone = isDone;
+        this.done = isDone;
+    }
+
+    public boolean isDone() {
+        return done;
     }
 
     public void markAsDone() {
-        isDone = true;
+        done = true;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", isDone ? "X" : " ", name);
+        return String.format("[%s] %s", done ? "X" : " ", name);
     }
 
     public abstract String toSerializedString();

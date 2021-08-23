@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.*;
+import duke.exception.InvalidCommandException;
+import duke.task.*;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -87,7 +93,7 @@ public enum DukeCommand implements DukeCommandAction {
             new DukeCommandConfig(new DukeCommandArgument("index", "The position of the task in the list", DukeCommandArgumentType.REQUIRED), Map.of()),
             (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
                 DukeTask task = taskList.getTaskAt(parseTaskIndex(taskList, arg));
-                if (task.isDone) {
+                if (task.isDone()) {
                     ui.outputLine("The following task is already marked as done! Good job!");
                 } else {
                     task.markAsDone();

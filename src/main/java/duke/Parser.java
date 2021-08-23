@@ -1,3 +1,8 @@
+package duke;
+
+import duke.command.DukeCommand;
+import duke.command.DukeCommandWithArgs;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;

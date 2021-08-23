@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -35,5 +37,5 @@ public class TaskList {
 
     public int size() {
         return list.size();
-    };
+    }
 }
