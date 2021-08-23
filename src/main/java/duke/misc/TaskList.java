@@ -18,12 +18,12 @@ public class TaskList {
 
     // creates a string of list of task
     public String displayList() {
-        StringBuilder str = new StringBuilder("");
+        StringBuilder sb = new StringBuilder("");
         int idx = 0;
         for (Task task : tasks) {
-            str.append(String.format("%d.%s\n", ++idx, task.toString()));
+            sb.append(String.format("%d.%s\n", ++idx, task.toString()));
         }
-        return str.toString();
+        return sb.toString();
     }
 
     // adds task to list
@@ -58,5 +58,22 @@ public class TaskList {
         } catch (IOException e) {
             throw e;
         }
+    }
+
+    /**
+     * Finds all tasks with specified keyword.
+     *
+     * @param key keyword to search.
+     * @return String of all tasks found appended in rows.
+     */
+    public String find(String key) {
+        StringBuilder sb = new StringBuilder();
+        int idx = 0;
+        for (Task task: tasks) {
+            if (task.getDescription().contains(key)) {
+                sb.append(String.format("%d.%s\n", ++idx, task.toString()));
+            }
+        }
+        return sb.toString();
     }
 }
