@@ -1,3 +1,11 @@
+package duke.tasklist;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -42,8 +50,8 @@ public class TaskList {
     }
 
     /**
-     * Adds a Todo task.
-     * @param description Description of the Todo.
+     * Adds a duke.task.Todo task.
+     * @param description Description of the duke.task.Todo.
      */
     public void addTodo(String description) {
         tasks.add(new Todo(description));
@@ -51,7 +59,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a Deadline task.
+     * Adds a duke.task.Deadline task.
      * @param fullDescription String that contains the description and deadline of the task.
      */
     public void addDeadline(String fullDescription) throws DukeException {
@@ -74,7 +82,7 @@ public class TaskList {
     }
 
     /**
-     * Adds an Event task.
+     * Adds an duke.task.Event task.
      * @param fullDescription String that contains the description and time of the task.
      */
     public void addEvent(String fullDescription) throws DukeException {

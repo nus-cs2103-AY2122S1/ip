@@ -1,3 +1,5 @@
+package duke.parser;
+
 import java.time.DateTimeException;
 
 public class Parser {

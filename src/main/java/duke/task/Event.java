@@ -1,11 +1,13 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 /**
- * A task that the user wants to complete by a certain point in time.
- */
-public class Deadline extends Task{
+ * A task that is scheduled for a specific time.
+ */public class Event extends Task{
     protected boolean timeBool;
     protected LocalDateTime dateTime;
     protected LocalDate date;
@@ -14,7 +16,7 @@ public class Deadline extends Task{
     protected DateTimeFormatter formatOutputTime = DateTimeFormatter.ofPattern("MMM d yyyy hh:m a");
     protected DateTimeFormatter formatOutputNoTime = DateTimeFormatter.ofPattern("MMM d yyyy");
 
-    public Deadline(String description, String dateString, DateTimeFormatter formatInput, boolean timeBool) {
+    public Event(String description, String dateString, DateTimeFormatter formatInput, boolean timeBool) {
         super(description);
         this.formatInput = formatInput;
         this.timeBool = timeBool;
@@ -26,16 +28,16 @@ public class Deadline extends Task{
     }
 
     /**
-     * Provides a String representation of the Deadline.
-     * @return A String representation of the Deadline.
+     * Provides a String representation of the duke.task.Deadline.
+     * @return A String representation of the duke.task.Deadline.
      */
     @Override
     public String toString() {
         if (timeBool) {
-            return "[D][" + this.getStatusIcon() + "] " + this.description + " (by: " +
+            return "[E][" + this.getStatusIcon() + "] " + this.description + " (at: " +
                     formatOutputTime.format(this.dateTime) + ")";
         } else {
-            return "[D][" + this.getStatusIcon() + "] " + this.description + " (by: " +
+            return "[E][" + this.getStatusIcon() + "] " + this.description + " (at: " +
                     formatOutputNoTime.format(this.date) + ")";
         }
     }

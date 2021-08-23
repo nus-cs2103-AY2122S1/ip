@@ -1,5 +1,7 @@
+package duke.task;
+
 /**
- * This class represents a Task object, which has a description for the current task and also a boolean value which
+ * This class represents a duke.task.Task object, which has a description for the current task and also a boolean value which
  * indicates if the task is done or not.
  */
 public abstract class Task {
@@ -7,7 +9,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for the Task class.
+     * Constructor for the duke.task.Task class.
      * @param description Description of the task.
      */
     public Task(String description) {
@@ -24,13 +26,13 @@ public abstract class Task {
     }
 
     /**
-     * Provides a String representation for each Task object.
-     * @return A String that describes the current Task object.
+     * Provides a String representation for each duke.task.Task object.
+     * @return A String that describes the current duke.task.Task object.
      */
     public abstract String toString();
 
     /**
-     * Sets whether the current Task is done or not.
+     * Sets whether the current duke.task.Task is done or not.
      * @param value Boolean value to set isDone to.
      */
     public void setIsDone(boolean value) {
