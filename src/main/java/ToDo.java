@@ -5,11 +5,6 @@
  * @author Dickson
  */
 public class ToDo extends Task {
-    /**
-     * Constructor for Todo object.
-     *
-     * @param description
-     */
     public ToDo(String description) {
         super(description);
     }

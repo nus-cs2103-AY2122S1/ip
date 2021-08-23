@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Encapsulates a deadline object.
  * Deadline objects are task objects that needs to be done by a specific date/time.
@@ -5,13 +8,11 @@
  * @author Dickson
  */
 public class Deadline extends Task {
-    /**
-     * Constructor for Deadline object.
-     *
-     * @param description
-     */
-    public Deadline(String description) {
+    private final LocalDateTime dateTime;
+
+    public Deadline(String description, LocalDateTime dateTime) {
         super(description);
+        this.dateTime = dateTime;
     }
 
     /**
@@ -21,6 +22,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy h:mma");
+        return "[D]" + super.toString() + " (by: " +
+                dateTime.format(dateTimeFormatter) + ")";
     }
 }
