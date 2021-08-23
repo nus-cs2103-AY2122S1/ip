@@ -1,9 +1,23 @@
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+
+import static java.lang.Integer.parseInt;
 
 public class Yoyo {
     private static ArrayList<Task> tasks = new ArrayList<>();
+
+
+    /**
+     * Exception class for command with invalid format .
+     */
+    private static class YoyoInvalidFormatException extends IOException {
+        YoyoInvalidFormatException(String message) {
+            super(message);
+        }
+    }
 
     /**
      * Exception class for incomplete command .
@@ -69,7 +83,7 @@ public class Yoyo {
                 } else if (command.equals("done")) {
                     checkCompleteCommand(inputTokens);
                     try {
-                        int taskIndex = Integer.parseInt(inputTokens[1]) - 1;
+                        int taskIndex = parseInt(inputTokens[1]) - 1;
                         tasks.get(taskIndex).toggleDone();
                         outputWrapper();
                         System.out.println("Nice! I've marked this task as done:\n"
@@ -83,7 +97,7 @@ public class Yoyo {
                 } else if (command.equals("delete")) {
                     checkCompleteCommand(inputTokens);
                     try {
-                        int taskIndex = Integer.parseInt(inputTokens[1]) - 1;
+                        int taskIndex = parseInt(inputTokens[1]) - 1;
                         Task toRemove = tasks.get(taskIndex);
                         tasks.remove(taskIndex);
                         outputWrapper();
@@ -113,7 +127,8 @@ public class Yoyo {
                             throw new YoyoIncompleteCommandException("You have not entered enough information for"
                                     + " your command.");
                         } else {
-                            Task newTask = new Event(taskInfo[0], taskInfo[1]);
+                            LocalDateTime datetime = parseTimeString(taskInfo[1]);
+                            Task newTask = new Event(taskInfo[0], datetime);
                             tasks.add(newTask);
                             printAddMessage(newTask);
                         }
@@ -124,7 +139,8 @@ public class Yoyo {
                             throw new YoyoIncompleteCommandException("You have not entered enough information for"
                                     + " your command.");
                         } else {
-                            Task newTask = new Deadline(taskInfo[0], taskInfo[1]);
+                            LocalDateTime datetime = parseTimeString(taskInfo[1]);
+                            Task newTask = new Deadline(taskInfo[0], datetime);
                             tasks.add(newTask);
                             printAddMessage(newTask);
                         }
@@ -133,12 +149,46 @@ public class Yoyo {
                     }
                 }
             } catch (YoyoCommandNotFoundException | YoyoIncompleteCommandException
-                        | YoyoEmptyCommandException e) {
+                        | YoyoEmptyCommandException | YoyoInvalidFormatException e) {
                 outputWrapper();
                 System.out.println(e.getMessage());
                 outputWrapper();
             }
         }
+    }
+
+    private static LocalDateTime parseTimeString(String ts)
+            throws YoyoIncompleteCommandException, YoyoInvalidFormatException {
+        char separator;
+        if (ts.indexOf('/') != -1) {
+            separator = '/';
+        } else if (ts.indexOf('-') != -1) {
+            separator = '-';
+        } else {
+            throw new YoyoInvalidFormatException("Invalid datetime format, "
+                    + "use 'yyyy/MM/dd hhmm'");
+        }
+
+        String[] dateTimeArr = ts.split(" ");
+        checkCompleteCommand(dateTimeArr);
+        String[] dateArr = dateTimeArr[0].split(String.valueOf(separator));
+        if (dateArr.length != 3 || dateTimeArr[1].length() < 3) {
+            throw new YoyoInvalidFormatException("Invalid datetime format, "
+                    + "use 'yyyy/MM/dd hhmm'");
+        }
+        int year = parseInt(dateArr[0]);
+        int month = parseInt(dateArr[1]);
+        int day = parseInt(dateArr[2]);
+        int hour = parseInt(dateTimeArr[1].substring(0, 2));
+        int min = parseInt(dateTimeArr[1].substring(2));
+        LocalDateTime result;
+        try {
+            result = LocalDateTime.of(year, month, day, hour, min);
+        } catch (DateTimeException e) {
+            throw new YoyoInvalidFormatException("Invalid datetime format, "
+                    + "use 'yyyy/MM/dd hhmm'");
+        }
+        return result;
     }
 
     /**
