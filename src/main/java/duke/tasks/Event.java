@@ -32,7 +32,7 @@ public class Event extends Task {
             return false;
         }
         Event e = (Event) o;
-        return taskName.equals(e.taskName) && done == e.done &&
+        return taskName.equals(e.taskName) && isDone == e.isDone &&
                 time.equals(e.time);
     }
 }

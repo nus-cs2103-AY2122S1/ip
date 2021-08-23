@@ -32,7 +32,7 @@ public class Deadline extends Task {
             return false;
         }
         Deadline d = (Deadline) o;
-        return taskName.equals(d.taskName) && done == d.done &&
+        return taskName.equals(d.taskName) && isDone == d.isDone &&
                 deadline.equals(d.deadline);
     }
 }
