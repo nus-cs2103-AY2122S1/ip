@@ -31,8 +31,8 @@ public class List extends ArrayList<Task> {
     }
 
     public void showList() {
-        for (int i = 0; i < todos.size(); i++) {
-            System.out.println(i + 1 + ". " + todos.get(i).toString());
+        for (int i = 0; i < List.todos.size(); i++) {
+            System.out.println(i + 1 + ". " + List.todos.get(i).toString());
         }
     }
 

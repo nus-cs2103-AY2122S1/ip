@@ -4,6 +4,7 @@ import duke.*;
 
 import java.io.IOException;
 import java.time.DateTimeException;
+import java.util.ArrayList;
 
 import static java.lang.Integer.parseInt;
 
@@ -14,6 +15,8 @@ public class Parser {
             done(split);
         } else if (split[0].equals("delete")) {
             delete(split);
+        } else if (split[0].equals("find")) {
+            search(split[1]);
         } else if (split[0].equals("todo")) {
             if (split.length == 1) {
                 throw new DukeTodoException();
@@ -78,5 +81,16 @@ public class Parser {
                 + " in the list"); // will take care of when it is 1
     }
 
-
+    public static void search(String input) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (int i = 0; i < List.todos.size(); i++) {
+            if (List.todos.get(i).getName().contains(input)) {
+                result.add(List.todos.get(i));
+            }
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < result.size(); i++) {
+            System.out.println(i + 1 + ". " + result.get(i).toString());
+        }
+    }
 }
