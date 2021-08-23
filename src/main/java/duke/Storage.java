@@ -31,7 +31,7 @@ public class Storage {
         try {
             ListIterator<Item> iterator = itemList.listIterator();
             if (!iterator.hasNext()) {
-                return;
+                s.append("");
             } else {
                 while (iterator.hasNext()) {
                     Item currItem = iterator.next();
