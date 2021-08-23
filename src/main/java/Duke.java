@@ -1,9 +1,12 @@
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
 
 /**
  * Duke is a simple bot that allows users to keep track of different types of tasks.
@@ -29,8 +32,8 @@ public class Duke {
         System.out.println(ROBOT_TEXT_SPACE + "done i: mark task number i as complete and view the task.");
         System.out.println(ROBOT_TEXT_SPACE + "delete i: delete the task at the given index i.");
         System.out.println(ROBOT_TEXT_SPACE + "todo *description*: add todo task.");
-        System.out.println(ROBOT_TEXT_SPACE + "event *description* /at *date*: add event task.");
-        System.out.println(ROBOT_TEXT_SPACE + "deadline *description* /by *timing*: add deadline task.");
+        System.out.println(ROBOT_TEXT_SPACE + "event *description* /at *date in dd/MM/YYYY*: add event task.");
+        System.out.println(ROBOT_TEXT_SPACE + "deadline *description* /by *timing in dd/MM/YYYY*: add deadline task.");
         System.out.println(LINE);
     }
 
@@ -152,10 +155,10 @@ public class Duke {
         if (!doesDeadlineDescriptionExist) {
             throw new NoTaskDescriptionException("deadline");
         }
-        return new Deadline(userInput.substring("deadline".length() + 1, indexOfBy - 1),
-                userInput.substring(indexOfBy + "/by".length() + 1));
-    }
+        String stringDate = userInput.substring(indexOfBy + "/by".length() + 1);
+        return new Deadline(userInput.substring("deadline".length() + 1, indexOfBy - 1), stringDate);
 
+    }
     /**
      * Overwrites and save new task list in data/duke.txt file when there is changes such as deleting and adding task.
      */
@@ -327,7 +330,7 @@ public class Duke {
             while (s.hasNext()) {
                 String line = s.nextLine();
                 char taskType = line.charAt(0);
-                int taskStatus = line.charAt(4);
+                char taskStatus = line.charAt(4);
                 int startOfTaskDes = 8;
                 int taskDescIdentifier  = line.indexOf('|', startOfTaskDes);
 
@@ -335,7 +338,7 @@ public class Duke {
                 if (taskType == 'E') {
                     String date = line.substring(taskDescIdentifier + 2);
                     Event task = new Event(taskDesc, date);
-                    if (taskStatus == 1) {
+                    if (taskStatus == '1') {
                         task.completeTask();
                     }
                     addTask(task);
@@ -343,10 +346,10 @@ public class Duke {
                 } else if (taskType == 'D') {
                     String time = line.substring(taskDescIdentifier + 2);
                     Deadline task = new Deadline(taskDesc, time);
-                    if (taskStatus == 1) {
+                    if (taskStatus == '1') {
                         task.completeTask();
                     }
-                    addTask(new Deadline(taskDesc, time));
+                    addTask(task);
                 } else {
                     addTask(new ToDo(taskDesc));
                 }
