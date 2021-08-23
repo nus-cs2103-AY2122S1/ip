@@ -10,6 +10,8 @@ blah
 todo
 delete 1
 list
+find book
 delete 1
 list
+find book
 bye

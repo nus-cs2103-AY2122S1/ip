@@ -49,6 +49,11 @@ Now you have 4 tasks in the list.
 4.  [T][ ] read book
 -------------------------------------
 -------------------------------------
+Here are the matching tasks in your list:
+1. [D][X] return book (by: June 6th)
+2. [T][X] read book
+-------------------------------------
+-------------------------------------
 Very well, Master Wayne. This task has been deleted as per your request.
 1. [D][X] return book (by: June 6th)
 Now you have 3 tasks in the list.
@@ -57,6 +62,10 @@ Now you have 3 tasks in the list.
 1.  [E][ ] project meeting (at: Aug 6th 2-4pm)
 2.  [T][ ] join sports club
 3.  [T][ ] read book
+-------------------------------------
+-------------------------------------
+Here are the matching tasks in your list:
+1.[T][X] read book
 -------------------------------------
 Have a pleasant day, Master Wayne.
 

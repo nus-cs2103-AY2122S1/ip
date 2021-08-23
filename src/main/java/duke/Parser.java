@@ -2,6 +2,8 @@ package duke;
 
 import duke.commands.*;
 
+import java.util.ArrayList;
+
 /**
  * Represents the Parser class which makes sense of what the user typed.
  */
@@ -16,8 +18,8 @@ public class Parser {
      * @throws DukeException If the user gives a bad input.
      */
     public Command parse(String commandLine, TaskList tasks) throws DukeException {
-        String[] split = commandLine.split(" ");
-        String command = split[0];
+        String[] fullCommand = commandLine.split(" ");
+        String command = fullCommand[0];
         String desc;
 
         switch (command) {
@@ -27,22 +29,22 @@ public class Parser {
         case "list":
             return new ListCommand("list");
         case "done":
-            checkIndex(split.length);
-            int doneIndex = Integer.parseInt(split[1]);
+            checkIndex(fullCommand.length);
+            int doneIndex = Integer.parseInt(fullCommand[1]);
             checkIndex(doneIndex, tasks.size());
             return new DoneCommand("done", doneIndex);
         case "delete":
-            checkIndex(split.length);
-            int deleteIndex = Integer.parseInt(split[1]);
+            checkIndex(fullCommand.length);
+            int deleteIndex = Integer.parseInt(fullCommand[1]);
             checkIndex(deleteIndex, tasks.size());
             return new DeleteCommand("delete", deleteIndex);
         case "todo":
             StringBuilder todoBuilder = new StringBuilder();
-            for (int i = 1; i < split.length; i++) {
+            for (int i = 1; i < fullCommand.length; i++) {
                 if (i != 1) {
                     todoBuilder.append(" ");
                 }
-                todoBuilder.append(split[i]);
+                todoBuilder.append(fullCommand[i]);
             }
             desc = todoBuilder.toString();
             checkDesc(desc);
@@ -53,20 +55,20 @@ public class Parser {
             String by;
             boolean byFound = false;
 
-            for (int i = 1; i < split.length; i++) {
+            for (int i = 1; i < fullCommand.length; i++) {
                 if (byFound) {
                     if (!byBuilder.toString().equals("")) {
                         byBuilder.append(" ");
                     }
-                    byBuilder.append(split[i]);
+                    byBuilder.append(fullCommand[i]);
                 } else {
                     if (i == 1) {
-                        deadlineBuilder.append(split[i]);
-                    } else if (split[i].equals("/by")) {
+                        deadlineBuilder.append(fullCommand[i]);
+                    } else if (fullCommand[i].equals("/by")) {
                         byFound = true;
                     } else {
                         deadlineBuilder.append(" ");
-                        deadlineBuilder.append(split[i]);
+                        deadlineBuilder.append(fullCommand[i]);
                     }
                 }
             }
@@ -81,20 +83,20 @@ public class Parser {
             String at;
             boolean atFound = false;
 
-            for (int i = 1; i < split.length; i++) {
+            for (int i = 1; i < fullCommand.length; i++) {
                 if (atFound) {
                     if (!atBuilder.toString().equals("")) {
                         atBuilder.append(" ");
                     }
-                    atBuilder.append(split[i]);
+                    atBuilder.append(fullCommand[i]);
                 } else {
                     if (i == 1) {
-                        eventBuilder.append(split[i]);
-                    } else if (split[i].equals("/at")) {
+                        eventBuilder.append(fullCommand[i]);
+                    } else if (fullCommand[i].equals("/at")) {
                         atFound = true;
                     } else {
                         eventBuilder.append(" ");
-                        eventBuilder.append(split[i]);
+                        eventBuilder.append(fullCommand[i]);
                     }
                 }
             }
@@ -102,6 +104,15 @@ public class Parser {
             at = atBuilder.toString();
             checkDesc(desc);
             return new AddEventCommand(desc, at);
+        case "find":
+            StringBuilder keywordBuilder = new StringBuilder();
+            for (int i = 1; i < fullCommand.length; i++) {
+                if (i != 1) {
+                    keywordBuilder.append(" ");
+                }
+                keywordBuilder.append(fullCommand[i]);
+            }
+            return new FindCommand("find", keywordBuilder.toString());
         }
         return new UnknownCommand("unknown");
     }
@@ -145,3 +156,9 @@ public class Parser {
         }
     }
 }
+
+
+//            ArrayList<String> keywords = new ArrayList<>();
+//            for (int i = 1; i < fullCommand.length; i++) {
+//                keywords.add(fullCommand[i]);
+//            }

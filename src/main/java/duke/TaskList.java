@@ -146,4 +146,14 @@ public class TaskList {
     public void add(Task task) {
         list.add(task);
     }
+
+    public ArrayList<Task> filter(String keyword) {
+        ArrayList<Task> temp = new ArrayList<>();
+        for (Task task : list) {
+            if (task.getDescription().contains(keyword)) {
+                temp.add(task);
+            }
+        }
+        return temp;
+    }
 }
