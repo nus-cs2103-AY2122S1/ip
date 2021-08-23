@@ -1,9 +1,14 @@
 import exception.DukeException;
+import exception.StorageException;
 import service.ChatBot;
-import service.Parser;
+import parser.Parser;
 import service.TaskList;
+import storage.Storage;
+import task.Task;
 import utils.Command;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -18,6 +23,8 @@ public class Duke {
     private final Parser parser = new Parser();
 
     private final TaskList taskList = new TaskList();
+    
+    private final Storage storage = new Storage();
 
     private final ChatBot chatBot = new ChatBot();
 
@@ -40,20 +47,26 @@ public class Duke {
      */
     public void run() {
         chatBot.greet();
-        taskList.loadTasks();
+        init();
         
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine().trim();
         String output;
         Command command = Command.parseFromInput(userInput);
+        List<Task> tasks;
 
         while (!command.equals(Command.BYE)) {
             try {
                 output = parser.execute(command, userInput, taskList);
+                tasks = taskList.getTasks();
+                storage.save(tasks);
                 chatBot.info(output);
 
             } catch (DukeException exception) {
-                chatBot.error(exception.getLocalizedMessage());
+                chatBot.error(exception.getMessage());
+
+            } catch (StorageException exception) {
+                chatBot.error("Error updating task file.");
 
             } finally {
                 userInput = scanner.nextLine().trim();
@@ -62,5 +75,16 @@ public class Duke {
         }
         scanner.close();
         chatBot.exit();
+    }
+    
+    public void init() {
+        try {
+            List<Task> tasks = storage.load();
+            taskList.init(tasks);
+            
+        } catch (StorageException exception) {
+            chatBot.error(exception.getMessage());
+            throw new RuntimeException();
+        }
     }
 }

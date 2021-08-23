@@ -1,13 +1,13 @@
 package storage;
 
 import exception.DukeException;
+import exception.StorageException;
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.Todo;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Storage {
 
@@ -43,91 +44,85 @@ public class Storage {
         this.taskFilePath = taskFilePath;
     }
 
-    public List<Task> load() throws DukeException {
+    public List<Task> load() throws StorageException {
         initialiseFilePath();
-        return decode();
+        List<String> taskLines;
+        try {
+            taskLines = readLines();
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            throw new StorageException(String.format(UNABLE_TO_LOAD_PATH, taskFilePath));
+        }
+        return decode(taskLines);
     }
 
-    public void initialiseFilePath() throws DukeException {
+    public void initialiseFilePath() throws StorageException {
         try {
             File directory = new File(taskDirectoryPath);
             if (!directory.exists() && !directory.mkdir()) {
-                throw new DukeException(String.format(UNABLE_TO_CREATE_DIRECTORY, taskDirectoryPath));
+                throw new StorageException(String.format(UNABLE_TO_CREATE_DIRECTORY, taskDirectoryPath));
             }
-
             File file = new File(taskFilePath);
             if (!file.exists() && !file.createNewFile()) {
-                throw new DukeException(String.format(UNABLE_TO_CREATE_FILE, taskFilePath));
+                throw new StorageException(String.format(UNABLE_TO_CREATE_FILE, taskFilePath));
             }
-            
         } catch (IOException exception) {
-            throw new DukeException(String.format(UNABLE_TO_LOAD_PATH, taskFilePath));
+            throw new StorageException(String.format(UNABLE_TO_LOAD_PATH, taskFilePath));
+        }
+    }
+    
+    public List<String> readLines() throws StorageException {
+        try {
+            Path filePath = Paths.get(taskFilePath);
+            return Files.readAllLines(filePath);
+        } catch (IOException exception) {
+            throw new StorageException(String.format(UNABLE_TO_LOAD_PATH, taskFilePath));
         }
     }
 
-    public List<Task> decode() throws DukeException {
-        Path filePath;
-        List<String> taskLines;
+    public List<Task> decode(List<String> taskLines) throws StorageException {
         List<Task> savedTaskList = new ArrayList<>();
-        
-        try {
-            filePath = Paths.get(taskFilePath);
-            taskLines = Files.readAllLines(filePath);
-        } catch (IOException exception) {
-            throw new DukeException(String.format(UNABLE_TO_LOAD_PATH, taskFilePath));
-        }
-        
         for (String stringTask: taskLines) {
-            String splitRegex = " \\" + Task.SPLIT_CHAR + ' '; // split based on regex '|'
-            String[] taskAsArray = stringTask.split(splitRegex);
+            String[] taskAsArray = stringTask.split(Task.SPLIT_TEMPLATE);
             
             String keyword = taskAsArray[0];
-            boolean isDone = taskAsArray[1].equals("1"); // if not 1, just set to false
+            boolean isDone = taskAsArray[1].equals(Task.DONE);
             String desc = taskAsArray[2];
             LocalDate date;
             LocalTime time;
-
+            
             switch (keyword) {
                 case Todo.KEYWORD:
                     savedTaskList.add(new Todo(desc, isDone));
                     break;
-                    
+
                 case Event.KEYWORD:
                     date = LocalDate.parse(taskAsArray[3]);
                     time = (taskAsArray.length == 4) ? null : LocalTime.parse(taskAsArray[4]);
                     savedTaskList.add(new Event(desc, isDone, date, time));
                     break;
-                    
+
                 case Deadline.KEYWORD:
                     date = LocalDate.parse(taskAsArray[3]);
                     time = (taskAsArray.length == 4) ? null : LocalTime.parse(taskAsArray[4]);
                     savedTaskList.add(new Deadline(desc, isDone, date, time));
                     break;
-                    
+
                 default:
-                    throw new DukeException(String.format(INVALID_TASK_FORMAT, stringTask));
+                    throw new StorageException(String.format(INVALID_TASK_FORMAT, stringTask));
             }
         }
         return savedTaskList;
     }
 
-    public void saveToFile(Task newTask) throws IOException {
-        FileWriter fileWriter = new FileWriter(taskFilePath, true);
-        fileWriter.write(newTask.toEncodedString() + '\n');
-        fileWriter.close();
-    }
-
-    public void updateToFile(int taskNumber, Task newTask) throws IOException {
-        Path filePath = Paths.get(taskFilePath);
-        List<String> taskLines = Files.readAllLines(filePath);
-        taskLines.set(taskNumber - 1, newTask.toEncodedString()); // 0-indexing
-        Files.write(filePath, taskLines);
-    }
-
-    public void removeFromFile(int taskNumber) throws IOException {
-        Path filePath = Paths.get(taskFilePath);
-        List<String> taskLines = Files.readAllLines(filePath);
-        taskLines.remove(taskNumber - 1); // 0-indexing
-        Files.write(filePath, taskLines);
+    public void save(List<Task> taskList) throws StorageException {
+        try {
+            Path filePath = Paths.get(taskFilePath);
+            List<String> taskLines = taskList.stream()
+                    .map(Task::toEncodedString)
+                    .collect(Collectors.toList());
+            Files.write(filePath, taskLines);
+        } catch (IOException exception) {
+            throw new StorageException(String.format(UNABLE_TO_LOAD_PATH, taskFilePath));
+        }
     }
 }
