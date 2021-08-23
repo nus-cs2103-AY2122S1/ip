@@ -18,6 +18,11 @@ public class Events extends Task {
         this.LIMIT = limit;
     }
 
+    /**
+     * Returns the Events object as data for saving.
+     *
+     * @return Events object save data.
+     */
     @Override
     public String saveData() {
         return "event " + super.saveData() + " /at " + this.LIMIT;

@@ -36,7 +36,11 @@ public class Task {
         this.isDone = true;
     }
 
-
+    /**
+     * Returns the general task as data for saving.
+     *
+     * @return Task object save data.
+     */
     public String saveData() {
         String doneState = this.isDone ? "1" : "0";
 

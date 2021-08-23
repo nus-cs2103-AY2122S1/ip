@@ -2,7 +2,6 @@ package duke.task;
 
 import duke.DukeException;
 
-
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -42,6 +41,14 @@ public class DukeList {
         System.out.println("added: " + text);
     }
 
+    /**
+     * Loads task data obtained from the save file into the list.
+     *
+     * @param type Type of task to be loaded.
+     * @param state Done state of the task to be loaded.
+     * @param body Description of the task to be loaded.
+     * @throws DukeException When unknown task type is loaded.
+     */
     public void loadData(String type, String state, String body) throws DukeException {
         Task task;
         String[] sections;
@@ -164,6 +171,7 @@ public class DukeList {
         System.out.println(response + task.toString() + taskCount);
     }
 
+
     public void find(String input) {
         String trimmedInput = input.trim();
         String str = "";
@@ -171,7 +179,7 @@ public class DukeList {
 
         int count = 0;
 
-        boolean doesContain = false;
+        boolean doesContain;
 
         for (int i = 0; i < TASKS.size(); i++) {
             msg = TASKS.get(i).toString();
@@ -191,6 +199,11 @@ public class DukeList {
     }
 
 
+    /**
+     * Returns the string form of the DukeList object.
+     *
+     * @return The string form of the DukeList.
+     */
     @Override
     public String toString() {
         String str = "";

@@ -21,11 +21,21 @@ public class Deadlines extends Task {
         this.LIMIT = LocalDate.parse(limit.replace("/", "-"));
     }
 
+    /**
+     * Returns the Deadlines object as data for saving.
+     *
+     * @return Deadlines object save data.
+     */
     @Override
     public String saveData() {
         return "deadline " + super.saveData() + " /by " + this.LIMIT.toString();
     }
 
+    /**
+     * Changes date format of LocalDate limit.
+     *
+     * @return LocalDate limit after its format is changed.
+     */
     private String dateConverter() {
         return this.LIMIT.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
