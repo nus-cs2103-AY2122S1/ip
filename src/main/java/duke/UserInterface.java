@@ -1,11 +1,27 @@
 package duke;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import duke.exception.DukeException;
 
 /**
  * Encapsulates a response of the bot.
  */
 public class UserInterface {
+
+    public String getInput() {
+        String input = "";
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            input = reader.readLine();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return input;
+    }
+
     public void greet() {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";

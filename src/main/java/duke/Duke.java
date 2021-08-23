@@ -1,9 +1,5 @@
 package duke;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import duke.command.CommandManager;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
@@ -28,10 +24,10 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke().init();
     }
 
-    private void run() {
+    private void init() {
         this.ui.greet();
 
         // Duke commands work with a registry so that add-ons can be developed with
@@ -40,27 +36,27 @@ public class Duke {
                 new ToDoCommand(this.list, this.ui), new EventCommand(this.list, this.ui),
                 new DeadlineCommand(this.list, this.ui), new DeleteCommand(this.list, this.ui));
 
-        echoInput(new BufferedReader(new InputStreamReader(System.in)));
+        this.run();
     }
 
-    private void echoInput(BufferedReader reader) {
+    private void run() {
         String input = "";
         try {
-            input = reader.readLine();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            input = this.ui.getInput();
+        } catch (DukeException e) {
+            this.ui.showError(e);
         }
-
         if (input.equals("bye")) {
             terminate();
+            return;
         } else {
             try {
                 this.commandManager.parseInput(input);
-            } catch (DukeException ex) {
-                this.ui.showError(ex);
+            } catch (DukeException e) {
+                this.ui.showError(e);
             }
-            echoInput(reader);
         }
+        run();
     }
 
     private void terminate() {
