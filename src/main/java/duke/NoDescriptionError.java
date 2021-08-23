@@ -1,4 +1,5 @@
 package duke;
+
 public class NoDescriptionError extends DukeException{
     private String command;
 
