@@ -1,5 +1,3 @@
-import java.util.Optional;
-
 public class ToDo extends Task{
 
     private ToDo(String description) {

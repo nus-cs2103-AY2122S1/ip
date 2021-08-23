@@ -1,5 +1,3 @@
-import java.util.Optional;
-
 public class Event extends Task{
 
     private Event(String description, String time) {

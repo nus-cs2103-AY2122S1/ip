@@ -1,5 +1,3 @@
-import java.util.Optional;
-
 public class Deadline extends Task{
 
     private Deadline(String description, String deadline) {
