@@ -6,6 +6,9 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * This class encapsulates Duke, an interactive task management chat-bot.
@@ -18,6 +21,7 @@ public class Duke {
     private static final String DATA_DELIMITER = " \\| ";
     private static final String DATA_FILENAME = "duke.txt";
     private static final String DATA_FILEPATH = System.getProperty("user.dir") + "/data/";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-d H:mm");
     private static List<Task> tasks = new ArrayList<>();
 
     private static void printReply(String string) {
@@ -100,10 +104,12 @@ public class Duke {
                     importedTask = new Todo(data[2]);
                     break;
                 case "D":
-                    importedTask = new Deadline(data[2], data[3]);
+                    LocalDateTime deadlineDatetime = LocalDateTime.parse(data[3], FORMATTER);
+                    importedTask = new Deadline(data[2], deadlineDatetime);
                     break;
                 case "E":
-                    importedTask = new Event(data[2], data[3]);
+                    LocalDateTime eventDatetime = LocalDateTime.parse(data[3], FORMATTER);
+                    importedTask = new Event(data[2], eventDatetime);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected Task value: " + taskType);
@@ -193,8 +199,13 @@ public class Duke {
                             throw new DukeException("Please indicate a deadline using '/by'.");
                         }
                         String description = splitTask[0];
-                        String by = splitTask[1];
-                        add(new Deadline(description, by));
+                        String byString = splitTask[1];
+                        try {
+                            LocalDateTime by = LocalDateTime.parse(byString, FORMATTER);
+                            add(new Deadline(description, by));
+                        } catch (DateTimeParseException e) {
+                            printReply("Datetime should be in YYYY-MM-DD hr:min (24h clock) format.");
+                        }
                         break;
                     }
                     case "event": {
@@ -206,8 +217,13 @@ public class Duke {
                             throw new DukeException("Please indicate the event time frame using '/at'.");
                         }
                         String description = splitTask[0];
-                        String at = splitTask[1];
-                        add(new Event(description, at));
+                        String atString = splitTask[1];
+                        try {
+                            LocalDateTime at = LocalDateTime.parse(atString, FORMATTER);
+                            add(new Event(description, at));
+                        } catch (DateTimeParseException e) {
+                            printReply("Datetime should be in YYYY-MM-DD hr:min (24h clock) format.");
+                        }
                         break;
                     }
                     case "todo": {

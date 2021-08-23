@@ -1,18 +1,21 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * This class encapsulates an Event task.
  *
  * @author Kleon Ang
  */
 public class Event extends Task {
-    protected String at;
+    private final LocalDateTime at;
 
     /**
      * Constructor for an Event task.
      *
      * @param description A string describing the Event task.
-     * @param at A string indicating when the event is held at.
+     * @param at A LocalDateTime indicating when the event is held at.
      */
-    public Event(String description, String at) {
+    public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
@@ -34,6 +37,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
+        return "[E]" + super.toString() + " (at: " + this.at.format(formatter) + ")";
     }
 }
