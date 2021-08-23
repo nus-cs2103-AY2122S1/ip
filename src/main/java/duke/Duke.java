@@ -1,3 +1,5 @@
+package duke;
+
 public class Duke {
     private boolean inSession;
     private final Storage storage;
