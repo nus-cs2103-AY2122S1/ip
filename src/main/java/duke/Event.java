@@ -22,7 +22,8 @@ public class Event extends Task{
     }
     @Override
     public String save() {
-        return "E | " + (this.isDone ? 1 : 0) + " | " + this.description + " | " + this.duration;
+        return "E | " + (this.isDone ? 1 : 0)
+                + " | " + this.description + " | " + this.duration;
     }
     public LocalDateTime getDuration() {
         return this.duration;
@@ -30,6 +31,7 @@ public class Event extends Task{
 
     @Override
     public String toString(){
-        return "[E]" + "[" + this.getStatusIcon() + "]" + " " + this.description + " (" + duration.format(fmt) + ")";
+        return "[E]" + "[" + this.getStatusIcon() + "]"
+                + " " + this.description + " (" + duration.format(fmt) + ")";
     }
 }

@@ -78,7 +78,8 @@ public class Parser {
             }
             String[] splitDeadline = splitString[1].split(" /by ", 2);
             if (splitDeadline.length == 1) {
-                throw new DukeException("OOPS!!! The description or deadline for a deadline cannot be empty or it must be after a '/'");
+                throw new DukeException(
+                        "OOPS!!! The description or deadline for a deadline cannot be empty or it must be after a '/'");
             }
             Deadline deadline = new Deadline(splitDeadline[0], LocalDateTime.parse(splitDeadline[1], fmt));
             tasks.add(deadline);
@@ -91,7 +92,8 @@ public class Parser {
             }
             String[] splitEvent = splitString[1].split(" /at ", 2);
             if (splitEvent.length == 1) {
-                throw new DukeException("\tOOPS!!! The description or duration for an event cannot be empty or it must be after a '/'");
+                throw new DukeException(
+                        "\tOOPS!!! The description or duration for an event cannot be empty or it must be after a '/'");
             }
             Event event = new Event(splitEvent[0], LocalDateTime.parse(splitEvent[1], fmt));
             tasks.add(event);
@@ -117,14 +119,15 @@ public class Parser {
             e.printStackTrace();
         }
 
-        return "\tNoted. I've removed this task:\n" + "\t\t" + removedTask.toString() + "\n" + "\tNow you have " + tasks.size() + " tasks in the list.";
+        return "\tNoted. I've removed this task:\n" + "\t\t" + removedTask.toString()
+                + "\n" + "\tNow you have " + tasks.size() + " tasks in the list.";
     }
 
     private String setTaskAsDone(String input) throws DukeException {
         String[] splitString = input.split(" ", 2);
         int i = Integer.parseInt(splitString[1])-1;
         if (i + 1 <= 0 || i + 1 > tasks.size()) {
-            throw new DukeException("duke.Task not found!");
+            throw new DukeException("Task not found!");
         }
         tasks.get(i).markAsDone();
         try {

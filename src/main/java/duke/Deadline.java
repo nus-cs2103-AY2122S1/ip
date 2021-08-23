@@ -23,7 +23,8 @@ public class Deadline extends Task{
 
     @Override
     public String save() {
-        return "D | " + (this.isDone ? 1 : 0) + " | " + this.description + " | " + this.deadline;
+        return "D | " + (this.isDone ? 1 : 0)
+                + " | " + this.description + " | " + this.deadline;
     }
 
     public LocalDateTime getDeadline() {
@@ -32,6 +33,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString(){
-        return "[D]" + "[" + this.getStatusIcon() + "]" + " " + this.description + " (" + deadline.format(fmt) + ")";
+        return "[D]" + "[" + this.getStatusIcon() + "]" + " "
+                + this.description + " (" + deadline.format(fmt) + ")";
     }
 }
