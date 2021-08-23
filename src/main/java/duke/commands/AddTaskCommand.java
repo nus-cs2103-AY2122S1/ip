@@ -14,7 +14,7 @@ public class AddTaskCommand extends Command {
 
     /**
      * Constructor of the AddTaskCommand class.
-     * 
+     *
      * @param task The task to be added.
      */
     public AddTaskCommand(Task task) {
@@ -23,7 +23,7 @@ public class AddTaskCommand extends Command {
 
     /**
      * Executes the add task command by adding the task into the in-memory list, and saving it to the txt file.
-     * 
+     *
      * @param tasks The current list of tasks.
      * @param ui The UI of the Duke app.
      * @param storage The storage manager for the Duke app.

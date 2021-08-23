@@ -16,10 +16,10 @@ public class Ui {
     private static final String COLOR_RESET = "\u001B[0m";
     private static final String LOGO =
             " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
     private final Scanner in;
     private final PrintStream out;
 
@@ -33,6 +33,7 @@ public class Ui {
 
     /**
      * Prints formatted error messages.
+     *
      * @param string The error message.
      */
     public void printErr(String string) {
@@ -41,6 +42,7 @@ public class Ui {
 
     /**
      * Prints formatted messages/
+     *
      * @param string The message.
      */
     public void print(String string) {
@@ -63,7 +65,7 @@ public class Ui {
 
     /**
      * Prints all the task from the given task list.
-     * 
+     *
      * @param taskList The task list to be printed from.
      */
     public void printAllTasks(TaskList taskList) {
@@ -81,7 +83,7 @@ public class Ui {
 
     /**
      * Prints the task that was added.
-     * 
+     *
      * @param task The task that was added.
      */
     public void printTaskAdded(Task task) {
@@ -91,7 +93,7 @@ public class Ui {
 
     /**
      * Prints the current number of task in the task list.
-     * 
+     *
      * @param taskList The task list.
      */
     public void printNumOfTasks(TaskList taskList) {
@@ -102,7 +104,7 @@ public class Ui {
 
     /**
      * Prints the failed to initialize message.
-     * 
+     *
      * @param msg The message to be printed.
      */
     public void printFailedInitMessage(String msg) {
@@ -121,7 +123,7 @@ public class Ui {
 
     /**
      * Prints the task that was marked as done.
-     * 
+     *
      * @param task The task that was marked as done.
      */
     public void printTaskMarkedAsDone(Task task) {
@@ -131,7 +133,7 @@ public class Ui {
 
     /**
      * Prints the task that was deleted.
-     * 
+     *
      * @param task The task that was deleted.
      */
     public void printTaskDeleted(Task task) {
@@ -148,10 +150,11 @@ public class Ui {
 
     /**
      * Gets the user command.
+     *
      * @return The user command.
      */
     public String readCommand() {
         return this.in.nextLine();
     }
-    
+
 }

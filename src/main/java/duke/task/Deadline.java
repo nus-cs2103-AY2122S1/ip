@@ -38,7 +38,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the savable string format of this task.
-     * 
+     *
      * @return Formatted string to be saved into storage.
      */
     @Override

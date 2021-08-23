@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructor of the DoneCommand class.
-     * 
+     *
      * @param taskId The id of the task to be marked as done.
      */
     public DoneCommand(int taskId) {
@@ -23,7 +23,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the done command by marking the task as done in the in-memory list, 
+     * Executes the done command by marking the task as done in the in-memory list,
      * and updating the corresponding task on the txt file.
      *
      * @param tasks The current list of tasks.

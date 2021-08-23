@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor of the DeleteCommand class.
-     * 
+     *
      * @param taskId The id of the task to be deleted.
      */
     public DeleteCommand(int taskId) {
@@ -23,9 +23,9 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the delete command by deleting the task in the in-memory list, 
+     * Executes the delete command by deleting the task in the in-memory list,
      * and deleting the corresponding task on the txt file.
-     * 
+     *
      * @param tasks The current list of tasks.
      * @param ui The UI of the Duke app.
      * @param storage The storage manager for the Duke app.

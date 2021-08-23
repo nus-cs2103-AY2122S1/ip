@@ -10,7 +10,7 @@ import duke.ui.Ui;
 public class ExitCommand extends Command {
     /**
      * Prints the exit message and closes the scanner.
-     * 
+     *
      * @param tasks The current list of tasks.
      * @param ui The UI of the Duke app.
      * @param storage The storage manager for the Duke app.
@@ -20,5 +20,5 @@ public class ExitCommand extends Command {
         ui.exit();
         ui.printExitMessage();
     }
-    
+
 }

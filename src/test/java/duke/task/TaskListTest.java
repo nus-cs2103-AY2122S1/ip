@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
-    
+
     @Test
     public void deleteTaskById_invalidId_exceptionThrown() {
         TaskList tasks = new TaskList();
@@ -15,7 +15,7 @@ public class TaskListTest {
         try {
             tasks.deleteTaskById(taskId);
             fail("Should throw InvalidTaskSelectedException");
-        } catch (Exception e){
+        } catch (Exception e) {
             assertEquals("Invalid task selected!", e.getMessage());
         }
     }
