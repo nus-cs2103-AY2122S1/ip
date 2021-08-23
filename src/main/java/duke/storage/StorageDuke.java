@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class StorageDuke implements Storage {
     private final String FILEPATH;
-    private ArrayList<String> fileContent;
+    private ArrayList<String> fileContent = new ArrayList<>();
 
     /**
      * Constructor.
