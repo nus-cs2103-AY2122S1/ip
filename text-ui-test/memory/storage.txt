@@ -1,4 +1,0 @@
-[T][X] borrow book
-[D][X] return book (by: 15 Oct 2019)
-[E][X] project meeting (at: 15 Oct 2019)
-[T][ ] bye
