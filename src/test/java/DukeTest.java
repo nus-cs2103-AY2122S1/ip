@@ -42,7 +42,7 @@ public class DukeTest {
             refresh();
             TaskList taskList = new TaskList();
             Parser inputH = new Parser(taskList);
-            inputH.query("deadline dl one /at 2021-08-24 18:00 / yeah");
+            inputH.query("deadline dl one /by 2021-08-24 18:00 / yeah");
             Deadline d = new Deadline("dl one | 2021-08-24 18:00 | yeah", false);
             assertEquals(taskList.contains(d), true);
         } catch (DukeException e) {
