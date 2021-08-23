@@ -4,8 +4,10 @@ todo
 todo do one thing
 deadline do 2 things
 deadline do 2 things by Monday
+deadline do 2 things by 2020-10-12
 event a birthday
 event a birthday at 21:00
+event a birthday at 2020-10-12
 done 4
 delete 3
 done ife

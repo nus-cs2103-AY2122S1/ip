@@ -1,6 +1,13 @@
 abstract public class Task {
     protected boolean completed;
     protected String description;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+public class Task {
+    private boolean completed;
+    private String description;
 
     protected Task(String taskName) {
         this.description = taskName;
@@ -11,6 +18,18 @@ abstract public class Task {
     public String toString() {
         String check = this.completed ? "[X] " : "[ ] ";
         return check + description;
+    }
+
+    public static LocalDate parseTime(String time) throws DateTimeParseException {
+        try {
+            return LocalDate.parse(time);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("\t☹ OOPS!!! Please specify the time in the yyyy-mm-dd format.\n");
+        }
+    }
+
+    public static String printTime(LocalDate time) {
+        return time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     public void markAsDone() {
