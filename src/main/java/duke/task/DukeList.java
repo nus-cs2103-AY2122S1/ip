@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class DukeList {
     /** The list in which Duke stores Tasks. */
     private ArrayList<Task> list = new ArrayList<>();
-    private int count = 0;
 
     /**
      * Constructs a DukeList.
@@ -37,7 +36,6 @@ public class DukeList {
      */
     public void add(String text) {
         list.add(new Task(text));
-        count += 1;
         System.out.println("added: " + text);
     }
 
@@ -83,7 +81,6 @@ public class DukeList {
 
         ToDos input = new ToDos(message);
         list.add(input);
-        count += 1;
 
         displayTask(input);
     }
@@ -100,7 +97,6 @@ public class DukeList {
         try {
             Deadlines input = new Deadlines(strings[0].trim(), limit);
             list.add(input);
-            count += 1;
             displayTask(input);
         } catch (DateTimeParseException e) {
             throw new DukeException("☹ OOPS!!! The deadline follows the format yyyy-MM-dd.");
@@ -119,7 +115,6 @@ public class DukeList {
 
         Events input = new Events(strings[0].trim(), limit);
         list.add(input);
-        count += 1;
 
         displayTask(input);
     }
@@ -160,6 +155,33 @@ public class DukeList {
         String taskCount = "\nNow you have " + list.size() + " tasks in the list.";
         System.out.println(response + task.toString() + taskCount);
     }
+
+    public void find(String input) {
+        String trimmedInput = input.trim();
+        String str = "";
+        String msg;
+
+        int count = 0;
+
+        boolean doesContain = false;
+
+        for (int i = 0; i < list.size(); i++) {
+            msg = list.get(i).toString();
+            doesContain = msg.contains(trimmedInput);
+
+            if (doesContain) {
+                str += (i + 1 + "." + msg + "\n");
+                count ++;
+            }
+        }
+
+        if (count == 0) {
+            System.out.println("Sorry no tasks found that match your input.");
+        } else {
+            System.out.println(str + "Are these the tasks you're looking for?");
+        }
+    }
+
 
     @Override
     public String toString() {
