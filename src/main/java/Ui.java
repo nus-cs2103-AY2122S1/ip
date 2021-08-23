@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Ui {
     
@@ -19,6 +20,10 @@ public class Ui {
     
     public void showInput() {
         System.out.print("> ");
+    }
+    
+    public String readCommand(Scanner input) {
+        return input.nextLine().trim();
     }
     
     public void showBye() {
