@@ -1,3 +1,5 @@
+package duke;
+
 public class AddCommand extends Command {
     private String description;
     private String taskType;
