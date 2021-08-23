@@ -2,14 +2,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class DataStorage {
+class Storage {
     private final String filePath;
 
-    public DataStorage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
     
@@ -23,7 +24,7 @@ class DataStorage {
         try {
             return readFromFile(file);
         } catch (FileNotFoundException e) {
-            System.out.println("Something went wrong: unable to read from the file");
+            System.out.println("Something went wrong: cannot find the file");
             return new ArrayList<>();
         } 
     }
@@ -35,8 +36,8 @@ class DataStorage {
 
         try {
             while (sc.hasNextLine()) {
-                String currItem = sc.nextLine();
-                String[] itemDetails = currItem.split(" | ");
+                String text = sc.nextLine();
+                String[] itemDetails = text.split("|");
 
                 Task task;
                 String task_type = itemDetails[0];
@@ -67,7 +68,7 @@ class DataStorage {
             file.getParentFile().mkdirs();
             file.createNewFile();
         } catch (IOException e) {
-            System.out.println("Something went wrong: unable to initialise an empty file for DataStorage.");
+            System.out.println("Something went wrong: cannot create an empty file for Storage.");
         }
     }
 
@@ -83,7 +84,7 @@ class DataStorage {
         try {
             writeToFile(tasks);
         } catch (IOException e) {
-            System.out.println("Something went wrong: unable to write to DataStorage.");
+            System.out.println("Something went wrong: cannot save to Storage.");
         }
     }
 }

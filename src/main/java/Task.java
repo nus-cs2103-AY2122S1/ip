@@ -35,7 +35,7 @@ public class Task {
     }
 
     public String toFileString() {
-        return " | " + this.getDoneIndicator() + " | " + this.description;
+        return "|" + this.getDoneIndicator() + "|" + this.description;
     }
 
 

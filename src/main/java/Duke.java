@@ -1,217 +1,42 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
-
 
 public class Duke {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
     private static final String FILE_URL = "data/Duke.txt";
-    private static List<Task> list = new ArrayList<>();
-    private static DataStorage storage = null;
 
-
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.loadStorage());
+    }
 
     public static void main(String[] args) {
-        storage = new DataStorage(FILE_URL);
-        list = storage.loadStorage();
-
-        greet();
-
-        Scanner scanner = new Scanner(System.in);
-        String text = scanner.nextLine();
-
-        String[] keywords = {"done", "bye", "list", "bye", "deadline", "event", "todo", "delete"};
-
-        try {
-            while (!text.isEmpty()) {
-
-
-                if (!stringContainsItemFromList(text, keywords)) {
-                    throw new UnknownException();
-                } else {
-                    //mark as done
-                    if (text.startsWith("done")) {
-                        char last_digit = text.charAt(text.length() - 1);
-                        int index = Character.getNumericValue(last_digit);
-                        setAsDone(index);
-                        text = scanner.nextLine();
-                    }
-
-                    //list
-                    else if (text.equals("list")) {
-                        list();
-                        text = scanner.nextLine();
-                    }
-
-                    //exit program
-                    else if (text.equals("bye")) {
-                        bye();
-                        break;
-                    }
-
-                    //delete task
-                    else if (text.startsWith("delete")) {
-                        char last_digit = text.charAt(text.length() - 1);
-                        int index = Character.getNumericValue(last_digit);
-                        deleteTask(index);
-                        text = scanner.nextLine();
-                    }
-
-                    //add new task
-                    else {
-                        Task newTask = null;
-                        if (text.contains("deadline")) {
-                            String description = extractTaskDescription(text);
-                            String time = extractTaskTime(text);
-                            LocalDate date = LocalDate.parse(time);
-                            newTask = new Deadline(description, date);
-                        } else if (text.contains("event")) {
-                            String description = extractTaskDescription(text);
-                            String time = extractTaskTime(text);
-                            LocalDate date = LocalDate.parse(time);
-                            newTask = new Event(description, date);
-                        } else if (text.contains("todo")) {
-                            String description = extractTaskDescription(text);
-                            newTask = new Todo(description);
-                        }
-
-                        list.add(newTask);
-                        addTask(newTask);
-
-                        text = scanner.nextLine();
-                    }
-                    storage.saveToStorage(list);
-
-                }
-            }
-        } catch (UnknownException e) {
-            System.out.println(e.getMessage());
-        } catch (UnclearInstructionException e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
-    
-    private static void greet() {
-        System.out.println("Hiiii~ I'm Duke created by Tianyue.\n" +
-                "How can I help you? :)");
+        new Duke(FILE_URL).run();
     }
 
-    private static void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
-    }
-
-    private static void addTask(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        if (list.size() == 1) {
-            System.out.println("Now you have 1 task in the list.");
-        } else {
-            System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
-        }
-    }
-
-    private static void list() {
-        if (list.isEmpty()) {
-            System.out.println("You have no task for now. Want to add a new task?");
-            return;
-        }
-
-        System.out.println("Here are the tasks in your list:");
-
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(String.format("%d. %s",
-                    i + 1, list.get(i)));
-        }
-    }
-
-    private static void setAsDone(int index) {
-        try {
-            if (index > list.size()) {
-                throw new DukeIndexException("The input task number is too big.");
-            }
-            if (index < 1) {
-                throw new DukeIndexException("The input task number is non-positive.");
-            }
-            list.get(index - 1).maskAsDone();
-
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(list.get(index - 1));
-        } catch (DukeIndexException e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
-
-    public static boolean stringContainsItemFromList(String inputStr, String[] items) {
-        for (int i = 0; i < items.length; i++) {
-            if (inputStr.contains(items[i])) {
-                return true;
+    /**
+     * Runs the program with the correct components and storage file set-ups.
+     */
+    public void run() {
+        ui.greet();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readNextLine();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (UnknownException e) {
+                ui.displayError(e.getMessage());
+            } finally {
+                ui.showLine();
             }
         }
-        return false;
     }
-
-    public static String extractTaskDescription(String text) throws UnclearInstructionException {
-        String[] contents = text.split(" ", 2);
-        String task_type = contents[0];
-        String description = "";
-
-        if (contents.length != 2) {
-            throw new UnclearInstructionException("OOPS!!! The description of a " + task_type + " cannot be extracted properly.");
-        }
-
-        int istart = text.indexOf(" ");
-        int iend = text.indexOf("/");
-
-        if (task_type.equals("deadline") || task_type.equals("event")) {
-            description = text.substring(istart, iend);
-        }
-
-        if (task_type.equals("todo")) {
-            description = text.substring(istart);
-        }
-
-        if (description.equals("")) {
-            throw new UnclearInstructionException("OOPS!!! The description of a " + task_type + " cannot be empty.");
-        }
-        return description;
-    }
-
-    public static String extractTaskTime(String text) throws UnclearInstructionException {
-        String[] contents = text.split(" ", 2);
-        String task_type = contents[0];
-        if (contents.length != 2) {
-            throw new UnclearInstructionException("OOPS!!! The description of a " + task_type + " cannot be extracted properly.");
-        }
-
-        int istart = text.indexOf(" ");
-        int iend = text.indexOf("/");
-        String time = text.substring(iend + 4);
-
-        if (time.equals("")) {
-            throw new UnclearInstructionException("OOPS!!! The time of a " + task_type + " cannot be empty.");
-        }
-        return time;
-    }
-
-    private static void deleteTask(int index) throws IndexOutOfBoundsException {
-        try {
-            if (index > list.size()) {
-                throw new DukeIndexException("The input task number is too big.");
-            }
-            Task removedTask = list.remove(index - 1);
-
-            System.out.println("Noted. I've removed this task:");
-            System.out.println("  " + removedTask);
-            System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
-        } catch (DukeIndexException e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
-
-
 }
+
