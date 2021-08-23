@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -93,7 +92,7 @@ public class Kermit {
 
         // Init writer to save Kermit data
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(PATHSTRING))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(PATHSTRING, true))) {
             while (true) {
                 try {
                     // Task description and flag should be separated by some /command
@@ -204,8 +203,6 @@ public class Kermit {
                     System.out.println(formatText(e.getMessage()));
                 }
             }
-        } catch (FileNotFoundException e) {
-            System.err.println(e.getMessage());
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
