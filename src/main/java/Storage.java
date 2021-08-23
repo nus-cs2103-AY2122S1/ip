@@ -1,17 +1,16 @@
-package tasks;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
-import java.nio.file.FileAlreadyExistsException;
 
 import commands.DukeException;
+import tasks.TaskList;
 
-public class FileManager {
+public class Storage {
     private static final String DIRECTORY_PATH = "./duke-files";
     private static final String FILE_PATH = DIRECTORY_PATH + "/tasks.txt";
     private final File file;
 
-    public FileManager() {
+    public Storage() {
         File directory = new File(DIRECTORY_PATH);
         boolean isDirectoryExist = directory.exists();
         if (!isDirectoryExist) {
@@ -25,7 +24,7 @@ public class FileManager {
         }
     }
 
-    public void save(TaskManager taskManager) throws DukeException {
+    public void save(TaskList taskManager) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.file);
             fileWriter.write(taskManager.toString());

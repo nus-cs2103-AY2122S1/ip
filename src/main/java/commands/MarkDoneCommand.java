@@ -1,6 +1,6 @@
 package commands;
 import tasks.Task;
-import tasks.TaskManager;
+import tasks.TaskList;
 
 public class MarkDoneCommand extends Command {
     private final int taskNumber;
@@ -11,7 +11,7 @@ public class MarkDoneCommand extends Command {
         this.taskNumber = Integer.parseInt(intString);
     }
 
-    public String execute(TaskManager taskManager) throws DukeException {
+    public String execute(TaskList taskManager) throws DukeException {
         if (this.taskNumber > taskManager.getNumOfTasks()) {
             throw new DukeException("OOPS!!! Please choose a smaller number :-(");
         }

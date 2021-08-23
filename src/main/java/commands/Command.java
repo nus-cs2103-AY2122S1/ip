@@ -1,6 +1,6 @@
 package commands;
-import tasks.TaskManager;
+import tasks.TaskList;
 
 public abstract class Command {
-    public abstract String execute(TaskManager taskManager) throws DukeException;
+    public abstract String execute(TaskList taskManager) throws DukeException;
 }

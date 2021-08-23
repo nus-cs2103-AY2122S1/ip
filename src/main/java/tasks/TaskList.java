@@ -4,10 +4,10 @@ import tasks.Task;
 
 import java.util.ArrayList;
 
-public class TaskManager {
+public class TaskList {
     private ArrayList<Task> tasks;
 
-    public TaskManager() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
 

@@ -1,7 +1,6 @@
 import commands.Command;
 import commands.DukeException;
-import tasks.TaskManager;
-import tasks.FileManager;
+import tasks.TaskList;
 
 import java.util.Scanner;
 
@@ -20,8 +19,8 @@ public class Duke {
         String exitString = "bye";
         System.out.println("Hello from\n" + logo + startGreeting);
 
-        TaskManager tm = new TaskManager();
-        FileManager fm = new FileManager();
+        TaskList tl = new TaskList();
+        Storage s = new Storage();
         Parser p = new Parser();
         Scanner sc = new Scanner(System.in);
 
@@ -29,8 +28,8 @@ public class Duke {
         while (!userInput.trim().toLowerCase().equals(exitString)) {
             try {
                 Command command = p.getCommand(userInput);
-                String output = command.execute(tm);
-                fm.save(tm);
+                String output = command.execute(tl);
+                s.save(tl);
                 System.out.print(line + output + line);
             } catch (DukeException e) {
                 System.out.println(line + e.getMessage() + line);
