@@ -5,7 +5,13 @@ import tasks.Event;
 import tasks.Task;
 import tasks.ToDo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,6 +19,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import java.util.List;
+
 /**
  * Represents a logger that can read logs and act according to logs provided.
  */
@@ -48,7 +55,7 @@ public class Logger {
             writer = new BufferedWriter(new FileWriter("tasks.txt"));
             StringBuilder builder = new StringBuilder();
 
-            for (int index = 0; index < tasks.size(); index++){
+            for (int index = 0; index < tasks.size(); index++) {
                 Task currentTask = tasks.get(index);
                 int flag = currentTask.getStatusIcon().equals("X") ? 1 : 0;
                 if (currentTask instanceof ToDo) {
