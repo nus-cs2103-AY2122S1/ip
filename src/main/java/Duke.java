@@ -1,7 +1,11 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -11,6 +15,8 @@ import java.util.regex.Pattern;
 public class Duke {
 
     private static final String divider = "____________________________________________________________";
+
+    private static final DateTimeFormatter dateInputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     /**
      * An enum describing the type of task.
@@ -188,7 +194,7 @@ public class Duke {
             } else {
                 throw new DukeException();
             }
-            
+
             switch (type) {
             case TODO:
                 return new ToDo(details);
@@ -288,16 +294,16 @@ public class Duke {
      * A type of Task that starts at a specific time and ends at a specific date/time.
      */
     public static class Event extends Task {
-        private final String time;
+        private final LocalDate time;
 
-        public Event(String description, String time) {
+        public Event(String description, String time) throws DateTimeParseException {
             super(description);
-            this.time = time;
+            this.time = LocalDate.parse(time, dateInputFormatter);
         }
 
         public Event(String description, boolean isDone, String time) {
             super(description, isDone);
-            this.time = time;
+            this.time = LocalDate.parse(time, dateInputFormatter);
         }
 
         @Override
@@ -314,6 +320,7 @@ public class Duke {
      * input for Duke.
      */
     private static class DukeException extends Exception {
+
         @Override
         public String getMessage() {
             return "Sorry, I don't know what that means :(";
