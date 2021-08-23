@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.DukeUi;
+import duke.task.Event;
+import duke.task.TaskList;
+
 public class CommandEvent extends DukeCommand {
     Event task;
 

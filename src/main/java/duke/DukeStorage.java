@@ -1,3 +1,12 @@
+package duke;
+
+import duke.exception.DukeArgumentException;
+import duke.exception.DukeFileException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -88,5 +97,4 @@ public class DukeStorage {
         }
         return "Tasks successfully loaded!";
     }
-
 }

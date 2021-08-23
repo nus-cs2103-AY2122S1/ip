@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class DukeFileException extends Exception {
     public DukeFileException(String msg){
         super(msg);

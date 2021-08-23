@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exception.DukeArgumentException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -7,7 +11,7 @@ public class DukeDate {
     private static String dateInputFormat = "d/MM/yyyy";
     private static String dateOutputFormat = "E, d MMM yyyy";
 
-    public static LocalDate parseDateInput(String dateStr) throws DukeArgumentException{
+    public static LocalDate parseDateInput(String dateStr) throws DukeArgumentException {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateInputFormat);
         try {

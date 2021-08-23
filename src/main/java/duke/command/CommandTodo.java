@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.DukeUi;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
 public class CommandTodo extends DukeCommand {
     ToDo task;
 

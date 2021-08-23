@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.exception.DukeFileException;
+import duke.DukeStorage;
+import duke.DukeUi;
+import duke.task.TaskList;
+
 public class CommandBye extends DukeCommand {
     boolean isEnd = true;
 

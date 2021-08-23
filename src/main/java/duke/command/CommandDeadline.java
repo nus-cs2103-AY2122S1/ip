@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.DukeUi;
+import duke.task.Deadline;
+import duke.task.TaskList;
+
 public class CommandDeadline extends DukeCommand {
     Deadline task;
 

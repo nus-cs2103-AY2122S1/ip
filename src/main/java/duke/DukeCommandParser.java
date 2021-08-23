@@ -1,5 +1,14 @@
-public class DukeCommandParser {
+package duke;
 
+import duke.command.*;
+import duke.exception.DukeArgumentException;
+import duke.exception.DukeCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
+public class DukeCommandParser {
     private enum TaskType {
         TODO,
         DEADLINE,
@@ -7,7 +16,6 @@ public class DukeCommandParser {
     }
 
     private static Task parseTask(String input, TaskType tType) throws DukeCommandException, DukeArgumentException {
-        String msg;
         String[] inputArr;
         String[] taskArr;
         Task task;

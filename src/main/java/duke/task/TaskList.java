@@ -1,4 +1,7 @@
-import java.nio.charset.StandardCharsets;
+package duke.task;
+
+import duke.DukeDate;
+
 import java.util.ArrayList;
 import java.lang.StringBuilder;
 public class TaskList {
@@ -72,7 +75,7 @@ public class TaskList {
             userList.remove(taskId - 1);
             listSize--;
             return String.format(
-                    "Alright,\nTask: %s [%s] [%s] (%s)\nHas been removed, you have %d tasks in the list",
+                    "Alright,\nduke.duke.Task.Task: %s [%s] [%s] (%s)\nHas been removed, you have %d tasks in the list",
                     t.getName(),
                     t.getTaskType(),
                     t.isCompleted() ? "X" : " ",

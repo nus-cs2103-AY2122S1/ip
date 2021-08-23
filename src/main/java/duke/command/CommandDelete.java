@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.DukeUi;
+import duke.task.TaskList;
+
 public class CommandDelete extends DukeCommand {
     private int taskId;
 

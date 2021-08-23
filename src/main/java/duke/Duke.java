@@ -1,11 +1,11 @@
-import java.util.Scanner;
+package duke;
 
+import duke.command.DukeCommand;
+import duke.exception.DukeFileException;
+import duke.task.TaskList;
 
 public class Duke {
-
     private static TaskList tList = new TaskList();
-
-
 
     private static void exit() {
         try {
