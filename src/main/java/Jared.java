@@ -67,6 +67,11 @@ public class Jared {
         System.out.println(res);
     }
 
+    /**
+     * @param next String entered by the user.
+     * @throws DukeException
+     */
+
     private static void delete(String next) throws DukeException {
         int taskNum;
         Task currTask;
