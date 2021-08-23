@@ -37,6 +37,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileFormatString() {
-        return String.format("D / %s / %s / %s\n", this.isDone ? "1" : "0", this.description, this.time);
+        return String.format("D / %s / %s / %s\n", this.isDone ? "1" : "0", this.description,
+                this.time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
     }
 }

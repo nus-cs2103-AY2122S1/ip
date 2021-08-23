@@ -54,6 +54,8 @@ public class Event extends Task {
      */
     @Override
     public String toFileFormatString() {
-        return String.format("E / %s / %s / %s\n", this.isDone ? "1" : "0", this.description, this.at);
+        return String.format("E / %s / %s / %s to %s\n", this.isDone ? "1" : "0", this.description,
+                this.startingTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                this.endingTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
     }
 }
