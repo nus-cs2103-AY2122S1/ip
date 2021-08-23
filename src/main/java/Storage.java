@@ -17,4 +17,17 @@ public class Storage {
         int index = this.filePath.lastIndexOf(File.separator);
         this.directoryPath = Paths.get(this.filePath.substring(0, index));
     }
+
+    private List<String> load() throws IOException {
+
+        if (!Files.exists(directoryPath))
+            Files.createDirectory(directoryPath);
+
+        Path path = Paths.get(filePath);
+
+        if (!Files.exists(path))
+            Files.createFile(path);
+
+        return Files.readAllLines(path);
+    }
 }
