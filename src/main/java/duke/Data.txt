@@ -1,5 +1,0 @@
-yyyy-MM-dd
-[D][X]  run /by 2000-12-12 yyyy-MM-dd
-[D][ ]  eat /by 11-11-2000 dd-MM-yyyy
-[T][ ]  eat
-[E][X]  run /at sjfnksjdf

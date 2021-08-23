@@ -21,7 +21,7 @@ public class Storage {
 
     public void load() {
         try {
-            File dataFile = new File("src/main/java/duke/Data.txt");
+            File dataFile = new File("./Data.txt");
             Scanner s = new Scanner(dataFile);
             Duke.setFormat(s.nextLine());
             while (s.hasNextLine()) {
@@ -75,7 +75,7 @@ public class Storage {
         try {
             int listLength = this.list.getListSize();
             String input = Duke.getFormat() + "\n";
-            FileWriter fw = new FileWriter("src/main/java/Data.txt");
+            FileWriter fw = new FileWriter("./Data.txt");
             for (int i = 0; i < listLength; i++) {
                 Task t = this.list.getTask(i);
                 input += t.createData() + "\n";
