@@ -36,6 +36,8 @@ public class Parser {
             return parseDone(splitInput);
         case "delete":
             return parseDelete(splitInput);
+        case "find":
+            return parseFind(splitInput);
         case "list":
             return new ListCommand();
         case "bye":
@@ -45,6 +47,14 @@ public class Parser {
         }
     }
 
+    private static Command parseFind(String[] args) throws InvalidArgumentsException {
+        if (args.length != 2) {
+            throw new InvalidArgumentsException("find [query]");
+        }
+
+        return new FindCommand(args[1]);
+    }
+    
     /**
      * Parses the add todo command
      * 
@@ -59,8 +69,7 @@ public class Parser {
 
         return new AddTaskCommand(new Todo(args[1]));
     }
-
-
+    
     /**
      * Parses the add event command
      *
@@ -80,8 +89,7 @@ public class Parser {
 
         return new AddTaskCommand(new Event(eventArgs[0], eventArgs[1]));
     }
-
-
+    
     /**
      * Parses the add deadline command
      *
