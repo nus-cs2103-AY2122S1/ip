@@ -2,16 +2,17 @@ package tiger.actions;
 
 import tiger.components.DeadLine;
 import tiger.components.TaskList;
+import tiger.utils.CustomDate;
 
 public class DeadLineAction extends Action {
-    AppState applicationState;
-    String todo;
-    String dateLine;
+    private AppState applicationState;
+    private String todo;
+    private CustomDate date;
 
-    public DeadLineAction(AppState applicationState, String todo, String dateLine) {
+    public DeadLineAction(AppState applicationState, String todo, CustomDate date) {
         this.applicationState = applicationState;
         this.todo = todo;
-        this.dateLine = dateLine;
+        this.date = date;
     }
 
     /**
@@ -22,7 +23,7 @@ public class DeadLineAction extends Action {
 
     public AppState run() {
         TaskList taskList = this.applicationState.taskList;
-        TaskList newTaskList = taskList.addTask(DeadLine.of(this.todo, false, this.dateLine));
+        TaskList newTaskList = taskList.addTask(new DeadLine(this.todo, false, this.date));
         System.out.println(String.format("Excellent! I've added this deadline:\n%s",
                 taskList.showTask(taskList.size() - 1)));
         return new AppState(applicationState.userExit, newTaskList);

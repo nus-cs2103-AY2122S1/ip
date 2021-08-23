@@ -10,19 +10,19 @@ import tiger.exceptions.inputs.TigerSemiColonException;
 
 public class Parser {
 
-    String command;
+    String input;
 
     /**
      * Constructor for the Parser class.
      *
-     * @param command User input commmand.
+     * @param input User input input.
      */
 
-    public Parser(String command) throws TigerSemiColonException {
-        if (command.contains(";")) {
+    public Parser(String input) throws TigerSemiColonException {
+        if (input.contains(";")) {
             throw new TigerSemiColonException("");
         }
-        this.command = command;
+        this.input = input;
     }
 
     // TODO: rewrite parsing functionality with regrex
@@ -36,7 +36,7 @@ public class Parser {
      */
 
     public String getCommandKeyword() {
-        String[] array = this.command.split(" ");
+        String[] array = this.input.split(" ");
         return array[0];
     }
 

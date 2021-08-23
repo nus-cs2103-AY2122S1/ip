@@ -46,22 +46,28 @@ public class Command {
             return new ListAction(applicationState);
         case "done":
             MarkDoneParser markDoneParser = new MarkDoneParser(command);
-            return new MarkDoneAction(applicationState, markDoneParser.index - 1);
+            markDoneParser.parse();
+            return new MarkDoneAction(applicationState, markDoneParser.getIndex() - 1);
         case "delete":
             DeleteParser deleteCommand = new DeleteParser(command);
-            return new DeleteAction(applicationState, deleteCommand.index - 1);
+            deleteCommand.parse();
+            return new DeleteAction(applicationState, deleteCommand.getIndex() - 1);
         case "todo":
             ToDoParser toDoCommand = new ToDoParser(command);
-            return new ToDoAction(applicationState, toDoCommand.todo);
+            toDoCommand.parse();
+            return new ToDoAction(applicationState, toDoCommand.getTodo());
         case "deadline":
             DeadLineParser deadLineCommand = new DeadLineParser(command);
-            return new DeadLineAction(applicationState, deadLineCommand.todo, deadLineCommand.dateLine);
+            deadLineCommand.parse();
+            return new DeadLineAction(applicationState, deadLineCommand.getTodo(), deadLineCommand.getDate());
         case "event":
             EventParser eventCommand = new EventParser(command);
-            return new EventAction(applicationState, eventCommand.todo, eventCommand.eventAt);
+            eventCommand.parse();
+            return new EventAction(applicationState, eventCommand.getTodo(), eventCommand.getDate());
         case "find":
             FindParser findCommand = new FindParser(command);
-            return new FindAction(applicationState, findCommand.findString);
+            findCommand.parse();
+            return new FindAction(applicationState, findCommand.getToSearchFor());
         case "clear":
             return new ClearAction(applicationState);
         default:

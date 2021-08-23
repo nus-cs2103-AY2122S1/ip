@@ -7,7 +7,7 @@ done 2
 todo carp
 todo carpfishy
 todo eat something
-event koifishy /at 14:35
+event koifishy /at 2021-08-22 14:35
 deadline feed fish /by 2021-12-21 12:22
 find carp
 find fish

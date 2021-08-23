@@ -14,53 +14,53 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MarkDoneParserTest {
     @Test
     public void markDoneParser_doneWithIndex_success() {
-        assertEquals(1,
-                new MarkDoneParser("done 1").index);
+        MarkDoneParser markDoneParser = new MarkDoneParser("done 1");
+        markDoneParser.parse();
+        assertEquals(1, markDoneParser.getIndex());
     }
 
     @Test
     public void markDoneParser_doneWithIndexLarge_success() {
-        assertEquals(212,
-                new MarkDoneParser("done 212").index);
+        MarkDoneParser markDoneParser = new MarkDoneParser("done 212");
+        markDoneParser.parse();
+        assertEquals(212, markDoneParser.getIndex());
     }
 
     @Test
     public void markDoneParser_zero_failure() {
         TigerException thrown = assertThrows(TigerInvalidArgumentException.class, () -> {
-            MarkDoneParser markDoneParser = new MarkDoneParser("done 0");
+            new MarkDoneParser("done 0").parse();
         });
-        assertTrue(thrown.toString().contains("0 is not a valid argument " +
-                "for the Done command."));
+        assertTrue(thrown.toString().contains("0 is not a valid argument for the Done command."));
     }
 
     @Test
     public void markDoneParser_negative_failure() {
         TigerException thrown = assertThrows(TigerInvalidArgumentException.class, () -> {
-            MarkDoneParser markDoneParser = new MarkDoneParser("done -55");
+            new MarkDoneParser("done -55").parse();
         });
-        assertTrue(thrown.toString().contains("-55 is not a valid argument " +
-                "for the Done command."));
+        assertTrue(thrown.toString().contains("-55 is not a valid argument for the Done command."));
     }
 
     @Test
     public void markDoneParser_decimal_failure() {
         TigerException thrown = assertThrows(TigerInvalidArgumentException.class, () -> {
-            MarkDoneParser markDoneParser = new MarkDoneParser("done 5.5");
+            new MarkDoneParser("done 5.5").parse();
         });
-        assertTrue(thrown.toString().contains("5.5 is not a valid argument " +
-                "for the Done command."));
+        assertTrue(thrown.toString().contains("5.5 is not a valid argument for the Done command."));
     }
 
     @Test
     public void markDoneParser_spaces_success() {
-        assertEquals(5,
-                new MarkDoneParser("  done 5  ").index);
+        MarkDoneParser markDoneParser = new MarkDoneParser("  done 5  ");
+        markDoneParser.parse();
+        assertEquals(5, markDoneParser.getIndex());
     }
 
     @Test
     public void markDoneParser_tooManyArguments_failure() {
         TigerException thrown = assertThrows(TigerTooManyInputsException.class, () -> {
-            MarkDoneParser markDoneParser = new MarkDoneParser("done 5 5555");
+            new MarkDoneParser("done 5 5555").parse();
         });
         assertTrue(thrown.toString().contains(Messages.EXCEPTION_INPUT_TOO_MANY_ARGUMENTS.getMessage()));
     }
@@ -68,11 +68,9 @@ public class MarkDoneParserTest {
     @Test
     public void markDoneParser_missingArguments_failure() {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
-            MarkDoneParser markDoneParser = new MarkDoneParser("done");
+            new MarkDoneParser("done").parse();
         });
-        assertTrue(thrown.toString().contains("Done index property cannot " +
-                "be empty" +
-                ".\nPlease ensure you key in the command in the format " +
-                "specified."));
+        assertTrue(thrown.toString().contains("Done index property cannot be empty.\nPlease ensure you key " +
+                "in the command in the format specified."));
     }
 }

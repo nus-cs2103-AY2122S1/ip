@@ -3,9 +3,9 @@ package tiger.parser;
 public class ByeParser extends Parser {
 
     /**
-     * Practically, {@ByeParser} does nothing as there is nothing to parse
-     * for the {@Bye} command. This is a filler class in case some additional
-     * arguments is added to the {@Bye} command in the future.
+     * Practically, {@code ByeParser} does nothing as there is nothing to parse
+     * for the {@code Bye} command. This is a filler class in case some additional
+     * arguments is added to the {@code Bye} command in the future.
      *
      * @param input String to be parsed.
      */

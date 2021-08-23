@@ -8,19 +8,21 @@ import tiger.utils.RemoveSpaces;
 
 public class MarkDoneParser extends Parser {
 
-    public int index;
+    private int index;
+
+    public MarkDoneParser(String input) {
+        super(input);
+    }
 
     /**
      * The {@code MarkDoneParser} parser class takes in an input String and
      * parses it, so that the {@code MarkDoneAction} class can access the
      * class fields and understand user input.
      *
-     * @param  input String to be parsed.
      * @throws TigerInvalidInputException If input is invalid.
      */
 
-    public MarkDoneParser(String input) throws TigerInvalidInputException {
-        super(input);
+    public void parse() throws TigerInvalidInputException {
         RemoveSpaces removeSpaces = new RemoveSpaces();
         String[] array = removeSpaces.removeBackAndFrontSpaces(input).split(
                 " ");
@@ -37,5 +39,9 @@ public class MarkDoneParser extends Parser {
         } catch (AssertionError e) {
             throw new TigerInvalidArgumentException(array[1], "Done");
         }
+    }
+
+    public int getIndex() {
+        return this.index;
     }
 }

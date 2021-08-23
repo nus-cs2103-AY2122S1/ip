@@ -5,19 +5,21 @@ import tiger.utils.RemoveSpaces;
 
 public class ToDoParser extends Parser {
 
-    public String todo = "";
+    private String todo = "";
+
+    public ToDoParser(String input) {
+        super(input);
+    }
 
     /**
      * The {@code ToDoParser} parser class takes in an input String and
      * parses it, so that the {@code ToDoAction} class can access the
      * class fields and understand user input.
      *
-     * @param  input String to be parsed.
      * @throws TigerEmptyStringException If input is invalid.
      */
 
-    public ToDoParser(String input) throws TigerEmptyStringException {
-        super(input);
+    public void parse() throws TigerEmptyStringException {
         RemoveSpaces removeSpaces = new RemoveSpaces();
         try {
             String[] array =
@@ -30,4 +32,9 @@ public class ToDoParser extends Parser {
             throw new TigerEmptyStringException("ToDo description");
         }
     }
+
+    public String getTodo() {
+        return this.todo;
+    }
+
 }

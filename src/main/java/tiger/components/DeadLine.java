@@ -8,21 +8,7 @@ import tiger.utils.DateStringConverter;
 public class DeadLine extends Task {
 
     /** Date deadline is due by. */
-    private final CustomDate customDate;
-
-    /**
-     * Private constructor for {@code DeadLine} class.
-     *
-     * @param taskDescription description of Task.
-     * @param done whether the Task is done.
-     * @param deadLine String representation of the date.
-     * @throws TigerDateParsingException if the input date is invalid.
-     */
-
-    private DeadLine(String taskDescription, boolean done, String deadLine) throws TigerDateParsingException {
-        super(taskDescription, done);
-        this.customDate = new DateStringConverter().getDateFromString(deadLine);
-    }
+    private final CustomDate date;
 
     /**
      * Private constructor for {@code DeadLine} class.
@@ -33,21 +19,9 @@ public class DeadLine extends Task {
      * @throws TigerDateParsingException if the input date is invalid.
      */
 
-    private DeadLine(String taskDescription, boolean done, CustomDate customDate) {
+    public DeadLine(String taskDescription, boolean done, CustomDate customDate) {
         super(taskDescription, done);
-        this.customDate = customDate;
-    }
-
-    /**
-     * Public constructor for {@code DeadLine} class.
-     *
-     * @param taskDescription description of Task.
-     * @param done whether the Task is done.
-     * @param deadLine String representation of the date.
-     */
-
-    public static DeadLine of(String taskDescription, boolean done, String deadLine) {
-        return new DeadLine(taskDescription, done, deadLine);
+        this.date = customDate;
     }
 
     /**
@@ -56,7 +30,7 @@ public class DeadLine extends Task {
 
     @Override
     public DeadLine markDone() {
-        return new DeadLine(this.taskDescription, true, this.customDate);
+        return new DeadLine(this.taskDescription, true, this.date);
     }
 
     /**
@@ -67,10 +41,11 @@ public class DeadLine extends Task {
 
     @Override
     public String toString() {
+        // TODO: make current day display as today
         if (this.done) {
-            return String.format("[D] [X] %s (by %s)", this.taskDescription, this.customDate.toString());
+            return String.format("[D] [X] %s (by %s)", this.taskDescription, this.date.toString());
         } else {
-            return String.format("[D] [ ] %s (by %s)", this.taskDescription, this.customDate.toString());
+            return String.format("[D] [ ] %s (by %s)", this.taskDescription, this.date.toString());
         }
     }
 
@@ -82,7 +57,7 @@ public class DeadLine extends Task {
      */
 
     protected String getStorageRepresentation() {
-        return String.format("D;%s;%s;%s", this.done, this.taskDescription, this.customDate.toString());
+        return String.format("D;%s;%s;%s", this.done, this.taskDescription, this.date.toString());
     }
 
     /**
@@ -95,6 +70,7 @@ public class DeadLine extends Task {
     protected static DeadLine getTaskFromStringRepresentation(String s) throws TigerStorageLoadException {
         /* s should be of the form T|true/false|taskDescription| */
         String[] stringArray = s.split(";", 4);
+        DateStringConverter dateStringConverter = new DateStringConverter();
         int length = stringArray.length;
         try {
             assert (length == 4);
@@ -107,9 +83,10 @@ public class DeadLine extends Task {
             // check that the event timing is non-empty
             assert (!stringArray[3].equals(""));
             if (stringArray[1].equals("true")) {
-                return new DeadLine(stringArray[2], true, stringArray[3]); // task description, done, timing
+                // task description, done, date
+                return new DeadLine(stringArray[2], true, dateStringConverter.getDateFromString(stringArray[3]));
             } else {
-                return new DeadLine(stringArray[2], false, stringArray[3]); // task description, done, timing
+                return new DeadLine(stringArray[2], false, dateStringConverter.getDateFromString(stringArray[3]));
             }
         } catch (AssertionError e) {
             throw new TigerStorageLoadException(e.toString());

@@ -1,6 +1,5 @@
 package tiger.components;
 
-import tiger.exceptions.inputs.TigerDateParsingException;
 import tiger.exceptions.storage.TigerStorageLoadException;
 import tiger.utils.CustomDate;
 import tiger.utils.DateStringConverter;
@@ -8,45 +7,19 @@ import tiger.utils.DateStringConverter;
 public class Event extends Task {
 
     /** Date event is at. */
-    private final CustomDate customDate;
-
-    /**
-     * Private constructor for {@code Event} class.
-     *
-     * @param taskDescription description of Task.
-     * @param done whether the Task is done.
-     * @param eventAt String representation of the date.
-     * @throws TigerDateParsingException if the input date is invalid.
-     */
-
-    private Event(String taskDescription, boolean done, String eventAt) throws TigerDateParsingException {
-        super(taskDescription, done);
-        this.customDate = new DateStringConverter().getDateFromString(eventAt);
-    }
-
-    /**
-     * Private constructor for {@code Event} class.
-     *
-     * @param taskDescription description of Task.
-     * @param done whether the Task is done.
-     * @param customDate A {@code CustomDate object}.
-     */
-
-    private Event(String taskDescription, boolean done, CustomDate customDate) {
-        super(taskDescription, done);
-        this.customDate = customDate;
-    }
+    private final CustomDate date;
 
     /**
      * Public constructor for {@code Event} class.
      *
      * @param taskDescription description of Task.
      * @param done whether the Task is done.
-     * @param eventAt String representation of the date.
+     * @param date A {@code CustomDate object}.
      */
 
-    public static Event of(String taskDescription, boolean done, String eventAt) {
-        return new Event(taskDescription, done, eventAt);
+    public Event(String taskDescription, boolean done, CustomDate date) {
+        super(taskDescription, done);
+        this.date = date;
     }
 
     /**
@@ -55,7 +28,7 @@ public class Event extends Task {
 
     @Override
     public Event markDone() {
-        return new Event(this.taskDescription, true, this.customDate);
+        return new Event(this.taskDescription, true, this.date);
     }
 
     /**
@@ -66,9 +39,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (this.done) {
-            return String.format("[E] [X] %s (at %s)", this.taskDescription, this.customDate.toString());
+            return String.format("[E] [X] %s (at %s)", this.taskDescription, this.date.toString());
         } else {
-            return String.format("[E] [ ] %s (at %s)", this.taskDescription, this.customDate.toString());
+            return String.format("[E] [ ] %s (at %s)", this.taskDescription, this.date.toString());
         }
     }
 
@@ -80,7 +53,7 @@ public class Event extends Task {
      */
 
     protected String getStorageRepresentation() {
-        return String.format("E;%s;%s;%s", this.done, this.taskDescription, this.customDate.toString());
+        return String.format("E;%s;%s;%s", this.done, this.taskDescription, this.date.toString());
     }
 
     /**
@@ -93,6 +66,7 @@ public class Event extends Task {
 
     protected static Event getTaskFromStringRepresentation(String s) throws TigerStorageLoadException {
         /* s should be of the form T|true/false|taskDescription| */
+        DateStringConverter dateStringConverter = new DateStringConverter();
         String[] stringArray = s.split(";");
         int length = stringArray.length;
         try {
@@ -106,9 +80,10 @@ public class Event extends Task {
             // check that the event timing is non-empty
             assert (!stringArray[3].equals(""));
             if (stringArray[1].equals("true")) {
-                return new Event(stringArray[2], true, stringArray[3]); // task description, done, timing
+                // task description, done, timing
+                return new Event(stringArray[2], true, dateStringConverter.getDateFromString(stringArray[3]));
             } else {
-                return new Event(stringArray[2], false, stringArray[3]); // task description, done, timing
+                return new Event(stringArray[2], false, dateStringConverter.getDateFromString(stringArray[3]));
             }
         } catch (AssertionError e) {
             throw new TigerStorageLoadException(e.toString());
