@@ -1,10 +1,16 @@
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
+
     public static void main(String[] args) {
-        ArrayList<Task> task = new ArrayList<>();
+        Database myTask = new Database();
+        ArrayList<Task> task = myTask.getData();
+//        ArrayList<Task> task = new ArrayList<>();
+
         int taskNum = 0;
         String indentation = "       ";
         String Horizontal_line = "---------------------------------------------------------------";
@@ -14,9 +20,9 @@ public class Duke {
         final String DONE = "done";
         final String DELETE = "delete";
         //Enumeration
-        enum Command {
-            CLIST, CDONE, CBYE, CDELETE, COTHER
-        };
+//        enum Command {
+//            CLIST, CDONE, CBYE, CDELETE, COTHER
+//        };
 
         boolean isEnd = false;
         String logo = " ____        _        \n"
@@ -34,21 +40,21 @@ public class Duke {
         while (!isEnd) {
             String keywords = scanner.nextLine();
             String[] keyword = keywords.split(" ");
-            Command command;
-            if (keyword[0].equals("list")) {
-                command = Command.CLIST;
-            } else if (keyword[0].equals("bye")) {
-                command = Command.CBYE;
-            } else if (keyword[0].equals("done")) {
-                command = Command.CDONE;
-            } else if (keyword[0].equals("delete")) {
-                command = Command.CDELETE;
-            } else {
-                command = Command.COTHER;
-            }
+//            Command command;
+//            if (keyword[0].equals("list")) {
+//                command = Command.CLIST;
+//            } else if (keyword[0].equals("bye")) {
+//                command = Command.CBYE;
+//            } else if (keyword[0].equals("done")) {
+//                command = Command.CDONE;
+//            } else if (keyword[0].equals("delete")) {
+//                command = Command.CDELETE;
+//            } else {
+//                command = Command.COTHER;
+//            }
 
-            switch(command) {
-                case CLIST:
+            switch(keyword[0]) {
+                case LIST:
                     System.out.println(indentation + Horizontal_line);
                     try {
 
@@ -81,7 +87,7 @@ public class Duke {
                     System.out.println(indentation + Horizontal_line);
 
                     break;
-                case CDONE:
+                case DONE:
 
                     try {
                         Integer num = Integer.valueOf(keyword[1]) - 1;
@@ -118,7 +124,7 @@ public class Duke {
                     }
 
                     break;
-                case CDELETE:
+                case DELETE:
                     try {
                         Integer num = Integer.valueOf(keyword[1]) - 1;
 
@@ -157,7 +163,7 @@ public class Duke {
                         System.out.println(indentation + Horizontal_line);
                     }
                     break;
-                case CBYE:
+                case BYE:
                     System.out.println(indentation + Horizontal_line);
                     System.out.println(indentation + "Bye. Hope to see you again soon!");
                     System.out.println(indentation + Horizontal_line);
@@ -194,7 +200,9 @@ public class Duke {
                                     System.out.println(indentation + Horizontal_line);
                                     break;
                                 }
-                                task.add(new Deadline(taskname_ddl, false, taskNum, tasktime_ddl));
+                                Task ddl = new Deadline(taskname_ddl, false, taskNum, tasktime_ddl);
+                                task.add(ddl);
+                                myTask.writeToDatabase(ddl);
                                 taskNum++;
                                 System.out.println(indentation + Horizontal_line);
                                 System.out.println(indentation + "Got it. I've added this task:");
@@ -213,7 +221,10 @@ public class Duke {
                                 for (int i = 1; i < keyword.length; i++) {
                                     taskname_todo += " " + keyword[i];
                                 }
-                                task.add(new Todo(taskname_todo, false, taskNum));
+                                Task todo = new Todo(taskname_todo, false, taskNum);
+
+                                task.add(todo);
+                                myTask.writeToDatabase(todo);
                                 taskNum++;
                                 System.out.println(indentation + Horizontal_line);
                                 System.out.println(indentation + "Got it. I've added this task:");
@@ -248,7 +259,9 @@ public class Duke {
                                     System.out.println(indentation + Horizontal_line);
                                     break;
                                 }
-                                task.add(new Event(taskname_event, false, taskNum, tasktime_event));
+                                Task event = new Event(taskname_event, false, taskNum, tasktime_event);
+                                task.add(event);
+                                myTask.writeToDatabase(event);
                                 taskNum++;
                                 System.out.println(indentation + Horizontal_line);
                                 System.out.println(indentation + "Got it. I've added this task:");
