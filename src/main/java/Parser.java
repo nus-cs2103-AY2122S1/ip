@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
     protected static int parseTaskId(String index) throws UnableToParseException {
         int i;
@@ -21,9 +24,16 @@ public class Parser {
 
     protected static Deadline parseDeadline(String args) throws InvalidArgumentsException {
         String[] splitArgs = args.split(" /by ");
+        InvalidArgumentsException invalidArgsException = new InvalidArgumentsException("deadline [task] /by [YYYY-MM-DD]");
         if (splitArgs.length != 2) {
-            throw new InvalidArgumentsException("deadline [task] /by [time]");
+            throw invalidArgsException;
         }
-        return new Deadline(splitArgs[0], splitArgs[1]);
+        
+        try {
+            LocalDate by = LocalDate.parse(splitArgs[1]);
+            return new Deadline(splitArgs[0], by);
+        } catch (DateTimeParseException e) {
+            throw invalidArgsException;
+        }
     }
 }
