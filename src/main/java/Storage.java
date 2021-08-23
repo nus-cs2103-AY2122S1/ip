@@ -8,11 +8,11 @@ import java.io.FileNotFoundException;
 
 
 
-public class FileHandler {
+public class Storage {
     private final String fileName;
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    private final TaskList tasks = new TaskList(new ArrayList<Task>());
 
-    FileHandler(String fileName) throws IOException {
+    Storage(String fileName) {
         this.fileName = fileName;
     }
 
@@ -62,7 +62,7 @@ public class FileHandler {
         return newTask;
     }
 
-    ArrayList<Task> getTasks() {
+    TaskList getTasks() {
         return tasks;
     }
 

@@ -5,9 +5,9 @@ import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.io.IOException;
 
-public class DukeHandler {
-    private final ArrayList<Task> tasks;
-    private final FileHandler fileHandler;
+public class Parser {
+    private final TaskList tasks;
+    private final Storage storage;
 
     DateTimeFormatter fmt = new DateTimeFormatterBuilder()
             .appendPattern("d/M/yyyy")
@@ -18,9 +18,9 @@ public class DukeHandler {
             .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
             .toFormatter();
 
-    DukeHandler(ArrayList<Task> tasks, FileHandler fileHandler) {
+    Parser(TaskList tasks, Storage storage) {
         this.tasks = tasks;
-        this.fileHandler = fileHandler;
+        this.storage = storage;
     }
 
     public boolean isExit(String input) {
@@ -49,7 +49,7 @@ public class DukeHandler {
             }
             Todo todo = new Todo(splitString[1]);
             tasks.add(todo);
-            fileHandler.write(todo.save());
+            storage.write(todo.save());
             break;
         case "deadline":
             if (splitString.length == 1) {
@@ -62,7 +62,7 @@ public class DukeHandler {
             Deadline deadline = new Deadline(splitDeadline[0], LocalDateTime.parse(splitDeadline[1], fmt));
             tasks.add(deadline);
             System.out.println(deadline.save());
-            fileHandler.write(deadline.save());
+            storage.write(deadline.save());
             break;
         case "event":
             if (splitString.length == 1) {
@@ -74,7 +74,7 @@ public class DukeHandler {
             }
             Event event = new Event(splitEvent[0], LocalDateTime.parse(splitEvent[1], fmt));
             tasks.add(event);
-            fileHandler.write(event.save());
+            storage.write(event.save());
             break;
         default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -91,7 +91,7 @@ public class DukeHandler {
         int i = Integer.parseInt(splitString[1])-1;
         Task removedTask = tasks.remove(i);
         try {
-            fileHandler.writeEntireFile();
+            storage.writeEntireFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,7 +107,7 @@ public class DukeHandler {
         }
         tasks.get(i).markAsDone();
         try {
-            fileHandler.writeEntireFile();
+            storage.writeEntireFile();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,54 +1,47 @@
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
 
 public class Duke {
-    private static DukeHandler dukeHandler;
-    private static FileHandler fileHandler;
-    public static void main(String[] args) {
 
-        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
+    private static Parser parser;
+    private static Storage storage;
+
+    public Duke(String fileName) {
+        storage = new Storage(fileName);
+        try {
+            storage.loadTasks();
+        } catch (IOException | DukeException e) {
+            Ui.showLoadingError();
+        }
+        parser = new Parser(storage.getTasks(), storage);
+    }
+
+    public void run() {
+        Ui.welcome();
         Scanner sc = new Scanner(System.in);
-        loadFile();
 
-
-        DateTimeFormatter fmt = new DateTimeFormatterBuilder()
-                .appendPattern("d/M/yyyy")
-                .optionalStart()
-                .appendPattern(" HHmm")
-                .optionalEnd()
-                .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
-                .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
-                .toFormatter();
         while (true) {
             String input = sc.nextLine();
-            if (dukeHandler.isExit(input)) {
-                System.out.println("\tBye. Hope to see you again soon!");
+            if (parser.isExit(input)) {
+                Ui.bye();
                 break;
             } else {
                 try {
-                    String[] results = dukeHandler.parseInput(input);
-                    for (int i = 0; i < results.length; i++) {
-                        System.out.println(results[i]);
-                    }
+                    String[] results = parser.parseInput(input);
+                    Ui.printAll(results);
                 } catch (Exception e) {
-                    System.out.println("\t" + e);
+                   Ui.showLoadingError();
                 }
             }
         }
     }
+    public static void main(String[] args) {
+        new Duke("duke.txt").run();
 
-    private static void loadFile() {
-        try {
-            fileHandler = new FileHandler("duke.txt");
-            fileHandler.loadTasks();
-            dukeHandler = new DukeHandler(fileHandler.getTasks(), fileHandler);
-        } catch (IOException | DukeException e) {
-            System.out.println(e);
-        }
     }
+
+
 }
