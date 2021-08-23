@@ -45,6 +45,7 @@ public class DukeTest {
         parser.parseInput("event meeting /at 22/2/2022 2222");
         parser.parseInput("event dinner /at 22/2/2022 2222");
 
+        assertEquals("\t1. [E][ ] meeting (22 Feb 2022 22:22)", parser.parseInput("find meeting")[1].toString());
     }
 
 }
