@@ -11,13 +11,18 @@ public class Event extends Task{
      */
     protected String deadline;
 
-    public Event(String description, String deadline) {
-        super(description);
+    public Event(boolean isDone, String description, String deadline) {
+        super(isDone, description);
         this.deadline = deadline;
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + String.format(" (at: %s)", deadline);
+    }
+
+    @Override
+    public String getData() {
+        return String.format("E | %s | %s", super.getData(), this.deadline);
     }
 }

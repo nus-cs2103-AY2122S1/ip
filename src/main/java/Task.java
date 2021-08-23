@@ -2,9 +2,9 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(boolean isDone, String description) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
@@ -18,5 +18,10 @@ public class Task {
     @Override
     public String toString() {
         return String.format("[%s] :  %s", getStatusIcon(), this.description);
+    }
+
+    public String getData() {
+        int isDoneBinary = isDone ? 1 : 0;
+        return String.format("%d | %s", isDoneBinary, this.description);
     }
 }

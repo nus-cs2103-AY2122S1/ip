@@ -1,4 +1,6 @@
-import java.util.*;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class Duke {
@@ -27,10 +29,12 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
         Logger logger = Logger.getLogger("Duke");
         boolean isActive = true;
-        ArrayList<Task> list = new ArrayList<>(100);
+        String filePath = "./data/duke.txt";
+
+        ArrayList<Task> list = TaskReader.read(filePath);
         String welcomeMsg = "Hey, I'm Duke.\n"
                 + "What's up?\n";
         String exitMsg = "Bye! Hope I helped!\n"
@@ -68,6 +72,7 @@ public class Duke {
                             list.remove(index);
                             System.out.println(String.format("You have %d task(s) at the moment!\n", list.size()));
                             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                            TaskReader.write(filePath, list);
                         }
                         break;
                     }
@@ -81,6 +86,7 @@ public class Duke {
                             System.out.println("Awesome! I marked this as done:\n" +
                                     list.get(index).toString());
                             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                            TaskReader.write(filePath, list);
                         }
                         break;
                     }
@@ -88,12 +94,13 @@ public class Duke {
                         if (remainder == null) {
                             throw DukeException.emptyDesc();
                         }
-                        Todo event = new Todo(remainder);
+                        Todo event = new Todo(false, remainder);
                         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                         System.out.println("Alright! I added this task: \n" + event.toString() + "\n");
                         list.add(event);
                         System.out.println(String.format("You have %d task(s) at the moment!\n", list.size()));
                         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        TaskReader.write(filePath, list);
                         break;
                     }
                     case DEADLINE: {
@@ -101,12 +108,13 @@ public class Duke {
                             throw DukeException.emptyDesc();
                         }
                         String[] tokens = remainder.split(" /by ", 2);
-                        Deadline event = new Deadline(tokens[0], tokens[1]);
+                        Deadline event = new Deadline(false, tokens[0], tokens[1]);
                         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                         System.out.println("Alright! I added this task: \n" + event.toString() + "\n");
                         list.add(event);
                         System.out.println(String.format("You have %d task(s) at the moment!\n", list.size()));
                         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        TaskReader.write(filePath, list);
                         break;
                     }
                     case EVENT: {
@@ -114,12 +122,13 @@ public class Duke {
                             throw DukeException.emptyDesc();
                         }
                         String[] tokens = remainder.split(" /at ", 2);
-                        Event event = new Event(tokens[0], tokens[1]);
+                        Event event = new Event(false, tokens[0], tokens[1]);
                         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                         System.out.println("Alright! I added this task: \n" + event.toString() + "\n");
                         list.add(event);
                         System.out.println(String.format("You have %d task(s) at the moment!\n", list.size()));
                         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        TaskReader.write(filePath, list);
                         break;
                     }
                     default:
