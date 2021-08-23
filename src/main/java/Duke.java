@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Scanner;
 
 public class Duke {
     public static List todoList;
@@ -21,14 +22,8 @@ public class Duke {
                 Duke.todoList = new List();
             } else {
                 System.out.println("Data exists");
-                FileWriter myWriter = new FileWriter("filename.txt");
-                myWriter.write("1");
-                myWriter.write(System.lineSeparator());
-                myWriter.write("2");
-                myWriter.write(System.lineSeparator());
-                myWriter.write("3");
-                myWriter.close();
-                Duke.todoList = new List();
+                Storage data = new Storage(myObj);
+                Duke.todoList = new List(data.load());
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");

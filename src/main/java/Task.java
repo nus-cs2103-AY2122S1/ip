@@ -7,8 +7,24 @@ public class Task {
         this.done = false;
     }
 
+    public Task(String name, Boolean done) {
+        this.name = name;
+        this.done = done;
+    }
+
     public void markAsDone() {
         this.done = true;
+    }
+
+    public static Task create(String[] input) {
+        if (input[0].equals("T")) {
+            return new Todo(input);
+        } else if (input[0].equals("E")) {
+            return new Event(input);
+        } else if (input[0].equals("D")) {
+            return new Deadline(input);
+        }
+        return new Task("ERROR");
     }
 
     @Override
@@ -17,6 +33,6 @@ public class Task {
     }
 
     public String toDataString() {
-        return this.done ? "T|" : "F|" + this.name;
+        return (this.done ? "T|" : "F|") + this.name;
     }
 }
