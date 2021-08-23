@@ -6,13 +6,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A representation of a class that handles the reading and writing of the data.
+ */
 public class Storage {
     private File file;
 
+    /**
+     * Constructor for the Storage Class
+     *
+     * @param file The file containing the data.
+     */
     public Storage(File file) {
         this.file = file;
     }
 
+    /**
+     * Reads the data from the File.
+     * Add the entries to the List according to the order in data.
+     *
+     * @return A newly created List of Tasks.
+     * @throws IOException If the file cannot be read/found.
+     */
     public ArrayList<Task> load() throws IOException {
         Scanner myReader = new Scanner(file);
         ArrayList<Task> result = new ArrayList<>();
@@ -25,6 +40,11 @@ public class Storage {
         return result;
     }
 
+    /**
+     * Updates the data in the file.
+     *
+     * @throws IOException If the file cannot be read/found.
+     */
     public static void writeToFile() throws IOException {
         FileWriter myWriter = new FileWriter("filename.txt");
 
