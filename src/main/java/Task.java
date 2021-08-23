@@ -19,12 +19,12 @@ public class Task {
         return this.completed;
     }
 
-    @Override
-    public String toString() {
-        return (this.completed ? "[X] " : "[ ] " ) + this.name;
-    }
-
     public String print() {
         return String.format("T,%d,%s",isCompleted() ? 1 : 0, this.getName());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s", this.isCompleted() ? "[X]" : "[ ]", this.getName());
     }
 }
