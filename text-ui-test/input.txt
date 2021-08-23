@@ -1,3 +1,4 @@
+reset
 foo
 list
 
@@ -5,9 +6,9 @@ todo find a book
 list
 deadline learn magic
 list
-deadline learn magic /by tomorrow
-event visiting koi /by today
-event visiting koi /at 23 Apr 2998 4 pm
+deadline learn magic /by 1999-02-02 0400
+event visiting koi /at 1999-02-02 1800
+event visiting koi /by 1999-05-02 0900 - 1999-05-01
 list
 done 2
 list
