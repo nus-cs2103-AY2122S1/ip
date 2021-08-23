@@ -11,8 +11,8 @@ import java.util.Scanner;
  * Represents a UI that the user interacts with.
  */
 public class Ui {
-    private PrintStream out;
-    private Scanner in;
+    private final PrintStream out;
+    private final Scanner in;
     private static final String line = "\n\t_______________________________________________________________";
 
     public Ui() {
