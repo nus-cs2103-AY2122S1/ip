@@ -1,12 +1,11 @@
 todo borrow book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /by 2021-27-08 14:15
+event project meeting /at Aug 26 2021 19:15
 list
 done 2
-event dinner party /at Tues 4-6pm
+event dinner party /at Aug 25 2021 18:00
 done 3
-list
 delete 2
+event have dinner /at 2021-28-08 14:20
 list
-event have dinner /at 2am
 bye

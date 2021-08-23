@@ -16,6 +16,10 @@ public class Event extends Task{
         this.dateAndTime = dateAndTime;
     }
 
+    public String getDate() {
+        return this.dateAndTime;
+    }
+
     public void formatLocalDateTime() {
         if (this.dateAndTime.substring(0, 1).matches("[0-9]")) {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

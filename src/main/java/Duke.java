@@ -10,7 +10,6 @@ enum Activity {
 public class Duke {
 
     public static void main(String[] args) {
-
         final String INTRO = "Hello! I'm Duke\n" +
                 "What can I do for you?";
 
@@ -71,7 +70,7 @@ public class Duke {
                         String subtext = "Nice! I've marked this task as done:\n";
                         Task currentTask = lst.get(index);
                         currentTask.setDone();
-                        System.out.println(subtext + currentTask.getStatusAndDescription());
+                        System.out.println(subtext + currentTask.toString());
                         writeToFile(FILE_NAME, lst);
                         break;
                     }
@@ -80,7 +79,7 @@ public class Duke {
                         System.out.println("Here are the tasks in your list:");
                         for (int i = 0; i < lst.size(); i++) {
                             Task currentTask = lst.get(i);
-                            System.out.println((i + 1) + "." + currentTask.getStatusAndDescription());
+                            System.out.println((i + 1) + "." + currentTask.toString());
                         }
                         writeToFile(FILE_NAME, lst);
                         break;
@@ -159,7 +158,7 @@ public class Duke {
                 }
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means! Please fill in a valid command");
-            } catch (DukeException | DeleteException e) {
+            } catch (DukeException | DeleteException | IOException e) {
                 System.out.println(e.getMessage());
             }
         }

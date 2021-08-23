@@ -25,6 +25,10 @@ public class Deadline extends Task {
         }
     }
 
+    public String getDate() {
+        return this.dateAndTime;
+    }
+
     @Override
     public String toString() {
         formatLocalDateTime();
