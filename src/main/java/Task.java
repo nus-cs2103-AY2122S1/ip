@@ -26,7 +26,7 @@ public class Task {
     /**
      * Marks this task as done by changing the isDone boolean to true
      */
-    public void markAsDone() {
+    public void markDone() {
         this.isDone = true;
     }
 

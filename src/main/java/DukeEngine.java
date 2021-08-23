@@ -244,9 +244,9 @@ public class DukeEngine {
         } else {
             //because our list starts from index 0 instead of index 1
             int realIndex = taskNumber - 1;
-            this.taskList.get(realIndex).markAsDone();
+            this.taskList.get(realIndex).markDone();
 
-            messages.markAsDoneMessage(this.taskList.get(realIndex).toString());
+            messages.markDoneMessage(this.taskList.get(realIndex).toString());
         }
     }
 

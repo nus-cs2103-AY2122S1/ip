@@ -21,6 +21,9 @@ public class DatabaseEngine {
     private Path fileDir;
     private DukeMessages messages = new DukeMessages();
 
+    /**
+     * Constructor of DatabaseEngine.
+     */
     public DatabaseEngine() {
         this.dir = Paths.get(System.getProperty("user.dir"), "database");
         this.fileDir = Paths.get(System.getProperty("user.dir"), "database", "database.txt");
@@ -97,7 +100,7 @@ public class DatabaseEngine {
 
                     Deadline deadlineTask = new Deadline(description, by);
                     if (isDone) {
-                        deadlineTask.markAsDone();
+                        deadlineTask.markDone();
                     }
                     taskList.add(deadlineTask);
                 }
@@ -109,7 +112,7 @@ public class DatabaseEngine {
 
                     Event eventTask = new Event(description, at);
                     if (isDone) {
-                        eventTask.markAsDone();
+                        eventTask.markDone();
                     }
                     taskList.add(eventTask);
 
@@ -121,7 +124,7 @@ public class DatabaseEngine {
 
                     Todo todoTask = new Todo(description);
                     if (isDone) {
-                        todoTask.markAsDone();
+                        todoTask.markDone();
                     }
                     taskList.add(todoTask);
                 }
