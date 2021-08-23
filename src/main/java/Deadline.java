@@ -27,7 +27,8 @@ public class Deadline extends Task {
      */
     @Override
     public String getDataString() {
-        return "D | " + super.getDataString() + " | " + this.by;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d H:mm");
+        return "D | " + super.getDataString() + " | " + this.by.format(formatter);
     }
 
     /**

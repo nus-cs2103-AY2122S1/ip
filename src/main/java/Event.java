@@ -27,7 +27,8 @@ public class Event extends Task {
      */
     @Override
     public String getDataString() {
-        return "E | " + super.getDataString() + " | " + this.at;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d H:mm");
+        return "E | " + super.getDataString() + " | " + this.at.format(formatter);
     }
 
     /**
