@@ -19,10 +19,11 @@ public class Task {
      *
      * @param task String description of the task
      */
-    public static Task createTask(String task) throws DukeException  {
+    public static Task createTask(String task) throws DukeException {
         String[] taskArr = task.split(" ", 2);
         String firstWord = taskArr[0];
-       if (firstWord.equals("todo")) {
+
+        if (firstWord.equals("todo")) {
            if (taskArr.length < 2) {
                throw new DukeMissingTaskDescription(new ToDo(" "), new IllegalArgumentException());
            }

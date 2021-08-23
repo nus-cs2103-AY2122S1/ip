@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
+
 /**
  * Represents a Deadline object that can be added
  * to users' task list.
@@ -5,11 +10,17 @@
  * @author Ne Zhijian, Didymus A0218159Y
  */
 public class Deadline extends Task {
-    private final String deadline;
+    private LocalDate deadlineDate;
 
     protected Deadline(String[] arrString) throws DukeException {
         super(arrString.length < 2 ? " " : arrString[0]);
-        this.deadline = arrString[1];
+        String date = arrString[1] == null ? " " : arrString[1].strip();
+
+        try {
+            this.deadlineDate = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeIncorrectTaskDescription(this, new IllegalArgumentException());
+        }
     }
 
     /**
@@ -17,7 +28,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String[] arrString = this.deadline.split(" ", 2);
-        return "[D]" + super.toString() + "(" + arrString[0] + "by: " + arrString[1] + ")";
+        return "[D]" + super.toString() + "(by: " +
+                this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

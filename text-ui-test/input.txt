@@ -1,14 +1,14 @@
 done 0
 done zero
 list
-deadline iP due /by 19 Aug 2359
-deadline iP due by 19 Aug 2359
-deadline iP due /at 19 Aug 2359
+deadline iP due /by 2021-08-19
+deadline iP due by 2021-08-19
+deadline iP due /at 2021-08-19
 todo buy financial calculator
 todo recap cs2100 lecture
-event lazpitch /at 16 Aug 2359
-event lazpitch at 16 Aug 2359
-event lazpitch /by 16 Aug 2359
+event lazpitch /at 2021-08-30
+event lazpitch at 2021-08-19
+event lazpitch /by 2021-08-19
 event
 deadline
 todo
