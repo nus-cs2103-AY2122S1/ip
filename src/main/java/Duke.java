@@ -32,7 +32,11 @@ public class Duke {
                     if (input.equals("bye")) {
                         break;
                     }
+<<<<<<< HEAD
                     Level7(input, tasks);
+=======
+                    Level6(input, tasks);
+>>>>>>> master
             }
             System.out.println(displayLabel(byeLabel));
         } catch (DukeException | IOException e) {
