@@ -3,7 +3,7 @@ public class Event extends Task {
   protected String when;
 
   public Event(String description, String when) {
-    super(description);
+    super(description, Task.Type.EVENT);
     this.when = when;
   }
 

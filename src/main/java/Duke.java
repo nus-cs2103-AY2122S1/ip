@@ -45,11 +45,11 @@ class Duke {
       } else if (command.equals("done")) {
         markTaskComplete(input);
       } else if (command.equals("todo")) {
-        addTodoTask(input);
+        addNewTask(input, Task.Type.TODO);
       } else if (command.equals("deadline")) {
-        addDeadlineTask(input);
+        addNewTask(input, Task.Type.DEADLINE);
       } else if (command.equals("event")) {
-        addEventTask(input);
+        addNewTask(input, Task.Type.EVENT);
       } else if (command.equals("delete")) {
         deleteTask(input);
       } else {
@@ -125,39 +125,12 @@ class Duke {
     }
   }
 
-  private void addTodoTask(String input) throws UserInputError {
-    checkDescExist(input);
-    Task newTask = new Todo(getDesc(input));
-    taskList.add(newTask);
-    addTaskOutput(newTask);
-  }
 
-  private String[] separateDetails(String str, String key)
-    throws NoDescriptionException {
-    if (str.split(key).length == 1) {
-      throw new NoDescriptionException(
-        "Oops! Please use the correct format with " +
-        key +
-        " to indicate\ndatetime"
-      );
-    }
-    return str.split(key);
-  }
-
-  private void addDeadlineTask(String input) throws UserInputError {
-    checkDescExist(input);
-    String[] details = separateDetails(getDesc(input), "/by");
-    Task newTask = new Deadline(details[0], details[1]);
-    taskList.add(newTask);
-    addTaskOutput(newTask);
-  }
-
-  private void addEventTask(String input) throws UserInputError {
-    checkDescExist(input);
-    String[] details = separateDetails(getDesc(input), "/at");
-    Task newTask = new Event(details[0], details[1]);
-    taskList.add(newTask);
-    addTaskOutput(newTask);
+  private void addNewTask(String input, Task.Type type) throws UserInputError {
+      checkDescExist(input);
+      Task newTask = Task.createTask(getDesc(input), type);
+      taskList.add(newTask);
+      addTaskOutput(newTask);
   }
 
   private void addTaskOutput(Task task) {
