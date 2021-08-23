@@ -2,10 +2,10 @@ import java.util.Scanner;
 /**
  * Parser class to create Task objects from string commands
  */
-public class Parser {
+public class SaveParser {
     Scanner scanner;
 
-    Parser(Scanner scanner) {
+    SaveParser(Scanner scanner) {
         this.scanner = scanner;
     }
 

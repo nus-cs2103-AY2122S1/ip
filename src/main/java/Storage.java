@@ -32,10 +32,10 @@ public class Storage {
         TaskArrayList taskList =  new TaskArrayList();
         try {
             Scanner sc = new Scanner(path);
-            Parser parser = new Parser(sc);
-            while (parser.hasNextLine()) {
+            SaveParser saveParser = new SaveParser(sc);
+            while (saveParser.hasNextLine()) {
                 try {
-                    taskList.add(parser.getNextTask());
+                    taskList.add(saveParser.getNextTask());
                 } catch (DukeException e){
                     System.out.println(e);
                 }
