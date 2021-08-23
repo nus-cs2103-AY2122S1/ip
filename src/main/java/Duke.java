@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -12,7 +13,7 @@ public class Duke {
 
     private void serve() {
         System.out.println("Good Day Sir/Mdm, I am Duke.\nWhat can I do for you?\n");
-
+        this.tasks = FileManager.getPreviousTasks();
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -28,12 +29,14 @@ public class Duke {
                 sc.close();
                 break;
             } else if (input.equals("list")) {
-                System.out.println("Here are your tasks Sir/Mdm:" + this.list());
+                System.out.println("Here are your tasks Sir/Mdm:");
+                System.out.println(this.list());
                 System.out.println();
                 continue;
             } else if (input.split(" ")[0].equals("done")) {
                 try {
                     markAsDone(input);
+                    continue;
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                     System.out.println();
@@ -41,6 +44,7 @@ public class Duke {
             } else if (input.split(" ")[0].equals("delete")) {
                 try {
                     deleteTask(input);
+                    continue;
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                     System.out.println();
@@ -48,6 +52,7 @@ public class Duke {
             } else {
                 try {
                     addTask(input);
+                    continue;
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                     System.out.println();
@@ -60,7 +65,7 @@ public class Duke {
         String[] parsedInput = input.split(" ");
 
         if (parsedInput.length != 2) {
-            throw (new DukeException("Please specify a task you would like marked as done Sir/Mdm:" + this.list()));
+            throw (new DukeException("Please specify a task you would like marked as done Sir/Mdm:\n" + this.list()));
         }
 
         int taskToMark;
@@ -68,7 +73,7 @@ public class Duke {
         try {
             taskToMark = Integer.parseInt(parsedInput[1]) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("Please enter a proper number within this range Sir/Mdm:" + this.list());
+            throw new DukeException("Please enter a proper number within this range Sir/Mdm:\n" + this.list());
         }
 
         if (this.tasks.isEmpty()) {
@@ -76,12 +81,13 @@ public class Duke {
         }
 
         if (taskToMark < 0 || taskToMark > this.tasks.size() - 1) {
-            throw (new DukeException("Please specify a task within this range Sir/Mdm:" + this.list()));
+            throw (new DukeException("Please specify a task within this range Sir/Mdm:\n" + this.list()));
         }
 
         this.tasks.get(taskToMark).markAsDone();
-        System.out.println("Good job Sir/Mdm! I shall mark this task as complete:\n   " +
-                this.tasks.get(taskToMark) + "\n");
+        FileManager.saveTaskList(this.tasks);
+        System.out.println("Good job Sir/Mdm! I shall mark this task as complete:\n   "
+                + this.tasks.get(taskToMark) + "\n");
     }
 
 
@@ -94,6 +100,7 @@ public class Duke {
 
             Task newTask = Task.taskFactory(TaskType.TODO, input);
             this.tasks.add(newTask);
+            FileManager.saveTaskList(this.tasks);
             System.out.println("Understood Sir/Mdm, I have added the indicated task: " + "\n   " + newTask);
             System.out.println("Now you have " + this.tasks.size() + (this.tasks.size() == 1 ? " task." : " tasks.")
                     + "\n");
@@ -102,6 +109,7 @@ public class Duke {
 
             Task newTask = Task.taskFactory(TaskType.DEADLINE, input);
             this.tasks.add(newTask);
+            FileManager.saveTaskList(this.tasks);
             System.out.println("Understood Sir/Mdm, I have added the indicated task: " + "\n   " + newTask);
             System.out.println("Now you have " + this.tasks.size() + (this.tasks.size() == 1 ? " task." : " tasks.")
                     + "\n");
@@ -109,19 +117,19 @@ public class Duke {
         } else if (eventPattern.matcher(input).find() || input.equals("event")) {
             Task newTask = Task.taskFactory(TaskType.EVENT, input);
             this.tasks.add(newTask);
+            FileManager.saveTaskList(this.tasks);
             System.out.println("Understood Sir/Mdm, I have added the indicated task: " + "\n   " + newTask);
             System.out.println("Now you have " + this.tasks.size() + (this.tasks.size() == 1 ? " task." : " tasks.")
                     + "\n");
         } else {
             throw new DukeException("Pardon me Sir/Mdm, but I do not understand.");
         }
-
     }
 
     private String list() {
         String list = "";
         for (int i = 0; i < this.tasks.size(); i++) {
-            list = list + "\n" + (i + 1) + ". " + this.tasks.get(i);
+            list = list + (i == 0 ? "" : "\n") + (i + 1) + ". " + this.tasks.get(i);
         }
 
         return list;
@@ -132,7 +140,7 @@ public class Duke {
         String[] parsedInput = input.split(" ");
 
         if (parsedInput.length != 2) {
-            throw (new DukeException("Please specify a task you would like to delete Sir/Mdm:" + this.list()));
+            throw (new DukeException("Please specify a task you would like to delete Sir/Mdm:\n" + this.list()));
         }
 
         int taskToDelete;
@@ -140,7 +148,7 @@ public class Duke {
         try {
             taskToDelete = Integer.parseInt(parsedInput[1]) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("Please enter a proper number within this range Sir/Mdm:" + this.list());
+            throw new DukeException("Please enter a proper number within this range Sir/Mdm:\n" + this.list());
         }
 
         if (this.tasks.isEmpty()) {
@@ -148,12 +156,13 @@ public class Duke {
         }
 
         if (taskToDelete < 0 || taskToDelete > this.tasks.size() - 1) {
-            throw (new DukeException("Please specify a task within this range Sir/Mdm:" + this.list()));
+            throw (new DukeException("Please specify a task within this range Sir/Mdm:\n" + this.list()));
         }
 
 
         Task deletedTask = this.tasks.get(taskToDelete);
         this.tasks.remove(taskToDelete);
+        FileManager.saveTaskList(this.tasks);
         System.out.println("Much obliged Sir/Mdm! I shall delete this task:\n   " +
                 deletedTask + "\n" + "Now you have " + this.tasks.size() +
                 (this.tasks.size() == 1 ? " task." : " tasks.") + "\n");
