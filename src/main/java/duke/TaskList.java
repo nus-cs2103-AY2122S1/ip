@@ -64,6 +64,28 @@ public class TaskList {
         }
         return res.substring(0, res.length() - 1);
     }
+    
+    public String stringifyTasksForFind(String keyword) {
+        if (this.tasks.size() == 0) {
+            return "No tasks added yet!";
+        }
+        
+        boolean found = false;
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task t = this.tasks.get(i);
+            if (t.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                found = true;
+                res.append(i + 1).append(". ").append(t.toString()).append("\n");
+            }            
+        }
+        
+        if (!found) {
+            return "No tasks match that keyword :(";
+        } else {
+            return res.substring(0, res.length() - 1);
+        }
+    }
 
     /**
      * Returns size of task list.

@@ -15,6 +15,7 @@ public class Ui {
             + "\t\t `event ${item} /at ${time}` to add an event\n"
             + "\t\t `done ${i}` to mark task i as completed\n"
             + "\t\t `delete ${i}` to delete task i\n"
+            + "\t\t `find ${keyword}` to find tasks by keyword\n"
             + "\t\t `bye` to end this chat\n";
     private static final String endMessage = "\n\tSad to see you go :(\n\t...shutting down...";
     private final Scanner sc;
