@@ -6,6 +6,8 @@ import item.Event;
 import item.TaskList;
 import item.Todo;
 
+import java.time.LocalDate;
+
 public class TaskListRequestHandler extends RequestHandler{
     private final TaskList taskList;
 
@@ -109,14 +111,15 @@ public class TaskListRequestHandler extends RequestHandler{
      */
     private void processDeadline(String request) throws BotException {
         if (!request.contains("/by") || request.split("/by").length < 2) {
-            throw new InvalidCommandException("Don't cheat me, give me a due time so I can watch you >.<");
+            throw new InvalidCommandException(
+                    "Don't cheat me, give me a due time so I can watch you >.<");
         }
         String[] inputs = request.split("deadline")[1].trim().split(" /by ");
         if (inputs.length == 1) {
             throw new EmptyCommandException("deadline");
         }
         String description = inputs[0].trim();
-        String date = inputs[1];
+        LocalDate date = LocalDate.parse(inputs[1]);
         respond(taskList.add(Deadline.of(description, date)));
     }
 
@@ -128,14 +131,15 @@ public class TaskListRequestHandler extends RequestHandler{
      */
     private void processEvent(String request) throws BotException {
         if (!request.contains("/at") || request.split("/at").length < 2) {
-            throw new InvalidCommandException("Oh no, I am not sure when this is happening >.<");
+            throw new InvalidCommandException(
+                    "Oh no, I am not sure when this is happening >.<");
         }
         String[] inputs = request.split("event")[1].trim().split(" /at ");
         if (inputs.length == 1) {
             throw new EmptyCommandException("event");
         }
         String description = inputs[0].trim();
-        String date = inputs[1];
+        LocalDate date = LocalDate.parse(inputs[1]);
         respond(taskList.add(Event.of(description, date)));
     }
 }
