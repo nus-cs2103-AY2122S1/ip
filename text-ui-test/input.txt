@@ -11,4 +11,5 @@ delete 3
 done ife
 done 2
 list
+clear tasks
 bye

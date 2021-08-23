@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Duke {
 
@@ -12,12 +10,16 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         Scanner scanner = new Scanner(System.in);
+
+        Storage storage = new Storage();
+        Tasks tasks = storage.getTasks();
+
         String input = scanner.nextLine();
 
-        Tasks tasks = new Tasks();
-
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
+            if (input.equals("clear tasks")) {
+                storage.resetTasks();
+            } else if (input.equals("list")) {
                 if (tasks.isEmpty()) {
                     System.out.println("\tYou haven't added any tasks yet\n");
                 } else {
@@ -25,39 +27,8 @@ public class Duke {
                 }
             } else {
                 try {
-                    String[] commandAndDesc = input.split(" ", 2);
-                    String command = commandAndDesc[0];
-                    String description = commandAndDesc.length == 2 ? commandAndDesc[1] : "" ;
-
-                    if (command.equals("deadline")) {
-                        tasks.addTask(new Deadline(description));
-                    } else if (command.equals("event")) {
-                        tasks.addTask(new Event(description));
-                    } else if (command.equals("todo")) {
-                        tasks.addTask(new ToDo(description));
-                    } else if (command.equals("done") || command.equals("delete")) {
-                        try {
-                            Integer taskNum = Integer.valueOf(description);
-                            Task inFocus = tasks.getTask(taskNum);
-                            if (inFocus == null) {
-                                System.out.println("\tSorry, I can't seem to find that task\n");
-                            } else {
-                                if (command.equals("done")) {
-                                    inFocus.markAsDone();
-                                } else {
-                                    tasks.deleteTask(inFocus);
-                                }
-                            }
-                        } catch (NumberFormatException e) {
-                            System.out.println("\tI'm Sorry, WHAT?!?!\n");
-                        }
-                    } else {
-                        if (command.equals("")) {
-                            System.out.println("\tTake your time :)\n");
-                        } else {
-                            System.out.println("\tI don't understand that command (yet...)\n");
-                        }
-                    }
+                    handleCompoundCommand(tasks, input);
+                    storage.updateStorage();
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
@@ -66,6 +37,49 @@ public class Duke {
         }
         scanner.close();
 
+    }
+
+    private static void handleCompoundCommand(Tasks tasks, String input) {
+        String[] commandAndDesc = input.split(" ", 2);
+        String command = commandAndDesc[0];
+        String description = commandAndDesc.length == 2 ? commandAndDesc[1] : "";
+
+        switch (command) {
+            case "deadline":
+                tasks.addTask(new Deadline(description));
+                break;
+            case "event":
+                tasks.addTask(new Event(description));
+                break;
+            case "todo":
+                tasks.addTask(new ToDo(description));
+                break;
+            case "done":
+            case "delete":
+                try {
+                    int taskNum = Integer.parseInt(description);
+                    Task inFocus = tasks.getTask(taskNum);
+                    if (inFocus == null) {
+                        System.out.println("\tSorry, I can't seem to find that task\n");
+                    } else {
+                        if (command.equals("done")) {
+                            inFocus.markAsDone();
+                        } else {
+                            tasks.deleteTask(inFocus);
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("\tI'm Sorry, WHAT?!?!\n");
+                }
+                break;
+            default:
+                if (command.equals("")) {
+                    System.out.println("\tTake your time :)\n");
+                } else {
+                    System.out.println("\tI don't understand that command (yet...)\n");
+                }
+                break;
+        }
     }
 
 }
