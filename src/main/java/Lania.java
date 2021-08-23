@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,6 +43,14 @@ public class Lania {
             throw new LaniaException("Sorry, but Lania doesn't know what that means");
         }
         taskArrayList.add(t);
+        String file = "data/lania.txt";
+        try {
+            for (int i = 0; i < taskArrayList.size(); i++) {
+                appendToFile(file, taskArrayList.get(i).toString() + "\n", i);
+            }
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
         System.out.println("Lania has added: ");
         System.out.println(t);
         System.out.println("Great! Now you have " + taskArrayList.size() + (taskArrayList.size() == 1 ? " task" : " tasks") + " in your list.");
@@ -129,6 +138,12 @@ public class Lania {
         while (s.hasNext()) {
             System.out.println(s.nextLine());
         }
+    }
+
+    private void appendToFile(String filePath, String textToAppend, int i) throws IOException {
+        FileWriter fw = new FileWriter(filePath, i != 0); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
     }
 
     /**
