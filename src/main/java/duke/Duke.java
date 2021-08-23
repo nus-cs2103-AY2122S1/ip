@@ -11,6 +11,10 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,7 +23,7 @@ import java.util.Scanner;
  * Driver class to simulate the 'Annie' chat bot program.
  *
  * @author limzk126
- * @version Level-6
+ * @version Level-7
  */
 public class Duke {
     private final String LINE = "_________________________________________________________________"
@@ -31,6 +35,7 @@ public class Duke {
     private final String NUMTASK_MSG = "Your current task count: ";
     private final String DONE_MSG = "I have marked this task as done:\n";
     private final String DELETE_MSG = "I have deleted this task:\n";
+    private final String FILE_PATH = "C:\\Users\\Chu Heng 2\\Desktop\\cs2103T\\ip\\data\\duke.txt";
 
     // List to store user task inputs.
     private final List<Task> taskList = new ArrayList<>();
@@ -220,30 +225,82 @@ public class Duke {
         }
     }
 
+    // Retrieves previously saved tasks into "duke.txt".
+    private void retrieveData() throws IOException {
+        File f = new File(FILE_PATH);
+        f.createNewFile();
+        Scanner sc = new Scanner(f);
+        while (sc.hasNextLine()) {
+            String data  = sc.nextLine();
+            String[] arguments = data.split(" // ");
+
+            boolean isDone;
+            if (Integer.parseInt(arguments[1]) == 0) {
+                isDone = false;
+            } else {
+                isDone = true;
+            }
+
+            if (arguments.length == 3) {
+                Todo task = new Todo(arguments[2], isDone);
+                taskList.add(task);
+            } else {
+                if (arguments[0].equals("Event")) {
+                    Event task = new Event(arguments[2], arguments[3], isDone);
+                    taskList.add(task);
+                } else {
+                    Deadline task = new Deadline(arguments[2], arguments[3], isDone);
+                    taskList.add(task);
+                }
+            }
+        }
+    }
+
+    // Saves current task list into "duke.txt".
+    private void storeData() throws IOException {
+        File f = new File(FILE_PATH);
+        f.createNewFile();
+        FileWriter fw = new FileWriter(FILE_PATH);
+
+        for (int i = 1; i <= taskList.size(); i++) {
+            fw.write(taskList.get(i - 1).getData() + "\n");
+        }
+
+        fw.close();
+    }
+
     /**
      * Method to simulate the program.
      */
     public void run() {
-        Scanner sc = new Scanner(System.in);
-        String textInput;
+        try {
+            retrieveData();
 
-        // Program starts. Say hello.
-        printText(WELCOME_MSG);
+            Scanner sc = new Scanner(System.in);
+            String textInput;
 
-        // While loop to continuously receive user input.
-        while (!isEnded) {
-            textInput = sc.nextLine().trim();
-            try {
-                parseText(textInput);
-            } catch (DukeException e) {
-                printText(e.toString());
+            // Program starts. Say hello.
+            printText(WELCOME_MSG);
+
+            // While loop to continuously receive user input.
+            while (!isEnded) {
+                textInput = sc.nextLine().trim();
+                try {
+                    parseText(textInput);
+                } catch (DukeException e) {
+                    printText(e.toString());
+                }
             }
+
+            // Program ends. Say goodbye.
+            printText(GOODBYE_MSG);
+
+            storeData();
+
+            sc.close();
+        } catch (IOException e) {
+            printText("File does not exist!");
         }
-
-        // Program ends. Say goodbye.
-        printText(GOODBYE_MSG);
-
-        sc.close();
     }
 
     /**
