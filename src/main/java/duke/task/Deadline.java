@@ -44,5 +44,4 @@ public class Deadline extends Task{
     public String getBy() {
         return this.by;
     }
-
 }
