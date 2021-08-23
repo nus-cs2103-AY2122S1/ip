@@ -21,7 +21,6 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:\n  [X] " + description);
     }
 
     /**
@@ -32,5 +31,13 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
+    }
+
+    public int taskType() {
+        return -1;
+    }
+
+    public String savedFormat() {
+        return "";
     }
 }

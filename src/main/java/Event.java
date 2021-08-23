@@ -18,4 +18,24 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
+
+    /**
+     * Returns the task type of Todo.
+     *
+     * @return 2 to represent Event task type.
+     */
+    @Override
+    public int taskType() {
+        return 2;
+    }
+
+    /**
+     * Returns the description in the format that will be saved into Hard drive.
+     *
+     * @return String
+     */
+    @Override
+    public String savedFormat() {
+        return super.description + "/~/" + this.at;
+    }
 }

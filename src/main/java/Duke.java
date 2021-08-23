@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,7 +13,23 @@ public class Duke {
         scanner = new Scanner(System.in);
         savedInputs = new ArrayList<>(100);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        chat();
+
+        try {
+            if (!new File("src/data/duke.txt").createNewFile()) {
+                Scanner dataScanner = new Scanner(new File("src/data/duke.txt"));
+                int counter = 0;
+                while(dataScanner.hasNext()) {
+                    convertToTask(dataScanner.nextLine(), counter);
+                    counter++;
+
+                }
+            }
+            chat();
+        } catch (IOException ioException) {
+            System.out.println(ioException);
+        } finally {
+            scanner.close();
+        }
     }
 
     /**
@@ -24,6 +43,22 @@ public class Duke {
 
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
+                try {
+                    FileWriter fw = new FileWriter("src/data/duke.txt");
+                    String textToSave = "";
+                    for (int i = 0; i < savedInputs.size(); i++) {
+                        Task t = savedInputs.get(i);
+                        String taskType = t.taskType() == 0 ? "T" : (t.taskType() == 1 ? "D" : "E");
+                        String done = t.isDone ? "1" : "0";
+                        String description = t.savedFormat();
+
+                        textToSave = textToSave + taskType + "/~/" + done + "/~/" + description + "\n";
+                    }
+                    fw.write(textToSave);
+                    fw.close();
+                } catch (IOException ioException) {
+                    System.out.println(ioException);
+                }
                 scanner.close();
                 break;
             }
@@ -57,6 +92,7 @@ public class Duke {
                             throw new DukeException("Oops! " +
                                 "The task to mark as done is not within the range of the list.");
                         }
+                        System.out.println("Nice! I've marked this task as done:\n  [X] " + savedInputs.get(donePos - 1).description);
                         savedInputs.get(donePos - 1).markAsDone();
                         break;
 
@@ -178,6 +214,26 @@ public class Duke {
             return Command.EVENT;
         } else {
             return Command.INVALID;
+        }
+    }
+
+    private static void convertToTask(String s, int counter) {
+        String[] savedTasks = s.split("/~/");
+
+        String description = savedTasks[2];
+        if (savedTasks.length == 3) {
+            savedInputs.add(new Todo(description));
+        } else if (savedTasks[0].equals("D")) {
+            String by = savedTasks[3];
+            savedInputs.add(new Deadline(description, by));
+        } else {
+            String at = savedTasks[3];
+            savedInputs.add(new Event(description, at));
+        }
+
+        boolean isDone = savedTasks[1].equals("1");
+        if (isDone) {
+            savedInputs.get(counter).markAsDone();
         }
     }
 }

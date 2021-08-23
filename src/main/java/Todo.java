@@ -15,4 +15,24 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    /**
+     * Returns the task type of Todo.
+     *
+     * @return 0 to represent Todo task type.
+     */
+    @Override
+    public int taskType() {
+        return 0;
+    }
+
+    /**
+     * Returns the description in the format that will be saved into Hard drive.
+     *
+     * @return String
+     */
+    @Override
+    public String savedFormat() {
+        return super.description;
+    }
 }
