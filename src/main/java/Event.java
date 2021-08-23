@@ -1,24 +1,42 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+
 /**
  * A task that is scheduled for a specific time.
- */
-public class Event extends Task{
-    protected String time;
+ */public class Event extends Task{
+    protected boolean timeBool;
+    protected LocalDateTime dateTime;
+    protected LocalDate date;
 
-    /**
-     * Constructor for the Event class.
-     * @param description Description of the task at hand.
-     * @param time Time the event is scheduled to take place at.
-     */
-    public Event(String description, String time) {
+    protected DateTimeFormatter formatInput;
+    protected DateTimeFormatter formatOutputTime = DateTimeFormatter.ofPattern("MMM d yyyy hh:m a");
+    protected DateTimeFormatter formatOutputNoTime = DateTimeFormatter.ofPattern("MMM d yyyy");
+
+    public Event(String description, String dateString, DateTimeFormatter formatInput, boolean timeBool) {
         super(description);
-        this.time = time;
+        this.formatInput = formatInput;
+        this.timeBool = timeBool;
+        if (!timeBool) {
+            this.date = LocalDate.parse(dateString, formatInput);
+        } else {
+            this.dateTime = LocalDateTime.parse(dateString, formatInput);
+        }
     }
 
     /**
-     * Provides a String representation of the Event.
-     * @return A String reprsentation of the Event.
+     * Provides a String representation of the Deadline.
+     * @return A String representation of the Deadline.
      */
+    @Override
     public String toString() {
-        return "[E][" + this.getStatusIcon() + "] " + this.description + " (at: " + this.time + ")";
+        if (timeBool) {
+            return "[E][" + this.getStatusIcon() + "] " + this.description + " (at: " +
+                    formatOutputTime.format(this.dateTime) + ")";
+        } else {
+            return "[E][" + this.getStatusIcon() + "] " + this.description + " (at: " +
+                    formatOutputNoTime.format(this.date) + ")";
+        }
     }
 }

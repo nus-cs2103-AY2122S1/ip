@@ -5,12 +5,19 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.File;
+import java.time.DateTimeException;
+
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     private static final ArrayList<Task> arr = new ArrayList<>();
     private static final Scanner in = new Scanner(System.in);
     private static final String FILE_PATH  = "./src/main/data/duke.txt";
     private static final String DIR_PATH = "./src/main/data";
+    private static final DateTimeFormatter FORMAT_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter FORMAT_NO_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter FORMAT_TIME_FILE = DateTimeFormatter.ofPattern("MMM d yyyy hh:m a");
+    private static final DateTimeFormatter FORMAT_NO_TIME_FILE = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     public static void main(String[] args) throws IOException {
         System.out.println("Hello, I'm Duke");
@@ -91,6 +98,8 @@ public class Duke {
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+        } catch (DateTimeException e) {
+            System.out.println("Please provide date/time in the correct format: yyyy-mm-dd HH:mm");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -141,11 +150,17 @@ public class Duke {
         if (fullDescription.charAt(sepIndex + 3) != ' ' || sepIndex == -1 || sepIndex == 0 ||
                 fullDescription.charAt(sepIndex - 1) != ' ') {
             throw new DukeException("☹ OOPS!!! Please input with the correct format e.g. deadline return books" +
-                    " /by Sunday");
+                    " /by 2023-04-05 18:40 (yyyy-mm-dd hh:mm, where time is optional)");
         }
         String description = fullDescription.substring(0, sepIndex - 1);
-        String deadline = fullDescription.substring(sepIndex + 4);
-        arr.add(new Deadline(description, deadline));
+        String dateTime = fullDescription.substring(sepIndex + 4);
+        String[] dateArray = dateTime.split(" ");
+        if (dateArray.length == 2) {
+            System.out.println(dateTime);
+            arr.add(new Deadline(description, dateTime, FORMAT_TIME, true));
+        } else {
+            arr.add(new Deadline(description, dateTime, FORMAT_NO_TIME, false));
+        };
         printAfterAdding();
     }
 
@@ -158,11 +173,16 @@ public class Duke {
         if (fullDescription.charAt(sepIndex + 3) != ' ' || sepIndex == -1 || sepIndex == 0 ||
                 fullDescription.charAt(sepIndex - 1) != ' ') {
             throw new DukeException("☹ OOPS!!! Please input with the correct format e.g. event read books" +
-                    " /at Saturday 9am");
+                    " /at 2021-09-08 09:30 (yyyy-mm-dd hh:mm, where time is optional)");
         }
         String description = fullDescription.substring(0, sepIndex - 1);
-        String time = fullDescription.substring(sepIndex + 4);
-        arr.add(new Event(description, time));
+        String dateTime = fullDescription.substring(sepIndex + 4);
+        String[] dateArray = dateTime.split(" ");
+        if (dateArray.length == 2) {
+            arr.add(new Event(description, dateTime, FORMAT_TIME, true));
+        } else {
+            arr.add(new Event(description, dateTime, FORMAT_NO_TIME, false));
+        }
         printAfterAdding();
     }
 
@@ -202,12 +222,26 @@ public class Duke {
                     break;
                 case 'D': {
                     int index = line.indexOf(" (by: ");
-                    arr.add(new Deadline(line.substring(10, index), line.substring(index + 6, line.length() - 1)));
+                    String description = line.substring(10, index);
+                    String dateTime = line.substring(index + 6, line.length() - 1);
+                    String[] dateTimeArray = dateTime.split(" ");
+                    if (dateTimeArray.length > 3) {
+                        arr.add(new Deadline(description, dateTime, FORMAT_TIME_FILE, true));
+                    } else {
+                        arr.add(new Deadline(description, dateTime, FORMAT_NO_TIME_FILE, false));
+                    }
                     break;
                 }
                 case 'E':
                     int index = line.indexOf(" (at: ");
-                    arr.add(new Event(line.substring(10, index), line.substring(index + 6, line.length() - 1)));
+                    String description = line.substring(10, index);
+                    String dateTime = line.substring(index + 6, line.length() - 1);
+                    String[] dateTimeArray = dateTime.split(" ");
+                    if (dateTimeArray.length > 3) {
+                        arr.add(new Event(description, dateTime, FORMAT_TIME_FILE, true));
+                    } else {
+                        arr.add(new Event(description, dateTime, FORMAT_NO_TIME_FILE, false));
+                    }
                     break;
             }
         }

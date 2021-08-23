@@ -1,3 +1,5 @@
-1: [T][ ] test
-2: [E][ ] study (at: later)
-3: [D][ ] dinner (by: 6pm)
+1: [T][ ] task 1
+2: [D][ ] task 2 (by: Apr 2 2021 08:32 PM)
+3: [D][ ] task 3 (by: Apr 5 2022)
+4: [E][ ] task 4 (at: Apr 2 2023 03:34 PM)
+5: [E][ ] task 5 (at: Mar 3 2022)

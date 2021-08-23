@@ -1,24 +1,42 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A task that the user wants to complete by a certain point in time.
  */
 public class Deadline extends Task{
-    protected String deadline;
+    protected boolean timeBool;
+    protected LocalDateTime dateTime;
+    protected LocalDate date;
 
-    /**
-     * Constructor for Deadline class.
-     * @param description Description for the task at hand.
-     * @param deadline Time the task has to be completed by.
-     */
-    public Deadline(String description, String deadline) {
+    protected DateTimeFormatter formatInput;
+    protected DateTimeFormatter formatOutputTime = DateTimeFormatter.ofPattern("MMM d yyyy hh:m a");
+    protected DateTimeFormatter formatOutputNoTime = DateTimeFormatter.ofPattern("MMM d yyyy");
+
+    public Deadline(String description, String dateString, DateTimeFormatter formatInput, boolean timeBool) {
         super(description);
-        this.deadline = deadline;
+        this.formatInput = formatInput;
+        this.timeBool = timeBool;
+        if (!timeBool) {
+            this.date = LocalDate.parse(dateString, formatInput);
+        } else {
+            this.dateTime = LocalDateTime.parse(dateString, formatInput);
+        }
     }
 
     /**
      * Provides a String representation of the Deadline.
      * @return A String representation of the Deadline.
      */
+    @Override
     public String toString() {
-        return "[D][" + this.getStatusIcon() + "] " + this.description + " (by: " + this.deadline + ")";
+        if (timeBool) {
+            return "[D][" + this.getStatusIcon() + "] " + this.description + " (by: " +
+                    formatOutputTime.format(this.dateTime) + ")";
+        } else {
+            return "[D][" + this.getStatusIcon() + "] " + this.description + " (by: " +
+                    formatOutputNoTime.format(this.date) + ")";
+        }
     }
 }
