@@ -31,6 +31,8 @@ public class Parser {
                     return delete(getArgs(command));
                 case "bye":
                     return new ExitCommand();
+                case "find":
+                    return find(getArgs(command));
                 default:
                     throw new InvalidCommandDukeException();
             }
@@ -111,6 +113,16 @@ public class Parser {
             throw new WrongArgumentDukeException("Not a number specified");
         }
 
+    }
+
+    /**
+     * Finds an entry containing the specified string.
+     *
+     * @param toFind String to find in all entries.
+     * @return A command that will find the entries when executed.
+     */
+    private Command find(String toFind) {
+        return new FindCommand(toFind);
     }
 
     /**

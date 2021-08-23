@@ -34,6 +34,14 @@ public abstract class Task {
         return done;
     }
 
+    /**
+     * Returns the name of this task
+     * @return String representation of name
+     */
+    public String getName() {
+        return taskName;
+    }
+
     public abstract String getIdentifier();
 
     public abstract String getDetailsWithDelimiter(String delimiter);
