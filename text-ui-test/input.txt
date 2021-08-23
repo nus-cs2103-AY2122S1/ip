@@ -1,5 +1,5 @@
 todo borrow book
-deadline return book /by Tomorrow
+deadline return book /by 1999-04-27 12:00
 event project meeting /at Mon 2-4pm
 deadline do homework /by no idea :-p
 done 4

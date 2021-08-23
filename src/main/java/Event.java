@@ -1,18 +1,35 @@
+import java.time.LocalDateTime;
+
 public class Event extends TaskItem {
 
-    protected String date;
-    protected String time;
+    protected LocalDateTime byDateAndTime;
 
+    protected String dateAndTimeInString;
     /**
      * Constructor for creating an Event object.
      * @param description description of the event.
-     * @param date date of the event.
-     * @param time the time that this event is going to occur.
+     * @param byDateAndTime date and time of the event.
      */
-    public Event(String description, String date, String time) {
+    public Event(String description, LocalDateTime byDateAndTime) {
         super(description);
-        this.date = date;
-        this.time = time;
+        this.byDateAndTime = byDateAndTime;
+        if (byDateAndTime.getDayOfMonth() == LocalDateTime.now().getDayOfMonth()) {
+            int hour = byDateAndTime.getHour();
+            int minute = byDateAndTime.getMinute();
+            this.dateAndTimeInString = "Today at " + hour + ":" + minute;
+        } else {
+            String timeOfDay;
+            int hour = byDateAndTime.getHour();
+            if (byDateAndTime.getHour() > 12) {
+                timeOfDay = "PM";
+                hour -= 12;
+            } else if (byDateAndTime.getHour() == 12) {
+                timeOfDay = "PM";
+            } else {
+                timeOfDay = "AM";
+            }
+            this.dateAndTimeInString = this.byDateAndTime.getDayOfWeek().toString() + " " + hour + timeOfDay;
+        }
     }
 
     /**
@@ -21,6 +38,6 @@ public class Event extends TaskItem {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.date + " " + this.time + ")";
+        return "[E]" + super.toString() + "(at: " + this.dateAndTimeInString + ")";
     }
 }

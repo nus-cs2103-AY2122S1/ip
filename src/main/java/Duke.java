@@ -1,10 +1,16 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class Duke {
 
     public static boolean active;
-    public static String startMessage = "Hello! I'm Duke \nWhat can I do for you?";
+    public static String startMessage = "Hello! I'm Duke \nFor " +
+            "events and deadlines, be sure to state the due date or the event timing as such: " +
+            "'XXX /by dd-MM-yyyy HH:mm'";
     public static String endMessage = "Bye! Hope to see you again soon!";
     //public static String[] list = new String[100];
     public static ArrayList<TaskItem> taskList = new ArrayList<>();
@@ -65,9 +71,19 @@ public class Duke {
                         );
                     }
                     String by = input.split("/")[1].split(" ", 2)[1];
-                    String description = input.split("/")[0];
-                    Deadline dead = new Deadline(description, by);
-                    Duke.addToList(dead);
+//                    System.out.println(by);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+                    try {
+                        LocalDateTime byDateAndTime = LocalDateTime.parse(by, formatter);
+                        String description = input.split("/")[0];
+                        //Deadline dead = new Deadline(description, by);
+                        Deadline dead = new Deadline(description, byDateAndTime);
+                        Duke.addToList(dead);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Please follow the specified format for entering the date and time of the deadline.");
+                    }
+//                    System.out.println(byDateAndTime.toString() + " for deadline");
+
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
@@ -84,9 +100,20 @@ public class Duke {
                     }
                     String date = input.split("/")[1].split(" ")[1];
                     String time = input.split("/")[1].split(" ")[2];
-                    String description = input.split("/")[0];
-                    Event someEvent = new Event(description, date, time);
-                    Duke.addToList(someEvent);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+                    System.out.println(date);
+                    System.out.println(time);
+                    System.out.println(date + time);
+                    try {
+                        LocalDateTime byDateAndTime = LocalDateTime.parse(date + " " + time, formatter);
+//                    System.out.println(byDateAndTime.toString() + " for event");
+                        String description = input.split("/")[0];
+                        Event someEvent = new Event(description, byDateAndTime);
+                        Duke.addToList(someEvent);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Please follow the specified format for entering the date and time of the deadline.");
+                    }
+
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
