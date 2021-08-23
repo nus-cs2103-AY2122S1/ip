@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Chng Zi Hao
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDate dueDate;
     private LocalTime dueTime;
 

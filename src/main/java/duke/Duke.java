@@ -8,7 +8,6 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,8 +19,8 @@ import java.util.Scanner;
 public class Duke {
     private Storage storage;
     private TaskList taskList;
-    private Parser parser;
-    private Ui ui;
+    private final Parser parser;
+    private final Ui ui;
 
     public Duke() {
         ui = new Ui();
@@ -33,6 +32,10 @@ public class Duke {
             ui.formatPrint(e.getMessage());
             taskList = new TaskList(new ArrayList<Task>(), storage);
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 
     public void run() {
@@ -50,9 +53,5 @@ public class Duke {
                 ui.formatPrint(e.getMessage());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
     }
 }

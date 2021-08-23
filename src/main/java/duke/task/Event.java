@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Chng Zi Hao
  */
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;

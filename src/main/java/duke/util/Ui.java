@@ -32,6 +32,7 @@ public class Ui {
     public void printDivider() {
         System.out.println(DIVIDER);
     }
+
     /**
      * Formats the input and prints it in a formatted version.
      *

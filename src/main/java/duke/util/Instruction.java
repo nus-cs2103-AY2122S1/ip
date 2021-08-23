@@ -14,7 +14,7 @@ public enum Instruction {
 
     public final String label;
 
-    private Instruction(String label) {
+    Instruction(String label) {
         this.label = label;
     }
 
