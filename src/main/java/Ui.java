@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Ui {
 
@@ -76,6 +77,11 @@ public class Ui {
         outputWrapper();
         System.out.println(e.getMessage());
         outputWrapper();
+    }
+
+    public String readCommand() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
 

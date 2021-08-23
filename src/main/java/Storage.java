@@ -1,3 +1,5 @@
+import yoyoexception.YoyoException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -30,11 +32,11 @@ public class Storage {
         }
     }
 
-    public TaskList load() {
+    public TaskList load() throws YoyoException {
         return readExistingTasks(this.file);
     }
 
-    private TaskList readExistingTasks(File f) {
+    private TaskList readExistingTasks(File f) throws YoyoException {
         TaskList tasks = new TaskList();
         try {
             Scanner s = new Scanner(f);
@@ -70,8 +72,7 @@ public class Storage {
             }
             return tasks;
         } catch (FileNotFoundException e) {
-            System.out.println("File not Found!");
-            return tasks;
+            throw new YoyoException("Critical Error! File exists but could not be found.");
         }
     }
 
