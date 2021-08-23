@@ -13,7 +13,7 @@ public class Task {
         this.completed = true;
     }
 
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return this.completed ? "X" : " ";
     }
 
