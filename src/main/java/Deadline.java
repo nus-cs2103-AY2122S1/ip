@@ -42,8 +42,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String timeComponent = (this.time.equals("")
-                ? this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                : this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time);
+                ? this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                : this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " " + this.time);
         return "[D]" + super.toString() + " (by: "
                 + timeComponent
                 + ")";

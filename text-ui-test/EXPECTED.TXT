@@ -52,8 +52,8 @@ ___________________________________________________________
 ___________________________________________________________
 Here is your list of tasks:
 1.[T][X] read book
-2.[D][ ] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2pm - 4pm)
+2.[D][ ] return book (by: Jun 06 2021)
+3.[E][ ] project meeting (at: Aug 06 2021 2pm - 4pm)
 4.[T][X] join sports club
 5.[T][ ] borrow book
 ___________________________________________________________
@@ -74,12 +74,12 @@ ___________________________________________________________
 ___________________________________________________________
 Here is your list of tasks:
 1.[T][X] read book
-2.[D][ ] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2pm - 4pm)
+2.[D][ ] return book (by: Jun 06 2021)
+3.[E][ ] project meeting (at: Aug 06 2021 2pm - 4pm)
 4.[T][X] join sports club
 5.[T][ ] borrow book
-6.[D][ ] return book (by: Sunday)
-7.[E][ ] project meeting (at: Mon 2-4pm)
+6.[D][ ] return book (by: Aug 09 2021 (Sunday))
+7.[E][ ] project meeting (at: Aug 27 2021 2-4pm)
 ___________________________________________________________
 ___________________________________________________________
 You might have mistyped the task number.
@@ -88,17 +88,17 @@ ___________________________________________________________
 ___________________________________________________________
 Done!
 The following task has been removed:
-	[E][ ] project meeting (at: Aug 6th 2pm - 4pm)
+	[E][ ] project meeting (at: Aug 06 2021 2pm - 4pm)
 You now have 6 tasks left in your list!
 ___________________________________________________________
 ___________________________________________________________
 Here is your list of tasks:
 1.[T][X] read book
-2.[D][ ] return book (by: June 6th)
+2.[D][ ] return book (by: Jun 06 2021)
 3.[T][X] join sports club
 4.[T][ ] borrow book
-5.[D][ ] return book (by: Sunday)
-6.[E][ ] project meeting (at: Mon 2-4pm)
+5.[D][ ] return book (by: Aug 09 2021 (Sunday))
+6.[E][ ] project meeting (at: Aug 27 2021 2-4pm)
 ___________________________________________________________
 ___________________________________________________________
 You might have mistyped the task number.
@@ -113,7 +113,7 @@ ___________________________________________________________
 ___________________________________________________________
 Done!
 The following task has been removed:
-	[D][ ] return book (by: June 6th)
+	[D][ ] return book (by: Jun 06 2021)
 You now have 4 tasks left in your list!
 ___________________________________________________________
 ___________________________________________________________
@@ -131,13 +131,13 @@ ___________________________________________________________
 ___________________________________________________________
 Done!
 The following task has been removed:
-	[D][ ] return book (by: Sunday)
+	[D][ ] return book (by: Aug 09 2021 (Sunday))
 You now have 1 task left in your list!
 ___________________________________________________________
 ___________________________________________________________
 Done!
 The following task has been removed:
-	[E][ ] project meeting (at: Mon 2-4pm)
+	[E][ ] project meeting (at: Aug 27 2021 2-4pm)
 You now have 0 tasks left in your list!
 ___________________________________________________________
 ___________________________________________________________

@@ -42,8 +42,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         String timeComponent = (this.time.equals("")
-                ? this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                : this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time);
+                ? this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                : this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " " + this.time);
         return "[E]" + super.toString() + " (at: "
                 + timeComponent
                 + ")";

@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.io.File;
@@ -8,8 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
->>>>>>> branch-Level-8
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -469,18 +468,40 @@ public class Duke {
         } else if (lineToAdd.charAt(1) == 'D') {
             int separator = taskDetails.indexOf(" (by: ");
             String taskName = taskDetails.substring(0, separator);
-            String taskTime = taskDetails.substring(separator + 6, taskDetails.length() - 1);
-            Task currentTask = new Deadline(taskName, taskTime);
+            String timeFull = taskDetails.substring(separator + 6);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+            Task currentTask;
+
+            if (timeFull.length() > 12) {
+                String time = timeFull.substring(12, timeFull.length() - 1);
+                LocalDate date = LocalDate.parse(timeFull.substring(0, 11), formatter);
+                currentTask = new Deadline(taskName, date, time);
+            } else {
+                LocalDate date = LocalDate.parse(timeFull.substring(0, 11), formatter);
+                currentTask = new Deadline(taskName, date);
+            }
             taskList.add(currentTask);
+
             if (lineToAdd.charAt(4) == 'X') {
                 currentTask.markAsDone();
             }
         } else {
             int separator = taskDetails.indexOf(" (at: ");
             String taskName = taskDetails.substring(0, separator);
-            String taskTime = taskDetails.substring(separator + 6, taskDetails.length() - 1);
-            Task currentTask = new Event(taskName, taskTime);
+            String timeFull = taskDetails.substring(separator + 6);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+            Task currentTask;
+
+            if (timeFull.length() > 12) {
+                String time = timeFull.substring(12, timeFull.length() - 1);
+                LocalDate date = LocalDate.parse(timeFull.substring(0, 11), formatter);
+                currentTask = new Event(taskName, date, time);
+            } else {
+                LocalDate date = LocalDate.parse(timeFull.substring(0, 11), formatter);
+                currentTask = new Event(taskName, date);
+            }
             taskList.add(currentTask);
+
             if (lineToAdd.charAt(4) == 'X') {
                 currentTask.markAsDone();
             }
