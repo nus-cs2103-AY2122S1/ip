@@ -3,6 +3,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,7 +14,7 @@ import java.util.Scanner;
 public class Duke {
     private static Scanner scanner;
     private static ArrayList<Task> savedInputs;
-    private enum Command {LIST, DONE, DELETE, TODO, DEADLINE, EVENT, INVALID}
+    private enum Command {LIST, DONE, DELETE, TODO, DEADLINE, EVENT, CHECKDATE, INVALID}
 
     public static void main(String[] args) throws DukeException {
         scanner = new Scanner(System.in);
@@ -176,9 +180,10 @@ public class Duke {
                         }
 
                         String by = input.split(" /by ")[1];
+                        LocalDate deadlineDate = LocalDate.parse(by);
                         String deadlineDescription = input.split(" /by ")[0].substring(9);
 
-                        Deadline deadline = new Deadline(deadlineDescription, by);
+                        Deadline deadline = new Deadline(deadlineDescription, deadlineDate);
                         System.out.println("Got it. I've added this task:\n  " + deadline);
                         savedInputs.add(deadline);
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
@@ -211,9 +216,10 @@ public class Duke {
                         }
 
                         String at = input.split(" /at ")[1];
+                        LocalDate eventDate = LocalDate.parse(at);
                         String eventDescription = input.split(" /at ")[0].substring(6);
 
-                        Event event = new Event(eventDescription, at);
+                        Event event = new Event(eventDescription, eventDate);
                         System.out.println("Got it. I've added this task:\n  " + event);
                         savedInputs.add(event);
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
@@ -227,6 +233,34 @@ public class Duke {
                         } catch (IOException ioException) {
                             System.out.println(ioException);
                         }
+                        break;
+
+                    case CHECKDATE:
+                        String date = input.substring(6);
+                        LocalDate checkDate = LocalDate.parse(date);
+
+                        String allTasks = "";
+                        int counter = 1;
+                        for (int i = 0; i < savedInputs.size(); i++) {
+                            Task t = savedInputs.get(i);
+                            if (t instanceof Deadline) {
+                                Deadline d = (Deadline) t;
+                                if (d.by.equals(checkDate)) {
+                                    allTasks = allTasks + counter + ". " + t.description + "\n";
+                                    counter++;
+                                }
+                            }
+
+                            if (t instanceof Event) {
+                                Event e = (Event) t;
+                                if (e.at.equals(checkDate)) {
+                                    allTasks = allTasks + counter + ". " + t.description + "\n";
+                                    counter++;
+                                }
+                            }
+                        }
+                        System.out.println(allTasks);
+
                         break;
 
                     default:
@@ -257,6 +291,8 @@ public class Duke {
             return Command.DEADLINE;
         } else if (input.startsWith("event")) {
             return Command.EVENT;
+        } else if (input.startsWith("check")) {
+            return Command.CHECKDATE;
         } else {
             return Command.INVALID;
         }
