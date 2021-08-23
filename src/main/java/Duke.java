@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -9,7 +14,7 @@ public class Duke {
         String logo = "______ _____ _   _ \n" +
                 "| ___ \\  ___| \\ | |\n" +
                 "| |_/ / |__ |  \\| |\n" +
-                "| ___ \\  __|| . ` |\n" +
+                "| ___ \\  __||     |\n" +
                 "| |_/ / |___| |\\  |\n" +
                 "\\____/\\____/\\_| \\_/\n";
         System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
@@ -17,6 +22,7 @@ public class Duke {
 
         //Initialise list to store tasks and Scanner to get user input
         List<Task> tasks = new ArrayList<>(100);
+        Path dataPath = loadData(tasks);
         Scanner sc = new Scanner(System.in);
 
         // Main Code
@@ -29,14 +35,55 @@ public class Duke {
                 showTasks(tasks);
                 // cant put done word as a task
             }else if (userInput.toLowerCase().startsWith("done")) {
-                markTaskDone(userInput, tasks);
+                markTaskDone(userInput, tasks, dataPath);
             } else if(userInput.toLowerCase().startsWith("delete")) {
-                deleteTask(userInput, tasks);
+                deleteTask(userInput, tasks, dataPath);
             } else {
-                addTask(userInput, tasks);
-
+                addTask(userInput, tasks, dataPath);
             }
         }
+    }
+
+    /**
+     * Loads all data stored on hard disk into local list upon start up.
+     * @param tasks ArrayList where all task objects are stored.
+     * @return Path of data file.
+     */
+    public static Path loadData(List<Task> tasks) {
+        Path dirPath = Paths.get("dataSets");
+        Path dataPath = Paths.get("datasets/Data.txt");
+
+        try {
+            if(!Files.exists(dataPath)) {
+                Files.createDirectories(dirPath);
+                Files.createFile(dataPath);
+            }
+
+            Files.lines(dataPath).forEach(x -> {
+                String[] data = x.split(",");
+                String taskType = data[0];
+                Task toAdd;
+                if(taskType.equalsIgnoreCase("todo")) {
+                    toAdd = new ToDo(data[2]);
+                }else if(taskType.equalsIgnoreCase("deadline")) {
+                    toAdd = new Deadline(data[2], data[3]);
+                } else if(taskType.equalsIgnoreCase("event")) {
+                    toAdd = new Event(data[2], data[3]);
+                } else {
+                    throw new IllegalArgumentException("Unrecognised task type on loading");
+                }
+
+                if(data[1].equals("1")) {
+                    toAdd.setDone();
+                }
+                tasks.add(toAdd);
+            });
+
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+
+        return dataPath;
     }
 
     /**
@@ -44,14 +91,17 @@ public class Duke {
      * @param userInput String of task to delete.
      * @param tasks List of current tasks.
      */
-    public static void deleteTask(String userInput, List<Task> tasks) {
+    public static void deleteTask(String userInput, List<Task> tasks, Path dataPath) {
         try {
+            //Delete from ArrayList
             int taskToDel = Integer.parseInt(userInput.substring(7)) - 1;
-            System.out.println(taskToDel);
             Task task = tasks.get(taskToDel);
             tasks.remove(taskToDel);
             dukeReply(String.format("Noted. I've removed this task:\n%s\nNow you have %s tasks in list"
                     , task, tasks.size()));
+
+            //Delete from DataFile
+            updateDataSet(tasks, dataPath);
         } catch(StringIndexOutOfBoundsException e) {
             dukeReply("OOPS!!! You cannot delete nothing!");
         } catch(NumberFormatException e) {
@@ -62,33 +112,71 @@ public class Duke {
     }
 
     /**
-     * Adds a task to the List of tasks.
+     * Rewrites content in dataset according to the ArrayList.
+     * @param list ArrayList of tasks.
+     * @param dataPath Path to data set.
+     */
+    public static void updateDataSet(List<Task> list, Path dataPath) {
+        try {
+            Path tempPath = Paths.get("datasets/temp.txt");
+            Files.createFile(tempPath);
+
+            for(int i = 0; i < list.size(); i++) {
+                String toAdd = list.get(i).getDataRep();
+                Files.writeString(tempPath, toAdd + System.lineSeparator(), StandardOpenOption.APPEND);
+            }
+
+            Files.move(tempPath, tempPath.resolveSibling("Data.txt"), StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception e) {
+            System.out.println("cant update dataset");
+        }
+    }
+    /**
+     * Adds a task to the List of tasks and to the data file.
      * @param userInput String of task to add.
      * @param tasks List of current tasks.
+     * @param dataPath Path to the data storage file.
      */
-    public static void addTask(String userInput, List<Task> tasks) {
+    public static void addTask(String userInput, List<Task> tasks, Path dataPath) {
         Task taskToAdd;
+        String dataToStore;
+        int todoIndex = 5;
+        int deadlineIndex = 9;
+        int eventIndex = 6;
         try{
             if(userInput.toLowerCase().startsWith("todo")) {
-                taskToAdd = new ToDo(userInput.substring(5));
+                String taskDesc = userInput.substring(todoIndex);
+                taskToAdd = new ToDo(taskDesc);
+                dataToStore = String.format("todo,0,%s", taskDesc);
+
             } else if (userInput.toLowerCase().startsWith("deadline")){
                 int dateIndex = userInput.indexOf("/by");
-                String[] dateAndTask = sepDateFromTask(dateIndex,9, userInput);
+                String[] dateAndTask = sepDateFromTask(dateIndex,deadlineIndex, userInput);
                 taskToAdd = new Deadline(dateAndTask[0], dateAndTask[1]);
+                dataToStore = String.format("deadline,0,%s,%s", dateAndTask[0], dateAndTask[1]);
+
             } else if(userInput.toLowerCase().startsWith("event")) {
                 int dateIndex = userInput.indexOf("/at");
-                String[] dateAndTask = sepDateFromTask(dateIndex,6, userInput);
+                String[] dateAndTask = sepDateFromTask(dateIndex,eventIndex, userInput);
                 taskToAdd = new Event(dateAndTask[0], dateAndTask[1]);
+                dataToStore = String.format("event,0,%s,%s", dateAndTask[0], dateAndTask[1]);
+
             } else {
                 throw new IllegalArgumentException("Please specify type of task");
             }
+            // Add task to data file
+            Files.writeString(dataPath, dataToStore + System.lineSeparator(), StandardOpenOption.APPEND);
+            // Add task To arrayList
             tasks.add(taskToAdd);
             dukeReply(String.format("Got it. I've added this task:\n" +
                     "%s\nNumber of tasks: %s", taskToAdd.toString(), tasks.size()));
+
         }catch(IllegalArgumentException e) {
             dukeReply("OOPS!!! I'm sorry, but I don't know what that means :-(");
         } catch(StringIndexOutOfBoundsException e) {
             dukeReply("OOPS!!! The description of a todo cannot be empty.");
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 
@@ -117,7 +205,7 @@ public class Duke {
      * @param userInput Text beginning with 'done' followed by a number.
      * @param tasks List of current tasks.
      */
-    public static void markTaskDone(String userInput, List<Task> tasks) {
+    public static void markTaskDone(String userInput, List<Task> tasks, Path dataPath) {
         try {
             int taskIndex = Integer.parseInt(userInput.substring(5)) - 1;
             Task task = tasks.get(taskIndex);
@@ -126,6 +214,7 @@ public class Duke {
             } else {
                 task.setDone();
                 dukeReply("Nice! I've marked this task as done:\n" + task.toString());
+                updateDataSet(tasks, dataPath);
             }
         } catch(StringIndexOutOfBoundsException e) {
             dukeReply("OOPS!!! You cannot mark nothing as done!");

@@ -1,11 +1,10 @@
 public class ToDo extends Task{
-    private String taskType = "T";
     public ToDo(String todo) {
-        super(todo);
+        super(todo, "T");
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.taskType, super.toString());
+        return String.format("[%s] %s", this.getTaskSymbol(), super.toString());
     }
 }
