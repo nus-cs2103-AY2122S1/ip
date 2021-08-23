@@ -39,6 +39,15 @@ public class TaskList {
         ui.printTaskOnDate(this.tasks, date);
     }
 
+    /** Prints tasks with the specified keyword.
+     *
+     * @param keyword The keyword specified by the user.
+     * @param ui The UI object of the current Duke object.
+     */
+    public void printTasksWithKeyword(String keyword, UI ui) {
+        ui.printTasksWithKeyword(this.tasks, keyword);
+    }
+
     /**
      * Marks a task as done.
      *

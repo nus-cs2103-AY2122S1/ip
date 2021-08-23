@@ -99,8 +99,25 @@ public class UI {
         }
     }
 
-    // Error methods
+    /**
+     * Prints the task with the specified keyword.
+     *
+     * @param taskList The list of tasks.
+     * @param keyword The keyword specified by the user.
+     */
+    public void printTasksWithKeyword(List<Task> taskList, String keyword) {
+        System.out.println("Lollipop: Here the tasks that match your keyword:");
+        int count = 1;
+        for (Task task : taskList) {
+            if (task.toString().contains(keyword)) {
+                System.out.printf("%d. %s%n", count, task);
+            }
+        }
+    }
 
+    /** Error methods */
+
+    // Error methods
     /**
      * Prints an error when the data file is not found.
      *
