@@ -46,10 +46,10 @@ public class Deadline extends Task {
     }
     
     @Override
-    public String toSavedString() {
+    public String toEncodedString() {
         return KEYWORD 
                 + getSplitTemplate() 
-                + super.toSavedString() 
+                + super.toEncodedString() 
                 + getSplitTemplate()
                 + byDate
                 + ((byTime == null) ? "" : getSplitTemplate() + byTime);

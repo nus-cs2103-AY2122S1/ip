@@ -45,10 +45,10 @@ public class Event extends Task {
     }
 
     @Override
-    public String toSavedString() {
+    public String toEncodedString() {
         return KEYWORD 
                 + getSplitTemplate() 
-                + super.toSavedString() 
+                + super.toEncodedString() 
                 + getSplitTemplate() 
                 + atDate
                 + ((atTime == null) ? "" : getSplitTemplate() + atTime);

@@ -18,8 +18,8 @@ public class Todo extends Task {
     }
 
     @Override
-    public String toSavedString() {
-        return KEYWORD + getSplitTemplate() + super.toSavedString();
+    public String toEncodedString() {
+        return KEYWORD + getSplitTemplate() + super.toEncodedString();
     }
 
     @Override

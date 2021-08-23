@@ -59,7 +59,7 @@ public abstract class Task {
         return " " + SPLIT_CHAR + " ";
     }
     
-    public String toSavedString() {
+    public String toEncodedString() {
         return ((isDone) ? "1" : "0") + getSplitTemplate() + description;
     }    
     

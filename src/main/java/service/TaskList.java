@@ -127,14 +127,14 @@ public class TaskList {
     
     public void saveToFile(Task newTask) throws IOException {
         FileWriter fileWriter = new FileWriter(TASK_FILE_PATH, true);
-        fileWriter.write(newTask.toSavedString() + '\n');
+        fileWriter.write(newTask.toEncodedString() + '\n');
         fileWriter.close();
     }
 
     public void updateToFile(int taskNumber, Task newTask) throws IOException {
         Path filePath = Paths.get(TASK_FILE_PATH);
         List<String> taskLines = Files.readAllLines(filePath);
-        taskLines.set(taskNumber - 1, newTask.toSavedString()); // 0-indexing
+        taskLines.set(taskNumber - 1, newTask.toEncodedString()); // 0-indexing
         Files.write(filePath, taskLines);
     }
 
