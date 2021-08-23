@@ -5,17 +5,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * TaskManager handles the management of and interaction with tasks
+ * TaskList handles the management of and interaction with tasks
  */
 public class TaskList {
     /** ArrayList containing all tasks **/
-    private static ArrayList<Task> taskArrayList = new ArrayList<>();
-
+    private ArrayList<Task> taskArrayList = new ArrayList<>();
 
     /**
      * Ensures the initial task list is empty
      */
-    public static void start() {
+    public void start() {
         taskArrayList = new ArrayList<>();
     }
 
@@ -23,7 +22,7 @@ public class TaskList {
      * Adds a new task to taskArrayList
      * @param task Task object to be added
      */
-    public static void add(Task task) {
+    public void add(Task task) {
         taskArrayList.add(task);
     }
 
@@ -33,7 +32,7 @@ public class TaskList {
      * @return Task with ID
      * @throws IndexOutOfBoundsException If task ID does not exist
      */
-    public static Task get(int id) throws IndexOutOfBoundsException {
+    public Task get(int id) throws IndexOutOfBoundsException {
         return taskArrayList.get(id - 1);
     }
 
@@ -42,14 +41,14 @@ public class TaskList {
      * @param id ID of task
      * @throws IndexOutOfBoundsException If task ID does not exist
      */
-    public static void remove(int id) throws IndexOutOfBoundsException {
+    public void remove(int id) throws IndexOutOfBoundsException {
         taskArrayList.remove(id - 1);
     }
 
     /**
      * Lists the current Tasks in taskArrayList with numbering
      */
-    public static void list() {
+    public void list() {
         for (int i = 0; i < taskArrayList.size(); i++) {
             System.out.println(i+1 + "." + taskArrayList.get(i).toString());
         }
@@ -60,15 +59,15 @@ public class TaskList {
      * Retrieves the number of tasks currently
      * @return Number of tasks
      */
-    public static int size() {
+    public int size() {
         return taskArrayList.size();
     }
 
     /**
      * Retrieves a list of tasks from previous sessions, stored in data/duke.txt
      */
-    public static void getTasksFromStorage() throws FileNotFoundException {
-        File dataFile = Storage.getDataFile();
+    public void getTasksFromStorage(String filePath) throws FileNotFoundException {
+        File dataFile = Storage.getDataFile(filePath);
         Scanner sc = new Scanner(dataFile);
         while (sc.hasNext()) {
             String[] commandArr = sc.nextLine().split("\\|");
@@ -93,7 +92,7 @@ public class TaskList {
     /**
      * Saves the current list of tasks to data/duke.txt to be used in future sessions
      */
-    public static void saveTasksToStorage() {
+    public void saveTasksToStorage(String filePath) {
         for (int i = 0; i < taskArrayList.size(); i++) {
             Task task = taskArrayList.get(i);
             String taskString;
@@ -108,9 +107,9 @@ public class TaskList {
                 taskString = "E|" + isDone + task.getName() + "|" + event.getEventDate();
             }
             if (i == 0) {
-                Storage.writeToDataFile(taskString);
+                Storage.writeToDataFile(filePath, taskString);
             } else {
-                Storage.appendToDataFile("\n" + taskString);
+                Storage.appendToDataFile(filePath, "\n" + taskString);
             }
         }
     }

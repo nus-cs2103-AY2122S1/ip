@@ -8,7 +8,21 @@ import java.util.Scanner;
  * @author Adam Oh Zhi Hong
  */
 public class Duke {
-    public static void main(String[] args) {
+    private TaskList tasklist;
+    private String filePath;
+
+    private Duke(String filePath) {
+        this.tasklist = new TaskList();
+        this.tasklist.start();
+        this.filePath = filePath;
+        try {
+            this.tasklist.getTasksFromStorage(filePath);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
+
+    private void run() {
         // Welcome the user
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -20,14 +34,6 @@ public class Duke {
                 "How can I help you?");
 
         boolean running = true;
-
-        try {
-            TaskList.start();
-            TaskList.getTasksFromStorage();
-        } catch (FileNotFoundException e) {
-            running = false;
-            System.out.println("File not found");
-        }
         Scanner sc = new Scanner(System.in);
 
         // Start taking input from the user
@@ -40,15 +46,15 @@ public class Duke {
             switch (command) {
                 case "bye":
                     System.out.println("¡Adiós! See you soon!");
-                    TaskList.saveTasksToStorage();
+                    tasklist.saveTasksToStorage(filePath);
                     running = false;
                     break;
                 case "list":
-                    TaskList.list();
+                    tasklist.list();
                     break;
                 default:
                     try {
-                        Parser.handle(command);
+                        Parser.handle(command, tasklist);
                     } catch (InvalidCommandException e) {
                         System.out.println("I'm afraid I don't recognise that, please try again!");
                     } catch (MissingTaskNameException e) {
@@ -69,6 +75,10 @@ public class Duke {
                     }
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
     }
 }
 
