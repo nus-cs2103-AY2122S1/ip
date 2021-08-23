@@ -63,9 +63,5 @@ Now you have 3 tasks in the list.
 2.  [T][ ] join sports club
 3.  [T][ ] read book
 -------------------------------------
--------------------------------------
-Here are the matching tasks in your list:
-1.[T][X] read book
--------------------------------------
 Have a pleasant day, Master Wayne.
 

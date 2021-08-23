@@ -24,7 +24,6 @@ public class Parser {
 
         switch (command) {
         case "bye":
-            System.out.println("Have a pleasant day, Master Wayne.\n");
             return new ExitCommand("exit");
         case "list":
             return new ListCommand("list");

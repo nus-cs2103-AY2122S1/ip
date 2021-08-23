@@ -8,8 +8,8 @@ if exist ACTUAL.TXT del ACTUAL.TXT
 
 REM compile the code into the bin folder
 javac  -cp ..\src\main\java\duke -Xlint:none -d ..\bin ..\src\main\java\duke\*.java
-javac  -cp ..\src\main\java\duke\commands\ -Xlint:none -d ..\bin ..\src\main\java\duke\commands\*.java
-javac  -cp ..\src\main\java\duke\tasks\ -Xlint:none -d ..\bin ..\src\main\java\duke\tasks\*.java
+javac  -cp ..\src\main\java\duke\commands -Xlint:none -d ..\bin ..\src\main\java\duke\commands\*.java
+javac  -cp ..\src\main\java\duke\tasks -Xlint:none -d ..\bin ..\src\main\java\duke\tasks\*.java
 
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********

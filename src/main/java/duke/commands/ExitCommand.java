@@ -34,6 +34,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) {
-
+        System.out.println("Have a pleasant day, Master Wayne.\n");
     }
 }
