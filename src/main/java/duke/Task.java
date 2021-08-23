@@ -12,15 +12,16 @@ abstract class Task {
      * Indicates if a task is done.
      */
     protected boolean isDone;
-    protected final String description;
+    protected final String DESCRIPTION;
+
 
     /**
      * Constructor for a task.
      *
-     * @param description description for the task.
+     * @param DESCRIPTION description for the task.
      */
-    public Task(String description, boolean isDone) {
-        this.description = description;
+    public Task(String DESCRIPTION, boolean isDone) {
+        this.DESCRIPTION = DESCRIPTION;
         this.isDone = isDone;
     }
 
@@ -38,7 +39,7 @@ abstract class Task {
      */
     @Override
     public String toString() {
-        return this.description;
+        return this.DESCRIPTION;
     }
 }
 
@@ -63,7 +64,7 @@ class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + " | " + (this.isDone ? "[X]" : "[ ]") + " | " + this.description;
+        return "[T]" + " | " + (this.isDone ? "[X]" : "[ ]") + " | " + this.DESCRIPTION;
     }
 }
 
@@ -90,7 +91,7 @@ class DeadLine extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + " | " + (this.isDone ? "[X]" : "[ ]") + " | " + this.description + " | " + this.deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        return "[D]" + " | " + (this.isDone ? "[X]" : "[ ]") + " | " + this.DESCRIPTION + " | " + this.deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
     }
 }
 
@@ -117,6 +118,6 @@ class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + " | " + (this.isDone ? "[X]" : "[ ]") + " | " + this.description + " | " + this.timePeriod.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        return "[E]" + " | " + (this.isDone ? "[X]" : "[ ]") + " | " + this.DESCRIPTION + " | " + this.timePeriod.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
     }
 }

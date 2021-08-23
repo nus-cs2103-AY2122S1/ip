@@ -8,16 +8,16 @@ import java.util.List;
  * Has operations to add/delete tasks in the list.
  */
 public class TaskList {
-    private final List<Task> tasks;
-    private final Parser parser = new Parser();
+    private final List<Task> TASKS;
+    private final Parser PARSER = new Parser();
 
     /**
      * Constructor for a task list.
      *
-     * @param tasks A list of tasks.
+     * @param TASKS A list of tasks.
      */
-    public TaskList(List<Task> tasks) {
-        this.tasks = tasks;
+    public TaskList(List<Task> TASKS) {
+        this.TASKS = TASKS;
     }
 
     /**
@@ -26,7 +26,7 @@ public class TaskList {
      * @return The number of tasks in this list.
      */
     public int size() {
-        return tasks.size();
+        return TASKS.size();
     }
 
     /**
@@ -36,7 +36,7 @@ public class TaskList {
      * @return Returns the task at the specified position in this list.
      */
     public Task get(int idx) {
-        return this.tasks.get(idx);
+        return this.TASKS.get(idx);
     }
 
     /**
@@ -45,7 +45,7 @@ public class TaskList {
      * @param task Task to be appended to this list
      */
     public void addTask(Task task) {
-        this.tasks.add(task);
+        this.TASKS.add(task);
     }
 
     /**
@@ -54,7 +54,7 @@ public class TaskList {
      * @param toBeDeleted Task to be removed from this list, if present.
      */
     public void deleteTask(Task toBeDeleted) {
-        tasks.remove(toBeDeleted);
+        TASKS.remove(toBeDeleted);
     }
 
     /**
@@ -63,7 +63,7 @@ public class TaskList {
      * @param taskIdx The index of the task to be marked as done.
      */
     public void markTaskAsDone(int taskIdx) {
-        Task task = this.tasks.get(taskIdx);
+        Task task = this.TASKS.get(taskIdx);
         task.markAsDone();
     }
 
@@ -83,7 +83,7 @@ public class TaskList {
      * @param task The task description of the deadline.
      * @return A DeadLine object.
      * @throws UnrecognizableCommandException If the command is invalid.
-     * @throws InvalidDateTimeException If the date is invalid.
+     * @throws InvalidDateTimeException       If the date is invalid.
      */
     public DeadLine createDeadLine(String task) throws UnrecognizableCommandException, InvalidDateTimeException {
         if (!task.contains(" /by ")) {
@@ -93,7 +93,7 @@ public class TaskList {
             String[] lst = task.split(" /by ");
             String description = lst[0];
             String ddl = lst[1];
-            LocalDate date = parser.stringToLocalDate(ddl);
+            LocalDate date = PARSER.stringToLocalDate(ddl);
             return new DeadLine(description, date, false);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new UnrecognizableCommandException();
@@ -107,7 +107,7 @@ public class TaskList {
      * @param task The task description of the event.
      * @return An event object.
      * @throws UnrecognizableCommandException If the command is invalid.
-     * @throws InvalidDateTimeException If the date is invalid.
+     * @throws InvalidDateTimeException       If the date is invalid.
      */
     public Event createEvent(String task) throws UnrecognizableCommandException, InvalidDateTimeException {
         if (!task.contains(" /at ")) {
@@ -117,7 +117,7 @@ public class TaskList {
             String[] lst = task.split(" /at ");
             String description = lst[0];
             String period = lst[1];
-            LocalDate date = parser.stringToLocalDate(period);
+            LocalDate date = PARSER.stringToLocalDate(period);
             return new Event(description, date, false);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new UnrecognizableCommandException();

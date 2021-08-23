@@ -13,20 +13,20 @@ enum ActionType {
 public class Duke {
 
     private boolean isLive = true;
-    private final Storage storage;
-    private final TaskList tasksLst;
-    private final Ui ui;
-    private final Parser parser;
+    private final Storage STORAGE;
+    private final TaskList TASKLIST;
+    private final Ui UI;
+    private final Parser PARSER;
 
     /**
      * Constructor for a duke.
      */
     public Duke() {
-        parser = new Parser();
-        storage = new Storage();
-        tasksLst = new TaskList(storage.loadFromDisk());
-        ui = new Ui(this.tasksLst);
-        ui.greet();
+        PARSER = new Parser();
+        STORAGE = new Storage();
+        TASKLIST = new TaskList(STORAGE.loadFromDisk());
+        UI = new Ui(this.TASKLIST);
+        UI.greet();
     }
 
     /**
@@ -45,54 +45,54 @@ public class Duke {
      * @throws DukeException exceptions when processing the command
      */
     public void processCommand(String command) throws DukeException {
-        ActionType actionType = parser.parseActionType(command);
+        ActionType actionType = PARSER.parseActionType(command);
         switch (actionType) {
         case LIST:
-            ui.displayTasks();
+            UI.displayTasks();
             break;
         case TODO: {
-            String task = parser.parseTask(command);
-            ToDo toDo = tasksLst.createTodo(task);
-            tasksLst.addTask(toDo);
-            ui.showAddedTask(toDo);
-            storage.saveProgress();
+            String task = PARSER.parseTask(command);
+            ToDo toDo = TASKLIST.createTodo(task);
+            TASKLIST.addTask(toDo);
+            UI.showAddedTask(toDo);
+            STORAGE.saveProgress();
             break;
         }
         case DEADLINE: {
-            String task = parser.parseTask(command);
-            DeadLine ddl = tasksLst.createDeadLine(task);
-            tasksLst.addTask(ddl);
-            ui.showAddedTask(ddl);
-            storage.saveProgress();
+            String task = PARSER.parseTask(command);
+            DeadLine ddl = TASKLIST.createDeadLine(task);
+            TASKLIST.addTask(ddl);
+            UI.showAddedTask(ddl);
+            STORAGE.saveProgress();
             break;
         }
         case EVENT: {
-            String task = parser.parseTask(command);
-            Event event = tasksLst.createEvent(task);
-            tasksLst.addTask(event);
-            ui.showAddedTask(event);
-            storage.saveProgress();
+            String task = PARSER.parseTask(command);
+            Event event = TASKLIST.createEvent(task);
+            TASKLIST.addTask(event);
+            UI.showAddedTask(event);
+            STORAGE.saveProgress();
             break;
         }
         case DONE: {
-            int taskIdx = parser.getTaskIdx(command, tasksLst.size());
-            Task toBeMarked = tasksLst.get(taskIdx - 1);
-            tasksLst.markTaskAsDone(taskIdx - 1);
-            ui.showMarkedAsDone(toBeMarked);
-            storage.saveProgress();
+            int taskIdx = PARSER.getTaskIdx(command, TASKLIST.size());
+            Task toBeMarked = TASKLIST.get(taskIdx - 1);
+            TASKLIST.markTaskAsDone(taskIdx - 1);
+            UI.showMarkedAsDone(toBeMarked);
+            STORAGE.saveProgress();
             break;
         }
         case DELETE: {
-            int taskIdx = parser.getTaskIdx(command,tasksLst.size());
-            Task toBeDeleted = tasksLst.get(taskIdx - 1);
-            tasksLst.deleteTask(toBeDeleted);
-            ui.showDeletedTask(toBeDeleted);
-            storage.saveProgress();
+            int taskIdx = PARSER.getTaskIdx(command, TASKLIST.size());
+            Task toBeDeleted = TASKLIST.get(taskIdx - 1);
+            TASKLIST.deleteTask(toBeDeleted);
+            UI.showDeletedTask(toBeDeleted);
+            STORAGE.saveProgress();
             break;
         }
         case BYE: {
-            storage.saveProgress();
-            ui.bye();
+            STORAGE.saveProgress();
+            UI.bye();
             this.isLive = false;
             break;
         }
