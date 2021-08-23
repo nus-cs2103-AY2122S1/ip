@@ -11,7 +11,7 @@ public class Parser {
      *
      * @param input the user input.
      * @throws DukeException Invalid command.
-     * @throws IOException File
+     * @throws IOException Invalid file.
      */
     public static ParseCommands parse(String input) throws DukeException, IOException {
         if (input.equals("list")) {

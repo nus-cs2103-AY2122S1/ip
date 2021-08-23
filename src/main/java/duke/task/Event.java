@@ -6,11 +6,21 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private final LocalDateTime time;
 
+    /**
+     * Initialise constructor for an event.
+     *
+     * @param taskName Description of the event.
+     * @param time Time of the event, indicated with /at {time}
+     */
     public Event(String taskName, LocalDateTime time) {
         super(taskName);
         this.time = time;
     }
 
+    /**
+     * Returns a {@code string} representation of an event.
+     * @return event name and whether it is completed.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "

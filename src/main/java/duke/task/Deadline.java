@@ -6,11 +6,21 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private final LocalDateTime deadline;
 
+    /**
+     * Initialise constructor for a deadline.
+     *
+     * @param taskName Description of the task.
+     * @param deadline Deadline of the task, indicated with /by {time}
+     */
     public Deadline(String taskName, LocalDateTime deadline) {
         super(taskName);
         this.deadline = deadline;
     }
 
+    /**
+     * Returns a {@code string} representation of a deadline.
+     * @return deadline name and whether it is completed.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "

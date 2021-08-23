@@ -4,6 +4,11 @@ public class Task {
     private final String taskName;
     private boolean done;
 
+    /**
+     * Initialise task constructor.
+     *
+     * @param taskName Description of task.
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         this.done = false;
@@ -33,7 +38,7 @@ public class Task {
     }
 
     /**
-     * Gets task name.
+     * Returns a {@code string} representation of a task.
      * @return task name and whether it is completed.
      */
     @Override

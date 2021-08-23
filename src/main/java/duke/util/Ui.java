@@ -9,13 +9,18 @@ public class Ui {
 
     private final Scanner sc;
 
+    /**
+     * Initialise scanner and greet user.
+     */
     public Ui() {
-        // Initialize scanner and print welcome message
         sc = new Scanner(System.in);
         print(MESSAGE_GREET);
     }
 
-
+    /**
+     * Returns a {@code string} which is the trimmed user input.
+     * @return Trimmed user input.
+     */
     public String getCommand() {
         return sc.nextLine().trim();
     }
@@ -37,6 +42,4 @@ public class Ui {
         sc.close();
         print(MESSAGE_EXIT);
     }
-
-
 }

@@ -16,6 +16,9 @@ public class Duke {
 
     /**
      * A private constructor to initialize variables.
+     *
+     * @throws IOException Invalid file.
+     * @throws DukeException Throw respective exceptions.
      */
     private Duke() throws IOException, DukeException {
         storage = new Storage(pathName);
@@ -25,10 +28,7 @@ public class Duke {
     }
 
     /**
-     * Run duke.
-     *
-     * @throws DukeException Error loading file.
-     * @throws IOException   File exists but cannot be created or opened.
+     * Run duke
      */
     public void run() {
         String input;

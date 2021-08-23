@@ -107,6 +107,7 @@ public class Storage {
      * Saves data into file stored locally. If file does not exist, create a new file,
      * otherwise overwrite it.
      *
+     * @throws DukeException Save file failed.
      * @throws IOException File exists but cannot be created or opened.
      */
     public void saveData(ArrayList<Task> tasks) throws DukeException, IOException {
