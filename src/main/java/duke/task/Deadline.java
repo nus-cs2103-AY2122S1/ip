@@ -24,7 +24,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * converts a Deadline object to a formatted text to be saved in storage.
+     * Converts a Deadline object to a formatted text to be saved in storage.
      *
      * @return text representation of Deadline in storage files.
      */

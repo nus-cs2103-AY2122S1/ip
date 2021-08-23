@@ -12,9 +12,8 @@ import duke.exception.DukeException;
 public class Parser {
 
     /**
-     * Given a user input, identify the command the user wishes to invoke.
-     * The lack of a recognised command word will return the Invalid Command while a valid
-     * command with insufficient arguments or lack of user input will throw a DukeException.
+     * Identifies the command the user wishes to invoke given a user input, otherwise throws
+     * DukeException if user input is invalid.
      *
      * @param input the user input
      * @return the command the user wishes to invoke

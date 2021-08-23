@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * TaskList encapsulates a checkList which can hold 100 tasks, display task information, add, delete, mark
+ * Encapsulates a checkList which can hold 100 tasks, display task information, add, delete, mark
  * task as done. If TaskList is linked with a Storage, any changes to the TaskList will be saved.
  *
  * @author Clifford
@@ -36,7 +36,7 @@ public class TaskList {
     }
 
     /**
-     * Request from storage the save file and translates the file to Task that are added into list.
+     * Requests from storage the save file and translates the file to Task that are added into list.
      *
      * @throws DukeException if there is an IOException when handling the file
      */
@@ -70,7 +70,7 @@ public class TaskList {
     }
 
     /**
-     * Add Todo Task to the TaskList and return a String representation of the results of the operation.
+     * Adds Todo Task to the TaskList and return a String representation of the results of the operation.
      *
      * @param description user description of the Task
      * @return a String representation of the results of the operation.
@@ -81,7 +81,7 @@ public class TaskList {
     }
 
     /**
-     * Add Deadline Task to the TaskList and return a String representation of the results of the operation.
+     * Adds Deadline Task to the TaskList and return a String representation of the results of the operation.
      *
      * @param description user description of the Task
      * @param date date of the Task
@@ -93,7 +93,7 @@ public class TaskList {
     }
 
     /**
-     * Add Event Task to the TaskList and return a String representation of the results of the operation.
+     * Adds Event Task to the TaskList and return a String representation of the results of the operation.
      *
      * @param description  user description of Task
      * @param date date of the Task
@@ -154,7 +154,7 @@ public class TaskList {
     }
 
     /**
-     * Enumerate the items recorded in a list to be displayed to user.
+     * Enumerates the items recorded in a list to be displayed to user.
      *
      * @return String representation of list of items in TaskList
      */
@@ -171,14 +171,7 @@ public class TaskList {
     }
 
     /**
-     * Allows users to choose a task in the list to be crossed off.
-     *
-     * @param taskId the id of the task starting from 1 for the first task
-     * @return a String that confirms the success or failure of the mark as done operation.
-     * @throws IllegalArgumentException when a task that does not exist is selected to be mark as done
-     */
-    /**
-     * Allows users to choose a task in the list to be marked as done. If the task is already marked
+     * Chooses and marks a task in the list to be marked as done. If the task is already marked
      * as done, the task will continue to be marked as done.
      *
      * @param taskId the id of the task within the list
@@ -205,7 +198,7 @@ public class TaskList {
     }
 
     /**
-     * Allows users to remove items from the list.
+     * Removes a given task from the list.
      *
      * @param taskId the id of the task starting from 1 for the first task
      * @return a String that confirms the success of the delete operation

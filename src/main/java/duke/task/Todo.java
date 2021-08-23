@@ -15,7 +15,7 @@ public class Todo extends Task {
     }
 
     /**
-     * converts a Todo object to a formatted text to be saved in storage.
+     * Converts a Todo object to a formatted text to be saved in storage.
      *
      * @return text representation of Todo in storage files.
      */

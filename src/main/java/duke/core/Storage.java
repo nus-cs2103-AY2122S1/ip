@@ -25,7 +25,7 @@ public class Storage {
     }
 
     /**
-     * Retrieve the save file, otherwise create the directory for the save file.
+     * Retrieves the save file, otherwise create the directory for the save file.
      *
      * @return file object or null to represent the absence of a save file
      * @throws DukeException if there is an I/O Exception when it is read
@@ -44,7 +44,7 @@ public class Storage {
     }
 
     /**
-     * Create the directory for the save file.
+     * Creates the directory for the save file.
      *
      * @throws DukeException if there is an IO Exception when it is read
      */
@@ -58,8 +58,8 @@ public class Storage {
     }
 
     /**
-     * if there is no save file, creates a save file, following which the given
-     * text is saved into the save file.  DukeException will be thrown if an IOException
+     * Creates a save file if there is no save file, then save given
+     * into the save file, throw DukeException if an IOException
      * occurs during the handling of the file.
      *
      * @param dataText a text representation of the objects to be stored.

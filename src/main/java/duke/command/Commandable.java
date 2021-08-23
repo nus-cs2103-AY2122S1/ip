@@ -6,7 +6,7 @@ import duke.core.Ui;
 import duke.exception.DukeException;
 
 /**
- * Commandable encapsulates an interface that requires a class that implements it to
+ * Encapsulates an interface that requires a class that implements it to
  * be executable and check if it results in the termination of the program.
  *
  * @author Clifford

@@ -20,7 +20,7 @@ public class Ui {
             "------------------------------------------------------------------------";
 
     /**
-     * greet is called when the user starts up the program.
+     * Greets user when the user starts up the program.
      *
      * @return a welcome message when user starts interacting with ChatBot
      */

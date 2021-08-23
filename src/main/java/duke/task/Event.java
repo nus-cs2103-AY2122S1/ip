@@ -22,7 +22,7 @@ public class Event extends Task {
     }
 
     /**
-     * converts an Event object to a formatted text to be saved in storage.
+     * Converts an Event object to a formatted text to be saved in storage.
      *
      * @return text representation of Event in storage files.
      */
