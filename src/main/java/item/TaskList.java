@@ -19,8 +19,8 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
-    public int getListSize() {
-        return this.taskList.size();
+    public TaskList(List<Task> taskList) {
+        this.taskList = taskList;
     }
 
     /**

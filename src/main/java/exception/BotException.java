@@ -1,7 +1,7 @@
 package exception;
 
 /**
- * BotException are possible exceptions thrown by Catobot.
+ * BotException are possible exceptions thrown by catobot.Catobot.
  */
 public class BotException extends Exception {
     /**

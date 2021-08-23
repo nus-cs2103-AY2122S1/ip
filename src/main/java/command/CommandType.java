@@ -1,4 +1,6 @@
-public enum Command {
+package command;
+
+public enum CommandType {
 
     LIST    ("list"),
     DONE    ("done"),
@@ -10,7 +12,7 @@ public enum Command {
     INVALID ("");
 
     private final String command;
-    Command(String command) {
+    CommandType(String command) {
         this.command = command;
     }
 
@@ -20,9 +22,9 @@ public enum Command {
      * @param request The request from raw input line.
      * @return The corresponding Command to a request.
      */
-    public static Command find(String request) {
+    public static CommandType find(String request) {
         String command = request.split(" ")[0];
-        for(Command req : Command.values()) {
+        for(CommandType req : CommandType.values()) {
             if (command.equals(req.command)) {
                 return req;
             }
