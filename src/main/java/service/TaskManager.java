@@ -133,6 +133,13 @@ public class TaskManager {
         Files.write(filePath, taskLines);
     }
 
+    public void removeFromFile(int taskNumber) throws IOException {
+        Path filePath = Paths.get(TASK_FILE_PATH);
+        List<String> taskLines = Files.readAllLines(filePath);
+        taskLines.remove(taskNumber - 1); // 0-indexing
+        Files.write(filePath, taskLines);
+    }
+
     /**
      * Gets the current number of tasks stored.
      *
@@ -241,7 +248,15 @@ public class TaskManager {
      */
     public String deleteTask(int taskNumber) throws DukeException {
         Task selectedTask = getTaskFromNumberString(taskNumber);
-        taskList.remove(selectedTask); // remove shifts tasks to the right backwards
+        try {
+            removeFromFile(taskNumber);
+            taskList.remove(selectedTask); // remove shifts tasks to the right backwards
+            
+        } catch (IOException exception) {
+            throw new DukeException(String.format(
+                    "Unable to delete task numbered %d to file.",
+                    taskNumber));
+        }
         return String.format(TASK_DELETED_MESSAGE, selectedTask, getTaskListSize());
     }
 
