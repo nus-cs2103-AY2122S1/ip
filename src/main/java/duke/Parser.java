@@ -5,6 +5,7 @@ import duke.command.Action;
 import duke.command.List;
 import duke.command.Add;
 import duke.command.End;
+import duke.command.Find;
 import duke.exception.DukeException;
 import duke.exception.MissingDescriptionException;
 import duke.exception.UnknownCommandException;
@@ -44,6 +45,9 @@ public class Parser {
                     break;
                 case "delete":
                     c = new Action(Type.DELETE, words);
+                    break;
+                case "find":
+                    c = new Find(words);
                     break;
                 case "todo": {
                     String[] split = command.split(" ");

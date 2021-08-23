@@ -16,6 +16,10 @@ public class Task {
     public String getSaveIcon() {
         return (isDone ? "1" : "0");
     }
+    
+    public String getDescription() {
+        return this.description;
+    }
 
     @Override
     public String toString() {
