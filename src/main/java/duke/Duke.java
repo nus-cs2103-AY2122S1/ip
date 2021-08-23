@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.util.Parser;
+import duke.util.Ui;
+
 import java.io.IOException;
 
 public class Duke {
@@ -27,8 +35,8 @@ public class Duke {
 
         while (!(input = ui.getCommand()).equals("bye")) {
             try {
-                String message = Parser.interpretCommand(input).execute(tasks);
-                ui.print(message);
+                String output = Parser.interpretCommand(input).execute(tasks);
+                ui.print(output);
                 storage.saveData(tasks.getTasks());
             } catch (DukeException | IOException e) {
                 ui.print(e.getMessage());

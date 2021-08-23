@@ -1,10 +1,12 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private final LocalDateTime time;
 
-    Event(String taskName, LocalDateTime time) {
+    public Event(String taskName, LocalDateTime time) {
         super(taskName);
         this.time = time;
     }

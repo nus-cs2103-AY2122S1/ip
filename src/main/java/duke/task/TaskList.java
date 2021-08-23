@@ -1,7 +1,13 @@
-import java.io.IOException;
+package duke.task;
+
+import duke.exception.DukeException;
+import duke.exception.EmptyListException;
+import duke.exception.InvalidDateException;
+import duke.exception.InvalidTaskException;
+import duke.exception.TaskNotFoundException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -14,7 +20,7 @@ public class TaskList {
 
     private ArrayList<Task> tasks;
 
-    TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -23,9 +29,8 @@ public class TaskList {
      *
      * @param task  the new task to be added.
      * @param size  size of the taskList.
-     * @throws IOException File exists but cannot be created or opened.
      */
-    public String formatTask(Task task, int size) throws IOException {
+    public String formatTask(Task task, int size) {
         String str = (tasks.size() > 1) ? " tasks in the list." : " task in the list.";
         return (MESSAGE_ADD + "\n  " + task + "\n" + "Nee has " + size + str);
     }
@@ -92,9 +97,8 @@ public class TaskList {
      *
      * @param command the event with a specific time.
      * @throws DukeException Task has invalid description.
-     * @throws IOException   File exists but cannot be created or opened.
      */
-    public String addEvent(String command) throws DukeException, IOException {
+    public String addEvent(String command) throws DukeException {
         LocalDateTime dateTime;
         String[] taskCommands = command.substring(6).split("/at");
         if (taskCommands.length < 2) {
@@ -118,9 +122,8 @@ public class TaskList {
      *
      * @param command the deadline with a specific time.
      * @throws DukeException Task has invalid description.
-     * @throws IOException   File exists but cannot be created or opened.
      */
-    public String addDeadline(String command) throws DukeException, IOException {
+    public String addDeadline(String command) throws DukeException {
         LocalDateTime dateTime;
         String[] taskCommands = command.substring(9).split("/by");
         if (taskCommands.length < 2) {
@@ -145,9 +148,8 @@ public class TaskList {
      *
      * @param command the todo with a specific time.
      * @throws DukeException Task is invalid.
-     * @throws IOException   File exists but cannot be created or opened.
      */
-    public String addTodo(String command) throws IOException {
+    public String addTodo(String command) {
         Task newTask = new Todo(command.substring(5).trim());
         tasks.add(newTask);
         return formatTask(newTask, tasks.size());

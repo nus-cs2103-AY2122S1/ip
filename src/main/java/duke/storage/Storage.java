@@ -1,3 +1,12 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.exception.InvalidDateException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,7 +21,7 @@ import java.time.format.DateTimeParseException;
 public class Storage {
     private final String pathName;
 
-    Storage(String pathName) {
+    public Storage(String pathName) {
         this.pathName = pathName;
     }
 

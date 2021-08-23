@@ -1,3 +1,8 @@
+package duke.util;
+
+import duke.exception.DukeException;
+import duke.exception.UnknownCommandException;
+import duke.task.TaskList;
 import java.io.IOException;
 
 public class Parser {
