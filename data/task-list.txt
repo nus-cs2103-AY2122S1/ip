@@ -1,3 +1,4 @@
-1.[T][ ] sleep
-2.[T][X] swim
-3.[E][ ] run (at: 2pm)
+1.[E][X] conference (at:  thursday 4pm)
+2.[T][ ] read
+3.[T][ ] swim
+4.[D][ ] dive  (by: 2021-12-31 14:00)
