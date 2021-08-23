@@ -1,11 +1,8 @@
 package duke;
 
-import duke.*;
-
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.util.ArrayList;
-
 import static java.lang.Integer.parseInt;
 
 public class Parser {
@@ -78,7 +75,7 @@ public class Parser {
                 + List.todos.size()
                 + " task"
                 + (List.todos.size() == 1 ? "" : "s")
-                + " in the list"); // will take care of when it is 1
+                + " in the list");
     }
 
     public static void search(String input) {
@@ -93,4 +90,5 @@ public class Parser {
             System.out.println(i + 1 + ". " + result.get(i).toString());
         }
     }
+
 }

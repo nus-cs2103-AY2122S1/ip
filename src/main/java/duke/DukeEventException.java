@@ -1,7 +1,5 @@
 package duke;
 
-import duke.DukeException;
-
 public class DukeEventException extends DukeException {
     @Override
     public String getMessage() {

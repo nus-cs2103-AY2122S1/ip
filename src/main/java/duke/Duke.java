@@ -1,6 +1,9 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
 public class Duke {
     public static List todoList;
@@ -14,9 +17,7 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public static void main(String[] args)
-            throws IOException
-    {
+    public static void main(String[] args) throws IOException {
         try {
             File myObj = new File("filename.txt");
             if (myObj.createNewFile()) {
