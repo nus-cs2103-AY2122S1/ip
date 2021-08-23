@@ -20,9 +20,9 @@ public class Deadline extends Task {
     /**
      * Returns a Deadline object that is subclass of Task
      *
-     * @param isDone Boolean for if the task is done.
+     * @param isDone      Boolean for if the task is done.
      * @param description String for the description of the Task
-     * @param time String for time, needs to be in valid string format or exception is thrown.
+     * @param time        String for time, needs to be in valid string format or exception is thrown.
      * @return A Task that is a Deadline object.
      * @throws DateTimeException If time string is not valid.
      */

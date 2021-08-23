@@ -60,7 +60,7 @@ public class Storage {
      * If file does not exist, empty List will be returned.
      *
      * @return List of Task saved in file.
-     * @throws IOException If something goes wrong with File operations.
+     * @throws IOException       If something goes wrong with File operations.
      * @throws DateTimeException If file's date data is corrupted.
      */
     public List<Task> load() throws IOException, DateTimeException {

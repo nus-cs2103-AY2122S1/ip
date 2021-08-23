@@ -13,7 +13,7 @@ public class ToDo extends Task {
     /**
      * Returns a ToDo object that is subclass of Task
      *
-     * @param isDone Boolean for if the task is done.
+     * @param isDone      Boolean for if the task is done.
      * @param description String for the description of the Task
      * @return A Task that is a ToDo object.
      */

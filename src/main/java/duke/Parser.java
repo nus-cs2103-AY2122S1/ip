@@ -13,7 +13,7 @@ public class Parser {
      *
      * @param fullCommand String of the full command user inputted.
      * @return Command that can be executed.
-     * @throws DukeException If the command action is not recognized.
+     * @throws DukeException            If the command action is not recognized.
      * @throws IllegalArgumentException If there are missing arguments for given command.
      */
     public static Command parse(String fullCommand) throws DukeException, IllegalArgumentException {
@@ -34,7 +34,8 @@ public class Parser {
             if (parts.length < 2) throw new IllegalArgumentException("Not enough arguments");
             else return new FindCommand(parts[1]);
         case "todo":
-            if (parts.length < 2) throw new IllegalArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
+            if (parts.length < 2)
+                throw new IllegalArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
             else return new AddCommand(action, parts[1]);
         case "deadline":
             if (parts.length < 2) throw new IllegalArgumentException("Not enough arguments");
