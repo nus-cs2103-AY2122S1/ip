@@ -11,12 +11,16 @@ public class Duke {
         storage = new Storage(fileName);
         try {
             storage.loadTasks();
-        } catch (IOException | DukeException e) {
+        } catch (IOException e) {
             Ui.showLoadingError();
         }
         parser = new Parser(storage.getTasks(), storage);
     }
 
+    /**
+     * Main logic of program
+     *
+     */
     public void run() {
         Ui.welcome();
         Scanner sc = new Scanner(System.in);
@@ -31,7 +35,7 @@ public class Duke {
                     String[] results = parser.parseInput(input);
                     Ui.printAll(results);
                 } catch (Exception e) {
-                   Ui.showLoadingError();
+                    continue;
                 }
             }
         }

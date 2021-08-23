@@ -22,7 +22,13 @@ public class Storage {
         writer.close();
     }
 
-    public void loadTasks() throws IOException, DukeException{
+    /**
+     * Loads all the tasks from the given file name and add it to task list.
+     * If the position is unset, NaN is returned.
+     *
+     * @throws IOException If unable to create new file
+     */
+    public void loadTasks() throws IOException{
         Scanner scanner;
         File file = new File(fileName);
         file.createNewFile();
@@ -62,10 +68,20 @@ public class Storage {
         return newTask;
     }
 
-    TaskList getTasks() {
+    /**
+     * Returns tasks.
+     *
+     * @return Tasks loaded from file
+     */
+    public TaskList getTasks() {
         return tasks;
     }
 
+    /**
+     * Rewrite the entire file based with tasks.
+     *
+     * @throws IOException If unable to create write to file
+     */
     public void writeEntireFile() throws IOException {
         FileWriter writer = new FileWriter(this.fileName);
         for (Task task : tasks) {

@@ -25,10 +25,23 @@ public class Parser {
         this.storage = storage;
     }
 
+    /**
+     * Returns true if input string is "bye"
+     *
+     * @param input Received string from scanner
+     * @return Boolean based on checking if input is "bye"
+     */
     public boolean isExit(String input) {
         return input.equals("bye");
     }
 
+
+    /**
+     * Parses the input given and returns the responses given the input.
+     *
+     * @param input Received string from scanner
+     * @return Response from program.
+     */
     public String[] parseInput(String input) {
         try {
             if (input.startsWith("done")) {
