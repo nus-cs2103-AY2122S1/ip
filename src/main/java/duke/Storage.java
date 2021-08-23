@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -93,7 +97,7 @@ public class Storage {
             // not of any task type
             throw new IllegalArgumentException("Task type not recognized: " + taskType);
         }
-        task.isDone = Integer.parseInt(taskInfo[1]) == 1;
+        if (Integer.parseInt(taskInfo[1]) == 1) task.markAsDone();
         return task;
     }
 

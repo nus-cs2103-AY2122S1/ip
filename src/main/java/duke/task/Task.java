@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * A task representation for Duke
  */
@@ -29,5 +31,14 @@ public class Task {
     @Override
     public String toString() {
         return "["+ this.getStatusIcon() +"]" + " " + this.description;
+    }
+
+    /**
+     * Get the done status of this task
+     *
+     * @return true if this task is done, false otherwise
+     */
+    public boolean getDoneStatus() {
+        return this.isDone;
     }
 }

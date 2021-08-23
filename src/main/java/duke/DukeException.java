@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * A class of Exception that can be thrown for invalid Duke behaviours
  */

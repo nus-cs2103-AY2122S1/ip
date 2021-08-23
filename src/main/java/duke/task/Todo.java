@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * A Todo type task representation for Duke
  */
