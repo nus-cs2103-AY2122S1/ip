@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Scanner;
 import java.lang.StringBuilder;
 
@@ -32,6 +33,19 @@ public class Kermit {
     private static String printDeleteTask(Task task, ToDo list) {
         return "Noted. I've removed this task:\n"
                 + task +"\nNow you have " + list.size() + " tasks in the list.";
+    }
+
+    private static String formatWriteString(Task task) {
+        String delimiter = " | ";
+
+        String taskComplete = task.isComplete() ? "1" : "0";
+        String formattedString = String.join(delimiter, task.getShortForm(), taskComplete, task.getDescription());
+
+        if (task instanceof DateDependentTask) {
+            DateDependentTask dateTask = (DateDependentTask) task;
+            String.join(delimiter, formattedString, dateTask.getDate();
+        }
+        return formattedString;
     }
 
     public static void main(String[] args) {
