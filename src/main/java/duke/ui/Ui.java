@@ -153,5 +153,22 @@ public class Ui {
     public String readCommand() {
         return this.in.nextLine();
     }
+
+    /**
+     * Prints the list of tasks.
+     *
+     * @param tasks The list of tasks.
+     */
+    public void printMatches(List<Task> tasks) {
+        if (tasks.isEmpty()) {
+            this.print("No matches!");
+            return;
+        }
+
+        this.print("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            this.out.println("\t" + ((i + 1) + ". " + tasks.get(i)));
+        }
+    }
     
 }

@@ -67,6 +67,24 @@ public class TaskList {
         int index = id - 1;
         return this.tasks.get(index);
     }
+
+    /**
+     * Finds a task by a query string.
+     *
+     * @param query The query string.
+     * @return The list of tasks.
+     */
+    public List<Task> find(String query) {
+        List<Task> matches = new ArrayList<>();
+        for (Task task : this.tasks) {
+            String description = task.getDescription();
+            if (description.contains(query)) {
+                matches.add(task);
+            }
+        }
+
+        return matches;
+    }
     
     private void validateTaskId(int id) throws InvalidTaskSelectedException {
         int index = id - 1;
