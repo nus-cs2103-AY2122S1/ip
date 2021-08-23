@@ -17,6 +17,7 @@ public class Parser {
     public Duke.TaskTypes taskTypes;
     public String by;
     public String at;
+    public String searchKey;
 
     public Duke.Commands parseCommand(String commandStr) throws IllegalCommandException {
         try {
@@ -40,6 +41,7 @@ public class Parser {
             break;
         case DONE:
         case DELETE:
+        case FIND:
             if (duke.taskSize() == 0)
                 throw new EmptyListException(command);
         default:
@@ -72,6 +74,10 @@ public class Parser {
                 }
                 description = s[1];
             }
+            break;
+
+        case FIND:
+            searchKey = argument.trim();
             break;
 
         case DEADLINE:

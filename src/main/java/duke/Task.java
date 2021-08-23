@@ -9,6 +9,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean containsString(String searchKey) {
+        return this.description.toLowerCase().contains(searchKey.toLowerCase());
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }

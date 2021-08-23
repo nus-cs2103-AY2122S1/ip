@@ -17,7 +17,8 @@ public class Duke {
         EVENT,
         DELETE,
         SAVE,
-        BYE
+        BYE,
+        FIND
     }
 
     public enum TaskTypes {
@@ -76,6 +77,11 @@ public class Duke {
                         ui.deleted(tasks.remove(parser.index), tasks.size());
                     else
                         ui.deleted(tasks.remove(parser.description, parser.taskTypes), tasks.size());
+                    break;
+
+                case FIND:
+                    ui.print(tasks.find(parser.searchKey).toString().replace("Here are the tasks in your list, meow:"
+                            , "Here are the matching tasks found, meow:"));
                     break;
 
                 case TODO:
