@@ -1,5 +1,7 @@
 package Tasks;
 
+import pibexception.PibException;
+
 /**
  * Todo task which contains only the task description
  */
@@ -7,14 +9,24 @@ public class Todo extends Task {
 
     /**
      * A public constructor to create a ToDo task
+     *
      * @param description description of the todo task
      */
-    public Todo(String description) {
+    private Todo(String description) {
         super(description);
+    }
+
+    public static Todo createTodo(String details) throws PibException {
+        if (details.trim().isBlank()) {
+            throw new PibException("Todo description can't be blank");
+        } else {
+            return new Todo(details.trim());
+        }
     }
 
     /**
      * A public toString method to add the task type [T] in front of the checkbox
+     *
      * @return the string representation of a todo task
      */
     @Override

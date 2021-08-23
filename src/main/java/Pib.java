@@ -5,6 +5,7 @@ import Tasks.Task;
 import Tasks.Todo;
 import Tasks.Deadline;
 import Tasks.Event;
+import pibexception.PibException;
 
 /**
  * Pib is a Personal Assistant Chat-bot that is able to keep track of tasks (CRUD) and deadlines
@@ -96,43 +97,18 @@ public class Pib {
 
     private void addToList(TaskType t, String taskDetails) {
         try {
-            if (t.equals(TaskType.TODO)) {
-                if (taskDetails.trim().isBlank()) {
-                    throw new PibException("Task description cannot be empty!\n");
-                }
-                list.add(new Todo(taskDetails));
-            } else {
-                if (t.equals(TaskType.DEADLINE)) {
-                    int dateDividerIndex = taskDetails.indexOf("/by ");
-                    if (dateDividerIndex == -1) {
-                        throw new PibException("Include /by <date>\n");
-                    }
-                    String description = taskDetails.substring(0, dateDividerIndex);
-                    String date = taskDetails.substring(dateDividerIndex + 4);
-                    if (description.trim().isBlank()) {
-                        throw new PibException("Task description cannot be empty!\n");
-                    }
-                    if (date.trim().isBlank()) {
-                        throw new PibException("Date cannot be empty!\n");
-                    }
-                    list.add(new Deadline(taskDetails.substring(0, dateDividerIndex), taskDetails.substring(dateDividerIndex + 4)));
-                } else if (t.equals(TaskType.EVENT)) {
-                    int dateDividerIndex = taskDetails.indexOf("/at ");
-                    if (dateDividerIndex == -1) {
-                        throw new PibException("Include /at <date>\n");
-                    }
-                    String description = taskDetails.substring(0, dateDividerIndex);
-                    String date = taskDetails.substring(dateDividerIndex + 4);
-                    if (description.trim().isBlank()) {
-                        throw new PibException("Task description cannot be empty!\n");
-                    }
-                    if (date.trim().isBlank()) {
-                        throw new PibException("Date cannot be empty!\n");
-                    }
-                    list.add(new Event(taskDetails.substring(0, dateDividerIndex), taskDetails.substring(dateDividerIndex + 4)));
-                } else {
-                    return;
-                }
+            switch (t) {
+            case TODO:
+                list.add(Todo.createTodo(taskDetails));
+                break;
+            case EVENT:
+                list.add(Event.createEvent(taskDetails));
+                break;
+            case DEADLINE:
+                list.add(Deadline.createDeadline(taskDetails));
+                break;
+            default:
+                break;
             }
             System.out.println("Now you have " + list.size() + " task(s) in your list.\n");
         } catch (PibException e) {
