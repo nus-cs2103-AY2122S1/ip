@@ -85,14 +85,22 @@ class TaskListTest {
 
     @Test
     void testFilterByDate() {
-        try {
-            taskList.addTask(new Deadline("homework", LocalDate.parse("2021-08-23"),
-                    LocalTime.parse("18:00")));
-            assertEquals("Here is your list of task on this day:\n"
-                            + "1.[D][ ] homework (by: Aug 23 2021 18:00)\n",
-                    taskList.filterByDate(LocalDate.parse("2021-08-23")));
-        } catch (DukeException e) {
-            fail();
-        }
+        taskList.addTask(new Deadline("homework", LocalDate.parse("2021-08-23"),
+                LocalTime.parse("18:00")));
+        assertEquals("Here is your list of task on this day:\n"
+                        + "1.[D][ ] homework (by: Aug 23 2021 18:00)\n",
+                taskList.filterByDate(LocalDate.parse("2021-08-23")));
+
+    }
+
+    @Test
+    void testFilterByKeyword() {
+        taskList.addTask(new Deadline("homework", LocalDate.parse("2021-08-23"),
+                LocalTime.parse("18:00")));
+        taskList.addTask(new ToDo("submit homework"));
+        assertEquals("Here are the matching tasks in your list:\n"
+                        + "1.[D][ ] homework (by: Aug 23 2021 18:00)\n"
+                        + "2.[T][ ] submit homework\n",
+                taskList.filterByKeyword("homework"));
     }
 }

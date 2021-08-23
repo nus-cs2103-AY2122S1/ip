@@ -16,7 +16,7 @@ Here is the list of my available commands!
 3. event [description] /at [date] [time]-[time] - Adds a Event to task list
 4. filter [date] - Filters out list of task on this date
 Date formats: dd/mm/yyyy, dd-mm-yyyy, yyyy-mm-dd
-Time format: HHmm
+Time format: HHmm, HH:mm
 5. list - Display list of items you have added
 6. done [index of completed task] - Marks specified tasks as completed
 7. delete [index of task to be deleted] - Deletes specified task
@@ -141,7 +141,7 @@ Error: '/by' argument is missing!
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
-Error: OOPS!!! Argument after '/by' is empty!
+Error: Date/Time is missing!
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ Error: '/at' argument is missing!
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
-Error: OOPS!!! Argument after '/at' is empty!
+Error: Date/Time is missing!
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
@@ -166,5 +166,19 @@ Here is your list of task on this day:
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
+Got it! I've added this task:
+  [D][ ] return book (by: Aug 22 2021 18:00)
+Now you have 4 task(s) in the list.
+--------------------------------------------------------------------------------
+Enter Command: 
+--------------------------------------------------------------------------------
+Here are the matching tasks in your list:
+1.[T][X] borrow book
+2.[D][ ] return book (by: Aug 22 2021 18:00)
+
+--------------------------------------------------------------------------------
+Enter Command: 
+--------------------------------------------------------------------------------
+File Saved successfully!
 Bye :< Hope to see you again soon!
 --------------------------------------------------------------------------------

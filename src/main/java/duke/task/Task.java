@@ -54,4 +54,8 @@ public class Task {
     public boolean checkDate(LocalDate date) {
         return false;
     }
+
+    public boolean hasKeyword(String keyword) {
+        return description.contains(keyword);
+    }
 }

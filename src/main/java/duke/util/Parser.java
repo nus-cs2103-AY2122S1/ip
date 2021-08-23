@@ -16,7 +16,7 @@ import java.time.LocalTime;
  * @author Chng Zi Hao
  */
 public class Parser {
-    
+
     /**
      * Extract out the information given in user input by separating out command.
      *
@@ -211,6 +211,8 @@ public class Parser {
         case FILTER:
             String filterDate = extractInfo(input, Instruction.FILTER);
             return new FilterCommand(parseDate(filterDate));
+        case FIND:
+            return new FindCommand(extractInfo(input, Instruction.FIND));
         case BYE:
             return new ExitCommand();
         default:
