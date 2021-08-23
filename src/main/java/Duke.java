@@ -1,5 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoField;
+
 public class Duke {
     public static void main(String[] args) {
 
@@ -7,6 +12,14 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
         Task currentTask = null;
+        DateTimeFormatter fmt = new DateTimeFormatterBuilder()
+                .appendPattern("d/M/yyyy")
+                .optionalStart()
+                .appendPattern(" HHmm")
+                .optionalEnd()
+                .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+                .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+                .toFormatter();
         while (true) {
             String input = sc.nextLine();
             boolean isLastCharDigit =  Character.isDigit(input.charAt(input.length() - 1));
@@ -57,7 +70,7 @@ public class Duke {
                             continue;
                         } else {
                             String deadline = input.substring(i + 1, input.length() - 1+1);
-                            currentTask = new Deadline(input.substring(firstIndexAfterDeadline, i), deadline);
+                            currentTask = new Deadline(input.substring(firstIndexAfterDeadline, i), LocalDateTime.parse("13/02/2021 0000", fmt));
                             tasks.add(currentTask);
                         }
                     }
@@ -74,7 +87,8 @@ public class Duke {
                             continue;
                         } else {
                             String deadline = input.substring(i + 1, input.length() - 1+1);
-                            currentTask = new Event(input.substring(firstIndexAfterDeadline, i), deadline);
+
+                            currentTask = new Event(input.substring(firstIndexAfterDeadline, i), LocalDateTime.parse("1/3/2021", fmt));
                             tasks.add(currentTask);
                         }
                     }
