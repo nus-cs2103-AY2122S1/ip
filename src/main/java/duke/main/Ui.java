@@ -1,10 +1,12 @@
-package duke;
+package duke.main;
 
 import java.util.Scanner;
 
+import duke.task.Storage;
+
 public class Ui {
-    private static Scanner sc;
-    private static Parser parser;
+    private Scanner sc;
+    private Parser parser;
 
     public Ui(Scanner sc, TaskList taskList, Storage storage) {
         this.sc = sc;

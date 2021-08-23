@@ -1,7 +1,15 @@
-package duke;
+package duke.main;
+
+import duke.exception.DukeException;
+import duke.exception.NoDescriptionException;
+import duke.exception.InvalidParamException;
+import duke.task.Storage;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 public class Parser {
-
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
@@ -119,7 +127,7 @@ public class Parser {
 
         try {
             if (!input.startsWith("todo") && !input.startsWith("deadline") && !input.startsWith("event")) {
-                throw new InvalidInputException();
+                throw new duke.exception.InvalidInputException();
             } else {
                 // If it passes the if block, means it is a task-setting command
 
@@ -143,7 +151,7 @@ public class Parser {
 
                 }
             }
-        } catch (NoDescriptionException | InvalidParamException | InvalidInputException e1) {
+        } catch (DukeException e1) {
             System.out.println("Output: " + e1.getMessage());
         }
 

@@ -1,9 +1,12 @@
-package duke;
+package duke.task;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+import duke.main.TaskList;
+import duke.exception.InvalidParamException;
 
 public class Storage {
 
@@ -52,7 +55,7 @@ public class Storage {
 
             fileWriter.write(toBeWritten.toString());
             fileWriter.close();
-        } catch (java.io.IOException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -84,7 +87,7 @@ public class Storage {
 
                 taskList.addTask(newTask);
             }
-        } catch (java.io.IOException e1) {
+        } catch (IOException e1) {
             System.out.println(e1.getMessage());
         } catch (InvalidParamException e2) {
             // SHOULD NEVER HAPPEN

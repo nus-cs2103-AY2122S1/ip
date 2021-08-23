@@ -1,7 +1,9 @@
-package duke;
+package duke.main;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import duke.task.Task;
 
 public class TaskList implements Iterable<Task> {
     private ArrayList<Task> taskList;

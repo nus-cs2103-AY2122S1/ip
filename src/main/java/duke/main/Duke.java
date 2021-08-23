@@ -1,6 +1,8 @@
-package duke;
+package duke.main;
 
 import java.util.Scanner;
+
+import duke.task.Storage;
 
 public class Duke {
     private static TaskList taskList;
