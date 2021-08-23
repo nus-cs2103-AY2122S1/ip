@@ -61,6 +61,15 @@ public class FindCommand extends Command {
         storage.saveTasks(taskList.getTasks());
     }
 
+    /**
+     * A recurssive method to check if a pattern is a sub-sequence of a description string.
+     * 
+     * @param pattern The pattern string to be checked.
+     * @param description The descriptoin string to be check against.
+     * @param m The length of the pattern string.
+     * @param n The length of the description string.
+     * @return Returns true if pattern is a subsequence of description.
+     */
     private boolean isSubSequence(String pattern, String description, int m, int n) {
         if (m == 0) {
             return true;
