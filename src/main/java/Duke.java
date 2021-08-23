@@ -243,24 +243,24 @@ public class Duke {
         String text = "";
         FileWriter fw = new FileWriter("/Users/ravi57004/ip/src/main/java/Tasks.txt", false);
         if (!input.equals("bye")) {
-            for (Task task: tasks) {
-                String doneStr = "No";
-                if (task.getIsDone().equals("[X]")) {
-                    doneStr = "Yes";
-                }
-                if (task instanceof ToDo) {
-                    text += "T ~ " + doneStr + " ~ " + task.newTask + "\n";
-                } else if (task instanceof Deadline) {
-                    Deadline dl = (Deadline) task;
-                    text += "D ~ " + doneStr + " ~ " + task.newTask + " ~ " + dl.getDeadLine() + "\n";
-                } else if (task instanceof Event) {
-                    Event ev = (Event) task;
-                    text += "E ~ " + doneStr + " ~ " + task.newTask + " ~ " + ev.getEvent() + "\n";
-                } else {
-                    text += doneStr + " ~ " + task.newTask + "\n";
+                for (Task task: tasks) {
+                    String doneStr = "No";
+                    if (task.getIsDone().equals("[X]")) {
+                        doneStr = "Yes";
+                    }
+                    if (task instanceof ToDo) {
+                        text += "T ~ " + doneStr + " ~ " + task.newTask + "\n";
+                    } else if (task instanceof Deadline) {
+                        Deadline dl = (Deadline) task;
+                        text += "D ~ " + doneStr + " ~ " + task.newTask + " ~ " + dl.getDeadLine() + "\n";
+                    } else if (task instanceof Event) {
+                        Event ev = (Event) task;
+                        text += "E ~ " + doneStr + " ~ " + task.newTask + " ~ " + ev.getEvent() + "\n";
+                    } else {
+                        text += doneStr + " ~ " + task.newTask + "\n";
+                    }
                 }
             }
-        }
         fw.write(text);
         fw.close();
     }
