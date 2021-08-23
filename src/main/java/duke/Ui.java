@@ -86,6 +86,10 @@ public class Ui {
         }
     }
 
+    public void displayFind(TaskList taskList) {
+        System.out.println(" > here are the matching tasks in your list!");
+    }
+
     public void displayTaskListSize(TaskList taskList) {
         if (taskList.getSize() == 1) {
             System.out.println("you have " + taskList.getSize() + " thing in your list");

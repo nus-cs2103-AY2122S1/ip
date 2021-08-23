@@ -32,6 +32,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public boolean containsMatch(String input) {
+        return this.description.contains(input);
+    }
+
     public String hardDiskSave() {
         return "";
     }
