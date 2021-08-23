@@ -1,4 +1,7 @@
-apply plugin: 'java'
+plugins {
+  id 'com.github.johnrengelman.shadow' version '7.0.0'
+  id 'java'
+}
 
 repositories { 
     mavenCentral() 
@@ -11,4 +14,10 @@ test {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.2'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.2'
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'duke.Duke'
+    }
 }
