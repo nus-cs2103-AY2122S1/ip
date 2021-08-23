@@ -48,7 +48,8 @@ public abstract class AddTaskCommand extends Command {
         }
         String taskDescription = taskDescriptionSb.toString().strip();
         if (taskDescription.length() == 0) {
-            throw new DukeInvalidCommandException(String.format("A description is required for \"%s\" commands.", getCommandType().getCommandDescription()));
+            throw new DukeInvalidCommandException(String.format("A description is required for \"%s\" commands.",
+                    getCommandType().getCommandDescription()));
         }
         setTaskDescription(taskDescription);
         setTask(createTask());

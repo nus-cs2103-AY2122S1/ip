@@ -26,7 +26,8 @@ public abstract class Command {
         String commandName = tokens[0];
         CommandType commandType = getCommandType();
         if (!commandName.equals(commandType.getCommandName())) {
-            throw new DukeInvalidCommandException(String.format("This command is not \"%s\".", commandType.getCommandDescription()));
+            throw new DukeInvalidCommandException(String.format("This command is not \"%s\".",
+                    commandType.getCommandDescription()));
         }
         parseCommand(tokens);
     }
