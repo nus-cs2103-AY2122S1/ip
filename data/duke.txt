@@ -1,4 +1,2 @@
-T | 1 | tidy up code
-D | 0 | return book | June 6th
-E | 0 | project meeting | Aug 6th 2-4pm
-T | 0 | join sports club
+D | 1 | iP | 2021-08-24
+E | 1 | NES | 2021-08-31

@@ -33,7 +33,7 @@ public class Event extends Task {
 
     @Override
     public String saveToFile() {
-        return "E | " + super.saveToFile() + "|" + this.startTime;
+        return "E | " + super.saveToFile() + "| " + this.dateOfEvent;
     }
 
 }

@@ -34,6 +34,6 @@ public class Deadline extends Task {
 
     @Override
     public String saveToFile() {
-        return "D | " + super.saveToFile() + "|" + this.deadline;
+        return "D | " + super.saveToFile() + "| " + this.deadlineDate;
     }
 }

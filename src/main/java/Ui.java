@@ -1,0 +1,69 @@
+/**
+ * Represents the user interface that interacts with the user.
+ */
+
+public class Ui {
+
+    /**
+     * The logo of Duke chatBot.
+     */
+    private static final String DUKE_LOGO = "      ____        _        \n" +
+            "     |  _ \\ _   _| | _____ \n" +
+            "     | | | | | | | |/ / _ \\\n" +
+            "     | |_| | |_| |   <  __/\n" +
+            "     |____/ \\__,_|_|\\_\\___|\n";
+
+    /**
+     * Formats the reply in a bubble.
+     * @param reply reply message that is to be formatted.
+     * @return formatted reply that is sent to the user.
+     */
+    private static String formatDukeMessage(String reply) {
+        return "\t____________________________________________________________\n" +
+                reply +
+                "\t____________________________________________________________\n";
+    }
+
+    /**
+     * Prints the opening message when Duke chatBot first boots up.
+     */
+    public static void printOpeningMessage() {
+        System.out.println(Ui.formatDukeMessage(Ui.DUKE_LOGO + "\n" +
+                        "\tHELLO! I'm Duke\n" +
+                        "\tTo ease your experience, here are some commands you can type: \n" +
+                        "\t\t 'list': view all tasks in your task list\n" +
+                        "\t\t 'todo': add a todo task in your task list\n" +
+                        "\t\t 'deadline': add a deadline task in your task list\n" +
+                        "\t\t 'event': add an event task in your task list\n" +
+                        "\t\t 'delete': delete a task from your task list\n" +
+                        "\t\t 'bye': exit chat\n" +
+                        "\tWhat can I do for you?\n"
+
+                )
+        );
+    }
+
+    /**
+     * Prints the closing message when Duke chatBot is closed.
+     */
+    public static void printClosingMessage() {
+        System.out.println(Ui.formatDukeMessage("\tBye. Hope to see you again soon!\n"));
+    }
+
+    /**
+     * Prints the error messages when Duke chatBot catches an exception.
+     * @param e exception that is thrown.
+     */
+    public static void printErrorMessage(Exception e) {
+        System.err.println(Ui.formatDukeMessage(e.getMessage() + "\n"));
+    }
+
+    /**
+     * Prints the reply from Duke chatBot to the user.
+     * @param message message that is formatted and sent to the user.
+     */
+    public static void printReply(String message) {
+        System.out.println(Ui.formatDukeMessage(message));
+    }
+
+}

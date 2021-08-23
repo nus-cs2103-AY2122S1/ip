@@ -11,16 +11,10 @@ import java.io.IOException;
  */
 public class Duke {
     private boolean isOpen;
-    private final String dukeLogo;
     private TaskList listOfTasks;
     private final String FILE_PATH = "./data/duke.txt";
 
     private Duke() { // constructor for Duke chat bot object
-        this.dukeLogo = "      ____        _        \n" +
-                "     |  _ \\ _   _| | _____ \n" +
-                "     | | | | | | | |/ / _ \\\n" +
-                "     | |_| | |_| |   <  __/\n" +
-                "     |____/ \\__,_|_|\\_\\___|\n";
         this.listOfTasks = TaskList.makeNewTaskList();
     }
 
@@ -58,36 +52,18 @@ public class Duke {
 
     private void openDukeChatBot() {
         this.isOpen = true;
-        System.out.println(formatDukeMessage(this.dukeLogo + "\n" +
-                "\tHELLO! I'm Duke\n" +
-                "\tTo ease your experience, here are some commands you can type: \n" +
-                    "\t\t 'list': view all tasks in your task list\n" +
-                    "\t\t 'todo': add a todo task in your task list\n" +
-                    "\t\t 'deadline': add a deadline task in your task list\n" +
-                    "\t\t 'event': add an event task in your task list\n" +
-                    "\t\t 'delete': delete a task from your task list\n" +
-                    "\t\t 'bye': exit chat\n" +
-                "\tWhat can I do for you?\n"
-
-                )
-        );
+        Ui.printOpeningMessage();
     }
 
     private void closeDukeChatBot() {
         this.isOpen = false;
-        System.out.println(formatDukeMessage("\tBye. Hope to see you again soon!\n"));
+        Ui.printClosingMessage();
     }
 
     private Task addTaskToList(String item) {
         Task task = Task.createTask(item);
         this.listOfTasks.addTaskToList(task);
         return task;
-    }
-
-    private String formatDukeMessage(String reply) {
-        return "\t____________________________________________________________\n" +
-                reply +
-                "\t____________________________________________________________\n";
     }
 
     private String getFirstWord(String s) {
@@ -134,6 +110,7 @@ public class Duke {
         while (sc.hasNextLine()) {
             String entry = sc.nextLine();
             String[] pastEntry = entry.split(" \\| ");
+
             String taskType = pastEntry[0];
             String isDone = pastEntry[1];
 
@@ -181,14 +158,14 @@ public class Duke {
             try {
                 output.createNewFile();
             } catch (IOException e) {
-                System.out.println(d.formatDukeMessage(e.getMessage()));
+                Ui.printErrorMessage(e);
             }
         }
 
         try {
             d.loadSavedTasks();
         } catch (IOException | DukeUnableLoadTask e) {
-            System.err.println(e.getMessage());
+            Ui.printErrorMessage(e);
         }
 
         while (d.isOpen) {
@@ -205,34 +182,33 @@ public class Duke {
                     sc.close();
                     break;
                 case LIST:
-                    System.out.println(d.formatDukeMessage(d.listOfTasks.toString()));
+                    Ui.printReply(d.listOfTasks.toString());
                     break;
                 case DONE:
                     d.listOfTasks.setTaskAsDone(d.getSecondNum(userInput));
-                    System.out.println(d.formatDukeMessage("\tNice! I've marked this task as done:\n" +
-                            "\t\t" + d.listOfTasks.getTask(d.getSecondNum(userInput) - 1) + "\n"));
+                    Ui.printReply("\tNice! I've marked this task as done:\n" +
+                            "\t\t" + d.listOfTasks.getTask(d.getSecondNum(userInput) - 1) + "\n");
                     d.saveTasks();
                     break;
                 case DELETE:
                     Task taskRemoved = d.deleteTask(d.getSecondNum(userInput));
-                    System.out.println(d.formatDukeMessage("\tNoted. I've removed this task:\n" +
+                    Ui.printReply("\tNoted. I've removed this task:\n" +
                             "\t\t" + taskRemoved + "\n" +
-                            "\tNow you have " + d.listOfTasks.getTotal() + " in your list.\n"
-                    ));
+                            "\tNow you have " + d.listOfTasks.getTotal() + " in your list.\n");
                     d.saveTasks();
                     break;
                 case TASK:
-                    System.out.println(d.formatDukeMessage("\tGot it. I've added this task:\n" +
+                    Ui.printReply("\tGot it. I've added this task:\n" +
                             "\t\t" + d.addTaskToList(userInput) + "\n" +
-                            "\tNow you have " + d.listOfTasks.getTotal() + " in your list.\n"
-                    ));
+                            "\tNow you have " + d.listOfTasks.getTotal() + " in your list.\n");
                     d.saveTasks();
                     break;
                 case ERRORS:
                     throw new DukeIncorrectCommandWord(new IllegalArgumentException());
                 }
             } catch (DukeException | IOException e) {
-                System.err.println(d.formatDukeMessage(e.getMessage() + "\n"));
+                Ui.printErrorMessage(e);
+                // System.err.println(Ui.formatDukeMessage(e.getMessage() + "\n"));
             }
         }
     }
