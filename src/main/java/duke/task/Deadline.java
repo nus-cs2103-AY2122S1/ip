@@ -31,7 +31,7 @@ public class Deadline extends Task {
         int istart = text.indexOf(" ");
         int iend = text.indexOf("/");
 
-        description = text.substring(istart, iend);
+        description = text.substring(istart + 1, iend - 1);
 
         if (description.equals("")) {
             throw new UnclearInstructionException("OOPS!!! The description of a deadline cannot be empty.");
@@ -64,6 +64,6 @@ public class Deadline extends Task {
 
     @Override
     public String toFileString() {
-        return "D" + super.toFileString() + byDate;
+        return "D" + super.toFileString() + "|" + byDate;
     }
 }

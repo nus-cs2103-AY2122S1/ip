@@ -31,7 +31,7 @@ public class Event extends Task {
         int istart = text.indexOf(" ");
         int iend = text.indexOf("/");
         
-        description = text.substring(istart, iend);
+        description = text.substring(istart + 1, iend - 1);
         
         if (description.equals("")) {
             throw new UnclearInstructionException("OOPS!!! The description of an event cannot be empty.");
@@ -64,6 +64,6 @@ public class Event extends Task {
 
     @Override
     public String toFileString() {
-        return "E" + super.toFileString() + atDate;
+        return "E" + super.toFileString() + "|" + atDate;
     }
 }

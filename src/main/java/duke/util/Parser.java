@@ -1,3 +1,6 @@
+import duke.command.*;
+import duke.exceptions.UnknownException;
+
 public class Parser {
     public static Command parse(String command) throws UnknownException {
         if (command.startsWith("todo")) {
