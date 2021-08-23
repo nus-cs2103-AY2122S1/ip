@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class Ui {
 
     Parser parser = new Parser();
-    Ui ui = new Ui();
     Storage storage = new Storage();
 
     public String ifDeadline(String input, ArrayList<Task> arListTask) throws BernException {
@@ -123,27 +122,27 @@ public class Ui {
     public void processInput(String input, ArrayList<Task> arListTask) {
         try {
             if (parser.isDone(input)){
-                System.out.println(ui.getReply(Bern.Command.DONE, input, arListTask));
+                System.out.println(new Ui().getReply(Bern.Command.DONE, input, arListTask));
                 storage.writeIntoFile(arListTask);
             } else if (parser.isDeadline(input)) {
-                System.out.println(ui.getReply(Bern.Command.DEADLINE, input, arListTask));
+                System.out.println(new Ui().getReply(Bern.Command.DEADLINE, input, arListTask));
                 storage.writeIntoFile(arListTask);
             } else if (parser.isEvent(input)) {
-                System.out.println(ui.getReply(Bern.Command.EVENT, input, arListTask));
+                System.out.println(new Ui().getReply(Bern.Command.EVENT, input, arListTask));
                 storage.writeIntoFile(arListTask);
             } else if (parser.isToDo(input)) {
-                System.out.println(ui.getReply(Bern.Command.TODO, input, arListTask));
+                System.out.println(new Ui().getReply(Bern.Command.TODO, input, arListTask));
                 storage.writeIntoFile(arListTask);
             } else if (parser.isBye(input)){
-                System.out.println(ui.getReply(Bern.Command.BYE, input, arListTask));
+                System.out.println(new Ui().getReply(Bern.Command.BYE, input, arListTask));
             } else if (parser.isList(input)){
-                System.out.println(ui.getReply(Bern.Command.LIST, input, arListTask));
+                System.out.println(new Ui().getReply(Bern.Command.LIST, input, arListTask));
                 storage.writeIntoFile(arListTask);
             } else if (parser.isDelete(input)){
-                System.out.println(ui.getReply(Bern.Command.DELETE, input, arListTask));
+                System.out.println(new Ui().getReply(Bern.Command.DELETE, input, arListTask));
                 storage.writeIntoFile(arListTask);
             } else {
-                ui.getReply(Bern.Command.INVALID, input, arListTask);
+                new Ui().getReply(Bern.Command.INVALID, input, arListTask);
             }
         } catch (BernException e) {
             System.out.println(e.getMessage());
