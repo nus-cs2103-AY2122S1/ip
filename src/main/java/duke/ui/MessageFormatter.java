@@ -21,7 +21,12 @@ public class MessageFormatter {
 
     private MessageFormatter() {}
 
-    public static MessageFormatter getInstance() {
+    /**
+     * Gets the sole MessageFormatter instance.
+     *
+     * @return The sole MessageFormatter instance.
+     */
+    static MessageFormatter getInstance() {
         if (instance == null) {
             instance = new MessageFormatter();
         }
@@ -34,7 +39,7 @@ public class MessageFormatter {
      * @param message The message to be formatted.
      * @return The formatted message.
      */
-    public String getFormattedMessage(String message) {
+    String getFormattedMessage(String message) {
         return indent(surroundWithDividerLines(message));
     }
 
@@ -44,7 +49,7 @@ public class MessageFormatter {
      * @param tasks The list of tasks to be formatted.
      * @return The formatted String representing the list of tasks.
      */
-    public String formatTasksList(List<Task> tasks) {
+    String formatTasksList(List<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         int n = tasks.size();
         for (int i = 0; i < n; i++) {
@@ -59,7 +64,7 @@ public class MessageFormatter {
      * @param task The task to be formatted.
      * @return The formatted String representing the task.
      */
-    public String formatTask(Task task) {
+    String formatTask(Task task) {
         return indent(task.toString(), 2);
     }
 

@@ -4,10 +4,20 @@ import duke.task.Task;
 import duke.task.TaskHandler;
 import duke.ui.Ui;
 
+/**
+ * Represents a "Mark Task Done" command.
+ *
+ * @author Jay Aljelo Saez Ting
+ */
 public class MarkTaskDoneCommand extends ApplyOnTaskNumberCommand {
 
     private static final CommandType COMMAND_TYPE = CommandType.MARK_TASK_DONE;
 
+    /**
+     * Creates an MarkTaskDoneCommand instance.
+     *
+     * @param command The command represented by the instance.
+     */
     public MarkTaskDoneCommand(String command) {
         super(command);
     }

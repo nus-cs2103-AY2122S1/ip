@@ -1,11 +1,14 @@
 package duke.command;
 
-import duke.task.DeadlineTask;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a generic "Add Temporal Task" command.
+ *
+ * @author Jay Aljelo Saez Ting
+ */
 public abstract class AddTemporalTaskCommand extends AddTaskCommand {
 
     private static final String DATE_TIME_FORMAT_PATTERN = "yyyy/M/d HHmm";
@@ -13,6 +16,11 @@ public abstract class AddTemporalTaskCommand extends AddTaskCommand {
 
     private LocalDateTime time;
 
+    /**
+     * Creates an AddTemporalTaskCommand instance.
+     *
+     * @param command The command represented by the instance.
+     */
     public AddTemporalTaskCommand(String command) {
         super(command);
     }

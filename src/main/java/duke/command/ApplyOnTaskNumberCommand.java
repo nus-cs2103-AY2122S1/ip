@@ -1,9 +1,19 @@
 package duke.command;
 
+/**
+ * Represents a generic "Apply On Task Number" command.
+ *
+ * @author Jay Aljelo Saez Ting
+ */
 public abstract class ApplyOnTaskNumberCommand extends Command {
 
     private int taskIndex;
 
+    /**
+     * Creates an ApplyOnTaskNumberCommand instance.
+     *
+     * @param command The command represented by the instance.
+     */
     public ApplyOnTaskNumberCommand(String command) {
         super(command);
     }

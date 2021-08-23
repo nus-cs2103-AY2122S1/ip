@@ -2,7 +2,6 @@ package duke.storage;
 
 import duke.task.DeadlineTask;
 import duke.task.Task;
-import duke.task.TaskHandler;
 import duke.task.ToDoTask;
 
 import java.io.BufferedReader;

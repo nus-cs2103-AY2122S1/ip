@@ -4,11 +4,21 @@ import duke.task.Task;
 import duke.task.TaskHandler;
 import duke.ui.Ui;
 
+/**
+ * Represents a generic "Add Task" command.
+ *
+ * @author Jay Aljelo Saez Ting
+ */
 public abstract class AddTaskCommand extends Command {
 
     private Task task;
     private String taskDescription;
 
+    /**
+     * Creates an AddTaskCommand instance.
+     *
+     * @param command The command represented by the instance.
+     */
     public AddTaskCommand(String command) {
         super(command);
     }
