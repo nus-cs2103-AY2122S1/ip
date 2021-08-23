@@ -46,10 +46,12 @@ public abstract class AddTemporalTaskCommand extends AddTaskCommand {
         String taskDescription = taskDescriptionSb.toString().strip();
         String timeStr = timeSb.toString().strip();
         if (taskDescription.length() == 0) {
-            throw new DukeInvalidCommandException(String.format("A description is required for \"%s\" commands.", getCommandType().getCommandDescription()));
+            throw new DukeInvalidCommandException(String.format("A description is required for \"%s\" commands.",
+                    getCommandType().getCommandDescription()));
         }
         if (timeStr.length() == 0) {
-            throw new DukeInvalidCommandException(String.format("A date and time is required for \"%s\" commands.", getCommandType().getCommandDescription()));
+            throw new DukeInvalidCommandException(String.format("A date and time is required for \"%s\" commands.",
+                    getCommandType().getCommandDescription()));
         }
         LocalDateTime time;
         try {

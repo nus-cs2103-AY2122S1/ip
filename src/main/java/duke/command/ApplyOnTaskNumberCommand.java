@@ -28,7 +28,8 @@ public abstract class ApplyOnTaskNumberCommand extends Command {
             }
         }
         if (taskNumberSb.length() == 0) {
-            throw new DukeInvalidCommandException(String.format("A task number is required for \"%s\" commands.", getCommandType().getCommandDescription()));
+            throw new DukeInvalidCommandException(String.format("A task number is required for \"%s\" commands.",
+                    getCommandType().getCommandDescription()));
         }
         try {
             taskIndex = Integer.parseInt(taskNumberSb.toString()) - 1;
