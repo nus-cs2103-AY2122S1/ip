@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -12,11 +15,9 @@ public class TaskList {
         DEADLINE("deadline");
 
         private final String type;
-
         Type(String type) {
             this.type = type;
         }
-
         public String getType() {
             return type;
         }
@@ -27,17 +28,19 @@ public class TaskList {
         if (arr[0].equals(Type.TODO.getType())) {
             if (arr.length == 1 || arr[1].trim().length() == 0) {
                 throw new DukeException("Invalid TODO entry. Description of a TODO cannot be empty.");
-            } else { t = new ToDo(arr[1]); }
+            } else {
+                t = new ToDo(arr[1]);
+            }
         } else if (arr.length > 1 && arr[0].equals(Type.EVENT.getType())) {
             String[] detail = arr[1].split("/at ", 2);
             if (detail.length == 1 || detail[1].trim().length() == 0 || detail[0].trim().length() == 0) {
                 throw new DukeException("Invalid Event entry. Try something like: Meeting /at 2pm");
-            } else { t = new Event(detail[0], detail[1]); }
+            } else {
+                t = new Event(detail[0], detail[1]);
+            }
         } else if (arr.length > 1 && arr[0].equals(Type.DEADLINE.getType())){
             String[] detail = arr[1].split("/by ", 2);
-            if (detail.length == 1 || detail[1].trim().length() == 0 || detail[0].trim().length() == 0) {
-                throw new DukeException("Invalid Deadline entry.Try something like : HW due /by 2pm");
-            } else { t = new Deadline(detail[0], detail[1]); }
+            t = addDeadline(detail);
         } else {
             throw new DukeException("Invalid entry. Try again!");
         }
@@ -48,6 +51,22 @@ public class TaskList {
                             "Got it. I've added this task:\n" + indent + t + "\n" + indent +
                             "Now you have " + size() + " tasks in the list." + "\n" + div_line);
         }
+    }
+
+    private Task addDeadline(String[] detail) throws DukeException {
+        Task t;
+        if (detail.length == 1 || detail[1].trim().length() == 0 || detail[0].trim().length() == 0) {
+            throw new DukeException("Invalid Deadline entry.Try something like : HW due /by 2pm");
+        } else {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                LocalDateTime d = LocalDateTime.parse(detail[1], formatter);
+                t = new Deadline(detail[0], d);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Invalid entry. Valid deadline format: deadline do HW /by 19/08/2021 23:59");
+            }
+        }
+        return t;
     }
 
     public void markDone(String[] arr) throws DukeException {

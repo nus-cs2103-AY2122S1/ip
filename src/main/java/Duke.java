@@ -53,7 +53,7 @@ public class Duke {
         }
     }
 
-    private static void echo(String next_input) {
+    public static void echo(String next_input) {
         System.out.println(div_line + "\n" + indent + next_input + "\n" + div_line);
     }
 
