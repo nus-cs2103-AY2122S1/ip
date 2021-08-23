@@ -21,7 +21,7 @@ public class Duke {
             "\\ <_. )\n" +
             " `---'   hjw";
 
-    private static String tasksFile = "/data/tasks.txt";
+    private static String tasksFile = "data/tasks.txt";
 
     public static void printLine(String content) {
         System.out.println(
@@ -52,6 +52,7 @@ public class Duke {
                 printLine("Something went wrong while creating data file, with error message:\n"
                         + e.getMessage()
                 );
+                printLine(f.getAbsolutePath());
                 return false;
             }
         }
