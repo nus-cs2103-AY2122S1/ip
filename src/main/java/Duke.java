@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -118,11 +119,11 @@ public class Duke implements ChatbotUI {
             } else if (message.startsWith(DELETE_TASK_COMMAND)) {
                 output = this.taskList.deleteTask(getIntFrom(DELETE_TASK_COMMAND, message));
             } else if (message.startsWith(CREATE_TODO_COMMAND)) {
-                output = this.taskList.addTodo(getStringFrom(CREATE_TODO_COMMAND, message));
+                output = this.taskList.addNewTodo(getStringFrom(CREATE_TODO_COMMAND, message));
             } else if (message.startsWith(CREATE_EVENT_COMMAND)) {
-                output = this.taskList.addEvent(getStringFrom(CREATE_EVENT_COMMAND, message));
+                output = this.taskList.addNewEvent(getStringFrom(CREATE_EVENT_COMMAND, message));
             } else if (message.startsWith(CREATE_DEADLINE_COMMAND)) {
-                output = this.taskList.addDeadline(getStringFrom(CREATE_DEADLINE_COMMAND, message));
+                output = this.taskList.addNewDeadline(getStringFrom(CREATE_DEADLINE_COMMAND, message));
             } else {
                 throw new DukeException("I don't know what that command means." +
                         "\nPlease input a valid command.");

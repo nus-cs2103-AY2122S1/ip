@@ -11,11 +11,19 @@ public class TaskList {
     }
 
     /**
+     * Adds an existing task to the list of tasks.
+     * @param task The task to be added to the list of tasks.
+     */
+    public void addTask(Task task) {
+        this.tasks.add(task);
+    }
+
+    /**
      * Given a string, creates a To-do from that string and adds it to the list of task.
      * @param taskTitle a String of the title of the To-do to be added.
      * @return the newly created Todo.
      */
-    public String addTodo(String taskTitle) {
+    public String addNewTodo(String taskTitle) {
         Todo task = new Todo(taskTitle);
         this.tasks.add(task);
         return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
@@ -26,7 +34,7 @@ public class TaskList {
      * @param taskTitle a String of the title of the Deadline to be added.
      * @return the newly created Deadline.
      */
-    public String addDeadline(String taskTitle) {
+    public String addNewDeadline(String taskTitle) {
         int delimiter = taskTitle.indexOf("/by ");
         Deadline task = new Deadline(taskTitle.substring(0, delimiter), taskTitle.substring(delimiter + 4));
         this.tasks.add(task);
@@ -38,7 +46,7 @@ public class TaskList {
      * @param taskTitle a String of the title of the Deadline to be added.
      * @return the newly created Deadline.
      */
-    public String addEvent(String taskTitle) {
+    public String addNewEvent(String taskTitle) {
         int delimiter = taskTitle.indexOf("/at ");
         Event task = new Event(taskTitle.substring(0, delimiter), taskTitle.substring(delimiter + 4));
         this.tasks.add(task);
