@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -57,7 +59,7 @@ public class TaskList {
         taskList.forEach((t) -> toWrite.append(t.saveString()).append("\n"));
         return toWrite.toString();
     }
-    
+
     public int getTaskIndex(String taskName, Duke.TaskTypes tt) {
         int i;
         switch (tt) {

@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
 
     // Credits to https://manytools.org/hacker-tools/convert-images-to-ascii-art/go/ and

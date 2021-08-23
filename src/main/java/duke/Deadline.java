@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -28,7 +30,7 @@ public class Deadline extends Task {
 
     @Override
     public String saveString() {
-        return "D | " + super.saveString() + " | " 
+        return "D | " + super.saveString() + " | "
                 + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.ENGLISH))
                 + " " + (time == null ? "All day" :
                 time.format(DateTimeFormatter.ofPattern("h.mma", Locale.ENGLISH)));
