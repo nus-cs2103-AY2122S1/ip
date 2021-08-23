@@ -20,9 +20,8 @@ public class Storage {
             Files.createFile(this.path);
         }
         return new TaskList(
-            Files.lines(this.path)
-                .map((taskRow) -> parseTaskRow(taskRow))
-                .collect(Collectors.toList())
+            Files.lines(this.path).map((taskRow) -> parseTaskRow(taskRow))
+                    .collect(Collectors.toList())
         );
     }
 
@@ -55,26 +54,28 @@ public class Storage {
     public static String genTaskLine(Task task) {
         var taskType = TaskType.identifyTask(task);
         switch (taskType) {
-            case TODO:
-                return task.getDescription();
-            case DEADLINE:
-                var deadline = (Deadline) task;
-                return String.format(
-                    "%s /by %s",
-                    deadline.getDescription(),
-                    deadline.getDeadline()
+        case TODO:
+            return task.getDescription();
+        case DEADLINE:
+            var deadline = (Deadline) task;
+            return String.format(
+                "%s /by %s",
+                deadline.getDescription(),
+                deadline.getDeadline()
                         .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-                );
-            case EVENT:
-                var event = (Event) task;
-                return String.format(
-                    "%s /at %s",
-                    event.getDescription(),
-                    event.getTime()
+            );
+        case EVENT:
+            var event = (Event) task;
+            return String.format(
+                "%s /at %s",
+                event.getDescription(),
+                event.getTime()
                         .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-                );
-            default:
-                throw new UnsupportedOperationException("task type is not a valid enum value");
+            );
+        default:
+            throw new UnsupportedOperationException(
+                "task type is not a valid enum value"
+            );
         }
     }
 }
