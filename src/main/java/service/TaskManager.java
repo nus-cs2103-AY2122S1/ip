@@ -36,7 +36,14 @@ public class TaskManager {
 
     private final static int MAX_STORAGE = 100;
 
-    private final List<Task> TASK_LIST = new ArrayList<>();
+    private final List<Task> taskList = new ArrayList<>();
+    
+    public void initialiseList(List<Task> taskList) throws DukeException {
+        if (taskList.size() > MAX_STORAGE) {
+            throw new DukeException(FULL_CAPACITY_ERROR_MESSAGE);
+        }
+        this.taskList.addAll(taskList);
+    }
 
     /**
      * Gets the current number of tasks stored.
@@ -44,7 +51,7 @@ public class TaskManager {
      * @return number of tasks stored currently
      */
     public int getTaskListSize() {
-        return TASK_LIST.size();
+        return taskList.size();
     }
 
     /**
@@ -55,10 +62,10 @@ public class TaskManager {
      * @throws DukeException if task cannot be saved, due to full capacity of task list
      */
     public Task addTask(Task newTask) throws DukeException {
-        if (TASK_LIST.size() == MAX_STORAGE) {
+        if (taskList.size() == MAX_STORAGE) {
             throw new DukeException(FULL_CAPACITY_ERROR_MESSAGE);
         }
-        TASK_LIST.add(newTask);
+        taskList.add(newTask);
         return newTask;
     }
 
@@ -131,7 +138,7 @@ public class TaskManager {
      */
     public String deleteTask(int taskNumber) throws DukeException {
         Task selectedTask = getTaskFromNumberString(taskNumber);
-        TASK_LIST.remove(selectedTask); // remove shifts tasks to the right backwards
+        taskList.remove(selectedTask); // remove shifts tasks to the right backwards
         return String.format(TASK_DELETED_MESSAGE, selectedTask, getTaskListSize());
     }
 
@@ -143,13 +150,13 @@ public class TaskManager {
      * @throws DukeException if the Task List is empty or the Task number is not valid
      */
     public Task getTaskFromNumberString(int taskNumber) throws DukeException {
-        if (TASK_LIST.isEmpty()) {
+        if (taskList.isEmpty()) {
             throw new DukeException(EMPTY_LIST_ERROR_MESSAGE);
         }
-        if (taskNumber <= 0 || TASK_LIST.size() < taskNumber) {
+        if (taskNumber <= 0 || taskList.size() < taskNumber) {
             throw new DukeException(String.format(INVALID_TASK_ERROR_MESSAGE, taskNumber));
         }
-        return TASK_LIST.get(taskNumber - 1); // shift to 0-indexing
+        return taskList.get(taskNumber - 1); // shift to 0-indexing
     }
 
     /**
@@ -158,12 +165,12 @@ public class TaskManager {
      * @return formatted tasks in String
      */
     public String getTaskList() {
-        if (TASK_LIST.isEmpty()) {
+        if (taskList.isEmpty()) {
             return EMPTY_LIST_MESSAGE;
         }
         StringBuilder tasksAsString = new StringBuilder(TASK_LIST_CONTENTS);
-        for (int idx = 0; idx < TASK_LIST.size(); idx ++) {
-            tasksAsString.append(String.format("\n\t%d. %s", idx + 1, TASK_LIST.get(idx)));
+        for (int idx = 0; idx < taskList.size(); idx ++) {
+            tasksAsString.append(String.format("\n\t%d. %s", idx + 1, taskList.get(idx)));
         }
         return tasksAsString.toString();
     }
