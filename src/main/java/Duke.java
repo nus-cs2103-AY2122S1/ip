@@ -24,10 +24,11 @@ public class Duke {
         Scanner userScanner = new Scanner(System.in);
         Parser parser = new Parser(ui,taskList,storagePath);
 
-        while (true){
+        boolean isExit = false;
+        while (!isExit){
             String userInput = userScanner.nextLine();
             try{
-                parser.run(userInput);
+                isExit = parser.run(userInput);
             } catch (DukeException e){
                 ui.displayException(e);
             } finally {

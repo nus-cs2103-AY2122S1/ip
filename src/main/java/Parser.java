@@ -14,8 +14,13 @@ public class Parser {
         this.storagePath = storagePath;
     }
 
-
-    public void run(String userInput) throws DukeException{
+    /**
+     * Run a user input string
+     * @param userInput String keyed in by user
+     * @return isExit, true if duke should exit after this command
+     * @throws DukeException
+     */
+    public boolean run(String userInput) throws DukeException{
         String[] cmd_args = userInput.split(" ",2);
         Task toAdd;
 
@@ -26,8 +31,7 @@ public class Parser {
                 throw new DukeException("command bye takes no arguments.");
             }
             ui.display("BYEEEEEE!\nHope to see you again soon :)");
-            System.exit(0);
-            break;
+            return true;
 
         case ("list"):
             if (cmd_args.length > 1){
@@ -85,5 +89,6 @@ public class Parser {
         default:
             throw new DukeException("Unrecognised command");
         }
+        return false;
     }
 }
