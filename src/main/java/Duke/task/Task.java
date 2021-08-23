@@ -2,6 +2,9 @@ package duke.task;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a task.
+ */
 abstract public class Task {
 
     private String details;
@@ -12,23 +15,50 @@ abstract public class Task {
         this.completed = false;
     }
 
-    // Completes task
+    /**
+     * Completes task.
+     */
     public void complete() {
         this.completed = true;
     }
 
-    // Check if task is completed
+    /**
+     * Checks if task is completed.
+     *
+     * @return True if completed; false otherwise.
+     */
     public boolean isCompleted() {
         return this.completed;
     }
 
+    /**
+     * Returns task details.
+     *
+     * @return Task details.
+     */
     public String getDetails() {
         return this.details;
     }
 
+    /**
+     * Returns date of task.
+     *
+     * @return Task date.
+     */
     abstract public LocalDate getDate();
+
+    /**
+     * Returns time of task.
+     *
+     * @return Task time.
+     */
     abstract public int getTime();
 
+    /**
+     * Returns a String representation of the task.
+     *
+     * @return String representation of the task.
+     */
     @Override
     public String toString() {
         String status = this.completed ? "[X]" : "[ ]";

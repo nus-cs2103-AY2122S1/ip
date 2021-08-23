@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline task. A deadline task has to be completed by a certain date and time.
+ */
 public class Deadline extends Task{
 
     private String by;
@@ -22,16 +25,31 @@ public class Deadline extends Task{
         return this.by;
     }
 
+    /**
+     * Returns date of task.
+     *
+     * @return Task date.
+     */
     @Override
     public LocalDate getDate() {
         return this.date;
     }
 
+    /**
+     * Returns time of task.
+     *
+     * @return Task time.
+     */
     @Override
     public int getTime() {
         return this.time;
     }
 
+    /**
+     * Converts a 24hr time to a 12hr time.
+     *
+     * @return 12hr time as a String.
+     */
     private String twelveHrTime() {
         String timeStr = "";
         if (this.time == 1200) {
@@ -51,6 +69,11 @@ public class Deadline extends Task{
         return timeStr;
     }
 
+    /**
+     * Returns a String representation of the task.
+     *
+     * @return String representation of the task.
+     */
     @Override
     public String toString() {
         if (date == null) {

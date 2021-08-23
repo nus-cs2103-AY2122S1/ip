@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Represents a chat bot named Duke.
+ */
 public class Duke {
 
     private Storage storage;
@@ -28,6 +31,11 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor.
+     *
+     * @param filePath File path of storage file.
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         try {
@@ -41,6 +49,11 @@ public class Duke {
         this.parser = new Parser();
     }
 
+    /**
+     * Saves the tasks in the task list into the storage file.
+     *
+     * @throws IOException If unable to write to storage file.
+     */
     private void saveTasks() throws IOException {
 
         String contents = "";
@@ -93,6 +106,10 @@ public class Duke {
         this.storage.writeToStorage(contents, false);
     }
 
+    /**
+     * Runs Duke.
+     * Duke takes in an input from the user line-by-line and responds to it accordingly.
+     */
     public void run() {
 
         this.ui.greeting(this.taskList.getList());

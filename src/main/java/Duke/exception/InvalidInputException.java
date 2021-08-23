@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Represents an invalid input. Thrown when user input is invalid.
+ */
 public class InvalidInputException extends DukeException {
 
     private String err;
@@ -9,6 +12,11 @@ public class InvalidInputException extends DukeException {
         this.err = str;
     }
 
+    /**
+     * Returns a String representation of the exception.
+     *
+     * @return String representation of the exception.
+     */
     @Override
     public String toString() {
         return "Invalid input: " + err;

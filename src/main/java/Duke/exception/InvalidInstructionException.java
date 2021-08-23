@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Represents an invalid instruction. Thrown when user input is an invalid instruction.
+ */
 public class InvalidInstructionException extends DukeException {
 
     private String instruction;
@@ -9,6 +12,11 @@ public class InvalidInstructionException extends DukeException {
         this.instruction = str;
     }
 
+    /**
+     * Returns a String representation of the exception.
+     *
+     * @return String representation of the exception.
+     */
     @Override
     public String toString() {
         return "Invalid instruction: " + instruction + " is not a valid instruction.";
