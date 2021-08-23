@@ -90,23 +90,16 @@ public class TaskManager {
             String taskAsString = scanner.nextLine();
             String[] taskAsArray = taskAsString.split(" \\| "); // split based on regex '|'
             boolean isDone = taskAsArray[1].equals("1"); // if not 1, just set to false
-            Task newTask;
 
             switch (taskAsArray[0]) {
-                case "T":
-                    newTask = new Todo(taskAsArray[2]);
-                    newTask.setDone(isDone);
-                    savedTaskList.add(newTask);
+                case Todo.KEYWORD:
+                    savedTaskList.add(new Todo(taskAsArray[2], isDone));
                     break;
-                case "E":
-                    newTask = new Event(taskAsArray[2], taskAsArray[3]);
-                    newTask.setDone(isDone);
-                    savedTaskList.add(newTask);
+                case Event.KEYWORD:
+                    savedTaskList.add(new Event(taskAsArray[2], isDone, taskAsArray[3]));
                     break;
-                case "D":
-                    newTask = new Deadline(taskAsArray[2], taskAsArray[3]);
-                    newTask.setDone(isDone);
-                    savedTaskList.add(newTask);
+                case Deadline.KEYWORD:
+                    savedTaskList.add(new Deadline(taskAsArray[2], isDone, taskAsArray[3]));
                     break;
                 default:
                     System.out.printf("'%s' is an invalid entry.\n", taskAsString);
