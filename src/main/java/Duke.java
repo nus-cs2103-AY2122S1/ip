@@ -64,70 +64,6 @@ public class Duke {
         commands();
     }
 
-    private static void appendToFile(String filePath, String textToAppend) throws IOException {
-        File f = new File(filePath);
-        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-        if (f.length() == 0) {
-            fw.write(textToAppend);
-        } else {
-            fw.write(System.lineSeparator() + textToAppend);
-        }
-        fw.close();
-    }
-
-    private static void editFileContentsForCompletion(int taskNum) {
-        File temp = new File("data/temp.txt");
-        if (!temp.exists()) {
-            try {
-                Files.copy(Paths.get("data/duke.txt"), Paths.get("data/temp.txt"), REPLACE_EXISTING);
-                new FileWriter(fileAddress, false).close();
-                Scanner s = new Scanner(new File("data/temp.txt"));
-                int count = 1;
-                while (s.hasNextLine()) {
-                    String command = s.nextLine();
-                    if (count == taskNum) {
-                        String head = command.substring(0, 4);
-                        String tail = command.substring(5);
-                        appendToFile("data/duke.txt", head + "1" + tail);
-                        count++;
-                    } else {
-                        appendToFile("data/duke.txt", command);
-                        count++;
-                    }
-                }
-                s.close();
-                Files.delete(Paths.get("data/temp.txt"));
-            } catch (IOException e) {
-                System.err.println("Failed to create file!" + e.getMessage());
-            }
-        }
-    }
-
-    private static void editFileContentsForDeletion(int taskNum) {
-        File temp = new File("data/temp.txt");
-        if (!temp.exists()) {
-            try {
-                Files.copy(Paths.get("data/duke.txt"), Paths.get("data/temp.txt"), REPLACE_EXISTING);
-                new FileWriter(fileAddress, false).close();
-                Scanner s = new Scanner(new File("data/temp.txt"));
-                int count = 1;
-                while (s.hasNextLine()) {
-                    String command = s.nextLine();
-                    if (count == taskNum) {
-                        count++;
-                    } else {
-                        appendToFile("data/duke.txt", command);
-                        count++;
-                    }
-                }
-                s.close();
-                Files.delete(Paths.get("data/temp.txt"));
-            } catch (IOException e) {
-                System.err.println("Failed to create file!" + e.getMessage());
-            }
-        }
-    }
-
     /**
      * Prints out text to say goodbye to user.
      */
@@ -138,34 +74,12 @@ public class Duke {
     }
 
     /**
-     * Prints out the current list of tasks the user has.
-     *
-     * @param command entered by user.
-     * @throws DukeException upon invalid commands or empty tasks list.
-     */
-    private static void printList(String command) throws DukeException {
-        String[] words = command.split(" ");
-        if (words.length > 1) {
-            throw new DukeException("invalidCommand");
-        } else if (tasks.size() == 0) {
-            throw new DukeException("noTasksException");
-        } else {
-            System.out.println("    ______________________________________");
-            System.out.println("     Here are the tasks in your list:");
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.printf("     %d.%s\n", i + 1, tasks.get(i).toString());
-            }
-            System.out.println("    ______________________________________");
-        }
-    }
-
-    /**
      * Adds a ToDo to the list of tasks.
      *
      * @param command entered by the user.
      * @throws DukeException upon invalid command format.
      */
-    public static void addToDo(String command, boolean printOutput) throws DukeException {
+    public void addToDo(String command, boolean printOutput) throws DukeException {
         if (command.length() < 6 || command == null) {
             throw new DukeException("invalidToDo");
         } else {
@@ -174,7 +88,7 @@ public class Duke {
             tasks.add(task);
             if (printOutput) {
                 try {
-                    appendToFile(fileAddress, "T - 0 - " + name);
+                    storage.appendToFile(fileAddress, "T - 0 - " + name);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -188,14 +102,13 @@ public class Duke {
 
     }
 
-
     /**
      * Adds a deadline to the list of tasks.
      *
      * @param command entered by the user.
      * @throws DukeException upon invalid command format.
      */
-    public static void addDeadline(String command, boolean printOutput) throws DukeException {
+    public void addDeadline(String command, boolean printOutput) throws DukeException {
         String[] words = command.split(" ");
         if (words.length <= 3 ) {
             throw new DukeException("invalidDeadline");
@@ -210,7 +123,7 @@ public class Duke {
                 Task task  = new Deadline(name, date);
                 tasks.add(task);
                 if (printOutput) {
-                    appendToFile(fileAddress, "D - 0 - " + name + "- " + date);
+                    storage.appendToFile(fileAddress, "D - 0 - " + name + "- " + date);
                     System.out.println("    ______________________________________");
                     System.out.println("     Got it. I've added this task: ");
                     System.out.printf("       %s\n",task);
@@ -225,14 +138,13 @@ public class Duke {
         }
     }
 
-
     /**
      * Adds event to the list of tasks.
      *
      * @param command entered by the user.
      * @throws DukeException upon invalid command format.
      */
-    public static void addEvent(String command, boolean printOutput) throws DukeException {
+    public void addEvent(String command, boolean printOutput) throws DukeException {
         String[] words = command.split(" ");
         if (words.length <= 3 ) {
             throw new DukeException("invalidEvent");
@@ -247,7 +159,7 @@ public class Duke {
                 Task task  = new Event(name, date);
                 tasks.add(task);
                 if (printOutput) {
-                    appendToFile(fileAddress, "E - 0 - " + name + "- " + date);
+                    storage.appendToFile(fileAddress, "E - 0 - " + name + "- " + date);
                     System.out.println("    ______________________________________");
                     System.out.println("     Got it. I've added this task: ");
                     System.out.printf("       %s\n",task);
@@ -268,7 +180,7 @@ public class Duke {
      * @param command entered by the user.
      * @throws DukeException upon incorrect command format.
      */
-    public static void markCompleted(String command, boolean printOutput) throws DukeException {
+    public void markCompleted(String command, boolean printOutput) throws DukeException {
         String restOfCommand = command.substring(5);
         boolean numeric;
         try {
@@ -283,7 +195,7 @@ public class Duke {
                 Task currTask = tasks.get(taskNum);
                 currTask.setCompleted();
                 if (printOutput) {
-                    editFileContentsForCompletion(taskNum + 1);
+                    storage.editFileContentsForCompletion(taskNum + 1);
                     System.out.println("    ______________________________________");
                     System.out.println("     Nice! I've marked this task as done:");
                     System.out.printf("       %s\n", currTask);
@@ -303,7 +215,7 @@ public class Duke {
      * @param command entered by the user.
      * @throws DukeException upon incorrect command format.
      */
-    private static void deleteTask(String command) throws DukeException {
+    private void deleteTask(String command) throws DukeException {
         String restOfCommand = command.substring(7);
         boolean numeric;
         try {
@@ -315,7 +227,7 @@ public class Duke {
         if (numeric) {
             int taskNum = Integer.parseInt(restOfCommand) - 1;
             if (taskNum < tasks.size()) {
-                editFileContentsForDeletion(taskNum + 1);
+                storage.editFileContentsForDeletion(taskNum + 1);
                 Task currTask = tasks.get(taskNum);
                 tasks.remove(taskNum);
                 System.out.println("    ______________________________________");
@@ -331,7 +243,7 @@ public class Duke {
         }
     }
 
-    private static void commands() throws DukeException {
+    private void commands() throws DukeException {
         int pointer = 1;
         System.out.println("Hello! I'm Duke\n");
         System.out.println("What can I do for you?");
@@ -345,7 +257,7 @@ public class Duke {
                 try {
                     switch (init) {
                     case ("list"):
-                        printList(command);
+                        tasks.printList(command);
                         break;
                     case ("todo"):
                         addToDo(command, true);

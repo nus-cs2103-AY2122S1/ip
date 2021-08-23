@@ -50,7 +50,6 @@ public class TaskList {
                             temp1.setCompleted();
                         }
                         store.add(temp1);
-                        System.out.println(store);
                         break;
                 }
             }
@@ -71,6 +70,28 @@ public class TaskList {
 
     public void remove(int taskNumber) {
         store.remove(taskNumber);
+    }
+
+    /**
+     * Prints out the current list of tasks the user has.
+     *
+     * @param command entered by user.
+     * @throws DukeException upon invalid commands or empty tasks list.
+     */
+    public void printList(String command) throws DukeException {
+        String[] words = command.split(" ");
+        if (words.length > 1) {
+            throw new DukeException("invalidCommand");
+        } else if (store.size() == 0) {
+            throw new DukeException("noTasksException");
+        } else {
+            System.out.println("    ______________________________________");
+            System.out.println("     Here are the tasks in your list:");
+            for (int i = 0; i < store.size(); i++) {
+                System.out.printf("     %d.%s\n", i + 1, store.get(i).toString());
+            }
+            System.out.println("    ______________________________________");
+        }
     }
 
 }
