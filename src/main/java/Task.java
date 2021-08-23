@@ -4,11 +4,20 @@ public class Task {
 
     public Task(String desc) {
         this.desc = desc;
-        isDone = false;
+        this.isDone = false;
+    }
+
+    public Task(String desc, boolean isDone) {
+        this.desc = desc;
+        this.isDone = isDone;
     }
 
     public String getDesc() {
         return desc;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     public String statusIcon() {
@@ -17,5 +26,10 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public String saveTask() {
+        String res = "T|" + isDone + "\\|" + desc;
+        return res;
     }
 }
