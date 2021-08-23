@@ -1,5 +1,8 @@
 package task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * Deadline class.
  *
@@ -9,19 +12,14 @@ public class Deadline extends Task {
 
     public final static String SPLIT_WORD = "by";
 
-    private String by;
+    private final LocalDate byDate;
 
-    public Deadline(String description, String by) {
+    private final LocalTime byTime;
+
+    public Deadline(String description, LocalDate byDate, LocalTime byTime) {
         super(description);
-        this.by = by;
-    }
-
-    public String getBy() {
-        return by;
-    }
-
-    public void setBy(String by) {
-        this.by = by;
+        this.byDate = byDate;
+        this.byTime = byTime;
     }
 
     /**
@@ -30,11 +28,16 @@ public class Deadline extends Task {
      * @return formatted String for field 'by'
      */
     public String getFormattedBy() {
-        return " (" + SPLIT_WORD  + ": " + by + ")";
+        return "("
+                + SPLIT_WORD
+                + ": "
+                + byDate
+                + ((byTime == null) ? "": " " + byTime)
+                + ")";
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + getFormattedBy();
+        return "[D]" + super.toString() + ' ' + getFormattedBy();
     }
 }

@@ -6,6 +6,8 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,14 +67,12 @@ public class TaskManager {
     /**
      * Adds a Todo Task, returns an output message.
      *
-     * @param userParams user input with parameters for a Todo
+     * @param desc user input with parameters for a Todo
      * @return String message of successful creation of Todo
      * @throws DukeException if task list is full
      */
-    public String addToDoTask(String userParams) throws DukeException {
-        assert (!userParams.isBlank());
-
-        Todo todo = new Todo(userParams); // desc
+    public String addToDoTask(String desc) throws DukeException {
+        Todo todo = new Todo(desc);
         Task task = addTask(todo);
         return String.format(CREATE_TODO_MESSAGE, task, getTaskListSize());
     }
@@ -80,14 +80,14 @@ public class TaskManager {
     /**
      * Adds an Event Task, returns an output message.
      *
-     * @param userParams user input with parameters for a Deadline
+     * @param desc todo
      * @return String message of successful creation of Event
      * @throws DukeException if task list is full
      */
-    public String addEventTask(String[] userParams) throws DukeException {
-        assert (userParams.length == 2);
-
-        Event event = new Event(userParams[0], userParams[1]); // desc, timing
+    public String addEventTask(String desc, LocalDate atDate, LocalTime atTime) 
+            throws DukeException {     
+        
+        Event event = new Event(desc, atDate, atTime);
         Task task = addTask(event);
         return String.format(CREATE_EVENT_MESSAGE, task, getTaskListSize());
     }
@@ -95,14 +95,14 @@ public class TaskManager {
     /**
      * Adds a Deadline Task, returns an output message.
      *
-     * @param userParams user input with parameters for a Deadline
+     * @param desc todo user input with parameters for a Deadline
      * @return String message of successful creation of Deadline
      * @throws DukeException if task list is full
      */
-    public String addDeadlineTask(String[] userParams) throws DukeException {
-        assert (userParams.length == 2);
+    public String addDeadlineTask(String desc, LocalDate byDate, LocalTime byTime)
+            throws DukeException {
 
-        Deadline deadline = new Deadline(userParams[0], userParams[1]); // desc, by
+        Deadline deadline = new Deadline(desc, byDate, byTime);
         Task task = addTask(deadline);
         return String.format(CREATE_DEADLINE_MESSAGE, task, getTaskListSize());
     }
