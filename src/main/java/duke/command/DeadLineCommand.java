@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.DeadLine;
+
 /**
  * Contains the executables when the user uses the 'deadline' command.
  */
@@ -8,12 +15,12 @@ public class DeadLineCommand extends Command {
      * Constructor for the DeadLine Command.
      * @param task the task that is to be a DeadLine
      */
-    DeadLineCommand(String task) {
+    public DeadLineCommand(String task) {
         this.task = task;
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (task.length() == 0) {
             ui.showError("OOPS!!! The description of a deadline cannot be empty.\n");
             return;

@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.Event;
+
 /**
  * Contains the executables for the 'event' command.
  */
@@ -5,12 +12,12 @@ public class EventCommand extends Command {
 
     private String task;
 
-    EventCommand(String task) {
+    public EventCommand(String task) {
         this.task = task;
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (task.length() == 0) {
             ui.showError("OOPS!!! The description of an event cannot be empty.\n");
             return;

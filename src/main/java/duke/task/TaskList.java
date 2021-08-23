@@ -1,35 +1,37 @@
+package duke.task;
+
 import java.util.ArrayList;
 
 public class TaskList {
 
     private ArrayList<Task> listOfTasks;
 
-    TaskList() {
+    public TaskList() {
         listOfTasks = new ArrayList<Task>();
     }
 
-    TaskList(ArrayList<Task> lst) {
+    public TaskList(ArrayList<Task> lst) {
         listOfTasks = lst;
     }
 
-    void add(Task task) {
+    public void add(Task task) {
         listOfTasks.add(task);
     }
 
-    Task delete(int taskNumber) {
+    public Task delete(int taskNumber) {
         return listOfTasks.remove(taskNumber);
     }
 
-    void done(int taskNumber) {
+    public void done(int taskNumber) {
         Task currTask = listOfTasks.get(taskNumber);
         currTask.markAsDone();
     }
 
-    int size() {
+    public int size() {
         return listOfTasks.size();
     }
 
-    ArrayList<Task> getAllTasks() {
+    public ArrayList<Task> getAllTasks() {
         return listOfTasks;
     }
 }

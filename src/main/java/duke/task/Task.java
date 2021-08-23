@@ -1,3 +1,4 @@
+package duke.task;
 /**
  * Task class to represent the tasks in the list.
  * It supports (i) getting status icon

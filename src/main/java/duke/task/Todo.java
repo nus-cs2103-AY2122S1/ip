@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Todo class for implementing tasks that are to be done.
  */

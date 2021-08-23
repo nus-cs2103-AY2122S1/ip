@@ -1,5 +1,10 @@
+package duke.ui;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
+import duke.task.TaskList;
 /**
  * Contains the logic to display the UI for the user to see.
  */
@@ -7,7 +12,7 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner in;
 
-    Ui() {
+    public Ui() {
         this.in = new Scanner(System.in);
     }
 
@@ -15,7 +20,7 @@ public class Ui {
      * Displays the welcome text for Duke.
      * @param taskList to output the list of tasks Duke currently has at start
      */
-    void showWelcome(TaskList taskList) {
+    public void showWelcome(TaskList taskList) {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
         System.out.println("These are the current tasks I have:");
         listView(taskList.getAllTasks());
@@ -26,7 +31,7 @@ public class Ui {
      * Reads a command from the user.
      * @return a string command of the user input
      */
-    String readCommand() {
+    public String readCommand() {
         String inputCommand = in.nextLine();
         return inputCommand;
     }
@@ -34,7 +39,7 @@ public class Ui {
     /**
      * Displays the bye text for Duke.
      */
-    void showBye() {
+    public void showBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
@@ -42,14 +47,14 @@ public class Ui {
      * Displays an error text based on the error message.
      * @param errorMsg error message to be displayed
      */
-    void showError(String errorMsg) {
+    public void showError(String errorMsg) {
         System.out.println(errorMsg);
     }
 
     /**
      * Displays a text when the user adds a task.
      */
-    void addMessage() {
+    public void addMessage() {
         System.out.println("Got it. I've added this task:\n");
     }
 
@@ -57,7 +62,7 @@ public class Ui {
      * Displays the task's toString() method with a new line at the end.
      * @param task task to be displayed
      */
-    void showTask(Task task) {
+    public void showTask(Task task) {
         System.out.println(task.toString() + "\n");
     }
 
@@ -65,14 +70,14 @@ public class Ui {
      * Displays the number of tasks that Duke currently has.
      * @param lst the list of tasks needed to output the number of items in it
      */
-    void showListLength(TaskList lst) {
+    public void showListLength(TaskList lst) {
         System.out.println("Now you have " + lst.size() + " tasks in the list\n");
     }
 
     /**
      * Displays a message when a task has been removed.
      */
-    void deletedMsg() {
+    public void deletedMsg() {
         System.out.println("Noted. I've removed this task:\n");
     }
 
@@ -80,7 +85,7 @@ public class Ui {
      * Displays a list view of the tasks that Duke has.
      * @param lst the list of tasks to be displayed
      */
-    void listView(ArrayList<Task> lst) {
+    public void listView(ArrayList<Task> lst) {
         String res = "";
         int counter = 1;
         for (Task tsk : lst) {
@@ -94,7 +99,7 @@ public class Ui {
      * Displays a message when a task is marked done.
      * @param tsk the task that was done
      */
-    void doneTask(Task tsk) {
+    public void doneTask(Task tsk) {
         System.out.println("Nice! I've marked this task as done:\n");
         System.out.println(tsk.toString());
     }
@@ -102,7 +107,7 @@ public class Ui {
     /**
      * Displays a message if the file had error loading.
      */
-    void showLoadingError() {
+    public void showLoadingError() {
         System.out.println("error loading!");
     }
 }

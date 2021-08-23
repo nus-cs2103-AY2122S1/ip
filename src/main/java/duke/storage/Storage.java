@@ -1,8 +1,12 @@
+package duke.storage;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+
+import duke.task.TaskList;
 /**
  * Contains the logic for file operations.
  */
@@ -11,7 +15,7 @@ public class Storage {
 
     final Path path;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.path = Paths.get(filePath);
     }
 
@@ -20,7 +24,7 @@ public class Storage {
      * then a new file is created.
      * @return an ArrayList of tasks in the file
      */
-    TaskList load() {
+    public TaskList load() {
         try {
             return TaskListDecoder.decodeTaskList(Files.readAllLines(path));
         } catch (Exception e) {
@@ -34,7 +38,7 @@ public class Storage {
      * Saves all the task from the current list of tasks to the file.
      * @param taskList the list of tasks to be saved
      */
-    void save(TaskList taskList) {
+    public void save(TaskList taskList) {
         try {
             List<String> encodedTaskList = TaskListEncoder.encodeTaskList(taskList);
             Files.write(path, encodedTaskList);

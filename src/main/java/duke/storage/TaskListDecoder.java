@@ -1,5 +1,14 @@
+package duke.storage;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.DeadLine;
+
 /**
  * Decodes the class from a list of strings in the file to an Array list of tasks.
  */

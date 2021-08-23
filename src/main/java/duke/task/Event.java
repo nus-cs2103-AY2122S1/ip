@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Event class for implementing tasks that are events.
  */
