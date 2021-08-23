@@ -12,7 +12,8 @@ public class Event extends Task {
 
     public Event(String description, boolean isDone, String at) {
         super(description, isDone);
-        this.at = at;
+        LocalDate d = LocalDate.parse(at);
+        this.at = d;
     }
 
     @Override
