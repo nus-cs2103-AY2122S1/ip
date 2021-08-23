@@ -27,7 +27,7 @@
 	____________________________________________________________
 
 	Got it. I've added this task:
-	  [D][ ] CS2103 Quiz (by: Sunday 15th June)
+	  [D][ ] CS2103 Quiz (by: Sun 12 Apr 2020, 3:33PM)
 	Now you have 2 tasks in the list.
 	____________________________________________________________
 
@@ -40,7 +40,7 @@
 
 	Here are the tasks in your list:
 	1. [T][ ] gym workout
-	2. [D][ ] CS2103 Quiz (by: Sunday 15th June)
+	2. [D][ ] CS2103 Quiz (by: Sun 12 Apr 2020, 3:33PM)
 	____________________________________________________________
 
 	____________________________________________________________
@@ -52,7 +52,7 @@
 	____________________________________________________________
 
 	Got it. I've added this task:
-	  [E][ ] class party (at: Thursday 19th August 7pm)
+	  [E][ ] class party (at: Thu 19 Aug 2021, 8:24AM)
 	Now you have 3 tasks in the list.
 	____________________________________________________________
 
@@ -60,22 +60,48 @@
 
 	Here are the tasks in your list:
 	1. [T][X] gym workout
-	2. [D][ ] CS2103 Quiz (by: Sunday 15th June)
-	3. [E][ ] class party (at: Thursday 19th August 7pm)
+	2. [D][ ] CS2103 Quiz (by: Sun 12 Apr 2020, 3:33PM)
+	3. [E][ ] class party (at: Thu 19 Aug 2021, 8:24AM)
 	____________________________________________________________
 
 	____________________________________________________________
 
-	Nice! I've marked this task as done:
-	  [D][X] CS2103 Quiz (by: Sunday 15th June)
+	Noted! I've removed this task:
+	  [T][X] gym workout
+	Now you have 2 tasks in the list.
 	____________________________________________________________
 
 	____________________________________________________________
 
 	Here are the tasks in your list:
-	1. [T][X] gym workout
-	2. [D][X] CS2103 Quiz (by: Sunday 15th June)
-	3. [E][ ] class party (at: Thursday 19th August 7pm)
+	1. [D][ ] CS2103 Quiz (by: Sun 12 Apr 2020, 3:33PM)
+	2. [E][ ] class party (at: Thu 19 Aug 2021, 8:24AM)
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Nice! I've marked this task as done:
+	  [E][X] class party (at: Thu 19 Aug 2021, 8:24AM)
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Here are the tasks in your list:
+	1. [D][ ] CS2103 Quiz (by: Sun 12 Apr 2020, 3:33PM)
+	2. [E][X] class party (at: Thu 19 Aug 2021, 8:24AM)
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Noted! I've removed this task:
+	  [E][X] class party (at: Thu 19 Aug 2021, 8:24AM)
+	Now you have 1 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Here are the tasks in your list:
+	1. [D][ ] CS2103 Quiz (by: Sun 12 Apr 2020, 3:33PM)
 	____________________________________________________________
 
 	____________________________________________________________
@@ -86,15 +112,13 @@
 	____________________________________________________________
 
 	Nice! I've marked this task as done:
-	  [E][X] class party (at: Thursday 19th August 7pm)
+	  [D][X] CS2103 Quiz (by: Sun 12 Apr 2020, 3:33PM)
 	____________________________________________________________
 
 	____________________________________________________________
 
 	Here are the tasks in your list:
-	1. [T][X] gym workout
-	2. [D][X] CS2103 Quiz (by: Sunday 15th June)
-	3. [E][X] class party (at: Thursday 19th August 7pm)
+	1. [D][X] CS2103 Quiz (by: Sun 12 Apr 2020, 3:33PM)
 	____________________________________________________________
 
 	____________________________________________________________
