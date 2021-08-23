@@ -1,5 +1,9 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
 
 public class Bern {
     public static boolean isANumber(String s) {
@@ -129,10 +133,95 @@ public class Bern {
         return "";
     }
 
+    public static void reinitialiseFile() {
+        try {
+            File file = new File("savedList.txt");
+            file.delete();
+            file.createNewFile();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void writeIntoFile(ArrayList<Task> arListTask) {
+        try {
+            reinitialiseFile();
+            FileWriter fw = new FileWriter("savedList.txt");
+            fw.write(getReply(Command.LIST, "", arListTask));
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } catch (BernException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static ToDo toDoFromString(String s) {
+        boolean isDone = s.substring(4, 5).equals("X") ? true : false;
+        String desc = s.substring(7);
+        ToDo ans = new ToDo(desc);
+        if (isDone) {
+            ans.markAsDone();
+        }
+        return ans;
+    }
+
+    public static Deadline deadlineFromString(String s) {
+        boolean isDone = s.substring(4, 5).equals("X") ? true : false;
+        String desc = s.substring(7, s.indexOf("(by: ") - 1);
+        String by = s.substring(s.indexOf("(by: ") + 5, s.length() - 1);
+        Deadline ans = new Deadline(desc, by);
+        if (isDone) {
+            ans.markAsDone();
+        }
+        return ans;
+    }
+
+    public static Event eventFromString(String s) {
+        boolean isDone = s.substring(4, 5).equals("X") ? true : false;
+        String desc = s.substring(7, s.indexOf("(at: ") - 1);
+        String at = s.substring(s.indexOf("(at: ") + 5, s.length() - 1);
+        Event ans = new Event(desc, at);
+        if (isDone) {
+            ans.markAsDone();
+        }
+        return ans;
+    }
+
+    public static Task taskFromString(String s) {
+        String cat = s.substring(1, 2);
+        return cat.equals("T")
+                ? toDoFromString(s)
+                : cat.equals("D")
+                ? deadlineFromString(s)
+                : eventFromString(s);
+    }
+
+    public static void initialiseArListTask(ArrayList<Task> arListTask) {
+        File file = new File("savedList.txt");
+        if (!file.exists()) {
+            return;
+        } else {
+            try {
+                Scanner s = new Scanner(file);
+                while (s.hasNext()) {
+                    String taskStr = s.nextLine();
+                    taskStr = taskStr.substring(taskStr.indexOf("["));
+                    Task temp = taskFromString(taskStr);
+                    arListTask.add(temp);
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Scanner myObj = new Scanner(System.in);
 
         ArrayList<Task> arListTask = new ArrayList<>();
+
+        initialiseArListTask(arListTask);
 
         System.out.println("Hi! I'm Bern, your trustworthy chatbot.\nWhat can I do for you?");
 
@@ -141,19 +230,25 @@ public class Bern {
             try {
                 if (input.length() >= 4 && input.substring(0, 4).equals("done")){
                     System.out.println(getReply(Command.DONE, input, arListTask));
+                    writeIntoFile(arListTask);
                 } else if (input.length() >= 8 && input.substring(0, 8).equals("deadline")) {
                     System.out.println(getReply(Command.DEADLINE, input, arListTask));
+                    writeIntoFile(arListTask);
                 } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
                     System.out.println(getReply(Command.EVENT, input, arListTask));
+                    writeIntoFile(arListTask);
                 } else if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
                     System.out.println(getReply(Command.TODO, input, arListTask));
+                    writeIntoFile(arListTask);
                 } else if (input.equals("bye")){
                     System.out.println(getReply(Command.BYE, input, arListTask));
                     break;
                 } else if (input.equals("list")){
                     System.out.println(getReply(Command.LIST, input, arListTask));
+                    writeIntoFile(arListTask);
                 } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")){
                     System.out.println(getReply(Command.DELETE, input, arListTask));
+                    writeIntoFile(arListTask);
                 } else {
                     getReply(Command.INVALID, input, arListTask);
                 }
