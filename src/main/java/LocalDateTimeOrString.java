@@ -24,4 +24,17 @@ public class LocalDateTimeOrString {
     protected String getDateTimeDesc() {
         return dateTime.map(x -> OUT_FORMATTER.format(x)).or(() -> dateTimeString).orElse(INVALID_DATE);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o == null) {
+            return false;
+        } else if (!(o instanceof LocalDateTimeOrString)) {
+            return false;
+        }
+        LocalDateTimeOrString other = (LocalDateTimeOrString) o;
+        return dateTime.equals(other.dateTime) && dateTimeString.equals(other.dateTimeString);
+    }
 }

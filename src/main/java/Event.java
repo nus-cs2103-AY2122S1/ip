@@ -5,6 +5,6 @@ public class Event extends TimedTask {
 
     @Override
     public String toString() {
-        return String.format("%s (at: %s)", super.toString(), getTimeDesc());
+        return String.format("%s (at: %s)", super.toString(), getDateTimeDesc());
     }
 }

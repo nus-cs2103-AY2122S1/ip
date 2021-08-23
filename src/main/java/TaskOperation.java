@@ -15,7 +15,7 @@ public abstract class TaskOperation {
     abstract void performOperation();
 
     protected String getTasksOverview() {
-        return tasks.isEmpty() ? "You have no tasks.\n"
+        return tasks.isEmpty() ? "There are no tasks.\n"
                 : String.format("Now you have %d task%s in the list.\n", tasks.size(), (tasks.size() == 1 ? "" : "s"));
     }
 

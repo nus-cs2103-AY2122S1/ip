@@ -13,14 +13,18 @@ public abstract class Task {
         String keyword = inputs[0];
 
         switch (keyword) {
-            case "todo":
-                return new Todo(inputs[1]);
-            case "deadline":
-            case "event":
-                return TimedTask.createTask(inputs);
-            default:
-                throw new InvalidArgumentException();
+        case "todo":
+            return new Todo(inputs[1]);
+        case "deadline":
+        case "event":
+            return TimedTask.createTimedTask(inputs);
+        default:
+            throw new InvalidArgumentException();
         }
+    }
+
+    public boolean isAtTime(LocalDateTimeOrString dateTimeOrString) {
+        return false;
     }
 
     public String getDescription() {

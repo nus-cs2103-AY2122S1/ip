@@ -12,7 +12,7 @@ public class ListTasks extends TaskOperation {
         setDescription(description);
     }
 
-    private String listTasks(List<Task> taskList) {
+    protected String listTasks(List<Task> taskList) {
         if (taskList.isEmpty()) {
             return getTasksOverview();
         }

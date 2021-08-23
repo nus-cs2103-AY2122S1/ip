@@ -23,7 +23,12 @@ public abstract class TimedTask extends Task {
         }
     }
 
-    protected String getTimeDesc() {
+    @Override
+    public boolean isAtTime(LocalDateTimeOrString dateTimeOrString) {
+        return this.dateTimeOrString.equals(dateTimeOrString);
+    }
+
+    protected String getDateTimeDesc() {
         return dateTimeOrString.getDateTimeDesc();
     }
 }

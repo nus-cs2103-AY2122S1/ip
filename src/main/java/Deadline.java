@@ -5,6 +5,6 @@ public class Deadline extends TimedTask {
 
     @Override
     public String toString() {
-        return String.format("%s (by: %s)", super.toString(), getTimeDesc());
+        return String.format("%s (by: %s)", super.toString(), getDateTimeDesc());
     }
 }
