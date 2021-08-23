@@ -12,12 +12,12 @@ public class Event extends Task {
 
     /** Identifying tag 'E' for Event task */
     private final String identifier = "E";
+    /** Stores Date specified by user */
+    private final LocalDate eventDate;
     /** Stores Date and Time if both are specified by user */
     private LocalDateTime eventDateTime;
     /** Boolean flag to check if both Date and Time are specified by user */
     private boolean isDateAndTime;
-    /** Stores Date specified by user */
-    private final LocalDate eventDate;
     /** Stores Time specified by use */
     private LocalTime eventTime;
 
@@ -51,6 +51,7 @@ public class Event extends Task {
 
     /**
      * Prints out Event task with an identifier, a done marker and the date/time specified.
+     *
      * @return String.
      */
     @Override

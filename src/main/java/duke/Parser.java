@@ -43,6 +43,8 @@ public class Parser {
             return new DoneCommand(userInput, tasks);
         } else if (checkDelete()) {
             return new DeleteCommand(userInput, tasks);
+        } else if (checkFind()) {
+            return new FindCommand(userInput, tasks);
         } else if (checkTodo()) {
             return new AddCommand(AddCommandType.todo, userInput, tasks);
         } else if (checkEvent()) {
@@ -126,6 +128,17 @@ public class Parser {
         Pattern deadlinePattern = Pattern.compile("^deadline\\h\\w.*/by\\h\\w.*");
         Matcher deadlineMatcher = deadlinePattern.matcher(this.userInput);
         return deadlineMatcher.find();
+    }
+
+    /**
+     * Checks if the find command is to be executed for finding tasks with matching substrings.
+     *
+     * @return boolean.
+     */
+    private boolean checkFind() {
+        Pattern findPattern = Pattern.compile("^find\\h\\w.*");
+        Matcher findMatcher = findPattern.matcher(this.userInput);
+        return findMatcher.find();
     }
 
 }

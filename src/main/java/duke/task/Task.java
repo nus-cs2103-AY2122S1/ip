@@ -7,16 +7,14 @@ import java.time.format.DateTimeFormatter;
  */
 public abstract class Task {
 
-    /** Description String of the Task */
-    private String description;
-    /** Boolean that determines whether a task is done or not */
-    private boolean isDone;
-
     /** The formatting patterns for Tasks with date (and time) inputs. */
     protected final DateTimeFormatter dateTimePattern = DateTimeFormatter.ofPattern("MMM d yyyy hh:mma");
-
     /** The formatting patterns for Tasks with date inputs. */
     protected final DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("MMM d yyyy");
+    /** Description String of the Task */
+    private final String description;
+    /** Boolean that determines whether a task is done or not */
+    private boolean isDone;
 
     /**
      * Instantiates a new Task.
