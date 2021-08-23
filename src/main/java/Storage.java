@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,6 +21,8 @@ public class Storage {
      * the file name of the data file
      */
     private final String fileName;
+
+    private final Parser parser = new Parser();
 
     public Storage(String filePath, String fileName) {
         this.filePath = filePath;
@@ -68,11 +71,23 @@ public class Storage {
             break;
         case "D":
             // task is deadline
-            task = new Deadline(taskInfo[2], taskInfo[3]);
+            LocalDate by;
+            try {
+                by = parser.stringToLocalDate(taskInfo[3]);
+            } catch (DukeException e) {
+                by = LocalDate.now();
+            }
+            task = new Deadline(taskInfo[2], by);
             break;
         case "E":
             // task is event
-            task = new Event(taskInfo[2], taskInfo[3]);
+            LocalDate at;
+            try {
+                at = parser.stringToLocalDate(taskInfo[3]);
+            } catch (DukeException e) {
+                at = LocalDate.now();
+            }
+            task = new Event(taskInfo[2], at);
             break;
         default:
             // not of any task type

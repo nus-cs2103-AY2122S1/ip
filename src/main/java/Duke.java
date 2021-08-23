@@ -34,6 +34,7 @@ public class Duke {
             command = ui.getNextLine();
             if (command.equals("bye")) {
                 // end bot
+                storage.writeTasksToData(tasks); // save all data
                 break;
             } else {
                 switch (parser.getCommandAction(command)) {
