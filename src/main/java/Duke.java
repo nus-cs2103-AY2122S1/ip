@@ -3,8 +3,8 @@ import java.io.PrintWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
 
@@ -39,14 +39,15 @@ public class Duke {
     }
 
     protected class Deadline extends Task {
-        protected final String dateBy;
+        protected final LocalDate dateBy;
 
-        public Deadline(String description, String dateBy) {
+        public Deadline(String description, LocalDate dateBy) {
             super(description);
             this.dateBy = dateBy;
+            this.isDone = false;
         }
 
-        public Deadline(String description, String dateBy, boolean isDone) {
+        public Deadline(String description, LocalDate dateBy, boolean isDone) {
             super(description);
             this.dateBy = dateBy;
             this.isDone = isDone;
@@ -54,11 +55,12 @@ public class Duke {
 
         @Override
         public String toString() {
-            return "[D]" + super.toString() + description + " (by: " + dateBy + ")";
+            return "[D]" + super.toString() + description + " (by: " +
+                    dateBy.getDayOfMonth() + " " + dateBy.getMonth().toString() + " " + dateBy.getYear() + ")";
         }
 
         @Override
-        public String getStatusString() { return "D@" + (isDone ? 1 : 0) + "@" + this.description + "@" + this.dateBy; }
+        public String getStatusString() { return "D@" + (isDone ? 1 : 0) + "@" + this.description + "@" + this.dateBy.toString(); }
 
     }
 
@@ -186,7 +188,7 @@ public class Duke {
                         }
                         case "D": {
                             String dateBy = txtFileCmd[3];
-                            todoList.add(duke.new Deadline(taskInfo, dateBy, taskState));
+                            todoList.add(duke.new Deadline(taskInfo, LocalDate.parse(dateBy), taskState));
                             break;
 
                         }
@@ -348,16 +350,17 @@ public class Duke {
                             throw new EmptyDescriptionException("todo");
                         }
 
-                        String[] additionalTaskInfo = taskInfo[1].split("/by", 2);
-                        if (additionalTaskInfo.length == 1) {
+                        String[] taskMoreInfo = taskInfo[1].split("/by", 2);
+                        if (taskMoreInfo.length == 1) {
                             throw new EmptyDetailsException("deadline");
                         }
-                        String description = additionalTaskInfo[0];
-                        String dateBy = additionalTaskInfo[1];
+                        String description = taskMoreInfo[0];
+                        String date = taskMoreInfo[1];
 
                         System.out.println("added: " + command);
                         System.out.println(linebreak);
-                        todoList.add(duke.new Deadline(description, dateBy));
+
+                        todoList.add(duke.new Deadline(description, LocalDate.parse(date.strip())));
                         textFileString.add(todoList.get(todoList.size() - 1).getStatusString());
                         String txt = "";
                         for (String s : textFileString) {
@@ -366,6 +369,7 @@ public class Duke {
                         PrintWriter pw = new PrintWriter(file);
                         pw.append(txt);
                         pw.flush();
+
                         break;
 
                     }
