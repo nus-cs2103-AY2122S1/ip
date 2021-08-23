@@ -39,3 +39,11 @@ public class DukeException extends Exception {
             super("Please provide a timeline for your task! ☹");
         }
     }
+    
+    class TaskDoneAlreadyException extends DukeException {
+        TaskDoneAlreadyException() {
+        super("You have completed this task already!");
+    }
+}
+    
+    
