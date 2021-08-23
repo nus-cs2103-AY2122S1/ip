@@ -1,4 +1,6 @@
-[35mHello from
+[31mYou do not have any saved task.
+[0m
+> [35mHello from
  _   _ _ _
 | | | (_) | _____
 | |_| | | |/ / _ \
@@ -33,7 +35,8 @@ Now you have 3 tasks in the list.
 [0m
 > [35mNoted. I've removed this task:
   [E][X] read book(at: tmr)
-Now you have 2 tasks in the list.[0m
+Now you have 2 tasks in the list.
+[0m
 > [35mHere are the tasks in your list:
 1. [T][ ] borrow book
 2. [D][ ] return book(by: Friday)
@@ -108,4 +111,5 @@ So that I can understand!
 [0m
 > [31m@_@ OOPS!!! I'm sorry, but I don't know what that means :-(
 [0m
+> [31merror while saving the tasks![0m
 > [35mBye! Hope to see you again soon![0m

@@ -5,8 +5,14 @@
  */
 
 class Event extends Task {
+    private final String task;
+    private final String time;
+
     public Event(String description) throws EmptyDescriptionException, WrongFormatException {
         super(processEventDescription(description));
+        String[] descriptionTime = description.split(" /at ");
+        this.task = descriptionTime[0];
+        this.time = descriptionTime[1];
     }
 
     private static String processEventDescription(String description) throws WrongFormatException {
@@ -25,5 +31,15 @@ class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString();
+    }
+
+    /**
+     * return the save string arrays for file writing
+     *
+     * @return the array of Strings representing the task
+     */
+    public String[] saveStrings() {
+        String isDone = this.getIsDone() ? "1" : "0";
+        return new String[]{"E", isDone, this.task, this.time};
     }
 }

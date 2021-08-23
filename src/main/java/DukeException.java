@@ -45,3 +45,12 @@ class ListIndexException extends DukeException {
         super("Please enter the number within the range of the list!\n");
     }
 }
+
+/**
+ * This is thrown when the file has wrong format
+ */
+class FileFormatException extends DukeException {
+    public FileFormatException() {
+        super("The saved tasks has wrong format!\n");
+    }
+}

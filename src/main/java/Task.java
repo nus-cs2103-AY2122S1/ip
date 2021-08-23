@@ -4,16 +4,17 @@
  * @author Chen Yanyu
  */
 
-class Task {
+abstract class Task {
     private String description;
     private boolean isDone;
 
     /**
      * Public Constructor for Task.
+     *
      * @param description the description for the task.
      */
     public Task(String description) throws EmptyDescriptionException {
-        if (description.isBlank()){
+        if (description.isBlank()) {
             throw new EmptyDescriptionException();
         } else {
             this.description = description;
@@ -23,6 +24,7 @@ class Task {
 
     /**
      * return the string representation of the task status.
+     *
      * @return X if the task is done
      */
     public String getStatusIcon() {
@@ -31,10 +33,20 @@ class Task {
 
     /**
      * return the description.
+     *
      * @return the description of the task
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * return the status of the task.
+     *
+     * @return the status of the task
+     */
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     /**
@@ -47,6 +59,13 @@ class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() +
-            "] " + this.description;
+                "] " + this.description;
     }
+
+    /**
+     * return the save string arrays for file writing
+     *
+     * @return the array of Strings representing the task
+     */
+    abstract public String[] saveStrings();
 }
