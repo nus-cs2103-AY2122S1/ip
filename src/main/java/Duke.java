@@ -1,5 +1,10 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.nio.file.*;
+import java.io.FileWriter;
 
 public class Duke {
     static ArrayList<Task> tasks = new ArrayList<>();
@@ -28,7 +33,7 @@ public class Duke {
         } catch (NumberFormatException nfe) {
             throw new DukeException("Please only enter an integer after command 'delete'!");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Task number " + s.substring(5) + " does not exist!");
+            throw new DukeException("Task number " + s.substring(7) + " does not exist!");
         }
     }
 
@@ -70,6 +75,56 @@ public class Duke {
         }
     }
 
+    public static void saveTasks() {
+        String textToAdd = "";
+
+        for (int i = 0; i < tasks.size(); i++) {
+            textToAdd = textToAdd + tasks.get(i).toString() + System.lineSeparator();
+        }
+
+        try {
+            FileWriter file = new FileWriter("data/duke.txt");
+            file.write(textToAdd);
+            file.close();
+        } catch (IOException e) {
+            System.out.println("There is a problem writing saved data.");
+        }
+    }
+
+    public static void loadTasks(){
+        try {
+            File dataDirectory = new File("data");
+            dataDirectory.mkdir();
+            File savedData = new File("data/duke.txt");
+            savedData.createNewFile();
+            Scanner savedTasks = new Scanner(savedData);
+
+            while (savedTasks.hasNextLine()) {
+                String curr = savedTasks.nextLine();
+
+                if (curr.startsWith("[T]")) {
+                    Task currentTask = new ToDo(curr.substring(7));
+                    tasks.add(currentTask);
+                } else if (curr.startsWith("[E]")) {
+                    int at = curr.lastIndexOf(" (at: ");
+                    int end = curr.lastIndexOf(")");
+                    Task currentTask = new Event(curr.substring(7, at), curr.substring(at + 6, end));
+                    tasks.add(currentTask);
+                } else if (curr.startsWith("[D]")) {
+                    int by = curr.lastIndexOf(" (by: ");
+                    int end = curr.lastIndexOf(")");
+                    Task currentTask = new Event(curr.substring(7, by), curr.substring(by + 6, end));
+                    tasks.add(currentTask);
+                } else {
+                    // do nothing
+                }
+            }
+
+        } catch (IOException e) {
+            System.out.println("There is a problem loading saved data.");
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("*******************************************");
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
@@ -77,6 +132,7 @@ public class Duke {
 
         Scanner myScanner= new Scanner(System.in); // open scanner
         boolean hasQuit = false;
+        loadTasks();
 
         while (!hasQuit && myScanner.hasNextLine()) {
             String userInput = myScanner.nextLine();
@@ -94,14 +150,19 @@ public class Duke {
                     }
                 } else if (userInput.startsWith("done")) {
                     markAsDone(userInput);
+                    saveTasks();
                 } else if (userInput.startsWith("delete")) {
                     deleteTask(userInput);
+                    saveTasks();
                 } else if (userInput.startsWith("todo")) {
                     addToDo(userInput);
+                    saveTasks();
                 } else if (userInput.startsWith("event")) {
                     addEvent(userInput);
+                    saveTasks();
                 } else if (userInput.startsWith("deadline")) {
                     addDeadline(userInput);
+                    saveTasks();
                 } else { // any other input from user
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
