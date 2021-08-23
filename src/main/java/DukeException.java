@@ -22,6 +22,10 @@ public class DukeException extends Exception {
                 errorMessage = "Invalid event formatting!\n"
                         + "Proper format: event 'event description' /at 'location'";
                 break;
+            case "date parse":
+                errorMessage = "Cannot parse date format!\n"
+                        + "Proper format: dd/MM/yyyy HHmm";
+                break;
             default:
                 errorMessage = "unknown error message";
         }
