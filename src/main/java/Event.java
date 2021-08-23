@@ -12,6 +12,12 @@ public class Event extends Task {
         this.timeframe = timeframe;
     }
 
+    public Event(String done, String description, String timeframe) {
+        super(description);
+        this.timeframe = timeframe;
+        this.isDone = (done.equals("X")) ? true : false;
+    }
+
     /**
      * Overriding toString method to display the relevant information
      *
