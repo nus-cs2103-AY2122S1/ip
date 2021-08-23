@@ -1,7 +1,3 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -9,64 +5,41 @@ import java.time.LocalDate;
 
 public class Duke {
     static String filePath = "data/duke.txt";
-    public static void main(String[] args) {
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            taskList = new TaskList(storage.loadTasks());
+        } catch (DukeException e) {
+            ui.showLoadingError(e.toString());
+            taskList = new TaskList();
+        }
+    }
+
+    public void run() {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> lst = new ArrayList<>();
+        ui.showGreeting();
+
+        ui.readInput();
 
         try {
-            initialize(lst);
-        } catch(FileNotFoundException ffe) {
-            System.out.println("Record not found in " + filePath);
-            System.exit(0);
-        }
-        String input = sc.nextLine();
-        while(!input.equals("bye")) {
-            if (input.equals("list")) {
-                System.out.println(printList(lst));
-            } else if (input.split(" ")[0].equals("schedule")) {
-                printSchedule(input, lst);
-            } else if (input.substring(0,Math.min(input.length(), 5)).equals("done ")) {
-                String index = input.split(" ", 2)[1];
-                System.out.println(doTask(index, lst));
-            } else if (input.substring(0,Math.min(input.length(), 7)).equals("delete ")) {
-                String index = input.split(" ", 2)[1];
-                System.out.println(deleteTask(index, lst));
-            } else {
-                System.out.println(addList(input, lst));
-            }
-            input = sc.nextLine();
+            storage.saveData(taskList);
+        } catch (DukeException e) {
+            System.out.println(e.toString());
         }
 
-        try {
-            exit(lst);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
-    public static void initialize(ArrayList<Task> lst) throws FileNotFoundException {
-        showGreeting();
-        readData(lst);
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 
-    public static void showGreeting() {
-        String output = "    ____________________________________________________________\n"
-                + "     Hello! I'm Duke\n"
-                + "     What can I do for you?\n"
-                + "    ____________________________________________________________\n";
 
-        System.out.println(output);
-    }
 
-    public static void readData(ArrayList<Task> lst) throws FileNotFoundException {
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
-
-        while (s.hasNext()) {
-            String description = s.nextLine();
-            lst.add(Task.decoding(description));
-        }
-    }
 
     /**
      * Returns the message that shows which task is marked as completed.
@@ -75,45 +48,7 @@ public class Duke {
      * @param lst the list containing all tasks
      * @return the messages
      */
-    public static String doTask(String index, ArrayList<Task> lst) {
-        int idx;
-        try {
-            idx = Integer.parseInt(index);
-            lst.get(idx - 1);
-        } catch (NumberFormatException nfe) {
-            return "Please check the format of the index.";
-        } catch (IndexOutOfBoundsException e) {
-            return "The task does not exist in task list.";
-        }
 
-
-        StringBuilder s = new StringBuilder();
-        s.append("    ____________________________________________________________\n");
-        s.append("    Nice! I've marked this task as done: \n");
-
-        lst.get(idx - 1).setDone();
-        s.append("       " + lst.get(idx - 1).toString() + "\n");
-
-        s.append("    ____________________________________________________________\n");
-
-        return s.toString();
-    }
-
-    /**
-     * Returns a string that contains all the elements in the list.
-     * @param lst the list to be printed
-     * @return the string
-     */
-    public static String printList(ArrayList<Task> lst) {
-        StringBuilder s = new StringBuilder();
-        s.append("    ____________________________________________________________\n");
-        for (int i = 0; i < lst.size(); i++) {
-            s.append(String.format("     %d. %s\n", i + 1, lst.get(i).toString()));
-        }
-        s.append("    ____________________________________________________________\n");
-
-        return s.toString();
-    }
 
     /**
      * Returns error messages or a string showing the added task.
@@ -162,66 +97,13 @@ public class Duke {
     }
 
 
-    public static String deleteTask(String index, ArrayList<Task> lst) {
-        int idx;
-        try {
-            idx = Integer.parseInt(index);
-            lst.get(idx - 1);
-        } catch (NumberFormatException nfe) {
-            return "Please check the format of the index.";
-        } catch (IndexOutOfBoundsException e) {
-            return "The task does not exist in task list.";
-        }
 
-        Task currTask = lst.get(idx - 1);
-        lst.remove(currTask);
 
-        String output = "    ____________________________________________________________\n"
-                + "     Noted. I've removed this task: \n"
-                + "      " + currTask.toString() + "\n"
-                + "     Now you have " + lst.size() +" tasks in the list. \n"
-                + "    ____________________________________________________________\n";
-        return output;
-    }
 
-    public static void printSchedule(String info, ArrayList<Task> lst) {
-        LocalDate date;
-        try {
-            date = LocalDate.parse(info.split(" ")[1]);
-        } catch (Exception e) {
-            System.out.println("Wrong format of date");
-            return ;
-        }
-        for (Task t : lst) {
-            if (date.equals(t.getDate())) {
-                System.out.println(t.toString());
-            }
-        }
-    }
 
-    /**
-     * return the goodbye message
-     * @return a string containing the goodbye message
-     */
-    public static void exit(ArrayList<Task> lst) throws IOException {
-        showGoodbye();
-        saveData(lst);
-    }
 
-    public static void showGoodbye() {
-        String output = "    ____________________________________________________________\n"
-                + "     Bye. Hope to see you again soon!\n"
-                + "    ____________________________________________________________\n";
-        System.out.println(output);
-    }
 
-    public static void saveData(ArrayList<Task> lst) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        for (Task t : lst) {
-            fw.write(t.encoding() + "\n");
-        }
 
-        fw.close();
-    }
+
 
 }

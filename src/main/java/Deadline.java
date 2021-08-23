@@ -27,12 +27,12 @@ class Deadline extends Task {
     }
 
     @Override
-    public LocalDate getDate() {
+    LocalDate getDate() {
         return date;
     }
 
     @Override
-    public String encoding() {
+    String encoding() {
         return "E&&" + super.encoding() + "&&" + by;
     }
 
