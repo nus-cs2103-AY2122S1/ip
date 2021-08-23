@@ -12,16 +12,27 @@ public class DeadLine extends Task {
     /**
      * Constructor of the Deadline class.
      * @param description the name of the task
-     * @param by when is the dateline of the task in the formate yyyy-mm-dd
+     * @param by when is the dateline of the task in the format yyyy-mm-dd
      */
     public DeadLine(String description, String by) {
-        super(description, TypeOfTasks.DEADLINE);
+        super(description);
+        this.by = LocalDate.parse(by.trim());
+    }
+
+    /**
+     * Constructor fo the Deadline class.
+     * @param description name of the task
+     * @param by when is the deadline of the task in the format yyyy-mm-dd
+     * @param isDone whether the deadline task is done, based on its status icon
+     */
+    public DeadLine(String description, String by, String isDone) {
+        super(description, isDone);
         this.by = LocalDate.parse(by.trim());
     }
 
     @Override
     public String toString() {
         String formattedDate = this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        return "[D]" + super.toString() + " (by:" + formattedDate + ")";
+        return "[D]" + super.toString() + " (by: " + formattedDate + ")";
     }
 }

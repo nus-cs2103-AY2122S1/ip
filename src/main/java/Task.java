@@ -6,17 +6,29 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected TypeOfTasks type;
 
     /**
      * Constructor for the Task class,
      * initially the task is not done.
      * @param description the name of the task
      */
-    public Task(String description, TypeOfTasks type) {
+    public Task(String description) {
         this.description = description.trim();
         this.isDone = false;
-        this.type = type;
+    }
+
+    /**
+     * Constructor for the Task class.
+     * @param description the name of the task
+     * @param isDone whether the task is done, based on its status icon
+     */
+    public Task(String description, String isDone) {
+        this.description = description.trim();
+        if (isDone.equals("X")) {
+            this.isDone = true;
+        } else {
+            this.isDone = false;
+        }
     }
 
     /**
@@ -37,11 +49,6 @@ public class Task {
     @Override
     public String toString() {
         String base = "[" + getStatusIcon() + "] " + this.description;
-        switch (type) {
-            case TODO :
-                return "[T]" + base;
-            default:
-                return base;
-        }
+        return base;
     }
 }
