@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static boolean running = true;
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -19,7 +18,10 @@ public class Duke {
         while (isRunning) {
             try {
                 String fullCommand = ui.readCommand();
-                isRunning = Parser.parse(fullCommand, taskList, ui);
+                Command c = Parser.parse(fullCommand, taskList);
+                c.execute(taskList, ui);
+                isRunning = c.isRunning();
+
             } catch (DukeException e) {
                 ui.stringWithDivider(e.getMessage());
             }

@@ -12,8 +12,7 @@ public class TaskList {
 
     public static Task createTask(char taskType, char taskDone, String taskDescription) {
         Task createdTask = new Task("Created");
-        Boolean isDone = (taskDone == 'X');
-
+        boolean isDone = (taskDone == 'X');
 
         switch (taskType) {
         case 'T':
@@ -24,14 +23,14 @@ public class TaskList {
             createdTask = taskToDo;
             break;
         case 'D':
-            Task taskDeadline = new Deadline(taskDescription);
+            Task taskDeadline = Parser.parseDeadlineFromFile(taskDescription);
             if (isDone) {
                 taskDeadline.markAsDone();
             }
             createdTask = taskDeadline;
             break;
         case 'E':
-            Task taskEvent = new Event(taskDescription);
+            Task taskEvent = Parser.parseEventFromFile(taskDescription);
             if (isDone) {
                 taskEvent.markAsDone();
             }
@@ -44,7 +43,6 @@ public class TaskList {
 
     public String addToList(Task newTask) {
         tasks.add(newTask);
-
         storage.writeToStorage(this.getList());
 
         return newTask.toString();
@@ -61,7 +59,8 @@ public class TaskList {
     public String taskDone(int index) {
         Task curr = tasks.get(index - 1);
         curr.markAsDone();
-        this.getList();
+        storage.writeToStorage(this.getList());
+
         return curr.toString();
     }
 
@@ -74,8 +73,12 @@ public class TaskList {
         String result = "";
 
         for (int i = 0; i < tasks.size(); i++) {
+            if (i < tasks.size() - 1) {
                 result = result + counter + "." + tasks.get(i) + "\n";
-                counter++;
+            } else {
+                result = result + counter + "." + tasks.get(i);
+            }
+            counter++;
         }
 
         return result;
