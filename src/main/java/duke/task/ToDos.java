@@ -14,6 +14,11 @@ public class ToDos extends Task {
         super(description);
     }
 
+    /**
+     * Returns the ToDos object as data for saving.
+     *
+     * @return Todos object save data.
+     */
     @Override
     public String saveData() {
         return "todo " + super.saveData();
