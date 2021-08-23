@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Deadline class used to represent a task that has an end date.
  * Contains method that
@@ -5,17 +9,28 @@
  * as well as status and description.
  */
 public class Deadline extends Task {
-    protected String date;
+    private LocalDate date;
+    private LocalTime time;
 
-    public Deadline(String description, String date) {
+    public Deadline(String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;
+        this.time = time;
     }
 
-    public Deadline(String done, String description, String date) {
+    public String formatString() {
+        return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
+    }
+
+    public Deadline(String done, String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;
-        this.isDone = (done.equals("X")) ? true : false;
+        this.time = time;
+        if ((done.equals("X"))) {
+            this.setIsDone(true);
+        } else {
+            this.setIsDone(false);
+        }
     }
 
     /**
@@ -26,6 +41,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.date + ")";
+        return "[D]" + super.toString() + " (by: " + this.date + " " + this.time + ")";
     }
 }

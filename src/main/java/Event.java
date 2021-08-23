@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Event class used to represent a task that has a start and end date.
  * Contains method that
@@ -5,17 +9,31 @@
  * as well as status and description.
  */
 public class Event extends Task {
-    protected String timeframe;
+    private final LocalDate date;
+    private final LocalTime start;
+    private final LocalTime end;
 
-    public Event(String description, String timeframe) {
+    public Event(String description, LocalDate date, LocalTime start, LocalTime end) {
         super(description);
-        this.timeframe = timeframe;
+        this.date = date;
+        this.start = start;
+        this.end = end;
     }
 
-    public Event(String done, String description, String timeframe) {
+    public String formatString() {
+        return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.start.format(DateTimeFormatter.ofPattern("h:mma")) + " " + this.end.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
+    }
+
+    public Event(String done, String description, LocalDate date, LocalTime start, LocalTime end) {
         super(description);
-        this.timeframe = timeframe;
-        this.isDone = (done.equals("X")) ? true : false;
+        this.date = date;
+        this.start = start;
+        this.end = end;
+        if ((done.equals("X"))) {
+            this.setIsDone(true);
+        } else {
+            this.setIsDone(false);
+        }
     }
 
     /**
@@ -26,6 +44,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.timeframe + ")";
+        return "[E]" + super.toString() + " (at: " + this.date + " " + this.start + " " + this.end + ")";
     }
 }

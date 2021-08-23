@@ -11,7 +11,11 @@ public class ToDo extends Task {
 
     public ToDo(String done, String description) {
         super(description);
-        this.isDone = (done.equals("X")) ? true : false;
+        if ((done.equals("X"))) {
+            this.setIsDone(true);
+        } else {
+            this.setIsDone(false);
+        }
     }
 
     /**

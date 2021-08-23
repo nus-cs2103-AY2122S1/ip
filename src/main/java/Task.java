@@ -8,8 +8,8 @@
  * (v) overrides the default toString method to display the status and description
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructor for Task
@@ -42,6 +42,11 @@ public class Task {
 
     public boolean getIsDone() {
         return this.isDone;
+    }
+
+    protected void setIsDone(boolean done) {
+        this.isDone = done;
+        return;
     }
 
     /**
