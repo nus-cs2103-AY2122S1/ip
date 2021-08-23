@@ -92,4 +92,14 @@ public class TaskListStub implements TaskList {
     public ArrayList<Task> output() {
         return this.output;
     }
+
+    /**
+     * Return nothing.
+     *
+     * @param searchString the string to be searched
+     */
+    @Override
+    public void printListSearch(String searchString) {
+        return;
+    }
 }

@@ -100,6 +100,24 @@ public class TaskListDuke implements TaskList {
     }
 
     /**
+     * Prints Tasks with containing the specific substring.
+     */
+    public void printListSearch(String str) {
+        UI.print(LIST_INTRO);
+        if (this.LIST.size() == 0) {
+            UI.print("\t List is empty.");
+        } else {
+            int count = 0;
+            for (Task t : this.LIST) {
+                if (t.containString(str)) {
+                    UI.print("\t " + (++count) + "." + t);
+                }
+            }
+            if (count == 0) UI.print("\t Oh no! There are no tasks containing the specified string.");
+        }
+    }
+
+    /**
      * Return the number of items in the TaskList.
      *
      * @return listCount

@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * @version CS2103T AY21/22 S2
  */
 public abstract class Task {
-    private final String DESCRIPTION;
+    protected final String DESCRIPTION;
     private boolean isDone;
 
     /**
@@ -55,4 +55,13 @@ public abstract class Task {
      * @return true if they are both equal
      */
     public abstract boolean onDate(LocalDate date);
+
+    /**
+     * Returns true if the task's description contains the string
+     * @param str the substring to be searched
+     * @return true if the task's description contains the string
+     */
+    public boolean containString(String str) {
+        return DESCRIPTION.contains(str);
+    }
 }
