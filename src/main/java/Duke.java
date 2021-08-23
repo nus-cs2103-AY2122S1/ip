@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,6 +28,7 @@ public class Duke {
             return value;
         }
     }
+
 
     private static void addNewTodo(String task) throws Exception {
         if (task.length() <= 5) {
@@ -66,7 +69,7 @@ public class Duke {
 
     private static void setTaskDone(String task) throws Exception {
         int itemDone = Integer.parseInt(task.substring(5));
-        tasks.get(itemDone - 1).done = true;
+        tasks.get(itemDone - 1).finished();
         System.out.println("    Nice! I've marked this task as done:");
         System.out.println("      " + tasks.get(itemDone - 1).toString());
         modifyTasks();
@@ -91,17 +94,19 @@ public class Duke {
     private static void readEvents(Scanner sc) {
         while (sc.hasNextLine()) {
             String task = sc.nextLine();
-            System.out.println(task);
+
             if (task.equals("\n")) {
                 System.out.println(task);
                 continue;
             }
+
             char taskType = task.charAt(0);
             char taskDone = task.charAt(4);
             String taskValue = task.substring(8);
-            boolean finished = taskDone == '1';
+            boolean finished = (taskDone == '1');
             Task curTask = new Task("");
             int separatorPosition;
+
             switch (taskType) {
             case 'T':
                 curTask = new Todo(taskValue, finished);
@@ -169,9 +174,11 @@ public class Duke {
         }
     }
 
+
     private static void printSeparateLine() {
         System.out.println("________________________________________________________________");
     }
+
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -180,7 +187,6 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-
 
         //Read events stored in the input List
         loadSavedTasks();

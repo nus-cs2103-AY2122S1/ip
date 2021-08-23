@@ -11,15 +11,15 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String finished = " ";
-        if (this.done) {
+        if (this.isDone()) {
             finished = "X";
         }
-        return "[T]" + "[" + finished + "] " + this.taskName;
+        return "[T]" + "[" + finished + "] " + this.getTaskName();
     }
 
     @Override
     public String toStoredString() {
-        int finished = done ? 1 : 0;
-        return "T | " + finished + " | " + taskName;
+        int finished = isDone() ? 1 : 0;
+        return "T | " + finished + " | " + this.getTaskName();
     }
 }
