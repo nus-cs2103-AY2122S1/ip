@@ -5,6 +5,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FileManager {
     private String filePath;
@@ -16,7 +19,8 @@ public class FileManager {
     /**
      * Load data from the hard disks.
      */
-    public TaskList loadData(TaskList taskList) {
+    public TaskList loadData(HashMap<LocalDate, ArrayList<Task>> dateTasks,
+                             TaskList taskList) {
         try {
             File file = new File(filePath);
             // Create a new file if it does not already exist
@@ -27,6 +31,7 @@ public class FileManager {
                 char type = task.charAt(1);
                 boolean isCompleted = task.charAt(4) == 'X';
 
+                DateTimeManager manager = new DateTimeManager(DateTimeFormatter.ISO_DATE);
                 String description = parseDescription(task);
                 Task newTask;
                 LocalDate time;
@@ -39,12 +44,14 @@ public class FileManager {
                     time = parseTime(task, "by: ");
                     newTask = new Deadline(description, time);
                     taskList = loadTasks(newTask, taskList, isCompleted);
+                    manager.updateDateTasks(dateTasks, time, newTask);
                     break;
                 case 'E':
                     time = parseTime(task, "at: ");
                     System.out.println(time);
                     newTask = new Event(description, time);
                     taskList = loadTasks(newTask, taskList, isCompleted);
+                    manager.updateDateTasks(dateTasks, time, newTask);
                     break;
                 default:
                     throw new DukeException("Invalid task.");

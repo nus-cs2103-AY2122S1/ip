@@ -1,6 +1,8 @@
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -13,6 +15,7 @@ public class Duke {
      */
     private TaskList taskList;
     private FileManager fileManager;
+    private HashMap<LocalDate, ArrayList<Task>> dateTasks = new HashMap<>();
 
     /**
      * Constructor for Duke
@@ -83,6 +86,14 @@ public class Duke {
         divider();
     }
 
+    private void returnTasksOnDate(String dateTime) {
+        String customPattern ="dd/MM/yyyy";
+        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern(customPattern);
+        DateTimeManager dateTimeManager = new DateTimeManager(customFormatter);
+        LocalDate date = dateTimeManager.parseDateTime(dateTime);
+        System.out.println(dateTasks.getOrDefault(date, new ArrayList<>()));
+    }
+
     /**
      * Method for Duke to handle invalid inputs by the user.
      *
@@ -135,7 +146,7 @@ public class Duke {
             String taskType = command.substring(0, indexOfFirstSpace);
             String description = command.substring(indexOfFirstSpace + 1);
 
-            String customPattern ="dd-MM-yyyy";
+            String customPattern ="dd/MM/yyyy";
             DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern(customPattern);
             DateTimeManager dateTimeManager = new DateTimeManager(customFormatter);
 
@@ -153,6 +164,8 @@ public class Duke {
                     date = dateTimeManager.parseDateTime(dateTime);
                     newTask = new Deadline(description.substring(0, deadlineIndex),
                             date);
+                    // Keep track of tasks for a date
+                    dateTimeManager.updateDateTasks(dateTasks, date, newTask);
                     break;
                 case "event":
                     int timeIndex = description.indexOf("/at");
@@ -160,6 +173,8 @@ public class Duke {
                     date = dateTimeManager.parseDateTime(dateTime);
                     newTask = new Event(description.substring(0, timeIndex),
                             date);
+                    // Keep track of tasks for a date
+                    dateTimeManager.updateDateTasks(dateTasks, date, newTask);
                     break;
                 default:
                     throw new DukeException(
@@ -237,7 +252,7 @@ public class Duke {
      */
     private void run() {
 
-        this.taskList = fileManager.loadData(this.taskList);
+        this.taskList = fileManager.loadData(this.dateTasks, this.taskList);
 
         // Greeting the user
         greet();
@@ -252,6 +267,12 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 returnTaskList();
+            } else if (command.startsWith("get")) {
+                String[] arrOfCommandWords = command.split(" ", 2);
+                if (arrOfCommandWords.length <= 1) {
+                    handleInvalidInputs(command);
+                }
+                returnTasksOnDate(arrOfCommandWords[1]);
             } else if (command.startsWith("done")
                     || command.startsWith("delete")) {
                 try {
