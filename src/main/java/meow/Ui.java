@@ -60,6 +60,27 @@ public class Ui {
     }
 
     /**
+     * Displays all the tasks in the task list that the user has entered.
+     *
+     * @param filteredList The task list that stores the tasks input by the user.
+     * @throws NoSearchResultException If there is not matching result.
+     */
+    public void displaySearchList(List<Task> filteredList) throws NoSearchResultException {
+        int len = filteredList.size();
+        if (len > 0) {
+            System.out.println("------------------------------------------------------------------------------");
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < len; i++) {
+                Task task = filteredList.get(i);
+                System.out.println(i + 1 + ". " + task.toString());
+            }
+            System.out.println("------------------------------------------------------------------------------");
+        } else {
+            throw new NoSearchResultException();
+        }
+    }
+
+    /**
      * Displays the new task that has been added to the list and the number
      * of tasks stored in the list.
      *

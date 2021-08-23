@@ -132,4 +132,22 @@ public class TaskList {
     public List<Task> getTasksList() {
         return this.tasksList;
     }
+
+    /**
+     * Filter the list of meow.Task objects based on the keyword provided by the user,
+     * and returns a list of meow.Task objects.
+     *
+     * @param keyword The search keyword input by the user.
+     * @return A list of filtered meow.Task objects.
+     */
+    public List<Task> searchTask(String keyword) {
+        List<Task> filteredTasks = new ArrayList<>();
+        for (int i = 0; i < this.tasksList.size(); i++) {
+            String description = this.tasksList.get(i).getDescription();
+            if (description.contains(keyword)) {
+                filteredTasks.add(this.tasksList.get(i));
+            }
+        }
+        return filteredTasks;
+    }
 }

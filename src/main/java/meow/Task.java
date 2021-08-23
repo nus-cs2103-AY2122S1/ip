@@ -20,7 +20,10 @@ public class Task {
         return (isDone ? "1" : "0"); // mark done task with X
     }
 
-    private String getDescription() {
+    /**
+     * Returns the description of the meow.Task object.
+     */
+    public String getDescription() {
         return description; // mark done task with X
     }
 
