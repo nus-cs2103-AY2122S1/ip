@@ -1,4 +1,8 @@
-package com.iP.yiheng;
+package com.duke.storage;
+
+import com.duke.task.TaskList;
+import com.duke.ui.UserInterface;
+import com.duke.parser.Parser;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -17,7 +21,7 @@ public class Storage {
         file = new File(filePath);
     }
 
-    protected void printTaskFile()  {
+    public void printTaskFile()  {
         try {
             Scanner sc = new Scanner(file);
             boolean isEmpty = !sc.hasNext();
@@ -35,13 +39,13 @@ public class Storage {
         }
     }
 
-    protected void saveTask(TaskList task) throws IOException {
+    public void saveTask(TaskList task) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath, true);
         fileWriter.write(task.toString() + "\n");
         fileWriter.close();
     }
 
-    protected void overwriteList(ArrayList<TaskList> taskArrayList) {
+    public void overwriteList(ArrayList<TaskList> taskArrayList) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
             for (TaskList t : taskArrayList) {
@@ -53,10 +57,9 @@ public class Storage {
         }
     }
 
-    protected void loadFile() {
+    public void loadFile() {
         try {
             Scanner sc = new Scanner(file);
-
             while (sc.hasNext()) {
                 String line = sc.nextLine();
                 Parser.parseFromFile(line);

@@ -1,4 +1,4 @@
-package com.iP.yiheng;
+package com.duke.exception;
 
 public class DukeException extends IllegalArgumentException {
 
@@ -50,6 +50,6 @@ public class DukeException extends IllegalArgumentException {
 
     @Override
     public String toString() {
-        return "Duke is confused! Duke says that " + getMessage();
+        return "com.duke.Duke is confused! com.duke.Duke says that " + getMessage();
     }
 }

@@ -1,4 +1,8 @@
-package com.iP.yiheng;
+package com.duke.parser;
+
+import com.duke.ui.UserInterface;
+import com.duke.task.TaskList;
+import com.duke.exception.DukeException;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -16,7 +20,7 @@ public class Parser {
 
     private final static UserInterface userInterface = new UserInterface();
 
-    protected boolean firstCommandParser(String command, Scanner scanner) {
+    public boolean firstCommandParser(String command, Scanner scanner) {
         TaskList task = new TaskList();
 
         switch (command) {
@@ -63,7 +67,7 @@ public class Parser {
         return false;
     }
 
-    protected static LocalDate findDate(String input) {
+    public static LocalDate findDate(String input) {
         String regex = "(\\d{4}-\\d{2}-\\d{2})"; // Regex to find date of the form yyyy-mm-dd
         Matcher m = Pattern.compile(regex).matcher(input);
         if (m.find()) {
@@ -72,7 +76,7 @@ public class Parser {
         return null;
     }
 
-    protected static String findTime(String input) {
+    public static String findTime(String input) {
         StringBuilder sb = new StringBuilder();
         int index = input.length() - 1;
         for (int i = 0; i < 4; i++) {
@@ -89,7 +93,7 @@ public class Parser {
         }
     }
 
-    protected static String convertTime(String input) {
+    public static String convertTime(String input) {
         double time = Double.parseDouble(input);
         String postfix;
         String prefix;
@@ -107,18 +111,22 @@ public class Parser {
         return prefix + " " + postfix;
     }
 
-    protected static void parseTime(String input, LocalDate ld, String deadlineTiming) {
+    public static void parseTime(String input, LocalDate ld, String deadlineTiming) {
         String[] parsedTime = input.split(" ");
-        String timeFormat = parsedTime[2] + "-"
-                + Parser.matchMonth(parsedTime[1]) + "-"
-                + (parsedTime[0].length() == 1 ? "0" + parsedTime[0] : parsedTime[0]);
-        if (parsedTime.length > 3) {
-            double timing = Double.parseDouble(parsedTime[3]) * 100
-                    + (parsedTime[4].equals("PM") ? 1200 : 0);
-            int flattenedTiming = (int) timing;
-            deadlineTiming = Integer.toString(flattenedTiming);
+        try {
+            String timeFormat = parsedTime[2] + "-"
+                    + Parser.matchMonth(parsedTime[1]) + "-"
+                    + (parsedTime[0].length() == 1 ? "0" + parsedTime[0] : parsedTime[0]);
+            if (parsedTime.length > 3) {
+                double timing = Double.parseDouble(parsedTime[3]) * 100
+                        + (parsedTime[4].equals("PM") ? 1200 : 0);
+                int flattenedTiming = (int) timing;
+                deadlineTiming = Integer.toString(flattenedTiming);
+            }
+            ld = LocalDate.parse(timeFormat);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            userInterface.nullFunction();
         }
-        ld = LocalDate.parse(timeFormat);
     }
 
     private static String matchMonth(String month) {
@@ -134,7 +142,7 @@ public class Parser {
                 : Integer.toString(index);
     }
 
-    protected static void parseFromFile(String line) {
+    public static void parseFromFile(String line) {
         TaskList task = new TaskList();
         char taskChar = line.charAt(1);
         char taskStatus = line.charAt(4);
