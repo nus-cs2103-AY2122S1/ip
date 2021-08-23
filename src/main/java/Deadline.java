@@ -1,22 +1,34 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
     protected String description;
     protected boolean isDone;
     final String DEADLINE = "[D]";
-    protected String date;
+    protected String dateAndTime;
+    protected LocalDateTime localDateTime;
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
-    public Deadline(String description, String date) {
+    public Deadline(String description, String dateAndTime) {
         super(description);
         this.description = description;
         this.isDone = false;
-        this.date = date;
+        this.dateAndTime = dateAndTime;
     }
 
-    public String getDate() {
-        return this.date;
+    public void formatLocalDateTime() {
+        if (this.dateAndTime.substring(0, 1).matches("[0-9]")) {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            this.localDateTime = LocalDateTime.parse(dateAndTime, dateTimeFormatter);
+        } else {
+            this.localDateTime = LocalDateTime.parse(dateAndTime, dtf);
+        }
     }
 
     @Override
-    public String getStatusAndDescription() {return DEADLINE + this.getStatusIcon() + " " + this.getDescription() + " (by: "
-            + this.date + ")"; }
+    public String toString() {
+        formatLocalDateTime();
+        return DEADLINE + this.getStatusIcon() + " " + this.getDescription() + " (by: " + localDateTime.format(dtf) + ")";
+    }
 
 }
