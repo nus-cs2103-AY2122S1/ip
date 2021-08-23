@@ -4,6 +4,8 @@ import duke.exception.InvalidInputException;
 import duke.exception.InvalidInstructionException;
 import duke.task.Task;
 
+import java.util.ArrayList;
+
 public class Ui {
 
     private static final String line =
@@ -51,6 +53,18 @@ public class Ui {
         System.out.println(wrap("Got it. I've added this task:\n" +
                 "\t\t" + task.toString() + "\n" +
                 "\t" + "Now you have " + taskCount + " tasks in the list."));
+    }
+
+    public void matchingTasksMsg(ArrayList<Task> tasks) {
+        if (tasks.isEmpty()) {
+            System.out.println(wrap("There are no matching tasks in your list."));
+        } else {
+            String text = "Here are the matching tasks in your list:\n";
+            for (int i = 0; i < tasks.size(); i++) {
+                text += "\n\t" + tasks.get(i).toString();
+            }
+            System.out.println(wrap(text));
+        }
     }
 
     public void invalidInput(InvalidInputException e) {

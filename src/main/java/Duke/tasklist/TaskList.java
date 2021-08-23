@@ -102,4 +102,14 @@ public class TaskList {
     public int getSize() {
         return this.taskList.size();
     }
+
+    public ArrayList<Task> matchingTasks(String keyword) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).getDetails().contains(keyword)) {
+                tasks.add(taskList.get(i));
+            }
+        }
+        return tasks;
+    }
 }

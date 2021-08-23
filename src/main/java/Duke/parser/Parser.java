@@ -186,6 +186,9 @@ public class Parser {
                             "Date and time format is incorrect. Correct format: YYYY-MM-DD (24hr time).");
                 }
             }
+        case "find":
+            data.put("keyword", input);
+            break;
         default:
             throw new InvalidInstructionException(cmd);
         }
