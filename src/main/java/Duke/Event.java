@@ -23,12 +23,12 @@ public class Event extends Task {
         } catch (DateTimeParseException e) {
             throw new DukeException("", DukeException.TYPE.INVALID_FORMAT);
         }
-        date1 = Utils.convert(this.date);
+        date1 = Parser.convert(this.date);
     }
 
     @Override
     public String save() {
-        return this.toString().replaceAll(date1, Utils.reverse(date1));
+        return this.toString().replaceAll(date1, Parser.reverse(date1));
     }
 
     @Override
