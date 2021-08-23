@@ -146,4 +146,20 @@ public class TaskList {
     public int getSize() {
         return taskList.size();
     }
+
+    /**
+     * Returns the tasks that match the given keyword.
+     *
+     * @param keyword The keyword to match the tasks.
+     * @return A list of tasks that match the given keyword.
+     */
+    public ArrayList<Task> matchingTasks(String keyword) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).getDetails().contains(keyword)) {
+                tasks.add(taskList.get(i));
+            }
+        }
+        return tasks;
+    }
 }

@@ -82,7 +82,9 @@ public class Duke {
                     String month = task.getDate().getMonthValue() < 10
                             ? "0" + task.getDate().getMonthValue()
                             : "" + task.getDate().getMonthValue();
-                    String day = "" + task.getDate().getDayOfMonth();
+                    String day = task.getDate().getDayOfMonth() < 10
+                            ? "0" + task.getDate().getDayOfMonth()
+                            : "" + task.getDate().getDayOfMonth();
                     dateStr = year + '-' + month + '-' + day;
                 }
 
@@ -186,6 +188,10 @@ public class Duke {
                         ui.reply("These tasks are due/happening:\n"
                                 + list);
                     }
+                    break;
+                case "find":
+                    ArrayList<Task> matchingTasks = taskList.matchingTasks((String) input.get("keyword"));
+                    this.ui.matchingTasksMsg(matchingTasks);
                     break;
                 }
             } catch (IllegalStateException | NoSuchElementException e) {
