@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Description:
  * DukeException class stores a variety of error messages that will be printed accordingly based on the
@@ -5,7 +7,6 @@
  *
  * @author Leong Hong Fai
  */
-
 public class DukeException extends RuntimeException {
     private final String INVALIDTODO = "Enter a valid todo in this format 'todo <task here>'";
     private final String NOTASKSEXCEPTION = "There are no tasks in the list yet!";

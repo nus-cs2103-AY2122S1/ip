@@ -1,18 +1,16 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+package duke;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
  * Description:
@@ -50,7 +48,6 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
-
     }
 
     public void run() {
@@ -166,13 +163,16 @@ public class Duke {
      * @throws DukeException upon incorrect command format.
      */
     public void markCompleted(String command, boolean printOutput) throws DukeException {
-        String restOfCommand = command.substring(5);
         boolean numeric;
+        String restOfCommand ="";
         try {
+            restOfCommand = command.substring(5);
             int temp = Integer.parseInt(restOfCommand);
             numeric = true;
         } catch (NumberFormatException err) {
             numeric = false;
+        } catch (StringIndexOutOfBoundsException err) {
+            throw new DukeException("invalidNumberFormat");
         }
         if (numeric) {
             int taskNum = Integer.parseInt(restOfCommand) - 1;

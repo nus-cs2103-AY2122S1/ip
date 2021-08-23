@@ -1,10 +1,11 @@
+package duke.task;
+
 /**
  * Description:
  * Simple parent class to Event, ToDo, and Deadline.
  *
  * @author Leong Hong Fai
  */
-
 public abstract class Task {
     private String name;
     private boolean completion;
