@@ -1,17 +1,21 @@
 package duke.command;
 
 import duke.DukeList;
+import duke.UserInterface;
 import duke.exception.InvalidArgumentException;
+import duke.task.Task;
 
 /**
  * Represents a command for which marks a task in the main dukelist as
  * completed.
  */
 public class DoneCommand implements Command {
-    private DukeList duke;
+    private final DukeList dukeList;
+    private final UserInterface ui;
 
-    public DoneCommand(DukeList duke) {
-        this.duke = duke;
+    public DoneCommand(DukeList dukeList, UserInterface ui) {
+        this.dukeList = dukeList;
+        this.ui = ui;
     }
 
     @Override
@@ -22,7 +26,8 @@ public class DoneCommand implements Command {
         } catch (NumberFormatException exception) {
             throw new InvalidArgumentException("Invalid Input! Please enter an integer...");
         }
-        this.duke.markCompleted(i).print();
+        Task task = this.dukeList.markCompleted(i);
+        this.ui.showMessage("Nice! I've marked this task as done:\n" + task);
     }
 
     @Override

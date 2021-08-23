@@ -19,10 +19,12 @@ import duke.exception.DukeException;
 public class Duke {
     private final DukeList list;
     private final CommandManager commandManager;
+    private final UserInterface ui;
 
     private Duke() {
         this.list = new DukeList();
         this.commandManager = new CommandManager();
+        this.ui = new UserInterface();
     }
 
     public static void main(String[] args) {
@@ -30,16 +32,13 @@ public class Duke {
     }
 
     private void run() {
-        String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-        String greetings = "Hello from\n" + logo + "\nWhat can I do for you?";
-        new Response(greetings).print();
+        this.ui.greet();
 
         // Duke commands work with a registry so that add-ons can be developed with
         // commands simply registered like so
-        this.commandManager.registerCommands(new ListCommand(this.list), new DoneCommand(this.list),
-                new ToDoCommand(this.list), new EventCommand(this.list), new DeadlineCommand(this.list),
-                new DeleteCommand(this.list));
+        this.commandManager.registerCommands(new ListCommand(this.list, this.ui), new DoneCommand(this.list, this.ui),
+                new ToDoCommand(this.list, this.ui), new EventCommand(this.list, this.ui),
+                new DeadlineCommand(this.list, this.ui), new DeleteCommand(this.list, this.ui));
 
         echoInput(new BufferedReader(new InputStreamReader(System.in)));
     }
@@ -58,15 +57,14 @@ public class Duke {
             try {
                 this.commandManager.processAndExecuteInput(input);
             } catch (DukeException ex) {
-                ex.getResponse().print();
+                this.ui.showError(ex);
             }
-
             echoInput(reader);
         }
     }
 
     private void terminate() {
-        new Response("Bye. Hope to see you again soon!").print();
+        this.ui.farewell();
     }
 
 }
