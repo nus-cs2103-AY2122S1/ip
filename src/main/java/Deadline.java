@@ -6,6 +6,11 @@ class Deadline extends Task {
     }
 
     @Override
+    public String encoding() {
+        return "E|" + super.encoding() + "|" + by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }

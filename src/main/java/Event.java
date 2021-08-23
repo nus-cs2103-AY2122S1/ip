@@ -6,6 +6,11 @@ class Event extends Task {
     }
 
     @Override
+    public String encoding() {
+        return "E|" + super.encoding() + "|" + at;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }

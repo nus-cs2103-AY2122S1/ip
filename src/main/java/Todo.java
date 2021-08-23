@@ -4,6 +4,11 @@ class Todo extends Task {
     }
 
     @Override
+    public String encoding() {
+        return "T|" + super.encoding();
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

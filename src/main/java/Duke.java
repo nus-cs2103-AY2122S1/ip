@@ -1,13 +1,23 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.ArrayList;
 
 public class Duke {
+    static String filePath = "data/duke.txt";
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> lst = new ArrayList<>();
 
-        System.out.println(greet());
+        try {
+            initialize(lst);
+        } catch(FileNotFoundException ffe) {
+            System.out.println("Record not found in " + filePath);
+            System.exit(0);
+        }
         String input = sc.nextLine();
         while(!input.equals("bye")) {
             if (input.equals("list")) {
@@ -24,16 +34,34 @@ public class Duke {
             input = sc.nextLine();
         }
 
-        System.out.println(exit());
+        try {
+            exit(lst);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static String greet() {
+    public static void initialize(ArrayList<Task> lst) throws FileNotFoundException {
+        showGreeting();
+        readData(lst);
+    }
+
+    public static void showGreeting() {
         String output = "    ____________________________________________________________\n"
                 + "     Hello! I'm Duke\n"
                 + "     What can I do for you?\n"
                 + "    ____________________________________________________________\n";
 
-        return output;
+        System.out.println(output);
+    }
+
+    public static void readData(ArrayList<Task> lst) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        //temp
+        while (s.hasNext()) {
+            System.out.println(s.nextLine());
+        }
     }
 
     /**
@@ -155,10 +183,25 @@ public class Duke {
      * return the goodbye message
      * @return a string containing the goodbye message
      */
-    public static String exit() {
+    public static void exit(ArrayList<Task> lst) throws IOException {
+        showGoodbye();
+        saveData(lst);
+    }
+
+    public static void showGoodbye() {
         String output = "    ____________________________________________________________\n"
                 + "     Bye. Hope to see you again soon!\n"
                 + "    ____________________________________________________________\n";
-        return output;
+        System.out.println(output);
     }
+
+    public static void saveData(ArrayList<Task> lst) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task t : lst) {
+            fw.write(t.encoding() + "\n");
+        }
+
+        fw.close();
+    }
+
 }
