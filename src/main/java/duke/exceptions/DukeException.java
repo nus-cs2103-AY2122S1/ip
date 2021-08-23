@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 /**
  * Custom DukeException class created to catch exceptions unique to the Duke chat-box.
  */

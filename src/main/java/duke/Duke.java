@@ -1,15 +1,9 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
+package duke;
+
+import duke.ui.Ui;
 
 /**
- * Duke class used to run the Duke chat-bot.
+ * Duke class used to run the duke.Duke chat-bot.
  * Contains methods that
  * (i)    runs the chat-bot
  * (ii)   exits the chat-bot

@@ -1,3 +1,10 @@
+package duke.commands;
+
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+
 import java.util.ArrayList;
 
 public class DoneCommand extends Command {

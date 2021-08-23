@@ -1,3 +1,5 @@
+package duke.tasks;
+
 /**
  * Task class used as Parent class for Deadline, ToDo, and Event.
  * Contains methods that

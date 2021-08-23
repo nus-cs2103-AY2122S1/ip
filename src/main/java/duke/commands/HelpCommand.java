@@ -1,4 +1,6 @@
-import java.util.ArrayList;
+package duke.commands;
+
+import duke.tasks.TaskList;
 
 public class HelpCommand extends Command {
     public HelpCommand() {

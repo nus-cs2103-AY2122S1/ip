@@ -1,3 +1,5 @@
+package duke.tasks;
+
 /**
  * ToDo class used to represent a task that has neither a start nor end date.
  * Contains method that
