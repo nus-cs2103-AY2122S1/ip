@@ -7,9 +7,16 @@ package task;
  */
 public class Deadline extends Task {
 
+    public final static String KEYWORD = "D";
+
     public final static String SPLIT_WORD = "by";
 
     private String by;
+
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = by;
+    }
 
     public Deadline(String description, String by) {
         super(description);
@@ -31,6 +38,11 @@ public class Deadline extends Task {
      */
     public String getFormattedBy() {
         return " (" + SPLIT_WORD  + ": " + by + ")";
+    }
+    
+    @Override
+    public String toSavedString() {
+        return KEYWORD + getSplitTemplate() + super.toSavedString() + getSplitTemplate() + by;
     }
 
     @Override

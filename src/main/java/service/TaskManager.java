@@ -6,8 +6,16 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * TaskManager class.
@@ -34,9 +42,103 @@ public class TaskManager {
     private static final String CREATE_DEADLINE_MESSAGE =
             "Got it. I've added this DEADLINE task:\n\t%s\nNow you have %d task(s) in the list.";
 
+    // Saved task directory.
+    private final String TASK_DIRECTORY_PATH = "data";
+    private final String TASK_FILE_PATH = TASK_DIRECTORY_PATH + "/duke.txt";
+    
     private final static int MAX_STORAGE = 100;
+      
+    private final List<Task> taskList = new ArrayList<>();
+    
+    public void loadTasks() {
+        try {
+            File file = loadAndCreateTaskFile();
+            List<Task> savedTaskList = extractTasksFromFile(file);
+            loadToList(savedTaskList);
+            
+        } catch (Exception exception) {
+            System.out.printf("Unable to generate/read save data file ./%s", TASK_FILE_PATH);
+            System.out.println(exception.getMessage());
+        }
+    }
+    
+    public File loadAndCreateTaskFile() throws DukeException, IOException {
+        File directory = new File(TASK_DIRECTORY_PATH);
+        File file = new File(TASK_FILE_PATH);
+        if (!directory.exists()) {
+            if (!directory.mkdir()) {
+                throw new DukeException(String.format(
+                        "Load/save directory ./%s cannot be created.",
+                        TASK_DIRECTORY_PATH));
+            } else {
+                System.out.printf("Directory ./%s created!\n", TASK_DIRECTORY_PATH);
+            }
+        }
+        if (!file.exists()) {
+            if (!file.createNewFile()) {
+                throw new DukeException(String.format(
+                        "Load/save file ./%s cannot be created.",
+                        TASK_FILE_PATH));
+            } else {
+                System.out.printf("File ./%s created!\n", TASK_FILE_PATH);
+            }
+        }
+        return file;
+    }
+    
+    public List<Task> extractTasksFromFile(File file) throws FileNotFoundException {
+        Scanner scanner = new Scanner(file);
+        List<Task> savedTaskList = new ArrayList<>();
+        
+        while (scanner.hasNext()) {
+            String taskAsString = scanner.nextLine();
+            String splitRegex = " \\" + Task.SPLIT_CHAR + ' '; // split based on regex '|'
+            String[] taskAsArray = taskAsString.split(splitRegex); 
+            boolean isDone = taskAsArray[1].equals("1"); // if not 1, just set to false
 
-    private final List<Task> TASK_LIST = new ArrayList<>();
+            switch (taskAsArray[0]) {
+                case Todo.KEYWORD:
+                    savedTaskList.add(new Todo(taskAsArray[2], isDone));
+                    break;
+                case Event.KEYWORD:
+                    savedTaskList.add(new Event(taskAsArray[2], isDone, taskAsArray[3]));
+                    break;
+                case Deadline.KEYWORD:
+                    savedTaskList.add(new Deadline(taskAsArray[2], isDone, taskAsArray[3]));
+                    break;
+                default:
+                    System.out.printf("'%s' is an invalid entry.\n", taskAsString);
+            }
+        }
+        return savedTaskList;
+    }
+
+    public void loadToList(List<Task> taskList) throws DukeException {
+        if (taskList.size() > MAX_STORAGE) {
+            throw new DukeException(FULL_CAPACITY_ERROR_MESSAGE);
+        }
+        this.taskList.addAll(taskList);
+    }
+    
+    public void saveToFile(Task newTask) throws IOException {
+        FileWriter fileWriter = new FileWriter(TASK_FILE_PATH, true);
+        fileWriter.write('\n' + newTask.toSavedString());
+        fileWriter.close();
+    }
+
+    public void updateToFile(int taskNumber, Task newTask) throws IOException {
+        Path filePath = Paths.get(TASK_FILE_PATH);
+        List<String> taskLines = Files.readAllLines(filePath);
+        taskLines.set(taskNumber - 1, newTask.toSavedString()); // 0-indexing
+        Files.write(filePath, taskLines);
+    }
+
+    public void removeFromFile(int taskNumber) throws IOException {
+        Path filePath = Paths.get(TASK_FILE_PATH);
+        List<String> taskLines = Files.readAllLines(filePath);
+        taskLines.remove(taskNumber - 1); // 0-indexing
+        Files.write(filePath, taskLines);
+    }
 
     /**
      * Gets the current number of tasks stored.
@@ -44,7 +146,7 @@ public class TaskManager {
      * @return number of tasks stored currently
      */
     public int getTaskListSize() {
-        return TASK_LIST.size();
+        return taskList.size();
     }
 
     /**
@@ -55,10 +157,15 @@ public class TaskManager {
      * @throws DukeException if task cannot be saved, due to full capacity of task list
      */
     public Task addTask(Task newTask) throws DukeException {
-        if (TASK_LIST.size() == MAX_STORAGE) {
+        if (taskList.size() == MAX_STORAGE) {
             throw new DukeException(FULL_CAPACITY_ERROR_MESSAGE);
         }
-        TASK_LIST.add(newTask);
+        try {
+            saveToFile(newTask); // save to file before saving to collection
+            taskList.add(newTask);
+        } catch (IOException exception) {
+            throw new DukeException("Unable to save task to memory.");
+        }
         return newTask;
     }
 
@@ -117,7 +224,17 @@ public class TaskManager {
      */
     public String updateTaskAsDone(int taskNumber) throws DukeException {
         Task selectedTask = getTaskFromNumberString(taskNumber);
-        selectedTask.markAsDone();
+        boolean wasDone = selectedTask.isDone();
+        try {
+            selectedTask.markAsDone();
+            updateToFile(taskNumber, selectedTask);
+            
+        } catch (IOException exception) {
+            selectedTask.setDone(wasDone); // set it back to old value if fails
+            throw new DukeException(String.format(
+                    "Unable to update task numbered %d to file.", 
+                    taskNumber));
+        }
         return String.format(TASK_DONE_MESSAGE, selectedTask);
     }
 
@@ -131,7 +248,15 @@ public class TaskManager {
      */
     public String deleteTask(int taskNumber) throws DukeException {
         Task selectedTask = getTaskFromNumberString(taskNumber);
-        TASK_LIST.remove(selectedTask); // remove shifts tasks to the right backwards
+        try {
+            removeFromFile(taskNumber);
+            taskList.remove(selectedTask); // remove shifts tasks to the right backwards
+            
+        } catch (IOException exception) {
+            throw new DukeException(String.format(
+                    "Unable to delete task numbered %d to file.",
+                    taskNumber));
+        }
         return String.format(TASK_DELETED_MESSAGE, selectedTask, getTaskListSize());
     }
 
@@ -143,13 +268,13 @@ public class TaskManager {
      * @throws DukeException if the Task List is empty or the Task number is not valid
      */
     public Task getTaskFromNumberString(int taskNumber) throws DukeException {
-        if (TASK_LIST.isEmpty()) {
+        if (taskList.isEmpty()) {
             throw new DukeException(EMPTY_LIST_ERROR_MESSAGE);
         }
-        if (taskNumber <= 0 || TASK_LIST.size() < taskNumber) {
+        if (taskNumber <= 0 || taskList.size() < taskNumber) {
             throw new DukeException(String.format(INVALID_TASK_ERROR_MESSAGE, taskNumber));
         }
-        return TASK_LIST.get(taskNumber - 1); // shift to 0-indexing
+        return taskList.get(taskNumber - 1); // shift to 0-indexing
     }
 
     /**
@@ -158,12 +283,12 @@ public class TaskManager {
      * @return formatted tasks in String
      */
     public String getTaskList() {
-        if (TASK_LIST.isEmpty()) {
+        if (taskList.isEmpty()) {
             return EMPTY_LIST_MESSAGE;
         }
         StringBuilder tasksAsString = new StringBuilder(TASK_LIST_CONTENTS);
-        for (int idx = 0; idx < TASK_LIST.size(); idx ++) {
-            tasksAsString.append(String.format("\n\t%d. %s", idx + 1, TASK_LIST.get(idx)));
+        for (int idx = 0; idx < taskList.size(); idx ++) {
+            tasksAsString.append(String.format("\n\t%d. %s", idx + 1, taskList.get(idx)));
         }
         return tasksAsString.toString();
     }

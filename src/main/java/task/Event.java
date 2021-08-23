@@ -7,9 +7,16 @@ package task;
  */
 public class Event extends Task {
 
+    public final static String KEYWORD = "E";
+
     public final static String SPLIT_WORD = "at";
 
     private String at;
+
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone);
+        this.at = at;
+    }
 
     public Event(String description, String at) {
         super(description);
@@ -33,6 +40,11 @@ public class Event extends Task {
         return " (" + SPLIT_WORD + ": " + at + ")";
     }
 
+    @Override
+    public String toSavedString() {
+        return KEYWORD + getSplitTemplate() + super.toSavedString() + getSplitTemplate() + at;
+    }
+    
     @Override
     public String toString() {
         return "[E]" + super.toString() + getFormattedAt();
