@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
 
 public class TodoList {
@@ -38,15 +41,23 @@ public class TodoList {
         }
     }
 
-    public void addDeadline(String name, String dateTime) {
-        Deadline deadline = new Deadline(name, dateTime);
-        tasks.add(deadline);
-        PrintResponse.print(
-                String.format("Caan Do!\n" +
-                                "  added: %s\n" +
-                                "Look at me! %d tasks in the list now!",
-                        deadline,
-                        tasks.size()));
+    public void addDeadline(String name, String dateTime) throws DukeException {
+        try {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+            LocalDateTime localDateTime = LocalDateTime.parse(dateTime, dateTimeFormatter);
+
+            Deadline deadline = new Deadline(name, localDateTime);
+            tasks.add(deadline);
+
+            PrintResponse.print(
+                    String.format("Caan Do!\n" +
+                                    "  added: %s\n" +
+                                    "Look at me! %d tasks in the list now!",
+                            deadline,
+                            tasks.size()));
+        } catch (DateTimeParseException e) {
+            throw new DukeException(">:( follow datetime format of dd-mm-yyyy HHmm");
+        }
     }
 
     public void addEvent(String name, String dateTime) {
