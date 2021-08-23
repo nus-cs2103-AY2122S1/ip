@@ -1,4 +1,4 @@
-1: [T][ ] task 1
+1: [T][ ] task
 2: [D][ ] task 2 (by: Apr 2 2021 08:32 PM)
 3: [D][ ] task 3 (by: Apr 5 2022)
 4: [E][ ] task 4 (at: Apr 2 2023 03:34 PM)
