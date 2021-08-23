@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a task that starts at a specific time and ends at a specific time.
  *
@@ -5,14 +8,14 @@
  */
 public class Event extends Task {
     /** Date, start and end time of the event */
-    protected String dateTime;
+    protected LocalDate dateTime;
 
     /**
      * Constructor of a Deadline Task.
      *
-     * @param description
+     * @param description Short description of task.
      */
-    public Event(String description, String dateTime) {
+    public Event(String description, LocalDate dateTime) {
         super(description);
         this.dateTime = dateTime;
     }
@@ -24,6 +27,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.dateTime + ")";
+        return "[E]" + super.toString() + " (at: " + this.dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
     }
 }

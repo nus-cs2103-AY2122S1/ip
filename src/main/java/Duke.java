@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -44,7 +45,8 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                     }
                     String[] deadlineParts = deadlineInput.split(" /by ");
-                    Task deadline = new Deadline(deadlineParts[0], deadlineParts[1]);
+                    LocalDate by = LocalDate.parse(deadlineParts[1]);
+                    Task deadline = new Deadline(deadlineParts[0], by);
                     addTask(tasks, deadline);
                     break;
                 case "event":
@@ -53,7 +55,8 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
                     }
                     String[] eventParts = eventInput.split(" /at ");
-                    Task event = new Event(eventParts[0], eventParts[1]);
+                    LocalDate dateTime = LocalDate.parse(eventParts[1]);
+                    Task event = new Event(eventParts[0], dateTime);
                     addTask(tasks, event);
                     break;
                 case "list":
@@ -89,7 +92,9 @@ public class Duke {
                 default:
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means (X_X)" +
                             "\nPlease enter one of the following commands:\n todo <task>" +
-                            "\n deadline <task> /by <deadline>\n event <event> /at <date time>\n list\n bye(to quit)");
+                            "\n deadline <task> /by <deadline(in yyyy-mm-dd format)>" +
+                            "\n event <event> /at <date(in yyyy-mm-dd format)>" +
+                            "\n list\n bye(to quit)");
                     break;
                 }
             } catch (DukeException e) {
