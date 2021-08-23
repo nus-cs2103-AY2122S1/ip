@@ -248,7 +248,6 @@ public class Duke {
                 + "   -------------------------------------------- \n";
     }
 
-
     public String getFirstWord(String input) {
         String[] arr = input.split(" ", 2);
         return arr[0];
