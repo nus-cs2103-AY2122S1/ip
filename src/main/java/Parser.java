@@ -16,7 +16,7 @@ class Parser {
                 return new String[] {command, Integer.toString(index)};
             } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
                 checkDescExist();
-                return new String[] {command, input};
+                return new String[] {command, getDesc(input)};
             } else {
                 throw new InvalidInputException();
             }
@@ -45,6 +45,10 @@ class Parser {
                             " tasks."
             );
         }
+    }
+
+    private String getDesc(String input) {
+        return input.split(" ", 2)[1];
     }
 
     private void checkDescExist()
