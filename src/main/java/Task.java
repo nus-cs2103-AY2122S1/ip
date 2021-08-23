@@ -22,4 +22,16 @@ public class Task {
             return "[ ] " + this.getString();
         }
     }
+
+    public String toStringConvert(){
+        if(this.isDone){
+            return "[X] " + this.getString();
+        } else {
+            return "[ ] " + this.getString();
+        }
+    }
+
+    public boolean isCompleted(){
+        return this.isDone;
+    }
 }
