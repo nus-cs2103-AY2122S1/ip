@@ -131,6 +131,11 @@ public class Duke {
     }
 
     public static void writeToFile(ArrayList<Task> lst) throws IOException {
+
+        File directory = new java.io.File(System.getProperty("user.dir") + "/data");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
         PrintWriter out = new PrintWriter("data/tasks.txt");
 
         for (int i = 0; i < tasks.size(); i++) {
