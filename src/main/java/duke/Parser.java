@@ -65,7 +65,7 @@ public class Parser {
      * @param date Date in the format yyyy-mm-dd.
      * @throws InvalidDateTimeException If the date or its format is invalid.
      */
-    public void validateDateTime(String date) throws InvalidDateTimeException {
+    private void validateDateTime(String date) throws InvalidDateTimeException {
         try {
             LocalDate.parse(date);
         } catch (DateTimeParseException e) {
@@ -79,7 +79,8 @@ public class Parser {
      * @param date A date as a string.
      * @return LocalDate.
      */
-    public LocalDate stringToLocalDate(String date) {
+    public LocalDate stringToLocalDate(String date) throws InvalidDateTimeException {
+        validateDateTime(date);
         String[] dateInfo = date.split("-");
         String year = dateInfo[0];
         String month = dateInfo[1];

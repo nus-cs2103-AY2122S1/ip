@@ -93,7 +93,6 @@ public class TaskList {
             String[] lst = task.split(" /by ");
             String description = lst[0];
             String ddl = lst[1];
-            parser.validateDateTime(ddl);
             LocalDate date = parser.stringToLocalDate(ddl);
             return new DeadLine(description, date, false);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -118,7 +117,6 @@ public class TaskList {
             String[] lst = task.split(" /at ");
             String description = lst[0];
             String period = lst[1];
-            parser.validateDateTime(period);
             LocalDate date = parser.stringToLocalDate(period);
             return new Event(description, date, false);
         } catch (ArrayIndexOutOfBoundsException e) {
