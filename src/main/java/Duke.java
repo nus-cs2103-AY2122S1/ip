@@ -2,8 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -49,14 +47,13 @@ public class Duke {
 
         //User input.
         Scanner sc = new Scanner(System.in);
-<<<<<<< HEAD
-        boolean isExit = true;
+        boolean isContinue = true;
 
         //Continue the loop until user says bye.
-        while (isExit) {
+        while (isContinue) {
             response = sc.nextLine();
             len = response.length();
-            isExit = echo();
+            isContinue = echo();
         }
     }
 
@@ -183,15 +180,6 @@ public class Duke {
             writeToFile(dataFile, content);
         } catch (IOException e) {
             System.out.println("Delete failed.");
-=======
-        boolean isContinue = true;
-
-        //Continue the loop until user says bye.
-        while (isContinue) {
-            response = sc.nextLine();
-            len = response.length();
-            isContinue = echo();
->>>>>>> branch-Level-8
         }
     }
 
@@ -277,15 +265,10 @@ public class Duke {
         //check with the special response "to-do X", where X is what to do.
         Todo todo = new Todo(response.substring(5, len));
         TASK_LIST.add(todo);
-<<<<<<< HEAD
         String todoString = todo.toString();
         store(todoString);
         count++;
         System.out.println(getPattern(getOutputFrame(todoString)));
-=======
-        count++;
-        System.out.println(getPattern(getOutputFrame(todo.toString())));
->>>>>>> branch-Level-8
         return true;
     }
 
@@ -302,15 +285,10 @@ public class Duke {
         String time = parts[1];
         Deadline deadline = new Deadline(content, time);
         TASK_LIST.add(deadline);
-<<<<<<< HEAD
         String deadlineString = deadline.toString();
         store(deadlineString);
         count++;
         System.out.println(getPattern(getOutputFrame(deadlineString)));
-=======
-        count++;
-        System.out.println(getPattern(getOutputFrame(deadline.toString())));
->>>>>>> branch-Level-8
         return true;
     }
 
@@ -327,15 +305,10 @@ public class Duke {
         String time = parts[1];
         Event event = new Event(content, time);
         TASK_LIST.add(event);
-<<<<<<< HEAD
         String eventString = event.toString();
         store(eventString);
         count++;
         System.out.println(getPattern(getOutputFrame(eventString)));
-=======
-        count++;
-        System.out.println(getPattern(getOutputFrame(event.toString())));
->>>>>>> branch-Level-8
         return true;
     }
 
