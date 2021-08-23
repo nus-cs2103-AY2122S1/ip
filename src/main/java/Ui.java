@@ -9,17 +9,17 @@ public class Ui {
 
     private static final String divider = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
-    private void showLine() {
+    public void showLine() {
         System.out.println("\t" + Ui.divider);
     }
 
-    private void showLoadingERROR() {
+    public void showLoadingERROR() {
         this.showLine();
         System.out.println("\t☹ OOPS!!! File loading failed :-(");
         this.showLine();
     }
 
-    private void showWelcome() {
+    public void showWelcome() {
         this.showLine();
         System.out.println("\tWelcome to");
         System.out.println(Ui.logo);
@@ -27,14 +27,14 @@ public class Ui {
         this.showLine();
     }
 
-    private String readCommand() {
+    public String readCommand() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         scanner.close();
         return input;
     }
 
-    private void showError(String errorMessage) {
+    public void showError(String errorMessage) {
         this.showLine();
         System.out.println("\tSomething went wrong: " + errorMessage);
         this.showLine();
