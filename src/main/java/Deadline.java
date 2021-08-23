@@ -13,6 +13,11 @@ public class Deadline extends Task{
         }
     }
 
+    public Deadline(String[] input) {
+        super(input[2].substring(0, input[1].length() - 1), input[1].equals("T") ? true : false);
+        this.deadline = input[3];
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by:" + this.deadline + ")";

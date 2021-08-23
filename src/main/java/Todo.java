@@ -7,6 +7,10 @@ public class Todo extends Task {
         }
     }
 
+    public Todo(String[] input) {
+        super(input[2], input[1].equals("T") ? true : false );
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
