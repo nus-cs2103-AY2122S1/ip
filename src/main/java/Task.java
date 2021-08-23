@@ -1,6 +1,6 @@
-public class Task {
+public abstract class Task {
     private String description;
-    private boolean status;
+    private boolean isDone;
 
     /**
      * Constructor
@@ -8,7 +8,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.status = false;
+        this.isDone = false;
     }
 
     /**
@@ -16,13 +16,37 @@ public class Task {
      * @return String that hows the correct icon.
      */
     public String getStatusIcon() {
-        if (!status) {
+        if (!isDone) {
             return "[ ] ";
         } else {
             return "[X] ";
         }
     }
 
+    /**
+     * Return the status of whether the Task is done.
+     * @return Boolean indicating if Task is done.
+     */
+    public Boolean getIsDone() {
+        return this.isDone;
+    }
+
+    /**
+     * Allows the marking of Tasks as done.
+     */
+    public void markDone() {
+        this.isDone = true;
+    }
+
+    /**
+     * Return the description of the Task.
+     * @return String of the Task description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    public abstract String toTxt();
 
     @Override
     public String toString() {

@@ -1,5 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -11,8 +12,8 @@ import java.util.Scanner;
 public class Duke {
     public Duke() {}
 
-    private static int listCount = 0;
-    private static ArrayList<Task> dukeList = new ArrayList<>();
+    private static final Scanner sc = new Scanner(System.in);
+    private static final ToDoList dukeList = new ToDoList(Data.loadData());
     private static String addedText = "Got it. I've added this task:\n";
 
     /**
@@ -24,55 +25,21 @@ public class Duke {
     }
 
     /**
+     * Interpret what the user has entered as an input and categorises it into a Command.
+     * @param input User's input
+     * @return The correct command that is interpreted from the user input.
+     */
+    public static Command inputToCommand(String input) {
+        String[] inputs = input.split(" ", 2);
+        return Command.readInput(inputs[0]);
+    }
+
+    /**
      * Handles the exiting or halting of Duke when the user has given the appropriate input.
      */
     public void exit() {
         String exitText = "Bye. Hope to see you again soon!";
         System.out.println(exitText);
-    }
-
-    /**
-     * Shows all Tasks in the list that the user has given to Duke to store.
-     * Tasks are ordered from least recent to most recent. If no tasks have been given to Duke,
-     * the appropriate message is shown.
-     */
-    public void showList() {
-        String showListText = "Here are the tasks in your list:";
-        String emptyListText = "☹ Oops! Looks like you have no tasks in your list!";
-        for (int i = 0; i < dukeList.size(); i++) {
-            showListText += "\n" + (i + 1) + "." + dukeList.get(i).toString();
-        }
-        if (dukeList.isEmpty()) {
-            System.out.println(emptyListText);
-        } else {
-            System.out.println(showListText);
-        }
-    }
-
-    /**
-     * Updates the marking of a certain Task as 'done'.
-     * @param input The entire String that the user has input i.e. "done 2".
-     * @throws DukeException If an incorrect input is entered.
-     */
-    public void markDone(String input) throws DukeException{
-        int itemNumber;
-        if (input.split(" ", 2).length == 1) {
-            throw new DukeException("☹ Oops! Looks like you are missing the task number you wish to mark as done! Try again :-)");
-        }
-        String numberInput = input.split(" ", 2)[1];
-        try {
-            itemNumber = Integer.parseInt(numberInput);
-        } catch (NumberFormatException e) {
-            throw new DukeException("☹ You may have entered something incorrectly. Try adding a number behind 'done'!");
-        }
-        String message = "☹ Oops! I cannot seem to find that task number. Try again!";
-        if (dukeList.isEmpty()) {
-            message = "☹ Oops! Your list is empty! Try adding a Task first!";
-        } else if (itemNumber <= dukeList.size()){
-            Task targetItem = dukeList.get(itemNumber - 1);
-            message = "Nice! I've marked this task as done:\n" + " " + targetItem.toString();
-        }
-        System.out.println(message);
     }
 
     /**
@@ -95,8 +62,8 @@ public class Duke {
         }
         Deadline newDL = new Deadline(description[0], description[1]);
         dukeList.add(newDL);
-        listCount++;
-        System.out.println(addedText + newDL.toString() + "\nNow you have " + listCount + " tasks in the list");
+        Data.writeToFile(newDL);
+        System.out.println(addedText + newDL.toString() + "\nNow you have " + ToDoList.numberOfTasks() + " tasks in the list");
     }
 
     /**
@@ -119,8 +86,8 @@ public class Duke {
         }
         Event newEV = new Event(description[0], description[1]);
         dukeList.add(newEV);
-        listCount++;
-        System.out.println(addedText + newEV.toString() + "\nNow you have " + listCount + " tasks in the list");
+        Data.writeToFile(newEV);
+        System.out.println(addedText + newEV.toString() + "\nNow you have " + ToDoList.numberOfTasks() + " tasks in the list");
     }
 
     /**
@@ -137,33 +104,24 @@ public class Duke {
         String[] information = input.split(" ", 2);
         Todo newTD = new Todo(information[1]);
         dukeList.add(newTD);
-        listCount++;
-        System.out.println(addedText + newTD.toString() + "\nNow you have " + listCount + " tasks in the list");
+        Data.writeToFile(newTD);
+        System.out.println(addedText + newTD.toString() + "\nNow you have " + ToDoList.numberOfTasks() + " tasks in the list");
     }
 
     /**
-     * Deletes a specific task that Duke has stored.
-     * @param input The entire String that the user has input i.e. "delete 2".
-     * @throws DukeException If an incorrect input is entered.
+     * Method that saves Tasks in the hard disk whenever called.
      */
-    public void delete(String input) throws DukeException{
-        int itemNumber;
-        if (input.split(" ", 2).length == 1) {
-            throw new DukeException("☹ Oops! Looks like you are missing the number of the task you wish to delete! Try again :-)");
-        }
-        String numberInput = input.split(" ", 2)[1];
+    public void save() {
         try {
-            itemNumber = Integer.parseInt(numberInput);
-        } catch (NumberFormatException e) {
-            throw new DukeException("You may have entered something incorrectly. Try adding a number behind 'delete'!");
+            FileWriter data = new FileWriter("./data/data.txt");
+            for (Task task : ToDoList.getDukeList()) {
+                data.write(task.toString() + "\n");
+            }
+            data.close();
+            System.out.print("Tasks have been saved");
+        } catch (IOException e) {
+            System.out.println("☹ Oops! An error occurred when saving the data.");
         }
-        String message = "☹ Oops! You may have incorrectly entered a number. Try again!";
-        if (itemNumber > dukeList.size()) {
-            throw new DukeException("☹ Oops! Looks like you are trying to delete something that is not in your list! Try again!");
-        }
-        Task removed = dukeList.remove(itemNumber - 1);
-        System.out.println("Noted. I've removed this task:\n" + removed.toString() + "\nNow you have " + dukeList.size()
-                                + " tasks in the list");
     }
 
     /**
@@ -172,49 +130,50 @@ public class Duke {
     public void start() {
         boolean loopStatus = true;
         greet();
-        Scanner scanner = new Scanner(System.in);
+        String input = sc.nextLine();
+        Command command = inputToCommand(input);
         while (loopStatus) {
-            String input = scanner.nextLine().toLowerCase();
-            String firstWord = input.split(" ", 2)[0];
-            switch (firstWord) {
-                case "bye":
+            switch (command) {
+                case BYE:
                     loopStatus = false;
                     exit();
                     break;
-                case "list":
-                    showList();
+                case LIST:
+                    ToDoList.showList();
                     break;
-                case "deadline":
+                case DEADLINE:
                     try {
                         addDeadline(input);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case "delete":
+                case DELETE:
                     try {
-                        delete(input);
+                        ToDoList.delete(input);
+                        ToDoList.update();
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case "event":
+                case EVENT:
                     try {
                         addEvent(input);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case "todo":
+                case TODO:
                     try {
                         addTodo(input);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case "done":
+                case DONE:
                     try {
-                        markDone(input);
+                        ToDoList.markDone(input);
+                        ToDoList.update();
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
@@ -222,6 +181,10 @@ public class Duke {
                 default:
                     //If no cases above are entered, Duke will not understand the command and prompt the user.
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+            if (loopStatus) {
+                input = sc.nextLine();
+                command = inputToCommand(input);
             }
         }
     }

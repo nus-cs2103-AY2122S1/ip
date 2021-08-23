@@ -8,6 +8,15 @@ public class Todo extends Task {
         super(description);
     }
 
+    /**
+     * Converts the given Todo into an appropriate format for txt file.
+     * @return a String of the Todo for input into a txt file.
+     */
+    @Override
+    public String toTxt() {
+        return String.format("T | %d | %s", super.getIsDone() ? 1 : 0, super.getDescription() + System.lineSeparator());
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
