@@ -1,8 +1,9 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Scanner;
 import java.lang.StringBuilder;
 
@@ -43,7 +44,7 @@ public class Kermit {
 
         if (task instanceof DateDependentTask) {
             DateDependentTask dateTask = (DateDependentTask) task;
-            String.join(delimiter, formattedString, dateTask.getDate();
+            String.join(delimiter, formattedString, dateTask.getDate());
         }
         return formattedString;
     }
@@ -65,6 +66,14 @@ public class Kermit {
             File f = new File(PATH);
             f.createNewFile();
         } catch (IOException e) {
+            System.err.println(e.getMessage());
+            return;
+        }
+
+        // Init writer to save Kermit data
+        try {
+            PrintWriter printWriter = new PrintWriter(PATH);
+        } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
         }
 
