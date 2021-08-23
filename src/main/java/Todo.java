@@ -13,6 +13,18 @@ public class Todo extends Task {
     }
 
     /**
+     * Returns formatted string to write to the duke.txt file.
+     *
+     * @return String to write to duke.txt
+     */
+    @Override
+    public String toWrite() {
+        String done = this.isDone ? "1" : "0";
+        return String.format("T | %s | %s", done, this.getDescription());
+    }
+
+
+    /**
      * Returns the string representation of the Todo.
      *
      * @return String representation of Todo.

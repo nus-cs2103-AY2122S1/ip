@@ -34,11 +34,21 @@ public class Task {
         return description;
     }
 
+
     /**
      * Updates the isDone boolean of the task to true.
      */
     public void markDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Returns formatted string to write to the duke.txt file.
+     *
+     * @return String to write to duke.txt
+     */
+    public String toWrite() {
+        return String.format("[ ] | %s", this.getDescription());
     }
 
     /**

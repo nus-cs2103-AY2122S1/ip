@@ -1,5 +1,12 @@
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileWriter;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+
 public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<Task>();
 
@@ -120,19 +127,62 @@ public class Duke {
         }
     }
 
+    public static void loadFile() throws FileNotFoundException, DukeException {
+        File file = new File("src/main/data/duketest.txt");
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            String[] data = scanner.nextLine().split("\\|");
+            String taskType = data[0].trim();
+            String statusIcon = data[1].trim();
+            String description = data[2].trim();
+            if (taskType.equalsIgnoreCase("T")) {
+                Todo todo = new Todo(description.trim());
+                if (statusIcon.equals("1")) {
+                    todo.markDone();
+                }
+                taskList.add(todo);
+            } else if (taskType.equalsIgnoreCase("D")) {
+                String by = data[3].trim();
+                Deadline deadline = new Deadline(description, by);
+                if (statusIcon.equals("1")) {
+                    deadline.markDone();
+                }
+                taskList.add(deadline);
+            } else if (taskType.equalsIgnoreCase("E")) {
+                String at = data[3].trim();
+                Event event = new Event(description, at);
+                if (statusIcon.equals("1")) {
+                    event.markDone();
+                }
+                taskList.add(event);
+            } else {
+                throw new DukeException("Uh oh there's something wrong with the file.");
+            }
+        }
+    }
+
+    public static void writeFile() throws IOException {
+        FileWriter fw = new FileWriter("src/main/data/duke.txt");
+        for (int i = 0; i<taskList.size(); i++) {
+            String taskToWrite = taskList.get(i).toWrite();
+            fw.write(taskToWrite + "\n");
+        }
+        fw.close();
+    }
+
     /**
      * Handles the input commands of the user and calls the appropriate method.
      *
      * @throws DukeException If input command is not recognized.
      */
-    public static void handleInput() {
-        Scanner scanner = new Scanner(System.in);
+    public static void handleInput(Scanner scanner) {
         String input;
         do{
                 input = scanner.nextLine();
             try{
                 if (input.equalsIgnoreCase("BYE")) {
                     System.out.println("Bai bai!");
+                    writeFile();
                 } else if (input.equalsIgnoreCase("LIST")) {
                     printTasks();
                 } else if (input.toUpperCase().startsWith("DONE")) {
@@ -148,13 +198,12 @@ public class Duke {
                 } else {
                     throw new DukeException("Sorry, I don't understand. :O");
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.out.println(e.getMessage());;
             }
         }
         while (!input.equalsIgnoreCase("BYE"));
     }
-
 
     /**
      * This is the main method.
@@ -168,18 +217,26 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n\n";
         String greeting = "Hello! I'm Duke.\n" + "What can I do for you? :)";
-        String usage = "Usage:\n" +
-                "list                                   - show current tasks\n" +
-                "todo [Description]                     - add todo\n" +
-                "deadline [Description] /by [Date/Time] - add deadline\n" +
-                "event [Description] /at [Date/Time]    - add event\n" +
-                "done [Task Number]                     - mark task as done\n" +
-                "bye                                    - say goodbye\n";
-        System.out.println(logo + greeting);
-        System.out.println(usage);
-
-
-        handleInput();
+        String usage = "Usage:\n"
+                + "list                                   - show current tasks\n"
+                + "todo [Description]                     - add todo\n"
+                + "deadline [Description] /by [Date/Time] - add deadline\n"
+                + "event [Description] /at [Date/Time]    - add event\n"
+                + "done [Task Number]                     - mark task as done\n"
+                + "bye                                    - say goodbye\n";
+        System.out.println(logo + greeting + "\n"
+                + usage + "\n");
+        try {
+            loadFile();
+            Scanner scanner = new Scanner(System.in);
+            handleInput(scanner);
+        } catch (FileNotFoundException e) {
+            System.out.println("(duke.txt) cannot be found.");
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
     }
 

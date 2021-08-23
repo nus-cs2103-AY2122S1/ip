@@ -17,6 +17,17 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns formatted string to write to the duke.txt file.
+     *
+     * @return String to write to duke.txt
+     */
+    @Override
+    public String toWrite() {
+        String done = this.isDone ? "1" : "0";
+        return String.format("D | %s | %s | %s", done, this.getDescription(), this.by);
+    }
+
+    /**
      * Returns the string representation of the Deadline.
      *
      * @return String representation of Deadline.
