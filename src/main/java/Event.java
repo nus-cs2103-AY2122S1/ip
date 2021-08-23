@@ -7,6 +7,11 @@ public class Event extends Task {
         this.time = input.substring(input.indexOf("/at ") + 4);
     }
 
+    public Event(String name, String time) {
+        super(name);
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + time + ")";
