@@ -45,22 +45,38 @@ public class Parser {
             break;
 
         case ("todo"):
-            toAdd = Todo.fromCmd(cmd_args);
+            if (cmd_args.length != 2 ){
+                throw new DukeException(Todo.USAGE_TEXT);
+            }
+            toAdd = new Todo(cmd_args[1]);
             ui.display(taskList.addTask(toAdd));
             break;
 
         case ("deadline"):
-            toAdd = Deadline.fromCmd(cmd_args);
+            if (cmd_args.length != 2 ){
+                throw new DukeException (Deadline.USAGE_TEXT);
+            }
+            String[] name_by = cmd_args[1].split("/by",2);
+            if (name_by.length != 2){
+                throw new DukeException (Deadline.USAGE_TEXT);
+            }
+            toAdd = new Deadline(name_by[0],name_by[1]);
             ui.display(taskList.addTask(toAdd));
             break;
 
         case ("event"):
-            toAdd = Event.fromCmd(cmd_args);
+            if (cmd_args.length != 2 ){
+                throw new DukeException (Event.USAGE_TEXT);
+            }
+            String[] name_at = cmd_args[1].split("/at",2);
+            if (name_at.length != 2){
+                throw new DukeException (Event.USAGE_TEXT);
+            }
+            toAdd = new Event(name_at[0],name_at[1]);
             ui.display(taskList.addTask(toAdd));
             break;
 
         default:
-            // unrecognised command
             throw new DukeException("Unrecognised command");
         }
     }

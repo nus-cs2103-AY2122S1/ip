@@ -3,19 +3,12 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
 public class Deadline extends Task{
+    public static final String USAGE_TEXT = "Usage: deadline <task name> /by <deadline> ";
+
     String by;
     LocalDate byDate;
 
-    public static Deadline fromCmd(String[] cmd_args) throws DukeException{
-        if (cmd_args.length != 2 ){
-            throw new DukeException ("Usage: deadline <task name> /by <deadline> ");
-        }
-        String[] name_by = cmd_args[1].split("/by",2);
-        if (name_by.length != 2){
-            throw new DukeException ("Usage: deadline <task name> /by <deadline> ");
-        }
-        return new Deadline(name_by[0],name_by[1]);
-    }
+
 
     /**
      * default constructor for a new task

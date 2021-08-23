@@ -1,16 +1,8 @@
 public class Event extends Task{
+    public static final String USAGE_TEXT = "Usage: event <task name> /at <deadline> ";
     String at;
 
-    public static Event fromCmd(String[] cmd_args) throws DukeException{
-        if (cmd_args.length != 2 ){
-            throw new DukeException ("Usage: event <task name> /at <deadline> ");
-        }
-        String[] name_at = cmd_args[1].split("/at",2);
-        if (name_at.length != 2){
-            throw new DukeException ("Usage: event <task name> /at <deadline> ");
-        }
-        return new Event(name_at[0],name_at[1]);
-    }
+
 
     /**
      * default constructor for a new task
