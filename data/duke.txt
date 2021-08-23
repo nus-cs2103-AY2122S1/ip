@@ -1,0 +1,3 @@
+T,0,read
+E,1,write,Mon
+D,0,read,Sun

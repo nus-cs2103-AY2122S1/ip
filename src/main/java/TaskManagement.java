@@ -15,6 +15,15 @@ public class TaskManagement {
     }
 
     /**
+     * Constructs a TaskManagement instance based on the given task list.
+     *
+     * @param tasks the given task list.
+     */
+    public TaskManagement(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    /**
      * Adds the given task to the list.
      *
      * @param task the given task.

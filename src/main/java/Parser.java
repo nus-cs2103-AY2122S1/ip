@@ -1,0 +1,66 @@
+/**
+ * The Parser class handles all actions from users' input.
+ */
+public class Parser {
+    public static final String SPLITER = ",";
+
+    /**
+     * The Action enum enumerates all possible actions
+     */
+    public enum Action {
+        BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, UNKNOWN
+    }
+
+    /**
+     * Returns an action based on the given input string.
+     *
+     * @param input the given input string.
+     * @return an action based on the given string.
+     */
+    public static Action getAction(String input) {
+        switch (input) {
+        case "bye":
+            return Action.BYE;
+        case "list":
+            return Action.LIST;
+        case "done":
+            return Action.DONE;
+        case "todo":
+            return Action.TODO;
+        case "deadline":
+            return Action.DEADLINE;
+        case "event":
+            return Action.EVENT;
+        case "delete":
+            return Action.DELETE;
+        default:
+            return Action.UNKNOWN;
+        }
+    }
+
+
+
+    /**
+     * Returns the boolean value based on the input string.
+     *
+     * @param input string 0 or 1.
+     * @return false if the string is 0, returns true otherwise.
+     */
+    public static boolean parseIsDone(String input) {
+        if (input.equals("0")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static Task parseDocument(String input) {
+        String[] array = input.split(SPLITER);
+        switch (array[0]) {
+        case "T": return new Todo(array[2], parseIsDone(array[1]));
+        case "E": return new Event(array[2], parseIsDone(array[1]), array[3]);
+        case "D": return new Deadline(array[2], parseIsDone(array[1]), array[3]);
+        default: throw new DukeException("Error in saved tasks document");
+        }
+    }
+}

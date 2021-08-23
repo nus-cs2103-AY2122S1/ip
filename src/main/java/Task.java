@@ -19,6 +19,17 @@ public class Task {
     }
 
     /**
+     * Constructs a task using the given description and complete state.
+     *
+     * @param description the given description.
+     * @param isDone the given complete state.
+     */
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    /**
      * Returns X when the task is done, space otherwise.
      *
      * @return X when the task is done, space otherwise.
@@ -42,5 +53,15 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+
+    /**
+     * Returns a string representation of the task following .txt format.
+     *
+     * @return a string representation of the task following .txt format.
+     */
+    public String toTxtFormat() {
+        String state = isDone ? "1" : "0";
+        return state + Parser.SPLITER + description;
     }
 }
