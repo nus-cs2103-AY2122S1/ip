@@ -17,4 +17,10 @@ done 14
 delete 3
 list
 delete 34
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
 bye

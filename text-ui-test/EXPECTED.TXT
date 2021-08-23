@@ -1,14 +1,15 @@
-___________________________________________________________
 Greetings! This is Elsa.
-What can I do for you?
+___________________________________________________________
+It seems like there are no items in the saved list.
+Start adding tasks to save your list!
 ___________________________________________________________
 ___________________________________________________________
 There are no tasks to be done! Hooray!
 ___________________________________________________________
 ___________________________________________________________
 Gotcha! The following task has been added:
-        read book
-You now have 1 tasks in your list!
+	read book
+You now have 1 task in your list!
 ___________________________________________________________
 ___________________________________________________________
 You might have missed out on the time.
@@ -16,7 +17,7 @@ Could you please enter it again?
 ___________________________________________________________
 ___________________________________________________________
 Gotcha! The following task has been added:
-        return book
+	return book
 You now have 2 tasks in your list!
 ___________________________________________________________
 ___________________________________________________________
@@ -25,28 +26,28 @@ Could you please enter it again?
 ___________________________________________________________
 ___________________________________________________________
 Gotcha! The following task has been added:
-        project meeting
+	project meeting
 You now have 3 tasks in your list!
 ___________________________________________________________
 ___________________________________________________________
 Gotcha! The following task has been added:
-        join sports club
+	join sports club
 You now have 4 tasks in your list!
 ___________________________________________________________
 ___________________________________________________________
 Gotcha! The following task has been added:
-        borrow book
+	borrow book
 You now have 5 tasks in your list!
 ___________________________________________________________
 ___________________________________________________________
 Great job!
 The following task is marked as done:
-        [T][X] read book
+	[T][X] read book
 ___________________________________________________________
 ___________________________________________________________
 Great job!
 The following task is marked as done:
-        [T][X] join sports club
+	[T][X] join sports club
 ___________________________________________________________
 ___________________________________________________________
 Here is your list of tasks:
@@ -62,12 +63,12 @@ Could you please rephrase that?
 ___________________________________________________________
 ___________________________________________________________
 Gotcha! The following task has been added:
-        return book
+	return book
 You now have 6 tasks in your list!
 ___________________________________________________________
 ___________________________________________________________
 Gotcha! The following task has been added:
-        project meeting
+	project meeting
 You now have 7 tasks in your list!
 ___________________________________________________________
 ___________________________________________________________
@@ -102,6 +103,42 @@ ___________________________________________________________
 ___________________________________________________________
 You might have mistyped the task number.
 Please ensure task number is between 1 and 6.
+___________________________________________________________
+___________________________________________________________
+Done!
+The following task has been removed:
+	[T][X] read book
+You now have 5 tasks left in your list!
+___________________________________________________________
+___________________________________________________________
+Done!
+The following task has been removed:
+	[D][ ] return book (by: June 6th)
+You now have 4 tasks left in your list!
+___________________________________________________________
+___________________________________________________________
+Done!
+The following task has been removed:
+	[T][X] join sports club
+You now have 3 tasks left in your list!
+___________________________________________________________
+___________________________________________________________
+Done!
+The following task has been removed:
+	[T][ ] borrow book
+You now have 2 tasks left in your list!
+___________________________________________________________
+___________________________________________________________
+Done!
+The following task has been removed:
+	[D][ ] return book (by: Sunday)
+You now have 1 task left in your list!
+___________________________________________________________
+___________________________________________________________
+Done!
+The following task has been removed:
+	[E][ ] project meeting (at: Mon 2-4pm)
+You now have 0 tasks left in your list!
 ___________________________________________________________
 ___________________________________________________________
 Goodbye. Hope to see you again soon!

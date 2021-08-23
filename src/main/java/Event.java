@@ -5,7 +5,7 @@ public class Event extends Task {
     // The time of the event.
     protected String time;
 
-    /***
+    /**
      * Constructor to create a event.
      *
      * @param name The name of the event.
@@ -16,7 +16,7 @@ public class Event extends Task {
         this.time = time;
     }
 
-    /***
+    /**
      * Returns the string representation of the event.
      *
      * @return The name of the event.

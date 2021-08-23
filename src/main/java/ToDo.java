@@ -2,7 +2,7 @@
  * This class creates to do instances which can be done any time.
  */
 public class ToDo extends Task {
-    /***
+    /**
      * Constructor to create a task to do.
      *
      * @param name The name of the task to do.
@@ -11,7 +11,7 @@ public class ToDo extends Task {
         super(name);
     }
 
-    /***
+    /**
      * Returns the string representation of the task to do.
      *
      * @return The name of the task to do.
