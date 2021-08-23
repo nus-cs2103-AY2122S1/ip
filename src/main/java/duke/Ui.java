@@ -93,4 +93,22 @@ public class Ui {
             String.format("Now you have %d tasks in the list.", tasks.size())
         });
     }
+
+    /**
+     * Print banner for found tasks.
+     * @param foundTasks List of found tasks.
+     */
+    public static void printFoundTasks(TaskList foundTasks) {
+        printBanner(
+            Stream.concat(
+                Stream.of("Here are the matching tasks in your list:"),
+                IntStream.range(0, foundTasks.size())
+                    .mapToObj(i -> String.format(
+                        "%d. %s",
+                        i + 1,
+                        renderTask(foundTasks.get(i)))
+                    )
+            ).toArray(String[]::new)
+        );
+    }
 }
