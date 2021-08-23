@@ -1,6 +1,3 @@
-D | 0 | return book | June 6th
-E | 0 | project meeting | Aug 6th 2-4pm
-E | 1 | join sports club | Aug 7th
-T | 1 | eat
-T | 0 | eat breakfast
-D | 1 | sleepwalk | 9am
+E | 1 | return book | 2019-10-15 1900
+D | 0 | eat breakfast | 2020-11-11 1400
+D | 1 | sleep | 2015-09-20 2000
