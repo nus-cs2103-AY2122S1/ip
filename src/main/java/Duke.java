@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     public static ArrayList<Task> list = new ArrayList<>();
@@ -7,6 +10,8 @@ public class Duke {
     private static Scanner sc;
 
     public static final String friendGreeting = "(*^_^*) Friend says: \n";
+
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static void main(String[] args) {
         String logo
@@ -31,6 +36,15 @@ public class Duke {
             listString = listString + index + "." + list.get(i).toString() + "\n";
         }
         return listString;
+    }
+
+    public static boolean isValid(String dateStr) {
+        try {
+            LocalDate.parse(dateStr, formatter);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 
     private static void handleInput() {
@@ -93,7 +107,7 @@ public class Duke {
                 else if (message.startsWith("todo ") || message.equals("todo")) {
                     if (message.length() > 5 && !message.substring(5).isBlank()) {
                         String description = message.substring(5).trim();
-                        Task.createTask(description, "", Task.Category.TODO);
+                        Task.createTask(description, "", Task.Category.TODO, false, true);
                     } else {
                         throw new DukeException.DukeNoDescriptionException();
                     }
@@ -104,6 +118,13 @@ public class Duke {
                         String description = message.substring(9, message.indexOf("/by")).trim();
                         if (message.length() > message.indexOf("/by") + 3) {
                             String by = message.substring(message.indexOf("/by") + 4).trim();
+                            LocalDate d1 = null;
+
+                            if (isValid(by)) {
+                                d1 = LocalDate.parse(by);
+                                by = d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                            }
+
                             if (description.isBlank()) {
                                 // blank description
                                 throw new DukeException.DukeNoDescriptionException();
@@ -112,7 +133,11 @@ public class Duke {
                                 throw new DukeException.DukeNoTimeGivenException();
                             } else {
                                 // proper description and by
-                                Task.createTask(description, by, Task.Category.DEADLINE);
+                                if (isValid(by)) {
+                                    Task.createTaskDate(description, d1, Task.Category.DEADLINE, false, true);
+                                } else {
+                                    Task.createTask(description, by, Task.Category.DEADLINE, false, true);
+                                }
                             }
                         } else {
                             throw new DukeException.DukeNoTimeGivenException();
@@ -133,6 +158,12 @@ public class Duke {
                         String description = message.substring(6, message.indexOf("/at")).trim();
                         if (message.length() > message.indexOf("/at") + 3) {
                             String at = message.substring(message.indexOf("/at") + 4).trim();
+                            LocalDate d1 = null;
+
+                            if (isValid(at)) {
+                                d1 = LocalDate.parse(at);
+                                at = d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                            }
                             if (description.isBlank()) {
                                 // blank description
                                 throw new DukeException.DukeNoDescriptionException();
@@ -140,8 +171,12 @@ public class Duke {
                                 // proper description, blank /at
                                 throw new DukeException.DukeNoTimeGivenException();
                             } else {
-                                // proper description and at
-                                Task.createTask(description, at, Task.Category.EVENT);
+                                // proper description and by
+                                if (isValid(at)) {
+                                    Task.createTaskDate(description, d1, Task.Category.EVENT, false, true);
+                                } else {
+                                    Task.createTask(description, at, Task.Category.EVENT, false, true);
+                                }
                             }
                         } else {
                             throw new DukeException.DukeNoTimeGivenException();
