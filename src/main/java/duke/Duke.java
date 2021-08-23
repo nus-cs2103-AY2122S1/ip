@@ -17,7 +17,7 @@ public class Duke {
 
         Hashtable<String, Consumer<String>> ret = new Hashtable<>();
 
-        ret.put("list", (x) -> UI.printTasks(taskBank.getTasks()));
+        ret.put("list", (x) -> Ui.printTasks(taskBank.getTasks()));
         ret.put("event", (x) -> taskBank.addTask(x, Event::create));
         ret.put("deadline", (x) -> taskBank.addTask(x, Deadline::create));
         ret.put("todo", (x) -> taskBank.addTask(x, ToDo::create));
@@ -29,8 +29,8 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        UI.welcomeMessage();
-        UI.printDivider();
+        Ui.welcomeMessage();
+        Ui.printDivider();
 
         Scanner sc=new Scanner(System.in);
 
@@ -38,23 +38,24 @@ public class Duke {
 
         while (true) {
             String input = sc.nextLine();
-            if (input.equals("bye")) break;
+            if (input.equals("bye"))
+                break;
 
             String keyword = input.split(" ", 2)[0];
             if (!commandTable.containsKey(keyword)) {
-                UI.print("Oops, I'm not sure what you mean :o");
+                Ui.print("Oops, I'm not sure what you mean :o");
                 continue;
             }
 
             try {
                 commandTable.get(keyword).accept(input);
             } catch (DukeException e) {
-                UI.print(e.toString());
+                Ui.print(e.toString());
             }
 
-            UI.printDivider();
+            Ui.printDivider();
         }
 
-        UI.goodbyeMessage();
+        Ui.goodbyeMessage();
     }
 }
