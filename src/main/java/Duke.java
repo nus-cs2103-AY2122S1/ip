@@ -142,10 +142,8 @@ public class Duke {
                     System.out.println("Yay! Nothing on your list right now :>");
                 }
 
-                int counter = 0;
-                for (Task task : todoList) {
+                for (int counter = 0; counter < todoList.size(); counter++) {
                     System.out.println((counter + 1) + ". " + todoList.get(counter).toString());
-                    counter++;
                 }
                 System.out.println(linebreak);
 
@@ -154,6 +152,7 @@ public class Duke {
 
                 if (command.toLowerCase().split(" ").length == 1 || Integer.parseInt(command.split(" ")[1]) < 1
                         || Integer.parseInt(command.split(" ")[1]) > todoList.size()) {
+                    sc.close();
                     throw new NotDoneRightException("1", String.valueOf(todoList.size()));
                 }
 
@@ -168,6 +167,7 @@ public class Duke {
 
                 if (command.toLowerCase().split(" ").length == 1 || Integer.parseInt(command.split(" ")[1]) < 1
                         || Integer.parseInt(command.split(" ")[1]) > todoList.size()) {
+                    sc.close();
                     throw new DeletionException("1", String.valueOf(todoList.size()));
                 }
 
@@ -184,7 +184,7 @@ public class Duke {
                 String taskType = command.toLowerCase().split(" ", 2)[0];
 
                 switch (taskType) {
-                    case "todo" -> {
+                    case "todo" : {
                         String[] taskInfo = command.split(" ", 2);
                         if (taskInfo.length == 1) {
                             throw new EmptyDescriptionException("todo");
@@ -196,7 +196,7 @@ public class Duke {
                         break;
 
                     }
-                    case "deadline" -> {
+                    case "deadline" : {
                         String[] taskInfo = command.split(" ", 2);
                         if (taskInfo.length == 1) {
                             throw new EmptyDescriptionException("todo");
@@ -215,7 +215,7 @@ public class Duke {
                         break;
 
                     }
-                    case "event" -> {
+                    case "event" : {
                         String[] taskInfo = command.split(" ", 2);
                         if (taskInfo.length == 1) {
                             throw new EmptyDescriptionException("todo");
@@ -234,7 +234,7 @@ public class Duke {
                         break;
 
                     }
-                    default -> throw new CommandDoesNotExist(command);
+                    default : throw new CommandDoesNotExist(command);
                 }
 
                 pointer++;
