@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -6,6 +9,7 @@ public class Duke {
 
     private static final String divider = "____________________________________________________________";
 
+    private static final DateTimeFormatter dateInputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     /**
      * An enum describing the type of task.
@@ -54,7 +58,7 @@ public class Duke {
          * @return A Task.
          * @throws DukeException The exception thrown when the input to create a task is invalid.
          */
-        public static Task createTask(String[] input) throws DukeException {
+        public static Task createTask(String[] input) throws DukeException, DateTimeParseException {
             if(input.length <= 0) throw new DukeException();
 
             TaskType type = TaskType.getType(input[0]);
@@ -146,16 +150,17 @@ public class Duke {
     public static class Deadline extends Task {
         private static final char symbol = 'D';
 
-        private final String time;
+        private final LocalDate time;
 
-        public Deadline(String description, String time) {
+        public Deadline(String description, String time) throws DateTimeParseException {
             super(description);
-            this.time = time;
+            this.time = LocalDate.parse(time, dateInputFormatter);
         }
 
         @Override
         public String toString() {
-            return "[" + symbol + "]" + super.toString() + " (by: " + time + ")";
+            return "[" + symbol + "]" + super.toString()
+                    + " (by: " + time + ")";
         }
     }
 
@@ -167,16 +172,17 @@ public class Duke {
     public static class Event extends Task {
         private static final char symbol = 'E';
 
-        private final String time;
+        private final LocalDate time;
 
-        public Event(String description, String time) {
+        public Event(String description, String time) throws DateTimeParseException {
             super(description);
-            this.time = time;
+            this.time = LocalDate.parse(time, dateInputFormatter);
         }
 
         @Override
         public String toString() {
-            return "[" + symbol + "]" + super.toString() + " (at: " + time + ")";
+            return "[" + symbol + "]" + super.toString()
+                    + " (at: " + time + ")";
         }
     }
 
@@ -325,6 +331,8 @@ public class Duke {
                     System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
+                } catch (DateTimeParseException e) {
+                    System.out.println("The date must be in the format dd-MM-yyyy");
                 }
 
             }
