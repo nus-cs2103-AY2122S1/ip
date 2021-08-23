@@ -3,6 +3,14 @@ public class ToDos extends Task{
         super(description);
     }
 
+    public ToDos(String description, boolean isCompleted) {
+        super(description, isCompleted);
+    }
+
+    public String getShortForm() {
+        return "T";
+    }
+
     @Override
     public String toString() {
         return "[T] " + super.toString();

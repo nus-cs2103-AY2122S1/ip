@@ -1,7 +1,7 @@
 /**
  * Encapsulates a task to be completed
  */
-public class Task {
+public abstract class Task {
     private String description = "";
     private boolean isCompleted = false;
 
@@ -14,6 +14,11 @@ public class Task {
         this.description = description;
     }
 
+    public Task(String description, boolean isCompleted) {
+        this.description = description;
+        this.isCompleted = isCompleted;
+    }
+
     /**
      * Marks task as complete
      */
@@ -21,6 +26,15 @@ public class Task {
         this.isCompleted = true;
     }
 
+    public boolean isComplete() {
+        return this.isCompleted;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    abstract String getShortForm();
     /**
      * @return String representation of task.
      */
