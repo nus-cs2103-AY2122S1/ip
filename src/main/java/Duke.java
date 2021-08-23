@@ -1,5 +1,6 @@
 import commands.Command;
 import tasks.TaskList;
+import utils.Util;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,15 +17,15 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        TaskList taskList = new TaskList();
+        TaskList taskList = Util.loadDataBase("./data/duke.txt");
 
         while (true) {
             String userInput = sc.nextLine();
             Command command = Command.of(userInput);
+            command.updateLogAndTaskList(taskList);
             if (command.isExit()) {
                 break;
             }
-            command.updateLogAndTaskList(taskList);
             taskList = command.getTaskList();
             System.out.println(command.getLog());
         }

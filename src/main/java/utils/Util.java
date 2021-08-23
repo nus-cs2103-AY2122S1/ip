@@ -1,13 +1,41 @@
 package utils;
 
 import tasks.Task;
+import tasks.TaskList;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Scanner;
 
 public class Util {
     public static boolean isLowerCase(String input) {
         return input == input.toLowerCase();
+    }
+
+    public static TaskList loadDataBase(String filePath) {
+        TaskList taskList = new TaskList();
+        File f = new File(filePath); // create a File for the given file path
+        try {
+            Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            while (s.hasNext()) {
+                StorageParser storageParser = new StorageParser(s.nextLine());
+                Task task = Task.of(storageParser);
+                taskList.addTask(task);
+            }
+        } catch (FileNotFoundException e) {
+            //Data file doesn't exist
+            //Create directory
+            Path path = Path.of(filePath);
+            File directory = new File(path.getParent().toString());
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+        } finally {
+            return taskList;
+        }
     }
 
     public static void writeToFile(String filePath, String textToAdd) {

@@ -1,11 +1,19 @@
 package tasks;
 
+import utils.StorageParser;
+
 public class Event extends Task {
     protected String at;
 
     public Event(String description, String time) {
         super(description);
+        this.taskIcon = "E";
         this.at = time;
+    }
+
+    public Event(StorageParser storageParser) {
+        super(storageParser);
+        this.at = storageParser.getTime();
     }
 
     public String toString() {

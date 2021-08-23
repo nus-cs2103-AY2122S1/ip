@@ -1,11 +1,19 @@
 package tasks;
 
+import utils.StorageParser;
+
 public class Deadline extends Task {
     protected String by;
 
     public Deadline(String description, String time) {
         super(description);
+        this.taskIcon = "D";
         this.by = time;
+    }
+
+    public Deadline(StorageParser storageParser) {
+        super(storageParser);
+        this.by = storageParser.getTime();
     }
 
     public String toString() {

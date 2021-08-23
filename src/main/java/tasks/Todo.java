@@ -1,8 +1,15 @@
 package tasks;
 
+import utils.StorageParser;
+
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
+        this.taskIcon = "T";
+    }
+
+    public Todo(StorageParser storageParser) {
+        super(storageParser);
     }
 
     public String toString() {
