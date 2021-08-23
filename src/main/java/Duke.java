@@ -1,12 +1,16 @@
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 public class Duke {
     List<Task> commands = new ArrayList<>();
     int doneTasks = 0;
+    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("d-MM-yyyy");
+    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d-MM-yyyy HHmm");
 
     private void loadCommands(String relPath){
         String directory = System.getProperty("user.dir");
@@ -19,7 +23,7 @@ public class Duke {
                     String [] input1 = x.split(" ", 2);
                     String command = input1[0].trim();
                     System.out.println(command);
-                    String [] input2 = input1[1].split("-", 2);
+                    String [] input2 = input1[1].split("\\+", 2);
                     String description = input2[0].trim();
                     int isDone = Integer.parseInt(input2[1].trim());
                     try {
@@ -35,25 +39,27 @@ public class Duke {
         } else{
             System.out.println("There is no such file!");
         }
-        
+
     }
     private void saveCommands(){
         String directory = System.getProperty("user.dir");
-        String text="";
+        StringBuilder text= new StringBuilder();
         for(Task command: commands){
             if(command instanceof ToDo){
-                text += "todo " + command.description;
-                
+                text.append("todo ").append(command.description);
+
             } else if (command instanceof Deadline){
-                text += "deadline " + command.description + "/by " + ((Deadline) command).by;
+                String deadline= ((Deadline) command).deadline.format(DateTimeFormatter.ofPattern("d-MM-yyyy"));
+                text.append("deadline ").append(command.description).append("/by ").append(deadline);
             } else if (command instanceof Event) {
-                text += "event " + command.description + "/at " + ((Event) command).time;
+                String time = ((Event) command).time.format(DateTimeFormatter.ofPattern("d-MM-yyyy HHmm"));
+                text.append("event ").append(command.description).append("/at ").append(time);
             }
-            
+
             if(command.isDone){
-                text += "-1\n";
+                text.append("+1\n");
             } else{
-                text += "-0\n";
+                text.append("+0\n");
             }
         }
         Path path = Paths.get(directory, "data");
@@ -68,11 +74,12 @@ public class Duke {
         }
 
         try {
-            Files.write(Paths.get(directory,"data", "taskList.txt"), text.getBytes());
+            Files.write(Paths.get(directory,"data", "taskList.txt"), text.toString().getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     void list(){
         try {
             if (commands.size() == 0) {
@@ -88,6 +95,7 @@ public class Duke {
         }
 
     }
+
     void execute(DukeCommands command, String input, int isDone){
         try {
             boolean taskToAdd = false;
@@ -113,7 +121,8 @@ public class Duke {
                         if (deadline.length < 2) {
                             throw new NoTimeException();
                         }
-                        commands.add(new Deadline(deadline[0], deadline[1]));
+                        LocalDate date = LocalDate.parse(deadline[1].trim(),formatter1);
+                        commands.add(new Deadline(deadline[0], date));
                         if(isDone==1){
                             doneTasks++;
                             commands.get(commands.size()-1).markAsDone();
@@ -129,7 +138,8 @@ public class Duke {
                         if (event.length < 2) {
                             throw new NoTimeException();
                         }
-                        commands.add(new Event(event[0], event[1]));
+                        LocalDateTime time = LocalDateTime.parse(event[1].trim(),formatter2);
+                        commands.add(new Event(event[0], time));
                         if(isDone==1){
                             doneTasks++;
                             commands.get(commands.size()-1).markAsDone();
@@ -238,9 +248,9 @@ public class Duke {
             } catch (IllegalArgumentException e){
                 System.out.println("I'm sorry, I don't know what that means! ☹");
             }
-            
-                
-            
+
+
+
             System.out.println("____________________________________________________________");
         }
         sc.close();
