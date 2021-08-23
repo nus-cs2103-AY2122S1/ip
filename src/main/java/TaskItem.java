@@ -35,6 +35,14 @@ public class TaskItem {
         this.completed = true;
     }
 
+    public String toFileString() {
+        if (completed) {
+            return "[X]" + this.task;
+        } else {
+            return "[ ]" + this.task;
+        }
+    }
+
     /**
      * Overriden toString method.
      * @return a String representation of a TaskItem.
