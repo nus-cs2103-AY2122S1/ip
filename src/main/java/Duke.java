@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.*;
 
 public class Duke {
@@ -26,16 +27,17 @@ public class Duke {
     }
 
     protected class Deadline extends Task {
-        protected final String dateBy;
+        protected final LocalDate dateBy;
 
-        public Deadline(String description, String dateBy) {
+        public Deadline(String description, LocalDate dateBy) {
             super(description);
             this.dateBy = dateBy;
         }
 
         @Override
         public String toString() {
-            return "[D]" + super.toString() + description + " (by: " + dateBy + ")";
+            return "[D]" + super.toString() + description + " (by: " +
+                    dateBy.getDayOfMonth() + " " + dateBy.getMonth().toString() + " " + dateBy.getYear() + ")";
         }
     }
 
@@ -202,16 +204,16 @@ public class Duke {
                             throw new EmptyDescriptionException("todo");
                         }
 
-                        String[] additionalTaskInfo = taskInfo[1].split("/by", 2);
-                        if (additionalTaskInfo.length == 1) {
+                        String[] taskMoreInfo = taskInfo[1].split("/by", 2);
+                        if (taskMoreInfo.length == 1) {
                             throw new EmptyDetailsException("deadline");
                         }
-                        String description = additionalTaskInfo[0];
-                        String dateBy = additionalTaskInfo[1];
+                        String description = taskMoreInfo[0];
+                        String date = taskMoreInfo[1];
 
                         System.out.println("added: " + command);
                         System.out.println(linebreak);
-                        todoList.add(duke.new Deadline(description, dateBy));
+                        todoList.add(duke.new Deadline(description, LocalDate.parse(date.strip())));
                         break;
 
                     }
