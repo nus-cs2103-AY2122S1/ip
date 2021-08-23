@@ -7,13 +7,25 @@ import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Storage class for the storage and retrieval of tasks.
+ */
 public class Storage {
     private Path path;
 
+    /**
+     * Constructor for Storage object.
+     * @param path Path of data file to be written to.
+     */
     public Storage(Path path) {
         this.path = path;
     }
 
+    /**
+     * Reads a list of tasks from the data file.
+     * @return List of tasks.
+     * @throws IOException
+     */
     public TaskList readTaskList() throws IOException {
         Files.createDirectories(this.path.getParent());
         if (!Files.exists(this.path)) {
@@ -26,6 +38,11 @@ public class Storage {
         );
     }
 
+    /**
+     * Writes a list of tasks to the data file.
+     * @param tasks List of tasks.
+     * @throws IOException
+     */
     public void writeTaskList(TaskList tasks) throws IOException {
         Stream<String> linesStream = tasks.stream()
                 .map((task) -> genTaskRow(task));
@@ -43,7 +60,7 @@ public class Storage {
         return task;
     }
 
-    public static String genTaskRow(Task task) {
+    private static String genTaskRow(Task task) {
         return String.format(
             "%s | %b | %s",
             TaskType.identifyTask(task).getTaskIcon(),
@@ -52,7 +69,7 @@ public class Storage {
         );
     }
 
-    public static String genTaskLine(Task task) {
+    private static String genTaskLine(Task task) {
         var taskType = TaskType.identifyTask(task);
         switch (taskType) {
             case TODO:

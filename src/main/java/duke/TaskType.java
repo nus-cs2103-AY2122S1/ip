@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Enum representing the type of a task.
+ */
 public enum TaskType {
     DEADLINE("D"),
     EVENT("E"),
@@ -10,10 +13,19 @@ public enum TaskType {
         this.taskIcon = taskIcon;
     }
 
+    /**
+     * Getter for task icon.
+     * @return Task icon corresponding to type of task.
+     */
     public String getTaskIcon() {
         return this.taskIcon;
     }
 
+    /**
+     * Identify type of task.
+     * @param task Task.
+     * @return Type of input task.
+     */
     public static TaskType identifyTask(Task task) {
         return task instanceof Todo
             ? TaskType.TODO
@@ -24,6 +36,11 @@ public enum TaskType {
             : null;
     }
 
+    /**
+     * Convert task icon into a task type.
+     * @param taskIcon Task icon.
+     * @return Task type corresponding to input task icon.
+     */
     public static TaskType convertTaskIcon(String taskIcon) {
         switch (taskIcon) {
             case "D":

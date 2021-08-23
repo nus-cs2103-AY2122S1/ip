@@ -2,7 +2,22 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Parser class containing static methods for the parsing of Duke commands and
+ * inputs.
+ */
 public class Parser {
+    /**
+     * Executes a command on the input task list and storage objects, given
+     * an input.
+     * @param tasks List of tasks.
+     * @param storage Storage object.
+     * @param input Command input.
+     * @return Boolean flag representing whether the program should terminate.
+     * If the flag is true, the program should terminate; otherwise, the program
+     * should continue running.
+     * @throws Exception
+     */
     public static boolean runCommand(TaskList tasks, Storage storage, String input) throws Exception {
         var parameters = input.split(" ");
         var command = parameters[0];
@@ -57,6 +72,12 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Parses a task line into a task.
+     * @param taskLine Task line.
+     * @param taskType Type of task.
+     * @return Task object corresponding to the input parameters.
+     */
     public static Task parseTaskLine(String taskLine, TaskType taskType) {
         switch (taskType) {
             case TODO:
