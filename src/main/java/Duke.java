@@ -6,16 +6,20 @@ class Duke {
     "     ____________________________________________________________\n";
   private static final String INDENT = "      ";
   private boolean isEndChat = false;
-//  private static ArrayList<Task> taskList = new ArrayList<>();
-  private TaskList taskList;
+  public static TaskList taskList;
 
-  private void getInput() {
+  private void run() {
     Scanner sc = new Scanner(System.in);
     taskList = new TaskList(Storage.readDatabase());
 
     while (sc.hasNextLine()) {
       String input = sc.nextLine();
-      takeInput(input);
+      Parser parser = new Parser(input);
+      try {
+        takeInput(parser.parse());
+      } catch (UserInputError e){
+        renderOutput(e.getMessage());
+      }
       if (isEndChat) {
         break;
       }
@@ -28,33 +32,25 @@ class Duke {
     isEndChat = true;
   }
 
-  private String getFirstWord(String text) {
-    int index = text.indexOf(' ');
-    if (index > -1) { // Check if there is more than one word.
-      return text.substring(0, index).trim(); // Extract first word.
-    } else {
-      return text; // Text is the first word itself.
-    }
-  }
-
-  public void takeInput(String input) {
+  public void takeInput(String[] input) {
     try {
-      String command = getFirstWord(input);
-      if (input.equals("bye")) {
+      String cmd = input[0];
+      String details = input.length == 1 ? "" : input[1];
+      if (cmd.equals("bye")) {
         renderOutput("Bye. Hope to see you again soon!");
         endChat();
-      } else if (input.equals("list")) {
+      } else if (cmd.equals("list")) {
         renderList();
-      } else if (command.equals("done")) {
-        markTaskComplete(input);
-      } else if (command.equals("todo")) {
-        addNewTask(input, Task.Type.TODO);
-      } else if (command.equals("deadline")) {
-        addNewTask(input, Task.Type.DEADLINE);
-      } else if (command.equals("event")) {
-        addNewTask(input, Task.Type.EVENT);
-      } else if (command.equals("delete")) {
-        deleteTask(input);
+      } else if (cmd.equals("done")) {
+        markTaskComplete(Integer.parseInt(details));
+      } else if (cmd.equals("todo")) {
+        addNewTask(details, Task.Type.TODO);
+      } else if (cmd.equals("deadline")) {
+        addNewTask(details, Task.Type.DEADLINE);
+      } else if (cmd.equals("event")) {
+        addNewTask(details, Task.Type.EVENT);
+      } else if (cmd.equals("delete")) {
+        deleteTask(Integer.parseInt(details));
       } else {
         throw new InvalidInputException();
       }
@@ -65,24 +61,6 @@ class Duke {
 
   private String getDesc(String input) {
     return input.split(" ", 2)[1];
-  }
-
-  //check for incomplete input
-  private void checkDescExist(String input)
-    throws NoDescriptionException {
-    if (input.split(" ").length == 1) {
-      throw new NoDescriptionException(
-        "Oops! Please add description for your command."
-      );
-    }
-  }
-
-  private int getTaskNumber(String cmd) {
-    String[] result = cmd.split(" ");
-    if (result[1].matches("\\d+")) {
-      return Integer.parseInt(result[1]);
-    }
-    return -1;
   }
 
   private void renderList() {
@@ -97,28 +75,7 @@ class Duke {
     renderOutput("Here are the tasks in your list:\n" + op);
   }
 
-  private void checkIndexRange(int index)
-    throws ExceedListSizeException {
-    if (index < 0) {
-      throw new ExceedListSizeException(
-        "Invalid task reference!\nIndex should be more than 0."
-      );
-    }
-
-    if (index > taskList.length() - 1) {
-      throw new ExceedListSizeException(
-        "Invalid task reference!\nYou currently have " +
-        taskList.length() +
-        " tasks."
-      );
-    }
-  }
-
-  private void markTaskComplete(String cmd) throws UserInputError {
-    checkDescExist(cmd);
-    int index = getTaskNumber(cmd) - 1;
-    checkIndexRange(index);
-
+  private void markTaskComplete(int index) throws UserInputError {
     Task task = taskList.getTask(index);
     if (task.isDone()) {
       renderOutput("Great! But you have already completed this task!");
@@ -129,7 +86,6 @@ class Duke {
   }
 
   private void addNewTask(String input, Task.Type type) throws UserInputError {
-    checkDescExist(input);
       Task newTask = Task.createTask(getDesc(input), type);
       taskList.addTask(newTask);
       addTaskOutput(newTask);
@@ -146,11 +102,7 @@ class Duke {
     renderOutput(output);
   }
 
-  private void deleteTask(String input) throws UserInputError {
-    checkDescExist(input);
-    int index = getTaskNumber(input) - 1;
-    checkIndexRange(index);
-
+  private void deleteTask(int index) throws UserInputError {
     Task deleted = taskList.getTask(index);
     taskList.deleteTask(index);
     deleteTaskOutput(deleted);
@@ -186,6 +138,6 @@ class Duke {
     System.out.println(LINE.trim());
 
     Duke bot = new Duke();
-    bot.getInput();
+    bot.run();
   }
 }
