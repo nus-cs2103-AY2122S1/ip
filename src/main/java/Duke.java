@@ -34,7 +34,8 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasksList.size(); i++) {
             Task t = tasksList.get(i);
-            t.showThisTask(i + 1);
+            System.out.println((i+1) + ".");
+            t.showThisTask();
             
         }
     }

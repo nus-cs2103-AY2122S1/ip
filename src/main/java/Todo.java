@@ -28,15 +28,15 @@ public class Todo extends Task{
         System.out.println(this.prefix + super.showStatus() + this.name);
     }
 
-    /**
-     * print out the relevant info of the todo with number in front
-     * 
-     * @param num the index of the todo in the task list
-     */
-    @Override
-    public void showThisTask(int num) {
-        System.out.println(num +  "."+ this.prefix + showStatus() + this.name);
-    }
+    // /**
+    //  * print out the relevant info of the todo with number in front
+    //  * 
+    //  * @param num the index of the todo in the task list
+    //  */
+    // @Override
+    // public void showThisTask(int num) {
+    //     System.out.println(num +  "."+ this.prefix + showStatus() + this.name);
+    // }
 
     
 
