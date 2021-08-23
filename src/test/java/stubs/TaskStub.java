@@ -20,6 +20,11 @@ public class TaskStub extends Task {
     }
 
     @Override
+    public boolean isTimeable() {
+        return false;
+    }
+
+    @Override
     public void taskDone() {
         super.isDone = true;
     }

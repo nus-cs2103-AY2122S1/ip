@@ -2,23 +2,35 @@ package petal.components;
 
 import petal.exception.*;
 import petal.task.*;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The TaskList class represents the tasks, and handles the operations
+ * done to the tasks
+ */
 public class TaskList {
 
-    //List of user inputted tasks
     private final List<Task> tasks;
     private final Ui ui;
+    private final Calendar calendar;
 
+    /**
+     * The constructor for TaskList
+     *
+     * @param ui The instance of Ui used
+     */
     public TaskList(Ui ui) {
         this.ui = ui;
-        tasks = new ArrayList<>();
+        this.tasks = new ArrayList<>();
+        calendar = new Calendar();
     }
 
     /**
      * Overloaded method to add previously saved tasks to the list of tasks
+     *
      * @param addTasks The arraylist of previously saved tasks
      */
     public void addTask(ArrayList<Task> addTasks) {
@@ -28,6 +40,7 @@ public class TaskList {
 
     /**
      * Method to add a task to list of tasks
+     *
      * @param task The task to be added
      */
     public void addTask(Task task) {
@@ -38,6 +51,7 @@ public class TaskList {
 
     /**
      * Method to delete a task from the list of tasks
+     *
      * @param index The message given by the user input
      * @throws InvalidInputException Thrown if no index inputted by the user or
      *                               when index is out-of-bounds/not valid int or when
@@ -47,6 +61,8 @@ public class TaskList {
         try {
             int indexOfTask = Integer.parseInt(index) - 1;
             Task toBeDeleted = tasks.remove(indexOfTask);
+            if (toBeDeleted.isTimeable())
+                calendar.updateCalendar(tasks);
             ui.output("Okay. I've deleted this task:\n" + toBeDeleted  + "\nYou now have " + tasks.size()
                     + " task(s)!");
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -56,6 +72,7 @@ public class TaskList {
 
     /**
      * Method to handle the tasks, depending on the command given
+     *
      * @param type The type of task: To.Do, deadline, event
      * @param message The desc/time of the task
      * @throws EmptyDescException Thrown when the task lacks a description
@@ -91,10 +108,13 @@ public class TaskList {
                 }
         }
         addTask(task);
+        if (task.isTimeable())
+            calendar.addToCalendar((Timeable) task);
     }
 
     /**
      * Method to mark a particular task as done
+     *
      * @param indexOfTask String representation of the index of the task
      * @throws IndexOutOfBoundsException Thrown if string is not within size of list
      * @throws NumberFormatException Thrown if string cannot be converted into valid int
@@ -110,6 +130,7 @@ public class TaskList {
 
     /**
      * Method that returns the string representations of the tasks
+     *
      * @return String containing the number, type, and description of tasks
      */
     public String printList() {
@@ -129,8 +150,19 @@ public class TaskList {
     }
 
     /**
+     * Method that displays the tasks ona given date
+     *
+     * @param date The date given
+     * @throws InvalidInputException Thrown if the parameter has an invalid format/input
+     */
+    public void tasksOnThisDay(String date) throws InvalidInputException {
+        ui.output(calendar.tasksOnThisDate(Parser.parseDate(date)));
+    }
+
+    /**
      * Method that takes the tasks and returns a formatted string representation
      * which can be easily parsed by retrieveTasks() once the program is run again
+     *
      * @return Formatted string representation of all the user-added tasks
      */
     public String formatForSaving() {
@@ -148,17 +180,6 @@ public class TaskList {
             count++;
         }
         return result.toString();
-    }
-
-    public void tasksOnThisDay(String date) throws InvalidInputException {
-        try {
-            String deadlines = Deadline.deadlinesOnDate(date);
-            String events = Event.eventsOnDate(date);
-            ui.output(deadlines + "\n" + events);
-        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-            throw new InvalidInputException("The date/time format used was wrong! Try again :(");
-        }
-
     }
 
 }

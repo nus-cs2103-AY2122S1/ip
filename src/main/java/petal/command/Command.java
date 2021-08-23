@@ -3,10 +3,19 @@ package petal.command;
 import petal.components.Storage;
 import petal.components.TaskList;
 import petal.components.Ui;
-import petal.task.Task;
 
+/**
+ * The Command interface represents all Command
+ */
 public interface Command {
 
+   /**
+    * Method that executes that particular command
+    *
+    * @param taskList Tasklist instance
+    * @param ui Ui instance
+    * @param storage Storage instance
+    */
    void execute(TaskList taskList, Ui ui, Storage storage);
 
 }

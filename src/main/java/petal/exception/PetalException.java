@@ -8,6 +8,7 @@ public class PetalException extends Exception {
 
     /**
      * Constructor for the PetalException class
+     *
      * @param message The message
      */
     public PetalException(String message) {
@@ -16,6 +17,7 @@ public class PetalException extends Exception {
 
     /**
      * Constructor for the PetalException class (Used as Wrapper)
+     *
      * @param message The exception message
      * @param cause Initial cause
      */
