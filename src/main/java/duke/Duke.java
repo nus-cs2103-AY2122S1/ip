@@ -21,7 +21,6 @@ public class Duke {
 
         // duke.Duke continuously asks for the user's input until they type "bye"
         while (!isExit) {
-
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
