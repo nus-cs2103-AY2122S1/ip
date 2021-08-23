@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,11 +20,12 @@ public class Duke {
         taskList = new ArrayList<>(100);
     }
 
-    void startConversation() {
+    void run() {
         Scanner sc = new Scanner(System.in);
 
         greeting("Alex");
-        while (true) {
+        boolean isExit = false;
+        while (!isExit) {
             // conversation loop
             String input = sc.nextLine().strip();
             String[] strArr = input.split(" ");
@@ -281,6 +284,6 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Duke duke = new Duke();
-        duke.startConversation();
+        duke.run();
     }
 }
