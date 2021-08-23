@@ -1,7 +1,9 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.IOException;
-
+import java.io.File;
+import java.io.FileWriter;
 
 public class Duke {
 
@@ -17,29 +19,25 @@ public class Duke {
         System.out.println("Hello from\n" + logo);*/
 
         System.out.println(displayLabel(welcomeLabel));
-
         // for Level 2
         ArrayList<String> items = new ArrayList<>();
-
         // for Level 3 onwards
         ArrayList<Task> tasks = new ArrayList<>();
-
-        Scanner userInput = new Scanner(System.in);
-
-        // remove try catch for levels 1-4
         try {
+            Scanner userInput = new Scanner(System.in);
+            tasks = assignTasks(getTasks(new File(
+                    "/Users/ravi57004/ip/src/main/java/Tasks.txt")));
             while (true) {
-                String input = userInput.nextLine();
-                if (input.equals("bye")) {
-                    break;
-                }
-                Level5(input, tasks);
+                    String input = userInput.nextLine();
+                    if (input.equals("bye")) {
+                        break;
+                    }
+                    Level7(input, tasks);
             }
             System.out.println(displayLabel(byeLabel));
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     // displays the information keyed in with lines and indentation
@@ -79,6 +77,38 @@ public class Duke {
         return collection;
     }
 
+    public static ArrayList<String> getTasks(File f) throws FileNotFoundException {
+        ArrayList<String> fileInfo = new ArrayList<>();
+        Scanner sc = new Scanner(f);
+        while (sc.hasNext()) {
+            //System.out.println(sc.nextLine());
+            fileInfo.add(sc.nextLine());
+        }
+        return fileInfo;
+    }
+
+    public static ArrayList<Task> assignTasks(ArrayList<String> fileText) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        for (String strTask : fileText) {
+            String[] taskInfo = strTask.split(" ~ ");
+            Task newTask = new Task("");
+            if (taskInfo[0].equals("T")) {
+                newTask = new ToDo(taskInfo[2]);
+            } else if (taskInfo[0].equals("D")) {
+                newTask = new Deadline(taskInfo[2], taskInfo[3]);
+            } else if (taskInfo[0].equals("E")) {
+                newTask = new Event(taskInfo[2], taskInfo[3]);
+            } else {
+               newTask.newTask = taskInfo[1];
+            }
+            if (strTask.contains("Yes")) {
+                newTask.setIsDone();
+            }
+            tasks.add(newTask);
+        }
+        return tasks;
+    }
+
     /* adds the information that is inputted,
      * and prints out all the information when list is inputted.
      */
@@ -109,7 +139,7 @@ public class Duke {
         }
     }
 
-    // Adding onto Level 3, handles subclasses of Tasks.
+    // Adding onto Level 3, handles subclasses of Tasks.txt.
     public static void Level4(String input, ArrayList<Task> tasks) {
         if (!input.equals("list") && !input.contains("done")) {
             if (input.contains("todo")) {
@@ -160,6 +190,34 @@ public class Duke {
                 Level5(input, tasks);
             }
     }
+
+    public static void Level7(String input, ArrayList<Task> tasks) throws DukeException, IOException {
+        Level6(input, tasks);
+        String text = "";
+        FileWriter fw = new FileWriter("/Users/ravi57004/ip/src/main/java/Tasks.txt", false);
+
+        if (!input.equals("bye")) {
+                for (Task task: tasks) {
+                    String doneStr = "No";
+                    if (task.getIsDone().equals("[X]")) {
+                        doneStr = "Yes";
+                    }
+                    if (task instanceof ToDo) {
+                        text += "T ~ " + doneStr + " ~ " + task.newTask + "\n";
+                    } else if (task instanceof Deadline) {
+                        Deadline dl = (Deadline) task;
+                        text += "D ~ " + doneStr + " ~ " + task.newTask + " ~ " + dl.deadLine + "\n";
+                    } else if (task instanceof Event) {
+                        Event ev = (Event) task;
+                        text += "D ~ " + doneStr + " ~ " + task.newTask + " ~ " + ev.timing + "\n";
+                    } else {
+                        text += doneStr + " ~ " + task.newTask + "\n";
+                    }
+                }
+            }
+        fw.write(text);
+        fw.close();
+       }
 }
 
 
@@ -180,8 +238,8 @@ class DukeException extends Exception {
 
 class Task {
 
-    private String newTask;
-    private boolean isDone;
+    protected String newTask;
+    protected boolean isDone;
 
     public Task(String newTask) {
         this.newTask = newTask;
@@ -204,7 +262,7 @@ class Task {
 
 class ToDo extends Task {
 
-    private String newTask;
+    protected String newTask;
 
     public ToDo(String newTask) {
         super(newTask);
@@ -219,8 +277,8 @@ class ToDo extends Task {
 
 class Deadline extends Task {
 
-    private String newTask;
-    private String deadLine;
+    protected String newTask;
+    protected String deadLine;
 
     public Deadline(String newTask, String deadLine) {
         super(newTask);
@@ -236,8 +294,8 @@ class Deadline extends Task {
 
 class Event extends Task {
 
-    private String newTask;
-    private String timing;
+    protected String newTask;
+    protected String timing;
 
     public Event(String newTask, String timing) {
         super(newTask);
