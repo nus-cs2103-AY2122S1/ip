@@ -1,6 +1,6 @@
 public class Formatter {
 
-    public Task formatStringToTask(String input) {
+    public Task formatStringToTask(String input) throws DukeException {
         String[] delimitedInput = input.split("[|]");
         String taskType = delimitedInput[0];
         if (taskType.equals(TaskType.T.toString())) {

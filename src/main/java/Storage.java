@@ -19,7 +19,11 @@ public class Storage {
             this.targetDirectory =
                     Paths.get(".", DEFAULT_FILE_DIRECTORY, DEFAULT_FILE_NAME).toAbsolutePath().normalize();
             if (!java.nio.file.Files.exists(this.targetDirectory)) {
-                Files.createDirectory(Paths.get(".", DEFAULT_FILE_DIRECTORY).toAbsolutePath().normalize());
+                try {
+                    Files.createDirectory(Paths.get(".", DEFAULT_FILE_DIRECTORY).toAbsolutePath().normalize());
+                } catch(java.nio.file.FileAlreadyExistsException e) {
+                    System.out.println("Directory exists but file does not. Creating file...");
+                }
                 Files.createFile(this.targetDirectory);
             }
             this.reader = Files.newBufferedReader(this.targetDirectory, StandardCharsets.UTF_8);
@@ -34,7 +38,7 @@ public class Storage {
         return new Storage();
     }
 
-    public TaskList load(TaskList taskList) {
+    public TaskList load(TaskList taskList) throws DukeException {
         try {
             String line = this.reader.readLine();
             if (line == null || line.isEmpty()) {

@@ -16,7 +16,11 @@ public class Duke {
 
     public void run() {
         this.userInterface.printInitialGreeting();
-        this.list = this.storage.load(this.list);
+        try {
+            this.list = this.storage.load(this.list);
+        } catch(DukeException e) {
+            System.out.println("OOPS!!! " + e.getMessage());
+        }
         this.runLoop();
         this.storage.save(this.list);
         this.userInterface.printGoodByeGreeting();
