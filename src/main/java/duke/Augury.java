@@ -1,15 +1,19 @@
-import exceptions.*;
-import tasks.Task;
-import tasks.TaskFactory;
-import tasks.TaskList;
-import storage.Storage;
+package duke;
+
+import duke.exceptions.*;
+import duke.tasks.Task;
+import duke.tasks.TaskFactory;
+import duke.tasks.TaskList;
+import duke.storage.Storage;
+import duke.io.Parser;
+import duke.ui.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Augury {
-    static String VER     = "v0.8.0"; // Level-8 Dates and Times + A-MoreOOP
+    static String VER     = "v0.8.0"; // Level-8 Dates and Times + A-MoreOOP, A-Packages
     static String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
@@ -40,7 +44,7 @@ public class Augury {
     }
 
     public void greet() {
-        ui.speak(WELCOME);
+        System.out.println(WELCOME);
     }
 
     public void loop() throws AuguryException {

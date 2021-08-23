@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +36,7 @@ public class TaskList {
         StringBuilder res = new StringBuilder("Nice! I've marked these tasks as done: \n\t\t");
 
         for (int i = 0; i < listOfTasks.size(); i++) {
-            // have to decrement by one since tasks ArrayList is 0-indexed,
+            // have to decrement by one since duke.tasks ArrayList is 0-indexed,
             // but the user-provided arguments uses a 1-indexed list
             int index = listOfTasks.get(i) - 1;
 
@@ -53,7 +53,7 @@ public class TaskList {
     public String deleteTasks(ArrayList<Integer> listOfTasks) {
         StringBuilder res = new StringBuilder("I've removed these tasks: \n\t\t");
 
-        // reverse-sort the tasks and remove duplicates
+        // reverse-sort the duke.tasks and remove duplicates
         Set<Integer> s = new LinkedHashSet<>(listOfTasks);
         listOfTasks.clear();
         listOfTasks.addAll(s);
@@ -61,7 +61,7 @@ public class TaskList {
         Collections.reverse(listOfTasks);
 
         for (int i = 0; i < listOfTasks.size(); i++) {
-            // have to decrement by one since tasks ArrayList is 0-indexed,
+            // have to decrement by one since duke.tasks ArrayList is 0-indexed,
             // but the user-provided arguments uses a 1-indexed list
             int index = listOfTasks.get(i) - 1;
 
@@ -79,7 +79,7 @@ public class TaskList {
 
     @Override
     public String toString() {
-        // returns an indented, newlined, 1-indexed, String of the Tasks in this tasks.TaskList
+        // returns an indented, newlined, 1-indexed, String of the Tasks in this duke.tasks.TaskList
         StringBuilder res = new StringBuilder("Here are your tasks:\n\t ");
         for (int i = 0; i < tasks.size(); i++) {
             res.append(i+1).append(". ").append(tasks.get(i));

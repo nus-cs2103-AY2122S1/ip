@@ -1,4 +1,4 @@
-package storage;
+package duke.storage;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -7,11 +7,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import exceptions.AuguryException;
-import exceptions.FileIOException;
-import tasks.Task;
-import tasks.TaskFactory;
-import tasks.TaskList;
+import duke.exceptions.AuguryException;
+import duke.exceptions.FileIOException;
+import duke.tasks.Task;
+import duke.tasks.TaskFactory;
+import duke.tasks.TaskList;
 
 public class Storage {
 
@@ -57,7 +57,7 @@ public class Storage {
     }
 
     private void loadTaskListFromStorage(TaskList t) throws IOException, AuguryException {
-        // read tasks.txt
+        // read duke.tasks.txt
         Scanner s = new Scanner(new File(path)); // create a Scanner using the File as the source
         ArrayList<String> tasks = new ArrayList<>();
         while (s.hasNext()) {

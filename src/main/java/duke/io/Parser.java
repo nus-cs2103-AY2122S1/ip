@@ -1,3 +1,5 @@
+package duke.io;
+
 public class Parser {
     private final String COMMAND_MAKE_TASK = "COMMAND_MAKE_TASK";
     private final String COMMAND_LIST_TASKS = "COMMAND_LIST_TASKS";

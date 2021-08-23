@@ -1,4 +1,6 @@
-import exceptions.AuguryException;
+package duke;
+
+import duke.exceptions.AuguryException;
 
 public class App {
     public static void main(String[] args) throws AuguryException {

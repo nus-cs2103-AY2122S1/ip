@@ -1,10 +1,10 @@
-package tasks;
-
-import exceptions.AuguryException;
-import exceptions.InvalidTaskCreationException;
+package duke.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.exceptions.AuguryException;
+import duke.exceptions.InvalidTaskCreationException;
 
 public class TaskFactory {
     static DateTimeFormatter TIME_DISPLAY_FORMAT = DateTimeFormatter.ofPattern("d MMM y, E, kk:mm");
@@ -12,7 +12,7 @@ public class TaskFactory {
     public TaskFactory() {    }
 
     public Task createTask(String newTaskDetails) throws AuguryException {
-        // this method is used when reading from tasks.txt file
+        // this method is used when reading from duke.tasks.txt file
         // the syntax is [E][X] description (at: time)
 
         if(newTaskDetails.startsWith("[T")) {
