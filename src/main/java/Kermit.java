@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -32,6 +34,15 @@ public class Kermit {
                 + task +"\nNow you have " + list.size() + " tasks in the list.";
     }
 
+    private static LocalDate formatDate(String s) {
+        String[] components = s.split("-");
+        String day = components[0];
+        String month = components[1];
+        String year = components[2];
+        LocalDate parsedDate = LocalDate.parse(String.join("-", year, month, day));
+        return parsedDate;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String command = "";
@@ -52,6 +63,7 @@ public class Kermit {
         final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
         final String listText = "Here are the tasks in your list:";
         final String invalidCommandText = "I'm sorry, but I don't know what that means :-(";
+        final String invalidTimeText = "BAH That's not a time is it?? Try writing like this D/MM/YYYY 1200";
         final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
         final String goodbyeText = "Bye. Hope to see you again soon!";
 
@@ -140,14 +152,14 @@ public class Kermit {
                         break;
                     // Add new deadline task
                     case "deadline":
-                        Task newDeadline = new Deadline(description, flagArguments);
+                        Task newDeadline = new Deadline(description, formatDate(flagArguments));
                         list.add(newDeadline);
                         System.out.println(formatText(printAddTask(newDeadline, list)));
                         break;
 
                     // Add new event task
                     case "event":
-                        Task newEvent = new Event(description, flagArguments);
+                        Task newEvent = new Event(description, formatDate(flagArguments));
                         list.add(newEvent);
                         System.out.println(formatText(printAddTask(newEvent, list)));
                         break;
@@ -159,6 +171,8 @@ public class Kermit {
                 }
             } catch (KermitException e) {
                 System.out.println(formatText(e.getMessage()));
+            } catch (DateTimeParseException e) {
+                System.out.println(formatText(invalidTimeText));
             }
         }
     }
