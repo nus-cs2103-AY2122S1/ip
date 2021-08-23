@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -32,21 +33,23 @@ public class TaskList {
     }
 
     /**
-     * Adds a new task to the list
+     * Adds a new todo to the list
      * @param task The task description to be added.
      * @param type The type of the task to be added.
      * @param time The time associated with the task added.
      */
     public void addTask(String task, Task.TaskType type, String time) {
+        this.tasks.add(new Todo(task));
+        this.taskIndex++;
+    }
+
+    public void addTask(String task, Task.TaskType type, LocalDate ld, String time) {
         switch(type) {
-            case DEADLINE:
-                this.tasks.add(new Deadline(task, time));
-                break;
             case EVENT:
-                this.tasks.add(new Event(task, time));
+                this.tasks.add(new Event(task, ld, time));
                 break;
-            case TODO:
-                this.tasks.add(new Todo(task));
+            case DEADLINE:
+                this.tasks.add(new Deadline(task, ld, time));
                 break;
         }
         this.taskIndex++;

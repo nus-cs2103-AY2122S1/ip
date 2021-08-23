@@ -2,13 +2,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.regex.Pattern;
+
 /**
  * This class represents the chat bot, Duke.
  */
 public class Duke {
     private final static String DATABASE_PATH = "data/duke.txt";
     private static TaskList tasks = TaskList.createTaskList();
+    private static Pattern DATE_PATTERN = Pattern.compile("^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3])[0-5][0-9]$");
+
     /**
      * The static method that runs in Main to reply to the user.
      */
@@ -81,14 +86,14 @@ public class Duke {
             switch (task.type) {
                 case DEADLINE:
                     Deadline dl = (Deadline) task;
-                    fw.write("D," + task.getStatusIcon() + "," + task.getTaskDescription() + "," + dl.getBy());
+                    fw.write("deadline," + task.getStatusIcon() + "," + task.getTaskDescription() + "," + dl.getBy());
                     break;
                 case TODO:
-                    fw.write("T," + task.getStatusIcon() + "," + task.getTaskDescription());
+                    fw.write("todo," + task.getStatusIcon() + "," + task.getTaskDescription());
                     break;
                 case EVENT:
                     Event e = (Event) task;
-                    fw.write("E," + task.getStatusIcon() + "," + task.getTaskDescription() + e.getAt());
+                    fw.write("event," + task.getStatusIcon() + "," + task.getTaskDescription() + "," +  e.getAt());
                     break;
             }
             fw.write(System.lineSeparator());
@@ -108,15 +113,15 @@ public class Duke {
         while (s.hasNext()) {
             String currentLine = s.nextLine();
             String[] commands = currentLine.split(",");
-            switch(commands[0]) {
-                case "T":
+            Task.TaskType type = convertToTaskType(commands[0]);
+            switch(type) {
+                case TODO:
                     tasks.addTask(commands[2], Task.TaskType.TODO, "");
                     break;
-                case "E":
-                    tasks.addTask(commands[2], Task.TaskType.EVENT, commands[3]);
-                    break;
-                case "D":
-                    tasks.addTask(commands[2], Task.TaskType.DEADLINE, commands[3]);
+                case EVENT:
+                case DEADLINE:
+                    String[] dateAndTime = commands[3].split(" ");
+                    tasks.addTask(commands[2], type, LocalDate.parse(dateAndTime[0]), dateAndTime[1]);
                     break;
             }
             if (commands[1].equals("[X]")) {
@@ -156,16 +161,31 @@ public class Duke {
         String aOrAn = firstCommand.equals("event") ? "an" : "a";
         if (taskDesc.equals("")) {
             throw new DukeException("☹ OOPS!!! The description of " + aOrAn + " " + firstCommand + " cannot be empty.");
-        } else if (date.equals("") && !firstCommand.equals("todo")) {
+        } else if (date.equals("") && convertToTaskType(firstCommand) != Task.TaskType.TODO) {
             throw new DukeException("☹ OOPS!!! The date of " + aOrAn + " " + firstCommand + " cannot be empty.");
+        } else if (convertToTaskType(firstCommand) == Task.TaskType.DEADLINE || convertToTaskType(firstCommand) == Task.TaskType.EVENT) {
+            if (DATE_PATTERN.matcher(date).matches()) {
+                String[] dateSplit = date.split(" ");
+                String dateString = dateSplit[0];
+                String timeString = dateSplit[1];
+                LocalDate ld = LocalDate.parse(dateString);
+                Duke.tasks.addTask(taskDesc, convertToTaskType(firstCommand), ld, timeString);
+                Duke.confirmAdditionOfTask();
+            } else {
+                throw new DukeException("You need to put the date in yyyy-mm-dd hhmm format!");
+            }
         } else {
             Duke.tasks.addTask(taskDesc, convertToTaskType(firstCommand), date);
-            System.out.println("Got it. I've added this task: ");
-            System.out.println(Duke.tasks.getTask(Duke.tasks.getTasksLength()));
-            System.out.println("Now you have " + Duke.tasks.getTasksLength() + " tasks in the list.");
+            Duke.confirmAdditionOfTask();
         }
         String[] commands = {commandSplit[0], taskDesc, date};
         return commands;
+    }
+
+    public static void confirmAdditionOfTask() {
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(Duke.tasks.getTask(Duke.tasks.getTasksLength()));
+        System.out.println("Now you have " + Duke.tasks.getTasksLength() + " tasks in the list.");
     }
 
     /**
@@ -248,7 +268,7 @@ public class Duke {
                 taskDesc.append(commandList[i]).append(" ");
             }
         }
-        return taskDesc.toString().trim();
+        return taskDesc.toString();
     }
 
     public static Task.TaskType convertToTaskType(String command) {

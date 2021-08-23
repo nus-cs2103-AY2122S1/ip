@@ -1,18 +1,22 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
     /**
      * String representation of due date of Deadline.
      */
-    protected String by;
+    protected LocalDate date;
+    protected String time;
 
     /**
      * Constructor for Deadline object.
      * @param description Description of Deadline.
-     * @param by Due date of Deadline.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDate ld, String time) {
         super(description);
-        this.by = by;
+        this.date = ld;
+        this.time = time;
         this.type = TaskType.DEADLINE;
     }
 
@@ -22,14 +26,10 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + by + ")";
+        return "[D]" + super.toString() + "(by: " +  this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy ")) + this.time + ")";
     }
 
-    /**
-     * Returns by property of Deadline object.
-     * @return by of Deadline.
-     */
     public String getBy() {
-        return this.by;
+        return this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " + this.time;
     }
 }
