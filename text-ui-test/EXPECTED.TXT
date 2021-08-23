@@ -130,6 +130,29 @@
 
     ____________________________________________________________
      This command is invalid.
+     A query is required for "Find Task" commands.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Here are the 2 matching tasks in your list:
+     1.[T][X] read book
+     2.[D][ ] return book (by: 18:00 June 6 2022)
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Here is the 1 matching task in your list:
+     3.[D][ ] do homework (by: 23:59 December 31 9999)
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Here are the 2 matching tasks in your list:
+     4.[E][ ] project meeting (at: 14:00 August 6 2022)
+     5.[E][ ] graduation (at: 23:59 June 30 2024)
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
      A task number is required for "Delete Task" commands.
      Please try again.
     ____________________________________________________________

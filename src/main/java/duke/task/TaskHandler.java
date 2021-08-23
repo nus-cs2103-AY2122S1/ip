@@ -1,7 +1,9 @@
 package duke.task;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Helper class to handle all the tasks in the tasks list.
@@ -88,6 +90,24 @@ public class TaskHandler {
         Task task = tasks.remove(taskIndex);
         notifyObservers();
         return task;
+    }
+
+    /**
+     * Finds matching tasks in the tasks list with matching task descriptions.
+     *
+     * @param queryTaskDescription The query task description (or part of it) to be matched.
+     * @return The list of pairs of the matching tasks and their indices in the tasks list.
+     */
+    public List<Map.Entry<Integer, Task>> findTasksDescribedBy(String queryTaskDescription) {
+        List<Map.Entry<Integer, Task>> queryResults = new ArrayList<>();
+        int n = tasks.size();
+        for (int i = 0; i < n; i++) {
+            Task task = tasks.get(i);
+            if (task.getDescription().contains(queryTaskDescription)) {
+                queryResults.add(new AbstractMap.SimpleEntry<>(i, task));
+            }
+        }
+        return queryResults;
     }
 
     /**

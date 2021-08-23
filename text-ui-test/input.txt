@@ -18,6 +18,10 @@ event project meeting /at
 event project meeting /at 2022/8/6 1400
 event graduation /at 2024/06/30 2359
 list
+find
+find book
+find homework
+find ti
 delete
 delete blah
 delete 42

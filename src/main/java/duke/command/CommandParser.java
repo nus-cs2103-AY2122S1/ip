@@ -14,6 +14,7 @@ public class CommandParser {
     private static final String ADD_DEADLINE_TASK_COMMAND = "deadline";
     private static final String ADD_EVENT_TASK_COMMAND = "event";
     private static final String DELETE_TASK_COMMAND = "delete";
+    private static final String FIND_TASKS_COMMAND = "find";
 
     /**
      * Parses the command to get the Command instance.
@@ -43,6 +44,8 @@ public class CommandParser {
             return new AddEventTaskCommand(command);
         case DELETE_TASK_COMMAND:
             return new DeleteTaskCommand(command);
+        case FIND_TASKS_COMMAND:
+            return new FindTasksCommand(command);
         default:
             throw new DukeInvalidCommandException("This command does not exist.");
         }

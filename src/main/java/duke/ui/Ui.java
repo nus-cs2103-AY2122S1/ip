@@ -3,6 +3,7 @@ package duke.ui;
 import duke.task.Task;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Helper class to handle UI functionality.
@@ -65,6 +66,17 @@ public class Ui {
          */
         public MessageBuilder addTasksList(List<Task> tasks) {
             messageSb.append(messageFormatter.formatTasksList(tasks)).append("\n");
+            return this;
+        }
+
+        /**
+         * Adds a text representation of a "Find Tasks" command's results.
+         *
+         * @param queryResults The results of the "Find Tasks" command.
+         * @return This MessageBuilder instance.
+         */
+        public MessageBuilder addFindTasksResultsList(List<Map.Entry<Integer, Task>> queryResults) {
+            messageSb.append(messageFormatter.formatFindTasksResultsList(queryResults)).append("\n");
             return this;
         }
 

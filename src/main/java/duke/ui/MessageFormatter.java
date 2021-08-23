@@ -3,6 +3,7 @@ package duke.ui;
 import duke.task.Task;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Helper class for formatting the Duke chatbot's messages.
@@ -66,6 +67,20 @@ public class MessageFormatter {
      */
     String formatTask(Task task) {
         return indent(task.toString(), 2);
+    }
+
+    /**
+     * Creates a formatted String representing the results from a "Find Task" command.
+     *
+     * @param queryResults The list of results to be formatted.
+     * @return The formatted String representing the list of results.
+     */
+    String formatFindTasksResultsList(List<Map.Entry<Integer, Task>> queryResults) {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<Integer, Task> findResult : queryResults) {
+            sb.append(String.format("%d.%s\n", findResult.getKey() + 1, findResult.getValue()));
+        }
+        return sb.toString().stripTrailing();
     }
 
     private String surroundWithDividerLines(String message) {
