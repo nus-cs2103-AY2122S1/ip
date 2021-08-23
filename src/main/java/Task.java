@@ -3,17 +3,17 @@
  * @author Liew Jian Hong
  */
 
-public class Task {
+public abstract class Task {
 
     /**
      * The description of the task.
      */
-    private String desc;
+    protected String desc;
 
     /**
      * The completion status of the task.
      */
-    private boolean isDone;
+    protected boolean isDone;
 
     /**
      * Constructor for a Task
@@ -32,6 +32,7 @@ public class Task {
         this.isDone = true;
     }
 
+    public abstract String toWrite();
     /**
      * Return a string representation of the task.
      * @return Return the completion status and description of the task.
@@ -40,4 +41,6 @@ public class Task {
     public String toString() {
         return String.format("[%s] %s",isDone ? "X" : " " ,this.desc);
     }
+
+
 }

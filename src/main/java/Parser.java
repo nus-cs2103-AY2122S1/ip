@@ -12,7 +12,7 @@ public class Parser {
      * @return String array of parsed item.
      */
     public String[] parse(String item) {
-        String[] result = new String[]{"", "", ""};
+        String[] result = new String[]{"", "", "", "false"};
         String[] split = item.split(" ");
         int firstWordLength = split[0].length();
         result[0] = split[0];
@@ -34,5 +34,24 @@ public class Parser {
             result[2] = remainder.substring(separator + 4);
         }
         return result;
+    }
+
+    public String[] parseFromFile(String input) {
+        String[] result = new String[]{"", "", "", ""};
+        String[] split = input.split("--");
+        result[0] = split[0];
+        result[1] = split[2];
+        result[2] = split[3];
+        result[3] = split[1];
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Parser p = new Parser();
+        String[] res = p.parseFromFile("event--false--meet--at Oct 15 1000-1200");
+        System.out.println(res[0]);
+        System.out.println(res[1]);
+        System.out.println(res[2]);
+        System.out.println(res[3]);
     }
 }
