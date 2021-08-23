@@ -1,7 +1,10 @@
-public class Deadline extends Task{
-    private final String dateTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    public Deadline(boolean done, String name, String dateTime) {
+public class Deadline extends Task{
+    private final LocalDateTime dateTime;
+    public Deadline(boolean done, String name, LocalDateTime dateTime) throws DateTimeParseException {
         super(done, name);
         this.dateTime = dateTime;
     }
@@ -13,6 +16,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.dateTime);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+        return String.format("[D]%s (by: %s)", super.toString(), this.dateTime.format(dateTimeFormatter));
     }
 }

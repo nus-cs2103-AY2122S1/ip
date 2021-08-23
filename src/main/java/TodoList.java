@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -32,7 +35,7 @@ public class TodoList {
             }
             case "D": {
                 String info = taskDetails[3];
-                return new Deadline(done, taskDetails[2], info);
+                return new Deadline(done, taskDetails[2], LocalDateTime.parse(info));
             }
             default:
                 return null;
@@ -73,15 +76,23 @@ public class TodoList {
         }
     }
 
-    public void addDeadline(String name, String dateTime) {
-        Deadline deadline = new Deadline(false, name, dateTime);
-        tasks.add(deadline);
-        PrintResponse.print(
-                String.format("Caan Do!\n" +
-                                "  added: %s\n" +
-                                "Look at me! %d tasks in the list now!",
-                        deadline,
-                        tasks.size()));
+    public void addDeadline(String name, String dateTime) throws DukeException {
+        try {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+            LocalDateTime localDateTime = LocalDateTime.parse(dateTime, dateTimeFormatter);
+
+            Deadline deadline = new Deadline(false, name, localDateTime);
+            tasks.add(deadline);
+
+            PrintResponse.print(
+                    String.format("Caan Do!\n" +
+                                    "  added: %s\n" +
+                                    "Look at me! %d tasks in the list now!",
+                            deadline,
+                            tasks.size()));
+        } catch (DateTimeParseException e) {
+            throw new DukeException(">:( follow datetime format of dd-mm-yyyy HHmm");
+        }
     }
 
     public void addEvent(String name, String dateTime) {
