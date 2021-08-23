@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -98,6 +99,8 @@ public class Lania {
                 }
             } catch (LaniaException e) {
                 System.out.println(e);
+            } catch (DateTimeParseException e) {
+                System.out.println("Lania does not understand this data/time format. Please try again");
             } finally {
                 input = s.nextLine();
             }
