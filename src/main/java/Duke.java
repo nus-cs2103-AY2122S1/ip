@@ -1,4 +1,10 @@
-import java.util.*;
+import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * The Duke program implements a bot with a set of simple commands
@@ -13,10 +19,11 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String command = sc.next();
         String arguments;
-
+        fetchData(tasks, "./data/duke.txt");
+        
         while (!command.equals("bye")) {
-            printBorder();
             try {
+                printBorder();
                 switch (command) {
                     case "list":
                         println("Here are the tasks in your list:");
@@ -74,7 +81,7 @@ public class Duke {
                                 if (argArr.length == 1 || argArr[1].isEmpty()) {
                                     throw new DukeException("Arguments do not follow proper format. Don't forget the /by");
                                 }
-                                Deadline newTask = new Deadline(argArr[0], argArr[1]);
+                                Deadline newTask = new Deadline(argArr[0].trim(), argArr[1].trim());
                                 tasks.add(newTask);
                                 println("Got it. I've added this task:");
                                 println("  " + newTask);
@@ -85,7 +92,7 @@ public class Duke {
                                 if (argArr.length == 1 || argArr[1].isEmpty()) {
                                     throw new DukeException("Arguments do not follow proper format. Don't forget the /at");
                                 }
-                                Event newTask = new Event(argArr[0], argArr[1]);
+                                Event newTask = new Event(argArr[0].trim(), argArr[1].trim());
                                 tasks.add(newTask);
                                 println("Got it. I've added this task:");
                                 println("  " + newTask);
@@ -95,7 +102,6 @@ public class Duke {
                         println("Now you have " + tasks.size() +
                                 (tasks.size() == 1 ? " task" : " tasks")
                                 + " in your list.");
-                        ;
                         break;
                     default:
                         throw new DukeException("I'm sorry, but I don't know what \""
@@ -107,7 +113,8 @@ public class Duke {
             printBorder();
             command = sc.next();
         }
-
+        
+        writeData(tasks, "./data/duke.txt");
         end();
         sc.close();
     }
@@ -136,6 +143,54 @@ public class Duke {
 
     public static void printBorder() {
         System.out.println("\t____________________________________________________________");
+    }
+    
+    public static void fetchData(List<Task> tasks, String filePath) {
+        writeData(new ArrayList<>(), filePath);
+        try {
+            File data = new File(filePath);
+            Scanner sc = new Scanner(data);
+            while (sc.hasNextLine()) {
+                String[] argArr = sc.nextLine().split("\\|");
+                Task taskToBeAdded;
+                switch (argArr[0]) {
+                    case "E":
+                        taskToBeAdded = new Event(argArr[2], argArr[3]);
+                        break;
+                    case "D":
+                        taskToBeAdded = new Deadline(argArr[2], argArr[3]);
+                        break;
+                    default:
+                        taskToBeAdded = new Todo(argArr[2]);
+                        break;
+                }
+                if (argArr[1].equals("1")) {
+                    taskToBeAdded.markTaskAsDone();
+                }
+                tasks.add(taskToBeAdded);
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            println("Sorry, I can't find your list of tasks");
+        }
+    }
+    
+    public static void writeData(List<Task> tasks, String filePath) {
+        try {
+            File directoryName = new File("./data");
+            if (!directoryName.exists()) {
+               directoryName.mkdirs();
+            }
+            FileWriter fw = new FileWriter(filePath);
+            for (Task currTask : tasks) {
+                fw.write(currTask.getTaskType() + "|" + (currTask.getIsDone() ? "1" : "0") + "|"
+                        + currTask.getDescription()
+                        + (currTask.getTiming() == null ? "\n" : "|" + currTask.getTiming() + "\n"));
+            }
+            fw.close();
+        } catch (IOException e) {
+            println("Sorry, I was unable to store your list of tasks");
+        }
     }
 
 }

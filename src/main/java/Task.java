@@ -14,6 +14,22 @@ public class Task {
     public void markTaskAsDone() {
         this.isDone = true;
     }
+    
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+    
+    public String getDescription() {
+        return this.description;
+    }
+    
+    public String getTaskType() {
+        return null;
+    }
+    
+    public String getTiming() {
+        return null;
+    }
 
     @Override
     public String toString() {
