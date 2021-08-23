@@ -7,6 +7,11 @@ public class Task {
         this.done = false;
     }
 
+    public Task(String taskName, boolean done) {
+        this.taskName = taskName;
+        this.done = done;
+    }
+
     public void finished() {
         this.done = true;
     }
@@ -18,5 +23,9 @@ public class Task {
             finished = "X";
         }
         return "[" + finished + "] " + this.taskName;
+    }
+
+    public String toStoredString() {
+        return taskName;
     }
 }
