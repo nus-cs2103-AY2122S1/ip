@@ -39,7 +39,28 @@ public class Ui {
         return scanner.nextLine();
     }
 
-    public void showAdded() {
-        System.out.println("New command added");
+    public void showAdded(String tasks, int size) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(tasks);
+        System.out.printf("Now you have %d tasks in the list.%n", size);
+    }
+    public void showDelete(String tasks, int size) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(tasks);
+        System.out.printf("Now you have %d tasks in the list.%n", size);
+    }
+
+    public void showFind(String tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(tasks);
+    }
+    public void showList(String tasks) {
+        System.out.println("Here are the tasks in your list:");
+        System.out.println(tasks);
+    }
+
+    public void showDone(String tasks) {
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(tasks);
     }
 }

@@ -13,6 +13,7 @@ public abstract class Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        storage.save(tasks.getTasks());
     }
 
     public boolean isExit() {

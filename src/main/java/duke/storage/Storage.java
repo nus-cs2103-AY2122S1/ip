@@ -5,7 +5,6 @@ import duke.exception.DukeException;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,23 +23,28 @@ public class Storage {
         }
     }
 
-    public static void save(List<Task> lib) throws IOException {
+    public void save(List<Task> lib) throws DukeException {
         String location = "data/duke.txt";
 
-        File f = new File(location);
-        if (!f.exists()) {
-            if (f.getParentFile().mkdirs()) {
-                System.out.println("Directory created");
-            }
-            if (f.createNewFile()) {
-                System.out.println("Text file created");
-            }
-        }
+        try {
 
-        FileWriter fw = new FileWriter(location);
-        for (Task tsk: lib) {
-            fw.write(tsk.save() + System.lineSeparator());
+            File f = new File(location);
+            if (!f.exists()) {
+                if (f.getParentFile().mkdirs()) {
+                    System.out.println("Directory created");
+                }
+                if (f.createNewFile()) {
+                    System.out.println("Text file created");
+                }
+            }
+
+            FileWriter fw = new FileWriter(location);
+            for (Task tsk: lib) {
+                fw.write(tsk.save() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (Exception e) {
+            throw new DukeException(e.getMessage());
         }
-        fw.close();
     }
 }

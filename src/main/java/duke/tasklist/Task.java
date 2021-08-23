@@ -22,6 +22,10 @@ public class Task {
         isDone = true;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String save() {
         int done = isDone ? 1 : 0;
         return String.format("%d | %s", done, name);
