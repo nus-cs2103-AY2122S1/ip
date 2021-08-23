@@ -27,25 +27,14 @@ public class Storage {
      * @param path path to store file
      * @return TaskArrayList of stored tasks
      */
-    public static TaskArrayList load( Path path){
+    public static TaskArrayList load( Path path) throws DukeException,IOException{
         createStore(path);
         TaskArrayList taskList =  new TaskArrayList();
-        try {
-            Scanner sc = new Scanner(path);
-            SaveParser saveParser = new SaveParser(sc);
-            while (saveParser.hasNextLine()) {
-                try {
-                    taskList.add(saveParser.getNextTask());
-                } catch (DukeException e){
-                    System.out.println(e);
-                }
-
-
-            }
-        } catch (IOException e){
-
+        Scanner sc = new Scanner(path);
+        SaveParser saveParser = new SaveParser(sc);
+        while (saveParser.hasNextLine()) {
+            taskList.add(saveParser.getNextTask());
         }
-
         return taskList;
     }
 
