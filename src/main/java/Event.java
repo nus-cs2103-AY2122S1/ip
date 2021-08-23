@@ -7,7 +7,7 @@ import java.time.format.FormatStyle;
  */
 public class Event extends Task {
     /** A string representing the start and end time of the event **/
-    private LocalDate startEndTime;
+    private LocalDate eventDate;
 
     /**
      * Initializes a new Event
@@ -16,17 +16,17 @@ public class Event extends Task {
      */
     public Event(String name, LocalDate startTime) {
         super(name);
-        this.startEndTime = startTime;
+        this.eventDate = startTime;
     }
 
-    public LocalDate getStartEndTime() {
-        return startEndTime;
+    public LocalDate getEventDate() {
+        return eventDate;
     }
 
     @Override
     public String toString() {
         String isDone = isDone() ? "x" : " ";
-        String prettyDate = startEndTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
+        String prettyDate = eventDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
         return String.format("[E][%s] %s (at: %s)", isDone, getName(), prettyDate);
     }
 }
