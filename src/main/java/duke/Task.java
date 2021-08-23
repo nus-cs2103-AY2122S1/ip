@@ -4,12 +4,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-class Task {
+/**
+ * Abstract template for a task
+ */
+abstract class Task {
     /**
      * Indicates if a task is done.
      */
-    public boolean isDone;
-    public final String description;
+    protected boolean isDone;
+    protected final String description;
 
     /**
      * Constructor for a task.
@@ -39,6 +42,9 @@ class Task {
     }
 }
 
+/**
+ * A ToDo task.
+ */
 class ToDo extends Task {
 
     /**
@@ -61,8 +67,11 @@ class ToDo extends Task {
     }
 }
 
+/**
+ * A deadline task with a deadline.
+ */
 class DeadLine extends Task {
-    LocalDate deadline;
+    private final LocalDate deadline;
 
     /**
      * Constructor for a deadline task.
@@ -85,8 +94,11 @@ class DeadLine extends Task {
     }
 }
 
+/**
+ * An event task with a event date.
+ */
 class Event extends Task {
-    LocalDate timePeriod;
+    private final LocalDate timePeriod;
 
     /**
      * Constructor for a event task.

@@ -2,12 +2,18 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Main class for execution of the duke.
+ */
 class Main {
     public static void main(String[] args) {
-        moreOOP();
+        run();
     }
 
-    public static void moreOOP() {
+    /**
+     * Creates an interactive duke.
+     */
+    public static void run() {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
         while (duke.isLive()) {
