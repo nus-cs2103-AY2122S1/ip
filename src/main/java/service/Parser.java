@@ -36,12 +36,12 @@ public class Parser {
      *
      * @param command command order to execute
      * @param userInput user input to parse for execution
-     * @param taskManager executor of tasks based on commands and parameters
+     * @param taskList executor of tasks based on commands and parameters
      * @return output String message from taskManager after execution
      * @throws DukeException if userInput is of invalid format,
      * or taskManager is unable to execute command
      */
-    public String execute(Command command, String userInput, TaskManager taskManager)
+    public String execute(Command command, String userInput, TaskList taskList)
             throws DukeException {
 
         assert (!command.equals(Command.BYE));
@@ -53,28 +53,28 @@ public class Parser {
         
         switch (command) {
             case LIST:
-                return taskManager.getTaskList();
+                return taskList.getTaskList();
             case DONE:
                 taskNumber = extractNumber(userInput, command);
-                return taskManager.updateTaskAsDone(taskNumber);
+                return taskList.updateTaskAsDone(taskNumber);
             case DELETE:
                 taskNumber = extractNumber(userInput, command);
-                return taskManager.deleteTask(taskNumber);
+                return taskList.deleteTask(taskNumber);
             case TODO:
                 desc = extractDesc(userInput, command);
-                return taskManager.addToDoTask(desc);
+                return taskList.addToDoTask(desc);
             case EVENT:
                 desc = extractDesc(userInput, command);
                 dateTime = extractDateTime(userInput, command);
                 date = extractDate(dateTime);
                 time = extractTime(dateTime);
-                return taskManager.addEventTask(desc, date, time);
+                return taskList.addEventTask(desc, date, time);
             case DEADLINE:
                 desc = extractDesc(userInput, command);
                 dateTime = extractDateTime(userInput, command);
                 date = extractDate(dateTime);
                 time = extractTime(dateTime);
-                return taskManager.addDeadlineTask(desc, date, time);
+                return taskList.addDeadlineTask(desc, date, time);
             case EMPTY:
                 throw new DukeException(EMPTY_COMMAND_ERROR_MESSAGE);
             default: // INVALID

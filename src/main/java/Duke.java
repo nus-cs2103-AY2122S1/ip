@@ -1,7 +1,7 @@
 import exception.DukeException;
 import service.ChatBot;
 import service.Parser;
-import service.TaskManager;
+import service.TaskList;
 import utils.Command;
 
 import java.util.Scanner;
@@ -17,7 +17,7 @@ public class Duke {
 
     private final Parser parser = new Parser();
 
-    private final TaskManager taskManager = new TaskManager();
+    private final TaskList taskList = new TaskList();
 
     private final ChatBot chatBot = new ChatBot();
 
@@ -40,7 +40,7 @@ public class Duke {
      */
     public void run() {
         chatBot.greet();
-        taskManager.loadTasks();
+        taskList.loadTasks();
         
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine().trim();
@@ -49,7 +49,7 @@ public class Duke {
 
         while (!command.equals(Command.BYE)) {
             try {
-                output = parser.execute(command, userInput, taskManager);
+                output = parser.execute(command, userInput, taskList);
                 chatBot.info(output);
 
             } catch (DukeException exception) {

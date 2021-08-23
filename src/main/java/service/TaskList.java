@@ -24,7 +24,7 @@ import java.util.Scanner;
  *
  * This class acts as the manager of tasks held by the Duke.
  */
-public class TaskManager {
+public class TaskList {
 
     // Error message formats.
     private static final String INVALID_TASK_ERROR_MESSAGE = "Task number '%d' is invalid.";
