@@ -15,12 +15,12 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath.replaceAll("\\|/", File.separator);
         int index = this.filePath.lastIndexOf(File.separator);
-        this.directoryPath = Paths.get(this.filePath.substring(0, index));
+        this.directoryPath = index == -1 ? null : Paths.get(this.filePath.substring(0, index));
     }
 
     private List<String> load() throws IOException {
 
-        if (!Files.exists(directoryPath))
+        if (directoryPath != null && !Files.exists(directoryPath))
             Files.createDirectory(directoryPath);
 
         Path path = Paths.get(filePath);
