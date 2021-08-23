@@ -1,5 +1,7 @@
 package commands;
+import tasks.DeadlineTask;
 import tasks.EventTask;
+import java.time.format.DateTimeParseException;
 
 public class AddEventCommand extends AddCommand {
     private static final String DELIMITER = "/at";
@@ -9,7 +11,8 @@ public class AddEventCommand extends AddCommand {
 
     public AddEventCommand (String userInput) throws DukeException {
         // TODO: dateTime validation
-        String inputFormat = String.format("\t\"%s [task] %s [date/time]\"", KEYWORD, DELIMITER);
+        String inputFormat = String.format("\t\"%s [task] %s [mm-dd-yyyy hh:mm]\"", KEYWORD, DELIMITER);
+
         // Check whether input contains delimiter
         boolean hasDelimiter = userInput.contains(DELIMITER);
         if (!hasDelimiter) {
@@ -18,14 +21,21 @@ public class AddEventCommand extends AddCommand {
 
         }
         String[] inputData = userInput.substring(KEYWORD.length()).trim().split(DELIMITER);
+
         // Check whether input contains task and date/time
         boolean isValidInput = (inputData.length == 2);
         if (!isValidInput) {
             throw new DukeException("OOPS!!! " +
                     "Please ensure your input is in the following format:\n" + inputFormat);
         }
+
         String taskName = inputData[TASK_INDEX].trim();
         String dateTime = inputData[DATETIME_INDEX].trim();
-        this.task = new EventTask(taskName, dateTime);
+        try {
+            this.task = new EventTask(taskName, dateTime);
+        } catch(DateTimeParseException e) {
+            throw new DukeException("OOPS!!! " +
+                    "Please ensure your input is in the following format:\n" + inputFormat);
+        }
     }
 }

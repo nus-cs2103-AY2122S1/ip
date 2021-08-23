@@ -1,5 +1,6 @@
 package commands;
 import tasks.DeadlineTask;
+import java.time.format.DateTimeParseException;
 
 public class AddDeadlineCommand extends AddCommand {
     private static final String DELIMITER = "/by";
@@ -9,7 +10,7 @@ public class AddDeadlineCommand extends AddCommand {
 
     public AddDeadlineCommand(String userInput) throws DukeException {
         // TODO: dateTime validation
-        String inputFormat = String.format("\t\"%s [task] %s [date/time]\"", KEYWORD, DELIMITER);
+        String inputFormat = String.format("\t\"%s [task] %s [mm-dd-yyyy hh:mm]\"", KEYWORD, DELIMITER);
         // Check whether input contains delimiter
         boolean hasDelimiter = userInput.contains(DELIMITER);
         if (!hasDelimiter) {
@@ -26,6 +27,11 @@ public class AddDeadlineCommand extends AddCommand {
         }
         String taskName = inputData[TASK_INDEX].trim();
         String dateTime = inputData[DATETIME_INDEX].trim();
-        this.task = new DeadlineTask(taskName, dateTime);
+        try {
+            this.task = new DeadlineTask(taskName, dateTime);
+        } catch(DateTimeParseException e) {
+            throw new DukeException("OOPS!!! " +
+                    "Please ensure your input is in the following format:\n" + inputFormat);
+        }
     }
 }
