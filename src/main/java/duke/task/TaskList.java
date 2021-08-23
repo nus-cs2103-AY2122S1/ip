@@ -23,8 +23,12 @@ public class TaskList {
     }
 
     public void done(int taskNumber) {
-        Task currTask = listOfTasks.get(taskNumber);
-        currTask.markAsDone();
+        try {
+            Task currTask = listOfTasks.get(taskNumber);
+            currTask.markAsDone();
+        } catch (IndexOutOfBoundsException ioobe) {
+            return;
+        }
     }
 
     public int size() {

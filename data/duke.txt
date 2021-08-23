@@ -1,6 +1,0 @@
-[T][X] read books
-[D][ ] return book (by:Jan 05 2020)
-[T][ ] borrow book
-[D][ ] return book (by:Jan 06 2020)
-[E][ ] project meeting (at: Mon 2-4pm)
-[D][ ] do homework (by:Feb 07 2020)

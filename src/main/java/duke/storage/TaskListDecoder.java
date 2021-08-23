@@ -37,7 +37,6 @@ public class TaskListDecoder {
         task.trim();
         String type = task.substring(1, 2);
         String done = task.substring(4,5);
-        System.out.println(done);
         String taskDescription = task.substring(7, task.length()).trim();
         switch (type) {
             case "T" :

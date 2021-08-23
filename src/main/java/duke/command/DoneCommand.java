@@ -17,6 +17,10 @@ public class DoneCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.done(taskNum);
         storage.save(taskList);
-        ui.doneTask(taskList.getAllTasks().get(taskNum));
+        try {
+            ui.doneTask(taskList.getAllTasks().get(taskNum));
+        } catch (IndexOutOfBoundsException ioobe) {
+            System.out.println("That task doesn't exist!");
+        }
     }
 }

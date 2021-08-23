@@ -24,7 +24,6 @@ public class Duke {
             tasks = storage.load();
 
         } catch (Exception e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -48,7 +47,7 @@ public class Duke {
     }
 
     /**
-     * Main function to intialise Duke.
+     * Main function to initialise Duke.
      * @param args None required
      */
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package duke.storage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,14 +25,8 @@ public class Storage {
      * then a new file is created.
      * @return an ArrayList of tasks in the file
      */
-    public TaskList load() {
-        try {
-            return TaskListDecoder.decodeTaskList(Files.readAllLines(path));
-        } catch (Exception e) {
-            System.out.println("Error occurred while loading file");
-            e.printStackTrace();
-        }
-        return new TaskList();
+    public TaskList load() throws FileNotFoundException, IOException{
+        return TaskListDecoder.decodeTaskList(Files.readAllLines(path));
     }
 
     /**
