@@ -10,43 +10,43 @@ public abstract class Task implements Serializable {
 	private boolean isDone = false;
 	
 	/**
-	 * constructor of the abstract class, to be initialized with the subclass
+	 * Constructor of the abstract class, to be initialized with the subclass.
 	 *
-	 * @param desc description
+	 * @param desc Description.
 	 */
 	public Task(String desc) {
 		this.desc = desc;
 	}
 	
 	/**
-	 * mark the task as done
+	 * Marks the task as done.
 	 */
 	public void markDone() {
 		this.isDone = true;
 	}
 	
 	/**
-	 * get the status of the task
+	 * Gets the status of the task.
 	 *
-	 * @return boolean representing whether the task is done
+	 * @return Boolean representing whether the task is done.
 	 */
 	public boolean isDone() {
 		return this.isDone;
 	}
 	
 	/**
-	 * get description of the task
+	 * Gets description of the task.
 	 *
-	 * @return string representing the description
+	 * @return String representing the description.
 	 */
 	public String getDesc() {
 		return this.desc;
 	}
 	
 	/**
-	 * string representation of task class
+	 * Returns string representation of task class.
 	 *
-	 * @return [X] or [ ] indicating whether the task is done and the description
+	 * @return [X] or [ ] indicating whether the task is done and the description.
 	 */
 	@Override
 	public String toString() {

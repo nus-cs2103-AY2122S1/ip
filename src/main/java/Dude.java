@@ -1,9 +1,9 @@
-import commandimpl.CommandLogicUnitImpl;
-import commandimpl.CommandProcessorImpl;
 import dao.TaskDao;
 import dao.TaskDaoImpl;
-import icommand.ICommandLogicUnit;
-import icommand.ICommandProcessor;
+import logic.CommandLogicUnitImpl;
+import logic.ICommandLogicUnit;
+import parser.CommandParserImpl;
+import parser.ICommandParser;
 
 import static util.Display.printSentence;
 
@@ -26,7 +26,7 @@ public class Dude {
 		
 		starting();
 		
-		try (ICommandProcessor commandProcessor = new CommandProcessorImpl(commandLogicUnit)) {
+		try (ICommandParser commandProcessor = new CommandParserImpl(commandLogicUnit)) {
 			while (true) {
 				commandProcessor.processInput();
 			}

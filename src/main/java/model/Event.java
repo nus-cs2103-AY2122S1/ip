@@ -1,18 +1,22 @@
 package model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
- * a task containing description and the time of the event
+ * Task containing description and the time of the event.
  */
-public class Event extends Task {
-	private final String time;
+public class Event extends Task implements TimedItem {
+	/** LocalDateTime of the event */
+	private final LocalDateTime time;
 	
 	/**
-	 * public constructor of event
+	 * Public constructor of Event.
 	 *
-	 * @param desc string representing the description
-	 * @param time string representing the time of the event
+	 * @param desc String representing the description
+	 * @param time LocalDateTime.
 	 */
-	public Event(String desc, String time) {
+	public Event(String desc, LocalDateTime time) {
 		super(desc);
 		this.time = time;
 	}
@@ -24,6 +28,12 @@ public class Event extends Task {
 	 */
 	@Override
 	public String toString() {
-		return "[E]" + super.toString() + " (at : " + time + ")";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+		return "[E]" + super.toString() + " (at : " + time.format(formatter) + ")";
+	}
+	
+	@Override
+	public LocalDateTime getTime() {
+		return time;
 	}
 }
