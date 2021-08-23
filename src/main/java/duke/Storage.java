@@ -10,6 +10,11 @@ import java.util.Scanner;
 public class Storage {
     public static final String SERIALIZATION_PATH = "data/task_list.txt";
 
+    /**
+     * Updates local file with provided task list.
+     * @param taskList Provided task list.
+     * @throws IOException When local files cannot be accessed.
+     */
     public static void updateLocalFile(TaskList taskList) throws IOException {
 
         ArrayList<Task> list = taskList.arrayList;
@@ -45,7 +50,11 @@ public class Storage {
         fileWriter.close();
     }
 
-
+    /**
+     * Loads task list from local file.
+     * @param path Given path of local file
+     * @return Arraylist of tasks. Will be empty if local file path cannot be accessed.
+     */
     public static ArrayList<Task> load(String path) {
         ArrayList<Task> arrayList = new ArrayList<>(100);
         File taskFile = new File(path);

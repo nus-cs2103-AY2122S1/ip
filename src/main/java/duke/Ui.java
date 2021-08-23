@@ -9,6 +9,9 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Prints initial headers and greetings.
+     */
     public static void initialize() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,6 +21,11 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
         printStatement("Hello! I'm Duke\nWhat can I do for you?\n");
     }
+
+    /**
+     * Out puts a statement, formatted with dividing lines before and after.
+     * @param statement Statement to be printed.
+     */
 
     public static void printStatement(String statement) {
         System.out.println();
@@ -29,6 +37,10 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Alternative printing methods, which prepends OOPS! for printing of error messages
+     * @param errorMsg Error message to be printed.
+     */
     public static void printError(String errorMsg) {
         printStatement("OOPS! " + errorMsg);
     }

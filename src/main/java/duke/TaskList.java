@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represents an array of tasks that the user inputs in.
+ */
 public class TaskList {
     protected ArrayList<Task> arrayList;
     TaskList(ArrayList<Task> loaded) {
@@ -29,7 +32,12 @@ public class TaskList {
         Ui.printStatement(sb.toString());
 
     }
-
+    /**
+     * Lists all of the tasks within the array.
+     * Numbered from 1 onwareds.
+     *
+     * @return A string containing list of tasks.
+     */
     public void listTasks() {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list: \n");
@@ -42,6 +50,13 @@ public class TaskList {
         Ui.printStatement(sb.toString());
     }
 
+    /**
+     * Adds a task to the internal array.
+     *
+     * @param command Command to be parsed.
+     * @param parameter Description of task.
+     * @param date Provided date of task.
+     */
     public void addTask(Command command, String parameter, String date) {
         StringBuilder sb = new StringBuilder();
         sb.append("Got it. I've added this task: \n");
@@ -70,6 +85,10 @@ public class TaskList {
         addTask(command, parameter, "");
     }
 
+    /**
+     * Removes task from task list.
+     * @param index Index of task to be removed.
+     */
     public void removeTask(int index) {
         StringBuilder sb = new StringBuilder();
         sb.append("Noted. I've removed this task:\n");
@@ -79,10 +98,19 @@ public class TaskList {
         Ui.printStatement(sb.toString());
     }
 
-    public int size() {
+    /**
+     * Returns size of task list.
+     * @return Integer showing size of task list.
+     */
+    protected int size() {
         return arrayList.size();
     }
 
+    /**
+     * Shows a task as done.
+     *
+     * @param i Index of task to be done.
+     */
     public void done(Integer i) {
         Task task = arrayList.get(i);
         task.markAsDone();
