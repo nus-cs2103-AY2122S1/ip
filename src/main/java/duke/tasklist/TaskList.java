@@ -94,7 +94,6 @@ public class TaskList {
         } else {
             tasks.add(new Deadline(description, dateTime, FORMAT_NO_TIME, false));
         }
-        ;
         printAfterAdding();
     }
 

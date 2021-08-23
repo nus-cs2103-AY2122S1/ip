@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * A task that the user wants to complete by a certain point in time.
  */
 public class Deadline extends Task {
-    protected boolean timeBool;
+    protected boolean hasTime;
     protected LocalDateTime dateTime;
     protected LocalDate date;
     protected DateTimeFormatter formatInput;
@@ -21,13 +21,13 @@ public class Deadline extends Task {
      * @param description Description of the task.
      * @param dateString  Date and time of the deadline.
      * @param formatInput How the input is formatted.
-     * @param timeBool    Boolean for whether time was supplied.
+     * @param hasTime     Boolean for whether time was supplied.
      */
-    public Deadline(String description, String dateString, DateTimeFormatter formatInput, boolean timeBool) {
+    public Deadline(String description, String dateString, DateTimeFormatter formatInput, boolean hasTime) {
         super(description);
         this.formatInput = formatInput;
-        this.timeBool = timeBool;
-        if (!timeBool) {
+        this.hasTime = hasTime;
+        if (!hasTime) {
             this.date = LocalDate.parse(dateString, formatInput);
         } else {
             this.dateTime = LocalDateTime.parse(dateString, formatInput);
@@ -41,7 +41,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        if (timeBool) {
+        if (this.hasTime) {
             return "[D][" + this.getStatusIcon() + "] " + this.description + " (by: " +
                     formatOutputTime.format(this.dateTime) + ")";
         } else {
