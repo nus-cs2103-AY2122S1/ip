@@ -1,4 +1,6 @@
-public class InvalidArgumentException extends DukeException{
+package duke.exception;
+
+public class InvalidArgumentException extends DukeException {
   public InvalidArgumentException(int numOfTask) {
     super(numOfTask < 0
         ? "Please input a positive number."
