@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ToDoList {
@@ -60,13 +61,13 @@ public class ToDoList {
         System.out.println("========== " + this.name + " ===========\n");
     }
 
-    public void addDeadline(String item, String deadline) {
+    public void addDeadline(String item, LocalDateTime deadline) {
         Deadline dl = new Deadline(item, deadline);
         this.record.add(dl);
         this.totalNumber++;
         System.out.println("========== " + this.name + " ===========");
         System.out.println("Aye Aye Capt'. I've added this Deadline:");
-        System.out.println("  [D][ ] " + item + "(by: " + deadline + ")");
+        System.out.println("  [D][ ] " + dl.toString());
         System.out.println("Now you have " + this.totalNumber.toString() + " in the list");
         System.out.println("========== " + this.name + " ===========\n");
     }

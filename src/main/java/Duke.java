@@ -1,9 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
 
     enum Commands {
-        BYE, LIST, DONE, TODO, EVENT, DEADLINE, DELETE;
+        BYE, LIST, DONE, TODO, EVENT, DEADLINE, DELETE
     }
 
     private static String name = "Duke";
@@ -70,10 +73,17 @@ public class Duke {
                 String substring = command.substring(9);
                 String item = substring.substring(0, substring.indexOf("/"));
                 String deadline = substring.substring(substring.indexOf("/") + 1).substring(2);
-                tdl.addDeadline(item, deadline);
+                if (deadline.startsWith(" ")) {
+                    deadline = deadline.substring(1);
+                }
+                LocalDateTime dl = LocalDateTime.parse(deadline.replace(' ','T'),
+                        DateTimeFormatter.ISO_DATE_TIME);
+                tdl.addDeadline(item, dl);
             } catch (StringIndexOutOfBoundsException e) {
                 dukePrinter("Hold up... You got the format all wrong! It's supposed to " +
                         "be <deadline> <name> /by <dueDate>");
+            } catch (DateTimeParseException e) {
+                System.out.println("Please key in the date time as YYYY-MM-dd HH:mm");
             } catch (DukeException e) {
                 dukePrinter(e.getMessage());
             }
@@ -95,7 +105,7 @@ public class Duke {
     private static void greeting() {
         System.out.println("========== " + Duke.name + " ===========");
         System.out.println("Hello... I'm " + Duke.name + ":/");
-        System.out.println("And how can I help you? Make it snappy!");
+        System.out.println("And how can I help you?");
         System.out.println("========== " + Duke.name + " ===========\n");
     }
 

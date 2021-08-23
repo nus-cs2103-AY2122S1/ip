@@ -1,8 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.TextStyle;
+import java.util.Locale;
+
 public class Deadline extends Task {
     private String name;
-    private String deadline;
+    private LocalDateTime deadline;
 
-    Deadline(String name, String deadline) {
+    Deadline(String name, LocalDateTime deadline) {
         this.name = name;
         this.deadline = deadline;
     }
@@ -14,10 +18,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return this.name + " (by: " + this.deadline + ")";
+        return this.name + " (by: " + this.deadline.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " + this.deadline.getDayOfMonth() + " "
+                + this.deadline.getYear() + " " + this.deadline.toLocalTime() + ")";
     }
 
     public String getDeadline() {
-        return this.deadline;
+        return this.deadline.toString();
     }
 }
