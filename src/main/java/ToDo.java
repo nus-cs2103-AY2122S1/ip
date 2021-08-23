@@ -8,6 +8,10 @@ public class ToDo extends Task {
         super(description, Type.TODO);
     }
 
+    public ToDo(boolean isDone, String description) {
+        super(isDone, description, Type.TODO);
+    }
+
     @Override
     public String toString() {
         return getTypeBox() + getCheckBox() + description;
