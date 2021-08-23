@@ -1,9 +1,13 @@
 public class Task {
     protected String description;
+    protected String date;
+    protected String time;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, String date, String time) {
         this.description = description;
+        this.date = date;
+        this.time = time;
         this.isDone = false;
     }
 
@@ -19,13 +23,15 @@ public class Task {
         return "";
     }
 
-    public String getDate() {
+    public String getFormattedDate() {
         return "";
     }
 
-    public String getTime() {
+    public String getFormattedTime() {
         return "";
     }
+
+    public String getDate() { return this.date; }
 
     @Override
     public String toString() {

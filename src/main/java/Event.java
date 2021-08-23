@@ -3,34 +3,30 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
+    private String timeStart;
+    private String timeEnd;
 
-    protected String at;
-    protected String[] segments;
-    protected String[] times;
-
-    public Event(String description, String at) {
-        super(description);
-        this.at = at;
-        this.segments = at.split(" ");
-        if (this.segments.length > 1) {
-            this.times = this.segments[1].split("-");
-        }
+    public Event(String description, String date, String time) {
+        super(description, date, time);
+        String[] segments = this.time.split("-");
+        this.timeStart = segments[0];
+        this.timeEnd = segments[1];
     }
 
     @Override
-    public String getDate() {
+    public String getFormattedDate() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter dateFormatterOutput = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        LocalDate date = LocalDate.parse(segments[0], dateFormatter);
+        LocalDate date = LocalDate.parse(this.date, dateFormatter);
         return date.format(dateFormatterOutput).toString();
     }
 
     @Override
-    public String getTime() {
+    public String getFormattedTime() {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("k:mm");
         DateTimeFormatter timeFormatterOutput = DateTimeFormatter.ofPattern("h.mma");
-        LocalTime timeStart = LocalTime.parse(times[0], timeFormatter);
-        LocalTime timeEnd = LocalTime.parse(times[1], timeFormatter);
+        LocalTime timeStart = LocalTime.parse(this.timeStart, timeFormatter);
+        LocalTime timeEnd = LocalTime.parse(this.timeEnd, timeFormatter);
         return timeStart.format(timeFormatterOutput).toString() + " to " +
                 timeEnd.format(timeFormatterOutput).toString();
 
@@ -39,11 +35,11 @@ public class Event extends Task {
     @Override
     public String getReadableString() {
         String status = this.isDone ? "1" : "0";
-        return "E | " + status + " | " + this.description + " | " + this.at  + "\n";
+        return "E | " + status + " | " + this.description + " | " + this.date + " " + this.time + "\n";
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getDate() + " " + this.getTime() + ")";
+        return "[E]" + super.toString() + " (at: " + getFormattedDate() + " " + getFormattedTime() + ")";
     }
 }

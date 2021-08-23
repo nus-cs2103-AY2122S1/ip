@@ -1,17 +1,13 @@
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+public class CommandBye extends Command {
+    public static final String KEYWORD = "bye";
+    public static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
 
-public class Command {
     public void execute(TaskList tl, Storage st, Ui ui) {
-
+        ui.printout(GOODBYE_MESSAGE);
     }
 
-    public boolean isArgumentValid() {
-        return true;
-    }
-
+    @Override
     public boolean isExit() {
-        return false;
+        return true;
     }
 }

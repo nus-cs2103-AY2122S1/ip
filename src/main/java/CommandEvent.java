@@ -1,16 +1,16 @@
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 
-public class CommandDeadline extends Command {
-    public static final String KEYWORD = "deadline";
+public class CommandEvent extends Command {
+    public static final String KEYWORD = "event";
     private ArrayList<String> arguments;
 
 
-    public CommandDeadline(ArrayList<String> arguments) {
+    public CommandEvent(ArrayList<String> arguments) {
         this.arguments = arguments;
     }
 
@@ -18,14 +18,16 @@ public class CommandDeadline extends Command {
     public boolean isArgumentValid() {
         try {
 
-            if (arguments.size() >= 3 && arguments.get(1).contains("/by")) {
+            if (arguments.size() >= 4 && arguments.get(1).contains("/at")) {
                 DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate date = LocalDate.parse(arguments.get(2), dateFormatter);
-                if (arguments.size() >= 4) {
-                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("k:mm");
-                    DateTimeFormatter timeFormatterOutput = DateTimeFormatter.ofPattern("h.mma");
-                    LocalTime time = LocalTime.parse(arguments.get(3), timeFormatter);
-                }
+
+                String[] segments = arguments.get(3).split("-");
+                String timeStart = segments[0];
+                String timeEnd = segments[1];
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("k:mm");
+                LocalTime timeS = LocalTime.parse(timeStart, timeFormatter);
+                LocalTime timeE = LocalTime.parse(timeEnd, timeFormatter);
                 return true;
             } else {
                 return false;
@@ -38,15 +40,11 @@ public class CommandDeadline extends Command {
     @Override
     public void execute(TaskList tl, Storage st, Ui ui) {
         if (isArgumentValid()) {
-            Deadline newDeadline;
-            if (arguments.size() >= 4) {
-                newDeadline = new Deadline(arguments.get(0), arguments.get(2), arguments.get(3));
-            } else {
-                newDeadline = new Deadline(arguments.get(0), arguments.get(2), "");
-            }
-            tl.addTask(newDeadline);
+            Event newEvent;
+            newEvent = new Event(arguments.get(0), arguments.get(2), arguments.get(3));
+            tl.addTask(newEvent);
         } else {
-            throw new DukeException("Invalid argument for command: deadline");
+            throw new DukeException("Invalid argument for command: event");
         }
     }
 
