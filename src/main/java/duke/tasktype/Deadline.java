@@ -1,7 +1,11 @@
+package duke.tasktype;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import duke.Duke;
+import duke.exception.WrongCommandFormatException;
 
 /**
  * Class to represent a task with a deadline.

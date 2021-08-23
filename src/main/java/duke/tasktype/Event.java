@@ -1,7 +1,10 @@
+package duke.tasktype;
+
 import java.util.Scanner;
+import duke.exception.WrongCommandFormatException;
 
 /**
- * Class to represent an Event task.
+ * Class to represent an duke.tasks.Event task.
  * An event has an additional component of a date.
  *
  * @author Houten Teo
@@ -9,12 +12,13 @@ import java.util.Scanner;
  */
 public class Event extends Task {
 
+    private String command;
     private String description = " ";
     private String timeframe;
     private boolean isDone;
 
     /**
-     * Constructor for the Event task.
+     * Constructor for the duke.tasks.Event task.
      * @param description the description of the task.
      * @param isDone whether or not the task is completed.
      * @throws WrongCommandFormatException thrown when the user enters the
@@ -22,6 +26,7 @@ public class Event extends Task {
      */
     public Event(String description, boolean isDone) throws WrongCommandFormatException {
         super(description, isDone);
+        this.command = description;
         Scanner s = new Scanner(description);
         while (s.hasNext()) {
             String next = s.next();
@@ -110,5 +115,15 @@ public class Event extends Task {
             System.out.println("WEW that's another task completed");
             this.isDone = true;
         }
+    }
+
+    @Override
+    public String createData() {
+        String data = getTypeIcon()
+                + ""
+                + getStatusIcon()
+                + " "
+                + this.command;
+        return data;
     }
 }

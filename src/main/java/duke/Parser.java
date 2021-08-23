@@ -1,14 +1,19 @@
+package duke;
+
+import duke.tasktype.Deadline;
+import duke.tasktype.Event;
+import duke.tasktype.Todo;
 import java.util.Scanner;
+import duke.exception.WrongCommandFormatException;
 
 public class Parser {
     private boolean isRunning;
-    private Ui ui;
     private MyList list;
     private Storage storage;
+
     public Parser(MyList list, Storage storage) {
         this.isRunning = true;
         this.list = list;
-        this.ui = new Ui();
         this.storage = storage;
     }
 
@@ -34,7 +39,7 @@ public class Parser {
                     counter ++;
                 }
                 if (counter == 0) {
-                    this.ui.invalidIndexMessage();
+                    Ui.invalidIndexMessage();
                 }
             } else if (input.equals("todo")) {
                 Scanner s2 = new Scanner(s.nextLine());
@@ -47,7 +52,7 @@ public class Parser {
                     this.list.addTask(newTodo);
                     this.storage.writeToFile();
                 } catch (WrongCommandFormatException e) {
-                    this.ui.formatExceptionMessage(e);
+                    Ui.formatExceptionMessage(e);
                 }
 
             } else if (input.equals("deadline")) {
@@ -61,7 +66,7 @@ public class Parser {
                     this.list.addTask(newDeadline);
                     this.storage.writeToFile();
                 } catch (WrongCommandFormatException e) {
-                    this.ui.formatExceptionMessage(e);
+                    Ui.formatExceptionMessage(e);
                 }
             } else if (input.equals("event")) {
                 Scanner s4 = new Scanner(s.nextLine());
@@ -74,7 +79,7 @@ public class Parser {
                     this.list.addTask(newEvent);
                     this.storage.writeToFile();
                 } catch (WrongCommandFormatException e) {
-                    this.ui.formatExceptionMessage(e);
+                    Ui.formatExceptionMessage(e);
                 }
             } else if (input.equals("delete")) {
                 Scanner s5 = new Scanner(s.nextLine());
@@ -83,30 +88,26 @@ public class Parser {
                     this.list.deleteTask(index);
                     this.storage.writeToFile();
                 } else {
-                    this.ui.invalidIndexMessage();
+                    Ui.invalidIndexMessage();
                 }
             } else if (input.equals("setFormat")) {
                 Scanner s6 = new Scanner(s.nextLine());
                 if (s6.hasNextLine()) {
                     try {
                         Duke.setFormat(s6.nextLine().substring(1));
-                        System.out.println(
-                                "Date format has been updated to: "
-                                        + Duke.getFormat()
-                        );
-                        this.ui.formatUpdatedMessage();
+                        Ui.formatUpdatedMessage();
                         this.storage.writeToFile();
                     } catch (IllegalArgumentException e) {
-                        this.ui.unacceptableFormatMessage();
+                        Ui.unacceptableFormatMessage();
                     }
                 }
             } else if (input.equals("format")) {
-                this.ui.currentDateFormatMessage();
+                Ui.currentDateFormatMessage();
             } else {
-                this.ui.noSpecificCmdMessage();
+                Ui.noSpecificCmdMessage();
             }
         } else {
-            this.ui.botShutdownMessage();
+            Ui.botShutdownMessage();
             this.isRunning = false;
         }
 

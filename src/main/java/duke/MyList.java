@@ -1,12 +1,11 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+package duke;
+
+import duke.tasktype.Task;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
- * MyList class that encapsulates the bot list object and functionalities.
+ * duke.MyList class that encapsulates the bot list object and functionalities.
  *
  * @Author Houten Teo
  * @version CS2103T week 2
@@ -20,22 +19,10 @@ public class MyList {
     private Ui ui;
 
     /**
-     * Constructor for the MyList class.
-     * Adds the tasks from the Data.txt file into the list if any.
+     * Constructor for the duke.MyList class.
+     * Adds the duke.tasks from the Data.txt file into the list if any.
      */
     public MyList() {
-//        try {
-//            File dataFile = new File("src/main/java/Data.txt");
-//            Scanner s = new Scanner(dataFile);
-//            Duke.setFormat(s.nextLine());
-//            while (s.hasNextLine()) {
-//                String input = s.nextLine();
-//                Task t = Task.getTaskFromString(input);
-//                this.myList.add(t);
-//            }
-//        } catch (FileNotFoundException e) {
-//            System.out.println("No data to load");
-//        }
           this.myList = new ArrayList<Task>();
     }
 
@@ -50,11 +37,10 @@ public class MyList {
     /**
      * Method to add an item into the list
      * Subsequently prints out the total number of items in the list.
-     * @param t the Task to be added into the list
+     * @param t the duke.tasks.Task to be added into the list
      */
     public void addTask(Task t) {
         myList.add(t);
-//        writeToFile();
         System.out.println("Got it! I have added:");
         System.out.println(t.toString());
         int noOfItems = this.myList.size();
@@ -103,7 +89,6 @@ public class MyList {
      */
     public void deleteTask(int index) {
         Task removed = this.myList.remove(index - 1);
-//        writeToFile();
         System.out.println("Noted. I've removed this task:");
         System.out.println(removed.toString());
         int noOfItems = this.myList.size();
@@ -117,24 +102,4 @@ public class MyList {
     public void loadTask(Task t) {
         this.myList.add(t);
     }
-
-    /**
-     * Method to update the Data.txt file with all the items in the list.
-     * This would allow the saving of data even when Duke restarts
-     */
-//    public void writeToFile() {
-//        try {
-//            int listLength = myList.size();
-//            String input = Duke.getFormat() + "\n";
-//            FileWriter fw = new FileWriter("src/main/java/Data.txt");
-//            for (int i = 0; i < listLength; i++) {
-//                Task t = myList.get(i);
-//                input += t.createData() + "\n";
-//            }
-//            fw.write(input);
-//            fw.close();
-//        } catch (IOException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
 }

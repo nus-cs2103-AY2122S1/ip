@@ -1,49 +1,53 @@
+package duke;
+
+import duke.exception.WrongCommandFormatException;
+
 public class Ui {
 
-    public void welcomeMessage() {
+    public static void welcomeMessage() {
         System.out.println(
-                "Yo! Duke here \n"
+                "Yo! duke.Duke here \n"
                         + "What did you call me for? \n"
                         + "It better be something useful or else... \n"
         );
     }
 
-    public void loadingError() {
-        System.out.println("Error loading tasks");
+    public static void loadingError() {
+        System.out.println("Error loading duke.tasks");
     }
 
-    public void emptyList() {
+    public static void emptyList() {
         System.out.println("Your list is empty.");
     }
 
-    public void invalidIndexMessage() {
+    public static void invalidIndexMessage() {
         System.out.println("Invalid index, please try again");
     }
 
-    public void formatExceptionMessage(WrongCommandFormatException e) {
+    public static void formatExceptionMessage(WrongCommandFormatException e) {
         System.out.println(e.getMessage());
     }
 
-    public void formatUpdatedMessage() {
+    public static void formatUpdatedMessage() {
         System.out.println(
                 "Date format has been updated to: "
                         + Duke.getFormat()
         );
     }
 
-    public void unacceptableFormatMessage() {
+    public static void unacceptableFormatMessage() {
         System.out.println("Not an acceptable format. Please try again");
     }
 
-    public void currentDateFormatMessage() {
+    public static void currentDateFormatMessage() {
         System.out.println("Current format " + Duke.getFormat());
     }
 
-    public void noSpecificCmdMessage() {
+    public static void noSpecificCmdMessage() {
         System.out.println("No specific command specified. Please try again");
     }
 
-    public void botShutdownMessage() {
+    public static void botShutdownMessage() {
         System.out.println("Good riddance! Time to continue my beauty sleep :)");
     }
 }

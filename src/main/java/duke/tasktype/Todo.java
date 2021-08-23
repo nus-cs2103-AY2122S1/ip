@@ -1,4 +1,6 @@
-import java.util.Scanner;
+package duke.tasktype;
+
+import duke.exception.WrongCommandFormatException;
 //test master branch
 //add another commit in master branch
 /**
@@ -9,9 +11,8 @@ import java.util.Scanner;
  * @author Houten Teo
  * @version CS2103T week 2
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
-    private String taskType = "Todo";
     private String description;
     private boolean isDone;
 
@@ -88,5 +89,15 @@ public class Todo extends Task{
                     "Finally! Took you long enough to complete:" + this.description
             );
         }
+    }
+
+    @Override
+    public String createData() {
+        String data = getTypeIcon()
+                + ""
+                + getStatusIcon()
+                + " "
+                + this.description;
+        return data;
     }
 }

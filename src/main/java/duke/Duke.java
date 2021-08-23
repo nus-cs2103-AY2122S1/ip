@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -37,7 +39,8 @@ public class Duke {
      * Method to start the bot and waits for the user's input.
      */
     public void start() {
-        //add welcome message here
+
+        Ui.welcomeMessage();
 
         this.storage.load();
 

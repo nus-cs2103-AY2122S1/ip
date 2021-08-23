@@ -1,3 +1,10 @@
+package duke;
+
+import duke.exception.WrongCommandFormatException;
+import duke.tasktype.Deadline;
+import duke.tasktype.Event;
+import duke.tasktype.Task;
+import duke.tasktype.Todo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -6,16 +13,14 @@ import java.util.Scanner;
 
 public class Storage {
     private MyList list;
-    private Ui ui;
 
     public Storage(MyList list) {
         this.list = list;
-        this.ui = new Ui();
     }
 
     public void load() {
         try {
-            File dataFile = new File("src/main/java/Data.txt");
+            File dataFile = new File("src/main/java/duke/Data.txt");
             Scanner s = new Scanner(dataFile);
             Duke.setFormat(s.nextLine());
             while (s.hasNextLine()) {
@@ -59,8 +64,8 @@ public class Storage {
                 }
             }
         } catch (WrongCommandFormatException e) {
-            this.ui.formatExceptionMessage(e);
-            this.ui.loadingError();
+            Ui.formatExceptionMessage(e);
+            Ui.loadingError();
         }
         return t;
     }
