@@ -1,9 +1,6 @@
+package duke;
+
 public abstract class Task {
-    public enum Type {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
     protected String description;
     protected boolean isDone;
 

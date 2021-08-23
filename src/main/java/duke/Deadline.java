@@ -1,10 +1,12 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 
-public class Event extends Task{
-    protected LocalDateTime duration;
+public class Deadline extends Task{
+    protected LocalDateTime deadline;
     DateTimeFormatter fmt = new DateTimeFormatterBuilder()
             .appendPattern("MMM dd yyyy")
             .optionalStart()
@@ -14,20 +16,22 @@ public class Event extends Task{
             .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
             .toFormatter();
 
-    Event(String desc, LocalDateTime duration) {
+    Deadline(String desc, LocalDateTime deadline) {
         super(desc);
-        this.duration = duration;
+        this.deadline = deadline;
     }
+
     @Override
     public String save() {
-        return "E | " + (this.isDone ? 1 : 0) + " | " + this.description + " | " + this.duration;
+        return "D | " + (this.isDone ? 1 : 0) + " | " + this.description + " | " + this.deadline;
     }
-    public LocalDateTime getDuration() {
-        return this.duration;
+
+    public LocalDateTime getDeadline() {
+        return this.deadline;
     }
 
     @Override
     public String toString(){
-        return "[E]" + "[" + this.getStatusIcon() + "]" + " " + this.description + " (" + duration.format(fmt) + ")";
+        return "[D]" + "[" + this.getStatusIcon() + "]" + " " + this.description + " (" + deadline.format(fmt) + ")";
     }
 }

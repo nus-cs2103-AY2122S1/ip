@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -103,7 +105,7 @@ public class Parser {
         String[] splitString = input.split(" ", 2);
         int i = Integer.parseInt(splitString[1])-1;
         if (i + 1 <= 0 || i + 1 > tasks.size()) {
-            throw new DukeException("Task not found!");
+            throw new DukeException("duke.Task not found!");
         }
         tasks.get(i).markAsDone();
         try {

@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
     public static void print(String input) {
         System.out.println("\t" + input);
@@ -17,6 +19,6 @@ public class Ui {
         System.out.println("\tError loading! Try restarting the program!");
     }
     public static void welcome() {
-        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke.\nWhat can I do for you?");
     }
 }
