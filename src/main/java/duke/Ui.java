@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    Parser parser;
+    private Parser parser;
 
     private static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -17,8 +17,8 @@ public class Ui {
             + "What can I do for you?\n";
     private static String exit = "Bye. Hope to see you again soon!";
 
-    public Ui(DukeList list) {
-        this.parser = new Parser(list);
+    public Ui(DukeList list, Storage storage) {
+        this.parser = new Parser(list, storage);
     }
 
     public void run() {
