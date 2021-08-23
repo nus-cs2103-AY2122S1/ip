@@ -8,6 +8,6 @@ public class DukeException extends Exception{
 
     @Override
     public String getMessage() {
-        return ANSI_RED + "     " + super.getMessage() + "!!\n     Try Again \\_(\"v\")_/" + ANSI_RESET;
+        return ANSI_RED + "     " + super.getMessage() + "\n     Try Again \\_(\"v\")_/" + ANSI_RESET;
     }
 }

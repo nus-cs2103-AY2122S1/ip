@@ -1,10 +1,10 @@
 public class Task {
     protected String description;
-    protected boolean isDone;
+    protected boolean isCompleted;
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        this.isCompleted = false;
     }
 
     public String getDescription() {
@@ -12,11 +12,11 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isCompleted ? "X" : " "); // mark done task with X
     }
 
-    public void changeStatus() {
-        this.isDone = true;
+    public void markAsCompleted() {
+        this.isCompleted = true;
     }
 
     @Override
