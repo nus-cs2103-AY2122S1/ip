@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 public class Duke {
 
+    /**
+     * Generates the task manager.
+     * @return Task manager object.
+     */
     public TaskList generateTaskList() {
         return new TaskList();
     }
