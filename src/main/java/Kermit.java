@@ -42,12 +42,13 @@ public class Kermit {
 
         String DIRNAME = "./data";
         String FILENAME = "kermit.txt";
+        String PATH = String.join("/", DIRNAME, FILENAME);
 
         // Check if Kermit data exists, else create it
         try {
             File dir = new File(DIRNAME);
             dir.mkdir();
-            File f = new File(String.join("/", DIRNAME, FILENAME));
+            File f = new File(PATH);
             f.createNewFile();
         } catch (IOException e) {
             System.err.println(e.getMessage());

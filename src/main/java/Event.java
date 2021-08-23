@@ -5,6 +5,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String getShortForm() {
+        return "E";
+    }
+
     @Override
     public String toString() {
         return "[E] " + super.toString() + " (at: " + this.at + ")";

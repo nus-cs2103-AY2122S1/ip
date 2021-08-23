@@ -3,6 +3,10 @@ public class ToDos extends Task{
         super(description);
     }
 
+    public String getShortForm() {
+        return "T";
+    }
+
     @Override
     public String toString() {
         return "[T] " + super.toString();
