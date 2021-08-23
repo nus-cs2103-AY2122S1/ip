@@ -84,6 +84,12 @@ public class Parser {
             }
             bot.handleDelete(index);
             break;
+        case "find":
+            if (inputs.length == 1) {
+                throw new DukeException("The task to find cannot be empty!");
+            }
+            bot.handleFind(inputs[1].trim());
+            break;
         default:
             bot.handleWrongCommand();
         }
