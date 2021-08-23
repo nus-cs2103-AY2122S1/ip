@@ -1,5 +1,5 @@
-import org.junit.jupiter.api.Test;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -89,6 +89,11 @@ public class Duke {
                         "You might have mistyped the task number.\n" +
                         "Please ensure task number is between 1 and %d.\n" +
                         "%s\n", LINE_HORIZONTAL, taskList.size(), LINE_HORIZONTAL);
+            } catch (DateTimeParseException e) {
+                System.out.printf("%s\n" +
+                        "Your date might not be in the correct format.\n" +
+                        "Please ensure it is in the YYYY-MM-DD format.\n" +
+                        "%s\n", LINE_HORIZONTAL, LINE_HORIZONTAL);
             }
         }
         scanner.close();
@@ -202,7 +207,7 @@ public class Duke {
      * @param input The deadline inputted by the user.
      */
     public static void addDeadline(String input)
-            throws MissingTaskException, MissingTimeException, InvalidDateFormatException {
+            throws MissingTaskException, MissingTimeException, DateTimeParseException {
         int separation = input.indexOf(" /by ");
 
         if (separation == -1) {
@@ -219,8 +224,18 @@ public class Duke {
             throw new MissingTimeException("Time not found");
         }
 
-        String time = input.substring(separation + 5);
-        taskList.add(new Deadline(taskName, time));
+        String timeFull = input.substring(separation + 5);
+        int timeFullSeparation;
+
+        if ((timeFullSeparation = timeFull.indexOf(" ")) != -1) {
+            String time = timeFull.substring(timeFullSeparation + 1);
+            LocalDate date = LocalDate.parse(timeFull.substring(0, timeFullSeparation));
+            taskList.add(new Deadline(taskName, date, time));
+        } else {
+            LocalDate date = LocalDate.parse(timeFull);
+            taskList.add(new Deadline(taskName, date));
+        }
+
         printTaskAdded(taskName);
     }
 
@@ -230,7 +245,7 @@ public class Duke {
      * @param input The event inputted by the user.
      */
     public static void addEvent(String input)
-            throws MissingTaskException, MissingTimeException, InvalidDateFormatException {
+            throws MissingTaskException, MissingTimeException, DateTimeParseException {
         int separation = input.indexOf(" /at ");
 
         if (separation == -1) {
@@ -246,8 +261,18 @@ public class Duke {
             throw new MissingTimeException("Time not found");
         }
 
-        String time = input.substring(separation + 5);
-        taskList.add(new Event(taskName, time));
+        String timeFull = input.substring(separation + 5);
+        int timeFullSeparation;
+
+        if ((timeFullSeparation = timeFull.indexOf(" ")) != -1) {
+            String time = timeFull.substring(timeFullSeparation + 1);
+            LocalDate date = LocalDate.parse(timeFull.substring(0, timeFullSeparation));
+            taskList.add(new Event(taskName, date, time));
+        } else {
+            LocalDate date = LocalDate.parse(timeFull);
+            taskList.add(new Event(taskName, date));
+        }
+
         printTaskAdded(taskName);
     }
 

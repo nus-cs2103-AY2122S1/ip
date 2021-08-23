@@ -1,18 +1,36 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * This class creates event instances which are to be done at a certain time.
  */
 public class Event extends Task {
-    // The time of the event.
-    protected String time;
+    // The date of the event.
+    protected LocalDate date;
+    // The time of the date to complete the event by.
+    protected String time = "";
 
     /***
      * Constructor to create a event.
      *
      * @param name The name of the event.
+     * @param date The date of the event.
+     */
+    public Event(String name, LocalDate date) {
+        super(name);
+        this.date = date;
+    }
+
+    /**
+     * Secondary constructor to which includes time.
+     *
+     * @param name The name of the event.
+     * @param date The date of the event.
      * @param time The time of the event.
      */
-    public Event(String name, String time) {
+    public Event(String name, LocalDate date, String time) {
         super(name);
+        this.date = date;
         this.time = time;
     }
 
@@ -23,6 +41,11 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ")";
+        String timeComponent = (this.time.equals("")
+                ? this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                : this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time);
+        return "[E]" + super.toString() + " (at: "
+                + timeComponent
+                + ")";
     }
 }
