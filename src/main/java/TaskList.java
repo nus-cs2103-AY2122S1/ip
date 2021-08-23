@@ -85,11 +85,11 @@ public class TaskList {
         switch (t.getTaskType()) {
             case "D":
                 Deadline d = (Deadline) t;
-                time = "by: " + d.getTime();
+                time = "by: " + DukeDate.formatDateOutput(d.getTime());
                 break;
             case "E":
                 Event e = (Event) t;
-                time = "at: " + e.getTime();
+                time = "at: " + DukeDate.formatDateOutput(e.getTime());
                 break;
             default:
                 time = "No time specified";

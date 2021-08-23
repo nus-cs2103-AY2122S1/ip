@@ -1,12 +1,14 @@
-public class Event extends Task{
-    private String time;
+import java.time.LocalDate;
 
-    public Event(String name, String time) {
+public class Event extends Task{
+    private LocalDate time;
+
+    public Event(String name, LocalDate time) {
         super(name, "E");
         this.time = time;
     }
 
-    public String getTime() {
+    public LocalDate getTime() {
         return time;
     }
 }
