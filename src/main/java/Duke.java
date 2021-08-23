@@ -60,11 +60,11 @@ public class Duke {
                     task = new Todo(description);
                     break;
                 case EVENT:
-                    String at = taskDetails[3];
+                    LocalDate at = LocalDate.parse(taskDetails[3]);
                     task = new Event(description, at);
                     break;
                 case DEADLINE:
-                    String by = taskDetails[3];
+                    LocalDate by = LocalDate.parse(taskDetails[3]);
                     task = new Deadline(description, by);
                     break;
                 }
