@@ -44,3 +44,9 @@ class IllegalTodoFormatException extends RetrieverException {
         super(errorMessage);
     }
 }
+
+class IllegalDateFormatException extends RetrieverException {
+    public IllegalDateFormatException(String errorMessage) {
+        super(errorMessage);
+    }
+}

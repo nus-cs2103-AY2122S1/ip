@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -153,18 +154,25 @@ public class Retriever {
      * @param userInput The task details input by the user.
      * @throws IllegalDeadlineFormatException If the format for adding a deadline task is not followed.
      */
-    public void addDeadline(String userInput) throws IllegalDeadlineFormatException {
+    public void addDeadline(String userInput) throws IllegalDeadlineFormatException, IllegalDateFormatException {
         // Making sure that a properly formatted deadline task is entered.
         if(!userInput.toLowerCase().contains("/by")
                 || userInput.split(" ").length < 4
                 || userInput.substring(9).split(" /by ").length < 2) {
             throw new IllegalDeadlineFormatException("Please Follow The Format For Adding A Deadline Task: \n"
-                    + "\tdeadline task_description /by date");
+                    + "\tdeadline task_description /by DD/MM/YYYY");
         }
 
         // Parsing the user input to obtain the information about the task.
         String[] userInputArray = userInput.substring(9).split(" /by ");
-        Task deadlineTask = new Deadline(userInputArray[0], userInputArray[1]);
+
+        // Making sure that the time is properly formatted.
+        TaskDateAndTime deadlineDate = new TaskDateAndTime(userInputArray[1]);
+        if(!deadlineDate.isValidDate()) {
+            throw new IllegalDateFormatException("Please Follow The Date Format DD/MM/YYYY");
+        }
+
+        Task deadlineTask = new Deadline(userInputArray[0], deadlineDate);
         userTaskList.add(deadlineTask);
 
         printAddedTask(deadlineTask);
@@ -176,7 +184,7 @@ public class Retriever {
      * @param userInput The task details input by the user.
      * @throws IllegalEventFormatException If the format for adding an event task is not followed.
      */
-    public void addEvent(String userInput) throws IllegalEventFormatException {
+    public void addEvent(String userInput) throws IllegalEventFormatException, IllegalDateFormatException {
         // Making sure that a properly formatted event task is entered.
         if(!userInput.toLowerCase().contains("/at")
                 || userInput.split(" ").length < 4
@@ -187,7 +195,14 @@ public class Retriever {
 
         // Parsing the user input to obtain the information about the task.
         String[] userInputArray = userInput.substring(6).split(" /at ");
-        Task eventTask = new Event(userInputArray[0], userInputArray[1]);
+
+        // Making sure that the date is properly formatted.
+        TaskDateAndTime eventDate = new TaskDateAndTime(userInputArray[1]);
+        if(!eventDate.isValidDate()) {
+            throw new IllegalDateFormatException("Please Follow The Date Format DD/MM/YYYY");
+        }
+
+        Task eventTask = new Event(userInputArray[0], eventDate);
         userTaskList.add(eventTask);
 
         printAddedTask(eventTask);
@@ -226,7 +241,8 @@ public class Retriever {
      * @throws IllegalTodoFormatException If the format for adding a todo task is not followed.
      */
     public void parseUserInput(String userInput) throws IllegalCommandException,
-            IllegalDeadlineFormatException, IllegalEventFormatException, IllegalTodoFormatException {
+            IllegalDeadlineFormatException, IllegalEventFormatException,
+            IllegalTodoFormatException, IllegalDateFormatException {
 
         String[] userInputArray = userInput.split(" ");
         String command = userInputArray[0].toLowerCase();
@@ -278,7 +294,7 @@ public class Retriever {
                 }
             } catch (TaskNotFoundException | IllegalDeadlineFormatException
                     | IllegalEventFormatException | IllegalTodoFormatException
-                    | IllegalCommandException | IllegalTaskNumberException e) {
+                    | IllegalCommandException | IllegalTaskNumberException | IllegalDateFormatException e) {
                 // Catching various exceptions and alerting the user.
                 System.out.println(e.getMessage());
             }
