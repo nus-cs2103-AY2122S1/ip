@@ -53,6 +53,7 @@ public class Duke {
                         if (splitString.length > 1) {
                             int taskNumber = Integer.parseInt(splitString[1].trim());
                             duke.markTaskAsDone(taskNumber);
+                            duke.saveToFile();
 
                         } else {
                             throw new DukeException("☹ OOPS!!! Please state which task number "
@@ -66,6 +67,7 @@ public class Duke {
                         if (splitString.length > 1 && splitString[1].trim().length() > 0) {
                             int taskNumber = Integer.parseInt(splitString[1].trim());
                             duke.deleteTask(taskNumber);
+                            duke.saveToFile();
 
                         } else {
                             throw new DukeException("☹ OOPS!!! Please state which task number"
@@ -118,6 +120,7 @@ public class Duke {
                                         break;
                                 }
                                 duke.addTask(newTask);
+                                duke.saveToFile();
 
                             } else {
                                 throw new DukeException("☹ OOPS!!! The description of a " + splitString[0]
@@ -213,7 +216,7 @@ public class Duke {
             }
             bw.close();
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! There was an error saving your task list.");
+            throw new DukeException("☹ OOPS!!! There was an error updating your task list.");
         }
     }
 
