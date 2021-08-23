@@ -27,4 +27,6 @@ Now you have 2 tasks in the list
 done 5: This command is trying to mark/delete uncreated event
 the description of a todo cannot be empty.
 blah is not a command I understand
+Here are the matching tasks in your list:
+1. [T][ ] Do 2103 project
 Bye. Hope to see you soon and hope you found my service useful!

@@ -171,10 +171,40 @@ public class Ui {
                 return ifList(input, arListTask);
             case DELETE:
                 return ifDelete(input, arListTask);
+            case FIND:
+                return ifFind(input, arListTask);
             case INVALID:
                 throw new InvalidCommandException(input);
         }
         return "";
+    }
+
+    public String ifFind(String input, ArrayList<Task> arListTask) throws BernException {
+        if (input.length() == 4 || (input.length() == 5 && input.substring(4, 5).equals(" "))) {
+            throw new EmptyDescriptionException("find");
+        }
+        String word = input.substring(5);
+        ArrayList<Task> found = new ArrayList<>();
+        for (Task t : arListTask) {
+            if (t.findWord(word)) {
+                found.add(t);
+            }
+        }
+
+        String result = "Here are the matching tasks in your list:\n";
+
+        for (int i = 0; i < found.size(); i++) {
+            result += String.valueOf(i + 1)
+                    + ". "
+                    + found.get(i).toString()
+                    + (i == found.size() - 1 ? "" : "\n");
+        }
+        if (found.size() == 0) {
+            result = "There is no matching task.";
+        }
+
+        return result;
+
     }
 
     /**
@@ -227,6 +257,8 @@ public class Ui {
             } else if (parser.isDelete(input)){
                 System.out.println(new Ui().getReply(Command.DELETE, input, arListTask));
                 storage.writeIntoFile(arListTask);
+            } else if (parser.isFind(input)) {
+                System.out.println(new Ui().getReply(Command.FIND, input, arListTask));
             } else {
                 new Ui().getReply(Command.INVALID, input, arListTask);
             }

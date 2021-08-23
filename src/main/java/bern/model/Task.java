@@ -42,4 +42,14 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public boolean findWord(String word) {
+        String[] words = description.split("\\s+");
+        for (String s : words) {
+            if (s.equals(word)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
