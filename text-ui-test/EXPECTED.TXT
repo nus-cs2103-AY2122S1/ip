@@ -24,4 +24,7 @@ Noted! I've removed this task:
 Now you have 2 tasks in the list
 1. [T][ ] Do 2103 project
 2. [D][X] return book (by: Sunday)
+done 5: This command is trying to mark/delete uncreated event
+the description of a todo cannot be empty.
+blah is not a command I understand
 Bye. Hope to see you soon and hope you found my service useful!
