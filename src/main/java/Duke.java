@@ -32,18 +32,19 @@ public class Duke {
         this(Storage.SERIALIZATION_PATH);
     }
 
-    public class Parser {
-        public String[] inputParser(String input) {
+    public static class Parser {
+        public static String[] inputParser(String input) {
 //            System.out.println("split" + input.split(" ",2)[0]);
             String[] processed = input.split(" ", 2);
             if (processed.length != 2) {
-                processed[1] = "";
+                processed = new String[]{processed[0], ""};
+//                processed[1] = "";
             }
             return processed;
         }
 
 
-        public Command commandParser(String input) {
+        public static Command commandParser(String input) {
             for (Command c : Command.values()) {
 //                System.out.println(c);
 //                System.out.println(input);
@@ -54,7 +55,7 @@ public class Duke {
             return Command.UNKNOWN;
         }
 
-        public String dateParser(String date) {
+        public static String dateParser(String date) {
             String parsedDate = "";
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -65,17 +66,21 @@ public class Duke {
             return parsedDate;
         }
 
-        public String[] dateParameterParser(Command c, String parameter) {
-            return switch (c) {
-                case DEADLINE -> parameter.split(" /by ");
-                case EVENT -> parameter.split(" /at ");
-                default -> throw new DukeException("Invalid command for date parsing.");
-            };
+        public static String[] dateParameterParser(Command c, String parameter) {
+            switch (c) {
+            case DEADLINE :
+                return parameter.split(" /by ");
+            case EVENT:
+                return parameter.split(" /at ");
+            default:
+                throw new DukeException("Invalid command for date parsing.");
+
+            }
         }
 
     }
 
-    public class Ui {
+    public static class Ui {
         public static void initialize() {
             String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -200,9 +205,10 @@ public class Duke {
 
         public String listTasks() {
             StringBuilder sb = new StringBuilder();
-            Integer counter = 1;
+            int counter = 1;
             for (Task t : arrayList) {
                 sb.append(counter + ". " + t + "\n");
+                counter += 1;
             }
             return sb.toString();
         }
@@ -218,12 +224,17 @@ public class Duke {
 //            } else {//if (Command.DEADLINE.equals(command)) {
 //                task = new Deadline(parameter, parsedDate);
 //            }
-            Task task = switch (command) {
-                case TODO -> new Todo(parameter);
-                case DEADLINE -> new Deadline(parameter, parsedDate);
-                case EVENT -> new Event(parameter, parsedDate);
-                default -> throw new DukeException("Invalid command");
-            };
+            Task task;
+
+            if (command.equals(Command.TODO)) {
+                task = new Todo(parameter);
+            } else if (command.equals(Command.TODO)){
+                task = new Deadline(parameter, parsedDate);
+            } else if (command.equals(Command.TODO)){
+                task = new Event(parameter, parsedDate);
+            } else {
+                throw new DukeException("Invalid command");
+            }
             arrayList.add(task);
             sb.append(task + "\n");
             sb.append("Now you have " + String.valueOf(arrayList.size()) + " tasks in the list.");
@@ -237,9 +248,8 @@ public class Duke {
             addTask(command, parameter, "");
         }
 
-        public void removeTask(Integer index) {
+        public void removeTask(int index) {
             StringBuilder sb = new StringBuilder();
-            sb = new StringBuilder();
             sb.append("Noted. I've removed this task:\n");
             sb.append(arrayList.get(index).toString() + "\n");
             arrayList.remove(index);
@@ -263,8 +273,6 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-
-
         String[] commandAndParameter = Parser.inputParser(input);
         Command currentCommand = Parser.commandParser(commandAndParameter[0]);
         String currentParameter = commandAndParameter[1];
@@ -272,6 +280,7 @@ public class Duke {
         do {
             try {
                 StringBuilder sb = new StringBuilder();
+                String[] descriptionAndTime;
                 switch (currentCommand) {
                     case UNKNOWN:
                         throw new DukeException("Unknown input");
@@ -293,7 +302,7 @@ public class Duke {
                         } else if (!currentParameter.contains(" /at ")) {
                             throw new DukeException("Missing /at command");
                         }
-                        String[] descriptionAndTime = Parser.dateParameterParser(Command.EVENT, currentParameter);
+                        descriptionAndTime = Parser.dateParameterParser(Command.EVENT, currentParameter);
                         taskList.addTask(Command.EVENT, descriptionAndTime[0], descriptionAndTime[1]);
                         Storage.updateLocalFile(taskList);
                         break;
@@ -303,7 +312,7 @@ public class Duke {
                         } else if (!currentParameter.contains(" /by ")) {
                             throw new DukeException("Missing /by command");
                         }
-                        String[] descriptionAndTime = Parser.dateParameterParser(Command.DEADLINE, currentParameter);
+                        descriptionAndTime = Parser.dateParameterParser(Command.DEADLINE, currentParameter);
                         taskList.addTask(Command.DEADLINE, descriptionAndTime[0], descriptionAndTime[1]);
                         Storage.updateLocalFile(taskList);
                         break;
@@ -491,6 +500,7 @@ public class Duke {
 
 
     public static void main(String[] args) {
-
+        Duke duke = new Duke();
+        duke.run();
     }
 }
