@@ -7,7 +7,9 @@ import duke.DukeDate;
  */
 public abstract class Task {
 
-    // The type of task
+    /**
+     * A representation of the 3 types of tasks currently supported by Duke.
+     */
     public enum Type {
         TODO,
         DEADLINE,
