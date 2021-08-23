@@ -89,7 +89,7 @@ public class Duke {
     }
 
     public static void marking(String input) throws DukeException {
-        if (input.length() >=6) {
+        if (input.length() >= 6) {
             if (input.substring(5).matches("[0-9]+")){
                 int taskNum = Integer.parseInt(input.substring(5)) - 1;
                 if (taskNum < sl.size() && taskNum >= 0) {

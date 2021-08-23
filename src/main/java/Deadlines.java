@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadlines extends Task {
     protected String by;
     protected LocalDateTime localDateTime;
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
     public Deadlines(String description, String by) {
         super(description);
@@ -14,7 +15,6 @@ public class Deadlines extends Task {
     @Override
     public String toString() {
         setLocalDateAndTime();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return "[D]" + super.toString() + "(by: " + localDateTime.format(dtf) + ")";
     }
 
@@ -24,10 +24,15 @@ public class Deadlines extends Task {
     }
 
     private void setLocalDateAndTime() {
-        int whitespaceIdx = by.indexOf(" ");
-        String date = by.substring(0, whitespaceIdx);
-        String time = by.substring(whitespaceIdx+1);
-        localDateTime = LocalDateTime.parse(date+"T"+time);
+        if (by.substring(0, 1).matches("[0-9]+")) {
+            int whitespaceIdx = by.indexOf(" ");
+            String date = by.substring(0, whitespaceIdx);
+            String time = by.substring(whitespaceIdx+1);
+            localDateTime = LocalDateTime.parse(date+"T"+time);
+
+        } else {
+            this.localDateTime = LocalDateTime.parse(by, dtf);
+        }
     }
 }
 
