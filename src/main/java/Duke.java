@@ -1,13 +1,26 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.File;
 
 public class Duke {
     private static final ArrayList<Task> arr = new ArrayList<>();
     private static final Scanner in = new Scanner(System.in);
+    private static final String FILE_PATH  = "./src/main/data/duke.txt";
+    private static final String DIR_PATH = "./src/main/data";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("Hello, I'm Duke");
-        String command;
+        String command = "";
+        File dir = new File(DIR_PATH);
+        dir.mkdir();
+        File txtFile = new File(FILE_PATH);
+        if (!txtFile.createNewFile()) {
+            loadFile(txtFile);
+        }
         do {
             System.out.print(">> ");
             command = in.nextLine();
@@ -40,6 +53,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
                     }
                     markTaskAsDone(taskId);
+                    saveFile(FILE_PATH, tasksAsString());
                     break;
                 }
                 case "todo":
@@ -47,18 +61,21 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
                     addTodo(inputWords[1]);
+                    saveFile(FILE_PATH, tasksAsString());
                     break;
                 case "deadline":
                     if (inputWords.length == 1) {
                         throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                     }
                     addDeadline(inputWords[1]);
+                    saveFile(FILE_PATH, tasksAsString());
                     break;
                 case "event":
                     if (inputWords.length == 1) {
                         throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                     }
                     addEvent(inputWords[1]);
+                    saveFile(FILE_PATH, tasksAsString());
                     break;
                 case "delete":
                     if (inputWords.length == 1) {
@@ -69,6 +86,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
                     }
                     deleteTask(taskId);
+                    saveFile(FILE_PATH, tasksAsString());
                     break;
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -85,6 +103,14 @@ public class Duke {
         for (int i = 0; i < arr.size(); i++) {
             System.out.println(i + 1 + ": " + arr.get(i));
         }
+    }
+
+    public static String tasksAsString() {
+        String result = "";
+        for (int i = 0; i < arr.size(); i++) {
+            result += (i + 1 + ": " + arr.get(i) + System.lineSeparator());
+        }
+        return result;
     }
 
     /**
@@ -112,11 +138,12 @@ public class Duke {
      */
     public static void addDeadline(String fullDescription) throws DukeException {
         int sepIndex = fullDescription.indexOf("/by");
-        if (fullDescription.charAt(sepIndex + 3) != ' ' || sepIndex == -1) {
+        if (fullDescription.charAt(sepIndex + 3) != ' ' || sepIndex == -1 || sepIndex == 0 ||
+                fullDescription.charAt(sepIndex - 1) != ' ') {
             throw new DukeException("☹ OOPS!!! Please input with the correct format e.g. deadline return books" +
                     " /by Sunday");
         }
-        String description = fullDescription.substring(0, sepIndex);
+        String description = fullDescription.substring(0, sepIndex - 1);
         String deadline = fullDescription.substring(sepIndex + 4);
         arr.add(new Deadline(description, deadline));
         printAfterAdding();
@@ -128,11 +155,12 @@ public class Duke {
      */
     public static void addEvent(String fullDescription) throws DukeException {
         int sepIndex = fullDescription.indexOf("/at");
-        if (fullDescription.charAt(sepIndex + 3) != ' ' || sepIndex == -1) {
+        if (fullDescription.charAt(sepIndex + 3) != ' ' || sepIndex == -1 || sepIndex == 0 ||
+                fullDescription.charAt(sepIndex - 1) != ' ') {
             throw new DukeException("☹ OOPS!!! Please input with the correct format e.g. event read books" +
                     " /at Saturday 9am");
         }
-        String description = fullDescription.substring(0, sepIndex);
+        String description = fullDescription.substring(0, sepIndex - 1);
         String time = fullDescription.substring(sepIndex + 4);
         arr.add(new Event(description, time));
         printAfterAdding();
@@ -156,5 +184,32 @@ public class Duke {
         System.out.println("   " + arr.get(taskId - 1));
         arr.remove(taskId - 1);
         System.out.println("Now you have " + arr.size() + " task(s) in the list.");
+    }
+
+    public static void saveFile(String filePath, String textToSave) throws IOException {
+        FileWriter fileWriter = new FileWriter(filePath);
+        fileWriter.write(textToSave);
+        fileWriter.close();
+    }
+
+    public static void loadFile(File txtFile) throws FileNotFoundException {
+        Scanner s = new Scanner(txtFile);
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            switch(line.charAt(4)) {
+                case 'T':
+                    arr.add(new Todo(line.substring(10)));
+                    break;
+                case 'D': {
+                    int index = line.indexOf(" (by: ");
+                    arr.add(new Deadline(line.substring(10, index), line.substring(index + 6, line.length() - 1)));
+                    break;
+                }
+                case 'E':
+                    int index = line.indexOf(" (at: ");
+                    arr.add(new Event(line.substring(10, index), line.substring(index + 6, line.length() - 1)));
+                    break;
+            }
+        }
     }
 }

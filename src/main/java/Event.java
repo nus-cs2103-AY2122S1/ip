@@ -19,6 +19,6 @@ public class Event extends Task{
      * @return A String reprsentation of the Event.
      */
     public String toString() {
-        return "[E][" + this.getStatusIcon() + "] " + this.description + "(at: " + this.time + ")";
+        return "[E][" + this.getStatusIcon() + "] " + this.description + " (at: " + this.time + ")";
     }
 }
