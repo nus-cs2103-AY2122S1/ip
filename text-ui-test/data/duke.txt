@@ -1,0 +1,4 @@
+D@1@lecture @ Friday
+D@1@finish this assignment
+D@0@submit @ Thursday
+D@0@lecture @ Friday

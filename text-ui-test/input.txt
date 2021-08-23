@@ -3,9 +3,10 @@ todo finish this assignment
 deadline submit /by Thursday
 event lecture /at Friday
 list
-done 1
-delete 1
+done 7
+delete 7
+delete 6
 list
-done 2
+done 5
 list
 bye
