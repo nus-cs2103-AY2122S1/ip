@@ -7,7 +7,7 @@ import dukeException.DukeException;
 import task.Task;
 
 public class DoneCommand extends Command {
-    private int taskIndex;
+    public int taskIndex;
 
     public DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;

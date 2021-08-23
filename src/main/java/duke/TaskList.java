@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class TaskList {
     /** The data structure to store all the tasks. **/
-    private ArrayList<Task> tasks;
+    public ArrayList<Task> tasks;
 
     /** A enum type indicating the type of the task. **/
 

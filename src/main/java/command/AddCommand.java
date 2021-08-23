@@ -10,10 +10,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class AddCommand extends Command {
-    private Task.taskType type;
-    private String description;
-    private LocalDate date;
-    private LocalTime time;
+    public Task.taskType type;
+    public String description;
+    public LocalDate date;
+    public LocalTime time;
 
     public AddCommand(Task.taskType type, String description, LocalDate date, LocalTime time) {
         this.type = type;
