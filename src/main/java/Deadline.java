@@ -5,7 +5,7 @@ public class Deadline extends Task {
     // The time to complete the deadline by.
     protected String time;
 
-    /***
+    /**
      * Constructor to create a deadline.
      *
      * @param name The name of the deadline.
@@ -16,7 +16,7 @@ public class Deadline extends Task {
         this.time = time;
     }
 
-    /***
+    /**
      * Returns the string representation of the deadline.
      *
      * @return The name of the deadline.

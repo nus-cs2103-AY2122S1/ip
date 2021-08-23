@@ -7,7 +7,7 @@ public abstract class Task {
     // To track if the task is done.
     protected boolean isDone;
 
-    /***
+    /**
      * Constructor to create a task.
      *
      * @param taskName The name of the task.
@@ -17,14 +17,14 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    /***
-     * To mark a task as done.
+    /**
+     * Marks a task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
-    /***
+    /**
      * Returns the string representation of the task.
      *
      * @return The name of the task.
