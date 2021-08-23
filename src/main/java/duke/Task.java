@@ -20,6 +20,16 @@ public class Task {
     }
 
     /**
+     * Check if task description contains string.
+     *
+     * @param searchKey Serach string
+     * @return true if contains string
+     */
+    public boolean containsString(String searchKey) {
+        return this.description.toLowerCase().contains(searchKey.toLowerCase());
+    }
+
+    /**
      * Returns done status in string format
      *
      * @return X if done else blank

@@ -132,12 +132,32 @@ public class TaskList {
     }
 
     /**
+     * Search tasklist for tasks that matches search key.
+     * Returns new TaskList object of matching tasks.
+     *
+     * @param searchKey Search string to match
+     * @return TaskList containing matching tasks
+     */
+    public TaskList find(String searchKey) {
+        TaskList results = new TaskList();
+        taskList.forEach((task) -> {
+            if (task.containsString(searchKey))
+                results.add(task);
+        });
+        return results;
+    }
+
+    /**
      * String representation of Tasklist
      *
      * @return String to print
      */
     @Override
     public String toString() {
+        if (taskList.size() == 0) {
+            return "No tasks, meow!";
+        }
+
         StringBuilder s = new StringBuilder();
         s.append("Here are the tasks in your list, meow:");
         for (int i = 0; i < taskList.size(); i++) {
