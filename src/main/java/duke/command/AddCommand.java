@@ -10,23 +10,46 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
 
+/**
+ * This AddCommand class represents a command to add a task to the task list.
+ */
 public class AddCommand extends Command {
 
     private String taskType;
     private String task;
     private LocalDate date;
 
+    /**
+     * Constructor for an AddCommand instance that takes in a task type and task.
+     *
+     * @param taskType The type of the task to be added.
+     * @param task The description of the task to be added.
+     */
     public AddCommand(String taskType, String task) {
         this.taskType = taskType;
         this.task = task;
     }
 
+    /**
+     * Constructor for an AddCommand instance that takes in a task type, task and date.
+     *
+     * @param taskType The type of the task to be added.
+     * @param task The description of the task to be added.
+     * @param date The date in which the task is due by / held on.
+     */
     public AddCommand(String taskType, String task, LocalDate date) {
         this.taskType = taskType;
         this.task = task;
         this.date = date;
     }
 
+    /**
+     * Adds a task to the task list and updates the hard disk of the change.
+     *
+     * @param tasks The task list.
+     * @param ui The UI of the application.
+     * @param storage The storage system of the application.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskToBeAdded;
@@ -50,6 +73,11 @@ public class AddCommand extends Command {
         storage.save(tasks);
     }
 
+    /**
+     * Indicates that this command does not intend to exit the system.
+     *
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;

@@ -5,26 +5,28 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * This Event class implements the characteristics of a task
- * that starts at a specific time and ends at a specific time.
- *
- * @author Yeo Jun Wei
+ * that is held on a specific date.
  */
 public class Event extends Task {
 
-    /** The date/time on which the event is held */
     protected LocalDate at;
 
     /**
-     * Constructor for an Event instance that takes in a description and time frame.
+     * Constructor for an Event instance that takes in a description and date.
      *
      * @param description The given task description.
-     * @param at The time frame in which the event is held.
+     * @param at The date on which the event is held.
      */
     public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Returns the date on which the event is held.
+     *
+     * @return A LocalDate instance representing the event date.
+     */
     public LocalDate getDate() {
         return this.at;
     }

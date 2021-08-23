@@ -6,12 +6,9 @@ import java.time.format.DateTimeFormatter;
 /**
  * This Deadline class implements the characteristics of a task
  * that needs to be done before a specific date/time.
- *
- * @author Yeo Jun Wei
  */
 public class Deadline extends Task {
 
-    /** The date/time that the task needs to be done by */
     protected LocalDate by;
 
     /**
@@ -25,6 +22,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Returns the deadline of the current task.
+     *
+     * @return A LocalDate instance representing the deadline.
+     */
     public LocalDate getDate() {
         return this.by;
     }

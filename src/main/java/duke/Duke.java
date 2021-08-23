@@ -13,12 +13,9 @@ import java.time.format.DateTimeParseException;
 /**
  * This Duke class implements the functionalities of a chatbot,
  * helping a person to keep track of various things.
- *
- * @author Yeo Jun Wei
  */
 public class Duke {
 
-    /** Path of the file that stores the tasks in the hard disk */
     private static final String FILE_PATH = String.valueOf(Paths.get(
             System.getProperty("user.home"), "data", "dukeFile.txt"));
 
@@ -27,6 +24,9 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
 
+    /**
+     * Constructor for a Duke instance.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(FILE_PATH);
@@ -34,6 +34,9 @@ public class Duke {
         parser = new Parser();
     }
 
+    /**
+     * Listens to the user input and executes the commands.
+     */
     public void run() {
         ui.greetUser();
         boolean isExit = false;
