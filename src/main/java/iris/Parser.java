@@ -1,8 +1,8 @@
-package duke;
+package iris;
 
 import java.util.List;
 
-import duke.task.Task;
+import iris.task.Task;
 
 /**
  * Encapsulates the parsing-related functionality of Iris
@@ -31,7 +31,7 @@ public class Parser {
      *
      * @param command  raw text representing command
      * @param tasks TaskList object representing current list of tasks
-     * @param ui       Ui object for current Duke instance
+     * @param ui       Ui object for current Iris instance
      * @throws IrisException for invalid commands
      */
     public static void handleCommand(String command, TaskList tasks, Ui ui) throws IrisException {

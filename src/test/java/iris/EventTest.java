@@ -1,6 +1,6 @@
-package duke;
+package iris;
 
-import duke.task.Event;
+import iris.task.Event;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

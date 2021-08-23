@@ -1,4 +1,4 @@
-package duke.task;
+package iris.task;
 
 /**
  * Represents a ToDo

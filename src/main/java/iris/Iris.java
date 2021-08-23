@@ -1,9 +1,9 @@
-package duke;
+package iris;
 
 /**
  * Represents an Iris object
  */
-public class Duke {
+public class Iris {
     private static final String ENDING_COMMAND = "bye";
 
     private final Storage storage;
@@ -15,7 +15,7 @@ public class Duke {
      *
      * @param filePath Path to file containing tasks
      */
-    public Duke(String filePath) {
+    public Iris(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -46,6 +46,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Iris("data/tasks.txt").run();
     }
 }

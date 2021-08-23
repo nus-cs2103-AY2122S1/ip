@@ -1,9 +1,9 @@
-package duke;
+package iris;
 
 import java.util.List;
 import java.util.Scanner;
 
-import duke.task.Task;
+import iris.task.Task;
 
 /**
  * Encapsulates UI-related functionality of Iris

@@ -1,6 +1,6 @@
-package duke;
+package iris;
 
-import duke.task.Deadline;
+import iris.task.Deadline;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

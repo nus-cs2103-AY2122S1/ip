@@ -1,4 +1,4 @@
-package duke;
+package iris;
 
 import java.io.File;
 import java.io.FileNotFoundException;

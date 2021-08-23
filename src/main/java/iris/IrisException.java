@@ -1,4 +1,4 @@
-package duke;
+package iris;
 
 /**
  * Represents an exception thrown by Iris

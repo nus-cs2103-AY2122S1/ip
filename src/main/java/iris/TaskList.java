@@ -1,12 +1,12 @@
-package duke;
+package iris;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import iris.task.Deadline;
+import iris.task.Event;
+import iris.task.Task;
+import iris.task.ToDo;
 
 /**
  * Encapsulates the TaskList-related functionality of Iris
