@@ -18,6 +18,7 @@ import side.exception.SideException;
  *   - 'list' -> displays current list of tasks
  *   - 'done x' -> marks Task x as done
  *   - 'delete x' -> deletes Task x from the task list
+ *   - 'find x' -> returns tasks with description matching x
  *   - 'bye' -> exits the program
  *   - Other input patterns throw exceptions
  *
