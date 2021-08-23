@@ -1,3 +1,6 @@
+/**
+ * Represents a task with a deadline to be completed by.
+ */
 public class Deadline extends Task {
 	private String deadline="unknown";
 
@@ -12,6 +15,6 @@ public class Deadline extends Task {
 
 	@Override
 	public String toString() {
-		return "[D]" + super.toString() + "(by: " + this.getDeadline() + ")";
+		return "[D]" + super.toString() + " (by: " + this.getDeadline() + ")";
 	}
 }

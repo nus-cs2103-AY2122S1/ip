@@ -1,3 +1,6 @@
+/**
+ * Represents an event task with a time and a name.
+ */
 public class Event extends Task {
 	private String time;
 
@@ -12,7 +15,7 @@ public class Event extends Task {
 
 	@Override
 	public String toString() {
-		return "[E]" + super.toString() + "(at: " + this.getTime() + ")";
+		return "[E]" + super.toString() + " (at: " + this.getTime() + ")";
 	}
 	
 }
