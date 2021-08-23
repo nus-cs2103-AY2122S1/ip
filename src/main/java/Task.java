@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 /**
  * This class implements a Task to be stored in a DukeList
  *
@@ -29,6 +31,8 @@ public abstract class Task {
     {
         isDone = doneOrNot;
     }
+
+    public abstract LocalDateTime getDateTime();
 
     /**
      * Returns a simplified representation of the task for easier recovery from save file.

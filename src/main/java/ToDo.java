@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 /**
  * This class implements a DukeList to be used in storing string from Duke
  *
@@ -15,6 +17,7 @@ public class ToDo extends Task {
         super(name);
     }
 
+<<<<<<< HEAD
     /**
      * Returns a simplified representation of the ToDo for easier recovery from save file.
      * @return The file formatted string representation of the ToDo.
@@ -27,6 +30,12 @@ public class ToDo extends Task {
      * Returns a string representation of the ToDo, with an [X] marked for done and [ ] as undone.
      * @return the string representation of the ToDo.
      */
+=======
+    public LocalDateTime getDateTime() {
+        return LocalDateTime.MAX;
+    }
+
+>>>>>>> branch-Level-8
     @Override
     public String toString() {
         return String.format("[T]" + super.toString());
