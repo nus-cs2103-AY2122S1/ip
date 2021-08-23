@@ -6,7 +6,6 @@ import java.util.Scanner;
  * @author Felissa Faustine
  */
 public class Todo extends Task {
-
     /**
      * The constructor for the Todo class.
      *
@@ -16,13 +15,17 @@ public class Todo extends Task {
         super(taskName);
     }
 
+    public String getTime() {
+        return "";
+    }
+
     /**
      * Gets the symbol of the todo task.
      *
      * @return The string representation of the symbol of the todo task.
      */
     public String getSymbol() {
-        return "[T]";
+        return "T";
     }
 
     /**
@@ -32,6 +35,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return getSymbol() + super.toString();
+        return "[" + getSymbol() + "]" + super.toString();
     }
 }

@@ -17,6 +17,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public String getTaskName() {
+        return this.taskName;
+    }
+
     /**
      * Sets the state of the task.
      *
@@ -59,4 +63,6 @@ public abstract class Task {
     public String toString() {
         return "[" + getStateIcon() + "] " + taskName;
     }
+
+    public abstract String getTime();
 }

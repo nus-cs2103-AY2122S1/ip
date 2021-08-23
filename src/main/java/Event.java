@@ -19,13 +19,17 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public String getTime() {
+        return this.time;
+    }
+
     /**
      * Gets the symbol of event.
      *
      * @return The string representation of the symbol of event.
      */
     public String getSymbol() {
-        return "[E]";
+        return "E";
     }
 
     /**
@@ -35,6 +39,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return getSymbol() + super.toString() + "(at:" + this.time + ")";
+        return "[" + getSymbol() + "]" + super.toString() + "(at:" + this.time + ")";
     }
 }

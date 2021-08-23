@@ -19,13 +19,17 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    public String getTime() {
+        return this.time;
+    }
+
     /**
      * Gets the symbol of deadline.
      *
      * @return The string representation of the deadline symbol.
      */
     public String getSymbol() {
-        return "[D]";
+        return "D";
     }
 
     /**
@@ -35,6 +39,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return getSymbol() + super.toString() + "(by:" + this.time + ")";
+        return "[" + getSymbol() + "]" + super.toString() + "(by:" + this.time + ")";
     }
 }

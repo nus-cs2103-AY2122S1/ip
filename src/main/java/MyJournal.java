@@ -1,4 +1,11 @@
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 /**
@@ -7,25 +14,41 @@ import java.util.Scanner;
  * @author Felissa Faustine
  */
 public class MyJournal {
+    private Storage storage;
+    private TaskList tasks;
+
+    public MyJournal(String filepath) {
+        storage = new Storage(filepath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            tasks = new TaskList();
+        }
+    }
+
     /**
      * Prints out the statement after a task is added.
      *
      * @param taskList The list of all tasks.
      * @return The statement to be printed after a task is added.
      */
-    public static String taskAddPrint(ArrayList<Task> taskList) {
+    public static String taskAddPrint(TaskList taskList) {
         return "Okay!! I've added the following task:\n"
-                + taskList.get(taskList.size() - 1) + "\n"
-                + "Now you have " + taskList.size() + " in the list";
+                + taskList.getTask(taskList.getSize() - 1) + "\n"
+                + "Now you have " + taskList.getSize() + " in the list";
     }
 
-    /**
-     * The main method of the MyJournal class.
-     *
-     * @param args An input of an array of strings.
-     */
-    public static void main(String[] args) {
-        ArrayList<Task> items = new ArrayList<>();
+    public boolean isInteger(String string) {
+        try {
+            Integer.parseInt(string);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void run() throws IOException {
         String input;
         Scanner reader = new Scanner(System.in);
         System.out.println("Hello!\n"
@@ -47,36 +70,35 @@ public class MyJournal {
                                 + "that needs to be marked as done!");
                     }
                     int index = line.nextInt() - 1;
-                    if (index >= items.size() || index < 0 || items.get(index) == null) {
+                    if (index >= tasks.getSize() || index < 0 || tasks.getTask(index) == null) {
                         throw new InvalidTaskNumberException("OOPS!!! Please enter a valid task number!");
                     }
-                    items.get(index).setState(true);
-                    System.out.println("Okay!! I have marked this task as done:\n" + items.get(index));
+                    tasks.getTask(index).setState(true);
+                    System.out.println("Okay!! I have marked this task as done:\n" + tasks.getTask(index));
                 } else if (firstWord.equals("delete")) {
                     if (!line.hasNextInt()) {
                         throw new InvalidTaskNumberException("OOPS!!! Please specify the task "
                                 + "that needs to be deleted!");
                     }
                     int index = line.nextInt() - 1;
-                    if (index >= items.size() || index < 0 || items.get(index) == null) {
+                    if (index >= tasks.getSize() || index < 0 || tasks.getTask(index) == null) {
                         throw new InvalidTaskNumberException("OOPS!!! Please enter a valid task number!");
                     } else {
-                        Task temp = items.get(index);
-                        items.remove(index);
+                        Task temp = tasks.getTask(index);
+                        tasks.deleteTask(index);
                         System.out.println("Okay!! I have removed the following task:\n"
                                 + temp);
                     }
                 } else if (firstWord.equals("list")) {
-                    if (items.size() == 0) {
+                    if (tasks.getSize() == 0) {
                         System.out.println("You have no task!");
                     } else {
-                        for (int i = 0; i < items.size(); i++) {
-                            System.out.println((i + 1) + "." + items.get(i));
+                        for (int i = 0; i < tasks.getSize(); i++) {
+                            System.out.println((i + 1) + "." + tasks.getTask(i));
                         }
                     }
                 } else {
                     String taskName = "";
-                    String time = "";
                     switch (firstWord) {
                         case "todo":
                             if (!line.hasNext()) {
@@ -86,8 +108,8 @@ public class MyJournal {
                                 String currWord = line.next();
                                 taskName = taskName + currWord + " ";
                             }
-                            items.add(new Todo(taskName));
-                            System.out.println(taskAddPrint(items));
+                            tasks.addTask(new Todo(taskName));
+                            System.out.println(taskAddPrint(tasks));
                             break;
                         case "event":
                             if (!line.hasNext()) {
@@ -100,11 +122,14 @@ public class MyJournal {
                                 }
                                 taskName = taskName + currWord + " ";
                             }
-                            while (line.hasNext()) {
-                                time = time + " " + line.next();
+                          //  String date = getDateTime(line);
+                            String time = "";
+                            while(line.hasNext()) {
+                                time = time + " " + line.hasNext();
                             }
-                            items.add(new Event(taskName, time));
-                            System.out.println(taskAddPrint(items));
+                            tasks.addTask(new Event(taskName, time));
+                                    //date));
+                            System.out.println(taskAddPrint(tasks));
                             break;
                         case "deadline":
                             if (!line.hasNext()) {
@@ -117,16 +142,19 @@ public class MyJournal {
                                 }
                                 taskName = taskName + currWord + " ";
                             }
-                            while (line.hasNext()) {
-                                time = time + " " + line.next();
+                            time = "";
+                            while(line.hasNext()) {
+                                time = time + " " + line.hasNext();
                             }
-                            items.add(new Deadline(taskName, time));
-                            System.out.println(taskAddPrint(items));
+                            tasks.addTask(new Deadline(taskName, time));
+                                    //getDateTime(line)));
+                            System.out.println(taskAddPrint(tasks));
                             break;
                         default:
                             throw new InvalidTypeException("OOPS!!! Please put either todo/event/deadline!");
                     }
                 }
+                storage.saveFile(tasks.toString());
             } catch (EmptyDescriptionException exception) {
                 System.out.println(exception.toString());
             } catch (InvalidTypeException exception) {
@@ -136,5 +164,17 @@ public class MyJournal {
             }
         }
         System.out.println("Bye. Hope to see you again soon!:)");
+    }
+    /**
+     * The main method of the MyJournal class.
+     *
+     * @param args An input of an array of strings.
+     */
+    public static void main(String[] args) {
+        try {
+            new MyJournal("./tasks.txt").run();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
