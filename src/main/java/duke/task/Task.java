@@ -23,6 +23,10 @@ public class Task implements Serializable {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     @Override
     public String toString() {
         char statusIcon = this.isDone ? 'X' : ' ';
