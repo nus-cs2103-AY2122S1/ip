@@ -19,6 +19,11 @@ public class JWBot {
     private final Ui ui;
     private static final String txtPath = "jwbot.txt";
 
+    /**
+     * The constructor of JWBot.
+     *
+     * @param filePath the path of the txt file that the tasks will be recorded on
+     */
     public JWBot(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -30,6 +35,9 @@ public class JWBot {
         }
     }
 
+    /**
+     * Starts JWBot.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

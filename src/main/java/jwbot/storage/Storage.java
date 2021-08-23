@@ -11,14 +11,29 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The storage class that reads and writes the txt file.
+ *
+ * @author  Yim Jaewon
+ */
 public class Storage {
 
     private final String filePath;
 
+    /**
+     * The constructor of the Storage class.
+     *
+     * @param filePath the path of the txt file that the tasks will be recorded on
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Write the current status of list to the txt file.
+     *
+     * @param items the list of the tasks
+     */
     public void write(TaskList items) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         List<Task> tasks = items.getItems();
@@ -36,6 +51,11 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Load the task list from the txt file.
+     *
+     * @return the loaded list of tasks from the txt file
+     */
     public List<Task> load() throws JWBotException {
         List<Task> items = new ArrayList<>();
         File file = new File(filePath);
