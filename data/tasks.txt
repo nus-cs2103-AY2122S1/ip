@@ -1,4 +1,4 @@
 [E][X] meeting (at: 2pm)
-[D][X] brunch (by: Aug 5 2021)
 [E][ ] lunch (at: 2pm)
-[D][ ] rush (by: Aug 23 2021)
+[D][X] rush (by: Aug 23 2021)
+[T][ ] fun

@@ -1,4 +1,5 @@
-import java.io.InputStream;
+package duke;
+
 import java.io.PrintStream;
 import java.util.Scanner;
 
