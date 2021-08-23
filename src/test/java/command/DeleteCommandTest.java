@@ -1,25 +1,33 @@
 package command;
 
 
-import main.java.duke.command.DeleteCommand;
-import main.java.duke.command.DoneCommand;
-import main.java.duke.task.*;
-import main.java.duke.storage.StorageStub;
-import main.java.duke.tasklist.TaskListStub;
 import main.java.duke.Ui;
+import main.java.duke.command.DeleteCommand;
+import main.java.duke.storage.StorageStub;
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.ToDo;
+import main.java.duke.tasklist.TaskListStub;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests the functions in DeleteCommand
+ *
+ * @author Zhen Xuan (Tutorial Group W12)
+ * @version CS2103T AY21/22 S1
+ */
 public class DeleteCommandTest {
 
-    private DeleteCommand c1 = new DeleteCommand("1");
-    private DeleteCommand c2 = new DeleteCommand("1");
-    private DeleteCommand c3 = new DeleteCommand("1");
-    private StorageStub s = new StorageStub();
-    private Ui u = new Ui();
+    private final DeleteCommand c1 = new DeleteCommand("1");
+    private final DeleteCommand c2 = new DeleteCommand("1");
+    private final DeleteCommand c3 = new DeleteCommand("1");
+    private final StorageStub s = new StorageStub();
+    private final Ui u = new Ui();
     private TaskListStub t;
 
     @Test

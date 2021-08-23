@@ -13,10 +13,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
- * Storage is in-charge of loading the saved taskList, and updating it.
+ * StorageDuke is in-charge of loading the saved taskList, and updating it.
  *
  * @author Zhen Xuan (Tutorial Group W12)
- * @version CS2103T AY21/22 S2
+ * @version CS2103T AY21/22 S1
  */
 public class StorageDuke implements Storage {
     private final String FILEPATH;

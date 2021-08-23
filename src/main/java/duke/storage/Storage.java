@@ -1,22 +1,15 @@
 package main.java.duke.storage;
 
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
 import main.java.duke.task.Task;
-import main.java.duke.task.ToDo;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
  * Storage is in-charge of loading the saved taskList, and updating it.
  *
  * @author Zhen Xuan (Tutorial Group W12)
- * @version CS2103T AY21/22 S2
+ * @version CS2103T AY21/22 S1
  */
 public interface Storage {
 

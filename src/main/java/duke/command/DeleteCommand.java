@@ -1,9 +1,9 @@
 package main.java.duke.command;
 
 import main.java.duke.DukeException;
-import main.java.duke.storage.*;
-import main.java.duke.tasklist.*;
 import main.java.duke.Ui;
+import main.java.duke.storage.Storage;
+import main.java.duke.tasklist.TaskList;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import java.io.IOException;
  * DeleteCommand is a command which deletes a specific Task from the TaskList.
  *
  * @author Zhen Xuan (Tutorial Group W12)
- * @version CS2103T AY21/22 S2
+ * @version CS2103T AY21/22 S1
  */
 public class DeleteCommand extends Command {
 
@@ -30,9 +30,11 @@ public class DeleteCommand extends Command {
      * @param tasks   the task list
      * @param ui      the ui
      * @param storage the storage for the saved task list
+     * @throws DukeException if the index of the task given is not within the last or if the data file
+     *                       is missing / corrupted
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             int index = Integer.valueOf(description);
             if (index > tasks.count()) {

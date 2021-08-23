@@ -1,10 +1,10 @@
 package main.java.duke.command;
 
 import main.java.duke.DukeException;
-import main.java.duke.storage.*;
-import main.java.duke.tasklist.*;
 import main.java.duke.Ui;
+import main.java.duke.storage.Storage;
 import main.java.duke.task.Deadline;
+import main.java.duke.tasklist.TaskList;
 
 import java.io.IOException;
 import java.time.DateTimeException;
@@ -13,7 +13,7 @@ import java.time.DateTimeException;
  * DeadlineCommand is a command which adds a deadline task to the task list.
  *
  * @author Zhen Xuan (Tutorial Group W12)
- * @version CS2103T AY21/22 S2
+ * @version CS2103T AY21/22 S1
  */
 public class DeadlineCommand extends Command {
 
@@ -32,9 +32,11 @@ public class DeadlineCommand extends Command {
      * @param tasks   the task list
      * @param ui      the ui
      * @param storage the storage for the saved task list
+     * @throws DukeException if the date/time format is wrong or if the saved data is deleted midway /
+     *                       the data file is missing by other factors
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String[] deadlinePair = description.split("/by", 2);
             if (deadlinePair.length < 2 || deadlinePair[0].equals("") || deadlinePair[1].equals("")) {

@@ -1,24 +1,27 @@
 package command;
 
 
+import main.java.duke.Ui;
 import main.java.duke.command.ToDoCommand;
 import main.java.duke.storage.StorageStub;
 import main.java.duke.tasklist.TaskListStub;
-import main.java.duke.Ui;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests the functions in ToDoCommand
+ *
+ * @author Zhen Xuan (Tutorial Group W12)
+ * @version CS2103T AY21/22 S1
+ */
 public class ToDoCommandTest {
 
-    private ToDoCommand c1 = new ToDoCommand("tutorial");
-    private ToDoCommand c2 = new ToDoCommand("   assignment   ");
-    private StorageStub s = new StorageStub();
-    private Ui u = new Ui();
-    private TaskListStub t = new TaskListStub(s.load(), u);
+    private final ToDoCommand c1 = new ToDoCommand("tutorial");
+    private final ToDoCommand c2 = new ToDoCommand("   assignment   ");
+    private final StorageStub s = new StorageStub();
+    private final Ui u = new Ui();
+    private final TaskListStub t = new TaskListStub(s.load(), u);
 
     @Test
     public void execute() {

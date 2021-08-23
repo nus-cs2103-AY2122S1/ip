@@ -7,9 +7,15 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests the functions in ToDo
+ *
+ * @author Zhen Xuan (Tutorial Group W12)
+ * @version CS2103T AY21/22 S1
+ */
 public class ToDoTest {
 
-    private ToDo t = new ToDo(false, "tutorial");
+    private final ToDo t = new ToDo(false, "tutorial");
 
     @Test
     public void constructor() {

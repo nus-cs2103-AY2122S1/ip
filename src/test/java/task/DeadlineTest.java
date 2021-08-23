@@ -7,9 +7,15 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests the functions in Deadline
+ *
+ * @author Zhen Xuan (Tutorial Group W12)
+ * @version CS2103T AY21/22 S1
+ */
 public class DeadlineTest {
 
-    private Deadline d = new Deadline(false, "tutorial", "2021-03-21 2103");
+    private final Deadline d = new Deadline(false, "tutorial", "2021-03-21 2103");
 
     @Test
     public void constructor() {

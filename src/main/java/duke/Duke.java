@@ -1,8 +1,10 @@
 package main.java.duke;
 
 import main.java.duke.command.Command;
-import main.java.duke.storage.*;
-import main.java.duke.tasklist.*;
+import main.java.duke.storage.Storage;
+import main.java.duke.storage.StorageDuke;
+import main.java.duke.tasklist.TaskList;
+import main.java.duke.tasklist.TaskListDuke;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
  * keep track of various things.
  *
  * @author Zhen Xuan (Tutorial Group W12)
- * @version CS2103T AY21/22 S2
+ * @version CS2103T AY21/22 S1
  */
 public class Duke {
     private final Storage STORAGE;

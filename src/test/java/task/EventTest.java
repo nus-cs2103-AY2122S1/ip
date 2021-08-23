@@ -7,9 +7,15 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests the functions in Event
+ *
+ * @author Zhen Xuan (Tutorial Group W12)
+ * @version CS2103T AY21/22 S1
+ */
 public class EventTest {
 
-    private Event e = new Event(false, "tutorial", "2021-03-21 2103");
+    private final Event e = new Event(false, "tutorial", "2021-03-21 2103");
 
     @Test
     public void constructor() {

@@ -9,7 +9,7 @@ import java.io.PrintWriter;
  * Ui deals with all the interactions with the user.
  *
  * @author Zhen Xuan (Tutorial Group W12)
- * @version CS2103T AY21/22 S2
+ * @version CS2103T AY21/22 S1
  */
 public class Ui {
 

@@ -1,21 +1,27 @@
 package command;
 
 
+import main.java.duke.Ui;
 import main.java.duke.command.DeadlineCommand;
 import main.java.duke.storage.StorageStub;
 import main.java.duke.tasklist.TaskListStub;
-import main.java.duke.Ui;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests the functions in DeadlineCommand
+ *
+ * @author Zhen Xuan (Tutorial Group W12)
+ * @version CS2103T AY21/22 S1
+ */
 public class DeadlineCommandTest {
 
-    private DeadlineCommand c1 = new DeadlineCommand("tutorial /by 2021-08-23 1643");
-    private DeadlineCommand c2 = new DeadlineCommand("assignment /by 2021-08-21 0401");
-    private StorageStub s = new StorageStub();
-    private Ui u = new Ui();
-    private TaskListStub t = new TaskListStub(s.load(), u);
+    private final DeadlineCommand c1 = new DeadlineCommand("tutorial /by 2021-08-23 1643");
+    private final DeadlineCommand c2 = new DeadlineCommand("assignment /by 2021-08-21 0401");
+    private final StorageStub s = new StorageStub();
+    private final Ui u = new Ui();
+    private final TaskListStub t = new TaskListStub(s.load(), u);
 
     @Test
     public void execute() {

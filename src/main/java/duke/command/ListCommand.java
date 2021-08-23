@@ -1,9 +1,9 @@
 package main.java.duke.command;
 
 import main.java.duke.DukeException;
-import main.java.duke.storage.*;
-import main.java.duke.tasklist.*;
 import main.java.duke.Ui;
+import main.java.duke.storage.Storage;
+import main.java.duke.tasklist.TaskList;
 
 import java.time.DateTimeException;
 
@@ -12,7 +12,7 @@ import java.time.DateTimeException;
  * prints only tasks of a specific date if the date is specified.
  *
  * @author Zhen Xuan (Tutorial Group W12)
- * @version CS2103T AY21/22 S2
+ * @version CS2103T AY21/22 S1
  */
 public class ListCommand extends Command {
 
@@ -31,9 +31,10 @@ public class ListCommand extends Command {
      * @param tasks   the task list
      * @param ui      the ui
      * @param storage the storage for the saved task list
+     * @throws DukeException if the date/time format is wrong
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String date = super.description.replace(" ", "");
         try {
             if (date.equals("")) {

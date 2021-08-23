@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * ToDo is a task that doesnt have any dates tied to it.
  *
  * @author Zhen Xuan (Tutorial Group W12)
- * @version CS2103T AY21/22 S2
+ * @version CS2103T AY21/22 S1
  */
 public class ToDo extends Task {
     /**

@@ -1,26 +1,33 @@
 package command;
 
 
-import main.java.duke.command.DeadlineCommand;
-import main.java.duke.command.DoneCommand;
-import main.java.duke.command.EventCommand;
-import main.java.duke.task.*;
-import main.java.duke.storage.StorageStub;
-import main.java.duke.tasklist.TaskListStub;
 import main.java.duke.Ui;
+import main.java.duke.command.DoneCommand;
+import main.java.duke.storage.StorageStub;
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.ToDo;
+import main.java.duke.tasklist.TaskListStub;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests the functions in DoneCommand
+ *
+ * @author Zhen Xuan (Tutorial Group W12)
+ * @version CS2103T AY21/22 S1
+ */
 public class DoneCommandTest {
 
-    private DoneCommand c1 = new DoneCommand("1");
-    private DoneCommand c2 = new DoneCommand("2");
-    private DoneCommand c3 = new DoneCommand("3");
-    private StorageStub s = new StorageStub();
-    private Ui u = new Ui();
+    private final DoneCommand c1 = new DoneCommand("1");
+    private final DoneCommand c2 = new DoneCommand("2");
+    private final DoneCommand c3 = new DoneCommand("3");
+    private final StorageStub s = new StorageStub();
+    private final Ui u = new Ui();
     private TaskListStub t;
 
     @Test
