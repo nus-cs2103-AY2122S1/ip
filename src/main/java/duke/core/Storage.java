@@ -14,14 +14,9 @@ import java.io.IOException;
  */
 public class Storage {
     private String filePath;
-    private TaskList tasks = null;
 
     public Storage(String filePath) {
         this.filePath = filePath;
-    }
-
-    public void setTaskList(TaskList tasks) {
-        this.tasks = tasks;
     }
 
     /**
@@ -30,6 +25,7 @@ public class Storage {
      * @return file object or null to represent the absence of a save file
      * @throws DukeException if there is an I/O Exception when it is read
      */
+
     public File retrieveTasks() throws DukeException {
         File file = new File(filePath);
         try {
@@ -71,14 +67,14 @@ public class Storage {
             if (!file.exists()) {
                 throw new FileNotFoundException();
             }
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             createStorageFile(file);
         } finally {
             try {
                 FileWriter fw = new FileWriter(filePath);
                 fw.write(dataText);
                 fw.close();
-            } catch(IOException e) {
+            } catch (IOException e) {
                 throw new DukeException("Something happened to the file when saving: " + e.getMessage());
             }
         }

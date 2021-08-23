@@ -1,7 +1,5 @@
 package duke.core;
 
-import java.util.ArrayList;
-
 /**
  * Ui encapsulates the user interface which the user interacts with. It can greet the player
  * and print the results return by the commands.
@@ -9,14 +7,14 @@ import java.util.ArrayList;
  * @author Clifford
  */
 public class Ui {
-    private static final String logo =
+    private static final String LOGO =
             " ____        _        \n" +
             "|  _ \\ _   _| | _____ \n" +
             "| | | | | | | |/ / _ \\\n" +
             "| |_| | |_| |   <  __/\n" +
             "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final String HorizontalSeparator =
+    private static final String HORIZONTAL_SEPARATOR =
             "------------------------------------------------------------------------";
 
     /**
@@ -25,8 +23,8 @@ public class Ui {
      * @return a welcome message when user starts interacting with ChatBot
      */
     public void greetUser() {
-        formatDisplay("Hello from\n" + logo +
-                "Hello! I'm Chatty Clifford!\nHow may I be of service to you?");
+        formatDisplay("Hello from\n" + LOGO +
+                "Hello! I'm Duke!\nHow may I be of service to you?");
     }
 
     /**
@@ -37,11 +35,11 @@ public class Ui {
     public void formatDisplay(String input) {
         StringBuilder sb = new StringBuilder();
         StringBuilder formattedSb = sb
-                .append(HorizontalSeparator)
+                .append(HORIZONTAL_SEPARATOR)
                 .append("\n")
                 .append(input)
                 .append("\n")
-                .append(HorizontalSeparator);
-        System.out.println(formattedSb.toString());
+                .append(HORIZONTAL_SEPARATOR);
+        System.out.println(formattedSb);
     }
 }

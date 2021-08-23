@@ -10,7 +10,6 @@ import duke.exception.DukeException;
  * @author Clifford
  */
 public class Parser {
-
     /**
      * Identifies the command the user wishes to invoke given a user input, otherwise throws
      * DukeException if user input is invalid.
@@ -27,25 +26,25 @@ public class Parser {
         String[] fullCommand = input.trim().split(" ", 2);
         final String command = fullCommand[0].trim();
         try {
-            if(command.equals("bye")) {
+            if (command.equals("bye")) {
                 return new ExitCommand();
             }
-            if(command.trim().equals("list")) {
+            if (command.trim().equals("list")) {
                 return new ListCommand();
             }
-            if(command.equals("done")) {
+            if (command.equals("done")) {
                 return new DoneCommand(fullCommand[1].trim());
             }
-            if(command.equals("delete")) {
+            if (command.equals("delete")) {
                 return new DeleteCommand(fullCommand[1].trim());
             }
-            if(command.equals("todo")) {
+            if (command.equals("todo")) {
                 return new AddTodoCommand(fullCommand[1].trim());
             }
-            if(command.equals("deadline")) {
+            if (command.equals("deadline")) {
                 return new AddDeadlineCommand(fullCommand[1].trim());
             }
-            if(command.equals("event")) {
+            if (command.equals("event")) {
                 return new AddEventCommand(fullCommand[1].trim());
             }
             return new InvalidCommand();

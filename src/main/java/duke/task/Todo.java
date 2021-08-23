@@ -8,10 +8,10 @@ package duke.task;
  */
 
 public class Todo extends Task {
-    protected final static String taskSymbol = "[T]";
+    protected static final String TASK_SYMBOL = "[T]";
 
     public Todo(String description) {
-        super(description, taskSymbol);
+        super(description, TASK_SYMBOL);
     }
 
     /**

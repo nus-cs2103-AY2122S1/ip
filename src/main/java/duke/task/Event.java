@@ -13,12 +13,12 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     protected final static String taskSymbol = "[E]";
     protected LocalDateTime dateTime;
-    protected final DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    protected final DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
+    protected static final DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
 
     public Event(String description, String dateTime) throws DateTimeParseException {
         super(description, taskSymbol);
-        this.dateTime = LocalDateTime.parse(dateTime.trim(), parseFormat);
+        this.dateTime = LocalDateTime.parse(dateTime.trim(), PARSE_FORMAT);
     }
 
     /**
@@ -28,11 +28,11 @@ public class Event extends Task {
      */
     @Override
     public String convertToText() {
-        return super.convertToText() + super.getDivider() + dateTime.format(parseFormat);
+        return super.convertToText() + super.getDivider() + dateTime.format(PARSE_FORMAT);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dateTime.format(outputFormat) + ")";
+        return "[E]" + super.toString() + " (at: " + dateTime.format(OUTPUT_FORMAT) + ")";
     }
 }

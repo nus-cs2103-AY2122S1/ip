@@ -19,7 +19,7 @@ import java.util.Scanner;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
-    private static final int tasksLimit = 100;
+    private static final int TASKS_LIMIT = 100;
     private int currentIdx;
     private Storage tasksStorage;
 
@@ -42,18 +42,17 @@ public class TaskList {
      */
     public void retrieveTasks() throws DukeException {
         File taskData = this.tasksStorage.retrieveTasks();
-        if(taskData == null || tasksStorage == null) {
+        if (taskData == null || tasksStorage == null) {
             return ;
         }
         try {
             Scanner sc = new Scanner(taskData);
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 record(Task.createTaskFromText(sc.nextLine()));
             }
         } catch (IOException e) {
             throw new DukeException("File could not be read by the taskList. :(");
         }
-
     }
 
     /**
@@ -63,7 +62,7 @@ public class TaskList {
      * @throws DukeException if there is an IOException when handling the file
      */
     public void saveTasks() throws DukeException {
-        if(tasksStorage == null) {
+        if (tasksStorage == null) {
             return ;
         }
         this.tasksStorage.saveTasks(this.convertTasksToText());
@@ -111,8 +110,8 @@ public class TaskList {
      */
     public String convertTasksToText() {
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < currentIdx; i++) {
-            if(i == 0) {
+        for (int i = 0; i < currentIdx; i++) {
+            if (i == 0) {
                 sb.append(convertTaskToText(tasks.get(i)));
                 continue;
             }
@@ -140,15 +139,15 @@ public class TaskList {
      */
     public String record(Task task) throws DukeException {
         try {
-            if(currentIdx >= tasksLimit) {
+            if (currentIdx >= TASKS_LIMIT) {
                 throw new IndexOutOfBoundsException(
-                        String.format("ChatBot can only record maximum of %d responses.", tasksLimit));
+                        String.format("ChatBot can only record maximum of %d responses.", TASKS_LIMIT));
             }
             tasks.add(task);
             currentIdx++;
             saveTasks();
             return "Noted task down! I've added this task:\n  " + task.toString();
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I cannot remember so many things!");
         }
     }
@@ -159,11 +158,11 @@ public class TaskList {
      * @return String representation of list of items in TaskList
      */
     public String printTasks() {
-        if(currentIdx == 0) {
+        if (currentIdx == 0) {
             return "--- List is Empty ---";
         }
         StringBuilder sb = new StringBuilder("--- Start of List ---\n");
-        for(int i = 0; i < currentIdx; i++) {
+        for (int i = 0; i < currentIdx; i++) {
             sb = sb.append(Integer.toString(i + 1)).append(". ").append(tasks.get(i).toString()).append("\n");
         }
         sb = sb.append("--- End of List ---");
@@ -180,17 +179,17 @@ public class TaskList {
      */
     public String markAsDone(int taskId) throws DukeException {
         try {
-            if(taskId <= 0 || taskId > currentIdx) {
+            if (taskId <= 0 || taskId > currentIdx) {
                 throw new IllegalArgumentException(
                         String.format("taskId of %1$d invalid as there are %2$d recorded task(s)", taskId, currentIdx));
             }
             Task task = tasks.get(taskId - 1);
-            boolean isChanged = task.markAsDone();
-            if(!isChanged) {
-                return "Task is already marked as done";
+            boolean isDone = task.isDone();
+            String result = task.markAsDone();
+            if (!isDone) {
+                saveTasks();
             }
-            saveTasks();
-            return "Nice! I've marked this task as done:\n  " + task.toString();
+            return result;
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             throw new DukeException("No such task exists!");
@@ -206,7 +205,7 @@ public class TaskList {
      */
     public String deleteTask(int taskId) throws DukeException {
         try {
-            if(taskId <= 0 || taskId > currentIdx) {
+            if (taskId <= 0 || taskId > currentIdx) {
                 throw new IllegalArgumentException(
                         String.format("taskId of %1$d invalid as there are %2$d recorded task(s)", taskId, currentIdx));
             }
