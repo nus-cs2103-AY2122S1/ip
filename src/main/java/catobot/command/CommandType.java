@@ -1,4 +1,4 @@
-package command;
+package catobot.command;
 
 public enum CommandType {
 

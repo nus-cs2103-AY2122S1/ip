@@ -1,7 +1,7 @@
-package command;
+package catobot.command;
 
-import exception.BotException;
-import exception.InvalidCommandException;
+import catobot.exception.BotException;
+import catobot.exception.InvalidCommandException;
 
 public class Parser {
     /**

@@ -1,4 +1,4 @@
-package exception;
+package catobot.exception;
 
 /**
  * OutOfBoundException is thrown when a value is out of valid range.

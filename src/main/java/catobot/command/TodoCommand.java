@@ -1,15 +1,10 @@
-package command;
+package catobot.command;
 
 import catobot.Storage;
 import catobot.Ui;
-import exception.BotException;
-import exception.EmptyCommandException;
-import exception.InvalidCommandException;
-import item.Deadline;
-import item.TaskList;
-import item.Todo;
-
-import java.time.LocalDate;
+import catobot.exception.BotException;
+import catobot.item.TaskList;
+import catobot.item.Todo;
 
 public class TodoCommand extends Command {
     private String content;

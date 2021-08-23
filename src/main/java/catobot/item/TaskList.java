@@ -1,7 +1,7 @@
-package item;
+package catobot.item;
 
-import exception.BotException;
-import exception.OutOfBoundException;
+import catobot.exception.BotException;
+import catobot.exception.OutOfBoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class TaskList {
      * Adds a task into the TaskList.
      *
      * @param item The task to be added.
-     * @return The response message after adding the item.
+     * @return The response message after adding the catobot.item.
      */
     public String add(Task item) {
         this.taskList.add(item);

@@ -1,6 +1,6 @@
-package item;
+package catobot.item;
 
-import exception.EmptyCommandException;
+import catobot.exception.EmptyCommandException;
 
 /**
  * Todo is a type of task which has description only.
@@ -14,7 +14,7 @@ public class Todo extends Task {
      * Creates a Todo.
      *
      * @param description The description of the Todo.
-     * @return The created Todo item.
+     * @return The created Todo catobot.item.
      * @throws EmptyCommandException if the description is empty.
      */
     public static Todo of(String description) throws EmptyCommandException {

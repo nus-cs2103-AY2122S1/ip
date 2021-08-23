@@ -1,15 +1,15 @@
-package command;
+package catobot.command;
 
 import catobot.Storage;
 import catobot.Ui;
-import exception.BotException;
-import exception.InvalidCommandException;
-import item.TaskList;
+import catobot.exception.BotException;
+import catobot.exception.InvalidCommandException;
+import catobot.item.TaskList;
 
 public class Command implements Executable{
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
-        throw new InvalidCommandException("Meow I don't understand this command >.<");
+        throw new InvalidCommandException("Meow I don't understand this catobot.command >.<");
     }
 
     public boolean isExit() {

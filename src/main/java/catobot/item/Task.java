@@ -1,6 +1,6 @@
-package item;
+package catobot.item;
 
-import exception.EmptyCommandException;
+import catobot.exception.EmptyCommandException;
 
 /**
  * Task contains items which can be done.

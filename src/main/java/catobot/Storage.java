@@ -1,10 +1,10 @@
 package catobot;
 
-import exception.EmptyCommandException;
-import item.Deadline;
-import item.Event;
-import item.Task;
-import item.Todo;
+import catobot.exception.EmptyCommandException;
+import catobot.item.Deadline;
+import catobot.item.Event;
+import catobot.item.Task;
+import catobot.item.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

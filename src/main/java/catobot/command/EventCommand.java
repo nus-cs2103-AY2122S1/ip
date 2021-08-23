@@ -1,12 +1,12 @@
-package command;
+package catobot.command;
 
 import catobot.Storage;
 import catobot.Ui;
-import exception.BotException;
-import exception.EmptyCommandException;
-import exception.InvalidCommandException;
-import item.Event;
-import item.TaskList;
+import catobot.exception.BotException;
+import catobot.exception.EmptyCommandException;
+import catobot.exception.InvalidCommandException;
+import catobot.item.Event;
+import catobot.item.TaskList;
 
 import java.time.LocalDate;
 

@@ -1,6 +1,6 @@
-package item;
+package catobot.item;
 
-import exception.EmptyCommandException;
+import catobot.exception.EmptyCommandException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

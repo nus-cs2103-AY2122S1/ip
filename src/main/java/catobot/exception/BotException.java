@@ -1,4 +1,4 @@
-package exception;
+package catobot.exception;
 
 /**
  * BotException are possible exceptions thrown by catobot.Catobot.

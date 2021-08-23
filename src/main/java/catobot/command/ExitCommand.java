@@ -1,9 +1,9 @@
-package command;
+package catobot.command;
 
 import catobot.Storage;
 import catobot.Ui;
-import exception.BotException;
-import item.TaskList;
+import catobot.exception.BotException;
+import catobot.item.TaskList;
 
 import java.io.IOException;
 

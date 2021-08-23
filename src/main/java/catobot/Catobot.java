@@ -1,12 +1,10 @@
 package catobot;
 
-import command.Command;
-import command.CommandType;
-import command.Executable;
-import command.Parser;
-import exception.BotException;
-import exception.EmptyCommandException;
-import item.TaskList;
+import catobot.command.Command;
+import catobot.command.Parser;
+import catobot.exception.BotException;
+import catobot.exception.EmptyCommandException;
+import catobot.item.TaskList;
 
 import java.io.FileNotFoundException;
 

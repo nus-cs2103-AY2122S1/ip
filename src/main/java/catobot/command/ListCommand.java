@@ -1,8 +1,8 @@
-package command;
+package catobot.command;
 
 import catobot.Storage;
 import catobot.Ui;
-import item.TaskList;
+import catobot.item.TaskList;
 
 public class ListCommand extends Command {
 
