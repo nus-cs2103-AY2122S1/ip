@@ -19,7 +19,11 @@ public class Data {
             Scanner scanner = new Scanner(data);
             ArrayList<Task> loadedTasks = new ArrayList<>();
             while (scanner.hasNext()) {
-                loadedTasks.add(txtToTasks(scanner.nextLine()));
+                try {
+                    loadedTasks.add(txtToTasks(scanner.nextLine()));
+                } catch (IllegalStateException e) {
+                    System.err.println(e);
+                }
             }
             return loadedTasks;
         } catch (FileNotFoundException e) {
@@ -49,7 +53,7 @@ public class Data {
      */
     public static void updateData(ArrayList<Task> dukeList) throws DukeException {
         try {
-            FileWriter writer = new FileWriter("./data/data/txt");
+            FileWriter writer = new FileWriter("./data/data.txt");
             for (Task task : dukeList) {
                 writer.write(task.toTxt());
             }
@@ -65,7 +69,7 @@ public class Data {
      * @return a new Task interpreted from the txt file.
      */
     public static Task txtToTasks(String txt) {
-        String[] read = txt.split("\\| ");
+        String[] read = txt.split(" \\| ");
         String taskCategory = read[0];
         Task task;
 

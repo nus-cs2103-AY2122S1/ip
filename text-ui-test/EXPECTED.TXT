@@ -21,16 +21,16 @@ Got it. I've added this task:
 [T][ ]  this
 Now you have 3 tasks in the list
 Nice! I've marked this task as done:
- [D][ ]  task  (by: date)
+ [D][X]  task  (by: date)
 Nice! I've marked this task as done:
- [E][ ]  activity  (at: place)
+ [E][X]  activity  (at: place)
 ☹ Oops! Looks like you are missing the number of the task you wish to delete! Try again :-)
 ☹ Oops! Looks like you are missing the number of the task you wish to delete! Try again :-)
 You may have entered something incorrectly. Try adding a number behind 'delete'!
 Noted. I've removed this task:
-[D][ ]  task  (by: date)
+[D][X]  task  (by: date)
 Now you have 2 tasks in the list
 Here are the tasks in your list:
-1.[E][ ]  activity  (at: place)
+1.[E][X]  activity  (at: place)
 2.[T][ ]  this
 Bye. Hope to see you again soon!

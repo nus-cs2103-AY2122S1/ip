@@ -12,8 +12,8 @@ import java.util.Scanner;
 public class Duke {
     public Duke() {}
 
-    private static int listCount = 0;
-    private static ArrayList<Task> dukeList = new ArrayList<>();
+    private static final Scanner sc = new Scanner(System.in);
+    private static final ToDoList dukeList = new ToDoList(Data.loadData());
     private static String addedText = "Got it. I've added this task:\n";
 
     /**
@@ -22,6 +22,16 @@ public class Duke {
     public void greet() {
         String greetText = "Hello I'm Duke\nWhat can I do for you?\n";
         System.out.print(greetText);
+    }
+
+    /**
+     * Interpret what the user has entered as an input and categorises it into a Command.
+     * @param input User's input
+     * @return The correct command that is interpreted from the user input.
+     */
+    public static Command inputToCommand(String input) {
+        String[] inputs = input.split(" ", 2);
+        return Command.readInput(inputs[0]);
     }
 
     /**
@@ -53,8 +63,7 @@ public class Duke {
         Deadline newDL = new Deadline(description[0], description[1]);
         dukeList.add(newDL);
         Data.writeToFile(newDL);
-        listCount++;
-        System.out.println(addedText + newDL.toString() + "\nNow you have " + listCount + " tasks in the list");
+        System.out.println(addedText + newDL.toString() + "\nNow you have " + ToDoList.numberOfTasks() + " tasks in the list");
     }
 
     /**
@@ -78,8 +87,7 @@ public class Duke {
         Event newEV = new Event(description[0], description[1]);
         dukeList.add(newEV);
         Data.writeToFile(newEV);
-        listCount++;
-        System.out.println(addedText + newEV.toString() + "\nNow you have " + listCount + " tasks in the list");
+        System.out.println(addedText + newEV.toString() + "\nNow you have " + ToDoList.numberOfTasks() + " tasks in the list");
     }
 
     /**
@@ -97,8 +105,7 @@ public class Duke {
         Todo newTD = new Todo(information[1]);
         dukeList.add(newTD);
         Data.writeToFile(newTD);
-        listCount++;
-        System.out.println(addedText + newTD.toString() + "\nNow you have " + listCount + " tasks in the list");
+        System.out.println(addedText + newTD.toString() + "\nNow you have " + ToDoList.numberOfTasks() + " tasks in the list");
     }
 
     /**
@@ -107,7 +114,7 @@ public class Duke {
     public void save() {
         try {
             FileWriter data = new FileWriter("./data/data.txt");
-            for (Task task : dukeList) {
+            for (Task task : ToDoList.getDukeList()) {
                 data.write(task.toString() + "\n");
             }
             data.close();
@@ -123,26 +130,25 @@ public class Duke {
     public void start() {
         boolean loopStatus = true;
         greet();
-        Scanner scanner = new Scanner(System.in);
+        String input = sc.nextLine();
+        Command command = inputToCommand(input);
         while (loopStatus) {
-            String input = scanner.nextLine().toLowerCase();
-            String firstWord = input.split(" ", 2)[0];
-            switch (firstWord) {
-                case "bye":
+            switch (command) {
+                case BYE:
                     loopStatus = false;
                     exit();
                     break;
-                case "list":
+                case LIST:
                     ToDoList.showList();
                     break;
-                case "deadline":
+                case DEADLINE:
                     try {
                         addDeadline(input);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case "delete":
+                case DELETE:
                     try {
                         ToDoList.delete(input);
                         ToDoList.update();
@@ -150,21 +156,21 @@ public class Duke {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case "event":
+                case EVENT:
                     try {
                         addEvent(input);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case "todo":
+                case TODO:
                     try {
                         addTodo(input);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case "done":
+                case DONE:
                     try {
                         ToDoList.markDone(input);
                         ToDoList.update();
@@ -175,6 +181,10 @@ public class Duke {
                 default:
                     //If no cases above are entered, Duke will not understand the command and prompt the user.
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+            if (loopStatus) {
+                input = sc.nextLine();
+                command = inputToCommand(input);
             }
         }
     }

@@ -8,6 +8,10 @@ public class ToDoList {
         this.dukeList = dukeList;
     }
 
+    public static void add(Task task) {
+        dukeList.add(task);
+    }
+
     /**
      * Shows all Tasks in the list that the user has given to Duke to store.
      * Tasks are ordered from least recent to most recent. If no tasks have been given to Duke,
@@ -16,12 +20,13 @@ public class ToDoList {
     public static void showList() {
         String showListText = "Here are the tasks in your list:";
         String emptyListText = "☹ Oops! Looks like you have no tasks in your list!";
-        for (int i = 0; i < dukeList.size(); i++) {
-            showListText += "\n" + (i + 1) + "." + dukeList.get(i).toString();
-        }
-        if (dukeList.isEmpty()) {
+
+        if (dukeList.size() == 0) {
             System.out.println(emptyListText);
         } else {
+            for (int i = 0; i < dukeList.size(); i++) {
+                showListText += "\n" + (i + 1) + "." + dukeList.get(i).toString();
+            }
             System.out.println(showListText);
         }
     }
@@ -47,7 +52,7 @@ public class ToDoList {
             message = "☹ Oops! Your list is empty! Try adding a Task first!";
         } else if (itemNumber <= dukeList.size()){
             Task targetItem = dukeList.get(itemNumber - 1);
-
+            targetItem.markDone();
             message = "Nice! I've marked this task as done:\n" + " " + targetItem.toString();
         }
         System.out.println(message);
@@ -74,12 +79,20 @@ public class ToDoList {
             throw new DukeException("☹ Oops! Looks like you are trying to delete something that is not in your list! Try again!");
         }
         Task removed = dukeList.remove(itemNumber - 1);
-        System.out.println("Noted. I've removed this task:\n" + removed.toString() + "\nNow you have " + dukeList.size()
+        System.out.println("Noted. I've removed this task:\n" + removed.toString() + "\nNow you have " + (dukeList.size())
                 + " tasks in the list");
     }
 
     public static void update() throws DukeException{
         Data.updateData(dukeList);
+    }
+
+    public static ArrayList<Task> getDukeList() {
+        return ToDoList.dukeList;
+    }
+
+    public static int numberOfTasks() {
+        return ToDoList.dukeList.size();
     }
 
 }
