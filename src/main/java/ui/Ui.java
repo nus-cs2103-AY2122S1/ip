@@ -1,7 +1,7 @@
 package ui;
 
-import task.TaskList;
 import task.Task;
+import task.TaskList;
 
 public class Ui {
     /**
