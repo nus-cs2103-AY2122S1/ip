@@ -3,9 +3,13 @@ class Todo extends Task {
         super(content);
     }
 
+    Todo(String content, boolean isDone) {
+        super(content, isDone);
+    }
+
     @Override
     public String encoding() {
-        return "T|" + super.encoding();
+        return "T&&" + super.encoding();
     }
 
     @Override

@@ -58,9 +58,10 @@ public class Duke {
     public static void readData(ArrayList<Task> lst) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
-        //temp
+
         while (s.hasNext()) {
-            System.out.println(s.nextLine());
+            String description = s.nextLine();
+            lst.add(Task.decoding(description));
         }
     }
 

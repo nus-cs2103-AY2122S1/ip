@@ -5,9 +5,14 @@ class Event extends Task {
         this.at = at;
     }
 
+    Event(String content, String at, boolean isDone) {
+        super(content, isDone);
+        this.at = at;
+    }
+
     @Override
     public String encoding() {
-        return "E|" + super.encoding() + "|" + at;
+        return "E&&" + super.encoding() + "&&" + at;
     }
 
     @Override
