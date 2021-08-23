@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.*;
+
 import static java.lang.Integer.parseInt;
 
 public class Parser {

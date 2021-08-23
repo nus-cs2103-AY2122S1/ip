@@ -1,3 +1,9 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -73,7 +79,7 @@ public class UI {
     }
 
     public void printIndexOutOfBoundsException() {
-        System.out.println("Lollipop: No such task number found.");
+        System.out.println("Lollipop: No such duke.task number found.");
     }
 
     public void printNumberFormatException() {

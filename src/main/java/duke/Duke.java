@@ -1,7 +1,10 @@
+package duke;
+
+import duke.command.Command;
+import duke.task.TaskList;
+
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 
 import static java.lang.Integer.parseInt;
 

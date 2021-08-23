@@ -1,15 +1,21 @@
+package duke.command;
+
+import duke.Storage;
+import duke.UI;
+import duke.task.TaskList;
+
 import java.io.FileNotFoundException;
 
-public class DeleteCommand extends Command {
+public class DoneCommand extends Command {
 
     private int taskNumber;
 
-    public DeleteCommand(int taskNumber) {
+    public DoneCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) throws FileNotFoundException {
-        tasks.deleteTask(taskNumber, storage, ui);
+        tasks.markTaskAsDone(taskNumber, storage, ui);
     }
 }

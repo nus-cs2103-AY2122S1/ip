@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.Storage;
+import duke.UI;
+import duke.task.TaskList;
+
 import java.io.FileNotFoundException;
 
 public class EventCommand extends Command {
