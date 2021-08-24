@@ -12,7 +12,7 @@ public class TaskList {
     private ArrayList<Task> taskList;
 
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.taskList = new ArrayList<Task>();
     }
 
     public void initialiseTaskList() {
@@ -31,14 +31,14 @@ public class TaskList {
                 } else if (curr.matches("\\[D](.*)")) {
                     String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
                     String[] splitRight = splitCurr[1].split(" \\(by: ", 2);
-                    String by = splitRight[1].substring(0, splitRight[1].length() - 1);
-                    newTask = new Deadline(splitRight[0], by);
+                    String deadline = splitRight[1].substring(0, splitRight[1].length() - 1);
+                    newTask = new Deadline(splitRight[0], formatDate(deadline));
                     isComplete = curr.contains("[X]");
                 } else {
                     String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
                     String[] splitRight = splitCurr[1].split(" \\(at: ", 2);
-                    String at = splitRight[1].substring(0, splitRight[1].length() - 1);
-                    newTask = new Event(splitRight[0], at);
+                    String timing = splitRight[1].substring(0, splitRight[1].length() - 1);
+                    newTask = new Event(splitRight[0], formatDate(timing));
                     isComplete = curr.contains("[X]");
                 }
                 this.taskList.add(newTask);
@@ -46,9 +46,45 @@ public class TaskList {
                     newTask.markCompleted();
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private String formatDate(String date) {
+        String day;
+        String month;
+        String year;
+        String[] splitDate = date.split(" ", 3);
+        day = splitDate[1];
+        switch (splitDate[0]) {
+            case "Jan":
+                month = "01";
+            case "Feb":
+                month = "02";
+            case "Mar":
+                month = "03";
+            case "Apr":
+                month = "04";
+            case "May":
+                month = "05";
+            case "Jun":
+                month = "06";
+            case "Jul":
+                month = "07";
+            case "Aug":
+                month = "08";
+            case "Sep":
+                month = "09";
+            case "Oct":
+                month = "10";
+            case "Nov":
+                month = "11";
+            default:
+                month = "12";
+        }
+        year = splitDate[2];
+        return year + "-" + month + "-" + day;
     }
 
     public String addTask(Task task) {

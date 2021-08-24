@@ -1,14 +1,18 @@
 package Tasks;
 
-public class Deadline extends Task {
-    private String by;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    private LocalDate deadline;
+
+    public Deadline(String description, String deadline) {
         super(description);
-        this.by = by;
-    }
+        this.deadline = LocalDate.parse(deadline);
+     }
+
     @Override
     public String printTask() {
-        return "[D] " + super.printTask() + " (by: " + by + ")";
+        return "[D] " + super.printTask() + " (by: " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
