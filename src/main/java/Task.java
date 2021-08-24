@@ -16,6 +16,12 @@ public class Task {
         this.type = type;
     }
 
+    public Task(Type type, boolean done, String description) {
+        this.type = type;
+        this.description = description;
+        this.isDone = done;
+    }
+
     //Completes the Task
     public void markAsDone() {
         isDone = true;
@@ -26,7 +32,11 @@ public class Task {
         return "[" + type.toString() + "]" + getStatusIcon() + description;
     }
 
+    public String toFileString() { return type.toString() + " " + doneString() + " " + description;}
+
     public String getStatusIcon() {
         return (isDone ? "[X] " : "[ ] "); // mark done task with X
     }
+
+    public String doneString() {return (isDone ? "X" : "O");}
 }
