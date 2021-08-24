@@ -1,5 +1,5 @@
 public class AddCommand extends Command {
-    Task task;
+    private Task task;
 
     public AddCommand(Task task) {
         super();
@@ -7,8 +7,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.addTask(this.task);
-        ui.displayAddedMessage(this.task, tasks);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        taskList.addTask(this.task);
+        ui.displayAddedMessage(this.task, taskList);
     }
 }

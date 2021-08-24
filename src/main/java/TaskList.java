@@ -22,6 +22,10 @@ public class TaskList {
         this.tasks.remove(index);
     }
 
+    public Task getTask(int index) {
+        return this.tasks.get(index);
+    }
+
     // For List command
     @Override
     public String toString() {

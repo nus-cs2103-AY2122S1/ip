@@ -44,6 +44,11 @@ public class Ui {
         System.out.println("\t There are " + tasks.getSize() + " items in the list");
     }
 
+    public void displayCompletedMessage(Task taskDone) {
+        System.out.println("\t Good job! This task has been completed:");
+        System.out.println("\t \t" + taskDone.toString());
+    }
+
     public void invalidCommand() throws DukeException {
         String errorMessage = "\t Sorry I do not understand this command \n";
         errorMessage += "\t Please use one of the following commands: \n";
