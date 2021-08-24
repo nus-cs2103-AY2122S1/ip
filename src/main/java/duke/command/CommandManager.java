@@ -49,7 +49,8 @@ public class CommandManager {
     }
 
     /**
-     * The default behaviour with the input if there are no commands called.
+     * Executes the default behaviour with the input if there are no commands
+     * called.
      */
     private void defaultExec() {
         throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

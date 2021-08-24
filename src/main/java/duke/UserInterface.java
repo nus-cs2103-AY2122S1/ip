@@ -41,7 +41,7 @@ public class UserInterface {
     }
 
     /**
-     * Bid farewell to the user.
+     * Bids farewell to the user.
      */
     public void farewell() {
         new Response("Bye. Hope to see you again soon!").print();
@@ -74,6 +74,11 @@ public class UserInterface {
         new Response(message).print();
     }
 
+    /**
+     * Shows a given list of tasks to the user.
+     * 
+     * @param list of tasks to be shown
+     */
     public void showTaskList(List<? extends Task> list) {
         String message = IntStream.range(0, list.size()).mapToObj(i -> (i + 1) + ". " + list.get(i))
                 .reduce((str1, str2) -> str1 + "\n" + str2).orElse("Wow, such emptiness!");
