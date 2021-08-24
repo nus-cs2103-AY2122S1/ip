@@ -1,4 +1,4 @@
-package processes;
+package parser;
 
 public interface IParser {
     boolean parseLine(String line);

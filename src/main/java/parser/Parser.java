@@ -1,4 +1,4 @@
-package processes;
+package parser;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import models.Command;
+import processor.Processor;
 
 public class Parser implements IParser {
 
@@ -20,7 +21,7 @@ public class Parser implements IParser {
 
     @Override
     public boolean parseLine(String line) {
-        List<String> arguments = new ArrayList<String>(Arrays.asList(line.split(" ")));
+        List<String> arguments = new ArrayList<>(Arrays.asList(line.split(" ")));
         if(line.equals("bye")) {
             this.processor.processCommand(Command.BYE, arguments);
             return false;

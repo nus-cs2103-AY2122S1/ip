@@ -1,4 +1,4 @@
-package processes;
+package models;
 
 public class Task {
 

@@ -1,4 +1,6 @@
-package processes;
+package models;
+
+import models.Task;
 
 public class Todo extends Task {
 

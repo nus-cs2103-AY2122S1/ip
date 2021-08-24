@@ -1,5 +1,5 @@
 import util.Output;
-import processes.Parser;
+import parser.Parser;
 
 public class Duke {
 
