@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     
@@ -131,13 +134,17 @@ public class Duke {
     public static String deadlineTask(String str) {
         try {
             int i = str.indexOf("/");
-            Task t = new Deadline(str.substring(0, i), str.substring(i + 4));
+            String day = str.substring(i + 4, i + 14);
+            String time = str.substring(i + 14);
+            Task t = new Deadline(str.substring(0, i), formatDate(day) + time);
             tasks.add(t);
             return "Got it. I've added this task: \n"
                     + t
                     + "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (StringIndexOutOfBoundsException e) {
             return "☹ OOPS!!! The description of a todo cannot be empty.";
+        } catch (DateTimeParseException e) {
+            return "☹ OOPS!!! Please use the date format: yyyy-mm-dd.";
         }
     }
 
@@ -149,13 +156,16 @@ public class Duke {
     public static String eventsTask(String str) {
         try {
             int i = str.indexOf("/");
-            Task t = new Events(str.substring(0, i), str.substring(i + 4));
+            String day = str.substring(i + 4, i + 14);
+            Task t = new Events(str.substring(0, i), day);
             tasks.add(t);
             return "Got it. I've added this task: \n"
                     + t
                     + "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (StringIndexOutOfBoundsException e) {
             return "☹ OOPS!!! The description of a todo cannot be empty.";
+        } catch (DateTimeParseException e) {
+            return "☹ OOPS!!! Please use the date format: yyyy-mm-dd.";
         }
     }
 
@@ -171,6 +181,11 @@ public class Duke {
         return "Got it. I've added this task: \n"
                 + t
                 + "\nNow you have " + tasks.size() + " tasks in the list.";
+    }
+    
+    public static String formatDate(String unformattedDate) throws DateTimeParseException{
+        LocalDate date = LocalDate.parse(unformattedDate);
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }
 
