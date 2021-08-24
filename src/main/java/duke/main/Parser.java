@@ -1,3 +1,7 @@
+package duke.main;
+
+import duke.task.*;
+
 public class Parser {
     public static boolean parse(TaskList taskList, Storage storage, String input, Ui ui) {
         String[] commandAndDesc = input.split(" ", 2);
@@ -49,6 +53,7 @@ public class Parser {
                 }
                 break;
         }
+        storage.updateStorage(taskList);
         return true;
     }
 }

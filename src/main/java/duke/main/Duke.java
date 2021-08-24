@@ -1,3 +1,7 @@
+package duke.main;
+
+import duke.task.TaskList;
+
 import java.io.File;
 
 public class Duke {
@@ -37,6 +41,7 @@ public class Duke {
 
     public static void main(String[] args) {
         String filePath = System.getProperty("user.dir") + File.separator + "tasks.txt";
+        System.out.println(filePath);
         new Duke(filePath).run();
     }
 
