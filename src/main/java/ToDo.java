@@ -6,8 +6,12 @@ public class ToDo extends Task{
      * Constructor
      * @param taskTitle
      */
-    ToDo(String taskTitle){
+    ToDo (String taskTitle){
         super(taskTitle, "T");
+    }
+
+    ToDo (String taskTitle, boolean isDone) {
+        super(taskTitle, isDone, "T");
     }
 
     @Override

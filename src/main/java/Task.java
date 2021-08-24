@@ -13,6 +13,12 @@ public abstract class Task {
         this.taskType = taskType;
     }
 
+    public Task (String taskTitle, boolean isDone, String taskType) {
+        this.taskTitle = taskTitle;
+        this.isDone = isDone;
+        this.taskType = taskType;
+    }
+
     /**
      * Returns the title of the task in String
      * @return
@@ -41,5 +47,7 @@ public abstract class Task {
     public void maskAsDone() {
         this.isDone = true;
     }
+
+
 
 }

@@ -9,8 +9,13 @@ public class Event extends Task{
      * @param tasktitle
      * @param time
      */
-    Event(String tasktitle, String time){
+    Event (String tasktitle, String time) {
         super(tasktitle, "E");
+        this.time = time;
+    }
+
+    Event (String taskTitle, boolean isDone, String time) {
+        super(taskTitle, isDone, "E");
         this.time = time;
     }
 
