@@ -59,8 +59,9 @@ public class DukeDB {
         }
     }
 
-    public void load(ArrayList<Task> arr) {
+    public Optional<ArrayList<Task>> load() {
         try {
+            ArrayList<Task> arr = new ArrayList<>();
             File database = new File(databasePath);
             Scanner reader = new Scanner(database);
             while (reader.hasNextLine()) {
@@ -69,11 +70,13 @@ public class DukeDB {
                 Optional<Task> task = this.readTask(splitTask);
                 task.ifPresentOrElse(arr::add, () -> Duke.printMsg("Error loading task. Database is corrupt."));
             }
+            return Optional.of(arr);
         } catch (FileNotFoundException e) {
             Duke.printMsg(e.toString());
         } catch (Error f) {
             Duke.printMsg("Problem reading the database format. Was the database modified externally?");
         }
+        return Optional.empty();
     }
 
     public Optional<Boolean> create() {
