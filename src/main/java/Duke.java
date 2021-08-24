@@ -46,15 +46,54 @@ public class Duke {
                 System.out.println(Goodbye_message);
                 System.out.println(line + "\n");
                 break;
-            } else if (Message.equals("list")){
+            }
+            else if (Message.equals("list")){
                 PrintList();
-            } else if (Message.startsWith("done")) {
+            }
+            else if (Message.startsWith("done")) {
                 int index = Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1;
 
                 MarkDone(index);
             }
+            else if (Message.startsWith("todo") || Message.startsWith("event") || Message.startsWith("deadline")) {
+                String task = "";
+                String deadline = "";
+                if (Message.indexOf("/") != -1) {
+                    task = Message.substring(Message.indexOf(" ") + 1, Message.indexOf("/") - 1);
+
+                    if (Message.indexOf("/by") != -1) {
+                        deadline = Message.substring(Message.indexOf("/by") + 3);
+                    } else if (Message.indexOf("/at") != -1){
+                        deadline = Message.substring(Message.indexOf("/at") + 3);
+                    }
+                }
+                else {
+                    task = Message.substring(Message.indexOf(" ") + 1);
+
+                    deadline = "";
+                }
+
+
+                System.out.println("Got it. I've added this task: ");
+                if (Message.startsWith("todo")) {
+                    Task newTask = new ToDos(false, task);
+                    System.out.println(" " + newTask.PrintTaskInfo());
+                    list.add(newTask);
+                } else if (Message.startsWith("event")) {
+                    Task newTask = new Events(false, task, deadline);
+                    System.out.println(" " + newTask.PrintTaskInfo());
+                    list.add(newTask);
+                } else {
+                    Task newTask = new Deadlines(false, task, deadline);
+                    System.out.println(" " + newTask.PrintTaskInfo());
+                    list.add(newTask);
+                }
+
+                System.out.println("Now you have " + list.size() + "" +
+                        " tasks in the list.");
+            }
             else {
-                Task newTask = new Task(false , Message);
+                Task newTask = new Task(false, Message);
                 System.out.println("added: " + newTask.PrintTaskInfo());
                 list.add(newTask);
             }
@@ -73,11 +112,12 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        //Print Hello.
+       //Print Hello.
         HelloMessage();
 
         //Print Message();
         PrintMessage();
+
 
     }
 }
