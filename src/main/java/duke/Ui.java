@@ -20,7 +20,7 @@ public class Ui {
      * @param errorMessage the message to print
      */
     public void showError(String errorMessage) {
-        System.out.println(errorMessage + "\n");
+        reply(errorMessage + "\n");
     }
 
 

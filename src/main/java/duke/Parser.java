@@ -1,5 +1,8 @@
 package duke;
 
+import Command.Command;
+import exceptions.NoSuchCommandException;
+
 import java.util.Scanner;
 
 /**
@@ -14,10 +17,10 @@ public class Parser {
      * @param userInput String input by the user
      * @return a String array holding the command and the input
      */
-    public static String[] parse(String userInput) {
+    public static Command parse(String userInput) throws NoSuchCommandException {
         Scanner sc = new Scanner(userInput);
         String command = sc.next();
         String input = userInput.replace(command, "").strip();
-        return new String[]{command, input};
+        return Command.of(command, input);
     }
 }
