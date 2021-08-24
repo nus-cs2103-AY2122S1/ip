@@ -1,6 +1,3 @@
-[T][X] inout
-[T][ ] yes
-[T][X] yes
-[D][X] hw --(by: ght)
-[E][ ] run --(at: p)
-[T][ ] shower
+[T][X] one
+[D][ ] two --(by: 2021-12-23)
+[E][ ] three --(at: 123)
