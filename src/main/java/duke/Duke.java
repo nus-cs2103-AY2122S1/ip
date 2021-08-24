@@ -46,9 +46,8 @@ public class Duke {
 
     public void run() {
         userInt.greet();
-        boolean exit = false;
 
-        while (!exit) {
+        while (true) {
             try {
                 String userInput = userInt.getUserInput();
                 parser.execute(userInput, dataStore, userInt, memBuff);
