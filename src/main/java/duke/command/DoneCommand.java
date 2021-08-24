@@ -13,6 +13,12 @@ import java.util.Scanner;
 public class DoneCommand extends Command {
     private final int index;
 
+    /**
+     * Constructor for the Done command.
+     * @param duke Duke chatbot that is in use.
+     * @param sc Scanner object that is in use.
+     * @param index index of the task that is to be marked as done.
+     */
     public DoneCommand(Duke duke, Scanner sc, int index) {
         super(duke, sc);
         this.index = index;

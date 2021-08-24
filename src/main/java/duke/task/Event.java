@@ -16,6 +16,11 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     private LocalDate dateOfEvent;
 
+    /**
+     * Constructor for the Event task.
+     * @param arrString user input sliced into an array.
+     * @throws DukeException if Duke cannot create the Event object.
+     */
     protected Event(String[] arrString) throws DukeException {
         super(arrString.length < 2 ? " " : arrString[0]);
         String date = arrString[1] == null ? " " : arrString[1].strip();

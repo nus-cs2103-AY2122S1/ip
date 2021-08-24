@@ -14,6 +14,12 @@ import java.util.Scanner;
 public class DeleteCommand extends Command {
     private final int index;
 
+    /** Constructor for the Delete command.
+     *
+     * @param duke Duke chatbot that is in use.
+     * @param sc Scanner object that is in use.
+     * @param index index of the task to be deleted.
+     */
     public DeleteCommand(Duke duke, Scanner sc, int index) {
         super(duke, sc);
         this.index = index;

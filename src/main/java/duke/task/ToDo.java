@@ -8,8 +8,12 @@ package duke.task;
  */
 public class ToDo extends Task {
 
-    protected ToDo(String s) {
-        super(s);
+    /**
+     * Constructor for the Todo object.
+     * @param description description of the todo task.
+     */
+    protected ToDo(String description) {
+        super(description);
     }
 
     /**
