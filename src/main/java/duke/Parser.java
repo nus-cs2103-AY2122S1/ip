@@ -26,6 +26,29 @@ public class Parser {
         }
     }
 
+    public void findTaskFromTaskList(TaskList ob, String inputFind) {
+        String trimmedFind = inputFind.split("\\s", 2)[1];
+        boolean flag = true;
+        int i=1;
+        for (int j = 0; j < ob.numberOfTasks(); j++) {
+            if(ob.getTaskFromList(j).getDescription().contains(trimmedFind)){
+                flag = false;
+                if (!ob.getTaskFromList(j).getPreExisting()) {
+                    System.out.println("    " + (i++) + ". " + ob.getTaskFromList(j).toString());
+                }
+                else {
+                    System.out.println("    " + (i++) + ". " + ob.getTaskFromList(j).getDescription());
+                }
+            }
+            else{
+
+            }
+        }
+        if(flag) {
+            System.out.println("oops! sorry you do not have any matching tasks");
+        }
+    }
+
     public String getTaskList(TaskList ob) {
         String ret="";
         for (int j = 0; j < ob.numberOfTasks(); j++) {
