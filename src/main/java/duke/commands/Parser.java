@@ -73,6 +73,9 @@ public class Parser {
             case "delete":
                 return new DeleteCommand(actionDescription[1]);
 
+            case "find":
+                return new FindCommand(actionDescription[1]);
+
             case "":
                 return new EmptyCommand();
 

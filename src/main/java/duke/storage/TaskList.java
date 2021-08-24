@@ -74,4 +74,16 @@ public class TaskList {
         Ui.printMessage("Noted. I've removed this task:\n" + Ui.INDENT + "  " + task.toString() + "\n" + Ui.INDENT
                 + "Now you have " + this.taskList.size() + " tasks in the list.");
     }
+
+    public void find(String find) {
+        ArrayList<Task> tempArr = new ArrayList<Task>();
+
+        this.taskList.forEach(task -> {
+            if (task.getDescription().contains(find)) {
+                tempArr.add(task);
+            }
+        });
+
+        Ui.printList(tempArr, Ui.FIND_ZERO_SIZE, Ui.FIND_LIST_MESSAGE);
+    }
 }

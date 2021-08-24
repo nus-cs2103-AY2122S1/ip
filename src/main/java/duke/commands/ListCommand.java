@@ -13,7 +13,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Storage storage) {
-        Ui.printList(taskList.getTaskList());
+        Ui.printList(taskList.getTaskList(), Ui.NO_TASK_MESSAGE, Ui.LIST_MESSAGE);
     }
 
     /**
