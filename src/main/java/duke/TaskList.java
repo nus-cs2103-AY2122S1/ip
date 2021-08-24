@@ -41,8 +41,12 @@ public class TaskList {
                 String desc = tasks.get(2);
                 String date = "";
                 String time = "";
-                if (tasks.size() >= 4) { date = tasks.get(3); }
-                if (tasks.size() >= 5) { time = tasks.get(4); }
+                if (tasks.size() >= 4) {
+                    date = tasks.get(3);
+                }
+                if (tasks.size() >= 5) {
+                    time = tasks.get(4);
+                }
                 addTask(id, desc, date, time, isDone);
 
                 tasks.clear();
@@ -64,7 +68,7 @@ public class TaskList {
     }
 
     public void addTask(int id, String desc, String date, String time, boolean status) {
-        switch(id) {
+        switch (id) {
         case(0):
             Todo newTodo = new Todo(desc, "", "");
             if (status) {
@@ -86,7 +90,9 @@ public class TaskList {
             }
             listOfTasks.add(newEvent);
             break;
+        default:
         }
+
     }
 
     public void removeTask(int i) {
