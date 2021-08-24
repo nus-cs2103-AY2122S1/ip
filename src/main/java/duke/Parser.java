@@ -10,15 +10,34 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the text parser for Duke. When parsing a user input, the parser
+ * also handles the updating of the associated TaskList.
+ *
+ * @author Joshua Yong
+ */
 public class Parser {
 
     // The TaskList which the Parser updates
     private TaskList tasks;
 
+    /**
+     * Class constructor.
+     *
+     * @param tasks The TaskList to be updated during parsing.
+     */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Parses the user input String, updating the associated TaskList.
+     * Also returns an appropriate String to be displayed to the user.
+     *
+     * @param userInput The String inputted by the user.
+     * @return A String to be displayed to the user.
+     * @throws DukeException if the user input is invalid.
+     */
     public String parse(String userInput) throws DukeException {
         String[] inputStringArray = userInput.split(" ", 2);
         String firstWord = inputStringArray[0];
@@ -98,6 +117,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Outputs the associated TaskList as a formatted String.
+     *
+     * @return A formatted String representation of the associated TaskList.
+     */
     private String getTasksString() { // TODO: Change to StringBuilder, put in TaskList
         String taskString = "";
         int taskCount = tasks.getSize();

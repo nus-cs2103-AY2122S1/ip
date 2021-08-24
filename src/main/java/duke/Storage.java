@@ -15,14 +15,29 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Representation of a storage file which can be read from and written to.
+ *
+ * @author Joshua Yong
+ */
 public class Storage {
 
     private String filePath;
 
+    /**
+     * Class constructor.
+     *
+     * @param filePath The file path of the file to be used.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Parses the associated file, returning a collection of Tasks.
+     * @return An ArrayList of Tasks corresponding to the data in the file.
+     * @throws DukeException if the file is formatted incorrectly or cannot be found
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -67,6 +82,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes task data to the associated file.
+     *
+     * @param tasks The given TaskList.
+     */
     public void save(TaskList tasks) { // TODO: Tidy this
         File file = new File(filePath);
         file.getParentFile().mkdirs();

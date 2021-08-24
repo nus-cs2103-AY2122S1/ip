@@ -4,14 +4,27 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of Tasks.
+ *
+ * @author Joshua Yong
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
 
+    /**
+     * Class constructor.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Overloaded class constructor which initializes the TaskList with existing tasks.
+     *
+     * @param tasks An ArrayList of tasks to be stored in the TaskList.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
