@@ -1,5 +1,11 @@
 package duke.task;
 
+/**
+ * Todo is a Task with no due date.
+ *
+ * @author Jovyn Tan
+ * @version CS2103 AY21/22 Sem 1
+ */
 public class Todo extends Task {
     /**
      * A constructor for a To-do.

@@ -3,6 +3,12 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event is a Task that occurs on a specified date.
+ *
+ * @author Jovyn Tan
+ * @version CS2103 AY21/22 Sem 1
+ */
 public class Event extends Task {
     /**
      * A constructor for an Event that specifies whether or not it is completed.
