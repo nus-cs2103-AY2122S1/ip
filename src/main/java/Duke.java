@@ -81,7 +81,7 @@ public class Duke {
         } else if (commandWord.equals("bye")) {
             return 1;
         } else {
-            throw new DukeException("\t☹ OOPS!!! You have entered an invalid command, please try again.");
+            throw new DukeException("\t☹ OOPS!!! You have entered an invalid command, please try again!");
         }
         return 0;
     }
