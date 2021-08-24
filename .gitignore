@@ -14,10 +14,10 @@
 /bin/
 
 # Text ui tests
-/test/text-ui-test/data/duke.txt
-/test/text-ui-test/ACTUAL.txt
-/test/text-ui-test/ACTUAL_EXCEPTION.txt
-/test/text-ui-test/EXPECTED-UNIX.TXT
+/src/test/text-ui-test/data/duke.txt
+/src/test/text-ui-test/ACTUAL.txt
+/src/test/text-ui-test/ACTUAL_EXCEPTION.txt
+/src/test/text-ui-test/EXPECTED-UNIX.TXT
 
 # saved data
 /data/
