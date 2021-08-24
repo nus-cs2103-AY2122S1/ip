@@ -1,11 +1,16 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import static java.lang.Integer.parseInt;
+
 
 public class Duke {
 
@@ -40,21 +45,69 @@ public class Duke {
      * Initial Greeting from Duke
      * Nullary Function that prints the intro message when called
      */
-    static void greetings() {
+    static List<Task> greetings() {
+        List<Task> taskList = new ArrayList<>();
+
+        //Scans and Reads LocalList.txt if present
+        try {
+            File localList = new File("localList.txt");
+            if (localList.exists()) {
+                Scanner listScanner = new Scanner(localList);
+                while (listScanner.hasNextLine()) {
+                    String data = listScanner.nextLine();
+
+                    //Logic to piece through task strings
+                    String[] words = data.split(" ");
+                    boolean isDone = words[1].equals("X") ? true : false;
+                    if (words[0].equals("T")) {
+                        //Task is a toDo
+                        taskList.add(new ToDo(words[2], isDone));
+                    } else if (words[0].equals("E")) {
+                        //Task is a Event
+                        taskList.add(new Event(words[2], words[3], isDone));
+                    } else if (words[0].equals("D")) {
+                        //Task is a Deadline
+                        taskList.add(new Deadline(words[2], words[3], isDone));
+                    } else {
+                        throw new DukeException("Invalid Fileformat");
+                    }
+                }
+                listScanner.close();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+
         System.out.println(logo);
         printDivider();
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
         printDivider();
+        return taskList;
     }
 
     /**
      * Goodbye from Duke
      * Nullary Function that prints a closing message when called
      */
-    static void close() {
+    static void close(List<Task> lst) {
+        // Creates or updates existing LocalList.txt file
+        try {
+            File savedList = new File("localList.txt");
+            FileWriter listWriter = new FileWriter(savedList);
+            // Task format:
+            for (Task tsk: lst) {listWriter.write(tsk.toFileString() + "\n");}
+            listWriter.close();
+        } catch (IOException e) {
+            System.out.println("A file error occurred.");
+            e.printStackTrace();
+        }
         printDivider();
         System.out.println("Bye. Hope to see you again soon!\n");
         printDivider();
+        System.exit(0);
     }
 
     /**
@@ -153,8 +206,8 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        List<Task> list = new ArrayList<>();
-        greetings();
+        List<Task> tasklist;
+        tasklist = greetings();
         Scanner userInput = new Scanner(System.in);
 
         //DateTime variables
@@ -230,36 +283,34 @@ public class Duke {
 
                 switch (key) {
                     case list:
-                        printList(list);
+                        printList(tasklist);
                         break;
                     case todo:
-                        list.add(new ToDo(desc));
-                        printTask(list);
+                        tasklist.add(new ToDo(desc));
+                        printTask(tasklist);
                         break;
                     case deadline:
-                        list.add(new Deadline(desc, time));
-                        printTask(list);
+                        tasklist.add(new Deadline(desc, time));
+                        printTask(tasklist);
                         break;
                     case event:
-                        list.add(new Event(desc, time));
-                        printTask(list);
+                        tasklist.add(new Event(desc, time));
+                        printTask(tasklist);
                         break;
                     case done:
-                        if (index >= list.size()) {
+                        if (index >= tasklist.size()) {
                             throw new DukeException("!!! The number you input exceeds the size of the list !!!");
                         }
-                        completeTask(list.get(index));
+                        completeTask(tasklist.get(index));
                         break;
                     case delete:
-                        if (index >= list.size()) {
+                        if (index >= tasklist.size()) {
                             throw new DukeException("!!! The number you input exceeds the size of the list !!!");
                         }
-                        removeTask(list, index);
+                        removeTask(tasklist, index);
                         break;
                     case bye:
-                        close();
-                        System.exit(0);
-                        break;
+                        close(tasklist);
                     case error:
                         throw new DukeException("!!! I'm sorry, but I don't know what that means. !!!");
                 }

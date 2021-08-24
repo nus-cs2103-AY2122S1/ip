@@ -8,11 +8,17 @@ public class Deadline extends Task{
     public Deadline(String description, LocalDate deadline) {
         super(description, Task.Type.D);
         this.deadline = deadline;
+    }
 
+    public Deadline(String description, String deadline, boolean isDone) {
+        super(Task.Type.D, isDone, description);
+        this.deadline = deadline;
     }
 
     @Override
     public String toString() {
         return super.toString() + " (by: " + printOut.format(deadline) + ")";
     }
+
+    public String toFileString() {return super.toFileString() + " " + deadline;}
 }
