@@ -18,9 +18,9 @@ public class CommandList extends DukeCommand {
     }
 
     /**
-     * As described in DukeCommand
-     * 
-     * @return
+     * As described in DukeCommand.
+     *
+     * @return False.
      */
     @Override
     public boolean isExit() {

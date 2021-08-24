@@ -14,7 +14,7 @@ abstract public class DukeCommand {
     abstract public void execute(TaskList tl);
 
     /**
-     * Checks if it is the Bye command
+     * Checks if it is the Bye command.
      *
      * @return True if is Bye, false otherwise.
      */
