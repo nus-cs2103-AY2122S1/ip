@@ -5,6 +5,9 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.Storage;
 
+/**
+ * Represents the main Duke Program, a task manager.
+ */
 public class Duke {
     public static void main(String[] args) {
 

@@ -10,10 +10,17 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 
+/**
+ * Represents and handles the storage of the Duke Program"
+ */
 public class Storage {
     private final String filePath;
     private final File file;
 
+    /**
+     * Constructor.
+     * @param filePath The storage file location in the system.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
@@ -27,7 +34,10 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Reads the list from the storage file and translates it into a TaskList object.
+     * @return A TaskList.
+     */
     public TaskList readList() {
         TaskList list = new TaskList();
         try {
@@ -69,6 +79,10 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Writes a TaskList object into the storage file.
+     * @param list The TaskList to be written into the file.
+     */
     public void writeList(TaskList list) {
         try {
             FileWriter fw = new FileWriter(filePath);
