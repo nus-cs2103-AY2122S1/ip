@@ -49,7 +49,8 @@ public class Event extends Task {
         String description = "";
 
         if (contents.length != 2) {
-            throw new UnclearInstructionException("OOPS!!! The description of an event cannot be extracted properly.");
+            throw new UnclearInstructionException(
+                    "OOPS!!! The description of an event cannot be extracted properly.");
         }
 
         int istart = text.indexOf(" ");
@@ -58,7 +59,8 @@ public class Event extends Task {
         description = text.substring(istart + 1, iend - 1);
         
         if (description.equals("")) {
-            throw new UnclearInstructionException("OOPS!!! The description of an event cannot be empty.");
+            throw new UnclearInstructionException(
+                    "OOPS!!! The description of an event cannot be empty.");
         }
         return description;
     }
@@ -68,13 +70,14 @@ public class Event extends Task {
      *
      * @param text  Full command given by user.
      * @return Event time.
-     * @throws UnclearInstructionException  If the given command cannot be properly extracted or has empty time.
+     * @throws UnclearInstructionException If the given command cannot be properly extracted or has empty time.
      */
     public static String extractTaskTime(String text) throws UnclearInstructionException {
         String[] contents = text.split(" ", 2);
         String task_type = contents[0];
         if (contents.length != 2) {
-            throw new UnclearInstructionException("OOPS!!! The description of an event cannot be extracted properly.");
+            throw new UnclearInstructionException(
+                    "OOPS!!! The description of an event cannot be extracted properly.");
         }
 
         int istart = text.indexOf(" ");

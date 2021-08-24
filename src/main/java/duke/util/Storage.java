@@ -106,7 +106,7 @@ public class Storage {
     public void writeToFile(List<Task> list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : list) {
-            fw.write(task.toFileString()+ System.lineSeparator());
+            fw.write(task.toFileString() + System.lineSeparator());
         }
         fw.close();
     }
