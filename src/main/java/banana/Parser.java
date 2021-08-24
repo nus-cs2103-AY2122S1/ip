@@ -168,7 +168,7 @@ public class Parser {
 
     /**
      * Finds the task that contains
-     * the user's input.
+     * or matches the user's input.
      *
      * @param tasks the list of tasks.
      */
@@ -210,7 +210,7 @@ public class Parser {
 
     /**
      * Gets the date and time in correct
-     * notation if necessary.
+     * notation/format if necessary.
      *
      * @param info the task information.
      * @param input the user input.
@@ -277,4 +277,5 @@ public class Parser {
             return "";
         }
     }
+    
 }
