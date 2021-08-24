@@ -63,7 +63,6 @@ public class Ui {
 
     public void displayDeleteMessage(TaskList taskList, int index) {
         System.out.println("\t Noted. The task has been removed!");
-        System.out.println("\t \t" + taskList.getTask(index).toString());
     }
 
 }
