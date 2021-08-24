@@ -54,16 +54,12 @@ public class Parser {
             }
             return new DeleteCommand(parts[1]);
         default:
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means (X_X)" +
-                    "\nPlease enter one of the following commands:\n todo <task>" +
-                    "\n deadline <task> /by <deadline(in yyyy-MM-dd kkmm format)>" +
-                    "\n event <event> /at <date(in yyyy-MM-dd kkmm format)>" +
-                    "\n list\n bye(to quit)");
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means (X_X)"
+                    + "\nPlease enter one of the following commands:\n todo <task>"
+                    + "\n deadline <task> /by <deadline(in yyyy-MM-dd kkmm format)>"
+                    + "\n event <event> /at <date(in yyyy-MM-dd kkmm format)>"
+                    + "\n list\n bye(to quit)");
         }
-
-
-
-
     }
 
     private static String getDescription(String[] parts, int partsLength) {
