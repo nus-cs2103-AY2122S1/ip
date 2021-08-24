@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import static java.lang.Integer.*;
 
+/**
+ * Main driver class of the bot
+ */
 public class Duke {
 
     enum Category {

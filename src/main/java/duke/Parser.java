@@ -8,13 +8,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parses the inputs
+ */
 public class Parser {
+
+    /** Input string by the user. */
     private String inp;
 
+    /**
+     * Constructor to initialise the input.
+     * @param inp input
+     */
     public Parser(String inp) {
         this.inp = inp;
     }
 
+    /**
+     * Parses the task array list and prints the list.
+     * @param ob The TaskList object.
+     */
     public void parseTaskList(TaskList ob) {
         for (int j = 0; j < ob.numberOfTasks(); j++) {
             if (!ob.getTaskFromList(j).getPreExisting()) {
@@ -26,6 +39,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Finds task with specific keywords from list.
+     * @param ob TaskList object.
+     * @param inputFind Keyword to find. 
+     */
     public void findTaskFromTaskList(TaskList ob, String inputFind) {
         String trimmedFind = inputFind.split("\\s", 2)[1];
         boolean flag = true;
@@ -49,6 +67,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the tasks in the list in string format.
+     * @param ob The TaskList object.
+     * @return String containing the tasks in the list.
+     */
     public String getTaskList(TaskList ob) {
         String ret="";
         for (int j = 0; j < ob.numberOfTasks(); j++) {
@@ -61,11 +84,19 @@ public class Parser {
         return ret;
     }
 
+    /**
+     * Parses the input task to extract the task content.
+     * @return The actual task content.
+     */
     public String parseTask() {
         String desc = ((inp.split("\\s",2)[1]).split("/"))[0];
         return desc;
     }
 
+    /**
+     * Parses the input task to extract the date.
+     * @return The date of the task.
+     */
     public String parseTime() {
         String atByTime = ((inp.split("\\s", 2)[1]).split("/"))[1];
         String time = atByTime.split("\\s", 2)[1];
@@ -73,6 +104,11 @@ public class Parser {
         return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * Returns the input index of the task
+     * in the done or delete commands.
+     * @return index
+     */
     public int getTaskIndex() {
         int ind = Integer.parseInt((inp.split("\\s"))[1]) - 1;
         return ind;
