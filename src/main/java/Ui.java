@@ -16,6 +16,11 @@ public class Ui {
     }
 
     public String readCommand() {
+        System.out.print("You: ");
         return sc.nextLine();
+    }
+
+    public void reply(String reply) {
+        System.out.println("Duke: " + reply);
     }
 }

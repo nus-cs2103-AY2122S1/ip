@@ -6,7 +6,6 @@ public class Duke {
     private static TaskList taskList = new TaskList();;
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         Storage storage = new Storage("./storage/save.txt");
         Ui ui = new Ui();
         try {
@@ -22,15 +21,17 @@ public class Duke {
             System.out.println("ERROR! Some tasks in save.txt had no name. Creating new" +
                     "save file.");
         }
+        String fullCommand;
+        String[] command_and_input;
         String command;
         String input;
         ui.greet();
 
         while(true) {
-            System.out.print("You: ");
-            command = sc.next();
-            input = sc.nextLine().trim();
-            System.out.print("Duke: ");
+            fullCommand = ui.readCommand();
+            command_and_input = Parser.parse(fullCommand);
+            command = command_and_input[0];
+            input = command_and_input[1];
             switch (command) {
             case "bye":
                 try {
