@@ -1,5 +1,5 @@
 public class Events extends Task {
-    private String date;
+    private final String date;
 
     public Events(String input) {
         super(input.split(" /at ", 2)[0].substring(6));

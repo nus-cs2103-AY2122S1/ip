@@ -21,7 +21,7 @@ public class taskList {
             if (!TODOS.matcher(input).matches()) {
                 throw new DukeException("ToDos format: todo [desc]");
             }
-            newTask = new ToDos(input.substring(4));
+            newTask = new ToDos(input);
         } else if (input.startsWith("deadline")) {
             if (!DEADLINES.matcher(input).matches()) {
                 throw new DukeException("Deadline format: deadline [desc] /by [date]");
