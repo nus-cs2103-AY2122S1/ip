@@ -1,20 +1,33 @@
-Hello from
+Hello I am
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-Hello! I'm duke.Duke
-What can I do for you?
-Got it. I've added this task:
-[T][ ] borrow book
-Now you have 1 tasks in the list.
-Here are the tasks in your list:
-1.[T][ ] borrow book
-Got it. I've added this task:
-[D][ ] return book (by: Sunday)
-Now you have 2 tasks in the list.
-Got it. I've added this task:
-[E][ ] project meeting (at: Mon 2-4pm)
-Now you have 3 tasks in the list.
+I have received your file! Added tasks!
+
+    Got it. I've added this task:
+        [T][ ] borrow book
+    Now you have 14 tasks in the list.
+    Here are the tasks in your list:
+        1.[T][X] read book
+        2.[D][X] return book(by: Aug 15 2019 18:00)
+        3.[E][X] project meeting(at: Aug 15 2019 18:00)
+        4.[T][X] sleep
+        5.[D][X] paper (by: Aug 15 2019 18:00)
+        6.[T][ ] test
+        7.[T][X] test2
+        8.[D][ ] test (by: Jan 01 2020 18:00)
+        9.[T][ ] sleep
+        10.[T][X] rest
+        11.[D][ ] test (by: Oct 10 2020 18:00)
+        12.[T][ ] rest
+        13.[D][ ] test (by: Aug 15 2020 17:00)
+        14.[T][ ] borrow book
+    Got it. I've added this task:
+        [D][ ] return book (by: Aug 20 2020 18:00)
+    Now you have 15 tasks in the list.
+    Got it. I've added this task:
+        [E][ ] project meeting (at: Aug 20 2020 18:00)
+    Now you have 16 tasks in the list.
