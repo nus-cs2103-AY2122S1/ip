@@ -16,7 +16,7 @@ public class AddCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
         storage.save(tasks);
-        ui.showMessage("task.Task added successfully!");
+        ui.showMessage("Task added successfully!");
     }
 
     @Override

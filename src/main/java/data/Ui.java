@@ -9,7 +9,7 @@ public class Ui {
     /** Statement to show the user upon running Duke */
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
 
-    private static final String MESSAGE_LOADING_ERROR = "Error occurred. Unable to load tasks.";
+    private static final String MESSAGE_LOADING_ERROR = "No saved tasks were found.";
 
     private static Scanner userInput = new Scanner(System.in);
 
