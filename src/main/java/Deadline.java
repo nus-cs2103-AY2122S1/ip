@@ -20,12 +20,12 @@ public class Deadline extends Task {
     public String toString() {
         String deadlineMarker = "[D]";
 
-        String timestamp = String.format("(by: %s)", date.toString());
+
 
         if (isDone) {
-            return deadlineMarker + "|" + hasCross + "|" + item + "|" + datetime;
+            return deadlineMarker + "|" + hasCross + "|" + item + "|" + date.toString();
         } else {
-            return deadlineMarker + "|" + hasNoCross + "|" + item + "|" + datetime;
+            return deadlineMarker + "|" + hasNoCross + "|" + item + "|" + date.toString();
         }
     }
 }

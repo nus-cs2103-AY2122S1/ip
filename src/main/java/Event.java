@@ -22,9 +22,9 @@ public class Event extends Task {
         String timestamp = String.format("(at: %s)", date.toString());
 
         if (isDone) {
-            return eventMarker + "|" + hasCross + "|" + item + "|" + datetime;
+            return eventMarker + "|" + hasCross + "|" + item + "|" + date.toString();
         } else {
-            return eventMarker + "|" + hasNoCross + "|" + item + "|" + datetime;
+            return eventMarker + "|" + hasNoCross + "|" + item + "|" + date.toString();
         }
     }
 }

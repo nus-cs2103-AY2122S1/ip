@@ -4,7 +4,7 @@ You have no items in your list. Add some with [todo], [deadline] or [event]!
 ########################
 ########################
 You have successfully added an item:
-[E]|[]|buy food|2-4pm
+[E]|[]|buy food|1999-01-01
 to the list.
 There is 1 item in the list right now
 ########################
@@ -16,23 +16,23 @@ There are 2 items in the list right now
 ########################
 ########################
 You have successfully added an item:
-[D]|[]|submit assignment|noon
+[D]|[]|submit assignment|1999-01-01
 to the list.
 There are 3 items in the list right now
 ########################
 ########################
-1. [E]|[]|buy food|2-4pm
+1. [E]|[]|buy food|1999-01-01
 2. [T]|[]|get home
-3. [D]|[]|submit assignment|noon
+3. [D]|[]|submit assignment|1999-01-01
 ########################
 ########################
 You have successfully completed task 2:
 [T]|[X]|get home
 ########################
 ########################
-1. [E]|[]|buy food|2-4pm
+1. [E]|[]|buy food|1999-01-01
 2. [T]|[X]|get home
-3. [D]|[]|submit assignment|noon
+3. [D]|[]|submit assignment|1999-01-01
 ########################
 ########################
 Sorry, you need to describe your event to me in format: event (description)!
@@ -47,8 +47,8 @@ from the list.
 There are 2 items in the list right now
 ########################
 ########################
-1. [E]|[]|buy food|2-4pm
-2. [D]|[]|submit assignment|noon
+1. [E]|[]|buy food|1999-01-01
+2. [D]|[]|submit assignment|1999-01-01
 ########################
 ########################
 Sorry, you need to describe the todo in format: todo (description)!

@@ -1,7 +1,7 @@
 items
-event buy food /at 2-4pm
+event buy food /at 1999-01-01
 todo get home
-deadline submit assignment /by noon
+deadline submit assignment /by 1999-01-01
 items
 completed 2
 items

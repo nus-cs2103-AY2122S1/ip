@@ -1,2 +1,2 @@
-[E]|[]|buy food|2-4pm
-[D]|[]|submit assignment|noon
+[E]|[]|buy food|1999-01-01
+[D]|[]|submit assignment|1999-01-01
