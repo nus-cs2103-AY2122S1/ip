@@ -1,13 +1,13 @@
 package duke;
 
-import duke.commands.ByeCommand;
-import duke.commands.Command;
-import duke.commands.ListCommand;
+import duke.commands.*;
 
 public class Parser {
     private final Command[] commandList = {
             new ListCommand(""),
             new ByeCommand(""),
+            new TodoCommand(""),
+            new FormatsCommand("")
     };
 
     public Command parse(String input) {

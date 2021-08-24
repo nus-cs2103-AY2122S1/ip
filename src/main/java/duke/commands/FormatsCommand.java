@@ -5,29 +5,24 @@ import duke.Storage;
 import duke.TaskList;
 import duke.UI;
 
-public class ByeCommand extends Command {
+public class FormatsCommand extends Command {
 
-    public ByeCommand(String arguments) {
-        super("");
+    public FormatsCommand(String arguments) {
+        super(arguments);
     }
 
     @Override
     public Command of(String arguments) {
-        return new ByeCommand("");
+        return new FormatsCommand("");
     }
 
     @Override
     public void execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
-
+        ui.print(dth.getFormatList());
     }
 
     @Override
     public String startsWith() {
-        return "bye";
-    }
-
-    @Override
-    public boolean isExit() {
-        return true;
+        return "formats";
     }
 }
