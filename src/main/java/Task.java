@@ -17,7 +17,8 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
-        //System.out.println(this.toString());
+        System.out.println(this.toString());
+
     }
 
     public String getTaskType() {
@@ -30,3 +31,4 @@ public class Task {
     }
 
 }
+
