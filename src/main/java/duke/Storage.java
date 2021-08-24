@@ -12,9 +12,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a wrapper class that deals with loading and saving tasks in a file.
+ */
 public class Storage {
     private File file;
 
+    /**
+     * Constructs a Storage from a given filePath.
+     *
+     * @param filePath The given String filePath.
+     */
     public Storage(String filePath) {
         this.file = new File(filePath);
         if (!this.file.getParentFile().exists()) {
@@ -22,6 +30,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts a string that contains info about a Task into a Task.
+     *
+     * @param fullString The given string
+     * @return The Task with the appropriate information.
+     */
     public static Task stringToTask(String fullString) {
         String[] arr = fullString.split("\\|");
         for (int i = 0; i < arr.length; i++) {
@@ -41,10 +55,22 @@ public class Storage {
         return curr;
     }
 
+    /**
+     * Converts a Task into a string.
+     *
+     * @param task THe given Task.
+     * @return The string to be stored into the file.
+     */
     public static String taskToString(Task task) {
         return task.fileFormat();
     }
 
+    /**
+     * Returns an ArrayList<Task> that contains all the tasks in a give file.
+     *
+     * @return the arraylist of Task inside the fiven file.
+     * @throws NoListException If there is no file to be loaded.
+     */
     public ArrayList<Task> load() throws NoListException {
         try {
             Scanner sc = new Scanner(this.file);
@@ -60,6 +86,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks in a tasklist into the file associated with this storage.
+     *
+     * @param tasks The given TaskList.
+     * @throws NoListException If there is no file to be saved.
+     */
     public void save(TaskList tasks) throws NoListException {
         try {
             FileWriter fw = new FileWriter(this.file);

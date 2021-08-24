@@ -5,11 +5,26 @@ import duke.TaskList;
 import duke.Ui;
 import duke.command.Command;
 
+/**
+ * Represents a type of Command that exits the program.
+ */
 public class Exit extends Command {
+    /**
+     * Performs the exiting of the program and printing the exit message.
+     *
+     * @param tasks The tasklist.
+     * @param ui The ui.
+     * @param storage The storage.
+     */
     public void exec(TaskList tasks, Ui ui, Storage storage) {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Returns a boolean that indicates if this is an Exit.
+     *
+     * @return Whether this is an Exit.
+     */
     @Override
     public boolean isExit() {
         return true;
