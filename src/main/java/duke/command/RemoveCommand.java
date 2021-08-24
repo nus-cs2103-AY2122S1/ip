@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.task.TaskList;
-import duke.task.Task;
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
 
 public class RemoveCommand extends Command {
 

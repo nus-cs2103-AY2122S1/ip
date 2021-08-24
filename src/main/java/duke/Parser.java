@@ -1,6 +1,13 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ClearCommand;
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.RemoveCommand;
+import duke.command.RestoreCommand;
 import duke.task.TaskTypes;
 
 public class Parser {
@@ -93,7 +100,7 @@ public class Parser {
                 throw new DukeException("you typed an invalid number: " + num);
             }
             return num;
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new DukeException("you typed in an invalid input! " + e.getMessage());
         }
     }

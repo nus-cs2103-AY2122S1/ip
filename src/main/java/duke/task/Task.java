@@ -2,8 +2,8 @@ package duke.task;
 
 public abstract class Task {
 
-    String name;
-    boolean isDone;
+    private String name;
+    private boolean isDone;
 
     /**
      * Constructor for a Task object
@@ -35,5 +35,13 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    abstract public String printToFile();
+    public abstract String printToFile();
+
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean getDone() {
+        return this.isDone;
+    }
 }

@@ -6,8 +6,8 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
-    String dlineString;
-    LocalDate dlineDate;
+    private String dlineString;
+    private LocalDate dlineDate;
 
     public Deadline(String input) {
         super(input.substring(0, input.indexOf("/by ") - 1));
@@ -40,7 +40,7 @@ public class Deadline extends Task {
     }
 
     public String printToFile() {
-        String msg = "D | " + (this.isDone ? 1 : 0) + " | " + this.name + " | ";
+        String msg = "D | " + (this.getDone() ? 1 : 0) + " | " + this.getName() + " | ";
         if (dlineString == null) {
             msg = msg + dlineDate.toString();
         } else {

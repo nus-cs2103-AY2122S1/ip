@@ -3,6 +3,7 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
+@SuppressWarnings("checkstyle:Regexp")
 public class TaskList {
 
     private ArrayList<Task> tasks;
@@ -28,7 +29,7 @@ public class TaskList {
     public Task getTask(int num) {
         return tasks.get(num);
     }
-    
+
     public int numTasks() {
         return tasks.size();
     }

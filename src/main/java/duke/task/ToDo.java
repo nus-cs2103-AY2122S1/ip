@@ -12,6 +12,6 @@ public class ToDo extends Task {
     }
 
     public String printToFile() {
-        return "T | " + (this.isDone ? 1 : 0) + " | " + this.name;
+        return "T | " + (this.getDone() ? 1 : 0) + " | " + this.getName();
     }
 }
