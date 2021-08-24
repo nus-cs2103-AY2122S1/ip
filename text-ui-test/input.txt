@@ -1,14 +1,18 @@
 todo Eat, code, and sleep
-event project meeting /at Monday 2-3pm
-deadline cs2103 ip /by Thursday 2359
-done 2
-delete 2
+todo hello world!
+event project meeting /at 2021-08-19
+deadline cs2103 ip /by 2021-12-23
+deadline cs2040s assignment /by 2021-12-23
+event graduation /at 2021-05-01
+done 3
+delete 3
 list
 todo
 event /by
-event /by monday
+event project meeting /at Monday 2-3pm
 deadline description
-done 5
-delete 5
+done 10
+delete 10
 list
+find cs
 bye
