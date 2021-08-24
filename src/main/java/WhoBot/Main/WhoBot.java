@@ -6,15 +6,29 @@ import WhoBot.Utils.Storage;
 import WhoBot.Utils.Parser;
 import WhoBot.Utils.TaskList;
 
+/**
+ * Main Driver Class
+ */
 public class WhoBot {
 
-    // The Global Variables used by the ChatBot
+    /** Scanner for getting input from user */
     private static final Scanner cmdReader = new Scanner(System.in);
+
+    /** UI to output to */
     public final UI ui;
+
+    /** Storage to store Task list in */
     private Storage storage;
+
+    /** Parser to parse user input */
     private final Parser parser;
+
+    /** Task List to store all tasks */
     private TaskList taskList;
 
+    /***
+     * Constructor Class for WhoBot Class
+     */
     public WhoBot() {
         this.parser = new Parser();
         this.ui = new UI();
@@ -27,7 +41,9 @@ public class WhoBot {
         }
     }
 
-
+    /***
+     * Runs the WhoBot and Accepts Input from the User
+     */
     public void run() {
         ui.greeting();
         while (true) {
@@ -44,7 +60,11 @@ public class WhoBot {
         }
     }
 
-    //Main Method
+    /***
+     * Main Method
+     *
+     * @param args Commandline arguments
+     */
     public static void main(String[] args) {
         WhoBot whoBot = new WhoBot();
         whoBot.run();

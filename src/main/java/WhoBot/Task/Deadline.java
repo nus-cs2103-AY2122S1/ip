@@ -5,13 +5,24 @@ import WhoBot.Main.WhoBotException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Objects;
 
+/***
+ * Class to Handle Deadline type Tasks
+ */
 public class Deadline extends Task{
 
+    /** Deadline of the Task */
     private LocalDateTime deadline;
+
+    /** Whether the Deadline is time specific */
     private boolean hasTime;
 
+    /***
+     * Constructor for the Deadline Class
+     *
+     * @param task the string description of the Deadline Task
+     * @throws WhoBotException If the format of timing or command is not correct
+     */
     public Deadline(String task) throws WhoBotException {
         super(task.split(" /by ")[0]);
         try {
@@ -23,6 +34,12 @@ public class Deadline extends Task{
         }
     }
 
+    /***
+     * Returns the processed final date and time of the event from string
+     *
+     * @param dateTime The String to get DateTime from.=
+     * @return LocalDateTime showing the deadline for the Event
+     */
     private LocalDateTime processDateTime(String dateTime) {
         if (dateTime.contains(" ")) {
             this.hasTime = true;
@@ -33,35 +50,72 @@ public class Deadline extends Task{
         }
     }
 
+    /***
+     * Returns whether the deadline has a time
+     *
+     * @return hasTime
+     */
     public boolean hasTime() {
         return hasTime;
     }
 
+
+    /***
+     * Returns the Deadline as a formatted string
+     *
+     * @return Date and Time (if applicable) as String
+     */
     private String getDateTimeFormatted() {
         return hasTime
                 ? this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"))
                 : this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /***
+     * Returns the String description of the task along with the formatted deadline
+     *
+     * @return String representation of the Deadline Task
+     */
     @Override
     public String getDescription() {
         return "[D] " + super.getDescription() + " (by: " + this.getDateTimeFormatted() + ")";
     }
 
+    /***
+     * Returns the Type of Task
+     *
+     * @return D since Deadline Type
+     */
     @Override
     public String getType() {
         return "D";
     }
 
+    /***
+     * Returns deadline
+     *
+     * @return deadline
+     */
     public LocalDateTime getDeadline() {
         return deadline;
     }
 
+    /***
+     * Returns string representation of the task
+     *
+     * @return string to display for the task
+     */
     @Override
     public String toString() {
         return "[D] " + super.toString() + " (by: " + this.getDateTimeFormatted() + ")";
     }
 
+    /***
+     * Compares this task to another, to help with sorting
+     *
+     * @param o Task to compare to
+     * @return result after comparing the deadline of the task
+     */
     @Override
     public int compareTo(Task o) {
         int val = super.compareTo(o);
@@ -78,6 +132,12 @@ public class Deadline extends Task{
         }
     }
 
+    /***
+     * Equates this task to another
+     *
+     * @param o Task to equate to
+     * @return true if both have the same description, same deadline and are done
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

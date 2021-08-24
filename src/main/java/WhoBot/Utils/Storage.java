@@ -14,11 +14,24 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+/***
+ * Class to Maintain the Storage File
+ */
 public class Storage {
 
+    /** Name of storage file */
     public String filename;
+
+    /** Storage file */
     private final File taskFile;
 
+    /***
+     * Constructor for Storage class
+     *
+     * @param filename Name of the storage file
+     * @throws WhoBotException if file could not be opened
+     */
     public Storage(String filename) throws WhoBotException {
         this.filename = filename;
         taskFile = new File(this.filename);
@@ -34,6 +47,12 @@ public class Storage {
         }
     }
 
+    /***
+     * Reads Data from File and Adds to Task List
+     *
+     * @param LIST the task list to store tasks in
+     * @throws WhoBotException if file could not be read
+     */
     public void readData(ArrayList<Task> LIST) throws WhoBotException {
         try {
             Scanner taskReader = new Scanner(taskFile);
@@ -65,6 +84,13 @@ public class Storage {
     }
 
     // Method to Save List to WhoBot's Memory
+
+    /***
+     * Saves Task List to File
+     *
+     * @param LIST the task list to save
+     * @throws WhoBotException if data could not be written
+     */
     public void saveMemory(ArrayList<Task> LIST) throws WhoBotException {
         try {
             FileWriter dataWriter = new FileWriter(taskFile);
