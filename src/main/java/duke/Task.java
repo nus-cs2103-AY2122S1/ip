@@ -118,4 +118,14 @@ public class Task {
     public String toData() {
         return (this.isDone ? "1" : "0") + " | " + this.description;
     }
+
+    /**
+     * Return if the provided string matches with that of the task's description.
+     *
+     * @param keyword The String used to check against the task's description if they match
+     * @return The boolean if the keyword matches with the task's description
+     */
+    public boolean matchKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
 }
