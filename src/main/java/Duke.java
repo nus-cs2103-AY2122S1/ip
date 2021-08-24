@@ -1,5 +1,6 @@
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -7,7 +8,17 @@ import java.time.LocalDate;
 import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
+
 import static java.lang.Integer.parseInt;
+
+/**
+ * The Duke class acts as a text bot that records down the tasks given to it. It can
+ * then mark these tasks as completed and delete them based on the inputs given.
+ */
 
 public class Duke {
     /**
@@ -36,8 +47,43 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Scanner input = new Scanner(System.in);
         ArrayList<Task> storedInfo = new ArrayList<Task>();
-        //Task[] storedInfo = new Task[100];
         int count = 0;
+        try {
+            File taskList = new File("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt");
+            Scanner taskReader = new Scanner(taskList);
+            while (taskReader.hasNextLine()) {
+                String item = taskReader.nextLine();
+                if (item.charAt(1) == 'T') {
+                    ToDoTask addedTask = new ToDoTask(item.substring(7));
+                    if (item.charAt(4) == 'X') {
+                        addedTask.markAsDone();
+                    }
+                    storedInfo.add(addedTask);
+                    count++;
+                } else if (item.charAt(1) == 'D') {
+                    int i = item.indexOf("(");
+                    DeadlineTask addedTask = new DeadlineTask(item.substring(7, i),
+                            item.substring(i+5, item.length()-1));
+                    if (item.charAt(4) == 'X') {
+                        addedTask.markAsDone();
+                    }
+                    storedInfo.add(addedTask);
+                    count++;
+                } else if (item.charAt(1) == 'E') {
+                    int i = item.indexOf("(");
+                    EventTask addedTask = new EventTask(item.substring(7, i),
+                            item.substring(i+5, item.length()-1));
+                    storedInfo.add(addedTask);
+                    if (item.charAt(4) == 'X') {
+                        addedTask.markAsDone();
+                    }
+                    count++;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Tasklist not found. Creating new tasklist");
+        }
+        //Task[] storedInfo = new Task[100];
         while (input.hasNextLine()) {
             String in = input.nextLine();
             if (in.equals("bye") || in.equals("Bye")) {
@@ -90,24 +136,30 @@ public class Duke {
                     System.out.println("Invalid Input for delete command");
                     continue;
                 }
-                int taskDeleted = parseInt(in.substring(7));
-                if (taskDeleted > 100) {
-                    System.out.println("Invalid Input for delete command");
-                    continue;
-                }
-                //System.out.println(taskDone);
-                if (taskDeleted > count) {
-                    System.out.println("Invalid Input for delete command");
-                    continue;
-                }
                 if (storedInfo.isEmpty()) {
                     System.out.println("The list is empty.");
                     continue;
                 }
-                System.out.println("Noted. I've removed this task:");
-                System.out.println(storedInfo.get(taskDeleted - 1));
-                storedInfo.remove(taskDeleted-1);
-                continue;
+                int taskDeleted = parseInt(in.substring(7));
+                try {
+                    if (taskDeleted > 100) {
+                        System.out.println("Invalid Input for delete command");
+                        continue;
+                    }
+                    //System.out.println(taskDone);
+                    if (taskDeleted > count) {
+                         System.out.println("Invalid Input for delete command");
+                        continue;
+                    }
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(storedInfo.get(taskDeleted - 1));
+                    storedInfo.remove(taskDeleted-1);
+                    count--;
+                    continue;
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid Input for delete command");
+                    continue;
+                }
             }
             if (in.length() > 3 && in.substring(0,4).equals("todo") ) {
                 if (in.length() == 4) {
@@ -174,7 +226,31 @@ public class Duke {
             }
 
             }
+        //Insert save protocol here
+        File taskList = new File("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt");
+        try {
+            if (taskList.createNewFile()) {
+                System.out.println("Tasklist created and saved");
+            } else {
+                System.out.println("Tasklist updated");
+            }
+        } catch (IOException e) {
+            System.out.println("File could not be created");
+        }
+        try {
+            FileWriter listEditor = new FileWriter("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt");
+            for (Task item: storedInfo) {
+                if(item != null) {
+                    listEditor.write(item.toString());
+                    listEditor.write("\n");
+                }
+            }
+            listEditor.close();
+            System.out.println("Saving list..");
 
+        } catch (IOException e) {
+            System.out.println("File does not exist");
+        }
 
         System.out.println("Bye. Hope to see you again!");
     }
