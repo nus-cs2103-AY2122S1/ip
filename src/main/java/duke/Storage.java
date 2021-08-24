@@ -9,14 +9,14 @@ import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
 
 public class Storage {
-    private BufferedReader reader;
+    private final BufferedReader reader;
     private BufferedWriter writer;
-    private Formatter formatter;
+    private final Formatter formatter;
     public static final String DEFAULT_FILE_NAME = "duke.txt";
     public static final String DEFAULT_FILE_DIRECTORY = "data";
-    private Path targetDirectory;
+    private final Path targetDirectory;
 
-    private Storage() {
+    private Storage() throws DukeException {
         try {
             this.targetDirectory =
                     Paths.get(".", DEFAULT_FILE_DIRECTORY, DEFAULT_FILE_NAME).toAbsolutePath().normalize();
@@ -31,14 +31,44 @@ public class Storage {
             this.reader = Files.newBufferedReader(this.targetDirectory, StandardCharsets.UTF_8);
             this.formatter = new Formatter();
         } catch (IOException e) {
-            System.out.println("Something happened when initializing the duke.Storage.");
-            e.printStackTrace();
+            throw new DukeException("Something happened when initializing the duke.Storage.\n" + e);
         }
     }
 
-    public static Storage createStorage() {
+    private Storage(String[] args) throws DukeException {
+        try {
+            this.targetDirectory =
+                    Paths.get(".", args).toAbsolutePath().normalize();
+            if (!java.nio.file.Files.exists(this.targetDirectory)) {
+                int i = 0;
+                StringBuilder directory = new StringBuilder("./");
+                while (i < args.length - 1) {
+                    try {
+                        directory.append(args[i]);
+                        Files.createDirectory(Paths.get(directory.toString()).toAbsolutePath().normalize());
+                        directory.append("/");
+                    } catch(java.nio.file.FileAlreadyExistsException e) {
+                        System.out.println("Directory exists but file does not. Creating file...");
+                    }
+                    i++;
+                }
+                Files.createFile(this.targetDirectory);
+            }
+            this.reader = Files.newBufferedReader(this.targetDirectory, StandardCharsets.UTF_8);
+            this.formatter = new Formatter();
+        } catch (IOException e) {
+            throw new DukeException("Something happened when initializing the duke.Storage.\n" + e);
+        }
+    }
+
+    public static Storage createStorage() throws DukeException {
         return new Storage();
     }
+
+    public static Storage createStorage(String filePath) throws DukeException {
+        return new Storage(filePath.split("/"));
+    }
+
 
     public TaskList load(TaskList taskList) throws DukeException {
         try {

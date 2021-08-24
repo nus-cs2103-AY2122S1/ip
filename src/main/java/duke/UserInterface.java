@@ -15,7 +15,7 @@ public class UserInterface {
 
     public void printInitialGreeting() {
         printLogo();
-        System.out.println("Hello I'm duke.Duke\n" +
+        System.out.println("Hello I'm Duke\n" +
                 "What can I do for you?");
     }
 

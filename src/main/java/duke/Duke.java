@@ -5,15 +5,32 @@ public class Duke {
     TaskList list;
     Storage storage;
 
-    public Duke() {
+    public Duke() throws DukeException {
         this.userInterface = new UserInterface();
         this.list = new TaskList();
         this.storage = Storage.createStorage();
     }
 
+    public Duke(String filePath) throws DukeException {
+        this.userInterface = new UserInterface();
+        this.list = new TaskList();
+        this.storage = Storage.createStorage(filePath);
+    }
+
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+        try {
+            Duke duke = new Duke("data/duke.txt");
+            duke.run();
+        } catch (DukeException e) {
+            System.out.println("Unable to initialize database. Using default document to start up\n");
+        }
+        try {
+            Duke duke = new Duke();
+            duke.run();
+        } catch (DukeException e) {
+            System.out.println("Unable to initialize database.");
+            System.exit(0);
+        }
     }
 
     public void run() {
