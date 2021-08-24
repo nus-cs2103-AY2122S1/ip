@@ -1,24 +1,34 @@
-public class Task {
-    private boolean done;
+public abstract class Task {
+    private boolean isDone;
     private String taskDetails;
 
     public Task() {
-        this.done = false;
+        this.isDone = false;
         this.taskDetails = "";
     }
 
     public Task(String taskDetails) {
-        this.done = false;
+        this.isDone = false;
         this.taskDetails = taskDetails;
     }
 
     public void markDone() {
-        done = true;
+        isDone = true;
     }
+
+    public String getTaskDetails() {
+        return taskDetails;
+    }
+
+    public int isDoneToInt() {
+        return isDone ? 0 : 1;
+    }
+
+    public abstract String taskType();
 
     @Override
     public String toString() {
-        if (done) {
+        if (isDone) {
             return "[X] " + taskDetails;
         } else {
             return "[ ] " + taskDetails;
