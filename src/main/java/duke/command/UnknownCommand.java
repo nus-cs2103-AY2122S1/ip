@@ -34,8 +34,10 @@ public class UnknownCommand extends Command {
                 "3. done {N} -  Mark task of number 'N' as done",
                 "4. delete {N} - Delete task of number 'N'",
                 "5. todo {description} - Add a todo with the specified 'description'",
-                "6. event {description} /at {date} - Add an event with the specified 'description' happening at 'date'",
-                "7. deadline {description} /by {date} - Add a deadline with the specified 'description' expires at 'date'");
+                "6. event {description} /at {date} - " +
+                        "Add an event with the specified 'description' happening at 'date'",
+                "7. deadline {description} /by {date} - " +
+                        "Add a deadline with the specified 'description' expires at 'date'");
         throw new UnknownCommandException(suggestions);
     }
 

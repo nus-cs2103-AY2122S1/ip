@@ -6,7 +6,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /** A class that handles task-mark-as-done command. */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     private final int taskNum;
 

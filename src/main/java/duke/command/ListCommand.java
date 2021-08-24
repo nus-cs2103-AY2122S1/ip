@@ -6,7 +6,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /** A class that handles task-listing command. */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Execute the task-listing command.

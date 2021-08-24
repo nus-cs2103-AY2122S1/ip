@@ -6,7 +6,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /** A class that handles task-deletion command. */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
     private final int taskNum;
 

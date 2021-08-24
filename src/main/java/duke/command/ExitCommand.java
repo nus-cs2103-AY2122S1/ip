@@ -5,7 +5,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /** A class that handles exit-program command. */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /**
      * Execute the exit-program command.
