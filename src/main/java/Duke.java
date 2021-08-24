@@ -12,12 +12,19 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Initialises Duke program.
+     * @param filepath Filepath of text file to read and write data.
+     */
     public Duke(String filepath) {
         this.ui = new Ui();
         this.taskList = new TaskList();
         this.storage = new Storage(filepath, taskList);
     }
 
+    /**
+     * Runs the program until termination.
+     */
     public void run() {
         ui.showWelcomeMessage();
 

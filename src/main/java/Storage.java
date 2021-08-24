@@ -18,11 +18,21 @@ public class Storage {
     int counter = 0;
     static String dash = "__________________________________";
 
+    /**
+     * Creates a Storage object that takes in filepath and a TaskList object.
+     * @param filepath Filepath of text file to read and write data.
+     * @param taskList TaskList of user.
+     */
     public Storage(String filepath, TaskList taskList) {
         this.filepath = filepath;
         this.taskList = taskList;
     }
 
+
+    /**
+     * Reads in an existing text file (if it exists) and prints the existing tasks.
+     * @throws FileNotFoundException Raise Exception if text file does not exist.
+     */
     public void printFileContents() throws FileNotFoundException {
 
         // System.out.println(filePath);
@@ -67,7 +77,11 @@ public class Storage {
         System.out.println(dash);
     }
 
-
+    /**
+     * Converts the TaskList into text and stores data in a text file.
+     * @param lst Existing list of tasks.
+     * @throws IOException Raises Exception if function fails.
+     */
     public void writeToFile(ArrayList<Task> lst) throws IOException {
 
         File directory = new java.io.File(System.getProperty("user.dir") + "/data");

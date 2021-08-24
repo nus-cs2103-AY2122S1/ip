@@ -14,10 +14,16 @@ public class TaskList {
     public int counter = 0;
     static String dash = "__________________________________";
 
+    /**
+     * Creates a TaskList object that stores a list of tasks in an ArrayList.
+     */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
+    /**
+     * Prints the user's existing list of tasks.
+     */
     public void list() {
         System.out.println(dash);
         System.out.println("Here are the tasks in your list:");
@@ -28,6 +34,10 @@ public class TaskList {
         System.out.println(dash);
     }
 
+    /**
+     * Marks the selected task as completed.
+     * @param userInput Index of task according to the list displayed.
+     */
     public void markDone(String userInput) {
         if (userInput.substring(4).length() == 0) {
             System.out.println(dash + '\n' + "Sorry, which task do you wish to mark as completed?" + '\n'+ dash);
@@ -45,11 +55,20 @@ public class TaskList {
         }
     }
 
+    /**
+     * Reads data from text file and marks the task as completed.
+     * Only performed during Duke's initialisation.
+     * @param num Index of task according to the data stored.
+     */
     public void addDone(int num) {
         Task currTask = tasks.get(num - 1);
         currTask.completeTask();
     }
 
+    /**
+     * Deletes task from user's list.
+     * @param userInput Index of task according to the list displayed.
+     */
     public void delete(String userInput) {
         if (userInput.substring(6).length() == 0) {
             System.out.println(dash + '\n' + "Sorry, which task do you wish to delete?" + '\n'+ dash);
@@ -70,6 +89,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a ToDo task and adds it to the user's list.
+     * @param userInput Description of task.
+     */
     public void makeTodo(String userInput) {
         if (userInput.substring(4).length() == 0) {
             System.out.println(dash + '\n' + "YIKES!! The description of a todo cannot be empty!" + '\n'+ dash);
@@ -87,12 +110,20 @@ public class TaskList {
         }
     }
 
+    /**
+     * Reads data from text file and creates a ToDo task.
+     * Only performed during Duke's initialisation.
+     * @param userInput Description of task from text file.
+     */
     public void addTodo(String userInput) {
         tasks.add(new ToDo(userInput));
         counter += 1;
     }
 
-
+    /**
+     * Creates an Event and adds it to the user's list.
+     * @param userInput Details of the Event.
+     */
     public void makeEvent(String userInput) {
         if (userInput.substring(5).length() == 0) {
             System.out.println(dash + '\n' + "YIKES!! The description of an Event cannot be empty!" + '\n'+ dash);
@@ -112,12 +143,21 @@ public class TaskList {
         }
     }
 
+    /**
+     * Reads data from text file and creates an Event.
+     * Only performed during Duke's initialisation.
+     * @param userInput Description of Event from text file.
+     */
     public void addEvent(String userInput) {
         String[] info = userInput.split("/");
         tasks.add(new Event(info[0], info[1].substring(3)));
         counter += 1;
     }
 
+    /**
+     * Creates a Deadline task and adds it to the user's list.
+     * @param userInput Details of the Deadline task.
+     */
     public void makeDeadline(String userInput) {
         if (userInput.substring(8).length() == 0) {
             System.out.println(dash + '\n' + "YIKES!! The description of a Deadline cannot be empty!" + '\n'+ dash);
@@ -137,12 +177,20 @@ public class TaskList {
         }
     }
 
+    /**
+     * Reads data from text file and creates a Deadline task.
+     * Only performed during Duke's initialisation.
+     * @param userInput Description of Deadline task from text file.
+     */
     public void addDeadline(String userInput) {
         String[] info = userInput.split("/");
         tasks.add(new Deadline(info[0], info[1].substring(3)));
         counter += 1;
     }
 
+    /**
+     * Alerts user to an invalid command.
+     */
     public void error() {
         System.out.println(dash + '\n' + "OOPS!! I don't know how to respond to this command! :-(" + '\n'+ dash);
         // throw new DukeException("OOPS!! I don't know how to respond to this command! :-(");

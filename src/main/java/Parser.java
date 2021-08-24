@@ -10,6 +10,10 @@ public class Parser {
         this.tasks = tasks;
     }
 
+    /**
+     * Reads userInput and calls on the corresponding function(s).
+     * @param userInput Input provided by user.
+     */
     public void parseCommand(String userInput) {
 
         if (userInput.matches("list")) {
