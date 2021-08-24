@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Command to list all Tasks.
+ *
+ * @author felix-ong
+ */
 public class ListCommand extends Command {
     /**
      * Executes the specific actions for this command.

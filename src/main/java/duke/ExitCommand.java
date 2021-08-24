@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Command to exit from Duke.
+ *
+ * @author felix-ong
+ */
 public class ExitCommand extends Command {
 
     /**

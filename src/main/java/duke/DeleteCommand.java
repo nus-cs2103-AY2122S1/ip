@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Command to delete a Task.
+ *
+ * @author felix-ong
+ */
 public class DeleteCommand extends Command {
     private String index;
 

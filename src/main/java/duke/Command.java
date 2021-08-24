@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Executes different actions depending on the command type derived from user input.
+ *
+ * @author felix-ong
+ */
 public abstract class Command {
     /**
      * Executes the specific actions for this command.
