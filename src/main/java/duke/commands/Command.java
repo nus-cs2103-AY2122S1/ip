@@ -24,7 +24,11 @@ public abstract class Command {
     public CommandType getCommandType() {
         return commandType;
     }
-    
+
+    public String getCommandParams() {
+        return commandParams;
+    }
+
     public boolean isBye() {
         return commandType.equals(CommandType.BYE);
     }

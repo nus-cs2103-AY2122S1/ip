@@ -15,11 +15,11 @@ import java.util.List;
 public class TaskList {
 
     // Error message formats.
-    private static final String INVALID_TASK_ERROR_MESSAGE = "Task number '%d' is invalid.";
-    private static final String FULL_CAPACITY_ERROR_MESSAGE = "Unable to execute as list is full.";
-    private static final String EMPTY_LIST_ERROR_MESSAGE = "Unable to execute as list is empty.";
+    protected static final String INVALID_TASK_ERROR_MESSAGE = "Task number '%d' is invalid.";
+    protected static final String FULL_CAPACITY_ERROR_MESSAGE = "Unable to execute as list is full.";
+    protected static final String EMPTY_LIST_ERROR_MESSAGE = "Unable to execute as list is empty.";
 
-    private final static int MAX_STORAGE = 100;
+    protected final static int MAX_STORAGE = 100;
       
     private final List<Task> tasks = new ArrayList<>();
     

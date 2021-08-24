@@ -26,36 +26,25 @@ public class DateTimeFormat {
 
     private void initialiseDateFormats() {
         dateFormatterList.clear();
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        
         dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
-
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd/M/yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy/M/dd"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd-M-yyyy"));
         dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy-M-dd"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd.M.yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy.M.dd"));
-
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd/MMMM/yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy/MMMM/dd"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd-MMMM-yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy-MMMM-dd"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd.MMMM.yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy.MMMM.dd"));
+        dateFormatterList.add(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        dateFormatterList.add(DateTimeFormatter.ofPattern("dd-M-yyyy"));
+        
+        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy/M/dd"));
+        dateFormatterList.add(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        dateFormatterList.add(DateTimeFormatter.ofPattern("dd/M/yyyy"));
     }
 
     private void initialiseTimeFormats() {
         timeFormatterList.clear();
+        
         timeFormatterList.add(DateTimeFormatter.ofPattern("HH:mm"));
-        timeFormatterList.add(DateTimeFormatter.ofPattern("HH:mm:ss"));
         timeFormatterList.add(DateTimeFormatter.ofPattern("HHmm"));
 
         timeFormatterList.add(DateTimeFormatter.ofPattern("hh:mm a"));
-        timeFormatterList.add(DateTimeFormatter.ofPattern("hh:mm:ss a"));
         timeFormatterList.add(DateTimeFormatter.ofPattern("hhmm a"));
     }
 

@@ -25,22 +25,25 @@ public class Storage {
     private String taskFilePath = taskDirectoryPath + "/duke.txt";
     
     // Error message templates.
-    private static final String UNABLE_TO_CREATE_DIRECTORY = "Load/save directory ./%s cannot be created.";
-    private static final String UNABLE_TO_CREATE_FILE = "Load/save file ./%s cannot be created.";
-    private static final String UNABLE_TO_LOAD_PATH = "Path ./%s cannot be accessed/loaded.";
-    private static final String INVALID_TASK_FORMAT = "'%s' is an invalid Task entry.";
+    protected static final String UNABLE_TO_CREATE_DIRECTORY = "Load/save directory ./%s cannot be created.";
+    protected static final String UNABLE_TO_CREATE_FILE = "Load/save file ./%s cannot be created.";
+    protected static final String UNABLE_TO_LOAD_PATH = "Path ./%s cannot be accessed/loaded.";
+    protected static final String INVALID_TASK_FORMAT = "'%s' is an invalid Task entry.";
 
     public void setFilePathAndDirectory(String taskFilePath) {
         setTaskFilePath(taskFilePath);
-        int splitIdx = taskFilePath.lastIndexOf('/');
-        setTaskDirectoryPath(taskFilePath.substring(splitIdx + 1));
+        int splitIdx = taskFilePath.lastIndexOf('/'); // mac/unix
+        if (splitIdx < 0) {
+            splitIdx = taskFilePath.lastIndexOf('\\'); // win
+        }
+        setTaskDirectoryPath(taskFilePath.substring(0, splitIdx + 1));
     }
 
-    public void setTaskDirectoryPath(String taskDirectoryPath) {
+    protected void setTaskDirectoryPath(String taskDirectoryPath) {
         this.taskDirectoryPath = taskDirectoryPath;
     }
 
-    public void setTaskFilePath(String taskFilePath) {
+    protected void setTaskFilePath(String taskFilePath) {
         this.taskFilePath = taskFilePath;
     }
 
@@ -50,7 +53,7 @@ public class Storage {
         return decode(taskLines);
     }
 
-    public void initialiseFilePath() throws StorageException {
+    protected void initialiseFilePath() throws StorageException {
         try {
             File directory = new File(taskDirectoryPath);
             if (!directory.exists() && !directory.mkdir()) {
@@ -64,8 +67,8 @@ public class Storage {
             throw new StorageException(String.format(UNABLE_TO_LOAD_PATH, taskFilePath));
         }
     }
-    
-    public List<String> readLines() throws StorageException {
+
+    protected List<String> readLines() throws StorageException {
         try {
             Path filePath = Paths.get(taskFilePath);
             return Files.readAllLines(filePath);
@@ -74,7 +77,7 @@ public class Storage {
         }
     }
 
-    public List<Task> decode(List<String> taskLines) throws StorageException {
+    protected List<Task> decode(List<String> taskLines) throws StorageException {
         List<Task> savedTaskList = new ArrayList<>();
         for (String stringTask : taskLines) {
             Task task = decodeSingleTask(stringTask);
@@ -82,8 +85,8 @@ public class Storage {
         }
         return savedTaskList;
     }
-    
-    public Task decodeSingleTask(String stringTask) throws StorageException {
+
+    protected Task decodeSingleTask(String stringTask) throws StorageException {
         String[] taskAsArray = stringTask.split(Task.SPLIT_TEMPLATE);
         try {
             String keyword = taskAsArray[0];
