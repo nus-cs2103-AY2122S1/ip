@@ -1,7 +1,5 @@
-import java.time.LocalDate;
-import java.time.LocalTime;
-
-public class Event extends Task{
+package duke.task;
+public class Event extends Task {
     private String eventTime;
 
     public Event (String task, String eventTime) {

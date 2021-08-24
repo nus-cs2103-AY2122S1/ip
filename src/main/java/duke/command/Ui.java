@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.task.Task;
+
 public class Ui {
     private TaskList taskList;
     private static String logo = " ____        _        \n"

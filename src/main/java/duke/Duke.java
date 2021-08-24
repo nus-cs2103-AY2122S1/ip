@@ -1,10 +1,13 @@
-import java.io.File;
+package duke;
+
+import duke.command.*;
 import java.util.Scanner;
 
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    private InputTypes t;
 
     public Duke(String filePath) {
         taskList = new TaskList();

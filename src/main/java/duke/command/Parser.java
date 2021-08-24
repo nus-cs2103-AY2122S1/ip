@@ -1,3 +1,5 @@
+package duke.command;
+
 public class Parser {
     public static boolean isBye(String task) {
         return task.equals(InputTypes.BYE.getValue());
