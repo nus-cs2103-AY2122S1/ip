@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
@@ -44,16 +45,29 @@ public class Duke {
                     tasks.add(task);
                 }
             }
+            dukeDataScanner.close();
         } catch (FileNotFoundException ex) {
             System.err.printf("File %s not found\n", dukePath.toString());
         }
         while (true){
             String command = stdin.nextLine();
             if ("bye".equals(command)){
-                System.out.println("----------------------");
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println("----------------------");
-                break;
+                dukeData = dukePath.toFile();
+                try {
+                    PrintWriter dukeWriter = new PrintWriter(dukeData);
+                    for (Task task : tasks) {
+                        dukeWriter.println(task.toCsvRow());
+                    }
+                    dukeWriter.close();
+                    System.out.println("File successfully saved to data/duke.csv");
+                } catch (FileNotFoundException e) {
+                    System.err.println("Error: Could not save file");
+                } finally {
+                    System.out.println("----------------------");
+                    System.out.println("Bye. Hope to see you again soon!");
+                    System.out.println("----------------------");
+                    break;
+                }
             }
             else if ("list".equals(command)){
                 System.out.println("Here are the tasks in your list:");
