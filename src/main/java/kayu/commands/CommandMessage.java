@@ -6,6 +6,8 @@ public class CommandMessage {
     protected static final String MESSAGE_EMPTY_LIST = "List is empty, try adding some tasks first.";
     protected static final String MESSAGE_TASK_DONE = "Nice! I've marked this task as done:\n\t%s";
     protected static final String MESSAGE_LIST_CONTENTS = "Here are the task(s) in your list:";
+    protected static final String MESSAGE_MATCHING_CONTENTS = "Here are the matching task(s) to '%s' in your list:";
+    protected static final String MESSAGE_NO_MATCHING_CONTENTS = "There are no matching tasks to '%s' in your list:";
     protected static final String MESSAGE_DELETED_TASK =
             "Noted. I've removed this task:\n\t%s\nNow you have %d task(s) in the list.";
     protected static final String MESSAGE_CREATED_TODO =

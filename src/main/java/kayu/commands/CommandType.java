@@ -11,6 +11,7 @@ public enum CommandType {
     LIST,
     DONE,
     DELETE,
+    FIND,
     TODO,
     EVENT,
     DEADLINE,

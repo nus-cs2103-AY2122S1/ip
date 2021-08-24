@@ -5,7 +5,10 @@ import kayu.exception.StorageException;
 import kayu.task.Task;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * TaskManager class.
@@ -100,5 +103,24 @@ public class TaskList {
             throw new DukeException(String.format(INVALID_TASK_ERROR_MESSAGE, taskNumber));
         }
         return tasks.get(taskNumber - 1); // shift to 0-indexing
+    }
+
+    /**
+     * Returns a Map of {@link kayu.task.Task} and their numberings based on 
+     * the <code>keyword</code> parameter.
+     * 
+     * @param keyword Keyword String to find in {@link kayu.task.Task}s.
+     * @return A Map of {@link kayu.task.Task} that has similar description to <code>keyword</code>.
+     */
+    public Map<Integer, Task> findMatchingTasks(String keyword) {
+        Map<Integer, Task> taskMap = new HashMap<>();
+        
+        for (int idx = 0; idx < tasks.size(); idx ++) {
+            Task task = tasks.get(idx);
+            if (task.getDescription().contains(keyword)) {
+                taskMap.put(idx, task);
+            }
+        }
+        return taskMap;
     }
 }
