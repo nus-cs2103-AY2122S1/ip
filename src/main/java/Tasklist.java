@@ -57,7 +57,7 @@ public class Tasklist {
         }
 
         System.out.println("Here are the tasks in your list:");
-        for(int i=0;i < currCount; i++) {
+        for(int i=0;i < tasklist.size(); i++) {
             if(!tasklist.get(i).isDone()) {
                 System.out.printf("%d. %s\n", i + 1, tasklist.get(i).toString());
             } else {

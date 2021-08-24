@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A type of task that requires event details and extends from Task
  *
@@ -5,7 +8,7 @@
  */
 public class Event extends Task{
 
-    private String event;
+    private String eventDetails;
     final static String split = " /at";
 
     /**
@@ -15,7 +18,7 @@ public class Event extends Task{
      */
     Event(String name, String eventDetails) {
         super(name);
-        this.event = eventDetails;
+        this.eventDetails = eventDetails;
     }
 
     /**
@@ -25,9 +28,9 @@ public class Event extends Task{
     @Override
     public String toString() {
         if(this.isDone()) {
-            return String.format("[E][X] %s (at: %s)", this.getName(), this.event);
+            return String.format("[E][X] %s (at: %s)", this.getName(), this.eventDetails);
         } else {
-            return String.format("[E][ ] %s (at: %s)", this.getName(), this.event);
+            return String.format("[E][ ] %s (at: %s)", this.getName(), this.eventDetails);
         }
     }
 }
