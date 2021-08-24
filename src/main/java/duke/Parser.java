@@ -2,7 +2,7 @@ package duke;
 
 public class Parser {
 
-    private String[] currentLine;
+    protected String[] currentLine;
 
     public void intepretCommand(String command) {
         currentLine = command.split(" ");
