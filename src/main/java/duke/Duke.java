@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * The Duke bot.
+ * @author Luo Zhijie
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -11,6 +15,9 @@ public class Duke {
         this.ui = new Ui();
     }
 
+    /**
+     * Runs the duke bot.
+     */
     public void run(){
         ui.greet();
         boolean isExit = false;

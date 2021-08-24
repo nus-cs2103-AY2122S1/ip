@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Command that adds tasks.
+ */
 public class AddCommand extends Command {
     private Task taskToBeAdded;
 

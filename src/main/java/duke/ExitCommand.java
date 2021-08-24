@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Command that exits the bot.
+ */
 public class ExitCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage){

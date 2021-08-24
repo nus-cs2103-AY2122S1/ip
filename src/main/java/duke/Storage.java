@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * class that interact with the file used to store tasks.
+ */
 public class Storage {
     private String filePath;
 
@@ -13,6 +16,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * adds new tasks to the file.
+     *
+     * @param task Task that is going to be added.
+     */
     public void addTaskToFile(Task task){
         try {
             FileWriter fileWriter = new FileWriter(filePath, true);
@@ -24,6 +32,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts the string representation of task to task object.
+     *
+     * @param taskString String representation of task read from file.
+     * @return Task object.
+     * @throws DukeException Exception that duke bot can throw.
+     */
     public static Task convertTaskStringToTask(String taskString) throws DukeException{
         Task task = new Task();
         String[] newTask = taskString.split("&&");
@@ -50,6 +65,11 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Converts all tasks derived from the storage file to TaskList.
+     *
+     * @return TaskList that includes all tasks in the file.
+     */
     public TaskList convertFileToTaskList(){
         TaskList taskList = new TaskList(new ArrayList<Task>());
         File dukeFile = new File(filePath);
@@ -68,6 +88,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Updates the file with the new TaskList.
+     *
+     * @param taskList New TaskList.
+     */
     public void convertTaskListToFile(TaskList taskList){
         try {
             FileWriter clearFile = new FileWriter(filePath);

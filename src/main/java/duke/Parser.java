@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * The class that Parses the command line from user.
+ * @author Luo Zhijie
+ */
 public class Parser {
     private String splitRegex;
 
@@ -7,6 +11,13 @@ public class Parser {
         this.splitRegex = splitRegex;
     }
 
+    /**
+     * Parses the input string from user to meaning command.
+     *
+     * @param input input string from user.
+     * @return Command got from input string.
+     * @throws DukeException Exception that duke could generate.
+     */
     public Command parse(String input) throws DukeException{
         String words[] = input.split(this.splitRegex);
         if (words[0].equals("list")) {
