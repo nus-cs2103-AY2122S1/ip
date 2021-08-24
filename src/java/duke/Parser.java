@@ -58,10 +58,18 @@ public class Parser {
                 else if (str.contains("event")) {
                     System.out.println(horizontalLines);
                     System.out.println(taskList.eventsTask(str));
-                } else if (str.contains("delete")) {
+                } 
+                
+                else if (str.contains("delete")) {
                     System.out.println(horizontalLines);
                     System.out.println(taskList.deleteTask(str));
-                } else {
+                } 
+                
+                else if (str.contains("help")) {
+                    Ui.allCommands();
+                }
+                
+                else {
                     throw new DukeException("Command is not valid!");
                 }
             } catch (DukeException e) {
