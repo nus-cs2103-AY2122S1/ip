@@ -1,22 +1,27 @@
+package duke.task;
+
+import duke.exception.EmptyFieldException;
+import duke.exception.InvalidCommandException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.time.temporal.ChronoUnit.DAYS;
 
-public class Event extends Task {
 
-    protected String at;
+public class Deadline extends Task {
+
+    protected String by;
     protected LocalDate date;
     protected LocalTime time;
 
-    public Event(String description, String at) throws EmptyFieldException, InvalidCommandException {
+    public Deadline(String description, String by) throws EmptyFieldException, InvalidCommandException {
         super(description);
-        if (description.equals("") || at.equals("")) {
+        if (description.equals("") || by.equals("")) {
             //check for empty description or by
             throw new EmptyFieldException("     Error! Description or date and time is empty!");
         } else {
-            String[] dateTime = at.split(" ");
+            String[] dateTime = by.split(" ");
             if (dateTime.length > 2) {
                 //check for more than 1 date and time entered
                 throw new InvalidCommandException(
@@ -24,7 +29,7 @@ public class Event extends Task {
                                 + "     one date, Eg: \"2021-09-12\" (This will enter time as 23:59 by default),\n"
                                 + "     or one time, Eg: \"18:00\" (This will enter today's date by default)");
             } else {
-                this.at = at;
+                this.by = by;
                 if (dateTime.length == 1) {
                     //user only entered a single date or time
                     if (dateTime[0].length() > 5) {
@@ -64,17 +69,17 @@ public class Event extends Task {
         }
     }
 
+
     @Override
     public String saveToFile() {
-        return "E " + super.saveToFile() + " | " + this.at;
+        return "D " + super.saveToFile() + " | " + this.by;
     }
 
     @Override
     public String toString() {
-        return "[E]"
+        return "[D]"
                 + super.toString()
-                + " (at: "
-                + this.date.format(DateTimeFormatter.ofPattern("MMMM d yyyy"))
+                + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMMM d yyyy"))
                 + ", "
                 + this.time.format(DateTimeFormatter.ofPattern("h:mm a"))
                 + ")";
