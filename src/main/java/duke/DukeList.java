@@ -9,8 +9,8 @@ import duke.exception.InvalidArgumentException;
 import duke.task.Task;
 
 /**
- * Encapsulation of a task list in Duke, able to provide relevant responses on
- * its manipulation.
+ * Encapsulates a task list in Duke, able to provide relevant responses on its
+ * manipulation.
  */
 public class DukeList {
     private final Database database;
@@ -21,7 +21,7 @@ public class DukeList {
     }
 
     /**
-     * Add a task to the list and return a response on the added task.
+     * Adds a task to the list and return a response on the added task.
      * 
      * @param task to be added to the list
      * @return response to the addition

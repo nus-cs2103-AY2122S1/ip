@@ -121,12 +121,15 @@ public abstract class Database {
      */
     protected void close(PreparedStatement ps, ResultSet rs) {
         try {
-            if (ps != null)
+            if (ps != null) {
                 ps.close();
-            if (rs != null)
+            }
+            if (rs != null) {
                 rs.close();
-            if (this.connection != null)
+            }
+            if (this.connection != null) {
                 connection.close();
+            }
         } catch (SQLException ex) {
             throw new DatabaseAccessException("Unable to close SQLite connection...");
         }
@@ -140,10 +143,12 @@ public abstract class Database {
      */
     protected void close(PreparedStatement ps) {
         try {
-            if (ps != null)
+            if (ps != null) {
                 ps.close();
-            if (this.connection != null)
+            }
+            if (this.connection != null) {
                 connection.close();
+            }
         } catch (SQLException ex) {
             throw new DatabaseAccessException("Unable to close SQLite connection...");
         }

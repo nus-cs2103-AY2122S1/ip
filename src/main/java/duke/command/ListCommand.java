@@ -4,7 +4,11 @@ import duke.DukeList;
 import duke.UserInterface;
 
 /**
+<<<<<<< HEAD
  * Represents a command to list all tasks in a dukelist.
+=======
+ * Encapsulates a command on a DukeList.
+>>>>>>> branch-A-CodingStandard
  */
 public class ListCommand implements Command {
     private final DukeList dukeList;
