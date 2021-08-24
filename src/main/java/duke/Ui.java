@@ -5,6 +5,9 @@ import duke.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * A Class to manage all user interactions.
+ */
 public class Ui {
     private Scanner myScanner = new Scanner(System.in);
 

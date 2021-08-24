@@ -14,6 +14,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class to load and save tasks.
+ */
 public class Storage {
     private String filePath;
     Path currentRelativePath = Paths.get("");
@@ -23,6 +26,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+
+    /**
+     * Load the previous tasks and return an ArrayList of Tasks.
+     *
+     * @return An ArrayList<Task> containing saved tasks.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             // System.out.println("Current absolute path is: " + s);
@@ -69,6 +78,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Save Tasks
+     *
+     */
     public void saveTasks(TaskList tasks) {
         String textToAdd = "";
 

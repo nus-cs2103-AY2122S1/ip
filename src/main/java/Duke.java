@@ -1,5 +1,8 @@
 import duke.*;
 
+/**
+ * Your not so friendly chatbox.
+ */
 public class Duke {
 
     private Storage storage;
@@ -17,6 +20,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Run the chatbox
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
