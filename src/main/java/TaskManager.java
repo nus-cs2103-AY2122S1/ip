@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManager {
@@ -75,15 +76,48 @@ public class TaskManager {
         return String.join("\n", tasks);
     }
 
-    @Override
-    public String toString() {
+    public String list() {
         String[] allTasks = new String[taskList.size()];
         for (int i = 0; i < allTasks.length; i++) {
             Task task = taskList.get(i);
             // Display numbers are 1-indexed
             int taskNumber = i + 1;
-            allTasks[i] = String.format("%d. %s", taskNumber, task.toString());
+            allTasks[i] = prependNumberToTask(taskNumber, task);
         }
         return String.join("\n", allTasks);
+    }
+
+    private List<Task> filterByDate(DukeDateTime dateTime) {
+        List<Task> tasks = new ArrayList<>();
+        for (Task t : this.taskList) {
+            if (!(t instanceof Timestampable)) {
+                continue;
+            }
+            Timestampable timestampableTask = (Timestampable) t;
+            if (timestampableTask.onSameDayAs(dateTime)) {
+                tasks.add(t);
+            }
+        }
+        return tasks;
+    }
+
+    public String list(DukeDateTime dateTime) {
+        List<Task> filteredTasks = filterByDate(dateTime);
+        String[] filteredTasksStrings = new String[filteredTasks.size()];
+        for (int i = 0; i < filteredTasksStrings.length; i++) {
+            Task task = filteredTasks.get(i);
+            int taskNumber = i + 1;
+            filteredTasksStrings[i] = prependNumberToTask(taskNumber, task);
+        }
+        return String.join("\n", filteredTasksStrings);
+    }
+
+    private String prependNumberToTask(int taskNumber, Task task) {
+        return String.format("%d. %s", taskNumber, task.toString());
+    }
+
+    @Override
+    public String toString() {
+        return list();
     }
 }
