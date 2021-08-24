@@ -8,6 +8,11 @@ public class Duke {
 
     public static boolean done = false;
 
+    /**
+     * initialises Duke
+     * @param filePath
+     */
+
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +23,10 @@ public class Duke {
         done = true;
         System.out.println("Bye for now!");
     }
+
+    /**
+     * runs the Duke program
+     */
 
     public void run() {
         while (!done) {

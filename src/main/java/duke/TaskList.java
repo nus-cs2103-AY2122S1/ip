@@ -12,9 +12,18 @@ public class TaskList {
 
     public ArrayList<Task> myList;
 
+    /**
+     * initialises the TaskList (supposed to have loading functionality, but will add on later)
+     */
+
     public TaskList() {
         myList = new ArrayList<>();
     }
+
+    /**
+     * calls an appropriate method based on the input param
+     * @param input
+     */
 
     public void action(String input) {
         if (input.equals("list")) {
@@ -27,6 +36,11 @@ public class TaskList {
             addTask(input);
         }
     }
+
+    /**
+     * forms a String of all the tasks, for saving into file
+     * @return String
+     */
 
     public String output() {
         String output = "";

@@ -9,6 +9,10 @@ public class Storage {
 
     private String filePath;
 
+    /**
+     * initialises the storage, which creates the necessary files
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         try {
@@ -26,6 +30,10 @@ public class Storage {
         }
     }
 
+    /**
+     * saves the output param into the file initialised by storage
+     * @param output
+     */
     public void saveTasks(String output) {
         try {
             FileWriter myWriter = new FileWriter(filePath);
