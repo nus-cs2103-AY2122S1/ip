@@ -1,7 +1,9 @@
 package jarvis.action;
 
+import jarvis.exception.JarvisException;
 import jarvis.exception.TaskDetailsEmptyException;
 import jarvis.output.Output;
+import jarvis.storage.Storage;
 import jarvis.task.Deadline;
 import jarvis.task.TaskList;
 
@@ -22,8 +24,9 @@ public class DeadlineAction extends Action {
     }
 
     @Override
-    public void execute(TaskList taskList) {
+    public void execute(TaskList taskList, Storage storage) throws JarvisException {
         Deadline newDeadlineTask = taskList.addTaskWithDeadline(taskDescription, deadline);
+        storage.addToStorageFile(newDeadlineTask.toStorageFormatString());
         Output.showTaskAddedMessage(newDeadlineTask, taskList);
     }
 }

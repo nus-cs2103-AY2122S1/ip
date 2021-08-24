@@ -1,7 +1,9 @@
 package jarvis.action;
 
+import jarvis.exception.StorageFileException;
 import jarvis.exception.TaskDetailsEmptyException;
 import jarvis.output.Output;
+import jarvis.storage.Storage;
 import jarvis.task.Event;
 import jarvis.task.TaskList;
 
@@ -22,8 +24,9 @@ public class EventAction extends Action {
     }
 
     @Override
-    public void execute(TaskList taskList) {
+    public void execute(TaskList taskList, Storage storage) throws StorageFileException {
         Event newEvent = taskList.addEvent(eventDescription, eventTime);
+        storage.addToStorageFile(newEvent.toStorageFormatString());
         Output.showTaskAddedMessage(newEvent, taskList);
     }
 }
