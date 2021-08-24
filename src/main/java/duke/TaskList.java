@@ -96,4 +96,21 @@ public class TaskList {
         storage.saveData(this.tasks);
         System.out.printf("Good job! I have marked the following task as done:%n %s%n", doneTask);
     }
+
+    /**
+     * Returns a list of tasks with description containing the keyword.List of tasks with
+     * description containing the keyword.
+     *
+     * @param keyword Word to search for in task description.
+     * @return List of tasks with description containing the keyword.
+     */
+    public List<Task> findTask(String keyword) {
+        List<Task> matches = new ArrayList<>();
+        for (Task task : this.tasks) {
+            if (task.getDescription().contains(keyword)) {
+                matches.add(task);
+            }
+        }
+        return matches;
+    }
 }

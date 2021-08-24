@@ -53,6 +53,11 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! You must provide the index of the task to delete.");
             }
             return new DeleteCommand(parts[1]);
+        case "find":
+            if (partsLength != 2) {
+                throw new DukeException("☹ OOPS!!! You must provide a keyword.");
+            }
+            return new FindCommand(parts[1]);
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means (X_X)"
                     + "\nPlease enter one of the following commands:\n todo <task>"
