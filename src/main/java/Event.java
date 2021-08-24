@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 public class Event extends Task {
     protected LocalDate at;
@@ -10,7 +12,12 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        String month = this.at.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+        int date = this.at.getDayOfMonth();
+        int year = this.at.getYear();
+
+        String toPrint = String.format("[E]%s (at: %s %d %d)", super.toString(), month, date, year);
+        return toPrint;
     }
 
     @Override

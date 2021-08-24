@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 public class Deadline extends Task {
     protected LocalDate by;
@@ -10,7 +12,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String month = this.by.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+        int date = this.by.getDayOfMonth();
+        int year = this.by.getYear();
+
+        String toPrint = String.format("[D]%s (by: %s %d %d)", super.toString(), month, date, year);
+        return toPrint;
     }
 
     @Override
