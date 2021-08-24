@@ -13,6 +13,6 @@ public class Event extends Task{
 
     @Override
     public String toFile() {
-        return "E " + super.toFile() + " | " + this.startTime;
+        return "E " + super.toFile() + "| " + this.startTime;
     }
 }

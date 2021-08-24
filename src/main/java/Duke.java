@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,6 +14,11 @@ public class Duke {
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("\t Hello! I'm Duke");
+        try {
+            DukeFileIO.readPastData(taskList);
+        } catch(FileNotFoundException e) {
+            System.out.println("Missing File");
+        }
         scanner = new Scanner(System.in);
         getCommand();
     }

@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+
 public enum DukeCommands {
 
     BYE("bye", (String command) -> {
@@ -137,6 +140,19 @@ public enum DukeCommands {
         Duke.taskList.add(t);
         Duke.counter++;
         System.out.println("\t There are " + Duke.counter + " items in the list");
+        Duke.getCommand();
+    }),
+    SAVE("save", (String command) -> {
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt");
+            for (Task t : Duke.taskList) {
+                fw.write(t.toFile() + System.lineSeparator());
+            }
+            fw.close();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("List successfully saved");
         Duke.getCommand();
     }),
     INVALID("invalid", (String command) -> {
