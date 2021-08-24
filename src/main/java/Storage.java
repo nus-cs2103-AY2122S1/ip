@@ -3,7 +3,6 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.File;
 
-
 public class Storage {
 
     protected String filePath;
@@ -39,4 +38,5 @@ public class Storage {
         }
         return tasks;
     }
+
 }

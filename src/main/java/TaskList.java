@@ -23,5 +23,4 @@ import java.util.ArrayList;
     public int size() {
         return allTasks.size();
     }
-
 }

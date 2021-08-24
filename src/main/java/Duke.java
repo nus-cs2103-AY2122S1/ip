@@ -77,22 +77,6 @@ public class Duke {
         fw.close();
     }
 
-    /*public static void Level9(String input, TaskList tasks) throws DukeException, IOException {
-        ArrayList<String> items = new ArrayList<>();
-        if (input.contains("find")) {
-            String item = input.split(" ")[1];
-            for (Task task: tasks) {
-                 if (task.newTask.contains(item)) {
-                     items.add(task.toString());
-                 }
-            }
-            System.out.println(displayLabel(
-                    "Here are the matching tasks in your list: \n" +
-                    "     " + getItems(items)));
-        } else {
-            Level8(input, tasks);
-        }
-    }*/
 }
 
 
