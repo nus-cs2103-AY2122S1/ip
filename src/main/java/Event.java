@@ -1,17 +1,19 @@
 public class Event extends Task{
 
-    protected String start;
-    protected String end;
+    protected String date;
 
-    public Event(String description, String start, String end) {
+    public Event(String description, String date) {
         super(description);
-        this.start = start;
-        this.end = end;
+        this.date = date;
     }
 
+    public String getDate() {
+        return this.date;
+    }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.start + "-" + this.end + ")";
+        return "[E]" + super.toString() + " (at: " + this.date + ")";
     }
+
 
 }
