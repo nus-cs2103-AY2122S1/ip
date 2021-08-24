@@ -1,3 +1,10 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,6 +17,12 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static final String DIVIDER = "____________________________________________________________\n";
+
+    private static final Path DATA_DIRECTORY_PATH = Paths.get("data");
+
+    private static final Path SAVE_FILE_PATH = Paths.get("data", "duke.txt");
+
+    private static final File SAVE_FILE = SAVE_FILE_PATH.toFile();
 
     private static ArrayList<Task> taskList;
 
@@ -40,6 +53,67 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 
+    private static void loadSave() throws DukeException {
+        try {
+            if (!Files.exists(DATA_DIRECTORY_PATH)) {
+                Files.createDirectory(DATA_DIRECTORY_PATH);
+            }
+            if (!Files.exists(SAVE_FILE_PATH)) {
+                Files.createFile(SAVE_FILE_PATH);
+            }
+
+            Scanner sc = new Scanner(SAVE_FILE);
+            while (sc.hasNext()) {
+                String[] taskInfo = sc.nextLine().split("\\|");
+                String taskType = taskInfo[0];
+                boolean isDone = taskInfo[1].equals("1");
+                String taskDescription = taskInfo[2];
+                Task task;
+                switch (taskType) {
+                case "T":
+                    task = new ToDo(taskDescription, isDone);
+                    break;
+                case "D":
+                    task = new Deadline(taskDescription, isDone, taskInfo[3]);
+                    break;
+                case "E":
+                    task = new Event(taskDescription, isDone, taskInfo[3]);
+                    break;
+                default:
+                    throw new DukeException("Oops! Your save file is corrupted and has an invalid format.");
+                }
+                taskList.add(task);
+                numberOfTasks++;
+            }
+            sc.close();
+        } catch (IOException e) {
+            throw new DukeException("Oops! There was an error creating/retrieving a save file for Duke.");
+        }
+    }
+
+    private static String getSaveFormat() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < numberOfTasks; i++) {
+            sb.append(taskList.get(i).getSaveFormat());
+        }
+        return sb.toString();
+    }
+
+    private static void modifySave(String text, boolean isOverwrite) throws DukeException {
+        try {
+            FileWriter fw;
+            if (isOverwrite) {
+                fw = new FileWriter(SAVE_FILE);
+            } else {
+                fw = new FileWriter(SAVE_FILE, true);
+            }
+            fw.write(text);
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("Oops! There was an error accessing your save file.");
+        }
+    }
+
     private static void editTask(String[] commandAndArgument) throws DukeException {
         try {
             int taskIndex = Integer.parseInt(commandAndArgument[1]) - 1;
@@ -61,6 +135,7 @@ public class Duke {
                         + DIVIDER
                 );
             }
+            modifySave(getSaveFormat(), true);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("Please enter a valid task number.");
         }
@@ -106,6 +181,7 @@ public class Duke {
         }
         taskList.add(newTask);
         numberOfTasks++;
+        modifySave(newTask.getSaveFormat(), false);
         System.out.println(DIVIDER
                 + "Got it. I've added this task:\n"
                 + newTask + '\n'
@@ -120,6 +196,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         taskList = new ArrayList<>();
         numberOfTasks = 0;
+
+        loadSave();
 
         while (true) {
             try {
@@ -139,7 +217,7 @@ public class Duke {
                     addTask(commandAndArgument);
                 } else {
                     throw new DukeException("Invalid command. List of valid commands include:\n"
-                            + "list|todo|deadline|event|done|bye");
+                            + "list|todo|deadline|event|done|delete|bye");
                 }
             } catch (DukeException e) {
                 System.out.println(DIVIDER
