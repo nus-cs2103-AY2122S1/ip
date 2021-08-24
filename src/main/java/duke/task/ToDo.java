@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * ToDo class.
  * Used to represent a todo task.

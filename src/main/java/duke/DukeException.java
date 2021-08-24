@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * DukeException class.
  * Used to represent the exceptions related to Duke.

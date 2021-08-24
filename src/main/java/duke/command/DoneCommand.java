@@ -1,3 +1,18 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
+
+
+/**
+ * A DoneCommand class that extends from the Command class.
+ *
+ * @author KelvinSoo
+ * @version A-MoreOOP
+ */
 public class DoneCommand extends Command{
 
     String parameter;

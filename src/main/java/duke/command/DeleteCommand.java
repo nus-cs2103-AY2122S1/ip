@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
+
+
 /**
  * A DeleteCommand class that extends from the Command class.
  *

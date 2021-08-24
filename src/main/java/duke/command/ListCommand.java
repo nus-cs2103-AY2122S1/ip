@@ -1,15 +1,22 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.task.TaskList;
+
 /**
- * An ExitCommand class that extends from the Command class.
+ * A ListCommand class that extends from the Command class.
  *
  * @author KelvinSoo
  * @version A-MoreOOP
  */
-public class ExitCommand extends Command{
+public class ListCommand extends Command{
 
     /**
      * An empty constructor to initialize an exit command.
      */
-    public ExitCommand() {
+    public ListCommand() {
     }
 
     /**
@@ -20,7 +27,11 @@ public class ExitCommand extends Command{
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.exit();
+        if (taskList.size() == 0) {
+            throw new DukeException("It seems that your task list is empty.\n"
+                    + "Try adding some task using \"todo\", \"deadline\" or \"event\"");
+        }
+        ui.showReply(taskList.toString());
     }
 
     /**
@@ -29,6 +40,6 @@ public class ExitCommand extends Command{
      */
     @Override
     public boolean isExit() {
-        return true;
+        return false;
     }
 }
