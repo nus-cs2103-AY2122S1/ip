@@ -21,7 +21,7 @@ public class Duke {
         printMessage(WELCOME_TEXT);
     }
 
-    private void handleInput() {
+    private void handleInput() throws Exception {
         System.out.print("> ");
         String input = this.in.next();
 
@@ -68,7 +68,8 @@ public class Duke {
 
             this.printTaskAddedMessage(event);
         } else {
-            printMessage(input);
+            String fullInput = input + " " + this.in.nextLine();
+            throw new Exception("Command not recognized: " + fullInput);
         }
     }
 
@@ -96,7 +97,13 @@ public class Duke {
 
         duke.greet();
         while (!duke.shouldExit()) {
-            duke.handleInput();
+            try {
+                duke.handleInput();
+            }
+            // TODO: custom Duke exceptions?
+            catch (Exception e) {
+                printMessage("Error: " + e.getMessage());
+            }
         }
         duke.shutdown();
     }
