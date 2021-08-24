@@ -26,6 +26,11 @@ public class Deadline extends Task{
     }
 
     @Override
+    public String saveTaskToFile() {
+        return typeOfTask() + "||" + getStatusIcon() + "||" + this.getDescription() + "||" + this.getDeadline();
+    }
+
+    @Override
     public String typeOfTask() {
         return "D";
     }

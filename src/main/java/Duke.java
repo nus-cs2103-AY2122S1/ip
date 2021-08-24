@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class Duke {
                 System.out.println("File created.");
                 return true;
             } else {
-                System.out.println("File already exists.");
+                System.out.println("File fetched.");
                 return false;
             }
         } catch (IOException e) {
@@ -36,7 +37,6 @@ public class Duke {
             Scanner fileScanner = new Scanner(file);
             while (fileScanner.hasNext()) {
                 String line = fileScanner.nextLine();
-                System.out.println(line);
                 parseLineInFile(line);
             }
         } catch (FileNotFoundException e) {
@@ -53,7 +53,7 @@ public class Duke {
             char type = string.charAt(0);
             char status = string.charAt(3);
             boolean isDone;
-            if (status == 'O') {
+            if (status == ' ') {
                 isDone = false;
             } else if (status == 'X') {
                 isDone = true;
@@ -79,6 +79,23 @@ public class Duke {
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void writeToFile(String filePath, ArrayList<Task> tasks) {
+        try {
+            FileWriter fileWriter = new FileWriter(filePath);
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
+                String line = task.saveTaskToFile() + "\n";
+                if (i == tasks.size() - 1) {
+                    line = task.saveTaskToFile();
+                }
+                fileWriter.write(line);
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Cannot update file.");
         }
     }
 
@@ -203,19 +220,21 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.createFile("file.text");
-        duke.readFile("file.text");
-        for (int i = 0; i < duke.tasks.size(); i++) {
-            System.out.println(duke.tasks.get(i));
-            System.out.println(duke.numOfTasks);
-        }
         System.out.println("Hello I am Duke.\nWhat can I do for you?");
         System.out.println();
+        duke.createFile("file.text");
+        duke.readFile("file.text");
+        if (duke.numOfTasks > 0) {
+            System.out.println("Current number of tasks: " + duke.numOfTasks);
+            duke.list();
+            System.out.println();
+        }
         Scanner scanner = new Scanner(System.in);
         String echo = scanner.nextLine();
         while (true) {
             if (echo.equals("bye")) {
                 System.out.println("Bye! See you next time!");
+                duke.writeToFile("file.text",duke.tasks);
                 break;
             }
             if (echo.equals("List")) {

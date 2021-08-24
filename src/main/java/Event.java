@@ -29,6 +29,11 @@ public class Event extends Task{
     }
 
     @Override
+    public String saveTaskToFile() {
+        return typeOfTask() + "||" + getStatusIcon() + "||" + this.getDescription() + "||" + this.getTime();
+    }
+
+    @Override
     public String typeOfTask() {
         return "E";
     }

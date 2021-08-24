@@ -30,6 +30,10 @@ public class Task {
         return this.description;
     }
 
+    public String saveTaskToFile() {
+        return typeOfTask() + "||" + getStatusIcon() + "||" + this.getDescription();
+    }
+
     @Override
     public String toString() {
         return String.format("[%s][%s] %s", this.typeOfTask(),this.getStatusIcon(), this.getDescription());
