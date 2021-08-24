@@ -1,4 +1,18 @@
+package duke.parser;
+
 import java.time.LocalDate;
+
+import duke.exception.DeadlineException;
+import duke.exception.DukeException;
+import duke.exception.EventException;
+import duke.exception.ToDoException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 
 public class Parser {
     private final TaskList taskList;
@@ -9,7 +23,7 @@ public class Parser {
         this.ui = new Ui();
     }
 
-    boolean parseInput(String input) {
+    public boolean parseInput(String input) {
         ui.printDivider();
         try {
             if (input.equals("bye")) {

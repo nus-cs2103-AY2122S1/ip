@@ -1,3 +1,5 @@
+package duke.tasklist;
+
 import java.io.IOException;
 
 import java.util.List;
@@ -7,6 +9,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
+
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.ui.Ui;
 
 public class TaskList {
     private List<Task> list;
@@ -19,7 +25,7 @@ public class TaskList {
         this.storage = new Storage("list.txt");
     }
 
-    TaskList(List<Task> list) {
+    public TaskList(List<Task> list) {
         this();
         this.list = list;
     }
@@ -32,7 +38,7 @@ public class TaskList {
         return list.get(index - 1);
     }
 
-    void markTaskAsDone(int index) {
+    public void markTaskAsDone(int index) {
         Task doneTask = getTask(index).markAsDone();
         list.set(index - 1, doneTask);
         ui.print("Nice! I've marked this task as done:");
@@ -40,7 +46,7 @@ public class TaskList {
         saveData();
     }
 
-    void add(Task item) {
+    public void add(Task item) {
         addWithoutPrinting(item);
         ui.print("Noted! I've added the following task:");
         ui.print("    %s%n", item.toString());
@@ -52,7 +58,7 @@ public class TaskList {
         saveData();
     }
 
-    void delete(int index) {
+    public void delete(int index) {
         Task removedItem = list.remove(index - 1);
         ui.print("Got it. I've removed the following task:");
         ui.print("    %s%n", removedItem.toString());
@@ -64,7 +70,7 @@ public class TaskList {
         ui.print("Total tasks: %d%n", list.size());
     }
 
-    void printItems() {
+    public void printItems() {
         ui.print("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             ui.print("%d. %s%n", (i + 1), list.get(i));

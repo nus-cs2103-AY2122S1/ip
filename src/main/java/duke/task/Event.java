@@ -1,12 +1,14 @@
+package duke.task;
+
 public class Event extends Task{
     protected final String time;
 
-    Event(String name, String time) {
+    public Event(String name, String time) {
         super(name);
         this.time = time;
     }
 
-    Event(String name, boolean isDone, String time) {
+    public Event(String name, boolean isDone, String time) {
         super(name, isDone);
         this.time = time;
     }

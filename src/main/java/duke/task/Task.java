@@ -1,3 +1,5 @@
+package duke.task;
+
 public abstract class Task {
     private final String name;
     private final boolean isDone;
@@ -20,7 +22,7 @@ public abstract class Task {
         return isDone ? "X" : " ";
     }
 
-    abstract Task markAsDone();
+    public abstract Task markAsDone();
 
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), name);

@@ -1,10 +1,21 @@
+package duke.storage;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import java.time.LocalDate;
+
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+
+
 
 public class Storage {
     public static final String directory = "./data";
@@ -14,7 +25,7 @@ public class Storage {
         this.fileName = fileName;
     }
 
-    List<Task> load() {
+    public List<Task> load() {
         String path = directory + "/" + fileName;
         File file = new File(path);
         List<Task> loadedTasks = new ArrayList<Task>();
@@ -56,7 +67,7 @@ public class Storage {
         return loadedTasks;
     }
 
-    boolean createFileIfNotExists(String fileName) throws IOException {
+    public boolean createFileIfNotExists(String fileName) throws IOException {
         File fileDirectory = new File(directory);
         if (!fileDirectory.exists()) {
             fileDirectory.mkdir();
