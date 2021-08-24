@@ -7,8 +7,12 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import duke.DukeException;
-import duke.task.*;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TodoTask;
 
 public class TaskStorage {
     private File dataFile;
@@ -54,11 +58,19 @@ public class TaskStorage {
         String[] tokens = taskString.split(" ");
         switch (tokens[0]) {
         case "todo":
-            return new TodoTask(tokens[1], Boolean.parseBoolean(tokens[2]));
+            return new TodoTask(
+                    tokens[1],
+                    Boolean.parseBoolean(tokens[2]));
         case "event":
-            return new EventTask(tokens[1], Boolean.parseBoolean(tokens[2]), LocalDateTime.parse(tokens[3]));
+            return new EventTask(
+                    tokens[1],
+                    Boolean.parseBoolean(tokens[2]),
+                    LocalDateTime.parse(tokens[3]));
         case "deadline":
-            return new DeadlineTask(tokens[1], Boolean.parseBoolean(tokens[2]), LocalDateTime.parse(tokens[3]));
+            return new DeadlineTask(
+                    tokens[1],
+                    Boolean.parseBoolean(tokens[2]),
+                    LocalDateTime.parse(tokens[3]));
         default:
             throw new DukeException("Task with invalid format!");
         }
@@ -68,15 +80,26 @@ public class TaskStorage {
         if (task instanceof TodoTask) {
             @SuppressWarnings("unchecked")
             TodoTask todoTask = (TodoTask) task;
-            return String.format("todo %s %b", todoTask.getContent(), todoTask.isDone());
+            return String.format(
+                    "todo %s %b",
+                    todoTask.getContent(),
+                    todoTask.isDone());
         } else if (task instanceof EventTask) {
             @SuppressWarnings("unchecked")
             EventTask eventTask = (EventTask) task;
-            return String.format("event %s %b %s", eventTask.getContent(), eventTask.isDone(), eventTask.getDate().toString());
+            return String.format(
+                    "event %s %b %s",
+                    eventTask.getContent(),
+                    eventTask.isDone(),
+                    eventTask.getDate().toString());
         } else if (task instanceof DeadlineTask) {
             @SuppressWarnings("unchecked")
             DeadlineTask deadlineTask = (DeadlineTask) task;
-            return String.format("deadline %s %b %s", deadlineTask.getContent(), deadlineTask.isDone(), deadlineTask.getDeadline().toString());
+            return String.format(
+                    "deadline %s %b %s",
+                    deadlineTask.getContent(),
+                    deadlineTask.isDone(),
+                    deadlineTask.getDeadline().toString());
         } else {
             // never reach this branch
             return null;

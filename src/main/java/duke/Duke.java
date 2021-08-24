@@ -1,7 +1,5 @@
 package duke;
 
-import duke.storage.TaskList;
-
 public class Duke {
     private Ui ui;
 

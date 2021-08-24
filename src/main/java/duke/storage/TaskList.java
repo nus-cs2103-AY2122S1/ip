@@ -1,7 +1,8 @@
 package duke.storage;
 
-import java.io.*;
 import java.util.ArrayList;
+import java.io.IOException;
+
 import duke.DukeException;
 import duke.task.Task;
 
