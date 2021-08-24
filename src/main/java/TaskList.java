@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class TaskList {
+    public class TaskList {
 
     protected ArrayList<Task> allTasks;
 
@@ -23,4 +23,5 @@ public class TaskList {
     public int size() {
         return allTasks.size();
     }
+
 }

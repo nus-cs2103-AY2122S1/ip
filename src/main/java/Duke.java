@@ -51,8 +51,6 @@ public class Duke {
         new Duke("/Users/ravi57004/ip/src/main/java/Tasks.txt").run();
     }
 
-
-
     public static void writeToFile(String input, TaskList tasks) throws DukeException, IOException {
         String text = "";
         FileWriter fw = new FileWriter("/Users/ravi57004/ip/src/main/java/Tasks.txt", false);
@@ -78,6 +76,23 @@ public class Duke {
         fw.write(text);
         fw.close();
     }
+
+    /*public static void Level9(String input, TaskList tasks) throws DukeException, IOException {
+        ArrayList<String> items = new ArrayList<>();
+        if (input.contains("find")) {
+            String item = input.split(" ")[1];
+            for (Task task: tasks) {
+                 if (task.newTask.contains(item)) {
+                     items.add(task.toString());
+                 }
+            }
+            System.out.println(displayLabel(
+                    "Here are the matching tasks in your list: \n" +
+                    "     " + getItems(items)));
+        } else {
+            Level8(input, tasks);
+        }
+    }*/
 }
 
 
@@ -209,6 +224,7 @@ class Event extends Task {
     }
 
 }
+
 
 
 
