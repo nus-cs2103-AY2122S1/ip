@@ -23,4 +23,10 @@ public class Task {
         return "[" + cross + "]" + this.content;
     }
 
+    public String toStorageString(){
+        String done = isCompleted? "1" : "0";
+        String s = String.format("| %s | %s ",done, content);
+        return s;
+    }
+
 }

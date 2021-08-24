@@ -48,7 +48,7 @@ public class DukeParser {
         if(inputScanner.hasNext()){
             throw new InvalidCommandParameterException();
         }else{
-            UI.printList(list);
+            UI.printStorageList(list);
         }
     }
 

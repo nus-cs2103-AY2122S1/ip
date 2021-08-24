@@ -10,4 +10,10 @@ public class Todo extends Task {
     public String toString(){
         return "[T]" + super.toString();
     }
+
+    public String toStorageString(){
+        String s1 = super.toStorageString();
+        String s2 = String.format("T %s", s1);
+        return s2;
+    }
 }
