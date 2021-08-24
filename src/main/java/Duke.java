@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
+    
     static List<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -23,8 +24,6 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (!end) {
-            System.out.println(horizontalLines);
-            System.out.print("Enter a text: ");
 
             String str = sc.nextLine();
             str = str.trim();
