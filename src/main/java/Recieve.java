@@ -1,3 +1,6 @@
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -108,17 +111,25 @@ public class Recieve {
                         if (input.length() > 12 && input.contains("/by")) {
                             String[] spl = input.substring(9).split("/");
                             if (spl[0].length() < 2 || spl[1].length() < 4) {
-                                System.out.println(spl[0].length());
-                                System.out.println(spl[1].length());
                                 throw new InvalidFormatException("☹ OOPS!!! The descriptions of a deadline cannot be empty.");
                             }
                             else {
-                                Deadline task = new Deadline(spl[0], spl[1].substring(3));
-                                inputs.add(task);
+                                try {
+                                    LocalDate date = LocalDate.parse(spl[1].substring(3));
+                                    if (date.isBefore(LocalDate.now())) {
+                                        throw new InvalidFormatException("Deadline is in the past already!");
+                                    }
 
-                                System.out.println("Got it. I've added this task:");
-                                System.out.println(task.toString());
-                                System.out.println("Now you have " + inputs.size() + " task(s) in the list.");
+                                    Deadline task = new Deadline(spl[0], date);
+                                    inputs.add(task);
+
+                                    System.out.println("Got it. I've added this task:");
+                                    System.out.println(task.toString());
+                                    System.out.println("Now you have " + inputs.size() + " task(s) in the list.");
+
+                                } catch (DateTimeParseException e) {
+                                    System.out.println("Please indicate the deadline in the format of yyyy-mm-dd!");
+                                }
                             }
                         }
                         else {
