@@ -7,6 +7,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String taskName, boolean isDone) {
+        this.taskName = taskName.trim();
+        this.isDone = isDone;
+    }
+
     public String getTaskName() {
         return this.taskName;
     }
@@ -19,8 +24,12 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String getFileString() {
+        return String.format("%d | %s", isDone ? 1 : 0, this.taskName);
+    }
+
     @Override
     public String toString() {
-        return String.format("[%s] %s", isDone ? "X" : " ", taskName);
+        return String.format("[%s] %s", isDone ? "X" : " ", this.taskName);
     }
 }
