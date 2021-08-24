@@ -1,7 +1,6 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -151,30 +150,48 @@ public class EightBit {
 
     private void processDeadline(String msg) throws EightBitException {
         if (msg.split(" ").length == 1 // missing description and deadline
-                || msg.substring(9).trim().split(" /by ").length < 2) { // missing either description or deadline
+                || msg.substring(9).trim().split(" /by ").length < 2) { // missing either description or date/time
             throw new EightBitException("OOPS!!! Please enter your deadline in this format:\n"
-                    + "deadline <description> /by <date/time>");
+                    + "deadline <description> /by yyyy-mm-dd hh:mm\n"
+                    + "Ensure a valid date and time is entered.");
         }
 
         String[] descriptionAndBy = msg.substring(9).split(" /by ");
         String deadlineDescription = descriptionAndBy[0];
-        String deadlineBy = descriptionAndBy[1];
-        Deadline deadline = new Deadline(deadlineDescription, deadlineBy);
-        addTask(deadline);
+
+        try {
+            String dateTime = descriptionAndBy[1];
+            LocalDateTime localDateTime = LocalDateTime.parse(dateTime.replace(' ', 'T'));
+            Deadline deadline = new Deadline(deadlineDescription, localDateTime);
+            addTask(deadline);
+        } catch (DateTimeParseException e) {
+            throw new EightBitException("OOPS!!! Please enter your deadline in this format:\n"
+                    + "deadline <description> /by yyyy-mm-dd hh:mm\n"
+                    + "Ensure a valid date and time is entered.");
+        }
     }
 
     private void processEvent(String msg) throws EightBitException {
         if (msg.split(" ").length == 1 // missing description and date
-                || msg.substring(6).trim().split(" /at ").length < 2) { // missing either description or date
+                || msg.substring(6).trim().split(" /at ").length < 2) { // missing either description or date/time
             throw new EightBitException("OOPS!!! Please enter your event in this format:\n"
-                    + "event <description> /at <date/time>");
+                    + "event <description> /at yyyy-mm-dd hh:mm\n"
+                    + "Ensure a valid date and time is entered.");
         }
 
         String[] descriptionAndAt = msg.substring(6).split(" /at ");
         String eventDescription = descriptionAndAt[0];
-        String eventAt = descriptionAndAt[1];
-        Event event = new Event(eventDescription, eventAt);
-        addTask(event);
+
+        try {
+            String dateTime = descriptionAndAt[1];
+            LocalDateTime localDateTime = LocalDateTime.parse(dateTime.replace(' ', 'T'));
+            Event event = new Event(eventDescription, localDateTime);
+            addTask(event);
+        } catch (DateTimeParseException e) {
+            throw new EightBitException("OOPS!!! Please enter your event in this format:\n"
+                    + "event <description> /at yyyy-mm-dd hh:mm\n"
+                    + "Ensure a valid date and time is entered.");
+        }
     }
 
     private void processDelete(String msg) throws EightBitException {
@@ -250,11 +267,13 @@ public class EightBit {
                     tasksInFile.add(todo);
                     break;
                 case "D":
-                    Deadline deadline = new Deadline(taskDescription, words[3], isDone);
+                    LocalDateTime by = LocalDateTime.parse(words[3]);
+                    Deadline deadline = new Deadline(taskDescription, by, isDone);
                     tasksInFile.add(deadline);
                     break;
                 case "E":
-                    Event event = new Event(taskDescription, words[3], isDone);
+                    LocalDateTime at = LocalDateTime.parse(words[3]);
+                    Event event = new Event(taskDescription, at, isDone);
                     tasksInFile.add(event);
                     break;
                 default:
