@@ -2,11 +2,17 @@ package duke;
 
 import duke.command.DukeCommand;
 import duke.exception.InvalidCommandException;
+import duke.task.DukeDeadlineTask;
+import duke.task.DukeEvent;
+import duke.task.DukeTask;
+import duke.task.TaskList;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Represents the UI interactions in the program.
@@ -82,5 +88,26 @@ public class Ui {
      */
     public boolean shouldContinue() {
         return !exit;
+    }
+
+    public void printTaskList(TaskList taskList) {
+        taskList.getTasks().stream()
+                .collect(Collectors.groupingBy(t -> {
+                    if (t instanceof DukeEvent) {
+                        return "Events";
+                    } else if (t instanceof DukeDeadlineTask) {
+                        return "Tasks with deadlines";
+                    } else {
+                        return "Tasks";
+                    }
+                }))
+                .forEach((String group, List<DukeTask> tasks) -> {
+                    outputLine(group);
+                    for (DukeTask task: tasks) {
+                        int index = taskList.indexOf(task);
+                        outputLine(String.format("%d. %s", index + 1, task));
+                    }
+                    outputLine("");
+                });
     }
 }

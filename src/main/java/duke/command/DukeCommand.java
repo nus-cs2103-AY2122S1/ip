@@ -42,26 +42,8 @@ public enum DukeCommand implements DukeCommandAction {
             "List all tasks",
             DukeCommandConfig.NO_ARGUMENTS,
             (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
-                ui.outputLine(String.format("You have %d %s.", taskList.size(), taskList.size() == 1 ? "task" :
-                        "tasks"));
-                taskList.getTasks().stream()
-                        .collect(Collectors.groupingBy(t -> {
-                            if (t instanceof DukeEvent) {
-                                return "Events";
-                            } else if (t instanceof DukeDeadlineTask) {
-                                return "Tasks with deadlines";
-                            } else {
-                                return "Tasks";
-                            }
-                        }))
-                        .forEach((String group, List<DukeTask> tasks) -> {
-                            ui.outputLine(group);
-                            for (DukeTask task : tasks) {
-                                int index = taskList.indexOf(task);
-                                ui.outputLine(String.format("%d. %s", index + 1, task));
-                            }
-                            ui.outputLine("");
-                        });
+                ui.outputLine(String.format("You have %d %s.", taskList.size(), taskList.size() == 1 ? "task" : "tasks"));
+                ui.printTaskList(taskList);
             }),
     ADD_TASK("add",
             "Add a task (with optionally a deadline or a date)",
@@ -95,6 +77,18 @@ public enum DukeCommand implements DukeCommandAction {
                 storage.saveTaskList(taskList);
                 ui.outputLine("I've removed the following task.");
                 ui.outputLine(task.toString());
+            }),
+    FIND_TASK("find",
+            "Find a task",
+            new DukeCommandConfig(new DukeCommandArgument("keyword", "The keyword to filter tasks by",
+                    DukeCommandArgumentType.REQUIRED), Map.of()),
+            (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
+                List<DukeTask> dukeTasks = taskList.getTasks().stream()
+                        .filter(dukeTask -> dukeTask.name.toLowerCase().contains(arg.toLowerCase()))
+                        .collect(Collectors.toList());
+                TaskList filteredTaskList = new TaskList(dukeTasks);
+                ui.outputLine(String.format("Here are the tasks with titles containing \"%s\"", arg));
+                ui.printTaskList(filteredTaskList);
             }),
     EXIT("bye",
             "Exit Duke",
@@ -213,8 +207,7 @@ public enum DukeCommand implements DukeCommandAction {
      * @param storage   The storage object representing the file in which the tasks are stored.
      * @param arg       The positional argument to the command.
      * @param namedArgs The named arguments to the command.
-     * @return the result of the run command
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException if the arguments provided are incompatible or malformed
      */
     @Override
     public void apply(TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) throws InvalidCommandException {
