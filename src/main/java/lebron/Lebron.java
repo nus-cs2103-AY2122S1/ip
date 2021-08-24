@@ -40,6 +40,12 @@ public class Lebron {
             this.text = text;
         }
 
+        /**
+         * Creates a Command enum value from a string.
+         *
+         * @param text the text.
+         * @return the desired Command enum.
+         */
         public static Command fromString(String text) {
             for (Command c : Command.values()) {
                 if (c.text.equalsIgnoreCase(text)) {
