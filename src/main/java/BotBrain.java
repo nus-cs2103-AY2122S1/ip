@@ -224,6 +224,7 @@ public class BotBrain {
                         classifyTask(input);
                         generateTaskFeedback();
                 }
+
             }
             catch (Exception error){
                 botPrinter.print(botMemory.ERROR_MESSAGE_PROMPT + error.getMessage());

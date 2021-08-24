@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +42,8 @@ public class BotMemory {
     final String ERROR_MESSAGE_EMPTY_TASKLIST = "HEY! You have no task at hand! Get your life together!";
     final String ERROR_MESSAGE_TASK_OUT_OF_RANGE = "HEY! You don't have that many tasks!";
     final String ERROR_MESSAGE_INVALID_TASK_INDEX = "HOLD ON! The index you entered is not an Integer!";
+    final String HARD_DISK_DATA = "data.txt";
+
 
     //  A list to track the tasks added
     List<Task> taskTracker = new ArrayList<Task>();
@@ -48,4 +52,45 @@ public class BotMemory {
      * Constructor
      */
     public BotMemory(){}
+
+    public String produceStringData(){
+        StringBuilder outputData = new StringBuilder();
+        taskTracker.stream().forEach(x -> outputData.append(generateEasyDataTaskFormat(x)));
+        return outputData.toString();
+    }
+
+    public String generateEasyDataTaskFormat(Task task){
+
+        String taskType = task.getTaskType();
+        switch (taskType){
+            case "T": {
+                return String.format(
+                        "%s | %s | %s\n",
+                        task.getTaskType(),
+                        task.getIsDone(),
+                        task.getTaskTitle()
+                );
+            }
+
+            default: {
+                return String.format(
+                        "%s | %s | %s | %s\n",
+                        task.getTaskType(),
+                        task.getIsDone(),
+                        task.getTaskTitle(),
+                        task.getTime()
+                        );
+            }
+        }
+    }
+
+    public void saveToHardDisk() throws IOException {
+        FileWriter fw = new FileWriter(HARD_DISK_DATA, false);
+        fw.write(produceStringData());
+        fw.close();
+    }
+
+    public void loadFromHardDisk(){
+
+    }
 }

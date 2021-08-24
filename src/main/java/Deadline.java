@@ -1,9 +1,7 @@
 import java.lang.String;
 
-
 public class Deadline extends Task{
 
-    private final String TYPE = "D";
     private String time;
 
     /**
@@ -12,8 +10,12 @@ public class Deadline extends Task{
      * @param time
      */
     Deadline(String taskTitle, String time){
-        super(taskTitle);
+        super(taskTitle, "D");
         this.time = time;
+    }
+
+    public String getTime() {
+        return this.time;
     }
 
     /**
@@ -23,7 +25,7 @@ public class Deadline extends Task{
     @Override
     public String toString(){
         return String.format("[%s][%s] %s (by: %s)",
-                this.TYPE,
+                this.taskType,
                 (this.isDone ? "X" : " "),
                 this.taskTitle,
                 this.time);

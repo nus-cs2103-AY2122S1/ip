@@ -2,14 +2,17 @@ import java.lang.String;
 
 public class ToDo extends Task{
 
-    private final String TYPE = "T";
-
     /**
      * Constructor
      * @param taskTitle
      */
     ToDo(String taskTitle){
-        super(taskTitle);
+        super(taskTitle, "T");
+    }
+
+    @Override
+    public String getTime() {
+        return null;
     }
 
     /**
@@ -19,7 +22,7 @@ public class ToDo extends Task{
     @Override
     public String toString(){
         return String.format("[%s][%s] %s",
-                this.TYPE,
+                this.getTaskType(),
                 (this.isDone ? "X" : " "),
                 this.taskTitle);
     }
