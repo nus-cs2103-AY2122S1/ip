@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,6 +16,8 @@ import java.util.Scanner;
 
 public class Storage {
     private String filePath;
+    Path currentRelativePath = Paths.get("");
+    String s = currentRelativePath.toAbsolutePath().toString();
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -22,13 +25,12 @@ public class Storage {
 
     public ArrayList<Task> load() throws DukeException {
         try {
-            File dataDirectory = new File("/data");
+            // System.out.println("Current absolute path is: " + s);
+            File dataDirectory = new File("data");
             dataDirectory.mkdir();
-            File storage = new File("/data/duke.txt");
-//            if (!Files.exists(Paths.get(filePath))) {
-//                System.out.println(storage.mkdir());
-//            }
+            File storage = new File("data/duke.txt");
             storage.createNewFile();
+            // System.out.println(storage.getAbsolutePath());
             Scanner savedTasks = new Scanner(storage);
             ArrayList<Task> tasks = new ArrayList<>();
 
@@ -75,7 +77,7 @@ public class Storage {
         }
 
         try {
-            FileWriter file = new FileWriter("/data/duke.txt");
+            FileWriter file = new FileWriter("data/duke.txt");
             file.write(textToAdd);
             file.close();
         } catch (IOException e) {
