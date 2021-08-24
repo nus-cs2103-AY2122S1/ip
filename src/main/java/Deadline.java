@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
@@ -24,11 +25,11 @@ public class Deadline extends Task {
 
 
     public String formatDate() {
+
         if (by.getHour() == 0 && by.getMinute() == 0) {
-            return String.format("%s %s %s", by.getDayOfMonth(), by.getMonth(), by.getYear());
+            return by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } else {
-            return String.format("%s %s %s, %d%d", by.getDayOfMonth(), by.getMonth(), by.getYear(), by.getHour(),
-                    by.getMinute());
+            return this.saveDate();
         }
 
     }
@@ -38,7 +39,12 @@ public class Deadline extends Task {
     public String saveString() {
         return String.format("D|%s|%s|%s",
                 super.description,
-                this.by,
+                saveDate(),
                 super.isDone ? "1" : "0");
+    }
+
+    public String saveDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        return by.format(formatter);
     }
 }
