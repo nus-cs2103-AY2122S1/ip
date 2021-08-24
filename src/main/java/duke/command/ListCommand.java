@@ -14,5 +14,4 @@ public class ListCommand implements Command{
     public boolean isRunning() {
         return true;
     }
-
 }

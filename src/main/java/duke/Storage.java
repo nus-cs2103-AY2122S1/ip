@@ -47,7 +47,7 @@ public class Storage {
                 char taskType = eachLine.split("\\[", 2)[1].charAt(0);
                 char taskDone = eachLine.split("]\\[", 2)[1].charAt(0);
                 String taskDescription = eachLine.split("] ", 2)[1].trim();
-                taskList.add(TaskList.createTask(taskType, taskDone, taskDescription));
+                taskList.add(createTask(taskType, taskDone, taskDescription));
             }
         } catch (FileNotFoundException e) {
             System.out.println("Error finding file: " + e.getMessage());
@@ -55,4 +55,34 @@ public class Storage {
         return taskList;
     }
 
+    private static Task createTask(char taskType, char taskDone, String taskDescription) {
+        Task createdTask = new Task("Created");
+        boolean isDone = (taskDone == 'X');
+
+        switch (taskType) {
+        case 'T':
+            Task taskToDo = new ToDo(taskDescription);
+            if (isDone) {
+                taskToDo.setDone();
+            }
+            createdTask = taskToDo;
+            break;
+        case 'D':
+            Task taskDeadline = Parser.parseDeadlineFromFile(taskDescription);
+            if (isDone) {
+                taskDeadline.setDone();
+            }
+            createdTask = taskDeadline;
+            break;
+        case 'E':
+            Task taskEvent = Parser.parseEventFromFile(taskDescription);
+            if (isDone) {
+                taskEvent.setDone();
+            }
+            createdTask = taskEvent;
+            break;
+        }
+
+        return createdTask;
+    }
 }

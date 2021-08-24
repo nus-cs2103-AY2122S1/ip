@@ -9,7 +9,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public void markAsDone() {
+    public void setDone() {
         this.isDone = true;
     }
 
