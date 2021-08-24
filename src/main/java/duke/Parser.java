@@ -33,6 +33,14 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException("Invalid input! Please enter the task number after 'delete'.");
             }
+        case "find":
+            try {
+                String keyword = input.substring(5);
+                return new Command.FindCommand(keyword);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("Insufficient input received! Please add in keyword after 'find'.");
+            }
+
         case "todo":
             return new Command.AddCommand(input, 0);
         case "deadline":
@@ -40,7 +48,7 @@ public class Parser {
         case "event":
             return new Command.AddCommand(input, 2);
         default:
-            return new Command.UnknowCommand();
+            return new Command.UnknownCommand();
         }
     }
 }

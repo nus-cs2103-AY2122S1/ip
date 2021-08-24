@@ -84,6 +84,21 @@ public class TaskList {
         return taskList.remove(i - 1);
     }
 
+    /**
+     * Looks for keyword in TaskList.
+     * Adds Task object with keyword into a list.
+     *
+     * @param relatedList The list that tasks with keyword are added to.
+     * @param keyword The keyword.
+     */
+    public void find(ArrayList<Task> relatedList, String keyword) {
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).hasKeyword(keyword)) {
+                relatedList.add(taskList.get(i));
+            }
+        }
+    }
+
     public String checkOut() {
         String str = "";
         for (int i = 0; i < taskList.size(); i++) {
@@ -130,6 +145,16 @@ public class TaskList {
                 isDone = true;
                 return true;
             }
+        }
+
+        /**
+         * Checks if Task contains a certain keyword in its description.
+         *
+         * @param keyword The keyword.
+         * @return True is task contains keyword in its description. Returns false otherwise.
+         */
+        public boolean hasKeyword(String keyword) {
+            return task.contains(keyword);
         }
 
         @Override
