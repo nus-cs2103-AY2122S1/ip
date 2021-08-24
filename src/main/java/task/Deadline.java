@@ -49,7 +49,7 @@ public class Deadline extends Task {
                 + SPLIT_WORD
                 + ": "
                 + byDate
-                + ((byTime == null) ? "": " " + byTime)
+                + " " + byTime
                 + ")";
     }
     
@@ -60,7 +60,8 @@ public class Deadline extends Task {
                 + super.toEncodedString() 
                 + SPLIT_TEMPLATE
                 + byDate
-                + ((byTime == null) ? "" : SPLIT_TEMPLATE + byTime);
+                + SPLIT_TEMPLATE 
+                + byTime;
     }
 
     @Override

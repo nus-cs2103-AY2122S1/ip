@@ -5,8 +5,8 @@ import service.TaskList;
 import task.Task;
 import task.Todo;
 
-public class TodoCommand extends Command {
-
+public class TodoCommand extends AddCommand {
+    
     public static final String COMMAND_WORD = "todo";
 
     public TodoCommand(String commandParams) {
@@ -15,6 +15,9 @@ public class TodoCommand extends Command {
 
     @Override
     public String execute(TaskList taskList) throws DukeException {
-        return "";
+        String desc = super.extractDesc(commandParams, COMMAND_WORD, null);
+        Task todo = new Todo(desc);
+        taskList.addTask(todo);
+        return String.format(CommandMessage.MESSAGE_CREATED_TODO, todo, taskList.getCapacity());
     }
 }

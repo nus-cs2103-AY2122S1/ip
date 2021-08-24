@@ -52,7 +52,7 @@ public class Duke {
         Command command;
         do {
             String userInput = scanner.nextLine().trim();
-            command = parser.parseCommand(userInput);
+            command = parser.parseToCommand(userInput);
             try {
                 String feedback = command.execute(taskList);
                 List<Task> tasks = taskList.getTasks();
@@ -63,7 +63,7 @@ public class Duke {
                 chatBot.error(exception.getMessage());
 
             } catch (StorageException exception) {
-                chatBot.error("Error updating task file.");
+                chatBot.errorOnSave();
                 break;
             }
         } while (!command.isBye());

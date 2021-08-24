@@ -23,7 +23,7 @@ public abstract class Command {
     
     public CommandType getCommandType() {
         return commandType;
-    };
+    }
     
     public boolean isBye() {
         return commandType.equals(CommandType.BYE);

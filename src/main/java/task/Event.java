@@ -48,7 +48,7 @@ public class Event extends Task {
                 + SPLIT_WORD 
                 + ": " 
                 + atDate 
-                + ((atTime == null) ? "": " " + atTime)
+                + " " + atTime
                 + ")";
     }
 
@@ -59,7 +59,8 @@ public class Event extends Task {
                 + super.toEncodedString() 
                 + SPLIT_TEMPLATE
                 + atDate
-                + ((atTime == null) ? "" : SPLIT_TEMPLATE + atTime);
+                + SPLIT_TEMPLATE 
+                + atTime;
     }
     
     @Override

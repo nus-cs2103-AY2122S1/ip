@@ -48,12 +48,11 @@ public class DateTimeFormat {
     private void initialiseTimeFormats() {
         timeFormatterList.clear();
         timeFormatterList.add(DateTimeFormatter.ofPattern("HH:mm"));
-        timeFormatterList.add(DateTimeFormatter.ofPattern("hh:mm a"));
-
         timeFormatterList.add(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        timeFormatterList.add(DateTimeFormatter.ofPattern("hh:mm:ss a"));
-
         timeFormatterList.add(DateTimeFormatter.ofPattern("HHmm"));
+
+        timeFormatterList.add(DateTimeFormatter.ofPattern("hh:mm a"));
+        timeFormatterList.add(DateTimeFormatter.ofPattern("hh:mm:ss a"));
         timeFormatterList.add(DateTimeFormatter.ofPattern("hhmm a"));
     }
 

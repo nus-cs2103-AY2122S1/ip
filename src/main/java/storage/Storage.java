@@ -1,6 +1,5 @@
 package storage;
 
-import exception.DukeException;
 import exception.StorageException;
 import task.Deadline;
 import task.Event;
@@ -46,12 +45,7 @@ public class Storage {
 
     public List<Task> load() throws StorageException {
         initialiseFilePath();
-        List<String> taskLines;
-        try {
-            taskLines = readLines();
-        } catch (ArrayIndexOutOfBoundsException exception) {
-            throw new StorageException(String.format(UNABLE_TO_LOAD_PATH, taskFilePath));
-        }
+        List<String> taskLines = readLines();
         return decode(taskLines);
     }
 
@@ -81,34 +75,38 @@ public class Storage {
 
     public List<Task> decode(List<String> taskLines) throws StorageException {
         List<Task> savedTaskList = new ArrayList<>();
-        for (String stringTask: taskLines) {
+        for (String stringTask : taskLines) {
             String[] taskAsArray = stringTask.split(Task.SPLIT_TEMPLATE);
-            
+
             String keyword = taskAsArray[0];
             boolean isDone = taskAsArray[1].equals(Task.DONE);
             String desc = taskAsArray[2];
             LocalDate date;
             LocalTime time;
-            
-            switch (keyword) {
-                case Todo.KEYWORD:
-                    savedTaskList.add(new Todo(desc, isDone));
-                    break;
 
-                case Event.KEYWORD:
-                    date = LocalDate.parse(taskAsArray[3]);
-                    time = (taskAsArray.length == 4) ? null : LocalTime.parse(taskAsArray[4]);
-                    savedTaskList.add(new Event(desc, isDone, date, time));
-                    break;
+            try {
+                switch (keyword) {
+                    case Todo.KEYWORD:
+                        savedTaskList.add(new Todo(desc, isDone));
+                        break;
 
-                case Deadline.KEYWORD:
-                    date = LocalDate.parse(taskAsArray[3]);
-                    time = (taskAsArray.length == 4) ? null : LocalTime.parse(taskAsArray[4]);
-                    savedTaskList.add(new Deadline(desc, isDone, date, time));
-                    break;
+                    case Event.KEYWORD:
+                        date = LocalDate.parse(taskAsArray[3]);
+                        time = LocalTime.parse(taskAsArray[4]);
+                        savedTaskList.add(new Event(desc, isDone, date, time));
+                        break;
 
-                default:
-                    throw new StorageException(String.format(INVALID_TASK_FORMAT, stringTask));
+                    case Deadline.KEYWORD:
+                        date = LocalDate.parse(taskAsArray[3]);
+                        time = LocalTime.parse(taskAsArray[4]);
+                        savedTaskList.add(new Deadline(desc, isDone, date, time));
+                        break;
+
+                    default:
+                        throw new StorageException(String.format(INVALID_TASK_FORMAT, stringTask));
+                }
+            } catch (ArrayIndexOutOfBoundsException exception) {
+                throw new StorageException(String.format(INVALID_TASK_FORMAT, stringTask));
             }
         }
         return savedTaskList;

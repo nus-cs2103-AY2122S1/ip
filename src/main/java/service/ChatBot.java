@@ -25,6 +25,8 @@ public class ChatBot {
             "What can I do for you?";
 
     private final static String BYE = "Bye. Hope to see you again soon!";
+    
+    private final static String ERROR_ON_SAVE = "Error updating task file.";
 
     /**
      * Prints a greeting when program is first booted up.
@@ -50,6 +52,13 @@ public class ChatBot {
         if (!message.isBlank()) {
             print(LINE_SPLIT + '\n' + message + '\n' + LINE_SPLIT + '\n');
         }
+    }
+
+    /**
+     * Generates an error on save message.
+     */
+    public void errorOnSave() {
+        error(ERROR_ON_SAVE);
     }
 
     /**
