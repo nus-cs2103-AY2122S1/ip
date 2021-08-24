@@ -19,6 +19,6 @@ interface DukeCommandAction {
      * @param namedArgs The named arguments to the command.
      * @return If Duke should continue listening to commands.
      */
-    boolean apply(TaskList taskList, Ui ui, Storage storage,
+    void apply(TaskList taskList, Ui ui, Storage storage,
                   String arg, Map<String, String> namedArgs) throws InvalidCommandException;
 }

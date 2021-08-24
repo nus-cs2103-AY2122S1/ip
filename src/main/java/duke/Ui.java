@@ -16,10 +16,12 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private final Scanner scanner;
     private final PrintStream outputStream;
+    private boolean exit;
 
     public Ui(InputStream inputStream, PrintStream outputStream) {
         this.scanner = new Scanner(inputStream);
         this.outputStream = outputStream;
+        this.exit = false;
     }
 
     public String nextCommand() {
@@ -45,5 +47,13 @@ public class Ui {
         } catch (InvalidCommandException e) {
             e.printStackTrace();
         }
+    }
+
+    public void markExit() {
+        exit = true;
+    }
+
+    public boolean shouldContinue() {
+        return !exit;
     }
 }

@@ -34,8 +34,7 @@ public class Duke {
     public void start() {
         ui.printWelcomeMessage();
         ui.printHelp();
-        boolean shouldContinue = true;
-        do {
+        while (ui.shouldContinue()) {
             String commandStr = ui.nextCommand();
             DukeCommandWithArgs command = parser.parse(commandStr);
             if (command == null) {
@@ -43,12 +42,12 @@ public class Duke {
                 ui.outputLine(String.format("Unknown command: %s. Type \"help\" for a list of available commands.", commandStr));
             } else {
                 try {
-                    shouldContinue = command.runWith(taskList, ui, storage);
+                    command.runWith(taskList, ui, storage);
                 } catch (InvalidCommandException e) {
                     ui.outputLine(String.format("Error in \"%s\": %s\nType \"help %s\" to view proper usage of the command.", command.getBaseCommand().getName(), e.getMessage(), command.getBaseCommand().getName()));
                 }
             }
-        } while (shouldContinue);
+        }
         ui.printExitMessage();
     }
 }

@@ -26,7 +26,6 @@ public enum DukeCommand implements DukeCommandAction {
                         ui.outputLine(command.get().toDetailedString());
                     }
                 }
-                return true;
             }),
     LIST_TASKS("list",
             "List all tasks",
@@ -51,7 +50,6 @@ public enum DukeCommand implements DukeCommandAction {
                             }
                             ui.outputLine("");
                         });
-                return true;
             }),
     ADD_TASK("add",
             "Add a task (with optionally a deadline or a date)",
@@ -72,7 +70,6 @@ public enum DukeCommand implements DukeCommandAction {
                 taskList.addTask(task);
                 storage.saveTaskList(taskList);
                 ui.outputLine(String.format("Task added with title: %s", arg));
-                return true;
             }),
     DELETE_TASK("delete",
             "Delete a task",
@@ -82,12 +79,13 @@ public enum DukeCommand implements DukeCommandAction {
                 storage.saveTaskList(taskList);
                 ui.outputLine("I've removed the following task.");
                 ui.outputLine(task.toString());
-                return true;
             }),
     EXIT("bye",
             "Exit Duke",
             DukeCommandConfig.NO_ARGUMENTS,
-            (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> false),
+            (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
+                ui.markExit();
+            }),
     MARK_DONE("done",
             "Mark the task as done",
             new DukeCommandConfig(new DukeCommandArgument("index", "The position of the task in the list", DukeCommandArgumentType.REQUIRED), Map.of()),
@@ -101,7 +99,6 @@ public enum DukeCommand implements DukeCommandAction {
                     ui.outputLine("I've marked the following task as done!");
                 }
                 ui.outputLine(task.toString());
-                return true;
             });
 
     final String command;
@@ -166,9 +163,9 @@ public enum DukeCommand implements DukeCommandAction {
     }
 
     @Override
-    public boolean apply(TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) throws InvalidCommandException {
+    public void apply(TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) throws InvalidCommandException {
         config.assertCompatibilityWith(arg, namedArgs);
-        return action.apply(taskList, ui, storage, arg, namedArgs);
+        action.apply(taskList, ui, storage, arg, namedArgs);
     }
 
     @Override

@@ -18,8 +18,8 @@ public class DukeCommandWithArgs {
         this.namedArgs = namedArgs;
     }
 
-    public boolean runWith(TaskList taskList, Ui ui, Storage storage) throws InvalidCommandException {
-        return baseCommand.apply(taskList, ui, storage, positionalArg, namedArgs);
+    public void runWith(TaskList taskList, Ui ui, Storage storage) throws InvalidCommandException {
+        baseCommand.apply(taskList, ui, storage, positionalArg, namedArgs);
     }
 
     public DukeCommand getBaseCommand() {
