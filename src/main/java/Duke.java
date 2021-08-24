@@ -1,6 +1,16 @@
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Duke {
+
+    /** Path string to data of tasks to load/save */
+    private final static String PATH = "data/tasks.txt";
 
     /** Stores a list of tasks */
     private static ArrayList<Task> lst = new ArrayList<>();
@@ -226,16 +236,16 @@ public class Duke {
                         }
                         case DEADLINE: {
                             // Add new deadline
-                            String[] desc_date = user_input.split(" ", 2)[1].split(" /by ",2);
-                            Task t = new Deadline(desc_date[0], desc_date[1]);
+                            String desc_date = user_input.split(" ", 2)[1];
+                            Task t = Deadline.build(desc_date);
                             lst.add(t);
                             System.out.print(showTasksReply(c, t.toString()));
                             break;
                         }
                         case EVENT: {
                             // Add new event
-                            String[] desc_date = user_input.split(" ", 2)[1].split(" /at ",2);
-                            Task t = new Event(desc_date[0], desc_date[1]);
+                            String desc_date = user_input.split(" ", 2)[1];
+                            Task t = Event.build(desc_date);
                             lst.add(t);
                             System.out.print(showTasksReply(c, t.toString()));
                             break;
@@ -247,6 +257,69 @@ public class Duke {
                 // Invalid user input
                 System.out.print(reply(e.getMessage()));
             }
+        }
+    }
+
+    /**
+     * Loads tasks from task text file if exists, otherwise start new text file
+     */
+    private static void loadTasks() {
+        File tasks = new File(PATH);
+        if (tasks.exists()) {
+            // Read tasks from text file
+            Scanner s = null;
+            try {
+                s = new Scanner(tasks);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            while (s.hasNext()) {
+                // Parse string to get task type, status, and description
+                String regex = "\\[(?<type>[A-Z])\\]\\[(?<status>[X\\s])\\]\\s(?<desc>.*)";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(s.nextLine());
+
+                // Check task type, status, description
+                while (matcher.find()) {
+                    String type = matcher.group("type");
+                    String desc = matcher.group("desc");
+
+                    Task toAdd;
+                    if (type.equals("T")) {
+                        toAdd = new Todo(desc);
+                    } else if (type.equals("D")) {
+                        toAdd = Deadline.build(desc);
+                    } else {
+                        toAdd = Event.build(desc);
+                    }
+
+                    if (matcher.group("status").equals("X")) {
+                        toAdd.setDone();
+                    }
+                    lst.add(toAdd);
+                }
+            }
+        }
+    }
+
+    /**
+     * Saves tasks into a text file
+     */
+    private static void saveTasks() {
+        File file = new File(PATH);
+        try {
+            // Create file if not already existing
+            file.createNewFile();
+            FileWriter fw = new FileWriter(PATH);
+
+            // Write current task list into file
+            for (Task t : lst) {
+                fw.write(t.toString());
+                fw.write(System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -266,6 +339,13 @@ public class Duke {
         System.out.println("The name is\n" + logo);
         System.out.print(reply("This Pepper Jack, wassup!"));
 
+        // Load tasks from text file if exists
+        loadTasks();
+
+        // Start conversation with Pepper Jack
         startConvo();
+
+        // Save tasks
+        saveTasks();
     }
 }
