@@ -147,7 +147,7 @@ public class TaskList {
      */
     public void find(String keyword){
         ArrayList<Task> temp = new ArrayList<>(this.getList());
-        temp.removeIf(x -> !(x.toString().contains(keyword)));
+        temp.removeIf(x -> !(x.toString().contains(keyword))); // remove any task which does not contain keyword
         System.out.println("Here are the matching tasks in your list:");
         temp.forEach(x -> System.out.println((temp.indexOf(x) + 1) + ". " + x.toString()));
     }
