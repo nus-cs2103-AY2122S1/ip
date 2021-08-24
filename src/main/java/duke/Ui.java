@@ -33,18 +33,18 @@ public class Ui {
 
     public static void warningMissingDescription(String command) {
         switch (command) {
-            case "todo":
-                String todoMessage = "OOPS!!! The description of a todo cannot be empty.";
-                showToUser(LINE, todoMessage, LINE);
-                break;
-            case "deadline":
-                String deadlineMessage = "OOPS!!! The description of a deadline cannot be empty.";
-                showToUser(LINE, deadlineMessage, LINE);
-                break;
-            case "event":
-                String eventMessage = "OOPS!!! The description of an event cannot be empty.";
-                showToUser(LINE, eventMessage, LINE);
-                break;
+        case "todo":
+            String todoMessage = "OOPS!!! The description of a todo cannot be empty.";
+            showToUser(LINE, todoMessage, LINE);
+            break;
+        case "deadline":
+            String deadlineMessage = "OOPS!!! The description of a deadline cannot be empty.";
+            showToUser(LINE, deadlineMessage, LINE);
+            break;
+        case "event":
+            String eventMessage = "OOPS!!! The description of an event cannot be empty.";
+            showToUser(LINE, eventMessage, LINE);
+            break;
         }
     }
 
