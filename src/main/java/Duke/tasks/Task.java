@@ -1,4 +1,5 @@
-//Imported Partial Solution
+package Duke.tasks;
+
 public class Task {
     enum Type {
         T,

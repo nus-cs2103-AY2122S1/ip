@@ -1,3 +1,5 @@
+package Duke.tasks;
+
 public class ToDo extends Task{
     public ToDo(String description) {
         super(description, Task.Type.T);

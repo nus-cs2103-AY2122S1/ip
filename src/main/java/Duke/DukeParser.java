@@ -1,3 +1,9 @@
+package Duke;
+
+import Duke.classes.TaskList;
+import Duke.exceptions.DukeException;
+import Duke.tasks.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -76,14 +82,14 @@ public class DukeParser {
         LocalDate time = LocalDate.now();
 
         //Switch variables
-        Duke.Keywords key = Duke.Keywords.error;
+        Keywords key = Keywords.error;
         int index = 0;
 
         //Logic that looks for keywords
         if (str.equals("bye")) {
-            key = Duke.Keywords.bye;
+            key = Keywords.bye;
         } else if (str.equals("list")) {
-            key = Duke.Keywords.list;
+            key = Keywords.list;
         } else if (words.length > 1) {
             String temp = words[0];
             if (temp.equals("done")) {
@@ -92,7 +98,7 @@ public class DukeParser {
                     if (index < 0) {
                         throw new DukeException("!!! Please input a number greater than 0 !!!");
                     }
-                    key = Duke.Keywords.done;
+                    key = Keywords.done;
                 }
             } else if (temp.equals("delete")) {
                 if (checkForInt(words[1])) {
@@ -100,13 +106,13 @@ public class DukeParser {
                     if (index < 0) {
                         throw new DukeException("!!! Please input a number greater than 0 !!!");
                     }
-                    key = Duke.Keywords.delete;
+                    key = Keywords.delete;
                 }
             } else if (temp.equals("todo")) {
-                key = Duke.Keywords.todo;
+                key = Keywords.todo;
                 desc = str.replaceFirst("todo ", "");
             } else if (temp.equals("deadline")) {
-                key = Duke.Keywords.deadline;
+                key = Keywords.deadline;
                 List<String> postFilter = processDesc("/by", words);
                 desc = postFilter.get(0);
                 if (postFilter.get(1).equals("")) {
@@ -117,7 +123,7 @@ public class DukeParser {
                 time = LocalDate.parse(postFilter.get(1), standard);
 
             } else if (temp.equals("event")) {
-                key = Duke.Keywords.event;
+                key = Keywords.event;
                 List<String> postFilter = processDesc("/at", words);
                 desc = postFilter.get(0);
                 if (postFilter.get(1).equals("")) {
@@ -151,7 +157,7 @@ public class DukeParser {
                 ui.printTask(taskList);
                 break;
             case done:
-                if (index >= taskList.last()) {
+                if (index >= taskList.size()) {
                     throw new DukeException("!!! The number you input exceeds the size of the list !!!");
                 }
                 taskList.completeTask(index);
@@ -162,7 +168,7 @@ public class DukeParser {
                     throw new DukeException("!!! The number you input exceeds the size of the list !!!");
                 }
                 Task task = taskList.remove(index);
-                ui.removeTask(task, index);
+                ui.removeTask(task, taskList.size());
                 break;
             case bye:
                 return true;

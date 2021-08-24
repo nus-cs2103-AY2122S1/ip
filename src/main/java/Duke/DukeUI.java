@@ -1,3 +1,8 @@
+package Duke;
+
+import Duke.classes.TaskList;
+import Duke.tasks.Task;
+
 import java.util.List;
 
 public class DukeUI {
@@ -22,7 +27,7 @@ public class DukeUI {
      * Initial Greeting from Duke
      * Nullary Function that prints the intro message when called
      */
-    static void greetings() {
+    public static void greetings() {
         System.out.println(logo);
         printDivider();
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
@@ -43,7 +48,7 @@ public class DukeUI {
     /**
      * Unary Function that prints list of task
      *
-     * @param taskList List of tasks to print
+     * @param taskList List of Duke.tasks to print
      */
     static void printList(TaskList taskList) {
         printDivider();
@@ -92,7 +97,7 @@ public class DukeUI {
         printDivider();
         System.out.println("Got it. I've added this task: \n"
                 + "\t" + lst.get(lastItem).toString() + "\n"
-                + "Now you have " + lastItem + " tasks in the list.");
+                + "Now you have " + lst.size() + " tasks in the list.");
         printDivider();
     }
 
@@ -100,7 +105,7 @@ public class DukeUI {
      * TODO
      * @param str
      */
-    static void printError(String str) {
+    public static void printError(String str) {
         printDivider();
         System.out.println(str);
         printDivider();
@@ -109,7 +114,7 @@ public class DukeUI {
     /**
      * TODO
      */
-    static void printDateTimeError() {
+    public static void printDateTimeError() {
         printDivider();
         System.out.println("!!! Provide Date in yyyy-MM-dd format. !!!");
         printDivider();
