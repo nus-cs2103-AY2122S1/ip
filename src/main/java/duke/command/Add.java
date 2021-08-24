@@ -32,7 +32,7 @@ public class Add extends Command {
                 String message = "OOPS!!! The description of a todo cannot be empty.";
                 throw new EmptyDescriptionException(message);
             }
-            this.task = new Todo(temp.trim().substring(1));
+            this.task = new Todo(temp.trim());
         } else if (input.startsWith("deadline")) {
             String[] arr = input.split(" /by ");
             this.task = new Deadline(arr[0].substring(9), arr[1]);
