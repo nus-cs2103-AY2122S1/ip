@@ -46,6 +46,8 @@ public class Parser {
             return new CommandCheck(arguments);
         case (CommandBye.KEYWORD):
             return new CommandBye();
+        case (CommandFind.KEYWORD):
+            return new CommandFind(arguments);
         default:
             return new CommandHelp();
 

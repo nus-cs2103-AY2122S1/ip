@@ -50,8 +50,9 @@ public class CommandDeadline extends Command {
             }
             tl.addTask(newDeadline);
         } else {
-            throw new DukeException("Invalid argument for duke.command: deadline");
+            throw new DukeException("Invalid argument for command: deadline");
         }
     }
+
 
 }

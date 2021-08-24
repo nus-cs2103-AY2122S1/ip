@@ -5,32 +5,28 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
-public class CommandCheck extends Command {
-    public static final String KEYWORD = "check";
+public class CommandFind extends Command {
+    public static final String KEYWORD = "find";
+    private static final String ARG_FORMAT = "\\w+";
     private ArrayList<String> arguments;
 
 
-    public CommandCheck(ArrayList<String> arguments) {
+    public CommandFind(ArrayList<String> arguments) {
         this.arguments = arguments;
     }
 
     @Override
     public boolean isArgumentValid() {
-        try {
-            if (arguments.size() == 1) {
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate date = LocalDate.parse(arguments.get(0), dateFormatter);
-                return true;
-            } else {
-                return false;
-            }
-        } catch (DateTimeParseException e) {
+        if (arguments.size() == 1) {
+            Pattern pattern = Pattern.compile(ARG_FORMAT);
+            Matcher matcher = pattern.matcher(arguments.get(0));
+            return matcher.matches();
+        } else {
             return false;
         }
     }
@@ -38,9 +34,9 @@ public class CommandCheck extends Command {
     @Override
     public void execute(TaskList tl, Storage st, Ui ui) {
         if (isArgumentValid()) {
-            tl.printAllTasksOnDate(arguments.get(0));
+            tl.printAllTasksWith(arguments.get(0));
         } else {
-            throw new DukeException("Invalid argument for duke.command: check");
+            throw new DukeException("Invalid argument for command: find");
         }
     }
 

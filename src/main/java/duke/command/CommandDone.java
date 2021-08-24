@@ -41,7 +41,7 @@ public class CommandDone extends Command {
                 throw new DukeException("That task does not exist!");
             }
         } else {
-            throw new DukeException("Invalid argument for duke.command: done");
+            throw new DukeException("Invalid argument for command: done");
         }
     }
 

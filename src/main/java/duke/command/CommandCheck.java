@@ -40,7 +40,7 @@ public class CommandCheck extends Command {
         if (isArgumentValid()) {
             tl.printAllTasksOnDate(arguments.get(0));
         } else {
-            throw new DukeException("Invalid argument for duke.command: check");
+            throw new DukeException("Invalid argument for command: check");
         }
     }
 

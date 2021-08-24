@@ -49,7 +49,7 @@ public class CommandEvent extends Command {
             newEvent = new Event(arguments.get(0), arguments.get(2), arguments.get(3));
             tl.addTask(newEvent);
         } else {
-            throw new DukeException("Invalid argument for duke.command: event");
+            throw new DukeException("Invalid argument for command: event");
         }
     }
 

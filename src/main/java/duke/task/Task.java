@@ -35,6 +35,8 @@ public class Task {
 
     public String getDate() { return this.date; }
 
+    public String getDesc() { return this.description; }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);

@@ -42,7 +42,7 @@ public class CommandDelete extends Command {
                 throw new DukeException("That task does not exist!");
             }
         } else {
-            throw new DukeException("Invalid argument for duke.command: delete");
+            throw new DukeException("Invalid argument for command: delete");
         }
     }
 

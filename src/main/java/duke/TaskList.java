@@ -91,7 +91,7 @@ public class TaskList {
 
     public void removeTask(int i) {
         if (i > listOfTasks.size()) {
-            throw new DukeException("duke.task.Task does not exist!");
+            throw new DukeException("Task does not exist!");
         } else {
             listOfTasks.remove(i);
         }
@@ -144,6 +144,18 @@ public class TaskList {
 
         for (int i = 0; i < listOfTasks.size(); i++) {
             if (listOfTasks.get(i).getDate().contains(s)) {
+                System.out.println(counter + ". " + listOfTasks.get(i).toString());
+                counter++;
+            }
+        }
+    }
+
+    public void printAllTasksWith(String s) {
+        System.out.println("Here are the tasks in your list with the word: " + s + ":");
+        int counter = 1;
+
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            if (listOfTasks.get(i).getDesc().contains(s)) {
                 System.out.println(counter + ". " + listOfTasks.get(i).toString());
                 counter++;
             }
