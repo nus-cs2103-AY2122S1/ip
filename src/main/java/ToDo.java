@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class ToDo extends Task{
     private String taskName;
     private String type = "T";
@@ -11,8 +14,15 @@ public class ToDo extends Task{
     }
 
     public String showType() {
-        return "[" + type + "]";
+        return type;
     }
+    public String showWhen() { return ""; }
 
+    public String showTaskOnly() { return ""; }
 
+    public void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(textToAppend);
+        fw.close();
+    }
 }
