@@ -18,7 +18,7 @@ public class Duke {
         printer.PrintIntro();
         Storage storage = new Storage();
 
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = Storage.Load();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -103,7 +103,6 @@ public class Duke {
                     printer.PrintMessage(e.getMessage());
                 }
             }
-            System.out.println(tasks);
             storage.Save(tasks);
             input = sc.nextLine();
         }
