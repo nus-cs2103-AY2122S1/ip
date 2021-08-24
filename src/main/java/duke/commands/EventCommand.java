@@ -46,7 +46,7 @@ public class EventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int atIndex = userCommand.indexOf("/at");
-            if (userCommand.strip().length() < 6 || atIndex <= 6) {
+            if (userCommand.length() < 6 || atIndex <= 6) {
                 throw new IllegalArgumentException("Please add a description and/or date for your event!");
             }
 

@@ -42,7 +42,7 @@ public class TodoCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            if (userCommand.strip().length() < 5) {
+            if (userCommand.length() < 5) {
                 throw new IllegalArgumentException("Please add a description for your todo!");
             }
 
