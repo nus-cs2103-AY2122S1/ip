@@ -33,9 +33,9 @@ public class Ui {
         echo(line1 + line2);
     }
 
-    public void printAll(ArrayList<Task> tasks) {
+    public void printAll(ArrayList<Task> tasks, String heading) {
         System.out.println(div_line);
-        System.out.println(indent + "Here are the tasks in your list:");
+        System.out.println(indent + heading);
         for (int i = 1; i < tasks.size() + 1; i++) {
             System.out.println(indent + i + " " + tasks.get(i - 1));
         }

@@ -11,6 +11,12 @@ public class Parser {
             return new ByeCommand();
         } else if (cmd.equals("list")) {
             return new ListCommand();
+        } else if (arr[0].equals("find")) {
+            if (arr[0].length() == 1) {
+                throw new DukeException("Enter search keyword to find tasks");
+            } else {
+                return new FindCommand(arr[1]);
+            }
         } else if (arr[0].equals("done")) {
             if (arr.length == 1) {
                 throw new DukeException("Enter duke.task no. to complete the duke.task.");
