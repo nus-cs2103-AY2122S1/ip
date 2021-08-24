@@ -9,12 +9,21 @@ public class Event extends Task {
     private LocalDateTime localDtime;
     private LocalTime hour;
 
+    /**
+     * Constructor for Event class
+     * @param description for the activity
+     * @param s time the activity will take place
+     */
     public Event(String description, String s) {
         super(description);
         this.schedule = s; // accept "yyyy-mm-dd kkmm" format
         this.localDtime = LocalDateTime.parse(s.substring(1), DateTimeFormatter.ofPattern("uuuu-MM-dd kkmm"));
     }
 
+    /**
+     * toString method which returns a string representation of an event to be printed
+     * @return description of the event in a specific format
+     */
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd kkmm");
@@ -23,7 +32,10 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at:" + formatDateTime + ")";
     }
 
-
+    /**
+     * toStringConvert method which returns a string representation of an event to be printed in a file
+     * @return description of the event in a specific format, to write to a file;
+     */
     @Override
     public String toStringConvert(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd kkmm");

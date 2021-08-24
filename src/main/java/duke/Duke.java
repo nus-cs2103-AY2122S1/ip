@@ -9,6 +9,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke class
+     * @param filePath of a file which consists of a list of tasks to be loaded by Duke
+     */
     public Duke(String filePath){
         tasks = new TaskList();
         ui = new Ui(tasks);
@@ -20,10 +24,14 @@ public class Duke {
         }
     }
 
+    /**
+     * a method to get Duke started, consisting of greeting, file loading, listen and repond for inputs, update file,
+     * and farewell
+     */
     public void run(){
         ui.greet();
-        fileUpdater.load(); // scan for inputs and input each line to bot
-        ui.listenForInputs();
+        fileUpdater.load(); // scan for inputs in file and input each line to bot
+        ui.listenForInputs(); // scan for user's keyed input and interact accordingly
         fileUpdater.updateListFile();
         ui.goodbye();
 

@@ -11,7 +11,13 @@ public class FileUpdater {
     private File f;
     private TaskList lst;
 
-    FileUpdater(File f, TaskList lst) throws FileNotFoundException {
+    /**
+     * Constructor for a fileupdater class
+     * @param f, file to be read by Duke
+     * @param lst, tasklist for the list of tasks to be modified
+     * @throws FileNotFoundException
+     */
+    public FileUpdater(File f, TaskList lst) throws FileNotFoundException {
         this.f = f;
         this.lst = lst;
 
@@ -21,11 +27,17 @@ public class FileUpdater {
 
     }
 
-
+    /**
+     * method to return a file inputted into fileupdater
+     *
+     */
     public File getFile(){
         return this.f;
     }
 
+    /**
+     * method to rewrite a file to sync the file with the updated tasklist
+     */
     public void updateListFile(){
         String s ="";
         for(int i = 0; i < lst.size(); i++){
@@ -40,6 +52,10 @@ public class FileUpdater {
         }
     }
 
+    /**
+     * method to read a lines of string as a task and input it into the tasklist
+     * @param s a line of string in a file
+     */
     public void updateLine(String s){
         String fs = "";
         boolean isCompleted = false;
@@ -57,10 +73,16 @@ public class FileUpdater {
         }
     }
 
+    /**
+     * method to print error message when FileNotFoundException is caught
+     */
     public void showError(){
         System.out.println("file not found!");
     }
 
+    /**
+     * method to load a file, reading each lines as a series of tasks and update the tasklist correspondingly
+     */
     public void load(){
         try {
             Scanner sc = new Scanner(f);
@@ -72,7 +94,6 @@ public class FileUpdater {
             showError();
         }
     }
-
 
     public String cut(String s) {
         return s.substring(s.indexOf('|') + 2);

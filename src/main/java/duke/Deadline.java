@@ -8,6 +8,11 @@ public class Deadline extends Task {
     private String Dtime;
     private LocalDateTime localDtime;
 
+    /**
+     * Constructor for Deadline object
+     * @param description for the activity
+     * @param s, time the activity is due
+     */
     public Deadline(String description, String s) {
         super(description);
         this.Dtime = s; // accept "yyyy-mm-dd kkm" format
@@ -15,6 +20,10 @@ public class Deadline extends Task {
 
     }
 
+    /**
+     * toString method which returns
+     * @return description of the Deadline in a specific format
+     */
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd kkmm");
@@ -22,6 +31,10 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by:" + formatDateTime + ")";
     }
 
+    /**
+     * toStringConvert method which converts a deadline into a specific format for a file
+     * @return description for the deadline to write in a file
+     */
     @Override
     public String toStringConvert(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd kkmm");

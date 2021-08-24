@@ -2,6 +2,11 @@ package duke;
 public class InputChecker {
     public String input;
 
+    /**
+     * Constructor for an input checker
+     * @param s, the command keyed in by the user
+     * @throws DukeException
+     */
     public InputChecker(String s) throws DukeException{
         this.input = s;
 
@@ -28,6 +33,10 @@ public class InputChecker {
         }
     }
 
+    /**
+     * method to check what is keyed in by the user
+     * @return string of what the user has inputted to Duke
+     */
     public String showInput(){
         return this.input;
     }
