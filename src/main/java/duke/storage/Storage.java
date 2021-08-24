@@ -63,15 +63,15 @@ public class Storage {
     }
 
     /**
-     * add task to file.
+     * Updates tasks in storage.
      */
     public void updateTasks(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getAllTasks();
         try {
             FileWriter writer = new FileWriter(this.filePath);
             ArrayList<String> displayTasks = new ArrayList<>();
-            for (int i = 0; i < tasks.size(); i++) {
-                displayTasks.add(tasks.get(i).fileFormat());
+            for (Task task : tasks) {
+                displayTasks.add(task.fileFormat());
             }
             writer.write(String.join(String.format("%n"), displayTasks));
             writer.close();
