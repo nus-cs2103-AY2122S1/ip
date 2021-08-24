@@ -1,20 +1,8 @@
 package duke;
 
 import duke.logic.LCommandParser;
-import duke.logic.LPrintTask;
 import duke.logic.LStorage;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -31,30 +19,10 @@ public class Duke {
     }
 
     public void run() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello, I am\n" + logo);
-        System.out.println("What can I do for you today?");
-        System.out.println("------------------");
-        String input;
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNextLine()) {
-            input = sc.nextLine();
-            try {
-                LCommandParser commandParser = new LCommandParser(input, taskList, lStorage);
-                if (commandParser.willExit()) {
-                    return;
-                }
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
-            System.out.println("------------------");
+        Ui ui = new Ui();
+        while (!ui.willExit()) {
+            ui.checkInput(taskList, lStorage);
         }
-
-        sc.close();
     }
 
     public static void main(String[] args) {
