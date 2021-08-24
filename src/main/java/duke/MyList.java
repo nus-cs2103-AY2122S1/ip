@@ -93,6 +93,21 @@ public class MyList {
         }
     }
 
+    public void find(String keyword) {
+        int counter = 0;
+        Task[] matchingList = new Task[getListSize()];
+        for (int i = 0; i < getListSize(); i++) {
+            Task t = getTask(i);
+            String taskDescription = t.getDescription().toLowerCase();
+            if (taskDescription.contains(keyword.toLowerCase())) {
+                matchingList[i] = t;
+                counter++;
+            }
+        }
+        Ui.containsKeyword(counter);
+        Ui.containsKeywordTask(matchingList);
+    }
+
     /**
      * Method to load a task into the list.
      * This method does not print anything to the screen.
