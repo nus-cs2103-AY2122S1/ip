@@ -8,6 +8,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String taskToLine() {
+        return "T" + super.taskToLine();
+    }
+
+    @Override
     public String toString() {
         String description = super.toString();
         return "[T]" + description;

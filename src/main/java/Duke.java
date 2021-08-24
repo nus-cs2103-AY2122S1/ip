@@ -163,6 +163,8 @@ public class Duke {
 
         System.out.println(Message.greet());
 
+        TaskFile taskFile = new TaskFile("tasks.txt");
+
         String input = scanner.next();
 
         while (!input.equals("bye")) {

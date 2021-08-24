@@ -11,7 +11,7 @@ public class Task {
         this.isDone = isDone;
     }
 
-    private static Duke.TaskType inputTaskType(String[] data) throws InvalidCommandException {
+    public static Duke.TaskType inputTaskType(String[] data) throws InvalidCommandException {
         Duke.TaskType type = null;
         if (data.length < 3
                 || !(data[1].equals("0") || data[1].equals("1"))
@@ -41,6 +41,11 @@ public class Task {
                 throw new InvalidCommandException();
         }
         return type;
+    }
+
+    public String taskToLine() {
+        String isDone = this.isDone ? "1" : "0";
+        return String.format(" | %s | %s", isDone, this.description);
     }
 
     public static Task of(String[] data) {
