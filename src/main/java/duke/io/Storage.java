@@ -21,7 +21,11 @@ public class Storage {
         this.saveFile = new File(filepath);
     }
 
-    // returns false if there is no file, i.e. new user
+    /**
+     * Loads the taskList from save.csv
+     *
+     * @return false if the file does not exist, i.e. the user is a new user. true otherwise.
+     */
     public boolean load() {
         try {
             ArrayList<Task> taskList = new ArrayList<>();
@@ -49,6 +53,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the taskList into save.csv
+     *
+     * @param taskListContent The formatted string representing the tasks in the task list
+     * @throws DukeException Any exception caught that has to do with the I/O
+     */
     public void save(String taskListContent) throws DukeException {
         try {
             // create the file if it does not exist

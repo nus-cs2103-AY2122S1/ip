@@ -8,6 +8,13 @@ public class DeleteCommand extends Command {
         setCommandString("delete");
     }
 
+    /**
+     * Parses the user input for a taskNumber, or a condition.
+     * Then deletes the specified task, or all tasks matching the condition
+     *
+     * @param input Full user input
+     * @throws DukeException Any exception caught when executing this command
+     */
     @Override
     public void parse(String input) throws DukeException {
         String data = input.substring(getCommandLength()).strip();

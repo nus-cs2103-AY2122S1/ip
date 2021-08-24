@@ -7,28 +7,45 @@ import duke.Duke;
 public class Ui {
     private StringBuilder message = new StringBuilder();
 
-    // prints the message between two lines and resets the message
+    /**
+     * Prints the message stored in the StringBuilder between two line separators
+     */
     public void print() {
         String LINEBREAK = "_________________________________________\n";
         System.out.println(LINEBREAK + message + '\n' + LINEBREAK);
         resetMessage();
     }
 
+    /**
+     * Prints a message to prompt for user input
+     */
     public void prompt() {
         System.out.println("How may I help you?");
     }
 
-    // adds message to be printed in the specified color
+    /**
+     * Add a message to be added to the queue to be printed.
+     *
+     * @param message The message to be added
+     * @param color The color of the text of the message
+     */
     public void addMessage(String message, TextColor color) {
         this.message.append(color);
         this.message.append(message);
         this.message.append(TextColor.DEFAULT);
     }
 
+    /**
+     * Clears the message queue
+     */
     public void resetMessage() {
         message = new StringBuilder();
     }
 
+    /**
+     * Prints the startup message for when the user is determined to be new.
+     * Prints a command list in addition to greeting.
+     */
     public void greetNewUser() {
         addMessage("Hello, I'm iP Man! How may I help you?\n", TextColor.DEFAULT);
         addMessage("Supported commands: ", TextColor.DEFAULT);
@@ -53,6 +70,10 @@ public class Ui {
         prompt();
     }
 
+    /**
+     * Prints the startup message for when the user is determined to have used the app before.
+     * Prints the current list in addition to a greeting.
+     */
     public void greetReturningUser() {
         addMessage("Welcome back! How may I help you?\n", TextColor.DEFAULT);
         addMessage("Tasks in list:\n", TextColor.DEFAULT);

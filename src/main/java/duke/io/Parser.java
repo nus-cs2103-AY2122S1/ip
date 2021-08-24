@@ -4,6 +4,12 @@ import duke.exception.DukeException;
 import duke.command.Commands;
 
 public class Parser {
+    /**
+     * Parses the user input for the first word, then calls the appropriate function for the command
+     *
+     * @param input User input
+     * @throws DukeException Any error thrown by Duke when executing the command
+     */
     public void parse(String input) throws DukeException {
         String firstWord = input.split(" ")[0];
 

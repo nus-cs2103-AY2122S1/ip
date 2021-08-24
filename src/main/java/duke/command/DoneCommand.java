@@ -8,6 +8,13 @@ public class DoneCommand extends Command {
         setCommandString("done");
     }
 
+    /**
+     * Parses the user input for a taskNumber.
+     * Then marks the specified task as done.
+     *
+     * @param input Full user input
+     * @throws DukeException Any exception caught when executing this command
+     */
     @Override
     public void parse(String input) throws DukeException {
         String data = input.substring(getCommandLength()).strip();

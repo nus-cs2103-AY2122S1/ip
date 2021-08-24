@@ -9,6 +9,13 @@ public class ToDoCommand extends Command {
         setCommandString("todo");
     }
 
+    /**
+     * Parses the user input for a name,
+     * then creates the ToDo and adds it into the taskList
+     *
+     * @param input Full user input
+     * @throws DukeException Any exception caught when executing this command
+     */
     @Override
     public void parse(String input) throws DukeException {
         if (input.length() <= getCommandLength()) {
