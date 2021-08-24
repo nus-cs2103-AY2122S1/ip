@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.IOException;
 
 public class Ligma {
 
@@ -8,8 +9,10 @@ public class Ligma {
     }
     private static ArrayList<Task> tasks;
     private static int noOfTasks;
+    private static FileManager fileManager;
 
     private static boolean response(String command) {
+
         //returns true if bot should exit, i.e. command is bye
         try {
             if (command.equals("bye")) {
@@ -87,6 +90,12 @@ public class Ligma {
                     : Event.createEvent(desc);
 
             tasks.add(task);
+            try {
+                fileManager.saveTask(task);
+            } catch (IOException e) {
+                System.out.println("Failed to save task to storage: ");
+                System.out.println(task);
+            }
             noOfTasks++;
 
             System.out.println(PARTITION
@@ -108,8 +117,16 @@ public class Ligma {
         if (index == -1) {
             throw new InputMismatchException("Indicate index of item to be deleted.");
         }
+
         Task temp = tasks.remove(index);
+        try {
+            fileManager.deleteTask(temp);
+        } catch (IOException e) {
+            System.out.println("Failed to delete task from storage: ");
+            System.out.println(temp);
+        }
         noOfTasks--;
+
         String response = "\n Successfully deleted:\n " + temp
                 + String.format("\n You now have %d task(s).\n", noOfTasks);
         System.out.println(PARTITION + response + PARTITION);
@@ -119,9 +136,19 @@ public class Ligma {
         if (taskNo == -1) {
             throw new InputMismatchException("Indicate index of item to be marked as done.");
         }
-        tasks.get(taskNo).markAsDone();
+
+        Task task = tasks.get(taskNo);
+        task.markAsDone();
+        try {
+            fileManager.markDone(task);
+        } catch (IOException e) {
+            System.out.println("Failed to update task in storage: ");
+            System.out.println(task);
+        }
+
+
         System.out.println(PARTITION + "\n Successfully marked as done:\n "
-                + tasks.get(taskNo) + "\n" + PARTITION);
+                + task + "\n" + PARTITION);
     }
 
     public static void main(String[] args) {
@@ -129,7 +156,13 @@ public class Ligma {
                 + "\n Hello! I'm Ligma, Ligma Balls."
                 + "\n What can I do for you?\n" + PARTITION);
 
-        tasks = new ArrayList<>();
+        fileManager = new FileManager("./data/ligma.txt");
+
+        try {
+            tasks = fileManager.loadInTasks();
+        } catch (IOException e) {
+            System.out.println("Failed to load in tasks.");
+        }
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
