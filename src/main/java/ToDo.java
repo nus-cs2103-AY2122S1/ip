@@ -10,4 +10,11 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String toDataString(String delimiter) {
+        String tag = "T";
+        String done = super.isDone ? "1" : "0";
+        return String.join(delimiter, tag, done, super.description);
+    }
 }

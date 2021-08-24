@@ -16,4 +16,11 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    @Override
+    public String toDataString(String delimiter) {
+        String tag = "D";
+        String done = super.isDone ? "1" : "0";
+        return String.join(delimiter, tag, done, super.description, by);
+    }
 }
