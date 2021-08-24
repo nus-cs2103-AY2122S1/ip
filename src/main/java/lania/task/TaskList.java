@@ -1,6 +1,6 @@
-package lania;
+package lania.task;
 
-import lania.Task;
+import lania.task.Task;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package lania;
+package lania.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +10,7 @@ public class Event extends Task {
     protected LocalDateTime dateTime;
 
     /**
-     * Constructor for lania.Event. Takes in a String description and at.
+     * Constructor for lania.task.Event. Takes in a String description and at.
      * Initialises description and time of event.
      *
      * @param description The name of the event.
@@ -21,6 +21,10 @@ public class Event extends Task {
         this.at = at;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         this.dateTime = LocalDateTime.parse(at, formatter);
+    }
+
+    public String getStringFormat() {
+        return "E|" + this.getStatusIcon() + "|" + this.description + "|" + this.at + "\n";
     }
 
     @Override

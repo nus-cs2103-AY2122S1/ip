@@ -1,7 +1,10 @@
 package lania;
 
-import lania.Deadline;
-import lania.Event;
+import lania.task.Task;
+import lania.task.TaskList;
+import lania.task.Deadline;
+import lania.task.Event;
+import lania.task.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -51,20 +54,7 @@ public class Storage {
     public void save(TaskList taskArrayList) throws IOException{
         for (int i = 0; i < taskArrayList.size(); i++) {
             Task task = taskArrayList.get(i);
-            appendToFile(filePath, getStringFormat(task), i);
-        }
-    }
-
-    private String getStringFormat(Task t) {
-        if (t instanceof Todo) {
-            Todo temp = (Todo) t;
-            return "T|" + temp.getStatusIcon() + "|" + temp.description + "\n";
-        } else if (t instanceof Deadline) {
-            Deadline temp = (Deadline) t;
-            return "D|" + temp.getStatusIcon() + "|" + temp.description + "|" + temp.by + "\n";
-        } else {
-            Event temp = (Event) t;
-            return "E|" + temp.getStatusIcon() + "|" + temp.description + "|" + temp.at + "\n";
+            appendToFile(filePath, task.getStringFormat(), i);
         }
     }
 

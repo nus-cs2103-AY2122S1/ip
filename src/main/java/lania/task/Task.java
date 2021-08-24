@@ -1,6 +1,6 @@
-package lania;
+package lania.task;
 
-public class Task {
+public abstract class Task {
 
     /** String containing the name of task */
     protected String description;
@@ -8,7 +8,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for lania.Task. Takes in a String description.
+     * Constructor for lania.task.Task. Takes in a String description.
      * Initialises description and isDone to false.
      *
      * @param description The name of the task.
@@ -33,6 +33,8 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public abstract String getStringFormat();
 
     @Override
     public String toString() {
