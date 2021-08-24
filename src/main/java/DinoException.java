@@ -46,27 +46,18 @@ class TimeNotSpecifiedException extends DinoException {
     }
 }
 
-class NoSuchModeException extends DinoException {
-    public NoSuchModeException() {
-        super("🤨 Please enter a valid mode!\n" +
-                "You can enter either 'echo' or 'intelligent'.");
-    }
-}
-
 class TaskAlreadyDoneException extends DinoException {
     public TaskAlreadyDoneException() {
         super("🤨 Hey you have already done this task!");
     }
 }
 
-
-/*
-class TaskListFullException extends DinoException {
-    public TaskListFullException() {
-        super("😨 Hey you already have 100 tasks! Can't add more XD");
+class FormatNotUnderstoodException extends DinoException {
+    public FormatNotUnderstoodException (String input) {
+        super("😕 Check this line in your file:\n" + input + "\n" + "Did you format the task incorrectly?");
     }
 }
- */
+
 
 
 
