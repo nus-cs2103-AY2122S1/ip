@@ -39,6 +39,10 @@ public class Duke {
         new Duke(filePath).run();
     }
 
+    /**
+     * Solution adapted with minor modifications at 
+     * https://nus-cs2103-ay2122s1.github.io/website/schedule/week3/project.html#a-moreoop
+     */
     private void run() {
         ui.printGreeting();
         boolean isExit = false;
