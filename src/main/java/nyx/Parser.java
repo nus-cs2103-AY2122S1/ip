@@ -1,7 +1,9 @@
+package nyx;
+
 import java.io.IOException;
 
 public class Parser {
-    static String parse(String input, TaskList taskList, Storage dataManager) throws NyxException {
+    public static String parse(String input, TaskList taskList, Storage dataManager) throws NyxException {
         String[] splitInput = input.split(" ", 2);
         String command = splitInput[0];
         String info = "";

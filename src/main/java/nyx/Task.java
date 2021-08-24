@@ -1,3 +1,5 @@
+package nyx;
+
 public abstract class Task {
     private final String content;
     private boolean isDone;
@@ -17,11 +19,11 @@ public abstract class Task {
         return isDone ? 1 : 0;
     }
 
-    String getContent() {
+    public String getContent() {
         return this.content;
     }
 
-    void setDone() {
+    public void setDone() {
         this.isDone = true;
     }
 

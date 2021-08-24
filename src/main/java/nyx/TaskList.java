@@ -1,3 +1,5 @@
+package nyx;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -11,23 +13,23 @@ public class TaskList {
         this(new ArrayList<Task>());
     }
 
-    Task getTask(int index) {
+    public Task getTask(int index) {
         return tasks.get(index);
     }
 
-    int getNumTasks() {
+    public int getNumTasks() {
         return tasks.size();
     }
 
-    void addTask(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
     }
 
-    void removeTask(int index) {
+    public void removeTask(int index) {
         tasks.remove(index);
     }
 
-    boolean markDone(int index) {
+    public boolean markDone(int index) {
         if (tasks.isEmpty()) {
             return false;
         } else {
@@ -36,7 +38,7 @@ public class TaskList {
         }
     }
 
-    String genSaveFormat() {
+    public String genSaveFormat() {
         StringBuilder sb = new StringBuilder();
         tasks.stream().map(Task::dataFormat).forEach(sb::append);
         return sb.toString();

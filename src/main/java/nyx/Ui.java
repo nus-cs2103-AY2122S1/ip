@@ -1,3 +1,5 @@
+package nyx;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -9,7 +11,7 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
-    void displayStart() {
+    public void displayStart() {
         String logo = " __      _\n"
                 + "|   \\   | |__    __ __     __\n"
                 + "| |\\ \\  | |\\ \\  / / \\ \\   / /\n"
@@ -21,13 +23,13 @@ public class Ui {
 
     }
 
-    void displayOutput(String message) {
+    public void displayOutput(String message) {
         displayDivider();
         System.out.println("\t" + message.replace("\n", LS + "\t"));
         displayDivider();
     }
 
-    String readInput() {
+    public String readInput() {
         return sc.nextLine();
     }
 

@@ -1,3 +1,5 @@
+package nyx;
+
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
@@ -38,7 +40,7 @@ public class Storage {
         return task;
     }
 
-    ArrayList<Task> loadData() throws NyxException {
+    public ArrayList<Task> loadData() throws NyxException {
         ArrayList<Task> taskList= new ArrayList<Task>();
         try {
             if (data.exists()) {
@@ -57,13 +59,13 @@ public class Storage {
         }
     }
 
-    void overwriteData(TaskList taskList) throws IOException {
+    public void overwriteData(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(data.getAbsolutePath());
         fw.write(taskList.genSaveFormat());
         fw.close();
     }
 
-    void addData(Task task) throws IOException {
+    public void addData(Task task) throws IOException {
         FileWriter fw = new FileWriter(data.getAbsolutePath(), true);
         fw.write(task.dataFormat());
         fw.close();
