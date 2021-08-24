@@ -1,15 +1,20 @@
+package biscuit.tasks;
+
+import biscuit.exceptions.BiscuitException;
+import biscuit.tasks.Task;
+
 import java.util.List;
 
 /**
- * TaskList class contains the task list and operations to edit the list
+ * biscuit.tasks.TaskList class contains the task list and operations to edit the list
  */
 public class TaskList {
     private final List<Task> list;
 
     /**
-     * Constructor for TaskList class
+     * Constructor for biscuit.tasks.TaskList class
      *
-     * @param list Task List
+     * @param list biscuit.tasks.Task List
      */
     public TaskList(List<Task> list) {
         this.list = list;
@@ -18,7 +23,7 @@ public class TaskList {
     /**
      * Adds task to list
      *
-     * @param task Task to add
+     * @param task biscuit.tasks.Task to add
      * @throws BiscuitException Error when saving
      */
     public void addTask(Task task) throws BiscuitException {
@@ -38,7 +43,7 @@ public class TaskList {
      * Gets task at index
      *
      * @param index Index of task to get
-     * @return Task
+     * @return biscuit.tasks.Task
      */
     public Task getTask(int index) {
         return list.get(index);

@@ -1,10 +1,18 @@
+package biscuit.commands;
+
+import biscuit.exceptions.BiscuitException;
+import biscuit.storage.Storage;
+import biscuit.tasks.Task;
+import biscuit.tasks.TaskList;
+import biscuit.ui.Ui;
+
 /**
  * Delete command to delete task
  */
 public class DeleteCommand extends Command {
 
     /**
-     * Constructors for DeleteCommand
+     * Constructors for biscuit.commands.DeleteCommand
      *
      * @param userInput User input array with this structure: [command, details]
      */
@@ -15,9 +23,9 @@ public class DeleteCommand extends Command {
     /**
      * Delete specified task from list
      *
-     * @param taskList Task list
-     * @param ui       Ui to display
-     * @param storage  Storage to save to
+     * @param taskList biscuit.tasks.Task list
+     * @param ui       biscuit.ui.Ui to display
+     * @param storage  biscuit.storage.Storage to save to
      * @throws BiscuitException Invalid input by user
      */
     @Override

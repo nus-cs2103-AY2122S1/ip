@@ -1,10 +1,17 @@
+package biscuit.commands;
+
+import biscuit.exceptions.BiscuitException;
+import biscuit.storage.Storage;
+import biscuit.tasks.TaskList;
+import biscuit.ui.Ui;
+
 /**
- * Exit command to exit Biscuit
+ * Exit command to exit biscuit.Biscuit
  */
 public class ExitCommand extends Command {
 
     /**
-     * Constructors for ExitCommand
+     * Constructors for biscuit.commands.ExitCommand
      *
      * @param userInput User input array with this structure: [command, details]
      */
@@ -13,11 +20,11 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Exit from Biscuit
+     * Exit from biscuit.Biscuit
      *
-     * @param taskList Task list
-     * @param ui       Ui to display
-     * @param storage  Storage to save to
+     * @param taskList biscuit.tasks.Task list
+     * @param ui       biscuit.ui.Ui to display
+     * @param storage  biscuit.storage.Storage to save to
      * @throws BiscuitException Invalid input by user
      */
     @Override

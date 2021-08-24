@@ -1,14 +1,16 @@
+package biscuit.ui;
+
 import java.util.Scanner;
 
 /**
- * Ui class deals with interactions with the user
+ * biscuit.ui.Ui class deals with interactions with the user
  */
 public class Ui {
 
     Scanner scanner;
 
     /**
-     * Constructor for Ui class
+     * Constructor for biscuit.ui.Ui class
      */
     public Ui() {
         this.scanner = new Scanner(System.in);
@@ -42,7 +44,7 @@ public class Ui {
                         "████████████████████████████████████████\n";
 
         System.out.println("Woof from\n" + logo);
-        System.out.println("Woof! I'm Biscuit.\nWhat can I do for you?");
+        System.out.println("Woof! I'm biscuit.Biscuit.\nWhat can I do for you?");
         showLine();
     }
 

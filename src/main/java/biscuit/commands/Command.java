@@ -1,3 +1,10 @@
+package biscuit.commands;
+
+import biscuit.exceptions.BiscuitException;
+import biscuit.storage.Storage;
+import biscuit.tasks.TaskList;
+import biscuit.ui.Ui;
+
 /**
  * Abstract class for User Commands
  */
@@ -6,7 +13,7 @@ public abstract class Command {
     protected CommandType commandType;
     protected String[] userInput;
     /**
-     * Constructor for Command class
+     * Constructor for biscuit.commands.Command class
      *
      * @param commandType Type of command
      * @param userInput   User input array with this structure: [command, details]
@@ -19,9 +26,9 @@ public abstract class Command {
     /**
      * Execute command from userInput
      *
-     * @param taskList Task list
-     * @param ui       Ui to display
-     * @param storage  Storage to save to
+     * @param taskList biscuit.tasks.Task list
+     * @param ui       biscuit.ui.Ui to display
+     * @param storage  biscuit.storage.Storage to save to
      * @throws BiscuitException Invalid input by user
      */
     public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException;

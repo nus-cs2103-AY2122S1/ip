@@ -1,5 +1,10 @@
+package biscuit.parser;
+
+import biscuit.commands.*;
+import biscuit.exceptions.BiscuitException;
+
 /**
- * Parser class deals with making sense of the user command
+ * biscuit.parser.Parser class deals with making sense of the user command
  */
 public class Parser {
 
@@ -10,7 +15,7 @@ public class Parser {
      * Parse user input to get command
      *
      * @param userInput Input by user
-     * @return Command
+     * @return biscuit.commands.Command
      * @throws BiscuitException Invalid command by user
      */
     public static Command parse(String userInput) throws BiscuitException {

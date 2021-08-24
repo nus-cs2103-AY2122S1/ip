@@ -1,8 +1,10 @@
+package biscuit.tasks;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event class: For tasks that start at a specific time and ends at a specific time
+ * biscuit.tasks.Event class: For tasks that start at a specific time and ends at a specific time
  * e.g., team project meeting on 2/10/2019 2-4pm
  */
 public class Event extends Task {

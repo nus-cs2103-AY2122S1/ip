@@ -1,8 +1,10 @@
+package biscuit.tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline class: For tasks that need to be done before a specific date/time
+ * biscuit.tasks.Deadline class: For tasks that need to be done before a specific date/time
  * e.g., submit report by 11/10/2019 5pm
  */
 public class Deadline extends Task {

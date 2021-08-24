@@ -1,7 +1,16 @@
+package biscuit;
+
+import biscuit.commands.Command;
+import biscuit.exceptions.BiscuitException;
+import biscuit.parser.Parser;
+import biscuit.storage.Storage;
+import biscuit.tasks.TaskList;
+import biscuit.ui.Ui;
+
 import java.util.ArrayList;
 
 /**
- * Biscuit is a Personal Assistant Chatbot that helps a person to keep track of various things
+ * biscuit.Biscuit is a Personal Assistant Chatbot that helps a person to keep track of various things
  */
 public class Biscuit {
     private final Storage storage;

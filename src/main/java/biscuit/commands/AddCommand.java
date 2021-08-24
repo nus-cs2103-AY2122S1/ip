@@ -1,3 +1,10 @@
+package biscuit.commands;
+
+import biscuit.exceptions.BiscuitException;
+import biscuit.storage.Storage;
+import biscuit.tasks.*;
+import biscuit.ui.Ui;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,7 +16,7 @@ import java.time.format.DateTimeParseException;
 public class AddCommand extends Command {
 
     /**
-     * Constructors for AddCommand
+     * Constructors for biscuit.commands.AddCommand
      *
      * @param userInput User input array with this structure: [command, details]
      */
@@ -20,9 +27,9 @@ public class AddCommand extends Command {
     /**
      * Adds specified task into list
      *
-     * @param taskList Task list
-     * @param ui       Ui to display
-     * @param storage  Storage to save to
+     * @param taskList biscuit.tasks.Task list
+     * @param ui       biscuit.ui.Ui to display
+     * @param storage  biscuit.storage.Storage to save to
      * @throws BiscuitException Invalid input by user
      */
     @Override
@@ -52,7 +59,7 @@ public class AddCommand extends Command {
     /**
      * Creates deadline
      *
-     * @return Deadline
+     * @return biscuit.tasks.Deadline
      * @throws BiscuitException Invalid user input
      */
     private Deadline getDeadline() throws BiscuitException {
@@ -73,7 +80,7 @@ public class AddCommand extends Command {
     /**
      * Creates event
      *
-     * @return Event
+     * @return biscuit.tasks.Event
      * @throws BiscuitException Invalid user input
      */
     private Event getEvent() throws BiscuitException {
@@ -94,7 +101,7 @@ public class AddCommand extends Command {
     /**
      * Creates todo
      *
-     * @return ToDo
+     * @return biscuit.tasks.ToDo
      * @throws BiscuitException Invalid user input
      */
     private ToDo getToDo() {

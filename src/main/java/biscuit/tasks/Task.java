@@ -1,5 +1,7 @@
+package biscuit.tasks;
+
 /**
- * Task class representing a pending task a User has
+ * biscuit.tasks.Task class representing a pending task a User has
  */
 public class Task {
     protected boolean isDone = false;
@@ -26,7 +28,7 @@ public class Task {
     }
 
     /**
-     * Get box containing type of Task abbreviated by a letter
+     * Get box containing type of biscuit.tasks.Task abbreviated by a letter
      *
      * @return box containing task of Type
      */

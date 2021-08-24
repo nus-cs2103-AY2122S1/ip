@@ -1,10 +1,18 @@
+package biscuit.commands;
+
+import biscuit.exceptions.BiscuitException;
+import biscuit.storage.Storage;
+import biscuit.tasks.Task;
+import biscuit.tasks.TaskList;
+import biscuit.ui.Ui;
+
 /**
  * Done command to mark task as done
  */
 public class DoneCommand extends Command {
 
     /**
-     * Constructors for DoneCommand
+     * Constructors for biscuit.commands.DoneCommand
      *
      * @param userInput User input array with this structure: [command, details]
      */
@@ -15,9 +23,9 @@ public class DoneCommand extends Command {
     /**
      * Marks specified task as done
      *
-     * @param taskList Task list
-     * @param ui       Ui to display
-     * @param storage  Storage to save to
+     * @param taskList biscuit.tasks.Task list
+     * @param ui       biscuit.ui.Ui to display
+     * @param storage  biscuit.storage.Storage to save to
      * @throws BiscuitException Invalid input by user
      */
     @Override

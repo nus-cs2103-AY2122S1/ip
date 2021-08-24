@@ -1,3 +1,11 @@
+package biscuit.storage;
+
+import biscuit.exceptions.BiscuitException;
+import biscuit.tasks.Deadline;
+import biscuit.tasks.Event;
+import biscuit.tasks.Task;
+import biscuit.tasks.ToDo;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +25,7 @@ public class Storage {
     private final ArrayList<Task> list;
 
     /**
-     * Constructor for Storage
+     * Constructor for biscuit.storage.Storage
      *
      * @param filePath path to file
      */

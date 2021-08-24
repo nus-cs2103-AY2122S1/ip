@@ -1,5 +1,7 @@
+package biscuit.tasks;
+
 /**
- * ToDo class: For tasks without any date/time attached to it
+ * biscuit.tasks.ToDo class: For tasks without any date/time attached to it
  * e.g., visit new theme park
  */
 public class ToDo extends Task {
