@@ -43,21 +43,24 @@ public class Storage {
         File f = new File(filePath);
         if (f.exists()) {
             Scanner sc = new Scanner(f);
+
             while (sc.hasNext()) {
                 String t = sc.nextLine();
                 String[] task = t.split("\\|");
+
                 switch (task[0]) {
                 case "T":
                     items.add(new Todo(task[2], task[1].equals("1")));
                     break;
 
                 case "E":
-                    items.add(new Event(task[2], task[1].equals("1"), LocalDateTime.parse(task[3], outputFormatter)));
+                    items.add(new Event(task[2], task[1].equals("1"),
+                            LocalDateTime.parse(task[3], outputFormatter)));
                     break;
 
                 case "D":
-                    items.add(
-                            new Deadline(task[2], task[1].equals("1"), LocalDateTime.parse(task[3], outputFormatter)));
+                    items.add(new Deadline(task[2], task[1].equals("1"),
+                            LocalDateTime.parse(task[3], outputFormatter)));
                     break;
 
                 default:
