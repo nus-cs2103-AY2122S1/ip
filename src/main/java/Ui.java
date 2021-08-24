@@ -49,6 +49,10 @@ public class Ui {
         System.out.println("\t \t" + taskDone.toString());
     }
 
+    public void displayListOfTasks(TaskList taskList) {
+        System.out.println(taskList.toString());
+    }
+
     public void invalidCommand() throws DukeException {
         String errorMessage = "\t Sorry I do not understand this command \n";
         errorMessage += "\t Please use one of the following commands: \n";
