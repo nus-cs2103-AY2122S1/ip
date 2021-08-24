@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Todo extends Task {
     public Todo(String description) throws DukeException {
         super(description);
@@ -9,5 +12,9 @@ public class Todo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    public void writeToFile(FileWriter myWriter) throws IOException {
+        myWriter.write("todo" + description);
     }
 }
