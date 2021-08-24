@@ -1,6 +1,7 @@
 package commands;
 import tasks.Task;
 import tasks.TaskList;
+import exceptions.DukeException;
 
 public class DeleteCommand extends Command {
     private final int taskNumber;
@@ -12,8 +13,9 @@ public class DeleteCommand extends Command {
     }
 
     public String execute(TaskList taskList) throws DukeException {
-        if (this.taskNumber > taskList.getNumOfTasks()) {
-            throw new DukeException("OOPS!!! Please choose a smaller number :-(");
+        boolean isInputValid = this.taskNumber <= taskList.getNumOfTasks();
+        if (isInputValid) {
+            throw new DukeException("OOPS!!! Please choose a smaller number!");
         }
         Task task = taskList.getTask(this.taskNumber);
         taskList.remove(this.taskNumber);

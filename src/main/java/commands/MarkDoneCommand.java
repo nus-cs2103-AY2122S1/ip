@@ -1,6 +1,7 @@
 package commands;
 import tasks.Task;
 import tasks.TaskList;
+import exceptions.DukeException;
 
 public class MarkDoneCommand extends Command {
     private final int taskNumber;
@@ -11,12 +12,13 @@ public class MarkDoneCommand extends Command {
         this.taskNumber = Integer.parseInt(intString);
     }
 
-    public String execute(TaskList taskManager) throws DukeException {
-        if (this.taskNumber > taskManager.getNumOfTasks()) {
-            throw new DukeException("OOPS!!! Please choose a smaller number :-(");
+    public String execute(TaskList taskList) throws DukeException {
+        boolean isInputValid = this.taskNumber <= taskList.getNumOfTasks();
+        if (isInputValid) {
+            throw new DukeException("OOPS!!! Please choose a smaller number!");
         }
-        taskManager.markAsDone(this.taskNumber);
-        Task task = taskManager.getTask(this.taskNumber);
+        taskList.markAsDone(this.taskNumber);
+        Task task = taskList.getTask(this.taskNumber);
         return "Nice! I've marked this task as done:\n\t"
                 + task.toString();
     }

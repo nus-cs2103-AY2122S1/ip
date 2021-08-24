@@ -1,4 +1,5 @@
 import commands.*;
+import exceptions.DukeException;
 
 public class Parser {
     public Command getCommand(String userInput) throws DukeException {

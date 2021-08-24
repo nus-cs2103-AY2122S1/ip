@@ -1,7 +1,5 @@
 package tasks;
 
-import tasks.Task;
-
 import java.util.ArrayList;
 
 public class TaskList {
@@ -14,6 +12,18 @@ public class TaskList {
     public boolean addTask(Task task) {
         tasks.add(task);
         return true;
+    }
+
+    public TaskList findTasks(String keyword) {
+        TaskList output = new TaskList();
+        for (Task t : this.tasks) {
+            String taskString = t.toString();
+            boolean isKeywordFound = taskString.contains(keyword);
+            if (isKeywordFound) {
+                output.addTask(t);
+            }
+        }
+        return output;
     }
 
     public int getNumOfTasks() {
@@ -36,6 +46,7 @@ public class TaskList {
 
     @Override
     public String toString() {
+        // Empty task list will print nothing
         StringBuilder listString = new StringBuilder();
         int numTasks = tasks.size();
         for (int i = 0; i < numTasks; i++) {

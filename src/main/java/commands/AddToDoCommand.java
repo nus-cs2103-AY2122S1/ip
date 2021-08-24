@@ -1,6 +1,6 @@
 package commands;
 import tasks.ToDoTask;
-
+import exceptions.DukeException;
 
 public class AddToDoCommand extends AddCommand {
     public static final String KEYWORD = "todo";
