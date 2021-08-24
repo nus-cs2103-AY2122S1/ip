@@ -9,13 +9,16 @@ import duke.io.TextColor;
 import duke.exception.DukeException;
 
 public class Duke {
-    // you can probably make a static ui, static parser, static storage
-    // then everything references that static thing
     public static TaskList taskList = new TaskList();
     public static Parser parser = new Parser();
     public static Storage storage = new Storage("save.csv");
     public static Ui ui = new Ui();
 
+    /**
+     * The main logic of the program. Handles initialising and user input.
+     *
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -42,6 +45,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Prints a goodbye message and exits the application.
+     */
     public static void exit() {
         ui.addMessage("Bye. Hope to see you again soon!", TextColor.DEFAULT);
         ui.print();

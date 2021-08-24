@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.time.LocalDate;
-import duke.io.TextColor;
 
 public class Event extends Task {
     private LocalDate date;
@@ -11,10 +10,22 @@ public class Event extends Task {
         this.date = date;
     }
 
+    /**
+     * Returns whether the event is happening today.
+     *
+     * @return true if the date is today. False otherwise.
+     */
+    @Override
     public boolean isToday() {
         return date.equals(LocalDate.now());
     }
 
+    /**
+     * Loads an event from data parsed from the save file
+     *
+     * @param loadData A line from the csv, split by commas
+     * @return Event created from provided data
+     */
     public static Event load(String[] loadData) {
         boolean done = loadData[1].equals("o");
         String name = loadData[2];
@@ -28,28 +39,31 @@ public class Event extends Task {
         return event;
     }
 
+    /**
+     * Returns whether the event has passed.
+     *
+     * @return true if the date is before today. False otherwise.
+     */
     @Override
     public boolean isExpired() {
         return date.isBefore(LocalDate.now());
     }
 
-    @Override
-    public TextColor getListColor() {
-        return isDone()
-                ? TextColor.DEFAULT
-                : isToday()
-                ? TextColor.YELLOW
-                : isExpired()
-                ? TextColor.RED
-                : TextColor.DEFAULT;
-    }
-
-    // prints in red if the deadline is expired, yellow if deadline is today
+    /**
+     * Returns a string representation of the event and its data
+     *
+     * @return string representation of the event
+     */
     @Override
     public String toString() {
         return "[E] " + super.toString() + " (at: " + date + ")";
     }
 
+    /**
+     * Returns a string representing the event compliant to the saveFile format
+     *
+     * @return String to be saved as a line in save.csv
+     */
     @Override
     public String getSaveString() {
         return "e," + super.getSaveString() + "," + date;

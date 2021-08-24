@@ -11,6 +11,13 @@ public class EventCommand extends Command {
         setCommandString("event");
     }
 
+    /**
+     * Parses the user input for a name and a date,
+     * then creates the event and adds it into the taskList
+     *
+     * @param input Full user input
+     * @throws DukeException Any exception caught when executing this command
+     */
     @Override
     public void parse(String input) throws DukeException {
         if (input.length() <= getCommandLength()) {

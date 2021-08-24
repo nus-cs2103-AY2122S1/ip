@@ -11,10 +11,22 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    /**
+     * Returns whether the deadline is today.
+     *
+     * @return true if the date is today. False otherwise.
+     */
+    @Override
     public boolean isToday() {
         return date.equals(LocalDate.now());
     }
 
+    /**
+     * Loads a deadline from data parsed from the save file
+     *
+     * @param loadData A line from the csv, split by commas
+     * @return Deadline created from provided data
+     */
     public static Deadline load(String[] loadData) {
         boolean done = loadData[1].equals("o");
         String name = loadData[2];
@@ -28,28 +40,31 @@ public class Deadline extends Task {
         return deadline;
     }
 
+    /**
+     * Returns whether the deadline has passed.
+     *
+     * @return true if the date is before today. False otherwise.
+     */
     @Override
     public boolean isExpired() {
         return date.isBefore(LocalDate.now());
     }
 
-    @Override
-    public TextColor getListColor() {
-        return isDone()
-                ? TextColor.DEFAULT
-                : isToday()
-                ? TextColor.YELLOW
-                : isExpired()
-                ? TextColor.RED
-                : TextColor.DEFAULT;
-    }
-
-    // prints in red if the deadline is expired, yellow if deadline is today
+    /**
+     * Returns a string representation of the deadline and its data
+     *
+     * @return string representation of the deadline
+     */
     @Override
     public String toString() {
         return "[D] " + super.toString() + " (by: " + date + ")";
     }
 
+    /**
+     * Returns a string representing the deadline compliant to the saveFile format
+     *
+     * @return String to be saved as a line in save.csv
+     */
     @Override
     public String getSaveString() {
         return "d," + super.getSaveString() + "," + date;

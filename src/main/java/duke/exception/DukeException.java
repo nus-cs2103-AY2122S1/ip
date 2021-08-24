@@ -8,6 +8,9 @@ public class DukeException extends Exception {
         super(message);
     }
 
+    /**
+     * Clears any queued message and prints the error message in red instead
+     */
     public void displayError() {
         Duke.ui.resetMessage();
         Duke.ui.addMessage("Oops! Something went wrong :(\n", TextColor.DEFAULT);

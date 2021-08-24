@@ -11,6 +11,13 @@ public class DeadlineCommand extends Command {
         setCommandString("deadline");
     }
 
+    /**
+     * Parses the user input for a name and a date,
+     * then creates the deadline and adds it into the taskList
+     *
+     * @param input Full user input
+     * @throws DukeException Any exception caught when executing this command
+     */
     @Override
     public void parse(String input) throws DukeException {
         if (input.length() <= getCommandLength()) {
