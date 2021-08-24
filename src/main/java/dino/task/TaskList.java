@@ -1,5 +1,6 @@
 package dino.task;
 
+import java.util.ArrayList;
 import java.util.List;
 import dino.exception.*;
 
@@ -55,5 +56,21 @@ public class TaskList {
         }
     }
 
+    public void searchKeyword(String keyword) throws TaskNotFoundException {
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task task: taskList) {
+            if (task.getDescription().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        if (matchingTasks.isEmpty()) {
+            throw new TaskNotFoundException(keyword);
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                System.out.println((i + 1) + ". " + matchingTasks.get(i));
+            }
+        }
+    }
 
 }

@@ -15,6 +15,8 @@ public class Parser {
             return new MarkCommand(input, markType);
         } else if (type.equals("list")) {
             return new ListCommand();
+        } else if (type.equals("find")) {
+            return new FindCommand(input);
         } else {
             throw new InvalidInputException();
         }
