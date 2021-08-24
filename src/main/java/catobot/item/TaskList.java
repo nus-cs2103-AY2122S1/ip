@@ -1,6 +1,5 @@
 package catobot.item;
 
-import catobot.exception.BotException;
 import catobot.exception.EmptyTaskListException;
 import catobot.exception.OutOfBoundException;
 

@@ -8,15 +8,15 @@ import java.util.Scanner;
  * Represents the User Interface.
  */
 public class Ui {
-    /** The Scanner to receive input. */
-    private final Scanner sc;
     private static final String name = "catobot.Catobot";
     private static final String banner = "(=^^=)(=^^=)(=^^=)(=^^=)";
-
     private static final String greeting
             = "Hello I am " + name + " (>^^<)\n    What can I do for you meow?";
     private static final String byeMessage
             = "Bye meow! I will always wait here meow(>^^<)";
+    
+    /** The Scanner to receive input. */
+    private final Scanner sc;
 
     /**
      * Constructor for Ui.
@@ -26,7 +26,7 @@ public class Ui {
     }
 
     /**
-     * Respond to the user.
+     * Responds to the user.
      *
      * @param message The key messages to be sent to the user.
      */
@@ -43,7 +43,7 @@ public class Ui {
     }
 
     /**
-     * Read the input from users.
+     * Reads the input from users.
      *
      * @return The next line content read from users.
      */
