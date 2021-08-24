@@ -6,6 +6,9 @@ import java.nio.file.Files;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -68,6 +71,8 @@ public class Duke {
             System.out.printf("You have %d task(s) in the list.\n\n", taskList.size());
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("Invalid format. Please try again.\n");
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter the date with format [yyyy-mm-dd].\n");
         }
     }
 
@@ -90,6 +95,8 @@ public class Duke {
             System.out.printf("You have %d task(s) in the list.\n\n", taskList.size());
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("Invalid format. Please try again.\n");
+        }  catch (DateTimeParseException e) {
+        throw new DukeException("Please enter the date and time with format [yyyy-mm-dd HH:mm].\n");
         }
     }
 
@@ -240,12 +247,12 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n\n";
         String greeting = "Hello! I'm Duke.\n" + "What can I do for you? :)";
         String usage = "Usage:\n"
-                + "list                                   - show current tasks\n"
-                + "todo [Description]                     - add todo\n"
-                + "deadline [Description] /by [Date/Time] - add deadline\n"
-                + "event [Description] /at [Date/Time]    - add event\n"
-                + "done [Task Number]                     - mark task as done\n"
-                + "bye                                    - say goodbye\n";
+                + "list                                         - show current tasks\n"
+                + "todo [Description]                           - add todo\n"
+                + "deadline [Description] /by [yyyy-mm-dd]      - add deadline\n"
+                + "event [Description] /at [yyyy-mm-dd HH:mm]   - add event\n"
+                + "done [Task Number]                           - mark task as done\n"
+                + "bye                                          - say goodbye\n";
         System.out.println(logo + greeting + "\n"
                 + usage + "\n");
         try {
@@ -257,7 +264,5 @@ public class Duke {
         } catch (Exception e) {
             System.out.println(e);
         }
-
     }
-
 }
