@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Task;
-
 public class TaskTest {
     private class TaskStub extends Task {
         public TaskStub(String description) {

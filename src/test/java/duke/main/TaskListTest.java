@@ -2,19 +2,19 @@ package duke.main;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.task.Event;
-import duke.task.Task;
 import org.junit.jupiter.api.Test;
 
-import duke.main.TaskList;
+import duke.task.Task;
 
 public class TaskListTest {
     private class TaskStub extends Task {
         private String description;
+
         public TaskStub(String description) {
             super(description);
             this.description = description;
         }
+
         @Override
         public String toString() {
             return this.description;

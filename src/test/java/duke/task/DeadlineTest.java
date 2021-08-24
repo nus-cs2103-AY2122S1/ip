@@ -40,7 +40,7 @@ public class DeadlineTest {
     @Test
     public void setDeadline_invalidDescriptionOfDeadline_invalidParamExceptionThrown() {
         try {
-            Deadline.setDeadline("Finish math homework /by Tuesday").toString();
+            Deadline.setDeadline("Finish math homework /by Tuesday");
             fail();
         } catch (InvalidParamException e) {
             assertEquals("\n\nThe deadline should be a valid date in the form: yyyy-mm-dd\n" + "i.e. 2021-12-25",

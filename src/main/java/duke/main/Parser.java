@@ -78,6 +78,7 @@ public class Parser {
      */
     private boolean alterTask(String input, Parser.TaskAction action) {
         try {
+
             Task taskToBeAltered;
 
             int index = Integer.parseInt(input.substring(action.substringIndex)) - 1;
@@ -93,6 +94,7 @@ public class Parser {
             System.out.println("Output:\n\nThis task is successfully " + action.successMessage + ":\n\n"
                     + "    " + taskToBeAltered);
             return true;
+
         } catch (StringIndexOutOfBoundsException | NumberFormatException e1) {
 
             System.out.println("Output: Please specify which task you would like to have\n"
@@ -150,8 +152,8 @@ public class Parser {
         // If there was no error, then add task. Else, skip this to get input again.
         if (newTask != null) {
             taskList.addTask(newTask);
-            System.out.println("Output:\n\nYou have successfully added the following task:\n\n" +
-                    "    " + newTask);
+            System.out.println("Output:\n\nYou have successfully added the following task:\n\n"
+                    + "    " + newTask);
             taskList.printNumberOfTasks();
         }
     }
