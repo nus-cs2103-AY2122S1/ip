@@ -78,7 +78,7 @@ public class Ui {
     }
 
     /**
-     * Prints out the tasklist.
+     * Prints out the taskList.
      */
     public void showList(TaskList taskList) {
         System.out.println(line);

@@ -1,21 +1,19 @@
 package duke.command;
 
 import duke.data.TaskList;
-import duke.data.exception.DukeException;
 import duke.data.task.Deadline;
 import duke.storage.Storage;
 import duke.ui.Ui;
-
-import java.time.LocalDateTime;
 
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
     private final Deadline newTask;
 
-    public DeadlineCommand(String description, LocalDateTime by) {
-        this(new Deadline(description, by));
-    }
-
+    /**
+     * Constructs a DeadlineCommand that will produce the given Deadline Task once executed.
+     *
+     * @param newTask The Deadline task to be generated.
+     */
     public DeadlineCommand(Deadline newTask){
         this.newTask = newTask;
     }

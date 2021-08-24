@@ -1,21 +1,19 @@
 package duke.command;
 
 import duke.data.TaskList;
-import duke.data.exception.DukeException;
 import duke.data.task.Event;
 import duke.storage.Storage;
 import duke.ui.Ui;
-
-import java.time.LocalDateTime;
 
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
     private final Event newTask;
 
-    public EventCommand(String description, LocalDateTime at) {
-        this(new Event(description, at));
-    }
-
+    /**
+     * Constructs an EventCommand that will produce the given Event Task once executed.
+     *
+     * @param newTask The Event task to be generated.
+     */
     public EventCommand(Event newTask){
         this.newTask = newTask;
     }

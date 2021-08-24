@@ -77,7 +77,7 @@ public class Storage {
                     eventTask.markAsDone();
                 }
                 storageList.add(eventTask);
-            } // Else invalid data, do nothing.
+            }
         } catch (DateTimeParseException e) {
             // Invalid data, do nothing.
         }
@@ -93,7 +93,7 @@ public class Storage {
                     deadlineTask.markAsDone();
                 }
                 storageList.add(deadlineTask);
-            } // Else, invalid data, do nothing.
+            }
         } catch (DateTimeParseException e) {
             // Invalid data, do nothing.
         }
