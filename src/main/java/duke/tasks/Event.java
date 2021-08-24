@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import duke.tasks.Task;
-
 public class Event extends Task {
     protected final String eventDetails;
 
