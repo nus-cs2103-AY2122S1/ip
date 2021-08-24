@@ -1,6 +1,7 @@
 package jarvis.action;
 
 import jarvis.exception.JarvisException;
+import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 
 public abstract class Action {
@@ -26,5 +27,5 @@ public abstract class Action {
         }
     }
 
-    public abstract void execute(TaskList taskList) throws JarvisException;
+    public abstract void execute(TaskList taskList, Storage storage) throws JarvisException;
 }

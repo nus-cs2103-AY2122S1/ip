@@ -3,7 +3,11 @@ package jarvis.task;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> taskList = new ArrayList<>();
+    private ArrayList<Task> taskList;
+
+    public TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
+    }
 
     public Todo addTodo(String todoDescription) {
         Todo todo = new Todo(todoDescription);
@@ -57,6 +61,17 @@ public class TaskList {
                     i < taskList.size() - 1 ? "\n" : ""
             );
             stringBuilder.append(task);
+        }
+
+        return stringBuilder.toString();
+    }
+
+    public String toStorageFormatString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Task task: taskList) {
+            stringBuilder.append(task.toStorageFormatString());
+            stringBuilder.append(System.lineSeparator());
         }
 
         return stringBuilder.toString();

@@ -5,6 +5,7 @@ import jarvis.exception.JarvisException;
 import jarvis.exception.TaskListEmptyException;
 import jarvis.exception.TaskNotFoundException;
 import jarvis.output.Output;
+import jarvis.storage.Storage;
 import jarvis.task.Task;
 import jarvis.task.TaskList;
 
@@ -20,7 +21,7 @@ public class DeleteAction extends Action {
      }
 
     @Override
-    public void execute(TaskList taskList) throws JarvisException {
+    public void execute(TaskList taskList, Storage storage) throws JarvisException {
         if (taskList.getTaskListSize() == 0) {
             throw new TaskListEmptyException();
         }
@@ -28,6 +29,7 @@ public class DeleteAction extends Action {
             throw new TaskNotFoundException();
         }
         Task task = taskList.deleteTask(taskIndex);
+        storage.rewriteStorageFile(taskList);
         Output.showTaskDeletedMessage(task, taskList);
     }
 }
