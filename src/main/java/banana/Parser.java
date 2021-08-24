@@ -26,7 +26,7 @@ public class Parser {
     /**
      * Gets the user input.
      *
-     * @return the input.
+     * @return the user input.
      */
     public String getInput() {
         return input;
