@@ -1,6 +1,11 @@
 package duke;
 
-import duke.command.*;
+import duke.command.InputTypes;
+import duke.command.Parser;
+import duke.command.Storage;
+import duke.command.TaskList;
+import duke.command.Ui;
+
 import java.util.Scanner;
 
 public class Duke {

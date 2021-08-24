@@ -8,6 +8,7 @@ import duke.task.Todo;
 public class Parser {
     private static final int MIN_DELETE_ITEM_LENGTH = 7;
     private static final int MIN_DONE_ITEM_LENGTH = 5;
+
     public static boolean isBye(String task) {
         return task.equals(InputTypes.BYE.getValue());
     }

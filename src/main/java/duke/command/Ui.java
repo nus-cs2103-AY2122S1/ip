@@ -10,7 +10,7 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    public Ui (TaskList taskList) {
+    public Ui(TaskList taskList) {
         this.taskList = taskList;
     }
 
