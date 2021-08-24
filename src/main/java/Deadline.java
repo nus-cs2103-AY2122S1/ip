@@ -12,7 +12,7 @@ public class Deadline extends Task {
     private DateTimeFormatter saveFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public Deadline(String desc, String deadline) throws DukeException {
-        super(desc);
+        super(desc.trim());
         try {
             Date date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(deadline);
             LocalDateTime newDT = new java.sql.Timestamp(date.getTime()).toLocalDateTime();
@@ -23,7 +23,7 @@ public class Deadline extends Task {
     }
 
     public Deadline(String desc, String deadline, boolean isDone) throws DukeException {
-        super(desc, isDone);
+        super(desc.trim(), isDone);
         try {
             Date date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(deadline);
             LocalDateTime newDT = new java.sql.Timestamp(date.getTime()).toLocalDateTime();

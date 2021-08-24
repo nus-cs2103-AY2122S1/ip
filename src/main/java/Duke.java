@@ -1,4 +1,7 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -6,35 +9,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    /*
     private static String line = "____________________________________________________________";
     private static String indent = "    ";
     private static Path saveFile = Paths.get("data", "duke.txt");
 
-    enum Commands {
-        LIST("list"),
-        DONE("done"),
-        DELETE("delete"),
-        TODO("todo"),
-        DEADLINE("deadline"),
-        EVENT("event"),
-        BYE("bye"),
-        INVALID("invalid");
 
-        private String c;
-        Commands(String c) {
-            this.c = c;
-        }
-
-        public static Commands fromString(String text) {
-            for (Commands cmd : Commands.values()) {
-                if (cmd.c.equalsIgnoreCase(text)) {
-                    return cmd;
-                }
-            }
-            return Commands.INVALID;
-        }
-    }
-
+    //ui
     private static void toScreen(String... msgs) {
         System.out.println(indent + line);
         for (String msg : msgs) {
@@ -43,6 +24,7 @@ public class Duke {
         System.out.println(indent + line);
     }
 
+    //storage
     private static void initialiseTasks(ArrayList<Task> tasks) {
         try {
             File sf = new File(String.valueOf(saveFile));
@@ -71,6 +53,7 @@ public class Duke {
         }
     }
 
+    //storage
     private static void writeTask(Task t) {
         try {
             FileWriter taskWriter = new FileWriter(String.valueOf(saveFile), true);
@@ -82,6 +65,7 @@ public class Duke {
         }
     }
 
+    //storage
     private static void updateFile(ArrayList<Task> task) {
         try {
             new PrintWriter(String.valueOf(saveFile)).close();
@@ -101,6 +85,8 @@ public class Duke {
         initialiseTasks(taskList);
 
         toScreen("Hello, I'm Duke!", "How can I help you?");
+
+        //parser
         String in = sc.nextLine();
         int space = in.indexOf(' ');
         String cmd = space > 0 ? in.substring(0, space) : in;
@@ -108,6 +94,7 @@ public class Duke {
         Commands c = Commands.fromString(cmd);
 
         while(!c.equals(Commands.BYE)) {
+            //tasklist
             switch (c) {
             case LIST:
                 //display tasklist
@@ -223,4 +210,34 @@ public class Duke {
         toScreen("Bye. Hope to see you again soon!");
 
     }
+
+     */
+
+    private TaskList tasks;
+    private Storage storage;
+    private Parser parser;
+    private Ui ui;
+//    private static Path saveFile = Paths.get("data", "duke.txt");
+
+    public Duke(Path saveFile) {
+        ui = new Ui();
+        storage = new Storage(saveFile, ui);
+        tasks = new TaskList(storage, ui);
+        parser = new Parser(tasks, ui);
+    }
+
+    public void run() {
+        ui.firstWelcome();
+        boolean cont = true;
+        while(cont) {
+            String c = ui.readCommand();
+            cont = parser.parse(c);
+        }
+    }
+
+    public static void main(String[] args) {
+        new Duke(Paths.get("data", "duke.txt")).run();
+    }
+
+
 }

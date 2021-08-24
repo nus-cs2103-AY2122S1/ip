@@ -1,10 +1,10 @@
 public class Todo extends Task {
     public Todo(String desc) {
-        super(desc);
+        super(desc.trim());
     }
 
     public Todo(String desc, boolean isDone) {
-        super(desc, isDone);
+        super(desc.trim(), isDone);
     }
 
     @Override

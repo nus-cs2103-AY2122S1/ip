@@ -1,2 +1,6 @@
 T|false|a thing
-D|false|a task |2021/12/19 1800
+D|false|a task|19/12/2021 1800
+D|false|task|19/12/2020 1800
+T|false|task lol
+T|false|task
+E|false|another task| this time

@@ -7,12 +7,12 @@ public class Event extends Task {
     private String duration;
 
     public Event(String desc, String duration) {
-        super(desc);
+        super(desc.trim());
         this.duration = duration;
     }
 
     public Event(String desc, String duration, boolean isDone) {
-        super(desc, isDone);
+        super(desc.trim(), isDone);
         this.duration = duration;
     }
 
