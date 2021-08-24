@@ -1,8 +1,6 @@
-import java.io.IOException;
+package duke;
+
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
 
 public class Duke {
     private static ArrayList<Task> list = new ArrayList<>();

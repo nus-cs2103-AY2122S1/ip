@@ -1,6 +1,4 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+package duke;
 
 public class Parser {
 
@@ -36,7 +34,7 @@ public class Parser {
                     }
                     messageArr = inputArr[1].split(" /by ", 2);
                     if (messageArr.length < 2) {
-                        throw new DukeException("Deadline needs a /by clause after the description.");
+                        throw new DukeException("duke.Deadline needs a /by clause after the description.");
                     }
                     addTask(new Deadline(messageArr[0], messageArr[1]));
                     break;
