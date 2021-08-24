@@ -27,10 +27,7 @@ public class Deadline extends Task {
     public static String getDeadlineDescription(String input) throws MissingDueDateDescriptionException {
         String[] strArr = input.split(" /by", 2);
         if (strArr.length < 2) {
-            System.out.println("---------------------------------------------");
-            System.out.println("OOPS!!! The due date of a deadline cannot be empty.");
-            System.out.println("Use format \"/by yyyy-mm-dd {time}\" when providing due date.");
-            System.out.println("---------------------------------------------");
+            Ui.missingDeadline();
             throw new MissingDueDateDescriptionException();
         } else {
             return strArr[0];

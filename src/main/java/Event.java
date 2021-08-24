@@ -22,10 +22,7 @@ public class Event extends Task {
     public static String getEventDescription(String input) throws MissingEventDetailsException {
         String[] strArr = input.split(" /at", 2);
         if (strArr.length < 2) {
-            System.out.println("---------------------------------------------");
-            System.out.println("OOPS!!! The details of an event cannot be empty.");
-            System.out.println("Please input time, day, or - if details unknown.");
-            System.out.println("---------------------------------------------");
+            Ui.missingEventDetails();
             throw new MissingEventDetailsException();
         } else {
             return strArr[0] + " (at:" + strArr[1] + ")";

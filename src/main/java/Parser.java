@@ -12,9 +12,7 @@ public class Parser {
     public static int taskNumber(String input) throws MissingTaskNumberException {
         String[] strArr = input.split(" ", 2);
         if (strArr.length < 2) {
-            System.out.println("---------------------------------------------");
-            System.out.println("OOPS!!! To delete a task, the task number must be stated.");
-            System.out.println("---------------------------------------------");
+            Ui.warningMissingNumber();
             throw new MissingTaskNumberException();
         } else {
             String number = strArr[1];
@@ -25,19 +23,7 @@ public class Parser {
     public static String getDescription(String input) throws MissingDescriptionException {
         String[] strArr = input.split(" ", 2);
         if (strArr.length < 2) {
-            System.out.println("---------------------------------------------");
-            switch (strArr[0]) {
-                case "todo":
-                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
-                    break;
-                case "deadline":
-                    System.out.println("OOPS!!! The description of a deadline cannot be empty.");
-                    break;
-                case "event":
-                    System.out.println("OOPS!!! The description of an event cannot be empty.");
-                    break;
-            }
-            System.out.println("---------------------------------------------");
+            Ui.warningMissingDescription(strArr[0]);
             throw new MissingDescriptionException();
         } else {
             return strArr[1];
@@ -63,7 +49,7 @@ public class Parser {
                 return new Task("NA");
         }
     }
-    
+
         public static void parseCommand(TaskList taskList, File file, PrintWriter writer) throws DukeException {
             Scanner input = new Scanner(System.in);
 
@@ -83,18 +69,14 @@ public class Parser {
                 } else if (action.equals("list")) { // list all items
                     taskList.listItems(); //todo
                 } else if (action.equals("bye")) { // exit
-                    System.out.println("---------------------------------------------\n"
-                            + "     Bye. Hope to see you again soon!" + "\n"
-                            + "---------------------------------------------");
+                    Ui.showGoodbyeMessage();
                     break;
                 } else if (Parser.getCommand(action).equals("delete")) { // delete task
                     int taskNum = Parser.taskNumber(action);
                     Storage.markAsDeleted(file, taskList.getIndividualTask(taskNum - 1)); //todo
                     taskList.deleteTask(taskNum); //todo
                 } else { // if there is an invalid input
-                    System.out.println("-------------------------------------------------------\n"
-                            + "OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n"
-                            + "-------------------------------------------------------");
+                    Ui.showInvalidInputMessage();
                     throw new IllegalArgumentException();
                 }
             }
