@@ -1,7 +1,5 @@
 package Tasks;
 
-import Tasks.Task;
-
 public class Event extends Task {
     private String at;
 
@@ -9,7 +7,6 @@ public class Event extends Task {
         super(description);
         this.at = at;
     }
-
     @Override
     public String printTask() {
         return "[E] " + super.printTask() + " (at: " + at + ")";

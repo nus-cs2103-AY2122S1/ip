@@ -4,16 +4,31 @@ import Tasks.Event;
 import Tasks.Task;
 import Tasks.Todo;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Bob {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("Howwwwwwdy! I'm Bob");
         System.out.println("What do you want?\n");
 
+        String currDirectory = new File("").getAbsolutePath();
+        File dataDirectory = new File(currDirectory + "/data");
+        boolean directoryExists = dataDirectory.exists(); //Check for data directory
+        if (!directoryExists) { //Make data directory if it does not exist yet
+            dataDirectory.mkdir();
+        }
+
+        boolean fileExists = new File(dataDirectory + "/bob.txt").exists(); //Check for bob.txt
+        if (!fileExists) { //Make bob.txt file if it does not exist yet
+            new File(dataDirectory,"bob.txt").createNewFile();
+        }
+
         Scanner scanner = new Scanner(System.in);
         TaskList taskList = new TaskList();
+        taskList.initialiseTaskList();
 
         String response = scanner.nextLine();
 
