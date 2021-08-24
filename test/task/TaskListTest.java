@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -60,7 +61,9 @@ class TaskListTest {
 
         ArrayList<Task> list = new ArrayList<>();
         TaskList testList = new TaskList(list);
-        testList.displayList((x) -> true);
+        ArrayList<Predicate<Task>> filter = new ArrayList<>();
+        filter.add((x) -> true);
+        testList.displayList(filter);
 
         String expectedOutput  = "  →   There is nothing to display! :angery:\r\n";
         assertEquals(expectedOutput, outContent.toString());
