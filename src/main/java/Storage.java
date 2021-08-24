@@ -7,13 +7,17 @@ import java.util.Scanner;
 
 /**
  * Represents a storage class to handle writing and loading from a file.
+ *
+ * @author Nigel Tan
  */
 public class Storage {
+
     private File file;
     private String filePath;
 
     /**
      * Constructor.
+     *
      * @param filePath the file path
      * @throws IOException
      */
@@ -29,6 +33,7 @@ public class Storage {
 
     /**
      * Loads the file contents and saves it in an arraylist.
+     *
      * @param filePath the file path
      * @return an ArrayList containing tasks
      * @throws FileNotFoundException
@@ -82,6 +87,7 @@ public class Storage {
 
     /**
      * Saves the current list of tasks into the specified file.
+     *
      * @param taskList the list of tasks
      * @throws IOException
      */
