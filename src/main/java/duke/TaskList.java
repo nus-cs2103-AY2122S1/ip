@@ -30,6 +30,22 @@ public class TaskList {
         };
     }
 
+    public String[] taskCompletedMessage(Task t) {
+        return new String[]{
+                "Nice! I've marked this task as done:",
+                t.toString(),
+                numOfTasks()
+        };
+    }
+
+    public String[] taskDeletedMessage(Task t) {
+        return new String[]{
+                "Noted. I've removed this task:",
+                t.toString(),
+                numOfTasks()
+        };
+    }
+
     public int size() {
         return list.size();
     }
