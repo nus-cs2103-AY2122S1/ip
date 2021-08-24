@@ -13,11 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Tasklist {
+public class TaskList {
     private ArrayList<Task> tasks;
     private Ui ui;
 
-    public Tasklist(ArrayList<String> tasksInfo, Ui ui) {
+    /**
+     * Constructs a task list.
+     *
+     * @param tasksInfo Arraylist of tasks loaded from storage.
+     * @param ui An Ui instance to deal with interactions with the user.
+     */
+    public TaskList(ArrayList<String> tasksInfo, Ui ui) {
         List<Task> list = tasksInfo.stream().map(Task::convertToTask).collect(Collectors.toList());
         this.tasks = new ArrayList<>(list);
         this.ui = ui;

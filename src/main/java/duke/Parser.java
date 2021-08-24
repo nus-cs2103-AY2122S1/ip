@@ -5,13 +5,13 @@ import duke.command.CommandKeyword;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.task.Task;
-import duke.task.Tasklist;
+import duke.task.TaskList;
 
 import java.util.ArrayList;
 
 public class Parser {
 
-    public static boolean parse(Command command, Tasklist tl, Storage storage) throws DukeException {
+    public static boolean parse(Command command, TaskList tl, Storage storage) throws DukeException {
         boolean shouldContinue = true;
         CommandKeyword keyword = command.getKeyword();
         String restOfCommand = command.getRestOfCommand();

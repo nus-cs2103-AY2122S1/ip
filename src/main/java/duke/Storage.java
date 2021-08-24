@@ -15,6 +15,11 @@ public class Storage {
     private File file;
     private Ui ui;
 
+    /**
+     * Constructs a storage to store tasks. It takes in an Ui instance.
+     *
+     * @param ui An instance to deal with interactions with the user.
+     */
     public Storage(Ui ui) {
         this.ui = ui;
         try {

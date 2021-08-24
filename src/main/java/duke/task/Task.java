@@ -9,11 +9,22 @@ public abstract class Task {
     protected boolean isDone;
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
+    /**
+     * Constructs a task. Should not be used to instantiate Task object because Task is an abstract class.
+     *
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Constructs a task. It is used for task that is already marked as done.
+     *
+     * @param description Description of the task.
+     * @param isDone Whether the task is done or not.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

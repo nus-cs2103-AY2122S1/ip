@@ -10,6 +10,10 @@ import java.util.Scanner;
 
 public class Ui {
     private Scanner sc;
+
+    /**
+     * Constructs an Ui instance. Instantiate a scanner object to take in user's input.
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }

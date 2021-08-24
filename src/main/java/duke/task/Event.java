@@ -9,12 +9,26 @@ public class Event extends Task {
     private LocalDate date;
     private String timeRange;
 
+    /**
+     * Constructs a event task.
+     *
+     * @param description The description of the task.
+     * @param date The date of the event.
+     * @param timeRange The start and end time of the event.
+     */
     public Event(String description, LocalDate date, String timeRange) {
         super(description);
         this.date = date;
         this.timeRange = timeRange;
     }
 
+    /**
+     * Constructs a event task. It is used to instantiate an event that is already marked as done.
+     * @param description The description of the task.
+     * @param date The date of the event.
+     * @param timeRange The start and end time of the event.
+     * @param isDone Whether the event is done or not.
+     */
     public Event(String description, LocalDate date, String timeRange, boolean isDone) {
         super(description, isDone);
         this.date = date;

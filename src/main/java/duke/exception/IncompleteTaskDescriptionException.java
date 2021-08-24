@@ -3,6 +3,11 @@ package duke.exception;
 public class IncompleteTaskDescriptionException extends DukeException {
     private String taskName;
 
+    /**
+     * Constructs a IncompleteTaskDescriptionException.
+     *
+     * @param taskName Name of the type of task.
+     */
     public IncompleteTaskDescriptionException(String taskName) {
         super();
         this.taskName = taskName;
