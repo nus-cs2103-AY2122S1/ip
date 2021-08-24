@@ -19,6 +19,10 @@ public class Task {
         return "[" + done_str + "] "  + task;
     }
 
+    public String GetDataInfo() {
+        return null;
+    }
+
     public void MarkDone() {
         this.done = true;
     }
