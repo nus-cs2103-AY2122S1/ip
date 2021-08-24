@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.task.*;
+
+import duke.task.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
+
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";

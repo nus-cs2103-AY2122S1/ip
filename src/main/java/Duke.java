@@ -1,3 +1,7 @@
+import duke.*;
+import duke.task.TaskList;
+import duke.command.Command;
+
 public class Duke {
 
     private Storage storage;
