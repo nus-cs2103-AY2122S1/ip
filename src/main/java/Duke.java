@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,6 +13,7 @@ import java.util.Scanner;
 public class Duke {
 
     private final static String SAVE_FILE = "data/tasks.txt";
+    private final static String SAVE_DIR = "data/";
     private final static String BOOT_MESSAGE =
             "                 |`._         |\\\n" +
                     "                 `   `.  .    | `.    |`.\n" +
@@ -99,13 +103,14 @@ public class Duke {
     }
 
     private static void saveFile() throws CorruptedFileException {
+        File dir = new File(SAVE_DIR);
+        if (!Files.exists(Paths.get(SAVE_DIR))) {
+            dir.mkdir();
+        }
         File file = new File(SAVE_FILE);
         try {
             if (!file.exists()) {
-                boolean isCreated = file.createNewFile();
-                if (!isCreated) {
-                    throw new CorruptedFileException();
-                }
+                file.createNewFile();
             }
             FileWriter fw = new FileWriter(SAVE_FILE);
             for (Task t : list) {
@@ -113,6 +118,7 @@ public class Duke {
             }
             fw.close();
         } catch (IOException e) {
+            e.printStackTrace();
             throw new CorruptedFileException();
         }
     }
