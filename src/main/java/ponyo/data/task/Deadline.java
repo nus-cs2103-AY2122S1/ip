@@ -1,5 +1,8 @@
 package ponyo.data.task;
 
+/**
+ * A Deadline task object that has a description and a by-date.
+ */
 public class Deadline extends Task {
     protected String by;
 

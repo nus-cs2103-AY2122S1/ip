@@ -12,6 +12,9 @@ import ponyo.data.task.Event;
 import ponyo.ui.Ui;
 import ponyo.storage.Storage;
 
+/**
+ * Adds a new task to the task list.
+ */
 public class AddCommand extends Command {
     private final String[] taskToAdd;
 
@@ -61,12 +64,27 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Outputs the message after a task has been added to the task list.
+     *
+     * @param task The task that is added.
+     * @param size The size of the task list array.
+     * @param ui The Ui object in charge of displaying information.
+     */
     public static void showTask(Task task, int size, Ui ui) {
         ui.show("\tGot it. I've added this task:",
                 "\t\t" + task,
                 "\tNow you have " + size + " tasks in the list.");
     }
 
+    /**
+     * Formats the date from yyyy-mm-dd to MM d yyyy
+     *
+     * @param inputDate The original date in the form of yyyy-mm-dd
+     * @param slashIndex The index to split the command to get the date
+     * @return The string representation of the date in MMM d yyyy
+     * @throws DateTimeParseException Thrown when the inputDate is of wrong format.
+     */
     public String dateFormatter(String inputDate, int slashIndex) throws DateTimeParseException {
         LocalDate date = LocalDate.parse(inputDate.substring(slashIndex + 4));
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

@@ -1,5 +1,8 @@
 package ponyo.data.task;
 
+/**
+ * An Event task object that has a description and an at-date.
+ */
 public class Event extends Task {
     protected String at;
 
