@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.lang.StringBuilder;
 
@@ -74,7 +75,19 @@ public class Kermit {
         return formattedString;
     }
 
-    private static ToDo readToDoData(File file) throws FileNotFoundException {
+    private static String printFilteredTasks(String text, ArrayList<Task> filteredTasks) {
+        String outputString = text;
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            Task task = filteredTasks.get(i);
+            text += (i + 1) + ". " + task.toString();
+            if (i != filteredTasks.size()) {
+                text += "\n";
+            }
+        }
+        return outputString;
+    }
+
+        private static ToDo readToDoData(File file) throws FileNotFoundException {
         Scanner sc = new Scanner(file);
         ToDo todo = new ToDo();
         String line;
@@ -129,7 +142,7 @@ public class Kermit {
         StringBuilder flagBuilder = new StringBuilder();
 
         // ArrayList of all valid commands and tasks
-        String[] strCommands = {"bye", "list", "done", "deadline", "todo", "event", "delete"};
+        String[] strCommands = {"bye", "list", "done", "deadline", "todo", "event", "delete", "find"};
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(strCommands));
         String[] strTasks = {"deadline", "todo", "event"};
         ArrayList<String> validTasks = new ArrayList<>(Arrays.asList(strTasks));
@@ -141,6 +154,7 @@ public class Kermit {
         final String invalidCommandText = "I'm sorry, but I don't know what that means :-(";
         final String invalidTimeText = "BAH That's not a time is it?? Try writing like this D/MM/YYYY 1200";
         final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
+        final String filteredTaskText = "Here are the matching tasks in your list:";
         final String goodbyeText = "Bye. Hope to see you again soon!";
 
         formatAndPrintText(introductionText);
@@ -253,6 +267,7 @@ public class Kermit {
                             index = Integer.parseInt(description) - 1;
                             Task deletedTask = list.deleteTask(index);
                             formatAndPrintText(printDeleteTask(deletedTask, list));
+                        case "find":
                     }
                 } catch (KermitException e) {
                     formatAndPrintText(e.getMessage());
