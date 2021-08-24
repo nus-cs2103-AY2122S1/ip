@@ -1,9 +1,8 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private  static Scanner sc;
-    private static TaskList taskList = new TaskList();
+    private static TaskList taskList;
     private static String bye_output = "Bye. Hope to see you again soon!";
     private static String indent = "    ";
     private static String div_line = "    ____________________________________________________________";
@@ -25,8 +24,9 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args)  {
+    private static void run() {
         greet();
+        taskList = new TaskList(Storage.load());
         sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String next_input = sc.nextLine();
@@ -65,5 +65,9 @@ public class Duke {
         String line1 = "Hello! I'm Duke\n";
         String line2 = indent + "What can I do for you?";
         echo(line1 + line2);
+    }
+
+    public static void main(String[] args) {
+        run();
     }
 }

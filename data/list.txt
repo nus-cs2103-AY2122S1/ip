@@ -1,0 +1,4 @@
+D | 1 | return bk | 19/8/2021
+E | 0 | funeral | 5pm
+D | 0 | hw due | 2359
+T | 1 | do hw
