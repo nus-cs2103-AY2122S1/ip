@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Returns false to indicate ListCommand does not exit the program.
+     * Returns false to indicate DoneCommand does not exit the program.
      *
      * @return False.
      */
