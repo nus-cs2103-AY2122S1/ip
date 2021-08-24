@@ -12,15 +12,22 @@ import duke.tasktype.Event;
 import duke.tasktype.Todo;
 import duke.exception.WrongCommandFormatException;
 
+/**
+ * Class that represents the storage.
+ *
+ * @author Houten Teo
+ * @version CS2103T week 3
+ */
 public class Storage {
     private MyList list;
-
+    private String filePath;
     /**
      * Constructor for the storage class
      * @param list the list to load the storage data into
      */
-    public Storage(MyList list) {
+    public Storage(MyList list, String filePath) {
         this.list = list;
+        this.filePath = filePath;
     }
 
     /**
@@ -28,7 +35,7 @@ public class Storage {
      */
     public void load() {
         try {
-            File dataFile = new File("./Data.txt");
+            File dataFile = new File(this.filePath);
             Scanner s = new Scanner(dataFile);
             Duke.setFormat(s.nextLine());
             while (s.hasNextLine()) {
@@ -91,7 +98,7 @@ public class Storage {
         try {
             int listLength = this.list.getListSize();
             String input = Duke.getFormat() + "\n";
-            FileWriter fw = new FileWriter("./Data.txt");
+            FileWriter fw = new FileWriter(this.filePath);
             for (int i = 0; i < listLength; i++) {
                 Task t = this.list.getTask(i);
                 input += t.createData() + "\n";

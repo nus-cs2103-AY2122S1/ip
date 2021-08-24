@@ -14,7 +14,7 @@ import duke.exception.WrongCommandFormatException;
  * Has an additional component of a deadline.
  *
  * @author Houten Teo
- * @version CS2103T week 2
+ * @version CS2103T week 3
  */
 public class Deadline implements Task {
 
@@ -27,7 +27,7 @@ public class Deadline implements Task {
     /**
      * constructor for the deadline class.
      * @param description the description of the task.
-     * @param isDone whether or not the task is completed .
+     * @param isDone whether the task is completed .
      * @throws WrongCommandFormatException Thrown when the user enters the
      *                                      command with the wrong format.
      */
@@ -83,10 +83,18 @@ public class Deadline implements Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Method to return the current date format.
+     * @return The current format.
+     */
     public DateTimeFormatter getCurrentFormat() {
         return this.currentFormat;
     }
 
+    /**
+     * Method to return the deadline.
+     * @return The deadline.
+     */
     public LocalDate getDeadline() {
         return this.deadline;
     }
@@ -113,6 +121,10 @@ public class Deadline implements Task {
         }
     }
 
+    /**
+     * Method to return the description of the deadline.
+     * @return The description of the deadline.
+     */
     @Override
     public String getDescription() {
         return this.description;
@@ -151,6 +163,10 @@ public class Deadline implements Task {
         }
     }
 
+    /**
+     * Method to return the String representation of the deadline to be stored in Data.txt.
+     * @return The string representation of the deadline.
+     */
     @Override
     public String createData() {
         String data = getTypeIcon()
@@ -160,5 +176,4 @@ public class Deadline implements Task {
                     + this.command;
         return data;
     }
-
 }

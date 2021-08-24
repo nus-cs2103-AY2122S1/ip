@@ -7,21 +7,39 @@ import duke.tasktype.Event;
 import duke.tasktype.Todo;
 import duke.exception.WrongCommandFormatException;
 
+/**
+ * Class to handle all the user inputs.
+ *
+ * @author Houten Teo
+ * @version CS2103T week 3
+ */
 public class Parser {
     private boolean isRunning;
     private MyList list;
     private Storage storage;
 
+    /**
+     * Constructor for the class
+     * @param list The list that the parser would be updating.
+     * @param storage the storage to read and write the data.
+     */
     public Parser(MyList list, Storage storage) {
         this.isRunning = true;
         this.list = list;
         this.storage = storage;
     }
 
+    /**
+     * Method to check if the parser is still running.
+     * @return true if its running and false otherwise.
+     */
     public boolean isRunning() {
         return this.isRunning;
     }
 
+    /**
+     * Method to read the inputs of the user.
+     */
     public void readInput() {
 
         Scanner s = new Scanner(System.in);

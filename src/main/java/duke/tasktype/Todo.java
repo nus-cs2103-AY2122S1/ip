@@ -9,7 +9,7 @@ import duke.exception.WrongCommandFormatException;
  * It essentially represents a standard task
  *
  * @author Houten Teo
- * @version CS2103T week 2
+ * @version CS2103T week 3
  */
 public class Todo implements Task {
 
@@ -58,6 +58,10 @@ public class Todo implements Task {
         }
     }
 
+    /**
+     * Method to get the description of the to do.
+     * @return The description.
+     */
     @Override
     public String getDescription() {
         return this.description;
@@ -88,11 +92,15 @@ public class Todo implements Task {
         if (isDone) {
             Ui.taskAlrCompleted(this);
         } else {
-            this.isDone = true;
             Ui.markCompleteTodo(this);
+            this.isDone = true;
         }
     }
 
+    /**
+     * Method to return the string representation of the to do to be stored in Data.txt.
+     * @return
+     */
     @Override
     public String createData() {
         String data = getTypeIcon()

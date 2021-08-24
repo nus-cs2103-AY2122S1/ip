@@ -8,7 +8,7 @@ import duke.tasktype.Task;
  * duke.MyList class that encapsulates the bot list object and functionalities.
  *
  * @Author Houten Teo
- * @version CS2103T week 2
+ * @version CS2103T week 3
  */
 public class MyList {
 
@@ -26,10 +26,19 @@ public class MyList {
           this.myList = new ArrayList<Task>();
     }
 
+    /**
+     * Method to return the size of the list
+     * @return The number of items in the list.
+     */
     public int getListSize() {
         return this.myList.size();
     }
 
+    /**
+     * Method the return the task at the specified index.
+     * @param index The specified index.
+     * @return The task at the specified index.
+     */
     public Task getTask(int index) {
         return this.myList.get(index);
     }

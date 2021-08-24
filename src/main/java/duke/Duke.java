@@ -1,12 +1,12 @@
 package duke;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 /**
  * The main class for the bot
- * Contains the methods 'to do', 'deadline', 'event', 'list',
- * 'delete' and 'bye'
+ *
+ * @author Houten Teo
+ * @version CS2103T week 3
  */
 public class Duke {
     private static String format = "yyyy-MM-dd"; //default date
@@ -25,14 +25,24 @@ public class Duke {
         return format;
     }
 
+    /**
+     * Method to allow the user to change the date format.
+     * @param newFormat The desired format
+     * @throws IllegalArgumentException Thrown if the format is not accepted by
+     *                                  DateTimeFormatter
+     */
     public static void setFormat(String newFormat) throws IllegalArgumentException {
         DateTimeFormatter.ofPattern(newFormat);
         format = newFormat;
     }
 
+    /**
+     * Constructor for the duke class.
+     * Initialises the list and storage.
+     */
     public Duke() {
         this.list = new MyList();
-        this.storage = new Storage(this.list);
+        this.storage = new Storage(this.list, "./Data.txt");
     }
 
     /**

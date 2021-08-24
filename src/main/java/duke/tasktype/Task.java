@@ -1,24 +1,20 @@
 package duke.tasktype;
 
+/**
+ * Task interface.
+ *
+ * @author Houten Teo
+ * @version CS2103T week 3
+ */
 public interface Task {
 
-    public void markComplete();
+    void markComplete();
 
-    /**
-     * Method to return the corresponding status icon depending on
-     * whether the task has been completed or not.
-     * @return The String representation of the icon.
-     */
-    public String getStatusIcon();
+    String getStatusIcon();
 
-    public String getDescription();
+    String getDescription();
 
-    /**
-     * Method to return the corresponding type icon depending on
-     * the type of the task.
-     * @return
-     */
-    public String getTypeIcon();
+    String getTypeIcon();
 
-    public String createData();
+    String createData();
 }

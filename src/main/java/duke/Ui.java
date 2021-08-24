@@ -1,11 +1,17 @@
 package duke;
 
-import duke.exception.WrongCommandFormatException;
+import duke.tasktype.Task;
 import duke.tasktype.Deadline;
 import duke.tasktype.Event;
-import duke.tasktype.Task;
 import duke.tasktype.Todo;
+import duke.exception.WrongCommandFormatException;
 
+/**
+ * Class that handles the user interface.
+ *
+ * @author Houten Teo
+ * @version CS2103T week 3
+ */
 public class Ui {
 
     /**
@@ -26,14 +32,24 @@ public class Ui {
         System.out.println("Error loading duke.tasks");
     }
 
+    /**
+     * Method to print out the error message when user keys in an invalid index.
+     */
     public static void invalidIndexMessage() {
         System.out.println("Invalid index, please try again");
     }
 
+    /**
+     * Method to print out the message from the wrongCommandFormatException.
+     * @param e the exception to get the message from.
+     */
     public static void formatExceptionMessage(WrongCommandFormatException e) {
         System.out.println(e.getMessage());
     }
 
+    /**
+     * Method to print out the message when the user updates the date format.
+     */
     public static void formatUpdatedMessage() {
         System.out.println(
                 "Date format has been updated to: "
@@ -41,22 +57,39 @@ public class Ui {
         );
     }
 
+    /**
+     * Method to print out the message when the user tries to update into and invalid date format.
+     */
     public static void unacceptableFormatMessage() {
         System.out.println("Not an acceptable format. Please try again");
     }
 
+    /**
+     * Method to print out the current date format.
+     */
     public static void currentDateFormatMessage() {
         System.out.println("Current format " + Duke.getFormat());
     }
 
+    /**
+     * Method when the user keys in and unrecognisable command.
+     */
     public static void noSpecificCmdMessage() {
         System.out.println("No specific command specified. Please try again");
     }
 
+    /**
+     * Method to print out the goodbye message.
+     */
     public static void botShutdownMessage() {
         System.out.println("Good riddance! Time to continue my beauty sleep :)");
     }
 
+    /**
+     * Method to inform the user what taks has been added and the number of items in the list.
+     * @param t the task that the user added.
+     * @param list the list that the task is added to.
+     */
     public static void addTaskMessage(Task t, MyList list) {
         System.out.println("Got it! I have added:");
         System.out.println(t.toString());
@@ -68,6 +101,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Method to print out all the items in the list.
+     * @param list the list that contains the items to be printed out.
+     */
     public static void listAllMessage(MyList list) {
         int listLength = list.getListSize();
         if (listLength == 0) {
@@ -81,6 +118,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Method to inform the user what task has been deleted.
+     * @param t The task that has been deleted.
+     * @param list The list that the task has been deleted from.
+     */
     public static void deleteTaskMessage(Task t, MyList list) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(t.toString());
@@ -92,10 +134,19 @@ public class Ui {
         }
     }
 
+    /**
+     * Method to print out the message when the user tries to complete a task
+     * that has already been completed.
+     * @param t The completed task that the user tries to mark as complete
+     */
     public static void taskAlrCompleted(Task t) {
         System.out.println("`" + t.getDescription().substring(1) + "`" + " is already completed.");
     }
 
+    /**
+     * Method to print out the message when the user marks an event as completed.
+     * @param e The task that was marked as completed.
+     */
     public static void markCompleteEvent(Event e) {
         System.out.println("Completed: "
                 + e.getDescription()
@@ -106,12 +157,20 @@ public class Ui {
         System.out.println("WEW that's another task completed");
     }
 
+    /**
+     * Method to print out the message when the user marks a to do as completed.
+     * @param t The to do that was marked completed.
+     */
     public static void markCompleteTodo(Todo t) {
         System.out.println(
                 "Finally! Took you long enough to complete:" + t.getDescription()
         );
     }
 
+    /**
+     * Method to print out the message when the user marks a deadline as completed.
+     * @param d The deadline that was marked as completed.
+     */
     public static void markCompleteDeadline(Deadline d) {
         System.out.println("Completed:"
                 + d.getDescription()
