@@ -8,6 +8,7 @@ public class Event extends Task {
 
     /**
      * Creates an Event object to store Task details.
+     *
      * @param description Description of Task.
      * @param at When the Event is held.
      */

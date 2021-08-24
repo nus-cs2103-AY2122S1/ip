@@ -14,6 +14,7 @@ public class Duke {
 
     /**
      * Initialises Duke program.
+     *
      * @param filepath Filepath of text file to read and write data.
      */
     public Duke(String filepath) {

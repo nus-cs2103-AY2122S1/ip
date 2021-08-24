@@ -6,6 +6,7 @@ public class Task {
 
     /**
      * Creates a Task object to store details of a task and its status of completion.
+     *
      * @param description Task details.
      */
     public Task(String description) {
@@ -15,6 +16,7 @@ public class Task {
 
     /**
      * Indicates task's status of completion.
+     *
      * @return Status of task.
      */
     public String getStatusIcon() {
@@ -30,6 +32,7 @@ public class Task {
 
     /**
      * Returns description of task.
+     *
      * @return Description of task.
      */
     public String getDescription() {

@@ -47,6 +47,7 @@ public class Ui {
 
     /**
      * Prompts user for command and reads text input.
+     *
      * @return command (full line) for Parser to interpret.
      */
     public String getUserCommand() {

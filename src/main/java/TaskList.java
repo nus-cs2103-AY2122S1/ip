@@ -36,6 +36,7 @@ public class TaskList {
 
     /**
      * Marks the selected task as completed.
+     *
      * @param userInput Index of task according to the list displayed.
      */
     public void markDone(String userInput) {
@@ -58,6 +59,7 @@ public class TaskList {
     /**
      * Reads data from text file and marks the task as completed.
      * Only performed during Duke's initialisation.
+     *
      * @param num Index of task according to the data stored.
      */
     public void addDone(int num) {
@@ -67,6 +69,7 @@ public class TaskList {
 
     /**
      * Deletes task from user's list.
+     *
      * @param userInput Index of task according to the list displayed.
      */
     public void delete(String userInput) {
@@ -91,6 +94,7 @@ public class TaskList {
 
     /**
      * Creates a ToDo task and adds it to the user's list.
+     *
      * @param userInput Description of task.
      */
     public void makeTodo(String userInput) {
@@ -113,6 +117,7 @@ public class TaskList {
     /**
      * Reads data from text file and creates a ToDo task.
      * Only performed during Duke's initialisation.
+     *
      * @param userInput Description of task from text file.
      */
     public void addTodo(String userInput) {
@@ -122,6 +127,7 @@ public class TaskList {
 
     /**
      * Creates an Event and adds it to the user's list.
+     *
      * @param userInput Details of the Event.
      */
     public void makeEvent(String userInput) {
@@ -146,6 +152,7 @@ public class TaskList {
     /**
      * Reads data from text file and creates an Event.
      * Only performed during Duke's initialisation.
+     *
      * @param userInput Description of Event from text file.
      */
     public void addEvent(String userInput) {
@@ -156,6 +163,7 @@ public class TaskList {
 
     /**
      * Creates a Deadline task and adds it to the user's list.
+     *
      * @param userInput Details of the Deadline task.
      */
     public void makeDeadline(String userInput) {
@@ -180,6 +188,7 @@ public class TaskList {
     /**
      * Reads data from text file and creates a Deadline task.
      * Only performed during Duke's initialisation.
+     *
      * @param userInput Description of Deadline task from text file.
      */
     public void addDeadline(String userInput) {
@@ -191,6 +200,7 @@ public class TaskList {
     /**
      * Finds tasks with keywords that match user's input.
      * Prints these tasks in a list for user's perusal.
+     *
      * @param userInput Keyword provided by user.
      */
     public void find(String userInput) {
