@@ -56,7 +56,7 @@ public class Parser {
                                 "todo <some task name>");
                     }
                 default:
-                    throw new DukeException("Say something I can understand!! >:(");
+                    return null;
             }
     }
 

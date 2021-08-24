@@ -1,10 +1,9 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task{
     private final LocalDateTime dateTime;
-    public Deadline(boolean done, String name, LocalDateTime dateTime) throws DateTimeParseException {
+    public Deadline(boolean done, String name, LocalDateTime dateTime) {
         super(done, name);
         this.dateTime = dateTime;
     }
