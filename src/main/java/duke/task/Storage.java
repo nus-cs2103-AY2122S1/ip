@@ -17,7 +17,7 @@ public class Storage {
     /** The path of the text file used to store the Tasks from a TaskList */
     private final String FILEPATH = "tasklist.txt";
     /** The file used to store the Tasks from a TaskList */
-    private final File SAVEFILE = new File(FILEPATH);
+    private final File SAVE_FILE = new File(FILEPATH);
     /** A distinct string separating pieces of information saved in the save text file */
     private final String SEPARATOR = "~SEPARATION_STRING~";
 
@@ -32,7 +32,7 @@ public class Storage {
     public Storage(TaskList taskList) {
         try {
             this.taskList = taskList;
-            SAVEFILE.createNewFile();
+            SAVE_FILE.createNewFile();
         } catch (java.io.IOException e) {
             System.out.println(e.getMessage());
         }
@@ -85,9 +85,9 @@ public class Storage {
     /**
      * Reads the save text file line by line to interpret and construct the appropriate Tasks to add into the TaskList.
      */
-    public void copyFromFileToList() { //STOPPED HERE
+    public void copyFromFileToList() {
         try {
-            Scanner sc = new Scanner(SAVEFILE);
+            Scanner sc = new Scanner(SAVE_FILE);
 
             while (sc.hasNext()) {
                 Task newTask = null;
@@ -99,11 +99,9 @@ public class Storage {
                     newTask = Todo.setTodo(inputArray[2]);
                     break;
                 case 'D':
-                    //newTask = new Deadline(inputArray[2], inputArray[3]);
                     newTask = Deadline.setDeadline(inputArray[2] + Deadline.getSeparator() + inputArray[3]);
                     break;
                 case 'E':
-                    //newTask = new Event(inputArray[2], inputArray[3]);
                     newTask = Event.setEvent(inputArray[2] + Event.getSeparator() + inputArray[3]);
                     break;
                 }

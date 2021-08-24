@@ -25,6 +25,18 @@ public class Event extends Task {
     }
 
     /**
+     * Returns the string representation of this Event, which follows the following format:
+     * [E][Task status] Task Description (at: Task start time to end time)
+     *
+     * @return String representation of this Event, which consists of the type of task (Event),
+     *         its status, its description, and its start time to end time.
+     */
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (at: " + at + ")";
+    }
+
+    /**
      * Returns an Event Task based on the given description.
      *
      * @param input String containing the Event description.
@@ -40,18 +52,6 @@ public class Event extends Task {
         }
         Task event = new Event(eventParams[0], eventParams[1]);
         return event;
-    }
-
-    /**
-     * Returns the string representation of this Event, which follows the following format:
-     * [E][Task status] Task Description (at: Task start time to end time)
-     *
-     * @return String representation of this Event, which consists of the type of task (Event),
-     *         its status, its description, and its start time to end time.
-     */
-    @Override
-    public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
     /**

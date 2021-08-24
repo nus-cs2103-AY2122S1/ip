@@ -21,6 +21,16 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
+     * Returns the iterator of the TaskList so that it is iterable.
+     *
+     * @return Iterator of the ArrayList representing the TaskList.
+     */
+    @Override
+    public Iterator<Task> iterator() {
+        return this.taskList.iterator();
+    }
+
+    /**
      * Adds the Task into the TaskList.
      *
      * @param newTask Task to be added into the TaskList.
@@ -81,15 +91,5 @@ public class TaskList implements Iterable<Task> {
         if (!taskFound) {
             System.out.println("    -- NO MATCHING TASKS FOUND --");
         }
-    }
-
-    /**
-     * Returns the iterator of the TaskList so that it is iterable.
-     *
-     * @return Iterator of the ArrayList representing the TaskList.
-     */
-    @Override
-    public Iterator<Task> iterator() {
-        return this.taskList.iterator();
     }
 }

@@ -23,13 +23,6 @@ public abstract class Task {
     }
 
     /**
-     * Marks this task as completed.
-     */
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
-    /**
      * Returns the string representation of this Task, which follows the following format:
      * [Task status] Task Description
      *
@@ -39,6 +32,13 @@ public abstract class Task {
     public String toString() {
         String statusIcon = this.isDone ? "X" : " ";
         return "[" + statusIcon + "] " + this.DESCRIPTION;
+    }
+
+    /**
+     * Marks this task as completed.
+     */
+    public void markAsDone() {
+        this.isDone = true;
     }
 
     /**

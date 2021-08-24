@@ -39,6 +39,18 @@ public class Deadline extends Task{
     }
 
     /**
+     * Returns the string representation of this Deadline, which follows the following format:
+     * [D][Task status] Task Description (by: Task deadline)
+     *
+     * @return String representation of this Deadline, which consist of the type of task (Deadline),
+     *         its status, its description, and its deadline date.
+     */
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+    }
+
+    /**
      * Returns a Deadline Task based on the given description.
      *
      * @param input String containing the Deadline description.
@@ -54,18 +66,6 @@ public class Deadline extends Task{
         }
         Task deadline = new Deadline(deadlineParams[0], deadlineParams[1]);
         return deadline;
-    }
-
-    /**
-     * Returns the string representation of this Deadline, which follows the following format:
-     * [D][Task status] Task Description (by: Task deadline)
-     *
-     * @return String representation of this Deadline, which consist of the type of task (Deadline),
-     *         its status, its description, and its deadline date.
-     */
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
     /**

@@ -15,17 +15,6 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns a To-do Task based on the given description.
-     *
-     * @param input String containing the To-do description.
-     * @return To-do constructed from the given description.
-     */
-    public static Task setTodo(String input) {
-        Task todo = new Todo(input);
-        return todo;
-    }
-
-    /**
      * Returns the string representation of this To-do, which follows the following format:
      * [T][Task status] Task Description
      *
@@ -37,4 +26,14 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Returns a To-do Task based on the given description.
+     *
+     * @param input String containing the To-do description.
+     * @return To-do constructed from the given description.
+     */
+    public static Task setTodo(String input) {
+        Task todo = new Todo(input);
+        return todo;
+    }
 }
