@@ -1,8 +1,8 @@
 first
 potato
 todo fight
-deadline fightmaster /by endOfTime
-event fight club /at kungfuPanda
+deadline fightmaster /by 2024-8-3 10:30
+event fight club /at 2030-10-12 9:30
 list
 done 3
 list

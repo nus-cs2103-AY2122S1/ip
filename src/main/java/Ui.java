@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Ui {
     private static final String BORDER = "____________________________________________________________";
     private static final String INTRO = "Hello from\n"

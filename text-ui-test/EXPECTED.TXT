@@ -1,10 +1,10 @@
+No past tasks found. Starting with a new list.
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
-
 Im Duke
 What can I do for you?
 ____________________________________________________________
@@ -20,12 +20,12 @@ Now you have a total of 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it, I've added this task:
-  [D][ ] fightmaster  (by:  endOfTime)
+  [D][ ] fightmaster  (at: Aug 3 2024 10:30)
 Now you have a total of 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it, I've added this task:
-  [E][ ] fight club  (at:  kungfuPanda)
+  [E][ ] fight club  (at: Oct 12 2030 9:30)
 Now you have a total of 5 tasks in the list.
 ____________________________________________________________
 Here are the tasks in your list:
@@ -33,43 +33,43 @@ ____________________________________________________________
 1. [ ] first
 2. [ ] potato
 3. [T][ ] fight
-4. [D][ ] fightmaster  (by:  endOfTime)
-5. [E][ ] fight club  (at:  kungfuPanda)
+4. [D][ ] fightmaster  (at: Aug 3 2024 10:30)
+5. [E][ ] fight club  (at: Oct 12 2030 9:30)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-  [X] fight
+  [T][X] fight
 ____________________________________________________________
 Here are the tasks in your list:
 ____________________________________________________________
 1. [ ] first
 2. [ ] potato
 3. [T][X] fight
-4. [D][ ] fightmaster  (by:  endOfTime)
-5. [E][ ] fight club  (at:  kungfuPanda)
+4. [D][ ] fightmaster  (at: Aug 3 2024 10:30)
+5. [E][ ] fight club  (at: Oct 12 2030 9:30)
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! The description of a todo cannot be empty.
+☹ OOPS!!! The description of todo cannot be empty!
 ____________________________________________________________
 ____________________________________________________________
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Event must come with a event date/time.
+☹ OOPS!!! Must come with a input date/time for the event .
 ____________________________________________________________
 ____________________________________________________________
 ☹ OOPS!!! The description of a event cannot be empty.
-Don't forget to use /at to indicate the event time.
+Don't forget to use /by to indicate the deadline.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Deadline must come with a input date/time for the deadline.
+☹ OOPS!!! Must come with a input date/time for the deadline .
 ____________________________________________________________
 ____________________________________________________________
 ☹ OOPS!!! The description of a deadline cannot be empty.
 Don't forget to use /by to indicate the deadline.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! We don't know what to delete!
+☹ OOPS!!! The description of delete cannot be empty!
 ____________________________________________________________
 ____________________________________________________________
 ☹ OOPS!!! Task number does not exist!
@@ -83,8 +83,8 @@ Here are the tasks in your list:
 ____________________________________________________________
 1. [ ] first
 2. [T][X] fight
-3. [D][ ] fightmaster  (by:  endOfTime)
-4. [E][ ] fight club  (at:  kungfuPanda)
+3. [D][ ] fightmaster  (at: Aug 3 2024 10:30)
+4. [E][ ] fight club  (at: Oct 12 2030 9:30)
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!
