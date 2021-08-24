@@ -34,6 +34,8 @@ public class Parser {
                 return detectEvent(fullCommand);
             } else if (fullCommand.startsWith("delete")) {
                 return detectDelete(fullCommand);
+            } else if (fullCommand.startsWith("find")){
+                return detectFind(fullCommand);
             } else {
                 throw new DukeUnknownException();
             }
@@ -134,6 +136,15 @@ public class Parser {
             return new DeleteCommand(deleteTaskIndex);
         } catch (Exception e) {
             throw new DukeDeleteException();
+        }
+    }
+
+    public static FindCommand detectFind(String str) throws DukeFindException {
+        try {
+            String query = str.replaceFirst("find ", "");
+            return new FindCommand(query);
+        } catch (Exception e) {
+            throw new DukeFindException();
         }
     }
 }
