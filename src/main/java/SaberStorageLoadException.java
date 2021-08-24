@@ -1,2 +1,3 @@
-package PACKAGE_NAME;public class SaberStorageLoadException {
+public class SaberStorageLoadException extends SaberException {
+    public SaberStorageLoadException(String message) { super(message); }
 }
