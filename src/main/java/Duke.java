@@ -10,7 +10,7 @@ import java.nio.file.Files;
 
 public class Duke {
     static List<Task> listOfText2 = new ArrayList<>();
-    static String filepath = "";
+    static String filepath = "src/main/data/duke.txt";
 
     private static void bye() {
         System.out.println("Bye. Hope to see you again soon!");
@@ -85,7 +85,6 @@ public class Duke {
             file.createNewFile();
 
         }
-        filepath = "src/main/data/duke.txt";
     }
 
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
