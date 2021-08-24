@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public enum DukeCommands {
 
@@ -19,7 +22,7 @@ public enum DukeCommands {
     DONE("done", (String command) -> {
         // User command is done, marks a task as done
         // Template for done command is done {number}
-        if (command.length() < 5 || isValidString(command.substring(5))) {
+        if (command.length() < 5 || isInvalidString(command.substring(5))) {
             String errorMessage = "\t Invalid command, please key in number of the task to be done as follows:\n";
             errorMessage += "\t \t done {number}";
             throw new DukeException(errorMessage);
@@ -39,7 +42,7 @@ public enum DukeCommands {
     DELETE("delete", (String command) -> {
         // User command is delete, deletes a task from the list
         // Template for delete command is delete {number}
-        if (command.length() < 7 || isValidString(command.substring(7))) {
+        if (command.length() < 7 || isInvalidString(command.substring(7))) {
             String errorMessage = "\t Invalid command, please key in number of the task to be deleted as follows:\n";
             errorMessage += "\t \t delete {number}";
             throw new DukeException(errorMessage);
@@ -85,7 +88,7 @@ public enum DukeCommands {
         // Template of command: deadline {description} /by {time}
         // Find the end of description, which is the start of byWhen
         String errorMessage = "\t Invalid command, description and time is required, please follow template:\n";
-        errorMessage += "\t \t deadline {description} /by {time}";
+        errorMessage += "\t \t deadline {description} /by {yyyy-mm-dd}";
 
         int endOfDescription = command.indexOf("/");
         if (endOfDescription == -1 || command.length() < 9) {
@@ -99,9 +102,16 @@ public enum DukeCommands {
         }
 
         String time = command.substring(endOfDescription + 1);
-        if (isValidString(time)  || !time.substring(0,2).equals("by") || isValidString(time.substring(2))) {
+        if (isInvalidString(time)  || !time.substring(0,3).equals("by ")) {
             throw new DukeException(errorMessage);
         }
+
+        // Remove the at from time and ensures that there is no additional whitespace behind
+        time = time.substring(3,13);
+        if (!isValidDate(time) || isInvalidString(time)) {
+            throw new DukeException(errorMessage);
+        }
+
 
         Deadline t = new Deadline(description, time);
 
@@ -115,7 +125,7 @@ public enum DukeCommands {
         // Template of command: event {description} /by {time}
         // Find the end of description, which is the start of time
         String errorMessage = "\t Invalid command, description and time is required, please follow template:\n";
-        errorMessage += "\t \t event {description} /at {time}";
+        errorMessage += "\t \t event {description} /at {yyyy-mm-dd}";
 
         int endOfDescription = command.indexOf("/");
         if (endOfDescription == -1 || command.length() < 6) {
@@ -129,7 +139,13 @@ public enum DukeCommands {
         }
 
         String time = command.substring(endOfDescription + 1);
-        if (isValidString(time) || !time.substring(0,2).equals("at") || isValidString(time.substring(2))) {
+        if (isInvalidString(time) || !time.substring(0,3).equals("at ")) {
+            throw new DukeException(errorMessage);
+        }
+
+        // Remove the at from time and ensures that there is no additional whitespace behind
+        time = time.substring(3,13);
+        if (!isValidDate(time) || isInvalidString(time)) {
             throw new DukeException(errorMessage);
         }
 
@@ -172,7 +188,17 @@ public enum DukeCommands {
     }
 
     // Function to check if string is empty or is just a string containing only blanks
-    private static boolean isValidString(String s) {
+    private static boolean isInvalidString(String s) {
         return s.isBlank() || s.isEmpty();
+    }
+
+    private static boolean isValidDate(String date) {
+        try {
+            LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+
+        return true;
     }
 }
