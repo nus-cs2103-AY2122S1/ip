@@ -1,14 +1,17 @@
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
+import java.lang.String;
+
 public class Duke {
+
+    private static ArrayList<Task> tasks;
+    private static Storage storage;
+    private static final String LOCATION = "./data/duke.txt";
 
     public enum Keyword {
         TODO, EVENT, DEADLINE, LIST, DONE, DELETE, BYE
     }
-
-    private static ArrayList<Task> itemList = new ArrayList<Task>();
 
     private static void greet() {
         System.out.println("Hello! I'm Duke" + '\n' + "What can I do for you?");
@@ -35,9 +38,10 @@ public class Duke {
     private static void markTaskDone(String input) {
         try {
             int taskDoneNum = getTaskNumber(input);
-            Task taskDone = itemList.get(taskDoneNum - 1);
+            Task taskDone = tasks.get(taskDoneNum - 1);
             taskDone.markAsDone();
             System.out.println("Nice! I've marked this task as done:" + '\n' + taskDone.toString());
+            storage.saveData(tasks);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("☹ OOPS!!! No such task can be marked as done!");
             start();
@@ -47,11 +51,12 @@ public class Duke {
     private static void deleteTask(String input) {
         try {
             int taskDeleteNum = getTaskNumber(input);
-            Task taskToDelete = itemList.get(taskDeleteNum - 1);
+            Task taskToDelete = tasks.get(taskDeleteNum - 1);
             taskToDelete.markUndone();
             System.out.println("Noted. I've removed this task:" + '\n' + taskToDelete.toString());
-            itemList.remove(taskDeleteNum - 1);
+            tasks.remove(taskDeleteNum - 1);
             printTaskNumber();
+            storage.saveData(tasks);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("☹ OOPS!!! No such task can be deleted!");
             start();
@@ -60,20 +65,21 @@ public class Duke {
 
     private static void printItemList() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < itemList.size(); i++) {
-            System.out.println(i + 1 + "." + itemList.get(i).toString());
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(i + 1 + "." + tasks.get(i).toString());
         }
     }
 
     private static void printTaskNumber() {
-        System.out.println("Now you have " + itemList.size() + (itemList.size() == 1 ? " task" : " tasks") + " in the list.");
+        System.out.println("Now you have " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
     private static void addComplete(Task t) {
-        itemList.add(t);
+        tasks.add(t);
         System.out.println("Got it. I've added this task:");
         System.out.println(t.toString());
         printTaskNumber();
+        storage.saveData(tasks);
     }
 
     private static void addToDo(String description) {
@@ -88,7 +94,7 @@ public class Duke {
         addComplete(new Event(description, time));
     }
 
-    public static Keyword getKeyword(String input) {
+    private static Keyword getKeyword(String input) {
         Keyword keyword = Keyword.valueOf(getFirstWord(input).toUpperCase());
         return keyword;
     }
@@ -107,7 +113,6 @@ public class Duke {
 
                 switch (keyword) {
                     case BYE:
-                        itemList.clear();
                         System.out.println("Bye. Hope to see you again soon!");
                         break;
                     case LIST:
@@ -165,6 +170,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         greet();
+        storage = new Storage(LOCATION);
+        tasks = storage.loadData();
         start();
     }
 }
