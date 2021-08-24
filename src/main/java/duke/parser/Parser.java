@@ -1,12 +1,7 @@
 package duke.parser;
 
+import duke.command.*;
 import duke.exception.DukeException;
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
 
 
 /**
@@ -50,6 +45,11 @@ public class Parser {
                 throw missingParamException;
             }
             return new DeleteCommand(command[1]);
+        case "find":
+            if (noParameter) {
+                throw missingParamException;
+            }
+            return new FindCommand(command[1]);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
