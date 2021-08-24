@@ -30,7 +30,7 @@ public class Duke {
                 String desc = splitItem[2];
                 String date = "";
                 if (splitItem.length > 3) date = splitItem[3];
-                Task nextTask = new Task("");
+                Task nextTask = null;
                 switch (taskType) {
                     case ("T"):
                         nextTask = new Todo(desc);
@@ -41,7 +41,7 @@ public class Duke {
                     case ("E"):
                         nextTask = new Event(desc, date);
                 }
-                if (completed.equals("1")) nextTask.markAsDone();
+                if (completed.equals("1") && nextTask != null) nextTask.markAsDone();
                 storage.add(nextTask);
             }
             myReader.close();
@@ -91,6 +91,9 @@ public class Duke {
                                 int tempIndex = Integer.parseInt(wordArray[1]) - 1;
                                 Task tempTask = storage.get(tempIndex);
                                 tempTask.markAsDone();
+
+                                rewriteFile(storage);
+
                                 System.out.println("Nice! I've marked this task as done:\n"
                                         + "  "
                                         + tempTask.toString());
@@ -109,15 +112,7 @@ public class Duke {
                             Task newTodo = new Todo(newDesc);
                             storage.add(newTodo);
 
-                            String todoString = "\nT|0|" + newDesc;
-                            try {
-                                BufferedWriter output;
-                                output = new BufferedWriter(new FileWriter("./Duke.txt", true));
-                                output.append(todoString);
-                                output.close();
-                            } catch (IOException e) {
-                                throw new DukeException("Error saving new task");
-                            }
+                            writeTask(newTodo);
 
                             System.out.println("Got it. I've added this task:\n"
                                     + "  " + newTodo.toString() + "\n"
@@ -154,15 +149,7 @@ public class Duke {
                             Task newDeadline = new Deadline(newDeadlineDesc, newBy);
                             storage.add(newDeadline);
 
-                            String deadlineString = "\nD|0|" + newDeadlineDesc + "|" + newBy;
-                            try {
-                                BufferedWriter output;
-                                output = new BufferedWriter(new FileWriter("./Duke.txt", true));
-                                output.append(deadlineString);
-                                output.close();
-                            } catch (IOException e) {
-                                throw new DukeException("Error saving new task");
-                            }
+                            writeTask(newDeadline);
 
                             System.out.println("Got it. I've added this task:\n"
                                     + "  " + newDeadline.toString() + "\n"
@@ -199,15 +186,7 @@ public class Duke {
                             Task newEvent = new Event(newEventDesc, newAt);
                             storage.add(newEvent);
 
-                            String eventString = "\nE|0|" + newEventDesc + "|" + newAt;
-                            try {
-                                BufferedWriter output;
-                                output = new BufferedWriter(new FileWriter("./Duke.txt", true));
-                                output.append(eventString);
-                                output.close();
-                            } catch (IOException e) {
-                                throw new DukeException("Error saving new task");
-                            }
+                            writeTask(newEvent);
 
                             System.out.println("Got it. I've added this task:\n"
                                     + "  " + newEvent.toString() + "\n"
@@ -223,6 +202,9 @@ public class Duke {
                                 int tempIndex = Integer.parseInt(wordArray[1]) - 1;
                                 String taskString = storage.get(tempIndex).toString();
                                 storage.remove(tempIndex);
+
+                                rewriteFile(storage);
+
                                 System.out.println("Noted. I've removed this task:\n"
                                         + "  "
                                         + taskString + "\n"
@@ -243,5 +225,36 @@ public class Duke {
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public static void writeTask(Task task) throws DukeException {
+        String newString = "\n" + task.toStorageString();
+        try {
+            FileWriter writer = new FileWriter("./Duke.txt", true);
+            writer.append(newString);
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeException("Error saving new task");
+        }
+    }
+
+    public static String readList(ArrayList<Task> al) {
+        String result = "";
+        for (int i = 0; i < al.size(); i++) {
+            Task nextTask = al.get(i);
+            String nextString = nextTask.toStorageString() + "\n";
+            result += nextString;
+        }
+        return result.trim();
+    }
+
+    public static void rewriteFile(ArrayList<Task> al) {
+        try {
+            FileWriter writer = new FileWriter("./Duke.txt");
+            writer.write(readList(al));
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeException("Error deleting or marking task as done");
+        }
     }
 }

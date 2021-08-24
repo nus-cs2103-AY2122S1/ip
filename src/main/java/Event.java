@@ -10,4 +10,9 @@ public class Event extends Task {
     public String toString() {
         return ("[E]" + super.toString() + " (at: " + this.at + ")");
     }
+
+    public String toStorageString() {
+        return ("E|" + super.getStatusNumber() + "|" + super.getDescription()
+                + "|" + this.at);
+    }
 }
