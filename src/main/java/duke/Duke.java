@@ -15,7 +15,7 @@ public class Duke {
         this.tasks = storage.convertFileToTaskList();
         this.ui = new Ui();
     }
-    
+
     /**
      * Runs the duke bot.
      */
