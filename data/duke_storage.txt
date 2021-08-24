@@ -1,0 +1,3 @@
+T1|borrow book
+E1Mon 2-4pm|project meeting 
+T0|return book

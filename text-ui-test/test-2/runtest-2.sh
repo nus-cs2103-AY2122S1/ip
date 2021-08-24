@@ -7,27 +7,27 @@ then
 fi
 
 # delete output from previous run
-if [ -e "./ACTUAL-2.TXT" ]
+if [ -e "./ACTUAL.TXT" ]
 then
-    rm ACTUAL-2.TXT
+    rm ACTUAL.TXT
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/*.java
+if ! javac -cp ../../src/main/java -Xlint:none -d ../../bin ../../src/main/java/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
 
-# run the program, feed commands from input-2.txt file and redirect the output to the ACTUAL-2.TXT
-java -classpath ../bin Duke < input-2.txt > ACTUAL-2.TXT
+# run the program, feed commands from input-2.txt file and redirect the output to the ACTUAL.TXT
+java -classpath ../../bin Duke < input-2.txt > ACTUAL.TXT
 
 # convert to UNIX format
-cp EXPECTED-2.TXT EXPECTED-2-UNIX.TXT
-dos2unix ACTUAL-2.TXT EXPECTED-2-UNIX.TXT
+cp EXPECTED.TXT EXPECTED-UNIX.TXT
+dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 
 # compare the output to the expected output
-diff ACTUAL-2.TXT EXPECTED-2-UNIX.TXT
+diff ACTUAL.TXT EXPECTED-UNIX.TXT
 if [ $? -eq 0 ]
 then
     echo "Test result: PASSED"
