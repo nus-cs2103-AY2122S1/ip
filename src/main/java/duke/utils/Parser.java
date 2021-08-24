@@ -8,32 +8,25 @@ import java.util.Scanner;
 
 public class Parser {
 
-    private Scanner scanner;
-
-    public Parser() {
-        this.scanner = new Scanner(System.in);
-    }
-
-    public Command parseNext(TaskList tasks) throws DukeException {
-        String command = this.scanner.nextLine();
-        if (command.matches("bye")) {
+    public static Command parseNext(String input) throws DukeException {
+        if (input.matches("bye")) {
             return new ByeCommand();
-        } else if (command.matches("list")) {
+        } else if (input.matches("list")) {
             return new ListCommand();
-        } else if (command.matches("deadline\\s.{1,}\\s\\/by\\s.{1,}")) {
-            String[] keywords = extractKeywordsFromCommand(command, new String[] {"deadline", "/by"});
+        } else if (input.matches("deadline\\s.{1,}\\s\\/by\\s.{1,}")) {
+            String[] keywords = extractKeywordsFromCommand(input, new String[] {"deadline", "/by"});
             return new AddDeadlineCommand(keywords);
-        } else if (command.matches("event\\s.{1,}\\s\\/at\\s.{1,}")) {
-            String[] keywords = extractKeywordsFromCommand(command, new String[] {"event", "/at"});
+        } else if (input.matches("event\\s.{1,}\\s\\/at\\s.{1,}")) {
+            String[] keywords = extractKeywordsFromCommand(input, new String[] {"event", "/at"});
             return new AddEventCommand(keywords);
-        } else if (command.matches("todo\\s.{1,}")) {
-            String[] keywords = extractKeywordsFromCommand(command, new String[] {"todo"});
+        } else if (input.matches("todo\\s.{1,}")) {
+            String[] keywords = extractKeywordsFromCommand(input, new String[] {"todo"});
             return new AddTodoCommand(keywords);
-        } else if (command.matches("done [0-9]{1,}")) {
-            String[] keywords = extractKeywordsFromCommand(command, new String[] {"done"});
+        } else if (input.matches("done [0-9]{1,}")) {
+            String[] keywords = extractKeywordsFromCommand(input, new String[] {"done"});
             return new MarkDoneCommand(keywords[0]);
-        }  else if (command.matches("delete [0-9]{1,}")) {
-            String[] keywords = extractKeywordsFromCommand(command, new String[] {"delete"});
+        }  else if (input.matches("delete [0-9]{1,}")) {
+            String[] keywords = extractKeywordsFromCommand(input, new String[] {"delete"});
             return new DeleteTaskCommand(keywords[0]);
         }
 

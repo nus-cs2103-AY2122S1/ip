@@ -25,14 +25,13 @@ public class Duke {
     }
 
     public void run() {
-        // TODO
-        Parser parser = new Parser();
         this.ui.showWelcome();
         Command command;
         boolean isExited = false;
         do {
             try {
-                command = parser.parseNext(taskList);
+                String input = this.ui.readCommand();
+                command = Parser.parseNext(input);
                 command.execute(this.taskList, this.ui, this.storage);
                 isExited = command.hasExited();
             } catch (DukeException e) {
