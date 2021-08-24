@@ -62,7 +62,7 @@ public class Ui {
     public void showTasks(ArrayList<Task> tasks) {
         int len = tasks.size();
         if (len == 0) {
-            this.printMessage("You have no task!");
+            this.printMessage("No task is found!");
         } else {
             for (int i = 0; i < len; i++) {
                 int num = i + 1;
@@ -87,6 +87,14 @@ public class Ui {
         } else {
             this.printMessage("There is no such task to delete!");
         }
+    }
 
+    public void showNoKeyword() {
+        this.printMessage("There is no keyword to search for!");
+    }
+
+    public void showFilteredTasks(ArrayList<Task> tasks) {
+        this.printMessage("Here are the matching tasks in your list:");
+        this.showTasks(tasks);
     }
 }

@@ -52,6 +52,8 @@ public class Parser {
             } else {
                 throw new InvalidCommandException();
             }
+        case FIND:
+            tl.find(restOfCommand);
         default:
             /* will never be executed because the error would have been caught in run() method
                if the user input a command that is invalid */
