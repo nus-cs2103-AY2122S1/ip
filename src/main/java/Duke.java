@@ -1,6 +1,6 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,45 +9,6 @@ public class Duke {
     public static class DukeException extends Exception {
         public DukeException(String errorMessage) {
             super(errorMessage);
-        }
-    }
-    public static class TaskList {
-        private ArrayList<Task> tasks;
-        private int numTask;
-
-        public TaskList(){
-            this.tasks = new ArrayList<>();
-            this.numTask = 0;
-        }
-
-        public void addCustom(Task task) {
-            tasks.add(task);
-            this.numTask++;
-            System.out.println("Got it. I've added this task: ");
-            System.out.println("  " + task);
-            System.out.printf("Now you have %d %s in the list.\n", this.numTask, this.numTask == 1 ? "task" : "tasks");
-        }
-
-
-        public void list() {
-            for (int i = 0; i < this.numTask; i++) {
-                System.out.println((i + 1)+ ". " + tasks.get(i));
-            }
-        }
-
-        public void done(int taskNumber) {
-            tasks.get(taskNumber - 1).complete();
-            System.out.println("Nice! I've marked this task as done: ");
-            System.out.println("  " + tasks.get(taskNumber - 1));
-        }
-
-        public void delete(int taskNumber) {
-            Task task = tasks.get(taskNumber - 1);
-            System.out.println("Noted. I've removed this task:");
-            System.out.println("  " + task);
-            tasks.remove(taskNumber - 1);
-            this.numTask--;
-            System.out.printf("Now you have %d %s in the list.\n", this.numTask, this.numTask == 1 ? "task" : "tasks");
         }
     }
 
@@ -69,7 +30,34 @@ public class Duke {
         Pattern eventPattern = Pattern.compile("event (.*) /at (.*)");
 
         TaskList storage = new TaskList();
+        Files.createDirectories(Paths.get("data/"));
+        File file = new File("data/duke.txt");
+
+        // Load data if exists, else create new TaskList
+//        if (Files.exists(java.nio.file.Paths.get(".", "data", "duke.txt"))) {
+        if (!file.createNewFile()) {
+            try {
+                FileInputStream fis = new FileInputStream("data/duke.txt");
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                storage = (TaskList) ois.readObject();
+                ois.close();
+            } catch (IOException e) {
+                System.out.println("IOException");
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                System.out.println("classnotfound");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("CAnt find the file");
+            storage = new TaskList();
+        }
+
+
         init();
+
+
+
 
         while (true) {
             // Enter data using BufferReader
@@ -79,11 +67,7 @@ public class Duke {
             // Reading data using readLine
             String input = reader.readLine();
 
-            // exit application
-            if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            }
+
 
             // print out list
             if (input.equals("list")) {
@@ -122,12 +106,24 @@ public class Duke {
                 continue;
             }
 
+            // exit application
+            if (input.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+                FileOutputStream fos = new FileOutputStream("./data/duke.txt");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(storage);
+                oos.close();
+                break;
+            }
+
             // identify reason for misinput
-            if (input.substring(0, 4).equals("todo")) {
+            if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
                 System.out.println("OOPS!!! The description of a todo cannot be empty.");
                 continue;
             }
             System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+
+
         }
     }
 
@@ -136,7 +132,9 @@ public class Duke {
         try {
             duke.run();
         } catch (IOException e) {
+
             System.out.println("Error found while parsing input, shutting down");
+            e.printStackTrace();
         } catch (DukeException e) {
 
         }
