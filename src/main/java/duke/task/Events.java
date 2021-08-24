@@ -21,8 +21,8 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        localDateTime = new Parser().parseLocalDateTime(at, localDateTime);
-        return "[E]" + super.toString() + "(at: " + localDateTime.format(dtf) + ")";
+        localDateTime = new Parser().parseLocalDateTime(at);
+        return "[E]" + super.toString() + " (at: " + localDateTime.format(dtf) + ")";
     }
 
     @Override

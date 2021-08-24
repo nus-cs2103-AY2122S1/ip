@@ -25,14 +25,15 @@ public class Parser {
     }
 
     public String getDeadlineDescription(String input) {
-        return input.substring(9, input.indexOf("/"));
+        return input.substring(9, input.indexOf("/")-1);
     }
 
     public boolean isValidEvent(String input) {
         return input.length() >= 5 && input.substring(0, 5).equals("event");
     }
+
     public String getEventDescription(String input) {
-        return input.substring(6,  input.indexOf("/"));
+        return input.substring(6,  input.indexOf("/")-1);
     }
 
     public boolean isDeleteCmd(String input) {
@@ -55,7 +56,7 @@ public class Parser {
         return input.substring(5).matches("[0-9]+");
     }
 
-    public LocalDateTime parseLocalDateTime(String time, LocalDateTime localDateTime) {
+    public LocalDateTime parseLocalDateTime(String time) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         if (time.substring(0, 1).matches("[0-9]+")) {
             DateTimeFormatter anotherDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

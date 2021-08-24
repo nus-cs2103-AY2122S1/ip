@@ -12,8 +12,8 @@ I have received your file! Added tasks!
     Now you have 14 tasks in the list.
     Here are the tasks in your list:
         1.[T][X] read book
-        2.[D][X] return book(by: Aug 15 2019 18:00)
-        3.[E][X] project meeting(at: Aug 15 2019 18:00)
+        2.[D][X] return book (by: Aug 15 2019 18:00)
+        3.[E][X] project meeting (at: Aug 15 2019 18:00)
         4.[T][X] sleep
         5.[D][X] paper (by: Aug 15 2019 18:00)
         6.[T][ ] test

@@ -21,8 +21,8 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-        localDateTime = new Parser().parseLocalDateTime(by, localDateTime);
-        return "[D]" + super.toString() + "(by: " + localDateTime.format(dtf) + ")";
+        localDateTime = new Parser().parseLocalDateTime(by);
+        return "[D]" + super.toString() + " (by: " + localDateTime.format(dtf) + ")";
     }
 
     @Override
