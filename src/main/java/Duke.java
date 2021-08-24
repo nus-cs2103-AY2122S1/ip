@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -66,7 +70,18 @@ public class Duke {
                     }
                 }
                 for (int i = 1; i < second.length; i++) {
-                    deadline += second[i];
+                    if (i == 1 && (second[i].equals("by") || second[i].equals("at"))) {
+                        // handle the case where user formatted command wrongly (include a space after "/")
+                        continue;
+                    }
+                    if (isValidDate(second[i], DateTimeFormatter.ISO_LOCAL_DATE)) {
+                        deadline += LocalDate.parse(second[i], DateTimeFormatter.ISO_LOCAL_DATE).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                    } else if (isValidTime(second[i], DateTimeFormatter.ISO_LOCAL_TIME)) {
+                        deadline += LocalTime.parse(second[i], DateTimeFormatter.ISO_LOCAL_TIME).format(DateTimeFormatter.ofPattern("hh:mm a"));
+                    } else {
+                        deadline += second[i];
+                    }
+
                     if (i != second.length - 1) {
                         deadline += " ";
                     }
@@ -92,6 +107,24 @@ public class Duke {
 
     public static boolean isRemove(String input){
         return input.startsWith("remove ");
+    }
+
+    public static boolean isValidDate(String dateString, DateTimeFormatter dateFormatter) {
+        try {
+            LocalDate.parse(dateString, dateFormatter);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isValidTime(String timeString, DateTimeFormatter timeFormatter) {
+        try {
+            LocalTime.parse(timeString, timeFormatter);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 
     public static void main(String[] args) {
