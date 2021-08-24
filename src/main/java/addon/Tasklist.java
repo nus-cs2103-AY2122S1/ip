@@ -4,6 +4,9 @@ import addon.Ui.IncorrectFormatException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Handles methods involving the Arraylists of current tasks, as well as containing the Task classes
+ */
 public class Tasklist {
 
     protected ArrayList<Task> list;
@@ -12,6 +15,12 @@ public class Tasklist {
         this.list = list;
     }
 
+    /**
+     * Adds Task entry to the Arraylist
+     *
+     * @param args Array of strings representing in order: type of task, name of task.
+     * @param date LocalDateTime object involved with the task, left as an arbitrary null date if Todotask.
+     */
     public void addEntry(String[] args, LocalDateTime date) {
         if (args[0].equals("T")) {
             addon.Tasklist.Todo add = new addon.Tasklist.Todo(args[1]);
@@ -31,7 +40,11 @@ public class Tasklist {
         }
 
     }
-
+    /**
+     * Removes specified task entry from the Arraylist
+     *
+     * @param num Index number of the item to be removed.
+     */
     public void removeEntry(int num) throws IncorrectFormatException {
         if (num >= 1 && num <= this.list.size() + 1) {
             System.out.println(Ui.bar + "\n    Nice! I've removed this task off the face of the Earth:\n    " + (list.get(num - 1)).toString() + "\n    Now you have " + list.size() + " tasks in the list.\n" + Ui.bar);
@@ -42,6 +55,11 @@ public class Tasklist {
         }
     }
 
+    /**
+     * Changes the "Done" status of the specified task entry from the Arraylist
+     *
+     * @param num Index number of the item to be changed.
+     */
     public void changeDone(int num) throws IncorrectFormatException {
         if (num >= 1 && num <= this.list.size() + 1) {
             (list.get(num - 1)).markDone();
@@ -52,6 +70,9 @@ public class Tasklist {
         }
     }
 
+    /**
+     * Lists out the current entries in the Arraylist.
+     */
     public void listEntries() {
         System.out.println(Ui.bar);
         if (this.list.size() == 0) {
@@ -65,6 +86,11 @@ public class Tasklist {
         System.out.println(Ui.bar);
     }
 
+    /**
+     * Lists out the current entries in the Arraylist that have the same date as the one specified.
+     *
+     * @param date LocalDateTime object of date that is to be queried.
+     */
     public void filterDates(LocalDateTime date) {
         System.out.println(Ui.bar + "\n    Here are your " + Ui.printDate(date, false) + " tasks: \n");
         for(Task i : list) {
@@ -83,6 +109,9 @@ public class Tasklist {
         System.out.println(Ui.bar + "\n");
     }
 
+    /**
+     * Wipes the Arraylist and savefile clear.
+     */
     public void clearList() {
         this.list.clear();
         System.out.println(Ui.bar + "\n    LIST CLEARED\n" + Ui.bar);
