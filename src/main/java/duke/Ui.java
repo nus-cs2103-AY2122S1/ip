@@ -27,47 +27,7 @@ public class Ui {
         System.out.println("There is a problem loading saved data.");
         System.out.println("*******************************************");
     }
-
-    public void showSavingError() {
-        System.out.println("There is a problem saving data.");
-        System.out.println("*******************************************");
-    }
-
-    public void showMeaninglessInput() {
-        System.out.println("I'm sorry, but I don't know what that means :-(");
-        System.out.println("*******************************************");
-    }
-
-    public void showWrongTodoInput() {
-        System.out.println("The description of a todo cannot be empty.");
-        System.out.println("*******************************************");
-    }
-
-    public void showWrongEventInput() {
-        System.out.println("The description and time of an event cannot be empty.");
-        System.out.println("*******************************************");
-    }
-
-    public void showWrongTimeInput() {
-        System.out.println("The time must be in this format: yyyy-MM-dd HH:mm");
-        System.out.println("*******************************************");
-    }
-
-    public void showWrongDeadlineInput() {
-        System.out.println("The description and time of a deadline cannot be empty.");
-        System.out.println("*******************************************");
-    }
-
-    public void showWrongDeleteInput() {
-        System.out.println("Please only enter an integer after command 'delete'!");
-        System.out.println("*******************************************");
-    }
-
-    public void showTaskNotExist(String s) {
-        System.out.println("Task number " + s + " does not exist!");
-        System.out.println("*******************************************");
-    }
-
+    
     public void showAddTask(Task task, int numOfTasks) {
         System.out.println("Got it. I've added this task:\n  "
                 + task.toString() + "\nNow you have " + numOfTasks
