@@ -17,12 +17,13 @@ class Deadline extends Task {
         return "D";
     }
     
-    String getDate() {
-        return date;
+    String getDateString() {
+        return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))  + ", " + 
+                time.format(DateTimeFormatter.ofPattern("hh:mm a"));
     }
 
     String getToWrite() {
-        return this.getType() + " | " + super.getToWrite() + " | " + date;
+        return this.getType() + " | " + super.getToWrite() + " | " + this.getDateString();
     }
 
     @Override

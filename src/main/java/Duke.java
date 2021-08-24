@@ -27,13 +27,19 @@ public class Duke {
                         }
                         list.add(toDo);
                     } else if (strSplit[0].equals("D")) {
-                        Deadline deadline = new Deadline(strSplit[2], strSplit[3]);
+                        String[] dateTime = strSplit[3].split(", ");
+                        LocalDate date = LocalDate.parse(dateTime[0], DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                        LocalTime time = LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("hh:mm a"));
+                        Deadline deadline = new Deadline(strSplit[2], date, time);
                         if (strSplit[1].equals("1")) {
                             deadline.complete();
                         }
                         list.add(deadline);
                     } else if (strSplit[0].equals("E")) {
-                        Event event = new Event(strSplit[2], strSplit[3]);
+                        String[] dateTime = strSplit[3].split(", ");
+                        LocalDate date = LocalDate.parse(dateTime[0], DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                        LocalTime time = LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("hh:mm a"));
+                        Event event = new Event(strSplit[2], date, time);
                         if (strSplit[1].equals("1")) {
                             event.complete();
                         }

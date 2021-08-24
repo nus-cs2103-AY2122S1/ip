@@ -17,17 +17,18 @@ class Event extends Task {
         return "E";
     }
 
-    String getDate() {
-        return date;
+    String getDateString() {
+        return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))  + ", " + 
+        time.format(DateTimeFormatter.ofPattern("hh:mm a"));
     }
 
     String getToWrite() {
-        return super.getToWrite() + " | " + date;
+        return this.getType() + " | " + super.getToWrite() + " | " + this.getDateString();
     }
 
     @Override
     public String toString() {
-        return("[E]" + super.toString() + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) 
+        return("[E]" + super.toString() + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
                 + time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")");
     }
 }
