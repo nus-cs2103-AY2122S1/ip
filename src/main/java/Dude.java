@@ -7,17 +7,19 @@ import parser.ParserImpl;
 import ui.IUi;
 import ui.UiImpl;
 
+import java.util.Scanner;
+
 /**
  * main driver program
  */
 public class Dude {
+	/** Scanner to take input from the console */
+	private final Scanner scanner = new Scanner(System.in);
 	
-	private final TaskDao taskDao;
 	private final ICommandLogicUnit commandLogicUnit;
 	private final IUi ui;
 	
-	public Dude(TaskDao taskDao, ICommandLogicUnit commandLogicUnit, IUi ui) {
-		this.taskDao = taskDao;
+	public Dude(ICommandLogicUnit commandLogicUnit, IUi ui) {
 		this.commandLogicUnit = commandLogicUnit;
 		this.ui = ui;
 	}
@@ -27,7 +29,7 @@ public class Dude {
 		IUi ui = new UiImpl();
 		ICommandLogicUnit commandLogicUnit = new CommandLogicUnitImpl(taskDao, ui);
 		
-		new Dude(taskDao, commandLogicUnit, ui).run();
+		new Dude(commandLogicUnit, ui).run();
 	}
 	
 	/**
@@ -44,9 +46,11 @@ public class Dude {
 		
 		starting();
 		
-		try (IParser commandProcessor = new ParserImpl(commandLogicUnit, ui)) {
+		try {
+			IParser commandProcessor = new ParserImpl(commandLogicUnit, ui);
 			while (true) {
-				commandProcessor.processInput();
+				String input = scanner.nextLine();
+				commandProcessor.processInput(input);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
