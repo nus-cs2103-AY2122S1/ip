@@ -1,7 +1,7 @@
-
+import java.io.IOException;
 
 public abstract class Task {
-    private boolean done;
+    private boolean isDone;
     private final String taskName;
 
     protected enum TaskKind {
@@ -42,12 +42,34 @@ public abstract class Task {
 
     private Task(String taskName) {
         this.taskName = taskName;
-        this.done = false;
+        this.isDone = false;
+    }
+
+    private Task(boolean isDone, String taskName) {
+        this.taskName = taskName;
+        this.isDone = isDone;
+    }
+
+    private static Task of(TaskKind taskKind, boolean isDone, String taskName) {
+        switch (taskKind) {
+        case TODO:
+            return new Todo(isDone, taskName);
+        case DEADLINE:
+            return new Deadline(isDone, taskName, null);
+        case EVENT:
+            return new Event(isDone, taskName, null);
+        default:
+            throw new IllegalStateException("Unexpected value: " + taskKind);
+        }
     }
 
     private static class Todo extends Task{
         private Todo(String taskName) {
             super(taskName);
+        }
+
+        private Todo(boolean isDone, String taskName) {
+            super(isDone, taskName);
         }
 
         @Override
@@ -58,8 +80,8 @@ public abstract class Task {
         @Override
         public String toString() {
             String shortName = "[" + this.taskKind().shortName() + "]";
-            String isDone = super.done ? "[X]" : "[ ]";
-            return shortName + " " + isDone + " " + super.taskName;
+            String isisDone = super.isDone ? "[X]" : "[ ]";
+            return shortName + " " + isisDone + " " + super.taskName;
         }
     }
 
@@ -67,6 +89,11 @@ public abstract class Task {
         private final String deadline;
         private Deadline(String taskName, String note) {
             super(taskName);
+            this.deadline = note;
+        }
+
+        private Deadline(boolean isDone, String taskName, String note) {
+            super(isDone, taskName);
             this.deadline = note;
         }
 
@@ -78,9 +105,9 @@ public abstract class Task {
         @Override
         public String toString() {
             String shortName = "[" + this.taskKind().shortName() + "]";
-            String isDone = super.done ? "[X]" : "[ ]";
+            String isisDone = super.isDone ? "[X]" : "[ ]";
             String deadline = "(by: " + this.deadline + ")";
-            return shortName + " " + isDone + " " + super.taskName + "" + deadline;
+            return shortName + " " + isisDone + " " + super.taskName + "" + deadline;
         }
     }
 
@@ -88,6 +115,11 @@ public abstract class Task {
         private final String startTime;
         private Event(String taskName, String note) {
             super(taskName);
+            this.startTime = note;
+        }
+
+        private Event(boolean isDone, String taskName, String note) {
+            super(isDone, taskName);
             this.startTime = note;
         }
 
@@ -99,9 +131,9 @@ public abstract class Task {
         @Override
         public String toString() {
             String shortName = "[" + this.taskKind().shortName() + "]";
-            String isDone = super.done ? "[X]" : "[ ]";
+            String isisDone = super.isDone ? "[X]" : "[ ]";
             String startTime = "(at: " + this.startTime + ")";
-            return shortName + " " + isDone + " " + super.taskName + "" + startTime;
+            return shortName + " " + isisDone + " " + super.taskName + "" + startTime;
         }
     }
 
@@ -144,8 +176,8 @@ public abstract class Task {
         }
     }
 
-    public void done() {
-        this.done = true;
+    public boolean isDone() {
+        return this.isDone;
     }
 
     public String getTaskName() {
@@ -153,4 +185,40 @@ public abstract class Task {
     }
 
     public abstract TaskKind taskKind();
+
+    public String encode() {
+        return this.taskKind().shortName + " , " + this.isDone + " , " + this.taskName + "\n";
+    }
+
+    public static Task decode(String hardCode) {
+        String[] parts = hardCode.split(" , ");
+
+        TaskKind taskKind;
+        Boolean isDone;
+        String taskName;
+        try {
+            switch (parts[0]) {
+            case "D":
+                taskKind = TaskKind.DEADLINE;
+                break;
+            case "E":
+                taskKind = TaskKind.EVENT;
+                break;
+            case "T":
+            default:
+                taskKind = TaskKind.TODO;
+            }
+
+            isDone = Boolean.parseBoolean(parts[1]);
+            taskName = parts[2];
+            return Task.of(taskKind, isDone, taskName);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public void add() throws IOException {
+        Duke.todoList.add(this);
+    }
 }
