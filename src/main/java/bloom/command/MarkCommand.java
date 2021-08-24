@@ -33,6 +33,6 @@ public class MarkCommand extends Command {
 		Task task = TaskList.get(this.index);
 		task.markAsDone();
 		System.out.println(Message.COMMAND_MARK.getMessage());
-		System.out.println(task);
+		System.out.println("\t   " + task);
 	}
 }

@@ -1,14 +1,6 @@
 package bloom.app;
 
-import bloom.command.Command;
-import bloom.command.GreetCommand;
-import bloom.command.ExitCommand;
-import bloom.command.ListCommand;
-import bloom.command.MarkCommand;
-import bloom.command.DeleteCommand;
-import bloom.command.ToDoCommand;
-import bloom.command.DeadlineCommand;
-import bloom.command.EventCommand;
+import bloom.command.*;
 import bloom.constant.Message;
 import bloom.exception.command.BloomUnknownCommandException;
 
@@ -39,6 +31,8 @@ public class Parser {
 			return new ExitCommand();
 		case "list":
 			return new ListCommand();
+		case "find":
+			return new FindCommand(parse[1]);
 		case "done":
 			return new MarkCommand(Integer.parseInt(parse[1]) - 1);
 		case "delete":
