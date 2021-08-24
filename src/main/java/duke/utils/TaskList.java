@@ -32,19 +32,6 @@ public class TaskList {
         this.tasks.add(task);
     }
 
-    public void showList(Ui ui) {
-        if (this.tasks.size() == 0) {
-            ui.printOut("No tasks added yet!");
-        } else {
-            String[] messages = new String[this.tasks.size()];
-            int i = 0;
-            for (Task task : this.tasks) {
-                messages[i] = String.format("%d. %s", ++i, task.toString());
-            }
-            ui.printOut(messages);
-        }
-    }
-
     public String[] deleteTask(int i) throws InvalidTaskNumberException {
         Task task = this.getTask(i);
         boolean removed = this.tasks.remove(task);
@@ -57,7 +44,7 @@ public class TaskList {
         if (marked) {
             return new String[] {"Nice! I've marked this task as done:", "    " + task.toString()};
         } else {
-            return new String[] {"This was completed previously!:", "    " + task.toString()};
+            return new String[] {"This was completed previously:", "    " + task.toString()};
         }
     }
 
@@ -71,5 +58,27 @@ public class TaskList {
         } else {
             return "";
         }
+    }
+
+    public void showList(Ui ui) {
+        ui.printOut(toStrings());
+    }
+
+    private String[] toStrings() {
+        if (this.tasks.size() == 0) {
+            return new String[] {"No tasks added yet!"};
+        } else {
+            String[] messages = new String[this.tasks.size()];
+            int i = 0;
+            for (Task task : this.tasks) {
+                messages[i] = String.format("%d. %s", ++i, task.toString());
+            }
+            return messages;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.join("\n", toStrings());
     }
 }

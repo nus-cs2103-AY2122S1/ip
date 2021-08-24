@@ -6,16 +6,20 @@ import duke.utils.TaskList;
 import duke.utils.Ui;
 
 public class MarkDoneCommand extends Command {
-    private String taskNumber;
+    private int taskNumber;
     public MarkDoneCommand(String taskNumber) {
-        this.taskNumber = taskNumber;
+        this.taskNumber = Integer.parseInt(taskNumber);
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskNumberException {
-        int index = Integer.parseInt(this.taskNumber);
-        String[] messages = tasks.markDone(index);
+        String[] messages = tasks.markDone(this.taskNumber);
         ui.printOut(messages);
         storage.save(tasks);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("TO MARK DONE: index %d", this.taskNumber);
     }
 }

@@ -6,16 +6,20 @@ import duke.utils.TaskList;
 import duke.utils.Ui;
 
 public class DeleteTaskCommand extends Command {
-    private String taskNumber;
+    private int taskNumber;
     public DeleteTaskCommand(String taskNumber) {
-        this.taskNumber = taskNumber;
+        this.taskNumber = Integer.parseInt(taskNumber);
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskNumberException {
-        int index = Integer.parseInt(taskNumber);
-        String[] messages = tasks.deleteTask(index);
+        String[] messages = tasks.deleteTask(this.taskNumber);
         ui.printOut(messages);
         storage.save(tasks);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("TO DELETE: index %d", this.taskNumber);
     }
 }

@@ -21,4 +21,9 @@ public class ByeCommand extends Command {
     public boolean hasExited() {
         return true;
     }
+
+    @Override
+    public String toString() {
+        return String.format("TO PRINT: %s", BYE_MESSAGE);
+    }
 }
