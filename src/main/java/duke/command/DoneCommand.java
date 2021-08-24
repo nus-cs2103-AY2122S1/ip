@@ -7,7 +7,7 @@ import duke.general.Ui;
 import duke.task.Task;
 
 public class DoneCommand extends Command {
-    String[] input;
+    private String[] input;
 
     public DoneCommand(String[] input) {
         this.input = input;

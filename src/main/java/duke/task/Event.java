@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 /**
  * duke.task.Event encapsulates the name of the event as well as the
  * when the event is occurring.

@@ -39,17 +39,17 @@ public class Storage {
                 while (s.hasNext()) {
                     String[] taskLine = s.nextLine().split("/");
                     switch (taskLine[0]) {
-                        case "T":
-                            addToList(TaskType.TODO, taskLine);
-                            break;
-                        case "D":
-                            addToList(TaskType.DEADLINE, taskLine);
-                            break;
-                        case "E":
-                            addToList(TaskType.EVENT, taskLine);
-                            break;
-                        default:
-                            System.out.println("Unexpected value obtained: " + taskLine[0]);
+                    case "T":
+                        addToList(TaskType.TODO, taskLine);
+                        break;
+                    case "D":
+                        addToList(TaskType.DEADLINE, taskLine);
+                        break;
+                    case "E":
+                        addToList(TaskType.EVENT, taskLine);
+                        break;
+                    default:
+                        System.out.println("Unexpected value obtained: " + taskLine[0]);
                     }
                 }
             }
@@ -70,17 +70,17 @@ public class Storage {
     public void addToList(TaskType t, String[] line) {
         Task temp;
         switch (t) {
-            case TODO:
-                temp = new ToDo(line[2]);
-                break;
-            case DEADLINE:
-                temp = new Deadline(line[2], line[3]);
-                break;
-            case EVENT:
-                temp = new Event(line[2], line[3]);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + t);
+        case TODO:
+            temp = new ToDo(line[2]);
+            break;
+        case DEADLINE:
+            temp = new Deadline(line[2], line[3]);
+            break;
+        case EVENT:
+            temp = new Event(line[2], line[3]);
+            break;
+        default:
+            throw new IllegalStateException("Unexpected value: " + t);
         }
         if (Objects.equals(line[1], "X")) {
             temp.toggleCompleted();

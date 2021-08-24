@@ -9,7 +9,7 @@ import duke.task.ToDo;
 import java.util.ArrayList;
 
 public class Tasklist {
-    ArrayList<Task> list;
+    private ArrayList<Task> list;
 
     public Tasklist(ArrayList<Task> list) {
         this.list = list;
@@ -28,27 +28,27 @@ public class Tasklist {
         }
         String input = inputSplit[1];
         switch (t) {
-            case TODO:
-                temp = new ToDo(input);
-                break;
-            case DEADLINE:
-                if (input.split(" /by ", 2).length < 2) {
-                    throw new DukeException("duke.task.Deadline not specified!");
-                }
-                String desc = input.split(" /by ", 2)[0];
-                String dead = input.split(" /by ", 2)[1];
-                temp = new Deadline(desc, dead);
-                break;
-            case EVENT:
-                if (input.split(" /at ", 2).length < 2) {
-                    throw new DukeException("Date of event not specified!");
-                }
-                String name = input.split(" /at ", 2)[0];
-                String at = input.split(" /at ", 2)[1];
-                temp = new Event(name, at);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + t);
+        case TODO:
+            temp = new ToDo(input);
+            break;
+        case DEADLINE:
+            if (input.split(" /by ", 2).length < 2) {
+                throw new DukeException("duke.task.Deadline not specified!");
+            }
+            String desc = input.split(" /by ", 2)[0];
+            String dead = input.split(" /by ", 2)[1];
+            temp = new Deadline(desc, dead);
+            break;
+        case EVENT:
+            if (input.split(" /at ", 2).length < 2) {
+                throw new DukeException("Date of event not specified!");
+            }
+            String name = input.split(" /at ", 2)[0];
+            String at = input.split(" /at ", 2)[1];
+            temp = new Event(name, at);
+            break;
+        default:
+            throw new IllegalStateException("Unexpected value: " + t);
         }
         list.add(temp);
         return temp;
