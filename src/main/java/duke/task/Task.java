@@ -1,16 +1,22 @@
 package duke.task;
 
+/** A task class which represents the user's tasks. */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * A constructor for class Task.
+     *
+     * @param description The task description.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
     /**
-     * A method that returns the status icon of the task.
+     * Return the status icon of the task.
      *
      * @return The status icon of the task.
      */
@@ -26,14 +32,19 @@ public class Task {
     }
 
     /**
-     * Return the data of the task written in a standard format.
+     * Return a string representation in the format to be written in tasks.txt file.
      *
-     * @return The data of the task written in a standard format.
+     * @return The string representation in the format to be written in tasks.txt file.
      */
     public String toDataString() {
         return String.format("| %d | %s", this.isDone ? 1 : 0, this.description);
     }
 
+    /**
+     * Return a string representation of this task.
+     *
+     * @return The string representation of this task.
+     */
     public String toString() {
         return String.format("%s %s", this.getStatusIcon(), this.description);
     }
