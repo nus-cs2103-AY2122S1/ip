@@ -19,7 +19,7 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-            return String.format("[E]%s(at: %s from: %s)", super.toString(),
+            return String.format("[E]%s (at: %s from: %s)", super.toString(),
                     this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy")),
                     this.startTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + "-"
                             + this.endTime.format(DateTimeFormatter.ofPattern("hh:mm a")));

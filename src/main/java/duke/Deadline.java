@@ -23,10 +23,10 @@ public class Deadline extends Task{
     public String toString() {
 
         if (this.dateTime != null) {
-            return String.format("[D]%s(by: %s)", super.toString(),
+            return String.format("[D]%s (by: %s)", super.toString(),
                     this.dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")));
         } else {
-            return String.format("[D]%s(by: %s)", super.toString(),
+            return String.format("[D]%s (by: %s)", super.toString(),
                     this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
         }
     }

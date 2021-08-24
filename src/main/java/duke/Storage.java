@@ -44,9 +44,9 @@ public class Storage {
 
             while (textFileContent.hasNext()) {
                 String eachLine = textFileContent.nextLine();
-                char taskType = eachLine.charAt(3);
-                char taskDone = eachLine.charAt(6);
-                String taskDescription = eachLine.substring(9);
+                char taskType = eachLine.split("\\[", 2)[1].charAt(0);
+                char taskDone = eachLine.split("]\\[", 2)[1].charAt(0);
+                String taskDescription = eachLine.split("] ", 2)[1].trim();
                 taskList.add(TaskList.createTask(taskType, taskDone, taskDescription));
             }
         } catch (FileNotFoundException e) {

@@ -122,7 +122,7 @@ public class Parser {
     }
 
     public static Task parseDeadlineFromFile(String input) {
-        String description = input.split("\\(", 2)[0];
+        String description = input.split("\\(", 2)[0].trim();
         String returnDate = input.substring(input.indexOf(":")+2,input.indexOf(")"));
 
         if (isDateTime(returnDate)) {
@@ -172,7 +172,7 @@ public class Parser {
     }
 
     public static Task parseEventFromFile(String input) {
-        String description = input.split("\\(", 2)[0];
+        String description = input.split("\\(", 2)[0].trim();
         String dateTimeDuration = input.substring(input.indexOf(":")+2,input.indexOf(")"));
         String date = dateTimeDuration.split(" from: ")[0];
         String timeDuration = dateTimeDuration.split(" from: ")[1];

@@ -28,13 +28,9 @@ public class Duke {
                 ui.stringWithDivider(e.getMessage());
             }
         }
-
-
     }
 
-
     public static void main(String[] args) {
-
         new Duke("./Duke.txt").run();
     }
 }
