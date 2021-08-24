@@ -37,6 +37,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Returns a string representation of the task to be saved in.
      *

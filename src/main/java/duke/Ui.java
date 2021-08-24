@@ -38,6 +38,11 @@ public class Ui {
         return this.scanner.nextLine();
     }
 
+    public void showFound() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+
     public void exit() {
         System.out.println("Bye! Feel free to ask me for help again anytime!");
         this.scanner.close();
