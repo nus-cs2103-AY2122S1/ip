@@ -1,16 +1,79 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class Duke {
     private static final ArrayList<Task> tasks = new ArrayList<>();
     private static Scanner scanner;
+    private static final String dataFolderPath = "./data";
+    private static final String saveFilePath = "./data/saveFile.txt";
 
 
     public static void main(String[] args) {
+        readSaveFile();
         System.out.println("Hello, I am Duke. What can I do for you?");
         scanner = new Scanner(System.in);
         waitResponse();
         scanner.close();
+    }
+
+    public static void readSaveFile() {
+        try{
+            File saveFile = getSaveFile();
+            Scanner scanner = new Scanner(saveFile);
+            while (scanner.hasNext()) {
+                String taskInSaveFormat = scanner.nextLine();
+                String[] currTask = taskInSaveFormat.split("\\|\\|");
+                Task newTask;
+                switch (currTask[0]) {
+                    case "[T]":
+                        newTask = new Todo(currTask[2]);
+                        if (currTask[1].equals("true")){
+                            newTask.complete();
+                        }
+                        tasks.add(newTask);
+                        break;
+                    case "[E]":
+                        newTask = new Event(currTask[2], currTask[3]);
+                        if (currTask[1].equals("true")){
+                            newTask.complete();
+                        }
+                        tasks.add(newTask);
+                        break;
+                    case "[D]":
+                        newTask = new Deadline(currTask[2], currTask[3]);
+                        if (currTask[1].equals("true")){
+                            newTask.complete();
+                        }
+                        tasks.add(newTask);
+                        break;
+                }
+            }
+            System.out.println("Save file successfully read.");
+        } catch (IOException e) {
+            System.out.println("We don't have permissions to make a save file.");
+        }
+
+    }
+
+    public static void writeSaveFile() throws IOException {
+        File saveFile = getSaveFile();
+        FileWriter writer = new FileWriter(saveFile);
+        for (Task task : tasks) {
+            writer.write(task.toSaveFormat() + System.lineSeparator());
+        }
+        writer.close();
+    }
+
+    private static File getSaveFile() throws IOException{
+        File dataFolder = new File(dataFolderPath);
+        File saveFile = new File(saveFilePath);
+        dataFolder.mkdir(); // if folder already exist, nothing is done
+        saveFile.createNewFile(); // if file already exists, nothing is done
+        return saveFile;
     }
 
     private static void waitResponse() {
@@ -50,28 +113,30 @@ public class Duke {
             System.out.println(e);
             System.out.println("Please try again");
             waitResponse();
+        } catch (IOException e) {
+            System.out.println("Sorry, your file could not save due to IO error");
         }
     }
 
-    private static void handleDelete(String action) throws TaskNotFoundException, InvalidInputException{
+    private static void handleDelete(String action) throws TaskNotFoundException, InvalidInputException, IOException{
         try {
             int taskNumber = Integer.parseInt(action);
             if (taskNumber <= tasks.size() && taskNumber > 0) {
                 Task taskToDelete = tasks.get(taskNumber - 1);
                 tasks.remove(taskNumber - 1);
-                System.out.println(String.format("Noted. I've removed this task:\n  %s\nNow you have %d task in the list.",
-                        taskToDelete, tasks.size()));
+                System.out.printf("Noted. I've removed this task:\n  %s\nNow you have %d task in the list.%n",
+                        taskToDelete, tasks.size());
+                writeSaveFile();
             } else {
                 throw new TaskNotFoundException("the task chosen does not exist. Use 'list' to see all your tasks.");
             }
             waitResponse();
         } catch (NumberFormatException e){
-            System.out.println(e);
             throw new InvalidInputException("command 'delete' require an integer as the second parameter");
         }
     }
 
-    private static void handleTodo(String action) throws NoActionException{
+    private static void handleTodo(String action) throws NoActionException, IOException{
         if (action.length() == 0) {
             throw new NoActionException("Command 'todo' requires a task action");
         }
@@ -80,11 +145,12 @@ public class Duke {
         System.out.printf(
                 "Got it. I've added this task: \n\t %s \nNow you have %d task in the list.%n",
         newTask, tasks.size());
+        writeSaveFile();
         waitResponse();
     }
 
 
-    private static void handleDeadline(String action) throws NoActionException, NoTimeException{
+    private static void handleDeadline(String action) throws NoActionException, NoTimeException, IOException{
         if (action.length() == 0) {
             throw new NoActionException("Command 'deadline' requires a task action");
         }
@@ -98,10 +164,11 @@ public class Duke {
         System.out.printf(
                 "Got it. I've added this task: \n  %s \nNow you have %d task in the list.%n",
         newTask, tasks.size());
+        writeSaveFile();
         waitResponse();
     }
 
-    private static void handleEvent(String action) throws NoActionException, NoTimeException{
+    private static void handleEvent(String action) throws NoActionException, NoTimeException, IOException{
         if (action.trim().length() == 0) {
             throw new NoActionException("Command 'event' requires a task action");
         }
@@ -115,6 +182,7 @@ public class Duke {
         System.out.printf(
                 "Got it. I've added this task:\n\t %s\nNow you have %d task in the list.%n",
         newTask, tasks.size());
+        writeSaveFile();
         waitResponse();
     }
 
@@ -130,7 +198,7 @@ public class Duke {
         System.out.println("Bye. Hope to see you again!");
     }
 
-    private static void handleDone(String action) throws InvalidInputException, TaskNotFoundException{
+    private static void handleDone(String action) throws InvalidInputException, TaskNotFoundException, IOException{
         try {
             int taskNumber = Integer.parseInt(action);
             if (taskNumber <= tasks.size() && taskNumber > 0) {
@@ -145,6 +213,7 @@ public class Duke {
             } else {
                 throw new TaskNotFoundException("the task chosen does not exist. Use 'list' to see all your tasks.");
             }
+            writeSaveFile();
             waitResponse();
         } catch (NumberFormatException e) {
             throw new InvalidInputException("command 'done' require an integer as the second parameter");

@@ -7,6 +7,10 @@ public class Event extends Task{
         this.deadline = deadline;
     }
 
+    public String toSaveFormat() {
+        return String.format("%s||%s||%s||%s", symbol, super.isComplete(), super.getAction(), this.deadline);
+    }
+
     public String toString() {
         return String.format("%s%s (at: %s)", symbol, super.toString(), deadline);
     }
