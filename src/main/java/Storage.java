@@ -70,7 +70,7 @@ public class Storage {
         return taskList;
     }
 
-    public void saveData(ArrayList<Task> taskList) {
+    public void saveData(TaskList taskList) {
         try (FileWriter fw = new FileWriter(this.filePath)) {
 
             StringBuilder dataString = new StringBuilder();

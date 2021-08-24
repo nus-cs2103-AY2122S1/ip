@@ -1,22 +1,26 @@
-import java.util.ArrayList;
-
-
 public class Duke {
-    private static ArrayList<Task> taskList = new ArrayList<>();
-    private static String DATA_FILE_PATH = "src/main/java/data.txt";
-    private static Storage storage = new Storage(DATA_FILE_PATH);
+    private TaskList taskList;
+    private Storage storage;
+    private Parser parser;
+    private Ui ui;
 
+    public Duke(String filePath) {
+        this.storage = new Storage(filePath);
+        this.taskList = new TaskList(storage.loadData());
+        this.parser = new Parser(storage, taskList);
+        this.ui = new Ui();
+    }
+
+    public void run() {
+        ui.sayGreeting();
+       while (!this.parser.isTerminated()) {
+            ui.printMessage(parser.parseCommand(ui.getUserInput()));
+       }
+
+    }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        taskList = storage.loadData();
-        Parser parser = new Parser(storage, taskList);
-        parser.parseCommands();
+            new Duke("src/main/java/data.txt").run();
         }
 
 }
