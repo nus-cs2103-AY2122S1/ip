@@ -2,8 +2,8 @@ list
 todo
 blah
 todo borrow book
-deadline gym /by Aug 6th
-event marathon /at Aug 10th 8-10am
+deadline gym /by 25/8/2021 0800
+event marathon /at 27/8/2021 0800
 done 5
 delete 7
 delete 6
