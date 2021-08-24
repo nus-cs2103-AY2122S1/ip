@@ -12,6 +12,14 @@ public class Task {
         return this.toString();
     }
 
+    public String write() {
+        if (this.isDone) {
+            return "| 1 | " + this.name;
+        } else {
+            return "| 0 | " + this.name;
+        }
+    }
+
     @Override
     public String toString() {
         if (this.isDone) {

@@ -7,6 +7,11 @@ public class Event extends Task{
     }
 
     @Override
+    public String write() {
+            return "E " + super.write() + " | " + this.eventTime;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.eventTime + ")";
     }
