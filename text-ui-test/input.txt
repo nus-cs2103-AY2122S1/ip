@@ -1,7 +1,8 @@
 todo farming leylines
-deadline clip toenails /by tomorrow
-deadline code /by tonight 2359
-event lecture /at 12pm
+deadline clip toenails /by 2021-09-01
+deadline code /by tmr
+deadline code /by 2021-08-29
+event lecture /at 2021-09-01
 todo brush teeth
 list
 done 2

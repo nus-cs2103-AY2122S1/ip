@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Ligma {
@@ -61,6 +62,9 @@ public class Ligma {
                     + "\n Sorry, command does not exist.\n" + PARTITION);
         } catch (InputMismatchException e2) {
             System.out.println(PARTITION + '\n' + e2.getMessage() + '\n' + PARTITION);
+        } catch (DateTimeParseException e3) {
+            System.out.println(PARTITION
+                    +"\n Time must be in yyyy-mm-dd format.\n" + PARTITION);
         } finally {
             return false;
         }
