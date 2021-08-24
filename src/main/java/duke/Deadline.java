@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     protected String by;
-    protected LocalDate byLD;
+    protected LocalDate byLd;
 
     /**
      * A public constructor to initialise a duke.task.Deadline duke.task.Task.
@@ -23,17 +23,17 @@ public class Deadline extends Task {
         super(description, isDone);
         this.by = by;
         try {
-            byLD = LocalDate.parse(by);
+            byLd = LocalDate.parse(by);
         } catch (DateTimeException e) {
-            byLD = null;
+            byLd = null;
         }
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + (byLD != null
-                    ? byLD.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + (byLd != null
+                    ? byLd.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                     : this.by)
                 + ")";
     }
@@ -43,4 +43,3 @@ public class Deadline extends Task {
         return "[D] | " + super.toData() + " | " + this.by;
     }
 }
-// deadline task1 /by 22/08/2021 6:40pm

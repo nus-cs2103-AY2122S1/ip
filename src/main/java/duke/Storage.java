@@ -44,6 +44,7 @@ public class Storage {
      */
     public TaskList readData(String filepath) {
         try {
+            // set-up to check if file exists
             TaskList list = new TaskList();
             String path = new File("").getAbsoluteFile() + filepath;
             File file = new File(path);
@@ -52,6 +53,7 @@ public class Storage {
                 return list;
             }
 
+            // read and update TaskList
             Scanner s = new Scanner(file);
             while (s.hasNext()) {
                 String[] inputArray = s.nextLine().split(" \\| ");
