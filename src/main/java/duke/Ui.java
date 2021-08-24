@@ -1,7 +1,7 @@
 package duke;
 
 /**
- *  A class that encapsulates the interactions with the user
+ *  A class that encapsulates the interactions with the user.
  */
 public class Ui {
     /**
@@ -20,7 +20,9 @@ public class Ui {
      * Shows the goodbye message when finishing executing Duke.
      */
     public void showByeMessage() {
-        System.out.println("\tBye bye!!. Hope to see you again soon!!");
+        String bye = "\tBye bye!!. Hope to see you again soon!!";
+        showBreakLine();
+        System.out.println(bye);
     }
 
     /**
@@ -35,11 +37,19 @@ public class Ui {
                 + def + "\n");
     }
 
+    /**
+     * Shows the BreakLine that is shown at the start and end of each Duke's reply.
+     */
     public void showBreakLine() {
         String breakLine = "------------------------------";
         System.out.println(breakLine + breakLine + "\n");
     }
 
+    /**
+     * Shows the formatted reply from Duke after receiving a input from the user.
+     *
+     * @param reply The String representation of the reply provided from Duke
+     */
     public void showReply(String reply) {
         showBreakLine();
         System.out.println(reply);

@@ -9,12 +9,34 @@ import java.util.Scanner;
  * A class that encapsulates the saving/reading data for Duke.
  */
 public class Storage {
+    private String filepath;
+
+    /**
+     * Constructor for the Storage object initialised with the filepath
+     * to save/read the data to/from.
+     *
+     * @param filepath The String representation of the filepath to the text file
+     *                 containing the saved data
+     */
+    public Storage(String filepath) {
+        this.filepath = filepath;
+    }
+
     /**
      * Saves the data of the task in the list into a text file formatted.
+     *
+     * @param list The TaskList containing the tasks that is to be saved into
      */
     public void saveData(TaskList list) {
         try {
-            String path = new File("").getAbsoluteFile() + "/data";
+            // get file directory string
+            String[] dir = this.filepath.split("/");
+            StringBuilder dirString = new StringBuilder("");
+            for (int i = 0; i < dir.length - 1; i++) {
+                dirString.append("/" + dir[i]);
+            }
+
+            String path = new File("").getAbsoluteFile() + dirString.toString();
             File file = new File(path);
 
             // create directory if not yet created
@@ -22,7 +44,7 @@ public class Storage {
                 file.mkdirs();
             }
 
-            FileWriter fw = new FileWriter(file + "/duke.txt");
+            FileWriter fw = new FileWriter(file + "/" + dir[dir.length - 1]);
 
             list.iterateList(x -> {
                 try {
@@ -42,10 +64,10 @@ public class Storage {
     /**
      * Reads the data from the saved file if it exists to update Duke on running.
      */
-    public TaskList readData(String filepath) {
+    public TaskList readData() {
         try {
             TaskList list = new TaskList();
-            String path = new File("").getAbsoluteFile() + filepath;
+            String path = new File("").getAbsoluteFile() + this.filepath;
             File file = new File(path);
 
             if (!file.isFile()) {

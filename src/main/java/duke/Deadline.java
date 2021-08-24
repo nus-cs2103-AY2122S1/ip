@@ -29,6 +29,13 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the string representation of this Deadline task that is to be displayed
+     * by Duke. It comprises the tag for Deadline, description of this Deadline and the
+     * deadline of this task.
+     *
+     * @return The string representation of this Deadline task
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
@@ -38,9 +45,14 @@ public class Deadline extends Task {
                 + ")";
     }
 
+    /**
+     * Returns the data representation for this Deadline task that is to be saved
+     * and used on initial execution of Duke.
+     *
+     * @return The String representation of the data of this Deadline task
+     */
     @Override
     public String toData() {
         return "[D] | " + super.toData() + " | " + this.by;
     }
 }
-// deadline task1 /by 22/08/2021 6:40pm

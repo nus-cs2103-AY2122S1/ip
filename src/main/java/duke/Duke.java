@@ -12,14 +12,20 @@ public class Duke {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Public constructor to initialise Duke.
+     *
+     * @param filepath The String representing the filepath to the Duke.txt file containing
+     *                 the previous saved data
+     */
     public Duke(String filepath) {
-        storage = new Storage();
-        list = storage.readData(filepath);
+        storage = new Storage(filepath);
+        list = storage.readData();
         ui = new Ui();
     }
 
     /**
-     * Executes the Duke
+     * Executes the Duke to start up for use.
      */
     public void run() {
         ui.showWelcomeMessage();

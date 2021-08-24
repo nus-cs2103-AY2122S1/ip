@@ -20,11 +20,24 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns the string representation of this Event task that is to be displayed
+     * by Duke. It comprises the tag for Event, description of this Event and the
+     * Event of this task.
+     *
+     * @return The string representation of this Event task
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";
     }
 
+    /**
+     * Returns the data representation for this Event task that is to be saved
+     * and used on initial execution of Duke.
+     *
+     * @return The String representation of the data of this Event task
+     */
     @Override
     public String toData() {
         return "[E] | " + super.toData() + " | " + this.at;
