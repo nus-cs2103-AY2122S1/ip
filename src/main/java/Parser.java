@@ -1,31 +1,67 @@
 public class Parser {
 
     private enum CommandType {
-        LIST, DONE, TODO, EVENT, DEADLINE, DELETE
+        LIST, DONE, TODO, EVENT, DEADLINE, DELETE, BYE, UNKNOWN
     }
 
-    public static Command parse(String fullCommand) {
+    private static CommandType toEnum(String command) {
+
+        for (CommandType commandType : CommandType.values()) {
+            if (commandType.name().equals(command)) {
+                return commandType;
+            }
+        }
+        return CommandType.UNKNOWN;
+    }
+
+    private static String[] validateCommand(String fullCommand)
+            throws EmptyDescriptionException {
 
         String[] commandComponents = fullCommand.split(" ", 2);
+        String message = "The description of [%s] command cannot be empty.";
+
+        if (commandComponents.length < 2 || commandComponents[1].trim().isEmpty())
+            throw new EmptyDescriptionException(String.format(message, commandComponents[0]));
+
+        return commandComponents;
+    }
+
+    public static Command parse(String fullCommand)
+            throws EmptyDescriptionException {
+
+        String[] commandComponents = fullCommand.split(" ", 2);;
         String commandType = commandComponents[0].toUpperCase();
+
+        int taskNum;
+        String commandDescription;
+
         Command command;
 
-        switch (CommandType.valueOf(commandType)) {
+        switch (toEnum(commandType)) {
         case LIST:
             command = new ListCommand();
             break;
+        case BYE:
+            command = new ExitCommand();
+            break;
         case DONE:
-            command = new DoneCommand();
+            commandComponents = validateCommand(fullCommand);
+            taskNum = Integer.parseInt(commandComponents[1]);
+            command = new DoneCommand(taskNum);
             break;
         case DELETE:
-            command = new DeleteCommand();
+            commandComponents = validateCommand(fullCommand);
+            taskNum = Integer.parseInt(commandComponents[1]);
+            command = new DeleteCommand(taskNum);
             break;
         case TODO:
             // Fallthrough
         case EVENT:
             // Fallthrough
         case DEADLINE:
-            command = new AddCommand();
+            commandComponents = validateCommand(fullCommand);
+            commandDescription = commandComponents[1];
+            command = new AddCommand(commandType, commandDescription);
             break;
         default:
             command = new UnknownCommand();
