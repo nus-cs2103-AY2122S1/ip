@@ -16,7 +16,8 @@ public class DeadlineCommand extends Command {
 		this.description = description;
 		this.by = by;
 	}
-	
+
+	@Override
 	public void run() {
 		Deadline deadline = new Deadline(this.description, this.by);
 		TaskList.add(deadline);

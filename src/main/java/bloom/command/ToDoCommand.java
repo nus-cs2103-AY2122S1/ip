@@ -11,7 +11,8 @@ public class ToDoCommand extends Command {
 	public ToDoCommand(String description) {
 		this.description = description;
 	}
-	
+
+	@Override
 	public void run() {
 		ToDo todo = new ToDo(this.description);
 		TaskList.add(todo);

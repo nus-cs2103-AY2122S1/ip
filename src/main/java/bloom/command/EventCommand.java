@@ -16,7 +16,8 @@ public class EventCommand extends Command {
 		this.description = description;
 		this.at = at;
 	}
-	
+
+	@Override
 	public void run() {
 		Event event = new Event(this.description, this.at);
 		TaskList.add(event);

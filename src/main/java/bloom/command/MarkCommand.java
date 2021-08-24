@@ -11,7 +11,8 @@ public class MarkCommand extends Command {
 	public MarkCommand(int index) {
 		this.index = index;
 	}
-	
+
+	@Override
 	public void run() {
 		Task task = TaskList.get(this.index - 1);
 		task.markAsDone();
