@@ -22,6 +22,11 @@ public class Deadline extends Task {
         isTimeGiven = true;
     }
 
+    /**
+     * Returns this Deadline's list entry string.
+     * 
+     * @return A string representation of this Deadline's list entry.
+     */
     @Override
     public String listEntry() {
         if (isTimeGiven) {
@@ -34,6 +39,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns this Deadline's database entry string.
+     * 
+     * @return A string representation of this Deadline's database entry.
+     */
     @Override
     public String databaseEntry() {
         if (isTimeGiven) {
@@ -42,7 +52,13 @@ public class Deadline extends Task {
             return "D" + super.databaseEntry() + " " + deadlineDate;
         }
     }
-    
+
+    /**
+     * Checks if this Deadline object's deadline is on the given date.
+     * 
+     * @param l The date against which to check this Deadline object's deadline.
+     * @return true if the deadline is on the given date.
+     */
     @Override
     public boolean isTodayTask(LocalDate l) {
         return l.isEqual(deadlineDate);
