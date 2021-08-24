@@ -9,14 +9,23 @@ import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ *  Duke class that contains run and main method to run the program
+ *
+ * @author Chua Sue-Ann
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList taskList;
-    //private Ui ui;
 
+    /**
+     * Public constructor for Duke class. Creates instance of Duke class.
+     *
+     * @param file File that data will be stored in later.
+     * @return Instance of Duke class.
+     */
     public Duke(File file) {
-        //this.ui = new Ui();
         this.storage = new Storage(file);
         try {
             this.taskList = new TaskList();
@@ -25,6 +34,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Run method triggers file to be created and welcomes user with welcome message.
+     *
+     * @throws DukeException
+     */
     public void run() throws DukeException {
         try {
             File dukeFile = new File("data/duke.txt");
@@ -38,6 +52,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method for program. Creates file path and creates file.
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         Files.createDirectories(Paths.get("data/"));
         File dukeFile = new File("data/duke.txt");

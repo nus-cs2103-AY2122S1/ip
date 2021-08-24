@@ -12,25 +12,12 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Storage {
-//    public static final String DEFAULT_DIRECTORY_NAME = "data/";
-//    public static final String DEFAULT_PATH_NAME = "data/duke.txt";
-//
-//    public final String dirName;
-//    public final String pathName;
+
     public final File file;
 
-//    public Storage() throws InvalidPathException {
-//        this.pathName = DEFAULT_PATH_NAME;
-//        this.dirName = DEFAULT_DIRECTORY_NAME;
-//    }
     public Storage(File file) {
         this.file = file;
     }
-
-//    public Storage(String dirName, String fileName) throws InvalidPathException{
-//        this.fileName = fileName;
-//        this.dirName = dirName;
-//    }
 
     public PrintWriter load() throws IOException {
         PrintWriter writer = new PrintWriter(this.file);

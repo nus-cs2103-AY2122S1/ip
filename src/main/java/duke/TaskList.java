@@ -4,24 +4,46 @@ import duke.tasks.Task;
 
 import java.util.ArrayList;
 
+/**
+ * The class that contains all the operations that change the list of tasks
+ * such as adding, completing, deleting.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Public constructor.
+     *
+     * @return An instance of TaskList
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Marks task as complete and shows message to user.
+     *
+     * @param taskID
+     */
     public void completeTask(int taskID) {
         Ui.showCompletedMessage();
         this.tasks.get(taskID - 1).markAsDone();
         Ui.showLine();
     }
 
+    /**
+     * Add task to list and shows message to user
+     *
+     * @param newTask
+     */
     public void addTask(Task newTask) {
         this.tasks.add(newTask);
         Ui.showAddedTask(newTask.toString(), this.tasks.size());
     }
 
+    /**
+     * Lists all the items in the list if they have not been deleted.
+     */
     public void listItems() {
         Ui.showList();
         for (int i = 0; i < this.tasks.size(); i++) {
@@ -32,6 +54,12 @@ public class TaskList {
         Ui.showLine();
     }
 
+    /**
+     * Deletes a specific task from the list.
+     *
+     * @param taskID
+     * @throws IndexOutOfBoundsException
+     */
     public void deleteTask(int taskID) throws IndexOutOfBoundsException{
         if (taskID <=0 || taskID > this.tasks.size()) {
             Ui.noTask();
@@ -44,10 +72,20 @@ public class TaskList {
         }
     }
 
+    /**
+     * Getter to get the arraylist of tasks
+     *
+     * @return Arraylist of tasks
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
+    /**
+     * Getter to get individual tasks from arraylist
+     * @param id
+     * @return Individual tasks
+     */
     public Task getIndividualTask(int id) {
         return this.tasks.get(id);
     }
