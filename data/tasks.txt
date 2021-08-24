@@ -1,3 +1,1 @@
-[T][ ] task1
-[E][ ] task2 (at: Aug 24 2021)
-[E][ ] task3 (at: Aug 25 2021)
+[T][ ] hehe

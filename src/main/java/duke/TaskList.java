@@ -32,6 +32,8 @@ public class TaskList {
             markAsDone(input);
         } else if (input.startsWith("delete")) {
             deleteTask(input);
+        } else if (input.startsWith("find")) {
+            findTask(input);
         } else {
             addTask(input);
         }
@@ -99,6 +101,23 @@ public class TaskList {
             System.out.println("Please input a number after the keyword: delete");
         } catch (IndexOutOfBoundsException | NullPointerException e ) {
             System.out.println("Please input a valid task index");
+        }
+    }
+
+    private void findTask(String input) {
+        String[] segments = input.split(" ");
+        try {
+            System.out.println("Here are the matching tasks:");
+            int count = 1;
+            for (int i = 0; i < myList.size(); i++) {
+                String task = myList.get(i).toString();
+                if (task.contains(segments[1])) {
+                    System.out.println(count + ". " + task);
+                    count++;
+                }
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Please input a word after the keyword: find");
         }
     }
 
