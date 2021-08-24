@@ -1,22 +1,32 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
 
+    private enum TaskType {
+        TODO, EVENT, DEADLINE
+    }
+
     private final List<Task> tasks;
+    private int taskNum;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
-    public TaskList(List<String> storageLoad) {
+    public TaskList(List<String> storageLoad) throws DukeException {
+
+        if (storageLoad == null)
+            throw new DukeException("Loading failed!");
+
         this.tasks = new ArrayList<>();
 
         for (String taskString : storageLoad) {
             // Extract task details into three parts
             String[] taskDetails = taskString.split(" \\| ", 4);
-            Duke.TaskType type = Duke.TaskType.valueOf(taskDetails[0]);
+            TaskType type = TaskType.valueOf(taskDetails[0]);
             boolean isDone = taskDetails[1].equals("1");
             String description = taskDetails[2];
 
@@ -40,8 +50,27 @@ public class TaskList {
             if (task != null) {
                 if (isDone)
                     task.markAsDone();
-                tasks.add(task);
+                this.tasks.add(task);
+                this.taskNum++;
             }
         }
+    }
+
+    public List<Task> getTasks() {
+        return this.tasks;
+    }
+
+    public int getTaskNum() {
+        return this.taskNum;
+    }
+
+    public void add(Task task) {
+        this.tasks.add(task);
+        this.taskNum++;
+    }
+
+    public void delete(int taskNum) {
+        this.tasks.remove(taskNum);
+        this.taskNum--;
     }
 }
