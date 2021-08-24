@@ -10,7 +10,7 @@ import duke.task.Task;
  * Command for the program to mark a task as completed
  */
 public class DoneCommand extends Command {
-    String[] input;
+    private String[] input;
 
     public DoneCommand(String[] input) {
         this.input = input;

@@ -1,7 +1,6 @@
 package duke.general;
 
 import duke.error.DukeException;
-import duke.general.Tasklist;
 import duke.task.Task;
 
 import java.util.Scanner;
@@ -10,8 +9,8 @@ import java.util.Scanner;
  * Deals with interactions with the user
  */
 public class Ui {
-    Scanner textInput = new Scanner(System.in);
-    private boolean loop = true;
+    private Scanner textInput = new Scanner(System.in);
+    private boolean isLoop = true;
 
     /**
      * Shows the welcome message to the user
@@ -77,11 +76,11 @@ public class Ui {
     }
 
     public boolean getLoop() {
-        return this.loop;
+        return this.isLoop;
     }
 
-    public void stopLoop() {
-        this.loop = false;
+    public void setLoop() {
+        this.isLoop = false;
     }
 
 }
