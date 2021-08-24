@@ -36,7 +36,7 @@ public class Parser {
         return isDone;
     }
 
-    private boolean checkToDo(String str) {
+    private boolean checkTodo(String str) {
         boolean isToDo = false;
         if (str.length() >= 4) {
             isToDo = str.substring(0,4).equals("todo");
@@ -44,7 +44,7 @@ public class Parser {
         return isToDo;
     }
 
-    private boolean checkDeadLine(String str) {
+    private boolean checkDeadline(String str) {
         boolean isDeadLine = false;
         if (str.length() >= 8) {
             isDeadLine = str.substring(0,8).equals("deadline");
@@ -77,9 +77,9 @@ public class Parser {
             caseNum = 2;
         } else if (checkDone(input)) {
             caseNum = 3;
-        } else if (checkToDo(input)) {
+        } else if (checkTodo(input)) {
             caseNum = 4;
-        } else if (checkDeadLine(input)) {
+        } else if (checkDeadline(input)) {
             caseNum = 5;
         } else if (checkEvent(input)) {
             caseNum = 6;
@@ -157,8 +157,6 @@ public class Parser {
         }
     }
 
-
-
     public void handle(int caseNum, String input, TaskList taskList) throws InputError {
         switch (caseNum) {
             case 2:
@@ -186,7 +184,6 @@ public class Parser {
                 break;
             default:
                 ui.invalidInput();
-
         }
     }
 }

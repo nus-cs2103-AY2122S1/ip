@@ -3,16 +3,16 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class DeadLine extends Task{
 
     private String deadLine;
     private LocalDateTime dateTime;
 
-    public Deadline(String task, String deadLine) {
+    public DeadLine(String task, String deadLine) {
         super(task);
         this.deadLine = deadLine;
         timeSetter(deadLine);
-        timeFormChange();
+        timerChange();
     }
 
     private void timeSetter(String timeInput) {
@@ -20,7 +20,7 @@ public class Deadline extends Task{
         dateTime = LocalDateTime.parse(timeInput, formatter);
     }
 
-    public String timeFormChange() {
+    public String timerChange() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h.mm a");
         return dateFormat.format(dateTime) + ", " + timeFormatter.format(dateTime);
@@ -34,6 +34,6 @@ public class Deadline extends Task{
         } else {
             result = "[D][ ] ";
         }
-        return result + super.task + " (by: " + timeFormChange() + ")";
+        return result + super.task + " (by: " + timerChange() + ")";
     }
 }
