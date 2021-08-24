@@ -2,9 +2,10 @@ package tasks;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import ui.Ui;
 
-public final class TaskList {
+public final class TaskList{
   private ArrayList<Task> tasks;
 
   public TaskList(ArrayList<Task> inputTasks) {
@@ -141,6 +142,11 @@ public final class TaskList {
             "Nice! there are " + tasks.size() + " task(s) left.");
   }
 
+  /**
+   * Checks if any tasks are due on a particular day.
+   *
+   * @param s the date which user wants to check
+   */
   public void anyItemsDue(String s) {
     ArrayList<Task> dueItems = new ArrayList<>();
     if (tasks.isEmpty()) {
@@ -174,5 +180,18 @@ public final class TaskList {
         Ui.showInput(temp);
       }
     }
+  }
+
+  public ArrayList<Task> findItems(String target) {
+    ArrayList<Task> matched = new ArrayList<>();
+    if (!target.equals("")) {
+      for (Task t : tasks) {
+        String temp = t.getTask();
+        if (temp.toLowerCase().contains(target.toLowerCase())) {
+          matched.add(t);
+        }
+      }
+    }
+    return matched;
   }
 }
