@@ -33,7 +33,8 @@ public class Duke {
     }
 
     //method to add a task to a list
-    public void addTask(String str) throws EmptyDescriptionException, InvalidTaskException{
+
+    public void addTask(String str) throws EmptyDescriptionException, InvalidTaskException, InvalidDeadlineException {
         //first check if the task only contain 1 word
         if (str.split(" ").length == 1) {
             //check if task if valid
@@ -59,16 +60,25 @@ public class Duke {
 
             //add correct task to the list
             else {
-                System.out.println("Got it. I've added this task.");
                 if (str.startsWith("todo")) {
                     list.add(new ToDos(str.substring(5)));
                 } else if (str.startsWith("deadline")) {
                     String[] message = str.split("/by ");
-                    list.add(new Deadline(message[0].substring(9), message[1]));
+                    if (message.length == 1) {
+                        throw new InvalidTaskException();
+                    } else {
+                        list.add(new Deadline(message[0].substring(9), message[1]));
+                    }
                 } else {
                     String[] message = str.split("/at ");
-                    list.add(new Events(message[0].substring(6), message[1]));
+                    if (message.length == 1) {
+                        throw new InvalidTaskException();
+                    } else {
+                        list.add(new Events(message[0].substring(6), message[1]));
+                    }
                 }
+
+                System.out.println("Got it. I've added this task.");
                 System.out.println(list.get(list.size() - 1));
                 System.out.println("Now you have " + list.size()
                         + (list.size() == 1 ? " task in the list" : " tasks in the list."));
@@ -96,8 +106,6 @@ public class Duke {
         File file = new File(".\\src\\main\\level-7.txt");
         if (!file.exists()) {
             file.createNewFile();
-//            FileWriter writer = new FileWriter(file);
-//            writer.close();
         } else {
             file.delete();
             File newFile = new File(".\\src\\main\\level-7.txt");
@@ -111,7 +119,7 @@ public class Duke {
         }
     }
 
-    public void load() throws IOException, InvalidTaskException {
+    public void load() throws IOException, InvalidTaskException, InvalidDeadlineException {
         File file = new File(".\\src\\main\\level-7.txt");
         if (file.exists()) {
             Scanner sc = new Scanner(file);
@@ -140,7 +148,6 @@ public class Duke {
         }
     }
 
-
     public static void main(String[] args) {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
@@ -153,7 +160,7 @@ public class Duke {
         } catch (IOException e) {
             System.out.println("e.getMessage()");
         } catch (InvalidTaskException e) {
-            System.out.println(e.toString());
+            System.out.println(e);
         }
 
         String input = sc.nextLine();
@@ -169,7 +176,7 @@ public class Duke {
                 try {
                     duke.markAsDone(input);
                 } catch (OutOfBoundException e) {
-                    System.out.println(e.toString());
+                    System.out.println(e);
                 } catch (NumberFormatException e) {
                     System.out.println("Task does not exist. Please send a correct number ><");
                 }
@@ -181,7 +188,7 @@ public class Duke {
                 } catch (NumberFormatException e) {
                     System.out.println("Task does not exist. Please send a correct number ><");
                 } catch (OutOfBoundException e) {
-                    System.out.println(e.toString());
+                    System.out.println(e);
                 }
             }
 
@@ -189,8 +196,8 @@ public class Duke {
             else {
                 try {
                     duke.addTask(input);
-                } catch (InvalidTaskException e) {
-                    System.out.println(e.toString());
+                } catch (InvalidTaskException | InvalidDeadlineException e) {
+                    System.out.println(e);
                 } catch (EmptyDescriptionException e) {
                     System.out.println("☹ OOPS!!! The description of a" + input + "cannot be empty.");
                 }
