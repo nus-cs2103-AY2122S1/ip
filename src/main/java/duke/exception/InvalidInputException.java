@@ -1,8 +1,11 @@
 package duke.exception;
 
+/**
+ * Represents a DukeException that is thrown when the user input is completely invalid.
+ */
 public class InvalidInputException extends DukeException{
     /**
-     * A constructor for this InvalidInputException.
+     * Constructs an InvalidInputException.
      */
     public InvalidInputException() {
         super("That is not a valid input!");

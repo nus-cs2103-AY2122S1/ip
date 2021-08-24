@@ -1,21 +1,24 @@
 package duke.task;
 
+/**
+ * Represents a To-do type Task.
+ */
 public class Todo extends Task {
 
     /**
-     * A constructor for this todo Task.
+     * Constructs a To-do Task with the given description.
      *
-     * @param description the description of what the task is.
+     * @param description Description of the To-do.
      */
     public Todo(String description) {
         super(description);
     }
 
     /**
-     * Returns a to-do task based on the given description.
+     * Returns a To-do Task based on the given description.
      *
-     * @param input the string containing the to-do task description.
-     * @return the to-do task constructed from the given description.
+     * @param input String containing the To-do description.
+     * @return To-do constructed from the given description.
      */
     public static Task setTodo(String input) {
         Task todo = new Todo(input);
@@ -23,10 +26,10 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns the string representation of this Task, which follows the following format:
+     * Returns the string representation of this To-do, which follows the following format:
      * [T][Task status] Task Description
      *
-     * @return string representation of this Task, which is the type of task (Todo),
+     * @return String representation of this To-do, which consists of the type of Task (To-do),
      *         its status, and its description.
      */
     @Override

@@ -1,14 +1,21 @@
 package duke.task;
 
+/**
+ * Encapsulates an abstract Task with a description and status.
+ */
 public abstract class Task {
 
+    /** Description of this Task */
     private final String DESCRIPTION;
+
+    /** Status of this task */
     private boolean isDone;
 
     /**
-     * A constructor for this Task.
+     * Constructs a Task with the given description.
+     * Task is not marked as done by default.
      *
-     * @param description the description of what the task is.
+     * @param description Description of the task.
      */
     public Task(String description) {
         this.DESCRIPTION = description;
@@ -26,7 +33,7 @@ public abstract class Task {
      * Returns the string representation of this Task, which follows the following format:
      * [Task status] Task Description
      *
-     * @return string representation of this Task, which is its status and its description.
+     * @return String representation of this Task, which is its status and its description.
      */
     @Override
     public String toString() {
@@ -34,10 +41,20 @@ public abstract class Task {
         return "[" + statusIcon + "] " + this.DESCRIPTION;
     }
 
+    /**
+     * Returns the status of this Task, which is whether it has been marked as done.
+     *
+     * @return True if the Task is done, false otherwise.
+     */
     public boolean getIsDone() {
         return this.isDone;
     }
 
+    /**
+     * Returns the description of this Task.
+     *
+     * @return Description of this Task.
+     */
     public String getDescription() {
         return this.DESCRIPTION;
     }
