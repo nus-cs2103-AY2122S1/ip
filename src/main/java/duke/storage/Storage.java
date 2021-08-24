@@ -11,11 +11,14 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Class to handle reading and writing the save file.
+ */
 public class Storage {
     /**
-     * Create store file if required
-     * @param path path to store file
+     * Creates store file if required.
+     *
+     * @param path path to store file.
      */
     public static void createStore(Path path){
         if (Files.exists(path)){
@@ -30,9 +33,10 @@ public class Storage {
     }
 
     /**
-     * Load store file as a duke.TaskArrayList
-     * @param path path to store file
-     * @return duke.TaskArrayList of stored duke.tasks
+     * Loads store file as a duke.TaskArrayList.
+     *
+     * @param path path to store file.
+     * @return duke.TaskArrayList of stored tasks.
      */
     public static TaskArrayList load(Path path) throws DukeException,IOException{
         createStore(path);
@@ -50,9 +54,10 @@ public class Storage {
     }
 
     /**
-     * Dump a taskList to a store file
-     * @param taskList duke.TaskArrayList to store
-     * @param path location to store taskList
+     * Dumps a taskList to a store file.
+     *
+     * @param taskList duke.TaskArrayList to store.
+     * @param path location to store taskList.
      */
     public static void dump(TaskArrayList taskList,Path path){
         createStore(path);

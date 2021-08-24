@@ -6,7 +6,7 @@ import duke.tasks.Task;
 import java.util.ArrayList;
 
 /**
- * Array List of Task objects
+ * Array List of Task objects.
  */
 public class TaskArrayList extends ArrayList<Task> {
     public final static String DELETE_USAGE_TEXT = "Usage: delete <integer task number>";
@@ -17,9 +17,10 @@ public class TaskArrayList extends ArrayList<Task> {
     }
 
     /**
-     * Add a task to the list
-     * @param task Task object to add
-     * @return addition message String
+     * Adds a task to the list.
+     *
+     * @param task Task object to add.
+     * @return addition message String.
      */
     public String addTask(Task task){
         this.add(task);
@@ -27,10 +28,11 @@ public class TaskArrayList extends ArrayList<Task> {
     }
 
     /**
-     * Mark the given task as done
-     * @param taskNo task number to mark as done
-     * @return removal message String
-     * @throws DukeException when invalid task number provided
+     * Marks the given task as done.
+     *
+     * @param taskNo task number to mark as done.
+     * @return removal message String.
+     * @throws DukeException when invalid task number provided.
      */
     public String deleteTask(int taskNo) throws DukeException{
         if (taskNo > this.size()){
@@ -41,14 +43,19 @@ public class TaskArrayList extends ArrayList<Task> {
         return "removed : " + toDel.toString()+ "\n" + this.newLength();
     }
 
-
+    /**
+     * Generates the message to print when tasklist length changes.
+     *
+     * @return You now have X task(s) in the list.
+     */
     private String newLength(){
         return String.format("Now you have %d %s in the list.",this.size(),this.size()==1?"task": "tasks");
     }
 
     /**
-     * enumerate members for printing
-     * @return String[] of "X. taskname"
+     * Enumerates members for printing
+     *
+     * @return String[] of "X. taskname".
      */
     public String enumerate(){
         String out  = "";
@@ -61,10 +68,11 @@ public class TaskArrayList extends ArrayList<Task> {
     }
 
     /**
-     * Mark a task as done
-     * @param index task number to mark
-     * @return mark done message String
-     * @throws DukeException when invalid task number provided
+     * Marks a task as done.
+     *
+     * @param index task number to mark.
+     * @return mark done message String.
+     * @throws DukeException when invalid task number provided.
      */
     public String markDone(int index) throws DukeException {
         if (index > this.size()){

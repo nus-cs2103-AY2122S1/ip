@@ -9,13 +9,20 @@ import duke.tasks.Todo;
 import java.nio.file.Path;
 
 /**
- * duke.Parser to parse user commands
+ * Parser to parse user commands.
  */
 public class Parser {
     UI ui;
     TaskArrayList taskList;
     Path storagePath;
 
+    /**
+     * Constructor for Parser.
+     *
+     * @param ui UI object to print to.
+     * @param taskList TaskArrayList object to work with.
+     * @param storagePath Path object representing path to savefile.
+     */
     Parser(UI ui, TaskArrayList taskList, Path storagePath) {
         this.ui = ui;
         this.taskList = taskList;
@@ -23,11 +30,11 @@ public class Parser {
     }
 
     /**
-     * Run a user input string
+     * Runs a user input string.
      *
-     * @param userInput String keyed in by user
-     * @return isExit, true if duke should exit after this command
-     * @throws DukeException if unable to run argument
+     * @param userInput String keyed in by user.
+     * @return isExit, true if duke should exit after this command.
+     * @throws DukeException if unable to run argument.
      */
     public boolean run(String userInput) throws DukeException {
         String[] cmd_args = userInput.split(" ", 2);

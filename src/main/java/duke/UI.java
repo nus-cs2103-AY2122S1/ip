@@ -3,22 +3,23 @@ package duke;
 import java.util.function.Function;
 
 /**
- * Class to handle User Interface interactions
+ * Class to handle User Interface interactions.
  */
 public class UI {
 
     Function<String, String> preprocessor;
 
     /**
-     * Construct duke.UI with a custom preprocessor
-     * @param preprocessor
+     * Constructor for  UI with a custom preprocessor.
+     *
+     * @param preprocessor Function\<String,String\> to transform the input strings for display.
      */
     UI(Function<String, String> preprocessor) {
         this.preprocessor = preprocessor;
     }
 
     /**
-     * Construct duke.UI using default preprocessor
+     * Constructor for UI using default preprocessor.
      */
     UI(){
         this(
@@ -34,6 +35,9 @@ public class UI {
             });
     }
 
+    /**
+     * Displays the ascii startup logo.
+     */
     public void displayLogo(){
         String logo =
             "  _____          _   _    ___   ___   ___   ___  \n" +
@@ -45,38 +49,46 @@ public class UI {
         System.out.println(logo);
     }
 
+    /**
+     * Displays the welcome message.
+     */
     public void displayWelcome() {
         this.display("Hello, I'm DAN 9000\n"
             + "How can I help you?");
     }
 
     /**
-     * Display the provided string using preprocessor
+     * Displays the provided string using preprocessor.
      *
-     * @param content
+     * @param content message String.
      */
     public void display(String content) {
         display(content, this.preprocessor);
     }
 
     /**
-     * Display the provided String using a provided processor
+     * Displays the provided String using a provided processor.
      *
-     * @param content
-     * @param preprocessor
+     * @param content message String.
+     * @param preprocessor Function\<String,String\> to transform the input strings for display.
      */
     public void display(String content, Function<String, String> preprocessor) {
         System.out.println(this.preprocessor.apply(content));
     }
 
     /**
-     * Display the error associated with loading save file
+     * Displays the error associated with loading save file.
      */
     public void showLoadingError(){
         String savePath = "./data/duke.txt";
         this.display("ERROR: unable to load save file from "+ savePath);
     }
 
+    /**
+     * Displays a general exception encountered.
+     *
+     * @param e Exception to display the message of.
+     */
     public void displayException(Exception e){
         this.display(e.getMessage());
     }
