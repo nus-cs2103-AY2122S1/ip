@@ -25,7 +25,7 @@ public class Parser {
 
     /**
      * Makes sense of the user input.
-     * Handles: bye, list, done, delete, todo, deadline, event commands.
+     * Handles: bye, list, done, delete, todo, deadline, event, find commands.
      *
      * @param input the user input from the Ui.
      * @return a boolean that determines if Duke is still inSession.
@@ -37,7 +37,7 @@ public class Parser {
         case ("bye"):
             return false;
         case ("list"):
-            taskList.display();
+            taskList.display("Here are the tasks in your list:");
             break;
         case ("done"): {
             String[] info = input.split(" ", 2);
@@ -154,6 +154,14 @@ public class Parser {
             }
             taskList.add(newEvent);
             storage.saveData(taskList);
+            break;
+        case ("find"):
+            String[] searchInfo = input.split(" ", 2);
+            if (searchInfo.length == 1) {
+                throw new DukeException("☹ OOPS!!! " +
+                        "Please include a keyword for your search.");
+            }
+            taskList.findTasks(searchInfo[1]);
             break;
         default:
             throw new DukeException("☹ OOPS!!! " +

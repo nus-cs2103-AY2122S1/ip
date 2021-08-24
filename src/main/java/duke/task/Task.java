@@ -44,6 +44,15 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Returns the description of the Task.
+     *
+     * @return the description String of the Task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
     @Override
     public String toString() {
         return this.getStatusIcon() + " " + this.description;
