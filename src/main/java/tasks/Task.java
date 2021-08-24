@@ -33,9 +33,6 @@ public abstract class Task {
             throw new NoTaskNameException("No task name, please try again.");
         }
         switch (command) {
-        case "event":
-            String[] message_and_eventDate = input.split("/at ");
-            return new Event(message_and_eventDate[0], message_and_eventDate[1]);
         case "deadline":
             String[] message_and_endTime = input.split("/by ");
             return new Deadline(message_and_endTime[0], message_and_endTime[1]);

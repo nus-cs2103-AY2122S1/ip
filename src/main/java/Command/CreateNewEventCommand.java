@@ -3,21 +3,21 @@ package Command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import tasks.ToDo;
+import tasks.Event;
 
 /**
- * Command to create a new ToDo task.
+ * Command to create a new Event task.
  *
  * @author Quan Teng Foong
  */
-public class CreateNewToDoCommand extends Command {
+public class CreateNewEventCommand extends Command {
 
-    public CreateNewToDoCommand(String message) {
+    public CreateNewEventCommand(String message) {
         super(message);
     }
 
     /**
-     * Adds a new ToDo task to the task list.
+     * Adds a new Event task to the task list.
      *
      * @param taskList the current list of tasks
      * @param ui the user interface object
@@ -25,6 +25,7 @@ public class CreateNewToDoCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.add(new ToDo(super.getExtraInput()));
+        String[] message_and_eventDate = super.getExtraInput().split("/at ");
+        taskList.add(new Event(message_and_eventDate[0], message_and_eventDate[1]));
     }
 }

@@ -5,7 +5,7 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Command executed to user asks to see the list of tasks.
+ * Command executed when user asks to see the list of tasks.
  *
  * @author Quan Teng Foong
  */

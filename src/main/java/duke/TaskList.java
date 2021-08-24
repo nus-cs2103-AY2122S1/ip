@@ -33,18 +33,10 @@ public class TaskList {
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line = bufferedReader.readLine();
         while (line != null) {
-            addTask(Task.createTaskFromString(line));
+            this.taskList.add(Task.createTaskFromString(line));
             line = bufferedReader.readLine();
         }
         fileReader.close();
-    }
-
-    /**
-     * Adds a task to the TaskList.
-     * @param task Task to be added
-     */
-    public void addTask(Task task) {
-        this.taskList.add(task);
     }
 
     /**
@@ -73,7 +65,7 @@ public class TaskList {
      * @param task the task to be added
      */
     public void add(Task task) {
-        taskList.add(task);
+        this.taskList.add(task);
         System.out.println("Alright, I've added the following task:");
         System.out.println(taskList.get(taskList.size() - 1) + "\nNow you have " + taskList.size() + " tasks in the list.\n");
     }

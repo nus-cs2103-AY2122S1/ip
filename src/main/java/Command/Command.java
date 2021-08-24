@@ -40,6 +40,8 @@ public abstract class Command {
                 return new DeleteTaskCommand(extraInput);
             case "todo":
                 return new CreateNewToDoCommand(extraInput);
+            case "event":
+                return new CreateNewEventCommand(extraInput);
             default:
                 throw new NoSuchCommandException("No such command!");
         }
