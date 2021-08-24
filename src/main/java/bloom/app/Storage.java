@@ -1,7 +1,6 @@
 package bloom.app;
 
 import bloom.constant.Message;
-import bloom.task.Task;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,8 +20,8 @@ public class Storage {
 			}
 			
 			StringBuilder stringBuilder = new StringBuilder();
-			for (int i = 0; i < Task.tasks.size(); ++i) {
-				stringBuilder.append(Task.tasks.get(i).toDb());
+			for (int i = 0; i < TaskList.size(); ++i) {
+				stringBuilder.append(TaskList.get(i).toDb());
 			}
 			String tasks = stringBuilder.toString();
 			

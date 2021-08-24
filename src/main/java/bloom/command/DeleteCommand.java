@@ -1,5 +1,6 @@
 package bloom.command;
 
+import bloom.app.TaskList;
 import bloom.constant.Message;
 import bloom.task.Task;
 
@@ -12,7 +13,7 @@ public class DeleteCommand extends Command {
 	}
 	
 	public void run() {
-		Task task = Task.tasks.remove(this.index);
+		Task task =TaskList.delete(this.index);
 		System.out.println(Message.COMMAND_DELETE.getMessage());
 		System.out.println("\t   " + task + "\n");
 	} 

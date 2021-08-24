@@ -1,8 +1,8 @@
 package bloom.command;
 
+import bloom.app.TaskList;
 import bloom.constant.Message;
 import bloom.task.Deadline;
-import bloom.task.Task;
 
 public class DeadlineCommand extends Command {
 	
@@ -17,7 +17,7 @@ public class DeadlineCommand extends Command {
 	
 	public void run() {
 		Deadline deadline = new Deadline(this.description, this.by);
-		Task.tasks.add(deadline);
+		TaskList.add(deadline);
 		System.out.println(Message.COMMAND_ADD.getMessage());
 		System.out.println("\t   " + deadline + "\n");
 	}

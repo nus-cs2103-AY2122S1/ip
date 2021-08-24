@@ -1,10 +1,9 @@
 package bloom.task;
 
-import java.util.ArrayList;
-
 public class Task {
-  public static ArrayList<Task> tasks = new ArrayList<>();
+
   protected final String description;
+  
   protected boolean isDone;
 
   public Task(String description) {

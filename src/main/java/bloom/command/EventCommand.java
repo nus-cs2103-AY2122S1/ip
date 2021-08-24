@@ -1,8 +1,8 @@
 package bloom.command;
 
+import bloom.app.TaskList;
 import bloom.constant.Message;
 import bloom.task.Event;
-import bloom.task.Task;
 
 public class EventCommand extends Command {
 	
@@ -17,7 +17,7 @@ public class EventCommand extends Command {
 	
 	public void run() {
 		Event event = new Event(this.description, this.at);
-		Task.tasks.add(event);
+		TaskList.add(event);
 		System.out.println(Message.COMMAND_ADD.getMessage());
 		System.out.println("\t   " + event + "\n");
 	}

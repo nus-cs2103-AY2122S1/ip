@@ -1,7 +1,7 @@
 package bloom.command;
 
+import bloom.app.TaskList;
 import bloom.constant.Message;
-import bloom.task.Task;
 import bloom.task.ToDo;
 
 public class ToDoCommand extends Command {
@@ -14,7 +14,7 @@ public class ToDoCommand extends Command {
 	
 	public void run() {
 		ToDo todo = new ToDo(this.description);
-		Task.tasks.add(todo);
+		TaskList.add(todo);
 		System.out.println(Message.COMMAND_ADD.getMessage());
 		System.out.println("\t   " + todo + "\n");
 	}

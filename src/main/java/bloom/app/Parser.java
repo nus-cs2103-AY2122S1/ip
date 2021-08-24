@@ -2,7 +2,7 @@ package bloom.app;
 
 import bloom.command.Command;
 import bloom.command.GreetCommand;
-import bloom.command.ByeCommand;
+import bloom.command.ExitCommand;
 import bloom.command.ListCommand;
 import bloom.command.MarkCommand;
 import bloom.command.DeleteCommand;
@@ -25,7 +25,7 @@ public class Parser {
 		case "greet":
 			return new GreetCommand();
 		case "bye":
-			return new ByeCommand();
+			return new ExitCommand();
 		case "list":
 			return new ListCommand();
 		case "done":

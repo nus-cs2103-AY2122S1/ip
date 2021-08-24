@@ -7,22 +7,20 @@ import java.util.Scanner;
 
 public class Ui {
 	
-	public static boolean isRunning = true;
-	
-	private final Parser parser = new Parser();
-	
-	private final Scanner scanner = new Scanner(System.in);
+	private static boolean isRunning = true;
 	
 	public void start() {
+		Scanner scanner = new Scanner(System.in);
 		run("greet");
 		String userInput;
-		while (isRunning) {
+		while (Ui.isRunning) {
 			userInput = scanner.nextLine();
 			run(userInput);
 		}
 	}
 	
 	public void run(String userInput) {
+		Parser parser = new Parser();
 		System.out.println(Drawing.HORIZONTAL_LINE.getDrawing());
 		try {
 			parser.parse(userInput).run();
@@ -30,5 +28,9 @@ public class Ui {
 			System.out.println(e.getMessage());
 		}
 		System.out.println(Drawing.HORIZONTAL_LINE.getDrawing());
+	}
+	
+	public void stop() {
+		Ui.isRunning = false;
 	}
 }
