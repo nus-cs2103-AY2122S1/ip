@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
@@ -6,11 +7,11 @@ import java.util.Optional;
 public enum DukeCommands {
 
     BYE("bye",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDateConfig config) -> {
                 Duke.printMsg("Bye. Hope to see you again soon!");
                 return false;
             }), LIST("list",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDateConfig config) -> {
                 StringBuilder output =
                         new StringBuilder("Here are the tasks in your list:\n");
                 for (Task i : list) {
@@ -23,7 +24,7 @@ public enum DukeCommands {
                 return true;
             }),
     DONE("done",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDateConfig config) -> {
                 Parser.parseInt(map.get("done"))
                         .map(x -> {
                             if (x < 1 || x > list.size()) {
@@ -43,7 +44,7 @@ public enum DukeCommands {
                 return true;
             }),
     EVENT("event",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDateConfig config) -> {
                 if (!map.containsKey("/at")) {
                     throw new DukeException("Missing positional argument '/at'.");
                 } else if (map.get("event") == null || map.get("/at") == null) {
@@ -58,7 +59,7 @@ public enum DukeCommands {
                 return true;
             }),
     DELETE("delete",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDateConfig config) -> {
                 Parser.parseInt(map.get("delete"))
                         .map(x -> {
                             if (x < 1 || x > list.size()) {
@@ -79,7 +80,7 @@ public enum DukeCommands {
                 return true;
             }),
     DEADLINE("deadline",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDateConfig config) -> {
 
                 if (!map.containsKey("/by")) {
                     throw new DukeException("Missing positional argument " +
@@ -87,8 +88,10 @@ public enum DukeCommands {
                 } else if (map.get("deadline") == null || map.get("/by") == null) {
                     throw new DukeException("Deadline body cannot be empty.");
                 } else {
-                    Task event = new Deadline(map.get("deadline"),
-                            map.get("/by"));
+                    LocalDateTime by =
+                            Parser.parseDateTime(map.get("/by"), config).orElseThrow(() -> new DukeException("Invalid" +
+                                    " date time specified"));
+                    Task event = new Deadline(map.get("deadline"), by);
                     list.add(event);
                     Duke.printMsg(addTaskFormatter(event,
                             list.size()));
@@ -96,7 +99,7 @@ public enum DukeCommands {
                 return true;
             }),
     TODO("todo",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDateConfig config) -> {
                 if (map.get("todo") == null) {
                     throw new DukeException("Todo body cannot be empty.");
                 } else {
@@ -108,7 +111,7 @@ public enum DukeCommands {
                 return true;
             }),
     INVALID("invalid",
-            (Map<String, String> map, ArrayList<Task> list) -> {
+            (Map<String, String> map, ArrayList<Task> list, DukeDateConfig config) -> {
                 throw new DukeException("Unrecognized command.");
             });
 
