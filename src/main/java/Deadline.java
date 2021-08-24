@@ -6,15 +6,15 @@ import java.time.format.DateTimeFormatter;
  * e.g., submit report by 11/10/2019 5pm
  */
 public class Deadline extends Task {
-    private LocalDate date;
+    private final LocalDate date;
 
     public Deadline(String description, LocalDate date) {
-        super(description, Type.DEADLINE);
+        super(description, TaskType.DEADLINE);
         this.date = date;
     }
 
     public Deadline(boolean isDone, String description, LocalDate date) {
-        super(isDone, description, Type.DEADLINE);
+        super(isDone, description, TaskType.DEADLINE);
         this.date = date;
     }
 

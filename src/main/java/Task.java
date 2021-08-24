@@ -2,31 +2,23 @@
  * Task class representing a pending task a User has
  */
 public class Task {
-    /**
-     * Types of tasks available
-     */
-    public enum Type {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
     protected boolean isDone = false;
     protected String description;
-    private Type type;
-
-    public Task(String description, Type type) {
+    private final TaskType taskType;
+    public Task(String description, TaskType taskType) {
         this.description = description;
-        this.type = type;
+        this.taskType = taskType;
     }
 
-    public Task(boolean isDone, String description, Type type) {
+    public Task(boolean isDone, String description, TaskType taskType) {
         this.isDone = isDone;
         this.description = description;
-        this.type = type;
+        this.taskType = taskType;
     }
 
     /**
      * Get checkbox based on status
+     *
      * @return checkbox either empty or crossed
      */
     protected String getCheckBox() {
@@ -35,11 +27,12 @@ public class Task {
 
     /**
      * Get box containing type of Task abbreviated by a letter
+     *
      * @return box containing task of Type
      */
     protected String getTypeBox() {
         String taskType;
-        switch (this.type) {
+        switch (this.taskType) {
         case DEADLINE:
             taskType = "D";
             break;
@@ -47,29 +40,38 @@ public class Task {
             taskType = "E";
             break;
         default:
-            taskType= "T";
+            taskType = "T";
         }
         return "[" + taskType + "]";
     }
 
-    public Type getType() {
-        return type;
+    public TaskType getType() {
+        return taskType;
     }
 
     public boolean isDone() {
         return isDone;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public void setDone(boolean done) {
         this.isDone = done;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override
     public String toString() {
         return getTypeBox() + getCheckBox() + description;
+    }
+
+    /**
+     * Types of tasks available
+     */
+    public enum TaskType {
+        TODO,
+        DEADLINE,
+        EVENT
     }
 }

@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -7,15 +6,15 @@ import java.time.format.DateTimeFormatter;
  * e.g., team project meeting on 2/10/2019 2-4pm
  */
 public class Event extends Task {
-    private LocalDateTime date;
+    private final LocalDateTime date;
 
     public Event(String description, LocalDateTime date) {
-        super(description, Type.EVENT);
+        super(description, TaskType.EVENT);
         this.date = date;
     }
 
     public Event(boolean isDone, String description, LocalDateTime date) {
-        super(isDone, description, Type.EVENT);
+        super(isDone, description, TaskType.EVENT);
         this.date = date;
     }
 

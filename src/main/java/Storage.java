@@ -1,7 +1,8 @@
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,12 +12,13 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private String filePath;
+    private final String filePath;
 
-    private ArrayList<Task> list;
+    private final ArrayList<Task> list;
 
     /**
      * Constructor for Storage
+     *
      * @param filePath path to file
      */
     public Storage(String filePath) {
@@ -26,6 +28,7 @@ public class Storage {
 
     /**
      * Saves changes made to file in filePath
+     *
      * @throws BiscuitException Unable to save
      */
     public void save() throws BiscuitException {
@@ -40,6 +43,7 @@ public class Storage {
 
     /**
      * Loads list of tasks from file in file path
+     *
      * @return List of files
      * @throws BiscuitException Unable to load save file
      */
@@ -63,6 +67,7 @@ public class Storage {
 
     /**
      * Converts task to csv string
+     *
      * @param task task to convert
      * @return csv string
      */
@@ -86,6 +91,7 @@ public class Storage {
 
     /**
      * Converts csv string to task
+     *
      * @param csv csv string to convert
      * @return task
      * @throws BiscuitException Invalid csv string
@@ -97,7 +103,7 @@ public class Storage {
             String[] values = csv.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
             boolean isDone = Boolean.parseBoolean(values[1]);
             String description = unescapeSpecialCharacters(values[2]);
-            switch (Task.Type.valueOf(values[0])) {
+            switch (Task.TaskType.valueOf(values[0])) {
             case DEADLINE:
                 return new Deadline(isDone, description, LocalDate.parse(values[3]));
             case EVENT:
@@ -114,6 +120,7 @@ public class Storage {
 
     /**
      * Escapes special characters of commas, quotes and new lines
+     *
      * @param data data to escape
      * @return string with special characters escaped
      */
@@ -130,12 +137,13 @@ public class Storage {
 
     /**
      * Unescapes special characters of commas, quotes and new lines
+     *
      * @param data data to unescape
      * @return string with special characters unescaped
      */
     private String unescapeSpecialCharacters(String data) {
         if (data.contains(",") || data.contains("\"") || data.contains("'")) {
-            data = data.replace("\"\"","\"");
+            data = data.replace("\"\"", "\"");
             data = data.substring(1, data.length() - 1);
         }
         return data;
