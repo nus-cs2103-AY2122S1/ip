@@ -22,7 +22,7 @@ public class TaskList {
      * Constructor for duke.TaskList.
      */
     private TaskList() {
-        this.tasks = new ArrayList<Task>(100);
+        this.tasks = new ArrayList<>(100);
     }
 
     /**
@@ -105,10 +105,19 @@ public class TaskList {
         return this.taskIndex;
     }
 
-    public void printList() {
-        System.out.println("This is the list.");
+    public ArrayList<Task> findTasksUsingKeyword(String keyword) {
+        ArrayList<Task> tasksContainingKeyword = new ArrayList<>(100);
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(tasks.get(i));
+            Task currentTask = tasks.get(i);
+            String taskDescription = currentTask.getTaskDescription();
+            String[] taskDescArray = taskDescription.split(" ");
+            for (int j = 0; j < taskDescArray.length; j++) {
+                if (taskDescArray[j].equals(keyword)) {
+                    tasksContainingKeyword.add(currentTask);
+                    break;
+                }
+            }
         }
+        return tasksContainingKeyword;
     }
 }

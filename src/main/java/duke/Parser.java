@@ -16,6 +16,11 @@ public class Parser {
         return Integer.parseInt(this.currentLine[1]);
     }
 
+    public String findKeyword() {
+        return currentLine[1];
+    }
+
+
     /**
      * Finds the date in the command (if any).
      * @return The date in the command (if any).
