@@ -1,6 +1,14 @@
 package duke.parser;
 
-import duke.commands.*;
+import duke.commands.AddTaskCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.InvalidArgumentsException;
+import duke.commands.ListCommand;
+import duke.commands.UnknownCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -54,10 +62,10 @@ public class Parser {
 
         return new FindCommand(args[1]);
     }
-    
+
     /**
      * Parses the add todo command
-     * 
+     *
      * @param args The Arguments of the command.
      * @return The corresponding command.
      * @throws InvalidArgumentsException Thrown if arguments are invalid.
@@ -69,7 +77,7 @@ public class Parser {
 
         return new AddTaskCommand(new Todo(args[1]));
     }
-    
+
     /**
      * Parses the add event command
      *
@@ -89,7 +97,7 @@ public class Parser {
 
         return new AddTaskCommand(new Event(eventArgs[0], eventArgs[1]));
     }
-    
+
     /**
      * Parses the add deadline command
      *
