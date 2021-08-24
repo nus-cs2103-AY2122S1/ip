@@ -1,3 +1,5 @@
+package duke;
+
 public abstract class Command {
     /**
      * Executes the specific actions for this command.

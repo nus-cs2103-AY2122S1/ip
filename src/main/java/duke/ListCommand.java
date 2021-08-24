@@ -1,3 +1,5 @@
+package duke;
+
 public class ListCommand extends Command {
     /**
      * Executes the specific actions for this command.
