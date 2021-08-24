@@ -1,6 +1,11 @@
+package duke.tasks;
+
 import java.time.format.DateTimeFormatter;
 
-class Task {
+import duke.exceptions.NoDescriptionException;
+import duke.exceptions.UserInputError;
+
+public class Task {
 
   public enum Type {
     TODO, EVENT, DEADLINE,
@@ -66,7 +71,7 @@ class Task {
     return str.split(key);
   }
 
-  protected String taskToString() {
+  public String taskToString() {
     String type;
     String done = this.isDone ? "1" : "0";
 
@@ -98,11 +103,11 @@ class Task {
     return (isDone ? "[X]" : "[ ]"); // mark done task with X
   }
 
-  protected void markDone() {
+  public void markDone() {
     isDone = true;
   }
 
-  protected boolean isDone() {
+  public boolean isDone() {
     return isDone;
   }
 

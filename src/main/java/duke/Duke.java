@@ -1,4 +1,15 @@
-class Duke {
+package duke;
+
+import duke.exceptions.UserInputError;
+import duke.exceptions.InvalidInputException;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+
+import duke.util.Parser;
+import duke.util.Ui;
+import duke.util.Storage;
+
+public class Duke {
 
   private static final String LINE =
     "     ____________________________________________________________\n";

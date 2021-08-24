@@ -1,28 +1,31 @@
+package duke.tasks;
+
 import java.util.ArrayList;
-class TaskList {
+
+public class TaskList {
     private ArrayList<Task> taskList;
 
-    TaskList(ArrayList<Task> list) {
+    public TaskList(ArrayList<Task> list) {
         taskList = list;
     }
 
-    protected int length() {
+    public int length() {
         return taskList.size();
     }
 
-    protected void addTask(Task task) {
+    public void addTask(Task task) {
         taskList.add(task);
     }
 
-    protected Task getTask(int index) {
+    public Task getTask(int index) {
         return taskList.get(index);
     }
 
-    protected void deleteTask(int index) {
+    public void deleteTask(int index) {
         taskList.remove(index);
     }
 
-    protected ArrayList<Task> toArrayList() {
+    public ArrayList<Task> toArrayList() {
         return taskList;
     }
 }

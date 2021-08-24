@@ -1,6 +1,8 @@
+package duke.exceptions;
+
 public class UserInputError extends Exception {
 
-  UserInputError(String msg) {
+  public UserInputError(String msg) {
     super(msg);
   }
 }

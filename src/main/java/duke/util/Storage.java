@@ -1,3 +1,5 @@
+package duke.util;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -5,7 +7,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Storage {
+import duke.tasks.Task;
+
+public class Storage {
 
     public static ArrayList<Task> readDatabase() {
         Path filePath = Paths.get(System.getProperty("user.dir"), "database", "database.txt");

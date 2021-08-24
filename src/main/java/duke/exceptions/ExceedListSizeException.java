@@ -1,6 +1,8 @@
+package duke.exceptions;
+
 public class ExceedListSizeException extends UserInputError {
 
-  ExceedListSizeException(String msg) {
+  public ExceedListSizeException(String msg) {
     super(msg);
   }
 }

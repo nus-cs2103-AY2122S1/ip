@@ -1,13 +1,21 @@
-class Parser {
+package duke.util;
+
+import duke.Duke;
+import duke.exceptions.ExceedListSizeException;
+import duke.exceptions.InvalidInputException;
+import duke.exceptions.NoDescriptionException;
+import duke.exceptions.UserInputError;
+
+public class Parser {
     private final String input;
     private final String command;
 
-    Parser(String input) {
+    public Parser(String input) {
         this.input = input;
         command = getFirstWord(input);
     }
 
-    protected String[] parse() throws UserInputError {
+    public String[] parse() throws UserInputError {
             if (input.equals("list") || input.equals("bye")) {
                 return new String[] {command};
             } else if (command.equals("done") || command.equals("delete")) {

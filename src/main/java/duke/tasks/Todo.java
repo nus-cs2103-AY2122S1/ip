@@ -1,4 +1,6 @@
-public class Todo extends Task {
+package duke.tasks;
+
+class Todo extends Task {
 
   public Todo(String description, boolean done) {
     super(description, Task.Type.TODO, done);

@@ -1,6 +1,12 @@
+package duke.util;
+
 import java.util.Scanner;
 
-class Ui {
+import duke.Duke;
+import duke.exceptions.UserInputError;
+import duke.tasks.Task;
+
+public class Ui {
     private static final String INDENT = "      ";
     private static final String LINE =
             "     ____________________________________________________________\n";
@@ -12,39 +18,39 @@ class Ui {
     private final Scanner sc;
     private boolean isEndChat = false;
 
-    Ui(){
+    public Ui(){
         sc = new Scanner(System.in);
     }
 
-    protected boolean hasInput() {
+    public boolean hasInput() {
         return sc.hasNextLine();
     }
 
-    protected String nextInput() {
+    public String nextInput() {
         return sc.nextLine();
     }
 
-    protected boolean hasEnded() {
+    public boolean hasEnded() {
         return isEndChat;
     }
 
-    protected void endChat() {
+    public void endChat() {
         isEndChat = true;
     }
 
-    protected void end() {
+    public void end() {
         Duke.renderOutput("Bye. Hope to see you again soon!");
         sc.close();
     }
 
-    protected void greet() {
+    public void greet() {
         String output = "Hello! Welcome to\n" + LOGO + "\nHow may i help you?\n";
         System.out.println(LINE.trim());
         output.lines().forEach(op -> System.out.println("      " + op));
         System.out.println(LINE.trim());
     }
 
-    protected void renderList() {
+    public void renderList() {
         StringBuilder op = new StringBuilder();
         for (int i = 0; i < Duke.taskList.length(); i++) {
             op
@@ -56,7 +62,7 @@ class Ui {
         Duke.renderOutput("Here are the tasks in your list:\n" + op);
     }
 
-    protected void markTaskComplete(int index) throws UserInputError {
+    public void markTaskComplete(int index) throws UserInputError {
         Task task = Duke.taskList.getTask(index);
         if (task.isDone()) {
             Duke.renderOutput("Great! But you have already completed this task!");
@@ -66,7 +72,7 @@ class Ui {
         }
     }
 
-    protected void addNewTask(String input, Task.Type type) throws UserInputError {
+    public void addNewTask(String input, Task.Type type) throws UserInputError {
         Task newTask = Task.createTask(input, type);
         Duke.taskList.addTask(newTask);
         addTaskOutput(newTask);
@@ -83,7 +89,7 @@ class Ui {
         Duke.renderOutput(output);
     }
 
-    protected void deleteTask(int index) throws UserInputError {
+    public void deleteTask(int index) throws UserInputError {
         Task deleted = Duke.taskList.getTask(index);
         Duke.taskList.deleteTask(index);
         deleteTaskOutput(deleted);

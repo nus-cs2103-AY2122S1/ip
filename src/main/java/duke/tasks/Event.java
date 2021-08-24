@@ -1,6 +1,11 @@
+package duke.tasks;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.exceptions.UserInputError;
+
 public class Event extends Task {
 
   protected LocalDate when;
