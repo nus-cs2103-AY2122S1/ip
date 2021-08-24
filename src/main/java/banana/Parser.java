@@ -188,7 +188,7 @@ public class Parser {
     }
 
     /**
-     * Gets the list of tasks.
+     * Get the list of tasks.
      *
      * @param tasks the list of tasks.
      * @return the tasks in string format.
