@@ -51,19 +51,19 @@ public class Duke {
             printMessage("Marking task as completed:\n    " + task.toString());
         } else if (input.equals("todo")) {
             String todoInput = this.in.nextLine().trim();
-            Task todo = new Todo(todoInput);
+            Task todo = Todo.fromInput(todoInput);
             this.tasks.add(todo);
 
             this.printTaskAddedMessage(todo);
         } else if (input.equals("deadline")) {
-            String[] deadlineInputs = this.in.nextLine().trim().split("\\s+/by\\s+", 2);
-            Task deadline = new Deadline(deadlineInputs[0], deadlineInputs[1]);
+            String deadlineInput = this.in.nextLine();
+            Task deadline = Deadline.fromInput(deadlineInput);
             this.tasks.add(deadline);
 
             this.printTaskAddedMessage(deadline);
         } else if (input.equals("event")) {
-            String[] eventInputs = in.nextLine().trim().split("\\s+/at\\s+", 2);
-            Task event = new Event(eventInputs[0], eventInputs[1]);
+            String eventInput = this.in.nextLine();
+            Task event = Event.fromInput(eventInput);
             this.tasks.add(event);
 
             this.printTaskAddedMessage(event);
