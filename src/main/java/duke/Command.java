@@ -1,11 +1,14 @@
 package duke;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public abstract class Command {
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
+    private static final String FIND_COMMAND = "find";
     private static final String DONE_COMMAND = "done";
     private static final String DELETE_COMMAND = "delete";
     private static final String TODO_COMMAND = "todo";
@@ -73,6 +76,28 @@ public abstract class Command {
         }
     }
 
+    private static class Find extends Command {
+        private final String search;
+        private Find(String search) {
+            this.search = search;
+        }
+        @Override
+        protected void execute() {
+            System.out.println("Here are the matching tasks in your list:");
+            java.util.List<Task> matchingList = new ArrayList<>();
+            for (int i = 0; i < Duke.todoList.size(); i++) {
+                Task t = Duke.todoList.get(i);
+                if (t.getTaskName().contains(search)) {
+                    matchingList.add(t);
+                }
+            }
+            for (int i = 0; i < matchingList.size(); i++) {
+                System.out.println((i + 1) + ". " + matchingList.get(i).toString());
+            }
+            Ui.printLine();
+        }
+    }
+
     private static class Done extends Command {
         private final String index;
         private Done(String index) {
@@ -125,6 +150,9 @@ public abstract class Command {
     protected static final Command NOTHING = new Nothing();
     protected static final Command BYE = new Bye();
     protected static final Command LIST = new List();
+    protected static Command find(String search) {
+        return new Find(search);
+    }
     protected static Command done(String index) {
         return new Done(index);
     }
@@ -157,6 +185,9 @@ public abstract class Command {
                     break outerLoop;
                 case LIST_COMMAND:
                     LIST.execute();
+                    break;
+                case FIND_COMMAND:
+                    find(body_command).execute();
                     break;
                 case DONE_COMMAND:
                     done(body_command).execute();
