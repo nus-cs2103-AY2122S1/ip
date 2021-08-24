@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    public List<String> lines = new ArrayList<String>();
+    public static List<String> lines;
     private File file;
     private Ui ui = new Ui();
 
@@ -17,7 +17,7 @@ public class TaskList {
 
     void initialise(File file,Storage storage){
         try {
-            storage.listFileContents(lines, file.getPath());
+            storage.listFileContents(file.getPath());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -34,7 +34,7 @@ public class TaskList {
             toBeDone=toBeDone.substring(0,4)+"X"+toBeDone.substring(5);
             lines.set(taskNo,toBeDone);
             try {
-                storage.writeListToFile(lines,file.getPath());
+                storage.writeListToFile(file.getPath());
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -27,32 +27,24 @@ public class Storage {
         }
     }
 
-    void printFileContents(List<String> lines, String filePath) throws FileNotFoundException {
+    void listFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        TaskList.lines = new ArrayList<String>();
+        System.out.println("hi");
         while (s.hasNext()) {
-            System.out.println(s.nextLine());
-        }
-        s.close();
-    }
-
-    void listFileContents(List<String> lines, String filePath) throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        lines = new ArrayList<String>();
-        while (s.hasNext()) {
-            lines.add(s.nextLine());
+            TaskList.lines.add(s.nextLine());
 
         }
         s.close();
     }
 
-    void writeListToFile(List<String> lines, String filePath) throws IOException {
+    void writeListToFile(String filePath) throws IOException {
         FileWriter clearer = new FileWriter(filePath);
         clearer.write(""); //clear the file
         clearer.close();
         FileWriter fw = new FileWriter(filePath, true);
-        for(String line : lines){
+        for(String line : TaskList.lines){
             fw.write(line + System.lineSeparator());
         }
         fw.close();

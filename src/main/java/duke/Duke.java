@@ -17,10 +17,19 @@ import java.time.LocalDate;
 
 public class Duke {
     private static List<Task> tasks = new ArrayList<Task>();
-    private static List<String> lines = new ArrayList<String>();
+    //private static List<String> lines;
     private static Ui ui = new Ui();
     private static Storage storage = new Storage();
+    private static TaskList taskList = new TaskList();
 
+    private static void listFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        TaskList.lines = new ArrayList<String>();
+        while (s.hasNext()) {
+            TaskList.lines.add(s.nextLine());
+        }
+    }
 
     public static void main(String[] args) {
         ui.showWelcome();
@@ -31,7 +40,7 @@ public class Duke {
         ui.showFileLocation(file.getAbsolutePath());
 
         try {
-            storage.listFileContents(lines, file.getPath());
+            storage.listFileContents(file.getPath());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -51,7 +60,7 @@ public class Duke {
                 }
                 */
 
-                ui.showList(lines);
+                ui.showList(TaskList.lines);
 
             }else if(command.contains("done")) {
                 String numbers = command.substring(5);
@@ -63,8 +72,8 @@ public class Duke {
                     continue;
                 }
                 int taskNo = Integer.parseInt(numbers);
-                if (lines.size() < taskNo) {
-                    ui.showOutOfBoundsMsg(lines.size());
+                if (TaskList.lines.size() < taskNo) {
+                    ui.showOutOfBoundsMsg(TaskList.lines.size());
                     continue;
                 }
                 if (taskNo <= 0) {
@@ -72,12 +81,12 @@ public class Duke {
                     continue;
                 }
                 taskNo--;
-                String toBeDone = lines.get(taskNo);
+                String toBeDone = TaskList.lines.get(taskNo);
                 if(toBeDone.contains("[ ]")){
                     toBeDone=toBeDone.substring(0,4)+"X"+toBeDone.substring(5);
-                    lines.set(taskNo,toBeDone);
+                    TaskList.lines.set(taskNo,toBeDone);
                     try {
-                        storage.writeListToFile(lines,file.getPath());
+                        storage.writeListToFile(file.getPath());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -95,8 +104,8 @@ public class Duke {
                     continue;
                 }
                 int taskNo = Integer.parseInt(numbers);
-                if (lines.size() < taskNo) {
-                    ui.showOutOfBoundsMsg(lines.size());
+                if (TaskList.lines.size() < taskNo) {
+                    ui.showOutOfBoundsMsg(TaskList.lines.size());
                     continue;
                 }
                 if (taskNo <= 0) {
@@ -104,14 +113,14 @@ public class Duke {
                     continue;
                 }
                 taskNo--;
-                String toBeDeleted=lines.get(taskNo);
-                lines.remove(taskNo);
+                String toBeDeleted=TaskList.lines.get(taskNo);
+                TaskList.lines.remove(taskNo);
                 try {
-                    storage.writeListToFile(lines,file.getPath());
+                    storage.writeListToFile(file.getPath());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                ui.showDeletionMsg(toBeDeleted,lines.size());
+                ui.showDeletionMsg(toBeDeleted,TaskList.lines.size());
 
             }else if(command.contains("todo")){
                 String task=command.substring(5);
@@ -122,15 +131,15 @@ public class Duke {
                 ToDo taskToAdd = new ToDo(task);
 
                 String toBeAdded = taskToAdd.toString();
-                if(!lines.contains(toBeAdded)){
-                    lines.add(toBeAdded);
+                if(!TaskList.lines.contains(toBeAdded)){
+                    TaskList.lines.add(toBeAdded);
                     ui.showTaskAdded(toBeAdded);
-                    ui.showListSize(lines.size());
+                    ui.showListSize(TaskList.lines.size());
                 }else{
                     ui.showAlreadyInList(toBeAdded);
                 }
                 try {
-                    storage.writeListToFile(lines,file.getPath());
+                    storage.writeListToFile(file.getPath());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -158,16 +167,16 @@ public class Duke {
 
                 Deadline taskToAdd = new Deadline(task,date);
                 String toBeAdded = taskToAdd.toString();
-                if (!lines.contains(toBeAdded)){
-                    lines.add(toBeAdded);
+                if (!TaskList.lines.contains(toBeAdded)){
+                    TaskList.lines.add(toBeAdded);
                     ui.showTaskAdded(toBeAdded);
-                    ui.showListSize(lines.size());
+                    ui.showListSize(TaskList.lines.size());
                 }else{
                     ui.showAlreadyInList(toBeAdded);
                 }
 
                 try {
-                    storage.writeListToFile(lines,file.getPath());
+                    storage.writeListToFile(file.getPath());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -195,16 +204,16 @@ public class Duke {
 
                 Deadline taskToAdd = new Deadline(task,date);
                 String toBeAdded = taskToAdd.toString();
-                if (!lines.contains(toBeAdded)) {
-                    lines.add(toBeAdded);
+                if (!TaskList.lines.contains(toBeAdded)) {
+                    TaskList.lines.add(toBeAdded);
                     ui.showTaskAdded(toBeAdded);
-                    ui.showListSize(lines.size());
+                    ui.showListSize(TaskList.lines.size());
                 } else {
                     ui.showAlreadyInList(toBeAdded);
                 }
 
                 try {
-                    storage.writeListToFile(lines,file.getPath());
+                    storage.writeListToFile(file.getPath());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -212,9 +221,9 @@ public class Duke {
             }else if(command.equals("WIPE")){
                 System.out.println("ARE YOU SURE? SAY Y IF YOU ARE AND LITERALLY ANYTHING ELSE IF YOU AREN'T");
                 if(sc.nextLine().equals("Y")) {
-                    lines.clear();
+                    TaskList.lines.clear();
                     try {
-                        storage.writeListToFile(lines,file.getPath());
+                        storage.writeListToFile(file.getPath());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
