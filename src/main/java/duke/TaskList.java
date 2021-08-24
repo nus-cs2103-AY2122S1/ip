@@ -46,7 +46,8 @@ public class TaskList {
 
     //method to add a task to a list
 
-    public Task addTask(String str) throws EmptyDescriptionException, InvalidTaskException, InvalidDeadlineException {
+    public Task addTask(String str) throws EmptyDescriptionException
+            , InvalidTaskException, InvalidDeadlineException {
         //first check if the task only contain 1 word
         if (str.split(" ").length == 1) {
             //check if task if valid
@@ -105,6 +106,7 @@ public class TaskList {
     public Task deleteTask(String str) throws OutOfBoundException {
         String i = str.substring(str.length()-1);
         int index = Integer.parseInt(i);
+
         if (index < 0 || index > list.size()) {
             throw new OutOfBoundException();
         } else {

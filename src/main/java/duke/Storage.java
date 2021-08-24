@@ -17,9 +17,12 @@ public class Storage {
     }
 
     //method to load file
-    public ArrayList<Task> load() throws IOException, InvalidTaskException, InvalidDeadlineException {
+    public ArrayList<Task> load() throws IOException,
+            InvalidTaskException, InvalidDeadlineException {
+
         ArrayList<Task> list = new ArrayList<>();
         File file = new File(filePath);
+
         if (file.exists()) {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
@@ -27,18 +30,19 @@ public class Storage {
                 String[] stuff = str.split(" \\| ");
                 Task task;
                 switch (stuff[0]) {
-                    case "T":
+                case "T":
                         task = new ToDos(stuff[2]);
                         break;
-                    case "D":
+                case "D":
                         task = new Deadline(stuff[2], stuff[3]);
                         break;
-                    case "E":
+                case "E":
                         task = new Events(stuff[2], stuff[3]);
                         break;
-                    default:
+                default:
                         throw new InvalidTaskException();
                 }
+
                 if (stuff[1].equals("1")) {
                     task.markAsDone();
                 }

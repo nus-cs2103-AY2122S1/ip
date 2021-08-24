@@ -12,11 +12,13 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return "[" + type + "]" + super.toString() + "(at:" + time + ")";
+        return "[" + type + "]" + super.toString()
+                + "(at:" + time + ")";
     }
 
     @Override
     public String writeTask() {
-        return type + " | " + super.writeTask() + " | " + time;
+        return type + " | " + super.writeTask()
+                + " | " + time;
     }
 }
