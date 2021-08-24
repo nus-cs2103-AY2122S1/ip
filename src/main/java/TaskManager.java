@@ -1,14 +1,50 @@
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Locale;
 import java.util.Objects;
 
 public class TaskManager {
     Task[] taskList = new Task[100];
     int i = 0;
+    File txtFile;
+    String path;
 
     TaskManager() {
+        File txtFile;
+        System.out.println(System.getProperty("user.dir"));
+        String path = System.getProperty("user.dir") + "\\src\\main\\data\\duke.txt";
+        txtFile = new File(path);
+        this.txtFile = txtFile;
+        this.path = path;
 
+        if (!txtFile.exists()) {
+            //create new file
+            try {
+                txtFile.createNewFile();
+                this.txtFile = txtFile;
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                BufferedReader br = new BufferedReader(new FileReader(txtFile));
+                String txtLine;
+                txtLine = br.readLine();
+                while(txtLine != null) {
+                    String[] segments = txtLine.split("\\|");
+                    executeCommand(segments[2]);
+                    System.out.println(segments[0]);
+                    if (Objects.equals(segments[0], "1")) {
+                        String input = "done " + segments[1];
+                        System.out.println(input);
+                        executeCommand(input);
+                    }
+                    txtLine = br.readLine();
+                }
+            } catch (IOException e) {
+                System.out.println("ERROR OCCURRED");
+            }
+        }
     }
 
     public void executeCommand(String inData) {
@@ -80,6 +116,40 @@ public class TaskManager {
             }
         } else {
             byeMessage();
+            try {
+                for (int k = 0; k < i; k++) {
+                    String done;
+                    if (taskList[k].getStatusIcon() == "X") {
+                        done = "1|";
+                    } else {
+                        done = "0|";
+                    }
+                    if (taskList[k].getTask() == "T") {
+                        String command = done + k + 1 + "|todo " + taskList[k].getDescription();
+                        if (k == 0) {
+                            writeToFile(path, command);
+                        } else {
+                            appendToFile(path, command);
+                        }
+                    } else if (taskList[k].getTask() == "D") {
+                        String command = done + k + 1+ "|deadline " + taskList[k].getDescription() + "/by " + taskList[k].getDateNum();
+                        if (k == 0) {
+                            writeToFile(path, command);
+                        } else {
+                            appendToFile(path, command);
+                        }
+                    } else if (taskList[k].getTask() == "E") {
+                        String command = done + k + 1+ "|event " + taskList[k].getDescription() + "/at " + taskList[k].getDateNum();
+                        if (k == 0) {
+                            writeToFile(path, command);
+                        } else {
+                            appendToFile(path, command);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Unable to write to file");
+            }
         }
 
     }
@@ -201,6 +271,12 @@ public class TaskManager {
     public static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(System.lineSeparator() + textToAppend);
         fw.close();
     }
 }

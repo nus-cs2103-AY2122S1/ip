@@ -14,4 +14,8 @@ public class Event extends Task {
     public String getDate() {
         return "(at: " + date + ")";
     }
+
+    public String getDateNum() {
+        return date;
+    }
 }
