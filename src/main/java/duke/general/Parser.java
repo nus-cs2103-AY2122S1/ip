@@ -33,6 +33,9 @@ public class Parser {
                 case "bye":
                     c = new ByeCommand();
                     break;
+                case "find":
+                    c = new FindCommand(inputSplit);
+                    break;
                 default:
                     c = new ErrorCommand();
             }
