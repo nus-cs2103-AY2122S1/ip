@@ -25,7 +25,6 @@ class Task {
 
     LocalDate getDate() {
         return null;
-
     }
 
     @Override

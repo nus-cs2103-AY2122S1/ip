@@ -35,7 +35,7 @@ class Deadline extends Task {
 
     @Override
     String encoding() {
-        return "E&&" + super.encoding() + "&&" + by;
+        return "D&&" + super.encoding() + "&&" + by;
     }
 
     @Override
