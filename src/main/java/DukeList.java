@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class DukeList {
+public class DukeList implements Iterable<Task> {
     private final ArrayList<Task> list;
 
     public DukeList() {
@@ -36,4 +37,10 @@ public class DukeList {
         }
         return listString.toString();
     }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return list.iterator();
+    }
+
 }

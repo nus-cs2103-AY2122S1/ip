@@ -1,6 +1,41 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
+
+    private final static String SAVE_FILE = "data/tasks.txt";
+    private final static String BOOT_MESSAGE =
+            "                 |`._         |\\\n" +
+                    "                 `   `.  .    | `.    |`.\n" +
+                    "                  .    `.|`-. |   `-..'  \\           _,.-'\n" +
+                    "                  '      `-. `.           \\ /|   _,-'   /\n" +
+                    "              .--..'        `._`           ` |.-'      /\n" +
+                    "               \\   |                                  /\n" +
+                    "            ,..'   '                                 /\n" +
+                    "            `.                                      /\n" +
+                    "            _`.---                                 /\n" +
+                    "        _,-'               `.                 ,-  /\"-._\n" +
+                    "      ,\"                   | `.             ,'|   `    `.\n" +
+                    "    .'                     |   `.         .'  |    .     `.\n" +
+                    "  ,'                       '   ()`.     ,'()  '    |       `.\n" +
+                    "'-.                    |`.  `.....-'    -----' _   |         .\n" +
+                    " / ,   ________..'     '  `-._              _.'/   |         :\n" +
+                    " ` '-\"\" _,.--\"'         \\   | `\"+--......-+' //   j `\"--.. , '\n" +
+                    "    `.'\"    .'           `. |   |     |   / //    .       ` '\n" +
+                    "      `.   /               `'   |    j   /,.'     '\n" +
+                    "        \\ /                  `-.|_   |_.-'       /\\\n" +
+                    "         /                        `\"\"          .'  \\\n" +
+                    "        j                                           .\n" +
+                    "        |                                 _,        |\n" +
+                    "        |             ,^._            _.-\"          '\n" +
+                    "        |          _.'    `'\"\"`----`\"'   `._       '\n" +
+                    "        j__     _,'                         `-.'-.\"`\n" +
+                    "          ',-.,' mh\n\n" +
+                    "Loading save file...";
+    private final static String END_MESSAGE = "Cya";
 
     private final static DukeList list = new DukeList();
 
@@ -8,14 +43,13 @@ public class Duke {
         TODO,
         DEADLINE,
         EVENT,
-        INVALID
     }
 
     private static void display(String content) {
         System.out.println(
-                "____________________________________________________________\n"
+                "69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969\n"
                 + content
-                + "\n____________________________________________________________\n"
+                + "\n69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969\n"
         );
     }
 
@@ -23,7 +57,64 @@ public class Duke {
         display(list.toString());
     }
 
-    private static void addTask(String input, TaskType type) throws InvalidArgumentsException, InvalidTaskException {
+    private static String loadFile() {
+        File file = new File(SAVE_FILE);
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] splitted = line.split("%,", 4);
+                String input;
+                TaskType type;
+                boolean isDone = Boolean.parseBoolean(splitted[1]);
+                switch (splitted[0]) {
+                case "T":
+                    input = "todo " + splitted[2];
+                    type = TaskType.TODO;
+                    break;
+                case "D":
+                    input = "deadline " + splitted[2] + " /by " + splitted[3];
+                    type = TaskType.DEADLINE;
+                    break;
+                case "E":
+                    input = "event " + splitted[2] + " /at " + splitted[3];
+                    type = TaskType.EVENT;
+                    break;
+                default:
+                    throw new CorruptedFileException();
+                }
+                Task task = addTask(input, type);
+                task.isDone = isDone;
+            }
+            scanner.close();
+            return "Save file successfully loaded";
+        } catch (DukeException e) {
+            return "Error loading save file";
+        } catch (FileNotFoundException e) {
+            return "No save file found";
+        }
+    }
+
+    private static void saveFile() throws CorruptedFileException {
+        File file = new File(SAVE_FILE);
+        try {
+            if (!file.exists()) {
+                boolean isCreated = file.createNewFile();
+                if (!isCreated) {
+                    throw new CorruptedFileException();
+                }
+            }
+            FileWriter fw = new FileWriter(SAVE_FILE);
+            for (Task t : list) {
+                fw.write(t.formatSave() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new CorruptedFileException();
+        }
+    }
+
+    private static Task addTask(String input, TaskType type) throws InvalidArgumentsException, InvalidTaskException {
         int descriptionEnd;
         String description;
         String dateTime;
@@ -105,11 +196,7 @@ public class Duke {
                 throw new InvalidTaskException();
         }
         list.add(task);
-        display("Got it. I've added this task:\n"
-                + "  "
-                + task.toString() + "\n"
-                + "Now you have " + list.size() + " tasks in the list"
-        );
+        return task;
     }
 
     private static void markDone(String input) throws InvalidArgumentsException, InvalidTaskException {
@@ -158,7 +245,9 @@ public class Duke {
     }
 
     private static void runDuke() {
-        display("Hello I'm Duke\nWhat can I do for you?");
+        display(BOOT_MESSAGE);
+        display(loadFile());
+        display("Sup ma man. watcha want?");
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
@@ -180,32 +269,53 @@ public class Duke {
                 }
             } else if (input.startsWith("todo")) {
                 try {
-                    addTask(input, TaskType.TODO);
+                    Task task = addTask(input, TaskType.TODO);
+                    display("Got it. I've added this task:\n"
+                            + "  "
+                            + task.toString() + "\n"
+                            + "Now you have " + list.size() + " tasks in the list"
+                    );
                 } catch (DukeException e) {
                     display(e.getMessage());
                 }
             } else if (input.startsWith("deadline")) {
                 try {
-                    addTask(input, TaskType.DEADLINE);
+                    Task task =  addTask(input, TaskType.DEADLINE);
+                    display("Got it. I've added this task:\n"
+                            + "  "
+                            + task.toString() + "\n"
+                            + "Now you have " + list.size() + " tasks in the list"
+                    );
                 } catch (DukeException e) {
                     display(e.getMessage());
                 }
             } else if (input.startsWith("event")) {
                 try {
-                    addTask(input, TaskType.EVENT);
+                    Task task =  addTask(input, TaskType.EVENT);
+                    display("Got it. I've added this task:\n"
+                            + "  "
+                            + task.toString() + "\n"
+                            + "Now you have " + list.size() + " tasks in the list"
+                    );
                 } catch (DukeException e) {
                     display(e.getMessage());
                 }
             } else {
                 try {
-                    addTask(input, TaskType.INVALID);
+                    throw new InvalidTaskException();
                 } catch (DukeException e) {
                     display(e.getMessage());
                 }
             }
         }
         scanner.close();
-        display("Bye. Hope to see you again soon!");
+        try {
+            saveFile();
+            display("File saved");
+        } catch (CorruptedFileException e) {
+            display("Error saving file");
+        }
+        display(END_MESSAGE);
     }
 
     public static void main(String[] args) {
