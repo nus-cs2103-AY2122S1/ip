@@ -83,6 +83,12 @@ public class Parser {
         return new Event(description, date, time);
     }
 
+    /**
+     * Parses the string for command and returns the command.
+     * @param fullCommand The string representing the command inputted by the user.
+     * @return A command that can be executed to perform action specified by the user.
+     * @throws DukeException if the command is not recognised.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] splitInput = fullCommand.split(" ");
         switch (splitInput[0]) {

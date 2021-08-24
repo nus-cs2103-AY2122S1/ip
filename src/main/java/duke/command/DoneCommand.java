@@ -6,7 +6,7 @@ import duke.ui.Ui;
 
 public class DoneCommand extends Command {
 
-    protected int taskNo;
+    private final int taskNo;
 
     public DoneCommand(int taskNo) {
         this.taskNo = taskNo;

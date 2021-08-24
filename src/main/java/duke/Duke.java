@@ -14,12 +14,19 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates duke with the file path given.
+     * @param filePath The file path where the tasks are stored locally.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.loadFile());
     }
 
+    /**
+     * Starts duke.
+     */
     public void run() {
         ui.greetUser();
         while (true) {

@@ -4,10 +4,17 @@ import duke.tasklist.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Deals with the interaction with the user.
+ */
 public class Ui {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Reads the text inputted by the user.
+     * @return A String representing the user input.
+     */
     public String readCommand() {
         return scanner.nextLine();
     }
@@ -38,10 +45,18 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints the message inputted.
+     * @param message The message to be outputted.
+     */
     public void printsMessage(String message) {
         System.out.println(message);
     }
 
+    /**
+     * Prints the tasks in the task list.
+     * @param taskList The tasks that will be printed.
+     */
     public void printTasks(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.getAllTasks().size(); i++) {

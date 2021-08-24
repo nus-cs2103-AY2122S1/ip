@@ -5,6 +5,9 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Represents all the tasks created through Duke.
+ */
 public class TaskList {
 
     private final ArrayList<Task> tasks;
@@ -13,13 +16,16 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Returns all the tasks in an array list.
+     * @return ArrayList containing all the list.
+     */
     public ArrayList<Task> getAllTasks() {
         return tasks;
     }
 
     /**
      * Adds the task to the list and prints the added task.
-     *
      * @param task the task that will be added to the list
      */
     public void addTask(Ui ui, Task task) {
@@ -30,7 +36,6 @@ public class TaskList {
 
     /**
      * Deletes the task with taskNo specified.
-     *
      * @param taskNo the taskNo of the task to be deleted.
      */
     public void deleteTask(Ui ui, int taskNo) {
@@ -42,7 +47,6 @@ public class TaskList {
 
     /**
      * Deletes the task with taskNo specified.
-     *
      * @param taskNo the taskNo of the task to be deleted.
      */
     public void markTaskAsDone(Ui ui, int taskNo) {
