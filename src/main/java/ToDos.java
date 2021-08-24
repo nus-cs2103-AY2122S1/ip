@@ -1,5 +1,5 @@
 public class ToDos extends Task {
-    String type;
+    private String type;
 
     ToDos(String title) {
         super(title);

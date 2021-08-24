@@ -1,6 +1,5 @@
-public class OutOfBoundException extends Exception {
-    @Override
-    public String toString() {
-        return "Task does not exist. Please send a correct number ><";
+public class OutOfBoundException extends DukeException {
+    public OutOfBoundException() {
+        super("Task does not exist. Please send a correct task number ><");
     }
 }

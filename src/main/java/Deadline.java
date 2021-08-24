@@ -3,11 +3,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    String type;
-    LocalDate deadline;
+    private String type;
+    private LocalDate deadline;
 
     Deadline(String title, String deadline) throws InvalidDeadlineException {
-        super(title.substring(9));
+        super(title);
         this.type = "D";
         try {
             this.deadline = LocalDate.parse(deadline);

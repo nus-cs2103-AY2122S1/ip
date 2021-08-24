@@ -1,4 +1,4 @@
-T | 0 | buy shampoo
-D | 1 | homework  | 12pm
-E | 0 | party  | 9pm tmr
-T | 1 | shower
+T | 1 | buy shampoo
+T | 0 | add
+D | 0 | hw  | 1203-01-11
+D | 0 | shower  | 2101-10-21
