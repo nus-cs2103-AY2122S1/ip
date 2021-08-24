@@ -163,21 +163,19 @@ public final class TaskList{
                     }
                 }
             }
-            if (dueItems.isEmpty()) {
-                Ui.showInput("Nothing due on this day!");
-            } else {
-                String temp = "The items due are: \n";
-                for (int i = 0; i < dueItems.size(); i++) {
-                    if (i + 1 < dueItems.size()) {
-                        temp += "     " + (i + 1) + "." + dueItems.get(i).getType()
-                                + dueItems.get(i).getStatus() + " " + dueItems.get(i).getTask() + "\n";
-                    } else {
-                        temp += "     " + (i + 1) + "." + dueItems.get(i).getType()
-                                + dueItems.get(i).getStatus() + " " + dueItems.get(i).getTask();
-                    }
+        }
+    }
+
+    public ArrayList<Task> findItems(String target) {
+        ArrayList<Task> matched = new ArrayList<>();
+        if (!target.equals("")) {
+            for (Task t : tasks) {
+                String temp = t.getTask();
+                if (temp.toLowerCase().contains(target.toLowerCase())) {
+                    matched.add(t);
                 }
-                Ui.showInput(temp);
             }
         }
+        return matched;
     }
 }

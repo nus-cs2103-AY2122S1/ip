@@ -9,7 +9,6 @@ import ui.Ui;
  * The Parser class attempts to make sense of
  * user's input and generates commands accordingly.
  */
-
 public final class Parser{
 
     /**
@@ -59,6 +58,8 @@ public final class Parser{
             return new EventCommand(s);
         } else if (s.get(0).equalsIgnoreCase("due")) {
             return new DueCommand(s);
+        } else if (s.get(0).equalsIgnoreCase("find")) {
+            return new FindCommand(s);
         } else {
             throw new DukeException("Invalid command!");
         }
