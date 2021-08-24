@@ -1,5 +1,8 @@
+import java.time.LocalDate;
+
+
 public class DeadLine extends Task {
-    private String dueDate;
+    private LocalDate dueDate;
 
     /**
      * Constructor for DeadLine
@@ -8,11 +11,11 @@ public class DeadLine extends Task {
      */
     public DeadLine(String description, String dueDate) {
         super(description, "deadline");
-        this.dueDate = dueDate;
+        this.dueDate = DateHandler.formatDate(dueDate);
     }
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (Due: " + this.dueDate + ")";
+        return "[D] " + super.toString() + " (Due: " + DateHandler.convertDate(this.dueDate) + ")";
     }
 }

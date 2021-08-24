@@ -1,5 +1,8 @@
+
+import java.time.LocalDate;
+
 public class Event extends Task {
-    private String dateAndTime;
+    private LocalDate dateAndTime;
     /**
      * Constructor for Event
      *
@@ -7,11 +10,11 @@ public class Event extends Task {
      */
     public Event(String description, String dateAndTime) {
         super(description, "event");
-        this.dateAndTime = dateAndTime;
+        this.dateAndTime = DateHandler.formatDate(dateAndTime);
     }
 
     @Override
     public String toString() {
-        return "[E] " + super.toString() + " (On: " + this.dateAndTime + ")";
+        return "[E] " + super.toString() + " (On: " + DateHandler.convertDate(this.dateAndTime) + ")";
     }
 }
