@@ -7,10 +7,10 @@ import java.util.function.Function;
  *  A class that encapsulates the list of task inputted by Duke
  */
 public class TaskList {
-    private ArrayList<Task> list;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -25,6 +25,7 @@ public class TaskList {
     public String addTask(Task.TaskName type, String input, Boolean isDone) throws DukeException {
         Task task;
         String[] inputArray;
+
         switch (type) {
         case TODO:
             task = new Todo(input, isDone);
@@ -47,9 +48,9 @@ public class TaskList {
             throw new DukeException("Unexpected value: " + type);
         }
 
-        this.list.add(task);
+        this.tasks.add(task);
         return "\tGot it. I've added this task:\n\t\t " + task
-                + "\n\tNow you have " + list.size() + " tasks in the list.\n";
+                + "\n\tNow you have " + tasks.size() + " tasks in the list.\n";
     }
 
     /**
@@ -73,7 +74,7 @@ public class TaskList {
     public String displayTask() {
         StringBuilder output = new StringBuilder("\tHere are the tasks in your list:\n");
         int i = 1;
-        for (Task task: list) {
+        for (Task task: tasks) {
             String temp = "\t" + i + "." + task.toString() + "\n";
             output.append(temp);
             i++;
@@ -96,11 +97,11 @@ public class TaskList {
         } catch (NumberFormatException e) {
             throw new DukeException("The index provided is not a number.");
         }
-        if (index > this.list.size() || index < 1) {
+        if (index > this.tasks.size() || index < 1) {
             throw new DukeException("The index provided is not within the valid range");
         }
 
-        return "\tNice! I've marked this task as done:\n\t\t" + list.get(index - 1).markDone() + "\n";
+        return "\tNice! I've marked this task as done:\n\t\t" + tasks.get(index - 1).markDone() + "\n";
     }
 
     /**
@@ -118,13 +119,13 @@ public class TaskList {
         } catch (NumberFormatException e) {
             throw new DukeException("The index provided is not a number.");
         }
-        if (index > this.list.size() || index < 1) {
+        if (index > this.tasks.size() || index < 1) {
             throw new DukeException("The index provided is not within the valid range");
         }
 
-        Task deleted = this.list.remove(index - 1);
+        Task deleted = this.tasks.remove(index - 1);
         return "\tNoted. I've removed this task:\n\t\t" + deleted.toString()
-                + "\n\tNow you have " + this.list.size() + " tasks in the list.\n";
+                + "\n\tNow you have " + this.tasks.size() + " tasks in the list.\n";
     }
 
     /**
@@ -133,7 +134,7 @@ public class TaskList {
      * @param f the function to be applied on each task
      */
     public void iterateList(Function<Task, Void> f){
-        for (Task t: this.list) {
+        for (Task t: this.tasks) {
             f.apply(t);
         }
     }

@@ -1,7 +1,5 @@
 package duke;
 
-import duke.DukeException;
-
 /**
  * A wrapper for a task used by DukeList.
  *
