@@ -2,15 +2,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DukeFileIO {
+public class Storage {
+    private String filePath;
 
-    public static void readPastData() throws FileNotFoundException {
-        File data = new File("data/duke.txt");
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public ArrayList<Task> readPastData() throws FileNotFoundException {
+        ArrayList<Task> savedTasks = new ArrayList<>();
+        File data = new File(this.filePath);
         Scanner dataReader = new Scanner(data);
         while (dataReader.hasNext()) {
-            Duke.counter++;
             String entry = dataReader.nextLine();
             String[] components = entry.split("[\\|]");
             char prefix = entry.charAt(0);
@@ -21,7 +27,7 @@ public class DukeFileIO {
                 if (checkIfDone(components[1])) {
                     t.markAsDone();
                 }
-                Duke.taskList.add(t);
+                savedTasks.add(t);
                 break;
             case 'D':
                 description = components[2].substring(1);
@@ -30,7 +36,7 @@ public class DukeFileIO {
                 if (checkIfDone(components[1])) {
                     d.markAsDone();
                 }
-                Duke.taskList.add(d);
+                savedTasks.add(d);
                 break;
             case 'E':
                 description = components[2].substring(1);
@@ -39,13 +45,14 @@ public class DukeFileIO {
                 if (checkIfDone(components[1])) {
                     e.markAsDone();
                 }
-                Duke.taskList.add(e);
+                savedTasks.add(e);
                 break;
             }
         }
+        return savedTasks;
     }
 
-    private static boolean checkIfDone(String component) {
+    private boolean checkIfDone(String component) {
         if (Integer.parseInt(component.substring(1,2)) == 1) {
             return true;
         } else {
@@ -53,16 +60,16 @@ public class DukeFileIO {
         }
     }
 
-    public static void writeCurrentData() throws IOException {
-        FileWriter fw = new FileWriter("data/duke.txt");
-        for (Task t : Duke.taskList) {
+    public void writeCurrentData(ArrayList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(this.filePath);
+        for (Task t : tasks) {
             fw.write(t.toFile() + System.lineSeparator());
         }
         fw.close();
     }
 
-    public static void createDataFile() {
-        File data = new File("data/duke.txt");
+    public void createDataFile() {
+        File data = new File(this.filePath);
         try {
             data.createNewFile();
         } catch (IOException e) {
