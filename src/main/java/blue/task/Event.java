@@ -1,32 +1,36 @@
+package blue.task;
+
+import blue.BlueException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
-public class Deadline extends Task {
+public class Event extends Task {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-    private final LocalDateTime by;
+    private final LocalDateTime at;
 
-    public Deadline(String title, String byString) throws BlueException {
+    public Event(String title, String atString) throws BlueException {
         super(title);
         try {
-            by = LocalDateTime.parse(byString, formatter);
+            at = LocalDateTime.parse(atString, formatter);
         } catch (DateTimeParseException e) {
             String message = "Please enter a valid date in the correct format, e.g., 2021-12-27T23:59:59";
             throw new BlueException(message);
         }
     }
 
-    static String getClassRepr() {
-        return "D";
+    public static String getClassRepr() {
+        return "E";
     }
 
-    public String getBy() {
-        return by.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+    public String getAt() {
+        return at.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
     public String toString() {
-        String byRepr = by.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
-        return "[D]" + super.toString() + " (by: " + byRepr + ")";
+        String atRepr = at.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
+        return "[E]" + super.toString() + " (at: " + atRepr + ")";
     }
 }

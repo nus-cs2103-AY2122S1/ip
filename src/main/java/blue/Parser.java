@@ -1,6 +1,8 @@
+package blue;
+
 import java.util.Arrays;
 
-class Parser {
+public class Parser {
     static String getCommand(String input) {
         if (input.length() > 0) {
             return input.split(" ")[0];
@@ -9,7 +11,7 @@ class Parser {
         }
     }
 
-    static String[] getArguments(String input) {
+    public static String[] getArguments(String input) {
         if (input.length() > 0) {
             String[] split = input.split(" ");
             if (split.length >= 2)

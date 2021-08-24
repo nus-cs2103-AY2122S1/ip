@@ -1,3 +1,5 @@
+package blue;
+
 public class Command {
     public final static String LIST = "list";
     public final static String TODO = "todo";

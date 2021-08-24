@@ -1,10 +1,16 @@
+package blue.handler;
+
+import blue.BlueException;
+import blue.TaskList;
+import blue.task.Event;
+
 public class EventHandler extends CommandHandler {
     public EventHandler(TaskList taskList) {
         super(taskList);
     }
 
     @Override
-    String handle(String input) throws BlueException {
+    public String handle(String input) throws BlueException {
         if (input.contains(" /at ")) {
             int indexSpace = input.indexOf(" ");
             int indexAt = input.indexOf(" /at ");

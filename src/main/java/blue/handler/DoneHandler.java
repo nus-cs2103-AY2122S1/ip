@@ -1,10 +1,17 @@
-class DoneHandler extends CommandHandler {
-    protected DoneHandler(TaskList taskList) {
+package blue.handler;
+
+import blue.BlueException;
+import blue.Parser;
+import blue.TaskList;
+import blue.task.Task;
+
+public class DoneHandler extends CommandHandler {
+    public DoneHandler(TaskList taskList) {
         super(taskList);
     }
 
     @Override
-    String handle(String input) throws BlueException {
+    public String handle(String input) throws BlueException {
         String[] arguments = Parser.getArguments(input);
         if (arguments.length > 0) {
             try {

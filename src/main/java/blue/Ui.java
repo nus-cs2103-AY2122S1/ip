@@ -1,3 +1,5 @@
+package blue;
+
 class Ui {
     private static final String LOADING_ERROR_CONTENT
             = "☹ OOPS!!! I'm sorry, but I can't find your previous tasks :-(";

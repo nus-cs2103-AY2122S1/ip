@@ -1,10 +1,16 @@
+package blue.handler;
+
+import blue.BlueException;
+import blue.TaskList;
+import blue.task.Deadline;
+
 public class DeadlineHandler extends CommandHandler {
     public DeadlineHandler(TaskList taskList) {
         super(taskList);
     }
 
     @Override
-    String handle(String input) throws BlueException {
+    public String handle(String input) throws BlueException {
         if (input.contains(" /by ")) {
             int indexSpace = input.indexOf(" ");
             int indexBy = input.indexOf(" /by ");

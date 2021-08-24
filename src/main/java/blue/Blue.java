@@ -1,4 +1,9 @@
-import java.util.*;
+package blue;
+
+import blue.handler.*;
+
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class Blue {
     private final Storage storage;

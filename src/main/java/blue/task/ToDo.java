@@ -1,9 +1,11 @@
+package blue.task;
+
 public class ToDo extends Task {
     public ToDo(String title) {
         super(title);
     }
 
-    static String getClassRepr() {
+    public static String getClassRepr() {
         return "T";
     }
 

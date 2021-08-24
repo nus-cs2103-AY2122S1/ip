@@ -1,10 +1,17 @@
+package blue.handler;
+
+import blue.BlueException;
+import blue.Parser;
+import blue.TaskList;
+import blue.task.Task;
+
 public class DeleteHandler extends CommandHandler {
-    protected DeleteHandler(TaskList taskList) {
+    public DeleteHandler(TaskList taskList) {
         super(taskList);
     }
 
     @Override
-    String handle(String input) throws BlueException {
+    public String handle(String input) throws BlueException {
         String[] arguments = Parser.getArguments(input);
         if (arguments.length > 0) {
             try {

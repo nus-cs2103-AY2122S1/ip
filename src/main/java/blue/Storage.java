@@ -1,3 +1,10 @@
+package blue;
+
+import blue.task.Deadline;
+import blue.task.Event;
+import blue.task.Task;
+import blue.task.ToDo;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,10 +44,10 @@ class Storage {
     }
 
     /**
-     * Returns a Task constructed based on the given representation.
+     * Returns a blue.Task constructed based on the given representation.
      *
      * @param taskRepresentation Representation of a task.
-     * @return Task constructed from its representation.
+     * @return blue.Task constructed from its representation.
      * @throws BlueException If no tasks can be created from the taskRepresentation.
      */
     private Task makeTask(String taskRepresentation) throws BlueException {

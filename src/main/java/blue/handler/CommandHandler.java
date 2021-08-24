@@ -1,4 +1,9 @@
-abstract class CommandHandler {
+package blue.handler;
+
+import blue.BlueException;
+import blue.TaskList;
+
+public abstract class CommandHandler {
     protected TaskList taskList;
 
     protected CommandHandler(TaskList taskList) {
@@ -9,5 +14,5 @@ abstract class CommandHandler {
      * @param input - the input entered by the user
      * @return response
      */
-    abstract String handle(String input) throws BlueException;
+    public abstract String handle(String input) throws BlueException;
 }
