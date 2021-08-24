@@ -46,8 +46,16 @@ public class GreetingBot {
         }
 
         store();
-        ui.goodbye();
-
+        if (tasks.getList().isEmpty()) {
+            try {
+                storage.deleteData();
+                ui.goodbyeEmptyList();
+            } catch (DukeException err) {
+                System.out.println(err.toString());
+            }
+        } else {
+            ui.goodbye();
+        }
     }
 
 

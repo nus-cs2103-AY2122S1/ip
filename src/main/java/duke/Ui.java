@@ -44,4 +44,9 @@ public class Ui {
         String exitMessage = "Leaving just like that? Fine. See you soon I guess.";
         System.out.println(exitMessage);
     }
+
+    public void goodbyeEmptyList() {
+        String exitMessage = "Leaving just like that? Fine. See you soon I guess.";
+        System.out.println(exitMessage);
+    }
 }

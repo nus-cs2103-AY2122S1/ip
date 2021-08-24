@@ -65,10 +65,17 @@ public class Storage {
             } catch (IOException error) {
                 throw new DukeException("Something went wrong when I tried to save your list :(");
             }
-        } else {
+        }
+//
+    }
+
+    public void deleteData() throws DukeException{
+        try {
             File dataFile = new File("./data/list.txt");
             dataFile.delete();
             System.out.println("Before you leave, it seems your list is empty anyway so I'll just delete it for you!");
+        } catch (Exception exception) {
+            throw new DukeException("Something went wrong when I tried to delete your empty list!");
         }
     }
 }
