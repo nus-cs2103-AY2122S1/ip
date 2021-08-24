@@ -5,13 +5,12 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.File;
+import java.io.IOException;
 
 
 public class Storage {
-
 
     public void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode

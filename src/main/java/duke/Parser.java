@@ -2,31 +2,31 @@ package duke;
 
 import java.sql.SQLOutput;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 
 public class Parser {
+
     private String inp;
 
-    public Parser(String inp) {
+    public Parser (String inp) {
         this.inp = inp;
     }
 
-    public void parseTaskList(TaskList ob) {
+    public void parseTaskList (TaskList ob) {
         for (int j = 0; j < ob.numberOfTasks(); j++) {
             if (!ob.getTaskFromList(j).getPreExisting()) {
                 System.out.println("    " + (j + 1) + ". " + ob.getTaskFromList(j).toString());
-            }
-            else {
+            } else {
                 System.out.println("    " + (j + 1) + ". " + ob.getTaskFromList(j).getDescription());
             }
         }
     }
 
-    public String getTaskList(TaskList ob) {
+    public String getTaskList (TaskList ob) {
         String ret="";
         for (int j = 0; j < ob.numberOfTasks(); j++) {
             if (!ob.getTaskFromList(j).getPreExisting()) {
@@ -54,7 +54,4 @@ public class Parser {
         int ind = Integer.parseInt((inp.split("\\s"))[1]) - 1;
         return ind;
     }
-
-
-
 }

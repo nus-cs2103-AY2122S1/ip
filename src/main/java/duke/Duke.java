@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import static java.lang.Integer.*;
 
 public class Duke {

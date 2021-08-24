@@ -15,7 +15,6 @@ public class Ui {
 
     Storage storage = new Storage();
 
-
     /**
      * Method to return the initial default greeting
      * @return The initial String greeting
@@ -150,7 +149,6 @@ public class Ui {
                 } else {
                     System.out.println("        " + ob.getTaskFromList(ind).getDescription());
                 }
-
                 ob.deleteTask(ind);
                 try {
                     storage.writeToFile(file,parser.getTaskList(ob));
