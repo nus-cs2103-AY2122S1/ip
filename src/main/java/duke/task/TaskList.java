@@ -8,6 +8,17 @@ import java.util.ArrayList;
 public class TaskList extends ArrayList<Task> {
     private ArrayList<Task> list = new ArrayList<>();
 
+    /**
+     * Create an empty list of task
+     */
+    public TaskList() {
+    }
+
+    /**
+     * Create a list of tasks
+     *
+     * @param tasks ArrayList of Tasks to create the task list from
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.list = tasks;
     }
@@ -103,7 +114,6 @@ public class TaskList extends ArrayList<Task> {
             // not of any task type
             throw new IllegalArgumentException("Task type not recognized: " + taskType);
         }
-
         return data;
     }
 

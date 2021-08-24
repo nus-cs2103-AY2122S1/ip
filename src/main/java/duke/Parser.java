@@ -15,8 +15,9 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     /**
      * Get the action specified by the command
-     *
+     * <p>
      * A valid action can be list, done, todo, event, deadline, delete
+     *
      * @param command The command to be parsed
      * @return The action of the command
      */
@@ -94,7 +95,7 @@ public class Parser {
                 ddlDescription = ddlSplit[0].split("deadline ")[1];
             } catch (ArrayIndexOutOfBoundsException e) {
                 // no deadline description
-                String message= "☹ OOPS!!! The description of a deadline cannot be empty.";
+                String message = "☹ OOPS!!! The description of a deadline cannot be empty.";
                 throw new DukeException(message);
             }
             return new Deadline(ddlDescription, by);

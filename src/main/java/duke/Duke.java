@@ -5,14 +5,32 @@ import duke.task.TaskList;
 
 public class Duke {
 
+    /**
+     * storage instance to handle task list storage
+     */
     private final Storage storage;
 
+    /**
+     * task list instance to store tasks
+     */
     private final TaskList tasks;
 
+    /**
+     * Ui instance to handle Duke ui
+     */
     private final Ui ui;
 
+    /**
+     * Parser instance to handle parsing
+     */
     private final Parser parser;
 
+    /**
+     * Construct a Duke instance to run Duke
+     *
+     * @param filePath Path to the data save file directory
+     * @param fileName File name of the data save file
+     */
     public Duke(String filePath, String fileName) {
         this.storage = new Storage(filePath, fileName);
         this.tasks = this.storage.readData();
@@ -193,5 +211,4 @@ public class Duke {
             ui.printMessage(e.getMessage());
         }
     }
-
 }

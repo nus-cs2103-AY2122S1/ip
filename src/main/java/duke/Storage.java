@@ -27,8 +27,17 @@ public class Storage {
      */
     private final String fileName;
 
+    /**
+     * Parser instance to handle parsing
+     */
     private final Parser parser = new Parser();
 
+    /**
+     * Construct a storage instance to handle task storage
+     *
+     * @param filePath Path to the data save file directory
+     * @param fileName File name of the data save file
+     */
     public Storage(String filePath, String fileName) {
         this.filePath = filePath;
         this.fileName = fileName;
