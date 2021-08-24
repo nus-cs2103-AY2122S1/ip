@@ -1,4 +1,4 @@
-public class MissingTaskNumberException extends Exception {
+public class MissingTaskNumberException extends DukeException {
     public MissingTaskNumberException() { }
 
     @Override

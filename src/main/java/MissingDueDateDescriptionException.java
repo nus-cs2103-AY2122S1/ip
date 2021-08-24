@@ -1,4 +1,4 @@
-public class MissingDueDateDescriptionException extends Exception {
+public class MissingDueDateDescriptionException extends DukeException {
 
     public MissingDueDateDescriptionException() { }
 

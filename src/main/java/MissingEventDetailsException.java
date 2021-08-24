@@ -1,4 +1,4 @@
-public class MissingEventDetailsException extends Exception {
+public class MissingEventDetailsException extends DukeException {
     public MissingEventDetailsException() { }
 
     @Override
