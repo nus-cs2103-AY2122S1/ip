@@ -11,17 +11,25 @@ public abstract class Task {
     private final String description;
     private boolean isDone;
 
-    Task(String description) throws InvalidTaskException {
+    Task(String description, boolean isDone) throws InvalidTaskException {
         if (description.isEmpty()) throw new InvalidTaskException(DESCRIPTION_EMPTY_MESSAGE);
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public void markAsDone() {
         this.isDone = true;
     }
 
-    protected abstract String getTaskTypeIcon();
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public abstract String getTaskTypeIcon();
 
     @Override
     public String toString() {
