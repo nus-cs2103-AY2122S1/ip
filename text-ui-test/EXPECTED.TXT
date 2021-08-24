@@ -16,7 +16,7 @@ Now you have 2 task(s) in the list.
 
 
 Got it. I've added this task:
-[D][ ] eat lunch  (by: 3pm today)
+[D][ ] eat lunch  (by: Wed, May 12,2021 05:00PM)
 Now you have 3 task(s) in the list.
 
 
@@ -25,42 +25,42 @@ Nice! I've marked this task as done:
 
 
 Got it. I've added this task:
-[D][ ] sleep  (by: 11pm tonight)
+[D][ ] sleep  (by: Fri, Jul 2,2021 11:00PM)
 Now you have 4 task(s) in the list.
 
 
 Got it. I've added this task:
-[E][ ] complete ip  (at: Aug 19 23:59)
+[E][ ] complete ip  (at: Sun, Aug 15,2021 11:59PM)
 Now you have 5 task(s) in the list.
 
 
 Got it. I've added this task:
-[E][ ] sleep  (at: Aug 19 00:00)
+[E][ ] sleep  (at: Thu, Aug 19,2021 12:00AM)
 Now you have 6 task(s) in the list.
 
 
 Nice! I've marked this task as done:
- [D][X] eat lunch  (by: 3pm today)
+ [D][X] eat lunch  (by: Wed, May 12,2021 05:00PM)
 
 
 Here are the tasks in your list:
 1.[T][ ] read book
 2.[T][X] sleep
-3.[D][X] eat lunch  (by: 3pm today)
-4.[D][ ] sleep  (by: 11pm tonight)
-5.[E][ ] complete ip  (at: Aug 19 23:59)
-6.[E][ ] sleep  (at: Aug 19 00:00)
+3.[D][X] eat lunch  (by: Wed, May 12,2021 05:00PM)
+4.[D][ ] sleep  (by: Fri, Jul 2,2021 11:00PM)
+5.[E][ ] complete ip  (at: Sun, Aug 15,2021 11:59PM)
+6.[E][ ] sleep  (at: Thu, Aug 19,2021 12:00AM)
 
 
 Nice! I've marked this task as done:
- [E][X] complete ip  (at: Aug 19 23:59)
+ [E][X] complete ip  (at: Sun, Aug 15,2021 11:59PM)
 
 
 Hey, there is no such task!
 
 
 Ok, I have removed the following task:
- [D][X] eat lunch  (by: 3pm today)
+ [D][X] eat lunch  (by: Wed, May 12,2021 05:00PM)
 Now you have 5 task(s) in the list.
 
 
@@ -71,8 +71,8 @@ Now you have 4 task(s) in the list.
 
 Here are the tasks in your list:
 1.[T][X] sleep
-2.[D][ ] sleep  (by: 11pm tonight)
-3.[E][X] complete ip  (at: Aug 19 23:59)
-4.[E][ ] sleep  (at: Aug 19 00:00)
+2.[D][ ] sleep  (by: Fri, Jul 2,2021 11:00PM)
+3.[E][X] complete ip  (at: Sun, Aug 15,2021 11:59PM)
+4.[E][ ] sleep  (at: Thu, Aug 19,2021 12:00AM)
 
 Bye. Hope to see you again soon!

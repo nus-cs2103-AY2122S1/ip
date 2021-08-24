@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.time.LocalDateTime;
 
 public class Storage {
     private final String filePath;
@@ -37,14 +39,14 @@ public class Storage {
                     list.addTask(t);
                     break;
                 case "D":
-                    Task d = new Deadline(arr[2],arr[3]);
+                    Task d = new Deadline(arr[2],LocalDateTime.parse(arr[3], DateTimeFormatter.ISO_LOCAL_DATE_TIME));
                     if (arr[1].equals("1")) {
                         d.markComplete();
                     }
                     list.addTask(d);
                     break;
                 case "E":
-                    Task e = new Event(arr[2],arr[3]);
+                    Task e = new Event(arr[2],LocalDateTime.parse(arr[3], DateTimeFormatter.ISO_LOCAL_DATE_TIME));
                     if (arr[1].equals("1")) {
                         e.markComplete();
                     }
