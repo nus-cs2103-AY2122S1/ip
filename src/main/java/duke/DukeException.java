@@ -6,6 +6,12 @@ public class DukeException extends Exception {
         super(str);
     }
 
+    /**
+     * Checks if the user input string is valid.
+     *
+     * @param str the user input
+     * @throws DukeException If input does not match Duke's command words
+     */
     public static void checkInput(String str) throws DukeException {
         if (str.startsWith("todo") || str.startsWith("deadline") || str.startsWith("event")
             || str.startsWith("list") || str.startsWith("bye") || str.startsWith("done")

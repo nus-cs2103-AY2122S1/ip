@@ -2,6 +2,13 @@ package duke;
 
 public class Parser {
 
+    /**
+     * Parses the user input string.
+     *
+     * @param input the input user string
+     *
+     * @return a string array representing the user's input
+     */
     public static String[] parse(String input) {
         String[] str = input.split(" ", 2);
         String arg = str[0];

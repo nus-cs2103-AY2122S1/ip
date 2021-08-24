@@ -12,6 +12,9 @@ public class Ui {
         this.in = new Scanner(System.in);
     }
 
+    /**
+     * Duke's greeting message seen by the user upon start-up.
+     */
     public void greeting() {
         // Credits to http://allaboutfrogs.org/gallery/frogstuff/ascii.html
         // for the frog ASCII text art!
@@ -34,11 +37,19 @@ public class Ui {
         System.out.println(frog + greeting + "How may I help you?\n" + LINE);
     }
 
+    /**
+     * Message to be seen by user upon closing the program.
+     */
     public void goodbye() {
         System.out.println("See you again in my frog hole! RIBBIT!");
         in.close();
     }
 
+    /**
+     * Receiving user input from the Scanner.
+     * @return a valid string input
+     * @throws DukeException If input string is not valid
+     */
     public String readCommand() throws DukeException {
         String input = in.nextLine();
         try {
@@ -49,29 +60,57 @@ public class Ui {
         return input;
     }
 
+    /**
+     * Message to be seen by user if hard disk file does not exist.
+     */
     public void showLoadingError() {
         System.out.println("File not detected, new file will be created!");
     }
 
+    /**
+     * Divider line.
+     */
     public void showLine() {
         System.out.println(LINE);
     }
 
+    /**
+     * Prefix for error messages.
+     *
+     * @param msg The error message
+     */
     public void showError(String msg) {
         System.out.println("ERROR: " + msg);
     }
 
+    /**
+     * Message signalling completion of task by user.
+     *
+     * @param tasks The TaskList to be affected
+     * @param index The index of the task to be marked done
+     */
     public void doneMessage(TaskList tasks, int index) {
         System.out.println("You have swallowed that pesky fly! RIBBIT!");
         System.out.println("  " + tasks.get(index).toString());
     }
 
+    /**
+     * Message to be seen by user upon deleting the given task.
+     *
+     * @param tasks The TaskList to be affected
+     * @param index The index of the task to be deleted
+     */
     public void deleteMessage(TaskList tasks, int index) {
         System.out.println("Rotten flies deserve to die!");
         System.out.println("  " + tasks.get(index).toString());
         System.out.println("Now you have " + tasks.size() + " flies to eat! RIBBIT!");
     }
 
+    /**
+     * Message to be seen by user upon "list" user input.
+     *
+     * @param tasks The TaskList to be affected
+     */
     public void listMessage(TaskList tasks) {
         System.out.println("Here is your menu for today:");
         for (int i = 0; i < tasks.size(); i++) {
@@ -79,6 +118,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Message to be seen by user when they add a task into the task list.
+     *
+     * @param tasks The TaskList to be affected
+     */
     public void addTaskMessage(TaskList tasks) {
         System.out.println("A fly has been added to the menu:");
         System.out.println("  " + tasks.get(tasks.size() - 1).toString());

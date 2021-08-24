@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * A human wannabe frog chat bot who can help keep track of tasks.
+ */
 public class Duke {
 
     private final Storage storage;
@@ -20,6 +23,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts an instance of Duke/Jo.
+     */
     public void run() {
         boolean isExit = false;
 
