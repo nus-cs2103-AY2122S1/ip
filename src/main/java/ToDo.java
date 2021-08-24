@@ -10,7 +10,7 @@ public class ToDo extends Task{
         super(taskTitle, "T");
     }
 
-    ToDo (String taskTitle, boolean isDone) {
+    ToDo (boolean isDone, String taskTitle) {
         super(taskTitle, isDone, "T");
     }
 

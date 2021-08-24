@@ -35,3 +35,9 @@ class InvalidFileException extends IOException {
         super(msg);
     }
 }
+
+class InvalidDataFormatException extends ArrayIndexOutOfBoundsException {
+    public InvalidDataFormatException (String msg) {
+        super(msg);
+    }
+}

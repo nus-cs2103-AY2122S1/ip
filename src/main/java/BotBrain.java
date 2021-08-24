@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -6,7 +7,7 @@ public class BotBrain {
     private BotMemory botMemory = new BotMemory();
     private BotPrinter botPrinter = new BotPrinter();
     private List<Task> taskTracker = botMemory.taskTracker;
-    private boolean isTerminate = false;
+    private boolean isTerminated = false;
 
     /**
      * Constrcutor
@@ -91,7 +92,7 @@ public class BotBrain {
      * @return (String) formatted list of tasks
      * @throws EmptyTaskListException for empty list
      */
-    private String formatTaskTracker() throws EmptyTaskListException {
+    private void reportTaskTracker() throws EmptyTaskListException {
         // throw empty list exception if task list is empty
         if (taskTracker.size() == 0) {
             throw new EmptyTaskListException(botMemory.ERROR_MESSAGE_EMPTY_TASKLIST);
@@ -101,7 +102,7 @@ public class BotBrain {
         taskTracker.stream().
                 forEach(x -> formattedTask.append((taskTracker.indexOf(x) + 1) + ". " + x.toString() + "\n\t"));
         formattedTask.append("(end)");
-        return formattedTask.toString();
+        botPrinter.print(formattedTask.toString());
     }
 
     /**
@@ -203,10 +204,10 @@ public class BotBrain {
         switch (commandInitial) {
             case BYE:
                 botPrinter.print(botMemory.MESSAGE_GOODBYE);
-                isTerminate = true;
+                isTerminated = true;
                 return;
             case LIST:
-                botPrinter.print(formatTaskTracker());
+                reportTaskTracker();
                 break;
             case DONE:
                 markTaskAsDone(input);
@@ -220,12 +221,22 @@ public class BotBrain {
         }
     }
 
+    private void wakeUpMemory() {
+        try {
+            botMemory.loadFromHardDisk();
+            reportTaskTracker();
+        } catch (Exception error) {
+            botPrinter.print(botMemory.ERROR_MESSAGE_PROMPT + error.getMessage());
+        }
+    }
+
     /**
      * A method to read the user's input and respond to it
      */
     private void interact() {
+
         Scanner sc = new Scanner(System.in);
-        while (!isTerminate) {
+        while (!isTerminated) {
             try {
                 String input = sc.nextLine().trim();
                 reactToCommand(input);
@@ -243,6 +254,7 @@ public class BotBrain {
     public void initiate() {
         System.out.println("\t" + botMemory.LOGO.replaceAll("\n", "\n\t"));
         botPrinter.print(botMemory.MESSAGE_GREETING);
+        this.wakeUpMemory();
         this.interact();
     }
 }

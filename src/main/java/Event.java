@@ -14,7 +14,7 @@ public class Event extends Task{
         this.time = time;
     }
 
-    Event (String taskTitle, boolean isDone, String time) {
+    Event (boolean isDone, String taskTitle, String time) {
         super(taskTitle, isDone, "E");
         this.time = time;
     }
