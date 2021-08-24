@@ -18,7 +18,7 @@ public class List {
         writeToFile();
     }
 
-    public void addDeadline(String text, String by) {
+    public void addDeadline(String text, String by) throws DukeException {
         Task newDl = new Deadline(text, by);
         list.add(newDl);
         System.out.println("Got it. I've added this task: ");
