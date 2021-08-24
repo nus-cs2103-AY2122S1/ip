@@ -46,7 +46,7 @@ public class Duke {
                     }
                     String[] furtherSplits = splitInput[1].split("/by", 2);
                     if (furtherSplits.length < 2 || furtherSplits[0].equals("")) {
-                        throw new DukeException("The description of a deadline cannot be empty.\n" +
+                        throw new DukeException("The description  of a deadline cannot be empty.\n" +
                                 "Don't forget to use /by to indicate the deadline.");
                     } else if (furtherSplits[1].equals("") || furtherSplits[1].equals(" ")) {
                         throw new DukeException("Deadline must come with a input date/time for the deadline.");
