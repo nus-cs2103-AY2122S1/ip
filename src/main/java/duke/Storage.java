@@ -45,7 +45,7 @@ public class Storage {
      *
      * @throws IOException If the file cannot be read/found.
      */
-    public static void writeToFile(List list) throws IOException {
+    public void writeToFile(List list) throws IOException {
         FileWriter myWriter = new FileWriter("filename.txt");
 
         for (int i = 0; i < list.todos.size(); i++) {

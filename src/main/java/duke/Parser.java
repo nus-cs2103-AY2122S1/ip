@@ -14,7 +14,7 @@ public class Parser {
      * @throws DukeException If input do not meet the requirements.
      * @throws IOException If the file cannot be read/found.
      */
-    public static void process(String input, List list) throws DukeException, IOException {
+    public void process(String input, List list, Storage storage) throws DukeException, IOException {
         String[] split = input.split(" ", 2);
         if (split[0].equals("done")) {
             list.done(split);
@@ -50,6 +50,6 @@ public class Parser {
         } else {
             throw new DukeException();
         }
-        Storage.writeToFile(list);
+        storage.writeToFile(list);
     }
 }

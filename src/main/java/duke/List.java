@@ -35,12 +35,12 @@ public class List {
      * @param input the command given.
      * @throws IOException If the file cannot be read/found.
      */
-    public void addTask(String input) throws IOException {
+    public void addTask(String input, Parser parser, Storage storage) throws IOException {
         if (input.equals("list")) {
             showList();
         } else {
             try {
-                Parser.process(input, this);
+                parser.process(input, this, storage);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
@@ -88,7 +88,6 @@ public class List {
                 + " task"
                 + (todos.size() == 1 ? "" : "s")
                 + " in the list");
-
     }
 
     /**
