@@ -24,7 +24,7 @@ public class Todo extends Task {
      * @return 0 to represent duke.Todo task type.
      */
     @Override
-    public int taskType() {
+    public int getTaskType() {
         return 0;
     }
 

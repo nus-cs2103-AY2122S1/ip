@@ -39,7 +39,7 @@ public class Task {
         return this.description.contains(word);
     }
 
-    public int taskType() {
+    public int getTaskType() {
         return -1;
     }
 

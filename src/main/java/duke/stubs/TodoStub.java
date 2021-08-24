@@ -1,7 +1,7 @@
 package duke.stubs;
 
-import duke.testinginterface.TodoInterface;
 import duke.task.Task;
+import duke.testinginterface.TodoInterface;
 
 public class TodoStub extends Task implements TodoInterface {
     public TodoStub() {
@@ -13,7 +13,7 @@ public class TodoStub extends Task implements TodoInterface {
         return "[T][ ] Create a todo task";
     }
 
-    public int taskType() {
+    public int getTaskType() {
         return 0;
     }
 

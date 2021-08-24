@@ -1,6 +1,6 @@
 package duke.testinginterface;
 
 public interface TodoInterface {
-    public int taskType();
+    public int getTaskType();
     public String toSavedFormat();
 }

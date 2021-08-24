@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.Storage;
-import duke.task.Task;
 import duke.TaskList;
 import duke.task.Todo;
 import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
 
 public class AddCommand extends Command {
     Task task;

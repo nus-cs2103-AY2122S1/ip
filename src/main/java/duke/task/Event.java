@@ -30,7 +30,7 @@ public class Event extends Task {
      * @return 2 to represent duke.Event task type.
      */
     @Override
-    public int taskType() {
+    public int getTaskType() {
         return 2;
     }
 
