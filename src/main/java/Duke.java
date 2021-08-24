@@ -1,12 +1,14 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static String introString = "Hey there! I'm Good Duke. How many I help you today?";
     private static String outroString = "That was an excellent chat - I look forward to seeing you again soon!";
+    private static String saveLocation = "duke.txt";
 
     private static Scanner sc = new Scanner(System.in);
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    private static ArrayList<Task> taskList;
 
     public static String taskListString() {
         String output = "";
@@ -35,6 +37,38 @@ public class Duke {
         System.out.println(horizontalLine);
 
     }
+
+    public static void writeSave() {
+        try {
+            FileOutputStream writeData = new FileOutputStream(saveLocation);
+            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+            writeStream.writeObject(taskList);
+            writeStream.flush();
+            writeStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void readSave() {
+        try {
+            File f = new File(saveLocation);
+            if (!f.createNewFile()) { // save file exists
+                FileInputStream readData = new FileInputStream(saveLocation);
+                ObjectInputStream readStream = new ObjectInputStream(readData);
+                @SuppressWarnings("unchecked")
+                ArrayList<Task> readList = (ArrayList<Task>) readStream.readObject();
+                Duke.taskList = readList;
+                readStream.close();
+            } else {
+                Duke.taskList = new ArrayList<>();
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public static Command parseUserInput(String input) throws DukeException {
         String[] strings = input.split(" ");
@@ -93,6 +127,7 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException {
         print(introString);
+        readSave();
         Command command;
         label:
         while (true) {
@@ -107,6 +142,7 @@ public class Duke {
             switch (command.getOperation()) {
             case "bye":
                 print(outroString);
+                writeSave();
                 break label;
             case "list":
                 print(taskListString());
