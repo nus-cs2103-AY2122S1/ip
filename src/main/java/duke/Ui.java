@@ -33,6 +33,7 @@ public class Ui {
     public void addTaskList(TaskList list) {
         parser.addTaskList(list);
     }
+    
     private void printLine() {
         System.out.println("    ____________________________________________________________");
     }
