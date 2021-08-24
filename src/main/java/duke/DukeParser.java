@@ -58,6 +58,7 @@ public class DukeParser {
         final Matcher checkEvent = eventPattern.matcher(input);
 
         if (checkList.matches()) {
+            // List tasks
             if (checkList.group(1) != null) {
                 // Extract modifiers and filter
                 try {

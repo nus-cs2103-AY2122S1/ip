@@ -110,7 +110,7 @@ public class TaskList {
         if (tasks.size() == 0) {
             System.out.println(Ui.OUTPUT_DISPLAY + "There is nothing to display! :angery:");
         } else {
-            // Apply all filters
+            // Get resultant list after applying all filters
             List<Task> list = tasks.stream()
                     .filter(task -> filters.stream()
                             .allMatch(predicate -> predicate.test(task)))
