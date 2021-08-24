@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/** Class to deal with saving/loading tasks from disk */
 public class Storage {
 
     private String filePath;
@@ -22,6 +23,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads previously saved tasks from the disk.
+     * Will create a new file to save tasks in if none currently exists.
+     *
+     * @return List of tasks loaded from disk.
+     * @throws DukeException if any of the saved tasks are invalid.
+     */
     public List<Task> load() throws DukeException {
         String dirName = this.filePath.split("/duke.txt")[0];
         File dir = new File(dirName);

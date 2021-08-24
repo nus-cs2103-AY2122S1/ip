@@ -5,9 +5,15 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+/** Abstract class to represent command when we add something to the taskList */
 public abstract class AddTaskCommand extends Command {
     private Task task;
 
+    /**
+     * AddTaskCommand constructor.
+     *
+     * @param task Task that this command will add to the taskList.
+     */
     public AddTaskCommand(Task task) {
         this.task = task;
     }

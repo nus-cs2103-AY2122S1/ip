@@ -6,28 +6,41 @@ import duke.exceptions.UnknownCommandException;
 
 import java.util.Scanner;
 
+/** Class to parse user inputs */
 public class Parser {
 
+    /**
+     * Parses the input to determine what command should be issued.
+     *
+     * @param input Input string that user types in.
+     * @return command Command representing the input.
+     * @throws DukeException If any error relating to duke occurs.
+     */
     public static Command parseNext(String input) throws DukeException {
+        Command command = null;
         if (input.matches("bye")) {
-            return new ByeCommand();
+            command = new ByeCommand();
         } else if (input.matches("list")) {
-            return new ListCommand();
+            command = new ListCommand();
         } else if (input.matches("deadline\\s.{1,}\\s\\/by\\s.{1,}")) {
             String[] keywords = extractKeywordsFromCommand(input, new String[] {"deadline", "/by"});
-            return new AddDeadlineCommand(keywords);
+            command = new AddDeadlineCommand(keywords);
         } else if (input.matches("event\\s.{1,}\\s\\/at\\s.{1,}")) {
             String[] keywords = extractKeywordsFromCommand(input, new String[] {"event", "/at"});
-            return new AddEventCommand(keywords);
+            command = new AddEventCommand(keywords);
         } else if (input.matches("todo\\s.{1,}")) {
             String[] keywords = extractKeywordsFromCommand(input, new String[] {"todo"});
-            return new AddTodoCommand(keywords);
+            command = new AddTodoCommand(keywords);
         } else if (input.matches("done [0-9]{1,}")) {
             String[] keywords = extractKeywordsFromCommand(input, new String[] {"done"});
-            return new MarkDoneCommand(keywords[0]);
+            command = new MarkDoneCommand(keywords[0]);
         }  else if (input.matches("delete [0-9]{1,}")) {
             String[] keywords = extractKeywordsFromCommand(input, new String[] {"delete"});
-            return new DeleteTaskCommand(keywords[0]);
+            command = new DeleteTaskCommand(keywords[0]);
+        }
+
+        if (command != null) {
+            return command;
         }
 
         throw new UnknownCommandException();

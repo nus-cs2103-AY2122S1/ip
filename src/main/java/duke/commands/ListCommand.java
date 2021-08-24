@@ -4,11 +4,9 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
-public class ListCommand extends Command {
 
-    public ListCommand() {
-        // nothing here
-    }
+/** Represents command to list all values in the current taskList */
+public class ListCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

@@ -1,6 +1,6 @@
 package duke.tasks;
 
-
+/** Abstract class representing a task */
 public abstract class Task {
     private boolean done = false;
     private String taskDetails;
@@ -17,6 +17,11 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Returns a string representation of data stored in this task.
+     *
+     * @return String containing the task's data, which will be used for saving to disk.
+     */
     public String toDataString() {
         return String.format("%d | %s", this.done ? 1 : 0, this.taskDetails);
     }

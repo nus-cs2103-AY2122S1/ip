@@ -4,19 +4,21 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+/** Represents command to end Duke */
 public class ByeCommand extends Command {
 
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
-
-    public ByeCommand() {
-        // nothing to do
-    }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printOut(BYE_MESSAGE);
     }
 
+    /**
+     * Checks if this command exits Duke.
+     *
+     * @return True since the program exits once this command is issued.
+     */
     @Override
     public boolean hasExited() {
         return true;

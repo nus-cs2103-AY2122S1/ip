@@ -5,6 +5,7 @@ import duke.tasks.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Class containing all tasks currently stored in Duke */
 public class TaskList {
     private List<Task> tasks;
 
@@ -32,12 +33,28 @@ public class TaskList {
         this.tasks.add(task);
     }
 
+    /**
+     * Deletes the ith task.
+     * Counting from 1.
+     *
+     * @param i Index of task to delete.
+     * @return String[] Strings telling the user what this method has done.
+     * @throws InvalidTaskNumberException if i == 0 or i >= number of tasks in list.
+     */
     public String[] deleteTask(int i) throws InvalidTaskNumberException {
         Task task = this.getTask(i);
         boolean removed = this.tasks.remove(task);
         return new String[] {"I have deleted this task:","    " + task.toString()};
     }
 
+    /**
+     * Marks the ith task as done.
+     * Counting from 1.
+     *
+     * @param i Index of task to mark as done.
+     * @return String[] Strings telling the user what this method has done.
+     * @throws InvalidTaskNumberException if i == 0 or i >= number of tasks in list.
+     */
     public String[] markDone(int i) throws InvalidTaskNumberException {
         Task task = this.getTask(i);
         boolean marked = task.markDone();
@@ -48,6 +65,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns String representation of taskList, which will be used to save to disk.
+     *
+     * @return String representation of taskList, which will be used to save to disk.
+     */
     public String getData() {
         StringBuilder data = new StringBuilder();
         for (Task task : tasks) {
@@ -60,6 +82,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the current contents of the list in a user-friendly manner.
+     *
+     * @param ui Ui object.
+     */
     public void showList(Ui ui) {
         ui.printOut(toStrings());
     }
