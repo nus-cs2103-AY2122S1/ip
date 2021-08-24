@@ -3,7 +3,7 @@ package duke;
 public class ToDos extends Task {
     private String type;
 
-    ToDos(String title) {
+    public ToDos(String title) {
         super(title);
         this.type = "T";
     }
@@ -14,7 +14,7 @@ public class ToDos extends Task {
     }
 
     @Override
-    String writeTask() {
+    public String writeTask() {
         return type + " | " + super.writeTask();
     }
 }

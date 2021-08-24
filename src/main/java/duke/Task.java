@@ -4,7 +4,7 @@ public class Task {
     private boolean done;
     private String title;
 
-    Task(String title) {
+    public Task(String title) {
         this.done = false;
         this.title = title;
     }
@@ -14,11 +14,11 @@ public class Task {
         return (done ? "[X]" : "[ ]") + title;
     }
 
-    void markAsDone() {
+    public void markAsDone() {
         done = true;
     }
 
-    String writeTask() {
+    public String writeTask() {
         return (done ? "1" : "0") + " | " + title;
     }
 
