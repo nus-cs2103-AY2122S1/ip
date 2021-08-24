@@ -1,3 +1,9 @@
+package duke.commands;
+
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
+
 public class ByeCommand extends Command {
 
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";

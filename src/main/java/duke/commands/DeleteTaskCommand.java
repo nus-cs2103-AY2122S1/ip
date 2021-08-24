@@ -1,5 +1,9 @@
-import Exceptions.InvalidTaskNumberException;
-import Tasks.Task;
+package duke.commands;
+
+import duke.exceptions.InvalidTaskNumberException;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
 
 public class DeleteTaskCommand extends Command {
     private String taskNumber;

@@ -1,5 +1,10 @@
-import Exceptions.InvalidTimeStampException;
-import Tasks.Deadline;
+package duke.commands;
+
+import duke.exceptions.InvalidTimeStampException;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.tasks.Deadline;
+import duke.utils.Ui;
 
 public class AddDeadlineCommand extends Command {
 

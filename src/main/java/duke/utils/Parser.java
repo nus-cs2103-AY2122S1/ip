@@ -1,5 +1,8 @@
-import Exceptions.DukeException;
-import Exceptions.UnknownCommandException;
+package duke.utils;
+
+import duke.commands.*;
+import duke.exceptions.DukeException;
+import duke.exceptions.UnknownCommandException;
 
 import java.util.Scanner;
 

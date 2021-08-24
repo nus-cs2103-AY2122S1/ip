@@ -1,17 +1,17 @@
-package Tasks;
-
-import Exceptions.InvalidTimeStampException;
+package duke.tasks;
+import duke.exceptions.InvalidTimeStampException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task {
+public class Deadline extends Task {
     private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy' 'HHmm");
     private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mma");
 
     private LocalDateTime timeInfo;
-    public Event(String taskDetails, String timeInfoString) throws InvalidTimeStampException {
+    public Deadline(String taskDetails, String timeInfoString) throws InvalidTimeStampException {
         super(taskDetails);
         try {
             this.timeInfo = LocalDateTime.parse(timeInfoString, inputFormatter);
@@ -20,15 +20,14 @@ public class Event extends Task {
         }
     }
 
-    @Override
     public String toString() {
         String timeInfoString = timeInfo.format(outputFormatter);
-        return String.format("[E]%s (at: %s)", super.toString(), timeInfoString);
+        return String.format("[D]%s (by: %s)", super.toString(), timeInfoString);
     }
 
     @Override
     public String dataToString() {
         String timeInfoString = timeInfo.format(inputFormatter);
-        return String.format("E | %s | %s", super.dataToString(), timeInfoString);
+        return String.format("D | %s | %s", super.dataToString(), timeInfoString);
     }
 }

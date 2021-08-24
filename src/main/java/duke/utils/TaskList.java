@@ -1,9 +1,9 @@
-import Exceptions.InvalidTaskNumberException;
-import Tasks.Task;
+package duke.utils;
+
+import duke.exceptions.InvalidTaskNumberException;
+import duke.tasks.Task;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class TaskList {
     private List<Task> tasks;

@@ -1,20 +1,11 @@
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.Todo;
+package duke;
 
-import Exceptions.DukeException;
-import Exceptions.EmptyDescriptionException;
-import Exceptions.EmptyTimestampException;
-import Exceptions.InvalidTaskNumberException;
-import Exceptions.UnknownCommandException;
-
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.utils.Parser;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
 
 public class Duke {
 

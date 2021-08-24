@@ -1,5 +1,10 @@
-import Exceptions.InvalidTimeStampException;
-import Tasks.Event;
+package duke.commands;
+
+import duke.exceptions.InvalidTimeStampException;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.tasks.Event;
+import duke.utils.Ui;
 
 public class AddEventCommand extends Command {
 

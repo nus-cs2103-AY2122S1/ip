@@ -1,6 +1,4 @@
-package Tasks;
-
-import java.io.File;
+package duke.tasks;
 
 
 public abstract class Task {

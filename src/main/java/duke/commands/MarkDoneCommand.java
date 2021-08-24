@@ -1,5 +1,9 @@
-import Exceptions.DukeException;
-import Exceptions.InvalidTaskNumberException;
+package duke.commands;
+
+import duke.exceptions.InvalidTaskNumberException;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
 
 public class MarkDoneCommand extends Command {
     private String taskNumber;

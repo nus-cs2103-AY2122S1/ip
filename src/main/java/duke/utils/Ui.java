@@ -1,4 +1,6 @@
-import Exceptions.DukeException;
+package duke.utils;
+
+import duke.exceptions.DukeException;
 
 public class Ui {
     private static final String SEPARATOR = "_".repeat(60);

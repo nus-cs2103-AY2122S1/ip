@@ -1,8 +1,10 @@
-import Exceptions.DukeException;
-import Tasks.Task;
-import Tasks.Deadline;
-import Tasks.Todo;
-import Tasks.Event;
+package duke.utils;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+import duke.tasks.Deadline;
+import duke.tasks.Todo;
+import duke.tasks.Event;
 
 
 import java.io.File;
