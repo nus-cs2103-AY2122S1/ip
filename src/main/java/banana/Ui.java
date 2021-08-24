@@ -1,3 +1,5 @@
+package banana;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -12,7 +14,7 @@ public class Ui {
         return userInput.nextLine();
     }
 
-    public void showLoadingError() {
-        System.out.println("There was an error getting the input");
+    public String showLoadingError() {
+        return "There was an error getting the input";
     }
 }

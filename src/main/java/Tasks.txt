@@ -1,6 +1,2 @@
 Yes ~ eat cheese
 T ~ Yes ~ shower
-T ~ Yes ~ hug
-Yes ~ eat cheese
-D ~ Yes ~ return book ~ Dec 2 2019 6pm
-E ~ Yes ~ attend conference ~ 6pm

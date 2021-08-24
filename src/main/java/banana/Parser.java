@@ -1,3 +1,4 @@
+package banana;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,6 +9,10 @@ public class Parser {
 
     public Parser(String input) {
         this.input = input;
+    }
+
+    public String getInput() {
+        return input;
     }
 
     public static void displayLabel(String information) {
@@ -110,7 +115,7 @@ public class Parser {
     }
 
 
-    public static String getItems(TaskList items) {
+    public String getItems(TaskList items) {
         String collection = "";
         for (int index = 0; index < items.size(); index++) {
             if (index != 0) { collection += "     "; }
@@ -123,7 +128,7 @@ public class Parser {
         return collection;
     }
 
-    public static Task getDateAndTime(String[] info, String input, String type) {
+    public Task getDateAndTime(String[] info, String input, String type) {
         String[] potentialDate = info[1].split(" ");
         LocalDate date = null;
         if (!getTime(potentialDate[0]).equals("")) {
@@ -151,7 +156,7 @@ public class Parser {
         }
     }
 
-    public static String parseDates(String date) {
+    public String parseDates(String date) {
         String[] sep = date.split("/");
         if (Integer.parseInt(sep[0]) < 10) {
             sep[0] = "0" + sep[0];
@@ -159,7 +164,7 @@ public class Parser {
         return sep[2] + "-" + sep[1] + "-" + sep[0];
     }
 
-    public static String getTime(String time) {
+    public String getTime(String time) {
         try {
             int timeVal = Integer.parseInt(time) / 100;
             if (timeVal > 12) { timeVal -= 12; }
