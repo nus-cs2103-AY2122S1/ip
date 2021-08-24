@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * A class that represent general task
+ */
 public class Task{
     private String name;
     private boolean isDone;

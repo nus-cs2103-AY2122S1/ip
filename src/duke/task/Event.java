@@ -2,6 +2,9 @@ package duke.task;
 
 import java.time.LocalDate;
 
+/**
+ * a clas that represent event task
+ */
 public class Event extends Task{
     private String name;
     private boolean isDone;

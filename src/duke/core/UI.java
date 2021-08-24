@@ -1,5 +1,8 @@
 package duke.core;
 
+/**
+ * Message and ui for duke
+ */
 public class UI {
 
     public final String indentation = "       ";
@@ -18,5 +21,5 @@ public class UI {
     public final String lack_content_message = line + "\n" + indentation + "OOPS!!! The description or time of a task cannot be empty." + "\n" + line;
     public final String index_message = line + "\n" + indentation + "please follow the format of adding task" + "\n" + line;
     public final String unknown_message = line + "\n" + indentation + "OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n" + line;
-    public final String added_message = line + "\n" + indentation + "Got it. I've added this task:" + "\n" + line;
+    public final String added_message = line + "\n" + indentation + "Got it. I've added this task:" + "\n";
 }

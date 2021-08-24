@@ -17,7 +17,10 @@ public class Duke {
     private ArrayList<Task> taskList;
     private UI ui = new UI();
 
-
+    /**
+     * Constructor
+     * @param filePath
+     */
     public Duke(String filePath) {
 
         database = new Database(filePath);
@@ -26,6 +29,9 @@ public class Duke {
 
     }
 
+    /**
+     * start the program
+     */
     public void run() {
 
         ArrayList<Task> task = database.getData();

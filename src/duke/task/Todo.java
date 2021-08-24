@@ -2,6 +2,9 @@ package duke.task;
 
 import java.time.LocalDate;
 
+/**
+ * a class that represent todo task
+ */
 public class Todo extends Task{
     private String name;
     private boolean isDone;

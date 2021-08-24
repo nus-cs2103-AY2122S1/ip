@@ -9,12 +9,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class to CRUD file that stores task
+ */
 public class Database {
 
     File file;
 
-
-
+    /**
+     * Constructor for database
+     * @param filePath
+     */
     public Database(String filePath) {
         try {
             file = new File(filePath);
@@ -32,7 +37,10 @@ public class Database {
     }
 
 
-
+    /**
+     * read data from file
+     * @return
+     */
     public ArrayList<Task> getData() {
         ArrayList<Task> objectsList = new ArrayList<>();
         try {
@@ -48,6 +56,11 @@ public class Database {
         return objectsList;
     }
 
+    /**
+     * parse data from string to task
+     * @param data
+     * @return
+     */
     public Task parseData(String data) {
         String[] s = data.split(" ");
 
@@ -109,6 +122,10 @@ public class Database {
         return null;
     }
 
+    /**
+     * write data to file
+     * @param todo
+     */
     public void writeToDatabase(Task todo) {
         try {
             BufferedWriter out = new BufferedWriter(
@@ -123,12 +140,11 @@ public class Database {
         }
     }
 
-
-    public static void main(String args[]) {
-        Database d = new Database("todoList.txt");
-        d.getData();
-    }
-
+    /**
+     * update data to file
+     * @param task
+     * @param index
+     */
     public void updateData(Task task, int index) {
         String data = "";
         try {
@@ -160,6 +176,10 @@ public class Database {
 
     }
 
+    /**
+     * delete data from file
+     * @param index
+     */
     public void deleteData(int index) {
         String data = "";
         try {
@@ -188,5 +208,13 @@ public class Database {
 
         }
     }
+
+
+    public static void main(String args[]) {
+        Database d = new Database("todoList.txt");
+        d.getData();
+    }
+
+
 
 }
