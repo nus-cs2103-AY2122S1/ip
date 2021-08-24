@@ -11,7 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
@@ -26,9 +25,9 @@ public class Storage {
         Files.createDirectories(Paths.get("data/"));
         File f = new File(filePath);
         if (f.createNewFile()) {
-            return new TaskList(new ArrayList<Task>());
+            return new TaskList();
         } else {
-            TaskList taskList = new TaskList(new ArrayList<Task>());
+            TaskList taskList = new TaskList();
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String next = s.nextLine();

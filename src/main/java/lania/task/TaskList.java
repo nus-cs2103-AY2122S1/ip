@@ -8,8 +8,8 @@ public class TaskList {
 
     private ArrayList<Task> taskArrayList;
 
-    public TaskList(ArrayList<Task> taskArrayList) {
-        this.taskArrayList = taskArrayList;
+    public TaskList() {
+        this.taskArrayList = new ArrayList<Task>();
     }
 
     public void update(Task t) {
