@@ -1,4 +1,7 @@
+package myjournal;
+
 import java.util.Scanner;
+import myjournal.Task;
 
 /**
  * A class to create tasks with the type of event.

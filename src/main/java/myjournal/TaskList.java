@@ -1,4 +1,9 @@
+package myjournal;
+
 import java.util.ArrayList;
+import myjournal.Task;
+import myjournal.Event;
+import myjournal.Deadline;
 
 public class TaskList {
     private ArrayList<Task> tasks;

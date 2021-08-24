@@ -1,16 +1,18 @@
+package myjournal;
+
 /**
- * A class to create empty description exceptions.
+ * A class to create invalid type exceptions.
  *
  * @author Felissa Faustine
  */
-public class EmptyDescriptionException extends RuntimeException {
+public class InvalidTypeException extends MyJournalException {
 
     /**
-     * The constructor for the EmptyDescriptionExceptions.
+     * The constructor for the InvalidTypeExceptions.
      *
      * @param message The error message.
      */
-    public EmptyDescriptionException(String message) {
+    public InvalidTypeException(String message) {
         super(message);
     }
 
@@ -21,6 +23,6 @@ public class EmptyDescriptionException extends RuntimeException {
      */
     @Override
     public String toString() {
-        return "EmptyDescriptionException: " + getMessage();
+        return "InvalidTypeException: " + getMessage();
     }
 }

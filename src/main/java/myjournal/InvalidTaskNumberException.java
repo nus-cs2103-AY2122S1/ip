@@ -1,16 +1,18 @@
+package myjournal;
+
 /**
- * A class to create invalid type exceptions.
+ * A class to create invalid task number exceptions.
  *
  * @author Felissa Faustine
  */
-public class InvalidTypeException extends RuntimeException {
+public class InvalidTaskNumberException extends MyJournalException {
 
     /**
-     * The constructor for the InvalidTypeExceptions.
+     * The constructor for the InvalidTaskNumberExceptions.
      *
      * @param message The error message.
      */
-    public InvalidTypeException(String message) {
+    public InvalidTaskNumberException(String message) {
         super(message);
     }
 
@@ -21,6 +23,6 @@ public class InvalidTypeException extends RuntimeException {
      */
     @Override
     public String toString() {
-        return "InvalidTypeException: " + getMessage();
+        return "InvalidTaskNumberException: " + getMessage();
     }
 }

@@ -1,3 +1,6 @@
+package myjournal;
+
+import myjournal.Task;
 import java.util.Scanner;
 
 /**
