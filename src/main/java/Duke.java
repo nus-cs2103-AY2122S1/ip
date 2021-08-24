@@ -60,7 +60,7 @@ public class Duke {
                     }
                     String description = arr[0];
                     String detail = arr[1];
-                    Deadline temp = new Deadline(description, detail);
+                    Deadline temp = new Deadline(description, Parser.parseDateTime(detail));
                     taskManagement.addTask(temp);
                     CommonUtils.showAddTaskMessage(temp, taskManagement.getSize());
                     break;
@@ -75,7 +75,7 @@ public class Duke {
                     }
                     String description = arr[0];
                     String detail = arr[1];
-                    Event temp = new Event(description, detail);
+                    Event temp = new Event(description, Parser.parseDateTime(detail));
                     taskManagement.addTask(temp);
                     CommonUtils.showAddTaskMessage(temp, taskManagement.getSize());
                     break;

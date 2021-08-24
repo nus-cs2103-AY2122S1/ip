@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;
+
 /**
  * This class contains some common utility methods regrading text ui.
  */
@@ -6,6 +8,8 @@ public class CommonUtils {
     protected static final String HORIZONTAL_LINE = "  -----------------------";
     /** Text UI: indentation. */
     protected static final String INDENTATION = "    ";
+    /** Text UI: date time format. */
+    public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy");
 
     /**
      * Prints greeting message.

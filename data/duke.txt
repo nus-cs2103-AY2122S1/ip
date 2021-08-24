@@ -1,3 +1,4 @@
-T,0,read
-E,1,write,Mon
-D,0,read,Sun
+E,1,meeting,24/08/2021 21:30
+D,0,project,25/08/2021 23:59
+E,0,tutorial,25/08/2021 10:00
+E,0,studio,31/08/2021 08:00

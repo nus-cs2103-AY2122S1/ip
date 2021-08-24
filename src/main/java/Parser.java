@@ -1,15 +1,28 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+
 /**
  * The Parser class handles all actions from users' input.
  */
 public class Parser {
-    public static final String SPLITER = ",";
-
     /**
      * The Action enum enumerates all possible actions
      */
     public enum Action {
         BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, UNKNOWN
     }
+
+    /**
+     * The spliter for the date time.
+     */
+    public static final String SPLITER = ",";
+
+    /**
+     * The date time format.
+     */
+    public static final DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     /**
      * Returns an action based on the given input string.
@@ -38,8 +51,6 @@ public class Parser {
         }
     }
 
-
-
     /**
      * Returns the boolean value based on the input string.
      *
@@ -54,13 +65,38 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a task based on the given input string from .txt file.
+     *
+     * @param input the given input string from .txt file.
+     * @return a task based on the given input string.
+     */
     public static Task parseDocument(String input) {
         String[] array = input.split(SPLITER);
         switch (array[0]) {
-        case "T": return new Todo(array[2], parseIsDone(array[1]));
-        case "E": return new Event(array[2], parseIsDone(array[1]), array[3]);
-        case "D": return new Deadline(array[2], parseIsDone(array[1]), array[3]);
-        default: throw new DukeException("Error in saved tasks document");
+        case "T":
+            return new Todo(array[2], parseIsDone(array[1]));
+        case "E":
+            return new Event(array[2], parseIsDone(array[1]), parseDateTime(array[3]));
+        case "D":
+            return new Deadline(array[2], parseIsDone(array[1]), parseDateTime(array[3]));
+        default:
+            throw new DukeException("Error in saved tasks document");
+        }
+    }
+
+    /**
+     * Returns LocalDateTime instance based on the input string.
+     *
+     * @param input the given input string whose format follows dd/MM/yyyy HH:mm.
+     * @return a LocalDateTime instance based on the input string.
+     */
+    public static LocalDateTime parseDateTime(String input) {
+        try {
+            LocalDateTime ldt = LocalDateTime.parse(input, inputDateTimeFormatter);
+            return ldt;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("time should be in the format: dd/MM/yyyy HH:mm");
         }
     }
 }
