@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -55,16 +53,9 @@ public class Command {
         if (description.isEmpty()) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         } else if (at.isEmpty()) {
-            throw new DukeException("OOPS!!! No date for event! Use format of event description /at YYYY-MM-DD");
+            throw new DukeException("OOPS!!! No date for event! Use format of event description /at date");
         }
-
-        LocalDate date;
-        try {
-            date = LocalDate.parse(at.trim());
-        } catch (DateTimeParseException e) {
-           throw new DukeException("OOPS!! Date and Time must be specified by YYYY-MM-DD");
-        }
-        Event toAdd = new Event(description, date);
+        Event toAdd = new Event(description, at);
         records.add(toAdd);
         return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
                         "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), records.size());
@@ -82,16 +73,9 @@ public class Command {
         if (description.isEmpty()) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else if (by.isEmpty()) {
-            throw new DukeException("OOPS!!! No date for deadline! Use format of deadline description /by YYYY-MM-DD");
+            throw new DukeException("OOPS!!! No date for deadline! Use format of deadline description /by date");
         }
-        LocalDate date;
-        try {
-            date = LocalDate.parse(by.trim());
-        } catch (DateTimeParseException e) {
-            throw new DukeException("OOPS!! Date and Time must be specified by YYYY-MM-DD");
-        }
-
-        Deadline toAdd = new Deadline(description, date);
+        Deadline toAdd = new Deadline(description, by);
         records.add(toAdd);
         return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
                         "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), records.size());
