@@ -1,10 +1,22 @@
 package duke;
 
+/**
+ * 
+ * Deals with making sense of the user's command.
+ * It takes in user inputs and filters it to its respective command. 
+ */
 public class Parser {
     public Parser() {
         
     }
-    
+
+    /**
+     * 
+     * 
+     * @param command Command is the user input.
+     * @param taskArr List of tasks in a TaskList. 
+     * @throws DukeException If input is unexpected or invalid.
+     */
     public void parse(String command, TaskList taskArr) throws DukeException{
         String[] commandArr = command.split(" ");
         if (command.equals("list")) {
@@ -65,6 +77,11 @@ public class Parser {
         }
     }
 
+    /**
+     * 
+     * To list existing tasks
+     * @param taskArr List of tasks in a TaskList. 
+     */
     public static void listCommand(TaskList taskArr) {
         System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < taskArr.size(); i++) {
@@ -73,6 +90,13 @@ public class Parser {
         }
     }
 
+    /**
+     *
+     * To set a task as completed.
+     * @param index Index of the task in the TaskList.
+     * @param taskArr List of tasks in a TaskList. 
+     * @throws DukeException If input is unexpected or invalid.
+     */
     public static void doneCommand(int index, TaskList taskArr) throws DukeException{
         if (index >= taskArr.size() || index < 0) {
             throw new DukeException("Invalid value!");
@@ -82,7 +106,14 @@ public class Parser {
             System.out.println("Nice! I've marked this task as done:\n"+ taskRef);
         }
     }
-
+    
+    /**
+     *
+     * To delete a task from existing list of tasks.
+     * @param index Index of the task in the TaskList.
+     * @param taskArr List of tasks in a TaskList. 
+     * @throws DukeException If input is unexpected or invalid.
+     */
     public static void deleteCommand(int index, TaskList taskArr) throws DukeException{
         if (index >= taskArr.size() || index < 0) {
             throw new DukeException("Invalid value!");
