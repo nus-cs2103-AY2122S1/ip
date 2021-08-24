@@ -1,6 +1,5 @@
 package duke;
 
-import commands.ByeCommand;
 import commands.Command;
 import parser.Parser;
 import storage.Storage;
@@ -8,7 +7,7 @@ import tasks.TaskList;
 import ui.Ui;
 
 
-/** This class implements the duke.Duke assistant/chat-bot
+/** This class implements the Duke memo assistant.
  * @author damithc
  * edited by Wanyu
  */
@@ -19,6 +18,9 @@ public class Duke {
     private final Storage unit;
 
 
+    /**
+     * Constructs a Duke object.
+     */
     public Duke() {
         Ui.welcomeMessage();
         this.ui = new Ui();
@@ -34,6 +36,10 @@ public class Duke {
         parser = new Parser();
     }
 
+    /**
+     * Starts the program and execute commands
+     * detected by parser as per user input.
+     */
     public void run() {
         boolean exit = false;
         while (!exit) {
@@ -47,6 +53,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Exits the program.
+     */
     public static void terminate() {
         Ui.showExitMessage();
         System.exit(0);

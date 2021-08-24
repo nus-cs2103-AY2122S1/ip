@@ -9,9 +9,21 @@ import tasks.Task;
 import tasks.ToDoTask;
 import ui.Ui;
 
+/**
+ * The Storage Class is responsible for reading and loading
+ * of data stored locally on the computer.
+ */
 public final class Storage {
   private final static String filePath = "./data/duke.txt";
 
+  /**
+   * Checks if folder and text files for where the information
+   * related to the Duke assistant already exists. If not,
+   * create them.
+   *
+   * @throws DukeException if there were unexpected errors
+   * while creating or checking files
+   */
   public void checkFiles() throws DukeException {
     File data = new File("./data");
     File saves = new File(filePath);
@@ -28,6 +40,11 @@ public final class Storage {
     }
   }
 
+  /**
+   * Saves the tasks to specified folder and file.
+   *
+   * @param currTasks the list of tasks to be saved
+   */
   public void resetFile(ArrayList<Task> currTasks) {
     File file = new File(filePath);
     if (!file.delete()) {
@@ -46,6 +63,11 @@ public final class Storage {
     }
   }
 
+  /**
+   * Loads the previously saved list of tasks.
+   *
+   * @return the stored list of tasks
+   */
   public ArrayList<Task> loadSaves() {
     ArrayList<Task> tasksLoaded = new ArrayList<>();
     try {

@@ -5,16 +5,30 @@ import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
-public final class DeleteCommand extends Command {
+/**
+ * The DeleteCommand Class inherits Command and is
+ * a specific type of executable command.
+ */
+public final class DeleteCommand extends Command{
 
+
+  /**
+   * Constructs the DeleteCommand object.
+   *
+   * @param s the entire line of user input
+   */
   public DeleteCommand(ArrayList<String> s) {
     super(s);
   }
 
-  public boolean isExit() {
-    return false;
-  }
 
+  /**
+   * Executes the command.
+   *
+   * @param lst the TaskList object that stores the list of tasks
+   * @param ui the Ui object that interacts with the user
+   * @param storage the Storage object that saves changes to stored tasks, if any
+   */
   @Override
   public void execute(TaskList lst, Ui ui, Storage storage) {
     if (super.getInput().size() == 1) {
