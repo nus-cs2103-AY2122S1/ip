@@ -5,6 +5,9 @@ import tasks.Todo;
 
 import java.io.*;
 import java.nio.file.Paths;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -36,10 +39,12 @@ public class BotManager {
                     tasks.add(new Todo(nextLineArr[2], Boolean.parseBoolean(nextLineArr[1])));
                     break;
                 case "E":
-                    tasks.add(new Event(nextLineArr[2], nextLineArr[3], Boolean.parseBoolean(nextLineArr[1])));
+                    tasks.add(new Event(nextLineArr[2], Boolean.parseBoolean(nextLineArr[1]), 
+                            LocalDateTime.parse(nextLineArr[3]), LocalDateTime.parse(nextLineArr[4])));
                     break;
                 case "D":
-                    tasks.add(new Deadline(nextLineArr[2], nextLineArr[3], Boolean.parseBoolean(nextLineArr[1])));
+                    tasks.add(new Deadline(nextLineArr[2], Boolean.parseBoolean(nextLineArr[1]), 
+                            LocalDateTime.parse(nextLineArr[3])));
                     break;
                 default:
                     break;
@@ -94,29 +99,49 @@ public class BotManager {
                     + "Please try again.");
         }
     }
-
+    
     private void addDeadline(String description) throws IOException {
-        if (Pattern.compile("(?i)(deadline ).*\\S+.*( /by ).*\\S+.*").matcher(description).matches()) {
+        if (Pattern.compile("(?i)(deadline ).*\\S+.*( /by )\\d{4}\\s\\d{2}\\s\\d{2}\\s\\d{4}").matcher(description).matches()) {
             String[] strArr = description.substring(9).split(" /by ", 2);
-            Deadline newDeadline = new Deadline(strArr[0].trim(), strArr[1].trim());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd HHmm");
+            LocalDateTime deadlineDT = LocalDateTime.MIN;
+            try {
+                deadlineDT = LocalDateTime.parse(strArr[1], formatter);
+            } catch (DateTimeException ex) {
+                throw new DukeException(ex.getMessage() + "\n"
+                        + "Please try again.");
+            }
+            Deadline newDeadline = new Deadline(strArr[0].trim(), deadlineDT);
             this.add(newDeadline);
         } else {
             throw new DukeException("There appears to be a typo in your DEADLINE command.\n" 
                     + "The command should be of the form:\n"
-                    + "  deadline 'description' /by 'time'\n"
+                    + "  deadline 'description' /by 'yyyy mm dd hhmm'\n"
                     + "Please try again.");
         }
     }
-
+    
     private void addEvent(String description) throws IOException {
-        if (Pattern.compile("(?i)(event ).*\\S+.*( /at ).*\\S+.*").matcher(description).matches()) {
-            String[] strArr = description.substring(6).split(" /at ", 2);
-            Event newEvent = new Event(strArr[0].trim(), strArr[1].trim());
+        if (Pattern.compile("(?i)(event ).*\\S+.*( /from )\\d{4}\\s\\d{2}\\s\\d{2}\\s\\d{4}"
+                        + "( to )\\d{4}\\s\\d{2}\\s\\d{2}\\s\\d{4}").matcher(description).matches()) {
+            String[] strArr = description.substring(6).split(" /from ", 2);
+            String[] dateTimeArr = strArr[1].split(" to ", 2);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd HHmm");
+            LocalDateTime eventDT1 = LocalDateTime.MIN;
+            LocalDateTime eventDT2 = LocalDateTime.MIN;
+            try {
+                eventDT1 = LocalDateTime.parse(dateTimeArr[0], formatter);
+                eventDT2 = LocalDateTime.parse(dateTimeArr[1], formatter);
+            } catch (DateTimeException ex) {
+                throw new DukeException(ex.getMessage() + "\n"
+                        + "Please try again.");
+            }
+            Event newEvent = new Event(strArr[0].trim(), eventDT1, eventDT2);
             this.add(newEvent);
         } else {
             throw new DukeException("There appears to be a typo in your EVENT command.\n"
                     + "The command should be of the form:\n"
-                    + "  event 'description' /at 'time'\n"
+                    + "  event 'description' /from 'yyyy mm dd hhmm' to 'yyyy mm dd hhmm'\n"
                     + "Please try again.");
         }
     }
