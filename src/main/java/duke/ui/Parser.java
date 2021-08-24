@@ -34,9 +34,11 @@ public class Parser {
             }
             Task task = new ToDo(trimmed.substring(5).trim(), false);
             return new Command(CommandType.ADD, task);
-        }  else if (cmd.startsWith("delete ")) {
+        } else if (cmd.startsWith("delete ")) {
             int serialNum = Integer.parseInt(cmd.split(" ")[1]);
             return new Command(CommandType.DELETE, serialNum);
+        } else if (cmd.startsWith("find ")) {
+            return new Command(CommandType.FIND, cmd.split(" ")[1]);
         } else {
             throw new DukeException("Sorry Sir, I cannot understand the command");
         }

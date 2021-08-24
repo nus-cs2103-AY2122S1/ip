@@ -34,6 +34,19 @@ public class Ui {
             System.out.printf("%d. %s%n", i + 1, tasks.get(i));
         }
     }
+
+    /**
+     * Displays the matching tasks.
+     * 
+     * @param tasks The matching tasks to display.
+     */
+    public void displayFoundTasks(List<Task> tasks) {
+        System.out.println("---------------------------------");
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.printf("%d. %s%n", i + 1, tasks.get(i));
+        }
+    }
     
     public void displayDoneTask(Task task) {
         System.out.println("---------------------------------");
