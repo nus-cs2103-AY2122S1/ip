@@ -23,6 +23,8 @@ public class Parser {
             return new DoneCommand(content);
         case DELETE:
             return new DeleteCommand(content);
+        case FIND:
+            return new FindCommand(content);
         case TODO:
             return new TodoCommand(content);
         case DEADLINE:

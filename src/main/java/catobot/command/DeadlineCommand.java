@@ -4,11 +4,13 @@ import catobot.Storage;
 import catobot.Ui;
 import catobot.exception.BotException;
 import catobot.exception.EmptyCommandException;
+import catobot.exception.InvalidDateException;
 import catobot.exception.InvalidDeadlineException;
 import catobot.item.Deadline;
 import catobot.item.TaskList;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents the commands to add a deadline.
@@ -44,8 +46,12 @@ public class DeadlineCommand extends Command {
         }
         String[] inputs = content.split("deadline")[1].trim().split(" /by ");
         String description = inputs[0].trim();
-        LocalDate date = LocalDate.parse(inputs[1]);
-        Ui.respond(tasks.add(Deadline.of(description, date)));
+        try {
+            LocalDate date = LocalDate.parse(inputs[1]);
+            Ui.respond(tasks.add(Deadline.of(description, date)));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
     }
 
 }
