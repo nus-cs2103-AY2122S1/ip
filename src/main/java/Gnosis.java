@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
@@ -117,7 +120,7 @@ public class Gnosis {
         String taskName = splitTaskInput[0];
         String taskDeadline = splitTaskInput[1];
 
-        Deadline dl = new Deadline(taskName, taskDeadline);
+        Deadline dl = new Deadline(taskName, StringToDate(taskDeadline));
         tasks.add(dl);
         System.out.println("Deadline added:");
         System.out.println(dl);
@@ -133,7 +136,7 @@ public class Gnosis {
         String taskName = splitTaskInput[0];
         String taskSchedule = splitTaskInput[1];
 
-        Event et = new Event(taskName,taskSchedule);
+        Event et = new Event(taskName,StringToDate(taskSchedule));
         tasks.add(et);
         System.out.println("Event added:");
         System.out.println(et);
@@ -164,6 +167,18 @@ public class Gnosis {
         for (int i = 0; i < len; i++) {
             System.out.println((i+1) + ". " + tasks.get(i));
         }
+    }
+
+    public static LocalDateTime StringToDate(String dateString) throws GnosisException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        LocalDateTime ldt;
+        try {
+            ldt = LocalDateTime.parse(dateString.stripLeading(),formatter);
+        } catch (DateTimeParseException e) {
+            throw new GnosisException(GnosisConstants.DATETIME_FORMAT_EXCEPT_MESSAGE);
+        }
+
+        return ldt;
     }
 
     //Utility methods for output

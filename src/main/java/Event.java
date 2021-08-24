@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * This class encapsulates a
  * event task with a specified schedule.
@@ -7,10 +11,9 @@
  *
  * */
 public class Event extends Task{
-    private String schedule;
+    private LocalDateTime schedule;
 
-
-    public Event(String task, String schedule) {
+    public Event(String task, LocalDateTime schedule) {
         super(task);
         this.schedule = schedule;
     }
@@ -18,6 +21,6 @@ public class Event extends Task{
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + "(at:"+ this.schedule  +")";
+                + "(at:"+ this.schedule.format(DateTimeFormatter.ofPattern("MM dd yyyy, hh:mma")) +")";
     }
 }
