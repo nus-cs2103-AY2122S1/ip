@@ -1,3 +1,5 @@
+package pilcrow;
+
 public class Ui {
     private final static String PILCROW_LOGO = """
               _____

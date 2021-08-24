@@ -1,3 +1,5 @@
+package pilcrow;
+
 // Parses commands entered by the user
 public class Parser {
     private String fullCommand;

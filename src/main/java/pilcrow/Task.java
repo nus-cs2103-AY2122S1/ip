@@ -1,3 +1,5 @@
+package pilcrow;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -32,7 +34,8 @@ public class Task {
         Parser parser = new Parser(storedTask);
         String commandWord = parser.getCommandWord();
         String restOfCommand = parser.getRestOfCommand().substring(1);
-        Boolean isDone = restOfCommand.substring(0, 1).equals("T");
+        Boolean isDone = parser.getRestOfCommand().charAt(0) == 'T';
+
         task = Task.createTask(commandWord, restOfCommand, isDone);
         return task;
     }
