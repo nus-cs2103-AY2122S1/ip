@@ -4,6 +4,7 @@ import command.Command;
 import exception.DukeException;
 import exception.DukeExceptionType;
 
+import java.io.InputStream;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
@@ -18,8 +19,8 @@ public class Duke {
         taskList = new TaskList(storage, ui, storage.load());
     }
     
-    public void run() {
-        Scanner input = new Scanner(System.in);
+    public void run(InputStream stream) {
+        Scanner input = new Scanner(stream);
         boolean isBye = false;
 
         ui.showWelcome();
@@ -51,6 +52,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data", "duke.txt").run();
+        new Duke("data", "duke.txt").run(System.in);
     }
 }
