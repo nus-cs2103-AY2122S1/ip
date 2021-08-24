@@ -31,7 +31,7 @@ public class Storage {
                     fw.write(s.description + "\r\n");
                     fw.write(e.date + "\r\n");
                 }
-                fw.write(s.isDone ? "1" : "0" + "\r\n");
+                fw.write((s.isDone ? "1" : "0") + "\r\n");
             }
             fw.close();
         } catch (IOException e) {
@@ -58,7 +58,7 @@ public class Storage {
                 fw.write(e.date.toString() + "\r\n");
             }
 
-            fw.write(s.isDone ? "1" : "0\r\n");
+            fw.write((s.isDone ? "1" : "0") + "\r\n");
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
