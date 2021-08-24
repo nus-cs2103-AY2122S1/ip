@@ -3,6 +3,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import java.util.Scanner;
 
 /**
@@ -90,19 +94,25 @@ public class Duke {
                 try {
                     description = splitMessage[1].split("/by ")[0];
                     dateTime = splitMessage[1].split("/by ")[1];
-                    list.addTask(description, dateTime, command);
+                    LocalDate date = LocalDate.parse(dateTime);
+                    list.addTask(description, date, command);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(e.getMessage());
                     System.out.println("Follow the format: \ndeadline %description% /by %date/time%");
+                } catch (DateTimeParseException e) {
+                    System.out.println("Date format is wrong.\nPlease follow the format YYYY-MM-DD");
                 }
                 break;
             case("event"): // Create an Event task and display the task
                 try {
                     description = splitMessage[1].split("/at ")[0];
                     dateTime = splitMessage[1].split("/at ")[1];
-                    list.addTask(description, dateTime, command);
+                    LocalDate date = LocalDate.parse(dateTime);
+                    list.addTask(description, date, command);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Follow the format: \nevent %description% /at %date/time%");
+                } catch (DateTimeParseException e) {
+                    System.out.println("Date format is wrong.\nPlease follow the format YYYY-MM-DD");
                 }
                 break;
             default: // If input does not have a recognised command
@@ -135,13 +145,12 @@ public class Duke {
                     list.addTask(splitData[2], Boolean.parseBoolean(splitData[1]));
                     break;
                 case("D"):
-                    for (String s : splitData) {
-                        System.out.println(s);
-                    }
-                    list.addTask(splitData[2], splitData[3], "deadline", Boolean.parseBoolean(splitData[1]));
+                    list.addTask(splitData[2], LocalDate.parse(splitData[3]),
+                            "deadline", Boolean.parseBoolean(splitData[1]));
                     break;
                 case("E"):
-                    list.addTask(splitData[2], splitData[3], "event", Boolean.parseBoolean(splitData[1]));
+                    list.addTask(splitData[2], LocalDate.parse(splitData[3]),
+                            "event", Boolean.parseBoolean(splitData[1]));
                 }
             }
             fileReader.close();

@@ -1,5 +1,8 @@
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.time.LocalDate;
+
 import java.util.ArrayList;
 
 /**
@@ -46,16 +49,16 @@ public class List {
      * Task added have a date/time attached.
      *
      * @param description The description of the task
-     * @param dateTime The date/time attached to the task
+     * @param date The date/time attached to the task
      * @param type Indicates if the task is a Deadline or Event
      */
-    public void addTask(String description, String dateTime, String type) {
+    public void addTask(String description, LocalDate date, String type) {
         Task task;
         if (type.equals("deadline")) {
-            task = new Deadline(description, dateTime);
+            task = new Deadline(description, date);
             saveTask(task.saveString());
         } else {
-            task = new Event(description, dateTime);
+            task = new Event(description, date);
             saveTask(task.saveString());
         }
         this.list.add(task);
@@ -72,7 +75,7 @@ public class List {
      * @param type
      * @param isDone Indicates if the task is done
      */
-    public void addTask(String description, String dateTime, String type, boolean isDone) {
+    public void addTask(String description, LocalDate dateTime, String type, boolean isDone) {
         Task task;
         if (type.equals("deadline")) {
             task = new Deadline(description, dateTime, isDone);
