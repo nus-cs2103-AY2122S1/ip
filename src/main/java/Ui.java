@@ -2,8 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
+    private Scanner scanner;
 
-    Ui() {};
+    Ui() {
+        this.scanner = new Scanner(System.in);
+    };
 
     /**
      * Prints a decoration line for output.
@@ -81,7 +84,6 @@ public class Ui {
     }
 
     public String readCommand() {
-        Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
