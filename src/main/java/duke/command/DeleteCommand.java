@@ -24,12 +24,12 @@ public class DeleteCommand extends Command {
         if (index < 1 || index > tasks.size()) {
             throw new DukeException("The index you entered is invalid. Please try again.");
         }
-            Task taskDeleted = tasks.remove(index - 1);
-            ui.printToUser("Noted! I've removed this task:");
-            ui.printToUser("  " + taskDeleted);
-            ui.printToUser("Now you have " + tasks.size() +
-                    (tasks.size() == 1 ? " task" : " tasks")
-                    + " in your list.");
+        Task taskDeleted = tasks.remove(index - 1);
+        ui.printToUser("Noted! I've removed this task:");
+        ui.printToUser("  " + taskDeleted);
+        ui.printToUser("Now you have " + tasks.size() +
+                (tasks.size() == 1 ? " task" : " tasks")
+                + " in your list.");
     }
 
     @Override

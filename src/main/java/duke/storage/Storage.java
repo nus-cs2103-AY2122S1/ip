@@ -46,7 +46,7 @@ public class Storage {
             sc.close();
             return taskList;
         } catch (FileNotFoundException e) {
-            throw new DukeException("Sorry, I can't find your list of tasks");
+            throw new DukeException("Sorry, I can't find your list of tasks. I'll create a new one for you.");
         }
     }
     

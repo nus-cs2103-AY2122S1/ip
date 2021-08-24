@@ -21,7 +21,7 @@ public class Ui {
     }
 
     public void printBorder() {
-        out.println(BORDER);
+        out.println(PREFIX + BORDER);
     }
     
     public void welcome() {
@@ -38,8 +38,9 @@ public class Ui {
     }
     
     public String readCommand() {
-        out.print("Enter command: ");
+        out.print("(User) Enter command: ");
         String fullCommand = sc.nextLine().trim();
+        printToUser("");
         return fullCommand;
     }
     

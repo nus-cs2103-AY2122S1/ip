@@ -13,7 +13,7 @@ public class ListCommand extends Command {
     }
     
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printToUser("Here are the tasks in your list:");
         if (tasks.isEmpty()) {
             ui.printToUser("  You currently have no tasks. Why not add a task?");
