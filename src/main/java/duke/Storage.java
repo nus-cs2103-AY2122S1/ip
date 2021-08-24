@@ -18,11 +18,11 @@ public class Storage {
 
     public TaskList load() throws DukeException {
         try {
-            Scanner s = new Scanner(this.data);
-            while (s.hasNextLine()) {
-                tasks.readData(s.nextLine());
+            Scanner scanner = new Scanner(this.data);
+            while (scanner.hasNextLine()) {
+                tasks.readData(scanner.nextLine());
             }
-            s.close();
+            scanner.close();
         } catch (FileNotFoundException e) {
             throw new DukeException("ERROR: File not found! :(");
         }

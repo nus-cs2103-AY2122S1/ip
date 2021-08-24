@@ -36,12 +36,12 @@ public class TaskList {
                 break;
         }
         if (args[1].equals("1")) {
-            this.get(this.size() - 1).markAsDone();
+            this.get(this.size() - 1).setCompleted();
         }
     }
 
     public void markDone(int index) {
-        this.taskList.get(index).markAsDone();
+        this.taskList.get(index).setCompleted();
     }
 
     public void add(String taskType, String description, String op) {

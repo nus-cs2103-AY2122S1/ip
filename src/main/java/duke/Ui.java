@@ -61,18 +61,18 @@ public class Ui {
         System.out.println("ERROR: " + msg);
     }
 
-    public void doneMessage(TaskList tasks, int index) {
+    public void showDoneMessage(TaskList tasks, int index) {
         System.out.println("You have swallowed that pesky fly! RIBBIT!");
         System.out.println("  " + tasks.get(index).toString());
     }
 
-    public void deleteMessage(TaskList tasks, int index) {
+    public void showDeleteMessage(TaskList tasks, int index) {
         System.out.println("Rotten flies deserve to die!");
         System.out.println("  " + tasks.get(index).toString());
         System.out.println("Now you have " + tasks.size() + " flies to eat! RIBBIT!");
     }
 
-    public void listMessage(TaskList tasks) {
+    public void showListMessage(TaskList tasks) {
         System.out.println("Here is your menu for today:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println(i + 1 + "." + tasks.get(i).toString());

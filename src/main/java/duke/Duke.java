@@ -45,35 +45,35 @@ public class Duke {
 
     public void run(String[] args) {
         switch (args[0]) {
-            case "done":
-                int index = Integer.parseInt(args[1]) - 1;
-                this.tasks.markDone(index);
-                ui.doneMessage(tasks, index);
-                break;
-            case "delete":
-                int idx = Integer.parseInt(args[1]) - 1;
-                ui.deleteMessage(tasks, idx - 1);
-                this.tasks.delete(idx);
-                break;
-            case "list":
-                ui.listMessage(tasks);
-                break;
-            case "todo":
-                tasks.add(new ToDo(args[1]));
-                ui.addTaskMessage(tasks);
-                break;
-            case "deadline":
-                LocalDate date = LocalDate.parse(args[2]);
-                tasks.add(new Deadline(args[1], date, args[3]));
-                ui.addTaskMessage(tasks);
-                break;
-            case "event":
-                tasks.add(new Event(args[1], args[2]));
-                ui.addTaskMessage(tasks);
-                break;
-            default:
-                System.out.println("Jo does not recognise non-frog speak!");
-                break;
+        case "done":
+            int index = Integer.parseInt(args[1]) - 1;
+            this.tasks.markDone(index);
+            ui.showDoneMessage(tasks, index);
+            break;
+        case "delete":
+            int idx = Integer.parseInt(args[1]) - 1;
+            ui.showDeleteMessage(tasks, idx - 1);
+            this.tasks.delete(idx);
+            break;
+        case "list":
+            ui.showListMessage(tasks);
+            break;
+        case "todo":
+            tasks.add(new ToDo(args[1]));
+            ui.addTaskMessage(tasks);
+            break;
+        case "deadline":
+            LocalDate date = LocalDate.parse(args[2]);
+            tasks.add(new Deadline(args[1], date, args[3]));
+            ui.addTaskMessage(tasks);
+            break;
+        case "event":
+            tasks.add(new Event(args[1], args[2]));
+            ui.addTaskMessage(tasks);
+            break;
+        default:
+            System.out.println("Jo does not recognise non-frog speak!");
+            break;
         }
     }
 
