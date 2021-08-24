@@ -1,3 +1,4 @@
+package duke.tasks;
 // Class that represents a Task
 public class Task {
     private String description;

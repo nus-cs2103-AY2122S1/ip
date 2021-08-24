@@ -1,3 +1,4 @@
+package duke.tasks;
 // class that handles ToDo tasks 
 // -> ToDo is a type of Task with no date/time
 public class ToDo extends Task {
