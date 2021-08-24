@@ -46,6 +46,11 @@ public class Parser {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Filtes the tasks that includes the keyword.
+     * @param input The keyword.
+     * @throws InvalidFormatException Thrown when the format of the query is invalid.
+     */
     public void find(String input) throws InvalidFormatException {
         if (input.length() > 5) {
             String keyword = input.substring(5);
