@@ -2,7 +2,7 @@
  * DukeException class.
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-7
+ * @version Level-8
  */
 public class DukeException extends Exception {
     DukeException(String message) {

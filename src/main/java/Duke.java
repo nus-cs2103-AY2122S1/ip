@@ -7,7 +7,7 @@ import java.util.Scanner;
  * Duke class
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-7
+ * @version Level-8
  */
 public class Duke {
     public static final String divider = "-------------------------------------";
