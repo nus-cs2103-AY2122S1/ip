@@ -8,7 +8,7 @@ public class Ui {
     }
 
     public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+        System.out.println(errorMessage + "\n");
     }
 
     public void greet() {
@@ -20,7 +20,20 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void reply(String reply) {
+    private void reply(String reply) {
         System.out.println("Duke: " + reply);
+    }
+
+    public void goodbye() {
+        reply("Nice talking to you, goodbye!");
+    }
+
+    public void showList(TaskList taskList) {
+        if (taskList.toString().equals("")) {
+            reply("Your todo list is empty!\n");
+        } else {
+            reply("Checking your todo list...");
+            System.out.println(taskList + "\n");
+        }
     }
 }

@@ -40,15 +40,16 @@ public class TaskList {
     }
 
     /**
-     * Prints out the taskList to the console
+     * Overrides toString() method.
+     * @return string representation of the TaskList object
      */
-    public void printList() throws EmptyTaskListException {
-        if (this.taskList.isEmpty()) {
-            throw new EmptyTaskListException("You have no tasks!");
-        }
+    @Override
+    public String toString() {
+        String allTasks = "";
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println((i + 1) + ". " + taskList.get(i).toString());
+            allTasks += (i + 1) + ". " + taskList.get(i).toString();
         }
+        return allTasks;
     }
 
     /**

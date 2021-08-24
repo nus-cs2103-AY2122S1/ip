@@ -91,6 +91,6 @@ public abstract class Task {
      * @return a String that represents this Task in storage
      */
     public String toStorage() {
-        return this.completed ? "1|" : "0|" + this.message;
+        return (this.completed ? "1|" : "0|") + this.message;
     }
 }

@@ -9,16 +9,15 @@ public class Duke {
         Storage storage = new Storage("./storage/save.txt");
         Ui ui = new Ui();
         try {
-            File saveFile = storage.retrieve();
-            taskList = new TaskList(saveFile);
+            taskList = new TaskList(storage.retrieve());
         } catch (IOException e) {
-            System.out.println("ERROR! There was an issue retrieving the file. Creating" +
+            ui.showError("ERROR! There was an issue retrieving the file. Creating" +
                     "new save file instead.");
         } catch (NoSuchCommandException e) {
-            System.out.println("ERROR! Some commands in save.txt could not be recognised," +
+            ui.showError("ERROR! Some commands in save.txt could not be recognised," +
                     "creating new save file.");
         } catch (NoTaskNameException e) {
-            System.out.println("ERROR! Some tasks in save.txt had no name. Creating new" +
+            ui.showError("ERROR! Some tasks in save.txt had no name. Creating new" +
                     "save file.");
         }
         String fullCommand;
@@ -37,37 +36,28 @@ public class Duke {
                 try {
                     storage.save(taskList);
                 } catch (IOException e) {
-                    System.out.println("ERROR! TaskList could not be saved.");
+                    ui.showError("ERROR: TaskList could not be saved!");
                 }
-                System.out.println("Nice talking to you, goodbye!");
+                ui.goodbye();
                 return;
             case "list":
-                try {
-                    System.out.println("Checking your todo list...");
-                    taskList.printList();
-                    System.out.println();
-                } catch (EmptyTaskListException e) {
-                    System.out.println(e.getMessage() + "\n");
-                }
+                ui.showList(taskList);
                 break;
             case "done":
                 taskList.doTask(Integer.parseInt(input) - 1);
-                try {
-                    taskList.printList();
-                } catch (EmptyTaskListException e) {
-                    System.out.println(e.getMessage() + "\n");
-                }
+                ui.showList(taskList);
                 break;
             case "delete":
                 taskList.delete(Integer.parseInt(input) - 1);
+                ui.showList(taskList);
                 break;
             default:
                 try {
                     taskList.add(Task.createTask(command, input));
                 } catch (NoSuchCommandException e) {
-                    System.out.println("ERROR! Command not recognised.");
+                    ui.showError("ERROR! Command not recognised.");
                 } catch (NoTaskNameException e) {
-                    System.out.println("ERROR! No task name.");
+                    ui.showError("ERROR! No task name.");
                 }
             }
         }
