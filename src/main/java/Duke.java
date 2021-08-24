@@ -1,5 +1,10 @@
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+
 
 import exception.DukeException;
 import exception.IncorrectFormatException;
@@ -33,6 +38,8 @@ public class Duke {
 
     private final ArrayList<Task> taskList = new ArrayList<>();
 
+    private final String FILE_PATH = "data.txt";
+
     /**
      * Runs the Duke chat bot.
      * It takes in user inputs and responds accordingly.
@@ -47,6 +54,12 @@ public class Duke {
 
         greet();
 
+        try {
+            load();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
         String input;
         Scanner sc = new Scanner(System.in);
 
@@ -58,6 +71,12 @@ public class Duke {
         }
 
         sc.close(); // closes the Scanner
+
+        try {
+            save();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
 
         exit();
     }
@@ -90,6 +109,7 @@ public class Duke {
 
     private void addToList(Task task) {
         taskList.add(task);
+
         System.out.println("Got it. I've added this task:");
         System.out.println("added: " + task);
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
@@ -104,6 +124,7 @@ public class Duke {
         if (taskList.size() == 0) {
             throw new EmptyListException();
         }
+
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             System.out.println(i + 1 + ". " + task);
@@ -118,17 +139,18 @@ public class Duke {
      */
 
     private void markDone(String taskIndex) throws EmptyListException, InvalidIndexException {
-
         int intTaskIndex = Integer.parseInt(taskIndex) - 1; // -1 because user inputs start from 1 not 0
         int taskListSize = taskList.size();
+
         if (taskListSize == 0) {
             throw new EmptyListException();
-        }
-        else if (intTaskIndex < 0 || intTaskIndex >= taskListSize) {
+        } else if (intTaskIndex < 0 || intTaskIndex >= taskListSize) {
             throw new InvalidIndexException(1, taskListSize, intTaskIndex + 1);
         }
+
         Task task = taskList.get(intTaskIndex);
         task.markAsDone();
+
         System.out.println("Nice! I've marked this task as done:\n" + task);
     }
 
@@ -140,10 +162,12 @@ public class Duke {
 
     private void addDeadline(String deadline) throws IncorrectFormatException {
         String[] result = deadline.split("/by");
+
         if (result.length == 1) {
             // throws an error if "/by" is not present in the message
             throw new IncorrectFormatException("deadline", "/by");
         }
+
         String description = result[0].trim(); // trims the additional spaces to the left and right of "by"
         String by = result[1].trim(); // trims the additional spaces to the left and right of "by"
         Deadline d = new Deadline(description, by);
@@ -168,10 +192,12 @@ public class Duke {
 
     private void addEvent(String event) throws IncorrectFormatException {
         String[] result = event.split("/at");
+
         if (result.length == 1) {
             // throws an error if "/at" is not present in the message
             throw new IncorrectFormatException("event", "/at");
         }
+
         String description = result[0].trim(); // trims the additional spaces to the left and right of "at"
         String at = result[1].trim(); // trims the additional spaces to the left and right of "at"
         Event e = new Event(description, at);
@@ -186,15 +212,15 @@ public class Duke {
      */
 
     private void deleteTask(String taskIndex) throws EmptyListException, InvalidIndexException {
-
         int intTaskIndex = Integer.parseInt(taskIndex) - 1; // -1 because user inputs start from 1 not 0
         int taskListSize = taskList.size();
+
         if (taskListSize == 0) {
             throw new EmptyListException();
-        }
-        else if (intTaskIndex < 0 || intTaskIndex >= taskListSize) {
+        } else if (intTaskIndex < 0 || intTaskIndex >= taskListSize) {
             throw new InvalidIndexException(1, taskListSize, intTaskIndex + 1);
         }
+
         Task task = taskList.remove(intTaskIndex);
         System.out.println("Noted. I've removed this task:\n" + task);
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
@@ -265,6 +291,71 @@ public class Duke {
             System.out.println(e.getMessage()); // prints only error message out for user
             System.out.println("__________________________________");
         }
+    }
+
+    private void save() throws IOException {
+        FileWriter fw = new FileWriter(FILE_PATH);
+
+        for (Task task : taskList) {
+            fw.write(task.toString() + "\n");
+        }
+
+        fw.flush();
+        fw.close();
+    }
+
+    private void load() throws IOException {
+        File file = new File(FILE_PATH);
+
+        // creates file if not present, else it does nothing
+        if (file.createNewFile()) {
+            // exit method if a new file is created
+            return;
+        }
+
+        Scanner sc = new Scanner(file);
+
+        while(sc.hasNext()) {
+            String nextCommand = sc.nextLine();
+            Task task;
+
+            switch (nextCommand.charAt(1)) {
+            case 'D':
+                task = extractDeadline(nextCommand.substring(7));   // [D][X] something by time
+                break;
+            case 'E':
+                task = extractEvent(nextCommand.substring(7));      // [D][X] something at time
+                break;
+            default:                                                // todos
+                task = new Todo(nextCommand.substring(7));          // disregards [T][X]
+            }
+
+            if (nextCommand.charAt(4) == 'X') {
+                task.markAsDone();
+            }
+
+            taskList.add(task);
+        }
+
+        sc.close();
+    }
+
+    private Deadline extractDeadline(String text) {
+        int lastOccurrenceOfBy = text.lastIndexOf(" (by: "); // in case other bys appear
+        String description = text.substring(0, lastOccurrenceOfBy);
+
+        // disregards "( by: " and trailing ")"
+        String by = text.substring(lastOccurrenceOfBy + 6, text.length() - 1);
+        return new Deadline(description, by);
+    }
+
+    private Event extractEvent(String text) {
+        int lastOccurrenceOfAt = text.lastIndexOf(" (at: ");
+        String description = text.substring(0, lastOccurrenceOfAt);
+
+        // disregards "( at: " and trailing ")"
+        String at = text.substring(lastOccurrenceOfAt + 6, text.length() - 1);
+        return new Event(description, at);
     }
 
     public static void main(String[] args) {
