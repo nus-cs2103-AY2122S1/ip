@@ -1,31 +1,53 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Event extends Task{
 
     protected String time;
+    protected LocalDate eventTime;
 
 
     Event(String description) {
         super(description);
         this.time = "";
+        this.eventTime = null;
     }
 
     Event(String description, boolean isDone) {
         super(description, isDone);
         this.time = "";
+        this.eventTime=null;
     }
 
     Event(String description, String time) {
         super(description);
         this.time = time;
+        this.eventTime = setEventTime(time);
     }
 
     Event(String description, boolean isDone, String time) {
         super(description, isDone);
         this.time = time;
+        this.eventTime = setEventTime(time);
     }
 
     public String getTime() {
-        return this.time;
+        if (this.eventTime == null) {
+            return this.time;
+        } else {
+            return this.eventTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        }
+    }
+
+    public LocalDate setEventTime(String time) {
+        try {
+            LocalDate date = LocalDate.parse(time);
+            return date;
+        } catch (DateTimeParseException e) {
+            System.out.println("Wrong format of event time. Event must be in the format of YYYY-MM-DD.");
+            return null;
+        }
     }
 
     @Override

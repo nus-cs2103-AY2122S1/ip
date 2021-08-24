@@ -1,9 +1,16 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task{
+
     protected String deadline;
+    protected LocalDate deadlineTime;
 
     Deadline(String description) {
         super(description);
         this.deadline = "";
+        this.deadlineTime = null;
     }
 
     Deadline(String description, boolean isDone) {
@@ -19,10 +26,26 @@ public class Deadline extends Task{
     Deadline(String description, String deadline) {
         super(description);
         this.deadline = deadline;
+        this.deadlineTime = setDeadlineTime(deadline);
+
     }
 
     public String getDeadline() {
-        return this.deadline;
+        if (deadlineTime == null) {
+            return this.deadline;
+        } else {
+            return this.deadlineTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        }
+    }
+
+    public LocalDate setDeadlineTime(String deadline) {
+        try {
+            LocalDate date = LocalDate.parse(deadline);
+            return date;
+        } catch (DateTimeParseException e) {
+            System.out.println("Wrong format of deadline. Deadline must be in the format of YYYY-MM-DD.");
+            return null;
+        }
     }
 
     @Override
