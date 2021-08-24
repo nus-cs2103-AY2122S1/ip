@@ -95,7 +95,7 @@ public class Parser {
     }
 
     /**
-     * Adds a task or a ToDo.
+     * Adds a task or the subclass ToDo.
      *
      * @param input the user input.
      * @param tasks the list of tasks.
