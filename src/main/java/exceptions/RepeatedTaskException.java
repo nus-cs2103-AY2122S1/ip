@@ -1,3 +1,5 @@
+package exceptions;
+
 public class RepeatedTaskException extends DukeException{
 
     public RepeatedTaskException() {

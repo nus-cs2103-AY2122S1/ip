@@ -1,3 +1,5 @@
+package exceptions;
+
 public class InvalidNumberInputException extends DukeException{
 
     public InvalidNumberInputException() {

@@ -1,3 +1,5 @@
+package exceptions;
+
 public class NonExistentTaskException extends DukeException{
 
     public NonExistentTaskException() {

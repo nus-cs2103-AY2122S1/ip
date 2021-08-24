@@ -1,24 +1,8 @@
-todo read book
-done 1
-deadline return book /by June 6th
-event project meeting /at Aug 6th 2-4pm
-todo join sports club
-done 4
-todo borrow book
-list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
-hello
-todo
-deadline xyz
-event xyz
-done 2
-done 3.5
-done 4
-done 5
-done 6
-done 7
-list
-done 3
+deadline read book /by 2021-12-31
+deadline return book /by 2022-01-01
+event watch movie /at 2021-12-31 2000
+event university fair /at 2022-01-01 0900
+onDate 2021-12-31
+onDate 2022-01-01
 list
 bye
