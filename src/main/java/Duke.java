@@ -1,5 +1,8 @@
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 public class Duke {
     static ArrayList<Task> tasks = new ArrayList<>();
@@ -47,26 +50,36 @@ public class Duke {
     public static void addEvent(String s) throws DukeException {
         try {
             int at = s.lastIndexOf(" /at ");
-            Task curr = new Event(s.substring(6, at), s.substring(at + 5));
+            Task curr = new Event(
+                    s.substring(6, at),
+                    LocalDateTime.parse(s.substring(at + 5), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+            );
             tasks.add(curr);
             System.out.println("Got it. I've added this task:\n  "
                     + curr.toString() + "\nNow you have " + tasks.size()
                     + " task(s) in the list.");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The description and time of an event cannot be empty.");
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The time must be in this format: yyyy-MM-dd HH:mm");
         }
     }
 
     public static void addDeadline(String s) throws DukeException {
         try {
             int by = s.lastIndexOf(" /by ");
-            Task curr = new Deadline(s.substring(9, by), s.substring(by + 5));
+            Task curr = new Deadline(
+                    s.substring(9, by),
+                    LocalDateTime.parse(s.substring(by + 5), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+            );
             tasks.add(curr);
             System.out.println("Got it. I've added this task:\n  "
                     + curr.toString() + "\nNow you have " + tasks.size()
                     + " task(s) in the list.");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The description and time of a deadline cannot be empty.");
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The time must be in this format: yyyy-MM-dd HH:mm");
         }
     }
 
