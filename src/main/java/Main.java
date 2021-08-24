@@ -3,12 +3,13 @@
  */
 public class Main {
 
+    private static final String FILEPATH = "data/eightBit.txt";
+
     /**
      * Main driver method.
      */
     public static void main(String[] args) {
-        EightBit eightBit = new EightBit();
-        eightBit.printWithLines("Hello! I'm 8-Bit!\nWhat can I do for you?");
-        eightBit.getUserInput();
+        EightBit eightBit = new EightBit(FILEPATH);
+        eightBit.run();
     }
 }
