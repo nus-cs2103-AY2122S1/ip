@@ -93,6 +93,7 @@ public class Parser {
         displayLabel("Nice! I've marked this task as done: \n" +
                 "       " + tasks.getTask(index).toString());
     }
+
     /**
      * Adds a task or a ToDo.
      *
