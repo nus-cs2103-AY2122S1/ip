@@ -1,4 +1,5 @@
 package duke;
+
 import command.*;
 import task.*;
 import duke_exception.*;
@@ -16,7 +17,9 @@ public class Duke {
 
     public Duke(String filePath) {
         this.ui = new Ui();
+
         this.storage = new Storage(filePath);
+
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -30,6 +33,7 @@ public class Duke {
      */
     public void run() {
         ui.showWelcome();
+
         boolean isExit = false;
         while (!isExit) {
             try {

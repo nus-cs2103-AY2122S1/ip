@@ -1,14 +1,16 @@
 package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 import task.*;
 import duke_exception.*;
 
@@ -90,6 +92,7 @@ public class Storage {
         try {
             String saveStr = "";
             FileWriter fw = new FileWriter(filePath);
+
             for (int i = 0; i < tasks.size() ; i++) {
                 Task task = tasks.get(i);
                 if (task instanceof Todo) {
