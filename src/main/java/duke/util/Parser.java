@@ -22,7 +22,8 @@ public class Parser {
                 int index = getTaskNumber() - 1;
                 checkIndexRange(index);
                 return new String[] {command, Integer.toString(index)};
-            } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+            } else if (command.equals("todo") || command.equals("deadline") ||
+                    command.equals("event") || command.equals("find")) {
                 checkDescExist();
                 return new String[] {command, getDesc(input)};
             } else {

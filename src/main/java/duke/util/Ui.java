@@ -5,6 +5,7 @@ import java.util.Scanner;
 import duke.Duke;
 import duke.exceptions.UserInputError;
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 public class Ui {
     private static final String INDENT = "      ";
@@ -48,6 +49,17 @@ public class Ui {
         System.out.println(LINE.trim());
         output.lines().forEach(op -> System.out.println("      " + op));
         System.out.println(LINE.trim());
+    }
+
+    public void find(String key, TaskList ls) {
+        StringBuilder op = new StringBuilder();
+
+        for (int i = 0; i < ls.length(); i++) {
+            if(ls.getTask(i).descContains(key)) {
+                op.append(ls.getTask(i).toString()).append("\n");
+            }
+        }
+        Duke.renderOutput("Here are the matching tasks in your list:\n" + op);
     }
 
     public void renderList() {
