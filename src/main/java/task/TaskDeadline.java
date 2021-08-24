@@ -61,7 +61,7 @@ public class TaskDeadline extends Task {
      * @return Whether task is tagged to the passed date
      */
     @Override
-    public boolean isDate(LocalDate date){
+    public boolean isDate(LocalDate date) {
         return date.equals(by);
     }
 
