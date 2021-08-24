@@ -14,7 +14,19 @@ import bloom.exception.command.BloomUnknownCommandException;
 
 import java.time.LocalDateTime;
 
+/**
+ * Takes in an input string and parse it into necessary format.
+ */
+
 public class Parser {
+
+	/**
+	 * Matches the user input with correct command and format.
+	 * 
+	 * @param userInput the text input received from users
+	 * @return          the respective command based on the first word    
+	 * @throws BloomUnknownCommandException when an unsupported command is inputted
+	 */
 	
 	public Command parse(String userInput) throws BloomUnknownCommandException {
 		String[] parse = userInput.split(" ");
@@ -28,9 +40,9 @@ public class Parser {
 		case "list":
 			return new ListCommand();
 		case "done":
-			return new MarkCommand(Integer.parseInt(parse[1]));
+			return new MarkCommand(Integer.parseInt(parse[1]) - 1);
 		case "delete":
-			return new DeleteCommand(Integer.parseInt(parse[1]));
+			return new DeleteCommand(Integer.parseInt(parse[1]) - 1);
 		case "todo":
 			descIdx = action.length() + 1;
 			return new ToDoCommand(userInput.substring(descIdx));
@@ -51,6 +63,13 @@ public class Parser {
 					Message.EXCEPTION_UNKNOWN_COMMAND.getMessage());
 		}
 	}
+
+	/**
+	 * Matches the date input with correct format.
+	 * 
+	 * @param dateInput the date input
+	 * @return          the respective object containing date and time as inputted
+	 */
 	
 	public LocalDateTime parseDate(String dateInput) {
 		String[] parse = dateInput.split(" ");

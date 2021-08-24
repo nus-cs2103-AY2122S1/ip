@@ -4,7 +4,16 @@ import bloom.app.TaskList;
 import bloom.constant.Message;
 import bloom.task.Task;
 
+/**
+ * Represents a list command which
+ * lists all current tasks in the database.
+ */
+
 public class ListCommand extends Command {
+
+	/**
+	 * Lists all current tasks.
+	 */
 	
 	public void run() {
 		System.out.println(Message.COMMAND_LIST.getMessage());

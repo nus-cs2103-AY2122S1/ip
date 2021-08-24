@@ -7,9 +7,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Manages database.
+ */
+
 public class Storage {
 	
+	/** The file path the destination database file */
 	private final String FILE_PATH = "src/main/java/bloom/data/bloomDB.txt";
+
+	/**
+	 * Saves the list of tasks into the database file.
+ 	 */
 	
 	public void saveToDb() {
 		try {
