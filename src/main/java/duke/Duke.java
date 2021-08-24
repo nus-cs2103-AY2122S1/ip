@@ -1,6 +1,14 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.exception.DukeNoSuchTask;
+import duke.exception.DukeUnableLoadTask;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.util.Scanner;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 /**

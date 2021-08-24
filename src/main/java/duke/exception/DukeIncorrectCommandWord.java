@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Represents the error object that is thrown when
  * the user keys in an invalid or incorrect command

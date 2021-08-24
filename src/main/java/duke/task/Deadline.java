@@ -1,7 +1,11 @@
+package duke.task;
+
+import duke.exception.DukeException;
+import duke.exception.DukeIncorrectTaskDescription;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 /**
  * Represents a Deadline object that can be added

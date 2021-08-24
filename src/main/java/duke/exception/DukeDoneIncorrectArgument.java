@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Represents the Incorrect Argument Exception class that is thrown
  * when the user does not enter an integer after 'done'.

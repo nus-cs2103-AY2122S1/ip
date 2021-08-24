@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Represents the parent exception class that is thrown when
  * there is an error with Duke.

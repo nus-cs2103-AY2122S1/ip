@@ -1,3 +1,11 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.DukeDoneIncorrectArgument;
+import duke.exception.DukeException;
+import duke.exception.DukeIncorrectCommandWord;
+import duke.exception.DukeIncorrectInputs;
+
 import java.io.IOException;
 import java.util.Scanner;
 

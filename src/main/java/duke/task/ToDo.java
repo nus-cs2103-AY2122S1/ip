@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a ToDo object that can be added
  * to users' task list.

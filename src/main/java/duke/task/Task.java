@@ -1,3 +1,10 @@
+package duke.task;
+
+import duke.exception.DukeException;
+import duke.exception.DukeIncorrectCommandWord;
+import duke.exception.DukeIncorrectTaskDescription;
+import duke.exception.DukeMissingTaskDescription;
+
 /**
  * Represents a Task object that can be added
  * to users' task list.

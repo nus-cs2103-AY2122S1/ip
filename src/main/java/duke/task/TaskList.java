@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exception.DukeIncorrectInputs;
+import duke.exception.DukeNoSuchTask;
+
 import java.util.ArrayList;
 
 /**

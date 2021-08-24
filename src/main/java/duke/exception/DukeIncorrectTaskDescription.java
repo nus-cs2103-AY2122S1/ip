@@ -1,3 +1,8 @@
+package duke.exception;
+
+import duke.task.Deadline;
+import duke.task.Event;
+
 /**
  * Represents the IncorrectTaskDescription Exception class
  * that is thrown when the user does not enter description

@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Represents the DukeNoSuchTask Exception class
  * that is thrown when the user wants to get a task

@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 /**
  * Represents the user interface that interacts with the user.
  */

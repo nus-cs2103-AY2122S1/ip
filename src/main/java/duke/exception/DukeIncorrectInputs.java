@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Represents the Incorrect Inputs Exception class that is thrown
  * when the user enters wrong commands.
