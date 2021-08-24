@@ -1,7 +1,7 @@
 package duke.stubs;
 
-import duke.testinginterface.TaskListInterface;
 import duke.task.Task;
+import duke.testinginterface.TaskListInterface;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

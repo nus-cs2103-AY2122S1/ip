@@ -1,6 +1,12 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.CheckDateCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -14,7 +20,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
     TaskListInterface taskList;
-    private enum Command {EXIT, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, CHECKDATE, INVALID};
+    private enum Command {Exit, List, Done, Delete, Todo, Deadline, Event, CheckDate, Invalid};
 
     public Parser(TaskListInterface taskList) {
         this.taskList = taskList;
@@ -28,13 +34,13 @@ public class Parser {
         duke.command.Command c = new InvalidCommand();
 
         switch (caseId) {
-        case EXIT:
+        case Exit:
             c = new ExitCommand();
             break;
-        case LIST:
+        case List:
             c = new ListCommand();
             break;
-        case DONE:
+        case Done:
             if (!input.startsWith("done ")) {
                 throw new DukeException("Oops! Improper formatting for done. " + "Please use: done <task number>");
             }
@@ -50,7 +56,7 @@ public class Parser {
             c = new DoneCommand(donePos);
             break;
 
-        case DELETE:
+        case Delete:
             if (!input.startsWith("delete ")) {
                 throw new DukeException("Oops! Improper formatting for delete. " + "Please use: delete <task number>");
             }
@@ -65,7 +71,7 @@ public class Parser {
             c = new DeleteCommand(deletePos);
             break;
 
-        case TODO:
+        case Todo:
             // handles any characters after 'todo' that are not white space
             if (!input.startsWith("todo ")) {
                 throw new DukeException("Oops! Improper formatting for todo. " + "Please use: todo <description>");
@@ -78,7 +84,7 @@ public class Parser {
             c = new AddCommand(todo);
             break;
 
-        case DEADLINE:
+        case Deadline:
             // handles any characters after 'deadline' that are not white space
             if (!input.startsWith("deadline ")) {
                 throw new DukeException("Oops! Improper formatting for deadline. " +
@@ -109,7 +115,7 @@ public class Parser {
             }
             break;
 
-        case EVENT:
+        case Event:
             // handles any characters after 'event' that are not white space
             if (!input.startsWith("event ")) {
                 throw new DukeException("Oops! Improper formatting for event. " +
@@ -139,7 +145,7 @@ public class Parser {
 
             break;
 
-        case CHECKDATE:
+        case CheckDate:
             String date = input.substring(6);
             LocalDate parsedDate = LocalDate.parse(date);
 
@@ -159,23 +165,23 @@ public class Parser {
      */
     private Command findCase(String input) {
         if (input.equals("bye")) {
-            return Command.EXIT;
+            return Command.Exit;
         } else if (input.equals("list")) {
-            return Command.LIST;
+            return Command.List;
         } else if (input.startsWith("done")) {
-            return Command.DONE;
+            return Command.Done;
         } else if (input.startsWith("delete")) {
-            return Command.DELETE;
+            return Command.Delete;
         } else if (input.startsWith("todo")) {
-            return Command.TODO;
+            return Command.Todo;
         } else if (input.startsWith("deadline")) {
-            return Command.DEADLINE;
+            return Command.Deadline;
         } else if (input.startsWith("event")) {
-            return Command.EVENT;
+            return Command.Event;
         } else if (input.startsWith("check")) {
-            return Command.CHECKDATE;
+            return Command.CheckDate;
         } else {
-            return Command.INVALID;
+            return Command.Invalid;
         }
     }
 }

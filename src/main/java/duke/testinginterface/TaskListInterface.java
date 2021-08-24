@@ -1,7 +1,5 @@
 package duke.testinginterface;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
 
 import java.time.LocalDate;

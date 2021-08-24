@@ -31,7 +31,7 @@ public class Deadline extends Task {
      * @return 1 to represent duke.Deadline task type.
      */
     @Override
-    public int taskType() {
+    public int getTaskType() {
         return 1;
     }
 

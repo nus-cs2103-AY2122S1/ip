@@ -1,7 +1,8 @@
 package duke.stubs;
 
-import duke.testinginterface.DeadlineInterface;
 import duke.task.Task;
+import duke.testinginterface.DeadlineInterface;
+
 
 public class DeadlineStub extends Task implements DeadlineInterface {
     public DeadlineStub() {
@@ -13,7 +14,7 @@ public class DeadlineStub extends Task implements DeadlineInterface {
         return "[D][ ] Create a deadline task (by: Dec 4 2021)";
     }
 
-    public int taskType() {
+    public int getTaskType() {
         return 1;
     }
 

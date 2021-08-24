@@ -1,6 +1,9 @@
 package duke;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -86,7 +89,7 @@ public class Storage {
     public void markAsDone(TaskList taskList, int taskToMark) {
         try {
             Task t = taskList.getTasks().get(taskToMark - 1);
-            String taskType = t.taskType() == 0 ? "T" : (t.taskType() == 1 ? "D" : "E");
+            String taskType = t.getTaskType() == 0 ? "T" : (t.getTaskType() == 1 ? "D" : "E");
             String done = t.isDone() ? "1" : "0";
             String description = t.toSavedFormat();
             String textToSave = taskType + "/~/" + done + "/~/" + description;

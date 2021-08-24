@@ -1,6 +1,6 @@
 package duke.testinginterface;
 
 public interface DeadlineInterface {
-    public int taskType();
+    public int getTaskType();
     public String toSavedFormat();
 }

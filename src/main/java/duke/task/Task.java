@@ -35,7 +35,7 @@ public class Task {
         return "[" + getStatusIcon() + "] " + this.description;
     }
 
-    public int taskType() {
+    public int getTaskType() {
         return -1;
     }
 
