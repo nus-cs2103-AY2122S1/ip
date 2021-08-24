@@ -1,3 +1,2 @@
-T _ 1 _ borrow book
-D _ 1 _ return book _ Sunday
-E _ 1 _ project meeting _ Mon 2-4pm
+D _ 1 _ return book _ 2020-12-13 _ 18:00
+E _ 1 _ project meeting _ 2020-12-13

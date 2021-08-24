@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -52,7 +55,11 @@ public class Jared {
     private static void add(String command, String next) throws DukeException {
         Task newTask;
         String desc;
-        String date;
+        String dateStr;
+        String[] dateTime;
+        LocalDate date;
+        LocalTime time;
+
         if (command.equals("todo")) {
             try {
                 desc = next.split(" ", 2)[1];
@@ -64,20 +71,47 @@ public class Jared {
             try {
                 String body = next.split(" ", 2)[1];
                 desc = body.split("/by", 2)[0].trim();
-                date = body.split("/by", 2)[1].trim();
+                dateStr = body.split("/by", 2)[1].trim();
+                dateTime = dateStr.split(" ");
+                String d = dateTime[0];
+                date = LocalDate.parse(d);
+
+                if (dateTime.length > 1) {
+                    String t = dateTime[1];
+                    time = LocalTime.parse(t);
+                    newTask = new Deadline(desc, date, time);
+                } else {
+                    newTask = new Deadline(desc, date);
+                }
+
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+            } catch (DateTimeParseException e) {
+                System.out.println(e.getMessage());
+                throw new DukeException("Invalid date. Please enter the date (yyyy-mm-dd)");
             }
-            newTask = new Deadline(desc, date);
         } else if (command.equals("event")) {
             try {
                 String body = next.split(" ", 2)[1];
                 desc = body.split("/at", 2)[0].trim();
-                date = body.split("/at", 2)[1].trim();
+                dateStr = body.split("/at", 2)[1].trim();
+                dateTime = dateStr.split(" ");
+                String d = dateTime[0];
+                date = LocalDate.parse(d);
+
+                if (dateTime.length > 1) {
+                    String t = dateTime[1];
+                    time = LocalTime.parse(t);
+                    newTask = new Event(desc, date, time);
+                } else {
+                    newTask = new Event(desc, date);
+                }
+
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Invalid date and time. Please enter the date (yyyy-mm-dd)");
             }
-            newTask = new Event(desc, date);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -86,7 +120,7 @@ public class Jared {
 
         System.out.println(String.format("Got it. I've added this task:\n" +
                         "%s\nNow you have %d tasks in the list.",
-                newTask.toString(), history.size())
+                newTask, history.size())
         );
     }
 
@@ -147,15 +181,29 @@ public class Jared {
                 String data = reader.nextLine();
                 String[] dataArr = data.split(" _ ");
                 Task t;
+                LocalDate date;
+                LocalTime time;
                 switch (dataArr[0]) {
                     case "T":
                         t = new Todo(dataArr[2]);
                         break;
                     case "D":
-                        t = new Deadline(dataArr[2], dataArr[3]);
+                        date = LocalDate.parse(dataArr[3]);
+                        try {
+                            time = LocalTime.parse(dataArr[4]);
+                            t = new Deadline(dataArr[2], date, time);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            t = new Deadline(dataArr[2], date);
+                        }
                         break;
                     case "E":
-                        t = new Event(dataArr[2], dataArr[3]);
+                        date = LocalDate.parse(dataArr[3]);
+                        try {
+                            time = LocalTime.parse(dataArr[4]);
+                            t = new Event(dataArr[2], date, time);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            t = new Event(dataArr[2], date);
+                        }
                         break;
                     default:
                         System.out.println("task failed to load");
