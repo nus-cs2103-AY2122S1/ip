@@ -1,14 +1,16 @@
-import java.util.Scanner;
+import java.io.IOException;
 
 public class Duke {
 
     public Duke() {
-        Response.greetingResponse();
-        Scanner commandInput = new Scanner(System.in);
-        TaskManager taskManager = new TaskManager(commandInput);
+        Response.greetingResponse();    
     }
-
-    public static void main(String[] args) {
+    
+    public void botInit() throws IOException {
+        BotManager botManager = new BotManager();
+    }
+    public static void main(String[] args) throws IOException {
         Duke duke = new Duke();
+        duke.botInit();
     }
 }
