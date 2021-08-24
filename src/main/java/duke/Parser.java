@@ -85,6 +85,7 @@ public class Parser {
         } catch (DukeException de) {
             System.out.println("    " + de.getMessage());
         }
+        printLine();
         return true;
     }
     private void printLine() {
