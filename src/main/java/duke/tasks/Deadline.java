@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Deadline task for tasks that have an end date.
+ */
 public class Deadline extends Task{
     public static final String USAGE_TEXT = "Usage: deadline <task name> /by <deadline> ";
 
@@ -13,20 +16,21 @@ public class Deadline extends Task{
 
 
     /**
-     * default constructor for a new task
+     * Default constructor for a new task.
      *
-     * @param name task name
-     * @param by   deadline for deadline task
+     * @param name task name.
+     * @param by   deadline for deadline task.
      */
     public Deadline(String name,String by){
         this(name, false, by);
     }
 
     /**
-     * default constructor for a new task
-     * @param name task name
-     * @param done boolean state of task done
-     * @param by   deadline for deadline task
+     * Full constructor with all fields exposed.
+     *
+     * @param name task name.
+     * @param done boolean state of task done.
+     * @param by   deadline for deadline task.
      */
     public Deadline(String name, boolean done, String by) {
         super(name);
@@ -38,7 +42,7 @@ public class Deadline extends Task{
         }
     }
 
-
+    @Override
     public String serialize() {
         return "Task:deadline\n" +
                 String.format("\tName:%s\n", this.name) +

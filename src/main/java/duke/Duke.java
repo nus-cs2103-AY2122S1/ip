@@ -8,10 +8,17 @@ import java.util.Scanner;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-
+/**
+ * Main class for Duke.
+ */
 public class Duke {
     static String border = "--------------------------------------------------";
 
+    /**
+     * Main entry point for Duke project.
+     *
+     * @param args unused.
+     */
     public static void main(String[] args) {
         UI ui = new UI();
 

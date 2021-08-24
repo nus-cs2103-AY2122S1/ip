@@ -11,7 +11,7 @@ import duke.tasks.Event;
 
 import java.util.Scanner;
 /**
- * duke.Parser class to create Task objects from string commands
+ * Parser class to create Task objects from string commands.
  */
 public class SaveParser {
     private static final DukeReadSaveException MISSING_ARG_EXCEPTION =
@@ -20,22 +20,29 @@ public class SaveParser {
 
     Scanner scanner;
 
+    /**
+     * Constructs a Save parser.
+     *
+     * @param scanner scanner object that is reading the save file.
+     */
     SaveParser(Scanner scanner) {
         this.scanner = scanner;
     }
 
     /**
-     * test if file has next line
-     * @return true if next line present
+     * Tests if file has next line.
+     *
+     * @return true if next line present.
      */
     public boolean hasNextLine() {
         return this.scanner.hasNextLine();
     }
 
     /**
-     * extract next task from save file and return it as object
-     * @return new task from save file
-     * @throws DukeReadSaveException if there is an invalid task
+     * Extracts next task from save file and return it as object.
+     *
+     * @return new task from save file.
+     * @throws DukeReadSaveException if there is an invalid task.
      */
     public Task getNextTask() throws DukeReadSaveException {
         String[] taskType = this.scanner.nextLine().split(":", 2);
