@@ -7,22 +7,22 @@ import java.time.LocalDateTime;
  */
 public class DeadlineTask extends Task {
 
-  private LocalDateTime date;
+    private LocalDateTime date;
 
-  public DeadlineTask(String title, LocalDateTime date) {
-    super(title, Type.DEADLINE);
-    this.date = date;
-  }
+    public DeadlineTask(String title, LocalDateTime date) {
+        super(title, Type.DEADLINE);
+        this.date = date;
+    }
 
-  @Override
-  public String taskToString() {
-    return super.taskToString() + DateParser.toDatabaseFormat(this.date);
-  }
+    @Override
+    public String taskToString() {
+        return super.taskToString() + DateParser.toDatabaseFormat(this.date);
+    }
 
-  @Override
-  public String toString() {
-    return (
-      "[D] " + super.toString() + String.format(" (by: %s)", DateParser.toHumanReadable(this.date))
-    );
-  }
+    @Override
+    public String toString() {
+        return "[D] "
+                + super.toString()
+                + String.format(" (by: %s)", DateParser.toHumanReadable(this.date));
+    }
 }

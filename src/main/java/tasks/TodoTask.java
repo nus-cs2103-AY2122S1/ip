@@ -5,12 +5,12 @@ package tasks;
  */
 public class TodoTask extends Task {
 
-  public TodoTask(String title) {
-    super(title, Type.TODO);
-  }
+    public TodoTask(String title) {
+        super(title, Type.TODO);
+    }
 
-  @Override
-  public String toString() {
-    return "[T] " + super.toString();
-  }
+    @Override
+    public String toString() {
+        return "[T] " + super.toString();
+    }
 }

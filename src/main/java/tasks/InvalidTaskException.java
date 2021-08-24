@@ -5,7 +5,7 @@ package tasks;
  */
 public class InvalidTaskException extends IllegalArgumentException {
 
-  InvalidTaskException(String message) {
-    super(message);
-  }
+    InvalidTaskException(String message) {
+        super(message);
+    }
 }
