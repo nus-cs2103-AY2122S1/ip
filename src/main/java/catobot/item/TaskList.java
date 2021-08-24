@@ -43,7 +43,7 @@ public class TaskList {
      * @return The bullet point lists of current tasks.
      */
     public String display() {
-        if (taskList.size() == 0) {
+        if (taskList.isEmpty()) {
             return "Meow currently no tasks!";
         }
 
@@ -90,8 +90,30 @@ public class TaskList {
                 "Noted. I've removed this task:\n      %s\n      %s", temp, checkSize());
     }
 
+    /**
+     * Searches the list of tasks.
+     *
+     * @param keyword The keyword used for searching.
+     * @return A list of matching tasks.
+     */
+    public String search(String keyword) {
+        ArrayList<Task> filtered = new ArrayList<>();
+        for (Task curr : taskList) {
+            if (curr.contains(keyword)) {
+                filtered.add(curr);
+            }
+        }
+        if (filtered.isEmpty()) {
+            return "Meow! No tasks found!";
+        }
+        String s = String.format(
+                "Here are the matching tasks in your list:%s",
+                new TaskList(filtered));
+        return s;
+    }
+
     private void checkRange(int index) throws OutOfBoundException, EmptyTaskListException {
-        if (taskList.size() == 0) {
+        if (taskList.isEmpty()) {
             throw new EmptyTaskListException();
         }
         if (index < 1 || index > taskList.size()) {

@@ -5,6 +5,7 @@ public enum CommandType {
     LIST    ("list"),
     DONE    ("done"),
     DELETE  ("delete"),
+    FIND    ("find"),
     TODO    ("todo"),
     DEADLINE("deadline"),
     EVENT   ("event"),
@@ -30,6 +31,10 @@ public enum CommandType {
             }
         }
         return INVALID;
+    }
+
+    public String getValue() {
+        return command;
     }
 
 }
