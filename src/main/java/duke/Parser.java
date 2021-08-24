@@ -6,7 +6,6 @@ public class Parser {
 
     public static Command parse(String cmd) throws DukeException {
         String[] arr = cmd.split(" ", 2);
-
         if (cmd.equals("bye")) {
             return new ByeCommand();
         } else if (cmd.equals("list")) {

@@ -8,8 +8,8 @@ import duke.Ui;
 public class DoneCommand implements  Command {
     private String number;
 
-    public DoneCommand(String no) {
-        this.number = no;
+    public DoneCommand(String number) {
+        this.number = number;
     }
 
     @Override

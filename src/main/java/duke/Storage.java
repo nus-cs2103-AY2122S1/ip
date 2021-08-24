@@ -40,7 +40,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("Error writing to file : "+ e.getLocalizedMessage());
+            System.out.println("Error writing to file : " + e.getLocalizedMessage());
         }
     }
 
@@ -61,7 +61,6 @@ public class Storage {
             Scanner sc = new Scanner(f);
             while(sc.hasNextLine()) {
                 Task newTask = null;
-                //should not have errors if saved in correct format
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                 String[] t = sc.nextLine().split("\\|", 4);
                 if (t[0].contains("T")) {
@@ -81,7 +80,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File not found : "+ e.getLocalizedMessage());
+            System.out.println("File not found : " + e.getLocalizedMessage());
         }
         return list;
     }

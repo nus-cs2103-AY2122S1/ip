@@ -23,10 +23,10 @@ public class TaskList {
     }
 
     public String markDone(int i) {
-        Task t = getTask(i);
-        t.markDone();
+        Task task = getTask(i);
+        task.markDone();
         storage.save(tasks);
-        return t.toString();
+        return task.toString();
     }
 
     public Task getTask(int i) {
@@ -38,9 +38,9 @@ public class TaskList {
     }
 
     public String removeTask(int i) {
-        Task t = getTask(i);
+        Task task = getTask(i);
         tasks.remove(i);
         storage.save(tasks);
-        return t.toString();
+        return task.toString();
     }
 }
