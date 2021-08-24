@@ -7,7 +7,8 @@ public class Task {
     private boolean isDone;
 
     /**
-     * Constructor for Task. Takes in the description of the task,
+     * Constructor for Task.
+     * Takes in the description of the task,
      * and sets the task as not done.
      *
      * @param description The description of the class.
@@ -20,8 +21,8 @@ public class Task {
     /**
      * Change the status of the Task to true
      */
-    public void doneTask() {
-        this.isDone = true;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
@@ -34,9 +35,22 @@ public class Task {
         return "[" + getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * Returns the string representation of the task's state
+     *
+     * @return "X" if task is done, " " otherwise
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
+    /**
+     * Returns a string formatted for writing into file.
+     *
+     * @return String representation of the task for file writing
+     */
+    public String saveString() {
+        return this.isDone + "," + this.description;
+    }
 
 }

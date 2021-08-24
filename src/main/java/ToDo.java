@@ -3,11 +3,25 @@
  */
 public class ToDo extends Task{
     /**
-     * Constructor for ToDo. Takes in the description of the ToDo.
-     * @param description
+     * Constructor for ToDo.
+     * Takes in the description of the ToDo.
+     *
+     * @param description The description of the task
      */
     public ToDo(String description) {
         super(description);
+    }
+
+    /**
+     * Constructor for ToDo.
+     * Takes in the description and the status of the task.
+     *
+     * @param description The description of the task
+     * @param isDone Indicates if the task is done
+     */
+    public ToDo(String description, Boolean isDone) {
+        super(description);
+        super.setDone(isDone);
     }
 
     /**
@@ -18,5 +32,15 @@ public class ToDo extends Task{
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    /**
+     * Returns a string formatted for writing into file.
+     *
+     * @return String representation of the task for file writing
+     */
+    @Override
+    public String saveString() {
+        return "T," + super.saveString();
     }
 }
