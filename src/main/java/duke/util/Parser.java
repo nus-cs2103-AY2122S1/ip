@@ -34,6 +34,9 @@ public class Parser {
     public static Command parse(String fullCommand)
             throws EmptyDescriptionException {
 
+        if (fullCommand.isEmpty() || fullCommand.trim().isEmpty())
+            throw new EmptyDescriptionException("Please do not enter empty command!");
+
         String[] commandComponents = fullCommand.split(" ", 2);;
         String commandType = commandComponents[0].toUpperCase();
 
