@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -116,7 +119,7 @@ public class Duke {
      */
     static boolean checkForInt(String str) {
         try {
-            int test = parseInt(str);
+            parseInt(str);
             return true;
         } catch (NumberFormatException e) {
             return false;
@@ -154,6 +157,9 @@ public class Duke {
         greetings();
         Scanner userInput = new Scanner(System.in);
 
+        //DateTime variables
+        DateTimeFormatter standard = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         //Waits for userInput
         while (true) {
             try {
@@ -161,7 +167,7 @@ public class Duke {
                 //Processed input
                 String[] words = input.split(" ");
                 String desc = input;
-                String time = "";
+                LocalDate time = LocalDate.now();
 
                 //Switch variables
                 Keywords key = Keywords.error;
@@ -197,23 +203,23 @@ public class Duke {
                         key = Keywords.deadline;
                         List<String> postFilter = processDesc("/by", words);
                         desc = postFilter.get(0);
-                        time = postFilter.get(1);
-                        if (time == "") {
+                        if (postFilter.get(1).equals("")) {
                             throw new DukeException("!!! The date of a deadline cannot be empty. Use /by to input date!!!");
-                        } else if (desc == "") {
+                        } else if (desc.equals("")) {
                             throw new DukeException("!!! Input the description then use /by to input date !!!");
                         }
+                        time = LocalDate.parse(postFilter.get(1), standard);
 
                     } else if (temp.equals("event")) {
                         key = Keywords.event;
                         List<String> postFilter = processDesc("/at", words);
                         desc = postFilter.get(0);
-                        time = postFilter.get(1);
-                        if (time == "") {
+                        if (postFilter.get(1).equals("")) {
                             throw new DukeException("!!! The date of a event cannot be empty. Use /at to input date !!!");
-                        } else if (desc == "") {
+                        } else if (desc.equals("")) {
                             throw new DukeException("!!! Input the description then use /at to input date !!!");
                         }
+                        time = LocalDate.parse(postFilter.get(1), standard);
                     }
                 } else {
                     //Error Handling (Can be improved)
@@ -260,6 +266,10 @@ public class Duke {
             } catch (DukeException ex) {
                 printDivider();
                 System.out.println(ex.getMessage());
+                printDivider();
+            } catch (DateTimeParseException ex) {
+                printDivider();
+                System.out.println("!!! Provide Date in yyyy-MM-dd format. !!!");
                 printDivider();
             }
         }
