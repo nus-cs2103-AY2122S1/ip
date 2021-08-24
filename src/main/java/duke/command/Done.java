@@ -1,4 +1,11 @@
-class Done extends Command {
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.command.Command;
+
+public class Done extends Command {
     private int index;
 
     public Done(int index) {

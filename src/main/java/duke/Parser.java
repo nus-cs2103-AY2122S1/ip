@@ -1,4 +1,10 @@
-class Parser {
+package duke;
+
+import duke.command.*;
+import duke.dukeexception.EmptyDescriptionException;
+import duke.dukeexception.IllegalCommandException;
+
+public class Parser {
 
     public static Command parse(String input) throws IllegalCommandException, EmptyDescriptionException {
         if (input.equals("bye")) {

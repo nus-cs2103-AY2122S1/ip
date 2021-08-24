@@ -1,4 +1,17 @@
-class Add extends Command {
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.dukeexception.EmptyDescriptionException;
+import duke.dukeexception.IllegalCommandException;
+import duke.dukeexception.NoListException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
+public class Add extends Command {
 
     private Task task;
 
@@ -20,7 +33,7 @@ class Add extends Command {
             throw new IllegalCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
-    public void exec(TaskList tasks, Ui ui, Storage storage) throws NoListException{
+    public void exec(TaskList tasks, Ui ui, Storage storage) throws NoListException {
         tasks.add(this.task);
         try {
             storage.save(tasks);
@@ -31,5 +44,4 @@ class Add extends Command {
             throw e;
         }
     }
-
 }
