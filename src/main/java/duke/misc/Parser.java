@@ -99,7 +99,7 @@ public class Parser {
                 } catch (NumberFormatException e) {
                     throw new InvalidIndexException();
                 }
-                return Ui.DONE_MSG + tl.delete(idx);
+                return Ui.DELETE_MSG + tl.delete(idx);
             case "find":
                 return Ui.FIND_MSG + tl.find(suffix);
             default:
