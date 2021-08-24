@@ -6,7 +6,7 @@ public class ToDo extends Task {
 
     @Override
     public String toData() {
-        return "T " + super.toData() + "\n";
+        return "T|" + super.toData() + "\n";
     }
 
     @Override

@@ -16,11 +16,10 @@ public class Task {
     }
 
     public String toData() {
-        return (isDone ? "1 " : "0 ") + this.description;
+        return (isDone ? "1|" : "0|") + this.description;
     }
 
     public String toString() {
-        System.out.println(this.description);
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }

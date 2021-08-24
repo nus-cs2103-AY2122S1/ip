@@ -12,9 +12,11 @@ import java.util.Scanner;
 public class Storage {
     /** File containing the user's saved tasks */
     private File userData;
-    private String pathname = "./src/main/data/USERDATA.TXT";
+//    private String pathname = "./src/main/data/USERDATA.TXT";
+    private String pathname;
 
-    public Storage() {
+    public Storage(String pathname) {
+        this.pathname = pathname;
         try {
             userData = new File(pathname);
             userData.createNewFile();
@@ -30,12 +32,12 @@ public class Storage {
      * @return an ArrayList of tasks
      * @throws DukeException If file is not found
      */
-    public ArrayList getUserDataFromFile() throws DukeException {
+    public ArrayList load() throws DukeException {
         ArrayList<Task> userDataList = new ArrayList<>();
         try {
             Scanner sc = new Scanner(userData);
             while (sc.hasNextLine()) {
-                String[] newTaskArray = sc.nextLine().split(" ");
+                String[] newTaskArray = sc.nextLine().split("\\|");
                 String taskType = newTaskArray[0];
                 boolean isDone = newTaskArray[1].equals("1");
                 Task newTask = taskType.equals("D") ? new Deadline(newTaskArray[2], LocalDate.parse(newTaskArray[3]))
@@ -57,18 +59,13 @@ public class Storage {
      *
      * @param listOfUserTasks Updated ArrayList
      */
-    public void updateFile(ArrayList<Task> listOfUserTasks) {
+    public void save(TaskList listOfUserTasks) {
         try {
             FileWriter newFile = new FileWriter(pathname);
-            for (int i = 0; i < listOfUserTasks.size(); i++) {
-                newFile.write(listOfUserTasks.get(i).toData());
+            for (int i = 0; i < listOfUserTasks.getSize(); i++) {
+                newFile.write(listOfUserTasks.getTask(i).toData());
             }
             newFile.close();
-            if (listOfUserTasks.size() == 1) {
-                System.out.println("Your task has been updated");
-            } else {
-                System.out.println("Your tasks has been updated");
-            }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
