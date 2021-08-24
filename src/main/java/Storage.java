@@ -1,33 +1,54 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
 
-    private final String filePath;
+    private final Path filePath;
     private final Path directoryPath;
 
     public Storage(String filePath) {
-        this.filePath = filePath.replaceAll("\\|/", File.separator);
-        int index = this.filePath.lastIndexOf(File.separator);
-        this.directoryPath = index == -1 ? null : Paths.get(this.filePath.substring(0, index));
+        this.filePath = Paths.get(filePath);
+        this.directoryPath = Paths.get(new File(filePath).getParent());
     }
 
-    private List<String> load() throws IOException {
+    public List<String> load() throws DukeException {
+        List<String> taskList = new ArrayList<>();
 
-        if (directoryPath != null && !Files.exists(directoryPath))
-            Files.createDirectory(directoryPath);
+        try {
+            if (!Files.exists(directoryPath))
+                Files.createDirectory(directoryPath);
 
-        Path path = Paths.get(filePath);
+            if (!Files.exists(filePath))
+                Files.createFile(filePath);
 
-        if (!Files.exists(path))
-            Files.createFile(path);
+            taskList = Files.readAllLines(filePath);
+        } catch (IOException | UnsupportedOperationException | SecurityException e) {
+            new Ui().showError(e.getMessage());
+        }
 
-        return Files.readAllLines(path);
+        if (taskList.isEmpty())
+            throw new DukeException("Empty list");
+
+        return taskList;
+    }
+
+    public void save(TaskList taskLists) {
+        try {
+            FileWriter dataFileWriter = new FileWriter(this.filePath.toString());
+            for (Task task : taskLists.getTasks()) {
+                dataFileWriter.write(task.toDataString() + System.lineSeparator());
+            }
+            dataFileWriter.close();
+        } catch (IOException e) {
+            Printer.prettyPrint("File writing failed: " + e);
+        }
     }
 }
