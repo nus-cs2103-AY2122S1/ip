@@ -31,6 +31,8 @@ public class Parser {
             return new DeleteCommand(processedInput);
         case "list":
             return new ListCommand(processedInput);
+        case "find":
+            return new FindCommand(processedInput);
         case "bye":
             return new ExitCommand(processedInput);
         default:
