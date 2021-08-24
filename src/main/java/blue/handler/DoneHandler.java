@@ -26,12 +26,13 @@ public class DoneHandler extends CommandHandler {
         if (arguments.length > 0) {
             try {
                 int index = Integer.parseInt(arguments[0]);
-                if (1 <= index && index <= taskList.size()) {
+                if (1 <= index && index <= taskList.getSize()) {
                     Task task = taskList.get(index);
                     task.markDone();
                     return "Nice! I've marked this task as done:\n" + task;
-                } else
+                } else {
                     throw new BlueException("☹ OOPS!!! No task found at index " + index + ".");
+                }
             } catch (NumberFormatException e) {
                 throw new BlueException("☹ OOPS!!! Index must be a number.");
             }

@@ -21,7 +21,7 @@ public class TaskList {
 
     /**
      * Add the task into the list.
-     * 
+     *
      * @param task Task to be added.
      */
     public void add(Task task) {
@@ -30,7 +30,7 @@ public class TaskList {
 
     /**
      * Returns the task at the specified index.
-     * 
+     *
      * @param i Specified index.
      * @return Task at specified index.
      */
@@ -40,7 +40,7 @@ public class TaskList {
 
     /**
      * Returns all tasks in a new copy of list.
-     * 
+     *
      * @return All tasks.
      */
     public List<Task> getAll() {
@@ -49,7 +49,7 @@ public class TaskList {
 
     /**
      * Returns the task at the specified index and removes it from list.
-     * 
+     *
      * @param i Specified index.
      * @return Task at specified index.
      */
@@ -59,10 +59,10 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the list.
-     * 
+     *
      * @return Number of tasks in the list.
      */
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 }

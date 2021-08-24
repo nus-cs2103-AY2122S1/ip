@@ -32,10 +32,11 @@ public abstract class Task {
     @Override
     public String toString() {
         String string = "[";
-        if (isDone)
+        if (isDone) {
             string += "X";
-        else
+        } else {
             string += " ";
+        }
         string += "] " + title;
         return string;
     }
