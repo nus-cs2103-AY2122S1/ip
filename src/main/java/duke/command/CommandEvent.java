@@ -11,7 +11,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-
+/**
+ * The CommandEvent class handles the command "event" that adds a new Event task
+ * to the task list.
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class CommandEvent extends Command {
     public static final String KEYWORD = "event";
     private ArrayList<String> arguments;
@@ -21,6 +27,12 @@ public class CommandEvent extends Command {
         this.arguments = arguments;
     }
 
+    /**
+     * This method checks if the description, date and time specified in the arguments
+     * is in a valid format.
+     *
+     * @return A boolean indicating if the arguments are in a valid format.
+     */
     @Override
     public boolean isArgumentValid() {
         try {

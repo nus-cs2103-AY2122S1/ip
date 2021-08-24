@@ -6,11 +6,15 @@ import duke.task.Task;
 import duke.task.Todo;
 import java.util.ArrayList;
 
-
+/**
+ * TaskList encapsulates all the functions related to managing the list of tasks.
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class TaskList {
     private ArrayList<Task> listOfTasks = new ArrayList<>();
     private ArrayList<String> saveFileInput;
-    private Parser parser;
     private Storage storage;
 
     public TaskList() {
@@ -23,6 +27,10 @@ public class TaskList {
         initialiseTaskList();
     }
 
+    /**
+     * Reads the save file and adds tasks to the list according to the save file.
+     *
+     */
     public void initialiseTaskList() {
         System.out.println("Loading save file...");
         ArrayList<String> tasks = new ArrayList<>();
@@ -59,6 +67,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Adds a task to the list after a task has been provided.
+     *
+     * @param t The task provided.
+     */
     public void addTask(Task t) {
         System.out.println("Got it. I'll add this task:");
         listOfTasks.add(t);
@@ -67,6 +80,15 @@ public class TaskList {
         this.storage.updateSavefile(this);
     }
 
+    /**
+     * Adds a task to the list by specifying the arguments for a new task.
+     *
+     * @param id The integer id for the type of task to be created.
+     * @param desc The description of the task.
+     * @param date The date of the task.
+     * @param time The time of the task.
+     * @param status A boolean indicating if the task should be marked as done or not.
+     */
     public void addTask(int id, String desc, String date, String time, boolean status) {
         switch (id) {
         case(0):
@@ -95,6 +117,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Removes a specified task from the list.
+     *
+     * @param i The index of the task.
+     */
     public void removeTask(int i) {
         if (i > listOfTasks.size()) {
             throw new DukeException("Task does not exist!");
@@ -104,14 +131,28 @@ public class TaskList {
         this.storage.updateSavefile(this);
     }
 
+    /**
+     * Calculates the total size of the task list.
+     *
+     * @return The size of the task list.
+     */
     public int numberOfTasks() {
         return listOfTasks.size();
     }
 
+    /**
+     * Removes all tasks from the task list.
+     *
+     */
     public void removeAllTasks() {
         listOfTasks.clear();
     }
 
+    /**
+     * Marks a specified task from the list as done.
+     *
+     * @param i The index of the task.
+     */
     public void markAsDone(int i) {
         if (i > listOfTasks.size()) {
             throw new DukeException("duke.task.Task does not exist!");
@@ -121,6 +162,12 @@ public class TaskList {
         this.storage.updateSavefile(this);
     }
 
+    /**
+     * Returns a task, specified by its index.
+     *
+     * @param i The index of the task.
+     * @return The specified task.
+     */
     public Task getTask(int i) {
         if (i > listOfTasks.size()) {
             throw new DukeException("duke.task.Task does not exist!");
@@ -129,6 +176,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a task's string representation, specified by its index.
+     *
+     * @param i The index of the task.
+     * @return The specified task's string representation.
+     */
     public String getTaskString(int i) {
         if (i > listOfTasks.size()) {
             throw new DukeException("duke.task.Task does not exist!");
@@ -137,6 +190,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints all tasks in the task list.
+     *
+     */
     public void printAllTasks() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < listOfTasks.size(); i++) {
@@ -144,6 +201,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints all the tasks list that occur on the specified date.
+     *
+     * @param s The specified date.
+     */
     public void printAllTasksOnDate(String s) {
         System.out.println("Here are the tasks in your list due on " + s + ":");
         int counter = 1;

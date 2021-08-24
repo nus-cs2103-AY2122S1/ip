@@ -4,6 +4,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Deadline is a task that has a description, date, and optionally a time.
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class Deadline extends Task {
 
     public Deadline(String description, String date, String time) {

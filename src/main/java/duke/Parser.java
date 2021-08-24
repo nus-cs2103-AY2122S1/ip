@@ -16,6 +16,12 @@ import duke.command.CommandTodo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Parser is the class that handles the parsing of strings.
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class Parser {
     private static final String[] TASK_TYPES = {"T", "D", "E"};
     private static ArrayList<String> storedInput;
@@ -23,6 +29,14 @@ public class Parser {
     public Parser() {
     }
 
+    /**
+     * Takes in a string and checks if it corresponds to a task type.
+     * If it does, return its index number in the TASK_TYPES array.
+     * If it does not, return -1.
+     *
+     * @param s  String to be checked.
+     * @return Integer representing corresponding task type.
+     */
     public static int getTaskID(String s) {
         for (int i = 0; i < TASK_TYPES.length; i++) {
             if (s.equals(TASK_TYPES[i])) {
@@ -32,6 +46,12 @@ public class Parser {
         return -1;
     }
 
+    /**
+     * Takes the user input and returns a valid command if it has been typed.
+     *
+     * @param userInput  String representing input typed in by user.
+     * @return A command responding to the user input.
+     */
     public static Command parseCommand(String userInput) {
         Scanner scanner = new Scanner(userInput);
         String keyword = scanner.next();

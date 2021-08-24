@@ -10,7 +10,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-
+/**
+ * The CommandCheck class handles the command "check" that checks the task list for all
+ * tasks that occur on a specified date.
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class CommandCheck extends Command {
     public static final String KEYWORD = "check";
     private ArrayList<String> arguments;
@@ -20,6 +26,11 @@ public class CommandCheck extends Command {
         this.arguments = arguments;
     }
 
+    /**
+     * This method checks if the date specified in the arguments is in a valid format.
+     *
+     * @return A boolean indicating if the arguments are in a valid format.
+     */
     @Override
     public boolean isArgumentValid() {
         try {

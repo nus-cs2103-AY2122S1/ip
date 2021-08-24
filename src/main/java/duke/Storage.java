@@ -7,6 +7,12 @@ import java.io.IOException;
 import java.io.FileWriter;
 import java.util.Scanner;
 
+/**
+ * Storage is the class that handles reading and writing to the save file.
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class Storage {
     private Scanner s;
     private final String FILEPATH;
@@ -17,6 +23,10 @@ public class Storage {
         this.initialiseSaveFile();
     }
 
+    /**
+     * Checks if save file exist, and if it does not, creates it.
+     *
+     */
     public void initialiseSaveFile() {
         this.savefile = new File(this.FILEPATH);
 
@@ -32,6 +42,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the save file and stores each word in an ArrayList.
+     *
+     * @return  An ArrayList of words in the save file.
+     */
     public ArrayList<String> produceReadableString() {
         try {
             s = new Scanner(savefile);
@@ -53,6 +68,10 @@ public class Storage {
 
     }
 
+    /**
+     * Updates the save file's list of tasks.
+     *
+     */
     public void updateSavefile(TaskList tl) {
         try {
             FileWriter myWriter = new FileWriter("saves/saves.txt");

@@ -11,7 +11,13 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
+/**
+ * The CommandDeadline class handles the command "deadline" that adds a new Deadline task
+ * to the task list.
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class CommandDeadline extends Command {
     public static final String KEYWORD = "deadline";
     private ArrayList<String> arguments;
@@ -21,6 +27,12 @@ public class CommandDeadline extends Command {
         this.arguments = arguments;
     }
 
+    /**
+     * This method checks if the description, date (and time if provided) specified in the arguments
+     * is in a valid format.
+     *
+     * @return A boolean indicating if the arguments are in a valid format.
+     */
     @Override
     public boolean isArgumentValid() {
         try {

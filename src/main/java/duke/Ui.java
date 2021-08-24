@@ -2,6 +2,12 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Ui handles all of the text interface functionality of the program
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class Ui {
     private static final String WELCOME_MESSAGE = "Hello, I'm Duke!\nWhat can I do for you?";
     private static final String LINE_DIVIDER = "______________________________________";

@@ -9,6 +9,13 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The CommandDone class handles the command "done" that handles the command to
+ * mark a specified task from the list as "done".
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class CommandDone extends Command {
     public static final String KEYWORD = "done";
     private static final String ARG_FORMAT = "\\d|\\d\\d|100";
@@ -19,6 +26,11 @@ public class CommandDone extends Command {
         this.arguments = arguments;
     }
 
+    /**
+     * This method checks if the argument provided is a valid task number.
+     *
+     * @return A boolean indicating if the arguments are in a valid format.
+     */
     @Override
     public boolean isArgumentValid() {
         if (arguments.size() == 1) {

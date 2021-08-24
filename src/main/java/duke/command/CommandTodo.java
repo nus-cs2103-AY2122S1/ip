@@ -9,6 +9,13 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The CommandTodo class handles the command "to do" that adds a new To Do task
+ * to the task list.
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class CommandTodo extends Command {
     public static final String KEYWORD = "todo";
     private static final String ARG_FORMAT = "\\w+";
@@ -19,6 +26,12 @@ public class CommandTodo extends Command {
         this.arguments = arguments;
     }
 
+    /**
+     * This method checks if the description specified in the arguments
+     * is in a valid format.
+     *
+     * @return A boolean indicating if the arguments are in a valid format.
+     */
     @Override
     public boolean isArgumentValid() {
         if (arguments.size() == 1) {
