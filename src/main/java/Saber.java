@@ -78,7 +78,7 @@ public class Saber {
         System.out.println(lineBreak + "\n      I have added: "  + task + "\n\n" + lineBreak);
     }
 
-    public void handleDeadlineTask(String task, String time) {
+    public void handleDeadlineTask(String task, String time) throws SaberTimeParserException {
         Task deadline = new Deadline(task, time, false);
         taskList.add(deadline);
         int totalTask = taskList.size();
@@ -118,7 +118,7 @@ public class Saber {
                 + "\n        " + task + "\n\n" + lineBreak);
     }
 
-    public void handleEventTask(String task, String time) {
+    public void handleEventTask(String task, String time) throws SaberTimeParserException {
         Task event = new Event(task, time, false);
         taskList.add(event);
         int totalTask = taskList.size();
@@ -156,8 +156,7 @@ public class Saber {
                 "\n      in the list." + "\n\n" + lineBreak);
     }
 
-    public void endSaber() {
-        System.out.println(goodbye);
+    public void storeExistingTaskList() {
         TaskType[] taskTypeArray = new TaskType[taskList.size()];
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i) instanceof Deadline) {
@@ -183,7 +182,7 @@ public class Saber {
         System.out.println("\n" + logo);
         System.out.println(greeting);
         while (!end) {
-            Runtime.getRuntime().addShutdownHook(new Thread(this::endSaber));
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> storeExistingTaskList()));
             String input = sc.nextLine().trim();
             Command command = new Command(input);
             InputCommand commandType ;
@@ -238,6 +237,11 @@ public class Saber {
                                     + "      do the task on time without\n"
                                     + "      knowing the deadline...\n\n"
                                     + lineBreak);
+                        } catch (SaberTimeParserException e) {
+                            System.out.println(lineBreak + "\n      I'm sorry, Master. I'm unable\n"
+                                    + "      to understand the date you\n"
+                                    + "      just told me. Maybe..., Master\n"
+                                    + "      can try to use other format?\n\n" + lineBreak);
                         }
                         break;
 
@@ -274,6 +278,11 @@ public class Saber {
                                     + "      to come to this event without\n"
                                     + "      knowing the time of the event...\n\n"
                                     + lineBreak);
+                        } catch (SaberTimeParserException e) {
+                            System.out.println(lineBreak + "\n      I'm sorry, Master. I'm unable\n"
+                                    + "      to understand the date you\n"
+                                    + "      just told me. Maybe..., Master\n"
+                                    + "      can try to use other format?\n\n" + lineBreak);
                         }
                         break;
 
@@ -303,9 +312,9 @@ public class Saber {
                         + "      I don't ... understand your command.\n\n"
                         + lineBreak);
             }
-
         }
-        endSaber();
+        System.out.println(goodbye);
+        storeExistingTaskList();
     }
 
     public static void main(String[] args) {
