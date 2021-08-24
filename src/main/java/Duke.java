@@ -1,4 +1,4 @@
-import util.Output;
+import ui.Ui;
 import parser.Parser;
 
 public class Duke {
@@ -11,8 +11,8 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|";
-        Output.print("Hello from\n" + logo);
-        Output.print("Wait, I'm not Duke. I'm Dub!\nWhat can I do for you?");
+        Ui.print("Hello from\n" + logo);
+        Ui.print("Wait, I'm not Duke. I'm Dub!\nWhat can I do for you?");
         listen();
     }
 
