@@ -1,7 +1,15 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
 
 class MyList {
 
@@ -15,7 +23,7 @@ class MyList {
 
     protected String addItem(String command) throws DukeException.InvalidCommandException, 
             DukeException.InvalidTaskDescriptionException, DukeException.DuplicateTaskException,
-            IOException {
+            IOException, DateTimeParseException {
         String[] commandTokens = generateTokens(command, " ");
         String taskName;
         Task task;
@@ -40,21 +48,26 @@ class MyList {
                 throw new DukeException.InvalidTaskDescriptionException("Invalid task description: missing date/time!");
             } else if (detailTokens.length > 2) {
                 throw new DukeException.InvalidTaskDescriptionException("Invalid task description: "
-                        + "multiple dates/times!");
+                        + "invalid date/time\nPlease use [command type] [task name] / [dd-mm-yyyy] [time (in 24hr " +
+                        "format)" +
+                        "]\ne.g. event lecture / 21-02-2021 1500");
             } else if (this.listedItems.contains(detailTokens[0].trim())){ // item already in list
                 throw new DukeException.DuplicateTaskException("Task already in list!");
             } else { // valid
                 taskName = detailTokens[0].trim();
-                String dateTime = detailTokens[1].trim();
+                String[] dateTimeString = detailTokens[1].trim().split(" "); 
+                LocalDate date = LocalDate.parse(dateTimeString[0], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                LocalTime time = LocalTime.parse(dateTimeString[1], DateTimeFormatter.ofPattern("HHmm"));
+                LocalDateTime dateTime = LocalDateTime.of(date, time);
                 if (commandTokens[0].trim().equals("event")) {
                     task = new Event(taskName, dateTime);
                     if (Duke.canLog) {
-                        this.appendNewLogEntry("E", "F", taskName, dateTime);
+                        this.appendNewLogEntry("E", "F", taskName, dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
                     }
                 } else { //deadline
                     task = new Deadline(taskName, dateTime);
                     if (Duke.canLog) {
-                        this.appendNewLogEntry("D", "F", taskName, dateTime);
+                        this.appendNewLogEntry("D", "F", taskName, dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
                     }
                 }
                 this.listedItems.add(taskName);
@@ -79,10 +92,12 @@ class MyList {
                 this.tasks.add(ToDo.createTask(taskName, isCompleted));
                 break;
             case "E":
-                this.tasks.add(Event.createTask(taskName, isCompleted, tokens[3]));
+                this.tasks.add(Event.createTask(taskName, isCompleted, LocalDateTime.parse(tokens[3].trim(),
+                        DateTimeFormatter.ISO_LOCAL_DATE_TIME)));
                 break;
             case "D":
-                this.tasks.add(Deadline.createTask(taskName, isCompleted, tokens[3]));
+                this.tasks.add(Deadline.createTask(taskName, isCompleted, LocalDateTime.parse(tokens[3].trim(),
+                        DateTimeFormatter.ISO_LOCAL_DATE_TIME)));
                 break;
             }    
             this.listedItems.add(taskName);
@@ -93,7 +108,7 @@ class MyList {
         return taskDetails.split(delimiter);
     }
 
-    protected String markAsCompleted(String taskName) throws IOException {  //TODO link to the log
+    protected String markAsCompleted(String taskName) throws IOException {
         //find the task to delete
         int i = 0;
         while (i < this.tasks.size()) {
@@ -186,7 +201,7 @@ class MyList {
         }
         sb.append("Your list contains:\n");
         for (int i = 0; i < this.tasks.size(); i++) {
-            String itemNum = Integer.toString(i + 1) + ". ";
+            String itemNum = i + 1 + ". ";
             sb.append(itemNum);
             sb.append(this.tasks.get(i).toString());
             if (i < this.tasks.size() - 1) {

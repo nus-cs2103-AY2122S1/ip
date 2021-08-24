@@ -1,18 +1,21 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 class Deadline extends Task {
 
-    private final String dueOn;
+    private final LocalDateTime dateTime;
 
-    Deadline(String taskName, String dueOn) {
+    Deadline(String taskName, LocalDateTime dateTime) {
         super(taskName);
-        this.dueOn = dueOn;
+        this.dateTime = dateTime;
     }
 
     private Deadline(Deadline oldDeadline) {
         super(oldDeadline);
-        this.dueOn = oldDeadline.dueOn;
+        this.dateTime = oldDeadline.dateTime;
     }
     
-    static protected Deadline createTask(String name, boolean isCompleted, String dateTime) {
+    static protected Deadline createTask(String name, boolean isCompleted, LocalDateTime dateTime) {
         Deadline d = new Deadline(name, dateTime);
         if (isCompleted) {
             return new Deadline(d);
@@ -28,6 +31,7 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "D: " + super.toString() + " [" + this.dueOn + "]";
+        return "D: " + super.toString() + " before: " + this.dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM " +
+                "yyyy, HH:mm"));
     }
 }

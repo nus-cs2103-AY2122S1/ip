@@ -1,8 +1,11 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 class Event extends Task {
 
-    private final String dateTime;
+    private final LocalDateTime dateTime;
 
-    Event(String eventName, String dateTime) {
+    Event(String eventName, LocalDateTime dateTime) {
         super(eventName);
         this.dateTime = dateTime;
     }
@@ -12,7 +15,7 @@ class Event extends Task {
         this.dateTime = oldEvent.dateTime;
     }
     
-    static protected Event createTask(String name, boolean isCompleted, String dateTime) {
+    static protected Event createTask(String name, boolean isCompleted, LocalDateTime dateTime) {
         Event e = new Event(name, dateTime);
         if (isCompleted) {
             return new Event(e);
@@ -28,6 +31,7 @@ class Event extends Task {
 
     @Override
     public String toString() {
-        return "E: " + super.toString() + " [" + this.dateTime + "]";
+        return "E: " + super.toString() + " on: " + this.dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM yyyy," +
+                " HH:mm"));
     }
 }
