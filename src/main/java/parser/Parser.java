@@ -1,15 +1,15 @@
 package parser;
 
-import command.ByeCommand;
-import command.Command;
-import command.DeadlineCommand;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.EmptyCommand;
-import command.EventCommand;
-import command.InvalidCommand;
-import command.ListCommand;
-import command.TodoCommand;
+import commands.ByeCommand;
+import commands.Command;
+import commands.DeadlineCommand;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.EmptyCommand;
+import commands.EventCommand;
+import commands.InvalidCommand;
+import commands.ListCommand;
+import commands.TodoCommand;
 import util.DateTimeFormat;
 
 /**

@@ -1,4 +1,4 @@
-package command;
+package commands;
 
 import exception.DukeException;
 import util.DateTimeFormat;

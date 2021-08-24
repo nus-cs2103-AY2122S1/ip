@@ -21,7 +21,7 @@ REM --- TEST NORMAL INPUTS ---
 REM delete save file from previous run
 if exist .\data\duke.txt del .\data\duke.txt
 
-REM run the program, feed command from input.txt file and redirect the output to the ACTUAL.TXT
+REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ..\..\bin Duke < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
@@ -32,7 +32,7 @@ REM --- TEST INPUTS THAT GIVE RISE TO EXCEPTIONS/ERROR MESSAGES ---
 REM delete save file from previous run
 if exist .\data\duke.txt del .\data\duke.txt
 
-REM run the program, feed command from input_exception.txt file and redirect the output to the ACTUAL_EXCEPTION.TXT
+REM run the program, feed commands from input_exception.txt file and redirect the output to the ACTUAL_EXCEPTION.TXT
 java -classpath ..\..\bin Duke < input_exception.txt > ACTUAL_EXCEPTION.TXT
 
 REM compare the output to the expected output
