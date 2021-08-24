@@ -6,6 +6,11 @@ import models.*;
 import util.Output;
 import exception.DukeException;
 
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+import java.util.List;
+
+
 public class Processor implements IProcessor {
 
     private final TaskList list = new TaskList();
@@ -50,7 +55,8 @@ public class Processor implements IProcessor {
                 if (input.length == 1) {
                     throw new DukeException("Deadline command must have /by specified");
                 }
-                this.list.addTask(new Deadline(input[0], input[1]));
+                LocalDate time = LocalDate.parse(input[1].trim());
+                this.list.addTask(new Deadline(input[0], time));
             } else if (type.equals("event")) {
                 arguments.remove(0);
                 if (arguments.size() == 0) {
@@ -61,12 +67,15 @@ public class Processor implements IProcessor {
                 if (input.length == 1) {
                     throw new DukeException("Event command must have /at specified");
                 }
-                this.list.addTask(new Event(input[0], input[1]));
+                LocalDate time = LocalDate.parse(input[1].trim());
+                this.list.addTask(new Event(input[0], time));
             } else {
                 throw new DukeException("I don't understand:(");
             }
             Output.print("Got it. I've added this task:\n   " + this.list.getLastTask() + "\nNow you have " + this.list.getSize() + " tasks in the list.");
         } catch (DukeException e) {
+            Output.print(e.getMessage());
+        } catch (DateTimeParseException e) {
             Output.print(e.getMessage());
         }
     }
