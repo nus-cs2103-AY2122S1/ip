@@ -4,9 +4,11 @@ import duke.Storage;
 import duke.Ui;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -88,16 +90,24 @@ public class TaskList {
     /**
      * Displays the list of tasks based on predicate filter
      *
-     * @param predicate Predicate to filter; return true to display task
+     * @param filters Predicates to filter; return true to display task
      */
-    public void displayList(Predicate<Task> predicate) {
+    public void displayList(ArrayList<Predicate<Task>> filters) {
         if (tasks.size() == 0) {
             System.out.println(Ui.OUTPUT_DISPLAY + "There is nothing to display! :angery:");
         } else {
-            // TODO Use of streams here?
-            for (int i = 0; i < tasks.size(); i++) {
-                if (predicate.test(tasks.get(i))) {
-                    System.out.println(Ui.OUTPUT_SPACES + (i + 1) + "." + tasks.get(i));
+            // Apply all filters
+            List<Task> list = tasks.stream()
+                    .filter(task -> filters.stream()
+                            .allMatch(predicate -> predicate.test(task)))
+                    .collect(Collectors.toList());
+
+            if (list.size() == 0) {
+                System.out.println(Ui.OUTPUT_DISPLAY + "There is nothing to display! :angery:");
+            } else {
+                // Add proper formatting and display list
+                for (int i = 0; i < list.size(); i++) {
+                    System.out.println(Ui.OUTPUT_SPACES + (i + 1) + "." + list.get(i));
                 }
             }
         }

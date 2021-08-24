@@ -1,9 +1,12 @@
 package duke;
 
+import task.Task;
 import task.TaskList;
 import task.TaskType;
 
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,7 +33,8 @@ public class DukeParser {
             "event (.+) /at (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?",
             Pattern.CASE_INSENSITIVE);
     final private Pattern listPattern = Pattern.compile(
-            "list( /date (\\d{1,2}/\\d{1,2}/\\d{4}+))?",
+            "list( .+)?",
+//            "list(( /date (\\d{1,2}/\\d{1,2}/\\d{4}+))|( /name (.+)))*",
             Pattern.CASE_INSENSITIVE);
 
     /**Constructor
@@ -55,16 +59,22 @@ public class DukeParser {
 
 
         if (checkList.matches()) {
-            if (checkList.group(2) != null) {
-                // Display List corresponding to the dates
+            if (checkList.group(1) != null) {
+                // Extract modifiers and filter
                 try {
-                    taskList.displayList(task -> task.isDate(TaskType.getDate(checkList.group(2))));
+                    ArrayList<Predicate<Task>> filters = TaskType.getArguments(
+                            checkList.group(1));
+                    taskList.displayList(filters);
                 } catch (DateTimeParseException e) {
                     System.out.println("Please enter a valid date! :(");
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
                 }
             } else {
                 // Display items
-                taskList.displayList(task -> true);
+                ArrayList<Predicate<Task>> filter = new ArrayList<>();
+                filter.add(task -> true);
+                taskList.displayList(filter);
             }
 
         } else if (checkDone.matches()) {
@@ -92,4 +102,6 @@ public class DukeParser {
             System.out.println(Ui.OUTPUT_DISPLAY + "☹ eeeeeee~dameda!! " + input + " isn't a valid command!");
         }
     }
+
+
 }
