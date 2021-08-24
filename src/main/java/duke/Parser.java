@@ -22,9 +22,9 @@ public class Parser {
         return this.isRunning;
     }
 
-    public void readInput(String command) {
+    public void readInput() {
 
-        Scanner s = new Scanner(command);
+        Scanner s = new Scanner(System.in);
         String input = s.next();
 
         if (!input.equals("bye")) {

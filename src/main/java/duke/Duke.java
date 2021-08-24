@@ -47,9 +47,7 @@ public class Duke {
         Parser p = new Parser(this.list, this.storage);
 
         while (p.isRunning()) {
-            Scanner s = new Scanner(System.in);
-            String command = s.nextLine();
-            p.readInput(command);
+            p.readInput();
         }
     }
 }
