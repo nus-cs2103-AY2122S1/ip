@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Locale;
 
 public class Parser {
@@ -6,9 +7,9 @@ public class Parser {
         String first = command.toLowerCase().split(" ")[0];
         switch (first) {
         case "bye":
-            break;
+            return new ExitCommand();
         case "list":
-            break;
+            return new ListCommand();
         case "todo":
             break;
         case "deadline":
@@ -20,7 +21,7 @@ public class Parser {
         case "done":
             break;
         case "save":
-            break;
+            return new SaveCommand();
         default:
             return new InvalidCommand();
         }
