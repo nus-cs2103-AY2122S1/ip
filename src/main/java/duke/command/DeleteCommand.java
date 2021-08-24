@@ -41,8 +41,9 @@ public class DeleteCommand extends Command{
         Task task = taskList.getTask(Integer.parseInt(parameter));
         taskList.deleteTask(Integer.parseInt(parameter));
         storage.save(taskList);
-        ui.showReply(String.format("Noted. I've removed this task:\n  %s %s\nNow you have %d tasks in the list.",
-                task.getStatusIcon(), task.getDescription(), taskList.size()));
+        ui.showReply(
+                String.format("Noted. I've removed this task:\n  %s %s\nNow you have %d tasks in the list.",
+                        task.getStatusIcon(), task.getDescription(), taskList.size()));
     }
 
     /**

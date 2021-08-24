@@ -29,7 +29,8 @@ public class Utility {
                     Integer.parseInt(dateDetails[0]));
             if (time != null) {
                 localDateTime = localDate.atTime(
-                        Integer.parseInt(time.substring(0, 2)),Integer.parseInt(time.substring(2, 4)));
+                        Integer.parseInt(time.substring(0, 2)),
+                        Integer.parseInt(time.substring(2, 4)));
             } else {
                 localDateTime = localDate.atStartOfDay();
             }

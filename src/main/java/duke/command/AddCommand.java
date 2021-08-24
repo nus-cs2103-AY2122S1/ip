@@ -50,25 +50,25 @@ public class AddCommand extends Command{
             break;
         case "deadline":
             if (description.split(" /by ").length != 2) {
-                throw new DukeException("OOPS!!! Parameter /by is missing.\n" +
-                        "eg. deadline Read Book /by 31/12/2021 1800\n" +
-                        "    deadline Read Book /by Friday");
+                throw new DukeException("OOPS!!! Parameter /by is missing.\n"
+                        + "eg. deadline Read Book /by 31/12/2021 1800\n"
+                        + "    deadline Read Book /by Friday");
             }
             parameter = description.split(" /by ");
             ldt = Utility.stringToDate(parameter[1]);
-            task = ldt == null
+            task = (ldt == null)
                     ? new Deadline(parameter[0], parameter[1])
                     : new Deadline(parameter[0], ldt);
             break;
         case "event":
             if (description.split(" /at ").length != 2) {
-                throw new DukeException("OOPS!!! Parameter /at is missing.\n" +
-                        "eg. event Meeting /at 31/12/2021 1800\n" +
-                        "    event Meeting /at Friday");
+                throw new DukeException("OOPS!!! Parameter /at is missing.\n"
+                        + "eg. event Meeting /at 31/12/2021 1800\n"
+                        + "    event Meeting /at Friday");
             }
             parameter = description.split(" /at ");
             ldt = Utility.stringToDate(parameter[1]);
-            task = ldt == null
+            task = (ldt == null)
                     ? new Event(parameter[0], parameter[1])
                     : new Event(parameter[0], ldt);
             break;
@@ -77,8 +77,9 @@ public class AddCommand extends Command{
         }
         taskList.addTask(task);
         storage.save(taskList);
-        ui.showReply(String.format("Got it. I've added this task:\n  %s %s\nNow you have %d tasks in the list.",
-                task.getStatusIcon(), task.getDescription(), taskList.size()));
+        ui.showReply(
+                String.format("Got it. I've added this task:\n  %s %s\nNow you have %d tasks in the list.",
+                        task.getStatusIcon(), task.getDescription(), taskList.size()));
 
     }
 
