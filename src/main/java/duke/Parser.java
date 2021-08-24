@@ -20,7 +20,15 @@ public class Parser {
                                     "____________________________________________________________"
                     );
                 }
+
                 String taskItemNumber = splitString[1];
+                if (Integer.parseInt(taskItemNumber) > Duke.taskList.size()) {
+                    throw new DukeException(
+                            "____________________________________________________________\n" +
+                                    "☹ OOPS!!! Choose a valid task number to be considered done.\n" +
+                                    "____________________________________________________________"
+                    );
+                }
                 Duke.markAsFinished(taskItemNumber);
 
                 Storage.rewriteFile(Duke.taskList);
@@ -40,7 +48,8 @@ public class Parser {
                 }
                 ToDo newToDo = new ToDo(actualToDo);
                 Duke.addToList(newToDo);
-                //System.out.println(newToDo.toString());
+                System.out.println(actualToDo);
+                System.out.println(newToDo.toString());
                 Storage.appendToFile(newToDo.toString());
 
 
