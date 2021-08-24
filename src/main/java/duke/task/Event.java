@@ -4,6 +4,8 @@ import duke.exception.InvalidParamException;
 
 public class Event extends Task {
 
+    private static final String SEPARATOR = " /at ";
+
     private String at;
 
     /**
@@ -25,7 +27,7 @@ public class Event extends Task {
      * @throws InvalidParamException if the description does not contain the appropriate information.
      */
     public static Task setEvent(String input) throws InvalidParamException {
-        String[] eventParams = input.split(" /at ");
+        String[] eventParams = input.split(SEPARATOR);
         if (eventParams.length != 2) {
             throw new InvalidParamException("Please include the time of the event after\n"
                     + "a task description using an '/at' (only once).\n"
@@ -49,6 +51,10 @@ public class Event extends Task {
 
     public String getAt() {
         return this.at;
+    }
+
+    public static String getSeparator() {
+        return SEPARATOR;
     }
 }
 

@@ -1,7 +1,9 @@
 package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
+import duke.exception.InvalidParamException;
 import org.junit.jupiter.api.Test;
 
 public class EventTest {
@@ -15,5 +17,24 @@ public class EventTest {
     public void getAt_timeOfEvent_eventTimeReturned() {
         assertEquals("Monday 2-4pm",
                 new Event("Project Meeting", "Monday 2-4pm").getAt());
+    }
+
+    @Test
+    public void setEvent_descriptionOfEvent_eventReturned() throws InvalidParamException {
+        assertEquals("[E][ ] Finish math homework (at: Monday)",
+                Event.setEvent("Finish math homework /at Monday").toString());
+    }
+
+    @Test
+    public void setEvent_invalidDescriptionOfEvent_invalidParamExceptionThrown() {
+        try {
+            Event.setEvent("Finish math homework").toString();
+            fail();
+        } catch (InvalidParamException e) {
+            assertEquals("Please include the time of the event after\n"
+                    + "a task description using an '/at' (only once).\n"
+                    + "i.e. event project meeting /at Aug 6th 2-4pm",
+                    e.getMessage());
+        }
     }
 }

@@ -8,6 +8,8 @@ import duke.exception.InvalidParamException;
 
 public class Deadline extends Task{
 
+    private static final String SEPARATOR = " /by ";
+
     private String by;
     private LocalDate date;
 
@@ -37,7 +39,7 @@ public class Deadline extends Task{
      * @throws InvalidParamException if the description does not contain the appropriate information.
      */
     public static Task setDeadline(String input) throws InvalidParamException {
-        String[] deadlineParams = input.split(" /by ");
+        String[] deadlineParams = input.split(SEPARATOR);
         if (deadlineParams.length != 2) {
             throw new InvalidParamException("Please include the deadline of the task after\n"
                     + "a task description using a '/by' (only once).\n"
@@ -61,5 +63,9 @@ public class Deadline extends Task{
 
     public String getBy() {
         return this.by;
+    }
+
+    public static String getSeparator() {
+        return SEPARATOR;
     }
 }

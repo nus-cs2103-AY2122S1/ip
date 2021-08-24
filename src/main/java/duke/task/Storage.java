@@ -78,11 +78,11 @@ public class Storage {
                     break;
                 case 'D':
                     //newTask = new Deadline(inputArray[2], inputArray[3]);
-                    newTask = Deadline.setDeadline(inputArray[2] + " /by " + inputArray[3]);
+                    newTask = Deadline.setDeadline(inputArray[2] + Deadline.getSeparator() + inputArray[3]);
                     break;
                 case 'E':
                     //newTask = new Event(inputArray[2], inputArray[3]);
-                    newTask = Event.setEvent(inputArray[2] + " /at " + inputArray[3]);
+                    newTask = Event.setEvent(inputArray[2] + Event.getSeparator() + inputArray[3]);
                     break;
                 }
 

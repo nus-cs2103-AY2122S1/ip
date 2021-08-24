@@ -2,7 +2,6 @@ package duke.main;
 
 import duke.exception.DukeException;
 import duke.exception.NoDescriptionException;
-import duke.exception.InvalidParamException;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Deadline;
