@@ -19,4 +19,9 @@ public class Events extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
+
+    @Override
+    public String toFile() {
+        return "E | " + super.getDoneValue() + " | " + super.getName() + " | " + this.at;
+    }
 }
