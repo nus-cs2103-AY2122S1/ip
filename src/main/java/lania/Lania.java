@@ -62,6 +62,16 @@ public class Lania {
         }
     }
 
+    /**
+     * Finds tasks that matches the keyword in the task list.
+     *
+     * @param s The keyword to match.
+     */
+    public void find(String s) {
+        TaskList temp = taskList.find(s);
+        ui.listMessage(temp);
+    }
+
     public void run() {
         try {
             taskList = storage.load();
@@ -78,6 +88,8 @@ public class Lania {
             try {
                 if (command.equals("list")) {
                     ui.listMessage(taskList);
+                } else if (command.equals("find")) {
+                    find(new Parser().parseTaskDescription(input));
                 } else if (command.equals("done")) {
                     complete(new Parser().getIndex(input));
                 } else if (command.equals("delete")) {

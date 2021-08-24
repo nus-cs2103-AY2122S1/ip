@@ -35,4 +35,22 @@ public class TaskList {
     public Task get(int i) {
         return taskArrayList.get(i);
     }
+
+    /**
+     * Creates a new TaskList consisting only of tasks
+     * that matches the keyword by looping through the
+     * current list.
+     *
+     * @param s The keyword to match.
+     * @return TaskList with only matching tasks.
+     */
+    public TaskList find(String s) {
+        TaskList temp = new TaskList();
+        for (int i = 0; i < taskArrayList.size(); i++) {
+            if (taskArrayList.get(i).toString().contains(s)) {
+                temp.update(taskArrayList.get(i));
+            }
+        }
+        return temp;
+    }
 }
