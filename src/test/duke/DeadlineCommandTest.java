@@ -33,7 +33,7 @@ public class DeadlineCommandTest {
     public void executeCreateDeadlineCommand(){
         TaskList taskList = new TaskList();
         Ui ui = new Ui();
-        Storage storage = new Storage("task.txt");
+        Storage storage = new Storage("tasks.txt");
         String commandDesc = "NEW DEADLINE";
         LocalDateTime commandDateTime = LocalDateTime.now();
         Deadline commandTask = new Deadline(commandDesc, commandDateTime);
