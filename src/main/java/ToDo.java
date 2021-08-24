@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * ToDo list stores items
@@ -22,6 +23,18 @@ public class ToDo extends ArrayList<Task> {
         Task task = super.get(index);
         super.remove(index);
         return task;
+    }
+
+    public ArrayList<Task> filter(String searchString) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        Iterator taskIter = super.iterator();
+        while (taskIter.hasNext()) {
+            Task task = (Task) taskIter.next();
+            if (task.getDescription().contains(searchString)) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
     }
 
     /**
