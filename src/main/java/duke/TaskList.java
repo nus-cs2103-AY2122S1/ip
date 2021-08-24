@@ -52,7 +52,7 @@ public class TaskList {
                 break;
         }
         if (args[1].equals("1")) {
-            this.get(this.size() - 1).markAsDone();
+            this.get(this.size() - 1).setCompleted();
         }
     }
 
@@ -62,7 +62,7 @@ public class TaskList {
      * @param index the index of the task to be marked done
      */
     public void markDone(int index) {
-        this.taskList.get(index).markAsDone();
+        this.taskList.get(index).setCompleted();
     }
 
     /**
