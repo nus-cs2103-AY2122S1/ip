@@ -84,6 +84,7 @@ public class Duke {
                         validateFilled(descExtractedRaw, command);
                         validateDetails(descExtractedRaw, command);
                         String[] deadlineDetails = descExtractedRaw.split("\\s+/by\\s+", 2);
+                        System.out.println(deadlineDetails[1]);
                         Deadline dl = new Deadline(deadlineDetails[0], deadlineDetails[1]);
                         taskHandler.addTask(dl);
                         break;
