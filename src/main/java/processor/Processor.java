@@ -1,14 +1,20 @@
 package processor;
 
+import config.Setting;
+import exception.DukeException;
+import models.Command;
+import models.Deadline;
+import models.Event;
+import models.TaskList;
+import models.Todo;
+import util.Output;
+
 import java.util.List;
 
-import models.*;
-import util.Output;
-import exception.DukeException;
 
 public class Processor implements IProcessor {
 
-    private final TaskList list = new TaskList();
+    private TaskList list = new TaskList(Setting.FILE_DIRECTORY, Setting.FILE_NAME);
 
     @Override
     public void processCommand(Command command, List<String> arguments) {
