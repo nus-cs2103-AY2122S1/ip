@@ -6,10 +6,16 @@ import duke.task.Task;
 
 import java.util.Scanner;
 
+/**
+ * Deals with interactions with the user
+ */
 public class Ui {
     Scanner textInput = new Scanner(System.in);
     private boolean loop = true;
 
+    /**
+     * Shows the welcome message to the user
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,10 +25,19 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
     }
 
+    /**
+     * Takes in input from the user and returns a String of the input
+     * @return Input by the user
+     */
     public String readInput() {
         return textInput.nextLine();
     }
 
+    /**
+     * Shows response to the user for when a task is added
+     * @param t Task that is being added
+     * @param size Size of the tasklist
+     */
     public void addResponse(Task t, int size) {
         t.addResponse(size);
     }
@@ -42,6 +57,10 @@ public class Ui {
         System.out.println("Bye bye. Duke going to sleep now.");
     }
 
+    /**
+     * Displays the list of tasks in the Tasklist provided
+     * @param t Tasklist
+     */
     public void showList(Tasklist t) {
         try {
             if (t.size() == 0) {

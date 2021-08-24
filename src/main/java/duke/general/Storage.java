@@ -14,10 +14,17 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private String filePath;
     private ArrayList<Task> storedList;
 
+    /**
+     * Constructs the Storage object meant for the saving and loading of files
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         storedList = new ArrayList<>();
@@ -65,8 +72,6 @@ public class Storage {
      * @param t Type of task being added
      * @param line String[] containing data about the task
      */
-
-    //TODO MIGHT BE CRAZY WRONG
     public void addToList(TaskType t, String[] line) {
         Task temp;
         switch (t) {

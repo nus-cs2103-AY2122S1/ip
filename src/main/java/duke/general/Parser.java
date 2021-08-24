@@ -1,12 +1,22 @@
 package duke.general;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
+import duke.command.ByeCommand;
+import duke.command.ErrorCommand;
 
-import java.util.Scanner;
-
+/**
+ * Deals with making sense of the user command
+ */
 public class Parser {
-    Scanner textInput = new Scanner(System.in);
-
+    /**
+     * Takes in a String as input and parses it give back a Command
+     * @param fullCommand String input by the user
+     * @return Command created based on input by user
+     */
     public Command parse(String fullCommand) {
         String[] inputSplit = fullCommand.split(" ", 2);
         Command c = null;

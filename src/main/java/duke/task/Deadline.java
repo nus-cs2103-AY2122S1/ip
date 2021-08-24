@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -25,12 +23,19 @@ public class Deadline extends Task {
         this.doneBy = LocalDate.parse(by);
     }
 
-
+    /**
+     * Getter for the type of task
+     * @return String "D" for Deadline
+     */
     @Override
     public String getType() {
         return "D";
     }
 
+    /**
+     * Getter for the additional information on the Deadline
+     * @return String with the deadline of the task
+     */
     @Override
     public String getInfo() {
         return this.by;
