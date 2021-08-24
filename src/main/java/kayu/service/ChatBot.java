@@ -91,6 +91,6 @@ public class ChatBot {
      * @param errorMessage error message to display
      */
     public void error(String errorMessage) {
-        info("☹ Error: " + errorMessage);
+        info("=( Error: " + errorMessage);
     }
 }
