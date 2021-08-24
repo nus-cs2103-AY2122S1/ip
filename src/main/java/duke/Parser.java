@@ -21,6 +21,12 @@ public abstract class Parser {
         UNKNOWN
     }
 
+    /**
+     * Takes in the user's String input and determines the type of Duke command it is.
+     *
+     * @param input The String input given by the user.
+     * @return The type of Duke command represented by the String input.
+     */
     public static CommandType decipherInput(String input) {
         if (input.equals("bye")) {
             return CommandType.EXIT;
@@ -49,9 +55,10 @@ public abstract class Parser {
     }
 
     /**
-     * Takes in the string representation of a task and returns the task represented by it.
-     * @param taskString The string representation of a task.
-     * @return The task represented by the string.
+     * Takes in the String representation of a task and returns the task represented by it.
+     *
+     * @param taskString The String representation of a task.
+     * @return The task represented by the String.
      */
     public static Task processTaskString(String taskString) {
         char type = taskString.charAt(1);
@@ -76,10 +83,11 @@ public abstract class Parser {
     }
 
     /**
-     * Takes in a string representation of a date and time and parses it into a LocalDateTime object.
+     * Takes in a String representation of a date and time and parses it into a LocalDateTime object.
+     *
      * @param dateAndTime The given date and time.
-     * @throws DukeException If the input date and time are incorrectly configured.
      * @return A LocalDateTime object.
+     * @throws DukeException If the input date and time are incorrectly configured.
      */
     public static LocalDateTime formatDateTime(String dateAndTime) throws DukeException {
         try {

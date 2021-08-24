@@ -7,8 +7,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns the string representation of the ToDo task.
-     * @return The string represenation of the task.
+     * Returns the String representation of the ToDo task.
+     *
+     * @return The String representation of the task.
      */
     @Override
     public String toString() {
@@ -20,8 +21,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns a string representation of the task to store within the save file.
-     * @return A string representation of the task.
+     * Returns a String representation of the task to store within the save file.
+     *
+     * @return The String representation of the task.
      */
     @Override
     public String parseToString() {

@@ -27,6 +27,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke bot.
+     */
     public void run() {
         boolean isDukeOpen = true;
 
