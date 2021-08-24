@@ -151,6 +151,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to find a task given an input string.
+     *
+     * @param str Input string from user to find a certain task.
+     * @return TaskList which contains all the tasks that match.
+     * @throws TaskDoesNotExistException when there is no task that matches.
+     */
+
     public TaskList findTask(String str)throws TaskDoesNotExistException {
         String t = str.substring(5);
         ArrayList<Task> l = new ArrayList<>();
@@ -171,6 +179,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Getter to get ArrayList
+     *
+     * @return ArrayList of the current tasks.
+     */
     public ArrayList<Task> getList() {
         return list;
     }
