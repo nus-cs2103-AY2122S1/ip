@@ -9,6 +9,11 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     private final int taskNum;
 
+    /**
+     * Constructs a DeleteCommand that will delete the given task number when executed.
+     *
+     * @param taskNum The index of the task to be executed.
+     */
     public DeleteCommand(int taskNum) {
         this.taskNum = taskNum;
     }

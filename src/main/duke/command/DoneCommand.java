@@ -9,6 +9,11 @@ public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     private final int taskNum;
 
+    /**
+     * Constructs a DoneCommand that will mark the task at the given task index once executed.
+     *
+     * @param taskNum The index of the task to be marked as done.
+     */
     public DoneCommand(int taskNum) {
         this.taskNum = taskNum;
     }

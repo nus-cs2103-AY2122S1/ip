@@ -9,10 +9,11 @@ public class ToDoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
     protected final ToDo newTask;
 
-    public ToDoCommand(String description) {
-        this(new ToDo(description));
-    }
-
+    /**
+     * Constructs an ToDoCommand that will produce the given ToDo Task once executed.
+     *
+     * @param newTask The Event task to be generated.
+     */
     public ToDoCommand(ToDo newTask) {
         this.newTask = newTask;
     }

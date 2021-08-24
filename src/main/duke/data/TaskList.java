@@ -4,13 +4,26 @@ import duke.data.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * This class abstracts the task list of Duke.
+ *
+ * @author Chesterwongz
+ */
 public class TaskList {
     private final ArrayList<Task> taskList;
 
+    /**
+     * Constructs a TaskList populated by Tasks from the given ArrayList of Tasks.
+     *
+     * @param taskList The ArrayList of Tasks to be used.
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * Constructs an empty TaskList.
+     */
     public TaskList() {
         taskList = new ArrayList<>();
     }

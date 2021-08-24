@@ -6,6 +6,12 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected final LocalDateTime at;
 
+    /**
+     * Constucts an Event with the given description and LocalDateTime.
+     *
+     * @param description The String description of the Event.
+     * @param at          The LocalDateTime of the Event.
+     */
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
