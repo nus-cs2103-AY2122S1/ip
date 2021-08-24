@@ -86,26 +86,55 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * A method to add a task to the collection of tasks
+     *
+     * @param task The task to be added
+     */
     public void addTask(Task task) {
         ls.add(task);
     }
 
+    /**
+     * A method to remove a task at a certain index in the collection
+     *
+     * @param index Index of the task to be removed
+     */
     public void removeTask(int index) {
         ls.remove(index);
     }
 
+    /**
+     * A method to change isBoolean to true
+     *
+     * @param index Index of the task to be marked as done
+     */
     public void markAsDone(int index) {
         ls.get(index).markAsDone();
     }
 
+    /**
+     * A method to return a task a certain index in the location
+     *
+     * @param index Index of the task to be returned
+     * @return a Task at a certain index
+     */
     public Task getTask(int index) {
         return ls.get(index);
     }
 
+    /**
+     * Returns the size of the list
+     *
+     * @return The size of the list
+     */
     public int getSize() {
         return ls.size();
     }
 
+    /**
+     * Prints the list of tasks
+     */
     public void displayList() {
         if (ls.size() == 0) {
             System.out.println("You currently do not have any task!");
@@ -117,12 +146,20 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the acknowledgement and the current number of tasks in the list
+     */
     public void printAddTask() {
         System.out.println("Got it. I've added this task: ");
         System.out.println(ls.get(ls.size() - 1).toString());
         System.out.println("Now you have " + ls.size() + " tasks in the list.");
     }
 
+    /**
+     * A method to allow the user to find a task in the list
+     *
+     * @param search The search term
+     */
     public void findTask(String search) {
         searchList = new ArrayList<>();
         for (int i = 0; i < ls.size(); i++) {
@@ -133,7 +170,7 @@ public class TaskList {
         if (searchList.size() == 0) {
             System.out.println("No matching tasks!");
         } else {
-            System.out.println("Here are the matching javatasks in your list: ");
+            System.out.println("Here are the matching tasks in your list: ");
             for (int i = 0; i < searchList.size(); i++) {
                 System.out.println((i + 1) + "." + searchList.get(i).toString());
             }

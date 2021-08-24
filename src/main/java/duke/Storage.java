@@ -10,10 +10,20 @@ public class Storage {
 
     private String filepath;
 
+    /**
+     * A constructor to create a Storage object
+     *
+     * @param filepath The location of the file to load from and save to
+     */
     Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * A method to read the list of tasks from a file
+     *
+     * @param ls A list to keep track of all tasks
+     */
     public void readFile(TaskList ls) {
         try {
             String arr[];
@@ -72,6 +82,11 @@ public class Storage {
         }
     }
 
+    /**
+     * A method to write to a file
+     *
+     * @param ls A list to keep track of all files
+     */
     public static void saveFile(TaskList ls) {
         try {
             String str = "";
