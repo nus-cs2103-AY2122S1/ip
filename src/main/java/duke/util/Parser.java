@@ -100,16 +100,16 @@ public class Parser {
             throw new DukeException("The time of deadline cannot be empty");
         }
 
-        // format should be "yyyy-MM-dd" or "yyyy-MM-dd HHmm"
+        // format should be "yyyy/MM/dd" or "yyyy/MM/dd HH:mm"
         String dateStr = strArr[i + 1];
-        String timeStr = "2359";  // default value in case time is missing from input
+        String timeStr = "23:59";  // default value in case time is missing from input
         if(strArr.length - i - 1 >= 2) {
             timeStr = strArr[i + 2];
         }
 
         try {
             return LocalDateTime.parse(dateStr + " " + timeStr,
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
@@ -125,7 +125,7 @@ public class Parser {
             throw new DukeException("Invalid start and end dateTime format");
         }
 
-        // format should be "yyyy-MM-dd HH:mm yyyy-MM-dd HH:mm"
+        // format should be "yyyy/MM/dd HH:mm yyyy/MM/dd HH:mm"
         // alternativly can be "yyyy-MM-dd HH:mm HH:mm"
         String startDateStr = strArr[i + 1];
         String startTimeStr = strArr[i + 2];
@@ -142,11 +142,11 @@ public class Parser {
         try {
             LocalDateTime startDateTime = LocalDateTime
                     .parse(String.format("%s %s", startDateStr, startTimeStr),
-                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                            DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
 
             LocalDateTime endDateTime = LocalDateTime
                     .parse(String.format("%s %s", endDateStr, endTimeStr),
-                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                            DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
 
             return new LocalDateTime[] {startDateTime, endDateTime};
         } catch(Exception e) {
@@ -168,7 +168,6 @@ public class Parser {
 
     public static List<Task> decode(String[] lines) {
         List<Task> tasks = new ArrayList<>();
-
         for (String line : lines) {
             String type = line.substring(0,1);
             switch (type) {
@@ -207,9 +206,10 @@ public class Parser {
                 String description = descriptionSj.toString();
                 LocalDateTime dateTime = LocalDateTime
                         .parse(dateTimeSj.toString(),
-                                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                                DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
 
                 tasks.add(new Deadline(description, isDone, dateTime));
+                break;
             }
             case "E": {
                 String[] strArr = line.split(" ");
@@ -227,19 +227,21 @@ public class Parser {
                     if(!isDateTimeStr) {
                         descriptionSj.add(curr);
                     } else {
+
                         dateTimeSj.add(curr);
                     }
                 }
                 String description = descriptionSj.toString();
-                String[] dateTimes = dateTimeSj.toString().split("");
+                String[] dateTimes = dateTimeSj.toString().split(" ");
                 LocalDateTime startDateTime = LocalDateTime
                         .parse(String.format("%s %s", dateTimes[0], dateTimes[1]),
-                                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                                DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
                 LocalDateTime endDateTime = LocalDateTime
                         .parse(String.format("%s %s", dateTimes[2], dateTimes[3]),
-                                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                                DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
 
                 tasks.add(new Event(description, isDone, startDateTime, endDateTime));
+                break;
             }
             }
         }

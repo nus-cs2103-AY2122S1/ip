@@ -5,6 +5,8 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+import java.io.IOException;
+
 public class CommandDone extends Command {
     int index;
 
@@ -16,8 +18,9 @@ public class CommandDone extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String msg = tasks.markTaskDone(index);
+            tasks.saveToFile(storage);
             ui.printMsg(msg);
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             ui.showError(e.getMessage());
         }
     }

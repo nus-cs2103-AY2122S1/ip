@@ -16,7 +16,7 @@ public class Storage {
     }
 
     public void save(String encoded) throws IOException {
-        File file = linkFileOrCreateFile(encoded);
+        File file = linkFileOrCreateFile(filePath);
         FileWriter fw = new FileWriter(file);
         fw.write(encoded);
         fw.close();
@@ -55,7 +55,9 @@ public class Storage {
      * @param currDir current directory to check and fix
      */
     private void checkAndFixParentDirectory(File currDir) {
-        if(!currDir.exists()) {
+        if(currDir == null) {
+            currDir.mkdir();
+        } else if (!currDir.exists()) {
             checkAndFixParentDirectory(currDir.getParentFile());
             currDir.mkdir();
         }

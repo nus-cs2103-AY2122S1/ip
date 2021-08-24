@@ -24,7 +24,8 @@ public class Duke {
         try {
             ui = new Ui();
             storage = new Storage(filePath);
-            tasks = new TaskList(Parser.decode(storage.load()));
+            tasks = new TaskList();
+            tasks.loadFromFile(storage);
         } catch (FileNotFoundException e) {
             ui.showError(e.getMessage());
         }
@@ -56,7 +57,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
+        Duke duke = new Duke(DEFAULT_PATH);
         duke.run();
     }
 }

@@ -6,6 +6,8 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+import java.io.IOException;
+
 public class CommandAdd extends Command {
     Task taskToAdd;
 
@@ -16,7 +18,12 @@ public class CommandAdd extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String msg = tasks.addTask(this.taskToAdd);
-        ui.printMsg(msg);
+        try {
+            String msg = tasks.addTask(this.taskToAdd);
+            tasks.saveToFile(storage);
+            ui.printMsg(msg);
+        } catch (IOException e) {
+            ui.showError(e.getMessage());
+        }
     }
 }
