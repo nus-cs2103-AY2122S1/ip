@@ -3,14 +3,14 @@ package duke;
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> list;
+    ArrayList<Task> tasks;
 
     TaskList() {
-        list = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     TaskList(ArrayList<String> stringList) throws DukeException {
-        list = new ArrayList<>();
+        tasks = new ArrayList<>();
         for (int i = 0; i < stringList.size(); i++) {
             String s = stringList.get(i);
             Task t = null;
@@ -34,22 +34,22 @@ public class TaskList {
             if (s.charAt(4) == 'X') {
                 t.markedAsDone();
             }
-            list.add(t);
+            tasks.add(t);
         }
     }
 
     public void add(Task t) {
-        list.add(t);
+        tasks.add(t);
     }
 
     public void remove(int i){
-        list.remove(i);
+        tasks.remove(i);
     }
     public int getSize() {
-        return list.size();
+        return tasks.size();
     }
 
     public Task get(int i) {
-        return list.get(i);
+        return tasks.get(i);
     }
 }

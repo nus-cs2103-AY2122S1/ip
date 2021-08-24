@@ -3,7 +3,6 @@ package duke;
 import java.util.ArrayList;
 
 public class Duke {
-    private static ArrayList<Task> list = new ArrayList<>();
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
