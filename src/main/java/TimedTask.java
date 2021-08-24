@@ -17,10 +17,6 @@ public abstract class TimedTask extends Task {
 
     protected abstract String dateTimeString();
 
-    protected LocalDateTime dateTime() {
-        return this.dateTime;
-    }
-
     protected String getDateTimeInternal() {
         return this.dateTime.toLocalDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                 + " " + this.dateTime.format(DateTimeFormatter.ISO_LOCAL_TIME);

@@ -1,7 +1,7 @@
 public class Event extends TimedTask {
 
     Event(String name, String by, boolean isCompleted) throws DukeException {
-        super(name, by, TaskType.D, isCompleted);
+        super(name, by, TaskType.E, isCompleted);
     }
 
     @Override

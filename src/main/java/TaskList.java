@@ -8,22 +8,6 @@ public class TaskList {
         store = new ArrayList<>();
     }
 
-    TaskList(List<Task> taskList) {
-        this.store = taskList;
-    }
-
-    public TaskList copy() {
-        List<Task> copiedList = new ArrayList<>();
-        for (Task t: this.store) {
-            copiedList.add(t.updateName(t.getName()));
-        }
-        return new TaskList(copiedList);
-    }
-
-    public static TaskList copy(TaskList taskList) {
-        return taskList.copy();
-    }
-
     public int size() {
         return store.size();
     }
@@ -42,7 +26,6 @@ public class TaskList {
         } catch (java.lang.IndexOutOfBoundsException e) {
             throw new DukeException("That task does not exist.");
         }
-
     }
 
     public Task markAsCompleted(int taskId) throws DukeException {

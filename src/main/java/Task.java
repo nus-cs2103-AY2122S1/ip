@@ -2,7 +2,7 @@ public abstract class Task {
     private final String name;
     private final boolean isCompleted;
     private final TaskType taskType;
-    public static final EmptyTask EMPTY_TASK = new EmptyTask();
+    public static final EmptyTask EMPTY_TASK = EmptyTask.empty();
 
     Task(String name, TaskType taskType, boolean isCompleted) {
         this.taskType = taskType;
@@ -47,6 +47,10 @@ public abstract class Task {
 
         EmptyTask() {
             super("", TaskType.EMPTY, false);
+        }
+
+        public static EmptyTask empty() {
+            return new EmptyTask();
         }
 
         @Override

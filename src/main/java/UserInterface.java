@@ -12,6 +12,7 @@ public class UserInterface {
     }
 
     public void printInitialGreeting() {
+        printLogo();
         System.out.println("Hello I'm Duke\n" +
                 "What can I do for you?");
     }
@@ -20,7 +21,15 @@ public class UserInterface {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void printLogo() {
+    public void showError(DukeException e) {
+        System.out.println("OOPS!!! " + e.getMessage());
+    }
+
+    public void showResult(CommandResult commandResult) {
+        System.out.println(commandResult.getFeedbackResult());
+    }
+
+    private void printLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -28,7 +37,4 @@ public class UserInterface {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
     }
-
-
-
 }
