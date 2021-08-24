@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,11 +13,57 @@ public class Recieve {
     public Recieve() {
     }
 
-    public void run() {
+    private static void readFile(String filePath) throws FileNotFoundException {
+        inputs.clear();
+
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+
+        while (s.hasNext()) {
+            String readLine = s.nextLine();
+            if (readLine.contains("[T]")) {
+                Todo task = new Todo(readLine.substring(7));
+                if (readLine.contains("[X]")) {
+                    task.markAsDone();
+                }
+                inputs.add(task);
+            }
+            else if (readLine.contains("[D]")) {
+                String[] spl = readLine.split("--");
+                int length = spl[1].length();
+                Deadline task = new Deadline(spl[0].substring(7), spl[1].substring(5, length - 1));
+                if (readLine.contains("[X]")) {
+                    task.markAsDone();
+                }
+                inputs.add(task);
+            }
+            else {
+                String[] spl = readLine.split("--");
+                int length = spl[1].length();
+                Event task = new Event(spl[0].substring(7), spl[1].substring(5, length - 1));
+                if (readLine.contains("[X]")) {
+                    task.markAsDone();
+                }
+                inputs.add(task);
+            }
+        }
+    }
+
+    private static void writeToFile(String filePath, ArrayList<Task> arr) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for(Task str: arr) {
+            fw.write(str.toString() + System.lineSeparator());
+        }
+        fw.close();
+    }
+
+    public void run(String filePath) {
+
         Scanner sc = new Scanner(System.in);
 
         while (true) {
             try {
+                readFile(filePath);
                 input = sc.nextLine();
 
                 if (input.equals("bye")) {
@@ -29,9 +79,17 @@ public class Recieve {
                             }
 
                             else if (pos < inputs.size()) {
-                                inputs.get(pos).markAsDone();
-                                System.out.println("Nice! I've marked this task as done: ");
-                                System.out.println(inputs.get(pos).toString());
+
+                                try {
+                                    inputs.get(pos).markAsDone();
+                                    writeToFile(filePath, inputs);
+                                    System.out.println("Nice! I've marked this task as done: ");
+                                    System.out.println(inputs.get(pos).toString());
+                                } catch (IOException e) {
+                                    System.out.println("Something went wrong: " + e.getMessage());
+                                }
+
+
                             }
                             else {
                                 throw new InvalidTaskIndexException("There are only " + pos + " tasks!");
@@ -49,14 +107,14 @@ public class Recieve {
                 else if (input.equals("list")) {
                     if (inputs.size() == 0) {
                         System.out.println("There is no task for now :)");
-                    }
-                    else {
+                    } else {
                         System.out.println("Here are the tasks in your list:");
-                        for(int i = 1; i < inputs.size() + 1; i++) {
+                        for (int i = 1; i < inputs.size() + 1; i++) {
                             System.out.println(i + "." + inputs.get(i - 1).toString());
                         }
-
                     }
+
+
                 }
                 else if (input.startsWith("delete ") || input.startsWith("delete")) {
                     if (input.length() > 7 && Character.isDigit(input.charAt(7))) {
@@ -68,9 +126,18 @@ public class Recieve {
                             }
 
                             else if (pos < inputs.size()) {
-                                System.out.println("Noted. I've removed this task: ");
-                                System.out.println(inputs.get(pos).toString());
+                                String temp = inputs.get(pos).toString();
+
                                 inputs.remove(pos);
+                                try {
+                                    writeToFile(filePath, inputs);
+                                } catch (IOException e) {
+                                    System.out.println("Something went wrong: " + e.getMessage());
+                                }
+
+                                System.out.println("Noted. I've removed this task: ");
+                                System.out.println(temp);
+
                                 System.out.println("Now you have " + inputs.size() + " task(s) in the list.");
                             }
                             else {
@@ -90,11 +157,19 @@ public class Recieve {
                     if (input.startsWith("todo ") || input.equals("todo")) {
                         if (input.length() > 5 ) {
                             Todo task = new Todo(input.substring(5));
-                            inputs.add(task);
 
-                            System.out.println("Got it. I've added this task:");
-                            System.out.println(task.toString());
-                            System.out.println("Now you have " + inputs.size() + " task(s) in the list.");
+
+                            try {
+                                inputs.add(task);
+                                writeToFile(filePath, inputs);
+                                System.out.println("Got it. I've added this task:");
+                                System.out.println(task.toString());
+                                System.out.println("Now you have " + inputs.size() + " task(s) in the list.");
+                            } catch (IOException e) {
+                                System.out.println("Something went wrong: " + e.getMessage());
+                            }
+
+
                         }
                         else {
                             throw new InvalidFormatException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -115,6 +190,12 @@ public class Recieve {
                             else {
                                 Deadline task = new Deadline(spl[0], spl[1].substring(3));
                                 inputs.add(task);
+
+                                try {
+                                    writeToFile(filePath, inputs);
+                                } catch (IOException e) {
+                                    System.out.println("Something went wrong: " + e.getMessage());
+                                }
 
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(task.toString());
@@ -139,6 +220,12 @@ public class Recieve {
                                 Event task = new Event(spl[0], spl[1].substring(3));
                                 inputs.add(task);
 
+                                try {
+                                    writeToFile(filePath, inputs);
+                                } catch (IOException e) {
+                                    System.out.println("Something went wrong: " + e.getMessage());
+                                }
+
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(task.toString());
                                 System.out.println("Now you have " + inputs.size() + " task(s) in the list.");
@@ -153,7 +240,7 @@ public class Recieve {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
-            } catch (InvalidTaskIndexException | InvalidFormatException | DukeException ex) {
+            } catch (InvalidTaskIndexException | InvalidFormatException | DukeException | FileNotFoundException ex) {
                 System.out.println(ex.toString());
             }
 
