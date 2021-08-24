@@ -1,4 +1,0 @@
-T | 1 | read book
-D | 0 | return book | Oct 15 2019 18:00
-E | 0 | project meeting | Aug 06 2019 15:15
-T | 1 | join sports club

@@ -1,38 +1,37 @@
+These are your current activities:
 Hello! I'm Duke
-What can I do for you?
+What can I do for you today?
 Got it. I've added this task:
 [T][ ] borrow book
 Now you have 1 tasks in this list.
 Got it. I've added this task:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: Aug 27 2021 14:15)
 Now you have 2 tasks in this list.
 Got it. I've added this task:
-[D][ ]  project meeting (by: Mon 2-4pm)
+[E][ ] project meeting (at: Aug 26 2021 19:15)
 Now you have 3 tasks in this list.
 Here are the tasks in your list:
 1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[D][ ]  project meeting (by: Mon 2-4pm)
+2.[D][ ] return book (by: Aug 27 2021 14:15)
+3.[E][ ] project meeting (at: Aug 26 2021 19:15)
+You have a total of 3 tasks
 Nice! I've marked this task as done:
-[D][X] return book (by: Sunday)
+[D][X] return book (by: Aug 27 2021 14:15)
 Got it. I've added this task:
-[D][ ]  dinner party (by: Tues 4-6pm)
+[E][ ] dinner party (at: Aug 25 2021 18:00)
 Now you have 4 tasks in this list.
 Nice! I've marked this task as done:
-[D][X]  project meeting (by: Mon 2-4pm)
-Here are the tasks in your list:
-1.[T][ ] borrow book
-2.[D][X] return book (by: Sunday)
-3.[D][X]  project meeting (by: Mon 2-4pm)
-4.[D][ ]  dinner party (by: Tues 4-6pm)
+[E][X] project meeting (at: Aug 26 2021 19:15)
 Noted. I've removed this task:
-[D][X] return book (by: Sunday)
+[D][X] return book (by: Aug 27 2021 14:15)
 Now you have 3 tasks in the list
+Got it. I've added this task:
+[E][ ] have dinner (at: Aug 28 2021 14:20)
+Now you have 4 tasks in this list.
 Here are the tasks in your list:
 1.[T][ ] borrow book
-2.[D][X]  project meeting (by: Mon 2-4pm)
-3.[D][ ]  dinner party (by: Tues 4-6pm)
-Got it. I've added this task:
-[D][ ]  have dinner (by: 2am)
-Now you have 4 tasks in this list.
+2.[E][X] project meeting (at: Aug 26 2021 19:15)
+3.[E][ ] dinner party (at: Aug 25 2021 18:00)
+4.[E][ ] have dinner (at: Aug 28 2021 14:20)
+You have a total of 4 tasks
 Bye. Hope to see you again soon!

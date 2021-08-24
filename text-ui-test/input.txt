@@ -1,11 +1,11 @@
 todo borrow book
-deadline return book /by 2021-27-08 14:15
+deadline return book /by 2021-08-27 14:15
 event project meeting /at Aug 26 2021 19:15
 list
 done 2
 event dinner party /at Aug 25 2021 18:00
 done 3
 delete 2
-event have dinner /at 2021-28-08 14:20
+event have dinner /at 2021-08-28 14:20
 list
 bye
