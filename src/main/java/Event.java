@@ -1,11 +1,14 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an event with a date/time.
  */
 public class Event extends Task {
 
-    protected String at;
+    protected LocalDateTime at;
 
-    public Event(String description, String at) {
+    public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
@@ -15,6 +18,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+        return "[E]" + super.toString() + " (at: " + at.format(formatter) + ")";
     }
 }
