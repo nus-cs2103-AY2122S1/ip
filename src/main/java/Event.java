@@ -1,6 +1,4 @@
 public class Event extends Task {
-    private String timeDue;
-
     public Event(String title, String timeDue) {
         super(title, TypeIndicators.EVENT);
         this.timeDue = timeDue;

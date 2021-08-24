@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+
 public class Task {
     protected String title;
     protected boolean isDone;
     protected char typeIndicator;
+    protected String timeDue;
 
     protected enum TypeIndicators {
         TODO('T'),
@@ -50,6 +53,32 @@ public class Task {
         }
         // If the type cannot be parsed, it defaults to TO-DO.
         return new Todo(title, isDone);
+    }
+
+    /**
+     * Parses structured text into a Task.
+     * Text must be of the format <typeIndicator><done><deadline>|<title>
+     * @param text The text to be parsed into a Task.
+     * @return a Task based on the parsed text
+     */
+    public static Task parseTaskFromText(String text) {
+        char typeIndicator = text.charAt(0);
+        char doneIndicator = text.charAt(1);
+        boolean isDone = doneIndicator == '1';
+        String timeDue = text.substring(2, text.indexOf('|'));
+        String title = text.substring(text.indexOf('|') + 1);
+        return createTaskWithDetail(charToTypeEnum(typeIndicator), isDone, title, timeDue);
+    }
+
+
+    /**
+     * Convert a task to a String that can be loaded as load data.
+     * @return a String that represents its saved state
+     */
+    public String toSaveData() {
+        int doneIndicator = this.isDone ? 1 : 0;
+        String timeDueString = this.timeDue == null ? "" : this.timeDue;
+        return String.format("%s%s%s|%s\n", this.typeIndicator, doneIndicator, timeDueString, this.title);
     }
 
     /**

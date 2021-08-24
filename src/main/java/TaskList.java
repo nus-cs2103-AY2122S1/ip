@@ -10,6 +10,14 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    public String toSaveData() {
+        String data = "";
+        for (Task task : this.tasks) {
+            data += task.toSaveData();
+        }
+        return data;
+    }
+
     /**
      * Adds an existing task to the list of tasks.
      * @param task The task to be added to the list of tasks.

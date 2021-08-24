@@ -21,6 +21,7 @@ public class Duke implements ChatbotUI {
     private TaskList taskList;
 
     private Scanner sc;
+    private final String DATA_STORAGE_PATH = "../data/duke_storage.txt";
 
     /**
      * The entrypoint of the Duke chat bot.
@@ -45,7 +46,36 @@ public class Duke implements ChatbotUI {
      */
     public Duke() {
         this.taskList = new TaskList();
+        this.loadData();
         this.sc = new Scanner(System.in);
+    }
+
+    /**
+     * Loads data that is saved in a given filename, and parses the data to load tasks.
+     */
+    public void loadData() {
+        ArrayList<String> lines = DataHandler.readLinesFromFile(this.DATA_STORAGE_PATH);
+        System.out.println(lines);
+        for (int i = 0; i < lines.size(); i++) {
+            System.out.println(taskList.toString());
+            Task task = Task.parseTaskFromText(lines.get(i));
+            this.taskList.addTask(task);
+        }
+        ChatbotUI.printMessage(String.format("Loaded tasks from save file! %s", this.taskList.countTasks()));
+    }
+
+    /**
+     * Saves Chatbot data to a given filename.
+     */
+    public void saveData() {
+        String content = this.taskList.toSaveData();
+        DataHandler.overwriteNewFile(this.DATA_STORAGE_PATH);
+        DataHandler.writeToFile(content, this.DATA_STORAGE_PATH);
+    }
+
+    public void endDuke() {
+        this.saveData();
+        ChatbotUI.printMessage(FAREWELL_MESSAGE);
     }
 
     /**
@@ -107,7 +137,7 @@ public class Duke implements ChatbotUI {
     public void taskMode() {
         String message = ChatbotUI.acceptUserInput(this.sc).trim();
         if (message.equals(FAREWELL_COMMAND)) {
-            ChatbotUI.printMessage(FAREWELL_MESSAGE);
+            this.endDuke();
             return;
         }
         try {
