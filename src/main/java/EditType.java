@@ -1,2 +1,4 @@
-package PACKAGE_NAME;public class EditType {
+public enum EditType {
+    DONE,
+    DELETE
 }
