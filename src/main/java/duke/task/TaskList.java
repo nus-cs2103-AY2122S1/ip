@@ -61,29 +61,6 @@ public class TaskList {
                 taskLengthReport(), TextColor.DEFAULT);
     }
 
-    // Returns a nicely formatted string representation of all tasks in the list
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        int size = taskList.size();
-
-        if (size == 0) {
-            return "No tasks yet!";
-        }
-
-        for (int i = 0; i < size; i++) {
-            stringBuilder.append(i + 1);
-            stringBuilder.append(". ");
-            stringBuilder.append(taskList.get(i).toString());
-            stringBuilder.append("\n");
-        }
-
-        // delete the last new line character
-        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-
-        return stringBuilder.toString();
-    }
-
     public void list() {
         int size = taskList.size();
         if (size == 0) {
@@ -133,5 +110,10 @@ public class TaskList {
         sb.deleteCharAt(sb.length() - 1);
 
         return sb.toString();
+    }
+
+    // for testing
+    protected ArrayList<Task> getList() {
+        return taskList;
     }
 }
