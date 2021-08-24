@@ -1,9 +1,6 @@
 package duke;
 
-import duke.exception.EmptyDescriptionException;
-import duke.exception.InvalidDeadlineException;
-import duke.exception.InvalidTaskException;
-import duke.exception.OutOfBoundException;
+import duke.exception.*;
 
 import java.util.ArrayList;
 
@@ -41,7 +38,6 @@ public class TaskList {
      * @return String representation of all the tasks inside the current TaskList.
      */
     public String printList() {
-        System.out.println("Here are the tasks on your list: ");
         String str = "";
         for (int i = 1; i <= list.size(); i++) {
             str = str + i + ". " + list.get(i-1) + "\n";
@@ -82,7 +78,8 @@ public class TaskList {
      * @throws InvalidDeadlineException Thrown when users give an incorrect deadline.
      */
 
-    public Task addTask(String str) throws EmptyDescriptionException, InvalidTaskException, InvalidDeadlineException {
+    public Task addTask(String str) throws EmptyDescriptionException
+            , InvalidTaskException, InvalidDeadlineException {
         //first check if the task only contain 1 word
         if (str.split(" ").length == 1) {
             //check if task if valid
@@ -140,6 +137,7 @@ public class TaskList {
     public Task deleteTask(String str) throws OutOfBoundException {
         String i = str.substring(str.length()-1);
         int index = Integer.parseInt(i);
+
         if (index < 0 || index > list.size()) {
             throw new OutOfBoundException();
         } else {
@@ -150,6 +148,26 @@ public class TaskList {
             System.out.println("Now you have " + list.size()
                     + (list.size() == 1 ? " task in the list" : " tasks in the list."));
             return task;
+        }
+    }
+
+    public TaskList findTask(String str)throws TaskDoesNotExistException {
+        String t = str.substring(5);
+        ArrayList<Task> l = new ArrayList<>();
+
+        for (Task task: list) {
+            if (task.getTitle().contains(t)) {
+                l.add(task);
+            }
+        }
+
+        if (l.isEmpty()) {
+            throw new TaskDoesNotExistException();
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            TaskList list = new TaskList(l);
+            list.printList();
+            return list;
         }
     }
 

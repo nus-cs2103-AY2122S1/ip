@@ -1,3 +1,3 @@
-T | 1 | shower
-T | 1 | watch shows
-D | 0 | shower  | Oct 2 2101
+T | 1 | play ball
+D | 1 | run  | Oct 2 2012
+E | 1 | party  | noon

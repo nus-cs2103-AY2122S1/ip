@@ -28,8 +28,8 @@ public class TaskListTest {
         l.add(task1);
         l.add(task2);
         TaskList list = new TaskList(l);
-        assertEquals("1. [T][ ]shower\n" + "2. [E][ ]assignment(at:2359hrs)\n",
-                list.printList());
+        assertEquals("1. [T][ ]shower\n"
+                        + "2. [E][ ]assignment(at:2359hrs)\n", list.printList());
     }
 
     /**
@@ -55,8 +55,8 @@ public class TaskListTest {
             Task t = list.addTask("deadline hw");
             fail();
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-( Please key in a valid task!"
-                    , e.getMessage());
+            assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-( " +
+                            "Please key in a valid task!", e.getMessage());
         }
     }
 
@@ -89,7 +89,8 @@ public class TaskListTest {
             list.deleteTask("2");
             fail();
         } catch (DukeException e) {
-            assertEquals("Task does not exist. Please send a correct task number ><", e.getMessage());
+            assertEquals("Task does not exist. " +
+                    "Please send a correct task number ><", e.getMessage());
         }
     }
 
@@ -122,7 +123,8 @@ public class TaskListTest {
             Task t = list.markAsDone("2");
             fail();
         } catch (DukeException e) {
-            assertEquals("Task does not exist. Please send a correct task number ><", e.getMessage());
+            assertEquals("Task does not exist. " +
+                    "Please send a correct task number ><", e.getMessage());
         }
     }
 }

@@ -31,7 +31,8 @@ public class DeadlineTest {
             Deadline t = new Deadline("Task 1" , "03/10/2021");
             assertEquals("", t.writeTask());
         } catch (InvalidDeadlineException e) {
-            assertEquals("Please enter deadline in the format yyyy-mm-dd", e.getMessage());
+            assertEquals("Please enter deadline in the format yyyy-mm-dd",
+                    e.getMessage());
         }
     }
 }

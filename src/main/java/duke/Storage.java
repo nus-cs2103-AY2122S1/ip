@@ -25,6 +25,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
+
     /**
      * Method to load any existing data from file to the current list
      *
@@ -33,9 +34,12 @@ public class Storage {
      * @throws InvalidTaskException thrown when users give invalid input.
      * @throws InvalidDeadlineException thrown when users give invalid deadlines.
      */
-    public ArrayList<Task> load() throws IOException, InvalidTaskException, InvalidDeadlineException {
+
+    public ArrayList<Task> load() throws IOException,
+            InvalidTaskException, InvalidDeadlineException {
         ArrayList<Task> list = new ArrayList<>();
         File file = new File(filePath);
+
         if (file.exists()) {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
@@ -43,18 +47,19 @@ public class Storage {
                 String[] stuff = str.split(" \\| ");
                 Task task;
                 switch (stuff[0]) {
-                    case "T":
+                case "T":
                         task = new ToDos(stuff[2]);
                         break;
-                    case "D":
+                case "D":
                         task = new Deadline(stuff[2], stuff[3]);
                         break;
-                    case "E":
+                case "E":
                         task = new Events(stuff[2], stuff[3]);
                         break;
-                    default:
+                default:
                         throw new InvalidTaskException();
                 }
+
                 if (stuff[1].equals("1")) {
                     task.markAsDone();
                 }
