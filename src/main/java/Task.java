@@ -1,6 +1,8 @@
 public class Task {
+    protected String eventType;
     protected boolean isDone;
     protected String description;
+    protected String time;
 
     /**
      * Basic constructor for task (used during subclass instance)
@@ -35,6 +37,27 @@ public class Task {
     }
 
     /**
+     * Takes in a string that describes the time,
+     * converts the time into LocalDate and sets the time of the task
+     * @param input set time
+     */
+    protected void setTime(String input) {
+        if (input == null){
+            this.time = null;
+        } else {
+            this.time = input;
+        }
+    }
+
+    /**
+     * Takes a string that indicates event type
+     * @param input set event type
+     */
+    protected void setEventType(String input){
+        this.eventType = "[" + input + "]";
+    }
+
+    /**
      * Sets the Task state to true
      * @return Task instance itself
      */
@@ -61,13 +84,21 @@ public class Task {
     }
 
     /**
+     * Returns the time attached to task
+     * @return time
+     */
+    public String getTime() {
+        return this.time;
+    }
+
+    /**
      * Returns a string that describes the instance
      * @return String containing details of the task
      */
     @Override
     public String toString(){
         String state = isDone ? "[X] " : "[ ] ";
-        return state + this.description;
+        return this.eventType + state + this.description;
     }
 }
 
