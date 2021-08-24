@@ -63,40 +63,40 @@ public class Parser {
                 return new Task("NA");
         }
     }
+    
+        public static void parseCommand(TaskList taskList, File file, PrintWriter writer) throws DukeException {
+            Scanner input = new Scanner(System.in);
 
-    public static void parseCommand(ArrayList<Task> toDoList, File file, PrintWriter writer) throws DukeException {
-        Scanner input = new Scanner(System.in);
+            while (true) {
+                String action = input.nextLine();
 
-        while (true) {
-            String action = input.nextLine();
-
-            if (Parser.getCommand(action).equals("done")) { //mark task as done
-                int taskNum = Parser.taskNumber(action);
-                String oldDescription = toDoList.get(taskNum - 1).toString();
-                Duke.completeTask(taskNum, toDoList);
-                Storage.saveAsCompleted(file, toDoList.get(taskNum - 1), oldDescription);
-            } else if (Parser.getCommand(action).equals("todo")
-                    || Parser.getCommand(action).equals("deadline")
-                    || Parser.getCommand(action).equals("event")) { // add task to to-do list
-                Duke.addTask(identifyType(action), toDoList);
-                Storage.addData(writer, identifyType(action)); //todo
-            } else if (action.equals("list")) { // list all items
-                Duke.listItems(toDoList);
-            } else if (action.equals("bye")) { // exit
-                System.out.println("---------------------------------------------\n"
-                        + "     Bye. Hope to see you again soon!" + "\n"
-                        + "---------------------------------------------");
-                break;
-            } else if (Parser.getCommand(action).equals("delete")) { // delete task
-                int taskNum = Parser.taskNumber(action);
-                Storage.markAsDeleted(file, toDoList.get(taskNum - 1)); //todo
-                Duke.deleteTask(taskNum, toDoList);
-            } else { // if there is an invalid input
-                System.out.println("-------------------------------------------------------\n"
-                        + "OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n"
-                        + "-------------------------------------------------------");
-                throw new IllegalArgumentException();
+                if (Parser.getCommand(action).equals("done")) { //mark task as done
+                    int taskNum = Parser.taskNumber(action);
+                    String oldDescription = taskList.getIndividualTask(taskNum - 1).toString();
+                    taskList.completeTask(taskNum); //todo
+                    Storage.saveAsCompleted(file, taskList.getIndividualTask(taskNum - 1), oldDescription); //todo
+                } else if (Parser.getCommand(action).equals("todo")
+                        || Parser.getCommand(action).equals("deadline")
+                        || Parser.getCommand(action).equals("event")) { // add task to to-do list
+                    taskList.addTask(identifyType(action)); //todo
+                    Storage.addData(writer, identifyType(action));
+                } else if (action.equals("list")) { // list all items
+                    taskList.listItems(); //todo
+                } else if (action.equals("bye")) { // exit
+                    System.out.println("---------------------------------------------\n"
+                            + "     Bye. Hope to see you again soon!" + "\n"
+                            + "---------------------------------------------");
+                    break;
+                } else if (Parser.getCommand(action).equals("delete")) { // delete task
+                    int taskNum = Parser.taskNumber(action);
+                    Storage.markAsDeleted(file, taskList.getIndividualTask(taskNum - 1)); //todo
+                    taskList.deleteTask(taskNum); //todo
+                } else { // if there is an invalid input
+                    System.out.println("-------------------------------------------------------\n"
+                            + "OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n"
+                            + "-------------------------------------------------------");
+                    throw new IllegalArgumentException();
+                }
             }
         }
-    }
 }
