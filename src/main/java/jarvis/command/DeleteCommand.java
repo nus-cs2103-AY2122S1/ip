@@ -5,10 +5,10 @@ import jarvis.exception.JarvisException;
 import jarvis.exception.TaskListEmptyException;
 import jarvis.exception.TaskNotFoundException;
 import jarvis.parser.Parser;
-import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.Task;
 import jarvis.task.TaskList;
+import jarvis.ui.Ui;
 
 public class DeleteCommand extends Command {
     private int taskIndex;
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
         } catch (NumberFormatException e) {
             throw new InvalidInputException("number");
         }
-     }
+    }
 
     @Override
     public void execute(TaskList taskList, Storage storage, Ui ui) throws JarvisException {

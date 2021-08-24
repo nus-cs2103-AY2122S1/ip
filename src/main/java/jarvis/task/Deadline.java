@@ -1,13 +1,13 @@
 package jarvis.task;
 
-import jarvis.exception.InvalidDateTimeInputException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import jarvis.exception.InvalidDateTimeInputException;
+
 public class Deadline extends Task {
-    private static final String INPUT_FORMAT =  "dd-MM-yyyy HHmm";
+    private static final String INPUT_FORMAT = "dd-MM-yyyy HHmm";
     private static final String OUTPUT_FORMAT = "MMM d yyyy HHmm";
     private LocalDateTime deadline;
 

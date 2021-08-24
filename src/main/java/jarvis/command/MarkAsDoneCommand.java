@@ -5,20 +5,20 @@ import jarvis.exception.JarvisException;
 import jarvis.exception.TaskListEmptyException;
 import jarvis.exception.TaskNotFoundException;
 import jarvis.parser.Parser;
-import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.Task;
 import jarvis.task.TaskList;
+import jarvis.ui.Ui;
 
 public class MarkAsDoneCommand extends Command {
     private int taskIndex;
 
     public MarkAsDoneCommand(String userInputWithoutCommandTrigger) throws JarvisException {
-       try {
-           this.taskIndex = Parser.getTaskIndex(userInputWithoutCommandTrigger);
-       } catch (NumberFormatException e) {
-           throw new InvalidInputException("number");
-       }
+        try {
+            this.taskIndex = Parser.getTaskIndex(userInputWithoutCommandTrigger);
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException("number");
+        }
     }
 
     @Override

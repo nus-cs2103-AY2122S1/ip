@@ -1,8 +1,8 @@
 package jarvis.message;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class GreetingMessageTest {
     private static final String DEFAULT_GREETING_MESSAGE = String.format(

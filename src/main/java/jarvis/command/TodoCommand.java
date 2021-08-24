@@ -2,10 +2,10 @@ package jarvis.command;
 
 import jarvis.exception.StorageFileException;
 import jarvis.exception.TaskDetailsEmptyException;
-import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 import jarvis.task.Todo;
+import jarvis.ui.Ui;
 
 public class TodoCommand extends Command {
     private String todoDescription;

@@ -18,10 +18,6 @@ public enum CommandTypeEnum {
         this.commandTrigger = commandTrigger;
     }
 
-    public int getCommandTypeStringLength() {
-        return commandTrigger.length();
-    }
-
     public static CommandTypeEnum identifyCommandType(String userInput) throws UnknownCommandException {
         String commandTrigger = Parser.getCommandTriggerFromInput(userInput);
 
@@ -32,5 +28,9 @@ public enum CommandTypeEnum {
         }
 
         throw new UnknownCommandException(commandTrigger);
+    }
+
+    public int getCommandTypeStringLength() {
+        return commandTrigger.length();
     }
 }

@@ -1,8 +1,8 @@
 package jarvis.message;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class ExitMessageTest {
     private static final String DEFAULT_EXIT_MESSAGE = "Bye Bye! I am always ready when you need me!";

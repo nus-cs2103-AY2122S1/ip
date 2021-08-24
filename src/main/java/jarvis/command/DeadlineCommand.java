@@ -3,10 +3,10 @@ package jarvis.command;
 import jarvis.exception.JarvisException;
 import jarvis.exception.TaskDetailsEmptyException;
 import jarvis.parser.Parser;
-import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.Deadline;
 import jarvis.task.TaskList;
+import jarvis.ui.Ui;
 
 public class DeadlineCommand extends Command {
     private String taskDescription;

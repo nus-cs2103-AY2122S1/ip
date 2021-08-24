@@ -1,9 +1,9 @@
 package jarvis.command;
 
 import jarvis.exception.JarvisException;
-import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
+import jarvis.ui.Ui;
 
 public class ListCommand extends Command {
     @Override

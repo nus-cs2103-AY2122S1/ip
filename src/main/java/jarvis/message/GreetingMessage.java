@@ -1,6 +1,6 @@
 package jarvis.message;
 
-public class GreetingMessage extends OutputMessage{
+public class GreetingMessage extends OutputMessage {
     private static final String DEFAULT_GREETING_MESSAGE = String.format(
             "%s\n%s",
             "Hello! I'm Jarvis!",

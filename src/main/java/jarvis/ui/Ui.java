@@ -1,13 +1,13 @@
 package jarvis.ui;
 
+import java.util.Scanner;
+
 import jarvis.exception.JarvisException;
 import jarvis.message.ExitMessage;
 import jarvis.message.GreetingMessage;
 import jarvis.message.OutputMessage;
 import jarvis.task.Task;
 import jarvis.task.TaskList;
-
-import java.util.Scanner;
 
 public class Ui {
     Scanner sc = new Scanner(System.in);
