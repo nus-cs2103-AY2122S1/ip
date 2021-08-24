@@ -17,7 +17,7 @@ public class TaskList {
     public TaskList findTasks(String keyword) {
         TaskList output = new TaskList();
         for (Task t : this.tasks) {
-            String taskString = t.toString();
+            String taskString = t.toString().toLowerCase();
             boolean isKeywordFound = taskString.contains(keyword);
             if (isKeywordFound) {
                 output.addTask(t);

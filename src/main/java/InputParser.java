@@ -12,6 +12,8 @@ public class InputParser {
             throw new DukeException("OOPS!!! Please avoid using the symbol \"¬\"");
         }
         switch (commandKeyword) {
+            case FindCommand.KEYWORD:
+                return new FindCommand(trimmedUserInput);
             case DeleteCommand.KEYWORD:
                 return new DeleteCommand(trimmedUserInput);
             case AddEventCommand.KEYWORD:
