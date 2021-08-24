@@ -59,7 +59,7 @@ public class Storage {
      * @return task.Task corresponding to the string
      * @throws ParseException Thrown if string from file contains errors
      */
-    public static Task StringToTask(String task) throws ParseException {
+    private static Task StringToTask(String task) throws ParseException {
         String[] args = task.split("\\t");
         String taskType = args[0];
         try {

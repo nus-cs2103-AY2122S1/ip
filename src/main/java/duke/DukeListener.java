@@ -29,13 +29,20 @@ public class DukeListener {
             String input = sc.nextLine();
             System.out.println(Ui.LINE);
 
+            /*
+            TODO refactor to command objects:
+            ___Command extends Command
+            Ui.displayHelp() prints all toString()s
+            command.execute() to carry out the command
+             */
+
             // Stop listening if "gubbai" is mentioned
             if (input.equals("gubbai")) {
                 break;
             } else if (input.equals("help")) {
                 Ui.displayHelp();
             } else {
-                // task.TaskList related inputs
+                // TaskList related inputs
                 parser.parseInput(input);
             }
 
