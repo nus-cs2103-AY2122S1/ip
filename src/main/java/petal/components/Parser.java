@@ -1,6 +1,7 @@
 package petal.components;
 
 import petal.command.ByeCommand;
+import petal.command.FindCommand;
 import petal.command.Command;
 import petal.command.DateCommand;
 import petal.command.DeleteCommand;
@@ -45,6 +46,8 @@ public class Parser {
             return new TaskCommand(command, formatted);
         case "date":
             return new DateCommand(formatted);
+        case "find":
+            return new FindCommand(formatted);
         default:
             return new UnintelligibleCommand();
         }

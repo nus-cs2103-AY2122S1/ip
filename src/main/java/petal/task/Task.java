@@ -2,6 +2,7 @@ package petal.task;
 
 import petal.components.Responses;
 import java.time.LocalDate;
+import java.util.Locale;
 
 /**
  * The Task class that encapsulates a directive given
@@ -80,6 +81,16 @@ public abstract class Task {
     public String firstLetter(String str) {
         str = str.substring(0, 1).toUpperCase() + str.substring(1);
         return str;
+    }
+
+    /**
+     * Returns if a task description contains a keyword
+     *
+     * @param keyword The keyword
+     * @return True if contains keyword, false if not
+     */
+    public boolean isKeyWordPresent(String keyword) {
+        return description.toLowerCase().contains(keyword);
     }
 
     /**

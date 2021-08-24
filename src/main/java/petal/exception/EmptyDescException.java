@@ -19,6 +19,15 @@ public class EmptyDescException extends PetalException {
     }
 
     /**
+     * Constructor for the EmptyDescException
+     *
+     * @param message The exception message
+     */
+    public EmptyDescException(Responses message) {
+        super(message.toString());
+    }
+
+    /**
      * Constructor for the EmptyDescException (Used as wrapper)
      *
      * @param message The exception message

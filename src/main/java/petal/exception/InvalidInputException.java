@@ -19,6 +19,15 @@ public class InvalidInputException extends PetalException {
     }
 
     /**
+     * Constructor for InvalidInputException
+     *
+     * @param message The exception message
+     */
+    public InvalidInputException(Responses message) {
+        super(message.toString());
+    }
+
+    /**
      * Constructor for InvalidInputException (Used as wrapper)
      *
      * @param message The exception message
