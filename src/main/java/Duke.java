@@ -1,10 +1,10 @@
-import Duke.parser.DukeParser;
-import Duke.UI;
-import Duke.exception.DukeException;
+import duke.parser.DukeParser;
+import duke.UI;
+import duke.exception.DukeException;
 
 import java.io.IOException;
-import Duke.task.TaskList;
-import Duke.Storage;
+import duke.task.TaskList;
+import duke.Storage;
 
 public class Duke {
     public static void main(String[] args) {
@@ -25,9 +25,9 @@ public class Duke {
                     input = UI.getUserInput();
                 }
             }
-        }catch(IOException e){
+        } catch (IOException e) {
             UI.printError(e);
-        }finally {
+        } finally {
             UI.printBye();
         }
     }

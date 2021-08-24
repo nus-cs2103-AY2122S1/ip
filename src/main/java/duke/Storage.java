@@ -1,6 +1,6 @@
-package Duke;
+package duke;
 
-import Duke.task.*;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,24 +28,24 @@ public class Storage {
         while (s.hasNext()) {
             String[] arr = s.nextLine().split(" \\| ", 4);
             String taskType = arr[0];
-            switch(taskType){
+            switch(taskType) {
                 case "T":
                     Task t = new Todo(arr[2]);
-                    if(arr[1]== "1"){
+                    if (arr[1].equals("1")) {
                         t.markComplete();
                     }
                     list.addTask(t);
                     break;
                 case "D":
                     Task d = new Deadline(arr[2],arr[3]);
-                    if(arr[1]== "1"){
+                    if (arr[1].equals("1")) {
                         d.markComplete();
                     }
                     list.addTask(d);
                     break;
                 case "E":
                     Task e = new Event(arr[2],arr[3]);
-                    if(arr[1]== "1"){
+                    if (arr[1].equals("1")) {
                         e.markComplete();
                     }
                     list.addTask(e);
@@ -57,7 +57,7 @@ public class Storage {
         return list;
     }
 
-    public void writeList(TaskList list) throws IOException{
+    public void writeList(TaskList list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(list.toStorageString());
         fw.close();

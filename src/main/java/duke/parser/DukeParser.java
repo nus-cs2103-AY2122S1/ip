@@ -1,14 +1,14 @@
-package Duke.parser;
+package duke.parser;
 
-import Duke.exception.DukeException;
-import Duke.exception.InvalidCommandException;
-import Duke.exception.InvalidCommandParameterException;
-import Duke.exception.NoSuchTaskException;
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidCommandParameterException;
+import duke.exception.NoSuchTaskException;
 import java.io.IOException;
 
-import Duke.task.*;
-import Duke.UI;
-import Duke.Storage;
+import duke.task.*;
+import duke.UI;
+import duke.Storage;
 
 import java.util.Scanner;
 
@@ -16,7 +16,7 @@ public class DukeParser {
     TaskList list;
     Storage storage;
 
-    public DukeParser(TaskList list, Storage storage){
+    public DukeParser(TaskList list, Storage storage) {
         this.list = list;
         this.storage = storage;
     }
@@ -24,8 +24,8 @@ public class DukeParser {
     public void parse(String rawInput) throws DukeException, IOException {
         Scanner inputScanner = new Scanner(rawInput);
         String checkForKeyword = inputScanner.next();
-        //...process
-        switch(checkForKeyword) {
+
+        switch (checkForKeyword) {
             case "list":
                 handleList(inputScanner);
                 break;
@@ -49,70 +49,72 @@ public class DukeParser {
         }
     }
 
-    //execute the action OR return (actionType, content, date(for deadline,event));
-    public void handleList(Scanner inputScanner) throws InvalidCommandParameterException{
-        if(inputScanner.hasNext()){
+    public void handleList(Scanner inputScanner) throws InvalidCommandParameterException {
+        if (inputScanner.hasNext()) {
             throw new InvalidCommandParameterException();
-        }else{
+        } else {
             UI.printList(list);
         }
     }
 
-    public void handleDone(Scanner inputScanner) throws InvalidCommandParameterException, NoSuchTaskException,IOException {
-        if(inputScanner.hasNextInt()){
+    public void handleDone(Scanner inputScanner) throws InvalidCommandParameterException
+            , NoSuchTaskException, IOException {
+        if (inputScanner.hasNextInt()) {
             int taskPos = inputScanner.nextInt() - 1;
             list.markDone(taskPos);
             storage.writeList(list);
             UI.printTaskDone(list.getTask(taskPos + 1));
-        }else{
+        } else {
             throw new InvalidCommandParameterException();
         }
     }
 
-    public void handleDelete(Scanner inputScanner) throws InvalidCommandParameterException,NoSuchTaskException,IOException {
-        if(inputScanner.hasNextInt()){
+    public void handleDelete(Scanner inputScanner) throws InvalidCommandParameterException
+            , NoSuchTaskException, IOException {
+        if (inputScanner.hasNextInt()) {
             int taskPos = inputScanner.nextInt() - 1;
             Task temp = list.deleteTask(taskPos);
             storage.writeList(list);
             UI.printTaskDeleted(temp, list);
-        }else{
+        } else {
             throw new InvalidCommandParameterException();
         }
     }
 
-    public void handleTodo(Scanner inputScanner) throws InvalidCommandParameterException,IOException {
-        if(inputScanner.hasNextLine()) {
+    public void handleTodo(Scanner inputScanner) throws InvalidCommandParameterException, IOException {
+        if (inputScanner.hasNextLine()) {
             String secondWord = inputScanner.nextLine();
             list.addTask(new Todo(secondWord));
             storage.writeList(list);
             UI.printTaskAdded(list);
-        }else{
+        } else {
             throw new InvalidCommandParameterException();
         }
     }
 
-    public void handleDeadline(Scanner inputScanner) throws InvalidCommandParameterException,IOException {
-        if(inputScanner.hasNextLine()) {
+    public void handleDeadline(Scanner inputScanner) throws InvalidCommandParameterException
+            , IOException {
+        if (inputScanner.hasNextLine()) {
             String[] contentAndDate = inputScanner.nextLine().split("/by", 2);
             String content = contentAndDate[0];
             String date = contentAndDate[1];
             list.addTask(new Deadline(content, date));
             storage.writeList(list);
             UI.printTaskAdded(list);
-        }else{
+        } else {
             throw new InvalidCommandParameterException();
         }
     }
 
     public void handleEvent(Scanner inputScanner) throws InvalidCommandParameterException,IOException {
-        if(inputScanner.hasNextLine()) {
+        if (inputScanner.hasNextLine()) {
             String[] contentAndDate = inputScanner.nextLine().split("/at", 2);
             String content = contentAndDate[0];
             String date = contentAndDate[1];
             list.addTask(new Event(content, date));
             storage.writeList(list);
             UI.printTaskAdded(list);
-        }else {
+        } else {
             throw new InvalidCommandParameterException();
         }
     }

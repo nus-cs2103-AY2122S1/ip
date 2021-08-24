@@ -1,7 +1,7 @@
-package Duke.exception;
+package duke.exception;
 
-public class NoSuchTaskException extends DukeException{
-    public NoSuchTaskException(){
+public class NoSuchTaskException extends DukeException {
+    public NoSuchTaskException() {
         super("Hey, there is no such task!");
     }
 }

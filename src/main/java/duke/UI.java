@@ -1,10 +1,9 @@
-package Duke;
+package duke;
 
 import java.util.Scanner;
 
-import Duke.exception.DukeException;
-import Duke.task.TaskList;
-import Duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Task;
 
 public class UI {
     protected static String greetingText = "Hello! I'm Duke\nWhat can I do for you?\n";
@@ -12,31 +11,27 @@ public class UI {
 
     protected static Scanner scanner = new Scanner(System.in);
 
-    private static String formatWithSpace(String text){
+    private static String formatWithSpace(String text) {
         return "\n" + text + "\n";
     }
 
-    public static void printGreeting(){
+    public static void printGreeting() {
         System.out.println(greetingText);
     }
 
-    public static void printBye(){
+    public static void printBye() {
         System.out.println(byeText);
     }
 
-    public static void printList(TaskList list){
+    public static void printList(TaskList list) {
         System.out.println(formatWithSpace(list.toString()));
     }
 
-    public static void printStorageList(TaskList list){
-        System.out.println(formatWithSpace(list.toStorageString()));
-    }
-
-    public static String listTaskAmount(int count){
+    public static String listTaskAmount(int count) {
         return("\nNow you have " + count + " task(s) in the list.");
     }
 
-    public static void printTaskAdded(TaskList list){
+    public static void printTaskAdded(TaskList list) {
         int taskAmount = list.getTaskAmount();
         System.out.println(
                 formatWithSpace("Got it. I've added this task:\n"
@@ -47,11 +42,11 @@ public class UI {
 
     }
 
-    public static void printTaskDone(Task task){
+    public static void printTaskDone(Task task) {
         System.out.println(formatWithSpace("Nice! I've marked this task as done:\n " + task));
     }
 
-    public static void printTaskDeleted(Task task,TaskList list){
+    public static void printTaskDeleted(Task task,TaskList list) {
         System.out.println(
                 formatWithSpace("Ok, I have removed the following task:\n "
                     + task
@@ -59,13 +54,11 @@ public class UI {
 
     }
 
-    public static String getUserInput(){
-        String input = scanner.nextLine();
-        return input;
+    public static String getUserInput() {
+        return scanner.nextLine();
     }
 
-    public static void printError(Exception e){
+    public static void printError(Exception e) {
         System.out.println(formatWithSpace(e.getMessage()));
     }
-
 }
