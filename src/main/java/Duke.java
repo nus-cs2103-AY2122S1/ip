@@ -17,8 +17,6 @@ public class Duke {
         TODO, EVENT, DEADLINE, LIST, DONE, DELETE, BYE
     }
 
-    private static ArrayList<Task> tasks = new ArrayList<Task>();
-
     private static void greet() {
         System.out.println("Hello! I'm Duke" + '\n' + "What can I do for you?");
     }
