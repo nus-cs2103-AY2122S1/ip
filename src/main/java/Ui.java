@@ -6,14 +6,12 @@ import java.util.ArrayList;
  */
 public class Response {
     private final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
-    private ArrayList<Task> lst;
     private int count;
 
     /**
      * Constructor
      */
-    public Response(ArrayList<Task> lst) {
-        this.lst = lst;
+    public Response() {
         this.count = 1;
     }
 
@@ -28,7 +26,7 @@ public class Response {
     }
 
     /**
-     * This method handles the echo event.
+     * This method handles the add event.
      * @param task the Task that the user wants to add
      */
     public void add(Task task) {
