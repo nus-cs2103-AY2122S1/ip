@@ -13,7 +13,9 @@ public class Parser {
     public void parseCommand(String userInput) {
 
         if (userInput.matches("list")) {
+
             tasks.list();
+
         }  else if (userInput.length() > 3 && userInput.substring(0, 4).matches("done")){
 
             tasks.markDone(userInput);
