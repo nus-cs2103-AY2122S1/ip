@@ -39,6 +39,11 @@ public class Ui {
         System.out.println(errorMessage);
     }
 
+    public void displayAddedMessage(Task t, TaskList tasks) {
+        System.out.println("\t I have added to the list: \n\t \t" + t.toString());
+        System.out.println("\t There are " + tasks.getSize() + " items in the list");
+    }
+
     public void invalidCommand() throws DukeException {
         String errorMessage = "\t Sorry I do not understand this command \n";
         errorMessage += "\t Please use one of the following commands: \n";
