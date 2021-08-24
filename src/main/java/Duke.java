@@ -2,8 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -133,24 +133,30 @@ public class Duke {
         if (input.equals("") || !input.contains(" /at")) {
             throw new DukeException("FORMAT YOUR EVENT PROPERLY. DON'T WASTE MY TIME.");
         }
-        String[] args = input.split("/at", 2);
-        Task newEvent = new Event(args[0].trim(), args[1].trim());
-        tasks.add(newEvent);
-        print(String.format(" MORTAL, YOU'VE ADDED THIS EVENT:\n %s\n YOU HAVE %d TASKS LEFT.", newEvent,
-                tasks.size()));
-        saveToFile();
+        try {
+            String[] args = input.split("/at", 2);
+            Task newEvent = new Event(args[0].trim(), args[1].trim());
+            tasks.add(newEvent);
+            print(String.format(" MORTAL, YOU'VE ADDED THIS EVENT:\n %s\n YOU HAVE %d TASKS LEFT.", newEvent,
+                    tasks.size()));
+        } catch (DateTimeParseException e) {
+            print("FORMAT YOUR DATETIME PROPERLY YOU FOOL");
+        }
     }
 
     private void addDeadline(String input) throws DukeException {
         if (input.equals("") || !input.contains(" /by")) {
             throw new DukeException("FORMAT YOUR DEADLINE PROPERLY. DON'T WASTE MY TIME.");
         }
-        String[] args = input.split("/by", 2);
-        Task newDeadline = new Deadline(args[0].trim(), args[1].trim());
-        tasks.add(newDeadline);
-        print(String.format(" MORTAL, YOU'VE ADDED THIS DEADLINE:\n %s\n YOU NOW HAVE %d TASKS.", newDeadline,
-                tasks.size()));
-        saveToFile();
+        try {
+            String[] args = input.split("/by", 2);
+            Task newDeadline = new Deadline(args[0].trim(), args[1].trim());
+            tasks.add(newDeadline);
+            print(String.format(" MORTAL, YOU'VE ADDED THIS DEADLINE:\n %s\n YOU NOW HAVE %d TASKS.", newDeadline,
+                    tasks.size()));
+        } catch (DateTimeParseException e) {
+            print("FORMAT YOUR DATETIME PROPERLY YOU FOOL");
+        }
     }
 
     private void getTasksFromFile() throws DukeException {
