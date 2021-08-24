@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,15 @@ import java.io.FileWriter;
  * @author felix-ong
  */
 public class Duke {
+    private Storage storage;
+    private TaskList tasks;
+//    private Ui ui;
+
+    public Duke(String filePath) throws DukeException {
+        this.storage = new Storage(filePath);
+        this.tasks = new TaskList(this.storage.loadData());
+    }
+
     /**
      * Adds the given task to the given list of tasks.
      *
@@ -100,10 +111,10 @@ public class Duke {
                     tasks.add(new Todo(taskDescription, isDone));
                     break;
                 case "D":
-                    tasks.add(new Deadline(taskDescription, LocalDate.parse(taskParts[3]), isDone));
+                    tasks.add(new Deadline(taskDescription, LocalDateTime.parse(taskParts[3]), isDone));
                     break;
                 case "E":
-                    tasks.add(new Event(taskDescription, LocalDate.parse(taskParts[3]), isDone));
+                    tasks.add(new Event(taskDescription, LocalDateTime.parse(taskParts[3]), isDone));
                     break;
                 default:
                     System.out.println("Invalid task in data");
@@ -138,6 +149,7 @@ public class Duke {
 
     public static void main(String[] args) {
         System.out.println("Hello, I am Duke!\nHow may I help you?");
+
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = loadData();
         String command = sc.next();
@@ -159,7 +171,8 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                     }
                     String[] deadlineParts = deadlineInput.split(" /by ");
-                    LocalDate by = LocalDate.parse(deadlineParts[1]);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm");
+                    LocalDateTime by = LocalDateTime.parse(deadlineParts[1], formatter);
                     Task deadline = new Deadline(deadlineParts[0], by);
                     addTask(tasks, deadline);
                     break;
@@ -169,7 +182,8 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
                     }
                     String[] eventParts = eventInput.split(" /at ");
-                    LocalDate dateTime = LocalDate.parse(eventParts[1]);
+                    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm");
+                    LocalDateTime dateTime = LocalDateTime.parse(eventParts[1], formatter1);
                     Task event = new Event(eventParts[0], dateTime);
                     addTask(tasks, event);
                     break;
@@ -190,8 +204,8 @@ public class Duke {
                 default:
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means (X_X)" +
                             "\nPlease enter one of the following commands:\n todo <task>" +
-                            "\n deadline <task> /by <deadline(in yyyy-mm-dd format)>" +
-                            "\n event <event> /at <date(in yyyy-mm-dd format)>" +
+                            "\n deadline <task> /by <deadline(in yyyy-MM-dd kkmm format)>" +
+                            "\n event <event> /at <date(in yyyy-MM-dd kkmm format)>" +
                             "\n list\n bye(to quit)");
                     break;
                 }

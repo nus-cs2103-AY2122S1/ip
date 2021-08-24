@@ -1,4 +1,4 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -8,16 +8,16 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     /** Date, start and end time of the event */
-    protected LocalDate dateTime;
+    protected LocalDateTime at;
 
     /**
      * Constructor of an Event Task.
      *
      * @param description Short description of task.
      */
-    public Event(String description, LocalDate dateTime) {
+    public Event(String description, LocalDateTime at) {
         super(description);
-        this.dateTime = dateTime;
+        this.at = at;
     }
 
     /**
@@ -25,9 +25,9 @@ public class Event extends Task {
      *
      * @param description Short description of task.
      */
-    public Event(String description, LocalDate dateTime, boolean isDone) {
+    public Event(String description, LocalDateTime at, boolean isDone) {
         super(description);
-        this.dateTime = dateTime;
+        this.at = at;
         this.isDone = isDone;
     }
 
@@ -38,7 +38,7 @@ public class Event extends Task {
      */
     @Override
     public String toSaveString() {
-        return "E" + super.toSaveString() + String.format(",%s", this.dateTime);
+        return "E" + super.toSaveString() + String.format(",%s", this.at);
     }
 
     /**
@@ -48,6 +48,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + this.at.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma")) + ")";
     }
 }
