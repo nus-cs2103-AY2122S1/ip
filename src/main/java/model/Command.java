@@ -10,6 +10,9 @@ package model;
  *      LIST : list the entire tasks array.
  *  </li>
  *  <li>
+ *      FIND : find tasks using keyword.
+ *  </li>
+ *  <li>
  *     Adding a Task: divided into 3 smaller parts :
  *     <ul>
  *      <li>
@@ -34,6 +37,7 @@ package model;
 public enum Command {
 	BYE,
 	LIST,
+	FIND,
 	DEADLINE,
 	EVENT,
 	TODOS,

@@ -49,6 +49,14 @@ public interface TaskDao {
 	List<Task> getAll();
 	
 	/**
+	 * Gets all the tasks from the list filtered by keyword.
+	 * Returns empty list if reading the file fails.
+	 *
+	 * @return Tasks ArrayList of the tasks filtered by keyword.
+	 */
+	List<Task> getByKeyword(String keyword);
+	
+	/**
 	 * Gets the size of the current list.
 	 * Returns -1 if the Task file cannot be read or invalid.
 	 *
