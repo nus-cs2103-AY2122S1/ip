@@ -4,22 +4,23 @@ import java.time.LocalDate;
 import ui.Ui;
 
 /**
- * This class implements the tasks to be tracked by the
- * duke.Duke assistant
+ * The Task class implements the tasks to be tracked by the
+ * Duke assistant.
  */
-public class Task {
+public class Task{
   /**
-   * Description of the task
+   * Description of the task.
    */
   private final String task;
 
   /**
-   * Status of the task represented by String
+   * Status of the task.
    */
   private String isDone;
 
   /**
-   * Constructor for a tasks.Task
+   * Constructs a Task.
+   *
    * @param s the input string to describe the task
    */
   public Task(String s) {
@@ -28,8 +29,8 @@ public class Task {
   }
 
   /**
-   * To mark a task as complete by changing
-   * the String representation
+   * Marks a task as complete by changing
+   * the String representation and display a confirmation message.
    */
   public void setIsDone() {
     String result = "";
@@ -42,13 +43,17 @@ public class Task {
     Ui.showInput(result, this.getType() + isDone + " " + this.getTask());
   }
 
+  /**
+   * To mark a task as complete by changing
+   * the String representation without displaying confirmation message.
+   */
   public void markAsDone() {
     this.isDone = "[X]";
   }
 
   /**
-   * To retrieve the status of the task
-   * whether it is complete or not
+   * Retrieves the status of the task
+   * whether it is complete or not.
    *
    * @return the string representation of the task's state
    */
@@ -57,7 +62,7 @@ public class Task {
   }
 
   /**
-   * To retrieve the description of the task
+   * Retrieves the description of the task.
    *
    * @return the String that is the description of the task
    */
@@ -66,18 +71,28 @@ public class Task {
   }
 
   /**
-   * To retrieve the information on the type of tasks.Task
+   * Retrieves the information of the type of task.
    *
-   * @return the String description of the type of tasks.Task
+   * @return the String description of the type of task
    */
   public String getType() {
     return "regular";
   }
 
+  /**
+   * Retrieves the information on the format of the task to be saved.
+   *
+   * @return the String representation of how the task will be saved
+   */
   public String getSaveFormat() {
     return "regular";
   }
 
+  /**
+   * Retrieves the information on the date associated with task.
+   *
+   * @return the date associated with task in as LocalDate if applicable
+   */
   public LocalDate getLocalDate() {
     return null;
   }

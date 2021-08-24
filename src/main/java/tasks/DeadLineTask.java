@@ -6,28 +6,31 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * The DeadlineTask class is a child class for tasks.Task
+ * The DeadlineTask Class inherits Task Class
  * to support different specificities of a task
- * as input by user
+ * as per input by user.
  */
-
 public final class DeadLineTask extends Task {
   /**
-   * The String to store the type of task information
-   * that identifies a Deadline task
+   * Stores the type of task information
+   * that identifies a DeadlineTask.
    */
   private final String type = "[D]";
 
   /**
-   * The String to store the do-by-date information
-   * that identifies a Deadline task
+   * Stores the do-by-date information.
    */
   private final String dueDate;
 
+  /**
+   * Stores the do-by-date information as a LocalDate.
+   */
   private LocalDate localDate;
 
   /**
-   * Constructor for a Deadline task
+   * Constructs a Deadline task and check if a date can be
+   * stored as LocalDate. If so, save it, otherwise save
+   * date as per user input.
    *
    * @param s the input string to describe the Deadline task
    * @param date the do-by-date
@@ -61,9 +64,9 @@ public final class DeadLineTask extends Task {
   }
 
   /**
-   * To retrieve the information on the type of tasks.Task
+   * Retrieves the information of the type of task.
    *
-   * @return the String description of the type of tasks.Task
+   * @return the String description of the type of task
    */
   public String getType() {
     return this.type;
@@ -73,15 +76,21 @@ public final class DeadLineTask extends Task {
     this.localDate = localDate;
   }
 
+  /**
+   * Retrieves the information on the date associated with task.
+   *
+   * @return the date associated with task in as a LocalDate
+   */
   @Override
   public LocalDate getLocalDate() {
     return this.localDate;
   }
 
   /**
-   * To retrieve the description of the Deadline task
+   * Retrieves the description specific to the Deadline task
+   * and use a LocalDate if available.
    *
-   * @return the String that is the description of the Deadline task
+   * @return the description specific to the Deadline task
    */
   @Override
   public String getTask() {
@@ -93,10 +102,20 @@ public final class DeadLineTask extends Task {
     }
   }
 
+  /**
+   * Retrieves the simple description of the task.
+   *
+   * @return the simple description of the task
+   */
   public String getActualTask() {
     return super.getTask();
   }
 
+  /**
+   * Retrieves the information on the format of the task to be saved.
+   *
+   * @return the String representation of how the task will be saved
+   */
   @Override
   public String getSaveFormat() {
     if (super.getStatus().equals("[ ]")) {

@@ -2,13 +2,21 @@ package parser;
 
 import commands.*;
 import duke.DukeException;
+import java.util.ArrayList;
 import ui.Ui;
 
-
-import java.util.ArrayList;
-
+/**
+ * The Parser class attempts to make sense of
+ * user's input and generates commands accordingly.
+ */
 public final class Parser {
 
+  /**
+   * Generates the command corresponding to user's input.
+   *
+   * @param str input line of words, possibly containing any character
+   * @return the command corresponding to keywords or null if none detected
+   */
   public Command parse(String str) {
     Command c = null;
     try {
@@ -24,7 +32,12 @@ public final class Parser {
     return c;
   }
 
-
+  /**
+   * Creates commands specific to user's input.
+   * @param s the words detected by parse method
+   * @return created executable command
+   * @throws DukeException if user's input does not contain correct keywords
+   */
   public Command chat(ArrayList<String> s) throws DukeException {
     if (s == null || s.isEmpty()) {
       throw new DukeException("Please chek your input!");

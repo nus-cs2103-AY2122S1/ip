@@ -1,37 +1,42 @@
 package tasks;
 
 /**
- * The tasks.ToDoTask class is a child class for tasks.Task
+ * The DeadlineTask Class inherits Task Class
  * to support different specificities of a task
- * as input by user
+ * as per input by user.
  */
 public final class ToDoTask extends Task {
 
   /**
-   * The String to store the type of task information
-   * that identifies a ToDo task
+   * Stores the type of task information
+   * that identifies a ToDoTask.
    */
   private final String type = "[T]";
 
   /**
-   * Constructor for a ToDo task
+   * Constructs a ToDoTask.
    *
-   * @param s the input string to describe the ToDO task
+   * @param s the input string to describe the task
    */
   public ToDoTask(String s) {
     super(s);
   }
 
   /**
-   * To retrieve the information on the type of tasks.Task
+   * Retrieves the information of the type of task.
    *
-   * @return the String description of the type of tasks.Task
+   * @return the String description of the type of task
    */
   @Override
   public String getType() {
     return this.type;
   }
 
+  /**
+   * Retrieves the information on the format of the task to be saved.
+   *
+   * @return the String representation of how the task will be saved
+   */
   @Override
   public String getSaveFormat() {
     if (super.getStatus().equals("[ ]")) {

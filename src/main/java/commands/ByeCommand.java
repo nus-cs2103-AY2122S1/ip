@@ -1,22 +1,33 @@
 package commands;
 
 import duke.Duke;
+import java.util.ArrayList;
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
-import java.util.ArrayList;
-
+/**
+ * The ByeCommand Class inherits Command and is
+ * a specific type of executable command.
+ */
 public final class ByeCommand extends Command{
 
+  /**
+   * Constructs the ByeCommand object.
+   *
+   * @param s the entire line of user input
+   */
   public ByeCommand(ArrayList<String> s) {
     super(s);
   }
 
-  public boolean isExit() {
-    return true;
-  }
-
+  /**
+   * Executes the command.
+   *
+   * @param lst the TaskList object that stores the list of tasks
+   * @param ui the Ui object that interacts with the user
+   * @param storage the Storage object that saves changes to stored tasks, if any
+   */
   @Override
   public void execute(TaskList lst, Ui ui, Storage storage) {
     Duke.terminate();

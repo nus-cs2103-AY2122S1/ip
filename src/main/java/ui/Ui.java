@@ -2,6 +2,11 @@ package ui;
 
 import java.util.Scanner;
 
+/**
+ * The Ui Class is responsible for interactions with
+ * the user directly and displays various dialog prompts
+ * to help user with input.
+ */
 public final class Ui{
   private final static String LOGO = " ____        _        \n"
           + "|  _ \\ _   _| | _____ \n"
@@ -12,17 +17,28 @@ public final class Ui{
 
   private final Scanner sc;
 
+  /**
+   * Constructs an Ui.
+   */
   public Ui() {
     this.sc = new Scanner(System.in);
   }
 
+  /**
+   * Displays the message when program is first started.
+   */
   public static void welcomeMessage() {
     System.out.println("Hello from\n" + LOGO);
     System.out.println(separator);
-    System.out.println("     Hi! I am duke.Duke!\n" + "     What can I do for you?");
+    System.out.println("     Hi! I am ... Duke!\n" + "     What can I do for you?");
     System.out.println(separator);
   }
 
+  /**
+   * Detects the next line of input by user.
+   *
+   * @return the detected line of input
+   */
   public String readLine() {
     String s = " ";
     if (sc.hasNext()) {
@@ -31,6 +47,11 @@ public final class Ui{
     return s;
   }
 
+  /**
+   * Displays certain dialogs as feedback to user.
+   *
+   * @param s the words to be displayed
+   */
   public static void showInput(String ... s) {
     System.out.println(separator);
     for (String str : s) {
@@ -39,16 +60,25 @@ public final class Ui{
     System.out.println(separator);
   }
 
+  /**
+   * Displays the user's input as confirmation that
+   * the input was indeed detected.
+   *
+   * @param s the words to be displayed.
+   */
   public static void showAsUserInput(String s) {
     System.out.println(s);
   }
 
+  /**
+   * Displays the message upon termination of program.
+   */
   public static void showExitMessage() {
     showInput("Bye. Hope to see you again soon!");
   }
 
   /**
-   * To display commands to help user with input as much as possible
+   * Displays commands to help user with input as much as possible
    */
   public static void helperMessage() {
     System.out.println(separator);
