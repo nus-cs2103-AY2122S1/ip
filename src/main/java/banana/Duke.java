@@ -256,6 +256,7 @@ class Deadline extends Task {
         }
 
     }
+
 }
 
 class Event extends Task {
