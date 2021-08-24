@@ -1,3 +1,4 @@
+package duke;
 /**
  * Class that deals with reading user input
  */

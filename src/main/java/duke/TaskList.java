@@ -1,3 +1,4 @@
+package duke;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -100,7 +101,7 @@ public class TaskList {
         } else {
             String[] splitLine = nextLine.split("todo");
             String title = splitLine[1];
-            Task nextTask = new Todo(title);
+            Todo nextTask = new Todo(title);
             System.out.println("Got it. I've added this task:");
             myList.add(nextTask);
             System.out.println(nextTask.toString());
@@ -122,7 +123,7 @@ public class TaskList {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 LocalDateTime parsedDate = LocalDateTime.parse(date, formatter);
                 String title = splitLine[0].split("deadline")[1];
-                Task nextTask = new Deadline(title, parsedDate);
+                Deadline nextTask = new Deadline(title, parsedDate);
                 System.out.println("Got it. I've added this task:");
                 myList.add(nextTask);
                 System.out.println(nextTask.toString());
@@ -147,7 +148,7 @@ public class TaskList {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 LocalDateTime parsedDate = LocalDateTime.parse(date, formatter);
                 String title = splitLine[0].split("event")[1];
-                Task nextTask = new Event(title, parsedDate);
+                Event nextTask = new Event(title, parsedDate);
                 System.out.println("Got it. I've added this task:");
                 myList.add(nextTask);
                 System.out.println(nextTask.toString());

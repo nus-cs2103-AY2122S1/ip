@@ -1,3 +1,4 @@
+package duke;
 /**
  * A class that is an exception to be thrown for errors relating to the Duke.
  */

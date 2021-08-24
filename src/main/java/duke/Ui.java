@@ -1,3 +1,4 @@
+package duke;
 /**
  * Ui class that deals with user interactions.
  */

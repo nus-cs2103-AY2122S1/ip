@@ -1,3 +1,4 @@
+package duke;
 /**
  * Code for the main skeleton of the Bot. When Duke is run, An instance of this class is created and used to run it.
  *
