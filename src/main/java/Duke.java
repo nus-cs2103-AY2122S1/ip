@@ -113,47 +113,47 @@ public class Duke {
                         + --Task.noOfTask
                         + " tasks left in the list.\n");
             } else {
-                    try {
-                        //Initialise the task if its a valid input.
-                        Task newTask = null;
-                        if (str.contains("todo")) {
-                            newTask = new Todo(str.replace("todo ", ""));
-                        } else if (str.contains("deadline")) {
-                            if (!str.contains("/by")) {
-                                newTask = new Deadline(str.replace("deadline ", ""), "");
-                            } else {
-                                String[] parts = str.split(" /by ");
-                                newTask = new Deadline(parts[0].replace("deadline " , ""), parts[1]);
-                            }
-                        } else if (str.contains("event")) {
-                            if (!str.contains("/at")) {
-                                newTask = new Event(str.replace("event ", ""), "");
-                            } else {
-                                String[] parts = str.split(" /at ");
-                                newTask = new Event(parts[0].replace("event ", ""), parts[1]);
-                            }
-                        }
-                        if (newTask != null) {
-                            //Add task to the list and print message.
-                            taskList.add(Task.noOfTask - 1, newTask);
-                            System.out.print("Roger! I will add this task in: \n"
-                                    + newTask.getTaskType()
-                                    + newTask.checkIsDone()
-                                    + " "
-                                    + newTask.getDescription() + "\n"
-                                    + "Now you have "
-                                    + Task.noOfTask
-                                    + " tasks left in the list.\n");
-
+                try {
+                    //Initialise the task if its a valid input.
+                    Task newTask = null;
+                    if (str.contains("todo")) {
+                        newTask = new Todo(str.replace("todo ", ""));
+                    } else if (str.contains("deadline")) {
+                        if (!str.contains("/by")) {
+                            newTask = new Deadline(str.replace("deadline ", ""), "");
                         } else {
-                            //For invalid input message
-                            throw new WrongInputException();
+                            String[] parts = str.split(" /by ");
+                            newTask = new Deadline(parts[0].replace("deadline " , ""), parts[1]);
                         }
-
-                    } catch (DukeException e) {
-                        System.out.print( e.toString()
-                                + "\n");
+                    } else if (str.contains("event")) {
+                        if (!str.contains("/at")) {
+                            newTask = new Event(str.replace("event ", ""), "");
+                        } else {
+                            String[] parts = str.split(" /at ");
+                            newTask = new Event(parts[0].replace("event ", ""), parts[1]);
+                        }
                     }
+                    if (newTask != null) {
+                        //Add task to the list and print message.
+                        taskList.add(Task.noOfTask - 1, newTask);
+                        System.out.print("Roger! I will add this task in: \n"
+                                + newTask.getTaskType()
+                                + newTask.checkIsDone()
+                                + " "
+                                + newTask.getDescription() + "\n"
+                                + "Now you have "
+                                + Task.noOfTask
+                                + " tasks left in the list.\n");
+
+                    } else {
+                        //For invalid input message
+                        throw new WrongInputException();
+                    }
+
+                } catch (DukeException e) {
+                    System.out.print( e.toString()
+                            + "\n");
+                }
             }
             System.out.print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         }
