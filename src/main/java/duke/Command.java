@@ -65,7 +65,6 @@ public class Command {
                     }
                 case "deadline":
                     try {
-
                         String[] deadlineArr = sc.nextLine().split("/by");
                         if(deadlineArr[0].strip().isEmpty()){
                             throw new DukeException("");
