@@ -20,12 +20,14 @@ public class DeadlineCommand extends AddTaskCommand {
     @Override
     public String execute(TaskList taskList) throws DukeException {
         String[] paramArray = super.splitUserParams(commandParams, COMMAND_WORD, Deadline.SPLIT_WORD);
+        
         String desc = super.extractDesc(paramArray, COMMAND_WORD);
         LocalDate byDate = super.extractDate(paramArray);
         LocalTime byTime = super.extractTime(paramArray);
 
         Task deadline = new Deadline(desc, byDate, byTime);
         taskList.addTask(deadline);
+        
         return String.format(CommandMessage.MESSAGE_CREATED_DEADLINE, deadline, taskList.getCapacity());
     }
 }

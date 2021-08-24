@@ -18,14 +18,19 @@ public abstract class AddTaskCommand extends Command {
         this.dateTimeFormat = dateTimeFormat;
     }
     
-    protected String[] splitUserParams(String userParams, String commandName, String splitKey) throws DukeException {
+    protected String[] splitUserParams(String userParams, String commandName, String splitKey) 
+            throws DukeException {
+        
         try {
             String[] splitOnKey = userParams.split(" /" + splitKey + ' ', 2);
             String[] dateTime = splitOnKey[1].split(" ", 2);
             return new String[] {splitOnKey[0], dateTime[0], dateTime[1]};
             
         } catch (ArrayIndexOutOfBoundsException exception) {
-            throw new DukeException(String.format(CommandMessage.ERROR_IMPROPER_FORMATTING, commandName, splitKey));
+            throw new DukeException(String.format(
+                    CommandMessage.ERROR_IMPROPER_FORMATTING, 
+                    commandName, 
+                    splitKey));
         }
     }
 
@@ -44,6 +49,7 @@ public abstract class AddTaskCommand extends Command {
         
         String dateString = paramArray[1].trim();
         List<DateTimeFormatter> dateFormatterList = dateTimeFormat.getDateFormatterList();
+        
         for (DateTimeFormatter formatter: dateFormatterList) {
             try {
                 return LocalDate.parse(dateString, formatter);
@@ -59,6 +65,7 @@ public abstract class AddTaskCommand extends Command {
         
         String timeString = paramArray[2].trim().toUpperCase();
         List<DateTimeFormatter> timeFormatterList = dateTimeFormat.getTimeFormatterList();
+        
         for (DateTimeFormatter formatter: timeFormatterList) {
             try {
                 return LocalTime.parse(timeString, formatter);

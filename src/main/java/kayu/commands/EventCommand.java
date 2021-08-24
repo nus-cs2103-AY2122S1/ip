@@ -20,6 +20,7 @@ public class EventCommand extends AddTaskCommand {
     @Override
     public String execute(TaskList taskList) throws DukeException {
         String[] paramArray = super.splitUserParams(commandParams, COMMAND_WORD, Event.SPLIT_WORD);
+        
         String desc = super.extractDesc(paramArray, COMMAND_WORD);
         LocalDate atDate = super.extractDate(paramArray);
         LocalTime atTime = super.extractTime(paramArray);

@@ -42,7 +42,9 @@ public class Kayu {
         chatBot.logo();
         init();
         chatBot.greet();
+        
         readCommandsUntilBye();
+        
         chatBot.exit();
     }
     
@@ -62,6 +64,7 @@ public class Kayu {
         do {
             String userInput = scanner.nextLine().trim();
             command = parser.parseToCommand(userInput);
+            
             try {
                 String feedback = command.execute(taskList);
                 List<Task> tasks = taskList.getTasks();

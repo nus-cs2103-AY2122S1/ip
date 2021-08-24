@@ -17,6 +17,7 @@ public class DeleteCommand extends Command {
         try {
             int taskNumber = Integer.parseInt(commandParams);
             Task selectedTask = taskList.deleteTask(taskNumber);
+            
             return String.format(CommandMessage.MESSAGE_DELETED_TASK, selectedTask, taskList.getCapacity());
             
         } catch (NumberFormatException exception) {

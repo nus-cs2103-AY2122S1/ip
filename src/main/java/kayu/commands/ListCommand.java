@@ -20,10 +20,12 @@ public class ListCommand extends Command {
         if (tasks.isEmpty()) {
             return CommandMessage.MESSAGE_EMPTY_LIST;
         }
+        
         StringBuilder tasksAsString = new StringBuilder(CommandMessage.MESSAGE_LIST_CONTENTS);
         for (int idx = 0; idx < tasks.size(); idx ++) {
             tasksAsString.append(String.format("\n\t%d. %s", idx + 1, tasks.get(idx)));
         }
+        
         return tasksAsString.toString();
     }
 }

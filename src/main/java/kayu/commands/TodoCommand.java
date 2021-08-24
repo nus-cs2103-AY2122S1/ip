@@ -17,8 +17,10 @@ public class TodoCommand extends AddTaskCommand {
     @Override
     public String execute(TaskList taskList) throws DukeException {
         String desc = super.extractDesc(new String[] {commandParams}, COMMAND_WORD);
+        
         Task todo = new Todo(desc);
         taskList.addTask(todo);
+        
         return String.format(CommandMessage.MESSAGE_CREATED_TODO, todo, taskList.getCapacity());
     }
 }

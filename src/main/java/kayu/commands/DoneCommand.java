@@ -17,6 +17,7 @@ public class DoneCommand extends Command {
         try {
             int taskNumber = Integer.parseInt(commandParams);
             Task selectedTask = taskList.updateTaskAsDone(taskNumber);
+            
             return String.format(CommandMessage.MESSAGE_TASK_DONE, selectedTask);
 
         } catch (NumberFormatException exception) {
