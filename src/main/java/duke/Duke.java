@@ -3,7 +3,7 @@ package duke;
 import task.TaskList;
 
 /**
- * Main duke.Duke class
+ * Main Duke class
  */
 public class Duke {
     private final DukeListener listener;
@@ -26,6 +26,11 @@ public class Duke {
         listener.startListen();
     }
 
+    /**
+     * Main function
+     *
+     * @param args No arguments need to be passed in
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.start();

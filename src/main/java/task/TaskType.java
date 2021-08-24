@@ -5,6 +5,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 
+/**
+ * Different task types, as well as
+ * functions related to the differentiation
+ * and creation of tasks
+ */
 public enum TaskType {
     TODO,
     EVENT,
@@ -36,11 +41,12 @@ public enum TaskType {
         }
     }
 
-    /** Converts a string to a date
+    /**
+     * Converts a string to a date
      *
      * @param date String to convert
      * @return LocalDate object
-     * @throws DateTimeParseException Thrown if error in parsing
+     * @throws DateTimeParseException Thrown if error in parsing date
      */
     public static LocalDate getDate(String date) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");

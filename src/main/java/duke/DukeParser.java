@@ -4,6 +4,7 @@ import task.TaskList;
 import task.TaskType;
 
 import java.time.format.DateTimeParseException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,9 +13,6 @@ import java.util.regex.Pattern;
  */
 public class DukeParser {
 
-    /**
-     * task.Task list that this Parser object edits
-     */
     final private TaskList taskList;
 
     /**
@@ -33,15 +31,17 @@ public class DukeParser {
             "list( /date (\\d{1,2}/\\d{1,2}/\\d{4}+))?",
             Pattern.CASE_INSENSITIVE);
 
-    /**Constructor
+    /**
+     * Constructor; instantiates the task list to be edited
      *
-     * @param tasks task.Task List to edit using this Parser object
+     * @param tasks Task list to edit using this Parser object
      */
     public DukeParser(TaskList tasks) {
         this.taskList = tasks;
     }
 
-    /** Parses Input for any list related functions, and carries it out
+    /**
+     * Matches input with any regex, and passes it to the correct function
      *
      * @param input String input from the Listener given by the User
      */
@@ -53,17 +53,17 @@ public class DukeParser {
         final Matcher checkDeadline = deadlinePattern.matcher(input);
         final Matcher checkEvent = eventPattern.matcher(input);
 
-
         if (checkList.matches()) {
+            // List tasks
             if (checkList.group(2) != null) {
-                // Display List corresponding to the dates
+                // Display list corresponding to the dates
                 try {
                     taskList.displayList(task -> task.isDate(TaskType.getDate(checkList.group(2))));
                 } catch (DateTimeParseException e) {
                     System.out.println("Please enter a valid date! :(");
                 }
             } else {
-                // Display items
+                // Display all tasks
                 taskList.displayList(task -> true);
             }
 

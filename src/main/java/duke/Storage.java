@@ -12,11 +12,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Contains all storage functions for Duke
+ */
 public class Storage {
 
     private static final String FILE_LOCATION = "data\\TaskList.txt";
     private static final String PATH_LOCATION = "data";
 
+    /**
+     * Saves the task list to a .txt file whose path
+     * is specified as FILE_LOCATION
+     *
+     * @param tasks task list to save
+     */
     public static void saveList(ArrayList<Task> tasks) {
         try {
             FileWriter writer = new FileWriter(Storage.FILE_LOCATION, false);
@@ -25,12 +34,17 @@ public class Storage {
                 writer.write("\r\n");
             }
             writer.close();
-            // System.out.println(duke.Ui.OUTPUT_DISPLAY + "duke.Duke-san saved your list UwU");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Loads a .txt file from the path
+     * specified as FILE_LOCATION
+     *
+     * @return Loaded task list
+     */
     public static TaskList loadList() {
         try {
             File file = new File(Storage.FILE_LOCATION);
@@ -41,7 +55,6 @@ public class Storage {
                 String task = text.nextLine();
                 loaded.add(StringToTask(task));
             }
-//            System.out.println("FILE LOADED!");
             return new TaskList(loaded);
 
         } catch (FileNotFoundException e) {
@@ -60,7 +73,8 @@ public class Storage {
     }
 
     /**
-     * Converts a given string for the .txt save file to a valid task.Task
+     * Converts a given string for the .txt save file to a valid Task
+     *
      * @param task String from .txt save file
      * @return task.Task corresponding to the string
      * @throws ParseException Thrown if string from file contains errors

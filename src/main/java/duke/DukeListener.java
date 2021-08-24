@@ -8,10 +8,11 @@ import java.util.Scanner;
  * Waits for and processes a User Input
  */
 public class DukeListener {
-    final Scanner sc;
-    final DukeParser parser;
+    private final Scanner sc;
+    private final DukeParser parser;
 
-    /** Constructor for Listener that takes instantiates a Scanner and a Parser object
+    /**
+     * Constructor for Listener that takes instantiates a Scanner and a Parser object
      *
      * @param taskList The task.TaskList that the parser should manage
      */
@@ -20,21 +21,15 @@ public class DukeListener {
         parser = new DukeParser(taskList);
     }
 
-    /**Waits for user input.
-     * Transfers input to the parser, and/or stops terminates the listening.
+    /**
+     * Waits for user input.
+     * Transfers input to the parser, or terminates the listening.
      */
     public void startListen() {
         while(true) {
             // Receive Input text
             String input = sc.nextLine();
             System.out.println(Ui.LINE);
-
-            /*
-            TODO refactor to command objects:
-            ___Command extends Command
-            Ui.displayHelp() prints all toString()s
-            command.execute() to carry out the command
-             */
 
             // Stop listening if "gubbai" is mentioned
             if (input.equals("gubbai")) {

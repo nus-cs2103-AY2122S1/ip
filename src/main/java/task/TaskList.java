@@ -8,13 +8,28 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 
+/**
+ * Implementation of task list, which is a list of tasks
+ */
 public class TaskList {
+
     private final ArrayList<Task> tasks;
 
+    /**
+     * Constructor, creates new task list
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
-    public TaskList(ArrayList<Task> tasks) { this.tasks = tasks; }
+
+    /**
+     * Constructor, takes in and uses existing task lists
+     *
+     * @param tasks Existing task list to use
+     */
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     /**
      * Prints the number of tasks in the list
@@ -46,8 +61,7 @@ public class TaskList {
                     });
         Storage.saveList(tasks);
     }
-
-
+    
     /**
      * Marks the task as complete (or incomplete if it is already complete)
      *

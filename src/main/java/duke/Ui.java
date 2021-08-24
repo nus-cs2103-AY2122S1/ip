@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Constants and variables used for output
+ */
 public class Ui {
     public static final String LINE = "____________________________________________________________\n";
     public static final String OUTPUT_DISPLAY = "  →   ";
@@ -39,6 +42,7 @@ public class Ui {
                 welcomeText + '\n' +
                 mascot + '\n'
         );
+
         System.out.println(
                 Ui.LINE +
                 "Hello! I'm Duke!\n" +
@@ -47,6 +51,9 @@ public class Ui {
         );
     }
 
+    /**
+     * Display list of possible commands
+     */
     public static void displayHelp() {
         System.out.println("Duke-san welcomes you! Here are a list of the available commands:\n" +
                 "_________________________________________________________________________________________\n" +
