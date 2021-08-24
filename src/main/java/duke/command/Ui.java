@@ -13,13 +13,12 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-
     /**
      * Constructor of Ui.
      *
      * @param taskList The taskList which stores data of the user's event.
      */
-    public Ui (TaskList taskList) {
+    public Ui(TaskList taskList) {
         this.taskList = taskList;
     }
 

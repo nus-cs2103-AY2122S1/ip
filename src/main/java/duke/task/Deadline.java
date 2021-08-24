@@ -6,7 +6,8 @@ import java.time.LocalTime;
 public class Deadline extends Task {
     private LocalDate deadlineDate;
     private LocalTime deadlineTime;
-    public Deadline (String task, String taskTime) {
+
+    public Deadline(String task, String taskTime) {
         super(task);
         String[] dateAndTime = taskTime.split(" ");
         System.out.println(dateAndTime[0]);
@@ -15,7 +16,7 @@ public class Deadline extends Task {
         this.deadlineTime = LocalTime.parse(dateAndTime[1]);
     }
 
-    public Deadline (String task, boolean done, String taskTime) {
+    public Deadline(String task, boolean done, String taskTime) {
         super(task, done);
         String[] dateAndTime = taskTime.split(" ");
         this.deadlineDate = LocalDate.parse(dateAndTime[0]);

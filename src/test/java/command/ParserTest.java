@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
-    public void judgeTypeTest(){
+    public void judgeTypeTest() {
         String invalidInput = "This is not a valid input";
         String validInput1 = "deadline go to school /by 2021-08-10 00:00";
         String validInput2 = "todo Finish ip";
@@ -20,7 +20,7 @@ public class ParserTest {
     }
 
     @Test
-    public void isValidDeadlineTaskTest() throws Exception{
+    public void isValidDeadlineTaskTest() throws Exception {
         String input1 = "deadline task1 /by 2020-12-08 09:00";
         String input2 = "deadline task2 /by 2010-12-08 20:00";
         Task expectedTask1 = new Deadline("task1", "2020-12-08 09:00");
