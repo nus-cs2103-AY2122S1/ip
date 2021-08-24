@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 /**
  * The Task class encapsulates a task with a String and
  * whether the task is done or not.
@@ -10,26 +12,26 @@ public class Task {
 
     private final char TASK_TYPE;
     private String taskName;
-    private String dateTime;
+    private LocalDateTime dateTime;
     private boolean isDone;
 
 
     public Task(String taskName, TaskType type) {
         this.taskName = taskName;
         this.TASK_TYPE = TaskType.getTask(type);
-        this.dateTime = "";
         isDone = false;
+        dateTime =  LocalDateTime.now();
     }
 
 
-    public Task(String taskName, TaskType type, String datetime) {
+    public Task(String taskName, TaskType type, LocalDateTime dateTime) {
         this.taskName = taskName;
         this.TASK_TYPE = TaskType.getTask(type);
-        this.dateTime = datetime;
+        this.dateTime = dateTime;
         isDone = false;
     }
 
-    public Task(String taskName, TaskType type, String dateTime, boolean isDone) {
+    public Task(String taskName, TaskType type, LocalDateTime dateTime, boolean isDone) {
         this.taskName = taskName;
         this.TASK_TYPE = TaskType.getTask(type);
         this.isDone = isDone;
@@ -40,7 +42,7 @@ public class Task {
         return taskName;
     }
 
-    public String getDatetime() {
+    public LocalDateTime getDatetime() {
         return this.dateTime;
     }
 

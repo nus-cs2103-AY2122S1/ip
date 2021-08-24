@@ -35,6 +35,9 @@ public class GnosisConstants {
 
     public static final String DONE_COMMAND_NUM_INPUT_EXCEPT_MESSAGE = "Please enter only numbers after done command";
 
+    public static final String DATETIME_FORMAT_EXCEPT_MESSAGE = "ERROR, ENTER DATE FORMAT AS SUCH:\n" +
+            "<day>/<month>/<year> <24HR format time>\ne.g: 14/08/2021 1600";
+
 
 
 

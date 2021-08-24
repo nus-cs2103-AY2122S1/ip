@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 /**
  *
  * This class encapsulates a todo task.
@@ -11,7 +13,7 @@ public class Todo extends Task {
     }
 
     public Todo(String task, Boolean isTaskDone) {
-        super(task, TaskType.TODO, "", isTaskDone);
+        super(task, TaskType.TODO, LocalDateTime.now(), isTaskDone);
     }
 
     @Override

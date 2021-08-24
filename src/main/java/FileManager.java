@@ -1,14 +1,14 @@
 import java.io.*;
-import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileManager {
 
-    private static String DIRECTORY_PATH = "data";
+    private static final String DIRECTORY_PATH = "data";
 
     private static final String FILE_PATH = DIRECTORY_PATH + "/gnosis.csv";
     private static final File file = new File(FILE_PATH);
@@ -31,12 +31,14 @@ public class FileManager {
                     return new Todo(taskName,isTaskDone);
                 } else if (taskType == TaskType.EVENT) {
                     String schedule = tokens[3];
-                    return new Event(taskName,isTaskDone, schedule);
+                    LocalDateTime dt = LocalDateTime.parse(schedule);
+                    return new Event(taskName,isTaskDone, dt);
                 } else if (taskType == TaskType.DEADLINE) {
                     String deadline = tokens[3];
-                    return new Deadline(taskName,isTaskDone, deadline);
+                    LocalDateTime dt = LocalDateTime.parse(deadline);
+                    return new Deadline(taskName,isTaskDone, dt);
                 }
-                return new Task(taskName,taskType,"",isTaskDone);
+                return new Task(taskName,taskType,null,isTaskDone);
             }).collect(Collectors.toList());
 
         } catch (IOException e) {
@@ -57,7 +59,7 @@ public class FileManager {
                 String oneLine = record.getTaskType() + DELIMITER +
                         taskDone + DELIMITER +
                         record.getTaskName() + DELIMITER +
-                        record.getDatetime();
+                        record.getDatetime().toString();
                 writer.write(oneLine);
                 writer.newLine();
             }
@@ -78,6 +80,7 @@ public class FileManager {
     }
 
     public static boolean isDataFileAvail() {
+        System.out.println(Files.isDirectory(Paths.get(DIRECTORY_PATH)) && file.exists());
         return Files.isDirectory(Paths.get(DIRECTORY_PATH)) && file.exists();
     }
 }
