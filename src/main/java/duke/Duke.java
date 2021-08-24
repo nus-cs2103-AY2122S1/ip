@@ -13,18 +13,28 @@ import duke.user.Ui;
 import duke.user.Parser;
 import duke.user.DukeException;
 
+/**
+ * Main class for the Duke program
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for the Duke instance
+     * @param filePath the String representing the path of the file where the data is saved
+     */
     public Duke(String filePath) {
-        storage = new Storage("data/Duke.txt");
+        storage = new Storage(filePath);
         tasks = new TaskList(storage.loadFromFile());
         ui = new Ui();
     }
 
+    /**
+     * Method which begins the majority of the program execution
+     */
     public void run() {
         boolean taskListIsUpdated = false;
         boolean taskListIsAddedTo = false;
@@ -111,6 +121,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method to start the whole program
+     * @param args NIL
+     */
     public static void main(String[] args) {
         new Duke("data/Duke.txt").run();
     }
