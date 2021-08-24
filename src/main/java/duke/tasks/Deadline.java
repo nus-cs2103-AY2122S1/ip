@@ -20,6 +20,7 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    @Override
     public String formatString() {
         return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
     }
