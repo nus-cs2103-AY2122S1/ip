@@ -14,7 +14,7 @@ public class MarkDoneCommand extends Command {
 
     public String execute(TaskList taskList) throws DukeException {
         boolean isInputValid = this.taskNumber <= taskList.getNumOfTasks();
-        if (isInputValid) {
+        if (!isInputValid) {
             throw new DukeException("OOPS!!! Please choose a smaller number!");
         }
         taskList.markAsDone(this.taskNumber);
