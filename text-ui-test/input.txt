@@ -2,6 +2,10 @@ deadline go for a jog /by 2/12/2021 1800
 deadline go for a jog /by 2/12/2021 1900
 event go for a jog /at 2/12/2021 1800 2100
 event go for a jog /at 2/12/2021 1900 2100
+find go
+find for
+find a 
+find jog
 date 2/12/2021
 delete 1 
 delete 2

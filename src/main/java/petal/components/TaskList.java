@@ -71,7 +71,7 @@ public class TaskList {
             ui.output("Okay. I've deleted this task:\n" + toBeDeleted  + "\nYou now have " + tasks.size()
                     + " task(s)!");
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new InvalidInputException("Invalid task number given! Please enter another value!", e);
+            throw new InvalidInputException(Responses.INVALID_TASK_NUMBER, e);
         }
     }
 
@@ -88,11 +88,11 @@ public class TaskList {
         String[] deadlineEvent = type.equals("deadline") ? message.split("/by")
                 : message.split("/at");
         if (message.isBlank() || deadlineEvent[0].isBlank()) {
-            throw new EmptyDescException("The description cannot be empty! Enter a valid one! :(");
+            throw new EmptyDescException(Responses.EMPTY_DESCRIPTION);
         }
         if ((type.equals("deadline") || type.equals("event")) && deadlineEvent.length < 2) {
             //No time given or the command /by or /at wasn't given by the user
-            throw new InvalidInputException("The format used was wrong! Try again :(");
+            throw new InvalidInputException(Responses.INVALID_TASK_NUMBER);
         }
         switch (type) {
         case "todo":
@@ -102,14 +102,14 @@ public class TaskList {
             try {
                 task = new Deadline(deadlineEvent[0], deadlineEvent[1], false);
             } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-                throw new InvalidInputException("The date/time format used was wrong! Try again :(");
+                throw new InvalidInputException(Responses.INVALID_DATE_TIME);
             }
             break;
         default: //Represents the Event task
             try {
                 task = new Event(deadlineEvent[0], deadlineEvent[1], false);
             } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-                throw new InvalidInputException("The date/time format used was wrong! Try again :(");
+                throw new InvalidInputException(Responses.INVALID_DATE_TIME);
             }
         }
         addTask(task);
@@ -129,7 +129,7 @@ public class TaskList {
             Task taskToBeCompleted = tasks.get(Integer.parseInt(indexOfTask) - 1);
             taskToBeCompleted.taskDone();
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new InvalidInputException("Invalid task number given! Please enter another value!", e);
+            throw new InvalidInputException(Responses.INVALID_TASK_NO);
         }
     }
 
@@ -162,6 +162,31 @@ public class TaskList {
      */
     public void tasksOnThisDay(String date) throws InvalidInputException {
         ui.output(calendar.tasksOnThisDate(Parser.parseDate(date)));
+    }
+
+    /**
+     * Displays tasks with the keyword
+     *
+     * @param keyword The keyword
+     */
+    public void tasksWithKeyword(String keyword) throws InvalidInputException {
+        keyword = keyword.trim();
+        if (keyword.equals("")) {
+            throw new InvalidInputException(Responses.INVALID_FORMAT);
+        } else {
+            int count = 1;
+            StringBuilder result = new StringBuilder("Here are the tasks:");
+            for (Task t : tasks) {
+                if (t.isKeyWordPresent(keyword)) {
+                    result.append('\n').append(count++).append(". ").append(t);
+                }
+            }
+            if (count == 1) { //No tasks appended
+                ui.output("No tasks!");
+            } else {
+                ui.output(result.toString());
+            }
+        }
     }
 
     /**

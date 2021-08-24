@@ -14,6 +14,10 @@ public enum Responses {
     START_MESSAGE("Welcome to Petal (•◡•)/" + "\nI am the best chat bot you'll meet! Don't be shy, say something! :P"
                 + "\nPssss here's a disclaimer: use the 'bye' command to exit or else your tasks won't save properly!"),
     //Error responses
+    INVALID_FORMAT("Invalid format given! Please try again :("),
+    INVALID_TASK_NO("Invalid task number given! Please enter another value!"),
+    EMPTY_DESCRIPTION("The description cannot be empty! Enter a valid one! :("),
+    INVALID_DATE_TIME("The date/time format used was wrong! Try again :("),
     UNINTELLIGIBLE("I do not understand what you mean :("),
     REQUIRED_FORMAT("Use 'todo <insert activity>' to create a to-do!"
                 + "\nUse 'deadline <insert activity> /by <DD/MM/YYYY> <Time in 24-hour format>' "
