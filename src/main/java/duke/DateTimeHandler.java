@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates a class that handles parsing of date-time inputs
+ */
 public class DateTimeHandler {
     String[] formats = {
             "dd-MM-yyyy hh:mm a",
@@ -18,6 +21,14 @@ public class DateTimeHandler {
             dtfList[i] = DateTimeFormatter.ofPattern(formats[i]);
         }
     }
+
+    /**
+     * Returns whether or not the input string can be parsed by the given formatter
+     *
+     * @param dtf The DateTimeFormatter object
+     * @param s The string to be parsed
+     * @return Whether or not the string can be parsed
+     */
     private boolean tryToParse(DateTimeFormatter dtf, String s) {
         try {
             LocalDateTime.parse(s, dtf);
@@ -26,6 +37,13 @@ public class DateTimeHandler {
         }
         return true;
     }
+
+    /**
+     * Returns a LocalDateTime if able to parse the given string using one of the DateTimeFormatters in dtfList
+     *
+     * @param s String to be parsed
+     * @return The created LocalDateTime object if the string can be parsed, null if it cannot be parsed.
+     */
     public LocalDateTime parseDate(String s) {
         for (DateTimeFormatter dateTimeFormatter : dtfList) {
             if (tryToParse(dateTimeFormatter, s)) {
@@ -34,6 +52,12 @@ public class DateTimeHandler {
         }
         return null;
     }
+
+    /**
+     * Returns a String array of valid date formats
+     *
+     * @return The String array containing the valid date formats
+     */
     public String[] getFormatList() {
         String[] res = new String[formats.length+1];
         res[0] = "Valid date formats:";
@@ -41,6 +65,11 @@ public class DateTimeHandler {
         return res;
     }
 
+    /**
+     * Returns a String to be printed when an invalid format is entered
+     *
+     * @return The String to be printed
+     */
     public String invalidFormat() {
         return "Please enter a valid date-time format. Type formats to see valid formats";
     }

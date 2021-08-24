@@ -5,6 +5,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.UI;
 
+/**
+ * Encapsulates the bye command, for terminating the program.
+ */
 public class ByeCommand extends Command {
 
     public ByeCommand(String arguments) {

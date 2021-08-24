@@ -2,6 +2,10 @@ package duke;
 
 import duke.commands.*;
 
+/**
+ * Encapsulates a parser class which parses user input
+ * and creates a different command object depending on the input
+ */
 public class Parser {
     private final Command[] commandList = {
             new ListCommand(""),
@@ -15,6 +19,12 @@ public class Parser {
             new FindCommand(""),
     };
 
+    /**
+     * Takes in a string input from the user and returns the invoked command object.
+     *
+     * @param input The string input by the user
+     * @return The created command object
+     */
     public Command parse(String input) {
         for(Command c : commandList) {
             if(input.startsWith(c.startsWith())) {

@@ -5,6 +5,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.UI;
 
+/**
+ * Encapsulates the abstract command class that concrete command implementations extend from
+ */
 public abstract class Command {
     private String arguments;
 
@@ -12,16 +15,45 @@ public abstract class Command {
         this.arguments = arguments;
     }
 
+    /**
+     * Returns a new command with the provided String as argument. Factory method
+     *
+     * @param arguments Arguments to be passed into new Command object
+     * @return The created Command
+     */
     public abstract Command of(String arguments);
 
+    /**
+     * Executes the command
+     *
+     * @param tl The TaskList object to interact with the list of tasks
+     * @param s The Storage object to interact with the output file
+     * @param ui The UI object to interact with the user interface
+     * @param dth The DateTimeHandler object to interact with date-times.
+     */
     public abstract void execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth);
 
+    /**
+     * Returns the prefix of the command
+     *
+     * @return The command prefix
+     */
     public abstract String startsWith();
 
+    /**
+     * Closes the program if true
+     *
+     * @return Boolean to determine whether or not to close the program
+     */
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Returns the arguments for the command
+     *
+     * @return The command arguments
+     */
     public String getArguments() {
         return arguments;
     }

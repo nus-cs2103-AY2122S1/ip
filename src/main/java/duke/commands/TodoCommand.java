@@ -6,6 +6,9 @@ import duke.TaskList;
 import duke.Todo;
 import duke.UI;
 
+/**
+ * Encapsulates the todo command, used to create a todo task
+ */
 public class TodoCommand extends Command {
 
     public TodoCommand(String arguments) {

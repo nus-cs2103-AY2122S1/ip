@@ -6,6 +6,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.UI;
 
+/**
+ * Encapsulates the delete command, used to delete tasks from the task list
+ */
 public class DeleteCommand extends Command {
 
     public DeleteCommand(String arguments) {

@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDateTime;
 
+/**
+ * Encapsulates an event task with a start date
+ */
 public class Event extends Task {
     private LocalDateTime startDate;
     public Event(String description, Boolean completionStatus, LocalDateTime startDate) {

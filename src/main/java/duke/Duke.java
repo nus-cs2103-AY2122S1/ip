@@ -2,6 +2,9 @@ package duke;
 
 import duke.commands.Command;
 
+/**
+ * Encapsulates the main Duke class which contains the main function to run the chat bot
+ */
 public class Duke {
     private final UI ui;
     private final Storage storage;
@@ -17,6 +20,9 @@ public class Duke {
         parser = new Parser();
     }
 
+    /**
+     * Runs the duke chat bot
+     */
     public void run() {
         try {
             storage.loadFile();

@@ -6,6 +6,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.UI;
 
+/**
+ * Encapsulates the done command, used to complete tasks
+ */
 public class DoneCommand extends Command {
 
     public DoneCommand(String arguments) {
