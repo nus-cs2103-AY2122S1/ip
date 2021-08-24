@@ -8,12 +8,21 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
+    private String path;
     private File src;
     private TaskList taskList;
     private Ui ui;
 
     public Storage(String path, TaskList taskList, Ui ui) {
-        this.src = new File(path);
+        this.path = path;
+        try {
+            this.src = new File(path);
+            if (this.src.createNewFile()) {
+                System.out.println("I have created a new file for you :)");
+            }
+        } catch (IOException e) {
+            System.out.println("I cannot create a new file for you :(");
+        }
         this.taskList = taskList;
         this.ui = ui;
     }
@@ -113,7 +122,7 @@ public class Storage {
     public void saveNewTask(Task task) {
         try {
             FileWriter fileWriter = new FileWriter(this.src, true);
-            fileWriter.write("\n" + task.toStoredString());
+            fileWriter.write(task.toStoredString() + "\n");
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -122,11 +131,6 @@ public class Storage {
 
     public void loadSavedTasks() {
         try {
-            //Create a File called duke.txt
-            src = new File("data/duke.txt");
-            if (src.createNewFile()) {
-                System.out.println("I have created a new file for you :)");
-            }
             Scanner sc = new Scanner(src);
             readEvents(sc);
             sc.close();
