@@ -116,7 +116,6 @@ public class Database {
                     }
                 }
                 Deadline deadline = new Deadline(taskname_ddl,isDone, tasktime_ddl);
-                //System.out.println(deadline.toString());
                 return deadline;
         }
         return null;
