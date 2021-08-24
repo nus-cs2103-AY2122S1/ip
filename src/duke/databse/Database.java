@@ -50,7 +50,7 @@ public class Database {
                 objectsList.add(parseData(data));
             }
         } catch (IOException e) {
-
+            System.out.println(ui.wrong_message);
         }
 
         return objectsList;
