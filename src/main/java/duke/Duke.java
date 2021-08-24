@@ -17,6 +17,10 @@ public class Duke {
         this.ui = new Ui();
     }
 
+    public Duke() {
+        this(FILE_PATH);
+    }
+
     public void run() {
         this.ui.welcomeMessage();
         boolean isExit = false;

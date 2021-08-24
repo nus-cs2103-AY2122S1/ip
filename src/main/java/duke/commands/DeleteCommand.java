@@ -17,6 +17,7 @@ public class DeleteCommand extends Command {
             if (taskNum + 1 <= taskListLen) {
                 Task removedTask = storage.deleteTask(taskNum);
                 taskListLen -= 1;
+                storage.saveToFile();
                 ui.taskDeletedMessage(removedTask, taskListLen);
             } else {
                 ui.missingTaskMessage();

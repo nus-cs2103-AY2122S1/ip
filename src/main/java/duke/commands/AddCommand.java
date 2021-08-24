@@ -22,6 +22,7 @@ public class AddCommand extends Command {
                 Todo newTodo = new Todo(this.taskName);
                 storage.addTask(newTodo);
                 taskListLen += 1;
+                storage.saveToFile();
                 ui.taskAddedMessage(newTodo, taskListLen);
             } else {
                 ui.maxTaskReachedMessage();
@@ -32,6 +33,7 @@ public class AddCommand extends Command {
                 Deadline newDeadline = new Deadline(taskName, this.datetime);
                 storage.addTask(newDeadline);
                 taskListLen += 1;
+                storage.saveToFile();
                 ui.taskAddedMessage(newDeadline, taskListLen);
             } else {
                 ui.maxTaskReachedMessage();
@@ -42,6 +44,7 @@ public class AddCommand extends Command {
                 Event newEvent = new Event(this.taskName, this.datetime);
                 storage.addTask(newEvent);
                 taskListLen += 1;
+                storage.saveToFile();
                 ui.taskAddedMessage(newEvent, taskListLen);
             } else {
                 ui.maxTaskReachedMessage();

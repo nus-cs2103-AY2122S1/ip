@@ -15,6 +15,7 @@ public class DoneCommand extends Command {
         try {
             Task taskToMark = storage.getTask(taskNum);
             taskToMark.markDone();
+            storage.saveToFile();
             ui.markedDoneMessage(taskToMark);
         } catch (IndexOutOfBoundsException e) {
             Ui.showErrorMessage("Please enter a valid index!");
