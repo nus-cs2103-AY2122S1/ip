@@ -25,7 +25,7 @@ public class DukeParser {
         this.storage = storage;
     }
 
-    public void parse(String rawInput) throws DukeException, IOException {
+    public void parse(String rawInput) throws DukeException {
         Scanner inputScanner = new Scanner(rawInput);
         String checkForKeyword = inputScanner.next();
 
@@ -62,7 +62,7 @@ public class DukeParser {
     }
 
     public void handleDone(Scanner inputScanner) throws InvalidCommandParameterException
-            , NoSuchTaskException, IOException {
+            , NoSuchTaskException {
         if (inputScanner.hasNextInt()) {
             int taskPos = inputScanner.nextInt() - 1;
             list.markDone(taskPos);
@@ -74,7 +74,7 @@ public class DukeParser {
     }
 
     public void handleDelete(Scanner inputScanner) throws InvalidCommandParameterException
-            , NoSuchTaskException, IOException {
+            , NoSuchTaskException {
         if (inputScanner.hasNextInt()) {
             int taskPos = inputScanner.nextInt() - 1;
             Task temp = list.deleteTask(taskPos);
@@ -85,7 +85,7 @@ public class DukeParser {
         }
     }
 
-    public void handleTodo(Scanner inputScanner) throws InvalidCommandParameterException, IOException {
+    public void handleTodo(Scanner inputScanner) throws InvalidCommandParameterException {
         if (inputScanner.hasNextLine()) {
             String secondWord = inputScanner.nextLine();
             list.addTask(new Todo(secondWord));
@@ -97,7 +97,7 @@ public class DukeParser {
     }
 
     public void handleDeadline(Scanner inputScanner) throws InvalidCommandParameterException
-            , IOException {
+             {
         if (inputScanner.hasNextLine()) {
             String[] contentAndDate = inputScanner.nextLine().split("/by ", 2);
             String content = contentAndDate[0];
@@ -110,7 +110,7 @@ public class DukeParser {
         }
     }
 
-    public void handleEvent(Scanner inputScanner) throws InvalidCommandParameterException,IOException {
+    public void handleEvent(Scanner inputScanner) throws InvalidCommandParameterException {
         if (inputScanner.hasNextLine()) {
             String[] contentAndDate = inputScanner.nextLine().split("/at ", 2);
             String content = contentAndDate[0];
