@@ -55,7 +55,8 @@ public class Duke {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             } catch (DateTimeParseException e) {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                System.out.println("Please enter the date and time in dd/mm/yyyy hh:mma format! :\n)");
+                System.out.println("Please enter the date and time "
+                        + "in dd/mm/yyyy hh:mma format! :\n)");
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
         }

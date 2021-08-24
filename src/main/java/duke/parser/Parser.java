@@ -3,7 +3,6 @@ package duke.parser;
 import static duke.common.Formats.DT_INPUT_FORMAT;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import duke.DukeException;
 import duke.commands.AddCommand;
@@ -16,8 +15,6 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-
-
 
 public class Parser {
     public enum CommandEnum {
@@ -96,7 +93,6 @@ public class Parser {
         }
         default:
             throw DukeException.invalidCommand();
-            //System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         }
     }
 }
