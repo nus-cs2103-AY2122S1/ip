@@ -1,22 +1,19 @@
 package duke.storage;
 
-
-
-import duke.exceptions.DukeException;
 import duke.exceptions.DukeReadSaveException;
-import duke.tasks.Task;
-import duke.tasks.Todo;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 import java.util.Scanner;
+
 /**
  * Parser class to create Task objects from string commands.
  */
 public class SaveParser {
     private static final DukeReadSaveException MISSING_ARG_EXCEPTION =
             new DukeReadSaveException("missing argument in save");
-
 
     Scanner scanner;
 
@@ -61,95 +58,102 @@ public class SaveParser {
         }
     }
 
-    private Todo parseTodo() throws DukeReadSaveException{
+    private Todo parseTodo() throws DukeReadSaveException {
         String name = "";
-        boolean done = false;
+        boolean isDone = false;
         boolean[] argsFound = new boolean[2];
 
         String nl;
         while (this.scanner.hasNextLine()) {
-            if (this.scanner.hasNext("(Task:).*")){
+            if (this.scanner.hasNext("(Task:).*")) {
                 //break if next line is the start of a new task
                 break;
             }
             nl = this.scanner.nextLine();
-            if (nl.equals("")){
+            if (nl.equals("")) {
                 break;
             }
             String[] key_value = nl.split(":", 2);
-            switch (key_value[0]){
-            case("\tName"):
+            switch (key_value[0]) {
+            case ("\tName"):
                 name = key_value[1];
                 argsFound[0] = true;
-            case("\tDone"):
-                done = Boolean.parseBoolean(key_value[1]);
+                break;
+            case ("\tDone"):
+                isDone = Boolean.parseBoolean(key_value[1]);
                 argsFound[1] = true;
+                break;
             }
         }
         if (argsFound[0] && argsFound[1]) {
-            return new Todo(name, done);
+            return new Todo(name, isDone);
         }
         throw MISSING_ARG_EXCEPTION;
     }
-    private Deadline parseDeadline() throws DukeReadSaveException{
+
+    private Deadline parseDeadline() throws DukeReadSaveException {
         String name = "";
-        boolean done = false;
+        boolean isDone = false;
         String by = "";
         boolean[] argsFound = new boolean[3];
 
         String nl;
         while (this.scanner.hasNextLine()) {
-            if (this.scanner.hasNext("(Task:).*")){
+            if (this.scanner.hasNext("(Task:).*")) {
                 //break if next line is the start of a new task
                 break;
             }
             nl = this.scanner.nextLine();
-            if (nl.equals("")){
+            if (nl.equals("")) {
                 break;
             }
             String[] key_value = nl.split(":", 2);
-            switch (key_value[0]){
-            case("\tName"):
+            switch (key_value[0]) {
+            case ("\tName"):
                 name = key_value[1];
                 argsFound[0] = true;
-            case("\tDone"):
-                done = Boolean.parseBoolean(key_value[1]);
+                break;
+            case ("\tDone"):
+                isDone = Boolean.parseBoolean(key_value[1]);
                 argsFound[1] = true;
-            case("\tBy"):
+                break;
+            case ("\tBy"):
                 by = key_value[1];
                 argsFound[2] = true;
+                break;
             }
         }
         if (argsFound[0] && argsFound[1] && argsFound[2]) {
-            return new Deadline(name, done, by);
+            return new Deadline(name, isDone, by);
         }
         throw MISSING_ARG_EXCEPTION;
     }
-    private Event parseEvent() throws DukeReadSaveException{
+
+    private Event parseEvent() throws DukeReadSaveException {
         String name = "";
-        boolean done = false;
+        boolean isDone = false;
         String at = "";
         boolean[] argsFound = new boolean[3];
 
         String nl;
         while (this.scanner.hasNextLine()) {
-            if (this.scanner.hasNext("(Task:).*")){
+            if (this.scanner.hasNext("(Task:).*")) {
                 //break if next line is the start of a new task
                 break;
             }
             nl = this.scanner.nextLine();
-            if (nl.equals("")  ){
+            if (nl.equals("")) {
                 //break if we hit an empty line
                 break;
             }
             String[] key_value = nl.split(":", 2);
-            switch (key_value[0]){
-            case ("\tName") :
+            switch (key_value[0]) {
+            case ("\tName"):
                 name = key_value[1];
                 argsFound[0] = true;
                 break;
             case ("\tDone"):
-                done = Boolean.parseBoolean(key_value[1]);
+                isDone = Boolean.parseBoolean(key_value[1]);
                 argsFound[1] = true;
                 break;
             case ("\tAt"):
@@ -157,11 +161,9 @@ public class SaveParser {
                 argsFound[2] = true;
                 break;
             }
-
-
         }
         if (argsFound[0] && argsFound[1] && argsFound[2]) {
-            return new Event(name, done, at);
+            return new Event(name, isDone, at);
         }
         throw MISSING_ARG_EXCEPTION;
     }

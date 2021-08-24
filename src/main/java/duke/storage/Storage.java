@@ -6,8 +6,8 @@ import duke.exceptions.DukeReadSaveException;
 import duke.tasks.Task;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,14 +20,14 @@ public class Storage {
      *
      * @param path path to store file.
      */
-    public static void createStore(Path path){
-        if (Files.exists(path)){
+    public static void createStore(Path path) {
+        if (Files.exists(path)) {
             return;
         }
-        try{
+        try {
             Files.createDirectories(path.getParent());
             Files.createFile(path);
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("failed to make store : " + e.toString());
         }
     }
@@ -38,9 +38,9 @@ public class Storage {
      * @param path path to store file.
      * @return duke.TaskArrayList of stored tasks.
      */
-    public static TaskArrayList load(Path path) throws DukeException,IOException{
+    public static TaskArrayList load(Path path) throws DukeException, IOException {
         createStore(path);
-        TaskArrayList taskList =  new TaskArrayList();
+        TaskArrayList taskList = new TaskArrayList();
         Scanner sc = new Scanner(path);
         SaveParser saveParser = new SaveParser(sc);
         while (saveParser.hasNextLine()) {
@@ -59,18 +59,17 @@ public class Storage {
      * @param taskList duke.TaskArrayList to store.
      * @param path location to store taskList.
      */
-    public static void dump(TaskArrayList taskList,Path path){
+    public static void dump(TaskArrayList taskList, Path path) {
         createStore(path);
-        ArrayList<String> f = new ArrayList<>();
-        for (Task task : taskList){
-            String toWrite = "" ;
-            f.add(task.serialize());
+        ArrayList<String> strings = new ArrayList<>();
+        for (Task task : taskList) {
+            String toWrite = "";
+            strings.add(task.serialize());
         }
         try {
-            Files.write(path, f);
-        } catch (IOException e){
+            Files.write(path, strings);
+        } catch (IOException e) {
             System.out.println("error writing data");
         }
-        return;
     }
 }

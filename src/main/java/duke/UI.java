@@ -21,31 +21,31 @@ public class UI {
     /**
      * Constructor for UI using default preprocessor.
      */
-    UI(){
+    UI() {
         this(
-            (String source) -> {
-                String border = "--------------------------------------------------";
-                StringBuilder out = new StringBuilder();
-                for (String line:source.split("\n")){
-                    out.append("\t" + line + "\n");
-                }
-                return border + "\n"
-                    + out.toString()
-                    + border;
-            });
+                (String source) -> {
+                    String border = "--------------------------------------------------";
+                    StringBuilder out = new StringBuilder();
+                    for (String line : source.split("\n")) {
+                        out.append("\t" + line + "\n");
+                    }
+                    return border + "\n"
+                            + out.toString()
+                            + border;
+                });
     }
 
     /**
      * Displays the ascii startup logo.
      */
-    public void displayLogo(){
+    public void displayLogo() {
         String logo =
-            "  _____          _   _    ___   ___   ___   ___  \n" +
-            " |  __ \\   /\\   | \\ | |  / _ \\ / _ \\ / _ \\ / _ \\ \n" +
-            " | |  | | /  \\  |  \\| | | (_) | | | | | | | | | |\n" +
-            " | |  | |/ /\\ \\ | . ` |  \\__, | | | | | | | | | |\n" +
-            " | |__| / ____ \\| |\\  |    / /| |_| | |_| | |_| |\n" +
-            " |_____/_/    \\_\\_| \\_|   /_/  \\___/ \\___/ \\___/ \n";
+                "  _____          _   _    ___   ___   ___   ___  \n" +
+                " |  __ \\   /\\   | \\ | |  / _ \\ / _ \\ / _ \\ / _ \\ \n" +
+                " | |  | | /  \\  |  \\| | | (_) | | | | | | | | | |\n" +
+                " | |  | |/ /\\ \\ | . ` |  \\__, | | | | | | | | | |\n" +
+                " | |__| / ____ \\| |\\  |    / /| |_| | |_| | |_| |\n" +
+                " |_____/_/    \\_\\_| \\_|   /_/  \\___/ \\___/ \\___/ \n";
         System.out.println(logo);
     }
 
@@ -54,7 +54,7 @@ public class UI {
      */
     public void displayWelcome() {
         this.display("Hello, I'm DAN 9000\n"
-            + "How can I help you?");
+                + "How can I help you?");
     }
 
     /**
@@ -79,9 +79,9 @@ public class UI {
     /**
      * Displays the error associated with loading save file.
      */
-    public void showLoadingError(){
+    public void showLoadingError() {
         String savePath = "./data/duke.txt";
-        this.display("ERROR: unable to load save file from "+ savePath);
+        this.display("ERROR: unable to load save file from " + savePath);
     }
 
     /**
@@ -89,7 +89,7 @@ public class UI {
      *
      * @param e Exception to display the message of.
      */
-    public void displayException(Exception e){
+    public void displayException(Exception e) {
         this.display(e.getMessage());
     }
 }
