@@ -67,7 +67,7 @@ public class Storage {
             }
             myScanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            System.out.println("Read File Error.");
             System.out.println(e.getMessage());
         }
     }
@@ -90,7 +90,7 @@ public class Storage {
             fileWriter.write(str);
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("Save File Error.");
             System.out.println(e.getMessage());
         }
     }

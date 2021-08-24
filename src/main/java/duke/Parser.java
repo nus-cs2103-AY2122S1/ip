@@ -36,7 +36,6 @@ public class Parser {
     }
 
     public void parse() {
-        storage.readFile(taskList);
         do {
             try {
                 input = scan.nextLine();
