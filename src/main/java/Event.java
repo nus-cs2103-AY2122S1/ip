@@ -8,7 +8,7 @@ public class Event extends Task{
      * Takes in a string and splits msg into based on /at pattern. Set the eventType and time of the instance
      * @param input string from the user
      */
-    public Event(String input) throws InvalidEventFormatException {
+    public Event(String input) throws InvalidInputException {
         super();
         List<String> results = Pattern.compile("/at").splitAsStream(input).map(x->x.trim()).collect(Collectors.toList());
 
@@ -23,7 +23,7 @@ public class Event extends Task{
         }
         super.setEventType("E");
         super.setDescription(key);
-        super.setTime(results.get(1));
+        super.setDate(results.get(1));
     }
     /**
      * Returns a string that describes the instance
@@ -31,6 +31,6 @@ public class Event extends Task{
      */
     @Override
     public String toString(){
-        return super.toString() + " (at: " + super.getTime() + ")";
+        return super.toString() + " (at: " + super.getDate() + ")";
     }
 }

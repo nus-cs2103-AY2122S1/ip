@@ -7,7 +7,7 @@ public class Deadline extends Task{
      * Takes in a string and splits msg into based on /by pattern. Set the eventType and time of the instance
      * @param input string from the user
      */
-    public Deadline(String input) throws InvalidDeadlineFormatException {
+    public Deadline(String input) throws InvalidInputException {
         super();
         List<String> results = Pattern.compile("/by").splitAsStream(input).map(x->x.trim()).collect(Collectors.toList());
         String key;
@@ -25,7 +25,7 @@ public class Deadline extends Task{
 
         super.setEventType("D");
         super.setDescription(key);
-        super.setTime(results.get(1));
+        super.setDate(results.get(1));
     }
 
     /**
@@ -34,6 +34,6 @@ public class Deadline extends Task{
      */
     @Override
     public String toString(){
-        return super.toString() + " (by: " + super.getTime() + ")";
+        return super.toString() + " (by: " + super.getDate() + ")";
     }
 }

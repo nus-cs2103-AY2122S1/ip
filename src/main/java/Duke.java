@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Duke {
@@ -34,5 +36,10 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke().run();
+//        String input = "2019-02/12 1900";
+//        String[] timeFormat = input.trim().split(" ");
+//        LocalDate ok = LocalDate.parse(timeFormat[0]);
+//        input = timeFormat[1];
+
     }
 }

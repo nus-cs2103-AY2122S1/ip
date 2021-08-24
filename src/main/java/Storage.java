@@ -72,7 +72,7 @@ public class Storage {
      * @param input tajes in the input from user
      * @return String that contains the success msg
      */
-    public String todo (String input) {
+    public String todo (String input) throws InvalidInputException {
         Todo todo = new Todo(input);
         mapper.put(todo.getDescription(), todo);
         return todo.toString();
@@ -82,7 +82,7 @@ public class Storage {
      * @param input tajes in the input from user
      * @return String that contains the success msg
      */
-    public String deadline (String input) throws InvalidDeadlineFormatException {
+    public String deadline (String input) throws InvalidInputException {
         Deadline deadline = new Deadline(input);
         mapper.put(deadline.getDescription(), deadline);
         return deadline.toString();
@@ -92,7 +92,7 @@ public class Storage {
      * @param input tajes in the input from user
      * @return String that contains the success msg
      */
-    public String event (String input) throws InvalidEventFormatException {
+    public String event (String input) throws InvalidInputException  {
         Event event = new Event(input);
         mapper.put(event.getDescription(), event);
         return event.toString();

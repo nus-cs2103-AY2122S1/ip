@@ -75,6 +75,8 @@ public class Brain {
             speech.error(new InvalidInputException("User input an invalid action.").toString());
         } catch (ArrayIndexOutOfBoundsException e) {
             speech.error(new InvalidInputException("Missing info after action").toString());
+        } catch (InvalidInputException e) {
+            speech.error(e.toString());
         }
         return cont;
 

@@ -1,8 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Task {
     protected String eventType;
     protected boolean isDone;
     protected String description;
-    protected String time;
+    protected LocalDate date;
+    protected int time;
 
     /**
      * Basic constructor for task (used during subclass instance)
@@ -41,11 +45,25 @@ public class Task {
      * converts the time into LocalDate and sets the time of the task
      * @param input set time
      */
-    protected void setTime(String input) {
+    protected void setDate(String input) throws InvalidInputException {
         if (input == null){
-            this.time = null;
+            this.date = null;
+            this.time = -1;
         } else {
-            this.time = input;
+            try {
+                String[] timeFormat = input.trim().split(" ");
+                this.date = LocalDate.parse(timeFormat[0]);
+                int hoursMins = Integer.parseInt(timeFormat[1]);
+                if (hoursMins <2401 && hoursMins > 999) {
+                    this.time = hoursMins;
+                } else {
+                    throw new InvalidInputException("Invalid time format (use 24hr format)");
+                }
+            } catch (DateTimeParseException e) {
+                throw new InvalidInputException("Wrong date format(use YYYY-MM-DD)");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new InvalidInputException("Missing time");
+            }
         }
     }
 
@@ -87,8 +105,8 @@ public class Task {
      * Returns the time attached to task
      * @return time
      */
-    public String getTime() {
-        return this.time;
+    public String getDate() {
+        return this.date.toString() + " " + this.time;
     }
 
     /**
