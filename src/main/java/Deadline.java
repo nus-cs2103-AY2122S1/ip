@@ -3,13 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    private String by;
     private LocalDate byDate;
-
-    public Deadline(String description, LocalDate byDate) {
-        super(description);
-        this.byDate = byDate;
-    }
 
     public Deadline(String description, String by) {
         super(description);
@@ -18,6 +12,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-         return "D" + super.toString() + " | " + this.by;
+        return "D" + super.toString() + " | "
+                + this.byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }
