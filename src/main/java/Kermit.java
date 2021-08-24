@@ -35,15 +35,6 @@ public class Kermit {
                 + task +"\nNow you have " + list.size() + " tasks in the list.";
     }
 
-    private static LocalDate formatTaskDateFormat(String s) {
-        String[] components = s.split("-");
-        String day = components[0];
-        String month = components[1];
-        String year = components[2];
-        LocalDate parsedDate = LocalDate.parse(String.join("-", year, month, day));
-        return parsedDate;
-    }
-
     private static LocalDate formatUserDateFormat(String s) {
         String[] components = s.split("-");
         String day = components[0];
@@ -57,20 +48,14 @@ public class Kermit {
         System.out.println(formatText(text));
     }
 
-    private static String formatWriteString(Task task) {
-        String delimiter = " | ";
-
-        String taskComplete = task.isComplete() ? "1" : "0";
-        String formattedString = String.join(delimiter, task.getShortForm(), taskComplete, task.getDescription());
-
-        if (task instanceof DateDependentTask) {
-            DateDependentTask dateTask = (DateDependentTask) task;
-            formattedString = String.join(delimiter, formattedString, dateTask.getDate());
-        }
-        return formattedString;
-    }
-
     public static void main(String[] args) throws FileNotFoundException {
+        final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
+        final String listText = "Here are the tasks in your list:";
+        final String invalidCommandText = "I'm sorry, but I don't know what that means :-(";
+        final String invalidTimeText = "BAH That's not a time is it?? Try writing like this D/MM/YYYY 1200";
+        final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
+        final String goodbyeText = "Bye. Hope to see you again soon!";
+
         Scanner sc = new Scanner(System.in);
         String command = "";
         String flag;
@@ -87,18 +72,10 @@ public class Kermit {
         String[] strTasks = {"deadline", "todo", "event"};
         ArrayList<String> validTasks = new ArrayList<>(Arrays.asList(strTasks));
 
-        ToDo list = storage.getToDoList();
-
-        final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
-        final String listText = "Here are the tasks in your list:";
-        final String invalidCommandText = "I'm sorry, but I don't know what that means :-(";
-        final String invalidTimeText = "BAH That's not a time is it?? Try writing like this D/MM/YYYY 1200";
-        final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
-        final String goodbyeText = "Bye. Hope to see you again soon!";
-
-        formatAndPrintText(introductionText);
-        while (true) {
-            try {
+        try {
+            ToDo list = storage.getToDoList();
+            formatAndPrintText(introductionText);
+            while (true) {
                 // Task description and flag should be separated by some /command
                 String[] userInput = sc.nextLine().split("/");
                 String commandString = userInput[0];
@@ -203,12 +180,11 @@ public class Kermit {
                         formatAndPrintText(printDeleteTask(deletedTask, list));
                         storage.save(list);
                 }
-            } catch (KermitException e) {
-                formatAndPrintText(e.getMessage());
-            } catch (DateTimeParseException e) {
-                formatAndPrintText(invalidTimeText);
             }
-        }
-        }
+        } catch (KermitException e) {
+            formatAndPrintText(e.getMessage());
+        } catch (DateTimeParseException e) {
+            formatAndPrintText(invalidTimeText);
+    }
     }
 }
