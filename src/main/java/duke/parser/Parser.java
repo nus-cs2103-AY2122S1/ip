@@ -55,7 +55,9 @@ public class Parser {
                     case DELETE:
                         return new DeleteCommand(response);
                     case DATE:
-                        return new SearchCommand(response);
+                        return new SearchCommand(response, 1);
+                    case FIND:
+                        return new SearchCommand(response, 2);
                     default:
                         return null;
                 }
@@ -69,7 +71,9 @@ public class Parser {
      * @return Type of operation for the next judgement.
      */
     public static Operation checkResponse(String response, int len) throws DukeException {
-        if (response.startsWith("date ")
+        if (response.startsWith("find ") && len > 5) {
+            return Operation.FIND;
+        } else if (response.startsWith("date ")
                 && Task.isDate(response.substring(5))) {
             return Operation.DATE;
         } else if (response.startsWith("done ")
@@ -87,7 +91,8 @@ public class Parser {
                 && chekDigit(response.substring(7))) {
             return Operation.DELETE;
         } else if (response.equals("delete") || response.equals("todo") || response.equals("deadline")
-                || response.equals("event") || response.equals("done") || response.equals("date")) {
+                || response.equals("event") || response.equals("done") || response.equals("date")
+                        || response.equals("find")) {
             String curr = response;
             throw new EmptyInputException(curr);
         } else {

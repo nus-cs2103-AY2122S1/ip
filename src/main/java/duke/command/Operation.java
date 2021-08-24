@@ -11,5 +11,6 @@ public enum Operation {
     DEADLINE,
     EVENT,
     DELETE,
-    DATE;
+    DATE,
+    FIND;
 }

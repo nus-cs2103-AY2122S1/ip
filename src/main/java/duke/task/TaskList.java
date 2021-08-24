@@ -66,4 +66,21 @@ public class TaskList {
         shouldMark.markAsDone();
         return shouldMark;
     }
+
+    /**
+     * Returns the tasks match that content.
+     *
+     * @param content The user input.
+     * @return The list of tasks.
+     */
+    public TaskList tasksWithContent(String content) {
+        TaskList currList = new TaskList();
+        for (int i = 0; i < count; i++) {
+            Task currTask = taskList.get(i);
+            if (currTask.contains(content)) {
+                currList.addElement(currTask);
+            }
+        }
+        return currList;
+    }
 }
