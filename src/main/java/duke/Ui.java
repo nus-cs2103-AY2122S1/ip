@@ -4,21 +4,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Helps interact with the user and displays
+ * content to the user.
+ */
 public class Ui {
 
     /** Boolean variable to exit the program */
     private boolean bye = false;
 
+    /** Stores the path of the text file */
     String file = "data/duke.txt";
 
+    /** Scanner object */
     Scanner sc = new Scanner(System.in);
 
+    /** Storage class object */
     Storage storage = new Storage();
 
 
     /**
-     * Method to return the initial default greeting
-     * @return The initial String greeting
+     * Returns the initial default greeting.
+     * @return The initial String greeting.
      */
     public String initGreeting() {
         return "_____________________________________________________________________" + "\n"
@@ -28,7 +35,8 @@ public class Ui {
     }
 
     /**
-     * Execution method to take input and execute the rest
+     * Starts the bot.
+     * Takes input and executes the rest
      * of the program flow based on the input
      * @throws DukeException
      */
