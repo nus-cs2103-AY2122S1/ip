@@ -1,7 +1,9 @@
-public class Event extends Task {
-    protected String at;
+import java.time.LocalDateTime;
 
-    public Event(String description, String at) {
+public class Event extends Task {
+    protected LocalDateTime at;
+
+    public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
