@@ -140,7 +140,7 @@ public class Duke {
             print(String.format(" MORTAL, YOU'VE ADDED THIS EVENT:\n %s\n YOU HAVE %d TASKS LEFT.", newEvent,
                     tasks.size()));
         } catch (DateTimeParseException e) {
-            print("FORMAT YOUR DATETIME PROPERLY YOU FOOL");
+            throw new DukeException("FORMAT YOUR DATETIME PROPERLY YOU FOOL");
         }
     }
 
@@ -155,7 +155,7 @@ public class Duke {
             print(String.format(" MORTAL, YOU'VE ADDED THIS DEADLINE:\n %s\n YOU NOW HAVE %d TASKS.", newDeadline,
                     tasks.size()));
         } catch (DateTimeParseException e) {
-            print("FORMAT YOUR DATETIME PROPERLY YOU FOOL");
+            throw new DukeException("FORMAT YOUR DATETIME PROPERLY YOU FOOL");
         }
     }
 
