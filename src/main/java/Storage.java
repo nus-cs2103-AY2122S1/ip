@@ -7,10 +7,10 @@ import java.nio.file.Paths;
 
 import java.util.ArrayList;
 
-public class DataManager {
+public class Storage {
     private final File data;
 
-    public DataManager(String folderName, String fileName) {
+    public Storage(String folderName, String fileName) {
         this.data = new File(Paths.get(folderName, fileName).toString());
     }
 
@@ -38,28 +38,28 @@ public class DataManager {
         return task;
     }
 
-    ArrayList<Task> loadData() throws IOException, NyxException {
+    ArrayList<Task> loadData() throws NyxException {
         ArrayList<Task> taskList= new ArrayList<Task>();
-
-        if (data.exists()) {
-            ArrayList<String> lines = new ArrayList<String>();
-            Files.lines(data.toPath()).forEach(lines::add);
-            for (String line: lines) {
-                taskList.add(lineToTask((line)));
+        try {
+            if (data.exists()) {
+                ArrayList<String> lines = new ArrayList<String>();
+                Files.lines(data.toPath()).forEach(lines::add);
+                for (String line : lines) {
+                    taskList.add(lineToTask((line)));
+                }
+            } else {
+                data.getParentFile().mkdirs();
+                data.createNewFile();
             }
-        } else {
-            data.getParentFile().mkdirs();
-            data.createNewFile();
+            return taskList;
+        } catch (IOException e) {
+            throw new NyxException("Unable to load existing data");
         }
-
-        return taskList;
     }
 
-    void overwriteData(ArrayList<Task> taskList) throws IOException {
+    void overwriteData(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(data.getAbsolutePath());
-        StringBuilder sb = new StringBuilder();
-        taskList.stream().map(Task::dataFormat).forEach(sb::append);
-        fw.write(sb.toString());
+        fw.write(taskList.genSaveFormat());
         fw.close();
     }
 
