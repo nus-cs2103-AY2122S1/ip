@@ -4,59 +4,117 @@
 | |_| | |_| | | |
 |____/ \__,_|_|_|
 
-Loaded Files.
-Hello! I'm Duii, your personal assistant!
+Hello User 1! I'm Duii, your personal assistant!
 What do you need help with?
-
-I don't get what you mean? Try Again!
-
+___________________
+I don't get what you mean? Try again!
+___________________
 New Task? I've added it to the list:
 [T] [ ] borrow book
 Now you have 1 task(s) in the list.
-
+___________________
 Here's your current list:
 1. [T] [ ] borrow book
-
+___________________
 New Task? I've added it to the list:
-[D] [ ] return book  (by:  2pm)
+[D] [ ] pl1101e project (by: 20 Apr 2021 12:00)
 Now you have 2 task(s) in the list.
-
-Describe the activity and its deadline!
-
-Describe the event and indicate its time!
-
-Describe the activity and its deadline!
-
+___________________
+Text '2500' could not be parsed: Invalid value for HourOfDay (valid values 0 - 23): 25
+___________________
+Text '33/04/2021' could not be parsed: Invalid value for DayOfMonth (valid values 1 - 28/31): 33
+___________________
+Text '30/13/2021' could not be parsed: Invalid value for MonthOfYear (valid values 1 - 12): 13
+___________________
+Input the following format: deadline *description* /at *DD/MM/YYYY* *24H-Time*
+___________________
+Input the following format: event *description* /at *DD/MM/YYYY* *24H-Time*
+___________________
+Input the following format: deadline *description* /at *DD/MM/YYYY* *24H-Time*
+___________________
 New Task? I've added it to the list:
-[E] [ ] project meeting  (at:  mon 2-4pm)
+[E] [ ] pl1101e project meeting (at: 15 Apr 2021 12:00)
 Now you have 3 task(s) in the list.
-
+___________________
+New Task? I've added it to the list:
+[E] [ ] cs2103t project meeting (at: 04 Apr 2021 00:00)
+Now you have 4 task(s) in the list.
+___________________
+Text '2500' could not be parsed: Invalid value for HourOfDay (valid values 0 - 23): 25
+___________________
+Text '33/04/2021' could not be parsed: Invalid value for DayOfMonth (valid values 1 - 28/31): 33
+___________________
+Text '30/13/2021' could not be parsed: Invalid value for MonthOfYear (valid values 1 - 12): 13
+___________________
 You've finished the task? Good job!
 This task has been marked as done:
-[D] [X] return book  (by:  2pm)
-
+[D] [X] pl1101e project (by: 20 Apr 2021 12:00)
+___________________
 Okay! Removing the task:
-[D] [X] return book  (by:  2pm)
-
+[D] [X] pl1101e project (by: 20 Apr 2021 12:00)
+___________________
 Here's your current list:
 1. [T] [ ] borrow book
-2. [E] [ ] project meeting  (at:  mon 2-4pm)
-
+2. [E] [ ] pl1101e project meeting (at: 15 Apr 2021 12:00)
+3. [E] [ ] cs2103t project meeting (at: 04 Apr 2021 00:00)
+___________________
 Okay! Removing the task:
 [T] [ ] borrow book
-
+___________________
 The id you entered was invalid!
-
+___________________
 The id you entered was invalid!
-
+___________________
 Here's your current list:
-1. [E] [ ] project meeting  (at:  mon 2-4pm)
-
+1. [E] [ ] pl1101e project meeting (at: 15 Apr 2021 12:00)
+2. [E] [ ] cs2103t project meeting (at: 04 Apr 2021 00:00)
+___________________
 Indicate the id of the task which you have completed!
-
-Describe the activity!
-
+___________________
+Input in the format: todo *description*
+___________________
 Here's your current list:
-1. [E] [ ] project meeting  (at:  mon 2-4pm)
-
+1. [E] [ ] pl1101e project meeting (at: 15 Apr 2021 12:00)
+2. [E] [ ] cs2103t project meeting (at: 04 Apr 2021 00:00)
+___________________
 You're going already? Hope to see you again soon!
+___________________
+Session Terminated.
+ ____        _ _
+|  _ \ _   _(_|_)
+| | | | | | | | |
+| |_| | |_| | | |
+|____/ \__,_|_|_|
+
+Hello User 1! I'm Duii, your personal assistant!
+What do you need help with?
+These tasks are from the previous session:
+1. [E] [ ] pl1101e project meeting (at: 15 Apr 2021 12:00)
+2. [E] [ ] cs2103t project meeting (at: 04 Apr 2021 00:00)
+___________________
+Here's your current list:
+1. [E] [ ] pl1101e project meeting (at: 15 Apr 2021 12:00)
+2. [E] [ ] cs2103t project meeting (at: 04 Apr 2021 00:00)
+___________________
+Okay! Removing the task:
+[E] [ ] cs2103t project meeting (at: 04 Apr 2021 00:00)
+___________________
+Okay! Removing the task:
+[E] [ ] pl1101e project meeting (at: 15 Apr 2021 12:00)
+___________________
+You're going already? Hope to see you again soon!
+___________________
+Session Terminated.
+ ____        _ _
+|  _ \ _   _(_|_)
+| | | | | | | | |
+| |_| | |_| | | |
+|____/ \__,_|_|_|
+
+Hello User 1! I'm Duii, your personal assistant!
+What do you need help with?
+You have no outstanding tasks from the previous session. What a productivity master!
+___________________
+You're going already? Hope to see you again soon!
+___________________
+Session Terminated.

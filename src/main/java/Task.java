@@ -28,7 +28,20 @@ public class Task {
         return this.taskName;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     public String displayInfo() {
         return String.format("[T] [%s] %s", this.getStatus(), this.getTaskName());
     }
+
+    public String getSaveInfo() {
+        if (this.isDone()) {
+            return String.format("T | 1 | %s", this.getTaskName());
+        } else {
+            return String.format("T | 0 | %s", this.getTaskName());
+        }
+    }
+
 }
