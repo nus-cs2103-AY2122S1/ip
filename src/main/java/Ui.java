@@ -12,13 +12,18 @@ public class Ui {
                     "____________________________________________________________\n";
     /** Scanner used to read commands */
     private Scanner input;
+    /** Parser used to interpret commands */
+    private Parser parser;
+    private Duke duke;
 
     /**
      * Constructor for the class `Ui`.
      */
-    public Ui() {
+    public Ui(Duke duke) {
+        this.duke = duke;
         System.out.println(Ui.GREETING_MESSAGE);
         this.input = new Scanner(System.in);
+        this.parser = new Parser(duke);
     }
 
     /**
@@ -26,18 +31,18 @@ public class Ui {
      *
      * @return The command received.
      */
-    public String getCommand() {
+    private String getCommand() {
         return this.input.nextLine().trim();
     }
 
     /**
      * Prints out output of a processor.
      *
-     * @param processor The processor that processes a command.
+     * @return Whether the program is still running.
      */
-    public void getCommandOutput(Processor processor) {
-        processor.process();
-        System.out.println(processor);
+    public boolean getCommandOutput() {
+        String command = this.getCommand();
+        return this.parser.parse(command, this);
     }
 
     /**
@@ -92,7 +97,7 @@ public class Ui {
      * @param timeFormat Time format of the task.
      */
     public void showMissingDetailsError(String missingDetails, String taskType, String timeFormat) {
-        String errorMessage = String.format("☹ OOPS!!! The %s of %s cannot be empty.", missingDetails, taskType) +
+        String errorMessage = String.format("☹ OOPS!!! The %s of %s cannot be empty.\n", missingDetails, taskType) +
                 this.getCommandFormat(taskType, timeFormat);
         DukeException dukeException = new DukeException(errorMessage);
         System.out.println(dukeException);

@@ -8,21 +8,27 @@ public class Processor {
     protected String message;
     /** Task involved in the command */
     protected Task task;
+    /** Duke program to be processed */
+    protected Duke duke;
 
     /**
      * Constructor of the class `Processor`.
      *
      * @param command The command received.
      */
-    public Processor(String command) {
+    public Processor(String command, Duke duke) {
         this.command = command;
+        this.duke = duke;
     }
 
     /**
      * Updates the message to be printed.
+     *
+     * @return Whether the program is still running.
      */
-    public void process() {
+    public boolean process() {
         this.message = this.command;
+        return true;
     }
 
     /**
