@@ -2,6 +2,8 @@ package commands;
 
 import tasks.EventTask;
 import tasks.Task;
+import java.time.LocalDateTime;
+
 import bot.Bot;
 import bot.OutputManager;
 import exceptions.InvalidArgumentsException;
@@ -17,7 +19,9 @@ public class EventCommand implements Command{
     if (splitArgs.length < 2) {
       throw new InvalidArgumentsException(OutputManager.ERROR_SIGNATURE + "Events require /at arguments");
     }
-    Task eventTask = new EventTask(splitArgs[0], splitArgs[1]);
+
+    LocalDateTime taskTime = LocalDateTime.parse(splitArgs[1].trim(), Task.INPUT_TIME_FORMAT);
+    Task eventTask = new EventTask(splitArgs[0], taskTime);
     bot.addTask(eventTask);
   }
 

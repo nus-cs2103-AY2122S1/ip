@@ -1,21 +1,23 @@
 package tasks;
 
+import java.time.LocalDateTime;
+
 import bot.TaskType;
 
 public class EventTask extends Task {
 
   private String taskText;
-  private String taskDetail;
+  private LocalDateTime taskTime;
   private TaskType taskType = TaskType.Event;
 
-  public EventTask(String taskText, String taskDetail) {
+  public EventTask(String taskText, LocalDateTime taskTime) {
     this.taskText = taskText.trim();
-    this.taskDetail = taskDetail.trim();
+    this.taskTime = taskTime;
   }
 
   @Override
   String getTaskDesc() {
-    return String.format("%s (at: %s)", taskText, taskDetail);
+    return String.format("%s (at: %s)", taskText, getTaskTime());
   }
   
   @Override
@@ -25,7 +27,7 @@ public class EventTask extends Task {
 
   @Override
   String getTaskTime() {
-    return this.taskDetail;
+    return this.taskTime.format(Task.OUTPUT_TIME_FORMAT);
   }
 
   @Override

@@ -1,10 +1,15 @@
 package tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import bot.TaskType;
 
 public abstract class Task {
   
   public boolean done = false;
+  public static final DateTimeFormatter INPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm"); // kkmm
+  public static final DateTimeFormatter OUTPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy - hh mm a");
 
   /**
    * Mark a task as complete
@@ -29,14 +34,18 @@ public abstract class Task {
   public static Task deserialize(String s) {
     String[] parts = s.split(",");
     TaskType taskType = TaskType.valueOf(parts[0]);
+
     Task task;
+    LocalDateTime taskTime;
 
     switch(taskType) {
     case Deadline:
-      task = new DeadlineTask(parts[2], parts[3]);
+      taskTime = LocalDateTime.parse(parts[3], OUTPUT_TIME_FORMAT);
+      task = new DeadlineTask(parts[2], taskTime);
       break;
     case Event:
-      task = new EventTask(parts[2], parts[3]);
+      taskTime = LocalDateTime.parse(parts[3], OUTPUT_TIME_FORMAT);
+      task = new EventTask(parts[2], taskTime);
       break;
     case Todo:
       task = new TodoTask(parts[2]);
