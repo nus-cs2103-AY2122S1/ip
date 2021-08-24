@@ -1,4 +1,5 @@
-deadline yes /by 2021-08-24
-deadline no /by 2021-08-23
-event yes /At 2021-08-24
+deadline 23 /by 2021-08-23
+event 24 /At 2021-08-24
+deadline 23 /by 2021-08-23
+event 24 /At 2021-08-24
 /check 2021-08-24
