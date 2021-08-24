@@ -1,9 +1,11 @@
 package duke.task;
 
+
 /**
  * Represents a generic Task which all the actual tasks inherit from
  */
 public abstract class Task {
+
     protected String description;
     protected boolean isDone;
     protected String taskType;
@@ -25,6 +27,7 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+
     public int getDoneStatus() {
         return this.isDone ? 1 : 0;
     }
@@ -32,7 +35,8 @@ public abstract class Task {
     /**
      * Toggles the isDone boolean to be true
      */
-    public void markAsDone() {
+
+    public void setIsDone() {
         this.isDone = true;
     }
 

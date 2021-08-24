@@ -24,10 +24,11 @@ public class Ui {
 
     /**
      * Message that is displayed when a done command is successfully called
+     *
      * @param task String representing the task that was done
      * @return A formatted String to display to the user
      */
-    public String doneTaskMessage(String task) {
+    public String displayDoneTaskMessage(String task) {
         return (DIVIDER + "\n" + "Nice! I've marked this task as done: " + "\n" +
                 task + "\n" +
                 DIVIDER);
@@ -35,10 +36,11 @@ public class Ui {
 
     /**
      * Message that is displayed when a delete command is successfully called
+     *
      * @param task String representing the task that was deleted
      * @return A formatted String to display to the user
      */
-    public String deletedTaskMessage(String task, int taskListSize) {
+    public String displayDeletedTaskMessage(String task, int taskListSize) {
         return (DIVIDER + "\n" + "Nice! Noted. I've removed this task: " + "\n" +
                 task + "\n" +
                 "You now have " + taskListSize + " tasks remaining!" + "\n" +
@@ -47,10 +49,11 @@ public class Ui {
 
     /**
      * Message that is displayed when a list command is successfully called
+     *
      * @param tasks TaskList representing the tasks
      * @return A formatted String of all the tasks in the taskList to display to the user
      */
-    public String listMessage(TaskList tasks) {
+    public String displayListMessage(TaskList tasks) {
         String output = "";
         output += DIVIDER + "\n" + "Here are the items in your task list: " + "\n";
         for (int i = 0; i < tasks.getLength(); i++) {
@@ -60,29 +63,32 @@ public class Ui {
         return output;
     }
 
+
     /**
      * Message that is displayed when a bye command is successfully called
+     *
      * @return A formatted String to display to the user
      */
-    public String byeMessage() {
+    public String displayByeMessage() {
         return DIVIDER + "\n" + "Bye. Hope to see you again soon!" + "\n" + DIVIDER;
     }
 
     /**
      * Message that is displayed when a todo, event or deadline command is successfully called
+     *
      * @param tasks String representing the task that was added
      * @return A formatted String to display to the user
      */
-    public String addTaskMessage(TaskList tasks) {
+    public String displayAddTaskMessage(TaskList tasks) {
         return DIVIDER + "\n" + "added: " + tasks.getTask(tasks.getLength() - 1) + "\n" +
                 "now you have: " + tasks.getLength() + " tasks! type 'list' to see them!" + "\n" + DIVIDER;
     }
 
-    public String dukeExceptionMessage(DukeException e) {
+    public String displayDukeExceptionMessage(DukeException e) {
         return DIVIDER + "\n" + e.getMessage() + "\n" + DIVIDER;
     }
 
-    public String exceptionMessage(Exception e) {
+    public String displayExceptionMessage(Exception e) {
         return DIVIDER + "\n" + e.getMessage() + "\n" + DIVIDER;
     }
 }

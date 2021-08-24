@@ -1,6 +1,7 @@
 package duke.data;
 
 import java.util.ArrayList;
+
 import duke.task.Task;
 
 /**
@@ -8,10 +9,11 @@ import duke.task.Task;
  */
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    protected ArrayList<Task> taskList;
 
     /**
      * Constructor for the TaskList object
+     *
      * @param taskList an ArrayList of tasks representing the saved task from a previous program execution
      */
     public TaskList(ArrayList<Task> taskList) {
@@ -27,6 +29,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the taskList
+     *
      * @return the number of tasks in the taskList
      */
     public int getLength() {
@@ -35,6 +38,7 @@ public class TaskList {
 
     /**
      * Gets a specific task from the taskList
+     *
      * @param index The index of the item in the taskList (0-indexed)
      * @return The task at [index] position
      */
@@ -44,6 +48,7 @@ public class TaskList {
 
     /**
      * Removes a specific task from the taskList
+     *
      * @param task The task object in the taskList
      */
     public void removeTask(Task task) {
@@ -52,6 +57,7 @@ public class TaskList {
 
     /**
      * Adds a task to the taskList
+     *
      * @param task The task to be added to the taskList
      */
     public void addTask(Task task) {
