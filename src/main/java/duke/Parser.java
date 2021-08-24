@@ -12,12 +12,13 @@ public class Parser {
         return currentLine[0];
     }
 
-    public int findCommandIndex() throws NumberFormatException{
+    public int findCommandIndex() throws NumberFormatException {
         return Integer.parseInt(this.currentLine[1]);
     }
 
     /**
      * Finds the date in the command (if any).
+     *
      * @return The date in the command (if any).
      */
     public String findDateInCommand() {
@@ -49,6 +50,7 @@ public class Parser {
 
     /**
      * Finds the task description in the command list.
+     *
      * @return The description of the task.
      */
     public String findTaskDescription() {

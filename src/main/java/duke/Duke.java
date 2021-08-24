@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
  * This class represents the chat bot, duke.Duke.
  */
 public class Duke {
-
     private final static String DATABASE_PATH = "data/duke.txt";
     private TaskList tasks;
     private final static Pattern DATE_PATTERN = Pattern.compile("^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3])[0-5][0-9]$");
@@ -41,35 +40,37 @@ public class Duke {
             parser.intepretCommand(command);
             String firstCommand = this.parser.getFirstCommand();
             try {
-                switch(firstCommand) {
-                    case "bye":
-                        this.ui.goodBye();
-                        stillRunning = false;
-                        break;
-                    case "done":
-                        markDone();
-                        break;
-                    case "deadline":
-                    case "todo":
-                    case "event":
-                        addTask();
-                        break;
-                    case "delete":
-                        deleteTask();
-                        break;
-                    case "list":
-                        this.tasks.listTasks();
-                        break;
-                    default:
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                switch (firstCommand) {
+                case "bye":
+                    this.ui.goodBye();
+                    stillRunning = false;
+                    break;
+                case "done":
+                    markDone();
+                    break;
+                case "deadline":
+                case "todo":
+                case "event":
+                    addTask();
+                    break;
+                case "delete":
+                    deleteTask();
+                    break;
+                case "list":
+                    this.tasks.listTasks();
+                    break;
+                default:
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 this.ui.showError(e);
             }
         }
     }
+
     /**
      * Method to delete task.
+     *
      * @throws DukeException
      */
     public void deleteTask() throws DukeException {
@@ -90,6 +91,7 @@ public class Duke {
 
     /**
      * Method to add task to duke.Duke.
+     *
      * @return String array of the command keywords.
      * @throws DukeException
      */
@@ -132,6 +134,7 @@ public class Duke {
 
     /**
      * Method for duke.Duke to mark a task done.
+     *
      * @throws DukeException
      */
     private void markDone() throws DukeException {
@@ -150,6 +153,7 @@ public class Duke {
 
     /**
      * Checks if the string is an integer.
+     *
      * @param input String to check.
      * @return Whether string is an integer.
      */
@@ -158,7 +162,7 @@ public class Duke {
         try {
             Integer.parseInt(input);
             return true;
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
     }

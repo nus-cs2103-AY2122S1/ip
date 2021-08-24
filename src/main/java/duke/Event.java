@@ -12,6 +12,7 @@ public class Event extends Task {
 
     /**
      * Constructor for duke.Event object.
+     *
      * @param description Description of duke.Event.
      */
     public Event(String description, LocalDate ld, String time) {
@@ -23,15 +24,17 @@ public class Event extends Task {
 
     /**
      * Returns string representation of duke.Event object.
+     *
      * @return String representation of duke.Event.
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +  this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy ")) + this.time + ")";
+        return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy ")) + this.time + ")";
     }
 
     /**
      * Returns at property of duke.Event object.
+     *
      * @return at of duke.Event.
      */
     public String getAt() {

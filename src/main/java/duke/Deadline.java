@@ -1,4 +1,5 @@
 package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -12,6 +13,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline object.
+     *
      * @param description Description of Deadline.
      */
     public Deadline(String description, LocalDate ld, String time) {
@@ -23,11 +25,12 @@ public class Deadline extends Task {
 
     /**
      * Returns string representation of Deadline object.
+     *
      * @return String representation of Deadline.
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +  this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy ")) + this.time + ")";
+        return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy ")) + this.time + ")";
     }
 
     public String getBy() {

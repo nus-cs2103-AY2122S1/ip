@@ -27,15 +27,15 @@ public class Storage {
             String currentLine = s.nextLine();
             String[] commands = currentLine.split(",");
             Task.TaskType type = Duke.convertToTaskType(commands[0]);
-            switch(type) {
-                case TODO:
-                    tasks.addTask(commands[2], Task.TaskType.TODO, "");
-                    break;
-                case EVENT:
-                case DEADLINE:
-                    String[] dateAndTime = commands[3].split(" ");
-                    tasks.addTask(commands[2], type, LocalDate.parse(dateAndTime[0]), dateAndTime[1]);
-                    break;
+            switch (type) {
+            case TODO:
+                tasks.addTask(commands[2], Task.TaskType.TODO, "");
+                break;
+            case EVENT:
+            case DEADLINE:
+                String[] dateAndTime = commands[3].split(" ");
+                tasks.addTask(commands[2], type, LocalDate.parse(dateAndTime[0]), dateAndTime[1]);
+                break;
             }
             if (commands[1].equals("[X]")) {
                 tasks.getTask(currentTask).markAsDone();
@@ -62,27 +62,28 @@ public class Storage {
 
     /**
      * Writes data to data.txt in data directory.
+     *
      * @param tasks Tasklist in duke.Duke.
      * @throws IOException
      */
-    public void writeData(TaskList tasks) throws DukeException{
+    public void writeData(TaskList tasks) throws DukeException {
         try {
             createFileIfNotFound(filePath);
             FileWriter fw = new FileWriter(filePath);
             for (int i = 1; i < tasks.getTasksLength() + 1; i++) {
                 Task task = tasks.getTask(i);
                 switch (task.type) {
-                    case DEADLINE:
-                        Deadline dl = (Deadline) task;
-                        fw.write("deadline," + task.getStatusIcon() + "," + task.getTaskDescription() + "," + dl.getBy());
-                        break;
-                    case TODO:
-                        fw.write("todo," + task.getStatusIcon() + "," + task.getTaskDescription());
-                        break;
-                    case EVENT:
-                        Event e = (Event) task;
-                        fw.write("event," + task.getStatusIcon() + "," + task.getTaskDescription() + "," +  e.getAt());
-                        break;
+                case DEADLINE:
+                    Deadline dl = (Deadline) task;
+                    fw.write("deadline," + task.getStatusIcon() + "," + task.getTaskDescription() + "," + dl.getBy());
+                    break;
+                case TODO:
+                    fw.write("todo," + task.getStatusIcon() + "," + task.getTaskDescription());
+                    break;
+                case EVENT:
+                    Event e = (Event) task;
+                    fw.write("event," + task.getStatusIcon() + "," + task.getTaskDescription() + "," + e.getAt());
+                    break;
                 }
                 fw.write(System.lineSeparator());
             }
