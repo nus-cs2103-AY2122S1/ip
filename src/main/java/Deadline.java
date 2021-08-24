@@ -12,8 +12,24 @@ public class Deadline extends Task {
         }
     }
 
+    public static Deadline createDeadline(String desc, boolean isDone) throws InputMismatchException {
+        if (desc.contains("by")) {
+            int i = desc.indexOf('(');
+            return new Deadline(desc.substring(0, i - 1),
+                    desc.substring(i + 5, desc.length() - 1),
+                    isDone);
+        } else {
+            throw new InputMismatchException();
+        }
+    }
+
     private Deadline(String details, String time) {
         super(details);
+        this.time = time;
+    }
+
+    private Deadline(String details, String time, boolean isDone) {
+        super(details, isDone);
         this.time = time;
     }
 

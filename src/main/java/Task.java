@@ -7,8 +7,18 @@ public class Task {
         this.isDone = false;
     }
 
-    public void markAsDone() {
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    public Task markAsDone() {
         this.isDone = true;
+        return this;
+    }
+
+    public String getTaskDesc() {
+        return description;
     }
 
     @Override

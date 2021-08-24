@@ -13,8 +13,24 @@ public class Event extends Task {
         }
     }
 
+    public static Event createEvent(String desc, boolean isDone) throws InputMismatchException {
+        if (desc.contains("at")) {
+            int i = desc.indexOf('(');
+            return new Event(desc.substring(0, i - 1),
+                    desc.substring(i + 5, desc.length() - 1),
+                    isDone);
+        } else {
+            throw new InputMismatchException();
+        }
+    }
+
     private Event(String details, String time) {
         super(details);
+        this.time = time;
+    }
+
+    private Event(String details, String time, boolean isDone) {
+        super(details, isDone);
         this.time = time;
     }
 
