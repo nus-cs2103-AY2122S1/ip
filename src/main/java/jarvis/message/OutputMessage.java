@@ -14,5 +14,9 @@ public class OutputMessage {
     public String getFormattedMessage() {
         return String.format("\n%s\n", this.getMessage());
     }
+
+    public void print() {
+        System.out.println(this.getFormattedMessage());
+    }
 }
 

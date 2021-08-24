@@ -1,18 +1,19 @@
-package jarvis.action;
+package jarvis.command;
 
 import jarvis.exception.JarvisException;
 import jarvis.exception.TaskDetailsEmptyException;
-import jarvis.output.Output;
+import jarvis.parser.Parser;
+import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.Deadline;
 import jarvis.task.TaskList;
 
-public class DeadlineAction extends Action {
+public class DeadlineCommand extends Command {
     private String taskDescription;
     private String deadline;
 
-    public DeadlineAction(String userInputWithoutActionTrigger) throws TaskDetailsEmptyException {
-        String[] splitStrings = userInputWithoutActionTrigger.split("/by", 2);
+    public DeadlineCommand(String userInputWithoutCommandTrigger) throws TaskDetailsEmptyException {
+        String[] splitStrings = Parser.getDeadlineInfoArray(userInputWithoutCommandTrigger);
         this.taskDescription = splitStrings[0].trim();
         if (taskDescription.equals("")) {
             throw new TaskDetailsEmptyException("description");
@@ -24,9 +25,9 @@ public class DeadlineAction extends Action {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) throws JarvisException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws JarvisException {
         Deadline newDeadlineTask = taskList.addTaskWithDeadline(taskDescription, deadline);
         storage.addToStorageFile(newDeadlineTask.toStorageFormatString());
-        Output.showTaskAddedMessage(newDeadlineTask, taskList);
+        ui.showTaskAddedMessage(newDeadlineTask, taskList);
     }
 }

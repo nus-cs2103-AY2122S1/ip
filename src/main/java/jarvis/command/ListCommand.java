@@ -1,16 +1,16 @@
-package jarvis.action;
+package jarvis.command;
 
 import jarvis.exception.JarvisException;
-import jarvis.output.Output;
+import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 
-public class ListAction extends Action {
+public class ListCommand extends Command {
     @Override
-    public void execute(TaskList taskList, Storage storage) throws JarvisException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws JarvisException {
         if (taskList.getTaskListSize() == 0) {
             throw new JarvisException("Your list is currently empty! Try adding some tasks.");
         }
-        Output.showTaskList(taskList);
+        ui.showTaskList(taskList);
     }
 }

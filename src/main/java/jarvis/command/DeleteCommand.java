@@ -1,27 +1,28 @@
-package jarvis.action;
+package jarvis.command;
 
 import jarvis.exception.InvalidInputException;
 import jarvis.exception.JarvisException;
 import jarvis.exception.TaskListEmptyException;
 import jarvis.exception.TaskNotFoundException;
-import jarvis.output.Output;
+import jarvis.parser.Parser;
+import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.Task;
 import jarvis.task.TaskList;
 
-public class DeleteAction extends Action {
+public class DeleteCommand extends Command {
     private int taskIndex;
 
-    public DeleteAction(String userInputWithoutActionTrigger) throws InvalidInputException {
+    public DeleteCommand(String userInputWithoutCommandTrigger) throws InvalidInputException {
         try {
-            this.taskIndex = Integer.parseInt(userInputWithoutActionTrigger.trim()) - 1;
+            this.taskIndex = Parser.getTaskIndex(userInputWithoutCommandTrigger);
         } catch (NumberFormatException e) {
             throw new InvalidInputException("number");
         }
      }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) throws JarvisException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws JarvisException {
         if (taskList.getTaskListSize() == 0) {
             throw new TaskListEmptyException();
         }
@@ -30,6 +31,6 @@ public class DeleteAction extends Action {
         }
         Task task = taskList.deleteTask(taskIndex);
         storage.rewriteStorageFile(taskList);
-        Output.showTaskDeletedMessage(task, taskList);
+        ui.showTaskDeletedMessage(task, taskList);
     }
 }

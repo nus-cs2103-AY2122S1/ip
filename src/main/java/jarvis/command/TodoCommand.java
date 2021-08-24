@@ -1,16 +1,16 @@
-package jarvis.action;
+package jarvis.command;
 
 import jarvis.exception.StorageFileException;
 import jarvis.exception.TaskDetailsEmptyException;
-import jarvis.output.Output;
+import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 import jarvis.task.Todo;
 
-public class TodoAction extends Action {
+public class TodoCommand extends Command {
     private String todoDescription;
 
-    public TodoAction(String todoDescription) throws TaskDetailsEmptyException {
+    public TodoCommand(String todoDescription) throws TaskDetailsEmptyException {
         if (todoDescription.equals("")) {
             throw new TaskDetailsEmptyException("description");
         }
@@ -18,9 +18,9 @@ public class TodoAction extends Action {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) throws StorageFileException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws StorageFileException {
         Todo newTodo = taskList.addTodo(todoDescription);
         storage.addToStorageFile(newTodo.toStorageFormatString());
-        Output.showTaskAddedMessage(newTodo, taskList);
+        ui.showTaskAddedMessage(newTodo, taskList);
     }
 }

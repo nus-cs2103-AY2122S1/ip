@@ -1,27 +1,28 @@
-package jarvis.action;
+package jarvis.command;
 
 import jarvis.exception.InvalidInputException;
 import jarvis.exception.JarvisException;
 import jarvis.exception.TaskListEmptyException;
 import jarvis.exception.TaskNotFoundException;
-import jarvis.output.Output;
+import jarvis.parser.Parser;
+import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.Task;
 import jarvis.task.TaskList;
 
-public class MarkAsDoneAction extends Action {
+public class MarkAsDoneCommand extends Command {
     private int taskIndex;
 
-    public MarkAsDoneAction(String userInputWithoutActionTrigger) throws JarvisException {
+    public MarkAsDoneCommand(String userInputWithoutCommandTrigger) throws JarvisException {
        try {
-           this.taskIndex = Integer.parseInt(userInputWithoutActionTrigger.trim()) - 1;
+           this.taskIndex = Parser.getTaskIndex(userInputWithoutCommandTrigger);
        } catch (NumberFormatException e) {
            throw new InvalidInputException("number");
        }
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) throws JarvisException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws JarvisException {
         if (taskList.getTaskListSize() == 0) {
             throw new TaskListEmptyException();
         }
@@ -30,6 +31,6 @@ public class MarkAsDoneAction extends Action {
         }
         Task task = taskList.markAsDone(taskIndex);
         storage.rewriteStorageFile(taskList);
-        Output.showTaskDoneMessage(task);
+        ui.showTaskDoneMessage(task);
     }
 }

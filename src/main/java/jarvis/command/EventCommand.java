@@ -1,18 +1,19 @@
-package jarvis.action;
+package jarvis.command;
 
 import jarvis.exception.StorageFileException;
 import jarvis.exception.TaskDetailsEmptyException;
-import jarvis.output.Output;
+import jarvis.parser.Parser;
+import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.Event;
 import jarvis.task.TaskList;
 
-public class EventAction extends Action {
+public class EventCommand extends Command {
     private String eventDescription;
     private String eventTime;
 
-    public EventAction(String userInputWithoutActionTrigger) throws TaskDetailsEmptyException {
-        String[] splitStrings = userInputWithoutActionTrigger.split("/at", 2);
+    public EventCommand(String userInputWithoutCommandTrigger) throws TaskDetailsEmptyException {
+        String[] splitStrings = Parser.getEventInfoArray(userInputWithoutCommandTrigger);
         this.eventDescription = splitStrings[0].trim();
         if (eventDescription.equals("")) {
             throw new TaskDetailsEmptyException("description");
@@ -24,9 +25,9 @@ public class EventAction extends Action {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) throws StorageFileException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws StorageFileException {
         Event newEvent = taskList.addEvent(eventDescription, eventTime);
         storage.addToStorageFile(newEvent.toStorageFormatString());
-        Output.showTaskAddedMessage(newEvent, taskList);
+        ui.showTaskAddedMessage(newEvent, taskList);
     }
 }

@@ -1,4 +1,4 @@
-package jarvis.output;
+package jarvis.ui;
 
 import jarvis.exception.JarvisException;
 import jarvis.message.ExitMessage;
@@ -7,62 +7,74 @@ import jarvis.message.OutputMessage;
 import jarvis.task.Task;
 import jarvis.task.TaskList;
 
-public class Output {
-    private static void showOutputMessage(OutputMessage message) {
-        System.out.println(message.getMessage());
+import java.util.Scanner;
+
+public class Ui {
+    Scanner sc = new Scanner(System.in);
+
+    private void showOutputMessage(OutputMessage message) {
+        message.print();
     }
 
-    private static void showFormattedOutputMessage(OutputMessage message) {
-        System.out.println(message.getFormattedMessage());
+    private void showFormattedOutputMessage(OutputMessage message) {
+        message.print();
     }
 
-    public static void showGreetingMessage() {
+    public void showGreetingMessage() {
         OutputMessage greetingMessage = new GreetingMessage();
-        Output.showFormattedOutputMessage(greetingMessage);
+        greetingMessage.print();
     }
 
-    public static void showExitMessage() {
+    public void showExitMessage() {
         OutputMessage exitMessage = new ExitMessage();
-        Output.showFormattedOutputMessage(exitMessage);
+        exitMessage.print();
     }
 
-    public static void showTaskList(TaskList taskList) {
+    public void showTaskList(TaskList taskList) {
         OutputMessage taskListMessage = new OutputMessage(String.format(
                 "%s\n%s",
                 "Here are the tasks in your list:",
                 taskList.toString()
         ));
-        Output.showFormattedOutputMessage(taskListMessage);
+        taskListMessage.print();
     }
 
-    public static void showError(JarvisException e) {
+    public void showError(JarvisException e) {
         OutputMessage errorMessage = new OutputMessage(e.getMessage());
-        Output.showFormattedOutputMessage(errorMessage);
+        errorMessage.print();
     }
 
-    public static void showTaskAddedMessage(Task task, TaskList taskList) {
+    public void showTaskAddedMessage(Task task, TaskList taskList) {
         OutputMessage taskAddedMessage = new OutputMessage(String.format(
                 "Alright! I have added this to the Stark Industries Database:\n\t%s\n%s",
                 task.toString(),
                 taskList.taskListSummary()
         ));
-        Output.showFormattedOutputMessage(taskAddedMessage);
+        taskAddedMessage.print();
     }
 
-    public static void showTaskDoneMessage(Task task) {
+    public void showTaskDoneMessage(Task task) {
         OutputMessage taskDoneMessage = new OutputMessage(String.format(
                 "Nice! I've marked this task as done:\n\t%s",
                 task.toString()
         ));
-        Output.showFormattedOutputMessage(taskDoneMessage);
+        taskDoneMessage.print();
     }
 
-    public static void showTaskDeletedMessage(Task task, TaskList taskList) {
+    public void showTaskDeletedMessage(Task task, TaskList taskList) {
         OutputMessage taskDeletedMessage = new OutputMessage(String.format(
                 "Initiated Delete protocol. Delete confirmed for:\n\t%s\n%s",
                 task.toString(),
                 taskList.taskListSummary()
         ));
-        Output.showFormattedOutputMessage(taskDeletedMessage);
+        taskDeletedMessage.print();
+    }
+
+    public String readInput() {
+        return this.sc.nextLine();
+    }
+
+    public void closeScanner() {
+        this.sc.close();
     }
 }

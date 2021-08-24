@@ -1,15 +1,13 @@
-import jarvis.action.Action;
-import jarvis.action.ActionTypeEnum;
+import jarvis.command.Command;
 import jarvis.exception.JarvisException;
-import jarvis.output.Output;
+import jarvis.parser.Parser;
+import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 
-import java.util.Scanner;
-
 public class Jarvis {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Ui ui = new Ui();
         Storage storage;
         TaskList taskList;
 
@@ -17,32 +15,32 @@ public class Jarvis {
             storage = new Storage("./data/jarvis.txt");
             taskList = new TaskList(storage.loadTasksFromFile());
         } catch (JarvisException e) {
-            Output.showError(e);
+            ui.showError(e);
             return;
         }
 
-        Output.showGreetingMessage();
+        ui.showGreetingMessage();
 
-        String userInput = scanner.nextLine();
+        String userInput = ui.readInput();
 
         while(true) {
             try {
-                if (userInput.equals("")) {
-                    userInput = scanner.nextLine();
+                if (Parser.isUserInputEmpty(userInput)) {
+                    userInput = ui.readInput();
                     continue;
                 }
-                if (ActionTypeEnum.identifyActionType(userInput.trim()) == ActionTypeEnum.EXIT) {
+                if (Parser.shouldExit(userInput)) {
                     break;
                 }
-                Action action = Action.createAction(userInput);
-                action.execute(taskList, storage);
+                Command command = Command.createCommand(userInput);
+                command.execute(taskList, storage, ui);
             } catch (JarvisException e) {
-                Output.showError(e);
+                ui.showError(e);
             }
-            userInput = scanner.nextLine();
+            userInput = ui.readInput();
         }
 
-        Output.showExitMessage();
-        scanner.close();
+        ui.showExitMessage();
+        ui.closeScanner();
     }
 }
