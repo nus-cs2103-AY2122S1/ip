@@ -79,7 +79,7 @@ public class Duke {
                     index -= 1;
                 }
                 dataReader.close();
-                String newData = taskData.replace("0", "1");
+                String newData = taskData.replaceFirst("0", "1");
                 dataReader = new Scanner(data);
                 while (dataReader.hasNextLine()) {
                     buffer.append(dataReader.nextLine()+System.lineSeparator());
