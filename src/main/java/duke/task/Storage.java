@@ -5,8 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.main.TaskList;
 import duke.exception.InvalidParamException;
+import duke.main.TaskList;
 
 public class Storage {
 
