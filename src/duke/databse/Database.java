@@ -25,8 +25,7 @@ public class Database {
             }
 
         } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            System.out.println("An error occurred in creating or opening file.");
         }
 
 
@@ -63,7 +62,6 @@ public class Database {
         switch (s[0]) {
             case "T":
                 Todo todo = new Todo(s[1], isDone);
-                //System.out.println(todo.toString());
                 return todo;
             case "E":
                 String taskname_event = "";
@@ -84,8 +82,7 @@ public class Database {
 
                     }
                 }
-                Event event =  new Event(s[1], isDone, tasktime_event);
-                //System.out.println(event.toString());
+                Event event =  new Event(taskname_event, isDone, tasktime_event);
                 return event;
             case "D":
                 String taskname_ddl = "";
