@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EventTest {
 
-    String date = "2000-10-10";
-    Event ev = new Event("fun run", LocalDate.parse(date), "1000");
+    final String date = "2000-10-10";
+    final Event ev = new Event("fun run", LocalDate.parse(date), "1000");
 
     @Test
     void testToString() {

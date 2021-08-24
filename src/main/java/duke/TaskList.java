@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
- * This class represents the task list stored by the chat bot.
+ * This class represents the task list stored by the chatbot.
  */
 public class TaskList {
 
     /**
      * Contains tasks added by user.
      */
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Represents the index of the next task to be added by the user.
@@ -36,10 +36,9 @@ public class TaskList {
     /**
      * Adds a new todo to the list
      * @param task The task description to be added.
-     * @param type The type of the task to be added.
-     * @param time The time associated with the task added.
+     *
      */
-    public void addTask(String task, Task.TaskType type, String time) {
+    public void addTask(String task) {
         this.tasks.add(new Todo(task));
         this.taskIndex++;
     }
@@ -93,8 +92,7 @@ public class TaskList {
      * @return Returns task.
      */
     public Task getTask(int index) {
-        Task currentTask = tasks.get(index - 1);
-        return currentTask;
+        return tasks.get(index - 1);
     }
 
     /**

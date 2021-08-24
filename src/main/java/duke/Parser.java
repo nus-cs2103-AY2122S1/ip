@@ -1,17 +1,37 @@
 package duke;
 
+/**
+ * Represents the Duke parser to interpret user commands.
+ */
 public class Parser {
 
     protected String[] currentLine;
 
-    public void intepretCommand(String command) {
+    /**
+     * Method to split the command into a <code>String</code> array.
+     * @param command The command to be split.
+     */
+    public void interpretCommand(String command) {
         currentLine = command.split(" ");
     }
 
+    /**
+     * Method to obtain the main command in the whole command.
+     * eg. <code>≈done 5</code> -> returns "done".
+     * eg. <code>deadline hw /by 2000-10-10 1000</code> -> returns "deadline"
+     * @return The first command.
+     */
     public String getFirstCommand() {
         return currentLine[0];
     }
 
+    /**
+     * Finds the index of the command.
+     * eg. <code>done 5</code> -> returns 5
+     * eg. <code>delete 3</code> -> returns 3
+     * @return The command index.
+     * @throws NumberFormatException Thrown when user does not put a number.
+     */
     public int findCommandIndex() throws NumberFormatException{
         return Integer.parseInt(this.currentLine[1]);
     }
@@ -22,7 +42,7 @@ public class Parser {
 
 
     /**
-     * Finds the date in the command (if any).
+     * Finds the date in the command if command is deadline or event.
      * @return The date in the command (if any).
      */
     public String findDateInCommand() {
