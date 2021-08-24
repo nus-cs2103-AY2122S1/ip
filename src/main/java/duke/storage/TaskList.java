@@ -75,6 +75,12 @@ public class TaskList {
                 + "Now you have " + this.taskList.size() + " tasks in the list.");
     }
 
+    /**
+     * Helps to find the specific Task from the list based on the description given.
+     * 
+     * @param find is the description coming from the user, which the list of Tasks
+     *             they would like to find.
+     */
     public void find(String find) {
         ArrayList<Task> tempArr = new ArrayList<Task>();
 
