@@ -9,7 +9,7 @@ public class Deadline extends Task{
      */
     public Deadline(String taskDescription, String deadline) {
         super(taskDescription);
-        this.deadline = deadline;
+        this.deadline = convert(deadline);
     }
 
     /**
