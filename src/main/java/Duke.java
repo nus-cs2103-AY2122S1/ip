@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
     private static ArrayList<Task> list = new ArrayList<Task>();
+    private static DukeException dukeExp = new DukeException();
 
     public static void printList() {
         System.out.println("    Here are the tasks in your list:");
@@ -13,10 +14,10 @@ public class Duke {
     }
 
     public static void printNoOfTasks() {
-        System.out.printf("    Now you have %d tasks in the list.\n", list.size());
+        System.out.printf("    Now you have %d tasks in the list.", list.size());
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         System.out.println("Hello! I'm Jacky\nWhat can I do for you?");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -44,7 +45,7 @@ public class Duke {
                 continue;
             } else if (input.contains("todo")) {
                 if (input.length() < 6) {
-                    throw new DukeException( "OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println(dukeExp.toDo());
                 } else {
                     ToDo toDo = new ToDo(input.substring(5));
                     list.add(toDo);
@@ -70,7 +71,9 @@ public class Duke {
                 input = sc.nextLine();
                 continue;
             } else {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println(dukeExp.random());
+                input = sc.nextLine();
+                continue;
             }
 
         }
