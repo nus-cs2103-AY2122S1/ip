@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+
 public class Event extends Task{
     private LocalDate date;
     private LocalTime time;
@@ -11,6 +12,7 @@ public class Event extends Task{
         if (deadline.equals("")) {
             throw new MissingDateException();
         } else {
+
             this.date = LocalDate.parse(deadline.substring(0,10));
             this.time = LocalTime.parse(deadline.substring(11), DateTimeFormatter.ofPattern("HHmm"));
         }
@@ -18,7 +20,8 @@ public class Event extends Task{
 
     @Override
     public String getDescription() {
-        return super.getDescription()  + "(at: "
+        return super.getDescription()
+                + "(at: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + this.time.format(DateTimeFormatter.ofPattern(" h:ma"))
                 + ")";

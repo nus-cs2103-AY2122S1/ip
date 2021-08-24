@@ -11,17 +11,17 @@ public class Deadline extends Task{
         if (deadline.equals("")) {
             throw new MissingDateException();
         } else {
-            this.date = LocalDate.parse(deadline.substring(0,10));
+            this.date = LocalDate.parse(deadline.substring(0, 10));
             this.time = LocalTime.parse(deadline.substring(11), DateTimeFormatter.ofPattern("HHmm"));
         }
     }
 
     @Override
     public String getDescription() {
-        return super.getDescription()
-                + "(by: "
-                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + this.time.format(DateTimeFormatter.ofPattern(" h:ma"))
-                + ")";
-    }
+            return super.getDescription()
+                    + "(by: "
+                    + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    + this.time.format(DateTimeFormatter.ofPattern(" h:ma"))
+                    + ")";
+        }
 }
