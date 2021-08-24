@@ -1,3 +1,5 @@
+package duke;
+
 public class EventTask extends Task{
     protected String description;
     protected boolean isDone;

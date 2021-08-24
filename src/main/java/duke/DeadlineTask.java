@@ -1,3 +1,5 @@
+package duke;
+
 public class DeadlineTask extends Task{
     protected String description;
     protected boolean isDone;
