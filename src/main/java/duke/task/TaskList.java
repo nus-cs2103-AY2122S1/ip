@@ -74,6 +74,33 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds all tasks with name matching the search string (case insensitive)
+     * Prints the tasks and their status
+     *
+     * @param searchString the string to find in the tasks
+     */
+    public void find(String searchString) {
+        int size = taskList.size();
+        int foundCount = 0;
+        Duke.ui.addMessage("Here are the matching tasks in your list:", TextColor.DEFAULT);
+
+        for (int i = 0; i < size; i++) {
+            Task task = taskList.get(i);
+            // case insensitive search
+            if (task.getName().toLowerCase().contains(searchString.toLowerCase())) {
+                // print each task indented, in a new line
+                Duke.ui.addMessage("\n  " + (i + 1) + ". " + task.toString(), task.getListColor());
+                foundCount++;
+            }
+        }
+
+        if (foundCount == 0) {
+            Duke.ui.resetMessage();
+            Duke.ui.addMessage("No matching tasks!", TextColor.DEFAULT);
+        }
+    }
+
     // parses the user's input and returns the index of the task in question
     private int getTaskIndexFromTaskNum(int taskNum) throws DukeException {
         if (taskNum <= 0 || taskNum > taskList.size()) {

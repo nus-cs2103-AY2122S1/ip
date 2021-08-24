@@ -9,7 +9,6 @@ public class ExitCommand extends Command {
 
     @Override
     public void parse(String input) {
-        // String data = input.substring(getCommandLength());
         Duke.exit();
     }
 }

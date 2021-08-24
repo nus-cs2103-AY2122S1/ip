@@ -9,8 +9,6 @@ public class ListCommand extends Command {
 
     @Override
     public void parse(String input) {
-        // String data = input.substring(getCommandLength());
-
         Duke.taskList.list();
     }
 }

@@ -19,6 +19,15 @@ public abstract class Task {
         return done;
     }
 
+    /**
+     * Returns the name of the task
+     *
+     * @return name of the task
+     */
+    public String getName() {
+        return name;
+    }
+
     public abstract boolean isExpired();
 
     public abstract TextColor getListColor();
