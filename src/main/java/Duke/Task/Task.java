@@ -29,7 +29,7 @@ public class Task {
     /**
      * Toggles the completion status of the task.
      */
-    public void toggleComplete() {
+    public void setDone() {
         this.complete = !this.complete;
     }
 

@@ -5,20 +5,17 @@ import Duke.Task.Event;
 import Duke.Task.Task;
 import Duke.Task.Todo;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
  * This class represents a Duke instance.
- * User inputs are added to the task list, and the "list" command lists all the user's tasks.
- * Users can exit Duke by typing the "bye" command.
  */
 public class Duke {
-    private final List<Task> list = new ArrayList<>();
+    private final TaskList list = new TaskList();
     private static final String WELCOME_MESSAGE = "Hello, I'm Duke\nWhat can I do for you?";
     private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String LINE = "____________________________________________________________\n";
+    private boolean isStopped = false;
 
     /**
      * Prints welcome message, then accepts user input until exit command is entered.
@@ -26,15 +23,18 @@ public class Duke {
     public void start() {
         formatAndPrint(WELCOME_MESSAGE);
         Scanner sc = new Scanner(System.in);
-        boolean continueListening = true;
-        while (continueListening) {
+        while (!this.isStopped) {
             String input = sc.nextLine();
             try {
-                continueListening = listen(input);
+                listen(input);
             } catch (DukeException e) {
                 formatAndPrint(e.getMessage());
             }
         }
+    }
+
+    public void stop() {
+        this.isStopped = true;
     }
 
     /**
@@ -43,16 +43,17 @@ public class Duke {
      * @param input String containing user input.
      * @return Boolean that controls whether to continue accepting user input.
      */
-    public boolean listen(String input) throws DukeException {
+    public void listen(String input) throws DukeException {
         // Get command
         String[] splitCommand = input.split(" ", 2);
         String command = splitCommand[0];
         switch (command) {
         case "bye":
+            this.stop();
             formatAndPrint(GOODBYE_MESSAGE);
-            return false;
+            break;
         case "list":
-            displayList();
+            formatAndPrint(list.toString());
             break;
         case "done": {
             // Error handling: number not provided.
@@ -65,7 +66,8 @@ public class Duke {
             if (index < 0 || index >= list.size()) {
                 throw new DukeException("Invalid number.");
             }
-            markAsDone(index);
+            Task task = this.list.setDone(index);
+            formatAndPrint("Nice! I've marked this task as done:\n" + task);
             break;
         }
         case "delete": {
@@ -79,7 +81,11 @@ public class Duke {
             if (index < 0 || index >= list.size()) {
                 throw new DukeException("Invalid number.");
             }
-            delete(index);
+            Task task = list.remove(index);
+            formatAndPrint(String.format("Noted. I've removed this task:\n%s\nNow you have %d %s in your list.",
+                    task,
+                    list.size(),
+                    list.size() == 1 ? "task" : "tasks"));
             break;
         }
         case "todo":
@@ -120,7 +126,6 @@ public class Duke {
         default:
             throw new DukeException("Sorry, I don't understand this command.");
         }
-        return true;
     }
 
     /**
@@ -131,45 +136,6 @@ public class Duke {
     public void addToList(Task task) {
         this.list.add(task);
         formatAndPrint(String.format("Got it. I've added this task:\n%s\nNow you have %d %s in your list.",
-                task,
-                list.size(),
-                list.size() == 1 ? "task" : "tasks"));
-    }
-
-    /**
-     * Formats the list of tasks for displaying when the user inputs "list".
-     */
-    public void displayList() {
-        StringBuilder output = new StringBuilder("Here are the tasks in your list:\n");
-        for (int i = 0; i < this.list.size(); i++) {
-            output.append(String.format("%d. %s", i + 1, this.list.get(i)));
-            // Append new line for all lines except last line.
-            if (i != this.list.size() - 1) {
-                output.append("\n");
-            }
-        }
-        formatAndPrint(output.toString());
-    }
-
-    /**
-     * Marks a given task as done.
-     *
-     * @param itemNo Index of the task in the ArrayList.
-     */
-    public void markAsDone(int itemNo) {
-        Task task = list.get(itemNo);
-        task.toggleComplete();
-        formatAndPrint("Nice! I've marked this task as done:\n" + task);
-    }
-
-    /**
-     * Deletes a given task
-     *
-     * @param itemNo Index of the task in the ArrayList.
-     */
-    public void delete(int itemNo) {
-        Task task = list.remove(itemNo);
-        formatAndPrint(String.format("Noted. I've removed this task:\n%s\nNow you have %d %s in your list.",
                 task,
                 list.size(),
                 list.size() == 1 ? "task" : "tasks"));
