@@ -1,6 +1,4 @@
 public class Deadline extends Task {
-    private String timeDue;
-
     public Deadline(String title, String timeDue) {
         super(title, TypeIndicators.DEADLINE);
         this.timeDue = timeDue;
