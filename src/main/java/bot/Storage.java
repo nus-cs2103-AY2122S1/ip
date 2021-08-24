@@ -52,7 +52,9 @@ public class Storage {
     List<Task> tasks = new ArrayList<>();
     List<String> taskStrings = Storage.read();
     for (String taskString: taskStrings) {
-      tasks.add(Task.deserialize(taskString));
+      if (!taskString.equals("")) {
+        tasks.add(Task.deserialize(taskString));
+      }
     }
     bot.setTaskList(tasks);
   }

@@ -1,5 +1,6 @@
 package bot;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class Bot {
         // Storage.write(input[0]);
         cmd.run(this, new String[]{ input.length >=2 ? input[1] : "" });
         Storage.save(this);
-      } catch (InvalidTaskException e) {
+      } catch (InvalidTaskException | DateTimeParseException e) {
         printOutput(new String[] {
           e.getMessage()
         });

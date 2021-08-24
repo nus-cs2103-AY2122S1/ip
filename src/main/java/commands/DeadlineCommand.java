@@ -2,6 +2,9 @@ package commands;
 
 import tasks.DeadlineTask;
 import tasks.Task;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import bot.Bot;
 import bot.OutputManager;
 import exceptions.InvalidArgumentsException;
@@ -17,7 +20,9 @@ public class DeadlineCommand implements Command {
     if (splitArgs.length < 2) {
       throw new InvalidArgumentsException(OutputManager.ERROR_SIGNATURE + "Deadlines require /by arguments");
     }
-    Task deadlineTask = new DeadlineTask(splitArgs[0], splitArgs[1]);
+    
+    LocalDateTime taskTime = LocalDateTime.parse(splitArgs[1].trim(), Task.INPUT_TIME_FORMAT);
+    Task deadlineTask = new DeadlineTask(splitArgs[0], taskTime);
     bot.addTask(deadlineTask);
   }
 
