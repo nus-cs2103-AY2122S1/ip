@@ -7,14 +7,21 @@ import duke.storage.TaskList;
 import duke.tasks.Task;
 
 public class AddCommand extends Command {
-    public void execute(TaskList taskList, Storage storage, Task task) {
+    private final Task task;
+
+    public AddCommand(Task task) {
+        this.task = task;
+    }
+
+    @Override
+    public void execute(TaskList taskList, Storage storage) {
         String inputToStorage;
         try {
-            taskList.addTask(task);
+            taskList.addTask(this.task);
 
-            inputToStorage = task.getSymbol() + " | 0 | " + task.getDescription();
-            if (!task.getSymbol().equals("T")) {
-                inputToStorage += " | " + task.getDateTime();
+            inputToStorage = this.task.getSymbol() + " | 0 | " + this.task.getDescription();
+            if (!this.task.getSymbol().equals("T")) {
+                inputToStorage += " | " + this.task.getDateTime();
             }
 
             storage.appendToData(inputToStorage);
@@ -23,7 +30,8 @@ public class AddCommand extends Command {
         }
     }
 
-    public void execute(TaskList taskList, Storage storage) {
-
-    }
+    @Override
+    public boolean getIsExit() {
+        return false;
+    };
 }
