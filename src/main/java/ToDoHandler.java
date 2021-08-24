@@ -7,7 +7,7 @@ public class ToDoHandler extends CommandHandler {
     public String handle(String input) throws BlueException {
         if (input.contains(" ")) {
             int index = input.indexOf(" ");
-            String title = input.substring(index + 1);
+            String title = input.substring(index + 1).strip();
             ToDo toDo = new ToDo(title);
             taskList.add(toDo);
             String response = "Got it. I've added this task:\n" + toDo + "\n";

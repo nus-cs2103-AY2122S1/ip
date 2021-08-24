@@ -8,8 +8,8 @@ public class DeadlineHandler extends CommandHandler {
         if (input.contains(" /by ")) {
             int indexSpace = input.indexOf(" ");
             int indexBy = input.indexOf(" /by ");
-            String title = input.substring(indexSpace + 1, indexBy);
-            String by = input.substring(indexBy + 5);
+            String title = input.substring(indexSpace + 1, indexBy).strip();
+            String by = input.substring(indexBy + 5).strip();
             Deadline deadline = new Deadline(title, by);
             taskList.add(deadline);
             String response = "Got it. I've added this task:\n" + deadline + "\n";
