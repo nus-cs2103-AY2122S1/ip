@@ -6,26 +6,26 @@ import biscuit.task.TaskList;
 import biscuit.ui.Ui;
 
 /**
- * List command to list tasks
+ * List command to list tasks.
  */
 public class ListCommand extends Command {
 
     /**
-     * Constructors for biscuit.commands.ListCommand
+     * Constructs ListCommand class.
      *
-     * @param userInput User input array with this structure: [command, details]
+     * @param userInput User input array with this structure: [command, details].
      */
     public ListCommand(String[] userInput) {
         super(CommandType.LIST, userInput);
     }
 
     /**
-     * Lists tasks
+     * Lists tasks.
      *
-     * @param taskList biscuit.tasks.Task list to add
-     * @param ui       biscuit.ui.Ui to display
-     * @param storage  biscuit.storage.Storage to save to
-     * @throws BiscuitException Invalid input by user
+     * @param taskList Task list to add.
+     * @param ui       Ui to display.
+     * @param storage  Storage to save to.
+     * @throws BiscuitException Invalid input by user.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {

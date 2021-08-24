@@ -7,26 +7,26 @@ import biscuit.task.TaskList;
 import biscuit.ui.Ui;
 
 /**
- * Done command to mark task as done
+ * Done command to mark task as done.
  */
 public class DoneCommand extends Command {
 
     /**
-     * Constructors for biscuit.commands.DoneCommand
+     * Constructs DoneCommand class.
      *
-     * @param userInput User input array with this structure: [command, details]
+     * @param userInput User input array with this structure: [command, details].
      */
     public DoneCommand(String[] userInput) {
         super(CommandType.DONE, userInput);
     }
 
     /**
-     * Marks specified task as done
+     * Marks specified task as done.
      *
-     * @param taskList biscuit.tasks.Task list
-     * @param ui       biscuit.ui.Ui to display
-     * @param storage  biscuit.storage.Storage to save to
-     * @throws BiscuitException Invalid input by user
+     * @param taskList Task list.
+     * @param ui       Ui to display.
+     * @param storage  Storage to save to.
+     * @throws BiscuitException Invalid input by user.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {

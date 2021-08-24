@@ -4,19 +4,22 @@ import biscuit.commands.*;
 import biscuit.exceptions.BiscuitException;
 
 /**
- * biscuit.parser.Parser class deals with making sense of the user command
+ * Parser class deals with making sense of the user command.
  */
 public class Parser {
 
+    /**
+     * Constructs Parser class.
+     */
     private Parser() {
     }
 
     /**
-     * Parse user input to get command
+     * Parses user input to get command.
      *
-     * @param userInput Input by user
-     * @return biscuit.commands.Command
-     * @throws BiscuitException Invalid command by user
+     * @param userInput Input by user.
+     * @return Command.
+     * @throws BiscuitException Invalid command by user.
      */
     public static Command parse(String userInput) throws BiscuitException {
         String[] processedInput = userInput.trim().split("\\s+", 2);

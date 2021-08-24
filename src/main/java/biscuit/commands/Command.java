@@ -6,12 +6,12 @@ import biscuit.task.TaskList;
 import biscuit.ui.Ui;
 
 /**
- * Abstract class for User Commands
+ * Abstract class for User Commands.
  */
 public abstract class Command {
 
     /**
-     * Types of commands available
+     * Types of commands available.
      */
     public enum CommandType {
         ADD,
@@ -25,10 +25,10 @@ public abstract class Command {
     protected String[] userInput;
 
     /**
-     * Constructor for biscuit.commands.Command class
+     * Constructs Command class.
      *
-     * @param commandType Type of command
-     * @param userInput   User input array with this structure: [command, details]
+     * @param commandType Type of command.
+     * @param userInput   User input array with this structure: [command, details].
      */
     protected Command(CommandType commandType, String[] userInput) {
         this.commandType = commandType;
@@ -36,28 +36,28 @@ public abstract class Command {
     }
 
     /**
-     * Execute command from userInput
+     * Execute command from userInput.
      *
-     * @param taskList biscuit.tasks.Task list
-     * @param ui       biscuit.ui.Ui to display
-     * @param storage  biscuit.storage.Storage to save to
-     * @throws BiscuitException Invalid input by user
+     * @param taskList Task list.
+     * @param ui       Ui to display.
+     * @param storage  Storage to save to.
+     * @throws BiscuitException Invalid input by user.
      */
     public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException;
 
     /**
-     * Checks if command type is EXIT
+     * Checks if command type is EXIT.
      *
-     * @return Boolean of is Exit type
+     * @return Boolean of is Exit type.
      */
     public boolean isExit() {
         return this.commandType.equals(CommandType.EXIT);
     }
 
     /**
-     * Get command type of command
+     * Gets command type of command.
      *
-     * @return Command type
+     * @return Command type.
      */
     public CommandType getCommandType() {
         return commandType;

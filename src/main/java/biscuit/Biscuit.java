@@ -10,13 +10,18 @@ import biscuit.ui.Ui;
 import java.util.ArrayList;
 
 /**
- * biscuit.Biscuit is a Personal Assistant Chatbot that helps a person to keep track of various things
+ * Biscuit is a Personal Assistant Chatbot that helps a person to keep track of various things
  */
 public class Biscuit {
     private final Storage storage;
     private final Ui ui;
     private TaskList taskList;
 
+    /**
+     * Constructs Biscuit class.
+     *
+     * @param filePath file path to save file
+     */
     public Biscuit(String filePath) {
         this.storage = new Storage(filePath);
         this.ui = new Ui();
@@ -28,10 +33,18 @@ public class Biscuit {
         }
     }
 
+    /**
+     * Executes main method.
+     *
+     * @param args Arguments passed when run.
+     */
     public static void main(String[] args) {
         new Biscuit("data/biscuit.csv").run();
     }
 
+    /**
+     * Runs Biscuit.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

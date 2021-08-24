@@ -11,26 +11,26 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Add command to add task
+ * Add command to add task.
  */
 public class AddCommand extends Command {
 
     /**
-     * Constructors for biscuit.commands.AddCommand
+     * Constructs AddCommand class.
      *
-     * @param userInput User input array with this structure: [command, details]
+     * @param userInput User input array with this structure: [command, details].
      */
     public AddCommand(String[] userInput) {
         super(CommandType.ADD, userInput);
     }
 
     /**
-     * Adds specified task into list
+     * Adds specified task into list.
      *
-     * @param taskList biscuit.tasks.Task list
-     * @param ui       biscuit.ui.Ui to display
-     * @param storage  biscuit.storage.Storage to save to
-     * @throws BiscuitException Invalid input by user
+     * @param taskList Task list.
+     * @param ui       Ui to display.
+     * @param storage  Storage to save to.
+     * @throws BiscuitException Invalid input by user.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
@@ -57,10 +57,10 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Creates deadline
+     * Creates deadline.
      *
-     * @return biscuit.tasks.Deadline
-     * @throws BiscuitException Invalid user input
+     * @return Deadline.
+     * @throws BiscuitException Invalid user input.
      */
     private Deadline getDeadline() throws BiscuitException {
         String[] deadlineData = userInput[1].split("/by ", 2);
@@ -78,10 +78,10 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Creates event
+     * Creates event.
      *
-     * @return biscuit.tasks.Event
-     * @throws BiscuitException Invalid user input
+     * @return Event.
+     * @throws BiscuitException Invalid user input.
      */
     private Event getEvent() throws BiscuitException {
         String[] eventData = userInput[1].split("/at ", 2);
@@ -99,10 +99,10 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Creates todo
+     * Creates todo.
      *
-     * @return biscuit.tasks.ToDo
-     * @throws BiscuitException Invalid user input
+     * @return ToDo.
+     * @throws BiscuitException Invalid user input.
      */
     private ToDo getToDo() {
         return new ToDo(userInput[1]);
