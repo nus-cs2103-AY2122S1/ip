@@ -95,7 +95,6 @@ public class Parser {
         }
         default:
             throw DukeException.invalidCommand();
-            //System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         }
     }
 }

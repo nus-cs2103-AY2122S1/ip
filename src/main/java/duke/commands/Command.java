@@ -23,14 +23,14 @@ public abstract class Command {
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     public boolean isActive() {
-        return this.isActive;
+        return isActive;
     }
 
     /**
      * Exits the program.
      */
     public void exit() {
-        this.isActive = false;
+        isActive = false;
     }
 
     /**

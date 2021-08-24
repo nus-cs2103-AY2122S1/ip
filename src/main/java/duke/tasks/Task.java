@@ -17,16 +17,16 @@ public class Task {
     }
 
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] :  %s", getStatusIcon(), this.description);
+        return String.format("[%s] :  %s", getStatusIcon(), description);
     }
 
     public String getData() {
         int isDoneBinary = isDone ? 1 : 0;
-        return String.format("%d | %s", isDoneBinary, this.description);
+        return String.format("%d | %s", isDoneBinary, description);
     }
 }
