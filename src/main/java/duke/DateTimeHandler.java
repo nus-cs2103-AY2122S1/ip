@@ -34,12 +34,13 @@ public class DateTimeHandler {
         }
         return null;
     }
-    public String getFormatList() {
-        StringBuilder sb = new StringBuilder("Valid date formats:");
-        for (int i=0; i<formats.length; i++) {
-            sb.append("\n     ").append(i+1).append(". ").append(formats[i]);
+    public String[] getFormatList() {
+        String[] res = new String[formats.length+1];
+        res[0] = "Valid date formats:";
+        for (int i=1; i<=formats.length; i++) {
+            res[i] = formats[i];
         }
-        return sb.toString();
+        return res;
     }
 
     public String invalidFormat() {
