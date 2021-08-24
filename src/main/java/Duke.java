@@ -201,7 +201,7 @@ public class Duke {
                     try{
                         int deleteIndex = Integer.parseInt(instruction[1]);
                         taskList.deleteTask(deleteIndex);
-                    } catch (IndexOutOfBoundsException i){
+                    } catch (IndexOutOfBoundsException | NumberFormatException i){
                         System.out.println("    ____________________________________________________________\n"
                                 + "     " + "\uD83D\uDE41" + " OOPS!!! Please enter a valid item number.\n"
                                 + "    ____________________________________________________________");
@@ -218,7 +218,7 @@ public class Duke {
                     try{
                         int doneIndex = Integer.parseInt(instruction[1]);
                         taskList.markDone(doneIndex);
-                    } catch (IndexOutOfBoundsException i){
+                    } catch (IndexOutOfBoundsException | NumberFormatException i){
                         System.out.println("    ____________________________________________________________\n"
                                 + "     " + "\uD83D\uDE41" + " OOPS!!! Please enter a valid item number.\n"
                                 + "    ____________________________________________________________");
@@ -241,17 +241,21 @@ public class Duke {
                     continue;
                 }
 
+                System.out.println("    ____________________________________________________________\n"
+                        + "     " + "\uD83D\uDE41" + " OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                        + "    ____________________________________________________________");
+
+                writeToFile.write(taskList.refreshList());
+                writeToFile.close();
+
+                input = sc.nextLine();
             } catch (IOException i) {
                 System.out.println("    ____________________________________________________________\n"
                         + "     " + "\uD83D\uDE41" + " OOPS!!! Unable to write to file.\n"
                         + "    ____________________________________________________________");
             }
 
-            System.out.println("    ____________________________________________________________\n"
-                    + "     " + "\uD83D\uDE41" + " OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                    + "    ____________________________________________________________");
 
-            input = sc.nextLine();
         }
 
         System.out.println(ByeMessage);
