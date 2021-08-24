@@ -1,3 +1,13 @@
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.MissingDescriptionException;
+import duke.exceptions.MissingTaskNumberException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;

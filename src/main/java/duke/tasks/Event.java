@@ -1,3 +1,8 @@
+package duke.tasks;
+
+import duke.Ui;
+import duke.exceptions.MissingEventDetailsException;
+
 public class Event extends Task {
     protected String details;
     protected String taskType;
