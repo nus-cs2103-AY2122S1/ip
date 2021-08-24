@@ -13,6 +13,7 @@ public class Storage {
 
     /**
      * Initializes a new storage container
+     *
      * @param filePath
      */
     public Storage(String filePath) {
@@ -23,6 +24,7 @@ public class Storage {
      * Gets the file which stores tasks from the user's session
      * If the file exists, it returns the file
      * If the file does not exist, it creates and returns it
+     *
      * @return Text file containing user session data
      */
     public static File getFile() {
@@ -39,6 +41,7 @@ public class Storage {
     /**
      * Gets the user task file and writes a string to it
      * Erases existing data
+     *
      * @param string String to be written
      */
     public static void writeToDataFile(String string) {
@@ -54,6 +57,7 @@ public class Storage {
 
     /**
      * Gets the user task file and appends a string to it
+     * 
      * @param string String to be appended
      */
     public static void appendToDataFile(String string) {

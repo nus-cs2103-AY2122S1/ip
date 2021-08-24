@@ -13,6 +13,7 @@ public abstract class Task {
 
     /**
      * Initializes a new task
+     *
      * @param name Name of task
      */
     public Task(String name) {

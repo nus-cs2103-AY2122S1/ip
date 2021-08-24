@@ -1,73 +1,77 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 /**
  * Duke.TaskList handles the management of and interaction with tasks
  */
 public class TaskList {
     /** ArrayList containing all tasks **/
-    private ArrayList<Task> taskArrayList;
+    private ArrayList<Task> tasks;
     private Storage storage;
 
     public TaskList(String filePath) {
-        this.taskArrayList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
         this.storage = new Storage(filePath);
         this.getTasksFromStorage();
     }
 
     /**
      * Adds a new task to taskArrayList
+     *
      * @param task Duke.Task object to be added
      */
     public void add(Task task) {
-        taskArrayList.add(task);
+        tasks.add(task);
     }
 
     /**
      * Retrieves the task with the corresponding ID
+     *
      * @param id ID of task
      * @return Duke.Task with ID
      * @throws IndexOutOfBoundsException If task ID does not exist
      */
     public Task get(int id) {
-        return taskArrayList.get(id - 1);
+        return tasks.get(id - 1);
     }
 
     /**
      * Removes the task with corresponding ID
+     *
      * @param id ID of task
      * @throws IndexOutOfBoundsException If task ID does not exist
      */
     public void remove(int id) {
-        taskArrayList.remove(id - 1);
+        tasks.remove(id - 1);
     }
 
     /**
      * Lists the current Tasks in taskArrayList with numbering
      */
     public void list() {
-        for (int i = 0; i < taskArrayList.size(); i++) {
-            System.out.println(i+1 + "." + taskArrayList.get(i).toString());
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(i+1 + "." + tasks.get(i).toString());
         }
         System.out.println();
     }
 
     /**
      * Retrieves the number of tasks currently
+     *
      * @return Number of tasks
      */
     public int size() {
-        return taskArrayList.size();
+        return tasks.size();
     }
 
     /**
@@ -105,8 +109,8 @@ public class TaskList {
      * Saves the current list of tasks to data/duke.txt to be used in future sessions
      */
     public void saveTasksToStorage() {
-        for (int i = 0; i < taskArrayList.size(); i++) {
-            Task task = taskArrayList.get(i);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
             String taskString;
             String isDone = task.isDone() ? "1|" : "0|";
             if (task instanceof ToDo) {
