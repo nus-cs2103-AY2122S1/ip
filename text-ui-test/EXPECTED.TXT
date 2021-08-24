@@ -168,6 +168,32 @@ i.e. event project meeting /at Aug 6th 2-4pm
 Input: 
 - - - - - - - - - - - - - - - - - - - - - - - - -
 
+Output: Please include a search term after the word 'find'.
+i.e. Find meeting
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
+Output: These tasks have descriptions that contain the phrase 'fjlfhsfh'!
+
+    -- NO MATCHING TASKS FOUND --
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
+Output: These tasks have descriptions that contain the phrase 'meeting'!
+
+Task 3. [E][ ] project meeting (at: Mon 2-4pm)
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
 Output: Please specify which task you would like to have
 deleted by adding a single number after 'delete'!
 i.e. delete 1

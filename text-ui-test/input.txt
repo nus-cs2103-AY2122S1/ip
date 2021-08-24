@@ -13,7 +13,10 @@ deadline
 event     
 deadline return book
 deadline return book /by Monday
-event project meeting /at 2-4pm /at Monday         
+event project meeting /at 2-4pm /at Monday
+find
+find fjlfhsfh
+find meeting
 delete 
 delete adawdaw    
 delete -1

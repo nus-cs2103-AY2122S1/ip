@@ -1,6 +1,7 @@
 package duke.main;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidParamException;
 import duke.exception.NoDescriptionException;
 import duke.task.Task;
 import duke.task.Todo;
@@ -49,6 +50,10 @@ public class Parser {
             System.out.println("Output: This is your current list!\n");
             taskList.printList();
 
+        } else if (input.startsWith("find")) {
+
+            findTask(input);
+
         } else if (input.startsWith("done")) {
 
             alterTask(input, Parser.TaskAction.DONE);
@@ -68,6 +73,16 @@ public class Parser {
         return true;
     }
 
+    private void findTask(String input) {
+        try {
+            System.out.println("Output: These tasks have descriptions that contain the phrase '"
+                    + input.substring(5) + "'!\n");
+            taskList.printAllContains(input.substring(5));
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("Output: Please include a search term after the word 'find'.\n"
+                    + "i.e. Find meeting");
+        }
+    }
 
     /**
      * Alters the task depending on the TaskAction given, which could either be delete or done.
