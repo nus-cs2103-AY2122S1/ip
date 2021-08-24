@@ -6,7 +6,7 @@ package tasks;
 public class ToDo extends Task{
 
     /**
-     * Creates a ToDo with a specified description.
+     * Creates a ToDo with a description.
      *
      * @param description The description of this ToDo.
      */
