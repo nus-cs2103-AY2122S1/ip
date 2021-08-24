@@ -11,9 +11,12 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+
+    }
     /**
      * Getter for isDone status
      * @return "X" or " "
@@ -26,11 +29,11 @@ public class Task {
      * Marks task as done
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     @Override
     public String toString() {
-        return "[" + getStatus() + "] " + this.description;
+        return "[" + getStatus() + "] " + description;
     }
 }
