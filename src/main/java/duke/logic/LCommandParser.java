@@ -105,45 +105,6 @@ public class LCommandParser {
         return willExit;
     }
 
-//    private void processInput() {
-//        String[] splitInput = commandEnum.split(" ", 2);
-//        if (splitInput[0].equals("done") || splitInput[0].equals("delete")) {
-//            int taskNumber;
-//            if (splitInput.length != 2) {
-//                throw new DukeException("Please key in %s [number].", splitInput[0]);
-//            } else {
-//                try {
-//                    taskNumber = Integer.parseInt(splitInput[1]);
-//                } catch (NumberFormatException e) {
-//                    throw new DukeException("Please enter a number after " + splitInput[0]);
-//                }
-//                if (splitInput[0].equals("done")) {
-//                    if (!taskList.markAsDone(taskNumber)) { // task already marked as done
-//                        throw new DukeException("You have already marked this task (%s) as done",
-//                                taskList.getTask(taskNumber));
-//                    }
-//                    System.out.println("Nice! I've marked this task as done: ");
-//                    System.out.println("    " + taskList.getTask(taskNumber));
-//                } else { // first word is delete
-//                    Task task = taskList.removeTask(taskNumber);
-//                    System.out.println("Noted. I've removed this task:");
-//                    System.out.println("    " + task);
-//                    System.out.println("Now you have " + taskList.size() + " task"
-//                            + (taskList.size() <= 1 ? " in the list" : "s in the list"));
-//                }
-//            }
-//        } else if (splitInput.length == 2) {
-//            Task task = addTask(splitInput[0], splitInput[1], taskList);
-//            System.out.println("Got it. I have added this task:");
-//            System.out.println("    " + task);
-//            System.out.println("Now you have " + taskList.size() + " task"
-//                    + (taskList.size() <= 1 ? " in the list" : "s in the list"));
-//        } else {
-//            throw new DukeException(INVALID_COMMAND);
-//        }
-//        storage.updateDukeTextFile();
-//    }
-
     /**
      * Attempts to add the task to the tasklist based on the user command.
      * @param action the action of either todo, event or deadline
