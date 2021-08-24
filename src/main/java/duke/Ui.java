@@ -9,13 +9,14 @@ import java.util.Scanner;
 public class Ui {
     private final static File help = new File("help.txt");
     private final static String BORDERS = "\t____________________________________________________________";
+
     public static void reply(String input) {
         System.out.print(BORDERS);
         System.out.print("\n\t ");
         System.out.println(input);
         System.out.println(BORDERS);
     }
-    
+
     public static String help() throws DukeException {
         try {
             StringBuilder sb = new StringBuilder();
