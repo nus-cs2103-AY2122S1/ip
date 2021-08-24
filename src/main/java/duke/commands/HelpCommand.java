@@ -32,6 +32,7 @@ public class HelpCommand extends Command {
                 EventCommand.MESSAGE_USAGE + "\n" +
                 DoneCommand.MESSAGE_USAGE + "\n" +
                 DeleteCommand.MESSAGE_USAGE + "\n" +
+                FindCommand.MESSAGE_USAGE + "\n" +
                 ListCommand.MESSAGE_USAGE + "\n" +
                 HelpCommand.MESSAGE_USAGE + "\n" +
                 ExitCommand.MESSAGE_USAGE);
