@@ -3,6 +3,7 @@ package Duke.Commands;
 import Duke.Duke;
 import Duke.Task.InvalidTaskException;
 import Duke.Task.Task;
+import Duke.Task.TaskList;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,9 +16,9 @@ class DoneTaskCommand extends Command {
     @Override
     public void run(Duke duke, Duke.UserInput input) throws InvalidTaskException {
         int taskIndex = parseTaskNumber(input);
-        Task task = duke.getTaskList().get(taskIndex);
-        task.markAsDone();
-        duke.say(String.format(DONE_TASK_SUCCESS_MESSAGE, task));
+        TaskList taskList = duke.getTaskList();
+        taskList.markAsDone(taskIndex);
+        duke.say(String.format(DONE_TASK_SUCCESS_MESSAGE, taskList.get(taskIndex)));
     }
 
     @Override

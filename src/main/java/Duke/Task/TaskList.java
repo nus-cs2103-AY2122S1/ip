@@ -1,15 +1,24 @@
 package Duke.Task;
 
-import java.util.ArrayList;
+import Duke.Storage.TaskStorage;
+
+import java.io.IOException;
 import java.util.List;
 
 public class TaskList {
     private static final String EMPTY_LIST_MESSAGE = "Hooray! You have no tasks currently.";
     private static final String CANNOT_FIND_TASK_MESSAGE = "Cannot find task with number %d.";
-    private final List<Task> list = new ArrayList<>();
+    private final TaskStorage storage;
+    private final List<Task> list;
+
+    public TaskList(TaskStorage storage) throws IOException {
+        this.storage = storage;
+        this.list = this.storage.load();
+    }
 
     public void add(Task newTask) {
         this.list.add(newTask);
+        this.save();
     }
 
     public Task get(int taskIndex) throws InvalidTaskException {
@@ -23,11 +32,25 @@ public class TaskList {
     public Task remove(int taskIndex) throws InvalidTaskException {
        Task task = this.get(taskIndex);
        this.list.remove(task);
+       this.save();
        return task;
+    }
+
+    public void markAsDone(int taskIndex) throws InvalidTaskException {
+        this.get(taskIndex).markAsDone();
+        this.save();
     }
 
     public int size() {
        return this.list.size();
+    }
+
+    private void save() {
+        try {
+            this.storage.save(this.list);
+        } catch (IOException e) {
+            throw new IllegalStateException("Error saving tasks to file", e);
+        }
     }
 
     @Override

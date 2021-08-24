@@ -1,19 +1,39 @@
 package Duke;
 
 import Duke.Commands.Command;
+import Duke.Storage.FileFormatException;
+import Duke.Storage.TaskStorage;
 import Duke.Task.TaskList;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String DEFAULT_TODO_STORAGE_PATH = "data/duke.txt";
     private static final String GREETING_MESSAGE = "Hello I'm Duke!";
     private static final String EXIT_MESSAGE = "Bye bye! Hope you have a productive day :)";
     private static final String ERROR_MESSAGE = "Oops! An error occurred: %s";
+    private static final String FILE_FORMAT_ERROR_MESSAGE = "The file storing your tasks is in an unrecognized format. "
+        + "Please fix or remove it.";
     private static final String RULER = "\n````````````````````````````````````````````````````````\n";
     private static final String INPUT_PROMPT = "> ";
 
     private boolean stopped = false;
-    private final TaskList taskList = new TaskList();
+    private final TaskList taskList;
+
+    public Duke(String todoStoragePath) throws IOException {
+        TaskStorage taskStorage = new TaskStorage(todoStoragePath);
+        try {
+            this.taskList = new TaskList(taskStorage);
+        } catch (FileFormatException e) {
+            this.say(FILE_FORMAT_ERROR_MESSAGE);
+            throw e;
+        }
+    }
+
+    public Duke() throws IOException {
+        this(DEFAULT_TODO_STORAGE_PATH);
+    }
 
     public void say(String message) {
         message = RULER + message + RULER;
