@@ -26,9 +26,9 @@ public class Calendar {
     }
 
     /**
-     * Method to add a Timeable object to the calendar
+     * Adds a Timeable object to the calendar
      *
-     * @param timeable The timeable to be added
+     * @param timeable The Timeable to be added
      */
     public void addToCalendar(Timeable timeable) {
         LocalDate date = timeable.getDate();
@@ -62,7 +62,7 @@ public class Calendar {
     }
 
     /**
-     * Method to update the calendar
+     * Updates the calendar
      *
      * @param newList The new arraylist of Tasks, which will be used to update the calendar
      */

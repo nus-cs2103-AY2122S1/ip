@@ -1,6 +1,10 @@
 package petal.components;
 
-import petal.task.*;
+import petal.task.Deadline;
+import petal.task.Event;
+import petal.task.Task;
+import petal.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -19,14 +23,18 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private boolean savedProperly;
+    //True if folder and file for saving could be created properly
+    private boolean isLocationPresent;
+
+    //Paths of the location of storage
     private final String folderPath;
     private final String filePath;
+
     private final TaskList taskList;
     private final Ui ui;
 
     /**
-     * The constructor for the Storage class
+     * Constructor for the Storage class
      *
      * @param taskList Instance of TaskList being used
      * @param ui The Ui instance being used
@@ -36,11 +44,11 @@ public class Storage {
         this.taskList = taskList;
         this.folderPath = System.getProperty("user.dir") + "/PetalData";
         this.filePath = folderPath + "/Tasks.txt";
-        savedProperly = true;
+        isLocationPresent = true;
     }
 
     /**
-     * Method to create the main PetalData folder, containing Tasks.txt
+     * Creates the main PetalData folder, containing Tasks.txt
      */
     public void createDirectory() {
         try {
@@ -51,14 +59,14 @@ public class Storage {
             File petalData = new File(filePath);
             boolean done = petalData.createNewFile();
         } catch (IOException e) {
-            savedProperly = false;
+            isLocationPresent = false;
             ui.output(Responses.FILE_ERROR);
         }
         ui.output(Responses.START_MESSAGE);
     }
 
     /**
-     * Method to parse the text from Tasks.txt in tasks
+     * Parses the text from Tasks.txt in tasks and retrieves it as tasks
      *
      * @return True if tasks were retrieved, false if no tasks (new user) or exception occurred
      */
@@ -72,15 +80,15 @@ public class Storage {
                 String[] components = taskLine.split("\\|");
                 boolean isDone = Objects.equals(components[1], "X");
                 switch (components[0]) {
-                    case "T":
-                        toBeAdded.add(new ToDo(components[2], isDone));
-                        break;
-                    case "D":
-                        toBeAdded.add(new Deadline(components[2], components[3], isDone));
-                        break;
-                    case "E":
-                        toBeAdded.add(new Event(components[2], components[3], isDone));
-                        break;
+                case "T":
+                    toBeAdded.add(new ToDo(components[2], isDone));
+                    break;
+                case "D":
+                    toBeAdded.add(new Deadline(components[2], components[3], isDone));
+                    break;
+                case "E":
+                    toBeAdded.add(new Event(components[2], components[3], isDone));
+                    break;
                 }
             }
             taskList.addTask(toBeAdded);
@@ -92,18 +100,20 @@ public class Storage {
     }
 
     /**
-     * Method to save the tasks. If the folder was not able to be created, Petal does not
-     * save any of the tasks.
+     * Saves the tasks in the task list.
+     * If the folder/file couldn't be created properly, the bot doesn't save the tasks.
      *
      * @throws IOException Thrown if tasks are not saved properly
      */
     public void saveTasks() throws IOException {
-        if (!savedProperly) {
+        if (!isLocationPresent) {
             return;
         }
         FileWriter fileWriter = new FileWriter(filePath);
         fileWriter.write(taskList.formatForSaving());
         fileWriter.close();
     }
+
+
 
 }

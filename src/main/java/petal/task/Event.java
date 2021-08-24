@@ -13,7 +13,8 @@ import java.time.format.FormatStyle;
  */
 public class Event extends Task implements Timeable {
 
-    protected String dateTime;
+    private final String description;
+    private final String dateTime;
     private final LocalDate date;
     private final LocalTime startTime;
     private final LocalTime endTime;
@@ -26,7 +27,8 @@ public class Event extends Task implements Timeable {
      * @param isDone Boolean representing if the event is done or not
      */
     public Event(String description, String dateTime, boolean isDone) {
-        super(description.trim(), isDone);
+        super(description = description.trim(), isDone);
+        this.description = description;
         this.dateTime = (dateTime = dateTime.trim());
         String[] splitByWhiteSpace = dateTime.split(" ");
         this.date = Parser.parseDate(splitByWhiteSpace[0]);

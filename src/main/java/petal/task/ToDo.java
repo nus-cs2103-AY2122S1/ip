@@ -6,6 +6,8 @@ package petal.task;
  */
 public class ToDo extends Task {
 
+    private final String description;
+
     /**
      * Constructor for the To.Do class
      *
@@ -14,34 +16,19 @@ public class ToDo extends Task {
      */
     public ToDo(String description, boolean isDone) {
         super(description.trim(), isDone);
+        this.description = description;
     }
 
-    /**
-     * Method that formats the string representation of the current To.Do to allow
-     * it to be sorted in a readable format in the Tasks.txt and retrieved again
-     *
-     * @return Formatted string representation of the object
-     */
     @Override
     public String strForSaving() {
         return "T|" + this.getStatusIcon() + "|" + this.description;
     }
 
-    /**
-     * Overriden method isTimeable
-     *
-     * @return False since not Timeable
-     */
     @Override
     public boolean isTimeable() {
         return false;
     }
 
-    /**
-     * Overridden toString method for the To.Do class
-     *
-     * @return String representation of the To.Do object
-     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

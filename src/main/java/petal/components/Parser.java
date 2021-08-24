@@ -1,6 +1,13 @@
 package petal.components;
 
-import petal.command.*;
+import petal.command.ByeCommand;
+import petal.command.Command;
+import petal.command.DateCommand;
+import petal.command.DeleteCommand;
+import petal.command.DoneCommand;
+import petal.command.ListCommand;
+import petal.command.TaskCommand;
+import petal.command.UnintelligibleCommand;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,8 +19,9 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     /**
-     * Method that comprehends the message. It splits the input and takes
-     * the first word (assumed to be command if format followed) and reacts accordingly
+     * Comprehends the user input.
+     * It splits the input and takes the first word (assumed to be command if format followed)
+     * and reacts accordingly.
      *
      * @param message User input
      */
@@ -22,27 +30,29 @@ public class Parser {
         String command = message.substring(0, message.indexOf(" "));
         String formatted = message.substring(message.indexOf(' ') + 1).trim();
         switch (command) { //Checks first word in string
-            case "list":
-                return new ListCommand();
-            case "bye":
-                return new ByeCommand();
-            case "done":
-                return new DoneCommand(formatted);
-            case "delete":
-                return new DeleteCommand(formatted);
-            case "todo":
-            case "deadline":
-            case "event":
-                return new TaskCommand(command, formatted);
-            case "date":
-                return new DateCommand(formatted);
-            default:
-                return new UnintelligibleCommand();
+        case "list":
+            return new ListCommand();
+        case "bye":
+            return new ByeCommand();
+        case "done":
+            return new DoneCommand(formatted);
+        case "delete":
+            return new DeleteCommand(formatted);
+        case "todo":
+        case "deadline":
+        case "event":
+            //Fallthrough
+            return new TaskCommand(command, formatted);
+        case "date":
+            return new DateCommand(formatted);
+        default:
+            return new UnintelligibleCommand();
         }
     }
 
     /**
-     * Static method that parse a given string (if given correctly), creating a LocalTime
+     * Parses a given string (if given correctly), creating a LocalTime object
+     * It is static as it is available to any object that wants to parse time
      *
      * @param time The given String
      * @return LocalTime object
@@ -55,18 +65,19 @@ public class Parser {
     }
 
     /**
-     * Static method that parse a given string (if given correctly), creating a LocalDate
+     * Parses a given string (if given correctly), creating a LocalDate
+     * It is static as it is available to any object that wants to parse time
      *
      * @param date The given String
-     * @return LocalDate object
+     * @return LocalDate Object
      * @throws DateTimeParseException Thrown if string cannot be represented as a Date object
      */
     public static LocalDate parseDate(String date) {
-        String[] ddMMYY = date.split("/");
-        if (ddMMYY[0].length() == 1) { //if user types 2/12/2019 -> 02/12/2019
-            ddMMYY[0] = "0" + ddMMYY[0];
+        String[] dayMonthYear = date.split("/");
+        if (dayMonthYear[0].length() == 1) { //if user types 2/12/2019 -> 02/12/2019
+            dayMonthYear[0] = "0" + dayMonthYear[0];
         }
-        return LocalDate.parse(ddMMYY[2] + "-" + ddMMYY[1] + "-" + ddMMYY[0]);
+        return LocalDate.parse(dayMonthYear[2] + "-" + dayMonthYear[1] + "-" + dayMonthYear[0]);
     }
 
 }

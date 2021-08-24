@@ -10,9 +10,9 @@ import petal.components.Ui;
 public interface Command {
 
    /**
-    * Method that executes that particular command
+    * Executes the given command
     *
-    * @param taskList Tasklist instance
+    * @param taskList TaskList instance
     * @param ui Ui instance
     * @param storage Storage instance
     */

@@ -24,8 +24,7 @@ public class DoneCommand implements Command {
     }
 
     /**
-     * Overwritten Execute method. It marks the given task
-     * as done.
+     * Marks the given task as done
      *
      * @param taskList TaskList instance
      * @param ui Ui instance

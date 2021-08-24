@@ -7,13 +7,13 @@ import petal.components.Ui;
 import java.io.IOException;
 
 /**
- * ByeCommand class that implements Command and handles
- * the termination of the Petal instance.
+ * The ByeCommand class implements Command
+ * and handles the termination of the Petal bot
  */
 public class ByeCommand implements Command {
 
     /**
-     * Overwritten Execute method. It terminates the Petal instance.
+     * Terminates the running Petal instance
      *
      * @param taskList TaskList instance
      * @param ui Ui instance

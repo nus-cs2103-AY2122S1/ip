@@ -11,7 +11,7 @@ import petal.components.Ui;
 public class ListCommand implements Command {
 
     /**
-     * Overwritten Execute method. It prints the curr list of tasks.
+     * Prints the current list of tasks
      *
      * @param taskList TaskList instance
      * @param ui Ui instance
