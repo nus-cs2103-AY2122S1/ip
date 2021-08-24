@@ -1,5 +1,0 @@
-deadline sleep false 2021-08-22T23:00
-event meeting false 2021-08-23T14:00
-todo eat true
-todo shit true
-deadline kms false 2021-12-31T23:59
