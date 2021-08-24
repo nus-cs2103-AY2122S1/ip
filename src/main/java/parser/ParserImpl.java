@@ -8,7 +8,6 @@ import ui.IUi;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
 /**
@@ -16,9 +15,6 @@ import java.util.logging.Logger;
  * if the command is invalid
  */
 public class ParserImpl implements IParser {
-	/** Scanner to take input from the console */
-	private final Scanner scanner = new Scanner(System.in);
-	
 	/** CommandLogicUnit to process all the commands */
 	private final ICommandLogicUnit commandLogicUnit;
 	
@@ -50,10 +46,8 @@ public class ParserImpl implements IParser {
 	}
 	
 	@Override
-	public void processInput() {
+	public void processInput(String input) {
 		// take the next command within a line, inputted using enter
-		String input = scanner.nextLine();
-		
 		List<String> parsedCommands = Arrays.asList(input.split(" "));
 		
 		processInputHelper(parsedCommands);
@@ -69,7 +63,6 @@ public class ParserImpl implements IParser {
 		switch (parsedCommands.get(0)) {
 		case "bye":
 			commandLogicUnit.processCommand(Command.BYE, Map.of());
-			this.close();
 			break;
 		case "list":
 			String date = "";
@@ -189,11 +182,6 @@ public class ParserImpl implements IParser {
 			processException(new IllegalCallerException("I'm sorry, but I don't know what that means :-("));
 			break;
 		}
-	}
-	
-	@Override
-	public void close() {
-		scanner.close();
 	}
 	
 	private void processException(Exception e) {

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * Implementation of the TaskDao using the temporary storage of ArrayList for database
+ * Implementation of the TaskDao using a FileListStorage.
  */
 public class TaskDaoImpl implements TaskDao {
 	private final Logger logger = Logger.getLogger(TaskDaoImpl.class.getName());

@@ -3,9 +3,11 @@ package parser;
 /**
  * Command line processor interface that takes in the input from the console.
  */
-public interface IParser extends AutoCloseable {
+public interface IParser {
 	/**
 	 * Parses the input from console into corresponding command and process it, current implementation using Command Processor.
+	 *
+	 * @param input String.
 	 */
-	void processInput();
+	void processInput(String input);
 }
