@@ -12,11 +12,6 @@ public class Storage {
     private TaskList taskList;
     private Ui ui;
 
-    public Storage(String filePath) {
-        this.src = new File(filePath);
-        this.taskList = new TaskList();
-    }
-
     public Storage(String path, TaskList taskList, Ui ui) {
         this.src = new File(path);
         this.taskList = taskList;
@@ -24,38 +19,28 @@ public class Storage {
     }
 
     public void addNewTodo(String task) throws Exception {
-        if (task.length() <= 5) {
-            throw new Exception("todoEmpty");
-        }
-        String taskName = task.substring(5);
-        Task todoTask = new Todo(taskName);
+        Task todoTask = Parser.isValidTodoTask(task);
         taskList.add(todoTask);
         this.ui.showAddNewTask();
         saveNewTask(todoTask);
     }
 
     public void addNewDeadline(String task) throws Exception {
-        int position = task.indexOf('/');
-        String taskName = task.substring(9, position - 1);
-        String deadlineTime = task.substring(position + 4);
-        Task deadlineTask = new Deadline(taskName, deadlineTime);
+        Task deadlineTask = Parser.isValidDeadlineTask(task);
         taskList.add(deadlineTask);
         ui.showAddNewTask();
         saveNewTask(deadlineTask);
     }
 
     public void addNewEvent(String task) throws Exception {
-        int position = task.indexOf('/');
-        String taskName = task.substring(6, position - 1);
-        String eventTime = task.substring(position + 4);
-        Task eventTask = new Event(taskName, eventTime);
+        Task eventTask = Parser.isValidEventTask(task);
         taskList.add(eventTask);
         ui.showAddNewTask();
         saveNewTask(eventTask);
     }
 
     public void setTaskDone(String task) throws Exception {
-        int itemDone = Integer.parseInt(task.substring(5));
+        int itemDone = Parser.findFinishedItem(task);
         taskList.get(itemDone - 1).finished();
         ui.showMarkTaskDone(itemDone);
         modifyTasks();
@@ -83,7 +68,7 @@ public class Storage {
     }
 
     public void deleteEvent(String task) throws Exception {
-        int itemDeleted = Integer.parseInt(task.substring(7));
+        int itemDeleted = Parser.findDeleteItem(task);
         Task deletedTask = taskList.remove(itemDeleted - 1);
         ui.showDeleteMessage(deletedTask);
         modifyTasks();
