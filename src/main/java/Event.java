@@ -9,7 +9,7 @@ public class Event extends Task {
     protected String time;
 
     public Event(String description, Boolean isDone) {
-        super(description, isDone);
+        super(description, isDone, "E");
         this.description = description;
     }
 

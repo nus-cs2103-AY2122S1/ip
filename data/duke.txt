@@ -1,4 +1,3 @@
-T, true, read book
 D, false, return book /by June 6th
 E, true, project meeting /at Aug 6th 2-4pm
 T, false, join sports club

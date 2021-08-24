@@ -7,14 +7,16 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String type;
 
     /**
      * Construct a Task object with a given description.
      * @param description The description of the task input by user.
      */
-    public Task(String description, Boolean isDone) {
+    public Task(String description, Boolean isDone, String type) {
         this.description = description;
         this.isDone = isDone;
+        this.type = type;
     }
 
     /**
@@ -56,6 +58,12 @@ public class Task {
     public String delete() {
         return getTask();
     }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+
 }
 
 

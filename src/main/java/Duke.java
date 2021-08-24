@@ -47,6 +47,21 @@ public class Duke {
         }
     }
 
+    private static void saveList() {
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt");
+
+            for (Task t : request) {
+                String str = t.type + ", " + t.isDone + ", " + t.description;
+                fw.write(str + "\n");
+            }
+
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -100,6 +115,7 @@ public class Duke {
             }
             System.out.println(divider);
         }
+        saveList();
     }
 
     public static String list() {

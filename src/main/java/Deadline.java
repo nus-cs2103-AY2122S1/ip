@@ -9,10 +9,10 @@ public class Deadline extends Task {
     protected String deadline;
 
     public Deadline(String description, Boolean isDone) {
-        super(description, isDone);
+        super(description, isDone, "D");
         this.description = description;
-
     }
+
 
     /**
      * Print the status and description of the deadline task.
@@ -24,4 +24,5 @@ public class Deadline extends Task {
         deadline = splitted[1];
         return "[D]" + "[" + super.getStatusIcon() + "] " + text + "(by: " + deadline + ")";
     }
+
 }
