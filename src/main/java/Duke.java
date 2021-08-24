@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.Writer;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
     public static void main (String[] args) throws DukeException, IOException {
@@ -119,7 +122,8 @@ public class Duke {
                 String[] split = userInput.split("deadline ");
                 String description = split[1].split(" /")[0];
                 String time = split[1].split("/by ")[1];
-                task = new Deadline(description, time, false);
+                LocalDate date = LocalDate.parse(time);
+                task = new Deadline(description, date, false);
                 tasks.add(task);
                 String dataDescription = "D , 0 , " + description + " , " + time;
                 addToData(dataDescription, data);
@@ -132,7 +136,8 @@ public class Duke {
                 String[] split = userInput.split("event ");
                 String description = split[1].split(" /")[0];
                 String time = split[1].split("/at ")[1];
-                task = new Event(description, time, false);
+                LocalDate date = LocalDate.parse(time);
+                task = new Event(description, date, false);
                 tasks.add(task);
                 String dataDescription = "E , 0 , " + description + " , " + time;
                 addToData(dataDescription, data);
