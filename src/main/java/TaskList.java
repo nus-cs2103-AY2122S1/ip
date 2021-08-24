@@ -16,9 +16,9 @@ public class TaskList {
     public TaskList() {
         tasks = new ArrayList<>();
         boolean success = loadData();
-//        if (!success) {
-//// TODO            createFile();
-//        }
+        if (!success) {
+            createFile();
+        }
     }
 
     private boolean loadData() {
@@ -39,6 +39,19 @@ public class TaskList {
         }
     }
 
+    private void createFile() {
+        try {
+            if (!Files.exists(directoryPath)) {
+                Files.createDirectory(directoryPath);
+            }
+            if (!Files.exists(filePath)) {
+                Files.createFile(filePath);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void add(Task task) {
         tasks.add(task);
         save();
@@ -56,12 +69,6 @@ public class TaskList {
 
     private void save() {
         try {
-            if (!Files.exists(directoryPath)) {
-                Files.createDirectory(directoryPath);
-            }
-            if (!Files.exists(filePath)) {
-                Files.createFile(filePath);
-            }
             BufferedWriter writer = Files.newBufferedWriter(filePath);
             for (Task task : tasks) {
                 writer.write(TaskMapper.makeString(task));
@@ -73,7 +80,6 @@ public class TaskList {
             e.printStackTrace();
         }
     }
-
 
     public int size() {
         return tasks.size();

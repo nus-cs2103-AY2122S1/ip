@@ -16,7 +16,7 @@ public class DeadlineHandler extends CommandHandler {
             response += "Now you have " + taskList.size() + " tasks in the list.";
             return response;
         } else {
-            throw new BlueException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new BlueException("☹ OOPS!!! The time of a deadline cannot be empty.");
         }
     }
 }
