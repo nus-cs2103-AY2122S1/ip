@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import static java.lang.Integer.parseInt;
-
 public class TaskList {
     public ArrayList<Task> tasks;
     public int count;
