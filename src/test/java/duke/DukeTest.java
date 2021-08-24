@@ -17,7 +17,7 @@ public class DukeTest {
     @Test
     public void DukeDummyTest(){
         try {
-            new Duke("/Users/hungkhoaitay/Duke.Duke/data/duke.txt");
+            new Duke("/Users/hungkhoaitay/Duke/data/dukeTest.txt");
             assertTrue(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -26,7 +26,7 @@ public class DukeTest {
 
     @Test
     public void AddDeadline_StorageTest() {
-        Duke duke = new Duke("/Users/hungkhoaitay/Duke.Duke/data/duke.txt");
+        Duke duke = new Duke("/Users/hungkhoaitay/Duke/data/dukeTest.txt");
         Storage storage = duke.storage;
         try {
             Duke.todoList = new ArrayList<>();
@@ -34,6 +34,7 @@ public class DukeTest {
             storage.clear();
             storage.upload();
             assertEquals(duke.storage.read().get(0), "D , false , return book  , 2022-02-18");
+            storage.clear();
         } catch (DukeException.DukeEmptyTask e) {
             e.printStackTrace();
         } catch (DukeException.DukeEmptyNote e) {
@@ -45,7 +46,7 @@ public class DukeTest {
 
     @Test
     public void DoneCommandTest() {
-        Duke duke = new Duke("/Users/hungkhoaitay/Duke.Duke/data/duke.txt");
+        Duke duke = new Duke("/Users/hungkhoaitay/Duke/data/dukeTest.txt");
         Storage storage = duke.storage;
         try {
             Duke.todoList = new ArrayList<>();
@@ -55,6 +56,7 @@ public class DukeTest {
             storage.clear();
             storage.upload();
             assertEquals(duke.storage.read().get(0), "D , true , return book  , 2022-02-18");
+            storage.clear();
         } catch (DukeException.DukeEmptyTask e) {
             e.printStackTrace();
         } catch (DukeException.DukeEmptyNote e) {
@@ -66,15 +68,17 @@ public class DukeTest {
 
     @Test
     public void DeleteTodo_StorageTest() {
-        Duke duke = new Duke("/Users/hungkhoaitay/Duke.Duke/data/duke.txt");
+        Duke duke = new Duke("/Users/hungkhoaitay/Duke/data/dukeTest.txt");
         Storage storage = duke.storage;
         try {
+            storage.clear();
             Duke.todoList = new ArrayList<>();
             Duke.todoList.add(Task.todo("read book"));
             storage.upload();
             Duke.todoList.clear();
             storage.upload();
             assertEquals(duke.storage.read().isEmpty(), true);
+            storage.clear();
         } catch (DukeException.DukeEmptyTask e) {
             e.printStackTrace();
         } catch (IOException e) {
