@@ -75,4 +75,20 @@ public class TaskList {
         tasks.remove(t);
         return t;
     }
+
+    /**
+     * Searches for the tasks that matches a given query.
+     *
+     * @param query The keyword to search for.
+     * @return An ArrayList of tasks that contains the given query.
+     */
+    public ArrayList<Task> find(String query) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.toString().contains(query)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
 }

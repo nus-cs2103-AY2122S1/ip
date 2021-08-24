@@ -38,6 +38,8 @@ public class Parser {
             return new AddCommand("event", remainingWords);
         case "delete":
             return new DeleteCommand(Integer.parseInt(remainingWords));
+        case "find":
+            return new FindCommand(remainingWords);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
