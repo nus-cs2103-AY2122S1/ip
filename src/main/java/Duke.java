@@ -31,11 +31,13 @@ public class Duke {
                 String description = split[2];
                 if (type.equals("D")) {
                     String time = split[3];
-                    Task deadline = new Deadline(description, time, done);
+                    LocalDate date = LocalDate.parse(time);
+                    Task deadline = new Deadline(description, date, done);
                     tasks.add(deadline);
                 } else if (type.equals("E")) {
                     String time = split[3];
-                    Task event = new Event(description, time, done);
+                    LocalDate date = LocalDate.parse(time);
+                    Task event = new Event(description, date, done);
                     tasks.add(event);
                 } else {
                     Task todo = new Todo(description, done);
