@@ -1,2 +1,4 @@
-0|1|todo Hi
-1|2|deadline shit /by 2359
+0|01|todo Hi
+1|11|deadline shit /by 2022-11-12
+0|21|event /at 2021-12-21
+0|31|event eat /at 2022-12-02

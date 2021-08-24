@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -33,10 +34,8 @@ public class TaskManager {
                 while(txtLine != null) {
                     String[] segments = txtLine.split("\\|");
                     executeCommand(segments[2]);
-                    System.out.println(segments[0]);
                     if (Objects.equals(segments[0], "1")) {
                         String input = "done " + segments[1];
-                        System.out.println(input);
                         executeCommand(input);
                     }
                     txtLine = br.readLine();
@@ -70,9 +69,13 @@ public class TaskManager {
 
                     int segmentedLength = segments[0].length();
                     String description = segments[0].substring(9, segmentedLength);
-                    taskList[i] = new Deadline(description, date);
-                    deadlineAddedMessage();
-                    i++;
+                    try {
+                        taskList[i] = new Deadline(description, date);
+                        deadlineAddedMessage();
+                        i++;
+                    } catch (Exception e) {
+                        System.out.println("Please enter date in this format: yyyy-mm-dd (e.g., 2019-10-15)");
+                    }
                 }
             } else if (inData.contains("event ")) {
                 if (Objects.equals(inData.substring(0, 6), "event ")) {
@@ -81,9 +84,13 @@ public class TaskManager {
 
                     int segmentedLength = segments[0].length();
                     String description = segments[0].substring(6, segmentedLength);
-                    taskList[i] = new Event(description, date);
-                    eventAddedMessage();
-                    i++;
+                    try {
+                        taskList[i] = new Event(description, date);
+                        eventAddedMessage();
+                        i++;
+                    } catch (Exception e) {
+                        System.out.println("Please enter date in this format: yyyy-mm-dd (e.g., 2019-10-15)");
+                    }
                 }
             } else if (inData.contains("done ")) {
                 if (isNumeric(inData.substring(5, inDataLength))) {
