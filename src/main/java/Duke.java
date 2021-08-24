@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ public class Duke {
                         throw new DukeException("Deadline must come with a input date/time for the deadline.");
                     }
                     DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-M-d HH:mm");
-                    LocalDate by = LocalDate.parse(furtherSplits[1].stripLeading(), df);
+                    LocalDateTime by = LocalDateTime.parse(furtherSplits[1].stripLeading(), df);
                     tasks.add(new Deadline(furtherSplits[0], by));
                     printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
                 } catch (DukeException e) {

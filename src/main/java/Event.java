@@ -15,8 +15,11 @@ public class Event extends Task {
         String month = this.at.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
         int date = this.at.getDayOfMonth();
         int year = this.at.getYear();
+        int hour = this.at.getHour();
+        int minute = this.at.getMinute();
 
-        String toPrint = String.format("[E]%s (at: %s %d %d)", super.toString(), month, date, year);
+        String toPrint = String.format("[E]%s (at: %s %d %d %s:%s)",
+                super.toString(), month, date, year, hour, minute);
         return toPrint;
     }
 

@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,7 +61,7 @@ public class Storage {
                         toAdd = new Todo(description);
                         break;
                     case "D":
-                        LocalDate by = LocalDate.parse(splitLine.get(3));
+                        LocalDateTime by = LocalDateTime.parse(splitLine.get(3));
                         toAdd = new Deadline(description, by);
                         break;
                     case "E":
