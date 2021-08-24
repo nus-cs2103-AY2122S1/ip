@@ -137,7 +137,7 @@ public class Duke {
      */
     private static void addDeadline(String commandDesc) {
         String[] commandDescSplit = commandDesc.split("/by");
-        taskList.add(new Deadline(commandDescSplit[0], commandDescSplit[1]));
+        taskList.add(new Deadline(commandDescSplit[0].trim(), commandDescSplit[1].trim()));
         System.out.println("\tGot it. I've added this Deadline:\n" + "\t  " + taskList.get(taskList.size() - 1));
         printTaskCount();
     }
