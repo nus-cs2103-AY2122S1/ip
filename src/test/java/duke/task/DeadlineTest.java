@@ -63,12 +63,12 @@ public class DeadlineTest {
     public void isCompleted_emptyInput_correctCompletion() {
         assertEquals(
                 false,
-                new Deadline("deadline 1", LocalDate.of(2020, 10, 15)).isCompleted()
+                new Deadline("deadline 1", LocalDate.of(2020, 10, 15)).hasCompleted()
         );
         assertEquals(
                 true,
                 new Deadline("deadline 1", LocalDate.of(2020, 10, 15), true)
-                        .isCompleted()
+                        .hasCompleted()
         );
     }
 

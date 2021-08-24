@@ -63,12 +63,12 @@ public class EventTest {
     public void isCompleted_emptyInput_correctCompletion() {
         assertEquals(
                 false,
-                new Event("event 1", LocalDate.of(2020, 10, 15)).isCompleted()
+                new Event("event 1", LocalDate.of(2020, 10, 15)).hasCompleted()
         );
         assertEquals(
                 true,
                 new Event("event 1", LocalDate.of(2020, 10, 15), true)
-                        .isCompleted()
+                        .hasCompleted()
         );
     }
 

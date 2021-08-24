@@ -19,6 +19,7 @@ public class DukeCommandParser {
         String[] inputArr;
         String[] taskArr;
         Task task;
+
         switch (tType) {
         case TODO:
             inputArr = input.split(" ", 2);

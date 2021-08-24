@@ -19,10 +19,10 @@ public class ToDo extends Task{
      * Creates a new ToDo object, allows specifying whether it is complete.
      *
      * @param name Name of the task.
-     * @param completed Boolean representing whether task is completed.
+     * @param isComplete Boolean representing whether task is completed.
      */
-    public ToDo(String name, boolean completed) {
-        super(name, completed, "T");
+    public ToDo(String name, boolean isComplete) {
+        super(name, isComplete, "T");
     }
 
 }

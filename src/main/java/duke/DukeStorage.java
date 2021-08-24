@@ -24,8 +24,8 @@ public class DukeStorage {
         if (!Files.exists(Paths.get(dataFolder))) {
             dataPath.mkdir();
         }
-        File f = new File(tasksFile);
 
+        File f = new File(tasksFile);
         if (!f.exists()) {
             try {
                 f.createNewFile();
@@ -38,7 +38,6 @@ public class DukeStorage {
         }
 
         FileWriter fw;
-
         try {
             fw = new FileWriter(tasksFile);
             for (int i = 0; i < taskList.getListSize(); i++) {
@@ -57,6 +56,7 @@ public class DukeStorage {
         File f = new File(tasksFile);
         String[] taskInfo;
         String nextTask;
+
         try {
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
@@ -64,6 +64,7 @@ public class DukeStorage {
                 if (nextTask.length() == 0) {
                     break;
                 }
+
                 taskInfo = nextTask.split("[|]", 4);
                 switch (taskInfo[0]) {
                 case "T":

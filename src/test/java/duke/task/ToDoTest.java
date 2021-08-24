@@ -47,11 +47,11 @@ public class ToDoTest {
     public void isCompleted_emptyInput_correctCompletion() {
         assertEquals(
                 false,
-                new ToDo("todo 1").isCompleted()
+                new ToDo("todo 1").hasCompleted()
         );
         assertEquals(
                 true,
-                new ToDo("todo 1", true).isCompleted()
+                new ToDo("todo 1", true).hasCompleted()
         );
     }
 

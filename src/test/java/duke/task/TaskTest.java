@@ -59,15 +59,15 @@ public class TaskTest {
     public void isCompleted_emptyInput_correctCompletion() {
         assertEquals(
                 false,
-                new Task("task 1").isCompleted()
+                new Task("task 1").hasCompleted()
         );
         assertEquals(
                 false,
-                new Task("task 1", "A").isCompleted()
+                new Task("task 1", "A").hasCompleted()
         );
         assertEquals(
                 true,
-                new Task("task 1", true, "K").isCompleted()
+                new Task("task 1", true, "K").hasCompleted()
         );
     }
 

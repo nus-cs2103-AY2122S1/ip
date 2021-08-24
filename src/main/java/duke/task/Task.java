@@ -5,7 +5,7 @@ package duke.task;
  */
 public class Task {
     private String name;
-    private boolean completed;
+    private boolean isComplete;
     private String taskType = "G";
 
     /**
@@ -15,7 +15,7 @@ public class Task {
      */
     public Task(String name) {
         this.name = name;
-        this.completed = false;
+        this.isComplete = false;
     }
 
     /**
@@ -27,7 +27,7 @@ public class Task {
      */
     public Task(String name, String taskType) {
         this.name = name;
-        this.completed = false;
+        this.isComplete = false;
         this.taskType = taskType;
     }
 
@@ -36,12 +36,12 @@ public class Task {
      * Allows specifying the TaskType, and whether it is completed.
      *
      * @param name Name of the task.
-     * @param completed Boolean representing whether task is completed.
+     * @param isComplete Boolean representing whether task is completed.
      * @param taskType String representing the type of the task.
      */
-    public Task(String name, boolean completed, String taskType) {
+    public Task(String name, boolean isComplete, String taskType) {
         this.name = name;
-        this.completed = completed;
+        this.isComplete = isComplete;
         this.taskType = taskType;
     }
 
@@ -60,7 +60,7 @@ public class Task {
      * @return True.
      */
     public boolean completeTask() {
-        this.completed = true;
+        this.isComplete = true;
         return true;
     }
 
@@ -69,8 +69,8 @@ public class Task {
      *
      * @return True if task is completed, false otherwise.
      */
-    public boolean isCompleted() {
-        return this.completed;
+    public boolean hasCompleted() {
+        return this.isComplete;
     }
 
     /**
@@ -88,6 +88,6 @@ public class Task {
      * @return String representing the Task.
      */
     public String getSaveFormat() {
-        return String.format("%s|%s|%s", this.taskType, this.completed ? "c" : "i", this.name);
+        return String.format("%s|%s|%s", this.taskType, this.isComplete ? "c" : "i", this.name);
     }
 }

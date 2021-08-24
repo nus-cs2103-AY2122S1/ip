@@ -49,7 +49,7 @@ public class TaskList {
                             i,
                             t.getName(),
                             t.getTaskType(),
-                            t.isCompleted() ? "X" : " ",
+                            t.hasCompleted() ? "X" : " ",
                             time
                     )
             );
@@ -116,7 +116,7 @@ public class TaskList {
                     "Alright,\nduke.duke.Task.Task: %s [%s] [%s] (%s)\nHas been removed, you have %d tasks in the list",
                     t.getName(),
                     t.getTaskType(),
-                    t.isCompleted() ? "X" : " ",
+                    t.hasCompleted() ? "X" : " ",
                     getTaskTime(t),
                     listSize
             );

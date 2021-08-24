@@ -27,10 +27,10 @@ public class Deadline extends Task{
      *
      * @param name Name of the task.
      * @param time Time the task is to be completed by.
-     * @param completed Boolean representing whether task is completed.
+     * @param isComplete Boolean representing whether task is completed.
      */
-    public Deadline(String name, LocalDate time, boolean completed) {
-        super(name,  completed, "D");
+    public Deadline(String name, LocalDate time, boolean isComplete) {
+        super(name,  isComplete, "D");
         this.time = time;
     }
 
