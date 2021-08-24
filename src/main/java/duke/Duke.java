@@ -12,19 +12,18 @@ public class Duke {
     private final Storage storage;
     private final TaskList taskList;
     private final Ui ui;
-    private final Parser parser;
 
     // Initialising the object
     public Duke(String filePath) throws IOException {
         ui = new Ui(); // has the self intro
         storage = new Storage(filePath);
         taskList = new TaskList(storage.load());
-        parser = new Parser();
     }
 
     public void run() throws DukeExceptions, IOException {
         ui.showWelcome();
-        String command; // this is the container for the command received from the user
+        String command; // this is the container for the full command received from the user
+        String cmd; // this is the container for the first word of the command
 
 
         ///// This listens for the commands and interprets them
@@ -32,56 +31,44 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             command = sc.nextLine();
+            Parser parser = new Parser(command);
+            cmd = parser.getFirstWord();
 
             // 'bye' : Ends the program
-            if (command.toLowerCase().equals("bye")) {
+            if (command.equals("bye") || cmd.equals("bye")) {
                 ui.showBye();
                 sc.close();
                 break;
 
 
             // 'list' : Retrieves information from the hard drive and prints it
-            } else if (command.toLowerCase().equals("list")) {
+            } else if (cmd.equals("list")) {
                 ui.showList(taskList);
                 ui.showLine();
 
 
             // 'done [int]' : marks the corresponding number in the list as done
-            } else if (command.toLowerCase().split(" ")[0].equals("done")) {
+            } else if (cmd.equals("done")) {
 
-                if (command.toLowerCase().split(" ").length == 1 || Integer.parseInt(command.split(" ")[1]) < 1
-                        || Integer.parseInt(command.split(" ")[1]) > taskList.size()) {
-                    sc.close();
-                    throw new NotDoneRightException("1", String.valueOf(taskList.size()));
-                }
-
+                // Throws exception if there is error accessing the integer following "done"
                 // Marks the task as done and prints statements as proof
-                int ref = Integer.parseInt(command.split(" ")[1]) - 1;
-                Task task = taskList.get(ref); //TODO???
+                int ref = parser.getSecondInteger(taskList.size()) - 1;
+                Task task = taskList.get(ref);
 
                 if (task.getStatusIcon().equals("X")) {
                     System.out.println("You've already done this!");
-                    ui.showLine();
                 } else {
                     task.markAsDone();
-                    ui.showCompletion(taskList.get(ref).toString());
-                    ui.showLine();
-
-                    // Updates the duke.txt file
                     storage.updateDone(ref, task.getStatusString());
+                    ui.showCompletion(taskList.get(ref).toString());
                 }
+                ui.showLine();
 
 
                 // 'delete [int]' : delete the corresponding number
-            } else if (command.toLowerCase().split(" ")[0].equals("delete")) {
+            } else if (cmd.equals("delete")) {
 
-                if (command.toLowerCase().split(" ").length == 1 || Integer.parseInt(command.split(" ")[1]) < 1
-                        || Integer.parseInt(command.split(" ")[1]) > taskList.size()) {
-                    sc.close();
-                    throw new DeletionException("1", String.valueOf(taskList.size()));
-                }
-
-                int ref = Integer.parseInt(command.split(" ")[1]) - 1;
+                int ref = parser.getSecondInteger(taskList.size()) - 1;
                 ui.showRemoval(taskList.get(ref).toString(), taskList.size() - 1);
                 taskList.remove(ref);
                 storage.removeTask(ref);
@@ -89,62 +76,39 @@ public class Duke {
 
 
                 // Else, an item has been added to the chat bot
+                // Commands are either todo, deadline or event
             } else {
 
-                String taskType = command.toLowerCase().split(" ", 2)[0];
-
-                switch (taskType) {
+                switch (cmd) {
                 case "todo" : {
-                    String[] taskInfo = command.split(" ", 2);
-                    if (taskInfo.length == 1) {
-                        throw new EmptyDescriptionException("todo");
-                    }
-
-                    System.out.println("added: " + command);
-                    ui.showLine();
-                    taskList.add(new Todo(taskInfo[1]));
+                    String taskInfo = parser.getTodoInfo();
+                    taskList.add(new Todo(taskInfo));
                     storage.addTask(taskList.getLastStatusString());
+                    ui.showAddition(cmd, command);
+                    ui.showLine();
                     break;
 
                 }
                 case "deadline" : {
-                    String[] taskInfo = command.split(" ", 2);
-                    if (taskInfo.length == 1) {
-                        throw new EmptyDescriptionException("todo");
-                    }
 
-                    String[] taskMoreInfo = taskInfo[1].split("/by", 2);
-                    if (taskMoreInfo.length == 1) {
-                        throw new EmptyDetailsException("deadline");
-                    }
-                    String description = taskMoreInfo[0];
-                    String date = taskMoreInfo[1];
+                    String description = parser.getDeadlineInfo();
+                    LocalDate date = parser.getDeadlineDate();
 
-                    System.out.println("added: " + command);
-                    ui.showLine();
-
-                    taskList.add(new Deadline(description, LocalDate.parse(date.strip())));
+                    taskList.add(new Deadline(description, date));
                     storage.addTask(taskList.getLastStatusString());
+                    ui.showAddition(cmd, command);
+                    ui.showLine();
                     break;
 
                 }
                 case "event" : {
-                    String[] taskInfo = command.split(" ", 2);
-                    if (taskInfo.length == 1) {
-                        throw new EmptyDescriptionException("todo");
-                    }
 
-                    String[] additionalTaskInfo = taskInfo[1].split("/at", 2);
-                    if (additionalTaskInfo.length == 1) {
-                        throw new EmptyDetailsException("event");
-                    }
-                    String description = additionalTaskInfo[0];
-                    String eventDetails = additionalTaskInfo[1];
-
-                    System.out.println("added: " + command);
-                    ui.showLine();
+                    String description = parser.getEventInfo();
+                    String eventDetails = parser.getEventLocation();
                     taskList.add(new Event(description, eventDetails));
                     storage.addTask(taskList.getLastStatusString());
+                    ui.showAddition(cmd, command);
+                    ui.showLine();
                     break;
 
                 }

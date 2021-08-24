@@ -36,6 +36,10 @@ public class Ui {
         System.out.println(linebreak);
     }
 
+    public void showAddition(String taskType, String command) {
+        System.out.println("added: " + command);
+    }
+
     public void showRemoval(String taskRemoved, int taskListSize) {
         System.out.println("Oki! I have removed this task:");
         System.out.println(taskListSize + " more tasks to go!");
