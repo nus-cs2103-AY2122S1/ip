@@ -2,6 +2,8 @@ package kayu.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static kayu.commands.CommandMessage.MESSAGE_CREATED_EVENT;
+import static kayu.commands.CommandMessage.ERROR_IMPROPER_FORMATTING;
 
 import kayu.exception.DukeException;
 import kayu.parser.DateTimeFormat;
@@ -65,9 +67,7 @@ public class EventCommandTest {
                 "meeting with friends", 
                 LocalDate.parse(DATE_LIST.get(0)), 
                 LocalTime.parse(TIME_LIST.get(0)));
-        String expectedFeedback = String.format(
-                CommandMessage.MESSAGE_CREATED_EVENT, 
-                expectedTask, 1);
+        String expectedFeedback = String.format(MESSAGE_CREATED_EVENT, expectedTask, 1);
         
         try {
             String feedback = eventCommand.execute(taskList);
@@ -95,9 +95,7 @@ public class EventCommandTest {
                 Command eventCommand = new EventCommand(parameters, dateTimeFormat);
                 String feedback = eventCommand.execute(taskList);
                 
-                String expectedFeedback = String.format(
-                        CommandMessage.MESSAGE_CREATED_EVENT,
-                        expectedTask, idx + 1);
+                String expectedFeedback = String.format(MESSAGE_CREATED_EVENT, expectedTask, idx + 1);
                 assertEquals(expectedFeedback, feedback);
                 
             } catch (DukeException exception) {
@@ -123,9 +121,7 @@ public class EventCommandTest {
                 Command eventCommand = new EventCommand(parameters, dateTimeFormat);
                 String feedback = eventCommand.execute(taskList);
 
-                String expectedFeedback = String.format(
-                        CommandMessage.MESSAGE_CREATED_EVENT,
-                        expectedTask, idx + 1);
+                String expectedFeedback = String.format(MESSAGE_CREATED_EVENT, expectedTask, idx + 1);
                 assertEquals(expectedFeedback, feedback);
 
             } catch (DukeException exception) {
@@ -160,7 +156,7 @@ public class EventCommandTest {
 
         } catch (DukeException exception) {
             String expected = String.format(
-                    CommandMessage.ERROR_IMPROPER_FORMATTING,
+                    ERROR_IMPROPER_FORMATTING,
                     EventCommand.COMMAND_WORD, 
                     Event.SPLIT_WORD);
             assertEquals(expected, exception.getMessage());

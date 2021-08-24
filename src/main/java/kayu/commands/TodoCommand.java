@@ -1,5 +1,8 @@
 package kayu.commands;
 
+import static kayu.commands.CommandMessage.MESSAGE_CREATED_TODO;
+import static kayu.commands.CommandType.TODO;
+
 import kayu.exception.DukeException;
 import kayu.service.TaskList;
 import kayu.task.Task;
@@ -11,7 +14,7 @@ public class TodoCommand extends AddTaskCommand {
     public static final String COMMAND_WORD = "todo";
 
     public TodoCommand(String commandParams, DateTimeFormat dateTimeFormat) {
-        super(CommandType.TODO, commandParams, dateTimeFormat);
+        super(TODO, commandParams, dateTimeFormat);
     }
 
     @Override
@@ -21,6 +24,6 @@ public class TodoCommand extends AddTaskCommand {
         Task todo = new Todo(desc);
         taskList.addTask(todo);
         
-        return String.format(CommandMessage.MESSAGE_CREATED_TODO, todo, taskList.getCapacity());
+        return String.format(MESSAGE_CREATED_TODO, todo, taskList.getCapacity());
     }
 }

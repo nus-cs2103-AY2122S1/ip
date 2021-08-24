@@ -1,5 +1,10 @@
 package kayu.commands;
 
+import static kayu.commands.CommandMessage.ERROR_EMPTY_PARAMS;
+import static kayu.commands.CommandMessage.ERROR_IMPROPER_DATE;
+import static kayu.commands.CommandMessage.ERROR_IMPROPER_FORMATTING;
+import static kayu.commands.CommandMessage.ERROR_IMPROPER_TIME;
+
 import kayu.exception.DukeException;
 import kayu.parser.DateTimeFormat;
 
@@ -28,7 +33,7 @@ public abstract class AddTaskCommand extends Command {
             
         } catch (ArrayIndexOutOfBoundsException exception) {
             throw new DukeException(String.format(
-                    CommandMessage.ERROR_IMPROPER_FORMATTING, 
+                    ERROR_IMPROPER_FORMATTING, 
                     commandName, 
                     splitKey));
         }
@@ -39,7 +44,7 @@ public abstract class AddTaskCommand extends Command {
         
         String desc = paramArray[0].trim();
         if (desc.isBlank()) {
-            throw new DukeException(String.format(CommandMessage.ERROR_EMPTY_PARAMS, commandName));
+            throw new DukeException(String.format(ERROR_EMPTY_PARAMS, commandName));
         }
         return desc;
     }
@@ -57,7 +62,7 @@ public abstract class AddTaskCommand extends Command {
                 // do nothing
             }
         }
-        throw new DukeException(CommandMessage.ERROR_IMPROPER_DATE);
+        throw new DukeException(ERROR_IMPROPER_DATE);
     }
 
     protected LocalTime extractTime(String[] paramArray) throws DukeException {
@@ -73,6 +78,6 @@ public abstract class AddTaskCommand extends Command {
                 // do nothing
             }
         }
-        throw new DukeException(CommandMessage.ERROR_IMPROPER_TIME);
+        throw new DukeException(ERROR_IMPROPER_TIME);
     }
 }
