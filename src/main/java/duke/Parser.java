@@ -7,6 +7,9 @@ import java.time.LocalTime;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a translator that makes sense of user input commands.
+ */
 public class Parser {
     private static String detectedFormat;
     private static LocalTime startTime;
@@ -38,6 +41,16 @@ public class Parser {
             "hh:mm a"
     };
 
+    /**
+     * This method takes in the user input as a String and runs checks on it to determine
+     * the type of command it is, also throwing exception if the input is invalid.
+     * It also takes in a TaskList that Duke bot uses to load and
+     * store tasks the user adds or deletes.
+     * @param fullCommand String of user input.
+     * @param taskList a list to store tasks the user adds or deletes.
+     * @return Command which Duke bot can execute afterwards.
+     * @throws DukeException if user input cannot be understood.
+     */
     public static Command parse(String fullCommand, TaskList taskList) throws DukeException {
 
         if (fullCommand.startsWith("bye")) {
@@ -121,6 +134,12 @@ public class Parser {
         }
     }
 
+    /**
+     * This method reads the stored String of text file in the Hard Disk which corresponds to a
+     * Deadline type task and transforms it into a Deadline task object.
+     * @param input String from text file.
+     * @return Task that is of Deadline type.
+     */
     public static Task parseDeadlineFromFile(String input) {
         String description = input.split("\\(", 2)[0].trim();
         String returnDate = input.substring(input.indexOf(":")+2,input.indexOf(")"));
@@ -171,6 +190,12 @@ public class Parser {
         }
     }
 
+    /**
+     * This method reads the stored String of text file in the Hard Disk which corresponds to a
+     * Event type task and transforms it into an Event task object.
+     * @param input String from text file.
+     * @return Task that is of Event type.
+     */
     public static Task parseEventFromFile(String input) {
         String description = input.split("\\(", 2)[0].trim();
         String dateTimeDuration = input.substring(input.indexOf(":")+2,input.indexOf(")"));

@@ -4,11 +4,19 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a type of task that contains a due by deadline.
+ */
 public class Deadline extends Task{
 
     protected LocalDate date;
     protected LocalDateTime dateTime;
 
+    /**
+     * This constructor creates a Deadline type task object.
+     * @param description text description of Deadline task.
+     * @param dateTime due date of Deadline task.
+     */
     public Deadline(String description, Object dateTime) {
         super(description);
 
@@ -19,6 +27,11 @@ public class Deadline extends Task{
         }
     }
 
+    /**
+     * This method formats task description and date in a user-friendly way,
+     * additionally marking the Deadline task type with [D]
+     * @return String of formatted task description and deadline.
+     */
     @Override
     public String toString() {
 
