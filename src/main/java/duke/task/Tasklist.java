@@ -102,4 +102,14 @@ public class Tasklist {
             return null;
         }
     }
+
+    public void find(String keyword) {
+        if (keyword.equals("")) {
+            this.ui.showNoKeyword();
+        } else {
+            List<Task> filteredList = this.tasks.stream()
+                    .filter(task -> task.toString().contains(keyword)).collect(Collectors.toList());
+            this.ui.showFilteredTasks(new ArrayList<Task>(filteredList));
+        }
+    }
 }
