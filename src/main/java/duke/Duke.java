@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.DateTimeException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.time.LocalDate;
 
 
 public class Duke {
@@ -121,7 +124,7 @@ public class Duke {
                 }else{
                     System.out.println("It is already done. How SPARKTACULAR.");
                 }
-            }else if(command.contains("delete")){
+            }else if(command.contains("delete") || command.contains("remove")){
                 String numbers = command.substring(7);
                 try {
                     int taskNo = Integer.parseInt(numbers);
@@ -155,9 +158,11 @@ public class Duke {
                     System.err.println("I NEED A NAME SIR");
                     continue;
                 }
-                String toBeAdded = "(T)[ ] " + task;
+                ToDo taskToAdd = new ToDo(task);
+
+                String toBeAdded = taskToAdd.toString();
                 if(!lines.contains(toBeAdded)){
-                    lines.add("(T)[ ] " + task);
+                    lines.add(toBeAdded);
                     System.out.println("todo " + task + " added.");
                     System.out.println("the list has "+lines.size()+" tasks now.");
                 }else{
@@ -183,9 +188,17 @@ public class Duke {
                     continue;
                 }
 
-                String toBeAdded = "(D)[ ] " + task + " (by: " + date + ")";
+                try{
+                    LocalDate test = LocalDate.parse(date);
+                }catch(DateTimeException error){
+                    System.err.println("hello sir I only understand YYYY-MM-DD format");
+                    continue;
+                }
+
+                Deadline taskToAdd = new Deadline(task,date);
+                String toBeAdded = taskToAdd.toString();
                 if (!lines.contains(toBeAdded)){
-                    lines.add("(D)[ ] " + task + " (by: " + date + ")");
+                    lines.add(toBeAdded);
                     System.out.println("deadline " + task + " added.");
                     System.out.println("the list has "+lines.size()+" tasks now.");
                 }else{
@@ -212,9 +225,17 @@ public class Duke {
                     continue;
                 }
 
-                String toBeAdded = "(E)[ ] " + task + " (at: " + date + ")";
+                try{
+                    LocalDate test = LocalDate.parse(date);
+                }catch(DateTimeException error){
+                    System.err.println("hello sir I only understand YYYY-MM-DD format");
+                    continue;
+                }
+
+                Deadline taskToAdd = new Deadline(task,date);
+                String toBeAdded = taskToAdd.toString();
                 if (!lines.contains(toBeAdded)) {
-                    lines.add("(E)[ ] " + task + " (at: " + date + ")");
+                    lines.add(toBeAdded);
                     System.out.println("event " + task + " added.");
                     System.out.println("the list has " + lines.size() + " tasks now.");
                 } else {
