@@ -13,12 +13,16 @@ public class Duke {
         event,
         delete
     }
-    public static void main(String[] args) {
-        String border = "____________________________________________________________";
-        Printer printer = new Printer(border);
-        printer.PrintIntro();
-        Storage storage = new Storage();
 
+    private Storage storage;
+    private Ui ui;
+
+    public Duke() {
+        this.storage = new Storage();
+        this.ui = new Ui();
+    }
+
+    public void run() {
         ArrayList<Task> tasks = Storage.Load();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -28,18 +32,18 @@ public class Duke {
             if (splitInput[0].equals(SPECIAL_TASK.done.name())) {
                 int index = Integer.parseInt(splitInput[1]) - 1;
                 String returnString = tasks.get(index).markDone();
-                printer.PrintMessage(returnString);
+                ui.PrintMessage(returnString);
             } else if (input.equals(SPECIAL_TASK.list.name())) {
-                printer.PrintList(tasks);
+                ui.PrintList(tasks);
             } else if (splitInput[0].equals(SPECIAL_TASK.todo.name())) {
                 try {
                     if (splitInput.length < 2 || splitInput[1].equals("") || splitInput[1].equals(" ")) {
                         throw new DukeException("The description of a todo cannot be empty.");
                     }
                     tasks.add(new Todo(splitInput[1]));
-                    printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
+                    ui.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
                 } catch (DukeException e) {
-                    printer.PrintMessage(e.getMessage());
+                    ui.PrintMessage(e.getMessage());
                 }
             } else if (splitInput[0].equals(SPECIAL_TASK.deadline.name())) {
                 try {
@@ -56,9 +60,9 @@ public class Duke {
                     DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-M-d HH:mm");
                     LocalDateTime by = LocalDateTime.parse(furtherSplits[1].stripLeading(), df);
                     tasks.add(new Deadline(furtherSplits[0], by));
-                    printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
+                    ui.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
                 } catch (DukeException e) {
-                    printer.PrintMessage(e.getMessage());
+                    ui.PrintMessage(e.getMessage());
                 }
             } else if (splitInput[0].equals(SPECIAL_TASK.event.name())) {
                 try {
@@ -75,9 +79,9 @@ public class Duke {
                     DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-M-d HH:mm");
                     LocalDateTime at = LocalDateTime.parse(furtherSplits[1].stripLeading(), df);
                     tasks.add(new Event(furtherSplits[0], at));
-                    printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
+                    ui.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
                 } catch (DukeException e) {
-                    printer.PrintMessage(e.getMessage());
+                    ui.PrintMessage(e.getMessage());
                 }
             } else if (splitInput[0].equals(SPECIAL_TASK.delete.name())) {
                 try {
@@ -90,12 +94,12 @@ public class Duke {
                     }
                     Task toDelete = tasks.get(index);
                     tasks.remove(index);
-                    printer.PrintDelete(toDelete.toString(), tasks.size());
+                    ui.PrintDelete(toDelete.toString(), tasks.size());
                 } catch (DukeException e1) {
-                    printer.PrintMessage(e1.getMessage());
+                    ui.PrintMessage(e1.getMessage());
                 } catch (NumberFormatException e2) {
                     DukeException newException = new DukeException("Please input a number!");
-                    printer.PrintMessage(newException.getMessage());
+                    ui.PrintMessage(newException.getMessage());
                 }
             } else {
                 try {
@@ -103,14 +107,18 @@ public class Duke {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
                     tasks.add(new Task(input));
-                    printer.PrintMessage(String.format("added: %s", input));
+                    ui.PrintMessage(String.format("added: %s", input));
                 } catch (DukeException e) {
-                    printer.PrintMessage(e.getMessage());
+                    ui.PrintMessage(e.getMessage());
                 }
             }
             storage.Save(tasks);
             input = sc.nextLine();
         }
-        printer.PrintMessage("Bye. Hope to see you again soon!");
+        ui.PrintMessage("Bye. Hope to see you again soon!");
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }
