@@ -92,7 +92,7 @@ public class Storage {
      * Saves the current list of tasks into the specified file.
      *
      * @param taskList the list of tasks
-     * @throws IOException
+     * @throws IOException if the stream is invalid
      */
     public void saveToFile(ArrayList<Task> taskList) throws IOException {
         StringBuilder builder = new StringBuilder();
