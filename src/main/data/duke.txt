@@ -1,1 +1,0 @@
-T - 0 - borrow bookD - 0 - deadline return book  - SundayE - 0 - event project meeting  - Mon 2-4pmT - 0 - borrow bookD - 0 - deadline return book  - SundayE - 0 - event project meeting  - Mon 2-4pm
