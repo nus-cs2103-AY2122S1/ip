@@ -17,58 +17,21 @@ import java.time.LocalDate;
 
 public class Duke {
     private static List<Task> tasks = new ArrayList<Task>();
-    private static List<String> lines;
+    private static List<String> lines = new ArrayList<String>();
+    private static Ui ui = new Ui();
+    private static Storage storage = new Storage();
 
-    private static void printFileContents(String filePath) throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-            System.out.println(s.nextLine());
-        }
-    }
-
-    private static void listFileContents(String filePath) throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        lines = new ArrayList<String>();
-        while (s.hasNext()) {
-            lines.add(s.nextLine());
-        }
-    }
-
-    private static void writeListToFile(String filePath) throws IOException{
-        FileWriter clearer = new FileWriter(filePath);
-        clearer.write(""); //clear the file
-        clearer.close();
-        FileWriter fw = new FileWriter(filePath, true);
-        for(String line : lines){
-            fw.write(line + System.lineSeparator());
-        }
-        fw.close();
-    }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Welcome. I am your virtual assistant Duke. Sparkle up your day (TM).");
+        ui.showWelcome();
         Scanner sc = new Scanner(System.in);
         File file = new File("data/list.txt");
-        if(!file.exists()){
-            try {
-                new File("data").mkdir();
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        storage.checkExistence();
 
-        System.out.println("Your task list is located in: " + file.getAbsolutePath() + ". SPARKLEOUS.");
+        ui.showFileLocation(file.getAbsolutePath());
 
         try {
-            listFileContents(file.getPath());
+            storage.listFileContents(lines, file.getPath());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -77,7 +40,7 @@ public class Duke {
             String command = sc.nextLine();
             if(command.equals("bye")) {
                 sc.close();
-                System.out.println("Have a SPARKULAR day.");
+                ui.sayBye();
                 break;
             }else if(command.equals("list")) {
                 /*
@@ -87,27 +50,25 @@ public class Duke {
                     System.err.println("WHERES THE FILE OH GOD SOMETHING TERRIBLE HAS HAPPENED");
                 }
                 */
-                int c = 1;
-                for (String line : lines) {
-                    System.out.println(c + ". " + line);
-                    c++;
-                }
+
+                ui.showList(lines);
+
             }else if(command.contains("done")) {
                 String numbers = command.substring(5);
                 try {
                     int taskNo = Integer.parseInt(numbers);
                 } catch (NumberFormatException notANumber) {
                     System.err.println(notANumber);
-                    System.err.println("JUST GIVE ME A NUMBER, WHY ARE YOU DOING THIS");
+                    ui.showNotANumberMsg();
                     continue;
                 }
                 int taskNo = Integer.parseInt(numbers);
                 if (lines.size() < taskNo) {
-                    System.err.println("hello sir there are only " + lines.size() + " tasks in the list sir");
+                    ui.showOutOfBoundsMsg(lines.size());
                     continue;
                 }
                 if (taskNo <= 0) {
-                    System.err.println("HOW CAN I COMPLETE THE TASK AT INDEX " + taskNo + "? IT DOESNT MAKE ANY SENSE");
+                    ui.showLessThanZeroMsg(taskNo);
                     continue;
                 }
                 taskNo--;
@@ -116,13 +77,13 @@ public class Duke {
                     toBeDone=toBeDone.substring(0,4)+"X"+toBeDone.substring(5);
                     lines.set(taskNo,toBeDone);
                     try {
-                        writeListToFile(file.getPath());
+                        storage.writeListToFile(lines,file.getPath());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    System.out.println(toBeDone + " has been marked as done");
+                    ui.showMarkedAsDone(toBeDone);
                 }else{
-                    System.out.println("It is already done. How SPARKTACULAR.");
+                    ui.showAlreadyDone();
                 }
             }else if(command.contains("delete") || command.contains("remove")){
                 String numbers = command.substring(7);
@@ -130,32 +91,32 @@ public class Duke {
                     int taskNo = Integer.parseInt(numbers);
                 } catch (NumberFormatException notANumber) {
                     System.err.println(notANumber);
-                    System.err.println("JUST GIVE ME A NUMBER, WHY ARE YOU DOING THIS");
+                    ui.showNotANumberMsg();
                     continue;
                 }
                 int taskNo = Integer.parseInt(numbers);
                 if (lines.size() < taskNo) {
-                    System.err.println("hello sir there are only " + lines.size() + " tasks in the list sir");
+                    ui.showOutOfBoundsMsg(lines.size());
                     continue;
                 }
                 if (taskNo <= 0) {
-                    System.err.println("HOW CAN I COMPLETE THE TASK AT INDEX " + taskNo + "? IT DOESNT MAKE ANY SENSE");
+                    ui.showLessThanZeroMsg(taskNo);
                     continue;
                 }
                 taskNo--;
                 String toBeDeleted=lines.get(taskNo);
                 lines.remove(taskNo);
                 try {
-                    writeListToFile(file.getPath());
+                    storage.writeListToFile(lines,file.getPath());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println("task " +toBeDeleted+ " has been deleted.\nThere are "+lines.size()+" tasks left in the list.");
+                ui.showDeletionMsg(toBeDeleted,lines.size());
 
             }else if(command.contains("todo")){
                 String task=command.substring(5);
                 if(task.equals("")){
-                    System.err.println("I NEED A NAME SIR");
+                    ui.showNoNameError();
                     continue;
                 }
                 ToDo taskToAdd = new ToDo(task);
@@ -163,13 +124,13 @@ public class Duke {
                 String toBeAdded = taskToAdd.toString();
                 if(!lines.contains(toBeAdded)){
                     lines.add(toBeAdded);
-                    System.out.println("todo " + task + " added.");
-                    System.out.println("the list has "+lines.size()+" tasks now.");
+                    ui.showTaskAdded(toBeAdded);
+                    ui.showListSize(lines.size());
                 }else{
-                    System.out.println(task + " is already in the list sir");
+                    ui.showAlreadyInList(toBeAdded);
                 }
                 try {
-                    writeListToFile(file.getPath());
+                    storage.writeListToFile(lines,file.getPath());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -177,21 +138,21 @@ public class Duke {
             }else if(command.contains("deadline")){
                 String taskNDate=command.substring(9);
                 if(!(taskNDate.contains("/by"))){
-                    System.err.println("BY WHEN? HOW CAN YOU HAVE A DEADLINE WITHOUT A DEADLINE???");
+                    ui.showNoDateError();
                     continue;
                 }
                 int splitIndex=taskNDate.indexOf("/by");
                 String task =taskNDate.substring(0,splitIndex-1);
                 String date =taskNDate.substring(splitIndex+4);
                 if(task.equals("")){
-                    System.err.println("I NEED A NAME SIR");
+                    ui.showNoNameError();
                     continue;
                 }
 
                 try{
                     LocalDate test = LocalDate.parse(date);
                 }catch(DateTimeException error){
-                    System.err.println("hello sir I only understand YYYY-MM-DD format");
+                    ui.showBadDateError();
                     continue;
                 }
 
@@ -199,14 +160,14 @@ public class Duke {
                 String toBeAdded = taskToAdd.toString();
                 if (!lines.contains(toBeAdded)){
                     lines.add(toBeAdded);
-                    System.out.println("deadline " + task + " added.");
-                    System.out.println("the list has "+lines.size()+" tasks now.");
+                    ui.showTaskAdded(toBeAdded);
+                    ui.showListSize(lines.size());
                 }else{
-                    System.out.println(task + " is already in the list sir");
+                    ui.showAlreadyInList(toBeAdded);
                 }
 
                 try {
-                    writeListToFile(file.getPath());
+                    storage.writeListToFile(lines,file.getPath());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -214,21 +175,21 @@ public class Duke {
             }else if(command.contains("event")) {
                 String taskNDate = command.substring(6);
                 if (!(taskNDate.contains("/at"))) {
-                    System.err.println("AT WHEN? YOU HAVE AN EVENT BUT YOU DONT KNOW WHERE IT IS???");
+                    ui.showNoDateError();
                     continue;
                 }
                 int splitIndex = taskNDate.indexOf("/at");
                 String task = taskNDate.substring(0, splitIndex - 1);
                 String date = taskNDate.substring(splitIndex + 4);
                 if (task.equals("")) {
-                    System.err.println("I NEED A NAME SIR");
+                    ui.showNoNameError();
                     continue;
                 }
 
                 try{
                     LocalDate test = LocalDate.parse(date);
                 }catch(DateTimeException error){
-                    System.err.println("hello sir I only understand YYYY-MM-DD format");
+                    ui.showBadDateError();
                     continue;
                 }
 
@@ -236,14 +197,14 @@ public class Duke {
                 String toBeAdded = taskToAdd.toString();
                 if (!lines.contains(toBeAdded)) {
                     lines.add(toBeAdded);
-                    System.out.println("event " + task + " added.");
-                    System.out.println("the list has " + lines.size() + " tasks now.");
+                    ui.showTaskAdded(toBeAdded);
+                    ui.showListSize(lines.size());
                 } else {
-                    System.out.println(task + " is already in the list sir");
+                    ui.showAlreadyInList(toBeAdded);
                 }
 
                 try {
-                    writeListToFile(file.getPath());
+                    storage.writeListToFile(lines,file.getPath());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -253,11 +214,11 @@ public class Duke {
                 if(sc.nextLine().equals("Y")) {
                     lines.clear();
                     try {
-                        writeListToFile(file.getPath());
+                        storage.writeListToFile(lines,file.getPath());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    System.out.println("The list has been wiped. How tragic.");
+                    System.out.println("BAYUM! The list has been wiped. How tragic.");
                 }else{
                     System.out.println("WOWZA! That was real close.");
                 }
