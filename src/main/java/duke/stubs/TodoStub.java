@@ -3,6 +3,9 @@ package duke.stubs;
 import duke.task.Task;
 import duke.testinginterface.TodoInterface;
 
+/**
+ * Stub for Todo class.
+ */
 public class TodoStub extends Task implements TodoInterface {
     public TodoStub() {
         super("");

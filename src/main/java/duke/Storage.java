@@ -16,11 +16,17 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Loads tasks to files and saves tasks to files.
+ * Loads tasks from hard disk and saves tasks to files after each command.
  */
 public class Storage {
     String filePath;
 
+    /**
+     * Constructor.
+     *
+     * @param filePath to hard disk that stores the tasks.
+     * @throws IOException
+     */
     public Storage(String filePath) throws IOException {
         try {
             new File(filePath).createNewFile();
@@ -30,6 +36,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads in tasks from hard disk to a task list, when Duke starts up.
+     *
+     * @return ArrayList of tasks that is loaded in from hard disk.
+     * @throws IOException
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> result = new ArrayList<>(100);
         int counter = 0;
@@ -48,6 +60,11 @@ public class Storage {
         return result;
     }
 
+    /**
+     * Adds Todo task to the hard disk.
+     *
+     * @param todo task to add.
+     */
     public void addTodo(Todo todo) {
         try {
             String textToSave = "T/~/0/~/" + todo.toSavedFormat() + "\n";
@@ -61,6 +78,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds Deadline task to hard disk.
+     *
+     * @param deadline task to add.
+     */
     public void addDeadline(Deadline deadline) {
         try {
             String textToSave = "D/~/0/~/" + deadline.toSavedFormat() + "\n";
@@ -74,6 +96,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds Event task to hard disk.
+     *
+     * @param event task to add.
+     */
     public void addEvent(Event event) {
         try {
             String textToSave = "E/~/0/~/" + event.toSavedFormat() + "\n";
@@ -86,6 +113,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Marks a task in the hard disk as done.
+     *
+     * @param taskList list of tasks.
+     * @param taskToMark position of task to mark as done in task list.
+     */
     public void markAsDone(TaskList taskList, int taskToMark) {
         try {
             Task t = taskList.getTasks().get(taskToMark - 1);
@@ -104,6 +137,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes a task in the hard disk.
+     *
+     * @param taskToDelete position of task to delete from task list.
+     */
     public void delete(int taskToDelete) {
         try {
             List<String> fileContent = new ArrayList<>(Files.readAllLines(Path
@@ -116,6 +154,15 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts the task from format in hard disk into a new Task.
+     *
+     * Each task has 3 possible types: Todo, Deadline and Event.
+     *
+     * @param s a task from saved hard disk.
+     * @param savedInputs list of tasks
+     * @param counter
+     */
     private static void convertToTask(String s, ArrayList<Task> savedInputs, int counter) {
         String[] savedTasks = s.split("/~/");
 

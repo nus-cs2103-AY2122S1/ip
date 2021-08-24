@@ -9,6 +9,12 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDate at;
 
+    /**
+     * Constructor.
+     *
+     * @param description details about the Task.
+     * @param at date/time when the Task takes place, in yyyy-mm-dd format.
+     */
     public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
@@ -25,7 +31,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the task type of duke.Todo.
+     * Returns the task type of duke.Event.
      *
      * @return 2 to represent duke.Event task type.
      */
@@ -37,7 +43,7 @@ public class Event extends Task {
     /**
      * Returns the description in the format that will be saved into Hard drive.
      *
-     * @return String
+     * @return String.
      */
     @Override
     public String toSavedFormat() {

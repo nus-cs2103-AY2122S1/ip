@@ -2,12 +2,21 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Duke is a Personal Assistant Chatbot that helps the user to keep track of various things.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor.
+     *
+     * @param filePath path of the file that stores previously entered tasks (Hard Disk).
+     * @throws IOException
+     */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -21,11 +30,11 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException, IOException {
-        new Duke("src/data/duke.txt").chat();
+        new Duke("./src/data/duke.txt").chat();
     }
 
     /**
-     * Prints (to screen) duke.Duke's response to the user input, entered from the Command Line.
+     * Display Duke's response to the user input, entered from the Command Line.
      */
     private void chat() throws DukeException {
         ui.showWelcome();

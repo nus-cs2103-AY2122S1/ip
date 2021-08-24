@@ -16,18 +16,31 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
- * Make sense of user commands.
+ * Makes sense of user commands.
+ *
+ * Checks for errors and converts user input to pass into other methods.
  */
 public class Parser {
     TaskListInterface taskList;
     private enum Command {Exit, List, Done, Delete, Todo, Deadline, Event, CheckDate, Find, Invalid};
 
+    /**
+     * Constructor.
+     *
+     * @param taskList
+     */
     public Parser(TaskListInterface taskList) {
         this.taskList = taskList;
     }
 
 
-    // RETURN A COMMAND
+    /**
+     * Returns a type of Command, based on the String input from user.
+     *
+     * @param input by the user from Command Line.
+     * @return Command.
+     * @throws DukeException
+     */
     public duke.command.Command parse(String input) throws DukeException {
 
         Command caseId = findCase(input);
@@ -161,7 +174,7 @@ public class Parser {
     }
 
     /**
-     * Returns the identifier of each case (for switch in chat method).
+     * Returns the identifier of each case (for switch in parse method).
      *
      * @param input User entered into Command Line.
      * @return CaseId of type Command (Enum).
