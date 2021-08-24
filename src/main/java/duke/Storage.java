@@ -16,11 +16,10 @@ public class Storage {
     }
 
     void checkExistence(){
-        File file = new File("data/list.txt");
-        if(!file.exists()){
+        if(!Duke.file.exists()){
             try {
                 new File("data").mkdir();
-                file.createNewFile();
+                Duke.file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -31,7 +30,6 @@ public class Storage {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         TaskList.lines = new ArrayList<String>();
-        System.out.println("hi");
         while (s.hasNext()) {
             TaskList.lines.add(s.nextLine());
 
