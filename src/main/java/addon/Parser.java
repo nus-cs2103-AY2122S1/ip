@@ -3,13 +3,14 @@ package addon;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 import addon.Ui.IncorrectFormatException;
 
 public class Parser {
 
-    private Tasklist tasklist;
+    private final Tasklist tasklist;
 
-    private static LocalDateTime NULLDATE = LocalDateTime.of(1, 1, 1, 1, 0);
+    private static final LocalDateTime NULLDATE = LocalDateTime.of(1, 1, 1, 1, 0);
 
     public Parser(Tasklist tasklist) {
         this.tasklist = tasklist;
@@ -27,7 +28,8 @@ public class Parser {
             if (input.indexOf(' ') > 0) { // checking if command given was >= two words
                 String[] splitted = input.split(" ", 2);
                 input = splitted[1];
-                if (splitted[0].equalsIgnoreCase("/done") || splitted[0].equalsIgnoreCase("/delete")) {
+                if (splitted[0].equalsIgnoreCase("/done") ||
+                        splitted[0].equalsIgnoreCase("/delete")) {
                     if (!input.matches("^[0-9]*$")) {
                         throw new IncorrectFormatException("Number not detected.");
                     } else {
@@ -45,11 +47,13 @@ public class Parser {
                         date = LocalDate.parse(original).atTime(0, 0);
                         tasklist.filterDates(date);
                     } catch (DateTimeException e) {
-                        throw new IncorrectFormatException("Date format provided incorrectly.\n    Date format: yyyy-mm-dd");
+                        throw new IncorrectFormatException("Date format provided incorrectly.\n    "
+                                + "Date format: yyyy-mm-dd");
                     }
                 } else if (splitted[0].equalsIgnoreCase("todo")) { // adding todoitem
                     if (input.isEmpty()) {
-                        throw new IncorrectFormatException("Task name not provided.\n" + "    FORMAT: \" TODO TASKNAME\"");
+                        throw new IncorrectFormatException("Task name not provided.\n"
+                                + "    FORMAT: \" TODO TASKNAME\"");
                     } else {
                         tasklist.addEntry(new String[]{"T", input}, NULLDATE);
                     }
@@ -80,25 +84,27 @@ public class Parser {
                             int minute = Integer.parseInt(timesplit[1].substring(2, 3));
                             date = LocalDate.parse(timesplit[0]).atTime(hour, minute);
                         } catch (DateTimeException e) {
-                            throw new IncorrectFormatException("Date format provided incorrectly.\n    Date format: yyyy-mm-dd TIME ((optional) in 24hrs format).");
+                            throw new IncorrectFormatException("Date format provided incorrectly."
+                                    + "    Date format: yyyy-mm-dd TIME ((optional) in 24hrs format).");
                         }
                         tasklist.addEntry(new String[]{isDeadline ? "D" : "E", splited[0]}, date);
                     }
                 }
             } else { // only one word
                 if (input.equalsIgnoreCase("help")) {
-                    System.out.println(Ui.bar + "\n    ToDos: tasks without any date/time attached to it e.g., visit new theme park\n" +
-                            "      FORMAT: todo TASKNAME\n" +
-                            "    Deadlines: tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm\n" +
-                            "      FORMAT: deadline TASKNAME /by DEADLINE\n" +
-                            "    Events: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm\n" +
-                            "      FORMAT: todo TASKNAME /by DATE\n" +
-                            "    Date format: yyyy-mm-dd TIME ((optional) in 24hrs format).\n" +
-                            "    \"/done x\" where x is the task number to mark task as done.\n" +
-                            "    \"/check DATE\" where DATE is the date you want to query.\n" +
-                            "    \"/clearlist\" clears.\n" +
-                            "    \"/list x\" lists.\n" +
-                            "    \"/delete x\" where x is the task number to be deleted. \n"+ Ui.bar);
+                    System.out.println(Ui.BAR + "\n    ToDos: tasks without any date/time attached to it "
+                            + "e.g., visit new theme park\n" + "      FORMAT: todo TASKNAME\n"
+                            + "    Deadlines: tasks that need to be done before a specific date/time "
+                            + "e.g., submit report by 11/10/2019 5pm\n"
+                            + "      FORMAT: deadline TASKNAME /by DEADLINE\n"
+                            + "    Events: tasks that start at a specific time and ends at a specific time "
+                            + "e.g., team project meeting on 2/10/2019 2-4pm\n"
+                            + "      FORMAT: todo TASKNAME /by DATE\n"
+                            + "    Date format: yyyy-mm-dd TIME ((optional) in 24hrs format).\n"
+                            + "    \"/done x\" where x is the task number to mark task as done.\n"
+                            + "    \"/check DATE\" where DATE is the date you want to query.\n"
+                            + "    \"/clearlist\" clears.\n" + "    \"/list x\" lists.\n"
+                            + "    \"/delete x\" where x is the task number to be deleted. \n"+ Ui.BAR);
                 } else if (input.equals("/clearlist")) {
                     tasklist.clearList();
                 } else {
