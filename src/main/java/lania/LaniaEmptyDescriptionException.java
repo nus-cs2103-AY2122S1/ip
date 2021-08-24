@@ -1,3 +1,5 @@
+package lania;
+
 public class LaniaEmptyDescriptionException extends LaniaException {
 
     LaniaEmptyDescriptionException(String message) {

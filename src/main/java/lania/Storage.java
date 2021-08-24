@@ -1,3 +1,8 @@
+package lania;
+
+import lania.Deadline;
+import lania.Event;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

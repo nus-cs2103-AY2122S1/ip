@@ -1,3 +1,5 @@
+package lania;
+
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.io.IOException;
@@ -16,7 +18,7 @@ public class Lania {
     /**
      * Store user input in task array and show that it is added.
      *
-     * @param t Task provided by the user.
+     * @param t lania.Task provided by the user.
      */
     public void update(Task t) throws LaniaException {
         taskList.update(t);
@@ -90,7 +92,7 @@ public class Lania {
                         String[] task = new Parser().parseEvent(taskDescription);
                         update(new Event(task[0], task[1]));
                     } else {
-                        throw new LaniaException("Sorry, but Lania does not know what that means.");
+                        throw new LaniaException("Sorry, but lania.Lania does not know what that means.");
                     }
                 }
             } catch (LaniaException e) {

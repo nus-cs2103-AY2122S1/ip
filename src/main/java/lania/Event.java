@@ -1,3 +1,5 @@
+package lania;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -8,7 +10,7 @@ public class Event extends Task {
     protected LocalDateTime dateTime;
 
     /**
-     * Constructor for Event. Takes in a String description and at.
+     * Constructor for lania.Event. Takes in a String description and at.
      * Initialises description and time of event.
      *
      * @param description The name of the event.

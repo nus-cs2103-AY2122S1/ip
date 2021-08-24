@@ -1,3 +1,5 @@
+package lania;
+
 public class LaniaException extends IllegalArgumentException {
 
     LaniaException(String message) {

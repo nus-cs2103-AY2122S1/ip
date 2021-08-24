@@ -1,18 +1,20 @@
+package lania;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    /** Deadline of a task */
+    /** lania.Deadline of a task */
     protected String by;
     protected LocalDateTime dateTime;
 
     /**
-     * Constructor for Deadline. Takes in a String description and by.
+     * Constructor for lania.Deadline. Takes in a String description and by.
      * Initialises description and deadline of task.
      *
      * @param description The name of the deadline.
-     * @param by Deadline of the task.
+     * @param by lania.Deadline of the task.
      */
     public Deadline(String description, String by) {
         super(description);

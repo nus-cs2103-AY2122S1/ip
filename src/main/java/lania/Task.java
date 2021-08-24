@@ -1,3 +1,5 @@
+package lania;
+
 public class Task {
 
     /** String containing the name of task */
@@ -6,7 +8,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for Task. Takes in a String description.
+     * Constructor for lania.Task. Takes in a String description.
      * Initialises description and isDone to false.
      *
      * @param description The name of the task.
