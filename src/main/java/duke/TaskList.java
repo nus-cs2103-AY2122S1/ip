@@ -4,6 +4,7 @@ import duke.tasks.Task;
 import duke.utils.DukeException;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import java.util.List;
 
 public class TaskList {
@@ -19,7 +20,8 @@ public class TaskList {
      * @throws DukeException
      */
     public TaskList(boolean loadFromStorage) throws DukeException {
-        if (loadFromStorage) this.storage = new Storage(this);
+        if (loadFromStorage)
+            this.storage = new Storage(this);
     }
 
     /**
@@ -30,7 +32,9 @@ public class TaskList {
      */
     public void add(Task task) throws DukeException {
         db.add(task);
-        if (storage != null) storage.update(task);
+        if (storage != null) {
+            storage.update(task);
+        }
     }
 
     /**
@@ -42,7 +46,9 @@ public class TaskList {
     public Task markAsDone(int index) throws DukeException {
         Task t = db.get(index);
         t.markComplete();
-        if (storage != null) storage.update(this);
+        if (storage != null) {
+            storage.update(this);
+        }
         return t;
     }
 
@@ -56,7 +62,9 @@ public class TaskList {
     public Task delete(int index) throws DukeException {
         Task t = db.get(index);
         db.remove(index);
-        if (storage != null) storage.update(this);
+        if (storage != null) {
+            storage.update(this);
+        }
         return t;
     }
 
@@ -101,10 +109,18 @@ public class TaskList {
         return db;
     }
 
+    public TaskList find(String word) throws DukeException {
+        TaskList filtered = new TaskList(false);
+        filtered.db = db.stream().filter(x -> x.matchWord(word)).collect(Collectors.toList());
+        return filtered;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if (db.size() == 0) return "You have no tasks!";
+        if (db.size() == 0) {
+            return "You have no tasks!";
+        }
         for (int i = 1; i <= db.size(); i++) {
             sb.append("\n\t ");
             sb.append(i + "." + db.get(i - 1));

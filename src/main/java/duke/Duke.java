@@ -7,11 +7,8 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n" + "| " +
+                "|_|" + " | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
         /* Initialization */
@@ -25,7 +22,9 @@ public class Duke {
                     input = sc.nextLine();
                     Record r = inputH.query(input);
                     Ui.reply(r.msg());
-                    if (r.bye()) break;
+                    if (r.bye()) {
+                        break;
+                    }
                 } catch (DukeException e) {
                     Ui.reply(e.getMessage());
                 }

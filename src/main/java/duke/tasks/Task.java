@@ -7,8 +7,8 @@ public abstract class Task {
     public final static DukeException FORMAT_EXCEPTION = 
             new DukeException("I don't understand this entry, enter " +
             "'help' to learn the correct formatting!");
-    protected String desc;
     protected boolean done;
+    protected String desc = new String();
     protected String details = new String();
     protected DukeDateTime dateTime = new DukeDateTime();
 
@@ -52,15 +52,23 @@ public abstract class Task {
      *
      * @return String representing this event in database format.
      */
+    public boolean matchWord(String word) {
+        return desc.contains(word) || details.contains(word);
+    }
+
     public abstract String toDB();
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
+        if (this == obj) {
+            return true;
+        }
         if (obj instanceof Task) {
             Task that = (Task) obj;
             return (desc.equals(that.desc) && done == that.done && details.equals((that.details)) && dateTime.equals(that.dateTime));
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     @Override

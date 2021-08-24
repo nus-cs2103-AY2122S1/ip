@@ -37,20 +37,28 @@ public class DukeDateTime implements Comparable<DukeDateTime> {
     private LocalDateTime dateTime = null;
     private LocalDate date = null;
     private LocalTime time = null;
-    
+
+    /**
+     * Instantiates an empty DukeDateTime.
+     */
     public DukeDateTime() {}
-    
+
+    /**
+     * Instantiates a new DukeDateTime based on a LocalDateTime.
+     * 
+     * @param dateTime
+     */
     public DukeDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
-    public DukeDateTime(LocalTime time) {
-        this.time = time;
-    }
-    public DukeDateTime(LocalDate date) {
-        this.date = date;
-    }
-    
-    // (date time), (date), (time)
+
+    /**
+     * Returns a DukeDateTime as parsed from arg.
+     * 
+     * @param arg Formatted date/time string.
+     * @return DukeDateTime as parsed from arg.
+     * @throws DukeException
+     */
     public static DukeDateTime parse(String arg) throws DukeException {
         DukeDateTime out = new DukeDateTime();
         String[] args = arg.split(" ");
@@ -68,12 +76,23 @@ public class DukeDateTime implements Comparable<DukeDateTime> {
         }
         return out;
     }
-    
+
+    /**
+     * Default formatting of this DukeDateTime.
+     * 
+     * @return String formatting of this DukeDateTime.
+     */
     public String format() {
         Format f1 = Format.PRINT_DATE_LONG, f2 = Format.PRINT_TIME;
         return format(f1, f2);
     }
-    
+
+    /**
+     * Formatting of this DukeDateTime according to f.
+     * 
+     * @param f Format desired.
+     * @return String formatting of this DukeDateTime.
+     */
     public String format(Format f) {
         if (dateTime != null) return dateTime.format(f.format);
         if (date != null && f.lvl == Level.DATE) return date.format(f.format);
@@ -81,16 +100,20 @@ public class DukeDateTime implements Comparable<DukeDateTime> {
         return new String();
     }
 
+    /**
+     * Formatting of this DukeDateTime according to f1, f2.
+     * Separated by a single blank space.
+     * 
+     * @param f1 Format desired.
+     * @param f2 Format desired.
+     * @return String formatting of this DukeDateTime.
+     */
     public String format(Format f1, Format f2) {
         String s1 = format(f1);
         String s2 = format(f2);
         if (s1.equals(new String())) return s2;
         if (s2.equals(new String())) return s1;
         return s1 + " " + s2;
-    }
-    
-    public static DukeDateTime now() {
-        return new DukeDateTime(LocalDateTime.now());
     }
     
     public int compareTo(DukeDateTime that) {
