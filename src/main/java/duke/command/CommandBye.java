@@ -5,9 +5,18 @@ import duke.DukeStorage;
 import duke.DukeUi;
 import duke.task.TaskList;
 
+/**
+ * Represents a command to exit the app.
+ */
 public class CommandBye extends DukeCommand {
     boolean isEnd = true;
 
+    /**
+     * Saves the task list and attempts to exit the app.
+     * Does not exit if the task list failed to save.
+     *
+     * @param tl Task list for the user.
+     */
     @Override
     public void execute(TaskList tl) {
         try {
@@ -19,6 +28,11 @@ public class CommandBye extends DukeCommand {
         }
     }
 
+    /**
+     * As described in DukeCommand.
+     *
+     * @return True if task list saved successfully, false otherwise.
+     */
     @Override
     public boolean isExit() {
         return isEnd;

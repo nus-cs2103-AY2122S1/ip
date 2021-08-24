@@ -30,7 +30,7 @@ public class CommandTodo extends DukeCommand {
     };
 
     /**
-     * As described in DukeCommand
+     * As described in DukeCommand.
      *
      * @return False.
      */
