@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * The Task class encapsulates a task with a name and an indicator of its completion.
+ * As every Task is one of various types of Tasks, this class is abstract.
+ */
 public abstract class Task {
 
     String name;
@@ -16,9 +20,9 @@ public abstract class Task {
     }
 
     /**
-     * Returns a string representing the task
+     * Returns a string representing the task.
      *
-     * @return a string representing the task
+     * @return a string representing the task.
      */
     @Override
     public String toString() {
@@ -35,5 +39,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Returns a String that will be stored in the taskList.txt file.
+     *
+     * @return a String to be stored in the taskList.txt file.
+     */
     abstract public String printToFile();
 }

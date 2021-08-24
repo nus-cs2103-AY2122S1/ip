@@ -5,6 +5,9 @@ import duke.Ui;
 import duke.Storage;
 import duke.DukeException;
 
+/**
+ * The ListCommand is used when displaying all the Tasks of the TaskList.
+ */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
@@ -13,6 +16,15 @@ public class ListCommand extends Command {
 
     }
 
+    /**
+     * Prints all the tasks in the given TaskList.
+     * If there are no tasks in the TaskList, will print a message saying so.
+     *
+     * @param tasks the given TaskList.
+     * @param ui the given Ui.
+     * @param storage the given Storage.
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String msg = tasks.listTaskArr();

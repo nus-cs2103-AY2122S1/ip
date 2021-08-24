@@ -3,8 +3,19 @@ package duke;
 import duke.command.*;
 import duke.task.TaskTypes;
 
+/**
+ * The Parser class encapsulates methods related to parsing user input.
+ */
 public class Parser {
 
+    /**
+     * Parses a given string representing user input and returns the related Command.
+     * Throws a DukeException when an invalid command is received.
+     *
+     * @param str The given user input.
+     * @return a Command corresponding to the user input.
+     * @throws DukeException when the given user input is invalid.
+     */
     public static Command parse(String str) throws DukeException {
         String[] strArr = str.split("\\s", 2);
 

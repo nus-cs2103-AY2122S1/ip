@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The Deadline class encapsulates a Task to be done by a given deadline.
+ */
 public class Deadline extends Task {
 
     String dlineString;
@@ -28,6 +31,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns a String representing the Deadline Task.
+     *
+     * @return a String representing the Deadline Task.
+     */
     @Override
     public String toString() {
         String msg = "[D]" + super.toString() + " (by: ";
@@ -39,6 +47,11 @@ public class Deadline extends Task {
         return msg;
     }
 
+    /**
+     * Returns a String representing the Deadline Task to be saved in the taskList.txt file.
+     *
+     * @return a String representing the Deadline Task to be saved in the taskList.txt file.
+     */
     public String printToFile() {
         String msg = "D | " + (this.isDone ? 1 : 0) + " | " + this.name + " | ";
         if (dlineString == null) {
