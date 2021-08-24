@@ -19,4 +19,8 @@ public abstract class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+    public String toFile() {
+        return "| " + (this.isDone ? 1 : 0) + " | " + this.description;
+    }
 }
