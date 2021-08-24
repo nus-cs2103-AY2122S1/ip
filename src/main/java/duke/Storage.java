@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.StringBuilder;
-import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Scanner;
 
@@ -25,7 +24,7 @@ public class Storage {
         }
     }
 
-    public void saveState(LinkedList<Item> itemList) throws DukeException {
+    public void saveState(ItemList itemList) throws DukeException {
         StringBuilder s = new StringBuilder();
 
         try {
@@ -57,8 +56,8 @@ public class Storage {
         }
     }
 
-    public LinkedList<Item> loadState() {
-        LinkedList<Item> itemList = new LinkedList<>();
+    public ItemList loadState() {
+        ItemList itemList = new ItemList();
         try {
             Scanner fileReader = new Scanner(this.file);
             while (fileReader.hasNextLine()) {

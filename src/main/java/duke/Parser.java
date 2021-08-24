@@ -4,6 +4,7 @@ import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
 import duke.commands.AddTodoCommand;
 import duke.commands.ByeCommand;
+import duke.commands.ClearCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
@@ -34,6 +35,9 @@ public class Parser {
             break;
         case "bye":
             c = new ByeCommand();
+            break;
+        case "clear":
+            c = new ClearCommand();
             break;
         default:
             throw new DukeException("Command not understood");

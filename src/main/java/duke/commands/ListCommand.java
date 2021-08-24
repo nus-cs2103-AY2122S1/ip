@@ -1,9 +1,9 @@
 package duke.commands;
 
-import duke.Duke;
 import duke.Item;
+import duke.ItemList;
+import duke.Ui;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.ListIterator;
 
 public class ListCommand extends Command {
@@ -12,10 +12,10 @@ public class ListCommand extends Command {
     public void parseLine(String line) {}
 
     @Override
-    public void execute(LinkedList<Item> itemList) {
+    public void execute(ItemList itemList, Ui ui) {
         ListIterator<Item> iterator = itemList.listIterator();
         if (!iterator.hasNext()) {
-            System.out.println(Duke.styleResponse("Empty!"));
+            ui.println("Empty!");
         } else {
             ArrayList<String> printBuffer = new ArrayList<>();
             printBuffer.add("Here are the tasks in your list:");
@@ -24,7 +24,7 @@ public class ListCommand extends Command {
                 printBuffer.add(currIdx.toString() + ". " + iterator.next().toString());
                 currIdx++;
             }
-            System.out.println(Duke.styleResponse(printBuffer));
+            ui.println(printBuffer);
         }
     }
 }

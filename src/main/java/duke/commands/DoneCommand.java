@@ -1,9 +1,9 @@
 package duke.commands;
 
-import duke.Duke;
 import duke.Item;
+import duke.ItemList;
+import duke.Ui;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class DoneCommand extends Command {
     private int index;
@@ -14,12 +14,12 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(LinkedList<Item> itemList) {
+    public void execute(ItemList itemList, Ui ui) {
         Item x = itemList.get(this.index);
         ArrayList<String> printBuffer = new ArrayList<>();
         printBuffer.add("Nice! I've marked this task as done:");
         x.markAsDone();
         printBuffer.add("  " + x.toString());
-        System.out.println(Duke.styleResponse(printBuffer));
+        ui.println(printBuffer);
     }
 }

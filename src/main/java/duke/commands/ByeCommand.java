@@ -1,8 +1,7 @@
 package duke.commands;
 
-import duke.Duke;
-import duke.Item;
-import java.util.LinkedList;
+import duke.ItemList;
+import duke.Ui;
 
 public class ByeCommand extends Command {
     static final String GOODBYE = "Bye. Hope to see you again soon!";
@@ -12,8 +11,8 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(LinkedList<Item> itemList) {
-        System.out.println(Duke.styleResponse(GOODBYE));
+    public void execute(ItemList itemList, Ui ui) {
+        ui.println(GOODBYE);
     }
 
     @Override

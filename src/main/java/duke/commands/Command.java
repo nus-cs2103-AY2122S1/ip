@@ -1,12 +1,11 @@
 package duke.commands;
 
-import java.util.LinkedList;
-
+import duke.ItemList;
 import duke.DukeException;
-import duke.Item;
+import duke.Ui;
 
 public abstract class Command {
-    public abstract void execute(LinkedList<Item> itemList) throws DukeException;
+    public abstract void execute(ItemList itemList, Ui ui) throws DukeException;
 
     public abstract void parseLine(String line) throws DukeException;
 

@@ -1,8 +1,6 @@
 package duke;
 
 import duke.commands.Command;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,8 +9,9 @@ public class Duke {
         + "| | | | | | | |/ / _ \\\n"
         + "| |_| | |_| |   <  __/\n"
         + "|____/ \\__,_|_|\\_\\___|\n";
-    private LinkedList<Item> itemList;
+    private ItemList itemList;
     private Storage storage;
+    private Ui ui;
 
     public static void main(String[] args) {
         new Duke();
@@ -20,6 +19,7 @@ public class Duke {
 
     public Duke() {
         this.storage = null;
+        this.ui = new Ui();
 
         try {
             this.storage = new Storage("duke/data/duke.txt");
@@ -37,34 +37,17 @@ public class Duke {
         boolean isExit = false;
         String currLine;
         
-        while (!isExit) {
+        while (!isExit && sc.hasNextLine()) {
             try {
                 currLine = sc.nextLine();
                 Command currCommand = Parser.parse(currLine);
-                currCommand.execute(this.itemList);
+                currCommand.execute(this.itemList, this.ui);
                 this.storage.saveState(this.itemList);
                 isExit = currCommand.isExit();
             } catch (DukeException e) {
-                System.out.println(styleResponse(e.toString()));
+                this.ui.println(e.toString());
             }
         }
         sc.close();
-    }
-
-    public static String styleResponse(String inputString) {
-        return "     --------------------\n     " + inputString + "\n     --------------------";
-    }
-
-    /**
-     * Uses a line-wise input array of Strings and formats it for output.
-     * @param inputStrings
-     * @return String of output.
-     */
-    public static String styleResponse(ArrayList<String> inputStrings) {
-        String returnBuffer = "     --------------------\n";
-        for (String line : inputStrings) {
-            returnBuffer = returnBuffer.concat("     " + line + "\n");
-        }
-        return returnBuffer + "     --------------------";
     }
 }
