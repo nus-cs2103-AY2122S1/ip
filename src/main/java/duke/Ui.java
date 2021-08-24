@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Class that deals with all the interactions with the user.
+ */
 public class Ui {
 
     private static final String LINE = "--------------------------------------------------------------------------------------";
@@ -22,15 +25,25 @@ public class Ui {
 
     public Ui() {}
 
+    /**
+     * Method to show welcome message to user
+     */
     public static void showWelcomeMessage() {
         showToUser(LOGO, WELCOME_MESSAGE, LINE, HELP_MESSAGE, LINE);
     }
 
+    /**
+     * Method to show message to warn user that task number is missing
+     */
     public static void warningMissingNumber() {
         String message = "OOPS!!! To delete a task, the task number must be stated.";
         showToUser(LINE, message, LINE);
     }
 
+    /**
+     * Method that warns user that there is a missing description for the task.
+     * @param command
+     */
     public static void warningMissingDescription(String command) {
         switch (command) {
         case "todo":
@@ -48,51 +61,84 @@ public class Ui {
         }
     }
 
+    /**
+     * Method to show goodbye message when user exits programme with command bye
+     */
     public static void showGoodbyeMessage() {
         String message = "     Bye. Hope to see you again soon!";
         showToUser(LINE, message, LINE);
     }
 
+    /**
+     * Method to show message prompting user that command is invalid or wrong
+     */
     public static void showInvalidInputMessage() {
         String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
         showToUser(LINE, message, LINE);
     }
 
+    /**
+     * Method to show message after successfully marking task as complete
+     */
     public static void showCompletedMessage() {
         String message = "Nice! I've marked this task as done:";
         showToUser(LINE, message);
     }
 
+    /**
+     * Method to show line divider
+     */
     public static void showLine() {
         System.out.println(LINE);
     }
 
+    /**
+     * Method to show added task, along with uodated number of tasks in list
+     * @param taskName
+     * @param numTasks
+     */
     public static void showAddedTask(String taskName, int numTasks) {
         String successfulMessage = "Got it. I've added this task:";
         String updatedListNumber = "Now you have " + numTasks + " task(s) in the list.";
         showToUser(LINE, successfulMessage, taskName, updatedListNumber, LINE);
     }
 
+    /**
+     * Shows list of all the tasks that have not been deleted
+     */
     public static void showList() {
         String message = "Here are the tasks in your list:";
         showToUser(LINE, message);
     }
 
+    /**
+     * Shows message if number does not correspond to any task
+     */
     public static void noTask() {
         String message = "No such task exists.";
         showToUser(LINE, message, LINE);
     }
 
+    /**
+     * Show message upon successfully deleting a task
+     */
     public static void showSuccessfulDelete() {
         String successfulMessage = "Noted I've removed this task:";
         showToUser(LINE, successfulMessage);
     }
 
+    /**
+     * Shows updated number of tasks in the list
+     * @param numTasks
+     */
     public static void showUpdatedNumber(int numTasks) {
         String updatedListNumber = "Now you have " + numTasks + " task(s) in the list.";
         showToUser(updatedListNumber, LINE);
     }
 
+    /**
+     * Shows message that warns user that due date of a deadline cannot be empty
+     */
     public static void missingDeadline() {
         System.out.println("---------------------------------------------");
         System.out.println("OOPS!!! The due date of a deadline cannot be empty.");
@@ -100,6 +146,9 @@ public class Ui {
         System.out.println("---------------------------------------------");
     }
 
+    /**
+     * Shows message that warns user that details of an event cannot be empty
+     */
     public static void missingEventDetails() {
         System.out.println("---------------------------------------------");
         System.out.println("OOPS!!! The details of an event cannot be empty.");
@@ -107,6 +156,10 @@ public class Ui {
         System.out.println("---------------------------------------------");
     }
 
+    /**
+     * method that takes in mutliple strings to form a message shown to the user
+     * @param message
+     */
     public static void showToUser(String... message) {
         for (String m : message) {
             System.out.println(m);

@@ -11,14 +11,29 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * Class that encapsulates all the methods relevant to storing of the tasks in a hard drive
+ */
 public class Storage {
 
     public final File file;
 
+    /**
+     * Pubic constructor for storage class that takes in a file to write data to
+     *
+     * @param file
+     */
     public Storage(File file) {
         this.file = file;
     }
 
+    /**
+     * Method that loads the file, by creating it if it does not exist and adds the format
+     * of the file to the top and clears all previous data before starting
+     *
+     * @return Printwriter instance to write data into file
+     * @throws IOException
+     */
     public PrintWriter load() throws IOException {
         PrintWriter writer = new PrintWriter(this.file);
 
@@ -35,12 +50,23 @@ public class Storage {
         return writer;
     }
 
+    /**
+     * Method that writes data into the file
+     * @param writer
+     * @param task
+     */
     public static void addData(PrintWriter writer, Task task) {
         writer.println(task.toString());
         writer.flush();
     }
 
 
+    /**
+     * Method that edits tasks in the file and marks them as deleted
+     *
+     * @param file
+     * @param task
+     */
     public static void markAsDeleted(File file, Task task) {
         try {
             Scanner sc = new Scanner(file);
@@ -66,6 +92,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Method that edits tasks in file and marks them as completed
+     *
+     * @param file
+     * @param task
+     * @param oldLine
+     */
     public static void saveAsCompleted(File file, Task task, String oldLine) {
         try {
             Scanner sc = new Scanner(file);
