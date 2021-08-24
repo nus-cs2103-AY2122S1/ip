@@ -1,7 +1,11 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String title;
     protected boolean isDone;
     protected char typeIndicator;
+    protected LocalDate timeDue;
 
     protected enum TypeIndicators {
         TODO('T'),
@@ -44,9 +48,9 @@ public class Task {
             case TODO:
                 return new Todo(title, isDone);
             case DEADLINE:
-                return new Deadline(title, timeDue, isDone);
+                return new Deadline(title, LocalDate.parse(timeDue), isDone);
             case EVENT:
-                return new Event(title, timeDue, isDone);
+                return new Event(title, LocalDate.parse(timeDue), isDone);
         }
         // If the type cannot be parsed, it defaults to TO-DO.
         return new Todo(title, isDone);

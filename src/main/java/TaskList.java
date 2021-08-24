@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -36,7 +37,8 @@ public class TaskList {
      */
     public String addNewDeadline(String taskTitle) {
         int delimiter = taskTitle.indexOf("/by ");
-        Deadline task = new Deadline(taskTitle.substring(0, delimiter), taskTitle.substring(delimiter + 4));
+        LocalDate due = LocalDate.parse(taskTitle.substring(delimiter + 4));
+        Deadline task = new Deadline(taskTitle.substring(0, delimiter), due);
         this.tasks.add(task);
         return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
     }
@@ -48,7 +50,8 @@ public class TaskList {
      */
     public String addNewEvent(String taskTitle) {
         int delimiter = taskTitle.indexOf("/at ");
-        Event task = new Event(taskTitle.substring(0, delimiter), taskTitle.substring(delimiter + 4));
+        LocalDate due = LocalDate.parse(taskTitle.substring(delimiter + 4));
+        Event task = new Event(taskTitle.substring(0, delimiter), due);
         this.tasks.add(task);
         return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
     }
