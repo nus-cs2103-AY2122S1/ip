@@ -37,9 +37,7 @@ public class DateTimeHandler {
     public String[] getFormatList() {
         String[] res = new String[formats.length+1];
         res[0] = "Valid date formats:";
-        for (int i=1; i<=formats.length; i++) {
-            res[i] = formats[i-1];
-        }
+        System.arraycopy(formats, 0, res, 1, formats.length);
         return res;
     }
 
