@@ -27,6 +27,10 @@ public class Duke {
      * @param dateStr Date taken in to check for validity
      * @return If date is valid
      */
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
     public static boolean isValid(String dateStr) {
         try {
             LocalDate.parse(dateStr, DateTimeFormatter.ISO_LOCAL_DATE);
@@ -37,7 +41,13 @@ public class Duke {
         return true;
     }
 
-    public static void main(String[] args) {
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.loadFile());
+    }
+
+    public void run () {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -45,10 +55,14 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    }
+
+    public static void main(String[] args) {
+
         Scanner input = new Scanner(System.in);
         ArrayList<Task> storedInfo = new ArrayList<Task>();
         int count = 0;
-        try {
+        /*try {
             File taskList = new File("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt");
             Scanner taskReader = new Scanner(taskList);
             while (taskReader.hasNextLine()) {
@@ -82,7 +96,7 @@ public class Duke {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Tasklist not found. Creating new tasklist");
-        }
+        }*/
         //Task[] storedInfo = new Task[100];
         while (input.hasNextLine()) {
             String in = input.nextLine();
