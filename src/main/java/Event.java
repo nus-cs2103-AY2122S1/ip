@@ -13,14 +13,15 @@ public class Event extends Task {
     }
 
     // Constructor for an Event that may be completed
-    public Event(String description, String eventTime, Boolean isComplete) {
+    public Event(String description, LocalDateTime eventTime, Boolean isComplete) {
         super(description, isComplete);
         this.eventTime = eventTime;
     }
 
     @Override
     public String getFileRepr() {
-        return "E" + super.getFileRepr() + " | " + this.eventTime;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return "E" + super.getFileRepr() + " | " + this.eventTime.format(format);
     }
 
     // String representation of an Event

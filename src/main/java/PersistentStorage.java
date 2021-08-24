@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -48,14 +50,16 @@ public class PersistentStorage {
                     String taskType = tokens[0];
                     boolean isDone = (tokens[1].equals("1") ? true : false);
                     String description = tokens[2];
-                    String dateTimeInfo;
+                    String rawDateTimeInfo;
 
                     if (tokens.length == 3) {
                         ToDo item = new ToDo(description, isDone);
                         storedTasks.addTask(item);
 
                     } else {
-                        dateTimeInfo = tokens[3];
+                        rawDateTimeInfo = tokens[3];
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+                        LocalDateTime dateTimeInfo = LocalDateTime.parse(rawDateTimeInfo, formatter);
                         if (taskType.equals("D")) {
                             // Task is a Deadline
                             Deadline item = new Deadline(description, dateTimeInfo, isDone);

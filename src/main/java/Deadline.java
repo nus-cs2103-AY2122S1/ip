@@ -13,14 +13,15 @@ public class Deadline extends Task {
     }
 
     // Constructor for a Deadline that may be completed
-    public Deadline(String description, String dueDate, Boolean isComplete) {
+    public Deadline(String description, LocalDateTime dueDate, Boolean isComplete) {
         super(description, isComplete);
         this.dueDate = dueDate;
     }
 
     @Override
     public String getFileRepr() {
-        return "D" + super.getFileRepr() + " | " + this.dueDate;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return "D" + super.getFileRepr() + " | " + this.dueDate.format(format);
     }
 
     // String representation of a Deadline
