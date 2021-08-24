@@ -8,14 +8,27 @@ import java.util.Scanner;
 import duke.exception.InvalidParamException;
 import duke.main.TaskList;
 
+/**
+ * Encapsulates a storage that has methods to save Tasks from a TaskList in the hard disk,
+ * as well as loading that saved data back into the TaskList upon running Duke.
+ */
 public class Storage {
 
+    /** The path of the text file used to store the Tasks from a TaskList */
     private final String FILEPATH = "tasklist.txt";
+    /** The file used to store the Tasks from a TaskList */
     private final File SAVEFILE = new File(FILEPATH);
+    /** A distinct string separating pieces of information saved in the save text file */
     private final String SEPARATOR = "~SEPARATION_STRING~";
 
+    /** TaskList that this Storage will copy to and from */
     private TaskList taskList;
 
+    /**
+     * Constructs a Storage instance that acts on the given TaskList.
+     *
+     * @param taskList TaskList that this Storage will copy to and from.
+     */
     public Storage(TaskList taskList) {
         try {
             this.taskList = taskList;
@@ -25,6 +38,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Copies Tasks from the TaskList in order and saves them in a save text file.
+     * Each Task is saved on 1 line in the order and format:
+     * Status(1 for done, 0 for not done), Initial of Task, Description, Extra information
+     * The above pieces of information are separated by the SEPARATOR string.
+     */
     public void writeToFile() {
         try {
             StringBuilder toBeWritten = new StringBuilder();
@@ -63,6 +82,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the save text file line by line to interpret and construct the appropriate Tasks to add into the TaskList.
+     */
     public void copyFromFileToList() { //STOPPED HERE
         try {
             Scanner sc = new Scanner(SAVEFILE);
@@ -99,5 +121,4 @@ public class Storage {
             System.out.println("THIS SHOULD NEVER HAPPEN, DEADLINE FORMAT WRONG");
         }
     }
-
 }

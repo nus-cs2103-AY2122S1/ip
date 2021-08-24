@@ -5,32 +5,55 @@ import java.util.Iterator;
 
 import duke.task.Task;
 
+/**
+ * Represents an iterable list that can hold Tasks and encapsulates methods for interacting with the list.
+ */
 public class TaskList implements Iterable<Task> {
+
+    /** ArrayList used to hold Tasks */
     private ArrayList<Task> taskList;
 
+    /**
+     * Constructs a TaskList that can hold Tasks.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
     /**
-     * Adds the Task into the task list.
+     * Adds the Task into the TaskList.
      *
-     * @param newTask the Task to be added into the task list.
+     * @param newTask Task to be added into the TaskList.
      */
     public void addTask(Task newTask) {
         this.taskList.add(newTask);
     }
 
+    /**
+     * Removes a Task with the given index from the TaskList and returns it.
+     *
+     * @param taskIndex Index of the Task to be removed from the TaskList.
+     * @return Task that was removed from the TaskList.
+     */
     public Task removeTask(int taskIndex) {
         return this.taskList.remove(taskIndex);
     }
 
+    /**
+     * Marks a Task from the TaskList with the given index as done and returns it.
+     *
+     * @param taskIndex Index of the Task in the TaskList to be marked as done.
+     * @return Task from the TaskList that was marked as done.
+     */
     public Task markDoneInTaskList(int taskIndex) {
         Task task = this.taskList.get(taskIndex);
         task.markAsDone();
         return task;
     }
 
+    /**
+     * Prints all the Tasks in the TaskList line by line.
+     */
     public void printList() {
         for (int i = 0; i < this.taskList.size(); i++) {
             System.out.println(i + 1 + ". " + this.taskList.get(i));
@@ -60,6 +83,11 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Returns the iterator of the TaskList so that it is iterable.
+     *
+     * @return Iterator of the ArrayList representing the TaskList.
+     */
     @Override
     public Iterator<Task> iterator() {
         return this.taskList.iterator();

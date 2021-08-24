@@ -6,18 +6,25 @@ import java.time.format.DateTimeParseException;
 
 import duke.exception.InvalidParamException;
 
+/**
+ * Represents a Deadline type Task.
+ */
 public class Deadline extends Task{
 
+    /** String that Deadline uses to distinguish the description from the deadline date in the input String */
     private static final String SEPARATOR = " /by ";
 
+    /** String containing the deadline date that this Deadline is due on*/
     private String by;
+    /** Date that this Deadline is due on */
     private LocalDate date;
 
     /**
-     * A constructor for this deadline Task.
+     * Constructs a Deadline Task with the given description and information.
      *
-     * @param description the description of what the task is.
-     * @param by the specific date/time that this task has to be done by.
+     * @param description Description of the Deadline.
+     * @param by The specific date that this Deadline is due on.
+     * @throws InvalidParamException If the description does not contain the appropriate information or format.
      */
     public Deadline(String description, String by) throws InvalidParamException {
         super(description);
@@ -32,11 +39,11 @@ public class Deadline extends Task{
     }
 
     /**
-     * Returns a deadline task based on the given description.
+     * Returns a Deadline Task based on the given description.
      *
-     * @param input the string containing the deadline task description.
-     * @return the deadline task constructed from the given description.
-     * @throws InvalidParamException if the description does not contain the appropriate information.
+     * @param input String containing the Deadline description.
+     * @return Deadline constructed from the given description.
+     * @throws InvalidParamException If the description does not contain the appropriate information or format.
      */
     public static Task setDeadline(String input) throws InvalidParamException {
         String[] deadlineParams = input.split(SEPARATOR);
@@ -50,21 +57,31 @@ public class Deadline extends Task{
     }
 
     /**
-     * Returns the string representation of this Task, which follows the following format:
+     * Returns the string representation of this Deadline, which follows the following format:
      * [D][Task status] Task Description (by: Task deadline)
      *
-     * @return string representation of this Task, which is the type of task (Deadline),
-     *         its status, its description, and its deadline.
+     * @return String representation of this Deadline, which consist of the type of task (Deadline),
+     *         its status, its description, and its deadline date.
      */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
+    /**
+     * Returns the date that the Deadline is due on.
+     *
+     * @return String containing the date that this Deadline is due on.
+     */
     public String getBy() {
         return this.by;
     }
 
+    /**
+     * Returns the separator string used to distinguish the description from the Deadline date in the input String.
+     *
+     * @return Separator string.
+     */
     public static String getSeparator() {
         return SEPARATOR;
     }

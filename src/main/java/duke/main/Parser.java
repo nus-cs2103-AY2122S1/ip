@@ -8,21 +8,38 @@ import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 
+/**
+ * Encapsulates methods that handle and interpret user input.
+ */
 public class Parser {
+
+    /** The TaskList that will be altered based on user input */
     private TaskList taskList;
+
+    /**
+     * Enum that holds information about acting on a task, not including actions that changes the size of the TaskList.
+     * Task actions include deleting a task (DELETE) and marking a Task as done (DONE).
+     */
     private enum TaskAction {
         DELETE("delete", 7, "deleted"),
         DONE("done", 5, "marked as done");
 
-        // Name of the task action
+        /** Name of the task action */
         private String name;
 
-        // At what index to substring the input so as to remove the first word
+        /** Index to substring the input so as to remove the first word (command word) */
         private int substringIndex;
 
-        // The message fragment when the action is successfully completed
+        /** Message fragment when the action is successfully completed */
         private String successMessage;
 
+        /**
+         * Constructs a TaskAction.
+         *
+         * @param name Name of the TaskAction.
+         * @param substringIndex Index to substring the input so as to remove the first word (command word).
+         * @param successMessage Message fragment when the action is successfully completed.
+         */
         TaskAction(String name, int substringIndex, String successMessage) {
             this.name = name;
             this.substringIndex = substringIndex;
@@ -30,14 +47,19 @@ public class Parser {
         }
     }
 
+    /**
+     * Constructs a Parser instance that acts on the given TaskList.
+     *
+     * @param taskList TaskList that the Parser will alter or act on.
+     */
     public Parser(TaskList taskList) {
         this.taskList = taskList;
     }
 
     /**
-     * Takes user input and handles it appropriately.
+     * Takes user input to interpret and acts on the TaskList appropriately.
      *
-     * @param input the input string from the Scanner
+     * @param input Input string from the user.
      */
     public boolean handleInput(String input) {
         Ui.printSingleDivider();
@@ -85,11 +107,11 @@ public class Parser {
     }
 
     /**
-     * Alters the task depending on the TaskAction given, which could either be delete or done.
+     * Alters the TaskList depending on the TaskAction given, which could either be DELETE or DONE.
      *
-     * @param input the input string from the Scanner.
-     * @param action the TaskAction to be done.
-     * @return true if the task is successfully altered, false otherwise.
+     * @param input Input string from the user.
+     * @param action TaskAction to be done.
+     * @return True if the TaskList is successfully altered, false otherwise.
      */
     private boolean alterTask(String input, Parser.TaskAction action) {
         try {
@@ -126,10 +148,10 @@ public class Parser {
     }
 
     /**
-     * Checks the task that is attempting to be added into the task list.
+     * Checks the task that is being attempted to be added into the task list.
      * If the input contains the appropriate information, the task is added.
      *
-     * @param input the input string from the Scanner.
+     * @param input Input string from the user.
      */
     private void vetoTask(String input) {
         Task newTask = null;
@@ -164,7 +186,7 @@ public class Parser {
             System.out.println("Output: " + e1.getMessage());
         }
 
-        // If there was no error, then add task. Else, skip this to get input again.
+        // If there was no error, then add task.
         if (newTask != null) {
             taskList.addTask(newTask);
             System.out.println("Output:\n\nYou have successfully added the following task:\n\n"
@@ -177,9 +199,8 @@ public class Parser {
      * Checks if the input contains the description for the task to be added.
      * Throws a NoDescriptionException otherwise.
      *
-     * @param input the input string from the Scanner.
-     *
-     * @throws NoDescriptionException if the description of the task is empty.
+     * @param input Input string from the user.
+     * @throws NoDescriptionException If the description of the task is empty.
      */
     private void checkDescription(String input) throws NoDescriptionException {
         String[] inputArray = input.split(" ");
