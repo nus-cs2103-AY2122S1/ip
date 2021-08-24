@@ -10,6 +10,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class handles the loading and saving of tasks.
+ */
 public class Storage {
     private final String filePath;
 

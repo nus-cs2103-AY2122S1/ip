@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser class makes sense of user input.
+ */
 public class Parser {
     private final TaskList taskList;
     private final Storage storage;

@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Duke is a task manager bot.
+ */
 public class Duke {
     private boolean inSession;
     private final Storage storage;

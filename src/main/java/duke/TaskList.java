@@ -3,6 +3,10 @@ package duke;
 import duke.task.*;
 import java.util.ArrayList;
 
+/**
+ * TaskList contains the list of Tasks.
+ * It handles display, add, markAsDone and delete operations.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
