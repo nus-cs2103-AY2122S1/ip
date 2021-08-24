@@ -9,11 +9,15 @@ public class TaskList {
         System.out.println("Now you have " + list.size() + " tasks in the list");
     }
 
+    public void read(Task task) {
+        list.add(task);
+    }
+
     public Task get(int pos) throws DukeException {
-        if (pos - 1 < 0 || pos > list.size()) {
+        if (pos < 0 || pos > list.size()) {
             throw new DukeException("☹ OOPS!!! No such task found!");
         }
-        return list.get(pos - 1);
+        return list.get(pos);
     }
 
     public int size() {
