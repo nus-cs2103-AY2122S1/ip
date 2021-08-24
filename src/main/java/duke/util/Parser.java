@@ -3,6 +3,7 @@ package duke.util;
 import duke.command.*;
 import duke.exception.EmptyDescriptionException;
 
+/** A class that deals with making sense of the user command. */
 public class Parser {
 
     private enum CommandType {
@@ -31,6 +32,13 @@ public class Parser {
         return commandComponents;
     }
 
+    /**
+     * Return a command class based on the type specified in the command.
+     *
+     * @param fullCommand The command input by the user.
+     * @return The command class based on the type specified in the command.
+     * @throws EmptyDescriptionException The exception that handles command with empty description.
+     */
     public static Command parse(String fullCommand)
             throws EmptyDescriptionException {
 
