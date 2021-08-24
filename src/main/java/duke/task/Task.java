@@ -1,5 +1,7 @@
+package duke.task;
+
 /**
- * Task is the base class for all tasks stored in the Duke application.
+ * duke.task.Task is the base class for all tasks stored in the Duke application.
  */
 public class Task {
     private static final String NOT_DONE_STATUS_ICON = " ";
@@ -23,6 +25,13 @@ public class Task {
     }
 
     /**
+     * Marks a task as done.
+     */
+    public void markDone() {
+        this.isDone = true;
+    }
+
+    /**
      * Gets the String icon that represents the status of the task.
      * @return The String icon.
      */
@@ -31,8 +40,8 @@ public class Task {
     }
 
     /**
-     * Converts the Task into a String that represents the Task.
-     * @return The String representation of a Task.
+     * Converts the duke.task.Task into a String that represents the duke.task.Task.
+     * @return The String representation of a duke.task.Task.
      */
     @Override
     public String toString() {
@@ -40,7 +49,7 @@ public class Task {
     }
 
     /**
-     * Converts the Task into a String to be stored in Storage.
+     * Converts the duke.task.Task into a String to be stored in duke.Storage.
      * @return String to be stored
      */
     public String toStorageString() {
@@ -49,9 +58,9 @@ public class Task {
     }
 
     /**
-     * Parses a storage String into a Task object.
-     * @param string The String used to represent the Task in the Storage.
-     * @return The Task represented by the Storage String.
+     * Parses a storage String into a duke.task.Task object.
+     * @param string The String used to represent the duke.task.Task in the duke.Storage.
+     * @return The duke.task.Task represented by the duke.Storage String.
      */
     public static Task fromStorageString(String string) {
         String[] taskSubstrings = string.split(Task.STORAGE_STRING_PARSING_DELIMITER);
@@ -70,7 +79,7 @@ public class Task {
                 break;
             default:
                 throw new RuntimeException(
-                        String.format("TaskType %s is not accounted for in switch statement.", taskType.toString())
+                        String.format("duke.task.TaskType %s is not accounted for in switch statement.", taskType.toString())
                 );
         }
 

@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -5,13 +7,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Storage class is responsible for dealing with loading tasks from file and saving tasks in the file.
+ * duke.Storage class is responsible for dealing with loading tasks from file and saving tasks in the file.
  */
 public class Storage {
     private final File file;
 
     /**
-     * Creates a new Storage instance at the specified path.
+     * Creates a new duke.Storage instance at the specified path.
      * @param pathname A pathname string
      */
     public Storage(String pathname) {
@@ -48,13 +50,13 @@ public class Storage {
             scanner.close();
             return contents.toString();
         } catch (FileNotFoundException exception) {
-            throw new RuntimeException("File not found when trying to read file from Storage class.");
+            throw new RuntimeException("File not found when trying to read file from duke.Storage class.");
         }
     }
 
     /**
-     * Writes the specified contents into the Storage file.
-     * @param contents The String contents to write to the Storage file.
+     * Writes the specified contents into the duke.Storage file.
+     * @param contents The String contents to write to the duke.Storage file.
      */
     public void write(String contents) {
         try {
@@ -62,7 +64,7 @@ public class Storage {
             fileWriter.write(contents);
             fileWriter.close();
         } catch (FileNotFoundException exception) {
-            throw new RuntimeException("File not found when trying to write to file from Storage class.");
+            throw new RuntimeException("File not found when trying to write to file from duke.Storage class.");
         } catch (IOException exception) {
             throw new RuntimeException(
                     String.format("An I/O exception occurred when trying to write to file %s\n", this.file.getPath())

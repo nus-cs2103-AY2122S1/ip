@@ -1,5 +1,13 @@
+package duke.request;
+
+import duke.action.Action;
+import duke.action.AddTask;
+import duke.exception.UserException;
+import duke.task.Event;
+import duke.task.TaskCollection;
+
 /**
- * EventRequest represents a request from the user to create an Event in the application.
+ * duke.request.EventRequest represents a request from the user to create an duke.task.Event in the application.
  */
 public class EventRequest extends TaskCollectionRequest {
     private static final String AT_DELIMITER = " /at ";
@@ -7,8 +15,8 @@ public class EventRequest extends TaskCollectionRequest {
     private final Event event;
 
     /**
-     * Creates a EventRequest.
-     * @param taskCollection The target TaskCollection.
+     * Creates a duke.request.EventRequest.
+     * @param taskCollection The target duke.task.TaskCollection.
      * @param requestString The request String.
      * @throws UserException If the request String is invalid.
      */
@@ -18,7 +26,7 @@ public class EventRequest extends TaskCollectionRequest {
     }
 
     /**
-     * Gets the Action the EventRequest requests to execute.
+     * Gets the Action the duke.request.EventRequest requests to execute.
      * @return The Action to be executed.
      */
     @Override
@@ -27,9 +35,9 @@ public class EventRequest extends TaskCollectionRequest {
     }
 
     /**
-     * Parses an input String to create a Event into a Event.
+     * Parses an input String to create a duke.task.Event into a duke.task.Event.
      * @param eventString The input String.
-     * @return The Event parsed from the input String.
+     * @return The duke.task.Event parsed from the input String.
      * @throws UserException If the eventString is invalid.
      */
     private static Event parseEvent(String eventString) throws UserException {

@@ -1,20 +1,26 @@
+package duke.request;
+
+import duke.action.Action;
+import duke.exception.UserException;
+import duke.task.TaskCollection;
+
 /**
- * Request represents a request from the user to perform an action on a collection of tasks.
+ * duke.request.Request represents a request from the user to perform an action on a collection of tasks.
  */
 public abstract class Request {
     private static final String COMMAND_DELIMITER = "\\s";
 
     /**
-     * Gets the Action the Request requests to execute.
+     * Gets the Action the duke.request.Request requests to execute.
      * @return The Action to be executed.
      */
     public abstract Action action();
 
     /**
-     * Creates the Request related to the input requestString.
-     * @param taskCollection The TaskCollection to perform the Request on.
+     * Creates the duke.request.Request related to the input requestString.
+     * @param taskCollection The duke.task.TaskCollection to perform the duke.request.Request on.
      * @param requestString The request String.
-     * @return The Request related to the request String and TaskCollection.
+     * @return The duke.request.Request related to the request String and duke.task.TaskCollection.
      * @throws UserException If the request String is invalid.
      */
     public static Request create(TaskCollection taskCollection, String requestString) throws UserException {
@@ -43,7 +49,7 @@ public abstract class Request {
         }
 
         throw new RuntimeException(String.format(
-                "Command %s exists but is not mapped to a corresponding Request.",
+                "duke.request.Command %s exists but is not mapped to a corresponding duke.request.Request.",
                 commandString
         ));
     }

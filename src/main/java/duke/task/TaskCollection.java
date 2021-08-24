@@ -1,17 +1,20 @@
-import java.lang.reflect.Array;
+package duke.task;
+
+import duke.Storage;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TaskCollection represents the collection of tasks stored in the Duke application.
+ * duke.task.TaskCollection represents the collection of tasks stored in the Duke application.
  */
 public class TaskCollection {
     private List<Task> tasks = new ArrayList<>();
     private final Storage storage;
 
     /**
-     * Creates a TaskCollection that consists of a Storage file at the specified pathname.
-     * @param pathname Pathname of the Storage file
+     * Creates a duke.task.TaskCollection that consists of a duke.Storage file at the specified pathname.
+     * @param pathname Pathname of the duke.Storage file
      */
     public TaskCollection(String pathname) {
         this.storage = new Storage(pathname);
@@ -19,7 +22,7 @@ public class TaskCollection {
     }
 
     /**
-     * Saves the List of Tasks into the TaskCollection's Storage file.
+     * Saves the List of Tasks into the duke.task.TaskCollection's duke.Storage file.
      */
     public void saveTasks() {
         StringBuilder taskCollectionString = new StringBuilder();
@@ -65,7 +68,7 @@ public class TaskCollection {
     }
 
     /**
-     * Adds a task to the TaskCollection.
+     * Adds a task to the duke.task.TaskCollection.
      * @param task The task to be added.
      */
     public void add(Task task) {
@@ -73,16 +76,16 @@ public class TaskCollection {
     }
 
     /**
-     * Gets a task from the TaskCollection.
-     * @param identifier The Task's identifier.
+     * Gets a task from the duke.task.TaskCollection.
+     * @param identifier The duke.task.Task's identifier.
      */
     public Task get(int identifier) {
         return this.tasks.get(identifier - 1);
     }
 
     /**
-     * Get the number of Tasks in the TaskCollection.
-     * @return The size of the TaskCollection.
+     * Get the number of Tasks in the duke.task.TaskCollection.
+     * @return The size of the duke.task.TaskCollection.
      */
     public Task delete(int identifier) {
         Task deletedTask = this.tasks.remove(identifier - 1);
@@ -90,16 +93,16 @@ public class TaskCollection {
     }
 
     /**
-     * Get the number of Tasks in the TaskCollection.
-     * @return The size of the TaskCollection.
+     * Get the number of Tasks in the duke.task.TaskCollection.
+     * @return The size of the duke.task.TaskCollection.
      */
     public int size() {
         return this.tasks.size();
     }
 
     /**
-     * Converts the TaskCollection to its String representation.
-     * @return The String representation of the TaskCollection.
+     * Converts the duke.task.TaskCollection to its String representation.
+     * @return The String representation of the duke.task.TaskCollection.
      */
     @Override
     public String toString() {

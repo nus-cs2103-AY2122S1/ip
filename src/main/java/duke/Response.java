@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * A Response from the application to some user input.
+ * A duke.Response from the application to some user input.
  */
 public class Response {
     public static String BASE_INDENT = "    ";
@@ -18,7 +20,7 @@ public class Response {
 
     /**
      * Creates a response with the specified String message.
-     * @param message The Response message.
+     * @param message The duke.Response message.
      */
     public Response(String message) {
         this(new String[]{ message });
@@ -26,7 +28,7 @@ public class Response {
 
     /**
      * Creates a response with the specified String array.
-     * @param messages The Response message array.
+     * @param messages The duke.Response message array.
      */
     public Response(String[] messages) {
         this.message = String.join(System.lineSeparator(), messages);
@@ -43,8 +45,8 @@ public class Response {
     }
 
     /**
-     * Converts the Response to its String representation.
-     * @return The String representation of the Response.
+     * Converts the duke.Response to its String representation.
+     * @return The String representation of the duke.Response.
      */
     @Override
     public String toString() {

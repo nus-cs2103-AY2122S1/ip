@@ -1,5 +1,13 @@
+package duke.request;
+
+import duke.task.TaskCollection;
+import duke.exception.UserException;
+import duke.action.Action;
+import duke.action.AddTask;
+import duke.task.Deadline;
+
 /**
- * DeadlineRequest represents a request from the user to create a Deadline in the application.
+ * duke.request.DeadlineRequest represents a request from the user to create a duke.task.Deadline in the application.
  */
 public class DeadlineRequest extends TaskCollectionRequest {
     private static final String BY_DELIMITER = " /by ";
@@ -7,8 +15,8 @@ public class DeadlineRequest extends TaskCollectionRequest {
     private final Deadline deadline;
 
     /**
-     * Creates a DeadlineRequest.
-     * @param taskCollection The target TaskCollection.
+     * Creates a duke.request.DeadlineRequest.
+     * @param taskCollection The target duke.task.TaskCollection.
      * @param requestString The request String.
      * @throws UserException If the request String is invalid.
      */
@@ -18,7 +26,7 @@ public class DeadlineRequest extends TaskCollectionRequest {
     }
 
     /**
-     * Gets the Action the DeadlineRequest requests to execute.
+     * Gets the Action the duke.request.DeadlineRequest requests to execute.
      * @return The Action to be executed.
      */
     @Override
@@ -27,9 +35,9 @@ public class DeadlineRequest extends TaskCollectionRequest {
     }
 
     /**
-     * Parses an input String to create a Deadline into a Deadline.
+     * Parses an input String to create a duke.task.Deadline into a duke.task.Deadline.
      * @param deadlineString The input String.
-     * @return The Deadline parsed from the input String.
+     * @return The duke.task.Deadline parsed from the input String.
      * @throws UserException If the deadlineString is invalid.
      */
     private static Deadline parseDeadline(String deadlineString) throws UserException {

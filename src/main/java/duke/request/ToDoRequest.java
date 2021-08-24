@@ -1,12 +1,20 @@
+package duke.request;
+
+import duke.exception.UserException;
+import duke.action.Action;
+import duke.action.AddTask;
+import duke.task.TaskCollection;
+import duke.task.ToDo;
+
 /**
- * ToDoRequest represents a request from the user to create an ToDo in the application.
+ * duke.request.ToDoRequest represents a request from the user to create an duke.task.ToDo in the application.
  */
 public class ToDoRequest extends TaskCollectionRequest {
     private final ToDo toDo;
 
     /**
-     * Creates a ToDoRequest.
-     * @param taskCollection The target TaskCollection.
+     * Creates a duke.request.ToDoRequest.
+     * @param taskCollection The target duke.task.TaskCollection.
      * @param requestString The request String.
      * @throws UserException If the request String is invalid.
      */
@@ -21,7 +29,7 @@ public class ToDoRequest extends TaskCollectionRequest {
     }
 
     /**
-     * Gets the Action the ToDoRequest requests to execute.
+     * Gets the Action the duke.request.ToDoRequest requests to execute.
      * @return The Action to be executed.
      */
     @Override

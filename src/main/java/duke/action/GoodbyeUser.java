@@ -1,7 +1,12 @@
+package duke.action;
+
+import duke.Response;
+import duke.action.Action;
+
 public class GoodbyeUser implements Action {
     /**
      * Greets farewell to the user when the user requests to exit the application.
-     * @return The Response.
+     * @return The duke.Response.
      */
     public Response execute() {
         return new Response(new String[]{

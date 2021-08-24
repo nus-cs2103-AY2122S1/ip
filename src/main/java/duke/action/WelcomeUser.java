@@ -1,10 +1,15 @@
+package duke.action;
+
+import duke.Response;
+import duke.action.Action;
+
 /**
- * WelcomeUser is an Action that greets the User.
+ * duke.action.WelcomeUser is an Action that greets the User.
  */
 public class WelcomeUser implements Action {
     /**
      * Welcomes the user to the application.
-     * @return The Response.
+     * @return The duke.Response.
      */
     public Response execute() {
         return new Response(new String[]{

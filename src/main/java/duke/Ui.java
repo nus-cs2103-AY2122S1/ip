@@ -1,14 +1,16 @@
+package duke;
+
 import java.util.Scanner;
 
 /**
- * Ui represents the class that deals with interactions with the user
+ * duke.Ui represents the class that deals with interactions with the user
  */
 public class Ui {
     Scanner scanner = new Scanner(System.in);
 
     /**
-     * Prints the Response to the console.
-     * @param response The Response to be printed.
+     * Prints the duke.Response to the console.
+     * @param response The duke.Response to be printed.
      */
     public void printResponse(Response response) {
         System.out.println(response.toString());

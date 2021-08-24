@@ -1,3 +1,12 @@
+package duke;
+
+import duke.action.Action;
+import duke.action.GoodbyeUser;
+import duke.action.WelcomeUser;
+import duke.exception.UserException;
+import duke.request.Request;
+import duke.task.TaskCollection;
+
 import java.util.Queue;
 import java.util.LinkedList;
 

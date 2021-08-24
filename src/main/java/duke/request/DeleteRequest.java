@@ -1,14 +1,21 @@
+package duke.request;
+
+import duke.action.DeleteTask;
+import duke.task.TaskCollection;
+import duke.exception.UserException;
+import duke.action.Action;
+
 import java.lang.NumberFormatException;
 
 /**
- * DeleteRequest represents a request from the user to delete a Task from the TaskCollection.
+ * duke.request.DeleteRequest represents a request from the user to delete a duke.task.Task from the duke.task.TaskCollection.
  */
 public class DeleteRequest extends TaskCollectionRequest {
     private final int taskId;
 
     /**
-     * Creates a DeleteRequest.
-     * @param taskCollection The target TaskCollection.
+     * Creates a duke.request.DeleteRequest.
+     * @param taskCollection The target duke.task.TaskCollection.
      * @param requestString The request String.
      * @throws UserException If the request String is invalid.
      */
@@ -22,7 +29,7 @@ public class DeleteRequest extends TaskCollectionRequest {
     }
 
     /**
-     * Gets the Action the DeleteRequest requests to execute.
+     * Gets the Action the duke.request.DeleteRequest requests to execute.
      * @return The Action to be executed.
      */
     @Override
