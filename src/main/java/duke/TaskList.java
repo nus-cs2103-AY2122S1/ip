@@ -10,6 +10,7 @@ import java.util.Locale;
 
 public class TaskList {
     private ArrayList<Task> ls;
+    private ArrayList<Task> searchList;
 
     TaskList(ArrayList<Task> ls) {
         this.ls = ls;
@@ -120,5 +121,22 @@ public class TaskList {
         System.out.println("Got it. I've added this task: ");
         System.out.println(ls.get(ls.size() - 1).toString());
         System.out.println("Now you have " + ls.size() + " tasks in the list.");
+    }
+
+    public void findTask(String search) {
+        searchList = new ArrayList<>();
+        for (int i = 0; i < ls.size(); i++) {
+            if(ls.get(i).getDescription().contains(search)) {
+                searchList.add(ls.get(i));
+            }
+        }
+        if (searchList.size() == 0) {
+            System.out.println("No matching tasks!");
+        } else {
+            System.out.println("Here are the matching tasks in your list: ");
+            for (int i = 0; i < searchList.size(); i++) {
+                System.out.println((i + 1) + "." + searchList.get(i).toString());
+            }
+        }
     }
 }

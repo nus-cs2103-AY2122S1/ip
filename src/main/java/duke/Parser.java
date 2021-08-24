@@ -93,6 +93,14 @@ public class Parser {
                     ui.printAddTask(taskList);
                 } else if (input.equals("list")) {
                     ui.displayList(taskList);
+                } else if (arr[0].equals("find")) {
+                    if (arr.length == 1) {
+                        throw new InvalidCommandException("Please specify a task you want to search");
+                    } else if (taskList.getSize() == 0) {
+                        throw new InvalidCommandException("You have not added any task!");
+                    } else {
+                        taskList.findTask(arr[1]);
+                    }
                 } else {
                     throw new InvalidCommandException("Command not Found");
                 }
