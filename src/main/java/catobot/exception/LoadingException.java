@@ -1,7 +1,7 @@
 package catobot.exception;
 
 /**
- * Represents exception when the initial loading of files have problem.
+ * Represents exception when the initial loading of files has problem.
  */
 public class LoadingException extends BotException {
     /**

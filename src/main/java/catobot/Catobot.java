@@ -3,11 +3,8 @@ package catobot;
 import catobot.command.Command;
 import catobot.command.Parser;
 import catobot.exception.BotException;
-import catobot.exception.EmptyCommandException;
 import catobot.exception.LoadingException;
 import catobot.item.TaskList;
-
-import java.io.FileNotFoundException;
 
 /**
  * Represents a Catobot.
@@ -15,9 +12,9 @@ import java.io.FileNotFoundException;
 public class Catobot {
     /** Storage of the tasks. */
     private final Storage storage;
-    /** The list of tasks for the Catobot. */
+    /** List of tasks for the Catobot. */
     private TaskList tasks;
-    /** The user interface of the Catobot. */
+    /** User interface of the Catobot. */
     private final Ui ui;
 
     /**

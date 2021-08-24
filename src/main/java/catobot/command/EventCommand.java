@@ -6,7 +6,6 @@ import catobot.exception.BotException;
 import catobot.exception.EmptyCommandException;
 import catobot.exception.InvalidDateException;
 import catobot.exception.InvalidEventException;
-import catobot.item.Deadline;
 import catobot.item.Event;
 import catobot.item.TaskList;
 
