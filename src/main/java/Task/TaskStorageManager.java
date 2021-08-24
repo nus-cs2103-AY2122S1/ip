@@ -1,3 +1,8 @@
+package Task;
+
+
+import model.*;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -6,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GnosisStorageManager {
+public class TaskStorageManager {
 
     private static final String DIRECTORY_PATH = "data";
     private static final String FILE_PATH = DIRECTORY_PATH + "/tasks.csv";
@@ -18,10 +23,10 @@ public class GnosisStorageManager {
         //check if user has folder:
         // if no folder -> means no data found -> create one from scratch
         // if have -> load to arraylist tasks
-        if (GnosisStorageManager.isDataFileAvail()) {
-            return GnosisStorageManager.getTasksFromFile();
+        if (TaskStorageManager.isDataFileAvail()) {
+            return TaskStorageManager.getTasksFromFile();
         } else {
-            GnosisStorageManager.createDataFolder();
+            TaskStorageManager.createDataFolder();
             return new ArrayList<>();
         }
     }
@@ -62,7 +67,7 @@ public class GnosisStorageManager {
     public static void writeTasksToFile(List<Task> tasks) {
         try {
             BufferedWriter writer = Files.newBufferedWriter(Paths.get(FILE_PATH));
-            writer.write("Task Type,is task completed?,Task name,DateTime");
+            writer.write("model.Task Type,is task completed?,model.Task name,DateTime");
             writer.newLine();
 
             for (Task record: tasks) {

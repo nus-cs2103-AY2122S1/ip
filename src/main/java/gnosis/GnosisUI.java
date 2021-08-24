@@ -1,3 +1,8 @@
+package gnosis;
+
+import model.Task;
+import util.GnosisConstants;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -38,11 +43,10 @@ public class GnosisUI {
     }
 
     public void updateTaskManagementViewMessage(String action, Task task, int numOfTasks) {
-        System.out.println("Task " + action + ":");
+        System.out.println("model.Task " + action + ":");
         System.out.println(task);
         System.out.println("Total tasks in the list: " + numOfTasks);
         displayBottomDivider();
-
     }
 
     public void displayAllTasksMessage(List<Task> tasks) {
@@ -59,7 +63,7 @@ public class GnosisUI {
     }
 
     public void displayMarkedTaskMessage(Task task, int taskIndex) {
-        System.out.println("Task " + (taskIndex) +" marked as done:" );
+        System.out.println("model.Task " + (taskIndex) +" marked as done:" );
         System.out.println("\t" + task);
         displayBottomDivider();
     }

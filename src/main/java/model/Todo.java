@@ -1,3 +1,5 @@
+package model;
+
 import java.time.LocalDateTime;
 
 /**
@@ -9,7 +11,7 @@ import java.time.LocalDateTime;
  * */
 public class Todo extends Task {
     public Todo(String task) {
-        super(task,TaskType.TODO);
+        super(task, TaskType.TODO);
     }
 
     public Todo(String task, Boolean isTaskDone) {

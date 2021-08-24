@@ -1,12 +1,14 @@
+package model;
+
 /**
  * This enum specifies the different commands
- * Gnosis presents.
+ * gnosis.Gnosis presents.
  *
  * @author Pawandeep Singh
  * @version A-Enums
  *
  * */
-public enum GnosisCommand {
+public enum Command {
     TODO, DEADLINE, EVENT, LIST, DONE, DELETE, BYE
 }
 

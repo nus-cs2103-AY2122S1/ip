@@ -27,7 +27,7 @@ Stretch goal: handle all possible errors in the current version. As you evolve D
 
 Tasks to achieve level-5:
 
-1. Create GnosisException Class: - Done
+1. Create gnosis.GnosisException Class: - Done
     - possible exceptions:
         - no task specified - Done
         - no specified command found - Done

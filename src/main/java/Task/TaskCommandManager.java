@@ -1,13 +1,22 @@
+package Task;
+
+import util.GnosisConstants;
+import gnosis.GnosisException;
+import model.Deadline;
+import model.Event;
+import model.Task;
+import model.Todo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
-public class TaskManager {
+public class TaskCommandManager {
 
     private List<Task> tasks;
 
-    public TaskManager(List<Task> tasks) {
+    public TaskCommandManager(List<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -46,7 +55,7 @@ public class TaskManager {
 
         Deadline dl = new Deadline(taskName, StringToDate(taskDeadline));
         tasks.add(dl);
-        //System.out.println("Deadline added:");
+        //System.out.println("model.Deadline added:");
         //System.out.println(dl);
         return dl;
     }
@@ -56,7 +65,7 @@ public class TaskManager {
             throw new GnosisException(GnosisConstants.TASK_INDEX_OUT_OF_BOUNDS_EXCEPT_MESSAGE);
         }
         tasks.get(taskIndex).setDone(true);
-        //System.out.println("Task " + (taskIndex+1) +" marked as done:" );
+        //System.out.println("model.Task " + (taskIndex+1) +" marked as done:" );
         //System.out.println("\t" + tasks.get(taskIndex));
         return tasks.get(taskIndex);
     }

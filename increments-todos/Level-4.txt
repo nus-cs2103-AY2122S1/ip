@@ -54,9 +54,9 @@ Extension: A-Inheritance
 A-Inheritance
 ↳ Use Inheritance to support multiple task types
 
-As there are multiple types of tasks that have some similarity between them, you can implement classes T0do, Deadline and Event classes to inherit from a Task class.
+As there are multiple types of tasks that have some similarity between them, you can implement classes T0do, model.Deadline and model.Event classes to inherit from a model.Task class.
 
-Furthermore, use polymorphism to store all tasks in a data structure containing Task objects e.g., Task[100].
+Furthermore, use polymorphism to store all tasks in a data structure containing model.Task objects e.g., model.Task[100].
 
 Tasks to achieve level-4:
 
@@ -64,17 +64,17 @@ Tasks to achieve level-4:
     - [T] denotes a tdo
     - no date/time attached to it
 
-2. Deadline Class - DONE
-    - [D] denotes an Event
+2. model.Deadline Class - DONE
+    - [D] denotes an model.Event
     - need to be done before a specific date/time
 
-3. Event Class - DONE
+3. model.Event Class - DONE
     - [E] denotes a deadline
     - has date
     - starts at a specific time
     - ends at specific time
 
-4. in Gnosis Class: - DONE
+4. in gnosis.Gnosis Class: - DONE
     - 3 commands:
         - tdo
             - e.g: tdo borrow book

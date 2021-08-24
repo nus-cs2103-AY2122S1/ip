@@ -1,11 +1,11 @@
 
 # User Guide
 
-## Gnosis Feature(s)
+## gnosis.Gnosis Feature(s)
 
-### Task Manager
+### model.Task Manager
 
-Gnosis provides the ability to create, retrieve and delete different variety of tasks
+gnosis.Gnosis provides the ability to create, retrieve and delete different variety of tasks
 to manage.</br>
 Different types of tasks includes: todos, deadlines and events.
 
@@ -22,10 +22,10 @@ Example of usage:
 Expected outcome:
 
 Displays todo task added.<br/>
-[T] - denotes as a Todo task.<br/>
+[T] - denotes as a model.Todo task.<br/>
 [&nbsp;&nbsp;] - denotes a todo that is not marked done.
 ```
-Todo added:
+model.Todo added:
 [T][ ] read book
 ```
 ***
@@ -43,7 +43,7 @@ Displays deadline task added.<br/>
 [D] - denotes as a deadline task.<br/>
 [&nbsp;&nbsp;] - denotes a deadline that is not marked done.
 ```
-Deadline added:
+model.Deadline added:
 [D][ ] return book  (by:  Sunday)
 ```
 ***
@@ -61,7 +61,7 @@ Displays event task added.<br/>
 [E] - denotes as an event task.<br/>
 [&nbsp;&nbsp;] - denotes an event that is not marked done.
 ```
-Event added:
+model.Event added:
 [E][ ] project meeting  (at: Mon 2-4pm)
 ```
 ***
@@ -100,13 +100,13 @@ Expected outcome:
 Marks specified task done.<br/>
 [X] - denotes a task that is marked has done<br/>
 ```
-Task 2 marked as done:
+model.Task 2 marked as done:
 [D][X] return book  (by: Sunday)
 ```
 ***
 ### `delete` - Deletes task from list
 
-Deletes task from task manager list.
+Deletes task from task Task list.
 
 Example of usage:
 
@@ -116,13 +116,13 @@ Expected outcome:
 
 Displays deleted task.<br/>
 ```
-Understood. Task has been deleted:
+Understood. model.Task has been deleted:
 3. [E][ ] project meeting  (at: Mon 2-4pm)
 ```
 ***
-### `bye` - Exits Gnosis
+### `bye` - Exits gnosis.Gnosis
 
-Terminates Gnosis program.
+Terminates gnosis.Gnosis program.
 
 Example of usage:
 

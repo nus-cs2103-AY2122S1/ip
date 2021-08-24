@@ -1,18 +1,24 @@
-import java.util.List;
+package gnosis;
+
+import Task.TaskCommandManager;
+import Task.TaskStorageManager;
+import model.*;
+import util.GnosisConstants;
+
 import java.util.Scanner;
 
 public class GnosisController {
 
-    private TaskManager taskManager;
+    private TaskCommandManager taskCommandManager;
     private GnosisUI view;
 
     public GnosisController(GnosisUI view) {
         this.view = view;
-        this.taskManager = new TaskManager(GnosisStorageManager.loadGnosisTasks());
+        this.taskCommandManager = new TaskCommandManager(TaskStorageManager.loadGnosisTasks());
     }
 
     public void startGnosis(Scanner sc) {
-        view.displayGreetMessage(GnosisStorageManager.isDataFileAvail());
+        view.displayGreetMessage(TaskStorageManager.isDataFileAvail());
         do {
             view.listenForInput(this, sc);
         } while (view.isStillListeningInput());
@@ -20,15 +26,15 @@ public class GnosisController {
     }
 
     public void executeCommand(String command, String commandInput) throws GnosisException {
-        GnosisCommand gc;
+        Command gc;
         try {
-            gc = GnosisCommand.valueOf(command.toUpperCase().trim());
+            gc = Command.valueOf(command.toUpperCase().trim());
         } catch (IllegalArgumentException e) {
             throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
         }
 
         // parse the commands
-        if (gc == GnosisCommand.BYE) {
+        if (gc == Command.BYE) {
             view.displayByeMessage();
             view.stopListeningInput();
         } else {
@@ -37,37 +43,37 @@ public class GnosisController {
         }
     }
 
-    public void executeTaskCommand(GnosisCommand gc, String taskInput) throws GnosisException, NumberFormatException {
+    public void executeTaskCommand(Command gc, String taskInput) throws GnosisException, NumberFormatException {
         switch (gc) {
             case TODO:
-                Todo td = taskManager.addTodo(taskInput);
-                view.updateTaskManagementViewMessage(gc.name(),td, taskManager.getNumOfTasks());
+                Todo td = taskCommandManager.addTodo(taskInput);
+                view.updateTaskManagementViewMessage(gc.name(),td, taskCommandManager.getNumOfTasks());
                 break;
             case DEADLINE:
-                Deadline dl = taskManager.addDeadline(taskInput);
-                view.updateTaskManagementViewMessage(gc.name(),dl, taskManager.getNumOfTasks());
+                Deadline dl = taskCommandManager.addDeadline(taskInput);
+                view.updateTaskManagementViewMessage(gc.name(),dl, taskCommandManager.getNumOfTasks());
                 break;
             case EVENT:
-                Event evt = taskManager.addEvent(taskInput);
-                view.updateTaskManagementViewMessage(gc.name(),evt, taskManager.getNumOfTasks());
+                Event evt = taskCommandManager.addEvent(taskInput);
+                view.updateTaskManagementViewMessage(gc.name(),evt, taskCommandManager.getNumOfTasks());
                 break;
             case LIST:
-                view.displayAllTasksMessage(taskManager.getTasks());
+                view.displayAllTasksMessage(taskCommandManager.getTasks());
                 break;
             case DONE:
                 // only if "done" command is call, we retrieve task index from user
                 int taskIndex = Integer.parseInt(taskInput.trim()) - 1;
-                view.displayMarkedTaskMessage(taskManager.markTaskAsDone(taskIndex), taskIndex + 1);
+                view.displayMarkedTaskMessage(taskCommandManager.markTaskAsDone(taskIndex), taskIndex + 1);
                 break;
             case DELETE:
                 taskIndex = Integer.parseInt(taskInput.trim()) - 1;
-                Task task = taskManager.deleteTask(taskIndex);
-                view.updateTaskManagementViewMessage(gc.name(),task, taskManager.getNumOfTasks());
+                Task task = taskCommandManager.deleteTask(taskIndex);
+                view.updateTaskManagementViewMessage(gc.name(),task, taskCommandManager.getNumOfTasks());
                 break;
             default:
                 throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
         }
 
-        GnosisStorageManager.writeTasksToFile(taskManager.getTasks());
+        TaskStorageManager.writeTasksToFile(taskCommandManager.getTasks());
     }
 }

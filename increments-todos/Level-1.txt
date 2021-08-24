@@ -30,7 +30,7 @@ and even the personality of the chatbot to make your chatbot unique.
 ====
 
 My Chatbot name:
-Gnosis (greek noun for knowledge :) )
+gnosis.Gnosis (greek noun for knowledge :) )
 
 
 Tasks to achieve level-1:

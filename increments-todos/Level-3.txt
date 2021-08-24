@@ -22,11 +22,11 @@ done 2
  A-Classes
  ↳ Use a class to represent tasks
 
- While it is possible to represent a task list as a multi-dimensional array containing primitive values, the more natural approach is to use a Task class to represent tasks.
+ While it is possible to represent a task list as a multi-dimensional array containing primitive values, the more natural approach is to use a model.Task class to represent tasks.
 
  Tasks to achieve level-3:
 
- 1. Create a Task Class
+ 1. Create a model.Task Class
     -to keep track of String task and a boolean isDone - DONE
     - constructor to create task and set isDone false as default - DONE
     - use toString() -> to display task -- format: [] (task name) - DONE
@@ -35,6 +35,6 @@ done 2
 
  2. Ability to mark task by index in list
     - Add done command
-    - Change ArrayList to store Task instead of String
+    - Change ArrayList to store model.Task instead of String
     - Change add command to store task in arraylist
-    - change behavior of list command for Task
+    - change behavior of list command for model.Task

@@ -1,13 +1,9 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
+package gnosis;
 import java.util.Scanner;
 /**
  *
- * Gnosis class is the main programme to execute chat-bot assistant.
- * Commands Gnosis can provide a task tracker to user:
+ * gnosis.Gnosis class is the main programme to execute chat-bot assistant.
+ * Commands gnosis.Gnosis can provide a task tracker to user:
  * "list" - displays all tasks
  * "done (task number)" - marks specified task as done
  * "bye" - exits program
@@ -19,18 +15,15 @@ import java.util.Scanner;
  * */
 public class Gnosis {
 
-    private static List<Task> tasks;
-
     private GnosisUI gnosisView;
     private GnosisController gnosisController;
-
 
     public Gnosis() {
         gnosisView = new GnosisUI();
         this.gnosisController = new GnosisController(gnosisView);
     }
 
-    public void run(Scanner sc) {
+    private void run(Scanner sc) {
         gnosisController.startGnosis(sc);
     }
 

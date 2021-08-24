@@ -9,7 +9,7 @@ TaskList: contains the task list e.g., it has operations to add/delete tasks in 
 
 what I need to achieve for increment:
 
-GnosisUI:
+gnosis.GnosisUI:
 -- all the UI related contexts
 --  greet user
 --- show error messages
@@ -26,5 +26,5 @@ GnosisParser:
 -- aka logic controller for reciving user command
 
 GnsosisTaskManager:
--- Task Manager handling logic
+-- model.Task Manager handling logic
 

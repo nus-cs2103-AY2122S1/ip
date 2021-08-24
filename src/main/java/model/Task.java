@@ -1,7 +1,9 @@
+package model;
+
 import java.time.LocalDateTime;
 
 /**
- * The Task class encapsulates a task with a String and
+ * The model.Task class encapsulates a task with a String and
  * whether the task is done or not.
  *
  * @author Pawandeep Singh

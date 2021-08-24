@@ -22,15 +22,15 @@ File format to save -> .csv
 
 save in file under: [project_root]/gnosisData/gnosis.txt folder
 
-1. Create a GnosisStorageManager to read/write CSV files - DONE
+1. Create a Task.TaskStorageManager to read/write CSV files - DONE
     --> use relative path
     --> handle case -> where file data doesn't exits -> create default file for them
     --> handle case -> folder does not exist -> create folder + file alongside
 
-    --> able to read csv file and convert to list of Task - Done
-    --> able to write to csv file from list of Task - Done
+    --> able to read csv file and convert to list of model.Task - Done
+    --> able to write to csv file from list of model.Task - Done
 
-2. Update Task classes: - DONE
+2. Update model.Task classes: - DONE
     --> to include char variable to store type of task
     --> getter and setters
     --> update classes

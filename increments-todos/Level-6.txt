@@ -27,11 +27,11 @@ Extension: A-Collections
 A-Collections
 ↳ Use Java Collections classes
 
-Use Java Collections classes for storing data. For example, you can use an ArrayList<Task> to store the tasks.
+Use Java Collections classes for storing data. For example, you can use an ArrayList<model.Task> to store the tasks.
 
 Tasks to achieve level-6:
 
-1. Gnosis Class: - Done
+1. gnosis.Gnosis Class: - Done
     - Add "delete" command:
     - new deleteTask method
         - retrieve task to display before removing from list

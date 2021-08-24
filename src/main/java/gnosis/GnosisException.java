@@ -1,5 +1,7 @@
+package gnosis;
+
 /**
- * This exception Class presents exception captured by Gnosis.
+ * This exception Class presents exception captured by gnosis.Gnosis.
  *
  *
  * @author Pawandeep Singh
