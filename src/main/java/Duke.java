@@ -31,22 +31,34 @@ public class Duke {
         ArrayList<Task> storedInfo = new ArrayList<Task>();
         int count = 0;
         try {
-            File taskList = new File("DUKE\\data\\duke.txt";
+            File taskList = new File("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt");
             Scanner taskReader = new Scanner(taskList);
             while (taskReader.hasNextLine()) {
                 String item = taskReader.nextLine();
                 if (item.charAt(1) == 'T') {
-                    storedInfo.add(new ToDoTask(item.substring(7)));
+                    ToDoTask addedTask = new ToDoTask(item.substring(7));
+                    if (item.charAt(4) == 'X') {
+                        addedTask.markAsDone();
+                    }
+                    storedInfo.add(addedTask);
                     count++;
                 } else if (item.charAt(1) == 'D') {
                     int i = item.indexOf("(");
-                    storedInfo.add(new DeadlineTask(item.substring(7, i),
-                            item.substring(i+5, item.length()-1)));
+                    DeadlineTask addedTask = new DeadlineTask(item.substring(7, i),
+                            item.substring(i+5, item.length()-1));
+                    if (item.charAt(4) == 'X') {
+                        addedTask.markAsDone();
+                    }
+                    storedInfo.add(addedTask);
                     count++;
                 } else if (item.charAt(1) == 'E') {
                     int i = item.indexOf("(");
-                    storedInfo.add(new EventTask(item.substring(7, i),
-                            item.substring(i+5, item.length()-1)));
+                    EventTask addedTask = new EventTask(item.substring(7, i),
+                            item.substring(i+5, item.length()-1));
+                    storedInfo.add(addedTask);
+                    if (item.charAt(4) == 'X') {
+                        addedTask.markAsDone();
+                    }
                     count++;
                 }
             }
@@ -177,7 +189,7 @@ public class Duke {
 
             }
         //Insert save protocol here
-        File taskList = new File("DUKE\\data\\duke.txt");
+        File taskList = new File("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt");
         try {
             if (taskList.createNewFile()) {
                 System.out.println("Tasklist created and saved");
@@ -188,7 +200,7 @@ public class Duke {
             System.out.println("File could not be created");
         }
         try {
-            FileWriter listEditor = new FileWriter("DUKE\\data\\duke.txt");
+            FileWriter listEditor = new FileWriter("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt");
             for (Task item: storedInfo) {
                 if(item != null) {
                     listEditor.write(item.toString());
