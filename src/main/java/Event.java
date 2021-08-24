@@ -1,8 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Event extends Task{
-    private String at;
+    private LocalDate at;
 
     /**
      * Constructor for Event tasks
@@ -19,7 +21,7 @@ public class Event extends Task{
         } else if (arr[1].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYAT);
         } else {
-            this.at = arr[1].trim();
+            this.at = LocalDate.parse(arr[1].trim());
         }
     }
 
@@ -31,7 +33,7 @@ public class Event extends Task{
     @Override
     public void log(FileWriter writer) {
         try {
-            writer.write(String.format("E|%d|%s|%s\n", this.isDone ? 1 : 0, this.description.trim(), this.at.trim()));
+            writer.write(String.format("E|%d|%s|%s\n", this.isDone ? 1 : 0, this.description, this.at));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,6 +41,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

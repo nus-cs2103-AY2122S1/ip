@@ -15,33 +15,33 @@ You: Ailurus: ☹ OOPS!!! The description of a deadline cannot be empty.
 You: Ailurus: ☹ OOPS!!! The description of /by cannot be empty.
 You: Ailurus: ☹ OOPS!!! The description of a deadline cannot be empty.
 You: Ailurus: Got it. I've added this task:
-	[D][ ]CS2103T ip week 2 (by: 19/08/2021)
+	[D][ ]CS2103T ip week 2 (by: Aug 19 2021)
 Now you have 2 tasks in the list.
 You: Ailurus: ☹ OOPS!!! The description of an event cannot be empty.
 You: Ailurus: ☹ OOPS!!! The description of an event cannot be empty.
 You: Ailurus: ☹ OOPS!!! The description of /at cannot be empty.
 You: Ailurus: ☹ OOPS!!! The description of an event cannot be empty.
 You: Ailurus: Got it. I've added this task:
-	[E][ ]CS2103T lecture (at: Friday 4-6pm)
+	[E][ ]CS2103T lecture (at: Aug 27 2021)
 Now you have 3 tasks in the list.
 You: Ailurus: 
 1.[T][ ]Go grocery shopping
-2.[D][ ]CS2103T ip week 2 (by: 19/08/2021)
-3.[E][ ]CS2103T lecture (at: Friday 4-6pm)
+2.[D][ ]CS2103T ip week 2 (by: Aug 19 2021)
+3.[E][ ]CS2103T lecture (at: Aug 27 2021)
 You: Ailurus: ☹ OOPS!!! Not a number.
 You: Ailurus: ☹ OOPS!!! Not a number.
 You: Ailurus: Nice! I've marked this task as done:
-	[D][X]CS2103T ip week 2 (by: 19/08/2021)
+	[D][X]CS2103T ip week 2 (by: Aug 19 2021)
 You: Ailurus: 
 1.[T][ ]Go grocery shopping
-2.[D][X]CS2103T ip week 2 (by: 19/08/2021)
-3.[E][ ]CS2103T lecture (at: Friday 4-6pm)
+2.[D][X]CS2103T ip week 2 (by: Aug 19 2021)
+3.[E][ ]CS2103T lecture (at: Aug 27 2021)
 You: Ailurus: ☹ OOPS!!! Not a number.
 You: Ailurus: ☹ OOPS!!! Not a number.
 You: Ailurus: Noted. I've removed this task:
-	[D][X]CS2103T ip week 2 (by: 19/08/2021)
+	[D][X]CS2103T ip week 2 (by: Aug 19 2021)
 Now you have 2 tasks in the list.
 You: Ailurus: 
 1.[T][ ]Go grocery shopping
-2.[E][ ]CS2103T lecture (at: Friday 4-6pm)
+2.[E][ ]CS2103T lecture (at: Aug 27 2021)
 You: Ailurus: Bye. Hope to see you again soon!

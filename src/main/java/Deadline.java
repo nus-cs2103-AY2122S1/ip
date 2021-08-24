@@ -1,8 +1,10 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
-    private String by;
+    private LocalDate by;
 
     /**
      * Constructor for Deadline tasks
@@ -19,7 +21,7 @@ public class Deadline extends Task{
         } else if (arr[1].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYBY);
         } else {
-            this.by = arr[1].trim();
+            this.by = LocalDate.parse(arr[1].trim());
         }
     }
 
@@ -39,6 +41,6 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }
