@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,34 +8,18 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    public static String breakline = "____________________________________________________________";
-    public static String fileDirectory = "src\\main\\java\\data\\tasklist.txt";
+    private Storage storage;
+    private Tasklist tasklist;
 
-    /**
-     * Provides the initialization message for the Duke Program
-     */
-    public static void start() {
-        System.out.println(breakline);
-        String greetingMsg = "Hello! I'm Duke\nWhat can I do for you?";
-        System.out.println(greetingMsg);
-        System.out.println(breakline);
+    public Duke(String filepath) {
+        storage = new Storage(filepath);
+        tasklist = storage.load();
     }
 
-    /**
-     * Provides the exit message for the Duke Program
-     */
-    public static void exit() {
-        String byeMsg = "Bye. Hope to see you again soon!";
-        System.out.println(byeMsg);
-        System.out.println(breakline);
-    }
-
-    public static void main(String[] args) {
+    public void run() {
         String cmd;
         Scanner scanner = new Scanner(System.in);
-        start();
-        ArrayList<Task> tasks = new ArrayList<>();
-        Tasklist tasklist = new Tasklist(tasks).readFile();
+        Ui.start();
 
         while (true) {
             cmd = scanner.next();
@@ -45,8 +28,8 @@ public class Duke {
 
             switch (cmd) {
                 case "bye":
-                    tasklist.updateFile();
-                    exit();
+                    storage.save();
+                    Ui.exit();
                     return;
                 case "list":
                     tasklist.list();
@@ -58,7 +41,7 @@ public class Duke {
                 case "todo":
                 case "deadline":
                 case "event":
-                    task = Task.parseStringIntoTask(input, cmd, false);
+                    task = Parser.parseStringIntoTask(input, cmd, false);
                     tasklist.add(task);
                     break;
                 case "delete":
@@ -70,10 +53,15 @@ public class Duke {
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means");
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
-                        System.out.println(breakline);
+                        System.out.println(Ui.breakline);
                     }
             }
         }
+    }
+
+    public static void main(String[] args) {
+        String filepath = "src\\main\\java\\data\\tasklist.txt";
+        new Duke(filepath).run();
     }
 }
 

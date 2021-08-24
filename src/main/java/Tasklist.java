@@ -1,9 +1,7 @@
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Class that contains the initialization of a list to store the tasks
@@ -12,8 +10,7 @@ import java.util.Scanner;
  */
 public class Tasklist {
     private ArrayList<Task> taskList;
-    private static int currCount = 0;
-    private static String fileDirectory = Duke.fileDirectory;
+    private int currCount = 0;
 
     /**
      * Constructor to create a new taskList to store tasks
@@ -33,7 +30,7 @@ public class Tasklist {
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            System.out.println(Duke.breakline);
+            System.out.println(Ui.breakline);
             return;
         }
 
@@ -44,7 +41,7 @@ public class Tasklist {
         String counterMsg = String.format("Now you have %d tasks in the list.", currCount);
         System.out.println(addMsg);
         System.out.println(counterMsg);
-        System.out.println(Duke.breakline);
+        System.out.println(Ui.breakline);
     }
 
     /**
@@ -59,7 +56,7 @@ public class Tasklist {
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            System.out.println(Duke.breakline);
+            System.out.println(Ui.breakline);
             return;
         }
 
@@ -67,7 +64,7 @@ public class Tasklist {
         for(int i=0;i < taskList.size(); i++) {
             System.out.printf("%d. %s\n", i + 1, this.taskList.get(i).toString());
         }
-        System.out.println(Duke.breakline);
+        System.out.println(Ui.breakline);
 
     }
 
@@ -82,7 +79,7 @@ public class Tasklist {
             removedTask = this.taskList.remove(idx - 1);
         } catch (IndexOutOfBoundsException e) {
             System.out.printf("Item %d cannot be found.", idx);
-            System.out.println(Duke.breakline);
+            System.out.println(Ui.breakline);
             return;
         }
 
@@ -90,7 +87,7 @@ public class Tasklist {
         System.out.println(removeMsg);
         currCount = currCount - 1;
         System.out.printf("Now you have %d task(s) in the list.\n", currCount);
-        System.out.println(Duke.breakline);
+        System.out.println(Ui.breakline);
     }
 
     /**
@@ -102,69 +99,16 @@ public class Tasklist {
         return taskList.get(idx);
     }
 
-    public void updateFile() {
-        File file = new File(fileDirectory);
-        try {
-            if (file.createNewFile()) {
-                System.out.printf("Saved file at %s\n", fileDirectory);
-            } else {
-                System.out.printf("File already exists at %s\n", fileDirectory);
-            }
-
-        } catch (IOException e) {
-            System.out.println("An error occurred during creation of file.");
-        }
-
-        try {
-            FileWriter fileWriter = new FileWriter(fileDirectory);
-             String headers = "S/n,Type,Status,Name,Remarks\n";
-             fileWriter.write(headers);
-            for (int i = 0; i < taskList.size(); i++) {
-                Task task = taskList.get(i);
-                String listEntry = String.format("%d,%s,%b,%s,%s\n",
-                        i+1, task.getTaskCat(), task.isDone(), task.getName(), task.getDetail());
-                fileWriter.append(listEntry);
-            }
-            fileWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred while writing to file.");
-        }
+    public void setCount(int count) {
+        currCount = count;
     }
 
-    public Tasklist readFile() {
-        currCount = 0;
-        ArrayList<Task> taskList = this.taskList;
-        try {
-            File file = new File(fileDirectory);
-            Scanner scanner = new Scanner(file);
-            scanner.nextLine();
-            while (scanner.hasNextLine()) {
-                String data = scanner.nextLine();
-                String[] fields = data.split(",");
-                String type = fields[1];
-                String isDone = fields[2];
-                String taskName = fields[3];
-                String remarks;
-                try {
-                    remarks = fields[4];
-                } catch (IndexOutOfBoundsException e) {
-                    remarks = "";
-                }
+    public int size() {
+        return currCount;
+    }
 
-                String input = taskName + " " + remarks;
-                Task task = Task.parseStringIntoTask(input, type, Boolean.parseBoolean(isDone));
-                taskList.add(task);
-                currCount++;
-            }
-            System.out.printf("Loaded old tasklist...\n");
-            System.out.println(Duke.breakline);
-
-        } catch (FileNotFoundException e) {
-            System.out.printf("Initializing new tasklist...\n");
-            System.out.println(Duke.breakline);
-        }
-        return new Tasklist(taskList);
+    public Task get(int idx) {
+        return taskList.get(idx);
     }
 }
 
