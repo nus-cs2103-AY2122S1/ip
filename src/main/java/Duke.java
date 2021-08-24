@@ -1,12 +1,9 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
-import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.List;
+import java.time.LocalDateTime;
 
 public class Duke {
     public static void main(String[] args) {
@@ -66,9 +63,9 @@ public class Duke {
                 if(taskType.equalsIgnoreCase("todo")) {
                     toAdd = new ToDo(data[2]);
                 }else if(taskType.equalsIgnoreCase("deadline")) {
-                    toAdd = new Deadline(data[2], data[3]);
+                    toAdd = new Deadline(data[2], stringToDate(data[3]));
                 } else if(taskType.equalsIgnoreCase("event")) {
-                    toAdd = new Event(data[2], data[3]);
+                    toAdd = new Event(data[2], stringToDate(data[3]));
                 } else {
                     throw new IllegalArgumentException("Unrecognised task type on loading");
                 }
@@ -84,6 +81,53 @@ public class Duke {
         }
 
         return dataPath;
+    }
+
+    /**
+     * Adds a task to the List of tasks and to the data file.
+     * @param userInput String of task to add.
+     * @param tasks List of current tasks.
+     * @param dataPath Path to the data storage file.
+     */
+    public static void addTask(String userInput, List<Task> tasks, Path dataPath) {
+        Task taskToAdd;
+        String dataToStore;
+
+        try{
+            if(userInput.toLowerCase().startsWith("todo")) {
+                taskToAdd = new ToDo(userInput.substring(5));
+            } else {
+                String[] input = userInput.split(" ");
+
+                int taskIndex = input[0].length() + 1;
+                int dateIndex = userInput.indexOf("/");
+                String[] dateAndTask = sepDateFromTask(dateIndex,taskIndex, userInput);
+
+                String str = dateAndTask[1];
+                LocalDateTime dateTime = stringToDate(str);
+
+                if (userInput.toLowerCase().startsWith("deadline")){
+                    taskToAdd = new Deadline(dateAndTask[0], dateTime);
+                } else if(userInput.toLowerCase().startsWith("event")) {
+                    taskToAdd = new Event(dateAndTask[0], dateTime);
+                } else {
+                    throw new IllegalArgumentException("Please specify type of task");
+                }
+            }
+            // Add task to data file
+            dataToStore = taskToAdd.getDataRep();
+            Files.writeString(dataPath, dataToStore + System.lineSeparator(), StandardOpenOption.APPEND);
+            // Add task To arrayList
+            tasks.add(taskToAdd);
+
+            dukeReply(String.format("Got it. I've added this task:\n" +
+                    "%s\nNumber of tasks: %s", taskToAdd.toString(), tasks.size()));
+
+        }catch(IllegalArgumentException e) {
+            dukeReply("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } catch(Exception e) {
+            dukeReply("Invalid Input format -> <taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
+        }
     }
 
     /**
@@ -112,6 +156,31 @@ public class Duke {
     }
 
     /**
+     * Marks a task as complete.
+     * @param userInput Text beginning with 'done' followed by a number.
+     * @param tasks List of current tasks.
+     */
+    public static void markTaskDone(String userInput, List<Task> tasks, Path dataPath) {
+        try {
+            int taskIndex = Integer.parseInt(userInput.substring(5)) - 1;
+            Task task = tasks.get(taskIndex);
+            if (task.checkStatus()) {
+                dukeReply("Youve already marked this task as done!");
+            } else {
+                task.setDone();
+                dukeReply("Nice! I've marked this task as done:\n" + task.toString());
+                updateDataSet(tasks, dataPath);
+            }
+        } catch(StringIndexOutOfBoundsException e) {
+            dukeReply("OOPS!!! You cannot mark nothing as done!");
+        } catch(NumberFormatException e) {
+            dukeReply("OOPS!!! Must be a number bodoh");
+        } catch(IndexOutOfBoundsException e) {
+            dukeReply("OOPS!!! NUmber doesnt exist");
+        }
+    }
+
+    /**
      * Rewrites content in dataset according to the ArrayList.
      * @param list ArrayList of tasks.
      * @param dataPath Path to data set.
@@ -129,54 +198,6 @@ public class Duke {
             Files.move(tempPath, tempPath.resolveSibling("Data.txt"), StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {
             System.out.println("cant update dataset");
-        }
-    }
-    /**
-     * Adds a task to the List of tasks and to the data file.
-     * @param userInput String of task to add.
-     * @param tasks List of current tasks.
-     * @param dataPath Path to the data storage file.
-     */
-    public static void addTask(String userInput, List<Task> tasks, Path dataPath) {
-        Task taskToAdd;
-        String dataToStore;
-        int todoIndex = 5;
-        int deadlineIndex = 9;
-        int eventIndex = 6;
-        try{
-            if(userInput.toLowerCase().startsWith("todo")) {
-                String taskDesc = userInput.substring(todoIndex);
-                taskToAdd = new ToDo(taskDesc);
-                dataToStore = String.format("todo,0,%s", taskDesc);
-
-            } else if (userInput.toLowerCase().startsWith("deadline")){
-                int dateIndex = userInput.indexOf("/by");
-                String[] dateAndTask = sepDateFromTask(dateIndex,deadlineIndex, userInput);
-                taskToAdd = new Deadline(dateAndTask[0], dateAndTask[1]);
-                dataToStore = String.format("deadline,0,%s,%s", dateAndTask[0], dateAndTask[1]);
-
-            } else if(userInput.toLowerCase().startsWith("event")) {
-                int dateIndex = userInput.indexOf("/at");
-                String[] dateAndTask = sepDateFromTask(dateIndex,eventIndex, userInput);
-                taskToAdd = new Event(dateAndTask[0], dateAndTask[1]);
-                dataToStore = String.format("event,0,%s,%s", dateAndTask[0], dateAndTask[1]);
-
-            } else {
-                throw new IllegalArgumentException("Please specify type of task");
-            }
-            // Add task to data file
-            Files.writeString(dataPath, dataToStore + System.lineSeparator(), StandardOpenOption.APPEND);
-            // Add task To arrayList
-            tasks.add(taskToAdd);
-            dukeReply(String.format("Got it. I've added this task:\n" +
-                    "%s\nNumber of tasks: %s", taskToAdd.toString(), tasks.size()));
-
-        }catch(IllegalArgumentException e) {
-            dukeReply("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } catch(StringIndexOutOfBoundsException e) {
-            dukeReply("OOPS!!! The description of a todo cannot be empty.");
-        } catch (IOException e) {
-            System.out.println(e);
         }
     }
 
@@ -201,28 +222,13 @@ public class Duke {
     }
 
     /**
-     * Marks a task as complete.
-     * @param userInput Text beginning with 'done' followed by a number.
-     * @param tasks List of current tasks.
+     * Converts a date from String class to LocalDateTime class
+     * @param str
+     * @return
      */
-    public static void markTaskDone(String userInput, List<Task> tasks, Path dataPath) {
-        try {
-            int taskIndex = Integer.parseInt(userInput.substring(5)) - 1;
-            Task task = tasks.get(taskIndex);
-            if (task.checkStatus()) {
-                dukeReply("Youve already marked this task as done!");
-            } else {
-                task.setDone();
-                dukeReply("Nice! I've marked this task as done:\n" + task.toString());
-                updateDataSet(tasks, dataPath);
-            }
-        } catch(StringIndexOutOfBoundsException e) {
-            dukeReply("OOPS!!! You cannot mark nothing as done!");
-        } catch(NumberFormatException e) {
-            dukeReply("OOPS!!! Must be a number bodoh");
-        } catch(IndexOutOfBoundsException e) {
-            dukeReply("OOPS!!! NUmber doesnt exist");
-        }
+    public static LocalDateTime stringToDate(String str) {
+        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        return (LocalDateTime.parse(str, inputFormat));
     }
 
     /**

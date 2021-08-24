@@ -1,9 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     private String task;
     private Boolean isDone;
     private String statusIcon = " ";
     private String taskSymbol;
-    private String date;
+    private LocalDateTime date;
 
     /**
      * Constructor for Events and Deadlines which have a date
@@ -11,7 +14,7 @@ public class Task {
      * @param taskSymbol D or T.
      * @param date Date associated with task.
      */
-    public Task(String task, String taskSymbol, String date) {
+    public Task(String task, String taskSymbol, LocalDateTime date) {
         this.task = task;
         this.isDone = false;
         this.taskSymbol = taskSymbol;
@@ -27,7 +30,6 @@ public class Task {
         this.task = task;
         this.isDone = false;
         this.taskSymbol = taskSymbol;
-        this.date = "";
     }
 
     /**
@@ -36,7 +38,7 @@ public class Task {
      */
     public String getDataRep() {
         String status;
-        String dataToDel;
+        String data;
         if(this.isDone) {
             status = "1";
         } else {
@@ -44,12 +46,12 @@ public class Task {
         }
 
         if(this.taskSymbol.equals("T")) {
-            dataToDel = String.format("%s,%s,%s", this.getTaskType(), status, this.task);
-
+            data = String.format("%s,%s,%s", this.getTaskType(), status, this.task);
         } else {
-            dataToDel = String.format("%s,%s,%s,%s", this.getTaskType(), status, this.task, this.date);
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            data = String.format("%s,%s,%s,%s", this.getTaskType(), status, this.task, this.date.format(inputFormat));
         }
-        return dataToDel;
+        return data;
     }
 
     /**
@@ -72,6 +74,11 @@ public class Task {
         } else {
             return "event";
         }
+    }
+
+    public String dateToString(LocalDateTime dateTime) {
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MM yyyy | HHmm");
+        return dateTime.format(outputFormat);
     }
 
     /**

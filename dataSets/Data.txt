@@ -1,2 +1,6 @@
-deadline,1,run around,?
-deadline,0,shez,sunday
+todo,0,hello
+deadline,0,dooby,2014-05-04 1234
+todo,0,kjnfjnrr n jn jn n
+deadline,0,shave due,2020-05-04 1200
+todo,0,something
+deadline,0,da doo dee,2020-04-04 1234
