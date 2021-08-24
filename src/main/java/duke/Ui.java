@@ -159,6 +159,11 @@ public class Ui {
                 }
                 System.out.println("    Now you have " + ob.numberOfTasks() + " tasks in the list.");
                 System.out.println("_____________________________________________________________________");
+            } else if (inp.startsWith("find ")) {
+                System.out.println("_____________________________________________________________________");
+                System.out.println("    Here are matching tasks in your list:");
+                parser.findTaskFromTaskList(ob,inp);
+                System.out.println("_____________________________________________________________________");
             } else if (inp.equals("bye")) {
                 System.out.println("_____________________________________________________________________");
                 System.out.println("    Bye. Hope to see you again soon! Just a little reminder : YOU ARE AWESOME :))");
