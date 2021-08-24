@@ -47,7 +47,9 @@ public class ChatBot {
      * @param message message to display within LINE_SPLIT
      */
     public void info(String message) {
-        print(LINE_SPLIT + '\n' + message + '\n' + LINE_SPLIT + '\n');
+        if (!message.isBlank()) {
+            print(LINE_SPLIT + '\n' + message + '\n' + LINE_SPLIT + '\n');
+        }
     }
 
     /**
