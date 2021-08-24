@@ -52,7 +52,6 @@ public class Database {
         } catch (IOException e) {
             System.out.println(ui.wrong_message);
         }
-
         return objectsList;
     }
 
@@ -70,8 +69,6 @@ public class Database {
         } else {
             isDone = true;
         }
-
-
         switch (s[0]) {
             case "T":
                 Todo todo = new Todo(s[1], isDone);
@@ -169,8 +166,6 @@ public class Database {
         } catch (IOException e) {
             System.out.println(ui.wrong_message);
         }
-
-
     }
 
     /**
@@ -211,7 +206,4 @@ public class Database {
         Database d = new Database("todoList.txt");
         d.getData();
     }
-
-
-
 }

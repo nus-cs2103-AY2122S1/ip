@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class Deadline extends Task{
     private String name;
     private boolean isDone;
-    private LocalDate date;
+    private String time;
 
     @Override
     public String getName() {
@@ -21,7 +21,7 @@ public class Deadline extends Task{
     }
 
 
-    private String time;
+
 
     public Deadline(String name, boolean isDone, String time) {
         super();
