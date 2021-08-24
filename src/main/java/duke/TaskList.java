@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 /**
  * Encapsulates all information for a list of Tasks.
+ *
+ * @author Quan Teng Foong
  */
 public class TaskList {
     private final ArrayList<Task> taskList = new ArrayList<>();

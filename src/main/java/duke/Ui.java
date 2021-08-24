@@ -1,9 +1,12 @@
 package duke;
 
-import duke.TaskList;
-
 import java.util.Scanner;
 
+/**
+ * Encapsulates the user interface (reading user input and printing strings to the console).
+ *
+ * @author Quan Teng Foong
+ */
 public class Ui {
     Scanner sc;
 
@@ -11,14 +14,29 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Prints out the error message.
+     *
+     * @param errorMessage the message to print
+     */
     public void showError(String errorMessage) {
         System.out.println(errorMessage + "\n");
     }
 
+
+    /**
+     * Prints a basic greeting message.
+     */
     public void greet() {
         System.out.println("Hello from Duke! What can I do for you?\n");
     }
 
+
+    /**
+     * Reads user input.
+     *
+     * @return the string input by the user
+     */
     public String readCommand() {
         System.out.print("You: ");
         return sc.nextLine();
@@ -28,10 +46,18 @@ public class Ui {
         System.out.println("Duke: " + reply);
     }
 
+    /**
+     * Prints the goodbye message.
+     */
     public void goodbye() {
         reply("Nice talking to you, goodbye!");
     }
 
+    /**
+     * Prints the user's current todo list.
+     *
+     * @param taskList the current TaskList object
+     */
     public void showList(TaskList taskList) {
         if (taskList.toString().equals("")) {
             reply("Your todo list is empty!\n");
@@ -41,6 +67,12 @@ public class Ui {
         }
     }
 
+
+    /**
+     * Print a message to tell the user that the task has been deleted.
+     *
+     * @param taskList the current TaskList object
+     */
     public void showDeleteTask(TaskList taskList) {
         reply("Task removed. You now have " + taskList.size() + " tasks remaining.");
     }

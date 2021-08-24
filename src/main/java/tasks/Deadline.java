@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The tasks.Deadline class encapsulates all the details of each deadline.
+ * The Deadline class encapsulates all the details of each deadline.
+ *
+ * @author Quan Teng Foong
  */
 public class Deadline extends Task {
     private final LocalDate endTime;
@@ -16,7 +18,7 @@ public class Deadline extends Task {
 
     /**
      * Overrides toString() method.
-     * @return String representation of the deadline object.
+     * @return String representation of the Deadline object.
      */
     @Override
     public String toString() {
@@ -26,7 +28,7 @@ public class Deadline extends Task {
     /**
      * Converts contents to a storable String.
      *
-     * @return a String that represents this Event in storage
+     * @return a String that represents this Deadline in storage
      */
     @Override
     public String toStorage() {

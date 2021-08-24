@@ -1,7 +1,9 @@
 package tasks;
 
 /**
- * The tasks.ToDo class extends Tasks.Task and encapsulates
+ * The Todo class encapsulates all the details of each Todo.
+ *
+ * @author Quan Teng Foong
  */
 
 public class ToDo extends Task {
@@ -11,7 +13,7 @@ public class ToDo extends Task {
 
     /**
      * Overrides toString() method.
-     * @return String representation of the tasks.ToDo object.
+     * @return String representation of the ToDo object.
      */
     @Override
     public String toString() {
@@ -21,7 +23,7 @@ public class ToDo extends Task {
     /**
      * Converts contents to a storable String.
      *
-     * @return a String that represents this tasks.ToDo in storage
+     * @return a String that represents this ToDo in storage
      */
     @Override
     public String toStorage() {

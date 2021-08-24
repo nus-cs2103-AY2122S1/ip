@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Tasks.Event class encapsulates all the details of each event.
+ * The Event class encapsulates all the details of each event.
+ *
+ * @author Quan Teng Foong
  */
 public class Event extends Task {
     private final LocalDate eventDate;
@@ -16,7 +18,7 @@ public class Event extends Task {
 
     /**
      * Overrides toString() method.
-     * @return String representation of the Tasks.Event object.
+     * @return String representation of the Event object.
      */
     @Override
     public String toString() {
@@ -27,7 +29,7 @@ public class Event extends Task {
     /**
      * Converts contents to a storable String.
      *
-     * @return a String that represents this Tasks.Event in storage
+     * @return a String that represents this Event in storage
      */
     @Override
     public String toStorage() {
