@@ -3,20 +3,31 @@ package com.duke.task;
 import com.duke.parser.Parser;
 
 import java.io.IOException;
+import java.lang.reflect.GenericDeclaration;
 import java.time.LocalDate;
 
+/**
+ * Represents a possible type of task in our task list, known as an Event. This task has
+ * additional information that supports adding deadlines in terms of dates and a specific
+ * 24-hour time range.
+ */
 public class Event extends TaskList {
     private final String time;
     private LocalDate localDate;
-    private String deadLineTiming;
+    private String[] timeRange;
+    private String startTime;
+    private String endTime;
 
     public Event(String description, String time, boolean isExisting) {
         super(description);
         this.time = time;
         if (!isExisting) {
             localDate = Parser.findDate(time);
-            deadLineTiming = Parser.findTime(time);
-            if (deadLineTiming != null) deadLineTiming = Parser.convertTime(deadLineTiming);
+            timeRange = Parser.findTimeRange(time);
+            if (timeRange != null) {
+                startTime = Parser.convertTime(timeRange[0]);
+                endTime = Parser.convertTime(timeRange[1]);
+            }
             try {
                 file.saveTask(this); // Saves task to hard disk
                 userInterface.taskAdded(this);
@@ -24,7 +35,7 @@ public class Event extends TaskList {
                 userInterface.fileNotFoundWarning();
             }
         } else {
-            Parser.parseTime(time,localDate, deadLineTiming);
+            Parser.parseEventTime(time, localDate, startTime, endTime);
         }
     }
 
@@ -35,10 +46,10 @@ public class Event extends TaskList {
             return "[E]" + "[" + status + "] " + this.description
                     + "(" + time + ")";
         } else {
-            String endTime = deadLineTiming == null ? "" : " "+ deadLineTiming;
+            String timeRange = startTime == null ? "" : " " + startTime + " - " + endTime;
             return "[E]" + "[" + status + "] " + this.description
                     + "(" + localDate.getDayOfMonth() + " " + localDate.getMonth()
-                    + " " + localDate.getYear() + endTime + ")";
+                    + " " + localDate.getYear() + timeRange + ")";
         }
     }
 }

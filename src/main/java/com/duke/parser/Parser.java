@@ -93,6 +93,24 @@ public class Parser {
         }
     }
 
+    public static String[] findTimeRange(String input) {
+        StringBuilder sb = new StringBuilder();
+        int index = input.length() - 1;
+        for (int i = 0; i < 9; i++) {
+            sb.append(input.charAt(index));
+            index--;
+        }
+        sb.reverse();
+        String regex = "^\\d{4}-\\d{4}$";
+        Matcher m = Pattern.compile(regex).matcher(sb.toString());
+        if (m.find()) {
+            String[] timeRange = sb.toString().split("-");
+            return timeRange;
+        } else {
+            return null;
+        }
+    }
+
     public static String convertTime(String input) {
         double time = Double.parseDouble(input);
         String postfix;
@@ -111,7 +129,7 @@ public class Parser {
         return prefix + " " + postfix;
     }
 
-    public static void parseTime(String input, LocalDate ld, String deadlineTiming) {
+    public static void parseDeadlineTime(String input, LocalDate ld, String deadlineTiming) {
         String[] parsedTime = input.split(" ");
         try {
             String timeFormat = parsedTime[2] + "-"
@@ -122,6 +140,28 @@ public class Parser {
                         + (parsedTime[4].equals("PM") ? 1200 : 0);
                 int flattenedTiming = (int) timing;
                 deadlineTiming = Integer.toString(flattenedTiming);
+            }
+            ld = LocalDate.parse(timeFormat);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            userInterface.nullFunction();
+        }
+    }
+
+    public static void parseEventTime(String input, LocalDate ld, String startTime, String endTime) {
+        String[] parsedTime = input.split(" ");
+        try {
+            String timeFormat = parsedTime[2] + "-"
+                    + Parser.matchMonth(parsedTime[1]) + "-"
+                    + (parsedTime[0].length() == 1 ? "0" + parsedTime[0] : parsedTime[0]);
+            if (parsedTime.length > 3) {
+                double timingStart = Double.parseDouble(parsedTime[3]) * 100
+                        + (parsedTime[4].equals("PM") ? 1200 : 0);
+                double timingEnd = Double.parseDouble(parsedTime[6]) * 100
+                        + (parsedTime[7].equals("PM") ? 1200 : 0);
+                int flattenedTimingStart = (int) timingStart;
+                int flattenedTimingEnd = (int) timingEnd;
+                startTime = Integer.toString(flattenedTimingStart);
+                endTime = Integer.toString(flattenedTimingEnd);
             }
             ld = LocalDate.parse(timeFormat);
         } catch (ArrayIndexOutOfBoundsException e) {
