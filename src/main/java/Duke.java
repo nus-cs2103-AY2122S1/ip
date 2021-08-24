@@ -89,10 +89,10 @@ public class Duke {
      */
 
     private void addToList(Task task) {
-        this.taskList.add(task);
+        taskList.add(task);
         System.out.println("Got it. I've added this task:");
         System.out.println("added: " + task);
-        System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
     /**
@@ -101,10 +101,10 @@ public class Duke {
      */
 
     private void displayList() throws EmptyListException {
-        if (this.taskList.size() == 0) {
+        if (taskList.size() == 0) {
             throw new EmptyListException();
         }
-        for (int i = 0; i < this.taskList.size(); i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             System.out.println(i + 1 + ". " + task);
         }
@@ -120,14 +120,14 @@ public class Duke {
     private void markDone(String taskIndex) throws EmptyListException, InvalidIndexException {
 
         int intTaskIndex = Integer.parseInt(taskIndex) - 1; // -1 because user inputs start from 1 not 0
-        int taskListSize = this.taskList.size();
+        int taskListSize = taskList.size();
         if (taskListSize == 0) {
             throw new EmptyListException();
         }
         else if (intTaskIndex < 0 || intTaskIndex >= taskListSize) {
             throw new InvalidIndexException(1, taskListSize, intTaskIndex + 1);
         }
-        Task task = this.taskList.get(intTaskIndex);
+        Task task = taskList.get(intTaskIndex);
         task.markAsDone();
         System.out.println("Nice! I've marked this task as done:\n" + task);
     }
@@ -140,7 +140,8 @@ public class Duke {
 
     private void addDeadline(String deadline) throws IncorrectFormatException {
         String[] result = deadline.split("/by");
-        if (result.length == 1) { // throws an error if "/by" is not present in the message
+        if (result.length == 1) {
+            // throws an error if "/by" is not present in the message
             throw new IncorrectFormatException("deadline", "/by");
         }
         String description = result[0].trim(); // trims the additional spaces to the left and right of "by"
@@ -167,7 +168,8 @@ public class Duke {
 
     private void addEvent(String event) throws IncorrectFormatException {
         String[] result = event.split("/at");
-        if (result.length == 1) { // throws an error if "/at" is not present in the message
+        if (result.length == 1) {
+            // throws an error if "/at" is not present in the message
             throw new IncorrectFormatException("event", "/at");
         }
         String description = result[0].trim(); // trims the additional spaces to the left and right of "at"
@@ -186,16 +188,16 @@ public class Duke {
     private void deleteTask(String taskIndex) throws EmptyListException, InvalidIndexException {
 
         int intTaskIndex = Integer.parseInt(taskIndex) - 1; // -1 because user inputs start from 1 not 0
-        int taskListSize = this.taskList.size();
+        int taskListSize = taskList.size();
         if (taskListSize == 0) {
             throw new EmptyListException();
         }
         else if (intTaskIndex < 0 || intTaskIndex >= taskListSize) {
             throw new InvalidIndexException(1, taskListSize, intTaskIndex + 1);
         }
-        Task task = this.taskList.remove(intTaskIndex);
+        Task task = taskList.remove(intTaskIndex);
         System.out.println("Noted. I've removed this task:\n" + task);
-        System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
     /**
@@ -210,48 +212,53 @@ public class Duke {
         try {
             System.out.println("__________________________________");
             switch (command) {
-                case "list":
-                    displayList();
-                    break;
-                case "done":
-                    if (words.length == 1) { // throws an error if there is no message input after the command word
-                        throw new MessageEmptyException();
-                    }
-                    String doneTaskIndex = words[words.length - 1];
-                    markDone(doneTaskIndex);
-                    break;
-                case "deadline":
-                    if (words.length == 1) { // throws an error if there is no message input after the command word
-                        throw new MessageEmptyException();
-                    }
-                    // excludes command "deadline " from the string
-                    addDeadline(input.substring(9));
-                    break;
-                case "todo":
-                    if (words.length == 1) { // throws an error if there is no message input after the command word
-                        throw new MessageEmptyException();
-                    }
-                    // excludes command "todo" from the string
-                    addTodo(input.substring(5));
-                    break;
-                case "event":
-                    if (words.length == 1) { // throws an error if there is no message input after the command word
-                        throw new MessageEmptyException();
-                    }
-                    // excludes command "event" from the string
-                    addEvent(input.substring(6));
-                    break;
-                case "delete":
-                    if (words.length == 1) { // throws an error if there is no message input after the command word
-                        throw new MessageEmptyException();
-                    }
-                    String deleteTaskIndex = words[words.length - 1];
-                    deleteTask(deleteTaskIndex);
-                    break;
-                case "": // empty user input
-                    throw new EmptyCommandException();
-                default: // all other inputs that are not supported
-                    throw new InvalidCommandException();
+            case "list":
+                displayList();
+                break;
+            case "done":
+                if (words.length == 1) {
+                    // throws an error if there is no message input after the command word
+                    throw new MessageEmptyException();
+                }
+                String doneTaskIndex = words[words.length - 1];
+                markDone(doneTaskIndex);
+                break;
+            case "deadline":
+                if (words.length == 1) {
+                    // throws an error if there is no message input after the command word
+                    throw new MessageEmptyException();
+                }
+                // excludes command "deadline " from the string
+                addDeadline(input.substring(9));
+                break;
+            case "todo":
+                if (words.length == 1) {
+                    // throws an error if there is no message input after the command word
+                    throw new MessageEmptyException();
+                }
+                // excludes command "todo" from the string
+                addTodo(input.substring(5));
+                break;
+            case "event":
+                if (words.length == 1) {
+                    // throws an error if there is no message input after the command word
+                    throw new MessageEmptyException();
+                }
+                // excludes command "event" from the string
+                addEvent(input.substring(6));
+                break;
+            case "delete":
+                if (words.length == 1) {
+                    // throws an error if there is no message input after the command word
+                    throw new MessageEmptyException();
+                }
+                String deleteTaskIndex = words[words.length - 1];
+                deleteTask(deleteTaskIndex);
+                break;
+            case "": // empty user input
+                throw new EmptyCommandException();
+            default: // all other inputs that are not supported
+                throw new InvalidCommandException();
             }
             System.out.println("__________________________________");
         } catch (DukeException e) {
