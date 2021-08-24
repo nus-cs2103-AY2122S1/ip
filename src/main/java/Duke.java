@@ -1,36 +1,157 @@
-import java.util.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class Duke {
+    public static void writeTaskToFile(Task task){
+        try {
+            FileWriter fileWriter = new FileWriter("data/duke.txt", true);
+            fileWriter.write(task.getIcon() + "&&" + task.getStatus() + "&&"+ task.getDescription()
+                    + "&&" + task.getTaskTime() + "\n");
+            fileWriter.close();
+        } catch (IOException e){
+            System.out.println("can't find this file");
+        }
+    }
+
+    public static Task convertStringToTask(String taskString) throws DukeException{
+        Task task = new Task();
+        String[] newTask = taskString.split("&&");
+        String taskType = newTask[0];
+        String status = newTask[1];
+        String taskDescription = newTask[2];
+        String taskTime = newTask.length > 3 ? newTask[3] : "";
+        switch (taskType){
+            case "T" :
+                task = new ToDo(taskDescription);
+                break;
+            case "D" :
+                task = new Deadline(taskDescription,taskTime);
+                break;
+            case "E" :
+                task = new Event(taskDescription,taskTime);
+                break;
+            default:
+                throw new DukeException("can't understand this icon");
+        }
+        if(status.equals("1")){
+            task.done();
+        }
+        return task;
+    }
+
+    public static void list(){
+        File dukeFile = new File("data/duke.txt");
+        try {
+            System.out.println("Here are the tasks in your list:");
+            Scanner scan = new Scanner(dukeFile);
+            int i = 0;
+            while(scan.hasNext()){
+                String taskString = scan.nextLine();
+                Task task = convertStringToTask(taskString);
+                System.out.println((i+1) + "." + task.toString());
+                i++;
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } catch (DukeException dukeException){
+            System.out.println(dukeException.getMessage());
+        }
+    }
+
+
+
+    public static ArrayList<Task> convertFileToArray(){
+        ArrayList<Task> taskArray = new ArrayList<>();
+        File dukeFile = new File("data/duke.txt");
+        try {
+            Scanner scan = new Scanner(dukeFile);
+            while(scan.hasNext()){
+                String taskString = scan.nextLine();
+                Task task = convertStringToTask(taskString);
+                taskArray.add(task);
+            }
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        } catch (DukeException dukeException){
+            System.out.println(dukeException.getMessage());
+        }
+        return taskArray;
+    }
+
+    public static void convertTaskArrayToFile(ArrayList<Task> taskArray){
+        try {
+            FileWriter clearFile = new FileWriter("data/duke.txt");
+            clearFile.write("");
+            clearFile.close();
+            for(int i = 0; i < taskArray.size(); i++){
+                System.out.println(taskArray.get(i).getStatus());
+                writeTaskToFile(taskArray.get(i));
+            }
+        } catch (IOException e){
+            System.out.println("can't find this file");
+        }
+    }
+
+    public static void markTaskAsDone(int index){
+        ArrayList<Task> taskArray = convertFileToArray();
+        taskArray.get(index).done();
+        System.out.println(taskArray.get(index).getStatus());
+        convertTaskArrayToFile(taskArray);
+        System.out.println("Nice! I've marked this task as done:\n"
+                + taskArray.get(index).toString());
+    }
+
+    public static void deleteTask(int index) {
+        ArrayList<Task> taskArray = convertFileToArray();
+        Task removedTask = taskArray.remove(index);
+        convertTaskArrayToFile(taskArray);
+        System.out.println("Got it. I've removed this task:\n"
+                + removedTask.toString()
+                + "\nNow you have "
+                + taskArray.size() + " tasks in the list.");
+    }
+
+
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String input = new String();
-        String command = new String();
-        ArrayList<Task> store = new ArrayList<>();
 
-        System.out.println("Hello! I'm Tom! What can I do for you?");
+        System.out.println("Hello! I'm duke! What can I do for you?");
         input = sc.nextLine();
         while(!input.equals("bye")){
             try {
                 String words[] = input.split(" ");
                 if (input.equals("list")) {
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < store.size(); i++) {
-                        System.out.println((i + 1) + "." + store.get(i).toString());
-                    }
+//                    System.out.println("Here are the tasks in your list:");
+//                    for (int i = 0; i < store.size(); i++) {
+//                        System.out.println((i + 1) + "." + store.get(i).toString());
+//                    }
+                    list();
                 } else if (words[0].equals("done")) {
                     int textNumber = Integer.parseInt(words[1]);
-                    store.get(textNumber - 1).done();
-                    System.out.println("Nice! I've marked this task as done:\n"
-                            + store.get(textNumber - 1).toString());
+                    markTaskAsDone(textNumber - 1);
+//                    store.get(textNumber - 1).done();
+//                    System.out.println("Nice! I've marked this task as done:\n"
+//                            + store.get(textNumber - 1).toString());
                 } else if(words[0].equals("delete")){
                     int deleteIndex = Integer.parseInt(words[1]);
-                    Task removedTask = store.get(deleteIndex);
-                    store.remove(deleteIndex - 1);
-                    System.out.println("Got it. I've removed this task:\n"
-                            + removedTask.toString()
-                            + "\nNow you have "
-                            + store.size() + " tasks in the list.");
+                    deleteTask(deleteIndex - 1);
+//                    Task removedTask = store.get(deleteIndex);
+//                    store.remove(deleteIndex - 1);
+//                    System.out.println("Got it. I've removed this task:\n"
+//                            + removedTask.toString()
+//                            + "\nNow you have "
+//                            + store.size() + " tasks in the list.");
                 } else {
-                    Task task;
+                    ArrayList<Task> taskArray = convertFileToArray();
+                    Task task = new Task();
                     if (words[0].equals("todo")) {
                         if(words.length <= 1){
                             throw new DukeException("The description of a todo " +
@@ -68,11 +189,13 @@ public class Duke {
                     } else {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
-                    store.add(task);
+                    taskArray.add(task);
+                    writeTaskToFile(task);
+
                     System.out.println("Got it. I've added this task:\n"
                             + task.toString()
                             + "\nNow you have "
-                            + store.size() + " tasks in the list.");
+                            + taskArray.size() + " tasks in the list.");
                 }
             }catch(DukeException e){
                 System.out.println("☹ OOPS!!!" + e.getMessage());
