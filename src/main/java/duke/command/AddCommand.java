@@ -7,6 +7,9 @@ import duke.general.Tasklist;
 import duke.general.Ui;
 import duke.task.Task;
 
+/**
+ * Command for the program to add a task
+ */
 public class AddCommand extends Command {
     private TaskType type;
     private String[] input;

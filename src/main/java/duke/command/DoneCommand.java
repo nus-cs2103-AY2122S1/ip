@@ -6,6 +6,9 @@ import duke.general.Tasklist;
 import duke.general.Ui;
 import duke.task.Task;
 
+/**
+ * Command for the program to mark a task as completed
+ */
 public class DoneCommand extends Command {
     String[] input;
 

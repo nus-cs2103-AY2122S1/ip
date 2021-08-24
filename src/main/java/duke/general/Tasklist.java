@@ -8,9 +8,16 @@ import duke.task.ToDo;
 
 import java.util.ArrayList;
 
+/**
+ * Contains the task list, and has operations to add/delete from the list
+ */
 public class Tasklist {
     ArrayList<Task> list;
 
+    /**
+     * Constructs the Tasklist based from a list provided
+     * @param list list of tasks
+     */
     public Tasklist(ArrayList<Task> list) {
         this.list = list;
     }
@@ -54,6 +61,12 @@ public class Tasklist {
         return temp;
     }
 
+    /**
+     * Marks a task as done from the Tasklist based on input given
+     * @param inputSplit input given by user
+     * @return Task that is mark as done, but null if Exception occurs
+     * @throws DukeException occurs when input is invalid
+     */
     public Task doneTask(String[] inputSplit) throws DukeException {
         Task task = null;
         if (inputSplit.length < 2) {
@@ -72,6 +85,11 @@ public class Tasklist {
         return task;
     }
 
+    /**
+     * Deletes a task from the Tasklist based on input given
+     * @param inputSplit input given by user
+     * @return Task that is being deleted
+     */
     public Task deleteTask(String[] inputSplit) {
         Task t = null;
         try {

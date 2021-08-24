@@ -15,7 +15,10 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-
+    /**
+     * Initializes the Duke chatbot program
+     * @param filePath File path to save the data files of the Tasklist to
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +26,9 @@ public class Duke {
         parser = new Parser();
     }
 
+    /**
+     * Run the main program
+     */
     public void run() {
         ui.showWelcome();
         while (ui.getLoop()) {
