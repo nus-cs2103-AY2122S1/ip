@@ -105,6 +105,21 @@ public class TaskList {
     }
 
     /**
+     * Returns the list of tasks that match a given keyword or phrase.
+     * @param keyword a String that must be contained by tasks.
+     * @return a filtered list of tasks that contain the keyword.
+     */
+    public String findTasks(String keyword) {
+        TaskList filteredList = new TaskList();
+        for (Task task : this.tasks) {
+            if (task.titleContains(keyword)) {
+                filteredList.addTask(task);
+            }
+        }
+        return String.format("I've filtered tasks containing '%s'.\n", keyword) + filteredList.toString();
+    }
+
+    /**
      * Deletes a task when given its index number.
      *
      * @param taskNumber an int representing the index of the task
