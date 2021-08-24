@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -6,9 +8,12 @@ import java.util.Scanner;
  * @author Nigel Tan
  */
 
-//CHANGE TO CASE SWITCH
-//Remove pos from TASKS use the int after done to put inside Response
 public class Duke {
+    private static final String FILE_PATH = "./data/duke.txt";
+    private Storage storage;
+    private Response response;
+    final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
+
     public enum Command {
         LIST("list"),
         DONE("done"),
@@ -34,18 +39,25 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        //System.out.println("Hello from\n" + logo);
-        Response response = new Response();
+    /**
+     * Constructor for the chatbot.
+     * @throws IOException
+     */
+    public Duke() throws IOException {
+        storage = new Storage(FILE_PATH);
+        try {
+            ArrayList<Task> taskList = storage.loadFileContents(FILE_PATH);
+            response = new Response(taskList);
+        } catch (Exception e) {
+            ArrayList<Task> taskList = new ArrayList<>();
+            response = new Response(taskList);
+        }
+    }
+
+    public void run() throws IOException {
         int position = 0;
-        Scanner sc = new Scanner(System.in);
         response.greet();
+        Scanner sc = new Scanner(System.in);
         String text = sc.nextLine();
 
         while (!text.equals("bye")) {
@@ -59,10 +71,12 @@ public class Duke {
             case DONE:
                 int pos = Integer.parseInt(splitWords[1]);
                 response.markDone(pos - 1);
+                storage.saveToFile(response.getLst());
                 break;
             case TODO:
                 try {
-                    response.echo(new ToDo(splitWords[1]));
+                    response.add(new ToDo(splitWords[1]));
+                    storage.saveToFile(response.getLst());
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.err.println(HORIZONTAL_LINE +
                             "    :( OOPS! The description of a todo cannot be empty.\n" +
@@ -72,7 +86,8 @@ public class Duke {
             case DEADLINE:
                 try {
                     String[] splitBy = splitWords[1].split("/by ", 2);
-                    response.echo(new Deadline(splitBy[0], splitBy[1]));
+                    response.add(new Deadline(splitBy[0], splitBy[1]));
+                    storage.saveToFile(response.getLst());
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.err.println(HORIZONTAL_LINE +
                             "    :( OOPS! The description or a time of a deadline cannot be empty.\n" +
@@ -82,7 +97,8 @@ public class Duke {
             case EVENT:
                 try {
                     String[] splitAt = splitWords[1].split("/at ", 2);
-                    response.echo(new Events(splitAt[0], splitAt[1]));
+                    response.add(new Events(splitAt[0], splitAt[1]));
+                    storage.saveToFile(response.getLst());
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.err.println(HORIZONTAL_LINE +
                             "    :( OOPS! The description or a time of an event cannot be empty.\n" +
@@ -92,6 +108,7 @@ public class Duke {
             case DELETE:
                 int pos2 = Integer.parseInt(splitWords[1]);
                 response.delete(pos2 - 1);
+                storage.saveToFile(response.getLst());
                 break;
             case OTHER:
                 System.out.println(HORIZONTAL_LINE +
@@ -103,4 +120,10 @@ public class Duke {
         }
         response.exit();
     }
+
+    public static void main(String[] args) throws Exception {
+        new Duke().run();
+    }
+
+
 }
