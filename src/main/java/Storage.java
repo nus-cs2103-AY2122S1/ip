@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +30,7 @@ public class Storage {
                     sb.append(",");
                     sb.append(((Deadline) task).by);
                 }
-                sb.append('\n');
+                sb.append(System.lineSeparator());
             }
             printWriter.write(sb.toString());
             printWriter.close();
@@ -65,7 +66,7 @@ public class Storage {
                         toAdd = new Deadline(description, by);
                         break;
                     case "E":
-                        LocalDate at = LocalDate.parse(splitLine.get(3));
+                        LocalDateTime at = LocalDateTime.parse(splitLine.get(3));
                         toAdd = new Event(description, at);
                         break;
                     default:

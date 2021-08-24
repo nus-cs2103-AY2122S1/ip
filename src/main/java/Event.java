@@ -1,11 +1,11 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class Event extends Task {
-    protected LocalDate at;
+    protected LocalDateTime at;
 
-    public Event(String description, LocalDate at) {
+    public Event(String description, LocalDateTime at) {
         super(description, "E");
         this.at = at;
     }

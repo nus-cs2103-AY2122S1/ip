@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -53,7 +54,7 @@ public class Duke {
                     } else if (furtherSplits[1].equals("") || furtherSplits[1].equals(" ")) {
                         throw new DukeException("Deadline must come with a input date/time for the deadline.");
                     }
-                    DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-M-d");
+                    DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-M-d HH:mm");
                     LocalDate by = LocalDate.parse(furtherSplits[1].stripLeading(), df);
                     tasks.add(new Deadline(furtherSplits[0], by));
                     printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
@@ -72,8 +73,8 @@ public class Duke {
                     } else if (furtherSplits[1].equals("") || furtherSplits[1].equals(" ")) {
                         throw new DukeException("Event must come with a event date/time.");
                     }
-                    DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-M-d");
-                    LocalDate at = LocalDate.parse(furtherSplits[1].stripLeading(), df);
+                    DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-M-d HH:mm");
+                    LocalDateTime at = LocalDateTime.parse(furtherSplits[1].stripLeading(), df);
                     tasks.add(new Event(furtherSplits[0], at));
                     printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
                 } catch (DukeException e) {
