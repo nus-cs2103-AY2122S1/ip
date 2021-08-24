@@ -40,11 +40,11 @@ public class Kermit {
     }
 
     private static void printFilteredTasks(ArrayList<Task> filteredTasks) {
-        String outputString = "Here are the matching tasks in your list:";
+        String outputString = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < filteredTasks.size(); i++) {
             Task task = filteredTasks.get(i);
             outputString += (i + 1) + ". " + task.toString();
-            if (i != filteredTasks.size()) {
+            if (i != filteredTasks.size() - 1) {
                 outputString += "\n";
             }
 
@@ -154,7 +154,6 @@ public class Kermit {
         final String invalidCommandText = "I'm sorry, but I don't know what that means :-(";
         final String invalidTimeText = "BAH That's not a time is it?? Try writing like this D/MM/YYYY 1200";
         final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
-        final String filteredTaskText = "Here are the matching tasks in your list:";
         final String goodbyeText = "Bye. Hope to see you again soon!";
 
         formatAndPrintText(introductionText);
@@ -267,7 +266,11 @@ public class Kermit {
                             index = Integer.parseInt(description) - 1;
                             Task deletedTask = list.deleteTask(index);
                             printDeleteTask(deletedTask, list);
+                            break;
                         case "find":
+                            ArrayList<Task> filteredTasks = list.filter(description);
+                            printFilteredTasks(filteredTasks);
+                            break;
                     }
                 } catch (KermitException e) {
                     formatAndPrintText(e.getMessage());
