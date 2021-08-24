@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     private String taskName;
     private boolean doneStatus;
@@ -7,7 +9,7 @@ public class Task {
         this.doneStatus = doneStatus;
     }
 
-    protected void setDone() {
+    public void setDone() {
         this.doneStatus = true;
     }
 
