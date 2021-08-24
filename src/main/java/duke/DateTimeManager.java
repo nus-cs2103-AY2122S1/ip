@@ -1,9 +1,13 @@
+package duke;
+
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DateTimeManager {
+class DateTimeManager {
     DateTimeFormatter formatter;
 
     public DateTimeManager(DateTimeFormatter formatter) {

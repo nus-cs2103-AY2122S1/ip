@@ -1,3 +1,11 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Storage {
+class Storage {
     private String filePath;
 
     Storage(String filePath) {
@@ -53,7 +61,7 @@ public class Storage {
                     manager.updateDateTasks(dateTasks, time, newTask);
                     break;
                 default:
-                    throw new DukeException("Invalid task.");
+                    throw new DukeException("Invalid duke.task.");
                 }
                 System.out.println(task);
             }
@@ -75,7 +83,7 @@ public class Storage {
     private LocalDate parseTime(String task, String command) throws DukeException {
         int timeIndex = task.indexOf(command);
         if (timeIndex < 0) {
-            throw new DukeException("Invalid Task");
+            throw new DukeException("Invalid duke.task.Task");
         }
         String timeDescription = task.substring(timeIndex + command.length(),
                 task.indexOf(')'));

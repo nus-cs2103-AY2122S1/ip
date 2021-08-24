@@ -1,3 +1,12 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.TaskList;
+import duke.command.Commands;
+
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -8,9 +17,9 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 /**
- * Class encapsulating a Duke and its commands.
+ * Class encapsulating a duke.Duke and its commands.
  */
-public class Duke {
+class Duke {
 
     private enum UserCommands {
         DONE, TODO, DEADLINE, EVENT, GET, DELETE, LIST, BYE;
@@ -56,7 +65,7 @@ public class Duke {
                     int index = Integer.parseInt(arrOfCommandWords[1]) - 1;
                     this.taskIndex = index;
                 } catch (NumberFormatException e) {
-                    throw new DukeException("Invalid task number");
+                    throw new DukeException("Invalid duke.task number");
                 }
                 return UserCommands.DONE;
             case "get":
@@ -71,7 +80,7 @@ public class Duke {
                     int index = Integer.parseInt(arrOfCommandWords[1]) - 1;
                     this.taskIndex = index;
                 } catch (NumberFormatException e) {
-                    throw new DukeException("Invalid task number");
+                    throw new DukeException("Invalid duke.task number");
                 }
                 return UserCommands.DELETE;
             default:
@@ -84,7 +93,7 @@ public class Duke {
                 int indexOfDate = userInput.indexOf(command);
                 int startOfDescription = userInput.indexOf(' ');
                 if (indexOfDate < 0) {
-                    throw new DukeException("No date specified for task.");
+                    throw new DukeException("No date specified for duke.task.");
                 }
                 String description = userInput.substring(startOfDescription, indexOfDate);
                 list_of_words[1] = description;
@@ -96,9 +105,9 @@ public class Duke {
         }
 
         /**
-         * Method for Duke to handle invalid inputs by the user.
+         * Method for duke.Duke to handle invalid inputs by the user.
          *
-         * @param input The user input to Duke.
+         * @param input The user input to duke.Duke.
          */
         private void handleInvalidInputs(String input) {
             try {
@@ -115,7 +124,7 @@ public class Duke {
                 }
                 case "done": // fallthrough
                 case "delete":
-                    throw new DukeException("Please enter the task index.");
+                    throw new DukeException("Please enter the duke.task index.");
                 case "get":
                     throw new DukeException("Please enter a date in dd/MM/yyyy format.");
                 default:
@@ -162,7 +171,7 @@ public class Duke {
     }
 
     /**
-     * Field for duke to keep track of task list.
+     * Field for duke to keep track of duke.task list.
      */
     private TaskList taskList;
     private Storage storage;
@@ -171,7 +180,7 @@ public class Duke {
     private Parser parser = new Parser();
 
     /**
-     * Constructor for Duke
+     * Constructor for duke.Duke
      */
     public Duke(TaskList taskList, Storage storage, Ui ui) {
         this.taskList = taskList;
@@ -180,7 +189,7 @@ public class Duke {
     }
 
     /**
-     * Dividing line for formatting Duke's replies.
+     * Dividing line for formatting duke.Duke's replies.
      */
     private void divider() {
         StringBuilder builder = new StringBuilder(100);
@@ -191,7 +200,7 @@ public class Duke {
     }
 
     /**
-     * Method that prints Duke's greetings.
+     * Method that prints duke.Duke's greetings.
      */
     private void greet() {
         divider();
@@ -200,7 +209,7 @@ public class Duke {
     }
 
     /**
-     * Method that prints Duke's exit message.
+     * Method that prints duke.Duke's exit message.
      */
     private void exit() {
         divider();
@@ -209,7 +218,7 @@ public class Duke {
     }
 
     /**
-     * Method that prints the current tasks in the task list.
+     * Method that prints the current tasks in the duke.task list.
      */
     private void returnTaskList() {
         divider();
@@ -241,9 +250,9 @@ public class Duke {
 
 
     /**
-     * Method for Duke to mark the respective tasks as completed.
+     * Method for duke.Duke to mark the respective tasks as completed.
      *
-     * @param index Index of the task to be deleted.
+     * @param index Index of the duke.task to be deleted.
      */
     private void markTaskAsCompleted(int index) {
         try {
@@ -259,7 +268,7 @@ public class Duke {
                 );
                 storage.markTaskAsCompleted(task.toString(), toUpdate);
             } else {
-                throw new DukeException("There is no such task.");
+                throw new DukeException("There is no such duke.task.");
             }
             divider();
         } catch (DukeException e) {
@@ -268,9 +277,9 @@ public class Duke {
     }
 
     /**
-     * Method for Duke to delete the corresponding task.
+     * Method for duke.Duke to delete the corresponding duke.task.
      *
-     * @param index Index of the task to be deleted.
+     * @param index Index of the duke.task to be deleted.
      */
     private void deleteTask(int index) {
         try {
@@ -286,7 +295,7 @@ public class Duke {
                 );
                 storage.deleteTaskFromFile(this.taskList);
             } else {
-                throw new DukeException("There is no such task.");
+                throw new DukeException("There is no such duke.task.");
             }
             divider();
         } catch (DukeException e) {
@@ -296,7 +305,7 @@ public class Duke {
 
 
     /**
-     * Runs the Duke chatbot.
+     * Runs the duke.Duke chatbot.
      */
     private void run() {
 
@@ -323,7 +332,7 @@ public class Duke {
     }
 
     /**
-     * Main method to execute Duke's functions.
+     * Main method to execute duke.Duke's functions.
      *
      * @param args Command line arguments.
      */
