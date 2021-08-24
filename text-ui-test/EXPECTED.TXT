@@ -81,7 +81,7 @@
     [D][X]  run it down  (by:  Thursday)
     ____________________________________________________________
     ____________________________________________________________
-     ☹ OOPS!!! Please insert a valid Task Number!
+     ☹ OOPS!!! Please insert a valid task.Task Number!
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list:
@@ -90,7 +90,7 @@
     3. [E][ ]  birthday party  (at:  IDK where)
     ____________________________________________________________
     ____________________________________________________________
-     ☹ OOPS!!! Please insert a valid Task Number!
+     ☹ OOPS!!! Please insert a valid task.Task Number!
     ____________________________________________________________
     ____________________________________________________________
      ☹ OOPS!!! I'm sorry, please input the number of the task you wish to delete.

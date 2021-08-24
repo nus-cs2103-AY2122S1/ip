@@ -1,3 +1,10 @@
+package data;
+
+import command.*;
+import task.Deadline;
+import task.Event;
+import task.ToDo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -39,7 +46,7 @@ public class Parser {
     }
 
     private static Command prepareAddCommand(String keyword, String userInput, String[] userInputArray, String specialPhrase) {
-        //Task is a todo
+        //task.Task is a todo
         if (specialPhrase.isEmpty()) {
             //checks if description is empty
             if (userInputArray.length > 1) {

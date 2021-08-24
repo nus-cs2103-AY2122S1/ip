@@ -1,3 +1,10 @@
+package command;
+
+import data.DukeException;
+import data.Storage;
+import data.TaskList;
+import data.Ui;
+
 public class DoneCommand extends Command{
     private int taskNumber;
 
@@ -8,11 +15,11 @@ public class DoneCommand extends Command{
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (taskNumber > tasks.getSize() || taskNumber <= 0) {
-            throw new DukeException("Please insert a valid Task Number!");
+            throw new DukeException("Please insert a valid task.Task Number!");
         } else {
             tasks.getTask(taskNumber).markAsDone();
             storage.save(tasks);
-            ui.showMessage("Task marked as done!");
+            ui.showMessage("task.Task marked as done!");
         }
     }
 

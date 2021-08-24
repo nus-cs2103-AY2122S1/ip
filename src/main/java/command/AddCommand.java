@@ -1,3 +1,10 @@
+package command;
+
+import data.Storage;
+import data.TaskList;
+import data.Ui;
+import task.Task;
+
 public class AddCommand extends Command {
     private Task task;
     //For deadline todo and event tasks
@@ -9,7 +16,7 @@ public class AddCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
         storage.save(tasks);
-        ui.showMessage("Task added successfully!");
+        ui.showMessage("task.Task added successfully!");
     }
 
     @Override
