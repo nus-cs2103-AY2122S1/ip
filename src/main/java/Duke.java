@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -97,14 +100,26 @@ public class Duke {
 
         case EVENT:
             String eventDescription = command.substring(command.indexOf(" ")+1, command.indexOf("/at")-1);
-            Task event = new Event(eventDescription, false, command.substring(command.indexOf("at")+3));
-            addTask(event);
+            try {
+                LocalDateTime at = LocalDateTime.parse(command.substring(command.indexOf("at")+3),
+                        DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
+                Task event = new Event(eventDescription, false, at);
+                addTask(event);
+            } catch (DateTimeParseException e){
+                System.out.println("Please enter Date and Time in YYYY-MM-DD H:MM.");
+            }
             break;
 
         case DEADLINE:
             String deadlineDescription = command.substring(command.indexOf(" ")+1, command.indexOf("/by")-1);
-            Task deadline = new Deadline(deadlineDescription, false, command.substring(command.indexOf("by")+3));
-            addTask(deadline);
+            try {
+                LocalDateTime by = LocalDateTime.parse(command.substring(command.indexOf("by")+3),
+                        DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
+                Task deadline = new Deadline(deadlineDescription, false, by);
+                addTask(deadline);
+            } catch (DateTimeParseException e){
+                System.out.println("Please enter Date and Time in YYYY-MM-DD H:MM.");
+            }
             break;
 
         case TODO:
