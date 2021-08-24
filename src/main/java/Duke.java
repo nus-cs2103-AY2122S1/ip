@@ -26,7 +26,8 @@ public class Duke {
     }
 
     //method to add a task to a list
-    public void addTask(String str, ArrayList<Task> l) throws EmptyDescriptionException, InvalidTaskException{
+    public void addTask(String str, ArrayList<Task> l)
+            throws EmptyDescriptionException, InvalidTaskException, InvalidDeadlineException {
         //first check if the task only contain 1 word
         if (str.split(" ").length == 1) {
             //check if task if valid
@@ -52,16 +53,25 @@ public class Duke {
 
             //add correct task to the list
             else {
-                System.out.println("Got it. I've added this task.");
                 if (str.startsWith("todo")) {
                     l.add(new ToDos(str));
                 } else if (str.startsWith("deadline")) {
-                    String[] message = str.split("/by");
-                    l.add(new Deadline(message[0], message[1]));
+                    String[] message = str.split("/by ");
+                    if (message.length == 1) {
+                        throw new InvalidTaskException();
+                    } else {
+                        l.add(new Deadline(message[0], message[1]));
+                    }
                 } else {
-                    String[] message = str.split("/at");
-                    l.add(new Events(message[0], message[1]));
+                    String[] message = str.split("/at ");
+                    if (message.length == 1) {
+                        throw new InvalidTaskException();
+                    } else {
+                        l.add(new Events(message[0], message[1]));
+                    }
                 }
+
+                System.out.println("Got it. I've added this task.");
                 System.out.println(l.get(l.size() - 1).printTask());
                 System.out.println("Now you have " + l.size()
                         + (l.size() == 1 ? " task in the list" : " tasks in the list."));
@@ -85,7 +95,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws InvalidTaskException, EmptyDescriptionException, OutOfBoundException {
+    public static void main(String[] args) {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
@@ -124,7 +134,7 @@ public class Duke {
             else {
                 try {
                     duke.addTask(input, list);
-                } catch (InvalidTaskException e) {
+                } catch (InvalidTaskException | InvalidDeadlineException e) {
                     System.out.println(e.toString());
                 } catch (EmptyDescriptionException e) {
                     System.out.println("☹ OOPS!!! The description of a" + input + "cannot be empty.");
