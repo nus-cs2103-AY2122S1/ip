@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.exception.IncompleteDescriptionException;
-import duke.exception.InvalidDateFormatException;
 import duke.task.Task;
 import duke.util.Storage;
 import duke.util.TaskList;
