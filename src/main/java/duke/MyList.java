@@ -41,30 +41,14 @@ public class MyList {
      */
     public void addTask(Task t) {
         myList.add(t);
-        System.out.println("Got it! I have added:");
-        System.out.println(t.toString());
-        int noOfItems = this.myList.size();
-        if (noOfItems == 1) {
-            System.out.printf("You now have %d item in your list \n", noOfItems);
-        } else {
-            System.out.printf("You now have %d items in your list \n", noOfItems);
-        }
+        Ui.addTaskMessage(t, this);
     }
 
     /**
      * Method to list out all the items in the list.
      */
     public void listAll() {
-        int listLength = myList.size();
-        if (listLength == 0) {
-            System.out.println("Your list is empty.");
-        } else {
-            System.out.println("Your list items:");
-            for (int i = 0; i < listLength; i ++) {
-                Task t = myList.get(i);
-                System.out.printf("%d. %s \n", i + 1, t.toString());
-            }
-        }
+        Ui.listAllMessage(this);
     }
 
     /**
@@ -77,7 +61,7 @@ public class MyList {
         try {
             myList.get(index - 1).markComplete();
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid index, please try again");
+            Ui.invalidIndexMessage();
         }
     }
 
@@ -89,6 +73,7 @@ public class MyList {
      */
     public void deleteTask(int index) {
         Task removed = this.myList.remove(index - 1);
+        Ui.deleteTaskMessage(removed, this);
         System.out.println("Noted. I've removed this task:");
         System.out.println(removed.toString());
         int noOfItems = this.myList.size();
@@ -99,6 +84,12 @@ public class MyList {
         }
     }
 
+    /**
+     * Method to load a task into the list.
+     * This method does not print anything to the screen.
+     * Used in conjuntion with the load method in storage.
+     * @param t The task to be laaded into the list.
+     */
     public void loadTask(Task t) {
         this.myList.add(t);
     }
