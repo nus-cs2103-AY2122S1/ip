@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Task;
+import duke.task.ToDos;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
