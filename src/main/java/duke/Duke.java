@@ -14,7 +14,7 @@ public class Duke {
     private Storage storage;
 
     /**
-     * Constructor for Duke.
+     * Constructs a Duke chatbot.
      */
     public Duke() {
         this.ui = new Ui();

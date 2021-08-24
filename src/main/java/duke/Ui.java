@@ -15,7 +15,7 @@ public class Ui {
     private Scanner sc;
 
     /**
-     * Constructor for Ui. Instantiate a scanner object to take in user's input.
+     * Constructs an Ui instance. Instantiate a scanner object to take in user's input.
      */
     public Ui() {
         this.sc = new Scanner(System.in);

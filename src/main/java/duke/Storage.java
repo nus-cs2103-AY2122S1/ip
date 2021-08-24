@@ -19,7 +19,7 @@ public class Storage {
     private Ui ui;
 
     /**
-     * Constructor of Storage that takes in an Ui instance.
+     * Constructs a storage to store tasks. It takes in an Ui instance.
      *
      * @param ui An instance to deal with interactions with the user.
      */

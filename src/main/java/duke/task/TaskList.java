@@ -21,7 +21,7 @@ public class TaskList {
     private Ui ui;
 
     /**
-     * Constructor for TaskList.
+     * Constructs a task list.
      *
      * @param tasksInfo Arraylist of tasks loaded from storage.
      * @param ui An Ui instance to deal with interactions with the user.

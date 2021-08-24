@@ -7,7 +7,7 @@ public class Todo extends Task {
     private static final char TASK_LETTER = 'T';
 
     /**
-     * Constructor for Todo.
+     * Constructs a todo task.
      *
      * @param description The description of the task.
      */
@@ -16,7 +16,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Constructor for Todo. It is used to instantiate a todo that is already marked as done.
+     * Constructs a todo task. It is used to instantiate a todo that is already marked as done.
      *
      * @param description The description of the task.
      * @param isDone Whether todo is done or not.

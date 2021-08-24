@@ -7,7 +7,7 @@ public class IncompleteTaskDescriptionException extends DukeException {
     private String taskName;
 
     /**2
-     * Constructor for IncompleteTaskDescriptionException.
+     * Constructs a IncompleteTaskDescriptionException.
      *
      * @param taskName Name of the type of task.
      */

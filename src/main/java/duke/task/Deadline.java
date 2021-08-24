@@ -14,7 +14,7 @@ public class Deadline extends Task {
     private LocalTime time;
 
     /**
-     * Constructor for Deadline.
+     * Constructs a deadline task.
      *
      * @param description The description of the task.
      * @param date The deadline date.
@@ -27,7 +27,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor for Deadline. It is used to instantiate a deadline that is already marked as done.
+     * Constructs a deadline task. It is used to instantiate a deadline that is already marked as done.
      *
      * @param description The description of the ask.
      * @param date The deadline date.

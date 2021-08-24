@@ -8,7 +8,7 @@ public class Command {
     private String restOfCommand;
 
     /**
-     * Constructor for Command.
+     * Constructs a user command.
      *
      * @param keyword The user command.
      * @param restOfCommand The rest of the command, if any.

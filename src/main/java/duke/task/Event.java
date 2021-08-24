@@ -13,7 +13,7 @@ public class Event extends Task {
     private String timeRange;
 
     /**
-     * Constructor for Event.
+     * Constructs a event task.
      *
      * @param description The description of the task.
      * @param date The date of the event.
@@ -26,7 +26,7 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor for Event. It is used to instantiate an event that is already marked as done.
+     * Constructs a event task. It is used to instantiate an event that is already marked as done.
      * @param description The description of the task.
      * @param date The date of the event.
      * @param timeRange The start and end time of the event.
