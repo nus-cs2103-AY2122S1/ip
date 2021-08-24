@@ -110,4 +110,11 @@ public class Ui {
     public void showLoadingError() {
         System.out.println("error loading!");
     }
+
+    /**
+     * Displays a message for the matching tasks.
+     */
+    public void matchingTasks() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
 }

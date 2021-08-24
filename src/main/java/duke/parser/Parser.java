@@ -9,6 +9,7 @@ import duke.command.ErrorCommand;
 import duke.command.EventCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
+import duke.command.FindCommand;
 
 /**
  * Processes the commands from Duke and initialises the appropriate command for it.
@@ -41,6 +42,8 @@ public class Parser {
 
         } else if (command.contains("delete")) {
             return prepDelete(command);
+        } else if (command.contains("find")) {
+            return prepFind(command);
         }
         return new ErrorCommand();
     }
@@ -103,5 +106,17 @@ public class Parser {
                 String.valueOf(
                     command.toCharArray()[command.length() - 1])) - 1;
         return new DeleteCommand(i);
+    }
+
+    /**
+     * Initialises the Find command.
+     * @param command the Find command from Duke
+     * @return Find command to be executed
+     */
+    Command prepFind(String command) {
+        int startIndex = "find".length();
+        int endIndex = command.length();
+        String task = command.substring(startIndex, endIndex);
+        return new FindCommand(task);
     }
 }
