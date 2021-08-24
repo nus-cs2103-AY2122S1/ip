@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Encapsulates the name and completion status of the task.
  */
@@ -7,8 +9,8 @@ abstract public class Task {
     private boolean completed;
 
     /**
-     * Constructs a Task object that contains the name and completion status set to false.
-     * @param name The name of the Task.
+     * Constructs a duke.task.Task object that contains the name and completion status set to false.
+     * @param name The name of the duke.task.Task.
      */
     public Task(String name) {
         this.name = name;
@@ -16,7 +18,7 @@ abstract public class Task {
     }
 
     /**
-     * Prints out the message to be shown when a new task has been added to the Task list.
+     * Prints out the message to be shown when a new task has been added to the duke.task.Task list.
      * @param size Total number of tasks in the list
      */
     public void addResponse(int size) {

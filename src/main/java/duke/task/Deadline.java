@@ -1,9 +1,12 @@
+package duke.task;
+
+import duke.task.Task;
+
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline encapsulates the name of the deadline as well as
+ * duke.task.Deadline encapsulates the name of the deadline as well as
  * when the task needs to be completed by.
  */
 
@@ -12,9 +15,9 @@ public class Deadline extends Task {
     private String by;
 
     /**
-     * Constructs Deadline object with given name, and deadline of the task.
-     * @param name The name of the Deadline
-     * @param by Deadline of the task
+     * Constructs duke.task.Deadline object with given name, and deadline of the task.
+     * @param name The name of the duke.task.Deadline
+     * @param by duke.task.Deadline of the task
      */
     public Deadline(String name, String by) {
         super(name);
@@ -35,7 +38,7 @@ public class Deadline extends Task {
 
     /**
      * Converts the deadline object into a string
-     * @return A string containing the type (Deadline), completion status and time
+     * @return A string containing the type (duke.task.Deadline), completion status and time
      * of the deadline to be done by.
      */
     @Override

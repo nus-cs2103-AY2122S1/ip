@@ -1,3 +1,11 @@
+package duke.general;
+
+import duke.error.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.util.ArrayList;
 
 public class Tasklist {
@@ -11,8 +19,10 @@ public class Tasklist {
      * Adds task based on the Type given and input to the tasklist, returns the task formed
      * @param t Type of task
      * @param inputSplit Additional info such as description, completion status etc.
-     * @return Task that was added to the Tasklist
+     * @return duke.task.Task that was added to the duke.general.Tasklist
      */
+
+    //TODO CAN BE VERY WRONG and CRAZY
     public Task addTask(TaskType t, String[] inputSplit) throws DukeException {
         Task temp;
         if (inputSplit.length < 2) {
@@ -25,7 +35,7 @@ public class Tasklist {
                 break;
             case DEADLINE:
                 if (input.split(" /by ", 2).length < 2) {
-                    throw new DukeException("Deadline not specified!");
+                    throw new DukeException("duke.task.Deadline not specified!");
                 }
                 String desc = input.split(" /by ", 2)[0];
                 String dead = input.split(" /by ", 2)[1];

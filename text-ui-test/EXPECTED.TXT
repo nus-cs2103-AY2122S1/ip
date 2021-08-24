@@ -12,7 +12,7 @@ Please enter the number of task to mark as completed!
 Description of task cannot be empty!
 Description of task cannot be empty!
 Description of task cannot be empty!
-Deadline not specified!
+duke.task.Deadline not specified!
 Date of event not specified!
 Got it. I've added this task:
 [T][ ] assignment

@@ -1,13 +1,17 @@
+package duke.task;
+
+import duke.task.Task;
+
 /**
- * Event encapsulates the name of the event as well as the
+ * duke.task.Event encapsulates the name of the event as well as the
  * when the event is occurring.
  */
 
-public class Event extends Task{
+public class Event extends Task {
     private String at;
 
     /**
-     * Construct Event object with a given name, and time of the event.
+     * Construct duke.task.Event object with a given name, and time of the event.
      * @param name The name of the event
      * @param at Time at which event is held
      */

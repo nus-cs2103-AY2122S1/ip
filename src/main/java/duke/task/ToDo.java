@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.task.Task;
+
 /**
  * Encapsulates the name of the todo task.
  */
@@ -22,7 +26,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Converts the ToDo task into a string
+     * Converts the duke.task.ToDo task into a string
      * @return String with the type of the task (todo) and the name of the task.
      */
     @Override

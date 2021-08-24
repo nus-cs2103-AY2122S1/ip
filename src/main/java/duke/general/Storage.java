@@ -1,3 +1,10 @@
+package duke.general;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.File;
@@ -58,6 +65,8 @@ public class Storage {
      * @param t Type of task being added
      * @param line String[] containing data about the task
      */
+
+    //TODO MIGHT BE CRAZY WRONG
     public void addToList(TaskType t, String[] line) {
         Task temp;
         switch (t) {
@@ -81,7 +90,7 @@ public class Storage {
 
     /**
      * Saves the task added into the save file
-     * @param t Task to be saved into save file
+     * @param t duke.task.Task to be saved into save file
      */
     public void appendSave(Task t) {
         try {

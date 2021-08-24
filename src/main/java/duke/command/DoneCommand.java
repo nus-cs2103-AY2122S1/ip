@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.error.DukeException;
+import duke.general.Storage;
+import duke.general.Tasklist;
+import duke.general.Ui;
+import duke.task.Task;
+
 public class DoneCommand extends Command {
     String[] input;
 
