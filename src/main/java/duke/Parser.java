@@ -9,7 +9,7 @@ import duke.tasks.Todo;
 import java.nio.file.Path;
 
 /**
- * duke.Parser to parse user commands
+ * Parser to parse user commands
  */
 public class Parser {
     UI ui;

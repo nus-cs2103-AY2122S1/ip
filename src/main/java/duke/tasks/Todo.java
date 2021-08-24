@@ -1,6 +1,6 @@
 package duke.tasks;
 
-public class Todo extends Task{
+public class Todo extends Task {
 
     public static final String USAGE_TEXT = "Usage : todo <task name>";
 
@@ -8,7 +8,7 @@ public class Todo extends Task{
      * default constructor for a new task
      * @param name task name
      */
-    public Todo(String name){
+    public Todo(String name) {
         this(name, false);
     }
 
@@ -24,12 +24,12 @@ public class Todo extends Task{
     public String serialize() {
         return "Task:todo\n" +
                 String.format("\tName:%s\n", this.name) +
-                String.format("\tDone:%s\n", this.done);
+                String.format("\tDone:%s\n", this.isTaskDone);
     }
 
     @Override
     public String toString() {
-        return "[T]" + (this.done? "[X] " : "[ ] ")
+        return "[T]" + (this.isTaskDone ? "[X] " : "[ ] ")
                 + this.name;
     }
 }

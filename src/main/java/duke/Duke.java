@@ -4,9 +4,9 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 
 import java.io.IOException;
-import java.util.Scanner;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 
 public class Duke {
@@ -15,11 +15,11 @@ public class Duke {
     public static void main(String[] args) {
         UI ui = new UI();
 
-        Path storagePath = Paths.get(".","data","duke.txt");
+        Path storagePath = Paths.get(".", "data", "duke.txt");
         TaskArrayList taskList;
         try {
             taskList = Storage.load(storagePath);
-        } catch (DukeException | IOException e){
+        } catch (DukeException | IOException e) {
             taskList = new TaskArrayList();
             ui.showLoadingError();
         }
@@ -27,17 +27,17 @@ public class Duke {
         ui.displayWelcome();
 
         Scanner userScanner = new Scanner(System.in);
-        Parser parser = new Parser(ui,taskList,storagePath);
+        Parser parser = new Parser(ui, taskList, storagePath);
 
         boolean isExit = false;
-        while (!isExit){
+        while (!isExit) {
             String userInput = userScanner.nextLine();
-            try{
+            try {
                 isExit = parser.run(userInput);
-            } catch (DukeException e){
+            } catch (DukeException e) {
                 ui.displayException(e);
             } finally {
-                Storage.dump(taskList,storagePath);
+                Storage.dump(taskList, storagePath);
             }
         }
     }
