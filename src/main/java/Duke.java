@@ -7,8 +7,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
 
@@ -28,7 +31,7 @@ public class Duke {
         } else if (command.equals("D")) {
             String[] details = next.split(" \\| ", 2);
             String desc = details[0];
-            String dueDate = details[1];
+            LocalDate dueDate = LocalDate.parse(details[1]);
             Deadline dl = new Deadline(desc, isDone, dueDate);
             taskList.add(dl);
         } else if (command.equals("E")) {
@@ -189,7 +192,7 @@ public class Duke {
                         String[] text = next[1].split(" /by ");
                         try {
                             String desc = text[0];
-                            String dueDate = text[1];
+                            LocalDate dueDate = LocalDate.parse(text[1]);
                             Deadline dl = new Deadline(desc, false, dueDate);
                             taskList.add(dl);
                             System.out.println(sepLine + "\n added: " + dl + "\n");
@@ -197,6 +200,8 @@ public class Duke {
                             System.out.println(sepLine);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new MissingFieldException();
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Failed to parse date given");
                         }
                     } else if (command.equals("event")) {
                         // Add an event to the task list
