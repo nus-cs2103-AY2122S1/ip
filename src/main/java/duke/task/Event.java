@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     /**
-     * A constructor for an duke.task.Event that specifies whether or not it is completed.
+     * A constructor for an Event that specifies whether or not it is completed.
      * @param title a String representing the title of the event
      * @param timeDue a LocalDate representing time at which the event is due
      */
@@ -15,7 +15,7 @@ public class Event extends Task {
     }
 
     /**
-     * A constructor for an duke.task.Event that specifies whether or not it is completed.
+     * A constructor for an Event that specifies whether or not it is completed.
      * @param title a String representing the title of the event
      * @param timeDue a LocalDate representing time at which the event is due
      * @param isDone a boolean representing whether or not the event is completed
@@ -27,9 +27,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string representation of a duke.task.Event.
+     * Returns the string representation of a Event.
      *
-     * @return A string describing the duke.task.Event.
+     * @return A string describing the Event.
      */
     @Override
     public String toString() {

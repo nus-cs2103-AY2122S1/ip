@@ -41,7 +41,7 @@ public class TaskList {
     /**
      * Given a string, creates a To-do from that string and adds it to the list of task.
      * @param taskTitle a String of the title of the To-do to be added.
-     * @return the newly created duke.task.Todo.
+     * @return the newly created To-do
      */
     public String addNewTodo(String taskTitle) {
         Todo task = new Todo(taskTitle);
@@ -50,9 +50,9 @@ public class TaskList {
     }
 
     /**
-     * Given a string, creates a duke.task.Deadline from that string and adds it to the list of task.
-     * @param taskTitle a String of the title of the duke.task.Deadline to be added.
-     * @return the newly created duke.task.Deadline.
+     * Given a string, creates a Deadline from that string and adds it to the list of task.
+     * @param taskTitle a String of the title of the Deadline to be added.
+     * @return the newly created Deadline.
      */
     public String addNewDeadline(String taskTitle) {
         int delimiter = taskTitle.indexOf("/by ");
@@ -63,9 +63,9 @@ public class TaskList {
     }
 
     /**
-     * Given a string, creates a duke.task.Deadline from that string and adds it to the list of task.
-     * @param taskTitle a String of the title of the duke.task.Deadline to be added.
-     * @return the newly created duke.task.Deadline.
+     * Given a string, creates a Deadline from that string and adds it to the list of task.
+     * @param taskTitle a String of the title of the Deadline to be added.
+     * @return the newly created Deadline.
      */
     public String addNewEvent(String taskTitle) {
         int delimiter = taskTitle.indexOf("/at ");
