@@ -7,7 +7,7 @@ public class UI {
     public static String addedText = "Got it. I've added this task:\n";
 
     /**
-     * Handles the greeting or opening message that is shown to the user before inputs are read.
+     * Handles the greeting or opening message that is shown to the user just before inputs are read.
      */
     public static void greet() {
         String greetText = "Hello I'm DukePakage.Duke\nWhat can I do for you?\n";
