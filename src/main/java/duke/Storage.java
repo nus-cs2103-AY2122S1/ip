@@ -1,3 +1,5 @@
+package duke;
+
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
