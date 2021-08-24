@@ -44,19 +44,17 @@ public class Duke {
 
                 // Case where user marks a task as done
                 if (command.equals("done")) {
-                    Task current = tasks.getTask(Integer.parseInt(parsedInputString[1]));
+                    Task current = tasks.getTask(Integer.parseInt(parsedInputString[1]) - 1);
                     current.markAsDone();
                     System.out.println(ui.doneTaskMessage(current.toString()));
                     taskListIsUpdated = true;
-                    continue;
 
                     // case where user wants to delete a task item, similar to done
                 } else if (command.equals("delete")) {
-                    Task current = tasks.getTask(Integer.parseInt(parsedInputString[1]));
-                    System.out.println(ui.deletedTaskMessage(current.toString(), tasks.getLength()));
+                    Task current = tasks.getTask(Integer.parseInt(parsedInputString[1]) - 1);
                     tasks.removeTask(current);
+                    System.out.println(ui.deletedTaskMessage(current.toString(), tasks.getLength()));
                     taskListIsUpdated = true;
-                    continue;
 
                     // Case where user wants to see the entire task list
                 } else if (command.equals("list")) {
@@ -80,6 +78,9 @@ public class Duke {
 
                     // Case where user wants to add a new deadline task
                 } else if (nextTask.startsWith("deadline")) {
+                    System.out.println(parsedInputString[2]);
+                    System.out.println(parsedInputString[3]);
+
                     LocalDate date = LocalDate.parse(parsedInputString[2]);
                     LocalTime time = LocalTime.parse(parsedInputString[3]);
                     String deadlineDesc = parsedInputString[1]; //skip the "deadline "
