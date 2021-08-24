@@ -16,6 +16,10 @@ public class Storage {
         this.tasks = new TaskList();
     }
 
+    /**
+     * Loads the saved task list from file in hard disk into Duke.
+     * @return the saved task list
+     */
     public TaskList load() throws DukeException {
         try {
             Scanner s = new Scanner(this.data);
@@ -29,6 +33,9 @@ public class Storage {
         return this.tasks;
     }
 
+    /**
+     * Saves the user's final task list into a file in hard disk.
+     */
     public void save() {
         try {
             FileWriter myFile = new FileWriter(this.data);

@@ -11,14 +11,30 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Gets the i-th task in the TaskList.
+     *
+     * @param i the index of the task the user would like to get.
+     *
+     * @return the i-th task in the TaskList
+     */
     public Task get(int i) {
         return this.taskList.get(i);
     }
 
+    /**
+     * Gets the number of tasks the user has added into the TaskList.
+     * @return the number of tasks in the TaskList.
+     */
     public int size() {
         return this.taskList.size();
     }
 
+    /**
+     * Adds the respective task into the TaskList.
+     *
+     * @param s the user input string
+     */
     public void readData(String s) {
         String[] args = s.split(",", 4);
         switch (args[0]) {
@@ -40,10 +56,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the index-th task in the TaskList as completed.
+     *
+     * @param index the index of the task to be marked done
+     */
     public void markDone(int index) {
         this.taskList.get(index).markAsDone();
     }
 
+    /**
+     * Adds the given task into the TaskList.
+     *
+     * @param taskType the String representing the type of Task
+     * @param description the name of the task
+     * @param op the date of the Event
+     */
     public void add(String taskType, String description, String op) {
         if (taskType.equals("todo")) {
             this.taskList.add(new ToDo(description));
@@ -56,10 +84,20 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds the given task into the TaskList.
+     *
+     * @param t The Task to be added
+     */
     public void add(Task t) {
         this.taskList.add(t);
     }
 
+    /**
+     * Deletes the given index-th task in TaskList.
+     *
+     * @param index the index of the task in the TaskList to be deleted
+     */
     public void delete(int index) {
         this.taskList.remove(index);
     }
