@@ -39,8 +39,8 @@ public class Storage {
         }
 
         // IOException will be handled in Pilcrow.run()
-        FileWriter pilcrowFileWriter = new FileWriter(this.filePath);
-        pilcrowFileWriter.write(storedTasks);
-        pilcrowFileWriter.close();
+//        FileWriter pilcrowFileWriter = new FileWriter(this.filePath);
+//        pilcrowFileWriter.write(storedTasks);
+//        pilcrowFileWriter.close();
     }
 }

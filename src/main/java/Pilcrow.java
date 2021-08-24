@@ -40,8 +40,6 @@ public class Pilcrow {
                 isExit = (parser.getCommandWord().equals("bye"));
             } catch (InvalidInputException exception) {
                 ui.printException(exception);
-            } catch (IOException exception) {
-                ui.printException(exception);
             }
         }
     }
