@@ -7,6 +7,7 @@ import duke.command.ListCommand;
 import duke.command.DeleteCommand;
 import duke.command.ByeCommand;
 import duke.command.ErrorCommand;
+import duke.command.FindCommand;
 
 /**
  * Deals with making sense of the user command
@@ -42,6 +43,9 @@ public class Parser {
                 break;
             case "bye":
                 c = new ByeCommand();
+                break;
+            case "find":
+                c = new FindCommand(inputSplit);
                 break;
             default:
                 c = new ErrorCommand();

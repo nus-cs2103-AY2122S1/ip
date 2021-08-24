@@ -3,6 +3,7 @@ package duke.general;
 import duke.error.DukeException;
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -57,9 +58,23 @@ public class Ui {
     }
 
     /**
-     * Displays the list of tasks in the Tasklist provided
-     * @param t Tasklist
+     * Shows the users what tasks in the tasklist matches their keyword.
+     * If there are no tasks in the list, informs the users of not finding any matches
+     *
+     * @param list List of tasks that have matches
      */
+    public void findResponse(ArrayList<Task> list) {
+        if (list.size() > 0) {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 1; i <= list.size(); i++) {
+                Task task = list.get(i - 1);
+                System.out.println(i + "." + task.toString());
+            }
+        } else {
+            System.out.println("No matching tasks have been found :(");
+        }
+    }
+
     public void showList(Tasklist t) {
         try {
             if (t.size() == 0) {

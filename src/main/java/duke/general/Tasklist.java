@@ -102,6 +102,21 @@ public class Tasklist {
         return t;
     }
 
+    /**
+     * Finds tasks that are related to the keyword and returns them in a ArrayList
+     * @param keyword Keyword that user is searching for
+     * @return ArrayList of tasks that are related to the keyword
+     */
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> found = new ArrayList<>();
+        for (Task t : this.list) {
+            if (t.getName().contains(keyword)) {
+                found.add(t);
+            }
+        }
+        return found;
+    }
+
     public int size() {
         return list.size();
     }
