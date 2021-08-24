@@ -1,13 +1,18 @@
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public abstract class Task {
+    final static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     private boolean done;
     private final String taskName;
+    private final LocalDate date;
 
     protected enum TaskKind {
         TODO("todo", "T", null, "todo borrow book"),
-        DEADLINE("Deadline", "D", "deadline", "deadline return book /by Sunday"),
-        EVENT("Event", "E", "start time", "event book conference /at Mon 2-4pm");
+        DEADLINE("Deadline", "D", "deadline", "deadline return book /by 2022-02-18"),
+        EVENT("Event", "E", "start time", "event book conference /at 2022-02-18");
 
         private final String kind;
         private final String shortName;
@@ -43,6 +48,13 @@ public abstract class Task {
     private Task(String taskName) {
         this.taskName = taskName;
         this.done = false;
+        this.date = null;
+    }
+
+    private Task(String taskName, LocalDate date) {
+        this.taskName = taskName;
+        this.done = false;
+        this.date = date;
     }
 
     private static class Todo extends Task{
@@ -64,10 +76,8 @@ public abstract class Task {
     }
 
     private static class Deadline extends Task{
-        private final String deadline;
-        private Deadline(String taskName, String note) {
-            super(taskName);
-            this.deadline = note;
+        private Deadline(String taskName, LocalDate date) {
+            super(taskName, date);
         }
 
         @Override
@@ -79,16 +89,14 @@ public abstract class Task {
         public String toString() {
             String shortName = "[" + this.taskKind().shortName() + "]";
             String isDone = super.done ? "[X]" : "[ ]";
-            String deadline = "(by: " + this.deadline + ")";
+            String deadline = "(by: " + super.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
             return shortName + " " + isDone + " " + super.taskName + "" + deadline;
         }
     }
 
     private static class Event extends Task{
-        private final String startTime;
-        private Event(String taskName, String note) {
-            super(taskName);
-            this.startTime = note;
+        private Event(String taskName, LocalDate date) {
+            super(taskName, date);
         }
 
         @Override
@@ -100,7 +108,7 @@ public abstract class Task {
         public String toString() {
             String shortName = "[" + this.taskKind().shortName() + "]";
             String isDone = super.done ? "[X]" : "[ ]";
-            String startTime = "(at: " + this.startTime + ")";
+            String startTime = "(at: " + super.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
             return shortName + " " + isDone + " " + super.taskName + "" + startTime;
         }
     }
@@ -119,8 +127,9 @@ public abstract class Task {
             String[] parts = bodyCommand.split("/by ", 2);
             String taskName = parts[0];
             if (parts.length > 1) {
-                String deadline = parts[1];
-                return new Deadline(taskName, deadline);
+                String date = parts[1];
+                LocalDate localDate = LocalDate.parse(date, dtf);
+                return new Deadline(taskName, localDate);
             } else {
                 throw new DukeException.DukeEmptyNote(TaskKind.DEADLINE);
             }
@@ -134,8 +143,9 @@ public abstract class Task {
             String[] parts = bodyCommand.split("/at ", 2);
             String taskName = parts[0];
             if (parts.length > 1) {
-                String startTime = parts[1];
-                return new Event(taskName, startTime);
+                String date = parts[1];
+                LocalDate localDate = LocalDate.parse(date, dtf);
+                return new Event(taskName, localDate);
             } else {
                 throw new DukeException.DukeEmptyNote(TaskKind.EVENT);
             }
