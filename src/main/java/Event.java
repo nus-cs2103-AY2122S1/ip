@@ -1,16 +1,25 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.util.Arrays;
+
 public class Event extends Task {
 
-    private String datetime;
+    protected LocalDate date;
 
-    public Event(String description, String time) {
+    public Event(String description, String date) {
         super(description);
-        datetime = time;
+        try {
+            int[] dateArr = Arrays.stream(date.split("-")).mapToInt(Integer::parseInt).toArray();
+            this.date = LocalDate.of(dateArr[0], dateArr[1], dateArr[2]);
+        } catch (NumberFormatException | DateTimeException | ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("the event date has to be in format yyyy-mm-dd");
+        }
     }
 
     @Override
     public String toString() {
         String eventMarker = "[E]";
-        String timestamp = String.format("(at: %s)", datetime);
+        String timestamp = String.format("(at: %s)", date.toString());
 
         if (isDone) {
             return eventMarker + "|" + hasCross + "|" + item + "|" + datetime;
