@@ -10,7 +10,7 @@ import command.EventCommand;
 import command.InvalidCommand;
 import command.ListCommand;
 import command.TodoCommand;
-import utils.DateTimeFormat;
+import util.DateTimeFormat;
 
 /**
  * Parser class.

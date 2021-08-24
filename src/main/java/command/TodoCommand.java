@@ -4,7 +4,7 @@ import exception.DukeException;
 import service.TaskList;
 import task.Task;
 import task.Todo;
-import utils.DateTimeFormat;
+import util.DateTimeFormat;
 
 public class TodoCommand extends AddTaskCommand {
     

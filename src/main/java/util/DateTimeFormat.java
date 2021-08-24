@@ -1,4 +1,4 @@
-package utils;
+package util;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
