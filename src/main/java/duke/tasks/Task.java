@@ -2,6 +2,7 @@ package duke.tasks;
 
 import java.time.format.DateTimeFormatter;
 
+import duke.Duke;
 import duke.exceptions.NoDescriptionException;
 import duke.exceptions.UserInputError;
 
@@ -54,11 +55,19 @@ public class Task {
           newTask = new Todo(desc, isDone);
           break;
       case "D":
-          newTask = new Deadline(desc, date, isDone);
+          try {
+            newTask = new Deadline(desc, date, isDone);
+          } catch (UserInputError e) {
+            Duke.renderOutput(e.getMessage());
+          }
           break;
       case "E":
+        try {
           newTask = new Event(desc, date, isDone);
-          break;
+        } catch (UserInputError e) {
+          Duke.renderOutput(e.getMessage());
+        }
+        break;
     }
     return newTask;
   }

@@ -5,17 +5,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import duke.Duke;
+import duke.exceptions.NoDescriptionException;
 
 public class Deadline extends Task {
 
   protected LocalDate when;
 
-  public Deadline(String description, String when, boolean done) {
+  public Deadline(String description, String when, boolean done) throws NoDescriptionException {
     super(description, Task.Type.DEADLINE, done);
     try {
       this.when = LocalDate.parse(when.trim());
     } catch (DateTimeException e){
-      Duke.renderOutput(e.getMessage());
+      throw new NoDescriptionException("Wrong datetime format");
     }
   }
 
