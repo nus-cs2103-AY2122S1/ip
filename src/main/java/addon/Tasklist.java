@@ -27,23 +27,22 @@ public class Tasklist {
         if (args[0].equals("T")) {
             addon.Tasklist.Todo add = new addon.Tasklist.Todo(args[1]);
             this.list.add(add);
-            System.out.println(Ui.BAR + "\n    added: " + args[1] + "\n    Now you have " + this.list.size()
+            System.out.println(Ui.BAR + "\n    New todo added: " + args[1] + "\n\n    Now you have " + this.list.size()
                     + " tasks in your list\n" + Ui.BAR);
             Storage.appendFile(add);
         } else if (args[0].equals("E")) {
             Event add = new Event(args[1], date);
             this.list.add(add);
-            System.out.println(Ui.BAR + "\n    added: " + args[1] + " on " + Ui.printDate(date, true)
-                    + "\n    Now you have " + this.list.size() + " tasks in your list\n" + Ui.BAR);
+            System.out.println(Ui.BAR + "\n    New event added: " + args[1] + " on " + Ui.printDate(date, true)
+                    + "\n\n    Now you have " + this.list.size() + " tasks in your list\n" + Ui.BAR);
             Storage.appendFile(add);
         } else {
             Deadline add = new Deadline(args[1], date);
             this.list.add(add);
-            System.out.println(Ui.BAR + "\n    added: " + args[1] + " by " + Ui.printDate(date, true)
-                    + "\n    Now you have " + this.list.size() + " tasks in your list\n" + Ui.BAR);
+            System.out.println(Ui.BAR + "\n    New deadline added: " + args[1] + " by " + Ui.printDate(date, true)
+                    + "\n\n    Now you have " + this.list.size() + " tasks in your list\n" + Ui.BAR);
             Storage.appendFile(add);
         }
-
     }
     /**
      * Removes specified task entry from the Arraylist
@@ -52,7 +51,7 @@ public class Tasklist {
      */
     public void removeEntry(int num) throws IncorrectFormatException {
         if (num >= 1 && num <= this.list.size() + 1) {
-            System.out.println(Ui.BAR + "\n    Nice! I've removed this task off the face of the Earth:\n    "
+            System.out.println(Ui.BAR + "\n    Nice! I've removed this task off the face of the Earth:\n\n    "
                     + (list.get(num - 1)).toString() + "\n    Now you have " + list.size() +
                     " tasks in the list.\n" + Ui.BAR);
             this.list.remove(num - 1);
@@ -70,9 +69,9 @@ public class Tasklist {
     public void changeDone(int num) throws IncorrectFormatException {
         if (num >= 1 && num <= this.list.size() + 1) {
             (list.get(num - 1)).markDone();
-            System.out.println(Ui.BAR + "\n     Nice! I've marked the following as " +
-                    ((list.get(num - 1)).isDone ? "undone: " : "done: ") + "\n     " +
-                    (list.get(num - 1)).toString() + "\n" + Ui.BAR);
+            System.out.println(Ui.BAR + "\n     Nice! I've marked the following as "
+                    + ((list.get(num - 1)).isDone ? "undone: " : "done: ") + "\n     "
+                    + (list.get(num - 1)).toString() + "\n" + Ui.BAR);
             Storage.rewriteFile(this.list);
         } else {
             throw new IncorrectFormatException("List does not contain this item number. Try again?");
@@ -115,6 +114,29 @@ public class Tasklist {
                         && o.date.getDayOfMonth() == date.getDayOfMonth()) {
                     System.out.println("    " + i.toString());
                 }
+            }
+        }
+        System.out.println(Ui.BAR + "\n");
+    }
+
+    /**
+     * Lists out the current entries in the Arraylist that contain the specified keyword.
+     *
+     * @param keyword Keyword to be queried
+     */
+    public void filterNames(String keyword) {
+        System.out.println(Ui.BAR + "\n    Here are your tasks with the word \"" + keyword + "\": \n");
+        for(Task i : list) {
+            String[] words = i.description.split(" ");
+            for (String s : words) {
+                boolean found = false;
+                if (s.equalsIgnoreCase(keyword)) {
+                    found = true;
+                }
+                if (found) {
+                    System.out.println("    " + i.toString());
+                }
+                break;
             }
         }
         System.out.println(Ui.BAR + "\n");
