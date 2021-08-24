@@ -1,11 +1,12 @@
-package Tasks;
+package pib.Tasks;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import pibexception.PibException;
+import pib.Ui;
+import pib.pibexception.PibException;
 /**
  * Event task which contains the task description, and the date of the event
  */
@@ -37,16 +38,19 @@ public class Event extends Task {
             int atIndex = details.indexOf("/at ");
             String description = details.substring(0, atIndex).trim();
             if (description.isBlank()) {
-                throw new PibException("Uh oh :( Task description can't be blank");
+                Ui.printError("empty-task-description");
+                throw new PibException();
             }
             String[] dateTime = details.substring(atIndex + 4).trim().split(" ");
             String date = LocalDate.parse(dateTime[0].trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
             String time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm")).format(DateTimeFormatter.ofPattern("hh:mm a"));
             return new Event(description, date, time);
         } catch (IndexOutOfBoundsException e) {
-            throw new PibException("Uh oh :( Please format the command as: event <task> /at <yyyy-mm-dd> <hhmm>");
+            Ui.printError("e-wrong-format");
+            throw new PibException();
         } catch (DateTimeParseException e) {
-            throw new PibException("Uh oh :( Ensure date-time format is YYYY-MM-DD HHMM");
+            Ui.printError("wrong-datetime-format");
+            throw new PibException();
         }
     }
 

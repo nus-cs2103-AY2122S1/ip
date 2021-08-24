@@ -1,4 +1,6 @@
-package Tasks;
+package pib.Tasks;
+
+import pib.Ui;
 
 /**
  * Task is a parent class of other specific types of tasks
@@ -13,13 +15,13 @@ public abstract class Task {
     public Task(String description) {
         this.description = description.trim();
         isDone = 0;
-        System.out.println("Added: " + this.description);
+        Ui.printAddSuccess(description);
     }
 
     public Task(String description, int isDone) {
         this.description = description.trim();
         this.isDone = isDone;
-        System.out.println("Added: " + this.description);
+        Ui.printAddSuccess(description);
     }
 
     /**
@@ -37,14 +39,14 @@ public abstract class Task {
      */
     public void markAsDone() {
         if (this.isDone == 1) {
-            System.out.println("Item is already marked as done!\n");
+            Ui.printError("already-markedasdone");
         } else {
             this.isDone = 1;
-            System.out.println("Nice! I've marked this task as done:\n" + "[X] " + description + "\n");
+            Ui.printMarkAsDoneSuccess(description);
         }
     }
 
-    protected String getDescription() {
+    public String getDescription() {
         return this.description;
     }
 

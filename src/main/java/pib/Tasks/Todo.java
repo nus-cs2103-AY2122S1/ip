@@ -1,6 +1,7 @@
-package Tasks;
+package pib.Tasks;
 
-import pibexception.PibException;
+import pib.Ui;
+import pib.pibexception.PibException;
 
 /**
  * Todo task which contains only the task description
@@ -22,18 +23,15 @@ public class Todo extends Task {
 
     public static Todo createTodo(String details) throws PibException {
         if (details.trim().isBlank()) {
-            throw new PibException("Todo description can't be blank");
+            Ui.printError("empty-task-description");
+            throw new PibException("Task description can't be blank");
         } else {
             return new Todo(details.trim());
         }
     }
 
-    public static Todo createTodo(String details, int isDone) throws PibException {
-        if (details.trim().isBlank()) {
-            throw new PibException("Todo description can't be blank");
-        } else {
-            return new Todo(details.trim(), isDone);
-        }
+    public static Todo createTodo(String details, int isDone) {
+        return new Todo(details.trim(), isDone);
     }
 
     public String toDataString() {

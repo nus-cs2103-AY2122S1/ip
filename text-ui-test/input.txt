@@ -5,17 +5,21 @@ todo read book
 list
 deadline
 deadline /by
-deadline /by wednesday 2359
-deadline homework /by wednesday 2359
+deadline /by 2021-12-12 2359
+deadline homework /by 2021-12-12 2359
 list
 event
 event /at
-event /at sunday 2-4pm
-event party /at sunday 2-4pm
+event /at 1999-01-01 1530
+event /at 1999-01-01 15:30
+event party /at 1999-01-01 1530
 list
 done 1
 list
 done 2
 done 2
+done 5
+delete 1
+delete
 unknown command
 bye
