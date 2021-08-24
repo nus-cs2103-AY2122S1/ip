@@ -2,6 +2,9 @@ package duke.tasks;
 
 import java.time.LocalDateTime;
 
+/**
+ * Container for an event task.
+ */
 public class Event extends Task {
     private LocalDateTime at;
 
@@ -16,6 +19,13 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Instantiates an Event object.
+     *
+     * @param description description of the task.
+     * @param isDone true if the task has been completed.
+     * @param at date when the task is scheduled at.
+     */
     public Event(String description, boolean isDone, LocalDateTime at) {
         super(description, isDone);
         this.at = at;
@@ -31,6 +41,11 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + this.at.format(outputFormatter) + ")";
     }
 
+    /**
+     * Returns the string representation of the task to be saved in the hard disk.
+     *
+     * @return string to be saved in the hard disk.
+     */
     @Override
     public String toSaveString() {
         return "E" + super.toSaveString() + "|" + this.at.format(outputFormatter);

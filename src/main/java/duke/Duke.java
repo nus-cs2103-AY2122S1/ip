@@ -4,11 +4,19 @@ import duke.commands.Command;
 
 import java.io.IOException;
 
+/**
+ * Container for Duke program.
+ */
 public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Instantiates a Duke object.
+     *
+     * @param filePath string of file path of the previously saved task.txt file (if any).
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the Duke program.
+     */
     public void run() {
         ui.printWelcomeMessage();
         boolean isExit = false;
@@ -36,6 +47,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Drives the Duke program.
+     *
+     * @param args arguments that user inputs.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

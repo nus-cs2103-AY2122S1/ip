@@ -2,10 +2,23 @@ package duke.tasks;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Container for a task item.
+ */
 public class Task {
+    /**
+     * Describes the task item.
+     */
     protected String description;
+
+    /**
+     * Formatter for parsing string into date.
+     */
     protected static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
 
+    /**
+     * True if the task item has been completed; false otherwise.
+     */
     protected boolean isDone;
 
     /**
@@ -18,6 +31,12 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Instantiates a Task Object.
+     *
+     * @param description description of the task item.
+     * @param isDone true if the task has been completed.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -42,13 +61,18 @@ public class Task {
     /**
      * Returns the string representation of the task item.
      *
-     * @return String representation of the task item.
+     * @return string representation of the task item.
      */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * Returns the string representation of the task to be saved in the hard disk.
+     *
+     * @return string to be saved in the hard disk.
+     */
     public String toSaveString() {
         return "|" + (isDone ? "1" : "0") + "|" + this.description;
     }

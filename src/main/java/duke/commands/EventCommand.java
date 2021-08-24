@@ -9,14 +9,29 @@ import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
+/**
+ * Adds an event to the task list.
+ */
 public class EventCommand extends Command {
+    /**
+     * The command word that identifies an EventCommand instance.
+     */
     public static final String COMMAND_WORD = "event";
+
+    /**
+     * Guide on how to use this command word.
+     */
     public static final String MESSAGE_USAGE = COMMAND_WORD +
             " <description> /at <date> - add an event scheduled at <date> in yyyy/MM/dd HHmm (24-hour format)\n" +
             "   Example: " + COMMAND_WORD + " project meeting /at 2021/08/24 1500";
 
     private String userCommand;
 
+    /**
+     * Instantiates EventCommand object.
+     *
+     * @param userCommand full user input.
+     */
     public EventCommand(String userCommand) {
         super();
         this.userCommand = userCommand;

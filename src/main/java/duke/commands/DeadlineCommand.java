@@ -9,14 +9,29 @@ import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
+/**
+ * Adds a deadline task to the task list.
+ */
 public class DeadlineCommand extends Command {
+    /**
+     * The command word to identity DeadlineCommand instance.
+     */
     public static final String COMMAND_WORD = "deadline";
+
+    /**
+     * Guide on how to use this command word.
+     */
     public static final String MESSAGE_USAGE = COMMAND_WORD +
             " <description> /by <date> - add a task to be completed by <date> in yyyy/MM/dd HHmm (24-hour format)\n" +
             "   Example: " + COMMAND_WORD + " project submission /by 2021/08/30 2359";
 
     private String userCommand;
 
+    /**
+     * Instantiates DeadlineCommand object.
+     *
+     * @param userCommand full user input.
+     */
     public DeadlineCommand(String userCommand) {
         super();
         this.userCommand = userCommand;
