@@ -1,15 +1,27 @@
 public class ToDoTask extends Task {
+    private String type;
     /**
      * Constructor for ToDoTask
      *
      * @param description is the string of the description of the given task
      */
+    public ToDoTask(String description, boolean isCompleted) {
+        super(description, "todo", isCompleted);
+        this.type = "T";
+    }
+    
     public ToDoTask(String description) {
-        super(description, "todo");
+        super(description, "todo", false);
+        this.type = "T";
+    }
+    
+    @Override
+    public String saveFormat() {
+        return this.type + "," + super.saveFormat();
     }
 
     @Override
     public String toString() {
-        return "[T] " + super.toString();
+        return "[" + this.type + "] " + super.toString();
     }
 }

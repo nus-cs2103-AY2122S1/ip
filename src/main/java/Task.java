@@ -1,17 +1,15 @@
 public class Task {
     private String description;
     private boolean done;
-    public String type;
 
     /**
      * Private constructor for Task
      *
      * @param description is the string of the description of the given task
      */
-    public Task(String description, String type) {
+    public Task(String description, String type, boolean isCompleted) {
         this.description = description;
-        this.done = false;
-        this.type = type;
+        this.done = isCompleted;
     }
 
     public void setComplete() {
@@ -25,6 +23,15 @@ public class Task {
             return "[ ]";
         }
     }
+
+    protected String saveFormat() {
+        if (done) {
+            return 1 + "," + this.description;
+        } else {
+            return 0 + "," + this.description;
+        }
+    }
+    
     @Override
     public String toString() {
         return this.description;
