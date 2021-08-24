@@ -18,7 +18,7 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        setLocalDateAndTime();
+        localDateTime = new Parser().parseLocalDateTime(at, localDateTime);
         return "[E]" + super.toString() + "(at: " + localDateTime.format(dtf) + ")";
     }
 
@@ -26,14 +26,5 @@ public class Events extends Task {
     public void displayTask() {
         System.out.println(toString());
 
-    }
-
-    private void setLocalDateAndTime() {
-        if (at.substring(0, 1).matches("[0-9]+")) {
-            DateTimeFormatter anotherDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            this.localDateTime = LocalDateTime.parse(at, anotherDTF);
-        } else {
-            this.localDateTime = LocalDateTime.parse(at, dtf);
-        }
     }
 }

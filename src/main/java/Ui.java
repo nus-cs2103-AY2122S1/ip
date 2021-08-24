@@ -59,4 +59,14 @@ public class Ui {
             return "   ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
     }
+
+    public void displayListContents(StorageList storageList) {
+        System.out.println("    Here are the tasks in your list:");
+
+        for (int i = 0; i < storageList.size(); i++) {
+            int num = i + 1;
+            Task task = storageList.get(i);
+            System.out.println("        " + num + "." + task.toString());
+        }
+    }
 }
