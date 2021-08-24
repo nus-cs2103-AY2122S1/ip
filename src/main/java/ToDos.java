@@ -2,12 +2,17 @@ public class ToDos extends Task {
     String type;
 
     ToDos(String title) {
-        super(title.substring(5));
-        this.type = "[T]";
+        super(title);
+        this.type = "T";
     }
 
     @Override
-    String printTask() {
-        return type + super.printTask();
+    public String toString() {
+        return "[" + type + "]" + super.toString();
+    }
+
+    @Override
+    String writeTask() {
+        return type + " | " + super.writeTask();
     }
 }

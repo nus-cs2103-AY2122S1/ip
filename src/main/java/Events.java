@@ -3,13 +3,18 @@ public class Events extends Task {
     String time;
 
     Events (String title, String time) {
-        super(title.substring(6));
-        this.type = "[E]";
+        super(title);
+        this.type = "E";
         this.time = time;
     }
 
     @Override
-    String printTask() {
-        return type + super.printTask() + "(at:" + time + ")";
+    public String toString() {
+        return "[" + type + "]" + super.toString() + "(at:" + time + ")";
+    }
+
+    @Override
+    String writeTask() {
+        return type + " | " + super.writeTask() + " | " + time;
     }
 }

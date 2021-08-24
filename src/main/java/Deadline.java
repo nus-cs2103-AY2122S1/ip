@@ -3,13 +3,18 @@ public class Deadline extends Task {
     String deadline;
 
     Deadline(String title, String deadline) {
-        super(title.substring(9));
-        this.type = "[D]";
+        super(title);
+        this.type = "D";
         this.deadline = deadline;
     }
 
     @Override
-    String printTask() {
-        return type + super.printTask() + "(by:" + deadline + ")";
+    public String toString() {
+        return "[" + type + "]" + super.toString() + "(by:" + deadline + ")";
+    }
+
+    @Override
+    String writeTask() {
+        return type + " | " + super.writeTask() + " | " + deadline;
     }
 }

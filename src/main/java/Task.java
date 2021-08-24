@@ -1,26 +1,23 @@
 public class Task {
     private boolean done;
     private String title;
-    private String check;
 
     Task(String title) {
         this.done = false;
         this.title = title;
-        this.check = "[ ]";
     }
 
-    String printTask() {
-        return check + title;
+    @Override
+    public String toString() {
+        return (done ? "[X]" : "[ ]") + title;
     }
 
     void markAsDone() {
-        this.check = "[X]";
+        done = true;
     }
 
-    void markAsUndone() {
-        this.check = "[ ]";
+    String writeTask() {
+        return (done ? "1" : "0") + " | " + title;
     }
-
-
 
 }
