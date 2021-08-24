@@ -3,6 +3,8 @@ package task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 
 /**
@@ -51,5 +53,54 @@ public enum TaskType {
     public static LocalDate getDate(String date) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         return LocalDate.parse(date, formatter);
+    }
+
+    /**
+     * Get arguments from a multi-argument string
+     *
+     * @param stringToParse String to parse
+     * @return Arraylist with all filters to use to display list
+     * @throws DateTimeParseException Thrown if error in parsing dates
+     * @throws IllegalArgumentException Thrown if an argument is in a wrong format
+     */
+    public static ArrayList<Predicate<Task>> getArguments(String stringToParse)
+            throws DateTimeParseException, IllegalArgumentException {
+
+        // Separate individual commands
+        String[] args = stringToParse.split(" /");
+
+        ArrayList<Predicate<Task>> results = new ArrayList<>();
+
+        for (String str : args) {
+
+            // Ignore any empty strings
+            if (str.equals("")) {
+                continue;
+            }
+
+            // Ensure validity; has a command and an argument
+            int index = str.indexOf(' ');
+            if (index == -1) {
+                throw new IllegalArgumentException("Invalid argument found!");
+            }
+
+            // Get command and argument information
+            String command = str.substring(0, index);
+            String arg = str.substring(index).trim();
+
+            switch (command) {
+                case ("name"):
+                    results.add(task -> task.description.contains(arg));
+                    break;
+                case ("date"):
+                    LocalDate date = TaskType.getDate(arg);
+                    results.add(task -> task.isDate(date));
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid argument found! :(");
+            }
+        }
+
+        return results;
     }
 }
