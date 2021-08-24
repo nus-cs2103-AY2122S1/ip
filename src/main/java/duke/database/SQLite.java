@@ -156,7 +156,7 @@ public class SQLite extends Database {
         try {
             this.connection = getSQLConnection();
             PreparedStatement ps = connection
-                    .prepareStatement("SELECT * FROM " + TASK_TABLE_NAME + " WHERE name LIKE " + pattern + ";");
+                    .prepareStatement("SELECT * FROM " + TASK_TABLE_NAME + " WHERE name LIKE '" + pattern + "';");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 TaskType type = TaskType.valueOf(rs.getString("type"));

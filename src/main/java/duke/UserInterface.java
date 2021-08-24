@@ -50,7 +50,7 @@ public class UserInterface {
 
     public void showTaskList(List<? extends Task> list) {
         String message = IntStream.range(0, list.size()).mapToObj(i -> (i + 1) + ". " + list.get(i))
-                .reduce((str1, str2) -> str1 + "\n" + str2).orElse("You have not added any tasks!");
+                .reduce((str1, str2) -> str1 + "\n" + str2).orElse("Wow, such emptiness!");
         new Response(message).print();
     }
 
