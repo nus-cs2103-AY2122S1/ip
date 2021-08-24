@@ -1,10 +1,23 @@
-import java.util.*;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
+import java.io.File;
+import java.io.IOException;
+
 public class Duke {
-    final String strBreak = "    ____________________________________________________________\n";
-    private ArrayList<Task> tasks = new ArrayList<>();
-    private int count = 0;
+    final private static String strBreak = "    ____________________________________________________________\n";
+    final private static String fileName = "taskList.txt";
+    final private FileManager taskListManager = new FileManager(Duke.fileName);
+    private ArrayList<Task> tasks;
+    private int count;
+
+    private Duke() {
+        tasks = taskListManager.getTaskList();
+        count = tasks.size();
+    }
 
     private void addTask(String input) throws DukeException {
         String type = input.split(" ")[0];
@@ -41,7 +54,7 @@ public class Duke {
                 System.out.println(currentDuke.getTasks());
             } else if (input.split(" ")[0].equals("done")) {
                 int index = Integer.parseInt(input.split(" ")[1]);
-                currentDuke.tasks.get(index - 1).markDone();
+                currentDuke.tasks.get(index - 1).markDone(true);
             } else if (input.split(" ")[0].equals("delete")) {
                 int index = Integer.parseInt(input.split(" ")[1]);
                 currentDuke.removeTask(index - 1);
@@ -54,13 +67,14 @@ public class Duke {
             }
             input = sc.nextLine();
         }
-        Duke.sayBye();
+        currentDuke.sayBye();
     }
 
-    private static void sayBye() {
+    private void sayBye() {
+        taskListManager.updateTaskList(tasks);
         System.out.println("Don't wake me up again");
     }
-    
+
     private void removeTask(int index) {
         Task removedTask = this.tasks.get(index);
         this.tasks.remove(index);

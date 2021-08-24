@@ -12,4 +12,9 @@ public class ToDos extends Task {
     public String toString() {
         return ("[T]" + super.toString());
     }
+
+    @Override
+    public String typeString() {
+        return "todo" + Task.sep + super.toSaveInFile("");
+    }
 }
