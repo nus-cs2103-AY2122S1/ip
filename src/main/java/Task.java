@@ -15,6 +15,16 @@ public class Task {
         this.isDone = true;
     }
 
+    // File operations
+    public int getStatusNumber() {
+        return (isDone ? 1 : 0); // mark done task with 1
+    }
+
+    // Sample: D - 0 - return book - June 6th
+    public String toStringInFile() {
+        return String.format("%d - %s", this.getStatusNumber(), this.description);
+    }
+
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
