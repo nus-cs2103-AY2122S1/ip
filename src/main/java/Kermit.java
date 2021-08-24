@@ -53,7 +53,7 @@ public class Kermit {
         String day = components[0];
         String month = components[1];
         String year = components[2];
-        LocalDate parsedDate = LocalDate.parse(String.join("-", day, month, year));
+        LocalDate parsedDate = LocalDate.parse(String.join("-", year, month, day));
         return parsedDate;
     }
 
