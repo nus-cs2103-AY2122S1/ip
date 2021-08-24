@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.exception.DukeException;
-
 /**
  * Represents the specific exception that is related to the non-recognition.
  *

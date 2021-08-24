@@ -7,10 +7,6 @@ import duke.exception.NotRecognizeException;
 import duke.task.Task;
 
 public class Parser {
-    public Parser() {
-
-    }
-
     /**
      * Returns boolean value which checks whether
      * input string is digit or not.
@@ -34,6 +30,13 @@ public class Parser {
         return isDigit;
     }
 
+    /**
+     * Transfers the user input to correct command.
+     *
+     * @param response The user input.
+     * @return The corresponding command.
+     * @throws DukeException The exception related to duke.
+     */
     public static Command parse(String response) throws DukeException {
         int len = response.length();
         switch (response) {
@@ -66,7 +69,10 @@ public class Parser {
      * Returns the correct enum operation according to response,
      * or it returns null to show exception occurred.
      *
+     * @param response The user input.
+     * @param len The length of user input.
      * @return Type of operation for the next judgement.
+     * @throws DukeException The exception related to duke.
      */
     public static Operation checkResponse(String response, int len) throws DukeException {
         if (response.startsWith("date ")
@@ -88,8 +94,7 @@ public class Parser {
             return Operation.DELETE;
         } else if (response.equals("delete") || response.equals("todo") || response.equals("deadline")
                 || response.equals("event") || response.equals("done") || response.equals("date")) {
-            String curr = response;
-            throw new EmptyInputException(curr);
+            throw new EmptyInputException(response);
         } else {
             //This means there's no match of operations.
             throw new NotRecognizeException();

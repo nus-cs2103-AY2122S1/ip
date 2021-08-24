@@ -14,10 +14,11 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Returns a boolean checking whether the user input is
-     * related to event operations.
+     * Shows the task just be added.
      *
-     * @return Whether the input is related to event or not.
+     * @param tasks The list of tasks.
+     * @param ui The user interaction instance.
+     * @param storage The instance to store data.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

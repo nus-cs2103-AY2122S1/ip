@@ -14,6 +14,13 @@ public class MarkCommand extends Command {
         this.response = response;
     }
 
+    /**
+     * Shows the task just be marked as done.
+     *
+     * @param tasks The list of tasks.
+     * @param ui The user interaction instance.
+     * @param storage The instance to store data.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int curr = Integer.parseInt(response.substring(5));

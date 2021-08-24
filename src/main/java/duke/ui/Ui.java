@@ -30,6 +30,7 @@ public class Ui {
      * Returns the formatted string output.
      *
      * @param task The possible task string representations.
+     * @param count The number of tasks.
      * @return The desirable output string related to task.
      */
     public String getOutputFrame(String task, int count) {
@@ -68,9 +69,10 @@ public class Ui {
     }
 
     /**
-     * Returns all strings stored with indexing.
+     * Shows all strings stored with indexing.
      *
-     * @return All user's stored strings.
+     * @param tasks The list of tasks.
+     * @param count The number of tasks.
      */
     public void showList(TaskList tasks, int count) {
         StringBuilder curr = new StringBuilder();
@@ -87,6 +89,12 @@ public class Ui {
         System.out.println(curr);
     }
 
+    /**
+     * Shows the deleted task.
+     *
+     * @param shouldDelete The task should be deleted.
+     * @param tasks The list of tasks.
+     */
     public void showDelete(Task shouldDelete, TaskList tasks) {
         String title = "   Noted. I've removed this task: \n";
         String out = "     " + shouldDelete.toString() + "\n   ";
@@ -103,6 +111,11 @@ public class Ui {
         System.out.println(e.getMessage());
     }
 
+    /**
+     * Shows the task marked as done.
+     *
+     * @param stringForm The string form of that task.
+     */
     public void showDone(String stringForm) {
         String title = "   Nice! I've marked this task as done: \n";
         String out = "     " + stringForm;

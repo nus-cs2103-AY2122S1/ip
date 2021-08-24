@@ -43,11 +43,23 @@ public class Task {
         return "[" + getStatusIcon() + "] " + getDescription();
     }
 
+    /**
+     * Returns the correct string form of date.
+     *
+     * @param date The date form in yy-mm-dd.
+     * @return The specified string form of date.
+     */
     public static String getDate(String date) {
         LocalDate d = LocalDate.parse(date);
         return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * Returns the date representation from the user input.
+     *
+     * @param date The date made by user.
+     * @return The date transformed in standard form.
+     */
     public static String transferToDateFormat(String date) {
         int lens = date.length();
         if (lens > 10) {
@@ -64,6 +76,12 @@ public class Task {
         return date;
     }
 
+    /**
+     * Returns whether the year,month and day are valid.
+     *
+     * @param parts The user input of date in parts.
+     * @return A boolean.
+     */
     public static boolean isDateFirstPart(String[] parts) {
         if (parts.length != 3) {
             return false;
@@ -79,6 +97,12 @@ public class Task {
                 && validMonth;
     }
 
+    /**
+     * Returns whether the input is date or not.
+     *
+     * @param input The user input of date.
+     * @return True or not.
+     */
     public static boolean isDate(String input) {
         int lens = input.length();
         if (lens > 10) {
@@ -106,6 +130,12 @@ public class Task {
         }
     }
 
+    /**
+     * Returns the correct time representation in string.
+     *
+     * @param time The user input time.
+     * @return The specified time representation.
+     */
     public static String getTime(String time) {
         int hr1 = time.charAt(0) - '0';
         int hr2 = time.charAt(1) - '0';
@@ -121,6 +151,12 @@ public class Task {
         return ((Integer) hrFinal).toString() + '.' + time.substring(2, 4) + day;
     }
 
+    /**
+     * Returns the time string in correct form.
+     *
+     * @param preTime The time user input.
+     * @return The specified form of time.
+     */
     public static String dateAndTime(String preTime) {
         if (isDate(preTime)) {
             int lens = preTime.length();
