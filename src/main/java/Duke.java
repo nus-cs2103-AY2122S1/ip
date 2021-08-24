@@ -10,7 +10,7 @@ public class Duke {
         try {
             Storage storage = new Storage("./data/list1.txt");
             TaskList list = new TaskList();
-            DukeParser parser = new DukeParser(list);
+            DukeParser parser = new DukeParser(list, storage);
 
             UI.printGreeting();
             String input = UI.getUserInput();
@@ -18,7 +18,7 @@ public class Duke {
             while (!input.equals("bye")) {
                 try {
                     parser.parse(input);
-                } catch (DukeException e) {
+                } catch (DukeException | IOException e) {
                     UI.printError(e);
                 } finally {
                     input = UI.getUserInput();

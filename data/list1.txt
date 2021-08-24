@@ -1,0 +1,2 @@
+D | 1 |  sleep  |  5pm
+E | 0 |  party  |  3pm

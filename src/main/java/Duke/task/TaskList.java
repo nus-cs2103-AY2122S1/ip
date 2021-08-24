@@ -8,13 +8,14 @@ import java.util.ArrayList;
 public class TaskList {
     private final ArrayList<Task> list;
 
+
     public TaskList(){
         this.list = new ArrayList<>();
+
     }
 
-    public void addTask(Task task){
+    public void addTask(Task task) {
         list.add(task);
-
     }
 
     public Task getTask(int taskNumber){

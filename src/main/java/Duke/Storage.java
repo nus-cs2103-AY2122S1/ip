@@ -4,12 +4,15 @@ import Duke.task.TaskList;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.FileWriter;
 
 public class Storage {
-    File file;
+    private String filePath;
+    private File file;
 
     public Storage(String filePath) throws IOException {
-        file = new File(filePath);
+        this.filePath = filePath;
+        this.file = new File(filePath);
         if(!file.exists()){
             file.getParentFile().mkdirs();
             file.createNewFile();
@@ -21,7 +24,9 @@ public class Storage {
 //        return
 //    }
 
-    public void saveList(TaskList list){
-
+    public void writeList(TaskList list) throws IOException{
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(list.toStorageString());
+        fw.close();
     }
 }
