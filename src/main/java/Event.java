@@ -12,6 +12,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String toCsvRow() {
+        return String.join(",", name, time, String.valueOf(isDone));
+    }
+
+    @Override
     public String toString(){
         return String.format("[E][%s] %s (at: %s)",
                 this.isDone ? "X" : " ", name, time);

@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String name;
     protected boolean isDone;
 
@@ -19,6 +19,8 @@ public class Task {
     public void markDone(){
         this.isDone = true;
     }
+
+    public abstract String toCsvRow();
 
     @Override
     public String toString(){

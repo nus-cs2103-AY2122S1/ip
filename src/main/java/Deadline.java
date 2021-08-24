@@ -11,6 +11,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toCsvRow() {
+        return String.join(",", name, time, String.valueOf(isDone));
+    }
+
+    @Override
     public String toString(){
         if (this.isDone){
             return "[D][X] " + name + " (by: " + time + ")";
