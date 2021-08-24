@@ -1,14 +1,16 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
 
-    private final static DukeList list = new DukeList();
+    protected final static DukeList list = new DukeList();
 
-    private enum TaskType {
+    protected enum TaskType {
         TODO,
         DEADLINE,
         EVENT,
-        INVALID
     }
 
     private static void display(String content) {
@@ -27,6 +29,7 @@ public class Duke {
         int descriptionEnd;
         String description;
         String dateTime;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         Task task;
         switch (type) {
             case TODO:
@@ -48,7 +51,6 @@ public class Duke {
                 task = new ToDo(description);
                 break;
             case DEADLINE:
-                // DOES NOT CATCH INVALID INPUTS SUCH AS "deadline ${String} /by /by"
                 try {
                     // filter out deadlineXXXX
                     // StringIndexOutOfBoundsException thrown here if input = "deadline"
@@ -69,13 +71,13 @@ public class Duke {
                     if (dateTime.trim().isEmpty()) {
                         throw new InvalidArgumentsException();
                     }
-                } catch (StringIndexOutOfBoundsException e) {
+                    task = new Deadline(description, LocalDateTime.parse(dateTime, formatter));
+                } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
                     throw new InvalidArgumentsException();
                 }
-                task = new Deadline(description, dateTime);
+
                 break;
             case EVENT:
-                // DOES NOT CATCH INVALID INPUTS SUCH AS "event ${String} /at /at"
                 try {
                     // filter out eventXXXX
                     // StringIndexOutOfBoundsException thrown here if input = "event"
@@ -96,10 +98,10 @@ public class Duke {
                     if (dateTime.trim().isEmpty()) {
                         throw new InvalidArgumentsException();
                     }
-                } catch (StringIndexOutOfBoundsException e) {
+                    task = new Event(description, LocalDateTime.parse(dateTime, formatter));
+                } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
                     throw new InvalidArgumentsException();
                 }
-                task = new Event(description, dateTime);
                 break;
             default:
                 throw new InvalidTaskException();
@@ -198,7 +200,7 @@ public class Duke {
                 }
             } else {
                 try {
-                    addTask(input, TaskType.INVALID);
+                    throw new InvalidTaskException();
                 } catch (DukeException e) {
                     display(e.getMessage());
                 }
