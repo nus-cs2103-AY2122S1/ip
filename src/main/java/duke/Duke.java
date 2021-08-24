@@ -46,35 +46,46 @@ public class Duke {
 
                 } else if (type == Parser.CommandType.LIST) {
                     // List all tasks in the task list.
-                    System.out.println("Here are the tasks in your list:");
-                    this.taskList.listTasks();
+                    this.ui.printMessage(this.taskList.listTasks());
 
                 } else if (type == Parser.CommandType.DONE) {
                     // Mark a certain task as done.
-                    String[] split = userInput.split(" ");
+                    String[] splitString = userInput.split(" ");
 
-                    if (split.length > 1) {
-                        int taskNumber = Integer.parseInt(split[1].trim());
-                        this.taskList.markTaskAsDone(taskNumber);
+                    if (splitString.length > 1) {
+                        int taskNumber = Integer.parseInt(splitString[1].trim());
+                        this.ui.printMessage(this.taskList.markTaskAsDone(taskNumber));
                         this.storage.save(this.taskList);
 
                     } else {
                         throw new DukeException("☹ OOPS!!! Please state which task number "
-                                + "you want to mark as done.");
+                                + "you want to mark\n as done.");
                     }
 
                 } else if (type == Parser.CommandType.DELETE) {
                     // Deletes a task from the task list.
-                    String[] split = userInput.split(" ", 2);
+                    String[] splitString = userInput.split(" ", 2);
 
-                    if (split.length > 1 && split[1].trim().length() > 0) {
-                        int taskNumber = Integer.parseInt(split[1].trim());
-                        this.taskList.deleteTask(taskNumber);
+                    if (splitString.length > 1 && splitString[1].trim().length() > 0) {
+                        int taskNumber = Integer.parseInt(splitString[1].trim());
+                        this.ui.printMessage(this.taskList.deleteTask(taskNumber));
                         this.storage.save(this.taskList);
 
                     } else {
-                        throw new DukeException("☹ OOPS!!! Please state which task number"
-                                + "you want to delete.");
+                        throw new DukeException("☹ OOPS!!! Please state which task number "
+                                + "you want to\n delete.");
+                    }
+
+                } else if (type == Parser.CommandType.FIND) {
+                    // Finds the tasks in the task list that contain the String.
+                    String[] splitString = userInput.split(" ", 2);
+
+                    if (splitString.length > 1 && splitString[1].trim().length() > 0) {
+                        String toSearch = splitString[1].trim();
+                        this.ui.printMessage(this.taskList.find(toSearch));
+
+                    } else {
+                        throw new DukeException("☹ OOPS!!! Please give a search query.");
                     }
 
                 } else if (type == Parser.CommandType.UNKNOWN) {
@@ -136,14 +147,14 @@ public class Duke {
                                 }
                                 break;
                         }
-                        this.taskList.addTask(newTask);
+                        this.ui.printMessage(this.taskList.addTask(newTask));
                         this.storage.save(this.taskList);
 
                     } else {
                         throw new DukeException("☹ OOPS!!! The description of a " + split[0]
                                 + " cannot be empty.");
                     }
-                }gi
+                }
             } catch (DukeException de) {
                 this.ui.showError(de);
             }
