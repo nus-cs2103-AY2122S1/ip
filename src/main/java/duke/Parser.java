@@ -1,6 +1,17 @@
 package duke;
 
+/**
+ * Deals with the input given by the user and making sense of it.
+ */
 public class Parser {
+    /**
+     * Processes the input given by the user.
+     * Returns the corresponding Command afterwards.
+     *
+     * @param input String representation of the input given by user.
+     * @return The corresponding Command.
+     * @throws DukeException
+     */
     public static Command parse(String input) throws DukeException {
         input = input.strip();
         String[] inputs = input.split(" ");
@@ -40,7 +51,7 @@ public class Parser {
         case "event":
             return new Command.AddCommand(input, 2);
         default:
-            return new Command.UnknowCommand();
+            return new Command.UnknownCommand();
         }
     }
 }
