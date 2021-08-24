@@ -43,7 +43,7 @@ public class TaskArrayList extends ArrayList<Task> {
 
 
     private String newLength(){
-        return String.format("Now you have %d %s in the list.",this.size(),this.size()==1?"task": "duke/tasks");
+        return String.format("Now you have %d %s in the list.",this.size(),this.size()==1?"task": "tasks");
     }
 
     /**
