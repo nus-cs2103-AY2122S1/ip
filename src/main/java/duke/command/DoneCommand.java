@@ -5,7 +5,7 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     private final int taskNum;
 

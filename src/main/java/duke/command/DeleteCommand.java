@@ -5,7 +5,7 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
     private final int taskNum;
 
