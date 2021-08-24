@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -8,6 +10,7 @@ import java.util.Scanner;
 public class Duke {
 
     public static String breakline = "____________________________________________________________";
+    public static String fileDirectory = "src\\main\\java\\data\\tasklist.txt";
 
     /**
      * Provides the initialization message for the Duke Program
@@ -31,9 +34,10 @@ public class Duke {
     public static void main(String[] args) {
         String cmd;
         Scanner scanner = new Scanner(System.in);
-        Tasklist tasklist = new Tasklist();
-
         start();
+        ArrayList<Task> tasks = new ArrayList<>();
+        Tasklist tasklist = new Tasklist(tasks).readFile();
+
         while (true) {
             cmd = scanner.next();
             String input = scanner.nextLine();
@@ -41,6 +45,7 @@ public class Duke {
 
             switch (cmd) {
                 case "bye":
+                    tasklist.updateFile();
                     exit();
                     return;
                 case "list":
@@ -53,7 +58,7 @@ public class Duke {
                 case "todo":
                 case "deadline":
                 case "event":
-                    task = Task.parseStringIntoTask(input, cmd);
+                    task = Task.parseStringIntoTask(input, cmd, false);
                     tasklist.add(task);
                     break;
                 case "delete":

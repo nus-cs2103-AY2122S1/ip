@@ -6,15 +6,15 @@
 public class Deadline extends Task{
 
     private String deadline;
-    final static String split = " /by";
+    private static String taskCat = "deadline";
 
     /**
      *  Constructor to create an DEADLINE task
      * @param name Name of task
      * @param deadline Deadline of task
      */
-    Deadline(String name, String deadline) {
-        super(name);
+    Deadline(String name, String deadline, boolean isDone) {
+        super(name, taskCat, isDone);
         this.deadline = deadline;
     }
 
@@ -29,5 +29,13 @@ public class Deadline extends Task{
         } else {
             return String.format("[D][ ] %s (by: %s)", this.getName(), this.deadline);
         }
+    }
+
+    /**
+     * @return Gets deadline of task
+     */
+    @Override
+    public String getDetail() {
+        return "/by " + this.deadline;
     }
 }
