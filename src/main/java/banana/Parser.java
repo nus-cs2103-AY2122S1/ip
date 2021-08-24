@@ -47,7 +47,7 @@ public class Parser {
     }
 
     /**
-     * Checks how to handle the users
+     * Checks how to handle the user's
      * input command.
      *
      * @param tasks the list of tasks.
@@ -113,7 +113,7 @@ public class Parser {
     }
 
     /**
-     * Adds an Event or a Deadline,
+     * Adds an Event or a Deadline and
      * gets the time/date in correct format
      * if necessary.
      *
