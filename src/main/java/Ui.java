@@ -57,6 +57,10 @@ public class Ui {
         System.out.println("\t Bye. Hope to see you again soon");
     }
 
+    public void displaySaveMessage() {
+        System.out.println("\t List successfully saved");
+    }
+
     public void invalidCommand() throws DukeException {
         String errorMessage = "\t Sorry I do not understand this command \n";
         errorMessage += "\t Please use one of the following commands: \n";

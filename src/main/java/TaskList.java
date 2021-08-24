@@ -26,6 +26,10 @@ public class TaskList {
         return this.tasks.get(index);
     }
 
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
+    }
+
     // For List command
     @Override
     public String toString() {
