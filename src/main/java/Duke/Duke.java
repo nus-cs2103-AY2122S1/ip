@@ -1,22 +1,16 @@
 package Duke;
 
-import Duke.Commands.Command;
+import Duke.Commands.Parser;
 import Duke.Storage.FileFormatException;
 import Duke.Storage.TaskStorage;
 import Duke.Task.TaskList;
+import Duke.Ui.Ui;
+import Duke.Ui.UserInput;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Duke {
     private static final String DEFAULT_TODO_STORAGE_PATH = "data/duke.txt";
-    private static final String GREETING_MESSAGE = "Hello I'm Duke!";
-    private static final String EXIT_MESSAGE = "Bye bye! Hope you have a productive day :)";
-    private static final String ERROR_MESSAGE = "Oops! An error occurred: %s";
-    private static final String FILE_FORMAT_ERROR_MESSAGE = "The file storing your tasks is in an unrecognized format. "
-        + "Please fix or remove it.";
-    private static final String RULER = "\n````````````````````````````````````````````````````````\n";
-    private static final String INPUT_PROMPT = "> ";
 
     private boolean stopped = false;
     private final TaskList taskList;
@@ -26,7 +20,7 @@ public class Duke {
         try {
             this.taskList = new TaskList(taskStorage);
         } catch (FileFormatException e) {
-            this.say(FILE_FORMAT_ERROR_MESSAGE);
+            Ui.print(Ui.FILE_FORMAT_ERROR_MESSAGE);
             throw e;
         }
     }
@@ -35,24 +29,18 @@ public class Duke {
         this(DEFAULT_TODO_STORAGE_PATH);
     }
 
-    public void say(String message) {
-        message = RULER + message + RULER;
-        String indentedMessage = String.join("\n\t", message.split("\n"));
-        System.out.println(indentedMessage);
-    }
-
     public void run() {
-        this.say(GREETING_MESSAGE);
+        Ui.print(Ui.GREETING_MESSAGE);
         while (!this.stopped) {
             UserInput input = new UserInput();
             input.readAndParse();
             try {
-                Command.matching(input).run(this, input);
+                Parser.parse(input).run(this, input);
             } catch (DukeException e) {
-                this.say(String.format(ERROR_MESSAGE, e.getMessage()));
+                Ui.print(String.format(Ui.ERROR_MESSAGE, e.getMessage()));
             }
         }
-        this.say(EXIT_MESSAGE);
+        Ui.print(Ui.EXIT_MESSAGE);
     }
 
     public void stop() {
@@ -61,33 +49,5 @@ public class Duke {
 
     public TaskList getTaskList() {
         return this.taskList;
-    }
-
-    public static class UserInput {
-        private static final Scanner scanner = new Scanner(System.in);
-
-        private String raw;
-        private String keyword;
-        private String args;
-
-        private void readAndParse() {
-            System.out.print(INPUT_PROMPT);
-            this.raw = UserInput.scanner.nextLine();
-            String[] splitInput = this.raw.trim().split("\\s+", 2);
-            this.keyword = splitInput[0];
-            this.args = splitInput.length > 1 ? splitInput[1] : "";
-        }
-
-        public String getKeyword() {
-            return this.keyword;
-        }
-
-        public String getArgs() {
-            return this.args;
-        }
-
-        public String getRaw() {
-            return this.raw;
-        }
     }
 }

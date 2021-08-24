@@ -2,6 +2,8 @@ package Duke.Commands;
 
 import Duke.Duke;
 import Duke.Task.*;
+import Duke.Ui.Ui;
+import Duke.Ui.UserInput;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -28,14 +30,14 @@ class AddTaskCommand extends Command {
     }
 
     @Override
-    public void run(Duke duke, Duke.UserInput input) throws InvalidTaskException {
+    public void run(Duke duke, UserInput input) throws InvalidTaskException {
         Task newTask = createTask(input);
         TaskList taskList = duke.getTaskList();
         taskList.add(newTask);
-        duke.say(String.format(ADD_TASK_SUCCESS_MESSAGE, newTask, taskList.size()));
+        Ui.print(String.format(ADD_TASK_SUCCESS_MESSAGE, newTask, taskList.size()));
     }
 
-    private static Task createTask(Duke.UserInput input) throws InvalidTaskException {
+    private static Task createTask(UserInput input) throws InvalidTaskException {
         TaskType taskType = TaskType.valueOf(input.getKeyword().toUpperCase());
         try {
             switch (taskType) {

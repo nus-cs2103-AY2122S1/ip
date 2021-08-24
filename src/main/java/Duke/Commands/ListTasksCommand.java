@@ -1,6 +1,8 @@
 package Duke.Commands;
 
 import Duke.Duke;
+import Duke.Ui.Ui;
+import Duke.Ui.UserInput;
 
 import java.util.HashSet;
 import java.util.List;
@@ -11,8 +13,8 @@ class ListTasksCommand extends Command {
     private static final String HELP_MESSAGE = "Here are the tasks in your list:\n%s";
 
     @Override
-    public void run(Duke duke, Duke.UserInput input) {
-        duke.say(String.format(HELP_MESSAGE, duke.getTaskList().toString()));
+    public void run(Duke duke, UserInput input) {
+        Ui.print(String.format(HELP_MESSAGE, duke.getTaskList().toString()));
     }
 
     @Override
