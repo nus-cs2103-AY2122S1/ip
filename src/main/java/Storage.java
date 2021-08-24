@@ -86,7 +86,7 @@ public class Storage {
                     }
                 }
             }
-            System.out.println("I've updated their statuses for ya!\n");
+            System.out.println("Everything is in order now!\n");
         } catch (FileNotFoundException e) {
             File f = new File("./data/task-list.txt");
             try {
