@@ -3,6 +3,9 @@ package core;
 import gui.Ui;
 import tasks.Task;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -51,5 +54,17 @@ public class TaskList {
 
     public int getSize() {
         return listOfTasks.size();
+    }
+
+    public void saveContents(File file) {
+        try {
+            FileWriter fw = new FileWriter(file.getPath());
+            for (Task task : listOfTasks) {
+                fw.write(task.toStorageFormat() +"\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
     }
 }
