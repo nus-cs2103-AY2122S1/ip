@@ -9,7 +9,7 @@ public class Ui {
      * Welcome text to display when duke.Duke starts up
      */
     public static void intro() {
-        String welcomeText = "When the duke.Duke is sus";
+        String welcomeText = "When the Duke is sus";
 
         String mascot ="\n" +
                 "       `:ossys/`              \n" +
@@ -41,7 +41,7 @@ public class Ui {
         );
         System.out.println(
                 Ui.LINE +
-                "Hello! I'm duke.Duke!\n" +
+                "Hello! I'm Duke!\n" +
                 "What can I do for you?\n" +
                 Ui.LINE
         );

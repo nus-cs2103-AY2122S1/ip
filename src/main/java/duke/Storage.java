@@ -15,6 +15,7 @@ import java.util.Scanner;
 public class Storage {
 
     private static final String FILE_LOCATION = "data\\TaskList.txt";
+    private static final String PATH_LOCATION = "data";
 
     public static void saveList(ArrayList<Task> tasks) {
         try {
@@ -44,7 +45,12 @@ public class Storage {
             return new TaskList(loaded);
 
         } catch (FileNotFoundException e) {
-            System.out.println("Save file not found, using new file");
+            System.out.println("Save file not found, creating new file");
+            // Create directory if doesn't exist
+            File directory = new File(PATH_LOCATION);
+            if (! directory.exists()){
+                directory.mkdir();
+            }
             return new TaskList();
 
         } catch (ParseException | IllegalArgumentException e) {
