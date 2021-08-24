@@ -1,7 +1,12 @@
+import java.time.DateTimeException;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.List;
+import java.time.LocalDateTime;
+
 
 public class Duke {
     public static void main(String[] args) {
@@ -40,55 +45,43 @@ public class Duke {
     }
 
     /**
-     * Deletes a task from the array of tasks.
-     * @param userInput String of task to delete.
-     * @param tasks List of current tasks.
-     */
-    public static void deleteTask(String userInput, List<Task> tasks) {
-        try {
-            int taskToDel = Integer.parseInt(userInput.substring(7)) - 1;
-            System.out.println(taskToDel);
-            Task task = tasks.get(taskToDel);
-            tasks.remove(taskToDel);
-            dukeReply(String.format("Noted. I've removed this task:\n%s\nNow you have %s tasks in list"
-                    , task, tasks.size()));
-        } catch(StringIndexOutOfBoundsException e) {
-            dukeReply("OOPS!!! You cannot delete nothing!");
-        } catch(NumberFormatException e) {
-            dukeReply("OOPS!!! Must be a number bodoh");
-        } catch(IndexOutOfBoundsException e) {
-            dukeReply("OOPS!!! Number doesnt exist");
-        }
-    }
-
-    /**
      * Adds a task to the List of tasks.
      * @param userInput String of task to add.
      * @param tasks List of current tasks.
      */
     public static void addTask(String userInput, List<Task> tasks) {
         Task taskToAdd;
+
         try{
             if(userInput.toLowerCase().startsWith("todo")) {
                 taskToAdd = new ToDo(userInput.substring(5));
-            } else if (userInput.toLowerCase().startsWith("deadline")){
-                int dateIndex = userInput.indexOf("/by");
-                String[] dateAndTask = sepDateFromTask(dateIndex,9, userInput);
-                taskToAdd = new Deadline(dateAndTask[0], dateAndTask[1]);
-            } else if(userInput.toLowerCase().startsWith("event")) {
-                int dateIndex = userInput.indexOf("/at");
-                String[] dateAndTask = sepDateFromTask(dateIndex,6, userInput);
-                taskToAdd = new Event(dateAndTask[0], dateAndTask[1]);
             } else {
-                throw new IllegalArgumentException("Please specify type of task");
+                String[] input = userInput.split(" ");
+
+                int taskIndex = input[0].length() + 1;
+                int dateIndex = userInput.indexOf("/");
+                String[] dateAndTask = sepDateFromTask(dateIndex,taskIndex, userInput);
+
+                String str = dateAndTask[1];
+                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                LocalDateTime dateTime = (LocalDateTime.parse(str, inputFormat));
+
+                if (userInput.toLowerCase().startsWith("deadline")){
+                    taskToAdd = new Deadline(dateAndTask[0], dateTime);
+                } else if(userInput.toLowerCase().startsWith("event")) {
+                    taskToAdd = new Event(dateAndTask[0], dateTime);
+                } else {
+                    throw new IllegalArgumentException("Please specify type of task");
+                }
             }
+
             tasks.add(taskToAdd);
             dukeReply(String.format("Got it. I've added this task:\n" +
                     "%s\nNumber of tasks: %s", taskToAdd.toString(), tasks.size()));
-        }catch(IllegalArgumentException e) {
+        } catch(IllegalArgumentException e) {
             dukeReply("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } catch(StringIndexOutOfBoundsException e) {
-            dukeReply("OOPS!!! The description of a todo cannot be empty.");
+        } catch(Exception e) {
+            dukeReply("Invalid Input format -> <taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
         }
     }
 
@@ -110,6 +103,28 @@ public class Duke {
             date = "?";
         }
         return new String[] {task, date};
+    }
+
+    /**
+     * Deletes a task from the array of tasks.
+     * @param userInput String of task to delete.
+     * @param tasks List of current tasks.
+     */
+    public static void deleteTask(String userInput, List<Task> tasks) {
+        try {
+            int taskToDel = Integer.parseInt(userInput.substring(7)) - 1;
+            System.out.println(taskToDel);
+            Task task = tasks.get(taskToDel);
+            tasks.remove(taskToDel);
+            dukeReply(String.format("Noted. I've removed this task:\n%s\nNow you have %s tasks in list"
+                    , task, tasks.size()));
+        } catch(StringIndexOutOfBoundsException e) {
+            dukeReply("OOPS!!! You cannot delete nothing!");
+        } catch(NumberFormatException e) {
+            dukeReply("OOPS!!! Must be a number bodoh");
+        } catch(IndexOutOfBoundsException e) {
+            dukeReply("OOPS!!! Number doesnt exist");
+        }
     }
 
     /**

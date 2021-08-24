@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     private String task;
     private Boolean isDone;
@@ -6,6 +9,11 @@ public class Task {
     public Task(String task) {
         this.task = task;
         this.isDone = false;
+    }
+
+    public String dateToString(LocalDateTime dateTime) {
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MM yyyy | HHmm");
+        return dateTime.format(outputFormat);
     }
 
     /**
