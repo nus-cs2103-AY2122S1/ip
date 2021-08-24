@@ -106,7 +106,7 @@ public class Parser {
 
     public static boolean parseDone(TaskList taskList, String[] userInput)
             throws DukeException {
-        if (userInput.length == 0) {
+        if (userInput.length == 1) {
             throw new DukeException("No task number entered!");
         }
         int doneNumber = Integer.parseInt(userInput[1].trim()) - 1;

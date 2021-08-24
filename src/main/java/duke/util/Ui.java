@@ -30,27 +30,34 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    public void showTaskAdded(Task task, int listLength) {
-        System.out.printf("added: " + task.toString()
+    public String showTaskAdded(Task task, int listLength) {
+        String output = String.format("added: " + task.toString()
                 + "\nNow you have %s tasks in your list\n" , listLength);
+        System.out.println(output);
+        return output;
     }
 
-    public void showTaskDeleted(Task task, int listLength) {
-        System.out.printf("Noted. I've removed this task:\n" + task.toString()
+    public String showTaskDeleted(Task task, int listLength) {
+        String output = String.format("Noted. I've removed this task:\n" + task.toString()
                 + "\nNow you have %s tasks in your list\n" , listLength);
+        System.out.println(output);
+        return output;
     }
 
-    public void showTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n"
-                + task.toString());
+    public String showTaskDone(Task task) {
+        String output = "Nice! I've marked this task as done:\n"
+                + task.toString();
+        System.out.println(output);
+        return output;
     }
 
     public void showBye() {
         System.out.println("Bye! Hope to see you again soon!");
     }
 
-    public void printError(String message) {
+    public String printError(String message) {
         System.out.println(message);
+        return message;
     }
 
 

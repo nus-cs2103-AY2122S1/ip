@@ -13,24 +13,23 @@ import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> taskList;
-    private Ui ui;
+    private Ui ui = new Ui();
 
-    public TaskList(ArrayList<Task> taskList, Ui ui) {
+    public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
-        this.ui = ui;
     }
 
-    public TaskList(Ui ui) {
-        this(new ArrayList<>(), ui);
+    public TaskList() {
+        this(new ArrayList<>());
     }
 
     public int listLength() {
         return taskList.size();
     }
 
-    public void addTaskToList(Task task) {
+    public String addTaskToList(Task task) {
         taskList.add(task);
-        ui.showTaskAdded(task, taskList.size());
+        return ui.showTaskAdded(task, taskList.size());
     }
 
     public void printTasksInList() {
@@ -40,48 +39,56 @@ public class TaskList {
         }
     }
 
-    public void deleteFromList(int deleteNumber) throws DukeException {
+    public String deleteFromList(int deleteNumber) {
         Task task = taskList.get(deleteNumber);
         taskList.remove(deleteNumber);
-        ui.showTaskDeleted(task, taskList.size());
+        return ui.showTaskDeleted(task, taskList.size());
     }
 
-    public void setTaskAsDone(int doneNumber) throws DukeException {
+    public String setTaskAsDone(int doneNumber) {
         Task task = taskList.get(doneNumber);
         task.setDone();
-        ui.showTaskDone(task);
+        return ui.showTaskDone(task);
     }
 
 
-    public void addDeadlineToList(String description, String by) throws DukeException {
+    public String addDeadlineToList(String description, String by) throws DukeException {
         try {
             LocalDate date = Parser.parseDate(by);
             Deadline deadline = new Deadline(description, date);
-            addTaskToList(deadline);
+            return addTaskToList(deadline);
         } catch (DateTimeParseException | ParseException e) {
             throw new InvalidDateTimeException();
         }
     }
 
-    public void addEventToList(String description, String at) throws DukeException {
+    public String addEventToList(String description, String at) throws DukeException {
         try {
             LocalDate date = Parser.parseDate(at);
             Event event = new Event(description, date);
-            addTaskToList(event);
+            return addTaskToList(event);
         } catch (DateTimeParseException | ParseException e) {
             throw new InvalidDateTimeException();
         }
     }
 
-    public void addTodoToList(String description) {
+    public String addTodoToList(String description) {
         Todo todo = new Todo(description);
-        addTaskToList(todo);
+        return addTaskToList(todo);
     }
 
     public void saveTasksInStorage(FileWriter writer) throws IOException {
         for (Task tasks : taskList) {
             writer.write(tasks.saveTaskFormat() + System.lineSeparator());
         }
+    }
+
+    public String getTasks() {
+        String tasks = "Here are the tasks in your list:\n";
+        for (int i = 0; i < taskList.size(); i++) {
+            tasks += String.format("\t%s.%s\n", i + 1, taskList.get(i).toString());
+        }
+        return tasks;
     }
 
 }
