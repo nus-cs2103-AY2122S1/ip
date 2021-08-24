@@ -156,19 +156,19 @@ public class Duke {
         for (Task s : list) {
             if (s instanceof Todo) {
                 fw.write("T" + "\r\n");
-                fw.write(s.description+ "\r\n");
+                fw.write(s.description + "\r\n");
             } else if (s instanceof Event) {
                 Event e = (Event) s;
-                fw.write("E"+ "\r\n");
-                fw.write(s.description+ "\r\n");
-                fw.write(e.date+ "\r\n");
+                fw.write("E" + "\r\n");
+                fw.write(s.description + "\r\n");
+                fw.write(e.date + "\r\n");
             } else if (s instanceof Deadline) {
                 Deadline e = (Deadline) s;
-                fw.write("D"+ "\r\n");
-                fw.write(s.description+ "\r\n");
-                fw.write(e.date+ "\r\n");
+                fw.write("D" + "\r\n");
+                fw.write(s.description + "\r\n");
+                fw.write(e.date + "\r\n");
             }
-            fw.write(s.isDone ? "1" : "0");
+            fw.write(s.isDone ? "1" : "0" + "\r\n");
         }
         fw.close();
         } catch (IOException e) {
@@ -197,7 +197,7 @@ public class Duke {
                     fw.write(s.description+ "\r\n");
                     fw.write(e.date+ "\r\n");
                 }
-                fw.write(s.isDone ? "1" : "0");
+                fw.write(s.isDone ? "1" : "0" + "\r\n");
             }
             fw.close();
         } catch (IOException e) {
