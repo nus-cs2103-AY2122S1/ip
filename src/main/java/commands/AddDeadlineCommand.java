@@ -3,6 +3,10 @@ import tasks.DeadlineTask;
 import java.time.format.DateTimeParseException;
 import exceptions.DukeException;
 
+/**
+ * This is an AddDeadlineCommand Class, which inherits from AddCommand.
+ * The execution of this command will add a deadline task to the task list.
+ */
 public class AddDeadlineCommand extends AddCommand {
     private static final String DELIMITER = "/by";
     public static final String KEYWORD = "deadline";
@@ -12,6 +16,11 @@ public class AddDeadlineCommand extends AddCommand {
     private static final String INPUT_FORMAT = String.format("\t\"%s [task] %s " +
             "[dd-mm-yyyy hh:mm]\"", KEYWORD, DELIMITER);
 
+    /**
+     * Constructor for AddDeadlineCommand.
+     * @param userInput The input string entered by the user.
+     * @throws DukeException
+     */
     public AddDeadlineCommand(String userInput) throws DukeException {
         // Check whether input contains delimiter
         boolean hasDelimiter = userInput.contains(DELIMITER);

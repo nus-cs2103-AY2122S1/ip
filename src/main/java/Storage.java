@@ -8,12 +8,19 @@ import exceptions.DukeException;
 import tasks.TaskList;
 import tasks.Task;
 
+/**
+ * This is a Storage class, which encapsulates storage of tasks.
+ */
 public class Storage {
     private static final String DIRECTORY_PATH = "./duke-files";
     private static final String FILE_PATH = DIRECTORY_PATH + "/tasks.txt";
     private final StorageParser parser = new StorageParser();
     private final File file;
 
+    /**
+     * Constructor for Storage.
+     * @throws DukeException
+     */
     public Storage() throws DukeException {
         File directory = new File(DIRECTORY_PATH);
         boolean isDirectoryExist = directory.exists();
@@ -28,6 +35,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads data from specified file.
+     * @param taskList The existing list of tasks from the file.
+     * @throws DukeException
+     */
     public void load(TaskList taskList) throws DukeException {
         try {
             Scanner sc = new Scanner(this.file);
@@ -45,8 +57,12 @@ public class Storage {
         }
     }
 
-    // Format: event ? true ? name ? date
 
+    /**
+     * Saves the list of tasks into a file.
+     * @param taskList The list of tasks to be saved.
+     * @throws DukeException
+     */
     public void save(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.file);

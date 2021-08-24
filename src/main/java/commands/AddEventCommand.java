@@ -3,6 +3,10 @@ import tasks.EventTask;
 import java.time.format.DateTimeParseException;
 import exceptions.DukeException;
 
+/**
+ * This is an AddEventCommand Class, which inherits from AddCommand.
+ * The execution of this command will add an event task to the task list.
+ */
 public class AddEventCommand extends AddCommand {
     private static final String DELIMITER = "/at";
     public static final String KEYWORD = "event";
@@ -12,6 +16,11 @@ public class AddEventCommand extends AddCommand {
     private static final String INPUT_FORMAT = String.format("\t\"%s [task] %s " +
             "[dd-mm-yyyy hh:mm]\"", KEYWORD, DELIMITER);
 
+    /**
+     * Constructor for AddEventCommand.
+     * @param userInput The input string entered by the user.
+     * @throws DukeException
+     */
     public AddEventCommand (String userInput) throws DukeException {
         // Check whether input contains delimiter
         boolean hasDelimiter = userInput.contains(DELIMITER);
