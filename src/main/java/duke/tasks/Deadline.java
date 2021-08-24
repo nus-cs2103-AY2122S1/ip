@@ -20,6 +20,7 @@ public class Deadline extends Task {
         }
     }
 
+    @Override
     public String toString() {
         String timeInfoString = timeInfo.format(outputFormatter);
         return String.format("[D]%s (by: %s)", super.toString(), timeInfoString);

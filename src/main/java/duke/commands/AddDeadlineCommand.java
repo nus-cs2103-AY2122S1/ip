@@ -1,28 +1,15 @@
 package duke.commands;
 
 import duke.exceptions.InvalidTimeStampException;
+import duke.tasks.Task;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.tasks.Deadline;
 import duke.utils.Ui;
 
-public class AddDeadlineCommand extends Command {
+public class AddDeadlineCommand extends AddTaskCommand {
 
-    private String[] keyWords;
-    public AddDeadlineCommand(String[] keywords) {
-        this.keyWords = keywords;
-    }
-
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTimeStampException {
-        Deadline deadline = new Deadline(this.keyWords[0], this.keyWords[1]);
-        tasks.addTask(deadline);
-        String[] messages = new String[] {
-                "Got it. I've added this task:",
-                "    " + deadline.toString(),
-                String.format("Now you have %d tasks in the list.", tasks.getSize())
-        };
-        ui.printOut(messages);
-        storage.save(tasks);
+    public AddDeadlineCommand(String[] keywords) throws InvalidTimeStampException {
+        super(new Deadline(keywords[0], keywords[1]));
     }
 }
