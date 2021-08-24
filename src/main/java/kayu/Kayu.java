@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Duke.Duke class.
+ * Kayu class.
  *
- * This class holds the main logic for Duke.Duke project (CS2103T's iP).
- * Duke.Duke is a Duke.task manager for users that love the command line interface.
+ * This class holds the main logic for Kayu project (CS2103T's iP).
+ * Kayu is a task manager for users that love the command line interface.
  * @author muhammad-khair, damithc
  */
 public class Kayu {
@@ -32,11 +32,8 @@ public class Kayu {
     private final Scanner scanner = new Scanner(System.in);
 
     /**
-     * Runs the whole Duke.Duke process.
-     *
-     * Consists of (1) scanning input and parsing it to a
-     * Command, (2) parsing the inputs in the format required by the Command and (3)
-     * executing the Commanding and returning a String output to be printed to console.
+     * Runs the whole program process. Greets user, loads data, 
+     * reads commands, and terminates upon 'bye'.
      */
     public void run() {
         chatBot.logo();
@@ -45,7 +42,10 @@ public class Kayu {
         readCommandsUntilBye();
         chatBot.exit();
     }
-    
+
+    /**
+     * Initialises the data stored in file to taskList.
+     */
     public void init() {
         try {
             List<Task> tasks = storage.load();
@@ -56,7 +56,12 @@ public class Kayu {
             errorExit();
         }
     }
-    
+
+    /**
+     * Reads the commands inputted by user, parses them into {@link kayu.commands.Command} 
+     * and executes them. {@link kayu.service.ChatBot} helps output the responses from such
+     * executions.
+     */
     public void readCommandsUntilBye() {
         Command command;
         do {
@@ -78,7 +83,10 @@ public class Kayu {
         } while (!command.isBye());
         scanner.close();
     }
-    
+
+    /**
+     * Terminates the program, based on {@link kayu.exception.StorageException}.
+     */
     public void errorExit() {
         chatBot.exitOnError();
         scanner.close();

@@ -9,6 +9,12 @@ import kayu.parser.DateTimeFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * EventCommand class.
+ *
+ * This class is an instance of {@link kayu.commands.AddTaskCommand} that uses the keyword 
+ * {@link #COMMAND_WORD}. It creates a {@link kayu.task.Event} and saves it.
+ */
 public class EventCommand extends AddTaskCommand {
 
     public static final String COMMAND_WORD = "event";
@@ -17,6 +23,9 @@ public class EventCommand extends AddTaskCommand {
         super(CommandType.EVENT, commandParams, dateTimeFormat);
     }
 
+    /**
+     * See {@link kayu.commands.Command#execute(TaskList)}.
+     */
     @Override
     public String execute(TaskList taskList) throws DukeException {
         String[] paramArray = super.splitUserParams(commandParams, COMMAND_WORD, Event.SPLIT_WORD);

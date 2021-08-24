@@ -6,7 +6,8 @@ import java.time.LocalTime;
 /**
  * Deadline class.
  *
- * This class is a Task that has a 'by' datetime String.
+ * This class is a {@link kayu.task.Task} that has a {@link #KEYWORD} 
+ * for its DateTime field.
  */
 public class Deadline extends Task {
 
@@ -40,9 +41,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Provides a formatted String of the 'by' field.
+     * Provides a formatted String of the {@link #KEYWORD} field.
      *
-     * @return formatted String for field 'by'
+     * @return Formatted String for field {@link #KEYWORD}.
      */
     private String getFormattedBy() {
         return "("
@@ -52,7 +53,10 @@ public class Deadline extends Task {
                 + " " + byTime
                 + ")";
     }
-    
+
+    /**
+     * See {@link kayu.task.Task#toEncodedString}.
+     */
     @Override
     public String toEncodedString() {
         return KEYWORD 

@@ -6,7 +6,8 @@ import java.time.LocalTime;
 /**
  * Event class.
  *
- * This class is a Task that has an 'at' datetime String.
+ * This class is a {@link kayu.task.Task} that has an {@link #KEYWORD} 
+ * for its DateTime field.
  */
 public class Event extends Task {
 
@@ -39,9 +40,9 @@ public class Event extends Task {
     }
 
     /**
-     * Provides a formatted String of the 'at' field.
+     * Provides a formatted String of the {@link #KEYWORD} field.
      *
-     * @return formatted String for field 'at'
+     * @return Formatted String for field {@link #KEYWORD}.
      */
     private String getFormattedAt() {
         return "(" 
@@ -52,6 +53,9 @@ public class Event extends Task {
                 + ")";
     }
 
+    /**
+     * See {@link kayu.task.Task#toEncodedString}.
+     */
     @Override
     public String toEncodedString() {
         return KEYWORD 

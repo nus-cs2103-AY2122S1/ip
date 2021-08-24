@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * TaskManager class.
  *
- * This class acts as the manager of tasks held by the Duke.Duke.
+ * This class acts as the manager of tasks held by the {@link kayu.Kayu}.
  */
 public class TaskList {
 
@@ -22,11 +22,17 @@ public class TaskList {
     protected final static int MAX_STORAGE = 100;
       
     private final List<Task> tasks = new ArrayList<>();
-    
+
     public List<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Initialises the {@link #tasks} list with the specified {@link kayu.task.Task} list.
+     * 
+     * @param taskList List of {@link kayu.task.Task} to initialise {@link #tasks} with.
+     * @throws StorageException If size of <code>#taskList</code> is larger than {@link #MAX_STORAGE}.
+     */
     public void init(List<Task> taskList) throws StorageException {
         if (taskList.size() > MAX_STORAGE) {
             throw new StorageException(FULL_CAPACITY_ERROR_MESSAGE);
@@ -36,19 +42,21 @@ public class TaskList {
     }
 
     /**
-     * Gets the current number of tasks stored.
+     * Gets the number of {@link kayu.task.Task}s current stored.
      *
-     * @return number of tasks stored currently
+     * @return Number of tasks stored currently.
      */
     public int getCapacity() {
         return tasks.size();
     }
 
     /**
-     * Adds a Duke.task to the Duke.task list. Returns saved Duke.task.
+     * Adds a {@link kayu.task.Task} to the {@link #tasks} list. 
+     * Returns saved {@link kayu.task.Task}.
      *
-     * @param newTask Duke.task to save
-     * @throws DukeException if Duke.task cannot be saved, due to full capacity of Duke.task list
+     * @param newTask {@link kayu.task.Task} to save.
+     * @throws DukeException If {@link kayu.task.Task} cannot be saved or
+     * due to full capacity of {@link #tasks} list. 
      */
     public void addTask(Task newTask) throws DukeException {
         if (tasks.size() >= MAX_STORAGE) {
@@ -58,12 +66,12 @@ public class TaskList {
     }
 
     /**
-     * Update a Task completed based on the input Task number fed as a String.
-     * Provides an output message on return.
+     * Update a {@link kayu.task.Task} to 'done' based on the input <code>taskNumber</code>
+     * number fed as a String. Provides an output message on return.
      *
-     * @param taskNumber String format of the Task number to delete
-     * @return String message of successful completion marking of Task
-     * @throws DukeException if the Task number is not valid
+     * @param taskNumber String format of the {@link kayu.task.Task} number to delete.
+     * @return String message of successful completion marking of {@link kayu.task.Task}.
+     * @throws DukeException If <code>taskNumber</code> is not valid.
      */
     public Task updateTaskAsDone(int taskNumber) throws DukeException {
         Task selectedTask = getTaskByNumber(taskNumber);
@@ -72,12 +80,12 @@ public class TaskList {
     }
 
     /**
-     * Deletes a Task based on the input Task number fed as a String.
+     * Deletes a {@link kayu.task.Task} based on the input <code>taskNumber</code> fed as a String.
      * Provides an output message on return.
      *
-     * @param taskNumber String format of the Task number to delete
-     * @return String message of successful deletion of Task
-     * @throws DukeException if the Task number is not valid
+     * @param taskNumber String format of the {@link kayu.task.Task} number to delete.
+     * @return String message of successful deletion of {@link kayu.task.Task}.
+     * @throws DukeException If <code>taskNumber</code> is not valid.
      */
     public Task deleteTask(int taskNumber) throws DukeException {
         Task selectedTask = getTaskByNumber(taskNumber);
@@ -86,11 +94,12 @@ public class TaskList {
     }
 
     /**
-     * Gets the Task based on the input Task number fed as a String.
+     * Gets the {@link kayu.task.Task} based on the input <code>taskNumber</code>.
      *
-     * @param taskNumber String format of the Task number to obtain
-     * @return associated Task
-     * @throws DukeException if the Task List is empty or the Task number is not valid
+     * @param taskNumber {@link kayu.task.Task} number to obtain.
+     * @return Associated {@link kayu.task.Task}.
+     * @throws DukeException If the {@link #tasks} List is empty or 
+     * the <code>taskNumber</code> is not valid.
      */
     private Task getTaskByNumber(int taskNumber) throws DukeException {
         if (tasks.isEmpty()) {

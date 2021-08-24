@@ -1,5 +1,11 @@
 package kayu.commands;
 
+/**
+ * CommandMessage class.
+ * 
+ * This class helps to hold all the possible messages and formats that are required by
+ * {@link kayu.commands.Command} classes.
+ */
 public class CommandMessage {
 
     // Message formats.

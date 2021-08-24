@@ -1,9 +1,9 @@
 package kayu.service;
 
 /**
- * DukeChatBot class.
+ * ChatBot class.
  *
- * This class acts as a communicator to the user on the command line.
+ * This class acts as a communicator to the user on the command line through {@link kayu.Kayu}.
  */
 public class ChatBot {
 
@@ -52,9 +52,9 @@ public class ChatBot {
     }
 
     /**
-     * Displays the messaged wrapped with LINE_SPLIT.
+     * Displays the messaged wrapped with {@link #LINE_SPLIT}.
      *
-     * @param message message to display within LINE_SPLIT
+     * @param message Message to display within {@link #LINE_SPLIT}.
      */
     public void info(String message) {
         if (!message.isBlank()) {
@@ -79,7 +79,7 @@ public class ChatBot {
     /**
      * Uses the default system's println method to output the message string.
      *
-     * @param string string to print in standard format
+     * @param string String to print in standard format.
      */
     public void print(String string) {
         System.out.println(string);
@@ -88,7 +88,7 @@ public class ChatBot {
     /**
      * Generates the error template which is then displayed to the user.
      *
-     * @param errorMessage error message to display
+     * @param errorMessage Error message to display.
      */
     public void error(String errorMessage) {
         info("=( Error: " + errorMessage);
