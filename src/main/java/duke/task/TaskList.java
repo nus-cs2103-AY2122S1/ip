@@ -91,7 +91,6 @@ public class TaskList {
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here is your task list:\n");
         for (int i = 0; i < size(); i++) {
             Task task = taskList.get(i);
             sb.append(String.format("%s. %s %s \n", i + 1, task.getStatusIcon(), task.getDescription()));

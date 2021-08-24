@@ -31,7 +31,10 @@ public class ListCommand extends Command{
             throw new DukeException("It seems that your task list is empty.\n"
                     + "Try adding some task using \"todo\", \"deadline\" or \"event\"");
         }
-        ui.showReply(taskList.toString());
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here is your task list:\n");
+        sb.append(taskList.toString());
+        ui.showReply(sb.toString());
     }
 
     /**
