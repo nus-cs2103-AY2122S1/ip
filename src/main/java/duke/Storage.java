@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -23,7 +30,6 @@ public class Storage {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line = br.readLine();
             while (line != null) {
-                System.out.println("asdf");
                 Task newTask;
                 try {
                     String taskInfo = line.substring(7);
@@ -50,7 +56,7 @@ public class Storage {
                     throw new DukeException("Error: Data is formatted incorrectly in storage file.");
                 }
                 if (line.charAt(4) == 'X') {
-                    newTask.isDone = true;
+                    newTask.setDone();
                 }
                 tasks.add(newTask);
                 line = br.readLine();

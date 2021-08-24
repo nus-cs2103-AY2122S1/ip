@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -21,7 +25,7 @@ public class TaskList {
     }
 
     public void setTaskAsDone(int i) {
-        tasks.get(i).isDone = true;
+        tasks.get(i).setDone();
     }
 
     public void deleteTask(int i) {
