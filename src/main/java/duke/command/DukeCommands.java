@@ -12,6 +12,7 @@ public enum DukeCommands {
     DELETE("delete", new DeleteCommand()),
     DEADLINE("deadline", new DeadlineCommand()),
     TODO("todo", new TodoCommand()),
+    FIND("find", new FindCommand()),
     INVALID("invalid", new InvalidCommand());
 
 

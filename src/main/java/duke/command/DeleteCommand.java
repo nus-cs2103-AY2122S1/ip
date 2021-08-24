@@ -15,6 +15,10 @@ public class DeleteCommand implements DukeActions {
             throws DukeException {
         list.toRemove(Parser.parseInt(map.get("delete"))
                 .orElseThrow(() -> new DukeException("The delete command is either missing the positional argument 'index' or it " + "is invalid.")) - 1)
+                .map(x -> {
+                    ui.removeTaskUpdate(x, list.getSize());
+                    return x;
+                })
                 .orElseThrow(() -> new DukeException("Failed to remove task from the tasklist."));
         return true;
 

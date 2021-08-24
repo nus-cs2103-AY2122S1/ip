@@ -2,6 +2,8 @@ package duke.util;
 
 import duke.task.Task;
 
+import java.util.List;
+
 public class Ui {
 
     final private static String LINES = "===============================================";
@@ -67,6 +69,17 @@ public class Ui {
                         1) : String.format("%d tasks",
                         numTasks));
         this.defaultPrint(remove);
+    }
+
+    public void findUpdate(List<Task> tasklist) {
+        StringBuilder output =
+                new StringBuilder("Here are the matching tasks in your list:\n");
+        for (Task i : tasklist) {
+            output.append(String.format("%d. %s\n",
+                    tasklist.indexOf(i) + 1,
+                    i));
+        }
+        defaultPrint(output.toString());
     }
 
     public void defaultPrint(String string) {

@@ -67,4 +67,8 @@ public class Task {
                 this.description,
                 isDone ? "1" : "0");
     }
+
+    public String getDescription() {
+        return this.description;
+    }
 }
