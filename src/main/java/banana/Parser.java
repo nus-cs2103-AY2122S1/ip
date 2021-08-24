@@ -47,7 +47,7 @@ public class Parser {
     }
 
     /**
-     * Checks how to handle the users
+     * Checks how to handle the user's
      * input command.
      *
      * @param tasks the list of tasks.
