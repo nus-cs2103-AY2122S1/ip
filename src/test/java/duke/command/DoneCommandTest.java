@@ -5,6 +5,7 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +15,7 @@ public class DoneCommandTest {
     private Storage storage;
     private Ui ui = new Ui();
     private TaskList tasks = new TaskList();
-    
+
     @Test
     public void execute_noIndex_throwsException() {
         DoneCommand test = new DoneCommand("");
@@ -51,5 +52,5 @@ public class DoneCommandTest {
     }
 
     // Can also handle if index is not an integer
-    
+
 }

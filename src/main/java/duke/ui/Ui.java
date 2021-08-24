@@ -4,13 +4,13 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Ui {
-   
+
     public static final String BORDER = "____________________________________________________________";
     public static final String PREFIX = "\t";
-    
+
     private final Scanner sc;
     private final PrintStream out;
-    
+
     public Ui() {
         this.sc = new Scanner(System.in);
         this.out = System.out;
@@ -23,7 +23,7 @@ public class Ui {
     public void printBorder() {
         out.println(PREFIX + BORDER);
     }
-    
+
     public void welcome() {
         String logo = "\t ____        _        \n"
                 + "\t|  _ \\ _   _| | _____ \n"
@@ -36,16 +36,16 @@ public class Ui {
         printToUser("What can I do for you?");
         printBorder();
     }
-    
+
     public String readCommand() {
         out.print("(User) Enter command: ");
         String fullCommand = sc.nextLine().trim();
         printToUser("");
         return fullCommand;
     }
-    
+
     public void showError(String errorMessage) {
-       printToUser("☹ OOPS!!! " + errorMessage);
+        printToUser("☹ OOPS!!! " + errorMessage);
     }
-    
+
 }

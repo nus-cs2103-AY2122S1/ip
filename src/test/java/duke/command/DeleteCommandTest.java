@@ -5,6 +5,7 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +16,7 @@ public class DeleteCommandTest {
     private Storage storage;
     private Ui ui = new Ui();
     private TaskList tasks = new TaskList();
-    
+
     @Test
     public void execute_noIndex_throwsException() {
         DeleteCommand test = new DeleteCommand("");
@@ -35,7 +36,7 @@ public class DeleteCommandTest {
             fail();
         } catch (DukeException e) {
             assertEquals(e.getMessage(), "The index you entered is invalid. Please try again.");
-        } 
+        }
     }
 
     @Test
@@ -48,9 +49,8 @@ public class DeleteCommandTest {
             fail();
         }
         assertEquals(tasks.size(), 0);
-
     }
-    
+
     // Can also handle if index is not an integer
-    
+
 }

@@ -10,7 +10,8 @@ import duke.ui.Ui;
 import java.time.LocalDate;
 
 public class EventCommand extends Command {
-    public String arguments;
+    
+    private String arguments;
 
     public EventCommand(String arguments) {
         super("event");
@@ -23,10 +24,12 @@ public class EventCommand extends Command {
             throw new DukeException(String.format("The description of a %s cannot be left empty. "
                     + "Please try again.", command));
         }
+        
         String[] argArr = arguments.split("/at");
         if (argArr.length == 1 || argArr[1].isEmpty()) {
             throw new DukeException("Arguments do not follow proper format. Don't forget the /at");
         }
+        
         LocalDate newTaskDate = Parser.convertDate(argArr[1].trim());
         Event newTask = new Event(argArr[0].trim(), newTaskDate);
         tasks.add(newTask);

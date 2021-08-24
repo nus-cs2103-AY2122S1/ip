@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class FindCommand extends Command {
 
     public String arguments;
-    
+
     public FindCommand(String arguments) {
         super("find");
         this.arguments = arguments;
@@ -30,7 +30,7 @@ public class FindCommand extends Command {
             }
         }
         if (matchedTasks.isEmpty()) {
-            ui.printToUser("  There are no tasks that match your query. Try again."); 
+            ui.printToUser("  There are no tasks that match your query. Try again.");
         } else {
             for (int i = 0; i < matchedTasks.size(); i++) {
                 Task currTask = matchedTasks.get(i);

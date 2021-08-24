@@ -17,7 +17,7 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
-    
+
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,24 +28,24 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-   
+
     public void run() {
-       ui.welcome();
-       boolean isExit = false;
-       while (!isExit) {
-           try {
-               String fullCommand = ui.readCommand();
-               ui.printBorder();
-               Command c = Parser.parse(fullCommand);
-               c.execute(tasks, ui, storage);
-               storage.write(tasks);
-               isExit = c.isExit();
-           } catch (DukeException e) {
-               ui.showError(e.getMessage());
-           } finally {
-               ui.printBorder();
-           }
-       }
+        ui.welcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.printBorder();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                storage.write(tasks);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.printBorder();
+            }
+        }
     }
 
     public static void main(String[] args) {

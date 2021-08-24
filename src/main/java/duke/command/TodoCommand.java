@@ -6,11 +6,11 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
 
-public class ToDoCommand extends Command {
-    
-    public String arguments;
+public class TodoCommand extends Command {
 
-    public ToDoCommand(String arguments) {
+    private String arguments;
+
+    public TodoCommand(String arguments) {
         super("todo");
         this.arguments = arguments;
     }
@@ -21,6 +21,7 @@ public class ToDoCommand extends Command {
             throw new DukeException(String.format("The description of a %s cannot be left empty. "
                     + "Please try again.", command));
         }
+
         Todo newTask = new Todo(arguments);
         tasks.add(newTask);
         ui.printToUser("Got it. I've added this task:");

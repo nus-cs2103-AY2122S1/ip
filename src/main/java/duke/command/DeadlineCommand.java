@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 public class DeadlineCommand extends Command {
 
-    public String arguments;
+    private String arguments;
 
     public DeadlineCommand(String arguments) {
         super("deadline");
@@ -24,10 +24,12 @@ public class DeadlineCommand extends Command {
             throw new DukeException(String.format("The description of a %s cannot be left empty. "
                     + "Please try again.", command));
         }
+        
         String[] argArr = arguments.split("/by");
         if (argArr.length == 1 || argArr[1].isEmpty()) {
             throw new DukeException("Arguments do not follow proper format. Don't forget the /by");
         }
+        
         LocalDate newTaskDate = Parser.convertDate(argArr[1].trim());
         Deadline newTask = new Deadline(argArr[0].trim(), newTaskDate);
         tasks.add(newTask);

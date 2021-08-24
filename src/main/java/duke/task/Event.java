@@ -19,12 +19,12 @@ public class Event extends Task {
 
     @Override
     public LocalDate getTiming() {
-        return this.at;
+        return at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " 
+        return "[E]" + super.toString() + " (at: "
                 + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 

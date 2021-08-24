@@ -1,24 +1,30 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    
+
     private String filePath;
-    
+
     public Storage(String filePath) {
-       this.filePath = filePath; 
+        this.filePath = filePath;
     }
-    
+
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -28,15 +34,15 @@ public class Storage {
                 String[] argArr = sc.nextLine().split("\\|");
                 Task taskToBeAdded;
                 switch (argArr[0]) {
-                    case "E":
-                        taskToBeAdded = new Event(argArr[2], LocalDate.parse(argArr[3]));
-                        break;
-                    case "D":
-                        taskToBeAdded = new Deadline(argArr[2], LocalDate.parse(argArr[3]));
-                        break;
-                    default:
-                        taskToBeAdded = new Todo(argArr[2]);
-                        break;
+                case "E":
+                    taskToBeAdded = new Event(argArr[2], LocalDate.parse(argArr[3]));
+                    break;
+                case "D":
+                    taskToBeAdded = new Deadline(argArr[2], LocalDate.parse(argArr[3]));
+                    break;
+                default:
+                    taskToBeAdded = new Todo(argArr[2]);
+                    break;
                 }
                 if (argArr[1].equals("1")) {
                     taskToBeAdded.markTaskAsDone();
@@ -49,7 +55,7 @@ public class Storage {
             throw new DukeException("Sorry, I can't find your list of tasks. I'll create a new one for you.");
         }
     }
-    
+
     public void write(TaskList tasks) throws DukeException {
         try {
             // need to use the filePath and cut off file name
@@ -68,5 +74,5 @@ public class Storage {
             throw new DukeException("Sorry, I was unable to store your list of tasks");
         }
     }
-    
+
 }
