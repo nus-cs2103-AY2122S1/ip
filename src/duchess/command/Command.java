@@ -1,3 +1,7 @@
+package duchess.command;
+
+import duchess.main.Duchess;
+
 /**
  * This abstract class contains the logic to handle commands.
  *

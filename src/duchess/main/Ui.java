@@ -1,3 +1,5 @@
+package duchess.main;
+
 /**
  * This class handles the UI specific elements of Duchess.
  *

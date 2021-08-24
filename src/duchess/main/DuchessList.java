@@ -1,3 +1,7 @@
+package duchess.main;
+
+import duchess.task.Task;
+
 import java.util.ArrayList;
 /**
  * This class implements a DukeList to be used in storing string from Duke

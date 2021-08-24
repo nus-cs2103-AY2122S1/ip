@@ -1,3 +1,5 @@
+package duchess.task;
+
 import java.time.LocalDateTime;
 
 /**
@@ -30,6 +32,10 @@ public abstract class Task {
     public void setDone(boolean doneOrNot)
     {
         isDone = doneOrNot;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     public abstract LocalDateTime getDateTime();

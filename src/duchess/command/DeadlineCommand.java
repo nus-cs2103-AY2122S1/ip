@@ -1,3 +1,10 @@
+package duchess.command;
+
+import duchess.main.Duchess;
+import duchess.main.DuchessException;
+import duchess.main.DuchessFileHandler;
+import duchess.task.Deadline;
+
 /**
  * This class contains the logic to handle the deadline command.
  *
@@ -40,10 +47,10 @@ public class DeadlineCommand extends Command {
             duchess.getUi().prettyPrint("Understood. I've added this task:\n    " + deadline
                     + "\nYou now have " + listSize
                     + (listSize > 1 ? " tasks in the list." : " task in the list."));
+            DuchessFileHandler.writeToFile(duchess.getDuchessList());
         } catch (DuchessException e) {
             duchess.getUi().prettyPrint(e.getMessage());
         }
-        DuchessFileHandler.writeToFile(duchess.getDuchessList());
         return true;
     }
 

@@ -1,3 +1,9 @@
+package duchess.main;
+
+import duchess.task.Deadline;
+import duchess.task.Event;
+import duchess.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

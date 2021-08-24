@@ -1,3 +1,10 @@
+package duchess.command;
+
+import duchess.main.Duchess;
+import duchess.main.DuchessException;
+import duchess.main.DuchessFileHandler;
+import duchess.task.Task;
+
 /**
  * This class contains the logic to handle the done command.
  *
@@ -28,10 +35,11 @@ public class DoneCommand extends Command {
             if (duchess.getDuchessList().checkWithinRange(Integer.parseInt(index))) {
                 // Valid done task
                 Task task = duchess.getDuchessList().getTask(Integer.parseInt(index));
-                if (task.isDone)
+                if (task.isDone())
                     throw new DuchessException("Oops... This task is already done.");
                 task.setDone(true);
                 duchess.getUi().prettyPrint("Brilliant! I've marked this task as done:   \n  " + task);
+                DuchessFileHandler.writeToFile(duchess.getDuchessList());
             } else {
                 // "done" followed by an integer outside of range of the list
                 throw new DuchessException("Apologies, that task does not exist and cannot be marked as done.");
@@ -43,7 +51,6 @@ public class DoneCommand extends Command {
             else
                 duchess.getUi().prettyPrint(((DuchessException) e).getMessage());
         }
-        DuchessFileHandler.writeToFile(duchess.getDuchessList());
         return true;
     }
 }

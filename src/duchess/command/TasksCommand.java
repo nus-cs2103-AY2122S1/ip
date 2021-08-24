@@ -1,3 +1,9 @@
+package duchess.command;
+
+import duchess.main.Duchess;
+import duchess.main.DuchessException;
+import duchess.task.Deadline;
+import duchess.task.Task;
 import java.time.LocalDateTime;
 
 public class TasksCommand extends Command {

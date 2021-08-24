@@ -1,3 +1,8 @@
+package duchess.main;
+
+import duchess.command.Command;
+import duchess.command.InvalidCommand;
+
 /**
  * This class implements a Parser to read in user input commands.
  *

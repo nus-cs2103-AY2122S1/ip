@@ -1,3 +1,7 @@
+package duchess.command;
+
+import duchess.main.Duchess;
+
 /**
  * This class implements the logic to handle invalid commands.
  *

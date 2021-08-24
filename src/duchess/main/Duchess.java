@@ -1,4 +1,7 @@
+package duchess.main;
+
 import java.util.Scanner;
+import duchess.command.Command;
 
 /**
  * This class implements a Duke Chatbot variant: Duchess

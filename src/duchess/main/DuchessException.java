@@ -1,3 +1,5 @@
+package duchess.main;
+
 /**
  * This class implements a DuchessException to be thrown by Duchess
  *

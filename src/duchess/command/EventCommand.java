@@ -1,3 +1,9 @@
+package duchess.command;
+
+import duchess.main.Duchess;
+import duchess.main.DuchessException;
+import duchess.main.DuchessFileHandler;
+import duchess.task.Event;
 import java.time.LocalDateTime;
 
 /**
@@ -48,10 +54,10 @@ public class EventCommand extends Command {
             duchess.getUi().prettyPrint("Understood. I've added this task:\n    " + event
                     + "\nYou now have " + listSize
                     + (listSize > 1 ? " tasks in the list." : " task in the list."));
+            DuchessFileHandler.writeToFile(duchess.getDuchessList());
         } catch (DuchessException e) {
             duchess.getUi().prettyPrint(e.getMessage());
         }
-        DuchessFileHandler.writeToFile(duchess.getDuchessList());
         return true;
     }
 }

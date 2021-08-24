@@ -1,3 +1,9 @@
+package duchess.command;
+
+import duchess.main.Duchess;
+import duchess.main.DuchessFileHandler;
+import duchess.task.ToDo;
+
 /**
  * This class contains the logic to handle the todo command.
  *

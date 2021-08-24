@@ -1,3 +1,10 @@
+package duchess.command;
+
+import duchess.main.Duchess;
+import duchess.main.DuchessException;
+import duchess.main.DuchessFileHandler;
+import duchess.task.Task;
+
 /**
  * This class contains the logic to handle the delete command.
  *
@@ -30,6 +37,7 @@ public class DeleteCommand extends Command {
                 Task deletedTask = duchess.getDuchessList().delete(Integer.parseInt(index));
                 duchess.getUi().prettyPrint("Alright. I've removed this task:   \n  " + deletedTask
                         + "\nNow you have " + duchess.getDuchessList().getSize() + " tasks in the list.");
+                DuchessFileHandler.writeToFile(duchess.getDuchessList());
             } else {
                 // "delete" followed by an integer outside of range of the list
                 throw new DuchessException("Apologies, that task does not exist and cannot be deleted.");
@@ -41,7 +49,6 @@ public class DeleteCommand extends Command {
             else
                 duchess.getUi().prettyPrint(((DuchessException) e).getMessage());
         }
-        DuchessFileHandler.writeToFile(duchess.getDuchessList());
         return true;
     }
 }

@@ -1,3 +1,7 @@
+package duchess.command;
+
+import duchess.main.Duchess;
+
 /**
  * This class contains the logic to handle the deadline command.
  *
