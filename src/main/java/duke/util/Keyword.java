@@ -4,7 +4,7 @@ package duke.util;
  * Enum file for chatbot commands.
  *
  * @author marcuspeh
- * @version Level-7
+ * @version Level-9
  * @since 19 Aug 2021
  */
 public enum Keyword {

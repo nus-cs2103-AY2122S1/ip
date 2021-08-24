@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * Deals with storing of task as well as operations involving the tasks.
  *
  * @author marcuspeh
- * @version A-MoreOOP
+ * @version Level-9
  * @since 21 Aug 2021
  */
 public class TaskList {
