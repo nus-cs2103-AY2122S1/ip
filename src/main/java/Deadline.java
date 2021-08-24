@@ -11,9 +11,15 @@ public class Deadline extends Task {
         super(description);
         this.by = dateAndTime(by);
     }
+
     @Override
     public String getActualTime() {
         return by;
+    }
+
+    @Override
+    public boolean compareTime(String time) {
+        return by.equals(time);
     }
 
     @Override

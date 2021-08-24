@@ -20,6 +20,11 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean compareTime(String time) {
+        return at.equals(time);
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }

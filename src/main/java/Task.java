@@ -22,19 +22,6 @@ public class Task {
         this.isDone = false;
     }
 
-     /*   public Task(String description, String date) {
-            this.description = description;
-            this.isDone = false;
-            this.date = date;
-        }
-
-        public Task(String description, String date, String time) {
-            this.description = description;
-            this.isDone = false;
-            this.date = date;
-            this.time = time;
-        }*/
-
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -84,7 +71,7 @@ public class Task {
         int monthValue = Integer.parseInt(month);
         boolean validDay = dayValue <= 31 && dayValue >= 1;
         boolean validMonth = monthValue <= 12 && monthValue >= 1;
-        return Duke.chekDigit(day) && Duke.chekDigit(year) && Duke.chekDigit(month) && validDay
+        return Parser.chekDigit(day) && Parser.chekDigit(year) && Parser.chekDigit(month) && validDay
                 && validMonth;
     }
 
@@ -100,7 +87,7 @@ public class Task {
             }
             String date = parts[0];
             String time = parts[1];
-            if (date.length() > 10 || time.length() != 4 || !Duke.chekDigit(time)
+            if (date.length() > 10 || time.length() != 4 || !Parser.chekDigit(time)
                     || !date.contains("/")) {
                 return false;
             }
@@ -143,7 +130,7 @@ public class Task {
         }
     }
 
-    public String getActualTime() {
-        return "";
+    public boolean compareTime(String time) {
+        return true;
     }
 }
