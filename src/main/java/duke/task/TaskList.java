@@ -55,7 +55,6 @@ public class TaskList {
         validateCommand(command, "^delete [0-9]+", "delete [task number]");
         
         int taskNumber;
-        
         try {
             taskNumber = Integer.parseInt(command.substring(7)) - 1;
         } catch (NumberFormatException e) {
@@ -95,7 +94,6 @@ public class TaskList {
         validateCommand(command, "^done [0-9]+", "done [task number]");
         
         int taskNumber;
-        
         try {
             taskNumber = Integer.parseInt(command.substring(5)) - 1;
         } catch (NumberFormatException e) {
@@ -150,10 +148,8 @@ public class TaskList {
             throw new IllegalFormatException(correctFormat);
         }
         
-        // Add new event
+        // Add new event into list of tasks
         Task newTask = new Event(info[0], date, startTime, endTime);
-        
-        // Add the newly created task into list of tasks
         tasks.add(newTask);
         
         // Return confirmation message
@@ -186,10 +182,8 @@ public class TaskList {
             throw new IllegalFormatException(correctFormat);
         }
         
-        // Add new deadline
+        // Add new deadline into list of tasks
         Task newTask = new Deadline(info[0], dateTime);
-        
-        // Add the newly created task into list of tasks
         tasks.add(newTask);
         
         // Return confirmation message
@@ -207,10 +201,8 @@ public class TaskList {
         // Throw exception if command does not follow format
         validateCommand(command, "^todo .*", "todo [description]");
         
-        // Add new todo
+        // Add new todo into list of tasks
         Task newTask = new Todo(command.substring(5).trim());
-        
-        // Add the newly created task into list of tasks
         tasks.add(newTask);
         
         // Return confirmation message
