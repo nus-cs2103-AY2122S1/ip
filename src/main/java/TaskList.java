@@ -86,6 +86,11 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Returns matches in task list for keyword.
+     * @param keyword String
+     * @return Returns matches in task list for keyword.
+     */
     public String find(String keyword) {
         ArrayList<Task> result = new ArrayList<>();
         final StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n\t");
@@ -102,10 +107,20 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Returns task at given index.
+     * @param index int
+     * @return task at given index.
+     */
     public Task getTask(int index) {
         return records.get(index);
     }
 
+    /**
+     * Returns number of tasks in tasklist.
+     *
+     * @return number of tasks in tasklist.
+     */
     public int length() {
         return records.size();
     }

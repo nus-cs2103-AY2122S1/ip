@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 /**
  * The Command class encapsulates all commands behaviour for a bot.
@@ -10,6 +9,7 @@ public class Command {
      * Returns added message for command to-do.
      *
      * @param description description of to-do task.
+     * @param tasks TaskList of existing tasks.
      * @return added message for command to-do.
      * @throws DukeException if description is empty.
      */
@@ -52,6 +52,7 @@ public class Command {
      *
      * @param description description of deadline task.
      * @param by string of deadline date/time.
+     * @param tasks TaskList of list of existing tasks.
      * @return added message for command deadline.
      * @throws DukeException if description or date/time is empty or not YYYY-MM-DD.
      */
@@ -76,6 +77,7 @@ public class Command {
     /**
      * Returns message representing list of all items user added.
      *
+     * @param tasks TaskList of existing tasks.
      * @return formatted string representing elements in records array.
      */
     public String list(TaskList tasks) {
@@ -84,9 +86,11 @@ public class Command {
 
     /**
      * Returns delete message for bot.
+     *
      * @param index index of task to be deleted.
+     * @param tasks TaskList of list of existing tasks.
      * @return delete message for bot.
-     * @throws DukeException
+     * @throws DukeException if index < 0 or index > number of tasks
      */
     public String delete(int index, TaskList tasks) throws DukeException {
         if (index < 0) {
@@ -101,6 +105,7 @@ public class Command {
      * Return task mark as done message.
      *
      * @param index index of task that is done.
+     * @param tasks TaskList of list of existing tasks.
      * @return task mark as done message.
      * @throws DukeException if index < 0 or index points to null value.
      */
@@ -115,6 +120,15 @@ public class Command {
         return String.format("Nice! I've marked this task as done:\n\t %1$s \n\t", done.toString());
     }
 
+
+    /**
+     * Return message for tasks matched with keyword.
+     *
+     * @param keyword String of keyword to be matched.
+     * @param tasks TaskList of list of existing tasks.
+     * @return message for all tasks matched with keyword.
+     * @throws DukeException if keyword is empty.
+     */
     public String find(String keyword, TaskList tasks) throws DukeException{
         if (keyword.isEmpty()) {
             throw new DukeException("OOPS!!! No keyword provided.");

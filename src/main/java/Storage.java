@@ -6,11 +6,22 @@ public class Storage {
     private final String filePath;
     private final File file;
 
+    /**
+     * Constructor for storage.
+     *
+     * @param filePath a fixed file path for records data.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
     }
 
+    /**
+     * Returns list of tasks records from file.
+     *
+     * @return list of tasks records.
+     * @throws IOException
+     */
     public ArrayList<Task> getTasks() throws IOException {
         ArrayList<Task> records = new ArrayList<>();
         FileReader fileReader = new FileReader(filePath);
@@ -49,6 +60,12 @@ public class Storage {
         return records;
     }
 
+    /**
+     * Update tasks record in fixed file.
+     *
+     * @param tasks TaskList of existing tasks.
+     * @throws IOException
+     */
     public void writeToFile(TaskList tasks) throws IOException {
         StringBuilder textToAdd = new StringBuilder();
         for (int i = 0; i < tasks.length(); i++) {

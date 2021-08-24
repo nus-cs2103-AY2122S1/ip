@@ -1,24 +1,24 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private Command commands = new Command();
     private Storage storage;
     private TaskList tasks;
-    private static final String FILE_PATH = "./data.txt";
+    private String file_path;
 
     /**
      * Constructor for Duke.
      *
-     * @param name name of bot.
+     * @param file_path file_path to write records to.
      */
-    public Duke(String name) {
+    public Duke(String file_path) {
+        this.file_path = file_path;
         try {
-            this.storage = new Storage(FILE_PATH);
+            this.storage = new Storage(file_path);
             tasks = new TaskList(this.storage.getTasks());
         } catch (IOException e) {
-            this.storage = new Storage(FILE_PATH);
+            this.storage = new Storage(file_path);
             tasks = new TaskList(null);
         }
     }
@@ -118,7 +118,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        Duke bot = new Duke("halp");
+        Duke bot = new Duke("./data.txt");
         bot.start();
     }
 }
