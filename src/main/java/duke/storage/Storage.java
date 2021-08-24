@@ -63,7 +63,7 @@ public class Storage {
                     list.add(new Event(taskParameter[2], taskParameter[3], taskParameter[1].equals("X")));
                     break;
                 default:
-                    break;
+                    throw new DukeException("OOPS!!! File appears to be corrupted.");
                 }
             }
             return list;
