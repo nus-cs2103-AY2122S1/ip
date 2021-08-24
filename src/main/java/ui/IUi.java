@@ -2,6 +2,9 @@ package ui;
 
 import java.util.List;
 
+/**
+ * Interface for UI.
+ */
 public interface IUi {
 	/**
 	 * Displays the sentence for the CLI.

@@ -2,6 +2,13 @@ package ui;
 
 import java.util.List;
 
+/**
+ * Default UI to interact with user.
+ * Printed using the following format :
+ * ---------------
+ * something
+ * ---------------
+ */
 public class UiImpl implements IUi {
 	/**
 	 * Displays a list for the CLI using --- + ordered list + ---- format.
