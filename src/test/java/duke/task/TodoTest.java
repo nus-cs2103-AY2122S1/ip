@@ -32,7 +32,7 @@ class TodoTest {
 
     @Test
     void statusIconMarkedTest() {
-        this.todo.MarkAsDone();
+        this.todo.markAsDone();
         assertEquals("X", this.todo.getStatusIcon());
     }
 
