@@ -9,9 +9,18 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates a storage object that handles all hard-disk file IO
+ */
 public class Storage {
     private File file;
 
+    /**
+     * Constructor for Storage
+     *
+     * @param filePath The path of file in which the data is stored
+     * @throws StorageFileException If there is an error when loading the file
+     */
     public Storage(String filePath) throws StorageFileException {
         this.file = new File(filePath);
         if (!file.isFile()) {
@@ -24,6 +33,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the tasks from the storage file into an array list
+     *
+     * @return An list of tasks
+     * @throws InvalidStorageTaskException If the file contains an invalid task
+     * @throws StorageFileException If there is an error when trying to read data from storage file
+     * @throws InvalidDateTimeInputException If the date time input is invalid in storage file
+     */
     public ArrayList<Task> loadTasksFromFile() throws InvalidStorageTaskException, StorageFileException, InvalidDateTimeInputException {
         Scanner s;
 
@@ -65,6 +82,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Appends the entry to the storage file
+     *
+     * @param entry The entry to append
+     * @throws StorageFileException If there is an error writing to storage file
+     */
     public void addToStorageFile(String entry) throws StorageFileException {
         try {
             FileWriter writer = new FileWriter(this.file, true);
@@ -75,6 +98,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Rewrites the storage file using the list of tasks provided
+     *
+     * @param taskList The list of tasks
+     * @throws StorageFileException If there is an error when rewriting the storage file
+     */
     public void rewriteStorageFile(TaskList taskList) throws StorageFileException {
         try {
             FileWriter writer = new FileWriter(this.file);

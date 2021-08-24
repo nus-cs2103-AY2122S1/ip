@@ -5,6 +5,9 @@ import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 
+/**
+ * Encapsulates the Jarvis chatbot
+ */
 public class Jarvis {
     public static void main(String[] args) {
         Ui ui = new Ui();

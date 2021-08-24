@@ -9,6 +9,9 @@ import jarvis.task.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Encapsulates the object that interacts with the user
+ */
 public class Ui {
     Scanner sc = new Scanner(System.in);
 
@@ -20,16 +23,25 @@ public class Ui {
         message.print();
     }
 
+    /**
+     * Shows the greeting message to user
+     */
     public void showGreetingMessage() {
         OutputMessage greetingMessage = new GreetingMessage();
         greetingMessage.print();
     }
 
+    /**
+     * Shows the exit message to user
+     */
     public void showExitMessage() {
         OutputMessage exitMessage = new ExitMessage();
         exitMessage.print();
     }
 
+    /**
+     * Shows the task list message to user
+     */
     public void showTaskList(TaskList taskList) {
         OutputMessage taskListMessage = new OutputMessage(String.format(
                 "%s\n%s",
@@ -39,11 +51,17 @@ public class Ui {
         taskListMessage.print();
     }
 
+    /**
+     * Shows the error message to user
+     */
     public void showError(JarvisException e) {
         OutputMessage errorMessage = new OutputMessage(e.getMessage());
         errorMessage.print();
     }
 
+    /**
+     * Shows the task added message to user
+     */
     public void showTaskAddedMessage(Task task, TaskList taskList) {
         OutputMessage taskAddedMessage = new OutputMessage(String.format(
                 "Alright! I have added this to the Stark Industries Database:\n\t%s\n%s",
@@ -53,6 +71,9 @@ public class Ui {
         taskAddedMessage.print();
     }
 
+    /**
+     * Shows the task done message to user
+     */
     public void showTaskDoneMessage(Task task) {
         OutputMessage taskDoneMessage = new OutputMessage(String.format(
                 "Nice! I've marked this task as done:\n\t%s",
@@ -61,6 +82,9 @@ public class Ui {
         taskDoneMessage.print();
     }
 
+    /**
+     * Shows the task deleted message to user
+     */
     public void showTaskDeletedMessage(Task task, TaskList taskList) {
         OutputMessage taskDeletedMessage = new OutputMessage(String.format(
                 "Initiated Delete protocol. Delete confirmed for:\n\t%s\n%s",
@@ -70,10 +94,18 @@ public class Ui {
         taskDeletedMessage.print();
     }
 
+    /**
+     * Reads user input from CLI
+     *
+     * @return String that is read
+     */
     public String readInput() {
         return this.sc.nextLine();
     }
 
+    /**
+     * Closes the active scanner
+     */
     public void closeScanner() {
         this.sc.close();
     }

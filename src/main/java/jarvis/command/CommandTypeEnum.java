@@ -3,6 +3,9 @@ package jarvis.command;
 import jarvis.exception.UnknownCommandException;
 import jarvis.parser.Parser;
 
+/**
+ * Encapsulates all the possible and valid command types
+ */
 public enum CommandTypeEnum {
     DEADLINE("deadline"),
     DELETE("delete"),
@@ -18,10 +21,22 @@ public enum CommandTypeEnum {
         this.commandTrigger = commandTrigger;
     }
 
+    /**
+     * Gets the length of the command trigger string
+     *
+     * @return length of the command trigger string
+     */
     public int getCommandTypeStringLength() {
         return commandTrigger.length();
     }
 
+    /**
+     * Identifies the correct CommandTypeEnum depending on user input.
+     *
+     * @param userInput User input
+     * @return The appropriate CommandTypeEnum
+     * @throws UnknownCommandException If user input has no valid command type
+     */
     public static CommandTypeEnum identifyCommandType(String userInput) throws UnknownCommandException {
         String commandTrigger = Parser.getCommandTriggerFromInput(userInput);
 
