@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.FileManager;
+import duke.Tasklist;
+import duke.UI;
+
 public class ListCommand extends Command {
     @Override
     public void execute(Tasklist tasks, UI ui, FileManager fileManager) {

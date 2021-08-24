@@ -1,7 +1,8 @@
-import java.util.ArrayList;
+package duke;
+
+import duke.command.Command;
 
 public class Duke {
-
     private FileManager filemanager;
     private Tasklist tasks;
     private UI ui;

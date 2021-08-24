@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.FileManager;
+import duke.Tasklist;
+import duke.UI;
+
 public class MarkDoneCommand extends Command {
     private final int index;
     public MarkDoneCommand(int index) {

@@ -1,3 +1,10 @@
+package duke;
+
+import duke.DukeException;
+import duke.command.Command;
+import duke.command.CommandsTypes;
+import duke.task.Task;
+
 import java.util.stream.Stream;
 
 public class Parser {

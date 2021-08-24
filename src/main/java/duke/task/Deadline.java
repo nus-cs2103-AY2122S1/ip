@@ -1,31 +1,35 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
+public class Deadline extends Task {
     final private LocalDateTime date;
-    final private static String inputExample = " event my birtday /at 01/01/2000 1400";
+    final private static String inputExample = "deadline return book /by 3/4/2021 400";
 
-    public static Event of(String input) throws DukeException {
-        String[] eachWord = input.split("/at");
+    public static Deadline of(String input) throws DukeException {
+        String[] eachWord = input.split("/by");
         if (eachWord.length == 0 || eachWord[0].length() == 0 || eachWord[0].equals(" ")) {
-            throw new DukeException("Description cannot be empty. Type description before /at\nEg."
-                    + Event.inputExample);
+            throw new DukeException("Description cannot be empty. Type description before /by\nEg."
+                    + Deadline.inputExample);
         }
         if (eachWord.length == 1 || eachWord[1].length() == 0 || eachWord[1].equals(" ")) {
-            throw new DukeException("The date for this event cannot be empty. Type date after /at\nEg."
-                    + Event.inputExample);
+            throw new DukeException("The date for this event cannot be empty. Type date after /by\nEg."
+                    + Deadline.inputExample);
         }
         String dateDescription = eachWord[1];
         String[] dateSplitBySpace = dateDescription.split(" ");
         if (dateSplitBySpace.length < 3) {
             throw new DukeException("Enter the date for this event in DD/MM/YYYY HHMM format\nEg."
-                    + Event.inputExample);
+                    + Deadline.inputExample);
         }
         String[] dateArr = dateSplitBySpace[1].split("/");
         if (dateArr.length < 3) {
             throw new DukeException("Enter the date for this event in DD/MM/YYYY HHMM format\nEg."
-                    + Event.inputExample);
+                    + Deadline.inputExample);
         }
         try {
             int year = Integer.parseInt(dateArr[2]);
@@ -34,19 +38,24 @@ public class Event extends Task {
             int hour = Integer.parseInt(dateSplitBySpace[2].substring(0, dateSplitBySpace[2].length() - 2));
             int min = Integer.parseInt(dateSplitBySpace[2].substring(dateSplitBySpace[2].length() - 2));
             LocalDateTime dateTime = LocalDateTime.of(year, month, date, hour, min);
-            return new Event(eachWord[0], dateTime);
+            return new Deadline(eachWord[0], dateTime);
         } catch (NumberFormatException e) {
             throw new DukeException("Enter the date for this event in DD/MM/YYYY HHMM format\nEg."
-                    + Event.inputExample);
+                    + Deadline.inputExample);
         } catch (DateTimeException e) {
             throw new DukeException("Invalid date inputed. Please check that the date is correct\nEg."
-                    + Event.inputExample);
+                    + Deadline.inputExample);
         }
     }
 
-//    private Event(String input) {
-//        super(input.split("/at", 2)[0]);
-//        String dateDescription = input.split("/at", 2)[1];
+    private Deadline(String description, LocalDateTime dateTime) {
+        super(description);
+        this.date = dateTime;
+    }
+
+//    private duke.task.Deadline(String input) {
+//        super(input.split("/by", 2)[0]);
+//        String dateDescription = input.split("/by", 2)[1];
 //        String[] dateSplitBySpace = dateDescription.split(" ");
 //        String[] dateArr = dateSplitBySpace[1].split("/");
 //        int hour = Integer.parseInt(dateSplitBySpace[2].substring(0, dateSplitBySpace[2].length() - 2));
@@ -55,20 +64,15 @@ public class Event extends Task {
 //                Integer.parseInt(dateSplitBySpace[2].substring(dateSplitBySpace[2].length() - 2)));
 //    }
 
-    private Event(String description, LocalDateTime dateTime) {
-        super(description);
-        this.date = dateTime;
-    }
-
     @Override
     public String toString() {
-        return ("[E]" + super.toString() + String.format("(at:%s)", this.date));
+        return ("[D]" + super.toString() + String.format("(by:%s)", this.date));
     }
 
     @Override
     public String typeString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         String formatDateTime = this.date.format(formatter);
-        return "event" + Task.sep + super.toSaveInFile("/at " + formatDateTime);
+        return "deadline" + Task.sep + super.toSaveInFile("/by " + formatDateTime);
     }
 }

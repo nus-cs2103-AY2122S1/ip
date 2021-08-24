@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.Scanner;
 
 public class UI {
@@ -22,7 +26,7 @@ public class UI {
     }
 
     public void deleteTask(Task task) {
-        System.out.println(task + "deleted. Bruh be more careful next time");
+        System.out.println(task + " deleted. Bruh be more careful next time");
     }
 
     public void printList(Tasklist tasks) {

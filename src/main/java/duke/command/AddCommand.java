@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.FileManager;
+import duke.Tasklist;
+import duke.UI;
+import duke.task.Task;
+
 public class AddCommand extends Command {
     private Task toAddTask;
 

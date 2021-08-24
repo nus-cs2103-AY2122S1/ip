@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.FileManager;
+import duke.Tasklist;
+import duke.UI;
+import duke.task.Task;
+
 public abstract class Command {
     public static Command makeCommand(CommandsTypes type, Task task, int index) throws DukeException {
         switch (type) {
