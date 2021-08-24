@@ -5,9 +5,6 @@ import duke.commands.Command;
 import java.io.IOException;
 
 public class Duke {
-    private static final String FILE_DIR = "data";
-    private static final String FILE_NAME = "duke.txt";
-
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
@@ -34,7 +31,7 @@ public class Duke {
                 isExit = c.isExit();
 
             } catch (DukeException e) {
-                ui.printError(e.getMessage());
+                ui.printError(e.toString());
             }
         }
     }

@@ -50,12 +50,6 @@ public class Ui {
                 "What can I do for you?");
         printHorizontalLine();
 
-        //        String home = System.getProperty("user.home"); // /Users/xiaoyunwu
-        //
-        //        java.nio.file.Path path = java.nio.file.Paths.get(home, "my", "app", "dir"); // /Users/xiaoyunwu/my/app/dir
-        //
-        //        boolean directoryExists = java.nio.file.Files.exists(path); // false
-
     }
 
     public void printExitMessage() {

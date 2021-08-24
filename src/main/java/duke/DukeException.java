@@ -1,12 +1,6 @@
 package duke;
 
-/**
- * A subclass of Exception that deals with Duke-specific exceptions.
- */
 public class DukeException extends Exception {
-    /**
-     * Message to be displayed.
-     */
     private final String message;
 
     /**

@@ -1,13 +1,10 @@
 package duke;
 
 import duke.tasks.Task;
-
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class TaskList {
     private List<Task> items;
-    private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
 
     public TaskList(List<Task> items) {
         this.items = items;
