@@ -26,6 +26,8 @@ public class Duke {
     private final Storage storage = new Storage();
 
     private final ChatBot chatBot = new ChatBot();
+    
+    private final Scanner scanner = new Scanner(System.in);
 
     /**
      * Driver function for main logic.
@@ -35,6 +37,7 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
+        System.exit(0);
     }
 
     /**
@@ -45,30 +48,10 @@ public class Duke {
      * executing the Commanding and returning a String output to be printed to console.
      */
     public void run() {
-        chatBot.greet();
+        chatBot.logo();
         init();
-        
-        Scanner scanner = new Scanner(System.in);
-        Command command;
-        do {
-            String userInput = scanner.nextLine().trim();
-            command = parser.parseToCommand(userInput);
-            try {
-                String feedback = command.execute(taskList);
-                List<Task> tasks = taskList.getTasks();
-                storage.save(tasks);
-                chatBot.info(feedback);
-                
-            } catch (DukeException exception) {
-                chatBot.error(exception.getMessage());
-
-            } catch (StorageException exception) {
-                chatBot.errorOnSave();
-                break;
-            }
-        } while (!command.isBye());
-
-        scanner.close();
+        chatBot.greet();
+        readCommandsUntilBye();
         chatBot.exit();
     }
     
@@ -79,7 +62,35 @@ public class Duke {
             
         } catch (StorageException exception) {
             chatBot.error(exception.getMessage());
-            throw new RuntimeException();
+            errorExit();
         }
+    }
+    
+    public void readCommandsUntilBye() {
+        Command command;
+        do {
+            String userInput = scanner.nextLine().trim();
+            command = parser.parseToCommand(userInput);
+            try {
+                String feedback = command.execute(taskList);
+                List<Task> tasks = taskList.getTasks();
+                storage.save(tasks);
+                chatBot.info(feedback);
+
+            } catch (DukeException exception) {
+                chatBot.error(exception.getMessage());
+
+            } catch (StorageException exception) {
+                chatBot.errorOnSave();
+                errorExit();
+            }
+        } while (!command.isBye());
+        scanner.close();
+    }
+    
+    public void errorExit() {
+        chatBot.exitOnError();
+        scanner.close();
+        System.exit(1); // exit with error status
     }
 }

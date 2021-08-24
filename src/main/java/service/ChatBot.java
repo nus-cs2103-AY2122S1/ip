@@ -28,11 +28,19 @@ public class ChatBot {
     
     private final static String ERROR_ON_SAVE = "Error updating task file.";
 
+    private final static String ERROR_EXIT = "Please check your saved file, exiting program...";
+
     /**
-     * Prints a greeting when program is first booted up.
+     * Prints logo.
+     */
+    public void logo() {
+        print(LOGO);
+    }
+
+    /**
+     * Prints greeting message.
      */
     public void greet() {
-        print(LOGO);
         info(GREETING);
     }
 
@@ -59,6 +67,13 @@ public class ChatBot {
      */
     public void errorOnSave() {
         error(ERROR_ON_SAVE);
+    }
+
+    /**
+     * Generates an exit error message.
+     */
+    public void exitOnError() {
+        info(ERROR_EXIT);
     }
 
     /**

@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -76,40 +77,38 @@ public class Storage {
     public List<Task> decode(List<String> taskLines) throws StorageException {
         List<Task> savedTaskList = new ArrayList<>();
         for (String stringTask : taskLines) {
-            String[] taskAsArray = stringTask.split(Task.SPLIT_TEMPLATE);
-
+            Task task = decodeSingleTask(stringTask);
+            savedTaskList.add(task);
+        }
+        return savedTaskList;
+    }
+    
+    public Task decodeSingleTask(String stringTask) throws StorageException {
+        String[] taskAsArray = stringTask.split(Task.SPLIT_TEMPLATE);
+        try {
             String keyword = taskAsArray[0];
             boolean isDone = taskAsArray[1].equals(Task.DONE);
             String desc = taskAsArray[2];
             LocalDate date;
             LocalTime time;
-
-            try {
-                switch (keyword) {
-                    case Todo.KEYWORD:
-                        savedTaskList.add(new Todo(desc, isDone));
-                        break;
-
-                    case Event.KEYWORD:
-                        date = LocalDate.parse(taskAsArray[3]);
-                        time = LocalTime.parse(taskAsArray[4]);
-                        savedTaskList.add(new Event(desc, isDone, date, time));
-                        break;
-
-                    case Deadline.KEYWORD:
-                        date = LocalDate.parse(taskAsArray[3]);
-                        time = LocalTime.parse(taskAsArray[4]);
-                        savedTaskList.add(new Deadline(desc, isDone, date, time));
-                        break;
-
-                    default:
-                        throw new StorageException(String.format(INVALID_TASK_FORMAT, stringTask));
-                }
-            } catch (ArrayIndexOutOfBoundsException exception) {
+            
+            switch (keyword) {
+            case Todo.KEYWORD:
+                return new Todo(desc, isDone);
+            case Event.KEYWORD:
+                date = LocalDate.parse(taskAsArray[3]);
+                time = LocalTime.parse(taskAsArray[4]);
+                return new Event(desc, isDone, date, time);
+            case Deadline.KEYWORD:
+                date = LocalDate.parse(taskAsArray[3]);
+                time = LocalTime.parse(taskAsArray[4]);
+                return new Deadline(desc, isDone, date, time);
+            default:
                 throw new StorageException(String.format(INVALID_TASK_FORMAT, stringTask));
             }
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException exception) {
+            throw new StorageException(String.format(INVALID_TASK_FORMAT, stringTask));
         }
-        return savedTaskList;
     }
 
     public void save(List<Task> taskList) throws StorageException {
