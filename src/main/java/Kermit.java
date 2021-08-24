@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Scanner;
 import java.lang.StringBuilder;
 
@@ -30,14 +29,27 @@ public class Kermit {
      * @param list List that task was added to
      * @return String stating task was successfully added
      */
-    private static String printAddTask(Task task, ToDo list) {
-        return "Got it. I've added this task:\n"
-                + task +"\nNow you have " + list.size() + " tasks in the list.";
+    private static void printAddTask(Task task, ToDo list) {
+        formatAndPrintText("Got it. I've added this task:\n"
+                + task +"\nNow you have " + list.size() + " tasks in the list.");
     }
 
-    private static String printDeleteTask(Task task, ToDo list) {
-        return "Noted. I've removed this task:\n"
-                + task +"\nNow you have " + list.size() + " tasks in the list.";
+    private static void printDeleteTask(Task task, ToDo list) {
+        formatAndPrintText("Noted. I've removed this task:\n"
+                + task +"\nNow you have " + list.size() + " tasks in the list.");
+    }
+
+    private static void printFilteredTasks(ArrayList<Task> filteredTasks) {
+        String outputString = "Here are the matching tasks in your list:";
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            Task task = filteredTasks.get(i);
+            outputString += (i + 1) + ". " + task.toString();
+            if (i != filteredTasks.size()) {
+                outputString += "\n";
+            }
+
+        }
+        formatAndPrintText(outputString);
     }
 
     private static LocalDate formatTaskDateFormat(String s) {
@@ -73,18 +85,6 @@ public class Kermit {
             formattedString = String.join(delimiter, formattedString, dateTask.getDate());
         }
         return formattedString;
-    }
-
-    private static String printFilteredTasks(String text, ArrayList<Task> filteredTasks) {
-        String outputString = text;
-        for (int i = 0; i < filteredTasks.size(); i++) {
-            Task task = filteredTasks.get(i);
-            text += (i + 1) + ". " + task.toString();
-            if (i != filteredTasks.size()) {
-                text += "\n";
-            }
-        }
-        return outputString;
     }
 
         private static ToDo readToDoData(File file) throws FileNotFoundException {
@@ -241,7 +241,7 @@ public class Kermit {
                         case "todo":
                             Task newToDo = new ToDos(description);
                             list.add(newToDo);
-                            formatAndPrintText(printAddTask(newToDo, list));
+                            printAddTask(newToDo, list);
                             bufferedWriter.write(formatWriteString(newToDo));
                             bufferedWriter.newLine();
                             break;
@@ -249,7 +249,7 @@ public class Kermit {
                         case "deadline":
                             Task newDeadline = new Deadline(description, formatUserDateFormat(flagArguments));
                             list.add(newDeadline);
-                            formatAndPrintText(printAddTask(newDeadline, list));
+                            printAddTask(newDeadline, list);
                             bufferedWriter.write(formatWriteString(newDeadline));
                             bufferedWriter.newLine();
                             break;
@@ -258,7 +258,7 @@ public class Kermit {
                         case "event":
                             Task newEvent = new Event(description, formatUserDateFormat(flagArguments));
                             list.add(newEvent);
-                            formatAndPrintText(printAddTask(newEvent, list));
+                            printAddTask(newEvent, list);
                             bufferedWriter.write(formatWriteString(newEvent));
                             bufferedWriter.newLine();
                             break;
@@ -266,7 +266,7 @@ public class Kermit {
                         case "delete":
                             index = Integer.parseInt(description) - 1;
                             Task deletedTask = list.deleteTask(index);
-                            formatAndPrintText(printDeleteTask(deletedTask, list));
+                            printDeleteTask(deletedTask, list);
                         case "find":
                     }
                 } catch (KermitException e) {
