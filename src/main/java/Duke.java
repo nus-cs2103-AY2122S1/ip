@@ -13,17 +13,11 @@ import java.util.Scanner;
  * Represents the Duke program. Manages tasks based on commands received.
  */
 public class Duke {
-    /** Greeting message to be printed when the program starts */
-    private static final String GREETING_MESSAGE =
-            "____________________________________________________________\n" +
-            "Hello! I'm Duke\n" +
-            "What can I do for you?\n" +
-            "____________________________________________________________\n";
     /** Message to be printed when the program exits */
     private static final String EXITING_MESSAGE =
             "____________________________________________________________\n" +
-            "Bye. Hope to see you again soon!\n" +
-            "____________________________________________________________";
+                    "Bye. Hope to see you again soon!\n" +
+                    "____________________________________________________________";
     /** Path of the current folder as a string */
     private static final String DIRECTORY_PATH = System.getProperty("user.dir");
     /** Path of file containing data saved */
@@ -32,8 +26,8 @@ public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
     /** Whether the Duke program is running */
     private boolean isRunning;
-    /** Scanner used to read commands */
-    private Scanner input;
+    /** UI of the program */
+    private Ui ui;
 
     /**
      * Constructor of the class 'Duke'.
@@ -42,8 +36,7 @@ public class Duke {
         Duke.data = Paths.get(Duke.DIRECTORY_PATH, "data", "duke.txt").toFile();
         Duke.readFile();
         this.isRunning = true;
-        System.out.println(Duke.GREETING_MESSAGE);
-        this.input = new Scanner(System.in);
+        this.ui = new Ui();
     }
 
     /**
@@ -192,7 +185,7 @@ public class Duke {
      * @throws DukeException If command is invalid.
      */
     private void readCommand() throws DukeException {
-        String command = this.input.nextLine().trim(); // read the command
+        String command = this.ui.getCommand(); // read the command
         String[] splitted = command.split(" ", 2);
 
         if (command.equals("bye")) {
