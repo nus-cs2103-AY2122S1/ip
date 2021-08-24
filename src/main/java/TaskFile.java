@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -46,5 +47,44 @@ public class TaskFile {
             errorMessage.printMessage();
         }
         return result;
+    }
+
+    public void appendToFile(String line) {
+        try {
+            FileWriter fileWriter = new FileWriter(this.tasks, true);
+            if (this.tasks.length() == 0) {
+                fileWriter.write(line);
+            } else {
+                fileWriter.write("\n" + line);
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            Message errorMessage = new Message("☹ OOPS!!! Something wrong happened when modifying the file.");
+            errorMessage.printMessage();
+        }
+    }
+
+    public void rewriteFile(List<Task> tasksList) {
+        try {
+            int numOfTask = tasksList.size();
+            if (numOfTask == 0) {
+                return;
+            }
+            FileWriter fileWriter = new FileWriter(this.tasks);
+            for (int i = 0; i < numOfTask - 1; i++) {
+                fileWriter.write(tasksList.get(i).taskToLine() + "\n");
+            }
+            fileWriter.write(tasksList.get(numOfTask - 1).taskToLine());
+            fileWriter.close();
+        } catch (IOException e) {
+            Message errorMessage = new Message("☹ OOPS!!! Something wrong happened when modifying the file.");
+            errorMessage.printMessage();
+        }
+    }
+
+    public static void main(String[] args) {
+        TaskFile t = new TaskFile("tasks.txt");
+//        t.appendToFile("T | 1 | join sports club");
+        System.out.println(t.parseToTasks());
     }
 }

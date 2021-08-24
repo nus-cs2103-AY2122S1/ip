@@ -6,9 +6,12 @@ public class Duke {
         TODO, DEADLINE, EVENT
     }
 
-    private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static final TaskFile taskFile = new TaskFile("tasks.txt");
+
+    private static final ArrayList<Task> tasks = taskFile.parseToTasks();
 
     public static void addTask(Task task) {
+        taskFile.appendToFile(task.taskToLine());
         tasks.add(task);
     }
 
@@ -58,8 +61,27 @@ public class Duke {
         }
     }
 
+    public static void completeTask(int item) throws DukeException {
+        if (item == 0) {
+            throw new IndexMismatchException();
+        }
+        if (item > tasks.size()) {
+            throw new IndexOutOfBoundException();
+        }
+        if (Duke.tasks.get(item - 1).isDone) {
+            throw new DukeException("☹ OOPS!!! The task is already done!");
+        }
+        Duke.tasks.get(item - 1).setDone(true);
+        taskFile.rewriteFile(tasks);
+        Message doneMessage = new Message("\tNice! I've marked this task as done:\n\t\t"
+                + tasks.get(item - 1)
+        );
+        doneMessage.printMessage();
+    }
+
     public static void removeTask(int index) {
         tasks.remove(index);
+        taskFile.rewriteFile(tasks);
     }
 
     public static Message printList() {
@@ -100,20 +122,7 @@ public class Duke {
                 case "done": {
                     if (description.matches("\\d+")) {
                         int item = Integer.parseInt(description);
-                        if (item == 0) {
-                            throw new IndexMismatchException();
-                        }
-                        if (item > tasks.size()) {
-                            throw new IndexOutOfBoundException();
-                        }
-                        if (Duke.tasks.get(item - 1).isDone) {
-                            throw new DukeException("☹ OOPS!!! The task is already done!");
-                        }
-                        Duke.tasks.get(item - 1).setDone(true);
-                        Message doneMessage = new Message("\tNice! I've marked this task as done:\n\t\t"
-                                + tasks.get(item - 1)
-                        );
-                        doneMessage.printMessage();
+                        completeTask(item);
                     } else {
                         throw new IndexMismatchException();
                     }
@@ -162,8 +171,6 @@ public class Duke {
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
         System.out.println(Message.greet());
-
-        TaskFile taskFile = new TaskFile("tasks.txt");
 
         String input = scanner.next();
 
