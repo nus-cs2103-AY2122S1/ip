@@ -12,6 +12,7 @@ import ui.IUi;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -81,6 +82,9 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
 		case DELETE:
 			processDelete(Integer.parseInt(arguments.getOrDefault("index", "-1")) - 1);
 			break;
+		case FIND:
+			processFind(Optional.ofNullable(arguments.getOrDefault("keyword", null)));
+			break;
 		default:
 			ui.printSentence("command not recognized by processor");
 		}
@@ -136,5 +140,13 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
 		ui.printSentence(" Noted. I've removed this task: \n" +
 				"\t" + deletedTask.toString() + "\n" +
 				" Now you have " + taskDao.getSize() + " tasks in the list.");
+	}
+	
+	private void processFind(Optional<String> keyword) {
+		keyword.ifPresentOrElse(s -> {
+					List<Task> tasks = taskDao.getByKeyword(s);
+					ui.printIndexedList(tasks);
+				},
+				() -> processList(Optional.empty()));
 	}
 }

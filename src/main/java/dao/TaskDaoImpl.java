@@ -5,8 +5,10 @@ import model.Task;
 import storage.FileListStorage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of the TaskDao using a FileListStorage.
@@ -88,6 +90,19 @@ public class TaskDaoImpl implements TaskDao {
 	public List<Task> getAll() {
 		try {
 			return taskFileListStorage.readArrayListFromFile();
+		} catch (Exception e) {
+			logger.warning(e.getMessage());
+			return List.of();
+		}
+	}
+	
+	@Override
+	public List<Task> getByKeyword(String keyword) {
+		try {
+			ArrayList<Task> tasks = taskFileListStorage.readArrayListFromFile();
+			return tasks.stream()
+					.filter(x -> Arrays.asList(x.getDesc().split(" ")).contains(keyword))
+					.collect(Collectors.toList());
 		} catch (Exception e) {
 			logger.warning(e.getMessage());
 			return List.of();

@@ -65,112 +65,25 @@ public class ParserImpl implements IParser {
 			commandLogicUnit.processCommand(Command.BYE, Map.of());
 			break;
 		case "list":
-			String date = "";
-			
-			if (parsedCommands.size() >= 2) {
-				date = parsedCommands.get(1);
-			}
-			
-			commandLogicUnit.processCommand(Command.LIST, Map.of(
-					"date", date
-			));
+			parseList(parsedCommands);
 			break;
 		case "done":
-			try {
-				commandLogicUnit.processCommand(Command.DONE, Map.of(
-						"index", parsedCommands.get(1)
-				));
-			} catch (Exception e) {
-				processException(e);
-			}
-			
+			parseDone(parsedCommands);
 			break;
-		case "deadline": {
-			try {
-				int byIndex = parsedCommands.indexOf("/by");
-				if (byIndex == -1) {
-					logger.warning("/by not supplied in deadline command");
-					throw new IllegalArgumentException("/by command not found");
-				}
-				
-				String desc = String.join(" ", parsedCommands.subList(1, byIndex));
-				if (desc.isBlank()) {
-					logger.warning("Empty deadline desc supplied");
-					throw new IllegalArgumentException("deadline desc cannot be empty");
-				}
-				
-				String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
-				if (timing.isBlank()) {
-					logger.warning("Empty deadline timing supplied");
-					throw new IllegalArgumentException("deadline timing cannot be empty");
-				}
-				
-				commandLogicUnit.processCommand(Command.DEADLINE, Map.of(
-						"description", desc,
-						"timing", timing
-				));
-			} catch (Exception e) {
-				processException(e);
-			}
-			
+		case "deadline":
+			parseDeadline(parsedCommands);
 			break;
-		}
-		case "todo": {
-			try {
-				String desc = String.join(" ", parsedCommands.subList(1, parsedCommands.size()));
-				
-				if (desc.isBlank()) {
-					logger.warning("Empty Todo desc being supplied");
-					throw new IllegalArgumentException("todo desc cannot be empty");
-				}
-				
-				commandLogicUnit.processCommand(Command.TODOS, Map.of(
-						"description", desc
-				));
-			} catch (Exception e) {
-				processException(e);
-			}
+		case "todo":
+			parseTodo(parsedCommands);
 			break;
-		}
-		case "event": {
-			try {
-				int byIndex = parsedCommands.indexOf("/at");
-				if (byIndex == -1) {
-					logger.warning("/at not supplied in event command");
-					throw new IllegalArgumentException("/at command not found");
-				}
-				
-				String desc = String.join(" ", parsedCommands.subList(1, byIndex));
-				if (desc.isBlank()) {
-					logger.warning("Empty event desc supplied");
-					throw new IllegalArgumentException("event desc cannot be empty");
-				}
-				
-				String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
-				if (timing.isBlank()) {
-					logger.warning("Empty todo timing supplied");
-					throw new IllegalArgumentException("event timing cannot be empty");
-				}
-				
-				commandLogicUnit.processCommand(Command.EVENT, Map.of(
-						"description", desc,
-						"timing", timing
-				));
-			} catch (Exception e) {
-				processException(e);
-			}
-			
+		case "event":
+			parseEvent(parsedCommands);
 			break;
-		}
 		case "delete":
-			try {
-				commandLogicUnit.processCommand(Command.DELETE, Map.of(
-						"index", parsedCommands.get(1)
-				));
-			} catch (Exception e) {
-				processException(e);
-			}
-			
+			parseDelete(parsedCommands);
+			break;
+		case "find":
+			parseFind(parsedCommands);
 			break;
 		case "man":
 			ui.printSentence("() -> optional parameter or format of date time\n" +
@@ -181,6 +94,128 @@ public class ParserImpl implements IParser {
 			logger.warning("Unknown command : " + parsedCommands.get(0) + "being parsed");
 			processException(new IllegalCallerException("I'm sorry, but I don't know what that means :-("));
 			break;
+		}
+	}
+	
+	private void parseList(List<String> parsedCommands) {
+		String date = "";
+		
+		if (parsedCommands.size() >= 2) {
+			date = parsedCommands.get(1);
+		}
+		
+		commandLogicUnit.processCommand(Command.LIST, Map.of(
+				"date", date
+		));
+	}
+	
+	private void parseDone(List<String> parsedCommands) {
+		try {
+			commandLogicUnit.processCommand(Command.DONE, Map.of(
+					"index", parsedCommands.get(1)
+			));
+		} catch (Exception e) {
+			processException(e);
+		}
+	}
+	
+	private void parseDeadline(List<String> parsedCommands) {
+		try {
+			int byIndex = parsedCommands.indexOf("/by");
+			if (byIndex == -1) {
+				logger.warning("/by not supplied in deadline command");
+				throw new IllegalArgumentException("/by command not found");
+			}
+			
+			String desc = String.join(" ", parsedCommands.subList(1, byIndex));
+			if (desc.isBlank()) {
+				logger.warning("Empty deadline desc supplied");
+				throw new IllegalArgumentException("deadline desc cannot be empty");
+			}
+			
+			String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
+			if (timing.isBlank()) {
+				logger.warning("Empty deadline timing supplied");
+				throw new IllegalArgumentException("deadline timing cannot be empty");
+			}
+			
+			commandLogicUnit.processCommand(Command.DEADLINE, Map.of(
+					"description", desc,
+					"timing", timing
+			));
+		} catch (Exception e) {
+			processException(e);
+		}
+	}
+	
+	private void parseTodo(List<String> parsedCommands) {
+		try {
+			String desc = String.join(" ", parsedCommands.subList(1, parsedCommands.size()));
+			
+			if (desc.isBlank()) {
+				logger.warning("Empty Todo desc being supplied");
+				throw new IllegalArgumentException("todo desc cannot be empty");
+			}
+			
+			commandLogicUnit.processCommand(Command.TODOS, Map.of(
+					"description", desc
+			));
+		} catch (Exception e) {
+			processException(e);
+		}
+	}
+	
+	private void parseEvent(List<String> parsedCommands) {
+		try {
+			int byIndex = parsedCommands.indexOf("/at");
+			if (byIndex == -1) {
+				logger.warning("/at not supplied in event command");
+				throw new IllegalArgumentException("/at command not found");
+			}
+			
+			String desc = String.join(" ", parsedCommands.subList(1, byIndex));
+			if (desc.isBlank()) {
+				logger.warning("Empty event desc supplied");
+				throw new IllegalArgumentException("event desc cannot be empty");
+			}
+			
+			String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
+			if (timing.isBlank()) {
+				logger.warning("Empty todo timing supplied");
+				throw new IllegalArgumentException("event timing cannot be empty");
+			}
+			
+			commandLogicUnit.processCommand(Command.EVENT, Map.of(
+					"description", desc,
+					"timing", timing
+			));
+		} catch (Exception e) {
+			processException(e);
+		}
+	}
+	
+	private void parseDelete(List<String> parsedCommands) {
+		try {
+			commandLogicUnit.processCommand(Command.DELETE, Map.of(
+					"index", parsedCommands.get(1)
+			));
+		} catch (Exception e) {
+			processException(e);
+		}
+	}
+	
+	private void parseFind(List<String> parsedCommands) {
+		if (parsedCommands.size() < 2) {
+			processException(new IllegalArgumentException("keyword cannot be empty"));
+		}
+		
+		String keyword = parsedCommands.get(1);
+		try {
+			commandLogicUnit.processCommand(Command.FIND, Map.of(
+					"keyword", keyword
+			));
+		} catch (Exception e) {
+			processException(e);
 		}
 	}
 	
