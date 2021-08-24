@@ -8,4 +8,8 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    public String formatToWrite() {
+        return String.format("T | %s", super.formatToWrite());
+    }
 }

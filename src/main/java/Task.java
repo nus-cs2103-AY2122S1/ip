@@ -18,4 +18,8 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "]" + " " + this.description;
     }
+
+    public String formatToWrite() {
+        return String.format("%d | %s", (this.isDone ? 1 : 0), this.description);
+    }
 }
