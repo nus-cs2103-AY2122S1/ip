@@ -24,7 +24,7 @@ public class Duke {
      * Initializes a new Duke instance with specified filepath to store tasks
      * @param filePath Path to storage file
      */
-    private Duke(String filePath) {
+    public Duke(String filePath) {
         this.tasklist = new TaskList(filePath);
     }
 
