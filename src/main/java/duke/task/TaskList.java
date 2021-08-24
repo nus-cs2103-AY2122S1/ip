@@ -1,3 +1,11 @@
+package duke.task;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -28,7 +36,6 @@ public class TaskList {
                     String deadlineDateString = deadlineDateTimeArr[0];
                     String deadlineTimeString = deadlineDateTimeArr[1];
                     task = new Deadline(taskStringArr[2], deadlineDateString, deadlineTimeString);
-                    // addTask(taskStringArr[2], taskStringArr[3], TaskType.DEADLINE);
                     break;
                 case "E":
                     if (taskStringArr.length != eventLength){
@@ -38,7 +45,6 @@ public class TaskList {
                     String eventDateString = eventDateTimeArr[0];
                     String eventTimeString = eventDateTimeArr[1];
                     task = new Event(taskStringArr[2], eventDateString, eventTimeString);
-                    // addTask(taskStringArr[2], taskStringArr[3], TaskType.EVENT);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + type);
