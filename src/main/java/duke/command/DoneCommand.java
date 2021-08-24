@@ -1,6 +1,17 @@
+package duke.command;
+
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.util.Storage;
+
 public class DoneCommand extends Command {
     private final String fullCommand;
 
+    /**
+     * Constructor method of DoneCommand.
+     *
+     * @param fullCommand Full command given by the user.
+     */
     public DoneCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }

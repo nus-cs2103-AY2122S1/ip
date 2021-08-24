@@ -1,5 +1,6 @@
 package duke.util;
 
+import duke.exceptions.UnclearInstructionException;
 import duke.exceptions.UnknownException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -18,10 +19,20 @@ import java.util.Scanner;
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructor method of Storage.
+     * 
+     * @param filePath file path for data storage.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from data storage.
+     *
+     * @return List of tasks.
+     */
     public List<Task> loadStorage() {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -37,6 +48,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads tasks from file.
+     *
+     * @return List of tasks.
+     * @throws UnknownException  If task type from the file is not "T", "E" or "D".
+     */
     public List<Task> readFromFile(File file) throws FileNotFoundException {
         Scanner sc = new Scanner(file);
         List<Task> tasks = new ArrayList<>();
@@ -71,6 +88,9 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Creates empty file
+     */
     public void createEmptyFile(File file) {
         try {
             file.getParentFile().mkdirs();
@@ -80,6 +100,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes to file
+     */
     public void writeToFile(List<Task> list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : list) {
@@ -88,6 +111,9 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Saves list of tasks to data storage.
+     */
     public void saveToStorage(List<Task> tasks) {
         try {
             writeToFile(tasks);

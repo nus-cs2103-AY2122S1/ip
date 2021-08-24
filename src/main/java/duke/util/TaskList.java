@@ -1,4 +1,4 @@
-package duke.task;
+package duke.util;
 
 import duke.task.Task;
 import duke.exceptions.DukeIndexException;
@@ -13,6 +13,11 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Constructor method of TaskList.
+     *
+     * @param tasks List of tasks.
+     */
     public TaskList(List<Task> tasks) {
         this.list = tasks;
     }
@@ -21,6 +26,11 @@ public class TaskList {
         return list;
     }
 
+    /**
+     * Adds a task to list.
+     *
+     * @param task Task to be added.
+     */
     public void addTask(Task task) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
@@ -33,6 +43,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Lists the tasks in the list of tasks.
+     */
     public void list() {
         if (list.isEmpty()) {
             System.out.println("You have no task for now. Want to add a new task?");
@@ -47,6 +60,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Sets a task as done.
+     *
+     * @param index Index of the task to be set as done.
+     * @throws DukeIndexException If index given by user is greater than size of list or non-positive.             
+     */
     public void setAsDone(int index) {
         try {
             if (index > list.size()) {
@@ -65,7 +84,13 @@ public class TaskList {
 
     }
 
-    public void deleteTask(int index) throws IndexOutOfBoundsException {
+    /**
+     * Deletes a task from list of tasks.
+     *
+     * @param index Index of the task to be deleted.
+     * @throws DukeIndexException If index given by user is greater than size of list.
+     */
+    public void deleteTask(int index) throws DukeIndexException {
         try {
             if (index > list.size()) {
                 throw new DukeIndexException("The input task number is too big.");

@@ -1,6 +1,11 @@
+package duke.util;
+
 import java.util.Scanner;
 public class Ui {
-    private final Scanner sc; 
+    private final Scanner sc;
+    /**
+     * Constructor method of Deadline.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }

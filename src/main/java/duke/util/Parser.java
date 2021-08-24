@@ -1,3 +1,5 @@
+package duke.util;
+
 import duke.command.*;
 import duke.exceptions.UnknownException;
 
