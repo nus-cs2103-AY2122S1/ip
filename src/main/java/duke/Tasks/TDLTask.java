@@ -1,6 +1,6 @@
-package dukeScripts.Tasks;
+package duke.Tasks;
 
-import dukeScripts.DukeExceptionBase;
+import duke.DukeExceptionBase;
 
 /**
  *  This class encapsulates a Task element in Duke's TDList, and features

@@ -1,7 +1,10 @@
-package dukeScripts;
+package duke;
 
-import dukeScripts.Tasks.TDLTask;
+import duke.Tasks.TDLTask;
 
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,6 +16,32 @@ public class Duke {
 
     private static TDList currTDL;
     private static boolean isExited;
+
+
+
+    // Storage and Management of Duke Objects
+    private static Duke dukeInstance;
+
+    private Duke() {
+
+    }
+
+    /**
+     * Use to get the current instance of Duke that is running.
+     * @return the Duke object that is running.
+     */
+    public static Duke getCurrDuke() {
+        if (dukeInstance == null) {
+            dukeInstance = new Duke();
+        }
+        return dukeInstance;
+    }
+
+
+
+
+
+
 
     public static void main(String[] args) {
         //Initialize variables

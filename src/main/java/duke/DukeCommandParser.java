@@ -1,5 +1,7 @@
 
-package dukeScripts;
+package duke;
+
+import duke.Tasks.TDLTask;
 
 /**
  * This class encapsulates the command parser for Duke which process the commands

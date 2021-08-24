@@ -1,4 +1,4 @@
-package dukeScripts.Tasks;
+package duke.Tasks;
 
 /**
  *  This class encapsulates a Task element of Deadline type in Duke's TDList, and features

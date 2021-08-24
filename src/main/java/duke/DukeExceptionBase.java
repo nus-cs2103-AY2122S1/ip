@@ -1,4 +1,4 @@
-package dukeScripts;
+package duke;
 
 public class DukeExceptionBase extends Exception {
 
