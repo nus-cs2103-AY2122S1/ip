@@ -51,10 +51,10 @@ public class Duke {
 
                 } else if (type == Parser.CommandType.DONE) {
                     // Mark a certain task as done.
-                    String[] splitString = userInput.split(" ");
+                    String[] split = userInput.split(" ");
 
-                    if (splitString.length > 1) {
-                        int taskNumber = Integer.parseInt(splitString[1].trim());
+                    if (split.length > 1) {
+                        int taskNumber = Integer.parseInt(split[1].trim());
                         this.taskList.markTaskAsDone(taskNumber);
                         this.storage.save(this.taskList);
 
@@ -65,10 +65,10 @@ public class Duke {
 
                 } else if (type == Parser.CommandType.DELETE) {
                     // Deletes a task from the task list.
-                    String[] splitString = userInput.split(" ", 2);
+                    String[] split = userInput.split(" ", 2);
 
-                    if (splitString.length > 1 && splitString[1].trim().length() > 0) {
-                        int taskNumber = Integer.parseInt(splitString[1].trim());
+                    if (split.length > 1 && split[1].trim().length() > 0) {
+                        int taskNumber = Integer.parseInt(split[1].trim());
                         this.taskList.deleteTask(taskNumber);
                         this.storage.save(this.taskList);
 
@@ -84,10 +84,10 @@ public class Duke {
 
                 } else {
                     // Adds a Task to the task list.
-                    String[] splitString = userInput.split(" ", 2);
+                    String[] split = userInput.split(" ", 2);
 
-                    if (splitString.length > 1 && splitString[1].trim().length() > 0) {
-                        String substring = splitString[1].trim();
+                    if (split.length > 1 && split[1].trim().length() > 0) {
+                        String substring = split[1].trim();
                         Task newTask;
                         switch (type) {
                             case TODO:
@@ -140,7 +140,7 @@ public class Duke {
                         this.storage.save(this.taskList);
 
                     } else {
-                        throw new DukeException("☹ OOPS!!! The description of a " + splitString[0]
+                        throw new DukeException("☹ OOPS!!! The description of a " + split[0]
                                 + " cannot be empty.");
                     }
                 }gi
