@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,6 +19,11 @@ public class Storage {
         try {
             scanner = new Scanner(pilcrowFile);
         } catch (FileNotFoundException exception) {
+            // Create the folder, if it doesn't exist
+            File dataDir = new File("data");
+            if (!dataDir.exists()) {
+                dataDir.mkdir();
+            }
             scanner = new Scanner("");
         }
         ArrayList<Task> taskList = new ArrayList<>();
@@ -25,6 +31,7 @@ public class Storage {
         while (scanner.hasNext()) {
             taskList.add(Task.convertFromStoredTask(scanner.nextLine()));
         }
+        scanner.close();
         return taskList;
     }
 
@@ -32,15 +39,18 @@ public class Storage {
      *
      * @param taskList
      */
-    public void save(ArrayList<Task> taskList) {
+    public void save(TaskList taskList){
         String storedTasks = "";
-        for (int i = 0; i < taskList.size(); i++) {
-            storedTasks += taskList.get(i).convertToStoredTask();
+        for (int i = 1; i <= taskList.getNumberOfTasks(); i++) {
+            storedTasks += taskList.getTask(i).convertToStoredTask() + "\n";
         }
 
-        // IOException will be handled in Pilcrow.run()
-//        FileWriter pilcrowFileWriter = new FileWriter(this.filePath);
-//        pilcrowFileWriter.write(storedTasks);
-//        pilcrowFileWriter.close();
+        try {
+            FileWriter pilcrowFileWriter = new FileWriter(this.filePath);
+            pilcrowFileWriter.write(storedTasks);
+            pilcrowFileWriter.close();
+        }  catch (IOException exception) {
+
+        }
     }
 }

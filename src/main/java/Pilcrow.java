@@ -1,5 +1,6 @@
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.File;
+
 import java.util.Scanner;
 
 /**
@@ -15,7 +16,7 @@ public class Pilcrow {
     private Pilcrow() {
         this.ui = new Ui();
         this.storage = new Storage(Pilcrow.PILCROW_FILE_PATH);
-        this.taskList = new TaskList();
+        this.taskList = new TaskList(this.storage.load());
     }
 
     /**
@@ -29,7 +30,7 @@ public class Pilcrow {
 
     private void run() {
         Boolean isExit = false;
-        System.out.println(this.taskList);
+
         while (!isExit) {
             Scanner scanner = new Scanner(System.in);
             try {
@@ -38,6 +39,9 @@ public class Pilcrow {
                         this.ui, this.storage, this.taskList, parser);
 
                 isExit = (parser.getCommandWord().equals("bye"));
+                if (isExit) {
+                    scanner.close();
+                }
             } catch (InvalidInputException exception) {
                 ui.printException(exception);
             }
@@ -55,6 +59,7 @@ public class Pilcrow {
         case "event":
             Task task = Task.createTask(commandWord, restOfCommand, false);
             taskList.addTask(task);
+            storage.save(taskList);
             ui.printTaskAddedMessage(task, taskList);
             break;
         case "list":
@@ -63,11 +68,13 @@ public class Pilcrow {
         case "done":
             int index = parser.getIndex();
             taskList.setTaskIsDone(index, true);
+            storage.save(taskList);
             ui.printSetTaskIsDoneMessage(taskList.getTask(index), taskList);
             break;
         case "delete":
             index = parser.getIndex();
             taskList.deleteTask(index);
+            storage.save(taskList);
             ui.printDeleteTaskMessage(index);
             break;
         case "bye":
