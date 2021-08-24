@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -112,6 +113,9 @@ public class Duke {
                         addEvent(rest, l, 0);
                         break;
                     }
+                    case "date" : {
+                        getTasksOnDate(rest, l);
+                    }
                     case "delete": {
                         delete(rest, l);
                         break;
@@ -129,11 +133,13 @@ public class Duke {
                 printOutput(e.getMessage());
             }
         }
+        scanner.close();
     }
 
     public static void addToDo(String rest, TaskList l, int complete) throws DukeException {
         if (rest.length() > 0){
             ToDo td = new ToDo(rest);
+
             if (complete == 1) {
                 td.completeItem();
             }
@@ -167,18 +173,23 @@ public class Duke {
     public static void addDeadline(String rest, TaskList l, int complete) throws DukeException {
         System.out.println(rest);
         if (rest.length() > 0) {
-            String[] details = rest.split("/by ");
-            if (details.length == 1) {
-                throw new DukeException("☹ OOPS!!! Add a '/by deadline'");
-            } else {
-                Deadline deadline = new Deadline(details[0], details[1]);
-                if (complete == 1) {
-                    deadline.completeItem();
+            try{
+                String[] details = rest.split("/by ");
+                if (details.length == 1) {
+                    throw new DukeException("☹ OOPS!!! Add a '/by deadline'");
+                } else {
+                    Deadline deadline = new Deadline(details[0], details[1]);
+                    if (complete == 1) {
+                        deadline.completeItem();
+                    }
+                    l.addToList(deadline);
+                    printOutput("Got it. I've added this task:\n" + deadline + "\nNow you have " + l.getLength() + " tasks in the list.");
+                    updateFile(l);
                 }
-                l.addToList(deadline);
-                printOutput("Got it. I've added this task:\n" + deadline + "\nNow you have " + l.getLength() + " tasks in the list.");
-                updateFile(l);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("☹ OOPS!!! The date of the deadline is poorly formatted (d/MM/yyyy or d/MM/yyyy HHmm)"); 
             }
+            
         } else {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
@@ -187,20 +198,33 @@ public class Duke {
     public static void addEvent(String rest, TaskList l, int complete) throws DukeException {
         System.out.println(rest);
         if (rest.length() > 0) {
-            String[] details = rest.split("/at ");
-            if (details.length == 1) {
-                throw new DukeException("☹ OOPS!!! Add a '/at time of event'");
-            } else {
-                Event event = new Event(details[0], details[1]);
-                if (complete == 1) {
-                    event.completeItem();
+            try {
+                String[] details = rest.split("/at ");
+                if (details.length == 1) {
+                    throw new DukeException("☹ OOPS!!! Add a '/at time of event'");
+                } else {
+                    Event event = new Event(details[0], details[1]);
+                    if (complete == 1) {
+                        event.completeItem();
+                    }
+                    l.addToList(event);
+                    printOutput("Got it. I've added this task:\n" + event + "\nNow you have " + l.getLength() + " tasks in the list.");
+                    updateFile(l); 
                 }
-                l.addToList(event);
-                printOutput("Got it. I've added this task:\n" + event + "\nNow you have " + l.getLength() + " tasks in the list.");
-                updateFile(l);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("☹ OOPS!!! The date of the event is poorly formatted (d/MM/yyyy)");
             }
+            
         } else {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+        }
+    }
+
+    public static void getTasksOnDate(String date, TaskList l) {
+        Task[] tasks = l.tasksOnDate(date);
+        System.out.println(tasks.length);
+        for (Task task : tasks) {
+            System.out.println(task);
         }
     }
 
@@ -217,11 +241,9 @@ public class Duke {
         }
     }
 
-
     public static void printOutput(String input) {
-        String line = "-------------------------------------";
+        String line = "-------------------------------------------------------------------------------";
         System.out.println(line + "\n" + input + "\n" + line + "\n");
     }
 
 }
-

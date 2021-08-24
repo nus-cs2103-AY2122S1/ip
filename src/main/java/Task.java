@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 public class Task {
     private String title;
     private boolean completed;
@@ -15,6 +16,10 @@ public class Task {
     public String formatTask() {
         int complete = completed ? 1 : 0;
         return complete + " | " + this.title;
+    }
+    
+    public boolean compareDate(LocalDate compare) {
+        return false;
     }
 
     @Override
