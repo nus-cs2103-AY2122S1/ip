@@ -3,14 +3,14 @@ package catobot;
 import java.util.Scanner;
 
 public class Ui {
-    private Scanner sc;
     private static final String name = "catobot.Catobot";
     private static final String banner = "(=^^=)(=^^=)(=^^=)(=^^=)";
-
     private static final String greeting
             = "Hello I am " + name + " (>^^<)\n    What can I do for you meow?";
     private static final String byeMessage
             = "Bye meow! I will always wait here meow(>^^<)";
+
+    private Scanner sc;
 
     protected Ui() {
         this.sc = new Scanner(System.in);
