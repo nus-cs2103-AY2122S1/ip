@@ -1,4 +1,6 @@
-public class MarkAsDoneCommand extends Command{
+package duke;
+
+public class MarkAsDoneCommand extends Command {
     private int doneListIndex;//index in the list
 
     public MarkAsDoneCommand(int doneListIndex){

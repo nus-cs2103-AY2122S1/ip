@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     private String splitRegex;
 
@@ -16,6 +18,8 @@ public class Parser {
         } else if(words[0].equals("delete")){
             int deleteIndex = Integer.parseInt(words[1]);
             return new DeleteCommand(deleteIndex - 1);
+        } else if(words[0].equals("bye")) {
+            return new ExitCommand();
         } else {
             Task task = new Task();
             if(words[0].equals("todo")){

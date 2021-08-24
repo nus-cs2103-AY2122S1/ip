@@ -1,4 +1,6 @@
-public class AddCommand extends Command{
+package duke;
+
+public class AddCommand extends Command {
     private Task taskToBeAdded;
 
     public AddCommand(Task taskToBeAdded){
@@ -16,4 +18,5 @@ public class AddCommand extends Command{
     public boolean isExit(){
         return false;
     }
+
 }

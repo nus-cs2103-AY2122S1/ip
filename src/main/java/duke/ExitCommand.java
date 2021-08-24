@@ -1,11 +1,13 @@
-public class ListCommand extends Command{
+package duke;
+
+public class ExitCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage){
-        ui.listAllTasks(tasks);
+        ui.bye();
     }
 
     @Override
     public boolean isExit(){
-        return false;
+        return true;
     }
 }

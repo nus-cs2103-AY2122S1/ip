@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -48,7 +49,7 @@ public class Ui {
 //        Scanner scanner = new Scanner(System.in);
 //        String input = new String();
 //        input = scanner.nextLine();
-//        Parser parser = new Parser(" ");
+//        duke.Parser parser = new duke.Parser(" ");
 //        while(parser.shouldStop(input)){
 //            try {
 //                parser.parse(input);
@@ -64,44 +65,44 @@ public class Ui {
 //                    int deleteIndex = Integer.parseInt(words[1]);
 //                    deleteTask(deleteIndex - 1);
 //                } else {
-//                    ArrayList<Task> taskArray = convertFileToArray();
-//                    Task task = new Task();
+//                    ArrayList<duke.Task> taskArray = convertFileToArray();
+//                    duke.Task task = new duke.Task();
 //                    if (words[0].equals("todo")) {
 //                        if(words.length <= 1){
-//                            throw new DukeException("The description of a todo " +
+//                            throw new duke.DukeException("The description of a todo " +
 //                                    "cannot be empty.");
 //                        }
-//                        task = new ToDo(input.substring(5));
+//                        task = new duke.ToDo(input.substring(5));
 //                    } else if (words[0].equals("deadline")) {
 //                        if(words.length <= 1 || words[1].equals("/by")){
-//                            throw new DukeException("The description of deadline task " +
+//                            throw new duke.DukeException("The description of deadline task " +
 //                                    "cannot be empty.");
 //                        }
 //                        if(input.indexOf("/by") < 0){
-//                            throw new DukeException("Please enter '/by' followed by a task deadline.");
+//                            throw new duke.DukeException("Please enter '/by' followed by a task deadline.");
 //                        }
 //                        String content = input.substring(9, input.indexOf("/by") - 1);
 //                        if(input.indexOf("/by") + 4 >= input.length()){
-//                            throw new DukeException("Please enter a deadline.");
+//                            throw new duke.DukeException("Please enter a deadline.");
 //                        }
 //                        String by = input.substring(input.indexOf("/by") + 4);
-//                        task = new Deadline(content, by);
+//                        task = new duke.Deadline(content, by);
 //                    } else if (words[0].equals("event")) {
 //                        if(words.length <= 1 || words[1].equals("/at")){
-//                            throw new DukeException("The description of event " +
+//                            throw new duke.DukeException("The description of event " +
 //                                    "cannot be empty.");
 //                        }
 //                        if(input.indexOf("/at") < 0){
-//                            throw new DukeException("Please enter '/at' followed by an event time.");
+//                            throw new duke.DukeException("Please enter '/at' followed by an event time.");
 //                        }
 //                        String content = input.substring(6, input.indexOf("/at") - 1);
 //                        if(input.indexOf("/at") + 4 >= input.length()){
-//                            throw new DukeException("Please provide the event time.");
+//                            throw new duke.DukeException("Please provide the event time.");
 //                        }
 //                        String at = input.substring(input.indexOf("/at") + 4);
-//                        task = new Event(content, at);
+//                        task = new duke.Event(content, at);
 //                    } else {
-//                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+//                        throw new duke.DukeException("I'm sorry, but I don't know what that means :-(");
 //                    }
 //                    taskArray.add(task);
 //                    writeTaskToFile(task);
@@ -111,7 +112,7 @@ public class Ui {
 //                            + "\nNow you have "
 //                            + taskArray.size() + " tasks in the list.");
 //                }
-//            }catch(DukeException e){
+//            }catch(duke.DukeException e){
 //                System.out.println("☹ OOPS!!!" + e.getMessage());
 //            }
 //            input = scanner.nextLine();

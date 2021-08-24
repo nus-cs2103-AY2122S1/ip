@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -55,13 +57,13 @@ public class Storage {
 //            int i = 0;
 //            while(scan.hasNext()){
 //                String taskString = scan.nextLine();
-//                Task task = convertTaskStringToTask(taskString);
+//                duke.Task task = convertTaskStringToTask(taskString);
 //                System.out.println((i+1) + "." + task.toString());
 //                i++;
 //            }
 //        } catch (IOException e) {
 //            System.out.println(e.getMessage());
-//        } catch (DukeException dukeException){
+//        } catch (duke.DukeException dukeException){
 //            System.out.println(dukeException.getMessage());
 //        }
 //    }
@@ -98,7 +100,7 @@ public class Storage {
     }
 //
 //    public void markTaskAsDone(int index){
-//        ArrayList<Task> taskArray = convertFileToArray();
+//        ArrayList<duke.Task> taskArray = convertFileToArray();
 //        taskArray.get(index).done();
 //        System.out.println(taskArray.get(index).getStatus());
 //        convertTaskListToFile(taskArray);
@@ -107,8 +109,8 @@ public class Storage {
 //    }
 
 //    public void deleteTask(int index) {
-//        ArrayList<Task> taskArray = convertFileToArray();
-//        Task removedTask = taskArray.remove(index);
+//        ArrayList<duke.Task> taskArray = convertFileToArray();
+//        duke.Task removedTask = taskArray.remove(index);
 //        convertTaskArrayToFile(taskArray);
 //        System.out.println("Got it. I've removed this task:\n"
 //                + removedTask.toString()

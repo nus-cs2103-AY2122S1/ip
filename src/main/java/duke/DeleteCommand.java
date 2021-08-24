@@ -1,4 +1,6 @@
-public class DeleteCommand extends Command{
+package duke;
+
+public class DeleteCommand extends Command {
     private int deletedTaskIndex;// the index in the list
 
     public DeleteCommand(int deletedTaskIndex){
