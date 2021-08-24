@@ -33,7 +33,6 @@ public class Storage {
         Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String currTask = sc.nextLine();
-                System.out.println(currTask);
                 String[] taskDetails = currTask.split(" \\| ");
                 Task task;
                 String type = taskDetails[0];

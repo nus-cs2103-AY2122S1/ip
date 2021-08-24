@@ -16,12 +16,6 @@ class InvalidInputException extends DinoException {
     }
 }
 
-class TaskNotCategorizedException extends DinoException {
-    public TaskNotCategorizedException() {
-        super("😐 Please specify the type of your task!");
-    }
-}
-
 class EmptyListException extends DinoException {
     public EmptyListException() {
         super("😐 You don't have any task in your list~");

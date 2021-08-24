@@ -1,3 +1,5 @@
 T | 0 | eat
 T | 0 | sleep
-D | 0 | project | Sep 1 2021
+T | 0 | eat
+T | 0 | eat
+T | 0 | sleep
