@@ -17,6 +17,18 @@ public class Event extends Task {
     }
 
     /**
+     * Constructor for the Event class.
+     *
+     * @param description The description of the event.
+     * @param isDone A boolean indicating whether the task has been completed.
+     * @param at The date/time that the event occurs at.
+     */
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone);
+        this.at = at;
+    }
+
+    /**
      * Returns the string representation of the Event.
      *
      * @return A string representing the Event.
@@ -24,5 +36,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";
+    }
+
+    @Override
+    public String getSaveFormat() {
+        return "E|" + super.getSaveFormat() + "|" + this.at + '\n';
     }
 }

@@ -19,6 +19,17 @@ public class Task {
     }
 
     /**
+     * Constructor for a Task object.
+     *
+     * @param description The description of the task.
+     * @param isDone A boolean indicating whether the task has been completed.
+     */
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    /**
      * Gets the status icon of the task.
      *
      * @return "X" if the task is done, " " otherwise.
@@ -42,5 +53,9 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    public String getSaveFormat() {
+        return (isDone ? "1" : "0") + "|" + this.description;
     }
 }
