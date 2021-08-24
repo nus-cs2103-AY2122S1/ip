@@ -22,6 +22,8 @@ public class Parser {
                     tasks.complete(Character.getNumericValue(str.charAt(5)));
                 } else if (str.contains("delete")) {
                     tasks.delete(Character.getNumericValue(str.charAt(7)));
+                } else if (str.contains("find")){
+                    tasks.find(str.split(" ", 2)[1]);
                 } else {
                     tasks.add(str);
                 }
