@@ -1,7 +1,6 @@
 package mango;
 
 import mango.task.*;
-
 import java.util.ArrayList;
 
 /**
