@@ -8,6 +8,11 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    public Deadline(String description, String by) {
+        super(description);
+        this.by = by;
+    }
+
     public Deadline(String description, LocalDate date) {
         super(description);
         this.date = date;
@@ -24,7 +29,15 @@ public class Deadline extends Task {
     }
 
     public String formatSave() {
-        return "D | "  + ((super.isDone) ? "1 |" : "0 |") + " " + super.getDescription() + " | " + getTime();
+        if (time != null) {
+            return "D | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() +  " | " +
+                    date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + time;
+        } else if (date != null) {
+            return "D | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | " +
+                    date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        } else {
+            return "D | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | " + getTime();
+        }
     }
 
     @Override
@@ -32,8 +45,10 @@ public class Deadline extends Task {
         if (time != null) {
             return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                     + ", " + time + ")";
-        } else {
+        } else if (date != null) {
             return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        } else {
+            return "[D]" + super.toString() + " (by: " + by + ")";
         }
     }
 }

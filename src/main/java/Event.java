@@ -12,6 +12,11 @@ public class Event extends Task {
         this.date = date;
     }
 
+    public Event(String description, String at) {
+        super(description);
+        this.at = at;
+    }
+
     public Event(String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;
@@ -23,7 +28,14 @@ public class Event extends Task {
     }
 
     public String formatSave() {
-        return "E | "  + ((super.isDone) ? "1 |" : "0 |") + " " + super.getDescription() + " | " + getTime();
+        if (time != null) {
+            return "E | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | " +
+                    date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + time;
+        } else if (date != null) {
+            return "E | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | " +
+                    date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        }
+        return "E | "  + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | " + getTime();
     }
 
     @Override
@@ -31,8 +43,10 @@ public class Event extends Task {
         if (time != null) {
             return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                     + ", " + time + ")";
-        } else {
+        } else if (time != null) {
             return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        } else {
+            return "[D]" + super.toString() + " (by: " + at + ")";
         }
     }
 }
