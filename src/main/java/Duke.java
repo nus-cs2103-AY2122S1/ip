@@ -47,9 +47,9 @@ public class Duke {
                         int num = Integer.parseInt(splitted[1]);
                         if (0 < num && num <= listLen) {
                             listLen--;
-                            list.remove(num - 1);
                             System.out.println(bar + "\n    Nice! I've removed this task off the face of the Earth:\n    " + list.get(num - 1).toString() +
                                     "\n    Now you have " + listLen + " tasks in the list.\n" + bar);
+                            list.remove(num - 1);
                         } else {
                             throw new IncorrectFormatException("Item number not present. Try again?");
                         }
