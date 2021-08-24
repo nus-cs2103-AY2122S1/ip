@@ -1,5 +1,5 @@
-deadline buy bread /by Friday
-event eat bread /at Friday night 8pm
+deadline buy bread /by 2021-08-12
+event eat bread /at 2021-03-01
 list
 done 1
 list
@@ -10,13 +10,12 @@ blah
 done 4
 deadline
 deadline buy more bread
-deadline buy more bread /by tonight
 done 4
 event
-event have fun /at 7am
+event have fun /at 2021-04-12
 event have fun
 list
-delete 5
+delete 4
 list
-delete 5
+delete 4
 bye

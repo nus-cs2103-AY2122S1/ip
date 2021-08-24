@@ -1,24 +1,29 @@
-Howwwwwwdy! I'm Bob
+I'm waking up... please wait...
+
+You don't have the data directory and Bob text file yet.I'll make them for you now, you're welcome! :D
+
+OKKAYYY finally awake!
+Howwwwwwdy! I'm Bob :D
 What do you want?
 
 Okay okay I've added the task:
-[D] [ ] buy bread (by: Friday)
+[D] [ ] buy bread (by: Aug 12 2021)
 Yay 1 tasks!
 
 Okay okay I've added the task:
-[E] [ ] eat bread (at: Friday night 8pm)
+[E] [ ] eat bread (at: Mar 1 2021)
 Yay 2 tasks!
 
 Here's your tasks! Wow I'm so helpful!
-1.[D] [ ] buy bread (by: Friday)
-2.[E] [ ] eat bread (at: Friday night 8pm)
+1.[D] [ ] buy bread (by: Aug 12 2021)
+2.[E] [ ] eat bread (at: Mar 1 2021)
 
 Wow you finally did something productive!
-[D] [X] buy bread (by: Friday)
+[D] [X] buy bread (by: Aug 12 2021)
 
 Here's your tasks! Wow I'm so helpful!
-1.[D] [X] buy bread (by: Friday)
-2.[E] [ ] eat bread (at: Friday night 8pm)
+1.[D] [X] buy bread (by: Aug 12 2021)
+2.[E] [ ] eat bread (at: Mar 1 2021)
 
 You didn't specify your task! >:(
 
@@ -27,8 +32,8 @@ Okay okay I've added the task:
 Yay 3 tasks!
 
 Here's your tasks! Wow I'm so helpful!
-1.[D] [X] buy bread (by: Friday)
-2.[E] [ ] eat bread (at: Friday night 8pm)
+1.[D] [X] buy bread (by: Aug 12 2021)
+2.[E] [ ] eat bread (at: Mar 1 2021)
 3.[T] [ ] bake bread
 
 That doesn't make any sense! >:(
@@ -39,37 +44,30 @@ You didn't specify your task! >:(
 
 When is the deadline? >:(
 
-Okay okay I've added the task:
-[D] [ ] buy more bread (by: tonight)
-Yay 4 tasks!
-
-Wow you finally did something productive!
-[D] [X] buy more bread (by: tonight)
+Huh what task is that :/
 
 You didn't specify your task! >:(
 
 Okay okay I've added the task:
-[E] [ ] have fun (at: 7am)
-Yay 5 tasks!
+[E] [ ] have fun (at: Apr 12 2021)
+Yay 4 tasks!
 
 When is the event? >:(
 
 Here's your tasks! Wow I'm so helpful!
-1.[D] [X] buy bread (by: Friday)
-2.[E] [ ] eat bread (at: Friday night 8pm)
+1.[D] [X] buy bread (by: Aug 12 2021)
+2.[E] [ ] eat bread (at: Mar 1 2021)
 3.[T] [ ] bake bread
-4.[D] [X] buy more bread (by: tonight)
-5.[E] [ ] have fun (at: 7am)
+4.[E] [ ] have fun (at: Apr 12 2021)
 
 Okay task yeeted away :D
-[E] [ ] have fun (at: 7am)
-Yay 4 tasks!
+[E] [ ] have fun (at: Apr 12 2021)
+Yay 3 tasks!
 
 Here's your tasks! Wow I'm so helpful!
-1.[D] [X] buy bread (by: Friday)
-2.[E] [ ] eat bread (at: Friday night 8pm)
+1.[D] [X] buy bread (by: Aug 12 2021)
+2.[E] [ ] eat bread (at: Mar 1 2021)
 3.[T] [ ] bake bread
-4.[D] [X] buy more bread (by: tonight)
 
 Huh what task is that :/
 
