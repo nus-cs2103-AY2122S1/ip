@@ -2,21 +2,23 @@ import java.util.ArrayList;
 
 /**
  * Represents a response the bot makes to the user.
+ *
  * @author Nigel Tan
  */
-public class Response {
+public class Ui {
+
     private final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
     private int count;
 
     /**
      * Constructor
      */
-    public Response() {
+    public Ui() {
         this.count = 1;
     }
 
     /**
-     * This method handles the greet event.
+     * Handles the greet event.
      */
     public void greet() {
         System.out.println(HORIZONTAL_LINE +
@@ -26,11 +28,11 @@ public class Response {
     }
 
     /**
-     * This method handles the add event.
-     * @param task the Task that the user wants to add
+     * Responds to the add event.
+     *
+     * @param lst the TaskList that the user wants to add the task to
      */
-    public void add(Task task) {
-        lst.add(task);
+    public void replyAdd(ArrayList<Task> lst, Task task) {
         String num = String.valueOf(lst.size());
         System.out.println(HORIZONTAL_LINE + "    Got it. I've added this task: \n" + "    " +
                 task.toString() + "\n" + "    Now you have " + num + " tasks in the list\n" +
@@ -38,7 +40,7 @@ public class Response {
     }
 
     /**
-     * This method handles the exit event when the user says bye.
+     * Responds to the exit event when the user says bye.
      */
     public void exit() {
         System.out.println(HORIZONTAL_LINE +
@@ -47,12 +49,14 @@ public class Response {
     }
 
     /**
-     * This method handles the display list event when the user says list.
+     * Responds to the display list event when the user says list.
+     *
+     * @param lst The TaskList to be displayed.
      */
-    public void display() {
+    public void replyDisplay(TaskList lst) {
         this.count = 1;
         System.out.println(HORIZONTAL_LINE + "    Here are the tasks in your list:");
-        lst.forEach(item -> {
+        lst.getLst().forEach(item -> {
             System.out.println("    " + count + ". " + item.toString());
             count++;
         });
@@ -60,31 +64,28 @@ public class Response {
     }
 
     /**
-     * This method handles the markDone event when the user says done, marking the Task as done.
-     * @param pos the position of the Task in the ArrayList lst
+     * Responds to the markDone event.
+     *
+     * @param task The task that is marked done.
      */
-    public void markDone(int pos) {
-        Task task = lst.get(pos);
-        task.mark();
+    public void replyMarkDone(Task task) {
         System.out.println(HORIZONTAL_LINE + "    Nice! I've marked this task as done:\n" +
                 "    " + task.toString() +
                 "\n" + HORIZONTAL_LINE);
     }
 
     /**
-     * This method handles the delete response.
-     * @param pos the position of the task in the list to delete
+     * Responds to the delete event.
+     *
+     * @param task the task in the list to delete.
+     * @param size the size of the TaskList.
      */
-    public void delete(int pos) {
-        Task task = lst.remove(pos);
-        String num = String.valueOf(lst.size());
+    public void replyDelete(Task task, int size) {
+        String num = String.valueOf(size);
         System.out.println(HORIZONTAL_LINE + "    Noted. I've removed this task:\n" +
                 "    " + task.toString() +
                 "\n" + "    Now you have " + num + " tasks in the list\n"
                 +  HORIZONTAL_LINE);
     }
 
-    public ArrayList<Task> getLst() {
-        return lst;
-    }
 }
