@@ -9,7 +9,7 @@ import tasks.Task;
  */
 public class DukeLogic {
 
-  private static ArrayList<Task> tasks = DukeStorage.tasksList;
+  private static ArrayList<Task> tasks = Storage.tasksList;
 
   enum Actions {
     DELETE,
@@ -49,8 +49,8 @@ public class DukeLogic {
       addTask(getArgs(input, "event "), Task.Type.EVENT);
       return true;
     } else if (matches("save", input)) {
-      DukeStorage.writeToDatabase();
-      DukeStorage.readFromDatabase();
+      Storage.writeToDatabase();
+      Storage.readFromDatabase();
       return true;
     } else if (matches("reset", input)) {
       tasks.clear();

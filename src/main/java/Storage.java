@@ -11,7 +11,7 @@ import tasks.Task;
  * Source of truth for the task list as well as able to write to and read from
  * the database as necessary.
  */
-public class DukeStorage {
+public class Storage {
 
   public static final ArrayList<Task> tasksList = new ArrayList<>();
 
