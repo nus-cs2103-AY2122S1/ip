@@ -83,6 +83,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Formats the date from the printed format to the format required to make a LocalDate object.
+     * (e.g. Dec 1 2021 to 2021-12-01)
+     *
+     * @param date Date of Event or Deadline task in the printed format.
+     * @return Date in the String format required to make a LocalDate object.
+     */
     private String formatDate(String date) {
         String day;
         String month;
@@ -157,6 +164,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds text to the existing text file without overriding it.
+     *
+     * @param textToAppend Text to be added to the existing text file.
+     */
     private void appendToFile(String textToAppend) {
         try {
             FileWriter fw = new FileWriter(this.path + "/bob.txt", true); //FileWriter in append mode
