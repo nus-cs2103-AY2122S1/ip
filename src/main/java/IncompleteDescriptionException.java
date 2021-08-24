@@ -1,5 +1,5 @@
 public class IncompleteDescriptionException extends DukeException{
-    IncompleteDescriptionException(String messgae) {
-        super(messgae);
+    IncompleteDescriptionException(String message) {
+        super(message);
     }
 }
