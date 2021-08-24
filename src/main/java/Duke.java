@@ -8,15 +8,15 @@ public class Duke {
         String welcomeMessage = "Hello I'm Duke!\nWhat can I do for you?";
         printMessage(welcomeMessage);
 
-        boolean run = true;
-        while (run) {
+        boolean isCompleted = false;
+        while (! isCompleted) {
             String command = sc.nextLine();
             String[] commandTokens = command.split(" ");
             // parse command
             try {
                 switch (commandTokens[0]) {
                     case "bye":
-                        run = false;
+                        isCompleted = true;
                         break;
                     case "done":
                         printMessage(toDoList.markAsCompleted(command.substring(5).trim()));
