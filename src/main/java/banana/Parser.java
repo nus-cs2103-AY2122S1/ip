@@ -24,7 +24,7 @@ public class Parser {
     }
 
     /**
-     * Gets the input.
+     * Gets the user input.
      *
      * @return the input.
      */
