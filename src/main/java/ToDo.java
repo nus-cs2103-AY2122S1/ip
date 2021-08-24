@@ -12,6 +12,16 @@ public class ToDo extends Task {
     }
 
     /**
+     * Constructor for the ToDo class.
+     *
+     * @param description The description of the task.
+     * @param isDone A boolean indicating whether the task has been completed.
+     */
+    public ToDo(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
+    /**
      * Returns the string representation of the task.
      *
      * @return A string representing the ToDo task.
@@ -19,5 +29,10 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public String getSaveFormat() {
+        return "T|" + super.getSaveFormat() + '\n';
     }
 }

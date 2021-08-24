@@ -17,6 +17,18 @@ public class Deadline extends Task {
     }
 
     /**
+     * Constructor for the Deadline class.
+     *
+     * @param description The description of the task.
+     * @param isDone A boolean indicating whether the task has been completed.
+     * @param by The deadline of the task.
+     */
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = by;
+    }
+
+    /**
      * Returns the string representation of the task.
      *
      * @return A string representing the Deadline task.
@@ -24,5 +36,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
+    }
+
+    @Override
+    public String getSaveFormat() {
+        return "D|" + super.getSaveFormat() + "|" + this.by + '\n';
     }
 }
