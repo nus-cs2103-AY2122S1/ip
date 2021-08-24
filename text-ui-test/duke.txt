@@ -1,0 +1,6 @@
+[T][X] inout
+[T][ ] yes
+[T][X] yes
+[D][X] hw --(by: ght)
+[E][ ] run --(at: p)
+[T][ ] shower
