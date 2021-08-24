@@ -1,0 +1,4 @@
+T|0|Test todo
+D|1|Test deadline|This time
+E|0|Test event|That time
+T|1|Test second todo

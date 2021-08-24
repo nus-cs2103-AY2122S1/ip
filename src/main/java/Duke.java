@@ -1,5 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -13,6 +16,46 @@ public class Duke {
         System.out.println("Hello! I'm Nukem\n"
                 + "What can I do for you?");
         ArrayList<Task> storage = new ArrayList<>();
+
+        try {
+            File myObj = new File("./Duke.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String item = myReader.nextLine();
+                String[] splitItem = item.split("\\|");
+                String taskType = splitItem[0];
+                String completed = splitItem[1];
+                String desc = splitItem[2];
+                String date = "";
+                if (splitItem.length > 3) date = splitItem[3];
+                Task nextTask = new Task("");
+                switch (taskType) {
+                    case ("T"):
+                        nextTask = new Todo(desc);
+                        break;
+                    case ("D"):
+                        nextTask = new Deadline(desc, date);
+                        break;
+                    case ("E"):
+                        nextTask = new Event(desc, date);
+                }
+                if (completed.equals("1")) nextTask.markAsDone();
+                storage.add(nextTask);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            try {
+                File myObj = new File("./Duke.txt");
+                if (myObj.createNewFile()) {
+                    System.out.println("File created: " + myObj.getName());
+                } else {
+                    System.out.println("File already exists.");
+                }
+            } catch (IOException ioe) {
+                System.out.println("Error occurred while creating the file");
+            }
+        }
+
         String tempString;
         Scanner input = new Scanner(System.in);
         // Keep asking for input as long as "bye" is not typed
