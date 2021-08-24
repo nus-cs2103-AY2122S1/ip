@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -50,6 +51,9 @@ public class Duke {
             System.out.println(e);
             System.out.println("Please try again");
             waitResponse();
+        } catch (DateTimeParseException e) {
+            System.out.println("Sorry, I don't understand your date format.");
+            waitResponse();
         }
     }
 
@@ -59,14 +63,13 @@ public class Duke {
             if (taskNumber <= tasks.size() && taskNumber > 0) {
                 Task taskToDelete = tasks.get(taskNumber - 1);
                 tasks.remove(taskNumber - 1);
-                System.out.println(String.format("Noted. I've removed this task:\n  %s\nNow you have %d task in the list.",
-                        taskToDelete, tasks.size()));
+                System.out.printf("Noted. I've removed this task:\n  %s\nNow you have %d task in the list.%n",
+                        taskToDelete, tasks.size());
             } else {
                 throw new TaskNotFoundException("the task chosen does not exist. Use 'list' to see all your tasks.");
             }
             waitResponse();
         } catch (NumberFormatException e){
-            System.out.println(e);
             throw new InvalidInputException("command 'delete' require an integer as the second parameter");
         }
     }
@@ -84,7 +87,7 @@ public class Duke {
     }
 
 
-    private static void handleDeadline(String action) throws NoActionException, NoTimeException{
+    private static void handleDeadline(String action) throws NoActionException, NoTimeException, DateTimeParseException {
         if (action.length() == 0) {
             throw new NoActionException("Command 'deadline' requires a task action");
         }
@@ -101,7 +104,7 @@ public class Duke {
         waitResponse();
     }
 
-    private static void handleEvent(String action) throws NoActionException, NoTimeException{
+    private static void handleEvent(String action) throws NoActionException, NoTimeException, DateTimeParseException{
         if (action.trim().length() == 0) {
             throw new NoActionException("Command 'event' requires a task action");
         }
