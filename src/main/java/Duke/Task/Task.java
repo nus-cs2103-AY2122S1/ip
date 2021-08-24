@@ -1,3 +1,5 @@
+package Duke.Task;
+
 /**
  * This class represents a user's task.
  */

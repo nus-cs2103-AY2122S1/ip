@@ -1,3 +1,5 @@
+package Duke.Task;
+
 /**
  * This class represents a deadline - a task that needs to be
  * done before a specific date/time.

@@ -1,3 +1,5 @@
+package Duke.Task;
+
 /**
  * This class represents a to-do - a task without any date/time attached.
  */

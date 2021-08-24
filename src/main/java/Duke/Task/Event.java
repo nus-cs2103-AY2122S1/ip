@@ -1,3 +1,5 @@
+package Duke.Task;
+
 /**
  * This class represents a event - a task that starts at a specific time
  * and ends at a specific time.

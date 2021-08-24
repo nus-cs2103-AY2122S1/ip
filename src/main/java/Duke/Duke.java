@@ -1,3 +1,10 @@
+package Duke;
+
+import Duke.Task.Deadline;
+import Duke.Task.Event;
+import Duke.Task.Task;
+import Duke.Task.Todo;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,14 +16,15 @@ import java.util.Scanner;
  */
 public class Duke {
     private final List<Task> list = new ArrayList<>();
-    private static final String WELCOME = "Hello, I'm Duke\nWhat can I do for you?";
-    private static final String BYE = "Bye. Hope to see you again soon!";
+    private static final String WELCOME_MESSAGE = "Hello, I'm Duke\nWhat can I do for you?";
+    private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String LINE = "____________________________________________________________\n";
 
     /**
      * Prints welcome message, then accepts user input until exit command is entered.
      */
     public void start() {
-        formatAndPrint(WELCOME);
+        formatAndPrint(WELCOME_MESSAGE);
         Scanner sc = new Scanner(System.in);
         boolean continueListening = true;
         while (continueListening) {
@@ -41,7 +49,7 @@ public class Duke {
         String command = splitCommand[0];
         switch (command) {
         case "bye":
-            formatAndPrint(BYE);
+            formatAndPrint(GOODBYE_MESSAGE);
             return false;
         case "list":
             displayList();
@@ -173,12 +181,6 @@ public class Duke {
      * @param s String to be outputted.
      */
     private static void formatAndPrint(String s) {
-        String line = "____________________________________________________________\n";
-        System.out.printf("%s%s\n%s", line, s, line);
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.start();
+        System.out.printf("%s%s\n%s", LINE, s, LINE);
     }
 }
