@@ -9,8 +9,9 @@ import tasks.ToDoTask;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ParserTest {
-    private final Parser parser = new Parser();
+public class InputParserTest {
+    private final InputParser parser = new InputParser();
+    private final Ui ui = new Ui();
 
     @Test
     public void testDelete() {
@@ -23,7 +24,7 @@ public class ParserTest {
             String actual = parser.getCommand("delete 1").execute(t2);
             assertEquals(expected, actual);
         } catch (DukeException e) {
-            Ui.print(e.getMessage());
+            ui.print(e.getMessage());
         }
     }
 
@@ -38,7 +39,7 @@ public class ParserTest {
             String actual = parser.getCommand("done 1").execute(t2);
             assertEquals(expected, actual);
         } catch (DukeException e) {
-            Ui.print(e.getMessage());
+            ui.print(e.getMessage());
         }
     }
 
@@ -51,7 +52,7 @@ public class ParserTest {
             String actual = parser.getCommand("todo do CS2030 quiz").execute(t2);
             assertEquals(expected, actual);
         } catch (DukeException e) {
-            Ui.print(e.getMessage());
+            ui.print(e.getMessage());
         }
     }
 
@@ -66,7 +67,7 @@ public class ParserTest {
                     .execute(t2);
             assertEquals(expected, actual);
         } catch (DukeException e) {
-            Ui.print(e.getMessage());
+            ui.print(e.getMessage());
         }
     }
 
@@ -81,7 +82,7 @@ public class ParserTest {
                     .execute(t2);
             assertEquals(expected, actual);
         } catch (DukeException e) {
-            Ui.print(e.getMessage());
+            ui.print(e.getMessage());
         }
     }
 }

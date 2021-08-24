@@ -1,17 +1,17 @@
 package tasks;
 
 public class Task {
-    private final String taskName;
-    private boolean isDone;
+    protected final String taskName;
+    protected boolean isDone;
 
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         // Mark done task with X
-        return isDone ? "X" : " ";
+        return isDone;
     }
 
     public String markDone() {
@@ -19,8 +19,13 @@ public class Task {
         return this.toString();
     }
 
+    public String getDescription() {
+        return this.taskName;
+    }
+
     @Override
     public String toString() {
-        return "[" + this.getStatus() + "]  " + this.taskName ;
+        String status = isDone ? "X" : " ";
+        return "[" + status + "]  " + this.taskName ;
     }
 }
