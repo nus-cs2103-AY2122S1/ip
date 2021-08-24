@@ -1,14 +1,21 @@
 package duke;
 
-import duke.storage.TaskList;
-
+/**
+ * Represents the chat bot
+ */
 public class Duke {
     private Ui ui;
 
+    /**
+     * Constructor for <code>Duke</code>
+     */
     public Duke() {
         this.ui = new Ui();
     }
 
+    /**
+     * Runs the chat bot
+     */
     public void run() {
        ui.greet();
 
@@ -28,6 +35,11 @@ public class Duke {
        ui.bye();
     }
 
+    /**
+     * The main method. A Duke instance is instantiated and run.
+     *
+     * @param args the command line arguments (ignored)
+     */
     public static void main(String[] args) {
        Duke xiri = new Duke();
        xiri.run();

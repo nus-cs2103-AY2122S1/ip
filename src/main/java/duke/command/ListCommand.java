@@ -5,7 +5,16 @@ import duke.DukeException;
 import duke.storage.TaskList;
 import duke.task.Task;
 
+/**
+ * Command to list all tasks
+ */
 public class ListCommand implements Command{
+    /**
+     * Runs the command
+     *
+     * @return message if success
+     * @throws DukeException if cannot read tasks from memory
+     */
     @Override
     public String run() throws DukeException {
         if (TaskList.getInstance().getSize() == 0) {

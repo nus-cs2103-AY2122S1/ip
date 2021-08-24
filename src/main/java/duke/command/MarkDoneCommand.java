@@ -4,13 +4,27 @@ import java.io.IOException;
 import duke.DukeException;
 import duke.storage.TaskList;
 
+/**
+ * Command to mark a task as done
+ */
 public class MarkDoneCommand implements Command{
-    int index;
+    private int index;
 
+    /**
+     * Constructor of <code>MarkDoneCommand</code>
+     *
+     * @param index
+     */
     public MarkDoneCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Runs the command
+     *
+     * @return message if success
+     * @throws DukeException if cannot access the memory
+     */
     @Override
     public String run() throws DukeException {
         try {

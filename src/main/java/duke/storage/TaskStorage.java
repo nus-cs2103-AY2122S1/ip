@@ -10,11 +10,19 @@ import java.util.Scanner;
 import duke.DukeException;
 import duke.task.*;
 
+/**
+ * Responsible for reading and writing tasks to the memory
+ */
 public class TaskStorage {
     private File dataFile;
     static final String DATA_FILE_DIR = "./data";
     static final String DATA_FILE_PATH = "./data/tasks.txt";
 
+    /**
+     * Constructor of <code>TaskStorage</code>
+     *
+     * @throws IOException if cannot initialize the data file
+     */
     public TaskStorage() throws IOException {
         this.dataFile = initializeDataFile();
     }
@@ -31,6 +39,11 @@ public class TaskStorage {
         return dataFile;
     }
 
+    /**
+     * Reads all tasks from the memory
+     *
+     * @return the list of tasks read from the memory
+     */
     public ArrayList<Task> readTasksFromMemory() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -83,6 +96,11 @@ public class TaskStorage {
         }
     }
 
+    /**
+     * Writes a list of tasks to memory
+     * @param tasks the array lists of tasks
+     * @throws IOException if cannot write to memory
+     */
     public void writeToMem(ArrayList<Task> tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(DATA_FILE_PATH);
         String data = "";

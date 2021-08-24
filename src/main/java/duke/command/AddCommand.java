@@ -5,13 +5,27 @@ import duke.DukeException;
 import duke.task.Task;
 import duke.storage.TaskList;
 
+/**
+ * Represents a command to add new task
+ */
 public class AddCommand implements Command {
     Task task;
 
+    /**
+     * Constructor of AddCommand
+     *
+     * @param task the task to add
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
 
+    /**
+     * Runs the command
+     *
+     * @return message if success
+     * @throws DukeException if cannot add new task to memory
+     */
     @Override
     public String run() throws DukeException {
         try {

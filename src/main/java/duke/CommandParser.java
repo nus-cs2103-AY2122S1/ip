@@ -7,9 +7,18 @@ import duke.command.*;
 import duke.task.*;
 import duke.storage.TaskList;
 
+/**
+ * Include utilities for parsing a string input into a command
+ */
 public class CommandParser {
     private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
+    /**
+     * Check if a string input represents an exit command
+     *
+     * @param commandString string input
+     * @return true if <code>commandString</code> represents an exit command, else false
+     */
     public static boolean isExit(String commandString) {
         if (commandString.startsWith("bye")) {
             return true;
@@ -18,6 +27,13 @@ public class CommandParser {
         }
     }
 
+    /**
+     * Parse a string input into a corresponding command
+     *
+     * @param commandString string input
+     * @return the corresponding command
+     * @throws DukeException if the command cannot be identified
+     */
     public static Command parse(String commandString) throws DukeException {
         if (commandString.startsWith("list")) {
             return parseListCommand();
