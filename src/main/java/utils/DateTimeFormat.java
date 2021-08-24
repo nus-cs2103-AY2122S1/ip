@@ -16,6 +16,9 @@ public class DateTimeFormat {
         return dateTimeFormat;
     }
     
+    // private to allow construction through public static method
+    private DateTimeFormat() {}
+    
     private void init() {
         initialiseDateFormats();
         initialiseTimeFormats();

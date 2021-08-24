@@ -9,7 +9,7 @@ import utils.DateTimeFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class EventCommand extends AddCommand {
+public class EventCommand extends AddTaskCommand {
 
     public static final String COMMAND_WORD = "event";
 
@@ -19,10 +19,10 @@ public class EventCommand extends AddCommand {
 
     @Override
     public String execute(TaskList taskList) throws DukeException {
-        String desc = super.extractDesc(commandParams, COMMAND_WORD, Event.SPLIT_WORD);
-        String[] dateTime = super.extractDateTime(commandParams, COMMAND_WORD, Event.SPLIT_WORD);
-        LocalDate atDate = super.extractDate(dateTime);
-        LocalTime atTime = super.extractTime(dateTime);
+        String[] paramArray = super.splitUserParams(commandParams, COMMAND_WORD, Event.SPLIT_WORD);
+        String desc = super.extractDesc(paramArray, COMMAND_WORD);
+        LocalDate atDate = super.extractDate(paramArray);
+        LocalTime atTime = super.extractTime(paramArray);
         
         Task event = new Event(desc, atDate, atTime);
         taskList.addTask(event);

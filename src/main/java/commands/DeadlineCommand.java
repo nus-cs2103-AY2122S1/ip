@@ -9,7 +9,7 @@ import utils.DateTimeFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class DeadlineCommand extends AddCommand {
+public class DeadlineCommand extends AddTaskCommand {
 
     public static final String COMMAND_WORD = "deadline";
 
@@ -19,10 +19,10 @@ public class DeadlineCommand extends AddCommand {
     
     @Override
     public String execute(TaskList taskList) throws DukeException {
-        String desc = super.extractDesc(commandParams, COMMAND_WORD, Deadline.SPLIT_WORD);
-        String[] dateTime = super.extractDateTime(commandParams, COMMAND_WORD, Deadline.SPLIT_WORD);
-        LocalDate byDate = super.extractDate(dateTime);
-        LocalTime byTime = super.extractTime(dateTime);
+        String[] paramArray = super.splitUserParams(commandParams, COMMAND_WORD, Deadline.SPLIT_WORD);
+        String desc = super.extractDesc(paramArray, COMMAND_WORD);
+        LocalDate byDate = super.extractDate(paramArray);
+        LocalTime byTime = super.extractTime(paramArray);
 
         Task deadline = new Deadline(desc, byDate, byTime);
         taskList.addTask(deadline);

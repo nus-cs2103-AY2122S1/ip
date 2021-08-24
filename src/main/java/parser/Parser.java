@@ -40,7 +40,7 @@ public class Parser {
                 return new DeleteCommand(inputs[1]);
                 
             case TodoCommand.COMMAND_WORD:
-                return new TodoCommand(inputs[1]);
+                return new TodoCommand(inputs[1], dateTimeFormat);
                 
             case EventCommand.COMMAND_WORD:
                 return new EventCommand(inputs[1], dateTimeFormat);
