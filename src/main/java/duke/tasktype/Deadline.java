@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import duke.Duke;
+import duke.Ui;
 import duke.exception.WrongCommandFormatException;
 
 /**
@@ -82,6 +83,14 @@ public class Deadline implements Task {
         this.isDone = isDone;
     }
 
+    public DateTimeFormatter getCurrentFormat() {
+        return this.currentFormat;
+    }
+
+    public LocalDate getDeadline() {
+        return this.deadline;
+    }
+
     /**
      * Overridden method to get the type icon.
      * @return The String representation of the icon.
@@ -135,14 +144,9 @@ public class Deadline implements Task {
     @Override
     public void markComplete() {
         if (this.isDone) {
-            System.out.println("`" + this.description.substring(1) + "`" + " is already completed.");
+            Ui.taskAlrCompleted(this);
         } else {
-            System.out.println("Completed:"
-                            + this.description
-                            + " (by:"
-                            + this.deadline.format(this.currentFormat) + ")"
-            );
-            System.out.println("You didn't overshoot the deadline right?");
+            Ui.markCompleteDeadline(this);
             this.isDone = true;
         }
     }

@@ -1,5 +1,6 @@
 package duke.tasktype;
 
+import duke.Ui;
 import duke.exception.WrongCommandFormatException;
 
 /**
@@ -85,12 +86,10 @@ public class Todo implements Task {
     @Override
     public void markComplete() {
         if (isDone) {
-            System.out.println("`" + this.description.substring(1) + "`" + " is already completed.");
+            Ui.taskAlrCompleted(this);
         } else {
             this.isDone = true;
-            System.out.println(
-                    "Finally! Took you long enough to complete:" + this.description
-            );
+            Ui.markCompleteTodo(this);
         }
     }
 
