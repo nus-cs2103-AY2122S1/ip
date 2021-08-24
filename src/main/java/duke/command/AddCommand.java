@@ -23,4 +23,10 @@ public class AddCommand extends Command {
         tasks.addTask(task);
         ui.printAddedTask(task);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        AddCommand other = (AddCommand) obj;
+        return this.task.toString().equals(other.task.toString());
+    }
 }

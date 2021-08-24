@@ -10,21 +10,25 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    // TODO make sure to test if data file doesn't exist
+
     File savedTasksFile;
 
     public Storage(String filePath) {
         this.savedTasksFile = new File(filePath);
-        if (!savedTasksFile.exists()) {
-            savedTasksFile.mkdirs();
+        File dir = new File(savedTasksFile.getParent());
+        if (!dir.exists()) {
+            dir.mkdirs();
         }
     }
 
     public ArrayList<String> load() {
-        if (!savedTasksFile.exists()) {
-            return new ArrayList<>();
-        } else {
-            try {
+
+        try {
+            if (savedTasksFile.createNewFile()) {
+                System.out.println("pee pee");
+                return new ArrayList<>();
+            } else {
+                System.out.println("poo poo");
                 Scanner reader = new Scanner(savedTasksFile);
                 ArrayList<String> loadingStrings = new ArrayList<>();
                 while (reader.hasNextLine()) {
@@ -32,10 +36,10 @@ public class Storage {
                     loadingStrings.add(next);
                 }
                 return loadingStrings;
-            } catch (FileNotFoundException e) {
-                System.out.println("AN ERROR HAS OCCURRED WHILE LOADING");
-                e.printStackTrace();
             }
+        } catch (IOException e) {
+            System.out.println("AN ERROR HAS OCCURRED WHILE LOADING");
+            e.printStackTrace();
         }
         return new ArrayList<>();
     }
