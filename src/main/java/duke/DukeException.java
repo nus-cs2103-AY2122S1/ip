@@ -5,12 +5,12 @@ package duke;
  * is unique Duke instances.
  */
 public class DukeException extends Exception{
-  /**
-   * Constructs the DukeException object.
-   *
-   * @param s the message associated with the exception
-   */
-  public DukeException(String s) {
-    super(s);
-  }
+    /**
+     * Constructs the DukeException object.
+     *
+     * @param s the message associated with the exception
+     */
+    public DukeException(String s) {
+        super(s);
+    }
 }
