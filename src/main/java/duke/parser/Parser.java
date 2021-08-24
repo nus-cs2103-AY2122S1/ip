@@ -23,6 +23,12 @@ public class Parser {
         this.ui = new Ui();
     }
 
+    /**
+     * Returns true if the program should still keep going on (e.g., when input is not equal to "bye")
+     *
+     * @param input full raw user input line.
+     * @return true if input is not equal to "bye".
+     */
     public boolean parseInput(String input) {
         ui.printDivider();
         try {
@@ -46,7 +52,13 @@ public class Parser {
         return true;
     }
 
-    void addItem(String input) throws DukeException {
+    /**
+     * Parses add command from the user.
+     *
+     * @param input full raw user input line.
+     * @throws DukeException if the user input is of an invalid format.
+     */
+    private void addItem(String input) throws DukeException {
         Task newItem = null;
         if (input.contains("todo")) {
             String[] parsedInput = input.split(" ", 2); // Splits input into array of [todo, ...]
@@ -89,17 +101,35 @@ public class Parser {
         taskList.add(newItem);
     }
 
-    void markAsDone(String input) throws DukeException {
+    /**
+     * Parses done command from the user
+     *
+     * @param input full raw user input line.
+     * @throws DukeException if the user input is of an invalid format.
+     */
+    private void markAsDone(String input) throws DukeException {
         int index = getIndexFromInput(input);
         taskList.markTaskAsDone(index);
     }
 
-    void deleteItem(String input) throws DukeException {
+    /**
+     * Parses delete command from the user
+     *
+     * @param input full raw user input line.
+     * @throws DukeException if the user input is of an invalid format.
+     */
+    private void deleteItem(String input) throws DukeException {
         int index = getIndexFromInput(input);
         taskList.delete(index);
     }
 
-    int getIndexFromInput(String input) throws DukeException {
+    /**
+     * Retrieves the number from user input.
+     *
+     * @param input full raw user input line.
+     * @throws DukeException if the user input is of an invalid format.
+     */
+    private int getIndexFromInput(String input) throws DukeException {
         String[] parsedInput = input.split(" ");
         if (isIncomplete(parsedInput)) {
             throw new DukeException("I do not know which task you are referring to. Please provide a number.");
@@ -107,11 +137,11 @@ public class Parser {
         return Integer.parseInt(parsedInput[1]);
     }
 
-    boolean isIncomplete(String[] arr) {
+    private boolean isIncomplete(String[] arr) {
         return arr.length <= 1;
     }
 
-    void printItems() {
+    private void printItems() {
         taskList.printItems();
     }
 }

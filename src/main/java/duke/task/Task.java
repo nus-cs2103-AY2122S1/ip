@@ -19,10 +19,20 @@ public abstract class Task {
         return name;
     }
 
+    /**
+     * Returns DONE_STATUS_INDICATOR if task is done, and " " otherwise.
+     *
+     * @return DONE_STATUS_INDICATOR if task is done.
+     */
     public String getStatusIcon() {
         return isDone ? DONE_STATUS_INDICATOR : " ";
     }
 
+    /**
+     * Returns a Task that is marked as done.
+     *
+     * @return a Task that is marked as done.
+     */
     public abstract Task markAsDone();
 
     public String toString() {

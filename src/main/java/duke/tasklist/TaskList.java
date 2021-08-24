@@ -38,6 +38,11 @@ public class TaskList {
         return list.get(index - 1);
     }
 
+    /**
+     * Marks a task as done using their index (1-based).
+     *
+     * @param index Index of item that wants to be marked as done.
+     */
     public void markTaskAsDone(int index) {
         Task doneTask = getTask(index).markAsDone();
         list.set(index - 1, doneTask);
@@ -46,6 +51,11 @@ public class TaskList {
         saveData();
     }
 
+    /**
+     * Adds a task to the list.
+     *
+     * @param item The task that is to be added.
+     */
     public void add(Task item) {
         addWithoutPrinting(item);
         ui.print("Noted! I've added the following task:");
@@ -58,6 +68,11 @@ public class TaskList {
         saveData();
     }
 
+    /**
+     * Deletes a task using their index (1-based).
+     *
+     * @param index Index of item that wants to be deleted.
+     */
     public void delete(int index) {
         Task removedItem = list.remove(index - 1);
         ui.print("Got it. I've removed the following task:");
@@ -70,6 +85,9 @@ public class TaskList {
         ui.print("Total tasks: %d%n", list.size());
     }
 
+    /**
+     * Prints the current list of tasks.
+     */
     public void printItems() {
         ui.print("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {

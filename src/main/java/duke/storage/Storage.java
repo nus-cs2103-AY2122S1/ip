@@ -25,6 +25,11 @@ public class Storage {
         this.fileName = fileName;
     }
 
+    /**
+     * Returns the list of tasks from the saved text file.
+     *
+     * @return List of Tasks.
+     */
     public List<Task> load() {
         String path = directory + "/" + fileName;
         File file = new File(path);
@@ -67,6 +72,13 @@ public class Storage {
         return loadedTasks;
     }
 
+    /**
+     * Returns true if file does not exist and false otherwise.
+     *
+     * @param fileName File name where task data is stored.
+     * @return true if file does not exist.
+     * @throws IOException if an I/O error occurred.
+     */
     public boolean createFileIfNotExists(String fileName) throws IOException {
         File fileDirectory = new File(directory);
         if (!fileDirectory.exists()) {
