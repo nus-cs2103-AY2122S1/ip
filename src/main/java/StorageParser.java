@@ -47,22 +47,22 @@ public class StorageParser {
 
         Task task;
         switch(taskType) {
-            case (EventTask.KEYWORD):
-                if (data.length <= DATETIME_INDEX) {
-                    throw new DukeException("OOPS!!! Storage data has been tampered.");
-                }
-                dateTimeString = data[DATETIME_INDEX].trim();
-                task = new EventTask(description, dateTimeString);
-                break;
-            case (DeadlineTask.KEYWORD):
-                if (data.length <= DATETIME_INDEX) {
-                    throw new DukeException("OOPS!!! Storage data has been tampered.");
-                }
-                dateTimeString = data[DATETIME_INDEX].trim();
-                task = new EventTask(description, dateTimeString);
-                break;
-            default:
-                task = new ToDoTask(description);
+        case (EventTask.KEYWORD):
+            if (data.length <= DATETIME_INDEX) {
+                throw new DukeException("OOPS!!! Storage data has been tampered.");
+            }
+            dateTimeString = data[DATETIME_INDEX].trim();
+            task = new EventTask(description, dateTimeString);
+            break;
+        case (DeadlineTask.KEYWORD):
+            if (data.length <= DATETIME_INDEX) {
+                throw new DukeException("OOPS!!! Storage data has been tampered.");
+            }
+            dateTimeString = data[DATETIME_INDEX].trim();
+            task = new EventTask(description, dateTimeString);
+            break;
+        default:
+            task = new ToDoTask(description);
         }
         if (isDone) {
             task.markDone();
