@@ -1,6 +1,6 @@
-package Yoyo.task;
+package yoyo.task;
 
-import Yoyo.utility.Separator;
+import yoyo.utility.Separator;
 
 public abstract class Task {
     protected boolean isDone = false;

@@ -1,7 +1,7 @@
-package Yoyo.core;
+package yoyo.core;
 
-import Yoyo.task.Task;
-import Yoyo.task.TaskList;
+import yoyo.task.Task;
+import yoyo.task.TaskList;
 
 import java.util.Scanner;
 

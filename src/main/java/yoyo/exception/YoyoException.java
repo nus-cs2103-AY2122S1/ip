@@ -1,4 +1,4 @@
-package Yoyo.exception;
+package yoyo.exception;
 
 import java.io.IOException;
 

@@ -1,9 +1,11 @@
-package Yoyo.command;
+package yoyo.command;
 
-import Yoyo.core.Storage;
-import Yoyo.task.TaskList;
-import Yoyo.core.Ui;
-import Yoyo.exception.YoyoException;
+import yoyo.core.Storage;
+import yoyo.task.TaskList;
+import yoyo.core.Ui;
+import yoyo.exception.YoyoException;
+
+import java.util.Arrays;
 
 public abstract class Command {
     protected String[] inputTokens;
@@ -32,5 +34,12 @@ public abstract class Command {
 
     public abstract void execute(TaskList tasks, Storage storage, Ui ui)
             throws YoyoException;
+    
+    @Override
+    public boolean equals(Object o) {
+        @SuppressWarnings({})
+        Command other = (Command) o;
+        return Arrays.equals(this.inputTokens, other.inputTokens);
+    } 
 
 }

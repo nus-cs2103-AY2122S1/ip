@@ -1,12 +1,12 @@
-package Yoyo.command;
+package yoyo.command;
 
-import Yoyo.core.Parser;
-import Yoyo.core.Storage;
-import Yoyo.core.Ui;
-import Yoyo.exception.YoyoException;
-import Yoyo.task.Event;
-import Yoyo.task.Task;
-import Yoyo.task.TaskList;
+import yoyo.core.Parser;
+import yoyo.core.Storage;
+import yoyo.core.Ui;
+import yoyo.exception.YoyoException;
+import yoyo.task.Event;
+import yoyo.task.Task;
+import yoyo.task.TaskList;
 
 import java.time.LocalDateTime;
 

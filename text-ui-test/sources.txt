@@ -1,1 +1,1 @@
-../src/main/java/Yoyo/Yoyo.java
+../src/main/java/yoyo/Yoyo.java

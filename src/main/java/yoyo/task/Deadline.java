@@ -1,41 +1,32 @@
-package Yoyo.task;
+package yoyo.task;
 
-import Yoyo.utility.Separator;
+import yoyo.utility.Separator;
 
 import java.time.LocalDateTime;
 
 /**
- * A subclass of duke.task.Task of event type.
+ * A subclass of duke.task.Task of deadline type.
  */
-public class Event extends Task {
+public class Deadline extends Task {
     private LocalDateTime datetime;
 
-    public Event(String name, LocalDateTime datetime) {
+    public Deadline(String name, LocalDateTime datetime) {
         super(name);
         this.datetime = datetime;
     }
 
-    public Event(String name, LocalDateTime datetime, boolean isDone) {
+    public Deadline(String name, LocalDateTime datetime, boolean isDone) {
         super(name, isDone);
         this.datetime = datetime;
     }
 
-    /**
-     * Shows all statuses appended with name.
-     *
-     * @return A status string containing name.
-     */
     @Override
     public String showStatus() {
         String status =  super.showStatus();
         return status + " (by: " + datetime.toString().replace('T', ' ') + ")";
+
     }
 
-    /**
-     * Returns a status string indicating type of task.
-     *
-     * @return An indicator string for the type of task.
-     */
     @Override
     public String showStatusWrite() {
         return this.printType() + this.printCompletionStatus()
@@ -45,7 +36,6 @@ public class Event extends Task {
 
     @Override
     public String printType() {
-        return "[E]";
+        return "[D]";
     }
-
 }

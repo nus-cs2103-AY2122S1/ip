@@ -1,4 +1,4 @@
-package Yoyo.task;
+package yoyo.task;
 
 /**
  * A subclass of duke.task.Task of todo type.

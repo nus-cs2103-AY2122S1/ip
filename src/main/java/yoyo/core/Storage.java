@@ -1,10 +1,10 @@
-package Yoyo.core;
+package yoyo.core;
 
-import Yoyo.exception.YoyoException;
-import Yoyo.task.Deadline;
-import Yoyo.task.Event;
-import Yoyo.task.TaskList;
-import Yoyo.task.Todo;
+import yoyo.exception.YoyoException;
+import yoyo.task.Deadline;
+import yoyo.task.Event;
+import yoyo.task.TaskList;
+import yoyo.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

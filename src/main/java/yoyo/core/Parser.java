@@ -1,7 +1,7 @@
-package Yoyo.core;
+package yoyo.core;
 
-import Yoyo.command.*;
-import Yoyo.exception.YoyoException;
+import yoyo.command.*;
+import yoyo.exception.YoyoException;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -72,6 +72,5 @@ public class Parser {
         }
         return result;
     }
-
-
+    
 }

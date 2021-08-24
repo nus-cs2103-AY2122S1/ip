@@ -1,11 +1,11 @@
-package Yoyo;
+package yoyo;
 
-import Yoyo.command.Command;
-import Yoyo.core.Parser;
-import Yoyo.core.Storage;
-import Yoyo.core.Ui;
-import Yoyo.exception.YoyoException;
-import Yoyo.task.TaskList;
+import yoyo.command.Command;
+import yoyo.core.Parser;
+import yoyo.core.Storage;
+import yoyo.core.Ui;
+import yoyo.exception.YoyoException;
+import yoyo.task.TaskList;
 
 public class Yoyo {
     private TaskList tasks;

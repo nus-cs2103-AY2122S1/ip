@@ -1,8 +1,8 @@
-package Yoyo.command;
+package yoyo.command;
 
-import Yoyo.core.Storage;
-import Yoyo.task.TaskList;
-import Yoyo.core.Ui;
+import yoyo.core.Storage;
+import yoyo.task.TaskList;
+import yoyo.core.Ui;
 
 public class CommandList extends Command {
     public CommandList(String[] inputTokens) {
