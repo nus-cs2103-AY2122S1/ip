@@ -21,6 +21,7 @@ class ParserTest {
                 "dead", "deedline", "dead line",
                 "eve", "evant", "event3",
                 "del", "deleta", "deleteh",
+                "fin", "fine", "finda",
         };
         
         for (String command : commands) {
@@ -39,6 +40,7 @@ class ParserTest {
                 "deadline",
                 "event",
                 "delete",
+                "find",
         };
         
         String[] formats = {
@@ -47,6 +49,7 @@ class ParserTest {
                 "deadline [description] /by [dd/MM/yy] [HHmm]",
                 "event [description] /at [dd/MM/yy] /from [HHmm] /to [HHmm]",
                 "delete [task number]",
+                "find [keyword]",
         };
         
         TaskList taskList = new TaskList();
@@ -73,6 +76,7 @@ class ParserTest {
                 "todo test 4",
                 "delete 4",
                 "list",
+                "find test",
         };
         
         CheckedFunction[] expected = {
@@ -83,6 +87,7 @@ class ParserTest {
                 (tasks) -> tasks.addTodo(commands[4]),
                 (tasks) -> tasks.taskDelete(commands[5]),
                 TaskList::printFullList,
+                (tasks) -> tasks.findInList(commands[7]),
         };
         
         for (int i = 0; i < commands.length; i++) {

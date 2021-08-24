@@ -328,4 +328,60 @@ class TaskListTest {
                         "2. [T][ ] todo 2",
                 taskList.printFullList());
     }
+    
+    @Test
+    void findInList_wrongFormat_exceptionThrown() {
+        String[] invalidCommands = {
+                "",
+                "fid",
+                "find",
+                "find1",
+                "finda1",
+        };
+        
+        TaskList taskList = new TaskList();
+        
+        for (String command : invalidCommands) {
+            IllegalFormatException exception = assertThrows(IllegalFormatException.class,
+                    () -> taskList.findInList(command));
+            
+            assertEquals("Please follow this format:\n" +
+                            "  find [keyword]",
+                    exception.getMessage());
+        }
+    }
+    
+    @Test
+    void findInList_nothingFound_exceptionThrown() {
+        TaskList taskList1 = new TaskList();
+        
+        EmptyListException exception = assertThrows(EmptyListException.class,
+                () -> taskList1.findInList("find test"));
+        
+        assertEquals("Your list is empty! Maybe add some tasks into it?", exception.getMessage());
+        
+        ArrayList<Task> list = new ArrayList<>();
+        list.add(new Task("task 1"));
+        list.add(new Todo("todo 2"));
+        
+        TaskList taskList2 = new TaskList(list);
+        
+        exception = assertThrows(EmptyListException.class,
+                () -> taskList2.findInList("find test"));
+        
+        assertEquals("Your list is empty! Maybe add some tasks into it?", exception.getMessage());
+    }
+    
+    @Test
+    void findInList_success() throws DukeException {
+        ArrayList<Task> list = new ArrayList<>();
+        list.add(new Task("task 1"));
+        list.add(new Todo("todo 2"));
+        
+        TaskList taskList = new TaskList(list);
+        
+        assertEquals("Here are the tasks in your list:\n" +
+                        "1. [T][ ] todo 2",
+                taskList.findInList("find todo"));
+    }
 }

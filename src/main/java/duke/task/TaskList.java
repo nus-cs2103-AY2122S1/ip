@@ -2,6 +2,8 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -209,16 +211,29 @@ public class TaskList {
         return formatAddMessage(newTask, tasks.size());
     }
     
-    private void validateCommand(String command, String regex, String format) throws IllegalFormatException {
-        if (!command.matches(regex)) {
-            throw new IllegalFormatException(format);
-        }
-    }
-    
     private String formatAddMessage(Task task, int size) {
         return MESSAGE_ADD + "\n  " +
                 task + "\n" +
                 "Now you have " + size + " task" + (size == 1 ? "" : "s") + " in the list.";
+    }
+    
+    /**
+     * Prints only the tasks in the list that contains the keyword in its description.
+     *
+     * @param command command entered by user (find [keyword])
+     * @throws EmptyListException if number of found tasks in the list is 0
+     * @throws IllegalFormatException if user inputs an invalid command
+     */
+    public String findInList(String command) throws EmptyListException, IllegalFormatException {
+        // Throw exception if command does not follow format
+        validateCommand(command, "^find .*", "find [keyword]");
+        
+        String keyword = command.substring(5).trim();
+        List<Task> filteredTasks = tasks.stream()
+                                        .filter(task -> task.matchDescription(keyword))
+                                        .collect(Collectors.toList());
+        
+        return printList(filteredTasks);
     }
     
     /**
@@ -228,7 +243,11 @@ public class TaskList {
      * @throws EmptyListException if the list of tasks is empty
      */
     public String printFullList() throws EmptyListException {
-        int size = tasks.size();
+        return printList(tasks);
+    }
+    
+    private String printList(List<Task> list) throws EmptyListException {
+        int size = list.size();
         
         // Throw exception if list is empty
         if (size == 0) {
@@ -240,16 +259,22 @@ public class TaskList {
         for (int i = 0; i < size - 1; i++) {
             sb.append(i + 1)
               .append(". ")
-              .append(tasks.get(i))
+              .append(list.get(i))
               .append("\n");
         }
         
         // Last task is special as it does not need the '\n'
         sb.append(size)
           .append(". ")
-          .append(tasks.get(size - 1));
+          .append(list.get(size - 1));
         
         // Return string representation of the list of tasks
         return MESSAGE_LIST + "\n" + sb;
+    }
+    
+    private void validateCommand(String command, String regex, String format) throws IllegalFormatException {
+        if (!command.matches(regex)) {
+            throw new IllegalFormatException(format);
+        }
     }
 }

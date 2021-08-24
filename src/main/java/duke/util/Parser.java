@@ -26,6 +26,8 @@ public class Parser {
             return (tasks) -> tasks.addEvent(command);
         } else if (command.matches("^delete( .*)?")) {
             return (tasks) -> tasks.taskDelete(command);
+        } else if (command.matches("^find( .*)?")) {
+            return (tasks) -> tasks.findInList(command);
         } else {
             throw new UnknownCommandException();
         }
