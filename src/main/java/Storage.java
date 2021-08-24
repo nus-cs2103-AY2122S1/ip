@@ -9,10 +9,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class FileManager {
+public class Storage {
     private String filePath;
 
-    FileManager(String filePath) {
+    Storage(String filePath) {
         this.filePath = filePath;
     }
 

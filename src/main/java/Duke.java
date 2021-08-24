@@ -14,15 +14,15 @@ public class Duke {
      * Field for duke to keep track of task list.
      */
     private TaskList taskList;
-    private FileManager fileManager;
+    private Storage storage;
     private HashMap<LocalDate, ArrayList<Task>> dateTasks = new HashMap<>();
 
     /**
      * Constructor for Duke
      */
-    public Duke(TaskList taskList, FileManager fileManager) {
+    public Duke(TaskList taskList, Storage storage) {
         this.taskList = taskList;
-        this.fileManager = fileManager;
+        this.storage = storage;
     }
 
     /**
@@ -191,7 +191,7 @@ public class Duke {
                             " ", this.taskList.status())
             );
             divider();
-            fileManager.addTaskToFile(newTask);
+            storage.addTaskToFile(newTask);
         } catch (DukeException e) {
             divider();
             System.out.println(String.format("%4s%s",
@@ -216,7 +216,7 @@ public class Duke {
                     String.format("%6s%s\n%4s%s", " ", task,
                             " ", this.taskList.status())
             );
-            fileManager.markTaskAsCompleted(task.toString(), toUpdate);
+            storage.markTaskAsCompleted(task.toString(), toUpdate);
         } else {
             throw new DukeException("There is no such task.");
         }
@@ -239,7 +239,7 @@ public class Duke {
                     String.format("%6s%s\n%4s%s", " ", task,
                             " ", taskList.status())
             );
-            fileManager.deleteTaskFromFile(this.taskList);
+            storage.deleteTaskFromFile(this.taskList);
         } else {
             throw new DukeException("There is no such task.");
         }
@@ -252,7 +252,7 @@ public class Duke {
      */
     private void run() {
 
-        this.taskList = fileManager.loadData(this.dateTasks, this.taskList);
+        this.taskList = storage.loadData(this.dateTasks, this.taskList);
 
         // Greeting the user
         greet();
@@ -323,7 +323,7 @@ public class Duke {
             }
         }
 
-        Duke duke = new Duke(new TaskList(), new FileManager(filePath));
+        Duke duke = new Duke(new TaskList(), new Storage(filePath));
         duke.run();
     }
 }
