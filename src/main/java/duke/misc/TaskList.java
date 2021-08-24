@@ -23,7 +23,7 @@ public class TaskList {
         try {
             tasks = storage.readData();
         } catch (IOException e) {
-            System.err.println("File does not exist!");
+            Ui.printBlock("No such directory!");
         }
     }
 

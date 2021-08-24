@@ -11,16 +11,26 @@ import java.io.IOException;
  * Driver class to simulate the 'Annie' chat bot program.
  */
 public class Duke {
+    private Ui ui;
+    private TaskList tl;
+    private Parser p;
+
+    /**
+     * Constructor for Duke class.
+     */
+    public Duke() {
+        ui = new Ui();
+        tl = new TaskList();
+        p = new Parser();
+    }
+
     /**
      * Method to simulate program.
      *
      * @throws IOException In case of invalid directory.
      */
     public void run() throws IOException {
-        Ui ui = new Ui();
-        TaskList tl = new TaskList();
         Ui.printBlock(Ui.WELCOME_MSG);
-        Parser p = new Parser();
         while (true) {
             String command = ui.readCommand();
             try {
@@ -44,7 +54,7 @@ public class Duke {
         try {
             new Duke().run();
         } catch (IOException e) {
-            System.err.println("File does not exist!");
+            Ui.printBlock("No such directory!");
         }
     }
 }

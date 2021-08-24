@@ -15,7 +15,7 @@ import java.util.Scanner;
  * Storage class to retrieve and store tasks in Duke.
  */
 public class Storage {
-    private final String FILE_PATH = "C:\\Users\\Chu Heng 2\\Desktop\\cs2103T\\ip\\data\\duke.txt";
+    private final String FILE_PATH = "data\\duke.txt";
 
     /**
      * Reads data from duke.txt file.
@@ -25,6 +25,10 @@ public class Storage {
      */
     public ArrayList<Task> readData() throws IOException {
         ArrayList<Task> al = new ArrayList<>();
+        File fd = new File("data");
+        if (!fd.exists()) {
+            fd.mkdirs();
+        }
         File f = new File(FILE_PATH);
         f.createNewFile();
         Scanner sc = new Scanner(f);
@@ -55,7 +59,6 @@ public class Storage {
      */
     public void writeData(ArrayList<Task> al) throws IOException {
         File f = new File(FILE_PATH);
-        f.createNewFile();
         FileWriter fw = new FileWriter(FILE_PATH);
         for (int i = 1; i <= al.size(); i++) {
             fw.write(al.get(i - 1).getData() + "\n");

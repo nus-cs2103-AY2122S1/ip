@@ -41,7 +41,6 @@ public class Parser {
                 if (!input.matches("event [\\s\\S]+/[\\s\\S]+")) {
                     throw new InvalidFormatException();
                 }
-
                 if (DateTime.isInvalidDate(args[1])) {
                     throw new InvalidDateException();
                 }
