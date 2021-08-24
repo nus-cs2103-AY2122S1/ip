@@ -6,6 +6,10 @@ import iris.TaskList;
 import iris.Ui;
 
 public abstract class Command {
+    public boolean isExit() {
+        return false;
+    }
+
     public abstract void runSilently(TaskList tasks) throws IrisException;
 
     public abstract void say(TaskList tasks, Ui ui);

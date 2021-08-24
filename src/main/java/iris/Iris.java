@@ -33,18 +33,17 @@ public class Iris {
     public void run() {
         ui.sayHello();
 
-        String rawCommand = ui.prompt();
-        while (!rawCommand.equals(ENDING_COMMAND)) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
+                String rawCommand = ui.prompt();
                 Command command = Parser.parse(rawCommand);
                 command.run(tasks, ui, storage);
+                isExit = command.isExit();
             } catch (IrisException exception) {
                 ui.sayError(exception);
             }
-            rawCommand = ui.prompt();
         }
-
-        ui.sayGoodbye();
     }
 
     public static void main(String[] args) {

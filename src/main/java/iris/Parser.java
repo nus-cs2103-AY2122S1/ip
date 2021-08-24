@@ -1,5 +1,6 @@
 package iris;
 
+import iris.command.ByeCommand;
 import iris.command.Command;
 import iris.command.ListCommand;
 import iris.command.ToDoCommand;
@@ -57,6 +58,8 @@ public class Parser {
         } else if (command.startsWith("find")) {
             String searchTerm = getMetadata(command);
             return new FindCommand(searchTerm);
+        } else if (command.startsWith("bye")) {
+            return new ByeCommand();
         } else {
             throw new IrisException("I'm sorry, but I don't know what that means.");
         }
