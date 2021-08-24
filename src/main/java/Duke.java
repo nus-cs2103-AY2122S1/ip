@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -46,7 +47,7 @@ public class Duke {
                         }
                     }
                     String date = sb.toString().trim();
-                    Task task = new Deadline(description, date);
+                    Task task = new Deadline(description, LocalDate.parse(date));
                     tasks.add(task);
                     System.out.println("---------------------------------");
                     System.out.println("I have added this task: ");
@@ -66,7 +67,7 @@ public class Duke {
                         }
                     }
                     String date = sb.toString().trim();
-                    Task task = new Event(description, date);
+                    Task task = new Event(description, LocalDate.parse(date));
                     tasks.add(task);
                     System.out.println("---------------------------------");
                     System.out.println("I have added this task: ");
