@@ -1,3 +1,5 @@
+package dukeScripts.Tasks;
+
 /**
  *  This class encapsulates a Task element of ToDo type in Duke's TDList, and features
  *  various methods to manipulate the Task.

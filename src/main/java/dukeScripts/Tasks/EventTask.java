@@ -1,17 +1,18 @@
+package dukeScripts.Tasks;
+
 /**
- *  This class encapsulates a Task element of Deadline type in Duke's TDList, and features
+ *  This class encapsulates a Task element of Event type in Duke's TDList, and features
  *  various methods to manipulate the Task.
  */
 
-public class DeadlineTask extends TDLTask {
+public class EventTask extends TDLTask {
 
-    String byWhen;
+    String atContents;
 
-    public DeadlineTask(String taskName, String byWhen) {
+    public EventTask(String taskName, String atContents) {
         super(taskName);
-        this.byWhen = byWhen;
+        this.atContents = atContents;
     }
-
 
     /**
      * Gets the type of the Task in enum form.
@@ -20,7 +21,7 @@ public class DeadlineTask extends TDLTask {
      */
     @Override
     public TaskType getTaskType() {
-        return TaskType.DEADLINE;
+        return TaskType.EVENT;
     }
 
     /**
@@ -30,7 +31,7 @@ public class DeadlineTask extends TDLTask {
      */
     @Override
     public String getTaskTypeStringHeader() {
-        return "[D]";
+        return "[E]";
     }
 
     /**
@@ -40,6 +41,7 @@ public class DeadlineTask extends TDLTask {
      */
     @Override
     public String getTaskDescription() {
-        return this.getTaskName() + "(by: " + this.byWhen + ")";
+        return this.getTaskName() + "(at: " + this.atContents + ")";
     }
+
 }

@@ -1,3 +1,10 @@
+package dukeScripts;
+
+import dukeScripts.Tasks.DeadlineTask;
+import dukeScripts.Tasks.EventTask;
+import dukeScripts.Tasks.TDLTask;
+import dukeScripts.Tasks.ToDosTask;
+
 import java.util.ArrayList;
 
 /**

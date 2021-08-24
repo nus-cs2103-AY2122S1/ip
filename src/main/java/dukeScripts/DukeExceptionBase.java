@@ -1,3 +1,5 @@
+package dukeScripts;
+
 public class DukeExceptionBase extends Exception {
 
     public String exceptionMsg;
