@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
@@ -13,7 +17,7 @@ public class Storage {
     /**
      * The path of the .txt file storing tasks
      */
-    private String filePath;
+    private final String filePath;
 
     /**
      * Constructs a storage instance using the given file path.

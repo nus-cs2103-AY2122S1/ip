@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -5,9 +9,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Ui {
     /** Text UI: horizontal line. */
-    protected static final String HORIZONTAL_LINE = "  -----------------------";
+    public static final String HORIZONTAL_LINE = "  -----------------------";
     /** Text UI: indentation. */
-    protected static final String INDENTATION = "    ";
+    public static final String INDENTATION = "    ";
     /** Text UI: date time format. */
     public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy");
 

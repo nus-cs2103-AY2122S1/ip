@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.Parser;
+import duke.Ui;
+
 import java.time.LocalDateTime;
 
 /**
@@ -6,7 +11,7 @@ import java.time.LocalDateTime;
 
 public class Event extends Task{
     /** Start or end time of the event. */
-    private LocalDateTime eventTime;
+    private final LocalDateTime eventTime;
 
     /**
      * Constructs an event using the given description and event time.

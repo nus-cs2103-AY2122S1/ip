@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.Parser;
+import duke.Ui;
+
 import java.time.LocalDateTime;
 
 /**
@@ -8,7 +13,7 @@ public class Deadline extends Task {
     /**
      * Deadline time of the task.
      */
-    private LocalDateTime deadlineTime;
+    private final LocalDateTime deadlineTime;
 
     /**
      * Constructs a Deadline instance using the given description and deadline time.

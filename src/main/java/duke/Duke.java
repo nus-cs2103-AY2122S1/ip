@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.*;
+
 import java.util.Scanner;
 
 /**
@@ -5,7 +9,7 @@ import java.util.Scanner;
  */
 public class Duke {
     private static final String filePath = "data/duke.txt";
-    private static Storage storage = new Storage(filePath);
+    private static final Storage storage = new Storage(filePath);
 
     /**
      * Receives input from the user and executes Duke's actions
