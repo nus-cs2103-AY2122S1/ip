@@ -17,8 +17,4 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 
 # duke.txt data save
-<<<<<<< HEAD
 /data/
-=======
-/data/
->>>>>>> branch-level-7

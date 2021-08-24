@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -39,7 +40,6 @@ public class Storage {
      * @return A TaskList of tasks read
      */
     public TaskList readData() {
-        System.out.println("Storage::readData");
         File dataFile = new File(this.filePath + this.fileName);
 
         try {
@@ -106,18 +106,17 @@ public class Storage {
      *
      * @param tasks the list of tasks to be written
      */
-    public void writeTasksToData(TaskList tasks) {
+    public void writeTasksToData(TaskList tasks) throws DukeException {
         try {
             Files.write(Paths.get(this.filePath + this.fileName), tasks.toDataString());
-        } catch (FileNotFoundException fileNotFoundException) {
+
+        } catch (IOException ioException) {
             try {
                 Files.createDirectories(Paths.get(this.filePath));
-                Files.createFile(Paths.get(this.filePath + this.fileName));
-            } catch (IOException ioException) {
-                System.out.println("Error caught: " + ioException);
+                Path p = Files.createFile(Paths.get(this.filePath + this.fileName));
+            } catch (IOException ioExp) {
+                throw new DukeException("Failed to create Directories/File: " + ioExp.getMessage());
             }
-        } catch (IOException ioException) {
-            System.out.println("Error caught: " + ioException);
         }
     }
 }

@@ -39,7 +39,12 @@ public class Duke {
             command = ui.getNextLine();
             if (command.equals("bye")) {
                 // end bot
-                storage.writeTasksToData(tasks); // save all data
+                try {
+                    // save all data
+                    storage.writeTasksToData(tasks);
+                } catch (DukeException e) {
+                    ui.printMessage(e.getMessage());
+                }
                 break;
             } else {
                 switch (parser.getCommandAction(command)) {
@@ -111,7 +116,11 @@ public class Duke {
             return;
         }
         tasks.add(todo);
-        storage.writeTasksToData(tasks);
+        try {
+            storage.writeTasksToData(tasks);
+        } catch (DukeException e) {
+            ui.printMessage(e.getMessage());
+        }
         ui.printMessage("Got it. I've added this task:\n\t" + todo + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 
@@ -129,7 +138,11 @@ public class Duke {
             return;
         }
         tasks.add(event);
-        storage.writeTasksToData(tasks);
+        try {
+            storage.writeTasksToData(tasks);
+        } catch (DukeException e) {
+            ui.printMessage(e.getMessage());
+        }
         ui.printMessage("Got it. I've added this task:\n\t" + event + "\nNow you have " + tasks.size() + " tasks in the list.");
 
     }
@@ -148,7 +161,11 @@ public class Duke {
             return;
         }
         tasks.add(deadline);
-        storage.writeTasksToData(tasks);
+        try {
+            storage.writeTasksToData(tasks);
+        } catch (DukeException e) {
+            ui.printMessage(e.getMessage());
+        }
         ui.printMessage("Got it. I've added this task:\n\t" + deadline + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 
