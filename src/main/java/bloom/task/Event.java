@@ -1,15 +1,13 @@
 package bloom.task;
 
-import bloom.app.Parser;
-
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-	private final LocalDateTime at;
+	protected final LocalDateTime at;
 
-	public Event(String description, String at) {
+	public Event(String description, LocalDateTime at) {
 		super(description);
-		this.at = new Parser().parseDate(at);
+		this.at = at;
 	}
 
 	@Override

@@ -12,7 +12,6 @@ import bloom.command.EventCommand;
 import bloom.constant.Message;
 import bloom.exception.command.BloomUnknownCommandException;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Parser {
@@ -40,13 +39,13 @@ public class Parser {
 			dateIdx = userInput.indexOf("/");
 			return new DeadlineCommand(
 					userInput.substring(descIdx, dateIdx - 1),
-					userInput.substring(dateIdx + 4));
+					new Parser().parseDate(userInput.substring(dateIdx + 4)));
 		case "event":
 			descIdx = action.length() + 1;
 			dateIdx = userInput.indexOf("/");
 			return new EventCommand(
 					userInput.substring(descIdx, dateIdx - 1), 
-					userInput.substring(dateIdx + 4));
+					new Parser().parseDate(userInput.substring(dateIdx + 4)));
 		default:
 			throw new BloomUnknownCommandException(
 					Message.EXCEPTION_UNKNOWN_COMMAND.getMessage());
@@ -76,7 +75,6 @@ public class Parser {
 		int minute = Integer.parseInt(min);
 		int second = Integer.parseInt(sec);
 		
-		return LocalDate.of(year, month, day)
-				.atTime(hour, minute, second);
+		return LocalDateTime.of(year, month, day, hour, minute, second);
 	}
 }

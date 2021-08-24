@@ -4,13 +4,15 @@ import bloom.app.TaskList;
 import bloom.constant.Message;
 import bloom.task.Deadline;
 
+import java.time.LocalDateTime;
+
 public class DeadlineCommand extends Command {
 	
 	private final String description;
 	
-	private final String by;
+	private final LocalDateTime by;
 	
-	public DeadlineCommand(String description, String by) {
+	public DeadlineCommand(String description, LocalDateTime by) {
 		this.description = description;
 		this.by = by;
 	}

@@ -4,13 +4,15 @@ import bloom.app.TaskList;
 import bloom.constant.Message;
 import bloom.task.Event;
 
+import java.time.LocalDateTime;
+
 public class EventCommand extends Command {
 	
 	private final String description;
 	
-	private final String at;
+	private final LocalDateTime at;
 	
-	public EventCommand(String description, String at) {
+	public EventCommand(String description, LocalDateTime at) {
 		this.description = description;
 		this.at = at;
 	}

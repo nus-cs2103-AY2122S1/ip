@@ -1,15 +1,13 @@
 package bloom.task;
 
-import bloom.app.Parser;
-
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
-	private final LocalDateTime by;
+	protected final LocalDateTime by;
 
-	public Deadline(String description, String by) {
+	public Deadline(String description, LocalDateTime by) {
 		super(description);
-		this.by = new Parser().parseDate(by);
+		this.by = by;
 	}
 
 	@Override
