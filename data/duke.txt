@@ -1,0 +1,6 @@
+T | 1 | 123
+D | 1 | return book | Sunday
+E | 1 | project meeting | Mon 2-4pm
+T | 0 | borrow book
+E | 0 | project meeting | 2359
+D | 1 | return book | I DK MAN

@@ -9,6 +9,8 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
+        Storage storage = new Storage("data/duke.txt", list);
+        storage.load();
         greeting();
         String cmd = sc.nextLine();
         while (!cmd.equals("bye")) {
@@ -53,6 +55,7 @@ public class Duke {
                         index = Integer.parseInt(tokens[1]) - 1;
                         deleteTask(index, list);
                 }
+                storage.save();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
