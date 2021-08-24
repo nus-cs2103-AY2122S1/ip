@@ -1,5 +1,9 @@
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Duke {
     private static String getCommand(String input) {
@@ -42,10 +46,10 @@ public class Duke {
         }
     }
 
-    private static void completeTask(String input, ArrayList<Task> arr) throws MissingTaskNumberException {
+    private static void completeTask(int taskID, ArrayList<Task> arr) {
         System.out.println("---------------------------------------------");
         System.out.println("Nice! I've marked this task as done:");
-        arr.get(taskNumber(input) - 1).markAsDone();
+        arr.get(taskID - 1).markAsDone();
         System.out.println("---------------------------------------------");
     }
 
@@ -53,9 +57,7 @@ public class Duke {
         arr.add(newTask);
         System.out.println("---------------------------------------------\n"
                 + "     Got it. I've added this task:\n"
-                + "[" + newTask.getTaskType() + "] "
-                + "[" + newTask.getStatusIcon() + "] "
-                + newTask.description + "\n"
+                + newTask.toString() + "\n"
                 + "Now you have " + arr.size() + " task(s) in the list.\n"
                 + "---------------------------------------------");
     }
@@ -72,7 +74,7 @@ public class Duke {
         }
         System.out.println("---------------------------------------------");
     }
-    
+
     private static Task identifyType(String input) throws Exception {
         String command = getCommand(input);
         String description = getDescription(input);
@@ -102,9 +104,7 @@ public class Duke {
         } else {
             System.out.println("---------------------------------------------");
             System.out.println("Noted I've removed this task:");
-            System.out.println("[" + arr.get(taskID - 1).getTaskType() + "]["
-                    + arr.get(taskID - 1).getStatusIcon() + "] "
-                    + arr.get(taskID - 1).description);
+            System.out.println(arr.get(taskID - 1).toString());
             arr.remove(taskID - 1);
             System.out.println("Now you have " + arr.size() + " task(s) in the list.");
             System.out.println("---------------------------------------------");
@@ -118,23 +118,43 @@ public class Duke {
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
+
+        Files.createDirectories(Paths.get("data/"));
+        File dukeFile = new File("data/duke.txt");
+        PrintWriter writer = new PrintWriter(dukeFile);
+
+        if (dukeFile.createNewFile()) {
+            System.out.println("New file created");
+        } else {
+            System.out.println("Data file already exists. No new file created.");
+            writer.flush(); // ensures that file is empty before starting
+            writer.println("Format is as follows: " +
+                    "[Task Type][X if completed, else empty] {task description}");
+            writer.println("If the task has been deleted, it will be shown as: " +
+                    "[Task Type][X if completed, else empty] {task description} [deleted]");
+        }
+
         ArrayList<Task> toDoList = new ArrayList<>();
 
         System.out.println("---------------------------------------------");
         System.out.println("Hello! I'm Duke!\n" + "What can I do for you?");
         System.out.println("---------------------------------------------");
 
-        Scanner input = new Scanner (System.in);
+        Scanner input = new Scanner(System.in);
 
         while (true) {
             String action = input.nextLine();
 
             if (getCommand(action).equals("done")) { //mark task as done
-                Duke.completeTask(action, toDoList);
+                int taskNum = taskNumber(action);
+                String oldDescription = toDoList.get(taskNum - 1).toString();
+                Duke.completeTask(taskNum, toDoList);
+                Save.saveAsCompleted(dukeFile, toDoList.get(taskNum - 1), oldDescription);
             } else if (getCommand(action).equals("todo")
                     || getCommand(action).equals("deadline")
                     || getCommand(action).equals("event")) { // add task to to-do list
                 Duke.addTask(identifyType(action), toDoList);
+                Save.addData(writer, identifyType(action)); //todo
             } else if (action.equals("list")) { // list all items
                 Duke.listItems(toDoList);
             } else if (action.equals("bye")) { // exit
@@ -143,7 +163,9 @@ public class Duke {
                         + "---------------------------------------------");
                 break;
             } else if (getCommand(action).equals("delete")) { // delete task
-                deleteTask(taskNumber(action), toDoList);
+                int taskNum = taskNumber(action);
+                Save.markAsDeleted(dukeFile, toDoList.get(taskNum - 1)); //todo
+                deleteTask(taskNum, toDoList);
             } else { // if there is an invalid input
                 System.out.println("-------------------------------------------------------\n"
                         + "OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n"
@@ -151,6 +173,7 @@ public class Duke {
                 throw new IllegalArgumentException();
             }
         }
-        
+
     }
 }
+
