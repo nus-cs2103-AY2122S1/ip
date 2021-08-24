@@ -3,10 +3,12 @@ import java.util.*;
 public class Duke {
     private ArrayList<Task> taskList;
     private int numTask;
+    private Storage storage;
 
     public Duke() {
-        taskList = new ArrayList<Task>();
-        numTask = 0;
+        storage = new Storage("data.txt");
+        taskList = storage.load();
+        numTask = taskList.size();
     }
 
     public static void main(String[] args) {
@@ -136,7 +138,11 @@ public class Duke {
         numTask = numTask + 1;
         String addTask = String.format("Got it. I've added this task:\n%s\nNow you have %d task(s) in the list.",
                 task.toString(), numTask);
+
+        this.storage.save(this.taskList);
+
         this.sendMessage(addTask);
+
     }
 
     private void list() {
@@ -172,6 +178,9 @@ public class Duke {
         numTask = numTask - 1;
         String delete = String.format("Noted. I've removed this task:\n%s\nNow you have %d task(s) in the list.",
                 taskStatus, numTask) ;
+
+        this.storage.save(taskList);
+
        this.sendMessage(delete);
     }
 }
