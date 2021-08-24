@@ -64,8 +64,4 @@ public class Duke {
         System.out.println(exitMsg);
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
-
-    public static void main(String[] args) throws IOException {
-        new Duke("data/tasks.txt").run();
-    }
 }
