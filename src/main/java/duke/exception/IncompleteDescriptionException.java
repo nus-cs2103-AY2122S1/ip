@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class IncompleteDescriptionException extends DukeException{
-    IncompleteDescriptionException(String message) {
+    public IncompleteDescriptionException(String message) {
         super(message);
     }
 }

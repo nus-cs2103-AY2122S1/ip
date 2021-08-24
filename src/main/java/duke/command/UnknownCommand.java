@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.exception.UnknownCommandException;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+
 public class UnknownCommand extends Command {
 
     @Override
@@ -14,7 +21,7 @@ public class UnknownCommand extends Command {
                 "I'm sorry, but I don't know what that means :-(",
                 "Try the following commands instead:\n",
                 "1. list - List all the existing tasks",
-                "2. bye - Exit from Duke's service",
+                "2. bye - Exit from duke.Duke's service",
                 "3. done {N} -  Mark task of number 'N' as done",
                 "4. delete {N} - Delete task of number 'N'",
                 "5. todo {description} - Add a todo with the specified 'description'",

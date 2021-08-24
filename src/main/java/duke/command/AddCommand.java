@@ -1,3 +1,17 @@
+package duke.command;
+
+import duke.exception.IncompleteDescriptionException;
+import duke.exception.InvalidDateFormatException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -18,7 +32,7 @@ public class AddCommand extends Command{
 
     private String[] validateCommand()
             throws IncompleteDescriptionException,
-                   InvalidDateFormatException {
+            InvalidDateFormatException {
 
         String[] descriptionComponents = this.taskDescriptions.split(" /by | /at ", 2);
         String descriptionMessage = "The description of a %s is incomplete.";
