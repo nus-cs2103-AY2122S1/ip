@@ -5,12 +5,23 @@ import duke.exception.DukeException;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * A class that reads user input and gives commands accordingly.
+ *
+ */
 public class Parser {
     Scanner sc;
     TaskList list;
     UI ui;
     Storage storage;
 
+    /**
+     * Constructor of a parser.
+     *
+     * @param list A TaskList which contains all the current tasks.
+     * @param ui An Ui object which prints out messages to users.
+     * @param storage A Storage object which deals with opening and loading file to the program.
+     */
     public Parser(TaskList list, UI ui, Storage storage) {
         sc = new Scanner(System.in);
         this.list = list;
@@ -18,6 +29,11 @@ public class Parser {
         this.storage = storage;
     }
 
+    /**
+     * A method to read task from user input and call commands accordingly.
+     *
+     * @throws IOException Thrown when file cannot be found.
+     */
     public void readTask() throws IOException {
         String input = sc.nextLine();
 

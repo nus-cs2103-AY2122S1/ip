@@ -7,18 +7,39 @@ import duke.exception.OutOfBoundException;
 
 import java.util.ArrayList;
 
+/**
+ * A class that represents a list of Tasks.
+ *
+ * It contains a constructor, a getter,
+ * a method to print a list, add a task to a list,
+ * mark a task as done and delete a task.
+ *
+ */
 public class TaskList {
     private ArrayList<Task> list;
 
+    /**
+     * Constructor to create a new TaskList.
+     *
+     */
     public TaskList() {
         list = new ArrayList<>();
     }
 
+    /**
+     * Constructor to create a new TaskList.
+     *
+     * @param list An ArrayList of Task that contains Tasks to be put inside the TaskList.
+     */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
-    //print a list
+    /**
+     * Method to print out tasks inside a TaskList.
+     *
+     * @return String representation of all the tasks inside the current TaskList.
+     */
     public String printList() {
         System.out.println("Here are the tasks on your list: ");
         String str = "";
@@ -29,7 +50,14 @@ public class TaskList {
         return str;
     }
 
-    //mark a task as done
+    /**
+     * A method to mark a task as done.
+     *
+     * @param str User input which indicates details of the task to be marked as done.
+     * @return Task after it is marked as done.
+     * @throws OutOfBoundException Thrown when user inputs task number that is out of the given task range.
+     * @throws NumberFormatException Thrown when user gives a non-number as the task number.
+     */
     public Task markAsDone(String str) throws OutOfBoundException, NumberFormatException {
         String i = str.substring(str.length()-1);
         int index = Integer.parseInt(i);
@@ -44,7 +72,15 @@ public class TaskList {
         }
     }
 
-    //method to add a task to a list
+    /**
+     * A method to add a Task inside a TaskList
+     *
+     * @param str User inputs which indicates details of the task to be added.
+     * @return Task after it is added.
+     * @throws EmptyDescriptionException Thrown when users do not give a task description.
+     * @throws InvalidTaskException Thrown when users give incorrect input for task.
+     * @throws InvalidDeadlineException Thrown when users give an incorrect deadline.
+     */
 
     public Task addTask(String str) throws EmptyDescriptionException, InvalidTaskException, InvalidDeadlineException {
         //first check if the task only contain 1 word
@@ -52,10 +88,7 @@ public class TaskList {
             //check if task if valid
             if (str.startsWith("todo") || str.startsWith("deadline") || str.startsWith("event")) {
                 throw new EmptyDescriptionException(str);
-            }
-
-            //check for invalid task
-            else {
+            } else { //check for invalid task
                 throw new InvalidTaskException();
             }
         }
@@ -63,12 +96,9 @@ public class TaskList {
         //task that contain more than 1 word.
         //check for invalid task. otherwise, add the correct task to the list.
         else {
-            //check for invalid task
             if (!str.startsWith("todo") && !str.startsWith("deadline") && !str.startsWith("event")) {
                 throw new InvalidTaskException();
             }
-
-            //add correct task to the list
             else {
                 Task task;
                 if (str.startsWith("todo")) {
@@ -101,7 +131,12 @@ public class TaskList {
         }
     }
 
-    //delete a task
+    /**
+     * A method to delete a certain in a TaskList.
+     * @param str User inputs which indicates detail of task to be deleted.
+     * @return Task after it is deleted.
+     * @throws OutOfBoundException Thrown when user gives a task number that is outside of the range of TaskList.
+     */
     public Task deleteTask(String str) throws OutOfBoundException {
         String i = str.substring(str.length()-1);
         int index = Integer.parseInt(i);

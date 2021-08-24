@@ -9,14 +9,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class that deals with loading and saving data to/from a file.
+ *
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructor of a storage.
+     *
+     * @param filePath A path that access the location of the file to be open and used.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    //method to load file
+    /**
+     * Method to load any existing data from file to the current list
+     *
+     * @return ArrayList of current tasks.
+     * @throws IOException thrown when file cannot be found.
+     * @throws InvalidTaskException thrown when users give invalid input.
+     * @throws InvalidDeadlineException thrown when users give invalid deadlines.
+     */
     public ArrayList<Task> load() throws IOException, InvalidTaskException, InvalidDeadlineException {
         ArrayList<Task> list = new ArrayList<>();
         File file = new File(filePath);
@@ -48,7 +64,12 @@ public class Storage {
         return list;
     }
 
-    //method to update list
+    /**
+     * Method to update file when TaskList is changed.
+     *
+     * @param list TaskList after it is changed.
+     * @throws IOException thrown when file is not found.
+     */
     public void updateFile(TaskList list) throws IOException {
         File file = new File(filePath);
         if (!file.exists()) {
