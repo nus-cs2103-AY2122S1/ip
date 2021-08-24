@@ -6,16 +6,30 @@ import catobot.exception.BotException;
 import catobot.exception.InvalidCommandException;
 import catobot.item.TaskList;
 
+/**
+ * Represents the command to delete a task.
+ */
 public class DeleteCommand extends Command {
 
-    private String content;
+    /** Content of the command. */
+    private final String content;
 
+    /**
+     * Constructor for DeleteCommand.
+     *
+     * @param content The content of the command.
+     */
     protected DeleteCommand(String content) {
         this.content = content;
     }
 
     /**
-     * Displays the list of tasks.
+     * Deletes a task.
+     *
+     * @param tasks The list of tasks to be worked on.
+     * @param ui The ui that responds to the user.
+     * @param storage The storage of the tasks.
+     * @throws BotException If the command does not give a valid index number.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {

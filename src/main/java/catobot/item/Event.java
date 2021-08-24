@@ -6,11 +6,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event is a type of Task which happen at a specific timing.
+ * Represents a type of Task which happen at a specific timing.
  */
 public class Event extends Task {
-    private LocalDate at;
+    /** The time of the event. */
+    private final LocalDate at;
 
+    /**
+     * Constructor for Event.
+     *
+     * @param description The details of the event.
+     * @param at The time of the event.
+     * @throws EmptyCommandException If the description is empty.
+     */
     private Event(String description, LocalDate at) throws EmptyCommandException {
         super(description);
         this.at = at;
@@ -46,6 +54,11 @@ public class Event extends Task {
                 + ")";
     }
 
+    /**
+     * Represents the format of event in storage.
+     *
+     * @return The string representation of event in storage.
+     */
     @Override
     public String toStringInDoc() {
         String s = super.toStringInDoc();

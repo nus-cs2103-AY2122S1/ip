@@ -3,9 +3,15 @@ package catobot.item;
 import catobot.exception.EmptyCommandException;
 
 /**
- * Todo is a type of task which has description only.
+ * Represents a type of task which has description only.
  */
 public class Todo extends Task {
+    /**
+     * Constructor for Todo.
+     *
+     * @param description The details of Todo.
+     * @throws EmptyCommandException If the description is empty.
+     */
     private Todo(String description) throws EmptyCommandException {
         super(description);
     }
@@ -26,15 +32,20 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns the string representation of Task.
+     * Returns the string representation of Todo.
      *
-     * @return The string representation of Task, including status and description.
+     * @return The string representation of Todo, including status and description.
      */
     @Override
     public String toString() {
         return "[T]" + super.toString() ;
     }
 
+    /**
+     * Represents the format of todo in storage.
+     *
+     * @return The string representation of todo in storage.
+     */
     @Override
     public String toStringInDoc() {
         String s = super.toStringInDoc();

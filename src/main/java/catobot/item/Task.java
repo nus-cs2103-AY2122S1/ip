@@ -3,14 +3,16 @@ package catobot.item;
 import catobot.exception.EmptyCommandException;
 
 /**
- * Task contains items which can be done.
+ * Represents items which can be done.
  */
 public class Task {
-    private String description;
+    /** Details of the task. */
+    private final String description;
+    /** Status of whether the task is done. */
     private boolean isDone;
 
     /**
-     * Constructs a Task.
+     * Constructor for Task.
      *
      * @param description The task description.
      * @throws EmptyCommandException if the description is empty.
@@ -35,7 +37,7 @@ public class Task {
     }
 
     /**
-     * Returns the string representation of Task.
+     * Represents the task as a String.
      *
      * @return The string representation of Task, including status and description.
      */
@@ -45,7 +47,12 @@ public class Task {
         return s;
     }
 
-    public String toStringInDoc() {
+    /**
+     * Represents the format of task in storage.
+     *
+     * @return The string representation of task in storage.
+     */
+    protected String toStringInDoc() {
         String s = String.format("%s | %s", this.isDone ? 1 : 0, this.description);
         return s;
     }

@@ -6,11 +6,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline is a type of Task which has a due time.
+ * Represents a type of Task which has a due time.
  */
 public class Deadline extends Task {
-    private LocalDate by;
+    /** Due datetime of the deadline. */
+    private final LocalDate by;
 
+    /**
+     * Constructor for Deadline.
+     *
+     * @param description The details of deadline.
+     * @param by The due datetime.
+     * @throws EmptyCommandException If the description is empty.
+     */
     private Deadline(String description, LocalDate by) throws EmptyCommandException {
         super(description);
         this.by = by;
@@ -46,6 +54,11 @@ public class Deadline extends Task {
                 + ")";
     }
 
+    /**
+     * Represents the format of deadline in storage.
+     *
+     * @return The string representation of deadline in storage.
+     */
     @Override
     public String toStringInDoc() {
         String s = super.toStringInDoc();

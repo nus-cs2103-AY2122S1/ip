@@ -3,12 +3,16 @@ package catobot.command;
 import catobot.exception.BotException;
 import catobot.exception.InvalidCommandException;
 
+/**
+ * Represents the processor of raw input content into commands.
+ */
 public class Parser {
+
     /**
-     * Responds to the request.
+     * Parses the input into corresponding commands.
      *
-     * @param content The full request message from a line of input.
-     * @throws BotException if the request is invalid.
+     * @param content The full content from a line of input.
+     * @throws BotException If the request is invalid.
      */
     public static Command parse(String content) throws BotException {
         CommandType commandType = CommandType.find(content);

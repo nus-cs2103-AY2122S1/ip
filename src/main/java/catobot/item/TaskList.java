@@ -8,18 +8,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TaskList contains a list of tasks.
+ * Represents a list of tasks.
  */
 public class TaskList {
+    /** List of tasks. */
     private final List<Task> taskList;
 
     /**
-     * Constructs a TaskList.
+     * Constructor for TaskList.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Constructor for TaskList.
+     *
+     * @param taskList The lists of tasks.
+     */
     public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }
@@ -50,22 +56,13 @@ public class TaskList {
         return String.format("Here are the tasks in your list:%s", this);
     }
 
-    public String displayInDoc() {
-        if (taskList.size() == 0) {
-            return "";
-        }
-
-        return String.format("Here are the tasks in your list:%s", this);
-    }
-
-
     /**
      * Marks a specific task as completed.
      *
      * @param index The index of the task in the TaskList.
      * @return The response message after completing the task.
-     * @throws OutOfBoundException if the index is out of valid range of TaskList.
-     * @throws EmptyTaskListException if the TaskList is empty.
+     * @throws OutOfBoundException If the index is out of valid range of TaskList.
+     * @throws EmptyTaskListException If the TaskList is empty.
      */
     public String completeTask(int index) throws OutOfBoundException, EmptyTaskListException {
         checkRange(index);
@@ -79,8 +76,8 @@ public class TaskList {
      *
      * @param index The index of the task in the TaskList.
      * @return The response message after deleting the task.
-     * @throws OutOfBoundException if the index is out of valid range of TaskList.
-     * @throws EmptyTaskListException if the TaskList is empty.
+     * @throws OutOfBoundException If the index is out of valid range of TaskList.
+     * @throws EmptyTaskListException If the TaskList is empty.
      */
     public String deleteTask(int index) throws OutOfBoundException, EmptyTaskListException {
         checkRange(index);
@@ -120,6 +117,11 @@ public class TaskList {
         return s.toString();
     }
 
+    /**
+     * Represents the format of TaskList in storage.
+     *
+     * @return The string representation of TaskList in storage.
+     */
     public String toStringInDoc() {
         StringBuilder s = new StringBuilder("");
         for (int i = 0; i < taskList.size(); i++) {
