@@ -2,6 +2,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     private final List<Task> list;
@@ -46,8 +50,10 @@ public class Duke {
                         throw new DukeException("Please state the deadline for this task with /by! Try again.");
                     } else {
                         try {
+                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy");
                             int deadlineIndex = input.indexOf("/by") + 4;
-                            String deadline = input.substring(deadlineIndex);
+                            String deadlineString = input.substring(deadlineIndex);
+                            LocalDate deadline = LocalDate.parse(deadlineString, dtf);
                             String firstTrimmed = input.substring(9);
                             String lastTrimmed = firstTrimmed.substring(0, firstTrimmed.indexOf("/by"));
                             Deadline createdDeadlineTask = new Deadline(lastTrimmed, false, deadline);
@@ -59,6 +65,9 @@ public class Duke {
                         } catch (StringIndexOutOfBoundsException e) {
                             throw new DukeException("Please ensure that there is a task description and deadline. " +
                                     "Try again.");
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("Please ensure that your deadline is formatted in the following " +
+                                    "way: DD/MM/YY");
                         }
                     }
                 } else if (input.startsWith("todo")) {
@@ -78,10 +87,12 @@ public class Duke {
                         throw new DukeException("Please state when the event will be held with /at! Try again.");
                     } else {
                         try {
+                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
                             int atIndex = input.indexOf("/at") + 4;
-                            String at = input.substring(atIndex);
+                            String atString = input.substring(atIndex);
                             String firstTrimmed = input.substring(6);
                             String lastTrimmed = firstTrimmed.substring(0, firstTrimmed.indexOf("/at"));
+                            LocalDateTime at = LocalDateTime.parse(atString, dtf);
                             Event createdEventTask = new Event(lastTrimmed, false, at);
                             addToList(createdEventTask);
                             System.out.println("Got it. I've added this task:\n" + "  " + createdEventTask + "\n"
@@ -90,6 +101,9 @@ public class Duke {
                             writeTasks();
                         } catch (StringIndexOutOfBoundsException e) {
                             throw new DukeException("Please ensure that there is an event time. Try again.");
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("Please ensure that your event is formatted in the following " +
+                                    "way: DD/MM/YY HHmm (24 hr format)");
                         }
                     }
                 } else if (input.startsWith("delete")) {
@@ -193,19 +207,23 @@ public class Duke {
                     boolean deadlineStatus = (splitLine[0].charAt(4) == 'X');
                     String deadlineByWithBracket = line.substring(line.lastIndexOf("(by: ") + 5);
                     String deadlineBy = deadlineByWithBracket.substring(0, deadlineByWithBracket.length() - 1);
-                    list.add(new Deadline(deadlineName, deadlineStatus, deadlineBy));
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy");
+                    LocalDate correctDeadline = LocalDate.parse(deadlineBy, dtf);
+                    list.add(new Deadline(deadlineName, deadlineStatus, correctDeadline));
                     break;
                 case 'E':
                     String eventName = splitLine[1] + " ";
                     boolean eventStatus = (splitLine[0].charAt(4) == 'X');
                     String eventAtWithBracket = line.substring(line.lastIndexOf("(at: ") + 5);
                     String eventAt = eventAtWithBracket.substring(0, eventAtWithBracket.length() - 1);
-                    list.add(new Event(eventName, eventStatus, eventAt));
+                    DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("dd MMM yyy hh:mm a");
+                    LocalDateTime correctEventAt = LocalDateTime.parse(eventAt, dtf2);
+                    list.add(new Event(eventName, eventStatus, correctEventAt));
                     break;
                 }
-                }
+            }
             br.close();
-            } catch (IOException e) {
+        } catch (IOException e) {
             throw new DukeException("Couldn't read the tasks!");
         }
     }
