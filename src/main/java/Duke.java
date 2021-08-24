@@ -1,4 +1,6 @@
 import java.io.File;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,7 +38,7 @@ public class Duke {
                     System.out.println("---------------------------------");
                 } else if (taskDescription.startsWith("deadline ")) {
                     String[] splitText = taskDescription.substring(9).split(" /by ");
-                    Task task = new Deadline(splitText[0].trim(), splitText[1].trim(), false);
+                    Task task = new Deadline(splitText[0].trim(), LocalDate.parse(splitText[1].trim()), false);
                     tasks.add(task);
                     System.out.println("---------------------------------");
                     System.out.println("I have added this task: ");
@@ -45,7 +47,7 @@ public class Duke {
                     System.out.println("---------------------------------");
                 } else if (taskDescription.startsWith("event ")) {
                     String[] splitText = taskDescription.substring(6).split(" /at ");
-                    Task task = new Event(splitText[0].trim(), splitText[1].trim(), false);
+                    Task task = new Event(splitText[0].trim(), LocalDate.parse(splitText[1].trim()), false);
                     tasks.add(task);
                     System.out.println("---------------------------------");
                     System.out.println("I have added this task: ");

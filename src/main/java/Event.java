@@ -1,7 +1,9 @@
-public class Event extends Task {
-    private String date;
+import java.time.LocalDate;
 
-    public Event(String description, String date, boolean isDone) {
+public class Event extends Task {
+    private LocalDate date;
+
+    public Event(String description, LocalDate date, boolean isDone) {
         super(description, isDone);
         this.date = date;
     }
@@ -13,6 +15,7 @@ public class Event extends Task {
     
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date + ")";
+        return String.format("[E]%s (at: %s %d %d)", super.toString(), date.getMonth(), date.getDayOfMonth(),
+                date.getYear());
     }
 }

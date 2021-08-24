@@ -1,6 +1,6 @@
 todo brush teeth
-deadline do homework /by 19 Aug
-event project meeting /at 20 Aug
+deadline do homework /by 2021-08-21
+event project meeting /at 2021-08-22
 list
 delete 2
 list

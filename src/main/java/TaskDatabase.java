@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,10 +21,10 @@ public class TaskDatabase {
                         tasks.add(new ToDo(split[2], isDone));
                         break;
                     case "D":
-                        tasks.add(new Deadline(split[2], split[3], isDone));
+                        tasks.add(new Deadline(split[2], LocalDate.parse(split[3]), isDone));
                         break;
                     case "E":
-                        tasks.add(new Event(split[2], split[3], isDone));
+                        tasks.add(new Event(split[2], LocalDate.parse(split[3]), isDone));
                         break;
                 }
             }
