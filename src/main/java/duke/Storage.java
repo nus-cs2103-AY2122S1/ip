@@ -5,14 +5,15 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Stores tasks locally on the hard disk.
  */
 public class Storage {
+
 
     /**
      * Appends tasks to text file.
@@ -49,7 +50,4 @@ public class Storage {
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         return s;
     }
-
-
-
 }
