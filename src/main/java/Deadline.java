@@ -6,6 +6,7 @@
 public class Deadline extends Task{
 
     private String deadline;
+    final static String split = " /by";
 
     /**
      *  Constructor to create an DEADLINE task
