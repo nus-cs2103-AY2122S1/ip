@@ -1,3 +1,7 @@
+package duke;
+
+import duke.DukeException;
+
 public interface Parser {
     /**
      * Gets the description supplied by the user after a command.
