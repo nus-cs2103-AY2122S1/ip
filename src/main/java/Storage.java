@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,14 +39,18 @@ public class Storage {
         }
     }
 
-    public ArrayList<String> load() throws Exception {
-        Scanner scanner = new Scanner(file);
+    public ArrayList<String> load() throws DukeException {
         ArrayList<String> stringList = new ArrayList<>();
-        while (scanner.hasNextLine()) {
-            String data = scanner.nextLine();
-            stringList.add(data);
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String data = scanner.nextLine();
+                stringList.add(data);
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            throw new DukeException("File not found");
         }
-        scanner.close();
         return stringList;
     }
 

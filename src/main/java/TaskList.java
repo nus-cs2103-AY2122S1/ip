@@ -3,6 +3,10 @@ import java.util.ArrayList;
 public class TaskList {
     ArrayList<Task> list;
 
+    TaskList() {
+        list = new ArrayList<>();
+    }
+
     TaskList(ArrayList<String> stringList) throws DukeException {
         list = new ArrayList<>();
         for (int i = 0; i < stringList.size(); i++) {
@@ -28,9 +32,17 @@ public class TaskList {
             if (s.charAt(4) == 'X') {
                 t.markedAsDone();
             }
+            list.add(t);
         }
     }
 
+    public void add(Task t) {
+        list.add(t);
+    }
+
+    public void remove(int i){
+        list.remove(i);
+    }
     public int getSize() {
         return list.size();
     }
