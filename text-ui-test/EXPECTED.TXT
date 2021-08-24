@@ -7,8 +7,8 @@ The list is currently empty!
 __________________________________
 __________________________________
 Got it. I've added this task:
-added: [T][ ] read book
-Now you have 1 tasks in the list.
+Added: [T][ ] read book
+Now you have 1 task in the list.
 __________________________________
 __________________________________
 You left the field blank!
@@ -27,28 +27,28 @@ You forgot to enter a message after the command!
 __________________________________
 __________________________________
 Got it. I've added this task:
-added: [D][ ] return book (by: June 6th)
+Added: [D][ ] return book (by: Feb 2 2020, 10:22 PM)
 Now you have 2 tasks in the list.
 __________________________________
 __________________________________
 Got it. I've added this task:
-added: [E][ ] project meeting (at: Aug 6th 2-4pm)
+Added: [E][ ] project meeting (at: Feb 2 2020, 2:00 AM - 4:00 AM)
 Now you have 3 tasks in the list.
 __________________________________
 __________________________________
 Got it. I've added this task:
-added: [T][ ] join sports club
+Added: [T][ ] join sports club
 Now you have 4 tasks in the list.
 __________________________________
 __________________________________
 Got it. I've added this task:
-added: [T][ ] borrow book
+Added: [T][ ] borrow book
 Now you have 5 tasks in the list.
 __________________________________
 __________________________________
 1. [T][ ] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+2. [D][ ] return book (by: Feb 2 2020, 10:22 PM)
+3. [E][ ] project meeting (at: Feb 2 2020, 2:00 AM - 4:00 AM)
 4. [T][ ] join sports club
 5. [T][ ] borrow book
 __________________________________
@@ -62,46 +62,75 @@ Nice! I've marked this task as done:
 __________________________________
 __________________________________
 1. [T][X] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+2. [D][ ] return book (by: Feb 2 2020, 10:22 PM)
+3. [E][ ] project meeting (at: Feb 2 2020, 2:00 AM - 4:00 AM)
 4. [T][X] join sports club
 5. [T][ ] borrow book
 __________________________________
 __________________________________
 Got it. I've added this task:
-added: [D][ ] return book (by: Sunday)
+Added: [D][ ] return book (by: Feb 2 2020, 8:20 PM)
 Now you have 6 tasks in the list.
 __________________________________
 __________________________________
-Please use /by when you want to call the deadline command.
+Please use /by when you want to call the deadline command and include the date and time as YYYY/MM/DD and HHMM in 24 hour format.
 __________________________________
 __________________________________
 Got it. I've added this task:
-added: [E][ ] project meeting (at: Mon 2-4pm)
+Added: [E][ ] project meeting (at: Aug 30 2021, 2:00 PM - 4:00 PM)
 Now you have 7 tasks in the list.
 __________________________________
 __________________________________
-Please use /at when you want to call the event command.
+Please use /at when you want to call the event command and include the date and time as YYYY/MM/DD and HHMM in 24 hour format.
 __________________________________
 __________________________________
 1. [T][X] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+2. [D][ ] return book (by: Feb 2 2020, 10:22 PM)
+3. [E][ ] project meeting (at: Feb 2 2020, 2:00 AM - 4:00 AM)
 4. [T][X] join sports club
 5. [T][ ] borrow book
-6. [D][ ] return book (by: Sunday)
-7. [E][ ] project meeting (at: Mon 2-4pm)
+6. [D][ ] return book (by: Feb 2 2020, 8:20 PM)
+7. [E][ ] project meeting (at: Aug 30 2021, 2:00 PM - 4:00 PM)
+__________________________________
+__________________________________
+You forgot to enter a message after the command!
+__________________________________
+__________________________________
+You forgot to enter a message after the command!
+__________________________________
+__________________________________
+Please define the duration of your event in the following format: YYYY/MM/DD HHMM - HHMM in the 24 hours format.
+__________________________________
+__________________________________
+Please define the duration of your event in the following format: YYYY/MM/DD HHMM - HHMM in the 24 hours format.
+__________________________________
+__________________________________
+Your date or time format is wrong! Please use the format YYYY/MM/DD HHMM where the time is in 24 hours.
+__________________________________
+__________________________________
+You forgot to enter a message after the command!
+__________________________________
+__________________________________
+You forgot to enter a message after the command!
+__________________________________
+__________________________________
+Your date or time format is wrong! Please use the format YYYY/MM/DD HHMM where the time is in 24 hours.
+__________________________________
+__________________________________
+Got it. I've added this task:
+Added: [D][ ]  (by: Feb 2 2020, 6:00 AM)
+Now you have 8 tasks in the list.
 __________________________________
 __________________________________
 Noted. I've removed this task:
-[E][ ] project meeting (at: Aug 6th 2-4pm)
-Now you have 6 tasks in the list.
+[E][ ] project meeting (at: Feb 2 2020, 2:00 AM - 4:00 AM)
+Now you have 7 tasks in the list.
 __________________________________
 __________________________________
-You entered an invalid task number of 7. Please enter a task number from 1 to 6.
+You entered an invalid task number of 8. Please enter a task number from 1 to 7.
 __________________________________
 __________________________________
-You entered an invalid task number of 10. Please enter a task number from 1 to 6.
+You entered an invalid task number of 10. Please enter a task number from 1 to 7.
 __________________________________
 __________________________________
 Bye. Hope to see you again soon!

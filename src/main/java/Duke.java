@@ -2,17 +2,26 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
 
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
+import exception.DataFileChangedException;
 import exception.DukeException;
-import exception.IncorrectFormatException;
-import exception.InvalidIndexException;
 import exception.EmptyCommandException;
-import exception.InvalidCommandException;
-import exception.MessageEmptyException;
 import exception.EmptyListException;
+import exception.IncorrectFormatException;
+import exception.InvalidCommandException;
+import exception.InvalidDateTimeException;
+import exception.InvalidDurationException;
+import exception.InvalidIndexException;
+import exception.MessageEmptyException;
 
 /**
  * Duke class that initialises the Duke chat bot.
@@ -111,8 +120,9 @@ public class Duke {
         taskList.add(task);
 
         System.out.println("Got it. I've added this task:");
-        System.out.println("added: " + task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("Added: " + task);
+        String taskGrammar = (taskList.size() == 1) ? " task" : " tasks";
+        System.out.println("Now you have " + taskList.size() + taskGrammar + " in the list.");
     }
 
     /**
@@ -160,17 +170,29 @@ public class Duke {
      * @throws IncorrectFormatException If the deadline command is used but a "/by" is not present in the message.
      */
 
-    private void addDeadline(String deadline) throws IncorrectFormatException {
+    private void addDeadline(String deadline) throws IncorrectFormatException, InvalidDateTimeException, MessageEmptyException {
         String[] result = deadline.split("/by");
 
-        if (result.length == 1) {
+        if (result.length == 0) {
+            throw new MessageEmptyException();
+        } else if (result.length == 1) {
             // throws an error if "/by" is not present in the message
             throw new IncorrectFormatException("deadline", "/by");
         }
 
         String description = result[0].trim(); // trims the additional spaces to the left and right of "by"
         String by = result[1].trim(); // trims the additional spaces to the left and right of "by"
-        Deadline d = new Deadline(description, by);
+
+        LocalDateTime finalBy;
+
+        try {
+            // checks if the formats of the input date and time are correct
+            finalBy = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm"));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException();
+        }
+
+        Deadline d = new Deadline(description, finalBy);
         addToList(d);
     }
 
@@ -190,17 +212,50 @@ public class Duke {
      * @throws IncorrectFormatException If the event command is used but a "/at" is not present in the message.
      */
 
-    private void addEvent(String event) throws IncorrectFormatException {
+    private void addEvent(String event) throws IncorrectFormatException, MessageEmptyException, InvalidDateTimeException, InvalidDurationException {
         String[] result = event.split("/at");
 
-        if (result.length == 1) {
+        if (result.length == 0) {
+            throw new MessageEmptyException();
+        } else if (result.length == 1) {
             // throws an error if "/at" is not present in the message
             throw new IncorrectFormatException("event", "/at");
         }
+        String description = result[0].trim();    // trims the additional spaces to the left and right of "at"
+        String at = result[1].trim();             // trims the additional spaces to the left and right of "at"
 
-        String description = result[0].trim(); // trims the additional spaces to the left and right of "at"
-        String at = result[1].trim(); // trims the additional spaces to the left and right of "at"
-        Event e = new Event(description, at);
+        // throws error if it doesn't even contain sufficient number of characters for correct format
+        if (at.replaceAll("\\s", "").length() < 19) { // YYYY/MM/DD HHMM - HHMM
+            throw new InvalidDurationException();
+        }
+
+        String date = at.substring(0, 10).trim(); // at this point, date contains 10 chars YYYY/MM/DD
+        String eventDuration = at.substring(11).trim();
+        String[] eventTimes = eventDuration.split("-");
+
+        // if no "-" present
+        if (eventTimes.length != 2) {
+            throw new InvalidDurationException();
+        }
+
+        String startTime = eventTimes[0].trim();
+        String endTime = eventTimes[1].trim();
+
+        LocalDate finalDate;
+        LocalTime finalStartTime;
+        LocalTime finalEndTime;
+
+        try {
+            // checks if the formats of the input date and time are correct
+            finalDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+            finalStartTime = LocalTime.parse(startTime, DateTimeFormatter.ofPattern("HHmm"));
+            finalEndTime = LocalTime.parse(endTime, DateTimeFormatter.ofPattern("HHmm"));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException();
+        }
+
+        Event e = new Event(description, finalDate, finalStartTime, finalEndTime);
+
         addToList(e);
     }
 
@@ -223,7 +278,8 @@ public class Duke {
 
         Task task = taskList.remove(intTaskIndex);
         System.out.println("Noted. I've removed this task:\n" + task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        String taskGrammar = (taskList.size() == 1) ? " task" : " tasks";
+        System.out.println("Now you have " + taskList.size() + taskGrammar + " in the list.");
     }
 
     /**
@@ -254,8 +310,12 @@ public class Duke {
                     // throws an error if there is no message input after the command word
                     throw new MessageEmptyException();
                 }
-                // excludes command "deadline " from the string
-                addDeadline(input.substring(9));
+                try {
+                    // excludes command "deadline " from the string
+                    addDeadline(input.substring(9));
+                } catch (InvalidDateTimeException | MessageEmptyException | IncorrectFormatException e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             case "todo":
                 if (words.length == 1) {
@@ -321,11 +381,19 @@ public class Duke {
 
             switch (nextCommand.charAt(1)) {
             case 'D':
-                task = extractDeadline(nextCommand.substring(7));   // [D][X] something by time
-                break;
+                try {
+                    task = extractDeadline(nextCommand.substring(7));   // [D][X] something by time
+                    break;
+                } catch (DataFileChangedException e) {
+                    System.out.println(e.getMessage());
+                }
             case 'E':
-                task = extractEvent(nextCommand.substring(7));      // [D][X] something at time
-                break;
+                try {
+                    task = extractEvent(nextCommand.substring(7));      // [D][X] something at time
+                    break;
+                } catch (DataFileChangedException e) {
+                    System.out.println(e.getMessage());
+                }
             default:                                                // todos
                 task = new Todo(nextCommand.substring(7));          // disregards [T][X]
             }
@@ -340,22 +408,63 @@ public class Duke {
         sc.close();
     }
 
-    private Deadline extractDeadline(String text) {
+    private Deadline extractDeadline(String text) throws DataFileChangedException {
         int lastOccurrenceOfBy = text.lastIndexOf(" (by: "); // in case other bys appear
         String description = text.substring(0, lastOccurrenceOfBy);
 
         // disregards "( by: " and trailing ")"
         String by = text.substring(lastOccurrenceOfBy + 6, text.length() - 1);
-        return new Deadline(description, by);
+
+        LocalDateTime dateTime;
+
+        try {
+            dateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a"));
+        } catch (DateTimeParseException e) {
+            throw new DataFileChangedException();
+        }
+
+        return new Deadline(description, dateTime);
     }
 
-    private Event extractEvent(String text) {
+    private Event extractEvent(String text) throws DataFileChangedException {
         int lastOccurrenceOfAt = text.lastIndexOf(" (at: ");
         String description = text.substring(0, lastOccurrenceOfAt);
 
         // disregards "( at: " and trailing ")"
         String at = text.substring(lastOccurrenceOfAt + 6, text.length() - 1);
-        return new Event(description, at);
+
+        // throws error if it doesn't even contain sufficient number of characters for correct format
+        if (at.replaceAll("\\s", "").length() < 22 || at.replaceAll("\\s", "").length() > 25) { // MMM d yyyy, HH:mm - HH:mm
+            throw new DataFileChangedException();
+        }
+
+        int indexOfComma = at.indexOf(',');
+        String date = at.substring(0, indexOfComma).trim(); // at this point, date contains 10 chars YYYY/MM/DD
+        String eventDuration = at.substring(indexOfComma + 1).trim();
+        String[] eventTimes = eventDuration.split("-");
+
+        // if no "-" present
+        if (eventTimes.length != 2) {
+            throw new DataFileChangedException();
+        }
+
+        String startTime = eventTimes[0].trim();
+        String endTime = eventTimes[1].trim();
+
+        LocalDate finalDate;
+        LocalTime finalStartTime;
+        LocalTime finalEndTime;
+
+        try {
+            // checks if the formats of the input date and time are correct
+            finalDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM d yyyy"));
+            finalStartTime = LocalTime.parse(startTime, DateTimeFormatter.ofPattern("h:mm a"));
+            finalEndTime = LocalTime.parse(endTime, DateTimeFormatter.ofPattern("h:mm a"));
+        } catch (DateTimeParseException e) {
+            throw new DataFileChangedException();
+        }
+
+        return new Event(description, finalDate, finalStartTime, finalEndTime);
     }
 
     public static void main(String[] args) {
