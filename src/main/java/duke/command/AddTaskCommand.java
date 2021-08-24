@@ -13,15 +13,30 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This class adds different types of tasks
+ */
+
 public class AddTaskCommand implements  Command {
     private String type, detail;
     private Task t;
 
+    /**
+     *
+     * @param arr of length 2 which contains the task type and description
+     */
     public AddTaskCommand(String[] arr) {
         this.type = arr[0];
         this.detail = arr[1];
     }
 
+    /**
+     *
+     * @param taskList Manages all current tasks
+     * @param ui Used to print messages
+     * @param storage Loads and saves the tasks to a txt file
+     * @throws DukeException thrown if there are input/parsing errors
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (type.equals("todo")) {
@@ -61,6 +76,11 @@ public class AddTaskCommand implements  Command {
         }
     }
 
+    /**
+     * Method to determine if Duke should stop running.
+     *
+     * @return true as this is an exit command
+     */
     @Override
     public boolean isExit() {
         return false;

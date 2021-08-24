@@ -20,7 +20,7 @@ public class Ui {
     }
 
     public void echo(String next_input) {
-        System.out.println(div_line + "\n" + indent + next_input + "\n" + div_line);
+        System.out.println(div_line + "\n" + indent + next_input + "\n" + div_line + "\n");
     }
 
     public void exit() {
@@ -28,11 +28,16 @@ public class Ui {
     }
 
     public void greet() {
-        String line1 = "Hello! I'm duke.Duke\n";
+        String line1 = "Hello! I'm Duke\n";
         String line2 = indent + "What can I do for you?";
         echo(line1 + line2);
     }
 
+    /**
+     * Method to print all tasks
+     *
+     * @param tasks List of all current tasks
+     */
     public void printAll(ArrayList<Task> tasks) {
         System.out.println(div_line);
         System.out.println(indent + "Here are the tasks in your list:");

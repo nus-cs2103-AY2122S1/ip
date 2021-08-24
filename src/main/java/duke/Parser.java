@@ -2,8 +2,17 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * This class converts user inputs to Commands
+ */
 public class Parser {
 
+    /**
+     *
+     * @param cmd User input
+     * @return A Command to be executed
+     * @throws DukeException thrown if user input is invalid
+     */
     public static Command parse(String cmd) throws DukeException {
         String[] arr = cmd.split(" ", 2);
 
