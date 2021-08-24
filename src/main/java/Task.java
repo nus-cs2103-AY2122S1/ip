@@ -35,6 +35,11 @@ public class Task {
         return (isDone ? "[X] " : "[ ] ");
     }
 
+    String saveText() {
+        int isDone = this.isDone ? 1 : 0;
+        return "T | " + isDone + " | " + desc + "\n";
+    }
+
     @Override
     public String toString() {
         return this.completionStatus() + desc;

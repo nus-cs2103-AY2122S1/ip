@@ -1,9 +1,11 @@
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 import java.io.IOException;
+import java.io.FileNotFoundException;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -17,7 +19,6 @@ public class Duke {
      */
     private static void process(String taskLine, ArrayList<Task> taskList) throws DukeException {
         String[] parsedLine = taskLine.split(" \\| ", 3);
-        System.out.println(taskLine);
         String command = parsedLine[0];
         Boolean isDone = parsedLine[1].equals("1");
         String next = parsedLine[2];
@@ -41,6 +42,13 @@ public class Duke {
         }
     }
 
+    private static void writeLineToFile(String line, File taskFile) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(taskFile));
+        writer.write(line);
+        writer.newLine();
+        writer.close();
+    }
+
     public static void main(String[] args) {
         // Initial values
         String sepLine = "____________________________________________________________";
@@ -57,9 +65,17 @@ public class Duke {
         // Gets the task file and reads the lines
         String localDir = System.getProperty("user.dir");
         File taskFile = new File(localDir + File.separator + "data/tasks.txt");
+        if (!taskFile.exists()) {
+            taskFile.getParentFile().mkdirs();
+            try {
+                taskFile.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Failed to create new file");
+            }
+        }
         try (BufferedReader br = new BufferedReader(new FileReader(taskFile))) {
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null && !line.equals("")) {
                 Duke.process(line, taskList);
             }
         } catch (FileNotFoundException e) {
@@ -102,11 +118,18 @@ public class Duke {
                     System.out.println("The task has been marked as done!");
                     System.out.println(taskToComplete);
                     System.out.println(sepLine);
+                    StringBuilder textString = new StringBuilder(100);
+                    for (Task t : taskList) {
+                        textString.append(t.saveText());
+                    }
+                    Duke.writeLineToFile(textString.toString(), taskFile);
                 } catch (NumberFormatException e) {
                     System.out.println("It seems like you have entered an invalid number for done.");
                     System.out.println("Please enter the task number as shown in the list.");
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("That task number does not exist in your list of tasks.");
+                } catch (IOException e) {
+                    System.out.println("Failed to write to file");
                 }
             } else if (command.equals("delete")) {
                 System.out.println(sepLine);
@@ -117,6 +140,11 @@ public class Duke {
                     System.out.println(taskToDelete);
                     taskList.remove(taskNum - 1);
                     System.out.println(sepLine);
+                    StringBuilder textString = new StringBuilder(100);
+                    for (Task t : taskList) {
+                        textString.append(t.saveText());
+                    }
+                    Duke.writeLineToFile(textString.toString(), taskFile);
                 } catch (NumberFormatException e) {
                     System.out.println("It seems like you have entered an invalid number to delete.");
                     System.out.println("Please enter the task number as shown in the list.");
@@ -124,6 +152,8 @@ public class Duke {
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("That task number does not exist in your list of tasks.");
                     System.out.println(sepLine);
+                } catch (IOException e) {
+                    System.out.println("Failed to write to file.");
                 }
             } else if (command.equals("help")) {
                 String helpMessage = sepLine + "\n HELP \n" + sepLine + "\n"
@@ -146,6 +176,7 @@ public class Duke {
                         + sepLine;
                 System.out.println(helpMessage);
             } else {
+                // Task is added to task list
                 try {
                     if (command.equals("todo")) {
                         Todo todo = new Todo(next[1], false);
@@ -155,7 +186,7 @@ public class Duke {
                         System.out.println(sepLine);
                     } else if (command.equals("deadline")) {
                         // Add a deadline to the task list
-                        String[] text = next[1].split("/by ");
+                        String[] text = next[1].split(" /by ");
                         try {
                             String desc = text[0];
                             String dueDate = text[1];
@@ -169,7 +200,7 @@ public class Duke {
                         }
                     } else if (command.equals("event")) {
                         // Add an event to the task list
-                        String[] text = next[1].split("/at ");
+                        String[] text = next[1].split(" /at ");
                         try {
                             String desc = text[0];
                             String time = text[1];
@@ -185,6 +216,15 @@ public class Duke {
                         System.out.println(sepLine + "\n I did not understand that command."
                                 + " Type 'help' for more info \n" + sepLine);
                     }
+                    try {
+                        StringBuilder textString = new StringBuilder(100);
+                        for (Task t : taskList) {
+                            textString.append(t.saveText());
+                        }
+                        Duke.writeLineToFile(textString.toString(), taskFile);
+                    } catch (IOException e) {
+                        throw new IOException();
+                    }
                 } catch (MissingFieldException e) {
                     System.out.println("Please fill in a timing for your deadline / event.");
                     System.out.println("Use '/by' for deadlines and '/at' for events.");
@@ -195,6 +235,8 @@ public class Duke {
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("It seems like your command was not formatted properly.");
                     System.out.println(sepLine);
+                } catch (IOException e) {
+                    System.out.println("Failed to save to file.");
                 }
             }
         }
