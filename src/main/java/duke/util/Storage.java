@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Storage {
@@ -36,11 +38,11 @@ public class Storage {
                         loadTodoToList(taskList, description, isTaskDone);
                         break;
                     case "E":
-                        String at = input[3];
+                        LocalDate at = LocalDate.parse(input[3]);
                         loadEventToList(taskList, description, at, isTaskDone);
                         break;
                     case "D":
-                        String by = input[3];
+                        LocalDate by = LocalDate.parse(input[3]);
                         loadDeadlineToList(taskList, description, by, isTaskDone);
                         break;
                 }
@@ -61,7 +63,7 @@ public class Storage {
         taskList.add(todo);
     }
 
-    public void loadEventToList(ArrayList<Task> taskList, String description, String at,
+    public void loadEventToList(ArrayList<Task> taskList, String description, LocalDate at,
                                 boolean isTaskDone) throws DukeException {
         Event event = new Event(description, at);
         if (isTaskDone) {
@@ -70,7 +72,7 @@ public class Storage {
         taskList.add(event);
     }
 
-    public void loadDeadlineToList(ArrayList<Task> taskList, String description, String by,
+    public void loadDeadlineToList(ArrayList<Task> taskList, String description, LocalDate by,
                                    boolean isTaskDone) throws DukeException {
         Deadline deadline = new Deadline(description, by);
         if (isTaskDone) {

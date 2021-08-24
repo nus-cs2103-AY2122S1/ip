@@ -8,8 +8,12 @@ import duke.exception.NoTimeException;
 import duke.exception.InvalidTaskDeletionException;
 import duke.exception.InvalidTaskDoneException;
 import duke.task.TaskList;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Parser {
     public static boolean parse(String fullCommand, TaskList taskList,
@@ -47,10 +51,10 @@ public class Parser {
         return next;
     }
 
-    public static String parseDate(String dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-        LocalDate date = LocalDate.parse(dateTime);
-        return date.format(formatter);
+    public static LocalDate parseDate(String dateTime) throws ParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        LocalDate date = LocalDate.parse(dateTime, formatter);
+        return date;
     }
 
     public static boolean parseList(TaskList taskList) {

@@ -6,6 +6,8 @@ import duke.exception.InvalidDateTimeException;
 import duke.util.Parser;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -53,20 +55,20 @@ public class TaskList {
 
     public void addDeadlineToList(String description, String by) throws DukeException {
         try {
-            by = Parser.parseDate(by);
-            Deadline deadline = new Deadline(description, by);
+            LocalDate date = Parser.parseDate(by);
+            Deadline deadline = new Deadline(description, date);
             addTaskToList(deadline);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException | ParseException e) {
             throw new InvalidDateTimeException();
         }
     }
 
     public void addEventToList(String description, String at) throws DukeException {
         try {
-            at = Parser.parseDate(at);
-            Event event = new Event(description, at);
+            LocalDate date = Parser.parseDate(at);
+            Event event = new Event(description, date);
             addTaskToList(event);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException | ParseException e) {
             throw new InvalidDateTimeException();
         }
     }
