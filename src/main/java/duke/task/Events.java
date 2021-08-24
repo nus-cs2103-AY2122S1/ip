@@ -15,16 +15,29 @@ public class Events extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns the event's date and time
+     *
+     * @return The event date and time.
+     */
     public String getAt() {
         return at;
     }
 
+    /**
+     * Returns the formatted string representation of the task.
+     *
+     * @return String representation of task.
+     */
     @Override
     public String toString() {
         localDateTime = new Parser().parseLocalDateTime(at);
         return "[E]" + super.toString() + " (at: " + localDateTime.format(dtf) + ")";
     }
 
+    /**
+     * Prints out event task.
+     */
     @Override
     public void displayTask() {
         System.out.println(toString());

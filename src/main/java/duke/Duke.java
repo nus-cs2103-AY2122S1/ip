@@ -22,6 +22,12 @@ public class Duke {
     private static final int TASK_OUTOFBOUNDS = 4;
     private static final int TASK_UNKNOWN = 5;
 
+    /**
+     * Constructor to initialise variables.
+     *
+     * @param filePath File path to receive input from and write to.
+     * @throws FileNotFoundException If file is not found.
+     */
     public Duke(String filePath) throws FileNotFoundException {
         ui = new Ui();
         ui.greeting();
@@ -38,7 +44,9 @@ public class Duke {
         }
     }
 
-
+    /**
+     * Executes the program after reading input from file or user.
+     */
     private void result() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
@@ -104,6 +112,12 @@ public class Duke {
 
     }
 
+    /**
+     * Marks tasks as done, and prints out relevant messages.
+     *
+     * @param input The user input to be processed.
+     * @throws DukeException If task index to be marked is not valid.
+     */
     public void marking(String input) throws DukeException {
         if (input.length() >= 6) {
             if (parser.isInteger(input)) {

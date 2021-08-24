@@ -6,11 +6,19 @@ public class ToDos extends Task {
         super(description);
     }
 
+    /**
+     * Returns the formatted string representation of the task.
+     *
+     * @return String representation of task.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Prints out todo task.
+     */
     @Override
     public void displayTask() {
         System.out.println("        " + toString());

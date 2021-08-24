@@ -18,6 +18,12 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * Returns the file to be read into the Duke program.
+     *
+     * @return The file to be read.
+     * @throws FileNotFoundException If the file is not found.
+     */
     public File load() throws FileNotFoundException{
         File file = new File(filepath);
         if (!file.exists()) {
@@ -27,6 +33,11 @@ public class Storage {
         return file;
     }
 
+    /**
+     * Writes and saves changes to the file read by the Duke program.
+     *
+     * @throws IOException If there is an error related to IO.
+     */
     public void save(StorageList storageList) throws IOException {
         FileWriter fw = new FileWriter(filepath);
         String textToAdd = "";

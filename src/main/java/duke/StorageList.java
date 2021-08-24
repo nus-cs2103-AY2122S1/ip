@@ -56,18 +56,39 @@ public class StorageList {
         }
     }
 
+    /**
+     * Adds a task to the storage list/task list.
+     *
+     * @param text
+     */
     public void add(Task text){
         storageList.add(text);
     }
 
+    /**
+     * Returns the task at the specified index.
+     *
+     * @param i Index of the task.
+     * @return The task at index i.
+     */
     public Task get(int i){
         return storageList.get(i);
     }
 
+    /**
+     * Returns the size of the storage list.
+     *
+     * @return The size of the list.
+     */
     public int size(){
         return storageList.size();
     }
 
+    /**
+     * Deletes a task from the specified index in the list.
+     *
+     * @param idx The index of the task to be deleted.
+     */
     public void delete(int idx){
         String desc = storageList.get(idx).getDescription();
         storageList.remove(idx);

@@ -15,16 +15,29 @@ public class Deadlines extends Task {
         this.by = by;
     }
 
+    /**
+     * Returns the deadline of the deadline task.
+     *
+     * @return The deadline.
+     */
     public String getBy() {
         return by;
     }
 
+    /**
+     * Returns the formatted string representation of the task.
+     *
+     * @return String representation of task.
+     */
     @Override
     public String toString() {
         localDateTime = new Parser().parseLocalDateTime(by);
         return "[D]" + super.toString() + " (by: " + localDateTime.format(dtf) + ")";
     }
 
+    /**
+     * Prints out deadline task.
+     */
     @Override
     public void displayTask(){
         System.out.println("        " + toString());
