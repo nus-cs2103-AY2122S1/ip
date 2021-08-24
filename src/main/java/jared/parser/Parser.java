@@ -1,3 +1,7 @@
+package jared.parser;
+
+import jared.common.DukeException;
+
 public class Parser {
     public static String parseCommand(String s) {
         String[] inputArr = s.split(" ",2);

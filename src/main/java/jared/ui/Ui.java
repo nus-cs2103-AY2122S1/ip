@@ -1,3 +1,10 @@
+package jared.ui;
+
+import jared.common.DukeException;
+import jared.common.Message;
+import jared.parser.Parser;
+import jared.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {

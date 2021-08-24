@@ -1,3 +1,12 @@
+package jared.storage;
+
+import jared.common.DukeException;
+import jared.parser.Parser;
+import jared.task.Deadline;
+import jared.task.Event;
+import jared.task.Task;
+import jared.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

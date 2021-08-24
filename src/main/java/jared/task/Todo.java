@@ -1,3 +1,7 @@
+package jared.task;
+
+import jared.task.Task;
+
 public class Todo extends Task {
     public Todo(String description) {
         super(description);

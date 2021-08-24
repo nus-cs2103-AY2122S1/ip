@@ -1,3 +1,8 @@
+import jared.common.DukeException;
+import jared.storage.Storage;
+import jared.task.TaskList;
+import jared.ui.Ui;
+
 public class Jared {
     private static final String FILE_NAME = "data.txt";
     private Storage storage;
@@ -29,8 +34,6 @@ public class Jared {
     public static void main(String[] args) {
         new Jared(FILE_NAME).run();
     }
-
-
 
 }
 

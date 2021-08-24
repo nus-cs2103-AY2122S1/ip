@@ -1,3 +1,5 @@
+package jared.common;
+
 public class Message {
     public static final String MESSAGE_WELCOME = "____________________________________________________________\n"
             + "Hello! I'm Jared\n"
