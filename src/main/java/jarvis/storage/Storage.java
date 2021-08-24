@@ -1,13 +1,20 @@
 package jarvis.storage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import jarvis.exception.InvalidDateTimeInputException;
 import jarvis.exception.InvalidStorageTaskException;
 import jarvis.exception.StorageFileException;
-import jarvis.task.*;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import jarvis.task.Deadline;
+import jarvis.task.Event;
+import jarvis.task.Task;
+import jarvis.task.TaskList;
+import jarvis.task.Todo;
 
 /**
  * Encapsulates a storage object that handles all hard-disk file IO
@@ -24,12 +31,12 @@ public class Storage {
     public Storage(String filePath) throws StorageFileException {
         this.file = new File(filePath);
         if (!file.isFile()) {
-           try {
-               this.file.getParentFile().mkdirs();
-               this.file.createNewFile();
-           } catch (IOException e) {
-               throw new StorageFileException("Error while loading storage file!");
-           }
+            try {
+                this.file.getParentFile().mkdirs();
+                this.file.createNewFile();
+            } catch (IOException e) {
+                throw new StorageFileException("Error while loading storage file!");
+            }
         }
     }
 
@@ -45,7 +52,7 @@ public class Storage {
         Scanner s;
 
         try {
-            s  = new Scanner(this.file);
+            s = new Scanner(this.file);
         } catch (FileNotFoundException e) {
             throw new StorageFileException("Storage file not found!");
         }
@@ -61,17 +68,17 @@ public class Storage {
             boolean isDone = readLine[1].equals("1");
             Task task;
             switch (taskType) {
-                case "T":
-                    task = new Todo(readLine[2]);
-                    break;
-                case "D":
-                    task = new Deadline(readLine[2], readLine[3]);
-                    break;
-                case "E":
-                    task = new Event(readLine[2], readLine[3]);
-                    break;
-                default:
-                    throw new InvalidStorageTaskException();
+            case "T":
+                task = new Todo(readLine[2]);
+                break;
+            case "D":
+                task = new Deadline(readLine[2], readLine[3]);
+                break;
+            case "E":
+                task = new Event(readLine[2], readLine[3]);
+                break;
+            default:
+                throw new InvalidStorageTaskException();
             }
             if (isDone) {
                 task.markAsDone();

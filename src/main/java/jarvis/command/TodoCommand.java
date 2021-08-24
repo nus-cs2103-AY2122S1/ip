@@ -3,10 +3,10 @@ package jarvis.command;
 import jarvis.exception.JarvisException;
 import jarvis.exception.StorageFileException;
 import jarvis.exception.TaskDetailsEmptyException;
-import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 import jarvis.task.Todo;
+import jarvis.ui.Ui;
 
 /**
  * Encapsulates the todo task command

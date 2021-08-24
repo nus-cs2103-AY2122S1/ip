@@ -22,15 +22,6 @@ public enum CommandTypeEnum {
     }
 
     /**
-     * Gets the length of the command trigger string
-     *
-     * @return length of the command trigger string
-     */
-    public int getCommandTypeStringLength() {
-        return commandTrigger.length();
-    }
-
-    /**
      * Identifies the correct CommandTypeEnum depending on user input.
      *
      * @param userInput User input
@@ -47,5 +38,14 @@ public enum CommandTypeEnum {
         }
 
         throw new UnknownCommandException(commandTrigger);
+    }
+
+    /**
+     * Gets the length of the command trigger string
+     *
+     * @return length of the command trigger string
+     */
+    public int getCommandTypeStringLength() {
+        return commandTrigger.length();
     }
 }

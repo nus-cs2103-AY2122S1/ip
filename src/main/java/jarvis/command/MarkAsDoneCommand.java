@@ -5,10 +5,10 @@ import jarvis.exception.JarvisException;
 import jarvis.exception.TaskListEmptyException;
 import jarvis.exception.TaskNotFoundException;
 import jarvis.parser.Parser;
-import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.Task;
 import jarvis.task.TaskList;
+import jarvis.ui.Ui;
 
 /**
  * Encapsulates the mark as done command
@@ -23,11 +23,11 @@ public class MarkAsDoneCommand extends Command {
      * @throws JarvisException If the user input is invalid
      */
     public MarkAsDoneCommand(String userInputWithoutCommandTrigger) throws JarvisException {
-       try {
-           this.taskIndex = Parser.getTaskIndex(userInputWithoutCommandTrigger);
-       } catch (NumberFormatException e) {
-           throw new InvalidInputException("number");
-       }
+        try {
+            this.taskIndex = Parser.getTaskIndex(userInputWithoutCommandTrigger);
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException("number");
+        }
     }
 
     /**

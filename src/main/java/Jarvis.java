@@ -1,9 +1,9 @@
 import jarvis.command.Command;
 import jarvis.exception.JarvisException;
 import jarvis.parser.Parser;
-import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
+import jarvis.ui.Ui;
 
 /**
  * Encapsulates the Jarvis chatbot
@@ -26,7 +26,7 @@ public class Jarvis {
 
         String userInput = ui.readInput();
 
-        while(true) {
+        while (true) {
             try {
                 if (Parser.isUserInputEmpty(userInput)) {
                     userInput = ui.readInput();

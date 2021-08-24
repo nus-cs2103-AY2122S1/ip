@@ -1,11 +1,12 @@
 package jarvis.parser;
 
-import jarvis.command.CommandTypeEnum;
-import jarvis.exception.UnknownCommandException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import jarvis.command.CommandTypeEnum;
+import jarvis.exception.UnknownCommandException;
 
 public class ParserTest {
     @Test

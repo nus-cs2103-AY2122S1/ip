@@ -1,8 +1,8 @@
 package jarvis.task;
 
-import jarvis.exception.InvalidDateTimeInputException;
-
 import java.util.ArrayList;
+
+import jarvis.exception.InvalidDateTimeInputException;
 
 /**
  * Encapsulates the list of tasks
@@ -132,7 +132,7 @@ public class TaskList {
     public String toStorageFormatString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (Task task: taskList) {
+        for (Task task : taskList) {
             stringBuilder.append(task.toStorageFormatString());
             stringBuilder.append(System.lineSeparator());
         }

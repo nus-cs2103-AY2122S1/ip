@@ -4,10 +4,10 @@ import jarvis.exception.JarvisException;
 import jarvis.exception.StorageFileException;
 import jarvis.exception.TaskDetailsEmptyException;
 import jarvis.parser.Parser;
-import jarvis.ui.Ui;
 import jarvis.storage.Storage;
 import jarvis.task.Event;
 import jarvis.task.TaskList;
+import jarvis.ui.Ui;
 
 /**
  * Encapsulates the event task command

@@ -1,9 +1,10 @@
 package jarvis.message;
 
+
 /**
- * Encapsulates an greeting message that is shown when program starts
+ * Encapsulates a greeting message that is shown when program starts
  */
-public class GreetingMessage extends OutputMessage{
+public class GreetingMessage extends OutputMessage {
     private static final String DEFAULT_GREETING_MESSAGE = String.format(
             "%s\n%s",
             "Hello! I'm Jarvis!",
