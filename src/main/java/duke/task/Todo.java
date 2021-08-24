@@ -1,11 +1,26 @@
+package duke.task;
+
+import duke.task.Task;
+
 public class Todo extends Task {
 
     protected String by;
 
+    /**
+     * Constructor method of Todo.
+     *
+     * @param description Description of a Todo.
+     */
     public Todo(String description) {
         super(description);
     }
 
+    /**
+     * Another constructor method of Todo.
+     *
+     * @param isDone Done status of a Todo.
+     * @param description Description of a Todo.
+     */
     public Todo(String isDone, String description) {
         super(description, isDone.equals("1"));
     }

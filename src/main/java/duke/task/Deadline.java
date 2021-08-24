@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exceptions.UnclearInstructionException;
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -9,23 +14,43 @@ public class Deadline extends Task {
         this.byDate = by;
     }
 
+    /**
+     * Constructor method of Deadline.
+     *
+     * @param description Description of a deadline.
+     * @param by Due time of a deadline.                   
+     */
     public Deadline(String description, String by) {
         super(description);
         this.byDate = LocalDate.parse(by);
     }
 
+    /**
+     * Another constructor method of Deadline.
+     *
+     * @param isDone Done indicator of a deadline.  
+     * @param description Description of a deadline.
+     * @param by Due time of a deadline.                   
+     */
     public Deadline(String isDone, String description, String by) {
         super(description, isDone.equals("1"));
         this.byDate = LocalDate.parse(by);
     }
 
+    /**
+     * Returns task description of a full command.
+     * 
+     * @param text  Full command given by user.
+     * @return Task description.
+     * @throws UnclearInstructionException  If the given command cannot be properly extracted or has empty description.
+     */
     public static String extractTaskDescription(String text) throws UnclearInstructionException {
         String[] contents = text.split(" ", 2);
         String task_type = contents[0];
         String description = "";
 
         if (contents.length != 2) {
-            throw new UnclearInstructionException("OOPS!!! The description of a " + task_type + " cannot be extracted properly.");
+            throw new UnclearInstructionException("OOPS!!! The description of a deadline cannot be extracted properly.");
         }
 
         int istart = text.indexOf(" ");
@@ -39,6 +64,13 @@ public class Deadline extends Task {
         return description;
     }
 
+    /**
+     * Returns due time of a full command.
+     *
+     * @param text  Full command given by user.
+     * @return Task due time.
+     * @throws UnclearInstructionException  If the given command cannot be properly extracted or has empty time.
+     */
     public static String extractTaskTime(String text) throws UnclearInstructionException {
         String[] contents = text.split(" ", 2);
         String task_type = contents[0];

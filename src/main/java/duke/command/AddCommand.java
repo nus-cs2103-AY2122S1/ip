@@ -1,7 +1,25 @@
-public class AddCommand extends Command{
+package duke.command;
+
+import duke.exceptions.UnclearInstructionException;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.util.TaskList;
+import duke.task.Todo;
+import duke.util.Ui;
+import duke.util.Storage;
+
+
+public class AddCommand extends Command {
     private final String fullCommand;
     private final String taskType;
 
+    /**
+     * Constructor method of AddCommand.
+     *
+     * @param fullCommand Full command given by the user.
+     * @param taskType Task type indicated by "T", "D" or "E".                   
+     */
     public AddCommand(String fullCommand, String taskType) {
         this.fullCommand = fullCommand;
         this.taskType = taskType;
@@ -12,6 +30,7 @@ public class AddCommand extends Command{
         return false;
     }
 
+    
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {

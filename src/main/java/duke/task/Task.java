@@ -1,15 +1,28 @@
+package duke.task;
+
+import duke.exceptions.UnclearInstructionException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
-
-
-
+    
+    /**
+     * Constructor method of Task.
+     *
+     * @param description Description of a task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
 
     }
 
+    /**
+     * Constructor method of Task.
+     *
+     * @param description Description of a task.
+     * @param isDone Done status of a task.                   
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -20,6 +33,11 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Returns doneIndicator as "1" or "0".
+     *
+     * @return task doneIndicator.
+     */
     public String getDoneIndicator() {
         String doneIndicator;
         if (isDone == false) {
@@ -39,7 +57,9 @@ public class Task {
     }
 
 
-
+    /**
+     * Marks task status as done.
+     */
     public void maskAsDone() {
         isDone = true;
     }
