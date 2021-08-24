@@ -7,6 +7,10 @@ import exceptions.DukeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This is a StorageParser class, which translates a task string
+ * into a Task object and vise versa.
+ */
 public class StorageParser {
     private final static int TASK_INDEX = 0; // Task type
     private final static int STATUS_INDEX = 1; // Task status
@@ -14,6 +18,11 @@ public class StorageParser {
     private final static int DATETIME_INDEX = 3; // Task date/time (if applicable)
     protected final static String DELIMITER = "¬";
 
+    /**
+     * Translates a task into its storage string representation.
+     * @param task The task to be parsed.
+     * @return The storage string representation of the task.
+     */
     public String encode(Task task) {
         StringBuilder output = new StringBuilder();
         String status = String.valueOf(task.getStatus());
@@ -35,6 +44,12 @@ public class StorageParser {
         return "";
     }
 
+    /**
+     * Translates a task in string format to a Task object.
+     * @param string The string to be parsed.
+     * @return The Task object based on the string.
+     * @throws DukeException
+     */
     public Task decode(String string) throws DukeException {
         String[] data = string.split(DELIMITER);
         if (data.length <= DESCRIPTION_INDEX) {

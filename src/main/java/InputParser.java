@@ -1,9 +1,20 @@
 import commands.*;
 import exceptions.DukeException;
 
+/**
+ * This is an InputParser class, which translates user input
+ * into commands.
+ */
 public class InputParser {
     private final static String DELIMITER = "\\s+";
     private final static int COMMAND_INDEX = 0;
+
+    /**
+     * Returns the command specified by the user.
+     * @param userInput The input string entered by the user.
+     * @return The command specified by the user.
+     * @throws DukeException
+     */
     public Command getCommand(String userInput) throws DukeException {
         String trimmedUserInput = userInput.trim();
         String[] words = trimmedUserInput.split(DELIMITER);
