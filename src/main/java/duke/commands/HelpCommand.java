@@ -2,15 +2,24 @@ package duke.commands;
 
 import duke.tasks.TaskList;
 
+/**
+ * HelpCommand class serves as an in-built user-guide that
+ * furnishes the user with information on how to use and format all
+ * the commands available.
+ * * Contains methods that
+ * * (i)    executes the HelpCommand
+ */
 public class HelpCommand extends Command {
     public HelpCommand() {
         super("help");
     }
 
+
     /**
-     * The possibleCommands() method serves as an in-built user-guide that
-     * furnishes the user with information on how to use and format all
-     * the commands available.
+     * execute() method in HelpCommand to add a Help task into the TaskList.
+     *
+     * @param des   the user input into the Duke chat-box.
+     * @param tList the TaskList object used to keep track of all tasks.
      */
     @Override
     public void execute(String des, TaskList tList) {

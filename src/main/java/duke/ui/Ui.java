@@ -17,6 +17,11 @@ import duke.tasks.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Ui class used as handle interactions with the user.
+ * Contains methods that
+ * (i) runs the Duke chat-bot.
+ */
 public class Ui {
 
     /**

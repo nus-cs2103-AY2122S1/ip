@@ -5,21 +5,28 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 import duke.exceptions.DukeException;
+
 import duke.storage.Storage;
+
 import duke.tasks.Event;
 import duke.tasks.TaskList;
 
+/**
+ * EventCommand class used to represent an Event Command.
+ * Contains methods that
+ * (i)    executes the EventCommand
+ */
 public class EventCommand extends Command {
     public EventCommand() {
         super("event");
     }
 
     /**
-     * The execute() method in eventCommand inputs an Event task into the Duke chat-bot.
+     * execute() method in EventCommand to add an Event task into the TaskList.
      *
-     * @param des the user input into the Duke chat-box.
-     * @throws DukeException if input is not correctly formatted with task and
-     *                       timeframe arguments.
+     * @param des   the user input into the Duke chat-box.
+     * @param tList the TaskList object used to keep track of all tasks.
+     * @throws DukeException if input for Delete command is not properly formatted.
      */
     @Override
     public void execute(String des, TaskList tList) throws DukeException {

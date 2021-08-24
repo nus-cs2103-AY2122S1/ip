@@ -1,24 +1,31 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+
 import duke.storage.Storage;
+
 import duke.tasks.Deadline;
 import duke.tasks.TaskList;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * DeadlineCommand class used to represent a Deadline Command.
+ * Contains methods that
+ * (i)    executes the DeadlineCommand
+ */
 public class DeadlineCommand extends Command {
     public DeadlineCommand() {
         super("deadline");
     }
 
     /**
-     * The execute() method in DeadLineCommand inputs a Deadline task into the Duke chat-bot.
+     * execute() method in DeadlineCommand to add a Deadline task to the TaskList.
      *
-     * @param des the user input into the Duke chat-box.
-     * @throws DukeException if input is not correctly formatted with task and due
-     *                       date arguments.
+     * @param des   the user input into the Duke chat-box.
+     * @param tList the TaskList object used to keep track of all tasks.
+     * @throws DukeException if input for deadline command is not properly formatted.
      */
     @Override
     public void execute(String des, TaskList tList) throws DukeException {

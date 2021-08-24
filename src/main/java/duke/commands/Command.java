@@ -1,12 +1,19 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
-
 import java.util.ArrayList;
 
+/**
+ * Abstract Command class used represent command inputs for Duke.
+ * Contains methods that
+ * (i)    executes the Command
+ * (ii)   print out the number of tasks in a given TaskList
+ * (iii)  counts the number of blank spaces in a string of text.
+ */
 public abstract class Command {
     private final String keyword;
 
@@ -14,10 +21,18 @@ public abstract class Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Abstract execute() method in Command for specific commands to execute their responsibilities.
+     *
+     * @param des   the user input into the Duke chat-box.
+     * @param tList the TaskList object used to keep track of all tasks.
+     */
     public abstract void execute(String des, TaskList tList) throws DukeException;
 
     /**
      * The numberOfTasks() method informs the user of the total number of tasks.
+     *
+     * @param tList the TaskList object used to keep track of all tasks.
      */
     public void numberOfTasks(TaskList tList) {
         ArrayList<Task> tasks = tList.getTaskList();
