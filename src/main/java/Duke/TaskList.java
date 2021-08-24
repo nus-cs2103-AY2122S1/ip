@@ -2,12 +2,24 @@ package Duke;
 
 import Duke.Task.Task;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
+    private static final String STORAGE_PATH = "data/duke.txt";
     private final String LIST_MESSAGE = "Here are the tasks in your list:\n";
-    private final List<Task> list = new ArrayList<>();
+    private List<Task> list = new ArrayList<>();
+    private Storage storage;
+
+    public TaskList() {
+        try {
+            this.storage = new Storage(STORAGE_PATH);
+            list = storage.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Adds a task to the task list.
@@ -15,6 +27,7 @@ public class TaskList {
      */
     public void add(Task task) {
         this.list.add(task);
+        this.save();
     }
 
     public Task get(int index) {
@@ -22,17 +35,28 @@ public class TaskList {
     }
 
     public Task remove(int index) {
-        return this.list.remove(index);
+        Task task = this.list.remove(index);
+        this.save();
+        return task;
     }
 
     public Task setDone(int index) {
         Task task = list.get(index);
         task.setDone();
+        this.save();
         return task;
     }
 
     public int size() {
         return this.list.size();
+    }
+
+    private void save() {
+        try {
+            storage.save(this.list);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
