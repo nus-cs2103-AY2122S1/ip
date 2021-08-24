@@ -23,8 +23,20 @@ public class Task {
         return (isDone? "X" : " ");
     }
 
-    public void markFinished(){
-        this.isDone = true;
+    public void markFinished(boolean t){
+        this.isDone = t;
+    }
+
+    public String getTaskType() {
+        return taskType;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     @Override

@@ -4,7 +4,7 @@ public class ToDo extends Task{
         super(description, "T");
     }
 
-    public static ToDo create(String description) throws DukeExceptions{
+    public static ToDo create(String description) {
         return new ToDo(description);
     }
 }
