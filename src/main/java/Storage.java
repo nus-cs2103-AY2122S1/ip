@@ -13,9 +13,9 @@ import duke.TaskList;
 
 public class Storage {
 
-    String filepath;
-    TaskList taskList;
-    int counter = 0;
+    protected String filepath;
+    protected TaskList taskList;
+    private int counter = 0;
     static String dash = "__________________________________";
 
     public Storage(String filepath, TaskList taskList) {
