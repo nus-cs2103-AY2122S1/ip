@@ -229,7 +229,7 @@ class Duke {
 
     /**
      * Returns the tasks on a given date.
-     * 
+     *
      * @param dateTime The desired date.
      */
     private void returnTasksOnDate(String dateTime) {
