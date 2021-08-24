@@ -31,14 +31,4 @@ public class Event extends Task {
     public String toStorage() {
         return "E|" + super.toStorage() + "/at " + this.eventDate;
     }
-
-    /**
-     * Converts contents to a storable String.
-     *
-     * @return a String that represents this Event in storage
-     */
-    @Override
-    public String toStorage() {
-        return "E|" + super.toStorage() + "/at " + this.timePeriod;
-    }
 }

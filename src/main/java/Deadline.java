@@ -30,14 +30,4 @@ public class Deadline extends Task {
     public String toStorage() {
         return "D|" + super.toStorage() + "/by " + this.endTime;
     }
-
-    /**
-     * Converts contents to a storable String.
-     *
-     * @return a String that represents this Event in storage
-     */
-    @Override
-    public String toStorage() {
-        return "D|" + super.toStorage() + "/by " + this.endTime;
-    }
 }
