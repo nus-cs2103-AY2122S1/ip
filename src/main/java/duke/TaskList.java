@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -6,6 +11,7 @@ public class TaskList {
 
     public TaskList(ArrayList<Task> tasks) {
         this.taskList = tasks;
+        this.taskCount = tasks.size();
     }
 
     public ArrayList<Task> get() {

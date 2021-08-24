@@ -1,15 +1,16 @@
+package duke.task;
+
+import duke.task.Task;
+
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
+public class Deadline extends Task {
     private final LocalDateTime dateAndTime;
-    private final LocalTime endTime;
 
-    public Event(String taskName, LocalDateTime dateAndTime, LocalTime endTime, boolean isDone) {
+    public Deadline(String taskName, LocalDateTime dateAndTime, boolean isDone) {
         super(taskName, isDone);
         this.dateAndTime = dateAndTime;
-        this.endTime = endTime;
     }
 
     /**
@@ -18,13 +19,12 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String dateAndTime = DateTimeFormatter.ofPattern("dd MMM yyyy 'from' h:mm a")
+        String dateAndTime = DateTimeFormatter.ofPattern("dd MMM yyyy 'at' h:mm a")
                 .format(this.dateAndTime);
-        String endTime = DateTimeFormatter.ofPattern("h:mm a").format(this.endTime);
         if (super.isDone) {
-            return "[E][X] " + super.taskName + " (at: " + dateAndTime + " - " + endTime + ")";
+            return "[D][X] " + super.taskName + " (by: " + dateAndTime + ")";
         } else {
-            return "[E][ ] " + super.taskName + " (at: " + dateAndTime + " - " + endTime + ")";
+            return "[D][ ] " + super.taskName + " (by: " + dateAndTime + ")";
         }
     }
 
@@ -35,8 +35,7 @@ public class Event extends Task {
     @Override
     public String parseToString() {
         String result = super.isDone ? "X" : "0";
-        result += "E/" + super.taskName + "/" + this.dateAndTime.toString() + "/"
-                + this.endTime.toString();
+        result += "D/" + super.taskName + "/" + this.dateAndTime.toString();
         return result;
     }
 }
