@@ -9,10 +9,11 @@ import java.io.IOException;
  */
 public class Storage {
     /** Path to storage file **/
-    private static String filePath;
+    private String filePath;
 
     /**
-     * Initializes a new storage manager
+     * Initializes a new storage container
+     *
      * @param filePath
      */
     public Storage(String filePath) {
@@ -23,9 +24,10 @@ public class Storage {
      * Gets the file which stores tasks from the user's session
      * If the file exists, it returns the file
      * If the file does not exist, it creates and returns it
+     *
      * @return Text file containing user session data
      */
-    public static File getFile() {
+    public File getFile() {
         File dataFile = new File(filePath);
         dataFile.getParentFile().mkdirs();
         try {
@@ -39,9 +41,10 @@ public class Storage {
     /**
      * Gets the user task file and writes a string to it
      * Erases existing data
+     *
      * @param string String to be written
      */
-    public static void writeToDataFile(String string) {
+    public void writeToDataFile(String string) {
         File dataFile = getFile();
         try {
             FileWriter fw = new FileWriter(dataFile);
@@ -54,9 +57,10 @@ public class Storage {
 
     /**
      * Gets the user task file and appends a string to it
+     * 
      * @param string String to be appended
      */
-    public static void appendToDataFile(String string) {
+    public void appendToDataFile(String string) {
         File dataFile = getFile();
         try {
             FileWriter fw = new FileWriter(dataFile, true);

@@ -19,18 +19,20 @@ import duke.exceptions.DukeException;
  */
 public class Duke {
     /** A class to keep track of all tasks of the Duke instance **/
-    private TaskList tasklist;
+    private TaskList taskList;
 
     /**
      * Initializes a new Duke instance with specified filepath to store tasks
+     *
      * @param filePath Path to storage file
      */
     public Duke(String filePath) {
-        this.tasklist = new TaskList(filePath);
+        this.taskList = new TaskList(filePath);
     }
 
     /**
      * Entry point of Duke
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -49,7 +51,7 @@ public class Duke {
             // Get input from the user
             String command = UI.readCommand();
             try {
-                Parser.handle(command, tasklist);
+                Parser.handle(command, taskList);
                 running = Parser.isRunning;
             } catch (InvalidCommandException e) {
                 System.out.println("I'm afraid I don't recognise that, please try again!");

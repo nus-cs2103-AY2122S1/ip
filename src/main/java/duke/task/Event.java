@@ -8,11 +8,12 @@ import java.time.format.FormatStyle;
  * A task with a start and end time
  */
 public class Event extends Task {
-    /** A string representing the start and end time of the event **/
+    /** Date of the event **/
     private LocalDate eventDate;
 
     /**
-     * Initializes a new Duke.Event
+     * Initializes a new Event
+     *
      * @param name Name of task
      * @param eventDate Start time of task
      */
@@ -22,7 +23,8 @@ public class Event extends Task {
     }
 
     /**
-     * Initializes a new Duke.Event with done property
+     * Initializes a new Event with done property
+     *
      * @param name Name of event
      * @param eventDate Date of event
      * @param isDone Whether event is done

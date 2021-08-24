@@ -6,6 +6,7 @@ package duke.task;
 public class ToDo extends Task {
     /**
      * Initializes a new ToDo task
+     *
      * @param name Name of task
      */
     public ToDo(String name) {
@@ -14,6 +15,7 @@ public class ToDo extends Task {
 
     /**
      * Initializes a new ToDo task with the done property
+     *
      * @param name Name of task
      * @param isDone Whether task is done or not
      */

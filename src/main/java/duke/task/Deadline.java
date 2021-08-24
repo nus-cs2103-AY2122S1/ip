@@ -13,6 +13,7 @@ public class Deadline extends Task {
 
     /**
      * Initializes a new Deadline
+     *
      * @param name Name of Deadline
      * @param endDate Date to complete task by
      */
@@ -22,7 +23,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Initializes a new Deadline
+     * Initializes a new Deadline with done property
+     *
      * @param name Name of Deadline
      * @param endDate Date to complete task by
      * @param isDone Whether task is done or not

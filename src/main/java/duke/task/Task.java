@@ -13,6 +13,7 @@ public abstract class Task {
 
     /**
      * Initializes a new task
+     *
      * @param name Name of task
      */
     public Task(String name) {
@@ -21,6 +22,7 @@ public abstract class Task {
 
     /**
      * Initializes a new task with the done property
+     *
      * @param name Name of task
      * @param isDone Whether task is done
      */
