@@ -1,3 +1,4 @@
+import Exceptions.InvalidTimeStampException;
 import Tasks.Deadline;
 
 public class AddDeadlineCommand extends Command {
@@ -8,7 +9,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTimeStampException {
         Deadline deadline = new Deadline(this.keyWords[0], this.keyWords[1]);
         tasks.addTask(deadline);
         String[] messages = new String[] {

@@ -1,3 +1,4 @@
+import Exceptions.InvalidTimeStampException;
 import Tasks.Event;
 
 public class AddEventCommand extends Command {
@@ -8,7 +9,7 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTimeStampException {
         Event event = new Event(this.keyWords[0], this.keyWords[1]);
         tasks.addTask(event);
         String[] messages = new String[] {
