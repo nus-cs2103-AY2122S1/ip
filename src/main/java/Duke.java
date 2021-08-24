@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 import static java.lang.Integer.parseInt;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.time.LocalDate;
 
 
@@ -21,9 +18,11 @@ import java.time.LocalDate;
 public class Duke {
 
     private TaskList taskList;
+    private Storage storage;
 
-    Duke() {
+    Duke(String filepath) {
         taskList = new TaskList(new ArrayList<Task>());
+        storage = new Storage(filepath);
     }
 
 
@@ -112,89 +111,8 @@ public class Duke {
         return true;
     }
 
-    public static void readFile(TaskList ls) {
-        try {
-            String arr[];
-            File myObj = new File("data/duke.txt");
-            Scanner myScanner = new Scanner(myObj);
-            while (myScanner.hasNextLine()) {
-                String data = myScanner.nextLine();
-                arr = data.split(" ");
-                String task = arr[0];
-                String description = arr[1] + " ";
-                if (task.charAt(2) == 'D') {
-                    String deadline = "";
-                    for (int i = 2; i < arr.length; i++) {
-                        if (i == 2) {
-                            deadline += arr[i].substring(1);
-                        } else if (i == arr.length - 1) {
-                            deadline += " " + arr[i].substring(0, arr[i].length() - 1);
-                        } else {
-                            deadline += " " + arr[i];
-                        }
-                    }
-                    Deadline item = new Deadline(description, deadline);
-                    if (task.substring(4) == "Done") {
-                        item.markAsDone();
-                    }
-                    ls.addTask(item);
-                } else if (task.charAt(2) == 'E') {
-                    String deadline = arr[2].substring(1, arr[2].length() - 1);
-                    for (int i = 2; i < arr.length; i++) {
-                        if (i == 2) {
-                            deadline += arr[i].substring(1);
-                        } else if (i == arr.length - 1) {
-                            deadline += " " + arr[i].substring(0, arr[i].length() - 1);
-                        } else {
-                            deadline += " " + arr[i];
-                        }
-                    }
-                    Event item = new Event(description, deadline);
-                    if (task.substring(4) == "Done") {
-                        item.markAsDone();
-                    }
-                    ls.addTask(item);
-                }
-                else {
-                    Todo item = new Todo(description);
-                    if (task.substring(4) == "Done") {
-                        item.markAsDone();
-                    }
-                    ls.addTask(item);
-                }
-            }
-            myScanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public static void saveFile(TaskList ls) {
-        try {
-            String str = "";
-            for (int i = 0; i < ls.getSize(); i++) {
-                str += (i + 1) + "."
-                        + ls.getTask(i).toString().charAt(1)
-                            + "|" + ls.getTask(i).getStatus() + " " + ls.getTask(i).getDescription();
-                if (ls.getTask(i) instanceof Deadline || ls.getTask(i) instanceof Event) {
-                    str += "(" + ls.getTask(i).getDeadline() + ")";
-                }
-                if (i != ls.getSize() - 1) {
-                    str += "\n";
-                }
-            }
-            FileWriter fileWriter = new FileWriter("data/duke.txt");
-            fileWriter.write(str);
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            System.out.println(e.getMessage());
-        }
-    }
-
     public void run() {
-        readFile(taskList);
+        storage.readFile(taskList);
         String input = "";
         String[] arr;
         Scanner scan = new Scanner(System.in);
@@ -267,7 +185,7 @@ public class Duke {
                 } else {
                     throw new InvalidCommandException("Command not Found");
                 }
-                saveFile(taskList);
+                storage.saveFile(taskList);
             } catch (InvalidCommandException e) {
                 System.out.println(e.toString());
             } catch (EmptyDescriptionException e) {
@@ -281,7 +199,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
+        Duke duke = new Duke("data/duke.txt");
         duke.run();
     }
 }
