@@ -1,21 +1,23 @@
+package duke.task;
+
 /**
- * Class encapsulating a task.
+ * Class encapsulating a duke.task.
  */
 public class Task {
     /**
-     * String to describe the task.
+     * String to describe the duke.task.
      */
     private String description;
 
     /**
-     * boolean to keep track if task is completed.
+     * boolean to keep track if duke.task is completed.
      */
     private boolean isCompleted;
 
     /**
-     * Public constructor for creating a task.
+     * Public constructor for creating a duke.task.
      *
-     * @param description Description of the task created.
+     * @param description Description of the duke.task created.
      */
     public Task(String description) {
         this.description = description;
@@ -23,16 +25,16 @@ public class Task {
     }
 
     /**
-     * Method to mark task as completed.
+     * Method to mark duke.task as completed.
      */
     public void markAsCompleted() {
         this.isCompleted = true;
     }
 
     /**
-     * String representation of the task.
+     * String representation of the duke.task.
      *
-     * @return String The string describing the task.
+     * @return String The string describing the duke.task.
      */
     @Override
     public String toString() {
