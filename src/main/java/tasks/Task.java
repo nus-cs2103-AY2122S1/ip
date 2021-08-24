@@ -33,8 +33,6 @@ public abstract class Task {
             throw new NoTaskNameException("No task name, please try again.");
         }
         switch (command) {
-        case "todo":
-            return new ToDo(input);
         case "event":
             String[] message_and_eventDate = input.split("/at ");
             return new Event(message_and_eventDate[0], message_and_eventDate[1]);
@@ -42,7 +40,7 @@ public abstract class Task {
             String[] message_and_endTime = input.split("/by ");
             return new Deadline(message_and_endTime[0], message_and_endTime[1]);
         default:
-            throw new NoSuchCommandException("Wrong command");
+            throw new NoSuchCommandException("No such command!");
         }
     }
 

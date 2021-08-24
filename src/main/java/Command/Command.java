@@ -38,6 +38,8 @@ public abstract class Command {
                 return new TaskCompletedCommand(extraInput);
             case "delete":
                 return new DeleteTaskCommand(extraInput);
+            case "todo":
+                return new CreateNewToDoCommand(extraInput);
             default:
                 throw new NoSuchCommandException("No such command!");
         }
