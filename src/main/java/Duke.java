@@ -6,6 +6,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
 
@@ -22,8 +24,8 @@ public class Duke {
         DONE      ("Usage: done [task number]"),
         DELETE    ("Usage: delete [task number]"),
         TODO      ("Usage: todo [description]"),
-        DEADLINE  ("Usage: deadline [description] /by [date and/or time]"),
-        EVENT     ("Usage: event [description] /at [date and/or time]");
+        DEADLINE  ("Usage: deadline [description] /by [date in YYYY-MM-DD format]"),
+        EVENT     ("Usage: event [description] /at [date in YYYY-MM-DD format]");
 
         private static Command[] taskCommands = {TODO, DEADLINE, EVENT};
 
@@ -119,6 +121,13 @@ public class Duke {
                     if (desc_date.length != 2) {
                         throw new DukeException("Deadline when brah??\n\t" + Command.DEADLINE.help_text);
                     }
+                    // Make sure date format is correct
+                    try {
+                        LocalDate.parse(desc_date[1]);
+                    }
+                    catch (DateTimeParseException e) {
+                        throw new DukeException("Follow the gahdam format!!\n\t" + Command.DEADLINE.help_text);
+                    }
                     return Command.DEADLINE;
                 }
                 case "event": {
@@ -130,6 +139,13 @@ public class Duke {
                     String[] desc_date = input_split[1].split(" /at ", 2);
                     if (desc_date.length != 2) {
                         throw new DukeException("Event when brah??\n\t" + Command.EVENT.help_text);
+                    }
+                    // Make sure date format is correct
+                    try {
+                        LocalDate.parse(desc_date[1]);
+                    }
+                    catch (DateTimeParseException e) {
+                        throw new DukeException("Follow the gahdam format!!\n\t" + Command.EVENT.help_text);
                     }
                     return Command.EVENT;
                 }
