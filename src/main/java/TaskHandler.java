@@ -34,7 +34,7 @@ public class TaskHandler {
      */
     public void addTask(Task task) {
         taskList.add(task);
-        Duke.prettify(String.format(TASK_ADDED_MESSAGE, task.toString(), getTotalTasksCount()));
+        Ui.prettify(String.format(TASK_ADDED_MESSAGE, task.toString(), getTotalTasksCount()));
     }
 
     /**
@@ -78,7 +78,7 @@ public class TaskHandler {
         int index = taskNumber - 1;
         Task t = taskList.get(index);
         t.markAsDone();
-        Duke.prettify(String.format(TASK_DONE_MESSAGE, t, getUndoneTasksCount()));
+        Ui.prettify(String.format(TASK_DONE_MESSAGE, t, getUndoneTasksCount()));
     }
 
     /**
@@ -97,29 +97,14 @@ public class TaskHandler {
         }
         int index = taskNumber - 1;
         Task t = taskList.remove(index);
-        Duke.prettify(String.format(TASK_DELETED_MESSAGE, t, getTotalTasksCount()));
+        Ui.prettify(String.format(TASK_DELETED_MESSAGE, t, getTotalTasksCount()));
     }
 
     public void updateData() throws DukeException {
         storage.updateData(taskList);
     }
-    /**
-     * String representation of the task list, with the tasks indexed.
-     *
-     * @return string representation of the task list.
-     */
-    @Override
-    public String toString() {
-        String allTasks = TASK_LIST;
-        if (taskList.size() == 0) {
-            return NO_TASKS_FOUND;
-        } else {
-            for (int i  = 0; i < taskList.size(); i++) {
-                int taskNumber =  i + 1;
-                String taskName = taskList.get(i).toString();
-                allTasks += String.format("\t%d. %s\n\t", taskNumber, taskName);
-            }
-        }
-        return allTasks;
+ 
+    public void printTasks() {
+        Ui.printTaskList(taskList);
     }
 }

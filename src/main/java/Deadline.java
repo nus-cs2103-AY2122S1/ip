@@ -22,28 +22,10 @@ public class Deadline extends Task {
      */
     public Deadline(String name, String dueDate) {
         super(name);
-        this.dueDate = parseDueDateToString(dueDate);
+        this.dueDate = dueDate;
     }
 
-    private String parseDueDateToString(String str) {
-        DateFormat sdf;
-        DateFormat reformattedSdf;
-        Date date;
-        if (str.split("\\s+").length == 2) {
-            sdf = new SimpleDateFormat("yyyy-MM-dd hhmm");
-            reformattedSdf = new SimpleDateFormat("dd MMM yyyy, h.mm aa");
-        } else {
-            sdf = new SimpleDateFormat("yyyy-MM-dd");
-            reformattedSdf = new SimpleDateFormat("dd MMM yyyy");
-        }
-        try {
-            date = sdf.parse(str);
-        } catch (ParseException e) {
-            System.out.println("wrong date format");
-            return str;
-        }
-        return reformattedSdf.format(date);
-    }
+
 
     public String formatToSave() {
         return String.format("D | %s | %s", super.formatToSave(), dueDate);

@@ -5,15 +5,24 @@
  * @version CS2103T AY21/22 Semester 1
  */
 public enum Command {
-    LIST,
-    DONE,
-    DEADLINE,
-    TODO,
-    EVENT,
-    DELETE,
-    BYE,
-    INVALID;
+    LIST(false),
+    DONE(false),
+    DEADLINE(false),
+    TODO(false),
+    EVENT(false),
+    DELETE(false),
+    BYE(true),
+    INVALID(false);
 
+    private final boolean isExit;
+
+    private Command(boolean isExit) {
+        this.isExit = isExit;
+    }
+
+    public boolean isExit() {
+        return isExit;
+    }
     /**
      * Looks up an enum value from user input
      *
