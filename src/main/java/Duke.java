@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
@@ -28,8 +29,31 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Scanner input = new Scanner(System.in);
         ArrayList<Task> storedInfo = new ArrayList<Task>();
-        //Task[] storedInfo = new Task[100];
         int count = 0;
+        try {
+            File taskList = new File("C:\\Users\\ronal\\duke.txt");
+            Scanner taskReader = new Scanner(taskList);
+            while (taskReader.hasNextLine()) {
+                String item = taskReader.nextLine();
+                if (item.charAt(1) == 'T') {
+                    storedInfo.add(new ToDoTask(item.substring(7)));
+                    count++;
+                } else if (item.charAt(1) == 'D') {
+                    int i = item.indexOf("(");
+                    storedInfo.add(new DeadlineTask(item.substring(7, i),
+                            item.substring(i+5, item.length()-1)));
+                    count++;
+                } else if (item.charAt(1) == 'E') {
+                    int i = item.indexOf("(");
+                    storedInfo.add(new EventTask(item.substring(7, i),
+                            item.substring(i+5, item.length()-1)));
+                    count++;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Tasklist not found. Creating new tasklist");
+        }
+        //Task[] storedInfo = new Task[100];
         while (input.hasNextLine()) {
             String in = input.nextLine();
             if (in.equals("bye") || in.equals("Bye")) {
@@ -82,21 +106,26 @@ public class Duke {
                     System.out.println("Invalid Input for delete command");
                     continue;
                 }
-                int taskDeleted = parseInt(in.substring(7));
-                if (taskDeleted > 100) {
+                try {
+                    int taskDeleted = parseInt(in.substring(7));
+                    if (taskDeleted > 100) {
+                        System.out.println("Invalid Input for delete command");
+                        continue;
+                    }
+                    //System.out.println(taskDone);
+                    if (taskDeleted > count) {
+                         System.out.println("Invalid Input for delete command");
+                        continue;
+                    }
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(storedInfo.get(taskDeleted - 1));
+                    storedInfo.remove(taskDeleted-1);
+                    count--;
+                    continue;
+                } catch (NumberFormatException e) {
                     System.out.println("Invalid Input for delete command");
                     continue;
                 }
-                //System.out.println(taskDone);
-                if (taskDeleted > count) {
-                    System.out.println("Invalid Input for delete command");
-                    continue;
-                }
-                System.out.println("Noted. I've removed this task:");
-                System.out.println(storedInfo.get(taskDeleted - 1));
-                storedInfo.remove(taskDeleted-1);
-                count--;
-                continue;
             }
             if (in.length() > 3 && in.substring(0,4).equals("todo") ) {
                 if (in.length() == 4) {
@@ -160,7 +189,12 @@ public class Duke {
         }
         try {
             FileWriter listEditor = new FileWriter("C:\\Users\\ronal\\duke.txt");
-            listEditor.write("Your mom");
+            for (Task item: storedInfo) {
+                if(item != null) {
+                    listEditor.write(item.toString());
+                    listEditor.write("\n");
+                }
+            }
             listEditor.close();
             System.out.println("Saving list..");
 
