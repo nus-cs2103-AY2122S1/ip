@@ -59,7 +59,7 @@ public class Task {
   }
 
   /**
-   * Marks a task as done. 
+   * Marks the task as done. 
    */
   
   public void markAsDone() {
