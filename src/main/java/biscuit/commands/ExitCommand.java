@@ -6,26 +6,26 @@ import biscuit.task.TaskList;
 import biscuit.ui.Ui;
 
 /**
- * Exit command to exit biscuit.Biscuit
+ * Exit command to exit Biscuit.
  */
 public class ExitCommand extends Command {
 
     /**
-     * Constructors for biscuit.commands.ExitCommand
+     * Constructs ExitCommand class.
      *
-     * @param userInput User input array with this structure: [command, details]
+     * @param userInput User input array with this structure: [command, details].
      */
     public ExitCommand(String[] userInput) {
         super(CommandType.EXIT, userInput);
     }
 
     /**
-     * Exit from biscuit.Biscuit
+     * Exits from Biscuit.
      *
-     * @param taskList biscuit.tasks.Task list
-     * @param ui       biscuit.ui.Ui to display
-     * @param storage  biscuit.storage.Storage to save to
-     * @throws BiscuitException Invalid input by user
+     * @param taskList Task list.
+     * @param ui       Ui to display.
+     * @param storage  Storage to save to.
+     * @throws BiscuitException Invalid input by user.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {

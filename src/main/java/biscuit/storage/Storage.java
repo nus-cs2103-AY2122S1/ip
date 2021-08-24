@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Deals with loading tasks from the file and saving tasks in the file
+ * Storage class deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
 
@@ -25,9 +25,9 @@ public class Storage {
     private final ArrayList<Task> list;
 
     /**
-     * Constructor for biscuit.storage.Storage
+     * Constructs Storage class.
      *
-     * @param filePath path to file
+     * @param filePath Path to file.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -35,9 +35,9 @@ public class Storage {
     }
 
     /**
-     * Saves changes made to file in filePath
+     * Saves changes made to file in filePath.
      *
-     * @throws BiscuitException Unable to save
+     * @throws BiscuitException Unable to save.
      */
     public void save() throws BiscuitException {
         try {
@@ -50,10 +50,10 @@ public class Storage {
     }
 
     /**
-     * Loads list of tasks from file in file path
+     * Loads list of tasks from file in file path.
      *
-     * @return List of files
-     * @throws BiscuitException Unable to load save file
+     * @return List of files.
+     * @throws BiscuitException Unable to load save file.
      */
     public List<Task> load() throws BiscuitException {
         try {
@@ -74,10 +74,10 @@ public class Storage {
     }
 
     /**
-     * Converts task to csv string
+     * Converts task to csv string.
      *
-     * @param task task to convert
-     * @return csv string
+     * @param task Task to convert.
+     * @return Csv string.
      */
     private String convertToCsv(Task task) {
         String csv = task.getType().toString() + "," + task.isDone() + ","
@@ -98,11 +98,11 @@ public class Storage {
     }
 
     /**
-     * Converts csv string to task
+     * Converts csv string to task.
      *
-     * @param csv csv string to convert
-     * @return task
-     * @throws BiscuitException Invalid csv string
+     * @param csv Csv string to convert.
+     * @return Task.
+     * @throws BiscuitException Invalid csv string.
      */
     private Task convertToTask(String csv) throws BiscuitException {
         try {
@@ -127,10 +127,10 @@ public class Storage {
     }
 
     /**
-     * Escapes special characters of commas, quotes and new lines
+     * Escapes special characters of commas, quotes and new lines.
      *
-     * @param data data to escape
-     * @return string with special characters escaped
+     * @param data Data to escape.
+     * @return String with special characters escaped.
      */
     private String escapeSpecialCharacters(String data) {
         // @@author MarcusTXK--reused
@@ -144,10 +144,10 @@ public class Storage {
     }
 
     /**
-     * Unescapes special characters of commas, quotes and new lines
+     * Unescapes special characters of commas, quotes and new lines.
      *
-     * @param data data to unescape
-     * @return string with special characters unescaped
+     * @param data Data to unescape.
+     * @return String with special characters unescaped.
      */
     private String unescapeSpecialCharacters(String data) {
         if (data.contains(",") || data.contains("\"") || data.contains("'")) {

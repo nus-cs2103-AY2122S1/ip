@@ -3,21 +3,21 @@ package biscuit.ui;
 import java.util.Scanner;
 
 /**
- * biscuit.ui.Ui class deals with interactions with the user
+ * Ui class deals with interactions with the user.
  */
 public class Ui {
 
     Scanner scanner;
 
     /**
-     * Constructor for biscuit.ui.Ui class
+     * Constructor for Ui class.
      */
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
 
     /**
-     * Prints welcome message
+     * Prints welcome message.
      */
     public void showWelcome() {
         String logo =
@@ -49,34 +49,34 @@ public class Ui {
     }
 
     /**
-     * Prints line separator
+     * Prints line separator.
      */
     public void showLine() {
         System.out.println("────────────────────────────────────────");
     }
 
     /**
-     * Prints message
+     * Prints message.
      *
-     * @param message message to display
+     * @param message Message to display.
      */
     public void showMessage(String message) {
         System.out.println(message);
     }
 
     /**
-     * Prints error
+     * Prints error.
      *
-     * @param error error to display
+     * @param error Error to display.
      */
     public void showError(String error) {
         System.out.println(error);
     }
 
     /**
-     * Reads user's next command
+     * Reads user's next command.
      *
-     * @return User's command
+     * @return User's command.
      */
     public String readCommand() {
         return scanner.nextLine();
