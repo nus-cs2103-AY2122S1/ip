@@ -6,11 +6,22 @@ public class Data {
     private final String filePath;
     private final File file;
 
+    /**
+     * Constructor for data.
+     *
+     * @param filePath a fixed file path for records data.
+     */
     public Data(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
     }
 
+    /**
+     * Returns list of tasks records from file.
+     *
+     * @return list of tasks records.
+     * @throws IOException
+     */
     public ArrayList<Task> getTasks() throws IOException {
         ArrayList<Task> records = new ArrayList<>();
         FileReader fileReader = new FileReader(filePath);
@@ -49,6 +60,12 @@ public class Data {
         return records;
     }
 
+    /**
+     * Update tasks record in fixed file.
+     *
+     * @param records list of tasks to be updated.
+     * @throws IOException
+     */
     public void writeToFile(ArrayList<Task> records) throws IOException {
         StringBuilder textToAdd = new StringBuilder();
         for (Task task : records) {

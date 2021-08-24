@@ -22,15 +22,23 @@ public abstract class Task {
      * @return "X" if isDone true.
      */
     public String getStatusIcon() {
-        return (isDone? "X" : " "); //mark done task with X
+        return (isDone? "X" : " ");
     }
 
+    /**
+     * Mark task as done.
+     */
     public void markAsDone() {
         isDone = true;
     }
 
     public abstract String toFileEntry();
 
+    /**
+     * Returns string representation of task object.
+     *
+     * @return string representation of task object.
+     */
     @Override
     public String toString() {
         return String.format("[%1$s] %2$s", getStatusIcon(), description);

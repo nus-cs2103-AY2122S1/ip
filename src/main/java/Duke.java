@@ -14,15 +14,13 @@ public class Duke {
      * @param name name of bot.
      */
     public Duke(String name) {
+        this.data = new Data(FILE_PATH);
         try {
-            this.data = new Data(FILE_PATH);
             this.records = this.data.getTasks();
-            commands = new Command(name);
         } catch (IOException e) {
-            this.data = new Data(FILE_PATH);
             records = new ArrayList<>();
-            commands = new Command(name);
         }
+        commands = new Command(name);
     }
 
     /**
@@ -60,7 +58,7 @@ public class Duke {
                     case TODO:
                         try {
                             String text = scanner.nextLine().trim();
-                            System.out.println(format(commands.todo(text, records.size(), records)));
+                            System.out.println(format(commands.todo(text, records)));
                         } catch (DukeException e) {
                             System.out.println(format(e.toString()));
                         }
@@ -68,7 +66,7 @@ public class Duke {
                     case EVENT:
                         String[] text = scanner.nextLine().split("/at ");
                         try {
-                            System.out.println(format(commands.event(text[0].trim(), text[1], records.size(), records)));
+                            System.out.println(format(commands.event(text[0].trim(), text[1], records)));
                         } catch (DukeException e) {
                             System.out.println(format(e.toString()));
                         } catch (ArrayIndexOutOfBoundsException e) {
@@ -79,7 +77,7 @@ public class Duke {
                     case DEADLINE:
                         String[] txt = scanner.nextLine().split("/by ");
                         try {
-                            System.out.println(format(commands.deadline(txt[0].trim(), txt[1], records.size(), records)));
+                            System.out.println(format(commands.deadline(txt[0].trim(), txt[1], records)));
                         } catch (DukeException e) {
                             System.out.println(format(e.toString()));
                         } catch (ArrayIndexOutOfBoundsException e) {

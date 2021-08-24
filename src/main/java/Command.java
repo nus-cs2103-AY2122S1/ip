@@ -29,28 +29,30 @@ public class Command {
      * Returns added message for command to-do.
      *
      * @param description description of to-do task.
+     * @param records records of existing tasks.
      * @return added message for command to-do.
      * @throws DukeException if description is empty.
      */
-    public String todo(String description, int size, ArrayList<Task> records) throws DukeException {
+    public String todo(String description, ArrayList<Task> records) throws DukeException {
         if (description.isEmpty()) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
         Todo toAdd = new Todo(description);
         records.add(toAdd);
         return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
-                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), size + 1);
+                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), records.size());
     }
 
     /**
      * Returns added message for command event.
      *
      * @param description description of event task.
-     * @param at string of event date/time.
-     * @return added message for command event.
-     * @throws DukeException if description or date/time is empty.
+     * @param at string of event date in YYYY-MM-DD.
+     * @param records records of existing tasks.
+     * @return message for command event
+     * @throws DukeException if description or date/time is not in YYYY-MM-DD.
      */
-    public String event(String description, String at, int size, ArrayList<Task> records) throws DukeException {
+    public String event(String description, String at, ArrayList<Task> records) throws DukeException {
         if (description.isEmpty()) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         } else if (at.isEmpty()) {
@@ -67,18 +69,19 @@ public class Command {
         Event toAdd = new Event(description, date);
         records.add(toAdd);
         return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
-                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), size + 1);
+                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), records.size());
     }
 
     /**
      * Returns added message for command deadline.
      *
      * @param description description of deadline task.
-     * @param by string of deadline date/time.
-     * @return added message for command deadline.
-     * @throws DukeException if description or date/time is empty.
+     * @param by string of deadline date in YYYY-MM-DD.
+     * @param records records of existing tasks.
+     * @return deadline message for command deadline.
+     * @throws DukeException if description or date/time is not in YYYY-MM-DD.
      */
-    public String deadline(String description, String by, int size, ArrayList<Task> records) throws DukeException{
+    public String deadline(String description, String by, ArrayList<Task> records) throws DukeException{
         if (description.isEmpty()) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else if (by.isEmpty()) {
@@ -95,12 +98,13 @@ public class Command {
         Deadline toAdd = new Deadline(description, date);
         records.add(toAdd);
         return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
-                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), size + 1);
+                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), records.size());
     }
 
     /**
      * Returns message representing list of all items user added.
      *
+     * @param records records of existing tasks.
      * @return formatted string representing elements in records array.
      */
     public String list(ArrayList<Task> records) {
@@ -113,9 +117,11 @@ public class Command {
 
     /**
      * Returns delete message for bot.
+     *
      * @param index index of task to be deleted.
+     * @param records records of existing tasks.
      * @return delete message for bot.
-     * @throws DukeException
+     * @throws DukeException if index < 0 or index > number of tasks
      */
     public String delete(int index, ArrayList<Task> records) throws DukeException {
         if (index < 0) {
@@ -132,6 +138,7 @@ public class Command {
      * Return task mark as done message.
      *
      * @param index index of task that is done.
+     * @param records records of existing tasks.
      * @return task mark as done message.
      * @throws DukeException if index < 0 or index points to null value.
      */
@@ -146,6 +153,14 @@ public class Command {
         return String.format("Nice! I've marked this task as done:\n\t %1$s \n\t", done.toString());
     }
 
+    /**
+     * Return message for tasks matched with keyword.
+     *
+     * @param keyword String of keyword to be matched.
+     * @param records records of existing tasks.
+     * @return message for all tasks matched with keyword.
+     * @throws DukeException if keyword is empty.
+     */
     public String find(String keyword, ArrayList<Task> records) throws DukeException{
         if (keyword.isEmpty()) {
             throw new DukeException("OOPS!!! No keyword provided.");
