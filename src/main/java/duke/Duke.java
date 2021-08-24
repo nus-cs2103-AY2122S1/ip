@@ -26,7 +26,9 @@ public class Duke {
                     input = sc.nextLine();
                     Record r = inputH.query(input);
                     Ui.reply(r.msg());
-                    if (r.bye()) break;
+                    if (r.bye()) {
+                        break;
+                    }
                 } catch (DukeException e) {
                     Ui.reply(e.getMessage());
                 }
