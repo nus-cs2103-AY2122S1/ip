@@ -81,10 +81,4 @@ public class TaskFile {
             errorMessage.printMessage();
         }
     }
-
-    public static void main(String[] args) {
-        TaskFile t = new TaskFile("tasks.txt");
-//        t.appendToFile("T | 1 | join sports club");
-        System.out.println(t.parseToTasks());
-    }
 }

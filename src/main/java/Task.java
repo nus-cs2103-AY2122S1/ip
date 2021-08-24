@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Task {
     protected String description;
     protected boolean isDone = false;
@@ -29,10 +32,20 @@ public class Task {
                 if (data.length != 4 || data[3].trim().isEmpty()) {
                     throw new InvalidCommandException();
                 }
+                try {
+                    LocalDate.parse(data[3]);
+                } catch (DateTimeParseException e) {
+                    throw new InvalidCommandException();
+                }
                 type = Duke.TaskType.DEADLINE;
                 break;
             case "E":
                 if (data.length != 4 || data[3].trim().isEmpty()) {
+                    throw new InvalidCommandException();
+                }
+                try {
+                    LocalDate.parse(data[3]);
+                } catch (DateTimeParseException e) {
                     throw new InvalidCommandException();
                 }
                 type = Duke.TaskType.EVENT;
@@ -48,7 +61,7 @@ public class Task {
         return String.format(" | %s | %s", isDone, this.description);
     }
 
-    public static Task of(String[] data) {
+    public static Task of(String[] data){
         Task result = null;
         Duke.TaskType taskType = inputTaskType(data);
 
@@ -60,10 +73,10 @@ public class Task {
                 result = new ToDo(description, isDone);
                 break;
             case DEADLINE:
-                result = new Deadline(description, isDone, data[3]);
+                result = new Deadline(description, isDone, LocalDate.parse(data[3]));
                 break;
             case EVENT:
-                result = new Event(description, isDone, data[3]);
+                result = new Event(description, isDone, LocalDate.parse(data[3]));
                 break;
         }
         return result;
