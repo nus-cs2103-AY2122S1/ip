@@ -12,7 +12,14 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 
+/**
+ * A class that tests the functionalities of a Tasklist.
+ *
+ */
 public class TaskListTest {
+    /**
+     * Test functionality of printList().
+     */
     @Test
     public void printListTest() {
         ToDos task1 = new ToDos("shower");
@@ -25,6 +32,11 @@ public class TaskListTest {
                 list.printList());
     }
 
+    /**
+     * Test functionality of addTask() when users give valid input.
+     *
+     * @throws DukeException when users gives invalid input.
+     */
     @Test
     public void addTaskTest() throws DukeException {
         TaskList list = new TaskList(new ArrayList<>());
@@ -32,6 +44,10 @@ public class TaskListTest {
         assertEquals("[T][ ]shower", t.toString());
     }
 
+    /**
+     * Test functionality of addTask() when users give invalid input.
+     *
+     */
     @Test
     public void addTaskTest2() {
         try {
@@ -44,6 +60,11 @@ public class TaskListTest {
         }
     }
 
+    /**
+     * Test functionality of deleteTask() method.
+     *
+     * @throws OutOfBoundException when users gives invalid task number.
+     */
     @Test
     public void deleteTaskTest() throws OutOfBoundException {
         ToDos task1 = new ToDos("shower");
@@ -54,6 +75,10 @@ public class TaskListTest {
         assertEquals("[T][ ]shower", t.toString());
     }
 
+    /**
+     * Test functionality of deleteTask().
+     *
+     */
     @Test
     public void deleteTaskTest2() {
         try {
@@ -68,6 +93,11 @@ public class TaskListTest {
         }
     }
 
+    /**
+     * Test funcionality of MarkAsDone().
+     *
+     * @throws OutOfBoundException when users give invalid input.
+     */
     @Test
     public void markAsDoneTest() throws OutOfBoundException {
         ToDos task1 = new ToDos("shower");
@@ -78,6 +108,10 @@ public class TaskListTest {
         assertEquals("[T][X]shower", t.toString());
     }
 
+    /**
+     * Test functionality of markAsDone().
+     *
+     */
     @Test
     public void markAsDoneTest2() {
         try {
