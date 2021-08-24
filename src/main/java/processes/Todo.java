@@ -1,4 +1,4 @@
-package Processes;
+package processes;
 
 public class Todo extends Task {
 

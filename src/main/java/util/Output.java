@@ -1,4 +1,4 @@
-package Util;
+package util;
 
 public class Output {
     public static void print(String line) {

@@ -1,4 +1,4 @@
-package Processes;
+package processes;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import java.util.Scanner;
 
-import Enum.Command;
+import models.Command;
 
 public class Parser implements IParser {
 

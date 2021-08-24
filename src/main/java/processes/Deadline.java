@@ -1,4 +1,4 @@
-package Processes;
+package processes;
 
 public class Deadline extends Task {
 

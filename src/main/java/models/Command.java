@@ -1,4 +1,4 @@
-package Enum;
+package models;
 
 public enum Command {
     BYE,

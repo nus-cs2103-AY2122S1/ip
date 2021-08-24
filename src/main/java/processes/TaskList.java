@@ -1,9 +1,9 @@
-package Processes;
+package processes;
 
 import java.util.List;
 import java.util.ArrayList;
 
-import Exception.DukeException;
+import exception.DukeException;
 
 public class TaskList {
 

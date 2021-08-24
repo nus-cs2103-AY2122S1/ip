@@ -1,8 +1,8 @@
-package Processes;
+package processes;
 
 import java.util.List;
 
-import Enum.Command;
+import models.Command;
 
 public interface IProcessor {
     void processCommand(Command command, List<String> arguments);

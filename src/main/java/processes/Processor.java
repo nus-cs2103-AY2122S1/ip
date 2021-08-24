@@ -1,10 +1,10 @@
-package Processes;
+package processes;
 
 import java.util.List;
 
-import Enum.Command;
-import Util.Output;
-import Exception.DukeException;
+import models.Command;
+import util.Output;
+import exception.DukeException;
 
 public class Processor implements IProcessor {
 
