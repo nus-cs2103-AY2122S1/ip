@@ -1,3 +1,10 @@
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
  * Represents the robot which has corresponding reaction to the user inputs.
  *
@@ -25,8 +32,9 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showLine(); // show the divider line ("*****")
                 Command c = Parser.parse(fullCommand);
+                assert c != null;
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {

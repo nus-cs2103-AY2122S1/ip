@@ -1,4 +1,13 @@
-public class DeleteCommand extends Command{
+package duke.command;
+
+import duke.command.Command;
+import duke.exception.OutOfRangeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
+public class DeleteCommand extends Command {
     private String response;
 
     public DeleteCommand(String response) {
@@ -12,7 +21,7 @@ public class DeleteCommand extends Command{
      * @return Whether the input is related to delete or not.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws OutOfRangeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws OutOfRangeException {
         //check with the special response "delete X", where X is index of deleted item.
         int curr = Integer.parseInt(response.substring(7));
         Task shouldDelete = tasks.removeElement(curr - 1);

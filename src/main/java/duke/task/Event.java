@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.task.Task;
+
 /**
  * Represents the event that has time. .
  *
@@ -12,11 +16,6 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         this.at = dateAndTime(at);
-    }
-
-    @Override
-    public String getActualTime() {
-        return at;
     }
 
     @Override

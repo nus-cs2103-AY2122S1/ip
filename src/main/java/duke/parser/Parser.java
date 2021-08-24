@@ -1,3 +1,11 @@
+package duke.parser;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.exception.EmptyInputException;
+import duke.exception.NotRecognizeException;
+import duke.task.Task;
+
 public class Parser {
     public Parser() {
 
@@ -26,7 +34,7 @@ public class Parser {
         return isDigit;
     }
 
-    public static Command parse(String response) throws DukeException{
+    public static Command parse(String response) throws DukeException {
         int len = response.length();
         switch (response) {
             case "bye":
@@ -62,21 +70,21 @@ public class Parser {
      */
     public static Operation checkResponse(String response, int len) throws DukeException {
         if (response.startsWith("date ")
-                && Task.isDate(response.substring(5, len))) {
+                && Task.isDate(response.substring(5))) {
             return Operation.DATE;
         } else if (response.startsWith("done ")
-                && chekDigit(response.substring(5, len))) {
+                && chekDigit(response.substring(5))) {
             return Operation.DONE;
-        } else if (response.startsWith("todo ")) {
+        } else if (response.startsWith("todo ") && len > 5) {
             return Operation.TODO;
         } else if (response.startsWith("deadline ")
-                && response.substring(9, len).contains(" /by ")) {
+                && response.substring(9).contains(" /by ")) {
             return Operation.DEADLINE;
         } else if (response.startsWith("event ")
-                && response.substring(6, len).contains(" /at ")) {
+                && response.substring(6).contains(" /at ")) {
             return Operation.EVENT;
         } else if (response.startsWith("delete ")
-                && chekDigit(response.substring(7, len))) {
+                && chekDigit(response.substring(7))) {
             return Operation.DELETE;
         } else if (response.equals("delete") || response.equals("todo") || response.equals("deadline")
                 || response.equals("event") || response.equals("done") || response.equals("date")) {

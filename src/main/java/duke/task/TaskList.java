@@ -1,8 +1,8 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+package duke.task;
+
+import duke.exception.OutOfRangeException;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class TaskList {
     /** The data structure used to store the tasks. */
@@ -24,7 +24,7 @@ public class TaskList {
         return count;
     }
 
-    public Task removeElement(int place) throws OutOfRangeException{
+    public Task removeElement(int place) throws OutOfRangeException {
         Task shouldDelete;
         try {
             shouldDelete = taskList.get(place);
@@ -56,7 +56,7 @@ public class TaskList {
         return currList;
     }
 
-    public Task markElement(int place) throws OutOfRangeException{
+    public Task markElement(int place) throws OutOfRangeException {
         Task shouldMark;
         try {
             shouldMark = taskList.get(place);

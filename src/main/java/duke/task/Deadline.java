@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.task.Task;
+
 /**
  * Represents the task which has deadline.
  *
@@ -10,11 +14,6 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = dateAndTime(by);
-    }
-
-    @Override
-    public String getActualTime() {
-        return by;
     }
 
     @Override
