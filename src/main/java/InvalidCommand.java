@@ -1,0 +1,26 @@
+/**
+ * This class implements the logic to handle invalid commands.
+ *
+ * @author Amos Tan
+ * @version CS2103T AY21/22 Semester 1
+ */
+
+public class InvalidCommand extends Command {
+
+    /** Constructs an InvalidCommand.*/
+    public InvalidCommand() {
+        super(null);
+    }
+
+    /**
+     * Handles the logic for creating an invalid command.
+     * @param input The user given input.
+     * @param duchess The Duchess to return the output to.
+     * @return Whether to continue scanning for user input afterwards.
+     */
+    public boolean handleLogic(String input, Duchess duchess) {
+        duchess.getUi().printError();
+        return true;
+    }
+
+}

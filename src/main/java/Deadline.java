@@ -11,10 +11,7 @@ import java.time.format.FormatStyle;
  */
 
 public class Deadline extends Task{
-<<<<<<< HEAD
-    /** The name of the deadline task.*/
-    protected String by;
-=======
+
     /** The date and time of the deadline task */
     protected LocalDateTime by;
 
@@ -27,7 +24,6 @@ public class Deadline extends Task{
     /** The DateTimeFormatter when converting time with minutes from string. */
     private static final DateTimeFormatter DATE_MINUTES_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy h:mma");
 
->>>>>>> branch-Level-8
 
     /**
      * Constructs a Deadline.
@@ -40,19 +36,14 @@ public class Deadline extends Task{
     }
 
     /**
-<<<<<<< HEAD
      * Returns a simplified representation of the Deadline for easier recovery from save file.
      * @return The file formatted string representation of the Deadline.
      */
     public String toFileFormat() {
-        return String.format("D%s,%s,%b", name, by, isDone);
+        return String.format("D%s,%s,%b", name, PRINT_DATE_FORMATTER.format(by), isDone);
     }
 
     /**
-     * Returns a string representation of the Deadline, with an [X] marked for done and [ ] as undone.
-     * @return the string representation of the Deadline.
-     */
-=======
      * Converts the user input string to a LocalDateTime.
      * @param by The user input date as a string.
      * @return The LocalDateTime representation.
@@ -70,12 +61,26 @@ public class Deadline extends Task{
         }
     }
 
+    /**
+     * Converts the user input string to a LocalDateTime.
+     * @param by The date as text within the file.
+     * @return The LocalDateTime representation.
+     * @throws DuchessException Exception thrown when an incorrect format is used for Deadline.
+     */
+    public static LocalDateTime convertTextToDate (String by)  {
+        return LocalDateTime.parse(by, PRINT_DATE_FORMATTER);
+    }
+
     public LocalDateTime getDateTime(){
         return this.by;
     }
 
->>>>>>> branch-Level-8
-    @Override
+
+    /**
+     * Returns a string representation of the Deadline, with an [X] marked for done and [ ] as undone.
+     * @return the string representation of the Deadline.
+    */
+     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + PRINT_DATE_FORMATTER.format(by)+ ")";
     }

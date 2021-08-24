@@ -10,18 +10,7 @@ import java.time.format.DateTimeParseException;
  */
 
 public class Event extends Task {
-<<<<<<< HEAD
-    /** The day of the event.*/
-    protected String day;
-    /** The time which the event takes place.*/
-    protected String time;
 
-    /**
-     * Constructs an Event.
-     * @param name The name of the event.
-     * @param day The day of the event.
-     * @param time The time which the event takes place.
-=======
     /** The date and time of the deadline task when it starts.*/
     protected LocalDateTime dateTimeStart;
 
@@ -39,11 +28,10 @@ public class Event extends Task {
 
 
     /**
-     * Constructor for Event class
-     * @param name the name of the event
-     * @param dateTimeStart the day of the event
-     * @param dateTimeEnd the day of the event
->>>>>>> branch-Level-8
+     * Constructs an Event.
+     * @param name The name of the event.
+     * @param dateTimeStart The time which the event starts.
+     * @param dateTimeEnd The time which the event ends.
      */
     public Event(String name, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd) {
         super(name);
@@ -85,11 +73,22 @@ public class Event extends Task {
      * @return The file formatted string representation of the Event.
      */
     public String toFileFormat() {
-        return String.format("E%s,%s,%s,%s", name, day, time, isDone);
+        return String.format("E%s,%s,%s,%s", name, dateTimeStart.format(PRINT_DATE_FORMATTER),
+                dateTimeEnd.format(PRINT_DATE_FORMATTER), isDone);
     }
 
     /**
-     * Returns a string representation of the Evenr, with an [X] marked for done and [ ] as undone.
+     * Converts the user input string to a LocalDateTime.
+     * @param by The date as text within the file.
+     * @return The LocalDateTime representation.
+     * @throws DuchessException Exception thrown when an incorrect format is used for Deadline.
+     */
+    public static LocalDateTime convertTextToDate (String by)  {
+        return LocalDateTime.parse(by, PRINT_DATE_FORMATTER);
+    }
+
+    /**
+     * Returns a string representation of the Event, with an [X] marked for done and [ ] as undone.
      * @return the string representation of the Event.
      */
     @Override

@@ -14,6 +14,10 @@ public class DuchessFileHandler {
 
     /** The save file of the tasks from Duchess. */
     public static File savedDuchess;
+    /** The home of the user to search for existing Duchess.*/
+    private static final String DATA_FOLDER = "data";
+    /** The file name of the existing Duchess.*/
+    private static final String FILE_LOCATION = "data/duchess.txt";
 
     /**
      * Extracts the DuchessList from the save file.
@@ -55,14 +59,15 @@ public class DuchessFileHandler {
             }
             case 'D': {
                 String[] nameByAndDone = task.substring(1).split(",");
-                Deadline deadline = new Deadline(nameByAndDone[0], nameByAndDone[1]);
+                Deadline deadline = new Deadline(nameByAndDone[0], Deadline.convertTextToDate(nameByAndDone[1]));
                 deadline.setDone(Boolean.parseBoolean(nameByAndDone[2]));
                 d.add(deadline);
                 break;
             }
             case 'E': {
                 String[] nameDayTimeAndDone = task.substring(1).split(",");
-                Event event = new Event(nameDayTimeAndDone[0], nameDayTimeAndDone[1], nameDayTimeAndDone[2]);
+                Event event = new Event(nameDayTimeAndDone[0], Event.convertTextToDate(nameDayTimeAndDone[1]),
+                        Event.convertTextToDate(nameDayTimeAndDone[2]));
                 event.setDone(Boolean.parseBoolean(nameDayTimeAndDone[3]));
                 d.add(event);
                 break;
@@ -83,13 +88,41 @@ public class DuchessFileHandler {
         try {
             FileWriter fw = new FileWriter(savedDuchess);
             for (int i = 1; i < tasks.getSize() + 1; i++) {
-                System.out.println("Writing task to file...");
                 fw.write(tasks.getTask(i).toFileFormat() + "\n");
             }
+            System.out.println("Writing task to file...");
             fw.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Loads the DuchessList from storage if found.
+     * @return The DuchessList saved to storage.
+     */
+    public static DuchessList load() {
+        // Solution below adapted from https://www.w3schools.com/java/java_files_create.asp
+        try {
+            File savedDuchess = new File(FILE_LOCATION);
+            DuchessFileHandler.savedDuchess = savedDuchess;
+            if (savedDuchess.createNewFile()) {
+                System.out.println("File created: " + savedDuchess.getName());
+                return new DuchessList();
+            }
+            else {
+                System.out.println("Found saved duchess file!");
+                return DuchessFileHandler.extractListFromFile(savedDuchess);
+            }
+        } catch (IOException e) {
+            // Directory does not exist
+            System.out.println("Directory does not exist, creating one now.");
+            File dir = new File(DATA_FOLDER);
+            if (!dir.exists())
+                dir.mkdir();
+            DuchessFileHandler.savedDuchess = new File(FILE_LOCATION);
+            return new DuchessList();
         }
     }
 }
