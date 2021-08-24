@@ -1,9 +1,12 @@
-import java.io.File;
+import exceptions.NoSuchCommandException;
+import exceptions.NoTaskNameException;
+
+import tasks.Task;
+
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Duke {
-    private static TaskList taskList = new TaskList();;
+    private static TaskList taskList = new TaskList();
 
     public static void main(String[] args) {
         Storage storage = new Storage("./storage/save.txt");
@@ -49,6 +52,7 @@ public class Duke {
                 break;
             case "delete":
                 taskList.delete(Integer.parseInt(input) - 1);
+                ui.showDeleteTask(taskList);
                 ui.showList(taskList);
                 break;
             default:

@@ -3,6 +3,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import tasks.Task;
+
 /**
  * The Storage class encapsulates the process of storing and loading files to and from the hard disk.
  *

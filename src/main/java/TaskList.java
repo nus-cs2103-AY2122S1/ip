@@ -1,3 +1,7 @@
+import exceptions.NoSuchCommandException;
+import exceptions.NoTaskNameException;
+import tasks.Task;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -20,7 +24,7 @@ public class TaskList {
      * @throws NoSuchCommandException if the command does not match any of the known
      * commands
      */
-    public TaskList(File storedTasks) throws IOException, NoTaskNameException, NoSuchCommandException {
+    public TaskList(File storedTasks) throws IOException, NoTaskNameException, NoSuchCommandException{
         FileReader fileReader = new FileReader(storedTasks);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line = bufferedReader.readLine();
@@ -47,7 +51,7 @@ public class TaskList {
     public String toString() {
         String allTasks = "";
         for (int i = 0; i < taskList.size(); i++) {
-            allTasks += (i + 1) + ". " + taskList.get(i).toString();
+            allTasks += (i + 1) + ". " + taskList.get(i).toString() + "\n";
         }
         return allTasks;
     }
@@ -75,8 +79,6 @@ public class TaskList {
      * @param taskIndex integer index of the task to be deleted
      */
     public void delete(int taskIndex) {
-        System.out.println("Alright, I've removed the following task:");
-        System.out.println(taskList.get(taskIndex) + "\nNow you have " + (taskList.size() - 1) + " tasks in the list.\n");
         taskList.remove(taskIndex);
     }
 
@@ -86,5 +88,14 @@ public class TaskList {
      */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
+    }
+
+    /**
+     * Returns the number of items in the TaskList.
+     *
+     * @return size of TaskList
+     */
+    public int size() {
+        return this.taskList.size();
     }
 }

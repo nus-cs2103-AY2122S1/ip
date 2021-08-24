@@ -33,7 +33,11 @@ public class Ui {
             reply("Your todo list is empty!\n");
         } else {
             reply("Checking your todo list...");
-            System.out.println(taskList + "\n");
+            System.out.println(taskList);
         }
+    }
+
+    public void showDeleteTask(TaskList taskList) {
+        reply("Task removed. You now have " + taskList.size() + " tasks remaining.");
     }
 }

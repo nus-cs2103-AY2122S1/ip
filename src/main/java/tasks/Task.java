@@ -1,5 +1,10 @@
+package tasks;
+
+import exceptions.NoSuchCommandException;
+import exceptions.NoTaskNameException;
+
 /**
- * The Task class encapsulates all the details of each task.
+ * The Tasks.Task class encapsulates all the details of each task.
  */
 
 public abstract class Task {
@@ -12,11 +17,11 @@ public abstract class Task {
     }
 
     /**
-     * Factory method for a Task
+     * Factory method for a Tasks.Task
      *
-     * @param command the type of Task to create
+     * @param command the type of Tasks.Task to create
      * @param input the contents of the task
-     * @return the corresponding Task
+     * @return the corresponding Tasks.Task
      * @throws NoSuchCommandException if the command does not match any of the known
      * commands
      * @throws NoTaskNameException if there is no task name
@@ -40,10 +45,10 @@ public abstract class Task {
     }
 
     /**
-     * Creates a Task from the String used in storage.
+     * Creates a Tasks.Task from the String used in storage.
      *
      * @param line read from the storage file
-     * @return the corresponding Task
+     * @return the corresponding Tasks.Task
      * @throws NoSuchCommandException if the command does not match any of the known
      * commands
      * @throws NoTaskNameException if there is no task name
@@ -88,7 +93,7 @@ public abstract class Task {
     /**
      * Converts contents to a storable String.
      *
-     * @return a String that represents this Task in storage
+     * @return a String that represents this Tasks.Task in storage
      */
     public String toStorage() {
         return (this.completed ? "1|" : "0|") + this.message;

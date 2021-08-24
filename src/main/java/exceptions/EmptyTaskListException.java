@@ -1,4 +1,6 @@
-public class EmptyTaskListException extends Exception {
+package exceptions;
+
+public class EmptyTaskListException extends DukeException {
     public EmptyTaskListException(String errorMessage) {
         super(errorMessage);
     }

@@ -1,8 +1,10 @@
+package tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Deadline class encapsulates all the details of each deadline.
+ * The tasks.Deadline class encapsulates all the details of each deadline.
  */
 public class Deadline extends Task {
     private final LocalDate endTime;
