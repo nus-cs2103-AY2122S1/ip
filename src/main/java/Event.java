@@ -1,14 +1,26 @@
+
 public class Event extends Task{
 
     protected String time;
+
 
     Event(String description) {
         super(description);
         this.time = "";
     }
 
+    Event(String description, boolean isDone) {
+        super(description, isDone);
+        this.time = "";
+    }
+
     Event(String description, String time) {
         super(description);
+        this.time = time;
+    }
+
+    Event(String description, boolean isDone, String time) {
+        super(description, isDone);
         this.time = time;
     }
 
