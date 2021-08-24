@@ -12,13 +12,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Duke.TaskList handles the management of and interaction with tasks
+ * TaskList handles the loading, storing and interactions with tasks
  */
 public class TaskList {
     /** ArrayList containing all tasks **/
     private ArrayList<Task> taskArrayList;
+
+    /** Storage class for interaction with files **/
     private Storage storage;
 
+    /**
+     * Initializes a new TaskList with the given filepath
+     * Filepath is used to initialize a Storage instance
+     * @param filePath Path to storage file
+     */
     public TaskList(String filePath) {
         this.taskArrayList = new ArrayList<>();
         this.storage = new Storage(filePath);
@@ -27,17 +34,16 @@ public class TaskList {
 
     /**
      * Adds a new task to taskArrayList
-     * @param task Duke.Task object to be added
+     * @param task Task object to be added
      */
     public void add(Task task) {
         taskArrayList.add(task);
     }
 
     /**
-     * Retrieves the task with the corresponding ID
+     * Retrieves the task with the corresponding ID from taskArrayList
      * @param id ID of task
-     * @return Duke.Task with ID
-     * @throws IndexOutOfBoundsException If task ID does not exist
+     * @return Task with ID
      */
     public Task get(int id) {
         return taskArrayList.get(id - 1);
@@ -46,7 +52,6 @@ public class TaskList {
     /**
      * Removes the task with corresponding ID
      * @param id ID of task
-     * @throws IndexOutOfBoundsException If task ID does not exist
      */
     public void remove(int id) {
         taskArrayList.remove(id - 1);
@@ -72,6 +77,8 @@ public class TaskList {
 
     /**
      * Retrieves a list of tasks from previous sessions, stored in data/duke.txt
+     * If file does not exist, it will be created
+     * Parses and adds tasks line by line to taskArrayList
      */
     public void getTasksFromStorage() {
         File dataFile = storage.getFile();

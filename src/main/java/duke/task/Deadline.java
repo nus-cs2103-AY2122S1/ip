@@ -12,8 +12,8 @@ public class Deadline extends Task {
     private LocalDate endDate;
 
     /**
-     * Initializes a new Duke.Deadline
-     * @param name Name of Duke.Deadline
+     * Initializes a new Deadline
+     * @param name Name of Deadline
      * @param endDate Date to complete task by
      */
     public Deadline(String name, LocalDate endDate) {
@@ -21,6 +21,12 @@ public class Deadline extends Task {
         this.endDate = endDate;
     }
 
+    /**
+     * Initializes a new Deadline
+     * @param name Name of Deadline
+     * @param endDate Date to complete task by
+     * @param isDone Whether task is done or not
+     */
     public Deadline(String name, LocalDate endDate, boolean isDone) {
         super(name, isDone);
         this.endDate = endDate;
