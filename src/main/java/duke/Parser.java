@@ -25,10 +25,12 @@ public class Parser {
         if (inputStringArray.length == 1) {
             switch (firstWord) {
             case "list":
-                return "Here are the tasks in your list:" + getTasksString();
+                return tasks.getAllTasksString();
             case "done":
             case "delete":
                 throw new DukeException("Please specify a task number.");
+            case "find":
+                throw new DukeException("Please specify a keyword.");
             case "deadline":
             case "event":
             case "todo":
@@ -57,6 +59,8 @@ public class Parser {
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     throw new DukeException("Please specify a valid task number.");
                 }
+            case "find":
+                return tasks.getMatchingTasksString(inputStringArray[1]);
             case "deadline":
                 String[] deadlineInfo = inputStringArray[1].split(" /by ", 2);
                 if (deadlineInfo.length < 2) {
@@ -96,15 +100,6 @@ public class Parser {
                 throw new DukeException("Sorry, I don't know what that means.");
             }
         }
-    }
-
-    private String getTasksString() { // TODO: Change to StringBuilder, put in TaskList
-        String taskString = "";
-        int taskCount = tasks.getSize();
-        for (int i = 0; i < taskCount; i++) {
-            taskString += "\n " + (i + 1) + ". " + tasks.getTask(i).toString();
-        }
-        return taskString;
     }
 
 }

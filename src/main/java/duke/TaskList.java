@@ -40,4 +40,24 @@ public class TaskList {
         return tasks.size();
     }
 
+    public String getAllTasksString() {
+        StringBuilder result = new StringBuilder("Here are the tasks in your list:\n");
+        int taskCount = tasks.size();
+        for (int i = 0; i < taskCount; i++) {
+            result.append((i + 1) + ". " + tasks.get(i).toString() + "\n");
+        }
+        return result.toString();
+    }
+
+    public String getMatchingTasksString(String keyword) {
+        ArrayList<Task> matchingTaskList = new ArrayList<>(tasks);
+        matchingTaskList.removeIf(task -> !task.getDescription().contains(keyword));
+        StringBuilder result = new StringBuilder("Here are the tasks in your list:\n");
+        int taskCount = matchingTaskList.size();
+        for (int i = 0; i < taskCount; i++) {
+            result.append((i + 1) + ". " + matchingTaskList.get(i).toString() + "\n");
+        }
+        return result.toString();
+    }
+
 }

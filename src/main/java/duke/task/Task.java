@@ -15,6 +15,10 @@ public class Task {
         return statusIcon + " " + description;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public void setDone() {
         this.isDone = true;
     }
