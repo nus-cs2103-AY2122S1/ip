@@ -64,7 +64,7 @@ public class TaskList implements Serializable {
             }
         }
         if (outList.size() == 0) {
-            Ui.printString("No current task found.");
+            Ui.printString("No current task found with a keyword " + keyword);
         } else {
             String out = "Here are the tasks in your list:\n";
             for (int i = 0; i < outList.size(); i++) {
