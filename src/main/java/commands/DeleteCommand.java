@@ -1,18 +1,18 @@
 package commands;
 
 import bot.Bot;
-import bot.OutputManager;
+import bot.Ui;
 import exceptions.InvalidTaskException;
 
-public class DeleteCommand implements Command {
+public class DeleteCommand extends Command {
 
   @Override
   public void run(Bot bot, String[] args) {
     int index = Integer.parseInt(args[0]) - 1;
-    if (index < 0 || index >= bot.getTaskList().size()) {
-      throw new InvalidTaskException(OutputManager.ERROR_SIGNATURE + "This task does not exist in the task list!");
+    if (index < 0 || index >= bot.taskList.get().size()) {
+      throw new InvalidTaskException(Ui.ERROR_SIGNATURE + "This task does not exist in the task list!");
     }
-    bot.removeTask(index);
+    bot.taskList.removeTask(index);
   }
   
 }

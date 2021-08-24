@@ -3,7 +3,7 @@ package bot;
 /**
  * The OutputManager handles bot output messages to console
  */
-public class OutputManager {
+public class Ui {
 
   public static final String RESPONSE_BLOCK_MARGIN = "    "; 
   public static final String TEXT_BLOCK_MARGIN = " ";
@@ -22,20 +22,18 @@ public class OutputManager {
   };
   public static final String ERROR_SIGNATURE = "☹ OOPS!!! ";
 
-  public OutputManager() {}
-
   /**
    * Prints welcome message dialogue
    */
-  public void printWelcome() {
-    this.print(START_MESSAGES);
+  public static void printWelcome() {
+    print(START_MESSAGES);
   }
 
   /**
    * Prints goodbye message dialogue
    */
-  public void printGoodbye() {
-    this.print(END_MESSAGES);
+  public static void printGoodbye() {
+    print(END_MESSAGES);
   }
 
   /**
@@ -43,8 +41,8 @@ public class OutputManager {
    * 
    * @param input string to print in dialogue
    */
-  public void printEcho(String input) {
-    this.print(new String[] { input });
+  public static void printEcho(String input) {
+    print(new String[] { input });
   }
 
   /**
@@ -54,7 +52,7 @@ public class OutputManager {
    * @param messages string messages to print in 
    * dialogue
    */
-  public void print(String[] messages) {
+  public static void print(String[] messages) {
     System.out.println(RESPONSE_BLOCK_MARGIN + DIVIDER);
     for (String message: messages) {
       System.out.println(RESPONSE_BLOCK_MARGIN + TEXT_BLOCK_MARGIN + message);

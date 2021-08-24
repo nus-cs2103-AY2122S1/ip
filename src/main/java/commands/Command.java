@@ -2,7 +2,17 @@ package commands;
 
 import bot.Bot;
 
-public interface Command {
+public abstract class Command {
+
+  String[] args;
+
+  public void setArgs(String[] args) {
+    this.args = args;
+  };
+
+  public String[] getArgs() {
+    return args;
+  }
 
   /**
    * Run the command
@@ -10,6 +20,6 @@ public interface Command {
    * @param bot the bot that invokes the command
    * @param args list of argument strings
    */
-  void run(Bot bot, String[] args);
+  public abstract void run(Bot bot, String[] args);
 
 }

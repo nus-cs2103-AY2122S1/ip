@@ -2,22 +2,22 @@ package commands;
 
 import tasks.Task;
 import bot.Bot;
-import bot.OutputManager;
+import bot.Ui;
 import exceptions.InvalidTaskException;
 
-public class DoneCommand implements Command {
+public class DoneCommand extends Command {
 
   @Override
   public void run(Bot bot, String[] args) {
     int index = Integer.parseInt(args[0]) - 1;
-    if (index < 0 || index >= bot.getTaskList().size()) {
-      throw new InvalidTaskException(OutputManager.ERROR_SIGNATURE + "This task does not exist in the task list!");
+    if (index < 0 || index >= bot.taskList.get().size()) {
+      throw new InvalidTaskException(Ui.ERROR_SIGNATURE + "This task does not exist in the task list!");
     }
-    Task task = bot.getTaskAt(index);
+    Task task = bot.taskList.getTaskAt(index);
     task.markDone();
-    bot.printOutput(new String[] {
+    Ui.print(new String[] {
       "Nice! I've marked this task as done:",
-      OutputManager.TEXT_BLOCK_MARGIN + task.toString()
+      Ui.TEXT_BLOCK_MARGIN + task.toString()
     });
   }
   

@@ -40,12 +40,7 @@ public class Storage {
   }
 
   public static void save(Bot bot) {
-    List<Task> tasks = bot.getTaskList();
-    List<String> taskStrings = new ArrayList<>();
-    for (Task t: tasks) {
-      taskStrings.add(t.serialize());
-    }
-    Storage.write(taskStrings);
+    Storage.write(bot.taskList.getTaskStringList());
   }
 
   public static void load(Bot bot) {
@@ -56,7 +51,7 @@ public class Storage {
         tasks.add(Task.deserialize(taskString));
       }
     }
-    bot.setTaskList(tasks);
+    bot.taskList.set(tasks);
   }
   
 }

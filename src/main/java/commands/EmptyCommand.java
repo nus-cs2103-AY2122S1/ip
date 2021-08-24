@@ -1,14 +1,14 @@
 package commands;
 
 import bot.Bot;
-import bot.OutputManager;
+import bot.Ui;
 
-public class EmptyCommand implements Command {
+public class EmptyCommand extends Command {
 
   @Override
   public void run(Bot bot, String[] args) {
-    bot.printOutput(new String[]{
-      OutputManager.ERROR_SIGNATURE + "I'm sorry, but I don't know what that means :-("
+    Ui.print(new String[]{
+      Ui.ERROR_SIGNATURE + "I'm sorry, but I don't know what that means :-("
     });
   }
   
