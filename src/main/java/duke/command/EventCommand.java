@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.task.Event;
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
 public class EventCommand extends Command {
     protected Event event;
     public static final String INSTRUCTION = "event";

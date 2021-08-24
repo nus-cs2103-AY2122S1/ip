@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.task.Deadline;
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
 public class DeadlineCommand extends Command {
     protected Deadline deadline;
     public static final String INSTRUCTION = "deadline";

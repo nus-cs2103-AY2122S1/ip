@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.task.Todo;
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
 public class TodoCommand extends Command {
     protected Todo todo;
     public static final String INSTRUCTION = "todo";
