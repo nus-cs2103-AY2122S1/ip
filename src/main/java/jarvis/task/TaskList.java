@@ -1,5 +1,6 @@
 package jarvis.task;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -15,7 +16,7 @@ public class TaskList {
         return todo;
     }
 
-    public Deadline addTaskWithDeadline(String taskDescription, String deadline) {
+    public Deadline addTaskWithDeadline(String taskDescription, LocalDateTime deadline) {
         Deadline taskWithDeadline = new Deadline(taskDescription, deadline);
         taskList.add(taskWithDeadline);
         return taskWithDeadline;
