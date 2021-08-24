@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DukeTest {
     @Test
-    public void dummyTest(){
+    public void dummyTest() {
         assertEquals(2, 2);
     }
 
     @Test
-    public void DukeDummyTest(){
+    public void DukeDummyTest() {
         try {
             new Duke("/Users/hungkhoaitay/Duke/data/dukeTest.txt");
             assertTrue(true);

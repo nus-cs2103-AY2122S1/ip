@@ -1,55 +1,16 @@
 package duke;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.io.IOException;
 import java.util.Optional;
 
 public abstract class Task {
     final static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private boolean isDone;
     private final String taskName;
     private final LocalDate date;
-
-    /**
-     * State different kinds of task
-     */
-    protected enum TaskKind {
-        TODO("todo", "T", null, "todo borrow book"),
-        DEADLINE("Deadline", "D", "deadline", "deadline return book /by 2022-02-18"),
-        EVENT("Event", "E", "start time", "event book conference /at 2022-02-18");
-
-        private final String kind;
-        private final String shortName;
-        private final String note;
-        private final String example;
-
-
-        TaskKind(String kind, String shortName, String note, String example) {
-            this.kind = kind;
-            this.shortName = shortName;
-            this.note = note;
-            this.example = example;
-        }
-
-        private String shortName() {
-            return shortName;
-        }
-
-        protected String note() {
-            return note;
-        }
-
-        protected String getExample() {
-            return example;
-        }
-
-        @Override
-        public String toString() {
-            return kind;
-        }
-    }
+    private boolean isDone;
 
     private Task(String taskName) {
         this(false, taskName, null);
@@ -74,66 +35,6 @@ public abstract class Task {
         }
     }
 
-    private static class Todo extends Task{
-        private Todo(String taskName) {
-            super(taskName);
-        }
-
-        private Todo(boolean isDone, String taskName) {
-            super(isDone, taskName, null);
-        }
-
-        @Override
-        public TaskKind taskKind() {
-            return TaskKind.TODO;
-        }
-
-        @Override
-        public String toString() {
-            String shortName = "[" + this.taskKind().shortName() + "]";
-            String isisDone = super.isDone ? "[X]" : "[ ]";
-            return shortName + " " + isisDone + " " + super.taskName;
-        }
-    }
-
-    private static class Deadline extends Task{
-        private Deadline(boolean isDone, String taskName, LocalDate date) {
-            super(isDone, taskName, date);
-        }
-
-        @Override
-        public TaskKind taskKind() {
-            return TaskKind.DEADLINE;
-        }
-
-        @Override
-        public String toString() {
-            String shortName = "[" + this.taskKind().shortName() + "]";
-            String isDone = super.isDone ? "[X]" : "[ ]";
-            String deadline = "(by: " + super.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
-            return shortName + " " + isDone + " " + super.taskName + "" + deadline;
-        }
-    }
-
-    private static class Event extends Task{
-        private Event(boolean isDone, String taskName, LocalDate date) {
-            super(isDone, taskName, date);
-        }
-
-        @Override
-        public TaskKind taskKind() {
-            return TaskKind.EVENT;
-        }
-
-        @Override
-        public String toString() {
-            String shortName = "[" + this.taskKind().shortName() + "]";
-            String isDone = super.isDone ? "[X]" : "[ ]";
-            String startTime = "(at: " + super.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
-            return shortName + " " + isDone + " " + super.taskName + "" + startTime;
-        }
-    }
-
     /**
      * Generate a Todo task from user's command
      *
@@ -141,7 +42,7 @@ public abstract class Task {
      * @return Todo task from user's command
      * @throws DukeException.DukeEmptyTask
      */
-    protected static Task todo(String s) throws DukeException.DukeEmptyTask{
+    protected static Task todo(String s) throws DukeException.DukeEmptyTask {
         Task t = new Todo(s);
         if (s != Command.NULL_COMMAND) {
             return t;
@@ -158,7 +59,7 @@ public abstract class Task {
      * @throws DukeException.DukeEmptyTask
      * @throws DukeException.DukeEmptyNote
      */
-    protected static Task deadline(String bodyCommand) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote{
+    protected static Task deadline(String bodyCommand) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote {
         if (bodyCommand != Command.NULL_COMMAND) {
             String[] parts = bodyCommand.split("/by ", 2);
             String taskName = parts[0];
@@ -182,7 +83,7 @@ public abstract class Task {
      * @throws DukeException.DukeEmptyTask
      * @throws DukeException.DukeEmptyNote
      */
-    protected static Task event(String bodyCommand) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote{
+    protected static Task event(String bodyCommand) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote {
         if (bodyCommand != Command.NULL_COMMAND) {
             String[] parts = bodyCommand.split("/at ", 2);
             String taskName = parts[0];
@@ -196,39 +97,6 @@ public abstract class Task {
         } else {
             throw new DukeException.DukeEmptyTask(TaskKind.EVENT);
         }
-    }
-
-    /**
-     * Determine if the task is done
-     *
-     * @return true if the task is done
-     */
-    public boolean isDone() {
-        return this.isDone;
-    }
-
-    /**
-     *
-     * @return Task's name
-     */
-    public String getTaskName() {
-        return taskName;
-    }
-
-    /**
-     *
-     * @return Task's kind
-     */
-    public abstract TaskKind taskKind();
-
-    /**
-     * Encode the task to store in hard-drive
-     *
-     * @return Encoded string
-     */
-    public String encode() {
-        return this.taskKind().shortName + " , " + this.isDone + " , " + this.taskName +
-                " , " + Optional.ofNullable(this.date).map(date -> date.format(dtf)).orElse("null");
     }
 
     /**
@@ -277,11 +145,42 @@ public abstract class Task {
     }
 
     /**
+     * Determine if the task is done
+     *
+     * @return true if the task is done
+     */
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    /**
+     * @return Task's name
+     */
+    public String getTaskName() {
+        return taskName;
+    }
+
+    /**
+     * @return Task's kind
+     */
+    public abstract TaskKind taskKind();
+
+    /**
+     * Encode the task to store in hard-drive
+     *
+     * @return Encoded string
+     */
+    public String encode() {
+        return this.taskKind().shortName + " , " + this.isDone + " , " + this.taskName +
+                " , " + Optional.ofNullable(this.date).map(date -> date.format(dtf)).orElse("null");
+    }
+
+    /**
      * Make the task done
      */
     public void done() {
         this.isDone = true;
-    };
+    }
 
     /**
      * Add task into memory
@@ -290,5 +189,106 @@ public abstract class Task {
      */
     public void add() throws IOException {
         Duke.todoList.add(this);
+    }
+
+    /**
+     * State different kinds of task
+     */
+    protected enum TaskKind {
+        TODO("todo", "T", null, "todo borrow book"),
+        DEADLINE("Deadline", "D", "deadline", "deadline return book /by 2022-02-18"),
+        EVENT("Event", "E", "start time", "event book conference /at 2022-02-18");
+
+        private final String kind;
+        private final String shortName;
+        private final String note;
+        private final String example;
+
+
+        TaskKind(String kind, String shortName, String note, String example) {
+            this.kind = kind;
+            this.shortName = shortName;
+            this.note = note;
+            this.example = example;
+        }
+
+        private String shortName() {
+            return shortName;
+        }
+
+        protected String note() {
+            return note;
+        }
+
+        protected String getExample() {
+            return example;
+        }
+
+        @Override
+        public String toString() {
+            return kind;
+        }
+    }
+
+    private static class Todo extends Task {
+        private Todo(String taskName) {
+            super(taskName);
+        }
+
+        private Todo(boolean isDone, String taskName) {
+            super(isDone, taskName, null);
+        }
+
+        @Override
+        public TaskKind taskKind() {
+            return TaskKind.TODO;
+        }
+
+        @Override
+        public String toString() {
+            String shortName = "[" + this.taskKind().shortName() + "]";
+            String isisDone = super.isDone ? "[X]" : "[ ]";
+            return shortName + " " + isisDone + " " + super.taskName;
+        }
+    }
+
+    private static class Deadline extends Task {
+        private Deadline(boolean isDone, String taskName, LocalDate date) {
+            super(isDone, taskName, date);
+        }
+
+        @Override
+        public TaskKind taskKind() {
+            return TaskKind.DEADLINE;
+        }
+
+        @Override
+        public String toString() {
+            String shortName = "[" + this.taskKind().shortName() + "]";
+            String isDone = super.isDone ? "[X]" : "[ ]";
+            String deadline = "(by: " + super.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
+            return shortName + " " + isDone + " " + super.taskName + "" + deadline;
+        }
+    }
+
+    ;
+
+    private static class Event extends Task {
+        private Event(boolean isDone, String taskName, LocalDate date) {
+            super(isDone, taskName, date);
+        }
+
+        @Override
+        public TaskKind taskKind() {
+            return TaskKind.EVENT;
+        }
+
+        @Override
+        public String toString() {
+            String shortName = "[" + this.taskKind().shortName() + "]";
+            String isDone = super.isDone ? "[X]" : "[ ]";
+            String startTime = "(at: " + super.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
+            return shortName + " " + isDone + " " + super.taskName + "" + startTime;
+        }
     }
 }
