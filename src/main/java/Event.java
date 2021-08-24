@@ -1,17 +1,26 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task{
-    private String deadline;
+    private LocalDate date;
+    private LocalTime time;
 
     public Event(String description, String deadline) {
         super(description.replace("event", ""), "[E]");
         if (deadline.equals("")) {
             throw new MissingDateException();
         } else {
-            this.deadline = deadline.replace("at", "at:");
+            this.date = LocalDate.parse(deadline.substring(0,10));
+            this.time = LocalTime.parse(deadline.substring(11), DateTimeFormatter.ofPattern("HHmm"));
         }
     }
 
     @Override
     public String getDescription() {
-        return super.getDescription() + "(" + this.deadline + ")";
+        return super.getDescription()  + "(at: "
+                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + this.time.format(DateTimeFormatter.ofPattern(" h:ma"))
+                + ")";
     }
 }
