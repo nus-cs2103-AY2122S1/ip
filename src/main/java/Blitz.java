@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-public class Duke {
+public class Blitz {
 
     private static List<Task> tasks = new ArrayList<>();
 
@@ -16,7 +19,7 @@ public class Duke {
         while (!command.equals("bye")) {
             try {
                 checkCommand(command);
-            } catch (DukeException ex) {
+            } catch (BlitzException ex) {
                 printFormatted(ex.toString());
             }
             command = scanner.nextLine();
@@ -29,7 +32,7 @@ public class Duke {
     /* To print horizontal line */
     public static void printLine() {
         System.out.print('\t');
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 100; i++) {
             System.out.print('_');
         }
         System.out.println("");
@@ -64,18 +67,18 @@ public class Duke {
     }
 
     /*Returns index of task completed or to be deleted if valid, otherwise, throws exception*/
-    public static int getIndex(String command) throws DukeException {
+    public static int getIndex(String command) throws BlitzException {
         String keyword = command.substring(0, command.indexOf(' '));
         int index = getTaskNumber(keyword,command);
         if (index < 0 || index >= tasks.size()) {
-            throw new DukeException("You are attempting to " + (keyword.equals("done") ? "mark" : "delete")
+            throw new BlitzException("You are attempting to " + (keyword.equals("done") ? "mark" : "delete")
                     +" an invalid task number!");
         }
         return index;
     }
 
     /*Method to check for the validity of user input */
-    public static void checkCommand(String command) throws DukeException {
+    public static void checkCommand(String command) throws BlitzException {
 
         //stores the first word (keyword) in the user input
         String keyword = command.substring(0, command.contains(" ") ? command.indexOf(' ') : command.length());
@@ -89,14 +92,14 @@ public class Duke {
 
             //when keyword is not followed by anything
             if (isTask && command.length() < keyword.length() + 2) {
-                throw new DukeException("The description of a " + keyword + " cannot be empty.");
+                throw new BlitzException("The description of a " + keyword + " cannot be empty.");
             }
 
             if (isFeature) {
                 switch (keyword) {
                 case "list":
                     if (tasks.size() == 0) {
-                        throw new DukeException("No items added to list yet!");
+                        throw new BlitzException("No items added to list yet!");
                     }
                     printList();
                     break;
@@ -107,7 +110,7 @@ public class Duke {
                         finished.markAsDone();
                         printFormatted("Nice! I've marked this task as done:\n" + "\t\t"
                                 + finished);
-                        } catch (DukeException ex) {
+                        } catch (BlitzException ex) {
                             printFormatted(ex.toString());
                         }
                         break;
@@ -118,7 +121,7 @@ public class Duke {
                             printFormatted("Noted. I've removed this task:" + "\n\t\t" + deleted + "\n\tNow you have "
                                     + tasks.size() + " tasks in the list.");
 
-                        } catch (DukeException ex) {
+                        } catch (BlitzException ex) {
                             printFormatted(ex.toString());
                         }
                         break;
@@ -130,22 +133,36 @@ public class Duke {
                     current = new Todo(command.substring(5));
                     break;
                 case "deadline":
-                    current = new Deadline(command.substring(9, command.indexOf('/') - 1),
-                        command.substring(command.indexOf('/') + 4));
+                    String date = command.substring(command.indexOf('/') + 4);
+                    try {
+                        LocalDateTime d = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+                        current = new Deadline(command.substring(9, command.indexOf('/') - 1), d);
+                    } catch (DateTimeParseException e) {
+                        throw new BlitzException("Incorrect date/time format! Please enter "
+                                + "deadline date/time in \"d M yyyy HHmm\" format");
+                    }
+
                     break;
                 case "event":
-                    current = new Event(command.substring(6, command.indexOf('/') - 1),
-                        command.substring(command.indexOf('/') + 4, command.indexOf('-')),
-                        command.substring(command.indexOf('-') + 1));
+                    String eventDate = command.substring(command.indexOf('/') + 4);
+                    try {
+                        LocalDateTime ed = LocalDateTime.parse(eventDate, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+                        current = new Event(command.substring(6, command.indexOf('/') - 1), ed);
+                    } catch (DateTimeParseException e) {
+                        throw new BlitzException("Incorrect date/time format! Please enter "
+                                + "event date/time in \"d M yyyy HHmm\" format");
+                    }
+
                     break;
                 }
+
                 tasks.add(current);
                 printFormatted("Got it. I've added this task:" + "\n\t\t" + current + "\n\tNow you have "
                         + tasks.size() + " tasks in the list.");
             }
         } else {
             //if the keyword is not valid
-            throw new DukeException("Sorry, but I don't know what that means :-(");
+            throw new BlitzException("Sorry, but I don't know what that means :-(");
         }
     }
 }
