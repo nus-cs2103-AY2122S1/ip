@@ -32,9 +32,6 @@ class Ui {
         System.out.println(s.toString());
     }
 
-
-
-
     void showGoodbye() {
         String output = "    ____________________________________________________________\n"
                 + "     Bye. Hope to see you again soon!\n"
@@ -51,7 +48,9 @@ class Ui {
                 continue;
             }
             String output = Parser.parseInput(input, taskList, this);
-
+            if (output != null) {
+                System.out.println(output);
+            }
         }
 
 

@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class Parser {
     static Task convertRecordToTask(String record) {
@@ -41,33 +42,74 @@ class Parser {
                 }
             case "delete":
                 if (infos.length == 2) {
-
+                    String index = infos[1];
+                    return deleteTask(index, taskList);
                 } else {
                     return "Wrong input format";
                 }
-
-
+            default:
+                return addList(input, taskList);
         }
     }
 
-            while(!input.equals("bye")) {
-        if (input.equals("list")) {
-            System.out.println(printList(lst));
-        } else if (input.split(" ")[0].equals("schedule")) {
 
-        } else if (input.substring(0,Math.min(input.length(), 5)).equals("done ")) {
-            String index = input.split(" ", 2)[1];
-            System.out.println(doTask(index, lst));
-        } else if (input.substring(0,Math.min(input.length(), 7)).equals("delete ")) {
-            String index = input.split(" ", 2)[1];
-            System.out.println(deleteTask(index, lst));
-        } else {
-            System.out.println(addList(input, lst));
-        }
-        input = sc.nextLine();
-    }
+    /**
+     * Returns error messages or a string showing the added task.
+     * The input string must follow input format, otherwise error messages will be return.
+     * The new task will be created and added to lst.
+     * @param input input message
+     * @param taskList the taskList containing all tasks
+     * @return a string showing the added task and number of tasks
+     */
+     static String addList(String input, TaskList taskList) {
+         ArrayList<Task> lst = taskList.getTasks();
+         ArrayList<String> validType = new ArrayList<>(
+                 Arrays.asList("deadline", "event", "todo"));
+         String type = input.split(" ", 2)[0];
+         String content;
+         if (!validType.contains(type)) {
+             return "I'm sorry, but I don't know what that means :-(";
+         }
+         try {
+             content = input.split(" ", 2)[1];
+         } catch (IndexOutOfBoundsException e) {
+             return "The description of a todo cannot be empty.";
+         }
 
-    public static String doTask(String index, TaskList taskList) {
+         if (type.equals("todo")) {
+             lst.add(new Todo(content));
+         } else if (type.equals("deadline")) {
+             String[] strings = content.split(" /by ");
+             if (strings.length != 2) {
+                 return "Please check the format of your deadline.";
+             }
+             lst.add(new Deadline(content.split(" /by ")[0], content.split( " /by ")[1]));
+         } else if (type.equals("event")) {
+             String[] strings = content.split(" /at ");
+             if (strings.length != 2) {
+                 return "Please check the format of your event.";
+             }
+             lst.add(new Event(content.split(" /at ")[0], content.split(" /at ")[1]));
+         }
+
+         String output = "    ____________________________________________________________\n"
+                 + "     Got it. I've added this task: \n"
+                 + "      " + lst.get(lst.size() - 1).toString() + "\n"
+                 + "     Now you have " + lst.size() +" tasks in the list. \n"
+                 + "    ____________________________________________________________\n";
+         return output;
+     }
+
+
+
+    /**
+     * Returns the message that shows which task is marked as completed.
+     * Mark the task indicated by index as completed.
+     * @param index the index of task to be marked
+     * @param taskList the taskList containing all tasks
+     * @return the messages
+     */
+    static String doTask(String index, TaskList taskList) {
         int idx;
         ArrayList<Task> lst = taskList.getTasks();
         try {
@@ -99,8 +141,8 @@ class Parser {
         try {
             date = LocalDate.parse(info.split(" ")[1]);
         } catch (Exception e) {
-            System.out.println("Wrong format of date");
-            return;
+            return "Wrong format of date";
+
         }
         for (Task t : lst) {
             if (date.equals(t.getDate())) {
@@ -108,9 +150,10 @@ class Parser {
                 output += (t.toString() + "\n");
             }
         }
+        return output;
     }
 
-    public String  deleteTask(String index, TaskList taskList) {
+    static String deleteTask(String index, TaskList taskList) {
         ArrayList<Task> lst = taskList.getTasks();
         int idx;
         try {
