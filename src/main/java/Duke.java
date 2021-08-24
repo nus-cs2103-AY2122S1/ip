@@ -1,5 +1,9 @@
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * General class for the Duke thing
@@ -13,9 +17,39 @@ public class Duke {
     ArrayList<Task> list = new ArrayList<>();
 
     /**
-     * General method for handling commands, decided against splitting up the method as it made it too messy
+     * method to load save file into current list
+     *
+     * @param saveFile savefile
+     * @exception FileNotFoundException but should not occur since check done
+     */
+    public void loadFile(File saveFile) throws FileNotFoundException{
+        Scanner s = new Scanner(saveFile);
+        while (s.hasNext()) {
+            String type = s.nextLine();
+            String name = s.nextLine();
+            if (type.equals("T")) {
+                list.add(new Todo(name));
+                listLen++;
+            } else {
+                String date = s.nextLine();
+                if (type.equals("D")) {
+                    list.add(new Deadline(name,date));
+                } else if (type.equals("E")){
+                    list.add(new Event(name,date));
+                }
+                listLen++;
+            }
+            if (s.nextLine().equals("1")) {
+                list.get(listLen - 1).markDone();
+            }
+        }
+    }
+
+    /**
+     * General method for handling commands
+     *
      * @param input input of user
-     * @throws IncorrectFormatException error if command input is formatted wrongly
+     * @exception IncorrectFormatException error if command input is formatted wrongly
      */
     public void updateList (String input) throws IncorrectFormatException {
         if (input.equalsIgnoreCase("list")) {
@@ -35,6 +69,7 @@ public class Duke {
                         int num = Integer.parseInt(splitted[1]);
                         if (0 < num && num <= listLen) {
                             list.get(num - 1).markDone();
+                            rewriteFile();
                             System.out.println(bar + "\n    Nice! I've marked this task as done:\n    " + list.get(num - 1).toString() + "\n" + bar);
                         } else {
                             throw new IncorrectFormatException("Item number not present. Try again?");
@@ -50,6 +85,7 @@ public class Duke {
                             System.out.println(bar + "\n    Nice! I've removed this task off the face of the Earth:\n    " + list.get(num - 1).toString() +
                                     "\n    Now you have " + listLen + " tasks in the list.\n" + bar);
                             list.remove(num - 1);
+                            rewriteFile();
                         } else {
                             throw new IncorrectFormatException("Item number not present. Try again?");
                         }
@@ -60,6 +96,7 @@ public class Duke {
                     } else {
                         list.add(new Todo(input));
                         listLen++;
+                        appendFile();
                         System.out.println(bar + "\n    added: " + input + "\n    Now you have " + listLen + " tasks in your list\n" +
                                 bar);
                     }
@@ -70,6 +107,7 @@ public class Duke {
                     } else {
                         list.add(new Deadline(deadlineSplit[0], deadlineSplit[1]));
                         listLen++;
+                        appendFile();
                         System.out.println(bar + "\n    Deadline added: " + deadlineSplit[0] + "\n    Now you have " + listLen + " tasks in your list\n" +
                                 bar);
                     }
@@ -80,6 +118,7 @@ public class Duke {
                     } else {
                         list.add(new Event(eventSplit[0], eventSplit[1]));
                         listLen++;
+                        appendFile();
                         System.out.println(bar + "\n    added: " + eventSplit[0] + "\n    Now you have " + listLen + " tasks in your list\n" +
                                 bar);
                     }
@@ -106,6 +145,67 @@ public class Duke {
     }
 
     /**
+     * Method to rewrite the file
+     *
+     */
+    public void rewriteFile(){
+        File oldFile = new File("./save.txt");
+        oldFile.delete();
+        try {
+            FileWriter fw = new FileWriter("./save.txt");
+        for (Task s : list) {
+            if (s instanceof Todo) {
+                fw.write("T" + "\r\n");
+                fw.write(s.description+ "\r\n");
+            } else if (s instanceof Event) {
+                Event e = (Event) s;
+                fw.write("E"+ "\r\n");
+                fw.write(s.description+ "\r\n");
+                fw.write(e.date+ "\r\n");
+            } else if (s instanceof Deadline) {
+                Deadline e = (Deadline) s;
+                fw.write("D"+ "\r\n");
+                fw.write(s.description+ "\r\n");
+                fw.write(e.date+ "\r\n");
+            }
+            fw.write(s.isDone ? "1" : "0");
+        }
+        fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    /**
+     * Method to append to the file
+     *
+     */
+    public void appendFile(){
+        try {
+            FileWriter fw = new FileWriter("./save.txt");
+            for (Task s : list) {
+                if (s instanceof Todo) {
+                    fw.write("T"+ "\r\n");
+                    fw.write(s.description+ "\r\n");
+                } else if (s instanceof Event) {
+                    Event e = (Event) s;
+                    fw.write("E"+ "\r\n");
+                    fw.write(s.description+ "\r\n");
+                    fw.write(e.date+ "\r\n");
+                } else if (s instanceof Deadline) {
+                    Deadline e = (Deadline) s;
+                    fw.write("D"+ "\r\n");
+                    fw.write(s.description+ "\r\n");
+                    fw.write(e.date+ "\r\n");
+                }
+                fw.write(s.isDone ? "1" : "0");
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Method to allow for checking if the String is a number, to prevent errors while deleting/ done-ing tasks
      * @param wool String to be checked
      * @return boolean true if String is num.
@@ -116,6 +216,15 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke currentList = new Duke();
+        try {
+            File saveFile = new File("./save.txt");
+            if (!saveFile.createNewFile()) {
+                currentList.loadFile(saveFile);
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
         boolean away = false;
         System.out.println(bar + "\n    Hello! I'm SaDOS\n" +
                 "    What can I do for you?\n" +
@@ -169,16 +278,16 @@ public class Duke {
      */
     public class Deadline extends Task {
 
-        protected String by;
+        protected String date;
 
         public Deadline(String description, String by) {
             super(description);
-            this.by = by;
+            this.date = by;
         }
 
         @Override
         public String toString() {
-            return "[D]" + super.toString() + " (by: " + by + ")";
+            return "[D]" + super.toString() + " (by: " + date + ")";
         }
     }
 
@@ -202,23 +311,23 @@ public class Duke {
      */
     public class Event extends Task {
 
-        protected String at;
+        protected String date;
 
         public Event(String description, String at) {
             super(description);
-            this.at = at;
+            this.date = at;
         }
 
         @Override
         public String toString() {
-            return "[E]" + super.toString() + " (at: " + at + ")";
+            return "[E]" + super.toString() + " (at: " + date + ")";
         }
     }
 
     /**
      * Exception that handles improperly formatted command.
      */
-    public class IncorrectFormatException extends Exception {
+    public static class IncorrectFormatException extends Exception {
         public IncorrectFormatException(String errorMessage) {
             super("\n" + bar + "\n    " + errorMessage + "\n    Type \"help\" for help\n" + bar);
         }
