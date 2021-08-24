@@ -2,7 +2,7 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -41,35 +41,42 @@ public class Duke {
             parser.intepretCommand(command);
             String firstCommand = this.parser.getFirstCommand();
             try {
-                switch(firstCommand) {
-                    case "bye":
-                        this.ui.goodBye();
-                        stillRunning = false;
-                        break;
-                    case "done":
-                        markDone();
-                        break;
-                    case "deadline":
-                    case "todo":
-                    case "event":
-                        addTask();
-                        break;
-                    case "delete":
-                        deleteTask();
-                        break;
-                    case "list":
-                        this.tasks.listTasks();
-                        break;
-                    default:
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                switch (firstCommand) {
+                case "bye":
+                    this.ui.goodBye();
+                    stillRunning = false;
+                    break;
+                case "done":
+                    markDone();
+                    break;
+                case "deadline":
+                case "todo":
+                case "event":
+                    addTask();
+                    break;
+                case "delete":
+                    deleteTask();
+                    break;
+                case "list":
+                    this.tasks.listTasks();
+                    break;
+                case "find":
+                    String keyword = this.parser.findKeyword();
+                    ArrayList<Task> tasksWithKeyword = this.tasks.findTasksUsingKeyword(keyword);
+                    this.ui.showTasksWithKeyword(tasksWithKeyword);
+                    break;
+                default:
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 this.ui.showError(e);
             }
         }
     }
+
     /**
      * Method to delete task.
+     *
      * @throws DukeException
      */
     public void deleteTask() throws DukeException {
@@ -84,12 +91,18 @@ public class Duke {
         }
     }
 
+    private void findTasks() {
+        String keyword = parser.findKeyword();
+
+    }
+
     private void writeDataToDuke() {
         this.storage.writeData(this.tasks);
     }
 
     /**
      * Method to add task to duke.Duke.
+     *
      * @return String array of the command keywords.
      * @throws DukeException
      */
@@ -132,6 +145,7 @@ public class Duke {
 
     /**
      * Method for duke.Duke to mark a task done.
+     *
      * @throws DukeException
      */
     private void markDone() throws DukeException {
@@ -145,21 +159,6 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! The number you gave is out of range!");
         } catch (NumberFormatException e) {
             throw new DukeException("☹ OOPS!!! Put a number after 'done'!");
-        }
-    }
-
-    /**
-     * Checks if the string is an integer.
-     * @param input String to check.
-     * @return Whether string is an integer.
-     */
-
-    private static boolean isInteger(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException e){
-            return false;
         }
     }
 

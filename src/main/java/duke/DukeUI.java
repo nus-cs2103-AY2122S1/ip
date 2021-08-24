@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.*;
+
 public class DukeUI {
 
     public void goodBye() {
@@ -34,5 +36,12 @@ public class DukeUI {
         System.out.println("Got it. I've added this task: ");
         System.out.println(task);
         System.out.println("Now you have " + tasksLength + " tasks in the list.");
+    }
+
+    public void showTasksWithKeyword(ArrayList<Task> tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(tasks.get(i).toString());
+        }
     }
 }
