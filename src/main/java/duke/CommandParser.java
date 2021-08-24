@@ -3,15 +3,32 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import duke.command.*;
-import duke.task.*;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkDoneCommand;
 import duke.storage.TaskList;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.TodoTask;
 
 /**
  * Include utilities for parsing a string input into a command
  */
 public class CommandParser {
-    private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
+    private static final String EXIT_PREFIX = "bye";
+    private static final String LIST_PREFIX = "list";
+    private static final String TODO_PREFIX = "todo";
+    private static final String DEADLINE_PREFIX = "deadline";
+    private static final String EVENT_PREFIX = "event";
+    private static final String DONE_PREFIX = "done";
+    private static final String DELETE_PREFIX = "delete";
+    private static final String FIND_PREFIX = "find";
 
     /**
      * Check if a string input represents an exit command
@@ -20,7 +37,7 @@ public class CommandParser {
      * @return true if <code>commandString</code> represents an exit command, else false
      */
     public static boolean isExit(String commandString) {
-        if (commandString.startsWith("bye")) {
+        if (commandString.startsWith(EXIT_PREFIX)) {
             return true;
         } else {
             return false;
@@ -35,18 +52,20 @@ public class CommandParser {
      * @throws DukeException if the command cannot be identified
      */
     public static Command parse(String commandString) throws DukeException {
-        if (commandString.startsWith("list")) {
+        if (commandString.startsWith(LIST_PREFIX)) {
             return parseListCommand();
-        } else if (commandString.startsWith("done")) {
+        } else if (commandString.startsWith(DONE_PREFIX)) {
             return parseMarkDoneCommand(commandString);
-        } else if (commandString.startsWith("todo")) {
+        } else if (commandString.startsWith(TODO_PREFIX)) {
             return parseTodoCommand(commandString);
-        } else if (commandString.startsWith("deadline")) {
+        } else if (commandString.startsWith(DEADLINE_PREFIX)) {
             return parseDeadlineCommand(commandString);
-        } else if (commandString.startsWith("event")) {
+        } else if (commandString.startsWith(EVENT_PREFIX)) {
             return parseEventCommand(commandString);
-        } else if (commandString.startsWith("delete")) {
+        } else if (commandString.startsWith(DELETE_PREFIX)) {
             return parseDeleteCommand(commandString);
+        } else if (commandString.startsWith(FIND_PREFIX)) {
+            return parseFindCommand(commandString);
         } else {
             throw new DukeException("Sorry, I don't understand that command...");
         }
@@ -73,7 +92,7 @@ public class CommandParser {
     }
 
     private static Command parseTodoCommand(String commandString) throws DukeException {
-        String payload = commandString.substring("todo".length()).trim();
+        String payload = commandString.substring(TODO_PREFIX.length()).trim();
         if (payload.length() <= 0) {
             throw new DukeException("Todo description cannot be empty!");
         }
@@ -81,7 +100,7 @@ public class CommandParser {
     }
 
     private static Command parseDeadlineCommand(String commandString) throws DukeException {
-        String payload = commandString.substring("deadline".length()).trim();
+        String payload = commandString.substring(DEADLINE_PREFIX.length()).trim();
         int separatorIndex = payload.lastIndexOf("/by");
         if (separatorIndex < 0) {
             throw new DukeException("Please indicate in this format: deadline [description] /by [due date].");
@@ -94,7 +113,7 @@ public class CommandParser {
             throw new DukeException("Please indicate the due date!");
         }
         try {
-            LocalDateTime deadline = LocalDateTime.parse(deadlineString, dateTimeFormatter);
+            LocalDateTime deadline = LocalDateTime.parse(deadlineString, DATE_TIME_FORMATTER);
             return new AddCommand(new DeadlineTask(deadlineContent, false, deadline));
         } catch (DateTimeParseException e) {
             throw new DukeException("Please provide date time in the format yyyy-MM-dd HHmm, e.g. 2021-08-04 2359");
@@ -102,7 +121,7 @@ public class CommandParser {
     }
 
     private static Command parseEventCommand(String commandString) throws DukeException {
-        String payload = commandString.substring("event".length()).trim();
+        String payload = commandString.substring(EVENT_PREFIX.length()).trim();
         int separatorIndex = payload.lastIndexOf("/at");
         if (separatorIndex < 0) {
             throw new DukeException("Please indicate in this format: event [description] /at [due date].");
@@ -115,7 +134,7 @@ public class CommandParser {
             throw new DukeException("Please indicate the event date!");
         }
         try {
-            LocalDateTime eventDate = LocalDateTime.parse(eventDateString, dateTimeFormatter);
+            LocalDateTime eventDate = LocalDateTime.parse(eventDateString, DATE_TIME_FORMATTER);
             return new AddCommand(new EventTask(eventContent, false, eventDate));
         } catch (DateTimeParseException e) {
             throw new DukeException("Please provide date time in the format yyyy-MM-dd HHmm, e.g. 2021-08-04 2359");
@@ -123,12 +142,12 @@ public class CommandParser {
     }
 
     private static Command parseDeleteCommand(String commandString) throws DukeException {
-        String[] tokens = commandString.split(" ");
-        if (tokens.length <= 1) {
+        String payload = commandString.substring(DEADLINE_PREFIX.length()).trim();
+        if (payload.length() <= 0) {
             throw new DukeException("Please indicate a task number to delete!");
         } else {
             try {
-                int taskIndex = Integer.parseInt(tokens[1]) - 1;
+                int taskIndex = Integer.parseInt(payload) - 1;
                 if (taskIndex >= 0 && taskIndex < TaskList.getInstance().getSize()) {
                     return new DeleteCommand(taskIndex);
                 } else {
@@ -138,5 +157,14 @@ public class CommandParser {
                 throw new DukeException("Please indicate a valid task number to delete!");
             }
         }
+    }
+
+    private static Command parseFindCommand(String commandString) throws DukeException {
+       String payload = commandString.substring(FIND_PREFIX.length()).trim();
+       if (payload.length() <= 0) {
+           throw new DukeException("Please indicate a keyword to find tasks!");
+       } else {
+           return new FindCommand(payload);
+       }
     }
 }

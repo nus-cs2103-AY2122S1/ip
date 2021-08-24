@@ -33,7 +33,8 @@ public class AddCommand implements Command {
             String resultString =
                     "Got it. I have added this task:\n" +
                     "\t\t" + task.toString() + "\n" +
-                    String.format("\t  Now you have %d task%s in your list.",
+                    String.format(
+                            "\t  Now you have %d task%s in your list.",
                             TaskList.getInstance().getSize(),
                             TaskList.getInstance().getSize() > 1 ? "s" : "");
             return resultString;

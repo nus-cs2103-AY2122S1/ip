@@ -1,7 +1,8 @@
 package duke.storage;
 
-import java.io.*;
 import java.util.ArrayList;
+import java.io.IOException;
+
 import duke.DukeException;
 import duke.task.Task;
 
@@ -87,6 +88,21 @@ public class TaskList {
     public void markDone(int index) throws IOException {
         this.tasks.get(index).setDone(true);
         storage.writeToMem(this.tasks);
+    }
+
+    /**
+     * Find tasks based on a keyword
+     * @param keyword keyword to find tasks
+     * @return array list of matching tasks
+     */
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> resultTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getContent().contains(keyword)) {
+                resultTasks.add(task);
+            }
+        }
+        return resultTasks;
     }
 
     /**
