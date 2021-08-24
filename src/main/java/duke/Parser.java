@@ -36,7 +36,7 @@ public class Parser {
      */
     public static boolean isNumeric(String s) {
         try {
-            int d = Integer.parseInt(s);
+            Integer.parseInt(s);
         } catch (NumberFormatException e) {
             return false;
         }
