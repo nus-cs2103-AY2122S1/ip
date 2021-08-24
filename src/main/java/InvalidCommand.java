@@ -1,4 +1,4 @@
-public class ListCommand extends Command {
+public class InvalidCommand extends Command {
 
     @Override
     public boolean isExit() {
@@ -7,6 +7,6 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.showList();
+        ui.showError("      I'm sorry, but I don't know what that means!");
     }
 }
