@@ -1,12 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
-    private List<Task> list;
+    private final List<Task> list;
 
-    public Duke() {
-        this.list = new ArrayList<Task>(100);
+    public Duke(){
+        this.list = new ArrayList<>(100);
     }
 
     private void begin() {
@@ -38,11 +42,13 @@ public class Duke {
                         throw new DukeException("Please state the deadline for this task with /by! Try again.");
                     } else {
                         try {
+                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy");
                             int deadlineIndex = input.indexOf("/by") + 4;
-                            String deadline = input.substring(deadlineIndex);
+                            String deadlineString = input.substring(deadlineIndex);
+                            LocalDate deadline = LocalDate.parse(deadlineString, dtf);
                             String firstTrimmed = input.substring(9);
                             String lastTrimmed = firstTrimmed.substring(0, firstTrimmed.indexOf("/by"));
-                            Deadline createdDeadlineTask = new Deadline(lastTrimmed, deadline);
+                            Deadline createdDeadlineTask = new Deadline(lastTrimmed, false, deadline);
                             addToList(createdDeadlineTask);
                             System.out.println("Got it. I've added this task:\n" + "  " + createdDeadlineTask + "\n"
                                     + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
@@ -50,12 +56,15 @@ public class Duke {
                         } catch (StringIndexOutOfBoundsException e) {
                             throw new DukeException("Please ensure that there is a task description and deadline. " +
                                     "Try again.");
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("Please ensure that your deadline is formatted in the following " +
+                                    "way: DD/MM/YY");
                         }
                     }
                 } else if (input.startsWith("todo")) {
                     try {
                         String trimmed = input.substring(5);
-                        Todo createdTodoTask = new Todo(trimmed);
+                        Todo createdTodoTask = new Todo(trimmed, false);
                         addToList(createdTodoTask);
                         System.out.println("Got it. I've added this task:\n" + "  " + createdTodoTask + "\n"
                                 + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
@@ -68,17 +77,22 @@ public class Duke {
                         throw new DukeException("Please state when the event will be held with /at! Try again.");
                     } else {
                         try {
+                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
                             int atIndex = input.indexOf("/at") + 4;
-                            String at = input.substring(atIndex);
+                            String atString = input.substring(atIndex);
                             String firstTrimmed = input.substring(6);
                             String lastTrimmed = firstTrimmed.substring(0, firstTrimmed.indexOf("/at"));
-                            Event createdEventTask = new Event(lastTrimmed, at);
+                            LocalDateTime at = LocalDateTime.parse(atString, dtf);
+                            Event createdEventTask = new Event(lastTrimmed, false, at);
                             addToList(createdEventTask);
                             System.out.println("Got it. I've added this task:\n" + "  " + createdEventTask + "\n"
                                     + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
                                     " in the list.");
                         } catch (StringIndexOutOfBoundsException e) {
                             throw new DukeException("Please ensure that there is an event time. Try again.");
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("Please ensure that your event is formatted in the following " +
+                                    "way: DD/MM/YY HHmm (24 hr format)");
                         }
                     }
                 } else if (input.startsWith("delete")) {
