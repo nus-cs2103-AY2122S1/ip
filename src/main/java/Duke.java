@@ -1,4 +1,6 @@
 import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     static ArrayList<Task> userInputs = new ArrayList<>();
@@ -37,6 +39,25 @@ public class Duke {
         }
     }
 
+    public static void getTaskWithDatesOn(String date) throws DukeException {
+        date = date.split("getat ")[1];
+        if (!date.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new DukeException("☹ Yo bro pls give the time in yyyy-mm-dd format thx.");
+        }
+        LocalDate parsedDate = LocalDate.parse(date);
+        for (int i = 0; i < userInputs.size(); i++) {
+            Task task = userInputs.get(i);
+            if (task instanceof TaskWithDate) {
+                //We know that the incoming task is a TaskWithDate, so its safe to type cast it
+                TaskWithDate datedTask = (TaskWithDate) task;
+                if (datedTask.date.equals(parsedDate)) {
+                    //Print out only if its equals to the date of interest
+                    System.out.println((i + 1) + ". " + task);
+                }
+            }
+        }
+    }
+
     public static void addTask(String input) throws DukeException {
         String description;
         String time;
@@ -54,6 +75,9 @@ public class Duke {
             } else {
                 description = input.split("deadline ")[1].split(" /")[0];
                 time = input.split("/by ")[1];
+                if (!time.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                    throw new DukeException("☹ Yo bro pls give the time in yyyy-mm-dd format thx.");
+                }
                 task = new Deadline(description, time);
             }
         } else if (input.startsWith("event")) {
@@ -62,6 +86,9 @@ public class Duke {
             } else {
                 description = input.split("event ")[1].split(" /")[0];
                 time = input.split("/at ")[1];
+                if (!time.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                    throw new DukeException("☹ Yo bro pls give the time in yyyy-mm-dd format thx.");
+                }
                 task = new Event(description, time);
             }
         } else {
@@ -86,6 +113,12 @@ public class Duke {
                 List();
             } else if (str.startsWith("delete")) {
                 delete(str);
+            } else if (str.startsWith("getat")) {
+                try {
+                    getTaskWithDatesOn(str);
+                } catch (DukeException de) {
+                    System.out.print(de);
+                }
             } else {
                 try {
                     addTask(str);
