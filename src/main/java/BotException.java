@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 class InvalidCommandException extends Exception {
     public InvalidCommandException(String msg) {
         super(msg);
@@ -24,6 +26,18 @@ class TaskOutOfRangeException extends Exception {
 
 class InvalidTaskIndexException extends Exception{
     public InvalidTaskIndexException(String msg) {
+        super(msg);
+    }
+}
+
+class InvalidFileException extends IOException {
+    public InvalidFileException (String msg) {
+        super(msg);
+    }
+}
+
+class InvalidDataFormatException extends ArrayIndexOutOfBoundsException {
+    public InvalidDataFormatException (String msg) {
         super(msg);
     }
 }

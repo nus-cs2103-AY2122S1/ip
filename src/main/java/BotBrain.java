@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -6,6 +7,7 @@ public class BotBrain {
     private BotMemory botMemory = new BotMemory();
     private BotPrinter botPrinter = new BotPrinter();
     private List<Task> taskTracker = botMemory.taskTracker;
+    private boolean isTerminated = false;
 
     /**
      * Constrcutor
@@ -90,7 +92,7 @@ public class BotBrain {
      * @return (String) formatted list of tasks
      * @throws EmptyTaskListException for empty list
      */
-    private String formatTaskTracker() throws EmptyTaskListException {
+    private void reportTaskTracker() throws EmptyTaskListException {
         // throw empty list exception if task list is empty
         if (taskTracker.size() == 0) {
             throw new EmptyTaskListException(botMemory.ERROR_MESSAGE_EMPTY_TASKLIST);
@@ -100,7 +102,7 @@ public class BotBrain {
         taskTracker.stream().
                 forEach(x -> formattedTask.append((taskTracker.indexOf(x) + 1) + ". " + x.toString() + "\n\t"));
         formattedTask.append("(end)");
-        return formattedTask.toString();
+        botPrinter.print(formattedTask.toString());
     }
 
     /**
@@ -197,33 +199,48 @@ public class BotBrain {
         }
     }
 
+    private void reactToCommand(String input) throws Exception {
+        CommandInput commandInitial = identifyCommand(input);
+        switch (commandInitial) {
+            case BYE:
+                botPrinter.print(botMemory.MESSAGE_GOODBYE);
+                isTerminated = true;
+                return;
+            case LIST:
+                reportTaskTracker();
+                break;
+            case DONE:
+                markTaskAsDone(input);
+                break;
+            case DELETE:
+                deleteTaskFromList(input);
+                break;
+            default:
+                classifyTask(input);
+                generateTaskFeedback();
+        }
+    }
+
+    private void wakeUpMemory() {
+        try {
+            botMemory.loadFromHardDisk();
+            reportTaskTracker();
+        } catch (Exception error) {
+            botPrinter.print(botMemory.ERROR_MESSAGE_PROMPT + error.getMessage());
+        }
+    }
+
     /**
      * A method to read the user's input and respond to it
      */
     private void interact() {
+
         Scanner sc = new Scanner(System.in);
-        while (true) {
+        while (!isTerminated) {
             try {
                 String input = sc.nextLine().trim();
-                CommandInput commandInitial = identifyCommand(input);
-
-                switch (commandInitial) {
-                    case BYE:
-                        botPrinter.print(botMemory.MESSAGE_GOODBYE);
-                        return;
-                    case LIST:
-                        botPrinter.print(formatTaskTracker());
-                        break;
-                    case DONE:
-                        markTaskAsDone(input);
-                        break;
-                    case DELETE:
-                        deleteTaskFromList(input);
-                        break;
-                    default:
-                        classifyTask(input);
-                        generateTaskFeedback();
-                }
+                reactToCommand(input);
+                botMemory.saveToHardDisk();
             }
             catch (Exception error){
                 botPrinter.print(botMemory.ERROR_MESSAGE_PROMPT + error.getMessage());
@@ -237,6 +254,7 @@ public class BotBrain {
     public void initiate() {
         System.out.println("\t" + botMemory.LOGO.replaceAll("\n", "\n\t"));
         botPrinter.print(botMemory.MESSAGE_GREETING);
+        this.wakeUpMemory();
         this.interact();
     }
 }

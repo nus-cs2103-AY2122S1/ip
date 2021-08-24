@@ -2,7 +2,6 @@ import java.lang.String;
 
 public class Event extends Task{
 
-    private final String TYPE = "E";
     private String time;
 
     /**
@@ -10,9 +9,18 @@ public class Event extends Task{
      * @param tasktitle
      * @param time
      */
-    Event(String tasktitle, String time){
-        super(tasktitle);
+    Event (String tasktitle, String time) {
+        super(tasktitle, "E");
         this.time = time;
+    }
+
+    Event (boolean isDone, String taskTitle, String time) {
+        super(taskTitle, isDone, "E");
+        this.time = time;
+    }
+
+    public String getTime() {
+        return this.time;
     }
 
     /**
@@ -22,7 +30,7 @@ public class Event extends Task{
     @Override
     public String toString(){
         return String.format("[%s][%s] %s (at: %s)",
-                this.TYPE,
+                this.taskType,
                 (this.isDone ? "X" : " "),
                 this.taskTitle,
                 this.time);
