@@ -9,7 +9,7 @@ public class Duke {
         CommonUtils.greet();
         Scanner sc = new Scanner(System.in);
         TaskManagement taskManagement = new TaskManagement();
-        ActionParser.run(sc, taskManagement);
+        Parser.run(sc, taskManagement);
         sc.close();
     }
 }

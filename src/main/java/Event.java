@@ -1,10 +1,12 @@
+import java.time.LocalDateTime;
+
 /**
  * This class represents an event task.
  */
 
 public class Event extends Task{
     /** Start or end time of the event. */
-    private String eventTime;
+    private LocalDateTime eventTime;
 
     /**
      * Constructs an event using the given description and event time.
@@ -12,7 +14,7 @@ public class Event extends Task{
      * @param description the given description
      * @param eventTime the given event time.
      */
-    public Event(String description, String eventTime) {
+    public Event(String description, LocalDateTime eventTime) {
         super(description);
         this.eventTime = eventTime;
     }
@@ -24,6 +26,6 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + eventTime + ")";
+        return "[E]" + super.toString() + "(at: " + eventTime.format(CommonUtils.dateTimeFormatter) + ")";
     }
 }

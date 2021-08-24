@@ -1,9 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
- * The ActionParser class handles all actions from users' input.
+ * The Parser class handles all actions from users' input.
  */
-public class ActionParser {
+public class Parser {
     /**
      * The Action enum enumerates all possible actions
      */
@@ -27,6 +30,16 @@ public class ActionParser {
             case "event": return Action.EVENT;
             case "delete": return Action.DELETE;
             default: return Action.UNKNOWN;
+        }
+    }
+
+    public static LocalDateTime parseDateTime(String input) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        try {
+            LocalDateTime ldt = LocalDateTime.parse(input, dtf);
+            return ldt;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("time should be in the format: dd/MM/yyyy HH:mm");
         }
     }
 
@@ -82,7 +95,7 @@ public class ActionParser {
                         }
                         String description = arr[0];
                         String detail = arr[1];
-                        Deadline temp = new Deadline(description, detail);
+                        Deadline temp = new Deadline(description, Parser.parseDateTime(detail));
                         taskManagement.addTask(temp);
                         CommonUtils.showAddTaskMessage(temp, taskManagement.getSize());
                         break;
@@ -97,7 +110,7 @@ public class ActionParser {
                         }
                         String description = arr[0];
                         String detail = arr[1];
-                        Event temp = new Event(description, detail);
+                        Event temp = new Event(description, Parser.parseDateTime(detail));
                         taskManagement.addTask(temp);
                         CommonUtils.showAddTaskMessage(temp, taskManagement.getSize());
                         break;
