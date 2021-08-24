@@ -31,6 +31,9 @@ public class Duke {
         this.parser = new Parser();
     }
 
+    /**
+     * Starts duke.
+     */
     public void start() {
         ui.printWelcomeMessage();
         ui.printHelp();

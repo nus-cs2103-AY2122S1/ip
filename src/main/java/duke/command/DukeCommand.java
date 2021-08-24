@@ -81,7 +81,7 @@ public enum DukeCommand implements DukeCommandAction {
                 ui.outputLine(task.toString());
             }),
     EXIT("bye",
-            "Exit Duke",
+            "Exit   Duke",
             DukeCommandConfig.NO_ARGUMENTS,
             (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
                 ui.markExit();
@@ -120,14 +120,26 @@ public enum DukeCommand implements DukeCommandAction {
                 .findFirst();
     }
 
+    /**
+     * Returns the name of the command.
+     * @return the name of the command
+     */
     public String getName() {
         return command;
     }
 
+    /**
+     * Returns the command formatted to print in the help function.
+     * @return the command formatted to print in the help function.
+     */
     private String formatCommand() {
         return String.format("%s%s%s", command, formatPositionalArgument(), formatNamedArguments());
     }
 
+    /**
+     * Returns the name of the positional argument, if any. Otherwise, returns an empty string.
+     * @return the name of the positional argument
+     */
     private String formatPositionalArgument() {
         if (config.positionalArg == DukeCommandArgument.NONE) {
             return "";
@@ -136,6 +148,10 @@ public enum DukeCommand implements DukeCommandAction {
         }
     }
 
+    /**
+     * Returns a formatted string containing the named arguments.
+     * @return a formatted string containing the named arguments
+     */
     private String formatNamedArguments() {
         if (config.acceptedNamedArgs.isEmpty()) {
             return "";
@@ -143,6 +159,10 @@ public enum DukeCommand implements DukeCommandAction {
         return " " + String.join(" ", config.acceptedNamedArgs.entrySet().stream().map(entry -> String.format("[/%s %s]", entry.getKey(), entry.getValue())).toArray(String[]::new));
     }
 
+    /**
+     * Returns the help message of the command containing usage information. Used in {@link DukeCommand#HELP}.
+     * @return the help message of the command
+     */
     public String toDetailedString() {
         String argsString = getDetailedArgumentsString();
         return String.format("usage: %s\n  %s.%s",
@@ -162,6 +182,17 @@ public enum DukeCommand implements DukeCommandAction {
         return String.join("\n", Arrays.stream(new String[]{positionalArgDesc, namedArgsDesc}).filter(s -> !s.isEmpty()).toArray(String[]::new));
     }
 
+    /**
+     * Runs the command with the given input arguments and objects. Throws an {@link InvalidCommandException} if
+     * arguments provided are incompatible or malformed.
+     * @param taskList  The list of tasks.
+     * @param ui        The {@link duke.Duke} object which the command uses to execute its commands.
+     * @param storage   The storage object representing the file in which the tasks are stored.
+     * @param arg       The positional argument to the command.
+     * @param namedArgs The named arguments to the command.
+     * @return the result of the run command
+     * @throws InvalidCommandException
+     */
     @Override
     public void apply(TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) throws InvalidCommandException {
         config.assertCompatibilityWith(arg, namedArgs);

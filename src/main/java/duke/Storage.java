@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Loads and reads the list of tasks from a save file.
+ */
 public class Storage {
     private final String saveFileLocation;
 
@@ -19,6 +22,11 @@ public class Storage {
         this.saveFileLocation = saveFileLocation;
     }
 
+    /**
+     * Loads the task list from the save file
+     * @return the loaded task list
+     * @throws DukeStorageException if there is an error when reading the save file
+     */
     public TaskList loadTaskList() throws DukeStorageException {
         try {
             FileInputStream fileInputStream = new FileInputStream(saveFileLocation);
@@ -37,6 +45,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the task list to the save file, overwriting it if it already exists.
+     * @param taskList the task list to save
+     */
     public void saveTaskList(TaskList taskList) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(saveFileLocation);

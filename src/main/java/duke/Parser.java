@@ -7,7 +7,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Parses the raw commands (in string form) to objects representing them.
+ */
 public class Parser {
+    /**
+     * Parses the command given as a raw text input, and returns a {@link DukeCommandWithArgs} representing it
+     * @param command the command as a string
+     * @return a {@link DukeCommandWithArgs} representing the full command
+     */
     public DukeCommandWithArgs parse(String command) {
         // Get the longest duke command that matches to command
         Optional<DukeCommand> dukeCommand = DukeCommand.getClosestMatch(command);

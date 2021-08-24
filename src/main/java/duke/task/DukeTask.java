@@ -28,8 +28,18 @@ public abstract class DukeTask {
         return String.format("[%s] %s", done ? "X" : " ", name);
     }
 
+    /**
+     * Returns the task as a serialized string. Used by {@link duke.Storage} to store tasks.
+     * @return a serialized string representing the task
+     */
     public abstract String toSerializedString();
 
+    /**
+     * Creates a task from the given string. Used by {@link duke.Storage} to read stored tasks.
+     * @param str the serialized task
+     * @return the task
+     * @throws TaskParseException if the given string is in the wrong format
+     */
     public static DukeTask fromSerializedString(String str) throws TaskParseException {
         // Either
         // name/done/simple

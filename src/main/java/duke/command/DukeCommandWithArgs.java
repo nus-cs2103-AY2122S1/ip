@@ -18,6 +18,13 @@ public class DukeCommandWithArgs {
         this.namedArgs = namedArgs;
     }
 
+    /**
+     * Runs the command with the given objects.
+     * @param taskList the list containing all the tasks
+     * @param ui the ui of the program
+     * @param storage the storage
+     * @throws InvalidCommandException if an error occurs when the command is ran with the given arguments
+     */
     public void runWith(TaskList taskList, Ui ui, Storage storage) throws InvalidCommandException {
         baseCommand.apply(taskList, ui, storage, positionalArg, namedArgs);
     }

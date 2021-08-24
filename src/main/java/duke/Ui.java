@@ -8,6 +8,9 @@ import java.io.PrintStream;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Represents the UI interactions in the program.
+ */
 public class Ui {
     private static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -24,23 +27,40 @@ public class Ui {
         this.exit = false;
     }
 
+    /**
+     * Prints a prompt for the next command, and returns the submitted user input.
+     * @return the raw command input by the user
+     */
     public String nextCommand() {
         outputStream.print("Duke> ");
         return scanner.nextLine();
     }
 
+    /**
+     * Outputs the given string with a newline.
+     * @param output the string to output
+     */
     public void outputLine(String output) {
         outputStream.println(output);
     }
 
+    /**
+     * Prints a welcome message greeting the user.
+     */
     public void printWelcomeMessage() {
         outputLine("Hello from\n" + logo);
     }
 
+    /**
+     * Prints an exit message greeting the user.
+     */
     public void printExitMessage() {
         outputLine("Goodbye from\n" + logo);
     }
 
+    /**
+     * Prints the list of commands available using the {@link DukeCommand#HELP} command.
+     */
     public void printHelp() {
         try {
             DukeCommand.HELP.apply(null, this, null, "", Map.of());
@@ -49,10 +69,17 @@ public class Ui {
         }
     }
 
+    /**
+     * Marks Duke as to be exited after the latest command is done processing.
+     */
     public void markExit() {
         exit = true;
     }
 
+    /**
+     * Returns if Duke should continue accepting commands.
+     * @return if Duke should continue accepting commands.
+     */
     public boolean shouldContinue() {
         return !exit;
     }

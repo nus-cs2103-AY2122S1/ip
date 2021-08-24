@@ -20,10 +20,20 @@ public class DukeCommandArgument {
         return String.format("<%s>", name);
     }
 
+    /**
+     * Returns the argument formatted for use in the {@link DukeCommand#HELP} command.
+     * @return the formatted string
+     */
     public String toDetailedString() {
         return String.format("%s - %s (%s)", toString(), description, type.toString());
     }
 
+    /**
+     * Asserts that the argument type can be fulfilled by the given argument value. Otherwise, throws an
+     * {@link InvalidCommandException}
+     * @param argValue the argument value
+     * @throws InvalidCommandException if the argument value is incompatible with the argument type
+     */
     void assertCompatibilityWith(String argValue) throws InvalidCommandException {
         if (type == DukeCommandArgumentType.REQUIRED) {
             if (argValue == null || argValue.equals("")) {

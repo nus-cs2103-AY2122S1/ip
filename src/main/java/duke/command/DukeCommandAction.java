@@ -17,7 +17,6 @@ interface DukeCommandAction {
      * @param storage   The storage object representing the file in which the tasks are stored.
      * @param arg       The positional argument to the command.
      * @param namedArgs The named arguments to the command.
-     * @return If Duke should continue listening to commands.
      */
     void apply(TaskList taskList, Ui ui, Storage storage,
                   String arg, Map<String, String> namedArgs) throws InvalidCommandException;

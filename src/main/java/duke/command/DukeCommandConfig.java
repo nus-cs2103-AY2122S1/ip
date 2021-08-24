@@ -15,6 +15,12 @@ class DukeCommandConfig {
         this.acceptedNamedArgs = acceptedNamedArgs;
     }
 
+    /**
+     * Asserts that the given positional and named arguments are compatible with the configuration.
+     * @param arg the positional argument
+     * @param namedArgs the named arguments
+     * @throws InvalidCommandException if given arguments are incompatible
+     */
     void assertCompatibilityWith(String arg, Map<String, String> namedArgs) throws InvalidCommandException {
         positionalArg.assertCompatibilityWith(arg);
         for (Map.Entry<String, String> entry : namedArgs.entrySet()) {
