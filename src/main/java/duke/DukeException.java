@@ -41,4 +41,11 @@ public class DukeException extends Exception {
                     "Did you spell your command correctly?";
         }
     }
+
+    static class DukeNoSearchFoundException extends DukeException {
+        @Override
+        public String toString() {
+            return "Oops :( Please key in a valid search to proceed!";
+        }
+    }
 }

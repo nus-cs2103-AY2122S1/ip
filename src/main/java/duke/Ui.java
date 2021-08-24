@@ -2,6 +2,7 @@ package duke;
 
 import duke.Duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -55,6 +56,20 @@ public class Ui {
         int listSize = duke.getTasks().getList().size();
         System.out.println(friendGreeting + "added: " + duke.getTasks().getList().get(listSize - 1).toString() + " to your to-do list!");
         System.out.println("Now you have " + listSize + " tasks in the list.");
+    }
+
+    public void showSearchResults(ArrayList<Task> resultsArray) {
+        System.out.println(friendGreeting + "Here are the matching tasks in your list:");
+        int listSize = resultsArray.size();
+        for (int i = 0; i < listSize; i++) {
+            Task currTask = resultsArray.get(i);
+            int index = i + 1;
+            System.out.println(index + "." + currTask.toString());
+        }
+    }
+
+    public void showNoSearchResults() {
+        System.out.println(friendGreeting + "There are no tasks that match your search.");
     }
 
     public void saveList() {

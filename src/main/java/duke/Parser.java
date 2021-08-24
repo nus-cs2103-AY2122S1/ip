@@ -85,6 +85,27 @@ public class Parser {
                     throw new DukeException.DukeTaskFailException();
                 }
             }
+            // Find
+            else if (message.startsWith("find ") || message.equals("find")) {
+                if (message.length() > 5 && !message.substring(5).isBlank()) {
+                    String search = message.substring(5).trim();
+                    ArrayList<Task> resultsArray = new ArrayList<>();
+                    boolean isFound = false;
+                    for (Task task : duke.getTasks().getList()) {
+                        if (task.description.contains(search)) {
+                            isFound = true;
+                            resultsArray.add(task);
+                        }
+                    }
+                    if (isFound) {
+                        duke.getUi().showSearchResults(resultsArray);
+                    } else {
+                        duke.getUi().showNoSearchResults();
+                    }
+                } else {
+                    throw new DukeException.DukeNoSearchFoundException();
+                }
+            }
             // To Do
             else if (message.startsWith("todo ") || message.equals("todo")) {
                 if (message.length() > 5 && !message.substring(5).isBlank()) {
