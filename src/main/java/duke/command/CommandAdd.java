@@ -26,4 +26,9 @@ public class CommandAdd extends Command {
             ui.showError(e.getMessage());
         }
     }
+
+    @Override
+    public String toString() {
+        return String.format("CommandAdd taskToAdd: %s",taskToAdd);
+    }
 }
