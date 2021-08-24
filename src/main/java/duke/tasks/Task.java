@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
 public abstract class Task {
     public final static DukeException FORMAT_EXCEPTION =
             new DukeException("I don't understand this entry, enter 'help' to learn the correct formatting!");
-    protected String desc;
     protected boolean done;
+    protected String desc = new String();
     protected String details = new String();
     protected DukeDateTime dateTime = new DukeDateTime();
 
@@ -30,6 +30,10 @@ public abstract class Task {
 
     public void markComplete() {
         done = true;
+    }
+    
+    public boolean matchWord(String word) {
+        return desc.contains(word) || details.contains(word);
     }
     
     abstract void addTime(String time) throws DukeException;

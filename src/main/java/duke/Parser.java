@@ -9,6 +9,7 @@ import duke.utils.DukeException;
 import duke.utils.Record;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ public class Parser {
     private HashMap<String, CheckedFunction<String, Record>> cmds = new HashMap<>();
     
     public Parser() throws DukeException {
-        this(new TaskList());
+        this(new TaskList(true));
     }
 
     public Parser(TaskList db) throws DukeException {
@@ -33,6 +34,7 @@ public class Parser {
         cmds.put("event", this::event);
         cmds.put("help", this::help);
         cmds.put("clear", this::clear);
+        cmds.put("find", this::find);
     }
     
     private boolean verify() {
@@ -74,7 +76,7 @@ public class Parser {
 
     private Record list(String args) {
         if (db.size() == 0) return new Record("You have no tasks!");
-        return new Record("Here are the tasks in your list:\n " + db.toString());
+        return new Record("Here are the tasks in your list:\n " + db);
     }
 
     private Record done(String args) throws DukeException {
@@ -147,5 +149,13 @@ public class Parser {
         }
         else return new Record("No worries! No changes were made.");
          */
+    }
+    
+    private Record find(String raw) throws DukeException {
+        TaskList filtered = db.find(raw);
+        if (filtered.size() == 0) {
+            return new Record("No matching tasks found.");
+        } 
+        return new Record("Here are the matching tasks in your list:\n " + filtered);
     }
 }

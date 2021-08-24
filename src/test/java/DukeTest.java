@@ -12,21 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class DukeTest {
-    private static void refresh() throws DukeException {
-        try {
-            File txt = new File("duke.txt");
-            txt.delete();
-            txt.createNewFile();
-        } catch (IOException e) {
-            throw Storage.ERROR_DB;
-        }
-    }
     
     @Test
     void singleTodo() {
         try {
-            refresh();
-            TaskList taskList = new TaskList();
+            TaskList taskList = new TaskList(false);
             Parser inputH = new Parser(taskList);
             inputH.query("todo test1");
             assertEquals(taskList.contains(new Todo("test1")), true);
@@ -39,8 +29,7 @@ public class DukeTest {
     @Test
     void singleDeadline() {
         try {
-            refresh();
-            TaskList taskList = new TaskList();
+            TaskList taskList = new TaskList(false);
             Parser inputH = new Parser(taskList);
             inputH.query("deadline dl one /by 2021-08-24 18:00 / yeah");
             Deadline d = new Deadline("dl one | 2021-08-24 18:00 | yeah", false);
@@ -54,8 +43,7 @@ public class DukeTest {
     @Test
     void clear() {
         try {
-            refresh();
-            TaskList taskList = new TaskList();
+            TaskList taskList = new TaskList(false);
             Parser inputH = new Parser(taskList);
             inputH.query("todo test1");
             assertEquals(true, taskList.contains(new Todo("test1")) );

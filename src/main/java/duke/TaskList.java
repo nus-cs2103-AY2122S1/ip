@@ -5,14 +5,15 @@ import duke.utils.DukeException;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private final static DukeException ERROR_DB = new DukeException("Error loading database.");
     private List<Task> db = new ArrayList<>();
     private Storage storage;
     
-    public TaskList() throws DukeException {
-        this.storage = new Storage(this);
+    public TaskList(boolean loadFromStorage) throws DukeException {
+        if (loadFromStorage) this.storage = new Storage(this);
     }
 
     // fix the adding problems
@@ -50,6 +51,12 @@ public class TaskList {
     public void clear() throws DukeException {
         db = new ArrayList<>();
         storage.purge();
+    }
+    
+    public TaskList find(String word) throws DukeException {
+        TaskList filtered = new TaskList(false);
+        filtered.db = db.stream().filter(x -> x.matchWord(word)).collect(Collectors.toList());
+        return filtered;
     }
     
     public List<Task> getList() {
