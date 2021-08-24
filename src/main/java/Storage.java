@@ -1,3 +1,6 @@
+import duke.exception.DukeException;
+import duke.task.Task;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -48,7 +51,7 @@ public class Storage {
             }
             dataFileWriter.close();
         } catch (IOException e) {
-            Printer.prettyPrint("File writing failed: " + e);
+            new Ui().showError(e.getMessage());
         }
     }
 }
