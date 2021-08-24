@@ -38,8 +38,8 @@ _____________________________________________________
 
 Here are the tasks in your list:
 1.[T][ ] Test add todo task
-2.[D][ ] Test add deadline task (by: now)
-3.[E][ ] Test add event task (at: now)
+2.[D][ ] Test add deadline task (by: 11 Dec 2012 11:59PM)
+3.[E][ ] Test add event task (at: 2021-25-08)
 4.[D][ ] Test slashPartition without space (by: now)
 _____________________________________________________
 
@@ -55,11 +55,11 @@ java.lang.NumberFormatException: For input string: "LOL THIS AIN'T NO INTEGER"
 _____________________________________________________
 
 Nice! I have marked this task as done: 
-[D][x] Test add deadline task (by: now)
+[D][x] Test add deadline task (by: 11 Dec 2012 11:59PM)
 _____________________________________________________
 
 Nice! I have marked this task as done: 
-[E][x] Test add event task (at: now)
+[E][x] Test add event task (at: 2021-25-08)
 _____________________________________________________
 
 Nice! I have marked this task as done: 
@@ -87,7 +87,7 @@ Please enter an integer greater than 0.
 _____________________________________________________
 
 Noted. I've removed this task: 
-[D][x] Test add deadline task (by: now)
+[D][x] Test add deadline task (by: 11 Dec 2012 11:59PM)
 You have 3 tasks in the list.
 _____________________________________________________
 
@@ -95,13 +95,13 @@ Please check that you have entered the correct number!
 _____________________________________________________
 
 Noted. I've removed this task: 
-[E][x] Test add event task (at: now)
+[E][x] Test add event task (at: 2021-25-08)
 You have 2 tasks in the list.
 _____________________________________________________
 
 Here are the tasks in your list:
 1.[T][ ] Test add todo task
-2.[D][x] Test add deadline task (by: now)
+2.[D][x] Test add deadline task (by: 11 Dec 2012 11:59PM)
 _____________________________________________________
 
 Bye. Hope to see you again soon!
