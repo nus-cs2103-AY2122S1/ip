@@ -7,7 +7,9 @@ public class Parser {
             new ListCommand(""),
             new ByeCommand(""),
             new TodoCommand(""),
-            new FormatsCommand("")
+            new FormatsCommand(""),
+            new DoneCommand(""),
+            new DeleteCommand(""),
     };
 
     public Command parse(String input) {
