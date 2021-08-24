@@ -46,8 +46,8 @@ public class Todo implements Task {
 
     /**
      * Overridden method to get the status icon.
-     * @return the corresponding status icon depending on the
-     *          completion status of the task.
+     * @return The corresponding status icon depending on the
+     *         completion status of the task.
      */
     @Override
     public String getStatusIcon() {
