@@ -4,12 +4,12 @@ package duke.exception;
  * Represents the Incorrect Argument Exception class that is thrown
  * when the user does not enter an integer after 'done' or 'delete.
  */
-public class DukeDoneIncorrectArgument extends DukeIncorrectInputs {
+public class DukeFindIncorrectArgument extends DukeIncorrectInputs {
     /**
      * Constructor for the DukeDoneIncorrectArgument Exception.
      */
-    public DukeDoneIncorrectArgument() {
-        super("\t⚠️ After the keyword, you have to enter an integer.",
+    public DukeFindIncorrectArgument() {
+        super("\t⚠️ After the keyword, you have to enter ONE keyword.",
                 new IllegalArgumentException());
     }
 }

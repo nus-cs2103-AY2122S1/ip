@@ -7,6 +7,7 @@ import duke.exception.DukeUnableLoadTask;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
@@ -99,6 +100,11 @@ public class Duke {
      */
     public void loadSavedTasks() throws IOException, DukeUnableLoadTask {
         this.storage.loadSavedTasks(this);
+    }
+
+    public TaskList findTasks(String keyword) {
+        TaskList tasksFound = this.listOfTasks.findTasks(keyword);
+        return tasksFound;
     }
 
 

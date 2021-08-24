@@ -1,6 +1,7 @@
 package duke;
 
 import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Represents the user interface that interacts with the user.
@@ -90,6 +91,11 @@ public class Ui {
     public static void printDoneMessage(Task task) {
         System.out.println(Ui.formatDukeMessage("\tNice! I've marked this task as done:\n" +
                 "\t\t" + task + "\n"));
+    }
+
+    public static void printFindMessage(TaskList tasks) {
+        System.out.println(Ui.formatDukeMessage("\tHere are the matching tasks in your list:\n" +
+                tasks.toString()));
     }
 
 }
