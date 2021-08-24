@@ -4,14 +4,15 @@ import duke.tasks.Event;
 import duke.Storage;
 import duke.TaskList;
 
-import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * Command that adds event to task list.
  */
 public class AddEventCommand extends Command {
     private final String at;
+    private LocalDate date;
 
     /**
      * Constructor for AddEventCommand.
@@ -22,6 +23,13 @@ public class AddEventCommand extends Command {
     public AddEventCommand(String desc, String at) {
         super(desc);
         this.at = at;
+        this.date = null;
+    }
+
+    public AddEventCommand(String desc, String at, LocalDate date) {
+        super(desc);
+        this.at = at;
+        this.date = date;
     }
 
     /**
@@ -52,8 +60,12 @@ public class AddEventCommand extends Command {
     @Override
     public void execute(TaskList tasks, Storage storage) {
         try {
-            FileWriter fw = new FileWriter("data/tasks.txt", true);
-            Event event = new Event(super.getDesc(), at, false);
+            Event event;
+            if (date == null) {
+                event = new Event(super.getDesc(), at, false);
+            } else {
+                event = new Event(super.getDesc(), at, false, date);
+            }
             tasks.add(event);
             storage.add(event);
 

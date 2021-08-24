@@ -1,11 +1,15 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an Event task.
  */
 public class Event extends Task {
 
     protected String at;
+    private LocalDate date;
 
     /**
      * Constructor for Event task.
@@ -19,12 +23,27 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String description, String at, boolean isDone, LocalDate date) {
+        super(description, isDone);
+        this.at = at;
+        this.date = date;
+    }
+
     public String getAt() {
         return at;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        if (date == null) {
+            return "[E]" + super.toString() + " (at: " + at + ")";
+        } else {
+            return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    + " " + at + ")";
+        }
     }
 }

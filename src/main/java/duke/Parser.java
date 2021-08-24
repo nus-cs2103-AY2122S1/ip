@@ -2,7 +2,9 @@ package duke;
 
 import duke.commands.*;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents the Parser class which makes sense of what the user typed.
@@ -54,12 +56,21 @@ public class Parser {
             String by;
             boolean byFound = false;
 
+            LocalDate deadlineDate = null;
+            DateTimeFormatter deadlineDateFormatter = DateTimeFormatter.
+                    ofPattern("[d/M/yyyy][d-MMM-yyyy][d-M-yyyy][d/MMM/yyyy]");
+
             for (int i = 1; i < fullCommand.length; i++) {
                 if (byFound) {
-                    if (!byBuilder.toString().equals("")) {
-                        byBuilder.append(" ");
+                    try {
+                        deadlineDate = LocalDate.parse(fullCommand[i], deadlineDateFormatter);
+                    } catch (DateTimeParseException e) {
+                        if (!byBuilder.toString().equals("")) {
+                            byBuilder.append(" ");
+                        }
+                        byBuilder.append(fullCommand[i]);
                     }
-                    byBuilder.append(fullCommand[i]);
+
                 } else {
                     if (i == 1) {
                         deadlineBuilder.append(fullCommand[i]);
@@ -75,19 +86,33 @@ public class Parser {
             by = byBuilder.toString();
 
             checkDesc(desc);
-            return new AddDeadlineCommand(desc, by);
+
+            if (deadlineDate == null) {
+                return new AddDeadlineCommand(desc, by);
+            } else {
+                return new AddDeadlineCommand(desc, by, deadlineDate);
+            }
+
         case "event":
             StringBuilder eventBuilder = new StringBuilder();
             StringBuilder atBuilder = new StringBuilder();
             String at;
             boolean atFound = false;
 
+            LocalDate eventDate = null;
+            DateTimeFormatter eventDateFormatter = DateTimeFormatter.
+                    ofPattern("[d/M/yyyy][d-MMM-yyyy][d-M-yyyy][d/MMM/yyyy]");
+
             for (int i = 1; i < fullCommand.length; i++) {
                 if (atFound) {
-                    if (!atBuilder.toString().equals("")) {
-                        atBuilder.append(" ");
+                    try {
+                        eventDate = LocalDate.parse(fullCommand[i], eventDateFormatter);
+                    } catch (DateTimeParseException e) {
+                        if (!atBuilder.toString().equals("")) {
+                            atBuilder.append(" ");
+                        }
+                        atBuilder.append(fullCommand[i]);
                     }
-                    atBuilder.append(fullCommand[i]);
                 } else {
                     if (i == 1) {
                         eventBuilder.append(fullCommand[i]);
@@ -101,8 +126,15 @@ public class Parser {
             }
             desc = eventBuilder.toString();
             at = atBuilder.toString();
+
             checkDesc(desc);
-            return new AddEventCommand(desc, at);
+
+            if (eventDate == null) {
+                return new AddEventCommand(desc, at);
+            } else {
+                return new AddEventCommand(desc, at, eventDate);
+            }
+
         case "find":
             StringBuilder keywordBuilder = new StringBuilder();
             for (int i = 1; i < fullCommand.length; i++) {
@@ -155,9 +187,3 @@ public class Parser {
         }
     }
 }
-
-
-//            ArrayList<String> keywords = new ArrayList<>();
-//            for (int i = 1; i < fullCommand.length; i++) {
-//                keywords.add(fullCommand[i]);
-//            }

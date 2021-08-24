@@ -2,6 +2,7 @@ package duke.commands;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 
 import duke.tasks.Deadline;
 import duke.Storage;
@@ -12,6 +13,7 @@ import duke.TaskList;
  */
 public class AddDeadlineCommand extends Command {
     private final String by;
+    private final LocalDate date;
 
     /**
      * Constructor for AddDeadlineCommand.
@@ -22,6 +24,13 @@ public class AddDeadlineCommand extends Command {
     public AddDeadlineCommand(String desc, String by) {
         super(desc);
         this.by = by;
+        this.date = null;
+    }
+
+    public AddDeadlineCommand(String desc, String by, LocalDate date) {
+        super(desc);
+        this.by = by;
+        this.date = date;
     }
 
     /**
@@ -43,7 +52,12 @@ public class AddDeadlineCommand extends Command {
     @Override
     public void execute(TaskList tasks, Storage storage) {
         try {
-            Deadline deadline = new Deadline(super.getDesc(), by, false);
+            Deadline deadline;
+            if (date == null) {
+                deadline = new Deadline(super.getDesc(), by, false);
+            } else {
+                deadline = new Deadline(super.getDesc(), by, false, date);
+            }
             tasks.add(deadline);
             storage.add(deadline);
 
