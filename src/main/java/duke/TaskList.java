@@ -2,6 +2,7 @@ package duke;
 
 import exceptions.NoSuchCommandException;
 import exceptions.NoTaskNameException;
+import exceptions.TaskDoesNotExistException;
 import tasks.Task;
 
 import java.io.*;
@@ -54,10 +55,14 @@ public class TaskList {
 
     /**
      * Marks the taskNum-th item in the tasks list as completed.
-     * @param taskNum integer index of the task to be marked
+     * @param taskIndex integer index of the task to be marked
      */
-    public void doTask(int taskNum) {
-        taskList.get(taskNum).doTask();
+    public void doTask(int taskIndex) throws TaskDoesNotExistException {
+        if (taskIndex >= this.taskList.size()) {
+            throw new TaskDoesNotExistException("Task number out of bounds!");
+        } else {
+            this.taskList.get(taskIndex).doTask();
+        }
     }
 
     /**
@@ -74,8 +79,12 @@ public class TaskList {
      * Removes a task from the taskList.
      * @param taskIndex integer index of the task to be deleted
      */
-    public void delete(int taskIndex) {
-        taskList.remove(taskIndex);
+    public void delete(int taskIndex) throws TaskDoesNotExistException {
+        if (taskIndex >= this.taskList.size()) {
+            throw new TaskDoesNotExistException("Task number out of bounds!");
+        } else {
+            this.taskList.remove(taskIndex);
+        }
     }
 
     /**

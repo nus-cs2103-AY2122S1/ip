@@ -3,6 +3,7 @@ package Command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import exceptions.DukeException;
 import exceptions.NoSuchCommandException;
 
 /**
@@ -58,7 +59,7 @@ public abstract class Command {
         return this.extraInput;
     }
 
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     public boolean isExit() {
         return false;

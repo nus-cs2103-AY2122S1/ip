@@ -3,6 +3,7 @@ package Command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import exceptions.DukeException;
 
 /**
  * Command to mark a task as complete.
@@ -23,7 +24,7 @@ public class TaskCompletedCommand extends Command {
      * @param storage the storage object
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.doTask(Integer.parseInt(super.getExtraInput()) - 1);
         ui.showList(taskList);
     }
