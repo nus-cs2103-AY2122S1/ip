@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * This class encapsulates an exception specific to Duke.
  *

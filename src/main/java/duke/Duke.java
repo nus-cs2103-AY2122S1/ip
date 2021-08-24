@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * This class encapsulates Duke, an interactive task management chat-bot.
  *
