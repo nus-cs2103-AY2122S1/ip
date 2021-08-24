@@ -1,15 +1,17 @@
 package addon;
 
-import addon.Ui.IncorrectFormatException;
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
+
+import addon.Ui.IncorrectFormatException;
 
 /**
  * Handles methods involving the Arraylists of current tasks, as well as containing the Task classes
  */
 public class Tasklist {
 
-    protected ArrayList<Task> list;
+    private final ArrayList<Task> list;
 
     public Tasklist(ArrayList<Task> list) {
         this.list = list;
@@ -25,17 +27,20 @@ public class Tasklist {
         if (args[0].equals("T")) {
             addon.Tasklist.Todo add = new addon.Tasklist.Todo(args[1]);
             this.list.add(add);
-            System.out.println(Ui.bar + "\n    added: " + args[1] + "\n    Now you have " + this.list.size() + " tasks in your list\n" + Ui.bar);
+            System.out.println(Ui.BAR + "\n    added: " + args[1] + "\n    Now you have " + this.list.size()
+                    + " tasks in your list\n" + Ui.BAR);
             Storage.appendFile(add);
         } else if (args[0].equals("E")) {
             Event add = new Event(args[1], date);
             this.list.add(add);
-            System.out.println(Ui.bar + "\n    added: " + args[1] + " on " + Ui.printDate(date, true) + "\n    Now you have " + this.list.size() + " tasks in your list\n" + Ui.bar);
+            System.out.println(Ui.BAR + "\n    added: " + args[1] + " on " + Ui.printDate(date, true)
+                    + "\n    Now you have " + this.list.size() + " tasks in your list\n" + Ui.BAR);
             Storage.appendFile(add);
         } else {
             Deadline add = new Deadline(args[1], date);
             this.list.add(add);
-            System.out.println(Ui.bar + "\n    added: " + args[1] + " by " + Ui.printDate(date, true) + "\n    Now you have " + this.list.size() + " tasks in your list\n" + Ui.bar);
+            System.out.println(Ui.BAR + "\n    added: " + args[1] + " by " + Ui.printDate(date, true)
+                    + "\n    Now you have " + this.list.size() + " tasks in your list\n" + Ui.BAR);
             Storage.appendFile(add);
         }
 
@@ -47,7 +52,9 @@ public class Tasklist {
      */
     public void removeEntry(int num) throws IncorrectFormatException {
         if (num >= 1 && num <= this.list.size() + 1) {
-            System.out.println(Ui.bar + "\n    Nice! I've removed this task off the face of the Earth:\n    " + (list.get(num - 1)).toString() + "\n    Now you have " + list.size() + " tasks in the list.\n" + Ui.bar);
+            System.out.println(Ui.BAR + "\n    Nice! I've removed this task off the face of the Earth:\n    "
+                    + (list.get(num - 1)).toString() + "\n    Now you have " + list.size() +
+                    " tasks in the list.\n" + Ui.BAR);
             this.list.remove(num - 1);
             Storage.rewriteFile(this.list);
         } else {
@@ -63,7 +70,9 @@ public class Tasklist {
     public void changeDone(int num) throws IncorrectFormatException {
         if (num >= 1 && num <= this.list.size() + 1) {
             (list.get(num - 1)).markDone();
-            System.out.println(Ui.bar + "\n     Nice! I've marked the following as " + ((list.get(num - 1)).isDone ? "undone: " : "done: ") + "\n     " + (list.get(num - 1)).toString() + "\n" + Ui.bar);
+            System.out.println(Ui.BAR + "\n     Nice! I've marked the following as " +
+                    ((list.get(num - 1)).isDone ? "undone: " : "done: ") + "\n     " +
+                    (list.get(num - 1)).toString() + "\n" + Ui.BAR);
             Storage.rewriteFile(this.list);
         } else {
             throw new IncorrectFormatException("List does not contain this item number. Try again?");
@@ -74,7 +83,7 @@ public class Tasklist {
      * Lists out the current entries in the Arraylist.
      */
     public void listEntries() {
-        System.out.println(Ui.bar);
+        System.out.println(Ui.BAR);
         if (this.list.size() == 0) {
             System.out.println("    LIST EMPTY.");
         } else {
@@ -83,7 +92,7 @@ public class Tasklist {
                 System.out.println("    " + i + "." + (list.get(i - 1)).toString());
             }
         }
-        System.out.println(Ui.bar);
+        System.out.println(Ui.BAR);
     }
 
     /**
@@ -92,21 +101,23 @@ public class Tasklist {
      * @param date LocalDateTime object of date that is to be queried.
      */
     public void filterDates(LocalDateTime date) {
-        System.out.println(Ui.bar + "\n    Here are your " + Ui.printDate(date, false) + " tasks: \n");
+        System.out.println(Ui.BAR + "\n    Here are your " + Ui.printDate(date, false) + " tasks: \n");
         for(Task i : list) {
             if (i instanceof Event) {
                 Event o = (Event)i;
-                if (o.date.getYear() == date.getYear() && o.date.getMonth().equals(date.getMonth()) && o.date.getDayOfMonth() == date.getDayOfMonth()) {
+                if (o.date.getYear() == date.getYear() && o.date.getMonth().equals(date.getMonth())
+                        && o.date.getDayOfMonth() == date.getDayOfMonth()) {
                     System.out.println("    " + i.toString());
                 }
             } else if (i instanceof Deadline) {
                 Deadline o = (Deadline)i;
-                if (o.date.getYear() == date.getYear() && o.date.getMonth().equals(date.getMonth()) && o.date.getDayOfMonth() == date.getDayOfMonth()) {
+                if (o.date.getYear() == date.getYear() && o.date.getMonth().equals(date.getMonth())
+                        && o.date.getDayOfMonth() == date.getDayOfMonth()) {
                     System.out.println("    " + i.toString());
                 }
             }
         }
-        System.out.println(Ui.bar + "\n");
+        System.out.println(Ui.BAR + "\n");
     }
 
     /**
@@ -114,7 +125,7 @@ public class Tasklist {
      */
     public void clearList() {
         this.list.clear();
-        System.out.println(Ui.bar + "\n    LIST CLEARED\n" + Ui.bar);
+        System.out.println(Ui.BAR + "\n    LIST CLEARED\n" + Ui.BAR);
         Storage.rewriteFile(this.list);
     }
 
