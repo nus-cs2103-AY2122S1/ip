@@ -1,5 +1,8 @@
 package blue;
 
+/**
+ * Holds the value of all commands.
+ */
 public class Command {
     public final static String LIST = "list";
     public final static String TODO = "todo";

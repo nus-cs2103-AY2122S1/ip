@@ -4,11 +4,21 @@ import blue.BlueException;
 import blue.TaskList;
 import blue.task.ToDo;
 
+/**
+ * Handles the todo command.
+ */
 public class ToDoHandler extends CommandHandler {
     public ToDoHandler(TaskList taskList) {
         super(taskList);
     }
 
+    /**
+     * Handles the user input.
+     * 
+     * @param input User input.
+     * @return Response.
+     * @throws BlueException If the user input is invalid.
+     */
     @Override
     public String handle(String input) throws BlueException {
         if (input.contains(" ")) {

@@ -4,11 +4,21 @@ import blue.BlueException;
 import blue.TaskList;
 import blue.task.Event;
 
+/**
+ * Handles the event command.
+ */
 public class EventHandler extends CommandHandler {
     public EventHandler(TaskList taskList) {
         super(taskList);
     }
 
+    /**
+     * Handles the user input.
+     * 
+     * @param input User input.
+     * @return Response.
+     * @throws BlueException If the user input is invalid.
+     */
     @Override
     public String handle(String input) throws BlueException {
         if (input.contains(" /at ")) {

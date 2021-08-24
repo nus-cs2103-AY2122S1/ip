@@ -5,11 +5,21 @@ import blue.Parser;
 import blue.TaskList;
 import blue.task.Task;
 
+/**
+ * Handles the delete command.
+ */
 public class DeleteHandler extends CommandHandler {
     public DeleteHandler(TaskList taskList) {
         super(taskList);
     }
 
+    /**
+     * Handles the user input.
+     *
+     * @param input User input.
+     * @return Response
+     * @throws BlueException If the input is invalid.
+     */
     @Override
     public String handle(String input) throws BlueException {
         String[] arguments = Parser.getArguments(input);

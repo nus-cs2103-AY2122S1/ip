@@ -1,5 +1,8 @@
 package blue.task;
 
+/**
+ * Holds the similarity of all tasks.
+ */
 public abstract class Task {
     private final String title;
     private boolean isDone;
@@ -21,6 +24,12 @@ public abstract class Task {
         isDone = true;
     }
 
+    /**
+     * Returns a String representation of this instance.
+     *
+     * @return String representation of this instance.
+     */
+    @Override
     public String toString() {
         String string = "[";
         if (isDone)

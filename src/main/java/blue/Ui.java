@@ -1,5 +1,8 @@
 package blue;
 
+/**
+ * Deals with the interaction with user.
+ */
 class Ui {
     private static final String LOADING_ERROR_CONTENT
             = "☹ OOPS!!! I'm sorry, but I can't find your previous tasks :-(";

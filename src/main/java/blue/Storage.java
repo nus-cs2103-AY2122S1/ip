@@ -12,6 +12,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Reads tasks from file and writes tasks to file.
+ */
 class Storage {
     private static final String DIVIDER = "\n\n";
     private static final String DELIMITER = "\n";

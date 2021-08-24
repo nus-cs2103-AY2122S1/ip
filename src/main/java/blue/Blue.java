@@ -5,6 +5,10 @@ import blue.handler.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Entry point of the Blue application.
+ * Initializes the application and interacts with the user.
+ */
 public class Blue {
     private final Storage storage;
     private TaskList tasks;
@@ -22,6 +26,9 @@ public class Blue {
         }
     }
 
+    /**
+     * Keeps engaging the user until the user input the exit command.
+     */
     public void run() {
         initCommandHandlers();
         ui.showLogo();
@@ -74,6 +81,11 @@ public class Blue {
         return true;
     }
 
+    /**
+     * Creates a Blue instance and runs it.
+     *
+     * @param args Ignored.
+     */
     public static void main(String[] args) {
         new Blue("data/tasks.txt").run();
     }

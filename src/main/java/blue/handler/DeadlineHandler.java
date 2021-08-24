@@ -4,11 +4,21 @@ import blue.BlueException;
 import blue.TaskList;
 import blue.task.Deadline;
 
+/**
+ * Handles the deadline command.
+ */
 public class DeadlineHandler extends CommandHandler {
     public DeadlineHandler(TaskList taskList) {
         super(taskList);
     }
 
+    /**
+     * Handles the user input.
+     * 
+     * @param input User input.
+     * @return Response.
+     * @throws BlueException If the time of deadline is not specified.
+     */
     @Override
     public String handle(String input) throws BlueException {
         if (input.contains(" /by ")) {

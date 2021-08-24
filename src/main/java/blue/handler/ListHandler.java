@@ -2,11 +2,20 @@ package blue.handler;
 
 import blue.TaskList;
 
+/**
+ * Handles the list command.
+ */
 public class ListHandler extends CommandHandler {
     public ListHandler(TaskList taskList) {
         super(taskList);
     }
 
+    /**
+     * Handles the user input.
+     * 
+     * @param input User input.
+     * @return Response.
+     */
     @Override
     public String handle(String input) {
         String response = "Here are the tasks in your list:\n";

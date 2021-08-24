@@ -3,6 +3,9 @@ package blue.handler;
 import blue.BlueException;
 import blue.TaskList;
 
+/**
+ * Holds the similarity of all command handlers.
+ */
 public abstract class CommandHandler {
     protected TaskList taskList;
 
@@ -11,8 +14,10 @@ public abstract class CommandHandler {
     }
 
     /**
-     * @param input - the input entered by the user
-     * @return response
+     * Handles the user input.
+     * 
+     * @param input User input.
+     * @return Response.
      */
     public abstract String handle(String input) throws BlueException;
 }
