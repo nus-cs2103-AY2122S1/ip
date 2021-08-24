@@ -1,187 +1,41 @@
 import java.util.Scanner;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Duke {
-    public static void main(String[] args) {
-        Response.start();
 
-        // Read data from file if it exists
-        PersistentStorage storage = new PersistentStorage("./data/taskdata.txt");
+    private PersistentStorage storage;
+    private Tasklist taskList;
+    private UI ui;
 
-        // Initialize input scanner and Tasklist
-        Scanner inputScanner = new Scanner(System.in);
-        Tasklist store = storage.loadTasks();
+    public Duke(String filePath) {
+        ui = new UI(new Scanner(System.in));
+        storage = new PersistentStorage(filePath);
+        try {
+            taskList = storage.loadTasks();
+        } catch (DukeException e) {
+            ui.showLoadError();
+            taskList = new Tasklist();
+        }
+    }
 
-        while (inputScanner.hasNext()) {
-            String input = inputScanner.nextLine();
-            String firstToken = input.split(" ")[0];
+    public void run() {
+        ui.showStartMsg();
+        Boolean exit = false;
 
-            // Check if input is "bye"
-            if (input.equals("bye")) {
-                Response.exit();
-                break;
-            } 
+        while (!exit) {
+            try {
+                String rawCommand = ui.readCommand();
+                Command command = Parser.parse(rawCommand);
+                command.executeCommand(taskList, ui, storage);
+                exit = command.isExit();
 
-            // Check if input is "list"
-            else if (input.equals("list")) {
-                Response.listAllItems(store);
-            }
-
-            // Check if input starts with "delete"
-            else if (firstToken.equals("delete")) {
-                try {
-                    // Check that delete is used correctly
-                    if (input.split(" ").length <= 1) {
-                        throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
-                    }
-                    
-                    // Determine index of task to delete
-                    int index = Integer.parseInt(input.split(" ")[1]);
-
-                    // Check for valid task number provided
-                    if (index < 1 || index > store.getTotalTasks()) {
-                        throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
-                    }
-
-                    // Remove item
-                    Task removed = store.deleteTask(index);
-                    Response.removed(store, removed);
-
-                } catch (DukeException e) {
-                    Response.error(e.getMessage());
-
-                } catch (NumberFormatException e) {
-                    Response.error("☹ OOPS!!! Please provide a valid task number.");
-                }
-            }
-
-            // Check if input starts with "done"
-            else if (firstToken.equals("done")) {
-                try {
-                    // Check that delete is used correctly
-                    if (input.split(" ").length <= 1) {
-                        throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
-                    }
-
-                    // Determine index of task to mark as done
-                    int index = Integer.parseInt(input.split(" ")[1]);
-
-                    // Check for valid task number provided
-                    if (index > store.getTotalTasks() || index < 1) {
-                        throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
-                    }
-
-                    // Mark item as done
-                    Task completedTask = store.markAsDone(index);
-                    Response.completed(completedTask);
-
-                } catch (DukeException e) {
-                    Response.error(e.getMessage());
-
-                } catch (NumberFormatException e) {
-                    Response.error("☹ OOPS!!! Please provide a valid task number.");
-                }
-                
-            }
-            
-            // Check if user adding a ToDo
-            else if (firstToken.equals("todo")) {
-                try {
-                    if (input.split(" ").length <= 1) {
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                    }
-                    String description = input.substring(5);
-                    ToDo todo = new ToDo(description);
-                    store.addTask(todo);
-                    Response.added(store, todo);
-
-                } catch (DukeException e) {
-                    Response.error(e.getMessage());
-                }
-            }
-            
-            // Check if user adding a Deadline
-            else if (firstToken.equals("deadline")) {
-                try {
-                    // Check for valid description provided
-                    if (input.split(" /by ")[0].split(" ").length <= 1) {
-                        throw new DukeException("☹ OOPS!!! Please provide a valid deadline description.");
-                    }
-
-                    // Check for valid due date provided
-                    if (input.split(" /by ").length != 2) {
-                        throw new DukeException("☹ OOPS!!! Please provide a valid due date.");
-                    }
-                    String rawDueDate = input.split("/by")[1].strip();
-
-                    // Initialize datetime formatter
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-                    LocalDateTime dueDateTime = LocalDateTime.parse(rawDueDate, formatter);
-                    
-                    String description = input
-                        .split("/by")[0]
-                        .strip()
-                        .substring(9);
-
-                    Deadline deadline = new Deadline(description, dueDateTime);
-                    store.addTask(deadline);
-                    Response.added(store, deadline);
-
-                } catch (DukeException e) {
-                    Response.error(e.getMessage());
-                } catch (DateTimeParseException e) {
-                    Response.error("☹ OOPS!!! Please provide a valid due date.");
-                }
-
-            }
-
-            // Check if user adding an Event
-            else if (firstToken.equals("event")) {
-                try {
-                    // Check for valid description provided
-                    if (input.split(" /at ")[0].split(" ").length <= 1) {
-                        throw new DukeException("☹ OOPS!!! Please provide a valid event description.");
-                    }
-                    
-                    // Check for valid event time provided
-                    if (input.split(" /at ").length != 2) {
-                        throw new DukeException("☹ OOPS!!! Please provide a valid event time.");
-                    }
-                    String rawEventDateTime = input.split("/at")[1].strip();
-
-                    // Initialize datetime formatter
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-                    LocalDateTime eventDateTime = LocalDateTime.parse(rawEventDateTime, formatter);
-                    
-                    String description = input
-                        .split("/at")[0]
-                        .strip()
-                        .substring(6);
-
-                    Event event = new Event(description, eventDateTime);
-                    store.addTask(event);
-                    Response.added(store, event);
-
-                } catch (DukeException e) {
-                    Response.error(e.getMessage());
-                } catch (DateTimeParseException e) {
-                    Response.error("☹ OOPS!!! Please provide a valid event time.");
-                }
-            }
-
-            // Otherwise, throw an error
-            else {
-                try {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-
-                } catch (DukeException e) {
-                    Response.error(e.getMessage());
-                }
+            } catch (DukeException e) {
+                ui.showErrorMsg(e);
             }
         }
-        storage.saveTasks(store);
-        inputScanner.close();
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke("./data/taskdata.txt");
+        duke.run();
     }
 }

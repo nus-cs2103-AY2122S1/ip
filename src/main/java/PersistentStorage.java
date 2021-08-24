@@ -14,7 +14,7 @@ public class PersistentStorage {
         this.filepath = filepath;
     }
 
-    public Tasklist loadTasks() {
+    public Tasklist loadTasks() throws DukeException {
         File file = new File(this.filepath);
         if (!file.exists()) {
             // File doesn't exist
@@ -75,13 +75,12 @@ public class PersistentStorage {
                 return storedTasks;
 
             } catch (FileNotFoundException e) {
-                Response.error("Error occurred! No file found.");
-                return new Tasklist();
+                throw new DukeException("Error loading file!");
             }
         }
     }
 
-    public boolean saveTasks(Tasklist tasklist) {
+    public boolean saveTasks(Tasklist tasklist) throws DukeException {
         File file = new File(this.filepath);
         
         try {
@@ -107,8 +106,7 @@ public class PersistentStorage {
             return true;
 
         } catch (IOException e) {
-            Response.error("An error occured while saving your tasks to the file.");
-            return false;
+            throw new DukeException("An error occurred while trying to save data to your file :(");
         }
         
     }
