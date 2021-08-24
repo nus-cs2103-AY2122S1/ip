@@ -2,7 +2,7 @@
  * The Task class encapsulates a task with a String description
  * and a boolean representing if task is done.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -28,6 +28,8 @@ public class Task {
     public void markAsDone() {
         isDone = true;
     }
+
+    public abstract String toFileEntry();
 
     @Override
     public String toString() {
