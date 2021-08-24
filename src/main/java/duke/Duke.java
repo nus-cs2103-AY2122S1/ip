@@ -53,6 +53,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("src/main/java/data/list.txt").run();
+        new Duke("data/list.txt").run();
     }
 }

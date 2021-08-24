@@ -8,19 +8,16 @@ Hi there! Start chatting with your new
 (*^_^*) Friend says: 
 What would you like to do today?
 (*^_^*) Friend says: 
-File not found
+These are your existing tasks!
+
 (*^_^*) Friend says: 
 added: [T][ ] read book to your to-do list!
 Now you have 1 tasks in the list.
 Saving file
 (*^_^*) Friend says: 
-File not found
-(*^_^*) Friend says: 
 added: [D][ ] do groceries (by: Saturday 3pm) to your to-do list!
 Now you have 2 tasks in the list.
 Saving file
-(*^_^*) Friend says: 
-File not found
 (*^_^*) Friend says: 
 Your to-do list has the following tasks: 
 
@@ -37,17 +34,11 @@ Your to-do list has the following tasks:
 added: [E][ ] Barbeque (at: Friday 8pm) to your to-do list!
 Now you have 3 tasks in the list.
 Saving file
-(*^_^*) Friend says: 
-File not found
 Saving file
-(*^_^*) Friend says: 
-File not found
 (*^_^*) Friend says: 
 Hooray! You've completed task 
 [X] read book
 Saving file
-(*^_^*) Friend says: 
-File not found
 (*^_^*) Friend says: 
 Hooray! You've completed task 
 [X] do groceries
@@ -67,37 +58,25 @@ added: [E][ ] flight (at: 3.45pm) to your to-do list!
 Now you have 4 tasks in the list.
 Saving file
 (*^_^*) Friend says: 
-File not found
-(*^_^*) Friend says: 
 added: [D][ ] assignment (by: 1pm tomorrow) to your to-do list!
 Now you have 5 tasks in the list.
 Saving file
-(*^_^*) Friend says: 
-File not found
 (*^_^*) Friend says: 
 added: [D][ ] project (by: noon) to your to-do list!
 Now you have 6 tasks in the list.
 Saving file
 (*^_^*) Friend says: 
-File not found
-(*^_^*) Friend says: 
 added: [E][ ] exam (at: 9.30am in 6 days) to your to-do list!
 Now you have 7 tasks in the list.
 Saving file
-(*^_^*) Friend says: 
-File not found
 (*^_^*) Friend says: 
 added: [E][ ] booksale (at: Aug 8 2021) to your to-do list!
 Now you have 8 tasks in the list.
 Saving file
 (*^_^*) Friend says: 
-File not found
-(*^_^*) Friend says: 
 added: [D][ ] presentation (by: Aug 2 2021) to your to-do list!
 Now you have 9 tasks in the list.
 Saving file
-(*^_^*) Friend says: 
-File not found
 (*^_^*) Friend says: 
 Here are the matching tasks in your list:
 1.[D][ ] presentation (by: Aug 2 2021)
@@ -114,27 +93,19 @@ removed the following task from your to-do list:
 Now you have 8 tasks in the list.
 Saving file
 (*^_^*) Friend says: 
-File not found
-(*^_^*) Friend says: 
 removed the following task from your to-do list: 
 [D][X] do groceries (by: Saturday 3pm)
 Now you have 7 tasks in the list.
 Saving file
-(*^_^*) Friend says: 
-File not found
 (*^_^*) Friend says: 
 removed the following task from your to-do list: 
 [E][ ] flight (at: 3.45pm)
 Now you have 6 tasks in the list.
 Saving file
 (*^_^*) Friend says: 
-File not found
-(*^_^*) Friend says: 
 removed the following task from your to-do list: 
 [E][ ] Barbeque (at: Friday 8pm)
 Now you have 5 tasks in the list.
 Saving file
-(*^_^*) Friend says: 
-File not found
 (*^_^*) Friend says: 
 See you again, my friend!

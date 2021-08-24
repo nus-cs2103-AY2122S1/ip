@@ -3,6 +3,8 @@
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
+REM if exist ..\text-ui-test\data\list.txt echo "T | 1 | Open Duke!" > ..\text-ui-test\data\list.txt
+
 REM delete output from previous run
 if exist ACTUAL.TXT del ACTUAL.TXT
 

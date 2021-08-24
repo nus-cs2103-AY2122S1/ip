@@ -1,0 +1,5 @@
+D | 0 | assignment | 1pm tomorrow
+D | 0 | project | noon
+E | 0 | exam | 9.30am in 6 days
+E | 0 | booksale | Aug 8 2021
+D | 0 | presentation | Aug 2 2021
