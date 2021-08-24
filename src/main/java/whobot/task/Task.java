@@ -1,6 +1,4 @@
-package WhoBot.Task;
-
-import java.util.Objects;
+package whobot.task;
 
 public class Task implements Comparable<Task> {
 

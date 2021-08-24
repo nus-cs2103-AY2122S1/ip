@@ -1,4 +1,4 @@
-package WhoBot.Task;
+package whobot.task;
 
 public class Todo extends Task{
 
