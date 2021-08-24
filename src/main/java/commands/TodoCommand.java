@@ -1,5 +1,6 @@
 package commands;
 
+import core.Storage;
 import core.TaskList;
 import tasks.Todo;
 
@@ -9,9 +10,11 @@ public class TodoCommand extends Command {
     public TodoCommand(String taskName) {
         todoTask = new Todo(taskName);
     }
+
     @Override
-    public void execute(TaskList taskList) {
+    public void execute(TaskList taskList, Storage storage) {
         taskList.addTask(todoTask);
+        storage.addTasksToFile(taskList);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package commands;
 
+import core.Storage;
 import core.TaskList;
 
 public class DeleteCommand extends Command {
@@ -10,8 +11,9 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList) {
+    public void execute(TaskList taskList, Storage storage) {
         taskList.delete(indexToDelete);
+        storage.addTasksToFile(taskList);
     }
 
     @Override

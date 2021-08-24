@@ -1,5 +1,6 @@
 package commands;
 
+import core.Storage;
 import core.TaskList;
 import tasks.Deadline;
 
@@ -11,8 +12,9 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList) {
+    public void execute(TaskList taskList, Storage storage) {
         taskList.addTask(deadlineTask);
+        storage.addTasksToFile(taskList);
     }
 
     @Override
