@@ -1,4 +1,6 @@
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Duke {
 
@@ -16,10 +18,56 @@ public class Duke {
                                 + "|____/ \\__,_|_|\\_\\___|\n";
 
 
+    public static void main(String[] args) {
+        //Print welcome message to the user
+        Duke.welcomeMessage();
+        Scanner s = new Scanner(System.in);
+        Duke.getPrompt();
+        String input = s.nextLine();
+
+        while (!input.equals("bye")) {
+            try {
+                if (input.contains("list")) {
+                    Duke.getList();
+                } else if (input.contains("done")) {
+                    int i = Integer.valueOf(input.substring(5));
+                    Duke.markDone(i);
+                } else if (input.contains("delete")) {
+                    int i = Integer.valueOf(input.substring(7));
+                    System.out.println(i);
+                    Duke.delete(i);
+                } else if (input.contains("todo")) {
+                    Duke.toDo(input);
+                } else if (input.contains("deadline")) {
+                    Duke.deadline(input);
+                } else if (input.contains("event")) {
+                    Duke.event(input);
+                } else {
+                    throw new DukeException(Duke.start +
+                            "☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n"
+                            + Duke.end);
+                }
+            } catch (DukeException error) {
+                System.out.println(error.getMessage());
+            }
+
+            //Get next command for the loop
+            System.out.println("What else can I do for you?");
+            input = s.nextLine();
+        }
+        Duke.byeMessage();
+        s.close();
+    }
+
     public static void welcomeMessage() {
         String welcome = "Hello! I'm Duke. A friendly chatbot!! :)\n" +
                             "What can I do for you?\n";
         System.out.println(Duke.start + Duke.logo + "\n" +  welcome + Duke.end);
+    }
+
+    public static void byeMessage() {
+        String end_message = "Bye. I hope to talk to you again soon! :)";
+        System.out.println(Duke.start + end_message + Duke.end);
     }
 
     public static void getPrompt() {
@@ -85,49 +133,6 @@ public class Duke {
         Duke.list.remove(((int) i - 1));
         System.out.println(" " + deleted);
         System.out.println("Now you have " + Duke.list.size() + " tasks in the list." + "\n" +  Duke.end);
-    }
-
-    public static void main(String[] args) {
-
-        String end_message = "Bye. I hope to talk to you again soon! :)";
-        //Print welcome message to the user
-        Duke.welcomeMessage();
-        Scanner s = new Scanner(System.in);
-        Duke.getPrompt();
-        String input = s.nextLine();
-
-        while (!input.equals("bye")) {
-            try {
-                if (input.contains("list")) {
-                    Duke.getList();
-                } else if (input.contains("done")) {
-                    int i = Integer.valueOf(input.substring(5));
-                    Duke.markDone(i);
-                } else if (input.contains("delete")) {
-                    int i = Integer.valueOf(input.substring(7));
-                    System.out.println(i);
-                    Duke.delete(i);
-                } else if (input.contains("todo")) {
-                    Duke.toDo(input);
-                } else if (input.contains("deadline")) {
-                    Duke.deadline(input);
-                } else if (input.contains("event")) {
-                    Duke.event(input);
-                } else {
-                    throw new DukeException(Duke.start +
-                                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n"
-                                        + Duke.end);
-                }
-            } catch (DukeException error) {
-                    System.out.println(error.getMessage());
-            }
-
-            //Get next command for the loop
-            System.out.println("What else can I do for you?");
-            input = s.nextLine();
-        }
-        System.out.println(Duke.start + end_message + "\n" + Duke.end);
-        s.close();
     }
 }
 
