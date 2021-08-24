@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -24,7 +26,7 @@ public class Storage {
         }
     }
 
-    public void writeToFile(String filePath,TaskList list){
+    public void writeToFile(String filePath, TaskList list){
         try{
             String text = "";
             FileWriter fw = new FileWriter(filePath);

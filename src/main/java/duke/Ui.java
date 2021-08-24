@@ -1,6 +1,7 @@
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
+package duke;
+
+import duke.Task;
+import duke.TaskList;
 
 public class Ui {
     String line = "____________________________________________________________\n";
@@ -21,7 +22,7 @@ public class Ui {
         System.out.println(line + "Nice! I've marked this task as done:\n" + list.get(doneNum));
     }
 
-    public void Delete(Task delete,int count){
+    public void Delete(Task delete, int count){
         System.out.println(line + "Noted. I've removed this task:\n" + delete +
                 "\nNow you have " + count + " tasks in the list.\n" + line);
     }

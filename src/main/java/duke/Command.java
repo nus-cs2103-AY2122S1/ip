@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -5,7 +7,7 @@ import java.util.Scanner;
 
 public class Command {
 
-    public void execute(TaskList tasks,Ui ui,Storage save) {
+    public void execute(TaskList tasks, Ui ui, Storage save) {
         ui.Start();
         boolean exit = false;
         Scanner sc = new Scanner(System.in);
@@ -13,7 +15,7 @@ public class Command {
         int count = tasks.size();
 
         while (!exit) {
-            String command = sc.next();
+            String command = Parser.parseCommand(sc.next());
             switch(command){
                 case "bye":
                     ui.Bye();
@@ -63,7 +65,11 @@ public class Command {
                     }
                 case "deadline":
                     try {
+
                         String[] deadlineArr = sc.nextLine().split("/by");
+                        if(deadlineArr[0].strip().isEmpty()){
+                            throw new DukeException("");
+                        }
                         LocalDate d1 = LocalDate.parse(deadlineArr[1].trim());
                         Task deadline = new Deadline(deadlineArr[0].trim(),
                                 d1.format(DateTimeFormatter.ofPattern("MMM dd YYYY")), count);
@@ -74,7 +80,7 @@ public class Command {
                     } catch (DateTimeParseException e){
                         ui.showDeadlineError1();
                         break;
-                    } catch (Exception e){
+                    } catch (DukeException e){
                         ui.showDeadlineError2();
                         break;
                     }
