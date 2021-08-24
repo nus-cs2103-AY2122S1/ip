@@ -1,7 +1,5 @@
-import java.io.IOException;
-
 // A custom exception to handle
-public class InvalidInputException extends IOException {
+public class InvalidInputException extends RuntimeException {
     public InvalidInputException(String errorMessage) {
         super(errorMessage);
     }

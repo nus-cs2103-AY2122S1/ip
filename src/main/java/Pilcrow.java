@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,266 +6,78 @@ import java.util.Scanner;
  * Pilcrow is a personal assistant chatbot made for CS2103, based off of Duke.
  */
 public class Pilcrow {
-    private final static String PILCROW_LOGO = """
-              _____
-             /   | |
-            |    | |
-            |    | |
-             \\___| |
-                 | |
-                 | |
-                _| |_
-               |_|_|_|
-            """;
+    private Ui ui;
+    private Storage storage;
+    private TaskList taskList;
+
+    private final static String PILCROW_FILE_PATH = "data/pilcrow.txt";
+
+    private Pilcrow() {
+        this.ui = new Ui();
+        this.storage = new Storage(Pilcrow.PILCROW_FILE_PATH);
+        this.taskList = new TaskList();
+    }
 
     /**
      * Runs the main body of the Pilcrow script.
      * @param args
      */
     public static void main(String[] args) {
-        ArrayList<Task> tasks = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
+        Pilcrow pilcrow = new Pilcrow();
+        pilcrow.run();
+    }
 
-        while (true) {
-            // Reads the text from the scanner
-            String text = scanner.nextLine();
-            String trimmedText = text.trim();
-            String[] splitText = trimmedText.split(" ");
-            ArrayList<String> words = new ArrayList<>();
-            for (int i = 0; i < splitText.length; i++) {
-                if (!splitText[i].equals("")) {
-                    words.add(splitText[i]);
-                }
-            }
-
-            // Parses the text and does the appropriate action
+    private void run() {
+        Boolean isExit = false;
+        System.out.println(this.taskList);
+        while (!isExit) {
+            Scanner scanner = new Scanner(System.in);
             try {
-                Pilcrow.parseText(trimmedText, words, tasks);
-            } catch (InvalidInputException exception) {
-                System.out.println(exception);
-            }
+                Parser parser = new Parser(scanner.nextLine());
+                Pilcrow.runCommand(parser.getCommandWord(), parser.getRestOfCommand(),
+                        this.ui, this.storage, this.taskList, parser);
 
-            // Exit while loop if first word of trimmed text is "bye"
-            if (words.size() > 0 && words.get(0).equals("bye")) {
-                break;
+                isExit = (parser.getCommandWord().equals("bye"));
+            } catch (InvalidInputException exception) {
+                ui.printException(exception);
+            } catch (IOException exception) {
+                ui.printException(exception);
             }
         }
     }
 
-    private static void parseText(String trimmedText, ArrayList<String> words, ArrayList<Task> tasks)
-            throws InvalidInputException {
-        String displayText = "";
-
-        // Exception thrown if input is empty
-        if (words.size() == 0) {
-            throw new InvalidInputException("Nothing entered.");
-        }
-
-        String command = words.get(0);
-
-        // Chooses what to do based on which command is entered
-        switch (command) {
+    private static void runCommand(String commandWord, String restOfCommand, Ui ui,
+            Storage storage, TaskList taskList, Parser parser) {
+        switch (commandWord) {
+        // To fix indentation
         case "todo":
-            // Exception thrown if description of todo is empty
-            if (words.size() == 1) {
-                throw new InvalidInputException("Description of todo cannot be empty.");
-            }
-            String toDoName = trimmedText.substring(trimmedText.indexOf(" ") + 1);
-            Task newTask = new ToDo(toDoName);
-            tasks.add(newTask);
-            displayText = "Added todo to tasks(" + tasks.size() + "): \n" + newTask.toString();
-            break;
+            // Fallthrough
         case "deadline":
             // Fallthrough
         case "event":
-            // Exception thrown if description of event/deadline is empty
-            if (words.size() == 1) {
-                throw new InvalidInputException("Description of event/deadline cannot be empty.");
-            }
-            // Exception thrown if description of event/deadline contains no '/'
-            if (!trimmedText.contains("/")) {
-                throw new InvalidInputException("No duration/deadline specified with '/'.");
-            }
-
-            String taskName = trimmedText.substring(0, trimmedText.indexOf("/")).trim();
-            // Exception thrown if description of event/deadline is empty
-            if (!taskName.contains(" ")) {
-                throw new InvalidInputException("Description of event/deadline cannot be empty.");
-            }
-            taskName = taskName.substring(taskName.indexOf(" "));
-            String taskTime = trimmedText.substring(trimmedText.indexOf("/") + 1);
-            if (command.equals("deadline")) {
-                newTask = new Deadline(taskName, taskTime);
-                tasks.add(newTask);
-                displayText = "Added deadline to tasks(" + tasks.size() + "): \n" + newTask.toString();
-            } else if (command.equals("event")) {
-                newTask = new Event(taskName, taskTime);
-                tasks.add(newTask);
-                displayText = "Added event to tasks(" + tasks.size() + "): \n" + newTask.toString();
-            }
+            Task task = Task.createTask(commandWord, restOfCommand, false);
+            taskList.addTask(task);
+            ui.printTaskAddedMessage(task, taskList);
             break;
         case "list":
-            displayText = Pilcrow.printAllTasks(tasks);
+            ui.printTaskList(taskList);
             break;
         case "done":
-            // Exception thrown if no word given after done command
-            if (words.size() == 1) {
-                throw new InvalidInputException("Must specify a task as done.");
-            }
-
-            // Exception thrown if word given cannot be converted to integer
-            int doneTask;
-            try {
-                doneTask = Integer.valueOf(words.get(1));
-            } catch (NumberFormatException exception) {
-                throw new InvalidInputException("Must specify task number as an integer.");
-            }
-
-            int taskIndex = doneTask - 1;
-            // Exception thrown if task specified does not exist
-            if (taskIndex >= tasks.size()) {
-                throw new InvalidInputException("Must specify a task that exists.");
-            }
-            tasks.get(taskIndex).markAsDone(true);
-            displayText = "Task " + doneTask + " set as done:\n" + tasks.get(taskIndex).toString();
+            int index = parser.getIndex();
+            taskList.setTaskIsDone(index, true);
+            ui.printSetTaskIsDoneMessage(taskList.getTask(index), taskList);
             break;
         case "delete":
-            // Exception thrown if no word given after delete command
-            if (words.size() == 1) {
-                throw new InvalidInputException("Must specify a task to delete.");
-            }
-
-            // Exception thrown if word given cannot be converted to integer
-            int taskToDelete;
-            try {
-                taskToDelete = Integer.valueOf(words.get(1));
-            } catch (NumberFormatException exception) {
-                throw new InvalidInputException("Must specify task number as an integer.");
-            }
-
-            taskIndex = taskToDelete - 1;
-            // Exception thrown if task specified does not exist
-            if (taskIndex >= tasks.size()) {
-                throw new InvalidInputException("Must specify a task that exists.");
-            }
-
-            tasks.remove(taskIndex);
-            displayText = "Task " + taskToDelete + " deleted.\n";
+            index = parser.getIndex();
+            taskList.deleteTask(index);
+            ui.printDeleteTaskMessage(index);
             break;
         case "bye":
-            displayText = "C'est fini.\n" + Pilcrow.PILCROW_LOGO;
+            ui.printGoodbyeMessage();
             break;
         default:
-            newTask = new Task(trimmedText);
-            tasks.add(newTask);
-            displayText = "Added generic task to tasks(" + tasks.size() + "): \n" + newTask.toString();
+            ui.printUnacceptedCommandMessage();
             break;
-        }
-        System.out.println(displayText);
-    }
-
-    private static String printAllTasks(ArrayList<Task> tasks) {
-        String tasksText = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            tasksText += (i + 1) + ". " + tasks.get(i).toString() + "\n";
-        }
-        return tasksText;
-    }
-
-    // Inner classes for Task and its subclasses
-    private static class Task {
-        protected String taskName;
-        protected Boolean isDone;
-
-        /**
-         * Constructor for a generic Task.
-         * @param taskName Task name
-         */
-        public Task(String taskName) {
-            this.taskName = taskName;
-            this.isDone = false;
-        }
-
-        public void markAsDone(Boolean isDone) {
-            this.isDone = isDone;
-        }
-
-        /**
-         * Converts Task into a string.
-         * @return Task in string form
-         */
-        @Override
-        public String toString() {
-            String taskText = "    [" + (this.isDone ? 'X' : ' ') + "] " + taskName;
-            return taskText;
-        }
-    }
-
-    private static class ToDo extends Task {
-        /**
-         * Constructor for a ToDo Task.
-         * @param toDoName ToDo Task name
-         */
-        public ToDo(String toDoName) {
-            super(toDoName);
-        }
-
-        /**
-         * Converts ToDo Task into a string.
-         * @return ToDo Task in string form
-         */
-        @Override
-        public String toString() {
-            String toDoText = "[T] [" + (this.isDone ? 'X' : ' ') + "] " + taskName;
-            return toDoText;
-        }
-    }
-
-    private static class Deadline extends Task {
-        String deadline;
-
-        /**
-         * Constructs a Deadline Task.
-         * @param deadlineName Deadline Task name
-         * @param deadline actual deadline
-         */
-        public Deadline(String deadlineName, String deadline) {
-            super(deadlineName);
-            this.deadline = deadline;
-        }
-
-        /**
-         * Converts Deadline Task into string.
-         * @return Deadline Task in string form
-         */
-        @Override
-        public String toString() {
-            String toDoText = "[D] [" + (this.isDone ? 'X' : ' ') + "] " + taskName + " (" + this.deadline + ")";
-            return toDoText;
-        }
-    }
-
-    private static class Event extends Task {
-        private String duration;
-
-        /**
-         * Constructs an Event Task.
-         * @param eventName Event Task name
-         * @param duration duration of Event Task
-         */
-        public Event(String eventName, String duration) {
-            super(eventName);
-            this.duration = duration;
-        }
-
-        /**
-         * Converts Event Task into string.
-         * @return Event Task in string form
-         */
-        @Override
-        public String toString() {
-            String toDoText = "[E] [" + (this.isDone ? 'X' : ' ') + "] " + taskName + " (" + this.duration + ")";
-            return toDoText;
         }
     }
 }

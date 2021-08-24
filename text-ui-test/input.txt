@@ -1,14 +1,9 @@
-abc
-def
 todo 234
-list
-done 2
 event dinner /by now
 done 3
 deadline supper /by 10pm
 event the rapture /very soon
 event global warming /yesterday, all my troubles seemed so far away
-glug glug glug goes the hippocampus
 done 4
 delete 1
 delete 1
