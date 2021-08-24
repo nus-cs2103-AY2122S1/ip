@@ -9,24 +9,24 @@ public class Parser {
             checkValiditiy(input, taskList);
             String[] splittedInput = input.split(" ");
             switch (splittedInput[0]) {
-                case "list":
-                    return new ListCommand();
-                case "done":
-                    return new DoneCommand(Integer.valueOf(splittedInput[1]));
-                case "delete":
-                    return new DeleteCommand(Integer.valueOf(splittedInput[1]));
-                case "bye":
-                    return new ByeCommand();
-                case "todo":
-                    return Parser.validTodoHandler(input);
-                case "deadline":
-                    return Parser.validDeadlineHandler(input);
-                case "event":
-                    return Parser.validEventHandler(input);
-                default:
-                    // This is for any other erroneous input we did not catch from checkValidity
-                    DukeException e = new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    return new ExceptionalCommand(e);
+            case "list":
+                return new ListCommand();
+            case "done":
+                return new DoneCommand(Integer.valueOf(splittedInput[1]));
+            case "delete":
+                return new DeleteCommand(Integer.valueOf(splittedInput[1]));
+            case "bye":
+                return new ByeCommand();
+            case "todo":
+                return Parser.validTodoHandler(input);
+            case "deadline":
+                return Parser.validDeadlineHandler(input);
+            case "event":
+                return Parser.validEventHandler(input);
+            default:
+                // This is for any other erroneous input we did not catch from checkValidity
+                DukeException e = new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                return new ExceptionalCommand(e);
             }
         } catch (DukeException e) {
             return new ExceptionalCommand(e);
@@ -40,21 +40,21 @@ public class Parser {
             throw new DukeException("☹ OOPS!!! The input cannot be empty.");
         }
         switch (splittedInput[0]) {
-            case "todo":
-                checkValidityTodo(input);
-                break;
-            case "deadline":
-                checkValidityDeadline(input);
-                break;
-            case "event":
-                checkValidityEvent(input);
-                break;
-            case "done":
-                checkValidityDone(input, taskList);
-                break;
-            case "delete":
-                checkValidityDelete(input, taskList);
-                break;
+        case "todo":
+            checkValidityTodo(input);
+            break;
+        case "deadline":
+            checkValidityDeadline(input);
+            break;
+        case "event":
+            checkValidityEvent(input);
+            break;
+        case "done":
+            checkValidityDone(input, taskList);
+            break;
+        case "delete":
+            checkValidityDelete(input, taskList);
+            break;
         }
         return true;
     }
