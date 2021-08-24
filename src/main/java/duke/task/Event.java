@@ -43,4 +43,8 @@ public class Event extends Task {
     public String toSavedFormat() {
         return super.description + "/~/" + this.at;
     }
+
+    public boolean isSameDate(LocalDate date) {
+        return at.equals(date);
+    }
 }

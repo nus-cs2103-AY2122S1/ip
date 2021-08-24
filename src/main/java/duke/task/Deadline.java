@@ -44,4 +44,8 @@ public class Deadline extends Task {
     public String toSavedFormat() {
         return super.description + "/~/" + this.by;
     }
+
+    public boolean isSameDate(LocalDate date) {
+        return by.equals(date);
+    }
 }
