@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Command to mark a task as done.
+ *
+ * @author felix-ong
+ */
 public class DoneCommand extends Command {
     private String index;
 

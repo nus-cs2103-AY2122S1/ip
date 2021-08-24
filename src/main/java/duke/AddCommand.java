@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Command to add a Task.
+ *
+ * @author felix-ong
+ */
 public class AddCommand extends Command {
     private Task task;
 
