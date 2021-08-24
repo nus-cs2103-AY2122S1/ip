@@ -56,7 +56,7 @@ public class Duke implements ChatbotUI {
     public void loadData() {
         ArrayList<String> lines = DataHandler.readLinesFromFile(this.DATA_STORAGE_PATH);
         for (int i = 0; i < lines.size(); i++) {
-            Task task = Task.parseTaskFromText(lines.get(i));
+            Task task = Task.parseTaskFromSavedText(lines.get(i));
             this.taskList.addTask(task);
         }
         ChatbotUI.printMessage("Loaded tasks from save file!" + this.taskList.countTasks());

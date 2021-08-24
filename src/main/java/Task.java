@@ -43,14 +43,14 @@ public class Task {
      * @param timeDue a String representing when the task is due, if it is due.
      * @return
      */
-    public static Task createTaskWithDetail(TypeIndicators taskType, boolean isDone, String title, String timeDue) {
+    public static Task createTaskWithDetail(TypeIndicators taskType, boolean isDone, String title, LocalDate timeDue) {
         switch (taskType) {
             case TODO:
                 return new Todo(title, isDone);
             case DEADLINE:
-                return new Deadline(title, LocalDate.parse(timeDue), isDone);
+                return new Deadline(title, timeDue, isDone);
             case EVENT:
-                return new Event(title, LocalDate.parse(timeDue), isDone);
+                return new Event(title, timeDue, isDone);
         }
         // If the type cannot be parsed, it defaults to TO-DO.
         return new Todo(title, isDone);
@@ -62,11 +62,11 @@ public class Task {
      * @param text The text to be parsed into a Task.
      * @return a Task based on the parsed text
      */
-    public static Task parseTaskFromText(String text) {
+    public static Task parseTaskFromSavedText(String text) {
         char typeIndicator = text.charAt(0);
         char doneIndicator = text.charAt(1);
         boolean isDone = doneIndicator == '1';
-        String timeDue = text.substring(2, text.indexOf('|'));
+        LocalDate timeDue = LocalDate.parse(text.substring(2, text.indexOf('|')));
         String title = text.substring(text.indexOf('|') + 1);
         return createTaskWithDetail(charToTypeEnum(typeIndicator), isDone, title, timeDue);
     }
