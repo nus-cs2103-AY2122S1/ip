@@ -20,6 +20,20 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.at);
+        return String.format("[%s]%s (at: %s)", TaskType.EVENT.toString(), super.toString(), this.at);
+    }
+
+    /**
+     * Converts the Event into a String to be stored in Storage.
+     * @return String to be stored
+     */
+    @Override
+    public String toStorageString() {
+        String taskString = super.toStorageString();
+        return TaskType.EVENT.toString()
+                + Task.STORAGE_STRING_DELIMITER
+                + taskString
+                + Task.STORAGE_STRING_DELIMITER
+                + this.at;
     }
 }

@@ -13,7 +13,8 @@ public class Duke {
                               + "| |_| | |_| |   <  __/\n"
                               + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final TaskCollection tasks = new TaskCollection();
+    public static String TASK_COLLECTION_STORAGE_PATH = "./data/duke.txt";
+    private static final TaskCollection tasks = new TaskCollection(TASK_COLLECTION_STORAGE_PATH);
     private static final Queue<Action> actions = new LinkedList<>();
 
     public static void main(String[] args) throws IOException {
@@ -29,6 +30,7 @@ public class Duke {
 
                 Action action = Duke.actions.remove();
                 Response response = action.execute();
+                Duke.tasks.saveTasks();
                 Duke.printResponse(response);
 
                 if (action instanceof GoodbyeUser) {

@@ -16,6 +16,18 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[%s]%s", TaskType.TODO.toString(), super.toString());
+    }
+
+    /**
+     * Converts the Event into a String to be stored in Storage.
+     * @return String to be stored
+     */
+    @Override
+    public String toStorageString() {
+        String taskString = super.toStorageString();
+        return TaskType.TODO.toString()
+                + Task.STORAGE_STRING_DELIMITER
+                + taskString;
     }
 }
