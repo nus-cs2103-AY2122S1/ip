@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TaskList {
@@ -66,5 +67,22 @@ public class TaskList {
         } else {
             return this.taskList.get(taskNum - 1);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        TaskList taskList1 = (TaskList) o;
+        return taskList.equals(taskList1.taskList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(taskList);
     }
 }

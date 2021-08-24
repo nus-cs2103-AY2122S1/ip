@@ -3,6 +3,7 @@ package duke.task;
 import duke.main.DukeException;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Event extends Task {
 
@@ -47,4 +48,23 @@ public class Event extends Task {
         return "E | " + super.completed + " | " + super.description + " | " + this.at;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        Event event = (Event) o;
+        return at.equals(event.at);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), at);
+    }
 }

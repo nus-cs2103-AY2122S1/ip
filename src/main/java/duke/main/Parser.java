@@ -56,4 +56,8 @@ public class Parser {
         storage.updateStorage(taskList);
         return true;
     }
+
+    private void onDelete() {
+
+    }
 }

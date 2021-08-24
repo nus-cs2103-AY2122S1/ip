@@ -14,7 +14,6 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = Path.of(filePath);
-        load();
     }
 
     public TaskList load() {

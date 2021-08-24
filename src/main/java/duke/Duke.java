@@ -1,5 +1,9 @@
-package duke.main;
+package duke;
 
+import duke.main.DukeException;
+import duke.main.Parser;
+import duke.main.Storage;
+import duke.main.Ui;
 import duke.task.TaskList;
 
 import java.io.File;
