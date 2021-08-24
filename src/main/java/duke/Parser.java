@@ -51,6 +51,9 @@ public class Parser {
         case "delete":
             handleDelete();
             break;
+        case "find":
+            handleFind();
+            break;
         default:
             throw new InvalidCommandException("Invalid command");
         }
@@ -125,5 +128,12 @@ public class Parser {
         UI.delete(deleteTaskNumber);
         UI.numberOfTasks(tasklist.size());
         tasklist.list();
+    }
+
+    public static void handleFind() throws DukeException {
+        if (commandArr.length < 2) {
+            throw new MissingTaskNameException("Missing task name");
+        }
+        tasklist.find(commandArr[1]);
     }
 }
