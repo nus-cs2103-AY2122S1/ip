@@ -29,21 +29,21 @@ public class Storage {
             File tasksFile = new File("src/data/duke.txt");
             Scanner s = new Scanner(tasksFile);
             while (s.hasNext()) {
-                String[] parseFromFile = p.parseFromFile(s.nextLine());
-                switch (parseFromFile[0]) {
+                String[] parsedFromFile = p.parseFromFile(s.nextLine());
+                switch (parsedFromFile[0]) {
                 case "todo":
-                    tasks.addTask(new Todo(parseFromFile));
+                    tasks.addTask(new Todo(parsedFromFile));
                     break;
                 case "deadline":
-                    tasks.addTask(new Deadline(parseFromFile));
+                    tasks.addTask(new Deadline(parsedFromFile));
                     break;
                 case "event":
-                    tasks.addTask(new Event(parseFromFile));
+                    tasks.addTask(new Event(parsedFromFile));
                     break;
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return tasks;
     }
@@ -57,7 +57,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }

@@ -31,7 +31,7 @@ public class Parser {
         if (separator == 0) {
             result[1] = remainder;
         } else {
-            result[1] = remainder.substring(0, separator);
+            result[1] = remainder.substring(0, separator - 1);
             result[2] = remainder.substring(separator + 4);
             System.out.println(result[2]);
         }

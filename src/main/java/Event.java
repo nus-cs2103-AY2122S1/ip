@@ -18,7 +18,7 @@ public class Event extends Task{
      */
     public Event(String[] desc) {
 
-        super(desc[1], false);
+        super(desc[1], Boolean.valueOf(desc[3]));
         this.date = LocalDate.parse(desc[2]);
 
     }

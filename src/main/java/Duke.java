@@ -12,6 +12,8 @@ public class Duke {
      */
     private TaskList tl;
     private Storage storage;
+    private Ui ui;
+    private Parser parser;
 
     /**
      * Constructor for a Duke.
@@ -19,39 +21,15 @@ public class Duke {
     public Duke() {
         this.storage = new Storage();
         this.tl = this.storage.load();
-    }
-
-    /**
-     * Greetings from Duke.
-     */
-    private void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
-
-    /**
-     * Echoes the given command.
-     * @param t User's command.
-     */
-    private void echo(String t) {
-        System.out.println("-----------------------------------------\n" +
-                String.format("%s\n", t) +
-                "-----------------------------------------\n");
+        this.ui = new Ui();
+        this.parser = new Parser();
     }
 
     /**
      * Exit the Duke program.
      */
     private void exit() {
-        String exitMessage =
-                "-----------------------------------------\n" +
-                "Bye. Hope to see you again soon!\n" +
-                "-----------------------------------------\n";
-        System.out.println(exitMessage);
+        this.ui.showExitMessage();
         System.exit(0);
     }
 
@@ -87,11 +65,7 @@ public class Duke {
         }
         this.tl.addTask(newTask);
         this.storage.write(this.tl);
-        System.out.println("-----------------------------------------\n" +
-                "Got it. I've added this task:\n" +
-                newTask.toString() +
-                String.format("Now you have %s tasks in the list.\n", this.tl.getLength()) +
-                "-----------------------------------------\n");
+        this.ui.showAddMessage(newTask, this.tl);
     }
 
     /**
@@ -110,10 +84,7 @@ public class Duke {
     private void markDone(int itemNum){
         this.tl.markDone(itemNum);
         this.storage.write(this.tl);
-        System.out.println("-----------------------------------------\n" +
-                "Nice! I've marked this task as done:\n" +
-                this.getTaskByIndex(itemNum - 1).toString() +
-                "-----------------------------------------\n");
+        this.ui.showMarkDoneMessage(this.getTaskByIndex(itemNum - 1));
     }
 
     /**
@@ -130,11 +101,7 @@ public class Duke {
             String taskName = toBeDeleted.toString();
             this.tl.deleteTask(itemNum - 1);
             this.storage.write(this.tl);
-            System.out.println("-----------------------------------------\n" +
-                    "Noted. I've removed this task:\n" +
-                    taskName +
-                    String.format("Now you have %s tasks in the list.\n", this.tl.getLength()) +
-                    "-----------------------------------------\n");
+            this.ui.showDeleteMessage(toBeDeleted, this.tl);
         }
     }
 
@@ -142,14 +109,13 @@ public class Duke {
      * Start Duke to allow for inputs.
      */
     private void run() {
-        this.greet();
+        this.ui.showGreetMessage();
         this.storage.load();
-        Scanner sc = new Scanner(System.in);
-        Parser p = new Parser();
-        String t;
-        while (sc.hasNextLine()) {
-            t = sc.nextLine();
-            String[] items = p.parse(t);
+        boolean isExit = false;
+        String userInput;
+        while (true) {
+            userInput = this.ui.getUserInput();
+            String[] items = this.parser.parse(userInput);
 
             try {
                 switch (items[0]) {
@@ -157,7 +123,7 @@ public class Duke {
                     this.exit();
                     break;
                 case "list":
-                    System.out.println(this.tl.toString());
+                    this.ui.showTaskList(this.tl);
                     break;
                 case "done":
                     this.markDone(Integer.parseInt(items[1]));
