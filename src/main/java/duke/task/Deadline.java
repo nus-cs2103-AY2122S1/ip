@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,6 +15,10 @@ public class Deadline extends Task {
     public Deadline(String desc, String dateDesc) {
         super(desc);
         parseDate(dateDesc);
+    }
+    public Deadline(String isDone, String desc, String date) {
+        super(isDone,desc);
+        parseDate(date);
     }
 
     private void parseDate(String dateDesc) {
@@ -33,11 +39,6 @@ public class Deadline extends Task {
         }
     }
 
-    public Deadline(String isDone, String desc, String date) {
-        super(isDone,desc);
-        this.date= date;
-    }
-
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + this.dateDesc + ")";
@@ -45,6 +46,6 @@ public class Deadline extends Task {
 
     @Override
     public String saveString() {
-        return "D|" + super.saveString() + "|" + date;
+        return "D|" + super.saveString() + "|" + this.dateDesc;
     }
 }
