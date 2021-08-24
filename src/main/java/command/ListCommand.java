@@ -17,7 +17,11 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showTasks(tasks);
+        if (tasks.getSize() == 0) {
+            ui.showMessage("You have no tasks saved!");
+        } else {
+            ui.showTasks(tasks);
+        }
     }
 
     @Override
