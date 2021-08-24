@@ -6,6 +6,7 @@ import java.time.LocalDate;
 public abstract class Task {
     private String value = null;
     private boolean isDone = false;
+    // takes in LocalDate
     private LocalDate time = null;
     public Task(String value){
         this.value = value;
