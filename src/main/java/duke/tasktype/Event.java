@@ -2,6 +2,7 @@ package duke.tasktype;
 
 import java.util.Scanner;
 
+import duke.Ui;
 import duke.exception.WrongCommandFormatException;
 
 /**
@@ -11,7 +12,7 @@ import duke.exception.WrongCommandFormatException;
  * @author Houten Teo
  * @version CS2103T week 2
  */
-public class Event extends Task {
+public class Event implements Task {
 
     private String command;
     private String description = " ";
@@ -26,7 +27,6 @@ public class Event extends Task {
      *                                     command with the wrong format.
      */
     public Event(String description, boolean isDone) throws WrongCommandFormatException {
-        super(description, isDone);
         this.command = description;
         Scanner s = new Scanner(description);
         while (s.hasNext()) {
@@ -57,6 +57,10 @@ public class Event extends Task {
         this.isDone = isDone;
     }
 
+    public String getTimeframe() {
+        return this.timeframe;
+    }
+
     /**
      * Overridden method to get the specific type icon.
      * @return The String representation of the icon.
@@ -77,6 +81,10 @@ public class Event extends Task {
         } else {
             return "[ ]";
         }
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     /**
@@ -106,14 +114,9 @@ public class Event extends Task {
     @Override
     public void markComplete() {
         if (this.isDone) {
-            System.out.println("`" + this.description.substring(1) + "`" + " is already completed.");
+            Ui.taskAlrCompleted(this);
         } else {
-            System.out.println("Completed: "
-                    + this.description
-                    + " (by:"
-                    + this.timeframe + ")"
-            );
-            System.out.println("WEW that's another task completed");
+            Ui.markCompleteEvent(this);
             this.isDone = true;
         }
     }

@@ -10,7 +10,7 @@ import duke.exception.WrongCommandFormatException;
  * @author Houten Teo
  * @version CS2103T week 2
  */
-public class Todo extends Task {
+public class Todo implements Task {
 
     private String description;
     private boolean isDone;
@@ -23,7 +23,6 @@ public class Todo extends Task {
      *                                     command with the wrong format.
      */
     public Todo(String description, boolean isDone) throws WrongCommandFormatException {
-        super(description, isDone);
         if (description.equals("")) {
             throw new WrongCommandFormatException(
                     "No task specified. Please try again"
@@ -56,6 +55,11 @@ public class Todo extends Task {
         } else {
             return "[ ]";
         }
+    }
+
+    @Override
+    public String getDescription() {
+        return this.description;
     }
 
     /**

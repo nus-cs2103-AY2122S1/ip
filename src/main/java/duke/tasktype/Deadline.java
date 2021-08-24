@@ -15,7 +15,7 @@ import duke.exception.WrongCommandFormatException;
  * @author Houten Teo
  * @version CS2103T week 2
  */
-public class Deadline extends Task {
+public class Deadline implements Task {
 
     private String command;
     private String description = " ";
@@ -31,7 +31,6 @@ public class Deadline extends Task {
      *                                      command with the wrong format.
      */
     public Deadline(String description, boolean isDone) throws WrongCommandFormatException {
-        super(description, isDone);
         Scanner s = new Scanner(description);
         this.command = description;
         while (s.hasNext()) {
@@ -105,6 +104,10 @@ public class Deadline extends Task {
         }
     }
 
+    @Override
+    public String getDescription() {
+        return this.description;
+    }
     /**
      * Overridden toString method
      * @return The String representation of the deadline object
