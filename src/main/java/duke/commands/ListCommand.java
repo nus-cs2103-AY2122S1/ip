@@ -22,7 +22,7 @@ public class ListCommand extends Command {
     public void execute(String des, TaskList tList) {
         ArrayList<Task> tasks = tList.getTaskList();
         int count = 1;
-        System.out.println("Here are the duke.tasks in your list:");
+        System.out.println("Here are the tasks in your list:");
         for (Task t : tasks) {
             System.out.print(count + ". ");
             if (t instanceof Deadline) {

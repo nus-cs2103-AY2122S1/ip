@@ -5,6 +5,7 @@
 
 # data files
 /data/
+/META-INF/
 
 # Gradle build files
 /.gradle/
