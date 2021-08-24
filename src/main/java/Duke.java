@@ -1,28 +1,41 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
-        greet();
+    public TaskList taskList;
+    public UserInterface userInterface;
+    public Storage storage;
+    public Parser parser;
+
+    public Duke(String filePath) {
+        userInterface = new UserInterface();
+        storage = new Storage(filePath);
+
+        try {
+            taskList = new TaskList(storage.load());
+            userInterface = new UserInterface(taskList);
+            parser = new Parser(taskList, userInterface, storage);
+        } catch (IOException e) {
+            taskList = new TaskList();
+            userInterface.showLoadingError();
+            userInterface = new UserInterface(taskList);
+            parser = new Parser(taskList, userInterface, storage);
+        }
+    }
+
+    public void run() {
+        userInterface.greet();
+
         Scanner sc = new Scanner(System.in);
-        ToDoList lst = new ToDoList();
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine().trim();
             try {
-                respond(input, lst);
-            } catch (InvalidCommandException e) {
-                System.out.println(e.getMessage());
-            } catch (MissingToDoDescriptionException e) {
-                System.out.println(e.getMessage());
-            } catch (MissingDeadlineDescriptionException e) {
-                System.out.println(e.getMessage());
-            } catch (MissingEventDescriptionException e) {
+                parser.parse(input);
+            } catch (InvalidCommandException | MissingToDoDescriptionException |
+                    MissingDeadlineDescriptionException | MissingEventDescriptionException e) {
                 System.out.println(e.getMessage());
             }
 
@@ -30,36 +43,8 @@ public class Duke {
         }
     }
 
-    public static void greet() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-    }
-
-    public static void respond(String input, ToDoList lst) throws InvalidCommandException,
-            MissingToDoDescriptionException, MissingDeadlineDescriptionException,
-            MissingEventDescriptionException {
-        if (input.equals("bye")) {
-            System.out.println("Bye. Hope to see you again soon!");
-        } else if (input.equals("list")){
-            lst.showList();
-        } else if (input.contains("done")) {
-            int index = Integer.parseInt(input.split(" ")[1]) - 1;
-            lst.markAsDone(index);
-        } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")){
-            if (input.contains("todo") && input.length() == 4) {
-                throw new MissingToDoDescriptionException();
-            } else if (input.contains("deadline") && input.length() == 8) {
-                throw new MissingDeadlineDescriptionException();
-            } else if (input.contains("event") && input.length() == 5) {
-                throw new MissingEventDescriptionException();
-            } else {
-                lst.addItem(input);
-            }
-        } else if (input.contains("delete")) {
-            int index = Integer.parseInt(input.split(" " )[1]) - 1;
-            lst.deleteItem(index);
-        } else {
-            throw new InvalidCommandException();
-        }
+    public static void main(String[] args) {
+        String s = System.getProperty("user.dir");
+        new Duke(s+ "/data/duke.txt").run();
     }
 }

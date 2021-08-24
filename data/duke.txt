@@ -1,0 +1,4 @@
+E|1|project meeting|Mon 2-8pm
+D|1|return book|Saturday
+T|0|eat breakfast
+E|1|project work|Mon 2-8pm
