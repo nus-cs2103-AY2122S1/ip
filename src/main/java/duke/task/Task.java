@@ -23,7 +23,7 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public void MarkAsDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
