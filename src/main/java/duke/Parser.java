@@ -10,12 +10,17 @@ public class Parser {
             new FormatsCommand(""),
             new DoneCommand(""),
             new DeleteCommand(""),
+            new DeadlineCommand(""),
+            new EventCommand("")
     };
 
     public Command parse(String input) {
         for(Command c : commandList) {
-            if(input.equals(c.startsWith())) {
-                return c.of(input.substring(c.startsWith().length()));
+            if(input.startsWith(c.startsWith())) {
+                if (input.equals(c.startsWith())) {
+                    return c.of("");
+                }
+                return c.of(input.substring(c.startsWith().length()+1));
             }
         }
         return null;
