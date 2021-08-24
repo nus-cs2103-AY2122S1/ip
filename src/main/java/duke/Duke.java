@@ -11,18 +11,29 @@ import duke.tasks.Task;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.io.IOException;
 
 public class Duke {
     private final TaskList taskList;
     private final Storage storage;
 
+    /**
+     * Class Constructor.
+     * 
+     * @param filePath path where the txt file, data base for this application, is
+     *                 being stored.
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.taskList = new TaskList();
     }
 
-    public void start() throws FileNotFoundException, IOException {
+    /**
+     * Starts the application, allows the application to start taking in inputs from
+     * the users.
+     * 
+     * @throws FileNotFoundException when file is not found in the given location.
+     */
+    public void start() throws FileNotFoundException {
         String userInput = "";
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> savedTasks = storage.loadData();
@@ -52,55 +63,3 @@ public class Duke {
 
     }
 }
-
-// action = actionDescription[0];
-// switch (action) {
-// case "bye":
-// Ui.printBye();
-// sc.close();
-// return;
-
-// case "list":
-// Ui.printList(taskList.getTaskList());
-// break;
-
-// case "done":
-// taskList.doneItem(userInput.split(" ")[1]);
-// storage.updateDone(userInput.split(" ")[1]);
-// break;
-
-// case "todo":
-// descriptions = actionDescription[1];
-// ToDos todos = new ToDos(descriptions);
-// command.execute(taskList, storage, todos);
-// break;
-
-// case "deadline":
-// descriptions = actionDescription[1];
-// onlyDescription = descriptions.split(" /")[0];
-// dateTime = descriptions.split(" /by ")[1];
-// dateTime = dateTimeFormatter(dateTime);
-// Deadline deadline = new Deadline(onlyDescription, dateTime);
-// command.execute(taskList, storage, deadline);
-// break;
-
-// case "event":
-// descriptions = actionDescription[1];
-// onlyDescription = descriptions.split(" /")[0];
-// dateTime = descriptions.split(" /at ")[1];
-// Events event = new Events(onlyDescription, dateTime);
-// command.execute(taskList, storage, event);
-// break;
-
-// case "delete":
-// Command deleteCommand = new DeleteCommand(userInput.split(" ")[1]);
-// deleteCommand.execute(taskList, storage);
-// break;
-
-// case "":
-// break;
-
-// default:
-// Ui.printMessage(Ui.ERROR_MSG_UNKOWN_MSG);
-// break;
-// }

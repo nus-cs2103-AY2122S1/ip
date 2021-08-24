@@ -9,10 +9,22 @@ import duke.tasks.Task;
 public class AddCommand extends Command {
     private final Task task;
 
+    /**
+     * Primary Constructor.
+     * 
+     * @param task is the task that will be added into the list of tasks and the
+     *             database.
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
 
+    /**
+     * Helps to add the task into the list of tasks when this function is executed.
+     * 
+     * @param taskList the list of Tasks which is being stored.
+     * @param storage  the database where the Tasks are being saved for progression.
+     */
     @Override
     public void execute(TaskList taskList, Storage storage) {
         String inputToStorage;
@@ -30,6 +42,11 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the user wants to exit from the application.
+     * 
+     * @return boolean whether the user wants to exit from the application.
+     */
     @Override
     public boolean getIsExit() {
         return false;
