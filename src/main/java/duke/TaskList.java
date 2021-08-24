@@ -2,9 +2,12 @@ package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -136,5 +139,15 @@ public class TaskList {
                 storage.appendToDataFile("\n" + taskString);
             }
         }
+    }
+
+    public void find(String taskName) {
+        List<Task> matchingTasks = taskArrayList.stream()
+                .filter(task -> task.getName().contains(taskName))
+                .collect(Collectors.toList());
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            System.out.println(i+1 + "." + matchingTasks.get(i).toString());
+        }
+        System.out.println();
     }
 }
