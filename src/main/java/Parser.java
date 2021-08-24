@@ -7,12 +7,15 @@ public class Parser {
     private Scanner scan;
     private Storage storage;
     private TaskList taskList;
+    private Ui ui;
     private String arr[];
     private String input = "";
-    Parser(Scanner scan, Storage storage, TaskList taskList) {
+
+    Parser(Scanner scan, Storage storage, TaskList taskList, Ui ui) {
         this.scan = scan;
         this.storage = storage;
         this.taskList = taskList;
+        this.ui = ui;
     }
 
     /**
@@ -34,11 +37,10 @@ public class Parser {
         storage.readFile(taskList);
         do {
             try {
-
                 input = scan.nextLine();
                 arr = input.split(" ");
                 if (input.equals("bye")) {
-                    System.out.println("Good Bye. Have a nice day!");
+                    ui.printBye();
                 } else if (arr[0].equals("done")) {
                     if (arr.length == 1) {
                         throw new InvalidCommandException("Please specify a number");
@@ -50,9 +52,9 @@ public class Parser {
                             || Integer.parseInt(arr[1]) <= 0)) {
                         throw new InvalidValueException("Enter a valid number!");
                     } else {
-                        System.out.println("Nice! I've marked this task as done: ");
+                        ui.printDone();
                         taskList.markAsDone(parseInt(arr[1]) - 1);
-                        System.out.println(taskList.getTask(parseInt(arr[1]) - 1).toString());
+                        ui.printCurrentTask(taskList, parseInt(arr[1]) - 1);
                     }
                 } else if (arr[0].equals("delete")) {
                     if (arr.length == 1) {
@@ -65,8 +67,8 @@ public class Parser {
                             || Integer.parseInt(arr[1]) <= 0)) {
                         throw new InvalidValueException("Enter a valid number!");
                     } else {
-                        System.out.println("Noted. I've removed this task: ");
-                        System.out.println(taskList.getTask(parseInt(arr[1]) - 1).toString());
+                        ui.printRemove();
+                        ui.printCurrentTask(taskList, parseInt(arr[1]) - 1);
                         taskList.removeTask(parseInt(arr[1]) - 1);
                     }
                 } else if (arr[0].equals("todo")) {
@@ -74,21 +76,21 @@ public class Parser {
                         throw new EmptyDescriptionException("Missing description / date");
                     }
                     taskList.addTask(new Todo(TaskList.getDescription(arr)));
-                    taskList.printAddTask();
+                    ui.printAddTask(taskList);
                 } else if (arr[0].equals("deadline")) {
                     if (arr.length < 2) {
                         throw new EmptyDescriptionException("Missing description / date");
                     }
                     taskList.addTask(new Deadline(TaskList.getDescription(arr), TaskList.getDeadline(arr)));
-                    taskList.printAddTask();
+                    ui.printAddTask(taskList);
                 } else if (arr[0].equals("event")) {
                     if (arr.length < 2) {
                         throw new EmptyDescriptionException("Missing description / date");
                     }
                     taskList.addTask(new Event(TaskList.getDescription(arr), TaskList.getDeadline(arr)));
-                    taskList.printAddTask();
+                    ui.printAddTask(taskList);
                 } else if (input.equals("list")) {
-                    taskList.displayList();
+                    ui.displayList(taskList);
                 } else {
                     throw new InvalidCommandException("Command not Found");
                 }
