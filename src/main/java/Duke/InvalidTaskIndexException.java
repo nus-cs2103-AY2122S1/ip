@@ -1,6 +1,8 @@
-public class InvalidFormatException extends Exception{
+package Duke;
 
-    public InvalidFormatException(String str) {
+public class InvalidTaskIndexException extends Exception {
+
+    public InvalidTaskIndexException(String str) {
         // calling the constructor of parent Exception
         super(str);
     }

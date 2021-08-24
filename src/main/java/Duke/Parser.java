@@ -1,6 +1,7 @@
+package Duke;
+
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Parser {
     private TaskList tasks;
@@ -11,7 +12,7 @@ public class Parser {
         this.storage = storage;
     }
 
-//    public ArrayList<Task> getTasks() {
+//    public ArrayList<Duke.Task> getTasks() {
 //        return this.tasks.inArrayList();
 //    }
 //
@@ -32,7 +33,7 @@ public class Parser {
             try {
                 int pos = Integer.parseInt(input.substring(5)) - 1;
                 if (pos < 0) {
-                    throw new InvalidTaskIndexException("Task list index starts from 1!");
+                    throw new InvalidTaskIndexException("Duke.Task list index starts from 1!");
                 }
 
                 else if (pos < tasks.arrSize()) {
@@ -73,7 +74,7 @@ public class Parser {
         }
         else if (input.startsWith("deadline ") || input.equals("deadline")) {
             if (!input.contains(" /by ")) {
-                throw new InvalidFormatException("OOPS!! To add a Deadline, type -> deadline <Description> /by <deadline>!");
+                throw new InvalidFormatException("OOPS!! To add a Duke.Deadline, type -> deadline <Description> /by <deadline>!");
             }
             if (input.length() > 12 && input.contains("/by")) {
                 String[] spl = input.substring(9).split("/");
@@ -101,7 +102,7 @@ public class Parser {
         }
         else if (input.startsWith("event ") || input.equals("event") ) {
             if (!input.contains(" /at ")) {
-                throw new InvalidTaskIndexException("OOPS!! To add an Event, type -> event <Description> /at <details>!");
+                throw new InvalidTaskIndexException("OOPS!! To add an Duke.Event, type -> event <Description> /at <details>!");
             }
             if (input.length() > 9 && input.contains("/at")) {
                 String[] spl = input.substring(6).split("/");
@@ -134,7 +135,7 @@ public class Parser {
                 int pos = Integer.parseInt(input.substring(7)) - 1;
 
                 if (pos < 0) {
-                    throw new InvalidTaskIndexException("Task list index starts from 1!");
+                    throw new InvalidTaskIndexException("Duke.Task list index starts from 1!");
                 } else if (pos < tasks.arrSize()) {
                     String temp = tasks.inArrayList().get(pos).toString();
 
