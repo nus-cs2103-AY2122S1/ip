@@ -3,11 +3,10 @@ package ui;
 import java.util.List;
 
 /**
- * Default UI to interact with user.
- * Printed using the following format :
- * ---------------
+ * Default implementation of UI which prints items using the following format:
+ * ------------------
  * something
- * ---------------
+ * ------------------
  */
 public class UiImpl implements IUi {
 	/**
