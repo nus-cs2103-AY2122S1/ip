@@ -5,6 +5,11 @@ import java.util.Scanner;
 public class Duke {
 
     private List<Task> taskList = new ArrayList<>();
+    private FileController fileController;
+
+    public Duke(String filePath) {
+        this.fileController = new FileController(filePath);
+    }
 
     /**
      * Display formatted message.
@@ -97,6 +102,7 @@ public class Duke {
                     // add task to list
                     Todo todo = new Todo(desc);
                     this.taskList.add(todo);
+                    this.fileController.writeToFile(this.taskList);
                     displaySuccessMessage(this.taskList, todo);
                 } else {
                     display("OOPS! The description cannot be empty. Please try again.");
@@ -109,6 +115,7 @@ public class Duke {
                     String timeDeadline = this.getTime(userInput,"/by ");
                     Deadline dl = new Deadline(descDeadline, timeDeadline);
                     this.taskList.add(dl);
+                    this.fileController.writeToFile(this.taskList);
                     displaySuccessMessage(this.taskList, dl);
                 } else {
                     display("OOPS! The description cannot be empty. Please try again.");
@@ -122,6 +129,7 @@ public class Duke {
                    // add task to list
                    Event event = new Event(descEvent, timeEvent);
                    this.taskList.add(event);
+                   this.fileController.writeToFile(this.taskList);
                    displaySuccessMessage(this.taskList, event);
                } else {
                    display("OOPS! The description cannot be empty. Please try again.");
@@ -136,6 +144,7 @@ public class Duke {
                         Task task = this.taskList.get(taskNumber - 1);
                         // mark done as done
                         task.markAsDone();
+                        this.fileController.writeToFile(this.taskList);
                         display("Nice! This task is marked as done: \n" + "      " + task);
                     } else {
                         display("This task does not exist! Please try again.");
@@ -151,6 +160,7 @@ public class Duke {
                    if (isTaskExists(taskNumberDel)) {
                        Task taskDel = this.taskList.get(taskNumberDel - 1);
                        this.taskList.remove(taskNumberDel - 1);
+                       this.fileController.writeToFile(this.taskList);
                        display("Gotchu mate. I've removed this task: \n" + "      " + taskDel + "\n    Now you have "
                                + this.taskList.size() + (this.taskList.size() <= 1 ? " task" : " tasks") + " in the list.");
                    } else {
@@ -173,6 +183,9 @@ public class Duke {
 
     public void start() {
 
+        // create file if it does not exist
+        this.fileController.createFile();
+
         this.greet();
 
         // initialize Scanner object
@@ -191,7 +204,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
+        Duke duke = new Duke("data/duke.txt");
         duke.start();
     }
 
