@@ -2,7 +2,7 @@ package lania.exception;
 
 public class LaniaException extends IllegalArgumentException {
 
-    LaniaException(String message) {
+    public LaniaException(String message) {
         super(message);
     }
 
