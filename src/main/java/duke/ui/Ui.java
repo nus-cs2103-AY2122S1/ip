@@ -58,6 +58,20 @@ public class Ui {
     }
 
     /**
+     * Displays the matching tasks.
+     * 
+     * @param tasks The matching tasks to display.
+     */
+    public void displayFoundTasks(List<Task> tasks) {
+        System.out.println("---------------------------------");
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.printf("%d. %s%n", i + 1, tasks.get(i));
+        }
+    }
+    
+
+    /**
      * Displays a task marked as completed.
      * 
      * @param task The task to be displayed as completed.  

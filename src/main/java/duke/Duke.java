@@ -60,6 +60,8 @@ public class Duke {
                     ui.displayRemovedTask(taskList.remove(serialNo), taskList.getTaskCount());
                 } else if (command.type == CommandType.LIST) {
                     ui.displayTasks(taskList.getTasks());
+                } else if (command.type == CommandType.FIND) {
+                    ui.displayFoundTasks(taskList.findMatchingTasks((String) command.payload));
                 }
             } catch (DukeException e) {
                 ui.displayErrorMessage(e.getMessage());

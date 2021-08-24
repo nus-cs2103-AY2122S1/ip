@@ -3,6 +3,7 @@ package duke.storage;
 import duke.task.Task;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a Task list that can be added to and removed from.
@@ -59,6 +60,16 @@ public class TaskList {
     public List<Task> getTasks() {
         return tasks;
     }
+
+    /**
+     * Finds the list of tasks matching a query.
+     * @param query The query to match against.
+     * @return The list of tasks matching the query.
+     */
+    public List<Task> findMatchingTasks(String query) {
+        return tasks.stream().filter(task -> task.getDescription().contains(query)).collect(Collectors.toList());
+    }
+    
 
     /**
      * Returns the number of tasks in the task list.
