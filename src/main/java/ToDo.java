@@ -7,6 +7,16 @@ public class ToDo extends Task {
         super(description);
     }
 
+    // Constructor for a ToDo that may be completed
+    public ToDo(String description, Boolean isComplete) {
+        super(description, isComplete);
+    }
+
+    @Override
+    public String getFileRepr() {
+        return "T" + super.getFileRepr();
+    }
+
     // String representation of a ToDo
     @Override
     public String toString() {

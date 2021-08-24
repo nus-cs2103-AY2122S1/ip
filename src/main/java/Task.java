@@ -9,6 +9,12 @@ public class Task {
         this.completed = false;
     }
 
+    // Constructor for a completed Task
+    public Task(String description, Boolean isComplete) {
+        this.description = description;
+        this.completed = isComplete;
+    }
+
     // Mark a task as complete
     public void completeTask() {
         this.completed = true;
@@ -22,6 +28,10 @@ public class Task {
     // Get description of task
     public String getDescription() {
         return this.description;
+    }
+
+    public String getFileRepr() {
+        return " | " + (this.completed ? "1" : "0") + " | " + this.description;
     }
 
     // String representation of a Task

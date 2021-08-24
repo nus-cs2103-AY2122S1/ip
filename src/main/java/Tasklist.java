@@ -35,6 +35,11 @@ public class Tasklist {
         return removed;
     }
 
+    // Method to get list of all tasks
+    public ArrayList<Task> getAllTasks() {
+        return this.taskList;
+    }
+
     // String representation of the tasklist
     @Override
     public String toString() {

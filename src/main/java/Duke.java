@@ -3,9 +3,13 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Response.start();
-        Scanner inputScanner = new Scanner(System.in);
 
-        Tasklist store = new Tasklist();
+        // Read data from file if it exists
+        PersistentStorage storage = new PersistentStorage("./data/taskdata.txt");
+
+        // Initialize input scanner and Tasklist
+        Scanner inputScanner = new Scanner(System.in);
+        Tasklist store = storage.loadTasks();
 
         while (inputScanner.hasNext()) {
             String input = inputScanner.nextLine();
@@ -163,6 +167,7 @@ public class Duke {
                 }
             }
         }
+        storage.saveTasks(store);
         inputScanner.close();
     }
 }
