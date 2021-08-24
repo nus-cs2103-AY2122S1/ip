@@ -6,6 +6,11 @@ public class Deadline extends Task {
         this.timeDue = timeDue;
     }
 
+    public Deadline(String description, boolean isDone, String timeDue) {
+        super(description, isDone);
+        this.timeDue = timeDue;
+    }
+
     @Override
     public String toString() {
         String description = super.toString();
