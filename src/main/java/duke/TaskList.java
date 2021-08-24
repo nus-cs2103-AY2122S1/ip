@@ -41,7 +41,7 @@ public class TaskList {
      * forms a String of all the tasks, for saving into file
      * @return String
      */
-
+    
     public String output() {
         String output = "";
         for (int i = 0; i < myList.size(); i++) {
