@@ -165,15 +165,6 @@ public class Lania {
     }
 
     /**
-     * Prints the user input.
-     *
-     * @param s String provided by the user.
-     */
-    public void echo(String s) {
-        System.out.println(s);
-    }
-
-    /**
      * Chatbot that stores and displays the user input.
      *
      * @param args The command line arguments. Not required here.
