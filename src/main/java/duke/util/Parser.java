@@ -1,3 +1,6 @@
+import duke.command.*;
+import duke.exception.EmptyDescriptionException;
+
 public class Parser {
 
     private enum CommandType {
