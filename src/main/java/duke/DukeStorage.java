@@ -11,12 +11,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class DukeStorage {
     private static String tasksFile = "data/tasks.txt";
+    private static String dataFolder = "data/";
 
     public static void saveTaskList(TaskList taskList) throws DukeFileException {
+        File dataPath = new File(dataFolder);
+        if (!Files.exists(Paths.get(dataFolder))) {
+            dataPath.mkdir();
+        }
         File f = new File(tasksFile);
 
         if (!f.exists()) {
