@@ -2,6 +2,7 @@ import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.tasks.Deadline;
+import duke.tasks.Task;
 import duke.tasks.Todo;
 import duke.utils.DukeException;
 import org.junit.jupiter.api.Test;
@@ -49,6 +50,33 @@ public class DukeTest {
             assertEquals(true, taskList.contains(new Todo("test1")) );
             inputH.query("clear");
             assertEquals(0, taskList.size());
+        } catch (DukeException e) {
+            if (e.equals(Storage.ERROR_DB)) fail("Failed to delete residual files.");
+            fail("Failed to clear tasklist");
+        }
+    }
+    
+    @Test
+    void find() {
+        try {
+            TaskList taskListH = new TaskList(false);
+            Parser inputH = new Parser(taskListH);
+            inputH.query("todo test1");
+            inputH.query("deadline Report /by 2021-11-21 15:20 / finalize bibliography");
+            inputH.query("deadline Another report /by 2021-06-09 04:20 / test2");
+            inputH.query("event dummy /at 08:00 ~ 18:00 / stock");
+            assertEquals(4, taskListH.size());
+            String msgH = inputH.query("find test").msg();
+            msgH = msgH.replace(" matching ", " ");
+
+            TaskList taskListI = new TaskList(false);
+            Parser inputI = new Parser(taskListI);
+            inputI.query("todo test1");
+            inputI.query("deadline Another report /by 2021-06-09 04:20 / test2");
+            assertEquals(2, taskListI.size());
+            String msgI = inputI.query("list").msg();
+            assertEquals(msgH, msgI);
+            
         } catch (DukeException e) {
             if (e.equals(Storage.ERROR_DB)) fail("Failed to delete residual files.");
             fail("Failed to clear tasklist");
