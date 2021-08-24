@@ -116,12 +116,12 @@ public class FileManager {
                 oldContent += line + System.lineSeparator();
             }
 
-            String newContent = oldContent.replaceAll(toUpdate, task);
+            // Error here : Not replacing content
+            String newContent = oldContent.replace(toUpdate, task);
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             writer.write(newContent);
             reader.close();
             writer.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
