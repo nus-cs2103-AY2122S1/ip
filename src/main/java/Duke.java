@@ -1,6 +1,10 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
+
 
 public class Duke {
 
@@ -8,7 +12,7 @@ public class Duke {
         TODO, EVENT, DEADLINE, LIST, DONE, DELETE, BYE
     }
 
-    private static ArrayList<Task> itemList = new ArrayList<Task>();
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
 
     private static void greet() {
         System.out.println("Hello! I'm Duke" + '\n' + "What can I do for you?");
@@ -35,7 +39,7 @@ public class Duke {
     private static void markTaskDone(String input) {
         try {
             int taskDoneNum = getTaskNumber(input);
-            Task taskDone = itemList.get(taskDoneNum - 1);
+            Task taskDone = tasks.get(taskDoneNum - 1);
             taskDone.markAsDone();
             System.out.println("Nice! I've marked this task as done:" + '\n' + taskDone.toString());
         } catch (IndexOutOfBoundsException e) {
@@ -47,10 +51,10 @@ public class Duke {
     private static void deleteTask(String input) {
         try {
             int taskDeleteNum = getTaskNumber(input);
-            Task taskToDelete = itemList.get(taskDeleteNum - 1);
+            Task taskToDelete = tasks.get(taskDeleteNum - 1);
             taskToDelete.markUndone();
             System.out.println("Noted. I've removed this task:" + '\n' + taskToDelete.toString());
-            itemList.remove(taskDeleteNum - 1);
+            tasks.remove(taskDeleteNum - 1);
             printTaskNumber();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("☹ OOPS!!! No such task can be deleted!");
@@ -60,17 +64,17 @@ public class Duke {
 
     private static void printItemList() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < itemList.size(); i++) {
-            System.out.println(i + 1 + "." + itemList.get(i).toString());
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(i + 1 + "." + tasks.get(i).toString());
         }
     }
 
     private static void printTaskNumber() {
-        System.out.println("Now you have " + itemList.size() + (itemList.size() == 1 ? " task" : " tasks") + " in the list.");
+        System.out.println("Now you have " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
     private static void addComplete(Task t) {
-        itemList.add(t);
+        tasks.add(t);
         System.out.println("Got it. I've added this task:");
         System.out.println(t.toString());
         printTaskNumber();
@@ -80,15 +84,53 @@ public class Duke {
         addComplete(new Todo(description));
     }
 
-    private static void addDeadline(String description, String time) {
-        addComplete(new Deadline(description, time));
+    private static void addDeadline(String description, String time) throws InvalidInputException {
+        String[] split = time.split(" ", 2);
+        LocalDate date;
+        LocalTime timing;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+            date = LocalDate.parse(split[0], formatter);
+        } catch (DateTimeParseException e) {
+            throw new InvalidInputException("Format should be in yyyy-mm-dd!");
+        }
+        if (split.length == 1) {
+            addComplete(new Deadline(description, date));
+        } else {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                timing = LocalTime.parse(split[1], formatter);
+            } catch (DateTimeParseException e) {
+                throw new InvalidInputException("Format should be in HH:mm");
+            }
+            addComplete(new Deadline(description, date, timing));
+        }
     }
 
-    private static void addEvent(String description, String time) {
-        addComplete(new Event(description, time));
+    private static void addEvent(String description, String time) throws InvalidInputException {
+        String[] split = time.split(" ", 2);
+        LocalDate date;
+        LocalTime timing;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+            date = LocalDate.parse(split[0], formatter);
+        } catch (DateTimeParseException e) {
+            throw new InvalidInputException("Format should be in yyyy-mm-dd!");
+        }
+        if (split.length == 1) {
+            addComplete(new Event(description, date));
+        } else {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                timing = LocalTime.parse(split[1], formatter);
+            } catch (DateTimeParseException e) {
+                throw new InvalidInputException("Format should be in HH:mm");
+            }
+            addComplete(new Event(description, date, timing));
+        }
     }
 
-    public static Keyword getKeyword(String input) {
+    private static Keyword getKeyword(String input) {
         Keyword keyword = Keyword.valueOf(getFirstWord(input).toUpperCase());
         return keyword;
     }
@@ -107,7 +149,6 @@ public class Duke {
 
                 switch (keyword) {
                     case BYE:
-                        itemList.clear();
                         System.out.println("Bye. Hope to see you again soon!");
                         break;
                     case LIST:
@@ -130,16 +171,18 @@ public class Duke {
                         if (getSecondWord(arr[1]).length() < 1 || !getFirstWord(arr[1]).equals("by:")) {
                             throw new InvalidTimeException("☹ OOPS!!! Please enter a suitable deadline!");
                         }
-                        addDeadline(getSecondWord(arr[0]), getSecondWord(arr[1]).substring(0,
-                                getSecondWord(arr[1]).length() - 1));
+                        String description = getSecondWord(arr[0]);
+                        String timing = getSecondWord(arr[1]).substring(0, getSecondWord(arr[1]).length() - 1);
+                        addDeadline(description, timing);
                         break;
                     case EVENT:
                         String[] arr_event = input.split("\\(");
                         if (getSecondWord(arr_event[1]).length() < 1 || !getFirstWord(arr_event[1]).equals("at:")) {
                             throw new InvalidTimeException("☹ OOPS!!! Please enter a suitable event timing!");
                         }
-                        addEvent(getSecondWord(arr_event[0]), getSecondWord(arr_event[1]).substring(0,
-                                getSecondWord(arr_event[1]).length() - 1));
+                        String eventDescription = getSecondWord(arr_event[0]);
+                        String eventTiming = getSecondWord(arr_event[1]).substring(0, getSecondWord(arr_event[1]).length() - 1);
+                        addEvent(eventDescription, eventTiming);
                         break;
                 }
                 System.out.println(lineBreak);
@@ -147,7 +190,7 @@ public class Duke {
         } catch (InvalidTimeException | InvalidDescriptionException e) {
             System.out.println(e.getMessage());
             start();
-        } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException | InvalidInputException e) {
             System.out.println("☹ OOPS!!! Please include an appropriate description/time!");
             start();
         } catch (IllegalArgumentException e) {
