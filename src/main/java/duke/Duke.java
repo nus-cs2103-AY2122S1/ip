@@ -3,18 +3,29 @@ package duke;
 import duke.command.*;
 import java.util.Scanner;
 
+/**
+ * A robot that can respond to user's input, and help user store tasks
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
     private InputTypes t;
 
+    /**
+     * Constructor of Duke class.
+     *
+     * @param filePath The filePath of the file storing the data.
+     */
     public Duke(String filePath) {
         taskList = new TaskList();
         ui = new Ui(taskList);
         storage = new Storage(filePath, taskList, ui);
     }
 
+    /**
+     * Start running the program.
+     */
     public void run() {
         //Read events stored in the input List
         storage.loadSavedTasks();
