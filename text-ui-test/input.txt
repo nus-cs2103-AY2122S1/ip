@@ -4,6 +4,7 @@ event e1 /at 8pm
 todo t2
 blah
 todo
+todo invalid|task description
 deadline nodate
 event nodate
 list

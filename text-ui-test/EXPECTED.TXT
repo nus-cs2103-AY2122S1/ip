@@ -47,6 +47,11 @@ ____________________________________________________________
 
 ____________________________________________________________
 Error detected by Duke:
+The description of a task cannot contain this character: |
+____________________________________________________________
+
+____________________________________________________________
+Error detected by Duke:
 Invalid format for a deadline task.
 Please input your deadline task in the following manner:
 deadline <task_description> /by <task_deadline>
