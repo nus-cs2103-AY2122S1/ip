@@ -18,6 +18,10 @@ public class Parser {
         } else if(words[0].equals("delete")){
             int deleteIndex = Integer.parseInt(words[1]);
             return new DeleteCommand(deleteIndex - 1);
+        } else if(words[0].equals("find")){
+            String keyWords = input.substring(5);
+            System.out.println(keyWords);
+            return new FindCommand(keyWords);
         } else if(words[0].equals("bye")) {
             return new ExitCommand();
         } else {
