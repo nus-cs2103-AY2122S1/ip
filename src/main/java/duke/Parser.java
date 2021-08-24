@@ -26,7 +26,16 @@ public class Parser {
             if (inputArray.length == 1) {
                 throw new DukeException("The index is missing.");
             }
-            reply = inputArray[0].equals("done") ? list.markTask(inputArray[1]) : list.deleteTask(inputArray[1]);
+            reply = inputArray[0].equals("done")
+                    ? list.markTask(inputArray[1])
+                    : list.deleteTask(inputArray[1]);
+            break;
+
+        case "find":
+            if (inputArray.length == 1) {
+                throw new DukeException("The keyword is missing.");
+            }
+            reply = list.findTask(inputArray[1]);
             break;
 
         case "todo":

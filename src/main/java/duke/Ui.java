@@ -20,9 +20,10 @@ public class Ui {
      * Shows the goodbye message when finishing executing Duke.
      */
     public void showByeMessage() {
-        String bye = "\tBye bye!!. Hope to see you again soon!!";
+        String bye = "\tBye bye!!. Hope to see you again soon!!\n";
         showBreakLine();
         System.out.println(bye);
+        showBreakLine();
     }
 
     /**

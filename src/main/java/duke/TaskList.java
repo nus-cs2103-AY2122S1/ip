@@ -30,6 +30,7 @@ public class TaskList {
         case TODO:
             task = new Todo(input, isDone);
             break;
+
         case EVENT:
             // Fallthrough
         case DEADLINE:
@@ -44,6 +45,7 @@ public class TaskList {
             task = type == Task.TaskName.EVENT ? new Event(inputArray[0], inputArray[1], isDone)
                     : new Deadline(inputArray[0], inputArray[1], isDone);
             break;
+
         default:
             throw new DukeException("Unexpected value: " + type);
         }
@@ -74,9 +76,8 @@ public class TaskList {
     public String displayTask() {
         StringBuilder output = new StringBuilder("\tHere are the tasks in your list:\n");
         int i = 1;
-        for (Task task: tasks) {
-            String temp = "\t" + i + "." + task.toString() + "\n";
-            output.append(temp);
+        for (Task task: this.tasks) {
+            output.append("\t").append(i).append(".").append(task).append("\n");
             i++;
         }
         return output.toString();
@@ -126,6 +127,32 @@ public class TaskList {
         Task deleted = this.tasks.remove(index - 1);
         return "\tNoted. I've removed this task:\n\t\t" + deleted.toString()
                 + "\n\tNow you have " + this.tasks.size() + " tasks in the list.\n";
+    }
+
+    /**
+     * Returns the list of all tasks whose description which matches the provided keyword.
+     *
+     * @param input The String of the keyword that will be used to search the TaskList
+     * @return The reply for Duke containing all the task matching the keyword
+     */
+    public String findTask(String input) {
+        StringBuilder reply = new StringBuilder("Here are the tasks matching the keyword: ")
+                .append(input).append("\n");
+        int i = 1;
+
+        for (Task task: this.tasks) {
+            if (task.matchKeyword(input)) {
+                reply.append(i).append(".").append(task).append("\n");
+                i++;
+            }
+        }
+
+        if (i == 1) {
+            reply = new StringBuilder("No task matching the keyword: ")
+                    .append(input).append("\n");
+        }
+
+        return reply.toString();
     }
 
     /**
