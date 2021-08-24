@@ -3,10 +3,19 @@ class ToDo extends Task {
     ToDo(String taskName) {
         super(taskName);
     }
-
+    
     private ToDo(ToDo oldTask) {
         super(oldTask);
     }
+    
+    static protected ToDo createTask(String name, boolean isCompleted) {
+        ToDo t = new ToDo(name);
+        if (isCompleted) {
+            return new ToDo(t);
+        } else {
+            return t;
+        }
+    } 
 
     @Override
     ToDo markAsCompleted() {

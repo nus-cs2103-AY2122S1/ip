@@ -11,6 +11,15 @@ class Event extends Task {
         super(oldEvent);
         this.dateTime = oldEvent.dateTime;
     }
+    
+    static protected Event createTask(String name, boolean isCompleted, String dateTime) {
+        Event e = new Event(name, dateTime);
+        if (isCompleted) {
+            return new Event(e);
+        } else {
+            return e;
+        }
+    }
 
     @Override
     Event markAsCompleted() {

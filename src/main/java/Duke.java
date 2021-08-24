@@ -1,10 +1,32 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
+    
+    protected static boolean canLog = false;
+    protected static final String logPath = "data/duke.txt";
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        MyList toDoList = new MyList();
-
+        MyList taskList = new MyList();
+       
+        File previousLog = new File(logPath);
+        try {
+            if (! previousLog.createNewFile()) { // file already exists
+                taskList.importPreviousTasks(previousLog);
+                printMessage("Successfully established connection with file " + Duke.logPath
+                        + "\nPrevious task log imported."
+                        + "\nAll changes to task log will be saved there.");
+            } else { // new file is created
+                printMessage("Specified file not found.\nNew file created: " + Duke.logPath
+                        + "\nTask log will be saved there.");
+            }
+            Duke.canLog = true;
+        } catch (IOException ex) {
+            printMessage("Unable to create/open specified file.\nTasks will not be logged.");
+        }
+        
         String welcomeMessage = "Hello I'm Duke!\nWhat can I do for you?";
         printMessage(welcomeMessage);
 
@@ -19,17 +41,17 @@ public class Duke {
                         isCompleted = true;
                         break;
                     case "done":
-                        printMessage(toDoList.markAsCompleted(command.substring(5).trim()));
+                        printMessage(taskList.markAsCompleted(command.substring(5).trim()));
                         break;
                     case "list":
-                        printMessage(toDoList.getAllItems());
+                        printMessage(taskList.getAllTasks());
                         break;
                     case "delete":
-                        printMessage(toDoList.deleteItem(command.substring(7)));
+                        printMessage(taskList.deleteItem(command.substring(7)));
                         break;
                     default:
                         try {
-                            printMessage(toDoList.addItem(command));
+                            printMessage(taskList.addItem(command));
                         } catch (DukeException ex) {
                             printMessage(ex.getMessage());
                         }
@@ -38,6 +60,9 @@ public class Duke {
                 printMessage("Please type some commands!");
             } catch (DukeException.InvalidTaskNumException ex) {
                 printMessage(ex.getMessage());
+            } catch (IOException ex) {
+                printMessage("Unable to log task. Task logging will stop");
+                Duke.canLog = false;
             }
         }
         printMessage("Goodbye for now!");
