@@ -45,6 +45,21 @@ public class TaskList implements Iterable<Task> {
                 + (this.taskList.size() == 1 ? " task " : " tasks ") + "in your list!");
     }
 
+    public void printAllContains(String match) {
+        boolean taskFound = false;
+        for (int i = 0; i < this.taskList.size(); i++) {
+            String description = taskList.get(i).getDescription();
+            if (description.contains(match)) {
+                taskFound = true;
+                System.out.println("Task " + (i + 1) + ". " + this.taskList.get(i));
+            }
+        }
+
+        if (!taskFound) {
+            System.out.println("    -- NO MATCHING TASKS FOUND --");
+        }
+    }
+
     @Override
     public Iterator<Task> iterator() {
         return this.taskList.iterator();
