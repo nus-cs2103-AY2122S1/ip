@@ -91,4 +91,23 @@ public class Ui {
                 +  HORIZONTAL_LINE);
     }
 
+    /**
+     * Responds to the find event.
+     *
+     * @param lst the current TaskList
+     * @param keyword the keyword
+     */
+    public void replyFind(TaskList lst, String keyword) {
+        this.count = 1;
+        System.out.println(HORIZONTAL_LINE + "    Here are the matching tasks in your list:");
+        lst.getLst().forEach(item -> {
+            if (item.getName().contains(keyword)) {
+                System.out.println("    " + count + ". " + item.toString());
+                count++;
+            }
+
+        });
+        System.out.println(HORIZONTAL_LINE);
+    }
+
 }
