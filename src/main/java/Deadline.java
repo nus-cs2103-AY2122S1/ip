@@ -26,6 +26,15 @@ public class Deadline extends Task{
         this.isDone = isDone;
     }
 
+    /**
+     * Getter for string in save-friendly format
+     */
+    @Override
+    public String getSaveFormatString() {
+        int isDoneInt = isDone ? 1 : 0;
+        return("D," + isDoneInt + "," + description + "," + by);
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

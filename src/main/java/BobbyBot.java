@@ -30,13 +30,12 @@ public class BobbyBot {
     }
 
     /**
-     * Load tasks in BobbyBot from hardcoded text file
+     * Loads tasks in BobbyBot from hardcoded text file
      */
     private void load(File f) throws FileNotFoundException {
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
             String[] row = s.nextLine().split(",");
-            totalTasks += 1;
             // load row into task
             switch (row[0]) {
             // data format: [type],[isDone],[desc],[period]
@@ -53,17 +52,25 @@ public class BobbyBot {
                 tasks.add(new Event(row[2], row[3], row[1].equals("1")));
                 break;
             }
+            totalTasks += 1;
         }
     }
-    /**
-     * Save tasks in BobbyBot to hardcoded text file
-     */
-    public void save() {
-        // save all tasks in hardcoded text file
 
-    }
     /**
-     * Perform command based on String user input
+     * Saves all tasks in BobbyBot to hardcoded text file
+     */
+    private void save() throws IOException {
+        // save task to .txt file
+        FileWriter fw = new FileWriter(DBPATH);
+        for (Task task: tasks) {
+            String saveRow = task.getSaveFormatString() + "\n";
+            fw.write(saveRow);
+        }
+        fw.close();
+    }
+
+    /**
+     * Performs command based on String user input
      * @param userInput string command for chatbot
      * @throws InvalidArgumentException Invalid or no arguments given
      * @throws TooManyArgumentsException Too many /by or /at connectors
@@ -134,6 +141,11 @@ public class BobbyBot {
             createEvent(description, at);
             break;
         }
+        try {
+            save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -187,7 +199,8 @@ public class BobbyBot {
      * @param description description of task
      */
     private void createToDo(String description) {
-        tasks.add(new ToDo(description));
+        Task newToDo = new ToDo(description);
+        tasks.add(newToDo);
         totalTasks++;
         System.out.println(div + "Got it. I've added this task:\n  " + tasks.get(totalTasks - 1) + "\n"
                 + "Now you have " + totalTasks + " tasks in the list.\n" + div);
@@ -199,7 +212,8 @@ public class BobbyBot {
      * @param at time period of Event (start-end)
      */
     private void createEvent(String description, String at) {
-        tasks.add(new Event(description, at));
+        Task newEvent = new Event(description, at);
+        tasks.add(newEvent);
         totalTasks++;
         System.out.println(div + "Got it. I've added this task:\n  " + tasks.get(totalTasks - 1) + "\n"
                 + "Now you have " + totalTasks + " tasks in the list.\n" + div);
@@ -211,7 +225,8 @@ public class BobbyBot {
      * @param by date and time that the task should be completed by
      */
     private void createDeadline(String description, String by) {
-        tasks.add(new Deadline(description, by));
+        Task newDeadLine = new Deadline(description, by);
+        tasks.add(newDeadLine);
         totalTasks++;
         System.out.println(div + "Got it. I've added this task:\n  " + tasks.get(totalTasks - 1) + "\n"
                 + "Now you have " + totalTasks + " tasks in the list.\n" + div);
