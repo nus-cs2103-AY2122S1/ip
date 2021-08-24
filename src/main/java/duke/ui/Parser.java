@@ -10,7 +10,17 @@ import duke.task.ToDo;
 
 import java.time.LocalDate;
 
+/** 
+ * Represents the parser that is used to parse the user's commands.
+ */
 public class Parser {
+    /**
+     * Returns a command after parsing the given command string.
+     * 
+     * @param cmd The command string to parse.
+     * @return The command after parsing the command string.
+     * @throws DukeException when the given command string cannot be parsed.
+     */
     public Command parse(String cmd) throws DukeException {
         if (cmd.equals("bye")) {
             return new Command(CommandType.BYE, null);

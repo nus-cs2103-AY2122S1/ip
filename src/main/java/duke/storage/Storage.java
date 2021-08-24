@@ -12,9 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents a storage class that handles reading and writing tasks to a specified data file.
+ */
 public class Storage {
     private File file;
-    
+
+    /**
+     * Creates a storage class with a data file whose path is provided.
+     * 
+     * @param path The path of the data file.
+     */
     public Storage(String path) {
         try {
             this.file = new File(path);
@@ -25,6 +33,13 @@ public class Storage {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Returns the list of tasks after reading from the data file of the Storage instance.
+     * 
+     * @return The list of tasks in the data file.
+     * @throws DukeException if the file cannot be read from.
+     */
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
         try {
@@ -50,7 +65,12 @@ public class Storage {
         }
         return tasks;
     }
-    
+
+    /**
+     * Writes the given list of tasks to the data file of the Storage instance.
+     * 
+     * @param tasks A list of tasks to write to the data file.
+     */
     public void write(List<Task> tasks) {
         try {
             PrintWriter writer = new PrintWriter(new FileOutputStream(file));

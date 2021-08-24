@@ -10,12 +10,20 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the main Duke application.
+ */
 public class Duke {
     
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-    
+
+    /**
+     * Constructs a Duke class with the given data file.
+     * 
+     * @param filePath The path of the data file for the application
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.ui = new Ui();
@@ -26,7 +34,10 @@ public class Duke {
             this.taskList = new TaskList(new ArrayList<>());
         }
     }
-    
+
+    /**
+     * Starts the Duke application with the UI. Writes to the data file after being closed by the user.
+     */
     public void run() {
         ui.greet();
         while (true) {
