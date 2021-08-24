@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class DukeException extends RuntimeException {
     private final String message;
     public DukeException(String message) {

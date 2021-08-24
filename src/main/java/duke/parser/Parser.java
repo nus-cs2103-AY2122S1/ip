@@ -1,3 +1,10 @@
+package duke.parser;
+
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.task.*;
+import duke.ui.Ui;
+
 import java.io.IOException;
 
 public class Parser {
@@ -25,7 +32,6 @@ public class Parser {
             deleteCommand(input, tasks, ui);
         } else {
             if (input.startsWith(Commands.TODO.toString().toLowerCase())) {
-                System.out.println("here");
                 t = todoCommand(input);
             } else if (input.startsWith(Commands.DEADLINE.toString().toLowerCase())) {
                 t = deadlineCommand(input, storage);

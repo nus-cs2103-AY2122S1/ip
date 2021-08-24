@@ -1,3 +1,8 @@
+import duke.task.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.exceptions.DukeException;
+
 public class Duke {
     private TaskList tasks;
     private final Storage storage;
@@ -26,7 +31,7 @@ public class Duke {
                 ui.enterCommand();
                 String fullCommand = ui.readInput();
                 ui.lineGenerator();
-                Parser parser = new Parser(fullCommand);
+                duke.parser.Parser parser = new duke.parser.Parser(fullCommand);
                 isExit = parser.execute(tasks, ui, storage);
             } catch (DukeException e) {
                 ui.printError(e);

@@ -1,14 +1,16 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class Deadline extends Task {
+public class Event extends Task {
 
     protected LocalTime time;
     protected LocalDate date;
 
-    public Deadline(String description, LocalTime time, LocalDate date) {
+    public Event(String description, LocalTime time, LocalDate date) {
         super(description);
         this.time = time;
         this.date = date;
@@ -16,13 +18,13 @@ public class Deadline extends Task {
 
     @Override
     public String outputFormat() {
-        return "D" + super.outputFormat() + " | " + date.getDayOfMonth() + "/" + date.getMonthValue() + "/" + date.getYear()
+        return "E" + super.outputFormat() + " | " + date.getDayOfMonth() + "/" + date.getMonthValue() + "/" + date.getYear()
                 + " " + String.format("%1$" + 2 + "s", time.getHour()).replace(' ', '0') + String.format("%1$" + 2 + "s", time.getMinute()).replace(' ', '0');
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
                 + ", " + time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
     }
 }
