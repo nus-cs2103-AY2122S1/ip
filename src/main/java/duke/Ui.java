@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -71,6 +72,20 @@ public class Ui {
 
     public void showAlreadyDoneTask(String description) {
         System.out.println(description + " has already been done! :)");
+
+    public void showSearchResults(ArrayList<Task> resultsArray) {
+        System.out.println(FRIENDGREETING + "Here are the matching tasks in your list:");
+        int listSize = resultsArray.size();
+        for (int i = 0; i < listSize; i++) {
+            Task currTask = resultsArray.get(i);
+            int index = i + 1;
+            System.out.println(index + "." + currTask.toString());
+        }
+    }
+
+    public void showNoSearchResults() {
+        System.out.println(FRIENDGREETING + "There are no tasks that match your search.");
+
     }
 
     public void saveList() {
