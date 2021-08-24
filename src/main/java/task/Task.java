@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * Class that stores a user's task description and whether the task is done or not.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

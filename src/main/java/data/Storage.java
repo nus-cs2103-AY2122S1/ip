@@ -14,12 +14,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Class that deals with loading tasks from the file and saving tasks in the file
+ * Class that deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     /** File containing the user's saved tasks */
     private File userData;
-//    private String pathname = "./src/main/data/USERDATA.TXT";
     private String pathname;
 
     public Storage(String pathname) {

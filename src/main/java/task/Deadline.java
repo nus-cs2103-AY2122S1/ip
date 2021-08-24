@@ -3,6 +3,9 @@ package task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class that stores a Task that contains a date(by).
+ */
 public class Deadline extends Task {
 
     protected LocalDate by;

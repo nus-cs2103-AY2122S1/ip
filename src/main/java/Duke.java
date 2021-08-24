@@ -1,6 +1,9 @@
 import command.Command;
 import data.*;
 
+/**
+ * The Duke iP Program.
+ */
 public class Duke {
 
     private Storage storage;
@@ -18,6 +21,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

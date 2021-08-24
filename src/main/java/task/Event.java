@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * Class that stores a Task that contains a location(at).
+ */
 public class Event extends Task {
 
     protected String at;

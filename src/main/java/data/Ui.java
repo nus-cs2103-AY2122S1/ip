@@ -2,6 +2,9 @@ package data;
 
 import java.util.Scanner;
 
+/**
+ * Class that deals with receiving input from the user and sending output to the user.
+ */
 public class Ui {
     /** Statement to show the user upon exit */
     private static final String MESSAGE_WELCOME = "Hello! I'm Duke\n" + "What can I do for you?";
@@ -9,6 +12,7 @@ public class Ui {
     /** Statement to show the user upon running Duke */
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
 
+    /** Statement to show the user upon finding no saved file */
     private static final String MESSAGE_LOADING_ERROR = "No saved tasks were found.";
 
     private static Scanner userInput = new Scanner(System.in);
@@ -59,6 +63,11 @@ public class Ui {
         }
     }
 
+    /**
+     * The following methods shouldIgnore, isCommentLine, readCommand and the string COMMENT_LINE_FORMAT_REGEX
+     * were taken from addressbook-level2(https://github.com/se-edu/addressbook-level2) and edited slightly
+     * to fit into iP
+     */
     /** Format of a comment input line. Comment lines are silently consumed when reading user input. */
     private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
 

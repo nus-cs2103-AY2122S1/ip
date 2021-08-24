@@ -9,10 +9,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
- * Parses user input.
+ * Class that parses a user's input.
  */
 public class Parser {
 
+    /**
+     * Checks the keyword of the input and return the corresponding command.
+     *
+     * @param userInput The text that the user inputs
+     * @return A Command that does what the keyword intended when executed
+     */
     public static Command parse(String userInput) {
         String[] userInputArray = userInput.split(" ");
         String keyword = userInputArray[0];
@@ -45,8 +51,17 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks for invalid inputs and returns an add command if input is valid.
+     *
+     * @param keyword The type of task
+     * @param userInput userInput from parse method
+     * @param userInputArray userInputArray from parse method
+     * @param specialPhrase The string to split the task description(if any)
+     * @return An AddCommand
+     */
     private static Command prepareAddCommand(String keyword, String userInput, String[] userInputArray, String specialPhrase) {
-        //task.Task is a todo
+        //Checks if task is a todo
         if (specialPhrase.isEmpty()) {
             //checks if description is empty
             if (userInputArray.length > 1) {
@@ -56,39 +71,41 @@ public class Parser {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
         } else {
+            //Checks if there is a description
             if (userInputArray.length == 1 || userInput.endsWith(specialPhrase)) {
                 throw new DukeException("The description of a deadline cannot be empty.");
             } else {
-                //checks if there is a "/by" to separate the description
-                if (userInput.contains(specialPhrase)) {
-                    //Removes the "deadline" string and splits the description using " /by "
-                    String[] updatedDeadline = userInput.replace(keyword + " ", "").split(" " + specialPhrase +" ");
-                    //Returns error if user enters more than one "/by"
-                    if (updatedDeadline.length > 2) {
-                        throw new DukeException("I'm sorry, please only have ONE '/by' in your description!");
-                    } else {
-                        String deadlineDescription = updatedDeadline[0];
-                        String deadlineBy = updatedDeadline[1];
-                        if (keyword.equals("deadline")) {
-                            try {
-                                LocalDate.parse(deadlineBy);
-                            } catch (DateTimeParseException e) {
-                                throw new DukeException("Please enter a valid date!");
-                            }
-                            Deadline newDeadline = new Deadline(deadlineDescription, LocalDate.parse(deadlineBy));
-                            return new AddCommand(newDeadline);
-                        } else {
-                            Event newDeadline = new Event(deadlineDescription, deadlineBy);
-                            return new AddCommand(newDeadline);
-                        }
-                    }
+                //Removes the keyword and splits the description using specialPhrase
+                String[] updatedTask = userInput.replace(keyword + " ", "").split(" " + specialPhrase +" ");
+                //Returns error if user enters less/more than one special phrase
+                if (updatedTask.length != 2) {
+                    throw new DukeException("I'm sorry, please have ONE "+ specialPhrase +" in your description!");
                 } else {
-                    throw new DukeException("I'm sorry, please add a '/by' in your description!");
+                    String taskDescription = updatedTask[0];
+                    String taskDetail = updatedTask[1];
+                    if (keyword.equals("deadline")) {
+                        try {
+                            LocalDate.parse(taskDetail);
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("Please enter a valid date!");
+                        }
+                        Deadline newDeadline = new Deadline(taskDescription, LocalDate.parse(taskDetail));
+                        return new AddCommand(newDeadline);
+                    } else {
+                        Event newEvent = new Event(taskDescription, taskDetail);
+                        return new AddCommand(newEvent);
+                    }
                 }
             }
         }
     }
 
+    /**
+     * Checks for invalid inputs and returns a list command if input is valid.
+     *
+     * @param userInputArray userInputArray from parse method
+     * @return A ListCommand
+     */
     private static Command prepareListCommand(String[] userInputArray) {
         if (userInputArray.length == 1) {
             return new ListCommand();
@@ -97,6 +114,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks for invalid inputs and returns a done command if input is valid.
+     *
+     * @param userInputArray userInputArray from parse method
+     * @return A DoneCommand
+     */
     private static Command prepareDoneCommand(String[] userInputArray) {
         //checks if there is a 2nd input(completed task number)
         if (userInputArray.length == 2) {
@@ -111,6 +134,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks for invalid inputs and returns a delete command if input is valid.
+     *
+     * @param userInputArray userInputArray from parse method
+     * @return A DeleteCommand
+     */
     private static Command prepareDeleteCommand(String[] userInputArray) {
         //checks if there is a 2nd input(task number to be deleted)
         if (userInputArray.length == 2) {
@@ -125,6 +154,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks for invalid inputs and returns an exit command if input is valid.
+     *
+     * @param userInputArray userInputArray from parse method
+     * @return An ExitCommand
+     */
     private static Command prepareExitCommand(String[] userInputArray) {
         //Checks if description is left empty
         if (userInputArray.length == 1) {
