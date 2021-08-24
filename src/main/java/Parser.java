@@ -22,7 +22,7 @@ public class Parser {
             } else if (input.contains("done")) {
                 int index = Integer.parseInt(input.split(" ")[1]) - 1;
                 taskList.markAsDone(index);
-                userInterface.showCompletedTask(taskList.getToDo(index));
+                userInterface.showCompletedTask(taskList.getTask(index));
                 storage.write();
             } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")){
                 if (input.contains("todo") && input.length() == 4) {

@@ -1,5 +1,4 @@
 import java.util.*;
-import java.nio.file.*;
 
 public class TaskList {
     List<Task> taskList;
@@ -34,20 +33,20 @@ public class TaskList {
     }
 
     public Task deleteItem(int index) {
-        Task t = getToDo(index);
+        Task t = getTask(index);
         taskList.remove(index);
 
         return t;
     }
 
-    public Task getToDo(int index) {
+    public Task getTask(int index) {
         return taskList.get(index);
     }
 
     public int getSize() { return taskList.size(); }
 
     public void markAsDone(int index) {
-        Task t = getToDo(index);
+        Task t = getTask(index);
         t.setDone();
     }
 }

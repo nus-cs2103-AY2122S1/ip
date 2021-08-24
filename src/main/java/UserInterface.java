@@ -26,7 +26,7 @@ public class UserInterface {
     public void showList() {
         System.out.println("Here are the tasks in your list: ");
         for (int i = 1; i <= taskList.getSize(); i++) {
-            Task t = taskList.getToDo(i - 1);
+            Task t = taskList.getTask(i - 1);
             System.out.println(i + "." + t.toString());
         }
     }
