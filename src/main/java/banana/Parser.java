@@ -113,7 +113,7 @@ public class Parser {
     }
 
     /**
-     * Adds an Event or a Deadline,
+     * Adds an Event or a Deadline and
      * gets the time/date in correct format
      * if necessary.
      *
