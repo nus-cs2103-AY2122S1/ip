@@ -59,4 +59,9 @@ public class Event extends Task {
     public String getDescription() {
         return String.format("%s (at: %s)", super.getDescription(), this.eventTime);
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s", getStatusIcon(), getDescription());
+    }
 }

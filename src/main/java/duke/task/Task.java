@@ -22,6 +22,8 @@ public abstract class Task {
         return description;
     }
 
+    public abstract String toString();
+
     public String getMetaData() {
         return String.format("%s|%s", isDone ? "X" : " ", description);
     }

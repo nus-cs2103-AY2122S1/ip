@@ -61,4 +61,8 @@ public class Deadline extends Task {
         return String.format("%s (by: %s)", super.getDescription(), this.dateLine);
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s %s", getStatusIcon(), getDescription());
+    }
 }

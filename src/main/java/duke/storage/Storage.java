@@ -1,6 +1,6 @@
 package duke.storage;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Deadline;
@@ -68,7 +68,7 @@ public class Storage {
             }
             return list;
         } catch (FileNotFoundException e) {
-            throw new DukeException("OOPS! File not found");
+            throw new DukeException("OOPS!!! File not found.");
         }
     }
 

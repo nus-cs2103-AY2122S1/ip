@@ -35,4 +35,9 @@ public class ToDo extends Task {
     public String getStatusIcon() {
         return "[T]" + super.getStatusIcon();
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s", getStatusIcon(), getDescription());
+    }
 }
