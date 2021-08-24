@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -31,15 +32,15 @@ public class List {
      * Adds an Event or Deadline to the list.
      *
      * @param description
-     * @param dateTime
+     * @param date
      * @param type
      */
-    public void addTask(String description, String dateTime, String type) {
+    public void addTask(String description, LocalDate date, String type) {
         Task task;
         if (type.equals("deadline")) {
-            task = new Deadline(description, dateTime);
+            task = new Deadline(description, date);
         } else {
-            task = new Event(description, dateTime);
+            task = new Event(description, date);
         }
         this.list.add(task);
         System.out.println("Task added successfully: \n" + task);
