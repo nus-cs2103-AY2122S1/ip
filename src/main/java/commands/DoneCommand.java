@@ -14,6 +14,12 @@ public class DoneCommand extends ExecutableCommand {
         return false;
     }
 
+    public static Command markAsComplete(Command inputCommand) {
+        NonExecutableCommand com = (NonExecutableCommand) inputCommand;
+        NonExecutableCommand updatedCom = com.updateStatus(Status.COMPLETED.getStatus(), Status.STORED.getStatus());
+        return updatedCom;
+    }
+
     @Override
     public void execute(List<Command> commandList) {
         System.out.println(DONE_MESSAGE);

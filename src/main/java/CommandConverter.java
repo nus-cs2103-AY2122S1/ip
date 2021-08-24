@@ -10,6 +10,9 @@ import commands.DeadlineCommand;
 import commands.ListCommand;
 import commands.DoneCommand;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
+
 public class CommandConverter {
     private static final String READ_COMMAND = "read";
     private static final String RETURN_COMMAND = "return";
@@ -21,8 +24,6 @@ public class CommandConverter {
     private static final String EVENT_COMMAND = "event";
     private static final String DELETE_COMMAND = "delete";
 
-
-    
     public CommandConverter() {}
 
     //throws NoSuchCommandException
@@ -36,6 +37,15 @@ public class CommandConverter {
             return this.extractSpecialCommand(commandInput, formatted_input, commandItems);
         }
 
+    }
+
+    HashMap<Command, Boolean> batchConvertStorageCommands(HashMap<String, Boolean> inputMap) throws NoSuchCommandException {
+        HashMap<Command, Boolean> outputCommands = new HashMap<>();
+        for (Map.Entry<String, Boolean> entry : inputMap.entrySet()) {
+            Command command = this.convertInputToCommand(entry.getKey());
+            outputCommands.put(command, entry.getValue());
+        }
+        return outputCommands;
     }
 
     private Command extractSpecialCommand(String commandName,

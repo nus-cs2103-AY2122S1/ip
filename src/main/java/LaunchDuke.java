@@ -1,11 +1,13 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class LaunchDuke {
     
-    public static void main(String[] args) {
-        System.out.println(Duke.dukeStart());
+    public static void main(String[] args) throws FileNotFoundException {
+        Duke duke = new Duke();
+        System.out.println(duke.dukeStart());
         Scanner scanner = new Scanner(System.in);
-        Duke.runDukeBot(scanner);
+        duke.runDukeBot(scanner);
         scanner.close();
     }
 }

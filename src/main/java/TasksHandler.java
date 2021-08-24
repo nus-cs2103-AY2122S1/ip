@@ -4,13 +4,11 @@ import commands.NonExecutableCommand;
 import java.util.List;
 import java.util.ArrayList;
 import status.Status;
-
-
 public class TasksHandler {
     private final List<Command> allTasks;
 
-    public TasksHandler() {
-        this.allTasks = new ArrayList<Command>();
+    public TasksHandler(ArrayList<Command> allTasks) {
+        this.allTasks = allTasks;
     }
 
     protected void storeTasks(Command newCommand) {
@@ -22,6 +20,11 @@ public class TasksHandler {
             System.out.println("Now you have " + this.allTasks.size() + " tasks in the list.");
         }
     }
+
+    protected void setToAllTasksList(ArrayList<Command> inputTasks) {
+        this.allTasks.addAll(inputTasks);
+    } 
+
 
     protected boolean handleTasks(Command newCommand) {
         if (newCommand.isExecutable()) {
@@ -36,5 +39,5 @@ public class TasksHandler {
         }
         return exit;
     }
-
+    
 }
