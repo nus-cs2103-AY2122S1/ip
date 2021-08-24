@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -111,19 +114,25 @@ public class Duke {
                     if (input.split(" /by ").length != 2) {
                         throw new DukeException("☹ OOPS!!! Please provide a valid due date.");
                     }
-                    String dueDate = input.split("/by")[1].strip();
+                    String rawDueDate = input.split("/by")[1].strip();
+
+                    // Initialize datetime formatter
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+                    LocalDateTime dueDateTime = LocalDateTime.parse(rawDueDate, formatter);
                     
                     String description = input
                         .split("/by")[0]
                         .strip()
                         .substring(9);
 
-                    Deadline deadline = new Deadline(description, dueDate);
+                    Deadline deadline = new Deadline(description, dueDateTime);
                     store.addTask(deadline);
                     Response.added(store, deadline);
 
                 } catch (DukeException e) {
                     Response.error(e.getMessage());
+                } catch (DateTimeParseException e) {
+                    Response.error("☹ OOPS!!! Please provide a valid due date.");
                 }
 
             }
@@ -140,20 +149,25 @@ public class Duke {
                     if (input.split(" /at ").length != 2) {
                         throw new DukeException("☹ OOPS!!! Please provide a valid event time.");
                     }
-                    String eventTime = input.split("/at")[1].strip();
+                    String rawEventDateTime = input.split("/at")[1].strip();
 
+                    // Initialize datetime formatter
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+                    LocalDateTime eventDateTime = LocalDateTime.parse(rawEventDateTime, formatter);
                     
                     String description = input
                         .split("/at")[0]
                         .strip()
                         .substring(6);
 
-                    Event event = new Event(description, eventTime);
+                    Event event = new Event(description, eventDateTime);
                     store.addTask(event);
                     Response.added(store, event);
 
                 } catch (DukeException e) {
                     Response.error(e.getMessage());
+                } catch (DateTimeParseException e) {
+                    Response.error("☹ OOPS!!! Please provide a valid event time.");
                 }
             }
 
