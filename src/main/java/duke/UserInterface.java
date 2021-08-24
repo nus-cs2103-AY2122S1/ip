@@ -11,6 +11,11 @@ import duke.exception.DukeException;
  */
 public class UserInterface {
 
+    /**
+     * Gets user's input from the console.
+     * 
+     * @return user's input
+     */
     public String getInput() {
         String input = "";
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -22,6 +27,9 @@ public class UserInterface {
         return input;
     }
 
+    /**
+     * Greets the user in the console.
+     */
     public void greet() {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
@@ -29,18 +37,36 @@ public class UserInterface {
         new Response(greetings).print();
     }
 
+    /**
+     * Bid farewell to the user.
+     */
     public void farewell() {
         new Response("Bye. Hope to see you again soon!").print();
     }
 
+    /**
+     * Shows the string representation of an object to the user.
+     * 
+     * @param obj to be shown
+     */
     public void showObject(Object obj) {
         new Response(obj.toString()).print();
     }
 
+    /**
+     * Shows the message of a thrown exception to the user.
+     * 
+     * @param exception to be shown
+     */
     public void showError(DukeException exception) {
         new Response(exception.getMessage()).print();
     }
 
+    /**
+     * Shows a given message to the user.
+     * 
+     * @param message to be shown
+     */
     public void showMessage(String message) {
         new Response(message).print();
     }
@@ -51,14 +77,14 @@ public class UserInterface {
         private static final String ANSI_RESET = "\u001B[0m";
         private final String message;
 
-        public Response(String message) {
+        private Response(String message) {
             this.message = message;
         }
 
         /**
          * Prints the response in the system's output.
          */
-        public void print() {
+        private void print() {
             System.out.println(ANSI_CYAN + PARTITION + "\n" + message + "\n" + PARTITION + ANSI_RESET);
         }
 

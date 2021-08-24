@@ -30,7 +30,7 @@ public abstract class Task {
     }
 
     /**
-     * Mark the task as completed.
+     * Marks the task as completed.
      */
     public void markCompleted() {
         this.completed = true;
@@ -53,7 +53,7 @@ public abstract class Task {
     }
 
     /**
-     * Return date of the task. It could a deadline/date for the event.
+     * Returns date of the task. It could a deadline/date for the event.
      * 
      * @return date of task
      */
@@ -73,6 +73,11 @@ public abstract class Task {
         return "[" + (this.completed ? "X" : " ") + "] " + this.name;
     }
 
+    /**
+     * Gets the type of task. Used to save tasks' type into the database.
+     * 
+     * @return type of the task
+     */
     public TaskType getType() {
         return TaskType.byTask(this.getClass());
     }

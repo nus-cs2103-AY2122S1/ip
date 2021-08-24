@@ -4,7 +4,7 @@ import duke.DukeList;
 import duke.UserInterface;
 
 /**
- * Encapsulate a command on a DukeList.
+ * Represents a command to list all tasks in a dukelist.
  */
 public class ListCommand implements Command {
     private final DukeList dukeList;
@@ -15,9 +15,8 @@ public class ListCommand implements Command {
      * ui.
      * 
      * @param dukeList of which tasks
-     * @param ui
+     * @param ui       to display the tasks onto
      */
-    // TODO
     public ListCommand(DukeList dukeList, UserInterface ui) {
         this.dukeList = dukeList;
         this.ui = ui;

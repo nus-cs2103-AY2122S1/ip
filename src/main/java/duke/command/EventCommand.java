@@ -10,7 +10,7 @@ import duke.task.EventTask;
 import duke.task.Task;
 
 /**
- * A command to add an event task into main DukeList.
+ * Represents a command to add an event task into main DukeList.
  */
 public class EventCommand implements Command {
     private final DukeList dukeList;

@@ -10,7 +10,7 @@ import duke.task.DeadlineTask;
 import duke.task.Task;
 
 /**
- * A command to add a deadline task into main DukeList.
+ * Represents a command to add a deadline task into main DukeList.
  */
 public class DeadlineCommand implements Command {
     private DukeList dukeList;
