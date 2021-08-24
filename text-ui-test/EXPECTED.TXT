@@ -16,6 +16,16 @@ ___________________
 Here's your current list:
 1. [T] [ ] borrow book
 ___________________
+I don't get what you mean? Try again!
+___________________
+I don't get what you mean? Try again!
+___________________
+Text '19-02-2020' could not be parsed at index 2
+___________________
+Text '18.03.2020' could not be parsed at index 2
+___________________
+I don't get what you mean? Try again!
+___________________
 New Task? I've added it to the list:
 [D] [ ] pl1101e project (by: 20 Apr 2021 12:00)
 Now you have 2 task(s) in the list.
@@ -31,6 +41,16 @@ ___________________
 Input the following format: event *description* /at *DD/MM/YYYY* *24H-Time*
 ___________________
 Input the following format: deadline *description* /at *DD/MM/YYYY* *24H-Time*
+___________________
+I don't get what you mean? Try again!
+___________________
+I don't get what you mean? Try again!
+___________________
+Text '19-01-2020' could not be parsed at index 2
+___________________
+Text '18.03.2020' could not be parsed at index 2
+___________________
+I don't get what you mean? Try again!
 ___________________
 New Task? I've added it to the list:
 [E] [ ] pl1101e project meeting (at: 15 Apr 2021 12:00)
