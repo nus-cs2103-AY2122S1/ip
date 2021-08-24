@@ -10,6 +10,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String description, String at, boolean isDone) {
+        super(description, isDone);
+        this.at = at;
+    }
+
     /**
      * @return String representation of an Event.
      */

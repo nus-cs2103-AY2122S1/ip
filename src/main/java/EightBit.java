@@ -1,3 +1,7 @@
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,7 +9,14 @@ import java.util.Scanner;
  * Represents the chat bot.
  */
 public class EightBit {
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    private String filepath;
+
+    private ArrayList<Task> tasks = new ArrayList<>();
+    private final String LINE = "-------------------------------------------------------";
+
+    public EightBit(String filepath) {
+        this.filepath = filepath;
+    }
 
     /**
      * Wraps the message with lines and print it.
@@ -13,8 +24,13 @@ public class EightBit {
      * @param msg Message to be printed.
      */
     public void printWithLines(String msg) {
-        String line = "-------------------------------------------------------";
-        System.out.println(line + "\n" + msg + "\n" + line);
+        System.out.println(LINE + "\n" + msg + "\n" + LINE);
+    }
+
+    public void run() {
+        printWithLines("Hello! I'm 8-Bit!\nWhat can I do for you?");
+        loadFileContents(this.filepath);
+        getUserInput();
     }
 
     /**
@@ -50,26 +66,26 @@ public class EightBit {
 
         try {
             switch (commandType) {
-                case LIST:
-                    processList(msg);
-                    break;
-                case DONE:
-                    processDone(msg);
-                    break;
-                case TODO:
-                    processToDo(msg);
-                    break;
-                case DEADLINE:
-                    processDeadline(msg);
-                    break;
-                case EVENT:
-                    processEvent(msg);
-                    break;
-                case DELETE:
-                    processDelete(msg);
-                    break;
-                default:
-                    throw new EightBitException("OOPS!!! I'm sorry, but I don't know what that means :(");
+            case LIST:
+                processList(msg);
+                break;
+            case DONE:
+                processDone(msg);
+                break;
+            case TODO:
+                processToDo(msg);
+                break;
+            case DEADLINE:
+                processDeadline(msg);
+                break;
+            case EVENT:
+                processEvent(msg);
+                break;
+            case DELETE:
+                processDelete(msg);
+                break;
+            default:
+                throw new EightBitException("OOPS!!! I'm sorry, but I don't know what that means :(");
             }
         } catch (EightBitException e) {
             printWithLines(e.toString());
@@ -78,6 +94,7 @@ public class EightBit {
 
     private void addTask(Task task) {
         tasks.add(task);
+        appendToFile(this.filepath, parseTaskToFileFormat(task));
 
         printWithLines("Got it. I've added this task:\n  " + task
                 + "\nNow you have " + tasks.size() + " tasks in the list.");
@@ -115,7 +132,10 @@ public class EightBit {
         if (index >= tasks.size() || index < 0) { // number exceeding no. of tasks in list or negative
             throw new EightBitException("OOPS!!! Task " + (index + 1) + " does not exist.");
         }
+
         tasks.get(index).markAsDone();
+        rewriteFileWithTasks(this.filepath);
+
         printWithLines("Great job on completing this task!\n" + tasks.get(index).toString());
     }
 
@@ -172,7 +192,96 @@ public class EightBit {
             throw new EightBitException("OOPS!!! Task " + (index + 1) + " does not exist.");
         }
         Task deletedTask = tasks.remove(index);
+        rewriteFileWithTasks(this.filepath);
         printWithLines("Noted. I've removed this task:\n  " + deletedTask
                 + "\nNow you have " + tasks.size() + " tasks in the list.");
+    }
+
+    private void createFile(String filepath) {
+        try {
+            File f = new File(filepath);
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void appendToFile(String filepath, String text) {
+        try {
+            FileWriter fw = new FileWriter(filepath, true);
+            fw.write(text + System.lineSeparator());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void rewriteFileWithTasks(String filepath) {
+        try {
+            FileWriter fw = new FileWriter(filepath);
+            StringBuilder newFileContent = new StringBuilder();
+            for (Task task : this.tasks) {
+                newFileContent.append(parseTaskToFileFormat(task)).append(System.lineSeparator());
+            }
+            fw.write(newFileContent.toString());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadFileContents(String filepath) {
+        try {
+            File f = new File(filepath);
+            Scanner s = new Scanner(f);
+
+            ArrayList<Task> tasksInFile = new ArrayList<>();
+            while (s.hasNext()) {
+                String str = s.nextLine();
+                String[] words = str.split(" \\| ");
+                String taskType = words[0];
+                boolean isDone = words[1].equals("1");
+                String taskDescription = words[2];
+
+                switch (taskType) {
+                case "T":
+                    ToDo todo = new ToDo(taskDescription, isDone);
+                    tasksInFile.add(todo);
+                    break;
+                case "D":
+                    Deadline deadline = new Deadline(taskDescription, words[3], isDone);
+                    tasksInFile.add(deadline);
+                    break;
+                case "E":
+                    Event event = new Event(taskDescription, words[3], isDone);
+                    tasksInFile.add(event);
+                    break;
+                default:
+                    break;
+                }
+            }
+            s.close();
+
+            this.tasks = tasksInFile;
+        } catch (FileNotFoundException e) {
+            createFile(filepath);
+        }
+    }
+
+    private String parseTaskToFileFormat(Task task) {
+        String isDone = task.isDone ? "1" : "0";
+        if (task instanceof ToDo) {
+            ToDo t = (ToDo) task;
+            return "T | " + isDone + " | " + t.description;
+        } else if (task instanceof Deadline) {
+            Deadline d = (Deadline) task;
+            return "D | " + isDone + " | " + d.description + " | " + d.by;
+        } else if (task instanceof Event) {
+            Event e = (Event) task;
+            return "E | " + isDone + " | " + e.description + " | " + e.at;
+        } else {
+            return "";
+        }
     }
 }
