@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -9,6 +13,90 @@ public class Duke {
     Duke() {
         this.numOfTasks = 0;
         this.tasks = new ArrayList<Task>();
+    }
+
+    public boolean createFile(String filePath) {
+        try {
+            File file = new File(filePath);
+            if (file.createNewFile()) {
+                System.out.println("File created.");
+                return true;
+            } else {
+                System.out.println("File fetched.");
+                return false;
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            return false;
+        }
+    }
+
+    public void readFile(String filePath) {
+        try {
+            File file = new File(filePath);
+            Scanner fileScanner = new Scanner(file);
+            while (fileScanner.hasNext()) {
+                String line = fileScanner.nextLine();
+                parseLineInFile(line);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
+    //format of string should be typeOfTask||status||description||time
+    public void parseLineInFile(String string) {
+        try {
+            if (string.length() < 7) {
+                throw new DukeException("Cannot read file.");
+            }
+            char type = string.charAt(0);
+            char status = string.charAt(3);
+            boolean isDone;
+            if (status == ' ') {
+                isDone = false;
+            } else if (status == 'X') {
+                isDone = true;
+            } else {
+                throw new DukeException("Cannot read file.");
+            }
+            String description = string.substring(6);
+            if (type == 'T') {
+                tasks.add(new ToDo(description, isDone));
+                numOfTasks = numOfTasks + 1;
+            } else if (type == 'E') {
+                int index = description.indexOf("||");
+                String time = description.substring(index + 2);
+                tasks.add(new Event(description.substring(0, index), isDone, time));
+                numOfTasks = numOfTasks + 1;
+            } else if (type == 'D') {
+                int index = description.indexOf("||");
+                String time = description.substring(index + 2);
+                tasks.add(new Deadline(description.substring(0, index), isDone, time));
+                numOfTasks = numOfTasks + 1;
+            } else {
+                throw new DukeException("Cannot read file.");
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void writeToFile(String filePath, ArrayList<Task> tasks) {
+        try {
+            FileWriter fileWriter = new FileWriter(filePath);
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
+                String line = task.saveTaskToFile() + "\n";
+                if (i == tasks.size() - 1) {
+                    line = task.saveTaskToFile();
+                }
+                fileWriter.write(line);
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Cannot update file.");
+        }
     }
 
     public void list() {
@@ -38,7 +126,7 @@ public class Duke {
                             "There is no task in your list.", taskNumber));
                 }
             } else if (index < 0) {
-                throw new DukeException(String.format("There is no task %s.",taskNumber));
+                throw new DukeException(String.format("There is no task %s.", taskNumber));
             }
             this.tasks.get(index).markAsDone();
             System.out.println();
@@ -82,7 +170,7 @@ public class Duke {
             this.numOfTasks = this.numOfTasks + 1;
             if (this.numOfTasks > 1) {
                 System.out.printf("Now you have %s tasks in your list.\n", this.numOfTasks);
-            } else if (this.numOfTasks == 1){
+            } else if (this.numOfTasks == 1) {
                 System.out.printf("Now you have 1 task in your list.\n");
             } else {
                 System.out.println("Your list is empty!");
@@ -101,7 +189,7 @@ public class Duke {
                 if (numOfTasks > 1) {
                     throw new DukeException(String.format("Cannot find task %s." +
                             "There are only %s tasks in your list.", taskNumber, numOfTasks));
-                } else if (numOfTasks == 1){
+                } else if (numOfTasks == 1) {
                     throw new DukeException(String.format("Cannot find task %s." +
                             "There is only 1 task in your list.", taskNumber));
                 } else {
@@ -109,7 +197,7 @@ public class Duke {
                             "There is no task in your list.", taskNumber));
                 }
             } else if (index < 0) {
-                throw new DukeException(String.format("There is no task %s.",taskNumber));
+                throw new DukeException(String.format("There is no task %s.", taskNumber));
             }
             System.out.println("Noted. I've removed this task:");
             System.out.println(this.tasks.get(index));
@@ -131,15 +219,22 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-
         Duke duke = new Duke();
         System.out.println("Hello I am Duke.\nWhat can I do for you?");
         System.out.println();
+        duke.createFile("file.text");
+        duke.readFile("file.text");
+        if (duke.numOfTasks > 0) {
+            System.out.println("Current number of tasks: " + duke.numOfTasks);
+            duke.list();
+            System.out.println();
+        }
         Scanner scanner = new Scanner(System.in);
         String echo = scanner.nextLine();
         while (true) {
             if (echo.equals("bye")) {
                 System.out.println("Bye! See you next time!");
+                duke.writeToFile("file.text",duke.tasks);
                 break;
             }
             if (echo.equals("List")) {

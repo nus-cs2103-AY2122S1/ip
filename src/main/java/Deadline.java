@@ -6,6 +6,16 @@ public class Deadline extends Task{
         this.deadline = "";
     }
 
+    Deadline(String description, boolean isDone) {
+        super(description, isDone);
+        this.deadline = "";
+    }
+
+    Deadline(String description, boolean isDone, String deadline) {
+        super(description, isDone);
+        this.deadline = deadline;
+    }
+
     Deadline(String description, String deadline) {
         super(description);
         this.deadline = deadline;
@@ -13,6 +23,11 @@ public class Deadline extends Task{
 
     public String getDeadline() {
         return this.deadline;
+    }
+
+    @Override
+    public String saveTaskToFile() {
+        return typeOfTask() + "||" + getStatusIcon() + "||" + this.getDescription() + "||" + this.getDeadline();
     }
 
     @Override

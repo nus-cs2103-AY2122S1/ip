@@ -1,9 +1,16 @@
+
 public class Event extends Task{
 
     protected String time;
 
+
     Event(String description) {
         super(description);
+        this.time = "";
+    }
+
+    Event(String description, boolean isDone) {
+        super(description, isDone);
         this.time = "";
     }
 
@@ -12,8 +19,18 @@ public class Event extends Task{
         this.time = time;
     }
 
+    Event(String description, boolean isDone, String time) {
+        super(description, isDone);
+        this.time = time;
+    }
+
     public String getTime() {
         return this.time;
+    }
+
+    @Override
+    public String saveTaskToFile() {
+        return typeOfTask() + "||" + getStatusIcon() + "||" + this.getDescription() + "||" + this.getTime();
     }
 
     @Override
