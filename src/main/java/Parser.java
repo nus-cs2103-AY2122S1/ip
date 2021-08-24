@@ -1,4 +1,4 @@
-public class Checker {
+public class Parser {
     public static Task check(String str, String check) throws DukeException {
         int partition = str.indexOf(check);
         if (partition < 0 || partition + 4 > str.length()) {

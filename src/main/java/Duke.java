@@ -65,7 +65,7 @@ public class Duke {
                     try {
                         String dlLabel = scanner.nextLine();
                         System.out.println("──────────────────────────────────────────");
-                        Task deadline = Checker.check(dlLabel, "/by ");
+                        Task deadline = Parser.check(dlLabel, "/by ");
                         list.add(deadline);
                         System.out.println("──────────────────────────────────────────");
                         input = scanner.next();
@@ -81,7 +81,7 @@ public class Duke {
                     try {
                         String eLabel = scanner.nextLine();
                         System.out.println("──────────────────────────────────────────");
-                        Task event = Checker.check(eLabel, "/at ");
+                        Task event = Parser.check(eLabel, "/at ");
                         list.add(event);
                         System.out.println("──────────────────────────────────────────");
                         input = scanner.next();
