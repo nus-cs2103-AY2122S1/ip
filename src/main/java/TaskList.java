@@ -47,8 +47,8 @@ public class TaskList {
 
     public Task markTask(int taskNumber) throws IOException {
         Task task = tasks.get(taskNumber - 1);
-        storage.editLine(taskNumber, task);
         task.markAsDone();
+        storage.editLine(taskNumber, task);
         return task;
     }
 
