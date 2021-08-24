@@ -1,6 +1,9 @@
+import java.time.LocalDate;
+
+
 public class DeadLine extends Task {
-    private String dueDate;
-    private String type;
+    private final String type;
+    private LocalDate dueDate;
     
     /**
      * Constructor for DeadLine
@@ -9,14 +12,14 @@ public class DeadLine extends Task {
      */
     public DeadLine(String description, String dueDate, boolean isCompleted) {
         super(description, "deadline", isCompleted);
-        this.dueDate = dueDate;
+        this.dueDate = DateHandler.formatDate(dueDate);
         this.type = "D";
     }
 
     public DeadLine(String description, String dueDate) {
         super(description, "deadline", false);
-        this.dueDate = dueDate;
         this.type = "D";
+        this.dueDate = DateHandler.formatDate(dueDate);
     }
 
     @Override
@@ -26,6 +29,6 @@ public class DeadLine extends Task {
 
     @Override
     public String toString() {
-        return "[" + this.type + "] " + super.toString() + " (Due: " + this.dueDate + ")";
+        return "[" + this.type + "] " + super.toString() + " (Due: " + DateHandler.convertDate(this.dueDate) + ")";
     }
 }

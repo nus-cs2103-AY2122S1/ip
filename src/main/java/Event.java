@@ -1,6 +1,10 @@
+
+import java.time.LocalDate;
+
 public class Event extends Task {
-    private String dateAndTime;
-    private String type;
+    private final String type;
+    private LocalDate dateAndTime;
+    
     /**
      * Constructor for Event
      *
@@ -8,14 +12,14 @@ public class Event extends Task {
      */
     public Event(String description, String dateAndTime, boolean isCompleted) {
         super(description, "event", isCompleted);
-        this.dateAndTime = dateAndTime;
+        this.dateAndTime = DateHandler.formatDate(dateAndTime);
         this.type = "E";
     }
 
     public Event(String description, String dateAndTime) {
         super(description, "event", false);
-        this.dateAndTime = dateAndTime;
         this.type = "E";
+        this.dateAndTime = DateHandler.formatDate(dateAndTime);
     }
 
     @Override
@@ -26,6 +30,6 @@ public class Event extends Task {
     
     @Override
     public String toString() {
-        return "[" + this.type + "] " + super.toString() + " (On: " + this.dateAndTime + ")";
+        return "[" + this.type + "] " + super.toString() + " (On: " + DateHandler.convertDate(this.dateAndTime) + ")";
     }
 }

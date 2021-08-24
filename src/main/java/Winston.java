@@ -3,6 +3,7 @@ import java.io.PrintWriter;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -116,9 +117,9 @@ public class Winston {
     private String getListData() {
         StringBuilder result = new StringBuilder();
         for (Task task : this.list) {
-            result.append(task.saveFormat() + "\n");
+            result.append(task.saveFormat()).append("\n");
         }
-        return result.substring(0, result.length() - 1).toString();
+        return result.substring(0, result.length() - 1);
     }
 
     /**
@@ -193,10 +194,18 @@ public class Winston {
             case "event": {
                 System.out.println("What task would you like to add?");
                 String task = scan.nextLine();
-                System.out.println("When is this event?");
-                String on = scan.nextLine();
-                winston1.addTask(new Event(task, on));
-                System.out.println("Task Added!");
+                System.out.println("When is this event? Please give your answer in the format (YYYY-MM-DD)");
+                boolean valid = true;
+                while (valid) {
+                    try {
+                        String on = scan.nextLine();
+                        winston1.addTask(new Event(task, on));
+                        System.out.println("Task Added!");
+                        valid = false;
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Invalid date format. Please give a valid date format. E.g 2021-12-12");
+                    }
+                }
                 break;
             }
             case "delete": {

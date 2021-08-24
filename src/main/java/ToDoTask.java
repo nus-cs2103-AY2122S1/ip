@@ -1,5 +1,5 @@
 public class ToDoTask extends Task {
-    private String type;
+    private final String type;
     /**
      * Constructor for ToDoTask
      *
