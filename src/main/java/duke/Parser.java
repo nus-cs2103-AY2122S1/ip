@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
     TaskListInterface taskList;
-    private enum Command {EXIT, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, CHECKDATE, INVALID};
+    private enum Command {EXIT, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, CHECKDATE, FIND, INVALID};
 
     public Parser(TaskListInterface taskList) {
         this.taskList = taskList;
@@ -146,6 +146,9 @@ public class Parser {
             c = new CheckDateCommand(parsedDate);
             break;
 
+        case FIND:
+            String word = input.substring(5);
+            c = new FindCommand(word);
         default:
         }
         return c;
@@ -174,7 +177,9 @@ public class Parser {
             return Command.EVENT;
         } else if (input.startsWith("check")) {
             return Command.CHECKDATE;
-        } else {
+        } else if (input.startsWith("find")) {
+            return Command.FIND;
+        } else{
             return Command.INVALID;
         }
     }
