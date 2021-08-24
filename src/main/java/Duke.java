@@ -1,9 +1,10 @@
-import java.sql.PseudoColumnUsage;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    enum SPECIALTASK {
+    enum SPECIAL_TASK {
         bye,
         done,
         list,
@@ -12,7 +13,7 @@ public class Duke {
         event,
         delete
     }
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         String border = "____________________________________________________________";
         Printer printer = new Printer(border);
         printer.PrintIntro();
@@ -22,15 +23,15 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        while (!input.equals(SPECIALTASK.bye.name())) {
+        while (!input.equals(SPECIAL_TASK.bye.name())) {
             String[] splitInput = input.split(" ", 2);
-            if (splitInput[0].equals(SPECIALTASK.done.name())) {
+            if (splitInput[0].equals(SPECIAL_TASK.done.name())) {
                 int index = Integer.parseInt(splitInput[1]) - 1;
                 String returnString = tasks.get(index).markDone();
                 printer.PrintMessage(returnString);
-            } else if (input.equals(SPECIALTASK.list.name())) {
+            } else if (input.equals(SPECIAL_TASK.list.name())) {
                 printer.PrintList(tasks);
-            } else if (splitInput[0].equals(SPECIALTASK.todo.name())) {
+            } else if (splitInput[0].equals(SPECIAL_TASK.todo.name())) {
                 try {
                     if (splitInput.length < 2 || splitInput[1].equals("") || splitInput[1].equals(" ")) {
                         throw new DukeException("The description of a todo cannot be empty.");
@@ -40,7 +41,7 @@ public class Duke {
                 } catch (DukeException e) {
                     printer.PrintMessage(e.getMessage());
                 }
-            } else if (splitInput[0].equals(SPECIALTASK.deadline.name())) {
+            } else if (splitInput[0].equals(SPECIAL_TASK.deadline.name())) {
                 try {
                     if (splitInput.length < 2) {
                         throw new DukeException("The description of a deadline cannot be empty.");
@@ -52,12 +53,14 @@ public class Duke {
                     } else if (furtherSplits[1].equals("") || furtherSplits[1].equals(" ")) {
                         throw new DukeException("Deadline must come with a input date/time for the deadline.");
                     }
-                    tasks.add(new Deadline(furtherSplits[0], furtherSplits[1]));
+                    DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-M-d HH:mm");
+                    LocalDateTime by = LocalDateTime.parse(furtherSplits[1].stripLeading(), df);
+                    tasks.add(new Deadline(furtherSplits[0], by));
                     printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
                 } catch (DukeException e) {
                     printer.PrintMessage(e.getMessage());
                 }
-            } else if (splitInput[0].equals(SPECIALTASK.event.name())) {
+            } else if (splitInput[0].equals(SPECIAL_TASK.event.name())) {
                 try {
                     if (splitInput.length < 2) {
                         throw new DukeException("The description of a event cannot be empty.");
@@ -69,12 +72,14 @@ public class Duke {
                     } else if (furtherSplits[1].equals("") || furtherSplits[1].equals(" ")) {
                         throw new DukeException("Event must come with a event date/time.");
                     }
-                    tasks.add(new Event(furtherSplits[0], furtherSplits[1]));
+                    DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-M-d HH:mm");
+                    LocalDateTime at = LocalDateTime.parse(furtherSplits[1].stripLeading(), df);
+                    tasks.add(new Event(furtherSplits[0], at));
                     printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
                 } catch (DukeException e) {
                     printer.PrintMessage(e.getMessage());
                 }
-            } else if (splitInput[0].equals(SPECIALTASK.delete.name())) {
+            } else if (splitInput[0].equals(SPECIAL_TASK.delete.name())) {
                 try {
                     if (splitInput.length < 2) {
                         throw new DukeException("We don't know what to delete!");

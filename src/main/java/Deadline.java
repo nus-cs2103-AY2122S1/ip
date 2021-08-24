@@ -1,14 +1,26 @@
-public class Deadline extends Task {
-    protected String by;
+import java.time.LocalDateTime;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    protected LocalDateTime by;
+
+    public Deadline(String description, LocalDateTime by) {
         super(description, "D");
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String month = this.by.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+        int date = this.by.getDayOfMonth();
+        int year = this.by.getYear();
+        int hour = this.by.getHour();
+        int minute = this.by.getMinute();
+
+        String toPrint = String.format("[D]%s (at: %s %d %d %s:%s)",
+                super.toString(), month, date, year, hour, minute);
+        return toPrint;
     }
 
     @Override
