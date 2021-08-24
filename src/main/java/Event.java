@@ -2,11 +2,22 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
+    /**
+     * A constructor for an Event that specifies whether or not it is completed.
+     * @param title a String representing the title of the event
+     * @param timeDue a LocalDate representing time at which the event is due
+     */
     public Event(String title, LocalDate timeDue) {
         super(title, TypeIndicators.EVENT);
         this.timeDue = timeDue;
     }
 
+    /**
+     * A constructor for an Event that specifies whether or not it is completed.
+     * @param title a String representing the title of the event
+     * @param timeDue a LocalDate representing time at which the event is due
+     * @param isDone a boolean representing whether or not the event is completed
+     */
     public Event(String title, LocalDate timeDue, boolean isDone) {
         super(title, TypeIndicators.EVENT);
         this.timeDue = timeDue;
@@ -20,7 +31,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String formattedTimeDue = this.timeDue == null ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formattedTimeDue = this.timeDue == null
+                ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return super.toString() + String.format(" (at: %s)", formattedTimeDue);
     }
 }
