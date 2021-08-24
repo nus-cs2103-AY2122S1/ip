@@ -23,7 +23,7 @@ public class Ui {
         System.out.println("  ______________________________________________________________\n");
     }
     
-    public void showInput() {
+    public void showInputPrompt() {
         System.out.print("> ");
     }
     
