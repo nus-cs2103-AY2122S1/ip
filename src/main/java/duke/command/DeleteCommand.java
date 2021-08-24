@@ -9,10 +9,17 @@ public class DeleteCommand extends Command {
 
     private final int taskNumber;
 
+    /**
+     * Constructor for the delete command class
+     * @param taskNumber the task to be deleted
+     */
     public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 
+    /**
+     * Executes the delete command.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task removed = taskList.delete(taskNumber);

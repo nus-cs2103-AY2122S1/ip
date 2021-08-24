@@ -9,10 +9,17 @@ import duke.storage.Storage;
 public class DoneCommand extends Command {
     private int taskNum;
     
+    /**
+     * Constructor for the done command.
+     * @param taskNumber the task that is to be marked as done
+     */
     public DoneCommand(int taskNumber) {
         this.taskNum = taskNumber;
     }
 
+    /**
+     * Executes the done command.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.done(taskNum);

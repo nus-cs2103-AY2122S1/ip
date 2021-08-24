@@ -8,6 +8,9 @@ import duke.storage.Storage;
  * Contains the executables when the user uses the 'bye' command.
  */
 public class ByeCommand extends Command {
+    /**
+     * Executes the bye command.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showBye();
