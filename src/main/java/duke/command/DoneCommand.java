@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Represents the general done command.
  */
 public class DoneCommand extends Command {
-    private final int index;
+    private final int INDEX;
 
     /**
      * Constructor for the Done command.
@@ -21,13 +21,13 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(Duke duke, Scanner sc, int index) {
         super(duke, sc);
-        this.index = index;
+        this.INDEX = index;
     }
 
     @Override
     public void execute(TaskList taskList) throws IOException {
-        this.duke.setTaskAsDone(this.index);
-        Ui.printDoneMessage(taskList.getTask(this.index - 1));
+        this.duke.setTaskAsDone(this.INDEX);
+        Ui.printDoneMessage(taskList.getTask(this.INDEX - 1));
         duke.saveTasks();
     }
 }

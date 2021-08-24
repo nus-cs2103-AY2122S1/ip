@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Represents the general task command.
  */
 public class TaskCommand extends Command {
-    private String description;
+    private final String DESCRIPTION;
 
     /**
      * Constructor for the Task command.
@@ -22,12 +22,12 @@ public class TaskCommand extends Command {
      */
     public TaskCommand(Duke duke, Scanner sc, String description) {
         super(duke, sc);
-        this.description = description;
+        this.DESCRIPTION = description;
     }
 
     @Override
     public void execute(TaskList taskList) throws IOException, DukeException {
-        Ui.printAddedTaskMessage(this.duke.addTaskToList(description), taskList.getTotal());
+        Ui.printAddedTaskMessage(this.duke.addTaskToList(DESCRIPTION), taskList.getTotal());
         this.duke.saveTasks();
     }
 }

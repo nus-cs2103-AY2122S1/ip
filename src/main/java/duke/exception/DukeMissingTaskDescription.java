@@ -10,16 +10,16 @@ import duke.task.ToDo;
  * after wanting to add a task.
  */
 public class DukeMissingTaskDescription extends DukeIncorrectInputs {
-    private static final String prefix = "⚠️ OOPS!! The description of a";
-    private static final String suffix = " cannot be empty. ⚠️";
+    private static final String PREFIX = "⚠️ OOPS!! The description of a";
+    private static final String SUFFIX = " cannot be empty. ⚠️";
 
     /**
      * Constructor for the DukeMissingTaskDescription exception. Uses
      * runtime polymorphism to deduce that the task is a todo.
      */
     public DukeMissingTaskDescription(ToDo todo, Throwable err) {
-        super("\t" + DukeMissingTaskDescription.prefix + " todo" +
-                DukeMissingTaskDescription.suffix, err);
+        super("\t" + DukeMissingTaskDescription.PREFIX + " todo" +
+                DukeMissingTaskDescription.SUFFIX, err);
     }
 
     /**
@@ -27,8 +27,8 @@ public class DukeMissingTaskDescription extends DukeIncorrectInputs {
      * runtime polymorphism to deduce that the task is a deadline.
      */
     public DukeMissingTaskDescription(Deadline deadline, Throwable err) {
-        super("\t" + DukeMissingTaskDescription.prefix + " deadline" +
-                DukeMissingTaskDescription.suffix, err);
+        super("\t" + DukeMissingTaskDescription.PREFIX + " deadline" +
+                DukeMissingTaskDescription.SUFFIX, err);
     }
 
     /**
@@ -36,7 +36,7 @@ public class DukeMissingTaskDescription extends DukeIncorrectInputs {
      * runtime polymorphism to deduce that the task is an event.
      */
     public DukeMissingTaskDescription(Event event, Throwable err) {
-        super("\t" + DukeMissingTaskDescription.prefix + "n event" +
-                DukeMissingTaskDescription.suffix, err);
+        super("\t" + DukeMissingTaskDescription.PREFIX + "n event" +
+                DukeMissingTaskDescription.SUFFIX, err);
     }
 }
