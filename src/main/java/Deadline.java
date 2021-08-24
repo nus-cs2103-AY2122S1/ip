@@ -9,14 +9,14 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String eventMarker = "[D]";
+        String deadlineMarker = "[D]";
 
         String timestamp = String.format("(by: %s)", datetime);
 
         if (isDone) {
-            return eventMarker + hasCross + " " + item + " " + timestamp;
+            return deadlineMarker + "|" + hasCross + "|" + item + "|" + datetime;
         } else {
-            return eventMarker + hasNoCross + " " + item + " " + timestamp;
+            return deadlineMarker + "|" + hasNoCross + "|" + item + "|" + datetime;
         }
     }
 }

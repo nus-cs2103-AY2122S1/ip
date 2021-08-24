@@ -1,13 +1,16 @@
-import java.util.List;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.ListIterator;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class Duke {
     private static final String END_OF_CONVERSATION = "bye";
-    private static List<Task> listOfItems = new ArrayList<Task>();
+    private static List<Task> listOfItems = new ArrayList<>();
     private static final String SEPARATOR = "########################";
-
+    private static final Path FILE_PATH = Paths.get(System.getProperty("user.dir"), "data/Duke.txt");
+    private static Storage storage;
     /**
      * Beautifies text output by wrapping it around a border.
      *
@@ -41,6 +44,7 @@ public class Duke {
 
     /**
      * Marks an item on the list as completed.
+     *
      * @param input
      */
     private static void markAsDone(String input) {
@@ -54,7 +58,8 @@ public class Duke {
     }
 
     /**
-     * function for printing the confirmation message for any item added to list
+     * Prints the confirmation message for any item added to list.
+     *
      * @param task
      */
     private static void printAdditionConfirmation(Task task) {
@@ -66,6 +71,12 @@ public class Duke {
                 listOfItems.size() != 1 ? "items" : "item");
         outputWrapper(confirmationMessage + numberOfItems);
     }
+
+    /**
+     * Prints the confirmations message for any item deleted from the list.
+     *
+     * @param task
+     */
     private static void printDeletionConfirmation(Task task) {
         String confirmationMessage = "You have successfully deleted an item:\n" + task + "\nfrom the list.\n";
 
@@ -76,7 +87,8 @@ public class Duke {
         outputWrapper(confirmationMessage + numberOfItems);
     }
     /**
-     * Add an item to the list as todo.
+     * Adds an item to the list as todo.
+     *
      * @param input
      */
     private static void markAsTodo(String input) throws DukeException {
@@ -91,14 +103,18 @@ public class Duke {
         printAdditionConfirmation(todo);
     }
 
+    /**
+     * Adds an item to the list as an event.
+     *
+     * @param input
+     */
     private static void markAsEvent(String input) throws DukeException {
-        // split input into command + text and date
         String[] keywords = input.split(" ", 2);
         if (keywords.length == 1) {
             throw new DukeException("you need to describe your event to me in format: event (description)!");
         }
         // split input into command and text
-        String[] elements = keywords[1].split("/at ", 2);
+        String[] elements = keywords[1].split(" /at ", 2);
         if (elements.length == 1) {
             throw new DukeException("you need to tell me the time in format: (task) /at (time)!");
         }
@@ -108,14 +124,17 @@ public class Duke {
         listOfItems.add(event);
         printAdditionConfirmation(event);
     }
-
+    /**
+     * Adds an item to the list as deadline.
+     *
+     * @param input
+     */
     private static void markAsDeadline(String input) throws DukeException {
-
         String[] keywords = input.split(" ", 2);
         if (keywords.length == 1) {
             throw new DukeException("you need to describe your deadline to me in format: deadline (description)!");
         }
-        String[] elements = keywords[1].split("/by ", 2);
+        String[] elements = keywords[1].split(" /by ", 2);
         if (elements.length == 1) {
             throw new DukeException("you need to tell me the time in format: (task) /by (time)!");
         }
@@ -126,6 +145,12 @@ public class Duke {
         printAdditionConfirmation(deadline);
     }
 
+    /**
+     * Deletes an item from the list by passing the index of the task to be deleted.
+     *
+     * @param input
+     * @throws DukeException
+     */
     private static void deleteItem(String input) throws DukeException {
         try {
             Integer idx = Integer.parseInt(input.split(" ", 2)[1]) - 1;
@@ -192,7 +217,18 @@ public class Duke {
     /**
      * Starts the current session for the bot.
      */
-    private static void startBot() {
+    private static void startBot()  {
+        try {
+            if (Files.notExists(FILE_PATH)) {
+                File f = new File(FILE_PATH.toString());
+                f.getParentFile().mkdirs();
+                f.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred when opening the file. Try rerunning Duke again.");
+        }
+        storage = new Storage(FILE_PATH);
+        listOfItems = storage.load();
         Scanner i = new Scanner(System.in);
         String input = i.nextLine();
 
@@ -200,12 +236,19 @@ public class Duke {
             handleInput(input);
             input = i.nextLine();
         }
+
+        try {
+            storage.save(listOfItems);
+        } catch (IOException e) {
+
+        }
+
         outputWrapper("Thanks for using me. See you again soon!");
         i.close();
     }
 
     /**
-     * Echos input of the user
+     * Echos input of the user.
      */
     private static void echoInput() {
         Scanner i = new Scanner(System.in);
@@ -216,7 +259,6 @@ public class Duke {
         }
         outputWrapper("Thanks for using me. See you again soon!");
         i.close();
-
     }
     public static void main(String[] args) {
         System.out.println("Hello this is Jeeves, your personal chatbot. What can i do you for today?");

@@ -8,9 +8,9 @@ public class Todo extends Task{
     public String toString() {
         String todoMarker = "[T]";
         if (isDone) {
-            return todoMarker + hasCross + " " + item;
+            return todoMarker + "|" + hasCross + "|" + item;
         } else {
-            return todoMarker + hasNoCross + " " + item;
+            return todoMarker + "|" + hasNoCross + "|" + item;
         }
     }
 }

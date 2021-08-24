@@ -9,6 +9,9 @@ public class Task {
         item = input;
     }
 
+    /**
+     * Sets task in tasklist to done.
+     */
     public void setDone() {
         isDone = true;
     }

@@ -12,6 +12,12 @@ then
     rm ACTUAL.TXT
 fi
 
+#delete previous savefile
+if [ -e "./data/Duke.txt" ]
+then
+    rm ./data/Duke.txt
+fi
+
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -cp ../src/main/java -Xlint:unchecked -d ../bin ../src/main/java/*.java
 then

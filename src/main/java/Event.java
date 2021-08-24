@@ -13,9 +13,9 @@ public class Event extends Task {
         String timestamp = String.format("(at: %s)", datetime);
 
         if (isDone) {
-            return eventMarker + hasCross + " " + item + " " + timestamp;
+            return eventMarker + "|" + hasCross + "|" + item + "|" + datetime;
         } else {
-            return eventMarker + hasNoCross + " " + item + " " + timestamp;
+            return eventMarker + "|" + hasNoCross + "|" + item + "|" + datetime;
         }
     }
 }
