@@ -12,7 +12,7 @@ public class Deadline extends Task{
 
     public Deadline(String description, String deadline, boolean isDone) {
         super(Task.Type.D, isDone, description);
-        this.deadline = deadline;
+        this.deadline = LocalDate.parse(deadline);
     }
 
     @Override
@@ -20,5 +20,5 @@ public class Deadline extends Task{
         return super.toString() + " (by: " + printOut.format(deadline) + ")";
     }
 
-    public String toFileString() {return super.toFileString() + " " + deadline;}
+    public String toFileString() {return super.toFileString() + " " + deadline.toString();}
 }

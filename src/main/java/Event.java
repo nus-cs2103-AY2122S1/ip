@@ -12,7 +12,7 @@ public class Event extends Task {
 
     public Event(String description, String time, boolean isDone) {
         super(Task.Type.E, isDone, description);
-        this.time = time;
+        this.time = LocalDate.parse(time);
     }
 
     @Override
@@ -20,5 +20,5 @@ public class Event extends Task {
         return super.toString() + " (at: " + printOut.format(time) + ")";
     }
 
-    public String toFileString() {return super.toFileString() + " " + time;}
+    public String toFileString() {return super.toFileString() + " " + time.toString();}
 }

@@ -59,15 +59,23 @@ public class Duke {
                     //Logic to piece through task strings
                     String[] words = data.split(" ");
                     boolean isDone = words[1].equals("X") ? true : false;
+                    String desc = "";
+                    for (int i = 2; i < words.length - 1; i++) {
+                        desc += words[i] + " ";
+                    }
+                    desc.trim();
+
                     if (words[0].equals("T")) {
                         //Task is a toDo
-                        taskList.add(new ToDo(words[2], isDone));
+                        desc += words[words.length - 1];
+
+                        taskList.add(new ToDo(desc, isDone));
                     } else if (words[0].equals("E")) {
                         //Task is a Event
-                        taskList.add(new Event(words[2], words[3], isDone));
+                        taskList.add(new Event(desc, words[words.length - 1], isDone));
                     } else if (words[0].equals("D")) {
                         //Task is a Deadline
-                        taskList.add(new Deadline(words[2], words[3], isDone));
+                        taskList.add(new Deadline(desc, words[words.length - 1], isDone));
                     } else {
                         throw new DukeException("Invalid Fileformat");
                     }
