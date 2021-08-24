@@ -4,38 +4,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exceptions.DukeException;
 import duke.task.*;
 
+import static duke.parser.Parser.dateFormatter;
+import static duke.parser.Parser.timeFormatter;
+
 public class Storage {
 
     private final String filePath;
     public Storage(String filePath) {
         this.filePath = filePath;
-    }
-
-    public LocalDate dateFormatter(String str) throws DukeException {
-        try {
-            String[] splitStr = str.split("/");
-            String day = String.format("%1$" + 2 + "s", splitStr[0]).replace(' ', '0');
-            String month = String.format("%1$" + 2 + "s", splitStr[1]).replace(' ', '0');
-            return LocalDate.parse(splitStr[2] + "-" +  month + "-" + day);
-        } catch (Exception e) {
-            throw new DukeException("Your Date is wrongly formatted! It should be in the form of dd-mm-yyyy.");
-        }
-    }
-
-    public LocalTime timeFormatter(String str) throws DukeException {
-        try {
-            return LocalTime.parse(str.substring(0, 2) + ":" + str.substring(2));
-        } catch (Exception e) {
-            throw new DukeException("Your Time is wrongly formatted! It should be in the the form of hhmm.");
-        }
     }
 
     public ArrayList<Task> load() throws DukeException {
