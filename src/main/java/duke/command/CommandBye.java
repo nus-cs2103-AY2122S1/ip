@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 public class CommandBye extends Command {
     public static final String KEYWORD = "bye";
     public static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";

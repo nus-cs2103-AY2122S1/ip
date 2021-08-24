@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.*;
+import duke.task.Deadline;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -45,7 +50,7 @@ public class CommandDeadline extends Command {
             }
             tl.addTask(newDeadline);
         } else {
-            throw new DukeException("Invalid argument for command: deadline");
+            throw new DukeException("Invalid argument for duke.command: deadline");
         }
     }
 

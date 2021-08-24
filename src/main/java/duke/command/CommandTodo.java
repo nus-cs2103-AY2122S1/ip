@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.*;
+import duke.task.Todo;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +34,7 @@ public class CommandTodo extends Command {
             Todo newTodo = new Todo(arguments.get(0), "", "");
             tl.addTask(newTodo);
         } else {
-            throw new DukeException("Invalid argument for command: todo");
+            throw new DukeException("Invalid argument for duke.command: todo");
         }
     }
 }

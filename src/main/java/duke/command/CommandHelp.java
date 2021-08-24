@@ -1,10 +1,16 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 public class CommandHelp extends Command {
     private static final String HELP_MESSAGE = "List of Commands:\n" +
             "List,\n" +
             "Done,\n" +
-            "Todo,\n" +
-            "Deadline,\n" +
-            "Event,\n" +
+            "duke.task.Todo,\n" +
+            "duke.task.Deadline,\n" +
+            "duke.task.Event,\n" +
             "Delete,\n" +
             "Check,\n" +
             "Bye";

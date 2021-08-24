@@ -1,14 +1,21 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CommandDone extends Command {
-    public static final String KEYWORD = "done";
+public class CommandDelete extends Command {
+    public static final String KEYWORD = "delete";
     private static final String ARG_FORMAT = "\\d|\\d\\d|100";
     private ArrayList<String> arguments;
 
 
-    public CommandDone(ArrayList<String> arguments) {
+    public CommandDelete(ArrayList<String> arguments) {
         this.arguments = arguments;
     }
 
@@ -28,13 +35,14 @@ public class CommandDone extends Command {
         if (isArgumentValid()) {
             int number = Integer.parseInt(arguments.get(0)) - 1;
             if (number + 1 <= tl.numberOfTasks() && number + 1 > 0) {
-                tl.markAsDone(number);
-                ui.printout("Nice, I've marked this task as done!\n" + tl.getTaskString(number));
+                ui.printout("Noted, I've removed this task\n" + tl.getTaskString(number));
+                tl.removeTask(number);
+                ui.printout("Now you have " + tl.numberOfTasks() + " tasks in the list.");
             } else {
                 throw new DukeException("That task does not exist!");
             }
         } else {
-            throw new DukeException("Invalid argument for command: done");
+            throw new DukeException("Invalid argument for duke.command: delete");
         }
     }
 

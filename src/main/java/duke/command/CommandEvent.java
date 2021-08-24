@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.*;
+import duke.task.Event;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -44,7 +49,7 @@ public class CommandEvent extends Command {
             newEvent = new Event(arguments.get(0), arguments.get(2), arguments.get(3));
             tl.addTask(newEvent);
         } else {
-            throw new DukeException("Invalid argument for command: event");
+            throw new DukeException("Invalid argument for duke.command: event");
         }
     }
 

@@ -1,6 +1,8 @@
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class Command {
     public void execute(TaskList tl, Storage st, Ui ui) {

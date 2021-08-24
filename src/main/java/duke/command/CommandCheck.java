@@ -1,5 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -34,7 +40,7 @@ public class CommandCheck extends Command {
         if (isArgumentValid()) {
             tl.printAllTasksOnDate(arguments.get(0));
         } else {
-            throw new DukeException("Invalid argument for command: check");
+            throw new DukeException("Invalid argument for duke.command: check");
         }
     }
 

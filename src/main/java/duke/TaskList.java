@@ -1,3 +1,9 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import java.util.ArrayList;
 
 
@@ -85,7 +91,7 @@ public class TaskList {
 
     public void removeTask(int i) {
         if (i > listOfTasks.size()) {
-            throw new DukeException("Task does not exist!");
+            throw new DukeException("duke.task.Task does not exist!");
         } else {
             listOfTasks.remove(i);
         }
@@ -102,7 +108,7 @@ public class TaskList {
 
     public void markAsDone(int i) {
         if (i > listOfTasks.size()) {
-            throw new DukeException("Task does not exist!");
+            throw new DukeException("duke.task.Task does not exist!");
         } else {
             listOfTasks.get(i).markAsDone();
         }
@@ -111,7 +117,7 @@ public class TaskList {
 
     public Task getTask(int i) {
         if (i > listOfTasks.size()) {
-            throw new DukeException("Task does not exist!");
+            throw new DukeException("duke.task.Task does not exist!");
         } else {
             return listOfTasks.get(i);
         }
@@ -119,7 +125,7 @@ public class TaskList {
 
     public String getTaskString(int i) {
         if (i > listOfTasks.size()) {
-            throw new DukeException("Task does not exist!");
+            throw new DukeException("duke.task.Task does not exist!");
         } else {
             return listOfTasks.get(i).toString();
         }
