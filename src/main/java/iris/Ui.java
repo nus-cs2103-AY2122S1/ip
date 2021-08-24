@@ -31,6 +31,14 @@ public class Ui {
         System.out.printf("%s %s%n", name, message);
     }
 
+    public void sayHello() {
+        say("Hello! I'm Iris. What can I do for you?");
+    }
+
+    public void sayGoodbye() {
+        say("Bye. Hope to see you again soon!");
+    }
+
     /**
      * Gets Iris to notify user about error
      *

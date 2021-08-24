@@ -31,7 +31,8 @@ public class Iris {
      * Starts an Iris instance
      */
     public void run() {
-        ui.say("Hello! I'm Iris. What can I do for you?");
+        ui.sayHello();
+
         String rawCommand = ui.prompt();
         while (!rawCommand.equals(ENDING_COMMAND)) {
             try {
@@ -43,7 +44,7 @@ public class Iris {
             rawCommand = ui.prompt();
         }
 
-        ui.say("Bye. Hope to see you again soon!");
+        ui.sayGoodbye();
     }
 
     public static void main(String[] args) {
