@@ -54,6 +54,7 @@ class Duke {
             switch (commandWord) {
             case "todo":
                 return UserCommands.TODO;
+
             case "deadline":
                 parseDescription(userInput, "/by ");
                 return UserCommands.DEADLINE;
