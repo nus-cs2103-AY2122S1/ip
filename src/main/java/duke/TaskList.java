@@ -22,6 +22,11 @@ public class TaskList {
         storage.save(tasks);
     }
 
+    /**
+     *
+     * @param i The task no in the list to be marked as completed
+     * @return String representation of the completed task
+     */
     public String markDone(int i) {
         Task t = getTask(i);
         t.markDone();
@@ -37,6 +42,11 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     *
+     * @param i The task no in the list to be deleted
+     * @return String representation of the deleted task
+     */
     public String removeTask(int i) {
         Task t = getTask(i);
         tasks.remove(i);

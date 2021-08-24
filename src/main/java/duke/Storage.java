@@ -14,10 +14,17 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class loads and saves a user's tasks
+ */
 public class Storage {
 
     private static String filePath = "data/list.txt";
 
+    /**
+     *
+     * @param tasks List of tasks to be saved to disk
+     */
     public void save(ArrayList<Task> tasks) {
         FileWriter w, fw;
         try {
@@ -44,6 +51,11 @@ public class Storage {
         }
     }
 
+    /**
+     *
+     * @return List of tasks loaded from disk
+     * @throws DukeException thrown if there are errors with loading / creating a file
+     */
     public ArrayList<Task> load() throws DukeException {
         File f = new File(filePath);
         ArrayList<Task> list = new ArrayList<>();
@@ -81,7 +93,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File not found : "+ e.getLocalizedMessage());
+            throw  new DukeException("File not found : "+ e.getLocalizedMessage());
         }
         return list;
     }
