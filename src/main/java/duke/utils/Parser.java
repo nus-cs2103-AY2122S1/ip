@@ -7,6 +7,7 @@ import duke.commands.AddTodoCommand;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteTaskCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkDoneCommand;
 
@@ -46,6 +47,9 @@ public class Parser {
         }  else if (input.matches("delete [0-9]{1,}")) {
             String[] keywords = extractKeywordsFromCommand(input, new String[] {"delete"});
             command = new DeleteTaskCommand(keywords[0]);
+        } else if (input.matches("find .{1,}")) {
+            String[] keywords = extractKeywordsFromCommand(input, new String[]{"find"});
+            return new FindCommand(keywords);
         }
 
         if (command != null) {
