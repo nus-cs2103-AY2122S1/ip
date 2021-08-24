@@ -4,7 +4,7 @@ public class Duke {
 
     // Messages
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
-    private static final String REWELCOME_MESSAGE = "Welcome back!\nWhat can I do for you again?";
+    private static final String REWELCOME_MESSAGE = "Welcome back!\nWhat can Duke do once again for you?";
     private static final String LIST_MESSAGE = "Here are the tasks in your list:\n%s";
     private static final String NO_TASKS_IN_LIST_MESSAGE = "You have no tasks currently. Go create some!";
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n %s";
@@ -70,22 +70,20 @@ public class Duke {
                 case TODO:
                     ToDo myTodo = ToDo.newTodo(remainingText);
                     Message.display_message(taskList.addTask(myTodo));
-                    storage.writeTaskToFile(myTodo);
                     break;
                 case DEADLINE:
                     Deadline myDeadline = Deadline.newDeadline(remainingText, false);
                     Message.display_message(taskList.addTask(myDeadline));
-                    storage.writeTaskToFile(myDeadline);
                     break;
                 case EVENT:
                     Event myEvent = Event.newEvent(remainingText, false);
                     Message.display_message(taskList.addTask(myEvent));
-                    storage.writeTaskToFile(myEvent);
                     break;
                 case BYE:
                     canContinue = false;
                     break;
             }
+                storage.updateTaskListToFile(taskList);
             } catch (DukeException err) {
                 Message.display_message(err.getMessage());
             }
@@ -96,7 +94,7 @@ public class Duke {
     public static void main(String[] args) {
         TaskList taskList = new TaskList();
         Storage myStorage = new Storage();
-        if (myStorage.didTaskFileExist()) {
+        if (!myStorage.didTaskFileExist()) {
             Message.display_message(WELCOME_MESSAGE);
         } else {
             Message.display_message(REWELCOME_MESSAGE);

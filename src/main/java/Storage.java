@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
@@ -6,12 +10,10 @@ public class Storage {
     private static final String FILE = "taskList.txt";
     private static final String[] FILE_PATH_ARR =  {".", OUTER_DIR , FILE};
     private static final String CREATE_FILE_ERROR = "An error occurred. Unable to create taskList file.";
-    private static final String CLOSE_WRITER_ERROR = "An error occurred. Unable to close writer to taskList.";
     private static final String FILE_NOT_FOUND_MESSAGE = "An error occurred. Unable to find file.";
     private static final String INVALID_TASKLIST_MESSAGE = "Error reading taskLst. TaskList is probably invalid.";
     private final File taskFile;
     private boolean didTaskFileExist = false;
-    private BufferedWriter bufferedWriter;
 
     public Storage() {
         taskFile = new File(getPath());
@@ -20,18 +22,8 @@ public class Storage {
             if (!taskFile.createNewFile()) {
                 this.didTaskFileExist = true;
             }
-            FileWriter fileWriter = new FileWriter(taskFile, true);
-            this.bufferedWriter = new BufferedWriter(fileWriter);
         } catch (IOException err) {
             System.out.println(CREATE_FILE_ERROR);
-        }
-    }
-
-    public void closeWriter() {
-        try {
-            this.bufferedWriter.close();
-        } catch (IOException err) {
-            System.out.println(CLOSE_WRITER_ERROR);
         }
     }
 
@@ -39,10 +31,11 @@ public class Storage {
         return this.didTaskFileExist;
     }
 
-    public void writeTaskToFile(Task task) {
+    public void updateTaskListToFile(TaskList taskList) {
         try {
-            bufferedWriter.append(task.getSaveFormat());
-            bufferedWriter.newLine();
+            FileWriter fileWriter = new FileWriter(taskFile, false);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(taskList.getSaveFormat());
             bufferedWriter.flush();
         } catch (IOException err) {
             System.out.println("Error writing task to file.");
@@ -59,9 +52,8 @@ public class Storage {
             taskScanner.close();
         } catch (FileNotFoundException err) {
             Message.display_message(FILE_NOT_FOUND_MESSAGE);
-            System.out.println(err);
         } catch (ArrayIndexOutOfBoundsException err) {
-            System.out.println(INVALID_TASKLIST_MESSAGE);
+            Message.display_message(INVALID_TASKLIST_MESSAGE);
         } catch (DukeException err) {
             Message.display_message(err.getMessage());
         }

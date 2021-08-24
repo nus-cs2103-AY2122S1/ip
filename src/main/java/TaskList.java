@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
+
+    private final List<Task> taskArr;
+
     // Messages
     private static final String OUT_OF_BOUNDS_TASK = "Could not find task. Check the task number again?";
     private static final String NUMBER_OF_TASKS_MESSAGE = "Now you have %d %s in the list.";
@@ -13,8 +16,6 @@ public class TaskList {
     private String taskWord() {
         return this.size() <= 1 ? "task" : "tasks";
     }
-
-    private final List<Task> taskArr;
 
     public TaskList() {
         this.taskArr = new ArrayList<>();
@@ -72,6 +73,15 @@ public class TaskList {
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException(OUT_OF_BOUNDS_TASK);
         }
+    }
+
+    public String getSaveFormat() {
+        StringBuilder printedList = new StringBuilder();
+        for (Task task : taskArr) {
+            printedList.append(String.format("%s\n", task.getSaveFormat()));
+        }
+        // Remove the last newline
+        return printedList.toString().trim();
     }
 
     @Override
