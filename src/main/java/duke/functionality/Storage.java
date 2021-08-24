@@ -73,6 +73,8 @@ public class Storage {
         return this.taskList.getTask(taskIndex);
     }
 
+    public TaskList getTaskList() { return this.taskList; }
+
     public String printTaskList() {
         return this.taskList.toString();
     }

@@ -5,6 +5,7 @@ import duke.tasks.Task;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
+import java.util.List;
 
 public class Ui {
     private static final String BORDER = "____________________________________________________________";
@@ -16,6 +17,7 @@ public class Ui {
     private static final String REMAINING_TASK_NUM = String.format("Now you have %s tasks in the list.", PLACEHOLDER);
     private static final String DELETED_TASK = "Noted. I've removed this task:";
     private static final String MISSING_TASK = "There is no task at the specified index.";
+    private static final String NO_MATCHING_TASKS = "There are no matching tasks found.";
     private static final String UNKNOWN_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
 
@@ -70,8 +72,21 @@ public class Ui {
     }
 
     public void printTaskListMessage(String stringifyTaskLast) {
-        //change Storage to String taskListMessage later on
         prettyPrintToUser(stringifyTaskLast);
+    }
+
+    public void printMatchingTasksMessage(List<Task> listOfMatches) {
+        int len = listOfMatches.size();
+        if (len == 0) {
+            prettyPrintToUser(NO_MATCHING_TASKS);
+        } else {
+            StringBuilder msg = new StringBuilder("Here are the matching tasks in your list:");
+            for (int i = 0; i < len; i++) {
+                int currTaskNum = i + 1;
+                msg.append("\n").append(currTaskNum).append(". ").append(listOfMatches.get(i).toString());
+            }
+            prettyPrintToUser(msg.toString());
+        }
     }
 
     public void unknownCommandMessage() {
