@@ -48,7 +48,6 @@ public class Storage {
                     break;
                 case 'E':
                     time = parseTime(task, "at: ");
-                    System.out.println(time);
                     newTask = new Event(description, time);
                     taskList = loadTasks(newTask, taskList, isCompleted);
                     manager.updateDateTasks(dateTasks, time, newTask);

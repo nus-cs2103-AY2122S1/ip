@@ -16,35 +16,15 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
     private HashMap<LocalDate, ArrayList<Task>> dateTasks = new HashMap<>();
+    private Ui ui;
 
     /**
      * Constructor for Duke
      */
-    public Duke(TaskList taskList, Storage storage) {
+    public Duke(TaskList taskList, Storage storage, Ui ui) {
         this.taskList = taskList;
         this.storage = storage;
-    }
-
-    /**
-     * Commands that Duke might use.
-     */
-    private enum Commands {
-        GREET(String.format("Hello! I'm Duke\n%4sWhat can I do for you?", " ")),
-        ADD("Got it. I've added this task:"),
-        DONE("Nice! I've marked this task as done:"),
-        DELETE("Noted. I've removed this task:"),
-        LIST("Here are the tasks in your list:"),
-        EXIT("Bye. Hope to see you again soon!");
-
-        private final String command;
-
-        private Commands(String command) {
-            this.command = command;
-        }
-
-        public void printCommand() {
-            System.out.println(String.format("%4s%s", " ", this.command));
-        }
+        this.ui = ui;
     }
 
     /**
@@ -63,7 +43,7 @@ public class Duke {
      */
     private void greet() {
         divider();
-        Commands.GREET.printCommand();
+        ui.outputMessage(Commands.GREET);
         divider();
     }
 
@@ -72,7 +52,7 @@ public class Duke {
      */
     private void exit() {
         divider();
-        Commands.EXIT.printCommand();
+        ui.outputMessage(Commands.EXIT);
         divider();
     }
 
@@ -81,7 +61,7 @@ public class Duke {
      */
     private void returnTaskList() {
         divider();
-        Commands.LIST.printCommand();
+        ui.outputMessage(Commands.LIST);
         System.out.println(taskList);
         divider();
     }
@@ -185,7 +165,7 @@ public class Duke {
 
             divider();
             this.taskList = this.taskList.add(newTask);
-            Commands.ADD.printCommand();
+            ui.outputMessage(Commands.ADD);
             System.out.println(
                     String.format("%5s%s\n%4s%s", " ", newTask,
                             " ", this.taskList.status())
@@ -211,7 +191,7 @@ public class Duke {
         if (isValid) {
             String toUpdate = this.taskList.getTask(index).toString();
             Task task = this.taskList.markTaskAsCompleted(index);
-            Commands.DONE.printCommand();
+            ui.outputMessage(Commands.DONE);
             System.out.println(
                     String.format("%6s%s\n%4s%s", " ", task,
                             " ", this.taskList.status())
@@ -234,7 +214,7 @@ public class Duke {
         if (isValid) {
             Task task = taskList.getTask(index);
             this.taskList = this.taskList.deleteTask(index);
-            Commands.DELETE.printCommand();
+            ui.outputMessage(Commands.DELETE);
             System.out.println(
                     String.format("%6s%s\n%4s%s", " ", task,
                             " ", taskList.status())
@@ -323,7 +303,7 @@ public class Duke {
             }
         }
 
-        Duke duke = new Duke(new TaskList(), new Storage(filePath));
+        Duke duke = new Duke(new TaskList(), new Storage(filePath), new Ui());
         duke.run();
     }
 }
