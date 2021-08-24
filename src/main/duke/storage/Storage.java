@@ -82,6 +82,7 @@ public class Storage {
             // Invalid data, do nothing.
         }
     }
+    
     private void readDeadline(String data) {
         try {
             String[] splitDeadline = data.split("\\|", 4);
@@ -98,12 +99,14 @@ public class Storage {
             // Invalid data, do nothing.
         }
     }
+
     /**
      * Creates a file. Called in readFile().
      */
     private void createFile() {
         try {
             File myObj = new File(FILEPATH);
+            //noinspection ResultOfMethodCallIgnored
             myObj.createNewFile();
         } catch (IOException e) {
             System.out.println("OOPS!!! An error occurred when creating a file!");

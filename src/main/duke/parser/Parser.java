@@ -1,6 +1,5 @@
 package duke.parser;
 
-import duke.Duke;
 import duke.command.*;
 import duke.data.exception.DukeException;
 import duke.data.task.Deadline;
