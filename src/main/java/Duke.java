@@ -157,27 +157,21 @@ public class Duke {
         } else if (taskTypeAndDetails[0].equals("deadline")) {
             String taskDetails = taskTypeAndDetails[1];
             String[] descriptionAndDateTime = taskDetails.split(" /by ", 2);
-            if (descriptionAndDateTime.length < 2
-                    || descriptionAndDateTime[0].strip().equals("")
-                    || descriptionAndDateTime[1].strip().equals("")) {
+            if (descriptionAndDateTime.length < 2 || descriptionAndDateTime[0].strip().equals("")) {
                 throw new DukeException("Invalid format for a deadline task.\n"
                         + "Please input your deadline task in the following manner:\n"
                         + "deadline <task_description> /by <task_deadline>");
-            } else {
-                newTask = new Deadline(descriptionAndDateTime[0], descriptionAndDateTime[1]);
             }
+            newTask = new Deadline(descriptionAndDateTime[0], descriptionAndDateTime[1]);
         } else if (taskTypeAndDetails[0].equals("event")) {
             String taskDetails = taskTypeAndDetails[1];
             String[] descriptionAndDateTime = taskDetails.split(" /at ", 2);
-            if (descriptionAndDateTime.length < 2
-                    || descriptionAndDateTime[0].strip().equals("")
-                    || descriptionAndDateTime[1].strip().equals("")) {
+            if (descriptionAndDateTime.length < 2 || descriptionAndDateTime[0].strip().equals("")) {
                 throw new DukeException("Invalid format for an event.\n"
                         + "Please input your event in the following manner:\n"
-                        + "event <event_description> /at <event_date_or_time>");
-            } else {
-                newTask = new Event(descriptionAndDateTime[0], descriptionAndDateTime[1]);
+                        + "event <event_description> /at <event_date>");
             }
+            newTask = new Event(descriptionAndDateTime[0], descriptionAndDateTime[1]);
         } else {
             throw new DukeException("Invalid command. List of valid commands include:\n"
                     + "list|todo|deadline|event|done|bye");

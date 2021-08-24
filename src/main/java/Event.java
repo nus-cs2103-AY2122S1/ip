@@ -1,9 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * The Event class encapsulates a task that occurs at a specific date/time.
  */
 public class Event extends Task {
     /** The date/time that the event occurs at. */
-    private String at;
+    private LocalDate at;
 
     /**
      * Constructor for the Event class.
@@ -11,9 +15,14 @@ public class Event extends Task {
      * @param description The description of the event.
      * @param at The date/time that the event occurs at.
      */
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException {
         super(description);
-        this.at = at;
+        try {
+            this.at = LocalDate.parse(at);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Event dates should be in the form YYYY-MM-DD.");
+        }
+
     }
 
     /**
@@ -35,7 +44,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[E]" + super.toString() + " (at: "
+                + this.at.format(DateTimeFormatter.ofPattern("d MMMM yyyy")) + ")";
     }
 
     @Override
