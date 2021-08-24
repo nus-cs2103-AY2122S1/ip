@@ -3,44 +3,38 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static ArrayList<Task> taskList = new ArrayList<>();
-    public static int counter = 0;
-    protected static Scanner scanner;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("\t Hello! I'm Duke");
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
         try {
-            DukeFileIO.readPastData();
-        } catch(FileNotFoundException e) {
-            DukeFileIO.createDataFile();
+            tasks = new TaskList(storage.readPastData());
+        } catch (FileNotFoundException e) {
+            storage.createDataFile();
+            tasks = new TaskList(new ArrayList<>());
         }
-        scanner = new Scanner(System.in);
-        getCommand();
     }
 
-    public static void getCommand() {
-        //Scanner scanner = new Scanner(System.in);
-        System.out.println("\t What would you like me to do?\n");
-        String command = scanner.nextLine();
-        String first = command.split(" ")[0];
-
-        try {
-            for (DukeCommands d : DukeCommands.values()) {
-                if (d.command.equals(first)) {
-                    d.action.execute(command);
-                    break;
-                } else if (d.command.equals("invalid")) {
-                    DukeCommands.INVALID.action.execute(command);
-                }
+    public void run() {
+        this.ui.greet();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String userCommand = this.ui.readCommand();
+                Command command = Parser.parse(userCommand);
+                command.execute(this.tasks, this.ui, this.storage);
+            } catch (DukeException e) {
+                ui.displayError(e.getMessage());
             }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            getCommand();
         }
+
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke("data/duke.txt");
+        duke.run();
     }
 }

@@ -7,26 +7,6 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    public void getCommand() {
-        System.out.println("\t What would you like me to do?\n");
-        String command = this.scanner.nextLine();
-        String first = command.split(" ")[0];
-
-        try {
-            for (DukeCommands d : DukeCommands.values()) {
-                if (d.command.equals(first)) {
-                    d.action.execute(command);
-                    break;
-                } else if (d.command.equals("invalid")) {
-                    DukeCommands.INVALID.action.execute(command);
-                }
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            getCommand();
-        }
-    }
-
     public String readCommand() {
         return this.scanner.nextLine();
     }
