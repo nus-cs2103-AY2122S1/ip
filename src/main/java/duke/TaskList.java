@@ -1,10 +1,13 @@
 package duke;
 
 import java.io.IOException;
+
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 
 public class TaskList {
+
     private ArrayList<Task> list;
     private Duke duke;
 
@@ -26,7 +29,8 @@ public class TaskList {
         return listString;
     }
 
-    public void createTask(String description, String time, Task.Category category, boolean isDone, boolean hasNotif) {
+    public void createTask(String description, String time, Task.Category category,
+                           boolean isDone, boolean hasNotif) {
         switch (category) {
         case TODO:
             list.add(new ToDo(description, isDone, hasNotif));
@@ -48,7 +52,8 @@ public class TaskList {
         }
     }
 
-    public void createTaskDate(String description, LocalDate time, Task.Category category, boolean isDone, boolean hasNotif) {
+    public void createTaskDate(String description, LocalDate time, Task.Category category,
+                               boolean isDone, boolean hasNotif) {
         switch (category) {
         case DEADLINE:
             list.add(new Deadline(description, time, isDone, hasNotif));

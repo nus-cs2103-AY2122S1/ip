@@ -11,6 +11,7 @@ public class Duke {
     public TaskList getTasks() {
         return this.tasks;
     }
+
     public Storage getStorage() {
         return this.storage;
     }

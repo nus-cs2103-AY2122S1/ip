@@ -1,16 +1,18 @@
 package duke;
 
 import java.io.IOException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 
 public class Parser {
 
     private Duke duke;
 
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public Parser(Duke duke) {
         this.duke = duke;
@@ -18,7 +20,7 @@ public class Parser {
 
     public boolean isValid(String dateStr) {
         try {
-            LocalDate.parse(dateStr, formatter);
+            LocalDate.parse(dateStr, FORMATTER);
         } catch (DateTimeParseException e) {
             return false;
         }
@@ -40,7 +42,7 @@ public class Parser {
             // Delete tasks
             else if (message.startsWith("delete")) {
                 if (message.length() > 7 && message.substring(6, 7).equals(" ")
-                        && message.substring(7).trim().chars().allMatch(Character::isDigit)) {
+                    && message.substring(7).trim().chars().allMatch(Character::isDigit)) {
                     int taskIndex = Integer.parseInt(message.substring(7).trim()) - 1;
                     ArrayList<Task> list = duke.getTasks().getList();
                     if (0 <= taskIndex && taskIndex < list.size()) {
@@ -62,7 +64,7 @@ public class Parser {
             // Mark tasks as done
             else if (message.startsWith("done")) {
                 if (message.length() > 5 && message.substring(4, 5).equals(" ")
-                        && message.substring(5).trim().chars().allMatch(Character::isDigit)) {
+                    && message.substring(5).trim().chars().allMatch(Character::isDigit)) {
                     int taskIndex = Integer.parseInt(message.substring(5).trim()) - 1;
                     if (0 <= taskIndex && taskIndex < duke.getTasks().getList().size()) {
                         Task task = duke.getTasks().getList().get(taskIndex);
@@ -74,9 +76,9 @@ public class Parser {
                             } catch (IOException e) {
                                 duke.getUi().showLoadingError();
                             }
-                            System.out.println(Ui.friendGreeting + "Hooray! You've completed task \n[X] " + description);
+                            duke.getUi().showDoneTask(description);
                         } else {
-                            System.out.println(description + " has already been done! :)");
+                            duke.getUi().showAlreadyDoneTask(description);
                         }
                     } else {
                         throw new DukeException.DukeTaskNotFoundException();
@@ -116,9 +118,11 @@ public class Parser {
                         } else {
                             // proper description and by
                             if (isValid(by)) {
-                                duke.getTasks().createTaskDate(description, d1, Task.Category.DEADLINE, false, true);
+                                duke.getTasks().createTaskDate(description, d1, Task.Category.DEADLINE,
+                                    false, true);
                             } else {
-                                duke.getTasks().createTask(description, by, Task.Category.DEADLINE, false, true);
+                                duke.getTasks().createTask(description, by, Task.Category.DEADLINE,
+                                    false, true);
                             }
                         }
                     } else {
@@ -155,9 +159,11 @@ public class Parser {
                         } else {
                             // proper description and by
                             if (isValid(at)) {
-                                duke.getTasks().createTaskDate(description, d1, Task.Category.EVENT, false, true);
+                                duke.getTasks().createTaskDate(description, d1, Task.Category.EVENT,
+                                    false, true);
                             } else {
-                                duke.getTasks().createTask(description, at, Task.Category.EVENT, false, true);
+                                duke.getTasks().createTask(description, at, Task.Category.EVENT,
+                                    false, true);
                             }
                         }
                     } else {
