@@ -1,4 +1,8 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -10,11 +14,60 @@ public class Duke {
         System.out.println("Hello! I'm\n" + logo + "\nHow can I help?");
 
         TaskList l = new TaskList();
-        int length = 0;
-
+        // int length = 0;
+        loadFile(l);
         start(l);
-
         printOutput("Bye. Hope to see you again soon!");
+    }
+
+    public static void loadFile(TaskList l) {
+        try {
+            File data = new File("../../../data/duke.txt");
+            Scanner reader = new Scanner(data);
+            while (reader.hasNextLine()) {
+                String task = reader.nextLine();
+                String[] vars = task.split("\\|");
+                Task t;
+                switch (vars[0].trim()) {
+                    case "T": {
+                        t = new ToDo(vars[2].trim());
+                        break;
+                    }
+                    case "D": {
+                        t = new Deadline(vars[2].trim(), vars[3].trim());
+                        break;
+                    }
+                    case "E": {
+                        t = new Event(vars[2].trim(), vars[3].trim());
+                        break;
+                    }
+                    default: {
+                        t = new ToDo("");
+                        break;
+                    }
+                }
+                if (Integer.parseInt(vars[1].trim()) == 1) {
+                    t.completeItem();
+                }
+                l.addToList(t);
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } 
+    }
+
+    public static void updateFile(TaskList l) {
+        try {
+            System.out.println("Hello");
+            FileWriter writer = new FileWriter("../../../data/duke.txt", false);
+            writer.write(l.format());
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        
     }
 
     public static void start(TaskList l) {
@@ -30,6 +83,7 @@ public class Duke {
             }
             try {
                 if (first.equals("bye")) {
+                    scanner.close();
                     break;
                 }
                 switch (first) {
@@ -42,25 +96,23 @@ public class Duke {
                         break;
                     }
                     case "deadline": {
-                        addDeadline(rest, l);
+                        addDeadline(rest, l, 0);
                         break;
                     }
                     case "todo": {
-                        addToDo(rest, l);
+                        addToDo(rest, l, 0);
                         break;
                     }
                     case "event": {
-                        addEvent(rest, l);
+                        addEvent(rest, l, 0);
                         break;
                     }
                     case "delete": {
-                        if (rest.matches("\\d+")) {
-                            int index = Integer.parseInt(rest) - 1;
-                            if (index >= 0 || index < l.getLength()) {
-                                Task task = l.deleteTask(0);
-                                printOutput("Noted. I've removed this task:\n" + task + "\nNow you have " + l.getLength() + " tasks in the list.");
-                            }
-                        }
+                        delete(rest, l);
+                        break;
+                    }
+                    case "hi": {
+                        System.out.println(l.format());
                         break;
                     }
                     default: {
@@ -71,17 +123,35 @@ public class Duke {
             } catch (DukeException e){
                 printOutput(e.getMessage());
             }
-
         }
     }
 
-    public static void addToDo(String rest, TaskList l) throws DukeException {
+    public static void addToDo(String rest, TaskList l, int complete) throws DukeException {
         if (rest.length() > 0){
             ToDo td = new ToDo(rest);
+            if (complete == 1) {
+                td.completeItem();
+            }
             l.addToList(td);
             printOutput("Got it. I've added this task:\n" + td + "\nNow you have " + l.getLength() + " tasks in the list.");
+            updateFile(l);
         } else {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+    }
+
+    public static void delete(String rest, TaskList l) throws DukeException {
+        if (rest.matches("\\d+")) {
+            int index = Integer.parseInt(rest) - 1;
+            if (index >= 0 && index < l.getLength()) {
+                Task task = l.deleteTask(0);
+                printOutput("Noted. I've removed this task:\n" + task + "\nNow you have " + l.getLength() + " tasks in the list.");
+                updateFile(l);
+            } else {
+                throw new DukeException("☹ OOPS!!! Input a valid index"); 
+            }
+        } else {
+            throw new DukeException("☹ OOPS!!! Input a valid index");
         }
     }
 
@@ -89,7 +159,7 @@ public class Duke {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    public static void addDeadline(String rest, TaskList l) throws DukeException {
+    public static void addDeadline(String rest, TaskList l, int complete) throws DukeException {
         System.out.println(rest);
         if (rest.length() > 0) {
             String[] details = rest.split("/by ");
@@ -97,15 +167,19 @@ public class Duke {
                 throw new DukeException("☹ OOPS!!! Add a '/by deadline'");
             } else {
                 Deadline deadline = new Deadline(details[0], details[1]);
+                if (complete == 1) {
+                    deadline.completeItem();
+                }
                 l.addToList(deadline);
                 printOutput("Got it. I've added this task:\n" + deadline + "\nNow you have " + l.getLength() + " tasks in the list.");
+                updateFile(l);
             }
         } else {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
     }
 
-    public static void addEvent(String rest, TaskList l) throws DukeException {
+    public static void addEvent(String rest, TaskList l, int complete) throws DukeException {
         System.out.println(rest);
         if (rest.length() > 0) {
             String[] details = rest.split("/at ");
@@ -113,8 +187,12 @@ public class Duke {
                 throw new DukeException("☹ OOPS!!! Add a '/at time of event'");
             } else {
                 Event event = new Event(details[0], details[1]);
+                if (complete == 1) {
+                    event.completeItem();
+                }
                 l.addToList(event);
                 printOutput("Got it. I've added this task:\n" + event + "\nNow you have " + l.getLength() + " tasks in the list.");
+                updateFile(l);
             }
         } else {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");

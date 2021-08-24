@@ -25,6 +25,15 @@ public class TaskList {
     public Task deleteTask(int index) {
         return this.list.remove(index);
     }
+
+    public String format() {
+        String x =  "";
+        for (Task task : this.list) {
+            x += task.formatTask() + "\n";
+        }
+        
+        return x;
+    }
     @Override
     public String toString() {
         String l = "Here are the tasks on your list:";

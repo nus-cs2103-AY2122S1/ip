@@ -1,0 +1,3 @@
+T | 0 | hello
+E | 0 | hi | noon tmr
+D | 0 | hi  |  tmr

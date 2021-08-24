@@ -12,6 +12,10 @@ public class Task {
         return "Nice I've marked this task as done!\n" + this.toString();
     }
 
+    public String formatTask() {
+        int complete = completed ? 1 : 0;
+        return complete + " | " + this.title;
+    }
 
     @Override
     public String toString() {

@@ -8,5 +8,7 @@ done 2
 list
 done 1
 list
+delete 2
+list
 bye
 
