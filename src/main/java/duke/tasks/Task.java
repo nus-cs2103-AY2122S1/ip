@@ -1,8 +1,10 @@
-/**
- * A class to represent a task to be done.
- */
+package duke.tasks;
+
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String description;
+    protected static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
 
     protected boolean isDone;
 

@@ -1,3 +1,9 @@
+package duke.commands;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " - display the list of available commands";

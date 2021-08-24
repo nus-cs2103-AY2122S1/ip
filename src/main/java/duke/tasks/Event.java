@@ -1,15 +1,9 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+package duke.tasks;
 
-/**
- * A subclass of Task with scheduled date.
- */
+import java.time.LocalDateTime;
+
 public class Event extends Task {
-    /**
-     * Scheduled date of the task.
-     */
     private LocalDateTime at;
-    private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
 
     /**
      * Instantiates an Event

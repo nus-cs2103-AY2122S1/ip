@@ -1,11 +1,6 @@
-/**
- * A subclass of Task.
- */
+package duke.tasks;
+
 public class Todo extends Task {
-    /**
-     * Instantiates a todo task.
-     * @param description description of the todo task.
-     */
     public Todo(String description) {
         super(description);
     }

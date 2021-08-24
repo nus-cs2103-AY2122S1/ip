@@ -1,4 +1,7 @@
-import java.io.IOException;
+package duke;
+
+import duke.tasks.Task;
+
 import java.util.Scanner;
 
 public class Ui {

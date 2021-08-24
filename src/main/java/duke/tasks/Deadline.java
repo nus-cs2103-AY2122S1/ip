@@ -1,15 +1,10 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+package duke.tasks;
 
-/**
- * A subclass of Task to represent a task with deadline.
- */
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
-    /**
-     * Due date of the task.
-     */
     private LocalDateTime by;
-    private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+
 
     /**
      * Instantiates a Deadline Object.

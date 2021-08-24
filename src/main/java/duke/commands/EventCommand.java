@@ -1,3 +1,10 @@
+package duke.commands;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.tasks.Event;
+
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -36,6 +43,7 @@ public class EventCommand extends Command {
             storage.save(tasks.getItems());
 
             ui.printTaskAdded(newEvent, tasks.getSize());
+
         } catch (IOException | IllegalArgumentException e) {
             ui.printError(e.getMessage());
 
