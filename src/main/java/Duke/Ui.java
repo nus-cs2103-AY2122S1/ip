@@ -1,3 +1,5 @@
+package Duke;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -16,7 +18,7 @@ public class Ui {
     }
 
     public void firstWelcome() {
-        toScreen("Hello, I'm Duke!", "How can I help you?");
+        toScreen("Hello, I'm Duke.Duke!", "How can I help you?");
     }
 
     public String readCommand() {

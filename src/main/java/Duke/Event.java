@@ -1,7 +1,4 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+package Duke;
 
 public class Event extends Task {
     private String duration;
@@ -13,7 +10,7 @@ public class Event extends Task {
 
     public Event(String desc, String duration, boolean isDone) {
         super(desc.trim(), isDone);
-        this.duration = duration;
+        this.duration = duration.trim();
     }
 
     @Override

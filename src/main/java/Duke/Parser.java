@@ -1,3 +1,5 @@
+package Duke;
+
 public class Parser {
     private TaskList tasks;
     private Ui ui;
@@ -28,16 +30,16 @@ public class Parser {
             tasks.deleteTask(deletedTaskIndex - 1);
             return true;
         case TODO:
-            //add Todo task
+            //add Duke.Todo task
             tasks.addTodo(remainder.trim());
             return true;
         case DEADLINE:
-            //add Deadline task
+            //add Duke.Deadline task
             String[] ds = remainder.split("/by");
             tasks.addDeadline(ds);
             return true;
         case EVENT:
-            //add Event task
+            //add Duke.Event task
             String[] es = remainder.split("/at");
             tasks.addEvent(es);
             return true;

@@ -1,3 +1,5 @@
+package Duke;
+
 public enum Commands {
     LIST("list"),
     DONE("done"),

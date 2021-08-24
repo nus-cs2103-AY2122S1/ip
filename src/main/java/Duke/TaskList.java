@@ -1,3 +1,5 @@
+package Duke;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -39,7 +41,7 @@ public class TaskList {
             ui.toScreen("Nice! I've marked the following task as done: ",
                     "    " + finishedTask.toString());
         } catch (IndexOutOfBoundsException e) {
-            ui.toScreen("Task could not be marked as done.", "Please input valid task index.");
+            ui.toScreen("Duke.Task could not be marked as done.", "Please input valid task index.");
         }
     }
 
@@ -51,7 +53,7 @@ public class TaskList {
             ui.toScreen("Ok, I've deleted the following task: ",
                     "    " + deletedTask.toString());
         } catch (IndexOutOfBoundsException e) {
-            ui.toScreen("Task could not be deleted.", "Please input valid task index.");
+            ui.toScreen("Duke.Task could not be deleted.", "Please input valid task index.");
         }
     }
 
@@ -67,7 +69,7 @@ public class TaskList {
                     "    " + temp.toString(),
                     "You now have " + tasks.size() + " task(s) in total.");
         } catch (DukeException de) {
-            ui.toScreen("Sorry, the Todo task could not be added.",
+            ui.toScreen("Sorry, the Duke.Todo task could not be added.",
                     "Please include the description for this task.", desc);
         }
     }
@@ -86,7 +88,7 @@ public class TaskList {
                     "    " + temp.toString(),
                     "You now have " + tasks.size() + " task(s) in total.");
         } catch (DukeException de) {
-            ui.toScreen("Sorry, the Deadline task could not be added.",
+            ui.toScreen("Sorry, the Duke.Deadline task could not be added.",
                     "Please include the description and deadline for this task with /by.",
                     "(Date and time format: dd/MM/yyyy HHmm)");
         }
@@ -106,7 +108,7 @@ public class TaskList {
                     "    " + temp.toString(),
                     "You now have " + tasks.size() + " task(s) in total.");
         } catch (DukeException de) {
-            ui.toScreen("Sorry, the Event task could not be added.",
+            ui.toScreen("Sorry, the Duke.Event task could not be added.",
                     "Please include the description and time of this task with /at.");
         }
     }
