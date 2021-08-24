@@ -9,6 +9,10 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class is responsible for the parsing of all user inputs, as well as file
+ * contents back into tasks during the initial loading of file.
+ */
 public class Parser {
 
     private static final String[] months = new String[]{"JANUARY", "FEBRUARY", "MARCH", "APRIL",
@@ -16,10 +20,21 @@ public class Parser {
             "OCTOBER", "NOVEMBER", "DECEMBER"};
     private static final int OFFSET = 7;
 
+    /**
+     * A default constructor for the Parser class.
+     */
     public Parser() {}
 
     private final static UserInterface userInterface = new UserInterface();
 
+    /**
+     * This method is responsible for detecting what the user wants. It allows the
+     * program to respond based on the first input word by the user.
+     *
+     * @param command the input provided by the user through the command line
+     * @param scanner the scanner that reads in the user's input
+     * @return true if there is a request to terminate execution and false otherwise
+     */
     public boolean firstCommandParser(String command, Scanner scanner) {
         TaskList task = new TaskList();
 
@@ -67,6 +82,13 @@ public class Parser {
         return false;
     }
 
+    /**
+     * This method detects the format of a yyyy-mm-dd date in a sentence
+     * and extracts it out for use.
+     *
+     * @param input the input string that is typically the timeline given by the user
+     * @return LocalDate which represents the date in a more readable format
+     */
     public static LocalDate findDate(String input) {
         String regex = "(\\d{4}-\\d{2}-\\d{2})"; // Regex to find date of the form yyyy-mm-dd
         Matcher m = Pattern.compile(regex).matcher(input);
@@ -76,6 +98,13 @@ public class Parser {
         return null;
     }
 
+    /**
+     * This method detects the format of a 4 integer timing in a sentence
+     * and extracts it out for use.
+     *
+     * @param input the input string that is typically the timeline given by the user
+     * @return the timing inputted by the user in String format
+     */
     public static String findTime(String input) {
         StringBuilder sb = new StringBuilder();
         int index = input.length() - 1;
@@ -93,6 +122,13 @@ public class Parser {
         }
     }
 
+    /**
+     * This method detects the format of a 4 integer to 4 integer
+     * range timing in a sentence.
+     *
+     * @param input the input string that is typically the timeline given by the user
+     * @return the time range inputted by the user, contained in a size 2 array
+     */
     public static String[] findTimeRange(String input) {
         StringBuilder sb = new StringBuilder();
         int index = input.length() - 1;
@@ -104,13 +140,19 @@ public class Parser {
         String regex = "^\\d{4}-\\d{4}$";
         Matcher m = Pattern.compile(regex).matcher(sb.toString());
         if (m.find()) {
-            String[] timeRange = sb.toString().split("-");
-            return timeRange;
+            return sb.toString().split("-");
         } else {
             return null;
         }
     }
 
+    /**
+     * This method converts the String input 24-hour time format
+     * into a 12-hour format with A.M. and P.M.
+     *
+     * @param input 24-hour time format
+     * @return 12-hour time format
+     */
     public static String convertTime(String input) {
         double time = Double.parseDouble(input);
         String postfix;
@@ -129,6 +171,15 @@ public class Parser {
         return prefix + " " + postfix;
     }
 
+    /**
+     * Assigns the reference variables of LocalDate and String to its respective
+     * values based on the input from the file storage. This method is specific
+     * to parsing Deadline tasks from the file storage.
+     *
+     * @param input the timing description originally provided by the user
+     * @param ld LocalDate reference variable that the method is to assign
+     * @param deadlineTiming String reference variable that the method is to assign
+     */
     public static void parseDeadlineTime(String input, LocalDate ld, String deadlineTiming) {
         String[] parsedTime = input.split(" ");
         try {
@@ -147,6 +198,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Assigns the reference variables of LocalDate and 2 Strings to its respective
+     * values based on the input from the file storage. This method is specific
+     * to parsing Event tasks from the file storage.
+     *
+     * @param input the timing description originally provided by the user
+     * @param ld LocalDate reference variable that the method is to assign
+     * @param startTime String reference variable that the method is to assign
+     * @param endTime String reference variable that the method is to assign
+     */
     public static void parseEventTime(String input, LocalDate ld, String startTime, String endTime) {
         String[] parsedTime = input.split(" ");
         try {
@@ -169,6 +230,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Matches the input month in String to its month in numbers.
+     *
+     * @param month String month such as May
+     * @return month in numbers, in String format, such as 05
+     */
     private static String matchMonth(String month) {
         int index = 0;
         for (int i = 0; i < months.length; i++) {
@@ -182,6 +249,15 @@ public class Parser {
                 : Integer.toString(index);
     }
 
+    /**
+     * This method is responsible for the parsing of contents from
+     * the file storage during the initial execution of the program.
+     * This method breaks down the information to be provided to the
+     * task class to create the respective tasks.
+     *
+     * @param line a line of content from the storage file
+     * @return a task which is created in the task class based on the given parameters
+     */
     public static TaskList parseFromFile(String line) {
         TaskList task = new TaskList();
         char taskChar = line.charAt(1);

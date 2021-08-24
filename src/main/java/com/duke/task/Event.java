@@ -3,7 +3,6 @@ package com.duke.task;
 import com.duke.parser.Parser;
 
 import java.io.IOException;
-import java.lang.reflect.GenericDeclaration;
 import java.time.LocalDate;
 
 /**
@@ -18,6 +17,15 @@ public class Event extends TaskList {
     private String startTime;
     private String endTime;
 
+    /**
+     * Creates an instance of an Event class, a subclass of our task list class.
+     *
+     * @param description the description of our task to be logged
+     * @param time the time description of our task which contains the deadline and time range
+     *             of this task
+     * @param isExisting the boolean that distinguishes between an existing task loaded from
+     *                   the task file or a newly added task during program execution
+     */
     public Event(String description, String time, boolean isExisting) {
         super(description);
         this.time = time;
@@ -39,6 +47,11 @@ public class Event extends TaskList {
         }
     }
 
+    /**
+     * Returns the String representation of an Event task class.
+     *
+     * @return the String representation of an Event task class
+     */
     @Override
     public String toString() {
         String status = this.getStatusIcon();
