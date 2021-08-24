@@ -2,19 +2,20 @@ package duke;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import static java.lang.Integer.parseInt;
 
 /**
  * Represents the Todo List for Duke.
  */
-public class List extends ArrayList<Task> {
-    public static ArrayList<Task> todos;
+public class List {
+    public ArrayList<Task> todos;
 
     /**
      * Constructor for List Class when there is no initial data.
      * Creates an empty list.
      */
     public List() {
-        todos = new ArrayList<>();
+        this.todos = new ArrayList<>();
     }
 
     /**
@@ -25,7 +26,7 @@ public class List extends ArrayList<Task> {
      * @param data
      */
     public List(ArrayList<Task> data) {
-        todos = data;
+        this.todos = data;
     }
 
     /**
@@ -39,7 +40,7 @@ public class List extends ArrayList<Task> {
             showList();
         } else {
             try {
-                Parser.process(input);
+                Parser.process(input, this);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
@@ -51,8 +52,70 @@ public class List extends ArrayList<Task> {
      * Ordered by creation time.
      */
     public void showList() {
-        for (int i = 0; i < List.todos.size(); i++) {
-            System.out.println(i + 1 + ". " + List.todos.get(i).toString());
+        for (int i = 0; i < todos.size(); i++) {
+            System.out.println(i + 1 + ". " + todos.get(i).toString());
+        }
+    }
+
+    /**
+     * Marks the target Task as done.
+     *
+     * @param array The input command.
+     * @throws DukeDoneException If the number of entry is not specified in the command.
+     */
+    public void done(String[] array) throws DukeDoneException {
+        if (array.length == 1) {
+            throw new DukeDoneException();
+        }
+        int index = parseInt(array[1]);
+        Task temp = todos.get(index - 1);
+        temp.markAsDone();
+        System.out.println("Nice! I've marked this task as done:\n" + temp);
+    }
+
+    /**
+     * Deletes the target Task.
+     *
+     * @param array The input command.
+     */
+    public void delete(String[] array) {
+        int index = parseInt(array[1]);
+        Task temp = todos.remove(index - 1);
+        System.out.println("Noted. I've removed this task:\n"
+                + temp
+                + "\nNow you have "
+                + todos.size()
+                + " task"
+                + (todos.size() == 1 ? "" : "s")
+                + " in the list");
+
+    }
+
+    /**
+     * Prints out the new Task added and the total number of Tasks in the List.
+     *
+     * @param item The new Task created.
+     */
+    public void echo(Task item) {
+        System.out.println("Got it. I've added this task:\n"
+                + item
+                + "\nNow you have "
+                + todos.size()
+                + " task"
+                + (todos.size() == 1 ? "" : "s")
+                + " in the list");
+    }
+
+    public void search(String input) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (int i = 0; i < todos.size(); i++) {
+            if (todos.get(i).getName().contains(input)) {
+                result.add(todos.get(i));
+            }
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < result.size(); i++) {
+            System.out.println(i + 1 + ". " + result.get(i).toString());
         }
     }
 }
