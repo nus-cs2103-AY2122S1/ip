@@ -8,6 +8,12 @@ import duke.task.Todo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * TaskList represents all the tasks contained in a Duke Chatbot.
+ *
+ * @author Jovyn Tan
+ * @version CS2103 AY21/22 Sem 1
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
