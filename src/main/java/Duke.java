@@ -1,7 +1,18 @@
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
+
 import static java.lang.Integer.parseInt;
+
+/**
+ * The Duke class acts as a text bot that records down the tasks given to it. It can
+ * then mark these tasks as completed and delete them based on the inputs given.
+ */
 
 public class Duke {
 
@@ -84,6 +95,7 @@ public class Duke {
                 System.out.println("Noted. I've removed this task:");
                 System.out.println(storedInfo.get(taskDeleted - 1));
                 storedInfo.remove(taskDeleted-1);
+                count--;
                 continue;
             }
             if (in.length() > 3 && in.substring(0,4).equals("todo") ) {
@@ -136,7 +148,25 @@ public class Duke {
 
             }
         //Insert save protocol here
+        File taskList = new File("C:\\Users\\ronal\\duke.txt");
+        try {
+            if (taskList.createNewFile()) {
+                System.out.println("Tasklist created and saved");
+            } else {
+                System.out.println("Tasklist updated");
+            }
+        } catch (IOException e) {
+            System.out.println("File could not be created");
+        }
+        try {
+            FileWriter listEditor = new FileWriter("C:\\Users\\ronal\\duke.txt");
+            listEditor.write("Your mom");
+            listEditor.close();
+            System.out.println("Saving list..");
 
+        } catch (IOException e) {
+            System.out.println("File does not exist");
+        }
 
         System.out.println("Bye. Hope to see you again!");
     }
