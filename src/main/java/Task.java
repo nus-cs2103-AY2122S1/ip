@@ -16,17 +16,15 @@ public abstract class Task {
         case "todo":
             return new Todo(inputs[1]);
         case "deadline":
-            inputs = inputs[1].split(" /by ", 2);
-            TaskCenter.checkMissingArguments(inputs,
-                    String.format("Please specify the date/time of your deadline.\n", keyword));
-            return new Deadline(inputs[0], inputs[1]);
         case "event":
-            inputs = inputs[1].split(" /at ", 2);
-            TaskCenter.checkMissingArguments(inputs, String.format("Please specify a time for your event.\n", keyword));
-            return new Event(inputs[0], inputs[1]);
+            return TimedTask.createTimedTask(inputs);
         default:
             throw new InvalidArgumentException();
         }
+    }
+
+    public boolean isAtTime(LocalDateTimeOrString dateTimeOrString) {
+        return false;
     }
 
     public String getDescription() {

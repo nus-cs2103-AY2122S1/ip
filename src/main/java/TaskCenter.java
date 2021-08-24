@@ -19,30 +19,31 @@ public class TaskCenter {
         case "todo":
         case "deadline":
         case "event": {
-            checkMissingArguments(inputs, String.format("The description of a %s cannot be empty.\n", keyword));
+            InputChecker.checkMissingArguments(inputs,
+                    String.format("The description of a %s cannot be empty.\n", keyword));
             Task newTask = Task.createTask(inputs);
             return new AddTask(tasks, newTask);
         }
         // Commands for existing tasks
         case "done": {
-            checkMissingArguments(inputs, "Please specify a task number to mark as done.\n");
+            InputChecker.checkMissingArguments(inputs, "Please specify a task number to mark as done.\n");
             int index = Integer.parseInt(inputs[1]) - 1;
             Task task = tasks.get(index);
             return new MarkTaskDone(tasks, task);
         }
         case "delete": {
-            checkMissingArguments(inputs, "Please specify a task number for deletion.\n");
+            InputChecker.checkMissingArguments(inputs, "Please specify a task number for deletion.\n");
             int index = Integer.parseInt(inputs[1]) - 1;
             return new DeleteTask(tasks, index);
         }
-        default:
+        case "list": {
+            InputChecker.checkMissingArguments(inputs, "Please specify a valid flag.\n");
+            String remainingInput = inputs[1];
+            return new ListTasksByDate(tasks, remainingInput);
+        }
+        default: {
             throw new InvalidArgumentException();
         }
-    }
-
-    public static void checkMissingArguments(String[] sections, String errorMessage) throws MissingArgumentException {
-        if (sections.length != 2 || sections[1].isEmpty()) {
-            throw new MissingArgumentException(errorMessage);
         }
     }
 }
