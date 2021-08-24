@@ -1,6 +1,5 @@
-package DukePackage;
+package DukeTest;
 
-import DukePakage.Event;
 import DukePakage.Todo;
 
 import org.junit.jupiter.api.Test;

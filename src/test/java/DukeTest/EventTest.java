@@ -1,4 +1,4 @@
-package DukePackage;
+package DukeTest;
 
 import DukePakage.Event;
 
