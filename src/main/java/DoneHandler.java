@@ -5,7 +5,7 @@ class DoneHandler extends CommandHandler {
 
     @Override
     String handle(String input) throws BlueException {
-        String[] arguments = getArguments(input);
+        String[] arguments = Parser.getArguments(input);
         if (arguments.length > 0) {
             try {
                 int index = Integer.parseInt(arguments[0]);

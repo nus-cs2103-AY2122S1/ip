@@ -50,7 +50,7 @@ public class Blue {
     }
 
     private boolean handle(String input) {
-        String command = getCommand(input);
+        String command = Parser.getCommand(input);
         if (command.equals(Command.EXIT)) {
             ui.goodbye();
             return false;
@@ -67,14 +67,6 @@ public class Blue {
             ui.confused();
         }
         return true;
-    }
-
-    private String getCommand(String input) {
-        if (input.length() > 0) {
-            return input.split(" ")[0];
-        } else {
-            return "";
-        }
     }
 
     public static void main(String[] args) {
