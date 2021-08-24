@@ -1,5 +1,7 @@
+package duke;
+
 public class DukeException extends Exception {
-    private String error;
+    private final String error;
 
 
     public DukeException(String error) {

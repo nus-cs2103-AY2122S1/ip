@@ -1,3 +1,14 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -20,7 +31,7 @@ public class AddTaskCommand implements  Command {
             String[] desc = detail.split("/by ", 2);
 
             if (desc.length == 1) {
-                throw new DukeException("Invalid Deadline entry.Try something like: deadline HW due /by 19/8/2021 14:00");
+                throw new DukeException("Invalid duke.task.Deadline entry.Try something like: deadline HW due /by 19/8/2021 14:00");
             } else {
                 try {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -33,7 +44,7 @@ public class AddTaskCommand implements  Command {
         } else {
             String[] desc = detail.split("/at ", 2);
             if (desc.length == 1) {
-                throw new DukeException("Invalid Event entry. Try something like: event meeting /at 19/08/2021 14:00");
+                throw new DukeException("Invalid duke.task.Event entry. Try something like: event meeting /at 19/08/2021 14:00");
             } else {
                 try {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -46,7 +57,7 @@ public class AddTaskCommand implements  Command {
 
         if (t != null) {
             taskList.addTask(t);
-            ui.echo("Got it! I added this task: " + t);
+            ui.echo("Got it! I added this duke.task: " + t);
         }
     }
 

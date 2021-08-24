@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,7 +28,7 @@ public class Ui {
     }
 
     public void greet() {
-        String line1 = "Hello! I'm Duke\n";
+        String line1 = "Hello! I'm duke.Duke\n";
         String line2 = indent + "What can I do for you?";
         echo(line1 + line2);
     }
