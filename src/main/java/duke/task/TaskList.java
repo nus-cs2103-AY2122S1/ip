@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * An array list of tasks
  */
 public class TaskList extends ArrayList<Task> {
-    private ArrayList<Task> list = new ArrayList<>();
+    private final ArrayList<Task> list;
 
     public TaskList(ArrayList<Task> tasks) {
         this.list = tasks;
@@ -122,7 +122,7 @@ public class TaskList extends ArrayList<Task> {
         }
 
         StringBuilder result = new StringBuilder();
-        int index = 0;
+        int index;
         if (!matched.isEmpty()) {
             result.append("Here are the matching tasks in your list:\n");
 
