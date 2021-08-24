@@ -79,11 +79,9 @@ public class Storage {
             Files.createDirectories(storagePath.getParent());
             Files.createFile(storagePath);
             System.out.println("No file found, but we created one!");
-            System.out.println(e.toString() + e.getMessage());
             return load();
         } catch (IOException e) {
             System.out.println("Something went wrong during reading!");
-            System.out.println(e.toString() + e.getMessage());
         } finally {
 
             return tasks;
