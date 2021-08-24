@@ -31,6 +31,7 @@ public class TaskList {
         if (taskList.size() > MAX_STORAGE) {
             throw new StorageException(FULL_CAPACITY_ERROR_MESSAGE);
         }
+        this.tasks.clear();
         this.tasks.addAll(taskList);
     }
 
@@ -50,7 +51,7 @@ public class TaskList {
      * @throws DukeException if task cannot be saved, due to full capacity of task list
      */
     public void addTask(Task newTask) throws DukeException {
-        if (tasks.size() == MAX_STORAGE) {
+        if (tasks.size() >= MAX_STORAGE) {
             throw new DukeException(FULL_CAPACITY_ERROR_MESSAGE);
         }
         tasks.add(newTask);
