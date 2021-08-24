@@ -1,8 +1,8 @@
 package mango;
 
 import mango.task.*;
-
 import java.util.ArrayList;
+
 public class TaskList {
     private ArrayList<Task> list;
     private int listIndex = 0;

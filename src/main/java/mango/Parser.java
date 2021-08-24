@@ -1,4 +1,5 @@
 package mango;
+
 import java.util.Scanner;
 
 public class Parser {
