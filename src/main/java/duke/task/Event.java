@@ -2,8 +2,18 @@ package duke.task;
 
 import duke.DukeException;
 
+/**
+ * The Event type task.
+ */
 public class Event extends TimedTask {
 
+    /**
+     * The constructor of Event.
+     * @param name Name of task
+     * @param by Date of task
+     * @param isCompleted Completion status of task
+     * @throws DukeException if date is the wrong format.
+     */
     public Event(String name, String by, boolean isCompleted) throws DukeException {
         super(name, by, TaskType.E, isCompleted);
     }

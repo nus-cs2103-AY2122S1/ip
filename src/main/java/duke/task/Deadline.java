@@ -2,8 +2,18 @@ package duke.task;
 
 import duke.DukeException;
 
+/**
+ * The Deadline type task.
+ */
 public class Deadline extends TimedTask {
 
+    /**
+     * The constructor of Deadline.
+     * @param name Name of task
+     * @param by Date of task
+     * @param isCompleted Completion status of task
+     * @throws DukeException if date is the wrong format.
+     */
     public Deadline(String name, String by, boolean isCompleted) throws DukeException {
         super(name, by, TaskType.D, isCompleted);
     }
