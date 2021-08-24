@@ -28,6 +28,10 @@ public class InputChecker {
             throw new DukeException("Please specify what you are deleting!");
         } else if (s.contains("delete")) {
 
+        } else if (s.contains("find") && s.length() > 4){
+
+        } else if (s.equals("find")){
+            throw new DukeException("Please specify what tasks you are searching for!");
         } else {
             throw new DukeException("Sorry! I don't get what you're saying!");
         }

@@ -83,6 +83,8 @@ public class Ui {
         } else if(s.contains("delete")){
             int order = Integer.parseInt(s.substring(7)); //getting the order of the task
             lst.deleteTask(order);
+        } else if (s.contains("find")){
+            lst.find(s.substring(5));
         }
     }
 }

@@ -140,4 +140,11 @@ public class TaskList {
         System.out.println("Got it. I've added this todo: \n" + d.toString());
         System.out.println("Now you have " + lst.size() + " tasks in the list.");
     }
+
+    public void find(String keyword){
+        ArrayList<Task> temp = new ArrayList<>(this.getList());
+        temp.removeIf(x -> !(x.toString().contains(keyword)));
+        System.out.println("Here are the matching tasks in your list:");
+        temp.forEach(x -> System.out.println((temp.indexOf(x) + 1) + ". " + x.toString()));
+    }
 }
