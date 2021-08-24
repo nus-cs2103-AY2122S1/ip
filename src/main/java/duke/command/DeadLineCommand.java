@@ -19,6 +19,10 @@ public class DeadLineCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Executes the deadline command. If there is no task specified, nothing is 
+     * added to the list.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (task.length() == 0) {
