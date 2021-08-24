@@ -153,7 +153,7 @@ public class Parser {
     }
 
     /**
-     * Deletes a task from the list.
+     * Delete a task from the list.
      *
      * @param tasks the list of tasks.
      */
