@@ -1,22 +1,28 @@
 package task;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    protected String date;
+    protected LocalDateTime at;
 
-    public Event(String description, String at) {
+    public Event(String description, LocalDateTime at) {
         super(description);
-        this.date = at;
+        this.at = at;
     }
 
     @Override
     public String getDetails(){
-        return super.toString() + " (at: " + date + ")";
+        return super.toString() + " (at: " + getDateString() + ")";
     }
 
     @Override
-    public String getDate() {
-        return this.date;
+    public String getDateString() {
+        return at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"));
+    }
+
+    public LocalDate getDate() {
+        return this.at.toLocalDate();
     }
 
     @Override
@@ -26,6 +32,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E] " + super.toString() + " (at: " + date + ")";
+        return "[E] " + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm")) + ")";
     }
 }

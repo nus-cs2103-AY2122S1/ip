@@ -1,14 +1,15 @@
 package task;
 
+import java.time.LocalDateTime;
+
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected String date;
+    protected LocalDateTime date;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.date = "";
     }
 
     public String getStatusIcon() {
@@ -33,7 +34,7 @@ public class Task {
         this.isDone = true;
     }
 
-    public String getDate() {return this.date; }
+    public String getDateString() {return this.date.toString(); }
 
     @Override
     public String toString() {
@@ -41,3 +42,4 @@ public class Task {
     }
 
 }
+

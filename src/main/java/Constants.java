@@ -2,8 +2,9 @@ public class Constants {
     private Constants() {
 
     }
+
     public static final String HELLO = "\nHello! I'm Duke\nWhat can I do for you?\n";
-    public static final String LINE = "=======================================================";
+    public static final String LINE = "=================================================================";
     public static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -18,4 +19,5 @@ public class Constants {
             "event [event_description] /at [event_date_and_time]";
     public static final String FILEPATH = "src/main/java/data/duke.txt";
     public static final String FOLPATH = "src/main/java/data";
+
 }

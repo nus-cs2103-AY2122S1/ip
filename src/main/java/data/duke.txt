@@ -1,3 +1,6 @@
-T | 0 | read book
-D | 1 | do homework | 25th Aug
-E | 0 | go to library | 27th Aug, 5pm
+D | 1 | read book | Dec 12 2020
+E | 0 | return book | Dec 12 2020 2359
+E | 1 | return book | Dec 12 2020 0000
+T | 0 | go to library
+T | 1 | research articles
+D | 1 | finish class readings | Nov 10 2020

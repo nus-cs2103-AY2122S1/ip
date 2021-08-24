@@ -1,14 +1,7 @@
 import exceptions.DukeException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import task.*;
+import java.io.*;
+import java.util.*;
 
 public class Storage {
 
@@ -59,13 +52,13 @@ public class Storage {
                 }
                 break;
             case "D":
-                task = new Deadline(parsed[2].trim(), parsed[3].trim());
+                task = new Deadline(parsed[2].trim(), DateTimeParser.readDate(parsed[3].trim()));
                 if (parsed[1].trim().equals("1")) {
                     task.markAsDone();
                 }
                 break;
             case "E":
-                task = new Event(parsed[2].trim(), parsed[3].trim());
+                task = new Event(parsed[2].trim(), DateTimeParser.readDateTime(parsed[3].trim()));
                 if (parsed[1].trim().equals("1")) {
                     task.markAsDone();
                 }
@@ -87,10 +80,10 @@ public class Storage {
                 str = "T" + " | " + task.getIntStatus() + " | " + task.getDescription() + "\n";
                 break;
             case "[D]":
-                str = "D" + " | " + task.getIntStatus() + " | " + task.getDescription() + " | " + task.getDate() + "\n";
+                str = "D" + " | " + task.getIntStatus() + " | " + task.getDescription() + " | " + task.getDateString() + "\n";
                 break;
             case "[E]":
-                str = "E" + " | " + task.getIntStatus() + " | " + task.getDescription() + " | " + task.getDate() + "\n";
+                str = "E" + " | " + task.getIntStatus() + " | " + task.getDescription() + " | " + task.getDateString() + "\n";
                 break;
             default:
                 str = "";
