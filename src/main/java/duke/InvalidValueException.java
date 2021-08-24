@@ -1,3 +1,5 @@
+package duke;
+
 public class InvalidValueException extends RuntimeException {
     InvalidValueException(String message) {
         super(message);

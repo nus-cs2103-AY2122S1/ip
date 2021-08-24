@@ -1,3 +1,5 @@
+package duke;
+
 public class InvalidCommandException extends RuntimeException {
     InvalidCommandException(String message) {
         super(message);

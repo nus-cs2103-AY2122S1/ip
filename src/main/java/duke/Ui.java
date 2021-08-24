@@ -1,3 +1,5 @@
+package duke;
+
 import static java.lang.Integer.parseInt;
 
 public class Ui {

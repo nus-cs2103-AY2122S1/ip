@@ -1,3 +1,5 @@
+package duke;
+
 public class EmptyDescriptionException extends RuntimeException {
     EmptyDescriptionException(String message) {
         super(message);

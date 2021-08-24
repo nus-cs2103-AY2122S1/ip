@@ -1,6 +1,5 @@
 1.T|Done a 
 2.T|Done a 
 3.T|Done a 
-4.T|Done a 
-5.E|Done a (aaaaaaaa: s)
-6.E|NotDone a (byby: au)
+4.E|Done a (aaaaaaaaaaaaaaaa: s)
+5.E|NotDone a (bybybyby: au)
