@@ -1,19 +1,29 @@
 package Duke.Task;
 
 /**
- * This class represents a event - a task that starts at a specific time
- * and ends at a specific time.
+ * This class represents a event - a task that starts at a specific date
+ * and ends at a specific date.
  */
 public class Event extends Task {
-    private String time;
+    public static final String IDENTIFIER = "E";
+    private String date;
 
-    public Event(String description, String time) {
+    public Event(String description, String date) {
         super(description);
-        this.time = time;
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    @Override
+    public String getType() {
+        return IDENTIFIER;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.time);
+        return String.format("[E]%s (at: %s)", super.toString(), this.date);
     }
 }

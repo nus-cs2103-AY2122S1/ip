@@ -3,9 +3,9 @@ package Duke.Task;
 /**
  * This class represents a user's task.
  */
-public class Task {
-    private String taskName;
-    private boolean complete;
+public abstract class Task {
+    private final String taskName;
+    private boolean isComplete;
 
     /**
      * Constructor for a task. When tasks are initialised, they are marked as not complete.
@@ -14,7 +14,7 @@ public class Task {
      */
     public Task(String taskName) {
         this.taskName = taskName;
-        this.complete = false;
+        this.isComplete = false;
     }
 
     /**
@@ -30,7 +30,7 @@ public class Task {
      * Toggles the completion status of the task.
      */
     public void setDone() {
-        this.complete = !this.complete;
+        this.isComplete = !this.isComplete;
     }
 
     /**
@@ -38,9 +38,15 @@ public class Task {
      *
      * @return Returns X if task is completed, " " otherwise.
      */
-    public String getStatusIcon() {
-        return (complete ? "X" : " "); // mark done task with X
+    public boolean isComplete() {
+        return isComplete;
     }
+
+    /**
+     * Gets a single letter representing the type of the task.
+     * @return Returns the type of the task.
+     */
+    abstract public String getType();
 
     /**
      * Returns a string representation of the task.
@@ -50,6 +56,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), taskName);
+        return String.format("[%s] %s", this.isComplete ? "X" : " ", taskName);
     }
 }
