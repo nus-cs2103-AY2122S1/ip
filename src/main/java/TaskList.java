@@ -34,8 +34,12 @@ public class TaskList {
     @Override
     public String toString() {
         String str = "";
+        int size = tasks.size();
+        if (size == 0) {
+            str = "\t Nothing has been added to the list";
+        }
 
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < size; i++) {
             str += "\t " + (i + 1) + ". " + this.tasks.get(i) + "\n";
         }
 
