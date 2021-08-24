@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
+    /** The scanner for the UI */
     private Scanner sc;
+    /** The parser to parse user commands */
     private Parser parser;
     
     public Ui() {

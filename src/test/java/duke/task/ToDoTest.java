@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ToDoTest {
     @Test
-    public void testToString() {
+    public void toStringUI() {
         ToDo todo = new ToDo("brush teeth", false);
         assertEquals("[T][ ] brush teeth", todo.toString());
         todo.markAsDone();
@@ -14,7 +14,7 @@ public class ToDoTest {
     }
 
     @Test
-    public void testToDataString() {
+    public void toDataString() {
         ToDo todo = new ToDo("brush teeth", false);
         assertEquals("T | 0 | brush teeth", todo.toDataString());
         todo.markAsDone();

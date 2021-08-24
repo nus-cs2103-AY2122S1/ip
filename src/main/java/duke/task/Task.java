@@ -1,7 +1,9 @@
 package duke.task;
 
 public class Task {
+    /** The description for the task */
     protected String description;
+    /** The completion status of the task */
     protected boolean isDone;
 
     public Task(String description, boolean isDone) {

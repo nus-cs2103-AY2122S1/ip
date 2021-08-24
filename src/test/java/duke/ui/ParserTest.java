@@ -21,7 +21,7 @@ public class ParserTest {
     }
     
     @Test
-    public void parse_todoNoDescription() {
+    public void parse_todoNoDescription_exceptionThrown() {
         Parser parser = new Parser();
         try {
             Command command = parser.parse("todo ");
@@ -31,7 +31,7 @@ public class ParserTest {
     }
     
     @Test
-    public void parse_incorrectCmd() {
+    public void parse_incorrectCmd_exceptionThrown() {
         Parser parser = new Parser();
         try {
             Command command = parser.parse("incorrect");

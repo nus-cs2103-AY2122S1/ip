@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
+    /** The data file to read/write */
     private File file;
     
     public Storage(String path) {

@@ -5,6 +5,7 @@ import duke.task.Task;
 import java.util.List;
 
 public class TaskList {
+    /** The current list of tasks */
     private List<Task> tasks;
     
     public TaskList(List<Task> tasks) {

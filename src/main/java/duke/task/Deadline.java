@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 
 public class Deadline extends Task {
+    /** The date of the deadline */
     private LocalDate date;
 
     public Deadline(String description, LocalDate date, boolean isDone) {

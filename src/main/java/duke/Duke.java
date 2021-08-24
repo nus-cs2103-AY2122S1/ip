@@ -11,9 +11,11 @@ import duke.ui.Ui;
 import java.util.ArrayList;
 
 public class Duke {
-    
+    /** The storage for the application */
     private Storage storage;
+    /** The task list for the application */
     private TaskList taskList;
+    /** The UI for the application */
     private Ui ui;
     
     public Duke(String filePath) {

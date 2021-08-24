@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeadlineTest {
     @Test
-    public void testToString() {
+    public void toStringUI() {
         Deadline deadline = new Deadline("do homework", LocalDate.parse("2021-08-21"), false);
         assertEquals("[D][ ] do homework (by: AUGUST 21 2021)", deadline.toString());
         deadline.markAsDone();
@@ -16,7 +16,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void testToDataString() {
+    public void toDataString() {
         Deadline deadline = new Deadline("do homework", LocalDate.parse("2021-08-21"), false);
         assertEquals("D | 0 | do homework | 2021-08-21", deadline.toDataString());
         deadline.markAsDone();
