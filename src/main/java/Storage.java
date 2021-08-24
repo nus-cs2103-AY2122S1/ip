@@ -10,18 +10,26 @@ public class Storage {
     private static String filePath;
 
     /**
+     * Initializes a new storage container
+     * @param filePath
+     */
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    /**
      * Gets the file which stores tasks from the user's session
      * If the file exists, it returns the file
      * If the file does not exist, it creates and returns it
      * @return Text file containing user session data
      */
-    public static File getDataFile(String filePath) {
+    public static File getFile() {
         File dataFile = new File(filePath);
         dataFile.getParentFile().mkdirs();
         try {
             dataFile.createNewFile();
         } catch (IOException e) {
-            System.out.println("There was an error.");
+            throw new RuntimeException(e);
         }
         return dataFile;
     }
@@ -31,14 +39,14 @@ public class Storage {
      * Erases existing data
      * @param string String to be written
      */
-    public static void writeToDataFile(String filePath, String string) {
-        File dataFile = getDataFile(filePath);
+    public static void writeToDataFile(String string) {
+        File dataFile = getFile();
         try {
             FileWriter fw = new FileWriter(dataFile);
             fw.write(string);
             fw.close();
         } catch (IOException e) {
-            System.out.println("IOException");
+            throw new RuntimeException(e);
         }
     }
 
@@ -46,14 +54,14 @@ public class Storage {
      * Gets the user task file and appends a string to it
      * @param string String to be appended
      */
-    public static void appendToDataFile(String filePath, String string) {
-        File dataFile = getDataFile(filePath);
+    public static void appendToDataFile(String string) {
+        File dataFile = getFile();
         try {
             FileWriter fw = new FileWriter(dataFile, true);
             fw.write(string);
             fw.close();
         } catch (IOException e) {
-            System.out.println("IOException");
+            throw new RuntimeException(e);
         }
     }
 }

@@ -9,13 +9,13 @@ import java.util.Scanner;
  */
 public class TaskList {
     /** ArrayList containing all tasks **/
-    private ArrayList<Task> taskArrayList = new ArrayList<>();
+    private ArrayList<Task> taskArrayList;
+    private Storage storage;
 
-    /**
-     * Ensures the initial task list is empty
-     */
-    public void start() {
-        taskArrayList = new ArrayList<>();
+    public TaskList(String filePath) {
+        this.taskArrayList = new ArrayList<>();
+        this.storage = new Storage(filePath);
+        this.getTasksFromStorage();
     }
 
     /**
@@ -32,7 +32,7 @@ public class TaskList {
      * @return Task with ID
      * @throws IndexOutOfBoundsException If task ID does not exist
      */
-    public Task get(int id) throws IndexOutOfBoundsException {
+    public Task get(int id) {
         return taskArrayList.get(id - 1);
     }
 
@@ -41,7 +41,7 @@ public class TaskList {
      * @param id ID of task
      * @throws IndexOutOfBoundsException If task ID does not exist
      */
-    public void remove(int id) throws IndexOutOfBoundsException {
+    public void remove(int id) {
         taskArrayList.remove(id - 1);
     }
 
@@ -66,9 +66,14 @@ public class TaskList {
     /**
      * Retrieves a list of tasks from previous sessions, stored in data/duke.txt
      */
-    public void getTasksFromStorage(String filePath) throws FileNotFoundException {
-        File dataFile = Storage.getDataFile(filePath);
-        Scanner sc = new Scanner(dataFile);
+    public void getTasksFromStorage() {
+        File dataFile = storage.getFile();
+        Scanner sc;
+        try {
+            sc = new Scanner(dataFile);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         while (sc.hasNext()) {
             String[] commandArr = sc.nextLine().split("\\|");
             boolean isDone = commandArr[1].equals("1");
@@ -92,7 +97,7 @@ public class TaskList {
     /**
      * Saves the current list of tasks to data/duke.txt to be used in future sessions
      */
-    public void saveTasksToStorage(String filePath) {
+    public void saveTasksToStorage() {
         for (int i = 0; i < taskArrayList.size(); i++) {
             Task task = taskArrayList.get(i);
             String taskString;
@@ -107,9 +112,9 @@ public class TaskList {
                 taskString = "E|" + isDone + task.getName() + "|" + event.getEventDate();
             }
             if (i == 0) {
-                Storage.writeToDataFile(filePath, taskString);
+                storage.writeToDataFile(taskString);
             } else {
-                Storage.appendToDataFile(filePath, "\n" + taskString);
+                storage.appendToDataFile("\n" + taskString);
             }
         }
     }

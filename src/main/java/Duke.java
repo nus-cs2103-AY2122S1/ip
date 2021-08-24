@@ -8,30 +8,31 @@ import java.util.Scanner;
  * @author Adam Oh Zhi Hong
  */
 public class Duke {
+    /** A class to keep track of all tasks of the Duke instance **/
     private TaskList tasklist;
-    private String filePath;
 
+    /**
+     * Initializes a new Duke instance with specified filepath to store tasks
+     * @param filePath Path to storage file
+     */
     private Duke(String filePath) {
-        this.tasklist = new TaskList();
-        this.tasklist.start();
-        this.filePath = filePath;
-        try {
-            this.tasklist.getTasksFromStorage(filePath);
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        }
+        this.tasklist = new TaskList(filePath);
     }
 
+    /**
+     * Entry point of Duke
+     * @param args
+     */
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
+    }
+
+    /**
+     * Starts an instance of Duke
+     */
     private void run() {
         // Welcome the user
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Stay on track with Duke!\n" +
-                "How can I help you?");
+        UI.welcome();
 
         boolean running = true;
         Scanner sc = new Scanner(System.in);
@@ -42,12 +43,12 @@ public class Duke {
             String command = sc.nextLine();
 
             // Handles basic user input such as list and exit
-            // All other commands are handled by TaskManager
+            // All other commands are handled by Parser
             switch (command) {
                 case "bye":
-                    System.out.println("¡Adiós! See you soon!");
-                    tasklist.saveTasksToStorage(filePath);
                     running = false;
+                    tasklist.saveTasksToStorage();
+                    UI.bye();
                     break;
                 case "list":
                     tasklist.list();
@@ -75,10 +76,6 @@ public class Duke {
                     }
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 }
 
