@@ -1,9 +1,17 @@
-public class EventCommand extends Command implements TaskListAddable{
+package duke.command;
+
+import duke.TaskList;
+import duke.CommandResult;
+import duke.DukeException;
+import duke.task.Event;
+import duke.task.Task;
+
+public class EventCommand extends Command implements TaskListAddable {
 
     private final String command;
     public static final String COMMAND_WORD = "event";
 
-    EventCommand(TaskList taskList, String command) {
+    public EventCommand(TaskList taskList, String command) {
         super(taskList);
         this.command = command;
     }

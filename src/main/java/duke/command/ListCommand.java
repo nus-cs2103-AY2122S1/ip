@@ -1,8 +1,13 @@
+package duke.command;
+
+import duke.CommandResult;
+import duke.TaskList;
+
 public class ListCommand extends Command{
 
     public static final String COMMAND_WORD = "list";
 
-    ListCommand(TaskList taskList) {
+    public ListCommand(TaskList taskList) {
         super(taskList);
     }
 

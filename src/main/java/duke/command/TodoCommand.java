@@ -1,9 +1,16 @@
-public class TodoCommand extends Command implements TaskListAddable{
+package duke.command;
+
+import duke.TaskList;
+import duke.CommandResult;
+import duke.task.Task;
+import duke.task.Todo;
+
+public class TodoCommand extends Command implements TaskListAddable {
 
     public static final String COMMAND_WORD = "todo";
     private final String command;
 
-    TodoCommand(TaskList taskList, String command) {
+    public TodoCommand(TaskList taskList, String command) {
         super(taskList);
         this.command = command;
     }

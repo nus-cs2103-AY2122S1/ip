@@ -1,8 +1,13 @@
+package duke.command;
+
+import duke.CommandResult;
+import duke.TaskList;
+
 public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "bye";
 
-    ExitCommand(TaskList taskList) {
+    public ExitCommand(TaskList taskList) {
         super(taskList);
     }
 

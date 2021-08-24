@@ -1,9 +1,16 @@
-public class DeleteCommand extends Command implements ListNumberPrintable{
+package duke.command;
+
+import duke.TaskList;
+import duke.CommandResult;
+import duke.DukeException;
+import duke.task.Task;
+
+public class DeleteCommand extends Command implements ListNumberPrintable {
 
     private final int taskId;
     public static final String COMMAND_WORD = "delete";
 
-    DeleteCommand(TaskList taskList, int taskId) {
+    public DeleteCommand(TaskList taskList, int taskId) {
         super(taskList);
         this.taskId = taskId;
     }

@@ -1,3 +1,5 @@
+package duke;
+
 public class Duke {
     UserInterface userInterface;
     TaskList list;

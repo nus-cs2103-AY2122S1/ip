@@ -1,3 +1,11 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.TaskType;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+
 public class Formatter {
 
     public Task formatStringToTask(String input) throws DukeException {

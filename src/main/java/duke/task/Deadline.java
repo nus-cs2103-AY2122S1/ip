@@ -1,6 +1,10 @@
+package duke.task;
+
+import duke.DukeException;
+
 public class Deadline extends TimedTask {
 
-    Deadline(String name, String by, boolean isCompleted) throws DukeException {
+    public Deadline(String name, String by, boolean isCompleted) throws DukeException {
         super(name, by, TaskType.D, isCompleted);
     }
 

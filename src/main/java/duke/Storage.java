@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,7 +31,7 @@ public class Storage {
             this.reader = Files.newBufferedReader(this.targetDirectory, StandardCharsets.UTF_8);
             this.formatter = new Formatter();
         } catch (IOException e) {
-            System.out.println("Something happened when initializing the Storage.");
+            System.out.println("Something happened when initializing the duke.Storage.");
             e.printStackTrace();
         }
     }

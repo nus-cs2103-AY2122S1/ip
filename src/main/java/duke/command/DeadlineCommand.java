@@ -1,15 +1,23 @@
-public class DeadlineCommand extends Command implements TaskListAddable{
+package duke.command;
+
+import duke.TaskList;
+import duke.CommandResult;
+import duke.DukeException;
+import duke.task.Deadline;
+import duke.task.Task;
+
+public class DeadlineCommand extends Command implements TaskListAddable {
 
     private final String command;
     public static final String COMMAND_WORD = "deadline";
 
-    DeadlineCommand(TaskList taskList, String command) {
+    public DeadlineCommand(TaskList taskList, String command) {
         super(taskList);
         this.command = command;
     }
 
     @Override
-    public CommandResult execute() throws DukeException{
+    public CommandResult execute() throws DukeException {
         TaskList taskList = super.getTaskList();
         String[] eventList = this.command.split(" /by ");
         if (eventList.length != 2) {

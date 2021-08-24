@@ -1,9 +1,16 @@
+package duke.command;
+
+import duke.CommandResult;
+import duke.DukeException;
+import duke.task.Task;
+import duke.TaskList;
+
 public class DoneCommand extends Command{
 
     private final int taskId;
     public static final String COMMAND_WORD = "done";
 
-    DoneCommand(TaskList taskList, int taskId) {
+    public DoneCommand(TaskList taskList, int taskId) {
         super(taskList);
         this.taskId = taskId;
     }
