@@ -1,3 +1,5 @@
+package DukePakage;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,9 +11,9 @@ public class Deadline extends Task{
     private final String dateInput;
 
     /**
-     * Constructor to create a Deadline.
-     * @param description Description of the Deadline task.
-     * @param dateInput Date of when Deadline is due entered by user in String format.
+     * Constructor to create a DukePakage.Deadline.
+     * @param description Description of the DukePakage.Deadline task.
+     * @param dateInput Date of when DukePakage.Deadline is due entered by user in String format.
      */
     public Deadline(String description, String dateInput) {
         super(description);
@@ -60,13 +62,13 @@ public class Deadline extends Task{
     }
 
     /**
-     * Converts the given Deadline into an appropriate format for txt file.
-     * @return a String of the Deadline for input into a txt file.
+     * Converts the given DukePakage.Deadline into an appropriate format for txt file.
+     * @return a String of the DukePakage.Deadline for input into a txt file.
      */
     @Override
     public String toTxt() {
         return String.format("D | %d | %s | %s", super.getIsDone() ? 1 : 0, super.getDescription(),
-                this.deadline);
+                dateToString());
     }
 
     @Override

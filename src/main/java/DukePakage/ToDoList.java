@@ -1,3 +1,5 @@
+package DukePakage;
+
 import java.util.ArrayList;
 
 public class ToDoList {
@@ -15,8 +17,8 @@ public class ToDoList {
     }
 
     /**
-     * Shows all Tasks in the list that the user has given to Duke to store.
-     * Tasks are ordered from least recent to most recent. If no tasks have been given to Duke,
+     * Shows all Tasks in the list that the user has given to DukePakage.Duke to store.
+     * Tasks are ordered from least recent to most recent. If no tasks have been given to DukePakage.Duke,
      * the appropriate message is shown.
      */
     public static void showList() {
@@ -34,7 +36,7 @@ public class ToDoList {
     }
 
     /**
-     * Updates the marking of a certain Task as 'done'.
+     * Updates the marking of a certain DukePakage.Task as 'done'.
      * @param input The entire String that the user has input i.e. "done 2".
      * @throws DukeException If an incorrect input is entered.
      */
@@ -51,7 +53,7 @@ public class ToDoList {
         }
         String message = "☹ Oops! I cannot seem to find that task number. Try again!";
         if (dukeList.isEmpty()) {
-            message = "☹ Oops! Your list is empty! Try adding a Task first!";
+            message = "☹ Oops! Your list is empty! Try adding a DukePakage.Task first!";
         } else if (itemNumber <= dukeList.size()){
             Task targetItem = dukeList.get(itemNumber - 1);
             targetItem.markDone();
@@ -61,7 +63,7 @@ public class ToDoList {
     }
 
     /**
-     * Deletes a specific task that Duke has stored.
+     * Deletes a specific task that DukePakage.Duke has stored.
      * @param input The entire String that the user has input i.e. "delete 2".
      * @throws DukeException If an incorrect input is entered.
      */

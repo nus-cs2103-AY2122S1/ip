@@ -1,8 +1,8 @@
-Hello I'm Duke
+Hello I'm DukePakage.Duke
 What can I do for you?
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ☹ Oops! Looks like you are missing the task number you wish to mark as done! Try again :-)
-☹ Oops! Your list is empty! Try adding a Task first!
+☹ Oops! Your list is empty! Try adding a DukePakage.Task first!
 ☹ Oops! Looks like you have no tasks in your list!
 ☹ Oops! Looks like you are missing the description and the deadline date! Try again :-)
 ☹ Oops! Looks like you are missing the deadline date! Try again :-)

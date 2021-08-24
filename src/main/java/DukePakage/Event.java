@@ -1,3 +1,5 @@
+package DukePakage;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +11,7 @@ public class Event extends Task {
     private final String dateInput;
 
     /**
-     * Constructor for an Event.
+     * Constructor for an DukePakage.Event.
      * @param description The description of th event.
      * @param dateInput The time of the event. (I only just realised that Events had a time and not location.
      */
@@ -61,8 +63,8 @@ public class Event extends Task {
     }
 
     /**
-     * Converts the given Event into an appropriate format for txt file.
-     * @return a String of the Event for input into a txt file.
+     * Converts the given DukePakage.Event into an appropriate format for txt file.
+     * @return a String of the DukePakage.Event for input into a txt file.
      */
     @Override
     public String toTxt() {

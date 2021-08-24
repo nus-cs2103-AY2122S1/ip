@@ -1,3 +1,5 @@
+package DukePakage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,8 +19,8 @@ public class Data {
     }
 
     /**
-     * Loads the Tasks stored in the form of an ArrayList<Task>.
-     * @return An ArrayList of type Task with all Tasks previously stored.
+     * Loads the Tasks stored in the form of an ArrayList<DukePakage.Task>.
+     * @return An ArrayList of type DukePakage.Task with all Tasks previously stored.
      */
     public static ArrayList<Task> loadData() {
         try {
@@ -39,7 +41,7 @@ public class Data {
     }
 
     /**
-     * Writes the Task to the current txt file.
+     * Writes the DukePakage.Task to the current txt file.
      */
     public static void writeToFile(Task task) throws DukeException {
         if (!data.exists()) {
@@ -70,9 +72,9 @@ public class Data {
     }
 
     /**
-     * Converts txt String into a Task object.
+     * Converts txt String into a DukePakage.Task object.
      * @param txt the String that is read from the txt file.
-     * @return a new Task interpreted from the txt file.
+     * @return a new DukePakage.Task interpreted from the txt file.
      */
     public static Task txtToTasks(String txt) {
         String[] read = txt.split(" \\| ");

@@ -1,10 +1,9 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
+package DukePakage;
+
 import java.util.Scanner;
 
 /**
- *  This is my attempt at Duke.
+ *  This is my attempt at DukePakage.Duke.
  * @author Zachary Lau --> I have sought feedback and suggestions from Charlton Tan, Wilbur Fong and Jia Yuan.
  *
  */
@@ -79,7 +78,7 @@ public class Duke {
                     }
                     break;
                 default:
-                    //If no cases above are entered, Duke will not understand the command and prompt the user.
+                    //If no cases above are entered, DukePakage.Duke will not understand the command and prompt the user.
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             if (loopStatus) {

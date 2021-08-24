@@ -1,3 +1,5 @@
+package DukePakage;
+
 public class Parser {
     private final ToDoList dukeList;
     private final Data data;
@@ -8,7 +10,7 @@ public class Parser {
     }
 
     /**
-     * Interpret what the user has entered as an input and categorises it into a Command.
+     * Interpret what the user has entered as an input and categorises it into a DukePakage.Command.
      * @param input User's input
      * @return The correct command that is interpreted from the user input.
      */
@@ -18,7 +20,7 @@ public class Parser {
     }
 
     /**
-     * Adds a Deadline to all Tasks that Duke has stored.
+     * Adds a DukePakage.Deadline to all Tasks that DukePakage.Duke has stored.
      * @param input The entire String that the user has input i.e. "deadline Whatever /by Whenever".
      * @throws DukeException If an incorrect input is entered.
      */
@@ -42,7 +44,7 @@ public class Parser {
     }
 
     /**
-     * Adds an Event to all Tasks that Duke has stored.
+     * Adds an DukePakage.Event to all Tasks that DukePakage.Duke has stored.
      * @param input The entire String that the user has input i.e. "event Here /at There".
      * @throws DukeException If an incorrect input is entered.
      */
@@ -66,7 +68,7 @@ public class Parser {
     }
 
     /**
-     * Adds a Todo to all Tasks that Duke has stored.
+     * Adds a DukePakage.Todo to all Tasks that DukePakage.Duke has stored.
      * @param input The entire String that the user has input i.e. "todo This task".
      * @throws DukeException If an incorrect input is entered.
      */
