@@ -13,7 +13,7 @@ public class TaskList {
     }
 
     /**
-     * Adds an item to the TaskList
+     * Adds an item to the TaskList.
      * This method is for Level-3, and is not longer used w.e.f Level-4
      *
      * @param input the item to be added to the TaskList
@@ -25,54 +25,60 @@ public class TaskList {
     }
 
     /**
-     * Adds an Event to the TaskList
+     * Adds an Event to the TaskList.
      *
      * @param event event to be added to the TaskList
      */
-    public void add(Event event) {
+    public void add(Event event, boolean print) {
         this.list.add(event);
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + event);
-        System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+        if (print) {
+            System.out.println("     Got it. I've added this task:");
+            System.out.println("       " + event);
+            System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+        }
     }
 
 
     /**
-     * Adds a deadline to the TaskList
+     * Adds a deadline to the TaskList.
      *
      * @param deadline deadline to be added to the TaskList
      */
-    public void add(Deadline deadline) {
+    public void add(Deadline deadline, boolean print) {
         this.list.add(deadline);
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + deadline);
-        System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+        if (print) {
+            System.out.println("     Got it. I've added this task:");
+            System.out.println("       " + deadline);
+            System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+        }
     }
 
     /**
-     * Adds a toDo to the TaskList
+     * Adds a toDo to the TaskList.
      *
      * @param toDo deadline to be added to the TaskList
      */
-    public void add(ToDo toDo) {
+    public void add(ToDo toDo, boolean print) {
         this.list.add(toDo);
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + toDo);
-        System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+        if (print) {
+            System.out.println("     Got it. I've added this task:");
+            System.out.println("       " + toDo);
+            System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+        }
     }
 
     /**
-     * Finishes a task at a given index
+     * Finishes a task at a given index.
      *
      * @param index index from 1 (i.e lowest index is 1, so subtract 1 to get real index)
      */
     public void finishTask(int index) {
         Task task = this.list.get(index - 1);
-        task.doneTask();
+        task.doneTask(true);
     }
 
     /**
-     * Lists out the current items in the TaskList
+     * Lists out the current items in the TaskList.
      */
     public void listOut() {
         if (this.list.size() == 0) {
@@ -84,6 +90,19 @@ public class TaskList {
                 System.out.println("     " + (i + 1) + "." + this.list.get(i));
             }
         }
+    }
+
+    /**
+     * This method is to be used when quitting and saving the file.
+     *
+     * @return the resulting string containing save-friendly information
+     */
+    public String save() {
+        String output = "";
+        for (Task task: list) {
+            output += task.type() + " | " + (task.getState() ? "1 | " : "0 | ") + task.getSaveInfo() + "\n";
+        }
+        return output;
     }
 
     /**
