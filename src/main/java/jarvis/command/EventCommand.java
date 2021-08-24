@@ -1,5 +1,6 @@
 package jarvis.command;
 
+import jarvis.exception.JarvisException;
 import jarvis.exception.StorageFileException;
 import jarvis.exception.TaskDetailsEmptyException;
 import jarvis.parser.Parser;
@@ -8,10 +9,19 @@ import jarvis.storage.Storage;
 import jarvis.task.Event;
 import jarvis.task.TaskList;
 
+/**
+ * Encapsulates the event task command
+ */
 public class EventCommand extends Command {
     private String eventDescription;
     private String eventTime;
 
+    /**
+     * Constructor for EventCommand
+     *
+     * @param userInputWithoutCommandTrigger User input without the command trigger
+     * @throws TaskDetailsEmptyException If any of the required details are empty
+     */
     public EventCommand(String userInputWithoutCommandTrigger) throws TaskDetailsEmptyException {
         String[] splitStrings = Parser.getEventInfoArray(userInputWithoutCommandTrigger);
         this.eventDescription = splitStrings[0].trim();
@@ -24,6 +34,14 @@ public class EventCommand extends Command {
         this.eventTime = splitStrings[1].trim();
     }
 
+    /**
+     * Creates the event task, adds to storage file and shows the ui message to user
+     *
+     * @param taskList The list in which the tasks are stored
+     * @param storage Storage to save or load tasks to hard-disk
+     * @param ui Ui to show information to the user
+     * @throws StorageFileException If there is an error when writing to storage file
+     */
     @Override
     public void execute(TaskList taskList, Storage storage, Ui ui) throws StorageFileException {
         Event newEvent = taskList.addEvent(eventDescription, eventTime);

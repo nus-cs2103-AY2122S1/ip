@@ -10,9 +10,18 @@ import jarvis.storage.Storage;
 import jarvis.task.Task;
 import jarvis.task.TaskList;
 
+/**
+ * Encapsulates the mark as done command
+ */
 public class MarkAsDoneCommand extends Command {
     private int taskIndex;
 
+    /**
+     * Constructor for MarkAsDoneCommand
+     *
+     * @param userInputWithoutCommandTrigger User input without the command trigger
+     * @throws JarvisException If the user input is invalid
+     */
     public MarkAsDoneCommand(String userInputWithoutCommandTrigger) throws JarvisException {
        try {
            this.taskIndex = Parser.getTaskIndex(userInputWithoutCommandTrigger);
@@ -21,6 +30,14 @@ public class MarkAsDoneCommand extends Command {
        }
     }
 
+    /**
+     * Marks the task as done, rewrites the storage file and shows the ui message to user
+     *
+     * @param taskList The list in which the tasks are stored
+     * @param storage Storage to save or load tasks to hard-disk
+     * @param ui Ui to show information to the user
+     * @throws JarvisException If there is an error
+     */
     @Override
     public void execute(TaskList taskList, Storage storage, Ui ui) throws JarvisException {
         if (taskList.getTaskListSize() == 0) {
