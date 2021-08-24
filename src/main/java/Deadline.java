@@ -16,4 +16,9 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
+    @Override
+    String printFormat() {
+        String[] info = {"D", this.isDone ? "1" : "0", this.description, this.by};
+        return String.join(" | ", info);
+    }
 }
