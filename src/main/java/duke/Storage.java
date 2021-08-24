@@ -1,6 +1,13 @@
+package duke;
+
+import duke.Deadline;
+import duke.Event;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -15,9 +22,12 @@ public class Storage {
 
     public ArrayList<Task> load() throws DukeException {
         try {
-            File dataDirectory = new File("data");
+            File dataDirectory = new File("/data");
             dataDirectory.mkdir();
-            File storage = new File("data/duke.txt");
+            File storage = new File("/data/duke.txt");
+//            if (!Files.exists(Paths.get(filePath))) {
+//                System.out.println(storage.mkdir());
+//            }
             storage.createNewFile();
             Scanner savedTasks = new Scanner(storage);
             ArrayList<Task> tasks = new ArrayList<>();
@@ -57,7 +67,7 @@ public class Storage {
         }
     }
 
-    public static void saveTasks(TaskList tasks) {
+    public void saveTasks(TaskList tasks) {
         String textToAdd = "";
 
         for (int i = 0; i < tasks.numOfTasks(); i++) {
@@ -65,7 +75,7 @@ public class Storage {
         }
 
         try {
-            FileWriter file = new FileWriter("data/duke.txt");
+            FileWriter file = new FileWriter("/data/duke.txt");
             file.write(textToAdd);
             file.close();
         } catch (IOException e) {

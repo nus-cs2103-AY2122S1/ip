@@ -1,3 +1,5 @@
+package duke;
+
 public class ExitCommand implements Command {
     public ExitCommand() {
         super();

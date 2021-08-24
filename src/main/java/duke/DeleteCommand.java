@@ -1,3 +1,5 @@
+package duke;
+
 public class DeleteCommand implements Command {
     private String userInput;
 
@@ -12,6 +14,7 @@ public class DeleteCommand implements Command {
             int taskNum = Integer.parseInt(userInput.substring(7));
             Task curr = tasks.removeTask(taskNum - 1);
             ui.showDeleteTask(curr, tasks.numOfTasks());
+            storage.saveTasks(tasks);
         } catch (NumberFormatException nfe) {
             throw new DukeException("Please only enter an integer after command 'delete'!");
         } catch (IndexOutOfBoundsException e) {

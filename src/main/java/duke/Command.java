@@ -1,4 +1,6 @@
-interface Command {
+package duke;
+
+public interface Command {
 
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
