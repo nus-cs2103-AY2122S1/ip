@@ -14,6 +14,11 @@ public class Todo extends Task {
         super(description);
     }
 
+    @Override
+    public String formatToSave() {
+        return String.format("T | %s", super.formatToSave());
+    }
+
     /**
      * String representation of the todo task.
      *

@@ -20,6 +20,10 @@ public class Event extends Task {
         this.time = time;
     }
 
+    @Override
+    public String formatToSave() {
+        return String.format("E | %s | %s", super.formatToSave(), time);
+    }
     /**
      * String representation of the event.
      *

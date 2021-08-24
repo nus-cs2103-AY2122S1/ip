@@ -17,11 +17,13 @@ public class TaskHandler {
     private static final String NO_SUCH_TASK_ID = "Awwww, I can't seem to find this task index. Try again? U_U";
     private static final String NEGATIVE_TASK_ID = "Please enter a number starting from 1! V_V";
 
-    private List<Task> taskList;
+    private ArrayList<Task> taskList;
+    private final Storage storage;
 
-    /** Instanbtiates a new Task Handler **/
-    public TaskHandler() {
-        taskList = new ArrayList<>();
+    /** Instantiates a new Task Handler **/
+    public TaskHandler(ArrayList<Task> taskList, Storage storage) {
+        this.taskList = taskList;
+        this.storage = storage;
     }
 
     /**
@@ -98,6 +100,9 @@ public class TaskHandler {
         Duke.prettify(String.format(TASK_DELETED_MESSAGE, t, getTotalTasksCount()));
     }
 
+    public void updateData() throws DukeException {
+        storage.updateData(taskList);
+    }
     /**
      * String representation of the task list, with the tasks indexed.
      *

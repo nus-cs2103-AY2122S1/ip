@@ -22,7 +22,8 @@ public class Duke {
     private static final String EVENT_ERROR_MESSAGE = "Invalid use of 'event' command!! @_@\n\tTo add a new event, use 'event <title> /at <time-stamp>'.";
     private static final String DONE_ERROR_MESSAGE = "Invalid use of 'done' command!! @_@\n\tTo mark a task as done, use 'done <task-number>'.";
     private static final String INPUT_PROMPT = "Enter a command *_*";
-
+    private Storage storage;
+    private TaskHandler taskHandler;
     /**
      * Formats the input and prints it in a formatted version.
      *
@@ -56,11 +57,16 @@ public class Duke {
         // Welcome message
         printIntroMessage();
         Scanner sc = new Scanner(System.in);
-        TaskHandler taskHandler = new TaskHandler();
+        storage = new Storage();
         Command command;
 
         // Logic of program based on user input
         while (sc.hasNextLine()) {
+            try {
+                taskHandler = new TaskHandler(storage.loadTasks(), storage);
+            } catch (DukeException e) {
+                prettify(e.getMessage());
+            }
             String input = sc.nextLine();
             String inputUpperCase = input.trim().toUpperCase();
             String commandWord = input.split("\\s+")[0];
@@ -79,6 +85,7 @@ public class Duke {
                         validateDetails(descExtractedRaw, command);
                         int taskIndex = Integer.parseInt(descExtractedRaw);
                         taskHandler.markTaskAsDone(taskIndex);
+                        taskHandler.updateData();
                         break;
                     case DEADLINE:
                         validateFilled(descExtractedRaw, command);
@@ -86,11 +93,13 @@ public class Duke {
                         String[] deadlineDetails = descExtractedRaw.split("\\s+/by\\s+", 2);
                         Deadline dl = new Deadline(deadlineDetails[0], deadlineDetails[1]);
                         taskHandler.addTask(dl);
+                        storage.writeToFile(dl);
                         break;
                     case TODO:
                         validateFilled(descExtractedRaw, command);
                         Todo td = new Todo(descExtractedRaw);
                         taskHandler.addTask(td);
+                        storage.writeToFile(td);
                         break;
                     case EVENT:
                         validateFilled(descExtractedRaw, command);
@@ -98,12 +107,14 @@ public class Duke {
                         String[] eventDetails = descExtractedRaw.split("\\s+/at\\s+", 2);
                         Event event = new Event(eventDetails[0], eventDetails[1]);
                         taskHandler.addTask(event);
+                        storage.writeToFile(event);
                         break;
                     case DELETE:
                         validateFilled(descExtractedRaw, command);
                         validateDetails(descExtractedRaw, command);
                         int deleteIndex = Integer.parseInt(descExtractedRaw);
                         taskHandler.deleteTask(deleteIndex);
+                        taskHandler.updateData();
                         break;
                     case BYE:
                         prettify(EXIT_MESSAGE);

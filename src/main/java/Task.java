@@ -5,7 +5,7 @@
  * @version CS2103T AY21/22 Semester 1
  */
 public class Task {
-    private String taskName;
+    private final String taskName;
     private boolean isDone;
 
     /**
@@ -39,6 +39,14 @@ public class Task {
      */
     private String getIcon() {
         return isDone ? "X" :"";
+    }
+
+    /**
+     *
+     *
+     */
+    public String formatToSave() {
+        return String.format("%d | %s", isDone ? 1 : 0, taskName);
     }
 
     /**
