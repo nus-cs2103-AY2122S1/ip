@@ -21,7 +21,7 @@ public class Event extends Task {
     /**
      * Constructor for the duke.tasks.Event task.
      * @param description the description of the task.
-     * @param isDone whether or not the task is completed.
+     * @param isDone whether the task is completed.
      * @throws WrongCommandFormatException thrown when the user enters the
      *                                     command with the wrong format.
      */
@@ -118,6 +118,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Method to convert the task into string format to be stored in Data.txt
+     * @return The string representation of the task
+     */
     @Override
     public String createData() {
         String data = getTypeIcon()

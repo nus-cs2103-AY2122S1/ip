@@ -4,6 +4,9 @@ import duke.exception.WrongCommandFormatException;
 
 public class Ui {
 
+    /**
+     * Method to print out the welcome message when the bot starts.
+     */
     public static void welcomeMessage() {
         System.out.println(
                 "Yo! duke.Duke here \n"
@@ -12,12 +15,11 @@ public class Ui {
         );
     }
 
+    /**
+     * Method to print out the error message when loading of tasks fails
+     */
     public static void loadingError() {
         System.out.println("Error loading duke.tasks");
-    }
-
-    public static void emptyList() {
-        System.out.println("Your list is empty.");
     }
 
     public static void invalidIndexMessage() {
