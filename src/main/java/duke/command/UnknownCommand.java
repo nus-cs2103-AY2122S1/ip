@@ -5,8 +5,17 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/** A class that handles unknown command. */
 public class UnknownCommand extends Command {
 
+    /**
+     * Hint the user about the functional commands.
+     *
+     * @param tasks The list that stores all the tasks to be added/deleted.
+     * @param ui The ui that deals with interactions with the user.
+     * @param storage The storage that deals with loading tasks from the file and saving tasks in the file.
+     * @throws UnknownCommandException The exception for handling unknown commands.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws UnknownCommandException {
         String suggestions = String.format("%s\n" +
@@ -30,6 +39,11 @@ public class UnknownCommand extends Command {
         throw new UnknownCommandException(suggestions);
     }
 
+    /**
+     * Return a boolean value of whether it is a command that exit the program.
+     *
+     * @return The boolean value of whether it is a command that exit the program.
+     */
     @Override
     public boolean isExit() {
         return false;
