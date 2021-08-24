@@ -5,16 +5,20 @@ import duke.exception.InvalidCommandException;
 import duke.exception.InvalidCommandParameterException;
 import duke.exception.NoSuchTaskException;
 import java.io.IOException;
-
 import duke.task.*;
 import duke.UI;
 import duke.Storage;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class DukeParser {
     TaskList list;
     Storage storage;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm", Locale.ENGLISH);
+
 
     public DukeParser(TaskList list, Storage storage) {
         this.list = list;
@@ -95,9 +99,9 @@ public class DukeParser {
     public void handleDeadline(Scanner inputScanner) throws InvalidCommandParameterException
             , IOException {
         if (inputScanner.hasNextLine()) {
-            String[] contentAndDate = inputScanner.nextLine().split("/by", 2);
+            String[] contentAndDate = inputScanner.nextLine().split("/by ", 2);
             String content = contentAndDate[0];
-            String date = contentAndDate[1];
+            LocalDateTime date = LocalDateTime.parse(contentAndDate[1],formatter);
             list.addTask(new Deadline(content, date));
             storage.writeList(list);
             UI.printTaskAdded(list);
@@ -108,9 +112,9 @@ public class DukeParser {
 
     public void handleEvent(Scanner inputScanner) throws InvalidCommandParameterException,IOException {
         if (inputScanner.hasNextLine()) {
-            String[] contentAndDate = inputScanner.nextLine().split("/at", 2);
+            String[] contentAndDate = inputScanner.nextLine().split("/at ", 2);
             String content = contentAndDate[0];
-            String date = contentAndDate[1];
+            LocalDateTime date = LocalDateTime.parse(contentAndDate[1],formatter);
             list.addTask(new Event(content, date));
             storage.writeList(list);
             UI.printTaskAdded(list);

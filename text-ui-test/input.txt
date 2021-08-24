@@ -1,11 +1,11 @@
 hello
 todo read book
 todo sleep
-deadline eat lunch /by 3pm today
+deadline eat lunch /by 12/05/2021 1700
 done 2
-deadline sleep /by 11pm tonight
-event complete ip /at Aug 19 23:59
-event sleep /at Aug 19 00:00
+deadline sleep /by 02/07/2021 2300
+event complete ip /at 15/08/2021 2359
+event sleep /at 19/08/2021 0000
 done 3
 list
 done 5

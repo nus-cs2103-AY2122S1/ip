@@ -1,16 +1,21 @@
 package duke.task;
 
-public class Deadline extends Task {
-    private final String by;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
-    public Deadline(String content, String by) {
+public class Deadline extends Task {
+    private final LocalDateTime by;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, MMM d,yyyy hh:mma", Locale.ENGLISH);
+
+    public Deadline(String content, LocalDateTime by) {
         super(content);
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by:" + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(formatter) + ")";
     }
 
     public String toStorageString() {
