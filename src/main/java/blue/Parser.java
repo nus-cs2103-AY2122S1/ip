@@ -14,8 +14,9 @@ public class Parser {
     public static String[] getArguments(String input) {
         if (input.length() > 0) {
             String[] split = input.split(" ");
-            if (split.length >= 2)
+            if (split.length >= 2) {
                 return Arrays.copyOfRange(split, 1, split.length);
+            }
         }
         return new String[]{};
     }
