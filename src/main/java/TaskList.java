@@ -12,7 +12,7 @@ public class TaskList {
     private ArrayList<Task> taskList;
 
     public TaskList() {
-        this.taskList = new ArrayList<Task>();
+        this.taskList = new ArrayList<>();
     }
 
     public void initialiseTaskList() {
@@ -46,7 +46,7 @@ public class TaskList {
                     newTask.markCompleted();
                 }
             }
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }
