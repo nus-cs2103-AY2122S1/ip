@@ -16,6 +16,8 @@ public class Parser {
             return new DoneCommand(userInput);
         } else if (userInput.startsWith("delete")) {
             return new DeleteCommand(userInput);
+        } else if (userInput.startsWith("find")) {
+            return new FindCommand(userInput);
         } else {
             return new AddCommand(userInput);
         }
