@@ -30,14 +30,14 @@ public class Parser {
                 return new Deadline(str1, str2);
 
             case "/at ":
-
-            case " (at: ":
-                return new Event(str1, str2);
                 if (date == null) {
                     return new Event(str1, str2);
                 } else {
                     return new Event(str1, date);
                 }
+
+            case " (at: ":
+                return new Event(str1, str2);
 
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
