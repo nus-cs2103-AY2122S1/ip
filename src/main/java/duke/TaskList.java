@@ -1,3 +1,5 @@
+package duke;
+
 import exceptions.NoSuchCommandException;
 import exceptions.NoTaskNameException;
 import tasks.Task;
