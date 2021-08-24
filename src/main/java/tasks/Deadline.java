@@ -1,4 +1,9 @@
+package tasks;
 public class Deadline extends TaskWithDate {
+    public Deadline(String description, String by, boolean done) {
+        super(description,by);
+        this.isDone = done;
+    }
 
     public Deadline(String description, String by) {
         super(description,by);

@@ -1,8 +1,9 @@
+package tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class TaskWithDate extends Task{
-    protected LocalDate date;
+    public final LocalDate date;
     
     public TaskWithDate(String description, String date) {
         super(description);

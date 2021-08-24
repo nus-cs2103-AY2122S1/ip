@@ -1,3 +1,0 @@
-todo,lol
-deadline,test,2020-01-01
-deadline,test,2020-01-01

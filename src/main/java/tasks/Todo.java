@@ -1,5 +1,10 @@
+package tasks;
 public class Todo extends Task{
-    protected String at;
+
+    public Todo(String description, boolean done) {
+        super(description);
+        this.isDone = done;
+    }
 
     public Todo(String description) {
         super(description);
