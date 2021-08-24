@@ -1,15 +1,22 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private List<Task> list;
+    private final List<Task> list;
 
-    public Duke() {
-        this.list = new ArrayList<Task>(100);
+    public Duke(){
+        this.list = new ArrayList<>(100);
     }
 
     private void begin() {
+        try {
+            readTasks(list);
+        } catch (Exception e) {
+            System.out.println("Could not read the data file: " + e.getMessage());
+        }
+
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         Scanner scanner = new Scanner(System.in);
 
@@ -25,6 +32,7 @@ public class Duke {
                         int listIndex = Integer.parseInt(input.substring(5));
                         if (listIndex <= list.size() && listIndex >= 1) {
                             completeTask(listIndex);
+                            writeTasks();
                         } else {
                             throw new DukeException("Couldn't find that task in the list! Try again.");
                         }
@@ -42,11 +50,12 @@ public class Duke {
                             String deadline = input.substring(deadlineIndex);
                             String firstTrimmed = input.substring(9);
                             String lastTrimmed = firstTrimmed.substring(0, firstTrimmed.indexOf("/by"));
-                            Deadline createdDeadlineTask = new Deadline(lastTrimmed, deadline);
+                            Deadline createdDeadlineTask = new Deadline(lastTrimmed, false, deadline);
                             addToList(createdDeadlineTask);
                             System.out.println("Got it. I've added this task:\n" + "  " + createdDeadlineTask + "\n"
                                     + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
                                     " in the list.");
+                            writeTasks();
                         } catch (StringIndexOutOfBoundsException e) {
                             throw new DukeException("Please ensure that there is a task description and deadline. " +
                                     "Try again.");
@@ -55,11 +64,12 @@ public class Duke {
                 } else if (input.startsWith("todo")) {
                     try {
                         String trimmed = input.substring(5);
-                        Todo createdTodoTask = new Todo(trimmed);
+                        Todo createdTodoTask = new Todo(trimmed, false);
                         addToList(createdTodoTask);
                         System.out.println("Got it. I've added this task:\n" + "  " + createdTodoTask + "\n"
                                 + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
                                 " in the list.");
+                        writeTasks();
                     } catch (StringIndexOutOfBoundsException e) {
                         throw new DukeException("Please add the task information. Try again.");
                     }
@@ -72,11 +82,12 @@ public class Duke {
                             String at = input.substring(atIndex);
                             String firstTrimmed = input.substring(6);
                             String lastTrimmed = firstTrimmed.substring(0, firstTrimmed.indexOf("/at"));
-                            Event createdEventTask = new Event(lastTrimmed, at);
+                            Event createdEventTask = new Event(lastTrimmed, false, at);
                             addToList(createdEventTask);
                             System.out.println("Got it. I've added this task:\n" + "  " + createdEventTask + "\n"
                                     + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
                                     " in the list.");
+                            writeTasks();
                         } catch (StringIndexOutOfBoundsException e) {
                             throw new DukeException("Please ensure that there is an event time. Try again.");
                         }
@@ -85,6 +96,7 @@ public class Duke {
                     try {
                         int toDeleteIndex = Integer.parseInt(input.substring(7));
                         deleteTask(toDeleteIndex);
+                        writeTasks();
                     } catch (NumberFormatException e){
                         throw new DukeException("Please make sure only a number follows the command 'delete'. " +
                                 "Try again.");
@@ -139,6 +151,63 @@ public class Duke {
         Task task = list.get(index - 1);
         task.setDone();
         System.out.println("Nice! I've marked this task as done:\n" + "  " + task);
+    }
+
+    private void writeTasks() throws DukeException{
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("./data/duke.txt"));
+            for (Task task : list) {
+                bw.write(task.toString());
+                bw.newLine();
+            }
+            bw.close();
+        } catch (IOException e) {
+            throw new DukeException("Couldn't write the tasks!");
+        }
+    }
+
+    private void readTasks(List<Task> list) throws DukeException {
+        File file = new File("./data/duke.txt");
+        file.getParentFile().mkdirs();
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Error creating data file: " + e.getMessage());
+            }
+        }
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("./data/duke.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] splitLine = line.split(" ");
+
+                switch(splitLine[0].charAt(1)) {
+                case 'T':
+                    String todoName = splitLine[1];
+                    boolean todoStatus = (splitLine[0].charAt(4) == 'X');
+                    list.add(new Todo(todoName, todoStatus));
+                    break;
+                case 'D':
+                    String deadlineName = splitLine[1] + " ";
+                    boolean deadlineStatus = (splitLine[0].charAt(4) == 'X');
+                    String deadlineByWithBracket = line.substring(line.lastIndexOf("(by: ") + 5);
+                    String deadlineBy = deadlineByWithBracket.substring(0, deadlineByWithBracket.length() - 1);
+                    list.add(new Deadline(deadlineName, deadlineStatus, deadlineBy));
+                    break;
+                case 'E':
+                    String eventName = splitLine[1] + " ";
+                    boolean eventStatus = (splitLine[0].charAt(4) == 'X');
+                    String eventAtWithBracket = line.substring(line.lastIndexOf("(at: ") + 5);
+                    String eventAt = eventAtWithBracket.substring(0, eventAtWithBracket.length() - 1);
+                    list.add(new Event(eventName, eventStatus, eventAt));
+                    break;
+                }
+                }
+            br.close();
+            } catch (IOException e) {
+            throw new DukeException("Couldn't read the tasks!");
+        }
     }
 
     public static void main(String[] args) {
