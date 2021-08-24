@@ -48,7 +48,7 @@ public class Duke {
                     if (task.isBlank()) {//checking incomplete input
                         throw new DukeException();
                     }
-                    String[] parts = task.split("/by");//split string along keyword /by
+                    String[] parts = task.split("/by ");//split string along keyword /by
                     list.addDeadline(parts[0], parts[1]);
                     input = sc.nextLine();
                     continue;
