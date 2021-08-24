@@ -1,9 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
 
 public class TaskArray extends ArrayList<Task>{
 
     private static final String DIVIDER = "%%";
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     public TaskArray() {
     }
 
@@ -31,9 +34,11 @@ public class TaskArray extends ArrayList<Task>{
                 task = ToDo.create(splitString[2]);
 
             } else if (splitString[0].equals("E")) {
-                task = Event.create(splitString[2], splitString[3]);
+                task = Event.create(splitString[2], LocalDateTime.parse(splitString[3],
+                        formatter));
             } else {
-                task = Deadline.create(splitString[2], splitString[3]);
+                task = Deadline.create(splitString[2], LocalDateTime.parse(splitString[3],
+                        formatter));
             }
             task.markFinished(splitString[1].equals("X"));
             this.add(task);

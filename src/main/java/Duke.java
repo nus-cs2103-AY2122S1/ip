@@ -1,4 +1,7 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -151,13 +154,16 @@ public class Duke {
         switch (type) {
         case Event:
             try {
-                String[] splitBody = body.split("/at", 2);
+                String[] splitBody = body.split(" /at ", 2);
                 if (splitBody.length == 1 || splitBody[1].strip().equals("")) {
                     throw new DukeExceptions("Oops! I need to know when the deadline is. " +
-                            "Use the /by argument please");
+                            "Use the /at argument please");
                 }
                 String desc = splitBody[0];
-                String time = splitBody[1];
+                System.out.println(splitBody[1]);
+                LocalDateTime time = LocalDateTime.parse(splitBody[1],
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+                );
                 task = Event.create(desc, time);
                 taskList.add(task);
                 reply("Got it! I've added this event to the list: \n"
@@ -165,6 +171,9 @@ public class Duke {
                         + String.format("Now you have %d tasks in the list", taskList.size()));
             } catch (DukeExceptions e) {
                 reply(e.getMessage());
+            } catch (DateTimeParseException e) {
+                reply("Hmm.. Seems like the time format is foreign to me. Please use the following format:" + '\n'
+                        + "yyyy-MM-dd HH:MM (e.g 2020-05-19 15:30");
             } finally {
                 break;
             }
@@ -179,13 +188,15 @@ public class Duke {
 
         case Deadline:
             try {
-                String[] splitBody = body.split("/by", 2);
+                String[] splitBody = body.split(" /by ", 2);
                 if (splitBody.length == 1 || splitBody[1].strip().equals("")) {
                     throw new DukeExceptions("Oops! I need to know when the deadline is. " +
                             "Use the /by argument please");
                 }
                 String desc = splitBody[0];
-                String time = splitBody[1];
+                LocalDateTime time = LocalDateTime.parse(splitBody[1],
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+                );
                 task = Deadline.create(desc, time);
                 taskList.add(task);
                 reply("Got it! I've added this time sensitive task: \n"
@@ -193,6 +204,9 @@ public class Duke {
                         + String.format("Now you have %d tasks in the list", taskList.size()));
             } catch (DukeExceptions e) {
                 reply(e.getMessage());
+            } catch (DateTimeParseException e) {
+                reply("Hmm.. Seems like the time format is foreign to me. Please use the following format:" + '\n'
+                        + "yyyy-MM-dd HH:MM (e.g 2020-05-19 15:30");
             } finally {
                 break;
             }

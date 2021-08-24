@@ -1,10 +1,13 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
 
-    private Deadline(String description, String deadline) {
+    private Deadline(String description, LocalDateTime deadline) {
         super(description, "D", deadline);
     }
 
-    public static Deadline create(String description, String time) {
+    public static Deadline create(String description, LocalDateTime time) {
         return new Deadline(description, time);
     }
 
@@ -12,6 +15,6 @@ public class Deadline extends Task{
     public String toString() {
         return '[' + this.taskType + ']' + '[' + getStatusIcon()
                 + ']' + ' ' + this.description
-                + String.format("(by:%s)", this.time);
+                + String.format(" (by: %s)", this.time.format(formatter));
     }
 }
