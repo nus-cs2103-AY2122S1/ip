@@ -15,7 +15,7 @@ import java.util.Scanner;
  * Storage class to retrieve and store tasks in Duke.
  */
 public class Storage {
-    private String FILE_PATH = "C:\\Users\\Chu Heng 2\\Desktop\\cs2103T\\ip\\data\\duke.txt";
+    private final String FILE_PATH = "C:\\Users\\Chu Heng 2\\Desktop\\cs2103T\\ip\\data\\duke.txt";
 
     /**
      * Reads data from duke.txt file.
@@ -31,13 +31,7 @@ public class Storage {
         while (sc.hasNextLine()) {
             String data = sc.nextLine();
             String[] args = data.split(" // ");
-
-            boolean isDone;
-            if (Integer.parseInt(args[1]) == 0) {
-                isDone = false;
-            } else {
-                isDone = true;
-            }
+            Boolean isDone = Integer.parseInt(args[1]) != 0;
             switch(args[0]) {
                 case "Todo":
                     al.add(new Todo(args[2], isDone));
@@ -60,16 +54,12 @@ public class Storage {
      * @throws IOException In case directory is invalid or file does not exist.
      */
     public void writeData(ArrayList<Task> al) throws IOException {
-        try {
-            File f = new File(FILE_PATH);
-            f.createNewFile();
-            FileWriter fw = new FileWriter(FILE_PATH);
-            for (int i = 1; i <= al.size(); i++) {
-                fw.write(al.get(i - 1).getData() + "\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            throw e;
+        File f = new File(FILE_PATH);
+        f.createNewFile();
+        FileWriter fw = new FileWriter(FILE_PATH);
+        for (int i = 1; i <= al.size(); i++) {
+            fw.write(al.get(i - 1).getData() + "\n");
         }
+        fw.close();
     }
 }

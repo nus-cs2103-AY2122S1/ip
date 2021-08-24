@@ -29,7 +29,7 @@ public class Parser {
         String[] args = {};
         if (idx >= 0) {
             name = input.substring(0, idx).trim();
-            args = input.substring(idx+1).split("/");
+            args = input.substring(idx + 1).split("/");
             for (int i = 0; i < args.length; i++) {
                 args[i] = args[i].trim();
             }
@@ -42,7 +42,7 @@ public class Parser {
                     throw new InvalidFormatException();
                 }
 
-                if (!DateTime.isValidDate(args[1])) {
+                if (DateTime.isInvalidDate(args[1])) {
                     throw new InvalidDateException();
                 }
                 return new Event(args[0], args[1]);
@@ -50,7 +50,7 @@ public class Parser {
                 if (!input.matches("deadline [\\s\\S]+/[\\s\\S]+")) {
                     throw new InvalidFormatException();
                 }
-                if (!DateTime.isValidDate(args[1])) {
+                if (DateTime.isInvalidDate(args[1])) {
                     throw new InvalidDateException();
                 }
                 return new Deadline(args[0], args[1]);

@@ -7,8 +7,6 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner sc;
-    static final String LINE = "_________________________________________________________________"
-            + "_______________________________________________________________________\n";
 
     /** Welcome message. */
     public static final String WELCOME_MSG = "Hi I am Annie!\nHow can I assist you?";
@@ -16,6 +14,8 @@ public class Ui {
     /** Goodbye message. */
     public static final String GOODBYE_MSG = "Bye. See you soon!";
 
+    static final String LINE = "_________________________________________________________________"
+            + "_______________________________________________________________________\n";
     static final String LIST_MSG = "Here are the tasks in your list:\n";
     static final String ADD_MSG = "Gotcha. I've added this task:\n";
     static final String NUMTASK_MSG = "Your current task count: ";

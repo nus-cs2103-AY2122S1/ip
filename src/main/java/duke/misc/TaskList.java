@@ -89,11 +89,7 @@ public class TaskList {
      * @throws IOException In case directory is invalid.
      */
     public void saveData() throws IOException {
-        try {
-            storage.writeData(tasks);
-        } catch (IOException e) {
-            throw e;
-        }
+        storage.writeData(tasks);
     }
 
     /**

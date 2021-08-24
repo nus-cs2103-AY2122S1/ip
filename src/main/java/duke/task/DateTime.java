@@ -46,35 +46,35 @@ public class DateTime {
     }
 
     /**
-     * Checks if date if in valid format. Returns true if yes and false
+     * Checks if date has invalid format. Returns true if yes and false
      * otherwise.
      *
-     * @param date The time.
+     * @param date The date.
      * @return The boolean value.
      */
-    public static boolean isValidDate(String date) {
+    public static boolean isInvalidDate(String date) {
         try {
             DATE_FORMATTER.parse(date);
         } catch (DateTimeParseException e) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
-     * Checks if time if in valid format. Returns true if yes and false
+     * Checks if time has invalid format. Returns true if yes and false
      * otherwise.
      *
      * @param time The time.
      * @return The boolean value.
      */
-    public static boolean isValidTime(String time) {
+    public static boolean isInvalidTime(String time) {
         try {
             TIME_FORMATTER.parse(time);
         } catch (DateTimeParseException e) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**

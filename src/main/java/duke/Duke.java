@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class Duke {
     /**
-     * Method to Simulate program.
+     * Method to simulate program.
      *
      * @throws IOException In case of invalid directory.
      */
@@ -23,10 +23,8 @@ public class Duke {
         Parser p = new Parser();
         while (true) {
             String command = ui.readCommand();
-            String msg = "";
             try {
-                msg = p.execute(command, tl);
-                Ui.printBlock(msg);
+                Ui.printBlock(p.execute(command, tl));
             } catch (DukeException e) {
                 Ui.printBlock(e.toString());
             }
