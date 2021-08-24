@@ -23,6 +23,7 @@ public class Duke {
         Command c = new Command();
         c.execute(tasks,ui,storage);
     }
+
     public static void main(String[] args) throws FileNotFoundException {
         new Duke("data/duke.txt").run();
     }
