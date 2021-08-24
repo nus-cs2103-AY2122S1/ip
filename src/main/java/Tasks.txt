@@ -1,2 +1,4 @@
 Yes ~ eat cheese
 T ~ Yes ~ shower
+D ~ No ~ return book ~ Dec 2 2019 6pm
+D ~ Yes ~ game ~ 5pm

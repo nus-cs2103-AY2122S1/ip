@@ -1,14 +1,16 @@
 package banana;
 
-import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
 
     @Test
-    public void test1(){
+    public void test1() {
+        // Checks whether the error message is correct for "blah"
         try {
             Parser p = new Parser("blah");
             p.useInput(new TaskList(new ArrayList<>()));
@@ -20,28 +22,24 @@ public class DukeTest {
     }
 
     @Test
-    public void test2(){
+    public void test2() {
+        // Checks whether the output is correct for a DeadLine
         TaskList tasks = new TaskList(new ArrayList<>());
         tasks.addTask(new ToDo("shower"));
         tasks.addTask(new Deadline("bake cake", "Sunday"));
         tasks.getTask(1).setIsDone();
         assertEquals("[D][X] bake cake (by: Sunday)",
-                    tasks.getTask(1).toString());
+                tasks.getTask(1).toString());
     }
 
-    @Test
-    public void test3(){
-        Ui ui = new Ui();
-        assertEquals("There was an error getting the input",
-                ui.showLoadingError());
-    }
 
     @Test
-    public void test4(){
+    public void test3() {
+        // Checks whether the parser can convert the time format
         Parser p = new Parser("2100");
         String time = p.getTime(p.getInput());
         assertEquals("9pm",
-               time);
+                time);
     }
 
 }
