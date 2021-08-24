@@ -97,9 +97,7 @@ public class Duke {
             fileWriter.close();
         } catch (IOException ioException) {
             Duke.readFile();
-            DukeException dukeException = new DukeException(
-                    "☹ OOPS!!! The file cannot be found. A new file has been created, please try again!");
-            System.out.println(dukeException);
+            Ui.showFileNotFoundError();
         }
     }
 
@@ -121,9 +119,7 @@ public class Duke {
             fileWriter.close();
         } catch (IOException ioException) {
             Duke.readFile();
-            DukeException dukeException = new DukeException(
-                    "☹ OOPS!!! The file cannot be found. A new file has been created, please try again!");
-            System.out.println(dukeException);
+            Ui.showFileNotFoundError();
         }
         Duke.tasks.remove(task); // remove from task list.
     }
@@ -140,9 +136,7 @@ public class Duke {
             fileWriter.close();
         } catch (IOException ioException) {
             Duke.readFile();
-            DukeException dukeException = new DukeException(
-                    "☹ OOPS!!! The file cannot be found. A new file has been created, please try again!");
-            System.out.println(dukeException);
+            Ui.showFileNotFoundError();
         }
     }
 
@@ -170,21 +164,9 @@ public class Duke {
     }
 
     /**
-     * Given the appropriate processor, process the command and print the result.
-     *
-     * @param processor The processor provided.
-     */
-    private void processCommand(Processor processor) {
-        processor.process();
-        System.out.println(processor);
-    }
-
-    /**
      * Based on the command received, either quit the program or process an event.
-     *
-     * @throws DukeException If command is invalid.
      */
-    private void readCommand() throws DukeException {
+    private void readCommand() {
         String command = this.ui.getCommand(); // read the command
         String[] splitted = command.split(" ", 2);
 
@@ -192,71 +174,67 @@ public class Duke {
             System.out.println(Duke.EXITING_MESSAGE);
             this.isRunning = false;
         } else if (command.equals("list")) {
-            processCommand(new GetListProcessor());
+            this.ui.getCommandOutput(new GetListProcessor());
         } else if (splitted[0].equals("done")) {
             try {
                 int index = Integer.parseInt(splitted[1]) - 1;
-                processCommand(new TaskDoneProcessor(Duke.tasks.get(index)));
+                this.ui.getCommandOutput(new TaskDoneProcessor(Duke.tasks.get(index)));
             } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The task number is invalid.");
+                this.ui.showInvalidTaskNoError();
             }
         } else if (splitted[0].equals("delete")) {
             try {
                 int index = Integer.parseInt(splitted[1]) - 1;
-                processCommand(new DeleteATaskProcessor(Duke.tasks.get(index)));
+                this.ui.getCommandOutput(new DeleteATaskProcessor(Duke.tasks.get(index)));
             } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The task number is invalid.");
+                this.ui.showInvalidTaskNoError();
             }
         } else if (splitted[0].equals("todo")) {
             if (splitted.length >= 2) {
-                processCommand(new AddATaskProcessor(new ToDo(splitted[1])));
+                this.ui.getCommandOutput(new AddATaskProcessor(new ToDo(splitted[1])));
             } else {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                this.ui.showMissingDetailsError("description","todo", "");
             }
         } else if (splitted[0].equals("deadline")) {
             if (splitted.length >= 2) {
                 String[] information = splitted[1].split("/by");
                 if (information.length == 2) {
                     try {
-                        processCommand(new AddATaskProcessor(new Deadline(information[0], information[1])));
+                        this.ui.getCommandOutput(new AddATaskProcessor(new Deadline(information[0], information[1])));
                     } catch (DateTimeParseException dateTimeParseException) {
-                        throw new DukeException(
-                                "☹ OOPS!!! The time is invalid.\nPlease input time in this form: yyyy-MM-dd HH:mm");
+                        this.ui.showInvalidTimeError("yyyy-MM-dd HH:mm");
                     }
                 } else if (information.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The time of a deadline cannot be empty.\n" +
-                            "Please follow the format:\ndeadline <task description> /by yyyy-MM-dd HH:mm");
+                    this.ui.showMissingDetailsError(
+                            "time", "deadline", "/by yyyy-MM-dd HH:mm");
                 } else {
-                    throw new DukeException("☹ OOPS!!! A deadline cannot occupy multiple time slots.");
+                    this.ui.showMultipleTimeSlotsError("deadline");
                 }
             } else {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.\n" +
-                        "Please follow the format:\ndeadline <task description> /by yyyy-MM-dd HH:mm");
+                this.ui.showMissingDetailsError(
+                        "description", "deadline", "/by yyyy-MM-dd HH:mm");
             }
         } else if (splitted[0].equals("event")) {
             if (splitted.length >= 2) {
                 String[] information = splitted[1].split("/at");
                 if (information.length == 2) {
                     try {
-                        processCommand(new AddATaskProcessor(new Event(information[0], information[1])));
+                        this.ui.getCommandOutput(new AddATaskProcessor(new Event(information[0], information[1])));
                     } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("☹ OOPS!!! The time is invalid.\n" +
-                                "Please input time in this form:\nyyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm");
+                        this.ui.showInvalidTimeError("yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm");
                     }
                 } else if (information.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The time of an event cannot be empty." +
-                            "\nPlease follow the format:" +
-                            "\nevent <task description> /at yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm");
+                    this.ui.showMissingDetailsError("time", "event",
+                            "/at yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm");
                 } else {
-                    throw new DukeException("☹ OOPS!!! An event cannot occupy multiple time slots.");
+                    this.ui.showMultipleTimeSlotsError("event");
                 }
             } else {
-                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty." +
-                        "\nPlease follow the format:" +
-                        "\nevent <task description> /at yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm");
+                this.ui.showMissingDetailsError("description", "event",
+                        "/at yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm");
             }
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            this.ui.showInvalidCommandError();
         }
     }
 
@@ -268,12 +246,7 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         while (duke.isRunning) {
-            try {
-                duke.readCommand();
-            } catch (DukeException dukeException) {
-                System.out.println(dukeException);
-                continue;
-            }
+            duke.readCommand();
         }
     }
 }
