@@ -37,4 +37,9 @@ public class AddCommand extends Command {
         tasks.addTask(this.task);
         storage.writeToFile(tasks);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof AddCommand) && this.task.equals((((AddCommand) obj).task));
+    }
 }

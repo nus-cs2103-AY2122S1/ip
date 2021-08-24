@@ -21,4 +21,13 @@ public class ToDo extends Task{
         String record = String.format("T | %d | %s", done, this.name);
         return record;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ToDo) {
+            ToDo td = (ToDo) obj;
+            return this.name.equals(td.name) && this.isDone == td.isDone;
+        }
+        return false;
+    }
 }

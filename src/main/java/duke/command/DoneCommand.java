@@ -22,4 +22,9 @@ public class DoneCommand extends Command {
         tasks.taskDone(this.index);
         storage.writeToFile(tasks);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof DoneCommand) && (this.index == ((DoneCommand) obj).index);
+    }
 }

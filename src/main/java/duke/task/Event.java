@@ -30,4 +30,13 @@ public class Event extends Task {
         String record = String.format("E | %d | %s | %s", done, this.name, this.at.format(formatter));
         return record;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Event) {
+            Event ev = (Event) obj;
+            return this.name.equals(ev.name) && this.at.equals(ev.at) && this.isDone == ev.isDone;
+        }
+        return false;
+    }
 }

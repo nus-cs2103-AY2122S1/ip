@@ -30,4 +30,13 @@ public class Deadline extends Task {
         String record = String.format("D | %d | %s | %s", done, this.name, this.by.format(formatter));
         return record;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline) {
+            Deadline dl = (Deadline) obj;
+            return this.name.equals(dl.name) && this.by.equals(dl.by) && this.isDone == dl.isDone;
+        }
+        return false;
+    }
 }
