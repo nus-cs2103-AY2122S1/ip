@@ -8,29 +8,21 @@ public class Duke {
     }
 
     private final String INDENTATION = "    ";
-    private final ArrayList<Task> taskList;
+    private Storage storage;
+    private ArrayList<Task> taskList;
     private boolean isActive;
-
-    private Duke(){
-        this.taskList = new ArrayList<>();
-    }
+    private Ui ui;
 
     private void greet(){
-        String msg = "Hello! I'm Duke\n";
-        msg += INDENTATION + "What can I do for you?";
-        printMessageWithFormat(msg);
+        String msg = "Hello! I'm Duke";
+        ui.printMessageWithFormat(msg);
     }
 
-    private void printMessageWithFormat(String msg){
-        String HORIZONTAL_LINE = "____________________________________________________________";
-        System.out.println(INDENTATION + HORIZONTAL_LINE);
-        System.out.println(INDENTATION + msg);
-        System.out.println(INDENTATION + HORIZONTAL_LINE);
-    }
+
 
     private void exit(){
         String msg = "Bye. Hope to see you again soon!";
-        printMessageWithFormat(msg);
+        ui.printMessageWithFormat(msg);
         this.isActive = false;
     }
 
@@ -38,26 +30,35 @@ public class Duke {
         this.taskList.add(task);
         String msg = "Got it. I've added this task:\n" + INDENTATION + "  " + task.checkStatus();
         msg += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskList.size());
-        printMessageWithFormat(msg);
+        ui.printMessageWithFormat(msg);
+        storage.save(taskList);
     }
 
     private void deleteTask(int taskNum){
         Task task = taskList.remove(taskNum-1);
         String msg = "Noted. I've removed this task:\n" + INDENTATION + "  " + task.checkStatus();
         msg += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskList.size());
-        printMessageWithFormat(msg);
+        ui.printMessageWithFormat(msg);
+        storage.save(taskList);
     }
 
     private void markTaskAsDone(int taskNumber){
         taskList.get(taskNumber-1).markDone();
         String msg = "Nice! I've marked this task as done:\n   ";
         msg += INDENTATION + taskList.get(taskNumber-1).checkStatus();
-        printMessageWithFormat(msg);
+        ui.printMessageWithFormat(msg);
+        storage.save(taskList);
     }
 
     private void start(){
-        this.isActive = true;
+        this.ui = new Ui();
         greet();
+
+        this.isActive = true;
+        this.storage = new Storage();
+        this.taskList = storage.load();
+
+
         Scanner sc = new Scanner(System.in);
 
         while (this.isActive){
@@ -76,7 +77,7 @@ public class Duke {
         for (int i = 1; i <= taskList.size(); i++){
             msg += String.format("\n%s%d. %s", INDENTATION, i, taskList.get(i-1).checkStatus());
         }
-        printMessageWithFormat(msg);
+        ui.printMessageWithFormat(msg);
     }
 
     private void processCommand(String command) throws DukeException{
@@ -96,13 +97,13 @@ public class Duke {
 
         case EVENT:
             String eventDescription = command.substring(command.indexOf(" ")+1, command.indexOf("/at")-1);
-            Task event = new Event(eventDescription, command.substring(command.indexOf("at")+3));
+            Task event = new Event(eventDescription, false, command.substring(command.indexOf("at")+3));
             addTask(event);
             break;
 
         case DEADLINE:
             String deadlineDescription = command.substring(command.indexOf(" ")+1, command.indexOf("/by")-1);
-            Task deadline = new Deadline(deadlineDescription, command.substring(command.indexOf("by")+3));
+            Task deadline = new Deadline(deadlineDescription, false, command.substring(command.indexOf("by")+3));
             addTask(deadline);
             break;
 
@@ -112,7 +113,7 @@ public class Duke {
             if (toDoDescription.isBlank() || spaceIndex == -1){
                 throw new NoToDoDescriptionException();
             };
-            Task toDo = new ToDo(toDoDescription);
+            Task toDo = new ToDo(toDoDescription, false);
             addTask(toDo);
             break;
 
