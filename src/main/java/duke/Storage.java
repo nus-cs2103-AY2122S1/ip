@@ -41,7 +41,7 @@ public class Storage {
                         ls.markAsDone(ls.getSize()-1);
                     }
                 } else if (task.charAt(2) == 'E') {
-                    String deadline = arr[2].substring(1, arr[2].length() - 1);
+                    String deadline = "";
                     for (int i = 2; i < arr.length; i++) {
                         if (i == 2) {
                             deadline += arr[i].substring(1);
@@ -54,14 +54,14 @@ public class Storage {
                     Event item = new Event(description, deadline);
                     ls.addTask(item);
                     if (task.substring(4).equals("Done")) {
-                        ls.markAsDone(ls.getSize()-1);
+                        ls.markAsDone(ls.getSize() - 1);
                     }
                 }
                 else {
                     Todo item = new Todo(description);
                     ls.addTask(item);
                     if (task.substring(4).equals("Done")) {
-                        ls.markAsDone(ls.getSize()-1);
+                        ls.markAsDone(ls.getSize() - 1);
                     }
                 }
             }
