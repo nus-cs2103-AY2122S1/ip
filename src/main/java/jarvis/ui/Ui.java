@@ -41,6 +41,8 @@ public class Ui {
 
     /**
      * Shows the task list message to user
+     *
+     * @param taskList The task list containing all the tasks
      */
     public void showTaskList(TaskList taskList) {
         OutputMessage taskListMessage = new OutputMessage(String.format(
@@ -67,6 +69,8 @@ public class Ui {
 
     /**
      * Shows the error message to user
+     *
+     * @param e The exception
      */
     public void showError(JarvisException e) {
         OutputMessage errorMessage = new OutputMessage(e.getMessage());
@@ -75,6 +79,9 @@ public class Ui {
 
     /**
      * Shows the task added message to user
+     *
+     * @param task The task which was added
+     * @param taskList The task list containing all the tasks
      */
     public void showTaskAddedMessage(Task task, TaskList taskList) {
         OutputMessage taskAddedMessage = new OutputMessage(String.format(
@@ -87,6 +94,8 @@ public class Ui {
 
     /**
      * Shows the task done message to user
+     *
+     * @param task The task that was marked as done
      */
     public void showTaskDoneMessage(Task task) {
         OutputMessage taskDoneMessage = new OutputMessage(String.format(
@@ -98,6 +107,9 @@ public class Ui {
 
     /**
      * Shows the task deleted message to user
+     *
+     * @param task The task which was deleted
+     * @param taskList The task list containing all the tasks
      */
     public void showTaskDeletedMessage(Task task, TaskList taskList) {
         OutputMessage taskDeletedMessage = new OutputMessage(String.format(
