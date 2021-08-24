@@ -4,7 +4,8 @@ package duke;
  * Class handles printing message to user
  */
 public class Ui {
-    public Ui() {}
+    public Ui() {
+    }
 
     /**
      * Print the line

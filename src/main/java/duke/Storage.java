@@ -20,7 +20,7 @@ public class Storage {
      */
     public List<String> read() throws IOException {
         List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
-        for (String hardCode: lines) {
+        for (String hardCode : lines) {
             System.out.println(hardCode);
         }
         return lines;
@@ -56,7 +56,7 @@ public class Storage {
      */
     public void download() throws IOException {
         List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
-        for (String hardCode: lines) {
+        for (String hardCode : lines) {
             Duke.todoList.add(Task.decode(hardCode));
         }
     }
@@ -70,6 +70,7 @@ public class Storage {
         if (!java.nio.file.Files.exists(filePath)) {
             Files.createDirectories(filePath.getParent());
             Files.createFile(filePath);
-        };
+        }
+        ;
     }
 }

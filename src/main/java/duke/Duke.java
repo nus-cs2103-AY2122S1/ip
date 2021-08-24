@@ -25,6 +25,12 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        Duke duke = new Duke("/Users/hungkhoaitay/Duke.Duke/data/duke.txt");
+        duke.run();
+        duke.finish();
+    }
+
     /**
      * Print Welcome message and process user's command
      */
@@ -42,11 +48,5 @@ public class Duke {
         } catch (IOException e) {
             System.out.println(e);
         }
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke("/Users/hungkhoaitay/Duke.Duke/data/duke.txt");
-        duke.run();
-        duke.finish();
     }
 }
