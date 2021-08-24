@@ -46,10 +46,13 @@ public class Parser {
             case "list":
                 return "Here are the tasks in your list:" + getTasksString();
             case "done":
+                // Fallthrough
             case "delete":
                 throw new DukeException("Please specify a task number.");
             case "deadline":
+                // Fallthrough
             case "event":
+                // Fallthrough
             case "todo":
                 throw new DukeException("Please specify the task info.");
             default:

@@ -1,14 +1,5 @@
 package duke;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 /**
  * Represents Duke, a text-based Java chatbot that helps to
  * keep track of various tasks.
