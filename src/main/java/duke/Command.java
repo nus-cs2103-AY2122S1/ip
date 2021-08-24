@@ -2,10 +2,13 @@ package duke;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public abstract class Command {
+    protected static final String NULL_COMMAND = "nothing";
+    protected static final Command NOTHING = new Nothing();
+    protected static final Command BYE = new Bye();
+    protected static final Command LIST = new List();
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String FIND_COMMAND = "find";
@@ -14,149 +17,16 @@ public abstract class Command {
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
-    protected static final String NULL_COMMAND = "nothing";
     private static String pre_command;
     private static String body_command;
 
-    private Command() {}
-
-    private static class Nothing extends Command {
-        private Nothing() {}
-
-        @Override
-        protected void execute() {
-            System.out.println("Say something to me :(");
-            Ui.printLine();
-        }
+    private Command() {
     }
 
-    private static class Bye extends Command {
-        private Bye() {}
-
-        @Override
-        protected void execute() {
-            System.out.println("Bye. Hope to see you again soon!");
-            Ui.printLine();
-        }
-    }
-
-    private static class Add extends Command {
-        private final Task t;
-        private Add(Task t) {
-            this.t = t;
-        }
-
-        @Override
-        protected void execute() {
-            if (t.getTaskName() != NULL_COMMAND) {
-                try {
-                    t.add();
-                    System.out.println("Got it. I've added this task:\n    " + t);
-                    System.out.println("Now you have " + Duke.todoList.size() + " tasks in the list.");
-                } catch (IOException e) {
-                    System.out.println("OOPS!!! Something went wrong with adding tasks:\n    " + t);
-                }
-
-            } else {
-                System.out.println("OOPS!!! The description of a todo cannot be empty.");
-            }
-            Ui.printLine();
-        }
-    }
-
-    private static class List extends Command {
-        private List() {}
-        @Override
-        protected void execute() {
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < Duke.todoList.size(); i++) {
-                System.out.println((i + 1) + ". " + Duke.todoList.get(i).toString());
-            }
-            Ui.printLine();
-        }
-    }
-
-    private static class Find extends Command {
-        private final String search;
-        private Find(String search) {
-            this.search = search;
-        }
-        @Override
-        protected void execute() {
-            System.out.println("Here are the matching tasks in your list:");
-            java.util.List<Task> matchingList = new ArrayList<>();
-            for (int i = 0; i < Duke.todoList.size(); i++) {
-                Task t = Duke.todoList.get(i);
-                if (t.getTaskName().contains(search)) {
-                    matchingList.add(t);
-                }
-            }
-            for (int i = 0; i < matchingList.size(); i++) {
-                System.out.println((i + 1) + ". " + matchingList.get(i).toString());
-            }
-            Ui.printLine();
-        }
-    }
-
-    private static class Done extends Command {
-        private final String index;
-        private Done(String index) {
-            this.index = index;
-        }
-
-        @Override
-        protected void execute() {
-            try {
-                Task t = Duke.todoList.get(Integer.parseInt(index) - 1);
-                if (t.isDone()) {
-                    System.out.println("OOPS!!! Seems like you marked the task done:\n    " + t);
-                } else {
-                    t.done();
-                    System.out.println("Nice! I've marked this task as done:\n    " + t);
-                }
-                Ui.printLine();
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("OOPS!!! I'm sorry, but I cannot find that task :(");
-                Ui.printLine();
-            } catch (NumberFormatException e) {
-                System.out.println("OOPS!!! You need to follow format \"done <number>\"");
-                Ui.printLine();
-            }
-        }
-    }
-
-    private static class Delete extends Command {
-        private final String index;
-        private Delete(String index) {
-            this.index = index;
-        }
-
-        @Override
-        protected void execute() {
-            try {
-                Task t = Duke.todoList.remove(Integer.parseInt(index) - 1);
-                System.out.println("Noted. I've removed this task:\n    " + t);
-                System.out.println("Now you have " + Duke.todoList.size() + " tasks in the list.");
-                Ui.printLine();
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("OOPS!!! I'm sorry, but I cannot find that task :(");
-                Ui.printLine();
-            } catch (NumberFormatException e) {
-                System.out.println("OOPS!!! You need to follow format \"done <number>\"");
-                Ui.printLine();
-            }
-        }
-    }
-
-    /**
-     * Handling different commands
-     */
-    protected static final Command NOTHING = new Nothing();
-    protected static final Command BYE = new Bye();
-    protected static final Command LIST = new List();
     protected static Command find(String search) {
         return new Find(search);
     }
+
     protected static Command done(String index) {
         return new Done(index);
     }
@@ -245,4 +115,141 @@ public abstract class Command {
      * Execute the commands
      */
     protected abstract void execute();
+
+    private static class Nothing extends Command {
+        private Nothing() {
+        }
+
+        @Override
+        protected void execute() {
+            System.out.println("Say something to me :(");
+            Ui.printLine();
+        }
+    }
+
+    private static class Bye extends Command {
+        private Bye() {
+        }
+
+        @Override
+        protected void execute() {
+            System.out.println("Bye. Hope to see you again soon!");
+            Ui.printLine();
+        }
+    }
+
+    private static class Add extends Command {
+        private final Task t;
+
+        private Add(Task t) {
+            this.t = t;
+        }
+
+        @Override
+        protected void execute() {
+            if (t.getTaskName() != NULL_COMMAND) {
+                try {
+                    t.add();
+                    System.out.println("Got it. I've added this task:\n    " + t);
+                    System.out.println("Now you have " + Duke.todoList.size() + " tasks in the list.");
+                } catch (IOException e) {
+                    System.out.println("OOPS!!! Something went wrong with adding tasks:\n    " + t);
+                }
+
+            } else {
+                System.out.println("OOPS!!! The description of a todo cannot be empty.");
+            }
+            Ui.printLine();
+        }
+    }
+
+    private static class List extends Command {
+        private List() {
+        }
+
+        @Override
+        protected void execute() {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < Duke.todoList.size(); i++) {
+                System.out.println((i + 1) + ". " + Duke.todoList.get(i).toString());
+            }
+            Ui.printLine();
+        }
+    }
+
+    private static class Find extends Command {
+        private final String search;
+
+        private Find(String search) {
+            this.search = search;
+        }
+
+        @Override
+        protected void execute() {
+            System.out.println("Here are the matching tasks in your list:");
+            java.util.List<Task> matchingList = new ArrayList<>();
+            for (int i = 0; i < Duke.todoList.size(); i++) {
+                Task t = Duke.todoList.get(i);
+                if (t.getTaskName().contains(search)) {
+                    matchingList.add(t);
+                }
+            }
+            for (int i = 0; i < matchingList.size(); i++) {
+                System.out.println((i + 1) + ". " + matchingList.get(i).toString());
+            }
+            Ui.printLine();
+        }
+    }
+
+    private static class Done extends Command {
+        private final String index;
+
+        private Done(String index) {
+            this.index = index;
+        }
+
+        @Override
+        protected void execute() {
+            try {
+                Task t = Duke.todoList.get(Integer.parseInt(index) - 1);
+                if (t.isDone()) {
+                    System.out.println("OOPS!!! Seems like you marked the task done:\n    " + t);
+                } else {
+                    t.done();
+                    System.out.println("Nice! I've marked this task as done:\n    " + t);
+                }
+                Ui.printLine();
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("OOPS!!! I'm sorry, but I cannot find that task :(");
+                Ui.printLine();
+            } catch (NumberFormatException e) {
+                System.out.println("OOPS!!! You need to follow format \"done <number>\"");
+                Ui.printLine();
+            }
+        }
+    }
+
+    private static class Delete extends Command {
+        private final String index;
+
+        private Delete(String index) {
+            this.index = index;
+        }
+
+        @Override
+        protected void execute() {
+            try {
+                Task t = Duke.todoList.remove(Integer.parseInt(index) - 1);
+                System.out.println("Noted. I've removed this task:\n    " + t);
+                System.out.println("Now you have " + Duke.todoList.size() + " tasks in the list.");
+                Ui.printLine();
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("OOPS!!! I'm sorry, but I cannot find that task :(");
+                Ui.printLine();
+            } catch (NumberFormatException e) {
+                System.out.println("OOPS!!! You need to follow format \"done <number>\"");
+                Ui.printLine();
+            }
+        }
+    }
 }
