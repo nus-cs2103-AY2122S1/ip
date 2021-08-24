@@ -4,6 +4,7 @@ import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -98,6 +99,8 @@ public class Parser {
             return new AddCommand(createEvent(fullCommand));
         case "delete":
             return new DeleteCommand(Integer.parseInt(splitInput[1]));
+        case "find":
+            return new FindCommand(fullCommand.substring(4).trim());
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
