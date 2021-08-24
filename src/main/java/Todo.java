@@ -6,12 +6,13 @@
 
 public class Todo extends Task {
 
-    public Todo(String description) {
-        super(description);
+    public Todo(String description, Boolean isDone) {
+        super(description, isDone);
     }
 
     /**
      * Print the status and description of the to-do task.
+     *
      * @return a string representation of the to-do task.
      */
     public String getTask() {

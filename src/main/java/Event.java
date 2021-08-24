@@ -8,8 +8,8 @@ public class Event extends Task {
     protected String description;
     protected String time;
 
-    public Event(String description) {
-        super(description);
+    public Event(String description, Boolean isDone) {
+        super(description, isDone);
         this.description = description;
     }
 

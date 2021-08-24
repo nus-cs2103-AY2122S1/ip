@@ -12,9 +12,9 @@ public class Task {
      * Construct a Task object with a given description.
      * @param description The description of the task input by user.
      */
-    public Task(String description) {
+    public Task(String description, Boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**

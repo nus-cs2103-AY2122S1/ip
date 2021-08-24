@@ -8,8 +8,8 @@ public class Deadline extends Task {
     protected String description;
     protected String deadline;
 
-    public Deadline(String description) {
-        super(description);
+    public Deadline(String description, Boolean isDone) {
+        super(description, isDone);
         this.description = description;
 
     }
