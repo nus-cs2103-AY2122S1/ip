@@ -16,6 +16,13 @@ public class DeadlineCommand implements Command {
     private DukeList dukeList;
     private UserInterface ui;
 
+    /**
+     * Creates a command that creates a deadline task in the given list and provides
+     * the corresponding response to the specified ui.
+     * 
+     * @param dukeList list of tasks for the task to be added into
+     * @param ui       user interface for displaying responses
+     */
     public DeadlineCommand(DukeList dukeList, UserInterface ui) {
         this.dukeList = dukeList;
         this.ui = ui;

@@ -55,19 +55,16 @@ public abstract class Database {
     }
 
     /**
-     * Returns the list of custom shops (represented by its custom model data)
-     * unlocked by the player.
+     * Returns the list of tasks stored in the database
      *
-     * @param player player of interest
-     * @return list of shops unlocked by the player
+     * @return list of tasks stored
      */
     public abstract List<Task> getTasksList();
 
     /**
-     * Updates the shop owned by player to database.
+     * Adds a task to the database.
      * 
-     * @param playerID player's UUID
-     * @param number   updated number of shops owned
+     * @param task to be added
      */
     public abstract void addTask(Task task);
 
@@ -81,7 +78,7 @@ public abstract class Database {
     public abstract Task removeTask(int index);
 
     /**
-     * Mark a task as completed in the database.
+     * Marks a task as completed in the database.
      * 
      * @param index index of the task, {@code 1} for the first task, {@code 2} for
      *              the second task etc.
@@ -91,8 +88,8 @@ public abstract class Database {
     public abstract Task markCompleted(int index);
 
     /**
-     * Recreate a task based on provided information. Used when retrieving task from
-     * SQL database.
+     * Recreates a task based on provided information. Used when retrieving task
+     * from SQL database.
      * 
      * @param type      type of task
      * @param name      name of task
@@ -136,7 +133,7 @@ public abstract class Database {
     }
 
     /**
-     * Close {@link PreparedStatement} and {@link Connection} to the database.
+     * Closes {@link PreparedStatement} and {@link Connection} to the database.
      *
      * @param ps   PreparedStatement of the database
      * @param conn Connection to the database
@@ -153,7 +150,7 @@ public abstract class Database {
     }
 
     /**
-     * Get directory for which the database will be saved into.
+     * Gets directory for which the database will be saved into.
      * 
      * @return database directory
      */
@@ -174,4 +171,5 @@ public abstract class Database {
         }
         return dataFolder;
     }
+
 }

@@ -13,6 +13,13 @@ public class DoneCommand implements Command {
     private final DukeList dukeList;
     private final UserInterface ui;
 
+    /**
+     * Creates a command that marks a task from the given dukelist as completed, and
+     * provide its response to the given ui.
+     * 
+     * @param dukeList list of tasks from which the task will marked as completed
+     * @param ui       user interface for displaying responses
+     */
     public DoneCommand(DukeList dukeList, UserInterface ui) {
         this.dukeList = dukeList;
         this.ui = ui;
