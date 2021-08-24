@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -106,6 +108,17 @@ public class Duke {
                             String newDesc = tempString.substring(5);
                             Task newTodo = new Todo(newDesc);
                             storage.add(newTodo);
+
+                            String todoString = "\nT|0|" + newDesc;
+                            try {
+                                BufferedWriter output;
+                                output = new BufferedWriter(new FileWriter("./Duke.txt", true));
+                                output.append(todoString);
+                                output.close();
+                            } catch (IOException e) {
+                                throw new DukeException("Error saving new task");
+                            }
+
                             System.out.println("Got it. I've added this task:\n"
                                     + "  " + newTodo.toString() + "\n"
                                     + "Now you have " + storage.size()
@@ -140,6 +153,17 @@ public class Duke {
                         } else {    // else add a new Deadline
                             Task newDeadline = new Deadline(newDeadlineDesc, newBy);
                             storage.add(newDeadline);
+
+                            String deadlineString = "\nD|0|" + newDeadlineDesc + "|" + newBy;
+                            try {
+                                BufferedWriter output;
+                                output = new BufferedWriter(new FileWriter("./Duke.txt", true));
+                                output.append(deadlineString);
+                                output.close();
+                            } catch (IOException e) {
+                                throw new DukeException("Error saving new task");
+                            }
+
                             System.out.println("Got it. I've added this task:\n"
                                     + "  " + newDeadline.toString() + "\n"
                                     + "Now you have " + storage.size()
@@ -174,6 +198,17 @@ public class Duke {
                         } else {    // else add a new Event
                             Task newEvent = new Event(newEventDesc, newAt);
                             storage.add(newEvent);
+
+                            String eventString = "\nE|0|" + newEventDesc + "|" + newAt;
+                            try {
+                                BufferedWriter output;
+                                output = new BufferedWriter(new FileWriter("./Duke.txt", true));
+                                output.append(eventString);
+                                output.close();
+                            } catch (IOException e) {
+                                throw new DukeException("Error saving new task");
+                            }
+
                             System.out.println("Got it. I've added this task:\n"
                                     + "  " + newEvent.toString() + "\n"
                                     + "Now you have " + storage.size()
