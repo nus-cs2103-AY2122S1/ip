@@ -186,9 +186,17 @@ public class Winston {
                 System.out.println("What task would you like to add?");
                 String task = scan.nextLine();
                 System.out.println("What is the due date of this task?");
-                String dueDate = scan.nextLine();
-                winston1.addTask(new DeadLine(task, dueDate));
-                System.out.println("Task Added!");
+                boolean valid = true;
+                while (valid) {
+                    try {
+                        String on = scan.nextLine();
+                        winston1.addTask(new DeadLine(task, on));
+                        System.out.println("Task Added!");
+                        valid = false;
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Invalid date format. Please give a valid date format. E.g 2021-12-12");
+                    }
+                }
                 break;
             }
             case "event": {
