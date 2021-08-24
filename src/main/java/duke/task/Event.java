@@ -3,13 +3,13 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/** A task class which falls under deadline category. */
+/** A task class which falls under event category. */
 public class Event extends Task {
 
     protected LocalDate at;
 
     /**
-     * A constructor for class Deadline.
+     * A constructor for class Event.
      *
      * @param description The task description.
      * @param at The date of the task being carried out.
