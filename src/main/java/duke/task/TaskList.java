@@ -122,7 +122,7 @@ public class TaskList {
 
         while (iter.hasNext()) {
             Task t = iter.next();
-            if (t.name.contains(key)) {
+            if (t.getName().contains(key)) {
                 found.add(t);
             }
         }
