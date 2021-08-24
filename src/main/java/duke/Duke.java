@@ -22,7 +22,10 @@ public class Duke {
         ui.welcome();
         String input = ui.getNextLine();
         Parser parser = new Parser(list);
-        while(!input.equals("bye")) {
+        while(true) {
+            if (input.equals("bye")) {
+                break;
+            }
             try {
                 parser.parse(input);
                 storage.writeTasks(list);
