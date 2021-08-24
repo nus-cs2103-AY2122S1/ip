@@ -9,9 +9,22 @@ import bob.task.Todo;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Represents an object that deals with making sense of the user commands.
+ */
 public class Parser {
+    /**
+     * Constructor for creating a new Parser instance.
+     */
     public Parser() {}
 
+    /**
+     * Begins the "chatting" sequence, making sense of the user commands.
+     *
+     * @param ui Ui object responsible for interactions with the user.
+     * @param tasks Tasklist that stores the user's list of tasks.
+     * @param storage Storage object responsible for loading tasks from the file and saving tasks into the file.
+     */
     public void run(Ui ui, TaskList tasks, Storage storage) {
         Scanner scanner = new Scanner(System.in);
         String response = scanner.nextLine();
@@ -71,6 +84,17 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks the user input to determine if any exception needs to be thrown.
+     *
+     * @param response The user input.
+     * @param tasklist Current list of tasks.
+     * @throws InvalidInputException If the user input is not one of the supported commands.
+     * @throws NoTaskException If the user does not specify the task description.
+     * @throws NoDeadlineException If the user does not specify the deadline of their Deadline task.
+     * @throws NoEventTimingException If the user does not specify the timing of their Event task.
+     * @throws OutOfBoundsException If the user tries to mark as completed or remove a task not inside the task list.
+     */
     private void inputChecker(String response, TaskList tasklist) throws InvalidInputException, NoTaskException,
             NoDeadlineException, NoEventTimingException, OutOfBoundsException {
         if (Objects.equals(response, "list")) {
