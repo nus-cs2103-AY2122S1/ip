@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import duke.tasks.Task;
-
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -18,5 +16,5 @@ public class Todo extends Task {
     }
 
     @Override
-    public String getStatusString() { return "D@" + (isDone ? 1 : 0) + "@" + this.description; }
+    public String getStatusString() { return "T@" + (isDone ? 1 : 0) + "@" + this.description; }
 }
