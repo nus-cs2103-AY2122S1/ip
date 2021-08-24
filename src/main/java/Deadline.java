@@ -9,6 +9,11 @@ public class Deadline extends Task {
 
     protected LocalDate by;
 
+    /**
+     * Creates Deadline object to store task details.
+     * @param description Description of Task.
+     * @param by Due date of Task.
+     */
     public Deadline(String description, String by) {
         super(description);
 

@@ -16,11 +16,17 @@ public class Ui {
     private final Scanner in;
     private final PrintStream out;
 
+    /**
+     * Initialises a Ui object.
+     */
     public Ui(){
         this.in = new Scanner(System.in);
         this.out = new PrintStream(System.out);
     }
 
+    /**
+     * Presents "Welcome" Message to user when app is loaded.
+     */
     public void showWelcomeMessage() {
         out.println("Hello from\n" + logo);
         out.println(dash);
@@ -28,6 +34,9 @@ public class Ui {
         out.println(dash);
     }
 
+    /**
+     * Presents "Farewell" Message to user when command "bye" is given.
+     */
     public void showFarewellMessage() {
         System.out.println(dash);
         System.out.println("Bye. Hope to see you again soon!");
@@ -36,6 +45,10 @@ public class Ui {
         System.exit(0);
     }
 
+    /**
+     * Prompts user for command and reads text input.
+     * @return command (full line) for Parser to interpret.
+     */
     public String getUserCommand() {
         out.print("Enter command: ");
         String fullInputLine = in.nextLine();
