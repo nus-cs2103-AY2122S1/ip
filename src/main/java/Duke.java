@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -94,6 +98,96 @@ public class Duke {
         return input.startsWith("remove ");
     }
 
+    public static void saveFile(ArrayList<Task> arr) {
+        try {
+            FileWriter fw = new FileWriter("history.txt");
+            String textToAdd = "";
+            for (int i = 0; i < arr.size(); i++) {
+                if (i == 0) {
+                    textToAdd += arr.get(i).convertToString();
+                } else {
+                    textToAdd += "\n" + arr.get(i).convertToString();
+                }
+            }
+            fw.write(textToAdd);
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong " + e.getMessage());
+        }
+    }
+//    public static void saveFile(ArrayList<Task> arr) {
+//        File readFile = new File("history.txt");
+//        try {
+//            if (readFile.exists()) {
+//                FileWriter fw = new FileWriter("history.txt");
+//                String textToAdd = "";
+//                for (int i = 0; i < arr.size(); i++) {
+//                    if (i == 0) {
+//                        textToAdd += arr.get(i).convertToString();
+//                    } else {
+//                        textToAdd += "\n" + arr.get(i).convertToString();
+//                    }
+//                }
+//                fw.write(textToAdd);
+//                fw.close();
+//            } else {
+//                FileWriter fw = new FileWriter("history.txt");
+//                String textToAdd = "";
+//                for (int i = 0; i < arr.size(); i++) {
+//                    if (i == 0) {
+//                        textToAdd += arr.get(i).convertToString();
+//                    } else {
+//                        textToAdd += "\n" + arr.get(i).convertToString();
+//                    }
+//                }
+//                fw.write(textToAdd);
+//                fw.close();
+//            }
+//        } catch (IOException e) {
+//            System.out.println("Something went wrong " + e.getMessage());
+//        }
+//    }
+
+    public static ArrayList<Task> readFile() {
+        File file = new File("history.txt");
+        try {
+            Scanner s = new Scanner(file);
+            ArrayList<Task> output = new ArrayList<>();
+            while (s.hasNext()) {;
+                String task = s.nextLine();
+                String[] splitTask = task.split(" ");
+                if (splitTask.length == 3) {
+                    // it is todotask
+                    Task toAdd = new ToDo(splitTask[2]);
+                    if (splitTask[1].equals("1")) {
+                        toAdd.markAsDone();
+                    }
+                    output.add(toAdd);
+                } else {
+                    // can be event or deadline
+                    if (splitTask[0].equals("E")) {
+                        // event
+                        Task toAdd = new Event(splitTask[2], splitTask[3]);
+                        if (splitTask[1].equals("1")) {
+                            toAdd.markAsDone();
+                        }
+                        output.add(toAdd);
+                    } else {
+                        // deadline
+                        Task toAdd = new Deadline(splitTask[2], splitTask[3]);
+                        if (splitTask[1].equals("1")) {
+                            toAdd.markAsDone();
+                        }
+                        output.add(toAdd);
+                    }
+                }
+            }
+            return output;
+        } catch (FileNotFoundException e) {
+            return new ArrayList<>();
+        }
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -101,7 +195,11 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = readFile();
+
+
+        // Read file here and insert into task list
+        // ...
         Scanner sc = new Scanner(System.in);
         greet();
         String next = sc.nextLine();
@@ -157,7 +255,10 @@ public class Duke {
                 next = sc.nextLine();
             }
         }
+
         print("Bye. Hope to see you again soon!");
+        // close file and save the contents of the task list into an array
+        saveFile(tasks);
         sc.close();
     }
 }

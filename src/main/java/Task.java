@@ -15,6 +15,13 @@ public class Task {
         isDone = true;
     }
 
+    public String printStatusIcon() {
+        return (isDone ? "1" : "0");
+    }
+    public String convertToString() {
+        return printStatusIcon() + " " + description;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
