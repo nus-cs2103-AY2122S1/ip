@@ -47,6 +47,9 @@ public class Parser {
                     } catch (DateTimeException e) {
                         throw new IncorrectFormatException("Date format provided incorrectly.\n    Date format: yyyy-mm-dd");
                     }
+                } else if (splitted[0].equalsIgnoreCase("/find")) { // finding keyword
+                    String keyword = splitted[1];
+                    tasklist.filterNames(keyword);
                 } else if (splitted[0].equalsIgnoreCase("todo")) { // adding todoitem
                     if (input.isEmpty()) {
                         throw new IncorrectFormatException("Task name not provided.\n" + "    FORMAT: \" TODO TASKNAME\"");
