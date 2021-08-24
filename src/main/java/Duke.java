@@ -1,5 +1,8 @@
 import java.util.Scanner; // import the Scanner class
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
     public static void main (String[] args) throws DukeException {
@@ -54,9 +57,8 @@ public class Duke {
                 String[] split = userInput.split("deadline ");
                 String description = split[1].split(" /")[0];
                 String time = split[1].split("/by ")[1];
-                System.out.println(description);
-                System.out.println(time);
-                task = new Deadline(description, time);
+                LocalDate date = LocalDate.parse(time);
+                task = new Deadline(description, date);
                 tasks.add(task);
                 System.out.println(task);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -67,9 +69,8 @@ public class Duke {
                 String[] split = userInput.split("event ");
                 String description = split[1].split(" /")[0];
                 String time = split[1].split("/at ")[1];
-                System.out.println(description);
-                System.out.println(time);
-                task = new Event(description, time);
+                LocalDate date = LocalDate.parse(time);
+                task = new Event(description, date);
                 tasks.add(task);
                 System.out.println(task);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
