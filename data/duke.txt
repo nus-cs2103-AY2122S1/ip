@@ -1,0 +1,4 @@
+[T][ ] attend class
+[T][X] return book
+[E][ ] lecture ->at: Mon 2pm
+[D][ ] return book ->by: Sunday

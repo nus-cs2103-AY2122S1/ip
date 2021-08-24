@@ -1,13 +1,19 @@
 /**
  * The Bhutu chatbot app
  */
+import java.nio.file.Files;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+
 
 public class Duke {
     /**
      * Add task to taskList
-     *
+     *t
      * @param taskList a list of tasks
      * @param task the task want to add to the list
      */
@@ -68,6 +74,62 @@ public class Duke {
         System.out.println("    Now you have " + taskList.size() + " tasks in the list.");
     }
 
+    public static void saveToFile(File file, ArrayList<Task> taskList) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(file, false);
+            for(int i=0; i<taskList.size(); i++) {
+                Task task= taskList.get(i);
+                fw.write(task.toString());
+                fw.write("\r\n");
+            }
+            fw.close();
+        }
+        catch(IOException e) {
+            throw new DukeException("☹ OOPS!!! Error occurs when save the data");
+        }
+    }
+
+    public static ArrayList<Task> readFile(File file) throws DukeException{
+        try {
+            ArrayList<Task> taskList = new ArrayList<>();
+            Scanner s = new Scanner(file);
+            boolean completed;
+            String current, desc, name,  time;
+            char type;
+            while(s.hasNext()) {
+                current = s.nextLine();
+                type = current.charAt(1);
+                if(type == 'T') {
+                    Task newTask = new Todo(current.substring(7));
+                    newTask.setCompleted(current.charAt(4)=='X');
+                    taskList.add(newTask);
+                }
+                else if(type == 'E') {
+                    desc = current.substring(7);
+                    String[] split = desc.split("->at: ", 2);
+                    name = split[0];
+                    time = split[1];
+                    Task newTask = new Event(name, time);
+                    newTask.setCompleted(current.charAt(4)=='X');
+                    taskList.add(newTask);
+                }
+                else {
+                    desc = current.substring(7);
+                    String[] split = desc.split("->by: ", 2);
+                    name = split[0];
+                    time = split[1];
+                    Task newTask = new Deadline(name, time);
+                    newTask.setCompleted(current.charAt(4)=='X');
+                    taskList.add(newTask);
+                }
+            }
+            return taskList;
+        }
+        catch(IOException e) {
+            throw new DukeException("OOPS!!! Error occurs when reload the data");
+        }
+    }
+
 
     public static void main(String[] args) throws DukeException{
         //Greet
@@ -86,6 +148,22 @@ public class Duke {
         boolean exit = false;
         ArrayList<Task> taskList = new ArrayList<>();
 
+        File file;
+        try {
+            Files.createDirectories(Paths.get("data/"));
+            file = new File("data/duke.txt");
+
+            //Check if the file exists
+            if (!file.exists()) {
+                boolean r = file.createNewFile();
+            }
+        }
+        catch(IOException e){
+            throw new DukeException("☹ OOPS!!! Error occurs when try to create a new data file");
+        }
+
+        taskList = readFile(file);
+
         //Echo
         while (!exit) {
             String input = scanner.nextLine();
@@ -100,9 +178,15 @@ public class Duke {
                 bye();
                 exit = true;
             } else if (command.equals("done")) {
-                int index = Integer.parseInt(pieces[1]);
-                Task task = getTask(taskList, index-1);
-                done(task);
+                try {
+                    int index = Integer.parseInt(pieces[1]);
+                    Task task = getTask(taskList, index - 1);
+                    done(task);
+                }
+                catch(IndexOutOfBoundsException e){
+                    throw new DukeException("☹ OOPS!!! Invalid task number");
+                }
+
             } else if (command.equals("todo")) {
                 try {
                     Task newTask = new Todo(pieces[1]);
@@ -136,14 +220,20 @@ public class Duke {
                     throw new DukeException("☹ Please enter the event command in 'deadline [task description]/by [end time]' format");
                 }
             } else if(command.equals("delete")){
-                int index = Integer.parseInt(pieces[1]);
-                Task task = taskList.get(index-1);
-                delete(taskList, task);
+                try {
+                    int index = Integer.parseInt(pieces[1]);
+                    Task task = taskList.get(index - 1);
+                    delete(taskList, task);
+                }
+                catch(IndexOutOfBoundsException e){
+                    throw new DukeException("☹ OOPS!!! Invalid task number");
+                }
 
             }else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
+            saveToFile(file, taskList);
             System.out.println("    ____________________________________________________________");
         }
     }

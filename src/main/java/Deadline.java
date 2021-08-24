@@ -10,6 +10,6 @@ public class Deadline extends Task{
     }
 
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + endTime + ")";
+        return "[D]" + super.toString() + "->by: " + endTime;
     }
 }

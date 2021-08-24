@@ -16,6 +16,10 @@ public class Task {
         this.completed = true;
     }
 
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
+    }
+
     public String toString() {
         if(completed){
             return "[X] " + name;
