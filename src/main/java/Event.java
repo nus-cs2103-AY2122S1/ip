@@ -6,6 +6,7 @@
 public class Event extends Task{
 
     private String event;
+    final static String split = " /at";
 
     /**
      *  Constructor to create an EVENT task

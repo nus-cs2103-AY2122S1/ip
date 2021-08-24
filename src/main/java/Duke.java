@@ -51,15 +51,9 @@ public class Duke {
                     tasklist.getTask(idx).setToCompleted();
                     break;
                 case "todo":
-                    task = Task.parseStringIntoTask(input, "", cmd);
-                    tasklist.add(task);
-                    break;
                 case "deadline":
-                    task = Task.parseStringIntoTask(input, "/by ", cmd);
-                    tasklist.add(task);
-                    break;
                 case "event":
-                    task = Task.parseStringIntoTask(input, "/at ", cmd);
+                    task = Task.parseStringIntoTask(input, cmd);
                     tasklist.add(task);
                     break;
                 case "delete":

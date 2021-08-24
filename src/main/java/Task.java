@@ -46,11 +46,11 @@ public class Task {
      * Checks for incorrectly formatted input from user to be caught as an exception.
      *
      * @param taskName The name of the task
-     * @param split The string that it is split by e.g "/by" or "/at"
      * @param taskType The type of task
      * @return A task of class taskType based on the command given
      */
-    public static Task parseStringIntoTask(String taskName, String split, String taskType) {
+    public static Task parseStringIntoTask(String taskName, String taskType) {
+        String split = "";
         try {
             if (taskName.equals("")) {
                 String errorMsg = String.format("Oops!!! %s cannot be empty", taskType.toUpperCase());
@@ -63,28 +63,36 @@ public class Task {
         }
 
         try {
-            if (split.equals("") && taskType.equals("todo")) {
-                return new Todo(taskName);
-            } else {
-                if (!taskName.contains(split)) {
-                    String errorMsg = String.format("Oops!!! %s cannot be found in %s.", split, taskType);
-                    throw new DukeException.InsufficientArgumentsException(errorMsg);
-                }
 
-                String[] nameNTime = taskName.split(split);
-                String name = nameNTime[0];
-                String time = nameNTime[1];
-                Task task;
-
-                if(taskType.equals("deadline")) {
-                    task = new Deadline(name, time);
-                } else if (taskType.equals("event")) {
-                    task = new Event(name, time);
-                } else {
+            switch (taskType) {
+                case "todo":
+                    return new Todo(taskName);
+                case "deadline":
+                    split = "/by ";
+                    break;
+                case "event":
+                    split = "/at ";
+                    break;
+                default:
                     throw new DukeException.TaskTypeNotFoundException("TaskType cannot be found");
-                }
-                return task;
             }
+
+            if (!taskName.contains(split)) {
+                String errorMsg = String.format("Oops!!! %s cannot be found in %s.", split, taskType);
+                throw new DukeException.InsufficientArgumentsException(errorMsg);
+            }
+
+            String[] nameNTime = taskName.split(split);
+            String name = nameNTime[0];
+            String time = nameNTime[1];
+            Task task = null;
+
+            if(taskType.equals("deadline")) {
+                task = new Deadline(name, time);
+            } else if (taskType.equals("event")) {
+                task = new Event(name, time);
+            }
+            return task;
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             System.out.println(Duke.breakline);
@@ -100,6 +108,5 @@ public class Task {
     public String toString() {
         return this.name;
     }
-
-
+    
 }
