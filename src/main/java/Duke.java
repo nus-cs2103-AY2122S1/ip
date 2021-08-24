@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -95,6 +98,7 @@ public class Duke {
         try {
             int taskNumber = Integer.parseInt(commandDesc) - 1;
             taskList.get(taskNumber).markDone();
+            save();
             System.out.println("\tNice! I've marked this task as done:\n\t  " + taskList.get(taskNumber));
         } catch (NumberFormatException e) {
             System.out.println("\t☹ OOPS!!! Please input a task number instead.");
@@ -127,6 +131,7 @@ public class Duke {
     private static void addToDo(String commandDesc){
         taskList.add(new ToDo(commandDesc));
         System.out.println("\tGot it. I've added this ToDo:\n" + "\t  " + taskList.get(taskList.size() - 1));
+        save();
         printTaskCount();
     }
 
@@ -139,6 +144,7 @@ public class Duke {
         String[] commandDescSplit = commandDesc.split("/by");
         taskList.add(new Deadline(commandDescSplit[0], commandDescSplit[1]));
         System.out.println("\tGot it. I've added this Deadline:\n" + "\t  " + taskList.get(taskList.size() - 1));
+        save();
         printTaskCount();
     }
 
@@ -151,6 +157,7 @@ public class Duke {
         String[] commandDescSplit = commandDesc.split("/at");
         taskList.add(new Event(commandDescSplit[0], commandDescSplit[1]));
         System.out.println("\tGot it. I've added this Event:\n" + "\t  " + taskList.get(taskList.size() - 1));
+        save();
         printTaskCount();
     }
 
@@ -164,12 +171,40 @@ public class Duke {
             int taskNumber = Integer.parseInt(commandDesc) - 1;
             System.out.println("\tNoted. I've removed this task:\n\t  " + taskList.get(taskNumber));
             taskList.remove(taskNumber);
+            save();
             printTaskCount();
         } catch (NumberFormatException e) {
             System.out.println("\t☹ OOPS!!! Please input a task number instead.");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("\t☹ OOPS!!! This is not a valid task number.");
         }
+    }
+
+    private static void save() {
+        try {
+            File file = new File("data/duke.txt");
+
+            if (!file.exists()) {
+                System.out.println("created!");
+                file.createNewFile();
+            }
+            FileWriter writer = new FileWriter("data/duke.txt");
+            String toSave = "";
+            for (int i = 0; i < taskList.size(); i++) {
+                Task currentTask = taskList.get(i);
+                toSave = toSave.concat(currentTask.taskType()
+                        + " | "
+                        + currentTask.isDoneToInt()
+                        + " | "
+                        + currentTask.getTaskDetails() + "\n");
+            }
+
+            writer.write(toSave);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("error");
+        }
+
     }
 
     /**
