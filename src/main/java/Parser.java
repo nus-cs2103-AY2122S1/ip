@@ -56,11 +56,11 @@ public class Parser {
     }
 
     public void parse(String command, ToDoList tdl, Ui ui, Duke chatBot) {
-        if (command.equals(Commands.BYE.toString().toLowerCase())) {
+        if (command.equals(Commands.BYE.asLowerCase())) {
             chatBot.exit(tdl);
-        } else if (command.equals(Commands.LIST.toString().toLowerCase())) {
+        } else if (command.equals(Commands.LIST.asLowerCase())) {
             tdl.displayList();
-        } else if (command.startsWith(Commands.DONE.toString().toLowerCase())) {
+        } else if (command.startsWith(Commands.DONE.asLowerCase())) {
             try {
                 String substring = command.substring(5);
                 int index = Integer.parseInt(substring);
@@ -70,7 +70,7 @@ public class Parser {
             } catch (IndexOutOfBoundsException e) {
                 ui.prettyPrinter("Where's this item? It's not even on the list!");
             }
-        } else if (command.startsWith(Commands.TODO.toString().toLowerCase())) {
+        } else if (command.startsWith(Commands.TODO.asLowerCase())) {
             try {
                 formatChecker(command);
                 String substring = command.substring(5);
@@ -80,7 +80,7 @@ public class Parser {
             } catch (DukeException e) {
                 ui.prettyPrinter(e.getMessage());
             }
-        } else if (command.startsWith(Commands.EVENT.toString().toLowerCase())) {
+        } else if (command.startsWith(Commands.EVENT.asLowerCase())) {
             try {
                 formatChecker(command);
                 String substring = command.substring(6);
@@ -93,7 +93,7 @@ public class Parser {
             } catch (DukeException e) {
                 ui.prettyPrinter(e.getMessage());
             }
-        } else if (command.startsWith(Commands.DEADLINE.toString().toLowerCase())) {
+        } else if (command.startsWith(Commands.DEADLINE.asLowerCase())) {
             try {
                 formatChecker(command);
                 String substring = command.substring(9);
@@ -113,7 +113,7 @@ public class Parser {
             } catch (DukeException e) {
                 ui.prettyPrinter(e.getMessage());
             }
-        } else if (command.startsWith(Commands.DELETE.toString().toLowerCase())) {
+        } else if (command.startsWith(Commands.DELETE.asLowerCase())) {
             try {
                 String substring = command.substring(7);
                 int index = Integer.parseInt(substring);
