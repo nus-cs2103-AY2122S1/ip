@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
 import duke.commands.Ui;
 import duke.storage.Storage;
 import duke.storage.TaskList;
@@ -45,12 +48,11 @@ public class Duke {
         String action = "";
         String descriptions = "";
         String[] actionDescription = new String[2];
-        String by = "";
-        String dayTime = "";
+        String dateTime = "";
         String onlyDescription = "";
         Scanner sc = new Scanner(System.in);
-        String inputToStorage;
         ArrayList<Task> savedTasks = storage.loadData();
+        Command command = new AddCommand();
         taskList.loadFromStorage(savedTasks);
 
         Ui.printIntro();
@@ -79,37 +81,29 @@ public class Duke {
                     case "todo":
                         descriptions = actionDescription[1];
                         ToDos todos = new ToDos(descriptions);
-                        taskList.addTask(todos);
-                        inputToStorage = todos.getSymbol() + " | 0 | " + todos.getDescription();
-                        storage.appendToData(inputToStorage);
+                        command.execute(taskList, storage, todos);
                         break;
 
                     case "deadline":
                         descriptions = actionDescription[1];
                         onlyDescription = descriptions.split(" /")[0];
-                        by = descriptions.split(" /by ")[1];
-                        by = dateTimeFormatter(by);
-                        Deadline deadline = new Deadline(onlyDescription, by);
-                        taskList.addTask(deadline);
-                        inputToStorage = deadline.getSymbol() + " | 0 | " + deadline.getDescription() + " | "
-                                + deadline.getBy();
-                        storage.appendToData(inputToStorage);
+                        dateTime = descriptions.split(" /by ")[1];
+                        dateTime = dateTimeFormatter(dateTime);
+                        Deadline deadline = new Deadline(onlyDescription, dateTime);
+                        command.execute(taskList, storage, deadline);
                         break;
 
                     case "event":
                         descriptions = actionDescription[1];
                         onlyDescription = descriptions.split(" /")[0];
-                        dayTime = descriptions.split(" /at ")[1];
-                        Events event = new Events(onlyDescription, dayTime);
-                        taskList.addTask(event);
-                        inputToStorage = event.getSymbol() + " | 0 | " + event.getDescription() + " | "
-                                + event.getDayTime();
-                        storage.appendToData(inputToStorage);
+                        dateTime = descriptions.split(" /at ")[1];
+                        Events event = new Events(onlyDescription, dateTime);
+                        command.execute(taskList, storage, event);
                         break;
 
                     case "delete":
-                        taskList.deleteItem(userInput.split(" ")[1]);
-                        storage.deleteTaskFromData(userInput.split(" ")[1]);
+                        Command deleteCommand = new DeleteCommand(userInput.split(" ")[1]);
+                        deleteCommand.execute(taskList, storage);
                         break;
 
                     case "":

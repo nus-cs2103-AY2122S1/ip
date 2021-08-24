@@ -1,19 +1,13 @@
 package duke.tasks;
+
 public class Events extends Task {
-    protected final String dayTime;
 
-    public Events(String description, String dayTime) {
-        super(description);
-        this.dayTime = dayTime;
+    public Events(String description, String dateTime) {
+        super(description, dateTime);
     }
 
-    public Events(String description, String dayTime, boolean isDone) {
-        super(description, isDone);
-        this.dayTime = dayTime;
-    }
-
-    public String getDayTime() {
-        return this.dayTime;
+    public Events(String description, String dateTime, boolean isDone) {
+        super(description, dateTime, isDone);
     }
 
     @Override
@@ -23,11 +17,11 @@ public class Events extends Task {
 
     @Override
     public Events markAsDone() {
-        return new Events(this.getDescription(), this.getDayTime(), true);
+        return new Events(this.getDescription(), this.getDateTime(), true);
     }
 
     @Override
     public String toString() {
-        return "[E][" + this.getStatusIcon() + "] " + this.getDescription() + " (at: " + this.getDayTime() + ")";
+        return "[E][" + this.getStatusIcon() + "] " + this.getDescription() + " (at: " + this.getDateTime() + ")";
     }
 }

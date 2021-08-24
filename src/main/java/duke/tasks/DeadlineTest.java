@@ -16,7 +16,7 @@ public class DeadlineTest {
     public void testGetBy() {
         Deadline deadline = new Deadline("testGetBy description", "testGetBy by");
 
-        assertEquals("testGetBy by", deadline.getBy());
+        assertEquals("testGetBy by", deadline.getDateTime());
     }
 
     @Test

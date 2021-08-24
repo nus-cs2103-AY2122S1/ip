@@ -16,7 +16,7 @@ public class EventsTest {
     public void testDayTime() {
         Events events = new Events("testDayTime description", "testDayTime dayTime");
 
-        assertEquals("testDayTime dayTime", events.getDayTime());
+        assertEquals("testDayTime dayTime", events.getDateTime());
     }
 
     @Test

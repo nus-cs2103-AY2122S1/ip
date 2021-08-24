@@ -1,16 +1,13 @@
 package duke.tasks;
 
 public class Deadline extends Task {
-    protected final String by;
 
-    public Deadline(String description, String by) {
-        super(description);
-        this.by = by;
+    public Deadline(String description, String dateTime) {
+        super(description, dateTime);
     }
 
-    public Deadline(String description, String by, boolean isDone) {
-        super(description, isDone);
-        this.by = by;
+    public Deadline(String description, String dateTime, boolean isDone) {
+        super(description, dateTime, isDone);
     }
 
     @Override
@@ -18,17 +15,13 @@ public class Deadline extends Task {
         return "D";
     }
 
-    public String getBy() {
-        return this.by;
-    }
-
     @Override
     public Deadline markAsDone() {
-        return new Deadline(this.getDescription(), this.getBy(), true);
+        return new Deadline(this.getDescription(), this.getDateTime(), true);
     }
 
     @Override
     public String toString() {
-        return "[D][" + this.getStatusIcon() + "] " + this.getDescription() + " (by: " + this.getBy() + ")";
+        return "[D][" + this.getStatusIcon() + "] " + this.getDescription() + " (by: " + this.getDateTime() + ")";
     }
 }
