@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -48,11 +50,13 @@ public class Storage {
                     break;
                 }
                 case "D": {
-                    task = new Deadline(description, taskDetails[3]);
+                    LocalDate time = LocalDate.parse(taskDetails[3]);
+                    task = new Deadline(description, time);
                     break;
                 }
                 case "E": {
-                    task = new Event(description, taskDetails[3]);
+                    LocalDate time = LocalDate.parse(taskDetails[3]);
+                    task = new Event(description, time);
                     break;
                 }
                 default: {
@@ -63,7 +67,7 @@ public class Storage {
                 if (status.equals("1")) task.setDone();
                 taskList.add(task);
             }
-        } catch (FileNotFoundException | DinoException e) {
+        } catch (FileNotFoundException | DinoException | DateTimeParseException e) {
             System.out.println(e.getMessage());
         }
         return taskList;

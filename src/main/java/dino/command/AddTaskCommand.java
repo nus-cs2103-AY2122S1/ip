@@ -4,6 +4,9 @@ import dino.util.Storage;
 import dino.exception.*;
 import dino.task.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class AddTaskCommand extends Command {
 
     String taskString;
@@ -25,13 +28,13 @@ public class AddTaskCommand extends Command {
                 break;
             }
             case DEADLINE: {
-                String time = getTaskTime(this.taskString);
+                LocalDate time = getTaskTime(this.taskString);
                 task = new Deadline(description, time);
                 taskList.addTask(task);
                 break;
             }
             case EVENT : {
-                String time = getTaskTime(this.taskString);
+                LocalDate time = getTaskTime(this.taskString);
                 task = new Event(description, time);
                 taskList.addTask(task);
                 break;
@@ -59,8 +62,13 @@ public class AddTaskCommand extends Command {
         return s;
     }
 
-    public static String getTaskTime(String s) {
-        return s.substring(s.indexOf("/") + 4);
+    public static LocalDate getTaskTime(String s) throws InvalidFormatException {
+        String time = s.substring(s.indexOf("/") + 4);
+        try {
+            return LocalDate.parse(time);
+        } catch (DateTimeParseException e){
+            throw new InvalidFormatException("make sure the date", "yy-mm-dd");
+        }
     }
 
 }

@@ -7,20 +7,16 @@ import dino.exception.*;
 
 public class Event extends Task{
 
-    private LocalDate atDate;
+    private LocalDate at;
 
-    public Event(String description, String at) throws InvalidFormatException {
+    public Event(String description, LocalDate at){
         super(description);
-        try {
-            this.atDate = LocalDate.parse(at);
-        } catch (DateTimeParseException e){
-            throw new InvalidFormatException("date", "yy-mm-dd");
-        }
+        this.at = at;
     }
 
     @Override
     public String toString() {
         return "E" + super.toString() + " | "
-                + this.atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                + this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }
