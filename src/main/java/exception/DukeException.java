@@ -57,7 +57,7 @@ public class DukeException extends Exception {
                     + "    3. start date and time, end date and time";
             break;
         default:
-            customMessage = "  OOPS!!! Duck has run into an unspecified error!";
+            customMessage = "  OOPS!!! Duke has run into an unspecified error!";
             break;
         }
     }
