@@ -36,7 +36,7 @@ public class TaskList {
         String str = "";
 
         for (int i = 0; i < tasks.size(); i++) {
-            str += "\t " + (i + 1) + ". " + this.tasks.get(i);
+            str += "\t " + (i + 1) + ". " + this.tasks.get(i) + "\n";
         }
 
         return str;
