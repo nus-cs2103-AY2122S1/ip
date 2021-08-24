@@ -21,6 +21,15 @@ public class Task {
         isDone = true;
     }
     
+    /**
+     * Checks if description contains the keyword.
+     *
+     * @param keyword keyword to match
+     */
+    public boolean matchDescription(String keyword) {
+        return description.contains(keyword);
+    }
+    
     @Override
     public String toString() {
         return "[" + (isDone ? "X" : " ") + "] " + description;
