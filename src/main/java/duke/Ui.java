@@ -88,6 +88,12 @@ public class Ui {
         System.out.println("*******************************************");
     }
 
+    public void showFoundTasks(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(tasks.toString());
+        System.out.println("*******************************************");
+    }
+
     public void showTaskDone(Task task) {
         System.out.println("Nice! I've marked this task as done:\n  "
                 + task.toString());
