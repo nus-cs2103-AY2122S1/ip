@@ -16,6 +16,7 @@ import java.util.Scanner;
  * Represents a storage class that handles reading and writing tasks to a specified data file.
  */
 public class Storage {
+    /** The data file to read/write */
     private File file;
 
     /**

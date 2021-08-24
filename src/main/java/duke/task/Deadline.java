@@ -7,6 +7,7 @@ import java.time.LocalDate;
  * date of the task.
  */
 public class Deadline extends Task {
+    /** The date of the deadline */
     private LocalDate date;
 
     /**

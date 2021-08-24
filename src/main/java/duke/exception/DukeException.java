@@ -4,6 +4,7 @@ package duke.exception;
  * Represents an exception related to the application with the error message.
  */
 public class DukeException extends Exception {
+    /** The error message of this exception */
     private String message;
 
     /**

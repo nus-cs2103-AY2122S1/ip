@@ -11,7 +11,9 @@ import java.util.Scanner;
  * Represents the UI that interacts with the user.
  */
 public class Ui {
+    /** The scanner for the UI */
     private Scanner sc;
+    /** The parser to parse user commands */
     private Parser parser;
 
     /**

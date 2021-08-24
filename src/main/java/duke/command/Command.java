@@ -4,7 +4,9 @@ package duke.command;
  * Represents a command with the type and payload of the command.
  */
 public class Command {
+    /** The command type */
     public CommandType type;
+    /** The payload */
     public Object payload;
 
     /**

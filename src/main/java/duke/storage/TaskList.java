@@ -8,6 +8,7 @@ import java.util.List;
  * Represents a Task list that can be added to and removed from.
  */
 public class TaskList {
+    /** The current list of tasks */
     private List<Task> tasks;
 
     /**

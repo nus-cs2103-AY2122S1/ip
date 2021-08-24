@@ -14,9 +14,11 @@ import java.util.ArrayList;
  * Represents the main Duke application.
  */
 public class Duke {
-    
+    /** The storage for the application */
     private Storage storage;
+    /** The task list for the application */
     private TaskList taskList;
+    /** The UI for the application */
     private Ui ui;
 
     /**
