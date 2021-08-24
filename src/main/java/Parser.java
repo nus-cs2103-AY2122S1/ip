@@ -1,6 +1,3 @@
-import yoyoexception.YoyoException;
-import yoyoexception.YoyoException.YoyoCommandNotFoundException;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
@@ -31,7 +28,8 @@ public class Parser {
         case "event":
             return new CommandEvent(inputTokens);
         default:
-            throw new YoyoCommandNotFoundException("Yoyo doesn't understand what you mean :-(");
+            throw new YoyoException.YoyoCommandNotFoundException("Yoyo doesn't understand "
+                    + "what you mean :-(");
         }
     }
 

@@ -1,8 +1,4 @@
-import yoyoexception.YoyoException;
-
 import java.time.LocalDateTime;
-
-import static yoyoexception.YoyoException.YoyoIncompleteCommandException;
 
 public class CommandDeadline extends Command {
     CommandDeadline(String[] inputTokens) {
@@ -15,7 +11,7 @@ public class CommandDeadline extends Command {
         checkCompleteCommand(inputTokens);
         String[] taskInfo = inputTokens[1].split(" /by ");
         if (taskInfo.length < 2) {
-            throw new YoyoIncompleteCommandException("command has bad format or"
+            throw new YoyoException.YoyoIncompleteCommandException("command has bad format or"
                     + " not enough information.");
         } else {
             LocalDateTime datetime = Parser.parseTimeString(taskInfo[1]);

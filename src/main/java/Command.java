@@ -1,7 +1,3 @@
-import yoyoexception.YoyoException;
-
-import static yoyoexception.YoyoException.YoyoIncompleteCommandException;
-
 public abstract class Command {
     protected String[] inputTokens;
 
@@ -12,15 +8,19 @@ public abstract class Command {
      * @throws YoyoException.YoyoIncompleteCommandException Thrown if command is incomplete.
      */
     public static void checkCompleteCommand(String[] inputTokens)
-            throws YoyoIncompleteCommandException {
+            throws YoyoException.YoyoIncompleteCommandException {
         if (inputTokens.length < 2 || inputTokens[1].trim().length() == 0) {
-            throw new YoyoIncompleteCommandException(
+            throw new YoyoException.YoyoIncompleteCommandException(
                     "You have not entered enough information for your command.");
         }
     }
 
     Command(String[] inputTokens) {
         this.inputTokens = inputTokens;
+    }
+
+    public boolean shouldContinueProgram() {
+        return true;
     }
 
     public abstract void execute(TaskList tasks, Storage storage, Ui ui)

@@ -8,6 +8,10 @@ public class CommandBye extends Command {
     public void execute(TaskList tasks, Storage storage, Ui ui) {
         storage.deposit(tasks);
         ui.sayGoodbye();
-        //find a way to terminate...
+    }
+
+    @Override
+    public boolean shouldContinueProgram() {
+        return false;
     }
 }

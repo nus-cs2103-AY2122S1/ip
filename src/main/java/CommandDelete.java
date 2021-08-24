@@ -1,5 +1,3 @@
-import yoyoexception.YoyoException;
-
 public class CommandDelete extends Command {
     CommandDelete(String[] inputTokens) {
         super(inputTokens);

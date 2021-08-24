@@ -9,7 +9,8 @@ public class Ui {
      * Prints a decoration line for output.
      */
     private void outputWrapper() {
-        System.out.println("============================================================");
+        System.out.println("======================"
+                + "======================================");
     }
 
     public void greetUser() {

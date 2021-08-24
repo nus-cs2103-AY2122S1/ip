@@ -1,23 +1,5 @@
-
-
-import java.io.IOException;
-import java.io.FileWriter;
-import java.util.Scanner;
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-
-import static java.lang.Integer.parseInt;
-
-import yoyoexception.YoyoException;
-import yoyoexception.YoyoException.YoyoInvalidFormatException;
-import yoyoexception.YoyoException.YoyoEmptyCommandException;
-import yoyoexception.YoyoException.YoyoTaskIndexException;
-import yoyoexception.YoyoException.YoyoIncompleteCommandException;
-import yoyoexception.YoyoException.YoyoCommandNotFoundException;
-
-
 public class Yoyo {
-    private TaskList tasks = new TaskList();
+    private TaskList tasks;
     private Storage storage;
     private Ui ui;
 
@@ -39,8 +21,8 @@ public class Yoyo {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                c.execute(ui, storage, tasks);
-
+                c.execute(tasks, storage, ui);
+                shouldRun = c.shouldContinueProgram();
             } catch (YoyoException e) {
                 ui.printErrorMessage(e);
             }

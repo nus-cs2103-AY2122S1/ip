@@ -1,5 +1,3 @@
-package yoyoexception;
-
 import java.io.IOException;
 
 /**

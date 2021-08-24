@@ -4,7 +4,8 @@ public class CommandTodo extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
+    public void execute(TaskList tasks, Storage storage, Ui ui)
+            throws YoyoException {
         checkCompleteCommand(inputTokens);
         Task newTask = new Todo(inputTokens[1]);
         tasks.add(newTask);
