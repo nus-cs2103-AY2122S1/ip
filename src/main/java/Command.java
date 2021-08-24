@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public abstract class Command {
@@ -43,9 +44,14 @@ public abstract class Command {
         @Override
         protected void execute() {
             if (t.getTaskName() != NULL_COMMAND) {
-                Duke.todoList.add(t);
-                System.out.println("Got it. I've added this task:\n    " + t);
-                System.out.println("Now you have " + Duke.todoList.size() + " tasks in the list.");
+                try {
+                    t.add();
+                    System.out.println("Got it. I've added this task:\n    " + t);
+                    System.out.println("Now you have " + Duke.todoList.size() + " tasks in the list.");
+                } catch (IOException e) {
+                    System.out.println("OOPS!!! Something went wrong with adding tasks:\n    " + t);
+                }
+
             } else {
                 System.out.println("OOPS!!! The description of a todo cannot be empty.");
             }
@@ -75,8 +81,12 @@ public abstract class Command {
         protected void execute() {
             try {
                 Task t = Duke.todoList.get(Integer.parseInt(index) - 1);
-                t.done();
-                System.out.println("Nice! I've marked this task as done:\n    " + t);
+                if (t.isDone()) {
+                    System.out.println("OOPS!!! Seems like you marked the task done:\n    " + t);
+                } else {
+                    t.done();
+                    System.out.println("Nice! I've marked this task as done:\n    " + t);
+                }
                 Duke.printLine();
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("OOPS!!! I'm sorry, but I cannot find that task :(");
@@ -137,32 +147,32 @@ public abstract class Command {
                 analyze(userCommand);
 
                 switch (pre_command) {
-                    case NULL_COMMAND:
-                        NOTHING.execute();
-                        break;
-                    case BYE_COMMAND:
-                        BYE.execute();
-                        break outerLoop;
-                    case LIST_COMMAND:
-                        LIST.execute();
-                        break;
-                    case DONE_COMMAND:
-                        done(body_command).execute();
-                        break;
-                    case DELETE_COMMAND:
-                        delete(body_command).execute();
-                        break;
-                    case TODO_COMMAND:
-                        add(Task.todo(body_command)).execute();
-                        break;
-                    case DEADLINE_COMMAND:
-                        add(Task.deadline(body_command)).execute();
-                        break;
-                    case EVENT_COMMAND:
-                        add(Task.event(body_command)).execute();
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Unexpected argument: " + pre_command);
+                case NULL_COMMAND:
+                    NOTHING.execute();
+                    break;
+                case BYE_COMMAND:
+                    BYE.execute();
+                    break outerLoop;
+                case LIST_COMMAND:
+                    LIST.execute();
+                    break;
+                case DONE_COMMAND:
+                    done(body_command).execute();
+                    break;
+                case DELETE_COMMAND:
+                    delete(body_command).execute();
+                    break;
+                case TODO_COMMAND:
+                    add(Task.todo(body_command)).execute();
+                    break;
+                case DEADLINE_COMMAND:
+                    add(Task.deadline(body_command)).execute();
+                    break;
+                case EVENT_COMMAND:
+                    add(Task.event(body_command)).execute();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unexpected argument: " + pre_command);
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :(");

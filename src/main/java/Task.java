@@ -1,11 +1,12 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.io.IOException;
+import java.util.Optional;
 
 public abstract class Task {
     final static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-    private boolean done;
+    private boolean isDone;
     private final String taskName;
     private final LocalDate date;
 
@@ -46,20 +47,35 @@ public abstract class Task {
     }
 
     private Task(String taskName) {
-        this.taskName = taskName;
-        this.done = false;
-        this.date = null;
+        this(false, taskName, null);
     }
 
-    private Task(String taskName, LocalDate date) {
+    private Task(boolean isDone, String taskName, LocalDate date) {
         this.taskName = taskName;
-        this.done = false;
         this.date = date;
+        this.isDone = isDone;
+    }
+
+    private static Task of(TaskKind taskKind, boolean isDone, String taskName, LocalDate date) {
+        switch (taskKind) {
+        case TODO:
+            return new Todo(isDone, taskName);
+        case DEADLINE:
+            return new Deadline(isDone, taskName, date);
+        case EVENT:
+            return new Event(isDone, taskName, date);
+        default:
+            throw new IllegalStateException("Unexpected value: " + taskKind);
+        }
     }
 
     private static class Todo extends Task{
         private Todo(String taskName) {
             super(taskName);
+        }
+
+        private Todo(boolean isDone, String taskName) {
+            super(isDone, taskName, null);
         }
 
         @Override
@@ -70,14 +86,14 @@ public abstract class Task {
         @Override
         public String toString() {
             String shortName = "[" + this.taskKind().shortName() + "]";
-            String isDone = super.done ? "[X]" : "[ ]";
-            return shortName + " " + isDone + " " + super.taskName;
+            String isisDone = super.isDone ? "[X]" : "[ ]";
+            return shortName + " " + isisDone + " " + super.taskName;
         }
     }
 
     private static class Deadline extends Task{
-        private Deadline(String taskName, LocalDate date) {
-            super(taskName, date);
+        private Deadline(boolean isDone, String taskName, LocalDate date) {
+            super(isDone, taskName, date);
         }
 
         @Override
@@ -88,15 +104,15 @@ public abstract class Task {
         @Override
         public String toString() {
             String shortName = "[" + this.taskKind().shortName() + "]";
-            String isDone = super.done ? "[X]" : "[ ]";
+            String isDone = super.isDone ? "[X]" : "[ ]";
             String deadline = "(by: " + super.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
             return shortName + " " + isDone + " " + super.taskName + "" + deadline;
         }
     }
 
     private static class Event extends Task{
-        private Event(String taskName, LocalDate date) {
-            super(taskName, date);
+        private Event(boolean isDone, String taskName, LocalDate date) {
+            super(isDone, taskName, date);
         }
 
         @Override
@@ -107,7 +123,7 @@ public abstract class Task {
         @Override
         public String toString() {
             String shortName = "[" + this.taskKind().shortName() + "]";
-            String isDone = super.done ? "[X]" : "[ ]";
+            String isDone = super.isDone ? "[X]" : "[ ]";
             String startTime = "(at: " + super.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
             return shortName + " " + isDone + " " + super.taskName + "" + startTime;
         }
@@ -129,7 +145,7 @@ public abstract class Task {
             if (parts.length > 1) {
                 String date = parts[1];
                 LocalDate localDate = LocalDate.parse(date, dtf);
-                return new Deadline(taskName, localDate);
+                return new Deadline(false, taskName, localDate);
             } else {
                 throw new DukeException.DukeEmptyNote(TaskKind.DEADLINE);
             }
@@ -145,7 +161,7 @@ public abstract class Task {
             if (parts.length > 1) {
                 String date = parts[1];
                 LocalDate localDate = LocalDate.parse(date, dtf);
-                return new Event(taskName, localDate);
+                return new Event(false, taskName, localDate);
             } else {
                 throw new DukeException.DukeEmptyNote(TaskKind.EVENT);
             }
@@ -154,8 +170,8 @@ public abstract class Task {
         }
     }
 
-    public void done() {
-        this.done = true;
+    public boolean isDone() {
+        return this.isDone;
     }
 
     public String getTaskName() {
@@ -163,4 +179,56 @@ public abstract class Task {
     }
 
     public abstract TaskKind taskKind();
+
+    public String encode() {
+        return this.taskKind().shortName + " , " + this.isDone + " , " + this.taskName +
+                " , " + Optional.ofNullable(this.date).map(date -> date.format(dtf)).orElse("null");
+    }
+
+    public static Task decode(String hardCode) {
+        String[] parts = hardCode.split(" , ");
+
+        TaskKind taskKind;
+        Boolean isDone;
+        String taskName;
+        LocalDate date;
+
+        try {
+            switch (parts[0]) {
+            case "D":
+                taskKind = TaskKind.DEADLINE;
+                break;
+            case "E":
+                taskKind = TaskKind.EVENT;
+                break;
+            case "T":
+            default:
+                taskKind = TaskKind.TODO;
+            }
+
+            isDone = Boolean.parseBoolean(parts[1]);
+            taskName = parts[2];
+
+            switch (parts[3]) {
+            case "null":
+                date = null;
+                break;
+            default:
+                date = LocalDate.parse(parts[3], dtf);
+            }
+
+            return Task.of(taskKind, isDone, taskName, date);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public void done() {
+        this.isDone = true;
+    };
+
+    public void add() throws IOException {
+        Duke.todoList.add(this);
+    }
 }
