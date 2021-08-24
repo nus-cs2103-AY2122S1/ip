@@ -1,6 +1,10 @@
-import duke.*;
-import duke.task.TaskList;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
 import duke.command.Command;
+import duke.task.TaskList;
+
 
 /**
  * The Duke program is an application that can store the Tasks you need to do!

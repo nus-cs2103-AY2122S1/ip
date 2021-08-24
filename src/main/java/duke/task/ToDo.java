@@ -25,6 +25,6 @@ public class ToDo extends Task {
      * @return a String representing the ToDo Task to be saved in the taskList.txt file.
      */
     public String printToFile() {
-        return "T | " + (this.isDone ? 1 : 0) + " | " + this.name;
+        return "T | " + (this.getDone() ? 1 : 0) + " | " + this.getName();
     }
 }

@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.task.TaskList;
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * The RestoreCommand is given when the user wants to revert to a previously saved TaskList.

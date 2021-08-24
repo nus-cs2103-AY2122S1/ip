@@ -9,8 +9,8 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
 
-    String timeString;
-    LocalDate timeDate;
+    private String timeString;
+    private LocalDate timeDate;
 
     public Event(String input) {
         super(input.substring(0, input.indexOf("/at ") - 1));
@@ -53,7 +53,7 @@ public class Event extends Task {
      * @return a String representing the Event Task to be saved in the taskList.txt file.
      */
     public String printToFile() {
-        String msg = "E | " + (this.isDone ? 1 : 0) + " | " + this.name + " | ";
+        String msg = "E | " + (this.getDone() ? 1 : 0) + " | " + this.getName() + " | ";
         if (timeString == null) {
             msg = msg + timeDate.toString();
         } else {

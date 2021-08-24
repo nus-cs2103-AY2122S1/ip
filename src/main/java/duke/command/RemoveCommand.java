@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.task.TaskList;
-import duke.task.Task;
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * The RemoveCommand is given when the user wants to remove a Task from the TaskList.

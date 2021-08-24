@@ -7,7 +7,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * The Storage class encapsulates methods related to saving and loading
@@ -65,7 +69,7 @@ public class Storage {
     }
 
     /**
-     * Reads the taskList.txt file and returns an ArrayList<Task> based on it.
+     * Reads the taskList.txt file and returns an ArrayList of Tasks based on it.
      * Throws a DukeException if the file does not exist.
      *
      * @return An ArrayList containing the tasks in the text file.
@@ -86,11 +90,11 @@ public class Storage {
         // parse each line
         try {
             Files.lines(taskFile).forEach(line -> {
-                        Task newTask = parseInput(line);
-                        if (newTask != null) {
-                            result.add(newTask);
-                        }
+                Task newTask = parseInput(line);
+                if (newTask != null) {
+                        result.add(newTask);
                     }
+                }
             );
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
