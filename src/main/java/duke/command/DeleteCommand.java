@@ -34,7 +34,7 @@ public class DeleteCommand extends Command{
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (parameter.matches("\\d+")) {
+        if (!parameter.matches("\\d+")) {
             // Invalid parameter
             throw new DukeException("OOPS!!! Invalid task number.");
         }

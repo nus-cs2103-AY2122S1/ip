@@ -69,8 +69,12 @@ public class TaskList {
      * A method to get a task from the task list.
      * @return Task The task to get
      */
-    public Task getTask(int i) {
-        return taskList.get(i);
+    public Task getTask(int i) throws DukeException {
+        try {
+            return taskList.get(i - 1);
+        } catch (Exception e) {
+            throw new DukeException(String.format("OOPS!!! Task %d does not exist.", i));
+        }
     }
 
     /**
