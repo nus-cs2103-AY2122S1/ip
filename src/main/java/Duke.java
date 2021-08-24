@@ -43,7 +43,12 @@ public class Duke {
                 command.validateArguments(inputLineWithoutCommand);
                 switch (command) {
                 case LIST:
-                    prettifier.print(taskManager.toString());
+                    if (inputLineWithoutCommand.isEmpty()) {
+                        prettifier.print(taskManager.list());
+                    } else {
+                        DukeDateTime date = DukeDateTime.parseUserInputDate(inputLineWithoutCommand);
+                        prettifier.print(taskManager.list(date));
+                    }
                     break;
                 case TODO:
                     String toDoName = inputLineWithoutCommand;
@@ -54,7 +59,7 @@ public class Duke {
                 case DEADLINE:
                     String[] deadlineDetails = inputLineWithoutCommand.split("\\s+/by\\s+", 2);
                     String deadlineName = deadlineDetails[0];
-                    DukeDateTime deadlineDueDate=  DukeDateTime.parseUserInput(deadlineDetails[1]);
+                    DukeDateTime deadlineDueDate=  DukeDateTime.parseUserInputDateTime(deadlineDetails[1]);
                     Deadline deadline = new Deadline(deadlineName, deadlineDueDate);
                     prettifier.print(taskManager.addTask(deadline));
                     storage.saveTasks(taskManager.toText());
@@ -62,7 +67,7 @@ public class Duke {
                 case EVENT:
                     String[] eventDetails = inputLineWithoutCommand.split("\\s+/at\\s+", 2);
                     String eventName = eventDetails[0];
-                    DukeDateTime eventTimestamp = DukeDateTime.parseUserInput(eventDetails[1]);
+                    DukeDateTime eventTimestamp = DukeDateTime.parseUserInputDateTime(eventDetails[1]);
                     Event event = new Event(eventName, eventTimestamp);
                     prettifier.print(taskManager.addTask(event));
                     storage.saveTasks(taskManager.toText());

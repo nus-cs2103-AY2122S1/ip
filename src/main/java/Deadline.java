@@ -1,4 +1,4 @@
-public class Deadline extends Task {
+public class Deadline extends Task implements Timestampable {
     private final DukeDateTime dueDate;
 
     public Deadline(String name, DukeDateTime dueDate) {
@@ -26,6 +26,11 @@ public class Deadline extends Task {
     public String toText() {
         String[] props = new String[]{"D", super.getStatusIcon(), super.getName(), this.dueDate.toISO()};
         return String.join(" | ", props);
+    }
+
+    @Override
+    public boolean onSameDayAs(DukeDateTime date) {
+        return DukeDateTime.onSameDay(this.dueDate, date);
     }
 
     @Override

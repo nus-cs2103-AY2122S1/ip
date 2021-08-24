@@ -1,4 +1,4 @@
-public class Event extends Task {
+public class Event extends Task implements Timestampable {
     private final DukeDateTime timestamp;
 
     public Event(String name, DukeDateTime timestamp) {
@@ -26,6 +26,11 @@ public class Event extends Task {
     public String toText() {
         String[] props = new String[]{"E", super.getStatusIcon(), super.getName(), this.timestamp.toISO()};
         return String.join(" | ", props);
+    }
+
+    @Override
+    public boolean onSameDayAs(DukeDateTime date) {
+        return DukeDateTime.onSameDay(this.timestamp, date);
     }
 
     @Override
