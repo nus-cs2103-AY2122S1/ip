@@ -7,13 +7,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates a class that deals with loading tasks from and saving tasks to a text file.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructor for a storage instance.
+     *
+     * @param filePath The path of the text file to read from and write to.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the tasks from the text file.
+     *
+     * @return An ArrayList of tasks, parsed from the strings in the text file.
+     */
     public ArrayList<Task> load() {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
@@ -62,6 +75,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves all the tasks in this instance of Duke to the text file, overwriting the content in the text file.
+     *
+     * @param tasks The list of tasks to save.
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -72,6 +90,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends text to the end of the text file.
+     * Does not overwrite the content in the text file.
+     *
+     * @param textToAppend The text to append to the end of the text file.
+     */
     public void append(String textToAppend) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
