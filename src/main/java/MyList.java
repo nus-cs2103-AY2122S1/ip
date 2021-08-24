@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -13,7 +18,7 @@ class MyList {
     }
 
     protected String addItem(String command) throws DukeException.InvalidCommandException, 
-            DukeException.InvalidTaskDescriptionException, DukeException.DuplicateTaskException {
+            DukeException.InvalidTaskDescriptionException, DukeException.DuplicateTaskException, DateTimeParseException {
         String[] commandTokens = generateTokens(command, " ");
         String taskName;
         Task task;
@@ -35,12 +40,17 @@ class MyList {
                 throw new DukeException.InvalidTaskDescriptionException("Invalid task description: missing date/time!");
             } else if (detailTokens.length > 2) {
                 throw new DukeException.InvalidTaskDescriptionException("Invalid task description: "
-                        + "multiple dates/times!");
+                        + "invalid date/time\nPlease use [command type] [task name] / [dd-mm-yyyy] [time (in 24hr " +
+                        "format)" +
+                        "]\ne.g. event lecture / 21-02-2021 1500");
             } else if (this.listedItems.contains(detailTokens[0].trim())){ // item already in list
                 throw new DukeException.DuplicateTaskException("Task already in list!");
             } else { // valid
                 taskName = detailTokens[0].trim();
-                String dateTime = detailTokens[1].trim();
+                String[] dateTimeString = detailTokens[1].trim().split(" "); 
+                LocalDate date = LocalDate.parse(dateTimeString[0], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                LocalTime time = LocalTime.parse(dateTimeString[1], DateTimeFormatter.ofPattern("HHmm"));
+                LocalDateTime dateTime = LocalDateTime.of(date, time);
                 if (commandTokens[0].trim().equals("event")) {
                     task = new Event(taskName, dateTime);
                 } else { //deadline

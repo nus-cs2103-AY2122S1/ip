@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -38,6 +39,11 @@ public class Duke {
                 printMessage("Please type some commands!");
             } catch (DukeException.InvalidTaskNumException ex) {
                 printMessage(ex.getMessage());
+            } catch (DateTimeParseException ex) {
+                printMessage("Invalid task description: "
+                        + "invalid date/time\nPlease use [command type] [task name] / [dd-mm-yyyy] [time (in 24hr " +
+                        "format)" +
+                        "]\ne.g. event lecture / 21-02-2021 1500");
             }
         }
         printMessage("Goodbye for now!");
