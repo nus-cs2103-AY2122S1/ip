@@ -2,7 +2,7 @@ package biscuit.commands;
 
 import biscuit.exceptions.BiscuitException;
 import biscuit.storage.Storage;
-import biscuit.tasks.TaskList;
+import biscuit.task.TaskList;
 import biscuit.ui.Ui;
 
 /**
@@ -10,8 +10,20 @@ import biscuit.ui.Ui;
  */
 public abstract class Command {
 
+    /**
+     * Types of commands available
+     */
+    public enum CommandType {
+        ADD,
+        DELETE,
+        DONE,
+        LIST,
+        EXIT,
+    }
+
     protected CommandType commandType;
     protected String[] userInput;
+
     /**
      * Constructor for biscuit.commands.Command class
      *
@@ -43,14 +55,11 @@ public abstract class Command {
     }
 
     /**
-     * Types of commands available
+     * Get command type of command
+     *
+     * @return Command type
      */
-    public enum CommandType {
-        ADD,
-        DELETE,
-        DONE,
-        LIST,
-        EXIT,
+    public CommandType getCommandType() {
+        return commandType;
     }
-
 }

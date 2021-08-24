@@ -1,7 +1,6 @@
-package biscuit.tasks;
+package biscuit.task;
 
 import biscuit.exceptions.BiscuitException;
-import biscuit.tasks.Task;
 
 import java.util.List;
 

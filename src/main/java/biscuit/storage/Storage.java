@@ -1,10 +1,10 @@
 package biscuit.storage;
 
 import biscuit.exceptions.BiscuitException;
-import biscuit.tasks.Deadline;
-import biscuit.tasks.Event;
-import biscuit.tasks.Task;
-import biscuit.tasks.ToDo;
+import biscuit.task.Deadline;
+import biscuit.task.Event;
+import biscuit.task.Task;
+import biscuit.task.ToDo;
 
 import java.io.File;
 import java.io.IOException;

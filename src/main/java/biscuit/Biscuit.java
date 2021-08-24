@@ -4,7 +4,7 @@ import biscuit.commands.Command;
 import biscuit.exceptions.BiscuitException;
 import biscuit.parser.Parser;
 import biscuit.storage.Storage;
-import biscuit.tasks.TaskList;
+import biscuit.task.TaskList;
 import biscuit.ui.Ui;
 
 import java.util.ArrayList;

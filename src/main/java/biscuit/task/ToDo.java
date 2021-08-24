@@ -1,4 +1,4 @@
-package biscuit.tasks;
+package biscuit.task;
 
 /**
  * biscuit.tasks.ToDo class: For tasks without any date/time attached to it

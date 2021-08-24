@@ -2,7 +2,7 @@ package biscuit.commands;
 
 import biscuit.exceptions.BiscuitException;
 import biscuit.storage.Storage;
-import biscuit.tasks.TaskList;
+import biscuit.task.TaskList;
 import biscuit.ui.Ui;
 
 /**

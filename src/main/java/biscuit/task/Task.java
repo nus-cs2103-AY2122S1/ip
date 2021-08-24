@@ -1,4 +1,4 @@
-package biscuit.tasks;
+package biscuit.task;
 
 /**
  * biscuit.tasks.Task class representing a pending task a User has

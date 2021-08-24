@@ -2,7 +2,7 @@ package biscuit.commands;
 
 import biscuit.exceptions.BiscuitException;
 import biscuit.storage.Storage;
-import biscuit.tasks.*;
+import biscuit.task.*;
 import biscuit.ui.Ui;
 
 import java.time.LocalDate;
@@ -69,7 +69,7 @@ public class AddCommand extends Command {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 return new Deadline(deadlineData[0].trim(), LocalDate.parse(deadlineData[1], formatter));
             } catch (DateTimeParseException e) {
-                throw new BiscuitException("Woof! Please use the date format of dd-MM-yyy (eg. 02-22-1999).");
+                throw new BiscuitException("Woof! Please use the date format of dd-MM-yyy (eg. 02-22-2021).");
             }
         } else {
             throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The date/time for deadline cannot be empty.\n" +
@@ -90,7 +90,7 @@ public class AddCommand extends Command {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
                 return new Event(eventData[0].trim(), LocalDateTime.parse(eventData[1], formatter));
             } catch (DateTimeParseException e) {
-                throw new BiscuitException("Woof! Please use the date format of dd-MM-yyy HH:mm (eg. 02-22-1999 22:02).");
+                throw new BiscuitException("Woof! Please use the date format of dd-MM-yyy HH:mm (eg. 02-22-2021 22:02).");
             }
         } else {
             throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The date/time for event cannot be empty.\n" +

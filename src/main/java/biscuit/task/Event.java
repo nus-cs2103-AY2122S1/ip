@@ -1,4 +1,4 @@
-package biscuit.tasks;
+package biscuit.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
