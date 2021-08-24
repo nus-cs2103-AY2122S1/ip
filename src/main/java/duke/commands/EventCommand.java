@@ -4,6 +4,9 @@ import duke.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Encapsulates the event command, used to create event tasks
+ */
 public class EventCommand extends Command {
 
     public EventCommand(String arguments) {

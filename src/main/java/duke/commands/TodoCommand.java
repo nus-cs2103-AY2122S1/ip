@@ -2,6 +2,9 @@ package duke.commands;
 
 import duke.*;
 
+/**
+ * Encapsulates the todo command, used to create a todo task
+ */
 public class TodoCommand extends Command {
 
     public TodoCommand(String arguments) {

@@ -4,6 +4,9 @@ import duke.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Encapsulates the deadline command, used to create a deadline task
+ */
 public class DeadlineCommand extends Command {
 
     public DeadlineCommand(String arguments) {

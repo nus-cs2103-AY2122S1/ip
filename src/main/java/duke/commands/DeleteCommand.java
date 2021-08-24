@@ -2,6 +2,9 @@ package duke.commands;
 
 import duke.*;
 
+/**
+ * Encapsulates the delete command, used to delete tasks from the task list
+ */
 public class DeleteCommand extends Command {
 
     public DeleteCommand(String arguments) {

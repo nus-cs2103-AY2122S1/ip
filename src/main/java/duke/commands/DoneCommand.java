@@ -2,6 +2,9 @@ package duke.commands;
 
 import duke.*;
 
+/**
+ * Encapsulates the done command, used to complete tasks
+ */
 public class DoneCommand extends Command {
 
     public DoneCommand(String arguments) {

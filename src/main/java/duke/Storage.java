@@ -6,8 +6,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
+/**
+ * Encapsulates a class which interacts with the output file to save data after
+ */
 public class Storage {
     public File txt;
+
+    /**
+     * Loads file to save task list data
+     *
+     * @throws Exception IO or Security Exception thrown by createNewFile
+     */
     public void loadFile() throws Exception {
         Path p = Paths.get("data");
         if (!Files.exists(p)) {
@@ -17,6 +26,12 @@ public class Storage {
         f.createNewFile();
         txt = f;
     }
+
+    /**
+     * Reads the output file and loads any saved tasks
+     *
+     * @param t the TaskList object to save the list of tasks
+     */
     public void readFromFile(TaskList t){
         try {
             BufferedReader br = new BufferedReader(new FileReader(txt));
@@ -46,6 +61,13 @@ public class Storage {
             System.out.println("Read error: " + e.getMessage());
         }
     }
+
+    /**
+     * Writes the task list stored to an output file to persist its data
+     *
+     * @param t The TaskList object that stores the task list to be written to the file
+     * @throws Exception IO Exception from BufferedWriter
+     */
     public void writeToFile(TaskList t) throws Exception {
         BufferedWriter bw = new BufferedWriter(new FileWriter(txt));
         String curLine;
