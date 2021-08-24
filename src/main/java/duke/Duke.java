@@ -1,15 +1,25 @@
 package duke;
 
+/**
+ * This is Duke, a program that serves as a ToDo-List.
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     * Used to initialise Duke.
+     *
+     * @param filePath String representation of the path where Duke will be run from.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.load());
+
             ui.greet2();
             ui.listUi(taskList);
             ui.showLine();
@@ -19,8 +29,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program.
+     * Will keep running until an exit command is given.
+     */
     public void run() {
         ui.greet1();
+
         boolean isExit = false;
         while (!isExit) {
             try {

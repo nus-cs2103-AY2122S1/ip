@@ -7,13 +7,28 @@ import java.io.IOException;
 
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from file and saving tasks in file.
+ */
 public class Storage {
+    /** String representation of the path to the file */
     private String filePath;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param filePath String representation of the path to the file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the tasks from the file.
+     * Returns task as String representation.
+     *
+     * @return String representation of tasks.
+     */
     public String load() {
         String str = "";
 
@@ -35,6 +50,11 @@ public class Storage {
         return str;
     }
 
+    /**
+     * Saves the tasks into a file.
+     *
+     * @param list Contain the tasks that needs to be saved.
+     */
     public void write(TaskList list) {
         String savedData = list.checkOut();
 

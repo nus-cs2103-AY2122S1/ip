@@ -7,9 +7,20 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Contains the task list.
+ */
 public class TaskList {
+    /** A collection of the task */
     private ArrayList<Task> taskList;
 
+    /**
+     * Constructor of TaskList.
+     * Initialises TaskList according to a file loaded by Storage.
+     *
+     * @param data String representation of task given by Storage.
+     * @throws DukeException
+     */
     public TaskList(String data) throws DukeException {
         if (data.isEmpty()) {
             throw new DukeException("No previous data found.\nLet's start a new To-Do List!");
@@ -44,10 +55,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * Constructor for TaskList.
+     * Starts a new task list.
+     */
     public TaskList() {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Adds a task to the task list.
+     *
+     * @param input String representation of task description.
+     * @param taskType Type of task.
+     * @return The Task object added to task list.
+     * @throws DukeException
+     */
     public Task add(String input, int taskType) throws DukeException {
         Task task;
         switch (taskType) {
@@ -67,6 +90,13 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Marks the specified task as done.
+     *
+     * @param i The task number of the task that is to be marked as done.
+     * @return The Task object that is marked as done.
+     * @throws DukeException
+     */
     public Task done(int i) throws DukeException{
         if (i > taskList.size() || i < 1) {
             throw new DukeException("Please enter a valid task number!");
@@ -77,6 +107,13 @@ public class TaskList {
         return taskList.get(i - 1);
     }
 
+    /**
+     * Deletes the specified task.
+     *
+     * @param i The task number of the task that is to be deleted.
+     * @return The Task object that is deleted.
+     * @throws DukeException
+     */
     public Task delete(int i) throws DukeException {
         if (i > taskList.size() || i < 1) {
             throw new DukeException("Please enter a valid task number!");
@@ -84,6 +121,12 @@ public class TaskList {
         return taskList.remove(i - 1);
     }
 
+    /**
+     * Converts all the tasks in TaskList into String representation.
+     * Given to Storage to be saved into a file.
+     *
+     * @return String representation of all the tasks in task list.
+     */
     public String checkOut() {
         String str = "";
         for (int i = 0; i < taskList.size(); i++) {
@@ -92,14 +135,29 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * Returns the number of tasks in TaskList.
+     *
+     * @return The number of tasks in task list.
+     */
     public int size() {
         return taskList.size();
     }
 
+    /**
+     * Checks if TaskList is empty/
+     *
+     * @return True if task list is empty. Returns false otherwise.
+     */
     public boolean isEmpty() {
         return taskList.isEmpty();
     }
 
+    /**
+     * Returns a String representation of all the Task objects in TaskList.
+     *
+     * @return String representation of all the tasks in task list.
+     */
     @Override
     public String toString() {
         String str = "";
@@ -112,9 +170,15 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * Abstract class used to represent a task.
+     */
     public static abstract class Task {
+        /** Description of the task */
         private String task;
+        /** Checks if the task has been completed */
         private boolean isDone;
+
         private DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma");
 
@@ -144,6 +208,12 @@ public class TaskList {
     }
 
     private static class Todo extends Task {
+        /**
+         * Constructor for a Todo Task.
+         *
+         * @param input String representation of task description.
+         * @throws DukeException
+         */
         public Todo(String input) throws DukeException {
             String[] inputs = input.split(" ");
             if (inputs.length == 1) {
@@ -155,6 +225,13 @@ public class TaskList {
             super.task = tTask;
         }
 
+        /**
+         * Constructor for a Todo Task.
+         * Used for creating a Todo Task from a loaded file.
+         *
+         * @param isDone Indicates whether the task has been completed.
+         * @param description Task description.
+         */
         public Todo(boolean isDone, String description) {
             super.isDone =  isDone;
             super.task = description;
@@ -172,8 +249,15 @@ public class TaskList {
     }
 
     private static class Deadline extends Task {
+        /** Date and time representation of deadline */
         private LocalDateTime by;
 
+        /**
+         * Constructor for a Deadline Task.
+         *
+         * @param input String representation of task description.
+         * @throws DukeException
+         */
         public Deadline(String input) throws DukeException {
             String[] inputs = input.split(" ");
             if (inputs.length == 1) {
@@ -199,6 +283,14 @@ public class TaskList {
             }
         }
 
+        /**
+         * Constructor for a Deadline Task.
+         * Used for creating a Deadline Task from a loaded file.
+         *
+         * @param isDone Indicates whether the task has been completed.
+         * @param description Task description.
+         * @param by Date and time representation of deadline.
+         */
         public Deadline(boolean isDone, String description, String by) {
             super.isDone = isDone;
             super.task = description;
@@ -217,8 +309,15 @@ public class TaskList {
     }
 
     private static class Event extends Task {
+        /** Date and time representation of event */
         private LocalDateTime at;
 
+        /**
+         * Constructor for an Event Task.
+         *
+         * @param input String representation of task description.
+         * @throws DukeException
+         */
         public Event(String input) throws DukeException {
             String[] inputs = input.split(" ");
             if (inputs.length == 1) {
@@ -244,6 +343,14 @@ public class TaskList {
             }
         }
 
+        /**
+         * Constructor for an Event Task.
+         * Used for creating an Event Task from a loaded file.
+         *
+         * @param isDone Indicates whether the task has been completed.
+         * @param description Task description.
+         * @param at Date and time representation of event.
+         */
         public Event(boolean isDone, String description, String at) {
             super.isDone = isDone;
             super.task = description;
