@@ -14,15 +14,32 @@ public class Duke {
     private static String sepLineOpen = "///<<<============ Duke Says: ===========>>>\\\\\\";
     private static String sepLineClose = "\\\\\\<<<===================================>>>///";
 
-    private static TDList currTDL;
-    private static boolean isExited;
 
+    private static boolean isExited;
 
 
     // Storage and Management of Duke Objects
     private static Duke dukeInstance;
 
+    private DukeCommandParser currDukeCmdParser;
+    private DukeStorageManager currStorageMgr;
+    private DukeUI currUiCtrl;
+    private TDList currTDL;
+
     private Duke() {
+        currTDL = new TDList();
+        currUiCtrl = new DukeUI();
+        currDukeCmdParser = new DukeCommandParser();
+
+        //Processes the path to use to access storage file
+        try {
+            Path xmlPath = Paths.get("../", "dukeDocs", "listSave1.xml");
+            //System.out.println(xmlPath.getFileName());
+            currStorageMgr = new DukeStorageManager(xmlPath);
+        } catch (InvalidPathException e) {
+            currStorageMgr = new DukeStorageManager();
+        }
+
 
     }
 
