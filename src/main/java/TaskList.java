@@ -78,17 +78,17 @@ public class TaskList {
             String[] commandArr = sc.nextLine().split("\\|");
             boolean isDone = commandArr[1].equals("1");
             switch (commandArr[0]) {
-                case "T":
-                    add(new ToDo(commandArr[2], isDone));
-                    break;
-                case "D":
-                    LocalDate deadlineDate = LocalDate.parse(commandArr[3]);
-                    add(new Deadline(commandArr[2], deadlineDate, isDone));
-                    break;
-                case "E":
-                    LocalDate eventDate = LocalDate.parse(commandArr[3]);
-                    add(new Event(commandArr[2], eventDate, isDone));
-                    break;
+            case "T":
+                add(new ToDo(commandArr[2], isDone));
+                break;
+            case "D":
+                LocalDate deadlineDate = LocalDate.parse(commandArr[3]);
+                add(new Deadline(commandArr[2], deadlineDate, isDone));
+                break;
+            case "E":
+                LocalDate eventDate = LocalDate.parse(commandArr[3]);
+                add(new Event(commandArr[2], eventDate, isDone));
+                break;
             }
         }
         sc.close();
