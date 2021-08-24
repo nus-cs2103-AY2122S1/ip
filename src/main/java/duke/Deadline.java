@@ -6,6 +6,7 @@ import java.time.LocalDate;
  * A type of <code>Task</code> that has a end time denoted by <code>/by</code> in the user input.
  */
 public class Deadline extends Task {
+
     protected String by;
     protected LocalDate byDate;
 

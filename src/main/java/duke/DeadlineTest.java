@@ -7,6 +7,7 @@ import org.junit.Test;
  * A class to test the methods in <code>Deadline</code>.
  */
 public class DeadlineTest {
+
     @Test
     public void testDeadlineToString(){
         Deadline deadline = new Deadline("description", "tomorrow", false, false);

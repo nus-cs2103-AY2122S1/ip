@@ -5,6 +5,7 @@ package duke;
  * Split into 3 types: <code>Todo, Deadline, Event</code>.
  */
 public class Task {
+
     protected String description;
     protected boolean isDone;
     protected Category category;
