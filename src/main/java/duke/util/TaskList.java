@@ -2,19 +2,19 @@ package duke.util;
 
 import duke.task.Deadlines;
 import duke.task.Events;
-import duke.task.Keyword;
 import duke.task.Task;
 import duke.task.ToDos;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Deals with storing of task as well as operations involving the tasks.
  *
  * @author marcuspeh
- * @version A-JavaDoc
- * @since 23 Aug 2021
+ * @version Level-9
+ * @since 21 Aug 2021
  */
 public class TaskList {
     /** List to store all the task. */
@@ -84,7 +84,7 @@ public class TaskList {
      */
     public void addTodo(String message) {
         try {
-            addTask(new ToDos(message.substring(Keyword.TODOS.length() + 1)));
+            addTask(new ToDos(message));
             saveTaskList();
         } catch (IndexOutOfBoundsException e) {
             ui.todoErrorMessage();
@@ -122,6 +122,21 @@ public class TaskList {
      */
     private void saveTaskList() {
         storage.exportTask(this.taskList);
+    }
+
+    /**
+     * Finds all the task that contains the string S and returns a array containing
+     * all the tasks.
+     *
+     * @param s Keyword to search for the task.
+     * @return String list containing all the description of the task.
+     */
+    public void findTask(String s) {
+        List<String> taskFiltered = taskList.stream()
+                .filter(task -> task.getTask().contains(s))
+                .map(x -> x.toString())
+                .collect(Collectors.toList());
+        ui.searchOutputMessage(taskFiltered);
     }
 
     public List<Task> getTaskList() {
