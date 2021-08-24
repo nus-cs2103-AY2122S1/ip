@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -118,6 +121,7 @@ public class Duke {
         int descriptionEnd;
         String description;
         String dateTime;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         Task task;
         switch (type) {
             case TODO:
@@ -139,7 +143,6 @@ public class Duke {
                 task = new ToDo(description);
                 break;
             case DEADLINE:
-                // DOES NOT CATCH INVALID INPUTS SUCH AS "deadline ${String} /by /by"
                 try {
                     // filter out deadlineXXXX
                     // StringIndexOutOfBoundsException thrown here if input = "deadline"
@@ -160,13 +163,13 @@ public class Duke {
                     if (dateTime.trim().isEmpty()) {
                         throw new InvalidArgumentsException();
                     }
-                } catch (StringIndexOutOfBoundsException e) {
+                    task = new Deadline(description, LocalDateTime.parse(dateTime, formatter));
+                } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
                     throw new InvalidArgumentsException();
                 }
-                task = new Deadline(description, dateTime);
+
                 break;
             case EVENT:
-                // DOES NOT CATCH INVALID INPUTS SUCH AS "event ${String} /at /at"
                 try {
                     // filter out eventXXXX
                     // StringIndexOutOfBoundsException thrown here if input = "event"
@@ -187,10 +190,10 @@ public class Duke {
                     if (dateTime.trim().isEmpty()) {
                         throw new InvalidArgumentsException();
                     }
-                } catch (StringIndexOutOfBoundsException e) {
+                    task = new Event(description, LocalDateTime.parse(dateTime, formatter));
+                } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
                     throw new InvalidArgumentsException();
                 }
-                task = new Event(description, dateTime);
                 break;
             default:
                 throw new InvalidTaskException();
