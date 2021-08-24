@@ -1,11 +1,16 @@
+import java.time.LocalTime;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;
 import java.io.FileWriter; // Import this class to handle errors
 import java.io.IOException;
+import java.time.LocalDate;
+
 
 /**
  * Project Duke
@@ -50,17 +55,43 @@ public class Duke {
         String str = "";
         boolean bool = false;
         for(int i = 1; i < arr.length; i++) {
-            if (arr[i].charAt(0) == '/') {
-                bool = true;
-                str += arr[i].substring(1) + ": ";
-            }
-            else if (bool && i == arr.length - 1) {
-                str += arr[i];
-            }
-            else if (bool) {
-                str += arr[i] + " ";
-            }
+            if (!bool) {
+                if (arr[i].charAt(0) == '/') {
+                    bool = true;
+                    str += arr[i].substring(1) + ": ";
+                }
+            } else {
+                if (arr[i].length() == 10 && arr[i].charAt(4) == '-' && arr[i].charAt(7) == '-') {
+                    LocalDate ld = LocalDate.parse(arr[i]);
+                    str += ld.getDayOfMonth() + " "
+                            + ld.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " "
+                                + ld.getYear();
+                    if (i != arr.length - 1) {
+                        str += " ";
+                    }
+                } else if (arr[i].length() == 5 && arr[i].charAt(2) == ':') {
+                    LocalTime lt = LocalTime.parse(arr[i]);
+                    int hour = lt.getHour();
+                    String hourSuffix = hour < 12 ? "AM" : "PM";
+                    if (hour == 0) {
+                        hour = 12;
+                    } else if (hour > 12) {
+                        hour -= 12;
+                    }
+                    int minute = lt.getMinute();
+                    String minutePrefix = minute < 10 ? "0" : "";
+                    str += hour + ":" + minutePrefix + minute + " " + hourSuffix;
+                    if (i != arr.length - 1) {
+                        str += " ";
+                    }
 
+                } else {
+                    str += arr[i];
+                    if (i != arr.length - 1) {
+                        str += " ";
+                    }
+                }
+            }
         }
         return str;
     }
@@ -147,12 +178,11 @@ public class Duke {
                 } else if (arr[0].equals("done")) {
                     if (arr.length == 1) {
                         throw new InvalidCommandException("Please specify a number");
-                    } else if (arr[0].equals("done") && !isNumeric(arr[1])) {
+                    } else if (!isNumeric(arr[1])) {
                         throw new InvalidCommandException("Please enter a number");
-                    } else if (arr[0].equals("done") && ls.size() == 0) {
+                    } else if (ls.size() == 0) {
                         throw new InvalidCommandException("You have not added any task!");
-                    } else if (arr[0].equals("done")
-                            && (Integer.parseInt(arr[1]) > ls.size()
+                    } else if ((Integer.parseInt(arr[1]) > ls.size()
                             || Integer.parseInt(arr[1]) <= 0)) {
                         throw new InvalidValueException("Enter a valid number!");
                     } else {
@@ -163,12 +193,11 @@ public class Duke {
                 } else if (arr[0].equals("delete")) {
                     if (arr.length == 1) {
                         throw new InvalidCommandException("Please specify a number");
-                    } else if (arr[0].equals("delete") && !isNumeric(arr[1])) {
+                    } else if (!isNumeric(arr[1])) {
                         throw new InvalidCommandException("Please enter a number");
-                    } else if (arr[0].equals("delete") && ls.size() == 0) {
+                    } else if (ls.size() == 0) {
                         throw new InvalidCommandException("You have not added any task!");
-                    } else if (arr[0].equals("delete")
-                            && (Integer.parseInt(arr[1]) > ls.size()
+                    } else if ((Integer.parseInt(arr[1]) > ls.size()
                             || Integer.parseInt(arr[1]) <= 0)) {
                         throw new InvalidValueException("Enter a valid number!");
                     } else {
