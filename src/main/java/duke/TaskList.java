@@ -22,9 +22,7 @@ public class TaskList {
     }
 
     public void printTasks(){
-        for (int i = 0; i < this.tasks.size(); i++) {
-            System.out.println(i + ": " + this.tasks.get(i));
-        }
+        System.out.println(this.toString());
     }
 
     public void doneTask(int Id) throws DukeException{
@@ -49,6 +47,14 @@ public class TaskList {
             txt = txt + tasks.get(i).saveTask() + "\n";
         }
         return txt;
+    }
 
+    @Override
+    public String toString(){
+        StringBuilder out = new StringBuilder();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            out.append(i).append(": ").append(this.tasks.get(i).toString()).append("\n");
+        }
+        return out.toString();
     }
 }
