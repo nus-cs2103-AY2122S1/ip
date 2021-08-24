@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * Deals with the Command given by user and implement the corresponding actions.
  */
@@ -184,6 +186,7 @@ public abstract class Command {
         }
     }
 
+
     /**
      * Handles when Duke do not understand the command given.
      */
@@ -216,6 +219,39 @@ public abstract class Command {
             }
 
             return false;
+        }
+    }
+
+    /**
+     * Handles finding keyword in task description of task in TaskList.
+     */
+    public static class FindCommand extends Command {
+        /** The list that tasks with keyword are added to */
+        private ArrayList<TaskList.Task> relatedList;
+        /** The keyword used to find tasks */
+        private String keyword;
+
+        /**
+         * Constructor for the FindCommand.
+         *
+         * @param keyword The keyword used to find tasks.
+         */
+        public FindCommand(String keyword) {
+            this.relatedList = new ArrayList<>();
+            this.keyword = keyword;
+        }
+
+        /**
+         * Finds tasks with keyword and add them into a list.
+         *
+         * @param taskList The TaskList that is saved in Duke.
+         * @param ui The Ui of Duke.
+         * @param storage The Storage of Duke.
+         */
+        @Override
+        public void execute(TaskList taskList, Ui ui, Storage storage) {
+            taskList.find(relatedList, keyword);
+            ui.findUi(relatedList);
         }
     }
 }

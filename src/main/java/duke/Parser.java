@@ -10,7 +10,7 @@ public class Parser {
      *
      * @param input String representation of the input given by user.
      * @return The corresponding Command.
-     * @throws DukeException
+     * @throws DukeException Throw DukeException.
      */
     public static Command parse(String input) throws DukeException {
         input = input.strip();
@@ -47,6 +47,14 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException("Invalid input! Please enter the task number after 'delete'.");
             }
+        case "find":
+            try {
+                String keyword = input.substring(5);
+                return new Command.FindCommand(keyword);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("Insufficient input received! Please add in keyword after 'find'.");
+            }
+
         case "todo":
             return new Command.AddCommand(input, 0);
         case "deadline":

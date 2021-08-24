@@ -19,7 +19,7 @@ public class TaskList {
      * Initialises TaskList according to a file loaded by Storage.
      *
      * @param data String representation of task given by Storage.
-     * @throws DukeException
+     * @throws DukeException Throw DukeException.
      */
     public TaskList(String data) throws DukeException {
         if (data.isEmpty()) {
@@ -75,7 +75,7 @@ public class TaskList {
      * @param input String representation of task description.
      * @param taskType Type of task.
      * @return The Task object added to task list.
-     * @throws DukeException
+     * @throws DukeException Throw DukeException.
      */
     public Task add(String input, int taskType) throws DukeException {
         Task task;
@@ -103,7 +103,7 @@ public class TaskList {
      *
      * @param i The task number of the task that is to be marked as done.
      * @return The Task object that is marked as done.
-     * @throws DukeException
+     * @throws DukeException Throw DukeException.
      */
     public Task done(int i) throws DukeException{
         if (i > taskList.size() || i < 1) {
@@ -122,7 +122,7 @@ public class TaskList {
      *
      * @param i The task number of the task that is to be deleted.
      * @return The Task object that is deleted.
-     * @throws DukeException
+     * @throws DukeException Throw DukeException.
      */
     public Task delete(int i) throws DukeException {
         if (i > taskList.size() || i < 1) {
@@ -130,6 +130,22 @@ public class TaskList {
         }
 
         return taskList.remove(i - 1);
+    }
+
+
+    /**
+     * Looks for keyword in TaskList.
+     * Adds Task object with keyword into a list.
+     *
+     * @param relatedList The list that tasks with keyword are added to.
+     * @param keyword The keyword.
+     */
+    public void find(ArrayList<Task> relatedList, String keyword) {
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).hasKeyword(keyword)) {
+                relatedList.add(taskList.get(i));
+            }
+        }
     }
 
     /**
@@ -211,6 +227,16 @@ public class TaskList {
             }
         }
 
+        /**
+         * Checks if Task contains a certain keyword in its description.
+         *
+         * @param keyword The keyword.
+         * @return True is task contains keyword in its description. Returns false otherwise.
+         */
+        public boolean hasKeyword(String keyword) {
+            return task.contains(keyword);
+        }
+
         @Override
         public String toString() {
             String str = String.format("[%s] %s", this.isDone(), this.task);
@@ -228,7 +254,7 @@ public class TaskList {
          * Constructor for a Todo Task.
          *
          * @param input String representation of task description.
-         * @throws DukeException
+         * @throws DukeException Throw DukeException.
          */
         public Todo(String input) throws DukeException {
             String[] inputs = input.split(" ");
@@ -275,7 +301,7 @@ public class TaskList {
          * Constructor for a Deadline Task.
          *
          * @param input String representation of task description.
-         * @throws DukeException
+         * @throws DukeException Throw DukeException.
          */
         public Deadline(String input) throws DukeException {
             String[] inputs = input.split(" ");
@@ -338,7 +364,7 @@ public class TaskList {
          * Constructor for an Event Task.
          *
          * @param input String representation of task description.
-         * @throws DukeException
+         * @throws DukeException Throw DukeException.
          */
         public Event(String input) throws DukeException {
             String[] inputs = input.split(" ");
