@@ -237,7 +237,7 @@ class Deadline extends Task {
      * Constructor for Deadline.
      *
      * @param description user input.
-     * @param deadLine date, day and/or time.
+     * @param deadLine    date, day and/or time.
      */
     public Deadline(String description, String deadLine) {
         super(description);
@@ -248,8 +248,8 @@ class Deadline extends Task {
      * Constructor for Deadline.
      *
      * @param description user input.
-     * @param date for official dates
-     * @param deadLine date, day and/or time.
+     * @param date        for official dates
+     * @param deadLine    date, day and/or time.
      */
     public Deadline(String description, LocalDate date, String deadLine) {
         super(description);
@@ -299,7 +299,7 @@ class Event extends Task {
      * Constructor for Event.
      *
      * @param description user input.
-     * @param timing date, day and/or time.
+     * @param timing      date, day and/or time.
      */
     public Event(String description, String timing) {
         super(description);
@@ -310,8 +310,8 @@ class Event extends Task {
      * Constructor for Event.
      *
      * @param description user input.
-     * @param date for official dates
-     * @param timing date, day and/or time.
+     * @param date        for official dates
+     * @param timing      date, day and/or time.
      */
     public Event(String description, LocalDate date, String timing) {
         super(description);
