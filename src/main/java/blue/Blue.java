@@ -46,12 +46,14 @@ public class Blue {
         EventHandler eventHandler = new EventHandler(tasks);
         DoneHandler doneHandler = new DoneHandler(tasks);
         DeleteHandler deleteHandler = new DeleteHandler(tasks);
+        FindHandler findHandler = new FindHandler(tasks);
         commandHandlers.put(Command.LIST, listHandler);
         commandHandlers.put(Command.TODO, toDoHandler);
         commandHandlers.put(Command.DEADLINE, deadlineHandler);
         commandHandlers.put(Command.EVENT, eventHandler);
         commandHandlers.put(Command.DONE, doneHandler);
         commandHandlers.put(Command.DELETE, deleteHandler);
+        commandHandlers.put(Command.FIND, findHandler);
     }
 
     private boolean handle(String input) {
