@@ -2,6 +2,8 @@ package duke.ui;
 
 import duke.tasklist.TaskList;
 
+import java.util.ArrayList;
+
 public class Ui {
     private String linebreak = "~~~~~~~~~~";
 
@@ -60,6 +62,21 @@ public class Ui {
     public void showCompletion(String s) {
         System.out.println("Yay good job!");
         System.out.println(s + " has been completed");
+    }
+
+    public void showSearch(ArrayList<String> wordList) {
+
+        if (wordList.isEmpty()) {
+            System.out.println("You don't have anything in your todo list with that word!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            int i = 1;
+            for (String s : wordList) {
+                System.out.println(i + ". " + s);
+                i++;
+            }
+            System.out.println("Good luck!");
+        }
     }
 
 }
