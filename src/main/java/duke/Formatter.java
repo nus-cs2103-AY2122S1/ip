@@ -6,8 +6,17 @@ import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 
+/**
+ * The class that will format a string to a task or a task to a string.
+ */
 public class Formatter {
 
+    /**
+     * Method that formats a String to a Task object.
+     * @param input the string from file.
+     * @return the formatted task.
+     * @throws DukeException if there are any errors.
+     */
     public Task formatStringToTask(String input) throws DukeException {
         String[] delimitedInput = input.split("[|]");
         String taskType = delimitedInput[0];
@@ -23,6 +32,11 @@ public class Formatter {
         return Task.emptyTask();
     }
 
+    /**
+     * Method that formats a Task to a String.
+     * @param input the task from a list.
+     * @return the formatted string.
+     */
     public String formatTaskToString(Task input) {
         StringBuilder result = new StringBuilder();
         TaskType taskType = input.taskType();
