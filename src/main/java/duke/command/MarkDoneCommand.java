@@ -1,4 +1,8 @@
+package duke.command;
+
 import java.io.IOException;
+import duke.DukeException;
+import duke.storage.TaskList;
 
 public class MarkDoneCommand implements Command{
     int index;

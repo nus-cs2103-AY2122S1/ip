@@ -1,5 +1,9 @@
+package duke.storage;
+
 import java.io.*;
 import java.util.ArrayList;
+import duke.DukeException;
+import duke.task.Task;
 
 public class TaskList {
     private ArrayList<Task> tasks;

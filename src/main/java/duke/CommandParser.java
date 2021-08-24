@@ -1,6 +1,11 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import duke.command.*;
+import duke.task.*;
+import duke.storage.TaskList;
 
 public class CommandParser {
     private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");

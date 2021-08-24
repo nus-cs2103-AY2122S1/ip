@@ -1,14 +1,12 @@
+package duke;
+
+import duke.storage.TaskList;
+
 public class Duke {
-    private TaskList taskStorage;
     private Ui ui;
 
     public Duke() {
         this.ui = new Ui();
-        try {
-            taskStorage = TaskList.getInstance();
-        } catch (DukeException e) {
-            ui.printError(e.getMessage());
-        }
     }
 
     public void run() {

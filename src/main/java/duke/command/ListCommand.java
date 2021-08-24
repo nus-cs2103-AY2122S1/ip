@@ -1,11 +1,15 @@
+package duke.command;
+
 import java.util.ArrayList;
+import duke.DukeException;
+import duke.storage.TaskList;
+import duke.task.Task;
 
 public class ListCommand implements Command{
     @Override
     public String run() throws DukeException {
         if (TaskList.getInstance().getSize() == 0) {
-            Message.print("No task added yet.");
-            return "";
+            return "No task added yet";
         }
         ArrayList<Task> tasks = TaskList.getInstance().getAll();
         String message = "Here are the tasks in your list:\n";
