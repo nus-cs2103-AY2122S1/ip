@@ -15,10 +15,17 @@ import duke.exception.WrongCommandFormatException;
 public class Storage {
     private MyList list;
 
+    /**
+     * Constructor for the storage class
+     * @param list the list to load the storage data into
+     */
     public Storage(MyList list) {
         this.list = list;
     }
 
+    /**
+     * Method to load the data from Data.txt file into the list if any.
+     */
     public void load() {
         try {
             File dataFile = new File("./Data.txt");
@@ -34,6 +41,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Takes the string representation of the task and converts it back into
+     * the corresponding task object.
+     * @param s The string representation of the task.
+     * @return The corresponding task object.
+     */
     public Task getTaskFromString(String s) {
         String taskType = s.substring(0, 3);
         String taskDescription = s.substring(7);
@@ -71,6 +84,9 @@ public class Storage {
         return t;
     }
 
+    /**
+     * Method to store the string representation of a task into the Data.txt file.
+     */
     public void writeToFile() {
         try {
             int listLength = this.list.getListSize();
