@@ -3,22 +3,21 @@ package duke.tasks;
 import duke.utils.DukeDateTime;
 import duke.utils.DukeException;
 
-import java.time.format.DateTimeFormatter;
-
 public abstract class Task {
-    public final static DukeException FORMAT_EXCEPTION =
-            new DukeException("I don't understand this entry, enter 'help' to learn the correct formatting!");
+    public final static DukeException FORMAT_EXCEPTION = new DukeException("I don't understand this entry, enter " + 
+            "'help' to learn the correct formatting!");
     protected String desc;
     protected boolean done;
-    protected String details = new String();
+    protected String details = "";
     protected DukeDateTime dateTime = new DukeDateTime();
 
-    public Task() {}
+    public Task() {
+    }
 
     public Task(String desc) {
-            this.desc = desc;
+        this.desc = desc;
     }
-    
+
     public Task(String desc, boolean done) {
         this.desc = desc;
         this.done = done;
@@ -31,19 +30,22 @@ public abstract class Task {
     public void markComplete() {
         done = true;
     }
-    
+
     abstract void addTime(String time) throws DukeException;
-    
+
     public abstract String toDB();
-    
-    @Override 
+
+    @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
+        if (this == obj) {
+            return true;
+        }
         if (obj instanceof Task) {
             Task that = (Task) obj;
-            return (desc.equals(that.desc) && done == that.done 
-                && details.equals((that.details)) && dateTime.equals(that.dateTime));
-        } else return false;
+            return (desc.equals(that.desc) && done == that.done && details.equals((that.details)) && dateTime.equals(that.dateTime));
+        } else {
+            return false;
+        }
     }
 
     @Override
