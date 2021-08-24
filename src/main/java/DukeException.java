@@ -1,5 +1,5 @@
 /**
- * This is the DukeException Class that contains all the Exceptions related to this programme.
+ * Represents DukeException that contains all the Exceptions related to this program.
  * 
  * @author Sherman Ng Wei Sheng
  */

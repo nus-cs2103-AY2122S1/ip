@@ -7,7 +7,7 @@ public class Deadline extends Task {
     private final String dateTime;
     
     /**
-     * Constructor to initialise a new Deadline.
+     * Constructor to initialize a new Deadline.
      *
      * @param description The description of the task.
      * @param dateTime The date and time of the deadline for the task.
@@ -18,7 +18,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Overridden toString method.
+     * Returns the string representation of the task in a desired format.
      *
      * @return The String representation of the task, prefixed with a status icon and deadlines identifier.
      */

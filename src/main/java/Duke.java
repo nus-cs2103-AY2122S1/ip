@@ -10,7 +10,7 @@ public class Duke {
     private final TaskList list;
 
     /**
-     * Class constructor specifying the name of the Chatbot to be created.
+     * Constructor specifying the name of the Chatbot to be created.
      *
      * @param name Name of the Chatbot.
      */
@@ -20,7 +20,7 @@ public class Duke {
     }
 
     /**
-     * Print the greeting message of the Chatbot.
+     * Prints the greeting message of the Chatbot.
      */
     private void greet() {
         String message =
@@ -30,7 +30,7 @@ public class Duke {
     }
 
     /**
-     * Print the goodbye message of the Chatbot.
+     * Prints the goodbye message of the Chatbot.
      */
     private void terminate() {
         String message = "Bye. Hope to see you again soon!";
@@ -38,7 +38,7 @@ public class Duke {
     }
 
     /**
-     * Add the given todo task into the list and print a log accordingly.
+     * Adds the given todo task into the list and print a log accordingly.
      * 
      * @param command The input command given by user.
      * @throws IllegalFormatException if the description of a todo is empty.
@@ -60,7 +60,7 @@ public class Duke {
     }
 
     /**
-     * Add the given deadline task into the list and print a log accordingly.
+     * Adds the given deadline task into the list and print a log accordingly.
      *
      * @param command The input command given by user.
      * @throws IllegalFormatException if the description of a deadline is empty or invalid deadline given.
@@ -92,7 +92,7 @@ public class Duke {
     }
 
     /**
-     * Add the given event task into the list and print a log accordingly.
+     * Adds the given event task into the list and print a log accordingly.
      *
      * @param command The input command given by user.
      * @throws IllegalFormatException if the description of a deadline is empty or invalid deadline given.
@@ -124,7 +124,7 @@ public class Duke {
     }
 
     /**
-     * Check if a given string is a command that denotes that a task is done.
+     * Checks if a given string is a command that denotes that a task is done.
      * If it is a valid Done command, the corresponding task will be marked done.
      * If it is a Done command with an incorrect index, an error prompt will be displayed.
      * For all other command received, returns false.
@@ -209,7 +209,7 @@ public class Duke {
     }
     
     /**
-     * Helper method to print the log for task object being added
+     * Prints the log for task object being added
      *
      * @param task The task object to be printed.
      */
@@ -222,7 +222,7 @@ public class Duke {
     }
     
     /**
-     * Method to format and print to console.
+     * Prints the input content to console with formatting.
      * 
      * @param content The content to be printed, wrapped between horizontal lines.
      */
@@ -235,7 +235,7 @@ public class Duke {
     }
 
     /**
-     * Method to start the Chatbot and listen for user input.
+     * Starts the Chatbot and listens for user input.
      *
      * @param sc Scanner object to listen for user input.
      */
@@ -273,7 +273,7 @@ public class Duke {
     }
 
     /**
-     * Main method to initialise a Duke object.
+     * Initializes a Duke object and runs the program.
      *
      * @param args The command line arguments.
      */

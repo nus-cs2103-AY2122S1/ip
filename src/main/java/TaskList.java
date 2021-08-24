@@ -10,14 +10,14 @@ public class TaskList {
     private final List<Task> list;
 
     /**
-     * Constructor to initialise a new TaskList
+     * Constructor to initialize a new TaskList
      */
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
     /**
-     * Method to add a new task to the list.
+     * Adds a new task to the list.
      * 
      * @param task Task to be added
      */
@@ -26,7 +26,7 @@ public class TaskList {
     }
 
     /**
-     * Method to retrieve the size of the list.
+     * Returns the size of the list.
      * 
      * @return The size of the TaskList.
      */
@@ -35,7 +35,7 @@ public class TaskList {
     }
 
     /**
-     * Method to obtain the Task at the given index.
+     * Returns the Task at the given index.
      * 
      * @param index The index to retrieve the Task from in the TaskList.
      * @return The Task that is located at the given index.
@@ -45,6 +45,7 @@ public class TaskList {
     }
 
     /**
+     * Marks the task at the index as done.
      * If given a valid index, returns true and mark the Task as done.
      * If given an invalid index, returns false.
      * 
@@ -62,7 +63,7 @@ public class TaskList {
     }
 
     /**
-     * Given a valid index, remove the task at the index and return that Task.
+     * Removes the task at the given index and returns that Task.
      * 
      * @param index The index of the task to be removed.
      * @return The task that is removed.

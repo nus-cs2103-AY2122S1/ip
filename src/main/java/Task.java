@@ -8,7 +8,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor to initialise a new Task.
+     * Constructor to initialize a new Task.
      * 
      * @param description The description of the task.
      */
@@ -18,7 +18,7 @@ public class Task {
     }
 
     /**
-     * Method to obtain the status icon of the particular task.
+     * Returns the status icon of the particular task.
      * 
      * @return The status icon depending on whether the task is marked as done.
      */
@@ -27,14 +27,14 @@ public class Task {
     }
 
     /**
-     * Method to mark the task as done.
+     * Marks the task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Overridden toString method.
+     * Returns the string representation of the task in a desired format.
      * 
      * @return The String representation of the task, prefixed with a status icon.
      */

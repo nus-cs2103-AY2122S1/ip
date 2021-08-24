@@ -6,7 +6,7 @@
 public class ToDo extends Task {
     
     /**
-     * Constructor to initialise a new ToDo.
+     * Constructor to initialize a new ToDo.
      *
      * @param description The description of the task.
      */
@@ -15,7 +15,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Overridden toString method.
+     * Returns the string representation of the task in a desired format.
      *
      * @return The String representation of the task, prefixed with a status icon and todos identifier.
      */
