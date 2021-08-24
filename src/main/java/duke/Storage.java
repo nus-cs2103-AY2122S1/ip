@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
 public class Storage {
-    public File txt;
+    private File txt;
     public void loadFile() throws Exception {
         Path p = Paths.get("data");
         if (!Files.exists(p)) {
@@ -17,7 +17,7 @@ public class Storage {
         f.createNewFile();
         txt = f;
     }
-    public void readFromFile(TaskList t){
+    public void readFromFile(TaskList t) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(txt));
             String curLine;

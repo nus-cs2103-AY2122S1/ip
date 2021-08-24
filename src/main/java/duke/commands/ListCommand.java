@@ -5,7 +5,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.UI;
 
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     public ListCommand(String arguments) {
         super("");

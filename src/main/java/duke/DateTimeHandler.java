@@ -11,7 +11,7 @@ public class DateTimeHandler {
             "dd/MM/yyyy hh:mm a",
             "dd/MM/yyyy HHmm"
     };
-    DateTimeFormatter[] dtfList = new DateTimeFormatter[formats.length];
+    private final DateTimeFormatter[] dtfList = new DateTimeFormatter[formats.length];
 
     public DateTimeHandler() {
         for(int i=0; i<formats.length; i++) {

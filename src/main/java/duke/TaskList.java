@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    public List<Task> list = new ArrayList<>();
+    private final List<Task> list = new ArrayList<>();
     public void addToList(Task t) {
         list.add(t);
     }
