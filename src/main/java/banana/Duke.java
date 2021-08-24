@@ -197,8 +197,7 @@ class Event extends Task {
             return timing;
         }
     }
-
-
+    
     @Override
     public String toString() {
         if (date == null) {
