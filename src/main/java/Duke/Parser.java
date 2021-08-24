@@ -2,6 +2,7 @@ package Duke;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
     private TaskList tasks;
@@ -82,17 +83,20 @@ public class Parser {
                     throw new InvalidFormatException("☹ OOPS!!! The descriptions of a deadline cannot be empty.");
                 }
                 else {
-                    LocalDate date = LocalDate.parse(spl[1].substring(3));
-                    if (date.isBefore(LocalDate.now())) {
-                        throw new DukeException("The deadline was in the past!");
-                    } else {
-                        tasks.addDeadline(spl[0], date);
-                        try {
+                    try {
+                        LocalDate date = LocalDate.parse(spl[1].substring(3));
+                        if (date.isBefore(LocalDate.now())) {
+                            throw new DukeException("The deadline was in the past!");
+                        } else {
+                            tasks.addDeadline(spl[0], date);
                             storage.writeToFile(tasks.inArrayList());
-                        } catch (IOException e) {
-                            System.out.println("Something went wrong: " + e.getMessage());
                         }
+                    } catch (IOException e) {
+                        System.out.println("Something went wrong: " + e.getMessage());
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Please enter the date in the format of yyyy-mm-dd!");
                     }
+
                 }
             }
             else {
