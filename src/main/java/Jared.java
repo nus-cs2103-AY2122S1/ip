@@ -1,8 +1,53 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Jared {
     private static ArrayList<Task> history = new ArrayList<Task>();
+    private static final String filename = "data.txt";
+    /**
+     * Main function
+     */
+    public static void main(String[] args) {
+        String intro = "____________________________________________________________\n" +
+                "Hello! I'm Jared\n" +
+                "What can I do for you?\n" +
+                "____________________________________________________________";
+        Scanner scan = new Scanner(System.in);
+        System.out.println(intro);
+
+        try {
+            loadData();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+
+        while (scan.hasNextLine()) {
+            String next = scan.nextLine();
+            String[] inputArr = next.split(" ",2);
+            String command = inputArr[0];
+            try {
+                if (command.equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    System.exit(0);
+                    scan.close();
+                } else if (command.equals("list")) {
+                    list();
+                } else if (command.equals("done")) {
+                    done(next);
+                } else if (command.equals("delete")) {
+                    delete(next);
+                } else {
+                    add(command, next);
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+    }
 
     private static void add(String command, String next) throws DukeException {
         Task newTask;
@@ -18,8 +63,8 @@ public class Jared {
         } else if (command.equals("deadline")) {
             try {
                 String body = next.split(" ", 2)[1];
-                desc = body.split("/by", 2)[0];
-                date = body.split("/by", 2)[1];
+                desc = body.split("/by", 2)[0].trim();
+                date = body.split("/by", 2)[1].trim();
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
             }
@@ -27,8 +72,8 @@ public class Jared {
         } else if (command.equals("event")) {
             try {
                 String body = next.split(" ", 2)[1];
-                desc = body.split("/at", 2)[0];
-                date = body.split("/at", 2)[1];
+                desc = body.split("/at", 2)[0].trim();
+                date = body.split("/at", 2)[1].trim();
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! The description of a event cannot be empty.");
             }
@@ -37,6 +82,8 @@ public class Jared {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         history.add(newTask);
+        saveData();
+
         System.out.println(String.format("Got it. I've added this task:\n" +
                         "%s\nNow you have %d tasks in the list.",
                 newTask.toString(), history.size())
@@ -62,6 +109,7 @@ public class Jared {
             throw new DukeException("Invalid task number provided.");
         }
         currTask.markDone();
+        saveData();
         String res = String.format("Nice! I've marked this task as done:\n%s",
                 currTask.toString());
         System.out.println(res);
@@ -84,44 +132,57 @@ public class Jared {
             throw new DukeException("Invalid task number provided.");
         }
         history.remove(index);
+        saveData();
         System.out.println(String.format("Noted. I've removed this task:\n" +
                 "%s\nNow you have %d tasks in the list.", currTask.toString(), history.size()));
     }
 
-    /**
-     * Main function
-     */
-    public static void main(String[] args) {
-        String intro = "____________________________________________________________\n" +
-                "Hello! I'm Jared\n" +
-                "What can I do for you?\n" +
-                "____________________________________________________________";
-        Scanner scan = new Scanner(System.in);
+    private static void loadData() throws DukeException {
+        File f = new File(filename);
 
-        System.out.println(intro);
-        while (scan.hasNextLine()) {
-            String next = scan.nextLine();
-            String[] inputArr = next.split(" ",2);
-            String command = inputArr[0];
-            try {
-                if (command.equals("bye")) {
-                    System.out.println("Bye. Hope to see you again soon!");
-                    System.exit(0);
-                    scan.close();
-                } else if (command.equals("list")) {
-                    list();
-                } else if (command.equals("done")) {
-                    done(next);
-                } else if (command.equals("delete")) {
-                    delete(next);
-                } else {
-                    add(command, next);
+        try {
+            f.createNewFile();
+            Scanner reader = new Scanner(f);
+            while (reader.hasNext()) {
+                String data = reader.nextLine();
+                String[] dataArr = data.split(" _ ");
+                Task t;
+                switch (dataArr[0]) {
+                    case "T":
+                        t = new Todo(dataArr[2]);
+                        break;
+                    case "D":
+                        t = new Deadline(dataArr[2], dataArr[3]);
+                        break;
+                    case "E":
+                        t = new Event(dataArr[2], dataArr[3]);
+                        break;
+                    default:
+                        System.out.println("task failed to load");
+                        continue;
                 }
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                if (dataArr[1].equals("1")) {
+                    t.markDone();
+                }
+                history.add(t);
             }
+        } catch (IOException e) {
+            throw new DukeException("Error");
         }
+    }
 
+    private static void saveData() {
+        try {
+            FileWriter fw = new FileWriter(filename);
+            String res = "";
+            for (Task t : history) {
+                res += (t.saveFormat() + "\n");
+            }
+            fw.write(res);
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
 
