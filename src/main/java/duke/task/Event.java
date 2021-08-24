@@ -8,12 +8,31 @@ import java.time.format.DateTimeFormatter;
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.time.temporal.ChronoUnit.DAYS;
 
+/**
+ * Represents events (a type of tasks) that Duke can keep track of.
+ *
+ * @author Javier Phon Zhee Kai.
+ * @version CS2103T AY21/22 Sem 1.
+ */
 public class Event extends Task {
 
+    /** A string representing the start date and time of an Event. */
     protected String at;
+
+    /** The date of an Event. */
     protected LocalDate date;
+
+    /** The time of an Event. */
     protected LocalTime time;
 
+    /**
+     * Constructor of the Deadline class.
+     *
+     * @param description A string representing the description of an event.
+     * @param at A string representing the start date and time of an event.
+     * @throws EmptyFieldException if the description or at is empty.
+     * @throws InvalidCommandException if the description or at is invalid.
+     */
     public Event(String description, String at) throws EmptyFieldException, InvalidCommandException {
         super(description);
         if (description.equals("") || at.equals("")) {
@@ -51,6 +70,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Checks that events entered by the user are some time in the future.
+     *
+     * @throws InvalidCommandException if the date and times entered by the user have already passed.
+     */
     private void checkChronologicalOrder() throws InvalidCommandException {
         LocalDate dateNow = LocalDate.now();
         LocalTime timeNow = LocalTime.now();
@@ -68,11 +92,21 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns a string that is used to represent events when saved to a file.
+     *
+     * @return A string representation of an event for saving to files.
+     */
     @Override
     public String saveToFile() {
         return "E " + super.saveToFile() + " | " + this.at;
     }
 
+    /**
+     * Returns a string that is used to represent events when Duke is interacting with a user.
+     *
+     * @return A string representation of an event to be displayed to users.
+     */
     @Override
     public String toString() {
         return "[E]"

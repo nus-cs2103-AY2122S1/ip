@@ -8,6 +8,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Represents a chat bot called Duke.
+ *
+ * @author Javier Phon Zhee Kai.
+ * @version CS2103T AY21/22 Sem 1.
+ */
 public class Duke {
 
     private Storage storage;
@@ -21,6 +27,11 @@ public class Duke {
         new Duke(path.toString()).run();
     }
 
+    /**
+     * Constructor for the Duke class.
+     *
+     * @param filePath A string representing a filepath to save or load Duke's responses.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         try {
@@ -33,6 +44,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke.
+     * Duke starts reading inputs from the user and executes the user's commands accordingly.
+     */
     public void run() {
         this.ui.showWelcome();
         boolean isExit = false;

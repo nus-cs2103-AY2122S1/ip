@@ -8,13 +8,31 @@ import java.time.format.DateTimeFormatter;
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.time.temporal.ChronoUnit.DAYS;
 
-
+/**
+ * Represents deadlines (a type of tasks) that Duke can keep track of.
+ *
+ * @author Javier Phon Zhee Kai.
+ * @version CS2103T AY21/22 Sem 1.
+ */
 public class Deadline extends Task {
 
+    /** A string representing the due date and time of a deadline. */
     protected String by;
+
+    /** The date of a deadline. */
     protected LocalDate date;
+
+    /** The time of a deadline. */
     protected LocalTime time;
 
+    /**
+     * Constructor of the Deadline class.
+     *
+     * @param description A string representing the description of a deadline.
+     * @param by A string representing the due date and time of a deadline.
+     * @throws EmptyFieldException if the description or by is empty.
+     * @throws InvalidCommandException if the description or by is invalid.
+     */
     public Deadline(String description, String by) throws EmptyFieldException, InvalidCommandException {
         super(description);
         if (description.equals("") || by.equals("")) {
@@ -52,6 +70,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Checks that deadlines entered by the user are some time in the future.
+     *
+     * @throws InvalidCommandException if the date and times entered by the user have already passed.
+     */
     private void checkChronologicalOrder() throws InvalidCommandException {
         LocalDate dateNow = LocalDate.now();
         LocalTime timeNow = LocalTime.now();
@@ -69,12 +92,21 @@ public class Deadline extends Task {
         }
     }
 
-
+    /**
+     * Returns a string that is used to represent deadlines when saved to a file.
+     *
+     * @return A string representation of a deadline for saving to files.
+     */
     @Override
     public String saveToFile() {
         return "D " + super.saveToFile() + " | " + this.by;
     }
 
+    /**
+     * Returns a string that is used to represent deadlines when Duke is interacting with a user.
+     *
+     * @return A string representation of a deadline to be displayed to users.
+     */
     @Override
     public String toString() {
         return "[D]"

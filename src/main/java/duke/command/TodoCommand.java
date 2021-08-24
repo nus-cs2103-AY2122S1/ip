@@ -5,16 +5,33 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 import duke.task.ToDo;
-
 import java.io.IOException;
 
+/**
+ * Represents how Duke responds to a "todo" command.
+ *
+ * @author Javier Phon Zhee Kai.
+ * @version CS2103T AY21/22 Sem 1.
+ */
 public class TodoCommand extends Command {
 
+    /**
+     * Returns a boolean that tells Duke if this is the command to exit.
+     *
+     * @return A boolean representing the exit condition.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Executes a "todo" command.
+     *
+     * @param taskList The taskList where all tasks are stored.
+     * @param ui An instance of the Ui class that is responsible for Duke's user interactions.
+     * @param storage An instance of a the Storage class that saves and loads Duke's data.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         String command = ui.getCommand();
