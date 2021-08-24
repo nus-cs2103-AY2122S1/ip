@@ -25,7 +25,8 @@ class Parser {
         switch (type) {
             case "bye":
                 ui.showGoodbye();
-                return null;
+                System.exit(0);
+                //return null;
             case "list":
                 if (infos.length == 1) {
                     ui.printList(taskList);
