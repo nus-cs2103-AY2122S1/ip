@@ -1,11 +1,19 @@
 package Tasks;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import pibexception.PibException;
+
 /**
  * Deadline task which contains the task description, and the date of the deadline
  */
 public class Deadline extends Task {
 
     private String date;
+    private String time;
 
     /**
      * A public constructor to create a Deadline task
@@ -13,9 +21,28 @@ public class Deadline extends Task {
      * @param description description of the deadline task
      * @param date        the date stated after "/by " portion
      */
-    public Deadline(String description, String date) {
+    private Deadline(String description, String date, String time) {
         super(description);
         this.date = date;
+        this.time = time;
+    }
+
+    public static Deadline createDeadline(String details) throws PibException {
+        try {
+            int byIndex = details.indexOf("/by ");
+            String description = details.substring(0, byIndex).trim();
+            if (description.isBlank()) {
+                throw new PibException("Uh oh :( Task description can't be blank");
+            }
+            String[] dateTime = details.substring(byIndex + 4).trim().split(" ");
+            String date = LocalDate.parse(dateTime[0].trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+            String time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm")).format(DateTimeFormatter.ofPattern("hh:mm a"));
+            return new Deadline(description, date, time);
+        } catch (IndexOutOfBoundsException e) {
+            throw new PibException("Uh oh :( Please format the command as: deadline <task> /by <yyyy-mm-dd> <hhmm>");
+        } catch (DateTimeParseException e) {
+            throw new PibException("Uh oh :( Ensure date-time format is YYYY-MM-DD HHMM");
+        }
     }
 
     /**
@@ -25,6 +52,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date + ")";
+        return "[D]" + super.toString() + " (by: " + this.date + ", " + this.time + ")";
     }
 }
