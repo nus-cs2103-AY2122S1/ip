@@ -22,6 +22,4 @@ class ParserTest {
                     "Please follow this format: [<Type> <Description> / <Date/Time>].", e.toString());
         }
     }
-
-
 }

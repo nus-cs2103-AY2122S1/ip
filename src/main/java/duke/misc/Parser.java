@@ -1,12 +1,11 @@
 package duke.misc;
 
-import duke.Duke;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
-
 import duke.exception.InvalidDateException;
 import duke.exception.InvalidFormatException;
 import duke.exception.InvalidIndexException;
+
 import duke.task.DateTime;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -66,6 +65,7 @@ public class Parser {
      * @param input User's command input.
      * @param tl TaskList which action is executed on.
      * @return Message according to what action is executed.
+     * @throws DukeException In case of errors.
      */
     public String execute(String input, TaskList tl) throws DukeException {
         String prefix = input;
