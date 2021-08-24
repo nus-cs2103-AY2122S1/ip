@@ -1,7 +1,9 @@
+package Yoyo.exception;
+
 import java.io.IOException;
 
 /**
- * Exception class for Yoyo's commands.
+ * Exception class for duke.Yoyo's commands.
  */
 public class YoyoException extends IOException {
 

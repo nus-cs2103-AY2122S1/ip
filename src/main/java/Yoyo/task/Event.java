@@ -1,17 +1,21 @@
+package Yoyo.task;
+
+import Yoyo.utility.Separator;
+
 import java.time.LocalDateTime;
 
 /**
- * A subclass of Task of event type.
+ * A subclass of duke.task.Task of event type.
  */
 public class Event extends Task {
     private LocalDateTime datetime;
 
-    Event(String name, LocalDateTime datetime) {
+    public Event(String name, LocalDateTime datetime) {
         super(name);
         this.datetime = datetime;
     }
 
-    Event(String name, LocalDateTime datetime, boolean isDone) {
+    public Event(String name, LocalDateTime datetime, boolean isDone) {
         super(name, isDone);
         this.datetime = datetime;
     }

@@ -1,3 +1,11 @@
+package Yoyo.core;
+
+import Yoyo.exception.YoyoException;
+import Yoyo.task.Deadline;
+import Yoyo.task.Event;
+import Yoyo.task.TaskList;
+import Yoyo.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,7 +25,7 @@ public class Storage {
         DEADLINE
     }
 
-    Storage(String dataPath) {
+    public Storage(String dataPath) {
         this.DATA_PATH = dataPath;
         this.file = new File(dataPath);
         try {

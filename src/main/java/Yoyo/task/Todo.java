@@ -1,12 +1,14 @@
+package Yoyo.task;
+
 /**
- * A subclass of Task of todo type.
+ * A subclass of duke.task.Task of todo type.
  */
 public class Todo extends Task {
-    Todo(String name) {
+    public Todo(String name) {
         super(name);
     }
 
-    Todo(String name, boolean isDone) {
+    public Todo(String name, boolean isDone) {
         super(name, isDone);
     }
 

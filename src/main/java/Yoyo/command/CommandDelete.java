@@ -1,5 +1,13 @@
+package Yoyo.command;
+
+import Yoyo.core.Storage;
+import Yoyo.core.Ui;
+import Yoyo.exception.YoyoException;
+import Yoyo.task.Task;
+import Yoyo.task.TaskList;
+
 public class CommandDelete extends Command {
-    CommandDelete(String[] inputTokens) {
+    public CommandDelete(String[] inputTokens) {
         super(inputTokens);
     }
 

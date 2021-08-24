@@ -1,3 +1,10 @@
+package Yoyo.command;
+
+import Yoyo.core.Storage;
+import Yoyo.task.TaskList;
+import Yoyo.core.Ui;
+import Yoyo.exception.YoyoException;
+
 public abstract class Command {
     protected String[] inputTokens;
 
@@ -15,7 +22,7 @@ public abstract class Command {
         }
     }
 
-    Command(String[] inputTokens) {
+    public Command(String[] inputTokens) {
         this.inputTokens = inputTokens;
     }
 

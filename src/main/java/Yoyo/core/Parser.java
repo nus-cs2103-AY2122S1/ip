@@ -1,3 +1,8 @@
+package Yoyo.core;
+
+import Yoyo.command.*;
+import Yoyo.exception.YoyoException;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
@@ -28,7 +33,7 @@ public class Parser {
         case "event":
             return new CommandEvent(inputTokens);
         default:
-            throw new YoyoException.YoyoCommandNotFoundException("Yoyo doesn't understand "
+            throw new YoyoException.YoyoCommandNotFoundException("duke.Yoyo doesn't understand "
                     + "what you mean :-(");
         }
     }

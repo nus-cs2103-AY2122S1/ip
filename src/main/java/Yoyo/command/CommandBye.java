@@ -1,6 +1,12 @@
+package Yoyo.command;
+
+import Yoyo.core.Storage;
+import Yoyo.task.TaskList;
+import Yoyo.core.Ui;
+
 public class CommandBye extends Command {
 
-    CommandBye(String[] inputTokens) {
+    public CommandBye(String[] inputTokens) {
         super(inputTokens);
     }
 

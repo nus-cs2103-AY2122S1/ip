@@ -1,10 +1,14 @@
-import java.util.ArrayList;
+package Yoyo.core;
+
+import Yoyo.task.Task;
+import Yoyo.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
     private Scanner scanner;
 
-    Ui() {
+    public Ui() {
         this.scanner = new Scanner(System.in);
     };
 
@@ -17,7 +21,7 @@ public class Ui {
     }
 
     public void greetUser() {
-        String greetings = "Hello! I'm Yoyo.\n"
+        String greetings = "Hello! I'm duke.Yoyo.\n"
                 + "What can I do for you?";
         outputWrapper();
         System.out.println(greetings);
@@ -65,7 +69,7 @@ public class Ui {
      * prints success message for adding task.
      *
      * @param newTask The task that has been created.
-     * @param tasks Task list.
+     * @param tasks duke.task.Task list.
      */
     public void printAddMessage(Task newTask, TaskList tasks) {
         outputWrapper();
