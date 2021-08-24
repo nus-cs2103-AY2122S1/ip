@@ -6,15 +6,34 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
 
+/**
+ * The Todo Command.
+ */
 public class TodoCommand extends Command {
 
-    private String arguments;
+    /**
+     * The arguments associated with the command
+     **/
+    public String arguments;
 
+    /**
+     * Constructs the todo command.
+     *
+     * @param arguments The arguments associated with the command.
+     */
     public TodoCommand(String arguments) {
         super("todo");
         this.arguments = arguments;
     }
 
+    /**
+     * Executes the main logic of the command.
+     *
+     * @param tasks   The user's list of tasks.
+     * @param ui      The ui interacting with the user.
+     * @param storage The location where the list of tasks is stored.
+     * @throws DukeException If arguments are invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (arguments.isEmpty()) {
@@ -31,8 +50,14 @@ public class TodoCommand extends Command {
                 + " in your list.");
     }
 
+    /**
+     * Checks whether command terminate the program.
+     *
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;
     }
+
 }

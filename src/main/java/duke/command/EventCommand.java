@@ -9,27 +9,46 @@ import duke.ui.Ui;
 
 import java.time.LocalDate;
 
+/**
+ * The event command.
+ */
 public class EventCommand extends Command {
-    
-    private String arguments;
 
+    /**
+     * The arguments associated with the command
+     **/
+    public String arguments;
+
+    /**
+     * Constructs the event command.
+     *
+     * @param arguments The arguments associated with the command.
+     */
     public EventCommand(String arguments) {
         super("event");
         this.arguments = arguments;
     }
 
+    /**
+     * Executes the main logic of the command.
+     *
+     * @param tasks   The user's list of tasks.
+     * @param ui      The ui interacting with the user.
+     * @param storage The location where the list of tasks is stored.
+     * @throws DukeException If arguments are invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (arguments.isEmpty()) {
             throw new DukeException(String.format("The description of a %s cannot be left empty. "
                     + "Please try again.", command));
         }
-        
+
         String[] argArr = arguments.split("/at");
         if (argArr.length == 1 || argArr[1].isEmpty()) {
             throw new DukeException("Arguments do not follow proper format. Don't forget the /at");
         }
-        
+
         LocalDate newTaskDate = Parser.convertDate(argArr[1].trim());
         Event newTask = new Event(argArr[0].trim(), newTaskDate);
         tasks.add(newTask);
@@ -40,8 +59,14 @@ public class EventCommand extends Command {
                 + " in your list.");
     }
 
+    /**
+     * Checks whether command terminate the program.
+     *
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;
     }
+
 }

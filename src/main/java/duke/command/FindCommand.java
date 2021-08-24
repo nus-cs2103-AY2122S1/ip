@@ -8,15 +8,34 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * The find command.
+ */
 public class FindCommand extends Command {
 
+    /**
+     * The arguments associated with the command
+     **/
     public String arguments;
 
+    /**
+     * Constructs the find command.
+     *
+     * @param arguments The arguments associated with the command.
+     */
     public FindCommand(String arguments) {
         super("find");
         this.arguments = arguments;
     }
 
+    /**
+     * Executes the main logic of the command.
+     *
+     * @param tasks   The user's list of tasks.
+     * @param ui      The ui interacting with the user.
+     * @param storage The location where the list of tasks is stored.
+     * @throws DukeException If arguments are invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (arguments.isEmpty()) {
@@ -39,6 +58,11 @@ public class FindCommand extends Command {
         }
     }
 
+    /**
+     * Checks whether command terminate the program.
+     *
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

@@ -17,14 +17,31 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the location used to store and retrieve the list of tasks.
+ */
 public class Storage {
 
+    /**
+     * The filepath of where the list of task is stored
+     **/
     private String filePath;
 
+    /**
+     * Constructs the storage
+     *
+     * @param filePath The location of the list of tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Fetches the list of tasks.
+     *
+     * @return The arraylist of tasks.
+     * @throws DukeException if file cannot be found.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -56,6 +73,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the list of tasks. If location doesn't exist, creates it.
+     *
+     * @param tasks The list of tasks to be saved.
+     * @throws DukeException If cannot save list at specified path.
+     */
     public void write(TaskList tasks) throws DukeException {
         try {
             // need to use the filePath and cut off file name

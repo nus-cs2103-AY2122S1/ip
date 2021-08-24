@@ -13,8 +13,18 @@ import duke.exception.DukeException;
 
 import java.time.LocalDate;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
 
+    /**
+     * Converts the user input of an task date into a LocalDate object.
+     *
+     * @param eventDate The string representing the date inputted by the user.
+     * @return The LocalDate object representing the task date.
+     * @throws DukeException if user input is of an incorrect format.
+     */
     public static LocalDate convertDate(String eventDate) throws DukeException {
         if (eventDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
             return LocalDate.parse(eventDate);
@@ -23,6 +33,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input and executes the appropriate response.
+     *
+     * @param fullCommand The string representing the command inputted by the user.
+     * @return The command based on the user input.
+     * @throws DukeException If user input is invalid.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String command;
         String arguments;
@@ -59,6 +76,7 @@ public class Parser {
         default:
             throw new DukeException("I'm sorry, but I don't know what \""
                     + fullCommand + "\" means :-(");
+
         }
     }
 

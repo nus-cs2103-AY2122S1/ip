@@ -8,16 +8,32 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * The duke.Duke program implements a bot with a set of simple commands
- *
- * @author Calvin Tan
+ * The Duke program implements a bot with a set of simple commands
+ * Initializes the app, and interacts with the user.
  */
 public class Duke {
 
+    /**
+     * The tasks associated with the user
+     **/
     private TaskList tasks;
+
+    /**
+     * The storage location associated with the user
+     **/
     private Storage storage;
+
+    /**
+     * The ui interacting with the user
+     **/
     private Ui ui;
 
+    /**
+     * Initializes the duke program with a given filePath.
+     *
+     * @param filePath The path of the file containing your list of tasks.
+     * @throws DukeException If file does not exist/cannot be found, create a new task list.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -29,6 +45,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the chat bot until the user inputs the bye command.
+     */
     public void run() {
         ui.welcome();
         boolean isExit = false;
@@ -48,6 +67,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program
+     **/
     public static void main(String[] args) {
         new Duke("./data/tasks.txt").run();
     }
