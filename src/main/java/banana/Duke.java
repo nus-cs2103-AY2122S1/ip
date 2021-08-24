@@ -113,7 +113,12 @@ public class Duke {
 
 }
 
-
+/**
+ * The DukeException class
+ * throws specialised Duke exceptions.
+ *
+ * @author: Ravi Ananya
+ **/
 class DukeException extends Exception {
 
     private String text;
@@ -139,6 +144,11 @@ class DukeException extends Exception {
 
 }
 
+/**
+ * The Task class handles tasks.
+ *
+ * @author: Ravi Ananya
+ **/
 class Task {
 
     protected String description;
@@ -186,6 +196,13 @@ class Task {
 
 }
 
+/**
+ * This class handles to-do
+ * types of tasks.
+ *
+ * @author: Ravi Ananya
+ **/
+
 class ToDo extends Task {
 
     /**
@@ -203,6 +220,13 @@ class ToDo extends Task {
     }
 
 }
+
+/**
+ * This class handles deadline
+ * types of tasks.
+ *
+ * @author: Ravi Ananya
+ **/
 
 class Deadline extends Task {
 
@@ -258,6 +282,13 @@ class Deadline extends Task {
     }
 
 }
+
+/**
+ * This class handles event
+ * types of tasks.
+ *
+ * @author: Ravi Ananya
+ **/
 
 class Event extends Task {
 
