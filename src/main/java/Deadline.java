@@ -1,3 +1,8 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+import java.util.Date;
+
 /**
  * This class encapsulates a deadline
  * (an event that needs to be done before a specific time)
@@ -7,7 +12,7 @@
  * @version CS2103T AY21/22 Semester 1
  */
 public class Deadline extends Task {
-    private String dueDate;
+    private final String dueDate;
 
     /**
      * Instantiates a new Deadline task.
@@ -17,7 +22,27 @@ public class Deadline extends Task {
      */
     public Deadline(String name, String dueDate) {
         super(name);
-        this.dueDate = dueDate;
+        this.dueDate = parseDueDateToString(dueDate);
+    }
+
+    private String parseDueDateToString(String str) {
+        DateFormat sdf;
+        DateFormat reformattedSdf;
+        Date date;
+        if (str.split("\\s+").length == 2) {
+            sdf = new SimpleDateFormat("yyyy-MM-dd hhmm");
+            reformattedSdf = new SimpleDateFormat("dd MMM yyyy, h.mm aa");
+        } else {
+            sdf = new SimpleDateFormat("yyyy-MM-dd");
+            reformattedSdf = new SimpleDateFormat("dd MMM yyyy");
+        }
+        try {
+            date = sdf.parse(str);
+        } catch (ParseException e) {
+            System.out.println("wrong date format");
+            return str;
+        }
+        return reformattedSdf.format(date);
     }
 
     public String formatToSave() {
