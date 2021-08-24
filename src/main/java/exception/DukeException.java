@@ -62,6 +62,11 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * Returns a string representation of the DukeException.
+     * 
+     * @return a string representing the exception.
+     */
     @Override
     public String getMessage() {
         return customMessage;
