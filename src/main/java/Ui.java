@@ -49,8 +49,8 @@ public class Ui {
         System.out.println("\t \t" + taskDone.toString());
     }
 
-    public void displayListOfTasks(TaskList taskList) {
-        System.out.println(taskList.toString());
+    public void displayListOfTasks(TaskList tasks) {
+        System.out.println(tasks.toString());
     }
 
     public void displayExitMessage() {

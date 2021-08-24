@@ -1,7 +1,7 @@
 public class InvalidCommand extends Command {
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String errorMessage = "\t Sorry I do not understand this command \n";
         errorMessage += "\t Please use one of the following commands: \n";
         errorMessage += "\t \t list - To list the added tasks so far\n";
