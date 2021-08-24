@@ -138,6 +138,5 @@ public class Parser {
             Ui.botShutdownMessage();
             this.isRunning = false;
         }
-
     }
 }
