@@ -1,5 +1,10 @@
+package duke;
+import duke.util.DukeTaskList;
+import duke.util.Parser;
+import duke.util.Ui;
+import duke.util.DukeConfig;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -11,13 +16,13 @@ public class Duke {
 
     private final DukeDB database;
 
-    private final DukeDateConfig config;
+    private final DukeConfig config;
 
     private final Ui ui;
     /**
      * Basic constructor to initialise the list
      **/
-    public Duke(DukeDB database, DukeDateConfig config) {
+    public Duke(DukeDB database, DukeConfig config) {
         this.ui = new Ui();
         this.database = database;
         this.list = new DukeTaskList(database.load().orElse(new ArrayList<>()));
@@ -30,7 +35,7 @@ public class Duke {
         this.ui = new Ui();
         this.database = database;
         this.list = new DukeTaskList(database.load().orElse(new ArrayList<>()));
-        this.config = DukeDateConfig.DDMMYYYY;
+        this.config = new DukeConfig();
     }
 
 
@@ -67,19 +72,4 @@ public class Duke {
     }
 
 
-}
-
-enum DukeDateConfig {
-    DDMMYYYY("DDMMYYYY"),
-    MMDDYYYY("MMDDYYYY");
-
-    final String format;
-
-    DukeDateConfig(String format) {
-        this.format = format;
-    }
-
-    public static Optional<DukeDateConfig> getDukeDateConfig(String config) {
-        return Arrays.stream(DukeDateConfig.values()).filter(x -> x.format.equals("config")).findFirst();
-    }
 }

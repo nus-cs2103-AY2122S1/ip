@@ -1,3 +1,5 @@
+package duke;
+
 public class Main {
     public static void main(String[] args) {
         DukeDB db = new DukeDB("./data/dukeStore.txt");

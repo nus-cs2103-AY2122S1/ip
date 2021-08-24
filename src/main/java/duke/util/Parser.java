@@ -1,4 +1,7 @@
-import java.time.DateTimeException;
+package duke.util;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,7 +12,7 @@ import java.util.Optional;
 
 
 /**
- * Parser class that contains static methods to parse raw text.
+ * duke.util.Parser class that contains static methods to parse raw text.
  */
 public class Parser {
 
@@ -93,12 +96,12 @@ public class Parser {
     }
 
     public static Optional<LocalDateTime> parseDateTime(String dateTime) throws DukeException {
-        return Parser.parseDateTime(dateTime, DukeDateConfig.DDMMYYYY);
+        return Parser.parseDateTime(dateTime, new DukeConfig());
     }
 
 
-    public static Optional<LocalDateTime> parseDateTime(String dateTime, DukeDateConfig config) throws DukeException{
-        String dateConfig = config.format;
+    public static Optional<LocalDateTime> parseDateTime(String dateTime, DukeConfig config) throws DukeException{
+        String dateConfig = config.getDateConfig();
         String[] timeSplit = dateTime.split("\\s");
         String[] dateSplit = timeSplit[0].split("/");
 
