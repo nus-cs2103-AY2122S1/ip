@@ -1,8 +1,8 @@
-package com.duke.parser;
+package duke.parser;
 
-import com.duke.ui.UserInterface;
-import com.duke.task.TaskList;
-import com.duke.exception.DukeException;
+import duke.ui.UserInterface;
+import duke.task.TaskList;
+import duke.exception.DukeException;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -24,45 +24,45 @@ public class Parser {
         TaskList task = new TaskList();
 
         switch (command) {
-            case "bye":
-                userInterface.exit();
-                return true;
-            case "done":
-                String stringIndex = scanner.next();
-                try {
-                    int index = Integer.parseInt(stringIndex) - 1;
-                    if (task.markDone(index)) {
-                        userInterface.taskComplete(TaskList.getTask(index));
-                    }
-                    break;
-                } catch (NumberFormatException e) {
-                    userInterface.integerInputWarning();
-                    break;
+        case "bye":
+            userInterface.exit();
+            return true;
+        case "done":
+            String stringIndex = scanner.next();
+            try {
+                int index = Integer.parseInt(stringIndex) - 1;
+                if (task.markDone(index)) {
+                    userInterface.taskComplete(TaskList.getTask(index));
                 }
-            case "list":
-                TaskList.displayList();
                 break;
-            case "delete":
-                try {
-                    String stringIndex2 = scanner.next();
-                    int index2 = Integer.parseInt(stringIndex2) - 1;
-                    TaskList deletedTask = TaskList.getTask(index2);
-                    if (deletedTask == null) break;
-                    task.delete(index2);
-                    userInterface.taskDeleted(deletedTask);
-                    break;
-                } catch (NumberFormatException e) {
-                    userInterface.integerInputWarning();
-                    break;
-                }
-            default:
-                String remaining = command.concat(" " + scanner.nextLine());
-                try {
-                    task.add(remaining);
-                    break;
-                } catch (DukeException e) {
-                    System.out.println(e);
-                }
+            } catch (NumberFormatException e) {
+                userInterface.integerInputWarning();
+                break;
+            }
+        case "list":
+            TaskList.displayList();
+            break;
+        case "delete":
+            try {
+                String stringIndex2 = scanner.next();
+                int index2 = Integer.parseInt(stringIndex2) - 1;
+                TaskList deletedTask = TaskList.getTask(index2);
+                if (deletedTask == null) break;
+                task.delete(index2);
+                userInterface.taskDeleted(deletedTask);
+                break;
+            } catch (NumberFormatException e) {
+                userInterface.integerInputWarning();
+                break;
+            }
+        default:
+            String remaining = command.concat(" " + scanner.nextLine());
+            try {
+                task.add(remaining);
+                break;
+            } catch (DukeException e) {
+                System.out.println(e);
+            }
         }
         return false;
     }
@@ -104,8 +104,7 @@ public class Parser {
         String regex = "^\\d{4}-\\d{4}$";
         Matcher m = Pattern.compile(regex).matcher(sb.toString());
         if (m.find()) {
-            String[] timeRange = sb.toString().split("-");
-            return timeRange;
+            return sb.toString().split("-");
         } else {
             return null;
         }

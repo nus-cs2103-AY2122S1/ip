@@ -1,6 +1,6 @@
-package com.duke.ui;
+package duke.ui;
 
-import com.duke.task.TaskList;
+import duke.task.TaskList;
 
 /**
  *  Contains the interface that mimics the interaction with users.

@@ -1,9 +1,8 @@
-package com.duke.task;
+package duke.task;
 
-import com.duke.parser.Parser;
+import duke.parser.Parser;
 
 import java.io.IOException;
-import java.lang.reflect.GenericDeclaration;
 import java.time.LocalDate;
 
 /**

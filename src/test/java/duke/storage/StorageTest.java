@@ -1,7 +1,7 @@
-package com.duke.storage;
+package duke.storage;
 
-import com.duke.task.TaskList;
-import com.duke.task.Todo;
+import duke.task.TaskList;
+import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 

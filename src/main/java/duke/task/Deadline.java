@@ -1,6 +1,6 @@
-package com.duke.task;
+package duke.task;
 
-import com.duke.parser.Parser;
+import duke.parser.Parser;
 
 import java.io.IOException;
 import java.time.LocalDate;

@@ -1,25 +1,25 @@
-com.duke.Duke: Hello! I'm com.duke.Duke
+Duke: Hello! I'm Duke
 What can I do for you?
 
-com.duke.Duke: Got it. I have added this task:
+Duke: Got it. I have added this task:
 [T][ ]  say hello
 Now you have 1 tasks in the list.
 
-com.duke.Duke: Got it. I have added this task:
+Duke: Got it. I have added this task:
 [D][ ]  project (by: sunday)
 Now you have 2 tasks in the list.
 
-com.duke.Duke: Got it. I have added this task:
+Duke: Got it. I have added this task:
 [E][ ]  splashdown (at: nus)
 Now you have 3 tasks in the list.
 
-com.duke.Duke: Nice! I've marked this task as done:
+Duke: Nice! I've marked this task as done:
 [T][X]  say hello
 
-com.duke.Duke: Nice! I've marked this task as done:
+Duke: Nice! I've marked this task as done:
 [D][X]  project (by: sunday)
 
-com.duke.Duke: Noted. I've removed this task:
+Duke: Noted. I've removed this task:
 [E][ ]  splashdown (at: nus)
 Now you have 2 tasks in the list.
 
@@ -28,4 +28,4 @@ Here are the tasks in your list:
 1. [T][X]  say hello
 2. [D][X]  project (by: sunday)
 
-com.duke.Duke: Bye. Hope to see you again soon!
+Duke: Bye. Hope to see you again soon!

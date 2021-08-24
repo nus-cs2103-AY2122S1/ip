@@ -1,4 +1,4 @@
-package com.duke.task;
+package duke.task;
 
 import java.io.IOException;
 

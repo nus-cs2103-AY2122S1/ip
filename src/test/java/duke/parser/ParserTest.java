@@ -1,9 +1,8 @@
-package com.duke.parser;
+package duke.parser;
 
-import com.duke.task.Deadline;
-import com.duke.task.Event;
-import com.duke.task.EventTest;
-import com.duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

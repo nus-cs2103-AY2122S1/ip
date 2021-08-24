@@ -1,8 +1,8 @@
-package com.duke.storage;
+package duke.storage;
 
-import com.duke.task.TaskList;
-import com.duke.ui.UserInterface;
-import com.duke.parser.Parser;
+import duke.task.TaskList;
+import duke.ui.UserInterface;
+import duke.parser.Parser;
 
 import java.io.File;
 import java.io.FileWriter;

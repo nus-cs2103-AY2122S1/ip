@@ -1,4 +1,4 @@
-package com.duke.exception;
+package duke.exception;
 
 public class DukeException extends IllegalArgumentException {
 
@@ -39,17 +39,8 @@ public class DukeException extends IllegalArgumentException {
         }
     }
 
-    public static class InvalidInputException extends DukeException {
-        public InvalidInputException(String message) {
-            super("you need to input a number as index!");
-        }
-
-        @Override
-        public String toString() { return super.toString(); }
-    }
-
     @Override
     public String toString() {
-        return "com.duke.Duke is confused! com.duke.Duke says that " + getMessage();
+        return "duke.Duke is confused! duke.Duke says that " + getMessage();
     }
 }

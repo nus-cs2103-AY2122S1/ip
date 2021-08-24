@@ -1,8 +1,8 @@
-package com.duke.task;
+package duke.task;
 
-import com.duke.storage.Storage;
-import com.duke.ui.UserInterface;
-import com.duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.UserInterface;
+import duke.exception.DukeException;
 
 import java.util.ArrayList;
 
@@ -48,43 +48,43 @@ public class TaskList {
         boolean emptyDescription = false;
 
         switch (splitTask[0]) {
-            case "todo":
-                if (splitTask.length == 1) {
-                    emptyDescription = true;
-                    break;
-                }
-                new Todo(splitTask[1], false);
+        case "todo":
+            if (splitTask.length == 1) {
+                emptyDescription = true;
                 break;
-            case "deadline":
-                if (splitTask.length == 1) {
-                    emptyDescription = true;
-                    break;
-                }
-
-                String[] splitTime = splitTask[1].split("/", 2);
-                if (splitTime.length == 1) {
-                    emptyTimelineError = "deadline";
-                    break;
-                }
-
-                new Deadline(splitTime[0], splitTime[1], false);
+            }
+            new Todo(splitTask[1], false);
+            break;
+        case "deadline":
+            if (splitTask.length == 1) {
+                emptyDescription = true;
                 break;
-            case "event":
-                if (splitTask.length == 1) {
-                    emptyDescription = true;
-                    break;
-                }
+            }
 
-                String[] splitTimeEvent = splitTask[1].split("/", 2);
-                if (splitTimeEvent.length == 1) {
-                    emptyTimelineError = "event";
-                    break;
-                }
-
-                new Event(splitTimeEvent[0], splitTimeEvent[1], false);
+            String[] splitTime = splitTask[1].split("/", 2);
+            if (splitTime.length == 1) {
+                emptyTimelineError = "deadline";
                 break;
-            default:
-                throw new DukeException.InvalidCommandException(input);
+            }
+
+            new Deadline(splitTime[0], splitTime[1], false);
+            break;
+        case "event":
+            if (splitTask.length == 1) {
+                emptyDescription = true;
+                break;
+            }
+
+            String[] splitTimeEvent = splitTask[1].split("/", 2);
+            if (splitTimeEvent.length == 1) {
+                emptyTimelineError = "event";
+                break;
+            }
+
+            new Event(splitTimeEvent[0], splitTimeEvent[1], false);
+            break;
+        default:
+            throw new DukeException.InvalidCommandException(input);
         }
 
         if (emptyDescription) {
