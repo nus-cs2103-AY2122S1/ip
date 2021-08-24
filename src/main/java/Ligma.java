@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.io.IOException;
 
@@ -64,6 +65,9 @@ public class Ligma {
                     + "\n Sorry, command does not exist.\n" + PARTITION);
         } catch (InputMismatchException e2) {
             System.out.println(PARTITION + '\n' + e2.getMessage() + '\n' + PARTITION);
+        } catch (DateTimeParseException e3) {
+            System.out.println(PARTITION
+                    +"\n Time must be in yyyy-mm-dd format.\n" + PARTITION);
         } finally {
             return false;
         }
@@ -161,7 +165,8 @@ public class Ligma {
         try {
             tasks = fileManager.loadInTasks();
         } catch (IOException e) {
-            System.out.println("Failed to load in tasks.");
+            System.out.println(PARTITION
+                    + "\n Failed to load in tasks.\n" + PARTITION);
         }
 
         Scanner sc = new Scanner(System.in);

@@ -7,15 +7,18 @@ ______________________
  You now have 1 task(s).
 ______________________
 ______________________
- Added: [D][ ] clip toenails (by: tomorrow)
+ Added: [D][ ] clip toenails (by: Sep 1 2021)
  You now have 2 task(s).
 ______________________
 ______________________
- Added: [D][ ] code (by: tonight 2359)
+ Time must be in yyyy-mm-dd format.
+______________________
+______________________
+ Added: [D][ ] code (by: Aug 29 2021)
  You now have 3 task(s).
 ______________________
 ______________________
- Added: [E][ ] lecture (at: 12pm)
+ Added: [E][ ] lecture (at: Sep 1 2021)
  You now have 4 task(s).
 ______________________
 ______________________
@@ -24,20 +27,20 @@ ______________________
 ______________________
 ______________________
  1. [T][ ] farming leylines
- 2. [D][ ] clip toenails (by: tomorrow)
- 3. [D][ ] code (by: tonight 2359)
- 4. [E][ ] lecture (at: 12pm)
+ 2. [D][ ] clip toenails (by: Sep 1 2021)
+ 3. [D][ ] code (by: Aug 29 2021)
+ 4. [E][ ] lecture (at: Sep 1 2021)
  5. [T][ ] brush teeth
 ______________________
 ______________________
  Successfully marked as done:
- [D][X] clip toenails (by: tomorrow)
+ [D][X] clip toenails (by: Sep 1 2021)
 ______________________
 ______________________
  1. [T][ ] farming leylines
- 2. [D][X] clip toenails (by: tomorrow)
- 3. [D][ ] code (by: tonight 2359)
- 4. [E][ ] lecture (at: 12pm)
+ 2. [D][X] clip toenails (by: Sep 1 2021)
+ 3. [D][ ] code (by: Aug 29 2021)
+ 4. [E][ ] lecture (at: Sep 1 2021)
  5. [T][ ] brush teeth
 ______________________
 ______________________
@@ -69,19 +72,19 @@ ______________________
  You now have 4 task(s).
 ______________________
 ______________________
- 1. [D][X] clip toenails (by: tomorrow)
- 2. [D][ ] code (by: tonight 2359)
- 3. [E][ ] lecture (at: 12pm)
+ 1. [D][X] clip toenails (by: Sep 1 2021)
+ 2. [D][ ] code (by: Aug 29 2021)
+ 3. [E][ ] lecture (at: Sep 1 2021)
  4. [T][X] brush teeth
 ______________________
 ______________________
  Successfully deleted:
- [E][ ] lecture (at: 12pm)
+ [E][ ] lecture (at: Sep 1 2021)
  You now have 3 task(s).
 ______________________
 ______________________
- 1. [D][X] clip toenails (by: tomorrow)
- 2. [D][ ] code (by: tonight 2359)
+ 1. [D][X] clip toenails (by: Sep 1 2021)
+ 2. [D][ ] code (by: Aug 29 2021)
  3. [T][X] brush teeth
 ______________________
 ______________________
