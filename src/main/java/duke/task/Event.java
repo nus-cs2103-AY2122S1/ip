@@ -20,4 +20,14 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + new Parser().formatLocalDate(at) + ")";
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Event) {
+            Event otherEvent = (Event) other;
+            return this.description.equals(otherEvent.description)
+                    && (this.isDone == otherEvent.isDone) && this.at.equals(otherEvent.at);
+        }
+        return false;
+    }
 }

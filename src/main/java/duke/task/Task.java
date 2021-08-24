@@ -41,4 +41,13 @@ public class Task {
     public boolean getDoneStatus() {
         return this.isDone;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Task) {
+            Task otherTask = (Task) other;
+            return this.description.equals(otherTask.description) && (this.isDone == otherTask.isDone);
+        }
+        return false;
+    }
 }

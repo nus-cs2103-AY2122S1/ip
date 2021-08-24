@@ -21,4 +21,15 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + new Parser().formatLocalDate(by) + ")";
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Deadline) {
+            Deadline otherDdl = (Deadline) other;
+            return this.description.equals(otherDdl.description)
+                    && (this.isDone == otherDdl.isDone) && this.by.equals(otherDdl.by);
+        }
+        return false;
+    }
+
 }
