@@ -24,4 +24,8 @@ delete 0
 done 6
 done 0
 list
+delete 1
+delete 1
+delete 1
+list
 bye
