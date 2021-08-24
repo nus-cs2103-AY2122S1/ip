@@ -1,12 +1,12 @@
 public class Deadline extends Task {
-    private String dueDate;
+    private final DukeDateTime dueDate;
 
-    public Deadline(String name, String dueDate) {
+    public Deadline(String name, DukeDateTime dueDate) {
         super(name);
         this.dueDate = dueDate;
     }
 
-    public Deadline(String name, boolean isDone, String dueDate) {
+    public Deadline(String name, boolean isDone, DukeDateTime dueDate) {
         super(name, isDone);
         this.dueDate = dueDate;
     }
@@ -18,13 +18,13 @@ public class Deadline extends Task {
         }
         boolean isDone = deadlineDetails[1].equals("X");
         String name = deadlineDetails[2];
-        String dueDate = deadlineDetails[3];
+        DukeDateTime dueDate = DukeDateTime.parseISO(deadlineDetails[3]);
         return new Deadline(name, isDone, dueDate);
     }
 
     @Override
     public String toText() {
-        String[] props = new String[]{"D", super.getStatusIcon(), super.getName(), this.dueDate};
+        String[] props = new String[]{"D", super.getStatusIcon(), super.getName(), this.dueDate.toISO()};
         return String.join(" | ", props);
     }
 
