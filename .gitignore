@@ -20,3 +20,5 @@ text-ui-test/sources_raw.txt
 
 # Data files (user dependent)
 dukedata.txt
+/text-ui-test/in/
+/text-ui-test/out/

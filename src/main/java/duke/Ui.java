@@ -25,6 +25,7 @@ public class Ui {
      */
     public Ui() {
         this.sc = new Scanner(System.in);
+        String name = "";
         this.willExit = false;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -33,8 +34,11 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello, I am\n" + logo);
         System.out.println("Please enter your name:");
-        this.name = sc.nextLine();
-        System.out.printf("%s, that is a nice name. What can I do for you today?\n", name);
+        while (name.equals("")) {
+            name = sc.nextLine();
+        }
+        this.name = name;
+        System.out.printf("%s, that is a nice name. What can I do for you today?\n", this.name);
         System.out.println("----------------------------");
 
     }
