@@ -1,5 +1,4 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+package duke.task;
 
 /**
  * This class encapsulates an Event

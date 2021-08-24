@@ -1,16 +1,12 @@
+package duke.util;
+
+import duke.task.*;
 import java.util.ArrayList;
 
 public class Ui {
     private static final String EXIT_MESSAGE = "Goodbyeeee! Hope to see you again soon! :>";
     private static final String SEPARATOR = "\t-------------------------------------------------------";
     private static final String INPUT_PROMPT = "Enter a command *_*";
-
-    private static final String BLANK_INPUT_MESSAGE = "Please enter something! ANYTHING!";
-    private static final String BLANK_DESCRIPTION_MESSAGE = "OOPS!!! The description of %s cannot be empty! x_x";
-    private static final String TODO_ERROR_MESSAGE = "Invalid use of 'todo' command!! @_@\n\tTo add a new todo, use 'todo <task>'.";
-    private static final String DEADLINE_ERROR_MESSAGE = "Invalid use of 'deadline' command!! @_@\n\tTo add a new deadline, use 'deadline <task> /by <due-date>'.";
-    private static final String EVENT_ERROR_MESSAGE = "Invalid use of 'event' command!! @_@\n\tTo add a new event, use 'event <title> /at <time-stamp>'.";
-    private static final String DONE_ERROR_MESSAGE = "Invalid use of 'done' command!! @_@\n\tTo mark a task as done, use 'done <task-number>'.";
     private static final String TASK_LIST = "Here are the task(s) in your list! n_n\n\t";
     private static final String NO_TASKS_FOUND = "Nothing in the list... :( Type todo/event/deadline to add something first! :^)";
 
@@ -47,16 +43,16 @@ public class Ui {
     }
 
     public static void printTaskList(ArrayList<Task> taskList) {
-        String allTasks = TASK_LIST;
+        StringBuilder allTasks = new StringBuilder(TASK_LIST);
         if (taskList.size() == 0) {
             prettify(NO_TASKS_FOUND);
         } else {
             for (int i  = 0; i < taskList.size(); i++) {
                 int taskNumber =  i + 1;
                 String taskName = taskList.get(i).toString();
-                allTasks += String.format("\t%d. %s\n\t", taskNumber, taskName);
+                allTasks.append(String.format("\t%d. %s\n\t", taskNumber, taskName));
             }
-            prettify(allTasks);
+            prettify(allTasks.toString());
         }
     }
 

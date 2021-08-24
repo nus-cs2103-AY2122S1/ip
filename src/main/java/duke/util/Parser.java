@@ -1,3 +1,8 @@
+package duke.util;
+
+import duke.command.*;
+import duke.exception.*;
+import duke.task.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -107,7 +112,11 @@ public class Parser {
 
     private String parseDueDateToString(String dueDate, String taskType) throws DukeException {
         if (dueDate.isEmpty()) {
-            throw new DukeException("blank");
+            if (taskType.equalsIgnoreCase("event")) {
+                throw new DukeException(EVENT_ERROR_MESSAGE);
+            } else {
+                throw new DukeException(DEADLINE_ERROR_MESSAGE);
+            }
         }
         DateFormat sdf;
         DateFormat reformattedSdf;
@@ -126,6 +135,4 @@ public class Parser {
         }
         return reformattedSdf.format(date);
     }
-
-
 }

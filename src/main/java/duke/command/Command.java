@@ -1,3 +1,5 @@
+package duke.command;
+
 /**
  * All commands that Duke can handle
  *
@@ -16,7 +18,7 @@ public enum Command {
 
     private final boolean isExit;
 
-    private Command(boolean isExit) {
+    Command(boolean isExit) {
         this.isExit = isExit;
     }
 

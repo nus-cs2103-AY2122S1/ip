@@ -1,7 +1,4 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.text.DateFormat;
-import java.util.Date;
+package duke.task;
 
 /**
  * This class encapsulates a deadline

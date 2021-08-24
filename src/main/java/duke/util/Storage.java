@@ -1,10 +1,13 @@
+package duke.util;
+
+import duke.task.*;
+import duke.exception.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.util.ArrayList;
-
 
 public class Storage {
     private static final String FILE_NAME = "./data/tasks.txt";

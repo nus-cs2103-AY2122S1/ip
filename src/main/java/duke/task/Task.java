@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * This class encapsulates a task that Duke can handle.
  *
@@ -19,7 +21,7 @@ public class Task {
     }
 
     /** Marks task as done **/
-    protected void markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
