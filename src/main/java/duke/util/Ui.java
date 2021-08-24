@@ -3,45 +3,45 @@ package duke.util;
 import java.util.Scanner;
 
 public class Ui {
-  private Scanner scanner;
+    private Scanner scanner;
 
-  public Ui() {
-    this.scanner = new Scanner(System.in);
-  }
-
-  public void showWelcome() {
-    String welcome = "    ____________________________________________________________\n"
-        + "     Hello! I'm Duke\n"
-        + "     What can I do for you?\n"
-        + "    ____________________________________________________________\n";
-    System.out.println(welcome);
-  }
-
-  public String readCommand() {
-    String nextLine = this.scanner.nextLine();
-    while (nextLine.equals("")) {
-      nextLine = this.scanner.nextLine();
+    public Ui() {
+        this.scanner = new Scanner(System.in);
     }
-    return nextLine;
-  }
 
-  public void showError(String errorMsg) {
-    System.out.println("     " + errorMsg);
-  }
+    public void showWelcome() {
+        String welcome = "    ____________________________________________________________\n"
+                + "     Hello! I'm Duke\n"
+                + "     What can I do for you?\n"
+                + "    ____________________________________________________________\n";
+        System.out.println(welcome);
+    }
 
-  public void showOpeningLine() {
-    System.out.println("    ____________________________________________________________");
-  }
+    public String readCommand() {
+        String nextLine = this.scanner.nextLine();
+        while (nextLine.equals("")) {
+            nextLine = this.scanner.nextLine();
+        }
+        return nextLine;
+    }
 
-  public void showClosingLine() {
-    System.out.println("    ____________________________________________________________\n");
-  }
+    public void showError(String errorMsg) {
+        System.out.println("     " + errorMsg);
+    }
 
-  public void showResponse(String response) {
-    System.out.println("     " + response);
-  }
+    public void showOpeningLine() {
+        System.out.println("    ____________________________________________________________");
+    }
 
-  public void closeScanner() {
-    this.scanner.close();
-  }
+    public void showClosingLine() {
+        System.out.println("    ____________________________________________________________\n");
+    }
+
+    public void showResponse(String response) {
+        System.out.println("     " + response);
+    }
+
+    public void closeScanner() {
+        this.scanner.close();
+    }
 }

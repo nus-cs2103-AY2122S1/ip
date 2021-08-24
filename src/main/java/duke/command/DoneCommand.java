@@ -7,30 +7,30 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 public class DoneCommand extends Command {
-  private int doneTask;
+    private int doneTask;
 
-  public DoneCommand(int doneTask) {
-    this.doneTask = doneTask;
-  }
-
-  @Override
-  public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-    // Check for invalid task argument
-    if (doneTask >= tasks.getSize()) {
-      throw new InvalidArgumentException(tasks.getSize());
+    public DoneCommand(int doneTask) {
+        this.doneTask = doneTask;
     }
 
-    tasks.getTask(this.doneTask).markAsDone();
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        // Check for invalid task argument
+        if (doneTask >= tasks.getSize()) {
+            throw new InvalidArgumentException(tasks.getSize());
+        }
 
-    String response = "Nice! I've marked this task as done:\n" +
-        "       " + tasks.getTask(this.doneTask);
-    ui.showResponse(response);
+        tasks.getTask(this.doneTask).markAsDone();
 
-    storage.save(tasks.getTaskList());
-  }
+        String response = "Nice! I've marked this task as done:\n" +
+                "       " + tasks.getTask(this.doneTask);
+        ui.showResponse(response);
 
-  @Override
-  public boolean isExit() {
-    return false;
-  }
+        storage.save(tasks.getTaskList());
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

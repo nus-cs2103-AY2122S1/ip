@@ -18,96 +18,96 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-  private File file;
+    private File file;
 
-  public Storage(String filePath) throws DukeException {
-    // ensure parent directories exist
-    String[] filePathComponents = filePath.split("/");
-    String filePathTemp = filePathComponents[0];
-    for (int i = 0; i < filePathComponents.length - 1; i++) {
-      File dir = new File(filePathTemp);
-      if (!dir.exists()) {
-        dir.mkdir();
-      }
-      filePathTemp += filePathComponents[i + 1];
-    }
-
-    // ensure file exists
-    this.file = new File(filePath);
-    try {
-      this.file.createNewFile();
-    } catch (IOException e) {
-      throw new StorageException();
-    }
-  }
-
-  public ArrayList<Task> load() throws DukeException {
-    // initialize task list
-    ArrayList<Task> taskList = new ArrayList<>();
-
-    // instantiate scanner obj
-    Scanner scanner;
-    try {
-      scanner = new Scanner(this.file);
-    } catch (FileNotFoundException e) {
-      throw new LoadingException();
-    }
-
-    while (scanner.hasNext()) {
-      // extract task components
-      String taskRaw = scanner.nextLine();
-      String[] taskComponents = taskRaw.split(" \\| ");
-      String taskType = taskComponents[0];
-      String taskStatus = taskComponents[1];
-      String taskDescription = taskComponents[2];
-
-      // create task
-      Task task;
-      switch (taskType) {
-        case "T":
-          task = new Todo(taskDescription);
-          break;
-        case "D":
-          String taskBy = taskComponents[3];
-          task = new Deadline(taskDescription, LocalDate.parse(taskBy));
-          break;
-        default:
-          String taskAt = taskComponents[3];
-          task = new Event(taskDescription, taskAt);
-          break;
-      }
-
-      // mark task as done if applicable
-      if (taskStatus.equals("1")) {
-        task.markAsDone();
-      }
-
-      // add task to taskList
-      taskList.add(task);
-    }
-
-    // return taskList
-    return taskList;
-  }
-
-  public void save(ArrayList<Task> taskList) throws DukeException {
-    try {
-      // instantiate file writer obj
-      FileWriter fw = new FileWriter(this.file);
-
-      // write to file
-      taskList.forEach(task -> {
-        try {
-          fw.write(task.toStringData() + "\n");
-        } catch (IOException e) {
-          System.out.println(e);
+    public Storage(String filePath) throws DukeException {
+        // Ensure parent directories exist
+        String[] filePathComponents = filePath.split("/");
+        String filePathTemp = filePathComponents[0];
+        for (int i = 0; i < filePathComponents.length - 1; i++) {
+            File dir = new File(filePathTemp);
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+            filePathTemp += filePathComponents[i + 1];
         }
-      });
 
-      // close file writer obj
-      fw.close();
-    } catch (IOException e) {
-      throw new SavingException();
+        // Ensure file exists
+        this.file = new File(filePath);
+        try {
+            this.file.createNewFile();
+        } catch (IOException e) {
+            throw new StorageException();
+        }
     }
-  }
+
+    public ArrayList<Task> load() throws DukeException {
+        // Initialize task list
+        ArrayList<Task> taskList = new ArrayList<>();
+
+        // Instantiate scanner obj
+        Scanner scanner;
+        try {
+            scanner = new Scanner(this.file);
+        } catch (FileNotFoundException e) {
+            throw new LoadingException();
+        }
+
+        while (scanner.hasNext()) {
+            // Extract task components
+            String taskRaw = scanner.nextLine();
+            String[] taskComponents = taskRaw.split(" \\| ");
+            String taskType = taskComponents[0];
+            String taskStatus = taskComponents[1];
+            String taskDescription = taskComponents[2];
+
+            // Create task
+            Task task;
+            switch (taskType) {
+            case "T":
+                task = new Todo(taskDescription);
+                break;
+            case "D":
+                String taskBy = taskComponents[3];
+                task = new Deadline(taskDescription, LocalDate.parse(taskBy));
+                break;
+            default:
+                String taskAt = taskComponents[3];
+                task = new Event(taskDescription, taskAt);
+                break;
+            }
+
+            // Mark task as done if applicable
+            if (taskStatus.equals("1")) {
+                task.markAsDone();
+            }
+
+            // Add task to taskList
+            taskList.add(task);
+        }
+
+        // Return taskList
+        return taskList;
+    }
+
+    public void save(ArrayList<Task> taskList) throws DukeException {
+        try {
+            // Instantiate file writer obj
+            FileWriter fw = new FileWriter(this.file);
+
+            // Write to file
+            taskList.forEach(task -> {
+                try {
+                    fw.write(task.toStringData() + "\n");
+                } catch (IOException e) {
+                    System.out.println(e);
+                }
+            });
+
+            // Close file writer obj
+            fw.close();
+        } catch (IOException e) {
+            throw new SavingException();
+        }
+    }
 }
