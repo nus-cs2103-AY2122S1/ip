@@ -24,6 +24,9 @@ public class FileManager {
                     try {
                         String nextLine = fileReader.nextLine();
                         String[] splitString = nextLine.split(Task.sep);
+                        if (splitString.length < 2) {
+                            throw new DukeException("Invalid input in file");
+                        }
                         Task newTask = Task.makeTask(splitString[0], splitString[1]);
                         if (splitString[2].equals("1")) {
                             newTask.markDone(false);

@@ -1,5 +1,6 @@
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 public class Deadline extends Task {
@@ -67,6 +68,8 @@ public class Deadline extends Task {
 
     @Override
     public String typeString() {
-        return "deadline" + Task.sep + super.toSaveInFile("/by" + this.date);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        String formatDateTime = this.date.format(formatter);
+        return "deadline" + Task.sep + super.toSaveInFile("/by " + formatDateTime);
     }
 }

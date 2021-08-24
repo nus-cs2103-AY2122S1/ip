@@ -54,7 +54,11 @@ public class Duke {
                 System.out.println(currentDuke.getTasks());
             } else if (input.split(" ")[0].toLowerCase().equals("done")) {
                 int index = Integer.parseInt(input.split(" ")[1]);
-                currentDuke.tasks.get(index - 1).markDone(true);
+                if (index > currentDuke.tasks.size()) {
+                    System.out.println("No element at this index!");
+                } else {
+                    currentDuke.tasks.get(index - 1).markDone(true);
+                }
             } else if (input.split(" ")[0].toLowerCase().equals("delete")) {
                 int index = Integer.parseInt(input.split(" ")[1]);
                 currentDuke.removeTask(index - 1);

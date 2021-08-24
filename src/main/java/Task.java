@@ -7,6 +7,7 @@ public abstract class Task {
         if (description.length() == 0) {
             throw new DukeException("The description cannot be empty");
         }
+
         switch (type) {
             case "todo": {
                 return (ToDos.of(description));

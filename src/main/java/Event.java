@@ -1,5 +1,6 @@
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     final private LocalDateTime date;
@@ -66,6 +67,8 @@ public class Event extends Task {
 
     @Override
     public String typeString() {
-        return "event" + Task.sep + super.toSaveInFile("/at" + this.time);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        String formatDateTime = this.date.format(formatter);
+        return "event" + Task.sep + super.toSaveInFile("/at" + formatDateTime);
     }
 }
