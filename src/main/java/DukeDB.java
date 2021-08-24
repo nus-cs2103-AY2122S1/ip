@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
@@ -118,7 +119,15 @@ public class DukeDB {
             String description = splitCommand[1];
             String by = splitCommand[2];
             boolean isDone = splitCommand[3].equals("1");
-            return Optional.of(new Deadline(description, by, isDone));
+
+            try {
+                LocalDateTime dateBy = Parser.parseDateTime(by).orElseThrow(() -> new DukeException("Unable to load " +
+                        "date for task" + description +". Removing the task."));
+                return Optional.of(new Deadline(description, dateBy, isDone));
+            } catch (DukeException e) {
+                Duke.printMsg(e.toString());
+            }
+            return Optional.empty();
         }
     }
 

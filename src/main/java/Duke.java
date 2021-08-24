@@ -11,13 +11,24 @@ public class Duke {
 
     private final DukeDB database;
 
+    private final DukeDateConfig config;
+
     /**
      * Basic constructor to initialise the list
      **/
+    public Duke(DukeDB database, DukeDateConfig config) {
+        this.database = database;
+        this.list = new ArrayList<>();
+        this.config = config;
+    }
+
+
     public Duke(DukeDB database) {
         this.database = database;
         this.list = new ArrayList<>();
+        this.config = DukeDateConfig.DDMMYYYY;
     }
+
 
     /**
      * Simple formatting tool to be used when printing commands
@@ -44,7 +55,7 @@ public class Duke {
             Optional<DukeCommands> prefix = DukeCommands.getCommand(scannedLine.split(" ")[0]);
             DukeCommands command = prefix.orElseGet(() -> DukeCommands.INVALID);
             try {
-                terminate = command.action.run(Parser.parseCommand(scannedLine), this.list, this.database);
+                terminate = command.action.run(Parser.parseCommand(scannedLine), this.list, this.database, this.config);
                 this.database.save(this.list);
             } catch(DukeException e) {
                 printMsg(e.toString());
@@ -53,4 +64,19 @@ public class Duke {
     }
 
 
+}
+
+enum DukeDateConfig {
+    DDMMYYYY("DDMMYYYY"),
+    MMDDYYYY("MMDDYYYY");
+
+    final String format;
+
+    DukeDateConfig(String format) {
+        this.format = format;
+    }
+
+    public static Optional<DukeDateConfig> getDukeDateConfig(String config) {
+        return Arrays.stream(DukeDateConfig.values()).filter(x -> x.format.equals("config")).findFirst();
+    }
 }
