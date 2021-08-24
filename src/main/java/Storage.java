@@ -2,6 +2,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class helps to read, write, update and delete
+ * tasks from the file it is being stored in.
+ */
 public class Storage {
     private String filePath;
 
@@ -9,6 +13,9 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Creates a new file in case the file doesn't exist.
+     */
     public void createNewFile() {
         try {
             File myFile = new File(filePath);
@@ -23,6 +30,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the tasks from the text file and returns it
+     * as an ArrayList.
+     *
+     * @return An ArrayList with the tasks stored in it.
+     */
     public ArrayList<Task> readTasks() {
         ArrayList<Task> taskList = new ArrayList<Task>();
 
@@ -30,11 +43,15 @@ public class Storage {
             Scanner scanner = new Scanner(new File(filePath));
 
             while (scanner.hasNext()) {
+                // Parsing the line read from file
                 String[] tokens = scanner.nextLine().split(" \\| ");
+
+                // Storing the extracted task components.
                 String taskType = tokens[0];
                 String completionStatus = tokens[1];
                 String taskDescription = tokens[2];
 
+                // Checking the type of task.
                 if(taskType.contains("D")) {
                     Task deadlineTask = new Deadline(taskDescription, new TaskDateAndTime(tokens[3]));
                     if(completionStatus.contains("1")) {
@@ -63,15 +80,24 @@ public class Storage {
         } catch (FileNotFoundException e) {
             System.out.println("Master, File Does Not Exist, Give Me A Treat, And\n"
                     + "I Shall Create One For You! :)");
+            // In case the file doesn't exist, one is created.
             createNewFile();
 
         }
         return taskList;
     }
 
+    /**
+     * Writes the task entered to the text file.
+     *
+     * @param task An enum representing the task type.
+     * @param taskDescription The description of the task.
+     * @param taskDeadline The deadline of the task.
+     */
     public void writeTask(Task.TaskType task, String taskDescription, String taskDeadline){
         String taskAsText;
 
+        // Formatting the string appropriately to add task to the text file.
         switch (task) {
         case DEADLINE:
             taskAsText = "D | 0 | " + taskDescription + " | " + taskDeadline + System.getProperty("line.separator");
@@ -87,6 +113,7 @@ public class Storage {
             break;
         }
 
+        // Writing the task to file.
         try {
             FileWriter fw = new FileWriter(filePath, true);
             fw.write(taskAsText);
@@ -96,11 +123,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes a task from the text file.
+     *
+     * @param taskNumber The task number to be deleted.
+     */
     public void deleteTask(int taskNumber) {
         int counter = 0;
         File inputFile = new File(filePath);
         File tempFile = new File("tempFile.txt");
 
+        // Reading and writing to the text file.
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
@@ -124,11 +157,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates a given task status to done in the text file.
+     *
+     * @param taskNumber The task number to be updated.
+     */
     public void updateTaskStatusToDone(int taskNumber) {
         int counter = 0;
         File inputFile = new File(filePath);
         File tempFile = new File("tempFile.txt");
 
+        // Reading and writing to the text file.
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));

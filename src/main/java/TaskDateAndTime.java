@@ -1,6 +1,10 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class helps to manage the date and time formatting
+ * for tasks.
+ */
 public class TaskDateAndTime {
     private String userInputDateAndTime;
     private LocalDate taskDateAndTime;
@@ -10,6 +14,12 @@ public class TaskDateAndTime {
         isValidDate();
     }
 
+    /**
+     * Validates if the date is entered in the correct
+     * format.
+     *
+     * @return A boolean indicating if the date is valid.
+     */
     public boolean isValidDate() {
         String[] userInputDate = userInputDateAndTime.split("/");
         if(userInputDate.length == 3) {
@@ -18,6 +28,12 @@ public class TaskDateAndTime {
         return userInputDate.length == 3;
     }
 
+    /**
+     * Returns the string representation of date in a
+     * specified format.
+     *
+     * @return Formatted date.
+     */
     @Override
     public String toString() {
         return taskDateAndTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
