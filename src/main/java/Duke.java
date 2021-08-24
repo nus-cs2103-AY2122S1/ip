@@ -2,6 +2,9 @@ import duke.*;
 import duke.task.TaskList;
 import duke.command.Command;
 
+/**
+ * The Duke program is an application that can store the Tasks you need to do!
+ */
 public class Duke {
 
     private Storage storage;
@@ -19,6 +22,9 @@ public class Duke {
         }
     }
 
+    /**
+     * The method that runs the Duke application.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -37,6 +43,11 @@ public class Duke {
         }
     }
 
+    /**
+     * The main method that makes use of the run method.
+     *
+     * @param args Unused.
+     */
     public static void main(String[] args) {
         new Duke("data/taskList.txt").run();
     }

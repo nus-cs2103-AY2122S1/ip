@@ -9,6 +9,10 @@ import java.util.ListIterator;
 
 import duke.task.*;
 
+/**
+ * The Storage class encapsulates methods related to saving and loading
+ * into a text file containing the list of tasks.
+ */
 public class Storage {
 
     private String filePath;
@@ -21,8 +25,8 @@ public class Storage {
      * Saves the given ArrayList of Tasks into data/taskList.txt.
      * Creates a new directory and file if they do not exist.
      *
-     * @param lst the given ArrayList of Tasks
-     * @throws DukeException
+     * @param lst the given ArrayList of Tasks.
+     * @throws DukeException when there is a problem with creating directories or files.
      */
     public void save(TaskList lst) throws DukeException {
         // directory and file names
@@ -64,8 +68,8 @@ public class Storage {
      * Reads the taskList.txt file and returns an ArrayList<Task> based on it.
      * Throws a DukeException if the file does not exist.
      *
-     * @return An ArrayList containing the tasks in the text file
-     * @throws DukeException
+     * @return An ArrayList containing the tasks in the text file.
+     * @throws DukeException when the file does not exist.
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
@@ -98,7 +102,7 @@ public class Storage {
     /**
      * Parses a given string and returns a Task based on that string.
      *
-     * @param str the given string to parse
+     * @param str the given string to parse.
      * @return The Task based on the string. Returns null if the string is invalid.
      */
     private static Task parseInput(String str) {

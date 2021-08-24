@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The Event class encapsulates an event that happens at a certain time.
+ */
 public class Event extends Task {
 
     String timeString;
@@ -28,6 +31,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns a String representing the Event Task.
+     *
+     * @return a String representing the Event Task.
+     */
     @Override
     public String toString() {
         String msg = "[E]" + super.toString() + " (at: ";
@@ -39,6 +47,11 @@ public class Event extends Task {
         return msg;
     }
 
+    /**
+     * Returns a String representing the Event Task to be saved in the taskList.txt file.
+     *
+     * @return a String representing the Event Task to be saved in the taskList.txt file.
+     */
     public String printToFile() {
         String msg = "E | " + (this.isDone ? 1 : 0) + " | " + this.name + " | ";
         if (timeString == null) {

@@ -7,6 +7,9 @@ import duke.Ui;
 import duke.Storage;
 import duke.DukeException;
 
+/**
+ * The AddCommand encapsulates a Command that adds Tasks to a TaskList.
+ */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
@@ -18,6 +21,15 @@ public class AddCommand extends Command {
         this.args = args;
     }
 
+    /**
+     * Will add the Task corresponding to this AddCommand to the given TaskList.
+     * Will also store the updated TaskList to taskList.txt.
+     *
+     * @param tasks the given TaskList.
+     * @param ui the given Ui.
+     * @param storage the given Storage.
+     * @throws DukeException when a Task cannot be created.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask;
