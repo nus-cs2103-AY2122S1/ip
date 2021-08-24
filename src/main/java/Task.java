@@ -16,13 +16,18 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     //markAsDone method indicates a task in completed
     public void markAsDone() {
         this.isDone = true;
-        System.out.println(Duke.divider);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(this.toString());
-        System.out.println(Duke.divider);
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
     public String getStatusIcon() {

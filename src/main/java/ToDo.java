@@ -1,5 +1,5 @@
 /**
- * ToDo class IS-A Task.
+ * To do class IS-A Task.
  *
  * Task without any date/time attached to it
  * @author Timothy Wong Eu-Jin
