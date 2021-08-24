@@ -3,13 +3,16 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * This class represents the Events event.
+ *
  * @author Nigel Tan
  */
 public class Events extends Task {
+
     private LocalDate at;
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param description the name of the task
      * @param at the start
      */
