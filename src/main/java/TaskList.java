@@ -64,8 +64,12 @@ public class TaskList {
     public String getData() {
         StringBuilder data = new StringBuilder();
         for (Task task : tasks) {
-            data.append(task).append("\n");
+            data.append(task.dataToString()).append("\n");
         }
-        return data.toString();
+        if (data.length() > 0) {
+            return data.toString().substring(0, data.length() - 1);
+        } else {
+            return "";
+        }
     }
 }
