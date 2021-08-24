@@ -1,13 +1,22 @@
-package duke;
+/**
+ * This class handles the storage of the current list (i.e. the updating and retrieval)
+ *
+ * @author Megan Wee Rui En
+ * @version CS2103 AY21/22 Semester 1
+ */
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+package duke.storage;
 
-import duke.tasks.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 // deals with loading tasks from the file and saving tasks in the file

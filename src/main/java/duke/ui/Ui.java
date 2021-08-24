@@ -1,4 +1,6 @@
-package duke;
+package duke.ui;
+
+import duke.tasklist.TaskList;
 
 public class Ui {
     private String linebreak = "~~~~~~~~~~";
