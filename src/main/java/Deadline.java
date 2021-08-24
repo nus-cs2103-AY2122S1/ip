@@ -1,21 +1,25 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Deadline class IS-A Task.
  *
  * Task that needs to be done by a specific date/time
  * @author Timothy Wong Eu-Jin
- * @version Level-4
+ * @version Level-8
  */
 public class Deadline extends Task {
 
-    private String date;
+    private LocalDate date;
 
     public Deadline(String description, String date) {
         super(description);
-        this.date = date;
+        this.date = LocalDate.parse(date);
     }
 
     public String toString() {
-        return ("[D]" + super.toString() + "(by:" + this.date + ")");
+        return ("[D]" + super.toString() + " (by: " +
+                this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
     }
 
 }

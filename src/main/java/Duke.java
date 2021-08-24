@@ -4,7 +4,7 @@ import java.util.Scanner;
  * Duke class
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-6
+ * @version Level-8
  */
 public class Duke {
     public static final String divider = "-------------------------------------";
@@ -59,7 +59,7 @@ public class Duke {
             throw new MissingTimeCommandException("Missing Time Command: add '/by' in the command.");
         }
 
-        String[] splitReq = req.split("/by", 2);
+        String[] splitReq = req.split(" /by ", 2);
         String desc = splitReq[0];
         String date = splitReq[1];
         Deadline deadline = new Deadline(desc, date);
@@ -76,7 +76,7 @@ public class Duke {
             throw new MissingTimeCommandException("Missing Time Command: add '/at' in the command.");
         }
 
-        String[] splitReq = req.split("/at", 2);
+        String[] splitReq = req.split(" /at ", 2);
         String desc = splitReq[0];
         String date = splitReq[1];
         Event event = new Event(desc, date);

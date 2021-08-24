@@ -3,7 +3,7 @@ import java.util.ArrayList;
  * List class: Duke HAS-A List, List HAS-A Task
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-6
+ * @version Level-8
  */
 
 public class List {
