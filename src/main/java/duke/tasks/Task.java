@@ -1,3 +1,4 @@
+package duke.tasks;
 public class Task {
     protected String name;
     protected boolean hasDone;

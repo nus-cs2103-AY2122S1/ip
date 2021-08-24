@@ -1,3 +1,4 @@
+package duke.tasks;
 // import java.sql.Date;
 // import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -34,6 +35,10 @@ public class Deadline extends Task{
         }
         return true;
     
+    }
+
+    public LocalDate getDateFormatted() {
+        return this.dateFormatted;
     }
 
     /**

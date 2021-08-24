@@ -1,6 +1,14 @@
+package duke.commands;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.tasks.Task;
+import duke.TaskList;
 
 public class DoneCommand extends Command {
     private int taskNum;
@@ -10,12 +18,13 @@ public class DoneCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
-        if (tasks.taskList.size() < this.taskNum) {
+        ArrayList<Task> taskList = tasks.getTaskList();
+        if (taskList.size() < this.taskNum) {
             throw new DukeException("You cannot complete a task that does not exist!");
         } else {
-            Scanner newSc = new Scanner(new File(storage.filePath));
+            Scanner newSc = new Scanner(new File(storage.getFilePath()));
             storage.markAsDoneInFile(taskNum, newSc, tasks);
-            completeTask(tasks.taskList.get(taskNum - 1));
+            completeTask(taskList.get(taskNum - 1));
         }
     };
 

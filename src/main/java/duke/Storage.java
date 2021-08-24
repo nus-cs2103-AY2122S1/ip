@@ -1,14 +1,24 @@
+package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 public class Storage {
     protected String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
+    }
+
+    public String getFilePath() {
+        return this.filePath;
     }
 
     /**
@@ -39,6 +49,7 @@ public class Storage {
         ArrayList<Task> taskList = new ArrayList<>();
         File nekoData = new File(this.filePath);
         if (!nekoData.exists()) {
+            nekoData.getParentFile().mkdir();
             nekoData.createNewFile();
             System.out.println("File created: " + nekoData.getName());
         } else {
@@ -84,6 +95,7 @@ public class Storage {
             fileString += input + "\n";
         }
         
+        System.out.println(task.toString());
         String newFile = fileString.replace(task.toString() + "\n", "");
         FileWriter writer = new FileWriter(new File(this.filePath));
         writer.write(newFile);
@@ -98,6 +110,7 @@ public class Storage {
             String input = scanner.nextLine();
             fileString += input + "\n";
         }
+        System.out.println(task.toString());
         String newFile = fileString.replace(task.toString(), task.toString().replace("[ ]", "[X]"));
         FileWriter writer = new FileWriter(new File(this.filePath));
         writer.write(newFile);

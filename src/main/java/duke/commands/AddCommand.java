@@ -1,4 +1,13 @@
+package duke.commands;
 import java.io.IOException;
+
+import duke.Storage;
+import duke.Ui;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.TaskList;
+import duke.tasks.Todo;
 
 public class AddCommand extends Command{
     private Task task;
@@ -10,16 +19,17 @@ public class AddCommand extends Command{
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException{
         if (this.task instanceof Todo) {
             addTask(this.task, tasks);
-            storage.saveTaskToFile("[T] " + this.task.showStatus() + this.task.name + "\n");
+            storage.saveTaskToFile(task.toString() + "\n");
         } else if (this.task instanceof Deadline) {
             Deadline deadline = (Deadline) this.task;
             addTask(deadline, tasks);
-            storage.saveTaskToFile("[D] " + deadline.showStatus() + deadline.name + ":" + deadline.dateFormatted + "\n");
+            storage.saveTaskToFile(task.toString() + "\n");
         } else {
             
             Event event = (Event) this.task;
             addTask(event, tasks);
-            storage.saveTaskToFile("[E] " + event.showStatus() + event.name + ":" + event.timeFormatted + "\n");
+            //System.out.println(event.timeFormatted);
+            storage.saveTaskToFile(task.toString() + "\n");
         }
     };
 
@@ -31,15 +41,15 @@ public class AddCommand extends Command{
     private void addTask(Task task, TaskList tasks) {
         System.out.println("Got it. I've added this task: ");
         task.showThisTask();
-        tasks.taskList.add(task);
+        tasks.getTaskList().add(task);
         
         String taskform;
-        if (tasks.taskList.size() == 1) {
+        if (tasks.getTaskList().size() == 1) {
             taskform = " task";
         } else {
             taskform = " tasks";
         }
-        System.out.println("Now you have " + (tasks.taskList.size()) + taskform + " in the list.");
+        System.out.println("Now you have " + (tasks.getTaskList().size()) + taskform + " in the list.");
     }
 
     public boolean isExit() {

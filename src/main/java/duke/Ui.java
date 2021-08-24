@@ -1,9 +1,14 @@
+package duke;
 import java.util.Scanner;
 
 public class Ui {
     protected Scanner sc;
 
     public Ui() {
+    }
+
+    public Scanner getScanner() {
+        return this.sc;
     }
 
     public void showWelcome() {

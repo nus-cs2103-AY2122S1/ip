@@ -1,4 +1,7 @@
+package duke;
 import java.io.IOException;
+
+import duke.commands.Command;
 
 public class Duke {
     private Storage storage;
@@ -39,6 +42,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("tasks.txt").run();
+        new Duke("data/tasks.txt").run();
     }
 }

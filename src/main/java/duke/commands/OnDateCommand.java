@@ -1,7 +1,15 @@
+package duke.commands;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import duke.Storage;
+import duke.Ui;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.TaskList;
 
 public class OnDateCommand extends Command {
     private String dateString;
@@ -25,16 +33,17 @@ public class OnDateCommand extends Command {
     public void identifyTasksByDate(String dateString, TaskList tasks) {
         LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         ArrayList<Task> tasksOnDate = new ArrayList<>();
-        for (Task task : tasks.taskList) {
+        ArrayList<Task> taskList = tasks.getTaskList();
+        for (Task task : taskList) {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
-                if (deadline.dateFormatted != null) {
-                    if (deadline.dateFormatted.equals(date)) tasksOnDate.add(deadline); 
+                if (deadline.getDateFormatted() != null) {
+                    if (deadline.getDateFormatted().equals(date)) tasksOnDate.add(deadline); 
                 }
             } else if (task instanceof Event) {
                 Event event = (Event) task;
-                if (event.timeFormatted != null) {
-                    LocalDate eventDate = event.timeFormatted.toLocalDate();
+                if (event.getTimeFormatted() != null) {
+                    LocalDate eventDate = event.getTimeFormatted().toLocalDate();
                     if (eventDate.equals(date)) tasksOnDate.add(event);
                 }
             }

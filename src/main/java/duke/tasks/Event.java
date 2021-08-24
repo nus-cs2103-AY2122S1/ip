@@ -1,3 +1,4 @@
+package duke.tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -22,6 +23,10 @@ public class Event extends Task{
         } else {
             this.time = time;
         }
+    }
+
+    public LocalDateTime getTimeFormatted() {
+        return this.timeFormatted;
     }
 
     private boolean canBeFormattedDateTime(String time) {
@@ -54,7 +59,7 @@ public class Event extends Task{
     @Override
     public void showThisTask() {
         if (canBeFormattedDateTime(this.time)) {
-            System.out.println(this.prefix + super.showStatus() + this.name + "(at:" + this.timeFormatted.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + ")");
+            System.out.println(this.prefix + super.showStatus() + this.name + "(at:" + this.timeFormatted + ")");
         } else {
             System.out.println(this.prefix + super.showStatus() + this.name + "(at:" + this.time + ")");
         }
@@ -70,6 +75,11 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return (this.prefix + " " + super.showStatus() + this.name + ":" + this.timeFormatted.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        if (this.timeFormatted != null) {
+            return (this.prefix + " " + super.showStatus() + this.name + ":" + this.timeFormatted);
+        } else {
+            return (this.prefix + " " + super.showStatus() + this.name + ":" + this.time);
+        }
+        
     }
 }

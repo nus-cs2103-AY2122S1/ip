@@ -1,3 +1,16 @@
+package duke;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.ListCommand;
+import duke.commands.OnDateCommand;
+import duke.commands.UnknownCommand;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
+
 public class Parser {
     public static Command parse(String userInput) throws DukeException {
         int firstBlankIndex = userInput.indexOf(" ");
