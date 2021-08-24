@@ -16,7 +16,10 @@ public class Storage {
 
     public Storage(String filePath) {
         file = new File("data/duke.txt");
-        // Add way to automatically create folder and file if they do not exist
+        // Create directory for the file if it does not exist
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
     }
 
     public void addTasksToFile(TaskList taskList) {
