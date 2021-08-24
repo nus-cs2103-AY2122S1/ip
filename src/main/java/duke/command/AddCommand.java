@@ -19,9 +19,11 @@ public class AddCommand extends Command{
             if (taskType.equals("todo")) {
                 newTask = new Todo(fullCommand.substring(5).strip());
             } else if (taskType.equals("deadline")) {
-                newTask = new Deadline(Deadline.extractTaskDescription(fullCommand), Deadline.extractTaskTime(fullCommand));
+                newTask = new Deadline(Deadline.extractTaskDescription(fullCommand), 
+                        Deadline.extractTaskTime(fullCommand));
             } else if (taskType.equals("event"))  {
-                newTask = new Event(Event.extractTaskDescription(fullCommand), Event.extractTaskTime(fullCommand));
+                newTask = new Event(Event.extractTaskDescription(fullCommand), 
+                        Event.extractTaskTime(fullCommand));
             }
             taskList.addTask(newTask);
         } catch (UnclearInstructionException e) {

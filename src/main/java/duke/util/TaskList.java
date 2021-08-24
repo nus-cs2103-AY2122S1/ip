@@ -28,7 +28,8 @@ public class TaskList {
         if (list.size() == 1) {
             System.out.println("Now you have 1 task in the list.");
         } else {
-            System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+            System.out.println(String.format("Now you have %d tasks in the list.", 
+                    list.size()));
         }
     }
 

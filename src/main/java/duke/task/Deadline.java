@@ -25,7 +25,10 @@ public class Deadline extends Task {
         String description = "";
 
         if (contents.length != 2) {
-            throw new UnclearInstructionException("OOPS!!! The description of a " + task_type + " cannot be extracted properly.");
+
+            throw new UnclearInstructionException(
+                    "OOPS!!! The description of a deadline cannot be extracted properly.");
+
         }
 
         int istart = text.indexOf(" ");
@@ -34,7 +37,8 @@ public class Deadline extends Task {
         description = text.substring(istart + 1, iend - 1);
 
         if (description.equals("")) {
-            throw new UnclearInstructionException("OOPS!!! The description of a deadline cannot be empty.");
+            throw new UnclearInstructionException(
+                    "OOPS!!! The description of a deadline cannot be empty.");
         }
         return description;
     }
@@ -43,7 +47,8 @@ public class Deadline extends Task {
         String[] contents = text.split(" ", 2);
         String task_type = contents[0];
         if (contents.length != 2) {
-            throw new UnclearInstructionException("OOPS!!! The description of a deadline cannot be extracted properly.");
+            throw new UnclearInstructionException(
+                    "OOPS!!! The description of a deadline cannot be extracted properly.");
         }
 
         int istart = text.indexOf(" ");
