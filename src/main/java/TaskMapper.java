@@ -37,10 +37,20 @@ class TaskMapper {
             task = new ToDo(title);
         } else if (classRepr.equals(Deadline.getClassRepr())) {
             String by = lines[2];
-            task = new Deadline(title, by);
+            try {
+                task = new Deadline(title, by);
+            } catch (BlueException e) {
+                System.out.println("Something when wrong when loading data from file");
+                e.printStackTrace();
+            }
         } else if (classRepr.equals(Event.getClassRepr())) {
             String at = lines[2];
-            task = new Event(title, at);
+            try {
+                task = new Event(title, at);
+            } catch (BlueException e) {
+                System.out.println("Something when wrong when loading data from file");
+                e.printStackTrace();
+            }
         }
         return task;
     }

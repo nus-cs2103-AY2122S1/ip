@@ -23,7 +23,7 @@ public class Deadline extends Task {
     }
 
     public String getBy() {
-        return by;
+        return by.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
     public String toString() {

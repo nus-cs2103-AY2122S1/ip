@@ -22,7 +22,7 @@ public class Event extends Task {
     }
 
     public String getAt() {
-        return at;
+        return at.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
     public String toString() {
