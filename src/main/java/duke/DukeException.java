@@ -7,7 +7,7 @@ package duke;
  */
 public class DukeException extends Exception {
     /**
-     * A public constructor for initialising DukeException
+     * A public constructor for initialising DukeException.
      *
      * @param message The message meant for the Duke Exception
      */
@@ -15,6 +15,11 @@ public class DukeException extends Exception {
         super(message);
     }
 
+    /**
+     * Returns the String representation for this DukeException formatted to be printed by Duke.
+     *
+     * @return The String representation of this DukeException
+     */
     @Override
     public String toString() {
         return ":( OOPS!! " + super.getMessage();
