@@ -23,6 +23,10 @@ public class TaskList {
         Ui.formatAndPrint(output);
     }
 
+    public void addTaskQuietly(Task task) {
+        listOfTasks.add(task);
+    }
+
     public void listTasks() {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
         int index = 1;
