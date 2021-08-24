@@ -53,9 +53,7 @@ public class Duke {
         arr.add(newTask);
         System.out.println("---------------------------------------------\n"
                 + "     Got it. I've added this task:\n"
-                + "[" + newTask.getTaskType() + "] "
-                + "[" + newTask.getStatusIcon() + "] "
-                + newTask.description + "\n"
+                + newTask.toString() + "\n"
                 + "Now you have " + arr.size() + " task(s) in the list.\n"
                 + "---------------------------------------------");
     }
@@ -65,10 +63,8 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < arr.size(); i++) {
             int j = i + 1;
-            System.out.println("     " + j + ". ["
-                    + arr.get(i).getTaskType() + "]"
-                    + "[" + arr.get(i).getStatusIcon() + "] "
-                    + arr.get(i).description);
+            System.out.println("     " + j + ". "
+                    + arr.get(i).toString());
         }
         System.out.println("---------------------------------------------");
     }
@@ -82,7 +78,7 @@ public class Duke {
                 return new Todo(description);
             case "deadline":
                 String deadlineDescription = Deadline.getDeadlineDescription(description);
-                Deadline deadline = new Deadline(deadlineDescription, Deadline.getDueDate(input));
+                Deadline deadline = new Deadline(deadlineDescription, Deadline.getDate(input), Deadline.getTime(input)); //todo
                 return deadline;
             case "event":
                 String eventDescription = Event.getEventDescription(description);
