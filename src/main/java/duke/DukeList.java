@@ -58,6 +58,7 @@ public class DukeList {
         return task;
     }
 
+    // TODO Change to get size instead
     public String currentSizeMessage() {
         int size = this.database.getTasksList().size();
         String unit = size == 1 ? "task" : "tasks";

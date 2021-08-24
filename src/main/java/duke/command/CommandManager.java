@@ -12,12 +12,18 @@ import duke.exception.InvalidCommandException;
 public class CommandManager {
     private final Map<String, Command> registry;
 
+    /**
+     * Creates a command manager that manages a collection of commands predeclared
+     * commands. All registered command must have a unique label for it to be a
+     * distinguishable callable.
+     */
     public CommandManager() {
         this.registry = new HashMap<>();
     }
 
     /**
-     * Puts commands under its registry, mapped to its label.
+     * Puts commands under its registry, mapped to its label. All registered command
+     * must have a unique label for it to be a distinguishable callable.
      * 
      * @param command to be registered
      */

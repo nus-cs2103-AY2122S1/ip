@@ -10,12 +10,19 @@ import duke.task.EventTask;
 import duke.task.Task;
 
 /**
- * A command to add an event task into main DukeList.
+ * Represents a command to add an event task into main DukeList.
  */
 public class EventCommand implements Command {
     private final DukeList dukeList;
     private final UserInterface ui;
 
+    /**
+     * Creates a command that creates an event in the given dukelist and provide its
+     * response to the given ui.
+     * 
+     * @param dukeList list of tasks for the task to be added into
+     * @param ui       user interface for displaying responses
+     */
     public EventCommand(DukeList dukeList, UserInterface ui) {
         this.dukeList = dukeList;
         this.ui = ui;
