@@ -1,3 +1,4 @@
+import commands.Command;
 import exception.DukeException;
 import exception.StorageException;
 import service.ChatBot;
@@ -5,9 +6,7 @@ import parser.Parser;
 import service.TaskList;
 import storage.Storage;
 import task.Task;
-import utils.Command;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -50,30 +49,25 @@ public class Duke {
         init();
         
         Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.nextLine().trim();
-        String feedback;
-        Command command = Command.parseFromInput(userInput);
-        List<Task> tasks;
-
-        while (!command.equals(Command.BYE)) {
+        Command command;
+        do {
+            String userInput = scanner.nextLine().trim();
+            command = parser.parseCommand(userInput);
             try {
-                feedback = parser.execute(command, userInput, taskList);
-                tasks = taskList.getTasks();
+                String feedback = command.execute(taskList);
+                List<Task> tasks = taskList.getTasks();
                 storage.save(tasks);
                 chatBot.info(feedback);
-
+                
             } catch (DukeException exception) {
                 chatBot.error(exception.getMessage());
 
             } catch (StorageException exception) {
                 chatBot.error("Error updating task file.");
                 break;
-
-            } finally {
-                userInput = scanner.nextLine().trim();
-                command = Command.parseFromInput(userInput);
             }
-        }
+        } while (!command.isBye());
+
         scanner.close();
         chatBot.exit();
     }
