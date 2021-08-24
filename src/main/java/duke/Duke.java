@@ -41,7 +41,11 @@ public class Duke {
             userInterface.showError(e);
         }
         this.runLoop();
-        this.storage.save(this.list);
+        try {
+            this.storage.save(this.list);
+        } catch(DukeException e) {
+            userInterface.showError(e);
+        }
         this.userInterface.printGoodByeGreeting();
         System.exit(0);
     }

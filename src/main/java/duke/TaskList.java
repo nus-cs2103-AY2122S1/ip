@@ -15,8 +15,13 @@ public class TaskList {
         return store.size();
     }
 
-    public Task get(int taskId) {
-        return this.store.get(taskId - 1);
+    public Task get(int taskId) throws DukeException {
+        try {
+            return this.store.get(taskId - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Wrong index input.");
+        }
+
     }
 
     public void addTask(Task task) {
@@ -46,7 +51,12 @@ public class TaskList {
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (int j = 1; j <= this.size() ; j++) {
-            String line = j + "." + this.get(j).toString();
+            String line = null;
+            try {
+                line = j + "." + this.get(j).toString();
+            } catch (DukeException e) {
+                e.printStackTrace();
+            }
             result.append(line);
             if (j < this.size()) {
                 result.append("\n");

@@ -88,7 +88,7 @@ public class Storage {
         return taskList;
     }
 
-    public void save(TaskList taskList) {
+    public void save(TaskList taskList) throws DukeException {
         try{
             this.writer = Files.newBufferedWriter(this.targetDirectory, StandardCharsets.UTF_8);
         } catch (IOException e) {
