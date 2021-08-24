@@ -62,6 +62,8 @@ public class Parser {
             brain.shutdownBot(userInt, dataStore, memBuff);
         } else if (command.contains("delete")) {
             brain.deleteTask(command, dataStore, userInt);
+        } else if (command.contains("find")) {
+            brain.find(command, dataStore, userInt);
         } else {
             try {
                 errorHandle(command);

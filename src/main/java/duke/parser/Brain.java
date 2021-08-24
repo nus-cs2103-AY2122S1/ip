@@ -186,4 +186,18 @@ public class Brain {
         dataStore.remove(idx-1); // actual deletion
         userInt.say("Now you have " + (dataStore.length()) + " tasks in the list.");
     }
+
+    public void find(String input, DataStore dataStore, Ui userInt) {
+        String query = input.split(" ")[1];
+
+        userInt.say("Here are the matching tasks in your list: ");
+        for (int i = 0; i < dataStore.length(); i++) {
+            Task record = dataStore.get(i);
+            String message = record.toString();
+
+            if (record.getDescription().contains(query)) {
+                userInt.say((i+1) + ". " + message);
+            }
+        }
+    }
 }
