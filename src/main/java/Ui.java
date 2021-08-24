@@ -28,6 +28,10 @@ public class Ui {
         System.out.println(message);
     }
 
+    public void showLoadingError() {
+        System.out.println("X_X Dude failed to load the list of tasks!");
+    }
+
     public String readCommand() {
         return this.scanner.nextLine();
     }

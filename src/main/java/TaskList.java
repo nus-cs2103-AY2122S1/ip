@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,9 +20,16 @@ public class TaskList {
     }
 
     /**
+     * Constructor of TaskList.
+     */
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
+
+    /**
      * Prints the size of the list of tasks with the appropriate grammar.
      */
-    public int getSize() {
+    public int printSize() {
         int taskCount = this.tasks.size();
         System.out.printf("You have %d %s in the list.%n", taskCount, taskCount > 1 ? "tasks" : "task");
         return taskCount;
@@ -45,7 +53,7 @@ public class TaskList {
         this.tasks.add(task);
         storage.saveData(this.tasks);
         System.out.println("Added task:\n " + task);
-        this.getSize();
+        this.printSize();
     }
 
     /**
@@ -65,7 +73,7 @@ public class TaskList {
         this.tasks.remove(deleteTaskIndex);
         storage.saveData(this.tasks);
         System.out.printf("Noted! I have removed the following task:%n %s%n", toBeDeleted);
-        this.getSize();
+        this.printSize();
     }
 
     /**

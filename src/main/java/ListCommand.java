@@ -9,7 +9,7 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showList();
-        for (int i = 0; i < tasks.getSize(); i++) {
+        for (int i = 0; i < tasks.getTasks().size(); i++) {
             ui.printTaskInList(tasks.getTask(i), i);
         }
     }

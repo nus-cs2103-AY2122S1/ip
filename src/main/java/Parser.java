@@ -8,38 +8,48 @@ import java.util.Arrays;
  * @author felix-ong
  */
 public class Parser {
-    public static Command parseCommand(String userInput) throws DukeException {
+    public static Command parse(String userInput) throws DukeException {
         String[] parts = userInput.split(" ");
         String command = parts[0];
         int partsLength = parts.length;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm");
 
         switch (command) {
+        case "bye":
+            return new ExitCommand();
         case "todo":
             if (partsLength < 2) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
-            Task todo = new Todo(getDescription(parts, partsLength));
+            Task todo = new Todo(parts[1]);
             return new AddCommand(todo);
         case "deadline":
             if (partsLength < 2) {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
             }
-            LocalDateTime by = LocalDateTime.parse(parts[partsLength - 1], formatter);
-            Task deadline = new Deadline(getDescription(parts, partsLength), by);
+            String by = userInput.split(" /by ")[1];
+            LocalDateTime deadlineDateTime = LocalDateTime.parse(by, formatter);
+            Task deadline = new Deadline(getDescription(parts, partsLength), deadlineDateTime);
             return new AddCommand(deadline);
         case "event":
             if (partsLength < 2) {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
             }
-            LocalDateTime at = LocalDateTime.parse(parts[partsLength - 1], formatter);
-            Task event = new Event(getDescription(parts, partsLength), at);
+            String at = userInput.split(" /at ")[1];
+            LocalDateTime eventDateTime = LocalDateTime.parse(at, formatter);
+            Task event = new Event(getDescription(parts, partsLength), eventDateTime);
             return new AddCommand(event);
         case "list":
             return new ListCommand();
         case "done":
+            if (partsLength < 2) {
+                throw new DukeException("☹ OOPS!!! You must provide the index of the task to mark as done.");
+            }
             return new DoneCommand(parts[1]);
         case "delete":
+            if (partsLength < 2) {
+                throw new DukeException("☹ OOPS!!! You must provide the index of the task to delete.");
+            }
             return new DeleteCommand(parts[1]);
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means (X_X)" +
