@@ -19,3 +19,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Task storage files
 /data/
+/text-ui-test/data/
+/src/test/data/

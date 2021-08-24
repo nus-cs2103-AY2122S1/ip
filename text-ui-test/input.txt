@@ -1,6 +1,6 @@
 todo read book
-deadline return book /by 9th Jun
-event watch lecture /at 10am-12pm
+deadline return book /by 9/8/2020 1400
+event watch lecture /at 10/3/2021 0600
 todo borrow book
 list
 done 2
