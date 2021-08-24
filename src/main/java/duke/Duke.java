@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke("/Users/hungkhoaitay/Duke/data/duke.txt");
+        Duke duke = new Duke("/Users/hungkhoaitay/Duke.Duke/data/duke.txt");
         duke.run();
         duke.finish();
     }

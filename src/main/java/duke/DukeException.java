@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeException extends Exception{
     protected static class DukeEmptyTask extends DukeException {
         private Task.TaskKind t;

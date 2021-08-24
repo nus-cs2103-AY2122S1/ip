@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -7,7 +9,7 @@ import java.util.List;
 
 public class Storage {
 //    protected static final String HOME = System.getProperty("user.home");
-//    protected static final Path PATH = java.nio.file.Paths.get(HOME, "Duke", "data", "duke.txt");
+//    protected static final Path PATH = java.nio.file.Paths.get(HOME, "Duke.Duke", "data", "duke.txt");
 
     private Path filePath;
 

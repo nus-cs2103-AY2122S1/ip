@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
     public Ui() {}
 
@@ -16,7 +18,7 @@ public class Ui {
     }
 
     public static void printHello() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke.Duke\nWhat can I do for you?");
         printLine();
     }
 
