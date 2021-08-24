@@ -24,7 +24,7 @@ public class Duke {
     }
     public static void main(String[] args) throws IOException {
 
-        String dukeFile = "text-ui-test/duke.txt";
+        String dukeFile = "duke.txt";
 
         Duke duke = new Duke(dukeFile);
         duke.recieve.run();

@@ -30,7 +30,12 @@ public class Storage {
         File f = new File(this.filePath); // create a File for the given file path
         if (!f.exists()) {
             System.out.println("Creating new file...");
-            f.createNewFile();
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Creating new file...1");
+            }
+
         }
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
 
