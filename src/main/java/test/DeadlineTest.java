@@ -1,5 +1,6 @@
-package duke;
+package test;
 
+import duke.Deadline;
 import org.junit.Assert;
 import org.junit.Test;
 

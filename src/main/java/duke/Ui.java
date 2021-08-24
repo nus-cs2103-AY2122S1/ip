@@ -33,7 +33,7 @@ public class Ui {
 
     public void showWelcomeMessage() {
         System.out.println("Hi there! Start chatting with your new \n" + LOGO);
-        System.out.println("What would you like to do today?");
+        System.out.println(FRIENDGREETING + "What would you like to do today?");
     }
 
     public void showGoodbyeMessage() {
@@ -41,11 +41,11 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        System.out.println("File not found");
+        System.out.println(FRIENDGREETING + "File not found");
     }
 
     public void showListLoad() {
-        System.out.println("These are your existing tasks!");
+        System.out.println(FRIENDGREETING + "These are your existing tasks!");
         System.out.println(duke.getTasks().printList());
     }
 
@@ -71,7 +71,7 @@ public class Ui {
     }
 
     public void showAlreadyDoneTask(String description) {
-        System.out.println(description + " has already been done! :)");
+        System.out.println(FRIENDGREETING + description + " has already been done! :)");
     }
 
     public void showSearchResults(ArrayList<Task> resultsArray) {
