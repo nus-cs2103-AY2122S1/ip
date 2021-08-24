@@ -210,7 +210,7 @@ public class Parser {
 
     /**
      * Gets the date and time in correct
-     * notation if necessary.
+     * notation/format if necessary.
      *
      * @param info the task information.
      * @param input the user input.
