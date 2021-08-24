@@ -1,9 +1,9 @@
 package duke.task;
 
 public class DukeDeadlineTask extends DukeTask {
-    final DukeDate deadline;
+    private final DukeDate deadline;
 
-     public DukeDeadlineTask(String name, String deadline) {
+    public DukeDeadlineTask(String name, String deadline) {
         super(name);
         this.deadline = DukeDate.of(deadline);
     }

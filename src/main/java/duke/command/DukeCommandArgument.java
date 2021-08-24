@@ -3,7 +3,8 @@ package duke.command;
 import duke.exception.InvalidCommandException;
 
 public class DukeCommandArgument {
-    static final DukeCommandArgument NONE = new DukeCommandArgument("Positional argument", "", DukeCommandArgumentType.NOT_ALLOWED);
+    public static final DukeCommandArgument NONE = new DukeCommandArgument("Positional argument", "",
+            DukeCommandArgumentType.NOT_ALLOWED);
 
     private final String name;
     private final String description;
@@ -27,11 +28,13 @@ public class DukeCommandArgument {
     void assertCompatibilityWith(String argValue) throws InvalidCommandException {
         if (type == DukeCommandArgumentType.REQUIRED) {
             if (argValue == null || argValue.equals("")) {
-                throw new InvalidCommandException(String.format("%s is required but not present.", this == NONE ? name : toString()));
+                throw new InvalidCommandException(
+                        String.format("%s is required but not present.", this == NONE ? name : toString()));
             }
         } else if (type == DukeCommandArgumentType.NOT_ALLOWED) {
             if (argValue != null && !argValue.equals("")) {
-                throw new InvalidCommandException(String.format("%s \"%s\" is not allowed but present.", name, argValue));
+                throw new InvalidCommandException(
+                        String.format("%s \"%s\" is not allowed but present.", name, argValue));
             }
         }
     }

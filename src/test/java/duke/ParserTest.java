@@ -1,8 +1,8 @@
 package duke;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class ParserTest {
     @Test

@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.exception.InvalidCommandException;
 import duke.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+import duke.exception.InvalidCommandException;
+import duke.task.TaskList;
 
 import java.util.Map;
 
@@ -20,5 +20,5 @@ interface DukeCommandAction {
      * @return If Duke should continue listening to commands.
      */
     void apply(TaskList taskList, Ui ui, Storage storage,
-                  String arg, Map<String, String> namedArgs) throws InvalidCommandException;
+               String arg, Map<String, String> namedArgs) throws InvalidCommandException;
 }

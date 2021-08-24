@@ -9,6 +9,7 @@ import java.time.format.DateTimeParseException;
  */
 public abstract class DukeDate {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
+
     public static DukeDate of(String date) {
         try {
             return new DukeLocalDate(LocalDate.parse(date));
