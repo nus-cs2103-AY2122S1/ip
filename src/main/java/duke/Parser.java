@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 class Parser {
+    /**
+     * Returns a Task recovered from the record.
+     * @param record contain the information of a task
+     * @return the task recovered from the record.
+     */
     static Task convertRecordToTask(String record) {
         String[] strings = record.split("&&");
         switch (strings[0]) {
@@ -137,6 +142,12 @@ class Parser {
         return s.toString();
     }
 
+    /**
+     * Returns the information of all tasks in a certain date.
+     * @param info specify the date of tasks to be returned
+     * @param taskList the taskList that stores all the tasks
+     * @return a string containing information of all tasks in the date.
+     */
     static String getSchedule(String info, TaskList taskList) {
         ArrayList<Task> lst = taskList.getTasks();
         String output = "";
@@ -156,6 +167,12 @@ class Parser {
         return output;
     }
 
+    /**
+     * Deletes target task from taskList and returns the message.
+     * @param index the index of task to be deleted
+     * @param taskList the taskList that stores all the tasks
+     * @return the information of the deleted task and if error, the error message.
+     */
     static String deleteTask(String index, TaskList taskList) {
         ArrayList<Task> lst = taskList.getTasks();
         int idx;
