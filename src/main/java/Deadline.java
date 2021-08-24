@@ -9,12 +9,8 @@ public class Deadline extends Task{
 
     public Deadline(String description, String deadline) {
         super(description, "[D]");
-        if (deadline.equals("")) {
-            throw new MissingDateException();
-        } else {
-            this.date = LocalDate.parse(deadline.substring(0,10));
-            this.time = LocalTime.parse(deadline.substring(11), DateTimeFormatter.ofPattern("HHmm"));
-        }
+        this.date = LocalDate.parse(deadline.substring(0,10));
+        this.time = LocalTime.parse(deadline.substring(11), DateTimeFormatter.ofPattern("HHmm"));
     }
 
     public Deadline(String description, String date, String time) {

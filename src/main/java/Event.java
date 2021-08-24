@@ -9,12 +9,8 @@ public class Event extends Task{
 
     public Event(String description, String deadline) {
         super(description, "[E]");
-        if (deadline.equals("")) {
-            throw new MissingDateException();
-        } else {
-            this.date = LocalDate.parse(deadline.substring(0,10));
-            this.time = LocalTime.parse(deadline.substring(11), DateTimeFormatter.ofPattern("HHmm"));
-        }
+        this.date = LocalDate.parse(deadline.substring(0,10));
+        this.time = LocalTime.parse(deadline.substring(11), DateTimeFormatter.ofPattern("HHmm"));
     }
 
     public Event(String description, String date, String time) {
