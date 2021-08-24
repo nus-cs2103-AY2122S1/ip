@@ -7,7 +7,8 @@ public enum Commands {
     DEADLINE (new DeadlineCommand()),
     EVENT (new EventCommand()),
     DONE (new DoneCommand()),
-    DELETE (new DeleteCommand());
+    DELETE (new DeleteCommand()),
+    FIND (new FindCommand());
 
     // make an abstract command class,
     // this enum is just a way to iterate through all the commands

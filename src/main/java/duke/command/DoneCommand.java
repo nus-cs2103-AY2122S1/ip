@@ -17,6 +17,10 @@ public class DoneCommand extends Command {
      */
     @Override
     public void parse(String input) throws DukeException {
+        if (input.length() <= getCommandLength()) {
+            throw new DukeException("Please input a task number.");
+        }
+
         String data = input.substring(getCommandLength()).strip();
 
         int idx;

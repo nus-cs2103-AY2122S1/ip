@@ -47,6 +47,15 @@ public abstract class Task {
     }
 
     /**
+     * Returns the name of the task
+     *
+     * @return name of the task
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Returns what color the task should be listed with.
      *
      * @return The text color representing the task's status
