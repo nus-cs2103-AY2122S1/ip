@@ -1,7 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.sql.SQLOutput;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -61,11 +61,11 @@ public class Storage {
                         toAdd = new Todo(description);
                         break;
                     case "D":
-                        String by = splitLine.get(3);
+                        LocalDate by = LocalDate.parse(splitLine.get(3));
                         toAdd = new Deadline(description, by);
                         break;
                     case "E":
-                        String at = splitLine.get(3);
+                        LocalDate at = LocalDate.parse(splitLine.get(3));
                         toAdd = new Event(description, at);
                         break;
                     default:
