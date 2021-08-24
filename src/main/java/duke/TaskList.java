@@ -1,4 +1,9 @@
-package duke.task;
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.testinginterface.TaskListInterface;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Contains task list and executes operations on task list.
  */
-public class TaskList {
+public class TaskList implements TaskListInterface {
     private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
@@ -35,19 +40,18 @@ public class TaskList {
             Task t = this.tasks.get(i);
             if (t instanceof Deadline) {
                 Deadline d = (Deadline) t;
-                if (d.by.equals(date)) {
-                    results.add(t);
+                if (d.isSameDate(date)) {
+                    results.add(d);
                 }
             }
 
             if (t instanceof Event) {
                 Event e = (Event) t;
-                if (e.at.equals(date)) {
-                    results.add(t);
+                if (e.isSameDate(date)) {
+                    results.add(e);
                 }
             }
         }
-
         return results;
     }
 }

@@ -1,0 +1,23 @@
+package duke.stubs;
+
+import duke.testinginterface.EventInterface;
+import duke.task.Task;
+
+public class EventStub extends Task implements EventInterface {
+    public EventStub() {
+        super("");
+    }
+
+    @Override
+    public String toString() {
+        return "[E][ ] Create an event task (at: Dec 4 2021)";
+    }
+
+    public int taskType() {
+        return 1;
+    }
+
+    public String toSavedFormat() {
+        return "E/~/0/~/Create an event task/~/2021-12-04";
+    }
+}
