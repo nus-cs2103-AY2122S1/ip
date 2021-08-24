@@ -67,12 +67,12 @@ public class Parser {
      * @param str User input.
      * @return True if To Do command. False if not To Do command.
      */
-    private boolean checkToDo(String str) {
-        boolean isToDo = false;
+    private boolean checkTodo(String str) {
+        boolean isTodo = false;
         if (str.length() >= 4) {
-            isToDo = str.substring(0,4).equals("todo");
+            isTodo = str.substring(0,4).equals("todo");
         }
-        return isToDo;
+        return isTodo;
     }
 
     /**
@@ -81,7 +81,7 @@ public class Parser {
      * @param str User input.
      * @return True if Deadline command. False if not Deadline command.
      */
-    private boolean checkDeadLine(String str) {
+    private boolean checkDeadline(String str) {
         boolean isDeadLine = false;
         if (str.length() >= 8) {
             isDeadLine = str.substring(0,8).equals("deadline");
@@ -132,9 +132,9 @@ public class Parser {
             caseNum = 2;
         } else if (checkDone(input)) {
             caseNum = 3;
-        } else if (checkToDo(input)) {
+        } else if (checkTodo(input)) {
             caseNum = 4;
-        } else if (checkDeadLine(input)) {
+        } else if (checkDeadline(input)) {
             caseNum = 5;
         } else if (checkEvent(input)) {
             caseNum = 6;
@@ -247,7 +247,6 @@ public class Parser {
                 break;
             default:
                 ui.invalidInput();
-
         }
     }
 }

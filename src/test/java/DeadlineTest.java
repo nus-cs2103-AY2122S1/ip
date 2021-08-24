@@ -1,4 +1,4 @@
-import duke.Deadline;
+import duke.DeadLine;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DeadlineTest {
     String task = "project submission";
     String deadline = "2/12/2021 1635";
-    Deadline deadlineTest = new Deadline(task, deadline);
+    DeadLine deadlineTest = new DeadLine(task, deadline);
 
     @Test
     public void timeFormChangeTest() {
-        String actual = deadlineTest.timeFormChange();
+        String actual = deadlineTest.timerChange();
         String expected = "Dec 02 2021, 4.35 PM";
         assertEquals(actual, expected);
     }

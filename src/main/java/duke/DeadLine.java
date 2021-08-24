@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Represents a Deadline task.
  * @author Nikki
  */
-public class Deadline extends Task{
+
+public class DeadLine extends Task{
 
     private String deadLine;
     private LocalDateTime dateTime;
@@ -18,11 +19,11 @@ public class Deadline extends Task{
      * @param task Name of the task.
      * @param deadLine Deadline of the task.
      */
-    public Deadline(String task, String deadLine) {
+    public DeadLine(String task, String deadLine) {
         super(task);
         this.deadLine = deadLine;
         timeSetter(deadLine);
-        timeFormChange();
+        timerChange();
     }
 
     private void timeSetter(String timeInput) {
@@ -35,7 +36,7 @@ public class Deadline extends Task{
      *
      * @return String representation of date and time after format change.
      */
-    public String timeFormChange() {
+    public String timerChange() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h.mm a");
         return dateFormat.format(dateTime) + ", " + timeFormatter.format(dateTime);
@@ -54,6 +55,6 @@ public class Deadline extends Task{
         } else {
             result = "[D][ ] ";
         }
-        return result + super.task + " (by: " + timeFormChange() + ")";
+        return result + super.task + " (by: " + timerChange() + ")";
     }
 }
