@@ -16,7 +16,7 @@ public class Storage {
 
     public Storage(String filePath) {
         file = new File("data/duke.txt");
-        // Create directory for the file if it does not exist
+        // Create folder for the file if it does not exist
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
@@ -49,6 +49,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             System.out.println("Storage file not found: " + e.getMessage());
             System.out.println("Task List will be initialized to empty state.");
+            System.out.println("Duke.txt will be created for you once you add tasks to the list.");
             return taskList;
         }
 
