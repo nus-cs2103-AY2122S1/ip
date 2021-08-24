@@ -28,7 +28,21 @@ public class Saber {
             "      told me to remember?\n" + "\n" +
             "      I'll list them for you, Master.\n";
 
-    protected static ArrayList<Task> taskList = new ArrayList<>();
+    protected static String storageLoadingError = lineBreak + "\n      I'm sorry, Master. I can't ...\n"
+            +  "      seem to remember what\n"
+            +  "      you have previously told me\n\n" + lineBreak;
+
+    protected static String storageStoringError = lineBreak + "\n      I'm really sorry, Master. I can't ...\n"
+            +  "      the next time you talk to me ...\n"
+            +  "      I won't be the Saber that you\n"
+            +  "      know...I won't remember our\n"
+            +  "      interaction either. A new\n"
+            +  "      Saber will serve you instead.\n\n"
+            +  "      Have I...done well, Master?\n\n" + lineBreak;
+
+    protected TaskStorage storage;
+
+    protected TaskList taskList;
 
     enum InputCommand {
         add,
@@ -41,14 +55,31 @@ public class Saber {
         list,
     }
 
-    public static void handleAddTask(String task) {
-        Task newTask = new Task(task);
+    enum TaskType {
+        deadline,
+        event,
+        normalTask,
+        todo,
+    }
+
+    public Saber(String filePath) {
+        storage = new TaskStorage(filePath);
+        try {
+            this.taskList = new TaskList(storage.load());
+        } catch (SaberStorageLoadException e) {
+            System.out.println(storageLoadingError);
+            this.taskList = new TaskList(new ArrayList<>());
+        }
+    }
+
+    public void handleAddTask(String task) {
+        Task newTask = new Task(task, false);
         taskList.add(newTask);
         System.out.println(lineBreak + "\n      I have added: "  + task + "\n\n" + lineBreak);
     }
 
-    public static void handleDeadlineTask(String task, String time) {
-        Task deadline = new Deadline(task, time);
+    public void handleDeadlineTask(String task, String time) {
+        Task deadline = new Deadline(task, time, false);
         taskList.add(deadline);
         int totalTask = taskList.size();
         System.out.println(lineBreak + "\n      Right, Master.\n"
@@ -60,13 +91,13 @@ public class Saber {
                 "\n      in the list." + "\n\n" + lineBreak);
     }
 
-    public static void handleDeleteTask(int taskIndex) throws TaskNotFoundException {
+    public void handleDeleteTask(int taskIndex) throws TaskNotFoundException {
         int totalTask = taskList.size();
         if (taskIndex >= totalTask || taskIndex < 0) {
             throw new TaskNotFoundException("Task not found");
         }
         Task task = taskList.get(taskIndex);
-        taskList.remove(taskIndex);
+        taskList.delete(taskIndex);
         totalTask--;
         System.out.println(lineBreak + "\n      Understand, Master.\n"
                 + "      I have deleted this task.\n"
@@ -76,7 +107,7 @@ public class Saber {
                 "\n      in the list." + "\n\n" + lineBreak);
     }
 
-    public static void handleDoneTask(int taskIndex) throws TaskNotFoundException {
+    public void handleDoneTask(int taskIndex) throws TaskNotFoundException {
         int totalTask = taskList.size();
         if (taskIndex >= totalTask || taskIndex < 0) {
             throw new TaskNotFoundException("Task not found");
@@ -87,8 +118,8 @@ public class Saber {
                 + "\n        " + task + "\n\n" + lineBreak);
     }
 
-    public static void handleEventTask(String task, String time) {
-        Task event = new Event(task, time);
+    public void handleEventTask(String task, String time) {
+        Task event = new Event(task, time, false);
         taskList.add(event);
         int totalTask = taskList.size();
         System.out.println(lineBreak + "\n      Right, Master.\n"
@@ -100,7 +131,7 @@ public class Saber {
                 "\n      in the list." + "\n\n" + lineBreak);
     }
 
-    public static void handleListTask() {
+    public void handleListTask() {
         System.out.println(lineBreak + "\n" + listMessage);
         int totalTask = taskList.size();
         for (int i = 0; i < totalTask; i++) {
@@ -113,8 +144,8 @@ public class Saber {
         System.out.println(lineBreak);
     }
 
-    public static void handleTodoTask(String task) {
-        Task todo = new ToDo(task);
+    public void handleTodoTask(String task) {
+        Task todo = new ToDo(task, false);
         taskList.add(todo);
         int totalTask = taskList.size();
         System.out.println(lineBreak + "\n      Yes, Master.\n"
@@ -125,12 +156,34 @@ public class Saber {
                 "\n      in the list." + "\n\n" + lineBreak);
     }
 
-    public static void main(String[] args) {
+    public void endSaber() {
+        System.out.println(goodbye);
+        TaskType[] taskTypeArray = new TaskType[taskList.size()];
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i) instanceof Deadline) {
+                taskTypeArray[i] = TaskType.deadline;
+            } else if (taskList.get(i) instanceof Event) {
+                taskTypeArray[i] = TaskType.event;
+            } else if (taskList.get(i) instanceof ToDo) {
+                taskTypeArray[i] = TaskType.todo;
+            } else {
+                taskTypeArray[i] = TaskType.normalTask;
+            }
+        }
+        try {
+            storage.store(taskList, taskTypeArray);
+        } catch (SaberStorageStoreException e) {
+            System.out.println(storageStoringError);
+        }
+    }
+
+    public void run() {
         boolean end = false;
         Scanner sc = new Scanner(System.in);
         System.out.println("\n" + logo);
         System.out.println(greeting);
         while (!end) {
+            Runtime.getRuntime().addShutdownHook(new Thread(this::endSaber));
             String input = sc.nextLine().trim();
             Command command = new Command(input);
             InputCommand commandType ;
@@ -250,7 +303,12 @@ public class Saber {
                         + "      I don't ... understand your command.\n\n"
                         + lineBreak);
             }
+
         }
-        System.out.println(goodbye);
+        endSaber();
+    }
+
+    public static void main(String[] args) {
+        new Saber(System.getProperty("user.dir")).run();
     }
 }
