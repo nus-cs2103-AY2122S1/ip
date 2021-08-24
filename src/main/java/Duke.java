@@ -2,9 +2,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 
 public class Duke {
 
@@ -28,10 +31,6 @@ public class Duke {
         }
     }
 
-    private static void AddTask() {
-
-    }
-
     private static void HandleTask(String Message) throws DukeException{
         String task = "";
         String deadline = "";
@@ -42,18 +41,18 @@ public class Duke {
         }
 
         //Get Task description and time if it has it.
-        if (Message.indexOf("/") != -1) {
+        if (Message.contains("/")) {
             task = Message.substring(Message.indexOf(" ") + 1, Message.indexOf("/") - 1);
 
             //throw exceptions for deadline or events' format.
             if (Message.startsWith("deadline")) {
-                if (Message.indexOf("/by") != -1) {
+                if (Message.contains("/by")) {
                     deadline = Message.substring(Message.indexOf("/by") + 3);
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but the format of deadline is wrong :-(");
                 }
             } else if (Message.startsWith("event")) {
-                if (Message.indexOf("/at") != -1) {
+                if (Message.contains("/at")) {
                     deadline = Message.substring(Message.indexOf("/at") + 3);
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but the format of event is wrong :-(");
@@ -63,7 +62,7 @@ public class Duke {
             }
         }
         else {
-            if (Message.indexOf(" ") == -1) {
+            if (!Message.contains(" ")) {
                 throw new DukeException("☹ OOPS!!! The description of a " + Message +" cannot be empty.");
             }else {
                 task = Message.substring(Message.indexOf(" ") + 1);
@@ -97,7 +96,7 @@ public class Duke {
     }
 
     private static void MarkDone(int index) throws DukeException{
-        if (index < 0) {
+        if (index < 0 || index >= list.size()) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
         } else {
             System.out.println("Nice! I've marked this task as done:");
@@ -107,7 +106,7 @@ public class Duke {
     }
 
     private static void Delete(int index) throws DukeException{
-        if (index < 0) {
+        if (index < 0 || index >= list.size()) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
         } else {
             System.out.println("Noted. I've removed this task:");
@@ -161,7 +160,7 @@ public class Duke {
         return done;
     }
 
-    private static void LoadDataFromFile(String filePath) throws FileNotFoundException {
+    private static void ReadDataFromFile(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f);
         int index = 1;
@@ -175,51 +174,82 @@ public class Duke {
         }
     }
 
-
-    private static void PrintMessage() {
-        Scanner scanner = new Scanner(System.in);
-        String Message = "";
-        String Goodbye_message = "Bye. Hope to see you again soon!";
-
-        //Use loop to determine if a user enters "bye" or not.
-        while (true) {
-            Message = scanner.nextLine();
-            System.out.println(line);
-            if (Message.equals("bye")) {
-                System.out.println(Goodbye_message);
-                System.out.println(line + "\n");
-                break;
-            }  else if (Message.equals("list")){
-                PrintList();
+    private static void LoadData(){
+        try {
+            ReadDataFromFile("data/duke.txt");
+        } catch (FileNotFoundException e1){
+            System.out.println("No File in the given root. Create a new file.");
+            try {
+                FileWriter fw = new FileWriter("data/duke.txt");
+                fw.close();
+            } catch (IOException e2) {
+                System.out.println("Something went wrong: " + e2.getMessage());
             }
-            else if (Message.startsWith("done")) {
-                int index = Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1;
+        }
+    }
 
+    private static void OperationForDuke(String t, String Message) {
+        int index;
+        switch (t) {
+            case "bye": {
+                String Goodbye_message = "Bye. Hope to see you again soon!";
+                System.out.println(Goodbye_message);
+                break;}
+            case "list": {
+                PrintList();
+                break;
+            }
+            case "done": {
                 try {
+                    index = (Message.contains(" "))? Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1
+                            :-1;
                     MarkDone(index);
                 } catch (DukeException e){
                     e.PrintErrorMessage();
                 }
-            } else if (Message.startsWith("delete")) {
-                int index =  Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1;
-
+                break;
+            }
+            case "delete":{
                 try {
+                    index = (Message.contains(" "))? Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1
+                            :-1;
                     Delete(index);
                 } catch (DukeException e){
                     e.PrintErrorMessage();
                 }
-            } else  {
+                break;
+            }
+            default:{
                 try {
                     HandleTask(Message);
                 } catch (DukeException e)
                 {
                     e.PrintErrorMessage();
                 }
+                break;
             }
-            System.out.println(line + "\n");
+        }
+    }
 
-            //Update the SaveData every time a round of operation is done.
-            UpdateSaveData();
+
+    private static void PrintMessage() {
+        Scanner scanner = new Scanner(System.in);
+        String Message = "";
+        String OperationType = "";
+
+        //Use loop to determine if a user enters "bye" or not.
+        while (true) {
+            Message = scanner.nextLine();
+
+            if (Message.indexOf(" ") != -1) {
+                OperationType = Message.substring(0, Message.indexOf(" "));
+            } else {
+                OperationType = Message;
+            }
+            System.out.println(line);
+            OperationForDuke(OperationType, Message); // Choose an operation for duke to do.
+            System.out.println(line + "\n");
+            UpdateSaveData(); //Update the SaveData every time a round of operation is done.
         }
     }
 
@@ -237,6 +267,7 @@ public class Duke {
     }
 
 
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -245,11 +276,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         //Load Save Data
-        try {
-            LoadDataFromFile("data/duke.txt");
-        } catch (FileNotFoundException e){
-            System.out.println("File not found");
-        }
+        LoadData();
 
 
        //Print Hello.

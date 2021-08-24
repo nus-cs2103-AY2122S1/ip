@@ -1,2 +1,3 @@
 T | 1 | fuck you
-D | 1 | suck my dick | Aug 6th
+T | 0 | suck my dick
+D | 0 | fc |  6 a.m
