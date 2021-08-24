@@ -71,7 +71,6 @@ public class Event extends Task {
      *
      * @param text  Full command given by user.
      * @return Event time.
-<<<<<<< HEAD
      * @throws UnclearInstructionException If the given command cannot be properly extracted or has empty time.
      */
     public static String extractTaskTime(String text) throws UnclearInstructionException {
