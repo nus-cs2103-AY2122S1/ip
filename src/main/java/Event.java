@@ -1,14 +1,17 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Event extends Task {
 
-    protected String at;
+    protected Date date;
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws Exception {
         super(description);
-        this.at = at;
+        this.date = new SimpleDateFormat("dd/MM/yyyy").parse(at);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (by: " + at + ")";
+        return "[E]" + super.toString() + " (by: " + date.toString() + ")";
     }
 }
