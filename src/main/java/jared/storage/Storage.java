@@ -29,11 +29,13 @@ public class Storage {
             f.createNewFile();
             Scanner reader = new Scanner(f);
             while (reader.hasNext()) {
-                String type = Parser.parseData(reader.nextLine(), "type");
-                String progress = Parser.parseData(reader.nextLine(), "progress");
-                String description = Parser.parseData(reader.nextLine(), "description");
-                String dateStr = Parser.parseData(reader.nextLine(), "date");
+                String next = reader.nextLine();
+                String type = Parser.parseData(next, "type");
+                String progress = Parser.parseData(next, "progress");
+                String description = Parser.parseData(next, "description");
+
                 Task t;
+                String dateStr;
                 LocalDate date;
                 LocalTime time;
                 switch (type) {
@@ -41,9 +43,10 @@ public class Storage {
                         t = new Todo(description);
                         break;
                     case "D":
+                        dateStr = Parser.parseData(next, "date");
                         date = LocalDate.parse(dateStr);
                         try {
-                            String timeStr = Parser.parseData(reader.nextLine(), "time");
+                            String timeStr = Parser.parseData(next, "time");
                             time = LocalTime.parse(timeStr);
                             t = new Deadline(description, date, time);
                         } catch (ArrayIndexOutOfBoundsException e) {
@@ -51,9 +54,10 @@ public class Storage {
                         }
                         break;
                     case "E":
+                        dateStr = Parser.parseData(next, "date");
                         date = LocalDate.parse(dateStr);
                         try {
-                            String timeStr = Parser.parseData(reader.nextLine(), "time");
+                            String timeStr = Parser.parseData(next, "time");
                             time = LocalTime.parse(timeStr);
                             t = new Event(description, date, time);
                         } catch (ArrayIndexOutOfBoundsException e) {
