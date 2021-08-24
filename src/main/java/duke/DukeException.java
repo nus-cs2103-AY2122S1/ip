@@ -1,8 +1,8 @@
+package duke;
 /**
  * DukeException class.
  *
  * @author Timothy Wong Eu-Jin
- * @version A-MoreOOP
  */
 public class DukeException extends Exception {
     DukeException(String message) {

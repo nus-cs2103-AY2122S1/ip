@@ -1,13 +1,11 @@
-import java.io.FileNotFoundException;
+package duke;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
 /**
  * Duke class
  *
  * @author Timothy Wong Eu-Jin
- * @version A-MoreOOP
  */
 public class Duke {
     private Storage storage;

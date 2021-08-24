@@ -1,21 +1,22 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event class IS-A Task.
+ * Deadline class IS-A Task.
  *
- * Task that has a start and end time
+ * Task that needs to be done by a specific date/time
  * @author Timothy Wong Eu-Jin
  * @version A-MoreOOP
  */
-public class Event extends Task {
+public class Deadline extends Task {
 
     private LocalDate date;
 
-    public Event(String description, String date) {
+    public Deadline(String description, String date) {
         super(description);
         this.date = LocalDate.parse(date);
-
     }
 
     public LocalDate getDate() {
@@ -23,7 +24,7 @@ public class Event extends Task {
     }
 
     public String toString() {
-        return ("[E]" + super.toString() + " (at: " +
+        return ("[D]" + super.toString() + " (by: " +
                 this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
     }
 

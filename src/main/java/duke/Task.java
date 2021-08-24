@@ -1,8 +1,9 @@
+package duke;
+
 /**
  * Task class. List HAS-A Task (encapsulation).
  *
  * @author Timothy Wong Eu-Jin
- * @version A-MoreOOP
  */
 
 public class Task {

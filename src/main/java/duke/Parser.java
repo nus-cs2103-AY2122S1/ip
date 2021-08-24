@@ -1,5 +1,11 @@
+package duke;
+
 import java.io.IOException;
-import java.util.Scanner;
+/**
+ * Parser class
+ *
+ * @author Timothy Wong Eu-Jin
+ */
 
 /** Deals with making sense of the user command*/
 public class Parser {

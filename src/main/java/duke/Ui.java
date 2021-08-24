@@ -1,5 +1,12 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+/**
+ * Ui class
+ *
+ * @author Timothy Wong Eu-Jin
+ */
 
 /** Deals with interactions with the user. */
 public class Ui {

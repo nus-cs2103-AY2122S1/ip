@@ -1,10 +1,10 @@
-import java.io.IOException;
+package duke;
+
 import java.util.ArrayList;
 /**
  * Contains the task list e.g. it has operation to add/delete tasks in the list
  *
  * @author Timothy Wong Eu-Jin
- * @version A-MoreOOP
  */
 
 public class TaskList {
