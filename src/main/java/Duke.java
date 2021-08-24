@@ -7,7 +7,7 @@ import java.util.Scanner;
  * Duke class
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-6
+ * @version Level-7
  */
 public class Duke {
     public static final String divider = "-------------------------------------";
@@ -110,10 +110,10 @@ public class Duke {
         if (!req.contains("/by")) {
             throw new MissingTimeCommandException("Missing Time Command: add '/by' in the command.");
         }
-
-        String[] splitReq = req.split("/by", 2);
-        String desc = splitReq[0];
-        String date = splitReq[1];
+        String[] splitReq = req.split(" ", 2);
+        String[] body = splitReq[1].split(" /by ", 2);
+        String desc = body[0];
+        String date = body[1];
         Deadline deadline = new Deadline(desc, date);
         this.list.add(deadline);
         return deadline;
@@ -128,9 +128,10 @@ public class Duke {
             throw new MissingTimeCommandException("Missing Time Command: add '/at' in the command.");
         }
 
-        String[] splitReq = req.split("/at", 2);
-        String desc = splitReq[0];
-        String date = splitReq[1];
+        String[] splitReq = req.split(" ", 2);
+        String[] body = splitReq[1].split(" /at ", 2);
+        String desc = body[0];
+        String date = body[1];
         Event event = new Event(desc, date);
         this.list.add(event);
         return event;

@@ -2,7 +2,7 @@
  * Task class. List HAS-A Task (encapsulation).
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-6
+ * @version Level-7
  */
 
 public class Task {
@@ -14,11 +14,6 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-    }
-
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
     }
 
     //markAsDone method indicates a task in completed

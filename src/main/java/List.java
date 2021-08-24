@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * List class: Duke HAS-A List, List HAS-A Task
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-6
+ * @version Level-7
  */
 
 public class List {
@@ -62,13 +62,13 @@ public class List {
             } else if (task instanceof Deadline) {
                 req += "D | ";
                 req += task.isDone() ? "1 | " : "0 | ";
-                req += task.getDescription() + "|";
+                req += task.getDescription() + " | ";
                 req += ((Deadline) task).getDate();
                 req += System.lineSeparator();
             } else if (task instanceof Event) {
                 req += "E | ";
                 req += task.isDone() ? "1 | " : "0 | ";
-                req += task.getDescription() + "|";
+                req += task.getDescription() + " | ";
                 req += ((Event) task).getDate();
                 req += System.lineSeparator();
             }

@@ -3,7 +3,7 @@
  *
  * Task without any date/time attached to it
  * @author Timothy Wong Eu-Jin
- * @version Level-6
+ * @version Level-7
  */
 public class ToDo extends Task {
 
