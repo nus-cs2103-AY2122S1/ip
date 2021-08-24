@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDateTime;
 
 public class Deadline extends TaskItem {
@@ -8,7 +10,7 @@ public class Deadline extends TaskItem {
 
     protected String dateAndTimeInString;
     /**
-     * Constructor for creating a Deadline object.
+     * Constructor for creating a duke.Deadline object.
      * @param description description of the task.
      * @param byDateAndTime the by-date of the task, e.g. "by 27-04-1999 12:00"
      */
@@ -24,7 +26,7 @@ public class Deadline extends TaskItem {
         }
     }
 
-//    public Deadline(String description) {
+//    public duke.Deadline(String description) {
 //        super(description);
 //    }
     @Override
@@ -34,7 +36,7 @@ public class Deadline extends TaskItem {
 
     /**
      * Overriden toString() method.
-     * @return a string representation of the Deadline object.
+     * @return a string representation of the duke.Deadline object.
      */
     @Override
     public String toString() {

@@ -1,3 +1,5 @@
+package duke;
+
 public class Duke {
 
     public static boolean active;
@@ -6,7 +8,7 @@ public class Duke {
 
 
     /**
-     * awaken() awakens Duke and allows one to input commands to Duke.
+     * awaken() awakens duke.Duke and allows one to input commands to duke.Duke.
      */
     public static void awaken() {
 
@@ -29,9 +31,9 @@ public class Duke {
     }
 
     /**
-     * deletes a task from the list that Duke creates.
+     * deletes a task from the list that duke.Duke creates.
      * @param taskToBeDeleted the index of the task to be deleted.
-     * @throws DukeException An exception stemming from incorrect or awkward input to Duke.
+     * @throws DukeException An exception stemming from incorrect or awkward input to duke.Duke.
      */
     public static void deleteTask(String taskToBeDeleted) throws DukeException {
         int taskNumber = Integer.parseInt(taskToBeDeleted);
@@ -52,9 +54,9 @@ public class Duke {
 
 
     /**
-     * markAsFinished marks items on Duke's list as completed. Completed tasks will have a checkbox [X].
+     * markAsFinished marks items on duke.Duke's list as completed. Completed tasks will have a checkbox [X].
      * @param taskItemNumber the index of the task to be marked as finished.
-     * @throws DukeException An exception stemming from incorrect or awkward input to Duke.
+     * @throws DukeException An exception stemming from incorrect or awkward input to duke.Duke.
      */
     public static void markAsFinished(String taskItemNumber) throws DukeException {
         int taskNumber = Integer.parseInt(taskItemNumber);
@@ -70,8 +72,8 @@ public class Duke {
     }
 
     /**
-     * addToList adds a taskItem of type TaskItem to the list.
-     * @param taskItem a TaskItem that is to be added to Duke's list.
+     * addToList adds a taskItem of type duke.TaskItem to the list.
+     * @param taskItem a duke.TaskItem that is to be added to duke.Duke's list.
      */
     public static void addToList(TaskItem taskItem) {
         Duke.taskList.add(taskItem);
@@ -102,15 +104,15 @@ public class Duke {
     }
 
 //    /**
-//     * sends the greeting message for Duke.
+//     * sends the greeting message for duke.Duke.
 //     */
 //    public static void sendStartMessage() {
 //
-//        Ui.sendStartMessage();
+//        duke.Ui.sendStartMessage();
 //    }
 
 //    /**
-//     * sends the closing message for Duke.
+//     * sends the closing message for duke.Duke.
 //     */
 //    public static void sendEndMessage() {
 //        System.out.println("____________________________________________________________");
@@ -120,7 +122,7 @@ public class Duke {
 
     /**
      * main method.
-     * @param args input from the user to control Duke.
+     * @param args input from the user to control duke.Duke.
      */
     public static void main(String[] args) {
         Duke.awaken();

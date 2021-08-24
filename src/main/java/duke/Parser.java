@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -62,7 +64,7 @@ public class Parser {
                 try {
                     LocalDateTime byDateAndTime = LocalDateTime.parse(by, formatter);
 //                        String description = input.split("/")[0];
-                    //Deadline dead = new Deadline(description, by);
+                    //duke.Deadline dead = new duke.Deadline(description, by);
                     Deadline dead = new Deadline(description, byDateAndTime);
                     Duke.addToList(dead);
                     Storage.appendToFile(dead.toFileString());

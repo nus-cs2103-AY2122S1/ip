@@ -1,16 +1,18 @@
+package duke;
+
 public class ToDo extends TaskItem {
 
     private boolean readFromFile = false;
 
     /**
-     * Constructor for creating a ToDo object.
-     * @param description the description of the ToDo/TaskItem.
+     * Constructor for creating a duke.ToDo object.
+     * @param description the description of the duke.ToDo/duke.TaskItem.
      */
     public ToDo(String description) {
         super(description);
     }
 
-//    public ToDo(String description, boolean readFromFile) {
+//    public duke.ToDo(String description, boolean readFromFile) {
 //        super(description);
 //        this.readFromFile = readFromFile;
 //    }
@@ -28,7 +30,7 @@ public class ToDo extends TaskItem {
 
     /**
      * Overriden toString() method.
-     * @return A String representation of a ToDo object.
+     * @return A String representation of a duke.ToDo object.
      */
     @Override
     public String toString() {

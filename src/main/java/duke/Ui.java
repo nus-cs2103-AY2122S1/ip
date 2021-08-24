@@ -1,6 +1,8 @@
+package duke;
+
 public class Ui {
     private static String startMessage = "____________________________________________________________\n" +
-            "Hello! I'm Duke \nFor " +
+            "Hello! I'm duke.Duke \nFor " +
             "events and deadlines, be sure to state the due date or the event timing as such: " +
             "'XXX /by dd-MM-yyyy HH:mm'\n" +
             "____________________________________________________________";

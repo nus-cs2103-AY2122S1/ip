@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDateTime;
 
 public class Event extends TaskItem {
@@ -11,7 +13,7 @@ public class Event extends TaskItem {
 
     protected String dateAndTimeInString;
     /**
-     * Constructor for creating an Event object.
+     * Constructor for creating an duke.Event object.
      * @param description description of the event.
      * @param byDateAndTime date and time of the event.
      */
@@ -37,7 +39,7 @@ public class Event extends TaskItem {
         }
     }
 
-//    public Event(String description) {
+//    public duke.Event(String description) {
 //        super(description);
 //        this.readFromFile = true;
 //        this.byDateAndTime = byDateAndTime;
@@ -68,7 +70,7 @@ public class Event extends TaskItem {
 
     /**
      * Overriden toString() method.
-     * @return a String representation of an Event object.
+     * @return a String representation of an duke.Event object.
      */
     @Override
     public String toString() {

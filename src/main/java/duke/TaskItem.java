@@ -1,11 +1,13 @@
+package duke;
+
 public class TaskItem {
 
     private String task;
     private boolean completed;
 
     /**
-     * Constructor for creating a TaskItem object.
-     * @param task the description of the TaskItem.
+     * Constructor for creating a duke.TaskItem object.
+     * @param task the description of the duke.TaskItem.
      */
     public TaskItem(String task) {
         this.task = task;
@@ -14,7 +16,7 @@ public class TaskItem {
 
     /**
      * describes the task.
-     * @return returns the description of the TaskItem as a String.
+     * @return returns the description of the duke.TaskItem as a String.
      */
     public String describeTaskItem() {
         return this.task;
@@ -45,7 +47,7 @@ public class TaskItem {
 
     /**
      * Overriden toString method.
-     * @return a String representation of a TaskItem.
+     * @return a String representation of a duke.TaskItem.
      */
     @Override
     public String toString() {
