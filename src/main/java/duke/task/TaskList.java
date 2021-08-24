@@ -4,26 +4,49 @@ import duke.exception.NoSuchTaskException;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a task list.
+ */
 public class TaskList {
     private final ArrayList<Task> list;
 
-
+    /**
+     * Constructor.
+     */
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Adds the specified Task to the list.
+     * @param task The Task.
+     */
     public void addTask(Task task) {
         list.add(task);
     }
 
+    /**
+     * Retrieves the nth Task from the list.
+     * @param taskNumber The position of the task in the list.
+     * @return The Task.
+     */
     public Task getTask(int taskNumber) {
         return this.list.get(taskNumber - 1);
     }
 
+    /**
+     * Returns the amount of tasks in the specified list.
+     * @return The amount of tasks.
+     */
     public int getTaskAmount() {
         return list.size();
     }
 
+    /**
+     * Marks the nth Task as done.
+     * @param taskPos The task position in the list.
+     * @throws NoSuchTaskException
+     */
     public void markDone(int taskPos) throws NoSuchTaskException {
         if (taskPos >= 0 && taskPos < list.size()) {
             list.get(taskPos).markComplete();
@@ -32,6 +55,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes the nth task from the list.
+     * @param taskPos The task position in the list.
+     * @return The deleted task.
+     * @throws NoSuchTaskException
+     */
     public Task deleteTask(int taskPos) throws NoSuchTaskException {
 
         if (taskPos >= 0 && taskPos < list.size()) {
@@ -43,6 +72,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * String representation of the tasklist.
+     * @return String representation of the tasklist.
+     */
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
@@ -53,6 +86,10 @@ public class TaskList {
         return s.toString();
     }
 
+    /**
+     * String representation of the tasklist for storage.
+     * @return String representation of the tasklist(storage format).
+     */
     public String toStorageString() {
         StringBuilder s = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
