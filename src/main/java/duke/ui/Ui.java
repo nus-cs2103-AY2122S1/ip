@@ -13,6 +13,7 @@ public class Ui {
 
     /**
      * Reads the text inputted by the user.
+     *
      * @return A String representing the user input.
      */
     public String readCommand() {
@@ -47,6 +48,7 @@ public class Ui {
 
     /**
      * Prints the message inputted.
+     *
      * @param message The message to be outputted.
      */
     public void printsMessage(String message) {
@@ -55,6 +57,7 @@ public class Ui {
 
     /**
      * Prints the tasks in the task list.
+     *
      * @param taskList The tasks that will be printed.
      */
     public void printTasks(TaskList taskList) {

@@ -16,6 +16,7 @@ public class Duke {
 
     /**
      * Creates duke with the file path given.
+     *
      * @param filePath The file path where the tasks are stored locally.
      */
     public Duke(String filePath) {

@@ -16,6 +16,7 @@ public class Task {
 
     /**
      * A constructor used to initialize the task.
+     *
      * @param description the description of the task.
      */
     public Task(String description) {
@@ -24,6 +25,7 @@ public class Task {
 
     /**
      * A constructor used to initialize the task through file input.
+     *
      * @param description the description of the task.
      * @param isCompleted the state of the task.
      */
@@ -41,6 +43,7 @@ public class Task {
 
     /**
      * Return the string representation of task.
+     *
      * @return the string representation of task.
      */
     @Override
@@ -51,6 +54,7 @@ public class Task {
 
     /**
      * Return the string representation of task for file input/output.
+     *
      * @return the string representation of task.
      */
     public String fileFormat() {

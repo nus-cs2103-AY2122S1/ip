@@ -20,6 +20,7 @@ public class Event extends Task {
 
     /**
      * A constructor used to initialize the event.
+     *
      * @param description the description of the event.
      * @param date the date of the event.
      * @param time the time of the event.
@@ -32,6 +33,7 @@ public class Event extends Task {
 
     /**
      * A constructor used to initialize the event through file input.
+     *
      * @param description the description of the event.
      * @param isCompleted the state of the event.
      * @param date the date of the event.
@@ -45,6 +47,7 @@ public class Event extends Task {
 
     /**
      * Return the string representation of event.
+     *
      * @return the string representation of event.
      */
     @Override
@@ -56,6 +59,7 @@ public class Event extends Task {
 
     /**
      * Return the string representation of event for file input/output.
+     *
      * @return the string representation of event for file input/output.
      */
     @Override

@@ -22,6 +22,7 @@ public class Storage {
 
     /**
      * Creates storage with the file path provided.
+     *
      * @param filePath The file path where all the tasks are stored.
      */
     public Storage(String filePath) {
@@ -30,6 +31,7 @@ public class Storage {
 
     /**
      * Loads the text file and creates a text file if file does not exist.
+     *
      * @return A array list with all the tasks read from the file.
      */
     public ArrayList<Task> loadFile() {
@@ -69,6 +71,7 @@ public class Storage {
 
     /**
      * Updates the tasks given to the file.
+     *
      * @param taskList The tasks that will be updated to the file.
      */
     public void updateTasks(TaskList taskList) {
@@ -76,8 +79,8 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(this.filePath);
             ArrayList<String> displayTasks = new ArrayList<>();
-            for (int i = 0; i < tasks.size(); i++) {
-                displayTasks.add(tasks.get(i).fileFormat());
+            for (Task task : tasks) {
+                displayTasks.add(task.fileFormat());
             }
             writer.write(String.join(String.format("%n"), displayTasks));
             writer.close();

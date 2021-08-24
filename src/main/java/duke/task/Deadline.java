@@ -20,6 +20,7 @@ public class Deadline extends Task {
 
     /**
      * A constructor used to initialize the deadline.
+     *
      * @param description the description of the deadline.
      * @param date the date of the deadline
      * @param time the time of the deadline
@@ -32,6 +33,7 @@ public class Deadline extends Task {
 
     /**
      * A constructor used to initialize the deadline through file input.
+     *
      * @param description the description of the event.
      * @param isCompleted the state of the event.
      * @param date the date of the deadline
@@ -45,6 +47,7 @@ public class Deadline extends Task {
 
     /**
      * Return the string representation of deadline.
+     *
      * @return the string representation of deadline.
      */
     @Override
@@ -56,6 +59,7 @@ public class Deadline extends Task {
 
     /**
      * Return the string representation of deadline for file input/output.
+     *
      * @return the string representation of deadline for file input/output.
      */
     @Override
