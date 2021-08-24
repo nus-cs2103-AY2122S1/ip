@@ -2,7 +2,7 @@
  * This class handles the storage of the current list (i.e. the updating and retrieval)
  *
  * @author Megan Wee Rui En
- * @version CS2103 AY21/22 Semester 1
+ * @version CS2103T AY21/22 Semester 1
  */
 
 package duke.storage;
@@ -32,6 +32,12 @@ public class Storage {
         file = new File(FILE_PATH);
     }
 
+    /**
+     * This function loads the existing file for the todo list if it exists, or creates a file if it does not
+     *
+     * @return an ArrayList of tasks for the todo list
+     * @throws IOException
+     */
     public ArrayList<Task> load() throws IOException {
 
         // If the file exists, print out the previous data
@@ -97,6 +103,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * This function updates the file
+     *
+     * @throws FileNotFoundException
+     */
     private void update() throws FileNotFoundException {
         String txt = "";
         for (String s : textArr) {
@@ -107,20 +118,37 @@ public class Storage {
         pw.flush();
     }
 
+    /**
+     * This function updates the textArr element after it has been marked as "done"
+     *
+     * @param ref the index of the item in the textArr being referenced to
+     * @param s the string to be added to the textArr
+     * @throws IOException
+     */
     public void updateDone(int ref, String s) throws IOException {
         textArr.set(ref, s);
         update();
     }
 
+    /**
+     * This function adds a task to the textArr
+     *
+     * @param s the string to be added to the textArr
+     * @throws IOException
+     */
     public void addTask(String s) throws IOException {
         textArr.add(s);
         update();
     }
 
+    /**
+     * This function removes the task referenced to from textArr
+     *
+     * @param ref the index of the item in the textArr being referenced to be removed
+     * @throws IOException
+     */
     public void removeTask(int ref) throws IOException{
         textArr.remove(ref);
         update();
     }
-
-
 }

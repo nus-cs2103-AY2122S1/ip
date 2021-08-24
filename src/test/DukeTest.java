@@ -1,12 +1,16 @@
+/**
+ * This class represents a test file for Duke.java.
+ *
+ * @author Megan Wee Rui En
+ * @version CS2103T AY21/22 Semester 1
+ */
+
 import duke.tasks.Deadline;
 import duke.tasks.Todo;
 import duke.tasks.Event;
-
-
+import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
 
 public class DukeTest {
     @Test
