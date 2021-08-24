@@ -11,8 +11,9 @@ import java.util.stream.Collectors;
 public class Storage {
     private static final String FileName = "duke.txt";
 
-    public void Save(ArrayList<Task> arr) {
+    public void Save(TaskList taskList) {
         try {
+            ArrayList<Task> arr = taskList.getEntire();
             PrintWriter printWriter = new PrintWriter(FileName);
             StringBuilder sb = new StringBuilder();
             for (Task task : arr) {

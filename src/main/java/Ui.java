@@ -20,25 +20,31 @@ public class Ui {
         System.out.println(BORDER);
     }
 
-    public void PrintList(ArrayList<Task> message) {
+    public void PrintList(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
         System.out.println(BORDER);
-        for (int i = 1; i <= message.size(); i++) {
-            Task thisTask = message.get(i-1);
+        for (int i = 1; i <= taskList.size(); i++) {
+            Task thisTask = taskList.get(i-1);
             String toPrint = String.format("%d. %s", i, thisTask);
             System.out.println(toPrint);
         }
         System.out.println(BORDER);
     }
 
-    public void PrintSpecialTasks(String message, int total) {
+    public void PrintSpecialTasks(TaskList taskList) {
+        String message = taskList.get(taskList.size() - 1).toString();
+        int total = taskList.size();
+
         String newMsg = String.
                 format("Got it, I've added this task:\n  %s\nNow you have a total of %d tasks in the list.",
                 message, total);
         PrintMessage(newMsg);
     }
 
-    public void PrintDelete(String message, int total) {
+    public void PrintDelete(Task deleted, TaskList taskList) {
+
+        String message = deleted.toString();
+        int total = taskList.size();
         String newMsg = String.
                 format("Noted. I've removed this task:\n  %s\nNow you have a total of %d tasks in the list.",
                         message, total);

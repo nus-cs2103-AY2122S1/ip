@@ -16,14 +16,16 @@ public class Duke {
 
     private Storage storage;
     private Ui ui;
+    private TaskList taskList;
 
     public Duke() {
         this.storage = new Storage();
         this.ui = new Ui();
+        this.taskList = new TaskList(storage.Load());
     }
 
     public void run() {
-        ArrayList<Task> tasks = Storage.Load();
+        this.ui.PrintIntro();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -31,17 +33,17 @@ public class Duke {
             String[] splitInput = input.split(" ", 2);
             if (splitInput[0].equals(SPECIAL_TASK.done.name())) {
                 int index = Integer.parseInt(splitInput[1]) - 1;
-                String returnString = tasks.get(index).markDone();
-                ui.PrintMessage(returnString);
+                String returnString = this.taskList.markDone(index);
+                this.ui.PrintMessage(returnString);
             } else if (input.equals(SPECIAL_TASK.list.name())) {
-                ui.PrintList(tasks);
+                this.ui.PrintList(taskList);
             } else if (splitInput[0].equals(SPECIAL_TASK.todo.name())) {
                 try {
                     if (splitInput.length < 2 || splitInput[1].equals("") || splitInput[1].equals(" ")) {
                         throw new DukeException("The description of a todo cannot be empty.");
                     }
-                    tasks.add(new Todo(splitInput[1]));
-                    ui.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
+                    this.taskList.add(new Todo(splitInput[1]));
+                    ui.PrintSpecialTasks(taskList);
                 } catch (DukeException e) {
                     ui.PrintMessage(e.getMessage());
                 }
@@ -59,8 +61,8 @@ public class Duke {
                     }
                     DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-M-d HH:mm");
                     LocalDateTime by = LocalDateTime.parse(furtherSplits[1].stripLeading(), df);
-                    tasks.add(new Deadline(furtherSplits[0], by));
-                    ui.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
+                    this.taskList.add(new Deadline(furtherSplits[0], by));
+                    ui.PrintSpecialTasks(this.taskList);
                 } catch (DukeException e) {
                     ui.PrintMessage(e.getMessage());
                 }
@@ -78,8 +80,8 @@ public class Duke {
                     }
                     DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-M-d HH:mm");
                     LocalDateTime at = LocalDateTime.parse(furtherSplits[1].stripLeading(), df);
-                    tasks.add(new Event(furtherSplits[0], at));
-                    ui.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
+                    this.taskList.add(new Event(furtherSplits[0], at));
+                    ui.PrintSpecialTasks(this.taskList);
                 } catch (DukeException e) {
                     ui.PrintMessage(e.getMessage());
                 }
@@ -89,12 +91,11 @@ public class Duke {
                         throw new DukeException("We don't know what to delete!");
                     }
                     int index = Integer.parseInt(splitInput[1]) - 1;
-                    if (index >= tasks.size() || index <= 0) {
+                    if (index >= this.taskList.size() || index <= 0) {
                         throw new DukeException("Task number does not exist!");
                     }
-                    Task toDelete = tasks.get(index);
-                    tasks.remove(index);
-                    ui.PrintDelete(toDelete.toString(), tasks.size());
+                    Task deleted = this.taskList.delete(index);
+                    ui.PrintDelete(deleted, taskList);
                 } catch (DukeException e1) {
                     ui.PrintMessage(e1.getMessage());
                 } catch (NumberFormatException e2) {
@@ -106,13 +107,13 @@ public class Duke {
                     if (input.equals("blah")) {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
-                    tasks.add(new Task(input));
+                    this.taskList.add(new Task(input));
                     ui.PrintMessage(String.format("added: %s", input));
                 } catch (DukeException e) {
                     ui.PrintMessage(e.getMessage());
                 }
             }
-            storage.Save(tasks);
+            this.storage.Save(taskList);
             input = sc.nextLine();
         }
         ui.PrintMessage("Bye. Hope to see you again soon!");
