@@ -52,7 +52,8 @@ public class Recieve {
                 } else {
                     parser.add(input);
                 }
-            } catch (DukeException | InvalidTaskIndexException | InvalidFormatException | IOException e) {
+            } catch (DukeException | InvalidTaskIndexException |
+                    InvalidFormatException | IOException e) {
                 System.out.println(e.toString());
             }
         }

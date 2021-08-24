@@ -65,7 +65,6 @@ public class Parser {
                     } catch (IOException e) {
                         System.out.println("Something went wrong: " + e.getMessage());
                     }
-
                 }
                 else {
                     throw new InvalidTaskIndexException("There are only " + pos + " tasks!");
@@ -73,7 +72,6 @@ public class Parser {
             } catch (NumberFormatException nfe) {
                 throw new InvalidTaskIndexException("A task index should only contain numbers!");
             }
-
         } else {
             throw new InvalidTaskIndexException("Please specify the task index to be marked as done!");
         }
@@ -103,7 +101,8 @@ public class Parser {
         }
         else if (input.startsWith("deadline ") || input.equals("deadline")) {
             if (!input.contains(" /by ")) {
-                throw new InvalidFormatException("OOPS!! To add a Duke.Deadline, type -> deadline <Description> /by <deadline>!");
+                throw new InvalidFormatException("OOPS!! To add a Duke.Deadline, " +
+                        "type -> deadline <Description> /by <deadline>!");
             }
             if (input.length() > 12 && input.contains("/by")) {
                 String[] spl = input.substring(9).split("/");
@@ -124,17 +123,16 @@ public class Parser {
                     } catch (DateTimeParseException e) {
                         System.out.println("Please enter the date in the format of yyyy-mm-dd!");
                     }
-
                 }
             }
             else {
                 throw new InvalidFormatException("☹ OOPS!!! The descriptions of a deadline cannot be empty.");
             }
-
         }
         else if (input.startsWith("event ") || input.equals("event") ) {
             if (!input.contains(" /at ")) {
-                throw new InvalidTaskIndexException("OOPS!! To add an Duke.Event, type -> event <Description> /at <details>!");
+                throw new InvalidTaskIndexException("OOPS!! To add an Duke.Event, " +
+                        "type -> event <Description> /at <details>!");
             }
             if (input.length() > 9 && input.contains("/at")) {
                 String[] spl = input.substring(6).split("/");
@@ -143,7 +141,6 @@ public class Parser {
                 }
                 else {
                     tasks.addEvent(spl[0], spl[1].substring(3));
-
                     try {
                         storage.writeToFile(tasks.inArrayList());
                     } catch (IOException e) {
