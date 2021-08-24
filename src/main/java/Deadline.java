@@ -10,4 +10,10 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    @Override
+    public String markDone() {
+        this.isDone = true;
+        return String.format("Nice! I've marked this task as done:\n  [D][X] %s", this.description);
+    }
 }
