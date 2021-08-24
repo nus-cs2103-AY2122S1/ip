@@ -1,5 +1,6 @@
 package duke.databse;
 
+import duke.core.UI;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -15,6 +16,7 @@ import java.util.Scanner;
 public class Database {
 
     File file;
+    private UI ui;
 
     /**
      * Constructor for database
@@ -23,17 +25,15 @@ public class Database {
     public Database(String filePath) {
         try {
             file = new File(filePath);
+            ui = new UI();
             if (file.createNewFile()) {
-
+                System.out.println(ui.creating_file_message);
             } else {
-
+                System.out.println(ui.reading_file_message);
             }
-
         } catch (IOException e) {
             System.out.println("An error occurred in creating or opening file.");
         }
-
-
     }
 
 
@@ -132,8 +132,6 @@ public class Database {
                     new FileWriter("todoList.txt", true));
             out.write(todo.toString());
             out.close();
-
-
         }
         catch (IOException e) {
             System.out.println("exception occoured" + e);
@@ -162,7 +160,7 @@ public class Database {
             myReader.close();
 
         } catch (IOException e) {
-
+            System.out.println(ui.wrong_message);
         }
 
         try {
@@ -170,7 +168,7 @@ public class Database {
             fw.write(data);
             fw.close();
         } catch (IOException e) {
-
+            System.out.println(ui.wrong_message);
         }
 
 
@@ -197,7 +195,7 @@ public class Database {
             myReader.close();
 
         } catch (IOException e) {
-
+            System.out.println(ui.wrong_message);
         }
 
         try {
@@ -205,7 +203,7 @@ public class Database {
             fw.write(data);
             fw.close();
         } catch (IOException e) {
-
+            System.out.println(ui.wrong_message);
         }
     }
 

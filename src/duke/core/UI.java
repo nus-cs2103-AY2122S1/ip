@@ -22,4 +22,7 @@ public class UI {
     public final String index_message = line + "\n" + indentation + "please follow the format of adding task" + "\n" + line;
     public final String unknown_message = line + "\n" + indentation + "OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n" + line;
     public final String added_message = line + "\n" + indentation + "Got it. I've added this task:" + "\n";
+    public final String reading_file_message = indentation + "Reading your tasks from record : )";
+    public final String creating_file_message = indentation + "Creating a file to store your tasks : )";
+    public final String wrong_message = index_message + "OOPS!! Something wrong!";
 }
