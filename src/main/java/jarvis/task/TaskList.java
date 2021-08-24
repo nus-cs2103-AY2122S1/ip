@@ -1,6 +1,7 @@
 package jarvis.task;
 
-import java.time.LocalDateTime;
+import jarvis.exception.InvalidDateTimeInputException;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -16,7 +17,7 @@ public class TaskList {
         return todo;
     }
 
-    public Deadline addTaskWithDeadline(String taskDescription, LocalDateTime deadline) {
+    public Deadline addTaskWithDeadline(String taskDescription, String deadline) throws InvalidDateTimeInputException {
         Deadline taskWithDeadline = new Deadline(taskDescription, deadline);
         taskList.add(taskWithDeadline);
         return taskWithDeadline;

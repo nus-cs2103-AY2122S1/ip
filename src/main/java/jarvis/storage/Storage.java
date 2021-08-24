@@ -1,5 +1,6 @@
 package jarvis.storage;
 
+import jarvis.exception.InvalidDateTimeInputException;
 import jarvis.exception.InvalidStorageTaskException;
 import jarvis.exception.StorageFileException;
 import jarvis.task.*;
@@ -23,7 +24,7 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> loadTasksFromFile() throws InvalidStorageTaskException, StorageFileException {
+    public ArrayList<Task> loadTasksFromFile() throws InvalidStorageTaskException, StorageFileException, InvalidDateTimeInputException {
         Scanner s;
 
         try {

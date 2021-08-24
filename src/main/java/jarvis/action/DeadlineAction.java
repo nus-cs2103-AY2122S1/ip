@@ -1,6 +1,5 @@
 package jarvis.action;
 
-import jarvis.exception.InvalidDateTimeInputException;
 import jarvis.exception.JarvisException;
 import jarvis.exception.TaskDetailsEmptyException;
 import jarvis.output.Output;
@@ -8,16 +7,11 @@ import jarvis.storage.Storage;
 import jarvis.task.Deadline;
 import jarvis.task.TaskList;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 public class DeadlineAction extends Action {
     private String taskDescription;
-    private LocalDateTime deadline;
-    private static final String INPUT_FORMAT =  "dd-MM-yyyy HHmm";
+    private String deadline;
 
-    public DeadlineAction(String userInputWithoutActionTrigger) throws TaskDetailsEmptyException, InvalidDateTimeInputException {
+    public DeadlineAction(String userInputWithoutActionTrigger) throws TaskDetailsEmptyException {
         String[] splitStrings = userInputWithoutActionTrigger.split("/by", 2);
         this.taskDescription = splitStrings[0].trim();
         if (taskDescription.equals("")) {
@@ -26,14 +20,7 @@ public class DeadlineAction extends Action {
         if (splitStrings.length < 2) {
             throw new TaskDetailsEmptyException("deadline");
         }
-
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(INPUT_FORMAT);
-
-        try {
-            this.deadline = LocalDateTime.parse(splitStrings[1].trim(), dateTimeFormatter);
-        } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeInputException("deadline", INPUT_FORMAT);
-        }
+        this.deadline = splitStrings[1].trim();
     }
 
     @Override
