@@ -95,7 +95,7 @@ public class Parser {
     }
 
     /**
-     * Adds a task or a ToDo.
+     * Adds a task or the subclass ToDo.
      *
      * @param input the user input.
      * @param tasks the list of tasks.
@@ -153,7 +153,7 @@ public class Parser {
     }
 
     /**
-     * Deletes a task from the list.
+     * Delete a task from the list.
      *
      * @param tasks the list of tasks.
      */
@@ -188,7 +188,7 @@ public class Parser {
     }
 
     /**
-     * Get the list of tasks.
+     * Gets the list of tasks.
      *
      * @param tasks the list of tasks.
      * @return the tasks in string format.
