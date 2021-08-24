@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * A type of <code>Task</code> that has a start and end time denoted by <code>/at</code> in the user input.
+ */
 public class Event extends Task {
     protected String at;
     protected LocalDate atDate;

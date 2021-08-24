@@ -6,10 +6,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Represents a parser that process the user's input and handles with appropriate action.
+ */
 public class Parser {
 
     private Duke duke;
-
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public Parser(Duke duke) {

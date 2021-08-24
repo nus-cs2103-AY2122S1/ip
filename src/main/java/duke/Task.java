@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * Represents an element in the <code>TaskList</code>.
+ * Split into 3 types: <code>Todo, Deadline, Event</code>.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

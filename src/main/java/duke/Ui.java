@@ -1,13 +1,14 @@
 package duke;
 
-import duke.Duke;
-
 import java.util.Scanner;
 
+/**
+ * Represents the interface that interacts with the user, receiving commands from the user and
+ * responding to the user directly through the console.
+ */
 public class Ui {
 
     private final Scanner sc;
-
     protected static final String friendGreeting = "(*^_^*) Friend says: \n";
     private static final String logo
             = " _____       _                    _        \n"
@@ -15,7 +16,6 @@ public class Ui {
             + "| |_  |/  _|| |/ _ \\ |  __  |____| |       \n"
             + "| __| | /   | |  __/ | / \\  |  __  |       \n"
             + "|_|   |_|   |_|\\____ |_|  |_|______|       \n";
-
     private Duke duke;
 
     public Ui(Duke duke) {

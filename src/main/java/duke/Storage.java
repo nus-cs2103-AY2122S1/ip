@@ -6,7 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents a storage space that loads the <code>list.txt</code> of existing tasks and saves new
+ * changes to the <code>list.txt</code>.
+ */
 public class Storage {
+
     private String filePath;
     private Duke duke;
 

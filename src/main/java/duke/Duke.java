@@ -2,6 +2,12 @@ package duke;
 
 import java.io.FileNotFoundException;
 
+/**
+ * Represents a chatbot that can be run with functionality of a to-do list keeper.
+ * Each <code>Duke</code> object has a <code>Storage</code> to load and save a .txt list,
+ * <code>TaskList</code> for storing the <code>Task</code>s, and a <code>Ui</code> for interacting
+ * with user inputs.
+ */
 public class Duke {
 
     private Storage storage;
@@ -14,7 +20,6 @@ public class Duke {
     public Storage getStorage() {
         return this.storage;
     }
-
     public Ui getUi() {
         return this.ui;
     }

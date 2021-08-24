@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Represents a list that keeps track of the <code>Task</code>s that the user has.
+ */
 public class TaskList {
+
     private ArrayList<Task> list;
     private Duke duke;
 

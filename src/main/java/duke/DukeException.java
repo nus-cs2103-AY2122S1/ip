@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * A class of exceptions that are thrown for invalid user inputs when parsed.
+ */
 public class DukeException extends Exception {
 
     public DukeException() {
