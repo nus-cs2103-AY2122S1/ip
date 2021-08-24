@@ -2,7 +2,7 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class WriteToFile {
+public class Storage {
 
     private static boolean appendMode = true;
     private static String filePath = "./data/dukeData.txt";
@@ -87,7 +87,7 @@ public class WriteToFile {
         }
     }
 
-    public static void rewriteFile(ArrayList<TaskItem> arrayList) {
+    public static void rewriteFile(TaskList taskList) {
         File dukeData = new File("./data/dukeData.txt");
         dukeData.delete();
 
@@ -102,8 +102,8 @@ public class WriteToFile {
 
             FileWriter fw = new FileWriter(filePath, appendMode);
 
-            for (int i = 0; i < arrayList.size(); i++) {
-                fw.write(arrayList.get(i).toFileString() + "\n");
+            for (int i = 0; i < taskList.size(); i++) {
+                fw.write(taskList.get(i).toFileString() + "\n");
 //                System.out.println("Wrote " + arrayList.get(i).toString() + " to file");
             }
 

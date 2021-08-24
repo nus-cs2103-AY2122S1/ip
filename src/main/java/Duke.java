@@ -1,23 +1,7 @@
-
-import java.io.IOException;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Locale;
-
 public class Duke {
 
     public static boolean active;
-    public static String startMessage = "Hello! I'm Duke \nFor " +
-            "events and deadlines, be sure to state the due date or the event timing as such: " +
-            "'XXX /by dd-MM-yyyy HH:mm'";
-    public static String endMessage = "Bye! Hope to see you again soon!";
-    //public static String[] list = new String[100];
-    public static ArrayList<TaskItem> taskList = new ArrayList<>();
-//    public static TaskItem[] taskList = new TaskItem[100];
+    public static TaskList taskList = new TaskList();
     public static int listIndex = 0;
 
 
@@ -28,150 +12,19 @@ public class Duke {
 
         //load previous list data here maybe
 
-        taskList = WriteToFile.loadData();
-//        System.out.println("This is the tasklist");
-//        System.out.println(taskList.toString());
+        taskList = new TaskList(Storage.loadData());
 
         Duke.active = true;
 
-        Duke.sendStartMessage();
+        Ui.sendStartMessage();
 
         java.util.Scanner scanner = new java.util.Scanner(System.in);
         while (active) {
             String input = scanner.nextLine();
-            if (input.split(" ")[0].equals("done")) {
-                try {
-                    String[] splitString = input.split(" ");
-                    if (splitString.length == 1) {
-                        throw new DukeException(
-                                "____________________________________________________________\n" +
-                                    "☹ OOPS!!! Choose the task number to be considered done.\n" +
-                                        "____________________________________________________________"
-                        );
-                    }
-                    String taskItemNumber = splitString[1];
-                    Duke.markAsFinished(taskItemNumber);
-
-                    //rewrite whole file lmaooooo havent written a method for that yet though
-                    WriteToFile.rewriteFile(taskList);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-            }   else if (input.split(" ")[0].equals("todo")) {
-                //input = input.replace(input.split(" ")[0], "");
-                try {
-                    String actualToDo = input.replace(input.split(" ")[0], "");
-                    if (actualToDo.equals("")) {
-                        throw new DukeException(
-                                "____________________________________________________________\n" +
-                                        "☹ OOPS!!! The description of a todo cannot be empty.\n" +
-                                        "____________________________________________________________"
-                        );
-                    }
-                    ToDo newToDo = new ToDo(actualToDo);
-                    Duke.addToList(newToDo);
-                    //System.out.println(newToDo.toString());
-                    WriteToFile.appendToFile(newToDo.toString());
-
-
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-            }   else if (input.split(" ")[0].equals("deadline")) {
-                try {
-                    input = input.replace(input.split(" ")[0], "");
-                    if (input.split("/").length == 1) {
-                        throw new DukeException(
-                                "____________________________________________________________\n" +
-                                        "☹ OOPS!!! The description or by-date (or both) cannot be empty.\n" +
-                                        "____________________________________________________________"
-                        );
-                    }
-                    String by = input.split("/")[1].split(" ", 2)[1];
-                    String description = input.split("/")[0];
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-                    try {
-                        LocalDateTime byDateAndTime = LocalDateTime.parse(by, formatter);
-//                        String description = input.split("/")[0];
-                        //Deadline dead = new Deadline(description, by);
-                        Deadline dead = new Deadline(description, byDateAndTime);
-                        Duke.addToList(dead);
-                        WriteToFile.appendToFile(dead.toFileString());
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Please follow the specified format for entering the date and time of the deadline.");
-                    }
-//                    System.out.println(byDateAndTime.toString() + " for deadline");
-
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-            }   else if (input.split(" ")[0].equals("event")) {
-                try {
-                    input = input.replace(input.split(" ")[0], "");
-
-                    if (input.split("/").length == 1) {
-                        throw new DukeException(
-                                "____________________________________________________________\n" +
-                                        "☹ OOPS!!! The description of an event, as well as its date and time, cannot be empty.\n" +
-                                        "____________________________________________________________"
-                        );
-                    }
-                    String date = input.split("/")[1].split(" ")[1];
-                    String time = input.split("/")[1].split(" ")[2];
-
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-//                    System.out.println(date);
-//                    System.out.println(time);
-//                    System.out.println(date + time);
-                    try {
-                        LocalDateTime byDateAndTime = LocalDateTime.parse(date + " " + time, formatter);
-//                    System.out.println(byDateAndTime.toString() + " for event");
-                        String description = input.split("/")[0];
-                        Event someEvent = new Event(description, byDateAndTime);
-                        Duke.addToList(someEvent);
-                        WriteToFile.appendToFile(someEvent.toFileString());
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Please follow the specified format for entering the date and time of the deadline.");
-                    }
-
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-            }   else if (input.equals("list")) {
-                Duke.printList();
-            } else if (input.equals("bye")) {
-                Duke.active = false;
-                Duke.sendEndMessage();
-
-                //save txt file here or something idk
-                WriteToFile.rewriteFile(taskList);
+            boolean cont = Parser.interpretCommand(input);
+            if (!cont) {
                 break;
-            } else if (input.split(" ")[0].equals("delete")) {
-
-                try {
-                    if (input.split(" ").length == 1) {
-                        throw new DukeException(
-                                "____________________________________________________________\n" +
-                                        "☹ OOPS!!! Please state the task number that you want to delete.\n" +
-                                        "____________________________________________________________"
-                        );
-                    }
-                    String taskToBeDeleted = input.split(" ")[1];
-                    Duke.deleteTask(taskToBeDeleted);
-
-                    //rewrite whole txt file
-                    WriteToFile.rewriteFile(taskList);
-                } catch (DukeException e) {
-
-                }
-
-            } else {
-                System.out.println("____________________________________________________________");
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                System.out.println("____________________________________________________________");
             }
-
-
         }
     }
 
@@ -193,12 +46,7 @@ public class Duke {
         TaskItem removedTask = taskList.get(taskNumber - 1);
         taskList.remove(taskNumber - 1);
         int taskListSize = taskList.size();
-        System.out.println("____________________________________________________________");
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(removedTask.toString());
-        if (taskListSize == 1) System.out.println("Now you have 1 task in the list.");
-        if (taskListSize > 1) System.out.println("Now you have " + taskListSize + " tasks in the list.");
-        System.out.println("____________________________________________________________");
+        Ui.deletedTaskMessage(removedTask, taskListSize);
 
     }
 
@@ -210,7 +58,6 @@ public class Duke {
      */
     public static void markAsFinished(String taskItemNumber) throws DukeException {
         int taskNumber = Integer.parseInt(taskItemNumber);
-
         if (taskList.get(taskNumber - 1) == null) {
             throw new DukeException(
                     "____________________________________________________________\n" +
@@ -218,14 +65,8 @@ public class Duke {
                             "____________________________________________________________"
             );
         }
-
         taskList.get(taskNumber - 1).completeTask();
-
-        System.out.println("____________________________________________________________");
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(taskList.get(taskNumber - 1).toString());
-        System.out.println("____________________________________________________________");
-
+        Ui.completedTaskMessage(taskList.get(taskNumber - 1));
     }
 
     /**
@@ -260,23 +101,22 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    /**
-     * sends the greeting message for Duke.
-     */
-    public static void sendStartMessage() {
-        System.out.println("____________________________________________________________");
-        System.out.println(startMessage);
-        System.out.println("____________________________________________________________");
-    }
+//    /**
+//     * sends the greeting message for Duke.
+//     */
+//    public static void sendStartMessage() {
+//
+//        Ui.sendStartMessage();
+//    }
 
-    /**
-     * sends the closing message for Duke.
-     */
-    public static void sendEndMessage() {
-        System.out.println("____________________________________________________________");
-        System.out.println(endMessage);
-        System.out.println("____________________________________________________________");
-    }
+//    /**
+//     * sends the closing message for Duke.
+//     */
+//    public static void sendEndMessage() {
+//        System.out.println("____________________________________________________________");
+//        System.out.println(endMessage);
+//        System.out.println("____________________________________________________________");
+//    }
 
     /**
      * main method.

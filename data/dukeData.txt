@@ -1,2 +1,4 @@
-[D][ ] return book --1999-04-27T12:00
 [T][ ] kill rick and morty
+[D][ ] kill rick and morty --2021-08-27T12:00
+[E][X] kill rick and morty --2021-08-28T12:00
+[T][ ] say hello to morty's mother
