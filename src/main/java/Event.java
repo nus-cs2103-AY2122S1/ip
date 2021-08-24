@@ -12,6 +12,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String taskToLine() {
+        return "D" + super.taskToLine() + " | " + this.timeStart;
+    }
+
+    @Override
     public String toString() {
         String description = super.toString();
         return "[E]" + description + " (at: " + this.timeStart + ")";

@@ -12,6 +12,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String taskToLine() {
+        return "D" + super.taskToLine() + " | " + this.timeDue;
+    }
+
+    @Override
     public String toString() {
         String description = super.toString();
         return "[D]" + description + " (by: " + this.timeDue + ")";
