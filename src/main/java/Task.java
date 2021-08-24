@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Encapsulates the creation of tasks found in the to-do list
  *
@@ -93,7 +97,12 @@ public class Task {
 
             String[] nameNTime = taskName.split(split);
             String name = nameNTime[0];
-            String time = nameNTime[1];
+            String time;
+            try {
+                time = LocalDate.parse(nameNTime[1]).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            } catch (DateTimeParseException e) {
+                time = nameNTime[1];
+            }
             Task task = null;
 
             if(taskType.equals("deadline")) {

@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A type of task that requires event details and extends from Task
  *
@@ -6,15 +9,24 @@
 public class Event extends Task{
 
     private String eventDetails;
+<<<<<<< HEAD
     private static String taskCat = "event";
+=======
+    final static String split = " /at";
+>>>>>>> branch-Level-8
 
     /**
      *  Constructor to create an EVENT task
      * @param name Name of task
      * @param eventDetails Location or time of event
      */
+<<<<<<< HEAD
     Event(String name, String eventDetails, boolean isDone) {
         super(name, taskCat, isDone);
+=======
+    Event(String name, String eventDetails) {
+        super(name);
+>>>>>>> branch-Level-8
         this.eventDetails = eventDetails;
     }
 

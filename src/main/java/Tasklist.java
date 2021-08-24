@@ -63,9 +63,15 @@ public class Tasklist {
         }
 
         System.out.println("Here are the tasks in your list:");
+<<<<<<< HEAD
         for(int i=0;i < taskList.size(); i++) {
             if(!this.taskList.get(i).isDone()) {
                 System.out.printf("%d. %s\n", i + 1, this.taskList.get(i).toString());
+=======
+        for(int i=0;i < tasklist.size(); i++) {
+            if(!tasklist.get(i).isDone()) {
+                System.out.printf("%d. %s\n", i + 1, tasklist.get(i).toString());
+>>>>>>> branch-Level-8
             } else {
                 System.out.printf("%d. %s\n", i + 1, this.taskList.get(i).toString());
             }
