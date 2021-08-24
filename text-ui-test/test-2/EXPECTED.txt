@@ -16,7 +16,7 @@ Hello from
 ---------------------------------------------------------
 	Here are the tasks in your list:
 	1.[T][x] borrow book
-	2.[E][x] project meeting  (at: Mon 2-4pm)
+	2.[E][x] project meeting  (at: Aug 25 2021)
 	3.[T][ ] return book
 ---------------------------------------------------------
 ---------------------------------------------------------

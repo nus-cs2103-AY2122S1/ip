@@ -78,7 +78,7 @@ public class Task {
      */
     public String toSaveData() {
         int doneIndicator = this.isDone ? 1 : 0;
-        String timeDueString = this.timeDue == null ? "" : this.timeDue;
+        String timeDueString = this.timeDue == null ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return String.format("%s%s%s|%s\n", this.typeIndicator, doneIndicator, timeDueString, this.title);
     }
 
