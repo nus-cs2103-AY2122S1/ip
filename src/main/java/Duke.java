@@ -16,7 +16,7 @@ public class Duke {
     Tasklist tasks;
     Parser parse;
 
-    public Duke () {
+    public Duke() {
         try {
             File saveFile = new File("./save.txt");
             if (!saveFile.createNewFile()) {
@@ -31,7 +31,7 @@ public class Duke {
         }
     }
 
-    public void run () {
+    public void run() {
         boolean away = false;
         System.out.println(Ui.bar + "\n    Hello! I'm SaDOS\n" +
                 "    What can I do for you?\n" +
