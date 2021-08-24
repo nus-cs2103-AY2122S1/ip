@@ -6,8 +6,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Parser handles the interpretation of user input,
+ * and makes the appropriate method calls.
+ *
+ * @author Ho Wen Zhong
+ */
 public class Parser {
 
+    /**
+     * Returns the appropriate Command based on user input.
+     *
+     * @param fullCommand User input.
+     * @return The appropriate Command.
+     * @throws DukeException If there are syntax errors in user input.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         try {
             if (fullCommand.equals("bye")) {
@@ -43,6 +56,13 @@ public class Parser {
         return null; // unreachable statement?
     }
 
+    /**
+     * Returns a DoneCommand.
+     *
+     * @param str User input.
+     * @return DoneCommand.
+     * @throws DukeDoneException If there are syntax errors in user input.
+     */
     public static DoneCommand detectDone(String str) throws DukeDoneException {
         try {
             int doneTaskIndex = Integer.parseInt(str.substring(5)) - 1;
@@ -52,6 +72,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a AddTodoCommand.
+     *
+     * @param str User input.
+     * @return AddTodoCommand.
+     * @throws DukeTodoException If there are syntax errors in user input.
+     */
     public static AddTodoCommand detectTodo(String str) throws DukeTodoException {
         if (str.length() > 5) {
             String desc = str.replaceFirst("todo ", "");
@@ -61,6 +88,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a AddDeadlineCommand.
+     *
+     * @param str User input.
+     * @return AddDeadlineCommand.
+     * @throws DukeDeadlineException If there are syntax errors in user input.
+     */
     public static AddDeadlineCommand detectDeadline(String str) throws DukeDeadlineException {
         try {
             String desc = str.split(" /")[0]
@@ -72,6 +106,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a AddEventCommand.
+     *
+     * @param str User input.
+     * @return AddEventCommand.
+     * @throws DukeEventException If there are syntax errors in user input.
+     */
     public static AddEventCommand detectEvent(String str) throws DukeEventException {
         try {
             String desc = str.split(" /")[0]
@@ -83,6 +124,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a DeleteCommand.
+     *
+     * @param str User input.
+     * @return DeleteCommand.
+     * @throws DukeDeleteException If there are syntax errors in user input.
+     */
     public static DeleteCommand detectDelete(String str) throws DukeDeleteException {
         try {
             int deleteTaskIndex = Integer.parseInt(str.substring(7)) - 1;

@@ -3,6 +3,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Deadline represents a deadline task.
+ *
+ * @author Ho Wen Zhong
+ */
 public class Deadline extends Task {
 
     protected LocalDate by;
@@ -12,6 +17,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Returns the String representation of the Deadline.
+     *
+     * @return String representatin of Deadline.
+     */
     @Override
     public String toString() {
         String formattedDate = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
@@ -19,6 +29,11 @@ public class Deadline extends Task {
                 + formattedDate + ")";
     }
 
+    /**
+     * Returns the deadline date.
+     *
+     * @return Deadline date.
+     */
     public LocalDate getBy() {
         return this.by;
     }

@@ -2,6 +2,11 @@ package task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TaskList represents the task list.
+ *
+ * @author Ho Wen Zhong
+ */
 public class TaskList {
 
     private List<Task> taskList;
@@ -14,10 +19,20 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+    /**
+     * Returns size of the TaskList.
+     *
+     * @return Size of TaskList.
+     */
     public int size() {
         return taskList.size();
     }
 
+    /**
+     * Returns String representation of TaskList.
+     *
+     * @return String representation of TaskList.
+     */
     public String list() {
         String message = "Here are the tasks in your list:\n";
         int count = 1;
@@ -29,18 +44,39 @@ public class TaskList {
         return message;
     }
 
+    /**
+     * Sets a Task in TaskList as done.
+     *
+     * @param index The index of the Task done.
+     */
     public void done(int index) {
         taskList.get(index).setDone();
     }
 
+    /**
+     * Adds a Task to TaskList.
+     *
+     * @param task The Task to add.
+     */
     public void add(Task task) {
         taskList.add(task);
     }
 
+    /**
+     * Deletes a Task in TaskList.
+     *
+     * @param index The index of the Task to delete.
+     */
     public void delete(int index) {
         taskList.remove(index);
     }
 
+    /**
+     * Returns a Task in TaskList.
+     *
+     * @param index The index of the Task to return.
+     * @return The specified Task.
+     */
     public Task get(int index) {
         Task task = taskList.get(index);
         return task;

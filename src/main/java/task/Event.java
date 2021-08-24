@@ -3,6 +3,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Event represents an event task.
+ *
+ * @author Ho Wen Zhong
+ */
 public class Event extends Task {
 
     protected LocalDate at;
@@ -12,6 +17,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns the String representation of the Event.
+     *
+     * @return String representation of Event
+     */
     @Override
     public String toString() {
         String formattedDate = at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
@@ -19,6 +29,11 @@ public class Event extends Task {
                 + formattedDate + ")";
     }
 
+    /**
+     * Returns the event date.
+     *
+     * @return Event date.
+     */
     public LocalDate getAt() {
         return this.at;
     }

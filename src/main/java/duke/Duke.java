@@ -2,6 +2,12 @@ package duke;
 import command.*;
 import task.*;
 import duke_exception.*;
+
+/**
+ * Duke is the main driver class.
+ *
+ * @author Ho Wen Zhong
+ */
 public class Duke {
 
     private Storage storage;
@@ -19,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -39,6 +48,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke program.
+     *
+     * @param args String arguments.
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }

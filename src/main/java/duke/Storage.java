@@ -12,6 +12,11 @@ import java.util.Scanner;
 import task.*;
 import duke_exception.*;
 
+/**
+ * Storage handles loading/saving of task list data from/to file.
+ *
+ * @author Ho Wen Zhong
+ */
 public class Storage {
 
     private String filePath;
@@ -22,6 +27,12 @@ public class Storage {
         this.file = new File(filePath);
     }
 
+    /**
+     * Loads the task list data from file.
+     *
+     * @return List of Tasks.
+     * @throws DukeException If there are file access errors.
+     */
     public List<Task> load() throws DukeException {
         File dataDir = new File("data");
         if (!dataDir.exists()) {
@@ -70,6 +81,11 @@ public class Storage {
         return strList;
     }
 
+    /**
+     * Saves the task list data to file.
+     *
+     * @param tasks The current task list in memory.
+     */
     public void save(TaskList tasks) {
         try {
             String saveStr = "";
