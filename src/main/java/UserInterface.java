@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class UserInterface {
     TaskList taskList;
 
@@ -46,5 +48,13 @@ public class UserInterface {
         System.out.println("Noted. I've removed this task:");
         System.out.println(t.toString());
         System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
+    }
+
+    public void showResults(List<Task> results) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i <= results.size(); i++) {
+            Task t = results.get(i - 1);
+            System.out.println(i + "." + t.toString());
+        }
     }
 }

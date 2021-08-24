@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.List;
 
 public class Parser {
     public TaskList taskList;
@@ -41,6 +42,10 @@ public class Parser {
                 Task t = taskList.deleteItem(index);
                 userInterface.showDeletedTask(t);
                 storage.write();
+            } else if (input.contains("find")) {
+                String keyword = input.split(" ")[1];
+                List<Task> results = taskList.find(keyword);
+                userInterface.showResults(results);
             } else {
                 throw new InvalidCommandException();
             }

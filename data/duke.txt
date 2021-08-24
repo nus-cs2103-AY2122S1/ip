@@ -2,3 +2,4 @@ E|1|project meeting|2021-12-08
 D|1|return book|2021-11-07
 T|1|eat breakfast
 E|1|project work|2021-10-05
+T|0|wake up
