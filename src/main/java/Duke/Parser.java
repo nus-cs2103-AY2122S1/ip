@@ -1,3 +1,5 @@
+package Duke;
+
 import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.function.BiFunction;

@@ -1,6 +1,10 @@
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import Duke.Ui;
+import Duke.Parser;
+import Duke.Storage;
+import Duke.TaskList;
 
 public class Duke implements Runnable {
     private static final String ERR_CREATE_FILE = "Could not create empty file.";

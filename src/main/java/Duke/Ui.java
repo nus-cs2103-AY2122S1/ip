@@ -1,3 +1,5 @@
+package Duke;
+
 public class Ui {
     private final String BORDER = "---------------------------------------------------";
     private final String GREETING = "Hello! I'm Duke, what can I do for you?";
