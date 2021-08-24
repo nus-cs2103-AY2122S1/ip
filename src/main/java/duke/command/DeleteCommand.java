@@ -12,16 +12,16 @@ import java.util.Scanner;
  * Represents the general delete command.
  */
 public class DeleteCommand extends Command {
-    private final int index;
+    private final int INDEX;
 
     public DeleteCommand(Duke duke, Scanner sc, int index) {
         super(duke, sc);
-        this.index = index;
+        this.INDEX = index;
     }
 
     @Override
     public void execute(TaskList taskList) throws IOException {
-        Task taskRemoved = this.duke.deleteTask(this.index);
+        Task taskRemoved = this.duke.deleteTask(this.INDEX);
         Ui.printDeleteTaskMessage(taskRemoved, taskList.getTotal());
         this.duke.saveTasks();
     }
