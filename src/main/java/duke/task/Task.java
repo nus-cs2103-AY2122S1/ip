@@ -32,6 +32,15 @@ public class Task {
     }
 
     /**
+     * Checks if the task contains the search word
+     * @param searchWord The word to look for in the task.
+     * @return True if the word exists in the Task, false otherwise.
+     */
+    public boolean contains(String searchWord) {
+        return this.content.contains(searchWord);
+    }
+
+    /**
      * String representation of a task.
      * @return Task in string.
      */

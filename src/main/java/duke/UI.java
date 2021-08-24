@@ -42,7 +42,8 @@ public class UI {
      * @param list The TaskList to be printed.
      */
     public static void printList(TaskList list) {
-        System.out.println(formatWithSpace(list.toString()));
+        String s = "Here are the tasks in your list:" + list.toString();
+        System.out.println(formatWithSpace(s));
     }
 
     /**
@@ -87,7 +88,6 @@ public class UI {
                 formatWithSpace("Ok, I have removed the following task:\n "
                     + task
                     + listTaskAmount(list.getTaskAmount())));
-
     }
 
     /**
@@ -104,5 +104,14 @@ public class UI {
      */
     public static void printError(Exception e) {
         System.out.println(formatWithSpace(e.getMessage()));
+    }
+
+    /**
+     * Prints the list of matching tasks to the terminal.
+     * @param list The list to be printed.
+     */
+    public static void printSearchList(TaskList list) {
+        String s = "Here are the matching tasks in your list:" + list.toString();
+        System.out.println(formatWithSpace(s));
     }
 }

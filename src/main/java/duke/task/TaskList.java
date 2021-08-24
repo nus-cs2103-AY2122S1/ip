@@ -73,13 +73,27 @@ public class TaskList {
     }
 
     /**
+     * Returns a Task List with tasks matching the search word.
+     * @param searchWord The search word.
+     * @return The task list.
+     */
+    public TaskList searchTask(String searchWord) {
+        TaskList output = new TaskList();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).contains(searchWord)) {
+                output.addTask(list.get(i));
+            }
+        }
+        return output;
+    }
+
+    /**
      * String representation of the tasklist.
      * @return String representation of the tasklist.
      */
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             s.append("\n").append(i + 1).append(".").append(list.get(i));
         }
