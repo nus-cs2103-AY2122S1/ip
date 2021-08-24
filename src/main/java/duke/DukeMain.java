@@ -1,7 +1,7 @@
-package Duke;
+package duke;
 
-import Duke.classes.TaskList;
-import Duke.exceptions.DukeException;
+import duke.classes.TaskList;
+import duke.exceptions.DukeException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class DukeMain {
         storage = new DukeStorage();
 
         try {
-            taskList = new TaskList(storage.retrieve());
+            taskList = new TaskList(storage.retrieve("localList.txt"));
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred with the saved file");
             e.printStackTrace();

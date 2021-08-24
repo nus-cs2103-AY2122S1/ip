@@ -1,8 +1,8 @@
-package Duke;
+package duke;
 
-import Duke.classes.TaskList;
-import Duke.exceptions.DukeException;
-import Duke.tasks.*;
+import duke.classes.TaskList;
+import duke.exceptions.DukeException;
+import duke.tasks.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,8 +25,8 @@ public class DukeStorage {
      * @throws DukeException
      * @throws FileNotFoundException
      */
-    public List<Task> retrieve() throws DukeException, FileNotFoundException {
-        File localList = new File("localList.txt");
+    public List<Task> retrieve(String pathname) throws DukeException, FileNotFoundException {
+        File localList = new File(pathname);
         List<Task> taskList = new ArrayList<>();
         if (localList.exists()) {
             Scanner listScanner = new Scanner(localList);

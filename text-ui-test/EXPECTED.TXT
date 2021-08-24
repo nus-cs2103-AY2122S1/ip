@@ -5,14 +5,14 @@
 |____/ \__,_|_|\_\___|
 
 ____________________________________________________________
-Hello! I'm Duke
+Hello! I'm duke
 What can I do for you?
 
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
 	[T][ ] borrow book
-Now you have 1 Duke.tasks in the list.
+Now you have 1 duke.tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 !!! The description cannot be empty. !!!
@@ -20,7 +20,7 @@ ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
 	[D][ ] return book (by: Sunday)
-Now you have 2 Duke.tasks in the list.
+Now you have 2 duke.tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 !!! Input the description then use /by to input date !!!
@@ -31,10 +31,10 @@ ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
 	[E][ ] project meeting (at: Mon 2-4pm)
-Now you have 3 Duke.tasks in the list.
+Now you have 3 duke.tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Here are the Duke.tasks in your list:
+Here are the duke.tasks in your list:
 1.[T][ ] borrow book
 2.[D][ ] return book (by: Sunday)
 3.[E][ ] project meeting (at: Mon 2-4pm)
