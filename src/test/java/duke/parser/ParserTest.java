@@ -1,6 +1,7 @@
 package duke.parser;
 
 import duke.exception.DukeException;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,15 +27,15 @@ public class ParserTest {
             fail();
         }
     }
-    
+
     @Test
     public void parse_invalidCommand_throwsException() {
         try {
             Parser.parse("invalid command");
             fail();
         } catch (DukeException e) {
-             assertEquals(e.getMessage(), "I'm sorry, but I don't know what \""
-                     + "invalid command" + "\" means :-(");
+            assertEquals(e.getMessage(), "I'm sorry, but I don't know what \""
+                    + "invalid command" + "\" means :-(");
         }
     }
 
@@ -44,7 +45,7 @@ public class ParserTest {
             Parser.parse("bye");
         } catch (DukeException e) {
             fail();
-        } 
+        }
     }
 
 }

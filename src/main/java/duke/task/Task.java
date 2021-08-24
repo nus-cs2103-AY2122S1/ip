@@ -3,40 +3,42 @@ package duke.task;
 import java.time.LocalDate;
 
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return isDone ? "X" : " ";
     }
 
     public void markTaskAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
-    
+
     public boolean getIsDone() {
-        return this.isDone;
+        return isDone;
     }
-    
+
     public String getDescription() {
-        return this.description;
+        return description;
     }
-    
+
     public String getTaskType() {
         return null;
     }
-    
+
     public LocalDate getTiming() {
         return null;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+        return String.format("[%s] %s", getStatusIcon(), description);
     }
+    
 }

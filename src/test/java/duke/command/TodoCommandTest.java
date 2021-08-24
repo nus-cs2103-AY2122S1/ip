@@ -4,12 +4,13 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class ToDoCommandTest {
+public class TodoCommandTest {
 
     private Storage storage;
     private Ui ui = new Ui();
@@ -17,7 +18,7 @@ public class ToDoCommandTest {
 
     @Test
     public void execute_emptyString_throwsException() {
-        ToDoCommand test = new ToDoCommand("");
+        TodoCommand test = new TodoCommand("");
         try {
             test.execute(tasks, ui, storage);
             fail();
@@ -28,7 +29,7 @@ public class ToDoCommandTest {
 
     @Test
     public void execute_validArgument_returnsNormally() {
-        ToDoCommand test = new ToDoCommand("go shopping");
+        TodoCommand test = new TodoCommand("go shopping");
         try {
             test.execute(tasks, ui, storage);
         } catch (DukeException e) {

@@ -7,7 +7,8 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class DoneCommand extends Command {
-    public String arguments;
+    
+    private String arguments;
 
     public DoneCommand(String arguments) {
         super("done");
@@ -19,10 +20,12 @@ public class DoneCommand extends Command {
         if (arguments.isEmpty()) {
             throw new DukeException("No index was keyed in. Please try again.");
         }
+        
         int index = Integer.parseInt(arguments);
         if (index < 1 || index > tasks.size()) {
             throw new DukeException("The index you entered is invalid. Please try again.");
         }
+        
         Task taskToBeMarked = tasks.get(index - 1);
         taskToBeMarked.markTaskAsDone();
         ui.printToUser("Nice! I've marked this task as done:");

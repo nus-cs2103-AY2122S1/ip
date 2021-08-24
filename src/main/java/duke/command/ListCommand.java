@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -11,7 +10,7 @@ public class ListCommand extends Command {
     public ListCommand() {
         super("list");
     }
-    
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printToUser("Here are the tasks in your list:");

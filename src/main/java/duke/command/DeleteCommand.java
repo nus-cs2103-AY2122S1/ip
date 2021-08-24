@@ -8,7 +8,7 @@ import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
 
-    public String arguments;
+    private String arguments;
 
     public DeleteCommand(String arguments) {
         super("delete");
@@ -20,10 +20,12 @@ public class DeleteCommand extends Command {
         if (arguments.isEmpty()) {
             throw new DukeException("No index was keyed in. Please try again.");
         }
+
         int index = Integer.parseInt(arguments);
         if (index < 1 || index > tasks.size()) {
             throw new DukeException("The index you entered is invalid. Please try again.");
         }
+
         Task taskDeleted = tasks.remove(index - 1);
         ui.printToUser("Noted! I've removed this task:");
         ui.printToUser("  " + taskDeleted);

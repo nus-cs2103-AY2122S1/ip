@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -47,6 +48,6 @@ public class EventCommandTest {
         }
         assertEquals(tasks.get(0).toString(), "[E][ ] go shopping (at: Oct 10 2021)");
     }
-    
-    
+
+
 }
