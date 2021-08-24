@@ -55,7 +55,7 @@ public class Storage {
         return tasks;
     }
 
-    private static Task convertInputToTask(String line) throws InvalidInputException {
+    private Task convertInputToTask(String line) throws InvalidInputException {
         Task task;
         String[] format = line.split("\\|");
         String taskType = format[0].trim();
