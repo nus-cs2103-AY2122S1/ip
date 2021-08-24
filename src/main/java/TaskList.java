@@ -12,46 +12,42 @@ public class TaskList {
     private ArrayList<Task> taskList;
 
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.taskList = new ArrayList<Task>();
     }
 
-    public void initialiseTaskList() {
-        try {
-            String path = new File("").getAbsolutePath() + "/data/bob.txt";
-            File f = new File(path);
-            Scanner s = new Scanner(f);
-            while (s.hasNext()) {
-                String curr = s.nextLine();
-                Task newTask;
-                boolean isComplete;
-                if (curr.matches("\\[T](.*)")) {
-                    String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
-                    newTask = new Todo(splitCurr[1]);
-                    isComplete = curr.contains("[X]");
-                } else if (curr.matches("\\[D](.*)")) {
-                    String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
-                    String[] splitRight = splitCurr[1].split(" \\(by: ", 2);
-                    String by = splitRight[1].substring(0, splitRight[1].length() - 1);
-                    newTask = new Deadline(splitRight[0], by);
-                    isComplete = curr.contains("[X]");
-                } else {
-                    String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
-                    String[] splitRight = splitCurr[1].split(" \\(at: ", 2);
-                    String at = splitRight[1].substring(0, splitRight[1].length() - 1);
-                    newTask = new Event(splitRight[0], at);
-                    isComplete = curr.contains("[X]");
-                }
-                this.taskList.add(newTask);
-                if (isComplete) {
-                    newTask.markCompleted();
-                }
+    public void initialiseTaskList() throws IOException {
+        String path = new File("").getAbsolutePath() + "/data/bob.txt";
+        File f = new File(path);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String curr = s.nextLine();
+            Task newTask;
+            boolean isComplete;
+            if (curr.matches("\\[T](.*)")) {
+                String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
+                newTask = new Todo(splitCurr[1]);
+                isComplete = curr.contains("[X]");
+            } else if (curr.matches("\\[D](.*)")) {
+                String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
+                String[] splitRight = splitCurr[1].split(" \\(by: ", 2);
+                String by = splitRight[1].substring(0, splitRight[1].length() - 1);
+                newTask = new Deadline(splitRight[0], by);
+                isComplete = curr.contains("[X]");
+            } else {
+                String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
+                String[] splitRight = splitCurr[1].split(" \\(at: ", 2);
+                String at = splitRight[1].substring(0, splitRight[1].length() - 1);
+                newTask = new Event(splitRight[0], at);
+                isComplete = curr.contains("[X]");
             }
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            this.taskList.add(newTask);
+            if (isComplete) {
+                newTask.markCompleted();
+            }
         }
     }
 
-    public String addTask(Task task) {
+    public String addTask(Task task) throws IOException {
         this.taskList.add(task);
         updateTextFile();
         return "Okay okay I've added the task:\n" + task.printTask() + "\n"
@@ -66,14 +62,14 @@ public class TaskList {
         return result;
     }
 
-    public String markIndexCompleted(int index) {
+    public String markIndexCompleted(int index) throws IOException {
         Task selectedTask = this.taskList.get(index);
         selectedTask.markCompleted();
         updateTextFile();
         return "Wow you finally did something productive!\n" + selectedTask.printTask() + "\n";
     }
 
-    public String deleteIndex(int index) {
+    public String deleteIndex(int index) throws IOException {
         Task selectedTask = this.taskList.get(index);
         this.taskList.remove(index);
         updateTextFile();
@@ -85,17 +81,13 @@ public class TaskList {
         return Integer.toString(this.taskList.size());
     }
 
-    private void updateTextFile() {
-        try {
-            String path = new File("").getAbsolutePath() + "/data/bob.txt";
-            FileWriter writer = new FileWriter(path);
-            writer.write("");
-            writer.close();
-            for (int i = 0; i < taskList.size(); i++) {
-                appendToFile(path, taskList.get(i).printTask());
-            }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+    private void updateTextFile() throws IOException {
+        String path = new File("").getAbsolutePath() + "/data/bob.txt";
+        FileWriter writer = new FileWriter(path);
+        writer.write("");
+        writer.close();
+        for(int i = 0; i < taskList.size(); i++) {
+            appendToFile(path, taskList.get(i).printTask());
         }
     }
 
