@@ -6,6 +6,7 @@ public class BotBrain {
     private BotMemory botMemory = new BotMemory();
     private BotPrinter botPrinter = new BotPrinter();
     private List<Task> taskTracker = botMemory.taskTracker;
+    private boolean isTerminate = false;
 
     /**
      * Constrcutor
@@ -197,34 +198,38 @@ public class BotBrain {
         }
     }
 
+    private void reactToCommand(String input) throws Exception {
+        CommandInput commandInitial = identifyCommand(input);
+        switch (commandInitial) {
+            case BYE:
+                botPrinter.print(botMemory.MESSAGE_GOODBYE);
+                isTerminate = true;
+                return;
+            case LIST:
+                botPrinter.print(formatTaskTracker());
+                break;
+            case DONE:
+                markTaskAsDone(input);
+                break;
+            case DELETE:
+                deleteTaskFromList(input);
+                break;
+            default:
+                classifyTask(input);
+                generateTaskFeedback();
+        }
+    }
+
     /**
      * A method to read the user's input and respond to it
      */
     private void interact() {
         Scanner sc = new Scanner(System.in);
-        while (true) {
+        while (!isTerminate) {
             try {
                 String input = sc.nextLine().trim();
-                CommandInput commandInitial = identifyCommand(input);
-
-                switch (commandInitial) {
-                    case BYE:
-                        botPrinter.print(botMemory.MESSAGE_GOODBYE);
-                        return;
-                    case LIST:
-                        botPrinter.print(formatTaskTracker());
-                        break;
-                    case DONE:
-                        markTaskAsDone(input);
-                        break;
-                    case DELETE:
-                        deleteTaskFromList(input);
-                        break;
-                    default:
-                        classifyTask(input);
-                        generateTaskFeedback();
-                }
-
+                reactToCommand(input);
+                botMemory.saveToHardDisk();
             }
             catch (Exception error){
                 botPrinter.print(botMemory.ERROR_MESSAGE_PROMPT + error.getMessage());
