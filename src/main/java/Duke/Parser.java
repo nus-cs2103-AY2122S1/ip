@@ -4,10 +4,19 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A Parser that deals with the user commands on the Task List.
+ */
 public class Parser {
     private TaskList tasks;
     private Storage storage;
 
+    /**
+     * A public constructor to create a parser that takes in a TaskList
+     * and a file of which the TaskList is stored.
+     * @param tasks The task list of the user.
+     * @param storage The file where the task list is stored.
+     */
     public Parser(TaskList tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
@@ -21,14 +30,26 @@ public class Parser {
 //        return this.storage.getPath();
 //    }
 
+    /**
+     * Returns the storage where the task list is saved.
+     * @return The storage where the task list is saved
+     */
     public Storage getStorage() {
         return this.storage;
     }
 
+    /**
+     * Ends the user's session with Duke with a farewell message.
+     */
     public void endSession() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Marks a specified task as completed.
+     * @param input The task index.
+     * @throws InvalidTaskIndexException Thrown when the task index is invalid.
+     */
     public void done(String input) throws InvalidTaskIndexException {
         if (input.length() > 5 && Character.isDigit(input.charAt(5))) {
             try {
@@ -58,6 +79,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Adds a new task to the task list.
+     * @param input The details of the user's input.
+     * @throws InvalidFormatException Thrown when the input format is invalid.
+     * @throws DukeException Thrown when Duke encounters errors.
+     * @throws InvalidTaskIndexException Thrown when the task index is invalid.
+     */
     public void add(String input) throws InvalidFormatException, DukeException, InvalidTaskIndexException {
         if (input.startsWith("todo ") || input.equals("todo")) {
             if (input.length() > 5 ) {
@@ -133,6 +161,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Deletes a specified task from the task list.
+     * @param input The task index.
+     * @throws InvalidTaskIndexException Thrown when the task index is invalid.
+     */
     public void delete(String input) throws InvalidTaskIndexException {
         if (input.length() > 7 && Character.isDigit(input.charAt(7))) {
             try {
@@ -163,6 +196,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Lists out all the tasks in the task list.
+     */
     public void list() {
         tasks.listTasks();
     }

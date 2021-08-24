@@ -3,14 +3,26 @@ package Duke;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * An UI that recieve's user's input to run Duke
+ * and prints out the welcome message to the user.
+ * UI also carries the parser created.
+ */
 public class Recieve {
     private String input;
     private Parser parser;
 
+    /**
+     * A public constructor to create Recieve.
+     * @param parser The parser created when user starts session with Duke.
+     */
     public Recieve(Parser parser) {
         this.parser = parser;
     }
 
+    /**
+     * Runs the Duke Application.
+     */
     public void run() {
         System.out.println("Hello! I'm Duke\n" +
                 "To add a Duke.Todo, type -> todo <Description> \n" +

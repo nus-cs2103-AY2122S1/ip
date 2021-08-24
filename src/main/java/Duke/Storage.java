@@ -7,9 +7,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles the reading and writing of file
+ * which Duke accesses for the task list.
+ * Keeps the file path of the task list.
+ */
+
 public class Storage {
     private String filePath;
 
+    /**
+     * A public constructor to create Storage.
+     * @param filePath The string for the file name.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -24,6 +34,12 @@ public class Storage {
 //        }
 //    }
 
+    /**
+     * Loads and reads the content of the file to
+     * return an Array List of tasks saved in the file.
+     * @return An ArrayList of tasks.
+     * @throws IOException Thrown when the file is not found.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> arr = new ArrayList<>();
 
@@ -72,6 +88,11 @@ public class Storage {
         return arr;
     }
 
+    /**
+     * Rewrites the content of the file with the content passed in to the method.
+     * @param arr The arraylist of tasks.
+     * @throws IOException Thrown when the file cannot be found.
+     */
     public void writeToFile(ArrayList<Task> arr) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         for(Task str: arr) {
@@ -80,6 +101,10 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Returns the filePath string of the storage.
+     * @return the filePath string of the storage.
+     */
     public String getPath() {
         return this.filePath;
     }
