@@ -1,17 +1,22 @@
+import java.time.LocalDate;
+
 /**
  * Task contains information about a task.
  */
-public class Task {
+public abstract class Task {
     private String value = null;
     private boolean isDone = false;
+    private LocalDate time = null;
     public Task(String value){
         this.value = value;
         this.isDone = false;
     }
 
-    public String getTime() {
-        return "";
+    public LocalDate getTime() {
+        return time;
     }
+
+    public abstract String getType();
 
     public boolean getDone() {
         return isDone;

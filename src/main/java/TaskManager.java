@@ -4,9 +4,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,16 +33,6 @@ public class TaskManager {
             } else {
                 // file exist, read the file.
                 readJson("dukeData.json");
-//                System.out.println("Loading tasks from files...");
-//                BufferedReader br = new BufferedReader(new FileReader(txtDataFile));
-////                System.out.println("Reading stored data...");
-//                String txtline;
-//                while ((txtline = br.readLine()) != null) {
-////                    System.out.println("Reading from dukeData...");
-//                    String[] stringArr = txtline.split("\\|");
-//                    boolean marked = stringArr[0].equals("1");
-//                    executeCommand(stringArr[1], false, marked);
-//                }
             }
         } catch (Exception e) {
             System.out.println("An error occurred.");
@@ -117,14 +107,14 @@ public class TaskManager {
         String time = (String) taskObject.get("time");
         String type = (String) taskObject.get("type");
         type = type.toUpperCase();
-        Task newTask = new Task("");
+        Task newTask = new Todo("");
 
         if (type.equals(CommandList.TODO.toString())) {
             newTask = new Todo(value);
         } else if (type.equals(CommandList.DEADLINE.toString())) {
-            newTask = new Deadline(value, time);
+            newTask = new Deadline(value, LocalDate.parse(time));
         } else if (type.equals(CommandList.EVENT.toString())) {
-            newTask = new Event(value, time);
+            newTask = new Event(value, LocalDate.parse(time));
         }
 
         if (done) {
@@ -148,7 +138,7 @@ public class TaskManager {
             String type = currTask.getClass().getName().toUpperCase();
             TaskDetails.put("type", type);
             TaskDetails.put("value", currTask.getValue());
-            TaskDetails.put("time", currTask.getTime());
+            TaskDetails.put("time", currTask.getTime() == null ? "" : currTask.getTime().toString());
             TaskDetails.put("done", currTask.getDone());
 
             JSONObject taskObj = new JSONObject();
@@ -226,7 +216,7 @@ public class TaskManager {
                 if (input.length() > 8) {
                     if (input.contains("/by")) {
                         String[] stringArr = input.substring(9).split("/by");
-                        newTask = new Deadline(stringArr[0], stringArr[1].strip());
+                        newTask = new Deadline(stringArr[0], LocalDate.parse(stringArr[1].strip()));
                     } else {
                         System.out.println("Your deadline is missing a /by (date)");
                     }
@@ -237,7 +227,7 @@ public class TaskManager {
                 if (input.length() > 5) {
                     if (input.contains("/at")) {
                         String[] stringArr = input.substring(6).split("/at");
-                        newTask = new Event(stringArr[0], stringArr[1].strip());
+                        newTask = new Event(stringArr[0], LocalDate.parse(stringArr[1].strip()));
                     } else {
                         System.out.println("Your Event is missing a /at (date)");
                     }
