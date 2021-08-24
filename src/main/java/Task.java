@@ -38,9 +38,18 @@ public class Task {
         return this.name;
     }
 
+    public String getDoneValue() {
+        return isDone ? "1" : "0";
+    }
+
+    public String toFile() {
+        return " | " + getDoneValue() + " | " + name;
+    }
+
     @Override
     public String toString() {
         String format = String.format("[%s] ", this.getStatusIcon());
         return format + this.name;
     }
+
 }
