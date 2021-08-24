@@ -82,21 +82,21 @@ public class Storage {
         case 'T':
             Task taskToDo = new ToDo(taskDescription);
             if (isDone) {
-                taskToDo.markAsDone();
+                taskToDo.setDone();
             }
             createdTask = taskToDo;
             break;
         case 'D':
             Task taskDeadline = Parser.parseDeadlineFromFile(taskDescription);
             if (isDone) {
-                taskDeadline.markAsDone();
+                taskDeadline.setDone();
             }
             createdTask = taskDeadline;
             break;
         case 'E':
             Task taskEvent = Parser.parseEventFromFile(taskDescription);
             if (isDone) {
-                taskEvent.markAsDone();
+                taskEvent.setDone();
             }
             createdTask = taskEvent;
             break;

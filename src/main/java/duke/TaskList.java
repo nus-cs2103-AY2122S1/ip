@@ -58,7 +58,7 @@ public class TaskList {
      */
     public String taskDone(int index) {
         Task curr = tasks.get(index - 1);
-        curr.markAsDone();
+        curr.setDone();
         storage.writeToStorage(this.getList());
 
         return curr.toString();
