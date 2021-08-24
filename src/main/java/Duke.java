@@ -2,6 +2,8 @@ import exceptions.DukeException;
 import exceptions.DukeUnknownCommandException;
 import exceptions.DukeEmptyTodoDescriptionException;
 import java.util.ArrayList;
+
+import java.io.*;
 import java.util.Scanner;
 
 
@@ -9,12 +11,13 @@ public class Duke {
     private Scanner sc = new Scanner(System.in);
     private ArrayList<Task> dukeList = new ArrayList<Task>();
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
         Duke duke = new Duke();
         duke.runDuke();
     }
 
-    public void runDuke() throws DukeException {
+    public void runDuke() throws DukeException, IOException {
+        fetchData();
         displayWelcomeMessage();
         String command = sc.next();
         String description = sc.nextLine();
@@ -26,6 +29,63 @@ public class Duke {
             }
         }
         displayByeMessage();
+    }
+
+    public void saveData() {
+        try {
+            File file = new File("./data/saved-tasks.txt");
+            if(!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter writer = new FileWriter(file, false);
+            for(Task task: dukeList) {
+                String commandLine = "";
+                if(task instanceof Deadline) {
+                    commandLine = "D | " + (task.isDone ? "1 | " : "0 | ") + task.description + " | " + ((Deadline) task).time + '\n';
+                } else if(task instanceof Event) {
+                    commandLine = "E | " + (task.isDone ? "1 | " : "0 | ") + task.description + " | " + ((Event) task).time + '\n';
+                } else {
+                   commandLine =  "T | " + (task.isDone ? "1 | " : "0 | ") + task.description + '\n';
+                }
+                writer.write(commandLine);
+                writer.flush();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void fetchData() throws IOException {
+        File savedFile = new File("./data/saved-tasks.txt");
+        if(!savedFile.exists()) {
+            savedFile.createNewFile();
+        }
+        Scanner scanner = new Scanner(savedFile);
+        while (scanner.hasNextLine()) {
+            String[] keywords = scanner.nextLine().split(" \\| ");
+            Task cur = null;
+            switch (keywords[0]) {
+                case "T":
+                    cur = new ToDo(keywords[2]);
+                    break;
+                case "D":
+                    cur = new Deadline(keywords[2], keywords[3]);
+                    break;
+                case "E":
+                    cur = new Event(keywords[2], keywords[3]);
+                    break;
+                default:
+                    System.out.println("error");
+                    break;
+            }
+
+            if (keywords[1].equals("1")) {
+                cur.completeTask();
+            }
+            dukeList.add(cur);
+        }
+        scanner.close();
     }
 
     void printLines() {
@@ -100,6 +160,7 @@ public class Duke {
                 System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
                 printLines();
             }
+            saveData();
         } catch ( DukeEmptyTodoDescriptionException | DukeUnknownCommandException e) {
             printLines();
             System.out.println(e.getMessage());
