@@ -16,6 +16,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the class to store the data.
+ *
+ * @author QIN GUORUI
+ */
 public class Storage {
     /** The content in the data file. */
     private String content = "";

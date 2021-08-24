@@ -67,32 +67,12 @@ public class Parser {
             case DELETE:
                 return new DeleteCommand(response);
             case DATE:
-                return new SearchCommand(response);
+                return new SearchCommand(response, 1);
+            case FIND:
+                return new SearchCommand(response, 2);
             default:
-<<<<<<< HEAD
-                Operation op = checkResponse(response, len);
-                switch (op) {
-                    case DEADLINE:
-                        return new AddCommand(response, 2);
-                    case TODO:
-                        return new AddCommand(response, 1);
-                    case EVENT:
-                        return new AddCommand(response, 3);
-                    case DONE:
-                        return new MarkCommand(response);
-                    case DELETE:
-                        return new DeleteCommand(response);
-                    case DATE:
-                        return new SearchCommand(response, 1);
-                    case FIND:
-                        return new SearchCommand(response, 2);
-                    default:
-                        return null;
-                }
-=======
                 return null;
             }
->>>>>>> branch-A-CodingStandard
         }
     }
 
@@ -126,15 +106,9 @@ public class Parser {
                 && chekDigit(response.substring(7))) {
             return Operation.DELETE;
         } else if (response.equals("delete") || response.equals("todo") || response.equals("deadline")
-<<<<<<< HEAD
                 || response.equals("event") || response.equals("done") || response.equals("date")
                         || response.equals("find")) {
-            String curr = response;
-            throw new EmptyInputException(curr);
-=======
-                || response.equals("event") || response.equals("done") || response.equals("date")) {
             throw new EmptyInputException(response);
->>>>>>> branch-A-JavaDoc
         } else {
             //This means there's no match of operations.
             throw new NotRecognizeException();
