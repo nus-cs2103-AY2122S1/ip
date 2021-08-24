@@ -22,7 +22,6 @@ public class Event extends Task {
         } catch (DateTimeParseException e) {
             throw new DukeException("Event dates should be in the form YYYY-MM-DD.");
         }
-
     }
 
     /**
@@ -34,7 +33,11 @@ public class Event extends Task {
      */
     public Event(String description, boolean isDone, String at) {
         super(description, isDone);
-        this.at = at;
+        try {
+            this.at = LocalDate.parse(at);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Event dates should be in the form YYYY-MM-DD.");
+        }
     }
 
     /**

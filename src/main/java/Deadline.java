@@ -33,7 +33,11 @@ public class Deadline extends Task {
      */
     public Deadline(String description, boolean isDone, String by) {
         super(description, isDone);
-        this.by = by;
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Deadlines should be in the form YYYY-MM-DD.");
+        }
     }
 
     /**
