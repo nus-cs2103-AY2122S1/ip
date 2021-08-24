@@ -6,6 +6,14 @@ public class ToDo extends Task {
         }
     }
 
+    public String getInfo() {
+        return getDescription();
+    }
+
+    public String getType() {
+        return "T";
+    };
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

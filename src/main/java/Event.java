@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Event extends Task {
 
     protected String at;
@@ -9,6 +11,14 @@ public class Event extends Task {
         }
         this.at = at;
     }
+
+    public String getInfo() {
+        return getDescription() + "/" + this.at;
+    }
+
+    public String getType() {
+        return "E";
+    };
 
     @Override
     public String toString() {
