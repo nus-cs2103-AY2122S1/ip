@@ -30,6 +30,9 @@ public class Storage {
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
                 String[] info = line.split(" \\| ");
+                if (info.length == 1) {
+                    continue;
+                }
                 String command = info[0];
                 Task task = null;
                 boolean done = info[1].equals("1");
@@ -59,6 +62,7 @@ public class Storage {
         String data = tasks.getData();
         try (PrintWriter out = new PrintWriter(this.filePath)) {
             out.println(data);
+            out.close();
         } catch (IOException e) {
             // will never occur since the file will always be created first
         }
