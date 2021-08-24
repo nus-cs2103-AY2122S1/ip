@@ -10,7 +10,7 @@ public class Deadline extends Task {
      * @param timeDue a LocalDate representing time at which the deadline is due
      */
     public Deadline(String title, LocalDate timeDue) {
-        super(title, TypeIndicators.DEADLINE);
+        super(title, TypeIndicator.DEADLINE);
         this.timeDue = timeDue;
     }
 
@@ -21,7 +21,7 @@ public class Deadline extends Task {
      * @param isDone a boolean representing whether or not the deadline is completed
      */
     public Deadline(String title, LocalDate timeDue, boolean isDone) {
-        super(title, TypeIndicators.DEADLINE);
+        super(title, TypeIndicator.DEADLINE);
         this.timeDue = timeDue;
         this.isDone = isDone;
     }
@@ -34,7 +34,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String formattedTimeDue = this.timeDue == null
-                ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                ? ""
+                : this.timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return super.toString() + String.format(" (by: %s)", formattedTimeDue);
     }
 }

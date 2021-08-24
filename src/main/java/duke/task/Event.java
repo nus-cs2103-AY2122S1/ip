@@ -10,7 +10,7 @@ public class Event extends Task {
      * @param timeDue a LocalDate representing time at which the event is due
      */
     public Event(String title, LocalDate timeDue) {
-        super(title, TypeIndicators.EVENT);
+        super(title, TypeIndicator.EVENT);
         this.timeDue = timeDue;
     }
 
@@ -21,7 +21,7 @@ public class Event extends Task {
      * @param isDone a boolean representing whether or not the event is completed
      */
     public Event(String title, LocalDate timeDue, boolean isDone) {
-        super(title, TypeIndicators.EVENT);
+        super(title, TypeIndicator.EVENT);
         this.timeDue = timeDue;
         this.isDone = isDone;
     }
@@ -34,7 +34,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         String formattedTimeDue = this.timeDue == null
-                ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                ? ""
+                : this.timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return super.toString() + String.format(" (at: %s)", formattedTimeDue);
     }
 }

@@ -9,14 +9,14 @@ public class Task {
     protected char typeIndicator;
     protected LocalDate timeDue;
 
-    protected enum TypeIndicators {
+    protected enum TypeIndicator {
         TODO('T'),
         EVENT('E'),
         DEADLINE('D');
 
-        public final char indicator;
+        private final char indicator;
 
-        TypeIndicators(char indicator) {
+        TypeIndicator(char indicator) {
             this.indicator = indicator;
         }
 
@@ -31,7 +31,7 @@ public class Task {
      * @param title a String representing the user-input title of the task.
      * @param taskType the type of the task
      */
-    public Task(String title, TypeIndicators taskType) {
+    public Task(String title, TypeIndicator taskType) {
         this.title = title;
         this.isDone = false;
         taskType.setIndicatorForTask(this);
@@ -46,15 +46,15 @@ public class Task {
      * @return a Task that is created from the given details
      */
     public static Task createTaskWithDetail(
-            TypeIndicators taskType, boolean isDone, String title, LocalDate timeDue) {
+            TypeIndicator taskType, boolean isDone, String title, LocalDate timeDue) {
         switch (taskType) {
-            case DEADLINE:
-                return new Deadline(title, timeDue, isDone);
-            case EVENT:
-                return new Event(title, timeDue, isDone);
-            default:
-                // If the type cannot be parsed, it defaults to TO-DO.
-                return new Todo(title, isDone);
+        case DEADLINE:
+            return new Deadline(title, timeDue, isDone);
+        case EVENT:
+            return new Event(title, timeDue, isDone);
+        default:
+            // If the type cannot be parsed, it defaults to TO-DO.
+            return new Todo(title, isDone);
         }
     }
 
@@ -82,7 +82,8 @@ public class Task {
     public String toSaveData() {
         int doneIndicator = this.isDone ? 1 : 0;
         String timeDueString = this.timeDue == null
-                ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                ? ""
+                : this.timeDue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return String.format("%s%s%s|%s\n",
                 this.typeIndicator, doneIndicator, timeDueString, this.title);
     }
@@ -96,18 +97,18 @@ public class Task {
 
     /**
      * Given a char, convert it to a typeIndicator Enum.
-     * @param t The char to be converted to a TypeIndicators Enum
-     * @return a TypeIndicators enum
+     * @param t The char to be converted to a TypeIndicator Enum
+     * @return a TypeIndicator enum
      */
-    public static TypeIndicators charToTypeEnum(char t) {
+    public static TypeIndicator charToTypeEnum(char t) {
         switch (t) {
-            case 'D':
-                return TypeIndicators.DEADLINE;
-            case 'E':
-                return TypeIndicators.EVENT;
-            default:
-                // If the type cannot be inferred, return a TO-DO as default.
-                return TypeIndicators.TODO;
+        case 'D':
+            return TypeIndicator.DEADLINE;
+        case 'E':
+            return TypeIndicator.EVENT;
+        default:
+            // If the type cannot be inferred, return a TO-DO as default.
+            return TypeIndicator.TODO;
         }
     }
 
