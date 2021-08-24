@@ -1,4 +1,4 @@
-package lania;
+package lania.exception;
 
 public class LaniaException extends IllegalArgumentException {
 

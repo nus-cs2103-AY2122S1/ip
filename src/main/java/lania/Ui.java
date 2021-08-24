@@ -1,5 +1,6 @@
 package lania;
 
+import lania.exception.LaniaException;
 import lania.task.Task;
 import lania.task.TaskList;
 

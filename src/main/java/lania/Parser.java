@@ -1,5 +1,7 @@
 package lania;
 
+import lania.exception.LaniaEmptyDescriptionException;
+
 public class Parser {
 
     public String parseCommand(String command) {
