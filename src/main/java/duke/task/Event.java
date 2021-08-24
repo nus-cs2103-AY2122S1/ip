@@ -4,6 +4,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Event is a task that has a description, date, and a period of time.
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class Event extends Task {
     private String timeStart;
     private String timeEnd;

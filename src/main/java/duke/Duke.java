@@ -2,6 +2,12 @@ package duke;
 
 import duke.command.Command;
 
+/**
+ * Duke is the main class that handles the overall execution of the program.
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class Duke {
 
     private Storage storage;
@@ -18,6 +24,7 @@ public class Duke {
             this.tasks = new TaskList();
         }
     }
+
 
     public void run() {
         ui.showWelcome();

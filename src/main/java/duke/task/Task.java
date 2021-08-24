@@ -1,5 +1,11 @@
 package duke.task;
 
+/**
+ * The Task class represents the tasks in the task list.
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class Task {
     protected String description;
     protected String date;
@@ -21,14 +27,29 @@ public class Task {
         isDone = true;
     }
 
+    /**
+     * Returns a string representation of the task that is stored in the save file.
+     *
+     * @return A string representation of the task.
+     */
     public String getReadableString() {
         return "";
     }
 
+    /**
+     * Returns the date of a task, formatted.
+     *
+     * @return A formatted string representation of the date of the task.
+     */
     public String getFormattedDate() {
         return "";
     }
 
+    /**
+     * Returns the time of a task, formatted.
+     *
+     * @return A formatted string representation of the time of the task.
+     */
     public String getFormattedTime() {
         return "";
     }

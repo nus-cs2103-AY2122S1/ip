@@ -1,5 +1,11 @@
 package duke.task;
 
+/**
+ * The To do is a task that only has a description.
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class Todo extends Task {
     public Todo(String description, String date, String time) {
         super(description, date, time);
