@@ -16,6 +16,12 @@ public class Event extends Task {
         this.at = dateAndTime(at);
     }
 
+    /**
+     * Returns whether the two times are equal.
+     *
+     * @param time The time's string representation.
+     * @return A boolean.
+     */
     @Override
     public boolean compareTime(String time) {
         return at.equals(time);

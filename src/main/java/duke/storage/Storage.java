@@ -23,8 +23,10 @@ public class Storage {
     /** The recommended working directory path. */
     private static String dir = System.getProperty("user.dir");
 
+    /** Relative file path. */
     private String filePath;
 
+    /** The actual file name. */
     private String file;
 
     public Storage(String filePath) {
@@ -32,6 +34,12 @@ public class Storage {
         this.file = filePath.substring(4);
     }
 
+    /**
+     * Returns the task list stored in data file.
+     *
+     * @return The task list.
+     * @throws LoadingException The exception related to loading.
+     */
     public ArrayList<Task> load() throws LoadingException {
         String dir = System.getProperty("user.dir");
         // inserts correct file path separator on *nix and Windows
@@ -166,9 +174,10 @@ public class Storage {
     }
 
     /**
-     * Replaces the task at certain place.
+     * Replaces the unmarked task as marked, or just removes the task.
      *
-     * @param place The index when the task is stored in task list.
+     * @param place The index of task in task list.
+     * @param tasks The task list.
      */
     public void replace(int place, TaskList tasks){
         try {

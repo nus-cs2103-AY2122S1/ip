@@ -17,10 +17,11 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Returns a boolean checking whether the user input is
-     * related to delete operations.
+     * Shows the task just be deleted.
      *
-     * @return Whether the input is related to delete or not.
+     * @param tasks The list of tasks.
+     * @param ui The user interaction instance.
+     * @param storage The instance to store data.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws OutOfRangeException {

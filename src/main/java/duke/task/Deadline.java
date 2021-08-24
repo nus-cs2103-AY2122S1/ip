@@ -14,6 +14,12 @@ public class Deadline extends Task {
         this.by = dateAndTime(by);
     }
 
+    /**
+     * Returns whether the two times are equal.
+     *
+     * @param time The time's string representation.
+     * @return A boolean.
+     */
     @Override
     public boolean compareTime(String time) {
         return by.equals(time);

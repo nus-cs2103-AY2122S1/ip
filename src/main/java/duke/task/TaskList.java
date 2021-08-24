@@ -24,6 +24,13 @@ public class TaskList {
         return count;
     }
 
+    /**
+     * Removes the task at index place and returns it.
+     *
+     * @param place The index of task in task list.
+     * @return The removed task.
+     * @throws OutOfRangeException The exception related to index out of bounds.
+     */
     public Task removeElement(int place) throws OutOfRangeException {
         Task shouldDelete;
         try {
@@ -45,6 +52,12 @@ public class TaskList {
         return taskList.get(place).toString();
     }
 
+    /**
+     * Returns the task list of specific date.
+     *
+     * @param time The user input time.
+     * @return The task list held at that time.
+     */
     public TaskList tasksWithDate(String time) {
         TaskList currList = new TaskList();
         for (int i = 0; i < count; i++) {
@@ -56,6 +69,13 @@ public class TaskList {
         return currList;
     }
 
+    /**
+     * Returns the marked element.
+     *
+     * @param place The index of task in task list.
+     * @return The task marked as done.
+     * @throws OutOfRangeException The exception related to out of bounds.
+     */
     public Task markElement(int place) throws OutOfRangeException {
         Task shouldMark;
         try {
