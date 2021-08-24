@@ -2,9 +2,6 @@ package duke;
 
 import duke.*;
 
-/**
- * A parser to process user input.
- */
 public class Parser {
     public Parser() {
 

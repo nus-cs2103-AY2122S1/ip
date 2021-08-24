@@ -1,8 +1,5 @@
 package duke;
 
-/**
- * A class to add an event to your list.
- */
 public class FindCommand implements Command {
     private String userInput;
 
