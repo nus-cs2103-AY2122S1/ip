@@ -1,0 +1,3 @@
+T,1,run
+D,0,study,12 Dec 2020,11:59 PM
+E,1,hack,12 Dec 2334,11:45 PM

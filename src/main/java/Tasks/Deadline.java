@@ -27,6 +27,12 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    private Deadline(String description, int isDone, String date, String time) {
+        super(description, isDone);
+        this.date = date;
+        this.time = time;
+    }
+
     public static Deadline createDeadline(String details) throws PibException {
         try {
             int byIndex = details.indexOf("/by ");
@@ -43,6 +49,14 @@ public class Deadline extends Task {
         } catch (DateTimeParseException e) {
             throw new PibException("Uh oh :( Ensure date-time format is YYYY-MM-DD HHMM");
         }
+    }
+
+    public static Deadline createDeadline(String description, int isDone, String date, String time) {
+        return new Deadline(description, isDone, date, time);
+    }
+
+    public String toDataString() {
+        return "D," + getIsDone() + "," + getDescription() + "," + date + "," + time + System.lineSeparator();
     }
 
     /**

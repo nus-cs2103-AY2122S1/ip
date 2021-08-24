@@ -26,6 +26,12 @@ public class Event extends Task {
         this.time = time;
     }
 
+    private Event(String description, int isDone, String date, String time) {
+        super(description, isDone);
+        this.date = date;
+        this.time = time;
+    }
+
     public static Event createEvent(String details) throws PibException {
         try {
             int atIndex = details.indexOf("/at ");
@@ -42,6 +48,14 @@ public class Event extends Task {
         } catch (DateTimeParseException e) {
             throw new PibException("Uh oh :( Ensure date-time format is YYYY-MM-DD HHMM");
         }
+    }
+
+    public static Event createEvent(String description, int isDone, String date, String time) {
+        return new Event(description, isDone, date, time);
+    }
+
+    public String toDataString() {
+        return "E," + getIsDone() + "," + getDescription() + "," + date + "," + time + System.lineSeparator();
     }
 
     /**

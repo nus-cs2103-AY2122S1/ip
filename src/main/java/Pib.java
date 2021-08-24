@@ -1,5 +1,10 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.io.File;
 
 import Tasks.Task;
 import Tasks.Todo;
@@ -11,18 +16,34 @@ import pibexception.PibException;
  * Pib is a Personal Assistant Chat-bot that is able to keep track of tasks (CRUD) and deadlines
  */
 public class Pib {
-    private static String DIVIDER = "____________________________________________________________\n";
+    private static final String DIVIDER = "____________________________________________________________\n";
+    private static final String DATA_FILE_PATH = "./data/data.txt";
     private ArrayList<Task> list;
     private Scanner sc;
+    private File data;
 
     /**
      * Public constructor to instantiate an instance of Pib and start the program
      */
     public Pib() {
-        System.out.println(DIVIDER + "Hello! I'm Pib\n" + "Tell me something!\n" + DIVIDER);
-        list = new ArrayList<>();
-        sc = new Scanner(System.in);
-        readInput();
+        try {
+            System.out.println(DIVIDER);
+            System.out.println(System.getProperty("user.dir"));
+            this.data = new File(DATA_FILE_PATH);
+            list = new ArrayList<>();
+            if (!this.data.createNewFile()) {
+                loadSavedData(this.data);
+                System.out.println("--Saved data successfully loaded!--\n" + DIVIDER);
+            }
+            System.out.println("Hello! I'm Pib\n" + "Tell me something!\n" + DIVIDER);
+            sc = new Scanner(System.in);
+            readInput();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading file");
+        } catch (PibException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private enum TaskType {
@@ -40,36 +61,31 @@ public class Pib {
                     String taskType = next.substring(0, spaceDividerIndex).toLowerCase();
                     String taskDetails = next.substring(1 + spaceDividerIndex);
                     switch (taskType) {
-                        case "todo":
-                            addToList(TaskType.TODO, taskDetails);
-                            break;
-                        case "deadline": {
-                            addToList(TaskType.DEADLINE, taskDetails);
-                            break;
+                    case "todo":
+                        addToList(TaskType.TODO, taskDetails);
+                        break;
+                    case "deadline":
+                        addToList(TaskType.DEADLINE, taskDetails);
+                        break;
+                    case "event":
+                        addToList(TaskType.EVENT, taskDetails);
+                        break;
+                    case "done":
+                        try {
+                            markAsDone(taskDetails);
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("Uh oh :( Please enter a valid task number!\n");
                         }
-                        case "event": {
-                            addToList(TaskType.EVENT, taskDetails);
-                            break;
+                        break;
+                    case "delete":
+                        try {
+                            delete(taskDetails);
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("Uh oh :( Please enter a valid task number!\n");
                         }
-                        case "done": {
-                            try {
-                                markAsDone(taskDetails);
-                            } catch (IndexOutOfBoundsException e) {
-                                System.out.println("Uh oh :( Please enter a valid task number!\n");
-                            }
-                            break;
-                        }
-                        case "delete": {
-                            try {
-                                delete(taskDetails);
-                            } catch (IndexOutOfBoundsException e) {
-                                System.out.println("Uh oh :( Please enter a valid task number!\n");
-                            }
-                            break;
-                        }
-                        default: {
-                            throw new PibException("Uh oh :( I don't know that command\n");
-                        }
+                        break;
+                    default:
+                        throw new PibException("Uh oh :( I don't know that command\n");
                     }
                 } else {
                     String action = next.toLowerCase();
@@ -97,22 +113,29 @@ public class Pib {
 
     private void addToList(TaskType t, String taskDetails) {
         try {
+            Task newTask = null;
             switch (t) {
             case TODO:
-                list.add(Todo.createTodo(taskDetails));
+                newTask = Todo.createTodo(taskDetails);
                 break;
             case EVENT:
-                list.add(Event.createEvent(taskDetails));
+                newTask = Event.createEvent(taskDetails);
                 break;
             case DEADLINE:
-                list.add(Deadline.createDeadline(taskDetails));
+                newTask = Deadline.createDeadline(taskDetails);
                 break;
             default:
                 break;
             }
-            System.out.println("Now you have " + list.size() + " task(s) in your list.\n");
+            if (newTask != null) {
+                list.add(newTask);
+                writeToFile(DATA_FILE_PATH, list);
+                System.out.println("Now you have " + list.size() + " task(s) in your list.\n");
+            }
         } catch (PibException e) {
             System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Uh oh :( Error saving tasks");
         }
     }
 
@@ -128,10 +151,15 @@ public class Pib {
     }
 
     private void markAsDone(String s) {
-        if (s.isBlank()) {
-            System.out.println("Tell me which item to mark as complete!\n ");
-        } else {
-            list.get(Integer.parseInt(s) - 1).markAsDone();
+        try {
+            if (s.isBlank()) {
+                System.out.println("Tell me which item to mark as complete!\n ");
+            } else {
+                list.get(Integer.parseInt(s) - 1).markAsDone();
+                writeToFile(DATA_FILE_PATH, list);
+            }
+        } catch (IOException e) {
+            System.out.println("Uh oh :( Error saving tasks");
         }
     }
 
@@ -145,6 +173,45 @@ public class Pib {
         }
     }
 
+    private void loadSavedData(File file) throws PibException {
+        try {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                String[] taskDetails = sc.nextLine().split(",");
+                System.out.println(Arrays.toString(taskDetails));
+                Task newTask = null;
+                switch (taskDetails[0]) {
+                case "T":
+                    newTask = Todo.createTodo(taskDetails[2], Integer.parseInt(taskDetails[1]));
+                    break;
+                case "E":
+                    newTask = Event.createEvent(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4]);
+                    break;
+                case "D":
+                    newTask = Deadline.createDeadline(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4]);
+                    break;
+                default:
+                    break;
+                }
+                if (newTask != null) {
+                    list.add(newTask);
+                }
+
+            }
+        } catch (FileNotFoundException e) {
+            throw new PibException("Saved data error");
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeToFile(String filePath, ArrayList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task t : tasks) {
+            fw.write(t.toDataString());
+        }
+        fw.close();
+    }
 
     public static void main(String[] args) {
         Pib p = new Pib();

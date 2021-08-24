@@ -16,12 +16,28 @@ public class Todo extends Task {
         super(description);
     }
 
+    private Todo(String description, int isDone) {
+        super(description, isDone);
+    }
+
     public static Todo createTodo(String details) throws PibException {
         if (details.trim().isBlank()) {
             throw new PibException("Todo description can't be blank");
         } else {
             return new Todo(details.trim());
         }
+    }
+
+    public static Todo createTodo(String details, int isDone) throws PibException {
+        if (details.trim().isBlank()) {
+            throw new PibException("Todo description can't be blank");
+        } else {
+            return new Todo(details.trim(), isDone);
+        }
+    }
+
+    public String toDataString() {
+        return "T," + getIsDone() + "," + getDescription() + System.lineSeparator();
     }
 
     /**
