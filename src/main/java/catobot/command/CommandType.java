@@ -1,5 +1,8 @@
 package catobot.command;
 
+/**
+ * Represents the types of commands.
+ */
 public enum CommandType {
 
     LIST    ("list"),
@@ -11,7 +14,14 @@ public enum CommandType {
     CLOSE   ("bye"),
     INVALID ("");
 
+    /** Content of the command. */
     private final String command;
+
+    /**
+     * Constructor for a command.
+     *
+     * @param command The content of the command.
+     */
     CommandType(String command) {
         this.command = command;
     }

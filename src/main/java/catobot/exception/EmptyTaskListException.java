@@ -1,20 +1,13 @@
 package catobot.exception;
 
+/**
+ * Represents exception when the task list is empty.
+ */
 public class EmptyTaskListException extends BotException {
     /**
-     * Creates a EmptyTaskListException.
+     * Constructor for EmptyTaskListException.
      */
     public EmptyTaskListException() {
         super("There is no tasks currently! Try to add one!");
-    }
-
-    /**
-     * Gets the message of the EmptyTaskListException.
-     *
-     * @return The error message.
-     */
-    @Override
-    public String getMessage() {
-        return super.getMessage();
     }
 }

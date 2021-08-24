@@ -10,15 +10,30 @@ import catobot.item.TaskList;
 
 import java.time.LocalDate;
 
+/**
+ * Represents the command to add an event to tasks.
+ */
 public class EventCommand extends Command {
+
+    /** Content of the command. */
     private final String content;
 
+    /**
+     * Constructor for EventCommand.
+     *
+     * @param content The content of the command.
+     */
     protected EventCommand(String content) {
         this.content = content;
     }
 
     /**
-     * Displays the list of tasks.
+     * Adds an event to a list of tasks.
+     *
+     * @param tasks The list of tasks to be worked on.
+     * @param ui The ui that responds to the user.
+     * @param storage The storage of the tasks.
+     * @throws BotException If the description is invalid.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {

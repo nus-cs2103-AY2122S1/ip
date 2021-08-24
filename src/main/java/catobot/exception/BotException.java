@@ -1,11 +1,11 @@
 package catobot.exception;
 
 /**
- * BotException are possible exceptions thrown by catobot.Catobot.
+ * Represents exceptions thrown by Catobot classes.
  */
 public class BotException extends Exception {
     /**
-     * Creates a BotException.
+     * Constructor for BotException.
      *
      * @param errorMessage The error message.
      */

@@ -1,6 +1,7 @@
 package catobot;
 
 import catobot.exception.EmptyCommandException;
+import catobot.exception.LoadingException;
 import catobot.item.Deadline;
 import catobot.item.Event;
 import catobot.item.Task;
@@ -15,11 +16,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents the local memory of tasks.
+ */
 public class Storage {
+    /** The path to the file. */
     private final String filePath;
+    /** The file storing the tasks. */
     private final File storage;
 
-
+    /**
+     * Constructor for Storage.
+     *
+     * @param filePath The path to the local memory.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.storage = new File(filePath);
@@ -33,48 +43,63 @@ public class Storage {
         }
     }
 
-
-    public List<Task> load() throws FileNotFoundException, EmptyCommandException {
-        Scanner s = new Scanner(storage); // create a Scanner using the File as the source
+    /**
+     * Loads the tasks from local memory to Catobot.
+     *
+     * @return The list of tasks from local memory.
+     * @throws FileNotFoundException If the file is not found.
+     * @throws EmptyCommandException If the tasks from local memory have empty description.
+     */
+    public List<Task> load() throws LoadingException {
         ArrayList<Task> taskList = new ArrayList<>();
 
-        while (s.hasNext()) {
-            String rawTask = s.nextLine();
-            String[] input = rawTask.split(" \\| ", 4);
-            String type = input[0];
-            int isDone = Integer.parseInt(input[1]);
-            String description = input[2];
-            switch (type) {
-            case "D":
-                Deadline deadline = Deadline.of(description, LocalDate.parse(input[3]));
-                if (isDone == 1) {
-                    deadline.markAsDone();
+        try {
+            Scanner s = new Scanner(storage); // create a Scanner using the File as the source
+            while (s.hasNext()) {
+                String rawTask = s.nextLine();
+                String[] input = rawTask.split(" \\| ", 4);
+                String type = input[0];
+                int isDone = Integer.parseInt(input[1]);
+                String description = input[2];
+                switch (type) {
+                case "D":
+                    Deadline deadline = Deadline.of(description, LocalDate.parse(input[3]));
+                    if (isDone == 1) {
+                        deadline.markAsDone();
+                    }
+                    taskList.add(deadline);
+                    break;
+                case "E":
+                    Event event = Event.of(description, LocalDate.parse(input[3]));
+                    if (isDone == 1) {
+                        event.markAsDone();
+                    }
+                    taskList.add(event);
+                    break;
+                case "T":
+                    Todo todo = Todo.of(description);
+                    if (isDone == 1) {
+                        todo.markAsDone();
+                    }
+                    taskList.add(todo);
+                    break;
                 }
-                taskList.add(deadline);
-                break;
-            case "E":
-                Event event = Event.of(description, LocalDate.parse(input[3]));
-                if (isDone == 1) {
-                    event.markAsDone();
-                }
-                taskList.add(event);
-                break;
-            case "T":
-                Todo todo = Todo.of(description);
-                if (isDone == 1) {
-                    todo.markAsDone();
-                }
-                taskList.add(todo);
-                break;
             }
+        } catch (FileNotFoundException | EmptyCommandException e) {
+            throw new LoadingException();
         }
         return taskList;
     }
 
-
-    public void write(String s) throws IOException {
+    /**
+     * Writes the list of tasks to the local memory.
+     *
+     * @param tasks The list of tasks to be written.
+     * @throws IOException If the file is not found.
+     */
+    public void write(String tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        fw.write(s);
+        fw.write(tasks);
         fw.close();
     }
 }

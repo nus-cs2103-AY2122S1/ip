@@ -1,11 +1,11 @@
 package catobot.exception;
 
 /**
- * InvalidCommandException is thrown when the catobot.command is invalid.
+ * Represents the exception when the command is invalid.
  */
 public class InvalidCommandException extends BotException {
     /**
-     * Creates a default InvalidCommandException.
+     * Constructor for InvalidCommandException.
      */
     public InvalidCommandException() {
         super("Meow I don't understand this command >.<");

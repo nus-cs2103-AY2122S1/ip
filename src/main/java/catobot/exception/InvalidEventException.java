@@ -1,11 +1,11 @@
 package catobot.exception;
 
 /**
- * InvalidEventCommandException is thrown when the command is invalid.
+ *  * Represents exception when creating event with invalid input.
  */
 public class InvalidEventException extends BotException {
     /**
-     * Creates a InvalidDeadlineException.
+     * Constructor for InvalidEventException.
      */
     public InvalidEventException() {
         super("Oh no, please give me a valid event with date >.<");
