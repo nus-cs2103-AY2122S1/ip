@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Duke {
     static List<Task> tasks = new ArrayList<>();
 
@@ -90,23 +94,33 @@ public class Duke {
             case "deadline":
                 try {
                     int slashIndex = cmds[1].indexOf("/");
-                    Task t = new Deadline(cmds[1].substring(0, slashIndex), cmds[1].substring(slashIndex + 4));
+                    Task t = new Deadline(cmds[1].substring(0, slashIndex), dateFormatter(cmds, slashIndex));
                     tasks.add(t);
                     return printTask(t);
+
                 } catch (ArrayIndexOutOfBoundsException e){
                     return "\t☹ OOPS!!! The description of a deadline cannot be empty.";
+                } catch (DateTimeParseException e) {
+                    return "\t☹ OOPS!!! Please use the date format: yyyy-mm-dd.";
                 }
             case "event":
                 try {
                     int slashIndex = cmds[1].indexOf("/");
-                    Task t = new Event(cmds[1].substring(0, slashIndex), cmds[1].substring(slashIndex + 4));
+                    Task t = new Event(cmds[1].substring(0, slashIndex), dateFormatter(cmds, slashIndex));
                     tasks.add(t);
                     return printTask(t);
                 } catch (ArrayIndexOutOfBoundsException e){
                     return "\t☹ OOPS!!! The description of an event cannot be empty.";
+                } catch (DateTimeParseException e) {
+                    return "\t☹ OOPS!!! Please use the date format: yyyy-mm-dd.";
                 }
         }
         return "";
+    }
+
+    public static String dateFormatter(String[] cmds, int slashIndex) throws DateTimeParseException {
+        LocalDate date = LocalDate.parse(cmds[1].substring(slashIndex + 4));
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     public static String printTask(Task task) {
