@@ -1,10 +1,12 @@
 package duke.command;
 
-import duke.command.Command;
 import duke.exception.OutOfRangeException;
+
 import duke.storage.Storage;
+
 import duke.task.Task;
 import duke.task.TaskList;
+
 import duke.ui.Ui;
 
 public class DeleteCommand extends Command {

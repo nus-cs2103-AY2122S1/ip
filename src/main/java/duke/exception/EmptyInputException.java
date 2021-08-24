@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.exception.DukeException;
-
 /**
  * Represents the specific duke exception that is related to empty user input.
  *
