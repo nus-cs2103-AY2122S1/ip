@@ -3,6 +3,7 @@ Hello! I'm Duke
 What can I do for you?
 *******************************************
 Here are the tasks in your list:
+
 *******************************************
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 *******************************************
@@ -44,6 +45,7 @@ Nice! I've marked this task as done:
 ☹ OOPS!!! Please only enter an integer after command 'done'!
 *******************************************
 Here are the tasks in your list:
+
 1.[T][X] read book
 2.[D][X] return book (by: Jun 06 2021 23:59)
 3.[E][ ] project meeting (at: Aug 06 2021 14:00)
@@ -52,9 +54,10 @@ Here are the tasks in your list:
 *******************************************
 Noted. I've removed this task:
   [E][ ] project meeting (at: Aug 06 2021 14:00)
-Now you have 4 tasks in the list.
+Now you have 4 task(s) in the list.
 *******************************************
 Here are the tasks in your list:
+
 1.[T][X] read book
 2.[D][X] return book (by: Jun 06 2021 23:59)
 3.[T][X] join sports club
@@ -74,13 +77,14 @@ Here are the tasks in your list:
 *******************************************
 ☹ OOPS!!! Please only enter an integer after command 'delete'!
 *******************************************
-☹ OOPS!!! Task number e 6 does not exist!
+☹ OOPS!!! Task number 6 does not exist!
 *******************************************
-☹ OOPS!!! Task number e 0 does not exist!
+☹ OOPS!!! Task number 0 does not exist!
 *******************************************
-☹ OOPS!!! Task number e -1 does not exist!
+☹ OOPS!!! Task number -1 does not exist!
 *******************************************
 Here are the tasks in your list:
+
 1.[T][X] read book
 2.[D][X] return book (by: Jun 06 2021 23:59)
 3.[T][X] join sports club
