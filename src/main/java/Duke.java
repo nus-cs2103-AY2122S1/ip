@@ -1,10 +1,26 @@
-import task.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.FileWriter;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.Todo;
 
 public class Duke {
     private Scanner sc;
     private TaskList taskList;
+    private static final Path SAVE_FILE_DIRECTORY = Paths.get("data", "duke.txt");
 
     public Duke() {
         sc = new Scanner(System.in);
@@ -21,18 +37,21 @@ public class Duke {
         Task task = new Todo(description);
         this.taskList.addTask(task);
         this.informTaskAdded(task);
+        this.saveData();
     }
 
     public void addDeadline(String description, String by) {
         Task task = new Deadline(description, by);
         this.taskList.addTask(task);
         this.informTaskAdded(task);
+        this.saveData();
     }
 
     public void addEvent(String description, String at) {
         Task task = new Event(description, at);
         this.taskList.addTask(task);
         this.informTaskAdded(task);
+        this.saveData();
     }
 
     public void printList() {
@@ -45,6 +64,7 @@ public class Duke {
 
         // Converting 1-based to 0-based
         this.taskList.markDone(index - 1);
+        this.saveData();
     }
 
     public void deleteTask(int index) {
@@ -55,6 +75,8 @@ public class Duke {
         this.echo("Deleted the following task successfully:\n"
                 + "    " + deletedTask + "\n"
                 + "You have " + this.taskList.size() + " task(s) in the list.\n");
+
+        this.saveData();
     }
 
     public void echo(String s) {
@@ -63,6 +85,50 @@ public class Duke {
 
     public String getResponse() {
         return sc.nextLine();
+    }
+
+    public void loadData() {
+        this.echo("Retrieving data...");
+        try {
+            FileReader fin = new FileReader(SAVE_FILE_DIRECTORY.toString());
+            BufferedReader bin = new BufferedReader(fin);
+
+            String line;
+            List<String> data = new ArrayList<>();
+
+            while ((line = bin.readLine()) != null) {
+                if (line.isEmpty()) {
+                    break; // end of line
+                }
+
+                data.add(line);
+            }
+
+            bin.close();
+
+            taskList = TaskList.deserialize(data);
+
+            this.echo("Data retrieved");
+        } catch (IllegalArgumentException e) {
+            // Data stored in incorrect format
+            this.echo("Unable to retrieve data. Data stored in invalid format");
+        } catch (IOException e) {
+            // Do nothing
+            this.echo("No stored data found");
+        }
+    }
+    
+    public void saveData() {
+        try {
+            FileWriter fout = new FileWriter(SAVE_FILE_DIRECTORY.toString());
+            BufferedWriter bout = new BufferedWriter(fout);
+
+            bout.write(taskList.serialize());
+            bout.close();
+        } catch (IOException e) {
+            // Do nothing
+            this.echo("Unable to save data");
+        }
     }
 
     public void greet() {
@@ -130,6 +196,7 @@ public class Duke {
         Duke duke = new Duke();
 
         duke.greet();
+        duke.loadData();
         duke.start();
         duke.exit();
     }
