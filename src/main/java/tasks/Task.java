@@ -17,4 +17,8 @@ public class Task {
     public String toString() {
         return (this.isDone ? "[X] " : "[ ] ") + this.description;
     }
+    
+    public String toStorage() {
+        return (this.isDone + "%" + this.description + "\n");
+    }
 }

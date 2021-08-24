@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.io.IOException;
 
 public class Duke {
 
@@ -6,11 +6,10 @@ public class Duke {
         Response.greetingResponse();    
     }
     
-    public void botInit() {
-        Scanner commandInput = new Scanner(System.in);
-        BotManager botManager = new BotManager(commandInput);
+    public void botInit() throws IOException {
+        BotManager botManager = new BotManager();
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Duke duke = new Duke();
         duke.botInit();
     }

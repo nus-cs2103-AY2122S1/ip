@@ -19,7 +19,7 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 ------------------------------
 ------------------------------
-I didn't get that.
+The description of a TODO task cannot be empty.
 Please try again.
 ------------------------------
 ------------------------------
@@ -29,7 +29,7 @@ Here are the tasks in your list:
 ------------------------------
 ------------------------------
 Nice! I've marked this task as done:
-[T][X] eat dinner
+  1.[T][X] eat dinner
 ------------------------------
 ------------------------------
 That task doesn't exist.
@@ -51,7 +51,9 @@ Got it. I've added this task:
 Now you have 4 tasks in the list.
 ------------------------------
 ------------------------------
-I didn't get that.
+There appears to be a typo in your EVENT command.
+The command should be of the form:
+  event 'description' /at 'time'
 Please try again.
 ------------------------------
 ------------------------------
@@ -63,11 +65,11 @@ Here are the tasks in your list:
 ------------------------------
 ------------------------------
 Nice! I've marked this task as done:
-[T][X] finish laundry
+  2.[T][X] finish laundry
 ------------------------------
 ------------------------------
 Nice! I've marked this task as done:
-[E][X] meet friends (at: 2-4 p.m.)
+  3.[E][X] meet friends (at: 2-4 p.m.)
 ------------------------------
 ------------------------------
 Here are the tasks in your list:
@@ -87,7 +89,9 @@ Got it. I've added this task:
 Now you have 6 tasks in the list.
 ------------------------------
 ------------------------------
-I didn't get that.
+There appears to be a typo in your DEADLINE command.
+The command should be of the form:
+  deadline 'description' /by 'time'
 Please try again.
 ------------------------------
 ------------------------------
@@ -113,6 +117,5 @@ Here are the tasks in your list:
   6.[D][ ] form tP teams (by: 13 August)
 ------------------------------
 ------------------------------
-I didn't get that.
-Please try again.
+I didn't get that. Please try again.
 ------------------------------
