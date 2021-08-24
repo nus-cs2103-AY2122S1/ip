@@ -27,12 +27,12 @@ public class Kermit {
      */
     private static String printAddTask(Task task, ToDo list) {
         return "Got it. I've added this task:\n"
-                + task +"\nNow you have " + list.size() + " tasks in the list.";
+                + task + "\nNow you have " + list.size() + " tasks in the list.";
     }
 
     private static String printDeleteTask(Task task, ToDo list) {
         return "Noted. I've removed this task:\n"
-                + task +"\nNow you have " + list.size() + " tasks in the list.";
+                + task + "\nNow you have " + list.size() + " tasks in the list.";
     }
 
     private static LocalDate formatUserDateFormat(String s) {
@@ -61,8 +61,6 @@ public class Kermit {
         String flag;
         String word;
 
-        Storage storage = new Storage("./data/kermit.txt");
-
         StringBuilder descriptionBuilder = new StringBuilder();
         StringBuilder flagBuilder = new StringBuilder();
 
@@ -72,10 +70,11 @@ public class Kermit {
         String[] strTasks = {"deadline", "todo", "event"};
         ArrayList<String> validTasks = new ArrayList<>(Arrays.asList(strTasks));
 
-        try {
-            ToDo list = storage.getToDoList();
-            formatAndPrintText(introductionText);
-            while (true) {
+        Storage storage = new Storage("./data/kermit.txt");
+        ToDo list = storage.getToDoList();
+        formatAndPrintText(introductionText);
+        while (true) {
+            try {
                 // Task description and flag should be separated by some /command
                 String[] userInput = sc.nextLine().split("/");
                 String commandString = userInput[0];
@@ -137,7 +136,7 @@ public class Kermit {
                 switch (command) {
                     case "bye":
                         formatAndPrintText(goodbyeText);
-                        storage.save(list);
+                        storage.save();
                         return;
                     // List out all objects that user added to list
                     case "list":
@@ -149,21 +148,21 @@ public class Kermit {
                         // Get task name
                         String taskText = list.completeTask(index);
                         formatAndPrintText(completeTaskText + "\n" + taskText);
-                        storage.save(list);
+                        storage.save();
                         break;
                     // Add new todo task
                     case "todo":
                         Task newToDo = new ToDos(description);
                         list.add(newToDo);
                         formatAndPrintText(printAddTask(newToDo, list));
-                        storage.save(list);
+                        storage.save();
                         break;
                     // Add new deadline task
                     case "deadline":
                         Task newDeadline = new Deadline(description, formatUserDateFormat(flagArguments));
                         list.add(newDeadline);
                         formatAndPrintText(printAddTask(newDeadline, list));
-                        storage.save(list);
+                        storage.save();
                         break;
 
                     // Add new event task
@@ -171,20 +170,20 @@ public class Kermit {
                         Task newEvent = new Event(description, formatUserDateFormat(flagArguments));
                         list.add(newEvent);
                         formatAndPrintText(printAddTask(newEvent, list));
-                        storage.save(list);
+                        storage.save();
                         break;
                     // Delete task
                     case "delete":
                         index = Integer.parseInt(description) - 1;
                         Task deletedTask = list.deleteTask(index);
                         formatAndPrintText(printDeleteTask(deletedTask, list));
-                        storage.save(list);
+                        storage.save();
                 }
+            } catch (KermitException e) {
+                formatAndPrintText(e.getMessage());
+            } catch (DateTimeParseException e) {
+                formatAndPrintText(invalidTimeText);
             }
-        } catch (KermitException e) {
-            formatAndPrintText(e.getMessage());
-        } catch (DateTimeParseException e) {
-            formatAndPrintText(invalidTimeText);
-    }
+        }
     }
 }
