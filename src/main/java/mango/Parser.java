@@ -1,7 +1,14 @@
 package mango;
 import java.util.Scanner;
 
+/**
+ * Represents a parser that makes sense of the user's commands by looking for keywords in the input.
+ */
 public class Parser {
+
+    /**
+     * Parses user input through the Scanner, and manipulates the list of tasks according to the commands.
+     */
     public static void parse(TaskList tasks) {
         Scanner sc = new Scanner(System.in);
         String str;

@@ -1,11 +1,20 @@
 import java.io.IOException;
 import mango.*;
 
+/**
+ * Represents a chat-bot named Mango that keeps track of a list of tasks that the user
+ * can manipulate by adding, deleting, or completing.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for a Duke chat-bot.
+     *
+     * @param filePath The path for the file that will contain the list of tasks tracked by the chatbot.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -17,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the functionality of the chat-bot.
+     */
     public void run() {
         ui.greet();
 

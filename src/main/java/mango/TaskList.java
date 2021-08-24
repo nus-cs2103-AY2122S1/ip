@@ -3,23 +3,48 @@ package mango;
 import mango.task.*;
 
 import java.util.ArrayList;
+
+/**
+ * Represents a list of tasks that can be manipulated. A <code>TaskList</code> corresponds to
+ * an ArrayList of <code>Task</code> objects.
+ */
 public class TaskList {
     private ArrayList<Task> list;
     private int listIndex = 0;
 
+    /**
+     * Constructor for a TaskList.
+     */
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Constructor for a TaskList, initialised with a list of tasks.
+     *
+     * @param tasks An ArrayList of Task objects.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.list = tasks;
         this.listIndex = tasks.size();
     }
 
+    /**
+     * Returns the task list.
+     *
+     * @return The task list.
+     */
     public ArrayList<Task> getList() {
         return this.list;
     }
 
+    /**
+     * Interprets an input string into its corresponding Task object and adds it to the task list.
+     * Prints a confirmation that the Task is added, and the new total number of tasks in the list.
+     *
+     * @param str The input string that contains the user's command.
+     * @throws DukeException If the input string does not make sense.
+     */
     public void add(String str) throws DukeException {
         Task newTask = null;
         String[] arr1 = str.split(" ", 2);
@@ -70,6 +95,12 @@ public class TaskList {
         listIndex++;
     }
 
+    /**
+     * Marks a Task in the task list as completed.
+     * Prints a confirmation that the Task has been marked complete.
+     *
+     * @param completedTask The task that is to be marked as done.
+     */
     public void complete(int completedTask) {
         Task currentTask = list.get(completedTask - 1);
         if (!currentTask.isDone()) {
@@ -80,6 +111,12 @@ public class TaskList {
         System.out.printf("[%s][X] %s\n", currentTask.getType(), currentTask.getDescription());
     }
 
+    /**
+     * Removes a Task from the task list. Prints a confirmation that the Task has been deleted,
+     * and the new total number of tasks in the list.
+     *
+     * @param deleteTask The task to be deleted.
+     */
     public void delete(int deleteTask) {
         Task delTask = list.remove(deleteTask - 1);
         listIndex--;
@@ -96,6 +133,9 @@ public class TaskList {
         System.out.printf("Now you have %d %s in the list.%n", listIndex, word);
     }
 
+    /**
+     * Prints the current task list.
+     */
     public void printList() {
         int i = 0;
         System.out.println("Here are the tasks in your list:");
