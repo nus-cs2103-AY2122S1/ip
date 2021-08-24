@@ -29,6 +29,9 @@ public class DukeCommandException extends Exception {
         case "delete":
             msg = "Wrong usage of \"delete\".\nCorrect usage: \"delete TASK_NUMBER\"";
             break;
+        case "find":
+            msg = "Wrong usage of \"find\".\nCorrect usage: \"find KEYWORD\"";
+            break;
         default:
             msg = command + " is not a supported command.";
         }

@@ -40,7 +40,7 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         Task t;
         String time;
-        for (int i = 1; i<=this.listSize; i++) {
+        for (int i = 1; i <= this.listSize; i++) {
             t = userList.get(i - 1);
             time = getTaskTime(t);
             sb.append(
@@ -137,6 +137,48 @@ public class TaskList {
             return t.getSaveFormat();
         } else {
             return "";
+        }
+    }
+
+    /**
+     * Searches for a specific keyword in the task list.
+     * This is done by comparing keyword with the task names, in a linear fashion.
+     *
+     * @param keyword Keyword to be used in the search.
+     * @return String representing the results of the search.
+     */
+    public String searchKeyword(String keyword) {
+        int tasksMatched = 0;
+        StringBuilder sb = new StringBuilder();
+        Task t;
+
+        for(int i = 1; i <= this.listSize; i++) {
+            t = userList.get((i - 1));
+            if (t.getName().contains(keyword)) {
+                sb.append(
+                        String.format(
+                                "%d. %s [%s]\n",
+                                i,
+                                t.getName(),
+                                t.getTaskType()
+                        )
+                );
+                tasksMatched++;
+            }
+        }
+
+        if (tasksMatched == 0) {
+            return String.format(
+                    "I couldn't find any tasks that matched the keyword \"%s\", *Quack*!",
+                    keyword
+            );
+        } else {
+            return String.format(
+                    "I found %d results when looking for \"%s\"!\n%s",
+                    tasksMatched,
+                    keyword,
+                    sb.toString()
+            );
         }
     }
 

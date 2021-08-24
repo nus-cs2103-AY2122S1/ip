@@ -84,6 +84,8 @@ public class DukeCommandParser {
                     throw new DukeCommandException("event");
                 case "delete":
                     throw new DukeCommandException("delete");
+                case "find":
+                    throw new DukeCommandException("find");
                 default:
                     throw new DukeCommandException(inputArr[0]);
                 }
@@ -113,6 +115,9 @@ public class DukeCommandParser {
                     } catch (NumberFormatException nfe) {
                         DukeUi.printLine("Incorrect argument for command Delete, must be an integer");
                     }
+                    break;
+                case "find":
+                    dc = new CommandFind(inputArr[1]);
                     break;
                 default:
                     throw new DukeCommandException(inputArr[0]);
