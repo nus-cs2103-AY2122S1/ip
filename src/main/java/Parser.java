@@ -36,6 +36,10 @@ public class Parser {
 
             tasks.makeDeadline(userInput);
 
+        } else if (userInput.length() > 3 && userInput.substring(0, 4).matches("find")) {
+
+            tasks.find(userInput);
+
         } else {
 
             tasks.error();

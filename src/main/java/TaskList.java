@@ -143,6 +143,29 @@ public class TaskList {
         counter += 1;
     }
 
+    public void find(String userInput) {
+        if (userInput.substring(4).length() == 0) {
+            System.out.println(dash + '\n' + "Uh Oh!! Please specify the keyword of a task!" + '\n'+ dash);
+
+        } else {
+            String keyword = userInput.substring(5);
+            ArrayList<Task> matchedTasks = new ArrayList<Task>();
+
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.get(i).getDescription().contains(keyword)) {
+                    matchedTasks.add(tasks.get(i));
+                }
+            }
+
+            System.out.println(dash);
+            System.out.println("Here are the tasks that fit your criteria:");
+            for (int i = 0; i < matchedTasks.size(); i++) {
+                System.out.println(i+1 + "." + matchedTasks.get(i).toString());
+            }
+            System.out.println(dash);
+        }
+    }
+
     public void error() {
         System.out.println(dash + '\n' + "OOPS!! I don't know how to respond to this command! :-(" + '\n'+ dash);
         // throw new DukeException("OOPS!! I don't know how to respond to this command! :-(");
