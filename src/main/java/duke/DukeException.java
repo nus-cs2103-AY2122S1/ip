@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 /**
  * This class handles exceptions specific to Duke.

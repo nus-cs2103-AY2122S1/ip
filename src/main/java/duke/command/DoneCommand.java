@@ -1,13 +1,13 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Duke;
-import Duke.DukeException;
-import Duke.Parser;
-import Duke.Task.Task;
+import duke.Duke;
+import duke.DukeException;
+import duke.Parser;
+import duke.Ui;
+import duke.task.Task;
 
 public class DoneCommand extends Command {
     private static final String COMMAND_WORD = "done";
-    private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n";
 
     @Override
     public String getCommandWord() {
@@ -21,6 +21,6 @@ public class DoneCommand extends Command {
             throw new DukeException("Invalid number.");
         }
         Task task = duke.getList().setDone(index);
-        Duke.formatAndPrint(DONE_MESSAGE + task);
+        Ui.doneMessage(task);
     }
 }

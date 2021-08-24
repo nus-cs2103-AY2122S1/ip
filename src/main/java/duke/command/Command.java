@@ -1,8 +1,8 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Duke;
-import Duke.Parser;
-import Duke.DukeException;
+import duke.Duke;
+import duke.Parser;
+import duke.DukeException;
 
 public abstract class Command {
     public static final Command[] COMMANDS = new Command[] {

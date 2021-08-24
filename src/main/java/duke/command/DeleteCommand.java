@@ -1,13 +1,13 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Duke;
-import Duke.DukeException;
-import Duke.Parser;
-import Duke.Task.Task;
+import duke.Duke;
+import duke.DukeException;
+import duke.Parser;
+import duke.Ui;
+import duke.task.Task;
 
 public class DeleteCommand extends Command {
     private static final String COMMAND_WORD = "delete";
-    public static final String REMOVE_MESSAGE = "Noted. I've removed this task:\n%s\nNow you have %d %s in your list.";
 
     @Override
     public String getCommandWord() {
@@ -23,9 +23,6 @@ public class DeleteCommand extends Command {
             throw new DukeException("Invalid number.");
         }
         Task task = duke.getList().remove(index);
-        Duke.formatAndPrint(String.format(REMOVE_MESSAGE,
-                task,
-                duke.getList().size(),
-                duke.getList().size() == 1 ? "task" : "tasks"));
+        Ui.deleteMessage(task, duke.getList().size());
     }
 }

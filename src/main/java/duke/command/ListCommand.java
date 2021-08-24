@@ -1,7 +1,8 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Duke;
-import Duke.Parser;
+import duke.Duke;
+import duke.Parser;
+import duke.Ui;
 
 public class ListCommand extends Command{
     public static final String COMMAND_WORD = "list";
@@ -13,6 +14,6 @@ public class ListCommand extends Command{
 
     @Override
     public void run(Duke duke, Parser parser) {
-        Duke.formatAndPrint(duke.getList().toString());
+        Ui.displayTasks(duke.getList());
     }
 }

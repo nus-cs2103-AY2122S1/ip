@@ -1,7 +1,7 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Duke;
-import Duke.Parser;
+import duke.Duke;
+import duke.Parser;
 
 public class EndCommand extends Command{
     public static final String COMMAND_WORD = "bye";

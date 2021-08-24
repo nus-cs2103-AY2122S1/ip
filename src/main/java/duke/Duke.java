@@ -1,12 +1,6 @@
-package Duke;
+package duke;
 
-import Duke.Command.Command;
-import Duke.Task.Deadline;
-import Duke.Task.Event;
-import Duke.Task.Task;
-import Duke.Task.Todo;
-
-import java.time.LocalDate;
+import duke.command.Command;
 import java.util.Scanner;
 
 /**
@@ -14,30 +8,27 @@ import java.util.Scanner;
  */
 public class Duke {
     private final TaskList list = new TaskList();
-    private static final String WELCOME_MESSAGE = "Hello, I'm Duke\nWhat can I do for you?";
-    private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
-    private static final String LINE = "____________________________________________________________\n";
     private boolean isStopped = false;
 
     /**
      * Prints welcome message, then accepts user input until exit command is entered.
      */
     public void start() {
-        formatAndPrint(WELCOME_MESSAGE);
+        Ui.welcomeMessage();
         Scanner sc = new Scanner(System.in);
         while (!this.isStopped) {
             String input = sc.nextLine();
             try {
                 listen(input);
             } catch (DukeException e) {
-                formatAndPrint(e.getMessage());
+                Ui.formatAndPrint(e.getMessage());
             }
         }
     }
 
     public void stop() {
+        Ui.goodbyeMessage();
         this.isStopped = true;
-        formatAndPrint(GOODBYE_MESSAGE);
     }
 
     public TaskList getList() {
@@ -54,14 +45,5 @@ public class Duke {
         Parser parser = new Parser(input);
         Command command = Command.identifyCommand(parser.getCommandWord());
         command.run(this, parser);
-    }
-
-    /**
-     * Helper function to format output between 2 lines.
-     *
-     * @param s String to be outputted.
-     */
-    public static void formatAndPrint(String s) {
-        System.out.printf("%s%s\n%s", LINE, s, LINE);
     }
 }

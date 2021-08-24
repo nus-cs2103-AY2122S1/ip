@@ -1,10 +1,11 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Duke;
-import Duke.DukeException;
-import Duke.Parser;
-import Duke.Task.Task;
-import Duke.Task.Todo;
+import duke.Duke;
+import duke.DukeException;
+import duke.Parser;
+import duke.Ui;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class TodoCommand extends Command{
     private static final String COMMAND_WORD = "todo";
@@ -19,9 +20,6 @@ public class TodoCommand extends Command{
         parser.parseTask();
         Task task = new Todo(parser.getTaskName());
         duke.getList().add(task);
-        Duke.formatAndPrint(String.format("Got it. I've added this task:\n%s\nNow you have %d %s in your list.",
-                task,
-                duke.getList().size(),
-                duke.getList().size() == 1 ? "task" : "tasks"));
+        Ui.addTaskMessage(task, duke.getList().size());
     }
 }

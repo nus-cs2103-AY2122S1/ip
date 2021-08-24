@@ -1,18 +1,18 @@
-package Duke.Task;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * This class represents a event - a task that starts at a specific date
- * and ends at a specific date.
+ * This class represents a deadline - a task that needs to be
+ * done before a specific date/time.
  */
-public class Event extends Task {
-    public static final String IDENTIFIER = "E";
+public class Deadline extends Task {
+    public static final String IDENTIFIER = "D";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
     private LocalDateTime date;
 
-    public Event(String description, LocalDateTime date) {
+    public Deadline(String description, LocalDateTime date) {
         super(description);
         this.date = date;
     }
@@ -28,8 +28,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.date.format(FORMATTER));
+        return String.format("[D]%s (by: %s)", super.toString(), this.date.format(FORMATTER));
     }
 }
-
-

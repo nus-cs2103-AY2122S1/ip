@@ -1,10 +1,11 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Duke;
-import Duke.DukeException;
-import Duke.Parser;
-import Duke.Task.Event;
-import Duke.Task.Task;
+import duke.Duke;
+import duke.DukeException;
+import duke.Parser;
+import duke.task.Event;
+import duke.task.Task;
+import duke.Ui;
 
 public class EventCommand extends Command{
     private static final String COMMAND_WORD = "event";
@@ -20,10 +21,6 @@ public class EventCommand extends Command{
         parser.parseDate();
         Task task = new Event(parser.getTaskName(), parser.getDate());
         duke.getList().add(task);
-        Duke.formatAndPrint(String.format("Got it. I've added this task:\n%s\nNow you have %d %s in your list.",
-                task,
-                duke.getList().size(),
-                duke.getList().size() == 1 ? "task" : "tasks"));
-
+        Ui.addTaskMessage(task, duke.getList().size());
     }
 }

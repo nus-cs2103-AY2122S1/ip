@@ -1,10 +1,11 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Duke;
-import Duke.DukeException;
-import Duke.Parser;
-import Duke.Task.Deadline;
-import Duke.Task.Task;
+import duke.Duke;
+import duke.DukeException;
+import duke.Parser;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.Ui;
 
 public class DeadlineCommand extends Command{
     private static final String COMMAND_WORD = "deadline";
@@ -20,9 +21,6 @@ public class DeadlineCommand extends Command{
         parser.parseDate();
         Task task = new Deadline(parser.getTaskName(), parser.getDate());
         duke.getList().add(task);
-        Duke.formatAndPrint(String.format("Got it. I've added this task:\n%s\nNow you have %d %s in your list.",
-                task,
-                duke.getList().size(),
-                duke.getList().size() == 1 ? "task" : "tasks"));
+        Ui.addTaskMessage(task, duke.getList().size());
     }
 }

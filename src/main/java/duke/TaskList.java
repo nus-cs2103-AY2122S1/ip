@@ -1,6 +1,6 @@
-package Duke;
+package duke;
 
-import Duke.Task.Task;
+import duke.task.Task;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,7 +8,6 @@ import java.util.List;
 
 public class TaskList {
     private static final String STORAGE_PATH = "data/duke.txt";
-    private final String LIST_MESSAGE = "Here are the tasks in your list:\n";
     private List<Task> list = new ArrayList<>();
     private Storage storage;
 
@@ -65,7 +64,7 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        StringBuilder output = new StringBuilder(LIST_MESSAGE);
+        StringBuilder output = new StringBuilder();
         for (int i = 0; i < this.list.size(); i++) {
             output.append(String.format("%d. %s", i + 1, this.list.get(i)));
             // Append new line for all lines except last line.
