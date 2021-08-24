@@ -18,6 +18,7 @@ public class DoneCommand extends Command {
         String args = super.getArguments();
         if (args.length() == 0) {
             ui.print("Please enter a number after done");
+            return;
         }
         try {
             int index = Integer.parseInt(args);
@@ -25,7 +26,7 @@ public class DoneCommand extends Command {
                 ui.print("There are only " + tl.size() + " tasks");
                 return;
             } else if (index == 0) {
-                ui.print(ui.formatMessage("There is no task 0"));
+                ui.print("There is no task 0");
                 return;
             }
             Task t = tl.getTask(index - 1);

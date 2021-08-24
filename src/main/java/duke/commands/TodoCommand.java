@@ -18,6 +18,7 @@ public class TodoCommand extends Command {
         String args = super.getArguments();
         if (args.length() == 0) {
             ui.print("Please enter the name of the task after todo");
+            return;
         }
         Todo t = new Todo(args, false);
         tl.addToList(t);
