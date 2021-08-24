@@ -1,15 +1,15 @@
 package duke.io;
 
+import duke.command.Command;
 import duke.command.Commands;
 import duke.Duke;
 
 public class Ui {
-    private final String LINEBREAK = "_________________________________________\n";
-
     private StringBuilder message = new StringBuilder();
 
     // prints the message between two lines and resets the message
     public void print() {
+        String LINEBREAK = "_________________________________________\n";
         System.out.println(LINEBREAK + message + '\n' + LINEBREAK);
         resetMessage();
     }
@@ -32,8 +32,22 @@ public class Ui {
     public void greetNewUser() {
         addMessage("Hello, I'm iP Man! How may I help you?\n", TextColor.DEFAULT);
         addMessage("Supported commands: ", TextColor.DEFAULT);
-        for (Commands command : Commands.values()) {
-            addMessage(command.getCommand().getCommandString() + ", ", TextColor.DEFAULT);
+        int lineLength = 20;
+        int maxLineLength = 40;
+        Commands[] commands = Commands.values();
+        for (int i = 0; i < commands.length; i++) {
+            String commandString = commands[i].getCommand().getCommandString();
+
+            // ensure that line length doesn't get too long
+            if (lineLength + commandString.length() > maxLineLength) {
+                addMessage("\n  ", TextColor.DEFAULT);
+                lineLength = commandString.length() + 2;
+            } else {
+                lineLength += commandString.length();
+            }
+
+            addMessage(commands[i].getCommand().getCommandString() +
+                    (i == commands.length - 1 ? "" : ", "), TextColor.DEFAULT);
         }
         print();
         prompt();
