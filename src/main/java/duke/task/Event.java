@@ -97,6 +97,20 @@ public class Event extends Task {
                 + " to " + Parser.dateTimeToString(this.endDateTime, isDateOnly) + ")";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Event) {
+            Event event = (Event) o;
+
+            return description.equals(event.description) && isDateOnly == event.isDateOnly
+                    && isDone == event.isDone && startDateTime.equals(event.startDateTime)
+                    && endDateTime.equals(event.endDateTime);
+        }
+        return false;
+    }
+
 
 }
 

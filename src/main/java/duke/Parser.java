@@ -23,7 +23,7 @@ public class Parser {
             + "2019-02-13 18:00\n"
             + "Examples for DATE: 13/2/2019, 2019-02-13";
 
-    protected static Command parse(String input, Ui ui, TaskList tasks, Storage storage) throws DukeException {
+    public static Command parse(String input, Ui ui, TaskList tasks, Storage storage) throws DukeException {
 
         if (input.equals("bye")) {
             return new ExitCommand(ui);

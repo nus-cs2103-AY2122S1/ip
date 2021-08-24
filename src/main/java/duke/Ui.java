@@ -49,7 +49,7 @@ public class Ui {
 
     }
 
-    protected String list(TaskList tasks) {
+    public String list(TaskList tasks) {
         String list = "";
         for (int i = 0; i < tasks.size(); i++) {
             list = list + (i == 0 ? "" : "\n") + (i + 1) + ". " + tasks.get(i);

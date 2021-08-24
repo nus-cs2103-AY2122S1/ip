@@ -70,6 +70,19 @@ public class Deadline extends Task {
         return taskType + super.toString() + " (by: " + Parser.dateTimeToString(this.date, isDateOnly) + ")";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Deadline) {
+            Deadline deadline = (Deadline) o;
+
+            return description.equals(deadline.description) && isDateOnly == deadline.isDateOnly
+                    && isDone == deadline.isDone && date.equals(deadline.date);
+        }
+        return false;
+    }
+
 
 }
 

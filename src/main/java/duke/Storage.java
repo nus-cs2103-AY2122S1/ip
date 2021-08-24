@@ -14,11 +14,11 @@ import java.util.Scanner;
 public class Storage {
     protected String filePath;
 
-    protected Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    protected TaskList load() throws DukeException {
+    public TaskList load() throws DukeException {
         createDir();
         File taskList = new File(this.filePath);
         ArrayList<Task> taskArrayList = new ArrayList<Task>();
@@ -34,7 +34,7 @@ public class Storage {
                         boolean isDateOnly = storedValues[1].trim().equals("X");
                         LocalDateTime startDate = LocalDateTime.parse(storedValues[2].trim());
                         LocalDateTime endDate = LocalDateTime.parse(storedValues[3].trim());
-                        String description = storedValues[3].trim();
+                        String description = storedValues[4].trim();
                         taskArrayList.add(new Event(description, startDate, endDate, isDone, isDateOnly));
                     } else if (typeOfTask == 'D') {
                         String[] storedValues = line.substring(5).split("[|]", 4);
@@ -68,7 +68,9 @@ public class Storage {
     }
 
     protected void createDir() {
-        File dataDir = new File("data");
+
+
+        File dataDir = new File(this.filePath.substring(0, this.filePath.lastIndexOf('/')));
         dataDir.mkdirs();
     }
 
@@ -100,7 +102,7 @@ public class Storage {
             if (!taskListFile.exists()) {
                 taskListFile.createNewFile();
             }
-            FileWriter fw = new FileWriter("data/taskList.txt");
+            FileWriter fw = new FileWriter(this.filePath);
             fw.write(text);
             fw.close();
         } catch (IOException e) {

@@ -2,8 +2,7 @@ package duke.command;
 
 
 import duke.Storage;
-import duke.task.Task;
-import duke.task.TaskList;
+import duke.task.*;
 import duke.Ui;
 
 public class AddCommand extends Command {
@@ -12,6 +11,15 @@ public class AddCommand extends Command {
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
+
+
+    public TaskType getTaskType() {
+        if (task instanceof Event) {
+            return TaskType.EVENT;
+        } else if (task instanceof Todo) {
+            return TaskType.TODO;
+        } else return TaskType.DEADLINE;
+    }
 
     public AddCommand(Task task, TaskList tasks, Ui ui, Storage storage) {
 

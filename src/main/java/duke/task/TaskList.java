@@ -63,4 +63,25 @@ public class TaskList {
         return foundTasks;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof TaskList) {
+            TaskList taskList = (TaskList) o;
+
+            return this.tasks.equals(taskList.tasks);
+
+
+        }
+        return false;
+
+
+    }
+
+    @Override
+    public String toString() {
+        return this.tasks.toString();
+    }
+
 }

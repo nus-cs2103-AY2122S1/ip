@@ -18,4 +18,16 @@ public class Todo extends Task {
         return taskType + super.toString();
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Todo) {
+            Todo todo = (Todo) o;
+
+            return description.equals(todo.description) && isDone == todo.isDone;
+        }
+        return false;
+    }
 }
