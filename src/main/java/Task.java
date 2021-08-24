@@ -23,6 +23,17 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    // File operations
+    public int getStatusNumber() {
+        return (isDone ? 1 : 0); // mark done task with 1
+    }
+
+    // Sample: D - 0 - return book - June 6th
+    public String toStringForFile() {
+        return String.format("%d - %s", this.getStatusNumber(), this.description);
+    }
+
+
     /**
      *
      * @return the String representation of a Deadline
