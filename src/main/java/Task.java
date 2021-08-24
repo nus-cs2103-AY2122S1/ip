@@ -29,13 +29,8 @@ public abstract class Task {
         case "todo":
             return new ToDo(input);
         case "event":
-<<<<<<< HEAD
-            String[] message_and_timePeriod = input.split("/at ");
-            return new Event(message_and_timePeriod[0], message_and_timePeriod[1]);
-=======
             String[] message_and_eventDate = input.split("/at ");
             return new Event(message_and_eventDate[0], message_and_eventDate[1]);
->>>>>>> branch-Level-8
         case "deadline":
             String[] message_and_endTime = input.split("/by ");
             return new Deadline(message_and_endTime[0], message_and_endTime[1]);
