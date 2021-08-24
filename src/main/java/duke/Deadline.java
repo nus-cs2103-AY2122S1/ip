@@ -2,17 +2,21 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Deadline task. A <code>Deadline</code> object corresponds to
+ * a task represented by a due date and time.
+ */
 public class Deadline extends Task {
 
-    /**
-     * String representation of due date of Deadline.
-     */
-    protected LocalDate date;
-    protected String time;
+
+    protected final LocalDate date;
+    protected final String time;
 
     /**
-     * Constructor for Deadline object.
-     * @param description Description of Deadline.
+     * Constructor for <code>Deadline</code> object.
+     * @param description Description of the deadline task.
+     * @param ld The due date of the task represented by a <code>LocalDate</code> object.
+     * @param time The due time of the task represented by a <code>String</code> object.
      */
     public Deadline(String description, LocalDate ld, String time) {
         super(description);
@@ -22,7 +26,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns string representation of Deadline object.
+     * Returns string representation of <code>Deadline</code> object.
      * @return String representation of Deadline.
      */
     @Override
@@ -30,6 +34,10 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " +  this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy ")) + this.time + ")";
     }
 
+    /**
+     * Returns string representation of <code>Deadline</code> object's due date.
+     * @return String representation of due date.
+     */
     public String getBy() {
         return this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " + this.time;
     }

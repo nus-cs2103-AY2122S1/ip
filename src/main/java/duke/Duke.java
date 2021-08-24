@@ -1,12 +1,12 @@
 package duke;
 
-import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
- * This class represents the chat bot, duke.Duke.
+ * Represents the Duke chatbot to store different types of tasks,
+ * todos, deadlines and events.
  */
 public class Duke {
 
@@ -14,10 +14,15 @@ public class Duke {
     private TaskList tasks;
     private final static Pattern DATE_PATTERN = Pattern.compile("^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3])[0-5][0-9]$");
     private final DukeUI ui;
-    private Storage storage;
-    private Parser parser;
+    private final Storage storage;
+    private final Parser parser;
 
-    public Duke(String filePath) throws FileNotFoundException {
+    /**
+     * Returns a <code>Duke</code> object that can reply to
+     * commands. Duke can save the tasks at the specified <code>filePath</code>.
+     * @param filePath The file path where Duke will save the tasks.
+     */
+    public Duke(String filePath) {
         ui = new DukeUI();
         storage = new Storage(filePath);
         parser = new Parser();
@@ -30,15 +35,17 @@ public class Duke {
     }
 
     /**
-     * The static method that runs in Main to reply to the user.
+     * The main method run by Duke, to respond to commands. The functional
+     * commands are: bye, done, deadline, todo, event
+     * delete, list. Other commands are ignored.
      */
-    public void run() throws FileNotFoundException {
+    public void run() {
         String command;
         boolean stillRunning = true;
         while (stillRunning) {
             Scanner scanner = new Scanner(System.in);
             command = scanner.nextLine();
-            parser.intepretCommand(command);
+            parser.interpretCommand(command);
             String firstCommand = this.parser.getFirstCommand();
             try {
                 switch(firstCommand) {
@@ -68,9 +75,11 @@ public class Duke {
             }
         }
     }
+
     /**
      * Method to delete task.
-     * @throws DukeException
+     * @throws DukeException Thrown whenever user requests delete of a
+     * task out of range or not a number. eg. <code>delete hi</code>
      */
     public void deleteTask() throws DukeException {
         try {
@@ -90,8 +99,9 @@ public class Duke {
 
     /**
      * Method to add task to duke.Duke.
-     * @return String array of the command keywords.
-     * @throws DukeException
+     * @throws DukeException Thrown when the task is not given a description
+     * or when the user does not give a date for an event or deadline task,
+     * or when the user formats the date wrongly.
      */
     public void addTask() throws DukeException {
         String firstCommand = this.parser.getFirstCommand();
@@ -103,7 +113,6 @@ public class Duke {
         } else if (date.equals("") && convertToTaskType(firstCommand) != Task.TaskType.TODO) {
             throw new DukeException("☹ OOPS!!! The date of " + aOrAn + " " + firstCommand + " cannot be empty.");
         } else if (convertToTaskType(firstCommand) == Task.TaskType.DEADLINE || convertToTaskType(firstCommand) == Task.TaskType.EVENT) {
-//                To duke.Parser
             if (DATE_PATTERN.matcher(date).matches()) {
 
                 String[] dateSplit = date.split(" ");
@@ -117,9 +126,8 @@ public class Duke {
             } else {
                 throw new DukeException("You need to put the date in yyyy-mm-dd hhmm format!");
             }
-            //        ENd of To duke.Parser
         } else {
-            this.tasks.addTask(taskDesc, convertToTaskType(firstCommand), date);
+            this.tasks.addTask(taskDesc);
             this.confirmAdditionOfTask();
         }
         this.writeDataToDuke();
@@ -132,7 +140,8 @@ public class Duke {
 
     /**
      * Method for duke.Duke to mark a task done.
-     * @throws DukeException
+     * @throws DukeException Thrown when user gives an index out of range
+     * or not a number after the command done.
      */
     private void markDone() throws DukeException {
         try {
@@ -149,20 +158,11 @@ public class Duke {
     }
 
     /**
-     * Checks if the string is an integer.
-     * @param input String to check.
-     * @return Whether string is an integer.
+     * Method used by Duke to convert task commands
+     * into the TaskType enum.
+     * @param command The command to be converted.
+     * @return The TaskType enum of the task.
      */
-
-    private static boolean isInteger(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException e){
-            return false;
-        }
-    }
-
     public static Task.TaskType convertToTaskType(String command) {
         if (command.equals("todo")) {
             return Task.TaskType.TODO;
@@ -174,12 +174,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        try {
-            Duke duke = new Duke(DATABASE_PATH);
-            duke.ui.greetUser();
-            duke.run();
-        } catch (FileNotFoundException e) {
-            e.getMessage();
-        }
+        Duke duke = new Duke(DATABASE_PATH);
+        duke.ui.greetUser();
+        duke.run();
     }
 }

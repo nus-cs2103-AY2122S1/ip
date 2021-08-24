@@ -17,7 +17,7 @@ public class Task {
     /**
      * The description of the task.
      */
-    private String taskDescription;
+    private final String taskDescription;
 
     /**
      * Represents the completion status of a task.

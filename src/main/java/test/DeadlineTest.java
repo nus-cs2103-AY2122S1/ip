@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeadlineTest {
 
-    String date = "2000-10-10";
-    Deadline dl = new Deadline("homework", LocalDate.parse(date), "1000");
+    final String date = "2000-10-10";
+    final Deadline dl = new Deadline("homework", LocalDate.parse(date), "1000");
 
     @Test
     void getBy() {
