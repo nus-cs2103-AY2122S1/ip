@@ -20,15 +20,20 @@ public class LaniaTest {
     }
 
     @Test
-    public void parseTaskDescription() {
+    public void parseTaskDescription_description_success() {
         Parser parser = new Parser();
         String a = "deadline read book /by 24-08-2021 18:00";
         String b = "event read book /by 24-08-2021 18:00";
         String c = "todo read book";
-        String d = "todo";
         assertEquals(parser.parseTaskDescription(a), "read book /by 24-08-2021 18:00");
         assertEquals(parser.parseTaskDescription(b), "read book /by 24-08-2021 18:00");
         assertEquals(parser.parseTaskDescription(c), "read book");
+    }
+
+    @Test
+    public void parseTaskDescription_emptyDescription_exceptionThrown() {
+        Parser parser = new Parser();
+        String d = "todo";
         try {
             parser.parseTaskDescription(d);
         } catch (LaniaEmptyDescriptionException e) {
@@ -37,16 +42,21 @@ public class LaniaTest {
     }
 
     @Test
-    public void parseEventDeadline() {
+    public void parseEventDeadline_DateTime_success() {
         Parser parser = new Parser();
         String a = "read book /by 24-08-2021 18:00";
         String b = "read book /at 24-08-2021 18:00";
-        String c = "read book";
-        String d = "borrow book";
         assertEquals(parser.parseDeadline(a)[0], "read book");
         assertEquals(parser.parseDeadline(a)[1], "24-08-2021 18:00");
         assertEquals(parser.parseEvent(b)[0], "read book");
         assertEquals(parser.parseEvent(b)[1], "24-08-2021 18:00");
+    }
+
+    @Test
+    public void parseEventDeadline_emptyDateTime_exceptionThrown() {
+        Parser parser = new Parser();
+        String c = "read book";
+        String d = "borrow book";
         try {
             parser.parseEvent(c);
         } catch (LaniaEmptyDescriptionException e) {

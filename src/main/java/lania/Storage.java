@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class Storage {
 
     /** Represents the path of the file to be retrieved or written. */
-    public String filePath;
+    private String filePath;
 
     /**
      * Constructor for the storage class.
@@ -70,12 +70,12 @@ public class Storage {
      * This method rewrites the entire file given a
      * TaskList line by line using the appendToFile method.
      *
-     * @param taskArrayList The user's TaskList.
+     * @param taskList The user's TaskList.
      * @throws IOException If unable to append to file.
      */
-    public void save(TaskList taskArrayList) throws IOException {
-        for (int i = 0; i < taskArrayList.size(); i++) {
-            Task task = taskArrayList.get(i);
+    public void save(TaskList taskList) throws IOException{
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
             appendToFile(filePath, task.getStringFormat(), i);
         }
     }
