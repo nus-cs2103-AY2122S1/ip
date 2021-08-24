@@ -1,9 +1,12 @@
 package tasks;
 
+import bot.TaskType;
+
 public class DeadlineTask extends Task {
 
   private String taskText;
   private String taskDetail;
+  private TaskType taskType = TaskType.Deadline;
 
   public DeadlineTask(String taskText, String taskDetail) {
     this.taskText = taskText.trim();
@@ -16,8 +19,18 @@ public class DeadlineTask extends Task {
   }
 
   @Override
-  String getTaskSymbol() {
-    return "D";
+  String getTaskText() {
+    return this.taskText;
+  }
+
+  @Override
+  String getTaskTime() {
+    return this.taskDetail;
+  }
+
+  @Override
+  TaskType getTaskType() {
+    return this.taskType;
   }
   
 }

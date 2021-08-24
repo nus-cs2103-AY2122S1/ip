@@ -1,5 +1,7 @@
 package tasks;
 
+import bot.TaskType;
+
 public abstract class Task {
   
   public boolean done = false;
@@ -20,10 +22,39 @@ public abstract class Task {
     return this.done;
   }
 
+  public String serialize () {
+    return String.format("%s,%b,%s,%s",this.getTaskType(), this.getTaskDone(), this.getTaskText(), this.getTaskTime());
+  }
+
+  public static Task deserialize(String s) {
+    String[] parts = s.split(",");
+    TaskType taskType = TaskType.valueOf(parts[0]);
+    Task task;
+
+    switch(taskType) {
+    case Deadline:
+      task = new DeadlineTask(parts[2], parts[3]);
+      break;
+    case Event:
+      task = new EventTask(parts[2], parts[3]);
+      break;
+    case Todo:
+      task = new TodoTask(parts[2]);
+      break;
+    default:
+      task = new GeneralTask("");      
+    }
+
+    if (Boolean.parseBoolean(parts[1])) {
+      task.markDone();
+    }
+    return task;
+  }
+
   @Override
   public String toString() {
     String taskChecked = this.done ? "X" : " ";
-    return String.format("[%s][%s] %s", this.getTaskSymbol(), taskChecked, this.getTaskDesc());
+    return String.format("[%s][%s] %s", this.getTaskType().getSymbol(), taskChecked, this.getTaskDesc());
   } 
 
   /**
@@ -33,10 +64,9 @@ public abstract class Task {
    */
   abstract String getTaskDesc();
 
-  /**
-   * Get a task's symbol
-   * 
-   * @return task's symbol string
-   */
-  abstract String getTaskSymbol();
+  abstract String getTaskText();
+
+  abstract String getTaskTime();
+
+  abstract TaskType getTaskType();
 }

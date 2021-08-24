@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commands.Command;
-import exceptions.InvalidArgumentsException;
 import exceptions.InvalidTaskException;
 import tasks.Task;
 
@@ -29,13 +28,16 @@ public class Bot {
    */
   public void start() {
     outputManager.printWelcome();
+    Storage.load(this);
     this.running = true;
     while (this.running) {
       String[] input = inputManager.getInput().split(" ", 2);
       Command cmd = CommandType.getCommandFromName(input[0]);
       try {
+        // Storage.write(input[0]);
         cmd.run(this, new String[]{ input.length >=2 ? input[1] : "" });
-      } catch (InvalidArgumentsException | InvalidTaskException e) {
+        Storage.save(this);
+      } catch (InvalidTaskException e) {
         printOutput(new String[] {
           e.getMessage()
         });
@@ -71,6 +73,10 @@ public class Bot {
 
   public List<Task> getTaskList() {
     return this.taskList;
+  }
+
+  public void setTaskList(List<Task> taskList) {
+    this.taskList = taskList;
   }
 
   /**

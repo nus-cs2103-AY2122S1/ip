@@ -1,8 +1,11 @@
 package tasks;
 
+import bot.TaskType;
+
 public class TodoTask extends Task {
 
   private String taskDesc;
+  private TaskType taskType = TaskType.Todo;
 
   public TodoTask(String description) {
     this.taskDesc = description.trim();
@@ -10,12 +13,22 @@ public class TodoTask extends Task {
 
   @Override
   String getTaskDesc() {
-    return taskDesc;
+    return this.taskDesc;
   }
 
   @Override
-  String getTaskSymbol() {
-    return "T";
+  String getTaskText() {
+    return this.taskDesc;
+  }
+
+  @Override
+  String getTaskTime() {
+    return "";
+  }
+
+  @Override
+  TaskType getTaskType() {
+    return this.taskType;
   }
   
 }
