@@ -25,15 +25,13 @@ public class Ui {
     }
 
     public void taskCompleteMessage(ArrayList<Task> taskArrayList, int i) {
-        i--;
         System.out.println("Good job! Lania has marked this task as done:");
         System.out.println(taskArrayList.get(i));
     }
 
-    public void removeTaskMessage(ArrayList<Task> taskArrayList, int i) {
-        i--;
+    public void removeTaskMessage(ArrayList<Task> taskArrayList, Task t) {
         System.out.println("Ok, Lania has removed this task:");
-        System.out.println(taskArrayList.get(i));
+        System.out.println(t);
         System.out.println("Great! Now you have " + taskArrayList.size() + (taskArrayList.size() == 1 ? " task" : " tasks") + " in your list.");
     }
 

@@ -12,10 +12,12 @@ public class Lania {
 
     private ArrayList<Task> taskArrayList;
     private Ui ui;
+    private Storage storage;
 
-    public Lania() {
+    public Lania(String filePath) {
         taskArrayList = new ArrayList<Task>();
         ui = new Ui();
+        storage = new Storage(filePath);
     }
 
     /**
@@ -50,29 +52,12 @@ public class Lania {
             throw new LaniaException("Sorry, but Lania doesn't know what that means");
         }
         taskArrayList.add(t);
-        String file = "data/lania.txt";
         try {
-            for (int i = 0; i < taskArrayList.size(); i++) {
-                Task task = taskArrayList.get(i);
-                appendToFile(file, getStringFormat(task), i);
-            }
+            storage.save(taskArrayList);
         } catch (IOException e) {
             ui.loadingErrorMessage();
         }
         ui.updateMessage(taskArrayList, t);
-    }
-
-    private String getStringFormat(Task t) {
-        if (t instanceof Todo) {
-            Todo temp = (Todo) t;
-            return "T|" + temp.getStatusIcon() + "|" + temp.description + "\n";
-        } else if (t instanceof Deadline) {
-            Deadline temp = (Deadline) t;
-            return "D|" + temp.getStatusIcon() + "|" + temp.description + "|" + temp.by + "\n";
-        } else {
-            Event temp = (Event) t;
-            return "E|" + temp.getStatusIcon() + "|" + temp.description + "|" + temp.at + "\n";
-        }
     }
 
     /**
@@ -81,7 +66,13 @@ public class Lania {
      * @param i The task number to be completed.
      */
     public void complete(int i) {
+        i--;
         taskArrayList.get(i).markAsDone();
+        try {
+            storage.save(taskArrayList);
+        } catch (IOException e) {
+            ui.loadingErrorMessage();
+        }
         ui.taskCompleteMessage(taskArrayList, i);
     }
 
@@ -91,8 +82,15 @@ public class Lania {
      * @param i The task number to be completed.
      */
     public void remove(int i) {
+        i--;
+        Task t = taskArrayList.get(i);
         taskArrayList.remove(i);
-        ui.removeTaskMessage(taskArrayList, i);
+        try {
+            storage.save(taskArrayList);
+        } catch (IOException e) {
+            ui.loadingErrorMessage();
+        }
+        ui.removeTaskMessage(taskArrayList, t);
     }
 
     public void run() {
@@ -102,7 +100,7 @@ public class Lania {
             if (f.createNewFile()) {
 
             } else {
-                loadFileContents("data/lania.txt");
+                loadFileContents();
             }
         } catch (IOException e) {
             ui.loadingErrorMessage();
@@ -135,33 +133,9 @@ public class Lania {
         ui.goodbyeMessage();
     }
 
-    private void loadFileContents(String filePath) throws FileNotFoundException {
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            String next = s.nextLine();
-            String[] split = next.split("\\|", 4);
-            Task t;
-            if (split[0].equals("T")) {
-                t = new Todo(split[2]);
-            } else if (split[0].equals("D")) {
-                t = new Deadline(split[2], split[3]);
-            } else {
-                t = new Event(split[2], split[3]);
-            }
-            if (split[1].equals("X")) {
-                t.markAsDone();
-            }
-            taskArrayList.add(t);
-        }
+    private void loadFileContents() throws FileNotFoundException {
+        taskArrayList = storage.load();
         ui.listMessage(taskArrayList);
-        s.close();
-    }
-
-    private void appendToFile(String filePath, String textToAppend, int i) throws IOException {
-        FileWriter fw = new FileWriter(filePath, i != 0);
-        fw.write(textToAppend);
-        fw.close();
     }
 
     /**
@@ -170,7 +144,7 @@ public class Lania {
      * @param args The command line arguments. Not required here.
      **/
     public static void main(String[] args) {
-        Lania lania = new Lania();
+        Lania lania = new Lania("data/lania.txt");
         lania.run();
     }
 }
