@@ -31,7 +31,7 @@ public class Duke {
         ArrayList<Task> storedInfo = new ArrayList<Task>();
         int count = 0;
         try {
-            File taskList = new File("C:\\Users\\ronal\\duke.txt");
+            File taskList = new File("DUKE\\data\\duke.txt";
             Scanner taskReader = new Scanner(taskList);
             while (taskReader.hasNextLine()) {
                 String item = taskReader.nextLine();
@@ -177,7 +177,7 @@ public class Duke {
 
             }
         //Insert save protocol here
-        File taskList = new File("C:\\Users\\ronal\\duke.txt");
+        File taskList = new File("DUKE\\data\\duke.txt");
         try {
             if (taskList.createNewFile()) {
                 System.out.println("Tasklist created and saved");
@@ -188,7 +188,7 @@ public class Duke {
             System.out.println("File could not be created");
         }
         try {
-            FileWriter listEditor = new FileWriter("C:\\Users\\ronal\\duke.txt");
+            FileWriter listEditor = new FileWriter("DUKE\\data\\duke.txt");
             for (Task item: storedInfo) {
                 if(item != null) {
                     listEditor.write(item.toString());
