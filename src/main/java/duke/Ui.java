@@ -38,7 +38,7 @@ public class Ui {
         try {
             throw new InputError("Invalid Input");
         } catch (InputError e) {
-            System.out.println("Here is the error boss. " + e);
+            System.out.println("Here is the error boss. " + e.getMessage());
             System.out.println("I'm not too sure what you meant.");
             System.out.println("Try again with these keywords.");
             System.out.println("todo deadline event");
@@ -46,6 +46,6 @@ public class Ui {
     }
 
     public void errorMessage(InputError e) {
-        System.out.println("Here is the error boss. " + e);
+        System.out.println("Here is the error boss. " + e.getMessage());
     }
 }

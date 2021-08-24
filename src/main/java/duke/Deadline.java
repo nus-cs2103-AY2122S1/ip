@@ -20,20 +20,20 @@ public class Deadline extends Task{
         dateTime = LocalDateTime.parse(timeInput, formatter);
     }
 
-    private String timeFormChange() {
+    public String timeFormChange() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h.mm a");
         return dateFormat.format(dateTime) + ", " + timeFormatter.format(dateTime);
     }
 
     @Override
-    String printTask() {
+    public String printTask() {
         String result = "";
         if (super.complete) {
             result = "[D][X] ";
         } else {
             result = "[D][ ] ";
         }
-        return result + super.task + "(by: " + timeFormChange() + ")";
+        return result + super.task + " (by: " + timeFormChange() + ")";
     }
 }

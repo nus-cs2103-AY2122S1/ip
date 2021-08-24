@@ -53,14 +53,14 @@ public class TaskList implements Serializable {
 
     void addDeadline(String str) {
         System.out.println("Alrighty! I have added this task:");
-        taskList.add(new Deadline(str.substring(9, str.indexOf("/")), str.substring(str.indexOf("/") + 4)));
+        taskList.add(new Deadline(str.substring(9, str.indexOf("/") - 1), str.substring(str.indexOf("/") + 4)));
         System.out.println("   " + taskList.get(taskList.size() - 1).printTask());
         System.out.println("Now you have " + taskList.size() + " task(s) in total!");
     }
 
     void addEvent(String str) {
         System.out.println("Alrighty! I have added this task:");
-        taskList.add(new Event(str.substring(6, str.indexOf("/")), str.substring(str.indexOf("/") + 4)));
+        taskList.add(new Event(str.substring(6, str.indexOf("/") - 1), str.substring(str.indexOf("/") + 4)));
         System.out.println("   " + taskList.get(taskList.size() - 1).printTask());
         System.out.println("Now you have " + taskList.size() + " task(s) in total!");
     }

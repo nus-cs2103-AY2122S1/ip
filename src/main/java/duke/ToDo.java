@@ -7,7 +7,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    String printTask() {
+    public String printTask() {
          String result = "";
         if(this.complete) {
             result = "[T][X] ";
