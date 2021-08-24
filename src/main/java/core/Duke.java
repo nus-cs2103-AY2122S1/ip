@@ -8,8 +8,8 @@ public class Duke {
     private Storage storage;
 
     public Duke() {
-        taskList = new TaskList();
         storage = new Storage("data/Duke.txt");
+        taskList = storage.loadStorageToTaskList();
     }
 
     private void run() {
