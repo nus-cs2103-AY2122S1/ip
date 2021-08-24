@@ -1,9 +1,49 @@
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) throws IllegalTaskException {
+    public static void main(String[] args) throws FileNotFoundException, FolderNotFoundException, IOException {
         ArrayList<Task> list = new ArrayList<Task>();
+        try {
+            File f = new File("../../../data/duke.txt");
+            if (f.exists()){
+                Scanner s = new Scanner(f);
+                while (s.hasNext()) {
+                    String toRead = s.nextLine();
+                    String[] strSplit = toRead.split(" \\| ");
+                    if (strSplit[0].equals("T")) {
+                        ToDo toDo = new ToDo(strSplit[2]);
+                        if (strSplit[1].equals("1")) {
+                            toDo.complete();
+                        }
+                        list.add(toDo);
+                    } else if (strSplit[0].equals("D")) {
+                        Deadline deadline = new Deadline(strSplit[2], strSplit[3]);
+                        if (strSplit[1].equals("1")) {
+                            deadline.complete();
+                        }
+                        list.add(deadline);
+                    } else if (strSplit[0].equals("E")) {
+                        Event event = new Event(strSplit[2], strSplit[3]);
+                        if (strSplit[1].equals("1")) {
+                            event.complete();
+                        }
+                        list.add(event);
+                    }
+                }
+                s.close();
+            } else {
+                throw new FileNotFoundException();
+            }
+        } catch (FileNotFoundException e){
+            System.out.println("File not found");
+        }
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -72,7 +112,17 @@ public class Duke {
             input = sc.nextLine();
             command = input.split(" ")[0];
         }
+        File toWrite = new File("../../../data");
+        if (!toWrite.exists()) {
+            toWrite.mkdir();
+        }
+        FileWriter fw = new FileWriter("../../../data/duke.txt");
+        for (Task t: list) {
+            fw.write(t.getToWrite());
+            fw.write(System.getProperty("line.separator"));
+        }
         System.out.println("Bye. Hope to see you again soon!");
+        fw.close();
         sc.close();
     }
 }

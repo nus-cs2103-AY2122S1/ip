@@ -1,0 +1,2 @@
+class FolderNotFoundException extends Exception {
+}

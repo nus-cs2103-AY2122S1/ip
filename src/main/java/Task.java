@@ -1,4 +1,4 @@
-class Task {
+abstract class Task {
     private int done;
     private String toDo;
 
@@ -13,6 +13,18 @@ class Task {
 
     void complete(){
         this.done = 1;
+    }
+
+    String getToDo() {
+        return toDo;
+    }
+
+    String getDone() {
+        return String.valueOf(done);
+    }
+
+    String getToWrite() {
+        return  this.getDone() + " | "  + this.getToDo();
     }
 
     @Override
