@@ -1,7 +1,7 @@
-package duke;
+package duke.task;
 
 /**
- * This class encapsulates a duke.Task.
+ * This class encapsulates a duke.task.Task.
  * Contains the boolean logic to store if a task has been completed, as well as the task description.
  */
 
@@ -50,7 +50,7 @@ public class Task {
 
 
     /**
-     * Overriding method to print a duke.Task object.
+     * Overriding method to print a duke.task.Task object.
      *
      * @return String representation of the task instance.
      */

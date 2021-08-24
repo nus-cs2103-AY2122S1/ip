@@ -1,6 +1,6 @@
 package duke.util;
 
-import duke.Task;
+import duke.task.Task;
 
 public class Ui {
 

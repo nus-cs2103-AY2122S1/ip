@@ -1,8 +1,6 @@
 package duke;
-import duke.util.DukeTaskList;
-import duke.util.Parser;
-import duke.util.Ui;
-import duke.util.DukeConfig;
+import duke.command.DukeCommands;
+import duke.util.*;
 
 import java.util.ArrayList;
 import java.util.Optional;
