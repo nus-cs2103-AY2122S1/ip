@@ -11,7 +11,7 @@ public class Event extends Task implements TimedItem {
 	private final LocalDateTime time;
 	
 	/**
-	 * Public constructor of Event.
+	 * Creates an Event that has a description and timing.
 	 *
 	 * @param desc String representing the description
 	 * @param time LocalDateTime.
