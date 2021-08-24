@@ -1,10 +1,13 @@
+package duke.task;
+
+import duke.util.Ui;
+import duke.exception.DukeException;
+import duke.exception.InvalidDateTimeException;
+import duke.util.Parser;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -68,7 +71,7 @@ public class TaskList {
         }
     }
 
-    public void addTodoToList(String description) throws DukeException {
+    public void addTodoToList(String description) {
         Todo todo = new Todo(description);
         addTaskToList(todo);
     }

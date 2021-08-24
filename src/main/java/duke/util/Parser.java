@@ -1,9 +1,19 @@
+package duke.util;
+
+import duke.exception.DukeException;
+import duke.exception.NoCommandException;
+import duke.exception.NoDescriptionAndTimeException;
+import duke.exception.NoDescriptionException;
+import duke.exception.NoTimeException;
+import duke.exception.InvalidTaskDeletionException;
+import duke.exception.InvalidTaskDoneException;
+import duke.task.TaskList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
     public static boolean parse(String fullCommand, TaskList taskList,
-                             Ui ui, Storage storage) throws DukeException {
+                                Ui ui, Storage storage) throws DukeException {
         String[] command = fullCommand.split(" ", 2);
         String commandWord = command[0].trim();
         switch (commandWord) {
@@ -22,7 +32,6 @@ public class Parser {
         case "done":
             return parseDone(taskList, command);
         default:
-            ui.readCommand();
             throw new NoCommandException();
         }
     }
@@ -30,12 +39,10 @@ public class Parser {
     public static String[] parseDescriptionAndTime(String[] userInput,String regex,
                                           String taskType) throws DukeException {
         String[] next = userInput[1].trim().split(regex);
-        if (next.length < 2) {
-            if (next[0].trim().length() == 0) {
-                throw new NoDescriptionAndTimeException(taskType);
-            } else {
-                throw new NoTimeException(taskType);
-            }
+        if (next[0].trim().length() == 0) {
+            throw new NoDescriptionException(taskType);
+        } else if (next.length < 2) {
+            throw new NoTimeException(taskType);
         }
         return next;
     }
@@ -53,7 +60,7 @@ public class Parser {
 
     public static boolean parseEvent(TaskList taskList, String[] details) throws DukeException {
         if (details.length == 1) {
-            throw new NoDescriptionException("event");
+            throw new NoDescriptionAndTimeException("event");
         }
         String[] eventDetail = parseDescriptionAndTime(details,
                 "/at", "event");
@@ -65,7 +72,7 @@ public class Parser {
 
     public static boolean parseDeadline(TaskList taskList, String[] details) throws DukeException {
         if (details.length == 1) {
-            throw new NoDescriptionException("deadline");
+            throw new NoDescriptionAndTimeException("deadline");
         }
         String[] eventDetail = parseDescriptionAndTime(details,
                 "/by", "deadline");
@@ -87,7 +94,7 @@ public class Parser {
         }
         int deleteNumber = Integer.parseInt(userInput[1].trim()) - 1;
         if (deleteNumber < 0 || deleteNumber > taskList.listLength()-1) {
-            throw new InvalidTaskDoneException();
+            throw new InvalidTaskDeletionException();
         }
         taskList.deleteFromList(deleteNumber);
         return false;

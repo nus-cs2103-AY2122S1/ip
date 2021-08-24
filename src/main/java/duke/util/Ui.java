@@ -1,8 +1,12 @@
+package duke.util;
+
+import duke.task.Task;
 import java.util.Scanner;
 
 public class Ui {
+    private Scanner scanner = new Scanner(System.in);
     private static final String LINE = "----------------------------------------------------";
-    private static final String WELCOME_MESSAGE= "Hello! I'm Duke. " +
+    private static final String WELCOME_MESSAGE= "Hello! I'm Duke " +
             "What can I do for you?\n\n" + LINE + "-----------------------------\n" +
             "|\tPlease enter one of the following commands:                                  |\n" +
             "|\t1. todo <description> (eg. todo paint)                                       |\n" +
@@ -13,14 +17,13 @@ public class Ui {
             "|\t6. done <task number> (e.g done 1) - mark a task in list as done             |\n" +
             "|\t7. bye - exit duke                                                           |\n" +
             LINE + "-----------------------------\n";
-    private Scanner scanner = new Scanner(System.in);
 
     public void showWelcome() {
         System.out.println(WELCOME_MESSAGE);
     }
 
     public String readCommand() {
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 
     public void showLine() {

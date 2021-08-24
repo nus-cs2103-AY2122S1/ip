@@ -1,6 +1,8 @@
+package duke.task;
+
 public class Todo extends Task {
 
-    public Todo(String description) throws DukeException {
+    public Todo(String description) {
         super(description, "todo");
     }
 
