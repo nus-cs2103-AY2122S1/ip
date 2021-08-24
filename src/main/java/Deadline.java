@@ -6,6 +6,17 @@ public class Deadline extends Task{
         this.by = by;
     }
 
+    public String writeToFile() {
+        String s = "D" + " | ";
+        if (this.isDone) {
+            s += "1";
+        } else {
+            s += "0";
+        }
+        s = s + " | " + description + " | " + by;
+        return s;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + by + ")";

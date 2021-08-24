@@ -16,6 +16,8 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public abstract String writeToFile();
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

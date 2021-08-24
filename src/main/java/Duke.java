@@ -1,12 +1,12 @@
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class Duke {
-    private static List<Task> tasks = new ArrayList<>(100);
+    private static DukeDB database;
+    private static ArrayList<Task> tasks = new ArrayList<>(100);
     private static int len = 0;
     private static Boolean going = true;
-
+    private static final String filePath = "data/duke.txt";
     private enum Type{
         DEADLINE, EVENT, TODO
     };
@@ -176,20 +176,15 @@ public class Duke {
         pack(bye);
     }
 
-
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        String s;
-
-        greet();
-        while(going && scan.hasNextLine()) {
-            try {
-                s = scan.nextLine().trim();
-                scan(s);
-            } catch (DukeException e) {
-                pack(e.getMessage());
-            }
+    public static void level7 () throws IOException {
+        DukeDB database = new DukeDB();
+        tasks = database.readData();
+        for(int i = 0; i < tasks.size(); i++) {
+            System.out.println(tasks.get(i));
         }
-        exit();
+    }
+
+    public static void main(String[] args) throws IOException {
+        level7();
     }
 }
