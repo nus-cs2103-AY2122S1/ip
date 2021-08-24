@@ -9,7 +9,13 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ * The CommandFind class handles the command "find" that receives a specified
+ * keyword and prints out all tasks whose description contains that keyword.
+ *
+ * @author Loh Wen Hao Aaron
+ *
+ */
 public class CommandFind extends Command {
     public static final String KEYWORD = "find";
     private static final String ARG_FORMAT = "\\w+";
@@ -20,6 +26,11 @@ public class CommandFind extends Command {
         this.arguments = arguments;
     }
 
+    /**
+     * This method checks if the keyword specified in the arguments is in a valid format.
+     *
+     * @return A boolean indicating if the arguments are in a valid format.
+     */
     @Override
     public boolean isArgumentValid() {
         if (arguments.size() == 1) {
