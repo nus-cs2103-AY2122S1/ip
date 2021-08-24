@@ -1,5 +1,8 @@
 package lania.task;
 
+/**
+ * Represents the task that a user has.
+ */
 public abstract class Task {
 
     /** String containing the name of task */
@@ -8,8 +11,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for lania.task.Task. Takes in a String description.
-     * Initialises description and isDone to false.
+     * Constructor for Task which consists of a description and whether the task is done.
      *
      * @param description The name of the task.
      */
@@ -19,7 +21,7 @@ public abstract class Task {
     }
 
     /**
-     * Gets an icon representation on whether task is done.
+     * Gets an icon representation depending on whether task is done.
      *
      * @return An indicator for whether the task is done.
      */
@@ -34,8 +36,20 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Converts the task object to a string representation
+     * to be stored in the hard disk.
+     *
+     * @return A string representation of the task object.
+     */
     public abstract String getStringFormat();
 
+    /**
+     * Another string representation of the task object
+     * which is displayed to the users.
+     *
+     * @return A string representation of the task object.
+     */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

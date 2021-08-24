@@ -7,23 +7,34 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+ * Represents the chatbot Lania that helps manage your tasks.
+ */
 public class Lania {
 
+    /** Contains the task list */
     private TaskList taskList;
+    /**  Deals with interactions with the user */
     private Ui ui;
+    /** Deals with loading tasks from the file and saving tasks in the file */
     private Storage storage;
 
+    /**
+     * Constructor for the Lania object.
+     *
+     * @param filePath location of the file in which data is stored
+     */
     public Lania(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
     }
 
     /**
-     * Store user input in task array and show that it is added.
+     * Store user input in the task list and display a message.
      *
-     * @param t lania.task.Task provided by the user.
+     * @param t Task provided by the user.
      */
-    public void update(Task t) throws LaniaException {
+    public void update(Task t) {
         taskList.update(t);
         try {
             storage.save(taskList);
@@ -34,7 +45,7 @@ public class Lania {
     }
 
     /**
-     * Completes given task number.
+     * Completes the given task number.
      *
      * @param i The task number to be completed.
      */
@@ -72,6 +83,16 @@ public class Lania {
         ui.listMessage(temp);
     }
 
+    /**
+     * Main part of the program. First, it tries to load the file
+     * if it exists and display its contents. It then copies the
+     * contents over into a TaskList.
+     *
+     * After greeting the user, the
+     * program continuously waits for input unless the command 'bye'
+     * is given which closes exits the program.
+     *
+     */
     public void run() {
         try {
             taskList = storage.load();
@@ -124,7 +145,7 @@ public class Lania {
     }
 
     /**
-     * Chatbot that stores and displays the user input.
+     * Lania object is created and starts running.
      *
      * @param args The command line arguments. Not required here.
      **/
