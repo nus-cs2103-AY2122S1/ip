@@ -12,6 +12,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     private static final String DATE_TIME_FORMAT = "dd-MM-yyy HH:mm";
+
     public static Command parse(String input) throws DukeException {
         if (input.contains("|")) {
             throw new DukeException("OOPS!!! Your input must not contain \"|\" ☹");

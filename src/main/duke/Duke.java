@@ -7,8 +7,6 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-import java.lang.String;
-
 /**
  * The Duke class encapsulates the Duke project's chat-bot for CS2103T individual project 1.
  *
@@ -25,7 +23,7 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
-    public void run() {
+    private void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
