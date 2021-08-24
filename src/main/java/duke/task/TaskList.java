@@ -214,7 +214,6 @@ public class TaskList {
         
         // Return confirmation message
         return formatAddMessage(newTask, tasks.size());
-        
     }
     
     private void validateCommand(String command, String regex, String format) throws IllegalFormatException {
