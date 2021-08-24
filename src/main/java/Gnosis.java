@@ -1,4 +1,7 @@
+import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 /**
  *
@@ -15,7 +18,7 @@ import java.util.Scanner;
  * */
 public class Gnosis {
 
-    private static ArrayList<Task> tasks;
+    private static List<Task> tasks;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -26,6 +29,7 @@ public class Gnosis {
         // Display greeting message
         displayTopDivider();
         System.out.println(GnosisConstants.GREET_MESSAGE);
+        setUpGnosisTasks();
         displayBottomDivider();
 
         // terminates user input only when "bye" is inputted by user
@@ -51,6 +55,19 @@ public class Gnosis {
         } while (!command.equalsIgnoreCase("BYE"));
 
         sc.close(); // close scanner
+    }
+
+
+    public static void setUpGnosisTasks() {
+        //check if user has folder:
+        // if no folder -> means no data found -> create one from scratch
+        // if have -> load to arraylist tasks
+        if (FileManager.isDataFileAvail()) {
+            System.out.println("SAVED DATA FOUND -- YOU CAN VIEW YOUR SAVED TASKS -- ");
+            tasks = FileManager.loadTask();
+        } else if (FileManager.createDataFolder()){
+            System.out.println("NO SAVED DATA FOUND -- NEW TASKS CAN NOW BE SAVED IN THE DATA FOLDER -- ");
+        }
     }
 
 
@@ -93,6 +110,9 @@ public class Gnosis {
             default:
                 throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
         }
+
+        // Write data to FileManager
+        FileManager.writeFile(tasks);
     }
 
     //Corresponding user command methods

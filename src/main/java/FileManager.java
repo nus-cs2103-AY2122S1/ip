@@ -14,10 +14,6 @@ public class FileManager {
     private static final File file = new File(FILE_PATH);
     private static final String  DELIMITER = ",";
 
-    public static boolean isGnosisDataSetup() {
-        return Files.isDirectory(Paths.get(DIRECTORY_PATH)) && file.exists();
-    }
-
     public static List<Task> loadTask() {
         List<Task> tasks = new ArrayList<>();
         try {
@@ -49,14 +45,7 @@ public class FileManager {
         return tasks;
     }
 
-    public static void writeFile(ArrayList<Task> tasks) {
-        //TODO: to remove
-//        ArrayList<Task> tasks = new ArrayList<>();
-//        tasks.add(new Todo("Study for CS2103"));
-//        tasks.add(new Event("cs2103 lecture", "2-4pm"));
-//        tasks.get(1).setDone(true);
-//        tasks.add(new Deadline("cs2103 iP due", "2359 Thursday"));
-
+    public static void writeFile(List<Task> tasks) {
         try {
             BufferedWriter writer = Files.newBufferedWriter(Paths.get(FILE_PATH));
             writer.write("Task Type,is task completed?,Task name,DateTime");
@@ -83,18 +72,12 @@ public class FileManager {
     }
 
     // returns value whether data folder and file was created successfully
-    public static boolean CreateDataFolder() throws IOException {
-        // create folder and file only if file doesn't exist
-        if (!file.exists() && file.getParentFile().mkdir()) {
-            System.out.println("File and data folder created");
-            return file.createNewFile();
-        }
-        return true;
-    }
-    //TODO: to remove
-//
-    public static void main(String[] args) {
-        System.out.println(isGnosisDataSetup());
+    public static boolean createDataFolder() {
+        // create folder
+        return !file.exists() && file.getParentFile().mkdir();
     }
 
+    public static boolean isDataFileAvail() {
+        return Files.isDirectory(Paths.get(DIRECTORY_PATH)) && file.exists();
+    }
 }
