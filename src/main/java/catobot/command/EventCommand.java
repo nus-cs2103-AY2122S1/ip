@@ -4,7 +4,7 @@ import catobot.Storage;
 import catobot.Ui;
 import catobot.exception.BotException;
 import catobot.exception.EmptyCommandException;
-import catobot.exception.InvalidCommandException;
+import catobot.exception.InvalidEventException;
 import catobot.item.Event;
 import catobot.item.TaskList;
 
@@ -22,15 +22,13 @@ public class EventCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
-
-        if (!content.contains("/at") || content.split("/at").length < 2) {
-            throw new InvalidCommandException(
-                    "Oh no, I am not sure when this is happening >.<");
-        }
-        String[] inputs = content.split("event")[1].trim().split(" /at ");
-        if (inputs.length == 1) {
+        if (content.split(" ").length == 1) {
             throw new EmptyCommandException("event");
         }
+        if (!content.contains("/at") || content.split("/at").length < 2) {
+            throw new InvalidEventException();
+        }
+        String[] inputs = content.split("event")[1].trim().split(" /at ");
         String description = inputs[0].trim();
         LocalDate date = LocalDate.parse(inputs[1]);
         Ui.respond(tasks.add(Event.of(description, date)));

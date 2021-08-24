@@ -8,14 +8,7 @@ public class InvalidCommandException extends BotException {
      * Creates a default InvalidCommandException.
      */
     public InvalidCommandException() {
-        super("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        super("Meow I don't understand this command >.<");
     }
 
-    /**
-     * Creates a InvalidCommandException.
-     * @param errorMessage The customized error message.
-     */
-    public InvalidCommandException(String errorMessage) {
-        super(errorMessage);
-    }
 }

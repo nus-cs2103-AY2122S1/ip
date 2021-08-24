@@ -5,6 +5,7 @@ import catobot.Ui;
 import catobot.exception.BotException;
 import catobot.exception.EmptyCommandException;
 import catobot.exception.InvalidCommandException;
+import catobot.exception.InvalidDeadlineException;
 import catobot.item.Deadline;
 import catobot.item.TaskList;
 
@@ -22,14 +23,13 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
-        if (!content.contains("/by") || content.split("/by").length < 2) {
-            throw new InvalidCommandException(
-                    "Don't cheat me, give me a due time so I can watch you >.<");
-        }
-        String[] inputs = content.split("deadline")[1].trim().split(" /by ");
-        if (inputs.length == 1) {
+        if (content.split(" ").length == 1) {
             throw new EmptyCommandException("deadline");
         }
+        if (!content.contains("/by") || content.split("/by").length < 2) {
+            throw new InvalidDeadlineException();
+        }
+        String[] inputs = content.split("deadline")[1].trim().split(" /by ");
         String description = inputs[0].trim();
         LocalDate date = LocalDate.parse(inputs[1]);
         Ui.respond(tasks.add(Deadline.of(description, date)));

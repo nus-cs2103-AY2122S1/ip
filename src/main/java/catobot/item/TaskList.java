@@ -1,6 +1,7 @@
 package catobot.item;
 
 import catobot.exception.BotException;
+import catobot.exception.EmptyTaskListException;
 import catobot.exception.OutOfBoundException;
 
 import java.util.ArrayList;
@@ -57,14 +58,16 @@ public class TaskList {
         return String.format("Here are the tasks in your list:%s", this);
     }
 
+
     /**
      * Marks a specific task as completed.
      *
      * @param index The index of the task in the TaskList.
      * @return The response message after completing the task.
      * @throws OutOfBoundException if the index is out of valid range of TaskList.
+     * @throws EmptyTaskListException if the TaskList is empty.
      */
-    public String completeTask(int index) throws OutOfBoundException {
+    public String completeTask(int index) throws OutOfBoundException, EmptyTaskListException {
         checkRange(index);
         Task t = taskList.get(index - 1);
         t.markAsDone();
@@ -76,9 +79,10 @@ public class TaskList {
      *
      * @param index The index of the task in the TaskList.
      * @return The response message after deleting the task.
-     * @throws BotException if the index is out of valid range of TaskList.
+     * @throws OutOfBoundException if the index is out of valid range of TaskList.
+     * @throws EmptyTaskListException if the TaskList is empty.
      */
-    public String deleteTask(int index) throws OutOfBoundException {
+    public String deleteTask(int index) throws OutOfBoundException, EmptyTaskListException {
         checkRange(index);
         Task temp = taskList.get(index - 1);
         taskList.remove(temp);
@@ -86,9 +90,9 @@ public class TaskList {
                 "Noted. I've removed this task:\n      %s\n      %s", temp, checkSize());
     }
 
-    private void checkRange(int index) throws OutOfBoundException {
+    private void checkRange(int index) throws OutOfBoundException, EmptyTaskListException {
         if (taskList.size() == 0) {
-            throw new OutOfBoundException("There is no tasks currently! Try to add one!");
+            throw new EmptyTaskListException();
         }
         if (index < 1 || index > taskList.size()) {
             String expected = String.format("%d - %d", 1, taskList.size());
