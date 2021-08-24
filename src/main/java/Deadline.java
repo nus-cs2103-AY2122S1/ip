@@ -1,9 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * The Deadline class encapsulates a task that has a deadline.
  */
 public class Deadline extends Task {
     /** The deadline of the task. */
-    private String by;
+    private LocalDate by;
 
     /**
      * Constructor for the Deadline class.
@@ -11,9 +15,13 @@ public class Deadline extends Task {
      * @param description The description of the task.
      * @param by The deadline of the task.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
-        this.by = by;
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Deadlines should be in the form YYYY-MM-DD.");
+        }
     }
 
     /**
@@ -23,6 +31,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.by.format(DateTimeFormatter.ofPattern("d MMMM yyyy")) + ")";
     }
 }
