@@ -1,9 +1,9 @@
 package pib;
 
-import pib.Tasks.Deadline;
-import pib.Tasks.Event;
-import pib.Tasks.Task;
-import pib.Tasks.Todo;
+import pib.tasks.Deadline;
+import pib.tasks.Event;
+import pib.tasks.Task;
+import pib.tasks.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

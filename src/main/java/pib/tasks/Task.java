@@ -1,4 +1,4 @@
-package pib.Tasks;
+package pib.tasks;
 
 import pib.Ui;
 

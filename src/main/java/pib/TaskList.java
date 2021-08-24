@@ -1,9 +1,10 @@
 package pib;
 
-import pib.Tasks.Deadline;
-import pib.Tasks.Event;
-import pib.Tasks.Task;
-import pib.Tasks.Todo;
+import pib.enums.TaskType;
+import pib.tasks.Deadline;
+import pib.tasks.Event;
+import pib.tasks.Task;
+import pib.tasks.Todo;
 import pib.pibexception.PibException;
 
 import java.util.ArrayList;

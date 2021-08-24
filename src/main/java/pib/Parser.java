@@ -1,5 +1,7 @@
 package pib;
 
+import pib.enums.TaskType;
+
 import java.util.Scanner;
 
 public class Parser {

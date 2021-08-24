@@ -1,4 +1,4 @@
-package pib.Tasks;
+package pib.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
