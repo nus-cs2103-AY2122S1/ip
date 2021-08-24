@@ -51,6 +51,16 @@ public class TaskList {
         storage.writeToMem(this.tasks);
     }
 
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> resultTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getContent().contains(keyword)) {
+                resultTasks.add(task);
+            }
+        }
+        return resultTasks;
+    }
+
     public Task delete(int index) throws IndexOutOfBoundsException, IOException {
         Task deletedTask = tasks.remove(index);
         storage.writeToMem(this.tasks);
