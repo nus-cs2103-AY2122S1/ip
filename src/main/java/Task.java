@@ -13,10 +13,6 @@ public abstract class Task {
         return String.format("[%s][%s] %s", representation, (isDone ? 'X' : ' '), description);
     }
 
-    public String showDescription(){
-        return this.description;
-    }
-
     public void markDone(){
         isDone = true;
     }
