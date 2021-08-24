@@ -1,4 +1,5 @@
 package duke.task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -14,7 +15,7 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public void markAsDone() {
+    public void setIsDone() {
         this.isDone = true;
     }
 

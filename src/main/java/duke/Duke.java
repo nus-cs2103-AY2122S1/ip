@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalTime;
 import java.util.Scanner;
 import java.time.LocalDate;
+
 import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Deadline;
@@ -45,25 +46,25 @@ public class Duke {
                 // Case where user marks a task as done
                 if (command.equals("done")) {
                     Task current = tasks.getTask(Integer.parseInt(parsedInputString[1]) - 1);
-                    current.markAsDone();
-                    System.out.println(ui.doneTaskMessage(current.toString()));
+                    current.setIsDone();
+                    System.out.println(ui.displayDoneTaskMessage(current.toString()));
                     taskListIsUpdated = true;
 
                     // case where user wants to delete a task item, similar to done
                 } else if (command.equals("delete")) {
                     Task current = tasks.getTask(Integer.parseInt(parsedInputString[1]) - 1);
                     tasks.removeTask(current);
-                    System.out.println(ui.deletedTaskMessage(current.toString(), tasks.getLength()));
+                    System.out.println(ui.displayDeletedTaskMessage(current.toString(), tasks.getLength()));
                     taskListIsUpdated = true;
 
                     // Case where user wants to see the entire task list
                 } else if (command.equals("list")) {
-                    System.out.println(ui.listMessage(tasks));
+                    System.out.println(ui.displayListMessage(tasks));
                     continue;
 
                     // Case where user exits the program
                 } else if (command.equals("bye")) {
-                    System.out.println(ui.byeMessage());
+                    System.out.println(ui.displayByeMessage());
                     break;
 
                     // Case where user wants to add a new to do task
@@ -96,17 +97,17 @@ public class Duke {
                     storage.saveToFile();
                     if (taskListIsAddedTo) {
                         // When adding a new task, this message be printed
-                        System.out.println(ui.addTaskMessage(tasks));
+                        System.out.println(ui.displayAddTaskMessage(tasks));
                     }
                 }
 
                 // catch all the custom exceptions and displays the message
             } catch (DukeException e) {
-                System.out.println(ui.dukeExceptionMessage(e));
+                System.out.println(ui.displayDukeExceptionMessage(e));
 
                 // catch the remaining exceptions
             } catch (Exception e) {
-                System.out.println(ui.exceptionMessage(e));
+                System.out.println(ui.displayExceptionMessage(e));
             }
         }
     }
