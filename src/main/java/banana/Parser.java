@@ -135,7 +135,7 @@ public class Parser {
 
     /**
      * Throws an exception if the wrong
-     * commands have been used.
+     * commands/inputs have been entered.
      *
      * @param tasks the list of tasks.
      * @throws DukeException the exception.
