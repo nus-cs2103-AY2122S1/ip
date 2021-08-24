@@ -1,10 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    public Deadline(String title, String timeDue) {
+    public Deadline(String title, LocalDate timeDue) {
         super(title, TypeIndicators.DEADLINE);
         this.timeDue = timeDue;
     }
 
-    public Deadline(String title, String timeDue, boolean isDone) {
+    public Deadline(String title, LocalDate timeDue, boolean isDone) {
         super(title, TypeIndicators.DEADLINE);
         this.timeDue = timeDue;
         this.isDone = isDone;
@@ -17,6 +20,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + String.format(" (by: %s)", this.timeDue);
+        String formattedTimeDue = this.timeDue == null ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return super.toString() + String.format(" (by: %s)", formattedTimeDue);
     }
 }

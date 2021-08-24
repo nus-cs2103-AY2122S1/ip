@@ -1,10 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    public Event(String title, String timeDue) {
+    public Event(String title, LocalDate timeDue) {
         super(title, TypeIndicators.EVENT);
         this.timeDue = timeDue;
     }
 
-    public Event(String title, String timeDue, boolean isDone) {
+    public Event(String title, LocalDate timeDue, boolean isDone) {
         super(title, TypeIndicators.EVENT);
         this.timeDue = timeDue;
         this.isDone = isDone;
@@ -17,6 +20,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + String.format(" (at: %s)", this.timeDue);
+        String formattedTimeDue = this.timeDue == null ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return super.toString() + String.format(" (at: %s)", formattedTimeDue);
     }
 }
