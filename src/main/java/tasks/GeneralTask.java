@@ -1,8 +1,11 @@
 package tasks;
 
+import bot.TaskType;
+
 public class GeneralTask extends Task {
 
   private String description;
+  private TaskType taskType = TaskType.Blank;
 
   public GeneralTask(String description) {
     this.description = description;
@@ -12,10 +15,20 @@ public class GeneralTask extends Task {
   public String getTaskDesc() {
     return description;
   }
+  
+  @Override
+  String getTaskText() {
+    return this.description;
+  }
 
   @Override
-  String getTaskSymbol() {
-    return "G";
+  String getTaskTime() {
+    return "";
+  }
+
+  @Override
+  TaskType getTaskType() {
+    return this.taskType;
   }
   
 }

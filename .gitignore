@@ -19,5 +19,8 @@ bin/
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 
+# Saved data
+data/
+
 # Java class files
 *.class
