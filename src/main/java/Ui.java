@@ -9,14 +9,19 @@ public class Ui {
 
     private static final String divider = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
+    private Scanner scanner;
+
+    public Ui() {
+        this.scanner = new Scanner(System.in);
+    }
+
     public void showLine() {
         System.out.println("\t" + Ui.divider);
     }
 
-    public void showLoadingERROR() {
-        this.showLine();
-        System.out.println("\t☹ OOPS!!! File loading failed :-(");
-        this.showLine();
+    public void showLoadingError() {
+        System.out.println("\tNo record found.");
+        System.out.println("\tInitializing...");
     }
 
     public void showWelcome() {
@@ -28,15 +33,15 @@ public class Ui {
     }
 
     public String readCommand() {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        scanner.close();
-        return input;
+        String nextLine = this.scanner.nextLine();
+        while (nextLine.equals("")) {
+            nextLine = this.scanner.nextLine();
+        }
+        return nextLine;
     }
 
     public void showError(String errorMessage) {
-        this.showLine();
-        System.out.println("\tSomething went wrong: " + errorMessage);
-        this.showLine();
+        System.out.println("\tSomething went wrong: ");
+        System.out.println("\t" + errorMessage);
     }
 }
