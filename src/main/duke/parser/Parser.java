@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.Duke;
 import duke.command.*;
 import duke.data.exception.DukeException;
 import duke.data.task.Deadline;
@@ -25,6 +26,8 @@ public class Parser {
         default:
             String[] split = input.split(" ", 2);
             switch (split[0]) {
+            case FindCommand.COMMAND_WORD:
+                return findTask(split);
             case DoneCommand.COMMAND_WORD:
                 return doTask(split);
             case ToDoCommand.COMMAND_WORD:
@@ -38,6 +41,14 @@ public class Parser {
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means ☹ ");
             }
+        }
+    }
+
+    private static FindCommand findTask(String[] input) throws DukeException {
+        if (input.length > 1) {
+            return new FindCommand(input[1]);
+        } else {
+            throw new DukeException("OOPS!!! Please type what you want to find ☹");
         }
     }
     /**

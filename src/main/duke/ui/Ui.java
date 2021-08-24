@@ -68,7 +68,7 @@ public class Ui {
     }
 
     /**
-     * Prints out the tasklist.
+     * Prints out the taskList.
      */
     public void showList(TaskList taskList) {
         System.out.println(line);
@@ -76,6 +76,22 @@ public class Ui {
         int index = 1;
         for (Task task : taskList.getAllTasks()) {
             System.out.println((index++) + "." + task);
+        }
+        System.out.println(line);
+        System.out.println();
+    }
+
+    /**
+     * Prints out filtered taskList.
+     */
+    public void showFilteredList(TaskList taskList, String keyword) {
+        System.out.println(line);
+        System.out.println("Here are the matching tasks in your list:");
+        int index = 1;
+        for (Task task : taskList.getAllTasks()) {
+            if (task.toString().contains(keyword)) {
+                System.out.println((index++) + "." + task);
+            }
         }
         System.out.println(line);
         System.out.println();
