@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a specific type of Task with an additional time field.
+ * */
 public class Event extends Task{
     private LocalDate time;
 
@@ -10,6 +13,10 @@ public class Event extends Task{
         this.time = time;
     }
 
+    /**
+     * Customize the string representation of an event object.
+     * @return string representation of an event in the form [E][{X}] {description} (at: {time})
+     * */
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: " + time.getMonth().toString() + " "  +

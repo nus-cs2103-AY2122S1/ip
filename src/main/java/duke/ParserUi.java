@@ -2,18 +2,25 @@ package duke;
 
 import java.util.ArrayList;
 
-public class ParserUi implements Ui{
-    private FormatAdapter adapter;
-    public ParserUi() {
-        this.adapter = new FormatAdapter();
+/**
+ * The ui for Parser that is in charge of displaying relevant messages to the user.
+ * */
+public class ParserUi extends Ui{
+
+    /**
+     * Remind the user that the parser cannot interpret the input command.
+     * */
+    public void cannotInterpretMessage() {
+        System.out.println(formatMessage("OOPS!!! I'm sorry, but I don't know what that means :-(\n"));
     }
 
-
-    //This method prints the saved list of events from the user.
+    /**
+     * Show the user the list of events saved at .../data/record.
+     * */
     public void printUserInputRecord(ArrayList<Task> userInputRecord) {
         if(userInputRecord.isEmpty()) {
-            System.out.println(adapter.formatMessage("Ah oh, seems like nothing is added yet :( \n" +
-                    FormatAdapter.getIndentation() + "Try to input something first! \n" ));
+            System.out.println(formatMessage("Ah oh, seems like nothing is added yet :( \n" +
+                    getIndentation() + "Try to input something first! \n" ));
         } else {
             System.out.println("    ____________________________________________________________");
             System.out.println("     Here are the tasks in your list:");
@@ -22,9 +29,5 @@ public class ParserUi implements Ui{
             }
             System.out.println("    ____________________________________________________________");
         }
-    }
-
-    public void cannotInterpretMessage() {
-        System.out.println(adapter.formatMessage("OOPS!!! I'm sorry, but I don't know what that means :-(\n"));
     }
 }

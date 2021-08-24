@@ -2,6 +2,10 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Parse user's input, identify whether it is a valid command and calls relevant method(s) to execute the command.
+ * */
+
 public class Parser {
     private TaskList tasks;
     private ParserUi ui;
@@ -10,14 +14,31 @@ public class Parser {
         this.tasks = tasks;
         this.ui = new ParserUi();
     }
+    /**
+     * This method checks if a String starting with delete is a delete command.
+     * A delete command is a string with the keyword delete followed by numbers and spaces only.
+     * Examples of valid user inputs:
+     * -> delete 3
+     * -> delete   4(spaces trimmed)
+     * -> delete 1 4(spaces trimmed and interpret as done 14)
+     * Examples of invalid user inputs:
+     * -> delete task
+     * -> delete 2 task
+     * @param userInput input from the user.
+     * @return whether the user input can be taken as a delete command.
+     * */
+    private boolean isDeleteCommand(String userInput) {
+        String copy = userInput.replace("delete", "");
+        copy = copy.replaceAll("[0-9]", "");
+        copy = copy.trim();
+        return copy.isEmpty();
+    }
 
     /**
-     * This method checks if a String starting with done is indeed a done command.
-     * Examples:
-     * Case 1: done 3 => valid, standard form
-     * Case 2: done         5 ==> valid, after trimmed
-     * Case 3: done with my schoolwork ==> invalid, will generate an exception
-     * Case 4: done 1 4 => valid, will be interpreted as done 14
+     * Similar to isDeleteCommand This method checks if a String starting with done is a done command.
+     * A done command is a string with the keyword done followed by numbers and spaces only.
+     * @param userInput input from the user.
+     * @return whether the user input can be taken as a done command.
      * **/
     private boolean isDoneCommand(String userInput) {
         String copy = userInput.replace("done", "");
@@ -26,13 +47,10 @@ public class Parser {
         return copy.isEmpty();
     }
 
-    private boolean isDeleteCommand(String userInput) {
-        String copy = userInput.replace("delete", "");
-        copy = copy.replaceAll("[0-9]", "");
-        copy = copy.trim();
-        return copy.isEmpty();
-    }
-
+    /**
+     * Parse the user's command and calls relevant method to execute the command.
+     * @param scanner the scanner from ParserUi that reads the user's input.
+     * */
     public void parse(Scanner scanner) {
         String userInput = scanner.nextLine();
         while(!userInput.equals("bye")) {
@@ -62,5 +80,4 @@ public class Parser {
             userInput = scanner.nextLine();
         }
     }
-
 }

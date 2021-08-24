@@ -2,56 +2,88 @@ package duke;
 
 import java.util.ArrayList;
 
-public class TaskListUi implements Ui {
-    private FormatAdapter adapter;
-    public TaskListUi() {
-        this.adapter = new FormatAdapter();
+/**
+ * The ui for TaskList that is in charge of displaying relevant messages to the user.
+ * */
+public class TaskListUi extends Ui {
+
+    /**
+     * Warn the user that the ID for deleting a task/marking a task as done is absent.
+     * */
+    public void absentIDMessage() {
+        System.out.println(formatMessage("Oops, the ID of the task does not exist!\n"));
     }
 
-
-    public void nonEmptyDescriptionMessage(String taskType) {
-        if(taskType.startsWith("a")|| taskType.startsWith("e") ||taskType.startsWith("i") ||
-                taskType.startsWith("o") || taskType.startsWith("u")) {
-            System.out.println(adapter.formatMessage("OOPS!!! The description of an " + taskType + " cannot be empty.\n"));
-        } else {
-            System.out.println(adapter.formatMessage("OOPS!!! The description of a " + taskType + " cannot be empty.\n"));
-        }
-    }
-
-    public void invalidDateFormMessage() {
-        System.out.println(adapter.formatMessage("Please enter a valid date in the format:/at yyyy-mm-dd!\n"));
-    }
-
-    public void cannotInterpretMessage() {
-        System.out.println(adapter.formatMessage("OOPS!!! I'm sorry, but I don't know what that means :-(\n"));
-    }
-
+    /**
+     * Remind the user that a task has been successfully added.
+     * @param userInputRecord the saved record.
+     * @param task the added task.
+     * */
     public void addMessage(ArrayList<Task> userInputRecord, Task task) {
-        System.out.println(adapter.formatMessage( "Got it. I've added this task:\n" +
-                FormatAdapter.getSubIndentation() + task + "\n" + FormatAdapter.getIndentation() +
+        System.out.println(formatMessage( "Got it. I've added this task:\n" +
+                getSubIndentation() + task + "\n" + getIndentation() +
                 "Now you have " + userInputRecord.size() + " tasks in the list.\n" ));
     }
 
-    public void markAsDoneMessage(ArrayList<Task> userInputRecord, int itemToComplete) {
-        System.out.println(adapter.formatMessage("Nice! I've marked this task as done:\n" +
-                FormatAdapter.getSubIndentation() + userInputRecord.get(itemToComplete) + "\n"));
+    /**
+     * Remind the user that the command cannot be interpreted.
+     * */
+    public void cannotInterpretMessage() {
+        System.out.println(formatMessage("OOPS!!! I'm sorry, but I don't know what that means :-(\n"));
     }
 
+    /**
+     * Remind the user that all messages in the record has been deleted.
+     * */
+    public void deleteAllMessage() {
+        System.out.println(formatMessage("All records deleted!\n"));
+    }
+
+    /**
+     * Remind the user that a task has been deleted.
+     * @param userInputRecord the saved record.
+     * @param itemDeleted the task deleted, by index.
+     * */
     public void deleteMessage(ArrayList<Task> userInputRecord, Task itemDeleted) {
-        System.out.println(adapter.formatMessage("Noted. I've removed this task:\n" +
-                FormatAdapter.getSubIndentation() + itemDeleted + "\n" + FormatAdapter.getIndentation() +
+        System.out.println(formatMessage("Noted. I've removed this task:\n" +
+                getSubIndentation() + itemDeleted + "\n" + getIndentation() +
                 "Now you have " + userInputRecord.size() + " tasks in the list.\n"));
     }
 
-    public void absentIDMessage() {
-        System.out.println(adapter.formatMessage("Oops, the ID of the task does not exist!\n"));
+    /**
+     * Remind the user that a task description is required.
+     * @param taskType the type of task specified by the user.
+     * */
+    public void nonEmptyDescriptionMessage(String taskType) {
+        if(taskType.startsWith("a")|| taskType.startsWith("e") ||taskType.startsWith("i") ||
+                taskType.startsWith("o") || taskType.startsWith("u")) {
+            System.out.println(formatMessage("OOPS!!! The description of an " + taskType + " cannot be empty.\n"));
+        } else {
+            System.out.println(formatMessage("OOPS!!! The description of a " + taskType + " cannot be empty.\n"));
+        }
     }
 
+    /**
+     * Warn the user that the date format is invalid (for deadline and event tasks only).
+     * */
+    public void invalidDateFormMessage() {
+        System.out.println(formatMessage("Please enter a valid date in the format:/at yyyy-mm-dd!\n"));
+    }
+
+    /**
+     * Warn the user that the ID for deleting a task/marking a task as done is invalid.
+     * */
     public void invalidIDMessage() {
-        System.out.println(adapter.formatMessage("Please enter a valid ID!\n"));
+        System.out.println(formatMessage("Please enter a valid ID!\n"));
     }
 
-    public void deleteAllMessage() {
-        System.out.println(adapter.formatMessage("All records deleted!\n"));
+    /**
+     * Remind the user that a task has been marked done.
+     * @param userInputRecord the saved record.
+     * @param itemToComplete the task marked done, by index.
+     * */
+    public void markAsDoneMessage(ArrayList<Task> userInputRecord, int itemToComplete) {
+        System.out.println(formatMessage("Nice! I've marked this task as done:\n" +
+                getSubIndentation() + userInputRecord.get(itemToComplete) + "\n"));
     }
 }

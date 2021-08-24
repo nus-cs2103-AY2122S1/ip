@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a task with a description and a status.
+ * */
 public class Task {
     private String taskTitle;
     private boolean isDone;
@@ -10,6 +13,14 @@ public class Task {
         this.isDone = false;
     }
 
+    public void setDone(boolean done) {
+        this.isDone = done;
+    }
+
+    /**
+     * Customize the string representation of a task object.
+     * @return string representation of a task in the form [][{X}] {description}
+     * */
     @Override
     public String toString() {
         if(isDone) {
@@ -17,9 +28,5 @@ public class Task {
         } else {
             return "[ ] " + taskTitle;
         }
-    }
-
-    public void setDone(boolean done) {
-        this.isDone = done;
     }
 }

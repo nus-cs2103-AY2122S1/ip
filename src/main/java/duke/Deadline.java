@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a specific type of Task with an additional deadline(ddl) field.
+ * */
 public class Deadline extends Task{
     private LocalDate ddl;
 
@@ -10,6 +13,10 @@ public class Deadline extends Task{
         this.ddl = ddl;
     }
 
+    /**
+     * Customize the string representation of a deadline object.
+     * @return string representation of a deadline in the form [D][{X}] {description} (by: {ddl})
+     * */
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + ddl.getMonth().toString() + " "  +
