@@ -21,8 +21,6 @@ public class Tasklist {
      * @param inputSplit Additional info such as description, completion status etc.
      * @return duke.task.Task that was added to the duke.general.Tasklist
      */
-
-    //TODO CAN BE VERY WRONG and CRAZY
     public Task addTask(TaskType t, String[] inputSplit) throws DukeException {
         Task temp;
         if (inputSplit.length < 2) {
