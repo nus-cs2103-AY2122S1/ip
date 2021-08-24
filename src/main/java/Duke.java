@@ -1,9 +1,16 @@
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+import java.nio.file.Files;
+
 
 public class Duke {
     static List<Task> listOfText2 = new ArrayList<>();
+    static String filepath = "";
 
     private static void bye() {
         System.out.println("Bye. Hope to see you again soon!");
@@ -16,7 +23,7 @@ public class Duke {
     private static void list(Task task) {
         listOfText2.add(task);
         int counter = listOfText2.size();
-
+        save();
         System.out.println("Got it. I've added this task:\n" + "  "+ task.toString() +"\nNow you have "+counter+" tasks in the list.");
     }
 
@@ -66,11 +73,47 @@ public class Duke {
     private static void deleteTask(int index) {
         Task item = listOfText2.get(index-1);
         listOfText2.remove(index-1);
+        save();
         System.out.println("Noted. I've removed this task:\n  " + item + "\nNow you have " + listOfText2.size() + " tasks left in the list");
+    }
+
+    private static void createFile() throws IOException{
+        Files.createDirectories(Paths.get("src/main/data"));
+        String directory = "src/main/data";
+        File file = new File("src/main/data/duke.txt");
+        if(!(file.exists())) {
+            file.createNewFile();
+
+        }
+        filepath = "src/main/data/duke.txt";
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void save() {
+        String temp = "";
+        for(int i = 0; i < listOfText2.size(); i++) {
+            temp = temp + listOfText2.get(i) +"\n";
+        }
+
+        try {
+            writeToFile(filepath, temp);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        try {
+            createFile();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         String input;
         while(!((input = sc.nextLine()).equals("bye"))) {
