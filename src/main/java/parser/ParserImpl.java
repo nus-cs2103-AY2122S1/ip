@@ -3,6 +3,7 @@ package parser;
 import dao.TaskDaoImpl;
 import logic.ICommandLogicUnit;
 import model.Command;
+import ui.IUi;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,19 +11,19 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import static util.Display.printIndexedList;
-import static util.Display.printSentence;
-
 /**
  * An entity that takes in the input from the console and parse it to valid command or throw exception
  * if the command is invalid
  */
-public class CommandParserImpl implements ICommandParser {
+public class ParserImpl implements IParser {
 	/** Scanner to take input from the console */
 	private final Scanner scanner = new Scanner(System.in);
 	
 	/** CommandLogicUnit to process all the commands */
 	private final ICommandLogicUnit commandLogicUnit;
+	
+	/** UI that is responsible for dealing with interactions with the user */
+	private final IUi ui;
 	
 	/** list of available commands and arguments that can be parsed */
 	private final List<String> availableCommands = List.of(
@@ -41,9 +42,11 @@ public class CommandParserImpl implements ICommandParser {
 	 * CommandProcessorImplementation that would parse the inputs into commands.
 	 *
 	 * @param commandLogicUnit CommandLogicUnit that would process the parsed input.
+	 * @param ui UI.
 	 */
-	public CommandParserImpl(ICommandLogicUnit commandLogicUnit) {
+	public ParserImpl(ICommandLogicUnit commandLogicUnit, IUi ui) {
 		this.commandLogicUnit = commandLogicUnit;
+		this.ui = ui;
 	}
 	
 	@Override
@@ -177,9 +180,9 @@ public class CommandParserImpl implements ICommandParser {
 			
 			break;
 		case "man":
-			printSentence("() -> optional parameter or format of date time\n" +
+			ui.printSentence("() -> optional parameter or format of date time\n" +
 					"# -> the parameter of the commands");
-			printIndexedList(availableCommands);
+			ui.printIndexedList(availableCommands);
 			break;
 		default:
 			logger.warning("Unknown command : " + parsedCommands.get(0) + "being parsed");
@@ -194,6 +197,6 @@ public class CommandParserImpl implements ICommandParser {
 	}
 	
 	private void processException(Exception e) {
-		printSentence("☹ OOPS!!! " + e.getMessage());
+		ui.printSentence("☹ OOPS!!! " + e.getMessage());
 	}
 }

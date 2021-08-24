@@ -3,7 +3,7 @@ package configuration;
 import java.nio.file.Paths;
 
 /**
- * Constant Settings that are used to configure Dude CLI chatbot.
+ * Constant Settings that are used to configure Dude CLI chatterbot.
  */
 public final class Setting {
 	/** Path to file containing the tasks */

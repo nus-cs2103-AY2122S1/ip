@@ -7,6 +7,7 @@ import model.Event;
 import model.Task;
 import model.TimedItem;
 import model.ToDos;
+import ui.IUi;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,9 +16,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static util.Display.printIndexedList;
-import static util.Display.printSentence;
-
 /**
  * Logic class that would handle all the logics and processing, together with the temporary data layer of the commands
  */
@@ -25,13 +23,17 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
 	/** Data access object for Task */
 	private final TaskDao taskDao;
 	
+	/** UI that is responsible to interacts with user */
+	private final IUi ui;
+	
 	/**
 	 * Constructor of CommandLogicUnitImpl that processes all the available commands.
 	 *
 	 * @param taskDao TaskDao.
 	 */
-	public CommandLogicUnitImpl(TaskDao taskDao) {
+	public CommandLogicUnitImpl(TaskDao taskDao, IUi ui) {
 		this.taskDao = taskDao;
+		this.ui = ui;
 	}
 	
 	@Override
@@ -80,12 +82,12 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
 			processDelete(Integer.parseInt(arguments.getOrDefault("index", "-1")) - 1);
 			break;
 		default:
-			printSentence("command not recognized by processor");
+			ui.printSentence("command not recognized by processor");
 		}
 	}
 	
 	private void processBye() {
-		printSentence(" Bye. Hope to see you again soon!");
+		ui.printSentence(" Bye. Hope to see you again soon!");
 		System.exit(0);
 	}
 	
@@ -94,19 +96,19 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
 	 */
 	private void processList(Optional<LocalDate> localDateOptional) {
 		localDateOptional.ifPresentOrElse(
-				x -> printIndexedList(taskDao.getAll()
+				x -> ui.printIndexedList(taskDao.getAll()
 						.stream()
 						.filter(task -> task instanceof TimedItem)
 						.filter(task -> ((TimedItem) task).getTime().toLocalDate().isEqual(x))
 						.collect(Collectors.toList())),
-				() -> printIndexedList(taskDao.getAll())
+				() -> ui.printIndexedList(taskDao.getAll())
 		);
 	}
 	
 	private void processAdd(Task task) {
 		taskDao.addTask(task);
 		
-		printSentence(" Got it. I've added this task: \n" +
+		ui.printSentence(" Got it. I've added this task: \n" +
 				"\t" + task.toString() + "\n" +
 				" Now you have " + taskDao.getSize() + " tasks in the list.");
 	}
@@ -119,7 +121,7 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
 	private void processDone(int index) {
 		taskDao.markDone(index);
 		
-		printSentence("Nice! I've marked this task as done: \n" +
+		ui.printSentence("Nice! I've marked this task as done: \n" +
 				"\t [X] " + taskDao.getTask(index).getDesc());
 	}
 	
@@ -131,7 +133,7 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
 	private void processDelete(int index) {
 		Task deletedTask = taskDao.deleteTask(index);
 		
-		printSentence(" Noted. I've removed this task: \n" +
+		ui.printSentence(" Noted. I've removed this task: \n" +
 				"\t" + deletedTask.toString() + "\n" +
 				" Now you have " + taskDao.getSize() + " tasks in the list.");
 	}
