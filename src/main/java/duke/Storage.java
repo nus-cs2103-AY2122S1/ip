@@ -19,6 +19,7 @@ public class Storage {
     /**
      * Loads the saved task list from file in hard disk into Duke.
      * @return the saved task list
+     * @throws DukeException If the file is not found
      */
     public TaskList load() throws DukeException {
         try {
