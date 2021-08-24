@@ -10,8 +10,8 @@ public class Parser {
      * command should be called.
      */
     public String checkForKeyword(String des) {
-        if (des.equals("allCmd")) {
-            return "allCmd";
+        if (des.equals("help")) {
+            return "help";
         } else if (des.equals("bye")) {
             return "bye";
         } else if (des.equals("list")) {

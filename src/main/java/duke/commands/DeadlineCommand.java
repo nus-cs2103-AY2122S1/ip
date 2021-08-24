@@ -29,6 +29,9 @@ public class DeadlineCommand extends Command {
             throw new DukeException("\"deadline\" command not correctly formatted \nPlease do not forget to include \"by\" and insert due date argument");
         }
         try {
+            if (des.chars().filter(c -> c == '/').count() > 1) {
+                throw new DukeException("Format Error. Do not use the special character \"/\" within your task description.");
+            }
             String description = des.substring(9, des.indexOf('/') - 1);
             LocalDate date = Storage.extractDate(des);
             LocalTime time = Storage.extractTimeDeadline(des);

@@ -9,7 +9,7 @@ package duke.tasks;
  * (iv) gets task isDone attribute
  * (v) overrides the default toString method to display the status and description
  */
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 

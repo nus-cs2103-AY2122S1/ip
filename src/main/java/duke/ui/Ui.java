@@ -58,7 +58,7 @@ public class Ui {
                         break;
                     }
 
-                    if (command.equals("allCmd")) {
+                    if (command.equals("help")) {
                         c = new HelpCommand();
                     }
 
