@@ -53,7 +53,8 @@ public class Blue {
         EventHandler eventHandler = new EventHandler(tasks);
         DoneHandler doneHandler = new DoneHandler(tasks);
         DeleteHandler deleteHandler = new DeleteHandler(tasks);
-
+        FindHandler findHandler = new FindHandler(tasks);
+        
         // put the handlers into HashMap
         commandHandlers = new HashMap<>();
         commandHandlers.put(Command.LIST, listHandler);
@@ -62,6 +63,7 @@ public class Blue {
         commandHandlers.put(Command.EVENT, eventHandler);
         commandHandlers.put(Command.DONE, doneHandler);
         commandHandlers.put(Command.DELETE, deleteHandler);
+        commandHandlers.put(Command.FIND, findHandler);
     }
 
     private boolean canHandle(String input) {
