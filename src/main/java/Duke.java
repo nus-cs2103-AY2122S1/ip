@@ -1,5 +1,8 @@
 package main.java;
 
+import main.java.tasklist.TaskList;
+import main.java.ui.Ui;
+
 public class Duke {
 
     /**
@@ -7,8 +10,8 @@ public class Duke {
      * @param args empty args.
      */
     public static void main(String[] args) {
-        DukeMessages messages = new DukeMessages();
-        DukeEngine engine = new DukeEngine();
+        Ui messages = new Ui();
+        TaskList engine = new TaskList();
 
         messages.welcomeMessage();
         engine.runProgram();

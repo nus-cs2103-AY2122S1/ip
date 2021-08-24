@@ -1,4 +1,17 @@
-package main.java;
+package main.java.tasklist;
+
+import main.java.exception.DescriptionException;
+import main.java.exception.DukeException;
+import main.java.exception.InvalidCommandException;
+import main.java.exception.CommandException;
+import main.java.exception.TaskNumberException;
+import main.java.parser.Parser;
+import main.java.storage.Storage;
+import main.java.task.Deadline;
+import main.java.task.Event;
+import main.java.task.Task;
+import main.java.task.Todo;
+import main.java.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -8,9 +21,10 @@ import java.util.Scanner;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class DukeEngine {
-    private final DukeMessages messages = new DukeMessages();
-    private final DatabaseEngine databaseEngine = new DatabaseEngine();
+
+public class TaskList {
+    private final Ui messages = new Ui();
+    private final Storage databaseEngine = new Storage();
 
     private List<Task> taskList = new ArrayList<Task>();
 
@@ -34,7 +48,7 @@ public class DukeEngine {
             input = sc.nextLine().trim();
 
             //removes space in the command input and stores the strings in an array
-            String[] inputArr = input.split(" ");
+            String[] inputArr = Parser.sanitizeInput(input);
 
             if (input.equals("bye")) {
                 break;

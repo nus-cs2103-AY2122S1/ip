@@ -1,4 +1,4 @@
-package main.java;
+package main.java.exception;
 
 
 public class CommandException extends DukeException {

@@ -1,4 +1,6 @@
-package main.java;
+package main.java.task;
+
+import main.java.task.Task;
 
 public class Todo extends Task {
 

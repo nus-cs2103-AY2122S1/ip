@@ -1,4 +1,4 @@
-package main.java;
+package main.java.task;
 
 
 public class Task {
@@ -14,7 +14,6 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
-
     /**
      * Gets the status of the current task object
      * @return the string status where X means done and blank is not done
@@ -36,6 +35,10 @@ public class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     @Override

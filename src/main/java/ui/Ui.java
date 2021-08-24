@@ -1,8 +1,10 @@
-package main.java;
+package main.java.ui;
+
+import main.java.task.Task;
 
 import java.util.List;
 
-public class DukeMessages {
+public class Ui {
     private final String welcomeMessage = "Hello! I'm Duke\n" + "What can I do for you?";
     private final String borderLine = "\n____________________________________________________________\n";
     private final String goodbyeMessage = "Bye. Hope to see you again soon!";

@@ -1,4 +1,10 @@
-package main.java;
+package main.java.storage;
+
+import main.java.task.Deadline;
+import main.java.task.Event;
+import main.java.task.Task;
+import main.java.task.Todo;
+import main.java.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,17 +20,17 @@ import java.util.Base64;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class DatabaseEngine {
+public class Storage {
 
 
     private Path dir;
     private Path fileDir;
-    private DukeMessages messages = new DukeMessages();
+    private Ui messages = new Ui();
 
     /**
      * Constructor of DatabaseEngine.
      */
-    public DatabaseEngine() {
+    public Storage() {
         this.dir = Paths.get(System.getProperty("user.dir"), "database");
         this.fileDir = Paths.get(System.getProperty("user.dir"), "database", "database.txt");
     }
@@ -46,20 +52,20 @@ public class DatabaseEngine {
                     Deadline deadlineTask = (Deadline) task;
                     String encodedString = Base64.getEncoder().encodeToString(deadlineTask.getDescription().getBytes());
 
-                    line += "deadline " + deadlineTask.isDone + " " + deadlineTask.getBy() + " " + encodedString;
+                    line += "deadline " + deadlineTask.getIsDone() + " " + deadlineTask.getBy() + " " + encodedString;
 
                 } else if (task instanceof Event) {
                     Event eventTask = (Event) task;
                     String encodedDescription = Base64.getEncoder().encodeToString(eventTask.getDescription().getBytes());
                     String encodedAt = Base64.getEncoder().encodeToString(eventTask.getAt().getBytes());
 
-                    line += "event " + eventTask.isDone + " " + encodedAt + " " + encodedDescription;
+                    line += "event " + eventTask.getIsDone() + " " + encodedAt + " " + encodedDescription;
 
                 } else {
                     //task instance of Todo
                     String encodedString = Base64.getEncoder().encodeToString(task.getDescription().getBytes());
 
-                    line += "todo " + task.isDone + " " + encodedString;
+                    line += "todo " + task.getIsDone() + " " + encodedString;
                 }
 
                 line += "\n";
