@@ -1,38 +1,46 @@
 import java.util.*;
 
 public class Blue {
-    private static final String LOGO = " ____  _                \n"
-            + "|  . \\| | _   _   ____  \n"
-            + "|____/| || | | | /  _  \\\n"
-            + "|  . \\| || |_| ||   ___/\n"
-            + "|____/|_||_____| \\_____/\n";
-    private static final String GREET_CONTENT = "Hello! I'm Blue\n" + "What can I do for you?";
-    private static final String EXIT_CONTENT = "Bye. Hope to never see you again!";
-    private static final TaskList taskList = new TaskList();
-    private static final ListHandler listHandler = new ListHandler(taskList);
-    private static final ToDoHandler toDoHandler = new ToDoHandler(taskList);
-    private static final DeadlineHandler deadlineHandler = new DeadlineHandler(taskList);
-    private static final EventHandler eventHandler = new EventHandler(taskList);
-    private static final DoneHandler doneHandler = new DoneHandler(taskList);
-    private static final DeleteHandler deleteHandler = new DeleteHandler(taskList);
-    private static final HashMap<String, CommandHandler> commandHandlers = new HashMap<>();
+    private final Storage storage;
+    private TaskList tasks;
+    private final Ui ui;
+    private HashMap<String, CommandHandler> commandHandlers;
 
+    public Blue(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (BlueException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
 
-    public static void main(String[] args) {
-        System.out.println(LOGO);
+    public void run() {
         initCommandHandlers();
-        greet();
+        ui.showLogo();
+        ui.greet();
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String input = scanner.nextLine();
             boolean shouldContinue = handle(input);
-            if (!shouldContinue)
+            storage.save(tasks);
+            if (!shouldContinue) {
                 break;
+            }
         }
         scanner.close();
     }
 
-    private static void initCommandHandlers() {
+    private void initCommandHandlers() {
+        commandHandlers = new HashMap<>();
+        ListHandler listHandler = new ListHandler(tasks);
+        ToDoHandler toDoHandler = new ToDoHandler(tasks);
+        DeadlineHandler deadlineHandler = new DeadlineHandler(tasks);
+        EventHandler eventHandler = new EventHandler(tasks);
+        DoneHandler doneHandler = new DoneHandler(tasks);
+        DeleteHandler deleteHandler = new DeleteHandler(tasks);
         commandHandlers.put(Command.LIST, listHandler);
         commandHandlers.put(Command.TODO, toDoHandler);
         commandHandlers.put(Command.DEADLINE, deadlineHandler);
@@ -41,40 +49,35 @@ public class Blue {
         commandHandlers.put(Command.DELETE, deleteHandler);
     }
 
-    private static void greet() {
-        speak(GREET_CONTENT);
-    }
-
-    private static boolean handle(String input) {
+    private boolean handle(String input) {
         String command = getCommand(input);
         if (command.equals(Command.EXIT)) {
-            speak(EXIT_CONTENT);
+            ui.goodbye();
             return false;
         }
         if (commandHandlers.containsKey(command)) {
             CommandHandler commandHandler = commandHandlers.get(command);
             try {
-                speak(commandHandler.handle(input));
+                String response = commandHandler.handle(input);
+                ui.speak(response);
             } catch (BlueException e) {
-                speak(e.getMessage());
+                ui.speak(e.getMessage());
             }
         } else {
-            speak("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            ui.confused();
         }
         return true;
     }
 
-    private static String getCommand(String input) {
-        if (input.length() > 0)
+    private String getCommand(String input) {
+        if (input.length() > 0) {
             return input.split(" ")[0];
-        else
+        } else {
             return "";
+        }
     }
 
-    private static void speak(String content) {
-        String line = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-        System.out.println(line);
-        System.out.println(content);
-        System.out.println(line);
+    public static void main(String[] args) {
+        new Blue("data/tasks.txt").run();
     }
 }
