@@ -65,7 +65,7 @@ public class Task {
 
   private static String[] separateDetails(String str, String key)
       throws NoDescriptionException {
-    if (str.split(key).length == 1) {
+    if (str.split(key).length <= 1) {
       throw new NoDescriptionException("Oops! Please use the correct format with " + key + " to indicate\ndatetime");
     }
     return str.split(key);
