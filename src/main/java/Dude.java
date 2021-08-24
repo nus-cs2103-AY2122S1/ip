@@ -10,13 +10,16 @@ import ui.UiImpl;
 import java.util.Scanner;
 
 /**
- * main driver program
+ * Main driver program.
  */
 public class Dude {
 	/** Scanner to take input from the console */
 	private final Scanner scanner = new Scanner(System.in);
 	
+	/** Logic Unit to process all the commands */
 	private final ICommandLogicUnit commandLogicUnit;
+	
+	/** UI class responsible for the interaction and display with user */
 	private final IUi ui;
 	
 	public Dude(ICommandLogicUnit commandLogicUnit, IUi ui) {
