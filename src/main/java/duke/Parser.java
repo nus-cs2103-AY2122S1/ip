@@ -20,6 +20,8 @@ public class Parser {
             return new String[]{ "delete", str[1] };
         case "list":
             return new String[]{ "list" };
+        case "find":
+            return new String[] { "find", str[1] };
         default:
             String task = str[1];
             if (arg.equals("todo")) {

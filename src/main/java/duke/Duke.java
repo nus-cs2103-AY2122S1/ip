@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * A human wannabe frog chat bot who can help keep track of tasks.
@@ -63,6 +64,10 @@ public class Duke {
             break;
         case "list":
             ui.showListMessage(tasks);
+            break;
+        case "find":
+            ArrayList<Integer> matches = this.tasks.findTask(args[1]);
+            ui.showFindMessage(tasks, matches);
             break;
         case "todo":
             tasks.add(new ToDo(args[1]));
