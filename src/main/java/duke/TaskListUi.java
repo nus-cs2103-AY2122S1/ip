@@ -18,7 +18,7 @@ public class TaskListUi extends Ui {
      * Remind the user that a task has been successfully added.
      *
      * @param userInputRecords the saved record.
-     * @param task            the added task.
+     * @param task             the added task.
      */
     public void addMessage(ArrayList<Task> userInputRecords, Task task) {
         System.out.println(formatMessage("Got it. I've added this task:\n" +
@@ -44,7 +44,7 @@ public class TaskListUi extends Ui {
      * Remind the user that a task has been deleted.
      *
      * @param userInputRecords the saved record.
-     * @param itemDeleted     the task deleted, by index.
+     * @param itemDeleted      the task deleted, by index.
      */
     public void deleteMessage(ArrayList<Task> userInputRecords, Task itemDeleted) {
         System.out.println(formatMessage("Noted. I've removed this task:\n" +
@@ -84,10 +84,26 @@ public class TaskListUi extends Ui {
      * Remind the user that a task has been marked done.
      *
      * @param userInputRecords the saved record.
-     * @param itemToComplete  the task marked done, by index.
+     * @param itemToComplete   the task marked done, by index.
      */
     public void markAsDoneMessage(ArrayList<Task> userInputRecords, int itemToComplete) {
         System.out.println(formatMessage("Nice! I've marked this task as done:\n" +
                 getSubIndentation() + userInputRecords.get(itemToComplete) + "\n"));
+    }
+
+    /**
+     * Show the search result.
+     */
+    public void printSearchResult(ArrayList<Task> searchResult, String keyword) {
+        if (searchResult.isEmpty()) {
+            System.out.println(formatMessage("Oops,there is no record for the keyword " + keyword + "\n"));
+        } else {
+            System.out.println("    ____________________________________________________________");
+            System.out.println("     Here are the matching tasks in your list:");
+            for (int i = 0; i < searchResult.size(); i++) {
+                System.out.println("     " + (i + 1) + "." + searchResult.get(i));
+            }
+            System.out.println("    ____________________________________________________________");
+        }
     }
 }

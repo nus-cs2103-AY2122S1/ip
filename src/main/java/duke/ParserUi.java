@@ -15,7 +15,7 @@ public class ParserUi extends Ui {
     }
 
     /**
-     * Show the user the list of events saved at .../data/record.
+     * Show the list of events saved at .../data/record.
      */
     public void printUserInputRecord(ArrayList<Task> userInputRecords) {
         if (userInputRecords.isEmpty()) {

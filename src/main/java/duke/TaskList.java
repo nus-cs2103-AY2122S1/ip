@@ -20,7 +20,7 @@ public class TaskList {
     /**
      * Add the user's input to the saved record only if the user's input is of a specific form.
      *
-     * @param userInput       input from the user.
+     * @param userInput        input from the user.
      * @param userInputRecords the saved record.
      */
     public void add(String userInput, ArrayList<Task> userInputRecords) {
@@ -70,7 +70,7 @@ public class TaskList {
     /**
      * Delete the user-specified event, according to the task index.
      *
-     * @param userInput       input from the user.
+     * @param userInput        input from the user.
      * @param userInputRecords the saved record.
      */
     public void delete(String userInput, ArrayList<Task> userInputRecords) {
@@ -102,7 +102,7 @@ public class TaskList {
     /**
      * Mark the user-specified event as done, according to the task index.
      *
-     * @param userInput       input from the user.
+     * @param userInput        input from the user.
      * @param userInputRecords the saved record.
      */
     public void markAsDone(String userInput, ArrayList<Task> userInputRecords) {
@@ -118,5 +118,25 @@ public class TaskList {
         } catch (NumberFormatException e) {
             ui.invalidIdMessage();
         }
+    }
+
+    /**
+     * Search for the events according to the user-specified keyword.
+     *
+     * @param userInput        input from the user.
+     * @param userInputRecords the saved record.
+     * @return Search result (for testing purposes)
+     */
+    public ArrayList<Task> search(String userInput, ArrayList<Task> userInputRecords) {
+        String keyword = userInput.replace("find", "").trim();
+        ArrayList<Task> searchResult = new ArrayList<>();
+        for (Task userInputRecord : userInputRecords) {
+            String taskTitle = userInputRecord.getTaskTitle();
+            if (taskTitle.contains(keyword)) {
+                searchResult.add(userInputRecord);
+            }
+        }
+        ui.printSearchResult(searchResult, keyword);
+        return searchResult;
     }
 }

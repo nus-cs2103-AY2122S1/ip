@@ -7,8 +7,8 @@ import java.util.Scanner;
  */
 
 public class Parser {
-    private TaskList tasks;
-    private ParserUi ui;
+    private final TaskList tasks;
+    private final ParserUi ui;
 
     public Parser(TaskList tasks) {
         this.tasks = tasks;
@@ -79,6 +79,8 @@ public class Parser {
                 tasks.getStorage().save(userInput);
             } else if (userInput.startsWith("load ")) {
                 tasks.getStorage().load(userInput);
+            } else if (userInput.startsWith("find")) {
+                tasks.search(userInput, tasks.getStorage().getUserInputRecords());
             } else {
                 tasks.add(userInput, tasks.getStorage().getUserInputRecords());
             }

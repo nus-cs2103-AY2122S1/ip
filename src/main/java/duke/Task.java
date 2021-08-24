@@ -17,6 +17,10 @@ public class Task {
         this.isDone = done;
     }
 
+    public String getTaskTitle() {
+        return taskTitle;
+    }
+
     /**
      * Customize the string representation of a task object.
      *
