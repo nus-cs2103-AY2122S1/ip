@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a list of tasks that can perform operations such as delete, add and list.
+ * Represents a list of tasks that can perform operations such as delete and add.
  */
 public class TaskList {
     private List<Task> tasks;
