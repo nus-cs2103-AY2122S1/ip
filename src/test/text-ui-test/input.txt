@@ -5,9 +5,10 @@ done 1
 todo join sports club
 done 4
 todo borrow book
-deadline return book /by 22-09-2020 1615
-event project meeting /at 23-08-2020 1800
+deadline return other book /by 22-09-2020 1615
+event boring project meeting /at 23-08-2020 1800
 list
+find book
 delete 3
 list
 bye

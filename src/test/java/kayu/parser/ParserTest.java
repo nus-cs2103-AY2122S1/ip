@@ -2,6 +2,7 @@ package kayu.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static kayu.commands.CommandType.FIND;
 
 import kayu.commands.ByeCommand;
 import kayu.commands.Command;
@@ -10,6 +11,7 @@ import kayu.commands.DeadlineCommand;
 import kayu.commands.DeleteCommand;
 import kayu.commands.DoneCommand;
 import kayu.commands.EventCommand;
+import kayu.commands.FindCommand;
 import kayu.commands.ListCommand;
 import kayu.commands.TodoCommand;
 import org.junit.jupiter.api.Test;
@@ -44,6 +46,16 @@ public class ParserTest {
         
         assertEquals(CommandType.DONE, command.getCommandType());
         assertEquals(numberString, command.getCommandParams());
+    }
+
+    @Test
+    public void testParseWithFind() {
+        String keyword = "test";
+        String input = FindCommand.COMMAND_WORD + ' ' + keyword;
+        Command command = parser.parseToCommand(input);
+
+        assertEquals(FIND, command.getCommandType());
+        assertEquals(keyword, command.getCommandParams());
     }
     
     @Test

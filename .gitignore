@@ -13,7 +13,7 @@
 *.iml
 
 # Text ui tests
-/src/test/text-ui-test/data/kayu.txt
+/src/test/text-ui-test/data/
 /src/test/text-ui-test/ACTUAL.txt
 /src/test/text-ui-test/ACTUAL_EXCEPTION.txt
 /src/test/text-ui-test/EXPECTED-UNIX.TXT
