@@ -2,6 +2,7 @@ package duke.storage;
 
 import duke.TaskArrayList;
 import duke.exceptions.DukeException;
+import duke.exceptions.DukeReadSaveException;
 import duke.tasks.Task;
 
 import java.io.IOException;
@@ -39,7 +40,11 @@ public class Storage {
         Scanner sc = new Scanner(path);
         SaveParser saveParser = new SaveParser(sc);
         while (saveParser.hasNextLine()) {
-            taskList.add(saveParser.getNextTask());
+            try {
+                taskList.add(saveParser.getNextTask());
+            } catch (DukeReadSaveException e) {
+                // skip corrupted save block
+            }
         }
         return taskList;
     }
