@@ -83,16 +83,16 @@ Yoyo doesn't understand what you mean :-(
 Yoyo doesn't understand what you mean :-(
 ============================================================
 ============================================================
-Please enter a valid index!
+Please enter A valid task index!
 ============================================================
 ============================================================
-Please enter a valid index!
+Please enter A valid task index!
 ============================================================
 ============================================================
-Please enter a valid index!
+Please enter A valid task index!
 ============================================================
 ============================================================
-Please enter a valid index!
+Please enter A valid task index!
 ============================================================
 ============================================================
 You have not entered enough information for your command.
