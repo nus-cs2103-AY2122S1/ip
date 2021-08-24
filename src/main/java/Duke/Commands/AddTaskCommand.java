@@ -3,6 +3,8 @@ package Duke.Commands;
 import Duke.Duke;
 import Duke.Task.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,17 +37,23 @@ class AddTaskCommand extends Command {
 
     private static Task createTask(Duke.UserInput input) throws InvalidTaskException {
         TaskType taskType = TaskType.valueOf(input.getKeyword().toUpperCase());
-        switch (taskType) {
-            case TODO:
-                return new Todo(input.getArgs());
-            case DEADLINE: {
-                String[] splitInput = input.getArgs().split(DEADLINE_BY_REGEX, 2);
-                return new Deadline(splitInput[0], splitInput.length > 1 ? splitInput[1] : "");
+        try {
+            switch (taskType) {
+                case TODO:
+                    return new Todo(input.getArgs());
+                case DEADLINE: {
+                    String[] splitInput = input.getArgs().split(DEADLINE_BY_REGEX, 2);
+                    String dateString = splitInput.length > 1 ? splitInput[1] : "";
+                    return new Deadline(splitInput[0], LocalDate.parse(dateString));
+                }
+                case EVENT: {
+                    String[] splitInput = input.getArgs().split(EVENT_AT_REGEX, 2);
+                    String dateString = splitInput.length > 1 ? splitInput[1] : "";
+                    return new Event(splitInput[0], LocalDate.parse(dateString));
+                }
             }
-            case EVENT: {
-                String[] splitInput = input.getArgs().split(EVENT_AT_REGEX, 2);
-                return new Event(splitInput[0], splitInput.length > 1 ? splitInput[1] : "");
-            }
+        } catch (DateTimeParseException e) {
+            throw new InvalidTaskException("Invalid date provided", e);
         }
 
         throw new InvalidTaskException("Invalid task type");
