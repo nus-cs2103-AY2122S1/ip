@@ -14,7 +14,7 @@ import java.io.IOException;
 public class Storage {
     
     private String filePath;
-    private ArrayList<Task> taskArr;
+    public ArrayList<Task> taskArr;
     
     public Storage(String filePath) {
         this.filePath = filePath;
