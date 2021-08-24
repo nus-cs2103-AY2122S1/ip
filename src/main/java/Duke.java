@@ -17,7 +17,7 @@ public class Duke {
         try {
             DukeFileIO.readPastData();
         } catch(FileNotFoundException e) {
-            System.out.println("Missing File");
+            DukeFileIO.createDataFile();
         }
         scanner = new Scanner(System.in);
         getCommand();
