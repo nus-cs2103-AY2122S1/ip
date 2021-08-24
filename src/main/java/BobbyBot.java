@@ -1,18 +1,67 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 public class BobbyBot {
     private static final List<Task> tasks = new ArrayList<Task>();
     private static final String div = "____________________________________________________________\n";
     private static int totalTasks = 0;
     private static final BotCommand[] acceptedCommands = BotCommand.values();
+    private static final String DBPATH = "data/database.txt";
 
-    public BobbyBot() {
+    public BobbyBot()  {
         System.out.println(div + "Hello! I'm Bobby\nWhat can I do for you?\n" + div);
+        File f = new File(DBPATH);
+        try {
+            if (f.isFile() && !f.isDirectory()) {
+                // load it if file exits
+                System.out.println("Loading saved tasks...");
+                load(f);
+            } else if (!f.isFile()) {
+                //create new file if file does not exist
+                System.out.println("No previously saved tasks.");
+                f.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Load tasks in BobbyBot from hardcoded text file
+     */
+    private void load(File f) throws FileNotFoundException {
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            String[] row = s.nextLine().split(",");
+            totalTasks += 1;
+            // load row into task
+            switch (row[0]) {
+            // data format: [type],[isDone],[desc],[period]
+            case "T":
+                // load task
+                tasks.add(new ToDo(row[2], row[1].equals("1")));
+                break;
+            case "D":
+                // load deadline
+                tasks.add(new Deadline(row[2], row[3], row[1].equals("1")));
+                break;
+            case "E":
+                // load event
+                tasks.add(new Event(row[2], row[3], row[1].equals("1")));
+                break;
+            }
+        }
+    }
+    /**
+     * Save tasks in BobbyBot to hardcoded text file
+     */
+    public void save() {
+        // save all tasks in hardcoded text file
+
+    }
     /**
      * Perform command based on String user input
      * @param userInput string command for chatbot

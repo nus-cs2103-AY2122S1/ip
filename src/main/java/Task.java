@@ -14,9 +14,6 @@ public class Task {
         isDone = false;
     }
 
-    public Task(String description, boolean isDone) {
-
-    }
     /**
      * Getter for isDone status
      * @return "X" or " "
