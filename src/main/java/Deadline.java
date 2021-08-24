@@ -15,6 +15,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String outputFormat() {
+        return "D" + super.outputFormat() + " | " + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
+                + ", " + time.format(DateTimeFormatter.ofPattern("hh:mm a"));
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
                 + ", " + time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";

@@ -13,7 +13,10 @@ public abstract class Task {
 
     public void markTaskDone() {
         this.isDone = true;
-        System.out.println(this);
+    }
+
+    public String outputFormat() {
+        return " | " + (this.isDone ? "1" : "0") + " | " + this.description;
     }
 
     @Override

@@ -1,12 +1,16 @@
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static final String NAME = "Tze Henn";
     private static final ArrayList<Task> list = new ArrayList<>();
+    private static final String FILE_PATH = "data.txt";
 
     enum Commands {
         BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT
@@ -35,6 +39,7 @@ public class Duke {
         String[] splitStr = input.split("\\s+");
         System.out.print("  ");
         list.get(Integer.parseInt(splitStr[1]) - 1).markTaskDone();
+        System.out.println(list.get(Integer.parseInt(splitStr[1]) - 1));
     }
 
     /**
@@ -158,10 +163,14 @@ public class Duke {
             System.out.println("What can I do for you?");
             lineGenerator();
 
+            try {
+                readFromDisk();
+            } catch (FileNotFoundException e) {
+                System.out.println("No past data found.");
+            }
             Scanner sc = new Scanner(System.in);
             System.out.print("\nEnter command: ");
             String input = sc.nextLine();
-
 
             while (!input.equals(Commands.BYE.toString().toLowerCase())) {
                 lineGenerator();
@@ -185,15 +194,51 @@ public class Duke {
                     addTask(t);
                 }
                 lineGenerator();
+                try {
+                    saveToDisk();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
                 System.out.print("\nEnter command: ");
                 input = sc.nextLine();
             }
             byeCommand();
         } catch (DukeException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             lineGenerator();
         }
     }
+
+    public static void saveToDisk() throws IOException {
+        FileWriter fw = new FileWriter(FILE_PATH);
+        for (Task t : list) {
+            fw.write(t.outputFormat() + '\n');
+        }
+        fw.close();
+     }
+
+     public static void readFromDisk() throws FileNotFoundException {
+         File f = new File(FILE_PATH);
+         Scanner sc = new Scanner(f); // create a Scanner using the File as the source
+         while (sc.hasNext()) {
+             String input = sc.nextLine();
+             String[] splitStr = input.split("\\|");
+             Task t;
+             if (splitStr[0].trim().equals("T")) {
+                 t = new Todo(splitStr[2].trim());
+             } else if (splitStr[0].trim().equals("E")) {
+                 String[] dateTime = splitStr[3].trim().split("\\s+");
+                 t = new Event(splitStr[2].trim(), timeFormatter(dateTime[1]), dateFormatter(dateTime[0]));
+             } else {
+                 String[] dateTime = splitStr[3].trim().split("\\s+");
+                 t = new Deadline(splitStr[2].trim(), timeFormatter(dateTime[1]), dateFormatter(dateTime[0]));
+             }
+             list.add(t);
+             if (splitStr[1].trim().equals("1")) {
+                 t.markTaskDone();
+             }
+         }
+     }
 
     public static void main(String[] args) {
         run();
