@@ -223,8 +223,8 @@ public class Duke {
 
     /**
      * Converts a date from String class to LocalDateTime class
-     * @param str
-     * @return
+     * @param str The String representation of a date
+     * @return LocalDateTime representation of the date.
      */
     public static LocalDateTime stringToDate(String str) {
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
