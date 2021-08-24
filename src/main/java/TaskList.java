@@ -46,7 +46,7 @@ public class TaskList {
                     newTask.markCompleted();
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -121,7 +121,7 @@ public class TaskList {
         return Integer.toString(this.taskList.size());
     }
 
-    private void updateTextFile() {
+    private void updateTextFile(){
         try {
             String path = new File("").getAbsolutePath() + "/data/bob.txt";
             FileWriter writer = new FileWriter(path);
