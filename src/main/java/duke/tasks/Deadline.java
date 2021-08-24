@@ -7,10 +7,14 @@ import java.time.DateTimeException;
 
 public class Deadline extends Task {
 
+    /**
+     * Instantiates a blank Deadline.
+     */
     public Deadline() {}
-    public Deadline(String desc) {
-        super(desc);
-    }
+
+    /**
+     * Instantiates a Deadline based on a database entry.
+     */
     public Deadline(String entry, boolean done) throws DukeException {
         try {
             String[] args = entry.split("( \\| )", 3);
@@ -24,6 +28,12 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Adds a time to the deadline.
+     *
+     * @param rawArgs Argument of the format "DATE_TIME / ADDITIONAL_INFO".
+     * @throws DukeException
+     */
     public void addTime(String rawArgs) throws DukeException {
         String[] args = rawArgs.split(" / ");
         if (args.length == 0) return;
@@ -34,12 +44,16 @@ public class Deadline extends Task {
             details = rawArgs;
         }
     }
-    
+
+    /**
+     * Returns this deadline formatted as a database entry.
+     *
+     * @return String representing this deadline in database format.
+     */
     public String toDB() {
         // return String.format("D | %d | %s | %s", super.done ? 1 : 0, super.desc, dl);
         return String.format("D | %d | %s | %s | %s", super.done ? 1 : 0, super.desc,
-                dateTime.format(DukeDateTime.Format.DATE_LONG, DukeDateTime.Format.PRINT_TIME),
-                details);
+                dateTime.format(DukeDateTime.Format.DATE_LONG, DukeDateTime.Format.PRINT_TIME), details);
     }
 
     @Override

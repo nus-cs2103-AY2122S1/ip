@@ -7,11 +7,11 @@ import duke.tasks.Todo;
 import duke.utils.DukeException;
 
 import java.io.File;
-import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.List;
+import java.util.Scanner;
 
 public class Storage {
     public final static DukeException ERROR_DB = new DukeException("Error loading database.");

@@ -6,7 +6,6 @@ import duke.utils.Record;
 import java.util.Scanner;
 
 public class Duke {
-
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,8 +17,8 @@ public class Duke {
         /* Initialization */
         try {
             Scanner sc = new Scanner(System.in);
-            Parser inputH = new Parser();
-            Ui.reply(inputH.greet("").msg());
+            Parser inputH = new Parser(true);
+            Ui.reply(inputH.query("greet").msg());
             String input;
             while (true) {
                 try {

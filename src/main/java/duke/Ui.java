@@ -9,13 +9,24 @@ import java.util.Scanner;
 public class Ui {
     private final static File help = new File("help.txt");
     private final static String BORDERS = "\t____________________________________________________________";
-    public static void reply(String input) {
+
+    /**
+     * Prints reply to the user, enclosed above and below by borders.
+     *
+     * @param reply Reply to user.
+     */
+    public static void reply(String reply) {
         System.out.print(BORDERS);
         System.out.print("\n\t ");
-        System.out.println(input);
+        System.out.println(reply);
         System.out.println(BORDERS);
     }
-    
+
+    /** 
+     * Returns the Duke help manual as a formatted string.
+     * @return Duke help manual.
+     * @throws DukeException
+     */
     public static String help() throws DukeException {
         try {
             StringBuilder sb = new StringBuilder();

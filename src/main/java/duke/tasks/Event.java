@@ -9,10 +9,14 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private DukeDateTime end = new DukeDateTime();
 
+    /**
+     * Instantiates a blank Event.
+     */
     public Event() {}
-    public Event(String desc) {
-        super(desc);
-    }
+
+    /**
+     * Instantiates an Event based on a database entry.
+     */
     public Event(String entry, boolean done) throws DukeException {
         try {
             String[] args = entry.split("( \\| )", 4);
@@ -27,6 +31,12 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Adds a start and end time to the event.
+     * 
+     * @param rawArgs Argument of the format "START_DATE_TIME ~ END_DATE_TIME / ADDITIONAL_INFO".
+     * @throws DukeException
+     */
     public void addTime(String rawArgs) throws DukeException {
         String[] args = rawArgs.split(" / ");
         if (args.length == 0) return;
@@ -40,14 +50,19 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns this event formatted as a database entry.
+     * 
+     * @return String representing this event in database format.
+     */
     public String toDB() {
         DateTimeFormatter d = DateTimeFormatter.ofPattern("HH:mm");
         // return String.format("E | %d | %s | %s", super.done ? 1 : 0, super.desc, time);
-        return String.format("E | %d | %s | %s | %s | %s", super.done ? 1 : 0, super.desc, 
-                dateTime.format(DukeDateTime.Format.DATE_LONG, DukeDateTime.Format.PRINT_TIME), 
+        return String.format("E | %d | %s | %s | %s | %s", super.done ? 1 : 0, super.desc,
+                dateTime.format(DukeDateTime.Format.DATE_LONG, DukeDateTime.Format.PRINT_TIME),
                 end.format(DukeDateTime.Format.DATE_LONG, DukeDateTime.Format.TIME), details);
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (super.equals(obj)) {

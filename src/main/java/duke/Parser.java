@@ -16,11 +16,23 @@ public class Parser {
     
     private TaskList db;
     private HashMap<String, CheckedFunction<String, Record>> cmds = new HashMap<>();
-    
-    public Parser() throws DukeException {
-        this(new TaskList());
+
+    /**
+     * Creates a Parser which initializes a TaskList.
+     * 
+     * @param loadFromStorage Inform the TaskList whether to load tasks from storage.
+     * @throws DukeException
+     */
+    public Parser(boolean loadFromStorage) throws DukeException {
+        this(new TaskList(loadFromStorage));
     }
 
+    /**
+     * Creates a Parser with TaskList db and with the recognized commands.
+     * 
+     * @param db TaskList to be added.
+     * @throws DukeException
+     */
     public Parser(TaskList db) throws DukeException {
         this.db = db;
         cmds.put("greet", this::greet);
@@ -34,19 +46,13 @@ public class Parser {
         cmds.put("help", this::help);
         cmds.put("clear", this::clear);
     }
-    
-    private boolean verify() {
-        System.out.println("WARNING: This procedure is irreversible." +
-                "\n\t Are you sure about proceeding? [y/n]");
-        Scanner sc = new Scanner(System.in);
-        char response =  sc.hasNext() ? sc.next().charAt(0) : 'x';
-        while (response != 'y' || response != 'n') {
-            System.out.println("Are you sure about proceeding? [y/n]");
-            response =  sc.hasNext() ? sc.next().charAt(0) : 'x';
-        }
-        return response == 'y';
-    }
 
+    /**
+     * Takes in a command, and if command is found, passes to it the remaining arguments.
+     * @param input
+     * @return
+     * @throws DukeException
+     */
     public Record query(String input) throws DukeException {
         try {
             Scanner sc = new Scanner(input);
@@ -59,12 +65,24 @@ public class Parser {
         }
     }
 
-    public String sizeMsg() {
+    private String sizeMsg() {
         return "\n\t Now you have " + db.size() + String.format(" task%sin the list.", db.size() != 1 ? "s " : " ");
     }
 
-    public Record greet(String args) {
+    private Record greet(String args) {
         return new Record("Hello! I'm duke.Duke\n\t What can I do for you?");
+    }
+
+    private boolean verify() {
+        System.out.println("WARNING: This procedure is irreversible." +
+                "\n\t Are you sure about proceeding? [y/n]");
+        Scanner sc = new Scanner(System.in);
+        char response =  sc.hasNext() ? sc.next().charAt(0) : 'x';
+        while (response != 'y' || response != 'n') {
+            System.out.println("Are you sure about proceeding? [y/n]");
+            response =  sc.hasNext() ? sc.next().charAt(0) : 'x';
+        }
+        return response == 'y';
     }
 
     private Record bye(String args) throws DukeException {
