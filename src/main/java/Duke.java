@@ -1,6 +1,4 @@
 import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
@@ -12,6 +10,37 @@ public class Duke {
     private static final String WELCOME_LABEL = "Hello! I'm Banana \n" + "     What can I do for you?";
     private static final String BYE_LABEL = "Bye. Hope to see you again soon!";
 
+    private Storage store;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        try {
+            store = new Storage(filePath);
+            ui = new Ui();
+            tasks = new TaskList(store.load(
+                    new File(store.getFilePath())));
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void run() {
+        try {
+            Parser.displayLabel(WELCOME_LABEL);
+            while (true) {
+                String input = ui.getInput();;
+                if (input.equals("bye")) { break; }
+                Parser p = new Parser(input);
+                p.useInput(tasks);
+                writeToFile(input, tasks);
+            }
+            Parser.displayLabel(BYE_LABEL);
+        } catch (DukeException | IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,251 +48,51 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);*/
-
-        System.out.println(displayLabel(WELCOME_LABEL));
-        // for Level 2
-        ArrayList<String> items = new ArrayList<>();
-        // for Level 3 onwards
-        ArrayList<Task> tasks = new ArrayList<>();
-        try {
-            Scanner userInput = new Scanner(System.in);
-            tasks = assignTasks(getTasks(new File(
-                    "/Users/ravi57004/ip/src/main/java/Tasks.txt")));
-            while (true) {
-                    String input = userInput.nextLine();
-                    if (input.equals("bye")) {
-                        break;
-                    }
-                    Level8(input, tasks);
-            }
-            System.out.println(displayLabel(BYE_LABEL));
-        } catch (DukeException | IOException e) {
-            System.out.println(e.getMessage());
-        }
+        new Duke("/Users/ravi57004/ip/src/main/java/Tasks.txt").run();
     }
 
-    // displays the information keyed in with lines and indentation
-    public static String displayLabel(String information) {
-        String label = "    ____________________________________________________________\n" +
-                "     " +
-                information + "\n    " +
-                "____________________________________________________________\n";
-        return label;
-    }
-
-    // displays the information that was inputted,
-    public static void Level1(String input) {
-        System.out.println(displayLabel(input));
-    }
-
-    /* gets the items in the list when the user inputs list
-       For level 2, the parameter was an ArrayList<String>, but from
-       level 3 onwards, the parameter became ArrayList<? extends Object>
-       to cater to Strings and Task/Subclasses of Task.
-     */
-    public static String getItems(ArrayList<? extends Object> items) {
-        String collection = "";
-        for (int index = 0; index < items.size(); index++) {
-            if (index != 0) { collection += "     "; }
-            String info = "";
-            if (items.get(index) instanceof Task) {
-                info = items.get(index).toString();
-            } else {
-                info = (String) (" " + items.get(index));
-            }
-            collection += Integer.toString(index + 1) + "." + info;
-            if (index != items.size() - 1) {
-                collection += "\n";
-            }
-        }
-        return collection;
-    }
-
-    public static ArrayList<String> getTasks(File f) throws FileNotFoundException {
-        ArrayList<String> fileInfo = new ArrayList<>();
-        Scanner sc = new Scanner(f);
-        while (sc.hasNext()) {
-            fileInfo.add(sc.nextLine());
-        }
-        return fileInfo;
-    }
-
-    public static ArrayList<Task> assignTasks(ArrayList<String> fileText) {
-        ArrayList<Task> tasks = new ArrayList<>();
-        for (String strTask : fileText) {
-            String[] taskInfo = strTask.split(" ~ ");
-            Task newTask = new Task("");
-            if (taskInfo[0].equals("T")) {
-                newTask = new ToDo(taskInfo[2]);
-            } else if (taskInfo[0].equals("D")) {
-                newTask = new Deadline(taskInfo[2], taskInfo[3]);
-            } else if (taskInfo[0].equals("E")) {
-                newTask = new Event(taskInfo[2], taskInfo[3]);
-            } else {
-               newTask.newTask = taskInfo[1];
-            }
-            if (strTask.contains("Yes")) {
-                newTask.setIsDone();
-            }
-            tasks.add(newTask);
-        }
-        return tasks;
-    }
-
-    public static Task getDateAndTime(String[] info, String input, String type) {
-        String[] potentialDate = info[1].split(" ");
-        LocalDate date = null;
-        if (!getTime(potentialDate[0]).equals("")) {
-            info[1] = getTime(potentialDate[0]);
-        } else if (potentialDate.length > 1 &&
-                !getTime(potentialDate[1]).equals("")) {
-            potentialDate[1] = getTime(potentialDate[1]);
-            info[1] = potentialDate[0] + " " + potentialDate[1];
-        }
-        if (potentialDate.length > 1 && potentialDate[0].contains("/")) {
-            date = LocalDate.parse(parseDates(potentialDate[0]));
-        }
-        if (type.equals("deadline")) {
-            if (date != null) {
-                return new Deadline(info[0], date, potentialDate[1]);
-            } else {
-                return new Deadline(info[0], info[1]);
-            }
-        } else {
-            if (date != null) {
-                return new Event(info[0], date, potentialDate[1]);
-            } else {
-                return new Event(info[0], info[1]);
-            }
-        }
-    }
-
-    public static String parseDates(String date) {
-        String[] sep = date.split("/");
-        if (Integer.parseInt(sep[0]) < 10) {
-            sep[0] = "0" + sep[0];
-        }
-        return sep[2] + "-" + sep[1] + "-" + sep[0];
-    }
-
-    public static String getTime(String time) {
-        try {
-             int timeVal = Integer.parseInt(time) / 100;
-             if (timeVal > 12) { timeVal -= 12; }
-             return Integer.toString(timeVal) + "pm";
-        } catch (NumberFormatException e) {
-            return "";
-        }
-    }
-
-    /* adds the information that is inputted,
-     * and prints out all the information when list is inputted.
-     */
-    public static void Level2(String input, ArrayList<String> items) {
-        if (!input.equals("list")) {
-            items.add(input);
-            Level1("added: " + input);
-        } else {
-            String itemCollection = (String) getItems(items);
-            Level1(itemCollection);
-        }
-    }
-
-    // Adding onto Level 2, marks tasks as done.
-    public static void Level3(String input, ArrayList<Task> tasks) {
-        if (input.contains("done")) {
-            int index = Integer.parseInt(input.substring(5, 6)) - 1;
-            tasks.get(index).setIsDone();
-            Level1("Nice! I've marked this task as done: \n" +
-                    "       " + tasks.get(index).toString());
-        } else if (!input.equals("list")) {
-            tasks.add(new Task(input));
-            Level1("added: " + input);
-        }  else {
-            String itemCollection = getItems(tasks);
-            Level1("Here are the tasks in your list: \n"
-                    + "     " + itemCollection);
-        }
-    }
-
-    // Adding onto Level 3, handles subclasses of Tasks.txt.
-    public static void Level4(String input, ArrayList<Task> tasks) {
-        if (!input.equals("list") && !input.contains("done")) {
-            if (input.contains("todo")) {
-                String info = input.substring(5);
-                tasks.add(new ToDo(info));
-            } else if (input.contains("deadline")) {
-                String[] info = input.substring(9).split(" /by ");
-                tasks.add(getDateAndTime(info, input, "deadline"));
-            } else if (input.contains("event")) {
-                String[] info = input.substring(6).split(" /at ");
-                tasks.add(getDateAndTime(info, input, "event"));
-            } else {
-                tasks.add(new Task(input));
-            }
-            Level1("Got it. I've added this task:  \n" +
-                    "       " + tasks.get(tasks.size() - 1).toString() + "\n     Now you have "
-                    + Integer.toString(tasks.size()) + " tasks in the list.");
-        } else {
-            Level3(input, tasks);
-        }
-    }
-
-    // Adds onto Level 4, throws exceptions for inadequate words.
-    public static void Level5(String input, ArrayList<Task> tasks) throws DukeException {
-            if (input.equals("todo") || input.equals("event") || input.equals("deadline")) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-            } else if (input.equals("done")) {
-                throw new DukeException("☹ OOPS!!! The completed task number must be given.");
-            } else if (input.equals("delete")) {
-                throw new DukeException("☹ OOPS!!! You need to specify which task you want to delete.");
-            } else if (input.equals("blah")) {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            } else {
-                Level4(input, tasks);
-            }
-    }
-
-    // Adds onto Level 5 by deleting items.
-    public static void Level6(String input, ArrayList<Task> tasks) throws DukeException {
-            if (input.contains("delete")) {
-                int index = Integer.parseInt(input.substring(7, 8)) - 1;
-                Task removedTask = tasks.get(index);
-                tasks.remove(removedTask);
-                System.out.println(displayLabel("Noted. I've removed this task:  \n" +
-                        "       " + removedTask.toString() + "\n     Now you have "
-                        + Integer.toString(tasks.size()) + " tasks in the list."));
-            } else {
-                Level5(input, tasks);
-            }
-    }
-
-    public static void Level8(String input, ArrayList<Task> tasks) throws DukeException, IOException {
-        Level6(input, tasks);
+    public static void writeToFile(String input, TaskList tasks) throws DukeException, IOException {
         String text = "";
         FileWriter fw = new FileWriter("/Users/ravi57004/ip/src/main/java/Tasks.txt", false);
         if (!input.equals("bye")) {
-            for (Task task: tasks) {
+            for (int i = 0; i < tasks.size(); i++) {
                 String doneStr = "No";
-                if (task.getIsDone().equals("[X]")) {
+                if (tasks.getTask(i).getIsDone().equals("[X]")) {
                     doneStr = "Yes";
                 }
-                if (task instanceof ToDo) {
-                    text += "T ~ " + doneStr + " ~ " + task.newTask + "\n";
-                } else if (task instanceof Deadline) {
-                    Deadline dl = (Deadline) task;
-                    text += "D ~ " + doneStr + " ~ " + task.newTask + " ~ " + dl.getDeadLine() + "\n";
-                } else if (task instanceof Event) {
-                    Event ev = (Event) task;
-                    text += "E ~ " + doneStr + " ~ " + task.newTask + " ~ " + ev.getEvent() + "\n";
+                if (tasks.getTask(i) instanceof ToDo) {
+                    text += "T ~ " + doneStr + " ~ " + tasks.getTask(i).newTask + "\n";
+                } else if (tasks.getTask(i) instanceof Deadline) {
+                    Deadline dl = (Deadline) tasks.getTask(i);
+                    text += "D ~ " + doneStr + " ~ " + tasks.getTask(i).newTask + " ~ " + dl.getDeadLine() + "\n";
+                } else if (tasks.getTask(i) instanceof Event) {
+                    Event ev = (Event) tasks.getTask(i);
+                    text += "E ~ " + doneStr + " ~ " + tasks.getTask(i).newTask + " ~ " + ev.getEvent() + "\n";
                 } else {
-                    text += doneStr + " ~ " + task.newTask + "\n";
+                    text += doneStr + " ~ " + tasks.getTask(i).newTask + "\n";
                 }
             }
         }
         fw.write(text);
         fw.close();
     }
+
+    /*public static void Level9(String input, TaskList tasks) throws DukeException, IOException {
+        ArrayList<String> items = new ArrayList<>();
+        if (input.contains("find")) {
+            String item = input.split(" ")[1];
+            for (Task task: tasks) {
+                 if (task.newTask.contains(item)) {
+                     items.add(task.toString());
+                 }
+            }
+            System.out.println(displayLabel(
+                    "Here are the matching tasks in your list: \n" +
+                    "     " + getItems(items)));
+        } else {
+            Level8(input, tasks);
+        }
+    }*/
 }
 
 
@@ -395,6 +224,7 @@ class Event extends Task {
     }
 
 }
+
 
 
 
