@@ -34,9 +34,9 @@ class TaskListTest {
         Task toDo = new ToDo("name");
         taskList.getList().add(toDo);
 
-        assertFalse(toDo.done);
+        assertFalse(toDo.isDone);
         taskList.doTask(1);
-        assertTrue(toDo.done);
+        assertTrue(toDo.isDone);
     }
 
     @Test
@@ -56,7 +56,7 @@ class TaskListTest {
         taskList.getList().add(toDo1);
         taskList.getList().add(toDo2);
 
-        toDo2.done = true;
+        toDo2.isDone = true;
         taskList.deleteDone();
         ArrayList<Task> expected = new ArrayList<>();
         expected.add(toDo1);
