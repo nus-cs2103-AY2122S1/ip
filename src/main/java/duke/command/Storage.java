@@ -8,6 +8,8 @@ import duke.task.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -82,7 +84,7 @@ public class Storage {
         }
     }
 
-    public void deleteEvent(String task) throws Exception {
+    public void deleteTask(String task) throws Exception {
         int itemDeleted = Parser.findDeleteItem(task);
         Task deletedTask = taskList.remove(itemDeleted - 1);
         ui.showDeleteMessage(deletedTask);
@@ -143,5 +145,17 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void findTask(String task) {
+        String target = task.substring(5);
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task cur = taskList.get(i);
+            if (cur.getTaskName().contains(target)) {
+                result.add(i);
+            }
+        }
+        ui.showFindingTasks(result);
     }
 }

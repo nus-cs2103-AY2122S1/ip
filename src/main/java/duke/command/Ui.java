@@ -2,6 +2,8 @@ package duke.command;
 
 import duke.task.Task;
 
+import java.util.List;
+
 /**
  * Dealing with responding user's input on the command line.
  */
@@ -91,6 +93,20 @@ public class Ui {
         System.out.println("    Noted. I've removed this task:");
         System.out.println("      " + deletedTask.toString());
         System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
+        printSeparateLine();
+    }
+
+    public void showFindingTasks(List<Integer> nums) {
+        printSeparateLine();
+        if (nums.size() > 0) {
+            System.out.println("    Here are the matching tasks in your list:");
+        } else {
+            System.out.println("    Sorry, I cannot find any matching task from the list :(");
+        }
+        for (int i = 1; i <= nums.size(); i++) {
+            int num = nums.get(i - 1);
+            System.out.println("    " + i + "." + taskList.get(num).toString());
+        }
         printSeparateLine();
     }
 }
