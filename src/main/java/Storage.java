@@ -2,16 +2,16 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Data {
+public class Storage {
     private final String filePath;
     private final File file;
 
     /**
-     * Constructor for data.
+     * Constructor for storage.
      *
      * @param filePath a fixed file path for records data.
      */
-    public Data(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
     }
@@ -63,12 +63,13 @@ public class Data {
     /**
      * Update tasks record in fixed file.
      *
-     * @param records list of tasks to be updated.
+     * @param tasks TaskList of existing tasks.
      * @throws IOException
      */
-    public void writeToFile(ArrayList<Task> records) throws IOException {
+    public void writeToFile(TaskList tasks) throws IOException {
         StringBuilder textToAdd = new StringBuilder();
-        for (Task task : records) {
+        for (int i = 0; i < tasks.length(); i++) {
+            Task task = tasks.getTask(i);
             textToAdd.append(task.toFileEntry());
             textToAdd.append("\n");
         }

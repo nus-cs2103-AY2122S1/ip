@@ -1,37 +1,26 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private Command commands;
-    private Data data;
-    private ArrayList<Task> records;
-    private static final String FILE_PATH = "./data.txt";
+    private Command commands = new Command();
+    private Storage storage;
+    private TaskList tasks;
+    private String file_path;
 
     /**
      * Constructor for Duke.
      *
-     * @param name name of bot.
+     * @param file_path file_path to write records to.
      */
-    public Duke(String name) {
-        this.data = new Data(FILE_PATH);
+    public Duke(String file_path) {
+        this.file_path = file_path;
         try {
-            this.records = this.data.getTasks();
+            this.storage = new Storage(file_path);
+            tasks = new TaskList(this.storage.getTasks());
         } catch (IOException e) {
-            records = new ArrayList<>();
+            this.storage = new Storage(file_path);
+            tasks = new TaskList(null);
         }
-        commands = new Command(name);
-    }
-
-    /**
-     * Returns formatted output string for bot message.
-     *
-     * @param input An input string.
-     * @return a formatted string for bot message.
-     */
-    public String format(String input) {
-        return String.format("\t--------------------- " +
-                "\n\t%1$s--------------------- ", input);
     }
 
 
@@ -39,75 +28,72 @@ public class Duke {
      * Starts the bot.
      */
     public void start() {
-        System.out.println(format(commands.greeting()));
+        Ui.greeting();
 
         Scanner scanner = new Scanner(System.in);
         String input;
             while (!((input = scanner.next().toLowerCase()).equals("bye"))) {
                 Keyword keyword = null;
                 try {
-                    keyword = Keyword.checkKeyword(input);
+                    keyword = Parser.parse(input);
                 } catch (DukeException e) {
-                    System.out.println(format(e.toString()));
+                    Ui.display(e.toString());
                 }
                 if (keyword != null) {
                     switch (keyword) {
                     case LIST:
-                        System.out.println(format(commands.list(records)));
+                        Ui.display(commands.list(tasks));
                         break;
                     case TODO:
                         try {
                             String text = scanner.nextLine().trim();
-                            System.out.println(format(commands.todo(text, records)));
+                            Ui.display(commands.todo(text, tasks));
                         } catch (DukeException e) {
-                            System.out.println(format(e.toString()));
+                            Ui.display(e.toString());
                         }
                         break;
                     case EVENT:
                         String[] text = scanner.nextLine().split("/at ");
                         try {
-                            System.out.println(format(commands.event(text[0].trim(), text[1], records)));
+                            Ui.display(commands.event(text[0].trim(), text[1], tasks));
                         } catch (DukeException e) {
-                            System.out.println(format(e.toString()));
+                            Ui.display(e.toString());
                         } catch (ArrayIndexOutOfBoundsException e) {
-                            System.out.println(format("OOPS!!! No date for event! " +
-                                    "Use format of event description /at date \n\t"));
+                            Ui.missingDate(keyword);
                         }
                         break;
                     case DEADLINE:
                         String[] txt = scanner.nextLine().split("/by ");
                         try {
-                            System.out.println(format(commands.deadline(txt[0].trim(), txt[1], records)));
+                            Ui.display(commands.deadline(txt[0].trim(), txt[1], tasks));
                         } catch (DukeException e) {
-                            System.out.println(format(e.toString()));
+                            Ui.display(e.toString());
                         } catch (ArrayIndexOutOfBoundsException e) {
-                            System.out.println(format("OOPS!!! No date for deadline! " +
-                                    "Use format of deadline description /by date \n\t"));
+                            Ui.missingDate(keyword);
                         }
                         break;
                     case DONE:
                         try {
                             int index = scanner.nextInt() - 1;
-                            System.out.println(format(commands.done(index, records)));
+                            Ui.display(commands.done(index, tasks));
                         } catch (DukeException e) {
-                            System.out.println(format(e.toString()));
+                            Ui.display(e.toString());
                         }
                         break;
                     case DELETE:
                         try {
                             int index = (scanner.nextInt()) - 1;
-                            System.out.println(format(commands.delete(index, records)));
+                            Ui.display(commands.delete(index, tasks));
                         } catch (DukeException e) {
-                            System.out.println(format(e.toString()));
+                            Ui.display(e.toString());
                         }
                         break;
-
                     case FIND:
                         try {
                             String key = scanner.nextLine().trim();
-                            System.out.println(format(commands.find(key, records)));
+                            Ui.display(commands.find(key, tasks));
                         } catch (DukeException e) {
-                            System.out.println(format(e.toString()));
+                            Ui.display(e.toString());
                         }
                         break;
                     }
@@ -115,13 +101,13 @@ public class Duke {
             }
 
         try {
-            data.writeToFile(records);
+            storage.writeToFile(tasks);
         } catch (IOException e){
-            System.out.println("Error in saving data");
+            System.out.println("Error in saving storage");
         }
 
         scanner.close();
-        System.out.println(format(commands.end()));
+        Ui.end();
     }
 
     public static void main(String[] args) {
@@ -132,7 +118,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        Duke bot = new Duke("halp");
+        Duke bot = new Duke("./data.txt");
         bot.start();
     }
 }
