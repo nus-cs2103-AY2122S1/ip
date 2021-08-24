@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class TaskList {
     private ArrayList<Task> taskList;

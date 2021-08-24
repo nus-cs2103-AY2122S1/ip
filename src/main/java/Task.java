@@ -1,6 +1,8 @@
-import org.w3c.dom.css.CSSStyleDeclaration;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-import javax.swing.event.ListDataEvent;
 
 public class Task {
     protected String taskName;
@@ -84,7 +86,7 @@ public class Task {
     }
 
     private static class Deadline extends Task {
-        String deadline;
+        LocalDate deadline;
 
         private Deadline(String taskName, Boolean isDone) {
             super(taskName, isDone);
@@ -106,17 +108,22 @@ public class Task {
             String deadline = taskName.substring(taskName.indexOf("/") + 1).trim();
 
             this.taskName = deadlineName;
-            this.deadline = deadline;
+            try {
+                this.deadline = LocalDate.parse(deadline);
+            } catch (DateTimeParseException exception) {
+                throw new InvalidInputException("Must enter a valid date.");
+            }
         }
 
-        public String getDeadline() {
+        public LocalDate getDeadline() {
             return this.deadline;
         }
 
         @Override
         public String toString() {
             String taskAsString;
-            taskAsString = "[D] " + super.toString() + " (" + this.deadline + ")";
+            taskAsString = "[D] " + super.toString() + " ("
+                    + this.deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
             return taskAsString;
         }
     }
@@ -138,7 +145,7 @@ public class Task {
 
             String eventName = taskName.substring(0, taskName.indexOf("/")).trim();
             if (eventName.length() == 0 ) {
-                throw new InvalidInputException("Must enter valid deadline name.");
+                throw new InvalidInputException("Must enter valid event name.");
             }
 
             String duration = taskName.substring(taskName.indexOf("/") + 1).trim();
