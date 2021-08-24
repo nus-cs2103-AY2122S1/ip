@@ -11,6 +11,15 @@ class Deadline extends Task {
         super(oldDeadline);
         this.dueOn = oldDeadline.dueOn;
     }
+    
+    static protected Deadline createTask(String name, boolean isCompleted, String dateTime) {
+        Deadline d = new Deadline(name, dateTime);
+        if (isCompleted) {
+            return new Deadline(d);
+        } else {
+            return d;
+        }
+    }
 
     @Override
     Deadline markAsCompleted() {
