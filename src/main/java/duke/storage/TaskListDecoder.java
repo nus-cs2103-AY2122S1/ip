@@ -39,18 +39,18 @@ public class TaskListDecoder {
         String done = task.substring(4,5);
         String taskDescription = task.substring(7, task.length()).trim();
         switch (type) {
-            case "T" :
-                return new Todo(taskDescription, done);
-            case "D" :
-                DesAndTime deadLineDetails = new DesAndTime(taskDescription);
-                deadLineDetails.deadLine();
-                return new DeadLine(deadLineDetails.getDes(), deadLineDetails.getTime(), done);
-            case "E" :
-                DesAndTime eventDetails = new DesAndTime(taskDescription);
-                eventDetails.event();
-                return new Event(eventDetails.getDes(), eventDetails.getTime(), done);
-            default:
-                return new Task("Invalid Task");
+        case "T" :
+            return new Todo(taskDescription, done);
+        case "D" :
+            DesAndTime deadLineDetails = new DesAndTime(taskDescription);
+            deadLineDetails.deadLine();
+            return new DeadLine(deadLineDetails.getDes(), deadLineDetails.getTime(), done);
+        case "E" :
+            DesAndTime eventDetails = new DesAndTime(taskDescription);
+            eventDetails.event();
+            return new Event(eventDetails.getDes(), eventDetails.getTime(), done);
+        default:
+            return new Task("Invalid Task");
         }
     }
 }
