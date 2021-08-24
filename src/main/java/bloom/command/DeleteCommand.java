@@ -29,6 +29,7 @@ public class DeleteCommand extends Command {
 	 * Deletes the task as requested.
 	 */
 	
+	@Override
 	public void run() {
 		Task task =TaskList.delete(this.index);
 		System.out.println(Message.COMMAND_DELETE.getMessage());

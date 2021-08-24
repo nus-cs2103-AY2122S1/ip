@@ -36,6 +36,7 @@ public class EventCommand extends Command {
 	 * Creates an event task.
 	 */
 	
+	@Override
 	public void run() {
 		Event event = new Event(this.description, this.at);
 		TaskList.add(event);

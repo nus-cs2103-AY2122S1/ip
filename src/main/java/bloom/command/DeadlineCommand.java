@@ -31,11 +31,12 @@ public class DeadlineCommand extends Command {
 		this.description = description;
 		this.by = by;
 	}
-
+	
 	/**
 	 * Creates a deadline task.
 	 */
 	
+	@Override
 	public void run() {
 		Deadline deadline = new Deadline(this.description, this.by);
 		TaskList.add(deadline);

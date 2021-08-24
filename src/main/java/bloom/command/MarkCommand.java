@@ -28,6 +28,7 @@ public class MarkCommand extends Command {
 	 * Marks the specified task as done.
 	 */
 	
+	@Override
 	public void run() {
 		Task task = TaskList.get(this.index);
 		task.markAsDone();

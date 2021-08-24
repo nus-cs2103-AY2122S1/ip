@@ -15,6 +15,7 @@ public class ListCommand extends Command {
 	 * Lists all current tasks.
 	 */
 	
+	@Override
 	public void run() {
 		System.out.println(Message.COMMAND_LIST.getMessage());
 		for (int i = 0; i < TaskList.size(); ++i) {
