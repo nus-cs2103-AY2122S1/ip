@@ -9,7 +9,7 @@ public class Storage {
     public String FileName;
 
     public Storage() {
-        this.FileName = "storage.txt";
+        this.FileName = "duke.txt";
     }
 
     public void Save(ArrayList<Task> arr) {
