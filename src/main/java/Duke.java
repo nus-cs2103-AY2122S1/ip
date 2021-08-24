@@ -8,6 +8,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Storage storage = new Storage("./storage/save.txt");
+        Ui ui = new Ui();
         try {
             File saveFile = storage.retrieve();
             taskList = new TaskList(saveFile);
@@ -23,12 +24,7 @@ public class Duke {
         }
         String command;
         String input;
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "What can I do for you?\n");
+        ui.greet();
 
         while(true) {
             System.out.print("You: ");
