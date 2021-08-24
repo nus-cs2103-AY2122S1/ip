@@ -2,12 +2,10 @@ package duke;
 
 import java.io.IOException;
 /**
- * Parser class
+ * Deals with making sense of the user command.
  *
  * @author Timothy Wong Eu-Jin
  */
-
-/** Deals with making sense of the user command*/
 public class Parser {
 
     private TaskList tasks;
@@ -20,7 +18,14 @@ public class Parser {
         this.storage = storage;
     }
 
-    /** Validates a to do command */
+    /**
+     * Validates a to do command.
+     *
+     * @param req The full command
+     * @return a ToDo object
+     * @throws NoDescriptionException
+     * @throws IOException
+     */
     public static ToDo validateToDo(String req) throws NoDescriptionException, IOException {
         if (req.equals("todo")) {
             throw new NoDescriptionException("The description of a todo cannot be empty.");
@@ -32,7 +37,13 @@ public class Parser {
         return todo;
     }
 
-    /** Validates a Deadline command */
+    /**
+     * Validates a Deadline command.
+     * @param req The full command
+     * @return Deadline object
+     * @throws NoDescriptionException
+     * @throws MissingTimeCommandException
+     */
     public static Deadline validateDeadline(String req) throws NoDescriptionException, MissingTimeCommandException{
         if (req.equals("deadline")) {
             throw new NoDescriptionException("The description of a deadline cannot be empty.");
@@ -48,7 +59,13 @@ public class Parser {
         return deadline;
     }
 
-    /** Validates an Event command */
+    /**
+     * Validates a Event command.
+     * @param req The full command
+     * @return Event object
+     * @throws NoDescriptionException
+     * @throws MissingTimeCommandException
+     */
     public static Event validateEvent(String req) throws NoDescriptionException, MissingTimeCommandException {
         if (req.equals("event")) {
             throw new NoDescriptionException("The description of an event cannot be empty.");
@@ -65,7 +82,16 @@ public class Parser {
         return event;
     }
 
-    /** Receives an index to specify a task to mark as done */
+    /**
+     * Receives an index to specify a task to mark as done.
+     * Converts string to integer.
+     *
+     * @param req The full command
+     * @return Integer index of the task in the task list
+     * @throws NoDescriptionException
+     * @throws InvalidDescriptionException
+     * @throws IOException
+     */
     public static int validateDone(String req) throws NoDescriptionException, InvalidDescriptionException,
             IOException {
         if (req.equals("done")) {
@@ -85,7 +111,16 @@ public class Parser {
         return index;
     }
 
-    /** Receives an index to specify a task to delete*/
+    /**
+     * Receives an index to specify a task to delete.
+     * Converts string to integer.
+     *
+     * @param req The full command
+     * @return Integer index of the task in the task list
+     * @throws NoDescriptionException
+     * @throws InvalidDescriptionException
+     * @throws IOException
+     */
     public Task validateDelete(String req) throws NoDescriptionException, InvalidDescriptionException,
             IOException{
         if (req.equals("delete")) {
@@ -106,12 +141,24 @@ public class Parser {
         return deletedTask;
     }
 
-    /** Receives an invalid command and throws and exception*/
+    /**
+     * Receives an invalid command and throws and exception.
+     *
+     * @param req The full command
+     * @throws InvalidCommandException
+     */
     public void invalidInput(String req) throws InvalidCommandException {
         throw new InvalidCommandException(
                 "Sorry! I do not understand you? Try another command!");
     }
 
+    /**
+     * Passes the full command to various helper function to check validity.
+     *
+     * @param fullCommand
+     * @throws DukeException
+     * @throws IOException
+     */
     public void parse(String fullCommand) throws DukeException, IOException {
         String req = "";
         boolean end = false;

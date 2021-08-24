@@ -3,7 +3,7 @@ package duke;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 /**
- * Duke class
+ * The Duke class is the main class.
  *
  * @author Timothy Wong Eu-Jin
  */
@@ -13,7 +13,11 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    //Constructor
+    /**
+     * Constructs a Duke object to start the program.
+     *
+     * @param filePath relative file path of output file
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -28,6 +32,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program
+     *
+     * Handles most errors within a while loop.
+     */
     public void run() {
         this.ui.greet();
         boolean isExit = false;
