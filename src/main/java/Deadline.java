@@ -12,7 +12,7 @@ public class Deadline extends Task {
 
     @Override
     public String toCsvRow() {
-        return String.join(",", name, time, String.valueOf(isDone));
+        return String.join(",", "deadline", name, time, String.valueOf(isDone));
     }
 
     @Override

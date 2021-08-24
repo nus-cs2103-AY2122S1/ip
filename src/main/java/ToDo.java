@@ -8,6 +8,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String toCsvRow() {
+        return String.join(",", "todo", name, String.valueOf(isDone));
+    }
+
+    @Override
     public String toString(){
         if (this.isDone){
             return "[T][X] " + this.name;
