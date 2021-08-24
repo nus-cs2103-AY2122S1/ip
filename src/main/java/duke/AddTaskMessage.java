@@ -1,8 +1,10 @@
-public class AddTask extends DukeMessage{
+package duke;
+
+public class AddTaskMessage extends DukeMessage {
     private String userString;
     private Task createdTask;
 
-    public AddTask(String userStr) throws IllegalFormatException, EmptyDescriptionException, InvalidCommandException {
+    public AddTaskMessage(String userStr) throws IllegalFormatException, EmptyDescriptionException, InvalidCommandException {
         userString = userStr;
         createdTask = TaskFactory.createTask(this.userString);
         TaskList.getTaskList().addTask(createdTask);

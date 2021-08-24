@@ -1,9 +1,11 @@
+package duke;
+
 import java.util.ArrayList;
 
-public class CompleteTask extends DukeMessage{
+public class CompleteTaskMessage extends DukeMessage{
     private int taskIndex;
 
-    public CompleteTask(int index) {
+    public CompleteTaskMessage(int index) {
         this.taskIndex = index;
     }
 

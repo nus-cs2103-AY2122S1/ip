@@ -1,3 +1,7 @@
+package duke;
+
+import duke.Deadline;
+
 public class TaskFactory {
     public static Task createTask(String taskStr) throws IllegalFormatException, EmptyDescriptionException, InvalidCommandException {
 

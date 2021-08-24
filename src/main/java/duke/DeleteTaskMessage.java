@@ -1,3 +1,5 @@
+package duke;
+
 public class DeleteTaskMessage extends DukeMessage{
     private Task deletedTask;
     private int taskIndex;

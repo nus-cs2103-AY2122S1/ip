@@ -1,3 +1,5 @@
+package duke;
+
 import java.lang.Exception;
 
 public class IllegalFormatException extends Exception{

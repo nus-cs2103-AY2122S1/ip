@@ -1,3 +1,7 @@
+package duke;
+
+import duke.AddTaskMessage;
+
 public class MessageFactory {
     public static DukeMessage createMessage(String userStr) {
         try {
@@ -6,13 +10,13 @@ public class MessageFactory {
             } else if (userStr.equals("bye")) {
                 return new ExitMessage();
             } else if (userStr.equals("list")) {
-                return new GetTasks();
+                return new GetTasksMessage();
             } else if (userStr.length() >= 4 && userStr.substring(0,4).equals("done")) {
                 int len = userStr.length();
                 int taskIndex = userStr.charAt(len - 1) - 49;
                 if (taskIndex >= TaskList.getTaskList().getTasks().size())
                     throw new ArrayIndexOutOfBoundsException();
-                return new CompleteTask(taskIndex);
+                return new CompleteTaskMessage(taskIndex);
             } else if (userStr.length() >= 6 && userStr.substring(0,6).equals("delete")) {
                 int len = userStr.length();
                 int taskIndex = userStr.charAt(len - 1) - 49;
@@ -20,7 +24,7 @@ public class MessageFactory {
                     throw new ArrayIndexOutOfBoundsException();
                 return new DeleteTaskMessage(taskIndex);
             } else {
-                return new AddTask(userStr);
+                return new AddTaskMessage(userStr);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             return new ErrorMessage("jo task ko select kerra h uska index padha tha??");

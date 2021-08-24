@@ -1,6 +1,8 @@
+package duke;
+
 import java.util.ArrayList;
 
-public class GetTasks extends DukeMessage{
+public class GetTasksMessage extends DukeMessage{
     public void display() {
         ArrayList<Task> taskList = (ArrayList<Task>) TaskList.getTaskList().getTasks();
         int count = 1;
