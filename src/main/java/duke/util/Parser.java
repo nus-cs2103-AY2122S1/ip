@@ -17,6 +17,8 @@ public class Parser {
             return new DeleteCommand(command);
         } else if (command.equals("bye")) {
             return new ExitCommand();
+        } else if (command.startsWith("find")) {
+            return new FindCommand(command);
         } else {
             throw new UnknownException();
         }
