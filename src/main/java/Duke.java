@@ -1,16 +1,23 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class Duke {
     
     public static ArrayList<Task> taskArr;
     
-    public static void main(String[] args) {
+    
+    public static void main(String[] args) throws IOException {
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        taskArr = new ArrayList<>();
+        loadFile();
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
-        taskArr = new ArrayList<>();
         while (! command.equals("bye")) {
             try {
                 addTask(command);
@@ -21,6 +28,7 @@ public class Duke {
                 command = sc.nextLine();
             }
         }
+        writeToFile();
         System.out.println("Bye. Hope to see you again soon!");
     }
     public static void addTask(String command) throws DukeException{
@@ -112,6 +120,66 @@ public class Duke {
             System.out.println("Noted. I've removed this task:\n"+ taskRef);
             System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
         }
+    }
+    
+    private static void loadFile() {
+        File f = new File("./data/duke.txt");
+        try {
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                convertToTask(s.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No saved file found. Creating new file.");
+            createFile(f);
+        }
+    }
+
+    private static void convertToTask(String line) {
+        Task task;
+        boolean isDone = false;
+        
+        String[] bracketSplit = line.split("\\|");
+        
+        String taskType = bracketSplit[0].trim();
+        String description = bracketSplit[2].trim();
+        if (bracketSplit[1].equals("X")) {
+            isDone = true;
+        }
+        switch (taskType) {
+            case "D":
+                task = new Deadline(description, isDone, bracketSplit[3].trim());
+                taskArr.add(task);
+                break;
+            case "E":
+                task = new Event(description, isDone, bracketSplit[3].trim());
+                taskArr.add(task);
+                break;
+            case "T":
+                task = new Todo(description, isDone);
+                taskArr.add(task);
+                break;
+            default:
+                System.out.println("No Task added.");
+        }
+        
+    }
+
+    private static void createFile(File f) {
+        try {
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    private static void writeToFile() throws IOException {
+        FileWriter fw = new FileWriter("./data/duke.txt");
+        for (int i = 0; i < taskArr.size(); i++) {
+            fw.write(taskArr.get(i).toString() + System.lineSeparator());
+        }
+        fw.close();
     }
     
 }
