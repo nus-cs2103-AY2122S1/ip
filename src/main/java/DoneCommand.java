@@ -8,8 +8,12 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task taskDone = tasks.getTask(index);
-        taskDone.markAsDone();
-        ui.displayCompletedMessage(taskDone);
+        try {
+            Task taskDone = tasks.getTask(index);
+            taskDone.markAsDone();
+            ui.displayCompletedMessage(taskDone);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("\t List number out of range, please enter a valid number\n");
+        }
     }
 }
