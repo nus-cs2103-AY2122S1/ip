@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a task that starts and ends at a specific time.
- * E.g. team project meeting on 2/10/2019 2-4pm
+ * E.g. team project meeting at Oct-10-2019 1300hrs
  */
 public class Event extends Task {
     protected LocalDateTime at;
@@ -26,7 +26,7 @@ public class Event extends Task {
      * @return String formatted date and time
      */
     public String getDateTime() {
-        DateTimeFormatter dateTimeFormatObj = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
+        DateTimeFormatter dateTimeFormatObj = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
         String formattedDate = String.format(at.format(dateTimeFormatObj) + "hrs");
         return formattedDate;
     }
