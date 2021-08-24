@@ -1,5 +1,4 @@
 package commands;
-import java.util.function.Predicate;
 import tasks.DeadlineTask;
 import java.time.format.DateTimeParseException;
 import exceptions.DukeException;
