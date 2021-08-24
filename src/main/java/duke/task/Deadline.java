@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -10,8 +12,8 @@ public class Deadline extends Task {
     private LocalDate endDate;
 
     /**
-     * Initializes a new Deadline
-     * @param name Name of Deadline
+     * Initializes a new Duke.Deadline
+     * @param name Name of Duke.Deadline
      * @param endDate Date to complete task by
      */
     public Deadline(String name, LocalDate endDate) {

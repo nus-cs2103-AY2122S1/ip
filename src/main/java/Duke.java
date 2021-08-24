@@ -1,6 +1,15 @@
-import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+
+import duke.TaskList;
+import duke.UI;
+import duke.exceptions.DukeException;
+import duke.Parser;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.MissingTaskNameException;
+import duke.exceptions.MissingTaskNumberException;
+import duke.exceptions.InvalidTaskNumberException;
+import duke.exceptions.MissingDeadlineException;
+import duke.exceptions.MissingEventTimeException;
 
 /**
  * Duke is a Personal Assistant Chatbot that keeps track of various tasks.
@@ -44,7 +53,7 @@ public class Duke {
             } catch (InvalidCommandException e) {
                 System.out.println("I'm afraid I don't recognise that, please try again!");
             } catch (MissingTaskNameException e) {
-                System.out.println("Task name cannot be empty!");
+                System.out.println("Duke.Task name cannot be empty!");
             } catch (MissingTaskNumberException e) {
                 System.out.println("Did you forget to enter your task number?");
             } catch (InvalidTaskNumberException e) {

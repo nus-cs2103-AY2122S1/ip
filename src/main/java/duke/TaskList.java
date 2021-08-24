@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -5,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * TaskList handles the management of and interaction with tasks
+ * Duke.TaskList handles the management of and interaction with tasks
  */
 public class TaskList {
     /** ArrayList containing all tasks **/
@@ -20,7 +27,7 @@ public class TaskList {
 
     /**
      * Adds a new task to taskArrayList
-     * @param task Task object to be added
+     * @param task Duke.Task object to be added
      */
     public void add(Task task) {
         taskArrayList.add(task);
@@ -29,7 +36,7 @@ public class TaskList {
     /**
      * Retrieves the task with the corresponding ID
      * @param id ID of task
-     * @return Task with ID
+     * @return Duke.Task with ID
      * @throws IndexOutOfBoundsException If task ID does not exist
      */
     public Task get(int id) {

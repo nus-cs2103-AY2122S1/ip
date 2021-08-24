@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 /**
  * Exception to indicate invalid task number entered by user
  * e.g. User only has 3 tasks but enters 4

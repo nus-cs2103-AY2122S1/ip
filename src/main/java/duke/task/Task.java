@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Parent class for all types of Tasks
  * Contains basic properties and methods that all Tasks should have

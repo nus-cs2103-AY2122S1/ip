@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 /**
  * Parent class for all Duke-related exceptions
  */

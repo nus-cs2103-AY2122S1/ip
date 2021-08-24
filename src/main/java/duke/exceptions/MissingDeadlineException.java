@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 /**
  * Exception to indicate when user enters deadline without due date
  * e.g. deadline math homework

@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -10,7 +12,7 @@ public class Event extends Task {
     private LocalDate eventDate;
 
     /**
-     * Initializes a new Event
+     * Initializes a new Duke.Event
      * @param name Name of task
      * @param eventDate Start time of task
      */
@@ -20,7 +22,7 @@ public class Event extends Task {
     }
 
     /**
-     * Initializes a new Event with done property
+     * Initializes a new Duke.Event with done property
      * @param name Name of event
      * @param eventDate Date of event
      * @param isDone Whether event is done

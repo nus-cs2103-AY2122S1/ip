@@ -1,3 +1,10 @@
+package duke;
+
+import duke.exceptions.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
 import java.time.LocalDate;
 
 /**
@@ -11,7 +18,6 @@ public class Parser {
     private static String[] commandArr;
     /**
      * Handles user input regarding tasks
-     *
      * @param userString String that users enter
      */
     public static void handle(String userString, TaskList tasklist) throws DukeException {
@@ -23,8 +29,9 @@ public class Parser {
 
         switch (firstWord) {
         case "bye":
+            tasklist.saveTasksToStorage();
             UI.bye();
-            isRunning = true;
+            isRunning = false;
             break;
         case "list":
             tasklist.list();
@@ -57,7 +64,7 @@ public class Parser {
         try {
             tasklist.get(taskNumber).setDone(true);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskNumberException("Task does not exist");
+            throw new InvalidTaskNumberException("Duke.Task does not exist");
         }
         UI.done(taskNumber);
         tasklist.list();
@@ -113,7 +120,7 @@ public class Parser {
         try {
             tasklist.remove(deleteTaskNumber);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskNumberException("Task does not exist");
+            throw new InvalidTaskNumberException("Duke.Task does not exist");
         }
         UI.delete(deleteTaskNumber);
         UI.numberOfTasks(tasklist.size());

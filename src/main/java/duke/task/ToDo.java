@@ -1,9 +1,11 @@
+package duke.task;
+
 /**
  * A task without any date or time attached
  */
 public class ToDo extends Task {
     /**
-     * Initializes a new ToDo
+     * Initializes a new Duke.ToDo
      * @param name Name of task
      */
     public ToDo(String name) {
