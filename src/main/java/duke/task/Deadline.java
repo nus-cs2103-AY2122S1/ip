@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.DukeException;
 
 public class Deadline extends DateTask {
     public Deadline(String description, String by) throws DukeException {

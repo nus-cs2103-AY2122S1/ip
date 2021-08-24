@@ -1,5 +1,8 @@
 package duke;
 
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.IOException;
 import java.util.Scanner;
 

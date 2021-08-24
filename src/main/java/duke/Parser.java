@@ -1,5 +1,9 @@
 package duke;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
 public class Parser {
     public static Task parseDateTask(String descriptionAndDate, String command) throws DukeException {
         String[] splitDescriptionAndDate;
