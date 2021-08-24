@@ -25,7 +25,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), DukeDateFormatter.dateTimeToFile(this.duration));
+        return String.format("[E]%s (at: %s)", super.toString(), DukeDateFormatter.dateTimeToString(this.duration));
     }
 
 }

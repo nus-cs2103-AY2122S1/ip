@@ -165,6 +165,7 @@ public class Duke {
             Scanner myReader = new Scanner(taskFile);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
+                System.out.println("PENIS" + data);
                 String[] args = data.split(Pattern.quote("|"));
                 boolean isDone = args[1].trim().equals("1");
                 switch (args[0].trim()) {
@@ -187,7 +188,10 @@ public class Duke {
         } catch (FileNotFoundException e) {
             // Init file and directory if they do not exist
             saveToFile();
+        } catch (DateTimeParseException e) {
+            throw new RuntimeException("FORMAT YOUR FILE DATETIMEs PROPERLY YOU FOOL.");
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             throw new DukeException("COULDN'T GET YOUR MISERABLE FILE. TRY AGAIN.");
         }
     }
