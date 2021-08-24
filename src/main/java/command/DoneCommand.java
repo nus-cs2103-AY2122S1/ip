@@ -2,6 +2,11 @@ package command;
 import task.*;
 import duke.*;
 
+/**
+ * DoneCommand represents a done command.
+ *
+ * @author Ho Wen Zhong
+ */
 public class DoneCommand extends Command {
 
     private int doneIndex;
@@ -10,6 +15,14 @@ public class DoneCommand extends Command {
         this.doneIndex = doneIndex;
     }
 
+    /**
+     * Sets task as done in TaskList, calls showResponse with response,
+     * saves TaskList to file.
+     *
+     * @param tasks Current TaskList.
+     * @param ui Ui object.
+     * @param storage Storage object.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.done(doneIndex);
@@ -21,11 +34,22 @@ public class DoneCommand extends Command {
         storage.save(tasks);
     }
 
+    /**
+     * Returns false to indicate ListCommand does not exit the program.
+     *
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Returns done message.
+     *
+     * @param task Task to be done.
+     * @return Done message.
+     */
     public String respond(Task task) {
         String response = "Nice! I've marked this task as done:\n"
                 + task.toString();
