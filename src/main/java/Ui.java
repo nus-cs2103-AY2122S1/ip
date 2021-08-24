@@ -1,5 +1,3 @@
-import javax.annotation.processing.SupportedSourceVersion;
-
 public class Ui {
     private final static String PILCROW_LOGO = """
               _____
