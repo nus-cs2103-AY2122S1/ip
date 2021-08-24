@@ -3,7 +3,7 @@
  *
  * Task that has a start and end time
  * @author Timothy Wong Eu-Jin
- * @version Level-6
+ * @version Level-7
  */
 public class Event extends Task {
 
@@ -14,8 +14,12 @@ public class Event extends Task {
         this.date = date;
     }
 
+    public String getDate() {
+        return this.date;
+    }
+
     public String toString() {
-        return ("[E]" + super.toString() + "(at:" + this.date + ")");
+        return ("[E]" + super.toString() + " (at: " + this.date + ")");
     }
 
 }

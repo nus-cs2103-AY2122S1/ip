@@ -3,7 +3,7 @@
  *
  * Task that needs to be done by a specific date/time
  * @author Timothy Wong Eu-Jin
- * @version Level-4
+ * @version Level-7
  */
 public class Deadline extends Task {
 
@@ -14,8 +14,12 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    public String getDate() {
+        return this.date;
+    }
+
     public String toString() {
-        return ("[D]" + super.toString() + "(by:" + this.date + ")");
+        return ("[D]" + super.toString() + " (by: " + this.date + ")");
     }
 
 }

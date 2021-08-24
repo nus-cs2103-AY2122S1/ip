@@ -2,7 +2,7 @@
  * Task class. List HAS-A Task (encapsulation).
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-6
+ * @version Level-7
  */
 
 public class Task {
@@ -19,10 +19,10 @@ public class Task {
     //markAsDone method indicates a task in completed
     public void markAsDone() {
         this.isDone = true;
-        System.out.println(Duke.divider);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(this.toString());
-        System.out.println(Duke.divider);
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
     public String getStatusIcon() {

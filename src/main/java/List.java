@@ -1,9 +1,10 @@
+import java.io.IOException;
 import java.util.ArrayList;
 /**
  * List class: Duke HAS-A List, List HAS-A Task
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-6
+ * @version Level-7
  */
 
 public class List {
@@ -19,11 +20,6 @@ public class List {
     //Add method to insert new entry into list
     public void add(Task task) {
         this.array.add(task);
-        System.out.println(Duke.divider);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
-        this.getNumOfTasks();
-        System.out.println(Duke.divider);
     }
 
     //getIndex method to return a specific task
@@ -52,6 +48,32 @@ public class List {
         } else {
             System.out.println("Now you have " + totalNum + " tasks in the list");
         }
+    }
+
+    public void rewriteFile() throws IOException {
+        String filePath = "data/list.txt";
+        String req = "";
+        for (Task task : this.array) {
+            if (task instanceof ToDo) {
+                req += "T | ";
+                req += task.isDone() ? "1 | " : "0 | ";
+                req += task.getDescription();
+                req += System.lineSeparator();
+            } else if (task instanceof Deadline) {
+                req += "D | ";
+                req += task.isDone() ? "1 | " : "0 | ";
+                req += task.getDescription() + " | ";
+                req += ((Deadline) task).getDate();
+                req += System.lineSeparator();
+            } else if (task instanceof Event) {
+                req += "E | ";
+                req += task.isDone() ? "1 | " : "0 | ";
+                req += task.getDescription() + " | ";
+                req += ((Event) task).getDate();
+                req += System.lineSeparator();
+            }
+        }
+        FileHelper.writeToFile(filePath, req);
     }
 
     //getAll method to return all entries in list
