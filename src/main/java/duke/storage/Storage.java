@@ -22,13 +22,10 @@ public class Storage {
     }
 
     public ArrayList<String> load() {
-
         try {
             if (savedTasksFile.createNewFile()) {
-                System.out.println("pee pee");
                 return new ArrayList<>();
             } else {
-                System.out.println("poo poo");
                 Scanner reader = new Scanner(savedTasksFile);
                 ArrayList<String> loadingStrings = new ArrayList<>();
                 while (reader.hasNextLine()) {
