@@ -20,6 +20,7 @@ public abstract class Command {
         public void execute(TaskList taskList, Ui ui, Storage storage) {
             try {
                 TaskList.Task task = taskList.add(input, taskType);
+
                 ui.addUi(taskList, task);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -76,6 +77,7 @@ public abstract class Command {
         @Override
         public void execute(TaskList taskList, Ui ui, Storage storage) {
             storage.write(taskList);
+
             ui.exitUi();
         }
 
@@ -85,8 +87,8 @@ public abstract class Command {
         }
     }
 
-    public static class UnknowCommand extends Command {
-        public UnknowCommand() {};
+    public static class UnknownCommand extends Command {
+        public UnknownCommand() {};
 
         @Override
         public void execute(TaskList taskList, Ui ui, Storage storage) {
@@ -99,7 +101,7 @@ public abstract class Command {
                 return true;
             }
 
-            if (obj instanceof UnknowCommand) {
+            if (obj instanceof UnknownCommand) {
                 return true;
             }
 

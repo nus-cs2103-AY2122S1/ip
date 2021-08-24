@@ -20,7 +20,7 @@ public class ParserTest {
     @Test
     public void parse_unknownCommand_success() {
         try {
-            assertEquals(new Command.UnknowCommand(), Parser.parse("blah"));
+            assertEquals(new Command.UnknownCommand(), Parser.parse("blah"));
         } catch (DukeException e) {
             fail();
         }

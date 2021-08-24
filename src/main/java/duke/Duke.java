@@ -10,6 +10,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.load());
+
             ui.greet2();
             ui.listUi(taskList);
             ui.showLine();
