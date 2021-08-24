@@ -16,8 +16,10 @@ public class DeleteCommand extends Command {
         } catch (NumberFormatException e) {
             ui.showError("     Error! Please ensure a number is entered after delete (eg: delete 2)");
         } catch (IndexOutOfBoundsException e) {
-            if (Integer.parseInt(inputValues[1]) <= 1) {
-                ui.showError("     Error! You do not have any task in the list");
+            if (Integer.parseInt(inputValues[1]) <= 0) {
+                ui.showError("     Error! Please specify a number greater than 0");
+            } else if (Integer.parseInt(inputValues[1]) == 1) {
+                ui.showError("     Error! You do not have any tasks in the list");
             } else {
                 ui.showError("     Error! You do not have " + inputValues[1] + " tasks in the list");
             }

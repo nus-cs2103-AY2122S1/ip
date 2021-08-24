@@ -49,11 +49,15 @@ public class TaskList {
     }
 
     public void showList() {
-        System.out.println("    Here are the tasks in your list:");
-        for (int i = 0; i < size(); i++) {
-            int currNum = i + 1;
-            Task currTask = get(i);
-            System.out.println("     " + currNum + ". " + currTask.toString());
+        if (size() == 0) {
+            System.out.println("    There are no tasks in your list currently!");
+        } else {
+            System.out.println("    Here are the tasks in your list:");
+            for (int i = 0; i < size(); i++) {
+                int currNum = i + 1;
+                Task currTask = get(i);
+                System.out.println("     " + currNum + ". " + currTask.toString());
+            }
         }
     }
 }
