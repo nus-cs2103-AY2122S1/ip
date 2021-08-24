@@ -67,14 +67,14 @@ public class Duke {
                             if (!str.contains("/")) {
                                 newTask = new Deadline(str, "");
                             } else {
-                                String[] parts = str.split("/");
+                                String[] parts = str.split("/by ");
                                 newTask = new Deadline(parts[0], parts[1]);
                             }
                         } else if (str.contains("event")) {
                             if (!str.contains("/")) {
                                 newTask = new Event(str, "");
                             } else {
-                                String[] parts = str.split("/");
+                                String[] parts = str.split("/at ");
                                 newTask = new Event(parts[0], parts[1]);
                             }
                         }
