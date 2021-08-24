@@ -1,3 +1,8 @@
+package duke.ui;
+
+import duke.TaskList;
+import duke.tasks.Task;
+
 public class TextUi {
     public static final String DIVIDER = "==========================================";
 

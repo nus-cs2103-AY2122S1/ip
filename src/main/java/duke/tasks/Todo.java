@@ -1,3 +1,5 @@
+package duke.tasks;
+
 /**
  * Represents a to-do, which is a subtype of a Task.
  */

@@ -1,3 +1,12 @@
+package duke;
+
+import duke.parser.Parser;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+import duke.ui.TextUi;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -22,14 +31,19 @@ public class TaskList {
      * @throws DukeException if format of input is wrong.
      */
     public void addTask(String text) throws DukeException {
-        Map<String, String> m = Parser.parseTextFromInput(text);
-        switch (m.get("type")) {
-            case "T": myList.add(new Todo(m.get("description")));
-                break;
-            case "D": myList.add(new Deadline(m.get("description"), m.get("time")));
-                break;
-            case "E": myList.add(new Event(m.get("description"), m.get("time")));
+        try {
+            Map<String, String> m = Parser.parseTextFromInput(text);
+            switch (m.get("type")) {
+                case "T": myList.add(new Todo(m.get("description")));
+                    break;
+                case "D": myList.add(new Deadline(m.get("description"), m.get("time")));
+                    break;
+                case "E": myList.add(new Event(m.get("description"), m.get("time")));
+            }
+        } catch (DukeException e) {
+            throw e;
         }
+
     }
 
     /**

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * An exception specific to Duke chat bot.
  */

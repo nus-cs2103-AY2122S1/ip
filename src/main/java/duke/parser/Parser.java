@@ -1,5 +1,10 @@
+package duke.parser;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Map;
 
 public class Parser {
@@ -20,16 +25,18 @@ public class Parser {
                     description = input.split(" ", 2)[1].split(" /by ", 2)[0];
                     time = input.split(" ", 2)[1].split(" /by ", 2)[1];
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new DukeException("Use the format --deadline  xx /by dd-MM-yyy HH:mm--");
+                    throw new DukeException("Use the format --deadline xx /by (yyyy-MM-dd) (HH:mm)--");
                 }
             } else if (input.contains("event")) {
                 try {
                     type = "E";
                     description = input.split(" ", 2)[1].split(" /at ", 2)[0];
                     time = input.split(" ", 2)[1].split(" /at ", 2)[1];
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new DukeException("Use the format --event xx /at dd-MM-yyy HH:mm--");
+                } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+                    throw new DukeException("Use the format --event xx /at (yyyy-MM-dd) (HH:mm)--");
                 }
+            } else {
+                throw new DukeException("Please use the keyword --todo, deadline or event--");
             }
             return Map.of("type", type, "description", description, "time", time);
         } catch (ArrayIndexOutOfBoundsException e) {

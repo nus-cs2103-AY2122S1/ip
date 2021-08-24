@@ -1,7 +1,9 @@
-import org.w3c.dom.Text;
+package duke;
 
-import java.util.ArrayList;
 import java.util.Scanner;
+import duke.storage.Storage;
+import duke.ui.TextUi;
+
 
 /**
  * Represents a personalised chat bot for CS2103/T iP.

@@ -1,3 +1,5 @@
+package duke.tasks;
+
 /**
  * Represents a task, which is contained in a list.
  */
