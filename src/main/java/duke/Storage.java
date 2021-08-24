@@ -33,6 +33,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Retrieves Tasks stored in text file.
+     * Adds Tasks to task list.
+     *
+     * @param taskList Task list to store retrieved Tasks.
+     */
     public void retrieveTasks(TaskList taskList) {
         try {
             ArrayList<String> lines = new ArrayList<>();
@@ -49,6 +55,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves Tasks in task list to test file.
+     *
+     * @param taskList Task list containing Tasks to store.
+     */
     public void saveToFile(TaskList taskList){
         try {
             String txt = taskList.saveTasklist();

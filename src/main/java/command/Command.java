@@ -9,7 +9,14 @@ public abstract class Command {
     protected Command(String args){
         this.args = args;
     }
-    
+
+    /**
+     * Returns Command created by user input.
+     *
+     * @param input User input.
+     * @return Command created.
+     * @throws DukeException if command is invalid.
+     */
     public static Command createCommand(String input) throws DukeException{
         String[] cmd_args = Parser.parseUserInput(input);
         Command cmd;

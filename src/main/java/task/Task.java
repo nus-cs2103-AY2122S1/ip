@@ -16,6 +16,14 @@ public abstract class Task {
         this.done = false;
     }
 
+    /**
+     * Returns Task created by user input.
+     *
+     * @param type First word of user input.
+     * @param rest Rest of user input.
+     * @return Task created.
+     * @throws DukeException If type of task is invalid.
+     */
     public static Task createTask(String type, String rest) throws DukeException{
         Task newTask;
         String[] name_delimit;
@@ -40,6 +48,12 @@ public abstract class Task {
         return newTask;
     }
 
+    /**
+     * Returns Task stored in storage.
+     *
+     * @param s Line in storage.
+     * @return Task stored in storage.
+     */
     public static Task getTask(String s){
         String[] parts = Parser.parseStorage(s);
         Task t = createTask(parts[0], parts[1]);
@@ -50,7 +64,7 @@ public abstract class Task {
     }
 
     /**
-     * marks this task as done
+     * Marks this task as done
      */
     public void markDone(){
         this.done = true;
@@ -64,11 +78,17 @@ public abstract class Task {
         return done;
     }
 
+    /**
+     * Returns string representing task to be saved to text file.
+     *
+     * @return string representing task.
+     */
     public abstract String saveTask();
 
     /**
-     * override toString method to add a check box beside task
-     * @return String
+     * Overrides toString method to add a check box beside task name.
+     *
+     * @return Done status and task name.
      */
     @Override
     public String toString(){
