@@ -3,6 +3,7 @@ package duke.task;
 public abstract class Task {
     private final String name;
     private final boolean isDone;
+    public static final String DONE_STATUS_INDICATOR = "X";
 
     public Task(String name) {
         this.name = name;
@@ -19,7 +20,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return isDone ? "X" : " ";
+        return isDone ? DONE_STATUS_INDICATOR : " ";
     }
 
     public abstract Task markAsDone();
