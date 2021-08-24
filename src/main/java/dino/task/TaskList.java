@@ -1,4 +1,7 @@
+package dino.task;
+
 import java.util.List;
+import dino.exception.*;
 
 public class TaskList {
 
@@ -21,16 +24,12 @@ public class TaskList {
                 (size > 1 ? " tasks" : " task") + " in the list.");
     }
 
-    public void printTaskList() {
+    public void printTaskList() throws EmptyListException{
+        if (taskList.isEmpty()) throw new EmptyListException();
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println((i + 1) + ". " + taskList.get(i));
         }
-    }
-
-    public void processTask(String task, int index) throws InvalidIndexException, TaskAlreadyDoneException {
-        if (task.equals("done")) this.markTaskDone(index);
-        else if (task.equals("delete")) this.deleteTask(index);
     }
 
     public void markTaskDone(int index) throws InvalidIndexException, TaskAlreadyDoneException {

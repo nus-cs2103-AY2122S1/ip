@@ -1,3 +1,9 @@
+package dino.command;
+
+import dino.util.Storage;
+import dino.exception.*;
+import dino.task.*;
+
 public class AddTaskCommand extends Command {
 
     String taskString;
@@ -10,20 +16,23 @@ public class AddTaskCommand extends Command {
 
     @Override
     public void execute(Storage storage, TaskList taskList) throws TimeNotSpecifiedException, EmptyTaskDescriptionException, InvalidFormatException {
-        String description;
+        String description = getTaskDescription(this.taskString, this.taskType);
         Task task;
         switch (this.taskType) {
             case TODO: {
-                description = getTaskDescription(this.taskString, this.taskType);
                 task = new ToDo(description);
                 taskList.addTask(task);
                 break;
             }
-            case DEADLINE:
-            case EVENT : {
-                description = getTaskDescription(this.taskString, this.taskType);
+            case DEADLINE: {
                 String time = getTaskTime(this.taskString);
                 task = new Deadline(description, time);
+                taskList.addTask(task);
+                break;
+            }
+            case EVENT : {
+                String time = getTaskTime(this.taskString);
+                task = new Event(description, time);
                 taskList.addTask(task);
                 break;
             }

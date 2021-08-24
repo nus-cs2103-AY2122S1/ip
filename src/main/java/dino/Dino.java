@@ -1,3 +1,12 @@
+package dino;
+
+import dino.command.Command;
+import dino.exception.*;
+import dino.task.TaskList;
+import dino.util.Parser;
+import dino.util.Ui;
+import dino.util.Storage;
+
 public class Dino {
     private TaskList taskList;
     private final Storage storage;
@@ -9,7 +18,6 @@ public class Dino {
         this.taskList = new TaskList(this.storage.loadStorage());
         this.ui = new Ui();
     }
-
 
     public void run() {
         ui.greeting();

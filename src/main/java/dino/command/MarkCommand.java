@@ -1,3 +1,9 @@
+package dino.command;
+
+import dino.util.Storage;
+import dino.task.TaskList;
+import dino.exception.*;
+
 public class MarkCommand extends Command {
 
     String taskString;

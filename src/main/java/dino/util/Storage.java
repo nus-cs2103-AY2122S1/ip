@@ -1,3 +1,5 @@
+package dino.util;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -5,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import dino.task.*;
+import dino.exception.*;
 
 public class Storage {
     private final String filePath;

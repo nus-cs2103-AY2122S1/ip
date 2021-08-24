@@ -1,3 +1,8 @@
+package dino.util;
+
+import dino.command.*;
+import dino.exception.*;
+
 public class Parser {
 
     public static Command parse(String input) throws InvalidInputException {
