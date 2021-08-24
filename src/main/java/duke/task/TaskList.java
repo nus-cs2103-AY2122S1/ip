@@ -218,10 +218,11 @@ public class TaskList {
     }
     
     /**
-     * Prints only the tasks in the list that contains the keyword in its description.
+     * Prints only the tasks in the list that contains the keyword in their descriptions.
      *
      * @param command command entered by user (find [keyword])
-     * @throws EmptyListException if number of found tasks in the list is 0
+     * @return string representation of the list of matched tasks
+     * @throws EmptyListException if number of matched tasks in the list is 0
      * @throws IllegalFormatException if user inputs an invalid command
      */
     public String findInList(String command) throws EmptyListException, IllegalFormatException {
@@ -246,8 +247,8 @@ public class TaskList {
         return printList(tasks);
     }
     
-    private String printList(List<Task> list) throws EmptyListException {
-        int size = list.size();
+    private String printList(List<Task> tasks) throws EmptyListException {
+        int size = tasks.size();
         
         // Throw exception if list is empty
         if (size == 0) {
@@ -259,14 +260,14 @@ public class TaskList {
         for (int i = 0; i < size - 1; i++) {
             sb.append(i + 1)
               .append(". ")
-              .append(list.get(i))
+              .append(tasks.get(i))
               .append("\n");
         }
         
         // Last task is special as it does not need the '\n'
         sb.append(size)
           .append(". ")
-          .append(list.get(size - 1));
+          .append(tasks.get(size - 1));
         
         // Return string representation of the list of tasks
         return MESSAGE_LIST + "\n" + sb;
