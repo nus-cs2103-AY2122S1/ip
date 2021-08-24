@@ -7,7 +7,11 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class Storage {
-    final static String persistedData = "data/duke.txt";
+    final String persistedData;
+
+    public Storage(String persistedData) {
+        this.persistedData = persistedData;
+    }
 
     public Stream<String> loadPersistedData() {
         Path pathToTxt = Paths.get("data", "duke.txt");

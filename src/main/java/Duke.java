@@ -1,44 +1,32 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.function.Consumer;
-import java.util.stream.Stream;
-
 public class Duke {
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Ui ui;
 
-    public static void main(String[] args) {
+    public Duke(String persistedData) {
+        ui = new Ui();
+        storage = new Storage(persistedData);
+        tasks = new TaskList(storage.loadPersistedData());
+    }
 
-            } else if (userInput.startsWith("todo")) {
-                try {
-                    handleToDo(userInput, false, true);
-                } catch (EmptyTaskDescriptionException e) {
-                    System.out.println(e.getMessage());
-                }
-            } else if (userInput.startsWith("deadline")) {
-                try {
-                    handleDeadline(userInput, false, true);
-                } catch (EmptyTaskDescriptionException e) {
-                    System.out.println(e.getMessage());
-                }
-            } else if (userInput.startsWith("event")) {
-                try {
-                    handleEvent(userInput, false, true);
-                } catch (EmptyTaskDescriptionException e) {
-                    System.out.println(e.getMessage());
-                }
-                // All other cases means input error
-                UnknownInputException e = new UnknownInputException();
-                try {
-                    throw e;
-                } catch (UnknownInputException e1) {
-                    System.out.println(e1.getMessage());
-                }
+    public void run() {
+        boolean toExit = false;
+        ui.showWelcome();
+        while (!toExit) {
+            String fullCommand = ui.readCommand();
+            ui.showLines();
+            try {
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                toExit = c.isExitCommand();
+            } catch (DukeException e) {
+                ui.showError(e);
+            } finally {
+                ui.showLines();
             }
         }
+    }
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
     }
 }

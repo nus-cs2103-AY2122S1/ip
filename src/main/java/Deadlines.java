@@ -8,7 +8,7 @@ public class Deadlines extends Task {
     private LocalDate dateTimeBy;
     public Deadlines(String description, String dateTimeBy, boolean isDone) {
         super(description, isDone);
-        this.dateTimeBy = LocalDate.parse(dateTimeBy.substring(3));
+        this.dateTimeBy = LocalDate.parse(dateTimeBy);
     }
     @Override
     public String persistedDataStringFormat() {

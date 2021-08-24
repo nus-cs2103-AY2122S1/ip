@@ -6,7 +6,7 @@ list
 done 1
 done 4
 todo borrow book
-deadline return book /by Sunday
-deadline do homework /by no idea :-p
+deadline return book /by 2021-10-11
+deadline do homework /by 2020-02-15
 list
 bye

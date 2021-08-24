@@ -1,12 +1,18 @@
 public abstract class Command {
+    private boolean isExit = false;
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
-    protected boolean isExit = false;
 
+    public boolean isExitCommand() {
+        return isExit;
+    }
+    public void setExitTrue() {
+        isExit = true;
+    }
     static class ExitCommand extends Command {
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) {
             ui.showByeMessage();
-            isExit = true;
+            super.setExitTrue();
         }
     }
     static class ListAllCommand extends Command {
@@ -77,9 +83,10 @@ public abstract class Command {
         }
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) {
+            Task taskToDelete = tasks.getTask(this.taskNum);
             tasks.deleteTask(this.taskNum);
             storage.removePersistedTask(this.taskNum);
-            ui.showTaskDeletedInteraction(tasks.getTask(this.taskNum), tasks);
+            ui.showTaskDeletedInteraction(taskToDelete, tasks);
         }
     }
 }

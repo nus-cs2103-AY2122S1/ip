@@ -20,7 +20,7 @@ public class Parser {
             try {
                 int sep = fullCommand.indexOf('/', 9);
                 String descPart = fullCommand.substring(9, sep - 1);
-                String byPart = fullCommand.substring(sep + 1);
+                String byPart = fullCommand.substring(sep + 4);
                 return new Command.DeadlineCommand(descPart, byPart);
             } catch (StringIndexOutOfBoundsException strE) {
                 throw new EmptyTaskDescriptionException("deadline");

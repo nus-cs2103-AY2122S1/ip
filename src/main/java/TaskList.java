@@ -34,7 +34,7 @@ public class TaskList {
         tasks.add(newTask);
     }
     public void deleteTask(int taskNum) {
-        tasks.remove(taskNum - 1);
+        tasks.remove(taskNum);
     }
     public void markTaskAsDone(int taskNum) {
         Task currTask = tasks.get(taskNum);

@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Ui {
     private static final String horizontalLines = "-----------------------------------------";
+    private final Scanner in = new Scanner(System.in);
 
     public void showLines() {
         System.out.println(horizontalLines);
@@ -10,9 +11,7 @@ public class Ui {
         System.out.println(horizontalLines + "\nHello! I'm Naruto\nWhat can I do for you?\n" + horizontalLines);
     }
     public String readCommand() {
-        Scanner in = new Scanner(System.in);
         String userInput = in.nextLine();
-        in.close();
         return userInput;
     }
     public void showTaskAddedInteraction(Task newTask, TaskList tasks) {
@@ -28,6 +27,7 @@ public class Ui {
             System.out.println(counter + "." + task.toString());
             counter += 1;
         }
+        System.out.println(String.format("There are %d tasks in the list.", tasks.getSize()));
     }
     public void showTaskDoneInteraction(Task task) {
         System.out.println("Good job! I've marked this task as done:");
@@ -38,6 +38,10 @@ public class Ui {
         System.out.printf("Now you have %d tasks in the list.%n", tasks.getSize());
     }
     public void showByeMessage() {
-        System.out.println("See ya! Hope to see you again!" + "\n" + horizontalLines);
+        System.out.println("See ya! Hope to see you again!");
+    }
+
+    public void showError(DukeException e) {
+        System.out.println(e.getMessage());
     }
 }
