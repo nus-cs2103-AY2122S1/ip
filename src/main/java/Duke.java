@@ -96,6 +96,20 @@ public class Duke {
                 int index = Integer.parseInt(split[1]);
                 Task deleteTask = tasks.get(index - 1);
                 tasks.remove(index - 1);
+                Scanner dataReader = new Scanner(data);
+                StringBuffer buffer = new StringBuffer();
+                int lineNumber = 1;
+                while (dataReader.hasNextLine()) {
+                    String line = dataReader.nextLine();
+                    if (lineNumber != index) {
+                        buffer.append(line+System.lineSeparator());
+                    }
+                    lineNumber += 1;
+                }
+                String fileContents = buffer.toString();
+                FileWriter writer = new FileWriter("./data/duke.txt");
+                writer.append(fileContents);
+                writer.flush();
                 System.out.println("Noted. I've removed this task:");
                 System.out.println(deleteTask);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
