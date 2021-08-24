@@ -3,6 +3,11 @@ public class Todo extends Task{
         super(description);
     }
 
+    @Override
+    public String toStringForFile() {
+        return "T - " + super.toStringForFile();
+    }
+
     /**
      *
      * @return the String representation of a Deadline

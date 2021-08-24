@@ -1,12 +1,23 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+
+/**
+ * A chat bot named Duke that is responsive to commands.
+ * 
+ * @author Raveen Prabhu 
+ */
 
 public class Duke {
     
-    static List<Task> tasks = new ArrayList<>();
+    private static List<Task> tasks = new ArrayList<>();
+    
+    private static final String PATH = "src/data";
+    private static final String FILENAME = "duke.txt";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -18,7 +29,14 @@ public class Duke {
         System.out.println(horizontalLines);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         System.out.println(horizontalLines);
+        
+        readFile(PATH + "/" + FILENAME);
+        
+        run();
+    }
 
+    public static void run() {
+        String horizontalLines = "---------------------------------";
         boolean end = false;
         int i = 0;
         Scanner sc = new Scanner(System.in);
@@ -45,12 +63,11 @@ public class Duke {
                 //command list
                 else if (str.equals("list")) {
                     System.out.println(horizontalLines);
-                    System.out.println(list(""));
+                    System.out.println(showList(""));
                 }
 
                 //command to do
                 else if (str.contains("todo")) {
-
                     System.out.println(horizontalLines);
                     System.out.println(todoTask(str));
                 }
@@ -81,9 +98,9 @@ public class Duke {
 
         }
         System.out.println(horizontalLines);
-
     }
-    public static String list(String str) {
+    
+    public static String showList(String str) {
         for (int i = 0; i < tasks.size(); i++) {
             str += (i+1) + ". " + tasks.get(i);
             if (i != tasks.size() - 1) {
@@ -92,6 +109,8 @@ public class Duke {
         }
         return str;
     }
+    
+    /////// tomarkasdone method gone
 
     /**
      * A method to mark the task as done
@@ -101,6 +120,7 @@ public class Duke {
     public static String markDone(String str) {
         int a = Integer.parseInt(str.substring(5)) - 1;
         tasks.get(a).taskDone();
+        getAllTasks();
         return "Nice! I've marked this task as done: \n" + tasks.get(a);
     }
 
@@ -112,10 +132,11 @@ public class Duke {
     public static String todoTask(String str) throws DukeException {
         try {
             str = str.substring(5);
-            Task task = new Todo(str);
-            tasks.add(task);
+            Task t = new Todo(str);
+            tasks.add(t);
+            writeLine(t);
             return "Got it. I've added this task: \n"
-                    + task
+                    + t
                     + "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (StringIndexOutOfBoundsException e) {
             return "☹ OOPS!!! The description of a todo cannot be empty.";
@@ -133,6 +154,7 @@ public class Duke {
             int i = str.indexOf("/");
             Task t = new Deadline(str.substring(0, i), str.substring(i + 4));
             tasks.add(t);
+            writeLine(t);
             return "Got it. I've added this task: \n"
                     + t
                     + "\nNow you have " + tasks.size() + " tasks in the list.";
@@ -151,6 +173,7 @@ public class Duke {
             int i = str.indexOf("/");
             Task t = new Events(str.substring(0, i), str.substring(i + 4));
             tasks.add(t);
+            writeLine(t);
             return "Got it. I've added this task: \n"
                     + t
                     + "\nNow you have " + tasks.size() + " tasks in the list.";
@@ -168,9 +191,104 @@ public class Duke {
         int index = Integer.parseInt(str.substring(7)) - 1;
         Task t = tasks.get(index);
         tasks.remove(index);
+        getAllTasks();
         return "Got it. I've added this task: \n"
                 + t
                 + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
+    
+    // SAVE METHODS
+
+    public static void checkForFile(String path) throws IOException {
+        File file = new File(path);
+        File dir = new File(PATH);
+
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+    }
+
+    public static void readFile(String path) throws IOException {
+        
+        checkForFile(path);
+        Scanner sc = new Scanner(new File(path));
+        sc.useDelimiter(Pattern.compile("(\\n)| - "));
+
+        while(sc.hasNext()) {
+            String t = sc.next();
+
+            switch(t) {
+                case "T":
+                    int i = Integer.parseInt(sc.next());
+                    String desc = sc.next();
+                    Task task = new Todo(desc);
+                    if (i == 1) {
+                        task.taskDone();
+                    }
+                    tasks.add(task);
+                    break;
+                case "D":
+                    i = Integer.parseInt(sc.next());
+                    desc = sc.next();
+                    String by = sc.next();
+                    task = new Deadline(desc, by);
+                    if (i == 1) {
+                        task.taskDone();
+                    }
+                    tasks.add(task);
+                    break;
+                case "E":
+                    i = Integer.parseInt(sc.next());
+                    desc = sc.next();
+                    String at = sc.next();
+                    task = new Events(desc, at);
+                    if (i == 1) {
+                        task.taskDone();
+                    }
+                    tasks.add(task);
+                    break;
+            }
+        }
+        sc.close();
+    }
+    
+    public static void getAllTasks() {
+        try {
+            String all = "";
+            for (Task t : tasks) {
+                all += t.toStringForFile() + "\n";
+                overWrite(PATH + "/" + FILENAME, all);
+            } 
+        }
+        catch (IOException e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+    }
+    
+    public static void writeLine(Task task) {
+        try {
+            addToFile(PATH + "/" + FILENAME, task.toStringForFile() + "\n");
+        } catch (IOException e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+    }
+
+    public static void addToFile(String path, String line) throws IOException {
+        checkForFile(path);
+        FileWriter writer = new FileWriter(path, true);
+        writer.write(line);
+        writer.close();
+    }
+
+    public static void overWrite(String path, String line) throws IOException {
+        checkForFile(path);
+        FileWriter writer = new FileWriter(path);
+        writer.write(line);
+        writer.close();
+    }
+    
 }
 
