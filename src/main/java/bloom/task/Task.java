@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Task {
   public static ArrayList<Task> tasks = new ArrayList<>();
-  private final String description;
-  private boolean isDone;
+  protected final String description;
+  protected boolean isDone;
 
   public Task(String description) {
     this.description = description;
@@ -15,6 +15,10 @@ public class Task {
   @Override
   public String toString() {
     return "[" + getStatusIcon() + "] " + this.description;
+  }
+
+  public String toDb() {
+    return (this.isDone ? 1 : 0) + " | " + this.description;
   }
 
   public String getStatusIcon() {
