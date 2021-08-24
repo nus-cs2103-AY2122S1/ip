@@ -1,5 +1,4 @@
-package lania;
-
+import lania.Parser;
 import lania.exception.LaniaEmptyDescriptionException;
 import lania.task.Deadline;
 import lania.task.Event;
