@@ -12,6 +12,10 @@ public class Task implements Serializable {
         this.complete = false;
     }
 
+    public String getTask() {
+        return this.task;
+    }
+
     String printTask() {
         String result = "";
         if (complete) {
