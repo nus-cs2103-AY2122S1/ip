@@ -6,6 +6,7 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 import duke.utils.DukeException;
 import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -13,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class DukeTest {
-    
     @Test
     void singleTodo() {
         try {
@@ -26,7 +26,7 @@ public class DukeTest {
             fail("Single todo not added.");
         }
     }
-    
+
     @Test
     void singleDeadline() {
         try {
@@ -40,14 +40,14 @@ public class DukeTest {
             fail("Single deadline not added.");
         }
     }
-    
+
     @Test
     void clear() {
         try {
             TaskList taskList = new TaskList(false);
             Parser inputH = new Parser(taskList);
             inputH.query("todo test1");
-            assertEquals(true, taskList.contains(new Todo("test1")) );
+            assertEquals(true, taskList.contains(new Todo("test1")));
             inputH.query("clear");
             assertEquals(0, taskList.size());
         } catch (DukeException e) {
