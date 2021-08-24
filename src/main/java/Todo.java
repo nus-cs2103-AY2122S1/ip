@@ -1,7 +1,13 @@
 public class Todo extends Task {
 
-    Todo(String desc) {
-        super(desc);
+    Todo(String desc, Boolean isDone) {
+        super(desc, isDone);
+    }
+
+    @Override
+    public String saveText() {
+        int isDone = this.isDone ? 1 : 0;
+        return "T | " + isDone + " | " + desc + "\n";
     }
 
     @Override

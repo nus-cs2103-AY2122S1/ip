@@ -9,12 +9,12 @@ public class Task {
     String desc;
     boolean isDone;
 
-    Task(String desc) throws EmptyDescException {
+    Task(String desc, Boolean isDone) throws EmptyDescException {
         if (desc.isBlank()) {
             throw new EmptyDescException();
         }
         this.desc = desc;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**
@@ -33,6 +33,11 @@ public class Task {
 
     String completionStatus() {
         return (isDone ? "[X] " : "[ ] ");
+    }
+
+    String saveText() {
+        int isDone = this.isDone ? 1 : 0;
+        return "T | " + isDone + " | " + desc + "\n";
     }
 
     @Override
