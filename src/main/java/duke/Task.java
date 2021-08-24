@@ -20,6 +20,10 @@ public class Task implements Serializable {
         this.complete = false;
     }
 
+    public String getTask() {
+        return this.task;
+    }
+
     /**
      * Return the String representation of a Task.
      *

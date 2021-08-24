@@ -2,6 +2,8 @@ package duke;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList implements Serializable {
     private ArrayList<Task> taskList;
@@ -16,6 +18,7 @@ public class TaskList implements Serializable {
     public ArrayList<Task> currList() {
         return this.taskList;
     }
+
     public int size() {
         return this.taskList.size();
     }
@@ -77,6 +80,21 @@ public class TaskList implements Serializable {
         } catch (InputError e) {
             ui.errorMessage(e);
         }
+    }
+
+    private void addTasks(Task task, ArrayList<Task> list, String word) {
+        if (task.getTask().equals(word)) {
+            list.add(task);
+        }
+    }
+
+    public TaskList findTasks(String str) throws InputError {
+        ArrayList<Task> resultList = new ArrayList<Task>();
+        List<Task> foundArray = taskList.stream().filter(task -> task.printTask().contains(str))
+                .collect(Collectors.toList());
+        resultList = new ArrayList<Task>(foundArray);
+
+        return new TaskList(resultList, ui);
     }
 
 }

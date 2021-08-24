@@ -117,6 +117,14 @@ public class Parser {
         return isDelete;
     }
 
+    private boolean checkFind(String str) {
+        boolean isFind = false;
+        if (str.length() >= 4) {
+            isFind = str.substring(0,4).equals("find");
+        }
+        return isFind;
+    }
+
     /**
      * Checks what command is the user input.
      *
@@ -140,6 +148,8 @@ public class Parser {
             caseNum = 6;
         } else if (checkDelete(input)) {
             caseNum = 7;
+        } else if (checkFind(input)) {
+            caseNum = 8;
         }
         return caseNum;
     }
@@ -162,6 +172,23 @@ public class Parser {
             }
             int indexNum = Integer.parseInt(str.replaceAll("[^0-9]", ""));
             taskList.doneItem(indexNum);
+        } catch (InputError e) {
+            ui.errorMessage(e);
+        }
+    }
+
+    private void findSeq(String str, TaskList taskList) throws InputError {
+        try {
+            if (str.length() == 4) {
+                throw new InputError("No task indicated");
+            }
+            String searchWord = str.substring(5);
+            TaskList foundList = taskList.findTasks(searchWord);
+            if (foundList.currList().isEmpty()) {
+                throw new InputError("No such tasks found");
+            }
+            System.out.println("We found these for you boss:");
+            foundList.printList();
         } catch (InputError e) {
             ui.errorMessage(e);
         }
@@ -244,6 +271,9 @@ public class Parser {
             case 7:
                 deleteSeq(input, taskList);
                 storage.fileSaver(taskList.currList());
+                break;
+            case 8:
+                findSeq(input, taskList);
                 break;
             default:
                 ui.invalidInput();
