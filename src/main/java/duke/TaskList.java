@@ -54,4 +54,15 @@ public class TaskList implements TaskListInterface {
         }
         return results;
     }
+
+    public ArrayList<Task> find(String word) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task t = this.tasks.get(i);
+            if (t.contains(word)) {
+                results.add(t);
+            }
+        }
+        return results;
+    }
 }

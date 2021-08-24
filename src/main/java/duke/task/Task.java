@@ -35,6 +35,10 @@ public class Task {
         return "[" + getStatusIcon() + "] " + this.description;
     }
 
+    public boolean contains(String word) {
+        return this.description.contains(word);
+    }
+
     public int taskType() {
         return -1;
     }

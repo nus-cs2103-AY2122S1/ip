@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.*;
-import duke.testinginterface.DeadlineInterface;
-import duke.testinginterface.EventInterface;
-import duke.testinginterface.TodoInterface;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -83,5 +83,15 @@ public class Ui {
 
     public void exit() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public void find(TaskList taskList, String word) {
+        ArrayList<Task> matchingDates = taskList.find(word);
+
+        String output = "Here are the matching tasks in your list: \n";
+        for (int i = 1; i <= matchingDates.size(); i++) {
+            output = output + i + ". " + matchingDates.get(i - 1).toString() + "\n";
+        }
+        System.out.println(output);
     }
 }
