@@ -16,7 +16,7 @@ public class Events extends Task {
      * Constructor.
      *
      * @param description the name of the task
-     * @param at the start
+     * @param at          the start
      */
     public Events(String description, String at) {
         super(description);
@@ -25,7 +25,7 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +  at.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
     }
 
     @Override

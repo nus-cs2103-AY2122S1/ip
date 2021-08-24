@@ -1,7 +1,8 @@
 package lebron.task;
 
-import java.util.ArrayList;
 import lebron.Ui;
+
+import java.util.ArrayList;
 
 /**
  * Represents the list of tasks.
