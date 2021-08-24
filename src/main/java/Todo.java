@@ -7,12 +7,14 @@
 // Testing for git Branch-level 7
 public class Todo extends Task{
 
+    private static String taskCat = "todo";
+
     /**
      * Constructor to create a TODO task
      * @param name Name of task
      */
-    Todo(String name) {
-        super(name);
+    Todo(String name, boolean isDone) {
+        super(name, taskCat, isDone);
     }
 
     /**
@@ -26,5 +28,13 @@ public class Todo extends Task{
         } else {
             return String.format("[T][ ] %s", this.getName());
         }
+    }
+
+    /**
+     * @return Category of task
+     */
+    @Override
+    public String getTaskCat() {
+        return taskCat;
     }
 }

@@ -5,36 +5,45 @@
  */
 public class Task {
     private String name;
-    private boolean done;
+    private boolean isDone;
+    private String taskCat;
 
     /**
      * Construct a generic task yet to be completed
      * @param name The name of the task
      */
-    Task(String name) {
+    Task(String name, String taskCat, boolean isDone) {
         this.name = name;
-        this.done = false;
+        this.isDone = isDone;
+        this.taskCat = taskCat;
+    }
+
+    /**
+     * @return Category of task
+     */
+    public String getTaskCat() {
+        return taskCat;
     }
 
     /**
      * @return The name of the task
      */
     public String getName() {
-        return this.name;
+        return this.name.trim();
     }
 
     /**
      * @return Whether the task has been completed
      */
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     /**
      * Sets task to completed
      */
     public void setToCompleted() {
-        this.done = true;
+        this.isDone = true;
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(this);
         System.out.println(Duke.breakline);
@@ -48,7 +57,7 @@ public class Task {
      * @param taskType The type of task
      * @return A task of class taskType based on the command given
      */
-    public static Task parseStringIntoTask(String taskName, String taskType) {
+    public static Task parseStringIntoTask(String taskName, String taskType, boolean isDone) {
         String split = "";
         try {
             if (taskName.equals("")) {
@@ -65,7 +74,7 @@ public class Task {
 
             switch (taskType) {
                 case "todo":
-                    return new Todo(taskName);
+                    return new Todo(taskName, isDone);
                 case "deadline":
                     split = "/by ";
                     break;
@@ -87,9 +96,9 @@ public class Task {
             Task task = null;
 
             if(taskType.equals("deadline")) {
-                task = new Deadline(name, time);
+                task = new Deadline(name, time, isDone);
             } else if (taskType.equals("event")) {
-                task = new Event(name, time);
+                task = new Event(name, time, isDone);
             }
             return task;
         } catch (DukeException e) {
@@ -107,5 +116,12 @@ public class Task {
     public String toString() {
         return this.name;
     }
-    
+
+    /**
+     * @return Gets addtional details of task
+     */
+    public String getDetail() {
+        return "";
+    }
+
 }
