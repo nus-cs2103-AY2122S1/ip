@@ -51,6 +51,10 @@ public class Parser {
             runDelete(cmd_args);
             break;
 
+        case ("find"):
+            runFind(cmd_args);
+            break;
+
         case ("todo"):
             runTodo(cmd_args);
             break;
@@ -98,6 +102,13 @@ public class Parser {
             throw new DukeException(TaskArrayList.DELETE_USAGE_TEXT);
         }
         ui.display(taskList.deleteTask(Integer.parseInt(cmd_args[1])));
+    }
+
+    private void runFind(String[] cmd_args) throws DukeException {
+        if (cmd_args.length != 2) {
+            throw new DukeException(TaskArrayList.FIND_USAGE_TEXT);
+        }
+        ui.display(taskList.find(cmd_args[1]));
     }
 
     private void runTodo(String[] cmd_args) throws DukeException {

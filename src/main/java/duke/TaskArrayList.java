@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class TaskArrayList extends ArrayList<Task> {
     public final static String DELETE_USAGE_TEXT = "Usage: delete <integer task number>";
     public final static String DONE_USAGE_TEXT = "Usage: done <integer task number>";
+    public final static String FIND_USAGE_TEXT = "Usage: find <search String>";
 
     public TaskArrayList(){
         super();
@@ -55,6 +56,26 @@ public class TaskArrayList extends ArrayList<Task> {
         int num = 0;
         for (Task task: this){
             out += String.format("%d. ",num+1) +task.toString() + "\n";
+            num ++;
+        }
+        return out;
+    }
+
+    /**
+     * Find all tasks that contain the searchTerm
+     * enumerate but only include if task string contains search term
+     * use absolute task number so delete and done commands can reference this result
+     *
+     * @param searchTerm term to find in task names
+     * @return String[] of tasks of "X. taskname"
+     */
+    public String find(String searchTerm) {
+        String out = "";
+        int num = 0;
+        for (Task task : this) {
+            if (task.toString().contains(searchTerm)) {
+                out += String.format("%d. ", num + 1) + task.toString() + "\n";
+            }
             num ++;
         }
         return out;
