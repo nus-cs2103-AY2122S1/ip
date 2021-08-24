@@ -16,6 +16,7 @@ public class Parser {
         input = input.strip();
         String[] inputs = input.split(" ");
         String action = inputs[0];
+
         switch (action.toLowerCase()) {
         case "bye":
             return new Command.ExitCommand();
@@ -28,6 +29,7 @@ public class Parser {
             } else {
                 try {
                     int index = Integer.parseInt(inputs[1]);
+
                     return new Command.DoneCommand(index);
                 } catch (NumberFormatException e) {
                     throw new DukeException("Invalid input! Please enter the task number after 'done'.");
@@ -40,6 +42,7 @@ public class Parser {
             }
             try {
                 int index = Integer.parseInt(inputs[1]);
+
                 return new Command.DeleteCommand(index);
             } catch (NumberFormatException e) {
                 throw new DukeException("Invalid input! Please enter the task number after 'delete'.");

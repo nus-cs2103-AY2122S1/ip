@@ -40,6 +40,7 @@ public class Storage {
                 dukeData.createNewFile();
             } else {
                 Scanner sc = new Scanner(dukeData);
+
                 while (sc.hasNext()) {
                     str += sc.nextLine() + "\n";
                 }
@@ -61,6 +62,7 @@ public class Storage {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filePath)));
             writer.write(savedData);
+
             writer.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());

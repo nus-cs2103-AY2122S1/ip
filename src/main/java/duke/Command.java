@@ -53,6 +53,7 @@ public abstract class Command {
         public void execute(TaskList taskList, Ui ui, Storage storage) {
             try {
                 TaskList.Task task = taskList.add(input, taskType);
+
                 ui.addUi(taskList, task);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -168,6 +169,7 @@ public abstract class Command {
         @Override
         public void execute(TaskList taskList, Ui ui, Storage storage) {
             storage.write(taskList);
+
             ui.exitUi();
         }
 

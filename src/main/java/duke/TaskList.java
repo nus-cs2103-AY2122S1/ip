@@ -25,27 +25,33 @@ public class TaskList {
         if (data.isEmpty()) {
             throw new DukeException("No previous data found.\nLet's start a new To-Do List!");
         }
+
         taskList = new ArrayList<>();
         Scanner sc = new Scanner(data);
+
         while (sc.hasNext()) {
             int taskType = Integer.parseInt(sc.nextLine());
             boolean isDone = Boolean.parseBoolean(sc.nextLine());
+
             switch (taskType) {
             case 0:
                 String tDescription = sc.nextLine();
                 Todo tTask = new Todo(isDone, tDescription);
+
                 taskList.add(tTask);
                 break;
             case 1:
                 String dDescription = sc.nextLine();
                 String by = sc.nextLine();
                 Deadline dTask = new Deadline(isDone, dDescription, by);
+
                 taskList.add(dTask);
                 break;
             case 2:
                 String eDescription = sc.nextLine();
                 String at = sc.nextLine();
                 Event eTask = new Event(isDone, eDescription, at);
+
                 taskList.add(eTask);
                 break;
             default:
@@ -73,6 +79,7 @@ public class TaskList {
      */
     public Task add(String input, int taskType) throws DukeException {
         Task task;
+
         switch (taskType) {
         case 0:
             task = new Todo(input);
@@ -86,6 +93,7 @@ public class TaskList {
         default:
             throw new DukeException("Not a valid Task!!");
         }
+
         taskList.add(task);
         return task;
     }
@@ -101,9 +109,11 @@ public class TaskList {
         if (i > taskList.size() || i < 1) {
             throw new DukeException("Please enter a valid task number!");
         }
+
         if (!taskList.get(i - 1).markAsDone()) {
             return null;
         }
+
         return taskList.get(i - 1);
     }
 
@@ -118,6 +128,7 @@ public class TaskList {
         if (i > taskList.size() || i < 1) {
             throw new DukeException("Please enter a valid task number!");
         }
+
         return taskList.remove(i - 1);
     }
 
@@ -129,9 +140,11 @@ public class TaskList {
      */
     public String checkOut() {
         String str = "";
+
         for (int i = 0; i < taskList.size(); i++) {
             str += taskList.get(i).saveAsString();
         }
+
         return str;
     }
 
@@ -166,7 +179,9 @@ public class TaskList {
         for (int i = 0; i < size - 1; i++) {
             str += String.format("%d.%s\n", i + 1, taskList.get(i));
         }
+
         str += String.format("%d.%s", size, taskList.get(size - 1));
+
         return str;
     }
 
@@ -199,6 +214,7 @@ public class TaskList {
         @Override
         public String toString() {
             String str = String.format("[%s] %s", this.isDone(), this.task);
+
             return str;
         }
 
@@ -216,12 +232,15 @@ public class TaskList {
          */
         public Todo(String input) throws DukeException {
             String[] inputs = input.split(" ");
+
             if (inputs.length == 1) {
                 throw new DukeException("Insufficient input received! "
                         + "Please add in description of the Todo task.");
             }
+
             int tFirst = input.indexOf(" ");
             String tTask = input.substring(tFirst + 1);
+
             super.task = tTask;
         }
 
@@ -264,11 +283,14 @@ public class TaskList {
                 throw new DukeException("Insufficient input received! "
                         + "Please add in description of the Deadline task.");
             }
+
             if (!input.contains("/by")) {
                 throw new DukeException("Invalid input! Please add in the deadline for the task.");
             }
+
             int dFirst = input.indexOf(" ");
             int dSecond = input.indexOf("/");
+
             try {
                 String dTask = input.substring(dFirst + 1, dSecond - 1);
                 LocalDateTime by = LocalDateTime.parse(input.substring(dSecond + 4), super.inputFormat);
@@ -324,11 +346,14 @@ public class TaskList {
                 throw new DukeException("Insufficient input received! "
                         + "Please add in description of the Event task.");
             }
+
             if (!input.contains("/at")) {
                 throw new DukeException("Invalid input! Please add in information about the event.");
             }
+
             int eFirst = input.indexOf(" ");
             int eSecond = input.indexOf("/");
+
             try {
                 String eTask = input.substring(eFirst + 1, eSecond - 1);
                 LocalDateTime at = LocalDateTime.parse(input.substring(eSecond + 4), super.inputFormat);
