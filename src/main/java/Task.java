@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 public class Task {
     private String title;
     private boolean completed;
@@ -12,6 +13,9 @@ public class Task {
         return "Nice I've marked this task as done!\n" + this.toString();
     }
 
+    public boolean compareDate(LocalDate compare) {
+        return false;
+    }
 
     @Override
     public String toString() {

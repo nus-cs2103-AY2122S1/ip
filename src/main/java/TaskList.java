@@ -1,5 +1,7 @@
 import java.util.ArrayList;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.stream.Stream;
 public class TaskList {
     private ArrayList<Task> list;
 
@@ -25,6 +27,13 @@ public class TaskList {
     public Task deleteTask(int index) {
         return this.list.remove(index);
     }
+
+    public Task[] tasksOnDate(String date) {
+        LocalDate search = LocalDate.parse(date.trim(), DateTimeFormatter.ofPattern("d/MM/yyyy"));
+        Task[] filtered = this.list.stream().filter(task -> task.compareDate(search)).toArray(Task[]::new);
+        return filtered;
+    }
+
     @Override
     public String toString() {
         String l = "Here are the tasks on your list:";
