@@ -145,7 +145,7 @@ public class Duke {
         try {
             return LocalTime.parse(str.substring(0, 2) + ":" + str.substring(2));
         } catch (Exception e) {
-            throw new DukeException("Your Time is wrongly formatted! It should be ineve the form of hhmm.");
+            throw new DukeException("Your Time is wrongly formatted! It should be in the the form of hhmm.");
         }
     }
 

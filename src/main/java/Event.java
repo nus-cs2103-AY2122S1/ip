@@ -16,8 +16,8 @@ public class Event extends Task {
 
     @Override
     public String outputFormat() {
-        return "E" + super.outputFormat() + " | " + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
-                + ", " + time.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        return "E" + super.outputFormat() + " | " + date.getDayOfMonth() + "/" + date.getMonthValue() + "/" + date.getYear()
+                + " " + String.format("%1$" + 2 + "s", time.getHour()).replace(' ', '0') + String.format("%1$" + 2 + "s", time.getMinute()).replace(' ', '0');
     }
 
     @Override
