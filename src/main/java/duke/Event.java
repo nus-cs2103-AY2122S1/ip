@@ -5,6 +5,8 @@ import java.time.LocalTime;
 
 /**
  * Tasks that start at a specific time and ends at a specific time.
+ * 
+ * @author Tianqi-Zhu
  */
 public class Event extends Task {
     private boolean isTimeString;

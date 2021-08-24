@@ -2,7 +2,12 @@ package duke;
 
 import java.io.Serializable;
 
-public class Task implements Executable, Serializable{
+/**
+ * Task type for the duke bot.
+ * 
+ * @author Tianqi-Zhu
+ */
+public class Task implements Executable, Serializable {
     protected String name; 
     protected boolean isDone = false; 
 
@@ -17,7 +22,12 @@ public class Task implements Executable, Serializable{
     public String name() {
         return name;
     }
-
+    
+    /**
+     * Execute to add this task to the list.
+     * 
+     * @param taskList Current list of tasks.
+     */
     public void execute(TaskList taskList) {
         taskList.addTask(this);
     }

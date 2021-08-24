@@ -7,7 +7,18 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * Methods to save and load tasklists of duke to disk.
+ * 
+ * @author Tianqi-Zhu
+ */
 public class Storage {
+
+    /**
+     * Save the current taskList to disk.
+     * 
+     * @param taskList Current list of tasks.
+     */
     public static void save(TaskList taskList) {
         File file =  new File("data/TaskList.ser");
         if (! file.exists()) {
@@ -24,10 +35,15 @@ public class Storage {
             out.close();
             fileOut.close();
         } catch (IOException e) {
-            Ui.printString(e.getMessage());
+            Ui.printString(e.toString());
         }
     }
 
+    /**
+     * Load the taskList saved on disk. Called when Duke is started. 
+     * 
+     * @return The taskList stored on the disk.
+     */
     public static TaskList load() {
         File file =  new File("data/TaskList.ser");
         if (! file.exists()) {
@@ -45,7 +61,7 @@ public class Storage {
                     Ui.printString(e.getMessage());
                 }
             } catch (IOException e) {
-                Ui.printString(e.getMessage());
+                Ui.printString(e.toString());
             }
         }
         return new TaskList();

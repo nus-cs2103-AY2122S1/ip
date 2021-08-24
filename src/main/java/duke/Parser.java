@@ -4,7 +4,21 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Methods to parse strings typed by user.
+ * 
+ * @author Tianqi-Zhu
+ */
 public class Parser {
+    
+    /**
+     * Parse a line of texts typed by user. 
+     * 
+     * @param newInput User's new line of input. 
+     * @param taskList Current taskList.
+     * @return Commands to execute or tasks to put into list.
+     * @throws DukeExcpetion If the input is valid.
+     */
     public static Executable parse(String newInput, TaskList taskList) throws DukeExcpetion {
         if (newInput.equals("list")) {
             return new ListCommand(); 
@@ -80,7 +94,14 @@ public class Parser {
             throw new DukeExcpetion("Sorry, I don't understand the input.");
         }
     }
-
+    
+    /**
+     * Parse a string of time typed by user of format hhmm.
+     * 
+     * @param timeString String of hhmm format to parse.
+     * @return 
+     * @throws DukeExcpetion
+     */
     private static LocalTime parseTime(String timeString) throws DukeExcpetion {
         String expanded = timeString.substring(0, 2) + ":" + timeString.substring(2) + ":00";
         try {

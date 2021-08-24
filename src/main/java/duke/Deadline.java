@@ -5,6 +5,8 @@ import java.time.LocalTime;
 
 /**
  * tasks that need to be done before a specific date/time
+ * 
+ * @author Tianqi-Zhu
  */
 public class Deadline extends Task {
     private LocalTime endTime;

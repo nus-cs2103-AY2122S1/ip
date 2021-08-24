@@ -2,6 +2,8 @@ package duke;
 
 /**
  * tasks without any date/time attached to it
+ * 
+ * @author Tianqi-Zhu
  */
 public class ToDo extends Task {
     public ToDo(String name) {

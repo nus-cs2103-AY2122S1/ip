@@ -2,6 +2,11 @@ package duke;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Methods for printing. Defines format, indentation etc.
+ * 
+ * @author Tianqi-Zhu
+ */
 public class Ui {
     public static final String LINE_STRING = "----------------------------------------";
     public static final String SPACE_STRING = "    ";
@@ -10,14 +15,14 @@ public class Ui {
     public static final DateTimeFormatter OUT_TIME_FORMATTER = DateTimeFormatter.ISO_LOCAL_TIME;
 
     /**
-     * print exit message
+     * Print exit message.
      */
     public static void exit() {
         printString("Bye. Hope to see you again soon!");
     }
     
     /**
-     * print greeting messgae
+     * Print greeting messgae.
      */
     public static void greet() {
         String logo = " ____        _        \n"
@@ -29,7 +34,8 @@ public class Ui {
     }
 
     /** 
-     * print in the format with lines
+     * Print in the format with lines.
+     * 
      * @param inputString string to print
      */
     public static void printString(String inputString) {
@@ -39,7 +45,8 @@ public class Ui {
     }
     
     /** 
-     * method that adjust printing format to suit list printing 
+     * Method that adjust printing format to suit list printing.
+     * 
      * @param taskString multi-line string of tasks to be printed
      */
     public static void printList(String taskString) {

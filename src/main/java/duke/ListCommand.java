@@ -1,6 +1,17 @@
 package duke;
 
+/**
+ * A class for the 'list' command, which lists all available tasks with type, whether done or not, names and dates.
+ * 
+ * @author Tianqi-Zhu
+ */
 public class ListCommand implements Executable {
+
+    /**
+     * Prints the task list onto the screen.
+     * 
+     * @param taskList Current list of tasks.
+     */
     public void execute(TaskList taskList) {
         if (taskList.tasks().size() == 0) {
             Ui.printString("No current task available.");

@@ -2,6 +2,11 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Main class for the duke assistant bot.
+ * 
+ * @author Tianqi-Zhu
+ */
 public class Duke {
 
     private static void run() {
