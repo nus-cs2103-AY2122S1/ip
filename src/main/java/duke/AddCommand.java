@@ -1,15 +1,32 @@
 package duke;
 
+/**
+ * Encapsulates a command by the user to add a task into Duke's to-do-list.
+ */
 public class AddCommand extends Command {
     private String description;
     private String taskType;
 
-    public AddCommand(String taskType, String secondWord) {
+    /**
+     * Constructor for an add command.
+     *
+     * @param taskType The type of task to add into Duke; can be a Todo, Deadline or Event.
+     * @param remainingWords The description of the task, as well as deadlines or timing if applicable.
+     */
+    public AddCommand(String taskType, String remainingWords) {
         super();
         this.taskType = taskType;
-        this.description = secondWord;
+        this.description = remainingWords;
     }
 
+    /**
+     * Executes the add command.
+     *
+     * @param tasks The list of tasks in the to-do-list.
+     * @param ui The user interface that deals with interactions with the user.
+     * @param storage The storage that Duke uses to deal with loading tasks from and saving tasks to a file.
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = null;

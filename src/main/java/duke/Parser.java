@@ -1,6 +1,16 @@
 package duke;
 
+/**
+ * A class that deals with making sense of user inputs.
+ */
 public class Parser {
+    /**
+     * Parses a user's inputs into commands that can be executed by Duke.
+     *
+     * @param fullCommand The string input by the user.
+     * @return A command that can be executed by Duke.
+     * @throws DukeException
+     */
     public static Command parse(String fullCommand) throws DukeException {
         // Separate user input into words
         String firstWord;
