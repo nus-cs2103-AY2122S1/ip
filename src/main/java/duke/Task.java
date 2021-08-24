@@ -29,6 +29,10 @@ public class Task {
      * leaving it blank if the task is not considered done.
      * @return String of formatted task description and if task is marked done.
      */
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public String toString() {
         return (isDone ? "[X] " + this.description : "[ ] " + this.description); // mark done task with X
