@@ -32,4 +32,14 @@ public class Event extends Task{
     public String getTaskTime(){
         return this.at.toString();
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Event){
+            Event event = (Event) obj;
+            return event.toString().equals(this.toString());
+        } else {
+            return false;
+        }
+    }
 }

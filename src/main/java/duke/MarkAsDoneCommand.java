@@ -18,4 +18,17 @@ public class MarkAsDoneCommand extends Command {
     public boolean isExit(){
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof MarkAsDoneCommand){
+            @SuppressWarnings("have checked obj is MarkAsDoneCommand, can safely parse")
+            MarkAsDoneCommand temp = (MarkAsDoneCommand)obj;
+            return temp.doneListIndex == this.doneListIndex
+                    ?true
+                    :false;
+        } else {
+            return false;
+        }
+    }
 }

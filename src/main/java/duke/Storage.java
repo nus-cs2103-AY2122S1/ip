@@ -50,24 +50,6 @@ public class Storage {
         return task;
     }
 
-//    public void listAllTasks(){
-//        File dukeFile = new File(filePath);
-//        try {
-//            Scanner scan = new Scanner(dukeFile);
-//            int i = 0;
-//            while(scan.hasNext()){
-//                String taskString = scan.nextLine();
-//                duke.Task task = convertTaskStringToTask(taskString);
-//                System.out.println((i+1) + "." + task.toString());
-//                i++;
-//            }
-//        } catch (IOException e) {
-//            System.out.println(e.getMessage());
-//        } catch (duke.DukeException dukeException){
-//            System.out.println(dukeException.getMessage());
-//        }
-//    }
-
     public TaskList convertFileToTaskList(){
         TaskList taskList = new TaskList(new ArrayList<Task>());
         File dukeFile = new File(filePath);
@@ -98,23 +80,4 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
-//
-//    public void markTaskAsDone(int index){
-//        ArrayList<duke.Task> taskArray = convertFileToArray();
-//        taskArray.get(index).done();
-//        System.out.println(taskArray.get(index).getStatus());
-//        convertTaskListToFile(taskArray);
-//        System.out.println("Nice! I've marked this task as done:\n"
-//                + taskArray.get(index).toString());
-//    }
-
-//    public void deleteTask(int index) {
-//        ArrayList<duke.Task> taskArray = convertFileToArray();
-//        duke.Task removedTask = taskArray.remove(index);
-//        convertTaskArrayToFile(taskArray);
-//        System.out.println("Got it. I've removed this task:\n"
-//                + removedTask.toString()
-//                + "\nNow you have "
-//                + taskArray.size() + " tasks in the list.");
-//    }
 }

@@ -19,4 +19,13 @@ public class AddCommand extends Command {
         return false;
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof AddCommand){
+           return true;
+        } else {
+            return false;
+        }
+    }
+
 }

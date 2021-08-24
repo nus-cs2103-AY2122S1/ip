@@ -16,4 +16,13 @@ public class ToDo extends Task{
         return "T";
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof ToDo){
+            ToDo toDo = (ToDo) obj;
+            return toDo.toString().equals(this.toString());
+        } else {
+            return false;
+        }
+    }
 }

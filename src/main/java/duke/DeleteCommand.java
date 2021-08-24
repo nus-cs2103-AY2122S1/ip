@@ -18,4 +18,17 @@ public class DeleteCommand extends Command {
     public boolean isExit(){
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof DeleteCommand){
+            @SuppressWarnings("have checked obj is MarkAsDoneCommand, can safely parse")
+            DeleteCommand temp = (DeleteCommand)obj;
+            return temp.deletedTaskIndex == this.deletedTaskIndex
+                    ?true
+                    :false;
+        } else {
+            return false;
+        }
+    }
 }

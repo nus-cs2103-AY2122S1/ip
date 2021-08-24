@@ -27,4 +27,14 @@ public class Deadline extends Task {
     public String getTaskTime(){
         return this.by.toString();
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Deadline){
+            Deadline deadline = (Deadline) obj;
+            return deadline.toString().equals(this.toString());
+        } else {
+            return false;
+        }
+    }
 }
