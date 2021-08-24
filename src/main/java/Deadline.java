@@ -27,7 +27,6 @@ public class Deadline extends Task{
         super(description);
         this.deadline = deadline;
         this.deadlineTime = setDeadlineTime(deadline);
-
     }
 
     public String getDeadline() {
