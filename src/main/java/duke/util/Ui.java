@@ -28,8 +28,8 @@ public class Ui {
     }
     
     /**
-     * Prints a horizontal line, followed by the message on a newline, then another horizontal line on a newline. Each
-     * newline will be prepended with a tab.
+     * Prints a horizontal line, followed by the message on a newline, then another horizontal line on a newline.
+     * Each newline will be prepended with a tab.
      * <p></p>
      * It looks like the following:
      * <br>

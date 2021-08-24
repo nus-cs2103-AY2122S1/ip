@@ -29,7 +29,8 @@ public class TaskList {
     }
     
     /**
-     * Overloading constructor for TaskList. Allows user to input a list of tasks.
+     * Overloading constructor for TaskList.
+     * Allows user to input a list of tasks.
      *
      * @param tasks an existing list of tasks
      */
@@ -45,7 +46,7 @@ public class TaskList {
      * Deletes the task with the same task number specified by user.
      *
      * @param command command entered by user (delete [task number])
-     * @return confirmation message for successful deleting a task
+     * @return confirmation message for successfully deleted a task
      * @throws IllegalFormatException if user gives empty or invalid task number
      * @throws TaskNotFoundException if the task specified by the task number does not exist
      */
@@ -85,7 +86,7 @@ public class TaskList {
      * Marks the task with the same task number specified by user as done.
      *
      * @param command command entered by user (done [task number])
-     * @return confirmation message for successful marking a task as done
+     * @return confirmation message for successfully marked a task as done
      * @throws IllegalFormatException if user gives empty or invalid task number
      * @throws TaskNotFoundException if the task specified by the task number does not exist
      */
@@ -117,8 +118,8 @@ public class TaskList {
     /**
      * Adds a new event to the list of tasks.
      *
-     * @param command command entered by user (event [description] /at [time])
-     * @return confirmation message for successful adding a new event
+     * @param command command entered by user (event [description] /at [dd/MM/yy] /from [HHmm] /to [HHmm])
+     * @return confirmation message for successfully added a new event
      * @throws IllegalFormatException if user inputs an invalid command
      */
     public String addEvent(String command) throws IllegalFormatException {
@@ -162,8 +163,8 @@ public class TaskList {
     /**
      * Adds a new deadline to the list of tasks.
      *
-     * @param command command entered by user (deadline [description] /by [time])
-     * @return confirmation message for successful adding a new deadline
+     * @param command command entered by user (deadline [description] /by [dd/MM/yy] [HHmm])
+     * @return confirmation message for successfully added a new deadline
      * @throws IllegalFormatException if user inputs an invalid command
      */
     public String addDeadline(String command) throws IllegalFormatException {
@@ -199,7 +200,7 @@ public class TaskList {
      * Adds a new todo to the list of tasks.
      *
      * @param command command entered by user (todo [description])
-     * @return confirmation message for successful adding a new todo
+     * @return confirmation message for successfully added a new todo
      * @throws IllegalFormatException if user inputs an invalid command
      */
     public String addTodo(String command) throws IllegalFormatException {
