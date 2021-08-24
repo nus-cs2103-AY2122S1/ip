@@ -1,6 +1,10 @@
 package duke;
 
 import duke.exception.WrongCommandFormatException;
+import duke.tasktype.Deadline;
+import duke.tasktype.Event;
+import duke.tasktype.Task;
+import duke.tasktype.Todo;
 
 public class Ui {
 
@@ -51,5 +55,69 @@ public class Ui {
 
     public static void botShutdownMessage() {
         System.out.println("Good riddance! Time to continue my beauty sleep :)");
+    }
+
+    public static void addTaskMessage(Task t, MyList list) {
+        System.out.println("Got it! I have added:");
+        System.out.println(t.toString());
+        int noOfItems = list.getListSize();
+        if (noOfItems == 1) {
+            System.out.printf("You now have %d item in your list \n", noOfItems);
+        } else {
+            System.out.printf("You now have %d items in your list \n", noOfItems);
+        }
+    }
+
+    public static void listAllMessage(MyList list) {
+        int listLength = list.getListSize();
+        if (listLength == 0) {
+            System.out.println("Your list is empty.");
+        } else {
+            System.out.println("Your list items:");
+            for (int i = 0; i < listLength; i ++) {
+                Task t = list.getTask(i);
+                System.out.printf("%d. %s \n", i + 1, t.toString());
+            }
+        }
+    }
+
+    public static void deleteTaskMessage(Task t, MyList list) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(t.toString());
+        int noOfItems = list.getListSize();
+        if (noOfItems == 1) {
+            System.out.printf("You now have %d item in your list \n", noOfItems);
+        } else {
+            System.out.printf("You now have %d items in your list \n", noOfItems);
+        }
+    }
+
+    public static void taskAlrCompleted(Task t) {
+        System.out.println("`" + t.getDescription().substring(1) + "`" + " is already completed.");
+    }
+
+    public static void markCompleteEvent(Event e) {
+        System.out.println("Completed: "
+                + e.getDescription()
+                + " (by:"
+                + e.getTimeframe()
+                + ")"
+        );
+        System.out.println("WEW that's another task completed");
+    }
+
+    public static void markCompleteTodo(Todo t) {
+        System.out.println(
+                "Finally! Took you long enough to complete:" + t.getDescription()
+        );
+    }
+
+    public static void markCompleteDeadline(Deadline d) {
+        System.out.println("Completed:"
+                + d.getDescription()
+                + " (by:"
+                + d.getDeadline().format(d.getCurrentFormat()) + ")"
+        );
+        System.out.println("You didn't overshoot the deadline right?");
     }
 }
