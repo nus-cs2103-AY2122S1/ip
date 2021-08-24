@@ -64,7 +64,7 @@ public class TaskList {
     public String getData() {
         StringBuilder data = new StringBuilder();
         for (Task task : tasks) {
-            data.append(task.dataToString()).append("\n");
+            data.append(task.toDataString()).append("\n");
         }
         if (data.length() > 0) {
             return data.toString().substring(0, data.length() - 1);

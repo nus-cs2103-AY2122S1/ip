@@ -17,7 +17,7 @@ public abstract class Task {
         }
     }
 
-    public String dataToString() {
+    public String toDataString() {
         return String.format("%d | %s", this.done ? 1 : 0, this.taskDetails);
     }
 

@@ -11,7 +11,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String dataToString() {
-        return String.format("T | %s", super.dataToString());
+    public String toDataString() {
+        return String.format("T | %s", super.toDataString());
     }
 }

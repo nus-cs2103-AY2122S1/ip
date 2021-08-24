@@ -26,8 +26,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String dataToString() {
+    public String toDataString() {
         String timeInfoString = timeInfo.format(inputFormatter);
-        return String.format("D | %s | %s", super.dataToString(), timeInfoString);
+        return String.format("D | %s | %s", super.toDataString(), timeInfoString);
     }
 }
