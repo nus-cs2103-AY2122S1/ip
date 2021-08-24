@@ -140,7 +140,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The description of a " + splitString[0]
                                 + " cannot be empty.");
                     }
-                }
+                }gi
             } catch (DukeException de) {
                 this.ui.showError(de);
             }
