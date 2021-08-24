@@ -10,15 +10,15 @@ public class ToDo extends Task {
     /**
      * Loads a ToDo from data parsed from the save file
      *
-     * @param loadData A line from the csv, split by commas
+     * @param loadDatas A line from the csv, split by commas
      * @return ToDo created from provided data
      */
-    public static ToDo load(String[] loadData) {
-        boolean done = loadData[1].equals("o");
-        String name = loadData[2];
+    public static ToDo load(String[] loadDatas) {
+        boolean isDone = loadDatas[1].equals("o");
+        String name = loadDatas[2];
 
         ToDo todo = new ToDo(name);
-        if (done) {
+        if (isDone) {
             todo.doTask();
         }
 

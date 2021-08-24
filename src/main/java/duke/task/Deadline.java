@@ -24,16 +24,16 @@ public class Deadline extends Task {
     /**
      * Loads a deadline from data parsed from the save file
      *
-     * @param loadData A line from the csv, split by commas
+     * @param loadDatas A line from the csv, split by commas
      * @return Deadline created from provided data
      */
-    public static Deadline load(String[] loadData) {
-        boolean done = loadData[1].equals("o");
-        String name = loadData[2];
-        LocalDate time = LocalDate.parse(loadData[3]);
+    public static Deadline load(String[] loadDatas) {
+        boolean isDone = loadDatas[1].equals("o");
+        String name = loadDatas[2];
+        LocalDate time = LocalDate.parse(loadDatas[3]);
 
         Deadline deadline = new Deadline(name, time);
-        if (done) {
+        if (isDone) {
             deadline.doTask();
         }
 

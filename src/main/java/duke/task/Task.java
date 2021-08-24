@@ -3,19 +3,19 @@ package duke.task;
 import duke.io.TextColor;
 
 public abstract class Task {
-    protected boolean done;
+    protected boolean isDone;
     protected String name;
 
     public Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
      * Marks the task as done
      */
     public void doTask() {
-        done = true;
+        isDone = true;
     }
 
     /**
@@ -24,7 +24,7 @@ public abstract class Task {
      * @return true if task is done, false if task is not done
      */
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     /**
@@ -68,7 +68,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + (done ? "X" : " ") + "] " + name;
+        return "[" + (isDone ? "X" : " ") + "] " + name;
     }
 
     /**
@@ -77,6 +77,6 @@ public abstract class Task {
      * @return String to be saved as a line in save.csv
      */
     public String getSaveString() {
-        return (done ? "o," : "x,") +  name;
+        return (isDone ? "o," : "x,") +  name;
     }
 }

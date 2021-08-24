@@ -28,25 +28,25 @@ public class Storage {
      */
     public boolean load() {
         try {
-            ArrayList<Task> taskList = new ArrayList<>();
+            ArrayList<Task> tasks = new ArrayList<>();
             Scanner sc = new Scanner(saveFile);
             while (sc.hasNextLine()) {
-                String[] data = sc.nextLine().split(",");
-                switch (data[0]) {
+                String[] datas = sc.nextLine().split(",");
+                switch (datas[0]) {
                     case "t":
-                        taskList.add(ToDo.load(data));
+                        tasks.add(ToDo.load(datas));
                         break;
                     case "d":
-                        taskList.add(Deadline.load(data));
+                        tasks.add(Deadline.load(datas));
                         break;
                     case "e":
-                        taskList.add(Event.load(data));
+                        tasks.add(Event.load(datas));
                         break;
                     default:
                         break;
                 }
             }
-            Duke.taskList = new TaskList(taskList);
+            Duke.taskList = new TaskList(tasks);
             return true;
         } catch (FileNotFoundException e) {
             return false;

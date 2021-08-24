@@ -6,16 +6,16 @@ import duke.Duke;
 import duke.io.TextColor;
 
 public class TaskList {
-    private final ArrayList<Task> taskList;
+    private final ArrayList<Task> tasks;
 
     // used when loading from csv
-    public TaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     // used when new user
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -26,11 +26,11 @@ public class TaskList {
      * @throws DukeException I/O exception from saving the taskList state
      */
     public void addTask(Task task) throws DukeException {
-        taskList.add(task);
+        tasks.add(task);
         save();
 
-        Duke.ui.addMessage("Got it. I've added this task:\n  " +
-                task.toString() + "\n" + taskLengthReport(), TextColor.DEFAULT);
+        Duke.ui.addMessage("Got it. I've added this task:\n  "
+                + task.toString() + "\n" + taskLengthReport(), TextColor.DEFAULT);
     }
 
     /**
@@ -42,12 +42,12 @@ public class TaskList {
      */
     public void doTask(int taskNum) throws DukeException {
         int idx = getTaskIndexFromTaskNum(taskNum);
-        Task task = taskList.get(idx);
+        Task task = tasks.get(idx);
         task.doTask();
         save();
 
-        Duke.ui.addMessage("Nice! I've marked this task as done:\n  " +
-                task.toString(), TextColor.DEFAULT);
+        Duke.ui.addMessage("Nice! I've marked this task as done:\n  "
+                + task.toString(), TextColor.DEFAULT);
     }
 
     /**
@@ -60,12 +60,12 @@ public class TaskList {
     public void deleteTask(int taskNum) throws DukeException {
         int idx = getTaskIndexFromTaskNum(taskNum);
 
-        Task task = taskList.get(idx);
-        taskList.remove(idx);
+        Task task = tasks.get(idx);
+        tasks.remove(idx);
         save();
 
-        Duke.ui.addMessage("Noted! I've removed this task:\n  " +
-                task.toString() + "\n" + taskLengthReport(), TextColor.DEFAULT);
+        Duke.ui.addMessage("Noted! I've removed this task:\n  "
+                + task.toString() + "\n" + taskLengthReport(), TextColor.DEFAULT);
     }
 
     /**
@@ -75,10 +75,10 @@ public class TaskList {
      * @throws DukeException I/O exception from saving the taskList state
      */
     public void deleteDone() throws DukeException {
-        taskList.removeIf(Task::isDone);
+        tasks.removeIf(Task::isDone);
         save();
-        Duke.ui.addMessage("Noted! I've removed all completed tasks.\n" +
-                taskLengthReport(), TextColor.DEFAULT);
+        Duke.ui.addMessage("Noted! I've removed all completed tasks.\n"
+                + taskLengthReport(), TextColor.DEFAULT);
     }
 
     /**
@@ -88,22 +88,22 @@ public class TaskList {
      * @throws DukeException I/O exception from saving the taskList state
      */
     public void deleteExpired() throws DukeException {
-        taskList.removeIf(Task::isExpired);
+        tasks.removeIf(Task::isExpired);
         save();
-        Duke.ui.addMessage("Noted! I've removed all expired tasks.\n" +
-                taskLengthReport(), TextColor.DEFAULT);
+        Duke.ui.addMessage("Noted! I've removed all expired tasks.\n"
+                + taskLengthReport(), TextColor.DEFAULT);
     }
 
     /**
      * Queues a message listing all the tasks to be printed
      */
     public void list() {
-        int size = taskList.size();
+        int size = tasks.size();
         if (size == 0) {
             Duke.ui.addMessage("No tasks yet!", TextColor.DEFAULT);
         } else {
             for (int i = 0; i < size; i++) {
-                Task task = taskList.get(i);
+                Task task = tasks.get(i);
                 Duke.ui.addMessage((i + 1) + ". " + task.toString()
                         + (i == size - 1 ? "" : "\n"), task.getListColor());
             }
@@ -118,7 +118,7 @@ public class TaskList {
      * @throws DukeException Exception thrown if the index is out of range
      */
     private int getTaskIndexFromTaskNum(int taskNum) throws DukeException {
-        if (taskNum <= 0 || taskNum > taskList.size()) {
+        if (taskNum <= 0 || taskNum > tasks.size()) {
             throw new DukeException("Please input the ID of a task!");
         }
 
@@ -132,8 +132,8 @@ public class TaskList {
      * @return string telling the user how many tasks are in the list
      */
     private String taskLengthReport() {
-        return "Now you have " + taskList.size()
-                + (taskList.size() != 1 ? " tasks" : " task") + " in the list.";
+        return "Now you have " + tasks.size()
+                + (tasks.size() != 1 ? " tasks" : " task") + " in the list.";
     }
 
     /**
@@ -153,11 +153,11 @@ public class TaskList {
     private String convertToSaveString() {
         StringBuilder sb = new StringBuilder();
 
-        if (taskList.size() == 0) {
+        if (tasks.size() == 0) {
             return "";
         }
 
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             sb.append(task.getSaveString());
             sb.append('\n');
         }
@@ -174,6 +174,6 @@ public class TaskList {
      * @return the taskList
      */
     protected ArrayList<Task> getList() {
-        return taskList;
+        return tasks;
     }
 }
