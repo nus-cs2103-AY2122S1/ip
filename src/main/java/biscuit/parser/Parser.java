@@ -1,6 +1,12 @@
 package biscuit.parser;
 
-import biscuit.commands.*;
+
+import biscuit.commands.AddCommand;
+import biscuit.commands.Command;
+import biscuit.commands.DeleteCommand;
+import biscuit.commands.DoneCommand;
+import biscuit.commands.ExitCommand;
+import biscuit.commands.ListCommand;
 import biscuit.exceptions.BiscuitException;
 
 /**
