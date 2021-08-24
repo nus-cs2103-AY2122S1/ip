@@ -1,0 +1,6 @@
+E|0|project meeting|21 Aug 2021 2359
+T|1|read book
+D|0| |21 Aug 2021 1200
+D|0|return boo|21 Aug 2021 1012
+D|0|return book|21 Aug 2021 1200
+D|0|return book |21 Aug 2021 1200

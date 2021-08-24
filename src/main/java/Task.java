@@ -2,14 +2,8 @@
  * A class to represent a task to be done.
  */
 public class Task {
-    /**
-     * Description of the task.
-     */
     protected String description;
 
-    /**
-     * Boolean to show whether this task has been completed.
-     */
     protected boolean isDone;
 
     /**

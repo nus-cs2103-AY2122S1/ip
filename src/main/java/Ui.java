@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Ui {
@@ -43,14 +44,7 @@ public class Ui {
                 + "|_______/ /__/    \\__\\ |__|\n";
         System.out.println(logo);
         System.out.println("Hello! I'm Bai.\n" +
-                "What can I do for you?\n\n" +
-                "Available commands:\n" +
-                "   todo <description> - add todo item\n" +
-                "   deadline <description> /by <date> - add a task to be completed by <date>\n" +
-                "   event <description> /at <date> - add an event scheduled at <date>\n" +
-                "   done <number> - mark task <number> as done\n" +
-                "   delete <number> - delete the specified task <number>\n" +
-                "   list - display the list of tasks");
+                "What can I do for you?");
         printHorizontalLine();
 
         //        String home = System.getProperty("user.home"); // /Users/xiaoyunwu
@@ -61,7 +55,32 @@ public class Ui {
 
     }
 
+    public void printExitMessage() {
+        System.out.println("====================================================\n" +
+                "Goodbai. Hope to see you again soon! （ ● ___ ●.）" +
+                "\n====================================================");
+    }
+
+    public void printTaskAdded(Task task, int size) {
+        printHorizontalLine();
+        printAddTask(task);
+        printTaskNum(size);
+        printHorizontalLine();
+    }
+
+    public String readCommand() {
+        String input = sc.nextLine();
+
+        while (input.trim().isEmpty()) {
+            input = sc.nextLine();
+        }
+
+        return input;
+    }
+
     public void printError(String err) {
+        printHorizontalLine();
         System.out.println(err);
+        printHorizontalLine();
     }
 }

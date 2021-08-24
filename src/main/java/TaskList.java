@@ -15,27 +15,25 @@ public class TaskList {
         return items.get(index);
     }
 
+    public List<Task> getItems() {
+        return items;
+    }
+
+    public int getSize() {
+        return items.size();
+    }
+
     public void markTaskDone(int index) {
         items.get(index).markAsDone();
     }
 
-    public void addTodo(String userCommand) {
-        Todo newTodo = new Todo(userCommand.substring(5));
-        items.add(newTodo);
+    public void addTask(Task task) {
+        this.items.add(task);
     }
 
-
-//    public void addTodo(String[] task) {
-//        items.add(new Todo(task[2], task[1].equals("1")));
-//    }
-//
-//    public void addDeadline(String[] task) {
-//        items.add(new Event(task[2], task[1].equals("1"), LocalDateTime.parse(task[3], outputFormatter)));
-//    }
-//
-//    public void addEvent(String[] task) {
-//        items.add(new Deadline(task[2], task[1].equals("1"), LocalDateTime.parse(task[3], outputFormatter)));
-//    }
+    public void deleteTask(int index) {
+        this.items.remove(index);
+    }
 
     /**
      * Prints the list of tasks the user has currently.
