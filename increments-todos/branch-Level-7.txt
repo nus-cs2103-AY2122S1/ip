@@ -22,7 +22,7 @@ File format to save -> .csv
 
 save in file under: [project_root]/gnosisData/gnosis.txt folder
 
-1. Create a FileManager to read/write CSV files - DONE
+1. Create a GnosisStorageManager to read/write CSV files - DONE
     --> use relative path
     --> handle case -> where file data doesn't exits -> create default file for them
     --> handle case -> folder does not exist -> create folder + file alongside

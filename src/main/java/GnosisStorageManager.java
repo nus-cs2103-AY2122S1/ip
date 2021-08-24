@@ -6,15 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileManager {
+public class GnosisStorageManager {
 
     private static final String DIRECTORY_PATH = "data";
-
-    private static final String FILE_PATH = DIRECTORY_PATH + "/gnosis.csv";
+    private static final String FILE_PATH = DIRECTORY_PATH + "/tasks.csv";
     private static final File file = new File(FILE_PATH);
     private static final String  DELIMITER = ",";
 
-    public static List<Task> loadTask() {
+
+    public static List<Task> loadGnosisTasks() {
+        //check if user has folder:
+        // if no folder -> means no data found -> create one from scratch
+        // if have -> load to arraylist tasks
+        if (GnosisStorageManager.isDataFileAvail()) {
+            return GnosisStorageManager.getTasksFromFile();
+        } else {
+            GnosisStorageManager.createDataFolder();
+            return new ArrayList<>();
+        }
+    }
+
+    public static List<Task> getTasksFromFile() {
         List<Task> tasks = new ArrayList<>();
         try {
             tasks = Files.newBufferedReader(Paths.get(FILE_PATH))
@@ -47,7 +59,7 @@ public class FileManager {
         return tasks;
     }
 
-    public static void writeFile(List<Task> tasks) {
+    public static void writeTasksToFile(List<Task> tasks) {
         try {
             BufferedWriter writer = Files.newBufferedWriter(Paths.get(FILE_PATH));
             writer.write("Task Type,is task completed?,Task name,DateTime");
@@ -80,7 +92,6 @@ public class FileManager {
     }
 
     public static boolean isDataFileAvail() {
-        System.out.println(Files.isDirectory(Paths.get(DIRECTORY_PATH)) && file.exists());
         return Files.isDirectory(Paths.get(DIRECTORY_PATH)) && file.exists();
     }
 }
