@@ -9,8 +9,6 @@ import duke.io.TextColor;
 import duke.exception.DukeException;
 
 public class Duke {
-    // you can probably make a static ui, static parser, static storage
-    // then everything references that static thing
     public static TaskList taskList = new TaskList();
     public static Parser parser = new Parser();
     public static Storage storage = new Storage("save.csv");

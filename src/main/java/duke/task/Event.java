@@ -15,13 +15,13 @@ public class Event extends Task {
         return date.equals(LocalDate.now());
     }
 
-    public static Event load(String[] loadData) {
-        boolean done = loadData[1].equals("o");
-        String name = loadData[2];
-        LocalDate time = LocalDate.parse(loadData[3]);
+    public static Event load(String[] loadDatas) {
+        boolean isDone = loadDatas[1].equals("o");
+        String name = loadDatas[2];
+        LocalDate time = LocalDate.parse(loadDatas[3]);
 
         Event event = new Event(name, time);
-        if (done) {
+        if (isDone) {
             event.doTask();
         }
 

@@ -3,20 +3,20 @@ package duke.task;
 import duke.io.TextColor;
 
 public abstract class Task {
-    protected boolean done;
+    protected boolean isDone;
     protected String name;
 
     public Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
     public void doTask() {
-        done = true;
+        isDone = true;
     }
 
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     public abstract boolean isExpired();
@@ -25,10 +25,10 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + (done ? "X" : " ") + "] " + name;
+        return "[" + (isDone ? "X" : " ") + "] " + name;
     }
 
     public String getSaveString() {
-        return (done ? "o," : "x,") +  name;
+        return (isDone ? "o," : "x,") +  name;
     }
 }

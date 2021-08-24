@@ -1,6 +1,5 @@
 package duke.io;
 
-import duke.command.Command;
 import duke.command.Commands;
 import duke.Duke;
 
@@ -9,8 +8,8 @@ public class Ui {
 
     // prints the message between two lines and resets the message
     public void print() {
-        String LINEBREAK = "_________________________________________\n";
-        System.out.println(LINEBREAK + message + '\n' + LINEBREAK);
+        String linebreak = "_________________________________________\n";
+        System.out.println(linebreak + message + '\n' + linebreak);
         resetMessage();
     }
 
@@ -46,8 +45,8 @@ public class Ui {
                 lineLength += commandString.length();
             }
 
-            addMessage(commands[i].getCommand().getCommandString() +
-                    (i == commands.length - 1 ? "" : ", "), TextColor.DEFAULT);
+            addMessage(commands[i].getCommand().getCommandString()
+                    + (i == commands.length - 1 ? "" : ", "), TextColor.DEFAULT);
         }
         print();
         prompt();

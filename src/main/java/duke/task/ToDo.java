@@ -7,12 +7,12 @@ public class ToDo extends Task {
         super(name);
     }
 
-    public static ToDo load(String[] loadData) {
-        boolean done = loadData[1].equals("o");
-        String name = loadData[2];
+    public static ToDo load(String[] loadDatas) {
+        boolean isDone = loadDatas[1].equals("o");
+        String name = loadDatas[2];
 
         ToDo todo = new ToDo(name);
-        if (done) {
+        if (isDone) {
             todo.doTask();
         }
 
