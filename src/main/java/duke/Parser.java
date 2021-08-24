@@ -15,26 +15,29 @@ public class Parser {
      * @throws DukeException if command keyword is invalid.
      */
     public static Command parse(String userCommand) throws DukeException {
-        String[] words = userCommand.split(" ");
+        String[] words = userCommand.strip().split(" ");
 
         switch (words[0].toLowerCase()) {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
         case DoneCommand.COMMAND_WORD:
-            return new DoneCommand(userCommand);
+            return new DoneCommand(userCommand.strip());
 
         case TodoCommand.COMMAND_WORD:
-            return new TodoCommand(userCommand);
+            return new TodoCommand(userCommand.strip());
 
         case DeadlineCommand.COMMAND_WORD:
-            return new DeadlineCommand(userCommand);
+            return new DeadlineCommand(userCommand.strip());
 
         case EventCommand.COMMAND_WORD:
-            return new EventCommand(userCommand);
+            return new EventCommand(userCommand.strip());
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommand(userCommand);
+            return new DeleteCommand(userCommand.strip());
+
+        case FindCommand.COMMAND_WORD:
+            return new FindCommand(userCommand.strip());
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();

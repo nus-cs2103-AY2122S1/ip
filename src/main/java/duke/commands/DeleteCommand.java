@@ -42,11 +42,11 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            if (this.userCommand.strip().length() < 7) {
+            if (this.userCommand.length() < 7) {
                 throw new IllegalArgumentException("Please enter a numeric character to delete the specified task!");
             }
 
-            int index = Integer.parseInt(this.userCommand.substring(7).strip()) - 1;
+            int index = Integer.parseInt(this.userCommand.substring(7)) - 1;
             Task taskToDelete = tasks.getTask(index);
 
             tasks.deleteTask(index);
@@ -59,7 +59,7 @@ public class DeleteCommand extends Command {
 
         } catch (NumberFormatException e) {
             // error encountered when command followed by done is not Number e.g. done one
-            ui.printError("Please enter a numeric character to delete the specified task");
+            ui.printError("Please enter a numeric character to delete the specified task!");
 
         } catch (IOException | IllegalArgumentException e) {
             ui.printError(e.getMessage());

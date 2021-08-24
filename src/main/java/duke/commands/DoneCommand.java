@@ -40,11 +40,11 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            if (this.userCommand.strip().length() < 5) {
+            if (this.userCommand.length() < 5) {
                 throw new IllegalArgumentException("Please enter a numeric character to mark your task as done!");
             }
 
-            int index = Integer.parseInt(this.userCommand.substring(5).strip()) - 1;
+            int index = Integer.parseInt(this.userCommand.substring(5)) - 1;
             tasks.markTaskDone(index);
             storage.save(tasks.getItems());
 

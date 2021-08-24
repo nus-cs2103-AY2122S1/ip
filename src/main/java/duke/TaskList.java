@@ -1,7 +1,11 @@
 package duke;
 
 import duke.tasks.Task;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Container for a list of task items.
@@ -72,6 +76,33 @@ public class TaskList {
         this.items.remove(index);
     }
 
+    public void findTask(String desc) {
+        if (items.size() > 0) {
+            List<Task> foundItems = new ArrayList<>();
+
+            // Solution below adapted from:
+            // https://www.w3schools.com/java/java_regex.asp
+            Pattern pattern = Pattern.compile(desc, Pattern.CASE_INSENSITIVE);
+
+            for (Task item : items) {
+                if (pattern.matcher(item.toString()).find()) {
+                    foundItems.add(item);
+                }
+            }
+
+            if (foundItems.size() > 0) {
+                System.out.println("Here are the matching tasks in your list:");
+                for (int i = 0; i < foundItems.size(); i++) {
+                    System.out.printf("%d. " + foundItems.get(i) + "\n", i + 1);
+                }
+            } else {
+                System.out.println("There is no task with the specified description!");
+            }
+        } else {
+            System.out.println("You have no tasks in your list to find a matching task.");
+        }
+    }
+
     /**
      * Prints the list of tasks the user has currently.
      */
@@ -85,6 +116,5 @@ public class TaskList {
         } else {
             System.out.println("You have no tasks in your list.");
         }
-
     }
 }

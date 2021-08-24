@@ -46,7 +46,7 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int byIndex = userCommand.indexOf("/by");
-            if (userCommand.strip().length() < 9 || byIndex <= 9) {
+            if (userCommand.length() < 9 || byIndex <= 9) {
                 throw new IllegalArgumentException("Please add a description and/or deadline!");
             }
 
