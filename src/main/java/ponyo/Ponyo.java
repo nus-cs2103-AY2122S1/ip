@@ -1,4 +1,13 @@
-public class Duke {
+package ponyo;
+
+import ponyo.data.task.TaskList;
+import ponyo.commands.Command;
+import ponyo.ui.Ui;
+import ponyo.storage.Storage;
+import ponyo.parser.Parser;
+import ponyo.data.exceptions.PonyoException;
+
+public class Ponyo {
     // CONSTANTS
     private static final String PATH = "src/main/data";
     private static final String FILENAME = "tasks.txt";
@@ -7,12 +16,12 @@ public class Duke {
     private TaskList tasks;
     private final Ui ui;
 
-    public Duke(String filePath) {
+    public Ponyo(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (PonyoException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -29,7 +38,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException e) {
+            } catch (PonyoException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
@@ -38,6 +47,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(PATH + "/" + FILENAME).run();
+        new Ponyo(PATH + "/" + FILENAME).run();
     }
 }

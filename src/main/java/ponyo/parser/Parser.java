@@ -1,3 +1,13 @@
+package ponyo.parser;
+
+import ponyo.data.exceptions.PonyoException;
+import ponyo.commands.Command;
+import ponyo.commands.ListCommand;
+import ponyo.commands.AddCommand;
+import ponyo.commands.DeleteCommand;
+import ponyo.commands.DoneCommand;
+import ponyo.commands.ExitCommand;
+
 public class Parser {
     private static final String MESSAGE_IDK = "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
@@ -19,10 +29,10 @@ public class Parser {
                 case "delete":
                     return new DeleteCommand(Integer.parseInt(cmds[1]));
                 default:
-                    throw new DukeException("Invalid command given!");
+                    throw new PonyoException("Invalid command given!");
             }
-        } catch (DukeException e) {
-            throw new DukeException(MESSAGE_IDK);
+        } catch (PonyoException e) {
+            throw new PonyoException(MESSAGE_IDK);
         }
 
     }

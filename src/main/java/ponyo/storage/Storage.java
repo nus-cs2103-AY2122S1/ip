@@ -1,3 +1,5 @@
+package ponyo.storage;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -5,6 +7,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+
+import ponyo.data.task.Task;
+import ponyo.data.task.TaskList;
+import ponyo.data.task.Todo;
+import ponyo.data.task.Deadline;
+import ponyo.data.task.Event;
+import ponyo.data.exceptions.PonyoException;
+
 
 public class Storage {
     protected String filePath;
@@ -22,7 +32,7 @@ public class Storage {
             readTasksFromFile(tasks, filePath);
             return tasks;
         } catch (IOException e) {
-            throw new DukeException("Error loading from file :(");
+            throw new PonyoException("Error loading from file :(");
         }
 
     }

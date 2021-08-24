@@ -1,3 +1,9 @@
+package ponyo.commands;
+
+import ponyo.data.task.TaskList;
+import ponyo.ui.Ui;
+import ponyo.storage.Storage;
+
 public class DoneCommand extends Command {
     private final int taskToMarkDone;
 

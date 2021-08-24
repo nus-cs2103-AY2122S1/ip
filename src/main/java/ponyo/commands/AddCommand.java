@@ -1,6 +1,16 @@
+package ponyo.commands;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import ponyo.data.task.Task;
+import ponyo.data.task.TaskList;
+import ponyo.data.task.Todo;
+import ponyo.data.task.Deadline;
+import ponyo.data.task.Event;
+import ponyo.ui.Ui;
+import ponyo.storage.Storage;
 
 public class AddCommand extends Command {
     private final String[] taskToAdd;

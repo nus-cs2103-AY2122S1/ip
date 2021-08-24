@@ -1,3 +1,5 @@
+package ponyo.ui;
+
 import java.util.Scanner;
 import java.io.InputStream;
 import java.io.PrintStream;

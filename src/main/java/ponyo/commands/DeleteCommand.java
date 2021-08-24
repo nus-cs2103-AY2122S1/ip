@@ -1,3 +1,9 @@
+package ponyo.commands;
+
+import ponyo.data.task.TaskList;
+import ponyo.ui.Ui;
+import ponyo.storage.Storage;
+
 public class DeleteCommand extends Command {
     private final int taskToDelete;
 
@@ -11,7 +17,7 @@ public class DeleteCommand extends Command {
         storage.getFullContents(tasks);
         ui.show("\tNoted. I've removed this task: \n\t\t" +
                 tasks.retrieveTask(taskToDelete - 1),
-                "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                "\tNow you have " + tasks.size() + " tasks in the list.");
     }
 
     @Override
