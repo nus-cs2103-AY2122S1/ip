@@ -12,6 +12,12 @@ public class Deadline extends Task{
         super(task, TaskType.DEADLINE, deadline);
     }
 
+    public Deadline(String task, Boolean isTaskDone, String deadline) {
+        super(task, TaskType.DEADLINE, deadline, isTaskDone);
+    }
+
+
+
     @Override
     public String toString() {
         return super.toString() + "(by:" + this.getDatetime()  + ")";

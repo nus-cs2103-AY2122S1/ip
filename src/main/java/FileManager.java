@@ -1,58 +1,74 @@
 import java.io.*;
+import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class FileManager {
 
-    private static final String FILE_PATH = "data/gnosis.csv";
-    private static File file = new File(FILE_PATH);
+    private static String DIRECTORY_PATH = "data";
 
-    public static void readFile() {
-        String delimiter = ",";
+    private static final String FILE_PATH = DIRECTORY_PATH + "/gnosis.csv";
+    private static final File file = new File(FILE_PATH);
+    private static final String  DELIMITER = ",";
 
+    public static boolean isGnosisDataSetup() {
+        return Files.isDirectory(Paths.get(DIRECTORY_PATH)) && file.exists();
+    }
+
+    public static List<Task> loadTask() {
+        List<Task> tasks = new ArrayList<>();
         try {
-            List<Task> tasks = Files.newBufferedReader(Paths.get(FILE_PATH))
+            tasks = Files.newBufferedReader(Paths.get(FILE_PATH))
                     .lines()
                     .skip(1)
                     .map(s -> {
-                String[] tokens = s.split(",");
-                Task t = new Task(tokens[1], TaskType.TODO);
-                t.setDone(Boolean.getBoolean(tokens[0]));
-                return t;
+                String[] tokens = s.split(DELIMITER);
 
+                TaskType taskType = TaskType.getTaskType(tokens[0].charAt(0));
+                boolean isTaskDone = tokens[1].equalsIgnoreCase("1");
+                String taskName = tokens[2];
+
+                if (taskType == TaskType.TODO) {
+                    return new Todo(taskName,isTaskDone);
+                } else if (taskType == TaskType.EVENT) {
+                    String schedule = tokens[3];
+                    return new Event(taskName,isTaskDone, schedule);
+                } else if (taskType == TaskType.DEADLINE) {
+                    String deadline = tokens[3];
+                    return new Deadline(taskName,isTaskDone, deadline);
+                }
+                return new Task(taskName,taskType,"",isTaskDone);
             }).collect(Collectors.toList());
-
-            for (Task t: tasks) {
-                System.out.println(t);
-
-            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return tasks;
     }
 
-    public static void writeFile() {
-        //Data
-        //T | 1 | read book
-        ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new Todo("Study for CS2103"));
-        tasks.add(new Event("cs2103 lecture", "2-4pm"));
-        tasks.add(new Deadline("cs2103 iP due", "2359 Thursday"));
+    public static void writeFile(ArrayList<Task> tasks) {
+        //TODO: to remove
+//        ArrayList<Task> tasks = new ArrayList<>();
+//        tasks.add(new Todo("Study for CS2103"));
+//        tasks.add(new Event("cs2103 lecture", "2-4pm"));
+//        tasks.get(1).setDone(true);
+//        tasks.add(new Deadline("cs2103 iP due", "2359 Thursday"));
 
         try {
             BufferedWriter writer = Files.newBufferedWriter(Paths.get(FILE_PATH));
-
-            writer.write("is Task Completed,Task Name");
+            writer.write("Task Type,is task completed?,Task name,DateTime");
             writer.newLine();
 
             for (Task record: tasks) {
-                String oneLine = "false" + "," + record;
+                int taskDone = record.isTaskDone() == 'X' ? 1 : 0;
+
+                String oneLine = record.getTaskType() + DELIMITER +
+                        taskDone + DELIMITER +
+                        record.getTaskName() + DELIMITER +
+                        record.getDatetime();
                 writer.write(oneLine);
                 writer.newLine();
             }
@@ -66,27 +82,19 @@ public class FileManager {
 
     }
 
-
+    // returns value whether data folder and file was created successfully
     public static boolean CreateDataFolder() throws IOException {
-        // create folder and file only if file doesnt exist
+        // create folder and file only if file doesn't exist
         if (!file.exists() && file.getParentFile().mkdir()) {
             System.out.println("File and data folder created");
             return file.createNewFile();
         }
         return true;
     }
-
+    //TODO: to remove
+//
     public static void main(String[] args) {
-        try {
-            FileManager.CreateDataFolder();
-
-            //writeFile();
-
-            readFile();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println(isGnosisDataSetup());
     }
 
 }

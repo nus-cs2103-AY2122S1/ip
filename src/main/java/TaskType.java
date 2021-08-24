@@ -13,5 +13,19 @@ public enum TaskType {
                 return '-';
         }
     }
+
+    public static TaskType getTaskType(char type) {
+        switch (type) {
+            case 'T':
+                return TODO;
+            case 'D':
+                return DEADLINE;
+            case 'E':
+                return EVENT;
+            default:
+                return null;
+        }
+    }
+
 }
 

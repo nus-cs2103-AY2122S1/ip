@@ -8,45 +8,58 @@
  * */
 public class Task {
 
-    private char taskType;
+    private final char TASK_TYPE;
     private String taskName;
-    private String datetime;
+    private String dateTime;
     private boolean isDone;
 
 
     public Task(String taskName, TaskType type) {
         this.taskName = taskName;
-        this.taskType = TaskType.getTask(type);
-        this.isDone = false;
+        this.TASK_TYPE = TaskType.getTask(type);
+        this.dateTime = "";
+        isDone = false;
     }
+
 
     public Task(String taskName, TaskType type, String datetime) {
         this.taskName = taskName;
-        this.taskType = TaskType.getTask(type);
-        this.isDone = false;
-        this.datetime = datetime;
+        this.TASK_TYPE = TaskType.getTask(type);
+        this.dateTime = datetime;
+        isDone = false;
+    }
+
+    public Task(String taskName, TaskType type, String dateTime, boolean isDone) {
+        this.taskName = taskName;
+        this.TASK_TYPE = TaskType.getTask(type);
+        this.isDone = isDone;
+        this.dateTime = dateTime;
     }
 
     public String getTaskName() {
         return taskName;
     }
 
-    public boolean isDone() {
-        return isDone;
-    }
-
     public String getDatetime() {
-        return datetime;
+        return this.dateTime;
     }
 
     public void setDone(boolean done) {
         this.isDone = done;
     }
 
+    public char isTaskDone() {
+        return this.isDone ? 'X' : ' ';
+    }
+
+    public char getTaskType() {
+        return this.TASK_TYPE;
+    }
+
     @Override
     public String toString() {
-        String taskTypeString = "[" + taskType + "]";
-        String mark = isDone ? "[X]" : "[ ]";
-        return taskTypeString + mark + " " + this.taskName;
+        return "[" + this.getTaskType() + "]"
+                + "["+ this.isTaskDone()  + "]"
+                + " " + this.taskName;
     }
 }

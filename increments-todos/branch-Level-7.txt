@@ -22,12 +22,17 @@ File format to save -> .csv
 
 save in file under: [project_root]/gnosisData/gnosis.txt folder
 
-1. Create a FileManager to read/write CSV files
+1. Create a FileManager to read/write CSV files - DONE
     --> use relative path
     --> handle case -> where file data doesn't exits -> create default file for them
     --> handle case -> folder does not exist -> create folder + file alongside
 
-2. Update Task classes:
+    --> able to read csv file and convert to list of Task - Done
+    --> able to write to csv file from list of Task - Done
+
+2. Update Task classes: - DONE
     --> to include char variable to store type of task
     --> getter and setters
     --> update classes
+
+3. Print message of saving and loading to User

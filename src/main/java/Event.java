@@ -12,6 +12,10 @@ public class Event extends Task{
         super(task, TaskType.EVENT, schedule);
     }
 
+    public Event(String task, Boolean isTaskDone, String schedule) {
+        super(task, TaskType.EVENT, schedule, isTaskDone);
+    }
+
     @Override
     public String toString() {
         return super.toString() + "(at:" + this.getDatetime()  + ")";

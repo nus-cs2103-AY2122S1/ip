@@ -10,6 +10,10 @@ public class Todo extends Task {
         super(task,TaskType.TODO);
     }
 
+    public Todo(String task, Boolean isTaskDone) {
+        super(task, TaskType.TODO, "", isTaskDone);
+    }
+
     @Override
     public String toString() {
         return super.toString();
