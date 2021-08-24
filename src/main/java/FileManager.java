@@ -20,7 +20,7 @@ public class FileManager {
                     .skip(1)
                     .map(s -> {
                 String[] tokens = s.split(",");
-                Task t = new Task(tokens[1]);
+                Task t = new Task(tokens[1], TaskType.TODO);
                 t.setDone(Boolean.getBoolean(tokens[0]));
                 return t;
 

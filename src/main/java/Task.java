@@ -7,12 +7,36 @@
  *
  * */
 public class Task {
-    private String task;
+
+    private char taskType;
+    private String taskName;
+    private String datetime;
     private boolean isDone;
 
-    public Task(String task) {
-        this.task = task;
+
+    public Task(String taskName, TaskType type) {
+        this.taskName = taskName;
+        this.taskType = TaskType.getTask(type);
         this.isDone = false;
+    }
+
+    public Task(String taskName, TaskType type, String datetime) {
+        this.taskName = taskName;
+        this.taskType = TaskType.getTask(type);
+        this.isDone = false;
+        this.datetime = datetime;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public String getDatetime() {
+        return datetime;
     }
 
     public void setDone(boolean done) {
@@ -21,7 +45,8 @@ public class Task {
 
     @Override
     public String toString() {
+        String taskTypeString = "[" + taskType + "]";
         String mark = isDone ? "[X]" : "[ ]";
-        return mark + " " + this.task;
+        return taskTypeString + mark + " " + this.taskName;
     }
 }

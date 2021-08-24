@@ -7,17 +7,13 @@
  *
  * */
 public class Event extends Task{
-    private String schedule;
-
 
     public Event(String task, String schedule) {
-        super(task);
-        this.schedule = schedule;
+        super(task, TaskType.EVENT, schedule);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString()
-                + "(at:"+ this.schedule  +")";
+        return super.toString() + "(at:" + this.getDatetime()  + ")";
     }
 }
