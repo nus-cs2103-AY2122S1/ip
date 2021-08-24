@@ -2,7 +2,7 @@
 # gnosis.Gnosis
 This is a project for a greenfield CS2103 Individual Project.
 The name gnosis.Gnosis means knowledge in Greek. 
-Why I named it gnosis.Gnosis ? 
+Why I named it Gnosis ? 
 Simply, because my aim in CS2103 (and of course in my other mods) is to expand my knowledge and learning.
 ```
 Welcome, I am gnosis.Gnosis.
