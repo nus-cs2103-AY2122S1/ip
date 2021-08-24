@@ -5,7 +5,7 @@ The name Gnosis means knowledge in Greek.
 Why I named it Gnosis? 
 Simply, because my aim in CS2103 (and of course in my other mods) is to expand my knowledge and learning.
 ```
-Welcome, I am gnosis.Gnosis.
+Welcome, I am Gnosis.
 The spark to meet your needs.
 How can I assist you ?
 ```
