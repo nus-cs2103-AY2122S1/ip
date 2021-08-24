@@ -3,8 +3,17 @@ package duke;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Represents a storage which you can retrieve and save from.
+ * @author Nikki
+ */
 public class Storage {
 
+    /**
+     * Saves the ArrayList representing tasks into hard drive.
+     *
+     * @param saveThis Any ArrayList of Tasks to save.
+     */
     public void fileSaver(ArrayList saveThis) {
         try {
             FileOutputStream fileOut = new FileOutputStream("saveFile");
@@ -19,6 +28,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the ArrayList representing tasks from the hard drive.
+     * Creates a new file if there is no file to read from.
+     *
+     * @return ArrayList of tasks for the current program to use.
+     */
     public ArrayList fileReader() {
         ArrayList result = null;
         File tempFile = new File("saveFile");
