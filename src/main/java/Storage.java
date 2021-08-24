@@ -44,6 +44,7 @@ public class Storage {
                 Task task = TaskList.stringToTask(curr);
                 taskList.add(task);
             }
+            sc.close();
         } catch (FileNotFoundException e) {
             Ui.printMessageWithFormat("No past data found in your local storage, initializing from blank state.");
             createFolder();
