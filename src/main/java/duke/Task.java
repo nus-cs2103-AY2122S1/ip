@@ -2,9 +2,9 @@ package duke;
 
 /**
  * Represents a task with a description and a status.
- * */
+ */
 public class Task {
-    private String taskTitle;
+    private final String taskTitle;
     private boolean isDone;
 
     public Task(String taskTitle) {
@@ -19,11 +19,12 @@ public class Task {
 
     /**
      * Customize the string representation of a task object.
+     *
      * @return string representation of a task in the form [][{X}] {description}
-     * */
+     */
     @Override
     public String toString() {
-        if(isDone) {
+        if (isDone) {
             return "[X] " + taskTitle;
         } else {
             return "[ ] " + taskTitle;

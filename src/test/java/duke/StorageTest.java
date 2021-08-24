@@ -14,9 +14,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class StorageTest {
     @Test
-    public void autoSave_autoLoadTest() {
+    public void autoSaveTest_tasksEntered_AutomaticallySaved() {
         try {
-            Scanner testScanner = new Scanner(Paths.get("java","duke","autosave-autoload-command"));
+            Scanner testScanner = new Scanner(Paths.get("java","duke","autosave-command"));
             Storage storage = new Storage();
             Parser parser = new Parser(new TaskList(storage));
             parser.parse(testScanner);
@@ -42,7 +42,7 @@ public class StorageTest {
     }
 
     @Test
-    public void save_loadTest() {
+    public void saveLoadTest_tasksEntered_savedAndLoaded() {
         try {
             Scanner testScanner = new Scanner(Paths.get("java","duke","save-load-command"));
             Storage storage = new Storage();

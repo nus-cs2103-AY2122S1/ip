@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 /**
  * Represents a specific type of Task with an additional deadline(ddl) field.
- * */
-public class Deadline extends Task{
+ */
+public class Deadline extends Task {
     private LocalDate ddl;
 
     public Deadline(String taskTitle, LocalDate ddl) {
@@ -15,11 +15,12 @@ public class Deadline extends Task{
 
     /**
      * Customize the string representation of a deadline object.
+     *
      * @return string representation of a deadline in the form [D][{X}] {description} (by: {ddl})
-     * */
+     */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + ddl.getMonth().toString() + " "  +
+        return "[D]" + super.toString() + "(by: " + ddl.getMonth().toString() + " " +
                 ddl.getDayOfMonth() + " " + ddl.getYear() + ")";
     }
 }
