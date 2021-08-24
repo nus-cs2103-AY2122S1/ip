@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +19,7 @@ class Parser {
         }
     }
 
-    static String parseInput(String input,TaskList taskList, Ui ui) {
+    static String parseInput(String input, TaskList taskList, Ui ui) {
         String[] infos = input.split(" ", 2);
         String type = infos[0];
         switch (type) {

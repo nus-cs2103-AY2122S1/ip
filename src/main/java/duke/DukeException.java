@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Thrown when the input to Duke is invalid.
  */

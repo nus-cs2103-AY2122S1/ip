@@ -1,4 +1,8 @@
 import java.util.Scanner;
+import duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.DukeException;
 
 public class Duke {
     private Storage storage;

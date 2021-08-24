@@ -1,13 +1,14 @@
-import java.time.LocalDate;
+package duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Ui {
-    void showLoadingError(String msg) {
+public class Ui {
+    public void showLoadingError(String msg) {
         System.out.println(msg);
     }
 
-    void showGreeting() {
+    public void showGreeting() {
         String output = "    ____________________________________________________________\n"
                 + "     Hello! I'm Duke\n"
                 + "     What can I do for you?\n"
@@ -21,7 +22,7 @@ class Ui {
      * @param taskList the TaskList to be printed
      * @return the string
      */
-    void printList(TaskList taskList) {
+    public void printList(TaskList taskList) {
         ArrayList<Task> lst = taskList.getTasks();
         StringBuilder s = new StringBuilder();
         s.append("    ____________________________________________________________\n");
@@ -32,14 +33,14 @@ class Ui {
         System.out.println(s.toString());
     }
 
-    void showGoodbye() {
+    public void showGoodbye() {
         String output = "    ____________________________________________________________\n"
                 + "     Bye. Hope to see you again soon!\n"
                 + "    ____________________________________________________________\n";
         System.out.println(output);
     }
 
-    void readInput(TaskList taskList) {
+    public void readInput(TaskList taskList) {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String input = sc.nextLine();

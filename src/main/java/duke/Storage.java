@@ -1,17 +1,19 @@
+package duke;
+
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Storage {
+public class Storage {
     String filePath;
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    ArrayList<Task> loadTasks() throws DukeException {
+    public ArrayList<Task> loadTasks() throws DukeException {
         File f = new File(filePath);
         Scanner s;
         try {
@@ -29,7 +31,7 @@ class Storage {
 
     }
 
-    void saveData(TaskList taskList) throws DukeException {
+    public void saveData(TaskList taskList) throws DukeException {
         ArrayList<Task> lst = taskList.getTasks();
         try {
             FileWriter fw = new FileWriter(filePath);

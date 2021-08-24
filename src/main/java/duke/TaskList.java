@@ -1,12 +1,14 @@
+package duke;
+
 import java.util.ArrayList;
 
-class TaskList {
+public class TaskList {
     ArrayList<Task> tasks;
-    TaskList() {
+    public TaskList() {
         tasks = new ArrayList<Task>();
     }
 
-    TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -19,7 +21,7 @@ class TaskList {
         return tasks;
     }
 
-    void deleteTask(int index) throws DukeException{
+    void deleteTask(int index) throws DukeException {
         try {
             tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
