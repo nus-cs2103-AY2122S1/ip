@@ -147,6 +147,9 @@ public class Duke {
                     + "Please input your task in the following manner:\n"
                     + "todo|deadline|event <task_description>");
         }
+        if (taskTypeAndDetails[1].indexOf('|') >= 0) {
+            throw new DukeException("The description of a task cannot contain this character: |");
+        }
 
         Task newTask;
         if (taskTypeAndDetails[0].equals("todo")) {
