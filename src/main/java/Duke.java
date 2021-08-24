@@ -20,7 +20,7 @@ public class Duke {
     }
 
     private void addTask(String input) throws DukeException {
-        String type = input.split(" ")[0];
+        String type = input.split(" ")[0].toLowerCase();
         String taskDescription = Stream.of(input.split(" "))
                 .skip(1).reduce("", (x, y) -> x + " " + y);
         Task newTask = Task.makeTask(type, taskDescription);
@@ -50,12 +50,12 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
+            if (input.replaceAll("\\s+","").toLowerCase().equals("list")) {
                 System.out.println(currentDuke.getTasks());
-            } else if (input.split(" ")[0].equals("done")) {
+            } else if (input.split(" ")[0].toLowerCase().equals("done")) {
                 int index = Integer.parseInt(input.split(" ")[1]);
                 currentDuke.tasks.get(index - 1).markDone(true);
-            } else if (input.split(" ")[0].equals("delete")) {
+            } else if (input.split(" ")[0].toLowerCase().equals("delete")) {
                 int index = Integer.parseInt(input.split(" ")[1]);
                 currentDuke.removeTask(index - 1);
             } else {
