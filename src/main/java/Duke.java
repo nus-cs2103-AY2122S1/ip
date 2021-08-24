@@ -17,8 +17,8 @@ public class Duke implements ChatbotUI, Parser {
     private static final String CREATE_TODO_COMMAND = "todo";
     private static final String CREATE_EVENT_COMMAND = "event";
     private static final String CREATE_DEADLINE_COMMAND = "deadline";
-    private final String dataStoragePath;
 
+    private Storage storage;
     private TaskList taskList;
 
     private Scanner sc;
@@ -46,7 +46,7 @@ public class Duke implements ChatbotUI, Parser {
      */
     public Duke(String dataStoragePath) {
         this.taskList = new TaskList();
-        this.dataStoragePath = dataStoragePath;
+        this.storage = new Storage(dataStoragePath);
         this.loadData();
         this.sc = new Scanner(System.in);
     }
@@ -55,7 +55,7 @@ public class Duke implements ChatbotUI, Parser {
      * Loads data that is saved in a given filename, and parses the data to load tasks.
      */
     public void loadData() {
-        ArrayList<String> lines = DataHandler.readLinesFromFile(this.dataStoragePath);
+        ArrayList<String> lines = this.storage.readLinesFromFile();
         for (int i = 0; i < lines.size(); i++) {
             Task task = Task.parseTaskFromSavedText(lines.get(i));
             this.taskList.addTask(task);
@@ -68,8 +68,8 @@ public class Duke implements ChatbotUI, Parser {
      */
     public void saveData() {
         String content = this.taskList.toSaveData();
-        DataHandler.overwriteNewFile(this.dataStoragePath);
-        DataHandler.writeToFile(content, this.dataStoragePath);
+        this.storage.overwriteNewFile();
+        this.storage.writeToFile(content);
     }
 
     public void endDuke() {
