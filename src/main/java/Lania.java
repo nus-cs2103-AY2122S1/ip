@@ -1,12 +1,7 @@
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Lania {
 
@@ -23,34 +18,9 @@ public class Lania {
     /**
      * Store user input in task array and show that it is added.
      *
-     * @param s String provided by the user.
+     * @param t Task provided by the user.
      */
-    public void update(String s) throws LaniaException {
-        Task t;
-        String[] split = s.split(" ", 2);
-        if (split[0].equals("todo")) {
-            if (split.length == 1) {
-                throw new LaniaEmptyDescriptionException(split[0]);
-            } else {
-                t = new Todo(split[1]);
-            }
-        } else if (split[0].equals("deadline")) {
-            if (split.length == 1) {
-                throw new LaniaEmptyDescriptionException(split[0]);
-            } else {
-                String[] splitDeadline = split[1].split(" /by ");
-                t = new Deadline(splitDeadline[0], splitDeadline[1]);
-            }
-        } else if (split[0].equals("event")) {
-            if (split.length == 1) {
-                throw new LaniaEmptyDescriptionException(split[0]);
-            } else {
-                String[] splitEvent = split[1].split(" /at ");
-                t = new Event(splitEvent[0], splitEvent[1]);
-            }
-        } else {
-            throw new LaniaException("Sorry, but Lania doesn't know what that means");
-        }
+    public void update(Task t) throws LaniaException {
         taskArrayList.add(t);
         try {
             storage.save(taskArrayList);
@@ -104,17 +74,30 @@ public class Lania {
         ui.greetingMessage();
         Scanner s = new Scanner(System.in);
         String input = s.nextLine();
-        while(!input.equals("bye")) {
+        String command = new Parser().parseCommand(input);
+        while(!command.equals("bye")) {
             try {
-                String[] split = input.split(" ");
-                if (input.equals("list")) {
+                if (command.equals("list")) {
                     ui.listMessage(taskArrayList);
-                } else if (split[0].equals("done")) {
-                    complete(Integer.parseInt(split[1]));
-                } else if (split[0].equals("delete")) {
-                    remove(Integer.parseInt(split[1]));
+                } else if (command.equals("done")) {
+                    complete(new Parser().getIndex(input));
+                } else if (command.equals("delete")) {
+                    remove(new Parser().getIndex(input));
                 } else {
-                    update(input);
+                    if (command.equals("todo")) {
+                        String taskDescription = new Parser().parseTaskDescription(input);
+                        update(new Todo(taskDescription));
+                    } else if (command.equals("deadline")) {
+                        String taskDescription = new Parser().parseTaskDescription(input);
+                        String[] task = new Parser().parseDeadline(taskDescription);
+                        update(new Deadline(task[0], task[1]));
+                    } else if (command.equals("event")) {
+                        String taskDescription = new Parser().parseTaskDescription(input);
+                        String[] task = new Parser().parseEvent(taskDescription);
+                        update(new Event(task[0], task[1]));
+                    } else {
+                        throw new LaniaException("Sorry, but Lania does not know what that means.");
+                    }
                 }
             } catch (LaniaException e) {
                 ui.laniaExceptionMessage(e);
@@ -122,6 +105,7 @@ public class Lania {
                 ui.dateTimeExceptionMessage();
             } finally {
                 input = s.nextLine();
+                command = new Parser().parseCommand(input);
             }
         }
         s.close();
