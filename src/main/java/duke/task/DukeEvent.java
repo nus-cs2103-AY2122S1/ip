@@ -1,7 +1,7 @@
 package duke.task;
 
 public class DukeEvent extends DukeTask {
-    final DukeDate date;
+    private final DukeDate date;
 
     public DukeEvent(String name, String date) {
         super(name);

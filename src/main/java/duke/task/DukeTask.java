@@ -46,9 +46,11 @@ public abstract class DukeTask {
         // name/done/by/deadline
         // name/done/at/date
         String[] tokens = str.split("/", 4);
+
         String name = tokens[0];
         boolean isDone = Integer.parseInt(tokens[1]) == 1;
         String type = tokens[2];
+
         switch (type) {
         case "simple":
             return new DukeSimpleTask(name, isDone);

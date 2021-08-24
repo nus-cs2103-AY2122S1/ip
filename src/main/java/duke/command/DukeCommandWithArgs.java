@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.exception.InvalidCommandException;
 import duke.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+import duke.exception.InvalidCommandException;
+import duke.task.TaskList;
 
 import java.util.Map;
 

@@ -52,7 +52,7 @@ public class Storage {
     public void saveTaskList(TaskList taskList) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(saveFileLocation);
-            for (DukeTask task: taskList.getTasks()) {
+            for (DukeTask task : taskList.getTasks()) {
                 fileOutputStream.write(task.toSerializedString().getBytes());
                 fileOutputStream.write("\n".getBytes());
             }
@@ -62,5 +62,4 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
 }

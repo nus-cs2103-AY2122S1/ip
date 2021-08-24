@@ -7,12 +7,28 @@ import java.util.Map;
 class DukeCommandConfig {
     static final DukeCommandConfig NO_ARGUMENTS = new DukeCommandConfig(DukeCommandArgument.NONE, Map.of());
 
-    final DukeCommandArgument positionalArg;
-    final Map<String, DukeCommandArgument> acceptedNamedArgs;
+    private final DukeCommandArgument positionalArg;
+    private final Map<String, DukeCommandArgument> acceptedNamedArgs;
 
     DukeCommandConfig(DukeCommandArgument positionalArg, Map<String, DukeCommandArgument> acceptedNamedArgs) {
         this.positionalArg = positionalArg;
         this.acceptedNamedArgs = acceptedNamedArgs;
+    }
+
+    /**
+     * Returns the positional argument.
+     * @return the positional argument
+     */
+    public DukeCommandArgument getPositionalArg() {
+        return positionalArg;
+    }
+
+    /**
+     * Returns the named arguments that were accepted for this command.
+     * @return the named arguments that were accepted for this command
+     */
+    public Map<String, DukeCommandArgument> getAcceptedNamedArgs() {
+        return acceptedNamedArgs;
     }
 
     /**
@@ -27,7 +43,8 @@ class DukeCommandConfig {
             String argName = entry.getKey();
             String argValue = entry.getValue();
             if (!acceptedNamedArgs.containsKey(argName)) {
-                throw new InvalidCommandException(String.format("Unexpected named argument \"%s\" with value \"%s\".", argName, argValue));
+                throw new InvalidCommandException(
+                        String.format("Unexpected named argument \"%s\" with value \"%s\".", argName, argValue));
             }
             acceptedNamedArgs.get(argName).assertCompatibilityWith(argValue);
         }
