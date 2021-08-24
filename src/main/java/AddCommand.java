@@ -14,11 +14,12 @@ public class AddCommand extends Command{
         } else if (this.task instanceof Deadline) {
             Deadline deadline = (Deadline) this.task;
             addTask(deadline, tasks);
-            storage.saveTaskToFile("[D] " + deadline.showStatus() + deadline.name + ":" + deadline.date + "\n");
+            storage.saveTaskToFile("[D] " + deadline.showStatus() + deadline.name + ":" + deadline.dateFormatted + "\n");
         } else {
+            
             Event event = (Event) this.task;
             addTask(event, tasks);
-            storage.saveTaskToFile("[E] " + event.showStatus() + event.name + ":" + event.time + "\n");
+            storage.saveTaskToFile("[E] " + event.showStatus() + event.name + ":" + event.timeFormatted + "\n");
         }
     };
 

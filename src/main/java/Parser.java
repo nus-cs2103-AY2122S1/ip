@@ -43,6 +43,7 @@ public class Parser {
             }
             String name = userInput.substring(6).split("/at")[0];
             String time = userInput.substring(6).split("/at")[1];
+            //System.out.println(time);
             Event event = new Event(name, time);
             return new AddCommand(event);
         }

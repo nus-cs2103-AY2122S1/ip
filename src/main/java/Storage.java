@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,15 +35,24 @@ public class Storage {
         return task;
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException, IOException {
         ArrayList<Task> taskList = new ArrayList<>();
-        Scanner scanner = new Scanner(this.filePath);
-        while (scanner.hasNextLine()) {
-            String s = scanner.nextLine();
-            Task task = stringToTask(s);
-            taskList.add(task);
+        File nekoData = new File(this.filePath);
+        if (!nekoData.exists()) {
+            nekoData.createNewFile();
+            System.out.println("File created: " + nekoData.getName());
+        } else {
+            System.out.println("File already exists.");
+            Scanner scanner = new Scanner(nekoData);
+            while (scanner.hasNextLine()) {
+                String s = scanner.nextLine();
+                // if (s.startsWith(" ")) break;
+                Task task = stringToTask(s);
+                taskList.add(task);
+            }
+            scanner.close();
         }
-        scanner.close();
+        
         return taskList;
     }
 
@@ -52,7 +62,7 @@ public class Storage {
      * @throws IOException
      */
     public void saveTaskToFile(String taskString) throws IOException {
-        FileWriter writer = new FileWriter(filePath, true);
+        FileWriter writer = new FileWriter(new File(this.filePath), true);
         writer.append(taskString);
         writer.flush();
         writer.close();
@@ -73,9 +83,9 @@ public class Storage {
             String input = scanner.nextLine();
             fileString += input + "\n";
         }
-        //System.out.println("before: \n" + fileString +"\n");
+        
         String newFile = fileString.replace(task.toString() + "\n", "");
-        FileWriter writer = new FileWriter(this.filePath);
+        FileWriter writer = new FileWriter(new File(this.filePath));
         writer.write(newFile);
         writer.flush();
         writer.close();
@@ -88,9 +98,8 @@ public class Storage {
             String input = scanner.nextLine();
             fileString += input + "\n";
         }
-        //System.out.println("before: \n" + fileString +"\n");
         String newFile = fileString.replace(task.toString(), task.toString().replace("[ ]", "[X]"));
-        FileWriter writer = new FileWriter(this.filePath);
+        FileWriter writer = new FileWriter(new File(this.filePath));
         writer.write(newFile);
         writer.flush();
         writer.close();

@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ public class DeleteCommand extends Command {
         if (tasks.taskList.size() < this.taskNum) {
             throw new DukeException("You cannot complete a task that does not exist!");
         } else {
-            Scanner newSc = new Scanner(storage.filePath);
+            Scanner newSc = new Scanner(new File(storage.filePath));
             storage.deleteTaskFromFile(taskNum, newSc, tasks);
             Task taskToDelete = tasks.taskList.get(taskNum - 1);
             tasks.taskList.remove(taskToDelete);

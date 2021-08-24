@@ -11,7 +11,20 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    public String readCommand() {
+        String userInput = sc.nextLine();
+        return userInput;
+    }
+
     public void showLine() {
         System.out.println("--------------------------");
+    }
+
+    public void showError(String error) {
+        System.out.println(error);
+    }
+
+    public void showLoadingError() {
+        System.out.println("Oops! Error in loading the document...");
     }
 }

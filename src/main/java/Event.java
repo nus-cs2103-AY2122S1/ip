@@ -17,6 +17,7 @@ public class Event extends Task{
         super(name);
         this.prefix = "[E]";
         if (canBeFormattedDateTime(time)) {
+            this.time = time;
             this.timeFormatted = fromStringToDateTime(time);
         } else {
             this.time = time;
@@ -47,17 +48,12 @@ public class Event extends Task{
         return this.prefix;
     }
 
-    @Override
-    public String toString() {
-        return (this.prefix + " " + super.showStatus() + this.name + ":" + this.time);
-    }
-
     /**
      * print out the relevant info of the event
      */
     @Override
     public void showThisTask() {
-        if (this.time == null) {
+        if (canBeFormattedDateTime(this.time)) {
             System.out.println(this.prefix + super.showStatus() + this.name + "(at:" + this.timeFormatted.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + ")");
         } else {
             System.out.println(this.prefix + super.showStatus() + this.name + "(at:" + this.time + ")");
@@ -70,6 +66,10 @@ public class Event extends Task{
     @Override
     public void markAsDone() {
         this.hasDone = true;
-        //System.out.println(this.prefix + "[X] " + this.name + "(by:" + this.time + ")");
+    }
+
+    @Override
+    public String toString() {
+        return (this.prefix + " " + super.showStatus() + this.name + ":" + this.timeFormatted.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
     }
 }

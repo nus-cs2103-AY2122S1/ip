@@ -58,7 +58,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return (this.prefix + " " + super.showStatus() + this.name + ":" + this.date);
+        return (this.prefix + " " + super.showStatus() + this.name + ":" + this.dateFormatted);
     }
 
     /**

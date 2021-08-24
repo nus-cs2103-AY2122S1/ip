@@ -51,6 +51,12 @@ public class Task {
         System.out.println(this.prefix + showStatus() + this.name);
     }
 
+    @Override
+    public String toString() {
+        return (this.prefix + " " + showStatus() + this.name);
+    }
+
+
     // /**
     //  * print out the relevant info of the task with number in front
     //  * 
