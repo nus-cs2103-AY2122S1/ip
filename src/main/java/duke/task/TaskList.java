@@ -191,6 +191,22 @@ public class TaskList {
         }
     }
 
+    public static ArrayList<TaskList> findMatching(String searchWord) {
+        ArrayList<TaskList> matchingTasks = new ArrayList<>();
+        for (TaskList t : tasks) {
+            String description = t.getDescription();
+            if (description.contains(searchWord)) {
+                matchingTasks.add(t);
+            }
+        }
+        userInterface.matchingTaskListHeader(searchWord);
+        return matchingTasks;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Returns the status icon of the task, depending on whether it is marked
      * done or not. Done is denoted by X, and whitespace otherwise.
