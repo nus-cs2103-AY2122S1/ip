@@ -54,55 +54,64 @@ public class Duke {
                 }
                 if (keyword != null) {
                     switch (keyword) {
-                        case LIST:
-                            System.out.println(format(commands.list(records)));
-                            break;
-                        case TODO:
-                            try {
-                                String text = scanner.nextLine().trim();
-                                System.out.println(format(commands.todo(text, records.size(), records)));
-                            } catch (DukeException e) {
-                                System.out.println(format(e.toString()));
-                            }
-                            break;
-                        case EVENT:
-                            String[] text = scanner.nextLine().split("/at ");
-                            try {
-                                System.out.println(format(commands.event(text[0].trim(), text[1], records.size(), records)));
-                            } catch (DukeException e) {
-                                System.out.println(format(e.toString()));
-                            } catch (ArrayIndexOutOfBoundsException e) {
-                                System.out.println(format("OOPS!!! No date for event! " +
-                                        "Use format of event description /at date \n\t"));
-                            }
-                            break;
-                        case DEADLINE:
-                            String[] txt = scanner.nextLine().split("/by ");
-                            try {
-                                System.out.println(format(commands.deadline(txt[0].trim(), txt[1], records.size(), records)));
-                            } catch (DukeException e) {
-                                System.out.println(format(e.toString()));
-                            } catch (ArrayIndexOutOfBoundsException e) {
-                                System.out.println(format("OOPS!!! No date for deadline! " +
-                                        "Use format of deadline description /by date \n\t"));
-                            }
-                            break;
-                        case DONE:
-                            try {
-                                int index = scanner.nextInt() - 1;
-                                System.out.println(format(commands.done(index, records)));
-                            } catch (DukeException e) {
-                                System.out.println(format(e.toString()));
-                            }
-                            break;
-                        case DELETE:
-                            try {
-                                int index = (scanner.nextInt()) - 1;
-                                System.out.println(format(commands.delete(index, records)));
-                            } catch (DukeException e) {
-                                System.out.println(format(e.toString()));
-                            }
-                            break;
+                    case LIST:
+                        System.out.println(format(commands.list(records)));
+                        break;
+                    case TODO:
+                        try {
+                            String text = scanner.nextLine().trim();
+                            System.out.println(format(commands.todo(text, records.size(), records)));
+                        } catch (DukeException e) {
+                            System.out.println(format(e.toString()));
+                        }
+                        break;
+                    case EVENT:
+                        String[] text = scanner.nextLine().split("/at ");
+                        try {
+                            System.out.println(format(commands.event(text[0].trim(), text[1], records.size(), records)));
+                        } catch (DukeException e) {
+                            System.out.println(format(e.toString()));
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println(format("OOPS!!! No date for event! " +
+                                    "Use format of event description /at date \n\t"));
+                        }
+                        break;
+                    case DEADLINE:
+                        String[] txt = scanner.nextLine().split("/by ");
+                        try {
+                            System.out.println(format(commands.deadline(txt[0].trim(), txt[1], records.size(), records)));
+                        } catch (DukeException e) {
+                            System.out.println(format(e.toString()));
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println(format("OOPS!!! No date for deadline! " +
+                                    "Use format of deadline description /by date \n\t"));
+                        }
+                        break;
+                    case DONE:
+                        try {
+                            int index = scanner.nextInt() - 1;
+                            System.out.println(format(commands.done(index, records)));
+                        } catch (DukeException e) {
+                            System.out.println(format(e.toString()));
+                        }
+                        break;
+                    case DELETE:
+                        try {
+                            int index = (scanner.nextInt()) - 1;
+                            System.out.println(format(commands.delete(index, records)));
+                        } catch (DukeException e) {
+                            System.out.println(format(e.toString()));
+                        }
+                        break;
+
+                    case FIND:
+                        try {
+                            String key = scanner.nextLine().trim();
+                            System.out.println(format(commands.find(key, records)));
+                        } catch (DukeException e) {
+                            System.out.println(format(e.toString()));
+                        }
+                        break;
                     }
                 }
             }

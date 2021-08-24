@@ -4,7 +4,8 @@ public enum Keyword {
     TODO ("todo"),
     DEADLINE ("deadline"),
     EVENT ("event"),
-    DELETE ("delete");
+    DELETE ("delete"),
+    FIND("find");
 
     private String command;
     Keyword(String command) {
@@ -20,20 +21,22 @@ public enum Keyword {
      */
     public static Keyword checkKeyword(String input) throws DukeException {
         switch (input) {
-            case "list":
-                return Keyword.LIST;
-            case "done":
-                return Keyword.DONE;
-            case "todo":
-                return Keyword.TODO;
-            case "deadline":
-                return Keyword.DEADLINE;
-            case "event":
-                return Keyword.EVENT;
-            case "delete":
-                return Keyword.DELETE;
-            default:
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        case "list":
+            return Keyword.LIST;
+        case "done":
+            return Keyword.DONE;
+        case "todo":
+            return Keyword.TODO;
+        case "deadline":
+            return Keyword.DEADLINE;
+        case "event":
+            return Keyword.EVENT;
+        case "delete":
+            return Keyword.DELETE;
+        case "find":
+            return Keyword.FIND;
+        default:
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
