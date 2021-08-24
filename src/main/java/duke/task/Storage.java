@@ -14,15 +14,18 @@ public class Storage {
     private final File SAVEFILE = new File(FILEPATH);
     private final String SEPARATOR = "~SEPARATION_STRING~";
 
-    public Storage() {
+    private TaskList taskList;
+
+    public Storage(TaskList taskList) {
         try {
+            this.taskList = taskList;
             SAVEFILE.createNewFile();
         } catch (java.io.IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void writeToFile(TaskList taskList) {
+    public void writeToFile() {
         try {
             StringBuilder toBeWritten = new StringBuilder();
             FileWriter fileWriter = new FileWriter(FILEPATH);
@@ -60,7 +63,7 @@ public class Storage {
         }
     }
 
-    public void copyFromFileToList(TaskList taskList) { //STOPPED HERE
+    public void copyFromFileToList() { //STOPPED HERE
         try {
             Scanner sc = new Scanner(SAVEFILE);
 
@@ -71,13 +74,15 @@ public class Storage {
 
                 switch (inputArray[1].charAt(0)) {
                 case 'T':
-                    newTask = new Todo(inputArray[2]);
+                    newTask = Todo.setTodo(inputArray[2]);
                     break;
                 case 'D':
-                    newTask = new Deadline(inputArray[2], inputArray[3]);
+                    //newTask = new Deadline(inputArray[2], inputArray[3]);
+                    newTask = Deadline.setDeadline(inputArray[2] + " /by " + inputArray[3]);
                     break;
                 case 'E':
-                    newTask = new Event(inputArray[2], inputArray[3]);
+                    //newTask = new Event(inputArray[2], inputArray[3]);
+                    newTask = Event.setEvent(inputArray[2] + " /at " + inputArray[3]);
                     break;
                 }
 

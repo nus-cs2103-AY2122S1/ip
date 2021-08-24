@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.InvalidParamException;
+
 public class Event extends Task {
 
     private String at;
@@ -13,6 +15,24 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         this.at = at;
+    }
+
+    /**
+     * Returns an event task based on the given description.
+     *
+     * @param input the string containing the event task description.
+     * @return the event task constructed from the given description.
+     * @throws InvalidParamException if the description does not contain the appropriate information.
+     */
+    public static Task setEvent(String input) throws InvalidParamException {
+        String[] eventParams = input.split(" /at ");
+        if (eventParams.length != 2) {
+            throw new InvalidParamException("Please include the time of the event after\n"
+                    + "a task description using an '/at' (only once).\n"
+                    + "i.e. event project meeting /at Aug 6th 2-4pm");
+        }
+        Task event = new Event(eventParams[0], eventParams[1]);
+        return event;
     }
 
     /**

@@ -3,28 +3,25 @@ package duke.main;
 import duke.exception.DukeException;
 import duke.exception.NoDescriptionException;
 import duke.exception.InvalidParamException;
-import duke.task.Storage;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 
 public class Parser {
-    private Ui ui;
     private TaskList taskList;
-    private Storage storage;
     private enum TaskAction {
         DELETE("delete", 7, "deleted"),
         DONE("done", 5, "marked as done");
 
         // Name of the task action
-        private final String name;
+        private String name;
 
         // At what index to substring the input so as to remove the first word
-        private final int substringIndex;
+        private int substringIndex;
 
         // The message fragment when the action is successfully completed
-        private final String successMessage;
+        private String successMessage;
 
         TaskAction(String name, int substringIndex, String successMessage) {
             this.name = name;
@@ -33,10 +30,8 @@ public class Parser {
         }
     }
 
-    public Parser(Ui ui, TaskList taskList, Storage storage) {
-        this.ui = ui;
+    public Parser(TaskList taskList) {
         this.taskList = taskList;
-        this.storage = storage;
     }
 
     /**
@@ -45,8 +40,7 @@ public class Parser {
      * @param input the input string from the Scanner
      */
     public boolean handleInput(String input) {
-        ui.printSingleDivider();
-
+        Ui.printSingleDivider();
         if (input.equals("bye")) {
 
             return false;
@@ -71,8 +65,7 @@ public class Parser {
             vetoTask(input);
         }
 
-        storage.writeToFile(taskList);
-        ui.printDoubleDivider();
+        Ui.printDoubleDivider();
         return true;
     }
 
@@ -137,17 +130,17 @@ public class Parser {
                 if (input.startsWith("todo")) {
 
                     // Set the to-do
-                    newTask = setTodo(input.substring(5));
+                    newTask = Todo.setTodo(input.substring(5));
 
                 } else if (input.startsWith("deadline")) {
 
                     // Set the deadline
-                    newTask = setDeadline(input.substring(9));
+                    newTask = Deadline.setDeadline(input.substring(9));
 
                 } else if (input.startsWith("event")) {
 
                     // Set the event
-                    newTask = setEvent(input.substring(6));
+                    newTask = Event.setEvent(input.substring(6));
 
                 }
             }
@@ -176,52 +169,4 @@ public class Parser {
         String[] inputArray = input.split(" ");
         if (inputArray.length == 1) throw new NoDescriptionException(inputArray[0]);
     }
-
-    /**
-     * Returns a to-do task based on the given description.
-     *
-     * @param input the string containing the to-do task description.
-     * @return the to-do task constructed from the given description.
-     */
-    public Task setTodo(String input) {
-        Task todo = new Todo(input);
-        return todo;
-    }
-
-    /**
-     * Returns a deadline task based on the given description.
-     *
-     * @param input the string containing the deadline task description.
-     * @return the deadline task constructed from the given description.
-     * @throws InvalidParamException if the description does not contain the appropriate information.
-     */
-    private Task setDeadline(String input) throws InvalidParamException {
-        String[] deadlineParams = input.split(" /by ");
-        if (deadlineParams.length != 2) {
-            throw new InvalidParamException("Please include the deadline of the task after\n"
-                    + "a task description using a '/by' (only once).\n"
-                    + "i.e. deadline return book /by 2021-12-25");
-        }
-        Task deadline = new Deadline(deadlineParams[0], deadlineParams[1]);
-        return deadline;
-    }
-
-    /**
-     * Returns an event task based on the given description.
-     *
-     * @param input the string containing the event task description.
-     * @return the event task constructed from the given description.
-     * @throws InvalidParamException if the description does not contain the appropriate information.
-     */
-    private Task setEvent(String input) throws InvalidParamException {
-        String[] eventParams = input.split(" /at ");
-        if (eventParams.length != 2) {
-            throw new InvalidParamException("Please include the time of the event after\n"
-                    + "a task description using an '/at' (only once).\n"
-                    + "i.e. event project meeting /at Aug 6th 2-4pm");
-        }
-        Task event = new Event(eventParams[0], eventParams[1]);
-        return event;
-    }
-
 }

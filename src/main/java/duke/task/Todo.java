@@ -12,6 +12,17 @@ public class Todo extends Task {
     }
 
     /**
+     * Returns a to-do task based on the given description.
+     *
+     * @param input the string containing the to-do task description.
+     * @return the to-do task constructed from the given description.
+     */
+    public static Task setTodo(String input) {
+        Task todo = new Todo(input);
+        return todo;
+    }
+
+    /**
      * Returns the string representation of this Task, which follows the following format:
      * [T][Task status] Task Description
      *

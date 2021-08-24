@@ -5,13 +5,7 @@ import java.util.Scanner;
 import duke.task.Storage;
 
 public class Ui {
-    private Scanner sc;
-    private Parser parser;
-
-    public Ui(Scanner sc, TaskList taskList, Storage storage) {
-        this.sc = sc;
-        this.parser = new Parser(this, taskList, storage);
-
+    public Ui() {
         showLogo();
     }
     /**
@@ -35,26 +29,29 @@ public class Ui {
     /**
      * Prompts the user for input.
      */
-    public void getInput() {
+    public void getInput(Scanner sc, Parser parser, Storage storage) {
         System.out.print("Input: ");
         boolean isContinue = parser.handleInput(sc.nextLine());
 
+        // After every input, write to disk file
+        storage.writeToFile();
+
         if (isContinue) {
-            getInput();
+            getInput(sc, parser, storage);
         }
     }
 
     /**
      * Prints a divider using "=".
      */
-    public void printDoubleDivider() {
+    public static void printDoubleDivider() {
         System.out.println("\n=================================================\n");
     }
 
     /**
      * Prints a divider using "-".
      */
-    public void printSingleDivider() {
+    public static void printSingleDivider() {
         System.out.println("\n- - - - - - - - - - - - - - - - - - - - - - - - -\n");
     }
 }

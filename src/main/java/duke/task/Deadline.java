@@ -30,6 +30,24 @@ public class Deadline extends Task{
     }
 
     /**
+     * Returns a deadline task based on the given description.
+     *
+     * @param input the string containing the deadline task description.
+     * @return the deadline task constructed from the given description.
+     * @throws InvalidParamException if the description does not contain the appropriate information.
+     */
+    public static Task setDeadline(String input) throws InvalidParamException {
+        String[] deadlineParams = input.split(" /by ");
+        if (deadlineParams.length != 2) {
+            throw new InvalidParamException("Please include the deadline of the task after\n"
+                    + "a task description using a '/by' (only once).\n"
+                    + "i.e. deadline return book /by 2021-12-25");
+        }
+        Task deadline = new Deadline(deadlineParams[0], deadlineParams[1]);
+        return deadline;
+    }
+
+    /**
      * Returns the string representation of this Task, which follows the following format:
      * [D][Task status] Task Description (by: Task deadline)
      *
