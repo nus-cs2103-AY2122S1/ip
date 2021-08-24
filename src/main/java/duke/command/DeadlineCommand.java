@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 import java.time.LocalDate;
 
 public class DeadlineCommand extends Command {
@@ -22,9 +31,9 @@ public class DeadlineCommand extends Command {
         LocalDate newTaskDate = Parser.convertDate(argArr[1].trim());
         Deadline newTask = new Deadline(argArr[0].trim(), newTaskDate);
         tasks.add(newTask);
-        ui.println("Got it. I've added this task:");
-        ui.println("  " + newTask);
-        ui.println("Now you have " + tasks.size() +
+        ui.printToUser("Got it. I've added this task:");
+        ui.printToUser("  " + newTask);
+        ui.printToUser("Now you have " + tasks.size() +
                 (tasks.size() == 1 ? " task" : " tasks")
                 + " in your list.");
     }

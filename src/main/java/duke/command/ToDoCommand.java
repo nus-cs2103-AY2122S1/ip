@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.ui.Ui;
+
 public class ToDoCommand extends Command {
     
     public String arguments;
@@ -15,9 +23,9 @@ public class ToDoCommand extends Command {
         }
         Todo newTask = new Todo(arguments);
         tasks.add(newTask);
-        ui.println("Got it. I've added this task:");
-        ui.println("  " + newTask);
-        ui.println("Now you have " + tasks.size() +
+        ui.printToUser("Got it. I've added this task:");
+        ui.printToUser("  " + newTask);
+        ui.printToUser("Now you have " + tasks.size() +
                 (tasks.size() == 1 ? " task" : " tasks")
                 + " in your list.");
     }

@@ -1,3 +1,8 @@
+package duke.parser;
+
+import duke.exception.DukeException;
+import duke.command.*;
+
 import java.time.LocalDate;
 
 public class Parser {

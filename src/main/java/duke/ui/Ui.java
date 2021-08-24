@@ -1,14 +1,27 @@
+package duke.ui;
+
 import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Ui {
    
+    public static final String BORDER = "____________________________________________________________";
+    public static final String PREFIX = "\t";
+    
     private final Scanner sc;
     private final PrintStream out;
     
     public Ui() {
         this.sc = new Scanner(System.in);
         this.out = System.out;
+    }
+
+    public void printToUser(String message) {
+        out.println(PREFIX + message);
+    }
+
+    public void printBorder() {
+        out.println(BORDER);
     }
     
     public void welcome() {
@@ -17,33 +30,21 @@ public class Ui {
                 + "\t| | | | | | | |/ / _ \\\n"
                 + "\t| |_| | |_| |   <  __/\n"
                 + "\t|____/ \\__,_|_|\\_\\___|\n";
-        out.println("\t____________________________________________________________");
+        printBorder();
         out.println(logo);
-        out.println("\tHello! I'm Duke\n" + "\tWhat can I do for you?");
-        out.println("\t____________________________________________________________");
+        printToUser("Hello! I'm Duke.");
+        printToUser("What can I do for you?");
+        printBorder();
     }
     
     public String readCommand() {
-        out.print("Enter command:");
-        return sc.nextLine();
+        out.print("Enter command: ");
+        String fullCommand = sc.nextLine().trim();
+        return fullCommand;
     }
     
     public void showError(String errorMessage) {
-       out.println("\t☹ OOPS!!! " + errorMessage);
-    }
-
-    public void end() {
-        out.println("\t____________________________________________________________");
-        out.println("\tBye. Hope to see you again soon!");
-        out.println("\t____________________________________________________________");
-    }
-
-    public void println(String message) {
-        out.println("\t" + message);
-    }
-
-    public void printBorder() {
-        System.out.println("\t____________________________________________________________");
+       printToUser("☹ OOPS!!! " + errorMessage);
     }
     
 }

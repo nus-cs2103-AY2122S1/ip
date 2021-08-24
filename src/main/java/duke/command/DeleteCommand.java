@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class DeleteCommand extends Command {
 
     public String arguments;
@@ -17,9 +25,9 @@ public class DeleteCommand extends Command {
             throw new DukeException("The index you entered is invalid. Please try again.");
         }
             Task taskDeleted = tasks.remove(index - 1);
-            ui.println("Noted! I've removed this task:");
-            ui.println("  " + taskDeleted);
-            ui.println("Now you have " + tasks.size() +
+            ui.printToUser("Noted! I've removed this task:");
+            ui.printToUser("  " + taskDeleted);
+            ui.printToUser("Now you have " + tasks.size() +
                     (tasks.size() == 1 ? " task" : " tasks")
                     + " in your list.");
     }

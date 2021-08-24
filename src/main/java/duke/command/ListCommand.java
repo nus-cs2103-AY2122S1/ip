@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class ListCommand extends Command {
 
     public ListCommand() {
@@ -5,14 +13,14 @@ public class ListCommand extends Command {
     }
     
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
-        ui.println("Here are the tasks in your list:");
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        ui.printToUser("Here are the tasks in your list:");
         if (tasks.isEmpty()) {
-            ui.println("  You currently have no tasks. Why not add a task?");
+            ui.printToUser("  You currently have no tasks. Why not add a task?");
         } else {
             for (int i = 0; i < tasks.size(); i++) {
                 Task currTask = tasks.get(i);
-                ui.println((i + 1) + ". " + currTask);
+                ui.printToUser((i + 1) + ". " + currTask);
             }
         }
     }

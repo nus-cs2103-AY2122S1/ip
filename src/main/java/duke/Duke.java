@@ -1,5 +1,14 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
- * The Duke program implements a bot with a set of simple commands
+ * The duke.Duke program implements a bot with a set of simple commands
  *
  * @author Calvin Tan
  */
@@ -20,7 +29,6 @@ public class Duke {
         }
     }
    
-    // Need to go through program flow for when no file in the beginning.
     public void run() {
        ui.welcome();
        boolean isExit = false;
@@ -30,19 +38,13 @@ public class Duke {
                ui.printBorder();
                Command c = Parser.parse(fullCommand);
                c.execute(tasks, ui, storage);
+               storage.write(tasks);
                isExit = c.isExit();
            } catch (DukeException e) {
                ui.showError(e.getMessage());
            } finally {
                ui.printBorder();
            }
-       }
-       ui.end();
-       
-       try {
-           storage.write(tasks);
-       } catch (DukeException e) {
-           ui.showError(e.getMessage());
        }
     }
 

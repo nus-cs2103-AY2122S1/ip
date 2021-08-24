@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class DoneCommand extends Command {
     public String arguments;
 
@@ -17,8 +25,8 @@ public class DoneCommand extends Command {
         }
         Task taskToBeMarked = tasks.get(index - 1);
         taskToBeMarked.markTaskAsDone();
-        ui.println("Nice! I've marked this task as done:");
-        ui.println("  " + taskToBeMarked);
+        ui.printToUser("Nice! I've marked this task as done:");
+        ui.printToUser("  " + taskToBeMarked);
     }
 
     @Override
