@@ -55,6 +55,10 @@ public class Parser {
                     userInterface.integerInputWarning();
                     break;
                 }
+            case "find":
+                String searchWord = scanner.next();
+                userInterface.printArrayList(TaskList.findMatching(searchWord));
+                break;
             default:
                 String remaining = command.concat(" " + scanner.nextLine());
                 try {

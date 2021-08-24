@@ -111,6 +111,18 @@ public class TaskList {
         return currentTask;
     }
 
+    public static ArrayList<TaskList> findMatching(String searchWord) {
+        ArrayList<TaskList> matchingTasks = new ArrayList<>();
+        for (TaskList t : tasks) {
+            String description = t.getDescription();
+            if (description.contains(searchWord)) {
+                matchingTasks.add(t);
+            }
+        }
+        userInterface.matchingTaskListHeader(searchWord);
+        return matchingTasks;
+    }
+
     public void loadArrayList() {
         file.loadFile();
         file.overwriteList(tasks);
@@ -123,6 +135,10 @@ public class TaskList {
         } else {
             return tasks.get(index);
         }
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     protected String getStatusIcon() {

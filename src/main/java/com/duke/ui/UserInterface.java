@@ -2,6 +2,8 @@ package com.duke.ui;
 
 import com.duke.task.TaskList;
 
+import java.util.ArrayList;
+
 /**
  *  Contains the interface that mimics the interaction with users.
  *  Methods contained within this class prints directly onto the command line.
@@ -31,6 +33,18 @@ public class UserInterface {
      * method executes.
      */
     public void taskListHeader() { System.out.println("\nHere are the tasks in your list:\n--------------------"); }
+
+    public void matchingTaskListHeader(String keyword) {
+        System.out.println("\nHere are the tasks matching \"" + keyword +  "\" in your list:\n--------------------");
+    }
+
+    public void printArrayList(ArrayList<TaskList> taskListArrayList) {
+        int index = 1;
+        for (TaskList t : taskListArrayList) {
+            System.out.println(index + ". " + t);
+            index++;
+        }
+    }
 
     /**
      * Prints a confirmation that the input task has been marked as done.
