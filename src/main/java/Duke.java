@@ -22,7 +22,10 @@ public class Duke {
 
     public static void loadFile(TaskList l) {
         try {
-            File data = new File("../../../data/duke.txt");
+            File directory = new File("../../../data");
+            directory.mkdir();
+            File data = new File("../../../data", "duke.txt");
+            data.createNewFile();
             Scanner reader = new Scanner(data);
             while (reader.hasNextLine()) {
                 String task = reader.nextLine();
@@ -54,7 +57,9 @@ public class Duke {
             reader.close();
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-        } 
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void updateFile(TaskList l) {
