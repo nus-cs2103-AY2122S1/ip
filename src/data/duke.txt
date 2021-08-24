@@ -1,0 +1,7 @@
+T - 1 - read book
+D - 0 - return book  - June 6th
+E - 0 - project meeting  - Aug 6th 2-4pm
+T - 1 - join sports clubT - 0 - borrow book
+D - 0 - deadline return book  - Sunday
+E - 0 - event project meeting  - Mon 2-4pm
+D - 0 - deadline return book  - Dec 12 2019 1800
