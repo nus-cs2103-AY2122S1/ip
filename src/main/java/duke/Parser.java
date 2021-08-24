@@ -119,9 +119,18 @@ public class Parser {
                     } catch (IllegalArgumentException e) {
                         Ui.unacceptableFormatMessage();
                     }
+                } else {
+                    Ui.noFormatSpecifiedMessage();
                 }
             } else if (input.equals("format")) {
                 Ui.currentDateFormatMessage();
+            } else if (input.equals("find")) {
+                Scanner s7 = new Scanner(s.nextLine());
+                if (s7.hasNextLine()) {
+                    this.list.find(s7.nextLine());
+                } else {
+                    Ui.noKeywordSpecifiedMessage();
+                }
             } else {
                 Ui.noSpecificCmdMessage();
             }
