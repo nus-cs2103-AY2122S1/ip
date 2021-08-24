@@ -8,6 +8,7 @@ import static kayu.commands.CommandType.DELETE;
 import static kayu.commands.CommandType.DONE;
 import static kayu.commands.CommandType.EMPTY;
 import static kayu.commands.CommandType.EVENT;
+import static kayu.commands.CommandType.FIND;
 import static kayu.commands.CommandType.INVALID;
 import static kayu.commands.CommandType.LIST;
 import static kayu.commands.CommandType.TODO;
@@ -18,6 +19,7 @@ import kayu.commands.DeadlineCommand;
 import kayu.commands.DeleteCommand;
 import kayu.commands.DoneCommand;
 import kayu.commands.EventCommand;
+import kayu.commands.FindCommand;
 import kayu.commands.ListCommand;
 import kayu.commands.TodoCommand;
 import org.junit.jupiter.api.Test;
@@ -52,6 +54,16 @@ public class ParserTest {
         
         assertEquals(DONE, command.getCommandType());
         assertEquals(numberString, command.getCommandParams());
+    }
+
+    @Test
+    public void testParseWithFind() {
+        String keyword = "test";
+        String input = FindCommand.COMMAND_WORD + ' ' + keyword;
+        Command command = parser.parseToCommand(input);
+
+        assertEquals(FIND, command.getCommandType());
+        assertEquals(keyword, command.getCommandParams());
     }
     
     @Test

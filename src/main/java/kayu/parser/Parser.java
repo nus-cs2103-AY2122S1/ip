@@ -7,6 +7,7 @@ import kayu.commands.DeleteCommand;
 import kayu.commands.DoneCommand;
 import kayu.commands.EmptyCommand;
 import kayu.commands.EventCommand;
+import kayu.commands.FindCommand;
 import kayu.commands.InvalidCommand;
 import kayu.commands.ListCommand;
 import kayu.commands.TodoCommand;
@@ -43,6 +44,9 @@ public class Parser {
                 
             case DeleteCommand.COMMAND_WORD:
                 return new DeleteCommand(inputs[1]);
+                
+            case FindCommand.COMMAND_WORD:
+                return new FindCommand(inputs[1]);
                 
             case TodoCommand.COMMAND_WORD:
                 return new TodoCommand(inputs[1], dateTimeFormat);
