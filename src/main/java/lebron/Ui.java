@@ -1,6 +1,8 @@
 package lebron;
 
-import lebron.task.*;
+import lebron.task.Task;
+import lebron.task.TaskList;
+
 import java.util.ArrayList;
 
 /**
@@ -88,7 +90,7 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE + "    Noted. I've removed this task:\n" +
                 "    " + task.toString() +
                 "\n" + "    Now you have " + num + " tasks in the list\n"
-                +  HORIZONTAL_LINE);
+                + HORIZONTAL_LINE);
     }
 
 }
