@@ -7,7 +7,6 @@ import java.util.ArrayList;
  */
 public class TaskList extends ArrayList<Task> {
     private ArrayList<Task> list = new ArrayList<>();
-
     /**
      * Create an empty list of task
      */
@@ -117,4 +116,35 @@ public class TaskList extends ArrayList<Task> {
         return data;
     }
 
+    /**
+     * Get a string of tasks matching the pattern
+     *
+     * @param pattern The pattern to match
+     * @return A string of tasks matching the patter
+     */
+    public String getMatchedTasksString(String pattern) {
+        ArrayList<Task> matched = new ArrayList<>();
+        for (Task task : list) {
+            if (task.description.contains(pattern)) {
+                matched.add(task);
+            }
+        }
+
+        StringBuilder result = new StringBuilder();
+        int index;
+        if (!matched.isEmpty()) {
+            result.append("Here are the matching tasks in your list:\n");
+
+            index = list.indexOf(matched.get(0));
+
+            result.append(index + 1).append(". ").append(matched.get(0));
+            for (int i = 1; i < matched.size(); i++) {
+                index = list.indexOf(matched.get(i));
+                result.append("\n").append(index + 1).append(". ").append(matched.get(i));
+            }
+        } else {
+            result.append("There is not task matched.");
+        }
+        return result.toString();
+    }
 }

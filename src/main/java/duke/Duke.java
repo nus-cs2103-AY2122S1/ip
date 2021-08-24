@@ -42,6 +42,12 @@ public class Duke {
         new Duke("./data/", "duke.txt").run();
     }
 
+    private void find(String command) {
+        String pattern = command.split("find ", 2)[1];
+        String matches = tasks.getMatchedTasksString(pattern);
+        ui.printMessage(matches);
+    }
+
     private void run() {
         ui.greet();
         this.add();
@@ -84,6 +90,9 @@ public class Duke {
                     break;
                 case "delete":
                     delete(command);
+                    break;
+                case "find":
+                    find(command);
                     break;
                 default:
                     // Message for unrecognised task type
