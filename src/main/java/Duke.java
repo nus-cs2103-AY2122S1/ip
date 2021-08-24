@@ -1,7 +1,13 @@
+import java.io.File;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
+    Storage storage;
+    public Duke(File file) {
+        this.storage = new Storage(file);
+    }
+
     public void Run() {
         Scanner scanner = new Scanner(System.in);
         TaskList list = new TaskList();
@@ -13,6 +19,10 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+
+        storage.read(list);
+        System.out.println("List loaded successfully!");
+
         System.out.println("What can i do for you?");
         System.out.println("──────────────────────────────────────────");
 
@@ -30,7 +40,7 @@ public class Duke {
                 case "done":
                     try {
                         int temp = scanner.nextInt();
-                        Task cur = list.get(temp);
+                        Task cur = list.get(temp - 1);
                         cur.Done();
                         System.out.println("──────────────────────────────────────────");
                         System.out.println("Nice! I've marked this task as done:");
@@ -117,7 +127,10 @@ public class Duke {
                     break;
             }
         }
+
+        storage.write(list);
         System.out.println("──────────────────────────────────────────");
+        System.out.println("List saved!");
         System.out.println("Bye, hope to see you again soon!");
     }
 }
