@@ -1,12 +1,15 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 public class Events extends Task{
 
     private boolean done = false;
     private String task = "";
-    private String time = "";
+    private LocalDateTime time = null;
     private String taskType = "E";
 
-    public Events(boolean done, String task, String time) {
-        super(done, task);
+    public Events(boolean done, String task, LocalDateTime time) {
         this.done = done;
         this.task = task;
         this.time = time;
@@ -21,7 +24,7 @@ public class Events extends Task{
             done_str = "X";
         }
 
-        return "[" + taskType + "]" + "[" + done_str + "] "  + task +" (at:" + time + ")";
+        return "[" + taskType + "]" + "[" + done_str + "] "  + task +" (at: " + ParsedTime() + ")";
     }
 
     @Override
@@ -30,8 +33,33 @@ public class Events extends Task{
     }
 
     @Override
+    public String ParsedTime() {
+        String parsedTime = "";
+        if (this.time != null) {
+            parsedTime = this.time.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH));
+        } else {
+            parsedTime = "I don't know the time.";
+        }
+
+        return parsedTime;
+    }
+
+    @Override
+    public String GetTime() {
+        if (this.time == null) {
+            return "I don't know the time";
+        }
+        return this.time.getDayOfMonth() + "/" + this.time.getMonthValue() + "/" + this.time.getYear() + " " +
+                ((this.time.getHour() < 10)? "0" + this.time.getHour()
+                        :this.time.getHour())
+                + ((this.time.getMinute() < 10)? "0" + this.time.getMinute()
+                :this.time.getMinute());
+    }
+
+
+    @Override
     public String GetDataInfo() {
-        return this.taskType + " | " + (this.done? 1 : 0) + " | " + task + " | " + time;
+        return this.taskType + " | " + (this.done? 1 : 0) + " | " + task + " | " + GetTime();
     }
 
 
