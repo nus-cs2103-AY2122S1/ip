@@ -29,6 +29,13 @@ public class MemoryBuffer {
         filePath = fp;
     }
 
+    /**
+     *
+     * Reads the flat file and its contents into an accessible format.
+     *
+     * @return an ArrayList of task records in string format.
+     * @throws FileNotFoundException
+     */
     public ArrayList<String> readFile() throws FileNotFoundException {
         ArrayList<String> store = new ArrayList<String>();
 
@@ -43,6 +50,13 @@ public class MemoryBuffer {
         return store;
     }
 
+    /**
+     *
+     * Writes the most recent task record logs into memory on a flat file.
+     *
+     * @param dataStore the data store containing the updated list of tasks.
+     * @throws IOException
+     */
     public void writeFile(DataStore dataStore) throws IOException {
         // BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
         FileWriter fileWriter = new FileWriter(filePath);

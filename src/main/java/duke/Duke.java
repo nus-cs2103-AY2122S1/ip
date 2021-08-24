@@ -1,18 +1,15 @@
 /** 
  * This file contains the main logic behind the Duke chatbot.
  * 
- * @author: @rish-16
+ * @author: Rishabh Anand
  * @version: CS2103, AY21/22 Semester 1
  */
 
 package duke;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.io.IOException;
-import java.util.Scanner;
 
 import duke.datastore.DataStore;
 import duke.membuffer.MemoryBuffer;

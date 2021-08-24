@@ -50,5 +50,12 @@ abstract public class Task {
         return this.getStatusString() + " " + this.getDescription();
     }
 
+    /**
+     *
+     * Abstract method to return the chatbot list
+     * representation of a task.
+     *
+     * @return CLI-friendly list representation of the task.
+     */
     abstract public String toTextRepresentation();
 }

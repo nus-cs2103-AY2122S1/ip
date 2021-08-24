@@ -1,3 +1,13 @@
+/**
+ *
+ * This class represents the Parser object that breaks queries
+ * into tokens before deciding what to compute.
+ *
+ * @author Rishabh Anand
+ * @version CS2103 AY21/22 Semester 1
+ *
+ */
+
 package duke.parser;
 
 import java.util.ArrayList;
@@ -24,6 +34,15 @@ public class Parser {
         brain = new Brain();
     }
 
+    /**
+     *
+     * Analyses the command and decides what function to perform.
+     *
+     * @param command the user input.
+     * @param dataStore the list containing the up-to-date task records.
+     * @param userInt the user interface object for logging.
+     * @param memBuff the memory buffer that reads and writes files
+     */
     public void execute(String command, DataStore dataStore, Ui userInt, MemoryBuffer memBuff) {
         if (command.equals("list")) {
             brain.listItems(dataStore, userInt);
@@ -52,6 +71,13 @@ public class Parser {
         }
     }
 
+    /**
+     *
+     * Handles all invalid commands given by the user.
+     *
+     * @param input the user input.
+     * @throws BotException
+     */
     public void errorHandle(String input) throws BotException {
         input = input.strip(); // remove whitespace
         String[] brokenInput = input.split(" ");
@@ -97,6 +123,13 @@ public class Parser {
         }
     }
 
+    /**
+     *
+     * Parses the commands from the flat file and commits it to working memory.
+     *
+     * @param store a list of per-line strings from the flat file.
+     * @return
+     */
     public ArrayList<Task> parseFromFile(ArrayList<String> store) {
         ArrayList<Task> dataStore = new ArrayList<Task>();
 

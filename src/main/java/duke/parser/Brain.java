@@ -1,3 +1,11 @@
+/**
+ * This class represents the main logic unit of the
+ * JARVIS chatbot that performs the actual functions.
+ *
+ * @author Rishabh Anand
+ * @versionCS2103 AY21/22 Semester 1
+ */
+
 package duke.parser;
 
 import java.time.LocalDateTime;
@@ -17,6 +25,13 @@ import java.io.IOException;
 public class Brain {
     public Brain() {}
 
+    /**
+     *
+     * Lists out the items in memory when requested by the user.
+     *
+     * @param dataStore the list containing the up-to-date task records.
+     * @param userInt the user interface object for logging.
+     */
     public void listItems(DataStore dataStore, Ui userInt) {
         userInt.say("Here are your tasks: ");
         for (int i = 0; i < dataStore.length(); i++) {
@@ -48,6 +63,14 @@ public class Brain {
         return finalTime;
     }
 
+    /**
+     *
+     * Creates a new ToDo task based on the description given.
+     *
+     * @param input the user's input with the description.
+     * @param dataStore the list containing the up-to-date task records.
+     * @param userInt the user interface object for logging.
+     */
     public void createTodo(String input, DataStore dataStore, Ui userInt) {
         String query = input.split(" ", 2)[1].strip();
         ToDo todo = new ToDo(query);
@@ -58,6 +81,14 @@ public class Brain {
         userInt.say("Now you have " + dataStore.length() + " tasks in the list.");
     }
 
+    /**
+     *
+     * Creates a Deadline task given a description and deadline.
+     *
+     * @param input the user's input with the description and deadline.
+     * @param dataStore the list containing the up-to-date task records.
+     * @param userInt the user interface object for logging.
+     */
     public void createDeadline(String input, DataStore dataStore, Ui userInt) {
         input = input.split(" ", 2)[1].strip();
         String query = input.split("/by")[0];
@@ -72,6 +103,14 @@ public class Brain {
         userInt.say("Now you have " + dataStore.length() + " tasks in the list.");        
     }
 
+    /**
+     *
+     * Creates an Event task given a description and timing.
+     *
+     * @param input the user's input with the description and timing.
+     * @param dataStore the list containing the up-to-date task records.
+     * @param userInt the user interface object for logging.
+     */
     public void createEvent(String input, DataStore dataStore, Ui userInt) {
         input = input.split(" ", 2)[1].strip();
         String query = input.split("/at")[0];
@@ -86,6 +125,16 @@ public class Brain {
         userInt.say("Now you have " + dataStore.length() + " tasks in the list.");        
     }
 
+    /**
+     *
+     * Sets a given task to completed status.
+     *
+     * @param input the user's input with the ID of the task in the list.
+     * @param dataStore the list containing the up-to-date task records.
+     * @param userInt the user interface object for logging.
+     * @param warning the exact warning to be thrown when valid index range is exceeded.
+     * @throws BotException
+     */
     public void completeTask(String input, DataStore dataStore, Ui userInt, String warning) throws BotException {
         int idx = Integer.parseInt(input.split(" ")[1]);
             
@@ -100,6 +149,14 @@ public class Brain {
         }        
     }
 
+    /**
+     *
+     * Shuts down the bot and stops the program from running.
+     *
+     * @param userInt the user interface object for logging.
+     * @param dataStore the list containing the up-to-date task records.
+     * @param memBuff the memory buffer for reading and writing files.
+     */
     public void shutdownBot(Ui userInt, DataStore dataStore, MemoryBuffer memBuff) {
         // save current task log 
         try {
@@ -112,6 +169,14 @@ public class Brain {
         System.exit(0);
     }
 
+    /**
+     *
+     * Deletes the current task from working memory.
+     *
+     * @param input the user's input with the task ID to be deleted.
+     * @param dataStore the list containing the up-to-date task records.
+     * @param userInt the user interface object for logging.
+     */
     public void deleteTask(String input, DataStore dataStore, Ui userInt) {
         int idx = Integer.parseInt(input.split(" ")[1]);
         Task task = dataStore.get(idx-1);
