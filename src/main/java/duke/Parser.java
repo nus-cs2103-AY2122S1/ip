@@ -2,8 +2,18 @@ package duke;
 
 import duke.commands.*;
 
+/**
+ * Parses user commands into the program.
+ */
 public class Parser {
 
+    /**
+     * Parses user commands into the program to determine which command they are categorised as.
+     *
+     * @param userCommand full user input string.
+     * @return command object depending on the command keyword.
+     * @throws DukeException if command keyword is invalid.
+     */
     public static Command parse(String userCommand) throws DukeException {
         String[] words = userCommand.split(" ");
 

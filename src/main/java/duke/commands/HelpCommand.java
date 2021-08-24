@@ -4,8 +4,18 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Prints the available commands and guides.
+ */
 public class HelpCommand extends Command {
+    /**
+     * The command word that identifies a HelpCommand instance.
+     */
     public static final String COMMAND_WORD = "help";
+
+    /**
+     * Guide on how to use this command word.
+     */
     public static final String MESSAGE_USAGE = COMMAND_WORD + " - display the list of available commands";
 
     @Override

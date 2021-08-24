@@ -4,9 +4,15 @@ import duke.tasks.Task;
 
 import java.util.Scanner;
 
+/**
+ * Prints various messages.
+ */
 public class Ui {
-    private Scanner sc;
+    private final Scanner sc;
 
+    /**
+     * Instantiates a ui object.
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
@@ -52,12 +58,21 @@ public class Ui {
 
     }
 
+    /**
+     * Prints the exit message when exit command is called.
+     */
     public void printExitMessage() {
         System.out.println("====================================================\n" +
                 "Goodbai. Hope to see you again soon! （ ● ___ ●.）" +
                 "\n====================================================");
     }
 
+    /**
+     * Prints the message when a task has been added to the list successfully.
+     *
+     * @param task task that has been added.
+     * @param size number of items in the list after the task has been added.
+     */
     public void printTaskAdded(Task task, int size) {
         printHorizontalLine();
         printAddTask(task);
@@ -65,16 +80,26 @@ public class Ui {
         printHorizontalLine();
     }
 
+    /**
+     * Reads the user input.
+     *
+     * @return user input string.
+     */
     public String readCommand() {
         String input = sc.nextLine();
 
-        while (input.trim().isEmpty()) {
+        while (input.strip().isEmpty()) {
             input = sc.nextLine();
         }
 
         return input;
     }
 
+    /**
+     * Prints the error message.
+     *
+     * @param err error message to be displayed.
+     */
     public void printError(String err) {
         printHorizontalLine();
         System.out.println(err);

@@ -7,17 +7,31 @@ import duke.tasks.Todo;
 
 import java.io.IOException;
 
+/**
+ * Adds a todo task to the task list.
+ */
 public class TodoCommand extends Command {
+    /**
+     * The command word that identifies a DeleteCommand instance.
+     */
     public static final String COMMAND_WORD = "todo";
+
+    /**
+     * Guide on how to use this command word.
+     */
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + " <description> - add a todo item\n" + "   Example: " + COMMAND_WORD + " read book";
+
     private String userCommand;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " <description> - add a todo item\n" +
-            "   Example: " + COMMAND_WORD + " read book";
-
+    /**
+     * Instantiates TodoCommand object.
+     *
+     * @param userCommand full user input.
+     */
     public TodoCommand(String userCommand) {
         super();
         this.userCommand = userCommand;
-
     }
 
     @Override

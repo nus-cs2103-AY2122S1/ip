@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Exception specifically related to Duke program.
+ */
 public class DukeException extends Exception {
     private final String message;
 
@@ -15,6 +18,7 @@ public class DukeException extends Exception {
 
     /**
      * Returns the string representation of this Exception.
+     *
      * @return Error message specified.
      */
     @Override

@@ -6,13 +6,28 @@ import duke.Ui;
 
 import java.io.IOException;
 
+/**
+ * Marks a task as done in the task list.
+ */
 public class DoneCommand extends Command {
+    /**
+     * The command word that identifies a DoneCommand instance.
+     */
     public static final String COMMAND_WORD = "done";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " <number> - mark task <number> as done\n" +
-            "   Example: " + COMMAND_WORD + " 1";
+
+    /**
+     * Guide on how to use this command word.
+     */
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + " <number> - mark task <number> as done\n" + "   Example: " + COMMAND_WORD + " 1";
 
     private String userCommand;
 
+    /**
+     * Instantiates DoneCommand object.
+     *
+     * @param userCommand full user input.
+     */
     public DoneCommand(String userCommand) {
         this.userCommand = userCommand;
     }

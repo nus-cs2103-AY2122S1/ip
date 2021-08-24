@@ -7,13 +7,28 @@ import duke.tasks.Task;
 
 import java.io.IOException;
 
+/**
+ * Deletes a task from the task list.
+ */
 public class DeleteCommand extends Command {
+    /**
+     * The command word that identifies a DeleteCommand instance.
+     */
     public static final String COMMAND_WORD = "delete";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " <number> - delete the specified task <number>\n" +
-            "   Example: " + COMMAND_WORD + " 1";
+
+    /**
+     * Guide on how to use the command word.
+     */
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + " <number> - delete the specified task <number>\n" + "   Example: " + COMMAND_WORD + " 1";
 
     private String userCommand;
 
+    /**
+     * Instantiates DeleteCommand object.
+     *
+     * @param userCommand full user input.
+     */
     public DeleteCommand(String userCommand) {
         super();
         this.userCommand = userCommand;
