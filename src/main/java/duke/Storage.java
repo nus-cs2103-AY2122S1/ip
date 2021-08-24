@@ -32,10 +32,10 @@ public class Storage {
 //        this.dirName = dirName;
 //    }
 
-    public PrintWriter load(File file) throws IOException {
-        PrintWriter writer = new PrintWriter(file);
+    public PrintWriter load() throws IOException {
+        PrintWriter writer = new PrintWriter(this.file);
 
-        if (file.createNewFile()) {
+        if (this.file.createNewFile()) {
             System.out.println("New file created");
         } else {
             System.out.println("Data file already exists. No new file created.");

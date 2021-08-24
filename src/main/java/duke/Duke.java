@@ -28,7 +28,7 @@ public class Duke {
     public void run() throws DukeException {
         try {
             File dukeFile = new File("data/duke.txt");
-            PrintWriter writer  = this.storage.load(dukeFile);
+            PrintWriter writer  = this.storage.load();
 
             Ui.showWelcomeMessage();
 

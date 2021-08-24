@@ -40,7 +40,7 @@ public class Parser {
         }
     }
 
-    private static Task identifyType(String input) throws DukeException {
+    static Task identifyType(String input) throws DukeException {
         String command = Parser.getCommand(input);
         String description = Parser.getDescription(input);
 
