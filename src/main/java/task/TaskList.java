@@ -81,4 +81,17 @@ public class TaskList {
         Task task = taskList.get(index);
         return task;
     }
+
+    public String find(String query) {
+        String message = "Here are the matching tasks in your list:\n";
+        int count = 1;
+        for (Task t : taskList) {
+            if (t.toString().contains(query)) {
+                message = message + Integer.toString(count) + ". "
+                        + t.toString() + "\n";
+                count++;
+            }
+        }
+        return message;
+    }
 }
