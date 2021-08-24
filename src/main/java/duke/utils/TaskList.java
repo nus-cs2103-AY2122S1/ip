@@ -3,6 +3,7 @@ package duke.utils;
 import duke.exceptions.InvalidTaskNumberException;
 import duke.tasks.Task;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class TaskList {
@@ -58,6 +59,16 @@ public class TaskList {
         } else {
             return "";
         }
+    }
+
+    public void find(HashSet<String> keywords, Ui ui) {
+        TaskList filteredTasks = new TaskList();
+        for (Task task : this.tasks) {
+            if (task.containsKeywords(keywords)) {
+                filteredTasks.addTask(task);
+            }
+        }
+        filteredTasks.showList(ui);
     }
 
     public void showList(Ui ui) {

@@ -1,6 +1,8 @@
 package duke.tasks;
 
 
+import java.util.HashSet;
+
 public abstract class Task {
     private boolean done = false;
     private String taskDetails;
@@ -15,6 +17,16 @@ public abstract class Task {
         } else {
             return false;
         }
+    }
+
+    public boolean containsKeywords(HashSet<String> keywords) {
+        String[] words = this.taskDetails.split(" ");
+        for (String word : words) {
+            if (keywords.contains(word)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String toDataString() {

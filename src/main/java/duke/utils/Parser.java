@@ -28,6 +28,9 @@ public class Parser {
         }  else if (input.matches("delete [0-9]{1,}")) {
             String[] keywords = extractKeywordsFromCommand(input, new String[] {"delete"});
             return new DeleteTaskCommand(keywords[0]);
+        } else if (input.matches("find .{1,}")) {
+            String[] keywords = extractKeywordsFromCommand(input, new String[] {"find"});
+            return new FindCommand(keywords);
         }
 
         throw new UnknownCommandException();
