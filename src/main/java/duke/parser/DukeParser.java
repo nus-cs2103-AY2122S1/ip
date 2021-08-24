@@ -60,6 +60,9 @@ public class DukeParser {
             case "event":
                 handleEvent(inputScanner);
                 break;
+            case "find":
+                handleFind(inputScanner);
+                break;
             default:
                 throw new InvalidCommandException();
         }
@@ -162,6 +165,21 @@ public class DukeParser {
             list.addTask(new Event(content, date));
             storage.writeList(list);
             UI.printTaskAdded(list);
+        } else {
+            throw new InvalidCommandParameterException();
+        }
+    }
+
+    /**
+     * Action for Find Command.
+     * @param inputScanner Command Parameters.
+     * @throws InvalidCommandParameterException
+     */
+    public void handleFind(Scanner inputScanner) throws InvalidCommandParameterException {
+        if (inputScanner.hasNextLine()) {
+            String searchWord = inputScanner.nextLine();
+            TaskList searchList = list.searchTask(searchWord);
+            UI.printSearchList(searchList);
         } else {
             throw new InvalidCommandParameterException();
         }
