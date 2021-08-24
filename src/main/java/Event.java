@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Event extends Task{
     private String at;
 
@@ -7,7 +10,7 @@ public class Event extends Task{
      * @param description description of task /at specific date or time
      */
     public Event(String description) {
-        super(description.split("/at", -1)[0]);
+        super(description.split("/at", -1)[0].trim());
         String[] arr = description.split("/at", -1);
         if (arr[0].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYEVENT);
@@ -16,12 +19,26 @@ public class Event extends Task{
         } else if (arr[1].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYAT);
         } else {
-            this.at = arr[1];
+            this.at = arr[1].trim();
+        }
+    }
+
+    /**
+     * Write data to log task
+     *
+     * @param writer file writer for writing data to file
+     */
+    @Override
+    public void log(FileWriter writer) {
+        try {
+            writer.write(String.format("E|%d|%s|%s\n", this.isDone ? 1 : 0, this.description.trim(), this.at.trim()));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + at + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 }

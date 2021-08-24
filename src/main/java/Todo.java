@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Todo extends Task{
     /**
      * Constructor for Todo
@@ -5,9 +8,23 @@ public class Todo extends Task{
      * @param description description of task
      */
     public Todo(String description) {
-        super(description);
+        super(description.trim());
         if (description.length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYTODO);
+        }
+    }
+
+    /**
+     * Write data to log task
+     *
+     * @param writer file writer for writing data to file
+     */
+    @Override
+    public void log(FileWriter writer) {
+        try {
+            writer.write(String.format("T|%d|%s\n", this.isDone ? 1 : 0, this.description.trim()));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
