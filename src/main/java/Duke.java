@@ -1,3 +1,5 @@
+import duke.TaskList;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,17 +11,17 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public TaskManager generateTaskManager() {
-        return new TaskManager();
+    public TaskList generateTaskList() {
+        return new TaskList();
     }
 
     public static void main(String[] args) {
-        TaskManager taskManager = new Duke().generateTaskManager();
+        TaskList taskList = new Duke().generateTaskList();
         String hello = "Hello! I'm Duke\n" +
                 "What can I do for you?";
         System.out.println(hello);
 
         Scanner scanner = new Scanner(System.in);
-        taskManager.run(scanner);
+        taskList.run(scanner);
     }
 }

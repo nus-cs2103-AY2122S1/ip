@@ -1,3 +1,5 @@
+package duke;
+
 public class FileParseErrorException extends DukeException {
     public FileParseErrorException(String err) {
         super(err);
