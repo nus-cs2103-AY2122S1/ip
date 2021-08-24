@@ -1,14 +1,16 @@
+package bob;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Exceptions.*;
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.Todo;
+import bob.exception.*;
+import bob.task.Deadline;
+import bob.task.Event;
+import bob.task.Task;
+import bob.task.Todo;
 
 public class Storage {
     private String path;
@@ -71,7 +73,7 @@ public class Storage {
         String month;
         String year;
         String[] splitDate = date.split(" ", 3);
-        day = splitDate[1];
+        day = splitDate[1].length() == 1 ? "0" + splitDate[1] : splitDate[1];
         switch (splitDate[0]) {
             case "Jan":
                 month = "01";

@@ -1,6 +1,4 @@
-package Tasks;
-
-import Tasks.Task;
+package bob.task;
 
 public class Todo extends Task {
 

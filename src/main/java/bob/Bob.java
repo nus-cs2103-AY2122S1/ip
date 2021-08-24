@@ -1,4 +1,6 @@
-import Exceptions.*;
+package bob;
+
+import bob.exception.*;
 
 import java.io.File;
 

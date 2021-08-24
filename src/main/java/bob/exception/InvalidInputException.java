@@ -1,6 +1,4 @@
-package Exceptions;
-
-import Exceptions.BobException;
+package bob.exception;
 
 public class InvalidInputException extends BobException {
     public InvalidInputException() {

@@ -1,8 +1,10 @@
-import Exceptions.*;
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.Todo;
+package bob;
+
+import bob.exception.*;
+import bob.task.Deadline;
+import bob.task.Event;
+import bob.task.Task;
+import bob.task.Todo;
 
 import java.util.Objects;
 import java.util.Scanner;

@@ -1,4 +1,6 @@
-import Tasks.Task;
+package bob;
+
+import bob.task.Task;
 
 public class Ui {
     public Ui() {}
@@ -9,16 +11,16 @@ public class Ui {
 
     public void showDirectoryLoadingError() {
         System.out.println("You don't have the data directory and Bob text file yet." +
-                "I'll make them for you now, you're welcome! :D\n");
+                " I'll make them for you now, you're welcome! :D\n");
     }
 
     public void showFileLoadingError() {
-        System.out.println("You don't have the Bob text file yet. I'll make one for you now, you're welcome! :D\n");
+        System.out.println("You don't have the Bob.Bob text file yet. I'll make one for you now, you're welcome! :D\n");
     }
 
     public void showGreeting() {
         System.out.println("OKKAYYY finally awake!");
-        System.out.println("Howwwwwwdy! I'm Bob :D");
+        System.out.println("Howwwwwwdy! I'm Bob.Bob :D");
         System.out.println("What do you want?\n");
     }
 
