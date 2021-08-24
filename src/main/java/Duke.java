@@ -1,9 +1,9 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 
 public class Duke {
@@ -122,7 +122,8 @@ public class Duke {
                         break;
                     case ("deadline"):  // "deadline" is typed as the first word
                         if (wordArray.length < 4) { // if less than 4 words are typed, warn
-                            throw new DukeException("Please follow format: 'deadline [task name] /by [time]'");
+                            throw new DukeException(
+                                    "Please follow format: 'deadline [task name] /by [yyyy-MM-dd HH:mm]'");
                         }
                         // Scan through the input to extract the description before "/by"
                         // and the date after "/by"
@@ -134,32 +135,37 @@ public class Duke {
                             deadlinePointer++;
                         }
                         deadlinePointer++;
-                        if (newDeadlineDesc.length() > 0) { // delete the last space
-                            newDeadlineDesc = newDeadlineDesc.substring(0, newDeadlineDesc.length() - 1);
-                        }
+                        newDeadlineDesc = newDeadlineDesc.trim();   // delete the last space
+
                         while (deadlinePointer < wordArray.length) {
                             newBy += wordArray[deadlinePointer] + " ";
                             deadlinePointer++;
                         }
-                        // delete the last space
-                        if (newBy.length() > 0) newBy = newBy.substring(0, newBy.length() - 1);
+                        newBy = newBy.trim();   // delete the last space
                         if (newDeadlineDesc.equals("") || newBy.equals("")) {   // if either the description or date is empty
-                            throw new DukeException("Please follow format: 'deadline [task name] /by [time]'");
+                            throw new DukeException(
+                                    "Please follow format: 'deadline [task name] /by [yyyy-MM-dd HH:mm]'");
                         } else {    // else add a new Deadline
-                            Task newDeadline = new Deadline(newDeadlineDesc, newBy);
-                            storage.add(newDeadline);
+                            try {
+                                Task newDeadline = new Deadline(newDeadlineDesc, newBy);
+                                storage.add(newDeadline);
 
-                            writeTask(newDeadline);
+                                writeTask(newDeadline);
 
-                            System.out.println("Got it. I've added this task:\n"
-                                    + "  " + newDeadline.toString() + "\n"
-                                    + "Now you have " + storage.size()
-                                    + " task" + (storage.size() > 1 ? "s" : "") + " in the list.");
+                                System.out.println("Got it. I've added this task:\n"
+                                        + "  " + newDeadline.toString() + "\n"
+                                        + "Now you have " + storage.size()
+                                        + " task" + (storage.size() > 1 ? "s" : "") + " in the list.");
+                            } catch (DateTimeParseException e) {
+                                throw new DukeException(
+                                        "Please follow format: 'deadline [task name] /by [yyyy-MM-dd HH:mm]'");
+                            }
                         }
                         break;
                     case ("event"): // "event" is typed as the first word
                         if (wordArray.length < 4) { // if less than 4 words are typed, warn
-                            throw new DukeException("Please follow format: 'event [task name] /at [time]'");
+                            throw new DukeException(
+                                    "Please follow format: 'event [task name] /at [yyyy-MM-dd HH:mm]'");
                         }
                         // Scan through the input to extract the description before "/at"
                         // and the date after "/at"
@@ -171,27 +177,31 @@ public class Duke {
                             eventPointer++;
                         }
                         eventPointer++;
-                        if (newEventDesc.length() > 0) {    // delete the last space
-                            newEventDesc = newEventDesc.substring(0, newEventDesc.length() - 1);
-                        }
+                        newEventDesc = newEventDesc.trim(); // delete the last space
+
                         while (eventPointer < wordArray.length) {
                             newAt += wordArray[eventPointer] + " ";
                             eventPointer++;
                         }
-                        // delete the last space
-                        if (newAt.length() > 0) newAt = newAt.substring(0, newAt.length() - 1);
+                        newAt = newAt.trim();   // delete the last space
                         if (newEventDesc.equals("") || newAt.equals("")) {  // if either the description or date is empty
-                            throw new DukeException("Please follow format: 'event [task name] /at [time]'");
+                            throw new DukeException(
+                                    "Please follow format: 'event [task name] /at [yyyy-MM-dd HH:mm]'");
                         } else {    // else add a new Event
-                            Task newEvent = new Event(newEventDesc, newAt);
-                            storage.add(newEvent);
+                            try {
+                                Task newEvent = new Event(newEventDesc, newAt);
+                                storage.add(newEvent);
 
-                            writeTask(newEvent);
+                                writeTask(newEvent);
 
-                            System.out.println("Got it. I've added this task:\n"
-                                    + "  " + newEvent.toString() + "\n"
-                                    + "Now you have " + storage.size()
-                                    + " task" + (storage.size() > 1 ? "s" : "") + " in the list.");
+                                System.out.println("Got it. I've added this task:\n"
+                                        + "  " + newEvent.toString() + "\n"
+                                        + "Now you have " + storage.size()
+                                        + " task" + (storage.size() > 1 ? "s" : "") + " in the list.");
+                            } catch (DateTimeParseException e) {
+                                throw new DukeException(
+                                        "Please follow format: 'event [task name] /at [yyyy-MM-dd HH:mm]'");
+                            }
                         }
                         break;
                     case ("delete"):    // "delete" is typed as the first word
