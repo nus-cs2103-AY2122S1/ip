@@ -6,12 +6,10 @@ public class Task implements Serializable {
 
     protected String description;
     protected boolean done;
-    protected String remarks;
 
-    public Task(String description, String remarks) {
+    public Task(String description) {
         this.description = description;
         this.done = false;
-        this.remarks = remarks;
     }
 
     public void setDone() {
