@@ -15,6 +15,7 @@ public abstract class Parser {
         LIST,
         DONE,
         DELETE,
+        FIND,
         TODO,
         DEADLINE,
         EVENT,
@@ -34,6 +35,9 @@ public abstract class Parser {
         } else if (input.startsWith("delete")) {
             return CommandType.DELETE;
 
+        } else if (input.startsWith("find")) {
+            return CommandType.FIND;
+
         } else if (input.startsWith("todo")) {
             return CommandType.TODO;
 
@@ -50,6 +54,7 @@ public abstract class Parser {
 
     /**
      * Takes in the string representation of a task and returns the task represented by it.
+     *
      * @param taskString The string representation of a task.
      * @return The task represented by the string.
      */
@@ -77,9 +82,10 @@ public abstract class Parser {
 
     /**
      * Takes in a string representation of a date and time and parses it into a LocalDateTime object.
+     *
      * @param dateAndTime The given date and time.
-     * @throws DukeException If the input date and time are incorrectly configured.
      * @return A LocalDateTime object.
+     * @throws DukeException If the input date and time are incorrectly configured.
      */
     public static LocalDateTime formatDateTime(String dateAndTime) throws DukeException {
         try {

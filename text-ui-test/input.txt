@@ -11,7 +11,13 @@ list
 delete 300
 delete -5
 delete 1
+delete
 list
+find book
+find sports
+find 123
+find project meeting a
+find
 todo
 deadline
 event

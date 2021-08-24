@@ -15,8 +15,9 @@ public class Storage {
 
     /**
      * Reads from the save file if it exists, otherwise a new save file is created.
-     * @throws DukeException If there was an error reading or writing to the save file.
+     *
      * @return The previously saved task list, if it exists.
+     * @throws DukeException If there was an error reading or writing to the save file.
      */
     public ArrayList<Task> load() throws DukeException {
         File save = new File(this.filePath);
@@ -46,6 +47,7 @@ public class Storage {
 
     /**
      * Saves the current task list to the save file.
+     *
      * @throws DukeException If there was an error writing to the save file.
      */
     public void save(TaskList taskList) throws DukeException {

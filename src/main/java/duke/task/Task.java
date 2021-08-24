@@ -18,7 +18,18 @@ public abstract class Task {
 
     /**
      * Returns a string representation of the task to store within the save file.
-     * @return A string representation of the task.
+     *
+     * @return The string representation of the task.
      */
     public abstract String parseToString();
+
+    /**
+     * Returns a boolean representing if the given String is a substring of the task's description.
+     *
+     * @param string The given String.
+     * @return True if the given String is a substring, and false otherwise.
+     */
+    public boolean hasSubString(String string) {
+        return this.taskName.contains(string);
+    }
 }
