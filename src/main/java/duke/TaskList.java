@@ -1,5 +1,6 @@
 package duke;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -62,5 +63,16 @@ public class TaskList {
 
     public void delete(int index) {
         this.taskList.remove(index);
+    }
+
+    public ArrayList<Integer> findTask(String keyword) {
+        ArrayList<Integer> matches = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            String name = taskList.get(i).getName();
+            if (name.contains(keyword)) {
+                matches.add(i);
+            }
+        }
+        return matches;
     }
 }

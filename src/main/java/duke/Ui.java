@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -69,7 +70,9 @@ public class Ui {
     public void deleteMessage(TaskList tasks, int index) {
         System.out.println("Rotten flies deserve to die!");
         System.out.println("  " + tasks.get(index).toString());
-        System.out.println("Now you have " + tasks.size() + " flies to eat! RIBBIT!");
+        System.out.printf("Now you have %d flies to eat! RIBBIT!\n",
+                tasks.size() - 1);
+
     }
 
     public void listMessage(TaskList tasks) {
@@ -83,5 +86,12 @@ public class Ui {
         System.out.println("A fly has been added to the menu:");
         System.out.println("  " + tasks.get(tasks.size() - 1).toString());
         System.out.println("Now you have " + tasks.size() + " flies to eat! RIBBIT!");
+    }
+
+    public void showFindMessage(TaskList tasks, ArrayList<Integer> matches) {
+        System.out.println("Here are the flies with the matching smell:");
+        for (int i = 0; i < matches.size(); i++) {
+            System.out.println(i + 1 + "." + tasks.get(matches.get(i)).toString());
+        }
     }
 }

@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -52,11 +53,15 @@ public class Duke {
                 break;
             case "delete":
                 int idx = Integer.parseInt(args[1]) - 1;
-                ui.deleteMessage(tasks, idx - 1);
+                ui.deleteMessage(tasks, idx);
                 this.tasks.delete(idx);
                 break;
             case "list":
                 ui.listMessage(tasks);
+                break;
+            case "find":
+                ArrayList<Integer> matches = this.tasks.findTask(args[1]);
+                ui.showFindMessage(tasks, matches);
                 break;
             case "todo":
                 tasks.add(new ToDo(args[1]));
