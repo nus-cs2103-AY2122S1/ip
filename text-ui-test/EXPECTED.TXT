@@ -8,24 +8,26 @@ Here are the tasks in your list:
 Nice! I've marked this task as done:
 [T][X] borrow The Fault in my Stars
 Got it. I've added this task: 
-  [D][ ] return The Fault in my Stars (by: 20 Aug 2021) 
+  [D][ ] return The Fault in my Stars (by: 20 Aug 2021, 2:00 PM) 
 Now you have 2 task in the list.
 Got it. I've added this task:
-	 [E][ ] John's Birthday Party (at: Next Sunday)
+	 [E][ ] John's Birthday Party (at: 4 Apr 2021, 2:00 PM)
 Now you have 3 task in the list.
+Sorry, I don't understand your date format.
+Sorry, I don't understand your date format.
 Here are the tasks in your list:
 1. [T][X] borrow The Fault in my Stars
-2. [D][ ] return The Fault in my Stars (by: 20 Aug 2021)
-3. [E][ ] John's Birthday Party (at: Next Sunday)
+2. [D][ ] return The Fault in my Stars (by: 20 Aug 2021, 2:00 PM)
+3. [E][ ] John's Birthday Party (at: 4 Apr 2021, 2:00 PM)
 This task is already completed.
 Nice! I've marked this task as done:
-[D][X] return The Fault in my Stars (by: 20 Aug 2021)
+[D][X] return The Fault in my Stars (by: 20 Aug 2021, 2:00 PM)
 Nice! I've marked this task as done:
-[E][X] John's Birthday Party (at: Next Sunday)
+[E][X] John's Birthday Party (at: 4 Apr 2021, 2:00 PM)
 Here are the tasks in your list:
 1. [T][X] borrow The Fault in my Stars
-2. [D][X] return The Fault in my Stars (by: 20 Aug 2021)
-3. [E][X] John's Birthday Party (at: Next Sunday)
+2. [D][X] return The Fault in my Stars (by: 20 Aug 2021, 2:00 PM)
+3. [E][X] John's Birthday Party (at: 4 Apr 2021, 2:00 PM)
 No Action Provided: Command 'todo' requires a task action
 Please try again
 No Action Provided: Command 'event' requires a task action
@@ -41,8 +43,8 @@ Got it. I've added this task:
 Now you have 4 task in the list.
 Here are the tasks in your list:
 1. [T][X] borrow The Fault in my Stars
-2. [D][X] return The Fault in my Stars (by: 20 Aug 2021)
-3. [E][X] John's Birthday Party (at: Next Sunday)
+2. [D][X] return The Fault in my Stars (by: 20 Aug 2021, 2:00 PM)
+3. [E][X] John's Birthday Party (at: 4 Apr 2021, 2:00 PM)
 4. [T][ ] Error Handling
 Invalid Input: command 'done' require an integer as the second parameter
 Please try again
@@ -52,10 +54,10 @@ This task is already completed.
 Task Not Found: the task chosen does not exist. Use 'list' to see all your tasks.
 Please try again
 Noted. I've removed this task:
-  [D][X] return The Fault in my Stars (by: 20 Aug 2021)
+  [D][X] return The Fault in my Stars (by: 20 Aug 2021, 2:00 PM)
 Now you have 3 task in the list.
 Noted. I've removed this task:
-  [E][X] John's Birthday Party (at: Next Sunday)
+  [E][X] John's Birthday Party (at: 4 Apr 2021, 2:00 PM)
 Now you have 2 task in the list.
 Noted. I've removed this task:
   [T][X] Error Handling

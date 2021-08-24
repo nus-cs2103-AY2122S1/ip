@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -115,6 +116,9 @@ public class Duke {
             waitResponse();
         } catch (IOException e) {
             System.out.println("Sorry, your file could not save due to IO error");
+        } catch (DateTimeParseException e) {
+            System.out.println("Sorry, I don't understand your date format.");
+            waitResponse();
         }
     }
 
@@ -150,7 +154,9 @@ public class Duke {
     }
 
 
-    private static void handleDeadline(String action) throws NoActionException, NoTimeException, IOException{
+
+    private static void handleDeadline(String action) throws NoActionException, NoTimeException,
+                DateTimeParseException, IOException {
         if (action.length() == 0) {
             throw new NoActionException("Command 'deadline' requires a task action");
         }
@@ -168,7 +174,9 @@ public class Duke {
         waitResponse();
     }
 
-    private static void handleEvent(String action) throws NoActionException, NoTimeException, IOException{
+
+    private static void handleEvent(String action) throws NoActionException, NoTimeException,
+                DateTimeParseException, IOException {
         if (action.trim().length() == 0) {
             throw new NoActionException("Command 'event' requires a task action");
         }
