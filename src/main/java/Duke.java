@@ -1,4 +1,4 @@
-import commands.Command;
+import command.Command;
 import exception.DukeException;
 import exception.StorageException;
 import service.ChatBot;

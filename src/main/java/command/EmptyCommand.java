@@ -1,4 +1,4 @@
-package commands;
+package command;
 
 import exception.DukeException;
 import service.TaskList;
