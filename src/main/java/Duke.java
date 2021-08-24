@@ -1,8 +1,11 @@
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Duke {
     // CONSTANTS
@@ -135,7 +138,7 @@ public class Duke {
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);
         getFullContents();
-        return "\tNoted. I've removed this task: " +
+        return "\tNoted. I've removed this task: \n\t\t" +
                 task +
                 "\n\tNow you have " + tasks.size() + " tasks in the list.";
     }
