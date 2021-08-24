@@ -1,12 +1,13 @@
 package duke.testinginterface;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * TaskList Interface to create the stub.
+ */
 public interface TaskListInterface {
     public ArrayList<Task> getTasks();
     public void addTask(Task task);
