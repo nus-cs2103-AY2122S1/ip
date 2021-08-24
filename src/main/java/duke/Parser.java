@@ -3,8 +3,8 @@ package duke;
 import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.TaskList;
 import duke.task.Todo;
+import duke.testinginterface.TaskListInterface;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -13,10 +13,10 @@ import java.time.format.DateTimeParseException;
  * Make sense of user commands.
  */
 public class Parser {
-    TaskList taskList;
+    TaskListInterface taskList;
     private enum Command {EXIT, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, CHECKDATE, INVALID};
 
-    public Parser(TaskList taskList) {
+    public Parser(TaskListInterface taskList) {
         this.taskList = taskList;
     }
 

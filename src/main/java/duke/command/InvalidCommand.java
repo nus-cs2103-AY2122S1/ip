@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.*;
-import duke.task.TaskList;
+import duke.TaskList;
 
 public class InvalidCommand extends Command {
 

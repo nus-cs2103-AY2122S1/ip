@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.TaskList;
+import duke.TaskList;
 import duke.Ui;
 
 public class DeleteCommand extends Command {
