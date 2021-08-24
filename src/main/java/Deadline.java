@@ -3,13 +3,16 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * This class represents the Deadline event.
+ *
  * @author Nigel Tan
  */
 public class Deadline extends Task {
+
     private LocalDate by;
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param description the name of the task
      * @param by the deadline
      */
