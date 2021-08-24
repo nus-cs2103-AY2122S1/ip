@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,14 +8,16 @@ import java.time.format.DateTimeParseException;
 
 public class Duke {
     private final List<Task> list;
+    private final Storage storage;
 
-    public Duke(){
+    public Duke(String filePath){
         this.list = new ArrayList<>(100);
+        this.storage = new Storage(filePath);
     }
 
     private void begin() {
         try {
-            readTasks(list);
+            storage.readTasks(list);
         } catch (Exception e) {
             System.out.println("Could not read the data file: " + e.getMessage());
         }
@@ -36,7 +37,7 @@ public class Duke {
                         int listIndex = Integer.parseInt(input.substring(5));
                         if (listIndex <= list.size() && listIndex >= 1) {
                             completeTask(listIndex);
-                            writeTasks();
+                            storage.writeTasks(list);
                         } else {
                             throw new DukeException("Couldn't find that task in the list! Try again.");
                         }
@@ -61,7 +62,7 @@ public class Duke {
                             System.out.println("Got it. I've added this task:\n" + "  " + createdDeadlineTask + "\n"
                                     + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
                                     " in the list.");
-                            writeTasks();
+                            storage.writeTasks(list);
                         } catch (StringIndexOutOfBoundsException e) {
                             throw new DukeException("Please ensure that there is a task description and deadline. " +
                                     "Try again.");
@@ -78,7 +79,7 @@ public class Duke {
                         System.out.println("Got it. I've added this task:\n" + "  " + createdTodoTask + "\n"
                                 + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
                                 " in the list.");
-                        writeTasks();
+                        storage.writeTasks(list);
                     } catch (StringIndexOutOfBoundsException e) {
                         throw new DukeException("Please add the task information. Try again.");
                     }
@@ -98,7 +99,7 @@ public class Duke {
                             System.out.println("Got it. I've added this task:\n" + "  " + createdEventTask + "\n"
                                     + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
                                     " in the list.");
-                            writeTasks();
+                            storage.writeTasks(list);
                         } catch (StringIndexOutOfBoundsException e) {
                             throw new DukeException("Please ensure that there is an event time. Try again.");
                         } catch (DateTimeParseException e) {
@@ -110,7 +111,7 @@ public class Duke {
                     try {
                         int toDeleteIndex = Integer.parseInt(input.substring(7));
                         deleteTask(toDeleteIndex);
-                        writeTasks();
+                        storage.writeTasks(list);
                     } catch (NumberFormatException e){
                         throw new DukeException("Please make sure only a number follows the command 'delete'. " +
                                 "Try again.");
@@ -167,69 +168,8 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done:\n" + "  " + task);
     }
 
-    private void writeTasks() throws DukeException{
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("./data/duke.txt"));
-            for (Task task : list) {
-                bw.write(task.toString());
-                bw.newLine();
-            }
-            bw.close();
-        } catch (IOException e) {
-            throw new DukeException("Couldn't write the tasks!");
-        }
-    }
-
-    private void readTasks(List<Task> list) throws DukeException {
-        File file = new File("./data/duke.txt");
-        file.getParentFile().mkdirs();
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                System.out.println("Error creating data file: " + e.getMessage());
-            }
-        }
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("./data/duke.txt"));
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] splitLine = line.split(" ");
-
-                switch(splitLine[0].charAt(1)) {
-                case 'T':
-                    String todoName = splitLine[1];
-                    boolean todoStatus = (splitLine[0].charAt(4) == 'X');
-                    list.add(new Todo(todoName, todoStatus));
-                    break;
-                case 'D':
-                    String deadlineName = splitLine[1] + " ";
-                    boolean deadlineStatus = (splitLine[0].charAt(4) == 'X');
-                    String deadlineByWithBracket = line.substring(line.lastIndexOf("(by: ") + 5);
-                    String deadlineBy = deadlineByWithBracket.substring(0, deadlineByWithBracket.length() - 1);
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy");
-                    LocalDate correctDeadline = LocalDate.parse(deadlineBy, dtf);
-                    list.add(new Deadline(deadlineName, deadlineStatus, correctDeadline));
-                    break;
-                case 'E':
-                    String eventName = splitLine[1] + " ";
-                    boolean eventStatus = (splitLine[0].charAt(4) == 'X');
-                    String eventAtWithBracket = line.substring(line.lastIndexOf("(at: ") + 5);
-                    String eventAt = eventAtWithBracket.substring(0, eventAtWithBracket.length() - 1);
-                    DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("dd MMM yyy hh:mm a");
-                    LocalDateTime correctEventAt = LocalDateTime.parse(eventAt, dtf2);
-                    list.add(new Event(eventName, eventStatus, correctEventAt));
-                    break;
-                }
-            }
-            br.close();
-        } catch (IOException e) {
-            throw new DukeException("Couldn't read the tasks!");
-        }
-    }
-
     public static void main(String[] args) {
-        Duke duke = new Duke();
+        Duke duke = new Duke("./data/duke.txt");
         duke.begin();
     }
 }
