@@ -58,4 +58,17 @@ public class TaskList {
         list.remove(index);
     }
 
+    public String[] findInTasks(String s) {
+        List<String> res = new ArrayList<>();
+        res.add("Here are the matching tasks in your list:");
+        for (Task t : list) {
+            if(t.toString().contains(s)) {
+                res.add(t.toString());
+            }
+        }
+        String[] result =  new String[res.size()];
+        result = res.toArray(result);
+        return result;
+    }
+
 }
