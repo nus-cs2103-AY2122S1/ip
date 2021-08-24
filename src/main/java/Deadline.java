@@ -14,14 +14,6 @@ public class Deadline extends Task {
         return by;
     }
 
-    private void parseTime(String time) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-            this.by = LocalDateTime.parse(time, formatter);
-        } catch (DateTimeParseException e) {
-            Duke.echo("Invalid entry. Valid deadline format: deadline do HW /by 19/08/2021 23:59");
-        }
-    }
 
     @Override
     public String toString() {

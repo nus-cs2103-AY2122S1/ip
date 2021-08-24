@@ -9,14 +9,16 @@ import java.util.Scanner;
 
 public class Storage {
 
-    public static void save(ArrayList<Task> tasks) {
+    private static String filePath = "data/list.txt";
+
+    public void save(ArrayList<Task> tasks) {
         FileWriter w, fw;
         try {
-            w = new FileWriter("data/list.txt");
+            w = new FileWriter(filePath);
             w.write("");
             w.close();
 
-            fw = new FileWriter("data/list.txt");
+            fw = new FileWriter(filePath);
             for(int i = 0; i < tasks.size(); i++) {
                 Task t = tasks.get(i);
                 String taskDesc = t.getType() + (t.isDone() ? " | 1 | " : " | 0 | ") + t.getDetail();
@@ -35,8 +37,8 @@ public class Storage {
         }
     }
 
-    public static ArrayList<Task> load() {
-        File f = new File("data/list.txt");
+    public ArrayList<Task> load() throws DukeException {
+        File f = new File(filePath);
         ArrayList<Task> list = new ArrayList<>();
 
         if (!f.getParentFile().exists()) {
@@ -45,7 +47,7 @@ public class Storage {
             try {
                 f.createNewFile();
             } catch (IOException e) {
-                System.out.println("Error loading file : " + e.getLocalizedMessage());
+                throw new DukeException("Error loading file");
             }
         }
         try {
