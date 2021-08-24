@@ -12,7 +12,7 @@ Now you have 1 task(s) in the list.
 
 
 Alright! I have added this to the Stark Industries Database:
-	[D][ ] Write report (by: friday)
+	[D][ ] Write report (by: Dec 2 2021 1900)
 Now you have 2 task(s) in the list.
 
 
@@ -27,7 +27,7 @@ Nice! I've marked this task as done:
 
 Here are the tasks in your list:
 1. [T][X] Complete ip week 2 task
-2. [D][ ] Write report (by: friday)
+2. [D][ ] Write report (by: Dec 2 2021 1900)
 3. [E][ ] Birthday party (at: Mon 2-4pm)
 
 
