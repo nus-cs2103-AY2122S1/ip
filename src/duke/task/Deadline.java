@@ -1,11 +1,26 @@
+package duke.task;
+
 import java.time.LocalDate;
 
-public class Event extends Task{
+public class Deadline extends Task{
     private String name;
     private boolean isDone;
+    private LocalDate date;
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public boolean isDone() {
+        return isDone;
+    }
+
+
     private String time;
 
-    public Event(String name, boolean isDone, String time) {
+    public Deadline(String name, boolean isDone, String time) {
         super();
         this.name = name;
         this.isDone = isDone;
@@ -34,18 +49,9 @@ public class Event extends Task{
     }
 
     @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public boolean isDone() {
-        return isDone;
-    }
-
-
-    @Override
     public String toString() {
-        return "E" + " " + name    +" "  +"/"+ time + " "+  isDone+ '\n';
+        return "D" + " " +  name  +" "  +"/"+ time + " "+  isDone+ '\n';
     }
+
+
 }

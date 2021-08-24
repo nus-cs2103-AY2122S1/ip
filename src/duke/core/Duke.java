@@ -1,3 +1,11 @@
+package duke.core;
+
+import duke.databse.Database;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;

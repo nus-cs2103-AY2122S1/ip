@@ -1,3 +1,10 @@
+package duke.databse;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -56,7 +63,7 @@ public class Database {
         switch (s[0]) {
             case "T":
                 Todo todo = new Todo(s[1], isDone);
-                System.out.println(todo.toString());
+                //System.out.println(todo.toString());
                 return todo;
             case "E":
                 String taskname_event = "";
@@ -78,7 +85,7 @@ public class Database {
                     }
                 }
                 Event event =  new Event(s[1], isDone, tasktime_event);
-                System.out.println(event.toString());
+                //System.out.println(event.toString());
                 return event;
             case "D":
                 String taskname_ddl = "";
@@ -99,7 +106,7 @@ public class Database {
                     }
                 }
                 Deadline deadline = new Deadline(taskname_ddl,isDone, tasktime_ddl);
-                System.out.println(deadline.toString());
+                //System.out.println(deadline.toString());
                 return deadline;
         }
         return null;
