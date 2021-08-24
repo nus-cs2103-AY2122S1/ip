@@ -19,6 +19,10 @@ public class Task {
   public String toDb() {
     return (this.isDone ? 1 : 0) + " | " + this.description;
   }
+  
+  public String getDescription() {
+    return this.description;
+  }
 
   public String getStatusIcon() {
     return (this.isDone ? "X" : " ");
