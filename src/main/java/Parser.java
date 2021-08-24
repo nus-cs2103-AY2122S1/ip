@@ -1,0 +1,145 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+public class Parser {
+    private ArrayList<Task> taskList;
+    private Storage storage;
+    private static Scanner sc = new Scanner(System.in);
+    private static void lineSpacing() {
+        System.out.println("____________________________________________________________");
+    }
+
+    public Parser(Storage storage, ArrayList<Task> taskList) {
+        this.storage = storage;
+        this.taskList = taskList;
+    }
+
+    public void parseCommands() {
+        while (true) {
+            String userInput = sc.nextLine();
+            try {
+                if (userInput.equals("bye")) {
+                    lineSpacing();
+                    System.out.println("Bye. Hope to see you again soon!");
+                    lineSpacing();
+                    break;
+                }
+
+                if (userInput.equals("list")) {
+                    printList();
+                    continue;
+                }
+
+                if (userInput.startsWith("done")) {
+                    doneTask(userInput);
+                    continue;
+                }
+
+                if (userInput.startsWith("deadline")) {
+                    addDeadline(userInput);
+                    continue;
+                }
+
+                if (userInput.startsWith("event")) {
+                    addEvent(userInput);
+                    continue;
+                }
+
+                if (userInput.startsWith(("todo"))) {
+                    addTodo(userInput);
+                    continue;
+                }
+
+                if (userInput.startsWith("delete")) {
+                    deleteTask(userInput);
+                    continue;
+                }
+
+                throw new DukeException("unknown command");
+            } catch (DukeException e) {
+                lineSpacing();
+                System.out.println(e);
+                lineSpacing();
+            }
+        }
+    }
+
+    private void displayAddedTask(Task currentTask) {
+        lineSpacing();
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(currentTask);
+        System.out.println(String.format("Now you have %d tasks in the list.", taskList.size()));
+        lineSpacing();
+    }
+
+    private void printList() {
+        lineSpacing();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currentTask = taskList.get(i);
+            System.out.println(String.format("%d.%s", i + 1, currentTask));
+        }
+        lineSpacing();
+    }
+
+    private void doneTask(String userInput) {
+        String[] inputArray = userInput.split(" ");
+        Task completedTask = taskList.get(Integer.parseInt(inputArray[1]) - 1);
+        completedTask.markAsDone();
+        lineSpacing();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(completedTask);
+        lineSpacing();
+        storage.saveData(taskList);
+    }
+
+    private void addDeadline(String userInput) {
+        List<String> inputArray = Arrays.asList(userInput.split(" /by "));
+        String by = inputArray.get(1);
+        ArrayList<String> descriptionArray = new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" ")));
+        descriptionArray.remove(0);
+        String description = String.join(" ", descriptionArray);
+        Deadline newDeadline = new Deadline(description, by);
+        taskList.add(newDeadline);
+        displayAddedTask(newDeadline);
+        storage.saveData(taskList);
+    }
+
+    private void addEvent(String userInput) {
+        List<String> inputArray = Arrays.asList(userInput.split(" /at "));
+        String timeFrame = inputArray.get(1);
+        ArrayList<String> descriptionArray = new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" ")));
+        descriptionArray.remove(0);
+        String description = String.join(" ", descriptionArray);
+        Event newEvent = new Event(description, timeFrame);
+        taskList.add(newEvent);
+        displayAddedTask(newEvent);
+        storage.saveData(taskList);
+    }
+
+    private void addTodo(String userInput) throws DukeException {
+        List<String>  inputArray = Arrays.asList(userInput.split(" "));
+        if (inputArray.size() <= 1) {
+            throw new DukeException("todo");
+        }
+        ArrayList<String> descriptionArray =  new ArrayList<String>(inputArray);
+        descriptionArray.remove(0);
+        String description = String.join(" ",descriptionArray);
+        Todo newTodo = new Todo(description);
+        taskList.add(newTodo);
+        displayAddedTask(newTodo);
+        storage.saveData(taskList);
+    }
+
+    private void deleteTask(String userInput) {
+        String[] inputArray = userInput.split(" ");
+        Task removedTask = taskList.remove(Integer.parseInt(inputArray[1]) - 1);
+        lineSpacing();
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(removedTask);
+        System.out.println(String.format("Now you have %d tasks in the list.", taskList.size()));
+        lineSpacing();
+        storage.saveData(taskList);
+    }
+}

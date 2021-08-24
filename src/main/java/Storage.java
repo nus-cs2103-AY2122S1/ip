@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Storage {
@@ -15,7 +14,7 @@ public class Storage {
 
     }
 
-    private static Task parseAndCreateTask(String input, ArrayList<Task> taskList) {
+    private static void parseAndCreateTask(String input, ArrayList<Task> taskList) {
         String[] inputArr = input.split(",");
         Task currentTask;
         switch (inputArr[0]) {
@@ -24,25 +23,27 @@ public class Storage {
             if (inputArr[1].equals("true")) {
                 currentTask.markAsDone();
             }
-            return currentTask;
+            taskList.add(currentTask);
+            break;
 
         case "E" :
             currentTask = new Event(inputArr[3], inputArr[1]);
             if (inputArr[2].equals("true")) {
                 currentTask.markAsDone();
             }
-            return currentTask;
+            taskList.add(currentTask);
+            break;
 
         case "D" :
             currentTask = new Deadline(inputArr[3], inputArr[1]);
             if (inputArr[2].equals("true")) {
                 currentTask.markAsDone();
             }
-            return currentTask;
+            taskList.add(currentTask);
+            break;
 
         default:
             System.out.println("Database has invalid data!");
-            return null;
         }
 
     }
@@ -54,10 +55,7 @@ public class Storage {
         try (Scanner fileScanner = new Scanner(dataFile);){
 
             while (fileScanner.hasNext()) {
-                Task currentTask = parseAndCreateTask(fileScanner.nextLine(), taskList);
-               if (!Objects.isNull(currentTask)) {
-                   taskList.add(currentTask);
-               }
+                parseAndCreateTask(fileScanner.nextLine(), taskList);
             }
             System.out.println("Database loaded!");
         } catch (FileNotFoundException fileException) {
