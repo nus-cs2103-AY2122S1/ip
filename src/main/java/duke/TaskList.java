@@ -65,9 +65,10 @@ public class TaskList {
 
     /**
      * Prints the current taskList.
+     *
+     * @param listString the title of the list to be printed.
      */
-    public void display() {
-        String listString = "Here are the tasks in your list:";
+    public void display(String listString) {
         for (int i = 0; i < tasks.size(); i++) {
             listString += "\n" + (i + 1) + "." + tasks.get(i).toString();
         }
@@ -81,5 +82,28 @@ public class TaskList {
      */
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    /**
+     * Prints the list of tasks with description matching the keyWord.
+     *
+     * @param keyWord the search keyWord to filter the tasks.
+     * @throws DukeException thrown when there is no tasks matching the keyWord.
+     */
+    public void findTasks(String keyWord) throws DukeException {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.getDescription().contains(keyWord)) {
+                filteredTasks.add(t);
+            }
+        }
+        if (filteredTasks.size() == 0) {
+            throw new DukeException("☹ OOPS!!! "
+                    + "There isn't a task matching the keyword: "
+                    + keyWord);
+        } else {
+            new TaskList(filteredTasks).display("I have found " +
+                    "these tasks in your list matching the keyword:");
+        }
     }
 }
