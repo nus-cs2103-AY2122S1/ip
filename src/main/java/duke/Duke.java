@@ -77,14 +77,13 @@ public class Duke {
                 System.out.println("Have a SPARKULAR day.");
                 break;
             }else if(command.equals("list")) {
-
+                /*
                 try {
                     printFileContents(file.getPath());
                 } catch (FileNotFoundException e) {
                     System.err.println("WHERES THE FILE OH GOD SOMETHING TERRIBLE HAS HAPPENED");
                 }
-
-
+                */
                 int c = 1;
                 for (String line : lines) {
                     System.out.println(c + ". " + line);
@@ -100,8 +99,8 @@ public class Duke {
                     continue;
                 }
                 int taskNo = Integer.parseInt(numbers);
-                if (tasks.size() < taskNo) {
-                    System.err.println("hello sir there are only " + tasks.size() + " tasks in the list sir");
+                if (lines.size() < taskNo) {
+                    System.err.println("hello sir there are only " + lines.size() + " tasks in the list sir");
                     continue;
                 }
                 if (taskNo <= 0) {
@@ -109,10 +108,19 @@ public class Duke {
                     continue;
                 }
                 taskNo--;
-                Task toBeDone = tasks.get(taskNo);
-                toBeDone.makeDone();
-                tasks.set(taskNo, toBeDone);
-                System.out.println(toBeDone.name + " has been marked as done");
+                String toBeDone = lines.get(taskNo);
+                if(toBeDone.contains("[ ]")){
+                    toBeDone=toBeDone.substring(0,4)+"X"+toBeDone.substring(5);
+                    lines.set(taskNo,toBeDone);
+                    try {
+                        writeListToFile(file.getPath());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(toBeDone + " has been marked as done");
+                }else{
+                    System.out.println("It is already done. How SPARKTACULAR.");
+                }
             }else if(command.contains("delete")){
                 String numbers = command.substring(7);
                 try {
@@ -123,8 +131,8 @@ public class Duke {
                     continue;
                 }
                 int taskNo = Integer.parseInt(numbers);
-                if (tasks.size() < taskNo) {
-                    System.err.println("hello sir there are only " + tasks.size() + " tasks in the list sir");
+                if (lines.size() < taskNo) {
+                    System.err.println("hello sir there are only " + lines.size() + " tasks in the list sir");
                     continue;
                 }
                 if (taskNo <= 0) {
@@ -132,9 +140,14 @@ public class Duke {
                     continue;
                 }
                 taskNo--;
-                Task toBeDeleted=tasks.get(taskNo);
-                tasks.remove(taskNo);
-                System.out.println("task " +toBeDeleted+ " has been deleted.\nThere are "+tasks.size()+" tasks left in the list.");
+                String toBeDeleted=lines.get(taskNo);
+                lines.remove(taskNo);
+                try {
+                    writeListToFile(file.getPath());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("task " +toBeDeleted+ " has been deleted.\nThere are "+lines.size()+" tasks left in the list.");
 
             }else if(command.contains("todo")){
                 String task=command.substring(5);
@@ -184,17 +197,6 @@ public class Duke {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                /*
-                Deadline toBeAdded = new Deadline(task,date);
-                if(!(tasks.contains(toBeAdded))){
-                    tasks.add(toBeAdded);
-                    System.out.println("deadline " +toBeAdded + " added");
-                    System.out.println("the list has "+tasks.size()+" tasks now");
-                }else{
-                    System.out.println(task + " is already in the list sir");
-                }
-
-                 */
 
             }else if(command.contains("event")) {
                 String taskNDate = command.substring(6);
@@ -225,25 +227,19 @@ public class Duke {
                     e.printStackTrace();
                 }
 
-                /*
-                Event toBeAdded = new Event(task,date);
-                if(!(tasks.contains(toBeAdded))){
-                    tasks.add(toBeAdded);
-                    System.out.println("event " +toBeAdded + " added");
-                    System.out.println("the list has "+tasks.size()+" tasks now");
-                }else{
-                    System.out.println(task + " is already in the list sir");
-                }
-
-                 */
             }else if(command.equals("WIPE")){
-                lines.clear();
-                try {
-                    writeListToFile(file.getPath());
-                } catch (IOException e) {
-                    e.printStackTrace();
+                System.out.println("ARE YOU SURE? SAY Y IF YOU ARE AND LITERALLY ANYTHING ELSE IF YOU AREN'T");
+                if(sc.nextLine().equals("Y")) {
+                    lines.clear();
+                    try {
+                        writeListToFile(file.getPath());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("The list has been wiped. How tragic.");
+                }else{
+                    System.out.println("WOWZA! That was real close.");
                 }
-                System.out.println("The list has been wiped. How tragic.");
             }else{
                 System.out.println("(WHAT IS THIS PERSON TRYING TO SAY WHY IS HE TYPING GIBBERISH I'M JUST TRYING TO SURVIVE)");
             }
