@@ -18,6 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Storage class.
+ * 
+ * This class handles the reading and writing of {@link kayu.task.Task} into files.
+ */
 public class Storage {
 
     // Default Duke.task file directory.
@@ -30,6 +35,11 @@ public class Storage {
     protected static final String UNABLE_TO_LOAD_PATH = "Path ./%s cannot be accessed/loaded.";
     protected static final String INVALID_TASK_FORMAT = "'%s' is an invalid Task entry.";
 
+    /**
+     * Sets the desired file path of {@link kayu.task.Task} storage.
+     * 
+     * @param taskFilePath File path for reading/writing of data.
+     */
     public void setFilePathAndDirectory(String taskFilePath) {
         setTaskFilePath(taskFilePath);
         int splitIdx = taskFilePath.lastIndexOf('/'); // mac/unix
@@ -47,6 +57,13 @@ public class Storage {
         this.taskFilePath = taskFilePath;
     }
 
+    /**
+     * Loads the file based on specified directory, extracts and decodes the
+     * {@link kayu.task.Task} instances for return.
+     * 
+     * @return List of {@link kayu.task.Task}.
+     * @throws StorageException If unable to read/write to file.
+     */
     public List<Task> load() throws StorageException {
         initialiseFilePath();
         List<String> taskLines = readLines();
@@ -114,6 +131,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current list of {@link kayu.task.Task} into file memory.
+     * 
+     * @param taskList List of {@link kayu.task.Task} to write to file.
+     * @throws StorageException If unable to read/write to file.
+     */
     public void save(List<Task> taskList) throws StorageException {
         try {
             Path filePath = Paths.get(taskFilePath);

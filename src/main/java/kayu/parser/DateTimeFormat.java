@@ -4,12 +4,23 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DateTimeFormat class.
+ * 
+ * This class helps as a utility for {@link kayu.parser.Parser} 
+ * and {@link kayu.commands.Command} in parsing DateTime String representations.
+ */
 public class DateTimeFormat {
     
     private final List<DateTimeFormatter> dateFormatterList = new ArrayList<>();
     
     private final List<DateTimeFormatter> timeFormatterList = new ArrayList<>();
-    
+
+    /**
+     * Generates an instance of this class, as well as initialise its fields.
+     * 
+     * @return A DateTimeFormat class with initialised fields.
+     */
     public static DateTimeFormat generate() {
         DateTimeFormat dateTimeFormat = new DateTimeFormat();
         dateTimeFormat.init();

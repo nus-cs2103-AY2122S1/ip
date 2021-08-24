@@ -3,7 +3,7 @@ package kayu.task;
 /**
  * Task class.
  *
- * This abstract class acts as a base for all tasks handled by Duke.Duke.
+ * This abstract class acts as a base for all tasks handled by {@link kayu.Kayu}.
  */
 public abstract class Task {
 
@@ -43,21 +43,26 @@ public abstract class Task {
     }
 
     /**
-     * Sets isDone to true.
+     * Sets isDone field to true.
      */
     public void markAsDone() {
         setDone(true);
     }
 
     /**
-     * Generates a String icon whether Duke.task class is done or not.
+     * Generates a String icon whether Task class is done or not.
      *
-     * @return String icon based on done status
+     * @return String icon based on done status.
      */
     public String getStatusIcon() {
         return (isDone ? "[X] " : "[ ] "); // mark done Duke.task with X
     }
 
+    /**
+     * Provides the encoded string representation of this Task instance.
+     * 
+     * @return Encoded String representation of instance.
+     */
     public String toEncodedString() {
         return ((isDone) ? DONE : NOT_DONE) + SPLIT_TEMPLATE + description;
     }    

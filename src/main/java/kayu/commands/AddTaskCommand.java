@@ -9,6 +9,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+/**
+ * AddTaskCommand class.
+ * 
+ * This class is an instance of {@link kayu.commands.Command} and adds on methods that 
+ * are used by {@link kayu.commands.Command}s that requires some additional parsing.
+ * Some such parsing requirements are extracting the String description or {@link java.time.LocalDate}.
+ */
 public abstract class AddTaskCommand extends Command {
 
     private final DateTimeFormat dateTimeFormat;

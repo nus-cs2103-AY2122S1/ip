@@ -14,12 +14,18 @@ import kayu.commands.TodoCommand;
 /**
  * Parser class.
  *
- * This class helps parse user input into Instructions for Duke to use with ease.
+ * This class helps parse user input into {@link kayu.commands.Command} to execute.
  */
 public class Parser {
 
     private final DateTimeFormat dateTimeFormat = DateTimeFormat.generate();
-    
+
+    /**
+     * Parses user input into executable {@link kayu.commands.Command}s.
+     * 
+     * @param userInput User input as String.
+     * @return Associated {@link kayu.commands.Command}.
+     */
     public Command parseToCommand(String userInput) {
         try {
             String[] inputs = userInput.split(" ", 2);
