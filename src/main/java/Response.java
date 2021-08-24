@@ -12,8 +12,8 @@ public class Response {
     /**
      * Constructor
      */
-    public Response() {
-        this.lst = new ArrayList<>();
+    public Response(ArrayList<Task> lst) {
+        this.lst = lst;
         this.count = 1;
     }
 
@@ -31,7 +31,7 @@ public class Response {
      * This method handles the echo event.
      * @param task the Task that the user wants to add
      */
-    public void echo(Task task) {
+    public void add(Task task) {
         lst.add(task);
         String num = String.valueOf(lst.size());
         System.out.println(HORIZONTAL_LINE + "    Got it. I've added this task: \n" + "    " +
@@ -84,5 +84,9 @@ public class Response {
                 "    " + task.toString() +
                 "\n" + "    Now you have " + num + " tasks in the list\n"
                 +  HORIZONTAL_LINE);
+    }
+
+    public ArrayList<Task> getLst() {
+        return lst;
     }
 }
