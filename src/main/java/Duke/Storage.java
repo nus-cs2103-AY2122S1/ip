@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,6 +19,7 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 public class Storage {
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private final File file;
 
     /**
@@ -79,14 +81,12 @@ public class Storage {
         if (task instanceof Deadline) {
             Deadline d = (Deadline) task;
             LocalDateTime date = d.getDate();
-            dateString = String.format("%d/%d/%d %d%d", date.getDayOfMonth(), date.getMonth(),
-                    date.getYear(), date.getHour(), date.getMinute());
+            dateString = date.format(FORMATTER);
         }
         if (task instanceof Event) {
             Event e = (Event) task;
             LocalDateTime date = e.getDate();
-            dateString = String.format("%d/%d/%d %d%d", date.getDayOfMonth(), date.getMonth(),
-                    date.getYear(), date.getHour(), date.getMinute());
+            dateString = date.format(FORMATTER);
         }
         return String.join("|", identifier, completionStatus, task.getName(), dateString);
     }

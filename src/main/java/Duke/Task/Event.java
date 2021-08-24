@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     public static final String IDENTIFIER = "E";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy kkmm");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
     private LocalDateTime date;
 
     public Event(String description, LocalDateTime date) {
@@ -31,3 +31,5 @@ public class Event extends Task {
         return String.format("[E]%s (at: %s)", super.toString(), this.date.format(FORMATTER));
     }
 }
+
+
