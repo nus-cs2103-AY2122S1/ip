@@ -30,20 +30,22 @@ public abstract class Command {
      */
     public static Command of(String command, String extraInput) throws NoSuchCommandException {
         switch(command) {
-            case "bye":
-                return new SaveAndExitCommand();
-            case "list":
-                return new ShowListCommand();
-            case "done":
-                return new TaskCompletedCommand(extraInput);
-            case "delete":
-                return new DeleteTaskCommand(extraInput);
-            case "todo":
-                return new CreateNewToDoCommand(extraInput);
-            case "event":
-                return new CreateNewEventCommand(extraInput);
-            default:
-                throw new NoSuchCommandException("No such command!");
+        case "bye":
+            return new SaveAndExitCommand();
+        case "list":
+            return new ShowListCommand();
+        case "done":
+            return new TaskCompletedCommand(extraInput);
+        case "delete":
+            return new DeleteTaskCommand(extraInput);
+        case "todo":
+            return new CreateNewToDoCommand(extraInput);
+        case "event":
+            return new CreateNewEventCommand(extraInput);
+        case "deadline":
+            return new CreateNewDeadlineCommand(extraInput);
+        default:
+            throw new NoSuchCommandException("No such command!");
         }
     }
 

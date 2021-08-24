@@ -28,11 +28,16 @@ public abstract class Task {
      * commands
      * @throws NoTaskNameException if there is no task name
      */
-    public static Task createTask(String command, String input) throws NoSuchCommandException, NoTaskNameException {
+    private static Task createTask(String command, String input) throws NoSuchCommandException, NoTaskNameException {
         if (input.isEmpty()) {
             throw new NoTaskNameException("No task name, please try again.");
         }
         switch (command) {
+        case "todo":
+            return new ToDo(input);
+        case "event":
+            String[] message_and_eventDate = input.split("/at ");
+            return new Event(message_and_eventDate[0], message_and_eventDate[1]);
         case "deadline":
             String[] message_and_endTime = input.split("/by ");
             return new Deadline(message_and_endTime[0], message_and_endTime[1]);
