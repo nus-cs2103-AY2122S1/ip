@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
 public class Event extends Task{
@@ -7,7 +8,12 @@ public class Event extends Task{
 
     public Event (String description, String at) {
         super(description);
-        this.at = LocalDate.parse(at);
+        try {
+            this.at = LocalDate.parse(at);
+
+        } catch (DateTimeParseException e){
+            System.out.println("please enter a valid date");
+        }
     }
 
     @Override

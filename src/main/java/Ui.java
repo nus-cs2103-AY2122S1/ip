@@ -1,74 +1,59 @@
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.util.Scanner;
 
-public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+public class Ui {
 
-    public Duke(String filePath){
-        this.storage = new Storage(filePath);
-        this.tasks = storage.convertFileToTaskList();
-        this.ui = new Ui();
+    public void greet(){
+        System.out.println("Hello! I'm duke! What can I do for you?");
     }
 
-    public void run(){
-        ui.greet();
-        boolean isExit = false;
-        Parser parser = new Parser(" ");
-        while(!isExit){
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e){
-                ui.showError(e.getMessage());
-            }
+    public void bye(){
+        System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public void showError(String errorMessage){
+        System.out.println(errorMessage);
+    }
+
+    public String readCommand(){
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    public void listAllTasks(TaskList tasks){
+        for(int i = 0; i < tasks.size(); i++){
+            System.out.println((i+1) + "." + tasks.get(i).toString());
         }
-        ui.bye();
     }
 
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public void markAsDone(Task task){
+        System.out.println("Nice! I've marked this task as done:\n"
+                + task.toString());
     }
 
+    public void addTask(Task task, int taskListSize){
+        System.out.println("Got it. I've added this task:\n"
+                + task.toString()
+                + "\nNow you have "
+                + taskListSize + " tasks in the list.");
+    }
 
+    public void deleteTask(Task task, int taskListSize){
+        System.out.println("Successfully deleted task"
+                + task.toString()
+                + "\nNow you have" + taskListSize + " tasks in the list.");
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    public static void main(String[] args) {
-//        Scanner sc = new Scanner(System.in);
+//    public void run(){
+//        Scanner scanner = new Scanner(System.in);
 //        String input = new String();
-//        Ui ui = new Ui();
-//
-//        ui.greet();
-//        input = sc.nextLine();
-//        while(!input.equals("bye")){
+//        input = scanner.nextLine();
+//        Parser parser = new Parser(" ");
+//        while(parser.shouldStop(input)){
 //            try {
+//                parser.parse(input);
+//
+//
 //                String words[] = input.split(" ");
 //                if (input.equals("list")) {
 //                    list();
@@ -129,8 +114,7 @@ public class Duke {
 //            }catch(DukeException e){
 //                System.out.println("☹ OOPS!!!" + e.getMessage());
 //            }
-//            input = sc.nextLine();
+//            input = scanner.nextLine();
 //        }
 //        ui.bye();
-//    }
 }
