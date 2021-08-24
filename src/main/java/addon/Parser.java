@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import addon.Ui.IncorrectFormatException;
 
+/**
+ * Class that handles parsing of users' inputs.
+ */
 public class Parser {
 
     private Tasklist tasklist;
@@ -15,10 +18,10 @@ public class Parser {
         this.tasklist = tasklist;
     }
     /**
-     * General method for handling commsands
+     * Handles user's commands, calls appropriate methods in Tasklist class.
      *
-     * @param input input of user
-     * @exception IncorrectFormatException error if command input is formatted wrongly
+     * @param input Input string of user.
+     * @exception IncorrectFormatException Error if command input is formatted wrongly.
      */
     public void updateList (String input) throws IncorrectFormatException {
         if (input.equalsIgnoreCase("/list")) {

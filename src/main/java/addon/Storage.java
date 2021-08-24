@@ -9,8 +9,16 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles storing and loading the save file.
+ */
 public class Storage {
 
+    /**
+     * Returns a new list of the current tasks.
+     *
+     * @param list List to be written over.
+     */
     public static void rewriteFile(ArrayList<Task> list) {
         File oldFile = new File("./save.txt");
         oldFile.delete();
@@ -40,6 +48,11 @@ public class Storage {
 
     }
 
+    /**
+     * Appends the provided task to the file.
+     *
+     * @param s Task to be appended.
+     */
     public static void appendFile(Task s) {
         try {
             FileWriter fw = new FileWriter("./save.txt", true);
@@ -66,6 +79,11 @@ public class Storage {
 
     }
 
+    /**
+     * Loads the provided save file into the current Arraylist.
+     *
+     * @param saveFile Savefile to be loaded.
+     */
     public static ArrayList<Task> loadFile(File saveFile) throws FileNotFoundException {
 
         Scanner s = new Scanner(saveFile);

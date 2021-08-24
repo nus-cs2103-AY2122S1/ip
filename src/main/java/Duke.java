@@ -7,9 +7,7 @@ import addon.*;
 
 
 /**
- * General class for the Duke thing
- *
- * @author A0217769M
+ * A simple task tracking interface.
  */
 
 public class Duke {
@@ -31,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts off the interface.
+     */
     public void run() {
         boolean away = false;
         System.out.println(Ui.bar + "\n    Hello! I'm SaDOS\n" +
