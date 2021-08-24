@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Data {
@@ -21,31 +22,27 @@ public class Data {
             String isDone = entry[1].trim();
             Task task;
             switch (taskType) {
-                case "T":
-                    task = new Todo(entry[2]);
-                    if (isDone.equals("true")) {
-                        task.markAsDone();
-                    }
-                    records.add(task);
-                    break;
-                case "D":
-                    task = new Deadline(entry[2], entry[3]);
-                    if (isDone.equals("true")) {
-                        task.markAsDone();
-                    }
-                    records.add(task);
-                    break;
-                case "E":
-                    System.out.println(entry[0]);
-                    System.out.println(entry[1]);
-                    System.out.println(entry[2]);
-                    System.out.println(entry[3]);
-                    task = new Event(entry[2], entry[3]);
-                    if (isDone.equals("true")) {
-                        task.markAsDone();
-                    }
-                    records.add(task);
-                    break;
+            case "T":
+                task = new Todo(entry[2]);
+                if (isDone.equals("true")) {
+                    task.markAsDone();
+                }
+                records.add(task);
+                break;
+            case "D":
+                task = new Deadline(entry[2], LocalDate.parse(entry[3]));
+                if (isDone.equals("true")) {
+                    task.markAsDone();
+                }
+                records.add(task);
+                break;
+            case "E":
+                task = new Event(entry[2], LocalDate.parse(entry[3]));
+                if (isDone.equals("true")) {
+                    task.markAsDone();
+                }
+                records.add(task);
+                break;
             }
         }
         reader.close();

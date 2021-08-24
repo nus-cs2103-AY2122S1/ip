@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -5,15 +7,13 @@ import java.util.ArrayList;
  */
 public class Command {
     private final String name;
-    //private ArrayList<Task> records = new ArrayList<>();
 
     /**
      * Constructor for command.
      * @param name name of bot.
      */
-    public Command(String name, ArrayList<Task> data) {
+    public Command(String name) {
         this.name = name;
-        //this.records = data;
     }
 
     /**
@@ -32,12 +32,12 @@ public class Command {
      * @return added message for command to-do.
      * @throws DukeException if description is empty.
      */
-    public String todo(String description, int size) throws DukeException {
+    public String todo(String description, int size, ArrayList<Task> records) throws DukeException {
         if (description.isEmpty()) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
         Todo toAdd = new Todo(description);
-        //records.add(toAdd);
+        records.add(toAdd);
         return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
                         "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), size + 1);
     }
@@ -50,14 +50,22 @@ public class Command {
      * @return added message for command event.
      * @throws DukeException if description or date/time is empty.
      */
-    public String event(String description, String at, int size) throws DukeException {
+    public String event(String description, String at, int size, ArrayList<Task> records) throws DukeException {
         if (description.isEmpty()) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         } else if (at.isEmpty()) {
             throw new DukeException("OOPS!!! No date for event! Use format of event description /at date");
         }
-        Event toAdd = new Event(description, at);
-        //records.add(toAdd);
+
+        LocalDate date;
+        try {
+            date = LocalDate.parse(at.trim());
+        } catch (DateTimeParseException e) {
+            throw new DukeException("OOPS!! Date and Time must be specified by YYYY-MM-DD");
+        }
+
+        Event toAdd = new Event(description, date);
+        records.add(toAdd);
         return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
                         "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), size + 1);
     }
@@ -70,14 +78,22 @@ public class Command {
      * @return added message for command deadline.
      * @throws DukeException if description or date/time is empty.
      */
-    public String deadline(String description, String by, int size) throws DukeException{
+    public String deadline(String description, String by, int size, ArrayList<Task> records) throws DukeException{
         if (description.isEmpty()) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else if (by.isEmpty()) {
             throw new DukeException("OOPS!!! No date for deadline! Use format of deadline description /by date");
         }
-        Deadline toAdd = new Deadline(description, by);
-        //records.add(toAdd);
+
+        LocalDate date;
+        try {
+            date = LocalDate.parse(by.trim());
+        } catch (DateTimeParseException e) {
+            throw new DukeException("OOPS!! Date and Time must be specified by YYYY-MM-DD");
+        }
+
+        Deadline toAdd = new Deadline(description, date);
+        records.add(toAdd);
         return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
                         "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), size + 1);
     }

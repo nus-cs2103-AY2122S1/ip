@@ -17,10 +17,11 @@ public class Duke {
         try {
             this.data = new Data(FILE_PATH);
             this.records = this.data.getTasks();
-            commands = new Command(name, this.records);
+            commands = new Command(name);
         } catch (IOException e) {
-            records = new ArrayList<Task>();
-            commands = new Command(name, records);
+            this.data = new Data(FILE_PATH);
+            records = new ArrayList<>();
+            commands = new Command(name);
         }
     }
 
@@ -59,9 +60,7 @@ public class Duke {
                         case TODO:
                             try {
                                 String text = scanner.nextLine().trim();
-                                System.out.println(format(commands.todo(text, records.size())));
-                                Task toAdd = new Todo(text);
-                                records.add(toAdd);
+                                System.out.println(format(commands.todo(text, records.size(), records)));
                             } catch (DukeException e) {
                                 System.out.println(format(e.toString()));
                             }
@@ -69,9 +68,7 @@ public class Duke {
                         case EVENT:
                             String[] text = scanner.nextLine().split("/at ");
                             try {
-                                System.out.println(format(commands.event(text[0].trim(), text[1], records.size())));
-                                Task toAdd = new Event(text[0].trim(), text[1]);
-                                records.add(toAdd);
+                                System.out.println(format(commands.event(text[0].trim(), text[1], records.size(), records)));
                             } catch (DukeException e) {
                                 System.out.println(format(e.toString()));
                             } catch (ArrayIndexOutOfBoundsException e) {
@@ -82,9 +79,7 @@ public class Duke {
                         case DEADLINE:
                             String[] txt = scanner.nextLine().split("/by ");
                             try {
-                                System.out.println(format(commands.deadline(txt[0].trim(), txt[1], records.size())));
-                                Task toAdd = new Deadline(txt[0].trim(), txt[1]);
-                                records.add(toAdd);
+                                System.out.println(format(commands.deadline(txt[0].trim(), txt[1], records.size(), records)));
                             } catch (DukeException e) {
                                 System.out.println(format(e.toString()));
                             } catch (ArrayIndexOutOfBoundsException e) {
@@ -104,7 +99,6 @@ public class Duke {
                             try {
                                 int index = (scanner.nextInt()) - 1;
                                 System.out.println(format(commands.delete(index, records)));
-                                //records.remove(index);
                             } catch (DukeException e) {
                                 System.out.println(format(e.toString()));
                             }
