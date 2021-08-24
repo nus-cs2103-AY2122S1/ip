@@ -55,14 +55,25 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-    }
+        Scanner input = new Scanner(System.in);
+        ui.input = input;
+        try {
+            while (input.hasNextLine()) {
+                String userInput = ui.readInput();
+                Parser.parse(userInput, this.ui, this.storage, this.tasks);
+            }
+        } catch (IllegalStateException e) {
+            storage.saveFile(tasks);
+            }
+        }
 
     public static void main(String[] args) {
-
-        Scanner input = new Scanner(System.in);
+        new Duke("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt").run();
+    }
+        /* Scanner input = new Scanner(System.in);
         ArrayList<Task> storedInfo = new ArrayList<Task>();
         int count = 0;
-        /*try {
+        try {
             File taskList = new File("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt");
             Scanner taskReader = new Scanner(taskList);
             while (taskReader.hasNextLine()) {
@@ -96,7 +107,7 @@ public class Duke {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Tasklist not found. Creating new tasklist");
-        }*/
+        }
         //Task[] storedInfo = new Task[100];
         while (input.hasNextLine()) {
             String in = input.nextLine();
@@ -119,7 +130,7 @@ public class Duke {
             if (in.length() > 3 && in.substring(0,4).equals("done") ) {
                 /*if (in.substring(4,5) != " ") {
                     System.out.println("Invalid input for done command");
-                };*/
+                };
                 if (in.length() < 6) {
                     System.out.println("Invalid Input for done command");
                     continue;
@@ -267,5 +278,5 @@ public class Duke {
         }
 
         System.out.println("Bye. Hope to see you again!");
-    }
+    }*/
 }

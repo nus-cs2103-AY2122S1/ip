@@ -47,10 +47,10 @@ public class Storage {
         return storedList;
 
     }
-    public void saveFile(ArrayList<Task> storedList) {
-        File taskList = new File("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt");
+    public void saveFile(TaskList taskList) {
+        File items = new File("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt");
         try {
-            if (taskList.createNewFile()) {
+            if (items.createNewFile()) {
                 System.out.println("Tasklist created and saved");
             } else {
                 System.out.println("Tasklist updated");
@@ -60,7 +60,7 @@ public class Storage {
         }
         try {
             FileWriter listEditor = new FileWriter("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt");
-            for (Task item: storedList) {
+            for (Task item: taskList.tasks) {
                 if(item != null) {
                     listEditor.write(item.toString());
                     listEditor.write("\n");

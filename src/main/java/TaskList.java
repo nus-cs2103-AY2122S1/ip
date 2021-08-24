@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 
+import static java.lang.Integer.parseInt;
+
 public class TaskList {
-    private ArrayList<Task> tasks;
-    private int count;
+    public ArrayList<Task> tasks;
+    public int count;
 
     public TaskList() {
         this.tasks = new ArrayList<Task>();
@@ -13,19 +15,49 @@ public class TaskList {
         this.count = tasks.size();
     }
 
-    public void addEventTask(EventTask task) {
-        tasks.add(task);
-        count++;
+    public void doTask(int i) {
+        if (i > tasks.size()) {
+            System.out.println("Invalid Input for done command");
+        } else if (!tasks.get(i - 1).isDone) {
+            System.out.println("Nice! I've marked this task as done:");
+            tasks.get(i - 1).markAsDone();
+            System.out.println(tasks.get(i - 1));
+        } else {
+            System.out.println("This task is already marked as done");
+        }
     }
 
-    public void addDeadlineTask(DeadlineTask task) {
-        tasks.add(task);
-        count++;
+    public void addEventTask(String in, int i) {
+        System.out.println("Got it. I've added this task:");
+        tasks.add(new EventTask(in.substring(6, i), in.substring(i + 1)));
+        System.out.println(tasks.get(tasks.size()-1));
+        if (tasks.size() == 1) {
+            System.out.println("Now you have " + tasks.size() + " task in the list.");
+        } else {
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        }
     }
 
-    public void addToDoTask(ToDoTask task) {
-        tasks.add(task);
-        count++;
+    public void addDeadlineTask(String in, int i) {
+        System.out.println("Got it. I've added this task:");
+        tasks.add(new DeadlineTask(in.substring(9, i), in.substring(i + 1)));
+        System.out.println(tasks.get(tasks.size()-1));
+        if (tasks.size() == 1) {
+            System.out.println("Now you have " + tasks.size() + " task in the list.");
+        } else {
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        }
+    }
+
+    public void addToDoTask(String in) {
+        System.out.println("Got it. I've added this task:");
+        tasks.add(new ToDoTask(in.substring(4)));
+        System.out.println(tasks.get(tasks.size()-1));
+        if (tasks.size() == 1) {
+            System.out.println("Now you have " + tasks.size() + " task in the list.");
+        } else {
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        }
     }
 
     public void showList() {
@@ -40,20 +72,19 @@ public class TaskList {
         }
     }
 
-    public void doTask(int task) {
-        if (!tasks.get(task-1).isDone) {
-            System.out.println("Nice! I've marked this task as done:");
-            tasks.get(task - 1).markAsDone();
-            System.out.println(tasks.get(task - 1));
+    public void deleteTask(int i) {
+        if (tasks.isEmpty()) {
+            System.out.println("The list is empty.");
         } else {
-            System.out.println("This task is already marked as done");
+            if (i > 100) {
+                System.out.println("Invalid Input for delete command");
+            } else if (i > tasks.size()) {
+                System.out.println("Invalid Input for delete command");
+            } else {
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(tasks.get(i - 1));
+                tasks.remove(i - 1);
+            }
         }
-    }
-
-    public void deleteTask(int task) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(tasks.get(task - 1));
-        tasks.remove(task-1);
-        count--;
     }
 }
