@@ -9,6 +9,10 @@ public class TaskList {
     private ArrayList<Task> tasks;
     private Storage storage = new Storage();
 
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
+
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
