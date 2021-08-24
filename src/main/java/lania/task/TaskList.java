@@ -1,7 +1,5 @@
 package lania.task;
 
-import lania.task.Task;
-
 import java.util.ArrayList;
 
 public class TaskList {

@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class Storage {
 
-    public String filePath;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -50,9 +50,9 @@ public class Storage {
         }
     }
 
-    public void save(TaskList taskArrayList) throws IOException{
-        for (int i = 0; i < taskArrayList.size(); i++) {
-            Task task = taskArrayList.get(i);
+    public void save(TaskList taskList) throws IOException{
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
             appendToFile(filePath, task.getStringFormat(), i);
         }
     }

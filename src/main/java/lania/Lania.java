@@ -28,9 +28,9 @@ public class Lania {
         try {
             storage.save(taskList);
         } catch (IOException e) {
-            ui.loadingErrorMessage();
+            ui.showError();
         }
-        ui.updateMessage(taskList, t);
+        ui.showUpdateMessage(taskList, t);
     }
 
     /**
@@ -43,9 +43,9 @@ public class Lania {
         try {
             storage.save(taskList);
         } catch (IOException e) {
-            ui.loadingErrorMessage();
+            ui.showError();
         }
-        ui.taskCompleteMessage(taskList, i);
+        ui.showCompleteMessage(taskList, i);
     }
 
     /**
@@ -54,11 +54,11 @@ public class Lania {
      * @param i The task number to be completed.
      */
     public void remove(int i) {
-        ui.removeTaskMessage(taskList, taskList.remove(i));
+        ui.showRemoveMessage(taskList, taskList.remove(i));
         try {
             storage.save(taskList);
         } catch (IOException e) {
-            ui.loadingErrorMessage();
+            ui.showError();
         }
     }
 
@@ -66,18 +66,18 @@ public class Lania {
         try {
             taskList = storage.load();
         } catch (IOException e) {
-            ui.loadingErrorMessage();
+            ui.showError();
             e.printStackTrace();
         }
-        ui.listMessage(taskList);
-        ui.greetingMessage();
+        ui.showListMessage(taskList);
+        ui.showGreetingMessage();
         Scanner s = new Scanner(System.in);
         String input = s.nextLine();
         String command = new Parser().parseCommand(input);
         while(!command.equals("bye")) {
             try {
                 if (command.equals("list")) {
-                    ui.listMessage(taskList);
+                    ui.showListMessage(taskList);
                 } else if (command.equals("done")) {
                     complete(new Parser().getIndex(input));
                 } else if (command.equals("delete")) {
@@ -99,16 +99,16 @@ public class Lania {
                     }
                 }
             } catch (LaniaException e) {
-                ui.laniaExceptionMessage(e);
+                ui.showLaniaException(e);
             } catch (DateTimeParseException e) {
-                ui.dateTimeExceptionMessage();
+                ui.showDateTimeException();
             } finally {
                 input = s.nextLine();
                 command = new Parser().parseCommand(input);
             }
         }
         s.close();
-        ui.goodbyeMessage();
+        ui.showExitMessage();
     }
 
     /**
