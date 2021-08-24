@@ -3,8 +3,6 @@ package duke.exception;
 /**
  * Represents the Incorrect Inputs Exception class that is thrown
  * when the user enters wrong commands.
- * I made the class just in case of expansion of exceptions that
- * may occur from Duke that are not due to incorrect inputs.
  */
 public class DukeIncorrectInputs extends DukeException {
     /**

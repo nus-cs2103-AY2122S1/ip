@@ -55,6 +55,7 @@ public class TaskList {
      * Sets the status of the specified task as 'done'.
      * @param i Index of the task in the task list, that
      *          is to be set as 'done'.
+     * @throws DukeIncorrectInputs if the command entered violates given
      */
     public void setTaskAsDone(int i) throws DukeIncorrectInputs {
         if (i < 1 || i > this.listOfTasks.size()) {
@@ -72,6 +73,13 @@ public class TaskList {
         return this.listOfTasks.get(i);
     }
 
+    /**
+     * Removes the specified task from the list of tasks.
+     * @param i index of the task to be removed.
+     * @return task that is removed.
+     * @throws DukeIncorrectInputs if the command entered violates given
+     * rules.
+     */
     public Task deleteTask(int i) throws DukeIncorrectInputs {
         if (i < 1 || i > this.listOfTasks.size()) {
             throw new DukeNoSuchTask(new IllegalArgumentException());

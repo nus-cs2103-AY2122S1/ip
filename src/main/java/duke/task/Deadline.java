@@ -16,6 +16,11 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     private LocalDate deadlineDate;
 
+    /**
+     * Constructor for the Deadline task.
+     * @param arrString user input sliced into an array.
+     * @throws DukeException if Duke cannot create the Deadline object.
+     */
     protected Deadline(String[] arrString) throws DukeException {
         super(arrString.length < 2 ? " " : arrString[0]);
         String date = arrString[1] == null ? " " : arrString[1].strip();

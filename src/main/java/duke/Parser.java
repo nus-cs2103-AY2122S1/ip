@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Parser {
+
     /**
      * Represents the action command keyed in by the user.
      */
@@ -60,6 +61,16 @@ public class Parser {
         return Integer.parseInt(arrString[1]);
     }
 
+    /**
+     * Interprets the full command entered in by the user and
+     * routes the command accordingly.
+     * @param userInput full command inputted by the user.
+     * @param d Duke chatbot that is in use.
+     * @param sc Scanner object that is in use.
+     * @return Command action that is interpreted from the user input.
+     * @throws IOException if there is an error in reading the file.
+     * @throws DukeException if there is an error from Duke's internal system.
+     */
     public static Command parse(String userInput, Duke d, Scanner sc) throws IOException, DukeException {
         String firstWord = Parser.getFirstWord(userInput);
         firstWord = firstWord.equals("todo") || firstWord.equals("event") || firstWord.equals("deadline")

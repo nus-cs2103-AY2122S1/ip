@@ -5,17 +5,16 @@ import duke.task.Task;
 /**
  * Represents the user interface that interacts with the user.
  */
-
 public class Ui {
 
     /**
      * The logo of Duke chatBot.
      */
-    private static final String DUKE_LOGO = "      ____        _        \n" +
-            "     |  _ \\ _   _| | _____ \n" +
-            "     | | | | | | | |/ / _ \\\n" +
-            "     | |_| | |_| |   <  __/\n" +
-            "     |____/ \\__,_|_|\\_\\___|\n";
+    private static final String DUKE_LOGO = "\t\t____        _        \n" +
+            "\t\t|  _ \\ _   _| | _____ \n" +
+            "\t\t| | | | | | | |/ / _ \\\n" +
+            "\t\t| |_| | |_| |   <  __/\n" +
+            "\t\t|____/ \\__,_|_|\\_\\___|\n";
 
     /**
      * Formats the reply in a bubble.
@@ -81,12 +80,21 @@ public class Ui {
                 "\tNow you have " + total + " in your list.\n"));
     }
 
+    /**
+     * Prints the success message when task is deleted.
+     * @param task task to be deleted.
+     * @param total total number of tasks in the task list.
+     */
     public static void printDeleteTaskMessage(Task task, String total) {
         System.out.println(Ui.formatDukeMessage("\tNoted. I've removed this task:\n" +
                 "\t\t" + task + "\n" +
                 "\tNow you have " + total + " in your list.\n"));
     }
 
+    /**
+     * Prints the success message when task is marked as done.
+     * @param task task to be marked as done.
+     */
     public static void printDoneMessage(Task task) {
         System.out.println(Ui.formatDukeMessage("\tNice! I've marked this task as done:\n" +
                 "\t\t" + task + "\n"));

@@ -1,9 +1,6 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.exception.DukeIncorrectCommandWord;
-import duke.exception.DukeIncorrectTaskDescription;
-import duke.exception.DukeMissingTaskDescription;
+import duke.exception.*;
 
 /**
  * Represents a Task object that can be added
@@ -22,9 +19,10 @@ public class Task {
     }
 
     /**
-     * Creates a new Task object
+     * Creates a new Task object.
      *
-     * @param task String description of the task
+     * @param task String description of the task.
+     * @throws DukeException if Duke cannot create the task.
      */
     public static Task createTask(String task) throws DukeException {
         String[] taskArr = task.split(" ", 2);

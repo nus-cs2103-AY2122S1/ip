@@ -10,8 +10,9 @@ import java.util.Scanner;
  * Represents a general bye command.
  */
 public class ByeCommand extends Command{
+
     /**
-     * Constructor for the bye command.
+     * Constructor for the Bye command.
      * @param duke chatbot that is in use.
      * @param sc scanner that is in use.
      */
