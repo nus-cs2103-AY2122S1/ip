@@ -9,6 +9,12 @@ public class ByeCommand extends Command {
         super(true);
     }
 
+    /**
+     * Executes the command of closing the program.
+     *
+     * @param ui Ui used to display the program closing message.
+     * @param taskList TaskList not used in this execution.
+     */
     @Override
     public void execute(Ui ui, TaskList taskList) {
         ui.showBye();
