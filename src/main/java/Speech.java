@@ -5,14 +5,16 @@ public class Speech {
     private final int baseBubbleLimit;
     private final String baseTemplate;
     private int currentBubbleLimit;
+    private final Writer writer;
 
 
-    public Speech(boolean testMode, int speechLimit){
+    public Speech(Writer writer, boolean testMode, int speechLimit){
         this.testing = testMode;
         this.emoticonState = 0;
         this.baseBubbleLimit = speechLimit;
-        this.currentBubbleLimit = 0;
         this.baseTemplate = String.format("%"+(speechLimit+1)+"s"," ").replace(' ', '_');
+        this.currentBubbleLimit = 0;
+        this.writer = writer;
     }
 
     /**
@@ -100,6 +102,7 @@ public class Speech {
             for( String x : in){
                 msges.append(message_format(x, limit));
             }
+            writer.saveMsg(msges.toString());
             System.out.println( topBorder + msges + botBorder + emoticon);
     }
 
