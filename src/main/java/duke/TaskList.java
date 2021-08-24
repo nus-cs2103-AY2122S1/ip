@@ -6,41 +6,11 @@ public class TaskList {
 
     private List<Task> tasks;
     private Storage storage;
+    private boolean taskFound = false;
 
     public TaskList(Storage storage) {
         this.storage = storage;
         tasks = storage.readFromStorage();
-    }
-
-    public static Task createTask(char taskType, char taskDone, String taskDescription) {
-        Task createdTask = new Task("Created");
-        boolean isDone = (taskDone == 'X');
-
-        switch (taskType) {
-        case 'T':
-            Task taskToDo = new ToDo(taskDescription);
-            if (isDone) {
-                taskToDo.markAsDone();
-            }
-            createdTask = taskToDo;
-            break;
-        case 'D':
-            Task taskDeadline = Parser.parseDeadlineFromFile(taskDescription);
-            if (isDone) {
-                taskDeadline.markAsDone();
-            }
-            createdTask = taskDeadline;
-            break;
-        case 'E':
-            Task taskEvent = Parser.parseEventFromFile(taskDescription);
-            if (isDone) {
-                taskEvent.markAsDone();
-            }
-            createdTask = taskEvent;
-            break;
-        }
-
-        return createdTask;
     }
 
     public String addToList(Task newTask) {
@@ -66,6 +36,27 @@ public class TaskList {
         return curr.toString();
     }
 
+    public String findTask(String searchString) {
+        int counter = 1;
+        String result = "";
+        taskFound = false;
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task curr = tasks.get(i);
+            if (curr.getDescription().contains(searchString)) {
+                result = result + counter + "." + curr + "\n";
+                counter++;
+                taskFound = true;
+            }
+        }
+
+        return result.trim();
+    }
+
+    public boolean isTaskFound() {
+        return taskFound;
+    }
+
     public int taskCount() {
         return tasks.size();
     }
@@ -75,14 +66,10 @@ public class TaskList {
         String result = "";
 
         for (int i = 0; i < tasks.size(); i++) {
-            if (i < tasks.size() - 1) {
-                result = result + counter + "." + tasks.get(i) + "\n";
-            } else {
-                result = result + counter + "." + tasks.get(i);
-            }
+            result = result + counter + "." + tasks.get(i) + "\n";
             counter++;
         }
 
-        return result;
+        return result.trim();
     }
 }

@@ -13,6 +13,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public String toString() {
         return (isDone ? "[X] " + this.description : "[ ] " + this.description); // mark done task with X

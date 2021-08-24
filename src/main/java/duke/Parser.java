@@ -70,6 +70,14 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException("☹ OOPS!!! Please enter an integer.");
             }
+        } else if (fullCommand.startsWith("find")) {
+            String searchString = fullCommand.split(" ", 2)[1].trim();
+
+            if (searchString.isEmpty()) {
+                throw new DukeException("☹ OOPS!!! Please enter the term you want to search.");
+            } else {
+                return new FindCommand(searchString);
+            }
         } else {
             if (fullCommand.startsWith("todo")) {
                 String content = fullCommand.split(" ", 2)[1].trim();
