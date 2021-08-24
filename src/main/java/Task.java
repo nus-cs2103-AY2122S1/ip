@@ -4,7 +4,6 @@
  * @author: Wei Yangken
  */
 
-//Testing for normal commit in main branch
 public class Task {
     private String name;
     private boolean done;
