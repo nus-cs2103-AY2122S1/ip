@@ -30,7 +30,7 @@ public abstract class Task {
     }
 
     /**
-     * Mark the task as completed.
+     * Marks the task as completed.
      */
     public void markCompleted() {
         this.completed = true;
@@ -53,7 +53,7 @@ public abstract class Task {
     }
 
     /**
-     * Return date of the task. It could a deadline/date for the event.
+     * Returns date of the task. It could a deadline/date for the event.
      * 
      * @return date of task
      */

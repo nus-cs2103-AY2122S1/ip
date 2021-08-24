@@ -81,7 +81,7 @@ public abstract class Database {
     public abstract Task removeTask(int index);
 
     /**
-     * Mark a task as completed in the database.
+     * Marks a task as completed in the database.
      * 
      * @param index index of the task, {@code 1} for the first task, {@code 2} for
      *              the second task etc.
@@ -91,8 +91,8 @@ public abstract class Database {
     public abstract Task markCompleted(int index);
 
     /**
-     * Recreate a task based on provided information. Used when retrieving task from
-     * SQL database.
+     * Recreates a task based on provided information. Used when retrieving task
+     * from SQL database.
      * 
      * @param type      type of task
      * @param name      name of task
@@ -124,12 +124,15 @@ public abstract class Database {
      */
     protected void close(PreparedStatement ps, ResultSet rs) {
         try {
-            if (ps != null)
+            if (ps != null) {
                 ps.close();
-            if (rs != null)
+            }
+            if (rs != null) {
                 rs.close();
-            if (this.connection != null)
+            }
+            if (this.connection != null) {
                 connection.close();
+            }
         } catch (SQLException ex) {
             throw new DatabaseAccessException("Unable to close SQLite connection...");
         }
@@ -143,17 +146,19 @@ public abstract class Database {
      */
     protected void close(PreparedStatement ps) {
         try {
-            if (ps != null)
+            if (ps != null) {
                 ps.close();
-            if (this.connection != null)
+            }
+            if (this.connection != null) {
                 connection.close();
+            }
         } catch (SQLException ex) {
             throw new DatabaseAccessException("Unable to close SQLite connection...");
         }
     }
 
     /**
-     * Get directory for which the database will be saved into.
+     * Gets directory for which the database will be saved into.
      * 
      * @return database directory
      */

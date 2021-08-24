@@ -1,12 +1,12 @@
 package duke.command;
 
 /**
- * Represent all commands used in Duke bot.
+ * Represents all commands used in Duke bot.
  */
 public interface Command {
 
     /**
-     * Execute the command with given arguments.
+     * Executes the command with given arguments.
      * 
      * @param args arguments of the command
      */

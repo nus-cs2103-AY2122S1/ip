@@ -4,7 +4,7 @@ import duke.DukeList;
 import duke.UserInterface;
 
 /**
- * Encapsulate a command on a DukeList.
+ * Encapsulates a command on a DukeList.
  */
 public class ListCommand implements Command {
     private final DukeList dukeList;
