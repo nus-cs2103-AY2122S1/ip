@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 class DoneHandler extends CommandHandler {
     protected DoneHandler(TaskList taskList) {
         super(taskList);
@@ -23,14 +21,5 @@ class DoneHandler extends CommandHandler {
         } else {
             throw new BlueException("☹ OOPS!!! The index of done cannot be empty.");
         }
-    }
-
-    private static String[] getArguments(String input) {
-        if (input.length() > 0) {
-            String[] split = input.split(" ");
-            if (split.length >= 2)
-                return Arrays.copyOfRange(split, 1, split.length);
-        }
-        return new String[]{};
     }
 }

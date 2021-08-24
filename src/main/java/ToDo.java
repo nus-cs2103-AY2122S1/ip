@@ -3,7 +3,11 @@ public class ToDo extends Task {
         super(title);
     }
 
+    static String getClassRepr() {
+        return "T";
+    }
+
     public String toString() {
-        return "[T]" + super.toString();
+        return "[" + getClassRepr() + "]" + super.toString();
     }
 }
