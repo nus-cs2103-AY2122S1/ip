@@ -18,4 +18,8 @@ public class TaskList extends ArrayList<Task>{
             this.add(task);
         }
     }
+
+    public TaskList() {
+
+    }
 }
