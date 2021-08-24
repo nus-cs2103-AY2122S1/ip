@@ -12,7 +12,6 @@ import addon.Ui.IncorrectFormatException;
 public class Parser {
 
     private final Tasklist tasklist;
-
     private static final LocalDateTime NULLDATE = LocalDateTime.of(1, 1, 1, 1, 0);
 
     public Parser(Tasklist tasklist) {
