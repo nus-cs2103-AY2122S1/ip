@@ -6,11 +6,7 @@ import java.time.format.DateTimeFormatter;
  *
  * Task that needs to be done by a specific date/time
  * @author Timothy Wong Eu-Jin
-<<<<<<< HEAD
- * @version Level-7
-=======
- * @version Level-8
->>>>>>> branch-Level-8
+ * @version A-MoreOOP
  */
 public class Deadline extends Task {
 

@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
  *
  * Task that has a start and end time
  * @author Timothy Wong Eu-Jin
- * @version Level-8
+ * @version A-MoreOOP
  */
 public class Event extends Task {
 

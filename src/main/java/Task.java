@@ -2,7 +2,7 @@
  * Task class. List HAS-A Task (encapsulation).
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-8
+ * @version A-MoreOOP
  */
 
 public class Task {
