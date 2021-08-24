@@ -1,3 +1,5 @@
+package duke.command;
+
 public class Command {
     public CommandType type;
     public Object payload;
