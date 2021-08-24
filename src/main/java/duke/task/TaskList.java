@@ -48,8 +48,12 @@ public class TaskList {
     }
 
     public String listTaskArr() {
+        return listTasks(tasks);
+    }
+
+    private String listTasks(ArrayList<Task> lst) {
         StringBuilder res = new StringBuilder();
-        ListIterator<Task> iter = tasks.listIterator();
+        ListIterator<Task> iter = lst.listIterator();
 
         while (iter.hasNext()) {
             res.append(iter.nextIndex() + 1).append(".").append(iter.next());
@@ -63,5 +67,23 @@ public class TaskList {
 
     public ListIterator<Task> makeIterator() {
         return tasks.listIterator();
+    }
+
+    public String findTasks(String key) {
+        ListIterator<Task> iter = tasks.listIterator();
+        ArrayList<Task> found = new ArrayList<>();
+
+        while (iter.hasNext()) {
+            Task t = iter.next();
+            if (t.name.contains(key)) {
+                found.add(t);
+            }
+        }
+
+        if (found.size() == 0) {
+            return "no matching tasks found";
+        } else {
+            return "Here are the matching tasks in your list:\n" + listTasks(found);
+        }
     }
 }

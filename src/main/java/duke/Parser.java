@@ -10,12 +10,12 @@ public class Parser {
 
         switch (strArr[0]) {
         case AddCommand.COMMAND_WORD:
-            if (strArr.length < 2) {
+            if (strArr.length < 2 || strArr[1].isBlank()) {
                 throw new DukeException("you are missing arguments for the add command!");
             }
             return prepareAdd(strArr[1]);
         case DoneCommand.COMMAND_WORD:
-            if (strArr.length < 2) {
+            if (strArr.length < 2 || strArr[1].isBlank()) {
                 throw new DukeException("you did not specify a task number to mark done!");
             }
             return prepareDone(strArr[1]);
@@ -25,7 +25,7 @@ public class Parser {
             }
             return new ListCommand();
         case RemoveCommand.COMMAND_WORD:
-            if (strArr.length < 2) {
+            if (strArr.length < 2 || strArr[1].isBlank()) {
                 throw new DukeException("you did not specify a task number to remove!");
             }
             return prepareRemove(strArr[1]);
@@ -40,10 +40,15 @@ public class Parser {
             }
             return new RestoreCommand();
         case ExitCommand.COMMAND_WORD:
-            if (strArr.length > 1) {
+            if (strArr.length > 1 ) {
                 throw new DukeException("you typed in something i cannot recognise!\ndid you mean to type bye?");
             }
             return new ExitCommand();
+        case FindCommand.COMMAND_WORD:
+            if (strArr.length < 2 || strArr[1].isBlank()) {
+                throw new DukeException("you did not specify a keyword to find!");
+            }
+            return new FindCommand(strArr[1]);
         default:
             throw new DukeException("you typed in something i cannot recognise!");
         }
@@ -52,7 +57,7 @@ public class Parser {
     private static Command prepareAdd(String args) throws DukeException {
         String[] argArr = args.split("\\s", 2);
 
-        if (argArr.length < 2) {
+        if (argArr.length < 2 || argArr[1].isBlank()) {
             throw new DukeException("the description of a task cannot be empty!");
         }
 
