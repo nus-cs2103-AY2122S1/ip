@@ -15,7 +15,7 @@ public class TaskTodo extends Task {
      */
     @Override
     public String toString() {
-        String checkBox = done
+        String checkBox = isDone
                 ? "[X] "
                 : "[ ] ";
         return "[T]" + checkBox + description;
@@ -24,7 +24,7 @@ public class TaskTodo extends Task {
     @Override
     public String saveString() {
         return "T" + '\t'
-                + (this.done ? "1" : "0") + '\t'
+                + (this.isDone ? "1" : "0") + '\t'
                 + this.description;
     }
 

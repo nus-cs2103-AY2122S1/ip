@@ -39,7 +39,7 @@ class TaskListTest {
         TaskList testList = new TaskList(list);
         testList.toggleDone(1);
 
-        assertTrue(task.done);
+        assertTrue(task.isDone);
     }
 
     @Test

@@ -25,7 +25,6 @@ public class Storage {
                 writer.write("\r\n");
             }
             writer.close();
-            // System.out.println(duke.Ui.OUTPUT_DISPLAY + "duke.Duke-san saved your list UwU");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,7 +40,6 @@ public class Storage {
                 String task = text.nextLine();
                 loaded.add(StringToTask(task));
             }
-//            System.out.println("FILE LOADED!");
             return new TaskList(loaded);
 
         } catch (FileNotFoundException e) {

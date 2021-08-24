@@ -14,7 +14,9 @@ public class TaskList {
     public TaskList() {
         tasks = new ArrayList<>();
     }
-    public TaskList(ArrayList<Task> tasks) { this.tasks = tasks; }
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     /**
      * Prints the number of tasks in the list

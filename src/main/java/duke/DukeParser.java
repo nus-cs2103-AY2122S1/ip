@@ -53,7 +53,6 @@ public class DukeParser {
         final Matcher checkDeadline = deadlinePattern.matcher(input);
         final Matcher checkEvent = eventPattern.matcher(input);
 
-
         if (checkList.matches()) {
             if (checkList.group(2) != null) {
                 // Display List corresponding to the dates

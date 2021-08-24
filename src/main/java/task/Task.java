@@ -5,11 +5,11 @@ import java.time.format.DateTimeParseException;
 
 public abstract class Task {
     protected final String description;
-    protected boolean done;
+    protected boolean isDone;
 
     public Task(String input, boolean done) {
         description = input;
-        this.done = done;
+        this.isDone = done;
     }
 
     /**Toggles completion of task
@@ -17,8 +17,8 @@ public abstract class Task {
      * @return New status of task
      */
     public boolean toggleDone() {
-        done = !done;
-        return done;
+        isDone = !isDone;
+        return isDone;
     }
 
     /**
@@ -27,7 +27,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String checkBox = done
+        String checkBox = isDone
                 ? "[X] "
                 : "[ ] ";
         return checkBox + description;

@@ -22,7 +22,7 @@ public class TaskEvent extends Task {
      */
     @Override
     public String toString() {
-        String checkBox = done
+        String checkBox = isDone
                 ? "[X] "
                 : "[ ] ";
         return "[E]" + checkBox + description
@@ -33,14 +33,14 @@ public class TaskEvent extends Task {
     @Override
     public String saveString() {
         return "E" + '\t'
-                + (this.done ? "1" : "0") + '\t'
+                + (this.isDone ? "1" : "0") + '\t'
                 + this.description + '\t'
                 + this.at + '\t'
                 + this.time;
     }
 
     @Override
-    public boolean isDate(LocalDate date){
+    public boolean isDate(LocalDate date) {
         return date.equals(at);
     }
 

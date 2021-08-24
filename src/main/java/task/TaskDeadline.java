@@ -21,7 +21,7 @@ public class TaskDeadline extends Task {
      */
     @Override
     public String toString() {
-        String checkBox = done
+        String checkBox = isDone
                 ? "[X] "
                 : "[ ] ";
         return "[D]" + checkBox + description
@@ -32,14 +32,14 @@ public class TaskDeadline extends Task {
     @Override
     public String saveString() {
         return "D" + '\t'
-                + (this.done ? "1" : "0") + '\t'
+                + (this.isDone ? "1" : "0") + '\t'
                 + this.description + '\t'
                 + this.by + '\t'
                 + this.time;
     }
 
     @Override
-    public boolean isDate(LocalDate date){
+    public boolean isDate(LocalDate date) {
         return date.equals(by);
     }
 

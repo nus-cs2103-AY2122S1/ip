@@ -10,20 +10,20 @@ public class TaskStub extends Task {
     }
 
     public boolean toggleDone() {
-        done = !done;
-        return done;
+        isDone = !isDone;
+        return isDone;
     }
 
     @Override
     public String toString() {
-        String checkBox = done
+        String checkBox = isDone
                 ? "[X] "
                 : "[ ] ";
         return checkBox + description;
     }
 
     public String saveString() {
-        String checkBox = done
+        String checkBox = isDone
                 ? "[X] "
                 : "[ ] ";
         return checkBox + description;
