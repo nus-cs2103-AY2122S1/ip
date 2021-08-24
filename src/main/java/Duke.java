@@ -6,6 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) throws FileNotFoundException, FolderNotFoundException, IOException {
@@ -87,7 +90,19 @@ public class Duke {
                     String[] taskDate = input.replaceFirst("deadline ", "").split("/by ");
                     String task = taskDate[0];
                     String date = taskDate[1];
-                    Deadline deadline = new Deadline(task, date);
+                    String[] splitDateTime = date.split(" ");
+                    String[] splitDate = splitDateTime[0].split("/");
+                    LocalDate localDate;
+                    if (splitDate[1].length() == 1){
+                        localDate = LocalDate.parse(splitDate[2] + "-0" + splitDate[1] + "-" + splitDate[0]);
+                    } else if (splitDate[0].length() == 1){
+                        localDate = LocalDate.parse(splitDate[2] + "-" + splitDate[1] + "-0" + splitDate[0]);
+                    } else { 
+                        localDate = LocalDate.parse(splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]);
+                    }
+                    LocalTime localTime;
+                    localTime = LocalTime.parse(splitDateTime[1], DateTimeFormatter.ofPattern("HHmm"));
+                    Deadline deadline = new Deadline(task, localDate, localTime);
                     list.add(deadline);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println(String.format("  %s", deadline.toString()));
@@ -96,7 +111,19 @@ public class Duke {
                     String[] taskDate = input.replaceFirst("event ", "").split("/at ");
                     String task = taskDate[0];
                     String date = taskDate[1];
-                    Event event = new Event(task, date);
+                    String[] splitDateTime = date.split(" ");
+                    String[] splitDate = splitDateTime[0].split("/");
+                    LocalDate localDate;
+                    if (splitDate[1].length() == 1){
+                        localDate = LocalDate.parse(splitDate[2] + "-0" + splitDate[1] + "-" + splitDate[0]);
+                    } else if (splitDate[0].length() == 1){
+                        localDate = LocalDate.parse(splitDate[2] + "-" + splitDate[1] + "-0" + splitDate[0]);
+                    } else { 
+                        localDate = LocalDate.parse(splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]);
+                    }
+                    LocalTime localTime;
+                    localTime = LocalTime.parse(splitDateTime[1], DateTimeFormatter.ofPattern("HHmm"));
+                    Event event = new Event(task, localDate, localTime);
                     list.add(event);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println(String.format("  %s", event.toString()));
