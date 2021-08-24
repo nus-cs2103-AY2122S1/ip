@@ -13,7 +13,39 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static ArrayList<Task> request = new ArrayList<Task>();
+    private static ArrayList<Task> request = new ArrayList<Task>();
+//    private static final String SAVE_FILE_LOCATION = "duke.txt";
+
+    private static void loadTask() {
+        try {
+            File f = new File("data/duke.txt");
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String nextLine = s.nextLine();
+                String[] words = nextLine.split(", ", 0);
+                String type = words[0];
+                Boolean isDone = Boolean.valueOf(words[1]);
+                String task = words[2];
+                switch (type) {
+                    case "T":
+                        request.add(new Todo(task, isDone));
+                        break;
+                    case "D":
+                        request.add(new Deadline(task, isDone));
+                        break;
+                    case "E":
+                        request.add(new Event(task, isDone));
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected type: " + type);
+                }
+            }
+            System.out.println("Finished loading saved file.");
+            s.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No save file found.");
+        }
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -26,6 +58,8 @@ public class Duke {
         System.out.println(divider);
         System.out.println("Duke: Hello! I'm Duke\nWhat can I do for you?");
         System.out.println(divider);
+
+        loadTask();
 
         boolean exit = false;
 
@@ -101,12 +135,18 @@ public class Duke {
             String text = words[1];
             Task task;
 
-            if (type.equals("todo")) {
-                task = new Todo(text);
-            } else if (type.equals("deadline")) {
-                task = new Deadline(text);
-            } else {
-                task = new Event(text);
+            switch (type) {
+                case "todo":
+                    task = new Todo(text, false);
+                    break;
+                case "deadline":
+                    task = new Deadline(text, false);
+                    break;
+                case "event":
+                    task = new Event(text, false);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected type: " + type);
             }
             request.add(task);
             return "Got it. I've added this task: \n" + task.getTask() + "\nNow you have " +
