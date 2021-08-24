@@ -10,6 +10,7 @@ public class Event extends Task {
     public Event(String description, String by) {
         super(description);
         this.by = by.equals("") ? "at: " : by;
+        super.deadline = this.by;
     }
 
     /**

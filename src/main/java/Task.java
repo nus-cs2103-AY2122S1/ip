@@ -1,6 +1,7 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String deadline = "";
 
     /**
      * A constructor to create a Task object
@@ -19,6 +20,18 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
+    }
+
+    public String getStatus() {
+        return isDone ? "Done" : "NotDone";
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getDeadline() {
+        return this.deadline;
     }
 
     /**

@@ -1,4 +1,5 @@
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,7 @@ public class Duke {
      * @param arr The array that contains strings from the user input
      * @return A string containing the deadline only
      */
-    public static String getDeadline(String[] arr) {
+    public static String getDeadline(String[] arr) throws DateTimeParseException {
         String str = "";
         boolean bool = false;
         for(int i = 1; i < arr.length; i++) {
@@ -111,13 +112,58 @@ public class Duke {
         return true;
     }
 
-    public static void readFile() {
+    public static void readFile(List<Task> ls) {
         try {
+            String arr[];
             File myObj = new File("data/duke.txt");
             Scanner myScanner = new Scanner(myObj);
             while (myScanner.hasNextLine()) {
                 String data = myScanner.nextLine();
-                System.out.println(data);
+                arr = data.split(" ");
+                String task = arr[0];
+                String description = arr[1] + " ";
+                if (task.charAt(2) == 'D') {
+                    String deadline = "";
+                    for (int i = 2; i < arr.length; i++) {
+                        if (i == 2) {
+                            deadline += arr[i].substring(1);
+                        } else if (i == arr.length - 1) {
+                            deadline += " " + arr[i].substring(0, arr[i].length() - 1);
+                        } else {
+                            deadline += " " + arr[i];
+                        }
+                    }
+                    Deadline item = new Deadline(description, deadline);
+                    if (task.substring(4) == "Done") {
+                        item.markAsDone();
+                    }
+                    System.out.println(description);
+                    System.out.println(deadline);
+                    ls.add(item);
+                } else if (task.charAt(2) == 'E') {
+                    String deadline = arr[2].substring(1, arr[2].length() - 1);
+                    for (int i = 2; i < arr.length; i++) {
+                        if (i == 2) {
+                            deadline += arr[i].substring(1);
+                        } else if (i == arr.length - 1) {
+                            deadline += " " + arr[i].substring(0, arr[i].length() - 1);
+                        } else {
+                            deadline += " " + arr[i];
+                        }
+                    }
+                    Event item = new Event(description, deadline);
+                    if (task.substring(4) == "Done") {
+                        item.markAsDone();
+                    }
+                    ls.add(item);
+                }
+                else {
+                    Todo item = new Todo(description);
+                    if (task.charAt(4) == 'X') {
+                        item.markAsDone();
+                    }
+                    ls.add(item);
+                }
             }
             myScanner.close();
         } catch (FileNotFoundException e) {
@@ -130,12 +176,19 @@ public class Duke {
         try {
             String str = "";
             for (int i = 0; i < ls.size(); i++) {
-                str += (i + 1) + "." + ls.get(i).toString() + "\n";
+                str += (i + 1) + "."
+                        + ls.get(i).toString().charAt(1)
+                            + "|" + ls.get(i).getStatus() + " " + ls.get(i).getDescription();
+                if (ls.get(i) instanceof Deadline || ls.get(i) instanceof Event) {
+                    str += "(" + ls.get(i).getDeadline() + ")";
+                }
+                if (i != ls.size() - 1) {
+                    str += "\n";
+                }
             }
             FileWriter fileWriter = new FileWriter("data/duke.txt");
             fileWriter.write(str);
             fileWriter.close();
-            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             System.out.println(e.getMessage());
@@ -154,7 +207,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        readFile();
+        List<Task> ls = new ArrayList<>();
+        readFile(ls);
         String input = "";
         String[] arr;
         Scanner scan = new Scanner(System.in);
@@ -168,7 +222,6 @@ public class Duke {
                 + "4. \"delete [number]\" to delete a particular task \n"
                 + "5. \"bye\" to exit"
         );
-        List<Task> ls = new ArrayList<>();
         do {
             try {
                 input = scan.nextLine();
@@ -235,6 +288,8 @@ public class Duke {
                 System.out.println(e.toString());
             } catch (InvalidValueException e) {
                 System.out.println(e.toString());
+            } catch (DateTimeParseException e) {
+                System.out.println(e.getMessage());
             }
         } while (!input.equals("bye"));
     }
