@@ -3,18 +3,21 @@ package lania.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the task class with a deadline.
+ */
 public class Deadline extends Task {
 
-    /** lania.task.Deadline of a task */
+    /** Deadline of a task */
     protected String by;
+    /** Formatted deadline of a task */
     protected LocalDateTime dateTime;
 
     /**
-     * Constructor for lania.task.Deadline. Takes in a String description and by.
-     * Initialises description and deadline of task.
+     * Constructor for Deadline which consists of description and deadline of task.
      *
      * @param description The name of the deadline.
-     * @param by lania.task.Deadline of the task.
+     * @param by Deadline of the task.
      */
     public Deadline(String description, String by) {
         super(description);
@@ -23,10 +26,20 @@ public class Deadline extends Task {
         this.dateTime = LocalDateTime.parse(by, formatter);
     }
 
+    /**
+     * Converts the deadline object to a string representation.
+     *
+     * @return The string representation of the deadline object.
+     */
     public String getStringFormat() {
         return "D|" + this.getStatusIcon() + "|" + this.description + "|" + this.by + "\n";
     }
 
+    /**
+     * Another string representation of the deadline object.
+     *
+     * @return A string representation of the deadline object.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mma")) + ")";

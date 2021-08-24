@@ -13,14 +13,30 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * This class deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
 
+    /** Represents the path of the file to be retrieved or written. */
     public String filePath;
 
+    /**
+     * Constructor for the storage class.
+     *
+     * @param filePath path of the file to write or read from.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * This method reads the file if it exists and stores the data
+     * into a TaskList.
+     *
+     * @return The TaskList containing the tasks specified in the file.
+     * @throws  IOException If the directory of file cannot be found.
+     */
     public TaskList load() throws IOException {
         Files.createDirectories(Paths.get("data/"));
         File f = new File(filePath);
@@ -50,13 +66,29 @@ public class Storage {
         }
     }
 
-    public void save(TaskList taskArrayList) throws IOException{
+    /**
+     * This method rewrites the entire file given a
+     * TaskList line by line using the appendToFile method.
+     *
+     * @param taskArrayList The user's TaskList.
+     * @throws IOException If unable to append to file.
+     */
+    public void save(TaskList taskArrayList) throws IOException {
         for (int i = 0; i < taskArrayList.size(); i++) {
             Task task = taskArrayList.get(i);
             appendToFile(filePath, task.getStringFormat(), i);
         }
     }
 
+    /**
+     * Writes if it is the first task, and appends if otherwise
+     * so that the entire file can be rewritten.
+     *
+     * @param filePath Location of the file to write to.
+     * @param textToAppend Text that needs to be added.
+     * @param i Checks whether it is the first task.
+     * @throws IOException If the program cannot create or write to the file indicated.
+     */
     private void appendToFile(String filePath, String textToAppend, int i) throws IOException {
         FileWriter fw = new FileWriter(filePath, i != 0);
         fw.write(textToAppend);
