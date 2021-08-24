@@ -1,4 +1,4 @@
-D&&1&&hello world&&Jun 8
-E&&1&&hoooola&&Jan 12
+D&&1&&hello world&&2010-10-1
+E&&1&&hoooola&&2021-1-10
 T&&1&&HOOO&&
 T&&0&&somthing&&
