@@ -168,7 +168,7 @@ public class Parser {
 
     /**
      * Finds the task that contains
-     * the user's input.
+     * or matches the user's input.
      *
      * @param tasks the list of tasks.
      */
