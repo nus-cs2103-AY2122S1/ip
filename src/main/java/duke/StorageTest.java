@@ -12,7 +12,7 @@ public class StorageTest {
     @Test
     public void testGetTaskFromString() {
         Duke duke = new Duke();
-        Storage s = new Storage(new MyList());
+        Storage s = new Storage(new MyList(), "./Data.txt");
         try {
             assertEquals(
                     s.getTaskFromString("[D][X]  run /by 2000-12-12 yyyy-MM-dd").toString(),
@@ -26,7 +26,7 @@ public class StorageTest {
     @Test
     public void testGetTaskFromString2() {
         Duke duke = new Duke();
-        Storage s = new Storage(new MyList());
+        Storage s = new Storage(new MyList(), "./Data.txt");
         try {
             assertEquals(
                     s.getTaskFromString("[E][]  run /at lolololol").toString(),
