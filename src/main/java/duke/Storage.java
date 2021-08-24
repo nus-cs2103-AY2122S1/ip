@@ -1,11 +1,11 @@
 package duke;
 
 import java.io.File;
-import java.io.IOException; 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.IOException; 
 
 /**
  * Methods to save and load tasklists of duke to disk.
