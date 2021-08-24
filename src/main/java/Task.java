@@ -42,6 +42,9 @@ public class Task {
      * Marks the given task as done.
      */
     public void markAsDone() {
+        if (this.isDone) {
+            throw new DukeException("The task indicated has already been marked as done.");
+        }
         this.isDone = true;
     }
 
