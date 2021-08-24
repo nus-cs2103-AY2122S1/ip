@@ -34,6 +34,10 @@ public class Task {
         return this.isDone ? 1 : 0;
     }
 
+    public boolean hasKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
 
     @Override
     public String toString() {

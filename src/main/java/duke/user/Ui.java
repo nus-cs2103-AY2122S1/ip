@@ -41,6 +41,10 @@ public class Ui {
         return output;
     }
 
+    public String findMessage(String foundTasks) {
+        return DIVIDER + "\n" + "Here are the matching tasks in your list:" + "\n" + foundTasks + "\n" + DIVIDER;
+    }
+
     public String byeMessage() {
         return DIVIDER + "\n" + "Bye. Hope to see you again soon!" + "\n" + DIVIDER;
     }
@@ -57,4 +61,6 @@ public class Ui {
     public String exceptionMessage(Exception e) {
         return DIVIDER + "\n" + e.getMessage() + "\n" + DIVIDER;
     }
+
+
 }

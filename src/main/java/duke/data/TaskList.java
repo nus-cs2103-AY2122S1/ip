@@ -58,4 +58,14 @@ public class TaskList {
         this.taskList.add(task);
     }
 
+    public String findTask(String keyword) {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0, j = 1; i < this.getLength(); i++) {
+            if (this.getTask(i).hasKeyword(keyword)) {
+                output.append(j++).append(". ").append(this.getTask(i).toString()).append("\n");
+            }
+        }
+        return output.toString();
+    }
+
 }

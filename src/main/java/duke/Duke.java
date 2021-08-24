@@ -87,6 +87,12 @@ public class Duke {
                     tasks.addTask(new Deadline(deadlineDesc, date, time));
                     taskListIsAddedTo = true;
 
+                    // Case where user wants to find a keyword
+                } else if (nextTask.startsWith("find")) {
+                    String keyword = parsedInputString[1];
+                    System.out.println(ui.findMessage(tasks.findTask(keyword)));
+                    continue;
+
                     // Else case for all non-recognised user inputs
                 } else {
                     throw new DukeException("Please enter a valid command");
