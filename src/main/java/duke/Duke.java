@@ -2,12 +2,19 @@ package duke;
 
 import java.io.FileNotFoundException;
 
+/**
+ * Duke class to start running the application
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     *
+     * @param filePath takes in a String representing the directory of the file
+     */
     public Duke(String filePath){
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * method to run the program
+     */
     public void run(){
         Command c = new Command();
         c.execute(tasks,ui,storage);
