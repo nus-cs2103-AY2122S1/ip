@@ -27,7 +27,6 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-
     public int getDoneStatus() {
         return this.isDone ? 1 : 0;
     }
@@ -64,8 +63,15 @@ public abstract class Task {
         return this.dueDate;
     }
 
-//    @Override
-//    public String toString() {
-//        return "[" + this.getStatusIcon() + "] " + this.description;
-//    }
+
+    public boolean hasKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
+
+    @Override
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
 }

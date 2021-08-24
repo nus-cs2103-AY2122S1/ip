@@ -71,7 +71,13 @@ public class Parser {
         case "list":
             return new String[]{command};
 
-        // If none of the command words was used as the first word, throw an exception
+        case "find" :
+            parsedInput = checkFind(input);
+            extractedInfo = new String[]{command, parsedInput};
+            return extractedInfo;
+
+            // If none of the command words was used as the first word, throw an exception
+
         default:
             throw new DukeException("Please enter a valid command");
         }
@@ -175,5 +181,16 @@ public class Parser {
         } catch (DateTimeParseException | IndexOutOfBoundsException e) {
             throw new DukeException("Invalid date or time format! Use: YYYY-MM-DD HH:MM");
         }
+
     }
+
+    public String checkFind(String input) throws DukeException{
+        if (input.length() == 4) {
+            throw new DukeException("Please enter a keyword!");
+        } else if (input.split(" ").length > 2) {
+            throw new DukeException("Please enter ONLY 1 keyword!");
+        }
+        return input.split(" ")[1];
+    }
+
 }

@@ -23,7 +23,7 @@ public class Ui {
     }
 
     /**
-     * Message that is displayed when a done command is successfully called
+     * Displays a message when a done command is successfully called
      *
      * @param task String representing the task that was done
      * @return A formatted String to display to the user
@@ -35,7 +35,7 @@ public class Ui {
     }
 
     /**
-     * Message that is displayed when a delete command is successfully called
+     * Displays a message when a delete command is successfully called
      *
      * @param task String representing the task that was deleted
      * @return A formatted String to display to the user
@@ -48,7 +48,7 @@ public class Ui {
     }
 
     /**
-     * Message that is displayed when a list command is successfully called
+     * Displays a message when a list command is successfully called
      *
      * @param tasks TaskList representing the tasks
      * @return A formatted String of all the tasks in the taskList to display to the user
@@ -63,9 +63,8 @@ public class Ui {
         return output;
     }
 
-
     /**
-     * Message that is displayed when a bye command is successfully called
+     * Displays a message when a bye command is successfully called
      *
      * @return A formatted String to display to the user
      */
@@ -74,7 +73,17 @@ public class Ui {
     }
 
     /**
-     * Message that is displayed when a todo, event or deadline command is successfully called
+     * Displays a message which contains the tasks which match the keyword
+     *
+     * @param foundTasks The tasks that match the keywords
+     * @return A formatted String to display to the user
+     */
+    public String findMessage(String foundTasks) {
+        return DIVIDER + "\n" + "Here are the matching tasks in your list:" + "\n" + foundTasks + "\n" + DIVIDER;
+    }
+
+    /**
+     * Displays a message when a todo, event or deadline command is successfully called
      *
      * @param tasks String representing the task that was added
      * @return A formatted String to display to the user
@@ -91,4 +100,6 @@ public class Ui {
     public String displayExceptionMessage(Exception e) {
         return DIVIDER + "\n" + e.getMessage() + "\n" + DIVIDER;
     }
+
+
 }

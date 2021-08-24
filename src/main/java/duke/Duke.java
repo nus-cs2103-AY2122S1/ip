@@ -89,14 +89,17 @@ public class Duke {
 
                     // Case where user wants to add a new deadline task
                 } else if (nextTask.startsWith("deadline")) {
-                    System.out.println(parsedInputString[2]);
-                    System.out.println(parsedInputString[3]);
-
                     LocalDate date = LocalDate.parse(parsedInputString[2]);
                     LocalTime time = LocalTime.parse(parsedInputString[3]);
                     String deadlineDesc = parsedInputString[1]; //skip the "deadline "
                     tasks.addTask(new Deadline(deadlineDesc, date, time));
                     taskListIsAddedTo = true;
+
+                    // Case where user wants to find a keyword
+                } else if (nextTask.startsWith("find")) {
+                    String keyword = parsedInputString[1];
+                    System.out.println(ui.findMessage(tasks.findTask(keyword)));
+                    continue;
 
                     // Else case for all non-recognised user inputs
                 } else {
