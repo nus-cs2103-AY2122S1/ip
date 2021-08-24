@@ -7,12 +7,18 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/** A chatbot that handles todo-list operations. */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * A constructor for the class Duke.
+     *
+     * @param filePath The relative path of the file that stores the user's task list.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Execute the chatbot functions based on user's command.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -42,6 +51,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Initiate the Duke chatbot.
+     *
+     * @param args The argument attached to this method.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
