@@ -10,8 +10,8 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
-    }    
-
+    }   
+    
     public boolean isDone() {
         return this.isDone;
     }
