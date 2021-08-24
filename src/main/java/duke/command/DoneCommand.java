@@ -6,14 +6,30 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The done command.
+ */
 public class DoneCommand extends Command {
+
+    /** The arguments associated with the command **/
     public String arguments;
 
+    /**
+     * Constructs the done command.
+     * @param arguments The arguments associated with the command.
+     */
     public DoneCommand(String arguments) {
         super("done");
         this.arguments = arguments;
     }
-
+    
+    /**
+     * Executes the main logic of the command.
+     * @param tasks The user's list of tasks.
+     * @param ui The ui interacting with the user.
+     * @param storage The location where the list of tasks is stored.
+     * @throws DukeException If arguments are invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (arguments.isEmpty()) {
@@ -29,8 +45,13 @@ public class DoneCommand extends Command {
         ui.printToUser("  " + taskToBeMarked);
     }
 
+    /**
+     * Checks whether command terminate the program. 
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;
     }
+    
 }
