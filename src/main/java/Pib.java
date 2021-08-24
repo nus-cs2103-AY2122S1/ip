@@ -1,5 +1,10 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.io.File;
 
 import Tasks.Task;
 import Tasks.Todo;
@@ -11,17 +16,30 @@ import Tasks.Event;
  */
 public class Pib {
     private static String DIVIDER = "____________________________________________________________\n";
+    private static final String DATA_FILE_PATH = "src/main/java/data/data.txt";
     private ArrayList<Task> list;
     private Scanner sc;
+    private File data;
 
     /**
      * Public constructor to instantiate an instance of Pib and start the program
      */
     public Pib() {
         System.out.println(DIVIDER + "Hello! I'm Pib\n" + "Tell me something!\n" + DIVIDER);
-        list = new ArrayList<>();
-        sc = new Scanner(System.in);
-        readInput();
+        try {
+            this.data = new File(DATA_FILE_PATH);
+            list = new ArrayList<>();
+            if (!this.data.createNewFile()) {
+                loadSavedData(this.data);
+            }
+            sc = new Scanner(System.in);
+            readInput();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading file");
+        } catch (PibException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private enum TaskType {
@@ -96,11 +114,12 @@ public class Pib {
 
     private void addToList(TaskType t, String taskDetails) {
         try {
+            Task newTask;
             if (t.equals(TaskType.TODO)) {
                 if (taskDetails.trim().isBlank()) {
                     throw new PibException("Task description cannot be empty!\n");
                 }
-                list.add(new Todo(taskDetails));
+                newTask = new Todo(taskDetails);
             } else {
                 if (t.equals(TaskType.DEADLINE)) {
                     int dateDividerIndex = taskDetails.indexOf("/by ");
@@ -115,7 +134,7 @@ public class Pib {
                     if (date.trim().isBlank()) {
                         throw new PibException("Date cannot be empty!\n");
                     }
-                    list.add(new Deadline(taskDetails.substring(0, dateDividerIndex), taskDetails.substring(dateDividerIndex + 4)));
+                    newTask = new Deadline(taskDetails.substring(0, dateDividerIndex), taskDetails.substring(dateDividerIndex + 4));
                 } else if (t.equals(TaskType.EVENT)) {
                     int dateDividerIndex = taskDetails.indexOf("/at ");
                     if (dateDividerIndex == -1) {
@@ -129,14 +148,18 @@ public class Pib {
                     if (date.trim().isBlank()) {
                         throw new PibException("Date cannot be empty!\n");
                     }
-                    list.add(new Event(taskDetails.substring(0, dateDividerIndex), taskDetails.substring(dateDividerIndex + 4)));
+                    newTask = new Event(taskDetails.substring(0, dateDividerIndex), taskDetails.substring(dateDividerIndex + 4));
                 } else {
                     return;
                 }
             }
+            list.add(newTask);
+            writeToFile(DATA_FILE_PATH, list);
             System.out.println("Now you have " + list.size() + " task(s) in your list.\n");
         } catch (PibException e) {
             System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Uh oh :( Error saving tasks");
         }
     }
 
@@ -152,10 +175,15 @@ public class Pib {
     }
 
     private void markAsDone(String s) {
-        if (s.isBlank()) {
-            System.out.println("Tell me which item to mark as complete!\n ");
-        } else {
-            list.get(Integer.parseInt(s) - 1).markAsDone();
+        try {
+            if (s.isBlank()) {
+                System.out.println("Tell me which item to mark as complete!\n ");
+            } else {
+                list.get(Integer.parseInt(s) - 1).markAsDone();
+                writeToFile(DATA_FILE_PATH, list);
+            }
+        } catch (IOException e) {
+            System.out.println("Uh oh :( Error saving tasks");
         }
     }
 
@@ -169,6 +197,46 @@ public class Pib {
         }
     }
 
+    private void loadSavedData(File file) throws PibException {
+        try {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext ()) {
+                String[] taskDetails = sc.nextLine().split(",");
+                System.out.println(Arrays.toString(taskDetails));
+                Task newTask = null;
+                switch (taskDetails[0]) {
+                case "T":
+                    newTask = new Todo(taskDetails[2], Integer.parseInt(taskDetails[1]));
+                    break;
+                case "E":
+                    newTask = new Event(taskDetails[2], taskDetails[3], Integer.parseInt(taskDetails[1]));
+                    break;
+                case "D":
+                    newTask = new Deadline(taskDetails[2], taskDetails[3], Integer.parseInt(taskDetails[1]));
+                    break;
+                default:
+                    break;
+                }
+                if (newTask != null) {
+                    list.add(newTask);
+                }
+
+            }
+            System.out.println(DIVIDER);
+        } catch (FileNotFoundException e) {
+            throw new PibException("Saved data error");
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeToFile(String filePath, ArrayList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task t : tasks) {
+            fw.write(t.toDataString());
+        }
+        fw.close();
+    }
 
     public static void main(String[] args) {
         Pib p = new Pib();

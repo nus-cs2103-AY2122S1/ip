@@ -18,6 +18,15 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    public Deadline(String description, String date, int isDone) {
+        super(description, isDone);
+        this.date = date;
+    }
+
+    public String toDataString() {
+        return "D," + getIsDone() + "," + getDescription() + "," + date + System.lineSeparator();
+    }
+
     /**
      * A public toString method to add the task type [D] in front of the checkbox, and the date behind the task description
      *

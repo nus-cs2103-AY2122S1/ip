@@ -18,6 +18,15 @@ public class Event extends Task {
         this.date = date;
     }
 
+    public Event(String description, String date, int isDone) {
+        super(description, isDone);
+        this.date = date;
+    }
+
+    public String toDataString() {
+        return "E," + getIsDone() + "," + getDescription() + "," + date + System.lineSeparator();
+    }
+
     /**
      * A public toString method to add the task type [E] in front of the checkbox, and the date behind the task description
      *

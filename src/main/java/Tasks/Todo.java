@@ -13,6 +13,14 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, int isDone) {
+        super(description, isDone);
+    }
+
+    public String toDataString() {
+        return "T," + getIsDone() + "," + getDescription() + System.lineSeparator();
+    }
+
     /**
      * A public toString method to add the task type [T] in front of the checkbox
      * @return the string representation of a todo task
