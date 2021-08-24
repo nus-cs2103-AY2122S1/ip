@@ -11,6 +11,11 @@ public class TaskList {
     private ArrayList<Task> tasks;
     private ArrayList<Task> prev;
 
+    /**
+     * Constructor for a TaskList object with a given ArrayList of Tasks.
+     *
+     * @param tasks the given ArrayList of Tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
         this.prev = new ArrayList<>(tasks);
@@ -116,6 +121,12 @@ public class TaskList {
         return tasks.listIterator();
     }
 
+    /**
+     * Finds Tasks with names matching a given key and returns an ordered list of the matching tasks.
+     *
+     * @param key the given key to match with.
+     * @return an ordered list of matching Tasks.
+     */
     public String findTasks(String key) {
         ListIterator<Task> iter = tasks.listIterator();
         ArrayList<Task> found = new ArrayList<>();

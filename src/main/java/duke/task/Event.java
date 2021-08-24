@@ -12,6 +12,11 @@ public class Event extends Task {
     private String timeString;
     private LocalDate timeDate;
 
+    /**
+     * Constructor for an Event Task given a String with the /at keyword.
+     *
+     * @param input the given String to parse
+     */
     public Event(String input) {
         super(input.substring(0, input.indexOf("/at ") - 1));
         String time = input.substring(input.indexOf("/at ") + 4);
@@ -22,6 +27,13 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Overloaded constructor for an Event task.
+     * Used only when reading from taskList.txt.
+     *
+     * @param name the given name of the Event.
+     * @param time the given time of the Event.
+     */
     public Event(String name, String time) {
         super(name);
         try {

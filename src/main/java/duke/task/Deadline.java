@@ -12,6 +12,11 @@ public class Deadline extends Task {
     private String dlineString;
     private LocalDate dlineDate;
 
+    /**
+     * Constructor for a Deadline Task given a String with the /by keyword.
+     *
+     * @param input the given String to parse
+     */
     public Deadline(String input) {
         super(input.substring(0, input.indexOf("/by ") - 1));
         String dline = input.substring(input.indexOf("/by ") + 4);
@@ -22,6 +27,13 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Overloaded constructor for a Deadline task.
+     * Used only when reading from taskList.txt.
+     *
+     * @param name the given name of the Deadline.
+     * @param dline the given deadline of the Deadline.
+     */
     public Deadline(String name, String dline) {
         super(name);
         try {

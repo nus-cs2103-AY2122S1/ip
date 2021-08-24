@@ -10,9 +10,9 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Constructor for a Task object
+     * Constructor for a Task object.
      *
-     * @param name the name of the task
+     * @param name the name of the task.
      */
     public Task(String name) {
         this.name = name;
@@ -33,7 +33,7 @@ public abstract class Task {
     }
 
     /**
-     * Marks a task as done
+     * Marks a task as done.
      */
     public void markDone() {
         this.isDone = true;

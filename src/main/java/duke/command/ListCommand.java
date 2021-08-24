@@ -23,7 +23,7 @@ public class ListCommand extends Command {
      * @param tasks the given TaskList.
      * @param ui the given Ui.
      * @param storage the given Storage.
-     * @throws DukeException
+     * @throws DukeException shouldn't happen.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

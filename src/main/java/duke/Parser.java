@@ -5,6 +5,7 @@ import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.RemoveCommand;
 import duke.command.RestoreCommand;
@@ -58,7 +59,7 @@ public class Parser {
             }
             return new RestoreCommand();
         case ExitCommand.COMMAND_WORD:
-            if (strArr.length > 1 ) {
+            if (strArr.length > 1) {
                 throw new DukeException("you typed in something i cannot recognise!\ndid you mean to type bye?");
             }
             return new ExitCommand();

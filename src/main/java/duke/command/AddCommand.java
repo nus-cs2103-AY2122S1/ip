@@ -20,6 +20,12 @@ public class AddCommand extends Command {
     private TaskTypes type;
     private String args;
 
+    /**
+     * Constructor of an AddCommand.
+     *
+     * @param type the type of the Task to add.
+     * @param args the arguments to create the Task.
+     */
     public AddCommand(TaskTypes type, String args) {
         this.type = type;
         this.args = args;
