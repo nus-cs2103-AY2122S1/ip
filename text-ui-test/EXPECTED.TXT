@@ -5,41 +5,22 @@
     I won't hold it against you
     Send "help" for help!
  -------------------------------------------------------------
-Duke$IncorrectFormatException:
  -------------------------------------------------------------
-    Task type or task name not provided!
-    Type "help" for help
- -------------------------------------------------------------
- -------------------------------------------------------------
-    added: read book
+    added: yes by AUG 24 2021 @ 0000
     Now you have 1 tasks in your list
  -------------------------------------------------------------
-Duke$IncorrectFormatException:
  -------------------------------------------------------------
-    Item number not present. Try again?
-    Type "help" for help
- -------------------------------------------------------------
- -------------------------------------------------------------
-    Nice! I've marked this task as done:
-    [T][X] read book
- -------------------------------------------------------------
-Duke$IncorrectFormatException:
- -------------------------------------------------------------
-    Task name or deadline not provided.
-   FORMAT: " DEADLINE TASKNAME /by DEADLINE"
-    Type "help" for help
- -------------------------------------------------------------
- -------------------------------------------------------------
-    added: arihtars
+    added: no by AUG 23 2021 @ 0000
     Now you have 2 tasks in your list
  -------------------------------------------------------------
-Duke$IncorrectFormatException:
  -------------------------------------------------------------
-    List does not contain this item number. Try again?
-    Type "help" for help
+    added: yes on AUG 24 2021 @ 0000
+    Now you have 3 tasks in your list
  -------------------------------------------------------------
  -------------------------------------------------------------
-    Nice! I've removed this task off the face of the Earth:
-    [E][ ] arihtars (at: tmr)
-    Now you have 1 tasks in the list.
+    Here are your AUG 24 2021 tasks:
+
+    [D][ ] yes (by: AUG 24 2021 @ 0000)
+    [E][ ] yes (at: AUG 24 2021 @ 0000)
  -------------------------------------------------------------
+

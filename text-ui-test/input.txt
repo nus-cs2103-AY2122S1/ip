@@ -1,8 +1,4 @@
-add read book
-TODO read book
-/done 0
-/done 1
-deadline arsnheiar /by
-event arihtars /At tmr
-/delete a
-/delete 1
+deadline yes /by 2021-08-24
+deadline no /by 2021-08-23
+event yes /At 2021-08-24
+/check 2021-08-24
