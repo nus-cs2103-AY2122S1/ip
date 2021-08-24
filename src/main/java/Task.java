@@ -11,7 +11,11 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public void markAsDone() { this.isDone = true; };
+    public void markAsDone() { this.isDone = true; }
+
+    public String getData() {
+        return String.format("%b,%s", this.isDone,this.description);
+    }
 
     @Override
     public String toString() {
