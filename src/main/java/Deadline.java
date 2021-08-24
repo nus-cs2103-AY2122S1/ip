@@ -33,8 +33,18 @@ public class Deadline extends Task {
         }
     }
 
+    public Deadline(String isDone, String desc, String date) {
+        super(isDone,desc);
+        this.date= date;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + this.dateDesc + ")";
+    }
+
+    @Override
+    public String saveString() {
+        return "D|" + super.saveString() + "|" + date;
     }
 }

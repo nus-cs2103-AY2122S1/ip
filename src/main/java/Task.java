@@ -6,15 +6,22 @@ public class Task {
         description = str;
     }
 
+    public Task(String isDone, String str) {
+        done = !isDone.equals("0");
+        description = str;
+    }
+
     public void markDone() {
         done = true;
-        System.out.println("\tNice! I've marked this task as done: ");
-        System.out.println("\t" +this.toString());
     }
 
     @Override
     public String toString() {
         return "["+ (done?'X':' ') + "] " + description;
 
+    }
+
+    public String saveString() {
+        return (done?"1":"0") + "|" + description;
     }
 }

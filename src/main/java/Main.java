@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Duke duke = new Duke();
+        duke.loadFile();
         duke.greet();
         boolean loop = true;
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
