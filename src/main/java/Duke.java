@@ -151,7 +151,7 @@ public class Duke {
 
     public static void addToData(String data, File file) throws IOException {
         Writer output;
-        output = new BufferedWriter(new FileWriter(file, true));  //clears file every time
+        output = new BufferedWriter(new FileWriter(file, true));
         output.append(data + "\n");
         output.close();
     }
