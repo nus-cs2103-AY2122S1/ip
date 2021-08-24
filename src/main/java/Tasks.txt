@@ -1,6 +1,7 @@
-Yes ~ eat cheese
-T ~ Yes ~ shower
-T ~ Yes ~ hug
-Yes ~ eat cheese
+No ~ eat cheese
+Yes ~ eat poutine
+D ~ Yes ~ return book ~ Sunday
+D ~ Yes ~ project meeting ~ Mon 2-4pm
 D ~ Yes ~ return book ~ Dec 2 2019 6pm
-E ~ Yes ~ attend conference ~ 6pm
+E ~ Yes ~ project meeting ~ Mon 2-4pm
+E ~ Yes ~ conference ~ Sunday 6pm
