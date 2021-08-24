@@ -4,6 +4,7 @@
 public class Task {
     private String value = null;
     private boolean isDone = false;
+    // takes in LocalDate
     public Task(String value){
         this.value = value;
         this.isDone = false;
