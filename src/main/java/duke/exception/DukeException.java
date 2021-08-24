@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Represents the exceptions which can occur during the operation of Duke robot.
+ * Represents the exceptions which can occur during the operation of duke.Duke robot.
  *
  * @author QIN GUORUI
  */

@@ -1,9 +1,18 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.SearchCommand;
+import duke.command.Operation;
+import duke.command.Command;
+
 import duke.exception.DukeException;
 import duke.exception.EmptyInputException;
 import duke.exception.NotRecognizeException;
+
 import duke.task.Task;
 
 public class Parser {
@@ -37,11 +46,27 @@ public class Parser {
     public static Command parse(String response) throws DukeException {
         int len = response.length();
         switch (response) {
-            case "bye":
+        case "bye":
                 return new ExitCommand();
-            case "list":
+        case "list":
                 return new ListCommand();
+        default:
+            Operation op = checkResponse(response, len);
+            switch (op) {
+            case DEADLINE:
+                return new AddCommand(response, 2);
+            case TODO:
+                return new AddCommand(response, 1);
+            case EVENT:
+                return new AddCommand(response, 3);
+            case DONE:
+                return new MarkCommand(response);
+            case DELETE:
+                return new DeleteCommand(response);
+            case DATE:
+                return new SearchCommand(response);
             default:
+<<<<<<< HEAD
                 Operation op = checkResponse(response, len);
                 switch (op) {
                     case DEADLINE:
@@ -61,6 +86,10 @@ public class Parser {
                     default:
                         return null;
                 }
+=======
+                return null;
+            }
+>>>>>>> branch-A-CodingStandard
         }
     }
 

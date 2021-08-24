@@ -1,19 +1,20 @@
 package duke.ui;
 
 import duke.exception.LoadingException;
+
 import duke.task.Task;
 import duke.task.TaskList;
 
 import java.util.Scanner;
 
 public class Ui {
-    private static String logo = " ____        _        \n"
+    private String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private final Scanner sc;
+    private Scanner sc;
 
     public Ui() {
         //User input.
@@ -23,7 +24,7 @@ public class Ui {
     public void showWelcome() {
         System.out.println("Hello from\n" + logo);
         //Start Prompt.
-        System.out.println(getPattern("Hello! I'm Duke\n   What can I do for you?"));
+        System.out.println(getPattern("Hello! I'm duke.Duke\n   What can I do for you?"));
     }
 
     /**
