@@ -5,6 +5,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
 import duke.exception.DukeException;
@@ -34,7 +35,8 @@ public class Duke {
         // commands simply registered like so
         this.commandManager.registerCommands(new ListCommand(this.list, this.ui), new DoneCommand(this.list, this.ui),
                 new ToDoCommand(this.list, this.ui), new EventCommand(this.list, this.ui),
-                new DeadlineCommand(this.list, this.ui), new DeleteCommand(this.list, this.ui));
+                new DeadlineCommand(this.list, this.ui), new DeleteCommand(this.list, this.ui),
+                new FindCommand(this.list, this.ui));
 
         this.run();
     }

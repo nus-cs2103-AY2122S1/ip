@@ -39,8 +39,9 @@ public class DukeList {
      */
     public Task markCompleted(int i) {
         Task task = this.database.markCompleted(i);
-        if (task == null)
+        if (task == null) {
             throw new InvalidArgumentException("Invalid index!\n" + currentSizeMessage());
+        }
         return task;
     }
 
@@ -53,9 +54,20 @@ public class DukeList {
      */
     public Task deleteTask(int i) {
         Task task = this.database.removeTask(i);
-        if (task == null)
+        if (task == null) {
             throw new InvalidArgumentException("Invalid index!\n" + currentSizeMessage());
+        }
         return task;
+    }
+
+    /**
+     * Finds tasks by searching for a keyword/phrase in the name.
+     * 
+     * @param pattern keyword/phrase to search
+     * @return list of tasks
+     */
+    public List<Task> findTasksByName(String pattern) {
+        return this.database.findTasksByName(pattern);
     }
 
     // TODO Change to get size instead

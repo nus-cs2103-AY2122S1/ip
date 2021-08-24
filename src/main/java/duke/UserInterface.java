@@ -3,8 +3,11 @@ package duke;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
+import java.util.stream.IntStream;
 
 import duke.exception.DukeException;
+import duke.task.Task;
 
 /**
  * Encapsulates a response of the bot.
@@ -68,6 +71,12 @@ public class UserInterface {
      * @param message to be shown
      */
     public void showMessage(String message) {
+        new Response(message).print();
+    }
+
+    public void showTaskList(List<? extends Task> list) {
+        String message = IntStream.range(0, list.size()).mapToObj(i -> (i + 1) + ". " + list.get(i))
+                .reduce((str1, str2) -> str1 + "\n" + str2).orElse("Wow, such emptiness!");
         new Response(message).print();
     }
 
