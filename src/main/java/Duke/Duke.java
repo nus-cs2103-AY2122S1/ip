@@ -1,9 +1,10 @@
 package Duke;
 
-import Duke.Commands.Parser;
+import Duke.Commands.Command;
 import Duke.Storage.FileFormatException;
 import Duke.Storage.TaskStorage;
 import Duke.Task.TaskList;
+import Duke.Ui.Parser;
 import Duke.Ui.Ui;
 import Duke.Ui.UserInput;
 
@@ -32,10 +33,9 @@ public class Duke {
     public void run() {
         Ui.print(Ui.GREETING_MESSAGE);
         while (!this.stopped) {
-            UserInput input = new UserInput();
-            input.readAndParse();
+            UserInput input = Parser.parse(Ui.read());
             try {
-                Parser.parse(input).run(this, input);
+                Command.matching(input).run(this, input);
             } catch (DukeException e) {
                 Ui.print(String.format(Ui.ERROR_MESSAGE, e.getMessage()));
             }

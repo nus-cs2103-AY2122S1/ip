@@ -1,19 +1,14 @@
 package Duke.Ui;
 
-import java.util.Scanner;
+import java.util.Objects;
 
 public class UserInput {
-    private static final String INPUT_PROMPT = "> ";
-    private static final Scanner scanner = new Scanner(System.in);
+    private final String raw, keyword, args;
 
-    private String raw, keyword, args;
-
-    public void readAndParse() {
-        System.out.print(INPUT_PROMPT);
-        this.raw = UserInput.scanner.nextLine();
-        String[] splitInput = this.raw.trim().split("\\s+", 2);
-        this.keyword = splitInput[0];
-        this.args = splitInput.length > 1 ? splitInput[1] : "";
+    UserInput(String raw, String keyword, String args) {
+        this.raw = raw;
+        this.keyword = keyword;
+        this.args = args;
     }
 
     public String getKeyword() {
@@ -26,5 +21,15 @@ public class UserInput {
 
     public String getRaw() {
         return this.raw;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserInput userInput = (UserInput) o;
+        return Objects.equals(raw, userInput.raw)
+                && Objects.equals(keyword, userInput.keyword)
+                && Objects.equals(args, userInput.args);
     }
 }
