@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Deletes a task to the task list.
+ */
 public class DeleteCommand extends Command {
     private int index;
 

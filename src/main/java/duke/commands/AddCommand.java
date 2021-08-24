@@ -6,6 +6,9 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Adds a task to the task list.
+ */
 public class AddCommand extends Command {
     private Task toAdd;
 

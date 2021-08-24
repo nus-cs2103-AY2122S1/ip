@@ -5,6 +5,9 @@ import static duke.common.Formats.DT_DATA_FORMAT;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a task a user has to complete by a certain date/time.
+ */
 public class Deadline extends Task{
     private LocalDateTime deadline;
 

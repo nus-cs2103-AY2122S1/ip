@@ -18,6 +18,9 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+/**
+ * Represents the file used to store task list data..
+ */
 public class Storage {
     private String fileName;
 
@@ -25,6 +28,12 @@ public class Storage {
         this.fileName = fileName;
     }
 
+    /**
+     * Loads the task list data from this storage file, and then returns it.
+     * Returns an empty task list if the file does not exist, or is not a regular file.
+     *
+     * @throws IOException if there were errors reading and/or converting data from file.
+     */
     public ArrayList<Task> load() throws IOException {
 
         ArrayList<Task> tasks = new ArrayList<>(100);
@@ -81,14 +90,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the task list data to the storage file.
+     *
+     * @throws IOException if there were errors reading and/or converting data from file.
+     */
     public void write (ArrayList<Task> tasks) {
         BufferedWriter outputWriter = null;
         try {
             outputWriter = new BufferedWriter(new FileWriter(fileName, false));
             for (int i = 0; i < tasks.size(); i++) {
-                // Maybe:
                 outputWriter.write(tasks.get(i).getData());
-                // Or:
                 outputWriter.newLine();
             }
             outputWriter.flush();

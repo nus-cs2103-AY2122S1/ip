@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Displays the current task list.
+ */
 public class ListCommand extends Command {
 
     @Override

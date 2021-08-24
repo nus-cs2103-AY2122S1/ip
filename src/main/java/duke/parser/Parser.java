@@ -3,7 +3,6 @@ package duke.parser;
 import static duke.common.Formats.DT_INPUT_FORMAT;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import duke.DukeException;
 import duke.commands.AddCommand;
@@ -14,11 +13,11 @@ import duke.commands.ExitCommand;
 import duke.commands.ListCommand;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.tasks.Task;
 import duke.tasks.Todo;
 
-
-
+/**
+ * Parses user input.
+ */
 public class Parser {
     public enum CommandEnum {
         EXIT("bye"),

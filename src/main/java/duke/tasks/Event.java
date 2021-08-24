@@ -5,6 +5,9 @@ import static duke.common.Formats.DT_DATA_FORMAT;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a task a user has to do by a certain time/date.
+ */
 public class Event extends Task{
     private LocalDateTime startTime;
 

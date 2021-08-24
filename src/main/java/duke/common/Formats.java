@@ -2,6 +2,9 @@ package duke.common;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Contains constants used across multiple classes.
+ */
 public class Formats {
     public static final DateTimeFormatter DT_INPUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy h:mma");
     public static final DateTimeFormatter DT_DATA_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy h:mma");

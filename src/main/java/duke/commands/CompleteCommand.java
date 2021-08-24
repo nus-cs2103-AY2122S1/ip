@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Marks a task as complete in the list.
+ */
 public class CompleteCommand extends Command {
     private int index;
 

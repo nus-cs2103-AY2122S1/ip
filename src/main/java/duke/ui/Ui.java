@@ -1,5 +1,8 @@
 package duke.ui;
 
+/**
+ * Text UI of the application.
+ */
 public class Ui {
     public Ui() {
 

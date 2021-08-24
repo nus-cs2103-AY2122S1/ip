@@ -4,6 +4,9 @@ import duke.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * List to contain tasks
+ */
 public class TaskList extends ArrayList<Task>{
 
     public TaskList(ArrayList<Task> taskList) throws DukeException {
@@ -14,9 +17,5 @@ public class TaskList extends ArrayList<Task>{
         for (Task task : taskList) {
             this.add(task);
         }
-    }
-
-    public TaskList() {
-
     }
 }
