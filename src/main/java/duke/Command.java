@@ -122,18 +122,18 @@ public abstract class Command {
             }
         }
     }
-    private static final Command NOTHING = new Nothing();
-    private static final Command BYE = new Bye();
-    private static final Command LIST = new List();
-    private static Command done(String index) {
+    protected static final Command NOTHING = new Nothing();
+    protected static final Command BYE = new Bye();
+    protected static final Command LIST = new List();
+    protected static Command done(String index) {
         return new Done(index);
     }
 
-    private static Command delete(String index) {
+    protected static Command delete(String index) {
         return new Delete(index);
     }
 
-    private static Command add(Task t) {
+    protected static Command add(Task t) {
         return new Add(t);
     }
 

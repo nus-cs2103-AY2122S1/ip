@@ -17,9 +17,17 @@ public class Storage {
         this.filePath = Paths.get(filePath);
     }
 
-    public void read() throws IOException {
-        String fileContent = new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8);
-        System.out.println(fileContent);
+    public List<String> read() throws IOException {
+        List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
+        for (String hardCode: lines) {
+            System.out.println(hardCode);
+        }
+        return lines;
+    }
+
+    public void clear() throws IOException {
+        String taskList = "";
+        Files.write(filePath, taskList.getBytes());
     }
 
     public void upload() throws IOException {
