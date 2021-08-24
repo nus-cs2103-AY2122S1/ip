@@ -1,4 +1,4 @@
-package DukePakage;
+package duke;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ public class UI {
      * Handles the greeting or opening message that is shown to the user just before inputs are read.
      */
     public static void greet() {
-        String greetText = "Hello I'm DukePakage.Duke\nWhat can I do for you?\n";
+        String greetText = "Hello I'm Duke\nWhat can I do for you?\n";
         System.out.print(greetText);
     }
 
