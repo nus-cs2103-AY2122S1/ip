@@ -6,6 +6,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
+
     private ArrayList<Task> taskList;
     private int taskCount;
 
