@@ -12,7 +12,10 @@ public class Duke {
     }
 
     public void run() {
+        // Display welcome message to user
         ui.showWelcome();
+
+        // Continuously prompt the user for input until the user commands Duke to exit
         boolean isExit = false;
         while (!isExit) {
             try {
