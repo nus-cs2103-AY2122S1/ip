@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Contains a list of tasks.
+ */
 public class TaskList {
     ArrayList<Task> tasks;
 
@@ -12,6 +15,12 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Creates a new TaskList by parsing an array of Strings into an array of tasks.
+     *
+     * @param stringList Arraylist of strings read from the file.
+     * @throws DukeException If there is an error with parsing.
+     */
     TaskList(ArrayList<String> stringList) throws DukeException {
         tasks = new ArrayList<>();
         for (int i = 0; i < stringList.size(); i++) {
@@ -41,17 +50,39 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds task to task list
+     *
+     * @param t Task to be added
+     */
     public void add(Task t) {
         tasks.add(t);
     }
 
+    /**
+     * Removes a task from the list.
+     *
+     * @param i Index of task to be removed.
+     */
     public void remove(int i){
         tasks.remove(i);
     }
+
+    /**
+     * Returns the size of the list.
+     *
+     * @return Number of tasks in the list.
+     */
     public int getSize() {
         return tasks.size();
     }
 
+    /**
+     * Gets the element at an index in the list.
+     *
+     * @param i Index number.
+     * @return Task at index.
+     */
     public Task get(int i) {
         return tasks.get(i);
     }
