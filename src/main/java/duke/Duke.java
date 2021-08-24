@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DukeException;
 import duke.misc.Parser;
 import duke.misc.TaskList;
 import duke.misc.Ui;
@@ -22,7 +23,13 @@ public class Duke {
         Parser p = new Parser();
         while (true) {
             String command = ui.readCommand();
-            Ui.printBlock(p.execute(command, tl));
+            String msg = "";
+            try {
+                msg = p.execute(command, tl);
+                Ui.printBlock(msg);
+            } catch (DukeException e) {
+                Ui.printBlock(e.toString());
+            }
             if (command.equals("bye")) {
                 tl.saveData();
                 break;

@@ -1,5 +1,6 @@
 package duke.misc;
 
+import duke.Duke;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 
@@ -29,27 +30,31 @@ public class Parser {
         String[] args = {};
         if (idx >= 0) {
             name = input.substring(0, idx).trim();
-            args = input.substring(idx + 1).split("/");
+            args = input.substring(idx+1).split("/");
+            for (int i = 0; i < args.length; i++) {
+                args[i] = args[i].trim();
+            }
         }
         switch(name) {
             case "todo":
-                return new Todo(args[0].trim());
+                return new Todo(args[0]);
             case "event":
-                if (!input.matches("event (.*)/(.*)")) {
+                if (!input.matches("event [\\s\\S]+/[\\s\\S]+")) {
                     throw new InvalidFormatException();
                 }
-                if (!DateTime.isValidDate(args[1].trim())) {
+
+                if (!DateTime.isValidDate(args[1])) {
                     throw new InvalidDateException();
                 }
-                return new Event(args[0].trim(), args[1].trim());
+                return new Event(args[0], args[1]);
             case "deadline":
-                if (!input.matches("deadline (.*)/(.*)")) {
+                if (!input.matches("deadline [\\s\\S]+/[\\s\\S]+")) {
                     throw new InvalidFormatException();
                 }
-                if (!DateTime.isValidDate(args[1].trim())) {
+                if (!DateTime.isValidDate(args[1])) {
                     throw new InvalidDateException();
                 }
-                return new Deadline(args[0].trim(), args[1].trim());
+                return new Deadline(args[0], args[1]);
             default:
                 throw new InvalidCommandException();
         }
@@ -62,45 +67,44 @@ public class Parser {
      * @param tl TaskList which action is executed on.
      * @return Message according to what action is executed.
      */
-    public String execute(String input, TaskList tl) {
-        int idx;
-        String message = "";
+    public String execute(String input, TaskList tl) throws DukeException {
+        String prefix = input;
         String suffix = "";
-        idx = input.indexOf(' ');
+        int idx = input.indexOf(' ');
         if (idx >= 0) {
+            prefix = input.substring(0, idx);
             suffix = input.substring(idx + 1);
         }
-        try {
-            if (input.equals("bye")) {
-                message = Ui.GOODBYE_MSG;
-            } else if (input.equals("list")) {
-                message = Ui.LIST_MSG + tl.displayList();
-            } else if (input.matches("done (.*)")) {
-                message = Ui.DONE_MSG;
+        switch (prefix) {
+            case "bye":
+                if (!suffix.equals("")) {
+                    throw new InvalidCommandException();
+                }
+                return Ui.GOODBYE_MSG;
+            case "list":
+                if (!suffix.equals("")) {
+                    throw new InvalidCommandException();
+                }
+                return Ui.LIST_MSG + tl.displayList();
+            case "done":
                 try {
                     idx = Integer.parseInt(suffix);
                 } catch (NumberFormatException e) {
                     throw new InvalidIndexException();
                 }
-                message += tl.complete(idx);
-            } else if (input.matches("delete (.*)")) {
-                message = Ui.DELETE_MSG;
+                return Ui.DONE_MSG + tl.complete(idx);
+            case "delete":
                 try {
                     idx = Integer.parseInt(suffix);
                 } catch (NumberFormatException e) {
                     throw new InvalidIndexException();
                 }
-                message += tl.delete(idx);
-            } else if (input.matches("find (.*)")) {
-                message = Ui.FIND_MSG + tl.find(suffix);
-            } else {
-                message = Ui.ADD_MSG;
+                return Ui.DONE_MSG + tl.delete(idx);
+            case "find":
+                return Ui.FIND_MSG + tl.find(suffix);
+            default:
                 Task task = makeTask(input);
-                message += tl.add(task);
-            }
-        } catch (DukeException e) {
-            message = e.toString();
+                return Ui.ADD_MSG + tl.add(task);
         }
-        return message;
-    }
+      }
 }
