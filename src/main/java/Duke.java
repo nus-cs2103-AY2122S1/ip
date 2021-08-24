@@ -1,15 +1,32 @@
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 import java.time.LocalDate;
+import java.time.DateTimeException;
+import java.time.format.DateTimeFormatter;
 
 import static java.lang.Integer.parseInt;
 
 public class Duke {
-
+    /**
+     * Checks the date input from the user to see if it is a valid date
+     *
+     * @param dateStr Date taken in to check for validity
+     * @return If date is valid
+     */
+    public static boolean isValid(String dateStr) {
+        try {
+            LocalDate.parse(dateStr, DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format. Please enter in the format: yyyy-mm-dd");
+            return false;
+        }
+        return true;
+    }
 
     public static void main(String[] args) {
-
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -83,6 +100,10 @@ public class Duke {
                     System.out.println("Invalid Input for delete command");
                     continue;
                 }
+                if (storedInfo.isEmpty()) {
+                    System.out.println("The list is empty.");
+                    continue;
+                }
                 System.out.println("Noted. I've removed this task:");
                 System.out.println(storedInfo.get(taskDeleted - 1));
                 storedInfo.remove(taskDeleted-1);
@@ -108,6 +129,14 @@ public class Duke {
                     System.out.println("Time not detected. Please try again");
                     continue;
                 }
+                try {
+                    if (!isValid(in.substring(i+1, i+11))) {
+                        continue;
+                    }
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("Invalid date and time. Use yyyy-mm-dd format for date");
+                    continue;
+                }
                 System.out.println("Got it. I've added this task:");
                 storedInfo.add(new EventTask(in.substring(6, i), in.substring(i + 1)));
                 System.out.println(storedInfo.get(count));
@@ -121,6 +150,14 @@ public class Duke {
                 int i = in.indexOf("/");
                 if (i < 0) {
                     System.out.println("Time not detected. Please try again");
+                    continue;
+                }
+                try {
+                    if (!isValid(in.substring(i+1, i+11))) {
+                        continue;
+                    }
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("Invalid date and time");
                     continue;
                 }
                 System.out.println("Got it. I've added this task:");
