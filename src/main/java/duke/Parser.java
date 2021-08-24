@@ -1,10 +1,7 @@
 package duke;
 
 import duke.command.*;
-import duke.exception.DukeDoneIncorrectArgument;
-import duke.exception.DukeException;
-import duke.exception.DukeIncorrectCommandWord;
-import duke.exception.DukeIncorrectInputs;
+import duke.exception.*;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -18,6 +15,7 @@ public class Parser {
         LIST("list"),
         BYE("bye"),
         DONE("done"),
+        FIND("find"),
         TASK("task"),
         DELETE("delete"),
         ERRORS("error");
@@ -60,6 +58,16 @@ public class Parser {
         }
         return Integer.parseInt(arrString[1]);
     }
+    
+    private static String getKeyword(String s) throws DukeIncorrectInputs {
+        String[] arrString = s.split(" ", 2);
+        try {
+            String second = arrString[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeFindIncorrectArgument();
+        }
+        return arrString[1];
+    }
 
     /**
      * Interprets the full command entered in by the user and
@@ -91,6 +99,9 @@ public class Parser {
             break;
         case DELETE:
             c = new DeleteCommand(d, sc, Parser.getSecondNum(userInput));
+            break;
+        case FIND:
+            c = new FindCommand(d, sc, Parser.getKeyword(userInput));
             break;
         case TASK:
             c = new TaskCommand(d, sc, userInput);

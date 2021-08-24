@@ -1,7 +1,9 @@
 package duke.task;
 
+import duke.exception.DukeFindIncorrectArgument;
 import duke.exception.DukeIncorrectInputs;
 import duke.exception.DukeNoSuchTask;
+import duke.exception.DukeUnableToFind;
 
 import java.util.ArrayList;
 
@@ -85,6 +87,23 @@ public class TaskList {
             throw new DukeNoSuchTask(new IllegalArgumentException());
         }
         return this.listOfTasks.remove(i - 1);
+    }
+
+    public TaskList findTasks(String keyword) throws DukeIncorrectInputs {
+        int len = this.listOfTasks.size();
+        TaskList tasksWithKey = new TaskList();
+
+        for (int i = 0; i < len; i++) {
+            if (this.listOfTasks.get(i).task.contains(keyword)) {
+                tasksWithKey.listOfTasks.add(this.listOfTasks.get(i));
+            }
+        }
+
+        if (tasksWithKey.getTotalNumber() == 0) {
+            throw new DukeUnableToFind();
+        }
+
+        return tasksWithKey;
     }
 
     /**
