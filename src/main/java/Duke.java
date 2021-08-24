@@ -18,6 +18,7 @@ public class Duke {
         String hello = "Hello! I'm Duke\n" +
                 "What can I do for you?";
         System.out.println(hello);
+
         Scanner scanner = new Scanner(System.in);
         taskManager.run(scanner);
     }
