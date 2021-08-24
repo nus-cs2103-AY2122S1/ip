@@ -10,14 +10,14 @@ public class Ui {
     /**
      * Says welcome to the user when they open duke bot.
      */
-    public void greet(){
+    public void greet() {
         System.out.println("Hello! I'm duke! What can I do for you?");
     }
 
     /**
      * Says GoodBye to the user when they leave.
      */
-    public void bye(){
+    public void bye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
@@ -26,7 +26,7 @@ public class Ui {
      *
      * @param errorMessage ErrorMessage throws by Duke.
      */
-    public void showError(String errorMessage){
+    public void showError(String errorMessage) {
         System.out.println(errorMessage);
     }
 
@@ -35,7 +35,7 @@ public class Ui {
      *
      * @return Command typed in by the user.
      */
-    public String readCommand(){
+    public String readCommand() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
@@ -45,9 +45,9 @@ public class Ui {
      *
      * @param tasks TaskList that is going to be printed.
      */
-    public void listAllTasks(TaskList tasks){
-        for(int i = 0; i < tasks.size(); i++){
-            System.out.println((i+1) + "." + tasks.get(i).toString());
+    public void listAllTasks(TaskList tasks) {
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + "." + tasks.get(i).toString());
         }
     }
 
@@ -56,7 +56,7 @@ public class Ui {
      *
      * @param task The task that's going to be marked as done.
      */
-    public void markAsDone(Task task){
+    public void markAsDone(Task task) {
         System.out.println("Nice! I've marked this task as done:\n"
                 + task.toString());
     }
@@ -64,10 +64,10 @@ public class Ui {
     /**
      * Notifies users that certain tasks has been added.
      *
-     * @param task Task that has been added.
+     * @param task         Task that has been added.
      * @param taskListSize Size of the updated taskList.
      */
-    public void addTask(Task task, int taskListSize){
+    public void addTask(Task task, int taskListSize) {
         System.out.println("Got it. I've added this task:\n"
                 + task.toString()
                 + "\nNow you have "
@@ -77,10 +77,10 @@ public class Ui {
     /**
      * Notifies the user that certain task has been deleted.
      *
-     * @param task Task that has been deleted.
+     * @param task         Task that has been deleted.
      * @param taskListSize Size of the updated taskList.
      */
-    public void deleteTask(Task task, int taskListSize){
+    public void deleteTask(Task task, int taskListSize) {
         System.out.println("Successfully deleted task"
                 + task.toString()
                 + "\nNow you have" + taskListSize + " tasks in the list.");

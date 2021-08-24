@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Storage {
     private String filePath;
 
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -21,13 +21,13 @@ public class Storage {
      *
      * @param task Task that is going to be added.
      */
-    public void addTaskToFile(Task task){
+    public void addTaskToFile(Task task) {
         try {
             FileWriter fileWriter = new FileWriter(filePath, true);
-            fileWriter.write(task.getIcon() + "&&" + task.getStatus() + "&&"+ task.getDescription()
+            fileWriter.write(task.getIcon() + "&&" + task.getStatus() + "&&" + task.getDescription()
                     + "&&" + task.getTaskTime() + "\n");
             fileWriter.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -39,27 +39,27 @@ public class Storage {
      * @return Task object.
      * @throws DukeException Exception that duke bot can throw.
      */
-    public static Task convertTaskStringToTask(String taskString) throws DukeException{
+    public static Task convertTaskStringToTask(String taskString) throws DukeException {
         Task task = new Task();
         String[] newTask = taskString.split("&&");
         String taskType = newTask[0];
         String status = newTask[1];
         String taskDescription = newTask[2];
         String taskTime = newTask.length > 3 ? newTask[3] : "";
-        switch (taskType){
-            case "T" :
-                task = new ToDo(taskDescription);
-                break;
-            case "D" :
-                task = new Deadline(taskDescription,taskTime);
-                break;
-            case "E" :
-                task = new Event(taskDescription,taskTime);
-                break;
-            default:
-                throw new DukeException("can't understand this icon");
+        switch(taskType) {
+        case "T":
+            task = new ToDo(taskDescription);
+            break;
+        case "D":
+            task = new Deadline(taskDescription, taskTime);
+            break;
+        case "E":
+            task = new Event(taskDescription, taskTime);
+            break;
+        default:
+            throw new DukeException("can't understand this icon");
         }
-        if(status.equals("1")){
+        if (status.equals("1")) {
             task.done();
         }
         return task;
@@ -70,19 +70,19 @@ public class Storage {
      *
      * @return TaskList that includes all tasks in the file.
      */
-    public TaskList convertFileToTaskList(){
+    public TaskList convertFileToTaskList() {
         TaskList taskList = new TaskList(new ArrayList<Task>());
         File dukeFile = new File(filePath);
         try {
             Scanner scan = new Scanner(dukeFile);
-            while(scan.hasNext()){
+            while (scan.hasNext()) {
                 String taskString = scan.nextLine();
                 Task task = convertTaskStringToTask(taskString);
                 taskList.add(task);
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
-        } catch (DukeException dukeException){
+        } catch (DukeException dukeException) {
             System.out.println(dukeException.getMessage());
         }
         return taskList;
@@ -93,15 +93,15 @@ public class Storage {
      *
      * @param taskList New TaskList.
      */
-    public void convertTaskListToFile(TaskList taskList){
+    public void convertTaskListToFile(TaskList taskList) {
         try {
             FileWriter clearFile = new FileWriter(filePath);
             clearFile.write("");
             clearFile.close();
-            for(int i = 0; i < taskList.size(); i++){
+            for (int i = 0; i < taskList.size(); i++) {
                 addTaskToFile(taskList.get(i));
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }

@@ -1,24 +1,24 @@
 package duke;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
 
-    public ToDo(String description){
+    public ToDo(String description) {
         super(description);
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
     }
 
     @Override
-    public String getIcon(){
+    public String getIcon() {
         return "T";
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(obj instanceof ToDo){
+    public boolean equals(Object obj) {
+        if (obj instanceof ToDo) {
             ToDo toDo = (ToDo) obj;
             return toDo.toString().equals(this.toString());
         } else {

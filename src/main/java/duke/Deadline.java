@@ -19,18 +19,18 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getIcon(){
+    public String getIcon() {
         return "D";
     }
 
     @Override
-    public String getTaskTime(){
+    public String getTaskTime() {
         return this.by.toString();
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(obj instanceof Deadline){
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline) {
             Deadline deadline = (Deadline) obj;
             return deadline.toString().equals(this.toString());
         } else {

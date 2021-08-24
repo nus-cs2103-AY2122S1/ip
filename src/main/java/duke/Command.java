@@ -7,8 +7,8 @@ public abstract class Command {
     /**
      * Executes the command.
      *
-     * @param tasks Up to date TaskList.
-     * @param ui User interaction class.
+     * @param tasks   Up to date TaskList.
+     * @param ui      User interaction class.
      * @param storage Class that store tasks.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
