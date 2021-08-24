@@ -1,13 +1,18 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Event extends Task{
 
     private LocalDate atDate;
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws InvalidFormatException {
         super(description);
-        this.atDate = LocalDate.parse(at);
+        try {
+            this.atDate = LocalDate.parse(at);
+        } catch (DateTimeParseException e){
+            throw new InvalidFormatException("date", "yy-mm-dd");
+        }
     }
 
     @Override

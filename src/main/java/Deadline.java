@@ -1,13 +1,18 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
     private LocalDate byDate;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String at) throws InvalidFormatException {
         super(description);
-        this.byDate = LocalDate.parse(by);
+        try {
+            this.byDate = LocalDate.parse(at);
+        } catch (DateTimeParseException e){
+            throw new InvalidFormatException("make sure the date", "yy-mm-dd");
+        }
     }
 
     @Override

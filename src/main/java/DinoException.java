@@ -52,11 +52,15 @@ class TaskAlreadyDoneException extends DinoException {
     }
 }
 
-class FormatNotUnderstoodException extends DinoException {
-    public FormatNotUnderstoodException (String input) {
-        super("😕 Check this line in your file:\n" + input + "\n" + "Did you format the task incorrectly?");
+class InvalidFormatException extends DinoException {
+    public InvalidFormatException(String action, String format) {
+        super("😕 Please "  + action + " is entered in the format: " + format);
     }
 }
+
+
+
+
 
 
 

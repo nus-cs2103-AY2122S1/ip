@@ -27,10 +27,10 @@ public class Storage {
         return new ArrayList<>();
     }
 
-    public List<Task> getDataFromStorage(File file) throws FileNotFoundException {
-        Scanner sc = new Scanner(file);
+    public List<Task> getDataFromStorage(File file)  {
         List<Task> taskList = new ArrayList<>();
         try {
+        Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String currTask = sc.nextLine();
                 System.out.println(currTask);
@@ -53,13 +53,14 @@ public class Storage {
                     break;
                 }
                 default: {
-                    throw new FormatNotUnderstoodException(currTask);
+                    throw new InvalidFormatException("check your storage file and make sure each task",
+                            "Event | Status | Description | Time");
                 }
                 }
                 if (status.equals("1")) task.setDone();
                 taskList.add(task);
             }
-        } catch (Exception e) {
+        } catch (FileNotFoundException | DinoException e) {
             System.out.println(e.getMessage());
         }
         return taskList;

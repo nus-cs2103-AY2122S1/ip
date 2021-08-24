@@ -13,7 +13,7 @@ public class TaskList {
         return this.taskList;
     }
 
-    public void addTask(String s) throws InvalidInputException, EmptyTaskDescriptionException, TaskNotCategorizedException, TimeNotSpecifiedException {
+    public void addTask(String s) throws InvalidInputException, EmptyTaskDescriptionException, TaskNotCategorizedException, TimeNotSpecifiedException, InvalidFormatException {
         if (Tool.isTaskCategorized(s)) {
             TaskType type = TaskType.valueOf(Tool.getFirstWord(s).toUpperCase());
             String description;
