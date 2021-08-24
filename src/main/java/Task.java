@@ -2,9 +2,9 @@ public abstract class Task {
     private final String text;
     private boolean isDone;
 
-    public Task(String text) {
+    public Task(String text, boolean isDone) {
         this.text = text;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public void markDone() {
@@ -15,9 +15,15 @@ public abstract class Task {
         return this.isDone ? "X" : " ";
     }
 
-    private String getText() {
+    public int getDoneInt() {
+        return  this.isDone ? 1 : 0;
+    }
+
+    public String getText() {
         return this.text;
     }
+
+    abstract String getSaveFormat();
 
     @Override
     public String toString() {

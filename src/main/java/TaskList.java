@@ -7,6 +7,7 @@ public class TaskList {
     private static final String NUMBER_OF_TASKS_MESSAGE = "Now you have %d %s in the list.";
     private static final String ADD_TASK_MESSAGE = "Got it. I've added this task:\n  %s\n" + NUMBER_OF_TASKS_MESSAGE;
     private static final String REMOVE_TASK_MESSAGE = "Noted. I've removed this task:\n %s\n" + NUMBER_OF_TASKS_MESSAGE;
+    private static final String ERROR_SAVING_MESSAGE = "Error reading taskLst. Symbol not found.";
 
     // Nouns
     private String taskWord() {
@@ -20,12 +21,34 @@ public class TaskList {
     }
 
     public int size() {
-        return taskArr != null ? taskArr.size() : 0;
+        return taskArr.size();
     }
 
     public String addTask(Task task) {
         this.taskArr.add(task);
         return String.format(ADD_TASK_MESSAGE, task, this.size(), taskWord());
+    }
+
+    public void addSavedTask(String input) throws ArrayIndexOutOfBoundsException, DukeException {
+        String[] inputArr = input.split("\\|");
+        String symbol = inputArr[0];
+        String remainingText = Duke.getRemainingText(symbol, input);
+        switch (symbol.charAt(0)) {
+        case ToDo.SYMBOL:
+            ToDo myTodo = ToDo.newToDoFromSave(remainingText);
+            this.addTask(myTodo);
+            break;
+        case Deadline.SYMBOL:
+            Deadline myDeadline = Deadline.newDeadlineFromSave(remainingText);
+            this.addTask(myDeadline);
+            break;
+        case Event.SYMBOL:
+            Event myEvent = Event.newEventFromSave(remainingText);
+            this.addTask(myEvent);
+            break;
+        default:
+            throw new DukeException(ERROR_SAVING_MESSAGE);
+        }
     }
 
     public String markTaskAsDone(int taskIndex) throws DukeException {
@@ -62,5 +85,4 @@ public class TaskList {
         // Remove the last newline
         return printedList.toString().trim();
     }
-
 }
