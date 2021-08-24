@@ -37,6 +37,8 @@ public class Recieve {
                     parser.list();
                 } else if (input.startsWith("delete ") || input.startsWith("delete")) {
                     parser.delete(input);
+                } else if (input.startsWith("find ") || input.startsWith("find")) {
+                    parser.find(input);
                 } else {
                     parser.add(input);
                 }

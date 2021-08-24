@@ -3,6 +3,7 @@ package Duke;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class Parser {
     private TaskList tasks;
@@ -27,6 +28,32 @@ public class Parser {
 
     public void endSession() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public void find(String input) throws InvalidTaskIndexException {
+        if (input.length() > 5) {
+            String keyword = input.substring(5);
+            ArrayList<Task> full = tasks.inArrayList();
+            ArrayList<Task> filtered = new ArrayList<>();
+            int len = tasks.arrSize();
+            for (int i = 0; i < len; i++) {
+                if (full.get(i).toString().contains(keyword)) {
+                    filtered.add(full.get(i));
+                }
+            }
+
+            if (filtered.size() < 1) {
+                System.out.println("There are no matching results!");
+            } else {
+                int len2 = filtered.size();
+                System.out.println("Here are the matching tasks in your list:");
+                for (int i = 1; i < len2 + 1; i++) {
+                    System.out.println(i + ". " + filtered.get(i - 1));
+                }
+            }
+        } else {
+            throw new InvalidTaskIndexException("Please specify the keyword to be searched!");
+        }
     }
 
     public void done(String input) throws InvalidTaskIndexException {
