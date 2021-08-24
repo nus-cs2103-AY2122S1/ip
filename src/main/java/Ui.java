@@ -61,6 +61,11 @@ public class Ui {
         System.out.println("\t List successfully saved");
     }
 
+    public void displayDeleteMessage(TaskList taskList, int index) {
+        System.out.println("\t Noted. The task has been removed!");
+        System.out.println("\t \t" + taskList.getTask(index).toString());
+    }
+
     public void invalidCommand() throws DukeException {
         String errorMessage = "\t Sorry I do not understand this command \n";
         errorMessage += "\t Please use one of the following commands: \n";
