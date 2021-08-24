@@ -1,4 +1,3 @@
-import java.io.FileWriter;
 import java.io.IOException;
 
 public enum DukeCommands {
@@ -144,15 +143,11 @@ public enum DukeCommands {
     }),
     SAVE("save", (String command) -> {
         try {
-            FileWriter fw = new FileWriter("data/duke.txt");
-            for (Task t : Duke.taskList) {
-                fw.write(t.toFile() + System.lineSeparator());
-            }
-            fw.close();
+           DukeFileIO.writeCurrentData();
         } catch(IOException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("List successfully saved");
+        System.out.println("\t List successfully saved");
         Duke.getCommand();
     }),
     INVALID("invalid", (String command) -> {

@@ -15,7 +15,7 @@ public class Duke {
 //                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("\t Hello! I'm Duke");
         try {
-            DukeFileIO.readPastData(taskList);
+            DukeFileIO.readPastData();
         } catch(FileNotFoundException e) {
             System.out.println("Missing File");
         }

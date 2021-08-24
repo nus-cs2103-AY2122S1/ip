@@ -1,11 +1,12 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class DukeFileIO {
 
-    public static void readPastData(ArrayList<Task> taskList) throws FileNotFoundException {
+    public static void readPastData() throws FileNotFoundException {
         File data = new File("data/duke.txt");
         Scanner dataReader = new Scanner(data);
         char[] prefixes = {'T', 'E', 'D'};
@@ -13,36 +14,33 @@ public class DukeFileIO {
             Duke.counter++;
             String entry = dataReader.nextLine();
             String[] components = entry.split("[\\|]");
-//            for (String s : components) {
-//                System.out.println("this" + s);
-//            }
             char prefix = entry.charAt(0);
             switch (prefix) {
             case 'T':
-                String description = components[2];
+                String description = components[2].substring(1);
                 ToDo t = new ToDo(description);
                 if (checkIfDone(components[1])) {
                     t.markAsDone();
                 }
-                taskList.add(t);
+                Duke.taskList.add(t);
                 break;
             case 'D':
-                description = components[2];
-                String time = components[3];
+                description = components[2].substring(1);
+                String time = components[3].substring(1);
                 Deadline d = new Deadline(description, time);
                 if (checkIfDone(components[1])) {
                     d.markAsDone();
                 }
-                taskList.add(d);
+                Duke.taskList.add(d);
                 break;
             case 'E':
-                description = components[2];
-                time = components[3];
+                description = components[2].substring(1);
+                time = components[3].substring(1);
                 Event e = new Event(description, time);
                 if (checkIfDone(components[1])) {
                     e.markAsDone();
                 }
-                taskList.add(e);
+                Duke.taskList.add(e);
                 break;
             }
         }
@@ -54,5 +52,13 @@ public class DukeFileIO {
         } else {
             return false;
         }
+    }
+
+    public static void writeCurrentData() throws IOException {
+        FileWriter fw = new FileWriter("data/duke.txt");
+        for (Task t : Duke.taskList) {
+            fw.write(t.toFile() + System.lineSeparator());
+        }
+        fw.close();
     }
 }
