@@ -4,17 +4,35 @@ import duke.DukeDate;
 
 import java.util.ArrayList;
 import java.lang.StringBuilder;
+
+/**
+ * Represents the list of tasks the user has. Stores the tasks in the form of <code>Task</code> objects.
+ */
 public class TaskList {
     private ArrayList<Task> userList;
     private int listSize = 0;
+
+    /**
+     * Creates a new TaskList.
+     */
     public TaskList() {
         userList = new ArrayList<Task>(100);
     }
 
+    /**
+     * Returns the current number of tasks in the list.
+     *
+     * @return Number of tasks in the list.
+     */
     public int getListSize() {
         return listSize;
     }
 
+    /**
+     * Returns a String representing the list of tasks.
+     *
+     * @return String representing list of tasks, or a message if the list is empty.
+     */
     public String getTasks() {
         if (listSize == 0) {
             return "The list is empty! *quack*";
@@ -40,6 +58,12 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Adds a task into the task list.
+     *
+     * @param task Task to be added.
+     * @return Message that the task has been successfully added.
+     */
     public String addTask(Task task) {
         userList.add(task);
         listSize++;
@@ -53,6 +77,13 @@ public class TaskList {
         );
     }
 
+    /**
+     * Sets a task in the task list as complete.
+     * Does not do anything if taskId doesn't match any of the tasks in the list.
+     *
+     * @param taskId ID of the task in the list.
+     * @return Message depending on the outcome of the action.
+     */
     public String markComplete(int taskId) {
         if (taskId - 1 < listSize) {
             if (userList.get(taskId - 1).completeTask()) {
@@ -69,6 +100,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Removes task from the task list.
+     * Does not do anything if taskId doesn't match any of the tasks in the list.
+     *
+     * @param taskId ID of the task in the list.
+     * @return Message depending on the outcome of the action.
+     */
     public String deleteTask(int taskId) {
         if (taskId - 1 < listSize) {
             Task t = userList.get(taskId - 1);
@@ -88,11 +126,10 @@ public class TaskList {
     }
 
     /**
-     * Returns the specified duke.task in a string format used for saving in txt file.
-     * Should not be exposed directly to the user.
+     * Returns the specified task in a string format used for saving in txt file.
      *
-     * @param taskIndex
-     * @return
+     * @param taskIndex Index of the task in the list, starting from 0.
+     * @return String representing the Task.
      */
     public String getTaskSaveFormat(int taskIndex) {
         if (taskIndex < listSize) {

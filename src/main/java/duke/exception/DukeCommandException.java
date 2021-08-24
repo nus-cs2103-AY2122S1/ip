@@ -1,7 +1,17 @@
 package duke.exception;
 
+/**
+ * Represents Duke command related exceptions.
+ * Generally used to handle when user uses the command wrongly.
+ */
 public class DukeCommandException extends Exception {
     private String msg;
+
+    /**
+     * Creates a new DukeCommandException
+     *
+     * @param command Command used by the user.
+     */
     public DukeCommandException(String command) {
         switch (command) {
         case "todo":
@@ -24,6 +34,11 @@ public class DukeCommandException extends Exception {
         }
     }
 
+    /**
+     * Returns the error message
+     *
+     * @return Error message.
+     */
     public String getMsg() {
         return msg;
     }
