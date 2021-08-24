@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -41,7 +40,6 @@ public class Duke {
             task = Message.substring(Message.indexOf(" ") + 1, Message.indexOf("/") - 1);
 
             //throw exceptions for deadline or events' format.
-
             if (Message.startsWith("deadline")) {
                 if (Message.indexOf("/by") != -1) {
                     deadline = Message.substring(Message.indexOf("/by") + 3);
@@ -75,18 +73,16 @@ public class Duke {
 
 
         System.out.println("Got it. I've added this task: ");
-        if (Message.startsWith("todo")) {
-                Task newTask = new ToDos(false, task);
+
+        TaskType[] tasktypes = TaskType.values();
+        String tasktype = Message.substring(0, Message.indexOf(" "));
+        for (TaskType t : tasktypes) {
+            if (t.toString().equals(tasktype)){
+                Task newTask = t.AssignTaskType(t, task, deadline);
                 System.out.println(" " + newTask.PrintTaskInfo());
                 list.add(newTask);
-        } else if (Message.startsWith("event")) {
-                Task newTask = new Events(false, task, deadline);
-                System.out.println(" " + newTask.PrintTaskInfo());
-                list.add(newTask);
-        } else if (Message.startsWith("deadline")){
-                Task newTask = new Deadlines(false, task, deadline);
-                System.out.println(" " + newTask.PrintTaskInfo());
-                list.add(newTask);
+                break;
+            }
         }
 
         System.out.println("Now you have " + list.size() + "" +
@@ -128,30 +124,27 @@ public class Duke {
                 System.out.println(Goodbye_message);
                 System.out.println(line + "\n");
                 break;
-            }
-            else if (Message.equals("list")){
+            }  else if (Message.equals("list")){
                 PrintList();
-            }
-            else if (Message.startsWith("done")) {
-                int index = (Message.contains(" "))?Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1
-                            :-1;
+            }  else if (Message.startsWith("done")) {
+                int index = (Message.contains(" "))? Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1
+                        :-1;
+
                 try {
                     MarkDone(index);
                 } catch (DukeException e){
                     e.PrintErrorMessage();
                 }
-
             } else if (Message.startsWith("delete")) {
-                int index = (Message.contains(" "))?Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1
-                            :-1;
+                int index =  (Message.contains(" "))? Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1
+                        :-1;
 
                 try {
                     Delete(index);
                 } catch (DukeException e){
                     e.PrintErrorMessage();
                 }
-            }
-            else  {
+            } else  {
                 try {
                     HandleTask(Message);
                 } catch (DukeException e)
@@ -159,12 +152,22 @@ public class Duke {
                     e.PrintErrorMessage();
                 }
             }
-
             System.out.println(line + "\n");
         }
     }
 
+    public enum TaskType{
+        todo, deadline, event;
 
+        public Task AssignTaskType(TaskType t,String task, String time){
+            switch (t) {
+                case todo: return new ToDos(false, task);
+                case deadline: return new Deadlines(false, task, time);
+                case event: return new Events(false, task, time);
+                default: return null;
+            }
+        }
+    }
 
 
     public static void main(String[] args) {
@@ -179,7 +182,6 @@ public class Duke {
 
         //Print Message();
         PrintMessage();
-
-
+        
     }
 }
