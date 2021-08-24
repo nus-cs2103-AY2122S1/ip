@@ -10,7 +10,7 @@ import java.io.IOException;
  * Entry point to the programme.
  */
 public class Duke {
-    public static List todoList;
+    public List todoList;
 
     /**
      * Greeting message from Duke.
@@ -34,15 +34,16 @@ public class Duke {
      * @throws IOException If the File cannot be read/found.
      */
     public static void main(String[] args) throws IOException {
+        Duke duke = new Duke();
         try {
             File myObj = new File("filename.txt");
             if (myObj.createNewFile()) {
                 System.out.println("New File created: " + myObj.getName());
-                Duke.todoList = new List();
+                duke.todoList = new List();
             } else {
                 System.out.println("Data exists");
                 Storage data = new Storage(myObj);
-                Duke.todoList = new List(data.load());
+                duke.todoList = new List(data.load());
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -56,7 +57,7 @@ public class Duke {
         String input;
 
         while (!(input = reader.readLine()).equals("bye")) {
-            Duke.todoList.addTask(input);
+            duke.todoList.addTask(input);
         }
         bye();
     }
