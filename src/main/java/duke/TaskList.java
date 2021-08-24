@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Contains a list of tasks.
+ */
 public class TaskList {
     ArrayList<Task> list;
 
@@ -9,6 +12,12 @@ public class TaskList {
         list = new ArrayList<>();
     }
 
+    /**
+     * Creates a new TaskList by parsing an array of Strings into an array of tasks.
+     *
+     * @param stringList Arraylist of strings read from the file.
+     * @throws DukeException If there is an error with parsing.
+     */
     TaskList(ArrayList<String> stringList) throws DukeException {
         list = new ArrayList<>();
         for (int i = 0; i < stringList.size(); i++) {
@@ -38,17 +47,39 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds task to task list
+     *
+     * @param t Task to be added
+     */
     public void add(Task t) {
         list.add(t);
     }
 
+    /**
+     * Removes a task from the list.
+     *
+     * @param i Index of task to be removed.
+     */
     public void remove(int i){
         list.remove(i);
     }
+
+    /**
+     * Returns the size of the list.
+     *
+     * @return Number of tasks in the list.
+     */
     public int getSize() {
         return list.size();
     }
 
+    /**
+     * Gets the element at an index in the list.
+     *
+     * @param i Index number.
+     * @return Task at index.
+     */
     public Task get(int i) {
         return list.get(i);
     }

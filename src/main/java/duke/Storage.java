@@ -7,16 +7,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage to handle logic of writing and reading from the file with the task list.
+ */
 public class Storage {
     private File file;
+
+    /**
+     * Creates a new storage to a certain filepath.
+     *
+     * @param filepath Path to file from project root.
+     */
     public Storage(String filepath) {
         String[] filepathArr = filepath.split("/");
         try {
-            File dir = new File("./"+filepathArr[0]);
-            if (!dir.exists()) {
-                dir.mkdir();
+            String currentPath = "";
+            for (int i = 0; i < filepathArr.length - 1; i++) {
+                File dir = new File("./" + currentPath + filepathArr[i]);
+                if (!dir.exists()) {
+                    dir.mkdir();
+                }
             }
-            file = new File("./"+ filepath);
+            file = new File("./" + filepath);
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -27,6 +39,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves a task list to the file in the storage.
+     *
+     * @param list TaskList of tasks.
+     */
     public void save(TaskList list) {
         try {
             FileWriter writer = new FileWriter(file);

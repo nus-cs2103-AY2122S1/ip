@@ -1,18 +1,37 @@
 package duke;
 
+/**
+ * Parser class handles input messages from the user
+ */
 public class Parser {
 
     private TaskList list;
     private Storage storage;
 
+    /**
+     * Adds a task list to the parser class
+     *
+     * @param list Task list of tasks
+     */
     public void addTaskList(TaskList list) {
         this.list = list;
     }
 
+    /**
+     * Adds a storage to allow the parser to save
+     *
+     * @param storage Storage containing the file to write to
+     */
     public void addStorage(Storage storage) {
         this.storage = storage;
     }
 
+    /**
+     * Handles each command the user inputs. Different commands have different actions.
+     *
+     * @param input Input string by user
+     * @return True or false. If false, program ends. If true, program continues.
+     */
     public boolean parse(String input) {
         printLine();
         String[] inputArr = input.split(" ", 2);
