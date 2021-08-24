@@ -9,11 +9,11 @@ public class Task {
         this.isCompleted = false;
     }
 
-    boolean isComplete(){
+    public boolean isComplete(){
         return this.isCompleted;
     }
 
-    void markComplete() {
+    public void markComplete() {
         this.isCompleted = true;
     }
 
@@ -21,6 +21,12 @@ public class Task {
     public String toString(){
         String cross = this.isCompleted?"X":" ";
         return "[" + cross + "]" + this.content;
+    }
+
+    public String toStorageString(){
+        String done = isCompleted? "1" : "0";
+        String s = String.format("| %s | %s",done, content);
+        return s;
     }
 
 }

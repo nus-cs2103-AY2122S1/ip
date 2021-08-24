@@ -8,11 +8,13 @@ import java.util.ArrayList;
 public class TaskList {
     private final ArrayList<Task> list;
 
+
     public TaskList(){
         this.list = new ArrayList<>();
+
     }
 
-    public void addTask(Task task){
+    public void addTask(Task task) {
         list.add(task);
     }
 
@@ -45,6 +47,24 @@ public class TaskList {
         }else{
             throw new NoSuchTaskException();
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        s.append("Here are the tasks in your list:");
+        for(int i = 0; i < list.size();i++){
+            s.append("\n").append(i + 1).append(".").append(list.get(i));
+        }
+        return s.toString();
+    }
+
+    public String toStorageString(){
+        StringBuilder s = new StringBuilder();
+        for(int i = 0; i < list.size();i++){
+            s.append(list.get(i).toStorageString()).append("\n");
+        }
+        return s.toString();
     }
 
 }

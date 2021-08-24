@@ -25,12 +25,11 @@ public class UI {
     }
 
     public static void printList(TaskList list){
-        StringBuilder s = new StringBuilder();
-        s.append("Here are the tasks in your list:");
-        for(int i = 1; i <= list.getTaskAmount();i++){
-            s.append("\n").append(i).append(".").append(list.getTask(i));
-        }
-        System.out.println(formatWithSpace(s.toString()));
+        System.out.println(formatWithSpace(list.toString()));
+    }
+
+    public static void printStorageList(TaskList list){
+        System.out.println(formatWithSpace(list.toStorageString()));
     }
 
     public static String listTaskAmount(int count){
@@ -65,7 +64,7 @@ public class UI {
         return input;
     }
 
-    public static void printError(DukeException e){
+    public static void printError(Exception e){
         System.out.println(formatWithSpace(e.getMessage()));
     }
 
