@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -115,10 +116,17 @@ public class Winston {
             case "event": {
                 System.out.println("What task would you like to add?");
                 String task = scan.nextLine();
-                System.out.println("When is this event?");
-                String on = scan.nextLine();
-                winston1.addTask(new Event(task, on));
-                System.out.println("Task Added!");
+                System.out.println("When is this event? Please give your answer in the format (YYYY-MM-DD)");
+                boolean valid = true;
+                while (valid) {
+                    try {
+                        String on = scan.nextLine();
+                        winston1.addTask(new Event(task, on));
+                        System.out.println("Task Added!");
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Invalid date format. Please give a valid date format. E.g 2021-12-12");
+                    }
+                }
                 break;
             }
             case "delete": {
