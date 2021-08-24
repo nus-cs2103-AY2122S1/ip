@@ -90,6 +90,8 @@ public class Parser {
                     return new Deadline(newInput.substring(9, timeIndex - 1), newInput.substring(timeIndex + 4));
                 }
             }
+        } else if (newInput.length() > 5 && newInput.substring(0, 5).equals("find ")) {
+            return new FindCommand(newInput.substring(5));
         } else {
             throw new DukeExcpetion("Sorry, I don't understand the input.");
         }

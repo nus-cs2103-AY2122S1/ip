@@ -10,7 +10,7 @@ import java.time.LocalTime;
  */
 public class Deadline extends Task {
     private LocalTime endTime;
-    private LocalDate endDate; 
+    private LocalDate endDate;
     private String timeString;
     private boolean isTimeString;
     

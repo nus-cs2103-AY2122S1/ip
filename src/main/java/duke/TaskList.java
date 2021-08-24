@@ -49,4 +49,29 @@ public class TaskList implements Serializable {
              "Now you have " + taskList.size() + " tasks in the list.");
         Storage.save(this);
     }
+    
+    /**
+     * Search if there are tasks with a given keyword
+     * 
+     * @param keyword keyword to search
+     * @return searched list
+     */
+    public void find(String keyword) {
+        ArrayList<Task> outList = new ArrayList<Task>(); 
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).name().indexOf(keyword) >= 0) {
+                outList.add(taskList.get(i));
+            }
+        }
+        if (outList.size() == 0) {
+            Ui.printString("No current task found.");
+        } else {
+            String out = "Here are the tasks in your list:\n";
+            for (int i = 0; i < outList.size(); i++) {
+                int index = i + 1;
+                out = out + Ui.SPACE_STRING + index + "." + outList.get(i) + "\n";
+            }
+            Ui.printList(out);
+        }
+    }
 }
