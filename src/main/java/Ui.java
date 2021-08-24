@@ -8,10 +8,10 @@ public class Ui {
     static String dash = "__________________________________";
 
     static String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+                        + "|  _ \\ _   _| | _____ \n"
+                        + "| | | | | | | |/ / _ \\\n"
+                        + "| |_| | |_| |   <  __/\n"
+                        + "|____/ \\__,_|_|\\_\\___|\n";
 
     private final Scanner in;
     private final PrintStream out;
@@ -41,7 +41,4 @@ public class Ui {
         String fullInputLine = in.nextLine();
         return fullInputLine;
     }
-
-
-
 }
