@@ -22,11 +22,18 @@ public class Duke {
      * @param filePath
      */
     public Duke(String filePath) {
-
         database = new Database(filePath);
+    }
 
 
-
+    public ArrayList<Task> searchTask(ArrayList<Task> tasklist, String keyword) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task: tasklist) {
+            if (task.searchKeyword(keyword)) {
+                result.add(task);
+            }
+        }
+        return result;
     }
 
     /**
@@ -41,6 +48,7 @@ public class Duke {
         final String BYE = "bye";
         final String DONE = "done";
         final String DELETE = "delete";
+        final String FIND = "find";
 
 
         boolean isEnd = false;
@@ -57,6 +65,37 @@ public class Duke {
 
 
             switch(keyword[0]) {
+                case FIND:
+                    ArrayList<Task> result = searchTask(task, keyword[1]);
+                    try {
+                        for (int i = 0; i < result.size(); i++) {
+                            String s = indentation;
+                            String s2 = "";
+
+                            if (result.get(i) instanceof Todo) {
+                                s += (i + 1) + "." + " [T]";
+                                s2 = result.get(i).getName();
+                            } else if (result.get(i) instanceof Deadline) {
+                                s += (i + 1) + "." + " [D]";
+                                s2 = result.get(i).getName() +  " ( " + ((Deadline) result.get(i)).getTime() + " )";
+                            } else if (result.get(i) instanceof Event){
+                                s += (i + 1) + "." + " [E]";
+                                s2 = result.get(i).getName() +  " ( " + ((Event) result.get(i)).getTime() + " )";
+                            }
+                            if (result.get(i).isDone() == false) {
+                                s += "[ ] " + s2;
+                                System.out.println(s);
+                            } else {
+                                s += "[X] " + s2;
+                                System.out.println(s);
+                            }
+                        }
+
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(indentation + e.getMessage());
+                    }
+                    System.out.println(ui.line);
+                    break;
                 case LIST:
                     System.out.println(ui.line);
                     try {

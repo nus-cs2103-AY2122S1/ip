@@ -46,6 +46,16 @@ public class Deadline extends Task{
         return stringBuilder.toString();
     }
 
+    public boolean searchKeyword(String keyword) {
+        String[] s = name.split(" ");
+        for (String ss : s) {
+            if (ss.equals(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void setDone(boolean done) {
         isDone = done;

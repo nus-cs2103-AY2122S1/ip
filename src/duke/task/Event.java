@@ -17,6 +17,16 @@ public class Event extends Task{
         this.time = time;
     }
 
+    public boolean searchKeyword(String keyword) {
+        String[] s = name.split(" ");
+        for (String ss : s) {
+            if (ss.equals(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getTime() {
         String[] s = this.time.split(" ");
 

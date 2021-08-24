@@ -15,6 +15,17 @@ public class Todo extends Task{
         this.isDone = isDone;
     }
 
+    public boolean searchKeyword(String keyword) {
+        String[] s = name.split(" ");
+        for (String ss : s) {
+            if (ss.equals(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     @Override
     public String getName() {
         return name;

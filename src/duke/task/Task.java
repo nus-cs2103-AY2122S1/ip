@@ -18,6 +18,16 @@ public class Task{
         this.index = index;
     }
 
+    public boolean searchKeyword(String keyword) {
+        String[] s = name.split(" ");
+        for (String ss : s) {
+            if (ss.equals(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void setDone(boolean done) {
         isDone = done;
     }
