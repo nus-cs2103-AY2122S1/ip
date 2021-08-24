@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,28 +15,33 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() throws FileNotFoundException {
-        ArrayList<Task> taskArrayList = new ArrayList<>();
+    public ArrayList<Task> load() throws IOException {
+        Files.createDirectories(Paths.get("data/"));
         File f = new File(filePath);
-        Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            String next = s.nextLine();
-            String[] split = next.split("\\|", 4);
-            Task t;
-            if (split[0].equals("T")) {
-                t = new Todo(split[2]);
-            } else if (split[0].equals("D")) {
-                t = new Deadline(split[2], split[3]);
-            } else {
-                t = new Event(split[2], split[3]);
+        if (f.createNewFile()) {
+            return new ArrayList<Task>();
+        } else {
+            ArrayList<Task> taskArrayList = new ArrayList<>();
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String next = s.nextLine();
+                String[] split = next.split("\\|", 4);
+                Task t;
+                if (split[0].equals("T")) {
+                    t = new Todo(split[2]);
+                } else if (split[0].equals("D")) {
+                    t = new Deadline(split[2], split[3]);
+                } else {
+                    t = new Event(split[2], split[3]);
+                }
+                if (split[1].equals("X")) {
+                    t.markAsDone();
+                }
+                taskArrayList.add(t);
             }
-            if (split[1].equals("X")) {
-                t.markAsDone();
-            }
-            taskArrayList.add(t);
+            s.close();
+            return taskArrayList;
         }
-        s.close();
-        return taskArrayList;
     }
 
     public void save(ArrayList<Task> taskArrayList) throws IOException{

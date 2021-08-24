@@ -95,17 +95,12 @@ public class Lania {
 
     public void run() {
         try {
-            Files.createDirectories(Paths.get("data/"));
-            File f = new File("data/lania.txt");
-            if (f.createNewFile()) {
-
-            } else {
-                loadFileContents();
-            }
+            taskArrayList = storage.load();
         } catch (IOException e) {
             ui.loadingErrorMessage();
             e.printStackTrace();
         }
+        ui.listMessage(taskArrayList);
         ui.greetingMessage();
         Scanner s = new Scanner(System.in);
         String input = s.nextLine();
@@ -131,11 +126,6 @@ public class Lania {
         }
         s.close();
         ui.goodbyeMessage();
-    }
-
-    private void loadFileContents() throws FileNotFoundException {
-        taskArrayList = storage.load();
-        ui.listMessage(taskArrayList);
     }
 
     /**
