@@ -42,7 +42,10 @@ public class Duke {
                     ui.showList();
                     break;
                 case DELETE:
-                    storage.deleteEvent(task);
+                    storage.deleteTask(task);
+                    break;
+                case FIND:
+                    storage.findTask(task);
                     break;
                 case UNKNOWN:
                     throw new Exception("Cannot Understand");

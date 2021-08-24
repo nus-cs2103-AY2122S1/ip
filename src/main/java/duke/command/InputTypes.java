@@ -2,7 +2,7 @@ package duke.command;
 
 public enum InputTypes {
         BYE("bye"), TODO("todo"), DEADLINE("deadline"),
-    EVENT("event"), LIST("list"), DONE("done"), DELETE("delete"), UNKNOWN("unknown");
+    EVENT("event"), LIST("list"), DONE("done"), DELETE("delete"), UNKNOWN("unknown"), FIND("find");
 
         private String value;
 
