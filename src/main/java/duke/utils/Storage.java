@@ -23,6 +23,10 @@ public class Storage {
     }
 
     public List<Task> load() throws DukeException {
+        String dirName = this.filePath.split("/duke.txt")[0];
+        File dir = new File(dirName);
+        dir.mkdir();
+
         File data = new File(this.filePath);
         List<Task> tasks = new ArrayList<>();
 
