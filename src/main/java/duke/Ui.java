@@ -6,6 +6,8 @@ import duke.tasktype.Event;
 import duke.tasktype.Todo;
 import duke.exception.WrongCommandFormatException;
 
+import java.util.ArrayList;
+
 /**
  * Class that handles the user interface.
  *
@@ -69,6 +71,10 @@ public class Ui {
      */
     public static void currentDateFormatMessage() {
         System.out.println("Current format " + Duke.getFormat());
+    }
+
+    public static void noFormatSpecifiedMessage() {
+        System.out.println("No format specified. Please try again.");
     }
 
     /**
@@ -178,5 +184,34 @@ public class Ui {
                 + d.getDeadline().format(d.getCurrentFormat()) + ")"
         );
         System.out.println("You didn't overshoot the deadline right?");
+    }
+
+    public static void containsKeyword(int counter) {
+        if (counter > 0) {
+            if (counter == 1) {
+                System.out.printf("THere is %d matching task in your list: \n", counter);
+            } else {
+                System.out.printf("THere are %d matching tasks in your list: \n", counter);
+            }
+        } else {
+            System.out.println("There are no matching tasks in your list");
+        }
+
+    }
+
+    public static void containsKeywordTask(Task[] matchingList) {
+        int noOfItems = matchingList.length;
+        
+        for (int i = 0; i < noOfItems; i++) {
+            if (matchingList[i] != null) {
+                Task matchingTask = matchingList[i];
+                System.out.printf("%d. %s \n", i + 1, matchingTask.toString());
+            }
+        }
+
+    }
+
+    public static void noKeywordSpecifiedMessage() {
+        System.out.println("No keyword specified. Please try again");
     }
 }
