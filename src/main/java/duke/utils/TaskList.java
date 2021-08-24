@@ -93,12 +93,16 @@ public class TaskList {
      */
     public void find(HashSet<String> keywords, Ui ui) {
         TaskList filteredTasks = new TaskList();
-        for (Task task : this.tasks) {
+        for (Task task : tasks) {
             if (task.containsKeywords(keywords)) {
                 filteredTasks.addTask(task);
             }
         }
-        filteredTasks.showList(ui);
+        if (filteredTasks.getSize() == 0) {
+            ui.printOut("No matching tasks found!");
+        } else {
+            filteredTasks.showList(ui);
+        }
     }
 
     public void showList(Ui ui) {
