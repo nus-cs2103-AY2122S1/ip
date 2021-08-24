@@ -4,10 +4,11 @@
  * @author Nigel Tan
  */
 public class ToDo extends Task {
+
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param description the name of the task
+     * @param description the name of the task.
      */
     public ToDo(String description) {
         super(description);
