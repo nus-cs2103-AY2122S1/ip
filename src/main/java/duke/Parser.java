@@ -11,7 +11,8 @@ public class Parser {
             new DoneCommand(""),
             new DeleteCommand(""),
             new DeadlineCommand(""),
-            new EventCommand("")
+            new EventCommand(""),
+            new FindCommand(""),
     };
 
     public Command parse(String input) {
