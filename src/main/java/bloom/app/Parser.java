@@ -4,6 +4,9 @@ import bloom.command.*;
 import bloom.constant.Message;
 import bloom.exception.command.BloomUnknownCommandException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Parser {
 	
 	public Command parse(String userInput) throws BloomUnknownCommandException {
@@ -38,5 +41,32 @@ public class Parser {
 			throw new BloomUnknownCommandException(
 					Message.EXCEPTION_UNKNOWN_COMMAND.getMessage());
 		}
+	}
+	
+	public LocalDateTime parseDate(String dateInput) {
+		String[] parse = dateInput.split(" ");
+		String date = parse[0];
+		String time = parse[1];
+		
+		int[] separators = new int[2];
+		separators[0] = date.indexOf("/");
+		separators[1] = date.indexOf("/", separators[0] + 1);
+		String y = date.substring(separators[1] + 1);
+		String m = date.substring(separators[0] + 1, separators[1]);
+		String d = date.substring(0, separators[0]);
+		int year = Integer.parseInt(y);
+		int month = Integer.parseInt(m);
+		int day = Integer.parseInt(d);
+		
+		String hr = time.substring(0, 2);
+		String min = time.substring(2, 4);
+		String sec = time.length() == 6
+				? time.substring(4, 6) : "00";
+		int hour = Integer.parseInt(hr);
+		int minute = Integer.parseInt(min);
+		int second = Integer.parseInt(sec);
+		
+		return LocalDate.of(year, month, day)
+				.atTime(hour, minute, second);
 	}
 }
