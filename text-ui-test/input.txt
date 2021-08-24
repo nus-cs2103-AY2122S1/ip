@@ -2,10 +2,12 @@ todo
 todo borrow book
 deadline
 deadline return book
-deadline return book /by Sunday
+deadline return book /by tmr
+deadline return book /by 2021-01-01
 event
 event project meeting
-event project meeting /at Mon 2-4pm
+event project meeting /by tmr
+event project meeting /at 2021-01-01
 done
 done ur momma
 done 0

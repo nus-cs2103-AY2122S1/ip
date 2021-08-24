@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Duke {
@@ -12,8 +15,8 @@ public class Duke {
         DONE      ("Usage: done [task number]"),
         DELETE    ("Usage: delete [task number]"),
         TODO      ("Usage: todo [description]"),
-        DEADLINE  ("Usage: deadline [description] /by [date and/or time]"),
-        EVENT     ("Usage: event [description] /at [date and/or time]");
+        DEADLINE  ("Usage: deadline [description] /by [date in YYYY-MM-DD format]"),
+        EVENT     ("Usage: event [description] /at [date in YYYY-MM-DD format]");
 
         private static Command[] taskCommands = {TODO, DEADLINE, EVENT};
 
@@ -109,6 +112,13 @@ public class Duke {
                     if (desc_date.length != 2) {
                         throw new DukeException("Deadline when brah??\n\t" + Command.DEADLINE.help_text);
                     }
+                    // Make sure date format is correct
+                    try {
+                        LocalDate.parse(desc_date[1]);
+                    }
+                    catch (DateTimeParseException e) {
+                        throw new DukeException("Follow the gahdam format!!\n\t" + Command.DEADLINE.help_text);
+                    }
                     return Command.DEADLINE;
                 }
                 case "event": {
@@ -120,6 +130,13 @@ public class Duke {
                     String[] desc_date = input_split[1].split(" /at ", 2);
                     if (desc_date.length != 2) {
                         throw new DukeException("Event when brah??\n\t" + Command.EVENT.help_text);
+                    }
+                    // Make sure date format is correct
+                    try {
+                        LocalDate.parse(desc_date[1]);
+                    }
+                    catch (DateTimeParseException e) {
+                        throw new DukeException("Follow the gahdam format!!\n\t" + Command.EVENT.help_text);
                     }
                     return Command.EVENT;
                 }
@@ -227,7 +244,7 @@ public class Duke {
                         case DEADLINE: {
                             // Add new deadline
                             String[] desc_date = user_input.split(" ", 2)[1].split(" /by ",2);
-                            Task t = new Deadline(desc_date[0], desc_date[1]);
+                            Task t = new Deadline(desc_date[0], LocalDate.parse(desc_date[1]));
                             lst.add(t);
                             System.out.print(showTasksReply(c, t.toString()));
                             break;
@@ -235,7 +252,7 @@ public class Duke {
                         case EVENT: {
                             // Add new event
                             String[] desc_date = user_input.split(" ", 2)[1].split(" /at ",2);
-                            Task t = new Event(desc_date[0], desc_date[1]);
+                            Task t = new Event(desc_date[0], LocalDate.parse(desc_date[1]));
                             lst.add(t);
                             System.out.print(showTasksReply(c, t.toString()));
                             break;
