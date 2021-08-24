@@ -12,6 +12,9 @@ public abstract class Task {
     private final String taskName;
     private final LocalDate date;
 
+    /**
+     * State different kinds of task
+     */
     protected enum TaskKind {
         TODO("todo", "T", null, "todo borrow book"),
         DEADLINE("Deadline", "D", "deadline", "deadline return book /by 2022-02-18"),
@@ -131,6 +134,13 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Generate a Todo task from user's command
+     *
+     * @param s user's command
+     * @return Todo task from user's command
+     * @throws DukeException.DukeEmptyTask
+     */
     protected static Task todo(String s) throws DukeException.DukeEmptyTask{
         Task t = new Todo(s);
         if (s != Command.NULL_COMMAND) {
@@ -140,6 +150,14 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Generate a Deadline task from user's command
+     *
+     * @param bodyCommand user's command
+     * @return Deadline task from user's command
+     * @throws DukeException.DukeEmptyTask
+     * @throws DukeException.DukeEmptyNote
+     */
     protected static Task deadline(String bodyCommand) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote{
         if (bodyCommand != Command.NULL_COMMAND) {
             String[] parts = bodyCommand.split("/by ", 2);
@@ -156,6 +174,14 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Generate an Event task from user's command
+     *
+     * @param bodyCommand user's command
+     * @return Event task from user's command
+     * @throws DukeException.DukeEmptyTask
+     * @throws DukeException.DukeEmptyNote
+     */
     protected static Task event(String bodyCommand) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote{
         if (bodyCommand != Command.NULL_COMMAND) {
             String[] parts = bodyCommand.split("/at ", 2);
@@ -172,21 +198,45 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Determine if the task is done
+     *
+     * @return true if the task is done
+     */
     public boolean isDone() {
         return this.isDone;
     }
 
+    /**
+     *
+     * @return Task's name
+     */
     public String getTaskName() {
         return taskName;
     }
 
+    /**
+     *
+     * @return Task's kind
+     */
     public abstract TaskKind taskKind();
 
+    /**
+     * Encode the task to store in hard-drive
+     *
+     * @return Encoded string
+     */
     public String encode() {
         return this.taskKind().shortName + " , " + this.isDone + " , " + this.taskName +
                 " , " + Optional.ofNullable(this.date).map(date -> date.format(dtf)).orElse("null");
     }
 
+    /**
+     * Decode the code in hard-drive
+     *
+     * @param hardCode
+     * @return Task
+     */
     public static Task decode(String hardCode) {
         String[] parts = hardCode.split(" , ");
 
@@ -226,10 +276,18 @@ public abstract class Task {
         return null;
     }
 
+    /**
+     * Make the task done
+     */
     public void done() {
         this.isDone = true;
     };
 
+    /**
+     * Add task into memory
+     *
+     * @throws IOException
+     */
     public void add() throws IOException {
         Duke.todoList.add(this);
     }
