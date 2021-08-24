@@ -124,6 +124,7 @@ public class Duke {
                         } else {
                             String[] parts = str.split(" /by ");
                             newTask = new Deadline(parts[0].replace("deadline " , ""), parts[1]);
+
                         }
                     } else if (str.contains("event")) {
                         if (!str.contains("/at")) {

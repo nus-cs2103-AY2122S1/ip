@@ -1,3 +1,2 @@
-1.[T][X] run
-2.[E][ ] meeting (at: Dec 31 2020 9:00PM)
-3.[D][ ] homework (by: Dec 31 2020 11:59PM)
+1.[T][ ] run
+2.[D][ ] deadline (by: Dec 31 2020 11:59PM)
