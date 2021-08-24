@@ -6,6 +6,11 @@ public abstract class Task {
     private final String message;
     private Boolean completed;
 
+    public Task(String message){
+        this.message = message;
+        this.completed = false;
+    }
+
     /**
      * Factory method for a Task
      *
@@ -62,11 +67,6 @@ public abstract class Task {
             task.doTask();
         }
         return task;
-    }
-
-    public Task(String message){
-        this.message = message;
-        this.completed = false;
     }
 
     /**

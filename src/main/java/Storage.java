@@ -51,7 +51,7 @@ public class Storage {
      * Stores the given TaskList into filePath.
      *
      * @param taskList the current TaskList
-     * @throws IOException if there is an error writing to the file
+     * @throws IOException if there is an error writing to the fileIO
      */
     public void save(TaskList taskList) throws IOException {
         ArrayList<Task> allTasks = taskList.getTaskList();
