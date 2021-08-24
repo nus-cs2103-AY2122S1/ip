@@ -2,11 +2,11 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Data {
+public class Storage {
     private final String filePath;
     private final File file;
 
-    public Data(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
     }
@@ -49,9 +49,10 @@ public class Data {
         return records;
     }
 
-    public void writeToFile(ArrayList<Task> records) throws IOException {
+    public void writeToFile(TaskList tasks) throws IOException {
         StringBuilder textToAdd = new StringBuilder();
-        for (Task task : records) {
+        for (int i = 0; i < tasks.length(); i++) {
+            Task task = tasks.getTask(i);
             textToAdd.append(task.toFileEntry());
             textToAdd.append("\n");
         }
