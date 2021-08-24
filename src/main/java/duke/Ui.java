@@ -1,8 +1,14 @@
 package duke;
 
+/**
+ * Class handles printing message to user
+ */
 public class Ui {
     public Ui() {}
 
+    /**
+     * Print the line
+     */
     public static void printLine() {
         System.out.println("--------------------------------------------------");
     }
@@ -17,14 +23,13 @@ public class Ui {
         printLine();
     }
 
-    public static void printHello() {
-        System.out.println("Hello! I'm Duke.Duke\nWhat can I do for you?");
-        printLine();
-    }
-
+    /**
+     * Print the welcome message
+     */
     public static void printWelcome() {
         Ui.printLine();
-        Ui.printHello();
+        System.out.println("Hello! I'm Duke.Duke\nWhat can I do for you?");
+        printLine();
     }
 
 }

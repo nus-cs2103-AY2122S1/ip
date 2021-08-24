@@ -147,6 +147,10 @@ public abstract class Command {
             }
         }
     }
+
+    /**
+     * Handling different commands
+     */
     protected static final Command NOTHING = new Nothing();
     protected static final Command BYE = new Bye();
     protected static final Command LIST = new List();
@@ -220,6 +224,11 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Analyze the first part of the user's command to determine the type of command
+     *
+     * @param command
+     */
     private static void analyze(String command) {
         String[] parts = command.split(" ", 2);
 
@@ -232,5 +241,8 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Execute the commands
+     */
     protected abstract void execute();
 }

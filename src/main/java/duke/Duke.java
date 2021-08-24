@@ -8,6 +8,11 @@ public class Duke {
     protected static List<Task> todoList;
     protected Storage storage;
 
+    /**
+     * Generate new Duke
+     *
+     * @param filePath path to store data
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         todoList = new ArrayList<>();
@@ -20,11 +25,17 @@ public class Duke {
         }
     }
 
+    /**
+     * Print Welcome message and process user's command
+     */
     public void run() {
-        Ui.printHello();
+        Ui.printWelcome();
         Command.process();
     }
 
+    /**
+     * Updating user's data into hard-drive
+     */
     public void finish() {
         try {
             this.storage.upload();

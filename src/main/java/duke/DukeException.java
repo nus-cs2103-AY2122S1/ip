@@ -1,6 +1,9 @@
 package duke;
 
 public class DukeException extends Exception{
+    /**
+     * Class handles if the task is empty
+     */
     protected static class DukeEmptyTask extends DukeException {
         private Task.TaskKind t;
 
@@ -15,6 +18,9 @@ public class DukeException extends Exception{
         }
     }
 
+    /**
+     * Class handles if the task Deadline or Event doesn't specify the date
+     */
     protected static class DukeEmptyNote extends DukeException {
         private Task.TaskKind t;
 
