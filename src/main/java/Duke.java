@@ -31,7 +31,7 @@ public class Duke {
             String input = scanner.nextLine();
             // Ensures that all bye would end the program.
             try {
-                run = taskManager.executeCommand(input);
+                run = taskManager.executeCommand(input, true, false);
             } catch (IncompleteCommandException e) {
                 System.out.println(e);
             }

@@ -1,3 +1,12 @@
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.*;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +17,37 @@ public class TaskManager {
     private final List<Task> taskList = new ArrayList<>();
 
     public TaskManager() {
-
+        try {
+            File txtDataFile;
+//            System.out.println(System.getProperty("user.dir"));
+            String dirPath = System.getProperty("user.dir") + "\\src\\main\\data";
+            if (Files.notExists(Path.of(dirPath))) {
+                Files.createDirectories(Path.of(dirPath));
+            }
+            String path = dirPath + "\\dukeData.json";
+            txtDataFile = new File(path);
+            if (!txtDataFile.exists()) {
+                System.out.println("No stored data! Starting a brand new state!");
+                txtDataFile = new File(path);
+                txtDataFile.createNewFile();
+            } else {
+                // file exist, read the file.
+                readJson("dukeData.json");
+//                System.out.println("Loading tasks from files...");
+//                BufferedReader br = new BufferedReader(new FileReader(txtDataFile));
+////                System.out.println("Reading stored data...");
+//                String txtline;
+//                while ((txtline = br.readLine()) != null) {
+////                    System.out.println("Reading from dukeData...");
+//                    String[] stringArr = txtline.split("\\|");
+//                    boolean marked = stringArr[0].equals("1");
+//                    executeCommand(stringArr[1], false, marked);
+//                }
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     public void addTask(Task task) {
@@ -47,10 +86,98 @@ public class TaskManager {
         return taskList.size();
     }
 
-    public boolean executeCommand(String input) throws IncompleteCommandException {
+    @SuppressWarnings("unchecked")
+    public void readJson(String fileName) {
+        //JSON parser object to parse read file
+        JSONParser jsonParser = new JSONParser();
+        String dirPath = System.getProperty("user.dir") + "\\src\\main\\data";
+        try (FileReader reader = new FileReader(dirPath + "\\" + fileName))
+        {
+            //Read JSON file
+            Object obj = jsonParser.parse(reader);
+
+            JSONArray taskArr = (JSONArray) obj;
+
+            //Iterate over task array
+            taskArr.forEach( task -> taskList.add(parseTaskObject( (JSONObject) task ) ) );
+
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private Task parseTaskObject(JSONObject task)
+    {
+        //Get task object within list
+        JSONObject taskObject = (JSONObject) task.get("task");
+
+        String value = (String) taskObject.get("value");
+        boolean done = (boolean) taskObject.get("done");
+        String time = (String) taskObject.get("time");
+        String type = (String) taskObject.get("type");
+        type = type.toUpperCase();
+        Task newTask = new Task("");
+
+        if (type.equals(CommandList.TODO.toString())) {
+            newTask = new Todo(value);
+        } else if (type.equals(CommandList.DEADLINE.toString())) {
+            newTask = new Deadline(value, time);
+        } else if (type.equals(CommandList.EVENT.toString())) {
+            newTask = new Event(value, time);
+        }
+
+        if (done) {
+            newTask.markDone();
+        }
+        return newTask;
+    }
+
+    @SuppressWarnings("unchecked")
+    public void saveData() {
+        String dirPath = System.getProperty("user.dir") + "\\src\\main\\data\\dukeData.json";
+        File savedData = new File(dirPath);
+
+        //Add employees to list
+        JSONArray jsonTaskList = new JSONArray();
+
+
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currTask = taskList.get(i);
+            JSONObject TaskDetails = new JSONObject();
+            String type = currTask.getClass().getName().toUpperCase();
+            TaskDetails.put("type", type);
+            TaskDetails.put("value", currTask.getValue());
+            TaskDetails.put("time", currTask.getTime());
+            TaskDetails.put("done", currTask.getDone());
+
+            JSONObject taskObj = new JSONObject();
+            taskObj.put("task", TaskDetails);
+            jsonTaskList.add(taskObj);
+        }
+
+        try {
+            savedData.delete();
+            savedData.createNewFile();
+        } catch (Exception e) {
+            System.out.println("An error occurred");
+        }
+
+        //Write JSON file
+        try (FileWriter file = new FileWriter(dirPath)) {
+            //We can write any JSONArray or JSONObject instance to the file
+            file.write(jsonTaskList.toJSONString());
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean executeCommand(String input, boolean printStatement, boolean done) throws IncompleteCommandException {
         boolean run = true;
         if (input.toUpperCase().equals(CommandList.BYE.toString())) {
             System.out.println("Bye. Hope to see you again soon!");
+            saveData();
             run = false;
         } else if (input.toUpperCase().equals(CommandList.LIST.toString())) {
             listAll();
@@ -87,19 +214,15 @@ public class TaskManager {
                 throw new IncompleteCommandException("Please enter the task number after done! E.g \"done 2\"");
             }
         } else {
-
             Task newTask = null;
             if (input.toUpperCase().contains(CommandList.TODO.toString())) {
-
                 if (input.length() > 5) {
                     String taskMessage = input.substring(5);
                     newTask = new Todo(taskMessage.strip());
                 } else {
                     throw new IncompleteCommandException("OOPS!!! The description of a todo cannot be empty.");
                 }
-
             } else if (input.toUpperCase().contains(CommandList.DEADLINE.toString())) {
-
                 if (input.length() > 8) {
                     if (input.contains("/by")) {
                         String[] stringArr = input.substring(9).split("/by");
@@ -110,10 +233,7 @@ public class TaskManager {
                 } else {
                     throw new IncompleteCommandException("OOPS!!! The description of a deadline cannot be empty.");
                 }
-
-
             } else if (input.toUpperCase().contains(CommandList.EVENT.toString())) {
-
                 if (input.length() > 5) {
                     if (input.contains("/at")) {
                         String[] stringArr = input.substring(6).split("/at");
@@ -126,10 +246,16 @@ public class TaskManager {
                 }
             }
             if (newTask != null) {
-                System.out.println("Got it. I've added this task.");
+                if (done) {
+                    newTask.markDone();
+                }
                 addTask(newTask);
-                System.out.println(newTask);
-                System.out.println("Now you have " + getTotalNumberOfTask() + " tasks in the list.");
+                if (printStatement) {
+                    System.out.println("Got it. I've added this task.");
+                    System.out.println(newTask);
+                    System.out.println("Now you have " + getTotalNumberOfTask() + " tasks in the list.");
+                }
+
             } else {
                 System.out.println("Invalid command!");
                 System.out.println("Try TODO, DEADLINE or EVENT follow by task description.");

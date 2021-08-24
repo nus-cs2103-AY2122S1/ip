@@ -9,6 +9,14 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getTime() {
+        return "";
+    }
+
+    public boolean getDone() {
+        return isDone;
+    }
+
     /**
      * Getting the information of the task.
      * @return Information of the task.
