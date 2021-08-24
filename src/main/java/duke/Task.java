@@ -28,8 +28,9 @@ public class Task {
 
     /**
      * Constructor for duke.Task object, takes in taskDescription string.`
+     *
      * @param taskDescription Description of the task.
-    */
+     */
     protected Task(String taskDescription) {
         this.taskDescription = taskDescription;
         this.isDone = false;
@@ -44,6 +45,7 @@ public class Task {
 
     /**
      * Returns a string representing the completion status of the task.
+     *
      * @return A string representing task status.
      */
     public String getStatusIcon() {
@@ -52,6 +54,7 @@ public class Task {
 
     /**
      * Returns string representation of duke.Task object.
+     *
      * @return String representation of duke.Task.
      */
     @Override

@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
  * todos, deadlines and events.
  */
 public class Duke {
-
     private final static String DATABASE_PATH = "data/duke.txt";
     private TaskList tasks;
     private final static Pattern DATE_PATTERN = Pattern.compile("^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3])[0-5][0-9]$");
@@ -20,6 +19,7 @@ public class Duke {
     /**
      * Returns a <code>Duke</code> object that can reply to
      * commands. Duke can save the tasks at the specified <code>filePath</code>.
+     *
      * @param filePath The file path where Duke will save the tasks.
      */
     public Duke(String filePath) {
@@ -86,7 +86,6 @@ public class Duke {
      *
      * @throws DukeException Thrown whenever user requests delete of a
      * task out of range or not a number. eg. <code>delete hi</code>
-
      */
     public void deleteTask() throws DukeException {
         try {
@@ -153,10 +152,8 @@ public class Duke {
 
     /**
      * Method for duke.Duke to mark a task done.
-     *
      * @throws DukeException Thrown when user gives an index out of range
      * or not a number after the command done.
-
      */
     private void markDone() throws DukeException {
         try {
@@ -179,7 +176,6 @@ public class Duke {
      * @param command The command to be converted.
      * @return The TaskType enum of the task.
      */
-
     public static Task.TaskType convertToTaskType(String command) {
         if (command.equals("todo")) {
             return Task.TaskType.TODO;

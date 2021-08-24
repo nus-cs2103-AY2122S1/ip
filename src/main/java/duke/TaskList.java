@@ -27,6 +27,7 @@ public class TaskList {
 
     /**
      * Factory method to create a duke.TaskList.
+     *
      * @return A new duke.TaskList.
      */
     public static TaskList createTaskList() {
@@ -35,6 +36,7 @@ public class TaskList {
 
     /**
      * Adds a new todo to the list
+     *
      * @param task The task description to be added.
      *
      */
@@ -44,19 +46,20 @@ public class TaskList {
     }
 
     public void addTask(String task, Task.TaskType type, LocalDate ld, String time) {
-        switch(type) {
-            case EVENT:
-                this.tasks.add(new Event(task, ld, time));
-                break;
-            case DEADLINE:
-                this.tasks.add(new Deadline(task, ld, time));
-                break;
+        switch (type) {
+        case EVENT:
+            this.tasks.add(new Event(task, ld, time));
+            break;
+        case DEADLINE:
+            this.tasks.add(new Deadline(task, ld, time));
+            break;
         }
         this.taskIndex++;
     }
 
     /**
      * Deletes a task.
+     *
      * @param taskIndex Index from list to delete task.
      */
     public void deleteTask(int taskIndex) {
@@ -79,6 +82,7 @@ public class TaskList {
 
     /**
      * Marks a task as done.
+     *
      * @param taskIndex The index of the task.
      */
     public void markTaskDone(int taskIndex) {
@@ -88,6 +92,7 @@ public class TaskList {
 
     /**
      * Returns task from the list using the index.
+     *
      * @param index Index of the task on the list.
      * @return Returns task.
      */
@@ -97,6 +102,7 @@ public class TaskList {
 
     /**
      * Returns the length of the current task list.
+     *
      * @return Length of tasks.
      */
     public int getTasksLength() {

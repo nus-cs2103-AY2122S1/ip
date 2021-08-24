@@ -9,6 +9,7 @@ public class Parser {
 
     /**
      * Method to split the command into a <code>String</code> array.
+     *
      * @param command The command to be split.
      */
     public void interpretCommand(String command) {
@@ -17,6 +18,7 @@ public class Parser {
 
     /**
      * Method to obtain the main command in the whole command.
+     *
      * eg. <code>≈done 5</code> -> returns "done".
      * eg. <code>deadline hw /by 2000-10-10 1000</code> -> returns "deadline"
      * @return The first command.
@@ -27,6 +29,7 @@ public class Parser {
 
     /**
      * Finds the index of the command.
+     *
      * eg. <code>done 5</code> -> returns 5
      * eg. <code>delete 3</code> -> returns 3
      * @return The command index.
@@ -43,6 +46,7 @@ public class Parser {
 
     /**
      * Finds the date in the command if command is deadline or event.
+     *
      * @return The date in the command (if any).
      */
     public String findDateInCommand() {
@@ -74,6 +78,7 @@ public class Parser {
 
     /**
      * Finds the task description in the command list.
+     *
      * @return The description of the task.
      */
     public String findTaskDescription() {
