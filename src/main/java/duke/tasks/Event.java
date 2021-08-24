@@ -9,8 +9,8 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy' 'HHmm");
     private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mma");
-
     private LocalDateTime timeInfo;
+
     public Event(String taskDetails, String timeInfoString) throws InvalidTimeStampException {
         super(taskDetails);
         try {

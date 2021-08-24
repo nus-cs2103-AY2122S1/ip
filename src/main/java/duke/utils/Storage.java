@@ -1,11 +1,11 @@
 package duke.utils;
 
 import duke.exceptions.DukeException;
-import duke.tasks.Task;
-import duke.tasks.Deadline;
-import duke.tasks.Todo;
-import duke.tasks.Event;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,11 +23,11 @@ public class Storage {
     }
 
     public List<Task> load() throws DukeException {
-        String dirName = this.filePath.split("/duke.txt")[0];
+        String dirName = filePath.split("/duke.txt")[0];
         File dir = new File(dirName);
         dir.mkdir();
 
-        File data = new File(this.filePath);
+        File data = new File(filePath);
         List<Task> tasks = new ArrayList<>();
 
         try {
@@ -39,6 +39,7 @@ public class Storage {
                 if (info.length == 1) {
                     continue;
                 }
+
                 String command = info[0];
                 Task task = null;
                 boolean done = info[1].equals("1");
@@ -49,6 +50,7 @@ public class Storage {
                 } else if (command.equals("E")) {
                     task = new Event(info[2], info[3]);
                 }
+
                 if (task != null) {
                     if (done) {
                         task.markDone();
@@ -64,9 +66,8 @@ public class Storage {
     }
 
     public void save(TaskList tasks) {
-        // TODO
         String data = tasks.getData();
-        try (PrintWriter out = new PrintWriter(this.filePath)) {
+        try (PrintWriter out = new PrintWriter(filePath)) {
             out.println(data);
             out.close();
         } catch (IOException e) {

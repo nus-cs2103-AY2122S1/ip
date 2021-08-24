@@ -1,11 +1,13 @@
 package duke.commands;
 
 import duke.tasks.Task;
+
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
 public abstract class AddTaskCommand extends Command {
+
     private Task task;
 
     public AddTaskCommand(Task task) {
@@ -26,6 +28,6 @@ public abstract class AddTaskCommand extends Command {
 
     @Override
     public String toString() {
-        return String.format("TO ADD: %s", this.task);
+        return String.format("TO ADD: %s", task);
     }
 }

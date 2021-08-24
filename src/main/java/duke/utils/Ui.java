@@ -10,10 +10,6 @@ public class Ui {
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String TAB = " ".repeat(4);
 
-    public Ui() {
-
-    }
-
     public void showWelcome() {
         printOut(WELCOME_MESSAGE);
     }

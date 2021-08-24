@@ -1,4 +1,5 @@
 package duke.tasks;
+
 import duke.exceptions.InvalidTimeStampException;
 
 import java.time.LocalDateTime;
@@ -7,10 +8,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
+
     private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy' 'HHmm");
     private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mma");
-
     private LocalDateTime timeInfo;
+
     public Deadline(String taskDetails, String timeInfoString) throws InvalidTimeStampException {
         super(taskDetails);
         try {

@@ -1,7 +1,9 @@
 package duke.utils;
 
 import duke.exceptions.InvalidTaskNumberException;
+
 import duke.tasks.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +19,10 @@ public class TaskList {
     }
 
     private Task getTask(int i) throws InvalidTaskNumberException {
-        if (i == 0 || i > this.tasks.size()) {
-            throw new InvalidTaskNumberException(this.tasks.size());
+        if (i == 0 || i > tasks.size()) {
+            throw new InvalidTaskNumberException(tasks.size());
         } else {
-            return this.tasks.get(i - 1);
+            return tasks.get(i - 1);
         }
     }
 
@@ -29,17 +31,17 @@ public class TaskList {
     }
 
     public void addTask(Task task) {
-        this.tasks.add(task);
+        tasks.add(task);
     }
 
     public String[] deleteTask(int i) throws InvalidTaskNumberException {
-        Task task = this.getTask(i);
-        boolean removed = this.tasks.remove(task);
+        Task task = getTask(i);
+        boolean removed = tasks.remove(task);
         return new String[] {"I have deleted this task:","    " + task.toString()};
     }
 
     public String[] markDone(int i) throws InvalidTaskNumberException {
-        Task task = this.getTask(i);
+        Task task = getTask(i);
         boolean marked = task.markDone();
         if (marked) {
             return new String[] {"Nice! I've marked this task as done:", "    " + task.toString()};
@@ -53,6 +55,7 @@ public class TaskList {
         for (Task task : tasks) {
             data.append(task.toDataString()).append("\n");
         }
+
         if (data.length() > 0) {
             return data.toString().substring(0, data.length() - 1);
         } else {
@@ -65,12 +68,12 @@ public class TaskList {
     }
 
     private String[] toStrings() {
-        if (this.tasks.size() == 0) {
+        if (tasks.size() == 0) {
             return new String[] {"No tasks added yet!"};
         } else {
-            String[] messages = new String[this.tasks.size()];
+            String[] messages = new String[tasks.size()];
             int i = 0;
-            for (Task task : this.tasks) {
+            for (Task task : tasks) {
                 messages[i] = String.format("%d. %s", ++i, task.toString());
             }
             return messages;

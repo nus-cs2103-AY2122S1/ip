@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.InvalidTaskNumberException;
+
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
@@ -13,13 +14,13 @@ public class MarkDoneCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskNumberException {
-        String[] messages = tasks.markDone(this.taskNumber);
+        String[] messages = tasks.markDone(taskNumber);
         ui.printOut(messages);
         storage.save(tasks);
     }
 
     @Override
     public String toString() {
-        return String.format("TO MARK DONE: index %d", this.taskNumber);
+        return String.format("TO MARK DONE: index %d", taskNumber);
     }
 }
