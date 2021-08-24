@@ -1,8 +1,0 @@
-T | 1 | this and them
-T | 0 | this
-T | 0 | this and that
-T | 0 | this and them
-D | 0 | this  | then
-E | 0 | this  | then
-T | 0 | that
-T | 0 | this
