@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,9 +38,14 @@ public class Duke {
             case DEADLINE: {
                 if (description.contains("/by")) {
                     String[] information = description.split("/by ");
-                    Task task = new Deadline(information[0], information[1]);
-                    Duke.addTask(task);
-                    printAddedTask(task);
+                    try {
+                        Task task = new Deadline(information[0], LocalDate.parse(information[1]));
+                        Duke.addTask(task);
+                        printAddedTask(task);
+                    } catch (DateTimeParseException e) {
+                        Message errorMessage = new Message("\tPlease use the YYYY-MM-DD format for the time!");
+                        errorMessage.printMessage();
+                    }
                 } else {
                     throw new CommandNotUsedException("/by");
                 }
@@ -47,9 +54,14 @@ public class Duke {
             case EVENT: {
                 if (description.contains("/at")) {
                     String[] information = description.split("/at ");
-                    Task task = new Event(information[0], information[1]);
-                    Duke.addTask(task);
-                    printAddedTask(task);
+                    try {
+                        Task task = new Event(information[0], LocalDate.parse(information[1]));
+                        Duke.addTask(task);
+                        printAddedTask(task);
+                    } catch (DateTimeParseException e) {
+                        Message errorMessage = new Message("\tPlease use the YYYY-MM-DD format for the time!");
+                        errorMessage.printMessage();
+                    }
                 } else {
                     throw new CommandNotUsedException("/at");
                 }
@@ -71,6 +83,40 @@ public class Duke {
             for (int i = 0; i < tasks.size(); i++) {
                 itemList.append("\t\t").append(i + 1).append(". ").append(tasks.get(i));
                 if (i < tasks.size() - 1) {
+                    itemList.append("\n");
+                }
+            }
+        }
+
+        return new Message(itemList.toString());
+    }
+
+    public static Message printList(LocalDate date) {
+        ArrayList<Task> targetTasks = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                if (deadline.timeDue.equals(date)) {
+                    targetTasks.add(task);
+                }
+            }
+            if (task instanceof Event) {
+                Event deadline = (Event) task;
+                if (deadline.timeStart.equals(date)) {
+                    targetTasks.add(task);
+                }
+            }
+        }
+
+        StringBuilder itemList = new StringBuilder("\tHere is the result:\n");
+
+        if (targetTasks.size() == 0) {
+            itemList.append("\tNothing special will happen on this day");
+        } else {
+            for (int i = 0; i < targetTasks.size(); i++) {
+                itemList.append("\t\t").append(i + 1).append(". ").append(targetTasks.get(i));
+                if (i < targetTasks.size() - 1) {
                     itemList.append("\n");
                 }
             }
@@ -138,6 +184,14 @@ public class Duke {
                         doneMessage.printMessage();
                     } else {
                         throw new IndexMismatchException();
+                    }
+                    return;
+                }
+                case "query": {
+                    try {
+                        Duke.printList(LocalDate.parse(description)).printMessage();
+                    } catch (DateTimeParseException e) {
+                        throw new InvalidCommandException();
                     }
                     return;
                 }
