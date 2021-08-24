@@ -32,6 +32,15 @@ public class Task {
     }
 
     /**
+     * Checks whether the Task description matches a given String.
+     * @param regex The regular expression String to match.
+     * @return Boolean representing whether Task matches String.
+     */
+    public boolean descriptionMatches(String regex) {
+        return this.description.matches(String.format("(.*)%s(.*)", regex));
+    }
+
+    /**
      * Gets the String icon that represents the status of the task.
      * @return The String icon.
      */

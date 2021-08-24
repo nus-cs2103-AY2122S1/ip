@@ -30,22 +30,24 @@ public abstract class Request {
         Command command = Command.parseFrom(commandString);
 
         switch (command) {
-            case BYE:
-                return new ByeRequest();
+        case BYE:
+            return new ByeRequest();
 
-            case DONE:
-                return new DoneRequest(taskCollection, commandInput);
-            case DELETE:
-                return new DeleteRequest(taskCollection, commandInput);
-            case LIST:
-                return new ListRequest(taskCollection);
+        case DONE:
+            return new DoneRequest(taskCollection, commandInput);
+        case DELETE:
+            return new DeleteRequest(taskCollection, commandInput);
+        case LIST:
+            return new ListRequest(taskCollection);
+        case FIND:
+            return new FindRequest(taskCollection, commandInput);
 
-            case DEADLINE:
-                return new DeadlineRequest(taskCollection, commandInput);
-            case EVENT:
-                return new EventRequest(taskCollection, commandInput);
-            case TODO:
-                return new ToDoRequest(taskCollection, commandInput);
+        case DEADLINE:
+            return new DeadlineRequest(taskCollection, commandInput);
+        case EVENT:
+            return new EventRequest(taskCollection, commandInput);
+        case TODO:
+            return new ToDoRequest(taskCollection, commandInput);
         }
 
         throw new RuntimeException(String.format(

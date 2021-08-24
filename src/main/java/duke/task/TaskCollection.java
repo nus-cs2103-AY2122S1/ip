@@ -47,6 +47,21 @@ public class TaskCollection {
     }
 
     /**
+     * Gets a List of Tasks that matches the given regex String.
+     * @param regex The regex String to match with
+     * @return The List of matching Tasks
+     */
+    public List<Task> findTasks(String regex) {
+        List<Task> matchedTasks = new ArrayList<>();
+        for (Task task : this.tasks) {
+            if (task.descriptionMatches(regex)) {
+                matchedTasks.add(task);
+            }
+        }
+        return matchedTasks;
+    }
+
+    /**
      * Parse a String of Tasks into a List.
      * @param string The input String of Tasks
      * @return The List of Tasks
