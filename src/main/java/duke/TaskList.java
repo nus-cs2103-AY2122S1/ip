@@ -141,6 +141,10 @@ public class TaskList {
         System.out.println("Now you have " + lst.size() + " tasks in the list.");
     }
 
+    /**
+     * method for users to conduct a search for a word in a task list
+     * @param keyword
+     */
     public void find(String keyword){
         ArrayList<Task> temp = new ArrayList<>(this.getList());
         temp.removeIf(x -> !(x.toString().contains(keyword)));
