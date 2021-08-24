@@ -1,3 +1,6 @@
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -70,10 +73,17 @@ public class Duke {
      * @return A Deadline object.
      */
     public static Deadline deadlineCommand(String input) {
-        int slashPosition = input.indexOf('/');
-        String description = input.substring("deadline".length() + 1, slashPosition);
-        String by = input.substring(slashPosition + 4);
-        return new Deadline(description, by);
+        try {
+            int slashPosition = input.indexOf('/');
+            String description = input.substring("deadline".length() + 1, slashPosition);
+            String by = input.substring(slashPosition + 4);
+            String[] splitStr = by.split("\\s+");
+            return new Deadline(description, timeFormatter(splitStr[1]), dateFormatter(splitStr[0]));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Your date and time is wrongly formatted. It should be in the form of" +
+                    " dd-mm-yyyy hhmm");
+        }
+
     }
 
     /**
@@ -82,11 +92,17 @@ public class Duke {
      * @param input input given by the user starting with "event" and the corresponding event item.
      * @return A Event object.
      */
-    public static Event eventCommand(String input) {
-        int slashPosition = input.indexOf('/');
-        String description = input.substring("event".length() + 1, slashPosition);
-        String at = input.substring(slashPosition + 4);
-        return new Event(description, at);
+    public static Event eventCommand(String input) throws DukeException {
+        try {
+            int slashPosition = input.indexOf('/');
+            String description = input.substring("event".length() + 1, slashPosition);
+            String at = input.substring(slashPosition + 4);
+            String[] splitStr = at.split("\\s+");
+            return new Event(description, timeFormatter(splitStr[1]), dateFormatter(splitStr[0]));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Your date and time is wrongly formatted. It should be in the form of" +
+                    "dd-mm-yyyy hhmm.");
+        }
     }
 
     /**
@@ -107,6 +123,25 @@ public class Duke {
         lineGenerator();
         System.out.println("Bye. Hope to see you again soon!");
         lineGenerator();
+    }
+
+    public static LocalDate dateFormatter(String str) throws DukeException {
+        try {
+            String[] splitStr = str.split("/");
+            String day = String.format("%1$" + 2 + "s", splitStr[0]).replace(' ', '0');
+            String month = String.format("%1$" + 2 + "s", splitStr[1]).replace(' ', '0');
+            return LocalDate.parse(splitStr[2] + "-" +  month + "-" + day);
+        } catch (Exception e) {
+            throw new DukeException("Your Date is wrongly formatted! It should be in the form of dd-mm-yyyy.");
+        }
+    }
+
+    public static LocalTime timeFormatter(String str) throws DukeException {
+        try {
+            return LocalTime.parse(str.substring(0, 2) + ":" + str.substring(2));
+        } catch (Exception e) {
+            throw new DukeException("Your Time is wrongly formatted! It should be ineve the form of hhmm.");
+        }
     }
 
     /** Start of the program */
