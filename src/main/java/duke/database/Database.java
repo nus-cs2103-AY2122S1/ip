@@ -91,6 +91,14 @@ public abstract class Database {
     public abstract Task markCompleted(int index);
 
     /**
+     * Finds tasks by searching for a keyword/phrase.
+     * 
+     * @param pattern keyword/phrase to be searched
+     * @return a list of tasks satisfying the condition mentioned above
+     */
+    public abstract List<Task> findTasksByName(String pattern);
+
+    /**
      * Recreate a task based on provided information. Used when retrieving task from
      * SQL database.
      * 

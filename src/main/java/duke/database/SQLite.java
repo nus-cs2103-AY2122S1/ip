@@ -150,4 +150,26 @@ public class SQLite extends Database {
         return result;
     }
 
+    @Override
+    public List<Task> findTasksByName(String pattern) {
+        List<Task> list = new ArrayList<>();
+        try {
+            this.connection = getSQLConnection();
+            PreparedStatement ps = connection
+                    .prepareStatement("SELECT * FROM " + TASK_TABLE_NAME + " WHERE name LIKE " + pattern + ";");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                TaskType type = TaskType.valueOf(rs.getString("type"));
+                String name = rs.getString("name");
+                boolean completed = rs.getBoolean("completed");
+                String date = rs.getString("date");
+                list.add(this.createTask(type, name, completed, date));
+            }
+            close(ps);
+        } catch (SQLException ex) {
+            throw new DatabaseAccessException("Unable to access SQLite database...");
+        }
+        return list;
+    }
+
 }
