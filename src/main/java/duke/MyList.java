@@ -93,6 +93,11 @@ public class MyList {
         }
     }
 
+    /**
+     * Method to find all tasks with a description containing the keyword.
+     * Not case-sensitive.
+     * @param keyword The keyword to be looking for.
+     */
     public void find(String keyword) {
         int counter = 0;
         Task[] matchingList = new Task[getListSize()];

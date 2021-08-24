@@ -186,6 +186,10 @@ public class Ui {
         System.out.println("You didn't overshoot the deadline right?");
     }
 
+    /**
+     * Method to print out the number of matching tasks.
+     * @param counter The number of matching tasks.
+     */
     public static void containsKeyword(int counter) {
         if (counter > 0) {
             if (counter == 1) {
@@ -199,9 +203,13 @@ public class Ui {
 
     }
 
+    /**
+     * Method to print out the string representations of all the matching tasks.
+     * @param matchingList The array containing the matching tasks.
+     */
     public static void containsKeywordTask(Task[] matchingList) {
         int noOfItems = matchingList.length;
-        
+
         for (int i = 0; i < noOfItems; i++) {
             if (matchingList[i] != null) {
                 Task matchingTask = matchingList[i];
@@ -211,6 +219,9 @@ public class Ui {
 
     }
 
+    /**
+     * Method to inform the user that he has not input a keyword after the find command.
+     */
     public static void noKeywordSpecifiedMessage() {
         System.out.println("No keyword specified. Please try again");
     }
