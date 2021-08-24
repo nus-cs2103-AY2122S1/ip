@@ -1,44 +1,49 @@
 package tasks;
 
 /**
- * The tasks.ToDoTask class is a child class for tasks.Task
+ * The DeadlineTask Class inherits Task Class
  * to support different specificities of a task
- * as input by user
+ * as per input by user.
  */
-public final class ToDoTask extends Task {
+public final class ToDoTask extends Task{
 
-  /**
-   * The String to store the type of task information
-   * that identifies a ToDo task
-   */
-  private final String type = "[T]";
+    /**
+     * Stores the type of task information
+     * that identifies a ToDoTask.
+     */
+    private final String TYPE = "[T]";
 
-  /**
-   * Constructor for a ToDo task
-   *
-   * @param s the input string to describe the ToDO task
-   */
-  public ToDoTask(String s) {
-    super(s);
-  }
-
-  /**
-   * To retrieve the information on the type of tasks.Task
-   *
-   * @return the String description of the type of tasks.Task
-   */
-  @Override
-  public String getType() {
-    return this.type;
-  }
-
-  @Override
-  public String getSaveFormat() {
-    if (super.getStatus().equals("[ ]")) {
-      return "T" + "|" + this.getTask().strip() + "|" + 0;
-    } else {
-      return "T" + "|" + this.getTask().strip() + "|" + 1;
+    /**
+     * Constructs a ToDoTask.
+     *
+     * @param s the input string to describe the task
+     */
+    public ToDoTask(String s) {
+        super(s);
     }
-  }
+
+    /**
+     * Retrieves the information of the type of task.
+     *
+     * @return the String description of the type of task
+     */
+    @Override
+    public String getType() {
+      return this.TYPE;
+    }
+
+    /**
+     * Retrieves the information on the format of the task to be saved.
+     *
+     * @return the String representation of how the task will be saved
+     */
+    @Override
+    public String getSaveFormat() {
+        if (super.getStatus().equals("[ ]")) {
+            return "T" + "|" + this.getTask().strip() + "|" + 0;
+        } else {
+            return "T" + "|" + this.getTask().strip() + "|" + 1;
+        }
+    }
 }
 
