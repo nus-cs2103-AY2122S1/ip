@@ -1,21 +1,34 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-public class FileManager {
+class Storage {
     private String filePath;
 
-    FileManager(String filePath) {
+    Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
      * Load data from the hard disks.
      */
-    public TaskList loadData(TaskList taskList) {
+    public TaskList loadData(HashMap<LocalDate, ArrayList<Task>> dateTasks,
+                             TaskList taskList) {
         try {
             File file = new File(filePath);
             // Create a new file if it does not already exist
@@ -26,9 +39,10 @@ public class FileManager {
                 char type = task.charAt(1);
                 boolean isCompleted = task.charAt(4) == 'X';
 
+                DateTimeManager manager = new DateTimeManager(DateTimeFormatter.ISO_DATE);
                 String description = parseDescription(task);
                 Task newTask;
-                String time;
+                LocalDate time;
                 switch (type) {
                 case 'T':
                     newTask = new ToDo(description);
@@ -38,14 +52,16 @@ public class FileManager {
                     time = parseTime(task, "by: ");
                     newTask = new Deadline(description, time);
                     taskList = loadTasks(newTask, taskList, isCompleted);
+                    manager.updateDateTasks(dateTasks, time, newTask);
                     break;
                 case 'E':
                     time = parseTime(task, "at: ");
                     newTask = new Event(description, time);
                     taskList = loadTasks(newTask, taskList, isCompleted);
+                    manager.updateDateTasks(dateTasks, time, newTask);
                     break;
                 default:
-                    throw new DukeException("Invalid task.");
+                    throw new DukeException("Invalid duke.task.");
                 }
                 System.out.println(task);
             }
@@ -64,13 +80,14 @@ public class FileManager {
         return taskList.add(task);
     }
 
-    private String parseTime(String task, String command) throws DukeException {
+    private LocalDate parseTime(String task, String command) throws DukeException {
         int timeIndex = task.indexOf(command);
         if (timeIndex < 0) {
-            throw new DukeException("Invalid Task");
+            throw new DukeException("Invalid duke.task.Task");
         }
-        String time = task.substring(timeIndex + command.length(),
+        String timeDescription = task.substring(timeIndex + command.length(),
                 task.indexOf(')'));
+        LocalDate time = LocalDate.parse(timeDescription);
         return time;
     }
 
@@ -111,13 +128,14 @@ public class FileManager {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line;
-            String oldContent = "";
+            String newContent = "";
             while((line = reader.readLine()) != null) {
-                oldContent += line + System.lineSeparator();
+                if (line.compareTo(toUpdate) == 0) {
+                    line = task;
+                }
+                newContent += line + System.lineSeparator();
             }
 
-            // Error here : Not replacing content
-            String newContent = oldContent.replace(toUpdate, task);
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             writer.write(newContent);
             reader.close();
