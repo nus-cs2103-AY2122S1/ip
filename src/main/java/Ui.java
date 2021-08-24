@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * This class contains some common utility methods regrading text ui.
  */
-public class CommonUtils {
+public class Ui {
     /** Text UI: horizontal line. */
     protected static final String HORIZONTAL_LINE = "  -----------------------";
     /** Text UI: indentation. */

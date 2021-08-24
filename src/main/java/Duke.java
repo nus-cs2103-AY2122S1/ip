@@ -11,9 +11,9 @@ public class Duke {
      * Receives input from the user and executes Duke's actions
      *
      * @param sc             the given scanner instance
-     * @param taskManagement the given task management instance.
+     * @param taskList the given task list instance.
      */
-    public static void run(Scanner sc, TaskManagement taskManagement) {
+    public static void run(Scanner sc, TaskList taskList) {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             int firstWordIndex = input.indexOf(" ");
@@ -23,19 +23,19 @@ public class Duke {
             try {
                 switch (action) {
                 case BYE: {
-                    CommonUtils.bye();
-                    storage.writeToTaskTxt(taskManagement.getTasks());
+                    Ui.bye();
+                    storage.writeToTaskTxt(taskList.getTasks());
                     sc.close();
                     return;
                 }
                 case LIST: {
-                    taskManagement.showTasks();
+                    taskList.showTasks();
                     break;
                 }
                 case DONE: {
                     try {
                         int taskNumber = Integer.parseInt(rest);
-                        taskManagement.markTaskAsDone(taskNumber - 1);
+                        taskList.markTaskAsDone(taskNumber - 1);
                         break;
                     } catch (NumberFormatException e) {
                         throw new DukeException("A number must be given to specified the task.");
@@ -46,8 +46,8 @@ public class Duke {
                         throw new DukeException("The description of a todo cannot be empty.");
                     }
                     Todo temp = new Todo(rest);
-                    taskManagement.addTask(temp);
-                    CommonUtils.showAddTaskMessage(temp, taskManagement.getSize());
+                    taskList.addTask(temp);
+                    Ui.showAddTaskMessage(temp, taskList.getSize());
                     break;
                 }
                 case DEADLINE: {
@@ -61,8 +61,8 @@ public class Duke {
                     String description = arr[0];
                     String detail = arr[1];
                     Deadline temp = new Deadline(description, Parser.parseDateTime(detail));
-                    taskManagement.addTask(temp);
-                    CommonUtils.showAddTaskMessage(temp, taskManagement.getSize());
+                    taskList.addTask(temp);
+                    Ui.showAddTaskMessage(temp, taskList.getSize());
                     break;
                 }
                 case EVENT: {
@@ -76,15 +76,15 @@ public class Duke {
                     String description = arr[0];
                     String detail = arr[1];
                     Event temp = new Event(description, Parser.parseDateTime(detail));
-                    taskManagement.addTask(temp);
-                    CommonUtils.showAddTaskMessage(temp, taskManagement.getSize());
+                    taskList.addTask(temp);
+                    Ui.showAddTaskMessage(temp, taskList.getSize());
                     break;
                 }
                 case DELETE: {
                     try {
                         int taskNumber = Integer.parseInt(rest);
-                        Task temp = taskManagement.removeTask(taskNumber - 1);
-                        CommonUtils.showRemoveTaskMessage(temp, taskManagement.getSize());
+                        Task temp = taskList.removeTask(taskNumber - 1);
+                        Ui.showRemoveTaskMessage(temp, taskList.getSize());
                         break;
                     } catch (NumberFormatException e) {
                         throw new DukeException("A number must be given to specified the task.");
@@ -94,19 +94,19 @@ public class Duke {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
-                CommonUtils.showMessage(e.getMessage());
+                Ui.showMessage(e.getMessage());
             }
         }
     }
 
     public static void main(String[] args) {
-        CommonUtils.greet();
+        Ui.greet();
         Scanner sc = new Scanner(System.in);
         try {
-            TaskManagement taskManagement = new TaskManagement(storage.readFromTaskTxt());
-            run(sc, taskManagement);
+            TaskList taskList = new TaskList(storage.readFromTaskTxt());
+            run(sc, taskList);
         } catch (DukeException e) {
-            CommonUtils.showMessage(e.getMessage());
+            Ui.showMessage(e.getMessage());
         } finally {
             sc.close();
         }

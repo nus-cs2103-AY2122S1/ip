@@ -1,5 +1,4 @@
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * This class represents a deadline task.
@@ -41,7 +40,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadlineTime.format(CommonUtils.dateTimeFormatter) + ")";
+        return "[D]" + super.toString() + " (by: " + deadlineTime.format(Ui.dateTimeFormatter) + ")";
     }
 
     /**

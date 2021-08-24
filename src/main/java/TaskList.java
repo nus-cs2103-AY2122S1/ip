@@ -3,23 +3,23 @@ import java.util.ArrayList;
 /**
  * This class manage all the tasks of Duke.
  */
-public class TaskManagement {
+public class TaskList {
     /** List of tasks. */
     private final ArrayList<Task> tasks;
 
     /**
-     * Constructs a TaskManagement instance.
+     * Constructs a TaskList instance.
      */
-    public TaskManagement() {
+    public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
     /**
-     * Constructs a TaskManagement instance based on the given task list.
+     * Constructs a TaskList instance based on the given task list.
      *
      * @param tasks the given task list.
      */
-    public TaskManagement(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -68,16 +68,16 @@ public class TaskManagement {
      * Prints the list of tasks.
      */
     public void showTasks() {
-        System.out.println(CommonUtils.HORIZONTAL_LINE);
-        System.out.println(CommonUtils.INDENTATION + "Here are the tasks in your list:");
+        System.out.println(Ui.HORIZONTAL_LINE);
+        System.out.println(Ui.INDENTATION + "Here are the tasks in your list:");
         if (tasks.isEmpty()) {
-            System.out.println(CommonUtils.INDENTATION + "No tasks");
+            System.out.println(Ui.INDENTATION + "No tasks");
         } else {
             for (int i = 0; i < tasks.size(); ++i) {
-                System.out.println(CommonUtils.INDENTATION + (i + 1) + ". " + tasks.get(i).toString());
+                System.out.println(Ui.INDENTATION + (i + 1) + ". " + tasks.get(i).toString());
             }
         }
-        System.out.println(CommonUtils.HORIZONTAL_LINE);
+        System.out.println(Ui.HORIZONTAL_LINE);
     }
 
     /**
@@ -93,9 +93,9 @@ public class TaskManagement {
         Task temp = tasks.get(index);
         temp.markAsDone();
         tasks.set(index, temp);
-        System.out.println(CommonUtils.HORIZONTAL_LINE);
-        System.out.println(CommonUtils.INDENTATION + "Nice! I've marked this task as done:");
-        System.out.println(CommonUtils.INDENTATION + temp.toString());
-        System.out.println(CommonUtils.HORIZONTAL_LINE);
+        System.out.println(Ui.HORIZONTAL_LINE);
+        System.out.println(Ui.INDENTATION + "Nice! I've marked this task as done:");
+        System.out.println(Ui.INDENTATION + temp.toString());
+        System.out.println(Ui.HORIZONTAL_LINE);
     }
 }
