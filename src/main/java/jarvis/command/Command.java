@@ -32,6 +32,8 @@ public abstract class Command {
             return new MarkAsDoneCommand(userInputWithoutCommandPrefix);
         case EVENT:
             return new EventCommand(userInputWithoutCommandPrefix);
+        case FIND:
+            return new FindCommand(userInputWithoutCommandPrefix);
         case TODO:
             return new TodoCommand(userInputWithoutCommandPrefix);
         default:

@@ -99,6 +99,22 @@ public class TaskList {
     }
 
     /**
+     * Gets the matching task list with tasks that contain the keyword
+     *
+     * @param keyword The search keyword
+     * @return The task list with only matching tasks
+     */
+    public TaskList getListWithKeyword(String keyword) {
+        ArrayList<Task> taskArrayList = new ArrayList<>();
+        for (Task task: taskList) {
+            if (task.toString().toLowerCase().contains(keyword)) {
+                taskArrayList.add(task);
+            }
+        }
+        return new TaskList(taskArrayList);
+    }
+
+    /**
      * The string representation of the task list
      *
      * @return The string representation of the task list
