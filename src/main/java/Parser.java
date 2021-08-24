@@ -115,11 +115,7 @@ public class Parser {
             throw new DukeException(errorMessage);
         }
 
-        int index = Integer.parseInt(command.substring(7)) - 1;
-        if (index < 0 || index > Duke.counter - 1) {
-            String errorMessage = "\t List number out of range, please enter a valid number\n";
-            throw new DukeException(errorMessage);
-        }
+        int index = Integer.parseInt(command.substring(7).replaceAll(" ", "")) - 1;
 
         return new DeleteCommand(index);
     }
@@ -131,11 +127,7 @@ public class Parser {
             throw new DukeException(errorMessage);
         }
 
-        int index = Integer.parseInt(command.substring(5)) - 1;
-        if (index < 0 || index > Duke.counter - 1) {
-            String errorMessage = "\t List number out of range, please enter a valid number\n";
-            throw new DukeException(errorMessage);
-        }
+        int index = Integer.parseInt(command.substring(5).replaceAll(" ", "")) - 1;
 
         return new DoneCommand(index);
     }
