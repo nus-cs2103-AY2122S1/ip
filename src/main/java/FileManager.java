@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileManager {
-    final private String filename;
     private File taskList;
 
     public FileManager(String filename) {
-        this.filename = filename;
         this.taskList = new File(filename);
     }
 
@@ -24,12 +22,12 @@ public class FileManager {
                     try {
                         String nextLine = fileReader.nextLine();
                         String[] splitString = nextLine.split(Task.sep);
-                        if (splitString.length < 2) {
+                        if (splitString.length < 3) {
                             throw new DukeException("Invalid input in file");
                         }
                         Task newTask = Task.makeTask(splitString[0], splitString[1]);
                         if (splitString[2].equals("1")) {
-                            newTask.markDone(false);
+                            newTask.markDone();
                         }
                         tasks.add(newTask);
                     } catch (DukeException e) {
@@ -45,19 +43,14 @@ public class FileManager {
         }
     }
 
-    public void updateTaskList(ArrayList<? extends Task> tasks) {
+    public void updateTaskList(Tasklist tasks, UI ui) {
         try {
-            FileWriter fileWriter = new FileWriter(this.taskList);
-            fileWriter.write("");
-            fileWriter.close();
-            FileWriter newfileWriter = new FileWriter(this.taskList, true);
-            for (Task task: tasks) {
-                newfileWriter.write(task.typeString() + "\n");
-            }
+            FileWriter newfileWriter = new FileWriter(this.taskList);
+            newfileWriter.write(tasks.stringSaveFile());
             newfileWriter.close();
         } catch (IOException e) {
-            System.out.println("Error in updating task list");
-            e.printStackTrace();
+            ui.showError(e);
+            //To ask ui to write?
         }
     }
 }

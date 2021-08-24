@@ -69,6 +69,6 @@ public class Event extends Task {
     public String typeString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         String formatDateTime = this.date.format(formatter);
-        return "event" + Task.sep + super.toSaveInFile("/at" + formatDateTime);
+        return "event" + Task.sep + super.toSaveInFile("/at " + formatDateTime);
     }
 }

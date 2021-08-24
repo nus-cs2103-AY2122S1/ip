@@ -28,11 +28,11 @@ public abstract class Task {
         this.description = description;
     }
 
-    public void markDone(Boolean toPrint) {
+    public void markDone() {
         this.done = true;
-        if (toPrint) {
-            System.out.println("Nice! I've marked this task as done:\n" + this.toString());
-        }
+//        if (toPrint) {
+//            System.out.println("Nice! I've marked this task as done:\n" + this.toString());
+//        }
     }
 
     @Override
