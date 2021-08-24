@@ -5,10 +5,17 @@ package duke;
  */
 public class DukeException extends Exception {
 
+    /**
+     * Creates a DukeException.
+     */
     public DukeException() {
         super();
     }
 
+    /**
+     * A class of <code>DukeException</code> thrown when the index for <code>Task</code> number is not found within the
+     * <code>TaskList</code>.
+     */
     static class DukeTaskNotFoundException extends DukeException {
         @Override
         public String toString() {
@@ -16,6 +23,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * A class of <code>DukeException</code> thrown when an invalid <code>Task</code> number is provided.
+     */
     static class DukeTaskFailException extends DukeException {
         @Override
         public String toString() {
@@ -23,6 +33,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * A class of <code>DukeException</code> thrown when an invalid <code>description</code> is provided.
+     */
     static class DukeNoDescriptionException extends DukeException {
         @Override
         public String toString() {
@@ -30,6 +43,10 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * A class of <code>DukeException</code> thrown when no time for a <code>Deadline</code> or
+     * <code>Event</code> is provided.
+     */
     static class DukeNoTimeGivenException extends DukeException {
         @Override
         public String toString() {
@@ -37,6 +54,10 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * A class of <code>DukeException</code> thrown when an invalid <code>input</code> is provided and
+     * cannot be handled appropriately.
+     */
     static class DukeInvalidInputException extends DukeException {
         @Override
         public String toString() {

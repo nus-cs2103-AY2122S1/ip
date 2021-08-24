@@ -15,11 +15,22 @@ public class Storage {
     private String filePath;
     private Duke duke;
 
+    /**
+     * Returns a Storage object.
+     *
+     * @param filePath String of the filepath of the list from source folder.
+     * @param duke the Duke object that is the parent.
+     */
     public Storage(String filePath, Duke duke) {
         this.filePath = filePath;
         this.duke = duke;
     }
 
+    /**
+     * Loads the existing <code>Task</code>s from the <code>TaskList</code> when Duke is ran.
+     *
+     * @throws FileNotFoundException if <code>filePath</code> specified is invalid.
+     */
     protected void loadFileToList() throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
@@ -46,6 +57,11 @@ public class Storage {
         duke.getUi().showListLoad();
     }
 
+    /**
+     * Saves the new <code>Task</code>s from the <code>TaskList</code> after changes are made to the <code>TaskList</code>.
+     *
+     * @throws IOException if <code>filePath</code> specified is invalid.
+     */
     protected void saveListToFile() throws IOException {
         duke.getUi().saveList();
         FileWriter fw = new FileWriter(filePath);

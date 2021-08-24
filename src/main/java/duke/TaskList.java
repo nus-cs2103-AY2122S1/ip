@@ -12,6 +12,11 @@ public class TaskList {
     private ArrayList<Task> list;
     private Duke duke;
 
+    /**
+     * Returns a TaskList object.
+     *
+     * @param duke the Duke object that is the parent.
+     */
     public TaskList(Duke duke) {
         this.list = new ArrayList<>();
         this.duke = duke;
@@ -21,6 +26,11 @@ public class TaskList {
         return this.list;
     }
 
+    /**
+     * Prints the <code>TaskList</code> in the correct format to be displayed in Ui.
+     *
+     * @return String of the current <code>TaskList</code> that has been formatted properly.
+     */
     public String printList() {
         String listString = "";
         for (int i = 0; i < list.size(); i++) {
@@ -30,6 +40,15 @@ public class TaskList {
         return listString;
     }
 
+    /**
+     * Adds a <code>Task</code> to the <code>TaskList</code>.
+     *
+     * @param description of the Task.
+     * @param time of the Task if it is a Deadline or Event.
+     * @param category in the <code>Task.CATEGORY</code> enumeration. Either ToDo, Deadline or Event.
+     * @param isDone boolean indicating if <code>Task</code> has been completed yet.
+     * @param hasNotif boolean indicating if <code>Task</code> addition should be printed to <code>Ui</code>.
+     */
     public void createTask(String description, String time, Task.Category category, boolean isDone, boolean hasNotif) {
         switch (category) {
         case TODO:
@@ -52,6 +71,15 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a <code>Task</code> to the <code>TaskList</code> with a date in <code>LocalDate</code> format.
+     *
+     * @param description of the Task.
+     * @param time of the Task if it is a Deadline or Event, in LocalDate.
+     * @param category in the <code>Task.CATEGORY</code> enumeration. Either ToDo, Deadline or Event.
+     * @param isDone boolean indicating if <code>Task</code> has been completed yet.
+     * @param hasNotif boolean indicating if <code>Task</code> addition should be printed to <code>Ui</code>.
+     */
     public void createTaskDate(String description, LocalDate time, Task.Category category, boolean isDone, boolean hasNotif) {
         switch (category) {
         case DEADLINE:

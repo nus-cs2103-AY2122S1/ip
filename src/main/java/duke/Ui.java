@@ -18,6 +18,11 @@ public class Ui {
             + "|_|   |_|   |_|\\____ |_|  |_|______|       \n";
     private Duke duke;
 
+    /**
+     * Returns a Ui object.
+     *
+     * @param duke the Duke object that is the parent.
+     */
     public Ui(Duke duke) {
         this.duke = duke;
         this.sc = new Scanner(System.in);

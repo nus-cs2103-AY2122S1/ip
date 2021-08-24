@@ -13,6 +13,12 @@ public class Task {
         TODO, DEADLINE, EVENT
     }
 
+    /**
+     * Returns a Task object.
+     *
+     * @param description description of Task
+     * @param isDone indicates if Task has been completed
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

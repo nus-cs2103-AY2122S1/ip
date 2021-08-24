@@ -24,12 +24,20 @@ public class Duke {
         return this.ui;
     }
 
+    /**
+     * Returns a Duke object
+     *
+     * @param filePath String of the filepath of the list from source folder.
+     */
     public Duke(String filePath) {
         ui = new Ui(this);
         storage = new Storage(filePath, this);
         tasks = new TaskList(this);
     }
 
+    /**
+     * Runs the duke chatbot by loading the TaskList and calling the Ui and Parser
+     */
     private void run() {
         ui.showWelcomeMessage();
         try {
