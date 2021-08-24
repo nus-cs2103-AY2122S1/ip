@@ -10,7 +10,13 @@ import java.nio.file.Paths;
 
 public class Lania {
 
-    private ArrayList<Task> taskArrayList = new ArrayList<Task>();
+    private ArrayList<Task> taskArrayList;
+    private Ui ui;
+
+    public Lania() {
+        taskArrayList = new ArrayList<Task>();
+        ui = new Ui();
+    }
 
     /**
      * Store user input in task array and show that it is added.
@@ -51,11 +57,9 @@ public class Lania {
                 appendToFile(file, getStringFormat(task), i);
             }
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            ui.loadingErrorMessage();
         }
-        System.out.println("Lania has added: ");
-        System.out.println(t);
-        System.out.println("Great! Now you have " + taskArrayList.size() + (taskArrayList.size() == 1 ? " task" : " tasks") + " in your list.");
+        ui.updateMessage(taskArrayList, t);
     }
 
     private String getStringFormat(Task t) {
@@ -72,26 +76,13 @@ public class Lania {
     }
 
     /**
-     * Display all tasks stored.
-     *
-     */
-    public void list() {
-        System.out.println("You have the following task(s):");
-        for (int i = 0; i < taskArrayList.size(); i++) {
-            System.out.println(i + 1 + "." + taskArrayList.get(i));
-        }
-    }
-
-    /**
      * Completes given task number.
      *
      * @param i The task number to be completed.
      */
     public void complete(int i) {
-        i--;
         taskArrayList.get(i).markAsDone();
-        System.out.println("Good job! Lania has marked this task as done:");
-        System.out.println(taskArrayList.get(i));
+        ui.taskCompleteMessage(taskArrayList, i);
     }
 
     /**
@@ -100,12 +91,8 @@ public class Lania {
      * @param i The task number to be completed.
      */
     public void remove(int i) {
-        i--;
-        Task t = taskArrayList.get(i);
         taskArrayList.remove(i);
-        System.out.println("Ok, Lania has removed this task:");
-        System.out.println(t);
-        System.out.println("Great! Now you have " + taskArrayList.size() + (taskArrayList.size() == 1 ? " task" : " tasks") + " in your list.");
+        ui.removeTaskMessage(taskArrayList, i);
     }
 
     public void run() {
@@ -113,24 +100,22 @@ public class Lania {
             Files.createDirectories(Paths.get("data/"));
             File f = new File("data/lania.txt");
             if (f.createNewFile()) {
-                System.out.println("File created: " + f.getName());
+
             } else {
-                System.out.println("File already exists.");
                 loadFileContents("data/lania.txt");
             }
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            ui.loadingErrorMessage();
             e.printStackTrace();
         }
-        System.out.println("Hello I am Lania! How may Lania be of assistance?");
-        System.out.println("Enter 'bye' to exit");
+        ui.greetingMessage();
         Scanner s = new Scanner(System.in);
         String input = s.nextLine();
         while(!input.equals("bye")) {
             try {
                 String[] split = input.split(" ");
                 if (input.equals("list")) {
-                    list();
+                    ui.listMessage(taskArrayList);
                 } else if (split[0].equals("done")) {
                     complete(Integer.parseInt(split[1]));
                 } else if (split[0].equals("delete")) {
@@ -139,15 +124,15 @@ public class Lania {
                     update(input);
                 }
             } catch (LaniaException e) {
-                System.out.println(e);
+                ui.laniaExceptionMessage(e);
             } catch (DateTimeParseException e) {
-                System.out.println("Lania does not understand this data/time format. Please try again");
+                ui.dateTimeExceptionMessage();
             } finally {
                 input = s.nextLine();
             }
         }
         s.close();
-        System.out.println("Bye. Lania looks forward to seeing you again!");
+        ui.goodbyeMessage();
     }
 
     private void loadFileContents(String filePath) throws FileNotFoundException {
@@ -155,7 +140,6 @@ public class Lania {
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
             String next = s.nextLine();
-            System.out.println(next);
             String[] split = next.split("\\|", 4);
             Task t;
             if (split[0].equals("T")) {
@@ -170,6 +154,7 @@ public class Lania {
             }
             taskArrayList.add(t);
         }
+        ui.listMessage(taskArrayList);
         s.close();
     }
 
