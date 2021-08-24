@@ -17,6 +17,9 @@ public class Parser {
         }  else if (input.startsWith("delete")) {
             int value = Character.getNumericValue(input.charAt(7));
             return new Delete(value);
+        } else if (input.startsWith("find")) {
+            String searchTerm = input.substring(4);
+            return new Find(searchTerm);
         } else {
             try {
                 return new Add(input);
