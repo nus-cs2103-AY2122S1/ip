@@ -1,24 +1,40 @@
 package duke;
 
-import duke.exceptions.*;
+import java.time.LocalDate;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.InvalidTaskNumberException;
+import duke.exceptions.MissingDeadlineException;
+import duke.exceptions.MissingEventTimeException;
+import duke.exceptions.MissingTaskNameException;
+import duke.exceptions.MissingTaskNumberException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
 
-import java.time.LocalDate;
-
 /**
- * A class for making sense of the user command
- * Bridges communication between the user and the tasks
+ * A class for making sense of the user string
+ * Bridges communication between the user string and the tasks
  */
 public class Parser {
+    /** Whether Duke should continue running after handling **/
     public static boolean isRunning = true;
+
+    /** TaskList object used by Duke **/
     private static TaskList tasklist;
+
+    /** Current user string **/
     private static String command;
+
+    /** Current user string split into words **/
     private static String[] commandArr;
+
     /**
-     * Handles user input regarding tasks
+     * Handles / parses user input, and allowing interactions with tasks
      * @param userString String that users enter
+     * @param tasklist TaskList object used by Duke
+     * @throws DukeException If Duke does not recognize the format provided
      */
     public static void handle(String userString, TaskList tasklist) throws DukeException {
         Parser.command = userString;
@@ -56,6 +72,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Triggered when the done command is identified
+     * Marks the given task as done
+     * @throws DukeException If there is no task number or wrong task number
+     */
     public static void handleDone() throws DukeException {
         if (commandArr.length < 2) {
             throw new MissingTaskNumberException("Missing task number");
@@ -64,12 +85,17 @@ public class Parser {
         try {
             tasklist.get(taskNumber).setDone(true);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskNumberException("Duke.Task does not exist");
+            throw new InvalidTaskNumberException("Task does not exist");
         }
         UI.done(taskNumber);
         tasklist.list();
     }
 
+    /**
+     * Triggered when the todo command is identified
+     * Adds a new Todo object to the TaskList
+     * @throws DukeException If no name is provided
+     */
     public static void handleTodo() throws DukeException {
         if (commandArr.length < 2) {
             throw new MissingTaskNameException("Missing task name");
@@ -80,6 +106,12 @@ public class Parser {
         UI.numberOfTasks(tasklist.size());
     }
 
+
+    /**
+     * Triggered when the deadline command is identified
+     * Adds a new Deadline object to the TaskList
+     * @throws DukeException If no name or no deadline is provided
+     */
     public static void handleDeadline() throws DukeException {
         if (commandArr.length < 2) {
             throw new MissingTaskNameException("Missing task name");
@@ -96,6 +128,11 @@ public class Parser {
         UI.numberOfTasks(tasklist.size());
     }
 
+    /**
+     * Triggered when event command is identified
+     * Adds a new Event object to the TaskList
+     * @throws DukeException If no task name or event date is provided
+     */
     public static void handleEvent() throws DukeException {
         if (commandArr.length < 2) {
             throw new MissingTaskNameException("Missing task name");
@@ -112,6 +149,11 @@ public class Parser {
         UI.numberOfTasks(tasklist.size());
     }
 
+    /**
+     * Triggered when delete command is identified
+     * Deletes the task with the task number provided
+     * @throws DukeException If there is none or invalid task number provided
+     */
     public static void handleDelete() throws DukeException {
         if (commandArr.length < 2) {
             throw new MissingTaskNumberException("Missing task number");
@@ -120,7 +162,7 @@ public class Parser {
         try {
             tasklist.remove(deleteTaskNumber);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskNumberException("Duke.Task does not exist");
+            throw new InvalidTaskNumberException("Task does not exist");
         }
         UI.delete(deleteTaskNumber);
         UI.numberOfTasks(tasklist.size());

@@ -2,14 +2,15 @@ import java.time.format.DateTimeParseException;
 
 import duke.TaskList;
 import duke.UI;
-import duke.exceptions.DukeException;
 import duke.Parser;
+
 import duke.exceptions.InvalidCommandException;
 import duke.exceptions.MissingTaskNameException;
 import duke.exceptions.MissingTaskNumberException;
 import duke.exceptions.InvalidTaskNumberException;
 import duke.exceptions.MissingDeadlineException;
 import duke.exceptions.MissingEventTimeException;
+import duke.exceptions.DukeException;
 
 /**
  * Duke is a Personal Assistant Chatbot that keeps track of various tasks.
@@ -39,7 +40,7 @@ public class Duke {
     /**
      * Starts an instance of Duke
      */
-    private void run() {
+    public void run() {
         // Welcome the user
         UI.welcome();
         boolean running = true;

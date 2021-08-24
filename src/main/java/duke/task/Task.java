@@ -19,6 +19,11 @@ public abstract class Task {
         this.name = name;
     }
 
+    /**
+     * Initializes a new task with the done property
+     * @param name Name of task
+     * @param isDone Whether task is done
+     */
     public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;

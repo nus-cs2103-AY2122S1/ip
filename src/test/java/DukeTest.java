@@ -1,12 +1,15 @@
-import duke.task.Deadline;
-import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import duke.task.Deadline;
+import duke.task.ToDo;
+
+/**
+ * Class for testing Duke using JUnit
+ */
 public class DukeTest {
     @Test
     public void deadline_toString() {

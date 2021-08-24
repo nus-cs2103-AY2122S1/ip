@@ -12,7 +12,7 @@ public class Storage {
     private static String filePath;
 
     /**
-     * Initializes a new storage container
+     * Initializes a new storage manager
      * @param filePath
      */
     public Storage(String filePath) {
