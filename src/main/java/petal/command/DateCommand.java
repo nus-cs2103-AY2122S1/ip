@@ -23,7 +23,7 @@ public class DateCommand implements Command {
     }
 
     /**
-     * Overwritten Execute method. Displays all tasks on the given date
+     * Displays all the tasks on the given date
      *
      * @param taskList TaskList instance
      * @param ui Ui instance

@@ -12,9 +12,7 @@ import petal.components.Ui;
 public class UnintelligibleCommand implements Command {
 
     /**
-     * Overwritten Execute method. It displayed a message to the user
-     * telling the user that the input was unintelligible and then recommending
-     * the correct format
+     * Displays message to user informing them that the input was unintelligible
      *
      * @param taskList TaskList instance
      * @param ui Ui instance

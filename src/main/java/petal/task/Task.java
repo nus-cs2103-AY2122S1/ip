@@ -10,26 +10,26 @@ import java.time.LocalDate;
  */
 public abstract class Task {
 
-    protected String description;
-    protected boolean isDone;
-    protected LocalDate localDate;
+    //Properties of a Task
+    private final String description;
+    private boolean isDone;
 
     /**
-     * Abstract method that formats string representation which is optimized for saving
+     * Formats string representation which is optimized for saving
      *
      * @return Formatted string representation
      */
     public abstract String strForSaving();
 
     /**
-     * Abstract method that returns whether the Task is a Timeable
+     * Returns whether the Task is a Timeable
      *
      * @return boolean True if Timeable, false if not Timeable
      */
     public abstract boolean isTimeable();
 
     /**
-     * The constructor for the Task class
+     * Constructor for the Task class
      *
      * @param description The description of the task
      * @param isDone  The boolean isDone, representing if the Task is done
@@ -37,12 +37,11 @@ public abstract class Task {
      */
     public Task(String description, boolean isDone, LocalDate localDate) {
         this.description = firstLetter(description);
-        this.localDate = localDate;
         this.isDone = isDone;
     }
 
     /**
-     * The constructor for the Task class
+     * Constructor for the Task class
      *
      * @param description The description of the task
      * @param isDone The boolean isDone, representing if the Task is done
@@ -53,7 +52,7 @@ public abstract class Task {
     }
 
     /**
-     * Method that returns whether a task is done in string
+     * Returns whether a task is done in string representation
      *
      * @return "X" if done, " " if not
      */
@@ -62,7 +61,7 @@ public abstract class Task {
     }
 
     /**
-     * Method to set a task as done
+     * Sets the task instance as done
      */
     public void taskDone() {
         System.out.println(Responses.LINE + "\nYou have completed the task: " + "'"
@@ -73,7 +72,7 @@ public abstract class Task {
     }
 
     /**
-     * Method to capitalize the first letter of the string
+     * Capitalizes the first letter of the string
      *
      * @param str The string
      * @return String but with first letter capitalized

@@ -15,14 +15,17 @@ import petal.components.Ui;
  */
 public class Petal {
 
+    /** Represents whether the user has said bye or not */
     private boolean isBye = false;
+
+    //Components of the Petal instance
     private final Storage storage;
     private final Parser parser;
     private final Ui ui;
     private final TaskList taskList;
 
     /**
-     * The constructor for the Petal class
+     * Constructor for the Petal class
      */
     public Petal() {
         ui = new Ui(this);
@@ -32,14 +35,14 @@ public class Petal {
     }
 
     /**
-     * Method to flip the boolean isBye and terminate the process
+     * Flips the boolean isBye and terminates the process
      */
     public void stop() {
         this.isBye = true;
     }
 
     /**
-     * Method to start the bot
+     * Starts the Petal instance
      */
     public void run() {
         storage.createDirectory();

@@ -17,8 +17,18 @@ public class TaskCommand implements Command {
     private final String input;
 
     /**
-     * Overwritten Execute method. It handles the input, and creates
-     * the corresponding Task object
+     * Constructor for TaskCommand
+     *
+     * @param type The type of Task
+     * @param input The input
+     */
+    public TaskCommand(String type, String input) {
+        this.type = type;
+        this.input = input;
+    }
+
+    /**
+     * Creates the corresponding Task object
      *
      * @param taskList TaskList instance
      * @param ui Ui instance
@@ -34,14 +44,4 @@ public class TaskCommand implements Command {
         }
     }
 
-    /**
-     * The Constructor for TaskCommand
-     *
-     * @param type The type of Task
-     * @param input The input
-     */
-    public TaskCommand(String type, String input) {
-        this.type = type;
-        this.input = input;
-    }
 }

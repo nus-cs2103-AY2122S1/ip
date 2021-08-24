@@ -15,7 +15,7 @@ public class DeleteCommand implements Command {
     private final String input;
 
     /**
-     * The constructor for the DeleteCommand class
+     * Constructor for the DeleteCommand class
      *
      * @param input The given class
      */
@@ -24,7 +24,7 @@ public class DeleteCommand implements Command {
     }
 
     /**
-     * Overwritten Execute method. It deletes the Task.
+     * Deletes the task corresponding to the input
      *
      * @param taskList TaskList instance
      * @param ui Ui instance

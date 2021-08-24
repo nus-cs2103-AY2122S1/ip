@@ -1,7 +1,12 @@
 package petal.components;
 
-import petal.exception.*;
-import petal.task.*;
+import petal.exception.InvalidInputException;
+import petal.exception.EmptyDescException;
+import petal.task.Task;
+import petal.task.ToDo;
+import petal.task.Deadline;
+import petal.task.Event;
+import petal.task.Timeable;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -18,7 +23,7 @@ public class TaskList {
     private final Calendar calendar;
 
     /**
-     * The constructor for TaskList
+     * Constructor for TaskList
      *
      * @param ui The instance of Ui used
      */
@@ -29,7 +34,7 @@ public class TaskList {
     }
 
     /**
-     * Overloaded method to add previously saved tasks to the list of tasks
+     * Adds the list of previously saved tasks to the list of tasks
      *
      * @param addTasks The arraylist of previously saved tasks
      */
@@ -39,7 +44,7 @@ public class TaskList {
     }
 
     /**
-     * Method to add a task to list of tasks
+     * Adds a task to the list of tasks
      *
      * @param task The task to be added
      */
@@ -50,7 +55,7 @@ public class TaskList {
     }
 
     /**
-     * Method to delete a task from the list of tasks
+     * Deletes a task from the list of tasks
      *
      * @param index The message given by the user input
      * @throws InvalidInputException Thrown if no index inputted by the user or
@@ -71,7 +76,7 @@ public class TaskList {
     }
 
     /**
-     * Method to handle the tasks, depending on the command given
+     * Handles the task, depending on the command given
      *
      * @param type The type of task: To.Do, deadline, event
      * @param message The desc/time of the task
@@ -90,22 +95,22 @@ public class TaskList {
             throw new InvalidInputException("The format used was wrong! Try again :(");
         }
         switch (type) {
-            case "todo":
-                task = new ToDo(message, false);
-                break;
-            case "deadline":
-                try {
-                    task = new Deadline(deadlineEvent[0], deadlineEvent[1], false);
-                } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-                    throw new InvalidInputException("The date/time format used was wrong! Try again :(");
-                }
-                break;
-            default: //Represents the Event task
-                try {
-                    task = new Event(deadlineEvent[0], deadlineEvent[1], false);
-                } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-                    throw new InvalidInputException("The date/time format used was wrong! Try again :(");
-                }
+        case "todo":
+            task = new ToDo(message, false);
+            break;
+        case "deadline":
+            try {
+                task = new Deadline(deadlineEvent[0], deadlineEvent[1], false);
+            } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+                throw new InvalidInputException("The date/time format used was wrong! Try again :(");
+            }
+            break;
+        default: //Represents the Event task
+            try {
+                task = new Event(deadlineEvent[0], deadlineEvent[1], false);
+            } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+                throw new InvalidInputException("The date/time format used was wrong! Try again :(");
+            }
         }
         addTask(task);
         if (task.isTimeable())
@@ -113,7 +118,7 @@ public class TaskList {
     }
 
     /**
-     * Method to mark a particular task as done
+     * Marks a particular task as done
      *
      * @param indexOfTask String representation of the index of the task
      * @throws IndexOutOfBoundsException Thrown if string is not within size of list
@@ -129,7 +134,7 @@ public class TaskList {
     }
 
     /**
-     * Method that returns the string representations of the tasks
+     * Returns a string representation of the tasks
      *
      * @return String containing the number, type, and description of tasks
      */
@@ -150,7 +155,7 @@ public class TaskList {
     }
 
     /**
-     * Method that displays the tasks ona given date
+     * Displays the tasks on the given date
      *
      * @param date The date given
      * @throws InvalidInputException Thrown if the parameter has an invalid format/input
@@ -160,8 +165,7 @@ public class TaskList {
     }
 
     /**
-     * Method that takes the tasks and returns a formatted string representation
-     * which can be easily parsed by retrieveTasks() once the program is run again
+     * Returns a formatted string representation of the list of tasks that can be used for saving
      *
      * @return Formatted string representation of all the user-added tasks
      */

@@ -13,19 +13,21 @@ import java.time.format.FormatStyle;
  */
 public class Deadline extends Task implements Timeable {
 
+    private final String description;
     private final String dateTime;
     private final LocalDate date;
     private final LocalTime time;
 
     /**
-     * The constructor for the Deadline class
+     * Constructor for the Deadline class
      *
      * @param description The description of the object
      * @param dateTime The date given by the user
      * @param isDone The boolean isDone, representing if the Task is done
      */
     public Deadline(String description, String dateTime, boolean isDone) {
-        super(description.trim(), isDone);
+        super(description = description.trim(), isDone);
+        this.description = description;
         this.dateTime = (dateTime = dateTime.trim());
         String[] splitByWhiteSpace = dateTime.split(" ");
         this.date = Parser.parseDate(splitByWhiteSpace[0]);
@@ -49,7 +51,8 @@ public class Deadline extends Task implements Timeable {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
-                                                     .format(date) +  " " + this.time + ")";
+        return "[D]" + super.toString() + " (by: "
+                + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(date)
+                +  " " + this.time + ")";
     }
 }

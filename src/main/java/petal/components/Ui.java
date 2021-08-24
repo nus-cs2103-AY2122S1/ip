@@ -13,7 +13,7 @@ public class Ui {
     private final Scanner scanner;
 
     /**
-     * The constructor for the Ui class
+     * Constructor for the Ui class
      *
      * @param petal The instance of the Petal bot
      */
@@ -23,7 +23,7 @@ public class Ui {
     }
 
     /**
-     * Method that reads the input from the user
+     * Reads input from the user
      *
      * @return String that represents the user's input
      */
@@ -32,8 +32,7 @@ public class Ui {
     }
 
     /**
-     * Method for Petal to say goodbye. In the case saveTasks() throws an error,
-     * Petal does not save any of the tasks.
+     * Terminates the Petal instance
      */
     public void goodBye() {
         output(Responses.GOODBYE);
@@ -42,8 +41,7 @@ public class Ui {
     }
 
     /**
-     * Method that outputs the given parameter, and is padded by the line so it can
-     * be displayed to the user in a compartmentalized fashion
+     * Outputs given message with lines above and below the message
      *
      * @param message Response that is converted to string that then displayed
      */
@@ -52,8 +50,7 @@ public class Ui {
     }
 
     /**
-     * Method that outputs the given parameter, and is padded by the line, so it can
-     * be displayed to the user in a compartmentalized fashion
+     * Outputs given message with lines above and below the message
      *
      * @param message String to be printed
      */

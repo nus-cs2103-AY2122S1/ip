@@ -9,9 +9,10 @@ import java.time.LocalDate;
 public interface Timeable {
 
     /**
-     * Method that returns the date of that object
+     * Returns the date of that Timeable object
      *
-     * @return LocalDate object correpsonding to the date of that object
+     * @return LocalDate object corresponding to the date of that object
      */
     public LocalDate getDate();
+
 }
