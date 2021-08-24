@@ -6,16 +6,29 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Represents a parser that process the user's input and handles with appropriate action.
+ */
 public class Parser {
 
     private Duke duke;
-
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    /**
+     * Returns a Parser object.
+     *
+     * @param duke the Duke object that is the parent.
+     */
     public Parser(Duke duke) {
         this.duke = duke;
     }
 
+    /**
+     * Checks if a String is a valid LocalDate of correct yyyy-MM-dd form.
+     *
+     * @param dateStr date in String
+     * @return true if String is valid date.
+     */
     public boolean isValid(String dateStr) {
         try {
             LocalDate.parse(dateStr, formatter);
@@ -25,6 +38,12 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Handles the input that is received by the Ui and performs the corresponding action
+     * based on the command.
+     *
+     * @param message String command that is received from the Scanner in Ui.
+     */
     public void handleInput(String message) {
 
         if (message.trim().equals("bye")) {

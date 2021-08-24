@@ -3,6 +3,9 @@ package duke;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * A class to test the methods in <code>Parser</code>.
+ */
 public class ParserTest {
     @Test
     public void testIfValidDateTrue(){

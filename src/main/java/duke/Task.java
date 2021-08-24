@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * Represents an element in the <code>TaskList</code>.
+ * Split into 3 types: <code>Todo, Deadline, Event</code>.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -9,6 +13,12 @@ public class Task {
         TODO, DEADLINE, EVENT
     }
 
+    /**
+     * Returns a Task object.
+     *
+     * @param description description of Task
+     * @param isDone indicates if Task has been completed
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
