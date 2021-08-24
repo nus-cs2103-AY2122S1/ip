@@ -5,17 +5,23 @@ import java.time.LocalDateTime;
  * Used to represent a event task.
  *
  * @author KelvinSoo
- * @version Level-4
+ * @version Level-8
  *
  */
 public class Event extends Task {
     private String eventTime;
 
+    /**
+     * A constructor to create a new event task.
+     */
     public Event(String description, String eventTime) {
         super(description);
         this.eventTime = eventTime;
     }
 
+    /**
+     * A constructor to create a new event task.
+     */
     public Event(String description, String eventTime, Boolean isDone) {
         super(description);
         if (isDone) {
@@ -24,6 +30,9 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
+    /**
+     * A constructor to create a new event task with supported time format.
+     */
     public Event(String description, LocalDateTime localDateTime) {
         super(description);
         this.eventTime = String.format("%s of %s %s, %s%s",

@@ -5,17 +5,23 @@ import java.time.LocalDateTime;
  * Used to represent a deadline task.
  *
  * @author KelvinSoo
- * @version Level-4
+ * @version Level-8
  *
  */
 public class Deadline extends Task {
     private String dateLine;
 
+    /**
+     * A constructor to create a new deadline task.
+     */
     public Deadline(String description, String dateLine) {
         super(description);
         this.dateLine = dateLine;
     }
 
+    /**
+     * A constructor to create a new deadline task.
+     */
     public Deadline(String description, String dateLine, Boolean isDone) {
         super(description);
         if (isDone) {
@@ -24,6 +30,9 @@ public class Deadline extends Task {
         this.dateLine = dateLine;
     }
 
+    /**
+     * A constructor to create a new deadline task with supported time format.
+     */
     public Deadline(String description, LocalDateTime localDateTime) {
         super(description);
         this.dateLine = String.format("%s of %s %s, %s%s",
