@@ -16,6 +16,7 @@ public class Duke {
         String border = "____________________________________________________________";
         Printer printer = new Printer(border);
         printer.PrintIntro();
+        Storage storage = new Storage();
 
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
@@ -102,6 +103,8 @@ public class Duke {
                     printer.PrintMessage(e.getMessage());
                 }
             }
+            System.out.println(tasks);
+            storage.Save(tasks);
             input = sc.nextLine();
         }
         printer.PrintMessage("Bye. Hope to see you again soon!");
