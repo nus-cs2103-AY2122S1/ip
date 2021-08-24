@@ -1,5 +1,8 @@
+package duke;
+
+import duke.commands.Command;
 import java.time.LocalDateTime;
-import java.util.Scanner;
+
 public class Duke {
     private final UI ui;
     private final Storage storage;

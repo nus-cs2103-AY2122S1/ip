@@ -1,3 +1,9 @@
+package duke;
+
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.ListCommand;
+
 public class Parser {
     private final Command[] commandList = {
             new ListCommand(""),
