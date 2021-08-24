@@ -20,7 +20,7 @@ public class Parser {
             return null;
         }
 
-        return output.stripLeading().stripTrailing();
+        return output.trim();
     }
 
     /**
