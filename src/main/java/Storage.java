@@ -2,7 +2,6 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class Storage {
     private final String filePath;
@@ -11,11 +10,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void writeTasks(List<Task> list) throws DukeException{
+    public void writeTasks(TaskList list) throws DukeException{
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
-            for (Task task : list) {
-                bw.write(task.toString());
+            for (int i = 0; i < list.size(); i++) {
+                bw.write(list.getTask(i).toString());
                 bw.newLine();
             }
             bw.close();
@@ -24,7 +23,7 @@ public class Storage {
         }
     }
 
-    public void readTasks(List<Task> list) throws DukeException {
+    public void readTasks(TaskList list) throws DukeException {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
         if (!file.exists()) {
@@ -44,7 +43,7 @@ public class Storage {
                 case 'T':
                     String todoName = splitLine[1];
                     boolean todoStatus = (splitLine[0].charAt(4) == 'X');
-                    list.add(new Todo(todoName, todoStatus));
+                    list.addToList(new Todo(todoName, todoStatus));
                     break;
                 case 'D':
                     String deadlineName = splitLine[1] + " ";
@@ -53,7 +52,7 @@ public class Storage {
                     String deadlineBy = deadlineByWithBracket.substring(0, deadlineByWithBracket.length() - 1);
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy");
                     LocalDate correctDeadline = LocalDate.parse(deadlineBy, dtf);
-                    list.add(new Deadline(deadlineName, deadlineStatus, correctDeadline));
+                    list.addToList(new Deadline(deadlineName, deadlineStatus, correctDeadline));
                     break;
                 case 'E':
                     String eventName = splitLine[1] + " ";
@@ -62,7 +61,7 @@ public class Storage {
                     String eventAt = eventAtWithBracket.substring(0, eventAtWithBracket.length() - 1);
                     DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("dd MMM yyy hh:mm a");
                     LocalDateTime correctEventAt = LocalDateTime.parse(eventAt, dtf2);
-                    list.add(new Event(eventName, eventStatus, correctEventAt));
+                    list.addToList(new Event(eventName, eventStatus, correctEventAt));
                     break;
                 }
             }

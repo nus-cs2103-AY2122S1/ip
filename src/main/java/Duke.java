@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,11 +6,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Duke {
-    private final List<Task> list;
+
+    private final TaskList list;
     private final Storage storage;
 
     public Duke(String filePath){
-        this.list = new ArrayList<>(100);
+        this.list = new TaskList();
         this.storage = new Storage(filePath);
     }
 
@@ -31,12 +31,12 @@ public class Duke {
                 if (input.equals("bye")) {
                     break;
                 } else if (input.equals("list")) {
-                    listTasks();
+                    list.printTasks();
                 } else if (input.startsWith("done")) {
                     try {
                         int listIndex = Integer.parseInt(input.substring(5));
                         if (listIndex <= list.size() && listIndex >= 1) {
-                            completeTask(listIndex);
+                            list.completeTask(listIndex);
                             storage.writeTasks(list);
                         } else {
                             throw new DukeException("Couldn't find that task in the list! Try again.");
@@ -58,7 +58,7 @@ public class Duke {
                             String firstTrimmed = input.substring(9);
                             String lastTrimmed = firstTrimmed.substring(0, firstTrimmed.indexOf("/by"));
                             Deadline createdDeadlineTask = new Deadline(lastTrimmed, false, deadline);
-                            addToList(createdDeadlineTask);
+                            list.addToList(createdDeadlineTask);
                             System.out.println("Got it. I've added this task:\n" + "  " + createdDeadlineTask + "\n"
                                     + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
                                     " in the list.");
@@ -75,7 +75,7 @@ public class Duke {
                     try {
                         String trimmed = input.substring(5);
                         Todo createdTodoTask = new Todo(trimmed, false);
-                        addToList(createdTodoTask);
+                        list.addToList(createdTodoTask);
                         System.out.println("Got it. I've added this task:\n" + "  " + createdTodoTask + "\n"
                                 + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
                                 " in the list.");
@@ -95,7 +95,7 @@ public class Duke {
                             String lastTrimmed = firstTrimmed.substring(0, firstTrimmed.indexOf("/at"));
                             LocalDateTime at = LocalDateTime.parse(atString, dtf);
                             Event createdEventTask = new Event(lastTrimmed, false, at);
-                            addToList(createdEventTask);
+                            list.addToList(createdEventTask);
                             System.out.println("Got it. I've added this task:\n" + "  " + createdEventTask + "\n"
                                     + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
                                     " in the list.");
@@ -110,7 +110,7 @@ public class Duke {
                 } else if (input.startsWith("delete")) {
                     try {
                         int toDeleteIndex = Integer.parseInt(input.substring(7));
-                        deleteTask(toDeleteIndex);
+                        list.deleteTask(toDeleteIndex);
                         storage.writeTasks(list);
                     } catch (NumberFormatException e){
                         throw new DukeException("Please make sure only a number follows the command 'delete'. " +
@@ -127,45 +127,6 @@ public class Duke {
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
-    }
-
-    private void addToList(Task task) {
-        this.list.add(task);
-    }
-
-    private void listTasks() throws DukeException {
-        if (list.size() < 1) {
-            throw new DukeException("You haven't added anything to the list yet! Try adding something.");
-        } else {
-            if (list.size() == 1) {
-                System.out.println("Here is the sole task in your list:");
-            } else {
-                System.out.println("Here are the tasks in your list:");
-            }
-            for (int i = 1; i <= list.size(); i++) {
-                System.out.println(i + ". " + list.get(i - 1));
-            }
-        }
-    }
-
-    private void deleteTask(int index) throws DukeException {
-        if (list.size() < 1) {
-            throw new DukeException("You haven't added anything to the list yet! Try adding something before " +
-                    "deleting.");
-        } else if (index <= list.size() && index >= 1) {
-            Task toDelete = list.get(index - 1);
-            list.remove(index - 1);
-            System.out.println("Noted. I've removed this task:\n" + "  " + toDelete + "\n" + "Now you have " +
-                    list.size() + " task" + (list.size() == 1 ? "" : "s") + " in the list.");
-        } else {
-            throw new DukeException("Couldn't find that task in the list! Try again.");
-        }
-    }
-
-    private void completeTask(int index) {
-        Task task = list.get(index - 1);
-        task.setDone();
-        System.out.println("Nice! I've marked this task as done:\n" + "  " + task);
     }
 
     public static void main(String[] args) {
