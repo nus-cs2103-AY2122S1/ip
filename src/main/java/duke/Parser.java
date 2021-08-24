@@ -1,6 +1,18 @@
 package duke;
 
-import duke.command.*;
+
+import duke.command.Command;
+import duke.command.CommandBye;
+import duke.command.CommandCheck;
+import duke.command.CommandDeadline;
+import duke.command.CommandDelete;
+import duke.command.CommandDone;
+import duke.command.CommandEvent;
+import duke.command.CommandFind;
+import duke.command.CommandHelp;
+import duke.command.CommandList;
+import duke.command.CommandTodo;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,11 +37,11 @@ public class Parser {
         String keyword = scanner.next();
         ArrayList<String> arguments = new ArrayList<>();
 
-        while(scanner.hasNext()) {
+        while (scanner.hasNext()) {
             arguments.add(scanner.next());
         }
 
-        switch(keyword) {
+        switch (keyword) {
         case (CommandList.KEYWORD):
             return new CommandList();
         case (CommandDone.KEYWORD):

@@ -12,7 +12,7 @@ public class Storage {
     private final String FILEPATH;
     private File savefile;
 
-    public Storage (String filepath) {
+    public Storage(String filepath) {
         this.FILEPATH = filepath;
         this.initialiseSaveFile();
     }
