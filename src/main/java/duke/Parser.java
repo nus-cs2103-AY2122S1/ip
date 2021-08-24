@@ -13,6 +13,14 @@ public class Parser {
     private String arr[];
     private String input = "";
 
+    /**
+     * A consructor to create a parser object
+     *
+     * @param scan A scanner that takes in the input from the user
+     * @param storage A storage that deals with loading and saving files
+     * @param taskList A list that keeps track of all tasks
+     * @param ui An object that perform tasks related to interactions with user
+     */
     Parser(Scanner scan, Storage storage, TaskList taskList, Ui ui) {
         this.scan = scan;
         this.storage = storage;
@@ -35,6 +43,9 @@ public class Parser {
         return true;
     }
 
+    /**
+     * A method to make sense of the user input
+     */
     public void parse() {
         do {
             try {

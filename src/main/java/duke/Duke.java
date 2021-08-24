@@ -16,12 +16,20 @@ public class Duke {
     private Parser parser;
     private Ui ui;
 
+    /**
+     * A constructor to create a Duke object
+     *
+     * @param filepath Location of the file that keeps track of the list
+     */
     Duke(String filepath) {
         taskList = new TaskList(new ArrayList<Task>());
         storage = new Storage(filepath);
         ui = new Ui();
     }
 
+    /**
+     * A method to run the whole program
+     */
     public void run() {
         Scanner scan = new Scanner(System.in);
         storage.readFile(taskList);
@@ -30,6 +38,11 @@ public class Duke {
         parser.parse();
     }
 
+    /**
+     * The main method of the Duke class that will call the run() method
+     *
+     * @param args An array of Strings
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("./data/duke.txt");
         duke.run();
