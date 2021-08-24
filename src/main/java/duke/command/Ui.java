@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.task.Task;
 
+/**
+ * Dealing with responding user's input on the command line.
+ */
 public class Ui {
     private TaskList taskList;
     private static String logo = " ____        _        \n"
@@ -10,6 +13,12 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+
+    /**
+     * Constructor of Ui.
+     *
+     * @param taskList The taskList which stores data of the user's event.
+     */
     public Ui (TaskList taskList) {
         this.taskList = taskList;
     }
@@ -18,6 +27,9 @@ public class Ui {
         System.out.println("________________________________________________________________");
     }
 
+    /**
+     * Print welcome message on command line.
+     */
     public void showLogo() {
         System.out.println("Hello from\n" + logo);
         printSeparateLine();
@@ -26,6 +38,9 @@ public class Ui {
         printSeparateLine();
     }
 
+    /**
+     * Print new message when a new task is added to the taskList.
+     */
     public void showAddNewTask() {
         printSeparateLine();
         System.out.println("     Got it. I've added this task:");
@@ -34,6 +49,11 @@ public class Ui {
         printSeparateLine();
     }
 
+    /**
+     * Print new message when a task is marked as done.
+     *
+     * @param itemDone The number of the item that user want to mark as done.
+     */
     public void showMarkTaskDone(int itemDone) {
         printSeparateLine();
         System.out.println("    Nice! I've marked this task as done:");
@@ -41,12 +61,18 @@ public class Ui {
         printSeparateLine();
     }
 
+    /**
+     * Print Goodbye message when user want to exit the program.
+     */
     public void showGoodBye() {
         printSeparateLine();
         System.out.println("    Bye. Hope to see you again soon!");
         printSeparateLine();
     }
 
+    /**
+     * Print tasks containing in the task list.
+     */
     public void showList() {
         printSeparateLine();
         System.out.println("    Here are the tasks in your list:");
@@ -56,6 +82,11 @@ public class Ui {
         printSeparateLine();
     }
 
+    /**
+     * Print new message when user want to delete a task.
+     *
+     * @param deletedTask The task that user want to delete
+     */
     public void showDeleteMessage(Task deletedTask) {
         printSeparateLine();
         System.out.println("    Noted. I've removed this task:");
