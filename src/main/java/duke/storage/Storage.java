@@ -18,14 +18,19 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private String filePath;
+    private final String filePath;
 
+    /**
+     * Creates storage with the file path provided.
+     * @param filePath The file path where all the tasks are stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
      * Loads the text file and creates a text file if file does not exist.
+     * @return A array list with all the tasks read from the file.
      */
     public ArrayList<Task> loadFile() {
         ArrayList<Task> taskList = new ArrayList<>();
@@ -63,7 +68,8 @@ public class Storage {
     }
 
     /**
-     * add task to file.
+     * Updates the tasks given to the file.
+     * @param taskList The tasks that will be updated to the file.
      */
     public void updateTasks(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getAllTasks();

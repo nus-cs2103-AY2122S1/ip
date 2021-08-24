@@ -6,7 +6,7 @@ import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
 
-    protected int taskNo;
+    private final int taskNo;
 
     public DeleteCommand(int taskNo) {
         this.taskNo = taskNo;
