@@ -3,6 +3,9 @@ package duke.stubs;
 import duke.testinginterface.EventInterface;
 import duke.task.Task;
 
+/**
+ * Stub for Event class.
+ */
 public class EventStub extends Task implements EventInterface {
     public EventStub() {
         super("");

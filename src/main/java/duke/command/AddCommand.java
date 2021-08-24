@@ -8,13 +8,28 @@ import duke.TaskList;
 import duke.task.Todo;
 import duke.Ui;
 
+/**
+ * Type of Command that adds tasks to the task list.
+ */
 public class AddCommand extends Command {
     Task task;
 
+    /**
+     * Constructor.
+     *
+     * @param task
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
 
+    /**
+     * Executes operations depending on the type of task.
+     *
+     * @param taskList current list of tasks.
+     * @param ui
+     * @param storage
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(this.task);
@@ -38,6 +53,11 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Returns false, because it is not a Exit Command.
+     *
+     * @return false;
+     */
     @Override
     public boolean isExit() {
         return false;

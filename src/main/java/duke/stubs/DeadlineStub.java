@@ -3,7 +3,13 @@ package duke.stubs;
 import duke.testinginterface.DeadlineInterface;
 import duke.task.Task;
 
+/**
+ * Stub for Deadline class.
+ */
 public class DeadlineStub extends Task implements DeadlineInterface {
+    /**
+     * Constructor.
+     */
     public DeadlineStub() {
         super("");
     }

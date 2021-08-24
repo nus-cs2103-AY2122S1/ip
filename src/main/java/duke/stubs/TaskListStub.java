@@ -6,10 +6,17 @@ import duke.task.Task;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-
+/**
+ * Stub for TaskList class.
+ */
 public class TaskListStub implements TaskListInterface {
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor.
+     *
+     * Has stubs for Event, Deadline and Todo classes as its contents.
+     */
     public TaskListStub() {
         this.tasks = new ArrayList<>();
         this.tasks.add(new TodoStub());

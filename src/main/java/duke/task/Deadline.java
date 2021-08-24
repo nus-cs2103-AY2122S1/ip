@@ -5,11 +5,16 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * A type of task that tracks a deadline (date and time) and the task description.
- *
  */
 public class Deadline extends Task {
     protected LocalDate by;
 
+    /**
+     * Constructor
+     *
+     * @param description details about the Task.
+     * @param by date/time the deadline is due, in yyyy-mm-dd format.
+     */
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
@@ -26,7 +31,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the task type of duke.Todo.
+     * Returns the task type of duke.Deadline.
      *
      * @return 1 to represent duke.Deadline task type.
      */

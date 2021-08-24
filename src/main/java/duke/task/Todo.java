@@ -4,6 +4,12 @@ package duke.task;
  * A type of task that just keeps track of the description.
  */
 public class Todo extends Task {
+
+    /**
+     * Constructor.
+     *
+     * @param description details about the task.
+     */
     public Todo(String description) {
         super(description);
     }
@@ -31,7 +37,7 @@ public class Todo extends Task {
     /**
      * Returns the description in the format that will be saved into Hard drive.
      *
-     * @return String
+     * @return String.
      */
     @Override
     public String toSavedFormat() {
