@@ -72,6 +72,7 @@ public class Ui {
 
     public void showAlreadyDoneTask(String description) {
         System.out.println(description + " has already been done! :)");
+    }
 
     public void showSearchResults(ArrayList<Task> resultsArray) {
         System.out.println(FRIENDGREETING + "Here are the matching tasks in your list:");

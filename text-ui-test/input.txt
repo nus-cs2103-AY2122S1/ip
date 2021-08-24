@@ -22,6 +22,8 @@ deadline       project     /by        noon
 event    exam        /at  9.30am in 6 days
 event booksale /at 2021-08-08
 deadline presentation /by 2021-08-02
+find pres
+find
 delete
 delete 31
 delete31

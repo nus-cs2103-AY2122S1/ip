@@ -85,6 +85,8 @@ added: [D][ ] presentation (by: Aug 2 2021) to your to-do list!
 Now you have 9 tasks in the list.
 Saving file
 File not found
+Oops :( Friend does not recognise this command! Did you spell your command correctly?
+Oops :( Friend does not recognise this command! Did you spell your command correctly?
 Sorry, I am not sure what the task number is :(
 Sorry, this task number cannot be found :(
 Sorry, I am not sure what the task number is :(
