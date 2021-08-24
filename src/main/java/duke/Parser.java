@@ -23,6 +23,7 @@ public class Parser {
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
+                System.out.println("Here are the tasks on your list: ");
                 list.printList();
             } else if (input.startsWith("done")) {
                 try {
@@ -35,6 +36,12 @@ public class Parser {
             } else if (input.startsWith("delete")) {
                 try {
                     list.deleteTask(input);
+                } catch (DukeException e) {
+                    ui.printErrorMessage(e.getMessage());
+                }
+            } else if (input.startsWith("find")) {
+                try {
+                    list.findTask(input);
                 } catch (DukeException e) {
                     ui.printErrorMessage(e.getMessage());
                 }

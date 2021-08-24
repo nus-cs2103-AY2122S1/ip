@@ -22,4 +22,7 @@ public class Task {
         return (done ? "1" : "0") + " | " + title;
     }
 
+    public String getTitle() {
+        return title;
+    }
 }

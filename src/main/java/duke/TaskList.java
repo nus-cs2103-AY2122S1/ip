@@ -1,9 +1,6 @@
 package duke;
 
-import duke.exception.EmptyDescriptionException;
-import duke.exception.InvalidDeadlineException;
-import duke.exception.InvalidTaskException;
-import duke.exception.OutOfBoundException;
+import duke.exception.*;
 
 import java.util.ArrayList;
 
@@ -20,7 +17,6 @@ public class TaskList {
 
     //print a list
     public String printList() {
-        System.out.println("Here are the tasks on your list: ");
         String str = "";
         for (int i = 1; i <= list.size(); i++) {
             str = str + i + ". " + list.get(i-1) + "\n";
@@ -117,6 +113,26 @@ public class TaskList {
             System.out.println("Now you have " + list.size()
                     + (list.size() == 1 ? " task in the list" : " tasks in the list."));
             return task;
+        }
+    }
+
+    public TaskList findTask(String str)throws TaskDoesNotExistException {
+        String t = str.substring(5);
+        ArrayList<Task> l = new ArrayList<>();
+
+        for (Task task: list) {
+            if (task.getTitle().contains(t)) {
+                l.add(task);
+            }
+        }
+
+        if (l.isEmpty()) {
+            throw new TaskDoesNotExistException();
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            TaskList list = new TaskList(l);
+            list.printList();
+            return list;
         }
     }
 
