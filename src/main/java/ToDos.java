@@ -10,9 +10,4 @@ public class ToDos extends Task{
     public String getShortForm() {
         return "T";
     }
-
-    @Override
-    public String toString() {
-        return "[T] " + super.toString();
-    }
 }

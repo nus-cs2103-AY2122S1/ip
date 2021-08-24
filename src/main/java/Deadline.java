@@ -20,6 +20,6 @@ public class Deadline extends DateDependentTask {
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + super.getDateString() + ")";
+        return super.toString() + " (by: " + super.getDateString() + ")";
     }
 }

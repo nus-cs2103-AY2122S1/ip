@@ -40,6 +40,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + (isCompleted ? "X" : "") + "] " + this.description;
+        return "[" + getShortForm() + "] [" + (isCompleted ? "X" : "") + "] " + this.description;
     }
 }
