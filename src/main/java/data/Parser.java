@@ -46,6 +46,9 @@ public class Parser {
         case "bye":
             return prepareExitCommand(userInputArray);
 
+        case "find":
+            return prepareFindCommand(userInputArray);
+
         default:
             throw new DukeException("Invalid Keyword.");
         }
@@ -166,6 +169,21 @@ public class Parser {
             return new ExitCommand();
         } else {
             throw new DukeException("The description of a bye MUST be empty.");
+        }
+    }
+
+    /**
+     * Checks for invalid inputs and returns a find command if input is valid.
+     *
+     * @param userInputArray userInputArray from parse method
+     * @return a FindCommand
+     */
+    private static Command prepareFindCommand(String[] userInputArray) {
+        //checks if there is a 2nd input(word to be searched)
+        if (userInputArray.length == 2) {
+            return new FindCommand(userInputArray[1]);
+        } else {
+            throw new DukeException("Please enter the word to search for");
         }
     }
 }

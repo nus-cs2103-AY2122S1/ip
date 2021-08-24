@@ -63,4 +63,20 @@ public class TaskList {
     public Task getTask(int index) {
         return tasks.get(index);
     }
+
+    /**
+     * Filters through the TaskList and returns a new TaskList with tasks containing the keyword.
+     *
+     * @param keyword Keyword to be searched by
+     * @return A new TaskList of tasks that contain the keyword.
+     */
+    public TaskList searchByKeyword(String keyword) {
+        TaskList filteredTaskList = new TaskList();
+        for (Task task : this.tasks) {
+            if (task.toString().contains(keyword)) {
+                filteredTaskList.addTask(task);
+            }
+        }
+        return filteredTaskList;
+    }
 }
