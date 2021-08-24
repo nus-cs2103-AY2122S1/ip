@@ -4,13 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TaskDatabase {
-    public static List<Task> readTaskData(File file) {
-        List<Task> tasks = new ArrayList<>();
+public class Storage {
+    private File file;
+    
+    public Storage(String path) {
         try {
+            this.file = new File(path);
             if (!file.exists()) {
                 file.createNewFile();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public List<Task> load() throws DukeException {
+        List<Task> tasks = new ArrayList<>();
+        try {
             Scanner sc = new Scanner(new FileInputStream(file));
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
@@ -28,13 +37,13 @@ public class TaskDatabase {
                         break;
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new DukeException("Unable to read duke.txt");
         }
         return tasks;
     }
     
-    public static void writeTaskData(File file, List<Task> tasks) {
+    public void write(List<Task> tasks) {
         try {
             PrintWriter writer = new PrintWriter(new FileOutputStream(file));
             for (Task t : tasks) {
