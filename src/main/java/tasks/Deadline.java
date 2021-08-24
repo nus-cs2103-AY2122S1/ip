@@ -1,6 +1,6 @@
 package tasks;
 
-import utils.StorageParser;
+import utils.StorageElement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -17,9 +17,9 @@ public class Deadline extends Task {
         return this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
-    public Deadline(StorageParser storageParser) {
-        super(storageParser);
-        this.by = LocalDate.parse(storageParser.getTime());
+    public Deadline(StorageElement storageElement) {
+        super(storageElement);
+        this.by = storageElement.getTime();
     }
 
     public String toString() {
@@ -27,9 +27,10 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String saveFormat() {
-        return String.join(Task.delimiter,
-                            super.saveFormat(),
-                            this.by.toString());
+    public StorageElement getStorageElement() {
+        return new StorageElement(this.taskIcon,
+                this.isDone,
+                this.description,
+                this.by);
     }
 }

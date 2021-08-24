@@ -1,14 +1,21 @@
 package tasks;
-
-import tasks.Task;
+import exceptions.DukeException;
+import utils.StorageElement;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
     protected ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
+    }
+
+    public TaskList(List<StorageElement> storageList) throws DukeException {
+        for (StorageElement storageElement : storageList) {
+            this.addTask(Task.of(storageElement));
+        }
     }
 
     public void addTask(Task task) {
@@ -45,11 +52,11 @@ public class TaskList {
         return description;
     }
 
-    public String saveFormat() {
-        String fileContent = "";
+    public List<StorageElement> getStorageList() {
+        List<StorageElement> storageList = new ArrayList<>();
         for (Task task : this.taskList) {
-            fileContent += task.saveFormat() + "\n";
+            storageList.add(task.getStorageElement());
         }
-        return fileContent;
+        return storageList;
     }
 }

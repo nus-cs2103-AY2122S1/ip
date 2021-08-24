@@ -1,6 +1,6 @@
 package tasks;
 
-import utils.StorageParser;
+import utils.StorageElement;
 
 public class Todo extends Task {
     public Todo(String description) {
@@ -8,18 +8,18 @@ public class Todo extends Task {
         this.taskIcon = "T";
     }
 
-    public Todo(StorageParser storageParser) {
-        super(storageParser);
+    public Todo(StorageElement storageElement) {
+        super(storageElement);
     }
 
     public String toString() {
         return "[T]" + super.toString();
     }
 
-    public String saveFormat() {
-        return String.join(Task.delimiter,
-                this.taskIcon,
-                isDone ? "1" : "0",
+    @Override
+    public StorageElement getStorageElement() {
+        return new StorageElement(this.taskIcon,
+                this.isDone,
                 this.description);
     }
 }
