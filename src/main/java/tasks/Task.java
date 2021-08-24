@@ -1,6 +1,6 @@
 package tasks;
 
-public class Task {
+public abstract class Task {
     private boolean completed;
 
     public Task() {
@@ -20,6 +20,12 @@ public class Task {
     public String getStatusIcon() {
         return completed ? "X" : " ";
     }
+
+    public int isCompleted() {
+        return completed ? 1 : 0;
+    }
+
+    public abstract String toStorageFormat();
 
 //    @Override
 //    public String toString() {
