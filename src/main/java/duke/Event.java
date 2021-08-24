@@ -1,3 +1,5 @@
+package duke;
+
 public class Event extends DateTask {
     public Event(String description, String at) throws DukeException {
         this(description, at, false);

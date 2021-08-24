@@ -1,3 +1,5 @@
+package duke;
+
 public class Message {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
 

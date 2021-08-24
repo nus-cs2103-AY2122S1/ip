@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     public static Task parseDateTask(String descriptionAndDate, String command) throws DukeException {
         String[] splitDescriptionAndDate;
