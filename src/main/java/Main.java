@@ -1,4 +1,4 @@
-import duke.Duke;
+import kayu.Kayu;
 
 public class Main {
 
@@ -8,8 +8,8 @@ public class Main {
      * @param args command line arguments fed
      */
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+        Kayu kayu = new Kayu();
+        kayu.run();
         System.exit(0);
     }
 }

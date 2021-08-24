@@ -20,9 +20,9 @@ then
 fi
 
 # delete saved file from previous run
-if [ -e "./data/duke.txt" ]
+if [ -e "./data/task_list.txt" ]
 then
-    rm ./data/duke.txt
+    rm ./data/task_list.txt
 fi
 
 # run the program, feed Duke.commands from input.txt file and redirect the output to the ACTUAL.TXT
@@ -44,9 +44,9 @@ else
 fi
 
 # delete saved file from previous run
-if [ -e "./data/duke.txt" ]
+if [ -e "./data/task_list.txt" ]
 then
-    rm ./data/duke.txt
+    rm ./data/task_list.txt
 fi
 
 # run the program, feed Duke.commands from input_exception.txt file and redirect the output to the ACTUAL_EXCEPTION.TXT

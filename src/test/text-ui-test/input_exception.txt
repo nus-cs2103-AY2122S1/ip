@@ -6,8 +6,8 @@ list
 todo create errors
 done 4
 done -3
-event test /at 22.10.2019 4321
-event test /at 42.10.2019 4321
+event test /at 22-10-2019 4321
+event test /at 42-10-2019 1234
 event
 event /at
 event test /at
