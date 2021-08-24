@@ -23,11 +23,11 @@ class Ui {
         speak(GREET_CONTENT);
     }
 
-    void confused() {
+    void actConfused() {
         speak("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    void goodbye() {
+    void sayGoodbye() {
         speak(EXIT_CONTENT);
     }
 

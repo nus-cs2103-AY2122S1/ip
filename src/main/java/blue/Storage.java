@@ -55,6 +55,7 @@ class Storage {
         String[] lines = taskRepresentation.split(DELIMITER);
         String classRepr = lines[0];
         String title = lines[1];
+        
         if (classRepr.equals(ToDo.getClassRepr())) {
             task = new ToDo(title);
         } else if (classRepr.equals(Deadline.getClassRepr())) {
@@ -64,6 +65,7 @@ class Storage {
             String at = lines[2];
             task = new Event(title, at);
         }
+        
         return task;
     }
 

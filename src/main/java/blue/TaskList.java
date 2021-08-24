@@ -32,7 +32,7 @@ public class TaskList {
         return tasks.remove(i - 1);
     }
 
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 }

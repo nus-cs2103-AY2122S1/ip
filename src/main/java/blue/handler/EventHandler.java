@@ -16,10 +16,11 @@ public class EventHandler extends CommandHandler {
             int indexAt = input.indexOf(" /at ");
             String title = input.substring(indexSpace + 1, indexAt).strip();
             String at = input.substring(indexAt + 5).strip();
+            
             Event event = new Event(title, at);
             taskList.add(event);
             String response = "Got it. I've added this task:\n" + event + "\n";
-            response += "Now you have " + taskList.size() + " tasks in the list.";
+            response += "Now you have " + taskList.getSize() + " tasks in the list.";
             return response;
         } else {
             throw new BlueException("☹ OOPS!!! The time of an event cannot be empty.");

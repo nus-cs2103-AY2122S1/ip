@@ -29,7 +29,7 @@ public class Blue {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String input = scanner.nextLine();
-            boolean shouldContinue = handle(input);
+            boolean shouldContinue = canHandle(input);
             storage.save(tasks);
             if (!shouldContinue) {
                 break;
@@ -39,13 +39,16 @@ public class Blue {
     }
 
     private void initCommandHandlers() {
-        commandHandlers = new HashMap<>();
+        // Construct the handlers
         ListHandler listHandler = new ListHandler(tasks);
         ToDoHandler toDoHandler = new ToDoHandler(tasks);
         DeadlineHandler deadlineHandler = new DeadlineHandler(tasks);
         EventHandler eventHandler = new EventHandler(tasks);
         DoneHandler doneHandler = new DoneHandler(tasks);
         DeleteHandler deleteHandler = new DeleteHandler(tasks);
+
+        // put the handlers into HashMap
+        commandHandlers = new HashMap<>();
         commandHandlers.put(Command.LIST, listHandler);
         commandHandlers.put(Command.TODO, toDoHandler);
         commandHandlers.put(Command.DEADLINE, deadlineHandler);
@@ -54,10 +57,10 @@ public class Blue {
         commandHandlers.put(Command.DELETE, deleteHandler);
     }
 
-    private boolean handle(String input) {
+    private boolean canHandle(String input) {
         String command = Parser.getCommand(input);
         if (command.equals(Command.EXIT)) {
-            ui.goodbye();
+            ui.sayGoodbye();
             return false;
         }
         if (commandHandlers.containsKey(command)) {
@@ -69,7 +72,7 @@ public class Blue {
                 ui.speak(e.getMessage());
             }
         } else {
-            ui.confused();
+            ui.actConfused();
         }
         return true;
     }

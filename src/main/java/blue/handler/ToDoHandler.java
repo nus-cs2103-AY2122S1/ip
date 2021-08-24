@@ -14,10 +14,11 @@ public class ToDoHandler extends CommandHandler {
         if (input.contains(" ")) {
             int index = input.indexOf(" ");
             String title = input.substring(index + 1).strip();
+            
             ToDo toDo = new ToDo(title);
             taskList.add(toDo);
             String response = "Got it. I've added this task:\n" + toDo + "\n";
-            response += "Now you have " + taskList.size() + " tasks in the list.";
+            response += "Now you have " + taskList.getSize() + " tasks in the list.";
             return response;
         } else {
             throw new BlueException("☹ OOPS!!! The description of a todo cannot be empty.");
