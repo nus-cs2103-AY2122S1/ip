@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Duke {
@@ -72,6 +73,9 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     String emptyDescription = "OOPS!!! The description/by of a deadline cannot be empty.";
                     this.sendMessage(emptyDescription);
+                } catch (DateTimeParseException e) {
+                    String wrongFormat = "Please enter date in this format: YYYY-MM-DD";
+                    this.sendMessage(wrongFormat);
                 }
                 break;
 
