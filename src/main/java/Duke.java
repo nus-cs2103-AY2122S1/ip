@@ -1,5 +1,5 @@
-import java.io.File;
-import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -103,7 +103,7 @@ public class Duke {
                         String[] text = next[1].split("/by ");
                         try {
                             String desc = text[0];
-                            String dueDate = text[1];
+                            LocalDate dueDate = LocalDate.parse(text[1]);
                             Deadline dl = new Deadline(desc, dueDate);
                             taskList.add(dl);
                             System.out.println(sepLine + "\n added: " + dl + "\n");
@@ -111,6 +111,8 @@ public class Duke {
                             System.out.println(sepLine);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new MissingFieldException();
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Failed to parse date given");
                         }
                     } else if (command.equals("event")) {
                         // Add an event to the task list
