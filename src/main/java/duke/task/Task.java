@@ -137,4 +137,14 @@ public class Task {
     public boolean compareTime(String time) {
         return true;
     }
+
+    /**
+     * Returns whether the task have this content.
+     *
+     * @param content The content.
+     * @return The boolean.
+     */
+    public boolean contains(String content) {
+        return this.description.contains(content);
+    }
 }

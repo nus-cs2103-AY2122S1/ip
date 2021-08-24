@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.command.Command;
 import duke.exception.OutOfRangeException;
 import duke.storage.Storage;
 import duke.task.Task;
