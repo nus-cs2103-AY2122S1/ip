@@ -12,7 +12,7 @@ public class Todo extends Task {
      * @param title a String representing the title of the to-do
      */
     public Todo(String title) {
-        super(title, TypeIndicators.TODO);
+        super(title, TypeIndicator.TODO);
     }
 
     /**
@@ -21,7 +21,7 @@ public class Todo extends Task {
      * @param isDone a boolean representing whether or not the To-do is completed
      */
     public Todo(String title, boolean isDone) {
-        super(title, TypeIndicators.TODO);
+        super(title, TypeIndicator.TODO);
         this.isDone = isDone;
     }
 }
