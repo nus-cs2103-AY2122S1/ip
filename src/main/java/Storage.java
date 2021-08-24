@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,13 +14,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() throws IOException {
+    public TaskList load() throws IOException {
         Files.createDirectories(Paths.get("data/"));
         File f = new File(filePath);
         if (f.createNewFile()) {
-            return new ArrayList<Task>();
+            return new TaskList(new ArrayList<Task>());
         } else {
-            ArrayList<Task> taskArrayList = new ArrayList<>();
+            TaskList taskList = new TaskList(new ArrayList<Task>());
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String next = s.nextLine();
@@ -37,14 +36,14 @@ public class Storage {
                 if (split[1].equals("X")) {
                     t.markAsDone();
                 }
-                taskArrayList.add(t);
+                taskList.update(t);
             }
             s.close();
-            return taskArrayList;
+            return taskList;
         }
     }
 
-    public void save(ArrayList<Task> taskArrayList) throws IOException{
+    public void save(TaskList taskArrayList) throws IOException{
         for (int i = 0; i < taskArrayList.size(); i++) {
             Task task = taskArrayList.get(i);
             appendToFile(filePath, getStringFormat(task), i);

@@ -1,16 +1,14 @@
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.IOException;
 
 public class Lania {
 
-    private ArrayList<Task> taskArrayList;
+    private TaskList taskList;
     private Ui ui;
     private Storage storage;
 
     public Lania(String filePath) {
-        taskArrayList = new ArrayList<Task>();
         ui = new Ui();
         storage = new Storage(filePath);
     }
@@ -21,13 +19,13 @@ public class Lania {
      * @param t Task provided by the user.
      */
     public void update(Task t) throws LaniaException {
-        taskArrayList.add(t);
+        taskList.update(t);
         try {
-            storage.save(taskArrayList);
+            storage.save(taskList);
         } catch (IOException e) {
             ui.loadingErrorMessage();
         }
-        ui.updateMessage(taskArrayList, t);
+        ui.updateMessage(taskList, t);
     }
 
     /**
@@ -36,14 +34,13 @@ public class Lania {
      * @param i The task number to be completed.
      */
     public void complete(int i) {
-        i--;
-        taskArrayList.get(i).markAsDone();
+        taskList.complete(i);
         try {
-            storage.save(taskArrayList);
+            storage.save(taskList);
         } catch (IOException e) {
             ui.loadingErrorMessage();
         }
-        ui.taskCompleteMessage(taskArrayList, i);
+        ui.taskCompleteMessage(taskList, i);
     }
 
     /**
@@ -52,25 +49,22 @@ public class Lania {
      * @param i The task number to be completed.
      */
     public void remove(int i) {
-        i--;
-        Task t = taskArrayList.get(i);
-        taskArrayList.remove(i);
+        ui.removeTaskMessage(taskList, taskList.remove(i));
         try {
-            storage.save(taskArrayList);
+            storage.save(taskList);
         } catch (IOException e) {
             ui.loadingErrorMessage();
         }
-        ui.removeTaskMessage(taskArrayList, t);
     }
 
     public void run() {
         try {
-            taskArrayList = storage.load();
+            taskList = storage.load();
         } catch (IOException e) {
             ui.loadingErrorMessage();
             e.printStackTrace();
         }
-        ui.listMessage(taskArrayList);
+        ui.listMessage(taskList);
         ui.greetingMessage();
         Scanner s = new Scanner(System.in);
         String input = s.nextLine();
@@ -78,7 +72,7 @@ public class Lania {
         while(!command.equals("bye")) {
             try {
                 if (command.equals("list")) {
-                    ui.listMessage(taskArrayList);
+                    ui.listMessage(taskList);
                 } else if (command.equals("done")) {
                     complete(new Parser().getIndex(input));
                 } else if (command.equals("delete")) {
