@@ -1,20 +1,22 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 
-public class Deadline extends Task{
+public class Event extends Task{
     private LocalDate date;
     private LocalTime time;
 
-    public Deadline(String description, String deadline) {
-        super(description, "[D]");
+    public Event(String description, String deadline) {
+        super(description, "[E]");
         this.date = LocalDate.parse(deadline.substring(0,10));
         this.time = LocalTime.parse(deadline.substring(11), DateTimeFormatter.ofPattern("HHmm"));
     }
 
-    public Deadline(String description, String date, String time) {
-        super(description, "[D]");
+    public Event(String description, String date, String time) {
+        super(description, "[E]");
         this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM d yyyy"));
         this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("h:ma"));
     }
@@ -22,11 +24,9 @@ public class Deadline extends Task{
     @Override
     public String getDescription() {
         return super.getDescription()
-                + " (by: "
+                + " (at: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + this.time.format(DateTimeFormatter.ofPattern(" h:ma"))
+                + this.time.format(DateTimeFormatter.ofPattern(" h:mma"))
                 + ")";
     }
 }
-
-

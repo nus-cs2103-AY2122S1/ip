@@ -1,6 +1,8 @@
-public class DukeException extends IllegalArgumentException{
+package duke;
 
-    DukeException() {
+public class WrongInputException extends DukeException{
+
+    WrongInputException() {
         super();
     }
 
@@ -11,6 +13,6 @@ public class DukeException extends IllegalArgumentException{
      */
     @Override
     public String toString() {
-        return "Oops! ";
+        return super.toString() + "Sorry I do not know what is this!";
     }
 }
