@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import iris.command.Command;
+
 /**
  * Encapsulates storage-related functionality of Iris
  */
@@ -35,15 +37,16 @@ public class Storage {
      * Reads tasks from task file
      *
      * @param tasks TaskList object to update with read tasks
-     * @param ui       Ui object for current Iris instance
      * @throws IrisException for invalid tasks.txt
      */
-    public void readTasks(TaskList tasks, Ui ui) throws IrisException {
+    public void readTasks(TaskList tasks) throws IrisException {
         File taskFile = new File(taskFilePath);
         try {
             Scanner scanner = new Scanner(taskFile);
             while (scanner.hasNextLine()) {
-                Parser.handleCommand(scanner.nextLine(), tasks, ui, true);
+                String rawCommand = scanner.nextLine();
+                Command command = Parser.parse(rawCommand);
+                command.runSilently(tasks);
             }
         } catch (FileNotFoundException exception) {
             createTaskFile();

@@ -1,8 +1,13 @@
 package iris;
 
-import java.util.List;
-
-import iris.task.Task;
+import iris.command.Command;
+import iris.command.ListCommand;
+import iris.command.ToDoCommand;
+import iris.command.DeadlineCommand;
+import iris.command.EventCommand;
+import iris.command.DoneCommand;
+import iris.command.DeleteCommand;
+import iris.command.FindCommand;
 
 /**
  * Encapsulates the parsing-related functionality of Iris
@@ -26,69 +31,32 @@ public class Parser {
         }
     }
 
-    /**
-     * Handles a given command
-     *
-     * @param command  raw text representing command
-     * @param tasks TaskList object representing current list of tasks
-     * @param ui       Ui object for current Iris instance
-     * @throws IrisException for invalid commands
-     */
-    public static void handleCommand(String command, TaskList tasks, Ui ui) throws IrisException {
-        handleCommand(command, tasks, ui, false);
-    }
-
-    /**
-     * Handles a given command
-     *
-     * @param command  raw text representing command
-     * @param tasks TaskList object representing current list of tasks
-     * @param ui       Ui object for current Iris instance
-     * @param silent   disables Ui if true
-     * @throws IrisException for invalid commands
-     */
-    public static void handleCommand(String command, TaskList tasks, Ui ui, boolean silent) throws IrisException {
+    public static Command parse(String command) throws IrisException {
         if (command.equals("list")) {
-            ui.listTasks(tasks);
-        } else if (command.startsWith("done")) {
-            Task task = tasks.done(parseInt(getMetadata(command)));
-            if (!silent) ui.say(String.format("Good job! I've marked this task as done: %s", task));
-        } else if (command.startsWith("delete")) {
-            Task task = tasks.delete(parseInt(getMetadata(command)));
-            if (!silent) {
-                ui.say("Noted. I've removed this task:");
-                ui.say(task.toString(), false);
-                int count = tasks.getCount();
-                ui.say(String.format("Now you have %d %s in the list.",
-                        count, count == 1 ? "task" : "tasks"), false);
-            }
+            return new ListCommand();
         } else if (command.startsWith("todo")) {
-            tasks.addTodo(getMetadata(command));
-            if (!silent) {
-                ui.sayTaskAdded(tasks);
-            }
+            return new ToDoCommand(getMetadata(command));
         } else if (command.startsWith("deadline")) {
             String[] splitted = getMetadata(command).split(" /by ");
             if (splitted.length != 2) {
                 throw new IrisException("deadline should have 2 arguments: a name and a time");
             }
-            tasks.addDeadline(splitted[0], splitted[1]);
-            if (!silent) {
-                ui.sayTaskAdded(tasks);
-            }
+            return new DeadlineCommand(splitted[0], splitted[1]);
         } else if (command.startsWith("event")) {
             String[] splitted = getMetadata(command).split(" /at ");
             if (splitted.length != 2) {
                 throw new IrisException("event should have 2 arguments: a name and a time");
             }
-            tasks.addEvent(splitted[0], splitted[1]);
-            if (!silent) {
-                ui.sayTaskAdded(tasks);
-            }
+            return new EventCommand(splitted[0], splitted[1]);
+        } else if (command.startsWith("done")) {
+            int index = parseInt(getMetadata(command));
+            return new DoneCommand(index);
+        } else if (command.startsWith("delete")) {
+            int index = parseInt(getMetadata(command));
+            return new DeleteCommand(index);
         } else if (command.startsWith("find")) {
             String searchTerm = getMetadata(command);
-            List<Task> searchResults = tasks.find(searchTerm);
-            ui.listTasks(searchResults);
+            return new FindCommand(searchTerm);
         } else {
             throw new IrisException("I'm sorry, but I don't know what that means.");
         }

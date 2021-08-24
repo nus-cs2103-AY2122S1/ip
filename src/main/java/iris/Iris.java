@@ -1,5 +1,7 @@
 package iris;
 
+import iris.command.Command;
+
 /**
  * Represents an Iris object
  */
@@ -19,8 +21,7 @@ public class Iris {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            // TODO: reading tasks should not need UI since it's silent
-            storage.readTasks(tasks, ui);
+            storage.readTasks(tasks);
         } catch (IrisException exception) {
             ui.sayError(exception);
         }
@@ -31,15 +32,15 @@ public class Iris {
      */
     public void run() {
         ui.say("Hello! I'm Iris. What can I do for you?");
-        String command = ui.prompt();
-        while (!command.equals(ENDING_COMMAND)) {
+        String rawCommand = ui.prompt();
+        while (!rawCommand.equals(ENDING_COMMAND)) {
             try {
-                Parser.handleCommand(command, tasks, ui);
+                Command command = Parser.parse(rawCommand);
+                command.run(tasks, ui, storage);
             } catch (IrisException exception) {
                 ui.sayError(exception);
             }
-            storage.writeTasks(tasks);
-            command = ui.prompt();
+            rawCommand = ui.prompt();
         }
 
         ui.say("Bye. Hope to see you again soon!");
