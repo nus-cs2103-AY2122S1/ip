@@ -29,7 +29,7 @@ public class Duke {
             "     What can I do for you?\n" +
             "    ____________________________________________________________";
         //ArrayList to store whatever text entered by the user
-        UserDataManager userFile = new UserDataManager();
+        Storage userFile = new Storage();
         ArrayList<Task> userList = userFile.getUserDataFromFile();
 
         Scanner userInput = new Scanner(System.in);

@@ -2,19 +2,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Class that loads and saves a user's file.
+ * Class that deals with loading tasks from the file and saving tasks in the file
  */
-public class UserDataManager {
+public class Storage {
     /** File containing the user's saved tasks */
     private File userData;
+    private String pathname = "./src/main/data/USERDATA.TXT";
 
-    public UserDataManager() {
+    public Storage() {
         try {
-            userData = new File("./src/main/data/USERDATA.TXT");
+            userData = new File(pathname);
             userData.createNewFile();
         } catch (IOException e) {
             System.out.println("File not created");
@@ -36,7 +38,7 @@ public class UserDataManager {
                 String[] newTaskArray = sc.nextLine().split(" ");
                 String taskType = newTaskArray[0];
                 boolean isDone = newTaskArray[1].equals("1");
-                Task newTask = taskType.equals("D") ? new Deadline(newTaskArray[2], newTaskArray[3])
+                Task newTask = taskType.equals("D") ? new Deadline(newTaskArray[2], LocalDate.parse(newTaskArray[3]))
                         : taskType.equals("E") ? new Event(newTaskArray[2], newTaskArray[3])
                         : new ToDo(newTaskArray[2]);
                 if (isDone) {
@@ -57,7 +59,7 @@ public class UserDataManager {
      */
     public void updateFile(ArrayList<Task> listOfUserTasks) {
         try {
-            FileWriter newFile = new FileWriter("./src/main/data/USERDATA.TXT");
+            FileWriter newFile = new FileWriter(pathname);
             for (int i = 0; i < listOfUserTasks.size(); i++) {
                 newFile.write(listOfUserTasks.get(i).toData());
             }
