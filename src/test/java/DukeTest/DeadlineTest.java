@@ -1,6 +1,6 @@
 package duketest;
 
-import DukePakage.Deadline;
+import duke.Deadline;
 
 import org.junit.jupiter.api.Test;
 

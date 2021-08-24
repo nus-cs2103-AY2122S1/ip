@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ToDoList {
 
@@ -91,8 +92,19 @@ public class ToDoList {
         Data.updateData(dukeList);
     }
 
-    public static ArrayList<Task> getDukeList() {
-        return ToDoList.dukeList;
+    /**
+     * Searches the entire dukeList for Tasks that contain the keyword.
+     * @param keyword User input that they wish to search for.
+     * @return An ArrayList of Tasks that contain the keyword.
+     */
+    public static ArrayList<Task> searchList(String keyword) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (Task task : dukeList) {
+            if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
+                results.add(task);
+            }
+        }
+        return results;
     }
 
     public static int numberOfTasks() {

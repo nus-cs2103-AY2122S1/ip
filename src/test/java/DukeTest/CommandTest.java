@@ -1,6 +1,6 @@
 package duketest;
 
-import DukePakage.Command;
+import duke.Command;
 
 import org.junit.jupiter.api.Test;
 

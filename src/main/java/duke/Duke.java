@@ -77,6 +77,13 @@ public class Duke {
                         System.out.println(e.getMessage());
                     }
                     break;
+                case FIND:
+                    try {
+                        parser.find(input);
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
                 default:
                     //If no cases above are entered, DukePakage.Duke will not understand the command and prompt the user.
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

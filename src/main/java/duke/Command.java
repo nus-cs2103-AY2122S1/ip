@@ -8,7 +8,8 @@ public enum Command {
     DEADLINE,
     EVENT,
     DELETE,
-    BYE;
+    BYE,
+    FIND;
 
     public static Command readInput(String input) {
         String newInput = input.toLowerCase();
@@ -34,6 +35,9 @@ public enum Command {
                 break;
             case "bye":
                 newCommand = Command.BYE;
+                break;
+            case "find":
+                newCommand = Command.FIND;
                 break;
             default:
                 newCommand = Command.UNRECOGNISED;

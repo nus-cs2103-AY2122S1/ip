@@ -1,6 +1,6 @@
 package duketest;
 
-import DukePakage.Event;
+import duke.Event;
 
 import org.junit.jupiter.api.Test;
 
