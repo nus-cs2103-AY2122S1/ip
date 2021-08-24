@@ -1,4 +1,4 @@
-package DukeTest;
+package duketest;
 
 import DukePakage.Deadline;
 

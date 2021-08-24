@@ -1,4 +1,4 @@
-package DukePakage;
+package duke;
 
 public class Parser {
     private final ToDoList dukeList;

@@ -1,6 +1,6 @@
-package DukeTest;
+package duketest;
 
-import DukePakage.Todo;
+import duke.Todo;
 
 import org.junit.jupiter.api.Test;
 

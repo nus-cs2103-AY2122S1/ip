@@ -1,4 +1,4 @@
-package DukePakage;
+package duke;
 
 import java.util.Scanner;
 
@@ -27,14 +27,14 @@ public class Duke {
      * Calls the appropriate methods depending on what the user has input.
      */
     public void start() {
-        boolean loopStatus = true;
+        boolean isRunning = true;
         UI.greet();
         String input = sc.nextLine();
         Command command = parser.inputToCommand(input);
-        while (loopStatus) {
+        while (isRunning) {
             switch (command) {
                 case BYE:
-                    loopStatus = false;
+                    isRunning = false;
                     ui.exit();
                     break;
                 case LIST:
@@ -81,7 +81,7 @@ public class Duke {
                     //If no cases above are entered, DukePakage.Duke will not understand the command and prompt the user.
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            if (loopStatus) {
+            if (isRunning) {
                 input = sc.nextLine();
                 command = parser.inputToCommand(input);
             }
