@@ -1,5 +1,8 @@
 package kayu.commands;
 
+import static kayu.commands.CommandMessage.ERROR_EMPTY_COMMAND;
+import static kayu.commands.CommandType.EMPTY;
+
 import kayu.exception.DukeException;
 import kayu.service.TaskList;
 
@@ -12,7 +15,7 @@ import kayu.service.TaskList;
 public class EmptyCommand extends Command {
 
     public EmptyCommand() {
-        super(CommandType.EMPTY);
+        super(EMPTY);
     }
 
     /**
@@ -20,6 +23,6 @@ public class EmptyCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {
-        throw new DukeException(CommandMessage.ERROR_EMPTY_COMMAND);
+        throw new DukeException(ERROR_EMPTY_COMMAND);
     }
 }

@@ -2,6 +2,7 @@ package kayu.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static kayu.storage.Storage.INVALID_TASK_FORMAT;
 
 import kayu.exception.StorageException;
 import kayu.task.Deadline;
@@ -103,7 +104,7 @@ public class StorageTest {
             fail();
             
         } catch (StorageException exception) {
-            String expected = String.format(Storage.INVALID_TASK_FORMAT, problematicLine);
+            String expected = String.format(INVALID_TASK_FORMAT, problematicLine);
             assertEquals(expected, exception.getMessage());
         }
     }

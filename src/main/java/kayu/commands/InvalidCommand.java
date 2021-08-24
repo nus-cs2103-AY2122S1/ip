@@ -1,5 +1,8 @@
 package kayu.commands;
 
+import static kayu.commands.CommandMessage.ERROR_UNKNOWN_COMMAND;
+import static kayu.commands.CommandType.INVALID;
+
 import kayu.exception.DukeException;
 import kayu.service.TaskList;
 
@@ -12,7 +15,7 @@ import kayu.service.TaskList;
 public class InvalidCommand extends Command {
     
     public InvalidCommand() {
-        super(CommandType.INVALID);
+        super(INVALID);
     }
 
     /**
@@ -20,6 +23,6 @@ public class InvalidCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {
-        throw new DukeException(CommandMessage.ERROR_UNKNOWN_COMMAND);
+        throw new DukeException(ERROR_UNKNOWN_COMMAND);
     }
 }

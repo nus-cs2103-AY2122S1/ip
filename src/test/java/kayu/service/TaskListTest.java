@@ -3,6 +3,10 @@ package kayu.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static kayu.service.TaskList.EMPTY_LIST_ERROR_MESSAGE;
+import static kayu.service.TaskList.FULL_CAPACITY_ERROR_MESSAGE;
+import static kayu.service.TaskList.INVALID_TASK_ERROR_MESSAGE;
+import static kayu.service.TaskList.MAX_STORAGE;
 
 import kayu.exception.DukeException;
 import kayu.exception.StorageException;
@@ -78,7 +82,7 @@ public class TaskListTest {
 
     @Test
     public void addTask_maxCapacity_exceptionThrown() throws StorageException {
-        List<Task> tasks = IntStream.rangeClosed(1, TaskList.MAX_STORAGE)
+        List<Task> tasks = IntStream.rangeClosed(1, MAX_STORAGE)
                 .boxed()
                 .map(num -> new Todo("mock " + num))
                 .collect(Collectors.toList());
@@ -90,7 +94,7 @@ public class TaskListTest {
             fail();
 
         } catch (DukeException exception) {
-            assertEquals(TaskList.FULL_CAPACITY_ERROR_MESSAGE, exception.getMessage());
+            assertEquals(FULL_CAPACITY_ERROR_MESSAGE, exception.getMessage());
         }
     }
 
@@ -102,7 +106,7 @@ public class TaskListTest {
             fail();
 
         } catch (DukeException exception) {
-            String expected = String.format(TaskList.INVALID_TASK_ERROR_MESSAGE, taskNumber);
+            String expected = String.format(INVALID_TASK_ERROR_MESSAGE, taskNumber);
             assertEquals(expected, exception.getMessage());
         }
     }
@@ -116,7 +120,7 @@ public class TaskListTest {
             fail();
 
         } catch (DukeException exception) {
-            assertEquals(TaskList.EMPTY_LIST_ERROR_MESSAGE, exception.getMessage());
+            assertEquals(EMPTY_LIST_ERROR_MESSAGE, exception.getMessage());
         }
     }
 }

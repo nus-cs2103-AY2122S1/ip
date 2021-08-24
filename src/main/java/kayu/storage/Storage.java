@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  */
 public class Storage {
 
-    // Default Duke.task file directory.
+    // Default task file directory.
     private String taskDirectoryPath = "data";
     private String taskFilePath = taskDirectoryPath + "/task_list.txt";
     
@@ -42,6 +42,7 @@ public class Storage {
      */
     public void setFilePathAndDirectory(String taskFilePath) {
         setTaskFilePath(taskFilePath);
+        
         int splitIdx = taskFilePath.lastIndexOf('/'); // mac/unix
         if (splitIdx < 0) {
             splitIdx = taskFilePath.lastIndexOf('\\'); // win
@@ -76,6 +77,7 @@ public class Storage {
             if (!directory.exists() && !directory.mkdir()) {
                 throw new StorageException(String.format(UNABLE_TO_CREATE_DIRECTORY, taskDirectoryPath));
             }
+            
             File file = new File(taskFilePath);
             if (!file.exists() && !file.createNewFile()) {
                 throw new StorageException(String.format(UNABLE_TO_CREATE_FILE, taskFilePath));
@@ -89,6 +91,7 @@ public class Storage {
         try {
             Path filePath = Paths.get(taskFilePath);
             return Files.readAllLines(filePath);
+            
         } catch (IOException exception) {
             throw new StorageException(String.format(UNABLE_TO_LOAD_PATH, taskFilePath));
         }
@@ -96,6 +99,7 @@ public class Storage {
 
     protected List<Task> decode(List<String> taskLines) throws StorageException {
         List<Task> savedTaskList = new ArrayList<>();
+        
         for (String stringTask : taskLines) {
             Task task = decodeSingleTask(stringTask);
             savedTaskList.add(task);
@@ -105,6 +109,7 @@ public class Storage {
 
     protected Task decodeSingleTask(String stringTask) throws StorageException {
         String[] taskAsArray = stringTask.split(Task.SPLIT_TEMPLATE);
+        
         try {
             String keyword = taskAsArray[0];
             boolean isDone = taskAsArray[1].equals(Task.DONE);
@@ -115,14 +120,17 @@ public class Storage {
             switch (keyword) {
             case Todo.KEYWORD:
                 return new Todo(desc, isDone);
+                
             case Event.KEYWORD:
                 date = LocalDate.parse(taskAsArray[3]);
                 time = LocalTime.parse(taskAsArray[4]);
                 return new Event(desc, isDone, date, time);
+                
             case Deadline.KEYWORD:
                 date = LocalDate.parse(taskAsArray[3]);
                 time = LocalTime.parse(taskAsArray[4]);
                 return new Deadline(desc, isDone, date, time);
+                
             default:
                 throw new StorageException(String.format(INVALID_TASK_FORMAT, stringTask));
             }
@@ -144,6 +152,7 @@ public class Storage {
                     .map(Task::toEncodedString)
                     .collect(Collectors.toList());
             Files.write(filePath, taskLines);
+            
         } catch (IOException exception) {
             throw new StorageException(String.format(UNABLE_TO_LOAD_PATH, taskFilePath));
         }

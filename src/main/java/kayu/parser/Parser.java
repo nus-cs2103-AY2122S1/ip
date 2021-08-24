@@ -30,6 +30,7 @@ public class Parser {
         try {
             String[] inputs = userInput.split(" ", 2);
             String command = inputs[0];
+            
             switch (command) {
             case ByeCommand.COMMAND_WORD:
                 return new ByeCommand();
