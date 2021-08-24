@@ -1,3 +1,4 @@
+	☹ OOPS!!! Sorry, I can't find your list of tasks. I'll create a new one for you.
 	____________________________________________________________
 	 ____        _        
 	|  _ \ _   _| | _____ 
@@ -8,72 +9,77 @@
 	Hello! I'm Duke
 	What can I do for you?
 	____________________________________________________________
+(User) Enter command: 	
 	____________________________________________________________
 	Here are the tasks in your list:
 	  You currently have no tasks. Why not add a task?
 	____________________________________________________________
+(User) Enter command: 	
 	____________________________________________________________
 	Got it. I've added this task:
 	  [T][ ] go shopping
 	Now you have 1 task in your list.
 	____________________________________________________________
+(User) Enter command: 	
 	____________________________________________________________
-	Got it. I've added this task:
-	  [E][ ] workshop  (at:  Tuesday 6-8pm)
-	Now you have 2 tasks in your list.
+	☹ OOPS!!! Please follow date format: yyyy-mm-dd
 	____________________________________________________________
+(User) Enter command: 	
 	____________________________________________________________
-	Got it. I've added this task:
-	  [D][ ] finish homework  (by:  ASAP)
-	Now you have 3 tasks in your list.
+	☹ OOPS!!! Please follow date format: yyyy-mm-dd
 	____________________________________________________________
+(User) Enter command: 	
 	____________________________________________________________
 	Here are the tasks in your list:
 	1. [T][ ] go shopping
-	2. [E][ ] workshop  (at:  Tuesday 6-8pm)
-	3. [D][ ] finish homework  (by:  ASAP)
 	____________________________________________________________
+(User) Enter command: 	
 	____________________________________________________________
 	☹ OOPS!!! The index you entered is invalid. Please try again.
 	____________________________________________________________
-	____________________________________________________________
-	Nice! I've marked this task as done:
-	  [D][X] finish homework  (by:  ASAP)
-	____________________________________________________________
-	____________________________________________________________
-	Here are the tasks in your list:
-	1. [T][ ] go shopping
-	2. [E][ ] workshop  (at:  Tuesday 6-8pm)
-	3. [D][X] finish homework  (by:  ASAP)
-	____________________________________________________________
+(User) Enter command: 	
 	____________________________________________________________
 	☹ OOPS!!! The index you entered is invalid. Please try again.
 	____________________________________________________________
-	____________________________________________________________
-	Noted! I've removed this task:
-	  [E][ ] workshop  (at:  Tuesday 6-8pm)
-	Now you have 2 tasks in your list.
-	____________________________________________________________
+(User) Enter command: 	
 	____________________________________________________________
 	Here are the tasks in your list:
 	1. [T][ ] go shopping
-	2. [D][X] finish homework  (by:  ASAP)
 	____________________________________________________________
+(User) Enter command: 	
+	____________________________________________________________
+	☹ OOPS!!! The index you entered is invalid. Please try again.
+	____________________________________________________________
+(User) Enter command: 	
+	____________________________________________________________
+	☹ OOPS!!! The index you entered is invalid. Please try again.
+	____________________________________________________________
+(User) Enter command: 	
+	____________________________________________________________
+	Here are the tasks in your list:
+	1. [T][ ] go shopping
+	____________________________________________________________
+(User) Enter command: 	
 	____________________________________________________________
 	☹ OOPS!!! The description of a event cannot be left empty. Please try again.
 	____________________________________________________________
+(User) Enter command: 	
 	____________________________________________________________
 	☹ OOPS!!! Arguments do not follow proper format. Don't forget the /at
 	____________________________________________________________
+(User) Enter command: 	
 	____________________________________________________________
 	☹ OOPS!!! Arguments do not follow proper format. Don't forget the /by
 	____________________________________________________________
+(User) Enter command: 	
 	____________________________________________________________
 	☹ OOPS!!! I'm sorry, but I don't know what "blob" means :-(
 	____________________________________________________________
+(User) Enter command: 	
 	____________________________________________________________
 	☹ OOPS!!! I'm sorry, but I don't know what "invalid command" means :-(
 	____________________________________________________________
+(User) Enter command: 	
 	____________________________________________________________
 	Bye. Hope to see you again soon!
 	____________________________________________________________
