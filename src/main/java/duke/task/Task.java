@@ -1,4 +1,9 @@
+package duke.task;
+
 import java.io.Serializable;
+
+import duke.exception.DukeException;
+import duke.exception.InvalidArgumentException;
 
 public abstract class Task implements Serializable {
     private String description;

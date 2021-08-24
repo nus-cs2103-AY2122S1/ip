@@ -1,3 +1,17 @@
+package duke.parser;
+
+import duke.command.AddTaskCommand;
+import duke.command.Command;
+import duke.command.DeleteTaskCommand;
+import duke.command.ExitCommand;
+import duke.command.ListTasksByDateCommand;
+import duke.command.ListTasksCommand;
+import duke.command.MarkTaskDoneCommand;
+import duke.exception.DukeException;
+import duke.exception.InvalidArgumentException;
+import duke.exception.MissingArgumentException;
+import duke.task.Task;
+
 public class Parser {
     private static final String STOP_SIGNAL = "bye";
 
@@ -5,8 +19,7 @@ public class Parser {
      * Parses the user's input and returns the appropriate command to be run by the
      * bot.
      * 
-     * @param input
-     *            The input entered by the user.
+     * @param input The input entered by the user.
      * @return The response to be displayed.
      */
     public static Command parseInputToCommand(String input) throws DukeException {

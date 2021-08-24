@@ -1,7 +1,12 @@
+package duke.tasklist;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import duke.task.LocalDateTimeOrString;
+import duke.task.Task;
 
 public class TaskList implements Serializable {
     private List<Task> taskList;
