@@ -29,4 +29,9 @@ public class TodoCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "[" + INSTRUCTION + "] - " + todo.toString();
+    }
 }

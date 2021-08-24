@@ -28,4 +28,9 @@ public class EventCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "[" + INSTRUCTION + "] - " + event.toString();
+    }
 }

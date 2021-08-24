@@ -28,4 +28,9 @@ public class DeadlineCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "[" + INSTRUCTION + "] - " + deadline.toString();
+    }
 }

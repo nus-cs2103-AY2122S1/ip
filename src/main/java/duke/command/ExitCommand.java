@@ -16,4 +16,9 @@ public class ExitCommand extends Command {
     public boolean isExit() {
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "[" + INSTRUCTION + "]";
+    }
 }
