@@ -1,11 +1,15 @@
-todo borrow book
-deadline math assignment /by 15 Sep 12pm
-todo read book
-event project meeting /at 7pm
-deadline return book /by 21 Sep 2359H
-todo buy groceries
+todo t1
+deadline d1 /by Tuesday
+event e1 /at 8pm
+todo t2
+blah
+todo
+deadline nodate
+event nodate
 list
-done 1
 done 3
+delete 1
+done -1
+delete 4
 list
 bye
