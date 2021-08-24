@@ -31,6 +31,7 @@ public class Lebron {
         DEADLINE("deadline"),
         EVENT("event"),
         DELETE("delete"),
+        FIND("find"),
         OTHER(" ");
 
         private String text;
@@ -127,6 +128,10 @@ public class Lebron {
                 int pos2 = Integer.parseInt(splitWords[1]);
                 taskList.delete(pos2 - 1);
                 storage.saveToFile(taskList.getLst());
+                break;
+            case FIND:
+                String keyword = splitWords[1];
+                ui.replyFind(taskList, keyword);
                 break;
             case OTHER:
                 System.out.println(HORIZONTAL_LINE +
