@@ -1,7 +1,10 @@
-public class Event extends Task{
-    private String when;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String when) {
+public class Event extends Task{
+    private LocalDateTime when;
+
+    public Event(String description, LocalDateTime when) {
         super(description);
         this.when = when;
     }
@@ -12,6 +15,6 @@ public class Event extends Task{
     }
 
     public String showWhen(){
-        return String.format("(at: %s)", this.when);
+        return String.format("(at: %s)", when.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm")));
     }
 }
