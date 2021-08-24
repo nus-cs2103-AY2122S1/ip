@@ -30,6 +30,8 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = null;
+
+        // Create Todo, Deadline or Event task
         switch (taskType) {
         case "todo":
             if (description.isBlank()) {
@@ -51,8 +53,12 @@ public class AddCommand extends Command {
         default:
             break;
         }
+
+        // Add task to list in Duke, and persist to text file
         tasks.add(t);
         storage.append(t.toStringForFile() + System.lineSeparator());
+
+        // Display response to user
         ui.showResponse("Got it. I've added this task: \n\t\t "
                 + t
                 + "\n\t Now you have " + tasks.getSize() + " tasks in the list.");
