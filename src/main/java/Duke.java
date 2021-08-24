@@ -2,13 +2,12 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 import static java.lang.Integer.parseInt;
-import java.io.File;  // Import the File class
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter; // Import this class to handle errors
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -21,11 +20,12 @@ import java.time.LocalDate;
 
 public class Duke {
 
-    public static void addTask(List<Task> ls) {
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(ls.get(ls.size() - 1).toString());
-        System.out.println("Now you have " + ls.size() + " tasks in the list.");
+    private TaskList taskList;
+
+    Duke() {
+        taskList = new TaskList(new ArrayList<Task>());
     }
+
 
     /**
      * A method to get the description from a task entered by the user
@@ -112,7 +112,7 @@ public class Duke {
         return true;
     }
 
-    public static void readFile(List<Task> ls) {
+    public static void readFile(TaskList ls) {
         try {
             String arr[];
             File myObj = new File("data/duke.txt");
@@ -137,9 +137,7 @@ public class Duke {
                     if (task.substring(4) == "Done") {
                         item.markAsDone();
                     }
-                    System.out.println(description);
-                    System.out.println(deadline);
-                    ls.add(item);
+                    ls.addTask(item);
                 } else if (task.charAt(2) == 'E') {
                     String deadline = arr[2].substring(1, arr[2].length() - 1);
                     for (int i = 2; i < arr.length; i++) {
@@ -155,14 +153,14 @@ public class Duke {
                     if (task.substring(4) == "Done") {
                         item.markAsDone();
                     }
-                    ls.add(item);
+                    ls.addTask(item);
                 }
                 else {
                     Todo item = new Todo(description);
-                    if (task.charAt(4) == 'X') {
+                    if (task.substring(4) == "Done") {
                         item.markAsDone();
                     }
-                    ls.add(item);
+                    ls.addTask(item);
                 }
             }
             myScanner.close();
@@ -172,17 +170,17 @@ public class Duke {
         }
     }
 
-    public static void saveFile(List<Task> ls) {
+    public static void saveFile(TaskList ls) {
         try {
             String str = "";
-            for (int i = 0; i < ls.size(); i++) {
+            for (int i = 0; i < ls.getSize(); i++) {
                 str += (i + 1) + "."
-                        + ls.get(i).toString().charAt(1)
-                            + "|" + ls.get(i).getStatus() + " " + ls.get(i).getDescription();
-                if (ls.get(i) instanceof Deadline || ls.get(i) instanceof Event) {
-                    str += "(" + ls.get(i).getDeadline() + ")";
+                        + ls.getTask(i).toString().charAt(1)
+                            + "|" + ls.getTask(i).getStatus() + " " + ls.getTask(i).getDescription();
+                if (ls.getTask(i) instanceof Deadline || ls.getTask(i) instanceof Event) {
+                    str += "(" + ls.getTask(i).getDeadline() + ")";
                 }
-                if (i != ls.size() - 1) {
+                if (i != ls.getSize() - 1) {
                     str += "\n";
                 }
             }
@@ -195,32 +193,20 @@ public class Duke {
         }
     }
 
-    public static void displayList(List<Task> ls) {
-        if (ls.size() == 0) {
-            System.out.println("You currently do not have any task!");
-        } else {
-            System.out.println("Here are the tasks in your list: ");
-            for (int i = 0; i < ls.size(); i++) {
-                System.out.println((i + 1) + "." + ls.get(i).toString());
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        List<Task> ls = new ArrayList<>();
-        readFile(ls);
+    public void run() {
+        readFile(taskList);
         String input = "";
         String[] arr;
         Scanner scan = new Scanner(System.in);
         System.out.println(
                 "Hello! I'm Amped :) \n"
-                + "Type: \n"
-                + "1. A task (todo/deadline/event) followed by description to add tasks \n"
-                + "   e.g \"deadline submit homework /by Sunday 12 pm\" \n"
-                + "2. \"list\" to see the list of tasks \n"
-                + "3. \"done [number]\" to mark a particular task as done \n"
-                + "4. \"delete [number]\" to delete a particular task \n"
-                + "5. \"bye\" to exit"
+                        + "Type: \n"
+                        + "1. A task (todo/deadline/event) followed by description to add tasks \n"
+                        + "   e.g \"deadline submit homework /by Sunday 12 pm\" \n"
+                        + "2. \"list\" to see the list of tasks \n"
+                        + "3. \"done [number]\" to mark a particular task as done \n"
+                        + "4. \"delete [number]\" to delete a particular task \n"
+                        + "5. \"bye\" to exit"
         );
         do {
             try {
@@ -233,55 +219,55 @@ public class Duke {
                         throw new InvalidCommandException("Please specify a number");
                     } else if (!isNumeric(arr[1])) {
                         throw new InvalidCommandException("Please enter a number");
-                    } else if (ls.size() == 0) {
+                    } else if (taskList.getSize() == 0) {
                         throw new InvalidCommandException("You have not added any task!");
-                    } else if ((Integer.parseInt(arr[1]) > ls.size()
+                    } else if ((Integer.parseInt(arr[1]) > taskList.getSize()
                             || Integer.parseInt(arr[1]) <= 0)) {
                         throw new InvalidValueException("Enter a valid number!");
                     } else {
                         System.out.println("Nice! I've marked this task as done: ");
-                        ls.get(parseInt(arr[1]) - 1).markAsDone();
-                        System.out.println(ls.get(parseInt(arr[1]) - 1).toString());
+                        taskList.markAsDone(parseInt(arr[1]) - 1);
+                        System.out.println(taskList.getTask(parseInt(arr[1]) - 1).toString());
                     }
                 } else if (arr[0].equals("delete")) {
                     if (arr.length == 1) {
                         throw new InvalidCommandException("Please specify a number");
                     } else if (!isNumeric(arr[1])) {
                         throw new InvalidCommandException("Please enter a number");
-                    } else if (ls.size() == 0) {
+                    } else if (taskList.getSize() == 0) {
                         throw new InvalidCommandException("You have not added any task!");
-                    } else if ((Integer.parseInt(arr[1]) > ls.size()
+                    } else if ((Integer.parseInt(arr[1]) > taskList.getSize()
                             || Integer.parseInt(arr[1]) <= 0)) {
                         throw new InvalidValueException("Enter a valid number!");
                     } else {
                         System.out.println("Noted. I've removed this task: ");
-                        System.out.println(ls.get(parseInt(arr[1]) - 1).toString());
-                        ls.remove(parseInt(arr[1]) - 1);
+                        System.out.println(taskList.getTask(parseInt(arr[1]) - 1).toString());
+                        taskList.removeTask(parseInt(arr[1]) - 1);
                     }
                 } else if (arr[0].equals("todo")) {
                     if (arr.length < 2) {
                         throw new EmptyDescriptionException("Missing description / date");
                     }
-                    ls.add(new Todo(getDescription(arr)));
-                    addTask(ls);
+                    taskList.addTask(new Todo(getDescription(arr)));
+                    taskList.printAddTask();
                 } else if (arr[0].equals("deadline")) {
                     if (arr.length < 2) {
                         throw new EmptyDescriptionException("Missing description / date");
                     }
-                    ls.add(new Deadline(getDescription(arr), getDeadline(arr)));
-                    addTask(ls);
+                    taskList.addTask(new Deadline(getDescription(arr), getDeadline(arr)));
+                    taskList.printAddTask();
                 } else if (arr[0].equals("event")) {
                     if (arr.length < 2) {
                         throw new EmptyDescriptionException("Missing description / date");
                     }
-                    ls.add(new Event(getDescription(arr), getDeadline(arr)));
-                    addTask(ls);
+                    taskList.addTask(new Event(getDescription(arr), getDeadline(arr)));
+                    taskList.printAddTask();
                 } else if (input.equals("list")) {
-                    displayList(ls);
+                    taskList.displayList();
                 } else {
                     throw new InvalidCommandException("Command not Found");
                 }
-                saveFile(ls);
+                saveFile(taskList);
             } catch (InvalidCommandException e) {
                 System.out.println(e.toString());
             } catch (EmptyDescriptionException e) {
@@ -292,5 +278,10 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         } while (!input.equals("bye"));
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
     }
 }
