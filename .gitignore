@@ -11,12 +11,13 @@
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
-bin/
+/bin/
 
 # Text ui tests
-/text-ui-test/ACTUAL.txt
-/text-ui-test/ACTUAL_EXCEPTION.txt
-/text-ui-test/EXPECTED-UNIX.TXT
+/test/text-ui-test/data/duke.txt
+/test/text-ui-test/ACTUAL.txt
+/test/text-ui-test/ACTUAL_EXCEPTION.txt
+/test/text-ui-test/EXPECTED-UNIX.TXT
 
 # saved data
 /data/
