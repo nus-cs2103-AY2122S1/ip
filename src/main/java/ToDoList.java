@@ -1,5 +1,3 @@
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -92,34 +90,8 @@ public class ToDoList {
         System.out.println("========== " + this.name + " ===========\n");
     }
 
-    public void save() {
-        try {
-            FileWriter fw = new FileWriter("./data/task-list.txt");
-            Integer number = 1;
-            for (Task a : this.record) {
-                if (a.isCompleted()) {
-                    if (a instanceof Deadline) {
-                        fw.write(number.toString() + "." + a.logo() + "[X] " + ((Deadline) a).getName() +
-                                " (by: " + ((Deadline) a).getDeadline() + ")\n");
-                    } else {
-                        fw.write(number.toString() + "." + a.logo() + "[X] " + a.toString() + "\n");
-                    }
-                } else {
-                    if (a instanceof Deadline) {
-                        fw.write(number.toString() + "." + a.logo() + "[ ] " + ((Deadline) a).getName() +
-                                " (by: " + ((Deadline) a).getDeadline() + ")\n");
-                    } else {
-                        fw.write(number.toString() + "." + a.logo() + "[ ] " + a.toString()+ "\n");
-                    }
-                }
-                number++;
-            }
-            System.out.println("Your task list has been updated successfully.");
-            fw.flush();
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Something's wrong.. I can't find the file..");
-        }
+    public ArrayList<Task> getRecord() {
+        return this.record;
     }
 
     public Task getTask(int index) {
