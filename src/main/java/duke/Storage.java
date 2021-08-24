@@ -11,18 +11,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Deals with laoding tasks from the file and saving tasks in the file.
- */
 public class Storage {
     private File file;
     private Ui ui;
 
-    /**
-     * Constructor of Storage that takes in an Ui instance.
-     *
-     * @param ui An instance to deal with interactions with the user.
-     */
     public Storage(Ui ui) {
         this.ui = ui;
         try {
@@ -44,12 +36,7 @@ public class Storage {
         }
     }
 
-    /**
-     * Load tasks from the file and add each line to an arraylist.
-     *
-     * @return An arraylist of strings, each representing a task information.
-     */
-    public ArrayList<String> load() {
+    public ArrayList load() {
         try {
             Scanner sc = new Scanner(this.file);
             ArrayList<String> tasksInfo = new ArrayList<>();
@@ -63,11 +50,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Save tasks in the file according to the arraylist of tasks given.
-     *
-     * @param tasks An arraylist of tasks to be saved.
-     */
     public void save(ArrayList<Task> tasks) {
         try {
             FileWriter fw = new FileWriter(this.file);

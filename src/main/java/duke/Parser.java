@@ -5,26 +5,13 @@ import duke.command.CommandKeyword;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.task.Task;
-import duke.task.TaskList;
+import duke.task.Tasklist;
 
 import java.util.ArrayList;
 
-/**
- * Deals with making sense of the user command and executing it.
- */
 public class Parser {
 
-    /**
-     * Execute user command and returns a boolean that represents the continuation of the program.
-     * Does not check for validity of user command.
-     *
-     * @param command Command inputted by user.
-     * @param tl List of tasks.
-     * @param storage Storage that store tasks.
-     * @return A boolean to determine if the program should continue.
-     * @throws DukeException If the command execution is unsuccessful.
-     */
-    public static boolean parse(Command command, TaskList tl, Storage storage) throws DukeException {
+    public static boolean parse(Command command, Tasklist tl, Storage storage) throws DukeException {
         boolean shouldContinue = true;
         CommandKeyword keyword = command.getKeyword();
         String restOfCommand = command.getRestOfCommand();
@@ -72,14 +59,6 @@ public class Parser {
         return shouldContinue;
     }
 
-    /**
-     * Convert a type String of an integer to type int.
-     * Returns the integer that is converted.
-     *
-     * @param description The string that is to be converted.
-     * @return The converted integer.
-     * @throws InvalidCommandException If description does not represent a type String of an integer.
-     */
     public static int stringToInt(String description) throws InvalidCommandException {
         if (description.matches("\\d+")) {
             return Integer.parseInt(description);
