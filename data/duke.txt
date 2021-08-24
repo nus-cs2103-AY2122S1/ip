@@ -1,4 +1,0 @@
-T , 1 , read book
-D , 0 , return book , aug 2
-E , 1 , meeting , aug 3
-T , 1 , join club
