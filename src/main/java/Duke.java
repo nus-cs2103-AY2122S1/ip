@@ -13,7 +13,7 @@ public class Duke {
     }
 
     public static void printNoOfTasks() {
-        System.out.printf("    Now you have %d tasks in the list.", list.size());
+        System.out.printf("    Now you have %d tasks in the list.\n", list.size());
     }
 
     public static void main(String[] args) throws DukeException {
