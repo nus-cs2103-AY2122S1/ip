@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exception.InvalidDeadlineException;
+import duke.exception.InvalidTaskException;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

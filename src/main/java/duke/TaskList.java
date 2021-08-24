@@ -1,3 +1,10 @@
+package duke;
+
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidDeadlineException;
+import duke.exception.InvalidTaskException;
+import duke.exception.OutOfBoundException;
+
 import java.util.ArrayList;
 
 public class TaskList {
