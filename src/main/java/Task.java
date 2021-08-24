@@ -36,5 +36,10 @@ public class Task {
         return fullDescription;
     }
 
+    public String toFileString() {
+        String fileString = String.format("%s | %s", getStatusIcon(), getDescription());
+        return fileString;
+    }
+
 
 }
