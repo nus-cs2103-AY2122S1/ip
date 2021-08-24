@@ -20,7 +20,7 @@ public class Ui {
 
     public void showGreeting() {
         System.out.println("OKKAYYY finally awake!");
-        System.out.println("Howwwwwwdy! I'm Bob.Bob :D");
+        System.out.println("Howwwwwwdy! I'm Bob :D");
         System.out.println("What do you want?\n");
     }
 
