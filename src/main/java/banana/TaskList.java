@@ -49,7 +49,7 @@ public class TaskList {
     public Task getTask(int index) {
         return allTasks.get(index);
     }
-
+    
     /**
      * Gets the size of the list.
      *
