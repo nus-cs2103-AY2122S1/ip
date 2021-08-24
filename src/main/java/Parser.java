@@ -1,63 +1,22 @@
-import java.io.IOException;
-import java.util.ArrayList;
-
 public class Parser {
-    private ArrayList<String> lines;
-    private Storage storage;
+    public static Task parseDateTask(String descriptionAndDate, String command) throws DukeException {
+        String[] splitDescriptionAndDate;
+        Task task = null;
 
-    public Parser(Storage storage) throws IOException {
-        this.storage = storage;
-        this.lines = storage.readLines();
-    }
-
-    public ArrayList<Task> retrieveTaskListFromLines() throws FileParseException {
-        ArrayList<Task> tasks = new ArrayList<>();
         try {
-            for (String line : lines) {
-                parseLineToTask(line, tasks);
+            if (command.equals("deadline")) {
+                splitDescriptionAndDate = descriptionAndDate.split(" /by ");
+                task = new Deadline(splitDescriptionAndDate[0].trim(), splitDescriptionAndDate[1].trim());
+            } else if (command.equals("event")) {
+                splitDescriptionAndDate = descriptionAndDate.split(" /at ");
+                task = new Event(splitDescriptionAndDate[0].trim(), splitDescriptionAndDate[1].trim());
             }
-        } catch (DukeException e) {
-            throw new FileParseException("The contents of the file in storage are formatted wrongly.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Oops!!! Deadlines or events should contain a description, followed by " +
+                    "a /by or /at respectively, followed by a date.");
         }
-        return tasks;
-    }
 
-    private void parseLineToTask(String line, ArrayList<Task> tasks) throws DukeException {
-        String[] params = line.split(" \\| ");
-        String taskType = params[0];
-        boolean isTaskDone = params[1].equals("1");
-        String description = params[2];
-
-        switch (taskType) {
-        case "T":
-            tasks.add(new Todo(description, isTaskDone));
-            break;
-        case "D":
-            tasks.add(new Deadline(description, params[3], isTaskDone));
-            break;
-        case "E":
-            tasks.add(new Event(description, params[3], isTaskDone));
-            break;
-        }
-    }
-
-    public void addLine(Task task) throws IOException {
-        lines.add(task.toStorageString());
-        saveLinesToStorage();
-    }
-
-    public void removeLine(Task task) throws IOException {
-        lines.remove(task.toStorageString());
-        saveLinesToStorage();
-    }
-
-    public void editLine(int lineNumber, Task task) throws IOException {
-        lines.set(lineNumber - 1, task.toStorageString());
-        saveLinesToStorage();
-    }
-
-    private void saveLinesToStorage() throws IOException {
-        storage.writeLines(lines);
+        return task;
     }
 
 }
