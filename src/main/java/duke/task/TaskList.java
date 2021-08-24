@@ -57,7 +57,7 @@ public class TaskList {
         if (taskId - 1 < listSize) {
             if (userList.get(taskId - 1).completeTask()) {
                 return String.format(
-                        "You have completed task %d. %s",
+                        "You have completed duke.task %d. %s",
                         taskId,
                         userList.get(taskId - 1).getName()
                 );
@@ -65,7 +65,7 @@ public class TaskList {
                 return "Something seems to have went terribly wrong";
             }
         } else {
-            return String.format("Uh oh, seems like there is no task number %d", taskId);
+            return String.format("Uh oh, seems like there is no duke.task number %d", taskId);
         }
     }
 
@@ -83,12 +83,12 @@ public class TaskList {
                     listSize
             );
         } else {
-            return String.format("Uh oh, seems like there is no task number %d", taskId);
+            return String.format("Uh oh, seems like there is no duke.task number %d", taskId);
         }
     }
 
     /**
-     * Returns the specified task in a string format used for saving in txt file.
+     * Returns the specified duke.task in a string format used for saving in txt file.
      * Should not be exposed directly to the user.
      *
      * @param taskIndex
