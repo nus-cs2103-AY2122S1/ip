@@ -15,6 +15,7 @@ public class Duke {
     
     /**
      * Initialize each component of the program.
+     * Loads any data available from filePath.
      *
      * @param filePath path to the storage file
      */
@@ -55,7 +56,7 @@ public class Duke {
     }
     
     /**
-     * Start the whole program.
+     * Initialize and start the program.
      *
      * @param args any CLI input but currently not used in program
      */

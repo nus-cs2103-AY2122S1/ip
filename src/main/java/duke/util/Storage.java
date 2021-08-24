@@ -35,7 +35,8 @@ public class Storage {
     }
     
     /**
-     * Saves data stored locally. If file does not exist, then a new file will be created.
+     * Saves data stored locally.
+     * If file does not exist, then a new file will be created.
      *
      * @param tasks the list of tasks to be saved into local storage
      * @throws IOException if the named file exists but is a directory rather than a regular file,
@@ -54,10 +55,11 @@ public class Storage {
     }
     
     /**
-     * Loads data stored locally. If file does not exist, then a new file will be created.
+     * Loads data stored locally.
+     * If file does not exist, then a new file will be created.
      *
      * @return an array list of tasks containing any tasks that can be read from local storage
-     * @throws DataIntegrityException if the save file is not in the correct format
+     * @throws DataIntegrityException if the data in the save file is not in the correct format
      * @throws IOException if the named file exists but is a directory rather than a regular file,
      * does not exist but cannot be created, or cannot be opened for any other reason
      */
