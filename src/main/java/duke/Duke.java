@@ -1,7 +1,8 @@
 package duke;
 
+import duke.task.TaskList;
+
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Duke {
     private Storage storage;
@@ -18,7 +19,7 @@ public class Duke {
             System.out.println(ioException);
             tasks = new TaskList();
         }
-        this.parser = new Parser(this.storage, this.ui, this.tasks);
+        this.parser = new Parser(this.tasks);
     }
 
     public static void main(String[] args) throws DukeException, IOException {
@@ -29,20 +30,17 @@ public class Duke {
      * Prints (to screen) duke.Duke's response to the user input, entered from the Command Line.
      */
     private void chat() throws DukeException {
-        String input;
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            input = scanner.nextLine();
-
-            if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                scanner.close();
-                break;
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                duke.command.Command c = parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
             }
-
-            this.parser.parse(input);
-
         }
     }
 }

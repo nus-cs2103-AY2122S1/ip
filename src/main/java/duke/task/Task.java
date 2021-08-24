@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Tracks a task with a description and whether it has been completed yet.
@@ -39,7 +39,11 @@ public class Task {
         return -1;
     }
 
-    public String savedFormat() {
+    public String toSavedFormat() {
         return "";
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 }

@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -40,7 +40,7 @@ public class Event extends Task {
      * @return String
      */
     @Override
-    public String savedFormat() {
+    public String toSavedFormat() {
         return super.description + "/~/" + this.at;
     }
 }

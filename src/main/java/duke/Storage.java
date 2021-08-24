@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -45,7 +47,7 @@ public class Storage {
 
     public void addTodo(Todo todo) {
         try {
-            String textToSave = "T/~/0/~/" + todo.description + "\n";
+            String textToSave = "T/~/0/~/" + todo.toSavedFormat() + "\n";
 
             FileWriter fw = new FileWriter("src/data/duke.txt", true);
             fw.write(textToSave);
@@ -58,7 +60,7 @@ public class Storage {
 
     public void addDeadline(Deadline deadline) {
         try {
-            String textToSave = "D/~/0/~/" + deadline.savedFormat() + "\n";
+            String textToSave = "D/~/0/~/" + deadline.toSavedFormat() + "\n";
 
             FileWriter fw = new FileWriter("src/data/duke.txt", true);
             fw.write(textToSave);
@@ -71,7 +73,7 @@ public class Storage {
 
     public void addEvent(Event event) {
         try {
-            String textToSave = "E/~/0/~/" + event.savedFormat() + "\n";
+            String textToSave = "E/~/0/~/" + event.toSavedFormat() + "\n";
 
             FileWriter fw = new FileWriter("src/data/duke.txt", true);
             fw.write(textToSave);
@@ -85,8 +87,8 @@ public class Storage {
         try {
             Task t = taskList.getTasks().get(taskToMark - 1);
             String taskType = t.taskType() == 0 ? "T" : (t.taskType() == 1 ? "D" : "E");
-            String done = t.isDone ? "1" : "0";
-            String description = t.savedFormat();
+            String done = t.isDone() ? "1" : "0";
+            String description = t.toSavedFormat();
             String textToSave = taskType + "/~/" + done + "/~/" + description;
 
             List<String> fileContent = new ArrayList<>(Files.readAllLines(Path

@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * A type of task that just keeps track of the description.
@@ -34,7 +34,7 @@ public class Todo extends Task {
      * @return String
      */
     @Override
-    public String savedFormat() {
+    public String toSavedFormat() {
         return super.description;
     }
 }

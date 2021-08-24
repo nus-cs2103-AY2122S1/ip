@@ -1,18 +1,32 @@
 package duke;
 
+import duke.task.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Deals with interations with user
  */
 public class Ui {
+    private Scanner scanner;
 
     public Ui() {
+        scanner = new Scanner(System.in);
+    }
+
+    public void showWelcome() {
         System.out.println("Hello! I'm duke.Duke\nWhat can I do for you?");
     }
 
-    public void list(ArrayList<Task> savedInputs) {
+    public String readCommand() {
+        String input = scanner.nextLine();
+        return input;
+    }
+
+    public void list(TaskList taskList) {
+        ArrayList<Task> savedInputs = taskList.getTasks();
         StringBuilder outputList = new StringBuilder();
         outputList.append("Here are the tasks in your list:\n");
         for (int i = 1; i <= savedInputs.size(); i++) {
@@ -22,8 +36,8 @@ public class Ui {
     }
 
     public void done(TaskList taskList, int donePos) {
-        System.out.println("Nice! I've marked this task as done:\n  [X] " +
-                taskList.getTasks().get(donePos - 1).description);
+        System.out.println("Nice! I've marked this task as done:\n  " +
+                taskList.getTasks().get(donePos - 1).toString());
     }
 
     public void delete(TaskList taskList, int deletePos) {
@@ -56,7 +70,15 @@ public class Ui {
         System.out.println("Now you have " + taskList.getTasks().size() + " tasks in the list.");
     }
 
+    public void showError(String message) {
+        System.out.println(message);
+    }
+
     public void invalidUserInput() throws DukeException {
         throw new DukeException("Oops! I'm sorry, but I don't know what that means :-(");
+    }
+
+    public void exit() {
+        System.out.println("Bye. Hope to see you again soon!");
     }
 }
