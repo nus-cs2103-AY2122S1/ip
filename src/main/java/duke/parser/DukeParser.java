@@ -14,17 +14,29 @@ import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+/**
+ * Represents the input parser of the Duke Program.
+ */
 public class DukeParser {
     TaskList list;
     Storage storage;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm", Locale.ENGLISH);
 
-
+    /**
+     * Constructor.
+     * @param list The list to handle.
+     * @param storage The storage to handle.
+     */
     public DukeParser(TaskList list, Storage storage) {
         this.list = list;
         this.storage = storage;
     }
 
+    /**
+     * Takes in raw input of user, processes it and execute the  appropriate action.
+     * @param rawInput
+     * @throws DukeException
+     */
     public void parse(String rawInput) throws DukeException {
         Scanner inputScanner = new Scanner(rawInput);
         String checkForKeyword = inputScanner.next();
@@ -53,6 +65,11 @@ public class DukeParser {
         }
     }
 
+    /**
+     * Action for list command.
+     * @param inputScanner Command Parameters.
+     * @throws InvalidCommandParameterException
+     */
     public void handleList(Scanner inputScanner) throws InvalidCommandParameterException {
         if (inputScanner.hasNext()) {
             throw new InvalidCommandParameterException();
@@ -61,6 +78,12 @@ public class DukeParser {
         }
     }
 
+    /**
+     * Action for done command.
+     * @param inputScanner Command Parameters.
+     * @throws InvalidCommandParameterException
+     * @throws NoSuchTaskException
+     */
     public void handleDone(Scanner inputScanner) throws InvalidCommandParameterException
             , NoSuchTaskException {
         if (inputScanner.hasNextInt()) {
@@ -73,6 +96,12 @@ public class DukeParser {
         }
     }
 
+    /**
+     * Action for delete command.
+     * @param inputScanner Command Parameters.
+     * @throws InvalidCommandParameterException
+     * @throws NoSuchTaskException
+     */
     public void handleDelete(Scanner inputScanner) throws InvalidCommandParameterException
             , NoSuchTaskException {
         if (inputScanner.hasNextInt()) {
@@ -85,6 +114,11 @@ public class DukeParser {
         }
     }
 
+    /**
+     * Action for todo command.
+     * @param inputScanner Command Parameters.
+     * @throws InvalidCommandParameterException
+     */
     public void handleTodo(Scanner inputScanner) throws InvalidCommandParameterException {
         if (inputScanner.hasNextLine()) {
             String secondWord = inputScanner.nextLine();
@@ -96,6 +130,11 @@ public class DukeParser {
         }
     }
 
+    /**
+     * Action for deadline command.
+     * @param inputScanner Command Parameters.
+     * @throws InvalidCommandParameterException
+     */
     public void handleDeadline(Scanner inputScanner) throws InvalidCommandParameterException
              {
         if (inputScanner.hasNextLine()) {
@@ -110,6 +149,11 @@ public class DukeParser {
         }
     }
 
+    /**
+     * Action for Event command.
+     * @param inputScanner Command Parameters.
+     * @throws InvalidCommandParameterException
+     */
     public void handleEvent(Scanner inputScanner) throws InvalidCommandParameterException {
         if (inputScanner.hasNextLine()) {
             String[] contentAndDate = inputScanner.nextLine().split("/at ", 2);
