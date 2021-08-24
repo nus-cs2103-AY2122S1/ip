@@ -20,7 +20,7 @@ public class ToDo extends Task{
      * @param isDone Indicates if the task is done
      */
     public ToDo(String description, Boolean isDone) {
-        super(description);
+        this(description);
         super.setDone(isDone);
     }
 

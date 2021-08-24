@@ -28,8 +28,7 @@ public class Event extends Task{
      * @param isDone indicates if the event is done
      */
     public Event(String description, LocalDate dateTime, boolean isDone) {
-        super(description);
-        this.dateTime = dateTime;
+        this(description, dateTime);
         super.setDone(isDone);
     }
 

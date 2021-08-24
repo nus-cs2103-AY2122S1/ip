@@ -1,23 +1,53 @@
-import java.io.FileWriter;
-import java.io.IOException;
-
 import java.time.LocalDate;
-
 import java.util.ArrayList;
 
 /**
- * The List class stores the list of items. Items are stored in
+ * The TaskList class stores the list of items. Items are stored in
  * an ArrayList of Strings. Supports adding of new items to the list
  * and printing of the entire current list.
  */
-public class List {
+public class TaskList {
     private ArrayList<Task> list;
+    private Ui ui;
 
     /**
-     * Constructor for List class.
+     * Constructor for TaskList class.
      */
-    public List() {
+    public TaskList() {
         this.list = new ArrayList<Task>();
+        this.ui = new Ui();
+    }
+
+    /**
+     * Constructor for TaskList.
+     * Constructs the list based on the given array of strings.
+     *
+     * @param tasklist An array of strings of tasks
+     */
+    public TaskList(ArrayList<String> tasklist) {
+        this();
+        for (String s : tasklist) {
+            String[] splitData = s.split(",");
+            switch(splitData[0]) {
+            case("T"):
+                addTask(splitData[2], Boolean.parseBoolean(splitData[1]));
+                break;
+            case("D"):
+                addTask(splitData[2], LocalDate.parse(splitData[3]),"deadline", Boolean.parseBoolean(splitData[1]));
+                break;
+            case("E"):
+                addTask(splitData[2], LocalDate.parse(splitData[3]), "event", Boolean.parseBoolean(splitData[1]));
+            }
+        }
+    }
+
+    /**
+     * Returns the array of tasks
+     *
+     * @return Array of tasks
+     */
+    public ArrayList<Task> getList() {
+        return this.list;
     }
 
     /**
@@ -25,12 +55,11 @@ public class List {
      *
      * @param description The description of the task
      */
-    public void addTask(String description) {
+    public String addTask(String description) {
         Task task = new ToDo(description);
         this.list.add(task);
-        System.out.println("Task added successfully: \n" + task);
-        System.out.println("Number of tasks in list: " + list.size());
-        saveTask(task.saveString());
+        ui.writeOutput("Task added successfully: \n" + task + "\nNumber of tasks in list: " + list.size());
+        return task.saveString();
     }
 
     /**
@@ -52,18 +81,16 @@ public class List {
      * @param date The date/time attached to the task
      * @param type Indicates if the task is a Deadline or Event
      */
-    public void addTask(String description, LocalDate date, String type) {
+    public String addTask(String description, LocalDate date, String type) {
         Task task;
         if (type.equals("deadline")) {
             task = new Deadline(description, date);
-            saveTask(task.saveString());
         } else {
             task = new Event(description, date);
-            saveTask(task.saveString());
         }
         this.list.add(task);
-        System.out.println("Task added successfully: \n" + task);
-        System.out.println("Number of tasks in list: " + list.size());
+        ui.writeOutput("Task added successfully: \n" + task + "\nNumber of tasks in list: " + list.size());
+        return task.saveString();
     }
 
     /**
@@ -97,7 +124,6 @@ public class List {
         } else {
             Task task = list.get(taskNumber - 1);
             task.setDone(true);
-            rewriteFile();
             return task.toString() + "\nNumber of tasks remaining: " + list.size();
         }
     }
@@ -115,47 +141,20 @@ public class List {
         } else {
             Task task = list.get(taskNumber - 1);
             list.remove(taskNumber - 1);
-            rewriteFile();
             return task.toString() + "\nNumber of tasks remaining: " + list.size();
         }
     }
 
     /**
-     * List the items in the list in the order added, along with a counter.
-     */
-    public void listItems() {
-        for (int i = 1; i <= list.size(); i++) {
-            System.out.println(i + ". " + list.get(i-1));
-        }
-    }
-
-    /**
-     * Save the given task string to file.
+     * Returns an array of tasks in their string representation.
      *
-     * @param taskString The task in string representation
+     * @return Array of tasks in string form
      */
-    private void saveTask(String taskString) {
-        try {
-            FileWriter writer = new FileWriter(Duke.filePath.toString(), true);
-            writer.write(taskString + "\n");
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("Error saving task.\n" + e.getMessage());
+    public ArrayList<String> getTaskList() {
+        ArrayList<String> tasks = new ArrayList<>();
+        for (Task t : list) {
+            tasks.add(t.toString());
         }
-    }
-
-    /**
-     * Rewrite the file with the latest list of tasks.
-     */
-    private void rewriteFile() {
-        try {
-            FileWriter writer = new FileWriter(Duke.filePath.toString());
-            for (Task task : list) {
-                writer.write(task.saveString() + "\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("Failed to rewrite file\n" + e.getMessage());
-        }
+        return tasks;
     }
 }
