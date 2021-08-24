@@ -19,7 +19,8 @@ public class DukeDB {
     String databasePath;
 
     public DukeDB(String database) {
-        if (database == null) {
+        File check = new File(database);
+        if (!check.exists() || database == null) {
             this.create()
                     .map((x) -> {
                         Duke.printMsg("DB cannot be found. New DB created successfully.");
@@ -32,12 +33,7 @@ public class DukeDB {
                         return null;
                     });
         } else {
-            File check = new File(database);
-            if (check.exists()) {
-                this.databasePath = database;
-            } else {
-                this.databasePath = "./data/dukeStore.txt";
-            }
+            this.databasePath = "./data/dukeStore.txt";
         }
 
     }
@@ -76,7 +72,8 @@ public class DukeDB {
                 String strTask = reader.nextLine();
                 String[] splitTask = strTask.split("\\|");
                 Optional<Task> task = this.readTask(splitTask);
-                task.ifPresentOrElse(arr::add, () -> Duke.printMsg("Error loading task. Database is corrupt."));
+                task.ifPresentOrElse(arr::add,
+                        () -> Duke.printMsg("Error loading task. Database is corrupt."));
             }
             return Optional.of(arr);
         } catch (FileNotFoundException e) {
@@ -108,7 +105,8 @@ public class DukeDB {
         } else {
             String description = splitCommand[1];
             boolean isDone = splitCommand[2].equals("1");
-            return Optional.of(new Todo(description, isDone));
+            return Optional.of(new Todo(description,
+                    isDone));
         }
     }
 
@@ -119,7 +117,9 @@ public class DukeDB {
             String description = splitCommand[1];
             String at = splitCommand[2];
             boolean isDone = splitCommand[3].equals("1");
-            return Optional.of(new Event(description, at, isDone));
+            return Optional.of(new Event(description,
+                    at,
+                    isDone));
         }
     }
 
@@ -132,9 +132,11 @@ public class DukeDB {
             boolean isDone = splitCommand[3].equals("1");
 
             try {
-                LocalDateTime dateBy = Parser.parseDateTime(by).orElseThrow(() -> new DukeException("Unable to load " +
-                        "date for task" + description +". Removing the task."));
-                return Optional.of(new Deadline(description, dateBy, isDone));
+                LocalDateTime dateBy = Parser.parseDateTime(by)
+                        .orElseThrow(() -> new DukeException("Unable to load " + "date for task" + description + ". Removing the task."));
+                return Optional.of(new Deadline(description,
+                        dateBy,
+                        isDone));
             } catch (DukeException e) {
                 Duke.printMsg(e.toString());
             }
@@ -146,7 +148,7 @@ public class DukeDB {
         if (!(splitCommand.length > 2)) {
             return Optional.empty();
         } else {
-            switch(splitCommand[0]) {
+            switch (splitCommand[0]) {
                 case "T": {
                     return this.readTodo(splitCommand);
                 }
