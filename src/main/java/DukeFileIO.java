@@ -61,4 +61,13 @@ public class DukeFileIO {
         }
         fw.close();
     }
+
+    public static void createDataFile() {
+        File data = new File("data/duke.txt");
+        try {
+            data.createNewFile();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
