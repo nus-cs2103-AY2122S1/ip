@@ -146,6 +146,25 @@ public class Command {
         return String.format("Nice! I've marked this task as done:\n\t %1$s \n\t", done.toString());
     }
 
+    public String find(String keyword, ArrayList<Task> records) throws DukeException{
+        if (keyword.isEmpty()) {
+            throw new DukeException("OOPS!!! No keyword provided.");
+        }
+        ArrayList<Task> result = new ArrayList<>();
+        final StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n\t");
+
+        for (int i = 0; i < records.size(); i++) {
+            Task current = records.get(i);
+            if (current.description.matches(keyword)) {
+                result.add(current);
+            }
+        }
+        result.forEach((el) -> sb.append(
+                String.format("%1$d. %2$s \n\t",
+                        result.indexOf(el) + 1, el.toString())));
+        return sb.toString();
+    }
+
     /**
      * Returns ending message for bot.
      *
