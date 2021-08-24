@@ -1,5 +1,8 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
-    private String by;
+    private LocalDate by;
 
     /**
      * Constructor for Deadline tasks
@@ -7,7 +10,7 @@ public class Deadline extends Task{
      * @param description description of task /by specific date or time
      */
     public Deadline(String description) {
-        super(description.split("/by", -1)[0]);
+        super(description.split("/by", -1)[0].trim());
         String[] arr = description.split("/by", -1);
         if (arr[0].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYDEADLINE);
@@ -16,12 +19,12 @@ public class Deadline extends Task{
         } else if (arr[1].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYBY);
         } else {
-            this.by = arr[1];
+            this.by = LocalDate.parse(arr[1].trim());
         }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

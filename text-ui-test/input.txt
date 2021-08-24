@@ -10,13 +10,13 @@ todo Go grocery shopping
 deadline
 deadline /by
 deadline CS2103T ip week 2 /by
-deadline /by 19/08/2021
-deadline CS2103T ip week 2 /by 19/08/2021
+deadline /by 2021-08-19
+deadline CS2103T ip week 2 /by 2021-08-19
 event
 event /at
 event CS2103T lecture /at
-event /at Friday 4-6pm
-event CS2103T lecture /at Friday 4-6pm
+event /at 2021-08-27
+event CS2103T lecture /at 2021-08-27
 list
 done
 done two
