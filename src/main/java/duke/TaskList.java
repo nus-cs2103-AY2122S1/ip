@@ -25,7 +25,7 @@ public class TaskList {
     public void add(String userInput, ArrayList<Task> userInputRecord) {
         Task task;
         if(userInput.startsWith("todo")) {
-            String description = userInput.substring(4);
+            String description = userInput.substring(5);
             if (description.trim().isEmpty()) {
                 ui.nonEmptyDescriptionMessage("todo");
                 return;

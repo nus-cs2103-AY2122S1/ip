@@ -39,4 +39,17 @@ public class ParserTaskListTest {
             System.out.println("Test file does not exist");
         }
     }
+
+    @Test
+    public void parseAndTaskList_deleteAll_allEventsDeleted() {
+        try {
+            Scanner testScanner = new Scanner(Paths.get("java","duke","deleteAll-command"));
+            Storage storage = new Storage();
+            Parser parser = new Parser(new TaskList(storage));
+            parser.parse(testScanner);
+            assert(storage.getUserInputRecord().isEmpty());
+        } catch (IOException e) {
+            System.out.println("Test file does not exist");
+        }
+    }
 }
