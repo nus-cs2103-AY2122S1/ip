@@ -6,7 +6,7 @@ import java.io.IOException;
 public class DukeException extends IOException {
 
     /**
-     * A constructor for class DukeException
+     * A constructor for class DukeException.
      *
      * @param message The message to be displayed when this exception is caught.
      */
