@@ -21,7 +21,7 @@ public abstract class Command {
         @Override
         protected void execute() {
             System.out.println("Say something to me :(");
-            Duke.printLine();
+            Ui.printLine();
         }
     }
 
@@ -31,7 +31,7 @@ public abstract class Command {
         @Override
         protected void execute() {
             System.out.println("Bye. Hope to see you again soon!");
-            Duke.printLine();
+            Ui.printLine();
         }
     }
 
@@ -55,7 +55,7 @@ public abstract class Command {
             } else {
                 System.out.println("OOPS!!! The description of a todo cannot be empty.");
             }
-            Duke.printLine();
+            Ui.printLine();
         }
     }
 
@@ -67,7 +67,7 @@ public abstract class Command {
             for (int i = 0; i < Duke.todoList.size(); i++) {
                 System.out.println((i + 1) + ". " + Duke.todoList.get(i).toString());
             }
-            Duke.printLine();
+            Ui.printLine();
         }
     }
 
@@ -87,13 +87,13 @@ public abstract class Command {
                     t.done();
                     System.out.println("Nice! I've marked this task as done:\n    " + t);
                 }
-                Duke.printLine();
+                Ui.printLine();
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("OOPS!!! I'm sorry, but I cannot find that task :(");
-                Duke.printLine();
+                Ui.printLine();
             } catch (NumberFormatException e) {
                 System.out.println("OOPS!!! You need to follow format \"done <number>\"");
-                Duke.printLine();
+                Ui.printLine();
             }
         }
     }
@@ -110,13 +110,13 @@ public abstract class Command {
                 Task t = Duke.todoList.remove(Integer.parseInt(index) - 1);
                 System.out.println("Noted. I've removed this task:\n    " + t);
                 System.out.println("Now you have " + Duke.todoList.size() + " tasks in the list.");
-                Duke.printLine();
+                Ui.printLine();
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("OOPS!!! I'm sorry, but I cannot find that task :(");
-                Duke.printLine();
+                Ui.printLine();
             } catch (NumberFormatException e) {
                 System.out.println("OOPS!!! You need to follow format \"done <number>\"");
-                Duke.printLine();
+                Ui.printLine();
             }
         }
     }
@@ -142,7 +142,7 @@ public abstract class Command {
         while (true) {
             try {
                 String userCommand = myScanner.nextLine();  // Read user input
-                Duke.printLine();
+                Ui.printLine();
 
                 analyze(userCommand);
 
@@ -176,13 +176,13 @@ public abstract class Command {
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :(");
-                Duke.printLine();
+                Ui.printLine();
             } catch (DukeException.DukeEmptyTask e) {
                 System.out.println(e);
-                Duke.printLine();
+                Ui.printLine();
             } catch (DukeException.DukeEmptyNote e) {
                 System.out.println(e);
-                Duke.printLine();
+                Ui.printLine();
             }
         }
     }
