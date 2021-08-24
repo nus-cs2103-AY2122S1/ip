@@ -1,5 +1,11 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import exception.DukeException;
 import exception.IncorrectFormatException;
@@ -8,6 +14,8 @@ import exception.EmptyCommandException;
 import exception.InvalidCommandException;
 import exception.MessageEmptyException;
 import exception.EmptyListException;
+import exception.InvalidDateTimeException;
+import exception.InvalidDurationException;
 
 /**
  * Duke class that initialises the Duke chat bot.
@@ -91,8 +99,9 @@ public class Duke {
     private void addToList(Task task) {
         taskList.add(task);
         System.out.println("Got it. I've added this task:");
-        System.out.println("added: " + task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("Added: " + task);
+        String taskGrammar = (taskList.size() == 1) ? " task" : " tasks";
+        System.out.println("Now you have " + taskList.size() + taskGrammar + " in the list.");
     }
 
     /**
@@ -138,15 +147,27 @@ public class Duke {
      * @throws IncorrectFormatException If the deadline command is used but a "/by" is not present in the message.
      */
 
-    private void addDeadline(String deadline) throws IncorrectFormatException {
+    private void addDeadline(String deadline) throws IncorrectFormatException, InvalidDateTimeException, MessageEmptyException {
         String[] result = deadline.split("/by");
-        if (result.length == 1) {
+        if (result.length == 0) {
+            throw new MessageEmptyException();
+        } else if (result.length == 1) {
             // throws an error if "/by" is not present in the message
             throw new IncorrectFormatException("deadline", "/by");
         }
         String description = result[0].trim(); // trims the additional spaces to the left and right of "by"
         String by = result[1].trim(); // trims the additional spaces to the left and right of "by"
-        Deadline d = new Deadline(description, by);
+
+        LocalDateTime finalBy;
+
+        try {
+            // checks if the formats of the input date and time are correct
+            finalBy = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm"));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException();
+        }
+
+        Deadline d = new Deadline(description, finalBy);
         addToList(d);
     }
 
@@ -166,15 +187,48 @@ public class Duke {
      * @throws IncorrectFormatException If the event command is used but a "/at" is not present in the message.
      */
 
-    private void addEvent(String event) throws IncorrectFormatException {
+    private void addEvent(String event) throws IncorrectFormatException, MessageEmptyException, InvalidDateTimeException, InvalidDurationException {
         String[] result = event.split("/at");
-        if (result.length == 1) {
+        if (result.length == 0) {
+            throw new MessageEmptyException();
+        } else if (result.length == 1) {
             // throws an error if "/at" is not present in the message
             throw new IncorrectFormatException("event", "/at");
         }
-        String description = result[0].trim(); // trims the additional spaces to the left and right of "at"
-        String at = result[1].trim(); // trims the additional spaces to the left and right of "at"
-        Event e = new Event(description, at);
+        String description = result[0].trim();    // trims the additional spaces to the left and right of "at"
+        String at = result[1].trim();             // trims the additional spaces to the left and right of "at"
+
+        // throws error if it doesn't even contain sufficient number of characters for correct format
+        if (at.strip().length() < 19) { // YYYY/MM/DD HHMM - HHMM
+            throw new InvalidDurationException();
+        }
+
+        String date = at.substring(0, 10).trim(); // at this point, date contains 10 chars YYYY/MM/DD
+        String eventDuration = at.substring(11).trim();
+        String[] eventTimes = eventDuration.split("-");
+
+        // if no "-" present
+        if (eventTimes.length != 2) {
+            throw new InvalidDurationException();
+        }
+
+        String startTime = eventTimes[0].trim();
+        String endTime = eventTimes[1].trim();
+
+        LocalDate finalDate;
+        LocalTime finalStartTime;
+        LocalTime finalEndTime;
+
+        try {
+            // checks if the formats of the input date and time are correct
+            finalDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+            finalStartTime = LocalTime.parse(startTime, DateTimeFormatter.ofPattern("HHmm"));
+            finalEndTime = LocalTime.parse(endTime, DateTimeFormatter.ofPattern("HHmm"));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException();
+        }
+
+        Event e = new Event(description, finalDate, finalStartTime, finalEndTime);
         addToList(e);
     }
 
@@ -197,7 +251,8 @@ public class Duke {
         }
         Task task = taskList.remove(intTaskIndex);
         System.out.println("Noted. I've removed this task:\n" + task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        String taskGrammar = (taskList.size() == 1) ? " task" : " tasks";
+        System.out.println("Now you have " + taskList.size() + taskGrammar + " in the list.");
     }
 
     /**
@@ -228,8 +283,12 @@ public class Duke {
                     // throws an error if there is no message input after the command word
                     throw new MessageEmptyException();
                 }
-                // excludes command "deadline " from the string
-                addDeadline(input.substring(9));
+                try {
+                    // excludes command "deadline " from the string
+                    addDeadline(input.substring(9));
+                } catch (InvalidDateTimeException | MessageEmptyException | IncorrectFormatException e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             case "todo":
                 if (words.length == 1) {
@@ -244,8 +303,12 @@ public class Duke {
                     // throws an error if there is no message input after the command word
                     throw new MessageEmptyException();
                 }
-                // excludes command "event" from the string
-                addEvent(input.substring(6));
+                try {
+                    // excludes command "event" from the string
+                    addEvent(input.substring(6));
+                } catch (InvalidDateTimeException | MessageEmptyException | IncorrectFormatException e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             case "delete":
                 if (words.length == 1) {
