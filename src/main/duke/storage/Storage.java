@@ -16,6 +16,11 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class handles the loading and saving of the TaskList into the hard drive.
+ *
+ * @author Chesterwongz
+ */
 public class Storage {
     private final String FILEPATH;
     private static final ArrayList<Task> storageList = new ArrayList<>();
@@ -28,7 +33,7 @@ public class Storage {
     /**
      * Reads and loads the taskList from txt file. Creates new file if it does not exist.
      *
-     * @return  The task list loaded from the txt file.
+     * @return An ArrayList of Tasks loaded from the txt file.
      */
     public ArrayList<Task> load() {
         try {

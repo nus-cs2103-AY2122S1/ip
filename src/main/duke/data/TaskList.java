@@ -23,10 +23,21 @@ public class TaskList {
         return taskList;
     }
 
+    /**
+     * Adds a new Task to the TaskList.
+     *
+     * @param newTask The new Task to be added.
+     */
     public void add(Task newTask) {
         taskList.add(newTask);
     }
 
+    /**
+     * Removes a task from the TaskList.
+     *
+     * @param index The index of the task to be removed
+     * @return The removed Task.
+     */
     public Task remove(int index) {
         return taskList.remove(index);
     }

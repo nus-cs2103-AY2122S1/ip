@@ -24,10 +24,20 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Returns the data representation of a Task object.
+     *
+     * @return The formatted String.
+     */
     public String toData() {
         return getStatusIcon() + "|" + description;
     }
 
+    /**
+     * Returns the String representation of a Task object.
+     *
+     * @return THe String representation of a Task object.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;

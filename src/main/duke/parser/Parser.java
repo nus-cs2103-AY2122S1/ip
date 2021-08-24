@@ -10,9 +10,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This class abstracts the parsing of user input.
+ *
+ * @author Chesterwongz
+ */
 public class Parser {
     private static final String DATE_TIME_FORMAT = "dd-MM-yyy HH:mm";
 
+    /**
+     * Parses the user's input.
+     *
+     * @param input The input String.
+     * @return The user's desired command.
+     * @throws DukeException The Exception to be thrown when the user's input is invalid.
+     */
     public static Command parse(String input) throws DukeException {
         if (input.contains("|")) {
             throw new DukeException("OOPS!!! Your input must not contain \"|\" ☹");
@@ -40,6 +52,7 @@ public class Parser {
             }
         }
     }
+
     /**
      * Adds a To-do task to the taskList.
      *

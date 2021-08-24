@@ -7,12 +7,20 @@ import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
-    protected final int taskNum;
+    private final int taskNum;
 
     public DeleteCommand(int taskNum) {
         this.taskNum = taskNum;
     }
 
+    /**
+     * Execute the command to delete the task from the given TaskList.
+     *
+     * @param tasks   The TaskList of the Duke instance.
+     * @param ui      The UI handler of the Duke instance.
+     * @param storage The storage handler of the Duke instance.
+     * @throws DukeException The checked exception to be thrown when execution fails.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (0 <= taskNum && taskNum < tasks.size()) {

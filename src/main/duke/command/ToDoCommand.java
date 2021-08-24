@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.data.TaskList;
+import duke.data.exception.DukeException;
 import duke.data.task.ToDo;
 import duke.storage.Storage;
 import duke.ui.Ui;
@@ -18,11 +19,11 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Adds a task to the taskList.
+     * Execute the command to add a task to the given TaskList.
      *
-     * @param tasks   The task to be added to the list.
-     * @param ui      The ui handler for the current Duke instance.
-     * @param storage The storage handler fot the current Duke instance.
+     * @param tasks   The TaskList of the Duke instance.
+     * @param ui      The UI handler of the Duke instance.
+     * @param storage The storage handler of the Duke instance.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

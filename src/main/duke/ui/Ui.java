@@ -5,6 +5,11 @@ import duke.data.task.Task;
 
 import java.util.Scanner;
 
+/**
+ * This class abstracts the user interface of Duke.
+ *
+ * @author Chesterwongz
+ */
 public class Ui {
     private static final String line = "__________________________________________________________";
 
@@ -14,6 +19,11 @@ public class Ui {
         this.in = new Scanner(System.in);
     }
 
+    /**
+     * Reads the next line of the user's input.
+     *
+     * @return The String that the user inputs.
+     */
     public String readCommand() {
         return in.nextLine();
     }
@@ -81,11 +91,19 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Prints the error message when the saved tasks could not be loaded.
+     */
     public void showLoadingError() {
         String loadingError = "OOPS!!! We couldn't load your saved tasks!";
         showFramedMsg(loadingError);
     }
 
+    /**
+     * Prints the Error message.
+     *
+     * @param msg The Error message to be printed.
+     */
     public void showError(String msg) {
         showFramedMsg(msg);
     }

@@ -7,12 +7,20 @@ import duke.ui.Ui;
 
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
-    protected final int taskNum;
+    private final int taskNum;
 
     public DoneCommand(int taskNum) {
         this.taskNum = taskNum;
     }
 
+    /**
+     * Execute the command to mark the given task as done.
+     *
+     * @param tasks   The TaskList of the Duke instance.
+     * @param ui      The UI handler of the Duke instance.
+     * @param storage The storage handler of the Duke instance.
+     * @throws DukeException The checked exception to be thrown when execution fails.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (0 <= taskNum && taskNum < tasks.size()) {
