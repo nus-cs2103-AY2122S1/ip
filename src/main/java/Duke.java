@@ -5,11 +5,13 @@
  * @author: Chen Hsiao Ting
  */
 
-import java.awt.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    static ArrayList<Task> request = new ArrayList<Task>();
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -23,7 +25,6 @@ public class Duke {
         System.out.println(divider);
 
         boolean exit = false;
-        ArrayList<Task> request = new ArrayList<Task>();
 
         while (!exit) {
             System.out.print("You: ");
@@ -36,39 +37,13 @@ public class Duke {
                     exit = true;
                     System.out.println("Bye. Hope to see you again soon!");
                 } else if (str.equals("list")) {
-                    int count = 1;
-                    System.out.println("Here are the tasks in your list:");
-                    for (Task t : request) {
-                        System.out.println(count + "." + t.getTask());
-                        count += 1;
-                    }
+                    System.out.println(list());
                 } else if (str.contains("done")) {
-                    int index = Integer.parseInt(str.substring(5)) - 1;
-                    System.out.println(request.get(index).markDone());
+                    System.out.println(done(str));
                 } else if (str.contains("delete")) {
-                    int index = Integer.parseInt(str.substring(7)) - 1;
-                    System.out.println("Noted. I've removed this task: \n" + request.get(index).delete() + "\nNow you have " + (request.size() - 1) + " tasks in the list.");
-                    request.remove(index);
+                    System.out.println(delete(str));
                 } else if (str.contains("todo") || str.contains("deadline") || str.contains("event")) {
-                    String[] words = str.split(" ");
-                    if (words.length == 1) {
-                        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-                    } else {
-                        words = str.split(" ", 2);
-                        String type = words[0];
-                        String text = words[1];
-                        Task task;
-
-                        if (type.equals("todo")) {
-                            task = new Todo(text);
-                        } else if (type.equals("deadline")) {
-                            task = new Deadline(text);
-                        } else {
-                            task = new Event(text);
-                        }
-                        request.add(task);
-                        System.out.println("Got it. I've added this task: \n" + task.getTask() + "\nNow you have " + request.size() + " tasks in the list.");
-                    }
+                    System.out.println(addTask(str));
                 } else {
                     throw new DukeException("Command is not valid!");
                 }
@@ -89,4 +64,60 @@ public class Duke {
             System.out.println(divider);
         }
     }
+
+    public static String list() {
+        int count = 1;
+        String str = "Here are the tasks in your list:";
+        for (Task t : request) {
+            str += "\n" + count + "." + t.getTask();
+            count += 1;
+        }
+        return str;
+    }
+
+    public static String done(String str) {
+        int index = Integer.parseInt(str.substring(5)) - 1;
+        return request.get(index).markDone();
+    }
+
+    public static String delete(String str) {
+        int index = Integer.parseInt(str.substring(7)) - 1;
+        String result = "Noted. I've removed this task: \n" + request.get(index).delete() +
+                "\nNow you have " + (request.size() - 1) + " tasks in the list.";
+        request.remove(index);
+        return result;
+    }
+
+    public static String addTask(String str) {
+        String[] words = str.split(" ");
+        if (words.length == 1) {
+            return "☹ OOPS!!! The description of a todo cannot be empty.";
+        } else {
+            words = str.split(" ", 2);
+            String type = words[0];
+            String text = words[1];
+            Task task;
+
+            if (type.equals("todo")) {
+                task = new Todo(text);
+            } else if (type.equals("deadline")) {
+                task = new Deadline(text);
+            } else {
+                task = new Event(text);
+            }
+            request.add(task);
+            return "Got it. I've added this task: \n" + task.getTask() + "\nNow you have " +
+                    request.size() + " tasks in the list.";
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
