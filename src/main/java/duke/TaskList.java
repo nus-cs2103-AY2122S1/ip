@@ -10,9 +10,12 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+    public TaskList() {
+        this.taskList = new ArrayList<>();
+    }
+
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
-    public TaskList() {}
 }
