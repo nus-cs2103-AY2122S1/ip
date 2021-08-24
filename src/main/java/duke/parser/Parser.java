@@ -44,6 +44,8 @@ public class Parser {
                 return new DeadlineCommand(arguments);
             case "todo":
                 return new ToDoCommand(arguments);
+            case "find":
+                return new FindCommand(arguments);
             default:
                 throw new DukeException("I'm sorry, but I don't know what \""
                         + fullCommand + "\" means :-(");
