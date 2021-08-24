@@ -9,6 +9,7 @@ public enum CommandTypeEnum {
     DONE("done"),
     EVENT("event"),
     EXIT("bye"),
+    FIND("find"),
     LIST("list"),
     TODO("todo");
 

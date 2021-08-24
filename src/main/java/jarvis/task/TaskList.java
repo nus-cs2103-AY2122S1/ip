@@ -3,6 +3,7 @@ package jarvis.task;
 import jarvis.exception.InvalidDateTimeInputException;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -45,6 +46,22 @@ public class TaskList {
 
     public String taskListSummary() {
         return String.format("Now you have %s task(s) in the list.", taskList.size());
+    }
+
+    /**
+     * Gets the list of tasks with the matching keyword
+     *
+     * @param keyword The search keyword
+     * @return A new TaskList with only the matching tasks
+     */
+    public TaskList getListWithKeyword(String keyword) {
+        ArrayList<Task> taskArrayList = new ArrayList<>();
+        for (Task task: taskList) {
+            if (task.toString().toLowerCase().contains(keyword)) {
+                taskArrayList.add(task);
+            }
+        }
+        return new TaskList(taskArrayList);
     }
 
     @Override

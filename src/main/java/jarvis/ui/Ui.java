@@ -39,6 +39,20 @@ public class Ui {
         taskListMessage.print();
     }
 
+    /**
+     * Shows the matching task list message to the user
+     *
+     * @param taskList The task list containing the tasks
+     */
+    public void showMatchingTaskList(TaskList taskList) {
+        OutputMessage taskListMessage = new OutputMessage(String.format(
+                "%s\n%s",
+                "Stark Industries Database contains these matching tasks:",
+                taskList.toString()
+        ));
+        taskListMessage.print();
+    }
+
     public void showError(JarvisException e) {
         OutputMessage errorMessage = new OutputMessage(e.getMessage());
         errorMessage.print();
