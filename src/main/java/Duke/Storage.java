@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -73,16 +75,20 @@ public class Storage {
     private String formatTask(Task task) {
         String identifier = task.getType();
         String completionStatus = task.isComplete() ? "1" : "0";
-        String date = "";
+        String dateString = "";
         if (task instanceof Deadline) {
             Deadline d = (Deadline) task;
-            date = d.getDate();
+            LocalDateTime date = d.getDate();
+            dateString = String.format("%d/%d/%d %d%d", date.getDayOfMonth(), date.getMonth(),
+                    date.getYear(), date.getHour(), date.getMinute());
         }
         if (task instanceof Event) {
             Event e = (Event) task;
-            date = e.getDate();
+            LocalDateTime date = e.getDate();
+            dateString = String.format("%d/%d/%d %d%d", date.getDayOfMonth(), date.getMonth(),
+                    date.getYear(), date.getHour(), date.getMinute());
         }
-        return String.join("|", identifier, completionStatus, task.getName(), date);
+        return String.join("|", identifier, completionStatus, task.getName(), dateString);
     }
 
     /**
@@ -101,15 +107,28 @@ public class Storage {
             task = new Todo(splitInput[2]);
             break;
         case Deadline.IDENTIFIER:
-            task = new Deadline(splitInput[2], splitInput[3]);
+            task = new Deadline(splitInput[2], parseDate(splitInput[3]));
             break;
         case Event.IDENTIFIER:
-            task = new Event(splitInput[2], splitInput[3]);
+            task = new Event(splitInput[2], parseDate(splitInput[3]));
             break;
         }
         if (isComplete) {
             task.setDone();
         }
         return task;
+    }
+
+    private LocalDateTime parseDate(String s) {
+        String[] splitDate = s.split(" ", 2);
+        // Split day, month, year
+        String[] splitDateElements = splitDate[0].split("/", 3);
+        int day = parseInt(splitDateElements[0]);
+        int month = parseInt(splitDateElements[1]);
+        int year = parseInt(splitDateElements[2]);
+        // Split hours and minutes
+        int hours = parseInt(splitDate[1].substring(0, 2));
+        int mins = parseInt(splitDate[1].substring(2, 4));
+        return LocalDateTime.of(year, month, day, hours, mins);
     }
 }
