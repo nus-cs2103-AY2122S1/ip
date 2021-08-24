@@ -15,10 +15,6 @@ public class Task {
         idCounter++;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public String getStatusIcon() {
         return isDone ? "[X]" : "[ ]";
     }
