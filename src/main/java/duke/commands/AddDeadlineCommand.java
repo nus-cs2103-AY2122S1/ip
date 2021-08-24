@@ -1,8 +1,8 @@
 package duke.commands;
 
-import duke.Deadline;
 import duke.DukeException;
 import duke.ItemList;
+import duke.items.Deadline;
 import duke.Ui;
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package duke.commands;
 
-import duke.Item;
+import duke.items.Item;
 import duke.ItemList;
 import duke.Ui;
 import java.util.ArrayList;

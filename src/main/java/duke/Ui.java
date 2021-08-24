@@ -3,8 +3,8 @@ package duke;
 import java.util.ArrayList;
 
 public class Ui {
-    public String println(String inputString) {
-        return "     --------------------\n     " + inputString + "\n     --------------------";
+    public void println(String inputString) {
+        System.out.println("     --------------------\n     " + inputString + "\n     --------------------");
     }
 
     /**
@@ -12,11 +12,11 @@ public class Ui {
      * @param inputStrings
      * @return String of output.
      */
-    public String println(ArrayList<String> inputStrings) {
+    public void println(ArrayList<String> inputStrings) {
         String returnBuffer = "     --------------------\n";
         for (String line : inputStrings) {
             returnBuffer = returnBuffer.concat("     " + line + "\n");
         }
-        return returnBuffer + "     --------------------";
+        System.out.println(returnBuffer + "     --------------------");
     }
 }

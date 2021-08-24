@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.DukeException;
 import duke.ItemList;
-import duke.Event;
+import duke.items.Event;
 import duke.Ui;
 import java.util.ArrayList;
 
