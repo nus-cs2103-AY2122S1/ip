@@ -10,6 +10,10 @@ public class Storage { //Storage class used to handle the writing of the file af
     private static Path filePath;
     private static Path txtPath;
 
+    /**
+     * Constructor for Storage Class
+     * @param path the filepath where the txt file will be/is created
+     */
     public Storage(String path) {
         filePath = Paths.get(path);
         if (!Files.exists(filePath)) {
@@ -18,12 +22,23 @@ public class Storage { //Storage class used to handle the writing of the file af
         txtPath = Paths.get(path, "task.txt");
     }
 
-    //Function to read the existing txt file if a previous one was already made
+    /**
+     * Function to read the existing txt file if a previous one was already made
+     *
+     * @return the BufferedReader to read the file
+     * @throws FileNotFoundException Handles if the files was not there previously, meaning need make new file
+     */
     public BufferedReader load() throws FileNotFoundException {
         return new BufferedReader(new FileReader(txtPath.toString()));
     }
 
-    //function to update the text each time after any new action is done
+    /**
+     * function to update the text each time after any new action is done
+     *
+     * @param listArray The list of tasks that the bot is using
+     * @throws IOException handles if the filepath/file has issues
+     */
+
     public static void updateText(TaskList listArray) throws IOException {
         BufferedWriter botList = new BufferedWriter(
                 new FileWriter(txtPath.toString()));
@@ -32,5 +47,4 @@ public class Storage { //Storage class used to handle the writing of the file af
         }
         botList.close();
     }
-
 }

@@ -8,9 +8,19 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
-public class AddCommand extends Command { //AddCommand class to handle all the adding of events to the list.
+/**
+ * AddCommand class to handle all the adding of events to the list.
+ */
+public class AddCommand extends Command {
     private final Task inputTask;
 
+    /**
+     * Constructor for AddCommand
+     *
+     * @param eventType The type of task to be made
+     * @param details   The name/date/time of the task
+     * @throws DukeException Throws this if there are anything wrong with the inputs
+     */
     public AddCommand(String eventType, String details) throws DukeException {
         super(true);
         String[] split;
@@ -45,6 +55,15 @@ public class AddCommand extends Command { //AddCommand class to handle all the a
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
+
+    /**
+     * Execute the AddCommand to update the list, update the txt, and print the returns to the user
+     *
+     * @param taskList The current list of tasks
+     * @param ui       The current Ui
+     * @param storage  The current storage class to handle the txt file
+     * @throws IOException if the filepath has any issues
+     */
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {

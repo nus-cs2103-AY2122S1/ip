@@ -10,12 +10,19 @@ import duke.ui.Ui;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Main Class to run the Duke ChatBot
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
-    public Duke(String filePath) { //Creating the Duke Class
+    /**
+     * Constructor for the duke class
+     * @param filePath The path where the txt file is located/to be created
+     */
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -26,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the bot
+     */
     public void run() {
         ui.showWelcome();
         boolean isRunning = true; //Bot is running on start up
@@ -48,6 +58,9 @@ public class Duke {
         } while (isRunning);
     }
 
+    /**
+     * main function
+     */
     public static void main(String[] args) {
         new Duke("data").run(); //To run the bot
     }

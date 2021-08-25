@@ -7,9 +7,19 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
-public class DeleteCommand extends Command { //DeleteCommand class to handle the deletion of task from the list
+/**
+ * DeleteCommand class to handle the deletion of task from the list
+ */
+public class DeleteCommand extends Command {
     private final int index;
 
+
+    /**
+     * Constructor for the DeleteCommand
+     *
+     * @param input The index of the task to be deleted
+     * @throws DukeException catches if the input is invalid
+     */
     public DeleteCommand(String input) throws DukeException {
         super(true);
         if (input == null) {
@@ -19,6 +29,16 @@ public class DeleteCommand extends Command { //DeleteCommand class to handle the
         this.index = Integer.parseInt(input.trim());
     }
 
+    /**
+     * Execute the DeleteCommand to delete the task from the list,
+     * update the respective list and txt file
+     *
+     * @param taskList The current list of tasks
+     * @param ui       The current Ui
+     * @param storage  The current storage class to handle the txt file
+     * @throws IOException   if the filepath has any issues
+     * @throws DukeException if there are any other format/input issues
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         if (index > taskList.getCount() || index <= 0) {
