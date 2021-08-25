@@ -4,6 +4,10 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task{
     private LocalDate by;
 
+    public String taskType() {
+        return "D";
+    }
+
     public Deadline (String taskDetails, String by) {
         super(taskDetails);
         this.by = LocalDate.parse(by);
@@ -11,6 +15,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + 
+                by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
