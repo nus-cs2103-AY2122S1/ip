@@ -5,14 +5,14 @@ import duke.ui.Ui;
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> list;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<Task> list) {
-        this.list = list;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -20,21 +20,27 @@ public class TaskList {
      *
      * @param t The task to be added.
      */
-    public void addTask(TaskList tasks, Task t, Ui ui) {
+    public void addTask(Task t, Ui ui) {
         ui.addTaskMessage(t);
-        list.add(t);
-        ui.printTaskLength(tasks);
+        tasks.add(t);
+        ui.printTaskLength(this);
+    }
+
+    public void printAllTasks() {
+        for (int i = 0; i < this.numberOfTasks(); i++) {
+            System.out.println((i + 1) + "." + this.taskNumber(i));
+        }
     }
 
     public int numberOfTasks() {
-        return list.size();
+        return tasks.size();
     }
 
     public Task taskNumber(int i) {
-        return list.get(i);
+        return tasks.get(i);
     }
 
     public void removeTask(int i) {
-        list.remove(i);
+        tasks.remove(i);
     }
 }

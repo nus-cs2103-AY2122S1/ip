@@ -41,7 +41,7 @@ public class Ui {
         System.out.println(e.getMessage());
     }
 
-    public void taskList() {
+    public void taskListMessage() {
         System.out.println("Here are the tasks in your list: ");
     }
 
@@ -70,5 +70,9 @@ public class Ui {
 
     public void showLoadingError() {
         System.out.println("No past saved data!");
+    }
+
+    public void matchTaskMessage() {
+        System.out.println("Here are the matching tasks in your list:");
     }
 }

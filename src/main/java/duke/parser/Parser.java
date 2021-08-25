@@ -8,12 +8,13 @@ import duke.ui.Ui;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Parser {
 
     private final String input;
     enum Commands {
-        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND
     }
 
     public Parser(String input) {
@@ -51,6 +52,8 @@ public class Parser {
             doneCommand(tasks, ui);
         } else if (input.startsWith(Commands.DELETE.toString().toLowerCase())) {
             deleteCommand(tasks, ui);
+        } else if (input.startsWith(Commands.FIND.toString().toLowerCase())) {
+            findCommand(tasks, ui);
         } else {
             if (input.startsWith(Commands.TODO.toString().toLowerCase())) {
                 t = todoCommand();
@@ -61,7 +64,7 @@ public class Parser {
             } else {
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            tasks.addTask(tasks, t, ui);
+            tasks.addTask(t, ui);
         }
         try {
             storage.saveToDisk(tasks);
@@ -71,12 +74,23 @@ public class Parser {
         return false;
     }
 
+    public void findCommand(TaskList tasks, Ui ui) {
+        ArrayList<Task> list = new ArrayList<>();
+        String description = input.substring("find".length()).trim();
+        ui.matchTaskMessage();
+        for (int i = 0; i < tasks.numberOfTasks(); i++) {
+            if (tasks.taskNumber(i).getDescription().contains(description)) {
+                list.add(tasks.taskNumber(i));
+            }
+        }
+        TaskList matchingTasks = new TaskList(list);
+        matchingTasks.printAllTasks();
+    }
+
     /** Prints out all user's tasks in numerical order. */
     public void taskCommand(TaskList tasks, Ui ui) {
-        ui.taskList();
-        for (int i = 0; i < tasks.numberOfTasks(); i++) {
-            System.out.println((i + 1) + "." + tasks.taskNumber(i));
-        }
+        ui.taskListMessage();
+        tasks.printAllTasks();
     }
 
     /** Marks a task as done. */
@@ -101,7 +115,7 @@ public class Parser {
      * @throws DukeException If the description of todo is empty.
      */
     public Todo todoCommand() throws DukeException {
-        String description = input.substring(4).trim();
+        String description = input.substring("todo".length()).trim();
         if (description.isEmpty()) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty :-(");
         }
