@@ -36,7 +36,7 @@ public class Storage {
         }
     }
 
-    public void writeToFile(Task task) throws DukeException {
+    public static void writeToFile(Task task) throws DukeException {
         if (!file.exists()) {
             newFile();
         }
