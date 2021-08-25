@@ -1,26 +1,31 @@
-public class Echo extends Responses{
+public class Echo extends Responses {
 
     private static String appendList(String uResponse) throws DukeException {
         Task t;
-        if (uResponse.startsWith("todo")) {
-            String description = uResponse.replaceAll("todo", "");
-            if (description.trim().isEmpty()) {
+        String[] uResponseList = uResponse.split(" ");
+        switch (uResponseList[0].trim()) {
+        case "todo":
+            String todoDescription = uResponse.replaceAll("todo", "");
+            if (todoDescription.trim().isEmpty()) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
-            t = new Todo(description);
-        } else if (uResponse.startsWith("deadline")) {
-            String[] split = uResponse.replaceAll("deadline", "").split("/by");
-            if (split[0].trim().isEmpty() || split.length == 1 || split[1].trim().isEmpty()) {
+            t = new Todo(todoDescription);
+            break;
+        case "deadline":
+            String[] deadlineDescriptions = uResponse.replaceAll("deadline", "").split("/by");
+            if (deadlineDescriptions[0].trim().isEmpty() || deadlineDescriptions.length == 1 || deadlineDescriptions[1].trim().isEmpty()) {
                 throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
             }
-            t = new Deadline(split[0], split[1]);
-        } else if (uResponse.startsWith("event")) {
-            String[] split = uResponse.replaceAll("event", "").split("/at");
-            if (split[0].trim().isEmpty() || split.length == 1 || split[1].trim().isEmpty()) {
+            t = new Deadline(deadlineDescriptions[0], deadlineDescriptions[1]);
+            break;
+        case "event":
+            String[] eventDescriptions = uResponse.replaceAll("event", "").split("/at");
+            if (eventDescriptions[0].trim().isEmpty() || eventDescriptions.length == 1 || eventDescriptions[1].trim().isEmpty()) {
                 throw new DukeException("OOPS!!! The description of an event cannot be empty.");
             }
-            t = new Event(split[0], split[1]);
-        } else {
+            t = new Event(eventDescriptions[0], eventDescriptions[1]);
+            break;
+        default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         Responses.list.add(t);
@@ -31,5 +36,4 @@ public class Echo extends Responses{
         String msg = appendList(dResponse);
         Responses.interact(String.format("\tGot it. I've added this task:\n\t %s\n\tNow you have %d tasks in the list.\n", msg, Responses.list.size()));
     }
-
 }

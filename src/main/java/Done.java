@@ -14,7 +14,7 @@ public class Done extends Responses{
         try {
             String[] dResponseList = dResponse.split(" ");
             int taskToDelete = Integer.parseInt(dResponseList[1]);
-            Responses.interact(String.format("\tNice! I've marked this task as done:\n\t%s\n", checkOffFromList(taskToDelete)));
+            Responses.interact(String.format("\tNice! I've marked this task as done:\n\t %s\n", checkOffFromList(taskToDelete)));
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Array Index Out of Bounds");
         }
