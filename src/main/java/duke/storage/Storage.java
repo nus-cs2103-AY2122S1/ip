@@ -15,14 +15,31 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+/**
+ * Represents a Storage object to keep of track changes to the task list.
+ *
+ * @author: James Kua
+ * @version: Duke-Level-8
+ */
 public class Storage {
 
+    /** String that contains the filePath of the saved TaskList. */
     private static String filePath;
 
+    /**
+     * Constructor for a Storage object.
+     *
+     * @param location filepath of the location to save the file.
+     */
     public Storage(String location) {
         filePath = location;
     }
 
+    /**
+     * Writes and saves the file to the file location.
+     *
+     * @param tasks TaskList of tasks.
+     */
     public static void saveData(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(filePath);
@@ -35,6 +52,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads saved data (if any) from the file location.
+     * If no saved data exists, creates and writes a new file in the file location.
+     *
+     * @return ArrayList of saved tasks (if any).
+     */
     public ArrayList<Task> loadData() {
         File folder = new File("./data/");
         if (folder.mkdir()) {

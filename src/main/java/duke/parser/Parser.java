@@ -12,15 +12,32 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Represents a Parser object that deals with making sense of the user commands.
+ *
+ * @author: James Kua
+ * @version: Duke-Level-8
+ */
 public class Parser {
 
+    /**
+     * Accepts only the specified following specific commands.
+     */
     public enum Keyword {
         TODO, EVENT, DEADLINE, LIST, DONE, DELETE, BYE
     }
 
+    /** TaskList object that stores tasks */
     private TaskList tasks;
+    /** Storage object that saves the TaskList. */
     private Storage storage;
 
+    /**
+     * Constructor for a Parser object.
+     *
+     * @param tasks TaskList containing the list of tasks.
+     * @param storage Storage that stores the data.
+     */
     public Parser(TaskList tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
@@ -100,6 +117,13 @@ public class Parser {
             addComplete(new Event(description, date, timing));
         }
     }
+
+    /**
+     * Parses the command based on the user's input to execute the corresponding action.
+     * Returns false when the user inputs 'bye', proceeds to break out of the program.
+     *
+     * @return a boolean on whether to exit the program.
+     */
     public boolean parseCommand() {
 
         String input;
