@@ -31,7 +31,7 @@ public class Storage {
      * @throws DukeException If file is corrupted.
      */
     public ArrayList<Task> load() throws DukeException{
-        ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         try {
             Scanner scan = new Scanner(this.file);
@@ -62,13 +62,13 @@ public class Storage {
                     newTask.markDone();
                 }
 
-                taskList.add(newTask);
+                tasks.add(newTask);
             }
 
-            return taskList;
+            return tasks;
 
         } catch (FileNotFoundException e) {
-            return taskList;
+            return tasks;
         }
     }
 
@@ -81,7 +81,6 @@ public class Storage {
     public void save(TaskList tasks) throws DukeException {
         try {
             String fileTask = tasks.toFileString();
-
             FileWriter fileWriter = new FileWriter(this.fileName, false);
             fileWriter.write(fileTask);
             fileWriter.close();
