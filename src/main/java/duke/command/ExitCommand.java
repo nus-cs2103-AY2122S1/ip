@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.data.Storage;
+import duke.data.TaskList;
+
 /**
  * Represents a processor that stops the duke program.
  */

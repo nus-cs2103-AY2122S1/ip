@@ -1,3 +1,8 @@
+package duke.ui;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+
 import java.util.Scanner;
 
 /**
@@ -12,15 +17,12 @@ public class Ui {
                     "____________________________________________________________\n";
     /** Scanner used to read commands */
     private Scanner input;
-    /** Parser used to interpret commands */
-    private Parser parser;
 
     /**
      * Constructor for the class `Ui`.
      */
     public Ui() {
         this.input = new Scanner(System.in);
-        this.parser = new Parser();
     }
 
     public void showWelcome() {

@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Represents an exception thrown when invalid commands are received.
  */

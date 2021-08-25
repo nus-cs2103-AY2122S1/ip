@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.data.Storage;
+import duke.data.TaskList;
+import duke.exception.DukeException;
+import duke.task.Task;
+
 /**
  * Represents a processor that can process a command and print out the results.
  */

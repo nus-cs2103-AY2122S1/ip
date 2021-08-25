@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.data.Storage;
+import duke.data.TaskList;
+import duke.task.Task;
+
 /**
  * Represents a processor that can add a task to the task list. A subclass of the Processor class.
  */

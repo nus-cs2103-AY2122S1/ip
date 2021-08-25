@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a task to be completed with unspecified time.
  */
