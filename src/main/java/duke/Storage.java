@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A class that handles anything related to the storing and loading of information from memory for Duke.
+ */
 public class Storage {
     private final Path filePath;
     private final DukeParser parser;
@@ -26,6 +29,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Constructs a new instance of Storage that loads and stores data into the file path that is specified.
+     * @param filePath a string literal of the file path where the information is accessed from.
+     * @throws IOException if the file path is not found and cannot be created automatically by Storage.
+     */
     public Storage(String filePath) throws IOException {
         this.filePath = Paths.get(System.getProperty("user.dir"), filePath);
         createDirectoriesAndFiles();
