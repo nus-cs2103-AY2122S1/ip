@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -14,9 +16,9 @@ public class Parser {
     /**
      * Constructor for Parser.
      *
-     * @param ui Ui instance for output
-     * @param storage Storage instance for saving task
-     * @param taskList TaskList instance for operations on tasks
+     * @param ui Ui instance for output.
+     * @param storage Storage instance for saving task.
+     * @param taskList TaskList instance for operations on tasks.
      */
     public Parser(Ui ui, Storage storage, TaskList taskList) {
         this.ui = ui;
@@ -25,10 +27,10 @@ public class Parser {
     }
 
     /**
-     * Process the input string and decide what operations to perform.
+     * Processes the input string and decide what operations to perform.
      *
-     * @param input The input String
-     * @return Boolean value indicating if program should continue
+     * @param input The input String.
+     * @return Boolean value indicating if program should continue.
      */
     public boolean process(String input) {
         boolean end = false;

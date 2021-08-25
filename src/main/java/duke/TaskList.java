@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -22,7 +24,7 @@ public class TaskList {
      * Constructor for TaskList.
      * Constructs the list based on the given array of strings.
      *
-     * @param tasklist An array of strings of tasks
+     * @param tasklist An array of strings of tasks.
      */
     public TaskList(ArrayList<String> tasklist) {
         this();
@@ -42,9 +44,9 @@ public class TaskList {
     }
 
     /**
-     * Returns the array of tasks
+     * Returns the array of tasks.
      *
-     * @return Array of tasks
+     * @return Array of tasks.
      */
     public ArrayList<Task> getList() {
         return this.list;
@@ -53,7 +55,7 @@ public class TaskList {
     /**
      * Adds a task the list and saves to the file.
      *
-     * @param description The description of the task
+     * @param description The description of the task.
      */
     public String addTask(String description) {
         Task task = new ToDo(description);
@@ -65,8 +67,8 @@ public class TaskList {
     /**
      * Adds a task the list without saving to file.
      *
-     * @param description The description of the task
-     * @param isDone Indicates if the task is done
+     * @param description The description of the task.
+     * @param isDone Indicates if the task is done.
      */
     public void addTask(String description, boolean isDone) {
         Task task = new ToDo(description, isDone);
@@ -77,9 +79,9 @@ public class TaskList {
      * Adds a task the list and saves to the file.
      * Task added have a date/time attached.
      *
-     * @param description The description of the task
-     * @param date The date/time attached to the task
-     * @param type Indicates if the task is a Deadline or Event
+     * @param description The description of the task.
+     * @param date The date/time attached to the task.
+     * @param type Indicates if the task is a Deadline or Event.
      */
     public String addTask(String description, LocalDate date, String type) {
         Task task;
@@ -97,10 +99,10 @@ public class TaskList {
      * Adds a task the list without saving to file.
      * Task added have a date/time attached.
      *
-     * @param description The description of the task
-     * @param dateTime
-     * @param type
-     * @param isDone Indicates if the task is done
+     * @param description The description of the task.
+     * @param dateTime The date associated with the task.
+     * @param type The type of task.
+     * @param isDone Indicates if the task is done.
      */
     public void addTask(String description, LocalDate dateTime, String type, boolean isDone) {
         Task task;
@@ -115,10 +117,10 @@ public class TaskList {
     /**
      * Changes the status for the task indicated by the user.
      *
-     * @param taskNumber The index(plus 1) of the task to be marked as done
-     * @return The string representation of the task after it is marked as done
+     * @param taskNumber The index(plus 1) of the task to be marked as done.
+     * @return The string representation of the task after it is marked as done.
      */
-    public String changeTaskStatus(int taskNumber) throws DukeException{
+    public String changeTaskStatus(int taskNumber) throws DukeException {
         if (taskNumber <= 0 || taskNumber > this.list.size()) {
             throw new DukeException("Task does not exist. Use list to check all tasks available.");
         } else {
@@ -131,11 +133,11 @@ public class TaskList {
     /**
      * Deletes the task indicated from the list.
      *
-     * @param taskNumber The index of the task to be deleted
-     * @return String representation of the task deleted
-     * @throws DukeException If taskNumber is an invalid index
+     * @param taskNumber The index of the task to be deleted.
+     * @return String representation of the task deleted.
+     * @throws DukeException If taskNumber is an invalid index.
      */
-    public String deleteTask(int taskNumber) throws DukeException{
+    public String deleteTask(int taskNumber) throws DukeException {
         if (taskNumber <= 0 || taskNumber > this.list.size()) {
             throw new DukeException("Task does not exist. Use list to check all tasks available.");
         } else {
@@ -148,7 +150,7 @@ public class TaskList {
     /**
      * Returns an array of tasks in their string representation.
      *
-     * @return Array of tasks in string form
+     * @return Array of tasks in string form.
      */
     public ArrayList<String> getTaskList() {
         ArrayList<String> tasks = new ArrayList<>();

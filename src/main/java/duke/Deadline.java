@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -5,15 +7,15 @@ import java.time.format.DateTimeFormatter;
  * A type of Task. Inherits from Task, takes in a deadline that
  * specifies when task has to be completed by.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDate deadline;
 
     /**
      * Constructor for Deadline.
      * Takes in a description and a deadline.
      *
-     * @param description The description of the task
-     * @param deadline The deadline of the task
+     * @param description The description of the task.
+     * @param deadline The deadline of the task.
      */
     public Deadline(String description, LocalDate deadline) {
         super(description);
@@ -24,9 +26,9 @@ public class Deadline extends Task{
      * Constructor for Deadline.
      * Takes in a description, deadline, and the status of the task.
      *
-     * @param description The description of the task
-     * @param deadline The deadline of the task
-     * @param isDone Indicates if the task is done
+     * @param description The description of the task.
+     * @param deadline The deadline of the task.
+     * @param isDone Indicates if the task is done.
      */
     public Deadline(String description, LocalDate deadline, boolean isDone) {
         this(description, deadline);
@@ -47,7 +49,7 @@ public class Deadline extends Task{
     /**
      * Returns a string formatted for writing into file.
      *
-     * @return String representation of the task for file writing
+     * @return String representation of the task for file writing.
      */
     @Override
     public String saveString() {

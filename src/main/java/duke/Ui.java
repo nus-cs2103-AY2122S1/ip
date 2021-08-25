@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -49,7 +51,7 @@ public class Ui {
     }
 
     /**
-     * List the items in the list in the order added, along with a counter.
+     * Lists the items in the list in the order added, along with a counter.
      */
     public void showList(ArrayList<String> taskList) {
         System.out.println(seperator);
@@ -62,9 +64,9 @@ public class Ui {
     }
 
     /**
-     * Write the message to output with a line divider around it.
+     * Writes the message to output with a line divider around it.
      *
-     * @param message The message to be displayed
+     * @param message The message to be displayed.
      */
     public void writeOutput(String message) {
         System.out.println(seperator);
@@ -75,7 +77,7 @@ public class Ui {
     /**
      * Displays the error message based on the given command.
      *
-     * @param command Determines which error message to display
+     * @param command Determines which error message to display.
      */
     public void showInputError(String command) {
         switch(command){
@@ -110,9 +112,9 @@ public class Ui {
     }
 
     /**
-     * Display the error message given by DukeException
+     * Displays the error message given by DukeException.
      *
-     * @param e DukeException instance
+     * @param e DukeException instance.
      */
     public void showDukeException(DukeException e) {
         writeOutput(e.getMessage());
@@ -121,7 +123,7 @@ public class Ui {
     /**
      * Returns a menu string.
      *
-     * @return A String representing the menu
+     * @return A String representing the menu.
      */
     public String menu() {
         return "Commands supported:\n"

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents a task. Contains the description and state of the task.
  * Allows for changing of the state of the class.
@@ -19,7 +21,7 @@ public class Task {
     }
 
     /**
-     * Change the status of the Task to true
+     * Changes the status of the Task to true.
      */
     public void setDone(boolean isDone) {
         this.isDone = isDone;
@@ -28,7 +30,7 @@ public class Task {
     /**
      * Returns the string representation of the Task.
      *
-     * @return String containing description and status indicator for Task
+     * @return String containing description and status indicator for Task.
      */
     @Override
     public String toString() {
@@ -36,9 +38,9 @@ public class Task {
     }
 
     /**
-     * Returns the string representation of the task's state
+     * Returns the string representation of the task's state.
      *
-     * @return "X" if task is done, " " otherwise
+     * @return "X" if task is done, " " otherwise.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
@@ -47,7 +49,7 @@ public class Task {
     /**
      * Returns a string formatted for writing into file.
      *
-     * @return String representation of the task for file writing
+     * @return String representation of the task for file writing.
      */
     public String saveString() {
         return this.isDone + "," + this.description;

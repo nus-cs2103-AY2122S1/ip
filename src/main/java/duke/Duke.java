@@ -1,3 +1,5 @@
+package duke;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -13,7 +15,7 @@ public class Duke {
     /**
      * Constructor for Duke.
      *
-     * @param filepath The filepath of the save file
+     * @param filepath The filepath of the save file.
      */
     public Duke(Path filepath) {
         ui = new Ui();

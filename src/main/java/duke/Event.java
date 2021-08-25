@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -5,14 +7,14 @@ import java.time.format.DateTimeFormatter;
  * A type of Task. Inherits from Task, takes in a date/time that
  * specifies when event is happening.
  */
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate dateTime;
 
     /**
      * Constructor for Event. Takes in a description and a dateTime.
      *
-     * @param description The description of the event
-     * @param dateTime The date/time the event occurs
+     * @param description The description of the event.
+     * @param dateTime The date/time the event occurs.
      */
     public Event(String description, LocalDate dateTime) {
         super(description);
@@ -23,9 +25,9 @@ public class Event extends Task{
      * Constructor for Event.
      * Takes in description, dateTime and the status of the event.
      *
-     * @param description The description of the event
-     * @param dateTime The date/time the event occurs
-     * @param isDone indicates if the event is done
+     * @param description The description of the event.
+     * @param dateTime The date/time the event occurs.
+     * @param isDone indicates if the event is done.
      */
     public Event(String description, LocalDate dateTime, boolean isDone) {
         this(description, dateTime);
@@ -35,7 +37,7 @@ public class Event extends Task{
     /**
      * Returns the string representation of the Event class.
      *
-     * @return String representation of Event
+     * @return String representation of Event.
      */
     @Override
     public String toString() {
@@ -46,7 +48,7 @@ public class Event extends Task{
     /**
      * Returns a string formatted for writing into file.
      *
-     * @return String representation of the task for file writing
+     * @return String representation of the task for file writing.
      */
     @Override
     public String saveString() {

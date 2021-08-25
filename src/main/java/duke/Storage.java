@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,9 +15,9 @@ public class Storage {
     private Path filepath;
 
     /**
-     * Constructor for Storage
+     * Constructor for Storage.
      *
-     * @param filepath The filepath of the storage file
+     * @param filepath The filepath of the storage file.
      */
     public Storage(Path filepath) {
         this.filepath = filepath;
@@ -26,10 +28,10 @@ public class Storage {
      * Returns an array of strings containing the task,
      * throw DukeException if file is not found.
      *
-     * @return ArrayList containing string representation of the tasks
-     * @throws DukeException No current save file
+     * @return ArrayList containing string representation of the tasks.
+     * @throws DukeException No current save file.
      */
-    public ArrayList<String> load() throws DukeException{
+    public ArrayList<String> load() throws DukeException {
         try {
             ArrayList<String> tasklist = new ArrayList<>();
             File file = new File(filepath.toString());
@@ -45,9 +47,9 @@ public class Storage {
     }
 
     /**
-     * Append the given task string to file.
+     * Appends the given task string to file.
      *
-     * @param taskString The task in string representation
+     * @param taskString The task in string representation.
      */
     public void saveTask(String taskString) {
         try {
@@ -60,9 +62,9 @@ public class Storage {
     }
 
     /**
-     * Rewrite the file with the latest list of tasks.
+     * Rewrites the file with the latest list of tasks.
      *
-     * @param tasklist The list of tasks to save to file
+     * @param tasklist The list of tasks to save to file.
      */
     public void rewriteFile(ArrayList<Task> tasklist) {
         try {
@@ -77,9 +79,9 @@ public class Storage {
     }
 
     /**
-     * Create a new file for saving data.
+     * Creates a new file for saving data.
      *
-     * @param filename The name of the file to be created
+     * @param filename The name of the file to be created.
      */
     public void createFile(String filename) {
         try {
