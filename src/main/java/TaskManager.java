@@ -124,22 +124,22 @@ public class TaskManager {
             Command c = getCommand(input);
             try {
                 switch (c) {
-                    case LIST:
-                        Message.list(tasks);
-                        break;
-                    case DONE:
-                        markDone(Integer.parseInt(taskDescription(input)));
-                        break;
-                    case TODO:
-                    case DEADLINE:
-                    case EVENT:
-                        addTask(taskDescription(input), c.type);
-                        break;
-                    case DELETE:
-                        deleteTask(Integer.parseInt(taskDescription(input)));
-                        break;
-                    case INVALID:
-                        throw new DukeException.InvalidInputException();
+                case LIST:
+                    Message.list(tasks);
+                    break;
+                case DONE:
+                    markDone(Integer.parseInt(taskDescription(input)));
+                    break;
+                case TODO:
+                case DEADLINE:
+                case EVENT:
+                    addTask(taskDescription(input), c.type);
+                    break;
+                case DELETE:
+                    deleteTask(Integer.parseInt(taskDescription(input)));
+                    break;
+                case INVALID:
+                    throw new DukeException.InvalidInputException();
                 }
             } catch (DukeException e) {
                 Message.error(e.toString());
