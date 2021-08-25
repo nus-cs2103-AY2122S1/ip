@@ -12,14 +12,15 @@ public abstract class Command {
         this.type = type;
     }
 
-    public void execute() {
-        switch (type) {
-            case ADD:
-            case DELETE:
-            case DONE:
-            case FIND:
-            case LIST:
-            default:
-        }
-    }
+//    public void execute() {
+//        switch (type) {
+//            case ADD:
+//            case DELETE:
+//            case DONE:
+//            case FIND:
+//            case LIST:
+//            default:
+//        }
+//    }
+    public abstract Command execute();
 }
