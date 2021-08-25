@@ -12,13 +12,28 @@ import bob.task.Event;
 import bob.task.Task;
 import bob.task.Todo;
 
+/**
+ * Represents an object that deals with loading tasks from a specified file and saving tasks in the file.
+ */
 public class Storage {
     private String path;
 
+    /**
+     * Constructor for a new Storage instance.
+     *
+     * @param path Pathname to the data directory that will be used to store the list of tasks.
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Loads the data from the bob.txt file to instantiate the TaskList for the current session.
+     *
+     * @return ArrayList containing tasks to be added to the TaskList for this current session.
+     * @throws DirectoryNotFoundException If the data directory does not exist yet.
+     * @throws FileNotFoundException If the bob.txt file does not exist yet.
+     */
     public ArrayList<Task> load() throws DirectoryNotFoundException, FileNotFoundException {
         File dataDirectory = new File(this.path);
 
@@ -68,6 +83,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Formats the date from the printed format to the format required to make a LocalDate object.
+     * (e.g. Dec 1 2021 to 2021-12-01)
+     *
+     * @param date Date of Event or Deadline task in the printed format.
+     * @return Date in the String format required to make a LocalDate object.
+     */
     private String formatDate(String date) {
         String day;
         String month;
@@ -104,11 +126,17 @@ public class Storage {
         return year + "-" + month + "-" + day;
     }
 
+    /**
+     * Makes the data directory that will later contain the bob.txt file if it does not yet exist.
+     */
     public void makeDataDirectory() {
         File dataDirectory = new File(this.path);
         dataDirectory.mkdir();
     }
 
+    /**
+     * Makes the bob.txt file in the data directory if it does not yet exist.
+     */
     public void makeBobFile() {
         try {
             File dataDirectory = new File(this.path);
@@ -118,6 +146,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates bob.txt with the newest list of tasks provided.
+     *
+     * @param taskList New list of tasks to be saved to the bob.txt file.
+     */
     public void updateBobFile(TaskList taskList){
         try {
             FileWriter writer = new FileWriter(this.path + "/bob.txt");
@@ -131,6 +164,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds text to the existing text file without overriding it.
+     *
+     * @param textToAppend Text to be added to the existing text file.
+     */
     private void appendToFile(String textToAppend) {
         try {
             FileWriter fw = new FileWriter(this.path + "/bob.txt", true); //FileWriter in append mode
