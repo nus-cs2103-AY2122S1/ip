@@ -51,4 +51,15 @@ public class Ui {
                         message, total);
         PrintMessage(newMsg);
     }
+
+    public void PrintFind(TaskList matchedTasks) {
+        System.out.println(BORDER);
+        System.out.println("Here are the matching tasks in your list: ");
+        for (int i = 1; i <= matchedTasks.size(); i++) {
+            Task thisTask = matchedTasks.get(i-1);
+            String toPrint = String.format("%d. %s", i, thisTask);
+            System.out.println(toPrint);
+        }
+        System.out.println(BORDER);
+    }
 }
