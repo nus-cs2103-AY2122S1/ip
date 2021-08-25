@@ -1,14 +1,12 @@
 package duke.command;
 
-import duke.util.TaskList;
-import duke.util.Ui;
-import duke.util.Storage;
-
 import duke.exception.InvalidInputException;
 import duke.exception.SaveFileException;
 import duke.exception.TaskNotFoundException;
-
 import duke.task.Task;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 public class DeleteCommand extends Command {
     private final String action;
@@ -30,7 +28,7 @@ public class DeleteCommand extends Command {
             } else {
                 throw new TaskNotFoundException("The task chosen does not exist. Use 'list' to see all your tasks.");
             }
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new InvalidInputException("Command 'delete' require an integer as the second parameter");
         }
     }

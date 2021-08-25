@@ -1,17 +1,15 @@
 package duke.command;
 
-import duke.util.TaskList;
-import duke.util.Ui;
-import duke.util.Storage;
-
 import duke.exception.NoActionException;
 import duke.exception.SaveFileException;
-
 import duke.task.Task;
 import duke.task.Todo;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 public class TodoCommand extends Command {
-    String action;
+    private String action;
     public TodoCommand(String action) {
         super(false);
         this.action = action;

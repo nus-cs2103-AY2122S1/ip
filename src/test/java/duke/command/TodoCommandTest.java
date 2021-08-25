@@ -1,16 +1,15 @@
 package duke.command;
 
-import duke.exception.NoActionException;
-import duke.exception.SaveFileException;
-
-import duke.task.Task;
-
-import duke.task.Todo;
-import duke.util.TaskList;
-
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exception.NoActionException;
+import duke.exception.SaveFileException;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.util.TaskList;
 
 public class TodoCommandTest {
     @Test
@@ -32,7 +31,7 @@ public class TodoCommandTest {
     }
 
     private class TaskListStub extends duke.util.TaskList {
-        Task task;
+        private Task task;
 
         @Override
         public void add(Task task) {

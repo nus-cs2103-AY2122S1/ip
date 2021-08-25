@@ -1,7 +1,7 @@
 package duke.task;
 
 public abstract class Task {
-    final private String action;
+    private final String action;
     private boolean isCompleted;
 
     public Task(String action) {
@@ -26,7 +26,7 @@ public abstract class Task {
     }
 
 
-    abstract public String toSaveFormat() ;
+    public abstract String toSaveFormat();
 
     @Override
     public String toString() {

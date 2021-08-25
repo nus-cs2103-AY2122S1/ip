@@ -1,16 +1,15 @@
 package duke.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.DeadlineCommand;
 import duke.command.EventCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
-
 import duke.exception.InvalidInputException;
-
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
     @Test
@@ -34,7 +33,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_InvalidCommand_throwsInvalidInputException() {
+    public void parse_invalidCommand_throwsInvalidInputException() {
         assertThrows(InvalidInputException.class, () -> {
             Parser.parse(new String[]{"hi", "Action"});
         });

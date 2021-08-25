@@ -1,18 +1,16 @@
 package duke.command;
 
-import duke.util.TaskList;
-import duke.util.Ui;
-import duke.util.Storage;
-
 import duke.exception.InvalidInputException;
 import duke.exception.SaveFileException;
-import duke.exception.TaskNotFoundException;
 import duke.exception.TaskCompletedException;
-
+import duke.exception.TaskNotFoundException;
 import duke.task.Task;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 public class DoneCommand extends Command {
-    String action;
+    private String action;
     public DoneCommand(String action) {
         super(false);
         this.action = action;
@@ -28,7 +26,7 @@ public class DoneCommand extends Command {
                 if (!taskToComplete.isComplete()) {
                     taskToComplete.complete();
                     ui.showTaskDone(taskToComplete);
-                }else {
+                } else {
                     throw new TaskCompletedException("This task is already completed.");
                 }
             } else {

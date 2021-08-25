@@ -1,7 +1,7 @@
 package duke.task;
 
 public class Todo extends Task {
-    private final static String symbol = "[T]";
+    private static final String symbol = "[T]";
     public Todo(String action) {
         super(action);
     }

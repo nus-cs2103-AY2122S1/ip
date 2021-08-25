@@ -1,12 +1,12 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 public class Ui {
     //change this
-    Scanner scanner;
+    private Scanner scanner;
     public Ui() {
         scanner = new Scanner(System.in);
     }
