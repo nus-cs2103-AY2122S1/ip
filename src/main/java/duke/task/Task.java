@@ -15,6 +15,10 @@ public class Task {
 
     public void markAsDone() { this.isDone = true; }
 
+    public boolean doesDescriptionContainString(String query) {
+        return this.description.contains(query);
+    }
+
     public String getData() {
         return String.format("%b,%s", this.isDone,this.description);
     }

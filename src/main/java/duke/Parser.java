@@ -1,14 +1,8 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneTaskCommand;
-import duke.command.ExitCommand;
-import duke.command.PrintListCommand;
+import duke.command.*;
 
 public class Parser {
-    private final static String[] SUPPORTED_COMMANDS = {"bye", "list", "done", "deadline", "event","todo", "delete"};
 
     /**
      * Checks if the user input contains a supported command.
@@ -16,6 +10,8 @@ public class Parser {
      * @param userInput String that user enters into chat bot
      * @return boolean, true if user input contains a supported command, otherwise false
      */
+    private static String[] SUPPORTED_COMMANDS = {"bye", "list", "done", "deadline", "event","todo", "delete", "find"};
+
     private static boolean isCommandSupported(String userInput) {
         boolean isSupported = false;
         for(int i = 0; i < SUPPORTED_COMMANDS.length; i++ ) {
@@ -62,6 +58,10 @@ public class Parser {
 
         if (userInput.startsWith("delete")) {
             return new DeleteCommand(userInput);
+        }
+        
+        if (userInput.startsWith("find")) {
+            return new FindCommand(userInput);
         }
 
         return null;
