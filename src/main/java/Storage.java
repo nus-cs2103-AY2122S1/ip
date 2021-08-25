@@ -1,3 +1,8 @@
+import duke.Deadline;
+import duke.Event;
+import duke.Task;
+import duke.ToDo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,11 +26,11 @@ public class Storage {
             for(Task task: Tasklist.dukeList) {
                 String commandLine = "";
                 if(task instanceof Deadline) {
-                    commandLine = "D | " + (task.isDone ? "1 | " : "0 | ") + task.description + " | " + ((Deadline) task).time + '\n';
+                    commandLine = "D | " + (task.getIsDone() ? "1 | " : "0 | ") + task.getDescription() + " | " + ((Deadline) task).getTime() + '\n';
                 } else if(task instanceof Event) {
-                    commandLine = "E | " + (task.isDone ? "1 | " : "0 | ") + task.description + " | " + ((Event) task).time + '\n';
+                    commandLine = "E | " + (task.getIsDone() ? "1 | " : "0 | ") + task.getDescription() + " | " + ((Event) task).getTime() + '\n';
                 } else {
-                    commandLine =  "T | " + (task.isDone ? "1 | " : "0 | ") + task.description + '\n';
+                    commandLine =  "T | " + (task.getIsDone() ? "1 | " : "0 | ") + task.getDescription() + '\n';
                 }
                 writer.write(commandLine);
                 writer.flush();
