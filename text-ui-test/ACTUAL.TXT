@@ -1,44 +1,44 @@
 Hello, I am Tiger, your personal assistant. I have fetched 0 tasks from my memory.
 Excellent! I've added this task:
-[T] [ ] A
+[T] [M] A
 Excellent! I've added this task:
-[T] [ ] B
+[T] [M] B
 Excellent! I've added this deadline:
-[D] [ ] C (by 2020-07-21)
+[D] [M] C 	(by 2020-07-21)
 Excellent! I've added this event:
-[E] [ ] D (at 2020-07-21 16:00)
+[E] [M] D 	(at 2020-07-21 16:00)
 Nice! I've marked this task as done:
 [T] [X] A
 Nice! I've marked this task as done:
 [T] [X] B
 Excellent! I've added this task:
-[T] [ ] Carp
+[T] [M] Carp
 Excellent! I've added this task:
-[T] [ ] Carpfishy
+[T] [M] Carpfishy
 Excellent! I've added this task:
-[T] [ ] Eat something
+[T] [M] Eat something
 Excellent! I've added this event:
-[E] [ ] Koifishy (at 2021-08-22 14:35)
+[E] [M] Koifishy 	(at 2021-08-22 14:35)
 Excellent! I've added this deadline:
-[D] [ ] Feed fish (by 2021-12-21 12:22)
-1. [T] [ ] Carp
-2. [T] [ ] Carpfishy
-1. [T] [ ] Carpfishy
-2. [E] [ ] Koifishy (at 2021-08-22 14:35)
-3. [D] [ ] Feed fish (by 2021-12-21 12:22)
-1. [T] [X] A
-2. [T] [X] B
-3. [D] [ ] C (by 2020-07-21)
-4. [E] [ ] D (at 2020-07-21 16:00)
-5. [T] [ ] Carp
-6. [T] [ ] Carpfishy
-7. [T] [ ] Eat something
-8. [E] [ ] Koifishy (at 2021-08-22 14:35)
-9. [D] [ ] Feed fish (by 2021-12-21 12:22)
+[D] [M] Feed fish 	(by 2021-12-21 12:22)
+1.	 [T] [M] Carp
+2.	 [T] [M] Carpfishy
+1.	 [T] [M] Carpfishy
+2.	 [E] [M] Koifishy 	(at 2021-08-22 14:35)
+3.	 [D] [M] Feed fish 	(by 2021-12-21 12:22)
+1.	 [T] [X] A
+2.	 [T] [X] B
+3.	 [D] [M] C 	(by 2020-07-21)
+4.	 [E] [M] D 	(at 2020-07-21 16:00)
+5.	 [T] [M] Carp
+6.	 [T] [M] Carpfishy
+7.	 [T] [M] Eat something
+8.	 [E] [M] Koifishy 	(at 2021-08-22 14:35)
+9.	 [D] [M] Feed fish 	(by 2021-12-21 12:22)
 Nice! I've marked this task as done:
-[E] [X] D (at 2020-07-21 16:00)
+[E] [X] D 	(at 2020-07-21 16:00)
 Excellent! I've added this task:
-[T] [ ] E
+[T] [M] E
 Nice! I've marked this task as done:
 [T] [X] Carpfishy
 Index 14 is out of bounds of your task list size of 10.
@@ -47,16 +47,16 @@ Use the list command to see task indices.
 Index -1 is out of bounds of your task list size of 10.
 Please make sure your index is at least 1.
 Use the list command to see task indices.
-1. [T] [X] A
-2. [T] [X] B
-3. [D] [ ] C (by 2020-07-21)
-4. [E] [X] D (at 2020-07-21 16:00)
-5. [T] [ ] Carp
-6. [T] [X] Carpfishy
-7. [T] [ ] Eat something
-8. [E] [ ] Koifishy (at 2021-08-22 14:35)
-9. [D] [ ] Feed fish (by 2021-12-21 12:22)
-10. [T] [ ] E
+1.	 [T] [X] A
+2.	 [T] [X] B
+3.	 [D] [M] C 	(by 2020-07-21)
+4.	 [E] [X] D 	(at 2020-07-21 16:00)
+5.	 [T] [M] Carp
+6.	 [T] [X] Carpfishy
+7.	 [T] [M] Eat something
+8.	 [E] [M] Koifishy 	(at 2021-08-22 14:35)
+9.	 [D] [M] Feed fish 	(by 2021-12-21 12:22)
+10.	 [T] [M] E
 Deadline date property cannot be empty.
 Please ensure you key in the command in the format specified.
 Deadline description property cannot be empty.
@@ -68,39 +68,39 @@ Please ensure you key in dates in the input specified.
 Please ensure you key in dates in the input specified.
 Please ensure you key in dates in the input specified.
 Excellent! I've added this deadline:
-[D] [ ] H (by 1999-02-28)
+[D] [M] H 	(by 1999-02-28)
 Input command cannot contain semicolons! (;)
 Input command cannot contain semicolons! (;)
 Excellent! I've added this deadline:
-[D] [ ] G (by 2020-08-21 12:00)
-1. [T] [X] A
-2. [T] [X] B
-3. [D] [ ] C (by 2020-07-21)
-4. [E] [X] D (at 2020-07-21 16:00)
-5. [T] [ ] Carp
-6. [T] [X] Carpfishy
-7. [T] [ ] Eat something
-8. [E] [ ] Koifishy (at 2021-08-22 14:35)
-9. [D] [ ] Feed fish (by 2021-12-21 12:22)
-10. [T] [ ] E
-11. [D] [ ] H (by 1999-02-28)
-12. [D] [ ] G (by 2020-08-21 12:00)
+[D] [M] G 	(by 2020-08-21 12:00)
+1.	 [T] [X] A
+2.	 [T] [X] B
+3.	 [D] [M] C 	(by 2020-07-21)
+4.	 [E] [X] D 	(at 2020-07-21 16:00)
+5.	 [T] [M] Carp
+6.	 [T] [X] Carpfishy
+7.	 [T] [M] Eat something
+8.	 [E] [M] Koifishy 	(at 2021-08-22 14:35)
+9.	 [D] [M] Feed fish 	(by 2021-12-21 12:22)
+10.	 [T] [M] E
+11.	 [D] [M] H 	(by 1999-02-28)
+12.	 [D] [M] G 	(by 2020-08-21 12:00)
 ToDo description property cannot be empty.
 Please ensure you key in the command in the format specified.
 Feeling lazy today? I've deleted:
 [T] [X] B
 Feeling lazy today? I've deleted:
 [T] [X] A
-1. [D] [ ] C (by 2020-07-21)
-2. [E] [X] D (at 2020-07-21 16:00)
-3. [T] [ ] Carp
-4. [T] [X] Carpfishy
-5. [T] [ ] Eat something
-6. [E] [ ] Koifishy (at 2021-08-22 14:35)
-7. [D] [ ] Feed fish (by 2021-12-21 12:22)
-8. [T] [ ] E
-9. [D] [ ] H (by 1999-02-28)
-10. [D] [ ] G (by 2020-08-21 12:00)
+1.	 [D] [M] C 	(by 2020-07-21)
+2.	 [E] [X] D 	(at 2020-07-21 16:00)
+3.	 [T] [M] Carp
+4.	 [T] [X] Carpfishy
+5.	 [T] [M] Eat something
+6.	 [E] [M] Koifishy 	(at 2021-08-22 14:35)
+7.	 [D] [M] Feed fish 	(by 2021-12-21 12:22)
+8.	 [T] [M] E
+9.	 [D] [M] H 	(by 1999-02-28)
+10.	 [D] [M] G 	(by 2020-08-21 12:00)
 Index 999 is out of bounds of your task list size of 10.
 Please make sure your index is at least 1.
 Use the list command to see task indices.
