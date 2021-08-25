@@ -40,6 +40,9 @@ public class Parser {
             case "event": {
                 return new EventCommand(sc.nextLine().trim());
             }
+            case "find": {
+                return new FindCommand(sc.nextLine().trim());
+            }
             case "bye": {
                 return new ExitCommand();
             }

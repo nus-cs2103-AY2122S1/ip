@@ -29,13 +29,22 @@ public abstract class Task {
         this.description = description;
         this.isDone = false;
     }
-    
+
     /**
      * Marks this task as done.
      * Note it does not update the db.
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Returns the description of the task.
+     *
+     * @return Description of the task.
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     @Override
