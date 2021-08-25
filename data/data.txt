@@ -2,3 +2,5 @@ D,2020-08-21,false,idk
 D,2020-01-29,false,idk
 E,mon,false,test
 T,true,idk
+D,2021-02-02,false,test1
+E,now,true,test2
