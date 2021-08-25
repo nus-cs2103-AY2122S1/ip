@@ -1,18 +1,16 @@
 package duke;
 
-import java.util.Scanner;
-import java.nio.file.Paths;
-import duke.storage.Storage;
-import duke.parser.Parser;
-import duke.task.TaskList;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.exception.DukeTaskDetailsException;
-import duke.exception.DukeIndexInputException;
-import duke.ui.Ui;
 import duke.command.Command;
+import duke.exception.DukeIndexInputException;
+import duke.exception.DukeTaskDetailsException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
+import java.nio.file.Paths;
+import java.util.Scanner;
 
 
 public class Duke {
