@@ -30,7 +30,7 @@ public class Storage {
                 if (components.length < 3) {
                     throw new Exception("Invalid format");
                 }
-                boolean isCompleted = components[1] == "1" ? true : false;
+                boolean isCompleted = components[1].equals("1") ? true : false;
                 String description = unescapeString(components[2]);
                 switch (components[0]) {
                     case "T": {
