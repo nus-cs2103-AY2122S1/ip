@@ -11,7 +11,7 @@ public class Task {
     private String description;
 
     /**
-     * boolean to keep track if <code>Task</code> object
+     * Boolean to keep track if <code>Task</code> object
      * is completed.
      */
     private boolean isCompleted;
@@ -27,7 +27,7 @@ public class Task {
     }
 
     /**
-     * Method to mark <code>Task</code> object as completed.
+     * Mark <code>Task</code> object as completed.
      */
     public void markAsCompleted() {
         this.isCompleted = true;

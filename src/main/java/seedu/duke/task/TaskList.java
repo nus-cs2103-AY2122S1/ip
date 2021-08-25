@@ -33,9 +33,11 @@ public class TaskList {
     }
 
     /**
-     * Method to check if a task with the corresponding index is in the task list.
+     * Check if a task with the corresponding index is in the task list.
+     * Returns true if it is.
      *
      * @param index Index of task to be checked.
+     *
      * @return boolean Indicate whether the task is in the task list.
      */
     public boolean isValidTaskIndex(int index) {
@@ -43,7 +45,7 @@ public class TaskList {
     }
 
     /**
-     * Method to return the specific task asked for.
+     * Returns the specific task asked for.
      *
      * @param index Index of the task desired.
      * @return The task corresponding to the index given.
@@ -53,9 +55,10 @@ public class TaskList {
     }
 
     /**
-     * Method to add a new task to the task list.
+     * Add a new task to the task list.
      *
      * @param newTask The task to be added.
+     *
      * @return A new task list that contains the required tasks.
      */
     public TaskList add(Task newTask) {
@@ -65,9 +68,10 @@ public class TaskList {
     }
 
     /**
-     * Method to mark a specific task as completed.
+     * Mark a specific task as completed.
      *
      * @param index Index of the task to be marked as completed.
+     *
      * @return The task that was marked as completed.
      */
     public Task markTaskAsCompleted(int index) {
@@ -77,9 +81,10 @@ public class TaskList {
     }
 
     /**
-     * Method to delete task from the task list.
+     * Delete task from the task list.
      *
      * @param index Index of the task to be deleted.
+     *
      * @return A new task list that contains the remaining tasks.
      */
     public TaskList deleteTask(int index) {
@@ -90,6 +95,7 @@ public class TaskList {
 
     /**
      * Gets the status of the current task list.
+     * Return the String describing the number of tasks in the task list.
      *
      * @return String representation of the number of tasks in the task list.
      */
@@ -100,7 +106,8 @@ public class TaskList {
     }
 
     /**
-     * String representation of the task list.
+     * Returns the String representation of the task list.
+     *
      * @return String representation of the respective tasks
      * in the task list.
      */
