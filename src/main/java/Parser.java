@@ -5,14 +5,14 @@ import java.util.Scanner;
 /**
  * Input parsing and displaying output to the user.
  */
-public class DukeIoHandler {
+public class Parser {
     private final Scanner sc;
     private final TaskList taskList;
 
     /**
      * Constructor for the class.
      */
-    public DukeIoHandler() {
+    public Parser() {
         this.sc = new Scanner(System.in);
         this.taskList = new TaskList();
     }
@@ -36,7 +36,7 @@ public class DukeIoHandler {
     }
 
     private void handleBye() {
-        PrintUtil.displayContentBetweenLines("Bye. Hope to see you again soon!");
+        Ui.displayContentBetweenLines("Bye. Hope to see you again soon!");
         sc.close();
     }
 
@@ -44,7 +44,7 @@ public class DukeIoHandler {
         if (parsedInput.length >= 2) {
             throw new DukeInvalidCommandException("OOPS!!! Do you mean 'list' ?");
         } else {
-            PrintUtil.displayContentBetweenLines(taskList.toString());
+            Ui.displayContentBetweenLines(taskList.toString());
         }
     }
 
@@ -57,7 +57,7 @@ public class DukeIoHandler {
         if (taskList.size() == 0) {
             throw new DukeInvalidCommandException("OOPS!!! The task list is currently empty."); 
         }
-        PrintUtil.displayContentBetweenLines(taskList.markTaskAsDone(taskIndex));
+        Ui.displayContentBetweenLines(taskList.markTaskAsDone(taskIndex));
     }
 
     private void handleDeadline(String[] parsedInput) throws DukeInvalidCommandException {
@@ -71,7 +71,7 @@ public class DukeIoHandler {
         }
         try {
             LocalDate date = LocalDate.parse(parsedArguments[1]);
-            PrintUtil.displayContentBetweenLines(taskList.addTask(new Deadline(parsedArguments[0], date)));
+            Ui.displayContentBetweenLines(taskList.addTask(new Deadline(parsedArguments[0], date)));
         } catch (DateTimeParseException e) {
             throw new DukeInvalidCommandException("OOPS!!! Wrong time format. Correct format should be yyyy-mm-dd");
         }
@@ -88,7 +88,7 @@ public class DukeIoHandler {
         }
         try {
             LocalDate date = LocalDate.parse(parsedArguments[1]);
-            PrintUtil.displayContentBetweenLines(taskList.addTask(new Event(parsedArguments[0], date)));
+            Ui.displayContentBetweenLines(taskList.addTask(new Event(parsedArguments[0], date)));
         } catch (DateTimeParseException e) {
             throw new DukeInvalidCommandException("OOPS!!! Wrong time format. Correct format should be yyyy-mm-dd");
         }
@@ -98,7 +98,7 @@ public class DukeIoHandler {
         if (parsedInput.length < 2) {
             throw new DukeInvalidCommandException("OOPS!!! The description of a todo task cannot be empty.");
         }
-        PrintUtil.displayContentBetweenLines(taskList.addTask(new ToDo(parsedInput[1])));
+        Ui.displayContentBetweenLines(taskList.addTask(new ToDo(parsedInput[1])));
     }
     
     private void handleDelete(String[] parsedInput) throws DukeInvalidCommandException {
@@ -110,7 +110,7 @@ public class DukeIoHandler {
         if (taskList.size() == 0) {
             throw new DukeInvalidCommandException("OOPS!!! The task list is currently empty.");
         }
-        PrintUtil.displayContentBetweenLines(taskList.delete(taskIndex));
+        Ui.displayContentBetweenLines(taskList.delete(taskIndex));
     }
     
     private void dukeCommandController(String[] parsedInput) throws DukeInvalidCommandException {
@@ -148,7 +148,7 @@ public class DukeIoHandler {
             try {
                 dukeCommandController(parseInput(currentCommand));
             } catch (DukeInvalidCommandException e) {
-                PrintUtil.displayContentBetweenLines(e.getMessage());
+                Ui.displayContentBetweenLines(e.getMessage());
             }
             currentCommand = sc.nextLine().trim();
         }

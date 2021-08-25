@@ -1,10 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * The task list to save all the tasks
@@ -19,10 +14,10 @@ public class TaskList {
     public TaskList() {
         ArrayList<Task> temp;
         try {
-            temp = loadTaskListFromHardDisk();
+            temp = Storage.loadTaskListFromHardDisk();
         } catch (IOException e) {
             temp = new ArrayList<>();
-            PrintUtil.displayContent("Can't read the save file.");
+            Ui.displayContent("Can't read the save file.");
         }
         this.tasks = temp;
     }
@@ -43,7 +38,7 @@ public class TaskList {
         } else {
             response.append(" tasks in the list.");
         }
-        saveTaskListToHardDisk();
+        Storage.saveTaskListToHardDisk(tasks);
         return response.toString();
     }
 
@@ -61,7 +56,7 @@ public class TaskList {
             response.append("This task is already done!");
         }
         response.append("\t" + "  ").append(tasks.get(index - 1).toString());
-        saveTaskListToHardDisk();
+        Storage.saveTaskListToHardDisk(tasks);
         return response.toString();
     }
 
@@ -77,7 +72,7 @@ public class TaskList {
         } else {
             response.append(" tasks in the list.");
         }
-        saveTaskListToHardDisk();
+        Storage.saveTaskListToHardDisk(tasks);
         return response.toString();
     }
     
@@ -88,81 +83,6 @@ public class TaskList {
      */
     public int size() {
         return tasks.size();
-    }
-
-    private void saveTaskListToHardDisk() {
-        try {
-            FileWriter fileWriter = new FileWriter("src/data/duke.txt");
-            if (tasks.size() == 0) {
-                fileWriter.write("");
-            } else {
-                for (Task t : tasks) {
-                    fileWriter.write(t.toSaveInHardDisk() + System.getProperty("line.separator"));
-                }
-            }
-            fileWriter.close();
-        } catch (IOException e) {
-            PrintUtil.displayContent("Can't save the tasks");
-        }
-    }
-    
-    private ArrayList<Task> loadTaskListFromHardDisk() throws IOException {
-        File dir = new File("src/data");
-        File logs = new File("src/data/duke.txt");
-        ArrayList<Task> result = new ArrayList<>();
-        try {
-            result = parseSavedTaskList(logs);
-        } catch (FileNotFoundException e) {
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-            if (!logs.exists()) {
-                logs.createNewFile();
-            }
-        } catch (DukeCorruptedSaveException e) {
-            logs.delete();
-            logs.createNewFile();
-            PrintUtil.displayContent("There's an error with the save file, the saved task list is deleted");
-        }
-        return result;
-    }
-    
-    private ArrayList<Task> parseSavedTaskList(File logs) throws FileNotFoundException, DukeCorruptedSaveException {
-        Scanner sc = new Scanner(logs);
-        ArrayList<Task> tasks = new ArrayList<>();
-        
-        while (sc.hasNext()) {
-            String[] currentLine = sc.nextLine().split(" ; ");
-            switch (currentLine[0].trim()) {
-                case "T": {
-                    Task temp = new ToDo(currentLine[2].trim());
-                    if (currentLine[1].equals("1")) {
-                        temp.markAsDone();
-                    }
-                    tasks.add(temp);
-                    break;
-                }
-                case "D": {
-                    Task temp = new Deadline(currentLine[2].trim(), LocalDate.parse(currentLine[3]));
-                    if (currentLine[1].equals("1")) {
-                        temp.markAsDone();
-                    }
-                    tasks.add(temp);
-                    break;
-                }
-                case "E": {
-                    Task temp = new Event(currentLine[2].trim(), LocalDate.parse(currentLine[3].trim()));
-                    if (currentLine[1].equals("1")) {
-                        temp.markAsDone();
-                    }
-                    tasks.add(temp);
-                    break;
-                }
-                default:
-                    throw new DukeCorruptedSaveException("The save file is corrupted!");
-            }
-        }
-        return tasks;
     }
     
     @Override

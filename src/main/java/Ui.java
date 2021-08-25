@@ -1,7 +1,22 @@
 /**
  * Utility to help print out the responses of Duke
  */
-public class PrintUtil {
+public class Ui {
+    
+    public static void greetings() {
+        String logo = "\t  ____        _        \n"
+                + "\t |  _ \\ _   _| | _____ \n"
+                + "\t | | | | | | | |/ / _ \\\n"
+                + "\t | |_| | |_| |   <  __/\n"
+                + "\t |____/ \\__,_|_|\\_\\___|\n";
+
+        insertSeparateLine();
+        System.out.println(logo);
+        displayContent("Hello! I'm Duke");
+        displayContent("What can I do for you?");
+        insertSeparateLine();
+    }
+    
     /**
      * Print out the separation line between elements of the program
      */
