@@ -7,11 +7,11 @@ import java.time.LocalDateTime;
  */
 public class EventTask extends Task {
 
-    private LocalDateTime startDateTime;
-    private LocalDateTime endDateTime;
+    private final LocalDateTime startDateTime;
+    private final LocalDateTime endDateTime;
 
     /**
-     * Create a task based on the title, startDateTime and endDateTime
+     * Create a task based on the title, startDateTime and endDateTime.
      *
      * @param title single line description of the task
      * @param startDateTime start of the event.

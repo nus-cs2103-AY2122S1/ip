@@ -77,7 +77,9 @@ public class Storage {
 
         StringBuilder save = new StringBuilder();
 
-        taskList.stream().forEach(x -> save.append(x.taskToString()).append(System.lineSeparator()));
+        taskList
+                .stream()
+                .forEach(x -> save.append(x.taskToString()).append(System.lineSeparator()));
         byte[] saveResult = save.toString().getBytes();
 
         ui.renderOutput("Saving tasks  - " + filePath);
