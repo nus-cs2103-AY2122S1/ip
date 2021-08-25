@@ -48,4 +48,15 @@ public class TaskList {
         return outputString;
     }
 
+    public void findTasks(String keyword) {
+        String taskListString = "Let Me See If I Can Search What You Seek:\n";
+        for(int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().contains(keyword)) {
+                taskListString += (i+1) + "." + tasks.get(i).toString() + "\n";
+            }
+        }
+        taskListString += "What I Found, I Present Above.";
+        Session.output(taskListString);
+    }
+
 }
