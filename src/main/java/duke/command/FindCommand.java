@@ -1,12 +1,26 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.task.Task;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /** A class that handles command of finding a task by searching for a keyword. */
 public class FindCommand extends Command {
+
+    private String keyword;
+
+    /**
+     * A constructor for class FindCommand.
+     *
+     */
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
+    }
 
     /**
      * Find a task by searching for a keyword.
@@ -17,8 +31,17 @@ public class FindCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        System.out.println("\tHere are the matching tasks in your list:");
+        int index = 1;
 
+        for (Task task : tasks.getTasks()) {
+            String taskString = task.toString();
+            if (taskString.contains(this.keyword)) {
+                String matchedResult = String.format("\t%d.%s", index++, taskString);
+                System.out.println(matchedResult);
+            }
+        }
     }
 
     /**

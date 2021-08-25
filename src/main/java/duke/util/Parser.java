@@ -6,7 +6,7 @@ import duke.exception.EmptyDescriptionException;
 public class Parser {
 
     private enum CommandType {
-        LIST, DONE, TODO, EVENT, DEADLINE, DELETE, BYE, UNKNOWN
+        LIST, DONE, TODO, EVENT, DEADLINE, DELETE, FIND, BYE, UNKNOWN
     }
 
     private static CommandType toEnum(String command) {
@@ -70,6 +70,11 @@ public class Parser {
             commandComponents = validateCommand(fullCommand);
             commandDescription = commandComponents[1];
             command = new AddCommand(commandType, commandDescription);
+            break;
+        case FIND:
+            commandComponents = validateCommand(fullCommand);
+            commandDescription = commandComponents[1];
+            command = new FindCommand(commandDescription);
             break;
         default:
             command = new UnknownCommand();
