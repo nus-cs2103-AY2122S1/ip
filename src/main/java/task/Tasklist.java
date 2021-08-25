@@ -110,7 +110,7 @@ public class Tasklist {
         if (o == this) {
             return true;
         }
-        if (!(o instanceof Task)) {
+        if (!(o instanceof Tasklist)) {
             return false;
         }
         Tasklist tasklist = (Tasklist) o;
@@ -119,6 +119,7 @@ public class Tasklist {
         } else {
             for(int i=0; i < this.size(); i++) {
                 if(!tasklist.get(i).equals(this.get(i))) {
+                    System.out.printf("different %d",i);
                     return false;
                 }
             }

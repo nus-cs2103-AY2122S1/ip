@@ -43,7 +43,6 @@ public class Storage {
                 Task task = Parser.parseStringIntoTask(input, type, Boolean.parseBoolean(isDone));
                 tasks.add(task);
 
-                tasklist.setCount(tasks.size());
             }
             System.out.printf("Loaded old tasklist...\n");
             System.out.println(Ui.breakline);

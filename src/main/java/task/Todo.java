@@ -41,4 +41,17 @@ public class Todo extends Task{
     public String getTaskCat() {
         return taskCat;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Todo)) {
+            return false;
+        }
+        Todo todo = (Todo) o;
+
+        return todo.getName().equals(this.getName());
+    }
 }

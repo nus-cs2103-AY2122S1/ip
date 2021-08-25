@@ -30,7 +30,6 @@ public class Parser {
         }
 
         try {
-
             switch (taskType) {
                 case "todo":
                     return new Todo(taskName, isDone);
@@ -53,7 +52,7 @@ public class Parser {
             String name = nameNTime[0];
             String time;
             try {
-                time = LocalDate.parse(nameNTime[1]).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                time = LocalDate.parse(nameNTime[1]).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
             } catch (DateTimeParseException e) {
                 time = nameNTime[1];
             }

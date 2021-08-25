@@ -19,7 +19,7 @@ public class Task {
      * @param name The name of the task
      */
     public Task(String name, String taskCat, boolean isDone) {
-        this.name = name;
+        this.name = name.trim();
         this.isDone = isDone;
         this.taskCat = taskCat;
     }
@@ -64,7 +64,7 @@ public class Task {
     }
 
     /**
-     * @return Gets addtional details of task
+     * @return Gets additional details of task
      */
     public String getDetail() {
         return "";

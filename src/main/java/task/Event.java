@@ -45,19 +45,23 @@ public class Event extends Task{
         return "/at " + this.eventDetails;
     }
 
+    public String getEventDetails() {
+        return this.eventDetails;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {
             return true;
         }
 
-        if (!(o instanceof Task)) {
+        if (!(o instanceof Event)) {
             return false;
         }
 
         Event task = (Event) o;
         // Compare the data members and return accordingly
         return this.getName().equals(task.getName()) &&
-                this.eventDetails.equals(task.getDetail());
+                this.eventDetails.equals(task.getEventDetails());
     }
 }

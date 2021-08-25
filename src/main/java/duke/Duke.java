@@ -13,10 +13,16 @@ public class Duke {
     private Storage storage;
     private Tasklist tasklist;
     private String exitCmd = "bye";
+    private String defaultAddress = "src/main/java/data/tasklist.txt";
 
     public Duke(String filepath) {
-        storage = new Storage(filepath);
-        tasklist = storage.load();
+        this.storage = new Storage(filepath);
+        this.tasklist = storage.load();
+    }
+
+    public Duke() {
+        this.storage = new Storage(defaultAddress);
+        this.tasklist = storage.load();
     }
 
     public void run() {

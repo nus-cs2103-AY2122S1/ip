@@ -20,7 +20,7 @@ public class Deadline extends Task{
      */
     public Deadline(String name, String deadline, boolean isDone) {
         super(name, taskCat, isDone);
-        this.deadline = deadline;
+        this.deadline = deadline.trim();
     }
 
     /**
@@ -44,19 +44,23 @@ public class Deadline extends Task{
         return "/by " + this.deadline;
     }
 
+    public String getDeadline() {
+        return this.deadline;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {
             return true;
         }
 
-        if (!(o instanceof Task)) {
+        if (!(o instanceof Deadline)) {
             return false;
         }
 
         Deadline task = (Deadline) o;
         // Compare the data members and return accordingly
         return this.getName().equals(task.getName()) &&
-                this.deadline.equals(task.getDetail());
+                this.deadline.equals(task.getDeadline());
     }
 }
