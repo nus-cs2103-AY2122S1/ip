@@ -16,13 +16,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Presents a storage manager that deals with loading tasks
+ * from a file and saving tasks into a file.
+ *
+ * @author ruiquan
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a Storage given a String that represent a path to a text file.
+     * @param filePath the path to the text file that will be used as storage
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves the list of tasks into a text file.
+     * @param tasks the list of tasks to be saved
+     * @return true if the tasks are saved and false otherwise
+     * @throws DukeException if the file can not be found
+     */
     public boolean save(TaskList tasks) throws DukeException {
         Path dirPath = Paths.get("data");
         boolean dataPathExists = Files.exists(dirPath);
@@ -55,6 +71,12 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Reads the tasks in a text file at filePath and
+     * returns the tasks as a List.
+     * @return the tasks a List
+     * @throws DukeException if the file can not be found
+     */
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
         File file = new File(filePath);

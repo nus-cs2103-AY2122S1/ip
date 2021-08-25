@@ -7,12 +7,20 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents Duke, a program that helps people to keep track of tasks.
+ *
+ * @author ruiquan
+ */
 public class Duke {
-
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Constructs a Duke instance.
+     * @param filePath the path to a text file for storage
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -24,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Run Duke.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -42,6 +53,10 @@ public class Duke {
         }
     }
 
+    /**
+     * This is the entry point for the Duke program.
+     * @param args an array of String arguments that stick to convention
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

@@ -11,10 +11,20 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 /**
- * Parses user input.
+ * Represents a Parser that deals with making sense
+ * of the user inputs.
+ *
+ * @author ruiquan
  */
 
 public class Parser {
+    /**
+     * Takes in a String input by the user and
+     * returns a Command.
+     * @param input the String input by the user
+     * @return a Command
+     * @throws DukeException if the user input is not in the correct form
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye") || input.equals("exit")) {
             return new ExitCommand();
