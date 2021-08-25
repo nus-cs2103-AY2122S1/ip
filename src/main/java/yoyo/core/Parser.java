@@ -10,6 +10,13 @@ import static java.lang.Integer.parseInt;
 
 public class Parser {
 
+    /**
+     * Reads an input string and returns the appropriate Command.
+     *
+     * @param fullCommand Full command that has been entered by user.
+     * @return a Command instance matching the user input.
+     * @throws YoyoException
+     */
     public static Command parse(String fullCommand) throws YoyoException {
         fullCommand = fullCommand.trim();
         if (fullCommand.length() == 0) {
@@ -38,7 +45,13 @@ public class Parser {
         }
     }
 
-
+    /**
+     * Reads an input string and returns the appropriate LocalDateTime.
+     *
+     * @param timeString Time string to be parsed.
+     * @return a LocalDateTime instance matching input.
+     * @throws YoyoException
+     */
     public static LocalDateTime parseTimeString(String timeString)
             throws YoyoException {
         char separator;
@@ -72,5 +85,5 @@ public class Parser {
         }
         return result;
     }
-    
+
 }

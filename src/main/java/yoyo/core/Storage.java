@@ -38,10 +38,23 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads a file and returns a Tasklist consisting of tasks listed in the file.
+     *
+     * @return A TaskList instance consisting of tasks listed in the file.
+     * @throws YoyoException
+     */
     public TaskList load() throws YoyoException {
         return readExistingTasks(this.file);
     }
 
+    /**
+     * Reads a file and returns a Tasklist consisting of tasks listed in the file.
+     *
+     * @param f File to be read.
+     * @return A TaskList instance consisting of tasks listed in the file.
+     * @throws YoyoException
+     */
     private TaskList readExistingTasks(File f) throws YoyoException {
         TaskList tasks = new TaskList();
         try {
@@ -82,6 +95,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes all of input TaskList's tasks to the file at storage's data path.
+     *
+     * @param tasks TaskList of the program.
+     */
     public void deposit(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(this.DATA_PATH);

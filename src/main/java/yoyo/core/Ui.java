@@ -20,6 +20,9 @@ public class Ui {
                 + "======================================");
     }
 
+    /**
+     * Greets the user.
+     */
     public void greetUser() {
         String greetings = "Hello! I'm Yoyo.\n"
                 + "What can I do for you?";
@@ -28,6 +31,9 @@ public class Ui {
         outputWrapper();
     }
 
+    /**
+     * Say goodbye to users.
+     */
     public void sayGoodbye() {
         outputWrapper();
         System.out.println("Bye. Hope to see you again soon!");
@@ -35,6 +41,11 @@ public class Ui {
     }
 
 
+    /**
+     * Prints all tasks in the current TaskList.
+     *
+     * @param tasks TaskList of the program.
+     */
     public void printTaskList(TaskList tasks) {
         int currListLength = tasks.size();
         outputWrapper();
@@ -48,6 +59,12 @@ public class Ui {
         outputWrapper();
     }
 
+    /**
+     * Prints a message indicating selected task has been marked as done.
+     *
+     * @param tasks TaskList of the program.
+     * @param taskIndex Index of the Task to be marked as done.
+     */
     public void printMarkTaskMessage(TaskList tasks, int taskIndex) {
         outputWrapper();
         System.out.println("Nice! I've marked this task as done:\n"
@@ -55,6 +72,12 @@ public class Ui {
         outputWrapper();
     }
 
+    /**
+     * Prints a message indicating selected task has been removed.
+     *
+     * @param toRemove The Task that has been removed.
+     * @param tasks TaskList of the program.
+     */
     public void printRemoveTaskMessage(Task toRemove, TaskList tasks) {
         outputWrapper();
         System.out.println("Noted. I've removed this task:\n"
@@ -81,12 +104,22 @@ public class Ui {
         outputWrapper();
     }
 
+    /**
+     * Prints the Exception's error message.
+     *
+     * @param e Error whose message is to be printed.
+     */
     public void printErrorMessage(Exception e) {
         outputWrapper();
         System.out.println(e.getMessage());
         outputWrapper();
     }
 
+    /**
+     * Reads user's next command and returns it as a string.
+     *
+     * @return A string containing user's full command.
+     */
     public String readCommand() {
         return scanner.nextLine();
     }

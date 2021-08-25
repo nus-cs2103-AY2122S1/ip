@@ -43,29 +43,30 @@ public abstract class Task {
     }
 
     /**
-     * Shows all statuses appended with name.
+     * Produces a string containing task's status.
      *
-     * @return A status string containing name.
+     * @return a string containing task's status.
      */
      public String showStatus() {
         return this.printType() + this.printCompletionStatus() + " " + this.name;
      }
 
     /**
-     * Returns an info string for writing to file.
+     * Produces a string containing task's status in write format.
      *
-     * @return A status string.
+     * @return a string containing task's status in write format.
      */
      public String showStatusWrite() {
          return this.printType() + this.printCompletionStatus()
                 + Separator.SEPARATOR + this.name;
      }
 
-    @Override
-    public String toString() {
-        return name;
-    }
-
+    /**
+     * Defines how to compare two Task instances.
+     *
+     * @param o Object to be compared with.
+     * @return A boolean.
+     */
     @Override
     public boolean equals(Object o) {
         @SuppressWarnings("unchecked")

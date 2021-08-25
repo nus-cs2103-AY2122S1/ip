@@ -12,6 +12,11 @@ public class Yoyo {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Constructor for Yoyo program.
+     *
+     * @param filePath File path to the file to be loaded.
+     */
     public Yoyo(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +28,9 @@ public class Yoyo {
         }
     }
 
+    /**
+     * Main method to start running the Yoyo program.
+     */
     private void run() {
         ui.greetUser();
         boolean shouldRun = true;

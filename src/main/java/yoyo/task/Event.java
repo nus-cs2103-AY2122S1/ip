@@ -5,7 +5,7 @@ import yoyo.utility.Separator;
 import java.time.LocalDateTime;
 
 /**
- * A subclass of duke.task.Task of event type.
+ * A subclass of Task of event type.
  */
 public class Event extends Task {
     private LocalDateTime datetime;
@@ -21,9 +21,9 @@ public class Event extends Task {
     }
 
     /**
-     * Shows all statuses appended with name.
+     * Produces a string containing task's status.
      *
-     * @return A status string containing name.
+     * @return a string containing task's status.
      */
     @Override
     public String showStatus() {
@@ -31,10 +31,11 @@ public class Event extends Task {
         return status + " (by: " + datetime.toString().replace('T', ' ') + ")";
     }
 
+
     /**
-     * Returns a status string indicating type of task.
+     * Produces a string containing task's status in write format.
      *
-     * @return An indicator string for the type of task.
+     * @return a string containing task's status in write format.
      */
     @Override
     public String showStatusWrite() {
@@ -43,11 +44,22 @@ public class Event extends Task {
                 + Separator.SEPARATOR + this.datetime;
     }
 
+    /**
+     * Returns a status string indicating type of task.
+     *
+     * @return An indicator string for the type of task.
+     */
     @Override
     public String printType() {
         return "[E]";
     }
 
+    /**
+     * Defines how to compare two Event instances.
+     *
+     * @param o Object to be compared with.
+     * @return A boolean.
+     */
     @Override
     public boolean equals(Object o) {
         @SuppressWarnings("unchecked")
