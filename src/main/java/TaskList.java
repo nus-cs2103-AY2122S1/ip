@@ -30,7 +30,7 @@ public class TaskList {
     }
 
     /** Add a task to the to-do list */
-    public void addTask(TaskType taskType, String details) throws DukeException {
+    public Task addTask(TaskType taskType, String details) throws DukeException {
         Task task;
         if (taskType.equals(TaskType.TODO)) {
             task = new ToDo(details);
@@ -56,28 +56,26 @@ public class TaskList {
             task = new Event(description.trim(), at.trim());
         } else {
             // should not reach here
-            return;
+            throw new DukeException("Invalid task type.");
         }
         todoList.add(task);
-        System.out.println("I've added this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + todoList.size() + " tasks in the list.");
+        
+        return task;
     }
 
     /** Mark a task with given task number as done */
-    public void markTaskDone(Integer taskNum) throws DukeException {
+    public Task markTaskDone(Integer taskNum) throws DukeException {
         Task task = todoList.get(taskNum - 1);
         task.markAsDone();
-        System.out.println("Good work! I've marked this task as done:");
-        System.out.println(task.toString());
+
+        return task;
     }
 
     /** Delete a task with given task number */
-    public void deleteTask(Integer taskNum) throws DukeException {
+    public Task deleteTask(Integer taskNum) throws DukeException {
         Task task = todoList.remove(taskNum - 1);
-        System.out.println("Ok, I've deleted this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + todoList.size() + " tasks in the list.");
+
+        return task;
     }
     
     public List<String> getListData() {

@@ -1,6 +1,10 @@
+import java.util.Scanner;
+
 public class Ui {
-    public Ui () {
-        
+    private Scanner sc;
+    
+    public Ui() {
+        sc = new Scanner(System.in);
     }
     
     public void showStartUpError(DukeException e) {
@@ -19,21 +23,17 @@ public class Ui {
         System.out.println("What can I do for you?");
         showLine();
     }
-    
-//    public void readCommand() {
-//
-//    }
-
-    public void showError(String error) {
-        System.out.println(error);
-    }
 
     public void showLine() {
         String separator = "------------------------------------------------------------------";
         System.out.println(separator);
     }
 
-//    public void () {
-//
-//    }
+    public String readCommand() {
+        return sc.nextLine();
+    }
+
+    public void showMessage(String message) {
+        System.out.println(message);
+    }
 }
