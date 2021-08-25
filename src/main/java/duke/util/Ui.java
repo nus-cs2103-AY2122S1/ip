@@ -1,3 +1,7 @@
+package duke.util;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -26,17 +30,17 @@ public class Ui {
     }
 
     public void showList(String input) {
-        String words = "Here is your task list:";
+        String words = "Here is your duke.task list:";
         print(words, input);
     }
 
     public void showDone(Task task) {
-        String words = " Nice! I've marked this task as done:";
+        String words = " Nice! I've marked this duke.task as done:";
         print(words, task.toString());
     }
 
     public void showDelete(Task task, int num) {
-        String words1 = "Noted. I've removed this task:";
+        String words1 = "Noted. I've removed this duke.task:";
         String words2 = "Now you have " + num + " tasks in the list.";
         print(words1, task.toString(), words2);
     }

@@ -1,3 +1,5 @@
+package duke.task;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -7,8 +9,16 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done duke.task with X
     }
 
 

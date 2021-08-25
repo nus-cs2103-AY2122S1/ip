@@ -1,14 +1,20 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
-    protected LocalDateTime at;
+public class Deadline extends Task{
+    protected LocalDateTime by;
     private Boolean hasTime = true;
 
-    public Event(String description, String at) {
+    public Deadline(String description, String by) {
         super(description);
-        this.at = parseTime(at);
+        this.by = parseTime(by);
+    }
+
+    public LocalDateTime getBy() {
+        return by;
     }
 
     public LocalDateTime parseTime(String time) {
@@ -16,7 +22,7 @@ public class Event extends Task {
         String[] str = time.split(" ");
         String[] oldDate = str[0].split("/");
         LocalDateTime localTime;
-        if(str.length > 1) {
+        if (str.length > 1) {
             String hour = str[1].substring(0,2);
             String min = str[1].substring(2,4);
 
@@ -37,24 +43,23 @@ public class Event extends Task {
         } else {
             s += "0";
         }
-        s = s + " | " + description + " | " + at;
+        s = s + " | " + description + " | " + by;
         return s;
     }
 
     @Override
     public String toString() {
-        String string = "[E]" + super.toString() + "(at: " ;
+        String string = "[D]" + super.toString() + "(by: " ;
         if (hasTime) {
-            string += at.format(DateTimeFormatter.ofPattern("HH:mm, MMM dd yyyy")) + ")";
+            string += by.format(DateTimeFormatter.ofPattern("HH:mm, MMM dd yyyy")) + ")";
         } else {
-            string += at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+            string += by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         }
         return string;
     }
 
     public static void main(String[] args) {
-        Event e = new Event("return book", "2/12/2019 1800");
-        System.out.println(e);
+        Deadline d = new Deadline("return book", "2/12/2019 1800");
+        System.out.println(d);
     }
 }
-

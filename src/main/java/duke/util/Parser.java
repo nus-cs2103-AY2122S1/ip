@@ -1,3 +1,10 @@
+package duke.util;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 public class Parser {
     private TaskList taskList;
     private Storage storage;
@@ -60,7 +67,7 @@ public class Parser {
                     return;
                 }
             } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("OOPS!!! The target of finished task cannot be empty.");
+                throw new DukeException("OOPS!!! The target of finished duke.task cannot be empty.");
             }
         } else if (lowerCase.startsWith("delete")) {
             try {
@@ -74,7 +81,7 @@ public class Parser {
                     return;
                 }
             } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("OOPS!!! The target of deleting task cannot be empty.");
+                throw new DukeException("OOPS!!! The target of deleting duke.task cannot be empty.");
             }
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

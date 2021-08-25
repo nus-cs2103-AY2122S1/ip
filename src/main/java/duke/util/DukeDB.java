@@ -1,3 +1,10 @@
+package duke.util;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -49,18 +56,18 @@ public class DukeDB {
                 out += "E &";
             }
 
-            if(task.isDone) {
+            if(task.isDone()) {
                 out += " 1 & ";
             } else {
                 out += " 0 & ";
             }
 
-            out += task.description;
+            out += task.getDescription();
             if(task instanceof Deadline) {
-                out += " & " + ((Deadline) task).by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
+                out += " & " + ((Deadline) task).getBy().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
             }
             if(task instanceof Event) {
-                out += " & " + ((Event) task).at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
+                out += " & " + ((Event) task).getAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
             }
             fileWriter.write(out);
             fileWriter.close();
@@ -90,18 +97,18 @@ public class DukeDB {
                     out += "E &";
                 }
 
-                if (task.isDone) {
+                if (task.isDone()) {
                     out += " 1 & ";
                 } else {
                     out += " 0 & ";
                 }
 
-                out += task.description;
+                out += task.getDescription();
                 if (task instanceof Deadline) {
-                    out += " & " + ((Deadline) task).by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
+                    out += " & " + ((Deadline) task).getBy().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
                 }
                 if (task instanceof Event) {
-                    out += " & " + ((Event) task).at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
+                    out += " & " + ((Event) task).getAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
                 }
                 fileWriter.write(out);
             }

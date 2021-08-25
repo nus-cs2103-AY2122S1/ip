@@ -1,3 +1,8 @@
+package duke.util;
+
+import duke.task.Task;
+import duke.util.DukeDB;
+
 import java.util.ArrayList;
 
 public class Storage {
