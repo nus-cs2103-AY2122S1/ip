@@ -1,4 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -26,6 +31,53 @@ public class TaskManager {
     }
 
     protected static ArrayList<Task> listOfTasks = new ArrayList<>();
+
+    /**
+     * Gets input from user and respond to the commands accordingly.
+     */
+    public void run() {
+        Message.greet();
+        try {
+            loadTaskList(TASK_FILE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+
+        while (!input.equals("bye")) {
+            Command c = getCommand(input);
+            try {
+                switch (c) {
+                case LIST:
+                    Message.list(listOfTasks);
+                    break;
+                case DONE:
+                    markDone(Integer.parseInt(taskDescription(input)));
+                    break;
+                case TODO:
+                case DEADLINE:
+                case EVENT:
+                    addTask(taskDescription(input), c.type);
+                    break;
+                case DELETE:
+                    deleteTask(Integer.parseInt(taskDescription(input)));
+                    break;
+                case INVALID:
+                    throw new DukeException.InvalidInputException();
+                }
+
+                saveTaskList(TASK_FILE);
+            } catch (IOException e) {
+                System.out.println("Oops, something went wrong!");
+            } catch (DukeException e) {
+                Message.error(e.toString());
+            } finally {
+                input = sc.nextLine();
+            }
+        }
+        Message.exit();
+    }
 
     /**
      * Gets the description of the task.
@@ -112,44 +164,44 @@ public class TaskManager {
         return Command.INVALID;
     }
 
-    /**
-     * Gets input from user and respond to the commands accordingly.
-     */
-    public void run() {
-        Message.greet();
-        listOfTasks = TaskListReader.read(TASK_FILE);
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-
-        while (!input.equals("bye")) {
-            Command c = getCommand(input);
-            try {
-                switch (c) {
-                case LIST:
-                    Message.list(listOfTasks);
-                    break;
-                case DONE:
-                    markDone(Integer.parseInt(taskDescription(input)));
-                    break;
-                case TODO:
-                case DEADLINE:
-                case EVENT:
-                    addTask(taskDescription(input), c.type);
-                    break;
-                case DELETE:
-                    deleteTask(Integer.parseInt(taskDescription(input)));
-                    break;
-                case INVALID:
-                    throw new DukeException.InvalidInputException();
-                }
-
-                TaskListWriter.write(TASK_FILE, listOfTasks);
-            } catch (DukeException e) {
-                Message.error(e.toString());
-            } finally {
-                input = sc.nextLine();
+    public void saveTaskList(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        String tasks = "";
+        for (Task t : listOfTasks) {
+            String done = t.isDone ? "1" : "0";
+            Command c = getCommand(t.getClass().getName().toLowerCase());
+            switch (c) {
+            case TODO:
+                tasks += "T" + " uwu " + done + " uwu " + t.description + "\n";
+                break;
+            case DEADLINE:
+                Deadline d = (Deadline) t;
+                tasks += "D" + " uwu " + done + " uwu " + d.description + " uwu " + d.by + "\n";
+                break;
+            case EVENT:
+                Event e = (Event) t;
+                tasks += "E" + " uwu " + done + " uwu " + e.description + " uwu " + e.at + "\n";
             }
         }
-        Message.exit();
+        fw.write(tasks);
+        fw.close();
+    }
+
+    public void loadTaskList(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while(s.hasNext()) {
+            Task t;
+            String[] taskFormat = s.nextLine().split(" uwu ");
+            if (taskFormat[0].equals("T")) {
+                t = new Todo(taskFormat[2]);
+            } else if (taskFormat[0].equals("D")) {
+                t = new Deadline(taskFormat[2], taskFormat[3]);
+            } else {
+                t = new Event(taskFormat[2], taskFormat[3]);
+            }
+            t.isDone = taskFormat[1].equals("1");
+            listOfTasks.add(t);
+        }
     }
 }
