@@ -1,0 +1,16 @@
+Welcome to Duke!
+Here is a comprehensive list of commands you can use:
+
+1. 'help': Help you with how to use the commands
+2. 'list': Display a list of all current tasks you are having
+3. 'todo': Add a to-do task with no specific deadline to list
+    How to use? 'todo' + <task name>
+4. 'deadline': Add a task with upcoming deadline to your list
+    How to use? 'deadline' + <task name> + /by + <deadline>
+5. 'event': Add a task event with occurred time to your list
+    How to use? 'event' + <task name> + /at + <time>
+6. 'done': Mark one task (or all tasks) in your list as done
+    How to use? 'done' + <task index> (or + 'all')
+7. 'delete': Delete one task (or all) in your list
+    How to use? 'delete' + <task index> (or + 'all')
+8. 'bye': Exit the program

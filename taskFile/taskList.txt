@@ -1,0 +1,3 @@
+[T][ ] walk 10k steps
+[D][X] cs2100 (by 2021-08-24)
+[E][ ] cs2103t meeting (at 2021-08-26)
