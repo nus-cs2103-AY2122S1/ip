@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parsed input that can easily be processed into a task.
+ */
 public class ParsedInput {
     CommandType commandType;
     String taskDescription = "";
@@ -10,6 +13,11 @@ public class ParsedInput {
 
     InputValidator inputValidator = InputValidator.getInstance();
 
+    /**
+     * Generates parsed input for task.
+     * @param input
+     * @throws JadenInputException
+     */
     public ParsedInput(String input) throws JadenInputException {
         String[] splitInput = input.split(" ");
         switch (splitInput[0]) {
