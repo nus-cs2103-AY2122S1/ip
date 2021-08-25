@@ -21,6 +21,9 @@ public class BotDynamicMemoryUnit {
     BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
     BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
 
+    public final String HARD_DISK_DATA_NAME = "data.txt";
+    public final String HARD_DISK_DATA_STORAGE_DIRECTORY = System.getProperty("user.home");
+
     public List<Task> taskTracker = new ArrayList<Task>();
     private static BotDynamicMemoryUnit dynamicMemoryUnit = null;
 
@@ -58,7 +61,14 @@ public class BotDynamicMemoryUnit {
     }
 
     public void saveToHardDisk() throws IOException {
-        FileWriter fw = new FileWriter(botStaticMemoryUnit.HARD_DISK_DATA_NAME, false);
+        FileWriter fw = new FileWriter(
+                String.format(
+                        "%s/%s",
+                        HARD_DISK_DATA_STORAGE_DIRECTORY,
+                        HARD_DISK_DATA_NAME
+                ),
+                false
+        );
         fw.write(produceStringData());
         fw.close();
     }
@@ -98,7 +108,13 @@ public class BotDynamicMemoryUnit {
 
     public void loadFromHardDisk() throws IOException {
         try {
-            File dataFile = new File(botStaticMemoryUnit.HARD_DISK_DATA_NAME);
+            File dataFile = new File(
+                    String.format(
+                            "%s/%s",
+                            HARD_DISK_DATA_STORAGE_DIRECTORY,
+                            HARD_DISK_DATA_NAME
+                    )
+            );
 
             if (dataFile.createNewFile()) {
                 return;
