@@ -51,6 +51,15 @@ public class Parser {
             newCommand = new AddCommand(command, fullCommand);
             break;
 
+        case "find":
+            try {
+                newCommand = new FindCommand(fullCommand.split(" ")[1]);
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                throw new DukeException("OOPS!!! Please enter a valid keyword.");
+            }
+            break;
+
+
         default:
             newCommand = new LostCommand();
             break;

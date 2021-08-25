@@ -55,4 +55,14 @@ public class Task {
         return fileString;
     }
 
+    public boolean isKeyWordPresent(String keyWord) {
+        int intIndex = description.indexOf(keyWord);
+
+        if (intIndex == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

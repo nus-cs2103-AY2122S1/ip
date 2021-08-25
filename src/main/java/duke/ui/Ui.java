@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -126,6 +127,24 @@ public class Ui {
      */
     public void showLoadingError() {
         this.sendMessage("OOPS!!! There is a loading error.");
+    }
+
+    public void showFindTask(ArrayList<Task> tasks) {
+        if (tasks.size() == 0) {
+            String noMatch = "Sorry, no match found";
+            this.sendMessage(noMatch);
+        } else {
+            int numTask = tasks.size();
+
+            String task = "1. " + tasks.get(0).toString();
+            for(int taskNumber = 2; taskNumber <= numTask; taskNumber++) {
+                task = task + "\n" + taskNumber + ". " + tasks.get(taskNumber -1 ).toString();
+            }
+
+            task = "Here are the matching tasks in your list:\n" + task;
+
+            this.sendMessage(task);
+        }
     }
 
 }
