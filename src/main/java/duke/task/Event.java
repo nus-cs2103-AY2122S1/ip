@@ -1,5 +1,7 @@
-import exceptions.DukeException;
-import exceptions.DukeIllegalFormatException;
+package duke.task;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeIllegalFormatException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,12 +28,12 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[" + label + "]" + super.toString() + " (at: " + at + ")";
+        return "[" + label + "]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
     public String toDataString() {
-        return label + super.toDataString() + " | " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return label + super.toDataString() + " | " + at;
     }
 }
 

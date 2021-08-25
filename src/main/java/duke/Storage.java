@@ -1,5 +1,8 @@
-import exceptions.DukeException;
-import exceptions.DukeParseException;
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeParseException;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,14 +10,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+public class Storage {
+    private final String filePath;
 
-public class TaskList extends ArrayList<Task> {
+    public Storage(String filePath) {
+        this.filePath = filePath;
 
-    public void save() throws IOException {
+    }
+
+    public void save(TaskList tasks) throws IOException {
         // update entire list to db
-        FileWriter fw = new FileWriter(Duke.dataPath);
+        FileWriter fw = new FileWriter(filePath);
         StringBuilder dataString = new StringBuilder();
-        for (Task task : this) {
+        for (Task task : tasks) {
             dataString.append(task.toDataString()).append("\n");
         }
         // batch write into the data file
@@ -22,25 +30,25 @@ public class TaskList extends ArrayList<Task> {
         fw.close();
     }
 
-    public void refreshFromDB(boolean shouldFailSilently) throws IOException, DukeException {
+    public void save(Task task) throws IOException {
+        // TODO: raise assertion error if not added to list yet
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(task.toDataString() + "\n");
+        fw.close();
+    }
 
-        String IOErrorMessage = "☹ OOPS!!! Seems like your data is corrupted. " +
-                "Please make sure you data file has the correct format.";
-
-        // refresh from db
-        this.clear();
-
-        File f = new File(Duke.dataPath);
+    public ArrayList<Task> load(boolean shouldFailSilently) throws IOException, DukeParseException {
+        File f = new File(filePath);
         f.getParentFile().mkdirs();
         f.createNewFile();
 
-        // parse
+        ArrayList<Task> list = new ArrayList<>();
         Scanner sc = new Scanner(f);
         while (sc.hasNext()) {
             String[] row = sc.nextLine().split(" \\| ");
             if (row.length < 3) {
                 if (!shouldFailSilently) {
-                    throw new IOException(IOErrorMessage);
+                    throw new DukeParseException();
                 }
                 continue;
             }
@@ -49,7 +57,7 @@ public class TaskList extends ArrayList<Task> {
                 switch (row[0]) {
                     case "T": {
                         Todo todo = new Todo(row[2]);
-                        super.add(todo);
+                        list.add(todo);
                         if (isDone) {
                             todo.markAsDone();
                         }
@@ -58,12 +66,12 @@ public class TaskList extends ArrayList<Task> {
                     case "E": {
                         if (row.length < 4) {
                             if (!shouldFailSilently) {
-                                throw new IOException(IOErrorMessage);
+                                throw new DukeParseException();
                             }
                             continue;
                         }
                         Event event = new Event(row[2], row[3]);
-                        super.add(event);
+                        list.add(event);
                         if (isDone) {
                             event.markAsDone();
                         }
@@ -72,12 +80,12 @@ public class TaskList extends ArrayList<Task> {
                     case "D": {
                         if (row.length < 4) {
                             if (!shouldFailSilently) {
-                                throw new IOException(IOErrorMessage);
+                                throw new DukeParseException();
                             }
                             continue;
                         }
                         Deadline deadline = new Deadline(row[2], row[3]);
-                        super.add(deadline);
+                        list.add(deadline);
                         if (isDone) {
                             deadline.markAsDone();
                         }
@@ -86,49 +94,16 @@ public class TaskList extends ArrayList<Task> {
                     default: {
                         if (!shouldFailSilently) {
                             // don't handle this, let it bubble up the stack and end the program
-                            throw new IOException(IOErrorMessage);
+                            throw new DukeParseException();
                         }
                     }
                 }
             } catch (DukeException e) {
                 if (!shouldFailSilently) {
-                    throw new DukeParseException(e.getMessage());
+                    throw new DukeParseException();
                 }
             }
         }
-    }
-
-    // all modifying operations of task list will modify the db as instructed
-    @Override
-    public boolean add(Task task) {
-        boolean result = super.add(task);
-        try {
-            task.save();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    @Override
-    public Task remove(int index) {
-        // TODO: param to allow client to decide whether to refresh db
-        // TODO: find and remove from file O(N)
-        Task task = super.remove(index);
-        try {
-            this.save();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return task;
-    }
-
-    public void markAsDone(Task task) {
-        task.markAsDone();
-        try {
-            this.save();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return list;
     }
 }

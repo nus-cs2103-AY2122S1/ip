@@ -5,39 +5,39 @@ ____________________________________________________________
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-Hello! I'm Duke
+Hello! I'm duke.Duke
 What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
   [T][ ]  borrow book
-Now you have 1 task(s) in the list.
+Now you have 1 duke.task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
   [D][ ]  return book (by:Sunday)
-Now you have 2 task(s) in the list.
+Now you have 2 duke.task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
   [E][ ]  project meeting (at:Mon 2-4pm)
-Now you have 3 task(s) in the list.
+Now you have 3 duke.task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Seems like you have entered a wrong format for a deadline task. Try this instead: deadline <description> /by <date>
+☹ OOPS!!! Seems like you have entered a wrong format for a deadline duke.task. Try this instead: deadline <description> /by <date>
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Seems like you have entered a wrong format for an event task. Try this instead: event <description> /at <date>
+☹ OOPS!!! Seems like you have entered a wrong format for an event duke.task. Try this instead: event <description> /at <date>
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
+Nice! I've marked this duke.task as done:
   [D][X]  return book (by:Sunday)
 ____________________________________________________________
 ____________________________________________________________
 OOPS!!! I'm sorry, index is out of range! Please try with a number from 1 to 3
 ____________________________________________________________
 ____________________________________________________________
-Noted. I've removed this task:
+Noted. I've removed this duke.task:
   [T][ ]  borrow book
 Now you have 2 tasks in the list.
 ____________________________________________________________

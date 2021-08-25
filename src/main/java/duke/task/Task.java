@@ -1,5 +1,7 @@
-import exceptions.DukeException;
-import exceptions.DukeIllegalFormatException;
+package duke.task;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeIllegalFormatException;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,15 +29,15 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public void save() throws IOException {
-        // TODO: raise assertion error if not added to list yet
-        // save this task to db
-        if (!isSaved) {
-            FileWriter fw = new FileWriter(Duke.dataPath, true);
-            fw.write(this.toDataString() + "\n");
-            fw.close();
-        }
-    }
+    // public void save() throws IOException {
+    //     // TODO: raise assertion error if not added to list yet
+    //     // save this duke.task to db
+    //     if (!isSaved) {
+    //         FileWriter fw = new FileWriter(Duke.dataPath, true);
+    //         fw.write(this.toDataString() + "\n");
+    //         fw.close();
+    //     }
+    // }
 
     @Override
     public String toString() {

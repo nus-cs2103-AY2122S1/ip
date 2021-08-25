@@ -1,5 +1,7 @@
-import exceptions.DukeException;
-import exceptions.DukeIllegalFormatException;
+package duke.task;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeIllegalFormatException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
