@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Ui {
     private static final String introString = "Hey there! I'm Good Duke. How many I help you today?";
     private static final String outroString = "That was an excellent chat - I look forward to seeing you again soon!";
@@ -19,7 +17,7 @@ public class Ui {
         return String.format("Certainly, I've deleted this task: \n\t%s\nNow, you have %d tasks in the list.\n", task, size);
     }
 
-    public static String taskListString(ArrayList<Task> taskList) {
+    public static String taskListString(TaskList taskList) {
         String output = "";
         for (int i = 0; i < taskList.size(); i++) {
             output += String.format("%d. %s\n", i + 1, taskList.get(i));
@@ -54,7 +52,7 @@ public class Ui {
         print(deletedString(task, size));
     }
 
-    public void showTasks(ArrayList<Task> tasks) {
+    public void showTasks(TaskList tasks) {
         print(taskListString(tasks));
     }
 

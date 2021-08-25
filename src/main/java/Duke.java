@@ -1,11 +1,10 @@
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private final Ui ui;
     private final Scanner sc = new Scanner(System.in);
-    private ArrayList<Task> taskList = new ArrayList<>();
+    private TaskList taskList = new TaskList();
     private final Storage storage;
 
     public Duke(String filePath) {
@@ -15,7 +14,7 @@ public class Duke {
 
     public void run() {
         try {
-            this.taskList = storage.readSave(taskList);
+            this.taskList = storage.readSave();
         } catch (EOFException e) {
             ui.showNewSave();
         } catch (IOException | ClassNotFoundException e) {
@@ -67,14 +66,14 @@ public class Duke {
                 break;
             case "delete":
                 task = taskList.get(command.getIndex() - 1);
-                taskList.remove(command.getIndex() - 1);
+                taskList.delete(command.getIndex() - 1);
                 ui.showDeleted(task, taskList.size());
                 break;
             }
         }
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         new Duke("duke.txt").run();
     }
 }
