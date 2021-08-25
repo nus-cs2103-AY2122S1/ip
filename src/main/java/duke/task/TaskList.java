@@ -109,6 +109,13 @@ public class TaskList {
         return fileTask;
     }
 
+    /**
+     * Returns an array of tasks that match the keyword.
+     *
+     * @param keyWord Key word to match the task.
+     * @return Array of tasks that match the keyword
+     * @throws DukeException If task get method has an error.
+     */
     public ArrayList<Task> findTask(String keyWord) throws DukeException{
         ArrayList<Task> newTasks = new ArrayList<>();
 

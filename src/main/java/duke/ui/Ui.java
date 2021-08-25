@@ -129,6 +129,11 @@ public class Ui {
         this.sendMessage("OOPS!!! There is a loading error.");
     }
 
+    /**
+     * Show user a list of tasks matching the key word.
+     *
+     * @param tasks List of tasks that match the key word.
+     */
     public void showFindTask(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
             String noMatch = "Sorry, no match found";

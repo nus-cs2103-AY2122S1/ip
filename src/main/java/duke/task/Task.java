@@ -55,6 +55,12 @@ public class Task {
         return fileString;
     }
 
+    /**
+     * Checks whether key word is present in the task's description.
+     *
+     * @param keyWord Key word to match the task.
+     * @return Boolean whether the task match the key word.
+     */
     public boolean isKeyWordPresent(String keyWord) {
         int intIndex = description.indexOf(keyWord);
 
