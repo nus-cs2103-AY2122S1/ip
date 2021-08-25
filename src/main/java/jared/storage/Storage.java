@@ -50,7 +50,7 @@ public class Storage {
                         String timeStr = Parser.parseData(next, "time");
                         time = LocalTime.parse(timeStr);
                         t = new Deadline(description, date, time);
-                    } catch (ArrayIndexOutOfBoundsException e) {
+                    } catch (DukeException e) {
                         t = new Deadline(description, date);
                     }
                     break;
@@ -61,7 +61,7 @@ public class Storage {
                         String timeStr = Parser.parseData(next, "time");
                         time = LocalTime.parse(timeStr);
                         t = new Event(description, date, time);
-                    } catch (ArrayIndexOutOfBoundsException e) {
+                    } catch (DukeException e) {
                         t = new Event(description, date);
                     }
                     break;
@@ -69,6 +69,7 @@ public class Storage {
                     System.out.println("task failed to load");
                     continue;
                 }
+
                 if (progress.equals("1")) {
                     t.markDone();
                 }

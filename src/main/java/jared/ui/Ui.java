@@ -30,6 +30,7 @@ public class Ui {
         while (scan.hasNextLine()) {
             String next = scan.nextLine();
             String command = Parser.parseCommand(next);
+
             try {
                 if (command.equals("bye")) {
                     showExitMessage();
