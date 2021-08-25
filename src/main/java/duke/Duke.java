@@ -8,7 +8,7 @@ public class Duke {
     /**
      * duke.TaskList containing Tasks.
      */
-    private TaskList tl;
+    private TaskList taskList;
     private Storage storage;
     private Ui ui;
     private Parser parser;
@@ -18,7 +18,7 @@ public class Duke {
      */
     public Duke() {
         this.storage = new Storage();
-        this.tl = this.storage.load();
+        this.taskList = this.storage.load();
         this.ui = new Ui();
         this.parser = new Parser();
     }
@@ -61,9 +61,9 @@ public class Duke {
                 }
                 break;
         }
-        this.tl.addTask(newTask);
-        this.storage.write(this.tl);
-        this.ui.showAddMessage(newTask, this.tl);
+        this.taskList.addTask(newTask);
+        this.storage.write(this.taskList);
+        this.ui.showAddMessage(newTask, this.taskList);
     }
 
     /**
@@ -72,7 +72,7 @@ public class Duke {
      * @return duke.Task of the given index.
      */
     public Task getTaskByIndex(int index) {
-        return this.tl.getTaskByIndex(index);
+        return this.taskList.getTaskByIndex(index);
     }
 
     /**
@@ -80,8 +80,8 @@ public class Duke {
      * @param itemNum Position of duke.Task in the list.
      */
     public void markDone(int itemNum){
-        this.tl.markDone(itemNum);
-        this.storage.write(this.tl);
+        this.taskList.markDone(itemNum);
+        this.storage.write(this.taskList);
         this.ui.showMarkDoneMessage(this.getTaskByIndex(itemNum - 1));
     }
 
@@ -97,9 +97,9 @@ public class Duke {
             int itemNum = Integer.parseInt(items[1]);
             Task toBeDeleted = this.getTaskByIndex(itemNum - 1);
             String taskName = toBeDeleted.toString();
-            this.tl.deleteTask(itemNum - 1);
-            this.storage.write(this.tl);
-            this.ui.showDeleteMessage(toBeDeleted, this.tl);
+            this.taskList.deleteTask(itemNum - 1);
+            this.storage.write(this.taskList);
+            this.ui.showDeleteMessage(toBeDeleted, this.taskList);
         }
     }
 
@@ -121,7 +121,7 @@ public class Duke {
                     this.exit();
                     break;
                 case "list":
-                    this.ui.showTaskList(this.tl);
+                    this.ui.showTaskList(this.taskList);
                     break;
                 case "done":
                     this.markDone(Integer.parseInt(items[1]));
