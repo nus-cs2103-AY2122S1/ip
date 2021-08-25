@@ -1,4 +1,8 @@
 -----------------------------------------------------------------------
+Seems like you do not have a previous save file. I will create one for you once you input a task!
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
@@ -8,8 +12,6 @@
 Hello! I'm Duke :)
 What can I do for you?
 -----------------------------------------------------------------------
-
-Seems like you do not have a previous save file. I will create one for you once you input a task!
 
 -----------------------------------------------------------------------
 Here are the tasks in your list:
