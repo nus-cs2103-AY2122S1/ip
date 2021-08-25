@@ -6,6 +6,11 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
+    /**
+     * interprets string input from the user and translates it into commands, and uses Duke to execute them.
+     * @param input string input from the user of Duke
+     * @return a boolean indicating whether Duke should continue or whether it should go to sleep based on the input.
+     */
     public static boolean interpretCommand(String input) {
 
         boolean cont = true;

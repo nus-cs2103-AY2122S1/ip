@@ -103,22 +103,6 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-//    /**
-//     * sends the greeting message for duke.Duke.
-//     */
-//    public static void sendStartMessage() {
-//
-//        duke.Ui.sendStartMessage();
-//    }
-
-//    /**
-//     * sends the closing message for duke.Duke.
-//     */
-//    public static void sendEndMessage() {
-//        System.out.println("____________________________________________________________");
-//        System.out.println(endMessage);
-//        System.out.println("____________________________________________________________");
-//    }
 
     /**
      * main method.
