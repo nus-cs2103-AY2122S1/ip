@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * A Task that needs to be done before a specific date/time.
  *
@@ -5,7 +9,7 @@
  */
 public class Deadline extends Task{
     /** date/time by which task must be done. */
-    protected String by;
+    protected LocalDate by;
 
     /**
      * Constructor for a Deadline task.
@@ -15,7 +19,12 @@ public class Deadline extends Task{
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        try {
+            LocalDate date = LocalDate.parse(by);
+            this.by = date;
+        } catch (DateTimeParseException e) {
+            System.out.println("Incorrect date format.");
+        }
     }
 
     /**
@@ -27,8 +36,13 @@ public class Deadline extends Task{
      */
     public Deadline(String description, String by, boolean status) {
         super(description);
-        this.by = by;
-        this.isDone = status;
+        try {
+            LocalDate date = LocalDate.parse(by);
+            this.by = date;
+        } catch (DateTimeParseException e) {
+            System.out.println("Incorrect date format stored.");
+        }
+        super.isDone = status;
     }
 
     /**
@@ -44,6 +58,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String formattedDate = this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return "[D]" + super.toString() + " (by: " + formattedDate + ")";
     }
 }

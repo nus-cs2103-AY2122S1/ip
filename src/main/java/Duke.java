@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -130,8 +133,11 @@ public class Duke {
         case DEADLINE:
             try {
                 String taskDesc = description.substring(9);
-                String[] fields = taskDesc.split(" /by ", 2);
+                String[] fields = taskDesc.split(" /by ", 2); //TODO
+                LocalDate date = LocalDate.parse(fields[1]);
                 tasks.add(new Deadline(fields[0], fields[1]));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please use format deadline <description> /by <yyyy-mm-dd>.");
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("The Deadline description cannot be empty. " +
                         "Please use format deadline <description> /by <time>.");

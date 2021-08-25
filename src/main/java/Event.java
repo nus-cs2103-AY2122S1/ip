@@ -29,7 +29,7 @@ public class Event extends Task{
     public Event(String description, String at, boolean status) {
         super(description);
         this.at = at;
-        this.isDone = status;
+        super.isDone = status;
     }
 
     /**
