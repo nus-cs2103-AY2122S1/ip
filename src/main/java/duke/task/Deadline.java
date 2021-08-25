@@ -17,6 +17,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public LocalDate getDate() {
+        return this.timeDue;
+    }
+
+    @Override
     public String taskToLine() {
         return "D" + super.taskToLine() + " | " + this.timeDue;
     }

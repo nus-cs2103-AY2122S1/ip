@@ -17,8 +17,13 @@ public class Event extends Task {
     }
 
     @Override
+    public LocalDate getDate() {
+        return this.timeStart;
+    }
+
+    @Override
     public String taskToLine() {
-        return "D" + super.taskToLine() + " | " + this.timeStart;
+        return "E" + super.taskToLine() + " | " + this.timeStart;
     }
 
     @Override

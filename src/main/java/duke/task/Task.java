@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
+
 import java.time.LocalDate;
 
 public class Task {
@@ -10,11 +13,17 @@ public class Task {
     protected String description;
     protected boolean isDone = false;
 
-    public Task(String description) {
+    public Task(String description) throws DukeException {
+        if (description.isEmpty()) {
+            throw new DukeException("Your description cannot be empty!");
+        }
         this.description = description;
     }
 
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone) throws DukeException {
+        if (description.isEmpty()) {
+            throw new DukeException("Your description cannot be empty!");
+        }
         this.description = description;
         this.isDone = isDone;
     }
@@ -29,14 +38,6 @@ public class Task {
     }
 
     public LocalDate getDate() {
-        if (this instanceof Deadline) {
-            Deadline deadline = (Deadline) this;
-            return deadline.timeDue;
-        }
-        if (this instanceof Event) {
-            Event deadline = (Event) this;
-            return deadline.timeStart;
-        }
         return null;
     }
 
