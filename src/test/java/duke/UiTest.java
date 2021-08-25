@@ -2,11 +2,12 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 public class UiTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();

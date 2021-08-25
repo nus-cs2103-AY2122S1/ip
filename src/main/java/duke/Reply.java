@@ -6,7 +6,7 @@ package duke;
  * @author Kleon Ang
  */
 public class Reply {
-    private String content;
+    private final String content;
     private final String LINE = "\t____________________________________________________________";
 
     /**
@@ -15,7 +15,7 @@ public class Reply {
      * @param content A string containing the contents of Duke's reply.
      */
     public Reply(String content) {
-        this.content = content.replaceAll("(?m)^", "\t ");;
+        this.content = content.replaceAll("(?m)^", "\t ");
     }
 
     /**
