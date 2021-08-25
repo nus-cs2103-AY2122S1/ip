@@ -4,3 +4,4 @@
 [T][ ] say hello to morty's mother
 [T][ ] kill rick and morty
 [T][ ] kill rick
+[D][ ] kill morty --2021-08-25T12:00

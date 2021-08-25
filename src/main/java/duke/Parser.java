@@ -48,8 +48,8 @@ public class Parser {
                 }
                 ToDo newToDo = new ToDo(actualToDo);
                 Duke.addToList(newToDo);
-                System.out.println(actualToDo);
-                System.out.println(newToDo.toString());
+//                System.out.println(actualToDo);
+//                System.out.println(newToDo.toString());
                 Storage.appendToFile(newToDo.toString());
 
 
