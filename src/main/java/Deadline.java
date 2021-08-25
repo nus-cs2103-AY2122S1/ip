@@ -7,28 +7,34 @@ public class Deadline extends Task {
 
     protected LocalDate localDateBy;
     protected LocalDateTime localDateTimeBy;
-    protected  String by;
+    protected String by;
 
+    private static final DateTimeFormatter DATE_FORMAT_WITH_HOURS_FOR_DISPLAY =
+            DateTimeFormatter.ofPattern("E, MMM d yyyy HH:mm");
+    private static final DateTimeFormatter DATE_FORMAT_WITHOUT_HOURS_FOR_DISPLAY =
+            DateTimeFormatter.ofPattern("E, MMM d yyyy");
     private static final DateTimeFormatter[] DATE_FORMATTERS_WITH_HOURS = {
-            DateTimeFormatter.ofPattern("E, MMM d yyyy HH:mm"),
+            DATE_FORMAT_WITH_HOURS_FOR_DISPLAY,
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
             DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy HH:mm"),
             DateTimeFormatter.ofPattern("dd/MM/yy HH:mm"),
             DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"),
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"),
             DateTimeFormatter.ofPattern("MMM, d yyyy HH:mm"),
+            DateTimeFormatter.ofPattern("d MMMM yyyy HH:mm"),
             DateTimeFormatter.ofPattern("d MMM yyyy HH:mm"),
     };
 
     private static final DateTimeFormatter[] DATE_FORMATTERS_WITHOUT_HOURS = {
-            DateTimeFormatter.ofPattern("E, MMM d yyyy"),
+            DATE_FORMAT_WITHOUT_HOURS_FOR_DISPLAY,
             DateTimeFormatter.ofPattern("yyyy-MM-dd"),
             DateTimeFormatter.ofPattern("dd/MM/yy"),
             DateTimeFormatter.ofPattern("dd/MM/yyyy"),
             DateTimeFormatter.ofPattern("dd-MM-yyyy"),
             DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy"),
             DateTimeFormatter.ofPattern("MMM, d yyyy"),
-            DateTimeFormatter.ofPattern("dd MMM yyyy")
+            DateTimeFormatter.ofPattern("d MMMM yyyy"),
+            DateTimeFormatter.ofPattern("d MMM yyyy")
     };
 
 
@@ -60,29 +66,13 @@ public class Deadline extends Task {
     @Override
     public String toString() {
 
-        String byString = "";
+        String byString;
 
         if (localDateTimeBy != null) {
-            for (DateTimeFormatter df : DATE_FORMATTERS_WITH_HOURS) {
-                try {
-                    byString = localDateTimeBy.format(df);
-                    break;
-                } catch (DateTimeParseException e) {
-                    // Ignore; try next formatter
-                }
-            }
-        } else if (localDateBy != null) {
-            if (localDateTimeBy == null) {
-                for (DateTimeFormatter df : DATE_FORMATTERS_WITHOUT_HOURS) {
-                    try {
-                        byString = localDateBy.format(df);
-                        break;
-                    } catch (DateTimeParseException e) {
-                        // Ignore; try next formatter
-                    }
-                }
-            }
-        } else {}
+            byString = localDateTimeBy.format(DATE_FORMAT_WITH_HOURS_FOR_DISPLAY);
+        } else {
+            byString = localDateBy.format(DATE_FORMAT_WITHOUT_HOURS_FOR_DISPLAY);
+        }
 
         return "[D]" + super.toString() + " (by: " + byString + ")";
     }

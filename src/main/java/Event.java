@@ -9,26 +9,32 @@ public class Event extends Task {
     protected LocalDateTime localDateTimeAt;
     protected String at;
 
+    private static final DateTimeFormatter DATE_FORMAT_WITH_HOURS_FOR_DISPLAY =
+            DateTimeFormatter.ofPattern("E, MMM d yyyy HH:mm");
+    private static final DateTimeFormatter DATE_FORMAT_WITHOUT_HOURS_FOR_DISPLAY =
+            DateTimeFormatter.ofPattern("E, MMM d yyyy");
     private static final DateTimeFormatter[] DATE_FORMATTERS_WITH_HOURS = {
-            DateTimeFormatter.ofPattern("E, MMM d yyyy HH:mm"),
+            DATE_FORMAT_WITH_HOURS_FOR_DISPLAY,
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
             DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy HH:mm"),
             DateTimeFormatter.ofPattern("dd/MM/yy HH:mm"),
             DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"),
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"),
             DateTimeFormatter.ofPattern("MMM, d yyyy HH:mm"),
+            DateTimeFormatter.ofPattern("d MMMM yyyy HH:mm"),
             DateTimeFormatter.ofPattern("d MMM yyyy HH:mm"),
     };
 
     private static final DateTimeFormatter[] DATE_FORMATTERS_WITHOUT_HOURS = {
-            DateTimeFormatter.ofPattern("E, MMM d yyyy"),
+            DATE_FORMAT_WITHOUT_HOURS_FOR_DISPLAY,
             DateTimeFormatter.ofPattern("yyyy-MM-dd"),
             DateTimeFormatter.ofPattern("dd/MM/yy"),
             DateTimeFormatter.ofPattern("dd/MM/yyyy"),
             DateTimeFormatter.ofPattern("dd-MM-yyyy"),
             DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy"),
             DateTimeFormatter.ofPattern("MMM, d yyyy"),
-            DateTimeFormatter.ofPattern("dd MMM yyyy")
+            DateTimeFormatter.ofPattern("d MMMM yyyy"),
+            DateTimeFormatter.ofPattern("d MMM yyyy")
     };
 
     public Event(String description, String at, boolean isDone) throws SaberTimeParserException {
@@ -58,29 +64,14 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String atString = "";
+        String atString;
 
         if (localDateTimeAt != null) {
-            for (DateTimeFormatter df : DATE_FORMATTERS_WITH_HOURS) {
-                try {
-                    atString = localDateTimeAt.format(df);
-                    break;
-                } catch (DateTimeParseException e) {
-                    // Ignore; try next formatter
-                }
-            }
-        } else if (localDateAt != null) {
-            if (localDateTimeAt == null) {
-                for (DateTimeFormatter df : DATE_FORMATTERS_WITHOUT_HOURS) {
-                    try {
-                        atString = localDateAt.format(df);
-                        break;
-                    } catch (DateTimeParseException e) {
-                        // Ignore; try next formatter
-                    }
-                }
-            }
-        } else {}
+            atString = localDateTimeAt.format(DATE_FORMAT_WITH_HOURS_FOR_DISPLAY);
+        } else {
+            atString = localDateAt.format(DATE_FORMAT_WITHOUT_HOURS_FOR_DISPLAY);
+        }
+
         return "[E]" + super.toString() + " (at: " + atString + ")";
     }
 }
