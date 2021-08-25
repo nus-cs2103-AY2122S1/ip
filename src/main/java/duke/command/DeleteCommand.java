@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // Check for invalid task argument
-        if (this.deleteTask >= tasks.getSize()) {
+        if (deleteTask >= tasks.getSize()) {
             throw new InvalidArgumentException(tasks.getSize());
         }
 
@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
                 + " in the list.";
         ui.showResponse(response);
 
-        tasks.deleteTask(this.deleteTask);
+        tasks.deleteTask(deleteTask);
 
         storage.save(tasks.getTaskList());
     }

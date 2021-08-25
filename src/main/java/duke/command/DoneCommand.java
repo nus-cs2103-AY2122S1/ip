@@ -20,10 +20,10 @@ public class DoneCommand extends Command {
             throw new InvalidArgumentException(tasks.getSize());
         }
 
-        tasks.getTask(this.doneTask).markAsDone();
+        tasks.getTask(doneTask).markAsDone();
 
         String response = "Nice! I've marked this task as done:\n" +
-                "       " + tasks.getTask(this.doneTask);
+                "       " + tasks.getTask(doneTask);
         ui.showResponse(response);
 
         storage.save(tasks.getTaskList());

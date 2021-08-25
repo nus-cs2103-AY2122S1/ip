@@ -6,7 +6,7 @@ public class Ui {
     private Scanner scanner;
 
     public Ui() {
-        this.scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
     public void showWelcome() {
@@ -18,9 +18,9 @@ public class Ui {
     }
 
     public String readCommand() {
-        String nextLine = this.scanner.nextLine();
+        String nextLine = scanner.nextLine();
         while (nextLine.equals("")) {
-            nextLine = this.scanner.nextLine();
+            nextLine = scanner.nextLine();
         }
         return nextLine;
     }
@@ -42,6 +42,6 @@ public class Ui {
     }
 
     public void closeScanner() {
-        this.scanner.close();
+        scanner.close();
     }
 }

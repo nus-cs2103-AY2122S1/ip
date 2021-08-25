@@ -33,9 +33,9 @@ public class Storage {
         }
 
         // Ensure file exists
-        this.file = new File(filePath);
+        file = new File(filePath);
         try {
-            this.file.createNewFile();
+            file.createNewFile();
         } catch (IOException e) {
             throw new StorageException();
         }
@@ -48,7 +48,7 @@ public class Storage {
         // Instantiate scanner obj
         Scanner scanner;
         try {
-            scanner = new Scanner(this.file);
+            scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
             throw new LoadingException();
         }
@@ -93,7 +93,7 @@ public class Storage {
     public void save(ArrayList<Task> taskList) throws DukeException {
         try {
             // Instantiate file writer obj
-            FileWriter fw = new FileWriter(this.file);
+            FileWriter fw = new FileWriter(file);
 
             // Write to file
             taskList.forEach(task -> {
