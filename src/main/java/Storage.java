@@ -12,9 +12,9 @@ public class Storage {
     }
 
     public TaskList load(UserInterface ui){
+        TaskList taskList = new TaskList();
         try {
             Scanner fileReader = new Scanner(file);
-            TaskList taskList = new TaskList();
             while (fileReader.hasNext()) {
                 String row = fileReader.nextLine();
                 String[] tokens = row.split(",");
@@ -32,5 +32,6 @@ public class Storage {
         } catch (FileNotFoundException e) {
             ui.displayError("File could not be found");
         }
+        return taskList;
     }
 }
