@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,10 +10,27 @@ public class Duke {
     public static final String DEADLINE = "deadline";
     public static final String EVENT = "event";
 
-    private static void initialiseBot() {
+    private static final String STORAGE_PATH = "data/duke.txt";
+    private static final File DATA_FILE = new File(STORAGE_PATH);
+
+    private static List<Task> initialiseBot() {
+        List<Task> taskList = new ArrayList<>();
+        DataManager dataManager = new DataManager();
+
+        try {
+            boolean isFileCreated = DATA_FILE.createNewFile();
+            if (!isFileCreated) {
+                taskList = dataManager.txtToList(DATA_FILE);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         String message = "Hello! I'm Duke\n"
                 + "What can I do for you?";
         System.out.println(message);
+
+        return taskList;
     }
 
     private static void closeBot() {
@@ -72,10 +91,9 @@ public class Duke {
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
 
-        initialiseBot();
 
         boolean status = true;
-        List<Task> tasks = new ArrayList<>();
+        List<Task> tasks = initialiseBot();
 
         Scanner sc = new Scanner(System.in);
 
@@ -131,6 +149,7 @@ public class Duke {
                     e.printErrorMessage();
                 }
             }
+
         }
 
         sc.close();
@@ -144,6 +163,11 @@ public class Duke {
             } else {
                 Task removedTask = tasks.get(taskPosition);
                 tasks.remove(taskPosition);
+
+                //TODO make better
+                DataManager dataManager = new DataManager(tasks);
+                dataManager.update(tasks);
+
                 String displayedMessage = "Noted. I've removed this task:\n"
                         + "  " + removedTask.toString() + "\n"
                         + getTotalTaskString(tasks);
@@ -156,6 +180,11 @@ public class Duke {
 
     private static void addTask(Task task, List<Task> tasks) {
         tasks.add(task);
+
+        //TODO make better
+        DataManager dataManager = new DataManager(tasks);
+        dataManager.update(tasks);
+
         String displayedMessage = getAddedSuccessMessage(task, tasks);
         System.out.println(displayedMessage);
     }
@@ -240,6 +269,11 @@ public class Duke {
             } else {
                 Task taskMarked = tasks.get(taskPosition);
                 taskMarked.markAsDone();
+
+                //TODO make better
+                DataManager dataManager = new DataManager(tasks);
+                dataManager.update(tasks);
+
                 String displayedMessage = "Nice! I've marked this task as done:\n"
                         + "  "
                         + taskMarked.toString();
