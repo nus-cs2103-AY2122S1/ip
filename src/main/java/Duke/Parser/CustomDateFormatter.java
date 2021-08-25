@@ -35,9 +35,11 @@ public class CustomDateFormatter {
             "yyyy-mm-dd",
     };
 
-    public CustomDateFormatter() {
-
+    public static LocalDate getLocalDateFromString(String str) {
+        CustomDateFormatter formatter = new CustomDateFormatter();
+        return formatter.formatWithoutTime(str);
     }
+
 
     public LocalDateTime formatWithTime(String text) {
         for (String pattern: patternsWithTime) {
@@ -65,8 +67,7 @@ public class CustomDateFormatter {
         CustomDateFormatter temp = new CustomDateFormatter();
         LocalDateTime dateTime = temp.formatWithTime("10 Oct 2014 01:00");
         LocalDate date = temp.formatWithoutTime("12-12-2019");
-        System.out.println(dateTime);
-        System.out.println(date.format(DateTimeFormatter.ofPattern("d/MM/yyyy")));
+
     }
 }
 
