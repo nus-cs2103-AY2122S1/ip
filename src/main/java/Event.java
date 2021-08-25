@@ -15,4 +15,9 @@ public class Event extends Task {
         return str;
     }
 
+    @Override
+    public String getDataString() {
+        return String.format("%s_~_%s_~_%s_~_%s", this.taskType, this.getStatusInt(), this.description, this.date);
+    }
+
 }
