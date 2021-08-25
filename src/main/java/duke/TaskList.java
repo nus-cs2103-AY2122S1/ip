@@ -82,6 +82,11 @@ public class TaskList {
                 + (size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
+    /**
+     * Searches for all tasks whose description contains the specified keyword and prints them to screen.
+     *
+     * @param keyword The keyword to search for.
+     */
     public void searchAndDisplay(String keyword) {
         ArrayList<Task> temp = new ArrayList<>();
         for (int i = 0; i < size(); i++) {

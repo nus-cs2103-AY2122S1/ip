@@ -24,7 +24,7 @@ public class Event extends Task {
     protected LocalTime time;
 
     /**
-     * Constructor of the Deadline class.
+     * Constructor of the Event class.
      *
      * @param description A string representing the description of an event.
      * @param at A string representing the start date and time of an event.
