@@ -1,12 +1,14 @@
 package bob;
 
 import bob.task.Task;
+
 import java.util.ArrayList;
 
 /**
  * Represents the user's list of tasks to be completed.
  */
 public class TaskList {
+    /** List of user tasks to keep track of. */
     private ArrayList<Task> taskList;
 
     /**
@@ -76,7 +78,8 @@ public class TaskList {
      *
      * @return The number of tasks in the list as a String.
      */
-    public String noOfTasks() {
+
+    public String getNoOfTasks() {
         return Integer.toString(this.taskList.size());
     }
 

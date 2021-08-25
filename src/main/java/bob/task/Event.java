@@ -1,12 +1,13 @@
 package bob.task;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 /**
  * Represents a special type of task with a specific date, meaning the task will occur or be completed at that date.
  */
 public class Event extends Task {
+    /** Date of event */
     private LocalDate date;
 
     /**

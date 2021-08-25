@@ -1,12 +1,13 @@
 package bob.task;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 /**
  * Represents a special type of task with a deadline, meaning the task must be completed before the specified date.
  */
 public class Deadline extends Task {
+    /** Deadline date of Deadline */
     private LocalDate deadline;
 
     /**

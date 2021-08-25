@@ -53,7 +53,7 @@ public class Ui {
     public void showTaskAdded(Task task, TaskList tasks) {
         tasks.addTask(task);
         System.out.println("Okay okay I've added the task:\n" + task.printTask() + "\n"
-                + "Yay " + tasks.noOfTasks() + " tasks!\n");
+                + "Yay " + tasks.getNoOfTasks() + " tasks!\n");
     }
 
     /**
@@ -68,7 +68,7 @@ public class Ui {
      */
     public void showIndexDeleted(int index, TaskList tasks) {
         System.out.println("Okay task yeeted away :D\n" + tasks.deleteIndex(index) + "\n"
-                + "Yay " + tasks.noOfTasks() + " tasks!\n");
+                + "Yay " + tasks.getNoOfTasks() + " tasks!\n");
     }
 
     /**

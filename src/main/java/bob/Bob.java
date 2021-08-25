@@ -1,6 +1,7 @@
 package bob;
 
-import bob.exception.*;
+import bob.exception.DirectoryNotFoundException;
+import bob.exception.FileNotFoundException;
 
 import java.io.File;
 
@@ -8,8 +9,13 @@ import java.io.File;
  * Represents a chatbot that stores, displays and alters the user's task list based on the user input.
  */
 public class Bob {
+    /** Storage object that deals with loading tasks from the file and saving tasks in the file */
     private Storage storage;
+
+    /** List of user tasks */
     private TaskList tasks;
+
+    /** Ui object that deals with interactions with the user */
     private Ui ui;
 
     /**

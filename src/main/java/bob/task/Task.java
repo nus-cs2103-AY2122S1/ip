@@ -4,8 +4,11 @@ package bob.task;
  * Represents a task for the user to ask Bob to store in the list and complete or remove at a later time.
  */
 public class Task {
+    /** Description of user Task */
     private String description;
-    private boolean completed;
+
+    /** Whether the Task has been completed by the user */
+    private boolean isCompleted;
 
     /**
      * Constructor for a new Task instance.
@@ -14,7 +17,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
@@ -23,14 +26,14 @@ public class Task {
      * @return "X" if the task is completed, " " otherwise.
      */
     public String getStatusIcon() {
-        return (completed ? "X" : " "); // mark done task with X
+        return (isCompleted ? "X" : " ");
     }
 
     /**
      * Marks the current Task as completed.
      */
     public void markCompleted() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
