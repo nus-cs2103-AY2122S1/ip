@@ -57,8 +57,15 @@ public class Ui {
         return list;
     }
 
-    public void find(TaskList foundTasks) {
+    public void findByDate(TaskList foundTasks) {
         String message = "Here are the deadlines and events that match the date Sir/Mdm:\n"
+                + list(foundTasks);
+        System.out.println(message);
+        System.out.println();
+    }
+
+    public void findByDescription(TaskList foundTasks) {
+        String message = "Here are the results of the search Sir/Mdm:\n"
                 + list(foundTasks);
         System.out.println(message);
         System.out.println();

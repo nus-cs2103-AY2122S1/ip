@@ -78,7 +78,7 @@ public class Parser {
 
             return new DeleteCommand(taskToDelete, tasks, ui, storage);
 
-        } else if (input.split(" ")[0].equals("find")) {
+        } else if (input.split(" ")[0].equals("find/date")) {
 
             String[] values = input.split(" ");
             if (values.length != 2) {
@@ -87,12 +87,18 @@ public class Parser {
             } else {
                 try {
                     LocalDate date = Parser.parseDate(values[1]);
-                    return new FindCommand(date, tasks, ui);
+                    return new FindByDateCommand(date, tasks, ui);
                 } catch (DukeException e) {
                     throw new DukeException("Wrong format for date Sir/Mdm. Examples of dates accepted: "
                             + "2/12/2019, 2019-12-02");
                 }
             }
+        } else if (input.startsWith("find")) {
+
+            String searchPhrase = input.substring(4).trim();
+
+            return new FindByDescriptionCommand(searchPhrase, tasks, ui);
+
         } else {
             Pattern todoPattern = Pattern.compile("(^(todo ))");
             Pattern deadlinePattern = Pattern.compile("(^(deadline ))");

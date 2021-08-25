@@ -16,10 +16,13 @@ event test /at gibberish hello to gibberish hello
 event test /at more gibberish hello to more gibberish hello
 event test /at hello to hello
 event test /at
-find 24-1-2021
-find 2021-24-11
-find 2/2/2021
-find 24/11/2021
+find/date 24-1-2021
+find/date 2021-24-11
+find/date 2/2/2021
+find/date 24/11/2021
+find momo
+find test
+find lalalalalala
 list
 done 1
 done 2

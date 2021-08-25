@@ -63,6 +63,23 @@ public class TaskList {
         return foundTasks;
     }
 
+    public TaskList findByDescription(String input) {
+
+        TaskList foundTasks = new TaskList();
+
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task task = this.tasks.get(i);
+
+
+            if (task.description.indexOf(input) != -1) {
+                foundTasks.add(task);
+            };
+        }
+
+        return foundTasks;
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
