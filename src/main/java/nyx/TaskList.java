@@ -1,5 +1,6 @@
 package nyx;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -80,6 +81,17 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         tasks.stream().map(Task::dataFormat).forEach(sb::append);
         return sb.toString();
+    }
+
+    /**
+     * Returns the tasks that match the specified keyword.
+     * @param keyword The keyword to match the tasks.
+     * @return The array list containing all the matching tasks.
+     */
+    public ArrayList<Task> searchTask(String keyword) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        tasks.stream().filter(task -> task.getContent().contains(keyword)).forEach(filteredTasks::add);
+        return filteredTasks;
     }
 
     /**

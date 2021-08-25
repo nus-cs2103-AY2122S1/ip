@@ -1,6 +1,7 @@
 package nyx;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Deals with making sense of the user input.
@@ -108,6 +109,21 @@ public class Parser {
             }
         case "bye":
             return "Bye. Hope to see you again soon!";
+        case "find":
+            if (info.isEmpty()) {
+                throw new NyxException("Please enter the keyword to search tasks by...");
+            } else {
+                ArrayList<Task> filteredTasks = taskList.searchTask(info);
+                if (filteredTasks.isEmpty()) {
+                    return "No matching tasks found.";
+                } else {
+                    StringBuilder output = new StringBuilder("Here are the matching tasks in your list:\n");
+                    for (int i = 1; i <= filteredTasks.size(); i++) {
+                        output.append(String.format("%d. %s\n", i, filteredTasks.get(i - 1)));
+                    }
+                    return output.toString();
+                }
+            }
         default:
             throw new NyxException("I dont understand this command... Please try again.");
         }
