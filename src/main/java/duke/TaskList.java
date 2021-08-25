@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class TaskList {
-    private static ArrayList<Task> myList = new ArrayList<>();
+    private ArrayList<Task> myList = new ArrayList<>();
 
     /**
      * A constructor of a TaskList.
@@ -80,7 +80,7 @@ public class TaskList {
      * @param text Command-line input.
      * @throws DukeException if input does not include which Task to mark as done.
      */
-    public static void markAsDone(String text) throws DukeException {
+    public void markAsDone(String text) throws DukeException {
         try {
             int i = Integer.parseInt(text.split(" ")[1]) - 1;
             Task t = (Task) myList.get(i);
@@ -93,10 +93,37 @@ public class TaskList {
         }
     }
 
+    public void findTask(String text) throws DukeException {
+        try {
+            text = text.substring(5);
+            ArrayList<String> temp = new ArrayList<>();
+            int len = myList.size();
+            for (int i = 0; i < len; i++) {
+                String taskInString = myList.get(i).toString();
+                int index = taskInString.indexOf(text);
+                String taskIndex = String.valueOf(i + 1);
+                if (index != -1) {
+                    temp.add(taskIndex + ". " + taskInString);
+                }
+            }
+            if (temp.isEmpty()) {
+                System.out.println("There are no matching tasks in your list.");
+            } else {
+                System.out.println("Here are the matching tasks in your list:");
+                for (int i = 0; i < temp.size(); i++) {
+                    System.out.println(temp.get(i));
+                }
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("Use the format --find xx--");
+        }
+
+    }
+
     /**
      * Prints the list of Tasks.
      */
-    public static void printList() {
+    public void printList() {
         int len = myList.size();
         if (len == 0) { System.out.println("The list is empty!"); }
         for (int i = 0; i < len; i++) {
