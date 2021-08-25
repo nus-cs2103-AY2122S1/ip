@@ -11,7 +11,8 @@ public enum DukeError {
     TOO_MANY_INPUTS(8, "Too many inputs!"),
     INVALID_LIST_NUMBER(9, "Please use a valid list number!"),
     LIST_FULL(10, "The list is full, please remove an existing Task before trying to add a new Task."),
-    SEPARATOR_DETECTED(11, "Please do not use '_~_' in your input as it breaks me! ):");
+    SEPARATOR_DETECTED(11, "Please do not use '_~_' in your input as it breaks me! ):"),
+    INVALID_DATE_FORMAT(12, "Invalid date. Please use the dd-mm-yyyy convention!");
 
 
 

@@ -1,10 +1,14 @@
 import java.lang.reflect.Array;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Duke {
 
@@ -14,6 +18,11 @@ public class Duke {
 
     public static String pluralOrNo(int cap) {
         return cap <= 1 ? "" : "s";
+    }
+
+    public static LocalDate getLocalDateFromString(String str) {
+        CustomDateFormatter formatter = new CustomDateFormatter();
+        return formatter.formatWithoutTime(str);
     }
 
     public static Task getTask(String task) {
@@ -28,14 +37,14 @@ public class Duke {
             return newToDo;
         case 'D':
             String[] deadlineArray = task.split("_~_");
-            Deadline newDeadline = new Deadline(deadlineArray[2], deadlineArray[3]);
+            Deadline newDeadline = new Deadline(deadlineArray[2], getLocalDateFromString(deadlineArray[3]));
             if (deadlineArray[1].equals("1")) {
                 newDeadline.markDone();
             }
             return newDeadline;
         case 'E':
             String[] eventArray = task.split("_~_");
-            Event newEvent = new Event(eventArray[2], eventArray[3]);
+            Event newEvent = new Event(eventArray[2], getLocalDateFromString(eventArray[3]));
             if (eventArray[1].equals("1")) {
                 newEvent.markDone();
             }
@@ -88,6 +97,9 @@ public class Duke {
         } else if (!input.contains("/by") || input.split("/by").length < 2 || input.split("/by")[1].strip().length() < 1) {
             return "error 4";
         } else {
+            if (getLocalDateFromString(input.split("/by")[1].strip()) == null) {
+                return "error 12";
+            }
             return input.strip();
         }
     }
@@ -98,6 +110,9 @@ public class Duke {
         } else if (!input.contains("/at") || input.split("/at").length < 2 || input.split("/at")[1].strip().length() < 1) {
             return "error 6";
         } else {
+            if (getLocalDateFromString(input.split("/at")[1].strip()) == null) {
+                return "error 12";
+            }
             return input.strip();
         }
     }
@@ -228,7 +243,7 @@ public class Duke {
         String withoutEvent = input.substring(6).strip();
         String[] eventArray = withoutEvent.split("/at");
         String description = eventArray[0].strip();
-        String date = eventArray[1].strip();
+        LocalDate date = getLocalDateFromString(eventArray[1].strip());
         return addTaskToFile(new Event(description, date));
     }
 
@@ -236,7 +251,7 @@ public class Duke {
         String withoutDeadline = input.substring(9).strip();
         String[] deadlineArray = withoutDeadline.split("/by");
         String description = deadlineArray[0].strip();
-        String date = deadlineArray[1].strip();
+        LocalDate date = getLocalDateFromString(deadlineArray[1].strip());
         return addTaskToFile(new Deadline(description, date));
     }
 
@@ -332,6 +347,8 @@ public class Duke {
                 return DukeError.LIST_FULL;
             case 11:
                 return DukeError.SEPARATOR_DETECTED;
+            case 12:
+                return DukeError.INVALID_DATE_FORMAT;
             default:
                 return null;
         }
