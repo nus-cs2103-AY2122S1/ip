@@ -12,6 +12,15 @@ public class TaskList {
     /**
      * Constructor to initialise a TaskList.
      */
+    public TaskList() {
+        ArrayList<Task> allTasks = new ArrayList<>();
+        this.allTasks = allTasks;
+        this.nextSpaceToStore = 0;
+    }
+
+    /**
+     * Constructor to initialise a TaskList.
+     */
     public TaskList(ArrayList<Task> allTasks) {
         this.allTasks = allTasks;
         this.nextSpaceToStore = allTasks.size();
@@ -27,23 +36,12 @@ public class TaskList {
     }
 
     /**
-     * Lists out the current tasks in the TaskList.
-     */
-    public void listTask() {
-        for (int i = 0; i < nextSpaceToStore; i++) {
-            int currTask = i + 1;
-            System.out.println(currTask + "." + allTasks.get(i).toString());
-        }
-    }
-
-    /**
      * Indicates the specified task is done in the TaskList.
      * @param taskNo The task that is completed.
      */
     public void doneTask(int taskNo) {
         Task doneTask = allTasks.get(taskNo - 1);
         doneTask.completeTask();
-        System.out.println("  " + doneTask.toString());
     }
 
     /**
@@ -54,11 +52,18 @@ public class TaskList {
         Task deleteTask = allTasks.get(taskNo - 1);
         allTasks.remove(taskNo - 1);
         nextSpaceToStore = nextSpaceToStore - 1;
-        System.out.println("  " + deleteTask.toString());
+    }
+
+    public int getNextSpaceToStore() {
+        return this.nextSpaceToStore;
     }
 
     public ArrayList<Task> getAllTasks() {
         return this.allTasks;
+    }
+
+    public Task getSpecificTask(int taskNo) {
+        return allTasks.get(taskNo - 1);
     }
 
     /**
