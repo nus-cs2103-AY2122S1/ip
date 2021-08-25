@@ -1,5 +1,7 @@
 package tasks;
 
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -24,6 +26,14 @@ public class Task {
 
     public String format() {
         return this.toString();
+    }
+
+    public static LocalDate formatDate(String dateInput) {
+        // assume that the acceptable format for dates related to deadline and event are in the form of
+        // "year-month-day"
+        LocalDate ld = LocalDate.parse(dateInput);
+
+        return ld;
     }
 
     @Override

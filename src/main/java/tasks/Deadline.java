@@ -1,11 +1,14 @@
 package tasks;
 
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+
 public class Deadline extends Task {
-    private String dueDate;
+    private LocalDate dueDate;
 
     private Deadline(String description, boolean completed, String dueDate) {
         super(description, completed);
-        this.dueDate = dueDate;
+        this.dueDate = Task.formatDate(dueDate);
     }
 
     public static Deadline addDeadline(String input, boolean completed) {
@@ -34,7 +37,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String due = "(by: " + this.dueDate + ")";
+        String date = this.dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String due = "(by: " + date + ")";
 
         String res = "[D] [" + this.getStatus() + "] " + this.description + " " + due;
 

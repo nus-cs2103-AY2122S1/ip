@@ -1,11 +1,14 @@
 package tasks;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    private String eventTime;
+    private LocalDate eventTime;
 
     private Event(String description, boolean completed, String eventTime) {
         super(description, completed);
-        this.eventTime = eventTime;
+        this.eventTime = Task.formatDate(eventTime);
     }
 
     public static Event addEvent(String input, boolean completed) {
@@ -35,7 +38,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String time = "(at: " + this.eventTime + ")";
+        String date = this.eventTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String time = "(at: " + date + ")";
 
         String res = "[E] [" + this.getStatus() + "] " + this.description + " " + time;
 
