@@ -1,6 +1,9 @@
+package duke.main;
+
+import duke.command.Command;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Duke {
     private Storage storage;

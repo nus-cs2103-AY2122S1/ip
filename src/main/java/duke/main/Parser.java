@@ -1,8 +1,14 @@
+package duke.main;
+
+import duke.command.*;
+import duke.task.Deadline;
+import duke.task.ToDo;
+import duke.task.Event;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.Locale;
+
 
 public class Parser {
 

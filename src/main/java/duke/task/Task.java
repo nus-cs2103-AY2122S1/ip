@@ -1,3 +1,5 @@
+package duke.task;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -11,7 +13,7 @@ public abstract class Task {
         return (isDone ? "X" : " ");
     }
 
-    protected void markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
