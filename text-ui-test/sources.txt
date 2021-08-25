@@ -5,6 +5,7 @@ C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\DeleteCommand.j
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\DoneCommand.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\EventCommand.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\ExitCommand.java
+C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\FindCommand.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\ListCommand.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\TodoCommand.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\exception\DukeException.java

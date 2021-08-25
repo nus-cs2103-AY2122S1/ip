@@ -22,5 +22,7 @@ delete 5
 delete 4
 todo borrow book
 list
+find book
+find study
 blah
 bye
