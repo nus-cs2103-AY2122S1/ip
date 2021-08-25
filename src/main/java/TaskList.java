@@ -1,11 +1,34 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TaskList {
     private final List<Task> tasks;
-
-    public TaskList() {
+    public TaskList(Scanner sc) {
         tasks = new ArrayList<>();
+        loadTasks(sc);
+    }
+
+    public void loadTasks(Scanner sc) {
+        if(sc != null){
+            while(sc.hasNext()) {
+                String taskString = sc.nextLine();
+                String[] splitTaskString = taskString.split(Task.STORAGE_DELIMITER);
+                Task task = null;
+
+                if(splitTaskString[0].equals("T")) {
+                    task = new Todo(splitTaskString[1], Boolean.valueOf(splitTaskString[2]));
+                } else if(splitTaskString[0].equals("E")) {
+                    task = new Event(splitTaskString[1], Boolean.valueOf(splitTaskString[2]), splitTaskString[3]);
+                } else if(splitTaskString[0].equals("D")) {
+                    task = new Deadline(splitTaskString[1], Boolean.valueOf(splitTaskString[2]), splitTaskString[3]);
+                }
+
+                if(task != null) {
+                    tasks.add(task);
+                }
+            }
+        }
     }
 
     public String add(Task task) {
@@ -32,8 +55,16 @@ public class TaskList {
         String taskStringRepresentation = "";
         for(int i = 0; i < numTasks(); i++) {
            taskStringRepresentation += (i+1) + ". " + tasks.get(i) + "\n";
-       }
+        }
        return "Here are the tasks in your list:\n" + taskStringRepresentation;
+    }
+
+    public String save() {
+        String taskStorageRepresentation = "";
+        for(int i = 0; i < numTasks(); i++) {
+            taskStorageRepresentation += tasks.get(i).formatForStorage() + "\n";
+        }
+        return taskStorageRepresentation;
     }
 
     public String delete(String userInput) throws MalformedCommandException {
