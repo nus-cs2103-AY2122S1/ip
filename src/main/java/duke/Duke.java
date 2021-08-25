@@ -1,3 +1,12 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.ui.TaskList;
+import duke.command.Command;
+import duke.ui.Parser;
+import duke.ui.Storage;
+import duke.ui.Ui;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 

@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Todo extends Task { //Todo Task to handle todo events
 
     public Todo(String name) {

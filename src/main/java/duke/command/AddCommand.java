@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.*;
+import duke.ui.Storage;
+import duke.ui.TaskList;
+import duke.ui.Ui;
+
 import java.io.IOException;
 
 public class AddCommand extends Command { //AddCommand class to handle all the adding of events to the list.

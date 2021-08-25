@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui { //IU Class used to handle the interactions with the user.

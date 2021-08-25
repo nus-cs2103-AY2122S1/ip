@@ -1,3 +1,8 @@
+package duke.ui;
+
+import duke.exception.DukeException;
+import duke.command.*;
+
 public class Parser { //The Parser to handle the inputs from the terminal
 
     //The below function converts the input to the proper command and returns an error if the input is not valid
