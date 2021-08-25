@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected static final String COMPLETED = "[X]";
     protected static final String NOT_COMPLETED = "[ ]";
 
@@ -12,6 +12,12 @@ public class Task {
 
     protected void markDone() {
         isDone = true;
+    }
+    protected abstract String getTaskType();
+
+
+    protected String getDate() throws DukeNoDateException{
+        throw new DukeNoDateException();
     }
 
     @Override
