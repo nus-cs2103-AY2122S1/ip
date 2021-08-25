@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 // Class that handles the storing of Tasks
 public class Tasklist {
+
     private ArrayList<Task> taskList;
     private int lastItem = 0;
 

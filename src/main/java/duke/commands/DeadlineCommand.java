@@ -8,6 +8,7 @@ import duke.tasks.Deadline;
 import java.time.LocalDateTime;
 
 public class DeadlineCommand extends Command {
+
     private String description;
     private LocalDateTime dueDateTime;
 

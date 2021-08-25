@@ -1,10 +1,12 @@
 package duke.tasks;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 // class that handles Deadline tasks 
 // -> Deadline is a type of Task with a do by date/time
 public class Deadline extends Task {
+
     private LocalDateTime dueDate;
 
     // Constructor for a Deadline

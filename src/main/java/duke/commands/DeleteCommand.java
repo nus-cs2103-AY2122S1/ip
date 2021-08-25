@@ -7,6 +7,7 @@ import duke.PersistentStorage;
 import duke.tasks.Task;
 
 public class DeleteCommand extends Command {
+
     private int target;
     
     public DeleteCommand(int target) {
@@ -14,7 +15,7 @@ public class DeleteCommand extends Command {
     }
     
     public void executeCommand(Tasklist taskList, UI ui, PersistentStorage storage) throws DukeException{
-    // Check for valid task number provided
+        // Check for valid task number provided
         if (this.target < 1 || this.target > taskList.getTotalTasks()) {
             throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
         }

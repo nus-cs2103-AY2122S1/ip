@@ -25,7 +25,6 @@ public class PersistentStorage {
             // Create the necessary files and load an empty Tasklist
             file.getParentFile().mkdirs();
             return new Tasklist();
-
         } else {
             // File exists
             // Read data from file
@@ -59,11 +58,11 @@ public class PersistentStorage {
                     if (tokens.length == 3) {
                         ToDo item = new ToDo(description, isDone);
                         storedTasks.addTask(item);
-
                     } else {
                         rawDateTimeInfo = tokens[3];
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
                         LocalDateTime dateTimeInfo = LocalDateTime.parse(rawDateTimeInfo, formatter);
+
                         if (taskType.equals("D")) {
                             // Task is a Deadline
                             Deadline item = new Deadline(description, dateTimeInfo, isDone);
@@ -77,7 +76,6 @@ public class PersistentStorage {
                 }
                 fileReader.close();
                 return storedTasks;
-
             } catch (FileNotFoundException e) {
                 throw new DukeException("Error loading file!");
             }
@@ -108,10 +106,8 @@ public class PersistentStorage {
             writer.close();
 
             return true;
-
         } catch (IOException e) {
             throw new DukeException("An error occurred while trying to save data to your file :(");
         }
-        
     }
 }

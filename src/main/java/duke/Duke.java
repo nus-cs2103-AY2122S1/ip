@@ -13,6 +13,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new UI(new Scanner(System.in));
         storage = new PersistentStorage(filePath);
+
         try {
             taskList = storage.loadTasks();
         } catch (DukeException e) {
@@ -31,7 +32,6 @@ public class Duke {
                 Command command = Parser.parse(rawCommand);
                 command.executeCommand(taskList, ui, storage);
                 exit = command.isExit();
-
             } catch (DukeException e) {
                 ui.showErrorMsg(e);
             }

@@ -1,10 +1,12 @@
 package duke.tasks;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 // class that handles Event tasks 
 // -> Event is a type of Task happening at a date/time
 public class Event extends Task {
+
     private LocalDateTime eventTime;
 
     // Constructor for an Event

@@ -6,6 +6,7 @@ import duke.PersistentStorage;
 import duke.tasks.ToDo;
 
 public class TodoCommand extends Command {
+
     private String description;
     
     public TodoCommand(String description) {
@@ -14,6 +15,7 @@ public class TodoCommand extends Command {
     
     public void executeCommand(Tasklist taskList, UI ui, PersistentStorage storage) {
         ToDo task = new ToDo(this.description);
+
         taskList.addTask(task);
         ui.showAddedTask(taskList, task);
     }
