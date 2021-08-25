@@ -14,6 +14,7 @@ public class Parser {
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-d H:mm");
     private boolean toRewriteData;
     private boolean isExit;
+    private boolean isFind;
 
     /**
      * Constructor for a Parser class.
@@ -24,14 +25,16 @@ public class Parser {
         this.tasks = tasks;
         this.toRewriteData = false;
         this.isExit = false;
+        this.isFind = false;
     }
 
-    private void list() throws DukeException {
-        if (this.tasks.size() == 0) {
+    private void list(TaskList tasks) throws DukeException {
+        if (tasks.size() == 0) {
             throw new DukeException("There are currently no tasks in your list.");
         }
+        String matching = this.isFind ? "matching " : "";
         StringBuilder tasksBuilder = new StringBuilder();
-        tasksBuilder.append("Here are the tasks in your list:\n");
+        tasksBuilder.append("Here are the ").append(matching).append("tasks in your list:\n");
         for (int i = 0; i < tasks.size(); ++i) {
             String counter = String.valueOf(i + 1);
             Task currentTask = tasks.get(i);
@@ -83,9 +86,8 @@ public class Parser {
             Ui.printReply("Bye. Hope to see you again soon!");
             this.isExit = true;
         } else if (readIn.equals("list")) {
-            list();
+            list(this.tasks);
         } else {
-            this.toRewriteData = true;
             String[] commandArguments = readIn.split(" ", 2);
             String command = commandArguments[0];
             String arguments = "";
@@ -98,6 +100,7 @@ public class Parser {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The index of '" + command + "' cannot be empty.");
                 }
+                this.toRewriteData = true;
                 int counter = Integer.parseInt(arguments);
                 done(counter);
                 break;
@@ -106,6 +109,7 @@ public class Parser {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
                 }
+                this.toRewriteData = true;
                 String[] splitTask = arguments.split(" /by ");
                 if (splitTask.length < 2) {
                     throw new DukeException("Please indicate a deadline using '/by'.");
@@ -124,6 +128,7 @@ public class Parser {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
                 }
+                this.toRewriteData = true;
                 String[] splitTask = arguments.split(" /at ");
                 if (splitTask.length < 2) {
                     throw new DukeException("Please indicate the event time frame using '/at'.");
@@ -142,6 +147,7 @@ public class Parser {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
                 }
+                this.toRewriteData = true;
                 tasks.addTask(new Todo(arguments));
                 break;
             }
@@ -149,8 +155,27 @@ public class Parser {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The index of '" + command + "' cannot be empty.");
                 }
+                this.toRewriteData = true;
                 int counter = Integer.parseInt(arguments);
                 tasks.deleteTask(counter);
+                break;
+            }
+            case "find": {
+                if (commandArguments.length < 2) {
+                    throw new DukeException("☹ OOPS!!! The keyword(s) of '" + command + "' cannot be empty.");
+                }
+                this.toRewriteData = false;
+                this.isFind = true;
+                String[] splitKeywords = arguments.split(" ");
+                TaskList matchingTasks = new TaskList();
+                for (Task task : this.tasks) {
+                    for (String keyword : splitKeywords) {
+                        if (task.containsKeyword(keyword) && !matchingTasks.contains(task)) {
+                            matchingTasks.add(task);
+                        }
+                    }
+                }
+                list(matchingTasks);
                 break;
             }
             default:
