@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -6,6 +7,9 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+=======
+import java.time.format.DateTimeParseException;
+>>>>>>> branch-Level-8
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -118,7 +122,11 @@ public class Duke {
                         }
                         String description, dateTime;
                         if (newUserInput.contains("/")) {
+<<<<<<< HEAD
                             String[] splitString = newUserInput.split(" /by ", 2);
+=======
+                            String[] splitString = newUserInput.split(" /by ");
+>>>>>>> branch-Level-8
                             description = splitString[0];
                             dateTime = splitString[1];
                         } else {
@@ -140,7 +148,7 @@ public class Duke {
                             throw new EmptyDescriptionException();
                         }
                         if (newUserInput.contains("/")) {
-                            String[] splitString = newUserInput.split("/at", 2);
+                            String[] splitString = newUserInput.split(" /at ");
                             description = splitString[0];
                             dateTime = splitString[1];
                         } else {
@@ -178,6 +186,9 @@ public class Duke {
                 }
             } catch (UserInputException e) {
                 System.out.println(e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("OOPS! Please input date in this format: yyyy-mm-dd");
+                System.out.println(e);
             }
         }
         scanner.close();
