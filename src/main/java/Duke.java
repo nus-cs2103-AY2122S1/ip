@@ -4,6 +4,8 @@ import exceptions.DukeEmptyTodoDescriptionException;
 import java.util.ArrayList;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 
@@ -123,7 +125,8 @@ public class Duke {
                 if (command.equals("deadline")) {
                     String[] description_and_time = description.split("/");
                     String deadlineDescription = (description_and_time[0].split(" ", 2))[1];
-                    String time = (description_and_time[1].split(" ", 2))[1];
+                    LocalDate localDate = LocalDate.parse((description_and_time[1].split(" ", 2))[1]);
+                    String time = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
                     Deadline newDeadline = new Deadline(deadlineDescription, time);
                     dukeList.add(newDeadline);
                     printLines();
@@ -132,7 +135,8 @@ public class Duke {
                 } else if (command.equals("event")) {
                     String[] event_and_time = description.split("/");
                     String eventDescription = (event_and_time[0].split(" ", 2))[1];
-                    String time = (event_and_time[1].split(" ", 2))[1];
+                    LocalDate localDate = LocalDate.parse((event_and_time[1].split(" ", 2))[1]);
+                    String time = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
                     Event newEvent = new Event(eventDescription, time);
                     dukeList.add(newEvent);
                     printLines();
