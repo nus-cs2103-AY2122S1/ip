@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Storage {
     private static final String DIRECTORY = "src/data";
     private static final String FILEPATH = "src/data/duke.txt";
-
+    
     public static void saveTaskListToHardDisk(ArrayList<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(FILEPATH);
