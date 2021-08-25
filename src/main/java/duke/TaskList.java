@@ -17,7 +17,7 @@ public class TaskList {
     }
 
     /**
-     * A method to get the description from a task entered by the user
+     * Returns the description from a task entered by the user
      *
      * @param arr The array that contains strings from the user input
      * @return A string containing the description only
@@ -36,7 +36,7 @@ public class TaskList {
     }
 
     /**
-     * A method to get the deadline from a task entered by the user
+     * Returns the deadline from a task entered by the user
      *
      * @param arr The array that contains strings from the user input
      * @return A string containing the deadline only
@@ -87,7 +87,7 @@ public class TaskList {
     }
 
     /**
-     * A method to add a task to the collection of tasks
+     * Adds a task to the collection of tasks
      *
      * @param task The task to be added
      */
@@ -96,7 +96,7 @@ public class TaskList {
     }
 
     /**
-     * A method to remove a task at a certain index in the collection
+     * Removes a task at a certain index in the collection
      *
      * @param index Index of the task to be removed
      */
@@ -105,7 +105,7 @@ public class TaskList {
     }
 
     /**
-     * A method to change isBoolean to true
+     * Sets isBoolean to true
      *
      * @param index Index of the task to be marked as done
      */
@@ -114,7 +114,7 @@ public class TaskList {
     }
 
     /**
-     * A method to return a task a certain index in the location
+     * Returns a task a certain index in the location
      *
      * @param index Index of the task to be returned
      * @return a Task at a certain index
@@ -156,7 +156,7 @@ public class TaskList {
     }
 
     /**
-     * A method to allow the user to find a task in the list
+     * Allows the user to find a task in the list
      *
      * @param search The search term
      */

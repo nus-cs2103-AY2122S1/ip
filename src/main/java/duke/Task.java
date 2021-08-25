@@ -16,7 +16,7 @@ public class Task {
     }
 
     /**
-     * A method to get either "X" for marked tasks or " " for unmarked tasks
+     * Returns either "X" for marked tasks or " " for unmarked tasks
      *
      * @return Either "X" or " "
      */
@@ -25,7 +25,7 @@ public class Task {
     }
 
     /**
-     * A method that returns "Done" for marked tasks and "NotDone" for unmarked tasks
+     * Returns "Done" for marked tasks and "NotDone" for unmarked tasks
      *
      * @return
      */
@@ -34,7 +34,7 @@ public class Task {
     }
 
     /**
-     * A method to return the description of a task
+     * Returns the description of a task
      *
      * @return The description of a task
      */
@@ -43,7 +43,7 @@ public class Task {
     }
 
     /**
-     * A method to return the deadline of a task
+     * Returns the deadline of a task
      *
      * @return The deadline of a task
      */
@@ -52,14 +52,14 @@ public class Task {
     }
 
     /**
-     * A method to set isDone to true
+     * Sets isDone to true
      */
     public void markAsDone() {
         isDone = true;
     }
 
     /**
-     * A method to get the string representation of a task description
+     * Returns the string representation of a task description
      *
      * @return The string representation of a task description
      */

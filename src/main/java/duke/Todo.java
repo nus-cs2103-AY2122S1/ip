@@ -13,7 +13,7 @@ public class Todo extends Task {
     }
 
     /**
-     * A method to get the string representation of a Todo object
+     * Returns the string representation of a Todo object
      *
      * @return The string representation of a Todo object
      */

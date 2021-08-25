@@ -16,7 +16,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * A method to get the string representation of a Deadline object
+     * Returns the string representation of a Deadline object
      *
      * @return The string representation of a Deadline object
      */

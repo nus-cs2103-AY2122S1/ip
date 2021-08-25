@@ -29,7 +29,7 @@ public class Parser {
     }
 
     /**
-     * A method to check if a string is an integer or not
+     * Checks if a string is an integer or not
      *
      * @param s A string from the user input
      * @return True if it is an integer, false otherwise
@@ -44,7 +44,7 @@ public class Parser {
     }
 
     /**
-     * A method to make sense of the user input
+     * Makes sense of the user input
      */
     public void parse() {
         do {

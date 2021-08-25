@@ -28,7 +28,7 @@ public class Duke {
     }
 
     /**
-     * A method to run the whole program
+     * Runs the whole program
      */
     public void run() {
         Scanner scan = new Scanner(System.in);
@@ -39,7 +39,7 @@ public class Duke {
     }
 
     /**
-     * The main method of the Duke class that will call the run() method
+     * Calls the run() method
      *
      * @param args An array of Strings
      */

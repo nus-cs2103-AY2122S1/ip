@@ -5,7 +5,7 @@ import static java.lang.Integer.parseInt;
 public class Ui {
 
     /**
-     * A method to print the welcome message
+     * Prints the welcome message
      */
     public void printWelcome() {
         System.out.println(
@@ -22,28 +22,28 @@ public class Ui {
     }
 
     /**
-     * A method to print the goodbye message
+     * Prints the goodbye message
      */
     public void printBye() {
         System.out.println("Good Bye. Have a nice day!");
     }
 
     /**
-     * A method to inform the user that a task has been marked as done
+     * Informs the user that a task has been marked as done
      */
     public void printDone() {
         System.out.println("Nice! I've marked this task as done: ");
     }
 
     /**
-     * A method to inform the user that a task has been removed from the list
+     * Informs the user that a task has been removed from the list
      */
     public void printRemove() {
         System.out.println("Noted. I've removed this task: ");
     }
 
     /**
-     * A method to inform the user that a task has been added
+     * Informs the user that a task has been added
      * @param ls The list of tasks
      */
     public void printAddTask(TaskList ls) {
@@ -51,7 +51,7 @@ public class Ui {
     }
 
     /**
-     * A method to display the list of tasks
+     * Displays the list of tasks
      * @param ls The list of tasks
      */
     public void displayList(TaskList ls) {
@@ -59,7 +59,7 @@ public class Ui {
     }
 
     /**
-     * A method to print a task at a certain index in the list
+     * Prints a task at a certain index in the list
      * @param ls The list of tasks
      * @param index The index of the tasks in the list
      */

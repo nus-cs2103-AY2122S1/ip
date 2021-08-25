@@ -20,7 +20,7 @@ public class Storage {
     }
 
     /**
-     * A method to read the list of tasks from a file
+     * Reads the list of tasks from a file
      *
      * @param ls A list to keep track of all tasks
      */
@@ -83,7 +83,7 @@ public class Storage {
     }
 
     /**
-     * A method to write to a file
+     * Writes to a file
      *
      * @param ls A list to keep track of all files
      */
