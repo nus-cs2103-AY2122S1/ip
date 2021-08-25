@@ -6,6 +6,7 @@ import duke.tasks.Task;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
+import java.util.List;
 
 /**
  * Creates an Ui system that is responsible for interacting with the user.
@@ -20,6 +21,7 @@ public class Ui {
     private static final String REMAINING_TASK_NUM = String.format("Now you have %s tasks in the list.", PLACEHOLDER);
     private static final String DELETED_TASK = "Noted. I've removed this task:";
     private static final String MISSING_TASK = "There is no task at the specified index.";
+    private static final String NO_MATCHING_TASKS = "There are no matching tasks found.";
     private static final String UNKNOWN_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
 
@@ -77,7 +79,7 @@ public class Ui {
     /**
      * Sends a message to the user when a task is deleted.
      *
-     * @param addedTask The task that has been deleted.
+     * @param removedTask The task that has been deleted.
      * @param taskLeftNum The number of remaining tasks present in the current list of tasks.
      */
     public void taskDeletedMessage(Task removedTask, int taskLeftNum) {
@@ -102,8 +104,26 @@ public class Ui {
      * @param stringifyTaskLast String representation of current list of tasks.
      */
     public void printTaskListMessage(String stringifyTaskLast) {
-        //change Storage to String taskListMessage later on
         prettyPrintToUser(stringifyTaskLast);
+    }
+
+    /**
+     * Prints out the list of matching tasks to the user.
+     *
+     * @param listOfMatches List of all tasks that match the user's keyword.
+     */
+    public void printMatchingTasksMessage(List<Task> listOfMatches) {
+        int len = listOfMatches.size();
+        if (len == 0) {
+            prettyPrintToUser(NO_MATCHING_TASKS);
+        } else {
+            StringBuilder msg = new StringBuilder("Here are the matching tasks in your list:");
+            for (int i = 0; i < len; i++) {
+                int currTaskNum = i + 1;
+                msg.append("\n").append(currTaskNum).append(". ").append(listOfMatches.get(i).toString());
+            }
+            prettyPrintToUser(msg.toString());
+        }
     }
 
     /**

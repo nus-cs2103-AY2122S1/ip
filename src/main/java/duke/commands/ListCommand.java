@@ -18,7 +18,6 @@ public class ListCommand extends Command {
      */
     public void execute(Storage storage, Ui ui) {
         String printedTaskList = storage.printTaskList();
-        storage.saveToFile();
         ui.printTaskListMessage(printedTaskList);
     }
 

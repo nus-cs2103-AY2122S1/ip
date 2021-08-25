@@ -52,11 +52,15 @@ public class TaskList {
     @Override
     public String toString() {
         int taskListLen = this.taskList.size();
-        StringBuilder msg = new StringBuilder("Here are the tasks in your list:");
-        for (int i = 0; i < taskListLen; i++) {
-            int currTaskNum = i + 1;
-            msg.append("\n").append(currTaskNum).append(". ").append(this.taskList.get(i).toString());
+        if (taskListLen == 0) {
+            return "There are no tasks in your list.";
+        } else {
+            StringBuilder msg = new StringBuilder("Here are the tasks in your list:");
+            for (int i = 0; i < taskListLen; i++) {
+                int currTaskNum = i + 1;
+                msg.append("\n").append(currTaskNum).append(". ").append(this.taskList.get(i).toString());
+            }
+            return msg.toString();
         }
-        return msg.toString();
     }
 }

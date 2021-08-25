@@ -74,6 +74,13 @@ public class Parser {
             String strTaskNum = inputSplit[1].split(" ")[0];
             int taskNum = Integer.parseInt(strTaskNum) - 1;
             return new DeleteCommand(taskNum);
+        } else if (command.equals("find")) {
+            if (checkInputLength(inputSplit)) {
+                throw DukeException.missingInput("find");
+            }
+            String args = inputSplit[1];
+            String keyword = args.contains(" ") ? args.split(" ", 2)[0] : args;
+            return new FindCommand(keyword);
         } else {
             return new UnknownCommand();
         }

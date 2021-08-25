@@ -93,6 +93,8 @@ public class Storage {
         return this.taskList.getTask(taskIndex);
     }
 
+    public TaskList getTaskList() { return this.taskList; }
+
     /**
      * Returns the string representation of the TaskList within the storage object.
      *
