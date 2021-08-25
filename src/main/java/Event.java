@@ -11,7 +11,7 @@ public class Event extends Task{
     }
 
     public String showTask() {
-        return taskName + "(at: " + this.at + ")";
+        return this.taskName + " (at: " + this.at + ")";
     }
 
     public String showType() {

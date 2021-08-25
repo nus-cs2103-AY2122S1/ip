@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Duke {
@@ -34,7 +39,9 @@ public class Duke {
                 + "     Got it. I've added this task:\n"
                 + "       " + newDeadline.showType()
                             + newDeadline.checkDone() + " "
-                            + newDeadline.showTask() + "\n"
+                            + newDeadline.showTaskOnly() + " by "
+                            + newDeadline.showDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
+                            + newDeadline.showTime() + "\n"
                 + "     Now you have " + tList.length() + " tasks in the list.\n"
                 + "    ____________________________________________________________";
         System.out.println(deadlineMessage);
@@ -53,10 +60,59 @@ public class Duke {
         System.out.println(eventMessage);
     }
 
+    private static String home = System.getProperty("user.home");
+    private static String dukeText = home + "/data/duke.txt";
+
     public static void main(String[] args) {
         System.out.println("Hello from\n" + logo + WelcomeMessage);
 
-        TaskList taskList = new TaskList(100);
+        TaskList taskList = new TaskList();
+
+        File listSource = new File(home + dukeText);
+
+        try{
+            Scanner listScan = new Scanner(listSource);
+            while(listScan.hasNext()) {
+                String listInput = listScan.nextLine();
+                String[] input = listInput.split("\\|", 3);
+                for (int i = 0; i < input.length; i++) {
+                    input[i] = input[i].trim();
+                }
+
+                switch (input[0]) {
+                    case "T":
+                        ToDo todo = new ToDo(input[2]);
+                        if (input[1].equals("1")) {
+                            todo.isDone();
+                        }
+                        taskList.addTask(todo);
+                        break;
+                    case "D":
+                        String[] deadlineTask = input[2].split("\\|", 2);
+                        String deadlineInput = deadlineTask[0].trim() + "|" + deadlineTask[1].trim();
+                        Deadline deadline = new Deadline(deadlineInput);
+                        if (input[1].equals("1")) {
+                            deadline.isDone();
+                        }
+                        taskList.addTask(deadline);
+                        break;
+                    case "E":
+                        String[] eventTask = input[2].split("\\|", 2);
+                        String eventInput = eventTask[0] + " / " + eventTask[1];
+                        Event event = new Event(eventInput);
+                        if (input[1].equals("1")) {
+                            event.isDone();
+                        }
+                        taskList.addTask(event);
+                        break;
+                }
+            }
+            listScan.close();
+        } catch (FileNotFoundException f){
+            System.out.println("    ____________________________________________________________\n"
+                    + "     " + "\uD83D\uDE41" + " OOPS!!! This file does not exist!\n"
+                    + "    ____________________________________________________________");
+        }
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();

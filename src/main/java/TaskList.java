@@ -4,7 +4,7 @@ public class TaskList {
     private ArrayList<Task> list;
     private int counter = 0;
 
-    public TaskList(int length) {
+    public TaskList() {
         list = new ArrayList<Task>();
     }
 
