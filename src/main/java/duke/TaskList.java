@@ -15,10 +15,22 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * save the task list to the local path.
+     *
+     * @param storage the Storage instance
+     * @throws IOException thrown when there is an error saving
+     */
     public void save(Storage storage) throws IOException {
         storage.write(tasks);
     }
 
+    /**
+     * remove the task from the list.
+     *
+     * @param index the index starting with 1.
+     * @throws IndexOutOfBoundsException thrown when index out of bound
+     */
     public void remove(int index) throws IndexOutOfBoundsException {
         Task task = tasks.remove(index - 1);
         Ui.showMessage("Noted. I've removed this task:\n  " +
@@ -26,6 +38,11 @@ public class TaskList {
                 "\nNow you have " + tasks.size() + " tasks in the list.\n");
     }
 
+    /**
+     * add task to the list.
+     *
+     * @param task the task to be added.
+     */
     public void add(Task task) {
         tasks.add(task);
         String msg = "Got it. I've added this task:\n  " +
@@ -35,6 +52,11 @@ public class TaskList {
         Ui.showMessage(msg);
     }
 
+    /**
+     * mark the task as done.
+     *
+     * @param index the index starting with 1.
+     */
     public void setDone(int index) {
         Task task = tasks.get(index - 1);
         task.setDone();
