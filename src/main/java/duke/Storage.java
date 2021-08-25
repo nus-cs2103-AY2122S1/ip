@@ -14,14 +14,16 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private File localFile;
+    private String filePath;
 
     public Storage(String filePath) {
-        this.localFile = new File(filePath);
+        this.filePath = filePath;
     }
 
     public ArrayList<Task> getFile() throws DukeException {
         try {
+            File localFile = new File(filePath);
+            localFile.getParentFile().mkdir();
             if (localFile.createNewFile()) {
                 return new ArrayList<>();
             } else {
@@ -55,22 +57,22 @@ public class Storage {
                 return taskList;
             }
         } catch (IOException e) {
+            e.printStackTrace();
             throw new DukeException("An error occurred. :-(\n");
         }
     }
 
-    public void saveList(ArrayList<Task> taskList) {
+    public void saveList(ArrayList<Task> taskList) throws DukeException {
         StringBuilder content = new StringBuilder();
         for (Task task : taskList) {
             content.append(task.toFileFormat()).append("\n");
         }
         try {
-            FileWriter myWriter = new FileWriter("./data/duke.txt");
+            FileWriter myWriter = new FileWriter(filePath);
             myWriter.write(content.toString());
             myWriter.close();
         } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            throw new DukeException("An error occurred. :-(\n");
         }
     }
 }
