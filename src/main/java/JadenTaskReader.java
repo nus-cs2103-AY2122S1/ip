@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -11,6 +13,10 @@ public class JadenTaskReader {
         this.inFile = new File(fileName);
     }
 
+    /**
+     * Reads tasks
+     * @return task list
+     */
     public TaskList readTasks() {
         TaskList tasks = new TaskList();
         try {
@@ -32,6 +38,11 @@ public class JadenTaskReader {
         }
     }
 
+    /**
+     * Decodes the task.
+     * @param taskString
+     * @return
+     */
     public Task decodeTask(String taskString) {
         String[] taskParts = taskString.split(" TTT ");
         boolean taskDone = taskParts[1].contains("X");
@@ -43,8 +54,12 @@ public class JadenTaskReader {
             String[] splitInput = taskParts[2].split(" ");
             int byIndex = ParsedInput.findFirstIndexOf("(by:", splitInput);
             String taskDescription = ParsedInput.joinStrings(splitInput, 0, byIndex - 1);
-            String deadline = ParsedInput.joinStrings(splitInput, byIndex + 1, splitInput.length - 1);
-            deadline = deadline.substring(0, deadline.length() - 1); // shave off trailing )
+            String deadlineString = ParsedInput.joinStrings(splitInput, byIndex + 1, splitInput.length - 1);
+            deadlineString = deadlineString.substring(0, deadlineString.length() - 1); // shave off trailing )
+            LocalDate deadline = LocalDate.now().plusWeeks(1);;
+            try {
+                deadline = LocalDate.parse(deadlineString);
+            } catch (DateTimeParseException e) { }
             decodedTask = new DeadlineTask(taskDescription, deadline);
         } else if(taskParts[1].contains("E")) {
             String[] splitInput = taskParts[2].split(" ");
