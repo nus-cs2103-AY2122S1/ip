@@ -1,23 +1,29 @@
-public class Events extends Task {
-    protected String at;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Events(String description, String at) {
+public class Events extends Task {
+    protected LocalDateTime at;
+    private DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("dd MMM uuuu HHmm");
+    private DateTimeFormatter saveFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
+
+    public Events(String description, LocalDateTime at) {
         super(description, false);
         this.at = at;
     }
 
-    public Events(String description, String isDone, String at) {
+    public Events(String description, String isDone, LocalDateTime at) {
         super(description, isDone == "1");
         this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")" ;
+
+        return "[E]" + super.toString() + " (at: " + at.format(displayFormatter) + ")" ;
     }
 
     @Override
     public String toSaveString() {
-        return "E|" + super.toSaveString() + "|" + this.at;
+        return "E|" + super.toSaveString() + "|" + at.format(saveFormatter);
     }
 }

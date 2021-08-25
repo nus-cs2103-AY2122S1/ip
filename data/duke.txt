@@ -1,4 +1,3 @@
-T|0|test
-E|0|attend school|today
-D|0|finish iP|tonight
-T|0|finsh iP!
+T|0|iP
+E|0|birthday!|27/08/2021 0000
+D|0|iP|26/08/2021 2359
