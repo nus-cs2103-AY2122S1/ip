@@ -79,18 +79,18 @@ public class ToDoList {
 
             if (t == taskType.TODO) {
                 if (arr.length == 1) {
-                    recentlyAdded = ToDo.addToDo("");
+                    recentlyAdded = ToDo.addToDo("", false);
                 }
 
-                recentlyAdded = ToDo.addToDo(arr[1]);
+                recentlyAdded = ToDo.addToDo(arr[1], false);
             } else if (t == taskType.DEADLINE) {
-                recentlyAdded = Deadline.addDeadline(arr[1]);
+                recentlyAdded = Deadline.addDeadline(arr[1], false);
             } else {
-                recentlyAdded = Event.addEvent(arr[1]);
+                recentlyAdded = Event.addEvent(arr[1], false);
             }
 
             this.tasks.add(recentlyAdded);
-            count++;
+            this.count++;
 
             String taskCount = "Now you have " + count + " task(s) in the list!";
 
@@ -104,6 +104,37 @@ public class ToDoList {
                     + e
                     + SEPARATOR);
         }
+    }
+
+    public void addTask(String taskType, String input, boolean isDone) {
+        if (taskType.equals("T")) {
+            addToDo(input, isDone);
+        } else if (taskType.equals("D")) {
+            addDeadline(input, isDone);
+        } else {
+            addEvent(input, isDone);
+        }
+    }
+
+    public void addToDo(String input, boolean isDone) {
+        try {
+            this.tasks.add(ToDo.addToDo(input, isDone));
+        } catch (EmptyTaskException e) {
+            System.out.println(SEPARATOR + "\n"
+                    + e
+                    + SEPARATOR);
+        }
+        this.count++;
+    }
+
+    public void addDeadline(String input, boolean isDone) {
+        this.tasks.add(Deadline.addDeadline(input, isDone));
+        this.count++;
+    }
+
+    public void addEvent(String input, boolean isDone) {
+        this.tasks.add(Event.addEvent(input, isDone));
+        this.count++;
     }
 
     public void markAsDone(String input) {
@@ -160,5 +191,9 @@ public class ToDoList {
                     + e
                     + SEPARATOR);
         }
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 }

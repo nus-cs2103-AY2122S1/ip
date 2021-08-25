@@ -9,12 +9,21 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean completed) {
+        this.description = description;
+        this.isDone = completed;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
 
     public String getStatus() {
         return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    public String format() {
+        return this.toString();
     }
 
     @Override
