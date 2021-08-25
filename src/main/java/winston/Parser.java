@@ -2,6 +2,8 @@ package winston;
 
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
+import java.time.LocalDate;
+
 
 public class Parser {
     private TaskList taskList;
@@ -40,9 +42,10 @@ public class Parser {
                 int endIndex = str.indexOf("/by ");
                 String date = str.substring(endIndex + 4);
                 String task = str.substring(str.indexOf(" ") + 1, endIndex);
+                LocalDate.parse(date);
                 return new AddDeadlineCommand(this.taskList, task, date);
             } catch (DateTimeParseException e) {
-                System.out.println("Invalid date format. Please give a valid date format. E.g 2021-12-12");
+                Ui.invalidDateFormat();
                 return new InvalidCommand(taskList);
             } catch (InputMismatchException | IndexOutOfBoundsException e) {
                 return new InvalidCommand(taskList);
@@ -53,13 +56,14 @@ public class Parser {
                 int endIndex = str.indexOf("/at ");
                 String date = str.substring(endIndex + 4);
                 String task = str.substring(str.indexOf(" ") + 1, endIndex);
+                LocalDate.parse(date);
                 return new AddEventCommand(this.taskList, task, date);
             } catch (DateTimeParseException e) {
-                System.out.println("Invalid date format. Please give a valid date format. E.g 2021-12-12");
+                Ui.invalidDateFormat();
+                return new InvalidCommand(taskList);
             } catch (InputMismatchException | IndexOutOfBoundsException e) {
                 return new InvalidCommand(taskList);
             }
-            return new InvalidCommand(taskList);
         } else {
             return new InvalidCommand(taskList);
         }

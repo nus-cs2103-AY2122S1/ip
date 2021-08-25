@@ -20,8 +20,8 @@ public class Ui {
         System.out.println("Don't worry, I've got you. Task Marked!");
     }
     
-    public static void returnMainMenu() {
-        System.out.println("Error occurred. Returning to home menu.");
+    public static void invalidDateFormat() {
+        System.out.println("Invalid date format. Please give a valid date format. E.g 2021-12-12");
     }
     
     public static void welcomeMessage() {
