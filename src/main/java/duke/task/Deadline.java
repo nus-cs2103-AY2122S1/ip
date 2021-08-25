@@ -19,8 +19,9 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.getName() + " (by: " + this.deadline.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " +
-                this.deadline.getDayOfMonth() + " " + this.deadline.getYear() + " " + this.deadline.toLocalTime() + ")";
+        return super.getName() + " (by: " + this.deadline.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
+                + " " + this.deadline.getDayOfMonth() + " " + this.deadline.getYear() + " "
+                + this.deadline.toLocalTime() + ")";
     }
 
     public String getDeadline() {

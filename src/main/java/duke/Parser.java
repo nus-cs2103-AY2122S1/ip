@@ -98,8 +98,8 @@ public class Parser {
                 String duration = substring.substring(substring.indexOf("/") + 1).substring(2);
                 return new EventCommand(tdl, item, duration);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.prettyPrinter("Hold up... You got the format all wrong! It's supposed to " +
-                        "be <event> <name> /at <duration>");
+                ui.prettyPrinter("Hold up... You got the format all wrong! It's supposed to "
+                        + "be <event> <name> /at <duration>");
             } catch (DukeException e) {
                 ui.prettyPrinter(e.getMessage());
             }
@@ -116,8 +116,8 @@ public class Parser {
                         DateTimeFormatter.ISO_DATE_TIME);
                 return new DeadlineCommand(tdl, item, dl);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.prettyPrinter("Hold up... You got the format all wrong! It's supposed to " +
-                        "be <deadline> <name> /by <dueDate>");
+                ui.prettyPrinter("Hold up... You got the format all wrong! It's supposed to "
+                        + "be <deadline> <name> /by <dueDate>");
             } catch (DateTimeParseException e) {
                 System.out.println("Please key in the date time as YYYY-MM-dd HH:mm");
             } catch (DukeException e) {
@@ -169,13 +169,15 @@ public class Parser {
             }
         } else if (command.startsWith("event")) {
             if (!command.substring(command.indexOf("/")).startsWith("/at")) {
-                throw new DukeException("You got the format wrong.. Geez it's supposed to be <event> <name> /at <duration>");
+                throw new DukeException("You got the format wrong.. Geez it's supposed to be <event> <name> "
+                        + "/at <duration>");
             } else if (command.substring(5).isBlank()) {
                 throw new DukeException("Really? An event of nothing?");
             }
         } else {
             if (!command.substring(command.indexOf("/")).startsWith("/by")) {
-                throw new DukeException("You got the format wrong.. Geez it's supposed to be <deadline> <name> /by <dueDate>");
+                throw new DukeException("You got the format wrong.. Geez it's supposed to be <deadline> "
+                        + "<name> /by <dueDate>");
             } else if (command.substring(8).isBlank()) {
                 throw new DukeException("Hold up.. last i checked doing nothing has no deadline");
             }

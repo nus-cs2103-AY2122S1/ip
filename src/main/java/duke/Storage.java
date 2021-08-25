@@ -109,15 +109,15 @@ public class Storage {
             for (Task a : this.tdl.getRecord()) {
                 if (a.isCompleted()) {
                     if (a instanceof Deadline) {
-                        fw.write(number.toString() + "." + a.logo() + "[X] " +  a.getName() +
-                                " (by: " + ((Deadline) a).getDeadline() + ")\n");
+                        fw.write(number.toString() + "." + a.logo() + "[X] " +  a.getName()
+                                + " (by: " + ((Deadline) a).getDeadline() + ")\n");
                     } else {
                         fw.write(number.toString() + "." + a.logo() + "[X] " + a.toString() + "\n");
                     }
                 } else {
                     if (a instanceof Deadline) {
-                        fw.write(number.toString() + "." + a.logo() + "[ ] " + a.getName() +
-                                " (by: " + ((Deadline) a).getDeadline() + ")\n");
+                        fw.write(number.toString() + "." + a.logo() + "[ ] " + a.getName()
+                                + " (by: " + ((Deadline) a).getDeadline() + ")\n");
                     } else {
                         fw.write(number.toString() + "." + a.logo() + "[ ] " + a.toString()+ "\n");
                     }
