@@ -15,7 +15,11 @@ import org.xml.sax.SAXParseException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -254,13 +258,11 @@ public class DukeStorageManager {
 
 
             // Now write the file to local storage
-
+            this.writeCurrXMLDocToDisk();
 
 
         } catch (ParserConfigurationException e) {
             Duke.dukeLaterSay("Document builder cannot be created. (List not saved)");
-        } finally {
-
         }
 
     }
@@ -271,7 +273,7 @@ public class DukeStorageManager {
      * @param currTask the respective task in question.
      * @return the task converted into an XML Element.
      */
-    public Element createTaskAssetElement(BaseTask currTask) {
+    private Element createTaskAssetElement(BaseTask currTask) {
         BaseTask.TaskType currTaskType = currTask.getTaskType();
         Element createdTaskElement;
 
@@ -316,5 +318,37 @@ public class DukeStorageManager {
         return createdTaskElement;
     }
 
+    /**
+     * Starts writing the current XML file in the Document thing to Disk.
+     */
+    private void writeCurrXMLDocToDisk() {
+        if (this.xmlSaveFileDoc == null) {
+            System.out.println("XML Document is null.");
+        }
+
+        try {
+            // Use Transformer Factory to save files to local storage
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+
+            DOMSource xmlToWriteSource = new DOMSource(this.xmlSaveFileDoc);
+            FileWriter currFileWriter = new FileWriter(this.saveFile);
+            StreamResult currStreamResult = new StreamResult(currFileWriter);
+
+            transformer.transform(xmlToWriteSource, currStreamResult);
+
+        } catch (TransformerConfigurationException e) {
+            System.out.println("Unable to create Transformer.");
+        } catch (IOException e) {
+            System.out.println("IO Exception");
+        } catch (TransformerException e) {
+            System.out.println("Error while using transformer.transform");
+        }
+
+
+    }
 
 }
