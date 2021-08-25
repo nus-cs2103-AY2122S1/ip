@@ -37,4 +37,12 @@ public class Deadline extends Task {
         return DEADLINE + this.getStatusIcon() + " " + this.getDescription() + " (by: " + localDateTime.format(dtf) + ")";
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Deadline) {
+            Deadline deadline = (Deadline) object;
+            return deadline.isDone == this.isDone && deadline.description.equals(this.description);
+        }
+        return false;
+    }
 }

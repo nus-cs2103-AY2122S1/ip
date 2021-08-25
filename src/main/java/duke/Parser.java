@@ -19,6 +19,10 @@ public class Parser {
         this.tasks = tasks;
     }
 
+    public boolean getRun() {
+        return !storage.isExit();
+    }
+
     public void parseCommand() throws DukeException, DeleteException, IOException {
 
         Activity activity;

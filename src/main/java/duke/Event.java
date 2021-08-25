@@ -36,4 +36,13 @@ public class Event extends Task{
         formatLocalDateTime();
         return EVENT + this.getStatusIcon() + " " + this.getDescription() + " (at: " + localDateTime.format(dtf) + ")";
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Event) {
+            Event event = (Event) object;
+            return (event.getDone() == this.getDone()) && event.description.equals(this.description);
+        }
+        return false;
+    }
 }

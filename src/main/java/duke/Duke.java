@@ -20,6 +20,7 @@ public class Duke {
         }
     }
 
+
     public static void main(String[] args) {
         Duke duke = new Duke("data/tasks.txt");
         duke.run();
