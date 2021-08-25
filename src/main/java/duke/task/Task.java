@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.DukeException;
+
 /**
  * The Task class encapsulates a task for the user to complete.
  */

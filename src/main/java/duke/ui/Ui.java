@@ -1,3 +1,10 @@
+package duke.ui;
+
+import duke.constant.EditType;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.util.Scanner;
 
 /**
