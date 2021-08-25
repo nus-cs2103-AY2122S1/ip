@@ -1,11 +1,9 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Skeltal {
     static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) throws SkeltalException {
+    public static void main(String[] args) {
 
         Display.introduction();
 

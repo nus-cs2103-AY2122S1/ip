@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
     private String time;
 
@@ -7,7 +11,15 @@ public class Deadline extends Task {
         if (procTime.length == 1) {
             throw new SkeltalException("OOPS! The description of a deadline cannot be empty!");
         }
-        String time = rawTime.split("/", 2)[1];
+
+        String time;
+        try {
+            LocalDate date = LocalDate.parse(procTime[1], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            time = date.format(DateTimeFormatter.ofPattern("dd MMM yy"));
+        } catch (DateTimeParseException e) {
+            time = procTime[1];
+            System.out.println(e);
+        }
         time = "(" + time + ")";
         this.time = time;
     }
