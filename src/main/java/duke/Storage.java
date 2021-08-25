@@ -9,12 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents Duke's storage system and handles file operations.
+ */
 public class Storage {
     //private static List<String> lines;
     public Storage(){
 
     }
 
+    /**
+     * Checks if the list file exists and creates it if it doesn't.
+     * @return true if the file exists or was successfully created
+     *         and false if there was an error creating the file.
+     */
     public boolean checkExistence(){
         if(!Duke.file.exists()){
             try {
@@ -30,6 +38,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the file contents into the list of strings for Duke to use.
+     * @param filePath File path.
+     * @throws FileNotFoundException If the file is missing.
+     */
     void listFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
@@ -41,6 +54,11 @@ public class Storage {
         s.close();
     }
 
+    /**
+     * Writes the contents of the list of strings Duke uses into the list file.
+     * @param filePath File path.
+     * @throws IOException If the file cannot be written to.
+     */
     void writeListToFile(String filePath) throws IOException {
         FileWriter clearer = new FileWriter(filePath);
         clearer.write(""); //clear the file

@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Represents an event type of task in the list.
+ */
 public class Event extends Task {
     private LocalDate date;
     private String dateString;
@@ -45,6 +48,12 @@ public class Event extends Task {
         }
         dateString = day.toString() + " " + monthString + " " + year.toString();
     }
+
+    /**
+     * Returns the string representation of the task.
+     * @return Indication that the task is an event type and if the task
+     *         is done or not followed by its name and date.
+     */
     @Override
     public String toString(){
         if(done == true){
@@ -53,6 +62,13 @@ public class Event extends Task {
             return "[E][ ] " + name + " (at: " + dateString + ")";
         }
     }
+
+    /**
+     * Returns true if the object being compared with is equivalent.
+     * @param obj Object to be compared with.
+     * @return True if the object is an Event with the same name and date.
+     *         False otherwise.
+     */
     @Override
     public boolean equals(Object obj){
         if(!(obj instanceof Event)){

@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a deadline type of task in the list.
+ */
 public class Deadline extends Task {
     private LocalDate date;
     private String dateString;
@@ -46,6 +49,12 @@ public class Deadline extends Task {
         dateString = day.toString() + " " + monthString + " " + year.toString();
 
     }
+
+    /**
+     * Returns the string representation of the task.
+     * @return Indication that the task is a deadline type and if the task
+     *         is done or not followed by its name and deadline.
+     */
     @Override
     public String toString(){
         if(done == true){
@@ -54,6 +63,13 @@ public class Deadline extends Task {
             return "[D][ ] " + name + " (by: " + dateString + ")";
         }
     }
+
+    /**
+     * Returns true if the object being compared with is equivalent.
+     * @param obj Object to be compared with.
+     * @return True if the object is a Deadline with the same name and date.
+     *         False otherwise.
+     */
     @Override
     public boolean equals(Object obj){
         if(!(obj instanceof Deadline)){
