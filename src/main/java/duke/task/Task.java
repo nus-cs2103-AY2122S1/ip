@@ -53,6 +53,17 @@ public abstract class Task {
     public abstract String toSaveFormat();
 
     /**
+     * Returns whether the task action contains the search terms.
+     *
+     * @param searchTerms Terms to search for
+     * @return true if search terms are found
+     *         false otherwise.
+     */
+    public boolean contains(String searchTerms) {
+        return this.action.contains(searchTerms);
+    }
+
+    /**
      * Returns a string representing the task
      *
      * @return String representation of the task
