@@ -7,7 +7,7 @@ import duke.utility.Ui;
 import java.io.IOException;
 
 public class Duke {
-
+    
     private final Ui ui;
     private TaskList tasks;
     private Storage storage;
