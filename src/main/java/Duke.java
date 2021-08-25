@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,10 +22,10 @@ public class Duke {
     private static final Pattern TODO_PATTERN = Pattern.compile("^todo (.*)$");
 
     // Regex pattern for finding deadline commands
-    private static final Pattern DEADLINE_PATTERN = Pattern.compile("^deadline (.*) /by (.*)$");
+    private static final Pattern DEADLINE_PATTERN = Pattern.compile("^deadline (.*) /by (\\d{4}-\\d{2}-\\d{2})$");
 
     // Regex pattern for finding event commands
-    private static final Pattern EVENT_PATTERN = Pattern.compile("^event (.*) /at (.*)$");
+    private static final Pattern EVENT_PATTERN = Pattern.compile("^event (.*) /at (\\d{4}-\\d{2}-\\d{2})$");
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -187,12 +190,12 @@ public class Duke {
     private static void addDeadline(String userInput) {
         Matcher matcher = DEADLINE_PATTERN.matcher(userInput);
         if (!matcher.find()) {
-            throw new DukeException("Give me a deadline like this: deadline <task> /by <date/time>");
+            throw new DukeException("Give me a deadline like this: deadline <task> /by YYYY-MM-DD");
         }
         String description = matcher.group(1);
         String endDateTime = matcher.group(2);
 
-        Deadline deadline = new Deadline(description, false, endDateTime);
+        Deadline deadline = new Deadline(description, false, parseDate(endDateTime));
 
         // Add to store
         store.add(deadline);
@@ -208,17 +211,32 @@ public class Duke {
     private static void addEvent(String userInput) {
         Matcher matcher = EVENT_PATTERN.matcher(userInput);
         if (!matcher.find()) {
-            throw new DukeException("Tell me an event like this: event <task> /at <date/time>");
+            throw new DukeException("Tell me an event like this: event <task> /at YYYY-MM-DD");
         }
         String description = matcher.group(1);
         String eventDateTime = matcher.group(2);
 
-        Event event = new Event(description, false, eventDateTime);
+        Event event = new Event(description, false, parseDate(eventDateTime));
 
         // Add to store
         store.add(event);
 
         // Inform user
         say("I have added a new event!", String.format("%d. %s", store.size(), event));
+    }
+
+    /**
+     * Parses a date String into LocalDate.
+     *
+     * Uses the ISO_LOCAL_DATE format (e.g 1970-09-21) to parse a date.
+     * @param date String containing the date
+     * @return LocalDate corresponding to the date in the String
+     */
+    private static LocalDate parseDate(String date) {
+        try {
+            return LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(date + " is not a valid date!");
+        }
     }
 }
