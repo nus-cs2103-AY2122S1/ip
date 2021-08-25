@@ -1,12 +1,14 @@
 package seedu.duke.task;
 
 /**
- * Class that encapsulates an duke.task.ToDo duke.task.
+ * Represents a ToDo task. A <code>ToDo</code> describes
+ * the task to be done.
  */
 public class ToDo extends Task {
 
     /**
-     * Public constructor to create a duke.task.ToDo duke.task
+     * Public constructor to create a <code>ToDo</code>
+     * object.
      *
      * @param description Description of what to do.
      */
@@ -15,9 +17,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * String representation of a duke.task.ToDo duke.task.
+     * String representation of a <code>ToDo</code>.
      *
-     * @return String representation of a duke.task.ToDo duke.task.
+     * @return String representation of a <code>ToDo</code>.
      */
     @Override
     public String toString() {

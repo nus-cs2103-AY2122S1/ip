@@ -3,19 +3,22 @@ package seedu.duke.task;
 import java.time.LocalDate;
 
 /**
- * Class that encapsulates a duke.task.Deadline duke.task.
+ * Represents a Deadline task. A <code>Deadline</code> describes
+ * the task and the deadline that the task needs to be completed by.
  */
 public class Deadline extends Task {
     /**
-     * String that indicates the deadline for the duke.task.
+     * String that indicates the deadline for the task.
      */
     protected LocalDate deadline;
 
     /**
-     * Public constructor to create a duke.task.Deadline duke.task
+     * Public constructor to create a <code>Deadline</code> object.
      *
-     * @param description Description of the deadline duke.task.
-     * @param deadline duke.task.Deadline to complete duke.task by.
+     * @param description Description of the <code>Deadline</code>
+     *                    task object.
+     * @param deadline duke.task.Deadline to complete <code>Deadline</code>
+     *                 task by.
      */
     public Deadline(String description, LocalDate deadline) {
         super(description);
@@ -23,9 +26,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of a deadline duke.task.
+     * String representation of <code>Deadline</code> object.
      *
-     * @return String representation of a deadline duke.task.
+     * @return String representation of a <code>Deadline</code> object.
      */
     @Override
     public String toString() {

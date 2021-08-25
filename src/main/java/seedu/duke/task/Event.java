@@ -3,7 +3,8 @@ package seedu.duke.task;
 import java.time.LocalDate;
 
 /**
- * Class that encapsulates an duke.task.Event duke.task.
+ * Represents an Event task. An <code>Event</code> describes
+ * the task and the date that the event would occur.
  */
 public class Event extends Task {
     /**
@@ -12,7 +13,8 @@ public class Event extends Task {
     protected LocalDate timeOfEvent;
 
     /**
-     * Public constructor to create an duke.task.Event duke.task
+     * Public constructor to create an <code>Event</code>
+     * object.
      *
      * @param description Description of the event.
      * @param timeOfEvent Time of the event.
@@ -23,9 +25,9 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of an event duke.task.
+     * String representation of an <code>Event</code>.
      *
-     * @return String representation of an event duke.task.
+     * @return String representation of an <code>Event</code>.
      */
     @Override
     public String toString() {
