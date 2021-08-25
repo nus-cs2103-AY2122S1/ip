@@ -7,6 +7,11 @@ public class Event extends Task{
         this.at = at;
     }
 
+    public String getFileString() {
+        int i = this.isDone ? 1 : 0;
+        return "E | " + i + " | " + this.description + "| " + this.at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at:" + this.at + ")";

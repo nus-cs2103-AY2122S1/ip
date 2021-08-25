@@ -15,6 +15,11 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
+    public String getFileString() {
+        int i = this.isDone ? 1 : 0;
+        return "T | " + i + " | " + this.description;
+    }
+
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
