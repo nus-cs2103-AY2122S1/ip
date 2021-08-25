@@ -1,7 +1,14 @@
 package duke.exception;
 
+/**
+ * Throw this when the format of the user input is incorrect.
+ */
 public class DukeIllegalFormatException extends DukeException {
-    // raised when user input format is incorrect
+    /**
+     * Constructs a DukeIllegalFormatException with the specified detail message.
+     *
+     * @param errorMessage Error message.
+     */
     public DukeIllegalFormatException(String errorMessage) {
         super(errorMessage);
     }

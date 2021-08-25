@@ -7,10 +7,26 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Event class encapsulates an event task.
+ */
 public class Event extends Task {
+    /**
+     * Date of the event
+     */
     protected LocalDate at;
-    private static final String label = "E";
+    /**
+     * Event Label ie. "E"
+     */
+    private static final String LABEL = "E";
 
+    /**
+     * Constructs a Deadline with the specified description and date.
+     *
+     * @param description Description.
+     * @param at          Date of the event.
+     * @throws DukeException If either the description or deadline does not follow the format.
+     */
     public Event(String description, String at) throws DukeException {
         super(description);
         if (at.isEmpty()) {
@@ -28,12 +44,12 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[" + label + "]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[" + LABEL + "]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
     public String toDataString() {
-        return label + super.toDataString() + " | " + at;
+        return LABEL + super.toDataString() + " | " + at;
     }
 }
 

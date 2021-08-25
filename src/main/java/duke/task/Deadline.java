@@ -7,11 +7,26 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Deadline class encapsulates a deadline task.
+ */
 public class Deadline extends Task {
+    /**
+     * Deadline
+     */
     protected LocalDate by;
-    private static final String label = "D";
+    /**
+     * Deadline Label ie. "D"
+     */
+    private static final String LABEL = "D";
 
-
+    /**
+     * Constructs a Deadline with the specified description and deadline.
+     *
+     * @param description Description.
+     * @param by          Deadline.
+     * @throws DukeException If either the description or deadline does not follow the format.
+     */
     public Deadline(String description, String by) throws DukeException {
         super(description);
         if (by.isEmpty()) {
@@ -29,12 +44,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[" + label + "]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[" + LABEL + "]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
     public String toDataString() {
-        return label + super.toDataString() + " | " + by;
+        return LABEL + super.toDataString() + " | " + by;
     }
 
 }

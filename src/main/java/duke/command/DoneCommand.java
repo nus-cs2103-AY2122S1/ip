@@ -6,13 +6,25 @@ import duke.exception.DukeIndexOutOfRangeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * DoneCommand class encapsulates command to mark a task as done.
+ */
 public class DoneCommand extends Command {
+    /**
+     * Index of the task to be marked done.
+     */
     int index;
 
+    /**
+     * Constructs an DoneCommand with the specified index.
+     *
+     * @param index Index of the task to be marked as done.
+     */
     public DoneCommand(int index) {
         this.index = index;
     }
 
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeIndexOutOfRangeException {
         if (index < 1 || index > tasks.toArray().length) {
             throw new DukeIndexOutOfRangeException(tasks.toArray().length > 0

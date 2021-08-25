@@ -6,12 +6,21 @@ import duke.task.TaskList;
 
 import java.io.IOException;
 
-
+/**
+ * Duke is a educational software project designed to take you through
+ * the steps of building a small software incrementally, while applying
+ * as many Java and SE techniques as possible along the way.
+ */
 public class Duke {
-    private final Storage storage;
+    private Storage storage;
     private TaskList tasks;
-    private final Ui ui;
+    private Ui ui;
 
+    /**
+     * Constructs a Duke with the specified filePath.
+     *
+     * @param filePath Path of the file to store the task list.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke instance.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
