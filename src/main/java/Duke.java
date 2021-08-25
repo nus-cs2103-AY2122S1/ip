@@ -2,8 +2,8 @@ import bot.Bot;
 
 public class Duke {
     public static void main(String[] args) {
-      // Initialize and start bot
-      Bot bot = new Bot();
-      bot.start();
+        // Initialize and start bot
+        Bot bot = new Bot();
+        bot.start();
     }
 }

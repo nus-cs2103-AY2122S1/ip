@@ -6,33 +6,33 @@ import bot.TaskType;
 
 public class EventTask extends Task {
 
-  private String taskText;
-  private LocalDateTime taskTime;
-  private TaskType taskType = TaskType.Event;
+    private final String taskText;
+    private final LocalDateTime taskTime;
+    private final TaskType taskType = TaskType.Event;
 
-  public EventTask(String taskText, LocalDateTime taskTime) {
-    this.taskText = taskText.trim();
-    this.taskTime = taskTime;
-  }
+    public EventTask(String taskText, LocalDateTime taskTime) {
+        this.taskText = taskText.trim();
+        this.taskTime = taskTime;
+    }
 
-  @Override
-  String getTaskDesc() {
-    return String.format("%s (at: %s)", taskText, getTaskTime());
-  }
-  
-  @Override
-  String getTaskText() {
-    return this.taskText;
-  }
+    @Override
+    String getTaskDesc() {
+        return String.format("%s (at: %s)", taskText, getTaskTime());
+    }
 
-  @Override
-  String getTaskTime() {
-    return this.taskTime.format(Task.OUTPUT_TIME_FORMAT);
-  }
+    @Override
+    String getTaskText() {
+        return this.taskText;
+    }
 
-  @Override
-  TaskType getTaskType() {
-    return this.taskType;
-  }
+    @Override
+    String getTaskTime() {
+        return this.taskTime.format(Task.OUTPUT_TIME_FORMAT);
+    }
+
+    @Override
+    TaskType getTaskType() {
+        return this.taskType;
+    }
 
 }

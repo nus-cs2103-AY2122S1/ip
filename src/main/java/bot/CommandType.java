@@ -15,55 +15,56 @@ import commands.TodoCommand;
 
 public enum CommandType {
 
-  BYE("bye", new ByeCommand()), LIST("list", new ListCommand()),
-  DONE("done", new DoneCommand()), DEADLINE("deadline", new DeadlineCommand()),
-  TODO("todo", new TodoCommand()), EVENT("event", new EventCommand()),
-  DELETE("delete", new DeleteCommand()),;
+    BYE("bye", new ByeCommand()), LIST("list", new ListCommand()),
+    DONE("done", new DoneCommand()), DEADLINE("deadline", new DeadlineCommand()),
+    TODO("todo", new TodoCommand()), EVENT("event", new EventCommand()),
+    DELETE("delete", new DeleteCommand()),
+    ;
 
-  private final Command command;
-  private final String name;
+    private final Command command;
+    private final String name;
 
-  // Map to retrieve enum value from name string
-  private static final Map<String, CommandType> hash = new HashMap<>();
+    // Map to retrieve enum value from name string
+    private static final Map<String, CommandType> hash = new HashMap<>();
 
-  static {
-    for (CommandType c: CommandType.values()) {
-      hash.put(c.getName(), c);
+    static {
+        for (CommandType c : CommandType.values()) {
+            hash.put(c.getName(), c);
+        }
     }
-  }
 
-  private CommandType(String name, Command cmd) {
-    this.name = name;
-    this.command = cmd;
-  }
+    CommandType(String name, Command cmd) {
+        this.name = name;
+        this.command = cmd;
+    }
 
-  /**
-   * Get enum value name
-   * 
-   * @return enum value name
-   */
-  public String getName() {
-    return this.name;
-  }
+    /**
+     * Get enum value name
+     *
+     * @return enum value name
+     */
+    public String getName() {
+        return this.name;
+    }
 
-  /**
-   * Get enum value command
-   * 
-   * @return enum value command
-   */
-  public Command getCommand() {
-    return this.command;
-  }
+    /**
+     * Get enum value command
+     *
+     * @return enum value command
+     */
+    public Command getCommand() {
+        return this.command;
+    }
 
-  /**
-   * Get a command with the given name string
-   * 
-   * @param name name string of command
-   * @return command associated with name
-   */
-  public static Command getCommandFromName(String name) {
-    CommandType cmdType = hash.get(name.toLowerCase());
-    return cmdType == null ? new EmptyCommand() : cmdType.getCommand();
-  } 
+    /**
+     * Get a command with the given name string
+     *
+     * @param name name string of command
+     * @return command associated with name
+     */
+    public static Command getCommandFromName(String name) {
+        CommandType cmdType = hash.get(name.toLowerCase());
+        return cmdType == null ? new EmptyCommand() : cmdType.getCommand();
+    }
 
 }

@@ -2,8 +2,8 @@ package exceptions;
 
 public class InvalidTaskException extends RuntimeException {
 
-  public InvalidTaskException(String errorMessage) {
-    super(errorMessage);
-  }
+    public InvalidTaskException(String errorMessage) {
+        super(errorMessage);
+    }
 
 }

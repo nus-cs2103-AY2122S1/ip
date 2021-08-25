@@ -2,16 +2,16 @@ package bot;
 
 public enum TaskType {
 
-  Deadline("D"), Event("E"), Todo("T"), Blank("B");
+    Deadline("D"), Event("E"), Todo("T"), Blank("B");
 
-  private String symbol;
+    private final String symbol;
 
-  private TaskType(String symbol) {
-    this.symbol = symbol;
-  }
+    TaskType(String symbol) {
+        this.symbol = symbol;
+    }
 
-  public String getSymbol() {
-    return this.symbol;
-  }
+    public String getSymbol() {
+        return this.symbol;
+    }
 
 }

@@ -10,16 +10,16 @@ import tasks.Task;
 
 public class ListCommand extends Command {
 
-  @Override
-  public void run(Bot bot, String[] args) {
-    List<Task> taskList = bot.taskList.get();
-    List<String> taskDescriptions = IntStream.range(0, taskList.size())
-                          .mapToObj(i -> {
-                            Task t = taskList.get(i);
-                            return String.format("%d. %s", i+1, t.toString());
-                          })
-                          .collect(Collectors.toList());
-    Ui.print(taskDescriptions.toArray(new String[0]));
-  }
-  
+    @Override
+    public void run(Bot bot, String[] args) {
+        List<Task> taskList = bot.taskList.get();
+        List<String> taskDescriptions = IntStream.range(0, taskList.size())
+                .mapToObj(i -> {
+                    Task t = taskList.get(i);
+                    return String.format("%d. %s", i + 1, t.toString());
+                })
+                .collect(Collectors.toList());
+        Ui.print(taskDescriptions.toArray(new String[0]));
+    }
+
 }
