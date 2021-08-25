@@ -3,13 +3,15 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 import java.util.List;
-import java.util.Scanner;
 
+import storage.Storage;
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.TaskList;
 import task.Todo;
+
+import ui.Ui;
 
 public class Duke {
     private Ui ui;
