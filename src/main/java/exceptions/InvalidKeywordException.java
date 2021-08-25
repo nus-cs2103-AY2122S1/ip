@@ -7,7 +7,7 @@ public class InvalidKeywordException extends DukeException {
                 "\nPlease use the keywords:" +
                 "\n'todo', 'deadline' or 'event' to create a new task" +
                 "\n'list' to view all the existing tasks" +
-                "\n'onDate' to view all tasks on a given date" +
+                "\n'tasks_on' to view all tasks on a given date" +
                 "\n'done' to mark a task as complete" +
                 "\n'delete' to remove a task from the list" +
                 "\n'bye' to exit");

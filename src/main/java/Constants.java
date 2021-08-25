@@ -17,7 +17,6 @@ public class Constants {
             "deadline [deadline_description] /by [deadline_date]";
     public static final String EVENT_FORMAT = "\nPlease use the following format:\n" +
             "event [event_description] /at [event_date_and_time]";
-    public static final String FILEPATH = "src/main/java/data/duke.txt";
-    public static final String FOLPATH = "src/main/java/data";
+
 
 }

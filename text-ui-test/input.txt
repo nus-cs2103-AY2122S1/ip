@@ -1,8 +1,17 @@
+todo watch a movie
+todo water plants
 deadline read book /by 2021-12-31
 deadline return book /by 2022-01-01
 event watch movie /at 2021-12-31 2000
 event university fair /at 2022-01-01 0900
-onDate 2021-12-31
-onDate 2022-01-01
+list
+done 2
+done 4
+done 5
+tasks_on 2021-12-31
+tasks_on 2022-01-01
+delete 5
+delete 2
 list
 bye
+

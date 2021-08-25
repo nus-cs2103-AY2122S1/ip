@@ -1,6 +1,4 @@
-D | 1 | read book | Dec 12 2020
-E | 0 | return book | Dec 12 2020 2359
-E | 1 | return book | Dec 12 2020 0000
-T | 0 | go to library
-T | 1 | research articles
-D | 1 | finish class readings | Nov 10 2020
+T | 0 | watch a movie
+D | 0 | read book | Dec 31 2021
+D | 1 | return book | Jan 01 2022
+E | 0 | university fair | Jan 01 2022 0900

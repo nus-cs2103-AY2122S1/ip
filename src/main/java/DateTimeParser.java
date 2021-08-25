@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
-public class DateTimeParser {
+public class DateTimeParser extends Parser {
 
     public static LocalDate deadlineDateParse(String date) {
         try {

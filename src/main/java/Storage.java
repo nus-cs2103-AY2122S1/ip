@@ -4,13 +4,20 @@ import java.io.*;
 import java.util.*;
 
 public class Storage {
+    private String filePath;
+    private String folderPath;
 
-    public static void readTasks(ArrayList<Task> taskList) throws IOException {
+    public Storage(String filePath, String folderPath) {
+         this.filePath = filePath;
+        this.folderPath = folderPath;
+    }
+
+    public void readTasks(TaskList taskList) throws IOException {
         try {
             Task task;
-            File fol = new File(Constants.FOLPATH);
+            File fol = new File(folderPath);
             fol.mkdir();
-            File file = new File(Constants.FILEPATH);
+            File file = new File(filePath);
             file.createNewFile();
 
             Scanner sc = new Scanner(file);
@@ -18,7 +25,7 @@ public class Storage {
                 while (sc.hasNext()) {
                     String inp = sc.nextLine();
                     task = stringToTask(inp);
-                    if (!Duke.containsTask(task, taskList)) {
+                    if (!taskList.containsTask(task)) {
                         taskList.add(task);
                     }
                 }
@@ -28,10 +35,11 @@ public class Storage {
         }
     }
 
-    public static void saveTasks(ArrayList<Task> taskList) {
+    public void saveTasks(TaskList taskList) {
         try {
-            FileWriter f = new FileWriter(Constants.FILEPATH);
-            for (Task t: taskList) {
+            FileWriter f = new FileWriter(filePath);
+            for (int i = 0; i < taskList.size(); i++) {
+                Task t = taskList.get(i);
                 f.write(taskToString(t));
             }
             f.close();
@@ -40,7 +48,7 @@ public class Storage {
         }
     }
 
-    public static Task stringToTask(String str) {
+    public Task stringToTask(String str) {
         String[] parsed = str.split("\\|");
         String taskType = parsed[0].trim();
         Task task;
@@ -70,7 +78,7 @@ public class Storage {
         return task;
     }
 
-    public static String taskToString(Task task) {
+    public String taskToString(Task task) {
         String[] parsedTask = task.toString().split("\\s");
         String taskType = parsedTask[0];
         String str;
