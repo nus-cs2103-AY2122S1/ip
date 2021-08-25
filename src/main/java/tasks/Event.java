@@ -15,4 +15,9 @@ public class Event extends Task {
         String statusIcon = getStatusIcon();
         return String.format("[%s][%s] %s (at: %s)", taskSymbol, statusIcon, taskName, date);
     }
+
+    @Override
+    public String toStorageFormat() {
+        return String.format("%s/%s/%s/%s", taskSymbol, isCompleted(), taskName, date);
+    }
 }

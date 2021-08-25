@@ -16,4 +16,9 @@ public class Deadline extends Task {
         return String.format("[%s][%s] %s (by: %s)", taskSymbol, statusIcon, taskName, date);
     }
 
+    @Override
+    public String toStorageFormat() {
+        return String.format("%s/%s/%s/%s", taskSymbol, isCompleted(), taskName, date);
+    }
+
 }

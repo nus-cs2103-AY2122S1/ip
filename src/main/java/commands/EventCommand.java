@@ -1,5 +1,6 @@
 package commands;
 
+import core.Storage;
 import core.TaskList;
 import tasks.Event;
 
@@ -11,8 +12,9 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList) {
+    public void execute(TaskList taskList, Storage storage) {
         taskList.addTask(eventTask);
+        storage.addTasksToFile(taskList);
     }
 
     @Override

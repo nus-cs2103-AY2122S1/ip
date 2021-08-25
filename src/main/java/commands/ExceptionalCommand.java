@@ -1,6 +1,7 @@
 package commands;
 
 import core.DukeException;
+import core.Storage;
 import core.TaskList;
 import gui.Ui;
 
@@ -12,7 +13,7 @@ public class ExceptionalCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList) {
+    public void execute(TaskList taskList, Storage storage) {
         String message = e.getMessage();
         Ui.formatAndPrint(message);
     }

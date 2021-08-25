@@ -11,6 +11,12 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String statusIcon = getStatusIcon();
+
         return String.format("[%s][%s] %s", taskSymbol, statusIcon, taskName);
+    }
+
+    @Override
+    public String toStorageFormat() {
+        return String.format("%s/%s/%s", taskSymbol, isCompleted(), taskName);
     }
 }

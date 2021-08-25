@@ -5,9 +5,11 @@ import gui.Ui;
 
 public class Duke {
     private TaskList taskList;
+    private Storage storage;
 
     public Duke() {
-        taskList = new TaskList();
+        storage = new Storage("data/Duke.txt");
+        taskList = storage.loadStorageToTaskList();
     }
 
     private void run() {
@@ -17,7 +19,7 @@ public class Duke {
         while (!shouldExit) {
             String input = Ui.readInput();
             Command command = Parser.parse(input, taskList);
-            command.execute(taskList);
+            command.execute(taskList, storage);
             shouldExit = command.shouldExit();
         }
     }
