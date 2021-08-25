@@ -1,24 +1,21 @@
 package duke.storage;
 
-import duke.exceptions.DukeException;
-
-import duke.tasks.Task;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.TaskList;
-import duke.tasks.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.ToDo;
 
 /**
  * Storage class used to handle reading and writing to file.

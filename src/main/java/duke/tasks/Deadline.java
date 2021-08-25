@@ -38,7 +38,8 @@ public class Deadline extends Task {
      * @return String object to represent Deadline task in a more readable manner.
      */
     public String formatString() {
-        return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
+        return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
+                + this.time.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
     }
 
     /**
