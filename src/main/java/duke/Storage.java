@@ -41,7 +41,9 @@ public class Storage {
             String time = s.split(":")[1];
             task = new Event(name, time);
         }
-        if (isDone) task.markAsDone();
+        if (isDone) {
+            task.markAsDone();
+        } 
         return task;
     }
 
@@ -57,7 +59,6 @@ public class Storage {
             Scanner scanner = new Scanner(nekoData);
             while (scanner.hasNextLine()) {
                 String s = scanner.nextLine();
-                // if (s.startsWith(" ")) break;
                 Task task = stringToTask(s);
                 taskList.add(task);
             }

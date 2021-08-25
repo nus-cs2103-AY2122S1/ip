@@ -16,8 +16,10 @@ public class Parser {
         int firstBlankIndex = userInput.indexOf(" ");
         String commandWord = firstBlankIndex == -1 ? userInput : userInput.substring(0, firstBlankIndex);
         switch (commandWord) {
-        case "bye" : return new ExitCommand();
-        case "list" : return new ListCommand();
+        case "bye" : 
+            return new ExitCommand();
+        case "list" : 
+            return new ListCommand();
         case "on" : {
             String dateString = userInput.substring(3);
             return new OnDateCommand(dateString);
@@ -60,7 +62,8 @@ public class Parser {
             Event event = new Event(name, time);
             return new AddCommand(event);
         }
-        default : return new UnknownCommand();
+        default : 
+            return new UnknownCommand();
         }
     }
 }
