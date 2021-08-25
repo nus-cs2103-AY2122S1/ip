@@ -42,6 +42,11 @@ public class Parser {
                     System.out.println(taskList.showList(""));
                 }
 
+                else if (str.contains("find")) {
+                    System.out.println(horizontalLines);
+                    System.out.println(taskList.findTask(str.substring(5)));
+                }
+
                 //command to do
                 else if (str.contains("todo")) {
                     System.out.println(horizontalLines);
