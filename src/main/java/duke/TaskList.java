@@ -119,16 +119,14 @@ public class TaskList {
             return;
         }
 
-        key = " " + key + " ";
+        String line = "____________________________________________________________";
+        String indent = "    ";
         ArrayList<Task> temp = new ArrayList<>();
         for (Task t : tasks) {
             if (t.toString().contains(key)) {
                 temp.add(t);
             }
         }
-
-        String line = "____________________________________________________________";
-        String indent = "    ";
 
         if (temp.size() == 0) {
             ui.toScreen("No tasks match this search, please try again.");

@@ -3,18 +3,18 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
-    private String line = "____________________________________________________________";
-    private String indent = "    ";
+    private static final String LINE = "____________________________________________________________";
+    private static final String INDENT = "    ";
 
     public Ui() {
     }
 
     public void toScreen(String... msgs) {
-        System.out.println(indent + line);
+        System.out.println(INDENT + LINE);
         for (String msg : msgs) {
-            System.out.println(indent + msg);
+            System.out.println(INDENT + msg);
         }
-        System.out.println(indent + line);
+        System.out.println(INDENT + LINE);
     }
 
     public void firstWelcome() {

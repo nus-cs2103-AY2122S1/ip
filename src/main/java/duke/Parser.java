@@ -34,16 +34,16 @@ public class Parser {
             tasks.deleteTask(deletedTaskIndex - 1);
             return true;
         case TODO:
-            //add Duke.Todo task
+            //add Todo task
             tasks.addTodo(remainder.trim());
             return true;
         case DEADLINE:
-            //add Duke.Deadline task
+            //add Deadline task
             String[] ds = remainder.split("/by");
             tasks.addDeadline(ds);
             return true;
         case EVENT:
-            //add Duke.Event task
+            //add Event task
             String[] es = remainder.split("/at");
             tasks.addEvent(es);
             return true;
@@ -52,6 +52,7 @@ public class Parser {
             ui.toScreen("I'm sorry, I don't understand. Please try again.");
             return true;
         case BYE:
+            //end program
             ui.toScreen("Bye. Hope to see you again soon!");
             return false;
         }

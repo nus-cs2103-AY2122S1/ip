@@ -12,6 +12,7 @@ public enum Commands {
     INVALID("invalid");
 
     private String c;
+
     Commands(String c) {
         this.c = c;
     }

@@ -9,8 +9,8 @@ import java.util.Date;
 
 public class Deadline extends Task {
     private LocalDateTime deadline;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a");
-    private DateTimeFormatter saveFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a");
+    private static final DateTimeFormatter SAVE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public Deadline(String desc, String deadline) throws DukeException {
         super(desc.trim());
@@ -36,11 +36,11 @@ public class Deadline extends Task {
 
     @Override
     public String saveTask() {
-        return "D|" + this.isDone() + "|" + getDesc() + "|" + deadline.format(saveFormat) + "\n";
+        return "D|" + this.isDone() + "|" + getDesc() + "|" + deadline.format(SAVE_FORMAT) + "\n";
     }
 
     @Override
     public String toString() {
-        return "[D]" + this.statusIcon() + this.getDesc() + " (by: " + deadline.format(formatter) + ")";
+        return "[D]" + this.statusIcon() + this.getDesc() + " (by: " + deadline.format(FORMATTER) + ")";
     }
 }

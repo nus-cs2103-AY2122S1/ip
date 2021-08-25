@@ -31,7 +31,6 @@ public class Task {
     }
 
     public String saveTask() {
-        String res = "T|" + isDone + "\\|" + desc;
-        return res;
+        return "T|" + isDone + "\\|" + desc;
     }
 }

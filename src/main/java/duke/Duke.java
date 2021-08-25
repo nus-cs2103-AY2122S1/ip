@@ -8,7 +8,6 @@ public class Duke {
     private Storage storage;
     private Parser parser;
     private Ui ui;
-//    private static Path saveFile = Paths.get("data", "duke.txt");
 
     public Duke(Path saveFile) {
         ui = new Ui();
