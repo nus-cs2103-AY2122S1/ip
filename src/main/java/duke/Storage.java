@@ -12,10 +12,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Storage {
-    
+
     private String filePath;
     public ArrayList<Task> taskArr;
-    
+
     public Storage(String filePath) {
         this.filePath = filePath;
         this.taskArr = new ArrayList<Task>();
@@ -58,26 +58,26 @@ public class Storage {
             isDone = true;
         }
         switch (taskType) {
-            case "D":
-                dateStr = bracketSplit[3].trim();
-                date = oldFormat.parse(dateStr);
-                dateStr = destDf.format(date);
-                task = new Deadline(description, isDone, dateStr);
-                taskArr.add(task);
-                break;
-            case "E":
-                dateStr = bracketSplit[3].trim();
-                date = oldFormat.parse(dateStr);
-                dateStr = destDf.format(date);
-                task = new Event(description, isDone, dateStr);
-                taskArr.add(task);
-                break;
-            case "T":
-                task = new Todo(description, isDone);
-                taskArr.add(task);
-                break;
-            default:
-                throw new DukeException("Error adding an existing Task");
+        case "D":
+            dateStr = bracketSplit[3].trim();
+            date = oldFormat.parse(dateStr);
+            dateStr = destDf.format(date);
+            task = new Deadline(description, isDone, dateStr);
+            taskArr.add(task);
+            break;
+        case "E":
+            dateStr = bracketSplit[3].trim();
+            date = oldFormat.parse(dateStr);
+            dateStr = destDf.format(date);
+            task = new Event(description, isDone, dateStr);
+            taskArr.add(task);
+            break;
+        case "T":
+            task = new Todo(description, isDone);
+            taskArr.add(task);
+            break;
+        default:
+            throw new DukeException("Error adding an existing Task");
         }
 
     }
