@@ -1,5 +1,6 @@
 package duke;
 
+import exceptions.NoSearchResultException;
 import exceptions.NoSuchCommandException;
 import exceptions.NoTaskNameException;
 import exceptions.TaskDoesNotExistException;
@@ -122,13 +123,25 @@ public class TaskList {
      * @param searchTerm search term to find
      * @return an ArrayList containing all Tasks with the search term in their message
      */
-    public TaskList search(String searchTerm) {
+    public TaskList search(String searchTerm) throws NoSearchResultException {
         TaskList matchingTasks = new TaskList();
         for (Task task: this.taskList) {
             if (task.getMessage().contains(searchTerm)) {
                 matchingTasks.add(task);
             }
         }
+        if (matchingTasks.isEmpty()) {
+            throw new NoSearchResultException("No results for search term " + searchTerm);
+        }
         return matchingTasks;
+    }
+
+    /**
+     * Checks if the TaskList is empty.
+     *
+     * @return true if the TaskList is empty, false otherwise
+     */
+    public boolean isEmpty() {
+        return this.taskList.isEmpty();
     }
 }
