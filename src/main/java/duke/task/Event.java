@@ -1,5 +1,8 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -7,7 +10,8 @@ import java.time.format.DateTimeFormatter;
  * E.g. team project meeting at Oct-10-2019 1300hrs
  */
 public class Event extends Task {
-    protected LocalDateTime at;
+    protected LocalDate date;
+    protected LocalTime time;
 
     /**
      * Class constructor
@@ -16,8 +20,8 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
-        String dateTime = String.format(at.replace(" ", "T") + ":00");
-        this.at = LocalDateTime.parse(dateTime);
+        this.date = LocalDate.parse(at.split(" ", 2)[0]);
+        this.time = LocalTime.parse(at.split(" ", 2)[1]);
     }
 
     /**
@@ -25,10 +29,16 @@ public class Event extends Task {
      *
      * @return String formatted date and time
      */
-    public String getDateTime() {
-        DateTimeFormatter dateTimeFormatObj = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
-        String formattedDate = String.format(at.format(dateTimeFormatObj) + "hrs");
+    public String getDate() {
+        DateTimeFormatter dateFormatObj = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
+        String formattedDate = date.format(dateFormatObj);
         return formattedDate;
+    }
+
+    public String getTime() {
+        DateTimeFormatter timeFormatObj = DateTimeFormatter.ofPattern("HH:mm");
+        String formattedTime = time.format(timeFormatObj);
+        return formattedTime;
     }
 
     /**
@@ -39,7 +49,7 @@ public class Event extends Task {
     @Override
     public String toWrite() {
         String done = this.isDone ? "1" : "0";
-        return String.format("E | %s | %s | %s", done, this.getDescription(), this.at);
+        return String.format("E | %s | %s | %s %s", done, this.getDescription(), this.date, this.time);
     }
 
     /**
@@ -49,6 +59,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getDateTime() + ")";
+        return String.format("[E]%s (at: %s %s hrs)",super.toString(),this.getDate(), this.getTime());
     }
 }

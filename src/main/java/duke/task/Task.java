@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a task to be done. A task includes a description and
  * whether it had been done or not.

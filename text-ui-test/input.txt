@@ -1,9 +1,14 @@
-list
-todo buy milk
-list
-deadline assignment /by Tuesday
-event hades raid /at 19th Aug 9-11pm
-list
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+todo clean house
+deadline homework /by 2020-12-10
+deadline project /by 2021-2-12
+event birthday /at
+event birthday /at 2020-12-03 15:00
+event birthday /at 2020-12-04 25:00
 done 2
 list
 bye
