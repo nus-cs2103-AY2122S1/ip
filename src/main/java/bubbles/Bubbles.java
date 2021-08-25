@@ -1,16 +1,32 @@
 package bubbles;
 
+/**
+ * Bubbles - a Personal Assistant Chatbot that
+ * helps a user to keep track of various tasks,
+ * namely ToDos, Deadlines and Events.
+ */
+
 public class Bubbles {
     private String FILEPATH = "data/bubbles.txt";
     private Storage storage;
     private Ui ui;
 
+
+    /**
+     * A public constructor to initialize the Bubbles bot.
+     */
     public Bubbles() {
         ui = new Ui();
         storage = new Storage();
         storage.loadFile(FILEPATH);
     }
 
+    /**
+     * Main method for the Bubbles bot.
+     * Creates a new Bubbles object and gets the bot running.
+     *
+     * @param args The command line arguments
+     */
     public static void main(String[] args) {
         new Bubbles().run();
     }

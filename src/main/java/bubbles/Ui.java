@@ -4,8 +4,16 @@ import java.util.Scanner;
 
 import bubbles.tasks.TaskList;
 
+/**
+ * A class that deals with interactions with the user,
+ * mainly accepting user input and echoing back to the user
+ * through System output.
+ */
 public class Ui {
-    //deals with interactions with the user
+    /**
+     * Echos the user input through printing out the input
+     * String onto the System output line.
+     */
     public void echo() {
         Scanner sc = new Scanner(System.in);
 
@@ -25,6 +33,16 @@ public class Ui {
         sc.close();
     }
 
+    /**
+     * Echos the (accepted forms of) user input after formatting,
+     * where the accepted commands are to add ToDo/Deadline/Event tasks,
+     * marking tasks as done, deleting tasks, listing out all of the
+     * tasks and saying good-bye.
+     *
+     * @param storage The Storage Object where the final list of tasks
+     *                would be updated to, after the Bubbles bot program
+     *                terminates
+     */
     public void echoTask(Storage storage) {
         Scanner sc = new Scanner(System.in);
 
