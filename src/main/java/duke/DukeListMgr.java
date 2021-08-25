@@ -163,5 +163,12 @@ public class DukeListMgr {
         Duke.dukeSays("Here are your current tasks: \n" + printThis);
     }
 
+    /**
+     * Triggers the saving of the current state of the task list.
+     */
+    public void triggerSaveTasks() {
+        Duke currDuke = Duke.getCurrDuke();
+        currDuke.getCurrStorageMgr().saveCurrentTasks(this.toDoList);
+    }
 
 }
