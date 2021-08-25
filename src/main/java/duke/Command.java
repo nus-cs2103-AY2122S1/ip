@@ -5,8 +5,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Command class will execute the different commands input from the user
+ */
 public class Command {
-
+    /**
+     * executes different commands from user and save tasks into a file
+     * @param tasks takes in TaskList object containing the list of tasks
+     * @param ui takes in Ui object containing the list of message to user
+     * @param save Storage object to store the TaskList
+     */
     public void execute(TaskList tasks, Ui ui, Storage save) {
         ui.Start();
         boolean exit = false;

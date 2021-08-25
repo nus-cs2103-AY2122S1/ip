@@ -7,10 +7,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class to handle saving and loading tasks from a file
+ */
 public class Storage {
     File file;
     String filePath;
 
+    /**
+     *
+     * @param filePath a String representing the directory of the file
+     */
     Storage(String filePath){
         this.filePath = filePath;
         file = new File(filePath);
@@ -26,6 +33,11 @@ public class Storage {
         }
     }
 
+    /**
+     * method to save tasks into a file
+     * @param filePath a String representing the directory of the file
+     * @param list list of tasks that will be written into the file
+     */
     public void writeToFile(String filePath, TaskList list){
         try{
             String text = "";
@@ -41,6 +53,12 @@ public class Storage {
         }
     }
 
+    /**
+     * method to load tasks from a file
+     * @param filePath a String representing the directory of the file
+     * @return return a TaskList object containing the list of tasks that was in the file
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> readFile(String filePath) throws FileNotFoundException{
         File f = new File(filePath);
         Scanner s = new Scanner(f);
