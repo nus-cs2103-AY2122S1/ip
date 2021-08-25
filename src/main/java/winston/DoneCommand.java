@@ -1,7 +1,7 @@
 package winston;
 
 public class DoneCommand extends Command{
-    private int index;
+    private final int index;
     
     public DoneCommand(TaskList tasklist, int index) {
             super(tasklist);

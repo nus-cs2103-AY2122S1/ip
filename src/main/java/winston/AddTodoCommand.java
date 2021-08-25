@@ -1,6 +1,6 @@
 package winston;
 public class AddTodoCommand extends Command {
-    private String description;
+    private final String description;
     
     public AddTodoCommand(TaskList taskList, String description) {
         super(taskList);

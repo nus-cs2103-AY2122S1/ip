@@ -1,8 +1,8 @@
 package winston;
 
 public class AddEventCommand extends Command{
-    private String dateAndTime;
-    private String description;
+    private final String dateAndTime;
+    private final String description;
     
     public AddEventCommand(TaskList taskList, String description, String dateAndTime) {
         super(taskList);

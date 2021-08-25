@@ -1,7 +1,7 @@
 package winston;
 
 public class DeleteCommand extends Command {
-    private int index;
+    private final int index;
     
     public DeleteCommand(TaskList taskList, int index) {
         super(taskList);

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 
 public class Parser {
-    private TaskList taskList;
+    private final TaskList taskList;
     
     public Parser(TaskList taskList) {
         this.taskList = taskList;
