@@ -12,23 +12,13 @@ public class Duke {
         }
     }
 
-    public void init() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-    }
 
     public void run() throws IOException, DukeException {
-        Pattern todoPattern = Pattern.compile("todo (.*)");
-        Pattern deadlinePattern = Pattern.compile("deadline (.*) /by (.*)");
-        Pattern eventPattern = Pattern.compile("event (.*) /at (.*)");
 
+
+        Ui ui = new Ui();
+        Parser parser = new Parser();
         TaskList storage = new TaskList();
         Files.createDirectories(Paths.get("data/"));
         File file = new File("data/duke.txt");
@@ -54,77 +44,23 @@ public class Duke {
         }
 
 
-        init();
+        ui.init();
+        boolean ended = false;
 
-
-
-
-        while (true) {
+        while (!ended) {
             // Enter data using BufferReader
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(System.in));
 
             // Reading data using readLine
-            String input = reader.readLine();
-
-
-
-            // print out list
-            if (input.equals("list")) {
-                storage.list();
-                continue;
-            }
-
-            // complete a task
-            if (Pattern.matches("done \\d", input)) {
-                String[] items = input.split(" ");
-                storage.done(Integer.parseInt(items[1]));
-                continue;
-            }
-
-            if (Pattern.matches("delete \\d", input)) {
-                String[] items = input.split(" ");
-                storage.delete(Integer.parseInt(items[1]));
-                continue;
-            }
-
-            Matcher todoMatcher = todoPattern.matcher(input);
-            if (todoMatcher.find()) {
-                storage.addCustom(new Todo(todoMatcher.group(1)));
-                continue;
-            }
-
-            Matcher deadlineMatcher = deadlinePattern.matcher(input);
-            if (deadlineMatcher.find()) {
-                storage.addCustom(new Deadline(deadlineMatcher.group(1), deadlineMatcher.group(2)));
-                continue;
-            }
-
-            Matcher eventMatcher = eventPattern.matcher(input);
-            if (eventMatcher.find()) {
-                storage.addCustom(new Event(eventMatcher.group(1), eventMatcher.group(2)));
-                continue;
-            }
-
-            // exit application
-            if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                FileOutputStream fos = new FileOutputStream("./data/duke.txt");
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(storage);
-                oos.close();
-                break;
-            }
-
-            // identify reason for misinput
-            if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
-                System.out.println("OOPS!!! The description of a todo cannot be empty.");
-                continue;
-            }
-            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
-
-
+            String input = ui.getNextCommand();
+            ended = parser.parse(input, storage);
         }
+
+        FileOutputStream fos = new FileOutputStream("./data/duke.txt");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(storage);
+        oos.close();
     }
 
     public static void main(String[] args) {
