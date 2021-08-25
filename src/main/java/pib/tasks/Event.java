@@ -21,19 +21,19 @@ public class Event extends Task {
      * @param description description of the deadline task
      * @param date        the date stated after "/at " portion
      */
-    private Event(String description, String date, String time) {
-        super(description);
+    private Event(String description, String date, String time, boolean printMessage) {
+        super(description, printMessage);
         this.date = date;
         this.time = time;
     }
 
-    private Event(String description, int isDone, String date, String time) {
-        super(description, isDone);
+    private Event(String description, int isDone, String date, String time, boolean printMessage) {
+        super(description, isDone, printMessage);
         this.date = date;
         this.time = time;
     }
 
-    public static Event createEvent(String details) throws PibException {
+    public static Event createEvent(String details, boolean printMessage) throws PibException {
         try {
             int atIndex = details.indexOf("/at ");
             String description = details.substring(0, atIndex).trim();
@@ -43,7 +43,7 @@ public class Event extends Task {
             String[] dateTime = details.substring(atIndex + 4).trim().split(" ");
             String date = LocalDate.parse(dateTime[0].trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
             String time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm")).format(DateTimeFormatter.ofPattern("hh:mm a"));
-            return new Event(description, date, time);
+            return new Event(description, date, time, printMessage);
         } catch (IndexOutOfBoundsException e) {
             throw new PibException("e-wrong-format");
         } catch (DateTimeParseException e) {
@@ -51,8 +51,8 @@ public class Event extends Task {
         }
     }
 
-    public static Event createEvent(String description, int isDone, String date, String time) {
-        return new Event(description, isDone, date, time);
+    public static Event createEvent(String description, int isDone, String date, String time, boolean printMessage) {
+        return new Event(description, isDone, date, time, printMessage);
     }
 
     public String toDataString() {

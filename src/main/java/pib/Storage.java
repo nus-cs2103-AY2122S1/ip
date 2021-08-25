@@ -24,18 +24,19 @@ public class Storage {
     public void loadData(TaskList list) throws PibException {
         try {
             Scanner sc = new Scanner(this.file);
+            Ui.printDataLoading();
             while (sc.hasNext()) {
                 String[] taskDetails = sc.nextLine().split(",");
                 Task newTask = null;
                 switch (taskDetails[0]) {
                 case "T":
-                    newTask = Todo.createTodo(taskDetails[2], Integer.parseInt(taskDetails[1]));
+                    newTask = Todo.createTodo(taskDetails[2], Integer.parseInt(taskDetails[1]), false);
                     break;
                 case "E":
-                    newTask = Event.createEvent(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4]);
+                    newTask = Event.createEvent(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4], false);
                     break;
                 case "D":
-                    newTask = Deadline.createDeadline(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4]);
+                    newTask = Deadline.createDeadline(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4], false);
                     break;
                 default:
                     break;
@@ -44,6 +45,8 @@ public class Storage {
                     list.addSavedData(newTask);
                 }
             }
+            Ui.printDataLoadSuccess();
+            Ui.printList(list);
         } catch (FileNotFoundException e) {
             throw new PibException("fnf-exception");
         }

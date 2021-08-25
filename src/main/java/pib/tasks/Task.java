@@ -13,16 +13,20 @@ public abstract class Task {
     /**
      * @param description The description of the task
      */
-    public Task(String description) {
+    public Task(String description, boolean printMessage) {
         this.description = description.trim();
         isDone = 0;
-        Ui.printAddSuccess(description);
+        if (printMessage) {
+            Ui.printAddSuccess(description);
+        }
     }
 
-    public Task(String description, int isDone) {
+    public Task(String description, int isDone, boolean printMessage) {
         this.description = description.trim();
         this.isDone = isDone;
-        Ui.printAddSuccess(description);
+        if (printMessage) {
+            Ui.printAddSuccess(description);
+        }
     }
 
     /**

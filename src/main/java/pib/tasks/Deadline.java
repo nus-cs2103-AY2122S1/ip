@@ -22,19 +22,19 @@ public class Deadline extends Task {
      * @param description description of the deadline task
      * @param date        the date stated after "/by " portion
      */
-    private Deadline(String description, String date, String time) {
-        super(description);
+    private Deadline(String description, String date, String time, boolean printMessage) {
+        super(description, printMessage);
         this.date = date;
         this.time = time;
     }
 
-    private Deadline(String description, int isDone, String date, String time) {
-        super(description, isDone);
+    private Deadline(String description, int isDone, String date, String time, boolean printMessage) {
+        super(description, isDone, printMessage);
         this.date = date;
         this.time = time;
     }
 
-    public static Deadline createDeadline(String details) throws PibException {
+    public static Deadline createDeadline(String details, boolean printMessage) throws PibException {
         try {
             int byIndex = details.indexOf("/by ");
             String description = details.substring(0, byIndex).trim();
@@ -44,7 +44,7 @@ public class Deadline extends Task {
             String[] dateTime = details.substring(byIndex + 4).trim().split(" ");
             String date = LocalDate.parse(dateTime[0].trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
             String time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm")).format(DateTimeFormatter.ofPattern("hh:mm a"));
-            return new Deadline(description, date, time);
+            return new Deadline(description, date, time, printMessage);
         } catch (IndexOutOfBoundsException e) {
             throw new PibException("d-wrong-format");
         } catch (DateTimeParseException e) {
@@ -52,8 +52,8 @@ public class Deadline extends Task {
         }
     }
 
-    public static Deadline createDeadline(String description, int isDone, String date, String time) {
-        return new Deadline(description, isDone, date, time);
+    public static Deadline createDeadline(String description, int isDone, String date, String time, boolean printMessage) {
+        return new Deadline(description, isDone, date, time, printMessage);
     }
 
     public String toDataString() {

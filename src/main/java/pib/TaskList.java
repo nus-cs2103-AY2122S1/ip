@@ -9,11 +9,17 @@ import pib.pibexception.PibException;
 
 import java.util.ArrayList;
 
+import static pib.Ui.DIVIDER;
+
 public class TaskList {
     private ArrayList<Task> list;
 
     public TaskList() {
         this.list = new ArrayList<Task>();
+    }
+
+    public TaskList(ArrayList<Task> list) {
+        this.list = list;
     }
 
     public void viewList() throws PibException {
@@ -23,24 +29,25 @@ public class TaskList {
             for (int i = 0; i < list.size(); i++) {
                 System.out.println((i + 1) + "." + list.get(i).toString());
             }
+            System.out.println(DIVIDER);
         }
     }
 
     public void viewListSize() {
-        System.out.println("There are " + list.size() + " task(s) in the list\n");
+        System.out.println("There are " + list.size() + " task(s) in the list\n" + DIVIDER);
     }
 
     public void add(TaskType t, String taskDetails) throws PibException {
         Task newTask = null;
         switch (t) {
         case TODO:
-            newTask = Todo.createTodo(taskDetails);
+            newTask = Todo.createTodo(taskDetails, true);
             break;
         case EVENT:
-            newTask = Event.createEvent(taskDetails);
+            newTask = Event.createEvent(taskDetails, true);
             break;
         case DEADLINE:
-            newTask = Deadline.createDeadline(taskDetails);
+            newTask = Deadline.createDeadline(taskDetails, true);
             break;
         default:
             break;
@@ -82,5 +89,23 @@ public class TaskList {
             data.append(t.toDataString());
         }
         return data.toString();
+    }
+
+    public void find(String query) throws PibException {
+        if (query.isBlank()) {
+            throw new PibException("empty-query");
+        }
+        ArrayList<Task> filtered = new ArrayList<>();
+        for (Task t : this.list) {
+            if (t.getDescription().contains(query)) {
+                filtered.add(t);
+            }
+        }
+        if (filtered.size() > 0) {
+            Ui.printQueryFound(query);
+            (new TaskList(filtered)).viewList();
+        } else {
+            Ui.printQueryNotFound(query);
+        }
     }
 }
