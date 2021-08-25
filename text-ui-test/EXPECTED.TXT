@@ -1,8 +1,5 @@
 Greetings! This is Elsa.
-___________________________________________________________
-It seems like there are no items in the saved list.
-Start adding tasks to save your list!
-___________________________________________________________
+What can I do for you?
 ___________________________________________________________
 There are no tasks to be done! Hooray!
 ___________________________________________________________
@@ -83,7 +80,7 @@ Here is your list of tasks:
 ___________________________________________________________
 ___________________________________________________________
 You might have mistyped the task number.
-Please ensure task number is between 1 and 7.
+Please recheck your task number and enter again.
 ___________________________________________________________
 ___________________________________________________________
 Done!
@@ -102,7 +99,7 @@ Here is your list of tasks:
 ___________________________________________________________
 ___________________________________________________________
 You might have mistyped the task number.
-Please ensure task number is between 1 and 6.
+Please recheck your task number and enter again.
 ___________________________________________________________
 ___________________________________________________________
 Done!
