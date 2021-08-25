@@ -10,13 +10,33 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates a storage object that provides functionality
+ * with regard to reading and writing from a file
+ */
 public class Storage {
+
+    // instance variable
     private final String filePath;
 
+    // constructors
+
+    /**
+     * Constructor for the Storage object
+     *
+     * @param filePath the path to the location of the file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * A method to read the data from the file and load it as
+     * the TaskList
+     *
+     * @return the TaskList that was saved in the file
+     * @throws IOException when the file cannot be found
+     */
     public TaskList load() throws IOException {
         TaskList listTask = new TaskList(new ArrayList<>());
         try {
@@ -62,6 +82,11 @@ public class Storage {
         return listTask;
     }
 
+    /**
+     * A method to write the current task list to the file
+     *
+     * @param task the current TaskList to be written to the file
+     */
     public void write(TaskList task) {
         try {
             File f = new File(this.filePath);

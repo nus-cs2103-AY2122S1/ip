@@ -9,12 +9,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a chat-bot that stores list of tasks/events that the user
+ * can add/delete/complete.
+ */
 public class Duke {
     static TaskList taskList;
     static Storage storage;
     static Ui ui;
 
-
+    /**
+     * Initialise the program by loading/creating the data file.
+     */
     static void init() {
         storage = new Storage("data/duke.txt");
         try {
@@ -26,6 +32,9 @@ public class Duke {
         ui = new Ui();
     }
 
+    /**
+     * Handles the program's reply until a bye command is given.
+     */
     static void reply() {
         Scanner sc = new Scanner(System.in);
         while (true) {
