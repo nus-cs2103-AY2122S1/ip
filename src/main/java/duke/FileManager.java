@@ -8,13 +8,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that manages the storage of the tasks.
+ */
 public class FileManager {
     private File taskList;
 
+    /**
+     * Makes new Filemanager which manages a file with the name inputted.
+     *
+     * @param filename name of file which will be managed.
+     */
     public FileManager(String filename) {
         this.taskList = new File(filename);
     }
 
+    /**
+     * Gets the current stored tasklist in the file.
+     *
+     * @return the tasklist stored in the file.
+     */
     public ArrayList<Task> getTaskList() {
         try {
             if (taskList.createNewFile()) {
@@ -47,6 +60,12 @@ public class FileManager {
         }
     }
 
+    /**
+     * Updates the stored tasks according to tasks inputted.
+     *
+     * @param tasks the updated tasklist.
+     * @param ui the user interface to interact with the user.
+     */
     public void updateTaskList(Tasklist tasks, UI ui) {
         try {
             FileWriter newfileWriter = new FileWriter(this.taskList);
@@ -54,7 +73,6 @@ public class FileManager {
             newfileWriter.close();
         } catch (IOException e) {
             ui.showError(e);
-            //To ask ui to write?
         }
     }
 }

@@ -7,7 +7,17 @@ import duke.task.Task;
 
 import java.util.stream.Stream;
 
+/**
+ * Class to parse the input by user.
+ */
 public class Parser {
+    /**
+     * Parses input by user.
+     *
+     * @param input the input by user.
+     * @return the command to be executed.
+     * @throws DukeException if input is invalid.
+     */
     public static Command parse(String input) throws DukeException {
         if (input.replaceAll("\\s+","").toLowerCase().equals("bye")) {
             return Command.makeCommand(CommandsTypes.Exit, null, 0);
