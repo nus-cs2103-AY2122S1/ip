@@ -17,9 +17,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage in the Duke program to store tasks created by users.
+ */
 public class Storage {
   private File file;
 
+  /**
+   * Constructs a Storage for the Duke program.
+   *
+   * @param filePath File path of the storage.
+   * @throws DukeException If file path does not exist.
+   */
   public Storage(String filePath) throws DukeException {
     // ensure parent directories exist
     String[] filePathComponents = filePath.split("/");
@@ -41,6 +50,12 @@ public class Storage {
     }
   }
 
+  /**
+   * Loads saved tasks from the storage.
+   *
+   * @return Tasks saved in the storage.
+   * @throws DukeException If saved tasks cannot be retrieved from storage.
+   */
   public ArrayList<Task> load() throws DukeException {
     // initialize task list
     ArrayList<Task> taskList = new ArrayList<>();
@@ -90,6 +105,12 @@ public class Storage {
     return taskList;
   }
 
+  /**
+   * Save tasks to storage.
+   *
+   * @param taskList Tasks to be saved to storage.
+   * @throws DukeException If tasks cannot be saved to storage.
+   */
   public void save(ArrayList<Task> taskList) throws DukeException {
     try {
       // instantiate file writer obj

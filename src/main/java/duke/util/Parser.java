@@ -6,6 +6,9 @@ import duke.exception.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the parser in the Duke program to parse commands by users.
+ */
 public class Parser {
   private static final String LIST_COMMAND = "list";
   private static final String DONE_COMMAND = "done";
@@ -15,6 +18,13 @@ public class Parser {
   private static final String DEADLINE_COMMAND = "deadline";
   private static final String EXIT_COMMAND = "bye";
 
+  /**
+   * Parses the given raw command.
+   *
+   * @param fullCommand Raw command.
+   * @return Parsed command.
+   * @throws DukeException If there is/are missing or invalid argument(s).
+   */
   public static Command parse(String fullCommand) throws DukeException {
     String[] commandComponents = fullCommand.split(" ");
     String command = commandComponents[0];

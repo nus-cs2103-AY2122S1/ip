@@ -6,13 +6,29 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * Represents the DeleteCommand in the Duke program.
+ */
 public class DeleteCommand extends Command {
   private int deleteTask;
 
+  /**
+   * Constructs a DeleteCommand to delete a given task in tasks.
+   *
+   * @param deleteTask Index of task to be deleted.
+   */
   public DeleteCommand(int deleteTask) {
     this.deleteTask = deleteTask;
   }
 
+  /**
+   * Defines the execution of the DeleteCommand where the given task is deleted.
+   *
+   * @param tasks Tasks of the Duke program.
+   * @param ui Ui of the Duke program.
+   * @param storage Storage of the Duke program.
+   * @throws DukeException If the given task does not exist, or changes cannot be saved to storage.
+   */
   @Override
   public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
     // Check for invalid task argument
@@ -32,6 +48,11 @@ public class DeleteCommand extends Command {
     storage.save(tasks.getTaskList());
   }
 
+  /**
+   * Returns false as this command is not the ExitCommand.
+   *
+   * @return false as this command is not the ExitCommand.
+   */
   @Override
   public boolean isExit() {
     return false;
