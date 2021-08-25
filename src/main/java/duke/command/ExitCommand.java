@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.FileManager;
 import duke.Tasklist;
-import duke.UI;
+import duke.Ui;
 
 /**
  * A command which exits from Duke.
@@ -16,7 +16,7 @@ public class ExitCommand extends Command {
      * @param fileManager the filemanger that manages the storage of duke.
      */
     @Override
-    public void execute(Tasklist task, UI ui, FileManager fileManager) {
+    public void execute(Tasklist task, Ui ui, FileManager fileManager) {
         ui.sayBye();
     }
 

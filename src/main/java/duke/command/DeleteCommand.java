@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.FileManager;
 import duke.Tasklist;
-import duke.UI;
+import duke.Ui;
 import duke.task.Task;
 
 /**
@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException if index is out of bounds or if task is missing.
      */
     @Override
-    public void execute(Tasklist tasks, UI ui, FileManager fileManager) throws DukeException {
+    public void execute(Tasklist tasks, Ui ui, FileManager fileManager) throws DukeException {
         tasks.delete(this.index);
         ui.deleteTask(this.task);
         fileManager.updateTaskList(tasks, ui);

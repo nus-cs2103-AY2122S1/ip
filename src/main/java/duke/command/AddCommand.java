@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.FileManager;
 import duke.Tasklist;
-import duke.UI;
+import duke.Ui;
 import duke.task.Task;
 
 /**
@@ -28,7 +28,7 @@ public class AddCommand extends Command {
      * @param fileManager the filemanger that manages the storage of duke.
      */
     @Override
-    public void execute(Tasklist tasks, UI ui, FileManager fileManager) {
+    public void execute(Tasklist tasks, Ui ui, FileManager fileManager) {
         tasks.add(this.toAddTask);
         fileManager.updateTaskList(tasks, ui);
         ui.taskAdded(this.toAddTask, tasks.getNumTasks());

@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.FileManager;
 import duke.Tasklist;
-import duke.UI;
+import duke.Ui;
 
 /**
  * A command which aims to list the current tasks.
@@ -16,7 +16,7 @@ public class ListCommand extends Command {
      * @param fileManager the filemanger that manages the storage of duke.
      */
     @Override
-    public void execute(Tasklist tasks, UI ui, FileManager fileManager) {
+    public void execute(Tasklist tasks, Ui ui, FileManager fileManager) {
         ui.printList(tasks);
     }
 

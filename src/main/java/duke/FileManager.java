@@ -66,7 +66,7 @@ public class FileManager {
      * @param tasks the updated tasklist.
      * @param ui the user interface to interact with the user.
      */
-    public void updateTaskList(Tasklist tasks, UI ui) {
+    public void updateTaskList(Tasklist tasks, Ui ui) {
         try {
             FileWriter newfileWriter = new FileWriter(this.taskList);
             newfileWriter.write(tasks.stringSaveFile());

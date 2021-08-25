@@ -30,7 +30,7 @@ public class UITester {
 
     @Test
     public void testBye() {
-        UI ui = new UI();
+        Ui ui = new Ui();
         ui.sayBye();
         assertEquals("Don'twakemeupagain", out.toString().replaceAll("\\s+",""));
     }
@@ -38,7 +38,7 @@ public class UITester {
     @Test
     public void testAddTask() {
         try {
-            UI ui = new UI();
+            Ui ui = new Ui();
             ui.taskAdded(Task.makeTask("todo", "get a life"), 2);
             assertEquals("    ____________________________________________________________\n" +
                     "     Got it. I've added this task:\n" +

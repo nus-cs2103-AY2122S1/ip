@@ -8,7 +8,7 @@ import duke.command.Command;
 public class Duke {
     private FileManager filemanager;
     private Tasklist tasks;
-    private UI ui;
+    private Ui ui;
 
     /**
      * Constructs Duke which stores the tasks in a file.
@@ -16,7 +16,7 @@ public class Duke {
      * @param filePath filepath for the file which the tasks will be solved in.
      */
     public Duke(String filePath) {
-        ui = new UI();
+        ui = new Ui();
         filemanager = new FileManager(filePath);
         tasks = new Tasklist(filemanager.getTaskList());
     }

@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * Class to handle the user interface of Duke.
  */
-public class UI {
+public class Ui {
     final private static String strBreak = "    ____________________________________________________________\n";
 
     /**
@@ -24,7 +24,8 @@ public class UI {
      * @param count the current number of tasks.
      */
     public void taskAdded(Task task, int count) {
-        String toPrint = String.format("     Got it. I've added this task:\n     %s\n     Now you have %x task%s in the list.",
+        String toPrint = String.format("     Got it. I've added this task:\n     "
+                        + "%s\n     Now you have %x task%s in the list.",
                 task.toString(), count, count > 1 ? "s" : "");
         System.out.println(strBreak + toPrint + "\n" + strBreak);
     }

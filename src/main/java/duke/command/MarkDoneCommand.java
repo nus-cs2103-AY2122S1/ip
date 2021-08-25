@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.FileManager;
 import duke.Tasklist;
-import duke.UI;
+import duke.Ui;
 
 /**
  * A command which aims to mark a task as done.
@@ -28,7 +28,7 @@ public class MarkDoneCommand extends Command {
      * @param fileManager the filemanger that manages the storage of duke.
      */
     @Override
-    public void execute(Tasklist tasks, UI ui, FileManager fileManager) throws DukeException {
+    public void execute(Tasklist tasks, Ui ui, FileManager fileManager) throws DukeException {
         tasks.markDone(this.index);
         ui.showMarkDone(tasks.getTask(this.index));
         fileManager.updateTaskList(tasks, ui);
