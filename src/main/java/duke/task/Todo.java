@@ -5,7 +5,7 @@ package duke.task;
  */
 public class Todo extends Task {
     /** The symbol that represents a deadline */
-    private final static String symbol = "[T]";
+    private static final String symbol = "[T]";
 
     /**
      * Constructor of the todo task.

@@ -9,7 +9,7 @@ import java.time.format.FormatStyle;
  */
 public class Event extends Task {
     /** The symbol that represents a deadline */
-    private final static String symbol = "[E]";
+    private static final String symbol = "[E]";
     /** The deadline of the task */
     private final LocalDateTime deadline;
 

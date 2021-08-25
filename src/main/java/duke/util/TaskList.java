@@ -1,9 +1,9 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Collection;
+
+import duke.task.Task;
 
 /**
  * Class representing a list of tasks to complete.
@@ -11,7 +11,7 @@ import java.util.Collection;
  */
 public class TaskList {
     /** ArrayList storing the tasks.*/
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Empty constructor of the Tasklist. Used when an empty TaskList is needed.

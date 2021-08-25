@@ -1,13 +1,11 @@
 package duke;
 
+import duke.command.Command;
+import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
-import duke.util.Ui;
 import duke.util.TaskList;
-
-import duke.command.Command;
-
-import duke.exception.DukeException;
+import duke.util.Ui;
 
 public class Duke {
     private final Ui ui;

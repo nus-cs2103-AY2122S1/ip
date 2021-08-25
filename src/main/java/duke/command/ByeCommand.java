@@ -1,8 +1,9 @@
 package duke.command;
 
+import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-import duke.util.Storage;
+
 
 /**
  * A command class encapsulating the logic that occurs when the user issues a 'bye' command.
@@ -23,7 +24,7 @@ public class ByeCommand extends Command {
      * @param storage Storage class handling the persistence of the tasks
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showBye();
     }
 }

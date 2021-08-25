@@ -1,19 +1,20 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Task representing the user interface of the program.
  */
 public class Ui {
     /** Scanner used to get input from the user. */
-    Scanner scanner;
+    private final Scanner scanner;
 
     /**
      * Constructor of Ui class.
      */
+
     public Ui() {
         scanner = new Scanner(System.in);
     }

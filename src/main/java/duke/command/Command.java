@@ -1,16 +1,15 @@
 package duke.command;
 
+import duke.exception.DukeException;
+import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-import duke.util.Storage;
-
-import duke.exception.DukeException;
 
 /**
  * Abstract class that represents a command. It is abstract because the execute method will depend
  * on the type of command.
  */
-abstract public class Command {
+public abstract class Command {
     /** Whether the command will cause the program to exit */
     private final boolean isExit;
 
@@ -31,7 +30,7 @@ abstract public class Command {
      * @param storage Storage class handling the persistence of the tasks
      * @throws DukeException if there is a Duke related exception
      */
-    abstract public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      *

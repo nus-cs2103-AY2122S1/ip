@@ -5,7 +5,7 @@ package duke.task;
  */
 public abstract class Task {
     /** The task that needs to be completed */
-    final private String action;
+    private final String action;
     /** Whether a task is completed */
     private boolean isCompleted;
 
@@ -50,7 +50,7 @@ public abstract class Task {
      *
      * @return Save format of the task
      */
-    abstract public String toSaveFormat() ;
+    public abstract String toSaveFormat();
 
     /**
      * Returns a string representing the task

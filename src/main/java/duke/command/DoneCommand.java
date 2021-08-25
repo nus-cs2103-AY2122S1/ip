@@ -1,22 +1,20 @@
 package duke.command;
 
-import duke.util.TaskList;
-import duke.util.Ui;
-import duke.util.Storage;
-
 import duke.exception.InvalidInputException;
 import duke.exception.SaveFileException;
-import duke.exception.TaskNotFoundException;
 import duke.exception.TaskCompletedException;
-
+import duke.exception.TaskNotFoundException;
 import duke.task.Task;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * A command class encapsulating the logic that occurs when the user issues a 'bye' command.
  */
 public class DoneCommand extends Command {
     /** The index of the todo to complete */
-    String action;
+    private final String action;
 
     /**
      * Constructor for the Done Command
@@ -48,7 +46,7 @@ public class DoneCommand extends Command {
                 if (!taskToComplete.isComplete()) {
                     taskToComplete.complete();
                     ui.showTaskDone(taskToComplete);
-                }else {
+                } else {
                     throw new TaskCompletedException("This task is already completed.");
                 }
             } else {

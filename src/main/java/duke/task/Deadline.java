@@ -11,7 +11,7 @@ public class Deadline extends Task {
     /** The deadline of the task */
     private final LocalDateTime deadline;
     /** The symbol that represents a deadline */
-    private final static String symbol = "[D]";
+    private static final String symbol = "[D]";
 
     /**
      * The constructor of a deadline task.
@@ -19,7 +19,7 @@ public class Deadline extends Task {
      * @param action Task to be completed by the deadline.
      * @param deadline The time when the task should be completed
      */
-    public Deadline(String action, LocalDateTime deadline){
+    public Deadline(String action, LocalDateTime deadline) {
         super(action);
         this.deadline = deadline;
     }
@@ -41,7 +41,7 @@ public class Deadline extends Task {
      * @return String representation of the task
      */
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("%s%s (by: %s)", symbol, super.toString(),
                 this.deadline.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)));
     }

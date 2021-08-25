@@ -1,12 +1,5 @@
 package duke.util;
 
-import duke.exception.InvalidInputException;
-import duke.exception.SaveFileException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,12 +7,20 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exception.InvalidInputException;
+import duke.exception.SaveFileException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
+
 /**
  * Class responsible for all interactions with the save file.
  */
 public class Storage {
     /** Path of the storage file */
-    String saveFilePath;
+    private String saveFilePath;
 
     /**
      * Constructor of the storage
@@ -47,29 +48,31 @@ public class Storage {
                 String[] currTask = taskInSaveFormat.split("\\|\\|");
                 Task newTask;
                 switch (currTask[0]) {
-                    case "[T]":
-                        newTask = new Todo(currTask[2]);
-                        if (currTask[1].equals("true")) {
-                            newTask.complete();
-                        }
-                        tasks.add(newTask);
-                        break;
-                    case "[E]":
-                        LocalDateTime eventTime = Parser.parseDate(currTask[3]);
-                        newTask = new Event(currTask[2], eventTime);
-                        if (currTask[1].equals("true")) {
-                            newTask.complete();
-                        }
-                        tasks.add(newTask);
-                        break;
-                    case "[D]":
-                        LocalDateTime deadline = Parser.parseDate(currTask[3]);
-                        newTask = new Deadline(currTask[2], deadline);
-                        if (currTask[1].equals("true")) {
-                            newTask.complete();
-                        }
-                        tasks.add(newTask);
-                        break;
+                case "[T]":
+                    newTask = new Todo(currTask[2]);
+                    if (currTask[1].equals("true")) {
+                        newTask.complete();
+                    }
+                    tasks.add(newTask);
+                    break;
+                case "[E]":
+                    LocalDateTime eventTime = Parser.parseDate(currTask[3]);
+                    newTask = new Event(currTask[2], eventTime);
+                    if (currTask[1].equals("true")) {
+                        newTask.complete();
+                    }
+                    tasks.add(newTask);
+                    break;
+                case "[D]":
+                    LocalDateTime deadline = Parser.parseDate(currTask[3]);
+                    newTask = new Deadline(currTask[2], deadline);
+                    if (currTask[1].equals("true")) {
+                        newTask.complete();
+                    }
+                    tasks.add(newTask);
+                    break;
+                default:
+                    throw new InvalidInputException("Unrecognised task type detected in save file.");
                 }
             }
             System.out.println("Save file successfully read.");
