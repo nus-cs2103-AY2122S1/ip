@@ -1,6 +1,9 @@
 package duke;
 
 public class Ui {
+    /**
+     * Print the greet expressions
+     */
     public static void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

@@ -2,7 +2,17 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Deals with making sense of the user command
+ */
 public class Parser {
+    /**
+     * Deals with parsing the command and do some reaction
+     * @param input user command input
+     * @param taskList a list of tasks
+     * @return if the command required to exit
+     * @throws DukeException exceptions that are possible to occur in Duke
+     */
     public static boolean parser(String input, TaskList taskList) throws DukeException{
         String[] pieces = input.split(" ", 2);
         String command = pieces[0];

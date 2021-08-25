@@ -16,6 +16,13 @@ public class Storage {
         this.file = file;
     };
 
+    /**
+     * Creates a new storage file for Duke in the corresponding file path
+     * @param directory directory store the file
+     * @param filePath the path of the file
+     * @return a new 'Storage' object
+     * @throws DukeException Exception of Duke system
+     */
     public static Storage initStorage(String directory, String filePath) throws DukeException{
         try {
             Files.createDirectories(Paths.get("data/"));
@@ -32,6 +39,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Save the taskList to the file
+     * @param taskList a list of tasks
+     * @throws DukeException Exceptions that are possible to occur in Duke
+     */
     public void saveToFile(TaskList taskList) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file, false);
@@ -47,6 +59,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Read the file and reload the data from the file
+     * @param taskList a list of tasks
+     * @throws DukeException Exceptions that are possible to occur in Duke
+     */
     public void readFile(TaskList taskList) throws DukeException{
         try {
             Scanner s = new Scanner(file);

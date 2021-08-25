@@ -22,6 +22,10 @@ public class Task {
         this.completed = completed;
     }
 
+    /**
+     * make the string that will be saved to the file
+     * @return a string that will be saved to the file
+     */
     public String saveTask(){
         return toString();
     }
