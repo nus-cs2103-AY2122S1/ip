@@ -1,3 +1,5 @@
+package duke;
+
 public class InputParser {
     public InputParser() {
 
