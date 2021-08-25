@@ -12,6 +12,11 @@ public class Duke {
     private Ui ui;
     private static final DateTimeFormatter FORMAT_FROM_LOCAL_STORAGE = DateTimeFormatter.ofPattern("dd LLLL yyyy");
 
+    /**
+     * Constructor for class Duke
+     *
+     * @param filePath path of local storage file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,10 +28,18 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns the formatter used for local storage
+     *
+     * @return formatter used for local storage
+     */
     public static DateTimeFormatter getFormatter() {
         return FORMAT_FROM_LOCAL_STORAGE;
     }
 
+    /**
+     * Runs Duke until bye is input by user
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -45,10 +58,20 @@ public class Duke {
         }
     }
 
+    /**
+     * Main function to start Duke
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke(LOCAL_STORAGE_LOCATION).run();
     }
 
+    /**
+     * Returns location of local storage
+     *
+     * @return location of local storage
+     */
     public static String getLocalStorageLocation() {
         return LOCAL_STORAGE_LOCATION;
     }

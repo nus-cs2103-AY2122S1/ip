@@ -8,10 +8,23 @@ import duke.task.Task;
 
 public class DeleteCommand extends Command {
 
+    /**
+     * Constructor for class DeleteCommand
+     *
+     * @param userInput  user's input
+     */
     public DeleteCommand(String userInput) {
         super(userInput);
     }
 
+    /**
+     * Deletes a task from the list of tasks
+     *
+     * @param tasks contains the task list
+     * @param ui deals with interactions with the user
+     * @param storage deals with loading tasks from the file and saving tasks in the file
+     * @throws DukeException If format of user input is incorrect
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] parsedUserInput = this.getUserInput().split(" ", 2);

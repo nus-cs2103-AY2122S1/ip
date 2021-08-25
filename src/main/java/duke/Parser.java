@@ -2,9 +2,14 @@ package duke;
 
 import duke.command.*;
 
-// duke.Parser: deals with making sense of the user duke.command
 public class Parser {
 
+    /**
+     * Parses user input and returns the appropriate Command
+     *
+     * @param fullCommand user input
+     * @return appropriate Command
+     */
     public static Command parse(String fullCommand) {
         if (fullCommand.equals("bye")) {
             return new ExitDukeCommand(fullCommand);
