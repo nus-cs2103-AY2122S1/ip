@@ -92,12 +92,8 @@ public class TaskList {
 
     public void list() {
         String res = "Here are the tasks in your list:\n";
-
-        for (int i = 0; i < tasks.size(); i++) {
-            Task currTask = tasks.get(i);
-            res += String.format("%d. %s\n", i + 1, currTask.toString());
-        }
-        System.out.println(res);
+        String tasksStr = listTasks(this.tasks);
+        System.out.println(res + tasksStr);
     }
 
     public void done(String next) throws DukeException {
@@ -123,7 +119,6 @@ public class TaskList {
      * @param next String entered by the user.
      * @throws DukeException
      */
-
     public void delete(String next) throws DukeException {
         int taskNum;
         Task currTask;
@@ -142,4 +137,29 @@ public class TaskList {
                 currTask.toString(), tasks.size()));
     }
 
+    public String listTasks(ArrayList<Task> tasks) {
+        String res = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currTask = tasks.get(i);
+            res += String.format("%d. %s\n", i + 1, currTask.toString());
+        }
+        return res;
+    }
+
+    /**
+     * Finds the task from keyword.
+     * @param next User input string.
+     */
+    public void find(String next) {
+        String word = next.split(" ")[1];
+        ArrayList<Task> matchedTasks = new ArrayList<>();
+        String findMessage = "Here are the matching tasks in your list:\n";
+
+        for (Task task: tasks) {
+            if (task.getDescription().contains(word)) {
+                matchedTasks.add(task);
+            }
+        }
+        System.out.println(findMessage + listTasks(matchedTasks));
+    }
 }
