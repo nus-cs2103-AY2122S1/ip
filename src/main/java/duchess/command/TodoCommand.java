@@ -27,7 +27,7 @@ public class TodoCommand extends Command {
      * @return Whether to continue scanning for user input afterwards.
      */
     public boolean handleLogic(Duchess duchess) {
-        String task = getName().split(" ", 2)[1];
+        String task = getName();
         // Valid input
         ToDo todo = new ToDo(task);
         duchess.getDuchessList().add(todo);

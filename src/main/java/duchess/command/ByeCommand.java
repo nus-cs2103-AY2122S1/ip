@@ -20,7 +20,6 @@ public class ByeCommand extends Command {
 
     /**
      * Handles the logic for exiting the Duchess interface.
-     * @param input The user given input.
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */

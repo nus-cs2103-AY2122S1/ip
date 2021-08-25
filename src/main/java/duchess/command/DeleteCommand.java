@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
      * @return Whether to continue scanning for user input afterwards.
      */
     public boolean handleLogic(Duchess duchess)  {
-        String index = getName().split(" ", 2)[1];
+        String index = getName();
         // Parsing a non-numeric string will throw a NumberFormatException
         try {
             if (duchess.getDuchessList().checkWithinRange(Integer.parseInt(index))) {

@@ -30,7 +30,7 @@ public class DeadlineCommand extends Command {
     public boolean handleLogic(Duchess duchess)  {
         String invalidMessage = "The command \"deadline\" should be followed by " +
                 "a task and a date and time, e.g (read book /by 11/10/2019 4pm).";
-        String taskAndBy = getName().split(" ", 2)[1];
+        String taskAndBy = getName();
         try {
             if (!taskAndBy.contains(" /by "))
                 throw new DuchessException(invalidMessage);

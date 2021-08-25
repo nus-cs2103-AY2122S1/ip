@@ -20,18 +20,17 @@ public class TasksCommand extends Command {
     public boolean handleLogic(Duchess duchess) {
         String invalidMessage = "The command \"tasks\" should be followed by " +
                 "a keyword \"/after\" or \"/before\", a date and/or a time (e.g before 2/10/2019 2pm" +
-                "or after today)";
+                " or after today)";
         try {
-            String[] timeSplit = getName().substring(6).split(" ", 2);
+            String[] timeSplit = getName().substring(1).split(" ", 2);
             String keyword = timeSplit[0];
             String date = timeSplit[1];
             boolean isBefore;
-            if (keyword.equals("/before"))
+            if (keyword.equals("before"))
                 isBefore = true;
-            else if (keyword.equals("/after"))
+            else if (keyword.equals("after"))
                 isBefore = false;
             else {
-                System.out.println(keyword + "\n" + date);
                 throw new DuchessException(invalidMessage);
             }
             LocalDateTime dateTime = date.equals("today") ? LocalDateTime.now()
@@ -44,7 +43,7 @@ public class TasksCommand extends Command {
                 else if (!isBefore && t.getDateTime().isAfter(dateTime))
                     tasksToPrint += t + "\n";
             }
-            duchess.getUi().prettyPrint(tasksToPrint.isBlank() ? "You have no tasks " + keyword.substring(1) + " " + date
+            duchess.getUi().prettyPrint(tasksToPrint.isBlank() ? "You have no tasks " + keyword + " " + date
                     : tasksToPrint);
         } catch (ArrayIndexOutOfBoundsException|DuchessException e) {
             if (e instanceof  ArrayIndexOutOfBoundsException)
