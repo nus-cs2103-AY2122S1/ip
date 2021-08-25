@@ -17,7 +17,9 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 /**
- * Class encapsulating a Duke and its commands.
+ * Represents a chatbot for organising user tasks and to do list.
+ * A <code>Duke</code> object takes in user commands and updates the
+ * user's tasks.
  */
 class Duke {
 
@@ -25,6 +27,11 @@ class Duke {
         DONE, TODO, DEADLINE, EVENT, GET, DELETE, LIST, BYE;
     }
 
+    /**
+     * Represents a parser for interpreting user inputs.
+     * A <code>Parser</code> object takes in user inputs and
+     * interprets it to Duke to execute relevant tasks.
+     */
     private class Parser {
         private String[] list_of_words = new String[0];
         private String userInput ="";
@@ -354,7 +361,7 @@ class Duke {
     public static void main(String[] args) {
         String directoryPath = "./data";
         String filePath = "./data/duke.text";
-        
+
         File directory = new File(directoryPath);
         // Check folder exists
         if (!directory.exists()) {

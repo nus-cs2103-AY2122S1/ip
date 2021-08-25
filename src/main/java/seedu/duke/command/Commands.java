@@ -1,5 +1,9 @@
 package seedu.duke.command;
 
+/**
+ * Encapsulates the possible commands that would be output
+ * by a <code>Duke</code> object.
+ */
 public enum Commands {
     /**
      * Commands that Duke might use.
@@ -17,6 +21,11 @@ public enum Commands {
         this.command = command;
     }
 
+    /**
+     * Returns the string description of the command.
+     *
+     * @return String representation of command.
+     */
     public String getCommand() {
         return this.command;
     }
