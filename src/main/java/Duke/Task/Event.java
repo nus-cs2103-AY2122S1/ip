@@ -9,9 +9,15 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
 
     private String taskDescription;
-    private LocalDate date;
-    private String date1;
+    private String date;
 
+    /**
+     * Constructor of an Event Task
+     * @param taskName contains the task description and task time that
+     *                 is to be divided
+     * @throws DukeException if there is no timing indicated or if the
+     *                       date entered is in the incorrect format
+     */
     public Event(String taskName) {
         super(taskName.split("/at")[0].trim());
         if (!taskName.contains("/at")) {
@@ -21,28 +27,35 @@ public class Event extends Task {
         this.taskDescription = divide[0];
         String taskTime = divide[1].trim();
         try {
-            this.date = LocalDate.parse(taskTime);
+            this.date = Parser.convert(LocalDate.parse(taskTime));
         } catch (DateTimeParseException e) {
             throw new DukeException("", DukeException.Type.INVALID_FORMAT);
         }
-        date1 = Parser.convert(this.date);
     }
 
+    /**
+     * Save task description to file on the initial date format
+     * @return a String that represents user initial input
+     */
     @Override
     public String save() {
-        return this.toString().replaceAll(date1, Parser.reverse(date1));
+        return this.toString().replaceAll(date, Parser.reverse(date));
     }
 
+    /**
+     * String representation of a Task
+     * @return String of Task
+     */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at " + date1 + ")";
+        return "[E]" + super.toString() + " (at " + date + ")";
     }
 
     public String getTaskDescription() {
         return this.taskDescription;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return this.date;
     }
 }
