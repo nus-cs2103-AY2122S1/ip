@@ -28,15 +28,15 @@ public class Duke {
                 if (command.startsWith("list")) {
                     tasks.printTasks();
                 } else if (command.startsWith("done")) {
-                    tasks.handleTasksOperation(command, "done");
+                    tasks.handleDone(command);
                 } else if (command.startsWith("delete")) {
-                    tasks.handleTasksOperation(command, "delete");
+                    tasks.handleDelete(command);
                 } else if (command.startsWith("todo")) {
                     tasks.addToDo(command);
                 } else if (command.startsWith("deadline")) {
-                    tasks.addTaskWithTime(command, "deadline");
+                    tasks.addDeadline(command);
                 } else if (command.startsWith("event")) {
-                    tasks.addTaskWithTime(command, "event");
+                    tasks.addEvent(command);
                 } else {
                     throw new DukeException("I don't understand that command!\n");
                 }
