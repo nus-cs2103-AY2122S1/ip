@@ -112,6 +112,25 @@ public class DukeTaskList {
     }
 
     /**
+     * Search for tasks in the list by a keyword.
+     *
+     * @param keyword keyword to be searched.
+     */
+    public void searchTask(String keyword) {
+        List<Task> matchingTaskList = new ArrayList<>();
+        for (Task task : taskList) {
+            String[] taskDescriptionWords = task.getDescription().split(" ");
+            for (String word : taskDescriptionWords) {
+                if (word.equals(keyword)){
+                    matchingTaskList.add(task);
+                    break;
+                }
+            }
+        }
+        Ui.printFindTask(matchingTaskList);
+    }
+
+    /**
      * Method to add a todos task to the list.
      *
      * @param toDoText description of the todos task
