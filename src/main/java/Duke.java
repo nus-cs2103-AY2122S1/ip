@@ -4,6 +4,10 @@ import java.util.Scanner;
 import exceptions.EmptyDescriptionException;
 import exceptions.InvalidInputException;
 import exceptions.UserInputException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 public class Duke {
     public static void main(String[] args) {
