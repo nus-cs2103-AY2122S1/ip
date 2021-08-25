@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 public class Ui {
 
     public static void printLine() {
@@ -6,7 +10,7 @@ public class Ui {
 
     public void printWelcomeMessage() {
         printLine();
-        System.out.println("Hello I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello I'm duke.Duke\nWhat can I do for you?");
         printLine();
     }
 
@@ -31,7 +35,7 @@ public class Ui {
 
     public static void printAddedMessage(Task task, int taskCount) {
         printLine();
-        System.out.println("\tGot it. I've added this Task:\n" + "\t  " + task);
+        System.out.println("\tGot it. I've added this duke.task.Task:\n" + "\t  " + task);
         printTaskCount(taskCount);
         printLine();
     }

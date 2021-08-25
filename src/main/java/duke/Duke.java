@@ -1,3 +1,8 @@
+package duke;
+
+import duke.Exception.DukeException;
+import duke.task.TaskList;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -20,7 +25,7 @@ public class Duke {
         Parser parser = new Parser(tasks);
         boolean end = false;
 
-        //Main functionality of Duke
+        //Main functionality of duke.Duke
         while(!end) {
             String command = "";
             if(sc.hasNextLine()) {

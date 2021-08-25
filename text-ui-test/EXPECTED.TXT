@@ -1,18 +1,18 @@
-Hello I'm Duke
+Hello I'm duke.Duke
 What can I do for you?
-	Got it. I've added this ToDo:
+	Got it. I've added this duke.task.ToDo:
 	  [T][ ] borrow book
 	Now you have 1 tasks in the list.
-	Got it. I've added this ToDo:
+	Got it. I've added this duke.task.ToDo:
 	  [T][ ] read book
 	Now you have 2 tasks in the list.
-	Got it. I've added this ToDo:
+	Got it. I've added this duke.task.ToDo:
 	  [T][ ] buy food
 	Now you have 3 tasks in the list.
-	Got it. I've added this Deadline:
+	Got it. I've added this duke.task.Deadline:
 	  [D][ ] do homework (by: Monday)
 	Now you have 4 tasks in the list.
-	Got it. I've added this Event:
+	Got it. I've added this duke.task.Event:
 	  [E][ ] birthday party (at: Tuesday 2pm)
 	Now you have 5 tasks in the list.
 	Here are the tasks in your list:

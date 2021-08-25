@@ -1,3 +1,11 @@
+package duke;
+
+import duke.Exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
 import java.time.format.DateTimeParseException;
 
 public class Parser {
