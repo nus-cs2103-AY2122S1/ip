@@ -1,4 +1,4 @@
-public class Task {
+public class Task { //Base Task Class
     private final String name;
     protected boolean isDone;
 

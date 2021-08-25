@@ -1,4 +1,4 @@
-public class Todo extends Task{
+public class Todo extends Task { //Todo Task to handle todo events
 
     public Todo(String name) {
         super(name);

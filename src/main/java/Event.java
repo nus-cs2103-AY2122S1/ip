@@ -1,7 +1,7 @@
 public class Event extends Task{
     protected String eventTime;
 
-    public Event(String name, String eventTime) {
+    public Event(String name, String eventTime) { //Event class to handle Event task
         super(name);
         this.eventTime = TaskTime.convertDateTimeFormat(eventTime);
     }
