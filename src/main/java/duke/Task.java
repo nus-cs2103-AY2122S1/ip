@@ -23,6 +23,10 @@ class Task {
         return (isDone ? "Done" : "InProgress") + "&&" + content;
     }
 
+    String getContent() {
+        return content;
+    }
+
     LocalDate getDate() {
         return null;
     }

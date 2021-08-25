@@ -43,6 +43,13 @@ class Parser {
                 } else {
                     return "Wrong input format";
                 }
+            case "find":
+                if (infos.length == 2) {
+                    String content = infos[1];
+                    return findContent(content, taskList);
+                } else {
+                    return "Wrong input format";
+                }
             case "delete":
                 if (infos.length == 2) {
                     String index = infos[1];
@@ -135,6 +142,21 @@ class Parser {
         s.append("    ____________________________________________________________\n");
 
         return s.toString();
+    }
+
+    static String findContent(String content, TaskList taskList) {
+        ArrayList<Task> lst = taskList.getTasks();
+        String output = "";
+        for (Task t: lst) {
+            if (t.getContent().contains(content)) {
+                output += (t.toString() + "\n");
+            }
+        }
+        if (output.equals("")) {
+            return "No matching tasks";
+        } else {
+            return output;
+        }
     }
 
     static String getSchedule(String info, TaskList taskList) {
