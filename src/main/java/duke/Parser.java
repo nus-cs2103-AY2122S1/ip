@@ -10,6 +10,7 @@ public class Parser {
     /**
      * Returns the result of parsing the user input in an array of string where index 0 is command, index 1 is
      * task description and index 2 is by/at date and time.
+     *
      * @param item User's input.
      * @return String array of parsed item.
      */
@@ -40,6 +41,12 @@ public class Parser {
         return result;
     }
 
+    /**
+     * Returns parsed input from file containing stored tasks.
+     *
+     * @param input String from file.
+     * @return Parsed input from file.
+     */
     public String[] parseFromFile(String input) {
         String[] result = new String[]{"", "", "", ""};
         String[] split = input.split("--");
@@ -50,12 +57,4 @@ public class Parser {
         return result;
     }
 
-    public static void main(String[] args) {
-        Parser p = new Parser();
-        String[] res = p.parseFromFile("event--false--meet--at Oct 15 1000-1200");
-        System.out.println(res[0]);
-        System.out.println(res[1]);
-        System.out.println(res[2]);
-        System.out.println(res[3]);
-    }
 }

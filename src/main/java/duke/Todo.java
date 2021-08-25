@@ -7,7 +7,8 @@ package duke;
 public class Todo extends Task{
 
     /**
-     * Constructor for a duke.Todo task.
+     * Constructor for a Todo task.
+     *
      * @param desc String array consisting of parsed description.
      */
     public Todo(String[] desc) {
@@ -17,7 +18,8 @@ public class Todo extends Task{
         return "todo--" + Boolean.toString(this.isDone) + "--" + this.desc + "--0\n";
     }
     /**
-     * Return a string representation of the todo.
+     * Returns a string representation of the todo.
+     *
      * @return Return the type, completion status and description of the todo.
      */
     @Override

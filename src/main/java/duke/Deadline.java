@@ -10,12 +10,13 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
     /**
-     * The date and time of the deadline.
+     * The date the deadline.
      */
     protected LocalDate date;
 
     /**
      * Constructor for a duke.Deadline task.
+     *
      * @param desc String array consisting of parsed description.
      */
     public Deadline(String[] desc) {
@@ -25,13 +26,19 @@ public class Deadline extends Task{
 
     }
 
+    /**
+     * Converts the task into a string to be written into storage.
+     *
+     * @return String to be written into storage
+     */
     @Override
     public String toWrite() {
         return "deadline--" + Boolean.toString(this.isDone) + "--" + this.desc + "--" + this.date.toString() +"\n";
     }
 
     /**
-     * Return a string representation of the deadline.
+     * Returns a string representation of the deadline.
+     *
      * @return Return the type, completion status and description of the deadline.
      */
     @Override

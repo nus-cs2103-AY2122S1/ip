@@ -5,16 +5,13 @@ package duke;
  */
 public class Duke {
 
-    /**
-     * duke.TaskList containing Tasks.
-     */
     private TaskList tl;
     private Storage storage;
     private Ui ui;
     private Parser parser;
 
     /**
-     * Constructor for a duke.Duke.
+     * Constructor for a Duke.
      */
     public Duke() {
         this.storage = new Storage();
@@ -24,7 +21,7 @@ public class Duke {
     }
 
     /**
-     * Exit the duke.Duke program.
+     * Exits the program.
      */
     public void exit() {
         this.ui.showExitMessage();
@@ -32,7 +29,8 @@ public class Duke {
     }
 
     /**
-     * Adds a task for duke.Duke to track given a parsed command.
+     * Adds a task for Duke to track given a parsed command.
+     *
      * @param t String array of parsed user input.
      * @throws DukeException Exception for wrong user inputs.
      */
@@ -68,6 +66,7 @@ public class Duke {
 
     /**
      * Gets the task from duke given an index.
+     *
      * @param index Index of duke.Task.
      * @return duke.Task of the given index.
      */
@@ -77,6 +76,7 @@ public class Duke {
 
     /**
      * Marks a task as done given its position in the list.
+     *
      * @param itemNum Position of duke.Task in the list.
      */
     public void markDone(int itemNum){
@@ -87,6 +87,7 @@ public class Duke {
 
     /**
      * Deletes a task from the list.
+     *
      * @param items Parsed delete command from user.
      * @throws DukeException Exception for wrong user inputs.
      */
@@ -104,7 +105,7 @@ public class Duke {
     }
 
     /**
-     * Start duke.Duke to allow for inputs.
+     * Starts Duke to allow for inputs.
      */
     public void run() {
         this.ui.showGreetMessage();

@@ -10,7 +10,11 @@ import java.util.Scanner;
 
 public class Storage {
 
-
+    /**
+     * Creates directory/file if it does not exist yet.
+     *
+     * @throws IOException
+     */
     public void createDirectoryFile() throws IOException {
         if (Files.notExists(Path.of("src/data"))) {
             Files.createDirectory(Path.of("src/ata"));
@@ -20,7 +24,8 @@ public class Storage {
         }
     }
     /**
-     * Loads the duke.TaskList stored in predetermined file
+     * Loads the TaskList stored in predetermined file.
+     *
      * @return duke.TaskList
      */
     public TaskList load() {
@@ -50,6 +55,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes TaskList into file for storage.
+     *
+     * @param taskList TaskList to be stored.
+     */
     public void write(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter("src/data/duke.txt");
@@ -64,8 +74,4 @@ public class Storage {
 
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        Storage store = new Storage();
-        store.load();
-    }
 }

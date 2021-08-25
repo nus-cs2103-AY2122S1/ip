@@ -2,11 +2,13 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Class for user interactions
+ */
 public class Ui {
 
     private Scanner scanner;
-
-
+    
     public Ui() {
         this.scanner = new Scanner(System.in);
 
@@ -19,6 +21,7 @@ public class Ui {
     public void showTaskList(TaskList taskList) {
         System.out.println(taskList.toString());
     }
+
     public void showGreetMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
