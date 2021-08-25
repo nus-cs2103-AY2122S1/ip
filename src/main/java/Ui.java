@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Ui {
     private static final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
     private static final String listText = "Here are the tasks in your list:";
@@ -5,6 +7,7 @@ public class Ui {
     private static final String goodbyeText = "Bye. Hope to see you again soon!";
     private static final String errorText = "Burp burp! Something went wrong!";
     private static final String loadingErrorText = "Could not read this file Nuuuuuuu!";
+    Scanner sc = new Scanner(System.in);
 
     /**
      * Adds a top and bottom horizontal line to text
@@ -59,5 +62,9 @@ public class Ui {
 
     public void showLoadingError() {
         formatAndPrintText(loadingErrorText);
+    }
+
+    public String readCommand() {
+        return sc.nextLine();
     }
 }
