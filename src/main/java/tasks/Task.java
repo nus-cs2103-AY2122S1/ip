@@ -50,6 +50,10 @@ public class Task {
         return "T | " + isDone + " | " + desc + "\n";
     }
 
+    public String getDescription() {
+        return this.desc;
+    }
+
     @Override
     public String toString() {
         return this.completionStatus() + desc;

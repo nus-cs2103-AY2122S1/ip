@@ -58,14 +58,18 @@ public class DukeParser {
                 String desc = details[0];
                 LocalDate time = LocalDate.parse(details[1]);
                 return new AddDeadlineCommand(desc, false, time);
+            } else if (command.equals("find")) {
+                String query = parsedInput[1];
+                return new FindTaskCommand(query);
             }
             return new UnknownCommand();
         } catch (NumberFormatException e) {
             System.out.println("It seems like you have entered an invalid task number");
             System.out.println("Please enter the task number as shown in the list.");
             return new ErrorCommand("An exception occurred! See details above.");
-        } catch (Exception e) {
-            //TODO DANGEROUS! please change
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new ErrorCommand("Missing fields in command. Type 'help' for more info.");
+        } catch (Exception e) { //TODO DANGEROUS! please change
             return new ErrorCommand("An exception occurred!");
         }
     }
