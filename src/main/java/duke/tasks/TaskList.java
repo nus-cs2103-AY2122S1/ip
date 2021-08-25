@@ -1,8 +1,13 @@
 package duke.tasks;
 
+import duke.exceptions.DukeException;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList {
     private List<Task> taskList;
     public static final int MAX_TASKS = 100;
@@ -15,14 +20,31 @@ public class TaskList {
         return this.taskList.get(i);
     }
 
+    /**
+     * Adds a new task to the existing list of tasks.
+     *
+     * @param task Task to be added.
+     * @return True if task has been successfully added, false otherwise.
+     */
     public boolean addTask(Task task) {
         return this.taskList.add(task);
     }
 
+    /**
+     * Deletes a task from the existing list of tasks.
+     *
+     * @param taskNum Index of the task to be deleted.
+     * @return Deleted task.
+     */
     public Task deleteTask(int taskNum) {
         return this.taskList.remove(taskNum);
     }
 
+    /**
+     * Returns the length of the taskList.
+     *
+     * @return Length of taskList.
+     */
     public int taskListLen() {
         return this.taskList.size();
     }

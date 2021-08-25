@@ -6,7 +6,18 @@ import duke.tasks.Todo;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 
+/**
+ * Creates a parser that makes sense of user inputs.
+ */
 public class Parser {
+
+    /**
+     * Returns the parsed Command input by the user.
+     *
+     * @param userInput The unparsed input from the user.
+     * @return Parsed Command.
+     * @throws DukeException If illegal/missing arguments are found.
+     */
     public static Command parseInput(String userInput) throws DukeException {
         //TODO need to catch DukeException and IndexOutOfBoundsException somewhere
         String[] inputSplit = userInput.split(" ", 2);

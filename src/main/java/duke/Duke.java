@@ -6,7 +6,9 @@ import duke.functionality.Parser;
 import duke.commands.*;
 import duke.exceptions.DukeException;
 
-
+/**
+ * Creates and runs a Duke bot. Main file for the bot that is run to create a new Duke bot.
+ */
 public class Duke {
     private Storage storage;
     private Ui ui;
@@ -21,6 +23,9 @@ public class Duke {
         this(FILE_PATH);
     }
 
+    /**
+     * Starts up the bot.
+     */
     public void run() {
         this.ui.welcomeMessage();
         boolean isExit = false;
