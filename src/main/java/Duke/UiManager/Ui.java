@@ -1,3 +1,8 @@
+package Duke.UiManager;
+
+import Duke.Command.Parser;
+import Duke.Excpetions.DukeException;
+import Duke.Task.TaskList;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -55,7 +60,7 @@ public class Ui {
         return scanner.nextLine();
     }
 
-    public ArrayList<String> ARoundOfInput() throws DukeException{
+    public ArrayList<String> ARoundOfInput() throws DukeException {
         System.out.println();
         Parser p;
         ArrayList<String> Info = new ArrayList<>();

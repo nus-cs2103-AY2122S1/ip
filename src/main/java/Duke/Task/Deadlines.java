@@ -1,15 +1,17 @@
+package Duke.Task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class Events extends Task{
+public class Deadlines extends Task{
 
     private boolean done = false;
     private String task = "";
     private LocalDateTime time = null;
-    private String taskType = "E";
+    private String taskType = "D";
 
-    public Events(boolean done, String task, LocalDateTime time) {
+    public Deadlines(boolean done, String task, LocalDateTime time) {
         this.done = done;
         this.task = task;
         this.time = time;
@@ -24,7 +26,7 @@ public class Events extends Task{
             done_str = "X";
         }
 
-        return "[" + taskType + "]" + "[" + done_str + "] "  + task +" (at: " + ParsedTime() + ")";
+        return "[" + taskType + "]" + "[" + done_str + "] "  + task +" (by: " + ParsedTime() + ")";
     }
 
     @Override
@@ -61,6 +63,4 @@ public class Events extends Task{
     public String GetDataInfo() {
         return this.taskType + " | " + (this.done? 1 : 0) + " | " + task + " | " + GetTime();
     }
-
-
 }

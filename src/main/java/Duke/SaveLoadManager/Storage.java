@@ -1,3 +1,9 @@
+package Duke.SaveLoadManager;
+
+import Duke.Command.Parser;
+import Duke.Excpetions.DukeException;
+import Duke.Task.Task;
+import Duke.Task.TaskList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,7 +22,7 @@ public class Storage {
         this.list = new ArrayList<>();
     }
 
-    public ArrayList<Task> load() throws DukeException{
+    public ArrayList<Task> load() throws DukeException {
         try {
             ReadDataFromFile();
         } catch (FileNotFoundException e){

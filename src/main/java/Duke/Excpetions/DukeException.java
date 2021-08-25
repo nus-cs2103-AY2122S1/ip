@@ -1,3 +1,5 @@
+package Duke.Excpetions;
+
 public class DukeException extends Exception {
 
     private String ErrorMessage = "";

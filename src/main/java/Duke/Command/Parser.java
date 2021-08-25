@@ -1,3 +1,7 @@
+package Duke.Command;
+
+import Duke.Excpetions.DukeException;
+import Duke.Task.TaskList;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -113,7 +117,7 @@ public class Parser {
         return time;
     }
 
-    public String getOperationType() throws DukeException{
+    public String getOperationType() throws DukeException {
         String OperationType;
         if (Message.contains(" ")) {
             OperationType = Message.substring(0, Message.indexOf(" "));
