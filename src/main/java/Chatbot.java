@@ -87,12 +87,14 @@ public class Chatbot {
             } catch (DukeTaskException e) {
                 System.out.println(e.getMessage());
             } catch (DukeIOException e) {
-                System.out.println(e.getMessage());
+                System.out.println(e);
+            } catch (DukeDateParseException e) {
+                System.out.println(e);
             }
         };
     }
 
-    private ChatContinue interpret() throws DukeIOException{
+    private ChatContinue interpret() throws DukeIOException, DukeDateParseException {
         String input = scanner.nextLine();
         ChatCommands command = ChatCommands.toEnum(input);
         if (command != null) {
@@ -109,7 +111,7 @@ public class Chatbot {
         throw new DukeArgumentException("Looks like I don't support those commands yet...");
     }
 
-    private ChatContinue addTask(TaskCommands command, String input) throws DukeIOException{
+    private ChatContinue addTask(TaskCommands command, String input) throws DukeIOException, DukeDateParseException {
         switch (command) {
             case DONE:
                 return this.markDone(input);
@@ -135,7 +137,7 @@ public class Chatbot {
         return ChatContinue.CONTINUE;
     }
 
-    private ChatContinue addDeadline(String input) throws DukeIOException{
+    private ChatContinue addDeadline(String input) throws DukeIOException, DukeDateParseException {
         Deadline deadline = new Deadline(input);
         memory.add(deadline);
         fileDB.save(deadline);
@@ -143,7 +145,7 @@ public class Chatbot {
         return ChatContinue.CONTINUE;
     }
 
-    private ChatContinue addEvent(String input) throws DukeIOException{
+    private ChatContinue addEvent(String input) throws DukeIOException, DukeDateParseException {
         Event event = new Event(input);
         memory.add(event);
         fileDB.save(event);

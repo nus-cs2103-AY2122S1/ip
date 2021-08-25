@@ -1,8 +1,12 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Event extends Task{
-    private String date;
+    private Date date;
     protected static final String EVENT_LABEL = "E";
 
-    public Event(String str) {
+    public Event(String str) throws DukeDateParseException {
         super(str.split(" /", 2)[0]);
         String[] command = str.split(" /", 2);
         if (command.length == 1) {
@@ -14,7 +18,11 @@ public class Event extends Task{
         } else if (commandAndDate.length == 1) {
             throw new DukeArgumentException("No date specified!");
         }
-        this.date = commandAndDate[1];
+        try {
+            this.date = new SimpleDateFormat("dd/mm/yyyy").parse(commandAndDate[1]);
+        } catch (ParseException e) {
+            throw new DukeDateParseException(e);
+        }
     }
 
     @Override
@@ -24,7 +32,7 @@ public class Event extends Task{
 
     @Override
     protected String getDate() {
-        return this.date;
+        return this.date.toString();
     }
 
     @Override
