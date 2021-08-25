@@ -11,17 +11,18 @@ import java.time.format.DateTimeFormatter;
 
 
 public class BobbyBot {
-    private List<Task> tasks = new ArrayList<>();
+
     private static final String div = "____________________________________________________________\n";
     private final String DBPATH = "data/database.txt";
     private static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
-    private final Storage storage;
+    private Storage storage;
+    private TaskList tasks;
 
     public BobbyBot()  {
         System.out.println(div + "Hello! I'm Bobby\nWhat can I do for you?\n" + div);
         storage = new Storage(DBPATH);
         try {
-            tasks = storage.load();
+            tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -33,7 +34,7 @@ public class BobbyBot {
     private void save() throws IOException {
         // save task to .txt file
         FileWriter fw = new FileWriter(DBPATH);
-        for (Task task: tasks) {
+        for (Task task: tasks.getTasks()) {
             String saveRow = task.getSaveFormatString() + "\n";
             fw.write(saveRow);
         }
@@ -133,7 +134,7 @@ public class BobbyBot {
     private void printList() {
         int i = 1;
         System.out.println(div + "Here are the tasks in your list:");
-        for (Task task: tasks) {
+        for (Task task: tasks.getTasks()) {
             System.out.print(i + ". ");
             System.out.println(task);
             i++;
@@ -146,7 +147,7 @@ public class BobbyBot {
      * @param taskNo Task Number (starting from index 1)
      */
     private void markAsDone(int taskNo) {
-        Task taskCompleted = tasks.get(taskNo - 1);
+        Task taskCompleted = tasks.getTask(taskNo - 1);
         taskCompleted.markAsDone();
         System.out.println(div + "Nice! I've marked this task as done:");
         System.out.println("  " + taskCompleted + "\n" + div);
@@ -161,7 +162,7 @@ public class BobbyBot {
             System.out.println("Cannot find task! Use list command to see available tasks");
             return;
         }
-        Task taskToDelete = tasks.get(taskNo - 1);
+        Task taskToDelete = tasks.getTask(taskNo - 1);
         System.out.println(div + "Noted. I've removed this task:");
         System.out.println("  " + taskToDelete);
         tasks.remove(taskToDelete);
