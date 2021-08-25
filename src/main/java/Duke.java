@@ -60,6 +60,44 @@ public class Duke {
         }
     }
 
+    private static void handleLoadText() {
+        String folderName = "./data";
+        String fileName =  "./data/duke.txt";
+        File directory = new File(folderName);
+
+        if (!directory.exists()){
+            directory.mkdir();
+        }
+
+        try {
+            Scanner scanner = new Scanner(new File(fileName));
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                // process the line
+                String[] output = line.split("\\s\\|\\s");
+                switch (output[0]) {
+                    case "T":
+                        Task newTodo = new Todo(output[1]);
+                        todos.add(newTodo);
+                        break;
+                    case "D":
+                        Task newDeadline = new Deadline(output[1], output[2]);
+                        todos.add(newDeadline);
+                        break;
+                    case "E":
+                        Task newEvent = new Event(output[1], output[2]);
+                        todos.add(newEvent);
+                        break;
+                    default:
+                        System.out.println("Detected invalid task type. Please check...");
+                        break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+
+        }
+    }
+
     /**
      * Throws the corresponding DukeException when the Task input is empty.
      *
@@ -161,6 +199,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         // Initial greeting of user
         greet();
+        handleLoadText();
 
         // Starts to ask for string of instruction
         // boolean flag to indicate if loop should be exited
