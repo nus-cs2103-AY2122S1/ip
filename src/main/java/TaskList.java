@@ -8,36 +8,44 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    public void addTask(Task task) {
+    public void addTask(Task task, boolean logOutput) {
         tasks.add(task);
         Session.output("I Understand. I Have Added:\n   " + task.toString() + "\nYou Have " + tasks.size() + " Tasks.");
     }
 
-    public void listTasks() {
+    public void listTasks(boolean logOutput) {
         String taskListString = "Here Are The Tasks In Your List:\n";
         for(int i = 0; i < tasks.size(); i++) {
             taskListString += (i+1) + "." + tasks.get(i).toString() + "\n";
         }
         taskListString += "I Wish You Luck With Your Tasks And Doings.";
-        Session.output(taskListString);
+        if (logOutput) Session.output(taskListString);
     }
 
-    public void markAsDone(int index) {
+    public void markAsDone(int index, boolean logOutput) {
         String doneString = "Good Work. I Mark This Task As Done:\n";
         Task doneTask = tasks.get(index - 1);
         doneTask.markAsDone();
         doneString += "   " + doneTask.toString();
-        Session.output(doneString);
+        if (logOutput) Session.output(doneString);
     }
 
-    public void removeTask(int index) {
+    public void removeTask(int index, boolean logOutput) {
         try {
             Task deadTask = tasks.get(index - 1);
             tasks.remove(index - 1);
-            Session.output("   I Have Removed This Task:\n   " + deadTask.toString());
+            if (logOutput) Session.output("   I Have Removed This Task:\n   " + deadTask.toString());
         } catch (IndexOutOfBoundsException e) {
-            Session.output("   You Cannot Delete A Task That Does Not Exist. Do Better.");
+            if (logOutput) Session.output("   You Cannot Delete A Task That Does Not Exist. Do Better.");
         }
+    }
+
+    public String saveTasks() {
+        String outputString = "";
+        for(int i = 0; i < tasks.size(); i++) {
+            outputString += (i + 1) + " TTT " + tasks.get(i).toString() + "\n";
+        }
+        return outputString;
     }
 
 }

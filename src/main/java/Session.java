@@ -4,17 +4,25 @@ public class Session {
 
     private final static String SEPARATOR = "_____________________________________________________________________";
     private final static String GREETING = "Hello! I'm Jaden\nHow Are You? It's Been A While Since We Last Spoke.";
-    private final static String GOODBYE_OUTPUT = "Each Day Brings Me Further Away From Our Past And Closer To The Truth. #Bye";
+    private final static String GOODBYE_OUTPUT =
+            "Each Day Brings Me Further Away From Our Past And Closer To The Truth. #Bye";
+    private final static String TASKS_FILE_NAME = "jaden-tasks.txt";
 
     private Scanner input;
     private TaskList taskList;
+    private JadenOutputWriter outputWriter;
     private boolean isActive;
 
     public Session() {
         this.input = new Scanner(System.in);
-        this.taskList = new TaskList();
         this.isActive = true;
         this.greet();
+
+        JadenTaskReader fileReader = new JadenTaskReader(TASKS_FILE_NAME);
+        this.taskList = fileReader.readTasks();
+
+        this.outputWriter = new JadenOutputWriter(TASKS_FILE_NAME);
+
         this.listenForInputs();
     }
 
@@ -37,22 +45,22 @@ public class Session {
         }
         switch (parsedInput.commandType) {
             case TODO:
-                this.taskList.addTask(new ToDoTask(parsedInput.taskDescription));
+                this.taskList.addTask(new ToDoTask(parsedInput.taskDescription), true);
                 break;
             case DEADLINE:
-                this.taskList.addTask(new DeadlineTask(parsedInput.taskDescription, parsedInput.deadline));
+                this.taskList.addTask(new DeadlineTask(parsedInput.taskDescription, parsedInput.deadline), true);
                 break;
             case EVENT:
-                this.taskList.addTask(new EventTask(parsedInput.taskDescription, parsedInput.eventPeriod));
+                this.taskList.addTask(new EventTask(parsedInput.taskDescription, parsedInput.eventPeriod), true);
                 break;
             case LIST:
-                this.taskList.listTasks();
+                this.taskList.listTasks(true);
                 break;
             case DONE:
-                this.taskList.markAsDone(parsedInput.taskIndex);
+                this.taskList.markAsDone(parsedInput.taskIndex, true);
                 break;
             case DELETE:
-                this.taskList.removeTask(parsedInput.taskIndex);
+                this.taskList.removeTask(parsedInput.taskIndex, true);
                 break;
             case BYE:
                 this.bye();
@@ -71,6 +79,7 @@ public class Session {
 
     private void bye() {
         output(GOODBYE_OUTPUT);
+        this.outputWriter.writeOutput(taskList);
         this.isActive = false;
     }
 }
