@@ -4,16 +4,32 @@ import java.io.IOException;
 import java.util.List;
 
 public class Parser {
-    public TaskList taskList;
-    public UserInterface userInterface;
-    public Storage storage;
+    private TaskList taskList;
+    private UserInterface userInterface;
+    private Storage storage;
 
+    /**
+     * Creates a Parser Object.
+     *
+     * @param taskList
+     * @param userInterface
+     * @param storage
+     */
     public Parser(TaskList taskList, UserInterface userInterface, Storage storage) {
         this.storage = storage;
         this.taskList = taskList;
         this.userInterface = userInterface;
     }
 
+    /**
+     * Parses user input and executes the appropriate commands.
+     *
+     * @param input
+     * @throws InvalidCommandException
+     * @throws MissingToDoDescriptionException
+     * @throws MissingDeadlineDescriptionException
+     * @throws MissingEventDescriptionException
+     */
     public void parse(String input) throws InvalidCommandException,
             MissingToDoDescriptionException, MissingDeadlineDescriptionException,
             MissingEventDescriptionException {
@@ -54,6 +70,5 @@ public class Parser {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
     }
 }

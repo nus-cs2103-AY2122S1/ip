@@ -1,17 +1,23 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.*;
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Storage {
-    public String filePath;
-    public List<Task> tasks;
-    public File parentDir;
-    public File file;
+    private String filePath;
+    private List<Task> tasks;
+    private File parentDir;
+    private File file;
 
+    /**
+     * Creates a Storage Object with the associated file path.
+     *
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.tasks = new ArrayList<>();
@@ -19,6 +25,12 @@ public class Storage {
         this.file = new File(filePath);
     }
 
+    /**
+     * Loads the list of tasks if it exists.
+     *
+     * @return List of tasks.
+     * @throws IOException
+     */
     public List<Task> load() throws IOException {
         if (! parentDir.exists()) {
             parentDir.mkdirs();
@@ -57,6 +69,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes to the storage.
+     *
+     * @throws IOException
+     */
     public void write() throws IOException {
         FileWriter fw = new FileWriter(file);
         for (int i = 0; i < tasks.size(); i++) {

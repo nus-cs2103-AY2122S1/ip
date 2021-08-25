@@ -5,14 +5,26 @@ import java.util.*;
 public class TaskList {
     List<Task> taskList;
 
+    /**
+     *
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param tasks
+     */
     public TaskList(List<Task> tasks) {
         this.taskList = tasks;
     }
 
+    /**
+     *
+     * @param input
+     * @return
+     */
     public Task addItem(String input) {
         Task t;
 
@@ -34,6 +46,11 @@ public class TaskList {
         return t;
     }
 
+    /**
+     *
+     * @param index
+     * @return
+     */
     public Task deleteItem(int index) {
         Task t = getTask(index);
         taskList.remove(index);
@@ -41,12 +58,26 @@ public class TaskList {
         return t;
     }
 
+    /**
+     *
+     * @param index
+     * @return
+     */
     public Task getTask(int index) {
         return taskList.get(index);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSize() { return taskList.size(); }
 
+    /**
+     *
+     * @param keyword
+     * @return
+     */
     public List<Task> find (String keyword) {
         List<Task> results = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
@@ -59,6 +90,10 @@ public class TaskList {
         return results;
     }
 
+    /**
+     *
+     * @param index
+     */
     public void markAsDone(int index) {
         Task t = getTask(index);
         t.setDone();

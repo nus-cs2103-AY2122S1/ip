@@ -1,15 +1,18 @@
 package duke;
-import java.io.File;
-import java.io.FileWriter;
+
 import java.io.IOException;
 import java.util.*;
 
 public class Duke {
-    public TaskList taskList;
-    public UserInterface userInterface;
-    public Storage storage;
-    public Parser parser;
+    private TaskList taskList;
+    private UserInterface userInterface;
+    private Storage storage;
+    private Parser parser;
 
+    /**
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
         userInterface = new UserInterface();
         storage = new Storage(filePath);
@@ -26,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     *
+     */
     public void run() {
         userInterface.greet();
 
@@ -44,6 +50,10 @@ public class Duke {
         }
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         String s = System.getProperty("user.dir");
         new Duke(s+ "/data/duke.txt").run();
