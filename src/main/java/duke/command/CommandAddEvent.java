@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Ui;
 import task.TaskDeadline;
 import task.TaskEvent;
 import task.TaskList;
@@ -25,6 +26,11 @@ public class CommandAddEvent extends Command{
     public CommandAddEvent(TaskList taskList, Matcher groups) {
         this.commandName = "event <string> /at DD/MM/YYYY xxxxH";
         this.description = "Creates a deadline task (Optional time argument)";
+        this.arguments = new String[]{
+                "<string> Description of Event",
+                "/at Date in Day/Month/Year format",
+                "Optional time argument (24 Hour format)"
+        };
 
         this.taskList = taskList;
         input = groups;

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Ui;
 import task.TaskList;
 import task.TaskTodo;
 
@@ -20,6 +21,9 @@ public class CommandAddTodo extends Command {
     public CommandAddTodo(TaskList taskList, String desc) {
         this.commandName = "todo <string>";
         this.description = "Creates a to-do task";
+        this.arguments = new String[]{
+                "<string> Description of to-do"
+        };
 
         this.taskList = taskList;
         this.desc = desc;

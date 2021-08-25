@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Ui;
 import task.TaskDeadline;
 import task.TaskEvent;
 import task.TaskList;
@@ -24,8 +25,13 @@ public class CommandAddDeadline extends Command {
      * @param groups Matcher with info needed to create the class
      */
     public CommandAddDeadline(TaskList taskList, Matcher groups) {
-        this.commandName = "deadline <string> /by DD/MM/YYYY xxxxH";
-        this.description = "Creates a deadline task (Optional time argument)";
+        this.commandName = "deadline <string> /by DD/MM/YYYY xxxx";
+        this.description = "Creates a deadline task";
+        this.arguments = new String[]{
+                "<string> Description of Deadline",
+                "/by Date in Day/Month/Year format",
+                "Optional time argument (24 Hour format)"
+        };
 
         this.taskList = taskList;
         input = groups;

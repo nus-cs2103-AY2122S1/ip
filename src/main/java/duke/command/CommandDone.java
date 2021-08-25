@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Ui;
 import task.TaskList;
 
 /**
@@ -18,6 +19,9 @@ public class CommandDone extends Command {
     public CommandDone(TaskList taskList, int index) {
         this.commandName = "done <index>";
         this.description = "Toggles completion of task";
+        this.arguments = new String[]{
+                "<index> Number, (un)completes task at index as displayed in list command"
+        };
 
         this.taskList = taskList;
         this.index = index;

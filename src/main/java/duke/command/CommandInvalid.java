@@ -17,6 +17,7 @@ public class CommandInvalid extends Command {
     public CommandInvalid(String input) {
         this.description = "";
         this.commandName = "";
+        this.arguments = new String[]{};
         this.input = input;
     }
 

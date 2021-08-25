@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Ui;
 import task.Task;
 import task.TaskList;
 
@@ -24,8 +25,13 @@ public class CommandList extends Command {
      * @param args un-parsed list of filters
      */
     public CommandList(TaskList taskList, String args) {
-        this.commandName = "done <index>";
+        this.commandName = "list /name <name> /date DD/MM/YYYY";
         this.description = "Toggles completion of task";
+        this.arguments = new String[]{
+                "/name Optional argument to search for particular name",
+                "/date Optional date argument in DAY/MONTH/YEAR, " +
+                        "to search for tasks on a particular date"
+        };
 
         this.taskList = taskList;
         this.args = args;
