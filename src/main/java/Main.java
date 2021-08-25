@@ -1,7 +1,4 @@
-import duke.commands.Deadline;
-import duke.commands.Event;
-import duke.commands.Task;
-import duke.commands.Todo;
+import duke.commands.*;
 import duke.data.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -16,12 +13,14 @@ public class Main {
     private Ui ui;
     private TaskList taskList;
     private Parser parser;
+    private Find finder;
 
     public Main() {
         this.storage = new Storage();
         this.ui = new Ui();
         this.taskList = new TaskList(storage.Load());
         this.parser = new Parser();
+        this.finder = new Find();
     }
 
     public void run() {
@@ -74,6 +73,14 @@ public class Main {
                 } catch (NumberFormatException e2) {
                     DukeException newException = new DukeException("Please input a number!");
                     ui.PrintMessage(newException.getMessage());
+                }
+            } else if (this.parser.isFind(splitInput[0])){
+                try {
+                    this.parser.parseFind(splitInput);
+                    TaskList matched = this.finder.findMatch(splitInput[1], taskList);
+                    ui.PrintFind(matched);
+                } catch (DukeException e) {
+                    ui.PrintMessage(e.getMessage());
                 }
             } else {
                 try {
