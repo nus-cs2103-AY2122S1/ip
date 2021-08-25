@@ -33,7 +33,7 @@ public class Deadline extends Task{
 
     /**
      * Returns the file's details in the format "D,<isDone>,<desc>,<time>"
-     * to be stored in the hard disk
+     * to be stored in the hard disk.
      *
      * @return formatted string containing task details
      */

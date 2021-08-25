@@ -34,7 +34,7 @@ public class Event extends Task{
 
     /**
      * Returns the file's details in the format "E,<isDone>,<desc>,<time>"
-     * to be stored in the hard disk
+     * to be stored in the hard disk.
      *
      * @return formatted string containing task details
      */
