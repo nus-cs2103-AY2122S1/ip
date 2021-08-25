@@ -1,124 +1,169 @@
-____________________________________________________________
-Hello I'm Duke
-What can I do for you?
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
+                 |`._         |\
+                 `   `.  .    | `.    |`.
+                  .    `.|`-. |   `-..'  \           _,.-'
+                  '      `-. `.           \ /|   _,-'   /
+              .--..'        `._`           ` |.-'      /
+               \   |                                  /
+            ,..'   '                                 /
+            `.                                      /
+            _`.---                                 /
+        _,-'               `.                 ,-  /"-._
+      ,"                   | `.             ,'|   `    `.
+    .'                     |   `.         .'  |    .     `.
+  ,'                       '   ()`.     ,'()  '    |       `.
+'-.                    |`.  `.....-'    -----' _   |         .
+ / ,   ________..'     '  `-._              _.'/   |         :
+ ` '-"" _,.--"'         \   | `"+--......-+' //   j `"--.. , '
+    `.'"    .'           `. |   |     |   / //    .       ` '
+      `.   /               `'   |    j   /,.'     '
+        \ /                  `-.|_   |_.-'       /\
+         /                        `""          .'  \
+        j                                           .
+        |                                 _,        |
+        |             ,^._            _.-"          '
+        |          _.'    `'""`----`"'   `._       '
+        j__     _,'                         `-.'-."`
+          ',-.,' mh
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
+Whats'up ma dawg?
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
+
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
+Finding previous save file...
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
+
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
+No save file found, making a new one
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
+
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
+What can I do for you ma dawg?
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
+
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Here are the tasks in your list:
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Got it. I've added this task:
   [T][ ] debug code
 Now you have 1 tasks in the list
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Got it. I've added this task:
-  [D][ ] ip project (by: Sunday)
+  [D][ ] ip project (by: Mon, 30 Aug 2021 11:59PM)
 Now you have 2 tasks in the list
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Invalid or Missing Arguments
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Got it. I've added this task:
   [T][ ] take a break
 Now you have 3 tasks in the list
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Invalid or Missing Arguments
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Nice! I've marked this task as done:
   [T][X] debug code
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Noted. I've removed this task:
   [T][X] debug code
 Now you have 2 tasks in the list
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Got it. I've added this task:
-  [E][ ] CS2103T Lecture (at: Friday 1600)
+  [E][ ] CS2103T Lecture (at: Fri, 27 Aug 2021 04:00PM)
 Now you have 3 tasks in the list
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Here are the tasks in your list:
-  1.[D][ ] ip project (by: Sunday)
+  1.[D][ ] ip project (by: Mon, 30 Aug 2021 11:59PM)
   2.[T][ ] take a break
-  3.[E][ ] CS2103T Lecture (at: Friday 1600)
-____________________________________________________________
+  3.[E][ ] CS2103T Lecture (at: Fri, 27 Aug 2021 04:00PM)
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Got it. I've added this task:
-  [E][ ] meet up with Adolph Blaine Charles David Earl Frederick Gerald Hubert Irvin John Kenneth Lloyd Martin Nero Oliver Paul Quincy Randolph Sherman Thomas Uncas Victor William Xerxes Yancy Zeus Wolfeschlegelsteinhausenbergerdorffwelchevoralternwarengewissenhaftschaferswessenschafewarenwohlgepflegeundsorgfaltigkeitbeschutzenvonangreifendurchihrraubgierigfeindewelchevoralternzwolftausendjahresvorandieerscheinenvanderersteerdemenschderraumschiffgebrauchlichtalsseinursprungvonkraftgestartseinlangefahrthinzwischensternartigraumaufdersuchenachdiesternwelchegehabtbewohnbarplanetenkreisedrehensichundwohinderneurassevonverstandigmenschlichkeitkonntefortpflanzenundsicherfreuenanlebenslanglichfreudeundruhemitnichteinfurchtvorangreifenvonandererintelligentgeschopfsvonhinzwischensternartigraum (at: Sunday 12pm)
+  [E][ ] meet up with Adolph Blaine Charles David Earl Frederick Gerald Hubert Irvin John Kenneth Lloyd Martin Nero Oliver Paul Quincy Randolph Sherman Thomas Uncas Victor William Xerxes Yancy Zeus Wolfeschlegelsteinhausenbergerdorffwelchevoralternwarengewissenhaftschaferswessenschafewarenwohlgepflegeundsorgfaltigkeitbeschutzenvonangreifendurchihrraubgierigfeindewelchevoralternzwolftausendjahresvorandieerscheinenvanderersteerdemenschderraumschiffgebrauchlichtalsseinursprungvonkraftgestartseinlangefahrthinzwischensternartigraumaufdersuchenachdiesternwelchegehabtbewohnbarplanetenkreisedrehensichundwohinderneurassevonverstandigmenschlichkeitkonntefortpflanzenundsicherfreuenanlebenslanglichfreudeundruhemitnichteinfurchtvorangreifenvonandererintelligentgeschopfsvonhinzwischensternartigraum (at: Mon, 06 Sep 2021 12:00PM)
 Now you have 4 tasks in the list
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Invalid or Missing Arguments
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Nice! I've marked this task as done:
-  [E][X] meet up with Adolph Blaine Charles David Earl Frederick Gerald Hubert Irvin John Kenneth Lloyd Martin Nero Oliver Paul Quincy Randolph Sherman Thomas Uncas Victor William Xerxes Yancy Zeus Wolfeschlegelsteinhausenbergerdorffwelchevoralternwarengewissenhaftschaferswessenschafewarenwohlgepflegeundsorgfaltigkeitbeschutzenvonangreifendurchihrraubgierigfeindewelchevoralternzwolftausendjahresvorandieerscheinenvanderersteerdemenschderraumschiffgebrauchlichtalsseinursprungvonkraftgestartseinlangefahrthinzwischensternartigraumaufdersuchenachdiesternwelchegehabtbewohnbarplanetenkreisedrehensichundwohinderneurassevonverstandigmenschlichkeitkonntefortpflanzenundsicherfreuenanlebenslanglichfreudeundruhemitnichteinfurchtvorangreifenvonandererintelligentgeschopfsvonhinzwischensternartigraum (at: Sunday 12pm)
-____________________________________________________________
+  [E][X] meet up with Adolph Blaine Charles David Earl Frederick Gerald Hubert Irvin John Kenneth Lloyd Martin Nero Oliver Paul Quincy Randolph Sherman Thomas Uncas Victor William Xerxes Yancy Zeus Wolfeschlegelsteinhausenbergerdorffwelchevoralternwarengewissenhaftschaferswessenschafewarenwohlgepflegeundsorgfaltigkeitbeschutzenvonangreifendurchihrraubgierigfeindewelchevoralternzwolftausendjahresvorandieerscheinenvanderersteerdemenschderraumschiffgebrauchlichtalsseinursprungvonkraftgestartseinlangefahrthinzwischensternartigraumaufdersuchenachdiesternwelchegehabtbewohnbarplanetenkreisedrehensichundwohinderneurassevonverstandigmenschlichkeitkonntefortpflanzenundsicherfreuenanlebenslanglichfreudeundruhemitnichteinfurchtvorangreifenvonandererintelligentgeschopfsvonhinzwischensternartigraum (at: Mon, 06 Sep 2021 12:00PM)
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Invalid or Missing Arguments
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
-Invalid or Missing Arguments
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
+Got it. I've added this task:
+  [D][ ] brush teeth (by: Sun, 01 Jan 1111 11:11AM)
+Now you have 5 tasks in the list
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Nice! I've marked this task as done:
   [T][X] take a break
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Invalid or Missing Arguments
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Here are the tasks in your list:
-  1.[D][ ] ip project (by: Sunday)
+  1.[D][ ] ip project (by: Mon, 30 Aug 2021 11:59PM)
   2.[T][X] take a break
-  3.[E][ ] CS2103T Lecture (at: Friday 1600)
-  4.[E][X] meet up with Adolph Blaine Charles David Earl Frederick Gerald Hubert Irvin John Kenneth Lloyd Martin Nero Oliver Paul Quincy Randolph Sherman Thomas Uncas Victor William Xerxes Yancy Zeus Wolfeschlegelsteinhausenbergerdorffwelchevoralternwarengewissenhaftschaferswessenschafewarenwohlgepflegeundsorgfaltigkeitbeschutzenvonangreifendurchihrraubgierigfeindewelchevoralternzwolftausendjahresvorandieerscheinenvanderersteerdemenschderraumschiffgebrauchlichtalsseinursprungvonkraftgestartseinlangefahrthinzwischensternartigraumaufdersuchenachdiesternwelchegehabtbewohnbarplanetenkreisedrehensichundwohinderneurassevonverstandigmenschlichkeitkonntefortpflanzenundsicherfreuenanlebenslanglichfreudeundruhemitnichteinfurchtvorangreifenvonandererintelligentgeschopfsvonhinzwischensternartigraum (at: Sunday 12pm)
-____________________________________________________________
+  3.[E][ ] CS2103T Lecture (at: Fri, 27 Aug 2021 04:00PM)
+  4.[E][X] meet up with Adolph Blaine Charles David Earl Frederick Gerald Hubert Irvin John Kenneth Lloyd Martin Nero Oliver Paul Quincy Randolph Sherman Thomas Uncas Victor William Xerxes Yancy Zeus Wolfeschlegelsteinhausenbergerdorffwelchevoralternwarengewissenhaftschaferswessenschafewarenwohlgepflegeundsorgfaltigkeitbeschutzenvonangreifendurchihrraubgierigfeindewelchevoralternzwolftausendjahresvorandieerscheinenvanderersteerdemenschderraumschiffgebrauchlichtalsseinursprungvonkraftgestartseinlangefahrthinzwischensternartigraumaufdersuchenachdiesternwelchegehabtbewohnbarplanetenkreisedrehensichundwohinderneurassevonverstandigmenschlichkeitkonntefortpflanzenundsicherfreuenanlebenslanglichfreudeundruhemitnichteinfurchtvorangreifenvonandererintelligentgeschopfsvonhinzwischensternartigraum (at: Mon, 06 Sep 2021 12:00PM)
+  5.[D][ ] brush teeth (by: Sun, 01 Jan 1111 11:11AM)
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
-Got it. I've added this task:
-  [D][ ] do homework (by: no idea :-p)
-Now you have 5 tasks in the list
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
+Invalid or Missing Arguments
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Noted. I've removed this task:
-  [D][ ] do homework (by: no idea :-p)
+  [D][ ] brush teeth (by: Sun, 01 Jan 1111 11:11AM)
 Now you have 4 tasks in the list
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 Here are the tasks in your list:
-  1.[D][ ] ip project (by: Sunday)
+  1.[D][ ] ip project (by: Mon, 30 Aug 2021 11:59PM)
   2.[T][X] take a break
-  3.[E][ ] CS2103T Lecture (at: Friday 1600)
-  4.[E][X] meet up with Adolph Blaine Charles David Earl Frederick Gerald Hubert Irvin John Kenneth Lloyd Martin Nero Oliver Paul Quincy Randolph Sherman Thomas Uncas Victor William Xerxes Yancy Zeus Wolfeschlegelsteinhausenbergerdorffwelchevoralternwarengewissenhaftschaferswessenschafewarenwohlgepflegeundsorgfaltigkeitbeschutzenvonangreifendurchihrraubgierigfeindewelchevoralternzwolftausendjahresvorandieerscheinenvanderersteerdemenschderraumschiffgebrauchlichtalsseinursprungvonkraftgestartseinlangefahrthinzwischensternartigraumaufdersuchenachdiesternwelchegehabtbewohnbarplanetenkreisedrehensichundwohinderneurassevonverstandigmenschlichkeitkonntefortpflanzenundsicherfreuenanlebenslanglichfreudeundruhemitnichteinfurchtvorangreifenvonandererintelligentgeschopfsvonhinzwischensternartigraum (at: Sunday 12pm)
-____________________________________________________________
+  3.[E][ ] CS2103T Lecture (at: Fri, 27 Aug 2021 04:00PM)
+  4.[E][X] meet up with Adolph Blaine Charles David Earl Frederick Gerald Hubert Irvin John Kenneth Lloyd Martin Nero Oliver Paul Quincy Randolph Sherman Thomas Uncas Victor William Xerxes Yancy Zeus Wolfeschlegelsteinhausenbergerdorffwelchevoralternwarengewissenhaftschaferswessenschafewarenwohlgepflegeundsorgfaltigkeitbeschutzenvonangreifendurchihrraubgierigfeindewelchevoralternzwolftausendjahresvorandieerscheinenvanderersteerdemenschderraumschiffgebrauchlichtalsseinursprungvonkraftgestartseinlangefahrthinzwischensternartigraumaufdersuchenachdiesternwelchegehabtbewohnbarplanetenkreisedrehensichundwohinderneurassevonverstandigmenschlichkeitkonntefortpflanzenundsicherfreuenanlebenslanglichfreudeundruhemitnichteinfurchtvorangreifenvonandererintelligentgeschopfsvonhinzwischensternartigraum (at: Mon, 06 Sep 2021 12:00PM)
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 
-____________________________________________________________
-Bye. Hope to see you again soon!
-____________________________________________________________
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
+File saved
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
+
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
+Cya next time ma dawg.
+69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969
 

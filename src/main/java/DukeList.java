@@ -8,6 +8,10 @@ public class DukeList implements Iterable<Task> {
         list = new ArrayList<>();
     }
 
+    public DukeList(ArrayList<Task> list) {
+        this.list = list;
+    }
+
     public Task get(int i) {
         return list.get(i);
     }
