@@ -78,6 +78,10 @@ public class Task {
         return null;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public void setDone(boolean isDone) {
         this.isDone = isDone;
     }

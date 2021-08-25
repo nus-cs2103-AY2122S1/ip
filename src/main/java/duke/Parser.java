@@ -211,6 +211,10 @@ public class Parser {
                 }
                 return;
             }
+            case "find": {
+                Ui.printMessage(taskList.printList(description));
+                return;
+            }
             default: {
                 throw new InvalidCommandException();
             }
