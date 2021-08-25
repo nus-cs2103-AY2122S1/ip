@@ -7,7 +7,7 @@ import duke.Ui;
 import duke.task.Task;
 import duke.task.Todo;
 
-public class TodoCommand extends Command{
+public class TodoCommand extends Command {
     private static final String COMMAND_WORD = "todo";
 
     @Override

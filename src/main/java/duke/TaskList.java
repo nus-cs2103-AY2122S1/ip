@@ -22,6 +22,7 @@ public class TaskList {
 
     /**
      * Adds a task to the task list.
+     *
      * @param task Task to be added to the list.
      */
     public void add(Task task) {
@@ -60,6 +61,7 @@ public class TaskList {
 
     /**
      * Formats the task list for display.
+     *
      * @return Formatted task list in a string.
      */
     @Override

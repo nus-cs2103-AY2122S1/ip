@@ -44,6 +44,7 @@ public abstract class Task {
 
     /**
      * Gets a single letter representing the type of the task.
+     *
      * @return Returns the type of the task.
      */
     abstract public String getType();

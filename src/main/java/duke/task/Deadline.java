@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     public static final String IDENTIFIER = "D";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
-    private LocalDateTime date;
+    private final LocalDateTime date;
 
     public Deadline(String description, LocalDateTime date) {
         super(description);

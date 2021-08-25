@@ -3,11 +3,11 @@ package duke.command;
 import duke.Duke;
 import duke.DukeException;
 import duke.Parser;
+import duke.Ui;
 import duke.task.Event;
 import duke.task.Task;
-import duke.Ui;
 
-public class EventCommand extends Command{
+public class EventCommand extends Command {
     private static final String COMMAND_WORD = "event";
 
     @Override
