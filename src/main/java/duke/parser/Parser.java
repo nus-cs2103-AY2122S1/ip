@@ -35,7 +35,8 @@ public class Parser {
      */
 
     public void handleCommands(String input) {
-        String[] words = input.split(" "); // isolates the command word
+        // isolates the command word
+        String[] words = input.split(" ");
         String command = words[0];
 
         try {
@@ -48,6 +49,8 @@ public class Parser {
                     // throws an error if there is no message input after the command word
                     throw new MessageEmptyException();
                 }
+
+                // extracts index of task to mark as done
                 String doneTaskIndex = words[words.length - 1];
                 taskList.markDone(doneTaskIndex);
                 break;
@@ -68,6 +71,7 @@ public class Parser {
                     // throws an error if there is no message input after the command word
                     throw new MessageEmptyException();
                 }
+
                 // excludes command "todo" from the string
                 taskList.addTodo(input.substring(5));
                 break;
@@ -84,6 +88,8 @@ public class Parser {
                     // throws an error if there is no message input after the command word
                     throw new MessageEmptyException();
                 }
+
+                // extracts index of task to delete
                 String deleteTaskIndex = words[words.length - 1];
                 taskList.deleteTask(deleteTaskIndex);
                 break;
@@ -93,7 +99,7 @@ public class Parser {
                 throw new InvalidCommandException();
             }
         } catch (DukeException e) {
-            Ui.printMessage(e.getMessage());     // prints only error message out for user
+            Ui.printMessage(e.getMessage());        // prints only error message out for user
         }
     }
 }

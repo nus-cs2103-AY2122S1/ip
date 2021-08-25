@@ -71,7 +71,7 @@ public class Storage {
 
         ArrayList<Task> taskList = new ArrayList<>();
 
-        // creates file if not present, else it does nothing
+        // if file not present it creates a file, else it does nothing
         if (file.createNewFile()) {
             // exit method if a new file is created
             return taskList;
@@ -98,13 +98,14 @@ public class Storage {
                 } catch (DataFileChangedException e) {
                     throw new DataFileChangedException();
                 }
-            case 'T':                                                // todos
-                task = new Todo(nextCommand.substring(7));          // disregards [T][X]
+            case 'T':                                                   // todos
+                task = new Todo(nextCommand.substring(7));              // disregards [T][X]
                 break;
             default:
                 throw new DataFileChangedException();
             }
 
+            // check if marked as done
             if (nextCommand.charAt(4) == 'X') {
                 task.markAsDone();
             }
@@ -113,6 +114,7 @@ public class Storage {
         }
 
         sc.close();
+
         return taskList;
     }
 
@@ -155,11 +157,16 @@ public class Storage {
         // disregards "( at: " and trailing ")"
         String at = text.substring(lastOccurrenceOfAt + 6, text.length() - 1);
 
+        // prepare variables
+        String atWithoutWhiteSpace = at.replaceAll("\\s", "");
+        int lengthOfAtNoSpace = atWithoutWhiteSpace.length();
+
         // throws error if it doesn't even contain sufficient number of characters for correct format
-        if (at.replaceAll("\\s", "").length() < 22 || at.replaceAll("\\s", "").length() > 25) { // MMM d yyyy, HH:mm - HH:mm
+        if (lengthOfAtNoSpace < 22 || lengthOfAtNoSpace > 25) { // MMM d yyyy, HH:mm - HH:mm
             throw new DataFileChangedException();
         }
 
+        // find start and end times
         int indexOfComma = at.indexOf(',');
         String date = at.substring(0, indexOfComma).trim(); // at this point, date contains 10 chars YYYY/MM/DD
         String eventDuration = at.substring(indexOfComma + 1).trim();

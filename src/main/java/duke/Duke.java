@@ -75,8 +75,8 @@ public class Duke {
         String input;
         Scanner sc = new Scanner(System.in);
 
-        // user input trimmed to remove unwanted spaces at the front and back of user input
-        // allows for greater margin of error when typing in commands
+        /* user input trimmed to remove unwanted spaces at the front and back of user input
+        allows for greater margin of error when typing in commands */
         while(!(input = sc.nextLine().trim()).equals("bye")) {
             // continuously runs the bot as long as the "bye" command is not issued
             parser.handleCommands(input);
