@@ -12,9 +12,10 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
 
-    private static Command parseCommandWithTime(String[] splitted, String taskType) throws DukeException {
-        String timeFormat = taskType.equals("event") ? "yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm" : "yyyy-MM-dd HH:mm";
-        String regex = taskType.equals("event") ? "/at" : "/by";
+    private static Command parseCommandWithTime(String[] splitted, boolean isEvent) throws DukeException {
+        String timeFormat = isEvent ? "yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm" : "yyyy-MM-dd HH:mm";
+        String regex = isEvent ? "/at" : "/by";
+        String taskType = isEvent ? "event" : "deadline";
         if (splitted.length >= 2) {
             String[] information = splitted[1].split(regex);
             if (information.length == 2) {
@@ -34,6 +35,15 @@ public class Parser {
         }
     }
 
+    private static Command parseCommandWithTaskNo(String[] splitted, boolean isDoneCommand) throws DukeException {
+        try {
+            int index = Integer.parseInt(splitted[1]) - 1;
+            return isDoneCommand ? new TaskDoneCommand(index) : new DeleteTaskCommand(index);
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            throw new InvalidTaskNoException();
+        }
+    }
+
     /**
      * Based on the command received, either quit the program or process an event.
      */
@@ -45,11 +55,9 @@ public class Parser {
         } else if (command.equals("list")) {
             return new GetListCommand();
         } else if (splitted[0].equals("done")) {
-            int index = Integer.parseInt(splitted[1]) - 1;
-            return new TaskDoneCommand(index);
+            return parseCommandWithTaskNo(splitted, true);
         } else if (splitted[0].equals("delete")) {
-            int index = Integer.parseInt(splitted[1]) - 1;
-            return new DeleteTaskCommand(index);
+            return parseCommandWithTaskNo(splitted, false);
         } else if (splitted[0].equals("todo")) {
             if (splitted.length >= 2) {
                 return new AddTaskCommand(new ToDo(splitted[1]));
@@ -57,9 +65,9 @@ public class Parser {
                 throw new MissingCommandDetailException("description","todo", "");
             }
         } else if (splitted[0].equals("deadline")) {
-            return Parser.parseCommandWithTime(splitted, "deadline");
+            return Parser.parseCommandWithTime(splitted, false);
         } else if (splitted[0].equals("event")) {
-            return Parser.parseCommandWithTime(splitted, "event");
+            return Parser.parseCommandWithTime(splitted, true);
         } else {
             throw new InvalidCommandException();
         }
