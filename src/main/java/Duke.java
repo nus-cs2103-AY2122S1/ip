@@ -1,9 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
 
     private static ArrayList<Task> toDoList = new ArrayList<>();
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -92,8 +96,15 @@ public class Duke {
                 } else if (!parsedUserInput[1].contains("/by")) {
                     throw new DukeException("Please include the keyword \"/by\" if you want to add a deadline.");
                 } else {
-                    String[] parsedDeadlineInput = parsedUserInput[1].split("/by", 2);
-                    Task newTask = new Deadline(parsedDeadlineInput[0], parsedDeadlineInput[1]);
+                    String[] parsedDeadlineInput = parsedUserInput[1].split("/by ", 2);
+                    String date = parsedDeadlineInput[1];
+                    LocalDate localDate;
+                    try {
+                        localDate = LocalDate.parse(date, formatter);
+                    } catch (DateTimeParseException e) {
+                        throw new DukeException("Please write the date in this format: dd/MM/yyyy");
+                    }
+                    Task newTask = new Deadline(parsedDeadlineInput[0], localDate);
                     addTaskToList(newTask, parsedUserInput[1]);
                 }
             } else if (parsedUserInput[0].equals("event")) { // Add event
@@ -102,8 +113,15 @@ public class Duke {
                 } else if (!parsedUserInput[1].contains("/at")) {
                     throw new DukeException("Please include the keyword \"/at\" if you want to add an event.");
                 } else {
-                    String[] parsedDeadlineInput = parsedUserInput[1].split("/at", 2);
-                    Task newTask = new Event(parsedDeadlineInput[0], parsedDeadlineInput[1]);
+                    String[] parsedDeadlineInput = parsedUserInput[1].split("/at ", 2);
+                    String date = parsedDeadlineInput[1];
+                    LocalDate localDate;
+                    try {
+                        localDate = LocalDate.parse(date, formatter);
+                    } catch (DateTimeParseException e) {
+                        throw new DukeException("Please write the date in this format: dd/MM/yyyy");
+                    }
+                    Task newTask = new Event(parsedDeadlineInput[0], localDate);
                     addTaskToList(newTask, parsedUserInput[1]);
                 }
             } else {
