@@ -9,6 +9,9 @@ import bot.Bot;
 import bot.Ui;
 import exceptions.InvalidArgumentsException;
 
+/**
+ * Command for adding an event task to the bot
+ */
 public class EventCommand extends Command {
 
     @Override

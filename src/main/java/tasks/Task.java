@@ -5,10 +5,13 @@ import java.time.format.DateTimeFormatter;
 
 import bot.TaskType;
 
+/**
+ * Abstract task class
+ */
 public abstract class Task {
 
     public boolean done = false;
-    public static final DateTimeFormatter INPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm"); // kkmm
+    public static final DateTimeFormatter INPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
     public static final DateTimeFormatter OUTPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy - hh mm a");
 
     /**
@@ -27,10 +30,22 @@ public abstract class Task {
         return this.done;
     }
 
+    /**
+     * Convert task object to string
+     *
+     * @return String representing task
+     */
     public String serialize() {
         return String.format("%s,%b,%s,%s", this.getTaskType(), this.getTaskDone(), this.getTaskText(), this.getTaskTime());
     }
 
+    /**
+     * Convert string representation of task
+     * to task object
+     *
+     * @param s string representation of task
+     * @return task object represented by string
+     */
     public static Task deserialize(String s) {
         String[] parts = s.split(",");
         TaskType taskType = TaskType.valueOf(parts[0]);
@@ -73,9 +88,24 @@ public abstract class Task {
      */
     abstract String getTaskDesc();
 
+    /**
+     * Get text associated with task
+     *
+     * @return Task's text
+     */
     abstract String getTaskText();
 
+    /**
+     * Get time associated with task
+     *
+     * @return Task's time
+     */
     abstract String getTaskTime();
 
+    /**
+     * Get task's TaskType
+     *
+     * @return Task's TaskType
+     */
     abstract TaskType getTaskType();
 }

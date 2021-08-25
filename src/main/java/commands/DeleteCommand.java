@@ -4,6 +4,9 @@ import bot.Bot;
 import bot.Ui;
 import exceptions.InvalidTaskException;
 
+/**
+ * Command to delete a command from the bot
+ */
 public class DeleteCommand extends Command {
 
     @Override

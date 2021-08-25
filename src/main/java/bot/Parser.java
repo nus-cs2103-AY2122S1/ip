@@ -24,6 +24,12 @@ public class Parser {
         return reader.nextLine();
     }
 
+    /**
+     * Converts input string to Command
+     *
+     * @param input user input
+     * @return Command matching input
+     */
     public static Command commandFromString(String input) {
         String[] inputArr = input.split(" ", 2);
         Command cmd = CommandType.getCommandFromName(inputArr[0]);
@@ -31,6 +37,12 @@ public class Parser {
         return cmd;
     }
 
+    /**
+     * Combines receiving user input and converting
+     * it to a command
+     *
+     * @return Command corresponding to user input
+     */
     public static Command getCommand() {
         return commandFromString(getInput());
     }

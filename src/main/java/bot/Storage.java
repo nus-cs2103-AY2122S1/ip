@@ -6,6 +6,9 @@ import java.util.List;
 
 import tasks.Task;
 
+/**
+ * Handles saving and loading bot data
+ */
 public class Storage {
 
     public static final String savefilePath = "data/save.txt";
@@ -37,10 +40,20 @@ public class Storage {
         }
     }
 
+    /**
+     * Save bot's task list
+     *
+     * @param bot running bot
+     */
     public static void save(Bot bot) {
         Storage.write(bot.taskList.getTaskStringList());
     }
 
+    /**
+     * Load saved data to bot's saved list
+     *
+     * @param bot running bot
+     */
     public static void load(Bot bot) {
         List<Task> tasks = new ArrayList<>();
         List<String> taskStrings = Storage.read();

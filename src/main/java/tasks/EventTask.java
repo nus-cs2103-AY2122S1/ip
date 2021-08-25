@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 
 import bot.TaskType;
 
+/**
+ * Event task
+ */
 public class EventTask extends Task {
 
     private final String taskText;

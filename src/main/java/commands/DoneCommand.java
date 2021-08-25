@@ -5,6 +5,9 @@ import bot.Bot;
 import bot.Ui;
 import exceptions.InvalidTaskException;
 
+/**
+ * Command to mark a task as done
+ */
 public class DoneCommand extends Command {
 
     @Override

@@ -13,6 +13,9 @@ import commands.EventCommand;
 import commands.ListCommand;
 import commands.TodoCommand;
 
+/**
+ * Types of Commands
+ */
 public enum CommandType {
 
     BYE("bye", new ByeCommand()), LIST("list", new ListCommand()),
@@ -24,7 +27,7 @@ public enum CommandType {
     private final Command command;
     private final String name;
 
-    // Map to retrieve enum value from name string
+    /** Map to retrieve enum value from name string **/
     private static final Map<String, CommandType> hash = new HashMap<>();
 
     static {

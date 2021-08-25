@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 
 import bot.TaskType;
 
+/**
+ * Deadline task
+ */
 public class DeadlineTask extends Task {
 
     private final String taskText;

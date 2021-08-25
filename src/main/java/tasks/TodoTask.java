@@ -2,6 +2,9 @@ package tasks;
 
 import bot.TaskType;
 
+/**
+ * To-do task
+ */
 public class TodoTask extends Task {
 
     private final String taskDesc;
