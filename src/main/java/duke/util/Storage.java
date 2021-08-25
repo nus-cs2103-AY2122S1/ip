@@ -40,19 +40,22 @@ public class Storage {
         List<String> taskList = new ArrayList<>();
 
         try {
-            if (!Files.exists(directoryPath))
+            if (!Files.exists(directoryPath)) {
                 Files.createDirectory(directoryPath);
+            }
 
-            if (!Files.exists(filePath))
+            if (!Files.exists(filePath)) {
                 Files.createFile(filePath);
+            }
 
             taskList = Files.readAllLines(filePath);
         } catch (IOException | UnsupportedOperationException | SecurityException e) {
             new Ui().showError(e.getMessage());
         }
 
-        if (taskList.isEmpty())
+        if (taskList.isEmpty()) {
             throw new DukeException("Empty list");
+        }
 
         return taskList;
     }

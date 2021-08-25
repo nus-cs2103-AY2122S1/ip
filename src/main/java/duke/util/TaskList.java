@@ -35,8 +35,9 @@ public class TaskList {
      */
     public TaskList(List<String> storageLoad) throws DukeException {
 
-        if (storageLoad == null)
+        if (storageLoad == null) {
             throw new DukeException("Loading failed!");
+        }
 
         this.tasks = new ArrayList<>();
 
@@ -65,8 +66,9 @@ public class TaskList {
 
             // Add to the task list if and only if it is valid in data file
             if (task != null) {
-                if (isDone)
+                if (isDone) {
                     task.markAsDone();
+                }
                 this.tasks.add(task);
                 this.taskNum++;
             }

@@ -26,8 +26,9 @@ public class Parser {
         String[] commandComponents = fullCommand.split(" ", 2);
         String message = "The description of [%s] command cannot be empty.";
 
-        if (commandComponents.length < 2 || commandComponents[1].trim().isEmpty())
+        if (commandComponents.length < 2 || commandComponents[1].trim().isEmpty()) {
             throw new EmptyDescriptionException(String.format(message, commandComponents[0]));
+        }
 
         return commandComponents;
     }

@@ -45,14 +45,17 @@ public class AddCommand extends Command{
         String descriptionMessage = "The description of a %s is incomplete.";
         String dateMessage = "Please specify the date in yyyy-mm-dd format!";
 
-        if (this.taskType.equals("TODO"))
+        if (this.taskType.equals("TODO")) {
             return descriptionComponents;
+        }
 
-        if (descriptionComponents.length < 2 || descriptionComponents[1].trim().isEmpty())
+        if (descriptionComponents.length < 2 || descriptionComponents[1].trim().isEmpty()) {
             throw new IncompleteDescriptionException(String.format(descriptionMessage, this.taskType.toLowerCase()));
+        }
 
-        if (!descriptionComponents[1].matches("\\d{4}-\\d{2}-\\d{2}"))
+        if (!descriptionComponents[1].matches("\\d{4}-\\d{2}-\\d{2}")) {
             throw new InvalidDateFormatException(dateMessage);
+        }
 
         return descriptionComponents;
     }
