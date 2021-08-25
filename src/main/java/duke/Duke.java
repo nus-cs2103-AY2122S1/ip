@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.*;
+import java.lang.module.FindException;
 import java.util.Scanner;
 
 /**
@@ -25,7 +26,7 @@ public class Duke {
         try {
             tasks = storage.load();
         } catch (FileNotFoundException e) {
-            ui.showLoadingError();
+            ui.showLoadingErrorMessage();
             tasks = new TaskList();
         }
     }
@@ -46,7 +47,7 @@ public class Duke {
             try {
                 Parser p = new Parser(sc.nextLine(), ui, storage, tasks);
                 p.parseCommand();
-            } catch (DeleteException | DukeException | IOException | StringIndexOutOfBoundsException e) {
+            } catch (DeleteException | DukeException | IOException | StringIndexOutOfBoundsException | FindException e) {
                 System.out.println(e.getMessage());
             }
         }

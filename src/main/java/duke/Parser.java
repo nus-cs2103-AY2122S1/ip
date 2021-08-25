@@ -12,7 +12,7 @@ public class Parser {
     TaskList tasks;
 
     enum Activity {
-        TODO, DONE, EVENT, DELETE, DEADLINE, BYE, LIST, NORMAL
+        TODO, DONE, EVENT, DELETE, DEADLINE, BYE, LIST, NORMAL, FIND
     }
 
     /**
@@ -46,30 +46,25 @@ public class Parser {
      * @throws DeleteException If delete is incomplete.
      * @throws IOException If an input or output operation is failed or interpreted.
      */
-    public void parseCommand() throws DukeException, DeleteException, IOException {
+    public void parseCommand() throws DukeException, DeleteException, IOException, FindException {
 
         Activity activity;
         if (command.equals("bye")) {
             activity = Activity.BYE;
-
         } else if (command.equals("list")) {
             activity = Activity.LIST;
-
         } else if (command.startsWith("done")) {
             activity = Activity.DONE;
-
         } else if (command.startsWith("todo")) {
             activity = Activity.TODO;
-
         } else if (command.startsWith("event")) {
             activity = Activity.EVENT;
-
         } else if (command.startsWith("deadline")) {
             activity = Activity.DEADLINE;
-
         } else if (command.startsWith("delete")){
             activity = Activity.DELETE;
-
+        } else if (command.startsWith("find")) {
+            activity = Activity.FIND;
         } else {
             activity = Activity.NORMAL;
         }
@@ -146,6 +141,26 @@ public class Parser {
                 tasks.add(deadline);
                 ui.showTaskMessage(deadline, tasks);
                 storage.save(tasks);
+                break;
+            }
+            case FIND: {
+                TaskList matchingTasks = new TaskList();
+                String desc = command.substring(4);
+
+                if (desc.isEmpty()) {
+                    throw new FindException();
+                }
+
+                for (Task t : tasks) {
+                    if (t.toString().contains(desc)) {
+                        matchingTasks.add(t);
+                    }
+                }
+                if (matchingTasks.isEmpty()) {
+                    ui.showNothingFoundMessage();
+                } else {
+                    ui.showListMessage("matching", matchingTasks);
+                }
                 break;
             }
             default: {

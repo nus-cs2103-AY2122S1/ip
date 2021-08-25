@@ -55,6 +55,15 @@ public class Ui {
      * @param currentTask The task added.
      * @param list The list of tasks.
      */
+    public void showListMessage(String desc, ArrayList<Task> list) {
+        System.out.format("Here are the %s tasks in your list:\n", desc);
+        for (int i = 0; i < list.size(); i++) {
+            Task currentTask = list.get(i);
+            System.out.println((i + 1) + "." + currentTask.toString());
+        }
+        System.out.format("You have a total of " + list.size() + " %s tasks.\n", desc);
+    }
+
     public void showTaskMessage(Task currentTask, ArrayList<Task> list) {
         System.out.format("Got it. I've added this task:\n" + currentTask.toString() + "\n"
                 + "Now you have %d tasks in this list.\n", list.size());
@@ -81,8 +90,12 @@ public class Ui {
     /**
      * Prints message if there are problems loading the list.
      */
-    public void showLoadingError() {
+    public void showLoadingErrorMessage() {
         System.out.println("Your file seems to have issues loading.");
+    }
+
+    public void showNothingFoundMessage() {
+        System.out.println("Sorry, there are no matching tasks");
     }
 
 }
