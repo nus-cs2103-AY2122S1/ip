@@ -54,7 +54,6 @@ public class Logic {
      * Loads in all the text history from previous times of running the bot
      */
     public static void preload() {
-        System.out.println("Ahhhhhh. It seems you have an old scroll. Let me read the contents......");
         try {
             ArrayList<Command> commandArrayList = DataHandlerLayer.loadPreset();
             for (Command command: commandArrayList) {

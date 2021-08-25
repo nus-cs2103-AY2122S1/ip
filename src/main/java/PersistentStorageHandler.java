@@ -36,6 +36,7 @@ public class PersistentStorageHandler {
 
         //Check if file exist. If not create a new file
         if (!hasStorageTextFile) {
+            System.out.println("Oooooooooooooo. Fresh meat. Welcome my dinn- I mean friend");
             //Create a storage text file with the same name
             try {
                 file.createNewFile();
@@ -43,6 +44,7 @@ public class PersistentStorageHandler {
                 e.printStackTrace();
             }
         } else {
+            System.out.println("Ahhhhhh. It seems you have an old scroll. Let me read the contents......");
             //Add all lines of the file to all_lines variable
             try {
                 List<String> list = Files.readAllLines(new File(fileName).toPath(), Charset.defaultCharset());
