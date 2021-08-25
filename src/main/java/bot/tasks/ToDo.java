@@ -1,4 +1,4 @@
-package tasks;
+package Bot.tasks;
 
 /**
  * Represents a task without any date/time attached to it.

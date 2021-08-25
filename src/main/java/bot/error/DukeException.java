@@ -1,4 +1,4 @@
-package error;
+package Bot.error;
 
 /**
  * Represents the unique DukeException.

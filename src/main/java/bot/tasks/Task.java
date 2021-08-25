@@ -1,4 +1,4 @@
-package tasks;
+package Bot.tasks;
 
 /**
  * Represents a task.

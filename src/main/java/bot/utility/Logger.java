@@ -1,9 +1,9 @@
-package utility;
+package Bot.utility;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.ToDo;
+import Bot.tasks.Deadline;
+import Bot.tasks.Event;
+import Bot.tasks.Task;
+import Bot.tasks.ToDo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -45,13 +45,13 @@ public class Logger {
     }
 
     /**
-     * Writes to the file containing the tasks.
+     * Writes to the file containing the Bot.tasks.
      *
-     * @param tasks The list of tasks that are due for writing.
+     * @param tasks The list of Bot.tasks that are due for writing.
      */
     public void write(List<Task> tasks) {
         try {
-            writer = new BufferedWriter(new FileWriter("tasks.txt"));
+            writer = new BufferedWriter(new FileWriter("Bot.tasks.txt"));
             StringBuilder builder = new StringBuilder();
 
             for (int index = 0; index < tasks.size(); index++){
@@ -97,7 +97,7 @@ public class Logger {
     public List<Task> loadList() {
         List<Task> list = new ArrayList<>();
         try {
-            bufferedReader = new BufferedReader(new FileReader("tasks.txt"));
+            bufferedReader = new BufferedReader(new FileReader("Bot.tasks.txt"));
             String line = bufferedReader.readLine();
 
             while (line != null) {

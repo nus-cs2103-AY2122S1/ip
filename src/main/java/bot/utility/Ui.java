@@ -1,4 +1,4 @@
-package utility;
+package Bot.utility;
 
 import java.io.PrintStream;
 

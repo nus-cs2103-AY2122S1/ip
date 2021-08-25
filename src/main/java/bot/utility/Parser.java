@@ -1,11 +1,11 @@
-package utility;
+package Bot.utility;
 
-import error.DukeException;
+import Bot.error.DukeException;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.ToDo;
+import Bot.tasks.Deadline;
+import Bot.tasks.Event;
+import Bot.tasks.Task;
+import Bot.tasks.ToDo;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class Parser {
     }
 
     /**
-     * Allows the parser to interact with the ui, logger and the list of tasks when needed.
+     * Allows the parser to interact with the ui, logger and the list of Bot.tasks when needed.
      *
      * @param ui The Ui interacting with the user.
      * @param logger The logger that keeps track of the logs.
@@ -47,7 +47,7 @@ public class Parser {
                 log.append("\n\t Peace out!");
                 break;
             case "list":
-                log.append("\n\t Here are the tasks in your list:");
+                log.append("\n\t Here are the Bot.tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
                     log.append("\n\t ").append(i + 1).append(". ").append(tasks.get(i));
                 }
@@ -66,28 +66,28 @@ public class Parser {
                 ToDo newTask = new ToDo(words[1]);
                 tasks.add(newTask);
                 log.append("\n\t Got it. I've added this task:\n\t\t").append(newTask).append("\n\t Now you have ")
-                        .append(tasks.size()).append(" tasks in the list.");
+                        .append(tasks.size()).append(" Bot.tasks in the list.");
                 break;
             case "deadline":
                 String[] details = words[1].split(" /by ", 2);
                 Deadline deadline = new Deadline(details[0], details[1]);
                 tasks.add(deadline);
                 log.append("\n\t Got it. I've added this task:\n\t\t").append(deadline)
-                        .append("\n\t Now you have ").append(tasks.size()).append(" tasks in the list.");
+                        .append("\n\t Now you have ").append(tasks.size()).append(" Bot.tasks in the list.");
                 break;
             case "event":
                 details = words[1].split(" /at ", 2);
                 Event event = new Event(details[0], details[1]);
                 tasks.add(event);
                 log.append("\n\t Got it. I've added this task:\n\t\t").append(event)
-                        .append("\n\t Now you have ").append(tasks.size()).append(" tasks in the list.");
+                        .append("\n\t Now you have ").append(tasks.size()).append(" Bot.tasks in the list.");
                 break;
             case "delete":
                 idx = Integer.parseInt(words[1]);
                 task = tasks.get(idx - 1);
                 tasks.remove(idx - 1);
                 log.append("\n\t Noted. I've removed this task:\n\t\t").append(task)
-                        .append("\n\t Now you have ").append(tasks.size()).append(" tasks in the list.");
+                        .append("\n\t Now you have ").append(tasks.size()).append(" Bot.tasks in the list.");
                 break;
             default:
                 throw new DukeException(
