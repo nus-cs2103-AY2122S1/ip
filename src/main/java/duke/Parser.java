@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Parser class to parse the input commands by the user.
+ */
 public class Parser {
     String command;
     Ui ui;
@@ -12,17 +15,37 @@ public class Parser {
         TODO, DONE, EVENT, DELETE, DEADLINE, BYE, LIST, NORMAL
     }
 
-    public Parser (String command, Ui ui, Storage storage, TaskList tasks) {
+    /**
+     * Public constructor for Parser.
+     *
+     * @param command The input command of the user.
+     * @param ui The Ui to return messages to the user.
+     * @param storage To load or save tasks by the user.
+     * @param tasks The list of tasks input by the user.
+     */
+    public Parser(String command, Ui ui, Storage storage, TaskList tasks) {
         this.command = command;
         this.ui = ui;
         this.storage = storage;
         this.tasks = tasks;
     }
 
+    /**
+     * Returns a boolean, whether a program should end or not.
+     *
+     * @return True if program should still run, false otherwise.
+     */
     public boolean getRun() {
         return !storage.isExit();
     }
 
+    /**
+     * Parses the user command and inputs the task accordingly.
+     *
+     * @throws DukeException If task input by user is incomplete.
+     * @throws DeleteException If delete is incomplete.
+     * @throws IOException If an input or output operation is failed or interpreted.
+     */
     public void parseCommand() throws DukeException, DeleteException, IOException {
 
         Activity activity;
@@ -73,7 +96,7 @@ public class Parser {
                 String desc = command.substring(4);
 
                 if (desc.isEmpty()) {
-                    throw new DukeException("todo");
+                    throw new DukeException("todo", "'todo borrow book'");
                 }
 
                 ToDo toDo = new ToDo(command.substring(5));
@@ -86,7 +109,7 @@ public class Parser {
                 String desc = command.substring(5);
 
                 if (desc.isEmpty()) {
-                    throw new DukeException("event");
+                    throw new DukeException("event", "'event project meeting /at Aug 26 2021 19:15'");
                 }
 
                 int escapeIndex = command.lastIndexOf("/");
@@ -114,7 +137,7 @@ public class Parser {
                 String desc = command.substring(8);
 
                 if (desc.isEmpty()) {
-                    throw new DukeException("deadline");
+                    throw new DukeException("deadline", "'deadline return book /by 2021-08-27 14:15'");
                 }
 
                 int escapeIndex = command.lastIndexOf("/");
