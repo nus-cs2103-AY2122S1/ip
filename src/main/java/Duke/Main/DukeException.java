@@ -8,17 +8,17 @@ public class DukeException extends RuntimeException {
      * SYNTAX_ERROR: Command type is not recognized
      * INVALID_FORMAT: Date and time format entered are not supported
      */
-    public enum TYPE {INCOMPLETE, OUT_OF_BOUND, SYNTAX_ERROR, INVALID_FORMAT}
+    public enum Type {INCOMPLETE, OUT_OF_BOUND, SYNTAX_ERROR, INVALID_FORMAT}
 
 
-    protected final TYPE type;
+    protected final Type type;
 
     /**
      * Constructor for Duke Exception class
      * @param message Error message
      * @param type Type of Duke Exception indicated
      */
-    public DukeException(String message, TYPE type) {
+    public DukeException(String message, Type type) {
         super(message);
         this.type = type;
     }
