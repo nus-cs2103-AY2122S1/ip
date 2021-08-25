@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class AddEventCommand extends AddTaskCommand {
 
     String time;
@@ -12,5 +14,10 @@ public class AddEventCommand extends AddTaskCommand {
         Event newEvent = new Event(this.desc, this.isDone, this.time);
         taskList.addTask(newEvent);
         ui.printAddTask(newEvent);
+        try {
+            storage.writeTasksToFile(taskList, storage.getTaskFile());
+        } catch (IOException e) {
+            ui.printFileWriteFail(storage.getTaskFile());
+        }
     }
 }

@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * This command adds a task to the taskList, given a description and flag.
  * TODO: Will split further to account for to-do, deadline and event.
@@ -17,6 +19,11 @@ public class AddTaskCommand implements Command {
         Task newTask = new Task(this.desc, this.isDone);
         taskList.addTask(newTask);
         ui.printAddTask(newTask);
+        try {
+            storage.writeTasksToFile(taskList, storage.getTaskFile());
+        } catch (IOException e) {
+            ui.printFileWriteFail(storage.getTaskFile());
+        }
     }
 
     public boolean isQuit() { return false; }

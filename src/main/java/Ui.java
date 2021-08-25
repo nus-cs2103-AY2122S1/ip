@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.io.File;
 
 /**
  * This class is responsible for the printing to console
@@ -22,6 +22,27 @@ public class Ui {
                 + SEP_LINE);
     }
 
+    public void printHelp() {
+        String helpMessage = "HELP \n" + SEP_LINE + "\n"
+                + "Available commands: \n"
+                + "'help' - Opens this dialog. \n"
+                + "'list' - Opens your list of tasks. \n"
+                + "'todo (desc)' - Adds a todo item with the given description. \n"
+                + "'deadline (desc) /by (due date)' - Adds a deadline item to your task list "
+                + "with the given description and due date. \n"
+                + "'event (desc) /at (timing)' - Adds a event item to your task list "
+                + "with the given description and timing. \n"
+                + "'done (x)' - Marks the task with number x as done "
+                + "according to the list given by the command 'list' \n"
+                + "'delete (x)' - Deletes the task with number x "
+                + "according to the list given by the command 'list' \n"
+                + "'bye' - Quits this program. \n"
+                + SEP_LINE + "\n"
+                + "To use any command, follow the structure as shown, entering your values \n"
+                + "in place of anything in brackets. \n";
+        System.out.println(helpMessage);
+    }
+
     public void printSepLine() {
         System.out.println(SEP_LINE);
     }
@@ -34,6 +55,17 @@ public class Ui {
         System.out.println("The task has been marked as done! \n" + (index + 1) + ". " + t);
     }
 
+    public void printDeleteTask(Task t, int index) {
+        System.out.println("The task has been removed! \n" + (index + 1) + ". " + t);
+    }
+
+    public void printUnknownCommand() {
+        System.out.println("I did not understand that command. Type 'help' for more info.");
+    }
+
+    public void printFileWriteFail(File file) {
+        System.out.println("Failed to write to file at " + file);
+    }
     public Command parseInput(String s) {
         return this.parser.parse(s);
     }

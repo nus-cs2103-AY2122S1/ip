@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class AddTodoCommand extends AddTaskCommand {
 
     AddTodoCommand(String desc, boolean isDone) {
@@ -9,5 +11,10 @@ public class AddTodoCommand extends AddTaskCommand {
         Todo newTodo = new Todo(this.desc, this.isDone);
         taskList.addTask(newTodo);
         ui.printAddTask(newTodo);
+        try {
+            storage.writeTasksToFile(taskList, storage.getTaskFile());
+        } catch (IOException e) {
+            ui.printFileWriteFail(storage.getTaskFile());
+        }
     }
 }

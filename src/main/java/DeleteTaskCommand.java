@@ -1,34 +1,33 @@
 import java.io.IOException;
 
-/**
- * This command marks a task in the task list as done.
- *
- */
-public class MarkDoneCommand implements Command {
+public class DeleteTaskCommand implements Command {
 
-    // The index of the task to be marked as done
     int index;
 
-    MarkDoneCommand(int index) {
+    DeleteTaskCommand(int index) {
         this.index = index;
     }
 
+    @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
         try {
             Task t = taskList.getTask(this.index);
-            taskList.getTask(this.index).markAsDone();
-            ui.printTaskDone(t, this.index);
+            taskList.deleteTask(this.index);
+            ui.printDeleteTask(t, this.index);
             storage.writeTasksToFile(taskList, storage.getTaskFile());
         } catch (IndexOutOfBoundsException e) {
             if (taskList.numberOfTasks() > 0) {
                 System.out.println("Invalid index given, enter a number from 1 to " + taskList.numberOfTasks());
             } else if (taskList.numberOfTasks() == 0) {
-                System.out.println("You cannot mark any task as done because you have no tasks!");
+                System.out.println("You cannot delete any task because you have no tasks!");
             }
         } catch (IOException e) {
             ui.printFileWriteFail(storage.getTaskFile());
         }
     }
 
-    public boolean isQuit() {return false;}
+    @Override
+    public boolean isQuit() {
+        return false;
+    }
 }

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.*;
 
 public class AddDeadlineCommand extends AddTaskCommand {
@@ -13,5 +14,10 @@ public class AddDeadlineCommand extends AddTaskCommand {
         Deadline newDeadline = new Deadline(this.desc, this.isDone, this.deadline);
         taskList.addTask(newDeadline);
         ui.printAddTask(newDeadline);
+        try {
+            storage.writeTasksToFile(taskList, storage.getTaskFile());
+        } catch (IOException e) {
+            ui.printFileWriteFail(storage.getTaskFile());
+        }
     }
 }
