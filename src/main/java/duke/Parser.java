@@ -10,6 +10,12 @@ import duke.command.PrintListCommand;
 public class Parser {
     private static String[] SUPPORTED_COMMANDS = {"bye", "list", "done", "deadline", "event","todo", "delete"};
 
+    /**
+     * Checks if the user input contains a supported command.
+     *
+     * @param userInput String that user enters into chat bot
+     * @return boolean, true if user input contains a supported command, otherwise false
+     */
     private static boolean isCommandSupported(String userInput) {
         boolean isSupported = false;
         for(int i = 0; i < SUPPORTED_COMMANDS.length; i++ ) {
@@ -18,9 +24,16 @@ public class Parser {
         return isSupported;
     }
 
+    /**
+     * Returns corresponding Command after parsing user input.
+     *
+     * @param userInput String that user enters into chat bot
+     * @return Command Command object depending on the user input
+     * @throws DukeException when user enters an unknown command
+     */
     public static Command parseCommand(String userInput) throws DukeException {
         if (!isCommandSupported(userInput)) {
-            throw new DukeException("unknown duke.command");
+            throw new DukeException("unknown duke command");
         }
 
         if (userInput.equals("bye")) {

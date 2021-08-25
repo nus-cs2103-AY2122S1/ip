@@ -23,6 +23,14 @@ public class AddCommand extends Command {
         this.taskType = taskType;
     }
 
+    /**
+     * Adds corresponding task based on taskType that is provided to AddCommand.
+     *
+     * @param taskList TaskList that contains the list of tasks
+     * @param ui User interface for the chat bot
+     * @param storage Storage object that handles saving and loading of data
+     * @throws DukeException when an error occurs during saving data
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 

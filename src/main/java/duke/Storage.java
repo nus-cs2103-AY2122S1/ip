@@ -22,6 +22,14 @@ public class Storage {
 
     }
 
+    /**
+     * Parses a line of input from the data storage, creates the corresponding task
+     * and adds it to the taskList.
+     *
+     * @param input String input from data storage
+     * @param taskList ArrayList<Task> that contains the tasks
+     * @throws DukeException when invalid data exists in the data storage
+     */
     private static void parseAndCreateTask(String input, ArrayList<Task> taskList) throws DukeException {
         String[] inputArr = input.split(",");
         Task currentTask;
