@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * Todo App.
  */
@@ -48,9 +50,7 @@ public class Duke {
                 nextLine = ui.nextLine();
                 nextCommand = parser.parseCommand(nextLine);
                 String[] arguments = parser.parseArguments(nextCommand, nextLine);
-
                 execute(nextCommand, arguments);
-                storage.save(tasks);
             } catch (DukeException e) {
                 ui.printDukeException(e);
             }
@@ -90,6 +90,10 @@ public class Duke {
             break;
         case LIST:
             ui.printList(tasks);
+            break;
+        case FIND:
+            ArrayList<Integer> indexes = tasks.find(arguments[0]);
+            ui.printSearchResult(indexes, tasks);
             break;
         case BYE:
             ui.printGoodbye();

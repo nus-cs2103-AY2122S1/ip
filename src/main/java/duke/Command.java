@@ -8,5 +8,6 @@ public enum Command {
     DONE,
     BYE,
     DELETE,
-    INVALID
+    INVALID,
+    FIND
 }

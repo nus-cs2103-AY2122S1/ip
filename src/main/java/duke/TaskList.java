@@ -61,6 +61,24 @@ public class TaskList {
     }
 
     /**
+     * Returns the index of tasks that contains the query in teh description.
+     *
+     * @param query Query to be searched.
+     * @return Array of indexes.
+     */
+    public ArrayList<Integer> find(String query) {
+        ArrayList<Integer> output = new ArrayList<>();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(query)) {
+                output.add(i);
+            }
+        }
+
+        return output;
+    }
+
+    /**
      * Returns string representation of the TaskList.
      *
      * @return String representation of the TaskList.
@@ -92,7 +110,6 @@ public class TaskList {
         for (Task t : tasks) {
             output.append(t.save()).append("\n");
         }
-
         return output.toString();
     }
 

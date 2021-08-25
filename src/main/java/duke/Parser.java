@@ -23,6 +23,8 @@ public class Parser {
             return Command.BYE;
         case("delete"):
             return Command.DELETE;
+        case("find"):
+            return Command.FIND;
         default:
             throw new DukeException("Sorry I don't know what that means");
         }
@@ -66,6 +68,8 @@ public class Parser {
             return new String[] {doneArgs};
         case DELETE:
             return new String[] {input.split(" ")[1].trim()};
+        case FIND:
+            return new String[] {input.replace("find ", "").trim()};
         default :
             return new String[] {};
         }
