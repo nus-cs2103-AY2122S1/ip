@@ -11,7 +11,7 @@ public class TaskFactory {
 
     public TaskFactory() {    }
 
-    public Task createTask(String newTaskDetails) throws AuguryException {
+    public Task createTask(String newTaskDetails) {
         // this method is used when reading from duke.tasks.txt file
         // the syntax is [E][X] description (at: time)
 
