@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -49,6 +50,7 @@ public class Duke {
                 }
                 //creates the duke.txt file to be written into
                 input = sc.next();
+                Task task;
                 //Reads the next input
                 switch (input) {
                 case "bye":
@@ -90,7 +92,8 @@ public class Duke {
                         //Catch if todo description is empty
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
-                    listArray.add(count++, new Todo(input.trim()));
+                    task = new Todo(input.trim());
+                    listArray.add(count++, task);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + listArray.get(count - 1));
                     System.out.println("Now you have " + count + " in the list.");
@@ -107,7 +110,8 @@ public class Duke {
                     if (split.length <= 1) {
                         throw new DukeException("☹ OOPS!!! Your deadline input format is not valid!");
                     }
-                    listArray.add(count++, new Deadline(split[0].trim(), split[1]));
+                    task = new Deadline(split[0].trim(), split[1]);
+                    listArray.add(count++, task);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + listArray.get(count - 1));
                     System.out.println("Now you have " + count + " in the list.");
@@ -124,7 +128,8 @@ public class Duke {
                     if (split.length <= 1) {
                         throw new DukeException("☹ OOPS!!! Your event input format is not valid!");
                     }
-                    listArray.add(count++, new Event(split[0].trim(), split[1]));
+                    task = new Event(split[0].trim(), split[1]);
+                    listArray.add(count++, task);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + listArray.get(count - 1));
                     System.out.println("Now you have " + count + " in the list.");
@@ -155,8 +160,12 @@ public class Duke {
             } catch (NumberFormatException e2) {
                 //For catching any invalid number after the done command
                 System.out.println("☹ OOPS!!! done will require a valid integer value input to update.");
-            } catch (IOException IO1) {
+            } catch (IOException e3) {
                 System.out.println("☹ OOPS!!! It seems like I am unable to create a list in your directory");
+            } catch (DateTimeParseException e4) {
+                System.out.println("☹ OOPS!!! It seems like your date/time format is wrong!");
+                System.out.println("Please input date in this format: YYYY-MM-DD");
+                System.out.println("Please input any time in this format: HH:MM");
             }
         } while (isRunning);
     }
