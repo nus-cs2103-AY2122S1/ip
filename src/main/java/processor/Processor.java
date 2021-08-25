@@ -6,6 +6,7 @@ import models.Command;
 import models.Deadline;
 import models.Event;
 import models.Todo;
+import storage.IStorage;
 import storage.Storage;
 import ui.Ui;
 
@@ -18,7 +19,11 @@ import java.time.LocalDate;
 
 public class Processor implements IProcessor {
 
-    private Storage storage = new Storage(Setting.FILE_DIRECTORY, Setting.FILE_NAME);
+    private IStorage storage;
+
+    public Processor(IStorage storage) {
+        this.storage = storage;
+    }
 
     @Override
     public void processCommand(Command command, List<String> arguments) {

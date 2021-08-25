@@ -7,16 +7,16 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import models.Command;
-import processor.Processor;
+import processor.IProcessor;
 
 public class Parser implements IParser {
 
     private final Scanner scanner;
-    private final Processor processor;
+    private final IProcessor processor;
 
-    public Parser() {
+    public Parser(IProcessor processor) {
         this.scanner = new Scanner(System.in);
-        this.processor = new Processor();
+        this.processor = processor;
     }
 
     @Override
