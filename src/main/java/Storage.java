@@ -3,10 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Storage {
     private final File saveFile;
@@ -26,12 +23,12 @@ public class Storage {
      * @return
      * @throws DukeException
      */
-    public List<Task> load() throws DukeException {
-        List<Task> taskList = new ArrayList<>();
+    public Tasklist load() throws DukeException {
+        Tasklist taskList = new Tasklist();
         try {
             Scanner s = new Scanner(saveFile);
             while (s.hasNext()) {
-                taskList.add(parser.parse(s.nextLine()));
+                taskList.addTask(parser.parse(s.nextLine()));
             }
         } catch (FileNotFoundException e) {
             throw new DukeException("There was no savefile found. Starting session with an empty list.");
@@ -46,8 +43,8 @@ public class Storage {
      * @param taskList
      * @throws IOException
      */
-    public void save(List<Task> taskList) throws IOException {
-        String writableData = taskList.stream().map(task -> task.toString() + "\n").collect(Collectors.joining());
+    public void save(Tasklist taskList) throws IOException {
+        String writableData = taskList.toWritable();
         FileWriter fileWriter = new FileWriter(this.filePath.toString());
         fileWriter.write(writableData);
         fileWriter.close();

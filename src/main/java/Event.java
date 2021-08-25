@@ -12,7 +12,9 @@ public class Event extends Task {
             int[] dateArr = Arrays.stream(date.split("-")).mapToInt(Integer::parseInt).toArray();
             this.date = LocalDate.of(dateArr[0], dateArr[1], dateArr[2]);
         } catch (NumberFormatException | DateTimeException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("the event date has to be in format yyyy-mm-dd");
+            throw new DukeException("the event date has to be in format yyyy-mm-dd.");
+        } catch (NullPointerException e) {
+            throw new DukeException("the dates are invalid.");
         }
     }
 
