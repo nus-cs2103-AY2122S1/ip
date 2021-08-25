@@ -37,14 +37,11 @@ public class Duke {
 
             input = sc.nextLine();
             continue;
-
         }
         this.ui.printBye();
-
     }
 
     public static void main(String[] args) {
         new Duke("/data/duke.txt").run();
-
     }
 }

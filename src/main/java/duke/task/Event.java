@@ -42,7 +42,9 @@ public class Event extends Task {
      * @return full description of the Event task
      */
     public String showTask() {
-        return this.taskName + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", " + this.time + ")";
+        return this.taskName + " (at: "
+                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
+                + this.time + ")";
     }
 
     /**

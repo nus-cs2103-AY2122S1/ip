@@ -42,7 +42,9 @@ public class Deadline extends Task {
      * @return full description of the Deadline task
      */
     public String showTask() {
-        return this.taskName + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", " + this.time + ")";
+        return this.taskName + " (by: "
+                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
+                + this.time + ")";
     }
 
     /**

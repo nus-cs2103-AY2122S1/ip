@@ -163,7 +163,6 @@ public class Parser {
                             + "     " + "\uD83D\uDE41" + " OOPS!!! The file you requested is unavailable.\n"
                             + "    ____________________________________________________________");
                 }
-
         }
     }
 }
