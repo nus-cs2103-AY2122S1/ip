@@ -2,6 +2,10 @@ package duke.task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a TaskList object. The TaskList is able to add tasks, delete tasks, mark tasks as done,
+ * as well as print out all the tasks in its list.
+ */
 public class TaskList {
     private ArrayList<Task> list;
     private int counter = 0;
@@ -14,11 +18,21 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Adds a task to the TaskList object
+     *
+     * @param task
+     */
     public void addTask(Task task) {
         this.list.add(task);
         counter++;
     }
 
+    /**
+     * Marks the task with the respective index as done in the TaskList object
+     *
+     * @param index
+     */
     public void markDone(int index) {
         int trueIndex = index - 1;
         list.get(trueIndex).isDone();
@@ -29,6 +43,11 @@ public class TaskList {
         System.out.println(taskDoneMessage);
     }
 
+    /**
+     * Deletes the task with the respective index in the TaskList object
+     *
+     * @param index
+     */
     public void deleteTask(int index) {
         int trueIndex = index - 1;
         String listData = "[" + list.get(trueIndex).showType() + "]"
@@ -42,10 +61,18 @@ public class TaskList {
         list.remove(trueIndex);
     }
 
+    /**
+     * Returns the size of the TaskList object.
+     *
+     * @return size/length of the TaskList
+     */
     public int length() {
         return list.size();
     }
 
+    /**
+     * Prints out all the tasks in the entire TaskList object.
+     */
     public void showList() {
         System.out.println("    ____________________________________________________________");
         String fullList = "     " + "Here are the tasks in your list:";
@@ -57,6 +84,12 @@ public class TaskList {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Stores all the task type, task's done status and task name and deadline
+     * in a format readable by Duke's storage component.
+     *
+     * @return String containing the details of all the tasks
+     */
     public String refreshList() {
         String refreshList = "";
         for (int j = 0; j < list.size(); j++) {

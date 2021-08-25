@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the "Event" task type. It encapsulates an Event's name, type and deadline
+ */
 public class Event extends Task {
     private String taskName, at, type = "E";
     private LocalDate date;
@@ -33,19 +36,49 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the full description (name + deadline) of the Event task
+     *
+     * @return full description of the Event task
+     */
     public String showTask() {
         return this.taskName + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", " + this.time + ")";
     }
 
+    /**
+     * Returns only the name of the Event task
+     *
+     * @return name of the Event task
+     */
     public String showTaskOnly() { return this.taskName; }
 
+    /**
+     * Returns the deadline of the Event task
+     *
+     * @return deadline of the Event task
+     */
     public String showWhen() { return this.at; }
 
+    /**
+     * Returns the type of the Event task
+     *
+     * @return task type "E"
+     */
     public String showType() {
         return this.type;
     }
 
+    /**
+     * Returns the date of the Event task in "MMM d yyyy" format
+     *
+     * @return date of the Event task
+     */
     public LocalDate showDate() { return this.date; }
 
+    /**
+     * Returns ths time of the Event task in 24-hour format
+     *
+     * @return time of the Event task
+     */
     public int showTime() { return this.time; }
 }

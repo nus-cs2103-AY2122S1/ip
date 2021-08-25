@@ -1,5 +1,8 @@
 package duke.ui;
 
+/**
+ * Represents a User Interface (Ui). The user will be greeted by Duke as they start and end their interactions with it.
+ */
 public class Ui {
     private static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -20,6 +23,10 @@ public class Ui {
         System.out.println("Hello from\n" + logo + WelcomeMessage);
     }
 
+    /**
+     * Prints the "Goodbye" message to the user
+     * Does not take any arguments
+     */
     public void printBye() {
         System.out.println(ByeMessage);
     }

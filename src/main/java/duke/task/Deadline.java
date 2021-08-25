@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the "Deadline" task type. It encapsulates the Deadline's name, type and deadline.
+ */
 public class Deadline extends Task {
     private String taskName, by, type = "D";
     private LocalDate date;
@@ -33,24 +36,54 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the full description (name + deadline) of the Deadline task
+     *
+     * @return full description of the Deadline task
+     */
     public String showTask() {
         return this.taskName + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", " + this.time + ")";
     }
 
+    /**
+     * Returns only the name of the Deadline task
+     *
+     * @return name of the Deadline task
+     */
     public String showTaskOnly() {
         return this.taskName;
     }
 
+    /**
+     * Returns the deadline of the Deadline task
+     *
+     * @return deadline of the Deadline task
+     */
     public String showWhen() {
         return this.by;
     }
 
+    /**
+     * Returns the type of the Deadline task
+     *
+     * @return task type "D"
+     */
     public String showType() {
         return this.type;
     }
 
+    /**
+     * Returns the date of the Deadline task in "MMM d yyyy" format
+     *
+     * @return date of the Deadline task
+     */
     public LocalDate showDate() { return this.date; }
 
+    /**
+     * Returns ths time of the Deadline task in 24-hour format
+     *
+     * @return time of the Deadline task
+     */
     public int showTime() { return this.time; }
 
 }
