@@ -25,6 +25,7 @@ public class Saber {
         event,
         todo,
         list,
+        find,
     }
 
     enum TaskType {
