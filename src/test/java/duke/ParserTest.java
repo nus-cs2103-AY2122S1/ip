@@ -58,8 +58,8 @@ public class ParserTest {
         try {
             Parser parser = new Parser();
             Command addCommand = Command.makeCommand(CommandsTypes.List, null, 0);
-            assertTrue(addCommand.toString().replaceAll("\\s+","")
-                    .equals(parser.parse("list").toString().replaceAll("\\s+","")));
+            assertTrue(addCommand.toString().replaceAll("\\s+", "")
+                    .equals(parser.parse("list").toString().replaceAll("\\s+", "")));
         } catch (DukeException e) {
             assertTrue(false);
             System.out.println("adding failed. Exception thrown");
