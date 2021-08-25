@@ -95,6 +95,8 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke currDuke = getCurrDuke();
+        // Load Save File only after Duke is created.
+        currDuke.getCurrStorageMgr().reloadSaveFromXMLDoc();
 
         // Show Welcome Message
         currDuke.currUiCtrl.printWelcomeMessage();
