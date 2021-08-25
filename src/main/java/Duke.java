@@ -119,6 +119,7 @@ public class Duke {
             }
         }
 
+        Ui.Border();
         storage.write(list);
         Ui.Goodbye();
     }

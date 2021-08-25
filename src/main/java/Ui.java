@@ -26,7 +26,6 @@ public class Ui {
     }
 
     public static void Goodbye() {
-        Ui.Border();
         System.out.println("Bye, hope to see you again soon!");
     }
 
