@@ -115,7 +115,7 @@ class Duke {
         }
 
         /**
-         * Method for Duke to handle invalid inputs by the user.
+         * Handles invalid inputs by the user.
          *
          * @param input The user input to Duke.
          */
@@ -149,6 +149,12 @@ class Duke {
         }
 
 
+        /**
+         * Execute program per the user input parsed.
+         *
+         * @param type The type of UserCommands specifying the task to
+         *             be executed.
+         */
         private void executeTasks(UserCommands type) {
             switch (type) {
             case BYE:
@@ -181,16 +187,19 @@ class Duke {
     }
 
     /**
-     * Field for duke to keep track of task list.
+     * Task list to keep track.
      */
     private TaskList taskList;
+    /**
+     * Storage to handle file manipulation.
+     */
     private Storage storage;
-    private HashMap<LocalDate, ArrayList<Task>> dateTasks = new HashMap<>();
     private Ui ui;
     private Parser parser = new Parser();
+    private HashMap<LocalDate, ArrayList<Task>> dateTasks = new HashMap<>();
 
     /**
-     * Constructor for Duke
+     * Public constructor for Duke
      */
     public Duke(TaskList taskList, Storage storage, Ui ui) {
         this.taskList = taskList;
@@ -209,7 +218,7 @@ class Duke {
     }
 
     /**
-     * Method that prints Duke's greetings.
+     * Prints Duke's greetings.
      */
     private void greet() {
         divide();
@@ -218,7 +227,7 @@ class Duke {
     }
 
     /**
-     * Method that prints Duke's exit message.
+     * Prints Duke's exit message.
      */
     private void exit() {
         divide();
@@ -228,7 +237,7 @@ class Duke {
     }
 
     /**
-     * Method that prints the current tasks in the task list.
+     * Prints the current tasks in the task list.
      */
     private void returnTaskList() {
         divide();
@@ -256,6 +265,10 @@ class Duke {
     }
 
 
+    /**
+     * Update the list and files with added task.
+     * @param task
+     */
     private void updateTasks(Task task) {
         this.taskList = this.taskList.add(task);
         divide();
@@ -270,7 +283,7 @@ class Duke {
 
 
     /**
-     * Method for Duke to mark the respective tasks as completed.
+     * Mark the respective tasks as completed.
      *
      * @param index Index of the task to be deleted.
      */
@@ -299,7 +312,7 @@ class Duke {
     }
 
     /**
-     * Method for Duke to delete the corresponding task.
+     * Delete the corresponding task.
      *
      * @param index Index of the task to be deleted.
      */
@@ -332,7 +345,6 @@ class Duke {
      * Runs the Duke chatbot.
      */
     private void run() {
-
         this.taskList = storage.loadData(this.dateTasks, this.taskList);
 
         // Greeting the user
