@@ -65,6 +65,23 @@ public class Parser {
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     throw new InvalidArgumentsException();
                 }
+            } else if (input.startsWith("find")) {
+                try {
+                    // filter out findXXXX
+                    // StringIndexOutOfBoundsException thrown here if input = "find",
+                    // which is caught by IndexOutOfBoundsException
+                    if (input.charAt(4) != ' ') {
+                        throw new InvalidTaskException();
+                    }
+                    // filter out "find "
+                    if (input.length() == 5) {
+                        throw new InvalidArgumentsException();
+                    }
+                    String keyWord = input.substring(5);
+                    return new FindCommand(keyWord);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new InvalidArgumentsException();
+                }
             } else if (input.startsWith("todo")) {
                 return new TodoCommand((ToDo) parseTask(input, TaskType.TODO));
             } else if (input.startsWith("deadline")) {

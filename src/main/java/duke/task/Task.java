@@ -37,6 +37,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Returns the String representation of the task.
      *
