@@ -41,8 +41,13 @@ public class Task {
     /**
      * Mark the Task as done.
      */
-    public void markAsDone() {
-        isDone = true;
+    public boolean markAsDone() {
+        if (isDone) {
+            return false;
+        } else {
+            isDone = true;
+            return true;
+        }
     }
 
     public String toFileString() {

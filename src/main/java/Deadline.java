@@ -29,16 +29,16 @@ public class Deadline extends Task {
             LocalDateTime parsedDateTime = LocalDateTime.parse(date, FORMATTER);
             return parsedDateTime;
         } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid datetime format.\n"
-                    + "\tOnly take in datetime with the format d-M-yyyy H:mm\n"
-                    + "\tNote that time should be in 24 hour format.");
+            throw new DukeException("Invalid datetime format for Deadline task.\n"
+                    + "Only take in datetime with the format d-M-yyyy H:mm\n"
+                    + "Note that time should be in 24 hour format.");
         }
     }
 
     
 
     public String toFileString() {
-        return String.format("D | %s | %s", super.toFileString(), endDate.format(PRINT_FORMATTER));
+        return String.format("D | %s | %s", super.toFileString(), endDate.format(FORMATTER));
     }
 
     /**

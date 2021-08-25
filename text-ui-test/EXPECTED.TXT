@@ -36,7 +36,7 @@ Hello from
 	-------------------------------------------------------------
 	Got it. I've  added this task:
 	  [T][ ] borrow book
-	Now you have 1 tasks in the list.
+	Now you have 1 task in the list.
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	1. [T][ ] borrow book
@@ -65,12 +65,12 @@ Hello from
 	-------------------------------------------------------------
 	Noted. I've removed this task:
 	  [T][ ] borrow book
-	Now you have 1 tasks in the list.
+	Now you have 1 task in the list.
 	-------------------------------------------------------------
 	-------------------------------------------------------------
-	Got it. I've  added this task:
-	  [D][ ] do homework (by: no idea :-P)
-	Now you have 2 tasks in the list.
+	☹ OOPS!!! Invalid datetime format for Deadline task.
+	Only take in datetime with the format d-M-yyyy H:mm
+	Note that time should be in 24 hour format.
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	☹ OOPS!!! The end time of a deadline cannot be empty.
@@ -80,10 +80,9 @@ Hello from
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	1. [E][ ] project meeting (at: Mon 2-4pm)
-	2. [D][ ] do homework (by: no idea :-P)
 	-------------------------------------------------------------
 	-------------------------------------------------------------
-	☹ OOPS!!! Enter a valid number between 1 - 2
+	☹ OOPS!!! Enter a valid number between 1 - 1
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	☹ OOPS!!! Enter a number for a done action!
