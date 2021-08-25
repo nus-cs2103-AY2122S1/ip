@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class DeleteCommand extends Command {
 
     public DeleteCommand(String userInput) {
@@ -18,7 +27,7 @@ public class DeleteCommand extends Command {
         String[] inputArray = userInput.split(" ");
         Task removedTask = taskList.deleteTask(Integer.parseInt(inputArray[1]) - 1);
         storage.saveData(taskList);
-        String deleteMessage = String.format("Noted. I've removed this task: \n%s\nNow you have %d tasks in the list.",
+        String deleteMessage = String.format("Noted. I've removed this duke.task: \n%s\nNow you have %d tasks in the list.",
                                     removedTask, taskList.size());
         ui.printMessage(deleteMessage);
     }

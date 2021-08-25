@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneTaskCommand;
+import duke.command.ExitCommand;
+import duke.command.PrintListCommand;
+
 public class Parser {
     private static String[] SUPPORTED_COMMANDS = {"bye", "list", "done", "deadline", "event","todo", "delete"};
 
@@ -11,7 +20,7 @@ public class Parser {
 
     public static Command parseCommand(String userInput) throws DukeException {
         if (!isCommandSupported(userInput)) {
-            throw new DukeException("unknown command");
+            throw new DukeException("unknown duke.command");
         }
 
         if (userInput.equals("bye")) {

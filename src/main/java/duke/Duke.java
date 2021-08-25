@@ -1,3 +1,8 @@
+package duke;
+
+import duke.command.Command;
+import duke.task.TaskList;
+
 public class Duke {
 
     private TaskList taskList;
@@ -17,7 +22,7 @@ public class Duke {
     public void run() {
         ui.sayGreeting();
         boolean isExit = false;
-       while (!isExit) {
+        while (!isExit) {
            try {
                String userInput = ui.getUserInput();
                Command c = Parser.parseCommand(userInput);
@@ -31,7 +36,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-            new Duke("src/main/java/data.txt").run();
+            new Duke("src/data/data.txt").run();
         }
 
 }

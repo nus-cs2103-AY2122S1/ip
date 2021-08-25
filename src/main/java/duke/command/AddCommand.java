@@ -1,6 +1,18 @@
+package duke.command;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 public class AddCommand extends Command {
 
@@ -34,7 +46,7 @@ public class AddCommand extends Command {
     }
 
     private void displayAddedTask(Task currentTask, TaskList taskList, Ui ui) {
-        String displayTask = String.format("Got it. I've added this task: \n%s\nNow you have %d tasks in the list.",
+        String displayTask = String.format("Got it. I've added this duke.task: \n%s\nNow you have %d tasks in the list.",
                                 currentTask, taskList.size());
         ui.printMessage(displayTask);
     }

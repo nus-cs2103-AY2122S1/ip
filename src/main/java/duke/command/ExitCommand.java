@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
+
+import duke.task.TaskList;
+
 public class ExitCommand extends Command {
 
     public ExitCommand(String userInput) {

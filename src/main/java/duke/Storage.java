@@ -1,9 +1,17 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 public class Storage {
 
@@ -58,6 +66,10 @@ public class Storage {
             }
         } catch (FileNotFoundException fileException) {
             try {
+                File parentDir = new File(dataFile.getParent());
+                if (!parentDir.exists()) {
+                    parentDir.mkdir();
+                }
                 dataFile.createNewFile();
             } catch (IOException ioException) {
                 throw new DukeException("failed database creation");
