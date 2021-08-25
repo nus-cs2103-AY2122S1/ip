@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    private static int getTaskNumber(String keyword, String task) {
+    public static int getTaskNumber(String keyword, String task) {
         int idx = 0;
         for (int i = task.length() - 1; i > keyword.length(); i--) {
             idx+= (task.charAt(i) - 48) * Math.pow(10, task.length() - 1 - i);
@@ -18,10 +18,10 @@ public class Parser {
         return idx - 1;
     }
 
-    private static int getIndex(String command, TaskList tasks) throws BlitzException {
+    public static int getIndex(String command, int listSize) throws BlitzException {
         String keyword = command.substring(0, command.indexOf(' '));
         int index = getTaskNumber(keyword,command);
-        if (index < 0 || index >= tasks.size()) {
+        if (index < 0 || index >= listSize) {
             throw new BlitzException("You are attempting to "
                     + (keyword.equals("done") ? "mark" : "delete")
                     + " an invalid task number!");
@@ -62,7 +62,7 @@ public class Parser {
                     break;
                 case "done":
                     try {
-                        int index = getIndex(command, tasks);
+                        int index = getIndex(command, tasks.size());
                         Task finished = tasks.get(index);
                         finished.markAsDone();
                         ui.printFormatted("Nice! I've marked this task as done:\n" + "\t\t"
@@ -73,7 +73,7 @@ public class Parser {
                     break;
                 case "delete":
                     try {
-                        int index = Parser.getIndex(command, tasks);
+                        int index = Parser.getIndex(command, tasks.size());
                         Task deleted = tasks.deleteTask(index);
                         ui.printFormatted("Noted. I've removed this task:" + "\n\t\t" + deleted
                                 + "\n\tNow you have " + tasks.size() + " tasks in the list.");
