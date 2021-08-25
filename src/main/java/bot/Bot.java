@@ -11,7 +11,7 @@ import exceptions.InvalidTaskException;
  */
 public class Bot {
     public TaskList taskList;
-    private Boolean running;
+    private Boolean isRunning;
 
 
     public Bot() {
@@ -24,8 +24,8 @@ public class Bot {
     public void start() {
         Ui.printWelcome();
         Storage.load(this);
-        this.running = true;
-        while (this.running) {
+        this.isRunning = true;
+        while (this.isRunning) {
             Command cmd = Parser.getCommand();
             try {
                 cmd.run(this, cmd.getArgs());
@@ -44,7 +44,7 @@ public class Bot {
      * Stops the task bot
      */
     public void stop() {
-        this.running = false;
+        this.isRunning = false;
     }
 
 }

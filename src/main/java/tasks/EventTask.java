@@ -6,9 +6,9 @@ import bot.TaskType;
 
 public class EventTask extends Task {
 
-    private final String taskText;
-    private final LocalDateTime taskTime;
-    private final TaskType taskType = TaskType.Event;
+    private String taskText;
+    private LocalDateTime taskTime;
+    private final TaskType TASK_TYPE = TaskType.Event;
 
     public EventTask(String taskText, LocalDateTime taskTime) {
         this.taskText = taskText.trim();
@@ -32,7 +32,7 @@ public class EventTask extends Task {
 
     @Override
     TaskType getTaskType() {
-        return this.taskType;
+        return this.TASK_TYPE;
     }
 
 }

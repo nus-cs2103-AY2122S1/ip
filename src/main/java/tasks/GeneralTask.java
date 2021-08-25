@@ -4,8 +4,8 @@ import bot.TaskType;
 
 public class GeneralTask extends Task {
 
-    private final String description;
-    private final TaskType taskType = TaskType.Blank;
+    private String description;
+    private final TaskType TASK_TYPE = TaskType.Blank;
 
     public GeneralTask(String description) {
         this.description = description;
@@ -28,7 +28,7 @@ public class GeneralTask extends Task {
 
     @Override
     TaskType getTaskType() {
-        return this.taskType;
+        return this.TASK_TYPE;
     }
 
 }

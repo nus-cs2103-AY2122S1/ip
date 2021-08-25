@@ -13,7 +13,7 @@ public class TaskTest {
         Task task = Task.deserialize("Deadline,false,return book,Dec 02 2019 - 06 00 PM");
         assertTrue(task instanceof DeadlineTask);
 
-        assertTrue(!task.done);
+        assertTrue(!task.isDone);
         assertEquals("return book", task.getTaskText());
         assertEquals("Dec 02 2019 - 06 00 PM", task.getTaskTime());
     }

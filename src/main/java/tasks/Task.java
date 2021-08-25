@@ -7,15 +7,15 @@ import bot.TaskType;
 
 public abstract class Task {
 
-    public boolean done = false;
-    public static final DateTimeFormatter INPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm"); // kkmm
+    public boolean isDone = false;
+    public static final DateTimeFormatter INPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
     public static final DateTimeFormatter OUTPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy - hh mm a");
 
     /**
      * Mark a task as complete
      */
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -24,7 +24,7 @@ public abstract class Task {
      * @return true iff task is complete
      */
     public boolean getTaskDone() {
-        return this.done;
+        return this.isDone;
     }
 
     public String serialize() {
@@ -62,14 +62,14 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String taskChecked = this.done ? "X" : " ";
+        String taskChecked = this.isDone ? "X" : " ";
         return String.format("[%s][%s] %s", this.getTaskType().getSymbol(), taskChecked, this.getTaskDesc());
     }
 
     /**
-     * Get a task's descrption details
+     * Get a task's description details
      *
-     * @return task decsription string
+     * @return task description string
      */
     abstract String getTaskDesc();
 

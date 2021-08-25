@@ -8,6 +8,9 @@ import bot.Bot;
 import bot.Ui;
 import tasks.Task;
 
+/**
+ * Command for listing Bot's taskList
+ */
 public class ListCommand extends Command {
 
     @Override
