@@ -14,10 +14,10 @@ public class FindCommand extends Command {
     /**
      * Constructs FindCommand class.
      *
-     * @param userInput
+     * @param userInputs User input array with this structure: [command, details].
      */
-    public FindCommand(String[] userInput) {
-        super(CommandType.FIND, userInput);
+    public FindCommand(String[] userInputs) {
+        super(CommandType.FIND, userInputs);
     }
 
     /**
@@ -30,13 +30,13 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
-        if (userInput.length == 2) {
+        if (userInputs.length == 2) {
             int count = 1;
             for (int i = 0; i < taskList.size(); i++) {
                 Task current = taskList.getTask(i);
-                if (current.getDescription().contains(userInput[1])) {
+                if (current.getDescription().contains(userInputs[1])) {
                     ui.showMessage(count + ". " + taskList.getTask(i));
-                    count ++;
+                    count++;
                 }
             }
             if (count == 1) {

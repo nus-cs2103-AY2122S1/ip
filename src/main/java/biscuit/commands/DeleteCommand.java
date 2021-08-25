@@ -7,17 +7,17 @@ import biscuit.task.TaskList;
 import biscuit.ui.Ui;
 
 /**
- * Delete command to delete task
+ * Delete command to delete task.
  */
 public class DeleteCommand extends Command {
 
     /**
      * Constructs DeleteCommand class.
      *
-     * @param userInput User input array with this structure: [command, details].
+     * @param userInputs User input array with this structure: [command, details].
      */
-    public DeleteCommand(String[] userInput) {
-        super(CommandType.DELETE, userInput);
+    public DeleteCommand(String[] userInputs) {
+        super(CommandType.DELETE, userInputs);
     }
 
     /**
@@ -30,17 +30,17 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
-        if (userInput.length == 2) {
+        if (userInputs.length == 2) {
             try {
-                int index = Integer.parseInt(userInput[1]) - 1;
+                int index = Integer.parseInt(userInputs[1]) - 1;
                 Task toDelete = taskList.getTask(index);
                 taskList.removeTask(index);
                 storage.save();
                 ui.showMessage("Noted. I've removed the following task:\n\t" + toDelete);
                 ui.showMessage("Now you have " + taskList.size() + " tasks in the list.");
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! Please enter a valid number" +
-                        (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");
+                throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! Please enter a valid number"
+                        + (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");
             }
         } else {
             throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The delete task number cannot be empty.");

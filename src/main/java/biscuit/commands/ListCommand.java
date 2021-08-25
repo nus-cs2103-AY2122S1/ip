@@ -1,6 +1,5 @@
 package biscuit.commands;
 
-import biscuit.exceptions.BiscuitException;
 import biscuit.storage.Storage;
 import biscuit.task.TaskList;
 import biscuit.ui.Ui;
@@ -13,10 +12,10 @@ public class ListCommand extends Command {
     /**
      * Constructs ListCommand class.
      *
-     * @param userInput User input array with this structure: [command, details].
+     * @param userInputs User input array with this structure: [command, details].
      */
-    public ListCommand(String[] userInput) {
-        super(CommandType.LIST, userInput);
+    public ListCommand(String[] userInputs) {
+        super(CommandType.LIST, userInputs);
     }
 
     /**
@@ -25,10 +24,9 @@ public class ListCommand extends Command {
      * @param taskList Task list to add.
      * @param ui       Ui to display.
      * @param storage  Storage to save to.
-     * @throws BiscuitException Invalid input by user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (taskList.isEmpty()) {
             ui.showMessage("List is currently empty.");
         } else {

@@ -2,7 +2,11 @@ package biscuit.commands;
 
 import biscuit.exceptions.BiscuitException;
 import biscuit.storage.Storage;
-import biscuit.task.*;
+import biscuit.task.Deadline;
+import biscuit.task.Event;
+import biscuit.task.Task;
+import biscuit.task.TaskList;
+import biscuit.task.ToDo;
 import biscuit.ui.Ui;
 
 import java.time.LocalDate;
@@ -18,10 +22,10 @@ public class AddCommand extends Command {
     /**
      * Constructs AddCommand class.
      *
-     * @param userInput User input array with this structure: [command, details].
+     * @param userInputs User input array with this structure: [command, details].
      */
-    public AddCommand(String[] userInput) {
-        super(CommandType.ADD, userInput);
+    public AddCommand(String[] userInputs) {
+        super(CommandType.ADD, userInputs);
     }
 
     /**
@@ -34,9 +38,9 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
-        if (userInput.length == 2) {
+        if (userInputs.length == 2) {
             Task task;
-            switch (userInput[0]) {
+            switch (userInputs[0]) {
             case "deadline":
                 task = getDeadline();
                 break;
@@ -52,18 +56,18 @@ public class AddCommand extends Command {
             ui.showMessage("Got it. I've added this task:\n\t" + task
                     + "\nNow you have " + taskList.size() + " tasks in the list.");
         } else {
-            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The description of " + userInput[0] + " cannot be empty.");
+            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The description of " + userInputs[0] + " cannot be empty.");
         }
     }
 
     /**
-     * Creates deadline.
+     * Creates deadline command.
      *
-     * @return Deadline.
+     * @return Deadline command.
      * @throws BiscuitException Invalid user input.
      */
     private Deadline getDeadline() throws BiscuitException {
-        String[] deadlineData = userInput[1].split("/by ", 2);
+        String[] deadlineData = userInputs[1].split("/by ", 2);
         if (deadlineData.length == 2) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -78,13 +82,13 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Creates event.
+     * Creates event command.
      *
-     * @return Event.
+     * @return Event command.
      * @throws BiscuitException Invalid user input.
      */
     private Event getEvent() throws BiscuitException {
-        String[] eventData = userInput[1].split("/at ", 2);
+        String[] eventData = userInputs[1].split("/at ", 2);
         if (eventData.length == 2) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -99,12 +103,11 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Creates todo.
+     * Creates todo command.
      *
-     * @return ToDo.
-     * @throws BiscuitException Invalid user input.
+     * @return ToDo command.
      */
     private ToDo getToDo() {
-        return new ToDo(userInput[1]);
+        return new ToDo(userInputs[1]);
     }
 }

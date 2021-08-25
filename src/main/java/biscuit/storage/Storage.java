@@ -22,7 +22,7 @@ public class Storage {
 
     private final String filePath;
 
-    private final ArrayList<Task> list;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructs Storage class.
@@ -31,7 +31,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
-        this.list = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -41,8 +41,8 @@ public class Storage {
      */
     public void save() throws BiscuitException {
         try {
-            try (PrintWriter printWriter = new PrintWriter(new File(filePath))) {
-                list.stream().map(this::convertToCsv).forEach(printWriter::println);
+            try (PrintWriter printWriter = new PrintWriter(filePath)) {
+                tasks.stream().map(this::convertToCsv).forEach(printWriter::println);
             }
         } catch (IOException e) {
             throw new BiscuitException("Woof! Something went wrong and I was unable to save your most recent change.");
@@ -64,13 +64,13 @@ public class Storage {
             }
             try (Scanner scanner = new Scanner(new File(filePath))) {
                 while (scanner.hasNext()) {
-                    list.add(convertToTask(scanner.nextLine()));
+                    tasks.add(convertToTask(scanner.nextLine()));
                 }
             }
         } catch (IOException e) {
             throw new BiscuitException("Woof! Could not create save file to save data to.");
         }
-        return list;
+        return tasks;
     }
 
     /**
@@ -106,8 +106,7 @@ public class Storage {
      */
     private Task convertToTask(String csv) throws BiscuitException {
         try {
-            // regex adapted from https://stackoverflow.com/questions/1757065/java-splitting-a-comma-separated-string-but-ignoring-commas-in-quotes
-            // splits by commas, but ignores commas in quotes
+            // splits csv string by commas, but ignores commas in quotes
             String[] values = csv.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
             boolean isDone = Boolean.parseBoolean(values[1]);
             String description = unescapeSpecialCharacters(values[2]);
@@ -133,12 +132,11 @@ public class Storage {
      * @return String with special characters escaped.
      */
     private String escapeSpecialCharacters(String data) {
-        // @@author MarcusTXK--reused
-        // Reused from https://www.baeldung.com/java-csv
+        // Solution below adapted from https://www.baeldung.com/java-csv
         String escapedData = data.replaceAll("\\R", " ");
-        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
-            data = data.replace("\"", "\"\"");
-            escapedData = "\"" + data + "\"";
+        if (escapedData.contains(",") || escapedData.contains("\"") || escapedData.contains("'")) {
+            escapedData = escapedData.replace("\"", "\"\"");
+            escapedData = "\"" + escapedData + "\"";
         }
         return escapedData;
     }

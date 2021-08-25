@@ -6,6 +6,7 @@ import biscuit.commands.Command;
 import biscuit.commands.DeleteCommand;
 import biscuit.commands.DoneCommand;
 import biscuit.commands.ExitCommand;
+import biscuit.commands.FindCommand;
 import biscuit.commands.ListCommand;
 import biscuit.exceptions.BiscuitException;
 
@@ -28,22 +29,24 @@ public class Parser {
      * @throws BiscuitException Invalid command by user.
      */
     public static Command parse(String userInput) throws BiscuitException {
-        String[] processedInput = userInput.trim().split("\\s+", 2);
-        switch (processedInput[0]) {
+        String[] processedInputs = userInput.trim().split("\\s+", 2);
+        switch (processedInputs[0]) {
         case "todo":
+            // Fallthrough
         case "deadline":
+            // Fallthrough
         case "event":
-            return new AddCommand(processedInput);
+            return new AddCommand(processedInputs);
         case "done":
-            return new DoneCommand(processedInput);
+            return new DoneCommand(processedInputs);
         case "delete":
-            return new DeleteCommand(processedInput);
+            return new DeleteCommand(processedInputs);
         case "list":
-            return new ListCommand(processedInput);
+            return new ListCommand(processedInputs);
         case "find":
-            return new FindCommand(processedInput);
+            return new FindCommand(processedInputs);
         case "bye":
-            return new ExitCommand(processedInput);
+            return new ExitCommand(processedInputs);
         default:
             throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! I'm sorry, but I don't know what that means...");
         }

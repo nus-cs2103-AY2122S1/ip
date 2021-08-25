@@ -14,10 +14,10 @@ public class DoneCommand extends Command {
     /**
      * Constructs DoneCommand class.
      *
-     * @param userInput User input array with this structure: [command, details].
+     * @param userInputs User input array with this structure: [command, details].
      */
-    public DoneCommand(String[] userInput) {
-        super(CommandType.DONE, userInput);
+    public DoneCommand(String[] userInputs) {
+        super(CommandType.DONE, userInputs);
     }
 
     /**
@@ -30,15 +30,15 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
-        if (userInput.length == 2) {
+        if (userInputs.length == 2) {
             try {
-                Task current = taskList.getTask(Integer.parseInt(userInput[1]) - 1);
+                Task current = taskList.getTask(Integer.parseInt(userInputs[1]) - 1);
                 current.setDone(true);
                 storage.save();
                 ui.showMessage("Nice! I've marked this task as done, woof!\n\t" + current);
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! Please enter a valid number" +
-                        (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");
+                throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! Please enter a valid number"
+                        + (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");
             }
         } else {
             throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The done task number cannot be empty.");

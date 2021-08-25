@@ -5,9 +5,7 @@ package biscuit.task;
  */
 public class Task {
 
-    /**
-     * Types of tasks available.
-     */
+    /** Types of tasks available. */
     public enum TaskType {
         TODO,
         DEADLINE,
@@ -58,18 +56,18 @@ public class Task {
      * @return Box containing task of Type.
      */
     protected String getTypeBox() {
-        String taskType;
-        switch (this.taskType) {
+        String type;
+        switch (taskType) {
         case DEADLINE:
-            taskType = "D";
+            type = "D";
             break;
         case EVENT:
-            taskType = "E";
+            type = "E";
             break;
         default:
-            taskType = "T";
+            type = "T";
         }
-        return "[" + taskType + "]";
+        return "[" + type + "]";
     }
 
     /**
@@ -96,7 +94,7 @@ public class Task {
      * @param done Boolean of is task is done.
      */
     public void setDone(boolean done) {
-        this.isDone = done;
+        isDone = done;
     }
 
     /**

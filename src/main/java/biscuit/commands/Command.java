@@ -10,9 +10,7 @@ import biscuit.ui.Ui;
  */
 public abstract class Command {
 
-    /**
-     * Types of commands available.
-     */
+    /** Types of commands available. */
     public enum CommandType {
         ADD,
         DELETE,
@@ -23,17 +21,17 @@ public abstract class Command {
     }
 
     protected CommandType commandType;
-    protected String[] userInput;
+    protected String[] userInputs;
 
     /**
      * Constructs Command class.
      *
      * @param commandType Type of command.
-     * @param userInput   User input array with this structure: [command, details].
+     * @param userInputs  User input array with this structure: [command, details].
      */
-    protected Command(CommandType commandType, String[] userInput) {
+    protected Command(CommandType commandType, String[] userInputs) {
         this.commandType = commandType;
-        this.userInput = userInput;
+        this.userInputs = userInputs;
     }
 
     /**
@@ -52,7 +50,7 @@ public abstract class Command {
      * @return Boolean of is Exit type.
      */
     public boolean isExit() {
-        return this.commandType.equals(CommandType.EXIT);
+        return commandType.equals(CommandType.EXIT);
     }
 
     /**

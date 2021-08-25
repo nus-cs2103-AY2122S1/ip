@@ -1,6 +1,5 @@
 package biscuit.commands;
 
-import biscuit.exceptions.BiscuitException;
 import biscuit.storage.Storage;
 import biscuit.task.TaskList;
 import biscuit.ui.Ui;
@@ -13,10 +12,10 @@ public class ExitCommand extends Command {
     /**
      * Constructs ExitCommand class.
      *
-     * @param userInput User input array with this structure: [command, details].
+     * @param userInputs User input array with this structure: [command, details].
      */
-    public ExitCommand(String[] userInput) {
-        super(CommandType.EXIT, userInput);
+    public ExitCommand(String[] userInputs) {
+        super(CommandType.EXIT, userInputs);
     }
 
     /**
@@ -25,10 +24,9 @@ public class ExitCommand extends Command {
      * @param taskList Task list.
      * @param ui       Ui to display.
      * @param storage  Storage to save to.
-     * @throws BiscuitException Invalid input by user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showMessage("Bye! Hope to see you again soon! 8==8");
     }
 }

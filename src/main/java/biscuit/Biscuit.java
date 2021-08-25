@@ -10,7 +10,7 @@ import biscuit.ui.Ui;
 import java.util.ArrayList;
 
 /**
- * Biscuit is a Personal Assistant Chatbot that helps a person to keep track of various things
+ * Biscuit is a Personal Assistant Chatbot that helps a person to keep track of various things.
  */
 public class Biscuit {
     private final Storage storage;
@@ -20,11 +20,11 @@ public class Biscuit {
     /**
      * Constructs Biscuit class.
      *
-     * @param filePath file path to save file
+     * @param filePath file path to save file.
      */
     public Biscuit(String filePath) {
-        this.storage = new Storage(filePath);
-        this.ui = new Ui();
+        storage = new Storage(filePath);
+        ui = new Ui();
         try {
             taskList = new TaskList(storage.load());
         } catch (BiscuitException e) {

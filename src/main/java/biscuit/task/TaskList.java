@@ -1,32 +1,29 @@
 package biscuit.task;
 
-import biscuit.exceptions.BiscuitException;
-
 import java.util.List;
 
 /**
  * TaskList class contains the task list and operations to edit the list.
  */
 public class TaskList {
-    private final List<Task> list;
+    private final List<Task> tasks;
 
     /**
      * Constructs TaskList class.
      *
-     * @param list Task List.
+     * @param tasks Task List.
      */
-    public TaskList(List<Task> list) {
-        this.list = list;
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
      * Adds task to list.
      *
      * @param task Task to add.
-     * @throws BiscuitException Error when saving.
      */
-    public void addTask(Task task) throws BiscuitException {
-        list.add(task);
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
     /**
@@ -35,7 +32,7 @@ public class TaskList {
      * @return Size of list.
      */
     public int size() {
-        return list.size();
+        return tasks.size();
     }
 
     /**
@@ -45,7 +42,7 @@ public class TaskList {
      * @return Task.
      */
     public Task getTask(int index) {
-        return list.get(index);
+        return tasks.get(index);
     }
 
     /**
@@ -54,7 +51,7 @@ public class TaskList {
      * @param index Index of task to remove.
      */
     public void removeTask(int index) {
-        list.remove(index);
+        tasks.remove(index);
     }
 
     /**
@@ -63,7 +60,7 @@ public class TaskList {
      * @return Boolean of is task empty.
      */
     public boolean isEmpty() {
-        return list.isEmpty();
+        return tasks.isEmpty();
     }
 
 }
