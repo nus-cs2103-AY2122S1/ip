@@ -1,6 +1,9 @@
-/**
- * Enum containing the different commands available.
- */
-public enum Command {
-    LIST, DONE, TODO, DEADLINE, EVENT, DELETE, BYE, DEFAULT
+public abstract class Command {
+    protected boolean isExit = false;
+
+    public boolean isExit() {
+        return this.isExit;
+    }
+
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws EightBitException;
 }
