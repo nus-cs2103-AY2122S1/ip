@@ -5,6 +5,7 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Handles matching input to behaviour and execution action.
@@ -39,6 +40,8 @@ public class Parser {
             return "";
         } else if (matches("list", input)) {
             return listTasks();
+        } else if (startsWithOrEquals("find ", input)) {
+            return findTasks(getArgs(input, "find "));
         } else if (startsWithOrEquals("done ", input)) {
             return doTaskAction(getArgs(input, "done "), Actions.MARK_COMPLETE);
         } else if (startsWithOrEquals("delete ", input)) {
@@ -77,6 +80,16 @@ public class Parser {
         int taskCount = 1;
         StringBuilder result = new StringBuilder();
         for (Task task : this.tasks.stream().collect(Collectors.toList())) {
+            result.append(String.format("%2d. %s\n", taskCount++, task));
+        }
+        return result.toString();
+    }
+
+    private String findTasks(String searchQuery) {
+        int taskCount = 1;
+        StringBuilder result = new StringBuilder();
+        Stream<Task> filteredTasks = this.tasks.stream().filter(task -> task.toString().contains(searchQuery));
+        for (Task task : filteredTasks.collect(Collectors.toList())) {
             result.append(String.format("%2d. %s\n", taskCount++, task));
         }
         return result.toString();
