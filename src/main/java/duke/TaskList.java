@@ -63,9 +63,9 @@ public class TaskList {
     }
 
     /**
-     * Produces a string representing the store format of the list of tasks for duke.Duke.
+     * Produces a string representing the store format of the list of tasks for Duke.
      *
-     * @return a String of the list of tasks in duke.Duke store format.
+     * @return a String of the list of tasks in Duke store format.
      */
     public String toDukeStoreFormat() {
         String outputString =

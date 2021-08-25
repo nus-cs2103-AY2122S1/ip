@@ -114,7 +114,7 @@ public class Duke {
     /**
      * Designates the job to the appropriate handler based on the duke command and args
      *
-     * @param command     the duke.Duke command read by the parser.
+     * @param command     the Duke command read by the parser.
      * @param argsLiteral the arguments read by the parser.
      */
     private void handleInput(DukeCommand command, String argsLiteral) {
@@ -155,10 +155,10 @@ public class Duke {
     }
 
     /**
-     * Prompts users to input their commands to duke.Duke
+     * Prompts users to input their commands to Duke
      */
     private void promptUserCommands() {
-        String introduction = "Hello! I'm duke.Duke\nWhat can I do for you?";
+        String introduction = "Hello! I'm Duke\nWhat can I do for you?";
         ui.dukePrint(introduction);
 
         String userInput;

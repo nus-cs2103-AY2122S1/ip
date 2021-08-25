@@ -12,7 +12,7 @@ public class DukeParser {
      *
      * @param line line that data is read from.
      * @return a task matching the information from the line of data.
-     * @throws DukeFileSystemException if the line provided does not conform to the duke.Duke storing format.
+     * @throws DukeFileSystemException if the line provided does not conform to the Duke storing format.
      */
     public Task parseTaskFromLine(String line) throws DukeFileSystemException {
         String[] lineArgs = line.split(" \\| ");
@@ -42,11 +42,11 @@ public class DukeParser {
     }
 
     /**
-     * Gets the type of duke.Duke command of a given input string.
-     * The duke.Duke command of an input string is given by the first argument provided in the string.
+     * Gets the type of Duke command of a given input string.
+     * The Duke command of an input string is given by the first argument provided in the string.
      *
      * @param inputString the string literal of the input.
-     * @return a corresponding duke.Duke command type based on the input string.
+     * @return a corresponding Duke command type based on the input string.
      */
     public DukeCommand getCommandType(String inputString) {
         DukeCommand inputCommand;

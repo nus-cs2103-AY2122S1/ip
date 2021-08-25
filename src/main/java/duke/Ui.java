@@ -29,7 +29,7 @@ public class Ui {
     }
 
     /**
-     * Prints the specified message in the duke.Duke error message format.
+     * Prints the specified message in the Duke error message format.
      *
      * @param s The error message to be printed.
      */
