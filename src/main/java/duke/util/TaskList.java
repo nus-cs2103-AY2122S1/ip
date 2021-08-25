@@ -21,7 +21,7 @@ public class TaskList {
             } else {
                 ui.listTasksOutput(commands);
             }
-        } catch (DukeException e){
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
 
@@ -35,12 +35,12 @@ public class TaskList {
     public void remove(int listNumber, ArrayList<Task> commands){
         try {
             if (listNumber < commands.size()) {
-                ui.removeOutput(commands.get(listNumber), commands.size()-1);
+                ui.removeOutput(commands.get(listNumber), commands.size() - 1);
                 commands.remove(listNumber);
             } else {
                 throw new InvalidTaskException();
             }
-        } catch (DukeException e){
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
     }

@@ -3,11 +3,10 @@ package duke.util;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
     @Test
-    void parseCommand_success(){
+    void parseCommand_success() {
         String[] inputs = {
                 "todo",
                 "DeadLine",
@@ -28,11 +27,11 @@ public class ParserTest {
                 DukeCommands.LIST,
                 DukeCommands.EVENT
         };
-        
-        for(int i = 0; i < 8; i++){
+
+        for (int i = 0; i < 8; i++) {
             assertEquals(expected[i], Parser.parseCommand(inputs[i]));
         }
-        
+
     }
-    
+
 }
