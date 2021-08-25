@@ -16,8 +16,8 @@ public class Event extends Task{
     }
 
     @Override
-    public String getType() {
-        return "EVENT";
+    public CommandList getType() {
+        return CommandList.EVENT;
     }
 
     @Override

@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Todo extends Task{
 
 
@@ -6,8 +8,13 @@ public class Todo extends Task{
     }
 
     @Override
-    public String getType() {
-        return "TODO";
+    public LocalDate getTime() {
+        return null;
+    }
+
+    @Override
+    public CommandList getType() {
+        return CommandList.TODO;
     }
 
     @Override

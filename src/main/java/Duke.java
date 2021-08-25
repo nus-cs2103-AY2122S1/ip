@@ -7,33 +7,49 @@ import java.util.Scanner;
  * @version: CS2103T AY21 Semester 1
  */
 public class Duke {
+
+    private Ui ui;
+    private TaskList taskList;
+    private Storage storage;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            taskList = new TaskList(storage.load());
+        } catch (InitialisationError e) {
+            ui.showLoadingError();
+            taskList = new TaskList();
+        }
+
+    }
+
     public static void main(String[] args) {
-        runProgram();
+        new Duke("data/dukeData.json").runProgram();
     }
 
     /**
      * This method runs the program indefinitely till user types in "bye".
      */
-    public static void runProgram() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
+    public void runProgram() {
+        ui.showWelcome();
         boolean run = true;
-        Scanner scanner = new Scanner(System.in);
-        TaskManager taskManager = new TaskManager();
 
         while (run) {
-            // wait to read in the user's input
-            String input = scanner.nextLine();
-            // Ensures that all bye would end the program.
             try {
-                run = taskManager.executeCommand(input, true, false);
+                // wait to read in the user's input
+                String input = ui.readCommand();
+                Command userCommand = Parser.parse(input);
+                run = userCommand.execute(taskList, ui, storage);
             } catch (IncompleteCommandException e) {
-                System.out.println(e);
+                run = true;
+                ui.printErrorMessage(e.getMessage());
+            } catch (Exception e) {
+                run = false;
+                e.printStackTrace();
+            }
+            if (run) {
+                ui.showLoopWelcome();
             }
 
         }

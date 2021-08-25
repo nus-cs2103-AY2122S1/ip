@@ -5,22 +5,19 @@ import java.time.LocalDate;
  */
 public abstract class Task {
     private String value = null;
-    private boolean isDone = false;
-    // takes in LocalDate
+    private boolean done = false;
     private LocalDate time = null;
     public Task(String value){
         this.value = value;
-        this.isDone = false;
+        this.done = false;
     }
 
-    public LocalDate getTime() {
-        return time;
-    }
+    public abstract LocalDate getTime();
 
-    public abstract String getType();
+    public abstract CommandList getType();
 
-    public boolean getDone() {
-        return isDone;
+    public boolean isDone() {
+        return done;
     }
 
     /**
@@ -35,14 +32,14 @@ public abstract class Task {
      * Mark task as done.
      */
     public void markDone() {
-        this.isDone = true;
+        this.done = true;
     }
 
     /**
      * Mark task as undone.
      */
     public void markUnDone() {
-        this.isDone = false;
+        this.done = false;
     }
 
     /**
@@ -50,7 +47,7 @@ public abstract class Task {
      * @return A string representing the state of the task.
      */
     public String getStatusIcon() {
-        return this.isDone ? "X" : " ";
+        return this.done ? "X" : " ";
     }
 
     @Override

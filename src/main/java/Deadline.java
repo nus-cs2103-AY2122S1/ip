@@ -15,8 +15,8 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String getType() {
-        return "DEADLINE";
+    public CommandList getType() {
+        return CommandList.DEADLINE;
     }
 
     @Override
