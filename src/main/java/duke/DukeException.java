@@ -9,7 +9,7 @@ public class DukeException extends IllegalArgumentException{
     /**
      * Return string message specific for the exception.
      *
-     * @return string message.
+     * @return String message.
      */
     @Override
     public String toString() {

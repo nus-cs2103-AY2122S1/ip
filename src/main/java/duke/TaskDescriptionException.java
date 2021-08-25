@@ -9,7 +9,7 @@ public class TaskDescriptionException extends DukeException{
     /**
      * Return string message specific for the exception.
      *
-     * @return string message.
+     * @return String message.
      */
     @Override
     public String toString() {
