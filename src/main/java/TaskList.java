@@ -78,10 +78,12 @@ public class TaskList {
         return task;
     }
     
+    /** Returns a list of tasks in data string format */
     public List<String> getListData() {
          return todoList.stream().map(task -> task.toDataString("|")).collect(Collectors.toList());
     }
-    
+
+    /** Returns the size of the list */
     public Integer getListSize() {
         return todoList.size(); 
     }

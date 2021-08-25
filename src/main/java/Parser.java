@@ -1,9 +1,8 @@
 public class Parser {
     public static Command parse(String fullCommand, TaskList tasks) throws DukeException {
-        String[] cmdWordDetails = fullCommand.split(" ", 2);
+        String[] cmdWordDetails = fullCommand.split(" ", 2); // split into command and details
         String cmdWord = cmdWordDetails[0]; // get first word as command
         String description = cmdWordDetails.length > 1 ? cmdWordDetails[1] : "";
-        Integer taskNum;
         
         switch(cmdWord) {
             case "bye":
@@ -17,11 +16,9 @@ public class Parser {
             case "event":
                 return new AddCommand(TaskList.TaskType.EVENT, description);
             case "done":
-                taskNum = validateTaskNumber(description, tasks);
-                return new DoneCommand(taskNum);
+                return new DoneCommand(validateTaskNumber(description, tasks));
             case "delete":
-                taskNum = validateTaskNumber(description, tasks);
-                return new DeleteCommand(taskNum);
+                return new DeleteCommand(validateTaskNumber(description, tasks));
             default:
                 throw new DukeException("Sorry, I don't know what that means.");
         }

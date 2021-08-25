@@ -3,8 +3,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    protected LocalDateTime by;
     
+    /** The deadline date and time of this task */
+    protected LocalDateTime by;
+
+    /** The accepted format of date and time for the deadline */
     private final String inputPattern = "dd-MM-yyyy HH:mm";
 
     public Deadline(String description, String by) throws DukeException {
@@ -22,7 +25,8 @@ public class Deadline extends Task {
             throw new DukeException("The deadline date is invalid. Please follow this format: " + inputPattern);
         }
     }
-    
+
+    /** Returns the deadline date and time as a string to be displayed */
     private String getDateString() {
         return by.format(DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm a")).replace("AM", "am").replace("PM","pm");
     }

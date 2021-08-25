@@ -7,10 +7,12 @@ public class Ui {
         sc = new Scanner(System.in);
     }
     
+    /** Error message shown on start up of Duke */
     public void showStartUpError(DukeException e) {
         System.out.println((new DukeException("Error starting up.").concat(e)));
     }
 
+    /** Welcome message shown on start up of Duke */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -23,15 +25,18 @@ public class Ui {
         showLine();
     }
 
+    /** Show divider line */
     public void showLine() {
         String separator = "------------------------------------------------------------------";
         System.out.println(separator);
     }
 
+    /** Takes in input from user and returns it */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    /** Displays a message to the user */
     public void showMessage(String message) {
         System.out.println(message);
     }
