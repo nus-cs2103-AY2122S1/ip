@@ -25,10 +25,9 @@ public class Storage {
     }
 
     /** Writes over data file to save current todoList contents */
-    public void save(ArrayList<Task> todoList) throws DukeException {
+    public void save(List<String> dataStrings) throws DukeException {
         try {
             // task saved as e.g. E|0|meeting|2pm
-            List<String> dataStrings = todoList.stream().map(task -> task.toDataString("|")).collect(Collectors.toList());
             Files.write(filePath, dataStrings);
         } catch (IOException e) {
             throw new DukeException("Could not save list to database. " + e.getMessage());

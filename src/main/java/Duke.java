@@ -5,21 +5,15 @@ import java.util.ArrayList;
 public class Duke {
 
     private static Storage storage;
-    
-    private static ArrayList<Task> todoList;
-    
-    private enum TaskType {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
+
+    private static TaskList tasks;
     
     public static void main(String[] args) {
         
         try {
             String filePath = "data/tasks.txt";
             storage = new Storage(filePath);
-            todoList = storage.load();
+            tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             System.out.println(e.toString());
             return;
@@ -59,19 +53,23 @@ public class Duke {
                     System.out.println("Bye bye! See you again soon!");
                     end = true;
                 } else if (cmd.equals(listCmd)) {
-                    displayList();
+                    tasks.displayList();
                 } else if (cmd.equals(doneCmd)) {
                     Integer taskNum = validateTaskNumber(description);
-                    markTaskDone(taskNum);
+                    tasks.markTaskDone(taskNum);
+                    storage.save(tasks.getListData());
                 } else if (cmd.equals(todoCmd)) {
-                    addTask(TaskType.TODO, description);
+                    tasks.addTask(TaskList.TaskType.TODO, description);
+                    storage.save(tasks.getListData());
                 } else if (cmd.equals(deadlineCmd)) {
-                    addTask(TaskType.DEADLINE, description);
+                    tasks.addTask(TaskList.TaskType.DEADLINE, description);
+                    storage.save(tasks.getListData());
                 } else if (cmd.equals(eventCmd)) {
-                    addTask(TaskType.EVENT, description);
+                    tasks.addTask(TaskList.TaskType.EVENT, description);
+                    storage.save(tasks.getListData());
                 } else if (cmd.equals(deleteCmd)) {
                     Integer taskNum = validateTaskNumber(description);
-                    deleteTask(taskNum);
+                    tasks.deleteTask(taskNum);
                 } else {
                     throw new DukeException("Sorry, I don't know what that means.");
                 }
@@ -82,73 +80,6 @@ public class Duke {
             }
         }
     }
-    
-    /** Prints the to-do list in order */
-    private static void displayList() {
-        System.out.println("Your task list:");
-        for (int i = 0; i < todoList.size(); i++) {
-            Task task = todoList.get(i);
-            int num = i+1;
-            System.out.println(num + "." + task.toString());
-        }
-    }
-
-    /** Add a task to the to-do list */
-    private static void addTask(TaskType taskType, String details) throws DukeException {
-        Task task;
-        if (taskType.equals(TaskType.TODO)) {
-            task = new ToDo(details);
-        } else if (taskType.equals(TaskType.DEADLINE)) {
-            int position = details.indexOf("/by");
-            String description, by;
-            if (position >= 0) {
-                description = details.substring(0, position);
-                by = details.substring(position + 3);
-            } else {
-                throw new DukeException("Please indicate the deadline eg \"/by Sunday\" ");
-            }
-            task = new Deadline(description.trim(), by.trim());
-        } else if (taskType.equals(TaskType.EVENT)) {
-            int position = details.indexOf("/at");
-            String description, at;
-            if (position >= 0) {
-                description = details.substring(0, position);
-                at = details.substring(position + 3);
-            } else {
-                throw new DukeException("Please indicate the event time eg \"/at Mon 2-4pm\" ");
-            }
-            task = new Event(description.trim(), at.trim());
-        } else {
-            // should not reach here
-            return;
-        }
-        todoList.add(task);
-        System.out.println("I've added this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + todoList.size() + " tasks in the list.");
-        
-        storage.save(todoList);
-    }
-
-    /** Mark a task with given task number as done */
-    private static void markTaskDone(Integer taskNum) throws DukeException {
-        Task task = todoList.get(taskNum - 1);
-        task.markAsDone();
-        System.out.println("Good work! I've marked this task as done:");
-        System.out.println(task.toString());
-
-        storage.save(todoList);
-    }
-
-    /** Delete a task with given task number */
-    private static void deleteTask(Integer taskNum) throws DukeException {
-        Task task = todoList.remove(taskNum - 1);
-        System.out.println("Ok, I've deleted this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + todoList.size() + " tasks in the list.");
-
-        storage.save(todoList);
-    }
 
     /** checks if input is a valid task number and returns task number if valid */
     private static Integer validateTaskNumber(String input) throws DukeException {
@@ -158,12 +89,12 @@ public class Duke {
         } catch (NumberFormatException e) {
             throw new DukeException("You did not specify the task number.");
         }
-        int listLength = todoList.size();
+        int listLength = tasks.getListSize();
         int taskIndex = taskNum - 1;
         if (listLength == 0) {
             throw new DukeException("The operation cannot be performed as you have 0 tasks in your list.");
         }
-        if (taskIndex < 0 || taskIndex >= todoList.size()) {
+        if (taskIndex < 0 || taskIndex >= tasks.getListSize()) {
             throw new DukeException("The task number must be from 1 to " + listLength + ".");
         }
         return taskNum;
