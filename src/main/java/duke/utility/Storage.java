@@ -1,3 +1,10 @@
+package duke.utility;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,25 +15,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class Storage {
+public class Storage {
     
     private final String filePath;
     
-    Storage(String filePath) throws IOException {
+    public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         // try to load the file, if not, create it
         File previousLog = new File(this.filePath);
         if (! previousLog.createNewFile()) { // file already exists
             System.out.println("Successfully established connection with file " + filePath
-                    + "\nPrevious task log imported."
-                    + "\nAll changes to task log will be saved there.");
+                    + "\nPrevious duke.task log imported."
+                    + "\nAll changes to duke.task log will be saved there.");
         } else { // new file is created
             System.out.println("Specified file not found.\nNew file created: " + filePath
-                    + "\nTask log will be saved there.");
+                    + "\nduke.task.Task log will be saved there.");
         }
     }
     
-    List<Task> loadPreviousTasks() throws FileNotFoundException {
+    public List<Task> loadPreviousTasks() throws FileNotFoundException {
         List<Task> prevTasks = new ArrayList<Task>();
         Scanner s = new Scanner(new File(this.filePath));
         while (s.hasNextLine()) {
@@ -34,7 +41,7 @@ class Storage {
             String[] tokens = task.split(";");
             boolean isCompleted = tokens[1].equals("T");
             String taskName = tokens[2];
-            // format: task type | isCompleted | event name | date/time
+            // format: duke.task type | isCompleted | event name | date/time
             switch (tokens[0]) {
             case "T":
                 prevTasks.add(ToDo.createTask(taskName, isCompleted));

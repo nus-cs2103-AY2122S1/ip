@@ -1,12 +1,15 @@
+package duke.utility;
+
+import duke.exception.DukeException;
 import java.util.Scanner;
 
-class Ui {
+public class Ui {
     
-    Ui() {
+    public Ui() {
         
     }
     
-    void startListening(TaskList tasks, Storage storage) {
+    public void startListening(TaskList tasks, Storage storage) {
         Parser parser = new Parser(tasks, storage);
         Scanner sc = new Scanner(System.in);
         String welcomeMessage = "Hello I'm Duke!\nWhat can I do for you?";

@@ -1,4 +1,6 @@
-abstract class Task {
+package duke.task;
+
+public abstract class Task {
 
     private final String taskName;
     private final boolean isCompleted;
@@ -13,7 +15,7 @@ abstract class Task {
         this.isCompleted = true;
     }
 
-    abstract Task markAsCompleted();
+    public abstract Task markAsCompleted();
 
     public String getTaskName() {
         return this.taskName;

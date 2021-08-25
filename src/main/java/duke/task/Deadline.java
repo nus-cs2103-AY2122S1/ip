@@ -1,11 +1,13 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-class Deadline extends Task {
+public class Deadline extends Task {
 
     private final LocalDateTime dateTime;
 
-    Deadline(String taskName, LocalDateTime dateTime) {
+    public Deadline(String taskName, LocalDateTime dateTime) {
         super(taskName);
         this.dateTime = dateTime;
     }
@@ -15,7 +17,7 @@ class Deadline extends Task {
         this.dateTime = oldDeadline.dateTime;
     }
     
-    static protected Deadline createTask(String name, boolean isCompleted, LocalDateTime dateTime) {
+    public static Deadline createTask(String name, boolean isCompleted, LocalDateTime dateTime) {
         Deadline d = new Deadline(name, dateTime);
         if (isCompleted) {
             return new Deadline(d);
@@ -25,7 +27,7 @@ class Deadline extends Task {
     }
 
     @Override
-    Deadline markAsCompleted() {
+    public Deadline markAsCompleted() {
         return new Deadline(this);
     }
 

@@ -1,11 +1,13 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-class Event extends Task {
+public class Event extends Task {
 
     private final LocalDateTime dateTime;
 
-    Event(String eventName, LocalDateTime dateTime) {
+    public Event(String eventName, LocalDateTime dateTime) {
         super(eventName);
         this.dateTime = dateTime;
     }
@@ -15,7 +17,7 @@ class Event extends Task {
         this.dateTime = oldEvent.dateTime;
     }
     
-    static protected Event createTask(String name, boolean isCompleted, LocalDateTime dateTime) {
+    public static Event createTask(String name, boolean isCompleted, LocalDateTime dateTime) {
         Event e = new Event(name, dateTime);
         if (isCompleted) {
             return new Event(e);
@@ -25,7 +27,7 @@ class Event extends Task {
     }
 
     @Override
-    Event markAsCompleted() {
+    public Event markAsCompleted() {
         return new Event(this);
     }
 

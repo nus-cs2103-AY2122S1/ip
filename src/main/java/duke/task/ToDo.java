@@ -1,6 +1,8 @@
-class ToDo extends Task {
+package duke.task;
 
-    ToDo(String taskName) {
+public class ToDo extends Task {
+
+    public ToDo(String taskName) {
         super(taskName);
     }
     
@@ -8,7 +10,7 @@ class ToDo extends Task {
         super(oldTask);
     }
     
-    static protected ToDo createTask(String name, boolean isCompleted) {
+    public static ToDo createTask(String name, boolean isCompleted) {
         ToDo t = new ToDo(name);
         if (isCompleted) {
             return new ToDo(t);
@@ -18,7 +20,7 @@ class ToDo extends Task {
     } 
 
     @Override
-    ToDo markAsCompleted() {
+    public ToDo markAsCompleted() {
         return new ToDo(this);
     }
 

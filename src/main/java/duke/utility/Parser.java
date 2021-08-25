@@ -1,3 +1,11 @@
+package duke.utility;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,18 +37,18 @@ public class Parser {
             case "delete":
                 return this.parseDeleteTask(command.substring(7));
             default:
-                return this.parseNewTask(command); // default is add new task
+                return this.parseNewTask(command); // default is add new duke.task
             }
         } catch (ArrayIndexOutOfBoundsException ex) { // only occurs when the user only types whitespace
             return "Please type some commands!";
         } catch (DukeException ex) {
             return ex.getMessage();
         } catch (DateTimeParseException ex) {
-            return "Invalid task description: "
-                    + "invalid date/time\nPlease use [command type] [task name] / [dd-mm-yyyy] [time (in 24hr " +
+            return "Invalid duke.task description: "
+                    + "invalid date/time\nPlease use [command type] [duke.task name] / [dd-mm-yyyy] [time (in 24hr " +
                     "format)]\ne.g. event lecture / 21-02-2021 1500";
         } catch (IOException ex) {
-            return "Unable to log task.";
+            return "Unable to log duke.task.";
         } catch (NumberFormatException | StringIndexOutOfBoundsException ex) {
             return "Invalid input for delete command. Please enter [delete] followed by the number of the line to " +
                     "delete\ne.g. delete 2";
@@ -74,9 +82,9 @@ public class Parser {
         if (commandTokens[0].equals("todo")) {
             taskName = command.substring(5).trim();
             if (this.taskList.existingTasks.contains(taskName)) {
-                throw new DukeException.DuplicateTaskException("Task already in list!");
+                throw new DukeException.DuplicateTaskException("duke.task.Task already in list!");
             } else if (taskName.length() == 0) {
-                throw new DukeException.InvalidTaskDescriptionException("Missing task description!");
+                throw new DukeException.InvalidTaskDescriptionException("Missing duke.task description!");
             } else {
                 task = new ToDo(taskName);
                 if (this.storage != null) {
@@ -88,14 +96,14 @@ public class Parser {
             String details = command.substring(commandTokens[0].length() + 1).trim();
             String[] detailTokens = details.split("/");
             if (detailTokens.length < 2) {
-                throw new DukeException.InvalidTaskDescriptionException("Invalid task description: missing date/time!");
+                throw new DukeException.InvalidTaskDescriptionException("Invalid duke.task description: missing date/time!");
             } else if (detailTokens.length > 2) {
-                throw new DukeException.InvalidTaskDescriptionException("Invalid task description: "
-                        + "invalid date/time\nPlease use [command type] [task name] / [dd-mm-yyyy] [time (in 24hr " +
+                throw new DukeException.InvalidTaskDescriptionException("Invalid duke.task description: "
+                        + "invalid date/time\nPlease use [command type] [duke.task name] / [dd-mm-yyyy] [time (in 24hr " +
                         "format)" +
                         "]\ne.g. event lecture / 21-02-2021 1500");
             } else if (this.taskList.existingTasks.contains(detailTokens[0].trim())) {
-                throw new DukeException.DuplicateTaskException("Task already in list!");
+                throw new DukeException.DuplicateTaskException("duke.task.Task already in list!");
             } else { // valid
                 taskName = detailTokens[0].trim();
                 String[] dateTimeString = detailTokens[1].trim().split(" ");
