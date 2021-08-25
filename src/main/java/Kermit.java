@@ -1,4 +1,4 @@
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -7,54 +7,21 @@ import java.util.Scanner;
 import java.lang.StringBuilder;
 
 public class Kermit {
-    /**
-     * Adds a top and bottom horizontal line to text
-     *
-     * @param text Text to be formatted.
-     * @return Formatted version of text.
-     */
-    private static String formatText(String text) {
-        String horizontalDivider = "____________________________________________________________________________";
-        return horizontalDivider + "\n" + text + "\n" + horizontalDivider;
-    }
-
-    /**
-     * Pretty format text when task is added
-     *
-     * @param task Task that is added to list
-     * @param list List that task was added to
-     * @return String stating task was successfully added
-     */
-    private static String printAddTask(Task task, ToDo list) {
-        return "Got it. I've added this task:\n"
-                + task + "\nNow you have " + list.size() + " tasks in the list.";
-    }
-
-    private static String printDeleteTask(Task task, ToDo list) {
-        return "Noted. I've removed this task:\n"
-                + task + "\nNow you have " + list.size() + " tasks in the list.";
-    }
-
-    private static LocalDate formatUserDateFormat(String s) {
+    private static LocalDate formatUserDateFormat(String s) throws KermitException {
         String[] components = s.split("-");
         String day = components[0];
         String month = components[1];
         String year = components[2];
-        LocalDate parsedDate = LocalDate.parse(String.join("-", year, month, day));
-        return parsedDate;
+        try {
+            LocalDate parsedDate = LocalDate.parse(String.join("-", year, month, day));
+            return parsedDate;
+        } catch (DateTimeParseException e) {
+            throw new KermitException("BAH That's not a time is it?? Try writing like this DD/MM/YYYY");
+        }
     }
 
-    private static void formatAndPrintText(String text) {
-        System.out.println(formatText(text));
-    }
-
-    public static void main(String[] args) throws FileNotFoundException {
-        final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
-        final String listText = "Here are the tasks in your list:";
+    public static void main(String[] args) throws IOException, KermitException {
         final String invalidCommandText = "I'm sorry, but I don't know what that means :-(";
-        final String invalidTimeText = "BAH That's not a time is it?? Try writing like this D/MM/YYYY 1200";
-        final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
-        final String goodbyeText = "Bye. Hope to see you again soon!";
 
         Scanner sc = new Scanner(System.in);
         String command = "";
@@ -71,8 +38,9 @@ public class Kermit {
         ArrayList<String> validTasks = new ArrayList<>(Arrays.asList(strTasks));
 
         Storage storage = new Storage("./data/kermit.txt");
+        Ui ui = new Ui();
         ToDo list = storage.getToDoList();
-        formatAndPrintText(introductionText);
+        ui.showIntroMessage();
         while (true) {
             try {
                 // Task description and flag should be separated by some /command
@@ -135,33 +103,33 @@ public class Kermit {
                 // Quit program
                 switch (command) {
                     case "bye":
-                        formatAndPrintText(goodbyeText);
+                        ui.showGoodbyeMessage();
                         storage.save();
                         return;
                     // List out all objects that user added to list
                     case "list":
-                        formatAndPrintText(listText + "\n" + list);
+                        ui.showListItems(list);
                         break;
                     // Add objects to list
                     case "done":
                         index = Integer.parseInt(description) - 1;
                         // Get task name
-                        String taskText = list.completeTask(index);
-                        formatAndPrintText(completeTaskText + "\n" + taskText);
+                        Task task = list.completeTask(index);
+                        ui.showCompleteTaskMessage(task);
                         storage.save();
                         break;
                     // Add new todo task
                     case "todo":
                         Task newToDo = new ToDos(description);
                         list.add(newToDo);
-                        formatAndPrintText(printAddTask(newToDo, list));
+                        ui.showAddTaskMessage(newToDo, list);
                         storage.save();
                         break;
                     // Add new deadline task
                     case "deadline":
                         Task newDeadline = new Deadline(description, formatUserDateFormat(flagArguments));
                         list.add(newDeadline);
-                        formatAndPrintText(printAddTask(newDeadline, list));
+                       ui.showAddTaskMessage(newDeadline, list);
                         storage.save();
                         break;
 
@@ -169,20 +137,18 @@ public class Kermit {
                     case "event":
                         Task newEvent = new Event(description, formatUserDateFormat(flagArguments));
                         list.add(newEvent);
-                        formatAndPrintText(printAddTask(newEvent, list));
+                        ui.showAddTaskMessage(newEvent, list);
                         storage.save();
                         break;
                     // Delete task
                     case "delete":
                         index = Integer.parseInt(description) - 1;
                         Task deletedTask = list.deleteTask(index);
-                        formatAndPrintText(printDeleteTask(deletedTask, list));
+                        ui.showDeleteTaskMessage(deletedTask, list);
                         storage.save();
                 }
             } catch (KermitException e) {
-                formatAndPrintText(e.getMessage());
-            } catch (DateTimeParseException e) {
-                formatAndPrintText(invalidTimeText);
+                ui.showErrorMessage(e);
             }
         }
     }
