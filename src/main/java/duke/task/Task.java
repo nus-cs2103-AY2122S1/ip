@@ -6,8 +6,13 @@ public abstract class Task {
     private final boolean isCompleted;
     protected static String dateTimeFormat = "E, dd MMM yyyy, HH:mm"; 
 
-    Task(String itemName) {
-        this.taskName = itemName;
+    /**
+     * Creates a new basic <code>Task</code> object, which has a name and a completion status. 
+     * @param taskName the name of the task.
+     * @see ToDo
+     */
+    Task(String taskName) {
+        this.taskName = taskName;
         this.isCompleted = false;
     }
 
@@ -16,12 +21,28 @@ public abstract class Task {
         this.isCompleted = true;
     }
 
+    /**
+     * Changes status of a task to 'completed'.
+     * @return a new {@link duke.task.Task} exactly the same as <code>this</code> but with the 
+     * <code>isCompleted</code> set to true.
+     * @see Event
+     * @see ToDo
+     * @see Deadline
+     */
     public abstract Task markAsCompleted();
 
+    /**
+     * Gets the name of the task.
+     * @return the name of the task.
+     */
     public String getTaskName() {
         return this.taskName;
     }
 
+    /**
+     * Gets the completion status of the task.
+     * @return the completion status of the task.
+     */
     public boolean getIsCompleted() {
         return this.isCompleted;
     }

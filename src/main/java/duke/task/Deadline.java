@@ -3,6 +3,14 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * <h2>Deadline</h2>
+ * A task which has an additional <code>dateTime</code> field which informs the user when the task needs to be 
+ * completed by.
+ * @see Event
+ * @see ToDo
+ */
+
 public class Deadline extends Task {
 
     private final LocalDateTime dateTime;
@@ -26,6 +34,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * @return a new <code>Deadline</code> which is exactly the same except with completion status set to 
+     * <code>true</code>.
+     */
     @Override
     public Deadline markAsCompleted() {
         return new Deadline(this);

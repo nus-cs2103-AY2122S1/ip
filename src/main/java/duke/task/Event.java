@@ -3,6 +3,13 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * <h2>Event</h2>
+ * A task which has an additional <code>dateTime</code> field which informs the user when this event occurs.
+ * @see Deadline
+ * @see ToDo
+ */
+
 public class Event extends Task {
 
     private final LocalDateTime dateTime;
@@ -26,6 +33,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * @return a new <code>Event</code> which is exactly the same except with completion status set to 
+     * <code>true</code>.
+     */
     @Override
     public Event markAsCompleted() {
         return new Event(this);

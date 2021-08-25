@@ -7,7 +7,12 @@ public class Ui {
     public Ui() {
         
     }
-    
+
+    /**
+     * Starts listening for commands from the user.
+     * @param tasks the {@link duke.utility.TaskList} this Ui is linked to.
+     * @param storage the {@link duke.utility.Storage} this Ui is linked to.
+     */
     public void startListening(TaskList tasks, Storage storage) {
         Parser parser = new Parser(tasks, storage);
         Scanner sc = new Scanner(System.in);
@@ -26,7 +31,11 @@ public class Ui {
         }
         printMessage("Goodbye for now!");
     }
-    
+
+    /**
+     * Outputs a message.
+     * @param message the message to print.
+     */
     public void printMessage(String message) {
         System.out.println("-------------------------");
         System.out.println(message);

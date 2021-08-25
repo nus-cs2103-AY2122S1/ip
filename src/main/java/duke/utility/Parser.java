@@ -13,6 +13,12 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * <h2>Parser</h2>
+ * Auxiliary class that parses commands from the user and hands the parsed commands and details to
+ * {@link duke.utility.TaskList} to track.
+ */
+
 public class Parser {
     
     private final TaskList taskList;
@@ -22,7 +28,12 @@ public class Parser {
         this.taskList = taskList;
         this.storage = storage;
     }
-    
+
+    /**
+     * Parses a given command from the user.
+     * @param command command from the user.
+     * @return a string that updates the user of the outcome of the command.
+     */
     String parseCommand(String command) {
         if (command.trim().length() == 0) {
             return "Please type some commands!";
@@ -61,8 +72,26 @@ public class Parser {
             return "Unexpected error occurred. Please check input.";
         }
     }
+    
+    private String parseDeleteTask(String taskNum) throws DukeException.InvalidTaskNumException, IOException {
+        String message = this.taskList.deleteTask(Integer.parseInt(taskNum.trim()));
+        if (this.storage != null) {
+            this.storage.deleteTaskLogEntry(Integer.parseInt(taskNum.trim()) - 1);
+        }
+        return message;
+    }
 
-    String parseNewTask(String command) throws DukeException.DuplicateTaskException,
+    private String parseDoneTask(String taskName) throws DukeException.NoSuchTaskException,
+            DukeException.TaskAlreadyCompleteException, IOException {
+        String message = this.taskList.markAsCompleted(taskName);
+        if (this.storage != null) { // log
+            int taskIdx = this.taskList.getTaskIdx(taskName);
+            this.storage.changeTaskLogToCompleted(taskIdx);
+        }
+        return message;
+    }
+    
+    private String parseNewTask(String command) throws DukeException.DuplicateTaskException,
             DukeException.InvalidTaskDescriptionException, DukeException.InvalidCommandException, IOException {
         String[] commandTokens = command.split(" ");
         String taskName = "";
@@ -117,23 +146,5 @@ public class Parser {
         } else { // invalid input
             throw new DukeException.InvalidCommandException("Invalid command!");
         }
-    }
-
-    String parseDoneTask(String taskName) throws DukeException.NoSuchTaskException, DukeException
-            .TaskAlreadyCompleteException, IOException {
-        String message = this.taskList.markAsCompleted(taskName);
-        if (this.storage != null) { // log
-            int taskIdx = this.taskList.getTaskIdx(taskName);
-            this.storage.changeTaskLogToCompleted(taskIdx);
-        }
-        return message;
-    }
-    
-    String parseDeleteTask(String taskNum) throws DukeException.InvalidTaskNumException, IOException {
-        String message = this.taskList.deleteTask(Integer.parseInt(taskNum.trim()));
-        if (this.storage != null) {
-            this.storage.deleteTaskLogEntry(Integer.parseInt(taskNum.trim()) - 1);
-        }
-        return message;
     }
 }
