@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  */
 public class Parser {
 
-    final private TaskList tasks;
+    private final TaskList tasks;
 
     protected Parser(TaskList taskList) {
         this.tasks = taskList;

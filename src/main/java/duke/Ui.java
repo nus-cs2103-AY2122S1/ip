@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    final private Parser parser;
+    private final Parser parser;
 
     protected Ui(Parser parser) {
         this.parser = parser;
