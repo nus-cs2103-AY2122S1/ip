@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
+
 public class DoneCommand extends Command {
 
     public DoneCommand(String userInput) {
@@ -9,12 +17,12 @@ public class DoneCommand extends Command {
         String[] parsedUserInput = this.getUserInput().split(" ", 2);
         if (parsedUserInput.length == 1) {
             throw new DukeException("☹ OOPS!!! Please enter \"done\" followed the number corresponding to " +
-                    "the task you want to mark as completed");
+                    "the duke.task you want to mark as completed");
         } else {
             int taskDone = Integer.parseInt(parsedUserInput[1]) - 1;
             tasks.getTasks().get(taskDone).markAsCompleted();
             storage.updateLS(tasks.getTasks());
-            ui.reply("Nice! I've marked this task as done: \n" + printDoneTask(taskDone, "", tasks));
+            ui.reply("Nice! I've marked this duke.task as done: \n" + printDoneTask(taskDone, "", tasks));
         }
     }
 

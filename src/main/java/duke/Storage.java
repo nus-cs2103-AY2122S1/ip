@@ -1,3 +1,9 @@
+package duke;
+
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -9,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// Storage: deals with loading tasks from the file and saving tasks in the file
+// duke.Storage: deals with loading tasks from the file and saving tasks in the file
 public class Storage {
 
     private File localStorageFile;
@@ -18,16 +24,17 @@ public class Storage {
     public Storage(String filePath) {
         File localStorageFile = new File(filePath);
         try {
-            localStorageFile.createNewFile();
+            boolean filecreated = localStorageFile.createNewFile();
         } catch (IOException e) {
-
+            throw new DukeException("No local storage found");
+        } finally {
+            this.localStorageFile = localStorageFile;
         }
-        this.localStorageFile = localStorageFile;
     }
 
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> toDoList= new ArrayList<>();
-        Scanner scanner = null; // create a Scanner using the File as the source
+        Scanner scanner; // create a Scanner using the File as the source
         try {
             scanner = new Scanner(localStorageFile);
         } catch (FileNotFoundException e) {
@@ -70,7 +77,7 @@ public class Storage {
         return toDoList;
     }
 
-    // Storage
+    // duke.Storage
     public void updateLS(ArrayList<Task> toDoList) {
         try {
             Files.delete(Paths.get(Duke.getLocalStorageLocation()));

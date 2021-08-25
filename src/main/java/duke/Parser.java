@@ -1,7 +1,8 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+package duke;
 
-// Parser: deals with making sense of the user command
+import duke.command.*;
+
+// duke.Parser: deals with making sense of the user duke.command
 public class Parser {
 
     public static Command parse(String fullCommand) {
@@ -11,7 +12,7 @@ public class Parser {
             return new ListCommand(fullCommand);
         } else {
             String[] parsedUserInput = fullCommand.split(" ", 2);
-            if (parsedUserInput[0].equals("done")) { // Mark task as completed
+            if (parsedUserInput[0].equals("done")) { // Mark duke.task as completed
                 return new DoneCommand(fullCommand);
             } else if (parsedUserInput[0].equals("delete")) {
                 return new DeleteCommand(fullCommand);

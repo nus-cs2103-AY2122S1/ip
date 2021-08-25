@@ -1,6 +1,8 @@
+package duke;
+
 import java.util.Scanner;
 
-// Ui: deals with interactions with the user
+// duke.Ui: deals with interactions with the user
 public class Ui {
 
     private final String lines = "--------------------------------------------------------------------------------------------";
