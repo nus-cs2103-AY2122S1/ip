@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,8 +12,11 @@ public class Duke {
                                                         + "  %s\n"
                                                         + "Now you have %d %s in the list.\n";
     private static final String MARK_DONE_MSG_TEMPLATE = "Nice! I've marked this task as done: \n  %s\n";
+    private static final String UNEXPECTED_ERROR_MSG = "Something went wrong";
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final TaskList tasks = new TaskList();
+
+    private static Storage taskStorage;
+    private static TaskList tasks = new TaskList();
 
     private static void greet() {
         System.out.println(GREETING_MSG);
@@ -23,7 +27,7 @@ public class Duke {
     }
 
 
-    private static void addTodo(String description) {
+    private static void addTodo(String description) throws IOException {
         Task taskToAdd = new Todo(description);
         System.out.printf(
                 ADD_TASK_MSG_TEMPLATE,
@@ -31,9 +35,10 @@ public class Duke {
                 tasks.getTaskCount(), 
                 tasks.getTaskCount() <= 1 ? "task" : "tasks"
         );
+        taskStorage.backup(tasks);
     }
 
-    private static void addDeadline(String description, String by) {
+    private static void addDeadline(String description, String by) throws IOException {
         Task taskToAdd = new Deadline(description, by);
         System.out.printf(
                 ADD_TASK_MSG_TEMPLATE,
@@ -41,9 +46,10 @@ public class Duke {
                 tasks.getTaskCount(),
                 tasks.getTaskCount() <= 1 ? "task" : "tasks"
         );
+        taskStorage.backup(tasks);
     }
 
-    private static void addEvent(String description, String at) {
+    private static void addEvent(String description, String at) throws IOException {
         Task taskToAdd = new Event(description, at);
         System.out.printf(
                 ADD_TASK_MSG_TEMPLATE,
@@ -51,6 +57,7 @@ public class Duke {
                 tasks.getTaskCount(),
                 tasks.getTaskCount() <= 1 ? "task" : "tasks"
         );
+        taskStorage.backup(tasks);
     }
 
     private static void listTasks() {
@@ -58,21 +65,23 @@ public class Duke {
         System.out.print(tasks);
     }
 
-    private static void doneTask(int index) {
+    private static void doneTask(int index) throws IOException {
         tasks.getTask(index).markAsDone();
         System.out.printf(MARK_DONE_MSG_TEMPLATE, tasks.getTask(index));
+        taskStorage.backup(tasks);
     }
 
-    private static void deleteTask(int index) {
+    private static void deleteTask(int index) throws IOException {
         System.out.printf(
                 DELETE_TASK_MSG_TEMPLATE,
                 tasks.deleteTask(index),
                 tasks.getTaskCount(),
                 tasks.getTaskCount() <= 1 ? "task" : "tasks"
         );
+        taskStorage.backup(tasks);
     }
 
-    private static void runCommand(String cmd) throws DukeException {
+    private static void runCommand(String cmd) throws DukeException, IOException {
         if (cmd.matches("^todo[ \\t]*$")) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else if (cmd.matches("^deadline[ \\t]*$")) {
@@ -108,14 +117,21 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        greet();
-        for (String cmd = SCANNER.nextLine(); !cmd.equals("bye"); cmd = SCANNER.nextLine()) {
-            try {
-                runCommand(cmd);
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
+        try {
+            greet();
+            taskStorage = new Storage("data/duke.txt");
+            tasks = new TaskList(taskStorage.load());
+            for (String cmd = SCANNER.nextLine(); !cmd.equals("bye"); cmd = SCANNER.nextLine()) {
+                try {
+                    runCommand(cmd);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
             }
+        } catch (IOException e) {
+            System.out.println(UNEXPECTED_ERROR_MSG);
+        } finally {
+            exit();
         }
-        exit();
     }
 }
