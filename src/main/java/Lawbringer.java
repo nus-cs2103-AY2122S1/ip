@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Lawbringer {
     public static void main(String[] args) {
         String introMessage = "Hello! I'm Lawbringer!\n" +
@@ -54,7 +57,9 @@ public class Lawbringer {
                 } else if (userInput.startsWith("deadline")) {
                     int index = userInput.indexOf('/');
                     String by = userInput.substring(index+4);
-                    Deadline deadline = new Deadline(userInput.substring(9,index), by);
+                    LocalDate localDate = LocalDate.parse(by);
+                    Deadline deadline = new Deadline(userInput.substring(9,index),
+                            localDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
                     tasks.add(deadline);
                     String message = "Got it. I've added this task:\n" + "  " +
                             deadline.toString() + "\nNow you have " + tasks.size() +
