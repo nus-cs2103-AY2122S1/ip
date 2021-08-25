@@ -14,9 +14,7 @@ public class UI {
             + "| |_| | |_| | | |\n"
             + "|____/ \\__,_|_|_|\n";
 
-    /**
-     * This method prints the greetings to the user's terminal.
-     */
+
     public void greet(User user) {
         System.out.println(logo);
         System.out.println(String.format("Hello %s! I'm Duii, your personal assistant!", user.getUsername()));
@@ -84,9 +82,6 @@ public class UI {
         }
     }
 
-    /**
-     * This method prints the exit message to the user's terminal.
-     */
     public void exit() {
         System.out.println("You're going already? Hope to see you again soon!");
     }

@@ -19,22 +19,11 @@ public class TaskList {
         this.listLength = 0;
     }
 
-    /**
-     * This method adds the input task into the list.
-     *
-     * @param task The task to be added to the list.
-     */
     public void add(Task task) throws DukeException {
         this.list.add(task);
         this.listLength++;
     }
 
-    /**
-     * This method deletes specific task from the list.
-     *
-     * @param id The id of the task as per display with the list() method.
-     * @throws DukeException This error is thrown if the id specified is invalid.
-     */
     public Task delete(int id) throws DukeException {
         if (id - 1 > this.listLength) {
             throw new DukeException("The id you entered was invalid!");
@@ -45,12 +34,6 @@ public class TaskList {
         }
     }
 
-    /**
-     * This method marks a specific task as completed.
-     *
-     * @param id The id of the task as per display with the list() method.
-     * @throws DukeException This error is thrown if the id specified is invalid.
-     */
     public Task markDone(int id) throws DukeException{
         if (id - 1 > this.listLength) {
             throw new DukeException("The id you entered was invalid!");

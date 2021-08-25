@@ -18,12 +18,6 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    /**
-     * This method parses the input from the user.
-     *
-     * @param input The input inserted by the user.
-     * @throws DukeException This exception is thrown when the input is invalid.
-     */
     public static Command parse(String input) throws DukeException {
         String[] inputArr = input.split(" ");
         String[] details;
