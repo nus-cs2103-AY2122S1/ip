@@ -1,4 +1,0 @@
-T | 1 | read book
-D | 1 | return book | 2020-06-12
-D | 1 | project meeting | 2020-06-12
-D | 1 | presentation | 2021-12-12

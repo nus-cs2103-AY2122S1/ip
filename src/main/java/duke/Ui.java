@@ -32,7 +32,7 @@ public class Ui {
     public static void addTaskMessage(TaskList tasks, Task task) {
         String message = "\tGot it. I've added this task:\n\t\t"
                 + task
-                + "\n\tduke.task.Task(s) remaining in the list: "
+                + "\n\tTask(s) remaining in the list: "
                 + tasks.size();
         printMessage(message);
     }
@@ -41,7 +41,7 @@ public class Ui {
         int tasksSize = tasks.size() - 1;
         String message = "\tNoted. I've removed this task:\n\t\t"
                 + tasks.getTask(item - 1)
-                + "\n\tduke.task.Task(s) remaining in the list: "
+                + "\n\tTask(s) remaining in the list: "
                 + tasksSize;
         printMessage(message);
     }

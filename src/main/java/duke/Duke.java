@@ -25,17 +25,18 @@ public class Duke {
 
         String input = scanner.next();
 
-        while (!input.equals("bye")) {
+        while (true) {
             try {
                 Parser.parseCommand(input, tasks, storage);
             } catch (DukeException e) {
                 Ui.reportError(e);
-            } finally {
+            }
+            if (input.equals("bye".trim())) {
+                break;
+            } else {
                 input = scanner.next();
             }
         }
-
-        Ui.farewell();
     }
 
     public static void main(String[] args) {

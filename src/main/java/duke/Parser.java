@@ -165,6 +165,7 @@ public class Parser {
                 Ui.printMessage(taskList.printList());
                 break;
             case "bye":
+                Ui.farewell();
                 break;
             default:
                 throw new InvalidCommandException();

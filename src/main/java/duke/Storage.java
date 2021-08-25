@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    private static final Path DEFAULT_DIR = Paths.get("src", "main", "data");
+    private static final Path DEFAULT_DIR = Paths.get("data");
 
     private File tasks;
 
     public Storage(String fileName) {
         try {
-            if (!Files.exists(DEFAULT_DIR)) {
+            if (!Files.isDirectory(DEFAULT_DIR)) {
                 Files.createDirectories(DEFAULT_DIR);
             }
             Path taskPath = Paths.get(DEFAULT_DIR.toString(), fileName);
