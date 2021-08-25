@@ -43,4 +43,20 @@ public class Deadline extends Task{
     public String getDetail() {
         return "/by " + this.deadline;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Task)) {
+            return false;
+        }
+
+        Deadline task = (Deadline) o;
+        // Compare the data members and return accordingly
+        return this.getName().equals(task.getName()) &&
+                this.deadline.equals(task.getDetail());
+    }
 }

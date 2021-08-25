@@ -42,7 +42,7 @@ public class Storage {
                 String input = taskName + " " + remarks;
                 Task task = Parser.parseStringIntoTask(input, type, Boolean.parseBoolean(isDone));
                 tasks.add(task);
-                tasklist = new Tasklist(tasks);
+
                 tasklist.setCount(tasks.size());
             }
             System.out.printf("Loaded old tasklist...\n");
@@ -52,12 +52,28 @@ public class Storage {
             System.out.printf("Initializing new tasklist...\n");
             System.out.println(Ui.breakline);
         }
-
+        tasklist = new Tasklist(tasks);
         return tasklist;
     }
 
     public void save() {
         File file = new File(filepath);
+
+       // Creates all the file directories
+        String[] fileDirectories = filepath.split("/");
+        int len = fileDirectories.length;
+        String currDir = "";
+
+        for (int i = 0; i < len - 1; i++) {
+            currDir += fileDirectories[i];
+            File currFile = new File(currDir);
+            if(currFile.mkdir()) {
+                System.out.printf("Added directory %s\n", currDir);
+            }
+            currDir += "/";
+        }
+
+        //Creates file
         try {
             if (file.createNewFile()) {
                 System.out.printf("Saved file at %s\n", filepath);

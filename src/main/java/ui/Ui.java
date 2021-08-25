@@ -3,12 +3,14 @@ package ui;
 import duke.*;
 import task.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
 
     public static String breakline = "____________________________________________________________";
     private Storage storage;
+    private ArrayList<Task> tasks = new ArrayList<>();
     private Tasklist tasklist;
 
     public Ui(Storage storage, Tasklist tasklist) {

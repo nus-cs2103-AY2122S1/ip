@@ -31,7 +31,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String filepath = "src\\main\\java\\data\\tasklist.txt";
+        String filepath = "src/main/java/data/tasklist.txt";
         new Duke(filepath).run();
     }
 }

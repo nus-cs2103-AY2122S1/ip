@@ -11,7 +11,6 @@ import ui.*;
  */
 public class Tasklist {
     private ArrayList<Task> taskList;
-    private int currCount = 0;
 
     /**
      * Constructor to create a new taskList to store tasks
@@ -36,10 +35,9 @@ public class Tasklist {
         }
 
         this.taskList.add(task);
-        currCount += 1;
         System.out.println("Got it. I've added this task:");
         String addMsg = String.format("%s", task.toString());
-        String counterMsg = String.format("Now you have %d tasks in the list.", currCount);
+        String counterMsg = String.format("Now you have %d tasks in the list.", taskList.size());
         System.out.println(addMsg);
         System.out.println(counterMsg);
         System.out.println(Ui.breakline);
@@ -86,8 +84,7 @@ public class Tasklist {
 
         String removeMsg = String.format("Noted. I've removed this task:\n%s",removedTask.toString());
         System.out.println(removeMsg);
-        currCount = currCount - 1;
-        System.out.printf("Now you have %d task(s) in the list.\n", currCount);
+        System.out.printf("Now you have %d task(s) in the list.\n", taskList.size());
         System.out.println(Ui.breakline);
     }
 
@@ -100,16 +97,33 @@ public class Tasklist {
         return taskList.get(idx);
     }
 
-    public void setCount(int count) {
-        currCount = count;
-    }
-
     public int size() {
-        return currCount;
+        return this.taskList.size();
     }
 
     public Task get(int idx) {
         return taskList.get(idx);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Task)) {
+            return false;
+        }
+        Tasklist tasklist = (Tasklist) o;
+        if(tasklist.size() != this.size()) {
+            return false;
+        } else {
+            for(int i=0; i < this.size(); i++) {
+                if(!tasklist.get(i).equals(this.get(i))) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
 

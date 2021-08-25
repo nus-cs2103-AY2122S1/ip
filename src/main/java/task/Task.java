@@ -70,4 +70,22 @@ public class Task {
         return "";
     }
 
+    /**
+     * @return Whether
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Task)) {
+            return false;
+        }
+
+        Task task = (Task) o;
+        // Compare the data members and return accordingly
+        return this.name.equals(task.getName());
+    }
+
 }
