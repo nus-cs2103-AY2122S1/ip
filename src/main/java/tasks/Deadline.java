@@ -27,7 +27,6 @@ public class Deadline extends Task {
         }
 
         format += this.description;
-        format += " | ";
         format += this.dueDate;
 
         return format;

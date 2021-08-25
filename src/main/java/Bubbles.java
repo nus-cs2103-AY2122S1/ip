@@ -122,7 +122,7 @@ public class Bubbles {
 
     public static void writeTasks(ArrayList<Task> tasks, File bubbles) {
         try {
-            FileWriter fw = new FileWriter(bubbles, true);
+            FileWriter fw = new FileWriter(bubbles, false);
 
             for (Task t : tasks) {
                 String task = t.format();
@@ -153,10 +153,10 @@ public class Bubbles {
 
         input += arr[2];
 
-        if (n > 2) {
-            String[] date = arr[2].split(" ", 2);
+        if (n > 3) {
+            String[] date = arr[3].split(" ", 2);
 
-            input = input + "/" + date[0] + " " + date[1];
+            input = input + " /" + date[0] + " " + date[1];
         }
 
         Object[] inputs = {taskType, input, isDone};
