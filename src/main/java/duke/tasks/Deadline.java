@@ -13,7 +13,7 @@ public class Deadline extends Task{
     }
 
     public Deadline(String description, String deadline, boolean isDone) {
-        super(Task.Type.D, isDone, description);
+        super(description, Task.Type.D, isDone);
         this.deadline = LocalDate.parse(deadline);
     }
 

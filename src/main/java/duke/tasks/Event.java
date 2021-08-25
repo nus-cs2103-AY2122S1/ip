@@ -13,7 +13,7 @@ public class Event extends Task {
     }
 
     public Event(String description, String time, boolean isDone) {
-        super(Task.Type.E, isDone, description);
+        super(description, Task.Type.E, isDone);
         this.time = LocalDate.parse(time);
     }
 

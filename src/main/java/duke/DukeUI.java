@@ -102,8 +102,8 @@ public class DukeUI {
     }
 
     /**
-     * TODO
-     * @param str
+     * Prints the String input, used for Errors
+     * @param str String to be printed
      */
     public static void printError(String str) {
         printDivider();
@@ -112,7 +112,7 @@ public class DukeUI {
     }
 
     /**
-     * TODO
+     * Prints the error when the date is input in the wrong format
      */
     public static void printDateTimeError() {
         printDivider();

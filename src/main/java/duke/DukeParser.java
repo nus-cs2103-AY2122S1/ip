@@ -28,6 +28,11 @@ public class DukeParser {
     private TaskList taskList;
     private DukeUI ui;
 
+    /**
+     * Class Constructor
+     * @param taskList The tasklist to be modified through user-input
+     * @param ui The UI instance that is used handle printing of replies and errors
+     */
     public DukeParser(TaskList taskList, DukeUI ui) {
         this.taskList = taskList;
         this.ui = ui;
@@ -35,7 +40,6 @@ public class DukeParser {
 
     /**
      * Checks if String is an int
-     *
      * @param str Target string to check
      */
     static boolean checkForInt(String str) {
@@ -48,8 +52,8 @@ public class DukeParser {
     }
 
     /**
-     * Binary Function that processes String into separate Desc and Time
-     *
+     * Binary Function that processes String into separate Desc and Time.
+     * The Desc and Time will be separated into 2 strings that will be returned in a list
      * @param divider The pivot string to divide the input (\by or \at)
      * @param input   Array of Strings containing individual words that was input
      * @return Returns a list of 2 Strings,
@@ -73,6 +77,14 @@ public class DukeParser {
         return temp;
     }
 
+    /**
+     * Main Parser function. Contains the logic to read and resolve user input,
+     * then directs Duke to the appropriate response in the backend and frontend
+     * @param str Input entered by the user
+     * @return Boolean to indicate the closing of the programme
+     *         as a direct result of the "bye" command (True if hasQuit)
+     * @throws DukeException Exception thrown when any issues are encountered
+     */
     public boolean parse(String str) throws DukeException {
         String[] words = str.split(" ");
         String desc = str;

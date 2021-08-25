@@ -14,16 +14,17 @@ import java.util.Scanner;
 
 public class DukeStorage {
     /**
-     * TODO
+     * Class Constructor
      */
     public DukeStorage(){
     };
 
     /**
-     * TODO
-     * @return
-     * @throws DukeException
-     * @throws FileNotFoundException
+     * Retrieves file indicated in the String and writes it into a List of Tasks.
+     * @param pathname String indicating the filename
+     * @return List of Tasks containing the Tasks in the file, else returns an empty ArrayList
+     * @throws DukeException Thrown if file is not in the right format to be read
+     * @throws FileNotFoundException Thrown when file is not found
      */
     public List<Task> retrieve(String pathname) throws DukeException, FileNotFoundException {
         File localList = new File(pathname);
@@ -63,9 +64,9 @@ public class DukeStorage {
     }
 
     /**
-     * TODO
-     * @param tasklist
-     * @throws IOException
+     * Saves the list to a local file. If the file is not present, function creates the file as well
+     * @param tasklist List to save to the file
+     * @throws IOException Thrown if there is an issue creating, retrieving or writing the file
      */
     public void saveList(TaskList tasklist) throws IOException {
             File savedList = new File("localList.txt");

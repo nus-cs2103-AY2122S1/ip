@@ -11,19 +11,32 @@ public class Task {
     protected boolean isDone;
     protected Type type;
 
+    /**
+     * Class Constructor
+     * @param description String Description of the Task
+     * @param type Type of the Task, ([T]oDo, [D]eadline, [E]vent)
+     */
     public Task(String description, Type type) {
         this.description = description;
         this.isDone = false;
         this.type = type;
     }
 
-    public Task(Type type, boolean done, String description) {
+    /**
+     * Class Constructor taking in if the task is done
+     * @param description String Description of the Task
+     * @param type Type of the Task, ([T]oDo, [D]eadline, [E]vent)
+     * @param done boolean indicating if the task is done
+     */
+    public Task(String description, Type type, boolean done) {
         this.type = type;
         this.description = description;
         this.isDone = done;
     }
 
-    //Completes the Task
+    /**
+     * Completes the Task
+     */
     public void markAsDone() {
         isDone = true;
     }
@@ -33,11 +46,23 @@ public class Task {
         return "[" + type.toString() + "]" + getStatusIcon() + description;
     }
 
+    /**
+     * Returns the task as a string format to be saved in the localList file
+     * @return Task as a String in the appropriate format
+     */
     public String toFileString() { return type.toString() + " " + doneString() + " " + description;}
 
+    /**
+     * Returns the status of the task as a string
+     * @return String of the task status
+     */
     public String getStatusIcon() {
         return (isDone ? "[X] " : "[ ] "); // mark done task with X
     }
 
+    /**
+     * Returns X if the task is done and O if the task is undone
+     * @return X or O
+     */
     public String doneString() {return (isDone ? "X" : "O");}
 }

@@ -15,6 +15,10 @@ public class DukeMain {
     private DukeUI ui;
     private DukeParser parser;
 
+    /**
+     * Class Constructor.
+     * Initializes a DukeMain class and creates supporting classes for usage when running the program
+     */
     public DukeMain() {
         ui = new DukeUI();
         storage = new DukeStorage();
@@ -33,6 +37,10 @@ public class DukeMain {
         parser = new DukeParser(taskList, ui);
     }
 
+    /**
+     * Runs Duke.
+     * Begins running duke and awaits user input to continue
+     */
     public void run() {
         boolean hasQuit = false;
         Scanner userInput = new Scanner(System.in);

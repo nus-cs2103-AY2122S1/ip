@@ -6,6 +6,6 @@ public class ToDo extends Task{
     }
 
     public ToDo(String description, boolean isDone) {
-        super(Task.Type.T, isDone, description);
+        super(description, Task.Type.T, isDone);
     }
 }
