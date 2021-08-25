@@ -1,6 +1,10 @@
+/**
+ * @author Hang Zelin
+ *
+ * @description ToDos class that extends Task class. It is one of the types in 3 tasks.
+ *
+ */
 package Duke.Task;
-
-import java.time.LocalDateTime;
 
 public class ToDos extends Task{
 

@@ -1,3 +1,14 @@
+/**
+ * @author Hang Zelin
+ * The main Programme to execute the Duke Project
+ *
+ * Duke will allow users to add three types of tasks: "todo" "deadline" "event".
+ *
+ * Duke also allow users to list all tasks, mark a task to be done if it is finished, and
+ * delete the task if the task is finished.
+ *
+ * You can also search a specific task by its date, keyword(to be done later).
+ */
 package Duke;
 
 import Duke.Excpetions.DukeException;
@@ -13,6 +24,13 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description initialize Ui, storage and load tasklists from specific filePath for Duke
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +42,19 @@ public class Duke {
         }
     }
 
+    /**
+     * @auther Hang Zelin
+     *
+     * @description Choose a specific task to execute via tasks type and add to the tasklists.
+     * Every time an execution is done, the task will be stored to the local file called tasks.txt
+     * via Storage.
+     *
+     * @param taskType
+     * @param task
+     * @param time
+     * @param index
+     * @return void
+     */
     public void OperationForDuke(String taskType, String task, String time, int index) {
         switch (taskType) {
         case "bye": {
@@ -55,8 +86,8 @@ public class Duke {
             break;
         }
         case "tell": {
-            ui.getSpecificEventOnTime();
-            tasks.GetSpecificDateEvent(time);
+            ui.getSpecificDateEvent();
+            tasks.getSpecificDateEvent(time);
             break;
         }
         default:{
@@ -72,6 +103,14 @@ public class Duke {
         }
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @Description Update a save data every time a round of execution is done.
+     *
+     * @param
+     * @return void
+     */
     public void UpdateSaveData() {
         try {
             storage.SaveListDataToFile(tasks);
@@ -80,6 +119,18 @@ public class Duke {
         }
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description Run the programme of Duke. It will firstly say Hello to users. Then it will repeatedly accept input from
+     * users and filter out key commands, then call OperationForDuke to execute a task by commands. The process will not stop
+     * until users enter "goodbye".
+     *
+     * Noted: Every time an execution is done, the savedata will be updated.
+     *
+     * @param
+     * @return void
+     */
     public void run() {
         //Say Hello to the User
         ArrayList<String> Messages;

@@ -1,3 +1,11 @@
+/**
+ * @author Hang Zelin
+ *
+ * @description Programme that allows Duke to save any changes after execution and read data when it is initially invoked.
+ * In other words, programme allows Duke to save and read data from a file.
+ *
+ */
+
 package Duke.SaveLoadManager;
 
 import Duke.Command.Parser;
@@ -22,6 +30,16 @@ public class Storage {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description Return the size of the TaskList
+     *
+     *
+     * @param
+     * @return ArrayList<Task></Task>
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             ReadDataFromFile();
@@ -32,6 +50,15 @@ public class Storage {
         return this.list;
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description Allow users to read all the info of tasks stored in local files, and write them into TaskList.
+     *
+     * @param
+     * @return void
+     * @throws FileNotFoundException
+     */
     public void ReadDataFromFile() throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f);
@@ -46,6 +73,15 @@ public class Storage {
         }
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description Allow users to save data from a TaskList to a specific file.
+     *
+     * @param Tasks
+     * @return void
+     * @throws IOException
+     */
     public void SaveListDataToFile(TaskList Tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < Tasks.size(); i++) {
@@ -55,6 +91,15 @@ public class Storage {
     }
 
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description return char which can be "0" or "1". The value indicates whether the task is done or not.
+     * It also deals with the local file data and convert them into task and store into TaskList.
+     *
+     * @param Data
+     * @return char
+     */
     public char HandleTaskText(String Data) {
         Parser p = new Parser(Data);
         char done = Data.charAt(4);

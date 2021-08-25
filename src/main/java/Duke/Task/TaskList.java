@@ -1,3 +1,10 @@
+/**
+ * @author Hang Zelin
+ *
+ * @description Stores all the tasks for the Duke. Duke can refer to this tasklist to see a specific task
+ * or make use of the methods in it to execute an operation.
+ *
+ */
 package Duke.Task;
 
 import Duke.Command.Parser;
@@ -15,15 +22,36 @@ public class TaskList {
 
     ArrayList<Task> tasks;
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description Constructor to store all the tasks in a Generic ArrayList.
+     *
+     */
     public TaskList(ArrayList<Task> tasks) {
+
         this.tasks = tasks;
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description Another Constructor to initialize an empty TaskList if there is no save data.
+     *
+     */
     public TaskList(){
         this.tasks = new ArrayList<Task>();
     }
 
-    public void GetSpecificDateEvent(String time){
+    /**
+     * @author Hang Zelin
+     *
+     * @description get all the events that match the time users take in.
+     *
+     * @param time
+     * @return void
+     */
+    public void getSpecificDateEvent(String time){
         Parser p = new Parser("");
         int count = 0;//count the number of the events happen on the time.
 
@@ -45,14 +73,42 @@ public class TaskList {
         }
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description Mark a specific task as done.
+     *
+     * @param index
+     * @return void
+     */
     public void MarkDone(int index) {
         this.tasks.get(index).MarkDone();
     }
 
-    public void Delete(int index) throws DukeException{
+    /**
+     * @author Hang Zelin
+     *
+     * @description delete a specific task.
+     *
+     * @param index
+     * @return void
+     */
+    public void Delete(int index) {
         this.tasks.remove(index);
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description Add a task to the TaskLists. This method will automatically decide which type of the
+     * task is added to the list.
+     *
+     * @param taskType
+     * @param task
+     * @param time
+     * @return void
+     * @throws DukeException
+     */
     public void add(String taskType, String task, String time) throws DukeException{
         Parser p = new Parser("");
 
@@ -68,20 +124,54 @@ public class TaskList {
 
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description Return a specific task users are referring to.
+     *
+     * @param index
+     * @return Task
+     *
+     */
     public Task get(int index) {
         return this.tasks.get(index);
     }
 
+
+    /**
+     * @author Hang Zelin
+     *
+     * @description Return the size of the TaskList
+     *
+     * @param
+     * @return int
+     */
     public int size(){
         return this.tasks.size();
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description detect if the index taking in is invalid or not.
+     *
+     * @param index
+     * @return void
+     * @throws DukeException
+     */
     public void detectIndex(int index) throws DukeException{
         if (index < 0 || index >= this.tasks.size()) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
         }
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description The enum of all types of operations that is able to execute.
+     * It also contains a method AssignTask Type to find the specific type of task to create.
+     *
+     */
     public enum OperationType{
         bye, done, delete, tell, list, todo, deadline, event;
 

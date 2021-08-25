@@ -1,3 +1,9 @@
+/**
+ * @author Hang Zelin
+ *
+ * @description a JUnit class that tests some methods in Storage.
+ *
+ */
 package Duke.JUnitTests;
 
 import Duke.Excpetions.DukeException;

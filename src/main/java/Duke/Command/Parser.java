@@ -1,3 +1,17 @@
+/**
+ * @author Hang Zelin
+ *
+ * @description Parser Programme will take in a full input Message and take out the operation type, task, time, index from the
+ * one line command input by users.
+ *
+ * It can also deal with the local saved data and return the parsed Message, which can be a task, time, done(or not).
+ *
+ * It can also parse the time users input into the LocalDateTime.
+ *
+ * Some invalid input Messages may cause throwing DukeException.
+ *
+ */
+
 package Duke.Command;
 
 import Duke.Excpetions.DukeException;
@@ -9,9 +23,17 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     String Message;
 
+    /**
+     * @author
+     *
+     * @description Constructor that stores the Message users take in to be parsed.
+     *
+     * @param Message
+     */
     public Parser(String Message) {
         this.Message = Message;
     }
+
 
     private static boolean ValidDate(int day, int month, int year, int hour, int minute) {
         if (((year%4 == 0 && year%100 != 0) || (year % 400 == 0)) && month == 2) {
@@ -49,7 +71,16 @@ public class Parser {
         return true;
     }
 
-    /*Will only include the Time Format of: DD/MM/YY Time
+    /**
+     * @author Hang Zelin
+     *
+     * @description return a LocalDateTime type that encapsulates the year, month, day, hour, minute of a time input.
+     * The method takes in a String of time and convert into LocalDateTime type.
+     * The format can only be: 1. dd/mm/yyyy hhmm
+     *                         2. yyyy-mm-dd
+     *
+     * @param time
+     * @return LocalDateTime
      */
     public LocalDateTime ParseTime(String time) {
         LocalDateTime parsedTime = null;
@@ -93,6 +124,15 @@ public class Parser {
         return parsedTime;
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description return a String which is a task info in a local save data.
+     * noted: you must specify it as local data, otherwise it can go wrong.
+     *
+     * @param
+     * @return String
+     */
     public String getSaveTask() {
         String task;
         char taskType = Message.charAt(0);
@@ -105,6 +145,15 @@ public class Parser {
         return task;
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description return a String which is a time info in a local save data.
+     * noted: you must specify it as local data, otherwise it can go wrong.
+     *
+     * @param
+     * @return String
+     */
     public String getSaveTime() {
         String time;
 
@@ -117,6 +166,15 @@ public class Parser {
         return time;
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description return a String which is an operation type in a line of command.
+     *
+     * @param
+     * @return String
+     * @throws DukeException
+     */
     public String getOperationType() throws DukeException {
         String OperationType;
         if (Message.contains(" ")) {
@@ -136,6 +194,15 @@ public class Parser {
 
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description return a String which is task info in a line of command.
+     *
+     * @param
+     * @return String
+     * @throws DukeException
+     */
     public String getTask() throws DukeException{
         String task = "";
 
@@ -155,6 +222,15 @@ public class Parser {
         return task;
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description return a String which is time info in a line of command.
+     *
+     * @param
+     * @return String
+     * @throws DukeException
+     */
     public String getTime() throws DukeException{
         String time = "";
 
@@ -193,6 +269,16 @@ public class Parser {
         return time;
     }
 
+    /**
+     * @author Hang Zelin
+     *
+     * @description return a String which is index info in a line of command.
+     * Noted: It is possible that index does not exist. This method will only be applicable for "tell", "find",
+     * "done" and "delete" operation type.
+     *
+     * @param
+     * @return Integer
+     */
     public Integer getIndex(){
         int index = (Message.contains(" ") && (Message.startsWith("done") || Message.startsWith("delete")))
                 ? Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1
