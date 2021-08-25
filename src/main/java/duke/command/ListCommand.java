@@ -12,4 +12,12 @@ public class ListCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage){
         ui.showList(tasks);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ListCommand) {
+            return true;
+        }
+        return false;
+    }
 }

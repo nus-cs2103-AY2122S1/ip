@@ -27,7 +27,7 @@ public final class Parser {
             case "delete":
                 return new DeleteCommand(action);
             default:
-                throw new InvalidInputException("This is an unknown duke.command.");
+                throw new InvalidInputException("This is an unknown command.");
         }
     }
 

@@ -28,7 +28,7 @@ public class DeadlineCommand extends Command {
             NoActionException, NoTimeException, SaveFileException {
         String[] deadlineInputs = action.split("/by", 2);
         if (deadlineInputs[0].length() == 0) {
-            throw new NoActionException("duke.command.Command 'deadline' requires a task action");
+            throw new NoActionException("Command 'deadline' requires a task action");
         }
         if (deadlineInputs.length <=1){
             throw new NoTimeException(
@@ -39,5 +39,14 @@ public class DeadlineCommand extends Command {
         tasks.add(newTask);
         ui.showTaskAdded(newTask, tasks);
         storage.save(tasks);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DeadlineCommand) {
+            DeadlineCommand otherDeadlineCommand = (DeadlineCommand) obj;
+            return otherDeadlineCommand.action.equals(this.action);
+        }
+        return false;
     }
 }

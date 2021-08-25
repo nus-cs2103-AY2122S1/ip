@@ -27,4 +27,13 @@ public class TodoCommand extends Command {
         ui.showTaskAdded(newTask, tasks);
         storage.save(tasks);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof TodoCommand) {
+            TodoCommand otherTask = (TodoCommand) obj;
+            return otherTask.action.equals(this.action);
+        }
+        return false;
+    }
 }

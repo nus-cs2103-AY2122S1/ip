@@ -14,6 +14,7 @@ src/main/resources/docs/
 bin/
 /data/saveFile.txt
 /text-ui-test/data/
+saveFile.txt
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT

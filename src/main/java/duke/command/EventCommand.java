@@ -27,7 +27,7 @@ public class EventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException,
             NoTimeException, NoActionException, SaveFileException {
             if (action.trim().length() == 0) {
-                throw new NoActionException("duke.command.Command 'event' requires a task action");
+                throw new NoActionException("Command 'event' requires a task action");
             }
             String[] eventInputs = action.split("/at", 2);
             if (eventInputs.length <=1){
@@ -39,5 +39,14 @@ public class EventCommand extends Command {
             tasks.add(newTask);
             ui.showTaskAdded(newTask, tasks);
             storage.save(tasks);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof EventCommand) {
+            EventCommand otherEventCommand = (EventCommand) obj;
+            return otherEventCommand.action.equals(this.action);
+        }
+        return false;
     }
 }
