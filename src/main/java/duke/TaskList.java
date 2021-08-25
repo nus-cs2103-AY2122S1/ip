@@ -107,6 +107,16 @@ public class TaskList {
         return "Noted. Removed this task:\n" + t.toString();
     }
 
+    public String findTask(String searchString) {
+        String result = "";
+        for (Task t : this.arrayList) {
+            if (t.toString().contains(searchString)) {
+                result += t.toString();
+            }
+        }
+        return result;
+    }
+
     public void saveToFile() {
         if (this.dataFile != null) {
             try {
