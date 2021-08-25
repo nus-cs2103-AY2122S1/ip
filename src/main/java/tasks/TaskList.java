@@ -37,10 +37,10 @@ public class TaskList {
      * @return The output that you want to be printed out in the console
      */
     public String markDone(String str) {
-        int a = Integer.parseInt(str.substring(5)) - 1;
-        tasks.get(a).taskDone();
+        int completedTaskIndex = Integer.parseInt(str.substring(5)) - 1;
+        tasks.get(completedTaskIndex).taskDone();
         Storage.getAllTasks(tasks);
-        return "Nice! I've marked this task as done: \n" + tasks.get(a);
+        return "Nice! I've marked this task as done: \n" + tasks.get(completedTaskIndex);
     }
 
     /**
@@ -51,11 +51,11 @@ public class TaskList {
     public String todoTask(String str) throws DukeException {
         try {
             str = str.substring(5);
-            Task t = new Todo(str);
-            tasks.add(t);
-            Storage.writeLine(t);
+            Task task = new Todo(str);
+            tasks.add(task);
+            Storage.writeLine(task);
             return "Got it. I've added this task: \n"
-                    + t
+                    + task
                     + "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (StringIndexOutOfBoundsException e) {
             return "☹ OOPS!!! The description of a todo cannot be empty.";
@@ -70,14 +70,14 @@ public class TaskList {
      */
     public String deadlineTask(String str) {
         try {
-            int i = str.indexOf("/");
-            String day = str.substring(i + 4, i + 14);
-            String time = str.substring(i + 14);
-            Task t = new Deadline(str.substring(0, i), Storage.formatDate(day) + time);
-            tasks.add(t);
-            Storage.writeLine(t);
+            int slashIndex = str.indexOf("/");
+            String day = str.substring(slashIndex + 4, slashIndex + 14);
+            String time = str.substring(slashIndex + 14);
+            Task task = new Deadline(str.substring(0, slashIndex), Storage.formatDate(day) + time);
+            tasks.add(task);
+            Storage.writeLine(task);
             return "Got it. I've added this task: \n"
-                    + t
+                    + task
                     + "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (StringIndexOutOfBoundsException e) {
             return "☹ OOPS!!! The description of a deadline cannot be empty.\n" + 
@@ -94,13 +94,13 @@ public class TaskList {
      */
     public String eventsTask(String str) {
         try {
-            int i = str.indexOf("/");
-            String day = str.substring(i + 4, i + 14);
-            Task t = new Events(str.substring(0, i), day);
-            tasks.add(t);
-            Storage.writeLine(t);
+            int slashIndex = str.indexOf("/");
+            String day = str.substring(slashIndex + 4, slashIndex + 14);
+            Task task = new Events(str.substring(0, slashIndex), day);
+            tasks.add(task);
+            Storage.writeLine(task);
             return "Got it. I've added this task: \n"
-                    + t
+                    + task
                     + "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (StringIndexOutOfBoundsException e) {
             return "☹ OOPS!!! The description of a deadline cannot be empty.\n" +
@@ -116,9 +116,9 @@ public class TaskList {
      * @return The output that you want to be printed out in the console
      */
     public String deleteTask(String str) {
-        int index = Integer.parseInt(str.substring(7)) - 1;
-        Task t = tasks.get(index);
-        tasks.remove(index);
+        int indexOfTaskToDelete = Integer.parseInt(str.substring(7)) - 1;
+        Task t = tasks.get(indexOfTaskToDelete);
+        tasks.remove(indexOfTaskToDelete);
         Storage.getAllTasks(tasks);
         return "Got it. I've deleted this task: \n"
                 + t
