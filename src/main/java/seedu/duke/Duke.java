@@ -31,7 +31,7 @@ class Duke {
         private DateTimeManager manager = new DateTimeManager(
                 DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         private int taskIndex = -1;
-        private LocalDate date;
+        private LocalDate date = LocalDate.now();
 
         private UserCommands parseString(String userInput) throws DukeException {
             this.userInput = userInput;
