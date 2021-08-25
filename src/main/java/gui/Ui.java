@@ -34,4 +34,10 @@ public class Ui {
         return sc.nextLine();
     }
 
+    public static void showStorageFileNotFoundError(String message) {
+        System.out.println("Storage file not found: " + message);
+        System.out.println("Task List will be initialized to empty state.");
+        System.out.println("Duke.txt will be created for you once you add tasks to the list.\n");
+    }
+
 }
