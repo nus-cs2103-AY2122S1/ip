@@ -1,24 +1,38 @@
+/**
+ * Main file of the duke folder. Runs the while loop to keep the bot going
+ */
 public class Duke {
 
+    private static boolean isRunning = false;
     /**
      * Function starts the process of the dukebot, closes when the "Bye command is issued"
      */
     private static void start() {
+        isRunning = true;
+        Logic.preload();
         while (true) {
-            String command = Presentation.scan();
-            // Check if player has entered a command, returns the command if command is not null or bye
-            if (command.equals("bye")) {
+            String command = Scanner.scan();
+            try {
+                Logic.checkIfSpecialComand(command);
+            } catch (InvalidCommandException exception) {
+                System.out.println(exception.getMessage());
+            }
+
+            //Check if the logic has made any changes to quit the programme or continue running
+            if (!isRunning) {
                 System.out.println("See ya");
                 break;
-            } else {
-                try {
-                    Logic.process(command);
-                } catch (InvalidCommandException exception) {
-                    System.out.println(exception.getMessage());
-                }
             }
         }
     }
+
+    /**
+     * Stop the running of the bot
+     */
+    protected static void stop() {
+        isRunning = false;
+    }
+
 
     /**
      * Starting point of the dukeBot

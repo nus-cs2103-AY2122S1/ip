@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Packaged command that the parser outputs. Is process by the logic layer and is for ease of processing.
+ */
 public class Command {
     private Task.TaskType taskType;
     private ArrayList<String> listOfCommandInputs;

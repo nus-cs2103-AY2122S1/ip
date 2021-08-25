@@ -1,15 +1,27 @@
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Persistence {
+/**
+ * Handles all things related to data. This includes the in-memory storage represented by an arrayList or
+ * the persistent storage handled by the .txt files.
+ */
+public class DataHandlerLayer {
+
 
     /**
      * In memory storage for log, for history, refer to the history variable
      */
     private static ArrayList<Task> log = new ArrayList<>();
+
+    /**
+     * History file that will be written to
+     */
+    private static String fileName = "src/main/Text/History.txt";
+
+    /**
+     * Init data storage handler for history.
+     */
+    private static PersistentStorageHandler history = new PersistentStorageHandler(fileName);
+
 
     /**
      * Adds the command to the log.
@@ -60,5 +72,33 @@ public class Persistence {
             throw new IndexOutOfBoundsException();
         };
         log.remove(position - 1);
+    }
+
+    /**
+     * Prints all the lines in the history
+     */
+    public static void print_history() {
+        history.printAllLines();
+    }
+
+    public static void stopWriting() {
+        history.stopWriting();
+    }
+
+    public static ArrayList<Command> loadPreset() throws InvalidCommandException {
+       return Parser.parsePreloadedTasks(history.getAll_lines());
+    }
+
+    public static void appendToHistory(Task task) {
+        history.write(task.toString());
+    }
+
+    public static void updateHistory() {
+        history.clear_history();
+        for (Task task: log) {
+            if (!task.getCompletedStatus()) {
+                appendToHistory(task);
+            }
+        }
     }
 }

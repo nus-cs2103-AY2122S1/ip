@@ -1,5 +1,9 @@
 import java.util.*;
 
+/**
+ * Parser that handles all the string manipulation. The users input is taken in as a string and passed to parser
+ * for packaging into a command.
+ */
 public class Parser {
 
     /**
@@ -8,7 +12,7 @@ public class Parser {
      *                and packaged into Command. See Command for more.
      * @return A packaged command for ease of access of infomation
      */
-    public static Command parse(String command) {
+    public static Command parse(String command) throws InvalidCommandException {
         //Remove TaskType from the command first
         Task.TaskType taskType = Task.TaskType.NOTAPPLICABLE;
         String stringTaskType = new String();
@@ -43,5 +47,36 @@ public class Parser {
 
         packagedCommand = new Command(taskType, listOfCommandInputs, tempCommand);
         return packagedCommand;
+    }
+
+    public static ArrayList<Command> parsePreloadedTasks(ArrayList<String> previousHistory) throws InvalidCommandException {
+        int eventTypeIndex = 1;
+        int isCompletedIndex = 4;
+        ArrayList<Command> preloadedList = new ArrayList<>();
+
+        for (String line: previousHistory) {
+            String[] temp_packaged_history = line.split(" ");
+            ArrayList<String> packaged_history = new ArrayList<>();
+            Collections.addAll(packaged_history,temp_packaged_history);
+
+            Task.TaskType eventType = Task.TaskType.NOTAPPLICABLE;
+            switch (packaged_history.get(0).charAt(eventTypeIndex)) {
+                case 'T':
+                    eventType = Task.TaskType.TODO;
+                    break;
+                case 'E':
+                    eventType = Task.TaskType.EVENT;
+                    break;
+                case 'D':
+                    eventType = Task.TaskType.DEADLINE;
+                case 'N':
+                    eventType = Task.TaskType.NOTAPPLICABLE;
+            }
+            boolean isCompleted = packaged_history.get(0).charAt(isCompletedIndex) == '✓';
+            packaged_history.remove(0);
+            Command command = new Command(eventType, packaged_history , String.join(" ", packaged_history));
+            preloadedList.add(command);
+        }
+        return preloadedList;
     }
 }

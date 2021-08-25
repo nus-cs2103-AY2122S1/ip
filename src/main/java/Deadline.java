@@ -1,3 +1,6 @@
+/**
+ * Deadline class that extends tasks. Should come with a name for the task as well as a deadline for the task
+ */
 public class Deadline extends Task{
 
     private String deadline;
