@@ -1,7 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class ParsedInput {
     CommandType commandType;
     String taskDescription = "";
-    String deadline = "";
+    LocalDate deadline;
     String eventPeriod = "";
     int taskIndex = -1;
 
@@ -21,7 +24,12 @@ public class ParsedInput {
                 this.commandType = CommandType.DEADLINE;
                 int byIndex = findFirstIndexOf("/by", splitInput);
                 this.taskDescription = joinStrings(splitInput, 1, byIndex - 1);
-                this.deadline = joinStrings(splitInput, byIndex + 1, splitInput.length - 1);
+                String deadlineString = joinStrings(splitInput, byIndex + 1, splitInput.length - 1);
+                try {
+                    this.deadline = LocalDate.parse(deadlineString);
+                } catch (DateTimeParseException e) {
+                    this.deadline = LocalDate.now().plusWeeks(1);
+                }
                 break;
             case "event":
                 this.commandType = CommandType.EVENT;

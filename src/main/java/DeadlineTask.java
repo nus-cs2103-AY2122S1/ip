@@ -1,8 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class DeadlineTask extends Task {
 
-    private String deadline;
+    private LocalDate deadline;
 
-    public DeadlineTask(String description, String deadline) {
+    public DeadlineTask(String description, LocalDate deadline) {
         super(description);
         this.deadline = deadline;
     }
@@ -14,6 +18,6 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " " + "(by: " + this.deadline + ")";
+        return super.toString() + " " + "(by: " + this.deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")";
     }
 }
