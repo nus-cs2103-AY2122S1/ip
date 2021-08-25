@@ -55,6 +55,11 @@ public class Duke {
             parentDir.mkdirs();
         }
 
+        System.out.println("\nImportant notes: \n1) For deadlines, it must contain /by ... and events must contain" +
+                        " /at ...");
+        System.out.println("2) The ... must be in the form DATE TIME where the DATE must be of the form" +
+                "YYYY-MM-DD and the TIME must be of 24hr type (e.g. 2pm = 1400)\n");
+
         Scanner newScan = new Scanner(System.in);
         ArrayList<Task> contents = new ArrayList<>();
         String userInput = newScan.nextLine();
@@ -98,9 +103,9 @@ public class Duke {
                 }
             } else {
                 Task newTask;
-                if (userInput.startsWith("deadline")) {
+                if (userInput.startsWith("deadline") && userInput.contains("by")) {
                     newTask = new Deadline(userInput);
-                } else if (userInput.startsWith("event")) {
+                } else if (userInput.startsWith("event") && userInput.contains("at")) {
                     newTask = new Event(userInput);
                 } else if (userInput.startsWith("todo")) {
                     newTask = new ToDos(userInput);
