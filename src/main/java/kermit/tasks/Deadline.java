@@ -37,15 +37,6 @@ public class Deadline extends DateDependentTask {
     }
 
     /**
-     * Get string representation of date associated to task.
-     *
-     * @return Stringified date in form MMM DD YYYY, MMM is the first 3 letters of the month.
-     */
-    public String getDateString() {
-        return super.getDateString();
-    }
-
-    /**
      * Get string representation of deadline task including its short form,
      * completion status and its due date.
      *
