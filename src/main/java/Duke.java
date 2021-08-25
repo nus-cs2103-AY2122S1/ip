@@ -10,9 +10,12 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-
         Duke duke = new Duke();
-        duke.greeting();
+        duke.run();
+    }
+
+    public void run() {
+        greeting();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -20,19 +23,18 @@ public class Duke {
             String command = scanner.nextLine().trim();
             if (command.equals("bye")) {
                 scanner.close();
-                duke.bye();
+                bye();
                 break;
             }
 
             try {
-                duke.runCommand(command);
+                runCommand(command);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
         }
 
         scanner.close();
-
     }
 
     public void runCommand(String command) throws DukeException {
@@ -112,13 +114,6 @@ public class Duke {
         }
     }
 
-    public void printNowSize() {
-        if (toDoList.size() == 1) {
-            System.out.println("Now you have 1 task in the list.");
-        } else {
-            System.out.printf("Now you have %d tasks in the list.%n", toDoList.size());
-        }
-    }
 
     public void delete(String num) {
         int listNum = Integer.parseInt(num);
@@ -136,6 +131,14 @@ public class Duke {
             toDoList.get(listNum - 1).setIsDone(true);
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(toDoList.get(listNum - 1));
+        }
+    }
+
+    public void printNowSize() {
+        if (toDoList.size() == 1) {
+            System.out.println("Now you have 1 task in the list.");
+        } else {
+            System.out.printf("Now you have %d tasks in the list.%n", toDoList.size());
         }
     }
 }
