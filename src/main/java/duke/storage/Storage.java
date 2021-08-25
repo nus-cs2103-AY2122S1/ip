@@ -1,8 +1,12 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.FileSystemException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,7 +19,7 @@ public class Storage {
         file = new File(fileName);
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException{
         ArrayList<Task> taskList = new ArrayList<>();
 
         try {
@@ -40,7 +44,7 @@ public class Storage {
                     newTask = new Event(task[2], task[3]);
                     break;
                 default:
-                    newTask = new Todo(task[2]);
+                    throw new DukeException("Oops! Duke can't load a file");
                 }
 
                 if (task[1].equals("X")) {
@@ -53,28 +57,19 @@ public class Storage {
             return taskList;
 
         } catch (FileNotFoundException e) {
-                return taskList;
+            return taskList;
         }
     }
 
-    public void save(ArrayList<Task> taskList){
+    public void save(TaskList tasks) throws DukeException {
         try {
-            String fileTask;
-            if (taskList.isEmpty()) {
-                fileTask = "";
-            } else {
-                fileTask = taskList.get(0).toFileString();
-            }
-
-            for (int i = 1; i < taskList.size(); i++) {
-                fileTask = fileTask + "\n" + taskList.get(i).toFileString();
-            }
+            String fileTask = tasks.toFileString();
 
             FileWriter fileWriter = new FileWriter(this.fileName, false);
             fileWriter.write(fileTask);
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("The file can't be overwrite");
+            throw new DukeException("Oops there is an issue with overriding the file");
         }
     }
 }
