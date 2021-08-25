@@ -1,7 +1,7 @@
 /**
  * General category
  */
-abstract public class Task {
+public class Task {
     private String name;
     private Boolean completed = false;
 
