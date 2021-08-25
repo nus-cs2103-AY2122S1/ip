@@ -1,6 +1,8 @@
 package duke.tasks;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 import duke.Duke;
 import duke.exceptions.NoDescriptionException;
@@ -78,6 +80,11 @@ public class Task {
       throw new NoDescriptionException("Oops! Please use the correct format with " + key + " to indicate\ndatetime");
     }
     return str.split(key);
+  }
+
+  public boolean descContains(String key) {
+    String regex = ".*\\b" + Pattern.quote(key.toLowerCase()) + "\\b.*";
+    return description.toLowerCase().matches(regex);
   }
 
   public String taskToString() {

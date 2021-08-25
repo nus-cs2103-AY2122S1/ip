@@ -13,7 +13,6 @@ public class Duke {
 
   private static final String LINE =
     "     ____________________________________________________________\n";
-//  private static final String INDENT = "      ";
   public static TaskList taskList;
   private Ui ui;
 
@@ -43,22 +42,33 @@ public class Duke {
     try {
       String cmd = input[0];
       String details = input.length == 1 ? "" : input[1];
-      if (cmd.equals("bye")) {
-        ui.endChat();
-      } else if (cmd.equals("list")) {
-        ui.renderList();
-      } else if (cmd.equals("done")) {
-        ui.markTaskComplete(Integer.parseInt(details));
-      } else if (cmd.equals("todo")) {
-        ui.addNewTask(details, Task.Type.TODO);
-      } else if (cmd.equals("deadline")) {
-        ui.addNewTask(details, Task.Type.DEADLINE);
-      } else if (cmd.equals("event")) {
-        ui.addNewTask(details, Task.Type.EVENT);
-      } else if (cmd.equals("delete")) {
-        ui.deleteTask(Integer.parseInt(details));
-      } else {
-        throw new InvalidInputException();
+      switch (cmd) {
+        case "bye":
+          ui.endChat();
+          break;
+        case "list":
+          ui.renderList();
+          break;
+        case "done":
+          ui.markTaskComplete(Integer.parseInt(details));
+          break;
+        case "todo":
+          ui.addNewTask(details, Task.Type.TODO);
+          break;
+        case "deadline":
+          ui.addNewTask(details, Task.Type.DEADLINE);
+          break;
+        case "event":
+          ui.addNewTask(details, Task.Type.EVENT);
+          break;
+        case "delete":
+          ui.deleteTask(Integer.parseInt(details));
+          break;
+        case "find":
+          ui.find(details, taskList);
+          break;
+        default:
+          throw new InvalidInputException();
       }
     } catch (UserInputError e) {
       Duke.renderOutput(e.getMessage());
