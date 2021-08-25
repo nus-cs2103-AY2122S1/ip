@@ -1,12 +1,14 @@
-public class Event extends Task {
-    protected String time;
+import java.time.LocalDateTime;
 
-    public Event(String description, String time) {
+public class Event extends Task {
+    protected LocalDateTime time;
+
+    public Event(String description, LocalDateTime time) {
         super(description);
         this.time = time;
     }
 
-    public Event(String description, String time, boolean isCompleted) {
+    public Event(String description, LocalDateTime time, boolean isCompleted) {
         super(description, isCompleted);
         this.time = time;
     }
@@ -27,15 +29,15 @@ public class Event extends Task {
         }
 
         String description = eventInputs[0];
-        String time = eventInputs[1];
+        LocalDateTime time = DateTime.parse(eventInputs[1]);
 
         return new Event(description, time);
     }
 
     @Override
     public String toString() {
-        String time = this.time.length() > 0 ? (" (at: " + this.time + ")") : "";
+        String timeStr = DateTime.stringify(this.time);
 
-        return "[E]" + super.toString() + time;
+        return "[E]" + super.toString() + " (at: " + timeStr + ")";
     }
 }

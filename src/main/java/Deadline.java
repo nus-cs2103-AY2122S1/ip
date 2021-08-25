@@ -1,12 +1,14 @@
-public class Deadline extends Task {
-    protected String time;
+import java.time.LocalDateTime;
 
-    public Deadline(String description, String time) {
+public class Deadline extends Task {
+    protected LocalDateTime time;
+
+    public Deadline(String description, LocalDateTime time) {
         super(description);
         this.time = time;
     }
 
-    public Deadline(String description, String time, boolean isCompleted) {
+    public Deadline(String description, LocalDateTime time, boolean isCompleted) {
         super(description, isCompleted);
         this.time = time;
     }
@@ -27,15 +29,15 @@ public class Deadline extends Task {
         }
 
         String description = deadlineInputs[0];
-        String time = deadlineInputs[1];
+        LocalDateTime time = DateTime.parse(deadlineInputs[1]);
 
         return new Deadline(description, time);
     }
 
     @Override
     public String toString() {
-        String time = this.time.length() > 0 ? (" (by: " + this.time + ")") : "";
+        String timeStr = DateTime.stringify(this.time);
 
-        return "[D]" + super.toString() + time;
+        return "[D]" + super.toString() + " (by: " + timeStr + ")";
     }
 }

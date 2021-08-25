@@ -68,14 +68,14 @@ public class Duke {
                         if (components.length != 4) {
                             throw new Exception("Invalid format");
                         }
-                        tasks.add(new Event(description, unescapeString(components[3]), isCompleted));
+                        tasks.add(new Event(description, DateTime.parse(components[3]), isCompleted));
                         break;
                     }
                     case "D": {
                         if (components.length != 4) {
                             throw new Exception("Invalid format");
                         }
-                        tasks.add(new Event(description, unescapeString(components[3]), isCompleted));
+                        tasks.add(new Deadline(description, DateTime.parse(components[3]), isCompleted));
                         break;
                     }
                     default: {
@@ -113,7 +113,7 @@ public class Duke {
             writer.write(" | ");
             writer.write(escapeString(task.description));
             writer.write(" | ");
-            writer.write(escapeString(((Event) task).time));
+            writer.write(DateTime.stringify(((Event) task).time));
             writer.write(System.lineSeparator());
         } else if (task instanceof Deadline) {
             writer.write("D | ");
@@ -121,7 +121,7 @@ public class Duke {
             writer.write(" | ");
             writer.write(escapeString(task.description));
             writer.write(" | ");
-            writer.write(escapeString(((Deadline) task).time));
+            writer.write(DateTime.stringify(((Deadline) task).time));
             writer.write(System.lineSeparator());
         }
     }
