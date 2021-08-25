@@ -67,4 +67,14 @@ public class TaskTest {
         tasks.addDeadlineTask("deadline homework /2021-09-10", 18);
         assertEquals("[E][ ] swimming (at: 2021-08-15) [D][ ] homework (by: 2021-09-10) ", tasks.toString());
     }
+
+    @Test
+    public void taskListTest5() {
+        TaskList tasks = new TaskList();
+        tasks.addToDoTask("todo buy dinner");
+        tasks.addToDoTask("todo eat dinner");
+        tasks.deleteTask(1);
+        tasks.deleteTask(1);
+        assertEquals("No tasks", tasks.toString());
+    }
 }
