@@ -132,8 +132,9 @@ public class TaskList {
         }
         tasks.remove(index);
         storage.saveData(tasks);
-        System.out.println(String.format("Noted. I've removed this task:\n" +
-                "%s\nNow you have %d tasks in the list.", currTask.toString(), tasks.size()));
+        System.out.println(String.format("Noted. I've removed this task:\n"
+                + "%s\nNow you have %d tasks in the list.",
+                currTask.toString(), tasks.size()));
     }
 
 }

@@ -38,35 +38,36 @@ public class Storage {
                 String dateStr;
                 LocalDate date;
                 LocalTime time;
+
                 switch (type) {
-                    case "T":
-                        t = new Todo(description);
-                        break;
-                    case "D":
-                        dateStr = Parser.parseData(next, "date");
-                        date = LocalDate.parse(dateStr);
-                        try {
-                            String timeStr = Parser.parseData(next, "time");
-                            time = LocalTime.parse(timeStr);
-                            t = new Deadline(description, date, time);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            t = new Deadline(description, date);
-                        }
-                        break;
-                    case "E":
-                        dateStr = Parser.parseData(next, "date");
-                        date = LocalDate.parse(dateStr);
-                        try {
-                            String timeStr = Parser.parseData(next, "time");
-                            time = LocalTime.parse(timeStr);
-                            t = new Event(description, date, time);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            t = new Event(description, date);
-                        }
-                        break;
-                    default:
-                        System.out.println("task failed to load");
-                        continue;
+                case "T":
+                    t = new Todo(description);
+                    break;
+                case "D":
+                    dateStr = Parser.parseData(next, "date");
+                    date = LocalDate.parse(dateStr);
+                    try {
+                        String timeStr = Parser.parseData(next, "time");
+                        time = LocalTime.parse(timeStr);
+                        t = new Deadline(description, date, time);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        t = new Deadline(description, date);
+                    }
+                    break;
+                case "E":
+                    dateStr = Parser.parseData(next, "date");
+                    date = LocalDate.parse(dateStr);
+                    try {
+                        String timeStr = Parser.parseData(next, "time");
+                        time = LocalTime.parse(timeStr);
+                        t = new Event(description, date, time);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        t = new Event(description, date);
+                    }
+                    break;
+                default:
+                    System.out.println("task failed to load");
+                    continue;
                 }
                 if (progress.equals("1")) {
                     t.markDone();

@@ -13,18 +13,18 @@ public class Parser {
         String[] dataArr = s.split(" _ ");
         try {
             switch (output) {
-                case "type":
-                    return dataArr[0];
-                case "progress":
-                    return dataArr[1];
-                case "description":
-                    return dataArr[2];
-                case "date":
-                    return dataArr[3];
-                case "time":
-                    return dataArr[4];
-                default:
-                    throw new DukeException("Unable to process the command");
+            case "type":
+                return dataArr[0];
+            case "progress":
+                return dataArr[1];
+            case "description":
+                return dataArr[2];
+            case "date":
+                return dataArr[3];
+            case "time":
+                return dataArr[4];
+            default:
+                throw new DukeException("Unable to process the command");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Unable to parse data");
