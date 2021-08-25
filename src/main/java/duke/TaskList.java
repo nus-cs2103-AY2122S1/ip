@@ -82,14 +82,6 @@ public class TaskList {
                 + (size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
-<<<<<<< HEAD
-    /**
-     * Returns the task at a specified index in the taskList.
-     *
-     * @param index The index of the task to retrieve in the taskList.
-     * @return The task at the index-th position in the taskList.
-     */
-=======
     public void searchAndDisplay(String keyword) {
         ArrayList<Task> temp = new ArrayList<>();
         for (int i = 0; i < size(); i++) {
@@ -109,7 +101,12 @@ public class TaskList {
         }
     }
 
->>>>>>> branch-Level-9
+    /**
+     * Returns the task at a specified index in the taskList.
+     *
+     * @param index The index of the task to retrieve in the taskList.
+     * @return The task at the index-th position in the taskList.
+     */
     public Task get(int index) {
         return this.taskList.get(index);
     }
