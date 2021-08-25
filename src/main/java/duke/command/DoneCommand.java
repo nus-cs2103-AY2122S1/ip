@@ -19,7 +19,7 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.taskDone(this.index);
+        tasks.markTaskAsDone(this.index);
         storage.writeToFile(tasks);
     }
 

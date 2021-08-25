@@ -52,7 +52,7 @@ public class TaskList {
         }
     }
 
-    public void taskDone(int index) {
+    public void markTaskAsDone(int index) {
         int numOfTasks = listOfTasks.size();
         if (index >= numOfTasks) {
             System.out.println("No task of this number. Add new task or input a different number.");
