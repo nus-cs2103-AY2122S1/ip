@@ -48,12 +48,16 @@ public class Task {
             return 0 + "," + this.description;
         }
     }
-    
+
+    /**
+     * A method that determines if a string can be found in this task's description
+     * @param str given string
+     * @return a boolean on whether a given string is a substring of the description
+     */
     public boolean isSubString(String str) {
         return this.description.toLowerCase().indexOf(str.toLowerCase()) >= 0;
     }
     
-
     /**
      *  Method to convert information from object instance into a more readable format
      *
