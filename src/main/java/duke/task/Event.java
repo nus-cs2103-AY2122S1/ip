@@ -3,16 +3,36 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The class models an event which is a special type of task.
+ */
 public class Event extends Task {
     LocalDateTime startDateTime;
     LocalDateTime endDateTime;
 
+    /**
+     * Constructor.
+     * Instantiates a Deadline object with given description and
+     * event start dateTime and end dateTime.
+     * @param description
+     * @param startDateTime
+     * @param endDateTime
+     */
     public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(description);
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
     }
 
+    /**
+     * Constructor.
+     * Instantiates a Deadline object with given description, isDone status and
+     * event start dateTime and end dateTime.
+     * @param description
+     * @param isDone
+     * @param startDateTime
+     * @param endDateTime
+     */
     public Event(String description, boolean isDone, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(description, isDone);
         this.startDateTime = startDateTime;
@@ -35,6 +55,10 @@ public class Event extends Task {
                 );
     }
 
+    /**
+     * String representation of Events.
+     * @return String representation of the event.
+     */
     public String toString() {
         return String.format("[E] [%s] %s (at: %s)",
                 isDone ? "X" : " ",

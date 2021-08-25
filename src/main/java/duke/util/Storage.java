@@ -8,13 +8,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The class that implements storage functions of the project.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructor of Storage class.
+     * It instantiates a Storage object that is associated with
+     * the file specified by the input path.
+     * @param filePath The path of the file the Storage will be associated with.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * The method saves the given String (encoded content) to the associated file.
+     * @param encoded String containing encoded/formatted content.
+     * @throws IOException When there is problem in I/O system.
+     */
     public void save(String encoded) throws IOException {
         File file = linkFileOrCreateFile(filePath);
         FileWriter fw = new FileWriter(file);
@@ -22,6 +36,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * The method loads Strings from the associated file,
+     * and return an array containing rows of lines of the file.
+     * @return A String array containing lines of the file.
+     * @throws FileNotFoundException When the file does not exist.
+     */
     public String[] load() throws FileNotFoundException {
         File file = new File(filePath);
         Scanner sc = new Scanner(file);
@@ -37,9 +57,9 @@ public class Storage {
      * Return a File object at given path.
      * If the file and its parent directories do not exist,
      * The methods will create them and then return the File object.
-     * @param path
+     * @param path Path of the file to be linked or created.
      * @return File object at the given path
-     * @throws IOException
+     * @throws IOException When I/O system goes wrong.
      */
     private File linkFileOrCreateFile(String path) throws IOException {
         File file = new File(path);

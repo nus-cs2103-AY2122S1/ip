@@ -14,10 +14,17 @@ import duke.task.Event;
 import duke.task.Task;
 
 /**
- * The class that parses user input and returns parsed objects
+ * The class that parses user input and returns parsed objects.
  */
 public class Parser {
 
+    /**
+     * The method takes a user input and parse out all necessary parts needed
+     * to execute user command and finally returns a Command object that can be executed
+     * @param input A line of user input
+     * @return A Command object which can then be called to execute user command
+     * @throws DukeException When the input is empty String or the command is invalid
+     */
     public static Command parseCommand(String input) throws DukeException {
         String[] splited = input.strip().split(" +");
         if(splited.length < 1) {
@@ -71,7 +78,7 @@ public class Parser {
      * Parse and return the description of the task.
      * @param strArr String array that contains splited input string.
      * @return description
-     * @throws DukeException when the task decription is missing from input.
+     * @throws DukeException when the task description is missing from input.
      */
     public static String parseDescription(String[] strArr) throws DukeException {
         StringBuilder sb = new StringBuilder();
