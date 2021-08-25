@@ -16,51 +16,41 @@ public class Duke {
     private boolean isActive;
     private Ui ui;
 
-    private void greet(){
-        String msg = "Hello! I'm Duke";
-        ui.printMessageWithFormat(msg);
+    public Duke(){
+        this.ui = new Ui();
+        this.storage = new Storage();
+        this.taskList = new ArrayList<>();
     }
 
-
-
     private void exit(){
-        String msg = "Bye. Hope to see you again soon!";
-        ui.printMessageWithFormat(msg);
+        ui.farewellMsg();
         this.isActive = false;
     }
 
     private void addTask(Task task){
         this.taskList.add(task);
-        String msg = "Got it. I've added this task:\n" + INDENTATION + "  " + task.checkStatus();
-        msg += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskList.size());
-        ui.printMessageWithFormat(msg);
+        ui.addTaskMsg(taskList, task);
         storage.save(taskList);
     }
 
     private void deleteTask(int taskNum){
         Task task = taskList.remove(taskNum-1);
-        String msg = "Noted. I've removed this task:\n" + INDENTATION + "  " + task.checkStatus();
-        msg += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskList.size());
-        ui.printMessageWithFormat(msg);
+        ui.deleteTaskMsg(taskList, task);
         storage.save(taskList);
     }
 
     private void markTaskAsDone(int taskNumber){
-        taskList.get(taskNumber-1).markDone();
-        String msg = "Nice! I've marked this task as done:\n   ";
-        msg += INDENTATION + taskList.get(taskNumber-1).checkStatus();
-        ui.printMessageWithFormat(msg);
+        Task task = taskList.get(taskNumber-1);
+        task.markDone();
+        ui.markDoneMsg(task);
         storage.save(taskList);
     }
 
     private void start(){
-        this.ui = new Ui();
-        greet();
-
         this.isActive = true;
-        this.storage = new Storage();
         this.taskList = storage.load();
 
+        ui.greet();
 
         Scanner sc = new Scanner(System.in);
 
@@ -76,11 +66,7 @@ public class Duke {
     }
 
     private void listTasks(){
-        String msg = "Here are the tasks in your list:";
-        for (int i = 1; i <= taskList.size(); i++){
-            msg += String.format("\n%s%d. %s", INDENTATION, i, taskList.get(i-1).checkStatus());
-        }
-        ui.printMessageWithFormat(msg);
+        ui.listTasks(taskList);
     }
 
     private void processCommand(String command) throws DukeException{
@@ -172,13 +158,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
         Duke duke = new Duke();
         duke.start();
     }
