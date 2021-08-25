@@ -1,5 +1,6 @@
 public class Deadline extends Task{
     private String date;
+    protected static final String DEADLINE_LABEL = "[D]";
 
     public Deadline(String str) {
         super(str.split(" /", 2)[0]);
@@ -17,7 +18,17 @@ public class Deadline extends Task{
     }
 
     @Override
+    protected String getTaskType() {
+        return DEADLINE_LABEL;
+    }
+
+    @Override
+    protected String getDate() {
+        return this.date;
+    }
+
+    @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date + ")";
+        return "[" + DEADLINE_LABEL + "]" + super.toString() + " (by: " + date + ")";
     }
 }

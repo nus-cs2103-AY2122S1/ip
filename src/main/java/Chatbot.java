@@ -53,6 +53,7 @@ public class Chatbot {
 
     private Scanner scanner;
     private List<Task> memory;
+    private FileDB fileDB;
 
     public Chatbot() {
         this.scanner = new Scanner(System.in);
@@ -63,7 +64,14 @@ public class Chatbot {
         System.out.println("Here are some things I can do now:");
         System.out.println("1. Bye");
         System.out.println("I'll learn what you're saying and " +
-                           "repeat it to you next time you say it if it's something new!");
+                "repeat it to you next time you say it if it's something new!");
+        System.out.println("Loading your commands...");
+        try {
+            this.fileDB = new FileDB();
+        } catch (DukeIOException e) {
+            // File already exists
+            System.out.println(e.getMessage());
+        }
     }
 
     public void chat() {
@@ -78,11 +86,13 @@ public class Chatbot {
                 System.out.println(e.getMessage());
             } catch (DukeTaskException e) {
                 System.out.println(e.getMessage());
+            } catch (DukeIOException e) {
+                System.out.println(e.getMessage());
             }
         };
     }
 
-    private ChatContinue interpret() {
+    private ChatContinue interpret() throws DukeIOException{
         String input = scanner.nextLine();
         ChatCommands command = ChatCommands.toEnum(input);
         if (command != null) {
@@ -99,7 +109,7 @@ public class Chatbot {
         throw new DukeArgumentException("Looks like I don't support those commands yet...");
     }
 
-    private ChatContinue addTask(TaskCommands command, String input) {
+    private ChatContinue addTask(TaskCommands command, String input) throws DukeIOException{
         switch (command) {
             case DONE:
                 return this.markDone(input);
@@ -117,23 +127,26 @@ public class Chatbot {
         }
     }
 
-    private ChatContinue addTodo(String input) {
+    private ChatContinue addTodo(String input) throws DukeIOException{
         ToDo todo = new ToDo(input);
         memory.add(todo);
+        fileDB.save(todo);
         this.displayAddTaskSuccessful(todo);
         return ChatContinue.CONTINUE;
     }
 
-    private ChatContinue addDeadline(String input) {
+    private ChatContinue addDeadline(String input) throws DukeIOException{
         Deadline deadline = new Deadline(input);
         memory.add(deadline);
+        fileDB.save(deadline);
         this.displayAddTaskSuccessful(deadline);
         return ChatContinue.CONTINUE;
     }
 
-    private ChatContinue addEvent(String input) {
+    private ChatContinue addEvent(String input) throws DukeIOException{
         Event event = new Event(input);
         memory.add(event);
+        fileDB.save(event);
         this.displayAddTaskSuccessful(event);
         return ChatContinue.CONTINUE;
     }

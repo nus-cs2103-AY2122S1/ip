@@ -1,5 +1,6 @@
 public class Event extends Task{
     private String date;
+    protected static final String EVENT_LABEL = "E";
 
     public Event(String str) {
         super(str.split(" /", 2)[0]);
@@ -17,7 +18,17 @@ public class Event extends Task{
     }
 
     @Override
+    protected String getTaskType() {
+        return EVENT_LABEL;
+    }
+
+    @Override
+    protected String getDate() {
+        return this.date;
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date + ")";
+        return "[" + EVENT_LABEL + "]" + super.toString() + " (at: " + date + ")";
     }
 }
