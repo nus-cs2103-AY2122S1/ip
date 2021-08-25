@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -26,7 +28,13 @@ public class taskList {
             if (!DEADLINES.matcher(input).matches()) {
                 throw new DukeException("Deadline format: deadline [desc] /by [date]");
             }
-            newTask = new Deadlines(input);
+            try {
+                String name = input.split(" /by ", 2)[0].substring(9);
+                LocalDate deadline = LocalDate.parse(input.split(" /by ", 2)[1]);
+                newTask = new Deadlines(name, deadline);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Use the following date format: yyyy-mm-dd");
+            }
         } else if (input.startsWith("event")) {
             if (!EVENTS.matcher(input).matches()) {
                 throw new DukeException("Event format: event [desc] /at [time]");
