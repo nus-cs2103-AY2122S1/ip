@@ -7,10 +7,28 @@ package duke.Tasks;
 
 public class DeadlineTask extends BaseTask {
 
-    String byWhen;
+    private String byWhen;
 
+    /**
+     * Used for creating a new Deadline Task.
+     *
+     * @param taskName the name or description of the task.
+     * @param byWhen describes when the task should be completed by.
+     */
     public DeadlineTask(String taskName, String byWhen) {
-        super(taskName);
+        super(taskName, false);
+        this.byWhen = byWhen;
+    }
+
+    /**
+     * Used for creating a new Deadline Task with ability to set all attributes.
+     *
+     * @param taskName the name or description of the task.
+     * @param byWhen describes when the task should be completed by.
+     * @param isCompleted true if task was already complete, false if incomplete.
+     */
+    public DeadlineTask(String taskName, String byWhen, boolean isCompleted) {
+        super(taskName, isCompleted);
         this.byWhen = byWhen;
     }
 
