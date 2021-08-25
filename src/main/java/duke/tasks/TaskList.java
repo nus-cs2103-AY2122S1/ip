@@ -7,6 +7,8 @@ import duke.exception.InvalidDurationException;
 import duke.exception.InvalidIndexException;
 import duke.exception.MessageEmptyException;
 
+import duke.ui.Ui;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -15,18 +17,26 @@ import java.time.format.DateTimeParseException;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the list of tasks.
+ */
 public class TaskList {
 
-    /**
-     * taskList is the list of Tasks
-     */
-
+    /** The list of Task. */
     private final ArrayList<Task> taskList;
 
+    /**
+     * Constructor for TaskList.
+     */
     public TaskList() {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Overloaded constructor for TaskList that accepts a task list as an ArrayList.
+     *
+     * @param taskList list of tasks.
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
@@ -39,19 +49,18 @@ public class TaskList {
      * Adds a task to the list of Tasks with a confirmation message printed out after.
      * @param task The duke.tasks.Task to be added to the list of Tasks
      */
-
     public void addToList(Task task) {
         taskList.add(task);
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println("Added: " + task);
+        String message = "Got it. I've added this task: Added: " + task;
         String taskGrammar = (taskList.size() == 1) ? " task" : " tasks";
-        System.out.println("Now you have " + taskList.size() + taskGrammar + " in the list.");
+        Ui.printMessage(message + "Now you have " + taskList.size() + taskGrammar + " in the list.");
     }
 
     /**
      * Prints out the full contents of the list of Tasks.
-     * @throws EmptyListException If the list of Tasks is empty and there is nothing to be printed.
+     *
+     * @throws EmptyListException if the list of Tasks is empty and there is nothing to be printed.
      */
 
     public void displayList() throws EmptyListException {
@@ -59,14 +68,24 @@ public class TaskList {
             throw new EmptyListException();
         }
 
+        StringBuilder sb = new StringBuilder();
+
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            System.out.println(i + 1 + ". " + task);
+            sb.append(i + 1);
+            sb.append(". ");
+            sb.append(task);
+            if (i != taskList.size() - 1) {
+                sb.append("\n");
+            }
         }
+
+        Ui.printMessage(sb.toString());
     }
 
     /**
-     * Marks a current duke.tasks.Task in the list of Tasks as Done.
+     * Marks a current Task in the list of Tasks as Done.
+     *
      * @param taskIndex The index of the duke.tasks.Task in the list of Tasks to be marked as Done.
      * @throws EmptyListException If the list of Tasks is empty and there is nothing to be marked as Done.
      * @throws InvalidIndexException If the index of the duke.tasks.Task provided is out of range of the current list of Tasks.
@@ -85,12 +104,14 @@ public class TaskList {
         Task task = taskList.get(intTaskIndex);
         task.markAsDone();
 
-        System.out.println("Nice! I've marked this task as done:\n" + task);
+        String message = "Nice! I've marked this task as done:\n" + task;
+        Ui.printMessage(message);
     }
 
     /**
-     * Adds a duke.tasks.Deadline to the list of Tasks.
-     * @param deadline The duke.tasks.Deadline to be added to the list of Tasks which is the whole input barring the command.
+     * Adds a Deadline to the list of Tasks.
+     *
+     * @param deadline The Deadline to be added to the list of Tasks which is the whole input barring the command.
      * @throws IncorrectFormatException If the deadline command is used but a "/by" is not present in the message.
      */
 
@@ -121,8 +142,9 @@ public class TaskList {
     }
 
     /**
-     * Adds a duke.tasks.Todo to the list of Tasks.
-     * @param todo The duke.tasks.Todo to be added to the list of Tasks.
+     * Adds a Todo to the list of Tasks.
+     *
+     * @param todo Todo to be added to the list of Tasks.
      */
 
     public void addTodo(String todo) {
@@ -131,8 +153,8 @@ public class TaskList {
     }
 
     /**
-     * Adds an duke.tasks.Event to the list of Tasks.
-     * @param event The duke.tasks.Event to be added to the list of Tasks, which is the entire user input barring the command.
+     * Adds an Event to the list of Tasks.
+     * @param event The Event to be added to the list of Tasks, which is the entire user input barring the command.
      * @throws IncorrectFormatException If the event command is used but a "/at" is not present in the message.
      */
 
@@ -185,7 +207,8 @@ public class TaskList {
 
     /**
      * Deletes a Task from the list of Tasks.
-     * @param taskIndex Index of the duke.tasks.Task to be deleted.
+     *
+     * @param taskIndex Index of the Task to be deleted.
      * @throws EmptyListException If the list of Tasks is empty and there is nothing to be deleted.
      * @throws InvalidIndexException If the index of the duke.tasks.Task provided is out of range of the current list of Tasks.
      */
@@ -201,9 +224,12 @@ public class TaskList {
         }
 
         Task task = taskList.remove(intTaskIndex);
-        System.out.println("Noted. I've removed this task:\n" + task);
+
+        String message = "Noted. I've removed this task:\n" + task;
+
         String taskGrammar = (taskList.size() == 1) ? " task" : " tasks";
-        System.out.println("Now you have " + taskList.size() + taskGrammar + " in the list.");
+
+        Ui.printMessage(message + "Now you have " + taskList.size() + taskGrammar + " in the list.");
     }
 
     /**

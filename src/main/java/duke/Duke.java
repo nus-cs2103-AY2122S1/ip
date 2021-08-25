@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
@@ -11,15 +12,15 @@ import java.util.Scanner;
 
 /**
  * duke.Duke class that initialises the duke.Duke chat bot.
- * The duke.Duke class supports operators including
+ * The Duke class supports operators including
  * (i) run: runs the chat bot
  * (ii) greet: prints out a greeting when the chat bot runs
  * (iii) exit: ends the execution of the chat bot
- * (iv) addToList: adds a duke.tasks.Task to the list of Tasks
+ * (iv) addToList: adds a Task to the list of Tasks
  * (v) displayList: prints out the current list of Tasks
- * (vi) markDone: marks a duke.tasks.Task as done
- * (vii) addDeadline: adds a duke.tasks.Deadline to the list of Tasks
- * (viii) addTodo: adds a duke.tasks.Todo to the list of Tasks
+ * (vi) markDone: marks a Task as done
+ * (vii) addDeadline: adds a Deadline to the list of Tasks
+ * (viii) addTodo: adds a Todo to the list of Tasks
  * (ix) addEvent: adds an duke.tasks.Event to the list of Tasks
  * (x) handleCommands: main logic for processing and executing various commands
  * like "list", "done", "deadline", "todo", "event" and other invalid commands
@@ -27,9 +28,21 @@ import java.util.Scanner;
 
 public class Duke {
 
+    /** Handles loading and saving of Tasks. */
     private final Storage storage;
+
+    /** Stores all tasks */
     private TaskList tasks;
+
+    /** Handles interactions with users. */
     private final Ui ui;
+
+    /**
+     * Constructor for the DUke chatbot.
+     * Loads any pre-existing data from the provided filePath.
+     *
+     * @param filePath path to the data storage file
+     */
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -37,9 +50,9 @@ public class Duke {
 
         try {
             tasks = new TaskList(storage.load());
-        } catch (IOException e) {
+        } catch (IOException | DukeException e) {
             tasks = new TaskList();
-            System.out.println(e.getMessage());
+            Ui.printMessage(e.getMessage());
         }
     }
 
@@ -74,15 +87,17 @@ public class Duke {
         try {
             storage.save(tasks.getTaskList());
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            Ui.printMessage(e.getMessage());
         }
 
         ui.exit();
     }
 
-
-
-
+    /**
+     * Runs the Duke chatbot.
+     *
+     * @param args command line arguments.
+     */
     public static void main(String[] args) {
         new Duke("data.txt").run();
     }
