@@ -1,5 +1,5 @@
-public class Exit extends Command {
-    public Exit() {
+public class ExitCommand extends Command {
+    public ExitCommand() {
     }
 
     public void execute(ToDo taskList, Ui ui, Storage storage) throws KermitException {

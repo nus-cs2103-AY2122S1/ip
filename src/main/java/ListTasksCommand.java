@@ -1,6 +1,6 @@
-public class ListTasks extends Command {
+public class ListTasksCommand extends Command {
 
-    public ListTasks() {}
+    public ListTasksCommand() {}
 
     @Override
     void execute(ToDo taskList, Ui ui, Storage storage) {

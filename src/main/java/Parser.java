@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -63,19 +62,19 @@ public class Parser {
 
         switch (command) {
             case "bye":
-                return new Exit();
+                return new ExitCommand();
             case "list":
-                return new ListTasks();
+                return new ListTasksCommand();
             case "done":
-                return new CompleteTask(argument);
+                return new CompleteTaskCommand(argument);
             case "delete":
-                return new DeleteTask(argument);
+                return new DeleteTaskCommand(argument);
             case "todo":
-                return new AddTask("todo", argument, flag);
+                return new AddTaskCommand("todo", argument, flag);
             case "event":
-                return new AddTask("event", argument, flag);
+                return new AddTaskCommand("event", argument, flag);
             case "deadline":
-                return new AddTask("deadline", argument, flag);
+                return new AddTaskCommand("deadline", argument, flag);
             default:
                 throw new KermitException(invalidCommandText);
         }
