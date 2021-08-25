@@ -2,10 +2,7 @@ package duke;
 
 import duke.command.*;
 /**
- * This class is the duke.Duke class to assess input from user.
- *
- * @author Deng Huaiyu(G12)
- * @version CS2103T AY21/22 Semester 1
+ * This class is the Duke class to start the whole program
  */
 public class Duke {
     private static String ind2 = "     ";
