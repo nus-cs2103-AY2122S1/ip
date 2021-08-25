@@ -69,9 +69,19 @@ public class Duke {
         return splitInput[0].trim();
     }
 
-    public String getTime(String userInput, String splitTime) {
+    public String getDate(String userInput, String splitTime) {
         String[] splitInput = userInput.split(splitTime);
-        return splitInput[1];
+        String date = splitInput[1];
+        if (date.split(" ").length > 1) {
+            return date.split(" ")[0];
+        }
+        return date;
+    }
+
+    public String getTime(String userInput) {
+        String[] splitInput = userInput.split(" ");
+        String time = splitInput[splitInput.length - 1];
+        return time.substring(0,2) + ":" + time.substring(2);
     }
 
     public int getTaskNumber(String userInput) {
@@ -112,8 +122,8 @@ public class Duke {
             case "deadline":
                 if (this.isDescExists(userInput)) {
                     String descDeadline = this.getDescription(userInput, "deadline ", "/by ");
-                    String timeDeadline = this.getTime(userInput,"/by ");
-                    Deadline dl = new Deadline(descDeadline, timeDeadline);
+                    String dateDeadline = this.getDate(userInput,"/by ");
+                    Deadline dl = new Deadline(descDeadline, dateDeadline);
                     this.taskList.add(dl);
                     this.fileController.writeToFile(this.taskList);
                     displaySuccessMessage(this.taskList, dl);
@@ -125,9 +135,10 @@ public class Duke {
             case "event":
                if (this.isDescExists(userInput)) {
                    String descEvent = this.getDescription(userInput, "event ", "/at ");
-                   String timeEvent = this.getTime(userInput,  "/at ");
+                   String dateEvent = this.getDate(userInput,  "/at ");
+                   String timeEvent = this.getTime(userInput);
                    // add task to list
-                   Event event = new Event(descEvent, timeEvent);
+                   Event event = new Event(descEvent, dateEvent, timeEvent);
                    this.taskList.add(event);
                    this.fileController.writeToFile(this.taskList);
                    displaySuccessMessage(this.taskList, event);
