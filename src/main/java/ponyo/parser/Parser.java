@@ -9,9 +9,19 @@ import ponyo.commands.DoneCommand;
 import ponyo.commands.ExitCommand;
 import ponyo.commands.FindCommand;
 
+/**
+ * Makes sense of the user commands
+ */
 public class Parser {
     private static final String MESSAGE_IDK = "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
+    /**
+     * Parses the full input command to produce the type of command
+     * to be executed.
+     *
+     * @param cmd the full input command
+     * @return the type of command to be executed
+     */
     public static Command parse(String cmd) {
         String[] cmds = cmd.split(" ", 2);
 
@@ -37,6 +47,5 @@ public class Parser {
         } catch (PonyoException e) {
             throw new PonyoException(MESSAGE_IDK);
         }
-
     }
 }

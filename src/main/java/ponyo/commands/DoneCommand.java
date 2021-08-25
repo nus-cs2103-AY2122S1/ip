@@ -4,6 +4,9 @@ import ponyo.data.task.TaskList;
 import ponyo.ui.Ui;
 import ponyo.storage.Storage;
 
+/**
+ * Marks a task as done based on the inputted task index.
+ */
 public class DoneCommand extends Command {
     private final int taskToMarkDone;
 

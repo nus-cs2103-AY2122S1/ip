@@ -27,6 +27,9 @@ public class Ponyo {
         }
     }
 
+    /**
+     * Runs the program until termination: exit
+     */
     public void run() {
         ui.showWelcomeMessage();
         boolean isExit = false;

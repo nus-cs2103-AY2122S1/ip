@@ -5,6 +5,9 @@ import ponyo.data.task.TaskList;
 import ponyo.ui.Ui;
 import ponyo.storage.Storage;
 
+/**
+ * Deletes a task identified using its index in the task list.
+ */
 public class DeleteCommand extends Command {
     private final int taskToDelete;
 
