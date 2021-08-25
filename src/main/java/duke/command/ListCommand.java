@@ -4,7 +4,7 @@ import duke.Duke;
 import duke.Parser;
 import duke.Ui;
 
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     @Override

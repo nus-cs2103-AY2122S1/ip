@@ -20,7 +20,7 @@ public class Ui {
     }
 
     public static void displayTasks(TaskList list) {
-       formatAndPrint(LIST_MESSAGE + list.toString());
+        formatAndPrint(LIST_MESSAGE + list.toString());
     }
 
     public static void addTaskMessage(Task task, int size) {
@@ -38,9 +38,9 @@ public class Ui {
     /**
      * Helper function to format output between 2 lines.
      *
-     * @param s String to be outputted.
+     * @param output String to be outputted.
      */
-    public static void formatAndPrint(String s) {
-        System.out.printf("%s%s\n%s", LINE, s, LINE);
+    public static void formatAndPrint(String output) {
+        System.out.printf("%s%s\n%s", LINE, output, LINE);
     }
 }

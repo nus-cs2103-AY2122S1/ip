@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+
 import java.util.Scanner;
 
 /**
@@ -35,12 +36,6 @@ public class Duke {
         return this.list;
     }
 
-    /**
-     * Accepts user input and runs the appropriate function.
-     *
-     * @param input String containing user input.
-     * @return Boolean that controls whether to continue accepting user input.
-     */
     public void listen(String input) throws DukeException {
         Parser parser = new Parser(input);
         Command command = Command.identifyCommand(parser.getCommandWord());
