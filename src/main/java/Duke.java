@@ -1,15 +1,10 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Duke {
-    private String storageFileName;
+    private String taskListFileName;
 
-    public Duke(String storageFileName) {
-        this.storageFileName = storageFileName;
+    public Duke(String taskListFileName) {
+        this.taskListFileName = taskListFileName;
     }
 
     public static class DukeException extends Exception {
@@ -18,61 +13,38 @@ public class Duke {
         }
     }
 
-    public void run() throws IOException, DukeException {
+
+    public void run() {
         Ui ui = new Ui();
         Parser parser = new Parser();
-        TaskList storage = new TaskList();
-        Files.createDirectories(Paths.get(this.storageFileName).getParent().getFileName());
-        File file = new File(this.storageFileName);
-
-        if (!file.createNewFile()) {
-            try {
-                FileInputStream fis = new FileInputStream(this.storageFileName);
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                storage = (TaskList) ois.readObject();
-                ois.close();
-            } catch (IOException e) {
-                System.out.println("IOException");
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                System.out.println("classnotfound");
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("CAnt find the file");
-            storage = new TaskList();
-        }
-
+        Storage storage = new Storage(this.taskListFileName);
+        TaskList taskList = storage.initialise();
 
         ui.init();
         boolean ended = false;
 
         while (!ended) {
+            String input = "";
             // Enter data using BufferReader
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(System.in));
 
             // Reading data using readLine
-            String input = ui.getNextCommand();
-            ended = parser.parse(input, storage);
+            try {
+                input = ui.getNextCommand();
+            } catch (IOException e) {
+                System.out.println("Cannot get next command, terminating");
+                e.printStackTrace();
+                break;
+            }
+
+            ended = parser.parse(input, taskList);
         }
 
-        FileOutputStream fos = new FileOutputStream(this.storageFileName);
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(storage);
-        oos.close();
+        storage.store(taskList);
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
-        try {
-            duke.run();
-        } catch (IOException e) {
-
-            System.out.println("Error found while parsing input, shutting down");
-            e.printStackTrace();
-        } catch (DukeException e) {
-
-        }
+        new Duke("data/duke.txt").run();
     }
 }
