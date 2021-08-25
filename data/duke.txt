@@ -1,2 +1,0 @@
-D | 1 | return book | 06/12/2019 1800
-E | 1 | project meeting | 10/03/2021 1700

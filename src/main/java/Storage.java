@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public class Storage {
     private String path;
-    private ArrayList<Task> tasks;
+    private TaskList tasks;
 
-    Storage(String path, ArrayList<Task> tasks) {
+    Storage(String path, TaskList tasks) {
         this.path = path;
         this.tasks = tasks;
     }
@@ -39,7 +39,8 @@ public class Storage {
     public void save() {
         try {
             FileWriter writer = new FileWriter(path);
-            for (Task task : tasks) {
+            ArrayList<Task> lst = tasks.getList();
+            for (Task task: lst) {
                 writer.write(task.printFormat());
                 writer.write("\n");
             }
