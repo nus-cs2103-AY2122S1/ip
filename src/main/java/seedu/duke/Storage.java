@@ -17,6 +17,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Represents a Storage object. A <code>Storage</code> object
+ * loads data from the file according to the filepath given
+ * and handles any updates to the file.
+ */
 class Storage {
     private String filePath;
 

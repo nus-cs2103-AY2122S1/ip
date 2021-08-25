@@ -8,6 +8,12 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+/**
+ * Represents a DateTimeManager. A <code>DateTimeManager</code> object
+ * handles the parsing of DateTime strings in the given format, as well
+ * track and updates tasks that occur on specific days.
+ */
 class DateTimeManager {
     DateTimeFormatter formatter;
 

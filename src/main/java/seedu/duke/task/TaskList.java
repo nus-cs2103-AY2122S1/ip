@@ -3,7 +3,8 @@ package seedu.duke.task;
 import java.util.ArrayList;
 
 /**
- * A task list to keep track of the tasks.
+ * Represents a tasklist. A <code>TaskList</code> records
+ * the tasks that the user have input.
  */
 public class TaskList {
     /**
