@@ -76,7 +76,6 @@ public class Parser {
             tasks.createEvent(description, at);
             break;
         case FIND:
-            System.out.println("Placeholder for find command");
             String keyword  = userInputList.get(1);
             tasks.find(keyword);
             break;
