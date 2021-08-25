@@ -1,9 +1,9 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-import exception.BobCatException;
-import executor.ExecutionUnit;
-import view.Ui;
+import BobCat.exception.BobCatException;
+import BobCat.executor.ExecutionUnit;
+import BobCat.view.Ui;
 
 /**
  * Main entrypoint to the BobCat Chat Application. Attempts to follow the MVC pattern
