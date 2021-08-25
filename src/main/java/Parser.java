@@ -40,7 +40,7 @@ public class Parser {
         int index = getTaskNumber(keyword,command);
         if (index < 0 || index >= listSize) {
             throw new BlitzException("You are attempting to "
-                    + (keyword.equals("done") ? "mark" : "delete")
+                + (keyword.equals("done") ? "mark" : "delete")
                     + " an invalid task number!");
         }
         return index;
