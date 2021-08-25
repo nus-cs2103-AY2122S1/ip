@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Command {
@@ -65,8 +67,12 @@ public class Command {
         try {
             int i = userInput.indexOf("/");
             String description = userInput.substring(6,i-1);
-            String time = userInput.substring(i+1);
-            Task A = new Event(description, time);
+            //String time = userInput.substring(i+1);
+            String[] split = userInput.split("at");
+            String date = split[1].substring(1);
+            LocalDate d = LocalDate.parse(date);
+            String formattedTime = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            Task A = new Event(description, formattedTime);
             storedInputs.add(A);
             Duke.index++;
             String message = "    ----------------------------\n"
@@ -84,8 +90,12 @@ public class Command {
         try {
             int i = userInput.indexOf("/");
             String description = userInput.substring(9,i-1);
-            String time = userInput.substring(i+1);
-            Task A = new Deadlines(description, time);
+            //String time = userInput.substring(i+1);
+            String[] split = userInput.split("by");
+            String date = split[1].substring(1);
+            LocalDate d = LocalDate.parse(date);
+            String formattedTime = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            Task A = new Deadlines(description, formattedTime);
             storedInputs.add(A);
             Duke.index++;
             String message = "    ----------------------------\n"
