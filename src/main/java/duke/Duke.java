@@ -29,34 +29,34 @@ public class Duke {
             int result = parser.parse(next);
             Command executeNext;
             switch (result) {
-                case 0:
-                    ExitCommand exitCommand = new ExitCommand();
-                    exitCommand.execute();
-                    return;
-                case 1:
-                    executeNext = new ListCommand(myTasks);
-                    executeNext.execute();
-                    break;
-                case 2:
-                    executeNext = new DoneCommand(myTasks, next);
-                    executeNext.execute();
-                    break;
-                case 3:
-                    executeNext = new DeleteCommand(myTasks, next);
-                    executeNext.execute();
-                    break;
-                case 4:
-                    executeNext = new GetDayCommand(next);
-                    executeNext.execute();
-                    break;
-                case 6:
-                    executeNext = new SearchCommand(myTasks, next);
-                    executeNext.execute();
-                    break;
-                case 5:
-                    executeNext = new AddCommand(myTasks, next);
-                    executeNext.execute();
-                    break;
+            case 0:
+                ExitCommand exitCommand = new ExitCommand();
+                exitCommand.execute();
+                return;
+            case 1:
+                executeNext = new ListCommand(myTasks);
+                executeNext.execute();
+                break;
+            case 2:
+                executeNext = new DoneCommand(myTasks, next);
+                executeNext.execute();
+                break;
+            case 3:
+                executeNext = new DeleteCommand(myTasks, next);
+                executeNext.execute();
+                break;
+            case 4:
+                executeNext = new GetDayCommand(next);
+                executeNext.execute();
+                break;
+            case 6:
+                executeNext = new SearchCommand(myTasks, next);
+                executeNext.execute();
+                break;
+            case 5:
+                executeNext = new AddCommand(myTasks, next);
+                executeNext.execute();
+                break;
             }
         }
     }
