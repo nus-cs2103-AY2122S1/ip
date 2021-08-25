@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,6 +9,7 @@ public class Duke {
 
     private final Storage storage;
     private final TaskList tasks;
+    private final Ui ui;
 
     // Regex pattern for finding done commands
     private static final Pattern DONE_PATTERN = Pattern.compile("^done (\\d*)$");
@@ -29,30 +29,25 @@ public class Duke {
     public Duke(String storageFilePath) {
          storage = new Storage(storageFilePath);
          tasks = new TaskList(storage);
+         ui = new Ui();
     }
 
     public void run() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
         Scanner scanner = new Scanner((System.in));
 
-        say("Hello, I'm Duke.", "Make me do something.");
+        ui.greet();
 
         while (true) {
             String userInput = scanner.nextLine().strip();
             try {
                 if (userInput.equals("bye")) {
                     // Check if user is attempting to exit.
-                    say("Bye bye, see you next time.");
+                    ui.goodbye();
                     break;
                 } else if (userInput.equals("list")) {
                     // Check if user is requesting to print list.
-                    list();
+                    ui.printTasks(tasks);
                 } else if (userInput.startsWith("done")) {
                     markAsDone(userInput);
                 } else if (userInput.startsWith("delete")) {
@@ -72,7 +67,7 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 // Get Duke to say out the error
-                say(e.getMessage());
+                ui.notifyException(e);
             }
         }
     }
@@ -80,40 +75,6 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke("data/tasks.txt");
         duke.run();
-    }
-
-    /**
-     * Makes duke speak.
-     *
-     * Prints a list of lines with indentation.
-     * @param lines list of lines for Duke
-     */
-    static void say(String... lines) {
-        System.out.println("    ____________________________________________________________");
-        for (String line : lines) {
-            System.out.println("    " + line);
-        }
-        System.out.println("    ____________________________________________________________");
-    }
-
-    /**
-     * Prints the list of inputs that Duke has stored.
-     */
-    void list() {
-
-        if (tasks.size() == 0) {
-            // Inform user if nothing has been stored.
-            say("The list is empty!");
-            return;
-        }
-
-        String[] listItems = new String[tasks.size()];
-
-        for (int i = 0; i < tasks.size(); ++i) {
-            listItems[i] = String.format("%d. %s", i + 1, tasks.getTask(i));
-        }
-
-        say(listItems);
     }
 
     /**
@@ -131,13 +92,9 @@ public class Duke {
         String taskPositionString = matcher.group(1);
         int taskPosition = Integer.parseInt(taskPositionString);
 
-        if (taskPosition <= 0 || taskPosition > tasks.size()) {
-            throw new DukeException(String.format("There is no task number %d!", taskPosition));
-        }
-
         Task task = tasks.markAsDone(taskPosition - 1);
 
-        say("I have marked the task as done!", String.format("%d. %s", taskPosition, task));
+        ui.notifyMarkDone(task, taskPosition - 1);
     }
 
     /**
@@ -155,18 +112,10 @@ public class Duke {
         String taskPositionString = matcher.group(1);
         int taskPosition = Integer.parseInt(taskPositionString);
 
-        if (taskPosition <= 0 || taskPosition > tasks.size()) {
-            throw new DukeException(String.format("There is no task number %d!", taskPosition));
-        }
-
-        Task task = tasks.getTask(taskPosition - 1);
-
         // Remove the task from the store.
-        tasks.delete(taskPosition - 1);
+        Task task = tasks.delete(taskPosition - 1);
 
-        say("I have removed this task!",
-                String.format("   %s", task),
-                String.format("You have %d task%s left.", tasks.size(), tasks.size() == 1 ? "" : "s"));
+        ui.notifyDelete(task, tasks.size());
     }
 
     /**
@@ -186,7 +135,7 @@ public class Duke {
         tasks.add(todo);
 
         // Inform user
-        say("I have added a ToDo!", String.format("%d. %s", tasks.size(), todo));
+        ui.notifyAdd(todo, tasks.size());
     }
 
     /**
@@ -207,7 +156,7 @@ public class Duke {
         tasks.add(deadline);
 
         // Inform user
-        say("I have added a new deadline!", String.format("%d. %s", tasks.size(), deadline));
+        ui.notifyAdd(deadline, tasks.size());
     }
 
     /**
@@ -228,7 +177,7 @@ public class Duke {
         tasks.add(event);
 
         // Inform user
-        say("I have added a new event!", String.format("%d. %s", tasks.size(), event));
+        ui.notifyAdd(event, tasks.size());
     }
 
     /**

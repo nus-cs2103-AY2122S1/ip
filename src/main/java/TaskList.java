@@ -18,9 +18,11 @@ public class TaskList {
         this.saveToStorage();
     }
 
-    public void delete(int index) {
+    public Task delete(int index) {
+        Task task = this.tasks.get(index);
         this.tasks.remove(index);
         this.saveToStorage();
+        return task;
     }
 
     public Task markAsDone(int index) {
