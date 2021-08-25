@@ -13,9 +13,18 @@ public class Event extends Task {
         this.deadline = deadline.trim();
     }
 
+    public Event(String title, String deadline, boolean isDone) {
+        super(title, isDone);
+        this.deadline = deadline.trim();
+    }
+
+    public String toFileString() {
+        return String.format("E | %s | %s", super.toFileString(), deadline);
+    }
+
     /**
-     * Return a String representation of an Event task.
-     * Starts "[E]" to indicate that it is an Event task.
+     * Return a String representation of an Event task. Starts "[E]" to indicate
+     * that it is an Event task.
      *
      * @return String representation of an Event.
      */
