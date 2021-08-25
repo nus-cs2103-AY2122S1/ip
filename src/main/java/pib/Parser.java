@@ -5,15 +5,26 @@ import pib.pibexception.PibException;
 
 import java.util.Scanner;
 
+/**
+ * Class to parse the user input
+ */
 public class Parser {
     private Scanner sc;
     private TaskList list;
 
+    /**
+     * Public constructor to initialise a Parser object
+     *
+     * @param list TaskList that is used to store the Tasks where this parser is used
+     */
     public Parser(TaskList list) {
         this.sc = new Scanner(System.in);
         this.list = list;
     }
 
+    /**
+     * Uses the scanner to read inputs from the user
+     */
     public void readInput() {
         scanner:
         while (sc.hasNextLine()) {

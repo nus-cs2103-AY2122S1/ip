@@ -2,6 +2,9 @@ package pib;
 
 import pib.pibexception.PibException;
 
+/**
+ * Class to handle the messages printed to the UI
+ */
 public class Ui {
     public static final String DIVIDER = "____________________________________________________________\n";
 
@@ -40,6 +43,10 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
+    /**
+     * Show the correct error message to the UI when a PibException is caught
+     * @param error type of error specified by PibException
+     */
     public static void printError(String error) {
         switch (error) {
         case "empty-list":

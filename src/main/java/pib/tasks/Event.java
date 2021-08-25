@@ -5,8 +5,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import pib.Ui;
 import pib.pibexception.PibException;
+
 /**
  * Event task which contains the task description, and the date of the event
  */
@@ -15,12 +15,6 @@ public class Event extends Task {
     private String date;
     private String time;
 
-    /**
-     * A public constructor to create an Event task
-     *
-     * @param description description of the deadline task
-     * @param date        the date stated after "/at " portion
-     */
     private Event(String description, String date, String time) {
         super(description);
         this.date = date;
@@ -33,6 +27,15 @@ public class Event extends Task {
         this.time = time;
     }
 
+    /**
+     * A public factory method to create an Event task
+     *
+     * @param details String containing the description, date and time
+     * @return Event object with description initialised and isDone set to 0
+     * @throws PibException when user inputs blank task description
+     * @throws PibException when user inputs wrongly formatted command to create a new Event
+     * @throws PibException when user inputs wrongly formatted date/time
+     */
     public static Event createEvent(String details) throws PibException {
         try {
             int atIndex = details.indexOf("/at ");
@@ -51,10 +54,24 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * A public factory method to create an Event task
+     *
+     * @param description task description
+     * @param isDone value 0 (false) or 1 (true)
+     * @param date String showing date of Event task
+     * @param time String showing time of Event task
+     * @return Event object with these 4 fields initialised
+     */
     public static Event createEvent(String description, int isDone, String date, String time) {
         return new Event(description, isDone, date, time);
     }
 
+    /**
+     * Public method to convert task to a string format used to save inside a .txt file
+     *
+     * @return string format of Event task to be saved
+     */
     public String toDataString() {
         return "E," + getIsDone() + "," + getDescription() + "," + date + "," + time + System.lineSeparator();
     }

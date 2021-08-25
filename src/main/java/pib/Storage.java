@@ -12,15 +12,29 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class to handle loading the saved data and saving data to external file
+ */
 public class Storage {
     private String filePath;
     private File file;
 
+    /**
+     * Public constructor to instantiate a Storage object containing a file from the specified filePath
+     *
+     * @param filePath String to locate the stored data
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
     }
 
+    /**
+     * Gets saved tasks from file located via the filePath and populates the TaskList
+     *
+     * @param list TaskList to add previously saved tasks to
+     * @throws PibException when FileNotFoundException is thrown by system when trying to locate the saved data file
+     */
     public void loadData(TaskList list) throws PibException {
         try {
             Scanner sc = new Scanner(this.file);
@@ -49,6 +63,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Takes a TaskList and writes the data to a file to be saved
+     *
+     * @param list     TaskList containing tasks to be saved to the file
+     * @param filePath path of file to be written to
+     * @throws PibException when IOException is thrown by system
+     */
     public static void saveData(TaskList list, String filePath) throws PibException {
         try {
             FileWriter fw = new FileWriter(filePath);

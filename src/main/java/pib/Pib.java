@@ -6,6 +6,10 @@ import pib.pibexception.PibException;
  * pib is a Personal Assistant Chat-bot that is able to keep track of tasks (CRUD) and deadlines
  */
 public class Pib {
+
+    /**
+     * String to locate data file to load/save data
+     */
     public static final String DATA_FILE_PATH = "data/data.txt";
 
     private Ui ui;
@@ -14,7 +18,7 @@ public class Pib {
     private Parser parser;
 
     /**
-     * Public constructor to instantiate an instance of pib and start the program
+     * Public constructor to instantiate an instance of pib
      */
     public Pib() {
         this.ui = new Ui();
@@ -27,7 +31,6 @@ public class Pib {
         }
         this.parser = new Parser(this.list);
     }
-
 
     private void start() {
         ui.printWelcome();
