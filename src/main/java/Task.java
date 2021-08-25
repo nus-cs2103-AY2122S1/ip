@@ -19,7 +19,7 @@ public class Task {
         return (isDone ? "1" : "0");
     }
     public String convertToString() {
-        return printStatusIcon() + " " + description;
+        return printStatusIcon() + "|" + description;
     }
 
     @Override

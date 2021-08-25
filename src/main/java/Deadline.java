@@ -8,7 +8,7 @@ public class Deadline extends Task{
 
     @Override
     public String convertToString() {
-        return "D " + super.convertToString() + " " + by;
+        return "D|" + super.convertToString() + "|" + by;
     }
 
     @Override

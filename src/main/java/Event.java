@@ -8,7 +8,7 @@ public class Event extends Task{
 
     @Override
     public String convertToString() {
-        return "E " + super.convertToString() + " " + duration;
+        return "E|" + super.convertToString() + "|" + duration;
     }
 
     @Override
