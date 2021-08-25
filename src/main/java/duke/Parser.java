@@ -13,6 +13,14 @@ import java.time.LocalTime;
 
 public class Parser {
     
+    /**
+     * Parses the given user input and returns the corresponding Command object for execution based on the input.
+     * 
+     * @param fullCommand The full user input string for parsing.
+     * @param taskList The list of currently saved tasks.
+     * @return A Command object based on the parsed user input.
+     * @throws DukeException If the parser encounters an invalid command.
+     */
     public static Command parse(String fullCommand, TaskList taskList) throws DukeException {
         
         // task function: add tasks

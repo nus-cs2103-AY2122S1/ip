@@ -18,7 +18,12 @@ public class Duke {
         Storage storage = new Storage(fileDirectory, fileName, ui);
         taskList = new TaskList(storage, ui, storage.load());
     }
-    
+
+    /**
+     * Runs the main logic of the Duke program.
+     *
+     * @param stream The desired stream for the program's input.
+     */
     public void run(InputStream stream) {
         Scanner input = new Scanner(stream);
         boolean isBye = false;

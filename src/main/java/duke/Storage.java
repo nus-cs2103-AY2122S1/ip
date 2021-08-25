@@ -31,7 +31,12 @@ public class Storage {
         direc = new File(fileDirectory);
         duke = new File(filePath);
     }
-    
+
+    /**
+     * Loads the saved tasks from the hard disk to the Duke TaskList.
+     * 
+     * @return An ArrayList of Tasks used to create the TaskList for the current instance of Duke.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> savedTasks = new ArrayList<>(100);
 
@@ -108,6 +113,11 @@ public class Storage {
         return savedTasks;
     }
 
+    /**
+     * Adds the given entry to the database (hard disk).
+     * 
+     * @param s A string representation of the task to be added to the database.
+     */
     public void addDBEntry(String s) {
         try {
             FileWriter writer = new FileWriter(duke, true);
@@ -119,6 +129,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Sets the given entry in the database to 'done'.
+     *
+     * @param s A string representation of the task in the database to be set to 'done'.
+     */
     public void setDBEntryDone(String s) {
         try {
             String updatedPath = filePath.split("/")[0] + "/updated.txt";
@@ -150,6 +165,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes the given entry from the database.
+     *
+     * @param s A string representation of the task to be deleted from the database.
+     */
     public void deleteDBEntry(String s) {
         try {
             String updatedPath = filePath.split("/")[0] + "/updated.txt";

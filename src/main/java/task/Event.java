@@ -40,6 +40,11 @@ public class Event extends Task {
         hasEndDate = true;
     }
 
+    /**
+     * Returns this Event's list entry string.
+     *
+     * @return A string representation of this Event's list entry.
+     */
     @Override
     public String listEntry() {
         if (hasTime) {
@@ -62,6 +67,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns this Event's database entry string.
+     *
+     * @return A string representation of this Event's database entry.
+     */
     @Override
     public String databaseEntry() {
         if (hasTime) {
@@ -75,6 +85,12 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Checks if this Event object's period contains the given date.
+     *
+     * @param l The date against which to check this Event object's period.
+     * @return true if the event is ongoing on the given date.
+     */
     @Override
     public boolean isTodayTask(LocalDate l) {
         return l.isEqual(startDate) || l.isEqual(endDate) || (l.isAfter(startDate) && l.isBefore(endDate));

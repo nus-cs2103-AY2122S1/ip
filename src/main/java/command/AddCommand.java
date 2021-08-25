@@ -12,6 +12,12 @@ public class AddCommand extends Command {
         this.newTask = newTask;
     }
 
+    /**
+     * Executes the command of adding the task to the given task list.
+     * 
+     * @param ui Ui not used in this execution.
+     * @param taskList The task list to which the task is added.
+     */
     @Override
     public void execute(Ui ui, TaskList taskList) {
         taskList.addTask(newTask);
