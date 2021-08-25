@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    public void showLoadingError(String msg) {
-        System.out.println(msg);
-    }
 
+    /**
+     * Displays the greeting message.
+     */
     public void showGreeting() {
         String output = "    ____________________________________________________________\n"
                 + "     Hello! I'm Duke\n"
@@ -18,9 +18,8 @@ public class Ui {
     }
 
     /**
-     * Print a string that contains all the elements in the list.
+     * Displays all the tasks in the taskList.
      * @param taskList the TaskList to be printed
-     * @return the string
      */
     public void printList(TaskList taskList) {
         ArrayList<Task> lst = taskList.getTasks();
@@ -33,6 +32,9 @@ public class Ui {
         System.out.println(s.toString());
     }
 
+    /**
+     * Displays the goodbye message.
+     */
     public void showGoodbye() {
         String output = "    ____________________________________________________________\n"
                 + "     Bye. Hope to see you again soon!\n"
@@ -40,6 +42,10 @@ public class Ui {
         System.out.println(output);
     }
 
+    /**
+     *
+     * @param taskList the taskList to manipulate
+     */
     public void readInput(TaskList taskList) {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
