@@ -15,7 +15,7 @@ public class Deadline extends Task {
     private static final DateTimeFormatter saveFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     /** DateTime of the deadline. */
-    protected LocalDateTime by;
+    private final LocalDateTime by;
 
     /**
      * Public constructor to create a Deadline object.
