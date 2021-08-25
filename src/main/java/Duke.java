@@ -4,10 +4,10 @@
 import java.nio.file.Files;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.io.File;
-import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
 import java.time.LocalDate;
 
 
@@ -95,7 +95,8 @@ public class Duke {
             ArrayList<Task> taskList = new ArrayList<>();
             Scanner s = new Scanner(file);
             boolean completed;
-            String current, desc, name,  time;
+            String current, desc, name;
+            LocalDate time;
             char type;
             while(s.hasNext()) {
                 current = s.nextLine();
@@ -109,7 +110,7 @@ public class Duke {
                     desc = current.substring(7);
                     String[] split = desc.split("->at: ", 2);
                     name = split[0];
-                    time = split[1];
+                    time = LocalDate.parse(split[1]);
                     Task newTask = new Event(name, time);
                     newTask.setCompleted(current.charAt(4)=='X');
                     taskList.add(newTask);
@@ -118,7 +119,7 @@ public class Duke {
                     desc = current.substring(7);
                     String[] split = desc.split("->by: ", 2);
                     name = split[0];
-                    time = split[1];
+                    time = LocalDate.parse(split[1]);
                     Task newTask = new Deadline(name, time);
                     newTask.setCompleted(current.charAt(4)=='X');
                     taskList.add(newTask);
@@ -130,6 +131,7 @@ public class Duke {
             throw new DukeException("OOPS!!! Error occurs when reload the data");
         }
     }
+
     public static void main(String[] args) throws DukeException{
         //Greet
         String logo = " ____        _        \n"
@@ -199,7 +201,7 @@ public class Duke {
                     String[] eventPieces = pieces[1].split("/", 2);
                     String name = eventPieces[0];
                     String[] timePieces = eventPieces[1].split("at ", 2);
-                    String time = timePieces[1];
+                    LocalDate time = LocalDate.parse(timePieces[1]);
                     Task newTask = new Event(name, time);
                     addTask(taskList, newTask);
                 }
@@ -211,7 +213,7 @@ public class Duke {
                     String[] eventPieces = pieces[1].split("/", 2);
                     String name = eventPieces[0];
                     String[] timePieces = eventPieces[1].split("by ", 2);
-                    String time = timePieces[1];
+                    LocalDate time = LocalDate.parse(timePieces[1]);
                     Task newTask = new Deadline(name, time);
                     addTask(taskList, newTask);
                 }
