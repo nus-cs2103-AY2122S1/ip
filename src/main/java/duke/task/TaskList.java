@@ -145,6 +145,7 @@ public class TaskList {
      * @param input The deadline inputted by the user.
      * @throws MissingTaskException If task is unspecified after command.
      * @throws MissingTimeException If time is unspecified after command.
+     * @throws DateTimeParseException If date entered is of the wrong format.
      */
     public static void addDeadline(String input)
             throws MissingTaskException, MissingTimeException, DateTimeParseException {
@@ -185,6 +186,7 @@ public class TaskList {
      * @param input The event inputted by the user.
      * @throws MissingTaskException If task is unspecified after command.
      * @throws MissingTimeException If time is unspecified after command.
+     * @throws DateTimeParseException If date entered is of the wrong format.
      */
     public static void addEvent(String input)
             throws MissingTaskException, MissingTimeException, DateTimeParseException {
