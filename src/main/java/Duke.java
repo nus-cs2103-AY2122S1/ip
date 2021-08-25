@@ -1,22 +1,27 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static final String LINE = "____________________________________________________________";
-    private static final Scanner sc = new Scanner(System.in);
-    private static final TaskList list = new TaskList();
+
+    private final String LINE = "____________________________________________________________";
+    private final Scanner sc = new Scanner(System.in);
+    private final TaskList tasks = new TaskList();
 
     public static void main(String[] args) {
+        new Duke().run();
+    }
+
+    public void run() {
         greet();
         while (true) {
             try {
                 String input = sc.nextLine();
                 if (input.equals("bye")) break;
-                else if (input.equals("list")) echo(list.toString());
+                else if (input.equals("list")) echo(tasks.toString());
                 else if (input.contains("done")) {
                     String[] parseInput = input.split(" ");
                     if (parseInput.length <= 1) throw new DukeException("OOPS!!! You need to indicate a task for me to mark as done.");
                     int index = Integer.parseInt(parseInput[1]);
-                    if (index <= 0 || index > list.size()) throw new DukeException("OOPS!!! Looks like there is no such task to be marked as done");
+                    if (index <= 0 || index > tasks.size()) throw new DukeException("OOPS!!! Looks like there is no such task to be marked as done");
                     done(index);
                 } else if (input.contains("todo")) {
                     if (input.length() <= 4) throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -38,7 +43,7 @@ public class Duke {
                     String[] parseInput = input.split(" ");
                     if (parseInput.length <= 1) throw new DukeException("OOPS!!! You need to indicate a task for me to delete.");
                     int index = Integer.parseInt(parseInput[1]);
-                    if (index <= 0 || index > list.size()) throw new DukeException("OOPS!!! Looks like there is no such task to be deleted");
+                    if (index <= 0 || index > tasks.size()) throw new DukeException("OOPS!!! Looks like there is no such task to be deleted");
                     delete(index);
                 } else throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch (DukeException ex) {
@@ -48,7 +53,7 @@ public class Duke {
         exit();
     }
 
-    private static void greet() {
+    private void greet() {
         String logo = """
                  ____        _       \s
                 |  _ \\ _   _| | _____\s
@@ -63,21 +68,21 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    private static void echo(String message) {
+    private void echo(String message) {
         System.out.println(LINE);
         System.out.println(message);
         System.out.println(LINE);
     }
 
-    private static void exit() {
+    private void exit() {
         System.out.println(LINE);
         System.out.println("Goodbye, hope to see you again soon!");
         System.out.println(LINE);
     }
 
-    private static void add(Task task) {
-        list.addTask(task);
-        int len = list.size();
+    private void add(Task task) {
+        tasks.addTask(task);
+        int len = tasks.size();
         String message = String.format("Got it. I've added this task:\n  %s\nNow you have %d %s in the list.",
                 task.toString(),
                 len,
@@ -85,15 +90,15 @@ public class Duke {
         echo(message);
     }
 
-    private static void done(int index) {
-        Task task = list.markTaskAsDone(index);
+    private void done(int index) {
+        Task task = tasks.markTaskAsDone(index);
         String message = String.format("Nice! I've marked this task as done:\n  %s", task);
         echo(message);
     }
 
-    private static void delete(int index) {
-        Task task = list.deleteTask(index);
-        int len = list.size();
+    private void delete(int index) {
+        Task task = tasks.deleteTask(index);
+        int len = tasks.size();
         String message = String.format("Noted. I've removed this task:\n  %s\nNow you have %d %s in the list.",
                 task.toString(),
                 len,
