@@ -3,7 +3,7 @@ package tiger.parser;
 import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.utils.CustomDate;
 import tiger.utils.DateStringConverter;
-import tiger.utils.RemoveSpaces;
+import tiger.utils.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +28,7 @@ public class EventParser extends Parser {
     }
 
     public void parse() throws TigerEmptyStringException {
-        RemoveSpaces removeSpaces = new RemoveSpaces();
+        StringUtils removeSpaces = new StringUtils();
         List<String> array =
                 Arrays.asList(removeSpaces.removeBackAndFrontSpaces(this.input).split(" "));
         boolean atFound = false;

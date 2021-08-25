@@ -2,6 +2,8 @@ package tiger.parser;
 
 import tiger.exceptions.inputs.TigerSemiColonException;
 
+import java.util.Locale;
+
 /**
  * The {@code Parser} class takes in the user input String, and parses
  * the string in relevant substrings so that {@code Action} classes
@@ -37,7 +39,7 @@ public class Parser {
 
     public String getCommandKeyword() {
         String[] array = this.input.split(" ");
-        return array[0];
+        return array[0].toLowerCase(Locale.ENGLISH);
     }
 
 }

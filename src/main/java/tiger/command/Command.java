@@ -44,10 +44,10 @@ public class Command {
         if (applicationState.checkFlag().equals(Flag.STORAGE_FAILED)) {
             AppState newApplicationState;
             switch (parser.getCommandKeyword()) {
-            case "Y":
+            case "y":
                 newApplicationState = new AppState(false, applicationState.taskList, Flag.STORAGE_PARTIAL_LOAD);
                 return new StorageLoadAction(newApplicationState);
-            case "N":
+            case "n":
                 newApplicationState = new AppState(false, applicationState.taskList, Flag.STORAGE_WIPE);
                 return new StorageLoadAction(newApplicationState);
             default:
@@ -81,7 +81,7 @@ public class Command {
         case "todo":
             ToDoParser toDoCommand = new ToDoParser(command);
             toDoCommand.parse();
-            return new ToDoAction(applicationState, toDoCommand.getTodo());
+            return new ToDoAction(applicationState, toDoCommand.getTodo(), toDoCommand.getPriority());
         case "deadline":
             DeadLineParser deadLineCommand = new DeadLineParser(command);
             deadLineCommand.parse();

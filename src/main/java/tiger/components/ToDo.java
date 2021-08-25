@@ -1,18 +1,12 @@
 package tiger.components;
 
+import tiger.constants.Priority;
 import tiger.exceptions.storage.TigerStorageLoadException;
 
 public class ToDo extends Task{
 
-    /**
-     * Private constructor for {@code ToDo} class.
-     *
-     * @param taskDescription description of Task.
-     * @param done whether the Task is done.
-     */
-
-    public ToDo(String taskDescription, boolean done) {
-        super(taskDescription, done);
+    public ToDo(String taskDescription, boolean done, Priority priority) {
+        super(taskDescription, done, priority);
     }
 
 
@@ -22,7 +16,7 @@ public class ToDo extends Task{
 
     @Override
     public ToDo markDone() {
-        return new ToDo(taskDescription, true);
+        return new ToDo(this.taskDescription, true, this.priority);
     }
 
     /**
@@ -36,7 +30,7 @@ public class ToDo extends Task{
         if (this.done) {
             return String.format("[T] [X] %s", this.taskDescription);
         } else {
-            return String.format("[T] [ ] %s", this.taskDescription);
+            return String.format("[T] [%s] %s", this.getPriority().getLetter(), this.taskDescription);
         }
     }
 
@@ -48,7 +42,7 @@ public class ToDo extends Task{
      */
 
     protected String getStorageRepresentation() {
-        return String.format("T;%s;%s", this.done, this.taskDescription);
+        return String.format("T;%s;%s;%s", this.done, this.taskDescription, this.getPriority().getLetter());
     }
 
     /**
@@ -59,21 +53,22 @@ public class ToDo extends Task{
      */
 
     protected static ToDo getTaskFromStringRepresentation(String s) throws TigerStorageLoadException {
-        /* s should be of the form T|true/false|taskDescription| */
         String[] stringArray = s.split(";");
         int length = stringArray.length;
         try {
-            assert (length == 3);
+            assert (length == 4);
             // check if task is indeed a ToDo task
             assert (stringArray[0].equals("T"));
             // check task done value is either true or false
             assert (stringArray[1].equals("true") || stringArray[1].equals("false"));
             // check that task description is non-empty
             assert (!stringArray[2].equals(""));
+            assert (stringArray[3].equals("L") || stringArray[3].equals("M") || stringArray[3].equals("H"));
+            Priority p = Priority.getPriorityFromLetter(stringArray[3]);
             if (stringArray[1].equals("true")) {
-                return new ToDo(stringArray[2], true); // task description, done
+                return new ToDo(stringArray[2], true, p); // task description, done, priority
             } else {
-                return new ToDo(stringArray[2], false); // task description, done
+                return new ToDo(stringArray[2], false, p); // task description, done, priority
             }
         } catch (AssertionError e) {
             throw new TigerStorageLoadException(e.toString());

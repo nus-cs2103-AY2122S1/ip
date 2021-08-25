@@ -4,6 +4,7 @@ import tiger.exceptions.actions.TigerIndexOutOfBoundsException;
 import tiger.exceptions.storage.TigerStorageLoadException;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * A list to storage the {@code Tasks}.
@@ -85,7 +86,7 @@ public class TaskList {
     public TaskList findRelevantTasks(String searchString) {
         TaskList taskList = new TaskList();
         for (Task t: this.taskList) {
-            if (t.getTaskDescription().contains(searchString)) {
+            if (t.getTaskDescription().toLowerCase(Locale.ENGLISH).contains(searchString.toLowerCase(Locale.ENGLISH))) {
                 taskList.addTask(t);
             }
         }
@@ -133,7 +134,7 @@ public class TaskList {
         }
         String returnString = "";
         for (int i = 1; i < this.taskList.size() + 1; i++) {
-            String row = String.format("%d. %s", i, this.taskList.get(i-1).toString());
+            String row = String.format("%d.\t %s", i, this.taskList.get(i-1).toString());
             if (i != this.taskList.size()) {
                 row += "\n";
             }

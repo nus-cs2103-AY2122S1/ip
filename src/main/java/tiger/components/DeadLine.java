@@ -1,5 +1,6 @@
 package tiger.components;
 
+import tiger.constants.Priority;
 import tiger.exceptions.inputs.TigerDateParsingException;
 import tiger.exceptions.storage.TigerStorageLoadException;
 import tiger.utils.CustomDate;
@@ -22,6 +23,13 @@ public class DeadLine extends Task {
     public DeadLine(String taskDescription, boolean done, CustomDate customDate) {
         super(taskDescription, done);
         this.date = customDate;
+        this.priority = Priority.MEDIUM;
+    }
+
+    public DeadLine(String taskDescription, boolean done, CustomDate customDate, Priority priority) {
+        super(taskDescription, done);
+        this.date = customDate;
+        this.priority = priority;
     }
 
     /**
@@ -43,9 +51,11 @@ public class DeadLine extends Task {
     public String toString() {
         // TODO: make current day display as today
         if (this.done) {
-            return String.format("[D] [X] %s (by %s)", this.taskDescription, this.date.toString());
+            return String.format("[D] [X] %s \t(by %s)", this.taskDescription, this.date.toString());
         } else {
-            return String.format("[D] [ ] %s (by %s)", this.taskDescription, this.date.toString());
+            return String.format("[D] [%s] %s \t(by %s)", this.getPriority().getLetter(),
+                    this.taskDescription,
+                    this.date.toString());
         }
     }
 
@@ -57,7 +67,8 @@ public class DeadLine extends Task {
      */
 
     protected String getStorageRepresentation() {
-        return String.format("D;%s;%s;%s", this.done, this.taskDescription, this.date.toString());
+        return String.format("D;%s;%s;%s;%s", this.done, this.taskDescription, this.date.toString(),
+                this.getPriority().getLetter());
     }
 
     /**
@@ -69,11 +80,11 @@ public class DeadLine extends Task {
 
     protected static DeadLine getTaskFromStringRepresentation(String s) throws TigerStorageLoadException {
         /* s should be of the form T|true/false|taskDescription| */
-        String[] stringArray = s.split(";", 4);
+        String[] stringArray = s.split(";", 5);
         DateStringConverter dateStringConverter = new DateStringConverter();
         int length = stringArray.length;
         try {
-            assert (length == 4);
+            assert (length == 5);
             // check if task is indeed a DeadLine task
             assert (stringArray[0].equals("D"));
             // check task done value is either true or false
@@ -82,11 +93,22 @@ public class DeadLine extends Task {
             assert (!stringArray[2].equals(""));
             // check that the event timing is non-empty
             assert (!stringArray[3].equals(""));
+            assert (stringArray[4].equals("L") || stringArray[4].equals("M") || stringArray[4].equals("H"));
+            Priority p;
+            switch (stringArray[4]) {
+            case "L":
+                p = Priority.LOW;
+                break;
+            case "H":
+                p = Priority.HIGH;
+                break;
+            default:
+                p = Priority.MEDIUM;
+            }
             if (stringArray[1].equals("true")) {
-                // task description, done, date
-                return new DeadLine(stringArray[2], true, dateStringConverter.getDateFromString(stringArray[3]));
+                return new DeadLine(stringArray[2], true, dateStringConverter.getDateFromString(stringArray[3]), p);
             } else {
-                return new DeadLine(stringArray[2], false, dateStringConverter.getDateFromString(stringArray[3]));
+                return new DeadLine(stringArray[2], false, dateStringConverter.getDateFromString(stringArray[3]), p);
             }
         } catch (AssertionError e) {
             throw new TigerStorageLoadException(e.toString());

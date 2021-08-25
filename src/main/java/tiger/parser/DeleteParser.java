@@ -4,7 +4,7 @@ import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.exceptions.inputs.TigerInvalidArgumentException;
 import tiger.exceptions.inputs.TigerInvalidInputException;
 import tiger.exceptions.inputs.TigerTooManyInputsException;
-import tiger.utils.RemoveSpaces;
+import tiger.utils.StringUtils;
 
 public class DeleteParser extends Parser {
 
@@ -24,7 +24,7 @@ public class DeleteParser extends Parser {
 
     public void parse() throws TigerInvalidInputException {
         String[] array =
-                new RemoveSpaces().removeBackAndFrontSpaces(this.input).split(" ");
+                new StringUtils().removeBackAndFrontSpaces(this.input).split(" ");
         try {
             this.index = Integer.valueOf(array[1].replaceAll(" ", ""));
             assert(this.index > 0);

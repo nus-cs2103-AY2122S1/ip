@@ -1,11 +1,18 @@
 package tiger.parser;
 
+import tiger.constants.Priority;
 import tiger.exceptions.inputs.TigerEmptyStringException;
-import tiger.utils.RemoveSpaces;
+import tiger.exceptions.inputs.TigerInvalidArgumentException;
+import tiger.exceptions.inputs.TigerInvalidInputException;
+import tiger.utils.StringUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ToDoParser extends Parser {
 
     private String todo = "";
+    private Priority priority = Priority.MEDIUM;
 
     public ToDoParser(String input) {
         super(input);
@@ -19,22 +26,46 @@ public class ToDoParser extends Parser {
      * @throws TigerEmptyStringException If input is invalid.
      */
 
-    public void parse() throws TigerEmptyStringException {
-        RemoveSpaces removeSpaces = new RemoveSpaces();
-        try {
-            String[] array =
-                    removeSpaces.removeBackAndFrontSpaces(input).split(" ");
-            for (int i = 1; i < array.length; i++) {
-                this.todo += (array[i] + " ");
+    public void parse() throws TigerInvalidInputException {
+
+        StringUtils stringUtils = new StringUtils();
+        String regex = "^(todo|Todo|TODO)|(/priority)";
+        List<String> array =
+                Arrays.asList(stringUtils.removeBackAndFrontSpaces(this.input).split(regex));
+        if (array.size() <= 1) {
+            throw new TigerEmptyStringException("ToDo description");
+        }
+        if (this.input.contains("/priority")) {
+            // task priority
+            if (array.size() < 3) {
+                throw new TigerEmptyStringException("ToDo priority");
             }
-            this.todo = removeSpaces.removeBackAndFrontSpaces(this.todo);
+            String p;
+            try {
+                p = stringUtils.removeBackAndFrontSpaces(array.get(2));
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new TigerEmptyStringException("ToDo priority");
+            }
+            this.priority = Priority.getPriorityFromLetter(p);
+            if (this.priority.equals(Priority.INVALID)) {
+                throw new TigerInvalidArgumentException(p, "ToDo priority");
+            }
+        }
+        // task description
+        try {
+            this.todo = stringUtils.removeBackAndFrontSpaces(array.get(1));
         } catch (StringIndexOutOfBoundsException e) {
             throw new TigerEmptyStringException("ToDo description");
         }
+        this.todo = stringUtils.capitaliseFirstLetter(this.todo);
     }
 
     public String getTodo() {
         return this.todo;
+    }
+
+    public Priority getPriority() {
+        return this.priority;
     }
 
 }

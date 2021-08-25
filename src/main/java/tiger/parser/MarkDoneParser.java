@@ -4,7 +4,7 @@ import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.exceptions.inputs.TigerInvalidArgumentException;
 import tiger.exceptions.inputs.TigerInvalidInputException;
 import tiger.exceptions.inputs.TigerTooManyInputsException;
-import tiger.utils.RemoveSpaces;
+import tiger.utils.StringUtils;
 
 public class MarkDoneParser extends Parser {
 
@@ -23,7 +23,7 @@ public class MarkDoneParser extends Parser {
      */
 
     public void parse() throws TigerInvalidInputException {
-        RemoveSpaces removeSpaces = new RemoveSpaces();
+        StringUtils removeSpaces = new StringUtils();
         String[] array = removeSpaces.removeBackAndFrontSpaces(input).split(
                 " ");
         try {

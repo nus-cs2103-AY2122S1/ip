@@ -4,7 +4,7 @@ import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.exceptions.inputs.TigerInvalidInputException;
 import tiger.utils.CustomDate;
 import tiger.utils.DateStringConverter;
-import tiger.utils.RemoveSpaces;
+import tiger.utils.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,9 +20,9 @@ public class DeadLineParser extends Parser {
     }
 
     public void parse() throws TigerInvalidInputException {
-        RemoveSpaces removeSpaces = new RemoveSpaces();
+        StringUtils stringUtils = new StringUtils();
         List<String> array =
-                Arrays.asList(removeSpaces.removeBackAndFrontSpaces(this.input).split(" "));
+                Arrays.asList(stringUtils.removeBackAndFrontSpaces(this.input).split(" "));
         boolean byFound = false;
         for (int i = 1; i < array.size(); i++) {
             if (array.get(i).equals("/by")) {
@@ -36,12 +36,13 @@ public class DeadLineParser extends Parser {
             }
         }
         try {
-            this.todo = removeSpaces.removeBackAndFrontSpaces(this.todo);
+            this.todo = stringUtils.removeBackAndFrontSpaces(this.todo);
+            this.todo = stringUtils.capitaliseFirstLetter(this.todo);
         } catch (StringIndexOutOfBoundsException e) {
             throw new TigerEmptyStringException("Deadline description");
         }
         try {
-            this.dateString = removeSpaces.removeBackAndFrontSpaces(this.dateString);
+            this.dateString = stringUtils.removeBackAndFrontSpaces(this.dateString);
         } catch (StringIndexOutOfBoundsException e) {
             throw new TigerEmptyStringException("Deadline date");
         }

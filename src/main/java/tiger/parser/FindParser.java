@@ -1,7 +1,7 @@
 package tiger.parser;
 
 import tiger.exceptions.inputs.TigerEmptyStringException;
-import tiger.utils.RemoveSpaces;
+import tiger.utils.StringUtils;
 
 public class FindParser extends Parser {
 
@@ -20,7 +20,7 @@ public class FindParser extends Parser {
      */
 
     public void parse() throws TigerEmptyStringException {
-        RemoveSpaces removeSpaces = new RemoveSpaces();
+        StringUtils removeSpaces = new StringUtils();
         try {
             String[] array =
                     removeSpaces.removeBackAndFrontSpaces(input).split(" ");

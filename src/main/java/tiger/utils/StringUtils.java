@@ -1,6 +1,6 @@
 package tiger.utils;
 
-public class RemoveSpaces {
+public class StringUtils {
 
     public String removeLastSpaces(String input) {
         int last = input.length() - 1;
@@ -21,5 +21,9 @@ public class RemoveSpaces {
         String cutBack = this.removeLastSpaces(input);
         String cutFront = this.removeFrontSpaces(cutBack);
         return cutFront;
+    }
+
+    public String capitaliseFirstLetter(String input) {
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
 }

@@ -12,35 +12,35 @@ Nice! I've marked this task as done:
 Nice! I've marked this task as done:
 [T] [X] B
 Excellent! I've added this task:
-[T] [ ] carp
+[T] [ ] Carp
 Excellent! I've added this task:
-[T] [ ] carpfishy
+[T] [ ] Carpfishy
 Excellent! I've added this task:
-[T] [ ] eat something
+[T] [ ] Eat something
 Excellent! I've added this event:
-[E] [ ] koifishy (at 2021-08-22 14:35)
+[E] [ ] Koifishy (at 2021-08-22 14:35)
 Excellent! I've added this deadline:
-[D] [ ] feed fish (by 2021-12-21 12:22)
-1. [T] [ ] carp
-2. [T] [ ] carpfishy
-1. [T] [ ] carpfishy
-2. [E] [ ] koifishy (at 2021-08-22 14:35)
-3. [D] [ ] feed fish (by 2021-12-21 12:22)
+[D] [ ] Feed fish (by 2021-12-21 12:22)
+1. [T] [ ] Carp
+2. [T] [ ] Carpfishy
+1. [T] [ ] Carpfishy
+2. [E] [ ] Koifishy (at 2021-08-22 14:35)
+3. [D] [ ] Feed fish (by 2021-12-21 12:22)
 1. [T] [X] A
 2. [T] [X] B
 3. [D] [ ] C (by 2020-07-21)
 4. [E] [ ] D (at 2020-07-21 16:00)
-5. [T] [ ] carp
-6. [T] [ ] carpfishy
-7. [T] [ ] eat something
-8. [E] [ ] koifishy (at 2021-08-22 14:35)
-9. [D] [ ] feed fish (by 2021-12-21 12:22)
+5. [T] [ ] Carp
+6. [T] [ ] Carpfishy
+7. [T] [ ] Eat something
+8. [E] [ ] Koifishy (at 2021-08-22 14:35)
+9. [D] [ ] Feed fish (by 2021-12-21 12:22)
 Nice! I've marked this task as done:
 [E] [X] D (at 2020-07-21 16:00)
 Excellent! I've added this task:
 [T] [ ] E
 Nice! I've marked this task as done:
-[T] [X] carpfishy
+[T] [X] Carpfishy
 Index 14 is out of bounds of your task list size of 10.
 Please make sure your index is at least 1.
 Use the list command to see task indices.
@@ -51,11 +51,11 @@ Use the list command to see task indices.
 2. [T] [X] B
 3. [D] [ ] C (by 2020-07-21)
 4. [E] [X] D (at 2020-07-21 16:00)
-5. [T] [ ] carp
-6. [T] [X] carpfishy
-7. [T] [ ] eat something
-8. [E] [ ] koifishy (at 2021-08-22 14:35)
-9. [D] [ ] feed fish (by 2021-12-21 12:22)
+5. [T] [ ] Carp
+6. [T] [X] Carpfishy
+7. [T] [ ] Eat something
+8. [E] [ ] Koifishy (at 2021-08-22 14:35)
+9. [D] [ ] Feed fish (by 2021-12-21 12:22)
 10. [T] [ ] E
 Deadline date property cannot be empty.
 Please ensure you key in the command in the format specified.
@@ -77,11 +77,11 @@ Excellent! I've added this deadline:
 2. [T] [X] B
 3. [D] [ ] C (by 2020-07-21)
 4. [E] [X] D (at 2020-07-21 16:00)
-5. [T] [ ] carp
-6. [T] [X] carpfishy
-7. [T] [ ] eat something
-8. [E] [ ] koifishy (at 2021-08-22 14:35)
-9. [D] [ ] feed fish (by 2021-12-21 12:22)
+5. [T] [ ] Carp
+6. [T] [X] Carpfishy
+7. [T] [ ] Eat something
+8. [E] [ ] Koifishy (at 2021-08-22 14:35)
+9. [D] [ ] Feed fish (by 2021-12-21 12:22)
 10. [T] [ ] E
 11. [D] [ ] H (by 1999-02-28)
 12. [D] [ ] G (by 2020-08-21 12:00)
@@ -93,11 +93,11 @@ Feeling lazy today? I've deleted:
 [T] [X] A
 1. [D] [ ] C (by 2020-07-21)
 2. [E] [X] D (at 2020-07-21 16:00)
-3. [T] [ ] carp
-4. [T] [X] carpfishy
-5. [T] [ ] eat something
-6. [E] [ ] koifishy (at 2021-08-22 14:35)
-7. [D] [ ] feed fish (by 2021-12-21 12:22)
+3. [T] [ ] Carp
+4. [T] [X] Carpfishy
+5. [T] [ ] Eat something
+6. [E] [ ] Koifishy (at 2021-08-22 14:35)
+7. [D] [ ] Feed fish (by 2021-12-21 12:22)
 8. [T] [ ] E
 9. [D] [ ] H (by 1999-02-28)
 10. [D] [ ] G (by 2020-08-21 12:00)

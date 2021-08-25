@@ -1,5 +1,6 @@
 package tiger.components;
 
+import tiger.constants.Priority;
 import tiger.exceptions.storage.TigerStorageLoadException;
 
 /**
@@ -12,10 +13,19 @@ abstract public class Task {
     protected String taskDescription;
     /** Whether the task is done */
     protected boolean done;
+    /** Priority of the task */
+    protected Priority priority;
 
     protected Task(String taskDescription, boolean done) {
         this.taskDescription = taskDescription;
         this.done = done;
+        this.priority = Priority.MEDIUM;
+    }
+
+    protected Task(String taskDescription, boolean done, Priority priority) {
+        this.taskDescription = taskDescription;
+        this.done = done;
+        this.priority = priority;
     }
 
     /**
@@ -23,6 +33,10 @@ abstract public class Task {
      */
 
     abstract public Task markDone();
+
+    public Priority getPriority() {
+        return this.priority;
+    }
 
     /**
      * Returns a String to be written to storage. The {@code Storage} class knows how to parse
