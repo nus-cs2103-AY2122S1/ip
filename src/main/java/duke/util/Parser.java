@@ -6,15 +6,29 @@ import duke.exceptions.InvalidInputException;
 import duke.exceptions.NoDescriptionException;
 import duke.exceptions.UserInputError;
 
+/**
+ * The Parser class that makes sense of the user input.
+ */
 public class Parser {
     private final String input;
     private final String command;
 
+    /**
+     * Constructor to make a parser.
+     *
+     * @param input Details of the user input.
+     */
     public Parser(String input) {
         this.input = input;
         command = getFirstWord(input);
     }
 
+    /**
+     * Parse the input to make input more readable.
+     *
+     * @return Array of string sectioned into separate parts.
+     * @throws UserInputError
+     */
     public String[] parse() throws UserInputError {
             if (input.equals("list") || input.equals("bye")) {
                 return new String[] {command};
@@ -30,6 +44,11 @@ public class Parser {
             }
     }
 
+    /**
+     * Get index of the task the user is referring to.
+     *
+     * @return Index of wanted task.
+     */
     private int getTaskNumber() {
         String[] result = input.split(" ");
         if (result[1].matches("\\d+")) {
@@ -38,6 +57,12 @@ public class Parser {
         return -1;
     }
 
+    /**
+     * Check that input index is valid.
+     *
+     * @param index Input index proposed by user.
+     * @throws ExceedListSizeException
+     */
     private void checkIndexRange(int index)
             throws ExceedListSizeException {
         if (index < 0) {
@@ -55,10 +80,21 @@ public class Parser {
         }
     }
 
+    /**
+     * Separate command and description from input.
+     *
+     * @param input User input.
+     * @return Description of the task.
+     */
     private String getDesc(String input) {
         return input.split(" ", 2)[1];
     }
 
+    /**
+     * Check user input contains needed description.
+     *
+     * @throws NoDescriptionException
+     */
     private void checkDescExist()
             throws NoDescriptionException {
         if (input.split(" ").length == 1) {
@@ -68,6 +104,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Get the command from the input.
+     *
+     * @param text User input.
+     * @return Command for Duke.
+     */
     private String getFirstWord(String text) {
         int index = text.indexOf(' ');
         if (index > -1) { // Check if there is more than one word.

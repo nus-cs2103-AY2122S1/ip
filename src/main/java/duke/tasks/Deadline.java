@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 import duke.Duke;
 import duke.exceptions.NoDescriptionException;
 
+/**
+ * The Deadline class that represents a task with a starting datetime.
+ */
 public class Deadline extends Task {
 
   protected LocalDate when;
@@ -20,6 +23,11 @@ public class Deadline extends Task {
     }
   }
 
+  /**
+   * Appends datetime to the String format writeable to Storage file.
+   *
+   * @return Formatted data as a string
+   */
   @Override
   public String taskToString() {
     return super.taskToString() + when;

@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 import duke.exceptions.NoDescriptionException;
 import duke.exceptions.UserInputError;
 
+/**
+ * The Event class that represents a task with a starting datetime.
+ */
 public class Event extends Task {
 
   protected LocalDate when;
@@ -20,14 +23,11 @@ public class Event extends Task {
     }
   }
 
-  private void DateParser(String when) throws UserInputError {
-    try {
-      this.when = LocalDate.parse(when.trim());
-    } catch (DateTimeException e){
-      throw new UserInputError("wrong datetime format");
-    }
-  }
-
+  /**
+   * Appends datetime to the String format writeable to Storage file.
+   *
+   * @return Formatted data as a string
+   */
   @Override
   public String taskToString() {
     return super.taskToString() + when;

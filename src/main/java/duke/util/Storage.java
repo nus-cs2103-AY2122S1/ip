@@ -9,8 +9,16 @@ import java.util.Scanner;
 
 import duke.tasks.Task;
 
+/**
+ * The Storage class that deals with loading tasks from a file and saving tasks to a file.
+ */
 public class Storage {
 
+    /**
+     * Retrieves data from stored database. Return empty task arraylist if .txt does not exist.
+     *
+     * @return ArrayList of tasks previously stored in database.
+     */
     public static ArrayList<Task> readDatabase() {
         Path filePath = Paths.get(System.getProperty("user.dir"), "database", "database.txt");
         ArrayList<Task> tasks = new ArrayList<>();
@@ -32,6 +40,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Write current ist of tasks into the database.
+     *
+     * @param list Arraylist of tasks needed to be written to database.
+     */
     public static void writeDatabase(ArrayList<Task> list) {
         Path filePath = Paths.get(System.getProperty("user.dir"), "database", "database.txt");
         Path dirPath = Paths.get(System.getProperty("user.dir"), "database");

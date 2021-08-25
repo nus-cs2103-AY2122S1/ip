@@ -9,6 +9,9 @@ import duke.util.Parser;
 import duke.util.Ui;
 import duke.util.Storage;
 
+/**
+ * The Duke class that runs the Duke program.
+ */
 public class Duke {
 
   private static final String LINE =
@@ -17,6 +20,9 @@ public class Duke {
   public static TaskList taskList;
   private Ui ui;
 
+  /**
+   * Run Duke and parse user input.
+   */
   private void run() {
     ui = new Ui();
     ui.greet();
@@ -39,6 +45,11 @@ public class Duke {
     ui.end();
   }
 
+  /**
+   * Direct input array to the correct Ui method to execute with user command.
+   *
+   * @param input Array string of user command information.
+   */
   public void directInput(String[] input) {
     try {
       String cmd = input[0];
@@ -121,6 +132,12 @@ public class Duke {
 //    renderOutput(output);
 //  }
 //
+
+  /**
+   * Format string to output with wrapper.
+   *
+   * @param op String that has to be rendered as output.
+   */
   public static void renderOutput(String op) {
     System.out.println(LINE);
     op.lines().forEach(line -> System.out.println("      " + line));
