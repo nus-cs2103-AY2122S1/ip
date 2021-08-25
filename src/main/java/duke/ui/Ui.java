@@ -1,3 +1,5 @@
+package duke.ui;
+
 public class Ui {
 
     public Ui() {}
@@ -8,7 +10,7 @@ public class Ui {
 
     public void greet() {
         System.out.println("__________________________________");
-        System.out.println("Hello! I'm Duke");
+        System.out.println("Hello! I'm duke.Duke");
         System.out.println("What can I do for you?");
         System.out.println("__________________________________");
     }

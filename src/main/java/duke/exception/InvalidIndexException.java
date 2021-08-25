@@ -1,4 +1,4 @@
-package exception;
+package duke.exception;
 
 public class InvalidIndexException extends DukeException {
     public InvalidIndexException(int start, int end, int actual) {

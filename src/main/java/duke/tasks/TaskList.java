@@ -1,9 +1,11 @@
-import exception.EmptyListException;
-import exception.IncorrectFormatException;
-import exception.InvalidDateTimeException;
-import exception.InvalidDurationException;
-import exception.InvalidIndexException;
-import exception.MessageEmptyException;
+package duke.tasks;
+
+import duke.exception.EmptyListException;
+import duke.exception.IncorrectFormatException;
+import duke.exception.InvalidDateTimeException;
+import duke.exception.InvalidDurationException;
+import duke.exception.InvalidIndexException;
+import duke.exception.MessageEmptyException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -35,7 +37,7 @@ public class TaskList {
 
     /**
      * Adds a task to the list of Tasks with a confirmation message printed out after.
-     * @param task The Task to be added to the list of Tasks
+     * @param task The duke.tasks.Task to be added to the list of Tasks
      */
 
     public void addToList(Task task) {
@@ -64,10 +66,10 @@ public class TaskList {
     }
 
     /**
-     * Marks a current Task in the list of Tasks as Done.
-     * @param taskIndex The index of the Task in the list of Tasks to be marked as Done.
+     * Marks a current duke.tasks.Task in the list of Tasks as Done.
+     * @param taskIndex The index of the duke.tasks.Task in the list of Tasks to be marked as Done.
      * @throws EmptyListException If the list of Tasks is empty and there is nothing to be marked as Done.
-     * @throws InvalidIndexException If the index of the Task provided is out of range of the current list of Tasks.
+     * @throws InvalidIndexException If the index of the duke.tasks.Task provided is out of range of the current list of Tasks.
      */
 
     public void markDone(String taskIndex) throws EmptyListException, InvalidIndexException {
@@ -87,8 +89,8 @@ public class TaskList {
     }
 
     /**
-     * Adds a Deadline to the list of Tasks.
-     * @param deadline The Deadline to be added to the list of Tasks which is the whole input barring the command.
+     * Adds a duke.tasks.Deadline to the list of Tasks.
+     * @param deadline The duke.tasks.Deadline to be added to the list of Tasks which is the whole input barring the command.
      * @throws IncorrectFormatException If the deadline command is used but a "/by" is not present in the message.
      */
 
@@ -119,8 +121,8 @@ public class TaskList {
     }
 
     /**
-     * Adds a Todo to the list of Tasks.
-     * @param todo The Todo to be added to the list of Tasks.
+     * Adds a duke.tasks.Todo to the list of Tasks.
+     * @param todo The duke.tasks.Todo to be added to the list of Tasks.
      */
 
     public void addTodo(String todo) {
@@ -129,8 +131,8 @@ public class TaskList {
     }
 
     /**
-     * Adds an Event to the list of Tasks.
-     * @param event The Event to be added to the list of Tasks, which is the entire user input barring the command.
+     * Adds an duke.tasks.Event to the list of Tasks.
+     * @param event The duke.tasks.Event to be added to the list of Tasks, which is the entire user input barring the command.
      * @throws IncorrectFormatException If the event command is used but a "/at" is not present in the message.
      */
 
@@ -182,10 +184,10 @@ public class TaskList {
     }
 
     /**
-     * Deletes a Task from the list of Tasks.
-     * @param taskIndex Index of the Task to be deleted.
+     * Deletes a duke.tasks.Task from the list of Tasks.
+     * @param taskIndex Index of the duke.tasks.Task to be deleted.
      * @throws EmptyListException If the list of Tasks is empty and there is nothing to be deleted.
-     * @throws InvalidIndexException If the index of the Task provided is out of range of the current list of Tasks.
+     * @throws InvalidIndexException If the index of the duke.tasks.Task provided is out of range of the current list of Tasks.
      */
 
     public void deleteTask(String taskIndex) throws EmptyListException, InvalidIndexException {

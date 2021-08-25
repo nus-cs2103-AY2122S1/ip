@@ -1,19 +1,26 @@
+package duke;
+
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+
 import java.io.IOException;
 
 import java.util.Scanner;
 
 /**
- * Duke class that initialises the Duke chat bot.
- * The Duke class supports operators including
+ * duke.Duke class that initialises the duke.Duke chat bot.
+ * The duke.Duke class supports operators including
  * (i) run: runs the chat bot
  * (ii) greet: prints out a greeting when the chat bot runs
  * (iii) exit: ends the execution of the chat bot
- * (iv) addToList: adds a Task to the list of Tasks
+ * (iv) addToList: adds a duke.tasks.Task to the list of Tasks
  * (v) displayList: prints out the current list of Tasks
- * (vi) markDone: marks a Task as done
- * (vii) addDeadline: adds a Deadline to the list of Tasks
- * (viii) addTodo: adds a Todo to the list of Tasks
- * (ix) addEvent: adds an Event to the list of Tasks
+ * (vi) markDone: marks a duke.tasks.Task as done
+ * (vii) addDeadline: adds a duke.tasks.Deadline to the list of Tasks
+ * (viii) addTodo: adds a duke.tasks.Todo to the list of Tasks
+ * (ix) addEvent: adds an duke.tasks.Event to the list of Tasks
  * (x) handleCommands: main logic for processing and executing various commands
  * like "list", "done", "deadline", "todo", "event" and other invalid commands
  */
@@ -37,7 +44,7 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke chat bot.
+     * Runs the duke.Duke chat bot.
      * It takes in user inputs and responds accordingly.
      * If a command is issued, the bot will execute the command if the appropriate message
      * follows the command.

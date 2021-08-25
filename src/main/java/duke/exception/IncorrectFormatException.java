@@ -1,4 +1,4 @@
-package exception;
+package duke.exception;
 
 public class IncorrectFormatException extends DukeException {
     public IncorrectFormatException(String command, String missingWord) {
