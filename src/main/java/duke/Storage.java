@@ -1,7 +1,4 @@
-import duke.Deadline;
-import duke.Event;
-import duke.Task;
-import duke.ToDo;
+package duke;
 
 import java.io.File;
 import java.io.FileWriter;

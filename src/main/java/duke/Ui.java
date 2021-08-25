@@ -1,11 +1,8 @@
+package duke;
 
-import duke.Deadline;
-import duke.Event;
-import duke.Task;
-import duke.ToDo;
-import exceptions.DukeEmptyTodoDescriptionException;
-import exceptions.DukeException;
-import exceptions.DukeUnknownCommandException;
+import duke.exceptions.DukeEmptyTodoDescriptionException;
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeUnknownCommandException;
 
 public class Ui {
 

@@ -1,11 +1,11 @@
-import exceptions.DukeException;
-import exceptions.DukeUnknownCommandException;
-import exceptions.DukeEmptyTodoDescriptionException;
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeUnknownCommandException;
+import duke.exceptions.DukeEmptyTodoDescriptionException;
 import java.util.ArrayList;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 
