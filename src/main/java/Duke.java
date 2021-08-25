@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Duke {
@@ -61,7 +62,9 @@ public class Duke {
                 + "     Got it. I've added this task:\n"
                 + "       " + "[" + newDeadline.showType() + "]"
                             + newDeadline.checkDone() + " "
-                            + newDeadline.showTask() + "\n"
+                            + newDeadline.showTaskOnly() + " by "
+                            + newDeadline.showDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
+                            + newDeadline.showTime() + "\n"
                 + "     Now you have " + tList.length() + " tasks in the list.\n"
                 + "    ____________________________________________________________";
         System.out.println(deadlineMessage);
@@ -83,7 +86,9 @@ public class Duke {
                 + "     Got it. I've added this task:\n"
                 + "       " + "[" + newEvent.showType() + "]"
                             + newEvent.checkDone() + " "
-                            + newEvent.showTask() + "\n"
+                            + newEvent.showTaskOnly() + " at "
+                            + newEvent.showDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
+                            + newEvent.showTime() + "\n"
                 + "     Now you have " + tList.length() + " tasks in the list.\n"
                 + "    ____________________________________________________________";
         System.out.println(eventMessage);
@@ -115,7 +120,7 @@ public class Duke {
                         break;
                     case "D":
                         String[] deadlineTask = input[2].split("\\|", 2);
-                        String deadlineInput = deadlineTask[0] + " / " + deadlineTask[1];
+                        String deadlineInput = deadlineTask[0].trim() + "|" + deadlineTask[1].trim();
                         Deadline deadline = new Deadline(deadlineInput);
                         if (input[1].equals("1")) {
                             deadline.isDone();
@@ -254,7 +259,6 @@ public class Duke {
                         + "     " + "\uD83D\uDE41" + " OOPS!!! Unable to write to file.\n"
                         + "    ____________________________________________________________");
             }
-
 
         }
 
