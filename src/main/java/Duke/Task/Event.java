@@ -1,21 +1,24 @@
-package Duke;
+package Duke.Task;
+
+import Duke.Main.DukeException;
+import Duke.Main.Parser;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Event extends Task {
 
     private String taskDescription;
     private LocalDate date;
     private String date1;
-    public Deadline(String taskName) {
-        super(taskName.split("/by")[0].trim());
-        if (!taskName.contains("/by")) {
+
+    public Event(String taskName) {
+        super(taskName.split("/at")[0].trim());
+        if (!taskName.contains("/at")) {
             throw new DukeException("", DukeException.TYPE.INCOMPLETE);
         }
-        String[] divide = taskName.split("/by");
-        this.taskDescription = divide[0].trim();
+        String[] divide = taskName.split("/at");
+        this.taskDescription = divide[0];
         String taskTime = divide[1].trim();
         try {
             this.date = LocalDate.parse(taskTime);
@@ -32,7 +35,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by " + date1 + ")";
+        return "[E]" + super.toString() + " (at " + date1 + ")";
     }
 
     public String getTaskDescription() {

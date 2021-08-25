@@ -1,4 +1,4 @@
-package Duke;
+package Duke.Main;
 
 public class DukeException extends RuntimeException {
     public enum TYPE {INCOMPLETE, OUT_OF_BOUND, SYNTAX_ERROR, INVALID_FORMAT}

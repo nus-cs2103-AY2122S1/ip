@@ -1,9 +1,9 @@
-package Duke;
+package Duke.Main;
+
+import Duke.Task.*;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.List;
 
 public class Storage {
 
