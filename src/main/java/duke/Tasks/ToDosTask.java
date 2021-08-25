@@ -5,7 +5,7 @@ package duke.Tasks;
  *  various methods to manipulate the Task.
  */
 
-public class ToDosTask extends TDLTask {
+public class ToDosTask extends BaseTask {
 
     public ToDosTask(String taskName) {
         super(taskName);

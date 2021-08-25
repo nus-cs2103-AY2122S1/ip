@@ -6,7 +6,7 @@ import duke.DukeExceptionBase;
  *  This class encapsulates a Task element in Duke's TDList, and features
  *  various methods to manipulate the Task.
  */
-public class TDLTask {
+public class BaseTask {
     private String taskName;
     private boolean isDone;
 
@@ -22,7 +22,7 @@ public class TDLTask {
      *
      * @param taskName      The name and description of the task.
      */
-    public TDLTask(String taskName) {
+    public BaseTask(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
     }
@@ -111,15 +111,15 @@ public class TDLTask {
      * @param command The command inputted by the user.
      * @return the task type. Returns NONE if it is not a task.
      */
-    public static TDLTask.TaskType checkTaskType(String command) {
+    public static BaseTask.TaskType checkTaskType(String command) {
         if (command.startsWith("deadline")) {
-            return TDLTask.TaskType.DEADLINE;
+            return BaseTask.TaskType.DEADLINE;
         } else if (command.startsWith("event")) {
-            return TDLTask.TaskType.EVENT;
+            return BaseTask.TaskType.EVENT;
         } else if (command.startsWith("todo")) {
-            return TDLTask.TaskType.TODO;
+            return BaseTask.TaskType.TODO;
         } else {
-            return TDLTask.TaskType.NONE;
+            return BaseTask.TaskType.NONE;
         }
     }
 

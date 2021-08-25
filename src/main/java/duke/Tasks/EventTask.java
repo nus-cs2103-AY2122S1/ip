@@ -5,7 +5,7 @@ package duke.Tasks;
  *  various methods to manipulate the Task.
  */
 
-public class EventTask extends TDLTask {
+public class EventTask extends BaseTask {
 
     String atContents;
 

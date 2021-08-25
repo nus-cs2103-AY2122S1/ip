@@ -5,7 +5,7 @@ package duke.Tasks;
  *  various methods to manipulate the Task.
  */
 
-public class DeadlineTask extends TDLTask {
+public class DeadlineTask extends BaseTask {
 
     String byWhen;
 

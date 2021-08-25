@@ -2,7 +2,7 @@ package duke;
 
 import duke.Tasks.DeadlineTask;
 import duke.Tasks.EventTask;
-import duke.Tasks.TDLTask;
+import duke.Tasks.BaseTask;
 import duke.Tasks.ToDosTask;
 
 import java.util.ArrayList;
@@ -10,11 +10,11 @@ import java.util.ArrayList;
 /**
  * This class encapsulates the list element that Duke uses to store tasks.
  */
-public class TDList {
+public class DukeListMgr {
 
-    private ArrayList<TDLTask> toDoList = new ArrayList<>();
+    private ArrayList<BaseTask> toDoList = new ArrayList<>();
 
-    public TDList() {
+    public DukeListMgr() {
 
     }
 
@@ -27,8 +27,8 @@ public class TDList {
      *
      * @throws DukeExceptionBase when an invalid input is entered.
      */
-    public void tdlAdd(String str, TDLTask.TaskType currTaskType) throws DukeExceptionBase {
-        TDLTask createdTask;
+    public void tdlAdd(String str, BaseTask.TaskType currTaskType) throws DukeExceptionBase {
+        BaseTask createdTask;
 
         int indexOfSlash = -1;
 
@@ -107,7 +107,7 @@ public class TDList {
         int taskIndex = taskNo - 1;
 
         if (taskIndex >= 0 && taskIndex < toDoList.size()) {
-            TDLTask currTask = toDoList.get(taskIndex);
+            BaseTask currTask = toDoList.get(taskIndex);
             currTask.setAsDone();
 
             return "Nice! I've marked this task as done:\n" + currTask.getLineOfTaskInfo();
@@ -129,7 +129,7 @@ public class TDList {
         int taskIndex = taskNo - 1;
 
         if (taskIndex >= 0 && taskIndex < toDoList.size()) {
-            TDLTask currTask = toDoList.get(taskIndex);
+            BaseTask currTask = toDoList.get(taskIndex);
 
             toDoList.remove(taskIndex);
             return "Ok, this task has been removed:\n" + currTask.getLineOfTaskInfo()
@@ -143,12 +143,12 @@ public class TDList {
     /**
      * Used to print out contents of the list nicely.
      */
-    public void printOutTDL() {
+    public void printOutWholeList() {
         String printThis = "";
         String nextLine = "\n";
 
         int serialNo = 1;
-        for (TDLTask ele : toDoList) {
+        for (BaseTask ele : toDoList) {
             String endOfCurrLine = nextLine;
             if (serialNo == toDoList.size()) {
                 endOfCurrLine = "";

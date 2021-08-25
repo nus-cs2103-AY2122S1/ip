@@ -1,6 +1,6 @@
 package duke;
 
-import duke.Tasks.TDLTask;
+import duke.Tasks.BaseTask;
 
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
@@ -24,10 +24,10 @@ public class Duke {
     private DukeCommandParser currDukeCmdParser;
     private DukeStorageManager currStorageMgr;
     private DukeUi currUiCtrl;
-    private TDList currTDL;
+    private DukeListMgr currTDL;
 
     private Duke() {
-        this.currTDL = new TDList();
+        this.currTDL = new DukeListMgr();
         this.currUiCtrl = new DukeUi();
         this.currDukeCmdParser = new DukeCommandParser();
         this.isExited = false;
@@ -106,7 +106,7 @@ public class Duke {
         // Get the type of command that this input represents
         DukeCommandParser.CommandType cmdType = this.currDukeCmdParser.parse(lastInput);
 
-        TDLTask.TaskType currTaskType = TDLTask.checkTaskType(lastInput);
+        BaseTask.TaskType currTaskType = BaseTask.checkTaskType(lastInput);
 
 
         if (cmdType == DukeCommandParser.CommandType.BYE) {
@@ -162,13 +162,13 @@ public class Duke {
         throw new DukeExceptionBase("Please enter something valid!");
     }
 
-    private void addToTDL(String str, TDLTask.TaskType currTaskType) throws DukeExceptionBase {
+    private void addToTDL(String str, BaseTask.TaskType currTaskType) throws DukeExceptionBase {
         this.currTDL.tdlAdd(str, currTaskType);
     }
 
 
     private void listOutTDL() {
-        this.currTDL.printOutTDL();
+        this.currTDL.printOutWholeList();
     }
 
     private void markItemDoneInTDL(String command) throws DukeExceptionBase {
