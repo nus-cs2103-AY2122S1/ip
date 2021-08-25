@@ -3,6 +3,7 @@ package duke;
 import duke.task.Task;
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * This class contains some common utility methods regrading text ui.
@@ -91,5 +92,18 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
         System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
         System.out.println(HORIZONTAL_LINE);
+    }
+
+    public static void showFindTasks(List<Task> taskList) {
+        System.out.println(Ui.HORIZONTAL_LINE);
+        System.out.println(Ui.INDENTATION + "Here are the matching tasks in your list:");
+        if (taskList.isEmpty()) {
+            System.out.println(Ui.INDENTATION + "No matching tasks");
+        } else {
+            for (int i = 0; i < taskList.size(); ++i) {
+                System.out.println(Ui.INDENTATION + (i + 1) + ". " + taskList.get(i).toString());
+            }
+        }
+        System.out.println(Ui.HORIZONTAL_LINE);
     }
 }

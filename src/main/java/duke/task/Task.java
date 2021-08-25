@@ -8,14 +8,10 @@ import java.util.Objects;
  * This class represents a task.
  */
 public class Task {
-    /**
-     * Description of the task.
-     */
-    protected String description;
-    /**
-     * State of the task.
-     */
-    protected boolean isDone;
+    /** Description of the task. */
+    private String description;
+    /** State of the task. */
+    private boolean isDone;
 
     /**
      * Constructs a task instance using the given description.
@@ -36,6 +32,14 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     /**

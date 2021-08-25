@@ -105,4 +105,20 @@ public class TaskList {
         System.out.println(Ui.INDENTATION + temp.toString());
         System.out.println(Ui.HORIZONTAL_LINE);
     }
+
+    /**
+     * Returns a list of task that matches the query string.
+     *
+     * @param query The given query.
+     * @return A list of task that matches the query string.
+     */
+    public ArrayList<Task> findTask(String query) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task: this.tasks) {
+            if (task.getDescription().contains(query)) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
 }
