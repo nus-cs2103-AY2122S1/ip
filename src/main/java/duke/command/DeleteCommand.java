@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  */
 public class DeleteCommand extends Command {
     // Regex pattern for finding delete commands
-    private static final Pattern DELETE_PATTERN = Pattern.compile("^delete (\\d*)$");
+    private static final Pattern PATTERN_DELETE = Pattern.compile("^delete (\\d*)$");
 
     public DeleteCommand(String input) {
         super(input);
@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
 
 
         // Check if user is attempting to mark a task as done.
-        Matcher matcher =  DELETE_PATTERN.matcher(input);
+        Matcher matcher =  PATTERN_DELETE.matcher(input);
         if (!matcher.find()) {
             throw new DukeException("Delete a task like this: delete <task number>");
         }

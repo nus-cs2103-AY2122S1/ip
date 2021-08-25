@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  */
 public class AddEventCommand extends Command {
     // Regex pattern for finding event commands
-    private static final Pattern EVENT_PATTERN = Pattern.compile("^event (.*) /at (\\d{4}-\\d{2}-\\d{2})$");
+    private static final Pattern PATTERN_EVENT = Pattern.compile("^event (.*) /at (\\d{4}-\\d{2}-\\d{2})$");
 
     public AddEventCommand(String input) {
         super(input);
@@ -22,7 +22,7 @@ public class AddEventCommand extends Command {
 
     @Override
     public boolean execute(TaskList tasks, Ui ui) {
-        Matcher matcher = EVENT_PATTERN.matcher(input);
+        Matcher matcher = PATTERN_EVENT.matcher(input);
         if (!matcher.find()) {
             throw new DukeException("Tell me an event like this: event <task> /at YYYY-MM-DD");
         }
