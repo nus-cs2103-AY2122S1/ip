@@ -17,6 +17,20 @@ public class Task implements Serializable {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj instanceof Task) {
+            Task temp = (Task) obj;
+            return temp.toString() == this.toString();
+        }
+
+        return false;
+    }
+
+    @Override
     public String toString() {
         if (this.done) {
             return "[X] " + this.description;

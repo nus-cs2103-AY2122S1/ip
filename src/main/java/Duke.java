@@ -1,9 +1,12 @@
+import config.Setting;
 import ui.Ui;
 import parser.Parser;
+import processor.Processor;
+import storage.Storage;
 
 public class Duke {
 
-    private static final Parser parser = new Parser();
+    private static final Parser parser = new Parser(new Processor(new Storage(Setting.FILE_DIRECTORY, Setting.FILE_NAME)));
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"

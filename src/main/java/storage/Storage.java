@@ -12,7 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 
-public class Storage {
+public class Storage implements IStorage {
 
     private TaskList list;
     private final String filePath;
@@ -28,15 +28,15 @@ public class Storage {
             File storage = new File(filePath);
             if (!storage.exists()) {
                 storage.createNewFile();
-                writeArrayListToFile();
+                writeTaskListToFile();
             }
-            this.list = loadArrayListFromFile();
+            this.list = loadTaskListFromFile();
         } catch (IOException error) {
             System.out.println("Fail to handle file, error: " + error.getMessage());
         }
     }
 
-    private TaskList loadArrayListFromFile() {
+    private TaskList loadTaskListFromFile() {
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(this.filePath));
             TaskList result = (TaskList) objectInputStream.readObject();
@@ -49,7 +49,7 @@ public class Storage {
         return new TaskList();
     }
 
-    private void writeArrayListToFile() {
+    private void writeTaskListToFile() {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(this.filePath));
             objectOutputStream.writeObject(this.list);
@@ -60,12 +60,12 @@ public class Storage {
 
     public void addTask(Task task) {
         this.list.addTask(task);
-        writeArrayListToFile();
+        writeTaskListToFile();
     }
 
     public void setDone(int index) throws DukeException {
         this.list.setDone(index);
-        writeArrayListToFile();
+        writeTaskListToFile();
     }
 
     public Task getTask(int index) {
@@ -78,7 +78,7 @@ public class Storage {
 
     public String deleteTask(int index) throws DukeException{
         String result = this.list.deleteTask(index);
-        writeArrayListToFile();
+        writeTaskListToFile();
         return result;
     }
 
