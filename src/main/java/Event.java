@@ -1,11 +1,13 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * This class represents an Event, which is a Task with a timing.
  */
-
 public class Event extends Task {
-    String time;
+    LocalDateTime time;
 
-    public Event(String taskName, String time) {
+    public Event(String taskName, LocalDateTime time) {
         super(taskName);
         this.time = time;
     }
@@ -32,6 +34,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + this.time + ")";
+        return "[E]" + super.toString() + "(at: " + this.time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
     }
 }

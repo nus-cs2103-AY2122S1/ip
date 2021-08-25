@@ -1,4 +1,7 @@
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,6 +9,7 @@ import java.io.FileNotFoundException;
 public class Duke {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -56,19 +60,27 @@ public class Duke {
                     break;
                 case "deadline":
                     try {
-                        String[] furtherSplitDeadline = splitText[1].trim().split("/by");
-                        Deadline deadline = new Deadline(furtherSplitDeadline[0], furtherSplitDeadline[1]);
+                        String[] furtherSplitDeadline = splitText[1].trim().split("/by ");
+                        String deadlineTask = furtherSplitDeadline[0];
+                        LocalDateTime deadlineBy = LocalDateTime.parse(furtherSplitDeadline[1], dateTimeFormatter);
+                        Deadline deadline = new Deadline(deadlineTask, deadlineBy);
                         taskList.add(deadline, true);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("    ☹ OOPS!!!  You used an invalid date! Hint: Use 'YYYY-MM-DD HH:mm'");
                     } catch (Exception e) {
                         System.out.println("    ☹ OOPS!!!  Use /by to add a deadline!");
                     }
                     break;
                 case "event":
                     try {
-                        String[] furtherSplitEvent = splitText[1].trim().split("/at");
-                        Event event = new Event(furtherSplitEvent[0], furtherSplitEvent[1]);
+                        String[] furtherSplitEvent = splitText[1].trim().split("/at ");
+                        String eventTask = furtherSplitEvent[0];
+                        LocalDateTime eventTime = LocalDateTime.parse(furtherSplitEvent[1], dateTimeFormatter);
+                        Event event = new Event(eventTask, eventTime);
                         taskList.add(event, true);
-                    } catch (Exception e) {
+                    } catch (DateTimeParseException e) {
+                        System.out.println("    ☹ OOPS!!!  You used an invalid date! Hint: Use 'YYYY-MM-DD HH:mm'");
+                    }   catch (Exception e) {
                         System.out.println("    ☹ OOPS!!!  Use /at to add a timing for the event!");
                     }
                     break;
@@ -87,6 +99,8 @@ public class Duke {
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found! Please create an empty file in /ip/data named duke.txt to get started");
+        } catch (DateTimeParseException e) {
+            System.out.println("Incorrectly formatted date! Please check your Duke.txt");
         }
     }
 }

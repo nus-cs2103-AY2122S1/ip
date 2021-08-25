@@ -1,5 +1,8 @@
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * This class takes in a saved file and loads whatever tasks were saved in it.
@@ -7,6 +10,7 @@ import java.util.Scanner;
 
 public class FileLoader {
     Scanner saveFile;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public FileLoader(Scanner saveFile) {
         this.saveFile = saveFile;
@@ -39,16 +43,17 @@ public class FileLoader {
                 lst.add(eventTodo, false);
                 break;
             case "D":
-                String deadline = data[3];
-                Deadline eventDeadline = new Deadline(taskName, deadline);
+                String deadline = data[3].substring(1);
+                System.out.println(deadline);
+                Deadline eventDeadline = new Deadline(taskName, LocalDateTime.parse(deadline, formatter));
                 if (state.indexOf("1") >= 0) {
                     eventDeadline.doneTask(false);
                 }
                 lst.add(eventDeadline, false);
                 break;
             case "E":
-                String time = data[3];
-                Event eventEvent = new Event(taskName, time);
+                String time = data[3].substring(1);
+                Event eventEvent = new Event(taskName, LocalDateTime.parse(time, formatter));
                 if (state.indexOf("1") >= 0) {
                     eventEvent.doneTask(false);
                 }
