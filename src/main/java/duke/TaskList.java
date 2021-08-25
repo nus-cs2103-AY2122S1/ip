@@ -55,4 +55,26 @@ public class TaskList {
     public Task getTask(int index) {
         return this.list.get(index);
     }
+
+    public void printFilteredTasks(String searchTerm) throws DukeException {
+        ArrayList<Task> filteredList = new ArrayList<>();
+        for (Task task : list) {
+            if (task.getTaskName().contains(searchTerm)) {
+                filteredList.add(task);
+            }
+        }
+        if (filteredList.size() < 1) {
+            throw new DukeException("I couldn't find any tasks with that particular search term. Try again.");
+        } else {
+            if (filteredList.size() == 1) {
+                System.out.println("Here is the sole matching task in your list:");
+            } else {
+                System.out.println("Here are the matching tasks in your list:");
+            }
+            for (int i = 1; i <= filteredList.size(); i++) {
+                System.out.println(i + ". " + filteredList.get(i - 1));
+            }
+        }
+    }
+
 }
