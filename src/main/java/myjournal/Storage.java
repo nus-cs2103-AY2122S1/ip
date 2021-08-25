@@ -6,10 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import myjournal.Task;
-import myjournal.Todo;
-import myjournal.Event;
-import myjournal.Deadline;
+
+import myjournal.task.Deadline;
+import myjournal.task.Event;
+import myjournal.task.Task;
+import myjournal.task.Todo;
 
 public class Storage {
     private File file;

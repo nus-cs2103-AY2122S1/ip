@@ -1,6 +1,6 @@
 package myjournal;
 
-import myjournal.TaskList;
+import myjournal.task.Task;
 
 public class Ui {
     public void welcomeMessage() {

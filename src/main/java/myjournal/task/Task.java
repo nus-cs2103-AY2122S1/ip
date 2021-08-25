@@ -1,4 +1,4 @@
-package myjournal;
+package myjournal.task;
 
 /**
  * An abstract class for tasks.

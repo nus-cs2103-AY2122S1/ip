@@ -1,7 +1,6 @@
-package myjournal;
+package myjournal.task;
 
-import java.util.Scanner;
-import myjournal.Task;
+import myjournal.task.Task;
 
 /**
  * A class to create task with the type of Deadline.

@@ -1,7 +1,6 @@
-package myjournal;
+package myjournal.task;
 
-import myjournal.Task;
-import java.util.Scanner;
+import myjournal.task.Task;
 
 /**
  * A class to create task with the type of todo.

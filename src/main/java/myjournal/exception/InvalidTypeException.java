@@ -1,4 +1,4 @@
-package myjournal;
+package myjournal.exception;
 
 /**
  * A class to create invalid type exceptions.

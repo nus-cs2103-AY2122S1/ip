@@ -6,8 +6,51 @@ import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.Scanner;
+import myjournal.exception.*;
+import myjournal.task.*;
 
 public class Parser {
+    private Ui ui;
+
+    public void parse(Scanner line, TaskList tasks) {
+        try {
+            String firstWord = line.next();
+            switch (firstWord) {
+                case "done":
+                    ui.doneTaskPrint(Parser.parseDone(line, tasks));
+                    break;
+                case "delete":
+                    ui.removeTaskPrint(Parser.parseDelete(line, tasks));
+                    break;
+                case "list":
+                    Parser.parseList(tasks);
+                    break;
+                case "todo":
+                    tasks.addTask(Parser.parseTodo(line));
+                    ui.taskAddPrint(tasks);
+                    break;
+                case "event":
+                    tasks.addTask(Parser.parseEvent(line));
+                    ui.taskAddPrint(tasks);
+                    break;
+                case "deadline":
+                    tasks.addTask(Parser.parseDeadline(line));
+                    ui.taskAddPrint(tasks);
+                    break;
+                default:
+                    throw new InvalidTypeException("OOPS!!! Please put either todo/event/deadline!");
+            }
+        } catch (InvalidTypeException e) {
+            System.out.println(e.toString());
+        } catch (InvalidTaskNumberException e) {
+            System.out.println(e.toString());
+        } catch (EmptyDescriptionException e) {
+            System.out.println(e.toString());
+        } catch (DateTimeParseException exception) {
+            System.out.println(exception.toString());
+        }
+    }
+
     public static Task parseDone(Scanner line, TaskList tasks) {
         if (!line.hasNextInt()) {
             throw new InvalidTaskNumberException("OOPS!!! Please specify the task "

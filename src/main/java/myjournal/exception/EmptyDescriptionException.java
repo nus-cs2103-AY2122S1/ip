@@ -1,18 +1,18 @@
-package myjournal;
+package myjournal.exception;
 
 /**
- * A class to create invalid task number exceptions.
+ * A class to create empty description exceptions.
  *
  * @author Felissa Faustine
  */
-public class InvalidTaskNumberException extends MyJournalException {
+public class EmptyDescriptionException extends MyJournalException {
 
     /**
-     * The constructor for the InvalidTaskNumberExceptions.
+     * The constructor for the EmptyDescriptionExceptions.
      *
      * @param message The error message.
      */
-    public InvalidTaskNumberException(String message) {
+    public EmptyDescriptionException(String message) {
         super(message);
     }
 
@@ -23,6 +23,6 @@ public class InvalidTaskNumberException extends MyJournalException {
      */
     @Override
     public String toString() {
-        return "InvalidTaskNumberException: " + getMessage();
+        return "EmptyDescriptionException: " + getMessage();
     }
 }

@@ -1,4 +1,4 @@
-package myjournal;
+package myjournal.exception;
 
 public class MyJournalException extends RuntimeException {
     public MyJournalException(String message) {
