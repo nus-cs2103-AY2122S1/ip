@@ -1,20 +1,12 @@
 package duke.task;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private String taskName;
-    private String at;
-    private String type = "E";
+    private String taskName, at, type = "E";
     private LocalDate date;
-    private int time;
-    private int day;
-    private int month;
-    private int year;
-    private String[] TaskAtSplit;
+    private int time, day, month, year;
 
     public Event(String taskName) {
         String[] TaskAtSplit = taskName.split("/", 2);
@@ -51,12 +43,6 @@ public class Event extends Task {
 
     public String showType() {
         return this.type;
-    }
-
-    public void appendToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true);
-        fw.write(textToAppend);
-        fw.close();
     }
 
     public LocalDate showDate() { return this.date; }

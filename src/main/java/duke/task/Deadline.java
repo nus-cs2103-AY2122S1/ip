@@ -1,22 +1,12 @@
 package duke.task;
 
-import duke.task.Task;
-
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private String taskName;
-    private String by;
+    private String taskName, by, type = "D";
     private LocalDate date;
-    private int time;
-    private int day;
-    private int month;
-    private int year;
-    private String type = "D";
-    private String[] TaskBySplit;
+    private int time, day, month, year;
 
     public Deadline(String taskName) {
         String[] TaskBySplit = taskName.split("/", 2);
@@ -63,9 +53,4 @@ public class Deadline extends Task {
 
     public int showTime() { return this.time; }
 
-    public void appendToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true);
-        fw.write(textToAppend);
-        fw.close();
-    }
 }
