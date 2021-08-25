@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
+import java.time.LocalDate;
 
 public class Duke {
     static List<Task> listOfText2 = new ArrayList<>();
@@ -27,7 +28,7 @@ public class Duke {
         if (listOfText2.size() > 0) {
             System.out.println("Here are the tasks in your list:");
             for(int i = 0; i < listOfText2.size(); i++) {
-                System.out.println(i+1 + "." +  listOfText2.get(i).logo() + listOfText2.get(i).getStatusIcon() + " " + listOfText2.get(i).description);
+                System.out.println(i+1 + "." +  listOfText2.get(i));
             }
         } else {
             System.out.println("There are no tasks in your list");
@@ -81,14 +82,17 @@ public class Duke {
                     String[] split = input.split("\\s+");
                     int number = Integer.parseInt(split[1]);
                     changeStatus(number);
-                }else if (input.length() > 9 && input.substring(0, 9).equals("deadline ")) {
+                }else if (input.length() > 9 && input.substring(0, 9).equals("deadline ")) { //date then time
                     String[] split = input.substring(9).split(" /by ");
-                    list(new Deadline(split[0], split[1]));
-                } else if (input.length() > 5 && input.substring(0, 5).equals("todo ")) {
+                    String[] split2 = split[1].split("\\s+"); //split into date and time
+                    LocalDate ld_D = LocalDate.parse(split2[0]);
+                    list(new Deadline(split[0], ld_D, split2[1]));
+                } else if (input.length() > 5 && input.substring(0, 5).equals("todo ")) { //empty
                     list(new ToDo(input.substring(5)));
-                } else if (input.length() > 6 && input.substring(0, 6).equals("event ")) {
+                } else if (input.length() > 6 && input.substring(0, 6).equals("event ")) { //date
                     String[] split = input.substring(6).split(" /at ");
-                    list(new Event(split[0], split[1]));
+                    LocalDate ld_E = LocalDate.parse(split[1]);
+                    list(new Event(split[0], ld_E));
                 } else if (input.length() > 7 && input.substring(0, 7).equals("delete ")) {
                     String[] split = input.substring(6).split("\\s+");
                     deleteTask(Integer.parseInt(split[1]));
