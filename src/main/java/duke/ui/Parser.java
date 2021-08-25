@@ -12,6 +12,14 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
 
+    /**
+     * Returns parsed command which involves time.
+     * 
+     * @param splitted An array of words in the command.
+     * @param isEvent Whether the command is an `event` command.
+     * @return Parsed command.
+     * @throws DukeException If command is invalid.
+     */
     private static Command parseCommandWithTime(String[] splitted, boolean isEvent) throws DukeException {
         String timeFormat = isEvent ? "yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm" : "yyyy-MM-dd HH:mm";
         String regex = isEvent ? "/at" : "/by";
@@ -35,7 +43,16 @@ public class Parser {
         }
     }
 
-    private static Command parseCommandWithTaskNo(String[] splitted, boolean isDoneCommand) throws DukeException {
+    /**
+     * Returns parsed command which involves a task number.
+     *
+     * @param splitted An array of words in the command.
+     * @param isDoneCommand Whether the command is a `done` command.
+     * @return Parsed command.
+     * @throws InvalidTaskNoException If task number is invalid.
+     */
+    private static Command parseCommandWithTaskNo(
+            String[] splitted, boolean isDoneCommand) throws InvalidTaskNoException {
         try {
             int index = Integer.parseInt(splitted[1]) - 1;
             return isDoneCommand ? new TaskDoneCommand(index) : new DeleteTaskCommand(index);
@@ -45,7 +62,11 @@ public class Parser {
     }
 
     /**
-     * Based on the command received, either quit the program or process an event.
+     * Parses and returns a command from a string to a Command object.
+     *
+     * @param command Command received from keyboard.
+     * @return Parsed command.
+     * @throws DukeException If command is invalid.
      */
     public static Command parse(String command) throws DukeException {
         String[] splitted = command.split(" ", 2);

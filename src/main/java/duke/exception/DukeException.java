@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Represents an exception thrown when invalid commands are received.
+ * Represents an exception thrown when commands are invalid.
  */
 public class DukeException extends Exception {
     /**

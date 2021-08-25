@@ -5,7 +5,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * Represents a list of tasks.
+ * Represents a temporary list of tasks.
  */
 public class TaskList {
     /** List of tasks */
@@ -47,7 +47,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the number of tasks added.
+     * Returns the number of tasks.
      *
      * @return Number of tasks.
      */
@@ -55,10 +55,22 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    /**
+     * Returns the task at the given index in the task list.
+     *
+     * @param index Index of a task.
+     * @return Task at the given index.
+     */
     public Task get(int index) {
         return this.tasks.get(index);
     }
 
+    /**
+     * Returns the index of a task in the task list.
+     *
+     * @param task Task in the task list.
+     * @return Index of the task given.
+     */
     public int indexOf(Task task) {
         return this.tasks.indexOf(task);
     }

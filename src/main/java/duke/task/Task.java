@@ -3,10 +3,10 @@ package duke.task;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a task that can be performed by the Duke program.
+ * Represents a task that can be recorded by the Duke program.
  */
 public class Task {
-    /** Formatter of input time */
+    /** Formatter of time */
     protected static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     /** Description of the task */
     protected String description;

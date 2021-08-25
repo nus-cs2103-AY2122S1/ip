@@ -17,15 +17,22 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Stores data into the file and reads data from the file.
+ * Represents storage that can store data into a file and read data from a file.
  */
 public class Storage {
     /** Path of the current folder as a string */
     public static final String DIRECTORY_PATH = System.getProperty("user.dir");
     /** Path of file containing data saved */
     private static File data;
+    /** A temporary list of tasks */
     private TaskList taskList;
 
+    /**
+     * Constructor of the `Storage` class.
+     *
+     * @param filePath Path to the file to be loaded.
+     * @param taskList A temporary list of tasks.
+     */
     public Storage(Path filePath, TaskList taskList) {
         Storage.data = filePath.toFile();
         this.taskList = taskList;
@@ -33,7 +40,8 @@ public class Storage {
     }
 
     /**
-     * Reads the data in the file. If the file doesn't exist, create it.
+     * Reads data in the file. If the directory or file doesn't exist, create a new file in the correct
+     * location.
      */
     private void readFile() {
         try {
@@ -115,7 +123,7 @@ public class Storage {
     }
 
     /**
-     * Rewrites the data to the file.
+     * Rewrites data from taskList to the file.
      */
     public void rewriteFile() {
         try {
