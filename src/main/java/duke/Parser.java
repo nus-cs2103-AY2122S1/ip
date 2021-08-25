@@ -19,7 +19,6 @@ public class Parser {
      *
      * @param userInput user inputs.
      * @param dukeTaskList a dukeTaskList object of the current run of Duke.
-     * @throws DukeException if input format is invalid.
      * @throws NumberFormatException if user doesn't enter valid integers when entering task numbers.
      */
     public static void parse(String userInput, DukeTaskList dukeTaskList) {
@@ -48,6 +47,14 @@ public class Parser {
                 int deleteTaskNo = Integer.parseInt(spaceSplitInput[1]); // Throws NumberFormatException if string cannot be parsed into valid int
 
                 dukeTaskList.deleteTask(deleteTaskNo);
+            } else if (spaceSplitInput[0].equals("find")) {
+                if (spaceSplitInput.length < 2) {
+                    // No find keyword entered
+                    throw new DukeException("Find keyword is missing!\n");
+                }
+                String keyword = spaceSplitInput[1];
+
+                dukeTaskList.searchTask(keyword);
             } else if (spaceSplitInput[0].equals("todo")) {
                 if (spaceSplitInput.length < 2) {
                     // Tudo has no description. If has, spaceSplitInput has length 2.

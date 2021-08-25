@@ -55,6 +55,15 @@ public class Ui {
             + LINE);
     }
 
+    public static void printFindTask(List<Task> matchingTaskList) {
+        System.out.println(LINE + INDENT + "Here are the matching tasks in your list:");
+        for (int i = 0; i < matchingTaskList.size(); i++) {
+            Task currTask = matchingTaskList.get(i);
+            System.out.println(INDENT + (i + 1) + "." + currTask.toString());
+        }
+        System.out.println(LINE);
+    }
+
     public static void printAddTask(String taskString, int taskNo) {
         System.out.println(LINE + INDENT + "Got it. I've added this task:\n"
             + INDENT + INDENT + taskString + "\n"
