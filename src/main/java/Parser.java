@@ -17,31 +17,22 @@ public class Parser {
         BotCommand command = BotCommand.valueOf(userInputList.get(0).toUpperCase());
         String description;
         String[] userInputArgs;
-
         switch (command) {
         case BYE:
-            ui.showLine();
             ui.sayBye();
-            ui.showLine();
             break;
         case LIST:
-            ui.showLine();
             tasks.printList();
-            ui.showLine();
             break;
         case DONE:
-            ui.showLine();
             tasks.markAsDone(Integer.parseInt(userInputList.get(1)));
-            ui.showLine();
             break;
         case DELETE:
             // check delete argument
             if (!isNumeric(userInputList.get(1))) {
                 throw new InvalidArgumentException("Delete argument is not numeric");
             }
-            ui.showLine();
             tasks.deleteTask(Integer.parseInt(userInputList.get(1)));
-            ui.showLine();
             break;
         case TODO:
             userInputList.remove(0);
@@ -49,9 +40,7 @@ public class Parser {
                 throw new InvalidArgumentException("No arguments submitted for todo");
             }
             description = String.join(" ", userInputList);
-            ui.showLine();
             tasks.createToDo(description);
-            ui.showLine();
             break;
         case DEADLINE:
             userInputList.remove(0);
@@ -67,9 +56,7 @@ public class Parser {
             }
             description = userInputArgs[0];
             String by = userInputArgs[1];
-            ui.showLine();
             tasks.createDeadline(description, by);
-            ui.showLine();
             break;
         case EVENT:
             userInputList.remove(0);
@@ -85,9 +72,7 @@ public class Parser {
             }
             description = userInputArgs[0];
             String at = userInputArgs[1];
-            ui.showLine();
             tasks.createEvent(description, at);
-            ui.showLine();
             break;
         }
     }
