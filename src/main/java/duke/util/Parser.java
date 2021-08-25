@@ -10,6 +10,7 @@ public class Parser {
   private static final String LIST_COMMAND = "list";
   private static final String DONE_COMMAND = "done";
   private static final String DELETE_COMMAND = "delete";
+  private static final String FIND_COMMAND = "find";
   private static final String TODO_COMMAND = "todo";
   private static final String EVENT_COMMAND = "event";
   private static final String DEADLINE_COMMAND = "deadline";
@@ -26,6 +27,7 @@ public class Parser {
     String at;
     String arguments;
     String[] argumentComponents;
+    String keyword;
 
     switch (command) {
       case Parser.DONE_COMMAND:
@@ -55,6 +57,16 @@ public class Parser {
         }
         // If pass all checking, create and return delete command obj
         return new DeleteCommand(task);
+
+    case Parser.FIND_COMMAND:
+      // Check for missing keyword argument
+      if (commandComponents.length == 1) {
+        throw new MissingArgumentException("Find", "keyword");
+      }
+      // Extract keyword argument
+      keyword = commandComponents[1];
+      // If pass all checking, create and return find command obj
+      return new FindCommand(keyword);
 
       case Parser.DEADLINE_COMMAND:
         // Check for empty description
