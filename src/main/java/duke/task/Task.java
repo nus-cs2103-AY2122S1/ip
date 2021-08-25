@@ -21,10 +21,13 @@ public abstract class Task {
         this.isCompleted = true;
     }
 
+    public boolean contains(String searchTerms) {
+        return this.action.contains(searchTerms);
+    }
+
     private String getStatusIcon() {
         return isCompleted ? "X" : " ";
     }
-
 
     abstract public String toSaveFormat() ;
 

@@ -49,6 +49,13 @@ Here are the tasks in your list:
 2. [D][X] return The Fault in my Stars (by: 20 Aug 2021, 2:00 PM)
 3. [E][X] John's Birthday Party (at: 4 Apr 2021, 2:00 PM)
 4. [T][ ] Error Handling
+Here are the matching tasks in your list:
+1. [T][X] borrow The Fault in my Stars
+2. [D][X] return The Fault in my Stars (by: 20 Aug 2021, 2:00 PM)
+Ooops! Command 'find' requires search terms to be provided.
+Please try again.
+Here are the matching tasks in your list:
+1. [D][X] return The Fault in my Stars (by: 20 Aug 2021, 2:00 PM)
 Ooops! Command 'done' require an integer as the second parameter
 Please try again.
 Nice! I've marked this task as done:
@@ -73,6 +80,6 @@ Noted. I've removed this task:
 Now you have 0 task in the list.
 Ooops! The task chosen does not exist. Use 'list' to see all your tasks.
 Please try again.
-Ooops! The task chosen does not exist. Use 'list' to see all your tasks.
+Ooops! Command 'delete' require an integer as the second parameter
 Please try again.
 Bye. Hope to see you again!

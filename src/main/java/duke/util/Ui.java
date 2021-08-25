@@ -2,6 +2,7 @@ package duke.util;
 
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -47,6 +48,18 @@ public class Ui {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.printf("%d. %s%n", i + 1, tasks.get(i));
         }
+    }
+
+    public void showMatchingTasks(TaskList tasks) {
+        if (tasks.size() == 0) {
+            System.out.println("There are no matches in your list.\nUse command 'list' to see your whole list");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.printf("%d. %s%n", i + 1, tasks.get(i));
+            }
+        }
+
     }
 
     public void showBye() {

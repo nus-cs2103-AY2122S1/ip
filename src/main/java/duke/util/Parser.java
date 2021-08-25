@@ -26,6 +26,8 @@ public final class Parser {
                 return new ByeCommand();
             case "delete":
                 return new DeleteCommand(action);
+            case "find":
+                return new FindCommand(action);
             default:
                 throw new InvalidInputException("This is an unknown command.");
         }
