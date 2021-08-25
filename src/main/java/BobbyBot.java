@@ -28,18 +28,6 @@ public class BobbyBot {
         }
     }
 
-    /**
-     * Saves all tasks in BobbyBot to hardcoded text file
-     */
-    private void save() throws IOException {
-        // save task to .txt file
-        FileWriter fw = new FileWriter(DBPATH);
-        for (Task task: tasks.getTasks()) {
-            String saveRow = task.getSaveFormatString() + "\n";
-            fw.write(saveRow);
-        }
-        fw.close();
-    }
 
     /**
      * Performs command based on String user input
@@ -122,7 +110,7 @@ public class BobbyBot {
             break;
         }
         try {
-            save();
+            storage.save(tasks);
         } catch (IOException e) {
             e.printStackTrace();
         }

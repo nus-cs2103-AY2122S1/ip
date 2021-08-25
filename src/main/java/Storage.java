@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +45,19 @@ public class Storage {
         System.out.println("load completed");
 
         return tasks;
+    }
+
+    /**
+     * Saves all tasks in BobbyBot to hardcoded text file
+     */
+    public void save(TaskList tasks) throws IOException {
+        // save task to .txt file
+        FileWriter fw = new FileWriter(filePath);
+        for (Task task: tasks.getTasks()) {
+            String saveRow = task.getSaveFormatString() + "\n";
+            fw.write(saveRow);
+        }
+        fw.close();
     }
 }
 
