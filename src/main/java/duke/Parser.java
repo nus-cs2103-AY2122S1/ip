@@ -16,6 +16,13 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
+    /**
+     * The method to parse an input line by the user
+     *
+     * @param input the String line to be parsed
+     * @return the command to be executed
+     * @throws DukeException
+     */
     public static Command parse(String input) throws DukeException{
         String[] x = input.split(" ");
         String cmd = x[0];
@@ -66,17 +73,35 @@ public class Parser {
         throw new DukeException("");
     }
 
+    /**
+     * The method to throw an exception user does not fill in task name
+     *
+     * @param cmd the type of command
+     * @throws DukeException
+     */
     public static void missingTaskName(String cmd) throws DukeException{
         String str = String.format("☹ OOPS!!! The description of a %s cannot be empty.", cmd);
         throw new DukeException(str);
     }
 
+    /**
+     * The method to return an AddCommand with a task
+     *
+     * @param input String to be parsed to get the Task
+     * @return the AddCommand with the Task to be added
+     */
     public static Command addToDo(String input) {
         String name = input.substring(input.indexOf(" ") + 1).strip();
         ToDo t = new ToDo(name);
         return new AddCommand(t);
     }
 
+    /**
+     * The method to return an AddCommand with a task
+     *
+     * @param input String to be parsed to get the Task
+     * @return the AddCommand with the Task to be added
+     */
     public static Command addDeadline(String input) throws DateTimeParseException {
         String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/by") - 1).strip();
         String by = input.substring(input.lastIndexOf("/by") + 4);
@@ -85,6 +110,12 @@ public class Parser {
         return new AddCommand(d);
     }
 
+    /**
+     * The method to return an AddCommand with a task
+     *
+     * @param input String to be parsed to get the Task
+     * @return the AddCommand with the Task to be added
+     */
     public static Command addEvent(String input) throws DateTimeParseException {
         String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/at") - 1).strip();
         String at = input.substring(input.lastIndexOf("/at") + 4);
@@ -93,6 +124,12 @@ public class Parser {
         return new AddCommand(e);
     }
 
+    /**
+     * The method to get the index of the Task
+     *
+     * @param inputArr the array of Strings
+     * @return the index of the Task to be modified
+     */
     public static int getTaskNumber(String[] inputArr) {
         return Integer.parseInt(inputArr[1]) - 1;
     }

@@ -5,24 +5,48 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
+    /** representation of the deadline date */
     protected LocalDateTime by;
 
+    /**
+     * Constructor of Deadline class
+     *
+     * @param name name of task
+     * @param by date of deadline of the task
+     */
     public Deadline(String name, LocalDateTime by) {
         super(name);
         this.by = by;
     }
 
+    /**
+     * Constructor of Deadline class
+     *
+     * @param name name of task
+     * @param isDone whether the task has been completed
+     * @param by date of deadline of the task
+     */
     public Deadline(String name, boolean isDone, LocalDateTime by) {
         super(name, isDone);
         this.by = by;
     }
 
+    /**
+     * Method to return the string representation of the Deadline instance
+     *
+     * @return the string representation of the Deadline instance
+     */
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
         return "[D]" + super.toString() + " (by: " + this.by.format(formatter) + ")";
     }
 
+    /**
+     * Method to return the string to be recorded of the Deadline instance
+     *
+     * @return the string to be recorded of the Deadline instance
+     */
     @Override
     public String getRecordString() {
         int done = this.isDone ? 1 : 0;
@@ -31,6 +55,12 @@ public class Deadline extends Task {
         return record;
     }
 
+    /**
+     * Method to determine if two instances of Deadline are equal
+     *
+     * @param obj the object to be used for comparison
+     * @return boolean indicating if the two Deadline instances are equal
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Deadline) {
