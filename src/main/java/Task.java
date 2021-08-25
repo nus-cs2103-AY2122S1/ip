@@ -1,5 +1,5 @@
 public abstract class Task {
-    public final static String STORAGE_DELIMITER = "/";
+    public final static String STORAGE_DELIMITER = "%";
 
     private String description;
     private boolean isDone;
