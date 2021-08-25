@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Parser {
     private TaskList tasks;
@@ -18,6 +18,10 @@ public class Parser {
         case LIST:
             //display tasklist
             tasks.displayList();
+            return true;
+        case FIND:
+            //find keyword
+            tasks.findTask(remainder);
             return true;
         case DONE:
             //mark task as done

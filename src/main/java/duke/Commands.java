@@ -1,7 +1,8 @@
-package Duke;
+package duke;
 
 public enum Commands {
     LIST("list"),
+    FIND("find"),
     DONE("done"),
     DELETE("delete"),
     TODO("todo"),

@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.util.ArrayList;
 
@@ -113,5 +113,34 @@ public class TaskList {
         }
     }
 
+    public void findTask(String key) {
+        if (key.isEmpty()) {
+            ui.toScreen("Please include a search word.");
+            return;
+        }
 
+        key = " " + key + " ";
+        ArrayList<Task> temp = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.toString().contains(key)) {
+                temp.add(t);
+            }
+        }
+
+        String line = "____________________________________________________________";
+        String indent = "    ";
+
+        if (temp.size() == 0) {
+            ui.toScreen("No tasks match this search, please try again.");
+            return;
+        }
+
+        System.out.println(indent + line + "\n" +
+                indent + "Here are the tasks that match your search: ");
+        for (int i = 0; i < temp.size(); i++) {
+            System.out.println(indent + indent + (i + 1) + "." + temp.get(i).toString());
+        }
+
+        System.out.println(indent + line);
+    }
 }
