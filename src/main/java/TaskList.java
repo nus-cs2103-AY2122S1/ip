@@ -8,10 +8,17 @@ import java.time.format.DateTimeParseException;
  * Tasks can be added, deleted, completed or simply printed out.
  */
 public class TaskList {
-	protected static ArrayList<Task> tasks;
+	protected ArrayList<Task> tasks;
+
+    /**
+     * Constructor for empty TaskList.
+     */
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
 
 	public TaskList(ArrayList<Task> tasks) {
-		TaskList.tasks = tasks;
+		this.tasks = tasks;
 	}
 
 	public ArrayList<Task> getTasks() {
@@ -27,7 +34,7 @@ public class TaskList {
     protected void completeTask(int taskNum) {
         Task task = tasks.get(taskNum - 1);
         task.setDone(true);
-        Duke.printFormattedMessage("Good job! I've marked this task as done:\n\n\t" + task + "\n");  
+        Ui.printFormattedMessage("Good job! I've marked this task as done:\n\n\t" + task + "\n");  
     }
 
 	/**
@@ -39,7 +46,7 @@ public class TaskList {
         int taskIdx = num - 1;
         Task taskToDelete = tasks.get(taskIdx);
         tasks.remove(taskIdx);
-        Duke.printFormattedMessage("Noted. I've removed this task:\n\t" 
+        Ui.printFormattedMessage("Noted. I've removed this task:\n\t" 
                                 + taskToDelete
                                 + "\n\tNow you have " + tasks.size() + " tasks in the list.\n"); 
     } 
@@ -94,9 +101,9 @@ public class TaskList {
      * 
      * @param t the task to add
      */
-    private static void addTask(Task t) throws DukeException {
-		tasks.add(t);
-        Duke.printFormattedMessage("Got it. I've added this task:\n\t" 
+    private void addTask(Task t) throws DukeException {
+		this.tasks.add(t);
+        Ui.printFormattedMessage("Got it. I've added this task:\n\t" 
                                 + t 
                                 + "\n\tNow you have " + tasks.size() + " tasks in the list.\n"); 
     } 
@@ -190,7 +197,7 @@ public class TaskList {
      */
     protected void printTasks() throws DukeException{
         if (tasks.isEmpty()) {
-            Duke.printFormattedMessage("You have no tasks!\n");
+            Ui.printFormattedMessage("You have no tasks!\n");
             return;
         }
         
@@ -202,6 +209,6 @@ public class TaskList {
             taskListMessage += task + "\n";
         }
 
-		Duke.printFormattedMessage(taskListMessage);
+		Ui.printFormattedMessage(taskListMessage);
     }
 }
