@@ -12,19 +12,38 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 
+/***
+ * Class to Maintain the Task List
+ */
 public class TaskList {
 
+    /** The Task List Arraylist */
     private final ArrayList<Task> LIST = new ArrayList<>();
 
+    /***
+     * Constructor for TaskList Class
+     *
+     * @param storage Storage where the task list will be stored
+     * @throws WhoBotException if there is an error reading data
+     */
     public TaskList(Storage storage) throws WhoBotException {
         storage.readData(LIST);
     }
 
+    /***
+     * Returns the Task List
+     *
+     * @return the task list
+     */
     public ArrayList<Task> getLIST() {
         return LIST;
     }
 
-    //Method to Print List
+    /***
+     * Prints Task List
+     *
+     * @param ui UI to print list to
+     */
     public void printList(UI ui) {
         if (LIST.isEmpty()) {
             ui.echo("There are currently no tasks in your list.", UI.TYPE.COMPLETE);
@@ -40,7 +59,13 @@ public class TaskList {
         ui.echo(listString, UI.TYPE.COMPLETE);
     }
 
-    // Method to Mark Task as Done
+    /***
+     * Marks Task as Done
+     *
+     * @param ind index of task to mark
+     * @param ui UI to show output
+     * @throws WhoBotException If any error
+     */
     public void markAsDone(String ind, UI ui) throws WhoBotException {
         try {
             int index = Integer.parseInt(ind) - 1;
@@ -55,7 +80,13 @@ public class TaskList {
         }
     }
 
-    // Method to Mark Task as Not Done
+    /***
+     * Marks Task as Not Done
+     *
+     * @param ind index of task to mark
+     * @param ui UI to show output
+     * @throws WhoBotException If any error
+     */
     public void markAsUndone(String ind, UI ui) throws WhoBotException {
         try {
             int index = Integer.parseInt(ind) - 1;
@@ -70,7 +101,13 @@ public class TaskList {
         }
     }
 
-    // Method to Delete Task from List
+    /***
+     * Deletes Task from the Task List
+     *
+     * @param ind index of task to delete
+     * @param ui UI to show output
+     * @throws WhoBotException If any error
+     */
     public void deleteFromList(String ind, UI ui) throws WhoBotException {
         try {
             int index = Integer.parseInt(ind) - 1;
@@ -97,7 +134,13 @@ public class TaskList {
         }
     }
 
-    // Method to Add a ToDos type Task into List
+    /***
+     * Adds a ToDo Task to the Task List
+     *
+     * @param command the command with the details for the task
+     * @param ui UI to show output to
+     * @throws WhoBotException If there is any error on addition
+     */
     public void addTODO(String command, UI ui) throws WhoBotException {
         try {
             Todo task = new Todo(command.substring(5));
@@ -112,7 +155,13 @@ public class TaskList {
         }
     }
 
-    // Method to Add a Events UI.TYPE Task into List
+    /***
+     * Adds a Event Task to the Task List
+     *
+     * @param command the command with the details for the task
+     * @param ui UI to show output to
+     * @throws WhoBotException If there is any error on addition
+     */
     public void addEvent(String command, UI ui) throws WhoBotException {
         try {
             if (!command.contains("/at ")) {
@@ -130,7 +179,13 @@ public class TaskList {
         }
     }
 
-    // Method to Add a Deadline type Task into List
+    /***
+     * Adds a Deadline Task to the Task List
+     *
+     * @param command the command with the details for the task
+     * @param ui UI to show output to
+     * @throws WhoBotException If there is any error on addition
+     */
     public void addDeadline(String command, UI ui) throws WhoBotException {
         try {
             if (!command.contains("/by ")) {
@@ -148,6 +203,12 @@ public class TaskList {
         }
     }
 
+    /***
+     * Shows Tasks on a specific date
+     * @param command the command with the date specified
+     * @param ui UI to show output to
+     * @throws WhoBotException If there is any error in the command
+     */
     public void showOnDate(String command, UI ui) throws WhoBotException {
         try {
             if (!command.contains("/on ")) {

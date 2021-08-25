@@ -1,13 +1,16 @@
 package WhoBot.Main;
 
+/***
+ * Custom Exception Class for the WhoBot
+ */
 public class WhoBotException extends Exception{
 
+    /***
+     * Constructor for the WhoBotException Class
+     *
+     * @param message The Exception error message
+     */
     public WhoBotException(String message) {
         super(message);
-    }
-
-    @Override
-    public String getMessage() {
-        return super.getMessage();
     }
 }

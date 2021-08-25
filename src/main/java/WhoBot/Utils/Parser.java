@@ -5,8 +5,24 @@ import WhoBot.Main.UI;
 
 import java.util.Locale;
 
+/***
+ * Class to Help Parse Input Commands
+ */
 public class Parser {
 
+    /***
+     * Parses the Given Command and does this appropriate action
+     * Return -1 if given the quitting command else 0.
+     *
+     * @param command String command to parse.
+     * @param ui UI to give outputs to.
+     * @param storage Storage to save any changes to list of made.
+     * @param taskList TaskList to take action based on command.
+     *
+     * @return -1 if end else 0.
+     *
+     * @throws WhoBotException If any issues with the commands.
+     */
     public int parse(String command, UI ui, Storage storage, TaskList taskList) throws WhoBotException {
 
         Helper helper = new Helper(ui);
@@ -49,15 +65,15 @@ public class Parser {
             taskList.addTODO(command, ui);
             storage.saveMemory(taskList.getLIST());
         } else if (commandList[0].equals("event")) {
-            //If input starts with todos, add that to list
+            //If input starts with event, add that to list
             taskList.addEvent(command, ui);
             storage.saveMemory(taskList.getLIST());
         } else if (commandList[0].equals("deadline")) {
-            //If input starts with todos, add that to list
+            //If input starts with deadline, add that to list
             taskList.addDeadline(command, ui);
             storage.saveMemory(taskList.getLIST());
         } else if (commandList[0].equals("show")) {
-            //If input starts with todos, add that to list
+            //If input starts with show, show tasks on specified date
             taskList.showOnDate(command, ui);
         } else if (commandList[0].equals("find")) {
             //If input starts with todos, add that to list
