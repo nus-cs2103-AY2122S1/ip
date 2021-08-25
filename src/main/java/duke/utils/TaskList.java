@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
+
     private final Consumer<String> loadDataAction = s -> {
         String[] loadedLine = s.split(",");
         char typeOfTask = loadedLine[0].charAt(0);
@@ -40,13 +41,16 @@ public class TaskList {
     public void addTask(Task newTask) {
         tasks.add(newTask);
     }
+
     public void deleteTask(int taskNum) {
         tasks.remove(taskNum);
     }
+
     public void markTaskAsDone(int taskNum) {
         Task currTask = tasks.get(taskNum);
         currTask.markAsDone();
     }
+
     public TaskList(Stream<String> persistedData) {
         persistedData.forEach(loadDataAction);
     }

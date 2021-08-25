@@ -10,14 +10,17 @@ import duke.utils.Ui;
 
 public abstract class Command {
     private boolean isExit = false;
+
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
     public boolean isExitCommand() {
         return isExit;
     }
+
     public void setExitTrue() {
         isExit = true;
     }
+
     public static class ExitCommand extends Command {
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -25,12 +28,14 @@ public abstract class Command {
             super.setExitTrue();
         }
     }
+
     public static class ListAllCommand extends Command {
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) {
             ui.showGettingAllTaskItemsInteraction(tasks);
         }
     }
+
     public static class DoneCommand extends Command {
         private int taskNum;
         public DoneCommand(int taskNum) {
@@ -43,6 +48,7 @@ public abstract class Command {
             ui.showTaskDoneInteraction(tasks.getTask(this.taskNum));
         }
     }
+
     public static class ToDoCommand extends Command {
         private String description;
         public ToDoCommand(String description) {
@@ -56,6 +62,7 @@ public abstract class Command {
             storage.addTaskToPersistedData(newToDo);
         }
     }
+
     public static class DeadlineCommand extends Command {
         private String description;
         private String dateTimeBy;
@@ -71,6 +78,7 @@ public abstract class Command {
             storage.addTaskToPersistedData(newDeadline);
         }
     }
+
     public static class EventCommand extends Command {
         private String description;
         private String dateTimeAt;
@@ -86,6 +94,7 @@ public abstract class Command {
             storage.addTaskToPersistedData(newEvent);
         }
     }
+
     public static class DeleteCommand extends Command {
         private int taskNum;
         public DeleteCommand(int taskNum) {
@@ -99,4 +108,5 @@ public abstract class Command {
             ui.showTaskDeletedInteraction(taskToDelete, tasks);
         }
     }
+
 }
