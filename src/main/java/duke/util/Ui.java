@@ -16,6 +16,7 @@ public class Ui {
     public void showLine() {
         System.out.println("_________________________________________________");
     }
+    
 
     public void showWelcome() {
         String words1 = "Hello! Welcome! This is Duke~";
