@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -7,6 +6,10 @@ import java.util.Scanner;
 import java.lang.StringBuilder;
 
 public class Kermit {
+    private Storage storage;
+    private ToDo taskList;
+    private Ui ui;
+
     private static LocalDate formatUserDateFormat(String s) throws KermitException {
         String[] components = s.split("-");
         String day = components[0];
@@ -20,7 +23,18 @@ public class Kermit {
         }
     }
 
-    public static void main(String[] args) throws IOException, KermitException {
+    public Kermit(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            taskList = new ToDo(storage.load());
+        } catch (KermitException e) {
+            ui.showLoadingError();
+            taskList = new ToDo();
+        }
+    }
+
+    public void run() {
         final String invalidCommandText = "I'm sorry, but I don't know what that means :-(";
 
         Scanner sc = new Scanner(System.in);
@@ -37,9 +51,6 @@ public class Kermit {
         String[] strTasks = {"deadline", "todo", "event"};
         ArrayList<String> validTasks = new ArrayList<>(Arrays.asList(strTasks));
 
-        Storage storage = new Storage("./data/kermit.txt");
-        Ui ui = new Ui();
-        ToDo list = storage.getToDoList();
         ui.showIntroMessage();
         while (true) {
             try {
@@ -104,52 +115,55 @@ public class Kermit {
                 switch (command) {
                     case "bye":
                         ui.showGoodbyeMessage();
-                        storage.save();
+                        storage.save(taskList);
                         return;
                     // List out all objects that user added to list
                     case "list":
-                        ui.showListItems(list);
+                        ui.showListItems(taskList);
                         break;
                     // Add objects to list
                     case "done":
                         index = Integer.parseInt(description) - 1;
                         // Get task name
-                        Task task = list.completeTask(index);
+                        Task task = taskList.completeTask(index);
                         ui.showCompleteTaskMessage(task);
-                        storage.save();
+                        storage.save(taskList);
                         break;
                     // Add new todo task
                     case "todo":
                         Task newToDo = new ToDos(description);
-                        list.add(newToDo);
-                        ui.showAddTaskMessage(newToDo, list);
-                        storage.save();
+                        taskList.add(newToDo);
+                        ui.showAddTaskMessage(newToDo, taskList);
+                        storage.save(taskList);
                         break;
                     // Add new deadline task
                     case "deadline":
                         Task newDeadline = new Deadline(description, formatUserDateFormat(flagArguments));
-                        list.add(newDeadline);
-                       ui.showAddTaskMessage(newDeadline, list);
-                        storage.save();
+                        taskList.add(newDeadline);
+                        ui.showAddTaskMessage(newDeadline, taskList);
+                        storage.save(taskList);
                         break;
 
                     // Add new event task
                     case "event":
                         Task newEvent = new Event(description, formatUserDateFormat(flagArguments));
-                        list.add(newEvent);
-                        ui.showAddTaskMessage(newEvent, list);
-                        storage.save();
+                        taskList.add(newEvent);
+                        ui.showAddTaskMessage(newEvent, taskList);
+                        storage.save(taskList);
                         break;
                     // Delete task
                     case "delete":
                         index = Integer.parseInt(description) - 1;
-                        Task deletedTask = list.deleteTask(index);
-                        ui.showDeleteTaskMessage(deletedTask, list);
-                        storage.save();
+                        Task deletedTask = taskList.deleteTask(index);
+                        ui.showDeleteTaskMessage(deletedTask, taskList);
+                        storage.save(taskList);
                 }
             } catch (KermitException e) {
                 ui.showErrorMessage(e);
             }
         }
+    }
+    public static void main(String[] args){
+        new Kermit("data/tasks.txt").run();
     }
 }
