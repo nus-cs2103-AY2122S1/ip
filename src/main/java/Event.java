@@ -9,7 +9,7 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public Event(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, LocalDateTime at) {
         super(description, isDone);
         this.at = at;
     }
@@ -23,7 +23,9 @@ public class Event extends Task {
 
     @Override
     String printFormat() {
-        String[] info = {"E", this.isDone ? "1" : "0", this.description, this.at};
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        String dateString = at.format(format);
+        String[] info = {"E", this.isDone ? "1" : "0", this.description, dateString};
         return String.join(" | ", info);
     }
 }

@@ -1,4 +1,7 @@
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Storage {
@@ -51,15 +54,27 @@ public class Storage {
         Task t = null;
         // T | 0 | description | addInfo
         boolean isDone = tokens[1].equals("1");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        LocalDateTime timestamp = null;
         switch (tokens[0]) {
             case "T":
                 t = new Todo(tokens[2], isDone);
                 break;
             case "D":
-                t = new Deadline(tokens[2], isDone, tokens[3]);
+                try {
+                    timestamp = LocalDateTime.parse(tokens[3], format);
+                    t = new Deadline(tokens[2], isDone, timestamp);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Error parsing task from saved file");
+                }
                 break;
             case "E":
-                t = new Event(tokens[2], isDone, tokens[3]);
+                try {
+                    timestamp = LocalDateTime.parse(tokens[3], format);
+                    t = new Event(tokens[2], isDone, timestamp);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Error parsing task from saved file");
+                }
                 break;
         }
         return t;

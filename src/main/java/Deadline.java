@@ -9,7 +9,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public Deadline(String description, boolean isDone, String by) {
+    public Deadline(String description, boolean isDone, LocalDateTime by) {
         super(description, isDone);
         this.by = by;
     }
@@ -23,7 +23,9 @@ public class Deadline extends Task {
 
     @Override
     String printFormat() {
-        String[] info = {"D", this.isDone ? "1" : "0", this.description, this.by};
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        String dateString = by.format(format);
+        String[] info = {"D", this.isDone ? "1" : "0", this.description, dateString};
         return String.join(" | ", info);
     }
 }
