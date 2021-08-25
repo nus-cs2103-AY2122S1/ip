@@ -5,6 +5,7 @@ public class Ui {
     private static final String outroString = "That was an excellent chat - I look forward to seeing you again soon!";
     private static final String readSaveString = "Sorry, there was a problem reading the save file :(";
     private static final String writeSaveString = "Sorry, there was a problem saving your tasks :(";
+    private static final String newSaveString = "Empty save file detected - loading a blank list.";
 
     private String addedString(Task task, int size) {
         return String.format("Alright, I've added this task: \n\t%s\nNow, you have %d tasks in the list.\n", task, size);
@@ -63,5 +64,9 @@ public class Ui {
 
     public void showWriteSaveError() {
         print(writeSaveString);
+    }
+
+    public void showNewSave() {
+        print(newSaveString);
     }
 }

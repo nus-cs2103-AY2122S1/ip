@@ -3,49 +3,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private Ui ui;
-    private String filePath;
-    private Scanner sc = new Scanner(System.in);
-    private ArrayList<Task> taskList;
+    private final Ui ui;
+    private final Scanner sc = new Scanner(System.in);
+    private ArrayList<Task> taskList = new ArrayList<>();
+    private final Storage storage;
 
     public Duke(String filePath) {
         this.ui = new Ui();
-        this.filePath = filePath;
-        this.readSave();
+        this.storage = new Storage(filePath);
     }
 
-    public void writeSave() {
-        try {
-            FileOutputStream writeData = new FileOutputStream(filePath);
-            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
-            writeStream.writeObject(taskList);
-            writeStream.flush();
-            writeStream.close();
-        } catch (IOException e) {
-            ui.showWriteSaveError();
-        }
-    }
-
-    public void readSave() {
-        try {
-            File f = new File(filePath);
-            if (!f.createNewFile()) { // save file exists
-                FileInputStream readData = new FileInputStream(filePath);
-                ObjectInputStream readStream = new ObjectInputStream(readData);
-                @SuppressWarnings("unchecked")
-                ArrayList<Task> readList = (ArrayList<Task>) readStream.readObject();
-                this.taskList = readList;
-                readStream.close();
-            } else {
-                this.taskList = new ArrayList<>();
-            }
-        } catch (EOFException e) {
-            this.taskList = new ArrayList<Task>();
-            writeSave();
-        } catch (IOException | ClassNotFoundException e) {
-            ui.showReadSaveError();
-        }
-    }
 
     public Command parseUserInput(String input) throws DukeException {
         String[] strings = input.split(" ");
@@ -103,11 +70,18 @@ public class Duke {
     }
 
     public void run() {
-        Command command;
+        try {
+            this.taskList = storage.readSave(taskList);
+        } catch (EOFException e) {
+            ui.showNewSave();
+        } catch (IOException | ClassNotFoundException e) {
+            ui.showReadSaveError();
+        }
         ui.showIntro();
         outer:
         while (true) {
             String userEntry = sc.nextLine();
+            Command command;
             try {
                 command = parseUserInput(userEntry);
             } catch (DukeException e) {
@@ -118,7 +92,11 @@ public class Duke {
             switch (command.getOperation()) {
             case "bye":
                 ui.showOutro();
-                writeSave();
+                try {
+                    storage.writeSave(this.taskList);
+                } catch (IOException e) {
+                    ui.showWriteSaveError();
+                }
                 break outer;
             case "list":
                 ui.showTasks(taskList);
