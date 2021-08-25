@@ -5,11 +5,21 @@ import kermit.command.Command;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Driver class for Kermit, a frog that keeps tracks of your tasks.
+ */
 public class Kermit {
     private Storage storage;
     private ToDo taskList;
     private Ui ui;
 
+    /**
+     * Converts convenient user string to LocalDate.
+     *
+     * @param s Date string in form DD-MM-YYYY.
+     * @return LocalDate of string.
+     * @throws KermitException when the date is not parseable.
+     */
     private static LocalDate formatUserDateFormat(String s) throws KermitException {
         String[] components = s.split("-");
         String day = components[0];
@@ -23,6 +33,11 @@ public class Kermit {
         }
     }
 
+    /**
+     * Constructor for Kermit.
+     *
+     * @param filePath File path for where data for task list should be stored.
+     */
     public Kermit(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -34,6 +49,9 @@ public class Kermit {
         }
     }
 
+    /**
+     * Driver function to start Kermit.
+     */
     public void run() {
         ui.showIntroMessage();
         boolean isExit = false;
@@ -48,6 +66,12 @@ public class Kermit {
             }
         }
     }
+
+    /**
+     * Starts Kermit and saves data in data/tasks.txt.
+     *
+     * @param args  The commandline arguments.
+     */
     public static void main(String[] args){
         new Kermit("data/tasks.txt").run();
     }
