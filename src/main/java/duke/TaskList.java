@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Object containing the list of tasks currently on hand.
+ */
 public class TaskList {
     
     public ArrayList<Task> taskList;

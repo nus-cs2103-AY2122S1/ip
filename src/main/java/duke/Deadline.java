@@ -2,8 +2,13 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
+/**
+ * 
+ * A subclass of the Task Object. 
+ * Includes a deadline date to complete task by.
+ * 
+ */
 public class Deadline extends Task {
 
     protected LocalDate date;

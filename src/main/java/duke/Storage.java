@@ -11,6 +11,10 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ * 
+ */
 public class Storage {
 
     private String filePath;
@@ -21,6 +25,12 @@ public class Storage {
         this.taskArr = new ArrayList<Task>();
     }
 
+    /**
+     * 
+     * Loads existing save file if it exists.
+     * Otherwise, it will create a new file.
+     * @return ArrayList of Tasks containing existing tasks from previous saves. 
+     */
     public ArrayList<Task> loadFile() {
         File f = new File(filePath);
         try {
@@ -43,7 +53,13 @@ public class Storage {
         return this.taskArr;
     }
 
-
+    /**
+     * 
+     * Carries tasks from previous save file to current application run.
+     * @param line Line of previous save file.
+     * @throws ParseException If date format is incorrect.
+     * @throws DukeException If line from previous save file was invalid.
+     */
     public void convertToTask(String line) throws ParseException, DukeException {
         Task task;
         boolean isDone = false;
@@ -82,6 +98,10 @@ public class Storage {
 
     }
 
+    /**
+     * Create a new file if there is no existing file.
+     * @param f file variable.
+     */
     public void createFile(File f) {
         try {
             f.getParentFile().mkdirs();
@@ -91,6 +111,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Update save file so that it remains up to date upon closure.
+     * @param taskArr List of tasks in a TaskList. 
+     * @throws IOException If IO operation fails.
+     */
     public void writeToFile(TaskList taskArr) throws IOException {
         FileWriter fw = new FileWriter("./data/duke.txt");
         for (int i = 0; i < taskArr.size(); i++) {

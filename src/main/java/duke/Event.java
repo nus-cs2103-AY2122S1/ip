@@ -4,6 +4,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * 
+ * A subclass of the Task Object. 
+ * Includes the date of the event.
+ * 
+ */
 public class Event extends Task {
 
     protected LocalDate date;
