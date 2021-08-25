@@ -14,23 +14,50 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Represents the "brain" of the application. Implements the "Controller" aspect of the MVC pattern. An
+ * <code>ExecutionUnit</code> object dictates <i>how</i> should data in storage should be manipulated according to the
+ * given command.
+ * <p>
+ *     Should the need arise e.g. too many commands, this is the first place to look at for a refactoring.
+ *     Easiest way is to abstract out the switch statement and make a Command class. Right now it's simple enough
+ *     to not require an abstraction.
+ * </p>
+ */
 public class ExecutionUnit {
     private final QueryParser parser = new QueryParser();
     private final Storage storeExecutor = new Storage();
     private TaskList taskList = new TaskList();
     private final String storagePath;
 
+    /**
+     * Public constructor to initialise filepath to saved data.
+     * @param storagePath Relative path to storage data. Must end in .txt
+     */
     public ExecutionUnit(String storagePath) {
         this.storagePath = storagePath;
     }
+
+    /**
+     * Initialises TaskList according to given storagePath.
+     * @throws IOException May throw IOException if given storagePath during initialisation is inappropriate
+     */
     public void initStorage() throws IOException {
         storeExecutor.initStorage(storagePath, taskList);
     }
 
+    /**
+     * Clears <code>TaskList</code>. This will irreversibly delete content of <code>TaskList</code>, as well as storage file.
+     */
     public void clearStorage() {
         taskList = new TaskList();
     }
 
+    /**
+     * Executes the given query. Query will be parsed and executed. May throw a <code>BobCatException</code>
+     * @param query The query to run on TaskList
+     * @throws IOException May throw IOException if given storagePath during initialisation is inappropriate
+     */
     public String[] executeCommand(String query) throws IOException {
         String[] queryArr;
         queryArr = parser.parse(query);

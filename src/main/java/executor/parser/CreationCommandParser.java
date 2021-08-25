@@ -4,7 +4,19 @@ import exception.CommandArityException;
 
 import java.util.Arrays;
 
+/**
+ * Implements a <code>CommandParser</code> which process taskCreation commands. Such commands include "todo",
+ * "event", and "bye". In particular it checks for the number of arguments corresponding to the provided command.
+ */
 public class CreationCommandParser implements CommandParser {
+    /**
+     * Process taskCreation commands.
+     * @param command The given taskCreation command
+     * @param commandArgs Arguments to the taskCreation command given
+     * @return Array of strings, where the 0th index is occupied by command, followed by the arguments to the command
+     * @throws CommandArityException May throw if number of elements in commandArgs is not appropriate relative to
+     * given command
+     */
     @Override
     public String[] parse(String command, String[] commandArgs) {
         if (command.equals("todo")) {

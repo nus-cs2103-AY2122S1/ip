@@ -1,10 +1,7 @@
 package model;
 
 import exception.InvalidOpsException;
-import model.task.Deadline;
-import model.task.Event;
 import model.task.Task;
-import model.task.ToDo;
 
 import java.util.ArrayList;
 
