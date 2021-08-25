@@ -24,6 +24,9 @@ public class Parser {
         case LIST:
             command = new ListCommand();
             break;
+        case FIND:
+            command = new FindCommand(argument);
+            break;
         case DONE:
             command = new DoneCommand(parseInt(argument));
             break;
@@ -63,13 +66,15 @@ public class Parser {
     }
 
     private static Action getAction(String input) {
-        String action = input.split(" ")[0];
+        String action = input.split(" ")[0].toLowerCase();
 
         switch (action) {
         case "bye":
             return Action.BYE;
         case "list":
             return Action.LIST;
+        case "find":
+            return Action.FIND;
         case "done":
             return Action.DONE;
         case "delete":

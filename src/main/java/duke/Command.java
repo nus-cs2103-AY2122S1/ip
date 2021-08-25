@@ -132,3 +132,14 @@ class AddCommand extends Command {
         tasks.add(task);
     }
 }
+
+class FindCommand extends Command {
+    public FindCommand(String searchString) {
+        super(Action.FIND, searchString);
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        tasks.filter(super.getArgument());
+    }
+}
