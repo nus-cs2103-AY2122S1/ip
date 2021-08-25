@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
 /**
  * Deadline class used to represent a task that has an end date.
  * Contains method that
- * (i) overrides the Parent toString method to display the task type,
+ * (i) formats the toString() output such that the result facilitates ease of reading.
+ * (ii) overrides the Parent toString method to display the task type,
  * as well as status and description.
  */
 public class Deadline extends Task {
@@ -20,10 +21,6 @@ public class Deadline extends Task {
         this.time = time;
     }
 
-    public String formatString() {
-        return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
-    }
-
     public Deadline(String done, String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;
@@ -33,6 +30,15 @@ public class Deadline extends Task {
         } else {
             this.setIsDone(false);
         }
+    }
+
+    /**
+     * The formatString() method formats the String representation of a Deadline task to facilitate ease of reading.
+     *
+     * @return String object to represent Deadline task in a more readable manner.
+     */
+    public String formatString() {
+        return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
     }
 
     /**

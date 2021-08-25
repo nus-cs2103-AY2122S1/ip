@@ -8,15 +8,21 @@ import duke.tasks.Event;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 
+/**
+ * ListCommand class used to represent a List Command.
+ * Contains methods that
+ * (i)    executes the ListCommand
+ */
 public class ListCommand extends Command {
     public ListCommand() {
         super("list");
     }
 
     /**
-     * The execute() method in ListCommand lists all tasks.
-     * Individual tasks are typecast into their respective classes in order for
-     * the toString() methods to work as intended.
+     * execute() method in ListCommand to list all tasks in the TaskList.
+     *
+     * @param des   the user input into the Duke chat-box.
+     * @param tList the TaskList object used to keep track of all tasks.
      */
     @Override
     public void execute(String des, TaskList tList) {

@@ -1,23 +1,30 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+
 import duke.storage.Storage;
+
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * DoneCommand class used to represent a Done Command.
+ * Contains methods that
+ * (i)    executes the DoneCommand
+ */
 public class DoneCommand extends Command {
     public DoneCommand() {
         super("done");
     }
 
     /**
-     * The execute() method in doneCommand marks a given Task as completed.
+     * execute() method in DoneCommand to mark a task as done in the TaskList.
      *
-     * @param des the user input into the Duke chat-box.
-     * @throws DukeException if done command is not formatted properly
-     *                       or if task has already been completed.
+     * @param des   the user input into the Duke chat-box.
+     * @param tList the TaskList object used to keep track of all tasks.
+     * @throws DukeException if input for Delete command is not properly formatted.
      */
     public void execute(String des, TaskList tList) throws DukeException {
         ArrayList<Task> tasks = tList.getTaskList();

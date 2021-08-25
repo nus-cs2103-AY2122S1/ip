@@ -1,23 +1,30 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+
 import duke.storage.Storage;
+
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * DeleteCommand class used to represent a Delete Command.
+ * Contains methods that
+ * (i)    executes the DeleteCommand
+ */
 public class DeleteCommand extends Command {
     public DeleteCommand() {
         super("delete");
     }
 
     /**
-     * The execute() method in DeleteCommand deletes a given command.
+     * execute() method in DeleteCommand to Delete a task from the TaskList.
      *
-     * @param des the user input into the Duke chat-box.
-     * @throws DukeException if input number is not valid or if too many arguments
-     *                       are provided to deleteCommand().
+     * @param des   the user input into the Duke chat-box.
+     * @param tList the TaskList object used to keep track of all tasks.
+     * @throws DukeException if input for Delete command is not properly formatted.
      */
     @Override
     public void execute(String des, TaskList tList) throws DukeException {

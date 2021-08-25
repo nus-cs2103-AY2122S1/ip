@@ -1,5 +1,10 @@
 package duke.parser;
 
+/**
+ * Parser class used parse user input.
+ * Contains methods that
+ * (i)    checks for keywords present in user input and returns the keyword found.
+ */
 public class Parser {
     /**
      * The checkForKeyword() method in Parser checks user input for keywords and responds
