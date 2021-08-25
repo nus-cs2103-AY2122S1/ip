@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -91,14 +93,14 @@ public class DukeMemory {
                 return new Deadline(
                         joinFrom(String.valueOf(DELIMITER), parts, 3),
                         completed,
-                        by
+                        LocalDate.parse(parts[2], DateTimeFormatter.ISO_LOCAL_DATE)
                 );
             case "e":
                 String at = parts[2];
                 return new Event(
                         joinFrom(String.valueOf(DELIMITER), parts, 3),
                         completed,
-                        at
+                        LocalDate.parse(parts[2], DateTimeFormatter.ISO_LOCAL_DATE)
                 );
             default:
                 throw new DukeException("Invalid memory!");

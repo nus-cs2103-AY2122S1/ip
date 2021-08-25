@@ -23,7 +23,7 @@ public class Event extends Task {
     public String encode() {
         return "e" + DukeMemory.DELIMITER
                 + (this.isCompleted() ? "1" : "0") + DukeMemory.DELIMITER
-                + eventDateTime + DukeMemory.DELIMITER
+                + eventDate.format(DateTimeFormatter.ISO_LOCAL_DATE) + DukeMemory.DELIMITER
                 + this.getDescription();
     }
 }

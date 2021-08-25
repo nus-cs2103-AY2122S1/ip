@@ -23,7 +23,7 @@ public class Deadline extends Task {
     public String encode() {
         return "d" + DukeMemory.DELIMITER
                 + (this.isCompleted() ? "1" : "0") + DukeMemory.DELIMITER
-                + endDateTime + DukeMemory.DELIMITER
+                + endDate.format(DateTimeFormatter.ISO_LOCAL_DATE) + DukeMemory.DELIMITER
                 + this.getDescription();
     }
 }
