@@ -79,9 +79,11 @@ public class AddCommand extends Command {
 
     private void addTodo(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
         List<String>  inputArray = Arrays.asList(userInput.split(" "));
+
         if (inputArray.size() <= 1) {
             throw new DukeException("todo");
         }
+
         ArrayList<String> descriptionArray =  new ArrayList<String>(inputArray);
         descriptionArray.remove(0);
         String description = String.join(" ",descriptionArray);

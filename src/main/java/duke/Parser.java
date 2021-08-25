@@ -8,7 +8,7 @@ import duke.command.ExitCommand;
 import duke.command.PrintListCommand;
 
 public class Parser {
-    private static String[] SUPPORTED_COMMANDS = {"bye", "list", "done", "deadline", "event","todo", "delete"};
+    private final static String[] SUPPORTED_COMMANDS = {"bye", "list", "done", "deadline", "event","todo", "delete"};
 
     private static boolean isCommandSupported(String userInput) {
         boolean isSupported = false;

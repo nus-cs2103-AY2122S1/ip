@@ -26,10 +26,12 @@ public class PrintListCommand extends Command {
 
     private void printList(TaskList taskList, Ui ui) {
         StringBuilder outputList = new StringBuilder();
+
         for (int i = 0; i < taskList.size(); i++) {
             Task currentTask = taskList.get(i);
             outputList.append(String.format("%d.%s\n", i + 1, currentTask));
         }
+
         ui.printMessage(outputList.toString());
     }
 }

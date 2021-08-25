@@ -27,8 +27,10 @@ public class DeleteCommand extends Command {
         String[] inputArray = userInput.split(" ");
         Task removedTask = taskList.deleteTask(Integer.parseInt(inputArray[1]) - 1);
         storage.saveData(taskList);
-        String deleteMessage = String.format("Noted. I've removed this duke.task: \n%s\nNow you have %d tasks in the list.",
-                                    removedTask, taskList.size());
+        String deleteMessage = String
+                .format("Noted. I've removed this duke.task: \n%s\nNow you have %d tasks in the list.",
+                        removedTask, taskList.size());
+
         ui.printMessage(deleteMessage);
     }
 }
