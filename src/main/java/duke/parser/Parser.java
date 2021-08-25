@@ -1,6 +1,14 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExceptionCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.UnknownCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -81,6 +89,12 @@ public class Parser {
                 timeString = dateTimeArr[1];
                 task = new Event(description, dateString, timeString);
                 return new AddCommand(task);
+            case "find":
+                if (words.length < 2) {
+                    throw new DukeException("☹ OOPS!!! Please provide some words to find in the list of tasks.");
+                }
+                rest = words[1];
+                return new FindCommand(rest);
             default:
                 return new UnknownCommand();
             }

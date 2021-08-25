@@ -88,4 +88,8 @@ public class Ui {
     public void showLoadingError() {
         System.out.println("ERROR LOADING FILE");
     }
+
+    public void printMessage(String s) {
+        System.out.println(s);
+    }
 }
