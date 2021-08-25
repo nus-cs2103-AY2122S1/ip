@@ -1,1 +1,2 @@
-[E][ ] attend Lecture ->at: 2021-12-09
+[T][X] borrow book
+[E][ ] add ->at: 2021-12-12
