@@ -28,6 +28,10 @@ public class UserInterface {
         System.out.println(message);
     }
 
+    public void displayError(String error) {
+        System.err.println(error);
+    }
+
     public String getResponse() {
         String response = "";
         while (response.equals("")) {
