@@ -7,18 +7,17 @@ import duke.UI;
 import duke.task.Task;
 
 public class DeleteCommand extends Command {
-    private final Task task;
     private final int index;
 
-    public DeleteCommand(Task task, int index) {
-        this.task = task;
+    public DeleteCommand(int index) {
         this.index = index;
     }
 
     @Override
     public void execute(Tasklist tasks, UI ui, FileManager fileManager) throws DukeException {
+        Task removedTask = tasks.getTask(this.index);
         tasks.delete(this.index);
-        ui.deleteTask(tasks.getTask(this.index));
+        ui.deleteTask(removedTask);
         fileManager.updateTaskList(tasks, ui);
     }
 

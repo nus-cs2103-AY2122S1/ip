@@ -10,10 +10,10 @@ import java.util.stream.Stream;
 public class Parser {
     public static Command parse(String input) throws DukeException {
         if (input.replaceAll("\\s+","").toLowerCase().equals("bye")) {
-            return Command.makeCommand(CommandsTypes.Exit, null, 0);
+            return Command.makeCommand(CommandsTypes.Exit);
         }
         if (input.replaceAll("\\s+","").toLowerCase().equals("list")) {
-            return Command.makeCommand(CommandsTypes.List, null, 0);
+            return Command.makeCommand(CommandsTypes.List);
         }
         String[] splitBySpace = input.split(" ");
         if (splitBySpace.length < 2) {
@@ -25,7 +25,7 @@ public class Parser {
                 if (index < 1) {
                     throw new NumberFormatException();
                 }
-                return Command.makeCommand(CommandsTypes.MarkDone, null, index);
+                return Command.makeCommand(CommandsTypes.MarkDone, index);
             } catch (NumberFormatException e) {
                 throw new DukeException("Invalid index inputted after done. Please enter a positive integer");
             }
@@ -36,15 +36,20 @@ public class Parser {
                 if (index < 1) {
                     throw new NumberFormatException();
                 }
-                return Command.makeCommand(CommandsTypes.Delete, null, index);
+                return Command.makeCommand(CommandsTypes.Delete, index);
             } catch (NumberFormatException e) {
                 throw new DukeException("Invalid index inputted after delete. Please enter a positive integer");
             }
+        }
+
+        if (splitBySpace[0].toLowerCase().equals("find")) {
+            String keyword = splitBySpace[1];
+            return Command.makeCommand(CommandsTypes.Find, keyword);
         }
         String type = splitBySpace[0].toLowerCase();
         String taskDescription = Stream.of(input.split(" "))
                 .skip(1).reduce("", (x, y) -> x + " " + y);
         Task newTask = Task.makeTask(type, taskDescription);
-        return Command.makeCommand(CommandsTypes.Add, newTask, 0);
+        return Command.makeCommand(CommandsTypes.Add, newTask);
     }
 }

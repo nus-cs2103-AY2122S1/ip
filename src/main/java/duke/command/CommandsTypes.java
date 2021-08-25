@@ -5,5 +5,6 @@ public enum CommandsTypes {
     Add,
     Delete,
     MarkDone,
-    List
+    List,
+    Find
 }

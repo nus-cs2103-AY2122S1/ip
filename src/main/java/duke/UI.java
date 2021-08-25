@@ -41,4 +41,9 @@ public class UI {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
+
+    public void printRelatedTasks(Tasklist task, String keyword) {
+        System.out.println("Your match tasks with " + keyword + ":");
+        this.printList(task);
+    }
 }
