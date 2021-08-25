@@ -1,5 +1,8 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Task {
-    private String taskName;
+    private final String taskName;
     private boolean isDone;
 
     public Task(String taskName) {
@@ -18,6 +21,14 @@ public class Task {
 
     public String toSaveData() {
         return this.isDone + "|" + this.taskName;
+    }
+
+    public boolean hasSameDate(LocalDate date) {
+        return false;
+    }
+
+    public boolean isBeforeDate(LocalDateTime dateTime) {
+        return false;
     }
 
     @Override

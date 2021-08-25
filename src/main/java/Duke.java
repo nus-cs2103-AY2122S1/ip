@@ -12,6 +12,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.stream.Collectors;
+
 public class Duke {
     private static final String FORMAT = "\t%s\n";
     private static final String LINE = "______________________________________________________";
@@ -75,6 +81,12 @@ public class Duke {
                     runDeleteCommand(input, tasks);
                     saveTasksToFile(tasks);
                     break;
+                case ONDATE:
+                    runOnDateCommand(input, tasks);
+                    break;
+                case DUE:
+                    runDueCommand(input, tasks);
+                    break;
                 default:
                     throw new DukeException("You have entered an invalid command.");
                 }
@@ -96,12 +108,31 @@ public class Duke {
         }
     }
 
-    // Helper function to separate a string into taskName and date
-    private static String[] splitWith(String input, int startIndex, String regex) throws DukeException {
+    // Helper function to separate a string into pieces (e.g. input into taskName and dateTime)
+    private static String[] splitWith(String input, int startIndex, String regex, String errorMessage)
+            throws DukeException {
         if (startIndex >= input.length() || !input.contains(regex)) {
-            throw new DukeException("Command must be in the format: [taskName]" + regex + "[date]");
+            throw new DukeException(errorMessage);
         }
         return input.substring(startIndex).split(regex);
+    }
+
+    // Helper function to parse a date from an input
+    private static LocalDate parseDateFromInput(String dateString) throws DukeException {
+        try {
+            return LocalDate.parse(dateString);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Date must be of the form YYYY-MM-DD, and must be a real/valid date.");
+        }
+    }
+
+    // Helper function to parse a time from and input
+    private static LocalTime parseTimeFromInput(String timeString) throws DukeException {
+        try {
+            return LocalTime.parse(timeString);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Time must be of the form HH:MM. (HH from 00-23, MM from 00-59)");
+        }
     }
 
     // Abstraction to make main function neater
@@ -154,17 +185,30 @@ public class Duke {
             task = new Todo(input.substring(5));
             break;
         case DEADLINE:
-            String[] splitInput = splitWith(input, 9, " /by ");
+            // Add Deadline task
+            String errorMessage = "Command must be in the format: [taskName] /by "
+                    + "[date(YYYY-MM-DD)] [time(HH:MM)].";
+            String[] splitInput = splitWith(input, 9, " /by ", errorMessage);
             String taskName = splitInput[0];
-            String date = splitInput[1];
-            task = new Deadline(taskName, date);
+            errorMessage = "Date and time must be in the format: YYYY-MM-DD HH:MM.";
+            String[] dateTime = splitWith(splitInput[1], 0, " ", errorMessage);
+            String date = dateTime[0];
+            String time = dateTime[1];
+            task = new Deadline(taskName, parseDateFromInput(date), parseTimeFromInput(time));
             break;
         default: // default is guaranteed to be event task due to use of enum + outer control flow
             // Add Event task
-            splitInput = splitWith(input, 6, " /at ");
+            errorMessage = "Command must be in the format: [taskName] /at "
+                    + "[date(YYYY-MM-DD)] [start time(HH:MM)] [end time(HH:MM)].";
+            splitInput = splitWith(input, 6, " /at ", errorMessage);
             taskName = splitInput[0];
-            date = splitInput[1];
-            task = new Event(taskName, date);
+            errorMessage = "Date and times must be in the format: YYYY-MM-DD HH:MM HH:MM.";
+            dateTime = splitWith(splitInput[1], 0, " ", errorMessage);
+            date = dateTime[0];
+            String startTime = dateTime[1];
+            String endTime = dateTime[2];
+            task = new Event(taskName, parseDateFromInput(date),
+                    parseTimeFromInput(startTime), parseTimeFromInput(endTime));
             break;
         }
 
@@ -226,10 +270,13 @@ public class Duke {
                 tasks.add(new Todo(taskData[2], Boolean.parseBoolean(taskData[1])));
                 break;
             case("D"):
-                tasks.add(new Deadline(taskData[2], Boolean.parseBoolean(taskData[1]), taskData[3]));
+                tasks.add(new Deadline(taskData[2], Boolean.parseBoolean(taskData[1]),
+                        parseDateFromInput(taskData[3]), parseTimeFromInput(taskData[4])));
                 break;
             case("E"):
-                tasks.add(new Event(taskData[2], Boolean.parseBoolean(taskData[1]), taskData[3]));
+                tasks.add(new Event(taskData[2], Boolean.parseBoolean(taskData[1]),
+                        parseDateFromInput(taskData[3]), parseTimeFromInput(taskData[4]),
+                        parseTimeFromInput(taskData[5])));
                 break;
             default:
                 throw new DukeException("Save file contains invalid task data (Invalid task type)");
@@ -239,4 +286,71 @@ public class Duke {
         return tasks;
     }
 
+    // Abstraction to make main function neater, lists all tasks on the inputted date
+    private static void runOnDateCommand(String input, List<Task> tasks) throws DukeException {
+        if (input.length() <= 7) {
+            throw new DukeException("Date must be of the form YYYY-MM-DD, and must be a real/valid date.");
+        }
+        String dateString = input.substring(7);
+        LocalDate date = parseDateFromInput(dateString);
+        List<Task> onDateTasks = tasks.stream()
+                .filter(task -> task.hasSameDate(date))
+                .collect(Collectors.toList());
+
+        System.out.printf(FORMAT, LINE);
+        if (onDateTasks.size() == 0) {
+            System.out.printf(FORMAT, "You do not have any tasks occurring before this date.");
+        } else {
+            System.out.printf(FORMAT, "Here are the tasks occurring on this date:");
+            for (int i = 0; i < onDateTasks.size(); i++) {
+                System.out.printf("\t%d.%s\n", i + 1, onDateTasks.get(i));
+            }
+        }
+        System.out.printf(FORMAT, LINE);
+    }
+
+    // Abstraction to make main function neater
+    // Lists all tasks that are due X hours/days from now (from timezone of device)
+
+    private static void runDueCommand(String input, List<Task> tasks) throws DukeException {
+        // Check if input is valid and input number is an integer
+        if (input.length() <= 4 || !input.substring(4, input.length() - 1).matches("\\d+")) {
+            throw new DukeException("Command must be of the form: due [integer][h/d/m] "
+                    + "(h = hours, d = days, m = months)");
+        }
+
+        String offset = input.substring(4, input.length() - 1);
+        LocalDateTime dateTime = LocalDateTime.now();
+        switch (input.charAt(input.length() - 1)) {
+        case('h'):
+            dateTime = dateTime.plusHours(Integer.parseInt(offset));
+            break;
+        case('d'):
+            dateTime = dateTime.plusDays(Integer.parseInt(offset));
+            break;
+        case('m'):
+            dateTime = dateTime.plusMonths(Integer.parseInt(offset));
+            break;
+        default:
+            throw new DukeException("Command must be of the form: due [integer][h/d/m] "
+                    + "(h = hours, d = days, m = months)");
+        }
+
+        // Copy dateTime to an effectively final variable for use in lambda
+        LocalDateTime finalDateTime = dateTime;
+        List<Task> beforeDateTasks = tasks.stream()
+                .filter(task -> task.isBeforeDate(finalDateTime))
+                .collect(Collectors.toList());
+
+        System.out.printf(FORMAT, LINE);
+        if (beforeDateTasks.size() == 0) {
+            System.out.printf(FORMAT, "You do not have any tasks occurring within this time period.");
+        } else {
+            System.out.printf(FORMAT, "Here are the tasks occurring within this time period:");
+            for (int i = 0; i < beforeDateTasks.size(); i++) {
+                System.out.printf("\t%d.%s\n", i + 1, beforeDateTasks.get(i));
+            }
+        }
+        System.out.printf(FORMAT, LINE);
+    }
 }
