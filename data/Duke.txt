@@ -1,4 +1,6 @@
 Do these soon!!
-[D][ ] hw (by Oct 15 2019)
-[E][ ] hw (at 5pm)
-
+[T][ ] homework
+[T][ ] assignment
+[D][ ] homework (by: deadline homework (by: 4pm))
+[E][ ] party (at: event party (at: 3pm))
+[T][ ] hw
