@@ -15,20 +15,20 @@ public class Parser {
     /**
      * Returns parsed command which involves time.
      * 
-     * @param splitted An array of words in the command.
+     * @param words An array of words in the command.
      * @param isEvent Whether the command is an `event` command.
      * @return Parsed command.
      * @throws DukeException If command is invalid.
      */
-    private static Command parseCommandWithTime(String[] splitted, boolean isEvent) throws DukeException {
+    private static Command parseCommandWithTime(String[] words, boolean isEvent) throws DukeException {
         // Determine key information based on type of the task
         String timeFormat = isEvent ? "yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm" : "yyyy-MM-dd HH:mm";
         String regex = isEvent ? "/at" : "/by";
         String taskType = isEvent ? "event" : "deadline";
 
         // Parse the command
-        if (splitted.length >= 2) {
-            String[] information = splitted[1].split(regex);
+        if (words.length >= 2) {
+            String[] information = words[1].split(regex);
             if (information.length == 2) {
                 try {
                     return new AddTaskCommand(new Event(information[0], information[1]));
@@ -49,15 +49,15 @@ public class Parser {
     /**
      * Returns parsed command which involves a task number.
      *
-     * @param splitted An array of words in the command.
+     * @param words An array of words in the command.
      * @param isDoneCommand Whether the command is a `done` command.
      * @return Parsed command.
      * @throws InvalidTaskNoException If task number is invalid.
      */
     private static Command parseCommandWithTaskNo(
-            String[] splitted, boolean isDoneCommand) throws InvalidTaskNoException {
+            String[] words, boolean isDoneCommand) throws InvalidTaskNoException {
         try {
-            int index = Integer.parseInt(splitted[1]) - 1;
+            int index = Integer.parseInt(words[1]) - 1;
             return isDoneCommand ? new TaskDoneCommand(index) : new DeleteTaskCommand(index);
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidTaskNoException();
@@ -73,30 +73,30 @@ public class Parser {
      */
     public static Command parse(String command) throws DukeException {
         // Split the command into two phrases
-        String[] splitted = command.split(" ", 2);
+        String[] words = command.split(" ", 2);
 
         // Determine type of the command and return corresponding command instance
         if (command.equals("bye")) {
             return new ExitCommand();
         } else if (command.equals("list")) {
             return new GetListCommand();
-        } else if (splitted[0].equals("done")) {
-            return parseCommandWithTaskNo(splitted, true);
-        } else if (splitted[0].equals("delete")) {
-            return parseCommandWithTaskNo(splitted, false);
-        } else if (splitted[0].equals("todo")) {
-            if (splitted.length >= 2) {
-                return new AddTaskCommand(new ToDo(splitted[1]));
+        } else if (words[0].equals("done")) {
+            return parseCommandWithTaskNo(words, true);
+        } else if (words[0].equals("delete")) {
+            return parseCommandWithTaskNo(words, false);
+        } else if (words[0].equals("todo")) {
+            if (words.length >= 2) {
+                return new AddTaskCommand(new ToDo(words[1]));
             } else {
                 throw new MissingCommandDetailException("description","todo", "");
             }
-        } else if (splitted[0].equals("deadline")) {
-            return Parser.parseCommandWithTime(splitted, false);
-        } else if (splitted[0].equals("event")) {
-            return Parser.parseCommandWithTime(splitted, true);
-        } else if (splitted[0].equals("find")) {
-            if (splitted.length >= 2) {
-                return new FindTaskCommand(splitted[1]);
+        } else if (words[0].equals("deadline")) {
+            return Parser.parseCommandWithTime(words, false);
+        } else if (words[0].equals("event")) {
+            return Parser.parseCommandWithTime(words, true);
+        } else if (words[0].equals("find")) {
+            if (words.length >= 2) {
+                return new FindTaskCommand(words[1].trim());
             } else {
                 throw new MissingCommandDetailException("keyword","find", "");
             }
