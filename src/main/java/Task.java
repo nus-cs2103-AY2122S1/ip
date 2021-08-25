@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -20,13 +22,19 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public boolean isDone() { return this.isDone; }
+    public boolean isDone() {
+        return this.isDone;
+    }
 
     public String getFormattedData() {
         return this.getTaskIdentifier() + "|" + (this.isDone ? 1 : 0) + "|" + this.description;
     }
 
     public abstract String getTaskIdentifier();
+
+    public boolean hasDueDate(LocalDate dueDate) {
+        return false;
+    }
 
     @Override
     public String toString() {

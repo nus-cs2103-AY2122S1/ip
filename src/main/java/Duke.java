@@ -3,21 +3,26 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Duke {
 
     /**
      * Sends a message to the user in the specified format
+     * 
      * @param message The message to be sent to the user
      */
     protected static void sendMessage(String message) {
-        System.out.println("    ____________________________________________________________\n    " +
-                message.replace("\n", "\n    ") +
-                "\n    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n    "
+                + message.replace("\n", "\n    ")
+                + "\n    ____________________________________________________________");
     }
 
     protected static void writeTasksToFile(String pathName, List<Task> taskData) throws IOException {
@@ -26,7 +31,7 @@ public class Duke {
             writer.write(taskData.get(0).getFormattedData() + "\n");
         }
 
-        for(int i = 1; i < taskData.size(); ++i) {
+        for (int i = 1; i < taskData.size(); ++i) {
             writer.append(taskData.get(i).getFormattedData() + "\n");
         }
 
@@ -36,13 +41,13 @@ public class Duke {
     protected static List<Task> loadTaskData(File taskFile) throws FileNotFoundException {
         Scanner sc = new Scanner(taskFile);
         List<Task> taskData = new ArrayList<>();
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String task = sc.nextLine();
 
             String[] taskDetails = task.split("\\|");
             boolean taskDone = Objects.equals(taskDetails[1], "1");
 
-            switch(taskDetails[0]) {
+            switch (taskDetails[0]) {
                 case "T":
                     taskData.add(new Todo(taskDetails[2], taskDone));
                     break;
@@ -59,17 +64,43 @@ public class Duke {
         return taskData;
     }
 
+    public static void printTaskList(List<Task> taskData) {
+        // Construct the string containing the list of items that have been stored in
+        // preparation to send to user
+        StringBuilder listMessage = new StringBuilder("Here are the tasks in your list:");
+
+        // Add all elements in the list
+        for (int i = 0; i < taskData.size(); ++i) {
+            listMessage.append("\n").append(i + 1).append(". ").append(taskData.get(i));
+        }
+
+        sendMessage(listMessage.toString());
+    }
+
+    public static void printTaskList(List<Task> taskData, LocalDate date) {
+        // Construct the string containing the list of items that have been stored in
+        // preparation to send to user
+        StringBuilder listMessage = new StringBuilder("Here are the tasks in your list that are due on ")
+                .append(date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))).append(":");
+
+        // Add all elements in the list
+        for (int i = 0; i < taskData.size(); ++i) {
+            listMessage.append("\n").append(i + 1).append(". ").append(taskData.get(i));
+        }
+
+        sendMessage(listMessage.toString());
+    }
+
     public static void main(String[] args) {
-//        final String pathDirectory = "data";
         final String fileName = "tasks.txt";
         final String pathName = fileName;
         final String welcomeMessage = "Hello! I'm Duke\nWhat can I do for you?";
 
         try (Scanner sc = new Scanner(System.in)) {
-//            File directory = new File(pathDirectory);
-//            if(!directory.mkdirs()) {
-//                sendMessage("Cannot create");
-//            }
+            // File directory = new File(pathDirectory);
+            // if(!directory.mkdirs()) {
+            // sendMessage("Cannot create");
+            // }
 
             File taskFile = new File(pathName);
             List<Task> taskData = new ArrayList<>();
@@ -99,7 +130,8 @@ public class Duke {
                         break;
                     } else if (userInput.equals("list")) {
                         // LIST command
-                        // Construct the string containing the list of items that have been stored in preparation to send to user
+                        // Construct the string containing the list of items that have been stored in
+                        // preparation to send to user
                         StringBuilder listMessage = new StringBuilder("Here are the tasks in your list:");
 
                         // Add all elements in the list
@@ -119,8 +151,8 @@ public class Duke {
                         Task removedTask = taskData.remove(index);
                         isTaskListUpdated = true;
 
-                        sendMessage("Noted. I've removed this task:\n  " + removedTask +
-                                "\nNow you have " + taskData.size() + " tasks in the list.");
+                        sendMessage("Noted. I've removed this task:\n  " + removedTask + "\nNow you have "
+                                + taskData.size() + " tasks in the list.");
                     } else if (userInput.startsWith("todo")) {
                         // If no arguments provided
                         if (userInput.length() == 4) {
@@ -134,7 +166,8 @@ public class Duke {
                         taskData.add(newTodo);
                         isTaskListUpdated = true;
 
-                        sendMessage("Got it. I've added this task:\n  " + newTodo + "\nNow you have " + taskData.size() + " tasks in the list.");
+                        sendMessage("Got it. I've added this task:\n  " + newTodo + "\nNow you have " + taskData.size()
+                                + " tasks in the list.");
                     } else if (userInput.startsWith("deadline")) {
                         // If no arguments provided
                         if (userInput.length() == 8) {
@@ -143,11 +176,13 @@ public class Duke {
                             // If it does not start with "deadline " after trimming, it is an invalid word
                             throw new DukeException("I'm sorry, but I don't know what that means :-(");
                         } else if (!userInput.contains("/by ")) {
-                            throw new DukeException(("A deadline must contain a deadline indicated after the /by command"));
+                            throw new DukeException(
+                                    ("A deadline must contain a deadline indicated after the /by command"));
                         }
 
                         String description = userInput.substring(9, userInput.indexOf("/by")).trim();
-                        String deadlineDate = userInput.substring(userInput.indexOf("/by")).trim(); // Inclusive of the /by command
+                        String deadlineDate = userInput.substring(userInput.indexOf("/by")).trim(); // Inclusive of the
+                                                                                                    // /by command
                         if (description.length() == 0) {
                             throw new DukeException("The description of a deadline cannot be empty");
                         }
@@ -156,7 +191,8 @@ public class Duke {
                         taskData.add(newDeadline);
                         isTaskListUpdated = true;
 
-                        sendMessage("Got it. I've added this task:\n  " + newDeadline + "\nNow you have " + taskData.size() + " tasks in the list.");
+                        sendMessage("Got it. I've added this task:\n  " + newDeadline + "\nNow you have "
+                                + taskData.size() + " tasks in the list.");
                     } else if (userInput.startsWith("event")) {
                         // If no arguments provided
                         if (userInput.length() == 5) {
@@ -165,11 +201,13 @@ public class Duke {
                             // If it does not start with "deadline " after trimming, it is an invalid word
                             throw new DukeException("I'm sorry, but I don't know what that means :-(");
                         } else if (!userInput.contains("/at ")) {
-                            throw new DukeException(("An event must contain a datetime indicated after the /at command"));
+                            throw new DukeException(
+                                    ("An event must contain a datetime indicated after the /at command"));
                         }
 
                         String description = userInput.substring(5, userInput.indexOf("/at")).trim();
-                        String datetime = userInput.substring(userInput.indexOf("/at")).trim(); // Inclusive of the /by command
+                        String datetime = userInput.substring(userInput.indexOf("/at")).trim(); // Inclusive of the /by
+                                                                                                // command
                         if (description.length() == 0) {
                             throw new DukeException("The description of an event cannot be empty");
                         }
@@ -178,13 +216,30 @@ public class Duke {
                         taskData.add(newEvent);
                         isTaskListUpdated = true;
 
-                        sendMessage("Got it. I've added this task:\n  " + newEvent + "\nNow you have " + taskData.size() + " tasks in the list.");
+                        sendMessage("Got it. I've added this task:\n  " + newEvent + "\nNow you have " + taskData.size()
+                                + " tasks in the list.");
+                    } else if (userInput.startsWith("date")) {
+                        if (userInput.length() == 4) {
+                            throw new DukeException(
+                                    "A date must be provided to find events and deadlines occurring on that day");
+                        } else if (!userInput.startsWith("date ")) {
+                            // If it does not start with "date " after trimming, it is an invalid command
+                            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                        }
+                        LocalDate queryDate = LocalDate.parse(userInput.substring(5));
+
+                        List<Task> dueTasks = taskData.stream().filter(x -> x.hasDueDate(queryDate))
+                                .collect(Collectors.toList());
+
+                        printTaskList(dueTasks, queryDate);
                     } else {
                         // Unknown command
                         throw new DukeException(("I'm sorry, but I don't know what that means :-("));
                     }
                 } catch (DukeException e) {
                     sendMessage(e.getMessage());
+                } catch (DateTimeParseException e) {
+                    sendMessage("Unknown date format. Please input a valid date in the format: YYYY-MM-DD");
                 }
             }
         } catch (IOException e) {
