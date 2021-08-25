@@ -65,4 +65,14 @@ public class Task {
     public String getSaveFormat() {
         return (isDone ? "1" : "0") + "|" + this.description;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Task) {
+            Task otherTask = (Task) other;
+            return this.description.equals(otherTask.description) && this.isDone == otherTask.isDone;
+        } else {
+            return false;
+        }
+    }
 }

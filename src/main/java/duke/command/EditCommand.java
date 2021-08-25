@@ -41,4 +41,14 @@ public class EditCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof EditCommand) {
+            EditCommand otherCommand = (EditCommand) other;
+            return this.editType == otherCommand.editType && this.taskIndex == otherCommand.taskIndex;
+        } else {
+            return false;
+        }
+    }
 }

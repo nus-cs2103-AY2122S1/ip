@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 /**
  * The duke.task.ToDo class encapsulates a duke.task to be done by the user.
  */

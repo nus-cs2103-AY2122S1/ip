@@ -59,4 +59,14 @@ public class Deadline extends Task {
     public String getSaveFormat() {
         return "D|" + super.getSaveFormat() + "|" + this.by + '\n';
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Deadline) {
+            Deadline otherDeadline = (Deadline) other;
+            return super.equals(otherDeadline) && this.by.equals(otherDeadline.by);
+        } else {
+            return false;
+        }
+    }
 }

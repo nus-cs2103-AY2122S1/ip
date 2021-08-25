@@ -59,4 +59,14 @@ public class Event extends Task {
     public String getSaveFormat() {
         return "E|" + super.getSaveFormat() + "|" + this.at + '\n';
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Event) {
+            Event otherEvent = (Event) other;
+            return super.equals(otherEvent) && this.at.equals(otherEvent.at);
+        } else {
+            return false;
+        }
+    }
 }

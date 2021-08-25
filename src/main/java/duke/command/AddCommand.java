@@ -42,4 +42,16 @@ public class AddCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof AddCommand) {
+            AddCommand otherCommand = (AddCommand) other;
+            return this.taskType == otherCommand.taskType
+                    && this.taskDescription.equals(otherCommand.taskDescription)
+                    && this.date.equals(otherCommand.date);
+        } else {
+            return false;
+        }
+    }
 }
