@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Deadline extends Task{
     private Date date;
-    protected static final String DEADLINE_LABEL = "[D]";
+    protected static final String DEADLINE_LABEL = "D";
 
     public Deadline(String str) throws DukeDateParseException {
         super(str.split(" /", 2)[0]);

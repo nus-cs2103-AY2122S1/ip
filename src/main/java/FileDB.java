@@ -6,10 +6,11 @@ public class FileDB {
     public static String DEFAULT_SAVE = "ip/src/main/resources/storage.txt";
     private File fileDB;
     private boolean alreadyExists;
+    private Parser parser;
 
     public FileDB() throws DukeIOException{
-//        ClassLoader classLoader = getClass().getClassLoader();
         this.fileDB = new File(DEFAULT_SAVE);
+        this.parser = new Parser();
         this.alreadyExists = false;
         try {
             this.alreadyExists = this.fileDB.createNewFile();
@@ -25,6 +26,7 @@ public class FileDB {
 
     public FileDB(String location) throws DukeIOException{
         this.fileDB = new File(location);
+        this.parser = new Parser();
         this.alreadyExists = false;
         try {
             this.alreadyExists = this.fileDB.createNewFile();
@@ -35,7 +37,7 @@ public class FileDB {
 
     public void save(Task task) throws DukeIOException {
         try {
-            String parseTask = this.parse(task);
+            String parseTask = this.parser.parseTask(task);
             FileWriter fileWriter = new FileWriter(this.fileDB, true);
             fileWriter.write(parseTask + '\n');
             fileWriter.close();
@@ -44,22 +46,5 @@ public class FileDB {
         } catch (DukeNoDateException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    // TODO: make an interface called taskparseable?
-    public String parse(Task task) throws DukeNoDateException {
-        String taskType = task.getTaskType();
-        String isCompleted = String.valueOf(task.isDone);
-        String description = task.description;
-        String date = "";
-        if (task instanceof Deadline || task instanceof Event) {
-            try {
-                date = task.getDate();
-            } catch (DukeNoDateException e) {
-                throw e;
-            }
-        }
-        String data = taskType + "|" + isCompleted + "|" + description + (date.equals("") ? "" : "|" + date);
-        return data;
     }
 }
