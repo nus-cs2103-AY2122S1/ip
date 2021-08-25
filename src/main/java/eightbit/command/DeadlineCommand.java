@@ -5,6 +5,9 @@ import eightbit.util.Storage;
 import eightbit.util.TaskList;
 import eightbit.util.Ui;
 
+/**
+ * Represents a command to add a deadline.
+ */
 public class DeadlineCommand extends Command {
 
     private final Deadline deadline;

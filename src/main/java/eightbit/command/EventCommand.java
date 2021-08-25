@@ -5,6 +5,9 @@ import eightbit.util.Storage;
 import eightbit.util.TaskList;
 import eightbit.util.Ui;
 
+/**
+ * Represents a command to add an event.
+ */
 public class EventCommand extends Command {
 
     private final Event event;

@@ -5,6 +5,9 @@ import eightbit.util.Storage;
 import eightbit.util.TaskList;
 import eightbit.util.Ui;
 
+/**
+ * Represents a command to add a todo.
+ */
 public class ToDoCommand extends Command {
 
     private final ToDo toDo;

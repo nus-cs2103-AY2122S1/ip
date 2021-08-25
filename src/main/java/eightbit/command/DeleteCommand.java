@@ -6,6 +6,9 @@ import eightbit.util.Storage;
 import eightbit.util.TaskList;
 import eightbit.util.Ui;
 
+/**
+ * Represents a command to delete a task.
+ */
 public class DeleteCommand extends Command {
 
     private final int index;

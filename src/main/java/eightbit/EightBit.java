@@ -16,6 +16,11 @@ public class EightBit {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Constructor.
+     *
+     * @param filepath Path of file to store the tasks in local machine.
+     */
     public EightBit(String filepath) {
         this.filepath = filepath;
         this.storage = new Storage(filepath);
@@ -23,6 +28,10 @@ public class EightBit {
         this.ui = new Ui();
     }
 
+    /**
+     * Starts the chat bot.
+     * Displays a welcome message, takes in user inputs, and displays exit message at the end.
+     */
     public void run() {
         ui.showWelcome();
 

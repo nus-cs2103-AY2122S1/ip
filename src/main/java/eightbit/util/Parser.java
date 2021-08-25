@@ -9,8 +9,18 @@ import eightbit.task.ToDo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Responsible for handling the user commands.
+ */
 public class Parser {
 
+    /**
+     * Converts a user input to a Command that can be executed.
+     *
+     * @param command User input.
+     * @return Command containing the details of the user input.
+     * @throws EightBitException If user input is invalid.
+     */
     public static Command parse(String command) throws EightBitException {
         String[] inputs = command.split(" ");
         CommandType commandType = getCommandType(inputs[0]);
