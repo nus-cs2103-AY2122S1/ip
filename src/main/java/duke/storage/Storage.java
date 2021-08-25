@@ -16,9 +16,25 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+/**
+ * Encapsulates a storage to store the tasks of the user.
+ * This class helps with operations concerning the
+ * saving of new tasks and loading of old tasks from the hard disk.
+ *
+ * @author: Jason Ng
+ * @version: Duke Level-8
+ */
 public class Storage {
+    /** Filename of the taskList */
     private static final String FileName = "duke.txt";
 
+    /**
+     * Saves current taskList into the hard disk.
+     * TaskList is saved as a .txt file.
+     * The filename of the file is stored in the attribute Filename of the class.
+     *
+     * @param taskList The taskList to be saved.
+     */
     public void Save(TaskList taskList) {
         try {
             ArrayList<Task> arr = taskList.getEntire();
@@ -47,6 +63,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads a previously stored taskList from the hard disk.
+     * The filename of the file is stored in the attribute Filename of the class.
+     * If the file does not exist, an empty taskList is instantiated and returned.
+     *
+     * @return The previously stored taskList, or if it is unavailable, an empty taskList.
+     */
     public static ArrayList<Task> Load() {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(FileName);
