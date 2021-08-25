@@ -138,4 +138,21 @@ public class TaskList {
     public void addTask(Task task) {
         this.taskList.add(task);
     }
+
+    public String find(String query) {
+        StringBuilder output = new StringBuilder("Here is the list of tasks that match query '" +
+                query + "':\n");
+        int count = 0;
+        for (Task currentTask : taskList) {
+            if (currentTask.getTaskName().contains(query)) {
+                output.append(count + 1).append(". ").append(currentTask).append("\n");
+                count++;
+            }
+        }
+        if (count == 0) {
+            return "OOPS! No task has a description that matches your query!";
+        } else {
+            return output.toString();
+        }
+    }
 }

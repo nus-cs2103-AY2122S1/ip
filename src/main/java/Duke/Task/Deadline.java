@@ -51,11 +51,4 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by " + date + ")";
     }
 
-    public String getTaskDescription() {
-        return this.taskDescription;
-    }
-
-    public String getDate() {
-        return this.date;
-    }
 }

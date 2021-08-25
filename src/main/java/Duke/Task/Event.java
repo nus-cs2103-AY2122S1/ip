@@ -51,11 +51,4 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at " + date + ")";
     }
 
-    public String getTaskDescription() {
-        return this.taskDescription;
-    }
-
-    public String getDate() {
-        return this.date;
-    }
 }

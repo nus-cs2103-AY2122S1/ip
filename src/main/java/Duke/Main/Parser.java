@@ -59,6 +59,8 @@ public class Parser {
             } else {
                 return taskList.delete(getNum(description));
             }
+        case "find":
+            return taskList.find(description);
         default:
             throw new DukeException("Error: ", DukeException.Type.SYNTAX_ERROR);
         }
