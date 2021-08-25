@@ -36,7 +36,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 
     /**
@@ -54,7 +54,7 @@ public class Task {
      * @return String representation of the task for file writing.
      */
     public String saveString() {
-        return this.isDone + "," + this.description;
+        return isDone + "," + description;
     }
 
 }

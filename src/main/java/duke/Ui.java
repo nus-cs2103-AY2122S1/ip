@@ -7,30 +7,29 @@ import java.util.Scanner;
  * The Ui class handles the input and output of the program.
  */
 public class Ui {
-    private Scanner scanner;
-    private String seperator = "----------------------------------------";
-    private final String logo =
-            "----------------------------------------\n"
-            + " ____        _        \n"
-            + "|  _ \\  ___ | | _____ \n"
-            + "| | | |/ _ \\| |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\___/|_|\\_\\___|\n"
-            + "Hello! I'm Doke\nWhat do you want??\n"
-            + "----------------------------------------";
+    private final Scanner SCANNER;
+    private String separator = "----------------------------------------";
 
     /**
      * Constructor for Ui.
      */
     public Ui() {
-        this.scanner = new Scanner(System.in);
+        this.SCANNER = new Scanner(System.in);
     }
 
     /**
      * Shows the welcome message
      */
     public void showWelcome() {
-        System.out.println(logo);
+        String LOGO = "----------------------------------------\n"
+                + " ____        _        \n"
+                + "|  _ \\  ___ | | _____ \n"
+                + "| | | |/ _ \\| |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\___/|_|\\_\\___|\n"
+                + "Hello! I'm Doke\nWhat do you want??\n"
+                + "----------------------------------------";
+        System.out.println(LOGO);
     }
 
     /**
@@ -39,7 +38,7 @@ public class Ui {
      * @return The input from the user
      */
     public String readInput() {
-        String input = this.scanner.nextLine();
+        String input = SCANNER.nextLine();
         return input;
     }
 
@@ -54,13 +53,13 @@ public class Ui {
      * Lists the items in the list in the order added, along with a counter.
      */
     public void showList(ArrayList<String> taskList) {
-        System.out.println(seperator);
+        System.out.println(separator);
         int count = 1;
         for (String s : taskList) {
             System.out.println(count + ". " + s);
             count++;
         }
-        System.out.println(seperator);
+        System.out.println(separator);
     }
 
     /**
@@ -69,9 +68,9 @@ public class Ui {
      * @param message The message to be displayed.
      */
     public void writeOutput(String message) {
-        System.out.println(seperator);
+        System.out.println(separator);
         System.out.println(message);
-        System.out.println(seperator);
+        System.out.println(separator);
     }
 
     /**

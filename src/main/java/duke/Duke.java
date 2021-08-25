@@ -33,7 +33,7 @@ public class Duke {
      * Runs the program.
      */
     public void run() {
-        this.ui.showWelcome();
+        ui.showWelcome();
         boolean end = false;
         while (!end) {
             String input = ui.readInput();
