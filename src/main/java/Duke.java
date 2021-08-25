@@ -1,4 +1,10 @@
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
@@ -23,6 +29,11 @@ public class Duke {
 
     public static void introduceDuke() {
         Scanner sc = new Scanner(System.in);
+        try {
+            loadPastTasks();
+        } catch (IOException e) {
+            System.out.println("Error writing to tasks.txt file");
+        }
         String introduction = "Hello, I am Ah Seng, the foodcourt uncle. Come chitchat with me.";
         formatMessages(introduction);
         respondTo(sc);
@@ -117,5 +128,60 @@ public class Duke {
     public static boolean containsDelete(String input) {
         String first = input.split(" ")[0];
         return first.equalsIgnoreCase("delete");
+    }
+
+    public static void loadPastTasks() throws IOException {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("./tasks.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (!line.equals("Tasks:")) {
+                    Task task = convertToTask(line);
+                    todolist.insertTask(task);
+                }
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            File file = new File("./tasks.txt");
+            file.createNewFile();
+        }
+    }
+
+    public static Task convertToTask(String output) {
+        char type = output.charAt(1);
+        char done = output.charAt(4);
+        String taskAndDate = output.substring(7);
+
+        Task task;
+        if (type == 'T') {
+            task = new Todo(taskAndDate);
+        } else if (type == 'D') {
+            // Deadlines
+            if (taskAndDate.contains("(by: ")) {
+                String name = taskAndDate.split(" \\(by: ")[0];
+                String date = taskAndDate.split(" \\(by: ")[1];
+
+                // Chop of last ")"
+                date = date.substring(0, date.length()-1);
+                task = new Deadline(name, " " + date);
+            } else {
+                task = new Deadline(taskAndDate, "");
+            }
+        } else {
+            // Events
+            if (taskAndDate.contains("(at: ")) {
+                String name = taskAndDate.split(" \\(at: ")[0];
+                String date = taskAndDate.split(" \\(at: ")[1];
+
+                // Chop of last ")"
+                date = date.substring(0, date.length()-1);
+                task = new Event(name, " " + date);
+            } else {
+                task = new Event(taskAndDate, "");
+            }
+        }
+        task.type = type;
+        task.done = done == 'X';
+        return task;
     }
 }

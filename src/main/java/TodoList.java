@@ -1,3 +1,8 @@
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class TodoList {
@@ -20,6 +25,11 @@ public class TodoList {
         }
 
         return output.toString();
+    }
+
+
+    public void insertTask(Task task) {
+        list.add(task);
     }
 
     public String insertTask(String input) throws NoDescriptionException {
@@ -57,6 +67,9 @@ public class TodoList {
         }
 
         list.add(task);
+        // Make Changes to txt file.
+        changeTxtFile();
+
         return "OK uncle added a task for you liao.\n" + "      " + task.toString()
                 + "\n      You now have " + list.size() + " tasks remaining.";
     }
@@ -65,7 +78,9 @@ public class TodoList {
         if (index < 1 || index > list.size()) {
             throw new IndexNotInListException("Haiyo, you sure there is a task " + index + " anot...");
         } else {
-            return list.get(index-1).completeTask();
+            String s = list.get(index-1).completeTask();
+            changeTxtFile();
+            return s;
         }
     }
 
@@ -74,9 +89,30 @@ public class TodoList {
             throw new IndexNotInListException("Haiyo, you sure there is a task " + index + " anot...");
         } else {
             Task task = list.remove(index-1);
+            changeTxtFile();
             return "OK, uncle removed a task for you liao.\n" + "      " + task.toString()
                     + "\n      You now have " + list.size() + " tasks remaining.";
         }
     }
 
+    public void changeTxtFile() {
+        BufferedWriter bw;
+        try {
+            bw = new BufferedWriter(new FileWriter("./tasks.txt"));
+            for (Task t : list) {
+                if (t.type == 'D') {
+                    Deadline dl = (Deadline) t;
+                    bw.write(dl + "\n");
+                } else if (t.type == 'E') {
+                    Event e = (Event) t;
+                    bw.write(e + "\n");
+                } else {
+                    bw.write(t + "\n");
+                }
+            }
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Error reading and writing file.");
+        }
+    }
 }
