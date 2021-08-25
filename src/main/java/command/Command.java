@@ -33,6 +33,9 @@ public abstract class Command {
             case "delete":
                 cmd = new DeleteCommand(cmd_args[1]);
                 break;
+            case "find":
+                cmd = new FindCommand(cmd_args[1]);
+                break;
             case "todo":
                 cmd = new TodoCommand(cmd_args[1]);
                 break;

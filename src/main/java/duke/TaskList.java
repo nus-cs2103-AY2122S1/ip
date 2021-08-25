@@ -67,6 +67,22 @@ public class TaskList {
     }
 
     /**
+     * Finds Task that contains keyword.
+     *
+     * @param keyword Keyword used to find Task.
+     */
+    public void findTasks(String keyword){
+        System.out.println("Matching task(s) are:");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            String name = t.getName();
+            if(name.contains(keyword)){
+                System.out.println(i + ": " + t.toString());
+            }
+        }
+    }
+
+    /**
      * Returns string representing task list to be saved to text file.
      *
      * @return String representing task list
