@@ -22,9 +22,9 @@ public class ToDo extends Task {
         String format = "T | ";
 
         if (this.isDone) {
-            format += "0 | ";
-        } else {
             format += "1 | ";
+        } else {
+            format += "0 | ";
         }
 
         format += this.description;

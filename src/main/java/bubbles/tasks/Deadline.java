@@ -24,9 +24,9 @@ public class Deadline extends Task {
         String format = "D | ";
 
         if (this.isDone) {
-            format += "0 | ";
-        } else {
             format += "1 | ";
+        } else {
+            format += "0 | ";
         }
 
         format += this.description;

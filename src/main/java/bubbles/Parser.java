@@ -12,7 +12,7 @@ public class Parser {
         String completed = arr[1];
         boolean isDone = false;
 
-        if (completed.equals("0")) {
+        if (completed.equals("1")) {
             isDone = true;
         }
 

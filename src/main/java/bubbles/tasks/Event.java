@@ -24,9 +24,9 @@ public class Event extends Task {
         String format = "E | ";
 
         if (this.isDone) {
-            format += "0 | ";
-        } else {
             format += "1 | ";
+        } else {
+            format += "0 | ";
         }
 
         format += this.description;
