@@ -5,6 +5,7 @@ import duke.DukeException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Encapsulates a list of tasks that the user wants to keep track of.
@@ -72,10 +73,21 @@ public class TaskList {
     /**
      * Gets all the tasks in the list.
      *
-     * @return the immutable list of tasks in this task list.
+     * @return the immutable list of tasks in this task list
      */
     public List<Task> getTasks() {
         return Collections.unmodifiableList(tasks);
+    }
+
+    /**
+     * Gets all the tasks in the list containing the string in the description.
+     *
+     * @param str the pattern to be matched with the task descriptions in the list
+     * @return the immutable list of tasks containing str in the description
+     */
+    public List<Task> getTasksContaining(String str) {
+        return tasks.stream().filter(task -> task.getDescription().contains(str))
+                .collect(Collectors.toUnmodifiableList());
     }
 
     /**

@@ -81,6 +81,13 @@ public enum LCommandsEnum {
             return "Usage: upcoming\n" +
                     "This will display all the upcoming tasks, in chronological order.";
         }
+    }, FIND() {
+        @Override
+        public String helpMessage() {
+            return "Usage: find <item>\n" +
+                    "For example: find book\n" +
+                    "This will list every task that contains \"book\".";
+        }
     };
 
     /**

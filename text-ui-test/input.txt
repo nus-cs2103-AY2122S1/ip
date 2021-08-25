@@ -32,4 +32,5 @@ delete
 list
 help help
 help something
+find homework
 bye

@@ -61,6 +61,9 @@ public class LCommandParser {
                 throw new DukeException(TOO_LITTLE_ARGUMENTS_MESSAGE);
             }
             switch (commandEnum) {
+            case FIND:
+                ui.printAllTasks(taskList.getTasksContaining(inputArr[1]));
+                break;
             case TODO: // fallthrough intended
             case EVENT: // fallthrough intended
             case DEADLINE:
@@ -96,7 +99,7 @@ public class LCommandParser {
     /**
      * Checks if the command given by the user is to exit.
      *
-     * @return true if and only if the command is to exit.
+     * @return true if and only if the command is to exit
      */
     public boolean willExit() {
         return willExit;
@@ -104,6 +107,7 @@ public class LCommandParser {
 
     /**
      * Attempts to add the task to the tasklist based on the user command.
+     *
      * @param action the action of either todo, event or deadline
      * @param otherInput the rest of the string without the action
      * @param taskList the list of task to be added to
