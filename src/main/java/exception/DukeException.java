@@ -9,13 +9,15 @@ public class DukeException extends Exception {
             customMessage = "  OOPS!!! The description of a deadline cannot be empty!";
             break;
         case DEADLINE_TIME:
-            customMessage = "  OOPS!!! The time of a deadline cannot be empty!";
+            customMessage = "  OOPS!!! The time of a deadline cannot be empty!\n"
+                    + "  Remember the /by tag.";
             break;
         case EVENT_DESC:
             customMessage = "  OOPS!!! The description of an event cannot be empty!";
             break;
         case EVENT_PERIOD:
-            customMessage = "  OOPS!!! The period of an event cannot be empty!";
+            customMessage = "  OOPS!!! The period of an event cannot be empty!\n"
+                    + "  Remember the /at tag.";
             break;
         case TODO_DESC:
             customMessage = "  OOPS!!! The description of a todo cannot be empty!";
@@ -24,7 +26,7 @@ public class DukeException extends Exception {
             customMessage = "  OOPS!!! That is not a valid task index!";
             break;
         case INVALID_FIND:
-            customMessage = "  OOPS!!! You need to specify a date!";
+            customMessage = "  OOPS!!! You need to specify a keyword or date!";
             break;
         case INVALID_INPUT:
             customMessage = "  OOPS!!! I don't recognise the command you've given me.";
@@ -46,7 +48,7 @@ public class DukeException extends Exception {
             customMessage = "  OOPS!!! There was a problem deleting the task from the hard disk!";
             break;
         case INVALID_DATETIME:
-            customMessage = "  OOPS!!! The deadline you provided is not in a correct format!\n"
+            customMessage = "  OOPS!!! The date you provided is not in a correct format!\n"
                     + "  The required format is yyyy-mm-dd or yyyy-mm-dd hh:mm.";
             break;
         case INVALID_PERIOD:
@@ -55,6 +57,12 @@ public class DukeException extends Exception {
                     + "    1. start and end dates\n" 
                     + "    2. one date, start and end times\n" 
                     + "    3. start date and time, end date and time";
+            break;
+        case MISSING_FIND_DATE:
+            customMessage = "  OOPS!!! You need to specify a date!";
+            break;
+        case MISSING_FIND_KEYWORD:
+            customMessage = "  OOPS!!! You need to specify a keyword!";
             break;
         default:
             customMessage = "  OOPS!!! Duke has run into an unspecified error!";

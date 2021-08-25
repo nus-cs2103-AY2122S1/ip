@@ -49,16 +49,24 @@ public class Parser {
         case "find":
             String[] parsedCommand = fullCommand.split("\\s+");
             if (parsedCommand.length == 1) {
-                throw new DukeException(DukeExceptionType.INVALID_FIND); // should be general invalid find 
+                throw new DukeException(DukeExceptionType.INVALID_FIND); 
             } else {
                 if (parsedCommand[1].contains("/date")) {
-                    LocalDate desiredDate = LocalDate.parse(parsedCommand[2]); // handle if date missing
-                    return new FindDateCommand(desiredDate);
+                    if (parsedCommand.length == 2) {
+                        throw new DukeException(DukeExceptionType.MISSING_FIND_DATE);
+                    } else {
+                        LocalDate desiredDate = LocalDate.parse(parsedCommand[2]); 
+                        return new FindDateCommand(desiredDate);
+                    }
                 } else if (parsedCommand[1].contains("/keyword")) {
-                    String keyword = parsedCommand[2]; // handle if keyword missing
-                    return new FindKeywordCommand(keyword);
+                    if (parsedCommand.length == 2) {
+                        throw new DukeException(DukeExceptionType.MISSING_FIND_KEYWORD);
+                    } else {
+                        String keyword = parsedCommand[2];
+                        return new FindKeywordCommand(keyword);
+                    }
                 } else {
-                    throw new DukeException(DukeExceptionType.INVALID_FIND); // should be invalid find keyword
+                    throw new DukeException(DukeExceptionType.INVALID_FIND); 
                 }
                 
             }
