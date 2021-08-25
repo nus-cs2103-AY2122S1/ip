@@ -11,16 +11,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// duke.Storage: deals with loading tasks from the file and saving tasks in the file
 public class Storage {
 
     private File localStorageFile;
-    private final DateTimeFormatter FORMAT_FROM_LOCAL_STORAGE = DateTimeFormatter.ofPattern("dd LLLL yyyy");
 
+    /**
+     * Constructor for class Storage
+     *
+     * @param filePath path of local storage
+     */
     public Storage(String filePath) {
         File localStorageFile = new File(filePath);
         try {
@@ -32,6 +34,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the list of tasks from local storage
+     *
+     * @return list of tasks
+     * @throws DukeException If there is no local file to be found
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> toDoList= new ArrayList<>();
         Scanner scanner; // create a Scanner using the File as the source
@@ -77,8 +85,12 @@ public class Storage {
         return toDoList;
     }
 
-    // duke.Storage
-    public void updateLS(ArrayList<Task> toDoList) {
+    /**
+     * Updates the local storage everytime a change is made
+     *
+     * @param toDoList the current list of tasks
+     */
+    public void updateLs(ArrayList<Task> toDoList) {
         try {
             Files.delete(Paths.get(Duke.getLocalStorageLocation()));
         } catch (IOException e) {

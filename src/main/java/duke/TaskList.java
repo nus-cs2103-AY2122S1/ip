@@ -4,18 +4,31 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
-// duke.TaskList: contains the duke.task list e.g., it has operations to add/delete tasks in the list
 public class TaskList {
 
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor for class TaskList
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
+
+    /**
+     * Constructor for class TaskList
+     *
+     * @param tasks the current list of tasks
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Returns the current list of tasks
+     *
+     * @return current list of tasks
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }

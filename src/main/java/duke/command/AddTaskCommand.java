@@ -14,12 +14,26 @@ public class AddTaskCommand extends Command {
 
     private DateTimeFormatter formatFromInput = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
+    /**
+     * Constructor for class AddTaskCommand
+     *
+     * @param userInput  user's input
+     */
     public AddTaskCommand(String userInput) {
         super(userInput);
     }
 
+    /**
+     * Adds the task to the tasks
+     * If the input is not parsable, a DukeException is thrown
+     *
+     * @param tasks contains the task list
+     * @param ui deals with interactions with the user
+     * @param storage deals with loading tasks from the file and saving tasks in the file
+     * @throws DukeException If user input is incorrect
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         String[] parsedUserInput = this.getUserInput().split(" ", 2);
         if (parsedUserInput[0].equals("todo")) {
             if (parsedUserInput.length == 1) {
@@ -64,9 +78,17 @@ public class AddTaskCommand extends Command {
         }
     }
 
+    /**
+     * Adds task to list and prints out what has been added
+     *
+     * @param newTask task to be added
+     * @param ui deals with interactions with the user
+     * @param tasks contains the task list
+     * @param storage deals with loading tasks from the file and saving tasks in the file
+     */
     private void addTaskToList(Task newTask, Ui ui, TaskList tasks, Storage storage) {
         tasks.getTasks().add(newTask);
-        storage.updateLS(tasks.getTasks());
+        storage.updateLs(tasks.getTasks());
         ui.reply("Got it. I've added this duke.task: \n" + newTask.toString() +
                 "     \nNow you have " + tasks.getTasks().size() + " tasks in the list.");
     }
