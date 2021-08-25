@@ -103,7 +103,7 @@ public class Duke {
                 System.out.println(indentation + "╰(▔∀▔)╯ File created!");
                 printBreak();
             }
-            System.out.println(data.getAbsolutePath());
+            //System.out.println(data.getAbsolutePath());
             FileWriter fw = new FileWriter(data.getAbsoluteFile());
 
             for (int i = 0; i < list.getList().size(); i++) {
@@ -118,11 +118,43 @@ public class Duke {
         }
     }
 
+    private static void readFile() {
+        try {
+            File f = new File(PATHNAME);
+            Scanner sc = new Scanner(f);
+            while (sc.hasNext()) {
+                String task = sc.nextLine();
+                String[] parsed = task.split("\\|");
+
+                switch (parsed[0]) {
+                    case "T":
+                        Todos newTodo = new Todos(parsed[2], parsed[1]);
+                        list.add(newTodo);
+                        break;
+                    case "E":
+                        Events newEvent = new Events(parsed[2], parsed[1], parsed[3]);
+                        list.add(newEvent);
+                        break;
+                    case "D":
+                        Deadlines newDeadline = new Deadlines(parsed[2], parsed[1], parsed[3]);
+                        list.add(newDeadline);
+                        break;
+                }
+            }
+        } catch (IOException e) {
+            printBreak();
+            System.out.println(indentation + "╮(￣ω￣;)╭ File cannot be read..." + e.getMessage());
+            printBreak();
+        }
+
+    }
+
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello from\n" + logo);
+        readFile();
 
         while (true) {
             String str = sc.nextLine();

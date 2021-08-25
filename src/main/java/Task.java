@@ -2,9 +2,9 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String task) {
+    public Task(String task, boolean isDone) {
         this.description = task;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
@@ -20,6 +20,6 @@ public class Task {
     }
 
     public String toSaveString() {
-        return isDone ? "1" : "0" + " | " + this.description;
+        return isDone ? "1" : "0" + "|" + this.description;
     }
 }
