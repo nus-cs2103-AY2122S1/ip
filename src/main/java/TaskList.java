@@ -2,30 +2,54 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
+
+    private final List<Task> taskArr;
+
     // Messages
     private static final String OUT_OF_BOUNDS_TASK = "Could not find task. Check the task number again?";
     private static final String NUMBER_OF_TASKS_MESSAGE = "Now you have %d %s in the list.";
     private static final String ADD_TASK_MESSAGE = "Got it. I've added this task:\n  %s\n" + NUMBER_OF_TASKS_MESSAGE;
     private static final String REMOVE_TASK_MESSAGE = "Noted. I've removed this task:\n %s\n" + NUMBER_OF_TASKS_MESSAGE;
+    private static final String ERROR_SAVING_MESSAGE = "Error reading taskLst. Symbol not found.";
 
     // Nouns
     private String taskWord() {
         return this.size() <= 1 ? "task" : "tasks";
     }
 
-    private final List<Task> taskArr;
-
     public TaskList() {
         this.taskArr = new ArrayList<>();
     }
 
     public int size() {
-        return taskArr != null ? taskArr.size() : 0;
+        return taskArr.size();
     }
 
     public String addTask(Task task) {
         this.taskArr.add(task);
         return String.format(ADD_TASK_MESSAGE, task, this.size(), taskWord());
+    }
+
+    public void addSavedTask(String input) throws ArrayIndexOutOfBoundsException, DukeException {
+        String[] inputArr = input.split("\\|");
+        String symbol = inputArr[0];
+        String remainingText = Duke.getRemainingText(symbol, input);
+        switch (symbol.charAt(0)) {
+        case ToDo.SYMBOL:
+            ToDo myTodo = ToDo.newToDoFromSave(remainingText);
+            this.addTask(myTodo);
+            break;
+        case Deadline.SYMBOL:
+            Deadline myDeadline = Deadline.newDeadlineFromSave(remainingText);
+            this.addTask(myDeadline);
+            break;
+        case Event.SYMBOL:
+            Event myEvent = Event.newEventFromSave(remainingText);
+            this.addTask(myEvent);
+            break;
+        default:
+            throw new DukeException(ERROR_SAVING_MESSAGE);
+        }
     }
 
     public String markTaskAsDone(int taskIndex) throws DukeException {
@@ -51,6 +75,15 @@ public class TaskList {
         }
     }
 
+    public String getSaveFormat() {
+        StringBuilder printedList = new StringBuilder();
+        for (Task task : taskArr) {
+            printedList.append(String.format("%s\n", task.getSaveFormat()));
+        }
+        // Remove the last newline
+        return printedList.toString().trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder printedList = new StringBuilder();
@@ -62,5 +95,4 @@ public class TaskList {
         // Remove the last newline
         return printedList.toString().trim();
     }
-
 }
