@@ -1,19 +1,18 @@
-package commands;
+package command;
 
 import core.Storage;
 import core.TaskList;
-import tasks.Event;
 
-public class EventCommand extends Command {
-    private Event eventTask;
+public class DoneCommand extends Command {
+    private int indexOfCompleted;
 
-    public EventCommand(String taskName, String time) {
-        eventTask = new Event(taskName, time);
+    public DoneCommand(int indexOfCompleted) {
+        this.indexOfCompleted = indexOfCompleted;
     }
 
     @Override
     public void execute(TaskList taskList, Storage storage) {
-        taskList.addTask(eventTask);
+        taskList.markAsDone(indexOfCompleted);
         storage.addTasksToFile(taskList);
     }
 

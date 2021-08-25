@@ -1,6 +1,5 @@
-package commands;
+package command;
 
-import core.DukeException;
 import core.Storage;
 import core.TaskList;
 import gui.Ui;

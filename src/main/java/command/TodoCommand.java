@@ -1,18 +1,19 @@
-package commands;
+package command;
 
 import core.Storage;
 import core.TaskList;
+import tasks.Todo;
 
-public class DoneCommand extends Command {
-    private int indexOfCompleted;
+public class TodoCommand extends Command {
+    private Todo todoTask;
 
-    public DoneCommand(int indexOfCompleted) {
-        this.indexOfCompleted = indexOfCompleted;
+    public TodoCommand(String taskName) {
+        todoTask = new Todo(taskName);
     }
 
     @Override
     public void execute(TaskList taskList, Storage storage) {
-        taskList.markAsDone(indexOfCompleted);
+        taskList.addTask(todoTask);
         storage.addTasksToFile(taskList);
     }
 

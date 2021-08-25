@@ -1,6 +1,6 @@
 package core;
 
-import commands.Command;
+import command.Command;
 import gui.Ui;
 
 public class Duke {

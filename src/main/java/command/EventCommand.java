@@ -1,19 +1,19 @@
-package commands;
+package command;
 
 import core.Storage;
 import core.TaskList;
-import tasks.Todo;
+import tasks.Event;
 
-public class TodoCommand extends Command {
-    private Todo todoTask;
+public class EventCommand extends Command {
+    private Event eventTask;
 
-    public TodoCommand(String taskName) {
-        todoTask = new Todo(taskName);
+    public EventCommand(String taskName, String time) {
+        eventTask = new Event(taskName, time);
     }
 
     @Override
     public void execute(TaskList taskList, Storage storage) {
-        taskList.addTask(todoTask);
+        taskList.addTask(eventTask);
         storage.addTasksToFile(taskList);
     }
 

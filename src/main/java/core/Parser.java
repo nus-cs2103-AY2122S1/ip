@@ -1,14 +1,14 @@
 package core;
 
-import commands.ByeCommand;
-import commands.Command;
-import commands.DeadlineCommand;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.EventCommand;
-import commands.ExceptionalCommand;
-import commands.ListCommand;
-import commands.TodoCommand;
+import command.ByeCommand;
+import command.Command;
+import command.DeadlineCommand;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.EventCommand;
+import command.ExceptionalCommand;
+import command.ListCommand;
+import command.TodoCommand;
 import helpful_functions.HelpfulFunctions;
 
 public class Parser {
