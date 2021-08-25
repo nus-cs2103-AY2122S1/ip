@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     protected LocalDate by;
-    
+
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
@@ -19,7 +19,7 @@ public class Deadline extends Task {
 
     /**
      * Return string representation of the task to write to hard disk.
-     * 
+     *
      * @return The string representation.
      */
     @Override
@@ -30,7 +30,7 @@ public class Deadline extends Task {
             return "D ; 0 ; " + this.description + " ; " + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
     }
-    
+
     /**
      * String representation of this task.
      *

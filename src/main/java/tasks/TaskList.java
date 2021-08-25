@@ -26,7 +26,7 @@ public class TaskList {
         }
         this.tasks = temp;
     }
-    
+
     /**
      * Add a task to the list
      *
@@ -34,7 +34,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         tasks.add(task);
-        
+
         StringBuilder response = new StringBuilder("Got it. I've added this task:");
         response.append("\t").append("  ").append(task)
                 .append("\n\t Now you have ").append(tasks.size());
@@ -49,7 +49,7 @@ public class TaskList {
 
     /**
      * Mark a task in the task list as done
-     * 
+     *
      * @param index The user requested index.
      * @return The status of the operation.
      */
@@ -68,7 +68,7 @@ public class TaskList {
     public String delete(int index) {
         Task temp = tasks.get(index - 1);
         tasks.remove(index - 1);
-        
+
         StringBuilder response = new StringBuilder("Noted. I've removed this task:");
         response.append("\t").append("  ").append(temp)
                 .append("\n\t Now you have ").append(tasks.size());
@@ -80,16 +80,16 @@ public class TaskList {
         Storage.saveTaskListToHardDisk(tasks);
         return response.toString();
     }
-    
+
     /**
      * Return the size of the task list
-     * 
+     *
      * @return Size of the task list.
      */
     public int size() {
         return tasks.size();
     }
-    
+
     @Override
     public String toString() {
         if (this.size() == 0) {

@@ -20,6 +20,7 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
+
     /**
      * Return the completion status of the task
      *
@@ -31,7 +32,7 @@ public class Task {
 
     /**
      * Mark a task as done
-     * 
+     *
      * @return Response whether the task is already marked as done.
      */
     public boolean markAsDone() {
@@ -51,7 +52,7 @@ public class Task {
     public String toSaveInHardDisk() {
         return "";
     }
-    
+
     @Override
     public String toString() {
         return ("[" + this.getStatusIcon() + "] " + this.getDescription());

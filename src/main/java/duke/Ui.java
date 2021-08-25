@@ -4,7 +4,7 @@ package duke;
  * Utility to help print out the responses of Duke
  */
 public class Ui {
-    
+
     public static void greetings() {
         String logo = "\t  ____        _        \n"
                 + "\t |  _ \\ _   _| | _____ \n"
@@ -18,12 +18,12 @@ public class Ui {
         displayContent("What can I do for you?");
         insertSeparateLine();
     }
-    
+
     /**
      * Print out the separation line between elements of the program
      */
     public static void insertSeparateLine() {
-        String separateLine = 
+        String separateLine =
                 "___________________________________________________________________________________";
         System.out.println("\t" + separateLine);
     }

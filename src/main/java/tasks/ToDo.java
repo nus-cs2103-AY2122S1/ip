@@ -1,13 +1,13 @@
 package tasks;
 
 /**
- * tasks.Task without any date/time attached to it
+ * Task without any date/time attached to it
  */
 public class ToDo extends Task {
 
     /**
      * Constructor for the Todo task.
-     * 
+     *
      * @param description Description of the task.
      */
     public ToDo(String description) {
@@ -27,10 +27,10 @@ public class ToDo extends Task {
             return "T ; 0 ; " + this.description;
         }
     }
-    
+
     /**
      * String representation of this task.
-     * 
+     *
      * @return The string representation.
      */
     @Override

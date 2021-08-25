@@ -1,6 +1,9 @@
 package duke;
 
-import tasks.*;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.ToDo;
+import tasks.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,7 +16,7 @@ import java.util.Scanner;
 public class Storage {
     private static final String DIRECTORY = "src/data";
     private static final String FILEPATH = "src/data/duke.txt";
-    
+
     public static void saveTaskListToHardDisk(ArrayList<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(FILEPATH);
@@ -51,7 +54,7 @@ public class Storage {
         return result;
     }
 
-    private static ArrayList<Task> parseSavedTaskList(File logs) 
+    private static ArrayList<Task> parseSavedTaskList(File logs)
             throws FileNotFoundException, DukeCorruptedSaveException {
         Scanner sc = new Scanner(logs);
         ArrayList<Task> tasks = new ArrayList<>();
@@ -59,32 +62,32 @@ public class Storage {
         while (sc.hasNext()) {
             String[] currentLine = sc.nextLine().split(" ; ");
             switch (currentLine[0].trim()) {
-                case "T": {
-                    Task temp = new ToDo(currentLine[2].trim());
-                    if (currentLine[1].equals("1")) {
-                        temp.markAsDone();
-                    }
-                    tasks.add(temp);
-                    break;
+            case "T": {
+                Task temp = new ToDo(currentLine[2].trim());
+                if (currentLine[1].equals("1")) {
+                    temp.markAsDone();
                 }
-                case "D": {
-                    Task temp = new Deadline(currentLine[2].trim(), LocalDate.parse(currentLine[3]));
-                    if (currentLine[1].equals("1")) {
-                        temp.markAsDone();
-                    }
-                    tasks.add(temp);
-                    break;
+                tasks.add(temp);
+                break;
+            }
+            case "D": {
+                Task temp = new Deadline(currentLine[2].trim(), LocalDate.parse(currentLine[3]));
+                if (currentLine[1].equals("1")) {
+                    temp.markAsDone();
                 }
-                case "E": {
-                    Task temp = new Event(currentLine[2].trim(), LocalDate.parse(currentLine[3].trim()));
-                    if (currentLine[1].equals("1")) {
-                        temp.markAsDone();
-                    }
-                    tasks.add(temp);
-                    break;
+                tasks.add(temp);
+                break;
+            }
+            case "E": {
+                Task temp = new Event(currentLine[2].trim(), LocalDate.parse(currentLine[3].trim()));
+                if (currentLine[1].equals("1")) {
+                    temp.markAsDone();
                 }
-                default:
-                    throw new DukeCorruptedSaveException("The save file is corrupted!");
+                tasks.add(temp);
+                break;
+            }
+            default:
+                throw new DukeCorruptedSaveException("The save file is corrupted!");
             }
         }
         return tasks;
