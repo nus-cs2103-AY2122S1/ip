@@ -14,34 +14,8 @@ public class Duke {
     private int counter = 0;
     private int bufferLength = 5;
     
-    public enum Command { 
-        DONE("done"), 
-        LIST("list"), 
-        DELE("dele"),
-        TASK("");
-        
-        private final String NAME;
-
-        /**
-         * Constructor for command enum.
-         * 
-         * @param name name of the command.
-         */
-        Command(String name) {
-            this.NAME = name;
-        }
-
-        /**
-         * Returns name of the command.
-         * @return the name field.
-         */
-        public String get_name() {
-            return NAME;
-        }
-        
-    };
+    public enum Command { done, list, delete, others};
     
-
     /**
      * Constructor for the Duke class.
      * Prints out a statement to greet user.
@@ -169,21 +143,19 @@ public class Duke {
      * @return a reply corresponding to the user input command.
      */
     public String generateReply(String input) {
-        String action = input.substring(0, 4);
-        Command command = Command.TASK;
-        
-        for (Command c : Command.values()) {
-            if (action.equals(c.get_name())) {
-                 command = c;
+        String action = input.split(" ", 2)[0]; 
+        Command cmd = Command.others;
+        for (Command c: Command.values()) {
+            if (action.equals(c.toString())) {
+                cmd = c;
             }
         }
-        
-        switch (command) {
-            case DONE:    
+        switch (cmd) {
+            case done:    
                 return markDone(input);
-            case LIST:
+            case list:
                 return iterate();
-            case DELE:
+            case delete:
                 return delete(input);
             default:
                 return add(input);
