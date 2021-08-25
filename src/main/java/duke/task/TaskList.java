@@ -10,6 +10,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Encapsulates a TaskList containing tasks.
@@ -195,6 +197,53 @@ public class TaskList {
         return deleteMessage(task, size);
     }
 
+    public String findFromList(String command) throws IllegalFormatException, EmptyListException {
+        String regexToMatch = "^find .*";
+        String correctFormat = "find <keyword to find>";
+        checkCommandFormat(command, regexToMatch, correctFormat);
+
+        String keyword = command.substring(5).trim();
+
+        List<Task> filteredTasks = tasks.stream()
+                                        .filter(str -> str.toString().contains(keyword))
+                                        .collect(Collectors.toList());
+
+        return printTaskList(filteredTasks);
+    }
+
+    /**
+     * Prints the full TaskList stored.
+     *
+     * @return string representation of full TaskList stored
+     * @throws EmptyListException if the TaskList is empty
+     */
+    public String printFullTaskList() throws EmptyListException {
+        return printTaskList(tasks);
+    }
+
+    /**
+     * Prints the TaskList stored so far.
+     *
+     * @return string representation of TaskList
+     * @throws EmptyListException if TaskList is empty
+     */
+    public String printTaskList(List<Task> tasks) throws EmptyListException {
+        String str = "";
+        int size = tasks.size();
+
+        if (size == 0) {
+            throw new EmptyListException();
+        }
+
+        for (int i = 0; i < size; i++) {
+            str = str.concat(tasks.get(i).toString());
+            if (i < tasks.size() - 1) {
+                str = str.concat("\n");
+            }
+        }
+        return str;
+    }
+
     /**
      * Generates message for successful addition of task.
      *
@@ -233,27 +282,5 @@ public class TaskList {
      */
     private String doneMessage(Task task) {
         return "Nice! I've marked this task as done:\n" + task;
-    }
-
-    /**
-     * Prints the TaskList stored so far.
-     * @return string representation of TaskList
-     * @throws EmptyListException if TaskList is empty
-     */
-    public String printTaskList() throws EmptyListException {
-        String str = "";
-        int size = tasks.size();
-
-        if (size == 0) {
-            throw new EmptyListException();
-        }
-
-        for (int i = 0; i < size; i++) {
-            str = str.concat(tasks.get(i).toString());
-            if (i < tasks.size() - 1) {
-                str = str.concat("\n");
-            }
-        }
-        return str;
     }
 }

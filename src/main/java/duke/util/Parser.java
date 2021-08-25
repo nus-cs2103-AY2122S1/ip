@@ -15,7 +15,7 @@ public class Parser {
      */
     public static Command parse(String command) throws UnknownCommandException {
         if (command.contains("list")) {
-            return tasks -> tasks.printTaskList();
+            return tasks -> tasks.printFullTaskList();
         } else if (command.contains("todo")) {
             return tasks -> tasks.addTodo(command);
         } else if (command.contains("event")) {
@@ -26,6 +26,8 @@ public class Parser {
             return tasks -> tasks.deleteTask(command);
         } else if (command.contains("done")) {
             return tasks -> tasks.markTaskDone(command);
+        } else if (command.contains("find")) {
+            return tasks -> tasks.findFromList(command);
         } else {
             throw new UnknownCommandException();
         }
