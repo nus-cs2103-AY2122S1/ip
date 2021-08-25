@@ -18,8 +18,8 @@ public class Deadline extends Task {
     /**
      * Constructs a Deadline instance using the given description and deadline time.
      *
-     * @param description  the given description.
-     * @param deadlineTime the given deadline time.
+     * @param description  The given description.
+     * @param deadlineTime The given deadline time.
      */
     public Deadline(String description, LocalDateTime deadlineTime) {
         super(description);
@@ -29,9 +29,9 @@ public class Deadline extends Task {
     /**
      * Constructs a Deadline instance using the given description, complete state and deadline time.
      *
-     * @param description  the given description.
-     * @param isDone       the given complete state.
-     * @param deadlineTime the given deadline time.
+     * @param description  The given description.
+     * @param isDone       The given complete state.
+     * @param deadlineTime The given deadline time.
      */
     public Deadline(String description, boolean isDone, LocalDateTime deadlineTime) {
         super(description, isDone);
@@ -41,7 +41,7 @@ public class Deadline extends Task {
     /**
      * Returns a string representation of the deadline.
      *
-     * @return a string representation of the deadline.
+     * @return A string representation of the deadline.
      */
     @Override
     public String toString() {
@@ -51,7 +51,7 @@ public class Deadline extends Task {
     /**
      * Returns a string representation of the deadline following .txt format.
      *
-     * @return a string representation of the deadline following .txt format.
+     * @return A string representation of the deadline following .txt format.
      */
     @Override
     public String toTxtFormat() {
