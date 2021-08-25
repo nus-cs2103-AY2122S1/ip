@@ -47,11 +47,7 @@ public class Storage {
 				taskDir.mkdir();
 			}
 			File taskFile = new File(this.filePath.toString());
-			if (taskFile.createNewFile()) {
-				System.out.println("File created");
-			} else {
-				System.out.println("File updated");
-			}
+			taskFile.createNewFile();
 			FileWriter writer = new FileWriter(this.filePath.toString());
 			for (Task task : tasks) {
 				writer.write(task.saveString() + "\n");

@@ -8,7 +8,7 @@ public class TaskList {
 		this.tasks = tasks;
 	}
 	
-	public boolean addTask(String[] taskArray) throws DukeTaskDetailsException {
+	public Task addTask(String[] taskArray) throws DukeTaskDetailsException {
 		Task task;
 		if (taskArray.length < 2) {
 			throw new DukeTaskDetailsException("Please provide task details");
@@ -29,31 +29,23 @@ public class TaskList {
 			task = new Event(eventDetails[0], eventDetails[1]);
 		}
 		this.tasks.add(task);
-		System.out.println("\tGot it. I\'ve added this task:");
-		System.out.println("\t  " + task.toString());
-		System.out.println("\tNow you have " + this.tasks.size() +
-						   " tasks in the list.");
-		return true;
+		return task;
 	}
 
-	public boolean indexCommand(String[] taskArray) throws DukeIndexInputException {
+	public Task indexCommand(String[] taskArray) throws DukeIndexInputException {
 		if (taskArray.length < 2) {
 			throw new DukeIndexInputException("Please enter index of the task");
 		}
 		try {
+        Task task;
 			int index = Integer.parseInt(taskArray[1]);
 			if (taskArray[0].equals("done")) {
-
-				this.tasks.get(index - 1).markAsDone();
-				System.out.println("\tNice! I\'ve marked this task as done:");
-				System.out.println(" \t" + this.tasks.get(index - 1).toString());
+				  this.tasks.get(index - 1).markAsDone();
+          task = this.tasks.get(index - 1); 
 			} else {
-				Task removed = this.tasks.remove(index - 1);
-				System.out.println("\tNoted. I've removed this task: ");
-				System.out.println("\t" + removed.toString());
-				System.out.println("\tNow you have " + this.tasks.size() + " tasks in the list");
+				task = this.tasks.remove(index - 1);
 			}
-			return true;
+			return task;
 		} catch (NumberFormatException e){
 			throw new DukeIndexInputException("Please enter index of the task");
 		} catch (IndexOutOfBoundsException e) {
