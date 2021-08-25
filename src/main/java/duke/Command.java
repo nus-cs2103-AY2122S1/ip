@@ -49,20 +49,20 @@ public class Command {
                     break;
                 }
             case "todo":
-                    try {
-                        String todoDescription = sc.nextLine().trim();
-                        Task todo = new Todo(todoDescription, count);
-                        if(todoDescription.isEmpty()){
-                            throw new DukeException(ui.emptyDescriptionError());
-                        }
-                        tasks.add(todo);
-                        count++;
-                        ui.todo(todo,count);
-                        break;
-                    } catch (DukeException e){
-                        System.out.println(e.getMessage());
-                        break;
+                try {
+                    String todoDescription = sc.nextLine().trim();
+                    Task todo = new Todo(todoDescription, count);
+                    if(todoDescription.isEmpty()){
+                        throw new DukeException(ui.emptyDescriptionError());
                     }
+                    tasks.add(todo);
+                    count++;
+                    ui.todo(todo,count);
+                    break;
+                } catch (DukeException e){
+                    System.out.println(e.getMessage());
+                    break;
+                }
             case "delete":
                 int delNum = sc.nextInt()-1;
                 try {
@@ -76,61 +76,61 @@ public class Command {
                     break;
                 }
             case "deadline":
-                    try {
-                        String[] deadlineArr = sc.nextLine().split("/by");
-                        if(deadlineArr[0].strip().isEmpty()){
-                            throw new DukeException(ui.emptyDescriptionError());
-                        }
-                        LocalDate d1 = LocalDate.parse(deadlineArr[1].trim());
-                        Task deadline = new Deadline(deadlineArr[0].trim(),
-                                d1.format(DateTimeFormatter.ofPattern("MMM dd YYYY")), count);
-                        tasks.add(deadline);
-                        count++;
-                        ui.deadline(deadline,count);
-                        break;
-                    } catch (DateTimeParseException e){
-                        ui.showDeadlineError1();
-                        break;
-                    } catch (DukeException e){
-                        System.out.println(e.getMessage());
-                        break;
+                try {
+                    String[] deadlineArr = sc.nextLine().split("/by");
+                    if(deadlineArr[0].strip().isEmpty()){
+                        throw new DukeException(ui.emptyDescriptionError());
                     }
-                case "event":
-                    try {
-                        String[] eventArr = sc.nextLine().split("/at");
-                        if(eventArr[0].strip().isEmpty()){
-                            throw new DukeException(ui.emptyDescriptionError());
-                        }
-                        Task event = new Event(eventArr[0].trim(),eventArr[1].trim(), count);
-                        tasks.add(event);
-                        count++;
-                        ui.event(event,count);
-                        break;
-                    } catch (DukeException e){
-                        System.out.println(e.getMessage());
-                        break;
-                    }
-                case "find":
-                    try {
-                        String keyword = sc.nextLine().trim();
-                        String findList = "\n";
-                        if(keyword.strip().isEmpty()){
-                            throw new DukeException(ui.emptyDescriptionError());
-                        }
-                        for (int i = 0; i < tasks.size(); i++){
-                            if (tasks.get(i).getDescription().contains(keyword)){
-                                findList += tasks.get(i) + "\n";
-                            }
-                        }
-                        ui.find(findList);
-                        break;
-                    } catch (DukeException e){
-                        System.out.println(e.getMessage());
-                        break;
-                    }
-                default:
-                    ui.defaultError();
+                    LocalDate d1 = LocalDate.parse(deadlineArr[1].trim());
+                    Task deadline = new Deadline(deadlineArr[0].trim(),
+                            d1.format(DateTimeFormatter.ofPattern("MMM dd YYYY")), count);
+                    tasks.add(deadline);
+                    count++;
+                    ui.deadline(deadline,count);
+                    break;
+                } catch (DateTimeParseException e){
+                    ui.showDeadlineError1();
+                    break;
+                } catch (DukeException e){
+                    System.out.println(e.getMessage());
+                    break;
                 }
+            case "event":
+                try {
+                    String[] eventArr = sc.nextLine().split("/at");
+                    if(eventArr[0].strip().isEmpty()){
+                        throw new DukeException(ui.emptyDescriptionError());
+                    }
+                    Task event = new Event(eventArr[0].trim(),eventArr[1].trim(), count);
+                    tasks.add(event);
+                    count++;
+                    ui.event(event,count);
+                    break;
+                } catch (DukeException e){
+                    System.out.println(e.getMessage());
+                    break;
+                }
+            case "find":
+                try {
+                    String keyword = sc.nextLine().trim();
+                    String findList = "\n";
+                    if(keyword.strip().isEmpty()){
+                        throw new DukeException(ui.emptyDescriptionError());
+                    }
+                    for (int i = 0; i < tasks.size(); i++){
+                        if (tasks.get(i).getDescription().contains(keyword)){
+                            findList += tasks.get(i) + "\n";
+                        }
+                    }
+                    ui.find(findList);
+                    break;
+                } catch (DukeException e){
+                    System.out.println(e.getMessage());
+                    break;
+                }
+            default:
+                ui.defaultError();
+            }
             save.writeToFile(filePath,tasks);
         }
     }
