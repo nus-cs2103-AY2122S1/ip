@@ -12,26 +12,26 @@ public class Pilcrow {
 
     private final static String PILCROW_FILE_PATH = "data/pilcrow.txt";
 
-    public Pilcrow() {
+    private Pilcrow() {
         this.ui = new Ui();
         this.storage = new Storage(Pilcrow.PILCROW_FILE_PATH);
         this.taskList = new TaskList(this.storage.load());
     }
 
-    /**
-     * Runs the main body of the Pilcrow script.
-     * @param args
-     */
+
     public static void main(String[] args) {
         Pilcrow pilcrow = new Pilcrow();
         pilcrow.run();
     }
 
+    /**
+     * Runs the main body of the Pilcrow script.
+     */
     private void run() {
         Boolean isExit = false;
+        Scanner scanner = new Scanner(System.in);
 
         while (!isExit) {
-            Scanner scanner = new Scanner(System.in);
             try {
                 Parser parser = new Parser(scanner.nextLine());
                 Pilcrow.runCommand(parser.getCommandWord(), parser.getRestOfCommand(),
@@ -39,12 +39,12 @@ public class Pilcrow {
 
                 isExit = (parser.getCommandWord().equals("bye"));
                 if (isExit) {
-                    scanner.close();
                 }
             } catch (InvalidInputException exception) {
                 ui.printException(exception);
             }
         }
+        scanner.close();
     }
 
     private static void runCommand(String commandWord, String restOfCommand, Ui ui,

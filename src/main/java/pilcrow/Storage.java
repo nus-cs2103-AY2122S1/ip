@@ -8,13 +8,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Abstraction to handle data stored onto the hard disk
 public class Storage {
-    String filePath;
+    private String filePath;
 
+    /**
+     * Constructor for Storage object.
+     * Takes in a filePath String to locate and manipulate a file.
+     * @param filePath String representing location of storage.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the contents of a Storage object as an ArrayList of Tasks.
+     * @return ArrayList of Tasks stored in Storage object.
+     */
     public ArrayList<Task> load() {
         File pilcrowFile = new File(this.filePath);
         Scanner scanner;
@@ -38,8 +48,8 @@ public class Storage {
     }
 
     /**
-     *
-     * @param taskList
+     * Save specified TaskList into Storage for later loading.
+     * @param taskList TaskList to be stored.
      */
     public void save(TaskList taskList){
         String storedTasks = "";
