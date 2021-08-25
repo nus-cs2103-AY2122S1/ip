@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.Ui;
+
 public class TryAgainCommand extends Command {
     private Ui ui;
 

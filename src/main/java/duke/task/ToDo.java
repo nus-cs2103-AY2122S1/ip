@@ -1,7 +1,9 @@
+package duke.task;
+
 public class ToDo extends Task {
     private String name;
 
-    ToDo(String name) {
+    public ToDo(String name) {
         this.name = name;
     }
 

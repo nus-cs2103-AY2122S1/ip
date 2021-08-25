@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -6,7 +8,7 @@ public class Deadline extends Task {
     private String name;
     private LocalDateTime deadline;
 
-    Deadline(String name, LocalDateTime deadline) {
+    public Deadline(String name, LocalDateTime deadline) {
         this.name = name;
         this.deadline = deadline;
     }

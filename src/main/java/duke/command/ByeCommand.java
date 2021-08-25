@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Duke;
+import duke.Storage;
+import duke.ToDoList;
+import duke.Ui;
+
 public class ByeCommand extends Command {
     private Duke chatBot;
     private Ui ui;

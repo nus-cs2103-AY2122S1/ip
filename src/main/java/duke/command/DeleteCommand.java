@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.ToDoList;
+import duke.Ui;
+
 public class DeleteCommand extends Command {
     private ToDoList tdl;
     private Ui ui;

@@ -1,8 +1,10 @@
+package duke.task;
+
 public class Event extends Task {
     private String duration;
     private String name;
 
-    Event(String name, String duration) {
+    public Event(String name, String duration) {
         this.name = name;
         this.duration = duration;
     }

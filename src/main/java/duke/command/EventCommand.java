@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.ToDoList;
+
 public class EventCommand extends Command {
     private ToDoList tdl;
     private String item;

@@ -1,4 +1,8 @@
-public class ConfusedCommand extends Command{
+package duke.command;
+
+import duke.Ui;
+
+public class ConfusedCommand extends Command {
     private Ui ui;
 
     public ConfusedCommand(Ui ui) {
