@@ -1,13 +1,12 @@
 package duke;
 
+import java.util.Scanner;
+
 /**
  * The Bhutu chatbot app
  */
-import java.util.Scanner;
-
-
 public class Duke {
-    public static void main(String[] args) throws DukeException{
+    public static void main(String[] args) throws DukeException {
         Ui.greet();
 
         Scanner scanner = new Scanner(System.in);

@@ -17,8 +17,7 @@ public class Parser {
                 Task task = taskList.get(index - 1);
                 task.doneTask();
                 Ui.done(task);
-            }
-            catch(IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("☹ OOPS!!! Invalid task number");
             }
 
@@ -27,8 +26,7 @@ public class Parser {
                 Task newTask = new Todo(pieces[1]);
                 taskList.add(newTask);
                 Ui.addTask(taskList, newTask);
-            }
-            catch (ArrayIndexOutOfBoundsException e){
+            } catch (ArrayIndexOutOfBoundsException e){
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
         } else if (command.equals("event")) {
@@ -40,8 +38,7 @@ public class Parser {
                 Task newTask = new Event(name, time);
                 taskList.add(newTask);
                 Ui.addTask(taskList, newTask);
-            }
-            catch (ArrayIndexOutOfBoundsException e){
+            } catch (ArrayIndexOutOfBoundsException e){
                 throw new DukeException("☹ Please enter the event command in 'event [task description]/at [start time]' format");
             }
         } else if (command.equals("deadline")) {
@@ -53,18 +50,16 @@ public class Parser {
                 Task newTask = new Deadline(name, time);
                 taskList.add(newTask);
                 taskList.add(newTask);
-            }
-            catch (ArrayIndexOutOfBoundsException e){
+            } catch (ArrayIndexOutOfBoundsException e){
                 throw new DukeException("☹ Please enter the event command in 'deadline [task description]/by [end time]' format");
             }
-        } else if(command.equals("delete")){
+        } else if (command.equals("delete")){
             try {
                 int index = Integer.parseInt(pieces[1]);
                 Task task = taskList.get(index - 1);
                 taskList.remove(task);
                 Ui.delete(taskList, task);
-            }
-            catch(IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e){
                 throw new DukeException("☹ OOPS!!! Invalid task number");
             }
 
@@ -72,7 +67,10 @@ public class Parser {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
-        if(command == "bye") {return true;}
-        else {return false;}
+        if(command == "bye") {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
