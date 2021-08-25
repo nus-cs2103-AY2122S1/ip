@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * This class encapsulates a task in the Duke application.
  */

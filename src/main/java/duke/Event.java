@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * This class encapsulates an event task in the Duke Application.
  */

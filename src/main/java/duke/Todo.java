@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * This class encapsulates a todo task in the Duke Application.
  */
