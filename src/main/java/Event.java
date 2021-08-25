@@ -6,6 +6,10 @@ public class Event extends Task {
         this.timePeriod = timePeriod;
     }
 
+    public String getTimePeriod() {
+        return this.timePeriod;
+    }
+
     @Override
     public String toString() {
         return "Event: " + super.toString() + " (at" + this.timePeriod + ")";

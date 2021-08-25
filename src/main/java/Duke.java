@@ -1,3 +1,8 @@
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -11,6 +16,7 @@ public class Duke {
             for (int i = 0; i < taskList.size(); i++) {
                 System.out.println( (i+1) + ": " + taskList.get(i));
             }
+
         } else if (commandInput.matches("done\\s[0-9][0-9]?")) {
             int taskToComplete = Integer.valueOf(commandInput.split(" ")[1]);
             if (taskToComplete - 1 >= 0 && taskToComplete - 1 < taskList.size()) {
@@ -20,6 +26,11 @@ public class Duke {
                 System.out.println("---------------");
                 for (int i = 0; i < taskList.size(); i++) {
                     System.out.println( (i+1) + ": " + taskList.get(i));
+                }
+                try {
+                    writeTaskFile(taskList);
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
                 }
             } else {
                 throw new InvalidTaskIDException();
@@ -33,6 +44,12 @@ public class Duke {
                 System.out.println("---------------");
                 for (int i = 0; i < taskList.size(); i++) {
                     System.out.println( (i+1) + ": " + taskList.get(i));
+                }
+
+                try {
+                    writeTaskFile(taskList);
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
                 }
 
             } else {
@@ -52,6 +69,12 @@ public class Duke {
                 for (int i = 0; i < taskList.size(); i++) {
                     System.out.println( (i+1) + ": " + taskList.get(i));
                 }
+
+                try {
+                    writeTaskFile(taskList);
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
             }
 
         } else if (commandInput.matches("deadline(.*?)")) {
@@ -68,6 +91,12 @@ public class Duke {
                 System.out.println("---------------");
                 for (int i = 0; i < taskList.size(); i++) {
                     System.out.println( (i+1) + ": " + taskList.get(i));
+                }
+
+                try {
+                    writeTaskFile(taskList);
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
                 }
             }
 
@@ -86,16 +115,83 @@ public class Duke {
                 for (int i = 0; i < taskList.size(); i++) {
                     System.out.println((i + 1) + ": " + taskList.get(i));
                 }
+
+                try {
+                    writeTaskFile(taskList);
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         } else
             throw new InvalidCommandException();
+    }
+
+    public static void writeTaskFile(List<Task> taskList) throws IOException {
+        String home = System.getProperty("user.home");
+        Path filePath = Paths.get(home, "tasks.txt");
+        List<String> lines = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task instanceof ToDo) {
+                String line = String.format("ToDo=%s=%s", String.valueOf(task.getCompleted()), task.getTaskName());
+                lines.add(line);
+            } else if (task instanceof Event) {
+                String line = String.format("Event=%s=%s=%s", String.valueOf(task.getCompleted()), task.getTaskName(), ((Event) task).getTimePeriod());
+                lines.add(line);
+            } else {
+                String line = String.format("Deadline=%s=%s=%s", String.valueOf(task.getCompleted()), task.getTaskName(), ((Deadline) task).getDeadline());
+                lines.add(line);
+            }
+        }
+        Files.write(filePath, lines, StandardCharsets.UTF_8);
+    }
+
+    public static void getTaskFile(List<Task> taskList) throws IOException {
+        String home = System.getProperty("user.home");
+        Path filePath = Paths.get(home,  "tasks.txt");
+        List<String> contents = Files.readAllLines(filePath);
+
+        for (String content : contents) {
+            String[] taskDetails = content.split("=");
+
+            if (taskDetails[0].equals("ToDo")) {
+                ToDo todo = new ToDo(taskDetails[2]);
+                if (taskDetails[1].equals("true")) {
+                    todo.markAsCompleted();
+                }
+                taskList.add(todo);
+            } else if (taskDetails[0].equals("Deadline")) {
+                Deadline deadline = new Deadline(taskDetails[2], taskDetails[3]);
+                if (taskDetails[1].equals("true")) {
+                    deadline.markAsCompleted();
+                }
+                taskList.add(deadline);
+            } else {
+                Event event = new Event(taskDetails[2], taskDetails[3]);
+                if (taskDetails[1].equals("true")) {
+                    event.markAsCompleted();
+                }
+                taskList.add(event);
+            }
+        }
+
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         List<Task> taskList = new ArrayList<Task>();
         System.out.println("Hi, I'm Duke, your personal assistant!\n");
-        System.out.println("What should I add to your schedule?");
+        try {
+            getTaskFile(taskList);
+            System.out.println("Welcome Back!\n");
+            System.out.println("Current List:");
+            System.out.println("---------------");
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.println((i + 1) + ": " + taskList.get(i));
+            }
+        } catch (IOException e) {
+            System.out.println("Your schedule is empty. What should I add to your schedule?");
+        }
+
         while (true) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
