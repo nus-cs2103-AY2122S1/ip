@@ -43,14 +43,14 @@ public class Parser {
         String command = tmp[0];
         String args = tmp.length > 1 ? tmp[1] : "";
         return commandsMap.getOrDefault(command, (str, tasklist) -> notFound())
-            .apply(args, tasks);
+                .apply(args, tasks);
     }
 
 
     private String latestTask(TaskList tasks) {
         return MSG_TASK_ADDED + "\n"
-            + "   " + tasks.get(tasks.size() - 1).toString() + "\n"
-            + String.format(MSG_TASK_COUNT, tasks.size());
+                + "   " + tasks.get(tasks.size() - 1).toString() + "\n"
+                + String.format(MSG_TASK_COUNT, tasks.size());
     }
 
     private String addTodo(String args, TaskList tasks) {
@@ -130,8 +130,8 @@ public class Parser {
             Task deletedTask = tasks.get(idx - 1);
             tasks.remove(idx - 1);
             return MSG_TASK_DELETED + "\n"
-                + "   " + deletedTask.toString() + "\n"
-                + String.format(MSG_TASK_COUNT, tasks.size());
+                    + "   " + deletedTask.toString() + "\n"
+                    + String.format(MSG_TASK_COUNT, tasks.size());
         } catch (NumberFormatException e) {
             return ERR_DELETE_FORMAT;
         }
