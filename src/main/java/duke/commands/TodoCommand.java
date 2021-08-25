@@ -10,6 +10,7 @@ import duke.tasks.ToDo;
  * Class encapsulating a "todo" command by the user.
  */
 public class TodoCommand extends Command {
+
     /** A String description of the ToDo */
     private String description;
 
@@ -33,6 +34,7 @@ public class TodoCommand extends Command {
      */
     public void executeCommand(Tasklist taskList, UI ui, PersistentStorage storage) {
         ToDo task = new ToDo(this.description);
+
         taskList.addTask(task);
         ui.showAddedTask(taskList, task);
     }

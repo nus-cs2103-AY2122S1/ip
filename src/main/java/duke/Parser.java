@@ -1,6 +1,13 @@
 package duke;
 
-import duke.commands.*;
+import duke.commands.Command;
+import duke.commands.DoneCommand;
+import duke.commands.DeadlineCommand;
+import duke.commands.ByeCommand;
+import duke.commands.TodoCommand;
+import duke.commands.ListAllCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.EventCommand;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -61,7 +68,6 @@ public class Parser {
                 int index = Integer.parseInt(fullCommand.split(" ")[1]);
 
                 return new DoneCommand(index);
-
             } catch (NumberFormatException e) {
                 throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
             }
@@ -101,7 +107,6 @@ public class Parser {
                     .substring(9);
                 
                 return new DeadlineCommand(description, dueDateTime);
-
             } catch (DateTimeParseException e) {
                 throw new DukeException("☹ OOPS!!! Please provide a valid due date.");
             }
@@ -131,7 +136,6 @@ public class Parser {
                     .substring(6);
                 
                 return new EventCommand(description, eventDateTime);
-
             } catch (DateTimeParseException e) {
                 throw new DukeException("☹ OOPS!!! Please provide a valid event time.");
             }

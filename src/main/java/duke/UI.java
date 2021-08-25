@@ -67,6 +67,7 @@ public class UI {
         public static Response completed(Task task) {
             String msg = "Nice! I've marked this task as done:\n" 
                 + task.toString();
+
             Response response = new Response(msg);
             System.out.println(response);
             return response;
@@ -103,6 +104,7 @@ public class UI {
         public static Response listAllItems(Tasklist tasklist) {
             Response response = new Response("Here are the tasks in your list:\n" 
                 + tasklist.toString());
+
             System.out.println(response);
             return response;
         }
@@ -169,7 +171,6 @@ public class UI {
             }
             
             String result = (linebreak + rawContent + linebreak);
-    
             return result;
         }
     }

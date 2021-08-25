@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * Class that handles the storing of Tasks during the app's runtime
   */
 public class Tasklist {
+
     /** Used to store each Task */
     private ArrayList<Task> taskList;
 

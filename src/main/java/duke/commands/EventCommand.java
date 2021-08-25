@@ -40,6 +40,7 @@ public class EventCommand extends Command {
      */
     public void executeCommand(Tasklist taskList, UI ui, PersistentStorage storage) {
         Event event = new Event(this.description, this.eventDateTime);
+
         taskList.addTask(event);
         ui.showAddedTask(taskList, event);
     }

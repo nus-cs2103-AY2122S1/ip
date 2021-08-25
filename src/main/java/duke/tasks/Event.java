@@ -1,4 +1,5 @@
 package duke.tasks;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -7,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  * An Event is a Task with an associated Event datetime.
  */
 public class Event extends Task {
+
     private LocalDateTime eventTime;
 
     // Constructor for an Event

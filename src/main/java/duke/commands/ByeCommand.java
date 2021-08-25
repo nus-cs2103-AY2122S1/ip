@@ -9,6 +9,7 @@ import duke.PersistentStorage;
  * A class encapsulating a "bye" command from the user.
  */
 public class ByeCommand extends Command {
+
     public ByeCommand(){}
 
     /**
@@ -20,7 +21,8 @@ public class ByeCommand extends Command {
      * @param storage The PersistentStorage associated with the Duke instance.
      * @throws DukeException if an error occured when saving tasks to PersistentStorage.
      */
-    public void executeCommand(Tasklist taskList, UI ui, PersistentStorage storage) throws DukeException{
+    public void executeCommand(Tasklist taskList, UI ui, PersistentStorage storage)
+            throws DukeException {
         try {
             ui.showExitMsg();
             storage.saveTasks(taskList);

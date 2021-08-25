@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException if the provided target index is not in range.
      */
     public void executeCommand(Tasklist taskList, UI ui, PersistentStorage storage) throws DukeException{
-    // Check for valid task number provided
+        // Check for valid task number provided
         if (this.target < 1 || this.target > taskList.getTotalTasks()) {
             throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
         }
