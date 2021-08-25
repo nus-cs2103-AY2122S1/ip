@@ -31,6 +31,8 @@ public class Parser {
             return parseDone(command);
         case "save":
             return new SaveCommand();
+        case "find":
+            return parseFind(command);
         default:
             return new InvalidCommand();
         }
@@ -136,6 +138,18 @@ public class Parser {
         int index = Integer.parseInt(command.substring(5).replaceAll(" ", "")) - 1;
 
         return new DoneCommand(index);
+    }
+
+    private static Command parseFind(String command) throws DukeException {
+        if (command.length() < 5 || isInvalidString(command.substring(5))) {
+            String errorMessage = "\t Invalid command, please key in the find command as follows:\n";
+            errorMessage += "\t \t find {keyword}";
+            throw new DukeException(errorMessage);
+        }
+
+        String keyword = command.substring(5).toLowerCase();
+
+        return new FindCommand(keyword);
     }
 
     private static boolean isInvalidString(String s) {
