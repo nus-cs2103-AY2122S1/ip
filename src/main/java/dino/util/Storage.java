@@ -12,13 +12,29 @@ import java.util.Scanner;
 import dino.task.*;
 import dino.exception.*;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
+
     private final String filePath;
 
+    /**
+     * Constructs a Storage object
+     *
+     * @param filePath path to the local storage file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Opens the local storage file and loads data from it
+     * Creates a new empty file at the specified path if there is no file under that path
+     *
+     * @throws IOException if the file cannot be loaded from the path specified, or the file
+     * does not exist but also fails to created
+     */
     public List<Task> loadStorage() {
         File file = new File(filePath);
         try {
@@ -33,6 +49,12 @@ public class Storage {
         return new ArrayList<>();
     }
 
+    /**
+     * Loads the task list data from the storage file
+     *
+     * @param file the file that is loaded which contains information about the task list
+     * @return the task list that is loaded from the file
+     */
     public List<Task> getDataFromStorage(File file)  {
         List<Task> taskList = new ArrayList<>();
         try {
@@ -73,11 +95,22 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Creates an empty file at the directory of the input file
+     *
+     * @param file the file whose path is used to create a new empty file
+     * @throws IOException if the file cannot be created for some reasons
+     */
     public void createEmptyFile(File file) throws IOException {
         file.getParentFile().mkdirs();
         file.createNewFile();
     }
 
+    /**
+     * Saves the current task list to the local storage file
+     *
+     * @param tasks the current task list
+     */
     public void saveToStorage(List<Task> tasks){
         try {
             FileWriter fw = new FileWriter(filePath);
