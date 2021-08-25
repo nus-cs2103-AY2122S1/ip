@@ -1,35 +1,24 @@
 import java.util.Scanner;
-import java.util.ArrayList;
-
 
 public class Duke {
 
-    private static Storage storage;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    private static TaskList tasks;
-    
-    public static void main(String[] args) {
-        
+    public Duke(String filePath) {
+        ui = new Ui();
         try {
-            String filePath = "data/tasks.txt";
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            System.out.println(e.toString());
-            return;
+            ui.showStartUpError(e);
+            tasks = new TaskList();
         }
+    }
 
-        String separator = "------------------------------------------------------------------";
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-        System.out.println("Hello I'm Duke :)");
-        System.out.println("What can I do for you?");
-        System.out.println(separator);
+    public void run() {
+        ui.showWelcome();
         
         String endCmd = "bye";
         String listCmd = "list";
@@ -47,7 +36,8 @@ public class Duke {
                 String[] inputs = input.split(" ", 2);
                 String cmd = inputs[0]; // get first word as command
                 String description = inputs.length > 1 ? inputs[1] : "";
-                System.out.println(separator);
+                
+                ui.showLine();
 
                 if (cmd.equals(endCmd)) {
                     System.out.println("Bye bye! See you again soon!");
@@ -76,13 +66,17 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(e.toString());
             } finally {
-                System.out.println(separator);
+                ui.showLine();
             }
         }
     }
+    
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
 
     /** checks if input is a valid task number and returns task number if valid */
-    private static Integer validateTaskNumber(String input) throws DukeException {
+    private Integer validateTaskNumber(String input) throws DukeException {
         Integer taskNum;
         try {
             taskNum = Integer.parseInt(input);

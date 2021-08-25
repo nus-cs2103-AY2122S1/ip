@@ -10,6 +10,10 @@ public class TaskList {
         DEADLINE,
         EVENT
     }
+
+    public TaskList() {
+        this.todoList = new ArrayList<>();
+    }
     
     public TaskList(ArrayList<Task> tasks) {
         this.todoList = tasks;
