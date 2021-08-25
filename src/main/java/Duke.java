@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private final static List<Task> items = new ArrayList<Task>(100);
+    private final static List<Task> items = new ArrayList<>(100);
     enum RequestType {
         DEFAULT,
         DONE,
@@ -15,11 +15,12 @@ public class Duke {
     }
     
     public static void main(String[] args) {
+        Storage.loadIntoDuke(items);
         Scanner userSc = new Scanner(System.in);
         String name = "JARVIS";
         System.out.println("Hello I am " + name +".\nIs there anything I can do for you Sir?\n");
         String userInput = userSc.nextLine();
-        RequestType userRequest = RequestType.DEFAULT;
+        RequestType userRequest;
         while(!userInput.equals("bye")){
             if(userInput.equals("list")){
                 userRequest = RequestType.DEFAULT;
@@ -65,6 +66,7 @@ public class Duke {
         }
 
         System.out.println("Goodbye Sir! Will take good care of your garden in the meantime.");
+        Storage.writeToFile(items);
     }
 
     public static void echo(String userInput, String actionType){
@@ -118,6 +120,7 @@ public class Duke {
             Task t =  new Deadline(description, by);
             items.add(t);
             echo(t.toString(), "added");
+            Storage.addNewTask(t);
         }
     }
     
@@ -132,6 +135,7 @@ public class Duke {
             Task t =  new Event(description, at);
             items.add(t);
             echo(t.toString(), "added");
+            Storage.addNewTask(t);
         }
     }
     
@@ -142,6 +146,7 @@ public class Duke {
             Task t = new ToDo(description);
             items.add(t);
             echo(t.toString(), "added");
+            Storage.addNewTask(t);
         } catch (DukeException e){
             System.out.println(e.getMessage());
         } catch (StringIndexOutOfBoundsException e){
