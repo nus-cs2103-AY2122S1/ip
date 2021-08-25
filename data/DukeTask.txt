@@ -1,3 +1,5 @@
 
-[T][ ]   kill humans
-[T][ ]   kill pokemon
+[T][ ]        kill humans
+[T][ ]        kill pokemon
+[T][X]      Kawaiii
+[E][ ]   kill humans (((at: 2020-10-15)

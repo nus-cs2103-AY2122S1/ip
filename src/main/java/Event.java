@@ -1,6 +1,8 @@
+import java.time.LocalDate;
+
 public class Event extends Task {
-    private String date;
-    Event(String description, boolean isDone, String date) {
+    private LocalDate date;
+    Event(String description, boolean isDone, LocalDate date) {
         super(description, isDone);
         this.date = date;
     }
