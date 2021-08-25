@@ -68,6 +68,9 @@ public class Ui {
                 int removedIdx = Integer.parseInt(input.trim());
                 tasklist.delete(removedIdx);
                 break;
+            case "find":
+                tasklist.findString(input.trim());
+                break;
             default:
                 try {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means");

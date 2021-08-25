@@ -88,6 +88,17 @@ public class Tasklist {
         System.out.println(Ui.breakline);
     }
 
+    public void findString(String item) {
+        Tasklist filteredList = new Tasklist(new ArrayList<>());
+        for(int i=0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            if(task.getName().contains(item)) {
+                filteredList.add(task);
+            }
+        }
+        filteredList.list();
+    }
+
     /**
      * Returns the task of a particular index in arraylist
      * @param idx Index in the arraylist
