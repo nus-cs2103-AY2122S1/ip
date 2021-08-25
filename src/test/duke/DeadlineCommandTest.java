@@ -18,7 +18,7 @@ public class DeadlineCommandTest {
     private final PrintStream originalErr = System.err;
 
     @BeforeEach
-    public void setUpStreamsAndEmptyFile() {
+    public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
