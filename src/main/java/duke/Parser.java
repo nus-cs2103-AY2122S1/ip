@@ -10,7 +10,6 @@ public class Parser {
 
     }
 
-
     /**
      * 
      * 
@@ -28,6 +27,14 @@ public class Parser {
         } else if (commandArr[0].equals("delete")) {
             int taskArrRef = Integer.parseInt(commandArr[1]) - 1;
             deleteCommand(taskArrRef, taskArr);
+        } else if (commandArr[0].equals("find")) {
+            try {
+                String keyword = commandArr[1];
+                findCommand(keyword, taskArr);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please insert a word after \"done\"");
+            }
+            
         } else {
             boolean wrongArrayLength = commandArr.length <= 1;
             String taskAdded = "Got it. I've added this task: ";
@@ -45,7 +52,7 @@ public class Parser {
             } else if (commandArr[0].equals("deadline")) {
                 if (wrongArrayLength) {
                     throw new DukeException("The description of a deadline cannot be empty!");
-                } else if (command.indexOf("/by ") < 0) {
+                } else if (!command.contains("/by ")) {
                     throw new DukeException("Remember to enter deadline in this format:\"[deadline] [task] /by [date]\"");
                 } else {
                     System.out.println(taskAdded);
@@ -59,7 +66,8 @@ public class Parser {
             } else if (commandArr[0].equals("event")) {
                 if (wrongArrayLength) {
                     throw new DukeException("The description of an event cannot be empty!");
-                } else if (command.indexOf("/at ") < 0) {
+
+                } else if (!command.contains("/at ")) {
                     throw new DukeException("Remember to enter event in this format:\"[event] [task] /at [date]\"");
                 } else {
                     System.out.println(taskAdded);
@@ -90,6 +98,7 @@ public class Parser {
             System.out.println(j + ". " + taskArr.get(i));
         }
     }
+
 
     /**
      *
@@ -123,6 +132,22 @@ public class Parser {
             taskArr.remove(index);
             System.out.println("Noted. I've removed this task:\n" + taskRef);
             System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
+        }
+    }
+
+    public static void findCommand(String word, TaskList taskArr) {
+        String returnMessage = "";
+        for (int i = 0; i < taskArr.size(); i++) {
+            Task taskInstance = taskArr.get(i);
+            String taskDescription = taskInstance.getDescription();
+            if (taskDescription.contains(word)) {
+                returnMessage = returnMessage + taskInstance.toString() + "\n";
+            }
+        }
+        if (returnMessage.equals("")) {
+            System.out.println("There were no tasks found with keyword: " + word);
+        } else {
+            System.out.println("Here are the tasks in your list that match the keyword:\n" + returnMessage);
         }
     }
 
