@@ -35,7 +35,7 @@ public class TaskList {
      * @return Size of task list.
      */
     public Integer taskListSize() {
-        return this.taskList.size() - 1;
+        return this.taskList.size();
     }
 
     /**
@@ -56,5 +56,41 @@ public class TaskList {
     public Task removeTask(int index) {
         Task.noOfTask -= 1;
         return taskList.remove(index);
+    }
+
+    /**
+     * Finds all task that contains a keyword.
+     *
+     * @param keyword Keyword use to find task.
+     * @return Task list that contains all task that have the keyword
+     */
+    public TaskList findTasks(String keyword) {
+        TaskList taskListWithKeyword = new TaskList();
+        for(int i = 0; i < taskListSize(); i++) {
+            Task currTask = this.taskList.get(i);
+            if (currTask.getDescription().contains(keyword)) {
+                taskListWithKeyword.addTask(currTask);
+            }
+        }
+        return taskListWithKeyword;
+    }
+
+    /**
+     * Return string form of task list.
+     *
+     * @return String form of task list.
+     */
+    @Override
+    public String toString() {
+        String str = "";
+        for (int j = 0; j < taskList.size(); j++) {
+            String listItem = (j + 1)
+                    + "."
+                    + taskList.get(j).getTaskType()
+                    + taskList.get(j).checkIsDone()
+                    + " " + taskList.get(j).getDescription() + "\n";
+            str = str + listItem;
+        }
+        return str;
     }
 }

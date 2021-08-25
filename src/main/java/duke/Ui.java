@@ -35,16 +35,9 @@ public class Ui {
      * @param taskList Task list to be printed.
      */
     public void listTaskList(TaskList taskList) {
-        System.out.print(LINEBREAK);
-        for (int j = 0; j < Task.noOfTask; j++) {
-            String listItem = (j + 1)
-                    + "."
-                    + taskList.getTask(j).getTaskType()
-                    + taskList.getTask(j).checkIsDone()
-                    + " " + taskList.getTask(j).getDescription() + "\n";
-            System.out.print(listItem);
-        }
-        System.out.print(LINEBREAK);
+        System.out.print(LINEBREAK
+                + taskList.toString()
+                + LINEBREAK);
     }
 
     /**
@@ -92,6 +85,18 @@ public class Ui {
                 + "Now you have "
                 + Task.noOfTask
                 + " tasks left in the list.\n"
+                + LINEBREAK);
+    }
+
+    /**
+     * Prints find task message and lists relevant tasks.
+     *
+     * @param taskList Task list that contains relevant tasks to be printed.
+     */
+    public void findTaskMsg(TaskList taskList) {
+        System.out.print(LINEBREAK
+                +"Are these what you were looking for?\n"
+                + taskList.toString()
                 + LINEBREAK);
     }
 }

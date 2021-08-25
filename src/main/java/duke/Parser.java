@@ -75,4 +75,8 @@ public class Parser {
         String[] parts = input.split(" /at ");
         return parts[1];
     }
+
+    public String findInputParser(String input) {
+        return input.substring(6);
+    }
 }
