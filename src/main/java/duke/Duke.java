@@ -1,7 +1,9 @@
-import java.util.Scanner;
+package duke;
+
+import duke.command.Command;
 
 /**
- * This program Duke is a chatbot.
+ * This program duke.Duke is a chatbot.
  *
  * @author: Toh Bing Cheng
  * @version: CS2103T AY21 Semester 1

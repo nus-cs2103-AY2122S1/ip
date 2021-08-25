@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 public class ListCommand extends Command{
     public ListCommand(String input) {
         super(input);
@@ -5,7 +11,6 @@ public class ListCommand extends Command{
 
     @Override
     public boolean execute(TaskList taskList, Ui ui, Storage storage) {
-//        listAll();
         if (taskList.getTotalNumberOfTask() > 0) {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < taskList.getTotalNumberOfTask(); i++) {

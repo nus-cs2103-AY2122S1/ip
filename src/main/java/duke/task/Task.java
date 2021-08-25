@@ -1,7 +1,11 @@
+package duke.task;
+
+import duke.CommandList;
+
 import java.time.LocalDate;
 
 /**
- * Task contains information about a task.
+ * duke.task.Task contains information about a task.
  */
 public abstract class Task {
     private String value = null;

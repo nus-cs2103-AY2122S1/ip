@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.*;
+
 public class DoneCommand extends Command{
 
     public DoneCommand(String input) {
@@ -15,7 +19,7 @@ public class DoneCommand extends Command{
                     taskList.markTaskDoneById(taskNum - 1);
 
                 } else {
-                    ui.printErrorMessage("Task number is not in the list!");
+                    ui.printErrorMessage("duke.task.Task number is not in the list!");
                 }
 
             } else {

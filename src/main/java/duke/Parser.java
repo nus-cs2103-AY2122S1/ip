@@ -1,3 +1,11 @@
+package duke;
+
+import duke.command.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.time.LocalDate;
 
 public class Parser {
@@ -19,7 +27,7 @@ public class Parser {
         } else if (isDone(input)) {
             return new DoneCommand(input);
         } else {
-            //ADD Command
+            //ADD duke.command.Command
             Task newTask = null;
             if (input.toUpperCase().contains(CommandList.TODO.toString())) {
                 if (input.length() > 5) {
@@ -52,7 +60,7 @@ public class Parser {
                         String[] stringArr = input.substring(6).split("/at");
                         newTask = new Event(stringArr[0], LocalDate.parse(stringArr[1].strip()));
                     } else {
-                        System.out.println("Your Event is missing a /at (date)");
+                        System.out.println("Your duke.task.Event is missing a /at (date)");
                     }
                 } else {
                     throw new IncompleteCommandException("OOPS!!! The description of a event cannot be empty.");
