@@ -1,7 +1,7 @@
 package duke;
 
 import duke.command.*;
-import duke.exceptions.DukeParseException;
+import duke.exception.DukeParseException;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;

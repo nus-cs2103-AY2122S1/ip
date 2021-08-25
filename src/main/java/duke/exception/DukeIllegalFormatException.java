@@ -1,4 +1,4 @@
-package duke.exceptions;
+package duke.exception;
 
 public class DukeIllegalFormatException extends DukeException {
     // raised when user input format is incorrect

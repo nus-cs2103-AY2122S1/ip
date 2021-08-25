@@ -1,7 +1,7 @@
 package duke;
 
 import duke.command.Command;
-import duke.exceptions.DukeException;
+import duke.exception.DukeException;
 import duke.task.TaskList;
 
 import java.io.IOException;

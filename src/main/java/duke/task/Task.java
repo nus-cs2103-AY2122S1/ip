@@ -1,10 +1,7 @@
 package duke.task;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.DukeIllegalFormatException;
-
-import java.io.FileWriter;
-import java.io.IOException;
+import duke.exception.DukeException;
+import duke.exception.DukeIllegalFormatException;
 
 public abstract class Task {
     // TODO: write tests for file methods

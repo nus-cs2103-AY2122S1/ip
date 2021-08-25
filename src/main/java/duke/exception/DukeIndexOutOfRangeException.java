@@ -1,4 +1,4 @@
-package duke.exceptions;
+package duke.exception;
 
 public class DukeIndexOutOfRangeException extends DukeException {
     // raised when index input is out of range

@@ -1,4 +1,4 @@
-package duke.exceptions;
+package duke.exception;
 
 public class DukeParseException extends DukeException {
     // raised when data format is incorrect

@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
-import duke.exceptions.DukeException;
-import duke.exceptions.DukeIllegalFormatException;
+import duke.exception.DukeException;
+import duke.exception.DukeIllegalFormatException;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;

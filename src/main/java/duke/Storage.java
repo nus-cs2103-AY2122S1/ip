@@ -1,7 +1,7 @@
 package duke;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.DukeParseException;
+import duke.exception.DukeException;
+import duke.exception.DukeParseException;
 import duke.task.*;
 
 import java.io.File;
