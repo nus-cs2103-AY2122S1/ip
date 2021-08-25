@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -67,6 +69,28 @@ public class Duke {
                         saveList();
                         break;
                     }
+                    case "on": {
+                        String dateString = sc.nextLine();
+                        LocalDate date = LocalDate.parse(dateString.trim());
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                        String message = "The tasks that you have on " + date.format(formatter) + " are:\n";
+                        for (int i = 0; i < taskList.size(); i++) {
+                            Task task = taskList.get(i);
+                            if (task instanceof Deadline) {
+                                Deadline deadline = (Deadline) task;
+                                if (deadline.getBy().isEqual(date)) {
+                                    message += deadline + "\n";
+                                }
+                            } else if (task instanceof Event) {
+                                Event event = (Event) task;
+                                if (event.getTime().isEqual(date)) {
+                                    message += event + "\n";
+                                }
+                            }
+                        }
+                        System.out.println(outputTemplate(message));
+                        break;
+                    }
                     default: {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
@@ -94,6 +118,7 @@ public class Duke {
                 String description = getDescription("deadline");
                 String[] parameters = description.split(" /by ");
                 Deadline task = new Deadline(parameters[0].trim(), parameters[1]);
+                Deadline task = new Deadline(parameters[0].trim(), LocalDate.parse(parameters[1]));
                 taskList.add(task);
                 String message = messageHeader + task + getTaskListStatus();
                 System.out.println(outputTemplate(message));
@@ -103,6 +128,7 @@ public class Duke {
                 String description = getDescription("event");
                 String[] parameters = description.split(" /at ");
                 Event task = new Event(parameters[0], parameters[1]);
+                Event task = new Event(parameters[0], LocalDate.parse(parameters[1]));
                 taskList.add(task);
                 String message = messageHeader + task + getTaskListStatus();
                 System.out.println(outputTemplate(message));
@@ -168,13 +194,13 @@ public class Duke {
                         break;
                     }
                     case "D": {
-                        Deadline task = new Deadline(parameters[2], parameters[3]);
+                        Deadline task = new Deadline(parameters[2], LocalDate.parse(parameters[3]));
                         task.setDone(Integer.parseInt(parameters[1]));
                         taskList.add(task);
                         break;
                     }
                     case "E": {
-                        Event task = new Event(parameters[2], parameters[3]);
+                        Event task = new Event(parameters[2], LocalDate.parse(parameters[3]));
                         task.setDone(Integer.parseInt(parameters[1]));
                         taskList.add(task);
                         break;
