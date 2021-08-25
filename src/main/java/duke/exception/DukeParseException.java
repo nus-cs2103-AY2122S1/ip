@@ -1,13 +1,23 @@
 package duke.exception;
 
+/**
+ * Throw this when data format is incorrect ie. parser fails to parse the data into a list.
+ */
 public class DukeParseException extends DukeException {
-    // raised when data format is incorrect
-    public DukeParseException(String errorMessage) {
-        super(errorMessage);
-    }
-
+    /**
+     * Constructs a DukeException with no detailed message.
+     */
     public DukeParseException() {
         super();
+    }
+    
+    /**
+     * Constructs a DukeParseException with the specified detail message.
+     *
+     * @param errorMessage
+     */
+    public DukeParseException(String errorMessage) {
+        super(errorMessage);
     }
 }
 

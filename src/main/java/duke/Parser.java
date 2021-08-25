@@ -7,6 +7,13 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Parser {
+    /**
+     * Parses the full command and returns a Command instance.
+     *
+     * @param fullCommand The command input by the user.
+     * @return A Command instance of the parsed command.
+     * @throws DukeParseException If parser fails to recognise the format of the command.
+     */
     public static Command parse(String fullCommand) throws DukeParseException {
         Scanner sc = new Scanner(fullCommand);
         String input = sc.next();

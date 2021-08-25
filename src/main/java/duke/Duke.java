@@ -12,6 +12,11 @@ public class Duke {
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Constructs a Duke with the specified filePath.
+     *
+     * @param filePath Path of the file to store the task list.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke instance.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -40,7 +48,7 @@ public class Duke {
             }
         }
     }
-
+    
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

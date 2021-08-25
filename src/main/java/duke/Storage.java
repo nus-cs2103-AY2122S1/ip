@@ -13,11 +13,23 @@ import java.util.Scanner;
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a Storage with the specified filePath.
+     *
+     * @param filePath Path of the file to store the task list.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
 
     }
 
+    /**
+     * Writes the specified tasks to the file in the filePath.
+     *
+     * @param tasks Tasks to be written in the file.
+     * @throws IOException If the named file exists but is a directory rather than a regular file,
+     *                     does not exist but cannot be created, or cannot be opened for any other reason.
+     */
     public void save(TaskList tasks) throws IOException {
         // update entire list to db
         FileWriter fw = new FileWriter(filePath);
@@ -25,11 +37,19 @@ public class Storage {
         for (Task task : tasks) {
             dataString.append(task.toDataString()).append("\n");
         }
+
         // batch write into the data file
         fw.write(dataString.toString());
         fw.close();
     }
 
+    /**
+     * Saves the specified task to the file.
+     *
+     * @param task Task to be saved to the file.
+     * @throws IOException If the named file exists but is a directory rather than a regular file,
+     *                     does not exist but cannot be created, or cannot be opened for any other reason.
+     */
     public void save(Task task) throws IOException {
         // TODO: raise assertion error if not added to list yet
         FileWriter fw = new FileWriter(filePath, true);
@@ -37,6 +57,14 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Loads task from the file.
+     *
+     * @param shouldFailSilently Set to true if you want to silent the parse error in each row.
+     * @return Loaded task list.
+     * @throws IOException        If an I/O error occurred.
+     * @throws DukeParseException If parse error occurred.
+     */
     public ArrayList<Task> load(boolean shouldFailSilently) throws IOException, DukeParseException {
         File f = new File(filePath);
         f.getParentFile().mkdirs();

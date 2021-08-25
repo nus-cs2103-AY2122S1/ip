@@ -1,15 +1,26 @@
 package duke.exception;
 
+/**
+ * Throw this when the user input is erroneous or does not abide by the rule stipulated.
+ */
 public class DukeException extends Exception {
-    // raised based on what you enter
-    // what you enter does not follow the format or abide by the duke.Duke rule
+    /**
+     * Constructs a DukeException with no detailed message.
+     */
+    public DukeException() {
+        super();
+    }
+
+    /**
+     * Constructs a DukeException with the specified detail message.
+     *
+     * @param errorMessage
+     */
     public DukeException(String errorMessage) {
         super(errorMessage);
     }
 
-    public DukeException() {
-        super();
-    }
+
 }
 
 

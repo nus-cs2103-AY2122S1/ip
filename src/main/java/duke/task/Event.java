@@ -8,9 +8,22 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
+    /**
+     * Date of the event
+     */
     protected LocalDate at;
+    /**
+     * Event Label ie. "E"
+     */
     private static final String label = "E";
 
+    /**
+     * Constructs a Deadline with the specified description and date.
+     *
+     * @param description Description.
+     * @param at          Date of the event.
+     * @throws DukeException If either the description or deadline does not follow the format.
+     */
     public Event(String description, String at) throws DukeException {
         super(description);
         if (at.isEmpty()) {

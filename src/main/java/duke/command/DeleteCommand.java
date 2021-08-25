@@ -7,12 +7,21 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 public class DeleteCommand extends Command {
+    /**
+     * Index of the task to be removed.
+     */
     int index;
 
+    /**
+     * Constructs an DeleteCommand with the specified index.
+     *
+     * @param index
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }
 
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeIndexOutOfRangeException {
         if (index < 1 || index > tasks.toArray().length) {
             throw new DukeIndexOutOfRangeException(tasks.toArray().length > 0

@@ -4,11 +4,21 @@ import duke.exception.DukeException;
 import duke.exception.DukeIllegalFormatException;
 
 public abstract class Task {
-    // TODO: write tests for file methods
+    /**
+     * Description of the task.
+     */
     protected String description;
+    /**
+     * True if the task is done.
+     */
     protected Boolean isDone;
-    protected Boolean isSaved = false;
 
+    /**
+     * Constructs a Task with the specified description.
+     *
+     * @param description Description of the task.
+     * @throws DukeException If the description does not follow the format.
+     */
     public Task(String description) throws DukeException {
         if (description.isEmpty()) {
             throw new DukeIllegalFormatException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -21,26 +31,25 @@ public abstract class Task {
         return isDone ? "X" : " ";
     }
 
+    /**
+     * Marks this task as done.
+     * Note it does not update the db.
+     */
     public void markAsDone() {
-        // this method does not update db
         this.isDone = true;
     }
-
-    // public void save() throws IOException {
-    //     // TODO: raise assertion error if not added to list yet
-    //     // save this duke.task to db
-    //     if (!isSaved) {
-    //         FileWriter fw = new FileWriter(Duke.dataPath, true);
-    //         fw.write(this.toDataString() + "\n");
-    //         fw.close();
-    //     }
-    // }
 
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+
+    /**
+     * Returns the string representation of the task to be saved in the db.
+     *
+     * @return String representation of the task to be saved in the db.
+     */
     public String toDataString() {
         return " | " + (this.getStatusIcon().equals("X") ? '1' : '0') + " | " + this.description;
     }

@@ -10,10 +10,16 @@ import duke.task.TaskList;
 
 public class EventCommand extends AddCommand {
 
+    /**
+     * Constructs an EventCommand with the specified description.
+     *
+     * @param description
+     */
     public EventCommand(String description) {
         super(description);
     }
 
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] line = description.split(" /at ");
         if (line.length != 2) {

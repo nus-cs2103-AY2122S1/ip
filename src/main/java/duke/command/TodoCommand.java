@@ -8,10 +8,16 @@ import duke.task.TaskList;
 import duke.task.Todo;
 
 public class TodoCommand extends AddCommand {
+    /**
+     * Constructs a TodoCommand with the specified description.
+     *
+     * @param description
+     */
     public TodoCommand(String description) {
         super(description);
     }
 
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = new Todo(description);
         tasks.add(task, storage);

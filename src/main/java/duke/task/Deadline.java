@@ -8,10 +8,22 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
+    /**
+     * Deadline
+     */
     protected LocalDate by;
+    /**
+     * Deadline Label ie. "D"
+     */
     private static final String label = "D";
 
-
+    /**
+     * Constructs a Deadline with the specified description and deadline.
+     *
+     * @param description Description.
+     * @param by          Deadline.
+     * @throws DukeException If either the description or deadline does not follow the format.
+     */
     public Deadline(String description, String by) throws DukeException {
         super(description);
         if (by.isEmpty()) {

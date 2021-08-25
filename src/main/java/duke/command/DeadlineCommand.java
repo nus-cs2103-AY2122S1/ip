@@ -9,11 +9,16 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 public class DeadlineCommand extends AddCommand {
-
+    /**
+     * Constructs an DeadlineCommand with the specified description.
+     *
+     * @param description
+     */
     public DeadlineCommand(String description) {
         super(description);
     }
 
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] line = description.split(" /by ");
         if (line.length != 2) {
