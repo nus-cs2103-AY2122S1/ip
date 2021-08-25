@@ -46,6 +46,39 @@ public class Duke {
         fileScanner.close();
     }
 
+    public static File doneChanger(String description, String cl, File dukeData) throws IOException {
+        Scanner sc = new Scanner(dukeData);
+        int count = 0;
+        File temp = new File("data/temp.txt");
+        FileWriter fw = new FileWriter(temp, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+
+        while (sc.hasNextLine()) {
+            String nextLine = sc.nextLine();
+            if (!nextLine.equals("")) {
+                String parts[] = nextLine.split("\\|", 10);
+                if (parts[2].equals(description) && parts[0].equals(cl)) {
+                    if (!(count == 0)) {
+                        bw.newLine();
+                    }
+                    bw.write(parts[0] + "|1|" + parts[2] + "|" + parts[3]);
+                    count++;
+                    continue;
+                }
+                if (!(count == 0)) {
+                    bw.newLine();
+                }
+                bw.write(nextLine);
+                count++;
+            }
+        }
+        bw.flush();
+        bw.close();
+        dukeData.delete();
+        File dukeRenewed = new File("data/duke.txt");
+        temp.renameTo(dukeRenewed);
+        return dukeRenewed;
+    }
     public static File deleteLine(String description, String cl, File dukeData) throws IOException {
         Scanner sc = new Scanner(dukeData);
         int count = 0;
@@ -138,7 +171,21 @@ public class Duke {
                     continue;
                 }
                 Task taskToChange = xs.get(doneNumber - 1);
+                String description = taskToChange.getItemName();
+                String cl = "X";
+                if (taskToChange instanceof Todo) {
+                    cl = "T";
+                }
+                if (taskToChange instanceof Deadline) {
+                    cl = "D";
+                }
+                if (taskToChange instanceof Event) {
+                    cl = "E";
+                }
                 taskToChange.changeIsDone(true);
+                dukeData = doneChanger(description, cl, dukeData);
+                fileWriter = new FileWriter(dukeData, true);
+                bw = new BufferedWriter(fileWriter);
                 System.out.println(lineProducer() + indentationAdder() + "Great job! I've marked the following as done" +
                         indentationAdder() + taskToChange + "\n" + lineProducer());
                 continue;
