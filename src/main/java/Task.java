@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     private String taskName;
     private boolean isDone;
@@ -9,6 +11,10 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public boolean hasSameDate(LocalDate date) {
+        return false;
     }
 
     @Override

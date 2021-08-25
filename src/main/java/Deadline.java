@@ -13,6 +13,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean hasSameDate(LocalDate date) {
+        return this.date.equals(date);
+    }
+
+    @Override
     public String toString() {
         String formattedDate = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String formattedTime = this.time.format(DateTimeFormatter.ofPattern("hh:mm a"));

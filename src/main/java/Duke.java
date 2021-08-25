@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.stream.Collectors;
 
 public class Duke {
     private static final String FORMAT = "\t%s\n";
@@ -51,6 +52,9 @@ public class Duke {
                     break;
                 case DELETE:
                     runDeleteCommand(input, tasks);
+                    break;
+                case ONDATE:
+                    runOnDateCommand(input, tasks);
                     break;
                 default:
                     throw new DukeException("You have entered an invalid command.");
@@ -198,6 +202,29 @@ public class Duke {
         } else {
             // Invalid input (not a number or invalid number)
             throw new DukeException("Please type in a valid task number to delete.");
+        }
+        System.out.printf(FORMAT, LINE);
+    }
+
+    // Abstraction to make main function neater, returns all tasks on the inputted date
+    private static void runOnDateCommand(String input, List<Task> tasks) throws DukeException {
+        if (input.length() <= 7) {
+            throw new DukeException("Date must be of the form YYYY-MM-DD, and must be a real/valid date.");
+        }
+        String dateString = input.substring(7);
+        LocalDate date = parseDateFromInput(dateString);
+        List<Task> onDateTasks = tasks.stream()
+                .filter(task -> task.hasSameDate(date))
+                .collect(Collectors.toList());
+
+        System.out.printf(FORMAT, LINE);
+        if (onDateTasks.size() == 0) {
+            System.out.printf(FORMAT, "You do not have any tasks occurring on this date.");
+        } else {
+            System.out.printf(FORMAT, "Here are the tasks occurring on this date:");
+            for (int i = 0; i < onDateTasks.size(); i++) {
+                System.out.printf("\t%d.%s\n", i + 1, onDateTasks.get(i));
+            }
         }
         System.out.printf(FORMAT, LINE);
     }
