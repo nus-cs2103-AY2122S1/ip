@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 
@@ -46,20 +47,20 @@ public class Storage {
             String taskType = split[0];
             boolean isDone = split[1].equals("0") ? false : true;;
             String description = split[2];
-            String dateTime;
+            String dateTimeString;
             switch (taskType) {
             case "T":
                 ToDo toDoTask = new ToDo(description, isDone);
                 taskList.add(toDoTask);
                 break;
             case "D":
-                dateTime = split[3];
-                Deadline deadlineTask = new Deadline(description, dateTime, isDone);
+                dateTimeString = split[3];
+                Deadline deadlineTask = new Deadline(description, LocalDate.parse(dateTimeString), isDone);
                 taskList.add(deadlineTask);
                 break;
             case "E":
-                dateTime = split[3];
-                Event eventTask = new Event(description, dateTime, isDone);
+                dateTimeString = split[3];
+                Event eventTask = new Event(description, LocalDate.parse(dateTimeString), isDone);
                 taskList.add(eventTask);
                 break;
             }

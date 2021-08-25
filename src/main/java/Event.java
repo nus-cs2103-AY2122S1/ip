@@ -1,10 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an Event Task which inherits from Task and contains the dateTime for the event.
  *
  * @author Sherman Ng Wei Sheng
  */
 public class Event extends Task {
-    private final String dateTime;
+    private final LocalDate dateTime;
     
     /**
      * Constructor to initialize a new Event.
@@ -12,7 +15,7 @@ public class Event extends Task {
      * @param description The description of the task.
      * @param dateTime The date and time of the event.
      */
-    public Event(String description, String dateTime) {
+    public Event(String description, LocalDate dateTime) {
         super(description);
         this.dateTime = dateTime;
     }
@@ -23,7 +26,7 @@ public class Event extends Task {
      * @param description The description of the task.
      * @param isDone The status of the task.
      */
-    public Event(String description, String dateTime, boolean isDone) {
+    public Event(String description, LocalDate dateTime, boolean isDone) {
         super(description, isDone);
         this.dateTime = dateTime;
     }
@@ -35,7 +38,10 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), this.getDescription(), this.dateTime);
+        return String.format("[E][%s] %s (at: %s)",
+                this.getStatusIcon(),
+                this.getDescription(),
+                this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
     
     @Override
