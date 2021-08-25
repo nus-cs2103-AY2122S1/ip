@@ -16,30 +16,30 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * A collection of storage io methods
+ * A collection of storage io methods.
  */
 public class Storage {
 
     /**
-     * the file path of the data file
+     * The file path of the data file.
      */
     private final String filePath;
 
     /**
-     * the file name of the data file
+     * The file name of the data file.
      */
     private final String fileName;
 
     /**
-     * Parser instance to handle parsing
+     * Parser instance to handle parsing.
      */
     private final Parser parser = new Parser();
 
     /**
-     * Construct a storage instance to handle task storage
+     * Construct a storage instance to handle task storage.
      *
-     * @param filePath Path to the data save file directory
-     * @param fileName File name of the data save file
+     * @param filePath Path to the data save file directory.
+     * @param fileName File name of the data save file.
      */
     public Storage(String filePath, String fileName) {
         this.filePath = filePath;
@@ -47,9 +47,9 @@ public class Storage {
     }
 
     /**
-     * Read data from the data file duke.txt
+     * Read data from the data file duke.txt.
      *
-     * @return A TaskList of tasks read
+     * @return A TaskList of tasks read.
      */
     public TaskList readData() {
         File dataFile = new File(this.filePath + this.fileName);
@@ -70,9 +70,9 @@ public class Storage {
     }
 
     /**
-     * Convert a data string read from duke.txt into task
+     * Convert a data string read from duke.txt into task.
      *
-     * @return the task represented by the string
+     * @return The task represented by the string.
      */
     private Task dataStringToTask(String data) {
         String[] taskInfo = data.split(" [|] ");
@@ -114,9 +114,9 @@ public class Storage {
     }
 
     /**
-     * Write a list of tasks to the duke.txt data file
+     * Write a list of tasks to the duke.txt data file.
      *
-     * @param tasks the list of tasks to be written
+     * @param tasks The list of tasks to be written.
      */
     public void writeTasksToData(TaskList tasks) throws DukeException {
         try {

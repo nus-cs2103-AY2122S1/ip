@@ -3,20 +3,20 @@ package duke.task;
 import java.util.ArrayList;
 
 /**
- * An array list of tasks
+ * An array list of tasks.
  */
 public class TaskList extends ArrayList<Task> {
     private ArrayList<Task> list = new ArrayList<>();
     /**
-     * Create an empty list of task
+     * Create an empty list of task.
      */
     public TaskList() {
     }
 
     /**
-     * Create a list of tasks
+     * Create a list of tasks.
      *
-     * @param tasks ArrayList of Tasks to create the task list from
+     * @param tasks ArrayList of Tasks to create the task list from.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.list = tasks;
@@ -68,9 +68,9 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Convert the task list into array list of string
+     * Convert the task list into array list of string.
      *
-     * @return Array list of task strings
+     * @return Array list of task strings.
      */
     public ArrayList<String> toDataString() {
         ArrayList<String> dataStrings = new ArrayList<>();
@@ -81,9 +81,9 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Convert a data string read from duke.txt into task
+     * Convert a data string read from duke.txt into task.
      *
-     * @return the task represented by the string
+     * @return The task represented by the string.
      */
     private String taskToDataString(Task task) {
         String taskType = task.getClass().getSimpleName();
@@ -117,10 +117,10 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Get a string of tasks matching the pattern
+     * Get a string of tasks matching the pattern.
      *
-     * @param pattern The pattern to match
-     * @return A string of tasks matching the patter
+     * @param pattern The pattern to match.
+     * @return A string of tasks matching the patter.
      */
     public String getMatchedTasksString(String pattern) {
         ArrayList<Task> matched = new ArrayList<>();

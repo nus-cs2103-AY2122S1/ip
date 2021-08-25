@@ -6,27 +6,27 @@ import duke.task.TaskList;
 public class Duke {
 
     /**
-     * storage instance to handle task list storage
+     * storage instance to handle task list storage.
      */
     private final Storage storage;
 
     /**
-     * task list instance to store tasks
+     * task list instance to store tasks.
      */
     private final TaskList tasks;
 
     /**
-     * Ui instance to handle Duke ui
+     * Ui instance to handle Duke ui.
      */
     private final Ui ui;
 
     /**
-     * Parser instance to handle parsing
+     * Parser instance to handle parsing.
      */
     private final Parser parser;
 
     /**
-     * Construct a Duke instance to run Duke
+     * Construct a Duke instance to run Duke.
      *
      * @param filePath Path to the data save file directory
      * @param fileName File name of the data save file
@@ -42,6 +42,11 @@ public class Duke {
         new Duke("./data/", "duke.txt").run();
     }
 
+    /**
+     * Find tasks from task list that contains a given pattern and print the tasks.
+     *
+     * @param command The command entered to the console.
+     */
     private void find(String command) {
         String pattern = command.split("find ", 2)[1];
         String matches = tasks.getMatchedTasksString(pattern);
@@ -104,9 +109,9 @@ public class Duke {
     }
 
     /**
-     * Duke response message for done command
+     * Duke response message for done command.
      *
-     * @param command command entered to console
+     * @param command The command entered to console.
      */
     private void done(String command) {
         try {
@@ -130,9 +135,9 @@ public class Duke {
     }
 
     /**
-     * Duke response message for todo command
+     * Duke response message for todo command.
      *
-     * @param command command entered to console
+     * @param command The command entered to console.
      */
     private void todo(String command) {
         Task todo;
@@ -152,9 +157,9 @@ public class Duke {
     }
 
     /**
-     * Duke response message for event command
+     * Duke response message for event command.
      *
-     * @param command command entered to console
+     * @param command The command entered to console.
      */
     private void event(String command) {
         Task event;
@@ -175,9 +180,9 @@ public class Duke {
     }
 
     /**
-     * Duke response message for deadline command
+     * Duke response message for deadline command.
      *
-     * @param command command entered to console
+     * @param command The command entered to console.
      */
     private void deadline(String command) {
         Task deadline;
@@ -197,9 +202,9 @@ public class Duke {
     }
 
     /**
-     * Duke response message for delete command
+     * Duke response message for delete command.
      *
-     * @param command command entered to console
+     * @param command The command entered to console.
      */
     private void delete(String command) {
         try {

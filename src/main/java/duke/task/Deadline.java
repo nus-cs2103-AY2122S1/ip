@@ -5,7 +5,7 @@ import duke.Parser;
 import java.time.LocalDate;
 
 /**
- * A Deadline type task representation for Duke
+ * A Deadline type task representation for Duke.
  */
 
 public class Deadline extends Task {
@@ -13,10 +13,10 @@ public class Deadline extends Task {
     protected LocalDate by;
 
     /**
-     * Create a Deadline task
+     * Create a Deadline task.
      *
-     * @param description Description of the deadline
-     * @param by LocalTime that the deadline is due by
+     * @param description Description of the deadline.
+     * @param by LocalTime that the deadline is due by.
      */
     public Deadline(String description, LocalDate by) {
         super(description);

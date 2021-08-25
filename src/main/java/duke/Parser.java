@@ -10,26 +10,26 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * A parser to parse Duke commands
+ * A parser to parse Duke commands.
  */
 public class Parser {
     /**
-     * Get the action specified by the command
+     * Get the action specified by the command.
      * <p>
-     * A valid action can be list, done, todo, event, deadline, delete
+     * A valid action can be list, done, todo, event, deadline, delete.
      *
-     * @param command The command to be parsed
-     * @return The action of the command
+     * @param command The command to be parsed.
+     * @return The action of the command.
      */
     public String getCommandAction(String command) {
         return command.split(" ", 2)[0];
     }
 
     /**
-     * Get the task index of done and delete action
+     * Get the task index of done and delete action.
      *
-     * @param command The command to be parsed
-     * @return The index of the task of the command, -1 if is invalid action
+     * @param command The command to be parsed.
+     * @return The index of the task of the command, -1 if is invalid action.
      */
     public int getCommandActionIndex(String command) throws DukeException {
         switch (getCommandAction(command)) {
@@ -43,10 +43,10 @@ public class Parser {
     }
 
     /**
-     * Get the relavant task information from the command
+     * Get the relevant task information from the command.
      *
-     * @param command The command to be parsed
-     * @return A map of task information from the command
+     * @param command The command to be parsed.
+     * @return A map of task information from the command.
      */
     public Task commandToTask(String command) throws DukeException {
         switch (getCommandAction(command)) {
@@ -105,11 +105,11 @@ public class Parser {
     }
 
     /**
-     * Parse a string of time into LocalDate
+     * Parse a string of time into LocalDate.
      *
-     * @param str The time string
-     * @return The LocalDate corresponding to the string
-     * @throws DukeException with message to be printed
+     * @param str The time string.
+     * @return The LocalDate corresponding to the string.
+     * @throws DukeException The exception that contains the message to be printed.
      */
     public LocalDate stringToLocalDate(String str) throws DukeException {
         try {
@@ -121,10 +121,10 @@ public class Parser {
     }
 
     /**
-     * Format LocalDate into MMMM d yyyy format
+     * Format LocalDate into MMMM d yyyy format.
      *
-     * @param localDate The LocalDate to be formatted
-     * @return The formatted LocalDate string
+     * @param localDate The LocalDate to be formatted.
+     * @return The formatted LocalDate string.
      */
     public String formatLocalDate(LocalDate localDate) {
         return localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

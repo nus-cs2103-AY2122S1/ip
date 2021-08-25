@@ -1,16 +1,16 @@
 package duke.task;
 
 /**
- * A task representation for Duke
+ * A task representation for Duke.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Create a Task
+     * Create a Task.
      *
-     * @param description Description of the task
+     * @param description Description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -39,9 +39,9 @@ public class Task {
     }
 
     /**
-     * Get the done status of this task
+     * Get the done status of this task.
      *
-     * @return true if this task is done, false otherwise
+     * @return True if this task is done, false otherwise.
      */
     public boolean getDoneStatus() {
         return this.isDone;

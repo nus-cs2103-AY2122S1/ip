@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 /**
- * A collection of UI methods
+ * A collection of UI methods.
  */
 public class Ui {
 
@@ -32,9 +32,9 @@ public class Ui {
     }
 
     /**
-     * Get the next line of input
+     * Get the next line of input.
      *
-     * @return The next line of input
+     * @return The next line of input.
      */
     public String getNextLine() {
         try {
@@ -46,7 +46,7 @@ public class Ui {
     }
 
     /**
-     * Exit message of ui
+     * Exit message of ui.
      */
     public void bye() {
         this.scanner.close();
