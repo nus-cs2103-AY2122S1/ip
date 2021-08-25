@@ -71,7 +71,7 @@ public class Task {
     }
 
     /**
-     * @return Whether
+     * @return Whether the two task share the same name
      */
     @Override
     public boolean equals(Object o) {

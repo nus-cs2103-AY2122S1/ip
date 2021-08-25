@@ -10,15 +10,28 @@ import java.util.Scanner;
 import task.*;
 import ui.*;
 
+/**
+ * Storage for todo list information
+ *
+ * @author: Wei Yangken
+ */
 public class Storage {
 
     private String filepath;
     private Tasklist tasklist;
 
+    /**
+     * Constructs a storage that stores information at filepath
+     * @param filepath Location of stored information
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Loads data from filepath
+     * @return a tasklist from specified filepath
+     */
     public Tasklist load() {
         System.out.println(Ui.breakline);
         ArrayList<Task> tasks = new ArrayList<>();
@@ -55,6 +68,9 @@ public class Storage {
         return tasklist;
     }
 
+    /**
+     * Saves the tasklist to the specified filepath
+     */
     public void save() {
         File file = new File(filepath);
 

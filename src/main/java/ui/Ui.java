@@ -36,6 +36,10 @@ public class Ui {
         System.out.println(breakline);
     }
 
+    /**
+     * Reads input from user to execute command
+     * @return String of command executed
+     */
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);
         String cmd = scanner.next();
@@ -75,6 +79,11 @@ public class Ui {
         return input;
     }
 
+    /**
+     * Overloaded method to manually input command
+     * @param input Command inputted
+     * @return String of command
+     */
     public String readCommand(String input) {
         Scanner scanner = new Scanner(System.in);
         String cmd = scanner.next();

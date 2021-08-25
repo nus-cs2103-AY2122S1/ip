@@ -38,17 +38,24 @@ public class Event extends Task{
     }
 
     /**
-     * @return Gets event details of task
+     * @return Formatted event details of task
      */
     @Override
     public String getDetail() {
         return "/at " + this.eventDetails;
     }
 
+    /**
+     * @return Raw event details of task
+     */
     public String getEventDetails() {
         return this.eventDetails;
     }
 
+    /**
+     * @param o Object to be compared to
+     * @return Whether the tasks share the same name and event
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {

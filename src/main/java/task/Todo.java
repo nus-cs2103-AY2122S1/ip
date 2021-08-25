@@ -8,7 +8,6 @@ import ui.*;
  *
  * @author: Wei Yangken
  */
-
 public class Todo extends Task{
 
     private static String taskCat = "todo";
@@ -42,6 +41,10 @@ public class Todo extends Task{
         return taskCat;
     }
 
+    /**
+     * @param o Object to be compared to
+     * @return Whether the two tasks share the same name
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {

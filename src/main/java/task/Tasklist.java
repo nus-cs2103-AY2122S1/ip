@@ -97,14 +97,25 @@ public class Tasklist {
         return taskList.get(idx);
     }
 
+    /**
+     * @return size of todo list
+     */
     public int size() {
         return this.taskList.size();
     }
 
+    /**
+     * @param idx Index of list
+     * @return Object of specified index on list
+     */
     public Task get(int idx) {
         return taskList.get(idx);
     }
 
+    /**
+     * @param o List to be compared to
+     * @return Whether the two list share the same tasks
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {

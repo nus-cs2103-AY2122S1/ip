@@ -15,16 +15,26 @@ public class Duke {
     private String exitCmd = "bye";
     private String defaultAddress = "src/main/java/data/tasklist.txt";
 
+    /**
+     * Constructs Duke Object that stores information in filepath
+     * @param filepath Location of stored data
+     */
     public Duke(String filepath) {
         this.storage = new Storage(filepath);
         this.tasklist = storage.load();
     }
 
+    /**
+     * Overloaded constructor of Duke Object with default address
+     */
     public Duke() {
         this.storage = new Storage(defaultAddress);
         this.tasklist = storage.load();
     }
 
+    /**
+     * Run main program
+     */
     public void run() {
         Ui.start();
         boolean isExit = false;

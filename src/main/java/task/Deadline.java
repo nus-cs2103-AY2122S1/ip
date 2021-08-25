@@ -1,8 +1,5 @@
 package task;
 
-import duke.*;
-import ui.*;
-
 /**
  * A type of task that requires a deadline that extends from Task
  *
@@ -37,17 +34,24 @@ public class Deadline extends Task{
     }
 
     /**
-     * @return Gets deadline of task
+     * @return Gets formatted deadline of task
      */
     @Override
     public String getDetail() {
         return "/by " + this.deadline;
     }
 
+    /**
+     * @return deadline of task in raw form
+     */
     public String getDeadline() {
         return this.deadline;
     }
 
+    /**
+     * @param o Object to be compared to
+     * @return Whether the tasks share the same name and deadline
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {
