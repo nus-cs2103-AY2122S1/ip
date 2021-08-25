@@ -2,6 +2,7 @@ package storage;
 
 import exception.DukeException;
 import models.Task;
+import tasklist.TaskList;
 
 /**
  * Interface for the Storage object which saves and loads TaskList from local file.
@@ -54,4 +55,6 @@ public interface IStorage {
      * @return The number of Task objects in the TaskList.
      */
     public int getSize();
+
+    public TaskList findKeyword(String keyword);
 }

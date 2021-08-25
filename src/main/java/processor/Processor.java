@@ -52,6 +52,9 @@ public class Processor implements IProcessor {
         case DELETE:
             processDelete(arguments.get(1));
             break;
+        case FIND:
+            processFind(arguments.get(1));
+            break;
         default:
             processDefault(arguments);
             break;
@@ -151,6 +154,11 @@ public class Processor implements IProcessor {
     /**
      * Process command implementation with type BYE.
      */
+    @Override
+    public void processFind(String keyword) {
+        Ui.print(this.storage.findKeyword(keyword).toString());
+    }
+
     @Override
     public void processBye() {
         Ui.print("Bye. Please meet me again later!");

@@ -40,6 +40,8 @@ public interface IProcessor {
      */
     void processDelete(String index);
 
+    void processFind(String keyword);
+
     /**
      * Process command with type DEFAULT.
      *
