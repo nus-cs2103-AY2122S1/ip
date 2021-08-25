@@ -1,6 +1,6 @@
 public class ToDo extends Task {
     public ToDo(String name){
-        super(name);
+        super(name, false);
     }
 
     public ToDo(String name, boolean isDone){

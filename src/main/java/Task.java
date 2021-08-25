@@ -1,13 +1,15 @@
 public abstract class Task {
     protected String name;
     protected boolean isDone;
+    private boolean isTimed;
 
-    public Task(String name){
+    public Task(String name, boolean isTimed){
         this.name = name;
+        this.isTimed = isTimed;
         this.isDone = false;
     }
 
-    public Task(String name, boolean isDone){
+    public Task(String name, boolean isTimed, boolean isDone){
         this.name = name;
         this.isDone = isDone;
     }
@@ -21,6 +23,10 @@ public abstract class Task {
     }
 
     public abstract String toCsvRow();
+
+    public boolean isTimed(){
+        return isTimed;
+    }
 
     @Override
     public String toString(){
