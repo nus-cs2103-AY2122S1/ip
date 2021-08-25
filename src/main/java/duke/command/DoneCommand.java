@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
         String[] parsedUserInput = this.getUserInput().split(" ", 2);
         if (parsedUserInput.length == 1) {
             throw new DukeException("☹ OOPS!!! Please enter \"done\" followed the number corresponding to " +
-                    "the duke.task you want to mark as completed");
+                    "the task you want to mark as completed");
         } else {
             int taskDone = Integer.parseInt(parsedUserInput[1]) - 1;
             tasks.getTasks().get(taskDone).markAsCompleted();
