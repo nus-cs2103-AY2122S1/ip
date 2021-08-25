@@ -4,8 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Description:
- * Deadlines: tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm.
+ * Creates Deadline objects.
  *
  * @author Leong Hong Fai
  */
@@ -19,7 +18,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Simple string representation of Deadline.
+     * Represents Deadline in a String format
      *
      * @return A string consisting of the information of the Deadline object.
      */

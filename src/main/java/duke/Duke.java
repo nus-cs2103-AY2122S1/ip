@@ -74,11 +74,7 @@ public class Duke {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println("    ______________________________________");
-                System.out.println("     Got it. I've added this task: ");
-                System.out.printf("       %s\n",task);
-                System.out.printf("     Now you have %d tasks in the list\n", tasks.size());
-                System.out.println("    ______________________________________");
+                ui.printTaskAdded(task, tasks.size());
             }
         }
 
@@ -106,11 +102,7 @@ public class Duke {
                 tasks.add(task);
                 if (printOutput) {
                     storage.appendToFile(fileAddress, "D - 0 - " + name + "- " + date);
-                    System.out.println("    ______________________________________");
-                    System.out.println("     Got it. I've added this task: ");
-                    System.out.printf("       %s\n",task);
-                    System.out.printf("     Now you have %d tasks in the list\n", tasks.size());
-                    System.out.println("    ______________________________________");
+                    ui.printTaskAdded(task, tasks.size());
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -142,11 +134,7 @@ public class Duke {
                 tasks.add(task);
                 if (printOutput) {
                     storage.appendToFile(fileAddress, "E - 0 - " + name + "- " + date);
-                    System.out.println("    ______________________________________");
-                    System.out.println("     Got it. I've added this task: ");
-                    System.out.printf("       %s\n",task);
-                    System.out.printf("     Now you have %d tasks in the list\n", tasks.size());
-                    System.out.println("    ______________________________________");
+                    ui.printTaskAdded(task, tasks.size());
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -181,10 +169,7 @@ public class Duke {
                 currTask.setCompleted();
                 if (printOutput) {
                     storage.editFileContentsForCompletion(taskNum + 1);
-                    System.out.println("    ______________________________________");
-                    System.out.println("     Nice! I've marked this task as done:");
-                    System.out.printf("       %s\n", currTask);
-                    System.out.println("    ______________________________________");
+                    ui.printTaskCompleted(currTask);
                 }
             } else {
                 throw new DukeException("invalidTaskNumber");
@@ -215,11 +200,7 @@ public class Duke {
                 storage.editFileContentsForDeletion(taskNum + 1);
                 Task currTask = tasks.get(taskNum);
                 tasks.remove(taskNum);
-                System.out.println("    ______________________________________");
-                System.out.println("     Noted. I've removed this task:");
-                System.out.printf("       %s\n", currTask);
-                System.out.printf("     Now you have %d tasks in the list.\n", tasks.size());
-                System.out.println("    ______________________________________");
+                ui.printDeleteTask(currTask, tasks.size());
             } else {
                 throw new DukeException("invalidTaskNumber");
             }
@@ -229,10 +210,7 @@ public class Duke {
     }
 
     private void commands() throws DukeException {
-        System.out.println("Hello! I'm Duke\n");
-        System.out.println("What can I do for you?");
-        System.out.println("__________________________________________");
-
+        ui.start();
         String command;
         while (!(command = ui.readCommand()).equals("bye")) {
             String parsed = Parser.process(command);
@@ -260,9 +238,7 @@ public class Duke {
                         throw new DukeException("invalidCommand");
                 }
             } catch (DukeException err) {
-                System.out.println("    ______________________________________");
-                System.out.printf("     %s\n", err);
-                System.out.println("    ______________________________________");
+                ui.printError(err);
             }
         }
         ui.end();

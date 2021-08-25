@@ -11,6 +11,9 @@ import java.util.Scanner;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
+/**
+ * Stores in real-time the edits to the TaskList directly into the destination text file.
+ */
 public class Storage {
     private String filepath;
 
@@ -20,6 +23,9 @@ public class Storage {
         load();
     }
 
+    /**
+     * Creates a folder and destination file if either of them do not exist.
+     */
     public void makeFile() {
         File textFile = new File("data/duke.txt");
         Path path = Paths.get("data");
@@ -39,6 +45,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the text file and stores the String commands line by line into an array.
+     *
+     * @return String array containing commands separated by lines.
+     */
     public String[] load() {
         File textFile = new File("data/duke.txt");
         Integer counter = 0;
@@ -57,9 +68,16 @@ public class Storage {
         return temp;
     }
 
-    public void appendToFile(String filePath, String textToAppend) throws IOException {
-        File f = new File(filePath);
-        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+    /**
+     * Appends changes to the text file.
+     *
+     * @param path Path to the text file.
+     * @param textToAppend Text to append to the file.
+     * @throws IOException If file at specified path does not exist.
+     */
+    public void appendToFile(String path, String textToAppend) throws IOException {
+        File f = new File(path);
+        FileWriter fw = new FileWriter(path, true); // create a FileWriter in append mode
         if (f.length() == 0) {
             fw.write(textToAppend);
         } else {
@@ -68,6 +86,11 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Edit the contents of the file to account for a current task being marked as completed.
+     *
+     * @param taskNum Task number of the task that is to be marked as completed.
+     */
     public void editFileContentsForCompletion(int taskNum) {
         File temp = new File("data/temp.txt");
         if (!temp.exists()) {
@@ -96,6 +119,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Edits the contents of the file to account for a task being deleted.
+     *
+     * @param taskNum Task number of the task that is to be deleted.
+     */
     public void editFileContentsForDeletion(int taskNum) {
         File temp = new File("data/temp.txt");
         if (!temp.exists()) {

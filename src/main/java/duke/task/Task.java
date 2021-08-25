@@ -1,41 +1,41 @@
 package duke.task;
 
 /**
- * Description:
- * Simple parent class to Event, ToDo, and Deadline.
+ * Exists to provide a parent class to Event, Deadline, and ToDo classes.
  *
  * @author Leong Hong Fai
  */
 public abstract class Task {
     private String name;
-    private boolean completion;
+    private boolean isCompleted;
 
     public Task(String name) {
         this.name = name;
-        this.completion = false;
+        this.isCompleted = false;
     }
 
     /**
-     * Marks current task as completed.
+     * Sets current task as completed.
      */
     public void setCompleted() {
-        this.completion = true;
+        this.isCompleted = true;
     }
 
 
     /**
+     * Indicates task object's completion using an 'X' or a blank space ' '.
      *
      * @return X or space depending on completion status of the Task object.
      */
     public String getStatusIcon() {
-        return (this.completion
+        return (this.isCompleted
                 ?"X"
                 :" ");
     }
 
 
     /**
-     * Simple string representation of Task.
+     * Represents Task in a String format
      *
      * @return A string consisting of the information of the Task object.
      */

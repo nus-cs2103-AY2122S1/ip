@@ -3,6 +3,9 @@ package duke.task;
 import duke.exception.DukeException;
 import java.util.ArrayList;
 
+/**
+ * Creates an ArrayList to store tasks and provides functionality to manipulate the tasks inside the ArrayList.
+ */
 public class TaskList {
     private ArrayList<Task> store;
     private String[] input;
@@ -17,11 +20,19 @@ public class TaskList {
         store = new ArrayList<>();
     }
 
+    /**
+     * Represents TaskList in a String format.
+     *
+     * @return String representation of TaskList.
+     */
     @Override
     public String toString() {
         return store.toString();
     }
 
+    /**
+     * Generates the TaskList upon start-up of the Duke using information stored in the text file.
+     */
     private void generateStore() {
         for (int i = 0; i < input.length; i++) {
             String command = input[i];
@@ -59,18 +70,39 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a task to TaskList.
+     *
+     * @param task Task that is to be added.
+     */
     public void add(Task task) {
         store.add(task);
     }
 
+    /**
+     * Gets size of TaskList currently.
+     *
+     * @return Number of Tasks inside the TaskList.
+     */
     public int size() {
         return store.size();
     }
 
+    /**
+     * Gets a specific Task inside TaskList.
+     *
+     * @param taskNumber Task Number to be taken from the TaskList.
+     * @return Task at specified position in the TaskList.
+     */
     public Task get(int taskNumber) {
         return store.get(taskNumber);
     }
 
+    /**
+     * Removes Task from TaskList.
+     *
+     * @param taskNumber Task Number to remove from the TaskList.
+     */
     public void remove(int taskNumber) {
         store.remove(taskNumber);
     }
@@ -78,8 +110,8 @@ public class TaskList {
     /**
      * Prints out the current list of tasks the user has.
      *
-     * @param command entered by user.
-     * @throws DukeException upon invalid commands or empty tasks list.
+     * @param command Command entered by the user.
+     * @throws DukeException Upon invalid commands or empty tasks list.
      */
     public void printList(String command) throws DukeException {
         String[] words = command.split(" ");

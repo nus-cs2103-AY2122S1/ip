@@ -1,11 +1,7 @@
 package duke.exception;
 
 /**
- * Description:
- * DukeException class stores a variety of error messages that will be printed accordingly based on the
- * error encountered while Duke is running.
- *
- * @author Leong Hong Fai
+ * Stores exceptions which generate a variety of error messages based on the error encountered during runtime.
  */
 public class DukeException extends RuntimeException {
     private final String INVALIDTODO = "Enter a valid todo in this format 'todo <task here>'";
