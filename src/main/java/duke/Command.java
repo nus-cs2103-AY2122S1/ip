@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Command {
     /**
-     *
+     * executes different commands from user and save tasks into a file
      * @param tasks takes in TaskList object containing the list of tasks
      * @param ui takes in Ui object containing the list of message to user
      * @param save Storage object to store the TaskList
