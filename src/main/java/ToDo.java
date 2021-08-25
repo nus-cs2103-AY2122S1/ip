@@ -13,6 +13,20 @@ public class ToDo extends Task {
     }
 
     /**
+     * Return string representation of the task to write to hard disk.
+     *
+     * @return The string representation.
+     */
+    @Override
+    public String toSaveInHardDisk() {
+        if (this.isDone) {
+            return "T - 1 - " + this.description;
+        } else {
+            return "T - 0 - " + this.description;
+        }
+    }
+    
+    /**
      * String representation of this task.
      * 
      * @return The string representation.

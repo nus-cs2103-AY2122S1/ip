@@ -41,6 +41,15 @@ public class Task {
         }
     }
 
+    /**
+     * Return string representation of the task to write to hard disk.
+     *
+     * @return The string representation.
+     */
+    public String toSaveInHardDisk() {
+        return "";
+    }
+    
     @Override
     public String toString() {
         return ("[" + this.getStatusIcon() + "] " + this.getDescription());
