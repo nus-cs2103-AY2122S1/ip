@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
@@ -16,6 +18,7 @@ public class Duke {
         System.out.println("----------------------");
         Scanner stdin = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
+        DateTimeFormatter dtformatter = DateTimeFormatter.ISO_DATE;
         while (true){
             String command = stdin.nextLine();
             if ("bye".equals(command)){
@@ -27,7 +30,11 @@ public class Duke {
             else if ("list".equals(command)){
                 System.out.println("Here are the tasks in your list:");
                 for (Task task : tasks){
-                    System.out.println(task);
+                    if (task.isTimed()){
+                        System.out.println(((TimedTask)task).format(dtformatter));
+                    } else {
+                        System.out.println(task.toString());
+                    }
                 }
             }
             else if (command.startsWith("done ")) {
@@ -59,10 +66,14 @@ public class Duke {
                         System.out.println("Oops! The name and/or time of a deadline cannot be empty");
                     }
                     else {
-                        Task task = new Deadline(name, time);
-                        tasks.add(task);
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println(task);
+                        try {
+                            Task task = new Deadline(name, time);
+                            tasks.add(task);
+                            System.out.println("Got it. I've added this task:");
+                            System.out.println(task);
+                        } catch (DateTimeParseException e) {
+                            System.err.println("Error: Date format not recognised");
+                        }
                     }
                 }
                 else {
@@ -77,10 +88,14 @@ public class Duke {
                         System.out.println("Oops! The name and/or time of an event cannot be empty");
                     }
                     else {
-                        Task task = new Event(name, time);
-                        tasks.add(task);
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println(task);
+                        try {
+                            Task task = new Event(name, time);
+                            tasks.add(task);
+                            System.out.println("Got it. I've added this task:");
+                            System.out.println(task);
+                        } catch (DateTimeParseException e) {
+                            System.err.println("Error: Date format not recognised");
+                        }
                     }
                 }
                 else {
@@ -101,6 +116,15 @@ public class Duke {
                 }
                 if (!taskFound){
                     System.out.println("Oops! A task of that name could not be found :(");
+                }
+            }
+            else if (command.startsWith("dateformat ")){
+                try {
+                    String newDtformat = command.substring(11);
+                    dtformatter = DateTimeFormatter.ofPattern(newDtformat);
+                    System.out.println("Gotcha :D Dates are now printed as: " + newDtformat);
+                } catch (DateTimeParseException e) {
+                    System.err.println("Error: Date format not recognised");
                 }
             }
             else {
