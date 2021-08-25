@@ -23,7 +23,7 @@ public class Duke {
                         System.out.printf("%d.%s\n", i + 1, tasks.get(i));
                     }
                     break;
-                default:
+                default: // changes made
                     if (input.matches("done \\d+")) {
                         int i = Integer.parseInt(input.substring("done ".length()));
                         System.out.println("Nice! I've marked this task as done:");
@@ -37,42 +37,36 @@ public class Duke {
                         System.out.println(t);
                     } else {
                         try {
+                            Task t;
                             if (input.matches("event.*")) {
                                 int k = input.indexOf("/at");
                                 if (k < 0) {
                                     throw new DukeException.MissingArgumentException("/at");
                                 }
-                                Task t  = new Event(input.substring("event".length(), k).trim(),input.substring(k + 3).trim());
-                                System.out.println("Got it. I've added this task:");
-                                System.out.println(t);
-                                tasks.add(t);
+                                t = new Event(input.substring("event".length(), k).trim(), input.substring(k + 3).trim());
                             } else if (input.matches("deadline.*")) {
                                 int k = input.indexOf("/by");
                                 if (k < 0) {
                                     throw new DukeException.MissingArgumentException("/by");
                                 }
-                                Task t  = new Deadline(input.substring("deadline".length(), k).trim(),input.substring(k + 3).trim());
-                                System.out.println("Got it. I've added this task:");
-                                System.out.println(t);
-                                tasks.add(t);
+                                t = new Deadline(input.substring("deadline".length(), k).trim(), input.substring(k + 3).trim());
                             } else if (input.matches("todo.*")) {
-                                Task t = new Todo(input.substring("todo".length()));
-                                System.out.println("Got it. I've added this task:");
-                                System.out.println(t);
-                                tasks.add(t);
+                                t = new Todo(input.substring("todo".length()));
                             } else {
                                 throw new DukeException.UnknownInputException();
                             }
-                            System.out.printf("Now you have %d tasks in the list\n", tasks.size());
+                            tasks.add(t);
+                            System.out.printf("Got it. I've added this task:\n%s\nNow you have %d tasks in the list\n", t, tasks.size());
                         } catch (Exception err) {
                             System.out.println(err.getMessage());
                         }
-
-
                     }
-
             }
         }
+    }
+
+    public void addTask(Task t) {
+
     }
 }
 
