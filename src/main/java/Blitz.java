@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Scanner;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +29,7 @@ public class Blitz {
         printFormatted("So what can I do for you today?");
 
         Scanner scanner = new Scanner(System.in);
+
         //command from the user
         String command = scanner.nextLine();
 
@@ -41,6 +48,7 @@ public class Blitz {
             System.err.println(e);
         }
 
+
         //if the user enter "bye"
         printFormatted("Adiós. Hope to see you again soon!");
     }
@@ -48,7 +56,7 @@ public class Blitz {
     /* To print horizontal line */
     private static void printLine() {
         System.out.print('\t');
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 100; i++) {
             System.out.print('_');
         }
         System.out.println("");
@@ -72,6 +80,7 @@ public class Blitz {
                 System.out.println("\t" + ctr + "." + tasks.get(ctr - 1));
                 ctr++;
             }
+
         }
     }
 
@@ -111,10 +120,12 @@ public class Blitz {
                     current = new Todo(keywords[2]);
                     break;
                 case 'D' :
-                    current = new Deadline(keywords[2], keywords[3]);
+                    current = new Deadline(keywords[2], LocalDateTime.parse(keywords[3],
+                            DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")));
                     break;
                 default :
-                    current = new Event(keywords[2], keywords[3]);
+                    current = new Event(keywords[2], LocalDateTime.parse(keywords[3],
+                            DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")));
                 }
                 if(done.equals(1)) {
                     current.markAsDone();
@@ -196,7 +207,6 @@ public class Blitz {
                             Task deleted = tasks.remove(index);
                             printFormatted("Noted. I've removed this task:" + "\n\t\t" + deleted
                                     + "\n\tNow you have " + tasks.size() + " tasks in the list.");
-
                         } catch (BlitzException ex) {
                             printFormatted(ex.toString());
                         }
@@ -204,28 +214,38 @@ public class Blitz {
                 }
             } else {
                 Task current = new Task("");
-                String[] dateParts = command.split(" /");
-                String[] descriptionParts = dateParts[0].split(" ");
-
                 switch (firstKeyword) {
                 case "todo":
                     current = new Todo(command.substring(5));
                     break;
                 case "deadline":
-                    current = new Deadline(command.substring(9, command.indexOf('/') - 1),
-                            command.substring(command.indexOf('/') + 4));
+                    String date = command.substring(command.indexOf('/') + 4);
+                    try {
+                        LocalDateTime d = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+                        current = new Deadline(command.substring(9, command.indexOf('/') - 1), d);
+                    } catch (DateTimeParseException e) {
+                        throw new BlitzException("Incorrect date/time format! Please enter "
+                                + "deadline date/time in \"d M yyyy HHmm\" format");
+                    }
+
                     break;
-                default:
-                    current = new Event(command.substring(6, command.indexOf('/') - 1),
-                            command.substring(command.indexOf('/') + 4));
+                case "event":
+                    String eventDate = command.substring(command.indexOf('/') + 4);
+                    try {
+                        LocalDateTime ed = LocalDateTime.parse(eventDate, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+                        current = new Event(command.substring(6, command.indexOf('/') - 1), ed);
+                    } catch (DateTimeParseException e) {
+                        throw new BlitzException("Incorrect date/time format! Please enter "
+                                + "event date/time in \"d M yyyy HHmm\" format");
+                    }
+
+                    break;
                 }
 
                 tasks.add(current);
-
                 printFormatted("Got it. I've added this task:" + "\n\t\t" + current + "\n\tNow you have "
                         + tasks.size() + " tasks in the list.");
             }
-
         } else {
             //if the keyword is not valid
             throw new BlitzException("Sorry, but I don't know what that means :-(");
