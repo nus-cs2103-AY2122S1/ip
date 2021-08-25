@@ -48,7 +48,7 @@ public class Logic {
                     for (int i = 0; i < indicatorDeadline; i++) {
                         tempDeadline = tempDeadline + listOfCommandInputs.get(i);
                     }
-                    Persistence.addToLog(new Deadline(tempDeadline, deadline));
+                    Persistence.addToLog(new Deadline(tempDeadline, Parser.convertToDateTime(deadline)));
                     break;
                 case EVENT:
                     int indicatorEvent = listOfCommandInputs.indexOf("/at");

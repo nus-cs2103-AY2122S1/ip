@@ -1,13 +1,15 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task{
 
-    private String deadline;
+    private LocalDateTime deadline;
 
     /**
      * Constructor for Deadline task
      * @param name name of task
      * @param deadline Use to indicate the deadline of the task
      */
-    public Deadline(String name, String deadline) {
+    public Deadline(String name, LocalDateTime deadline) {
            super(name);
            this.deadline = deadline;
     }
@@ -20,4 +22,5 @@ public class Deadline extends Task{
     public String toString() {
         return "[D]" + super.toString() + String.format(" (by: %s)", deadline);
     }
+
 }
