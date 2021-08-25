@@ -26,11 +26,11 @@ public class Parser {
             case "bye":
                 return new ByeCommand();
             case "todo":
-                return Parser.validTodoHandler(input);
+                return validTodoHandler(input);
             case "deadline":
-                return Parser.validDeadlineHandler(input);
+                return validDeadlineHandler(input);
             case "event":
-                return Parser.validEventHandler(input);
+                return validEventHandler(input);
             default:
                 // This is for any other erroneous input we did not catch from checkValidity
                 DukeException e = new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -42,7 +42,7 @@ public class Parser {
 
     }
 
-    public static boolean checkValiditiy(String input, TaskList taskList) throws DukeException {
+    private static boolean checkValiditiy(String input, TaskList taskList) throws DukeException {
         String[] splittedInput = input.split(" ");
         if (input.length() == 0) {
             throw new DukeException("☹ OOPS!!! The input cannot be empty.");
@@ -67,28 +67,28 @@ public class Parser {
         return true;
     }
 
-    public static void checkValidityTodo(String input) throws DukeException {
+    private static void checkValidityTodo(String input) throws DukeException {
         String[] splittedInput = input.split(" ");
         if (splittedInput.length == 1) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
-    public static void checkValidityDeadline(String input) throws DukeException {
+    private static void checkValidityDeadline(String input) throws DukeException {
         String[] splittedInput = input.split(" ");
         if (splittedInput.length == 1) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
     }
 
-    public static void checkValidityEvent(String input) throws DukeException {
+    private static void checkValidityEvent(String input) throws DukeException {
         String[] splittedInput = input.split(" ");
         if (splittedInput.length == 1) {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
         }
     }
 
-    public static void checkValidityDone(String input, TaskList taskList) throws DukeException {
+    private static void checkValidityDone(String input, TaskList taskList) throws DukeException {
         String[] splittedInput = input.split(" ");
         if (splittedInput.length == 1) {
             throw new DukeException("☹ OOPS!!! You must specify an index");
@@ -104,7 +104,7 @@ public class Parser {
         }
     }
 
-    public static void checkValidityDelete(String input, TaskList taskList) throws DukeException {
+    private static void checkValidityDelete(String input, TaskList taskList) throws DukeException {
         String[] splittedInput = input.split(" ");
         if (splittedInput.length == 1) {
             throw new DukeException("☹ OOPS!!! You must specify an index");
@@ -120,19 +120,19 @@ public class Parser {
         }
     }
 
-    public static Command validTodoHandler(String input) {
+    private static Command validTodoHandler(String input) {
         String[] splittedInput = input.split(" ", 2);
         return new TodoCommand(splittedInput[1]);
     }
 
-    public static Command validDeadlineHandler(String input) {
+    private static Command validDeadlineHandler(String input) {
         String details = input.split(" ", 2)[1];
         String regexForDetails = "/by";
         String splittedDetails[] = details.split(regexForDetails);
         return new DeadlineCommand(splittedDetails[0].trim(), splittedDetails[1].trim());
     }
 
-    public static Command validEventHandler(String input) {
+    private static Command validEventHandler(String input) {
         String details = input.split(" ", 2)[1];
         String regexForDetails = "/at";
         String splittedDetails[] = details.split(regexForDetails);
