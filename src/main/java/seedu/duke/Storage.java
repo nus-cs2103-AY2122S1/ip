@@ -25,12 +25,22 @@ import java.util.HashMap;
 class Storage {
     private String filePath;
 
-    Storage(String filePath) {
+    /**
+     * Public constructor for a Storage object.
+     *
+     * @param filePath The filepath of the file object to be handled.
+     */
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Load data from the hard disks.
+     * Load data from the file per the filepath.
+     *
+     * @param dateTasks A HashMap to keep track of tasks happening on specific
+     *                  dates.
+     * @param taskList The tasklist to be updated as the file content is read.
+     * @return The updated tasklist.
      */
     public TaskList loadData(HashMap<LocalDate, ArrayList<Task>> dateTasks,
                              TaskList taskList) {
@@ -115,6 +125,11 @@ class Storage {
         return description;
     }
 
+    /**
+     * Append the newly added task to the file contents.
+     *
+     * @param task The task to be appended to the file contents.
+     */
     public void addTaskToFile(Task task) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
@@ -125,6 +140,12 @@ class Storage {
         }
     }
 
+    /**
+     * Update the file contents to reflect the updated list after
+     * a task has been deleted from it.
+     *
+     * @param taskList The updated tasklist after a deletion.
+     */
     public void deleteTaskFromFile(TaskList taskList) {
         try {
             File file = new File(filePath);
@@ -135,6 +156,13 @@ class Storage {
         }
     }
 
+    /**
+     * Edit the file contents to reflect that a particular task has been marked.
+     * Compares the updated line with the existing one to be replaced.
+     *
+     * @param task String representation of the editted task.
+     * @param toUpdate String representation of the pre-editted task.
+     */
     public void markTaskAsCompleted(String task, String toUpdate) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
