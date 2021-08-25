@@ -1,3 +1,4 @@
+
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -54,13 +55,13 @@ public class Duke {
                         int index = desc.indexOf("at:");
                         int n = desc.length();
                         String date = desc.substring(index + 4, n-1);
-                        currTask = new Event(desc.substring(0,index), done, date);
+                        currTask = new Event(desc.substring(0,index), done, LocalDate.parse(date));
                     } else if(tasktype == 'D') {
                         int index = desc.indexOf("by:");
                         int n = desc.length();
                         String date = desc.substring(index + 4, n-1);
 
-                        currTask = new Deadline(desc.substring(0, index), done, date);
+                        currTask = new Deadline(desc.substring(0, index), done, LocalDate.parse(date));
                     }
                     tasks.add(currTask);
                 }
@@ -160,7 +161,7 @@ public class Duke {
                 //if remaining string is whitespace or empty
                 throw new DukeException("deadline needs to have dates !");
             }
-            return new Deadline(task, false, date);
+            return new Deadline(task, false, LocalDate.parse(date.trim()));
         } else if(userInput.startsWith("event")) {
             int start_id = userInput.indexOf("event");
             int task_id = userInput.indexOf("/at");
@@ -170,7 +171,7 @@ public class Duke {
             if(task_id == -1) {
                 throw new DukeException("You need to specify at using /at !");
             }
-            return new Event(task, false, date);
+            return new Event(task, false, LocalDate.parse(date.trim()));
         } else {
             throw new DukeException("I don't understand what you are talking about !");
         }
