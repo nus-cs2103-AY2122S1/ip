@@ -1,8 +1,10 @@
 package duke;
 
 public class Ui {
+    /**
+     * Prints introduction message.
+     */
     public void greeting() {
-        // Introduction message
         String logo = "______ _____ _   _ \n" +
                 "| ___ \\  ___| \\ | |\n" +
                 "| |_/ / |__ |  \\| |\n" +
@@ -15,6 +17,7 @@ public class Ui {
 
     /**
      * Prints dukes reply in between two lines.
+     *
      * @param message Duke's reply.
      */
     public void dukeReply(String message) {

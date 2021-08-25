@@ -5,12 +5,23 @@ public class Parser {
     Storage storage;
     TaskList taskList;
 
+    /**
+     * Constructor for parser which requires Storage and TaskList Objects.
+     * @param storage Storage object.
+     * @param tasks TaskList object.
+     */
     public Parser(Storage storage, TaskList tasks) {
         this.storage = storage;
         this.taskList = tasks;
         this.ui = new Ui();
     }
 
+    /**
+     * Parses the users input and decides acts accordingly.
+     *
+     * @param userInput Input from user.
+     * @return False if user wants to close the program and true otherwise.
+     */
     public Boolean command(String userInput) {
         String toReply;
         if (userInput.equalsIgnoreCase("bye")) {

@@ -20,6 +20,9 @@ public class Duke {
         parser = new Parser(storage, tasks);
     }
 
+    /**
+     * Takes in users input and parses it.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         while (true) {

@@ -1,7 +1,7 @@
 package duke;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 
 public class Task {
     private String task;
@@ -27,6 +27,7 @@ public class Task {
 
     /**
      * Constructor for tasks of type todo which do not have a date.
+     *
      * @param task Todo type task.
      * @param taskSymbol T.
      */
@@ -37,7 +38,8 @@ public class Task {
     }
 
     /**
-     * Representation of task in the from that it is stored in the data file.
+     * Represents task in the from that it is stored in the data file.
+     *
      * @return String of the task in the form required by teh data file.
      */
     public String getDataRep() {
@@ -58,7 +60,8 @@ public class Task {
     }
 
     /**
-     * Get the symbol of the task which is the first letter of the task type.
+     * Gets the symbol of the task which is the first letter of the task type.
+     *
      * @return Upper-case first letter of task type.
      */
     public String getTaskSymbol() {
@@ -66,8 +69,9 @@ public class Task {
     }
 
     /**
-     * Getter for the type of task - todo, event and deadline.
-     * @return duke.Task type.
+     * Gets the type of task - todo, event and deadline.
+     *
+     * @return String representation of task type.
      */
     public String getTaskType() {
         if(this.taskSymbol.equals("T")) {

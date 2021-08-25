@@ -17,6 +17,11 @@ public class Storage {
         utility = new Utility();
     }
 
+    /**
+     * Loads data stored on hard disk into local list for easy manipulation.
+     *
+     * @return ArrayList of Task objects from previous session.
+     */
     public List<Task> loadData() {
         List<Task> tasks = new ArrayList<Task>(100);
 
@@ -54,6 +59,7 @@ public class Storage {
 
     /**
      * Rewrites content in dataset according to the ArrayList.
+     *
      * @param list ArrayList of tasks.
      */
     public void updateDataSet(List<Task> list) {
@@ -72,6 +78,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns data path associated with this program.
+     *
+     * @return Path object.
+     */
     public Path getDataPath() {
         return this.dataPath;
     }

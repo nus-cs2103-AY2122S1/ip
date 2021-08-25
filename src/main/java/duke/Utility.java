@@ -14,25 +14,36 @@ public class Utility {
     }
 
     /**
-     * Converts a date from String class to LocalDateTime class
-     * @param str The String representation of a date
+     * Converts a date from String class to LocalDateTime class.
+     *
+     * @param str The String representation of a date.
      * @return LocalDateTime representation of the date.
      */
     public LocalDateTime stringToDate(String str) {
         return (LocalDateTime.parse(str, inputFormat));
     }
 
-
+    /**
+     * Converts dateTime to String representation seen by user.
+     * @param dateTime dateTime of Task object.
+     * @return String representation of the date and time.
+     */
     public String dateToString(LocalDateTime dateTime) {
         return dateTime.format(outputFormat);
     }
 
+    /**
+     * Converts dateTime to String to be saved in storage
+     * @param dateTime dateTime of Task object.
+     * @return String representation of the date and time.
+     */
     public String dateToInputString(LocalDateTime dateTime) {
         return dateTime.format(inputFormat);
     }
 
     /**
      * Seperates the date and task from the users input.
+     *
      * @param taskIndex Beginning index of the task in the given String.
      * @param dateIndex Beginning index of the date in the given String.
      * @param userInput String of task containing task and date.

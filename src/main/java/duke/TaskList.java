@@ -26,6 +26,7 @@ public class TaskList {
 
     /**
      * Adds a task to the List of tasks and to the data file.
+     *
      * @param userInput String of task to add.
      * @param dataPath Path to the data storage file.
      */
@@ -57,6 +58,7 @@ public class TaskList {
             // Add task to data file
             dataToStore = taskToAdd.getDataRep();
             Files.writeString(dataPath, dataToStore + System.lineSeparator(), StandardOpenOption.APPEND);
+
             // Add task To arrayList
             this.tasks.add(taskToAdd);
 
@@ -65,17 +67,14 @@ public class TaskList {
 
         }catch(IllegalArgumentException e) {
             return("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } catch(IOException e) {
-            return("Invalid Input format -> <taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
-        } catch(StringIndexOutOfBoundsException e) {
-            return("Invalid Input format -> <taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
-        } catch (DateTimeParseException e) {
+        } catch(IOException | DateTimeParseException | StringIndexOutOfBoundsException e) {
             return("Invalid Input format -> <taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
         }
     }
 
     /**
      * Deletes a task from the array of tasks.
+     *
      * @param userInput String of task to delete.
      */
     public String deleteTask(String userInput) {
@@ -97,6 +96,7 @@ public class TaskList {
 
     /**
      * Marks a task as complete.
+     *
      * @param userInput Text beginning with 'done' followed by a number.
      */
     public String markTaskDone(String userInput) {
@@ -124,6 +124,7 @@ public class TaskList {
 
     /**
      * Prints the list of todos sequentially.
+     *
      * @param tasks List of current tasks.
      */
     public String showTasks(List<Task> tasks) {
