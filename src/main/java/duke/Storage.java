@@ -72,12 +72,15 @@ public class Storage {
             while (fileScanner.hasNext()) {
                 parseAndCreateTask(fileScanner.nextLine(), taskList);
             }
+
         } catch (FileNotFoundException fileException) {
             try {
                 File parentDir = new File(dataFile.getParent());
+
                 if (!parentDir.exists()) {
                     parentDir.mkdir();
                 }
+
                 dataFile.createNewFile();
             } catch (IOException ioException) {
                 throw new DukeException("failed database creation");
@@ -88,13 +91,13 @@ public class Storage {
 
     public void saveData(TaskList taskList) throws DukeException {
         try (FileWriter fw = new FileWriter(this.filePath)) {
-
             StringBuilder dataString = new StringBuilder();
 
             for (int i = 0; i < taskList.size(); i++) {
                 Task currentTask = taskList.get(i);
                 dataString.append(currentTask.getData() + "\n");
             }
+
             fw.write(dataString.toString());
 
         } catch (IOException e) {
