@@ -5,15 +5,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
+    private String filepath;
 
-    public static void save(ArrayList<Task> tasks) {
+    public Storage(String filepath) {
+        this.filepath = filepath;
+    }
+
+    public void save(TaskList tasks) {
         try {
-            File file = new File("data/duke.txt");
+            File file = new File(filepath);
 
             if (!file.exists()) {
                 file.createNewFile();
             }
-            FileWriter writer = new FileWriter("data/duke.txt");
+            FileWriter writer = new FileWriter(filepath);
             String toSave = "";
             for (int i = 0; i < tasks.size(); i++) {
                 Task currentTask = tasks.get(i);
@@ -31,10 +36,10 @@ public class Storage {
         }
     }
 
-    public static TaskList load() {
+    public TaskList load() {
         ArrayList<Task> loadedTaskList = new ArrayList<>();
         try {
-            File file = new File("data/duke.txt");
+            File file = new File(filepath);
             if (file.createNewFile()) {
                 return new TaskList();
             }

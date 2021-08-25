@@ -4,13 +4,13 @@ public class Ui {
         System.out.println("____________________________________________");
     }
 
-    public static void printWelcomeMessage() {
+    public void printWelcomeMessage() {
         printLine();
         System.out.println("Hello I'm Duke\nWhat can I do for you?");
         printLine();
     }
 
-    public static void printGoodbyeMessage() {
+    public void printGoodbyeMessage() {
         printLine();
         System.out.println("\tBye. Hope to see you again soon!");
         printLine();

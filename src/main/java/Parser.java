@@ -1,3 +1,5 @@
+import java.time.format.DateTimeParseException;
+
 public class Parser {
     private TaskList tasks;
 
@@ -38,15 +40,21 @@ public class Parser {
             if (commandDesc.equals("")) {
                 throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
             }
-            String[] commandDescSplit = commandDesc.split("/by");
-            this.tasks.addTask(new Deadline(commandDescSplit[0], commandDescSplit[1]));
+            try {
+                String[] commandDescSplit = commandDesc.split("/by");
+                this.tasks.addTask(new Deadline(commandDescSplit[0].trim(), commandDescSplit[1].trim()));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("You've entered a date in an invalid format! " +
+                        "\nIt should be in the form: yyyy-mm-dd");
+            }
+
 
         } else if (commandWord.equals("event")) {
             if (commandDesc.equals("")) {
                 throw new DukeException("\t☹ OOPS!!! The description of a event cannot be empty.");
             }
             String[] commandDescSplit = commandDesc.split("/at");
-            this.tasks.addTask(new Event(commandDescSplit[0], commandDescSplit[1]));
+            this.tasks.addTask(new Event(commandDescSplit[0].trim(), commandDescSplit[1].trim()));
 
         } else if (commandWord.equals("delete")) {
             if (commandDesc.equals("")) {

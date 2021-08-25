@@ -1,12 +1,20 @@
 import java.util.Scanner;
 
 public class Duke {
-    private TaskList tasks = new TaskList();
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    private void start() {
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = storage.load();
+    }
+
+    private void run() {
         //Welcome message
-        Ui.printWelcomeMessage();
-        tasks = Storage.load();
+        ui.printWelcomeMessage();
 
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(tasks);
@@ -21,7 +29,8 @@ public class Duke {
             try {
                 if (parser.parse(command) == 1) {
                     end = true;
-                    Ui.printGoodbyeMessage();
+                    ui.printGoodbyeMessage();
+                    storage.save(tasks);
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -31,6 +40,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().start();
+        new Duke("data/duke.txt").run();
     }
 }
