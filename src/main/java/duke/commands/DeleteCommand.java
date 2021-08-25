@@ -13,10 +13,24 @@ import duke.TaskList;
 public class DeleteCommand extends Command {
     private int taskNum;
 
+    /**
+     * Constructs a new delete task command with the given index.
+     * 
+     * @param taskNum the given task index
+     */
     public DeleteCommand(int taskNum) {
         this.taskNum = taskNum;
     }
 
+    /**
+     * Executes the delete command.
+     * 
+     * @param tasks given list of tasks
+     * @param ui given ui object
+     * @param storage given storage object
+     * @throws IOException
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         if (tasks.getTaskList().size() < this.taskNum) {
             throw new DukeException("You cannot complete a task that does not exist!");

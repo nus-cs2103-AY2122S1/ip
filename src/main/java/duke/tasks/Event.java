@@ -39,6 +39,12 @@ public class Event extends Task{
     
     }
 
+    /**
+     * Converts a string to date time format.
+     * 
+     * @param time the given time string
+     * @return the time in LocalDateTime format
+     */
     public LocalDateTime fromStringToDateTime(String time) {
         return LocalDateTime.parse(time.substring(1), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
     }

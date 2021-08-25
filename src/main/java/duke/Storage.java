@@ -45,15 +45,20 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Loads stored tasks from text file
+     * 
+     * @return the list of tasks stored in file
+     * @throws DukeException
+     * @throws IOException
+     */
     public ArrayList<Task> load() throws DukeException, IOException {
         ArrayList<Task> taskList = new ArrayList<>();
         File nekoData = new File(this.filePath);
         if (!nekoData.exists()) {
             nekoData.getParentFile().mkdir();
             nekoData.createNewFile();
-            System.out.println("File created: " + nekoData.getName());
         } else {
-            System.out.println("File already exists.");
             Scanner scanner = new Scanner(nekoData);
             while (scanner.hasNextLine()) {
                 String s = scanner.nextLine();
@@ -103,6 +108,14 @@ public class Storage {
         writer.close();
     }
     
+    /**
+     * Marks a task as done in the list in the text file.
+     * 
+     * @param num the index of the task in the list
+     * @param scanner scanner for the file
+     * @param tasks the given tasks list
+     * @throws IOException
+     */
     public void markAsDoneInFile(int num, Scanner scanner, TaskList tasks) throws IOException {
         Task task = tasks.taskList.get(num - 1);
         String fileString = "";

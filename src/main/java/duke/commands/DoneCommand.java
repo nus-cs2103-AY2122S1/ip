@@ -13,10 +13,24 @@ import duke.TaskList;
 public class DoneCommand extends Command {
     private int taskNum;
 
+    /**
+     * Constructs a new mark task as done command with the given index.
+     * 
+     * @param taskNum the given task index
+     */
     public DoneCommand(int taskNum) {
         this.taskNum = taskNum;
     }
 
+    /**
+     * Executes the mark as done command.
+     * 
+     * @param tasks given list of tasks
+     * @param ui given ui object
+     * @param storage given storage object
+     * @throws IOException
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         ArrayList<Task> taskList = tasks.getTaskList();
         if (taskList.size() < this.taskNum) {

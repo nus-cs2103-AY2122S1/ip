@@ -12,10 +12,24 @@ import duke.tasks.Todo;
 public class AddCommand extends Command{
     private Task task;
 
+    /**
+     * Constructs a new add task command with the given task.
+     * 
+     * @param task the given task
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
-
+    
+    /**
+     * Executes the add task command.
+     * 
+     * @param tasks given list of tasks
+     * @param ui given ui object
+     * @param storage given storage object
+     * @throws IOException
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException{
         if (this.task instanceof Todo) {
             addTask(this.task, tasks);

@@ -56,14 +56,4 @@ public class Task {
     public String toString() {
         return (this.prefix + " " + showStatus() + this.name);
     }
-
-
-    // /**
-    //  * print out the relevant info of the task with number in front
-    //  * 
-    //  * @param num the index of the task in the task list
-    //  */
-    // public void showThisTask(int num) {
-    //     System.out.println(num +  "."+ this.prefix + showStatus() + this.name);
-    // }
 }

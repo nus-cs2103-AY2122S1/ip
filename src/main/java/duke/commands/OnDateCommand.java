@@ -14,10 +14,24 @@ import duke.TaskList;
 public class OnDateCommand extends Command {
     private String dateString;
 
+    /**
+     * Constructs a new find tasks on a date command with the given date.
+     * 
+     * @param dateString the string of the date
+     */
     public OnDateCommand(String dateString) {
         this.dateString = dateString;
     }
 
+    /**
+     * Executes the find tasks on a date command.
+     * 
+     * @param tasks given list of tasks
+     * @param ui given ui object
+     * @param storage given storage object
+     * @throws IOException
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         boolean isFormattedDate = true;
         try {

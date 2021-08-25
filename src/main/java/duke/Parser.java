@@ -12,6 +12,14 @@ import duke.tasks.Event;
 import duke.tasks.Todo;
 
 public class Parser {
+
+    /**
+     * Parses user input and responds with corresponding commands.
+     * 
+     * @param userInput input by user
+     * @return corresponding command of the input
+     * @throws DukeException
+     */
     public static Command parse(String userInput) throws DukeException {
         int firstBlankIndex = userInput.indexOf(" ");
         String commandWord = firstBlankIndex == -1 ? userInput : userInput.substring(0, firstBlankIndex);
