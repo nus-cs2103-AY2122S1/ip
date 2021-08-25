@@ -1,4 +1,4 @@
 D, false, return book /by 2021-09-10T18:00
 E, true, project meeting /from 2021-02-19T18:00 /to 2021-02-19T23:59
 T, false, join sports club
-T, true, read book
+T, false, read book

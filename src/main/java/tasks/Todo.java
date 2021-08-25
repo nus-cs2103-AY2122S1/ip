@@ -1,3 +1,7 @@
+package tasks;
+
+import tasks.Task;
+
 /**
  * To-do class for tasks without any date/time attached to it
  *
@@ -16,7 +20,7 @@ public class Todo extends Task {
      * @return a string representation of the to-do task.
      */
     public String getTask() {
-        return "[T]" + "[" + getStatusIcon() + "] " + description;
+        return "[T]" + "[" + getStatusIcon() + "] " + super.getDescription();
     }
 
 }

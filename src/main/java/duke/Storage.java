@@ -1,3 +1,7 @@
+package duke;
+
+import tasks.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -19,8 +23,6 @@ public class Storage {
         final Path p = Paths.get(PATH);
         final String DIRECTORY = p.getParent().toString();
         final String FILENAME = p.getFileName().toString();
-        System.out.println(DIRECTORY);
-        System.out.println(FILENAME);
 
         File file = new File(FILENAME);
         File dir = new File(DIRECTORY);
@@ -71,7 +73,7 @@ public class Storage {
             FileWriter fw = new FileWriter(PATH);
 
             for (Task t : tasks) {
-                String str = t.type + ", " + t.isDone + ", " + t.description;
+                String str = t.getType() + ", " + t.isDone() + ", " + t.getDescription();
                 fw.write(str + "\n");
             }
 

@@ -1,16 +1,18 @@
+package tasks;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline class for tasks that need to be done before a specific date/time
+ * tasks.Deadline class for tasks that need to be done before a specific date/time
  *
  * @author: Chen Hsiao Ting
  */
 
 public class Deadline extends Task {
-    protected String description;
-    protected String deadline;
+    private String description;
+    private String deadline;
 
     public Deadline(String description, Boolean isDone) {
         super(description, isDone, "D");

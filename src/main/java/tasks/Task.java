@@ -1,16 +1,18 @@
+package tasks;
+
 /**
- * Task class to represent a task.
+ * tasks.Task class to represent a task.
  *
  * @author: Chen Hsiao Ting
  */
 
 public class Task {
-    protected String description;
-    protected boolean isDone;
-    protected String type;
+    private String description;
+    private boolean isDone;
+    private String type;
 
     /**
-     * Construct a Task object with a given description.
+     * Construct a tasks.Task object with a given description.
      * @param description The description of the task input by user.
      */
     public Task(String description, Boolean isDone, String type) {
@@ -63,4 +65,11 @@ public class Task {
         return isDone;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public String getType() {
+        return type;
+    }
 }

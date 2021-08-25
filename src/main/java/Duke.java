@@ -1,5 +1,12 @@
+
+
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
+import tasks.TaskList;
+
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Duke class encapsulate a chatbot service.
@@ -28,12 +35,12 @@ public class Duke {
 
     public void run() {
         Ui.welcome();
-        Parser.startDuke();
+        Parser.startDuke(tasks);
         Storage.saveList();
     }
 
     public static void main(String[] args) {
-        new Duke("data/dude.txt").run();
+        new Duke("data/duke.txt").run();
     }
 
 }

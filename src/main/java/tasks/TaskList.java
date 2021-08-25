@@ -1,8 +1,10 @@
+package tasks;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
-    protected static ArrayList<Task> tasks = new ArrayList<Task>();
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -11,7 +13,7 @@ public class TaskList {
     public TaskList() {
     }
 
-    public static String list() {
+    public String list() {
         int count = 1;
         String str = "Here are the tasks in your list:";
         for (Task t : tasks) {
@@ -21,12 +23,12 @@ public class TaskList {
         return str;
     }
 
-    public static String done(String str) {
+    public String done(String str) {
         int index = Integer.parseInt(str.substring(5)) - 1;
         return tasks.get(index).markDone();
     }
 
-    public static String delete(String str) {
+    public String delete(String str) {
         int index = Integer.parseInt(str.substring(7)) - 1;
         String result = "Noted. I've removed this task: \n" + tasks.get(index).delete() +
                 "\nNow you have " + (tasks.size() - 1) + " tasks in the list.";
@@ -34,7 +36,7 @@ public class TaskList {
         return result;
     }
 
-    public static String addTask(String str) {
+    public String addTask(String str) {
         String type = "";
         try {
             String[] words = str.split(" ");
@@ -81,5 +83,9 @@ public class TaskList {
             }
             return message;
         }
+    }
+
+    public int getSize() {
+        return tasks.size();
     }
 }

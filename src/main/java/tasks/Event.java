@@ -1,15 +1,19 @@
+package tasks;
+
+import tasks.Task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event class for tasks that start at a specific time and ends at a specific time
+ * tasks.Event class for tasks that start at a specific time and ends at a specific time
  *
  * @author: Chen Hsiao Ting
  */
 
 public class Event extends Task {
-    protected String description;
-    protected String time;
+    private String description;
+    private String time;
 
     public Event(String description, Boolean isDone) {
         super(description, isDone, "E");
