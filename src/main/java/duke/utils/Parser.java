@@ -54,6 +54,9 @@ public class Parser {
         } else if (true == fullCommand.startsWith("delete")) {
             taskNum = Integer.parseInt(fullCommand.substring(7)) - 1;
             return new Command.DeleteCommand(taskNum);
+        } else if (true == fullCommand.startsWith("find")) {
+            String keyword = fullCommand.substring(5);
+            return new Command.FindCommand(keyword);
         } else {
             UnknownInputException e = new UnknownInputException();
             throw e;

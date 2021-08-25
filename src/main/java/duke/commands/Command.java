@@ -8,6 +8,8 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+import java.util.HashMap;
+
 /**
  * Contains all the static nested classes to represent various user commands to the chat-bot.
  */
@@ -232,6 +234,20 @@ public abstract class Command {
             tasks.deleteTask(this.taskNum);
             storage.removePersistedTask(this.taskNum);
             ui.showTaskDeletedInteraction(taskToDelete, tasks);
+        }
+    }
+
+    public static class FindCommand extends Command {
+        private final String keyword;
+
+        public FindCommand(String keyword) {
+            this.keyword = keyword;
+        }
+
+        @Override
+        public void execute(TaskList tasks, Ui ui, Storage storage) {
+            HashMap<String, Task> matchingTasks = tasks.getMatchingTasks(this.keyword);
+            ui.showMessagePrintingAllMatchingTasks(matchingTasks, tasks);
         }
     }
 

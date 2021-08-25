@@ -3,6 +3,7 @@ package duke.utils;
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -100,6 +101,18 @@ public class Ui {
      */
     public void showError(DukeException e) {
         System.out.println(e.getMessage());
+    }
+
+    public void showMessagePrintingAllMatchingTasks(HashMap<String, Task> matchingTasks, TaskList tasks) {
+        System.out.println("Here are all the matching tasks in your list:");
+        for (int counter = 1; counter <= tasks.getSize(); counter++) {
+            String key = String.valueOf(counter);
+            if (matchingTasks.containsKey(key)) {
+                Task matchedTask = matchingTasks.get(key);
+                System.out.println(key + "." + matchedTask.toString());
+            }
+        }
+        System.out.println(String.format("There are %d matching tasks in the list.", matchingTasks.size()));
     }
 
 }
