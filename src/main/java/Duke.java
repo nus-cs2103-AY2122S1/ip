@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Duke {
 
     //To do list storage DS
-    private static final ArrayList<Task> list = new ArrayList<>();
+    protected static final ArrayList<Task> list = new ArrayList<>();
 
     private static final String filepath = "data/duke.txt";
     //Constants
@@ -24,7 +24,7 @@ public class Duke {
         Duke.welcomeMessage();
 
         try {
-            loadFileContents(Duke.filepath);
+            Storage.loadFileContents(Duke.filepath);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
@@ -102,7 +102,7 @@ public class Duke {
     private static void markDone(int i) throws DukeException {
         System.out.println(Duke.start + "Nice! I've marked this task as done: ");
         Duke.list.get((int) i - 1).markAsDone();
-        Duke.writeToFile(filepath, Duke.list);
+        Storage.writeToFile(filepath, Duke.list);
         String res = Duke.list.get(i-1).toString();
         System.out.println(res + "\n" +  Duke.end);
     }
@@ -116,7 +116,7 @@ public class Duke {
         String t = input.split("todo ")[1];
         ToDo td = new ToDo(t);
         Duke.list.add(td);
-        Duke.writeToFile(filepath, Duke.list);
+        Storage.writeToFile(filepath, Duke.list);
         System.out.println(Duke.start + "Got it. I've added this task: \n " + td.toString() + "\n"
                             + "Now you have " + Duke.list.size()  + " tasks in the list."  + "\n" +Duke.end);
     }
@@ -125,7 +125,7 @@ public class Duke {
         String t = input.split("deadline ")[1];
         Deadline dl = new Deadline(t);
         Duke.list.add(dl);
-        Duke.writeToFile(filepath, Duke.list);
+        Storage.writeToFile(filepath, Duke.list);
         System.out.println(Duke.start + "Got it. I've added this task: \n " + dl.toString() + "\n"
                 + "Now you have " + Duke.list.size()  + " tasks in the list."  + "\n" +Duke.end);
     }
@@ -134,7 +134,7 @@ public class Duke {
         String t = input.split("event ")[1];
         Event e = new Event(t);
         Duke.list.add(e);
-        Duke.writeToFile(filepath, Duke.list);
+        Storage.writeToFile(filepath, Duke.list);
         System.out.println(Duke.start + "Got it. I've added this task: \n " + e.toString() + "\n"
                 + "Now you have " + Duke.list.size()  + " tasks in the list."  + "\n" +Duke.end);
     }
@@ -143,60 +143,11 @@ public class Duke {
         System.out.println(Duke.start + "Noted. I've removed this task: ");
         String deleted = Duke.list.get(i-1).toString();
         Duke.list.remove(i - 1);
-        Duke.writeToFile(filepath, Duke.list);
+        Storage.writeToFile(filepath, Duke.list);
         System.out.println(" " + deleted);
         System.out.println("Now you have " + Duke.list.size() + " tasks in the list." + "\n" +  Duke.end);
     }
 
-    private static void loadFileContents(String filePath) throws FileNotFoundException {
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            // Read and add the task into the list
-            String input = s.nextLine();
-            String[] arrOfInputs = input.split("\\|");
-            readInputs(arrOfInputs);
-        }
-    }
 
-    private static void readInputs(String[] arrOfInputs) {
-        //Check for T, D, E
-        if (arrOfInputs[0].equals("T")) {
-            String t = arrOfInputs[2];
-            ToDo td = new ToDo(t);
-            Duke.list.add(td);
-        } else if (arrOfInputs[0].equals("D")) {
-            String t = arrOfInputs[2] + " /by " + arrOfInputs[3];
-            Deadline d = new Deadline(t);
-            Duke.list.add(d);
-        } else if (arrOfInputs[0].equals("E")) {
-            String t = arrOfInputs[2] + " /at " + arrOfInputs[3];
-            Event e = new Event(t);
-            Duke.list.add(e);
-        }
-
-        int currListLength = Duke.list.size();
-        //Check if its completed or not (0,1) and mark accordingly
-        if (arrOfInputs[1].equals("1")) {
-            Duke.list.get(currListLength - 1).markAsDone();
-        }
-    }
-
-    public static void writeToFile(String filePath, ArrayList<Task> taskList) throws DukeException {
-        try {
-            File file = new File(filePath);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            FileWriter fileWriter = new FileWriter(file.getAbsolutePath());
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            for (Task t: taskList) {
-                bufferedWriter.write(t.getTaskInfo() + System.lineSeparator());
-            }
-            bufferedWriter.close();
-        } catch (IOException e) {
-            throw new DukeException("Could not write to file!");
-        }
-    }
 }
 
