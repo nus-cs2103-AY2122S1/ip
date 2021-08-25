@@ -36,7 +36,7 @@ class Storage {
 
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
-            String task;
+            String task = "";
             while((task = reader.readLine()) != null) {
                 char type = task.charAt(1);
                 boolean isCompleted = task.charAt(4) == 'X';
@@ -44,8 +44,10 @@ class Storage {
                 DateTimeManager manager = new DateTimeManager(DateTimeFormatter.ISO_DATE);
 
                 String description = parseDescription(task);
-                Task newTask;
-                LocalDate time;
+
+                // Dummy objects initialised.
+                Task newTask = new Task("");
+                LocalDate time = LocalDate.now();
 
                 switch (type) {
                 case 'T':
@@ -134,7 +136,7 @@ class Storage {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
-            String line;
+            String line ="";
             String newContent = "";
             while((line = reader.readLine()) != null) {
                 if (line.compareTo(toUpdate) == 0) {
