@@ -1,6 +1,7 @@
 todo,0,hello
-deadline,0,dooby,2014-05-04 1234
-todo,0,kjnfjnrr n jn jn n
-deadline,0,shave due,2020-05-04 1200
-todo,0,something
+deadline,1,shave due,2020-05-04 1200
 deadline,0,da doo dee,2020-04-04 1234
+todo,1,shez
+todo,1,s
+deadline,0,runnig,1999-02-02 1200
+event,0,trim,1999-02-02 1234

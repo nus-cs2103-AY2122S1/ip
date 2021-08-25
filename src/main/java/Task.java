@@ -7,6 +7,7 @@ public class Task {
     private String statusIcon = " ";
     private String taskSymbol;
     private LocalDateTime date;
+    private  Utility utility;
 
     /**
      * Constructor for Events and Deadlines which have a date
@@ -19,6 +20,7 @@ public class Task {
         this.isDone = false;
         this.taskSymbol = taskSymbol;
         this.date = date;
+        this.utility = new Utility();
     }
 
     /**
@@ -77,8 +79,7 @@ public class Task {
     }
 
     public String dateToString(LocalDateTime dateTime) {
-        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MM yyyy | HHmm");
-        return dateTime.format(outputFormat);
+        return utility.dateToString(dateTime);
     }
 
     /**
