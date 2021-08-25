@@ -28,7 +28,7 @@ public class ToDo extends Task {
      */
     @Override
     public String dataFormat() {
-        return String.format("T, %d, %s\n", isDoneInt(), getContent());
+        return String.format("T, %d, %s\n", getStatusInt(), getContent());
     }
 
     /**

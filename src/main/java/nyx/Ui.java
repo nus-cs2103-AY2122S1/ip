@@ -11,7 +11,7 @@ public class Ui {
     private final Scanner sc;
 
     /**
-     * Constructs a Ui object
+     * Constructs a Ui object.
      */
     public Ui() {
         this.sc = new Scanner(System.in);

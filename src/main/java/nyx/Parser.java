@@ -41,53 +41,57 @@ public class Parser {
             } catch (IOException e) {
                 throw new NyxException("Unable to save the changes...");
             }
-        case "todo": {
+        case "todo":
             if (info.isEmpty()) {
                 throw new NyxException("The description of a todo cannot be empty.");
             }
-            ToDo task = new ToDo(info);
+
+            ToDo toDo = new ToDo(info);
+
             try {
-                dataManager.addData(task);
-                taskList.addTask(task);
+                dataManager.addData(toDo);
+                taskList.addTask(toDo);
                 return String.format("Got it. I've added this task:\n\t  %s\nNow you have %d tasks in the list.",
-                        task, taskList.getNumTasks());
+                        toDo, taskList.getNumTasks());
             } catch (IOException e) {
                 throw new NyxException("Unable to save this todo...");
             }
-        }
-        case "deadline": {
+        case "deadline":
             if (info.isEmpty()) {
                 throw new NyxException("The description of a deadline cannot be empty.");
             }
+
             String[] splitInfo = info.split(" /by ");
-            Deadline task = new Deadline(splitInfo[0].strip(), splitInfo[1]);
+            Deadline deadline = new Deadline(splitInfo[0].strip(), splitInfo[1]);
+
             try {
-                dataManager.addData(task);
-                taskList.addTask(task);
+                dataManager.addData(deadline);
+                taskList.addTask(deadline);
                 return String.format("Got it. I've added this task:%n  %s\nNow you have %d tasks in the list.",
-                        task, taskList.getNumTasks());
+                        deadline, taskList.getNumTasks());
             } catch (IOException e) {
                 throw new NyxException("Unable to save this deadline...");
             }
-        }
-        case "event": {
+        case "event":
             if (info.isEmpty()) {
                 throw new NyxException("The description of an event cannot be empty.");
             }
-            String[] splitInfo = info.split(" /at ");
-            Event task = new Event(splitInfo[0].strip(), splitInfo[1]);
+
+            splitInfo = info.split(" /at ");
+            Event event = new Event(splitInfo[0].strip(), splitInfo[1]);
+
             try {
-                dataManager.addData(task);
-                taskList.addTask(task);
+                dataManager.addData(event);
+                taskList.addTask(event);
                 return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
-                        task, taskList.getNumTasks());
+                        event, taskList.getNumTasks());
             } catch (IOException e) {
                 throw new NyxException("Unable to save this event...");
             }
-        }
         case "delete":
             try {
                 int index = Integer.parseInt(info) - 1;
+
                 if (taskList.getNumTasks() > 0) {
                     Task task = taskList.getTask(index);
                     taskList.removeTask(index);
