@@ -140,7 +140,7 @@ public class TaskList {
     }
 
     public String find(String query) {
-        StringBuilder output = new StringBuilder("Here is the list of tasks that match query '" +
+        StringBuilder output = new StringBuilder("The following task(s) matches query '" +
                 query + "':\n");
         int count = 0;
         for (Task currentTask : taskList) {
@@ -150,7 +150,7 @@ public class TaskList {
             }
         }
         if (count == 0) {
-            return "OOPS! No task has a description that matches your query!";
+            return "OOPS! There are no task that matches your query!";
         } else {
             return output.toString();
         }
