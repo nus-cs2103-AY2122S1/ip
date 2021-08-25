@@ -86,4 +86,17 @@ public class TaskList {
             }
         }
     }
+
+    public String toString() {
+        if (tasks.isEmpty()) {
+            return "No tasks";
+        } else {
+            String result = "";
+            for (Task item : tasks) {
+                result += item.toString();
+                result += " ";
+            }
+            return result;
+        }
+    }
 }
