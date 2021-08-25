@@ -50,10 +50,6 @@ public class Duke {
     public static void main(String[] args) {
         Duke user1 = new Duke(new User("User 1"));
         user1.run();
-        user1.run();
-        user1.run();
         Duke.shutdown();
     }
-
-
 }
