@@ -1,7 +1,15 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
+    
+    public TaskList() {
+        
+    }
+    
+    public TaskList(ArrayList<Task> taskData) {
+        tasks = taskData;
+    }
     
     public Task addTask(Task newTask) {
         tasks.add(newTask);
