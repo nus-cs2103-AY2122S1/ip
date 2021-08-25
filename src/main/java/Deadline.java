@@ -21,9 +21,9 @@ public class Deadline extends Task {
     @Override
     public String toSaveInHardDisk() {
         if (this.isDone) {
-            return "D - 1 - " + this.description + " - " + this.by;
+            return "D ; 1 ; " + this.description + " ; " + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         } else {
-            return "D - 0 - " + this.description + " - " + this.by;
+            return "D ; 0 ; " + this.description + " ; " + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
     }
     

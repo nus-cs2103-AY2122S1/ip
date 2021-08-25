@@ -21,9 +21,9 @@ public class Event extends Task {
     @Override
     public String toSaveInHardDisk() {
         if (this.isDone) {
-            return "E - 1 - " + this.description + " - " + this.at;
+            return "E ; 1 ; " + this.description + " ; " + this.at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         } else {
-            return "E - 0 - " + this.description + " - " + this.at;
+            return "E ; 0 ; " + this.description + " ; " + this.at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
     }
     

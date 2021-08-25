@@ -20,9 +20,9 @@ public class ToDo extends Task {
     @Override
     public String toSaveInHardDisk() {
         if (this.isDone) {
-            return "T - 1 - " + this.description;
+            return "T ; 1 ; " + this.description;
         } else {
-            return "T - 0 - " + this.description;
+            return "T ; 0 ; " + this.description;
         }
     }
     

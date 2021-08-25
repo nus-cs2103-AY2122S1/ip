@@ -132,7 +132,7 @@ public class TaskList {
         ArrayList<Task> tasks = new ArrayList<>();
         
         while (sc.hasNext()) {
-            String[] currentLine = sc.nextLine().split(" - ");
+            String[] currentLine = sc.nextLine().split(" ; ");
             switch (currentLine[0].trim()) {
                 case "T": {
                     Task temp = new ToDo(currentLine[2].trim());
@@ -143,7 +143,7 @@ public class TaskList {
                     break;
                 }
                 case "D": {
-                    Task temp = new Deadline(currentLine[2].trim(), LocalDate.parse(currentLine[3].trim()));
+                    Task temp = new Deadline(currentLine[2].trim(), LocalDate.parse(currentLine[3]));
                     if (currentLine[1].equals("1")) {
                         temp.markAsDone();
                     }
