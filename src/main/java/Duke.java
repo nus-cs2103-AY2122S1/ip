@@ -13,7 +13,13 @@ import java.nio.file.Paths;
 import java.nio.file.Files;
 
 public class Duke {
+
     public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+    }
+
+    public void run() {
         UserInterface ui = new UserInterface();
         ui.displayGreeting();
         DateTimeFormatter dtformatter = DateTimeFormatter.ISO_DATE;
@@ -149,6 +155,5 @@ public class Duke {
                 }
             }
         }
-
     }
 }
