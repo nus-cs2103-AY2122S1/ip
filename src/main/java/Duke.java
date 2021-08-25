@@ -22,7 +22,7 @@ import task.Todo;
 public class Duke {
     private Scanner sc;
     private TaskList taskList;
-    private static final Path SAVE_FILE_DIRECTORY = Paths.get("data", "duke.txt");
+    Storage storage = new Storage("data/duke.txt");
 
     public Duke() {
         sc = new Scanner(System.in);
@@ -92,22 +92,7 @@ public class Duke {
     public void loadData() {
         this.echo("Retrieving data...");
         try {
-            FileReader fin = new FileReader(SAVE_FILE_DIRECTORY.toString());
-            BufferedReader bin = new BufferedReader(fin);
-
-            String line;
-            List<String> data = new ArrayList<>();
-
-            while ((line = bin.readLine()) != null) {
-                if (line.isEmpty()) {
-                    break; // end of line
-                }
-
-                data.add(line);
-            }
-
-            bin.close();
-
+            List<String> data = storage.load();
             taskList = TaskList.deserialize(data);
 
             this.echo("Data retrieved");
@@ -122,11 +107,7 @@ public class Duke {
 
     public void saveData() {
         try {
-            FileWriter fout = new FileWriter(SAVE_FILE_DIRECTORY.toString());
-            BufferedWriter bout = new BufferedWriter(fout);
-
-            bout.write(taskList.serialize());
-            bout.close();
+            storage.store(taskList.serialize());
         } catch (IOException e) {
             // Do nothing
             this.echo("Unable to save data");
