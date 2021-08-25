@@ -47,7 +47,7 @@ public class ParserTest {
                 MarkDoneCommand, "Wrongly parses mark done command");
 
         Assertions.assertEquals(true, Parser.parse(inputFind, null, makeTasks(), null) instanceof
-                FindCommand, "Wrongly parses find command");
+                FindByDateCommand, "Wrongly parses find command");
 
         Assertions.assertEquals(true, Parser.parse(inputDelete, null, makeTasks(), null) instanceof
                 DeleteCommand, "Wrongly parses delete command");
@@ -204,3 +204,4 @@ public class ParserTest {
 
 
 }
+
