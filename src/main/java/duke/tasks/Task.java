@@ -8,8 +8,14 @@ import duke.Duke;
 import duke.exceptions.NoDescriptionException;
 import duke.exceptions.UserInputError;
 
-public class Task {
+/**
+ * The abstract Task class representing a task.
+ */
+public abstract class Task {
 
+  /**
+   *  Enum class for different class types.
+   */
   public enum Type {
     TODO, EVENT, DEADLINE,
   }
@@ -21,12 +27,28 @@ public class Task {
   private final Type type;
   private boolean isDone;
 
+  /**
+   * Constructor for a Task object.
+   *
+   * @param description The description of the task.
+   * @param type The enum type of the task.
+   * @param done The boolean value of whether task is completed.
+   */
   protected Task(String description, Type type, boolean done) {
     this.description = description;
     this.type = type;
     this.isDone = done;
   }
 
+
+  /**
+   * Creates a new task according task type.
+   *
+   * @param input String containing task details.
+   * @param type The enum type of the task.
+   * @return A Task object.
+   * @throws UserInputError
+   */
   public static Task createTask(String input, Type type) throws UserInputError {
     String[] details;
     switch (type) {
@@ -43,6 +65,12 @@ public class Task {
     }
   }
 
+  /**
+   * Convert String equivalent of a task from database to a Task object.
+   *
+   * @param dataString String containing Task details.
+   * @return A Task object with task type and details.
+   */
   public static Task stringToTask(String dataString) {
     Task newTask = null;
     String[] infoArr = dataString.split(SEPARATE);
@@ -74,6 +102,14 @@ public class Task {
     return newTask;
   }
 
+  /**
+   * Separate input into task description and datetime.
+   *
+   * @param str String of details.
+   * @param key Delimiter.
+   * @return Array of description and datetime.
+   * @throws NoDescriptionException
+   */
   private static String[] separateDetails(String str, String key)
       throws NoDescriptionException {
     if (str.split(key).length <= 1) {
@@ -87,6 +123,12 @@ public class Task {
     return description.toLowerCase().matches(regex);
   }
 
+
+  /**
+   * Convert Task object to a String form for database.
+   *
+   * @return String writeable to database.
+   */
   public String taskToString() {
     String type;
     String done = this.isDone ? "1" : "0";
@@ -119,10 +161,18 @@ public class Task {
     return (isDone ? "[X]" : "[ ]"); // mark done task with X
   }
 
+  /**
+   * Mark task as done.
+   */
   public void markDone() {
     isDone = true;
   }
 
+  /**
+   * Check if task is completed.
+   *
+   * @return Boolean value of task completeness.
+   */
   public boolean isDone() {
     return isDone;
   }
