@@ -108,9 +108,13 @@ public class Event extends Task {
 	@Override
 	public String saveString() {
 		if (this.done) {
-			return "E : 1 : " + this.title + " : " + this.eventDate;
+			return this.eventDate != null
+				? "E : 1 : " + this.title + " : " + this.eventDate.toString() + (this.eventTime == null ? "" : " " + this.eventTime.toString())
+				: "E : 1 : " + this.title + " : " + this.eventString;
 		} else {
-			return "E : 1 : " + this.title + " : " + this.eventDate;
+			return this.eventDate != null
+				? "E : 0 : " + this.title + " : " + this.eventDate.toString() + (this.eventTime == null ? "" : " " + this.eventTime.toString())
+				: "E : 0 : " + this.title + " : " + this.eventString;
 		}
 	}
 }

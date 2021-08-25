@@ -107,9 +107,13 @@ public class Deadline extends Task {
 	@Override
 	public String saveString() {
 		if (this.done) {
-			return "D : 1 : " + this.title + " : " + this.deadline;
+			return this.deadlineDate != null
+				? "D : 1 : " + this.title + " : " + this.deadlineDate.toString() + (this.deadlineTime == null ? "" : " " + this.deadlineTime.toString())
+				: "D : 1 : " + this.title + " : " + this.deadline;
 		} else {
-			return "D : 0 : " + this.title + " : " + this.deadline;
+			return this.deadlineDate != null
+				? "D : 0 : " + this.title + " : " + this.deadlineDate.toString() + (this.deadlineTime == null ? "" : " " + this.deadlineTime.toString())
+				: "D : 0 : " + this.title + " : " + this.deadline;
 		}
 	}
 }
