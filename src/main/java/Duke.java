@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.List;
 import java.lang.StringBuilder;
 
 public class Duke {
@@ -7,7 +6,7 @@ public class Duke {
     private static String BYE_TEXT = "Bye! Hope to see you again!";
 
     private Scanner in;
-    private List<Task> tasks;
+    private TaskList taskList;
     private Storage storage;
     private boolean shouldExit;
 
@@ -19,7 +18,7 @@ public class Duke {
         this.in = in;
         this.shouldExit = false;
         this.storage = new Storage(filePath);
-        this.tasks = storage.loadTasks();
+        this.taskList = new TaskList(storage.loadTasks());
     }
 
     private void greet() {
@@ -56,13 +55,13 @@ public class Duke {
                 }
 
                 StringBuilder builder = new StringBuilder();
-                int numTasks = this.tasks.size();
+                int numTasks = this.taskList.size();
 
                 if (numTasks == 0) {
                     printMessage("No tasks saved");
                 } else {
                     for (int i = 0; i < numTasks; i++) {
-                        Task item = this.tasks.get(i);
+                        Task item = this.taskList.getTask(i);
                         builder.append(i + 1);
                         builder.append(". ");
                         builder.append(item.toString());
@@ -84,7 +83,7 @@ public class Duke {
                 Task task;
                 try {
                     int taskIndex = Integer.parseInt(arguments);
-                    task = this.tasks.get(taskIndex - 1);
+                    task = this.taskList.getTask(taskIndex - 1);
                     task.markCompleted();
                 } catch (NumberFormatException e) {
                     throw new Exception("Unable to parse number from arguments: " + arguments);
@@ -92,7 +91,7 @@ public class Duke {
                     throw new Exception("There is no task with the following number: " + arguments);
                 }
 
-                this.storage.saveTasks(this.tasks);
+                this.storage.saveTasks(this.taskList);
                 printMessage("Marking task as completed:\n    " + task.toString());
                 break;
             }
@@ -104,39 +103,39 @@ public class Duke {
                 Task task;
                 try {
                     int taskIndex = Integer.parseInt(arguments);
-                    task = this.tasks.remove(taskIndex - 1);
+                    task = this.taskList.removeTask(taskIndex - 1);
                 } catch (NumberFormatException e) {
                     throw new Exception("Unable to parse number from arguments: " + arguments);
                 } catch (IndexOutOfBoundsException e) {
                     throw new Exception("There is no task with the following number: " + arguments);
                 }
 
-                this.storage.saveTasks(this.tasks);
+                this.storage.saveTasks(this.taskList);
                 printMessage("Removed the following task:\n    " + task.toString() + "\n" + "You now have "
-                        + this.tasks.size() + " tasks in your list.");
+                        + this.taskList.size() + " tasks in your list.");
                 break;
             }
             case TODO: {
                 Task todo = Todo.fromInput(arguments);
-                this.tasks.add(todo);
+                this.taskList.addTask(todo);
 
-                this.storage.saveTasks(this.tasks);
+                this.storage.saveTasks(this.taskList);
                 this.printTaskAddedMessage(todo);
                 break;
             }
             case DEADLINE: {
                 Task deadline = Deadline.fromInput(arguments);
-                this.tasks.add(deadline);
+                this.taskList.addTask(deadline);
 
-                this.storage.saveTasks(this.tasks);
+                this.storage.saveTasks(this.taskList);
                 this.printTaskAddedMessage(deadline);
                 break;
             }
             case EVENT: {
                 Task event = Event.fromInput(arguments);
-                this.tasks.add(event);
+                this.taskList.addTask(event);
 
-                this.storage.saveTasks(this.tasks);
+                this.storage.saveTasks(this.taskList);
                 this.printTaskAddedMessage(event);
                 break;
             }
@@ -144,7 +143,7 @@ public class Duke {
     }
 
     private void printTaskAddedMessage(Task task) {
-        printMessage("Added the following task:\n    " + task.toString() + "\n" + "You now have " + this.tasks.size()
+        printMessage("Added the following task:\n    " + task.toString() + "\n" + "You now have " + this.taskList.size()
                 + " tasks in your list.");
     }
 

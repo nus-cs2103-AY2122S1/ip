@@ -63,10 +63,10 @@ public class Storage {
         return tasks;
     }
 
-    public void saveTasks(List<Task> tasks) throws IOException {
+    public void saveTasks(TaskList taskList) throws IOException {
         FileWriter writer = new FileWriter(this.tasksFile);
 
-        for (Task task : tasks) {
+        for (Task task : taskList.items()) {
             this.writeTask(writer, task);
         }
 
