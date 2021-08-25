@@ -1,14 +1,15 @@
 package duke.parser;
 
 import duke.DukeException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Parser {
-    private static final DateTimeFormatter DATE_TIME_PARSE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-
     static String byeMsg = "Bye. Hope to see you again soon!";
     static String listMsg = "Here are the tasks in your list:";
     static String doneMsg = "Nice! I've marked this duke.task as done:";
