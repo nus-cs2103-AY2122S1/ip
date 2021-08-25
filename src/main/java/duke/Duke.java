@@ -8,7 +8,7 @@ import duke.utils.TaskList;
 import duke.utils.Ui;
 
 /**
- * A chat-bot called Naruto that acts as a task list
+ * A chat-bot called Naruto that acts as a task list.
  */
 public class Duke {
     private final Storage storage;
@@ -16,9 +16,9 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Constructor for the Duke chat-bot
+     * Constructor for the Duke chat-bot.
      *
-     * @param persistedData the relative path to the persisted data starting from the project directory
+     * @param persistedData the relative path to the persisted data starting from the project directory.
      */
     public Duke(String persistedData) {
         ui = new Ui();
@@ -27,7 +27,7 @@ public class Duke {
     }
 
     /**
-     * Initializes and starts the chat-bot for operation/interaction
+     * Initializes and starts the chat-bot for operation/interaction.
      */
     public void run() {
         boolean toExit = false;

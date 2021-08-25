@@ -1,12 +1,15 @@
 package duke.tasks;
 
+/**
+ * Represents a todos entry in the task list.
+ */
 public class ToDos extends duke.tasks.Task {
 
     /**
-     * Constructor for the ToDos
+     * Constructor for the ToDos.
      *
-     * @param description description of this ToDo
-     * @param isDone whether this task is to be marked as done or not
+     * @param description description of this ToDos.
+     * @param isDone whether this task is to be marked as done or not.
      */
     public ToDos(String description, boolean isDone) {
         super(description, isDone);

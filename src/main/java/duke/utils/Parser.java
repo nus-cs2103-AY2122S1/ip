@@ -4,15 +4,18 @@ import duke.commands.Command;
 import duke.exceptions.EmptyTaskDescriptionException;
 import duke.exceptions.UnknownInputException;
 
+/**
+ * The Parser to parse and make sense of the user commands.
+ */
 public class Parser {
 
     /**
-     * Returns a Command object containing the necessary information to be executed
+     * Returns a Command object containing the necessary information to be executed.
      *
-     * @param fullCommand the full command input by the user
-     * @return a Command object containing the necessary information to be executed
-     * @throws UnknownInputException if the full command given is invalid
-     * @throws EmptyTaskDescriptionException if a valid command was given but there was no task description
+     * @param fullCommand the full command input by the user.
+     * @return a Command object containing the necessary information to be executed.
+     * @throws UnknownInputException if the full command given is invalid.
+     * @throws EmptyTaskDescriptionException if a valid command was given but there was no task description.
      */
     public static Command parse(String fullCommand) throws UnknownInputException, EmptyTaskDescriptionException {
         int taskNum;

@@ -11,16 +11,16 @@ import java.util.List;
 import java.util.stream.Stream;
 
 /**
- * A class to handle all the operations that deals with the computer hard drive or memory
+ * A class to handle all the operations that deals with the computer hard drive or memory.
  */
 public class Storage {
 
     final private String persistedData;
 
     /**
-     * Constructor for Storage
+     * Constructor for Storage.
      *
-     * @param persistedData the relative path to the persisted data starting from the project directory
+     * @param persistedData the relative path to the persisted data starting from the project directory.
      */
     public Storage(String persistedData) {
         this.persistedData = persistedData;
@@ -28,9 +28,9 @@ public class Storage {
 
     /**
      * Returns a stream of strings that contains all the individual lines within the persisted data,
-     * which is a text file
+     * which is a text file.
      *
-     * @return the stream of strings containing all the individual lines in persisted data
+     * @return the stream of strings containing all the individual lines in persisted data.
      */
     public Stream<String> loadPersistedData() {
         Path pathToTxt = Paths.get("data", "duke.txt");
@@ -58,10 +58,10 @@ public class Storage {
     }
 
     /**
-     * Marks the particular task within the persisted data as done, by editing the text file
+     * Marks the particular task within the persisted data as done, by editing the text file.
      *
-     * @param taskNum the task number within the TaskList
-     * @param task the task to mark as done
+     * @param taskNum the task number within the TaskList.
+     * @param task the task to mark as done.
      */
     public void markPersistedTaskAsDone(int taskNum, Task task) {
         Path persistedDataPath = Paths.get(persistedData);
@@ -76,9 +76,9 @@ public class Storage {
     }
 
     /**
-     * Adds in a new line of text to the persisted data, corresponding to this task
+     * Adds in a new line of text to the persisted data, corresponding to this task.
      *
-     * @param task the new task to add to the persisted data
+     * @param task the new task to add to the persisted data.
      */
     public void addTaskToPersistedData(Task task) {
         String line = task.persistedDataStringFormat();
@@ -95,9 +95,9 @@ public class Storage {
 
     /**
      * Removes the particular line within the persisted data, that corresponds with this
-     * particular task number
+     * particular task number.
      *
-     * @param taskNum the task number within the TaskList
+     * @param taskNum the task number within the TaskList.
      */
     public void removePersistedTask(int taskNum) {
         Path persistedDataPath = Paths.get(persistedData);

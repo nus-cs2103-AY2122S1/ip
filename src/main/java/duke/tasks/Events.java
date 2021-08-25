@@ -1,15 +1,18 @@
 package duke.tasks;
 
+/**
+ * Represents an event entry in the task list.
+ */
 public class Events extends Task {
 
     private String dateTimeAt;
 
     /**
-     * Constructor for Events
+     * Constructor for Events.
      *
-     * @param description the description of this event
-     * @param dateTimeAt the time/date/period at which this event is to occur
-     * @param isDone whether this task is to be marked as done or not
+     * @param description the description of this event.
+     * @param dateTimeAt the time/date/period at which this event is to occur.
+     * @param isDone whether this task is to be marked as done or not.
      */
     public Events(String description, String dateTimeAt, boolean isDone) {
         super(description, isDone);

@@ -42,9 +42,9 @@ public class TaskList {
     };
 
     /**
-     * Adds a new task to the TaskList
+     * Adds a new task to the TaskList.
      *
-     * @param newTask the new task to add
+     * @param newTask the new task to add.
      */
     public void addTask(Task newTask) {
         tasks.add(newTask);
@@ -52,9 +52,9 @@ public class TaskList {
 
     /**
      * Deletes the particular task in the task list that corresponds with the given
-     * task number
+     * task number.
      *
-     * @param taskNum the task number that we want to delete from the task list
+     * @param taskNum the task number that we want to delete from the task list.
      */
     public void deleteTask(int taskNum) {
         tasks.remove(taskNum);
@@ -62,9 +62,9 @@ public class TaskList {
 
     /**
      * Marks the task in the task list that corresponds with the given task number
-     * as done
+     * as done.
      *
-     * @param taskNum the task number that we want to mark as done
+     * @param taskNum the task number that we want to mark as done.
      */
     public void markTaskAsDone(int taskNum) {
         Task currTask = tasks.get(taskNum);
@@ -72,28 +72,28 @@ public class TaskList {
     }
 
     /**
-     * Constructor for TaskList
+     * Constructor for TaskList.
      *
-     * @param persistedData the persisted tasks that we loaded from the hard disk/text file
+     * @param persistedData the persisted tasks that we loaded from the hard disk/text file.
      */
     public TaskList(Stream<String> persistedData) {
         persistedData.forEach(loadDataAction);
     }
 
     /**
-     * Returns the task that corresponds with the given task number
+     * Returns the task that corresponds with the given task number.
      *
-     * @param taskNum the task number of the task that you want to retrieve
-     * @return the task corresponding to the given task number
+     * @param taskNum the task number of the task that you want to retrieve.
+     * @return the task corresponding to the given task number.
      */
     public Task getTask(int taskNum) {
         return tasks.get(taskNum);
     }
 
     /**
-     * Returns the number of tasks in the TaskList
+     * Returns the number of tasks in the TaskList.
      *
-     * @return the number of tasks in the TaskList
+     * @return the number of tasks in the TaskList.
      */
     public int getSize() {
         return tasks.size();
