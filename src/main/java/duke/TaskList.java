@@ -19,17 +19,16 @@ public class TaskList {
         return this.listOfTasks;
     }
 
-    public void listAllTasks() {
-        if (listOfTasks.isEmpty()) {
-            System.out.println("You currently have no tasks! Add one now ☻");
-        } else {
-            System.out.println("Here are the tasks in your list:");
-            int size = listOfTasks.size();
-            for (int i = 0; i < size; i++) {
-                Task t = listOfTasks.get(i);
-                System.out.println((i + 1) + "." + t.toString());
-            }
-        }
+    public boolean isEmpty() {
+        return this.listOfTasks.isEmpty();
+    }
+
+    public int size() {
+        return this.listOfTasks.size();
+    }
+
+    public Task get(int i) {
+        return this.listOfTasks.get(i);
     }
 
     public void addTask(Task t) {
@@ -63,5 +62,16 @@ public class TaskList {
             t.markAsDone();
             System.out.println("Nice! I've marked this task as done:\n  " + t.toString());
         }
+    }
+
+    public TaskList findMatchingTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task t : this.listOfTasks) {
+            String name = t.getName();
+            if (name.equals(keyword) || name.contains(keyword)) {
+                matchingTasks.add(t);
+            }
+        }
+        return new TaskList(matchingTasks);
     }
 }

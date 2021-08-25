@@ -14,6 +14,10 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public String getStatusIcon() {
         return (this.isDone ? "X" : " ");
     }

@@ -1,11 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -28,6 +23,8 @@ public class Parser {
                 missingTaskName(cmd);
             } else if ("done".equals(cmd) || "delete".equals(cmd)) {
                 throw new DukeException("Indicate a task number beside the command ☻");
+            } else if ("find".equals(cmd)) {
+                throw new DukeException("Enter a keyword beside the command ☻");
             } else {
                 throw new DukeException("☹︎wut☁︎☻ unknown command");
             }
@@ -44,6 +41,8 @@ public class Parser {
                 } else {
                     return new DeleteCommand(getTaskNumber(x));
                 }
+            } else if (cmd.equals("find")) {
+                return new FindCommand(getKeyword(input));
             } else if (cmd.equals("todo")) {
                 return addToDo(input);
             } else if (cmd.equals("deadline")) {
@@ -95,5 +94,9 @@ public class Parser {
 
     public static int getTaskNumber(String[] inputArr) {
         return Integer.parseInt(inputArr[1]) - 1;
+    }
+
+    public static String getKeyword(String input) {
+        return input.substring(input.indexOf(" ")).strip();
     }
 }
