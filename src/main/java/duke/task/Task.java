@@ -57,12 +57,14 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
-
+    
+//    public String toFileString() {
+//        return "|" + this.getDoneIndicator() + "|" + this.description;
+//    }
     public String toFileString() {
-        return "|" + this.getDoneIndicator() + "|" + this.description;
+        return "/" + this.description + "/" + this.getDoneIndicator();
     }
-
-
+    
     /**
      * Marks task status as done.
      */

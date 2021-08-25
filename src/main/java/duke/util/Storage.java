@@ -62,19 +62,19 @@ public class Storage {
         try {
             while (sc.hasNextLine()) {
                 String text = sc.nextLine();
-                String[] itemDetails = text.split("|");
+                String[] itemDetails = text.split("/");
 
                 Task task;
                 String task_type = itemDetails[0];
 
                 if (task_type.equals("T")) {
-                    task = new Todo(itemDetails[1], itemDetails[2]);
+                    task = new Todo(itemDetails[2], itemDetails[1]);
 
                 } else if (task_type.equals("D")) {
-                    task = new Deadline(itemDetails[1], itemDetails[2], itemDetails[3]);
+                    task = new Deadline(itemDetails[2], itemDetails[1], itemDetails[3]);
 
                 } else if (task_type.equals("E")) {
-                    task = new Event(itemDetails[1], itemDetails[2], itemDetails[3]);
+                    task = new Event(itemDetails[2], itemDetails[1], itemDetails[3]);
 
                 } else {
                     throw new UnknownException();

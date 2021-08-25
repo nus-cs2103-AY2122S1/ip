@@ -14,10 +14,6 @@ public class Ui {
         return sc.nextLine().trim();
     }
     
-    public static void displayText(String text) {
-        System.out.println(text);
-    }
-    
     public static void displayError(String error) {
         System.err.println(error);
     }

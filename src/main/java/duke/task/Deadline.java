@@ -45,11 +45,11 @@ public class Deadline extends Task {
      * @throws UnclearInstructionException  If the given command cannot be properly extracted or has empty description.
      */
     public static String extractTaskDescription(String text) throws UnclearInstructionException {
-        String[] contents = text.split(" ", 2);
+        String[] contents = text.split(" ", 3);
         String task_type = contents[0];
         String description = "";
 
-        if (contents.length != 2) {
+        if (contents.length != 3) {
             throw new UnclearInstructionException(
                     "OOPS!!! The description of a deadline cannot be extracted properly.");
         }
@@ -74,9 +74,8 @@ public class Deadline extends Task {
      * @throws UnclearInstructionException  If the given command cannot be properly extracted or has empty time.
      */
     public static String extractTaskTime(String text) throws UnclearInstructionException {
-        String[] contents = text.split(" ", 2);
-        String task_type = contents[0];
-        if (contents.length != 2) {
+        String[] contents = text.split(" ", 3);
+        if (contents.length != 3) {
             throw new UnclearInstructionException(
                     "OOPS!!! The description of a deadline cannot be extracted properly.");
         }
@@ -99,6 +98,6 @@ public class Deadline extends Task {
 
     @Override
     public String toFileString() {
-        return "D" + super.toFileString() + "|" + byDate;
+        return "D" + super.toFileString() + "/" + byDate;
     }
 }
