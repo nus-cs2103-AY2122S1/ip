@@ -78,29 +78,29 @@ public class Duke {
 
             System.out.println("Got it. I've added this task:");
 
-            Task task = new Task(description);
 
-            switch (taskType) {
-                case TODO: {
-                    task = new Todo(description);
-                    break;
-                }
-                case DEADLINE: {
-                    String newDescription = description.substring(0, description.indexOf(" /by "));
-                    String by = description.substring(description.indexOf("/by ") + 4);
-                    task = new Deadline(newDescription, by);
-                    break;
-                }
-                case EVENT: {
-                    String newDescription = description.substring(0, description.indexOf(" /at "));
-                    String at = description.substring(description.indexOf("/at ") + 4);
-                    task = new Event(newDescription, at);
-                    break;
-                }
+            if (taskType == TaskType.TODO) {
+                Task task = new Todo(description);
+                toDoList.add(task);
+                System.out.println(task);
             }
 
-            toDoList.add(task);
-            System.out.println(task);
+            if (taskType == TaskType.DEADLINE) {
+                String newDescription = description.substring(0, description.indexOf(" /by "));
+                String by = description.substring(description.indexOf("/by ") + 4);
+                Task task = new Deadline(newDescription, by);
+                toDoList.add(task);
+                System.out.println(task);
+            }
+
+            if (taskType == TaskType.EVENT) {
+                String newDescription = description.substring(0, description.indexOf(" /at "));
+                String at = description.substring(description.indexOf("/at ") + 4);
+                Task task = new Event(newDescription, at);
+                toDoList.add(task);
+                System.out.println(task);
+            }
+
             printNowSize();
         }
     }
