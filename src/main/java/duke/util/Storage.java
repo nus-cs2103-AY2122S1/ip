@@ -14,13 +14,29 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class responsible for all interactions with the save file.
+ */
 public class Storage {
+    /** Path of the storage file */
     String saveFilePath;
 
+    /**
+     * Constructor of the storage
+     *
+     * @param saveFilePath path of the storage file
+     */
     public Storage(String saveFilePath) {
         this.saveFilePath = saveFilePath;
     }
 
+    /**
+     * Read data from the save file
+     *
+     * @return ArrayList of Tasks
+     * @throws InvalidInputException if unable to parse the data in the save file
+     * @throws SaveFileException if there are issues caused by the IO.
+     */
     public ArrayList<? extends Task> load() throws InvalidInputException, SaveFileException {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
@@ -63,6 +79,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Write into the save file given a TaskList
+     *
+     * @param list current tasks
+     * @throws SaveFileException if there is an IO error
+     */
     public void save(TaskList list) throws SaveFileException {
         try {
             File saveFile = this.getSaveFile();
@@ -76,6 +98,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Retrieves the save file given the file path. Create the file if it is not found.
+     *
+     * @return save file
+     * @throws IOException if there is an IO error
+     */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private File getSaveFile() throws IOException {
         File saveFile = new File(saveFilePath);
         saveFile.getParentFile().mkdirs(); // if folder already exist, nothing is done

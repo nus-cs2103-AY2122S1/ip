@@ -16,6 +16,9 @@ import duke.task.Deadline;
 
 import java.time.LocalDateTime;
 
+/**
+ * A command class encapsulating the logic that occurs when the user issues a 'deadline' command.
+ */
 public class DeadlineCommand extends Command {
     String action;
     public DeadlineCommand(String action) {
@@ -23,6 +26,17 @@ public class DeadlineCommand extends Command {
         this.action = action;
     }
 
+    /**
+     * Creates and adds a 'deadline' task to the tasks
+     *
+     * @param tasks List of existing tasks
+     * @param ui User interface current interacting with the user
+     * @param storage Storage class handling the persistence of the tasks
+     * @throws InvalidInputException if input cannot be parsed into a date
+     * @throws NoActionException if no todo list action given
+     * @throws NoTimeException if no deadline is provided
+     * @throws SaveFileException if there are issues with the save file
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException,
             NoActionException, NoTimeException, SaveFileException {
@@ -41,6 +55,13 @@ public class DeadlineCommand extends Command {
         storage.save(tasks);
     }
 
+    /**
+     * Indicate if another object is 'equal' to this object.
+     *
+     * @param obj Reference object with which to compare to.
+     * @return true if they are equal.
+     *         false otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof DeadlineCommand) {

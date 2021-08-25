@@ -10,18 +10,38 @@ import duke.exception.TaskNotFoundException;
 
 import duke.task.Task;
 
+/**
+ * A command class encapsulating the logic that occurs when the user issues a 'delete' command.
+ */
 public class DeleteCommand extends Command {
-    private final String action;
-    public DeleteCommand(String action) {
+    /** The index of the todo to delete */
+    private final String todoNumber;
+
+    /**
+     * Constructor for the DeleteCommand
+     *
+     * @param todoNumber The index of the todo to delete
+     */
+    public DeleteCommand(String todoNumber) {
         super(false);
-        this.action = action;
+        this.todoNumber = todoNumber;
     }
 
+    /**
+     * Deletes a task from the tasks
+     *
+     * @param tasks List of existing tasks
+     * @param ui User interface current interacting with the user
+     * @param storage Storage class handling the persistence of the tasks
+     * @throws TaskNotFoundException if task does not exist
+     * @throws InvalidInputException if input cannot be parsed into a number
+     * @throws SaveFileException if there are issues with the save file
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException,
             InvalidInputException, SaveFileException {
         try {
-            int taskNumber = Integer.parseInt(action);
+            int taskNumber = Integer.parseInt(todoNumber);
             if (taskNumber <= tasks.size() && taskNumber > 0) {
                 Task taskToDelete = tasks.get(taskNumber - 1);
                 tasks.remove(taskNumber - 1);

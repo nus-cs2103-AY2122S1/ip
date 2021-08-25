@@ -16,6 +16,9 @@ import duke.task.Event;
 
 import java.time.LocalDateTime;
 
+/**
+ * A command class encapsulating the logic that occurs when the user issues a 'event' command.
+ */
 public class EventCommand extends Command {
     String action;
     public EventCommand(String action) {

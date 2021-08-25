@@ -1,35 +1,64 @@
 package duke.task;
 
+/**
+ * An abstract class representing a task
+ */
 public abstract class Task {
+    /** The task that needs to be completed */
     final private String action;
+    /** Whether a task is completed */
     private boolean isCompleted;
 
+    /**
+     * Constructor of the task. Can only be called by subclasses
+     * as Task is an abstract class.
+     *
+     * @param action task that needs to be completed.
+     */
     public Task(String action) {
         this.action = action;
         this.isCompleted = false;
     }
 
+    /**
+     * Returns the action
+     *
+     * @return action
+     */
     public String getAction() {
         return this.action;
     }
 
+    /**
+     * Returns whether a task is completed.
+     *
+     * @return whether a task is completed
+     */
     public boolean isComplete() {
         return this.isCompleted;
     }
 
+    /**
+     * Changes the state of the task to be completed.
+     */
     public void complete() {
         this.isCompleted = true;
     }
 
-    private String getStatusIcon() {
-        return isCompleted ? "X" : " ";
-    }
-
-
+    /**
+     * Abstract method for the task to return its save format
+     *
+     * @return Save format of the task
+     */
     abstract public String toSaveFormat() ;
 
+    /**
+     * Returns a string representing the task
+     *
+     * @return String representation of the task
+     */
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), this.action);
+        return String.format("[%s] %s", isCompleted ? "X" : " ", this.action);
     }
 }
