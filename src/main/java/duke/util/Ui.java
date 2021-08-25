@@ -3,7 +3,9 @@ package duke.util;
 import java.util.Scanner;
 
 import duke.Duke;
+
 import duke.exceptions.UserInputError;
+
 import duke.tasks.Task;
 
 public class Ui {
@@ -18,23 +20,27 @@ public class Ui {
     private final Scanner sc;
     private boolean isEndChat = false;
 
-    public Ui(){
+    public Ui() {
         sc = new Scanner(System.in);
     }
 
     public boolean hasInput() {
+
         return sc.hasNextLine();
     }
 
     public String nextInput() {
+
         return sc.nextLine();
     }
 
     public boolean hasEnded() {
+
         return isEndChat;
     }
 
-    public void endChat() {
+    public void setEndChat() {
+
         isEndChat = true;
     }
 

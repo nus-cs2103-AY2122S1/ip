@@ -1,9 +1,11 @@
 package duke.util;
 
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,6 +16,7 @@ public class Storage {
     public static ArrayList<Task> readDatabase() {
         Path filePath = Paths.get(System.getProperty("user.dir"), "database", "database.txt");
         ArrayList<Task> tasks = new ArrayList<>();
+
         try {
             if (!Files.isRegularFile(filePath)) {
                 return tasks;
@@ -29,6 +32,7 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("read file error");
         }
+
         return tasks;
     }
 
@@ -38,16 +42,19 @@ public class Storage {
 
         try {
             StringBuilder db = new StringBuilder();
-            list.forEach(x -> db.append(x.taskToString() + System.lineSeparator()));
+            list.forEach(x -> db.append(x.taskToString()).append(System.lineSeparator()));
             byte[] dbByte = db.toString().getBytes();
+
             if (!Files.isDirectory(dirPath)) {
                 Files.createDirectory(dirPath);
             }
+
             if (Files.isRegularFile(filePath)) {
                 Files.delete(filePath);
             }
+
             Files.write(filePath, dbByte);
-        }catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
