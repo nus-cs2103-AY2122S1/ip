@@ -1,5 +1,7 @@
 package pib;
 
+import pib.pibexception.PibException;
+
 /**
  * pib is a Personal Assistant Chat-bot that is able to keep track of tasks (CRUD) and deadlines
  */
@@ -18,9 +20,14 @@ public class Pib {
         this.ui = new Ui();
         this.list = new TaskList();
         this.storage = new Storage(DATA_FILE_PATH);
-        storage.loadData(this.list);
+        try {
+            storage.loadData(this.list);
+        } catch (PibException e) {
+            e.print();
+        }
         this.parser = new Parser(this.list);
     }
+
 
     private void start() {
         ui.printWelcome();

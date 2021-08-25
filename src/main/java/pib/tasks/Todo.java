@@ -1,6 +1,5 @@
 package pib.tasks;
 
-import pib.Ui;
 import pib.pibexception.PibException;
 
 /**
@@ -23,8 +22,7 @@ public class Todo extends Task {
 
     public static Todo createTodo(String details) throws PibException {
         if (details.trim().isBlank()) {
-            Ui.printError("empty-task-description");
-            throw new PibException("Task description can't be blank");
+            throw new PibException("empty-task-description");
         } else {
             return new Todo(details.trim());
         }

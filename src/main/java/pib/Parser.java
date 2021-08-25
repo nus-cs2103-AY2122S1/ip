@@ -1,6 +1,7 @@
 package pib;
 
 import pib.enums.TaskType;
+import pib.pibexception.PibException;
 
 import java.util.Scanner;
 
@@ -14,28 +15,32 @@ public class Parser {
     }
 
     public void readInput() {
-        scanner: while (sc.hasNextLine()) {
-            String nextLine = sc.nextLine();
+        scanner:
+        while (sc.hasNextLine()) {
+            try {
+                String nextLine = sc.nextLine();
 
-            if (nextLine.contains(" ")) {
-                taskCommand(nextLine);
-            } else {
-                switch (nextLine.toLowerCase()) {
-                case "list":
-                    Ui.printList(list);
-                    break;
-                case "bye":
-                    closeScanner();
-                    break scanner;
-                default:
-                    Ui.printError("unknown-command");
-                    break;
+                if (nextLine.contains(" ")) {
+                    taskCommand(nextLine);
+                } else {
+                    switch (nextLine.toLowerCase()) {
+                    case "list":
+                        Ui.printList(list);
+                        break;
+                    case "bye":
+                        closeScanner();
+                        break scanner;
+                    default:
+                        throw new PibException("unknown-command");
+                    }
                 }
+            } catch (PibException e) {
+                e.print();
             }
         }
     }
 
-    private void taskCommand(String input) {
+    private void taskCommand(String input) throws PibException {
         try {
             int spaceIndex = input.indexOf(" ");
             String taskType = input.substring(0, spaceIndex).toLowerCase();
@@ -58,27 +63,10 @@ public class Parser {
                 list.delete(Integer.parseInt(taskDetails));
                 break;
             default:
-                Ui.printError("unknown-command");
-                break;
+                throw new PibException("unknown-command");
             }
         } catch (NumberFormatException e) {
-            Ui.printError("ioob-exception");
-        }
-    }
-
-    private void pibCommand(String input) {
-        String command = input.toLowerCase();
-
-        switch (command) {
-        case "list":
-            Ui.printList(list);
-            break;
-        case "bye":
-            closeScanner();
-            break;
-        default:
-            Ui.printError("unknown-command");
-            break;
+            throw new PibException("ioob-exception");
         }
     }
 

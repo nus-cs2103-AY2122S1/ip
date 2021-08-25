@@ -16,9 +16,9 @@ public class TaskList {
         this.list = new ArrayList<Task>();
     }
 
-    public void viewList() {
+    public void viewList() throws PibException {
         if (list.size() == 0) {
-            Ui.printError("empty-list");
+            throw new PibException("empty-list");
         } else {
             for (int i = 0; i < list.size(); i++) {
                 System.out.println((i + 1) + "." + list.get(i).toString());
@@ -30,28 +30,25 @@ public class TaskList {
         System.out.println("There are " + list.size() + " task(s) in the list\n");
     }
 
-    public void add(TaskType t, String taskDetails) {
-        try {
-            Task newTask = null;
-            switch (t) {
-            case TODO:
-                newTask = Todo.createTodo(taskDetails);
-                break;
-            case EVENT:
-                newTask = Event.createEvent(taskDetails);
-                break;
-            case DEADLINE:
-                newTask = Deadline.createDeadline(taskDetails);
-                break;
-            default:
-                break;
-            }
-            if (newTask != null) {
-                list.add(newTask);
-                Storage.saveData(this, Pib.DATA_FILE_PATH);
-                Ui.printListSize(this);
-            }
-        } catch (PibException e) {
+    public void add(TaskType t, String taskDetails) throws PibException {
+        Task newTask = null;
+        switch (t) {
+        case TODO:
+            newTask = Todo.createTodo(taskDetails);
+            break;
+        case EVENT:
+            newTask = Event.createEvent(taskDetails);
+            break;
+        case DEADLINE:
+            newTask = Deadline.createDeadline(taskDetails);
+            break;
+        default:
+            break;
+        }
+        if (newTask != null) {
+            list.add(newTask);
+            Storage.saveData(this, Pib.DATA_FILE_PATH);
+            Ui.printListSize(this);
         }
     }
 
@@ -59,23 +56,23 @@ public class TaskList {
         list.add(t);
     }
 
-    public void delete(int taskNum) {
+    public void delete(int taskNum) throws PibException {
         try {
-            String taskDesc = list.get(taskNum -1).getDescription();
+            String taskDesc = list.get(taskNum - 1).getDescription();
             list.remove(taskNum - 1);
             Storage.saveData(this, Pib.DATA_FILE_PATH);
             Ui.printDeleteSuccess(taskDesc);
         } catch (IndexOutOfBoundsException e) {
-            Ui.printError("ioob-exception");
+            throw new PibException("ioob-exception");
         }
     }
 
-    public void markAsDone(int taskNum) {
+    public void markAsDone(int taskNum) throws PibException {
         try {
             list.get(taskNum - 1).markAsDone();
             Storage.saveData(this, Pib.DATA_FILE_PATH);
         } catch (IndexOutOfBoundsException e) {
-            Ui.printError("ioob-exception");
+            throw new PibException("ioob-exception");
         }
     }
 

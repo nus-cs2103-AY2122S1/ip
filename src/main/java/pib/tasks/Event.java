@@ -38,19 +38,16 @@ public class Event extends Task {
             int atIndex = details.indexOf("/at ");
             String description = details.substring(0, atIndex).trim();
             if (description.isBlank()) {
-                Ui.printError("empty-task-description");
-                throw new PibException();
+                throw new PibException("empty-task-description");
             }
             String[] dateTime = details.substring(atIndex + 4).trim().split(" ");
             String date = LocalDate.parse(dateTime[0].trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
             String time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm")).format(DateTimeFormatter.ofPattern("hh:mm a"));
             return new Event(description, date, time);
         } catch (IndexOutOfBoundsException e) {
-            Ui.printError("e-wrong-format");
-            throw new PibException();
+            throw new PibException("e-wrong-format");
         } catch (DateTimeParseException e) {
-            Ui.printError("wrong-datetime-format");
-            throw new PibException();
+            throw new PibException("wrong-datetime-format");
         }
     }
 

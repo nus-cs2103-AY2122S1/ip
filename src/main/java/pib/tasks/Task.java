@@ -1,6 +1,7 @@
 package pib.tasks;
 
 import pib.Ui;
+import pib.pibexception.PibException;
 
 /**
  * Task is a parent class of other specific types of tasks
@@ -37,9 +38,9 @@ public abstract class Task {
     /**
      * Method to toggle the isDone variable, to display to the user if a task is marked as done or not
      */
-    public void markAsDone() {
+    public void markAsDone() throws PibException {
         if (this.isDone == 1) {
-            Ui.printError("already-markedasdone");
+            throw new PibException("already-markedasdone");
         } else {
             this.isDone = 1;
             Ui.printMarkAsDoneSuccess(description);

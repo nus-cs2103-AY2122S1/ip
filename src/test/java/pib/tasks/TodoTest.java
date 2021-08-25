@@ -21,7 +21,7 @@ public class TodoTest {
             Todo todo = Todo.createTodo(" ");
             fail();
         } catch (PibException e) {
-            assertEquals("Task description can't be blank", e.getMessage());
+            assertEquals("empty-task-description", e.getMessage());
         }
     }
 

@@ -20,7 +20,7 @@ public class DeadlineTest {
             Deadline deadline = Deadline.createDeadline("/by 2020-12-12 2300");
             fail();
         } catch (PibException e) {
-            assertEquals("Task description can't be blank", e.getMessage());
+            assertEquals("empty-task-description", e.getMessage());
         }
     }
 
@@ -30,7 +30,7 @@ public class DeadlineTest {
             Deadline deadline = Deadline.createDeadline("Quiz /by 20201212 2300");
             fail();
         } catch (PibException e) {
-            assertEquals("Wrong date-time format", e.getMessage());
+            assertEquals("wrong-datetime-format", e.getMessage());
         }
     }
 }

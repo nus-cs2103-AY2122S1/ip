@@ -1,5 +1,7 @@
 package pib;
 
+import pib.pibexception.PibException;
+
 public class Ui {
     public static final String DIVIDER = "____________________________________________________________\n";
 
@@ -23,7 +25,7 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
-    public static void printList(TaskList list) {
+    public static void printList(TaskList list) throws PibException {
         list.viewList();
         System.out.println(DIVIDER);
     }

@@ -1,5 +1,6 @@
 package pib;
 
+import pib.pibexception.PibException;
 import pib.tasks.Deadline;
 import pib.tasks.Event;
 import pib.tasks.Task;
@@ -20,7 +21,7 @@ public class Storage {
         this.file = new File(filePath);
     }
 
-    public void loadData(TaskList list) {
+    public void loadData(TaskList list) throws PibException {
         try {
             Scanner sc = new Scanner(this.file);
             while (sc.hasNext()) {
@@ -44,17 +45,17 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            Ui.printError("fnf-exception");
+            throw new PibException("fnf-exception");
         }
     }
 
-    public static void saveData(TaskList list, String filePath) {
+    public static void saveData(TaskList list, String filePath) throws PibException {
         try {
             FileWriter fw = new FileWriter(filePath);
             fw.write(list.convertListToSaveData());
             fw.close();
         } catch (IOException e) {
-            Ui.printError("io-exception");
+            throw new PibException("io-exception");
         }
     }
 }

@@ -39,19 +39,16 @@ public class Deadline extends Task {
             int byIndex = details.indexOf("/by ");
             String description = details.substring(0, byIndex).trim();
             if (description.isBlank()) {
-                Ui.printError("empty-task-description");
-                throw new PibException("Task description can't be blank");
+                throw new PibException("empty-task-description");
             }
             String[] dateTime = details.substring(byIndex + 4).trim().split(" ");
             String date = LocalDate.parse(dateTime[0].trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
             String time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm")).format(DateTimeFormatter.ofPattern("hh:mm a"));
             return new Deadline(description, date, time);
         } catch (IndexOutOfBoundsException e) {
-            Ui.printError("d-wrong-format");
-            throw new PibException("Wrong command format");
+            throw new PibException("d-wrong-format");
         } catch (DateTimeParseException e) {
-            Ui.printError("wrong-datetime-format");
-            throw new PibException("Wrong date-time format");
+            throw new PibException("wrong-datetime-format");
         }
     }
 
