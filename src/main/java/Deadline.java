@@ -16,7 +16,7 @@ public class Deadline extends Task{
         String[] str = time.split(" ");
         String[] oldDate = str[0].split("/");
         LocalDateTime localTime;
-        if(str.length > 1) {
+        if (str.length > 1) {
             String hour = str[1].substring(0,2);
             String min = str[1].substring(2,4);
 

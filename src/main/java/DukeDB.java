@@ -1,26 +1,12 @@
-import java.io.*;
-
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class DukeDB {
     private File file;
-
-    public DukeDB() {
-        try {
-            file = new File("data/duke.txt");
-            File parentFile = file.getParentFile();
-            if(!parentFile.exists()) {
-                parentFile.mkdirs();
-            }
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public DukeDB(String filePath) {
         try {
@@ -33,13 +19,16 @@ public class DukeDB {
         }
     }
 
-    public ArrayList<Task> readData() throws IOException{
+    public ArrayList<Task> readData() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
+
             Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                Task s = parse(scanner.nextLine());
-                tasks.add(s);
+            while (scanner.hasNext()) {
+                String s = scanner.nextLine();
+                Task t = parse(s);
+                tasks.add(t);
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,167 +36,153 @@ public class DukeDB {
         return tasks;
     }
 
-    public void writeData(Task task) throws IOException {
+    public void addData(Task task) {
         try {
-            FileWriter writer = new FileWriter(file, true);
-            String string = task.writeToFile();
-            writer.write(string);
-            writer.flush();
-            writer.close();
+            FileWriter fileWriter = new FileWriter(file,true);
+            String out = "\n";
+
+            if (task instanceof Deadline) {
+                out += "D &";
+            } else if (task instanceof Todo) {
+                out += "T &";
+            } else if (task instanceof Event) {
+                out += "E &";
+            }
+
+            if(task.isDone) {
+                out += " 1 & ";
+            } else {
+                out += " 0 & ";
+            }
+
+            out += task.description;
+            if(task instanceof Deadline) {
+                out += " & " + ((Deadline) task).by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
+            }
+            if(task instanceof Event) {
+                out += " & " + ((Event) task).at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
+            }
+            fileWriter.write(out);
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
-    public void deleteData(int num) throws IOException{
-        int count = 0;
-        ArrayList<String> strings = new ArrayList<>();
+    public void entireWriteData (ArrayList<Task> tasks) {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            String str = null;
-            while ((str=bufferedReader.readLine()) != null) {
-                if(count == num) {
-                    continue;
+            FileWriter fileWriter = new FileWriter(file);
+            for(int i = 0 ; i < tasks.size();i++) {
+
+                Task task = tasks.get(i);
+                String out;
+                if(i > 0) {
+                    out = "\n";
+                } else {
+                    out = "";
                 }
-                strings.add(str);
-                count++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            FileWriter writer = new FileWriter(file);
-            for (int i = 0; i < strings.size(); i++) {
-                writer.write(strings.get(i));
-            }
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void doneData(int num) {
-        int count = 0;
-        ArrayList<String> strings = new ArrayList<>();
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            String str = null;
-            while ((str=bufferedReader.readLine()) != null) {
-                if(count == num) {
-                    String[] target = str.split(" ");
-                    target[2] = "1";
-                    String result = Arrays.toString(target);
-                    strings.add(result);
-                    continue;
+                if (task instanceof Deadline) {
+                    out += "D &";
+                } else if (task instanceof Todo) {
+                    out += "T &";
+                } else if (task instanceof Event) {
+                    out += "E &";
                 }
-                strings.add(str);
-                count++;
+
+                if (task.isDone) {
+                    out += " 1 & ";
+                } else {
+                    out += " 0 & ";
+                }
+
+                out += task.description;
+                if (task instanceof Deadline) {
+                    out += " & " + ((Deadline) task).by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
+                }
+                if (task instanceof Event) {
+                    out += " & " + ((Event) task).at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
+                }
+                fileWriter.write(out);
             }
+            fileWriter.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        try {
-            FileWriter writer = new FileWriter(file);
-            for (int i = 0; i < strings.size(); i++) {
-                writer.write(strings.get(i));
-            }
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
+    public void doneData(int index) {
+        ArrayList<Task> readOut = readData();
+        Task temp = readOut.get(index);
+        temp.markAsDone();
+        readOut.set(index, temp);
+        entireWriteData(readOut);
+    }
+
+    public void deleteData(int index) {
+        ArrayList<Task> readOut = readData();
+        readOut.remove(index);
+        entireWriteData(readOut);
+    }
+
+    //from: E & 0 & project meeting & 6/8/2021 1400
+    //  to: Task
     public Task parse(String string) {
         Task task;
-        String[] str = string.split(" ");
-
-        String s = str[0];
-        String description = "";
-        String time = "";
-
-        Boolean done = false;
-        if (str[2] == "1") {
-            done = true;
+        boolean isDone = false;
+        String[] str = string.split("&");
+        for(int i = 0; i < str.length; i++) {
+            str[i] = str[i].trim();
         }
 
-        switch (s) {
+        if (str[1].equals("1")) {
+            isDone = true;
+        }
+
+        String item;
+        String time;
+        switch (str[0]) {
         case "T":
-            int k = 4;
-            do {
-                description = description + str[k];
-                if(k < str.length - 1) {
-                    description += " ";
-                }
-                k++;
-            } while (k < str.length);
-
-            task = new Todo(description);
-            if (done) {
-                task.markAsDone();
-            }
-            break;
-        case "D":
-            int j = 4;
-            description = str[j];
-            j++;
-            while (!str[j].equals("|")) {
-                description = description + " " + str[j];
-                j++;
-            }
-
-            j++;
-            do {
-                time = time + str[j];
-                if (j < str.length - 1) {
-                    time += " ";
-                }
-                j++;
-            } while (j < str.length);
-
-            task = new Deadline(description, time);
-            if (done) {
+            item = str[2];
+            task = new Todo(item);
+            if(isDone) {
                 task.markAsDone();
             }
             break;
         case "E":
-            int m = 4;
-
-            description = str[m];
-            m++;
-            while (!str[m].equals("|")) {
-                description = description + " " + str[m];
-                m++;
+            item = str[2];
+            time = str[3];
+            task = new Event(item, time);
+            if(isDone) {
+                task.markAsDone();
             }
-
-            m++;
-            do {
-                time = time + str[m];
-                if (m < str.length - 1) {
-                    time += " ";
-                }
-                m++;
-            } while (m < str.length);
-
-            task = new Event(description, time);
-            if (done) {
+            break;
+        case "D":
+            item = str[2];
+            time = str[3];
+            task = new Deadline(item, time);
+            if(isDone) {
                 task.markAsDone();
             }
             break;
         default:
             task = null;
         }
+
         return task;
     }
 
     public static void main(String[] args) throws IOException {
-        DukeDB data = new DukeDB();
+        DukeDB data = new DukeDB("data/tasks.txt");
+
+        data.addData(new Todo("hahaha"));
         ArrayList<Task> lst = data.readData();
         for(int i = 0 ; i < lst.size(); i++) {
-            System.out.println(lst);
+            System.out.println(lst.get(i));
         }
+        data.deleteData(1);
+        data.doneData(0);
     }
 }
