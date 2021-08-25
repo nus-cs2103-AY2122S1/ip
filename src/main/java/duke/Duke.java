@@ -34,12 +34,14 @@ public class Duke {
                     break;
                 } else if (text.equals("ls")) {
                     tl.printList();
-                } else if (text.contains("done")) {
+                } else if (text.startsWith("done")) {
                     tl.markAsDone(text);
                     storage.copyToFile();
-                } else if (text.contains("delete")) {
+                } else if (text.startsWith("delete")) {
                     tl.deleteTask(text);
                     storage.copyToFile();
+                } else if (text.startsWith("find")) {
+                    tl.findTask(text);
                 } else {
                     tl.addTask(text);
                     storage.copyToFile();

@@ -6,3 +6,4 @@
 [D][ ] cs2013t (by: 15:00)
 [D][ ] alloc (by: 12:00)
 [E][ ] breakfast (at: 09:15)
+[T][ ] read notes
