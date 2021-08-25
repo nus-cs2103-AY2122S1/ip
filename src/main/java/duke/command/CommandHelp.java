@@ -1,12 +1,21 @@
 package duke.command;
 
+/**
+ * Command to display the help window
+ */
 public class CommandHelp extends Command {
 
+    /**
+     * Constructor
+     */
     public CommandHelp() {
         this.commandName = "help";
         this.description = "displays a list of possible commands";
     }
 
+    /**
+     * Display all commands
+     */
     @Override
     public void execute() {
         displayHelp();
@@ -14,10 +23,10 @@ public class CommandHelp extends Command {
 
 
     /**
-     * Display list of possible commands
+     * Lists out all possible commands
      */
     private void displayHelp() {
-        //TODO Refactor to display command info instead
+        //TODO Refactor to display command info instead by using toString()
         System.out.println("Duke-san welcomes you! Here are a list of the available commands:\n" +
                 "_________________________________________________________________________________________\n" +
                 "todo [description]\t- Make a new todo event\n" +

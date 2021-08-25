@@ -16,7 +16,7 @@ public class DukeListener {
     /**
      * Constructor for Listener that takes instantiates a Scanner and a Parser object
      *
-     * @param taskList The task.TaskList that the parser should manage
+     * @param parser used for parsing commands
      */
     public DukeListener(DukeParser parser) {
         sc = new Scanner(System.in);

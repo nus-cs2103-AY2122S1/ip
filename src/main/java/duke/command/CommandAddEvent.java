@@ -9,29 +9,36 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 
+/**
+ * Command to add an event
+ */
 public class CommandAddEvent extends Command{
     private final TaskList taskList;
     private final Matcher input;
 
-    public CommandAddEvent(TaskList tasklist, Matcher groups) {
+    /**
+     * Constructor
+     *
+     * @param taskList Task list
+     * @param groups Matcher with info needed to create the class
+     */
+    public CommandAddEvent(TaskList taskList, Matcher groups) {
         this.commandName = "event <string> /at DD/MM/YYYY xxxxH";
         this.description = "Creates a deadline task (Optional time argument)";
 
-        this.taskList = tasklist;
+        this.taskList = taskList;
         input = groups;
     }
 
+    /**
+     * Add an event to the task list if valid
+     */
     @Override
     public void execute() {
         try {
-            taskList.add(new TaskEvent(input.group(1), getDate(input.group(2)), input.group(3), false));
+            taskList.add(new TaskEvent(input.group(1), Command.getDate(input.group(2)), input.group(3), false));
         } catch (DateTimeParseException e) {
             System.out.println("Please enter a valid date! :(");
         }
-    }
-
-    private static LocalDate getDate(String date) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        return LocalDate.parse(date, formatter);
     }
 }

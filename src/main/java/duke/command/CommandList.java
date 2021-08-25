@@ -9,11 +9,20 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
+/**
+ * Command to list out tasks
+ */
 public class CommandList extends Command {
 
     private final TaskList taskList;
     private final String args;
 
+    /**
+     * Constructor
+     *
+     * @param taskList task list to list
+     * @param args un-parsed list of filters
+     */
     public CommandList(TaskList taskList, String args) {
         this.commandName = "done <index>";
         this.description = "Toggles completion of task";
@@ -22,6 +31,9 @@ public class CommandList extends Command {
         this.args = args;
     }
 
+    /**
+     * Lists out tasks based on given filters
+     */
     @Override
     public void execute() {
         // List tasks
@@ -81,7 +93,7 @@ public class CommandList extends Command {
                     results.add(task -> task.getDescription().contains(arg));
                     break;
                 case ("date"):
-                    LocalDate date = getDate(arg);
+                    LocalDate date = Command.getDate(arg);
                     results.add(task -> task.isDate(date));
                     break;
                 default:
@@ -90,17 +102,5 @@ public class CommandList extends Command {
         }
 
         return results;
-    }
-
-    /**
-     * Converts a string to a date
-     *
-     * @param date String to convert
-     * @return LocalDate object
-     * @throws DateTimeParseException Thrown if error in parsing date
-     */
-    private static LocalDate getDate(String date) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        return LocalDate.parse(date, formatter);
     }
 }

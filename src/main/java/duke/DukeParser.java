@@ -56,25 +56,18 @@ public class DukeParser {
         final Matcher checkEvent = eventPattern.matcher(input);
 
         if (checkList.matches()) {
-            // Lists tasks based on given filter
             return new CommandList(taskList, checkList.group(1));
         } else if (checkDone.matches()) {
-            // Toggles completion of a task
             return new CommandDone(taskList, Integer.parseInt(checkDone.group(1)));
         } else if (checkDelete.matches()) {
-            // Remove a task from list
             return new CommandDelete(taskList, Integer.parseInt(checkDelete.group(1)));
         } else if (checkTodo.matches()) {
-            // Add a to-do task to list
             return new CommandAddTodo(taskList, checkTodo.group(1));
         } else if (checkDeadline.matches()) {
-            // Add a deadline to list
             return new CommandAddDeadline(taskList, checkDeadline);
         } else if (checkEvent.matches()) {
-            // Add an event to list
             return new CommandAddEvent(taskList, checkEvent);
         }  else {
-            // Invalid command
             return new CommandInvalid(input);
         }
     }
