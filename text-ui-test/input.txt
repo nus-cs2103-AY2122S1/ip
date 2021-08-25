@@ -13,7 +13,7 @@ deadline /by 20
 event Concert /by 19/2/2022
 deadline hello
 event Job Interview /at 15:00
-deadline Write resume /by
+deadline Write resume /by 2/11/2021 14:20
 deadline Prepare presentation /by 21:30
 event Mum's birthday /at 24/11/2021, 20:00
 todo Get a life
