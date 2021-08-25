@@ -27,4 +27,22 @@ abstract class DukeException extends Exception {
             super(message);
         }
     }
+    
+    static class NoSuchTaskException extends DukeException {
+        NoSuchTaskException(String message) {
+            super(message);
+        }
+    }
+    
+    static class TaskAlreadyCompleteException extends  DukeException {
+        TaskAlreadyCompleteException(String message) {
+            super(message);
+        }
+    }
+    
+    static class EmptyTaskListException extends DukeException {
+        EmptyTaskListException(String message) {
+            super(message);
+        }
+    }
 }
