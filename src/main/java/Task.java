@@ -8,7 +8,7 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public void maskAsDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
