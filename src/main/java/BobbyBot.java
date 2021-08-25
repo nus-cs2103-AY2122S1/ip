@@ -11,20 +11,20 @@ import java.time.format.DateTimeFormatter;
 
 
 public class BobbyBot {
-
-    private static final String div = "____________________________________________________________\n";
     private final String DBPATH = "data/database.txt";
     private static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
     private Storage storage;
     private TaskList tasks;
+    private Ui ui;
 
     public BobbyBot()  {
-        System.out.println(div + "Hello! I'm Bobby\nWhat can I do for you?\n" + div);
+        ui = new Ui();
+        ui.showWelcome();
         storage = new Storage(DBPATH);
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            ui.showLoadingError();
         }
     }
 
@@ -53,16 +53,19 @@ public class BobbyBot {
         String description;
         String[] userInputArgs;
 
-
         switch (command) {
         case BYE:
-            sayBye();
+            ui.sayBye();
             break;
         case LIST:
-            printList();
+            ui.showLine();
+            tasks.printList();
+            ui.showLine();
             break;
         case DONE:
-            markAsDone(Integer.parseInt(userInputList.get(1)));
+            ui.showLine();
+            tasks.markAsDone(Integer.parseInt(userInputList.get(1)));
+            ui.showLine();
             break;
         case DELETE:
             // check delete argument
@@ -120,38 +123,6 @@ public class BobbyBot {
         }
     }
 
-    /**
-     * Say Bye and close program
-     */
-    private void sayBye() {
-        System.out.println(div + "Bye. Hope to see you again soon!\n" + div);
-        System.exit(1);
-    }
-
-    /**
-     * Print current to do list
-     */
-    private void printList() {
-        int i = 1;
-        System.out.println(div + "Here are the tasks in your list:");
-        for (Task task: tasks.getTasks()) {
-            System.out.print(i + ". ");
-            System.out.println(task);
-            i++;
-        }
-        System.out.println(div);
-    }
-
-    /**
-     * Mark a task as done
-     * @param taskNo Task Number (starting from index 1)
-     */
-    private void markAsDone(int taskNo) {
-        Task taskCompleted = tasks.getTask(taskNo - 1);
-        taskCompleted.markAsDone();
-        System.out.println(div + "Nice! I've marked this task as done:");
-        System.out.println("  " + taskCompleted + "\n" + div);
-    }
 
     /**
      * Delete a task
@@ -163,10 +134,12 @@ public class BobbyBot {
             return;
         }
         Task taskToDelete = tasks.getTask(taskNo - 1);
-        System.out.println(div + "Noted. I've removed this task:");
+        ui.showLine();
+        System.out.println("Noted. I've removed this task:");
         System.out.println("  " + taskToDelete);
         tasks.remove(taskToDelete);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.\n" + div);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list." );
+        ui.showLine();
     }
     /**
      * Creates a todo task
@@ -175,8 +148,10 @@ public class BobbyBot {
     private void createToDo(String description) {
         Task newToDo = new ToDo(description);
         tasks.add(newToDo);
-        System.out.println(div + "Got it. I've added this task:\n  " + newToDo + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list.\n" + div);
+        ui.showLine();
+        System.out.println("Got it. I've added this task:\n  " + newToDo + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.");
+        ui.showLine();
     }
 
     /**
@@ -187,8 +162,10 @@ public class BobbyBot {
     private void createEvent(String description, String at) {
         Task newEvent = new Event(description, at);
         tasks.add(newEvent);
-        System.out.println(div + "Got it. I've added this task:\n  " + newEvent + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list.\n" + div);
+        ui.showLine();
+        System.out.println("Got it. I've added this task:\n  " + newEvent + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.");
+        ui.showLine();
     }
 
     /**
@@ -202,10 +179,14 @@ public class BobbyBot {
             LocalDateTime dateBy = LocalDateTime.parse(by, DT_FORMATTER);
             Task newDeadline = new Deadline(description, dateBy);
             tasks.add(newDeadline);
-            System.out.println(div + "Got it. I've added this task:\n  " + newDeadline + "\n"
-                    + "Now you have " + tasks.size() + " tasks in the list.\n" + div);
+            ui.showLine();
+            System.out.println("Got it. I've added this task:\n  " + newDeadline + "\n"
+                    + "Now you have " + tasks.size() + " tasks in the list.");
+            ui.showLine();
         } catch (DateTimeParseException e) {
-            System.out.println(div+"Please input deadline date in the following format: [dd-mm-yyyy hh:mm] \n"+div);
+            ui.showLine();
+            System.out.println("Please input deadline date in the following format: [dd-mm-yyyy hh:mm]");
+            ui.showLine();
         }
     }
 
