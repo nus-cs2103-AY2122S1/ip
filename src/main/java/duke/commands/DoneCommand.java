@@ -41,6 +41,5 @@ public class DoneCommand extends Command {
         storage.save(tasks);
         String message = String.format("Nice! I've marked this task as done:\n  %s", task);
         ui.reply(message);
-
     }
 }

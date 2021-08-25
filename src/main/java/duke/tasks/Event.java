@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * @author ruiquan
  */
 public class Event extends Task {
-    protected LocalDate at;
+    private LocalDate at;
 
     /**
      * Constructs an Event given the description and start date.
@@ -41,6 +41,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), at.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return String.format("[E]%s (at: %s)",
+                super.toString(),
+                at.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

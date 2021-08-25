@@ -10,6 +10,7 @@ import duke.ui.Ui;
  * @author ruiquan
  */
 public class ExitCommand extends Command {
+
     /**
      * Constructs an ExitCommand.
      */
