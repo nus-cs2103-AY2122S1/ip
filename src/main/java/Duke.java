@@ -4,10 +4,22 @@ public class Duke {
 
     private final String LINE = "____________________________________________________________";
     private final Scanner sc = new Scanner(System.in);
-    private final TaskList tasks = new TaskList();
+    private TaskList tasks;
+    private final Storage storage;
+
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            System.out.println("Loading error: " + e.getMessage());
+            tasks = new TaskList();
+        }
+    }
+
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("data/tasks.txt").run();
     }
 
     public void run() {
@@ -80,8 +92,9 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    private void add(Task task) {
+    private void add(Task task) throws DukeException {
         tasks.addTask(task);
+        storage.save(tasks);
         int len = tasks.size();
         String message = String.format("Got it. I've added this task:\n  %s\nNow you have %d %s in the list.",
                 task.toString(),
@@ -90,14 +103,16 @@ public class Duke {
         echo(message);
     }
 
-    private void done(int index) {
+    private void done(int index) throws DukeException {
         Task task = tasks.markTaskAsDone(index);
+        storage.save(tasks);
         String message = String.format("Nice! I've marked this task as done:\n  %s", task);
         echo(message);
     }
 
-    private void delete(int index) {
+    private void delete(int index) throws DukeException {
         Task task = tasks.deleteTask(index);
+        storage.save(tasks);
         int len = tasks.size();
         String message = String.format("Noted. I've removed this task:\n  %s\nNow you have %d %s in the list.",
                 task.toString(),

@@ -1,0 +1,65 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Storage {
+    private final String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public boolean save(TaskList tasks) throws DukeException {
+        Path dirPath = Paths.get("data");
+        boolean dataPathExists = Files.exists(dirPath);
+        if (!dataPathExists) {
+            File dataDir = new File("data");
+            dataDir.mkdir();
+        }
+
+        try {
+            File file = new File(filePath);
+            PrintWriter writer = new PrintWriter(file);
+            tasks.getTasks().forEach(task -> writer.write(task.format() + System.lineSeparator()));
+            writer.close();
+        } catch (FileNotFoundException e) {
+            throw new DukeException("File could not be found");
+        }
+        return true;
+    }
+
+    private Task convertStringToTask(String string) {
+        String[] arr = string.split(",");
+        Task task = null;
+        if (arr[0].trim().contains("T")) {
+            task = new ToDo(arr[2].trim(), arr[1].trim().equals("1"));
+        } else if (arr[0].trim().contains("E")) {
+            task = new Event(arr[2].trim(), arr[1].trim().equals("1"), arr[3].trim());
+        } else if (arr[0].trim().contains("D")) {
+            task = new Deadline(arr[2].trim(), arr[1].trim().equals("1"), arr[3].trim());
+        }
+        return task;
+    }
+
+    public List<Task> load() throws DukeException {
+        List<Task> tasks = new ArrayList<>();
+        File file = new File(filePath);
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNext()) {
+                tasks.add(convertStringToTask(scanner.nextLine()));
+            }
+        } catch (FileNotFoundException e) {
+            save(new TaskList());
+        }
+        return tasks;
+    }
+}

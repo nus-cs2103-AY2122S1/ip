@@ -1,10 +1,15 @@
 public abstract class Task {
-    private final String description;
-    private boolean isDone;
+    protected final String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
@@ -15,6 +20,8 @@ public abstract class Task {
         isDone = true;
         return this;
     }
+
+    abstract public String format();
 
     @Override
     public String toString() {
