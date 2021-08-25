@@ -65,4 +65,8 @@ public class Parser {
             return LocalDateTime.parse(time, dtf);
         }
     }
+
+    public boolean isFindCmd(String input) {
+        return input.length() >= 4 && input.substring(0, 4).equals("find");
+    }
 }
