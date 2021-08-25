@@ -48,6 +48,11 @@ public class Task {
             return 0 + "," + this.description;
         }
     }
+    
+    public boolean isSubString(String str) {
+        return this.description.toLowerCase().indexOf(str.toLowerCase()) >= 0;
+    }
+    
 
     /**
      *  Method to convert information from object instance into a more readable format
@@ -59,3 +64,4 @@ public class Task {
         return this.description;
     }
 }
+

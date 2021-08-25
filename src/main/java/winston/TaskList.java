@@ -68,7 +68,7 @@ public class TaskList {
      */
     public String getList() {
         int counter = 1;
-        StringBuilder result = new StringBuilder("List of things to do:\n");
+        StringBuilder result = new StringBuilder("List of things to do:\n\n");
         for (Task task : this.list) {
             result.append("\t" + counter + ". " + task.taskCompletion() + task.toString() + "\n");
             counter += 1;
@@ -83,5 +83,15 @@ public class TaskList {
             result.append(task.saveFormat()).append("\n");
         }
         return result.substring(0, result.length() - 1);
+    }
+    
+    public TaskList find(String str) {
+        ArrayList<Task> arrList = new ArrayList<>();
+        for (Task task : this.list) {
+            if (task.isSubString(str)) {
+                arrList.add(task);
+            }
+        }
+        return new TaskList(arrList);
     }
 }
