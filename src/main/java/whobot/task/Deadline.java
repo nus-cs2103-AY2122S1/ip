@@ -1,6 +1,6 @@
-package WhoBot.Task;
+package whobot.task;
 
-import WhoBot.Main.WhoBotException;
+import whobot.main.WhoBotException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -30,7 +30,8 @@ public class Deadline extends Task{
         } catch (DateTimeParseException ex) {
             throw new WhoBotException("Ensure that date time is of the format d/M/yyyy HH:mm");
         } catch (ArrayIndexOutOfBoundsException ex) {
-            throw new WhoBotException("Ensure that the command is of the form \"deadline #description /by #deadline\". The deadline must be given.");
+            throw new WhoBotException("Ensure that the command is of the form \"deadline #description /by #deadline\"."
+                    + " The deadline must be given.");
         }
     }
 

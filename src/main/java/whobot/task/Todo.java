@@ -1,4 +1,4 @@
-package WhoBot.Task;
+package whobot.task;
 
 /***
  * Class to Handle Todo type Tasks

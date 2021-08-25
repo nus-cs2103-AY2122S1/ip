@@ -1,4 +1,4 @@
-package WhoBot.Main;
+package whobot.main;
 
 /***
  * Custom Exception Class for the WhoBot

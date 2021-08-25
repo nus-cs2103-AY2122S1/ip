@@ -1,21 +1,18 @@
-package Test;
+package test;
 
-import WhoBot.Main.UI;
-import WhoBot.Main.WhoBotException;
-import WhoBot.Task.Deadline;
-import WhoBot.Task.Event;
-import WhoBot.Task.Task;
-import WhoBot.Task.Todo;
-import WhoBot.Utils.Storage;
-import WhoBot.Utils.TaskList;
+import whobot.main.UI;
+import whobot.main.WhoBotException;
+import whobot.task.Deadline;
+import whobot.task.Event;
+import whobot.task.Task;
+import whobot.task.Todo;
+import whobot.utils.Storage;
+import whobot.utils.TaskList;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 

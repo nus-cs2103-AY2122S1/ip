@@ -1,10 +1,10 @@
-package WhoBot.Utils;
+package whobot.utils;
 
-import WhoBot.Main.WhoBotException;
-import WhoBot.Task.Deadline;
-import WhoBot.Task.Event;
-import WhoBot.Task.Task;
-import WhoBot.Task.Todo;
+import whobot.main.WhoBotException;
+import whobot.task.Deadline;
+import whobot.task.Event;
+import whobot.task.Task;
+import whobot.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -79,7 +79,8 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new WhoBotException("Oops, The file to store my data could not be created. If you continue, tasks won't be stored permanently.");
+            throw new WhoBotException("Oops, The file to store my data could not be created."
+                    + " If you continue, tasks won't be stored permanently.");
         }
     }
 
@@ -114,7 +115,8 @@ public class Storage {
             }
             dataWriter.close();
         } catch (IOException e) {
-            throw new WhoBotException("Oops, The file to store my data could not be created. If you continue, tasks won't be stored permanently.");
+            throw new WhoBotException("Oops, The file to store my data could not be created."
+                    + " If you continue, tasks won't be stored permanently.");
         }
     }
 }

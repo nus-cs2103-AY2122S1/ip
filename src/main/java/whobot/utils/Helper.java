@@ -1,6 +1,6 @@
-package WhoBot.Utils;
+package whobot.utils;
 
-import WhoBot.Main.UI;
+import whobot.main.UI;
 
 import java.util.Arrays;
 import java.util.List;
@@ -85,7 +85,8 @@ public class Helper {
         ui.echo(UI.COLOR_PURPLE + "deadline #description /by #deadline:" + UI.COLOR_RESET +
                 "\n\t\t\tThis command will add a new Deadline Task with the given description and deadline." +
                 "\n\t\t\tThe description and deadline are required and should be of the format d/m/yyyy HH:mm or d/m/yyyy." +
-                "\n\t\t\tFor example: deadline Return Books /by 28/9/2021 18:00 or deadline Return Books /by 28/9/2021", UI.TYPE.COMPLETE);
+                "\n\t\t\tFor example: deadline Return Books /by 28/9/2021 18:00 or deadline Return Books /by 28/9/2021",
+                UI.TYPE.COMPLETE);
     }
 
     /***

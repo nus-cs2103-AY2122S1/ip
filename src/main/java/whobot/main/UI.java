@@ -1,4 +1,4 @@
-package WhoBot.Main;
+package whobot.main;
 
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ public class UI {
     public static final String COLOR_RED = "\u001B[31m";
 
     /** Greeting String */
-    private static final String logo = "\n" +
+    private static final String LOGO = "\n" +
             "\t\t\t /$$      /$$ /$$                 /$$$$$$$              /$$\n" +
             "\t\t\t| $$  /$ | $$| $$                | $$__  $$            | $$\n" +
             "\t\t\t| $$ /$$$| $$| $$$$$$$   /$$$$$$ | $$  \\ $$  /$$$$$$  /$$$$$$\n" +
@@ -23,10 +23,10 @@ public class UI {
             "\t\t\t|__/     \\__/|__/  |__/ \\______/ |_______/  \\______/    \\___/\n";
 
     /** Break Line String */
-    private static final String line = "________________________________________________________________________________________________________________";
+    private static final String LINE = "________________________________________________________________________________________________________________";
 
     /** GoodBye String */
-    private static final String bye = "\n" +
+    private static final String BYE = "\n" +
             "\t\t  /$$$$$$                            /$$ /$$$$$$$                            /$$\n" +
             "\t\t /$$__  $$                          | $$| $$__  $$                          | $$\n" +
             "\t\t| $$  \\__/  /$$$$$$   /$$$$$$   /$$$$$$$| $$  \\ $$ /$$   /$$  /$$$$$$       | $$\n" +
@@ -41,40 +41,34 @@ public class UI {
 
 
     /** Scanner for getting input from user */
-    public static final Scanner cmdReader = new Scanner(System.in);
+    public static final Scanner CMD_READER = new Scanner(System.in);
 
     /** Enum Type for indicating the type of echo */
     public enum TYPE {START, MIDDLE, END, COMPLETE, ERROR};
-
-    // Method to Print Greeting
 
     /***
      * Prints Greeting Message
      */
     public void greeting() {
-        System.out.println(COLOR_CYAN + line + COLOR_RESET);
-        System.out.println(COLOR_CYAN + line + COLOR_RESET);
-        System.out.println(COLOR_BLUE + logo + COLOR_RESET);
-        System.out.println(COLOR_CYAN + line + COLOR_RESET);
+        System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
+        System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
+        System.out.println(COLOR_BLUE + LOGO + COLOR_RESET);
+        System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
         echo("Hello! I'm the WhoBot.", UI.TYPE.START);
         echo("What can I do for you?", UI.TYPE.END);
     }
-
-    // Method to Print GoodBye Message
 
     /***
      * Prints GoodBye Message
      */
     public void goodbye() {
-        System.out.println(COLOR_CYAN + line + COLOR_RESET);
-        System.out.println(COLOR_CYAN + line + COLOR_RESET);
-        System.out.println(COLOR_BLUE + bye + COLOR_RESET);
+        System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
+        System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
+        System.out.println(COLOR_BLUE + BYE + COLOR_RESET);
         echo("I hope to see you again soon :)", UI.TYPE.MIDDLE);
-        System.out.println(COLOR_CYAN + line + COLOR_RESET);
-        System.out.println(COLOR_CYAN + line + COLOR_RESET);
+        System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
+        System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
     }
-
-    //Method to Echo the Given Word
 
     /***
      * Prints the given string with the right formatting based on  the type
@@ -84,21 +78,21 @@ public class UI {
      */
     public void echo(String answer, UI.TYPE type) {
         if (type == UI.TYPE.COMPLETE) {
-            System.out.println(COLOR_CYAN + line + COLOR_RESET);
+            System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
             System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
-            System.out.println(COLOR_CYAN + line + COLOR_RESET);
+            System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
         } else if (type == UI.TYPE.START) {
-            System.out.println(COLOR_CYAN + line + COLOR_RESET);
+            System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
             System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
         } else if (type == UI.TYPE.END) {
             System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
-            System.out.println(COLOR_CYAN + line + COLOR_RESET);
+            System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
         } else if (type == UI.TYPE.MIDDLE) {
             System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
         } else if (type == UI.TYPE.ERROR) {
-            System.out.println(COLOR_CYAN + line + COLOR_RESET);
+            System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
             System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RED + answer + COLOR_RESET);
-            System.out.println(COLOR_CYAN + line + COLOR_RESET);
+            System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
         }
     }
 
