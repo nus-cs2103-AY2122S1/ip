@@ -37,7 +37,7 @@ public class MyJournal {
             if (input.equals("bye")) {
                 break;
             } else {
-                parser.parse(currLine, tasks);
+                parser.parse(currLine, tasks, ui);
             }
             storage.saveFile(tasks.toString());
         }

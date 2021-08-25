@@ -6,13 +6,20 @@ import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.Scanner;
-import myjournal.exception.*;
-import myjournal.task.*;
+
+import myjournal.exception.EmptyDescriptionException;
+import myjournal.exception.InvalidTaskNumberException;
+import myjournal.exception.InvalidTypeException;
+import myjournal.exception.MyJournalException;
+import myjournal.task.Deadline;
+import myjournal.task.Event;
+import myjournal.task.Task;
+import myjournal.task.Todo;
 
 public class Parser {
-    private Ui ui;
+//    private Ui ui;
 
-    public void parse(Scanner line, TaskList tasks) {
+    public void parse(Scanner line, TaskList tasks, Ui ui) {
         try {
             String firstWord = line.next();
             switch (firstWord) {
@@ -101,7 +108,9 @@ public class Parser {
             } else if (isTime(currWord)) {
                 LocalTime time = LocalTime.parse(currWord);
                 String beforeOrAfterNoon = time.getHour() >= 12 ? "pm" : "am";
-                int hour = time.getHour() >= 12 ? time.getHour() - 12 : time.getHour();
+                int hour = time.getHour() >= 12
+                        ? time.getHour() - 12
+                        : time.getHour();
                 int min = time.getMinute();
                 String timeFormatted = (String.valueOf(hour).length() == 1 ? "0" + hour : hour)
                         + ":" + (min < 10 ? "0" + min : min) + beforeOrAfterNoon;
@@ -122,8 +131,8 @@ public class Parser {
     }
 
     public static boolean isTime(String string) {
-        return string.length() == 5 && isInteger(string.substring(0,2))
-                && isInteger(string.substring(3,5)) && string.charAt(2) == ':';
+        return string.length() == 5 && isInteger(string.substring(0,2)) && isInteger(string.substring(3,5))
+                && string.charAt(2) == ':';
     }
 
     public static boolean isInteger(String string) {

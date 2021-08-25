@@ -1,5 +1,4 @@
 T|0| watch movie
-T|0| play switch 
 E|0| watch fireworks | MONDAY, 23 Aug 2021 03:00pm
 T|0| read book 
 E|0| watch | 2021/02/30

@@ -37,7 +37,7 @@ public abstract class Task {
      *
      * @return A boolean representing whether the task is done or not.
      */
-    public boolean getState() {
+    public boolean isDone() {
         return this.isDone;
     }
 
