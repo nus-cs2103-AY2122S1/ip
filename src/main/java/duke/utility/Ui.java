@@ -1,6 +1,5 @@
 package duke.utility;
 
-import duke.exception.DukeException;
 import java.util.Scanner;
 
 public class Ui {
@@ -18,15 +17,11 @@ public class Ui {
         boolean isCompleted = false;
         while (! isCompleted) {
             String command = sc.nextLine();
-            try {
-                String message = parser.parseCommand(command);
-                if (message.equals("TERMINATE")) {
-                    isCompleted = true;
-                } else {
-                    this.printMessage(message);
-                }
-            } catch (DukeException ex) {
-                this.printMessage(ex.getMessage());
+            String message = parser.parseCommand(command);
+            if (message.equals("TERMINATE")) {
+                isCompleted = true;
+            } else {
+                this.printMessage(message);
             }
         }
         printMessage("Goodbye for now!");

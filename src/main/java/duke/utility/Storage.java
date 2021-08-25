@@ -26,10 +26,10 @@ public class Storage {
         if (! previousLog.createNewFile()) { // file already exists
             System.out.println("Successfully established connection with file " + filePath
                     + "\nPrevious duke.task log imported."
-                    + "\nAll changes to duke.task log will be saved there.");
+                    + "\nAll changes to task log will be saved there.");
         } else { // new file is created
             System.out.println("Specified file not found.\nNew file created: " + filePath
-                    + "\nduke.task.Task log will be saved there.");
+                    + "\nTask log will be saved there.");
         }
     }
     

@@ -34,7 +34,7 @@ public class TaskList {
     
     String deleteTask(int taskNum) throws DukeException.InvalidTaskNumException {
         if (taskNum > this.tasks.size() || taskNum < 1) {
-            throw new DukeException.InvalidTaskNumException("duke.task.Task number " + taskNum + " does not exist!");
+            throw new DukeException.InvalidTaskNumException("Task number " + taskNum + " does not exist!");
         } else {
             Task toRemove = this.tasks.get(taskNum - 1);
             this.tasks.remove(taskNum - 1);
@@ -52,7 +52,7 @@ public class TaskList {
                 i++;
             }
         }
-        throw new DukeException.NoSuchTaskException("duke.task is not in list!!");
+        throw new DukeException.NoSuchTaskException("Task is not in list!");
     }
     
     protected String markAsCompleted(String taskName) throws DukeException.TaskAlreadyCompleteException, 
@@ -60,11 +60,11 @@ public class TaskList {
         int taskIdx = this.getTaskIdx(taskName);
         Task completedTask = this.tasks.get(taskIdx);
         if (completedTask.getIsCompleted()) {
-            throw new DukeException.TaskAlreadyCompleteException("duke.task.Task is already complete!!");
+            throw new DukeException.TaskAlreadyCompleteException("Task is already complete!!");
         }
         this.tasks.remove(taskIdx);
         this.tasks.add(taskIdx, completedTask.markAsCompleted());
-        return "duke.task.Task marked as completed:\n" + this.tasks.get(taskIdx).toString();
+        return "Task marked as completed:\n" + this.tasks.get(taskIdx).toString();
     }
 
     public String getAllTasks() throws DukeException.EmptyTaskListException {
