@@ -156,4 +156,15 @@ public class Ui {
     void showBadDateError() {
         System.err.println("hello sir I only understand YYYY-MM-DD format");
     }
+
+    void showSearchResults(List<String> list, String searchQuery) {
+        int c=1;
+        System.out.println("Search results for \"" + searchQuery + "\":" );
+        for(String task : list){
+            if (task.contains(searchQuery)){
+                System.out.println(c + ". " + task);
+            }
+            c++;
+        }
+    }
 }
