@@ -39,9 +39,55 @@ public class Duke {
         }
     }
 
-    private List<Task> loadTasks() {
-        // TODO
-        return new ArrayList<>();
+    private String escapeString(String str) {
+        return str.replace("|", "||");
+    }
+
+    private String unescapeString(String str) {
+        return str.replace("||", "|");
+    }
+
+    private List<Task> loadTasks() throws Exception {
+        List<Task> tasks = new ArrayList<>();
+        Scanner s = new Scanner(this.tasksFile);
+        try {
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                String[] components = line.split(" \\| ");
+                if (components.length < 3) {
+                    throw new Exception("Invalid format");
+                }
+                boolean isCompleted = components[1] == "1" ? true : false;
+                String description = unescapeString(components[2]);
+                switch (components[0]) {
+                    case "T": {
+                        tasks.add(new Todo(description, isCompleted));
+                        break;
+                    }
+                    case "E": {
+                        if (components.length != 4) {
+                            throw new Exception("Invalid format");
+                        }
+                        tasks.add(new Event(description, unescapeString(components[3]), isCompleted));
+                        break;
+                    }
+                    case "D": {
+                        if (components.length != 4) {
+                            throw new Exception("Invalid format");
+                        }
+                        tasks.add(new Event(description, unescapeString(components[3]), isCompleted));
+                        break;
+                    }
+                    default: {
+                        throw new Exception("Invalid format");
+                    }
+                }
+            }
+        } finally {
+            s.close();
+        }
+
+        return tasks;
     }
 
     private void saveTasks() throws IOException {
@@ -53,29 +99,29 @@ public class Duke {
 
         writer.close();
     }
-    
+
     private void writeTask(FileWriter writer, Task task) throws IOException {
         if (task instanceof Todo) {
             writer.write("T | ");
             writer.write(task.isCompleted ? "1" : "0");
             writer.write(" | ");
-            writer.write(task.description);
+            writer.write(escapeString(task.description));
             writer.write(System.lineSeparator());
         } else if (task instanceof Event) {
             writer.write("E | ");
             writer.write(task.isCompleted ? "1" : "0");
             writer.write(" | ");
-            writer.write(task.description);
+            writer.write(escapeString(task.description));
             writer.write(" | ");
-            writer.write(((Event) task).time);
+            writer.write(escapeString(((Event) task).time));
             writer.write(System.lineSeparator());
         } else if (task instanceof Deadline) {
             writer.write("D | ");
             writer.write(task.isCompleted ? "1" : "0");
             writer.write(" | ");
-            writer.write(task.description);
+            writer.write(escapeString(task.description));
             writer.write(" | ");
-            writer.write(((Deadline) task).time);
+            writer.write(escapeString(((Deadline) task).time));
             writer.write(System.lineSeparator());
         }
     }
