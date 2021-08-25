@@ -13,7 +13,7 @@ public abstract class Task {
         this.status = false;
     }
 
-    protected void markAsCompleted() {
+    public void markAsCompleted() {
         this.status = true;
     }
 

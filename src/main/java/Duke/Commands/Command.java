@@ -9,7 +9,7 @@ public abstract class Command {
     }
 
     public boolean isExitCommand() {
-        return (command.equals("bye") || command.equals("Bye") || command.equals("BYE"));
+        return (command.equalsIgnoreCase("bye"));
     }
 
     public abstract void execute();

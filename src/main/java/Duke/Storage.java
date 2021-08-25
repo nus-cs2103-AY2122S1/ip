@@ -7,23 +7,25 @@ import java.util.List;
 
 public class Storage {
 
-
-    public static void processInstructions() {
+    public static String processInstructions() {
+        StringBuilder builder = new StringBuilder();
         try {
             File file = new File("taskFile/instructions.txt");
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
-                System.out.println(sc.nextLine());
+                builder.append(sc.nextLine()).append("\n");
             }
             sc.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        return builder.toString();
     }
-    public static void saveData(File file, List<Task> taskList) {
+
+    public static void saveData(File file, TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(file);
-            for (Task task : taskList) {
+            for (Task task : taskList.getTaskList()) {
                 writer.write(task.save() + "\n");
             }
             writer.flush();
@@ -33,7 +35,7 @@ public class Storage {
         }
     }
 
-    public static void loadData(File file, List<Task> taskList) {
+    public static void loadData(File file, TaskList taskList) {
         try {
             FileReader reader = new FileReader(file);
             Scanner sc = new Scanner(reader);
@@ -51,7 +53,7 @@ public class Storage {
                         if (status == 'X') {
                             curr.markAsCompleted();
                         }
-                        taskList.add(curr);
+                        taskList.addTask(curr);
                         break;
                     case 'D':
                         taskDescription = taskDescription.trim().
@@ -61,7 +63,7 @@ public class Storage {
                         if (status == 'X') {
                             curr.markAsCompleted();
                         }
-                        taskList.add(curr);
+                        taskList.addTask(curr);
                         break;
                     case 'E':
                         taskDescription = taskDescription.
@@ -71,7 +73,7 @@ public class Storage {
                         if (status == 'X') {
                             curr.markAsCompleted();
                         }
-                        taskList.add(curr);
+                        taskList.addTask(curr);
                         break;
                     default:
                         break;

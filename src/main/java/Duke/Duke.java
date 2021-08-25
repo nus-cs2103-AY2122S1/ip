@@ -1,26 +1,32 @@
 package Duke;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Duke {
 
     private TaskList taskList;
+    private Ui ui;
+    private File file;
     public Duke() {
         this.taskList = new TaskList();
+        this.file = new File("taskFile/taskList.txt");
+        Storage.loadData(file, taskList);
+        this.ui = new Ui();
     }
-
     public void run() {
-        taskList.gettingStart();
-        Scanner sc = new Scanner(System.in).useDelimiter("\n");
-        String command = sc.next().trim();
-
-        while (!taskList.isExitCommand(command)) {
-
-            taskList.processCommand(command);
-            command = sc.next().trim();
+        ui.start();
+        String command = ui.readCommand();
+        while (!Parser.isExit(command)) {
+            try {
+                ui.respondWith(Parser.parse(command, taskList));
+            } catch (DukeException e) {
+                ui.respondWith(e.getMessage());
+            } finally {
+                Storage.saveData(file, taskList);
+                command = ui.readCommand();
+            }
         }
-
-        sc.close();
-        taskList.exitProgram();
+        ui.exit();
     }
 }
