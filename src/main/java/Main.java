@@ -8,13 +8,29 @@ import duke.ui.Ui;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+/**
+ * Encapsulates the entire Duke program.
+ * Main class contains the storage, ui, tasklist, parser and finder objects,
+ * to help run the program.
+ *
+ * @author: Jason Ng
+ * @version: Duke Level-9
+ */
 public class Main {
+    /** Storage component for Duke */
     private Storage storage;
+    /** UI component for Duke */
     private Ui ui;
+    /** TaskList component for Duke */
     private TaskList taskList;
+    /** Parser component for Duke */
     private Parser parser;
+    /** Find component for Duke */
     private Find finder;
 
+    /**
+     * Constructor for a Main() class.
+     */
     public Main() {
         this.storage = new Storage();
         this.ui = new Ui();
@@ -23,6 +39,9 @@ public class Main {
         this.finder = new Find();
     }
 
+    /**
+     * Driver for Duke program.
+     */
     public void run() {
         this.ui.PrintIntro();
         Scanner sc = new Scanner(System.in);

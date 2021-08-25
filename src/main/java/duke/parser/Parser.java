@@ -7,12 +7,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Encapsulates a a parser to help make sense of user input.
+ * Encapsulates a parser to help make sense of user input.
  * This class helps to split the command inputs of the user,
  * for further usage by other classes.
  *
  * @author: Jason Ng
- * @version: Duke Level-8
+ * @version: Duke Level-9
  */
 public class Parser {
     /** Special names that are the commands for Duke */
@@ -182,15 +182,21 @@ public class Parser {
     }
 
     /**
-     * Checks if input is a "blah".
+     * Checks if input is a "find" command.
      *
      * @param input The input string.
-     * @return True if it is a "blah", false otherwise.
+     * @return True if it is a "find", false otherwise.
      */
     public boolean isFind(String input) {
         return input.equals(SPECIAL_TASK.find.name());
     }
 
+    /**
+     * Checks if input is a "blah".
+     *
+     * @param input The input string.
+     * @return True if it is a "blah", false otherwise.
+     */
     public boolean isBlah(String input) {
         return input.equals("Blah");
     }
@@ -250,16 +256,22 @@ public class Parser {
     }
 
     /**
+     * Parses a "find" command.
+     *
+     * @param splitInput The string input that is already split.
+     * @throws DukeException If the command is not entered correctly.
+     */
+    public void parseFind(String[] splitInput) throws DukeException {
+        checkDesc(splitInput, SPECIAL_TASK.find.name());
+    }
+
+    /**
      * Checks that entered index of the task  is valid.
      *
      * @param index The input index.
      * @param taskList The taskList to check the index from.
      * @throws DukeException If index outside the range of number of tasks in the taskList.
      */
-    public void parseFind(String[] splitInput) throws DukeException {
-        checkDesc(splitInput, SPECIAL_TASK.find.name());
-    }
-
     public void checkTaskIndex(int index, TaskList taskList) throws DukeException {
         if (index >= taskList.size() || index <= 0) {
             throw new DukeException("duke.commands.Task number does not exist!");

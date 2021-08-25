@@ -8,7 +8,7 @@ import duke.data.TaskList;
  * This class deals with interactions with the user.
  *
  * @author: Jason Ng
- * @version: Duke Level-8
+ * @version: Duke Level-9
  */
 public class Ui {
     /** The border to be printed for messages */
@@ -88,6 +88,11 @@ public class Ui {
         PrintMessage(newMsg);
     }
 
+    /**
+     * Prints the message after a find of tasks.
+     *
+     * @param matchedTasks The list of matched tasks.
+     */
     public void PrintFind(TaskList matchedTasks) {
         System.out.println(BORDER);
         System.out.println("Here are the matching tasks in your list: ");
