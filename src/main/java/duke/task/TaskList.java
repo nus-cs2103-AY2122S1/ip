@@ -19,7 +19,7 @@ public class TaskList {
      * @param limit the limit to the size of the list. The number of tasks cannot exceed this limit.
      */
     public TaskList(int limit) {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
         this.limit = limit;
     }
 

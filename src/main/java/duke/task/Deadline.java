@@ -22,8 +22,8 @@ public class Deadline extends Task {
     public Deadline(String description, String stringDateOfDeadline) {
         super(description, "D");
         LDateTimeParser logicDateTimeParser = new LDateTimeParser(stringDateOfDeadline);
-        this.timeOfDeadline = logicDateTimeParser.getTime();
-        this.dateOfDeadline = logicDateTimeParser.getDate();
+        timeOfDeadline = logicDateTimeParser.getTime();
+        dateOfDeadline = logicDateTimeParser.getDate();
     }
 
     @Override

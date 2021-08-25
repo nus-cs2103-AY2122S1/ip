@@ -41,7 +41,7 @@ public class LCommandParser {
         switch (commandEnum) {
         case BYE:
             ui.sayGoodBye();
-            this.willExit = true;
+            willExit = true;
             break;
         case LIST:
             ui.printAllTasks(taskList.getTasks());
@@ -61,8 +61,8 @@ public class LCommandParser {
                 throw new DukeException(TOO_LITTLE_ARGUMENTS_MESSAGE);
             }
             switch (commandEnum) {
-            case TODO:
-            case EVENT:
+            case TODO: // fallthrough intended
+            case EVENT: // fallthrough intended
             case DEADLINE:
                 ui.addTaskMessage(addTask(commandEnum.name(), inputArr[1], taskList), taskList.size());
                 break;

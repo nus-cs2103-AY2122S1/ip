@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * duke.Task is a general class for any task that is to be saved by duke.Duke.
+ * Task is a general class for any task that is to be saved by {@link} .
  */
 public abstract class Task {
     private final String description, taskType;
