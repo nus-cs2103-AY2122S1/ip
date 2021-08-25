@@ -2,16 +2,17 @@ import java.util.*;
 
 public class Duke {
     private static List<String> taskString = new ArrayList<>();
-    private static List<Task> taskList = new ArrayList<>();
+    private static List<Tasks> taskList = new ArrayList<>();
     private static int taskNumber = 1;
     private final static String LINE = "-----------------------------------------";
     private final static String DEFAULT_MESSAGE = LINE + "\nHello! I'm Duke \nWhat can I do for you?\n" + LINE;
+
 
     /**
      * Adds a task to the list and prints the addition.
      * @param task Task to be added
      */
-    private static void addTask(Task task) {
+    private static void addTask(Tasks task) {
         taskString.add(taskNumber + ". ");
         taskList.add(task);
         taskNumber++;
@@ -72,7 +73,7 @@ public class Duke {
      * @param i Number of task to be deleted
      */
     public static void deleteTask(int i) {
-        Task deletedTask = taskList.get(i - 1);
+        Tasks deletedTask = taskList.get(i - 1);
         taskList.remove(i - 1);
         taskString.remove(i - 1);
         System.out.println("Noted. I've removed this task: \n" + deletedTask + "\nNow you have " + taskString.size() + " tasks in the list.");
@@ -116,36 +117,5 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(LINE);
         sc.close();
-    }
-}
-
-// unable to create class file
-class Task {
-    protected String description;
-    protected boolean isDone;
-
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    /**
-     * Returns the status of the task (X if done, blank if not done).
-     * @return the status of task
-     */
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
-    }
-
-    /**
-     * Marks a task as done.
-     */
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
