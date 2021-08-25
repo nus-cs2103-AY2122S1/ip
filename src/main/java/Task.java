@@ -6,6 +6,15 @@ public class Task {
     this.description = description;
     this.isDone = false;
   }
+  
+  public Task(String description, int done){
+    this.description = description;
+    if(done == 1){
+      this.isDone = true;
+    } else {
+      this.isDone = false;
+    }
+  }
 
   public String getDescription() {
     return this.description;
@@ -20,7 +29,15 @@ public class Task {
   }
 
   public String toString(){
-    return "[" + this.getStatusIcon() + "] " + this.getDescription();
+    return "[" + this.getStatusIcon() + "] " + this.getDescription() ;
+  }
+  
+  public String toStorageString(){
+    int done = 0;
+    if(this.isDone){
+      done = 1;
+    }
+    return "T | " + done +  " | " +  this.description + "\n";
   }
 
 }
