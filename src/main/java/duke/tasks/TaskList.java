@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 public class TaskList {
-    private final ArrayList<Task> tasksList;
+    private final ArrayList<Task> tasks;
 
-    public TaskList(ArrayList<Task> tasksList) {
-        this.tasksList = tasksList;
+    public TaskList(ArrayList<Task> taskList) {
+        this.tasks = taskList;
     }
 
     /**
@@ -17,7 +17,7 @@ public class TaskList {
      * @return boolean - has adding of task succeeded.
      */
     public boolean add(Task t) {
-        return tasksList.add(t);
+        return tasks.add(t);
     }
 
     /**
@@ -28,14 +28,14 @@ public class TaskList {
      * @throws IndexOutOfBoundsException if there is no such index in list.
      */
     public Task get(int index) {
-        return tasksList.get(index);
+        return tasks.get(index);
     }
 
     /**
      * Removes all tasks from internal list. List will be empty after this call.
      */
     public void clear() {
-        tasksList.clear();
+        tasks.clear();
     }
 
     /**
@@ -45,7 +45,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException if there is no such index in list.
      */
     public void remove(int index) {
-        tasksList.remove(index);
+        tasks.remove(index);
     }
 
     /**
@@ -54,7 +54,7 @@ public class TaskList {
      * @return integer number of tasks in list.
      */
     public int size() {
-        return tasksList.size();
+        return tasks.size();
     }
 
     /**
@@ -63,7 +63,7 @@ public class TaskList {
      * @return stream of Tasks in the list
      */
     public Stream<Task> stream() {
-        return tasksList.stream();
+        return tasks.stream();
     }
 
 }
