@@ -9,9 +9,20 @@ import java.util.Scanner;
 import myjournal.exception.*;
 import myjournal.task.*;
 
+/**
+ * Returns an object of Parser.
+ *
+ * @author felissafaustine
+ */
 public class Parser {
     private Ui ui;
 
+    /**
+     * Parses the input from the user.
+     *
+     * @param line The current line parsed.
+     * @param tasks The list of the tasks in MyJournal.
+     */
     public void parse(Scanner line, TaskList tasks) {
         try {
             String firstWord = line.next();
@@ -51,6 +62,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user's input for the command "done".
+     *
+     * @param line The current line that is being parsed.
+     * @param tasks The list of tasks.
+     * @return A task which has been marked as done.
+     */
     public static Task parseDone(Scanner line, TaskList tasks) {
         if (!line.hasNextInt()) {
             throw new InvalidTaskNumberException("OOPS!!! Please specify the task "
@@ -64,6 +82,11 @@ public class Parser {
         return tasks.getTask(index);
     }
 
+    /**
+     * Parses user's input for the command "list".
+     *
+     * @param tasks The list of tasks.
+     */
     public static void parseList(TaskList tasks) {
         if (tasks.getSize() == 0) {
             System.out.println("You have no task!");
@@ -74,6 +97,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user's input for the command "delete".
+     *
+     * @param line The user's input.
+     * @param tasks The list of tasks.
+     * @return The task to be deleted.
+     */
     public static Task parseDelete(Scanner line, TaskList tasks) {
         if (!line.hasNextInt()) {
             throw new InvalidTaskNumberException("OOPS!!! Please specify the task "
@@ -88,6 +118,13 @@ public class Parser {
         return temp;
     }
 
+    /**
+     * Returns the time or date of the task.
+     *
+     * @param line The user's input.
+     * @return The String representation of the time or date of the task.
+     * @throws DateTimeParseException An exception thrown if the date or time is invalid.
+     */
     public static String getTimeDate(Scanner line) throws DateTimeParseException {
         String parsed = "";
         while (line.hasNext()) {
@@ -113,6 +150,12 @@ public class Parser {
         return parsed;
     }
 
+    /**
+     * Returns whether the string is a date.
+     *
+     * @param string The string that may potentially be a date.
+     * @return A boolean stating whether the string is a date.
+     */
     public static boolean isDate(String string) {
         String year = string.substring(0, 4);
         String month = string.substring(5, 7);
@@ -121,11 +164,23 @@ public class Parser {
                 && isInteger(year) && isInteger(month) && isInteger(day);
     }
 
+    /**
+     * Returns whether the string is a time.
+     *
+     * @param string The string that may potentially be a time.
+     * @return A boolean stating whether the string is a time.
+     */
     public static boolean isTime(String string) {
         return string.length() == 5 && isInteger(string.substring(0,2))
                 && isInteger(string.substring(3,5)) && string.charAt(2) == ':';
     }
 
+    /**
+     * Returns whether the string is an integer.
+     *
+     * @param string The string that may potentially be an integer.
+     * @return A boolean stating whether the string is an integer.
+     */
     public static boolean isInteger(String string) {
         try {
             Integer.parseInt(string);
@@ -135,6 +190,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user's input for the command "Todo".
+     *
+     * @param line The user's input.
+     * @return The Todo object.
+     */
     public static Todo parseTodo(Scanner line) {
         String taskName= "";
         if (!line.hasNext()) {
@@ -147,6 +208,12 @@ public class Parser {
         return new Todo(taskName);
     }
 
+    /**
+     * Parses user's input for the command "Event".
+     *
+     * @param line The user's input.
+     * @return The Event object.
+     */
     public static Event parseEvent(Scanner line) {
         String taskName= "";
         if (!line.hasNext()) {
@@ -162,6 +229,12 @@ public class Parser {
         return new Event(taskName, getTimeDate(line));
     }
 
+    /**
+     * Parses user's input for the command "Deadline".
+     *
+     * @param line The user's input.
+     * @return The Deadline object.
+     */
     public static Deadline parseDeadline(Scanner line) {
         String taskName = "";
         if (!line.hasNext()) {

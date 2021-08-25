@@ -3,7 +3,7 @@ package myjournal.task;
 import myjournal.task.Task;
 
 /**
- * A class to create task with the type of Deadline.
+ * Creates task with the type of Deadline.
  *
  * @author Felissa Faustine
  */
@@ -11,7 +11,7 @@ public class Deadline extends Task {
     public String time;
 
     /**
-     * This is the constructor of the Deadline task.
+     * Constructs the Deadline object.
      *
      * @param taskName The name of the task.
      * @param time The deadline.
@@ -21,6 +21,11 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    /**
+     * Returns the time of the Deadline task.
+     *
+     * @return The time of the Deadline task.
+     */
     public String getTime() {
         return this.time;
     }

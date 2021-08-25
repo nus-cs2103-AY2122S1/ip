@@ -3,7 +3,7 @@ package myjournal.task;
 import myjournal.task.Task;
 
 /**
- * A class to create tasks with the type of event.
+ * Creates tasks with the type of event.
  *
  * @author Felissa Faustine
  */
@@ -11,7 +11,7 @@ public class Event extends Task {
     public String time;
 
     /**
-     * The constructor of the Event class.
+     * Constructs the Event object.
      *
      * @param taskName The name of the task.
      * @param time The time of the event.
@@ -21,6 +21,11 @@ public class Event extends Task {
         this.time = time;
     }
 
+    /**
+     * Returns the time of the event task.
+     *
+     * @return The time of the event task.
+     */
     public String getTime() {
         return this.time;
     }

@@ -1,14 +1,14 @@
 package myjournal.exception;
 
 /**
- * A class to create invalid type exceptions.
+ * Creates the invalid type exceptions.
  *
  * @author Felissa Faustine
  */
 public class InvalidTypeException extends MyJournalException {
 
     /**
-     * The constructor for the InvalidTypeExceptions.
+     * Constructs the InvalidTypeException objects.
      *
      * @param message The error message.
      */

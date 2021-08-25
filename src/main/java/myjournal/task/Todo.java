@@ -3,22 +3,18 @@ package myjournal.task;
 import myjournal.task.Task;
 
 /**
- * A class to create task with the type of todo.
+ * Creates task with the type of todo.
  *
  * @author Felissa Faustine
  */
 public class Todo extends Task {
     /**
-     * The constructor for the Todo class.
+     * Constructs the Todo object.
      *
      * @param taskName The name of the task.
      */
     public Todo(String taskName) {
         super(taskName);
-    }
-
-    public String getTime() {
-        return "";
     }
 
     /**

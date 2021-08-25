@@ -10,7 +10,7 @@ public abstract class Task {
     public boolean isDone;
 
     /**
-     * This is the constructor for the Task class.
+     * Constructs the Task object.
      *
      * @param taskName The name of the task.
      */
@@ -19,6 +19,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Returns the name of the task.
+     *
+     * @return The name of the task.
+     */
     public String getTaskName() {
         return this.taskName;
     }
@@ -66,6 +71,4 @@ public abstract class Task {
     public String toString() {
         return "[" + getStateIcon() + "] " + taskName;
     }
-
-    public abstract String getTime();
 }
