@@ -27,6 +27,8 @@ public class Parser {
             return new AddDeadlineCommand(input);
         } else if (input.startsWith("event")) {
             return new AddEventCommand(input);
+        } else if (input.startsWith("find")) {
+            return new FindCommand(input);
         } else {
             // Invalid command
             throw new DukeException("Sorry, I didn't understand what you meant by that");

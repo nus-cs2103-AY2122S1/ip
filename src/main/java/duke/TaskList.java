@@ -52,7 +52,44 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Finds tasks with descriptions containing the prompt.
+     * @param prompt Search string
+     * @return List of results matching prompt
+     */
+    public List<FindResult> find(String prompt) {
+        List<FindResult> results = new ArrayList<>();
+        String promptLower = prompt.toLowerCase();
+        for (int i = 0; i < tasks.size(); ++i) {
+            Task task = tasks.get(i);
+            if (task.getDescription().toLowerCase().contains(promptLower)) {
+                results.add(new FindResult(task, i));
+            }
+        }
+        return results;
+    }
+
     public void saveToStorage() {
         storage.saveTasks(tasks);
+    }
+
+    /**
+     * Represents a found result.
+     */
+    public static class FindResult {
+        /**
+         * Task that was found.
+         */
+        public final Task task;
+
+        /**
+         * Index of the task in the full list.
+         */
+        public final int index;
+
+        public FindResult(Task task, int index) {
+            this.task = task;
+            this.index = index;
+        }
     }
 }
