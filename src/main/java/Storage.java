@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class Store {
+public class Storage {
     private static final String text = "./data/duke.txt";
     private static BufferedWriter writer;
 

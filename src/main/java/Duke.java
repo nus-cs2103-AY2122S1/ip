@@ -2,15 +2,17 @@ import java.io.*;
 import java.util.*;
 
 public class Duke {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
     private final static String LINE = "-----------------------------------------";
-    private final static String DEFAULT_MESSAGE = LINE + "\nHello! I'm Duke \nWhat can I do for you?\n" + LINE;
 
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println(DEFAULT_MESSAGE);
+        Ui.sayHello();
         String task = sc.nextLine();
-        Store.readFromFile();
+        Storage.readFromFile();
 
         while(!task.equals("bye")) {
             try {
@@ -18,14 +20,14 @@ public class Duke {
                     TaskList.printList();
                 } else if (task.startsWith("done")) {
                     TaskList.complete(task);
-                    Store.overwrite();
+                    Storage.overwrite();
                 } else if (task.startsWith("deadline") || task.startsWith("event") || task.startsWith("todo")) {
-                    Store.writeToFile(task);
+                    Storage.writeToFile(task);
                 } else if (task.startsWith("delete")) {
                     String numString = task.replaceAll("[^0-9]", "");
                     int num = Integer.parseInt(numString);
                     TaskList.deleteTask(num);
-                    Store.overwrite();
+                    Storage.overwrite();
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
